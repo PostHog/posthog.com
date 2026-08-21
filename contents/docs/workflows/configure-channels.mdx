@@ -24,11 +24,13 @@ Other than the channels shown below, you can also dispatch to any [realtime dest
 <Tab.Group tabs={[
   'Email', 
   'Slack', 
-  'Twilio']}>
+  'Twilio',
+  'Push']}>
 <Tab.List>
   <Tab>Email</Tab>
   <Tab>Slack</Tab>
   <Tab>Twilio</Tab>
+  <Tab>Push</Tab>
 </Tab.List>
 <Tab.Panels>
 <Tab.Panel>
@@ -81,6 +83,51 @@ Twilio enables you to send SMS messages to your users. To configure the channel,
 Once configured, you'll be able to use the channel in a workflow to send SMS messages to your users.
 
 </Tab.Panel>
+<Tab.Panel>
+
+Push lets you send native mobile push notifications to users who have your app installed and have registered a device token through the PostHog mobile SDK. Connect the provider(s) your app uses: **Firebase Cloud Messaging (FCM)** for Android (and iOS via Firebase), and/or **Apple Push Notification service (APNs)** for iOS.
+
+<CalloutBox icon="IconInfo" title="Push notifications are in beta" type="fyi">
+
+Push is the newest workflows channel and is in beta. It's rolling out gradually, so it isn't available in every project yet. It's free to use during the beta. To request access or send feedback, [reach out in-app](https://app.posthog.com/#panel=support%3Afeedback%3A%3Alow%3Atrue).
+</CalloutBox>
+
+<CalloutBox icon="IconInfo" title="Device tokens come from the mobile SDK" type="fyi">
+
+Push delivery requires your app to register each user's device token with PostHog through the mobile SDK ([iOS](/docs/workflows/push-notifications/ios), [Android](/docs/libraries/android#push-notifications)), which is also where you implement identity verification if you enable it below. Connecting a channel here sets up the credentials PostHog sends with. It doesn't collect tokens on its own.
+</CalloutBox>
+
+**Firebase Cloud Messaging (FCM)**
+
+Paste the contents of your Firebase **service account key JSON**. Generate one in the [Firebase console](https://console.firebase.google.com/project/_/settings/serviceaccounts/adminsdk) under **Project settings > Service accounts > Generate new private key**.
+
+**Apple Push Notification service (APNs)**
+
+Provide the following, from your [Apple Developer account](https://developer.apple.com/account/resources/authkeys/list) under **Certificates, Identifiers & Profiles > Keys**:
+
+| Field | Description |
+| --- | --- |
+| **Signing key (.p8)** | Your APNs auth key. Paste the contents or upload the `.p8` file. |
+| **Key ID** | The ID of the signing key. |
+| **Apple team ID** | Your Apple developer team ID. |
+| **Bundle ID** | Your app's bundle identifier (the APNs topic), e.g. `com.example.app`. |
+| **Environment** | `Production` or `Sandbox`. Match how your app build registers with APNs. |
+
+**Identity verification**
+
+A device token says *where* to deliver a notification, not *who* the device belongs to. Identity verification lets your backend sign a short-lived token for the logged-in user that your app sends when registering a device, so a client can't register a device against someone else's user. Pick a mode when connecting the channel:
+
+| Mode | Behavior |
+| --- | --- |
+| **Disabled** (default) | Any client with your project API key can register a device for any user. |
+| **Optional** | Tokens are verified and recorded, but devices can still register without one. Use this to confirm your app sends valid tokens before you require them. |
+| **Required** | Devices without a valid token can't register or unregister. Switch to this only once your app sends tokens, otherwise registration stops working. |
+
+When you enable Optional or Required, paste your backend's EC (P-256) **public key** into the field below the mode. Your backend signs each token with the matching private key (ES256), and PostHog verifies it with the public key you paste here, so the private key never leaves your control. Leave the field blank to verify against your project's Feature flags secure API key instead. Either way, you implement the signing in the mobile SDK ([iOS](/docs/workflows/push-notifications/ios#identity-verification), [Android](/docs/libraries/android#identity-verification)).
+
+Once configured, add a **Push** step in the [workflow builder](/docs/workflows/workflow-builder), set the notification title and body (with variables like `{{ person.name }}`), and optionally set platform-specific overrides.
+
+</Tab.Panel>
 </Tab.Panels>
 </Tab.Group>
 
@@ -119,6 +166,7 @@ Once your channel is created, you can use it in a workflow to deliver messages t
 | Emails not sending? | Check that your domain is verified and you've added the DNS records correctly. |
 | Spam folder issues? | Ensure SPF/DKIM are valid, and consider setting up DMARC. |
 | Variables not populating? | Confirm the property exists on the person profile (e.g. `person.name`). |
+| Push not arriving? | Confirm the device registered a token via the mobile SDK, the channel's provider credentials are valid, and (for APNs) the environment (Production/Sandbox) matches your app build. |
 
 </Step>
 

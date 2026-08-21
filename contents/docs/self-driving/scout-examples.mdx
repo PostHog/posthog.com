@@ -15,6 +15,12 @@ Self-driving is in open beta. It's improving quickly – expect rough edges, and
 
 A [scout](/docs/self-driving/scouts) can watch almost anything you land in PostHog. There are two kinds: the **canonical** scouts PostHog ships with, and **custom** scouts you create for the patterns specific to your product. This page is a catalog of both, to spark ideas for what to point a scout at.
 
+<CalloutBox icon="IconBook" title="Prefer to learn by use case?" type="fyi">
+
+The [pocket guides](/pocket-guides) walk through real scouts end to end – the report each one files, the pull request it becomes, and a one-click way to add it to your own product.
+
+</CalloutBox>
+
 ## Canonical scouts
 
 PostHog ships a fleet of canonical scouts out of the box, each watching a common pattern. You turn each one on or off per project. Each scout is just a skill you can read (named `signals-scout-*`) – the table links straight to its `SKILL.md` in the [PostHog repo](https://github.com/PostHog/posthog/tree/master/products/signals/skills). Here's the full set:
@@ -64,6 +70,7 @@ You can create your own scout for anything you care about. The job is the same e
 | **Own a funnel or a journey** | A scout can watch your key funnels and activation flows, flag a conversion or retention regression against the flow's own trailing baseline, and even propose the [experiment](/docs/experiments) to fix the weakest step. |
 | **Get a morning digest** | Most scouts stay quiet until something clears a bar. A digest scout inverts that: one report a day synthesizing its surface – your AI traffic, the day's merged PRs grouped into workstreams – where a quiet day gets a short "all green" and that's the product. |
 | **Turn free text into themes** | [Survey](/docs/surveys) responses, feedback submissions, support messages: instead of forwarding every item, a scout aggregates – "these six responses all describe the same checkout bug" is one actionable finding, not six noisy ones. |
+| **Score what you can't query** | Some metrics are judgment calls: whether a support reply resolved the question, whether generated content follows your guidelines, whether a summary sticks to its sources. A scout can judge a fresh sample on a schedule and [record each verdict as a structured measurement](/docs/self-driving/scouts#turn-a-scouts-judgment-into-a-metric), turning a subjective quality bar into a chartable time series. |
 | **Triage what already pages you** | If a detector already exists – billing spike alerts, an incident pipeline, a support channel where a bot classifies every ticket – a scout can be the judgment layer on top: bundling related items into one finding, weighing who's affected, and flagging the items nobody acted on. |
 | **Guard your SLOs** | If your team has explicit success-rate targets, a scout can score against the error budget instead of a trailing baseline – catching fast burns (an incident eating the budget right now) and slow burns (a success rate quietly creeping below target). |
 | **Notice when something *stops* happening** | Error tracking only sees code that throws – it can't see silence. A scout can pair an event that should keep firing (a compliance check in CI, a scheduled automation, even your own event capture) with a heartbeat that proves the system is otherwise alive, and flag when the heartbeat continues but the expected event goes quiet. |

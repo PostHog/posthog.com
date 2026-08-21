@@ -1,20 +1,20 @@
 import React from 'react'
 import { getTool } from '../../data/tools'
 import {
-    IconFlask,
-    IconEye,
-    IconSparkles,
-    IconList,
-    IconConfetti,
-    IconRocket,
-    IconPieChart,
-    IconCheckCircle,
-    IconInfo,
-    IconCursorClick,
-    IconMagic,
     IconChat,
+    IconCheckCircle,
     IconCode,
+    IconConfetti,
+    IconCursorClick,
+    IconEye,
+    IconFlask,
+    IconInfo,
+    IconList,
+    IconMagic,
     IconMessage,
+    IconPieChart,
+    IconRocket,
+    IconSparkles,
     IconToggle,
 } from '@posthog/icons'
 import { features } from './experiments/features'
@@ -140,9 +140,9 @@ export const experiments = {
             imgClasses: 'rounded-t-md shadow-2xl',
         },
         home: {
-            src: 'https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/Screenshot_2026_04_01_at_14_21_27_96d1375a92.png',
+            src: 'https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2026_04_01_at_14_21_27_96d1375a92.png',
             srcDark:
-                'https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/Screenshot_2026_04_01_at_14_24_58_04e669df5a.png',
+                'https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2026_04_01_at_14_24_58_04e669df5a.png',
             alt: 'Experiment results',
             classes: 'justify-center items-end px-4 @lg:px-6',
             imgClasses: 'rounded-t-md shadow-2xl',
@@ -155,8 +155,9 @@ export const experiments = {
         },
     },
     hog: {
-        src: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/hogs/ab-testing-hog.png',
-        alt: 'Hedgehog experimenting',
+        src: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/sales/celebration.png',
+        alt: 'Hedgehogs celebrating a shipped experiment',
+        footerClasses: 'max-w-[420px]',
         classes: 'absolute bottom-0 right-0 max-w-md',
     },
     hogs: {
@@ -397,7 +398,8 @@ export const experiments = {
         ai: 'The PostHog MCP server lets your AI coding agent create and manage Experiments directly from your code editor. Set up A/B tests, check results, and manage Experiment lifecycle – without switching to the PostHog app.',
     },
     ai: {
-        // Distinct from hogs.mobileHog (test-tube hog on Eli5) – flask mascot from the PostHog AI page.
+        // Flask mascot from the PostHog AI page – deliberately different art from
+        // `hogs.mobileHog` (header) and `hogs.default` (use cases).
         image: 'https://res.cloudinary.com/dmukukwp6/image/upload/experiments_f90ed26268.png',
         imageAlt: 'PostHog AI and experiments',
         description: 'set up experiments, read the results, and ship the winner',
@@ -449,7 +451,7 @@ export const experiments = {
                 title: 'Timeseries',
                 tool: 'experiment-timeseries-results',
                 prompts: [
-                    'Show daily results for this experiment — is the lift a novelty effect?',
+                    'Show daily results for this experiment – is the lift a novelty effect?',
                     'Plot the experiment over time, not just the summary',
                 ],
             },
@@ -470,7 +472,7 @@ export const experiments = {
                 title: 'Duplicate',
                 tool: 'experiment-duplicate',
                 prompts: [
-                    'That pricing test won — clone it for the mobile flow and launch',
+                    'That pricing test won – clone it for the mobile flow and launch',
                     'Duplicate this experiment onto the signup page',
                 ],
             },

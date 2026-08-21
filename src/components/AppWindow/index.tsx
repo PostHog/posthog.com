@@ -737,7 +737,10 @@ export default function AppWindow({ item, chrome = true }: { item: AppWindowType
                             : ''
                     } ${
                         item.appSettings?.size?.fixed
-                            ? '!absolute top-2 left-1/2 -translate-x-1/2 z-50 w-[calc(100%-1rem)]'
+                            ? // The max height keeps auto-height modals inside the desktop area on short
+                              // screens — without it they grow past the bottom edge and get clipped by the
+                              // desktop's `overflow-clip` with nothing left to scroll.
+                              '!absolute top-2 left-1/2 -translate-x-1/2 z-50 w-[calc(100%-1rem)] max-h-[calc(100%-1rem)]'
                             : item.windowed
                             ? 'h-[95%] w-[80%]'
                             : 'size-full'
@@ -832,7 +835,14 @@ export default function AppWindow({ item, chrome = true }: { item: AppWindowType
                         ref={contentRef}
                         className={`size-full flex-grow ${
                             chrome
-                                ? `overflow-hidden rounded-lg ${hasToolbar ? 'rounded-t-none' : ''} ${
+                                ? `${
+                                      // A modal's auto height makes percentage heights inside it resolve to
+                                      // `auto`, so its own ScrollAreas never overflow and can't scroll. Scroll
+                                      // the content here instead of clipping whatever doesn't fit.
+                                      item.appSettings?.size?.fixed
+                                          ? 'overflow-x-hidden overflow-y-auto'
+                                          : 'overflow-clip'
+                                  } rounded-lg ${hasToolbar ? 'rounded-t-none' : ''} ${
                                       item.expanded
                                           ? 'rounded-tr-none rounded-tl-none'
                                           : item.snapped === 'left'

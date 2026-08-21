@@ -58,7 +58,7 @@ Before you settle on a launch tier, work through the questions below. They shape
 
 ### Tier 1: New product announcements
 
-New product launches are our biggest tier. They have their own GitHub template: [Launch Plan](https://github.com/PostHog/meta/issues/new/choose). Product marketers should always create a launch plan for new product announcements.
+New product launches are our biggest tier. They have their own GitHub template: [Launch Plan](https://github.com/PostHog/marketing/issues/new?template=launch-plan.md). Product marketers should always create a launch plan for new product announcements.
 
 Here are some activities your Tier 1 launch could include:
 
@@ -83,7 +83,7 @@ Some other things we've done for launches:
 - If the product is moving from free beta to paid general availability (GA) you might also want to choose a reward for beta users. Examples of this include giving PostHog AI beta users 30 extra days of unlimited free usage, or giving Workflows beta users a discount code for merch.
 - If the product has been free for a while and it's becoming paid with the launch, make sure to plan to notify free customers in advance and clearly communicate pricing. 
 
-As an example, here's the issue of the [Tier 1 launch for Replay Vision](https://github.com/PostHog/requests-for-comments-public/issues/562).
+As an example, here's the issue of the [Tier 1 launch for Replay Vision](https://github.com/PostHog/marketing/issues/179).
 
 _Note: All of these are suggestions, not must-haves. It's likely that not all of these things can be ready for launch. A case study, for example, can follow a few weeks after._
 

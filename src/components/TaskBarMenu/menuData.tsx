@@ -1,6 +1,6 @@
 import { MenuType, MenuItemType } from 'components/RadixUI/MenuBar'
 import React from 'react'
-import { companyMenu, docsMenu, pricingMenu } from '../../navs'
+import { companyMenu, docsMenu } from '../../navs'
 import * as Icons from '@posthog/icons'
 import { Logo } from '@posthog/brand/logo'
 import SearchableProductMenu from './SearchableProductMenu'
@@ -401,50 +401,9 @@ export function useMenuData(): MenuType[] {
         },
         {
             trigger: 'Pricing',
-            items: [
-                {
-                    type: 'item',
-                    label: 'Usage-based pricing',
-                    link: '/pricing',
-                    icon: getMenuIcon(pricingMenu.children, '/pricing', 'IconReceipt', 'blue'),
-                },
-                {
-                    type: 'item',
-                    label: 'Platform packages',
-                    link: '/platform-packages',
-                    icon: getMenuIcon(pricingMenu.children, '/platform-packages', 'IconServer', 'purple'),
-                },
-                {
-                    type: 'item',
-                    label: 'Startups',
-                    link: '/startups',
-                    icon: getMenuIcon(pricingMenu.children, '/startups', 'IconRocket', 'purple'),
-                },
-                { type: 'separator' },
-                {
-                    type: 'item',
-                    label: 'Learn more',
-                    disabled: true,
-                },
-                {
-                    type: 'item',
-                    label: 'Watch a demo',
-                    link: '/demo',
-                    icon: getMenuIcon(pricingMenu.children, '/demo', 'IconPlay', 'blue'),
-                },
-                {
-                    type: 'item',
-                    label: 'Talk to a human',
-                    link: '/talk-to-a-human',
-                    icon: getMenuIcon(pricingMenu.children, '/talk-to-a-human', 'IconHeadset', 'purple'),
-                },
-                {
-                    type: 'item',
-                    label: 'How we do sales',
-                    link: '/sales',
-                    icon: getMenuIcon(pricingMenu.children, '/sales', 'IconPercentage', 'green'),
-                },
-            ],
+            link: '/pricing',
+            items: [],
+            hideChevron: true,
         },
         {
             trigger: 'Docs',
@@ -482,6 +441,12 @@ export function useMenuData(): MenuType[] {
                 { type: 'separator' },
                 {
                     type: 'item',
+                    label: 'Startups',
+                    link: '/startups',
+                    icon: <Icons.IconPresent className="size-4 text-purple" />,
+                },
+                {
+                    type: 'item',
                     label: 'Merch store',
                     link: '/merch',
                     icon: <Icons.IconStore className="size-4 text-purple" />,
@@ -491,6 +456,18 @@ export function useMenuData(): MenuType[] {
                     label: 'Events',
                     link: '/events',
                     icon: <Icons.IconCalendar className="size-4 text-red" />,
+                },
+                {
+                    type: 'item',
+                    label: 'Students',
+                    link: '/students',
+                    icon: <Icons.IconGraduationCap className="size-4 text-blue" />,
+                },
+                {
+                    type: 'item',
+                    label: 'Incubator',
+                    link: '/community-incubator',
+                    icon: <Icons.IconFlask className="size-4 text-seagreen" />,
                 },
                 {
                     type: 'item',
@@ -566,6 +543,12 @@ export function useMenuData(): MenuType[] {
                     label: 'Careers',
                     link: '/careers',
                     icon: getMenuIcon(companyMenu.children, '/careers', 'IconLaptop', 'purple'),
+                },
+                {
+                    type: 'item',
+                    label: 'Side projects',
+                    link: '/side-projects',
+                    icon: getMenuIcon(companyMenu.children, '/side-projects', 'IconRocket', 'purple'),
                 },
                 {
                     type: 'item',
@@ -817,12 +800,12 @@ export function useMenuData(): MenuType[] {
         const mobileItems: MenuItemType[] = []
 
         mainNavItems.forEach((menu) => {
-            // If menu has mobileLink, convert to simple item
-            if (menu.mobileLink) {
+            const link = menu.link || menu.mobileLink
+            if (link) {
                 mobileItems.push({
                     type: 'item' as const,
                     label: typeof menu.trigger === 'string' ? menu.trigger : 'Menu',
-                    link: menu.mobileLink,
+                    link,
                 })
             } else {
                 // Process items and filter out those with mobileDestination === false
@@ -963,6 +946,20 @@ export const DocsItemsEnd = [
         label: 'Tutorials',
         link: '/tutorials',
         icon: <Icons.IconGraduationCap className="size-4 text-purple" />,
+    },
+    {
+        type: 'item' as const,
+        label: 'Pocket guides',
+        link: '/pocket-guides',
+        // Orange matches volume one's token in src/constants/pocketGuides.ts.
+        icon: <Icons.IconCompass className="size-4 text-orange" />,
+    },
+    {
+        type: 'item' as const,
+        label: 'Templates',
+        link: '/templates',
+        // Matches the Templates entry in src/navs/index.js.
+        icon: <Icons.IconMagic className="size-4 text-purple" />,
     },
 ]
 

@@ -1,19 +1,19 @@
 import React from 'react'
 import {
-    IconToggle,
-    IconEye,
-    IconSparkles,
-    IconList,
-    IconConfetti,
-    IconRocket,
-    IconPieChart,
-    IconCheckCircle,
-    IconInfo,
-    IconCursorClick,
-    IconMagic,
     IconChat,
+    IconCheckCircle,
     IconCode,
+    IconConfetti,
+    IconCursorClick,
+    IconEye,
+    IconInfo,
+    IconList,
+    IconMagic,
     IconMessage,
+    IconPieChart,
+    IconRocket,
+    IconSparkles,
+    IconToggle,
 } from '@posthog/icons'
 import { features } from './feature_flags/features'
 import { applications, topFeatures } from './feature_flags/slides'
@@ -145,8 +145,9 @@ export const featureFlags = {
         },
     },
     hog: {
-        src: 'https://res.cloudinary.com/dmukukwp6/image/upload/v1/posthog.com/src/components/Product/hogs/feature-flags-hog.png',
-        alt: 'A hedgehog toggling a feature flag',
+        src: 'https://res.cloudinary.com/dmukukwp6/image/upload/hogmillionaire_6a6c2c958d.png',
+        alt: 'A hedgehog holding an enormous banknote',
+        footerClasses: 'max-w-[240px]',
         classes: 'absolute bottom-0 right-0 max-w-md',
     },
     hogs: {
@@ -391,8 +392,8 @@ export const featureFlags = {
         ai: 'The PostHog MCP server lets your AI coding agent create and manage Feature Flags directly from your code editor. Create flags, configure targeting rules, and check rollout status – without switching to the PostHog app.',
     },
     ai: {
-        image: 'https://res.cloudinary.com/dmukukwp6/image/upload/FEATURE_FLAGS_hog_95e008723c.png',
-        imageAlt: 'PostHog AI and feature flags',
+        image: 'https://res.cloudinary.com/dmukukwp6/image/upload/business_hog_adb9cf3c35.png',
+        imageAlt: 'A hedgehog in a suit deciding who gets the flag',
         description: 'roll a change out, watch the impact, and roll it back',
         intro: 'Ask PostHog AI to create flags, explain targeting, and clean up stale ones.',
         mcpFeatures: ['flags'],

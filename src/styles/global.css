@@ -692,11 +692,20 @@ hr {
         left: 50%;
         width: 100%;
         height: 100%;
-        min-width: 44px;
-        min-height: 44px;
         content: '';
         transform: translate(-50%, -50%);
     }
+}
+
+/* Enlarged pointer target for a short thumb. It grows only along the scroll axis:
+   across the axis it would reach ~19px past the rail and swallow clicks on
+   whatever content sits beside the scrollbar. */
+.app-scrollbar[data-orientation='vertical'] .app-scrollbar-thumb::before {
+    min-height: 44px;
+}
+
+.app-scrollbar[data-orientation='horizontal'] .app-scrollbar-thumb::before {
+    min-width: 44px;
 }
 
 .app-scrollbar-corner {
@@ -3014,7 +3023,9 @@ article.reader-view-content-container:has(.quest-sidebar) {
 /* Per-page windowed width overrides (desktop only; mobile stays full-screen above). */
 @media (min-width: 768px) {
     #app-container:not([data-window-expanded])
-        div[data-app='AppWindow'][data-windowed][data-path='/']:not([data-fixed-size]) {
+        div[data-app='AppWindow'][data-windowed][data-path='/']:not([data-fixed-size]),
+    #app-container:not([data-window-expanded])
+        div[data-app='AppWindow'][data-windowed][data-path='/pricing']:not([data-fixed-size]) {
         max-width: 1200px;
     }
 }
@@ -3152,7 +3163,45 @@ div[data-radix-popper-content-wrapper] {
     }
 }
 
-/* Set on <html> by theme-init.js before paint when the hint was previously dismissed. */
-html.warehouse-wizard-hint-dismissed .warehouse-wizard-hint {
+/* Set on <html> by theme-init.js before paint when the hint was previously collapsed.
+   Collapsing swaps the WizardHint's full banner for its slim re-expandable bar. */
+.wizard-hint-collapsed {
     display: none;
+}
+
+/* Dotted "paper desk" backdrop, ported from the .PaperDesk rule on the PostHog
+   app's login screen. Two layers: a soft warm glow that does not repeat, over a
+   16px dot grid that does. Used by the pricing hero. */
+.paper-desk {
+    background-image: radial-gradient(72% 72% at 50% 38%, rgba(247, 165, 1, 0.05), transparent 70%),
+        radial-gradient(hsla(0, 0%, 7%, 0.055) 1.4px, transparent 0);
+    background-repeat: no-repeat, repeat;
+    background-size: auto, 16px 16px;
+    background-color: #eef0e7;
+}
+
+.dark .paper-desk {
+    background-image: radial-gradient(72% 72% at 50% 38%, rgba(247, 165, 1, 0.07), transparent 70%),
+        radial-gradient(hsla(0, 0%, 100%, 0.07) 1.4px, transparent 0);
+    background-color: #1a1a1a;
+}
+
+html.warehouse-wizard-hint-dismissed .warehouse-wizard-hint .wizard-hint-full,
+html.ai-observability-wizard-hint-dismissed .ai-observability-wizard-hint .wizard-hint-full {
+    display: none;
+}
+
+html.warehouse-wizard-hint-dismissed .warehouse-wizard-hint .wizard-hint-collapsed,
+html.ai-observability-wizard-hint-dismissed .ai-observability-wizard-hint .wizard-hint-collapsed {
+    display: flex;
+}
+
+/* `#:~:text=` fragment highlight. Same yellow as Tailwind's `yellow` token
+   (see tailwind.config.js), matching the site's search-result highlight
+   (mark[data-markjs='true']) at the same opacity for visual consistency. */
+::highlight(text-fragment-target) {
+    background-color: rgb(247 165 1 / 0.4);
+}
+.dark ::highlight(text-fragment-target) {
+    background-color: rgb(247 165 1 / 0.3);
 }

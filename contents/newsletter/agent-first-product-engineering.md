@@ -119,7 +119,7 @@ Everything else gets pulled later. We let the agent figure out when.
 
 ## 4. Writing skills is a human skill
 
-Skills help you fill the gap between what your product can do and what an agent can do out of the box with your tools:
+[Skills](/newsletter/writing-agent-skills) help you fill the gap between what your product can do and what an agent can do out of the box with your tools:
 
 ![Writing skills for agents](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/agent1_b1e92e5899.png)
 

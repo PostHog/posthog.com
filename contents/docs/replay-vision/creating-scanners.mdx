@@ -80,7 +80,7 @@ Once the scanner is running, the tuning loop moves to its [calibration tab](/doc
 
 ### Drafting prompts with PostHog AI
 
-Inside the scanner editor, you can ask [PostHog AI](/docs/posthog-ai) to draft a prompt by describing what you want in natural language. It picks a scanner type, drafts the prompt, and fills it into the form for you to edit.
+Inside the scanner editor, you can ask [PostHog AI](/docs/posthog-ai) to draft a prompt by describing what you want in natural language. It picks a scanner type, drafts the prompt, and fills it into the form for you to edit. When your goal targets a specific flow and one of your product's events clearly marks it, the draft also pre-fills a recording filter for that event, which you can review or remove on the filters step.
 
 <ProductScreenshot
   imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/posthog_ai_prompt_drafter_7cb9c1fc04.png"
@@ -97,13 +97,14 @@ Each scanner type has a few extra knobs. The full reference is on the [scanner t
 - **Summarizer** – pick a summary length (short / medium / long). The core summarizer prompt is built in, so the prompt field becomes **Additional context**: use it for product context or steering, like what the ideal user flow looks like.
 - **Monitor** – choose whether the model can return `inconclusive` rather than forcing a yes/no answer.
 
-The editor also has a **model** picker, which sets the price of every observation the scanner makes: 2 credits on Gemini 3.5 Flash Lite, 5 on Gemini 3 Flash (the default), and 15 on Gemini 3.6 Flash. Newer models tend to produce higher-quality observations, but the top tier costs over seven times as much per session as the cheapest. Start on the default. If results are close but not quite right, tune the prompt before reaching for a pricier model, since a sharper prompt is free and the [calibration tab](/docs/replay-vision/calibration) will tell you whether it worked. See [quota and limits](/docs/replay-vision/quota-and-limits) for how credits are metered.
+The editor also has a **model** picker, which sets the price of every observation the scanner makes: 2 credits on Gemini 3.5 Flash Lite, 5 on Gemini 3 Flash (the default), and 15 on Gemini 3.7 Flash. Newer models tend to produce higher-quality observations, but the top tier costs over seven times as much per session as the cheapest. Start on the default. If results are close but not quite right, tune the prompt before reaching for a pricier model, since a sharper prompt is free and the [calibration tab](/docs/replay-vision/calibration) will tell you whether it worked. See [quota and limits](/docs/replay-vision/quota-and-limits) for how credits are metered.
 
 ## Filters: scoping the scanner
 
 Recording filters use the same query builder as the rest of [Session Replay](/docs/session-replay/how-to-control-which-sessions-you-record). You can filter by:
 
 - Person properties (e.g. plan tier, signup date)
+- Group properties (e.g. company name, account tier) – requires [group analytics](/docs/product-analytics/group-analytics)
 - Session properties (duration, page count, country)
 - Cohorts
 - Events the session contains

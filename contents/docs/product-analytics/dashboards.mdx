@@ -98,7 +98,7 @@ A few things to keep in mind:
 
 New dashboards are set to _No date range override_ by default. This means all insights use the date range applied in their configuration.
 
-Changing the date range on a dashboard forces all the insights to use the same date range, but this doesn't impact the date range that's shown when viewing an individual insight.
+Changing the date range on a dashboard forces all the insights to use the same date range, unless a tile [overrides or ignores dashboard filters](#overriding-filters-at-the-tile-level). This doesn't impact the date range that's shown when viewing an individual insight.
 
 The date range can be accessed in SQL insights through the [`filters` variable](/docs/data-warehouse/sql/variables) like `filters.dateRange.from` and `filters.dateRange.to`.
 
@@ -127,6 +127,22 @@ Filters can be accessed in SQL insights through the [`filters` variable](/docs/d
 
 > **Note:** Dashboard property filter overrides are not applied to insights containing [data warehouse series](/docs/data-warehouse/insights). A warning is displayed on the insight card when this happens. Date range overrides still work for all insight types.
 
+### Overriding filters at the tile level
+
+You can override dashboard-level filters for individual tiles. This lets one insight use different settings while the rest of the dashboard uses the dashboard-level filters.
+
+To configure tile-level overrides:
+
+1. Click the **⋯** menu on any insight card.
+2. Select **Override tile filters**.
+3. Configure any of the available overrides:
+   - **Date range** – Use a different time period for this tile.
+   - **Interval** – Change the grouping interval (hour, day, week, or month). Select "inherit" to use the dashboard's interval.
+   - **Properties** – Add property filters specific to this tile. These combine with dashboard filters using AND logic.
+   - **Breakdown** – Split the data by a different property than the dashboard setting.
+
+Some controls may be disabled depending on the insight type. For example, interval is only available for time-series insights, and breakdown isn't supported by all chart types.
+
 ### Filter precedence: dashboard vs. tile level
 
 Individual tiles (insights) can have their own filters and date ranges configured separately from dashboard-level overrides. When both are set, **tile-level filters take precedence**:
@@ -136,6 +152,14 @@ Individual tiles (insights) can have their own filters and date ranges configure
 - **Property filters:** Filters from both levels are combined using AND logic. However, if a tile filter directly contradicts a dashboard filter on the same property key, the tile filter wins and the conflicting dashboard filter is dropped.
 
 The insight card displays a warning when tile filters are merging with or overriding dashboard filters.
+
+### Ignoring dashboard filters entirely
+
+To completely detach a tile from all dashboard filters, toggle **Ignore dashboard filters** on in the tile's filter override modal (**⋯** → **Override tile filters**).
+
+When enabled, the tile ignores the dashboard's date range, properties, breakdown, interval, and test account filter. Tile-level overrides still apply, and [dashboard variables](/docs/data-warehouse/sql/variables) continue to work.
+
+Tiles ignoring dashboard filters display an **Ignores dashboard filters** indicator in the card heading.
 
 ## Dashboard options
 
@@ -187,6 +211,17 @@ You can move or copy insight cards and text cards to other dashboards from the *
 Both options require editor access to the target dashboard.
 
 When you copy an insight, it's the same underlying insight appearing on multiple dashboards (as [noted above](#creating-a-new-dashboard)). Any changes to the insight are reflected everywhere it appears. This is different from duplicating an insight, which creates an independent copy.
+
+### Removing and deleting insights
+
+Removing an insight from a dashboard only removes it from the current dashboard – the insight itself still exists in PostHog and on any other dashboards where it appears.
+
+When you remove an insight, a toast notification appears with two options:
+
+- **Undo** – Restores the insight to the dashboard.
+- **Delete insight everywhere** – Permanently deletes the insight from PostHog and removes it from every dashboard it appears on. This opens a confirmation dialog that lists any other dashboards using the insight before you confirm.
+
+Deletion can be undone after confirming. The **Delete insight everywhere** option only appears if you have editor access to the insight. If you only have view access, you can remove the insight from the dashboard but won't see the delete option.
 
 ### Adding text cards
 
@@ -358,6 +393,29 @@ The widget displays:
 - List of recent responses, each showing the respondent's name, submission time, and answers
 
 Clicking a response row opens the respondent's person page. Clicking **See more** opens the survey detail page in a new tab.
+
+#### Support widget
+
+The Support widget displays a list of recently updated support tickets from [Support](/docs/support). Each row shows the requester name and email, ticket number, channel source, last message preview, unread count, priority, status, assignee, and when the ticket was last updated.
+
+To add it, click the **Add...** dropdown and select **Recent tickets** under the **Support** group.
+
+**Tile filters:**
+
+- **Saved view** - Apply a saved Support view to refine which tickets are shown. When set, the saved view owns the ticket filters; the widget still sorts by most recently updated and applies its limit.
+- **Status** - Filter by ticket status (new, open, pending, on hold, resolved, or all). Default: all.
+- **Priority** - Filter by priority levels (low, medium, high, critical). Default: all.
+- **Assignee** - Filter to show only tickets assigned to specific team members or roles.
+
+When a saved view is active, the status, priority, and assignee filters are hidden since the saved view controls those settings.
+
+**Display settings (edit modal):**
+
+- **Number of tickets** - Maximum number of tickets to display. Default: 10, maximum: 25.
+
+You can update ticket assignees directly from the widget without leaving the dashboard.
+
+Clicking a row opens the ticket detail page in a new tab. Clicking the tile title navigates to **Support**.
 
 ### Sharing a dashboard
 

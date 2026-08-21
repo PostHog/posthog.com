@@ -1,18 +1,22 @@
-import React, { useEffect, useMemo, useState } from 'react'
+import React, { useEffect, useMemo, useRef, useState } from 'react'
 import Tooltip from 'components/Tooltip'
 import { IconCopy, IconInfo, IconLightBulb } from '@posthog/icons'
 import Toggle from 'components/Toggle'
-import { calculatePrice, formatUSD } from '../PricingSlider/pricingSliderLogic'
+import { formatUSD } from '../PricingSlider/pricingSliderLogic'
+import { buildProductAddons, calculatePrice, getAddonsCostForProduct, getCalculatorTotal } from './calculatorLogic'
 import { Link, useStaticQuery } from 'gatsby'
 import { allProductsData } from '../Pricing'
 import useProducts from 'hooks/useProducts'
 import { LogSlider, inverseCurve, sliderCurve } from '../PricingSlider/Slider'
 import { PricingTiers } from '../Plans'
 import ProductAnalyticsTab, { analyticsSliders, getTotalEnhancedPersonsVolume } from './Tabs/ProductAnalytics'
+import ReplayVisionTab from './Tabs/ReplayVision'
 import StandaloneAddonsTab from './Tabs/StandaloneAddonsTab'
 import { EXCLUDED_ADDON_TYPES } from '../../../constants/addons'
+import { BROWSE_TOOLS_HANDLES } from 'constants/productNavigation'
 import qs from 'qs'
 import { useUser } from 'hooks/useUser'
+import usePostHog from 'hooks/usePostHog'
 import { NumericFormat } from 'react-number-format'
 import AutosizeInput from 'react-input-autosize'
 
@@ -83,6 +87,7 @@ export const Addon = ({ type, name, description, plans, addons, setAddons, volum
 
 const productTabs = {
     product_analytics: ProductAnalyticsTab,
+    replay_vision: ReplayVisionTab,
 }
 
 export const Addons = ({ addons, setAddons, volume, activeProduct, analyticsData }) => {
@@ -275,23 +280,43 @@ export default function Tabbed() {
     const platform = billingProducts.find((product) => product.type === 'platform_and_support')
     const [activeTab, setActiveTab] = useState(0)
     const { products: initialProducts, setVolume, setProduct, monthlyTotal } = useProducts()
-    const products = initialProducts.filter((product) => !!product.unit && !product.hideFromPricingTableAndCalculator)
-    const activeProduct = products[activeTab]
-    const initialProductAddons = useMemo(() => {
-        const initialAddons = []
-        for (const product of products) {
-            if (product.billingData?.addons?.length > 0) {
-                product.billingData.addons.forEach((addon) => {
-                    initialAddons.push({
-                        type: addon.type,
-                        checked: addonDefaults[addon.type]?.checked || false,
-                        totalCost: 0,
-                    })
-                })
-            }
+    // Listed in the same order as the taskbar's "Browse tools" menu, so the tools appear where
+    // people have already learned to look for them. Metered products missing from that curated
+    // list (Managed warehouse, PostHog AI, Inbox) fall to the end, keeping their relative order —
+    // `sort` is stable, so the `Infinity` bucket stays in `useProducts` order.
+    const products = useMemo(() => {
+        const navOrder = (product) => {
+            const index = BROWSE_TOOLS_HANDLES.indexOf(product.handle)
+            return index === -1 ? Infinity : index
         }
-        return initialAddons
-    }, [])
+        return initialProducts
+            .filter(
+                (product) => !!product.unit && !product.hideFromPricingTableAndCalculator && !product.hideFromCalculator
+            )
+            .sort((a, b) => navOrder(a) - navOrder(b))
+    }, [initialProducts])
+    const activeProduct = products[activeTab]
+
+    // Capture pricing calculator interactions for the experiment.
+    const posthog = usePostHog()
+    const hasCapturedInteraction = useRef(false)
+    const trackInteraction = (kind: string) => (event: React.SyntheticEvent) => {
+        if (hasCapturedInteraction.current) return
+        // Clicks land on padding and labels as much as on controls; only count the real ones.
+        const control = (event.target as HTMLElement)?.closest?.(
+            'button, input, select, textarea, [role="slider"], [role="switch"]'
+        )
+        if (!control) return
+        hasCapturedInteraction.current = true
+        posthog?.capture('pricing_calculator_interacted', {
+            interaction: kind,
+            // Which tool was on screen when they first touched it — the tab list is the most
+            // likely first interaction, so this is usually the product they went looking for.
+            product: activeProduct?.handle,
+        })
+    }
+
+    const initialProductAddons = useMemo(() => buildProductAddons(products, addonDefaults), [])
     const initialPlatformAddons = useMemo(() => {
         const initialAddons = []
         platform.addons.forEach((addon) => {
@@ -307,10 +332,7 @@ export default function Tabbed() {
     const [productAddons, setProductAddons] = useState(initialProductAddons)
     const [platformAddons, setPlatformAddons] = useState(initialPlatformAddons)
     const totalPrice = useMemo(
-        () =>
-            monthlyTotal +
-            productAddons.reduce((acc, addon) => acc + addon.totalCost, 0) +
-            platformAddons.reduce((acc, addon) => acc + (addon.checked ? addon.price : 0), 0),
+        () => getCalculatorTotal(monthlyTotal, productAddons, platformAddons),
         [monthlyTotal, productAddons, platformAddons]
     )
 
@@ -364,21 +386,22 @@ export default function Tabbed() {
     }, [])
 
     return (
-        <div className="w-full flex-1">
+        // Capture-phase handlers so an interaction still registers if a control stops propagation.
+        // Keyboard is covered separately: slider handles move on arrow keys without firing either
+        // of the other two.
+        <div
+            className="w-full flex-1"
+            onClickCapture={trackInteraction('click')}
+            onChangeCapture={trackInteraction('change')}
+            onKeyDownCapture={trackInteraction('keyboard')}
+        >
             <div className="grid grid-cols-12 mb-1">
                 <div className="col-span-12 @2xl:col-span-4 md:pr-6 mb-4 md:mb-0">
-                    <h4 className="m-0 md:pl-3 pb-1 font-normal text-sm opacity-70">Products</h4>
                     <ul className="list-none m-0 p-0 pb-2 flex flex-row md:flex-col gap-px overflow-x-auto @md:w-auto -mx-4 px-4 @md:px-0 @md:mx-0">
                         {products.map(
                             ({ name, Icon, cost, color, billingData, handle, categoryName, pricingBadge }, index) => {
                                 const active = activeTab === index
-                                const addonsPrice = productAddons
-                                    .filter(
-                                        (addon) =>
-                                            addon.checked &&
-                                            billingData?.addons.some((billingAddon) => addon.type === billingAddon.type)
-                                    )
-                                    .reduce((acc, addon) => acc + addon.totalCost, 0)
+                                const addonsPrice = getAddonsCostForProduct(productAddons, billingData)
                                 return (
                                     <li key={name} className="flex-1">
                                         <button

@@ -13,8 +13,8 @@ import WizardCommand from 'components/WizardCommand'
 
 ## Requirements
 
-- Node.js 18 or later (TypeScript/JavaScript), or Python 3.10+ — see [Python](#python) below
-- An MCP server built on `@modelcontextprotocol/sdk` (TS) or the `mcp` package (Python). (Running a custom dispatcher with no server object to wrap? See [Custom servers](/docs/mcp-analytics/custom-servers).)
+- Node.js 20.20+ or 22.22+ (TypeScript/JavaScript), or Python 3.10+ — see [Python](#python) below
+- An MCP server built on the MCP TypeScript SDK — either major, `@modelcontextprotocol/sdk` (v1) or `@modelcontextprotocol/{core,server,client}` (v2), see [MCP SDK v2](/docs/mcp-analytics/sdk-v2) — or the `mcp` package (Python). (Running a custom dispatcher with no server object to wrap? See [Custom servers](/docs/mcp-analytics/custom-servers).)
 - A PostHog [project API key](/docs/getting-started/project-token) (`phc_…`)
 
 ## AI wizard
@@ -50,7 +50,7 @@ import { instrument } from "@posthog/mcp"
 
 const server = new Server({ name: "my-mcp-server", version: "1.0.0" })
 
-const posthog = new PostHog(process.env.POSTHOG_PROJECT_API_KEY, {
+const posthog = new PostHog(process.env.POSTHOG_PROJECT_TOKEN, {
   host: "https://us.i.posthog.com", // or https://eu.i.posthog.com
 })
 
@@ -61,16 +61,18 @@ const analytics = instrument(server, posthog)
 
 ### High-level `McpServer`
 
-If you use the typed `McpServer` wrapper from `@modelcontextprotocol/sdk/server/mcp.js`, pass it in directly — the SDK will unwrap it and also install a proxy on `_registeredTools`, so any tool you register *after* `instrument()` is also wrapped:
+If you use the typed `McpServer` wrapper, pass it in directly — the SDK will unwrap it and also install a proxy on `_registeredTools`, so any tool you register *after* `instrument()` is also wrapped:
 
-```ts
+<MultiLanguage>
+
+```ts file=SDK-v1
 import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js"
 import { PostHog } from "posthog-node"
 import { instrument } from "@posthog/mcp"
 
 const server = new McpServer({ name: "my-mcp-server", version: "1.0.0" })
 
-const posthog = new PostHog(process.env.POSTHOG_PROJECT_API_KEY, {
+const posthog = new PostHog(process.env.POSTHOG_PROJECT_TOKEN, {
   host: "https://us.i.posthog.com",
 })
 
@@ -80,6 +82,28 @@ server.tool("search_events", { /* ... */ }, async (args) => {
   // your handler runs untouched
 })
 ```
+
+```ts file=SDK-v2
+import { McpServer } from "@modelcontextprotocol/server"
+import { PostHog } from "posthog-node"
+import { instrument } from "@posthog/mcp"
+
+const server = new McpServer({ name: "my-mcp-server", version: "1.0.0" })
+
+const posthog = new PostHog(process.env.POSTHOG_PROJECT_TOKEN, {
+  host: "https://us.i.posthog.com",
+})
+
+const analytics = instrument(server, posthog)
+
+server.registerTool("search_events", { /* ... */ }, async (args) => {
+  // your handler runs untouched
+})
+```
+
+</MultiLanguage>
+
+Everything past this point — options, callbacks, events — is identical on both majors. See [MCP SDK v2](/docs/mcp-analytics/sdk-v2) for the two places they differ.
 
 ### Next.js / Vercel (`mcp-handler`)
 
@@ -91,7 +115,7 @@ import { createMcpHandler } from "mcp-handler"
 import { PostHog, instrument } from "@posthog/mcp"
 
 // Create the client once at module scope (not per request).
-const posthog = new PostHog(process.env.POSTHOG_PROJECT_API_KEY, {
+const posthog = new PostHog(process.env.POSTHOG_PROJECT_TOKEN, {
   host: "https://us.i.posthog.com", // or https://eu.i.posthog.com
 })
 
@@ -148,7 +172,7 @@ import { McpModule } from "@rekog/mcp-nest"
 import { PostHog, instrumentMutator } from "@posthog/mcp"
 
 // Create the client once at module scope.
-const posthog = new PostHog(process.env.POSTHOG_PROJECT_API_KEY, {
+const posthog = new PostHog(process.env.POSTHOG_PROJECT_TOKEN, {
   host: "https://us.i.posthog.com", // or https://eu.i.posthog.com
 })
 
@@ -181,6 +205,12 @@ serverMutator: (server) => {
 A stateless server keeps nothing between requests — a fresh server instance each time, often on a different pod. Left alone, every request becomes its own `$session_id`, and `$mcp_client_name` / `$mcp_client_version` (only sent at `initialize`) go missing from every event after the handshake.
 
 The SDK handles this with no session store and no sticky routing. At `initialize` it mints the `Mcp-Session-Id` response header as a token carrying the session id and client metadata. Clients replay that header on every subsequent request, so any pod reads the same values back — nothing changes on the client side.
+
+<CalloutBox icon="IconInfo" title="This applies to 2025-11-25 traffic" type="fyi">
+
+The `2026-07-28` revision has no `initialize` and no `Mcp-Session-Id`, so none of this section reaches it. See [Sessions on 2026-07-28](/docs/mcp-analytics/sdk-v2#sessions-on-2026-07-28).
+
+</CalloutBox>
 
 ### Streamable HTTP needs `enableJsonResponse: true`
 
@@ -317,6 +347,8 @@ No server object to wrap (a custom HTTP/edge dispatcher)? Use `PostHogMCP`, a `p
 
 The Python SDK is in beta (pre-1.0); the API may still change before `v1`, and some TypeScript-only features may land first. It emits the identical `$mcp_*` events documented on the [events](/docs/mcp-analytics/events) page.
 
+It doesn't support the `2026-07-28` protocol revision yet — that's in progress. See [MCP SDK v2](/docs/mcp-analytics/sdk-v2) for what that revision changes.
+
 </CalloutBox>
 
 ## Configuration
@@ -343,7 +375,7 @@ The `posthog-node` client queues and batches events asynchronously, and you own 
 import { PostHog } from "posthog-node"
 import { instrument } from "@posthog/mcp"
 
-const posthog = new PostHog(process.env.POSTHOG_PROJECT_API_KEY)
+const posthog = new PostHog(process.env.POSTHOG_PROJECT_TOKEN)
 instrument(server, posthog)
 
 process.on("SIGTERM", async () => {

@@ -28,6 +28,18 @@ The suppression list is address-level and category-independent – a suppressed 
 
 PostHog adds addresses automatically when mail to them hard-bounces, which is what protects your sending domain's reputation. You can add an address by hand, and you can remove an entry if you believe the bounce was a one-off – but removing a genuine hard bounce means you'll bounce again.
 
+## Managing the lists over the API
+
+Both lists are available over the [REST API](/docs/api), so your own product can honor an unsubscribe or a resubscribe without anyone opening PostHog.
+
+The [messaging preferences API](/docs/api/messaging-preferences) manages the opt-out list: list a category's opt-outs, add them one at a time or up to 1,000 in bulk, remove one when a recipient opts back in, and export a category's list as CSV. Leave out the category to work with the global opt-out that covers all marketing messages.
+
+Sends check the message's category and the global opt-out together, so opting someone back in to one marketing category also lifts a global opt-out if they have one. Their other marketing categories stay opted out, which keeps the resubscribe scoped to the category you named.
+
+The [messaging suppressions API](/docs/api/messaging-suppressions) manages the suppression list: list entries, add one, or remove one.
+
+Authenticate with a [personal API key](/docs/api/personal-api-keys) that has the `hog_flow:read` scope for reads or `hog_flow:write` for writes.
+
 ## Related
 
 - [Import opt-out lists from Customer.io](/docs/workflows/import-customerio-optouts)
