@@ -1,24 +1,19 @@
 import { CallToAction, TrackedCTA } from 'components/CallToAction'
 import Link from 'components/Link'
+import List from 'components/List'
 import React, { useEffect, useState } from 'react'
 
-const DOWNLOAD_URL = 'https://code.posthog.com/download'
-const RELEASES_URL = 'https://github.com/PostHog/code/releases/latest'
+export const RELEASES_URL = 'https://github.com/PostHog/posthog/releases?q=desktop&expanded=true'
 
 type OS = 'mac' | 'windows' | 'linux' | 'unknown'
 type Arch = 'arm64' | 'x64' | 'unknown'
 
-// code.posthog.com is a Cloudflare Worker that redirects to the matching asset
-// on the latest published release. Arch is detected client-side and passed as
-// an explicit path because browsers don't send the Sec-CH-UA-Arch hint on
-// cross-origin navigation, so the worker can't tell an Intel Mac from Apple
-// Silicon on its own.
-const PLATFORMS = [
-    { key: 'mac-arm64', label: 'macOS (Apple Silicon)', url: `${DOWNLOAD_URL}/mac/arm64` },
-    { key: 'mac-x64', label: 'macOS (Intel)', url: `${DOWNLOAD_URL}/mac/intel` },
-    { key: 'windows-x64', label: 'Windows', url: `${DOWNLOAD_URL}/windows` },
-    { key: 'linux-x64', label: 'Linux (x64)', url: `${DOWNLOAD_URL}/linux/x64` },
-    { key: 'linux-arm64', label: 'Linux (Arm64)', url: `${DOWNLOAD_URL}/linux/arm64` },
+export const PLATFORMS = [
+    { key: 'mac-arm64', label: 'macOS (Apple Silicon)', icon: 'IconApple', url: RELEASES_URL },
+    { key: 'mac-x64', label: 'macOS (Intel)', icon: 'IconApple', url: RELEASES_URL },
+    { key: 'windows-x64', label: 'Windows', icon: 'IconLaptop', url: RELEASES_URL },
+    { key: 'linux-x64', label: 'Linux (x64)', icon: 'IconServer', url: RELEASES_URL },
+    { key: 'linux-arm64', label: 'Linux (Arm64)', icon: 'IconServer', url: RELEASES_URL },
 ] as const
 
 type Platform = (typeof PLATFORMS)[number]
@@ -65,7 +60,7 @@ async function detectArch(os: OS): Promise<Arch> {
     return 'unknown'
 }
 
-export function DownloadContent({ className }: { className?: string }): JSX.Element {
+function useDetectedPlatform(): { primary: Platform | null; macAlt: Platform | null } {
     const [os, setOS] = useState<OS>('unknown')
     const [arch, setArch] = useState<Arch>('unknown')
 
@@ -87,14 +82,61 @@ export function DownloadContent({ className }: { className?: string }): JSX.Elem
                 ? 'linux-arm64'
                 : 'linux-x64'
             : null
-    const primary = primaryKey ? getPlatform(primaryKey) : null
-    const macAlt = os === 'mac' ? getPlatform(primaryKey === 'mac-x64' ? 'mac-arm64' : 'mac-x64') : null
+
+    return {
+        primary: primaryKey ? getPlatform(primaryKey) : null,
+        macAlt: os === 'mac' ? getPlatform(primaryKey === 'mac-x64' ? 'mac-arm64' : 'mac-x64') : null,
+    }
+}
+
+export function DownloadCTA(): JSX.Element {
+    const { primary, macAlt } = useDetectedPlatform()
+
+    return (
+        <div className="not-prose">
+            <TrackedCTA
+                event={{ name: 'clicked code download', platform: primary?.key || 'unknown' }}
+                type="primary"
+                size="lg"
+                to={primary?.url || RELEASES_URL}
+            >
+                {primary ? `View downloads for ${primary.label}` : 'View PostHog Desktop downloads'}
+            </TrackedCTA>
+
+            {macAlt && (
+                <p className="mt-3 mb-0 text-sm text-secondary">
+                    {macAlt.key === 'mac-x64' ? 'On an Intel Mac? ' : 'On an Apple Silicon Mac? '}
+                    <Link to={macAlt.url} external>
+                        View {macAlt.label} downloads
+                    </Link>
+                </p>
+            )}
+        </div>
+    )
+}
+
+export function DownloadList(): JSX.Element {
+    return (
+        <List
+            className="grid gap-4 grid-cols-1 @md:grid-cols-2 not-prose"
+            items={PLATFORMS.map((platform) => ({
+                label: platform.label,
+                url: platform.url,
+                icon: platform.icon,
+            }))}
+        />
+    )
+}
+
+export function DownloadContent({ className }: { className?: string }): JSX.Element {
+    const { primary, macAlt } = useDetectedPlatform()
 
     return (
         <div className={className}>
             <h1 className="text-3xl mb-3 !mt-0">Download PostHog Desktop</h1>
             <p className="mb-8 text-base leading-relaxed">
-                We’ve picked the build that matches your device. Grab it below, or choose another platform.
+                We’ve highlighted the platform that matches your device. Open the releases page to choose its latest
+                asset.
             </p>
 
             <div className="flex flex-wrap gap-3 mb-3 justify-center">
@@ -102,9 +144,9 @@ export function DownloadContent({ className }: { className?: string }): JSX.Elem
                     event={{ name: 'clicked code download', platform: primary?.key || 'unknown' }}
                     type="primary"
                     size="lg"
-                    to={primary?.url || DOWNLOAD_URL}
+                    to={primary?.url || RELEASES_URL}
                 >
-                    {primary ? `Download for ${primary.label}` : 'Download PostHog Desktop'}
+                    {primary ? `View downloads for ${primary.label}` : 'View PostHog Desktop downloads'}
                 </TrackedCTA>
                 <CallToAction type="secondary" size="lg" to="/docs/posthog-desktop" state={{ newWindow: true }}>
                     Read the docs
@@ -115,7 +157,7 @@ export function DownloadContent({ className }: { className?: string }): JSX.Elem
                 <p className="mb-8 text-sm text-secondary">
                     {macAlt.key === 'mac-x64' ? 'On an Intel Mac? ' : 'On an Apple Silicon Mac? '}
                     <Link to={macAlt.url} external>
-                        Download the {macAlt.label} build
+                        View {macAlt.label} downloads
                     </Link>
                 </p>
             )}
@@ -136,15 +178,7 @@ export function DownloadContent({ className }: { className?: string }): JSX.Elem
                     ))}
                 </div>
                 <p className="mt-6 text-sm text-secondary">
-                    Linux builds are also available as a{' '}
-                    <Link to={`${DOWNLOAD_URL}/linux/deb`} external>
-                        .deb
-                    </Link>{' '}
-                    or{' '}
-                    <Link to={`${DOWNLOAD_URL}/linux/rpm`} external>
-                        .rpm
-                    </Link>
-                    .
+                    Linux builds are available as AppImage, .deb, and .rpm packages.
                 </p>
                 <p className="mt-2 text-sm text-secondary">
                     <Link to={RELEASES_URL} external>
