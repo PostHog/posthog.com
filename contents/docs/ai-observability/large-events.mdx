@@ -10,13 +10,13 @@ Large event capture is in public beta, available in [posthog-python](/docs/libra
 
 </CalloutBox>
 
-Most AI events are small, and the regular capture path handles them fine. Some aren't: a single generation can carry megabytes of prompt context or base64-encoded images and audio, more than regular event capture accepts. For these large events, PostHog has a dedicated ingestion path that accepts events up to **8MB**.
+AI events can get big – a single generation can carry megabytes of prompt context or base64-encoded media, more than regular event capture accepts. To handle this, PostHog sends AI events like `$ai_generation` and `$ai_embedding` through a dedicated ingestion path that accepts events up to **8MB**.
 
-During the beta, this path is opt-in. You only need it if your events are large: multimodal content, or prompts and outputs that approach 1MB. How you opt in depends on how you capture AI events today.
+During the beta, this path is opt-in. How you opt in depends on how you capture AI events today.
 
 ## Using the SDK integrations
 
-By default, our [SDK integrations](/docs/ai-observability/installation) redact base64 media and may truncate very long strings before capture. That's the right setting for most apps, and there's nothing to change. If you do need the full payload, pass a single flag when creating your PostHog client:
+By default, our [SDK integrations](/docs/ai-observability/installation) redact base64 media and may truncate very long strings before capture. To capture everything in full, pass a single flag when creating your PostHog client:
 
 <MultiLanguage>
 
@@ -42,11 +42,11 @@ const posthog = new PostHog(
 
 </MultiLanguage>
 
-With the flag on, nothing is truncated or redacted, and AI events go through the large event path. The one exception is [privacy mode](/docs/ai-observability/privacy-mode): when it's enabled, input and output content is still stripped, flag or no flag.
+With the flag on, nothing is truncated or redacted. The one exception is [privacy mode](/docs/ai-observability/privacy-mode): when it's enabled, input and output content is still stripped, flag or no flag.
 
 ## Calling capture_ai directly
 
-If you build AI events yourself instead of using the integrations, call `capture_ai` (Python) or `captureAi` (Node) instead of `capture`. It takes the same arguments as `capture`, sends the event through the large event path, and returns the captured event's UUID.
+If you build AI events yourself instead of using the integrations, call `capture_ai` (Python) or `captureAi` (Node) instead of `capture`. It takes the same arguments as `capture` and returns the captured event's UUID.
 
 <MultiLanguage>
 
@@ -98,7 +98,7 @@ In Python, call `posthog.flush()` before exit (or enable `sync_mode`), just like
 
 ## Other platforms
 
-Not on Python or Node? Build events with [manual capture](/docs/ai-observability/installation/manual-capture) and point your capture requests at the large event endpoint instead of the regular one – same request format, different path:
+Not on Python or Node? Build events with [manual capture](/docs/ai-observability/installation/manual-capture) and point your capture requests at the dedicated AI endpoint instead of the regular one – same request format, different path:
 
 ```shell
 POST <ph_client_api_host>/i/v0/ai/batch/
