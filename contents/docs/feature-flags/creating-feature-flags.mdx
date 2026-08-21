@@ -117,7 +117,7 @@ This specifies the conditions a user must meet to access the feature flag and re
 
 > **Tip:** You can configure [default release conditions](/docs/feature-flags/project-wide-settings#default-release-conditions) in your project settings to pre-populate release conditions when creating new flags. These defaults aren't enforced – you can modify or remove them during flag creation. Default release conditions don't apply to remote config flags.
 
-By default, all condition sets are evaluated and a pass on any condition is a pass. A condition matches when all property filters pass and the target falls within the rollout percentage. You can change this behavior with the **Stop evaluation at first matching condition set** option – see [early exit](#stop-evaluation-at-first-matching-condition-set) below.
+By default, all condition sets are evaluated and a pass on any condition is a pass. A condition matches when all property filters pass and the target falls within the rollout percentage. You can change this behavior with the **Stop at the first condition set whose property filters match** option – see [early exit](#stop-at-the-first-condition-set-whose-property-filters-match) below.
 
 By default, release conditions use **Properties** targeting, which evaluates flags based on user or group property filters. You can change the top-level targeting mode:
 
@@ -145,7 +145,7 @@ When you target a person property of `distinct_id equals`, the value field searc
   classes="rounded"
 />
 
-#### Stop evaluation at first matching condition set
+#### Stop at the first condition set whose property filters match
 
 This setting is off by default, and leaving it off means your flag evaluates exactly as it always has. Turning it on only changes what happens when a user matches a condition set's property filters but falls outside that set's rollout percentage:
 
