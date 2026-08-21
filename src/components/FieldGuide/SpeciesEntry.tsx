@@ -152,11 +152,8 @@ export default function SpeciesEntry({ species }: { species: Species }): JSX.Ele
                     }
                     .se-plate img {
                         display: block;
-                        width: auto;
-                        max-width: 100%;
-                        max-height: 32vh;
+                        width: 100%;
                         height: auto;
-                        margin: 0 auto;
                         border: 1px solid ${CORAL};
                     }
                     .se-plate-pending {

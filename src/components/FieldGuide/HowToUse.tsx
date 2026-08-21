@@ -4,6 +4,7 @@ import { INK, PAPER } from './heroData'
 import { ALL_SPECIES } from './speciesData'
 
 const CORAL = '#E1554E'
+const ROMAN = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X']
 
 const STRUCTURE: { label: string; body: string }[] = [
     {
@@ -55,6 +56,23 @@ export default function HowToUse(): JSX.Element {
                             yChannelSelector="G"
                         />
                     </filter>
+                    {/* Finer, gentler deckle for the small anatomy cards */}
+                    <filter id="fg-torn-card">
+                        <feTurbulence
+                            type="fractalNoise"
+                            baseFrequency="0.02 0.03"
+                            numOctaves={3}
+                            seed={9}
+                            result="noise2"
+                        />
+                        <feDisplacementMap
+                            in="SourceGraphic"
+                            in2="noise2"
+                            scale={5}
+                            xChannelSelector="R"
+                            yChannelSelector="G"
+                        />
+                    </filter>
                 </svg>
                 <aside className="htu-ebook-callout">
                     <p className="htu-ebook-text">
@@ -68,31 +86,37 @@ export default function HowToUse(): JSX.Element {
                 </aside>
 
                 <h2 className="htu-title">How to use this guide</h2>
-                <p className="htu-p htu-p--full">
-                    Each species in this guide follows the same structure, which has been refined over many years of
-                    fieldwork and one or two arguments at the Royal Society dinner. The structure is as follows:
-                </p>
-
-                <dl className="htu-structure">
-                    {STRUCTURE.map((s) => (
-                        <div className="htu-row" key={s.label}>
-                            <dt className="htu-term">{s.label}</dt>
-                            <dd className="htu-desc">{s.body}</dd>
-                        </div>
-                    ))}
-                </dl>
-
-                <p className="htu-p">
-                    The species are presented in no particular order. They are not ranked by frequency, importance, or
-                    severity, on the principle that a field naturalist's job is to only observe what is there without
-                    judgement.
-                </p>
-                <p className="htu-p">
-                    The guide may be read cover to cover or kept by the desk and consulted whenever a session begins to
-                    behave in ways the reader does not immediately recognize. The Latin binomials are of the author's
-                    own composition. Their academic legitimacy is at your own interpretation.
-                </p>
-                <p className="htu-sig">– S.B.H.</p>
+                <div className="htu-guide">
+                    <div className="htu-guide-text">
+                        <p className="htu-p">
+                            Each species in this guide follows the same structure, which has been refined over many
+                            years of fieldwork and one or two arguments at the Royal Society dinner. The cards on the
+                            right replicate the guide structure and what each section under the species means.
+                        </p>
+                        <p className="htu-p">
+                            The species are presented in no particular order. They are not ranked by frequency,
+                            importance, or severity, on the principle that a field naturalist's job is to only observe
+                            what is there without judgement.
+                        </p>
+                        <p className="htu-p">
+                            The guide may be read cover to cover or kept by the desk and consulted whenever a session
+                            begins to behave in ways the reader does not immediately recognize. The Latin binomials are
+                            of the author's own composition. Their academic legitimacy is at your own interpretation.
+                        </p>
+                        <p className="htu-sig">– S.B.H.</p>
+                    </div>
+                    <dl className="htu-anatomy">
+                        {STRUCTURE.map((s, i) => (
+                            <div className="htu-anat-card" key={s.label}>
+                                <span className="htu-anat-num" aria-hidden="true">
+                                    {ROMAN[i]}
+                                </span>
+                                <dt className="htu-anat-label">{s.label}</dt>
+                                <dd className="htu-anat-desc">{s.body}</dd>
+                            </div>
+                        ))}
+                    </dl>
+                </div>
 
                 <h3 id="the-species" className="htu-subtitle">
                     The species
@@ -149,7 +173,7 @@ export default function HowToUse(): JSX.Element {
                     border-top: 1px solid rgba(69, 28, 1, 0.15);
                     padding: clamp(2rem, 5cqw, 4rem) clamp(1rem, 5cqw, 3rem);
                 }
-                .htu-inner { max-width: 1000px; margin: 0 auto; }
+                .htu-inner { max-width: 1280px; margin: 0 auto; }
                 .htu-title {
                     font-family: 'RoundHog', sans-serif;
                     font-weight: 800;
@@ -204,32 +228,83 @@ export default function HowToUse(): JSX.Element {
                     max-width: 68ch;
                 }
                 .htu-p--full { max-width: none; }
-                .htu-sig { font-style: italic; font-size: 14px; margin: 0.5rem 0 0; }
-                .htu-structure {
-                    margin: 1.75rem 0;
-                    border-top: 1px solid rgba(69, 28, 1, 0.15);
-                }
-                .htu-row {
+                .htu-sig { font-style: italic; font-size: 14px; margin: 1.25rem 0 0; }
+                /* How-to layout: prose on the left, the "anatomy" cards stacked on the right */
+                .htu-guide {
+                    margin: 1.75rem 0 clamp(2.25rem, 5cqw, 3.5rem);
                     display: grid;
-                    grid-template-columns: minmax(140px, 26%) 1fr;
-                    gap: clamp(0.75rem, 3cqw, 2.5rem);
-                    padding: 1.1rem 0;
-                    border-bottom: 1px solid rgba(69, 28, 1, 0.15);
-                    align-items: center;
+                    grid-template-columns: 0.85fr 1.15fr;
+                    gap: clamp(1.5rem, 4cqw, 3.5rem);
+                    align-items: start;
                 }
-                .htu-term {
+                .htu-guide-text {
+                    position: sticky;
+                    top: clamp(1.5rem, 5cqw, 3rem);
+                    align-self: start;
+                }
+                .htu-guide-text .htu-p { max-width: none; }
+                .htu-guide-text .htu-p:last-of-type { margin-bottom: 0; }
+                @container (max-width: 680px) {
+                    .htu-guide { grid-template-columns: 1fr; }
+                    .htu-guide-text { position: static; }
+                }
+                /* "Anatomy of an entry" — a vintage plate legend, stacked vertically */
+                .htu-anatomy {
                     margin: 0;
+                    display: grid;
+                    grid-template-columns: 1fr;
+                    gap: clamp(0.9rem, 2.5cqw, 1.4rem);
+                }
+                .htu-anat-card {
+                    position: relative;
+                    isolation: isolate;
+                    padding: clamp(1.1rem, 2.5cqw, 1.5rem) clamp(1.2rem, 3cqw, 1.7rem);
+                }
+                /* Aged, gently torn paper card, matching the species plate */
+                .htu-anat-card::before {
+                    content: '';
+                    position: absolute;
+                    inset: 0;
+                    z-index: -1;
+                    background: radial-gradient(110px 70px at 16% 28%, rgba(120, 82, 30, 0.06), transparent 70%),
+                        radial-gradient(130px 90px at 85% 72%, rgba(120, 82, 30, 0.05), transparent 70%),
+                        linear-gradient(158deg, #f6f2e1 0%, #efe8cf 60%, #e7dec1 100%);
+                    border: 1px solid rgba(69, 28, 1, 0.26);
+                    box-shadow: inset 0 0 20px rgba(69, 28, 1, 0.06), 0 6px 15px rgba(69, 28, 1, 0.13);
+                    filter: url(#fg-torn-card);
+                }
+                .htu-anat-num {
+                    position: absolute;
+                    top: 0.1rem;
+                    right: 0.6rem;
+                    z-index: 0;
+                    font-family: 'RoundHog', sans-serif;
+                    font-weight: 800;
+                    font-size: clamp(38px, 7.5cqw, 62px);
+                    line-height: 1;
+                    color: rgba(225, 85, 78, 0.2);
+                    pointer-events: none;
+                    user-select: none;
+                }
+                .htu-anat-label {
+                    position: relative;
+                    z-index: 1;
+                    margin: 0 0 0.4rem;
                     font-family: 'RoundHog', sans-serif;
                     font-weight: 800;
                     text-transform: uppercase;
                     letter-spacing: 0.5px;
-                    font-size: 12px;
-                    line-height: 1.3;
+                    font-size: clamp(12px, 1.7cqw, 14px);
                     color: ${INK};
                 }
-                .htu-desc { margin: 0; font-size: clamp(13px, 1.6cqw, 15px); line-height: 1.55; }
-                @container (max-width: 560px) {
-                    .htu-row { grid-template-columns: 1fr; gap: 0.25rem; }
+                .htu-anat-desc {
+                    position: relative;
+                    z-index: 1;
+                    margin: 0;
+                    font-size: clamp(13px, 1.6cqw, 15px);
+                    line-height: 1.55;
+                    color: ${INK};
+                    max-width: 46ch;
                 }
 
                 .htu-subtitle {
@@ -237,15 +312,15 @@ export default function HowToUse(): JSX.Element {
                     font-weight: 800;
                     text-transform: uppercase;
                     letter-spacing: 0.5px;
-                    font-size: clamp(16px, 2.5cqw, 22px);
-                    margin: 2.5rem 0 1.25rem;
+                    font-size: clamp(22px, 4cqw, 34px);
+                    margin: 3rem 0 1.5rem;
                     color: ${INK};
                 }
                 .htu-plate-defs { position: absolute; width: 0; height: 0; }
                 .htu-plate {
                     position: relative;
                     margin: 0;
-                    padding: clamp(1.75rem, 4cqw, 3.25rem) clamp(1.5rem, 4cqw, 3rem) clamp(2rem, 4cqw, 2.75rem);
+                    padding: clamp(1.75rem, 4cqw, 3.25rem) clamp(1rem, 3cqw, 2.25rem) clamp(2rem, 4cqw, 2.75rem);
                     isolation: isolate;
                 }
                 /* Aged, torn book page sitting behind the specimens */
@@ -269,7 +344,7 @@ export default function HowToUse(): JSX.Element {
                     display: grid;
                     grid-template-columns: repeat(5, 1fr);
                     grid-auto-rows: 1fr;
-                    gap: clamp(1.5rem, 3.5cqw, 2.5rem);
+                    gap: clamp(1rem, 2.5cqw, 1.75rem);
                     align-items: stretch;
                 }
                 @container (max-width: 640px) {
@@ -292,14 +367,14 @@ export default function HowToUse(): JSX.Element {
                 }
                 .htu-specimen:hover { transform: translateY(-3px); }
                 .htu-specimen-img {
-                    height: clamp(64px, 9cqw, 86px);
+                    height: clamp(96px, 15cqw, 152px);
                     display: flex;
                     align-items: center;
                     justify-content: center;
                 }
                 .htu-specimen-img img {
                     max-height: 100%;
-                    max-width: 92%;
+                    max-width: 100%;
                     width: auto;
                     height: auto;
                     filter: drop-shadow(1px 3px 2px rgba(69, 28, 1, 0.22));
@@ -316,7 +391,7 @@ export default function HowToUse(): JSX.Element {
                     font-weight: 800;
                     text-transform: uppercase;
                     letter-spacing: 0.4px;
-                    font-size: 11px;
+                    font-size: clamp(11px, 1.4cqw, 13px);
                     line-height: 1.2;
                     color: ${INK};
                     /* Reserve two lines so single- and double-line names align */
@@ -343,13 +418,13 @@ export default function HowToUse(): JSX.Element {
                     margin-top: 2.5rem;
                     padding-top: 1.75rem;
                     border-top: 1px solid rgba(69, 28, 1, 0.15);
-                    text-align: center;
+                    text-align: left;
                 }
                 .htu-closing-text {
                     font-size: clamp(15px, 1.9cqw, 18px);
                     line-height: 1.6;
-                    max-width: 52rem;
-                    margin: 0 auto 1.25rem;
+                    max-width: 68ch;
+                    margin: 0 0 1.25rem;
                     color: ${INK};
                 }
                 .htu-closing-link {
