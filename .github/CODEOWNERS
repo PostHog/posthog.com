@@ -15,5 +15,4 @@
 # Serverless API functions
 /api/ @PostHog/website
 
-
 /.github/CODEOWNERS @PostHog/website
