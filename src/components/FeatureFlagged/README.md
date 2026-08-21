@@ -1,4 +1,4 @@
-# FeatureFlagged
+# Feature flagged
 
 Renders its children only when a PostHog feature flag is enabled for the current visitor, with an optional fallback for everyone else. Use it to merge unreleased copy or UI into `master` behind a 0% rollout, then flip the flag to ship.
 

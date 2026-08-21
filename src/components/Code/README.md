@@ -1,4 +1,4 @@
-# Code Components
+# Code components
 
 Animation primitives and content components for the `/code` (PostHog Desktop) marketing page.
 
