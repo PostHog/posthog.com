@@ -4,7 +4,7 @@ import Link from 'components/Link'
 import { Popover } from 'components/RadixUI/Popover'
 import usePostHog from 'hooks/usePostHog'
 import React from 'react'
-import { DOWNLOAD_URL, PACKAGES, PLATFORMS, RELEASES_URL, useDetectedDevice } from './platforms'
+import { DOWNLOAD_URL, PACKAGES, PLATFORMS, useDetectedDevice } from './platforms'
 
 interface DownloadButtonsProps {
     className?: string
@@ -25,10 +25,7 @@ export function DownloadNote({ className = '' }: { className?: string }): JSX.El
 
     return (
         <p className={`m-0 text-sm text-secondary ${className}`}>
-            These always grab the latest release, since older builds can behave unexpectedly.{' '}
-            <Link to={RELEASES_URL} external>
-                See what's new
-            </Link>
+            These always grab the latest release, since older builds can behave unexpectedly.
         </p>
     )
 }
@@ -65,25 +62,38 @@ export function DownloadButtons({ className = '', align = 'start', size = 'md' }
 
     return (
         <div className={`flex flex-wrap items-center gap-2 ${justify} ${className}`}>
-            {/* Primary download and the platform dropdown sit together so they read as one split button */}
-            <div className="flex items-center gap-1">
+            {/*
+                Split button: the download action and the platform chevron are two separate
+                CallToActions, squared off where they meet so they read as one control. Each
+                segment keeps its own container/child pair, because the CTA's raised look
+                depends on that two-layer structure.
+            */}
+            <div className="flex items-center">
                 <TrackedCTA
                     event={{ name: 'clicked code download', platform: platform?.key || 'unknown' }}
                     type="primary"
                     size={size}
                     to={platform?.url || DOWNLOAD_URL}
+                    className="!rounded-r-none"
+                    childClassName="!rounded-r-none"
                 >
                     {platform ? `Download for ${platform.os}` : 'Download'}
                 </TrackedCTA>
 
                 <Popover
                     dataScheme="secondary"
-                    align="start"
+                    align="end"
                     contentClassName="min-w-[13rem]"
                     trigger={
-                        <button aria-label="Download for another platform" className={container('primary', size)}>
-                            <span className={child('primary', 'auto', '!px-1.5 flex items-center', size)}>
-                                <IconChevronDown className="size-4" />
+                        <button
+                            aria-label="Download for another platform"
+                            className={`${container('primary', size)} !rounded-l-none`}
+                        >
+                            <span className={child('primary', 'auto', '!rounded-l-none !px-2 flex', size)}>
+                                {/* h-5 matches the text segment's line box, so both halves are the same height */}
+                                <span className="flex h-5 items-center">
+                                    <IconChevronDown className="size-4" />
+                                </span>
                             </span>
                         </button>
                     }
