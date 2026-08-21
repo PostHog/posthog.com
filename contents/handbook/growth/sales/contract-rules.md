@@ -75,15 +75,6 @@ We cap terms at 36 months because our products and pricing evolve quickly: a con
 
 Customers wanting a better rate can buy more credits (lever 1), pay for more of the term upfront (lever 2), or commit to a mutual timeline (lever 3).
 
-### Starting a new term early
-
-Sometimes a customer's usage grows faster than the credits they bought, and they exhaust the term's credits with months left to run. They have two options.
-
-1. **Top up the current term.** They buy additional credits that expire with the existing term on a new order form. Available in the first half of the term.
-2. **Start a new term.** The current order form is replaced by a new term. The new purchase must be sized in good faith against the full new term: a credible forecast of usage across all 12 months, not a bridge to the next conversation. A customer expecting their usage to settle below its current peak can price against that, provided they're candid about the assumption.
-
-Running out of credit early neither creates nor destroys eligibility for the early renewal discount, because eligibility is always measured against the term's natural end date. A top-up prices on the volume lever alone. A new term earns the +5% only if it's signed inside the normal [early renewal window](#3-ability-to-forecast---mutual-commitment-to-timing-additive) — in the last 6 months of the original term, 60+ days before its natural end date, and while the customer is still on prepaid credits. Burning through credits faster than planned doesn't open that window sooner.
-
 ### One-off credits
 
 One-off free credits appear on order forms in three cases: [contract buyouts](#contract-buyouts), [new business renewal credits](#new-business-renewal-credits) (competitor win-backs), and [startup plan roll-offs](#startup-plan-discounts). We don't generally add free credits to close a deal, bridge a coverage gap, or substitute for a discount the levers don't provide. A one-off credit is a larger discount wearing a disguise, and it breaks the transparency the levers exist to protect.
@@ -315,6 +306,15 @@ Apply your usual growth assumption to both halves. The post-plan run rate is the
 Their costs rise on a known date whether or not they sign, so it belongs in the conversation. It's a reason to commit now, rather than something for them to discover at renewal. Sizing it properly often moves them into a better volume discount tier as well, which is a much better trade than giving away the plan benefits.
 
 ## Credit over/under usage for contracts
+
+### Starting a new term early
+
+Sometimes a customer's usage grows faster than the credits they bought, and they exhaust the term's credits with months left to run. They have two options.
+
+1. **Top up the current term.** They buy additional credits that expire with the existing term on a new order form. Available in the first half of the term.
+2. **Start a new term.** The current order form is replaced by a new term. The new purchase must be sized in good faith against the full new term: a credible forecast of usage across all 12 months, not a bridge to the next conversation. A customer expecting their usage to settle below its current peak can price against that, provided they're candid about the assumption.
+
+Running out of credit early neither creates nor destroys eligibility for the early renewal discount, because eligibility is always measured against the term's natural end date. A top-up prices on the volume lever alone. A new term earns the +5% only if it's signed inside the normal [early renewal window](#3-ability-to-forecast---mutual-commitment-to-timing-additive) — in the last 6 months of the original term, 60+ days before its natural end date, and while the customer is still on prepaid credits. Burning through credits faster than planned doesn't open that window sooner.
 
 ### When they don't have enough credit to cover their term
 
