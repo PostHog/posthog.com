@@ -3052,7 +3052,7 @@ export const docsMenu = {
                         },
                         {
                             name: 'Discord',
-                            url: '/docs/integrations/discord',
+                            url: '/docs/libraries/discord',
                         },
                         {
                             name: 'Framer',
@@ -3060,7 +3060,7 @@ export const docsMenu = {
                         },
                         {
                             name: 'GitHub',
-                            url: '/docs/integrations/github',
+                            url: '/docs/libraries/github',
                         },
                         {
                             name: 'Google Tag Manager',
@@ -3096,7 +3096,7 @@ export const docsMenu = {
                         },
                         {
                             name: 'Slack',
-                            url: '/docs/integrations/slack',
+                            url: '/docs/libraries/slack',
                         },
                         {
                             name: 'Vercel',

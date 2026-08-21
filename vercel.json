@@ -942,12 +942,16 @@
             "destination": "/docs/error-tracking:ext?"
         },
         {
-            "source": "/docs/libraries/slack:ext(\\.md)?",
-            "destination": "/docs/integrations/slack:ext?"
+            "source": "/docs/integrations/slack:ext(\\.md)?",
+            "destination": "/docs/libraries/slack:ext?"
         },
         {
-            "source": "/docs/libraries/github:ext(\\.md)?",
-            "destination": "/docs/integrations/github:ext?"
+            "source": "/docs/integrations/github:ext(\\.md)?",
+            "destination": "/docs/libraries/github:ext?"
+        },
+        {
+            "source": "/docs/integrations/discord:ext(\\.md)?",
+            "destination": "/docs/libraries/discord:ext?"
         },
         {
             "source": "/docs/posthog-code/slack:ext(\\.md)?",
