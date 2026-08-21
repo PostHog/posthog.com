@@ -4,7 +4,7 @@ sidebar: Handbook
 showTitle: true
 ---
 
-Over 100,000 users have signed up to PostHog.
+Over 500,000 teams have signed up to PostHog.
 
 Most companies build their product with a particular user in mind. We build _everything_ around our ideal customer profile.
 
