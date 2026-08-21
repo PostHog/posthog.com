@@ -80,7 +80,8 @@ after the prose.
 | `<Eyebrow>` | The small line above a title-page heading |
 | `<Fig n caption legend>` | Any exhibit, in a numbered frame |
 | `<ReportFigure n caption legend>` | This use case's report, drawn as its inbox moment |
-| `<ScoutFigure n caption>` | This use case's `SKILL.md` |
+| `<ScoutFigure n caption>` | This use case's `SKILL.md`, from its self-driving `InboxTemplate` |
+| `<SkillFigure n caption>` | This page's own `SKILL.md`, for guides with no `InboxTemplate` |
 | `<LoopFigure n caption>` | The self-driving loop diagram |
 | `<TraceFigure n caption rows>` | One LLM trace, nested – generations and spans with their numbers |
 | `<Watches />` | The signal sources from this page's `watches` frontmatter |
@@ -167,6 +168,7 @@ shows after the `.mdx` file itself changes (or `pnpm clean`).
 | `terms.tsx` | The book's vocabulary – `<Term>` and every hover-card definition |
 | `bookContext.tsx` | EntryProvider + useEntry/useTemplate (page data for figures) |
 | `bookModel.tsx` | Volume id, reading order, page numbers, tabs, arrow-key turns |
+| `useSkillFile.ts` | Pairs a page with its sibling `SKILL.md`, for `<SkillFigure>` |
 | `Figure.tsx` | A framed, captioned exhibit – "Fig. 1 – …" |
 | `InboxFigure.tsx` | One use case's inbox moment, annotated |
 | `TraceTree.tsx` | An LLM trace drawn as nested rows – the AI Observability volume's hero |

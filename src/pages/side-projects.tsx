@@ -455,10 +455,10 @@ function SideProjectsPage({ location }: { location: { search: string } }): JSX.E
                                     {loading
                                         ? 'Loading…'
                                         : hasActiveFilters
-                                          ? `${filteredCurrent.length + filteredAlumni.length} of ${
-                                                projects.length
-                                            } projects`
-                                          : `${projects.length} projects`}
+                                        ? `${filteredCurrent.length + filteredAlumni.length} of ${
+                                              projects.length
+                                          } projects`
+                                        : `${projects.length} projects`}
                                 </span>
                                 {hasActiveFilters && (
                                     <button

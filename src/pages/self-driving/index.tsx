@@ -862,11 +862,7 @@ export default function SelfDrivingPage({
                                     PostHog instruments your codebase, then combines that context with product data like
                                     analytics events, errors, and recordings to understand problems and propose fixes.
                                 </p>
-                                <GetStarted
-                                    selfDriving
-                                    demoTo="/self-driving#see-how-it-works"
-                                    demoNewWindow={false}
-                                />
+                                <GetStarted selfDriving demoTo="/self-driving#see-how-it-works" demoNewWindow={false} />
                             </div>
 
                             <div className="relative overflow-hidden rounded-md border border-primary bg-primary shadow-2xl">

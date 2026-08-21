@@ -136,8 +136,8 @@ const BenefitsUnexpected: React.FC = () => {
                 <div className="order-1 md:order-2 relative">
                     <h3 className="text-2xl mt-0 mb-2">Co-working or café credits on us</h3>
                     <p className="max-w-lg mb-3">
-                        If heading out to a co-working space or getting some overpriced coffee from boogie coffee shops is how you do your best work,
-                        you get to charge it to your company card – everyone gets one.
+                        If heading out to a co-working space or getting some overpriced coffee from boogie coffee shops
+                        is how you do your best work, you get to charge it to your company card – everyone gets one.
                     </p>
                 </div>
             </div>
@@ -152,8 +152,8 @@ const BenefitsUnexpected: React.FC = () => {
                         get together. We have a special budget for you to do this.
                     </p>
                     <p>
-                        Recent small team off-sites have been in Sicily, Lisbon, Santiago, Cartagena,
-                        Sedona (Arizona), and Palm Springs (California).
+                        Recent small team off-sites have been in Sicily, Lisbon, Santiago, Cartagena, Sedona (Arizona),
+                        and Palm Springs (California).
                     </p>
                 </div>
                 <aside>
@@ -186,7 +186,11 @@ const BenefitsUnexpected: React.FC = () => {
                         Access to the <span className="text-red dark:text-yellow">Hedge Houses</span>
                     </h3>
                     <p className="max-w-lg mb-3">
-                        We have a dedicated [coworking space](https://posthog.com/handbook/people/hogpatch) in San Francisco (SF) where you'll often find YC founders/members and some of our team working together. In London, we have a house where you can both work and relax, giving you options for collaborative or solo work in the city. There's also a house in Cambridge, UK available for employees to work from or stay at.  
+                        We have a dedicated [coworking space](https://posthog.com/handbook/people/hogpatch) in San
+                        Francisco (SF) where you'll often find YC founders/members and some of our team working
+                        together. In London, we have a house where you can both work and relax, giving you options for
+                        collaborative or solo work in the city. There's also a house in Cambridge, UK available for
+                        employees to work from or stay at.
                     </p>
                 </div>
             </div>

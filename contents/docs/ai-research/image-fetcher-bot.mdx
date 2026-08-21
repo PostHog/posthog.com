@@ -30,12 +30,11 @@ The user agent is the way to identify the bot. We don't publish a list of IP add
 
 ## How it behaves
 
-- It reads `robots.txt` on every site it fetches from, and follows the rules there. There are no exceptions.
-- It follows `Crawl-delay` if you set one.
-- It downloads each image once and remembers the result, so a popular image is fetched once rather than once per recording.
 - It sends no cookies, no credentials, and no `Referer` header. It sees your site the way an anonymous visitor does.
-- It slows down when your server returns 429 or 503, and it honors `Retry-After`.
-- It only requests images. It doesn't crawl your site, follow links, or index anything.
+- It doesn't crawl your site, follow links, or index anything. It requests the images a recording refers to, and the files it needs to read to decide whether it may fetch them.
+- It downloads each image once, so a popular image is fetched once rather than once per recording.
+
+The full specification is public. It covers the rate limits, what the bot does when your server is slow or returns an error, and every signal that stops a fetch: [the image fetch lane README](https://github.com/PostHog/posthog/blob/master/nodejs/src/ingestion/pipelines/sessionreplay/ml-mirror-image-fetch/README.md).
 
 ## How to block it
 
@@ -48,10 +47,23 @@ Disallow: /
 
 The bot checks `robots.txt` before every fetch, so this takes effect on its next visit.
 
+To slow it down instead of blocking it, set `Crawl-delay` in the same group. The bot uses whichever is longer, your value or its own interval.
+
+The bot also stops if any one of these refuses it:
+
+- `X-Robots-Tag: noai` or `noimageai` in the image response
+- `Content-Signal: ai-train=no` in `robots.txt`
+- `Content-Usage: train-ai=n` in the image response or in `robots.txt`
+- `tdm-reservation: 1` in the image response, or a rule covering the image in `/.well-known/tdmrep.json`
+
+One is enough. You don't need to set more than one.
+
 You can also block the user agent at your CDN or web server. If you do, the bot treats the block as final and stops requesting from your site.
+
+An opt-out applies to what the bot does next. It doesn't remove images the bot already downloaded, and an image that has already been used to train a model can't be taken back out of that model.
 
 Blocking the bot doesn't affect session recording. Your PostHog customers keep recording sessions as before, and their recordings still show images to anyone watching a replay. The only difference is that PostHog can't use those images for AI training.
 
 ## Questions
 
-If the bot is causing load on your site, or something here doesn't match what you're seeing in your logs, [contact us](/talk-to-a-human). Include the user agent and a timestamp so we can find the requests.
+If something here doesn't match what you're seeing in your logs, [contact us](/talk-to-a-human). Include the user agent and a timestamp so we can find the requests.

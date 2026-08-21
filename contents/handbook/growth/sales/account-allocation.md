@@ -3,7 +3,7 @@ title: Account allocation and handover
 sidebar: Handbook
 showTitle: true
 ---
-We have different roles who manage customers through their lifecycle. Customers typically sign up and start paying on their own, or land via a [Technical Account Executive](/handbook/growth/sales/how-we-work#technical-account-executives). Once an account hits $20k a year in spend, a Customer Success Manager becomes the point of contact. A Technical Account Manager is added on top only where there's a qualified growth opportunity.
+We have different roles who manage customers through their lifecycle. Customers typically sign up and start paying on their own, or land via a [Technical Account Executive](/handbook/growth/sales/new-business-how-we-work). Once an account hits $20k a year in spend, a [Customer Success Manager](/handbook/cs-and-onboarding/how-we-work) becomes the point of contact. A [Technical Account Manager](/handbook/growth/sales/how-we-work#technical-account-managers) is added on top only where there's a qualified growth opportunity.
 
 The [customer journey and coverage model](/handbook/growth/sales/customer-journey) covers the phases an account moves through and who covers it at each one. This page covers the operational side: book planning, how TAMs get added and removed, and handover mechanics.
 
@@ -107,25 +107,26 @@ If an account is struggling on these dimensions, that's a signal to invest more.
 
 ## Doing the allocation
 
-Each quarter, team leads, with Ben's approval, review coverage: which accounts need a TAM added or removed, and how books should be rebalanced. CSM coverage stays Simon's call. That's the base layer on every $20k+ account, including the list of [$20K accounts without an owner](https://posthog.vitally-eu.io/hubs/152ccd4c-c7b2-4508-865b-b08fea5c3dc6/1c518181-54a5-4c59-98de-f0b0bb54f9c3). A TAM is added on top where an opportunity qualifies. We use Vitally data to understand which region the account is primarily based in. Looking at the user list in Vitally will show you where the most users are, so make a judgement call on where the CSM or TAM should be based to best support the customer. Once decided, the New Owner trait is populated with one of the following:
+Each quarter, team leads, with Ben's approval, review coverage: which accounts need a TAM added or removed, and how books should be rebalanced. CSM coverage stays Simon's call. That's the base layer on every $20k+ account, including the list of [$20K accounts without an owner](https://posthog.vitally-eu.io/hubs/152ccd4c-c7b2-4508-865b-b08fea5c3dc6/1c518181-54a5-4c59-98de-f0b0bb54f9c3). A TAM is added on top where an opportunity qualifies. For accounts with no previous owner, we use PostHog GeoIP data to understand which region the account is primarily based in. We use the following tags in PostHog Customer Analytics:
 
-- US TAM
-- US CSM
-- EU TAM
-- EU CSM
+- `csm overlay needed` where a TAM is retaining an account but needs extra help from a CSM
+- `csm handover needed` where a TAM or TAE is ready to hand over an account fully to a CSM
+- `tam overlay needed` where a CSM has identified an opportunity for a TAM to expand an account
 
-And then it is down to the Team Leads to figure out which team member is taking on the customer.
+And then it is down to the relevant Team Leads to figure out which team member is taking on the customer.
+
+> Once a day an <PrivateLink url='posthog-code://loop/9f441418-1400-4839-b82c-4ce3f8bcb2cb'>automation</PrivateLink> runs which adds a region tag to the account to assist in routing to the correct team.
 
 ### Quarterly allocation process
 
 At the start of each quarter, team leads (with Ben's approval) review:
 
 1. **[$20K accounts without an owner](https://posthog.vitally-eu.io/hubs/152ccd4c-c7b2-4508-865b-b08fea5c3dc6/1c518181-54a5-4c59-98de-f0b0bb54f9c3)** – accounts that need a CSM assigned
-2. **Accounts flagged for handover** from TAEs and TAMs
+2. **Accounts flagged for handover** from TAEs and TAMs using the above tags
 3. **TAM books outside the $1.5M-$2M ARR band** – identifying which accounts to rebalance
 4. **Flagged growth opportunities on CSM-only accounts** – identifying where to add a TAM
 
-Once the region and any TAM decision are settled, the `New Owner` trait is populated and team leads assign the specific team member. CSM coverage assignments stay with Simon.
+Once the region and any TAM decision are settled, the above tags are applied and team leads assign the specific team member. 
 
 ### Mid-quarter changes
 
@@ -160,7 +161,7 @@ For handover to take place there should be an Account Plan (saved as a note on t
 
 > All open invoices should also have been paid before handing over. It makes sense to use existing relationships to chase payments, rather than the new owner's first action needing to be chasing payments/suspending access for non-payment.
 
-> For TAE accounts being handed over, set the New Owner to `Ready to move` in Vitally and then flag this with Simon directly.  There's no need to wait for the end of the quarter to do this.  He will review the plan and current state of the customer and then work with TAM or CSM leads to assign a new owner.
+> For TAE accounts being handed over to a CSM, tag the account in PostHog Customer Analytics with `csm handover needed` and then flag this with Simon directly.  There's no need to wait for the end of the quarter to do this.  He will review the plan and current state of the customer and then work with CSM leads to assign a new owner.
 
 ### Account Plan
 

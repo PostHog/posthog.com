@@ -1,15 +1,18 @@
 import React, { useLayoutEffect, useRef, useState } from 'react'
 import { IconChevronDown } from '@posthog/icons'
 import { Popover } from 'components/RadixUI/Popover'
+import { Accent, accents } from './accents'
 
 const TagPill = ({
     label,
     active,
+    activeClassName,
     onClick,
     dataTag,
 }: {
     label: string
     active: boolean
+    activeClassName: string
     onClick: () => void
     dataTag?: string
 }) => (
@@ -17,9 +20,7 @@ const TagPill = ({
         onClick={onClick}
         data-tag={dataTag}
         className={`whitespace-nowrap rounded-full border px-2.5 py-1 text-[13px] font-medium transition-colors ${
-            active
-                ? 'border-red bg-red text-white'
-                : 'border-transparent text-secondary hover:border-primary hover:text-primary'
+            active ? activeClassName : 'border-transparent text-secondary hover:border-primary hover:text-primary'
         }`}
     >
         {label}
@@ -31,6 +32,19 @@ type TagFilterProps = {
     /** `null` means "All". */
     activeTag: string | null
     onChange: (tag: string | null) => void
+    accent?: Accent
+    tagOrderOverride?: string[]
+}
+
+function sortTags(tags: string[], tagOrderOverride: string[]): string[] {
+    return tags.sort((a, b) => {
+        const aIndex = tagOrderOverride.indexOf(a)
+        const bIndex = tagOrderOverride.indexOf(b)
+        if (aIndex !== -1 && bIndex !== -1) return aIndex - bIndex
+        if (aIndex !== -1) return -1
+        if (bIndex !== -1) return 1
+        return 0
+    })
 }
 
 /**
@@ -38,10 +52,18 @@ type TagFilterProps = {
  * Pills that don't fit the row are clipped (max-h + overflow-hidden) and collected
  * into a "more" popover; a ResizeObserver re-measures as the window resizes.
  */
-export default function TagFilter({ tags, activeTag, onChange }: TagFilterProps): JSX.Element {
+export default function TagFilter({
+    tags,
+    activeTag,
+    onChange,
+    accent = 'red',
+    tagOrderOverride = [],
+}: TagFilterProps): JSX.Element {
     const rowRef = useRef<HTMLDivElement>(null)
     const [overflowTags, setOverflowTags] = useState<string[]>([])
     const [menuOpen, setMenuOpen] = useState(false)
+
+    const sortedTags = sortTags(tags, tagOrderOverride)
 
     useLayoutEffect(() => {
         const row = rowRef.current
@@ -79,17 +101,19 @@ export default function TagFilter({ tags, activeTag, onChange }: TagFilterProps)
     }, [tags])
 
     const activeIsHidden = activeTag !== null && overflowTags.includes(activeTag)
+    const { pillActive, pillOverflowActive } = accents[accent]
 
     return (
         <div className="my-3 flex items-start gap-1 @2xl:my-4">
             <div ref={rowRef} className="flex max-h-8 min-w-0 flex-1 flex-wrap gap-1 overflow-hidden">
-                <TagPill label="All" active={!activeTag} onClick={() => onChange(null)} />
-                {tags.map((tag) => (
+                <TagPill label="All" active={!activeTag} activeClassName={pillActive} onClick={() => onChange(null)} />
+                {sortedTags.map((tag) => (
                     <TagPill
                         key={tag}
                         label={tag}
                         dataTag={tag}
                         active={activeTag === tag}
+                        activeClassName={pillActive}
                         onClick={() => onChange(activeTag === tag ? null : tag)}
                     />
                 ))}
@@ -104,7 +128,7 @@ export default function TagFilter({ tags, activeTag, onChange }: TagFilterProps)
                         <button
                             className={`flex shrink-0 grow-0 items-center gap-1 whitespace-nowrap rounded-full border px-2.5 py-1 text-[13px] font-medium transition-colors ${
                                 activeIsHidden
-                                    ? 'border-red text-red'
+                                    ? pillOverflowActive
                                     : 'border-transparent text-secondary hover:border-primary hover:text-primary'
                             }`}
                         >
@@ -118,6 +142,7 @@ export default function TagFilter({ tags, activeTag, onChange }: TagFilterProps)
                                 key={tag}
                                 label={tag}
                                 active={activeTag === tag}
+                                activeClassName={pillActive}
                                 onClick={() => {
                                     onChange(activeTag === tag ? null : tag)
                                     setMenuOpen(false)

@@ -32,6 +32,14 @@ export const POCKET_GUIDE_VOLUMES: PocketGuideVolume[] = [
         token: 'purple',
         volume: 2,
     },
+    {
+        id: 'context-warehouse',
+        title: 'Context Warehouse',
+        description:
+            'Model revenue, conversion, activation, and usage once, so every dashboard and downstream model reuses the same definition.',
+        token: 'blue',
+        volume: 3,
+    },
 ]
 
 export function volumeById(id: string): PocketGuideVolume | undefined {
