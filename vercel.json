@@ -946,8 +946,8 @@
             "destination": "/docs/libraries/slack:ext?"
         },
         {
-            "source": "/docs/integrations/github:ext(\\.md)?",
-            "destination": "/docs/libraries/github:ext?"
+            "source": "/docs/libraries/github:ext(\\.md)?",
+            "destination": "/docs/integrations/github:ext?"
         },
         {
             "source": "/docs/posthog-code/slack:ext(\\.md)?",
