@@ -31,9 +31,11 @@ import {
  * `lib/posthogDesktopCompute`. Neither the rate nor the fallback is duplicated here, so the two
  * surfaces can't quote different numbers.
  *
- * Denominations, following the Replay Vision tab: the UI works in hours and dollars, shared state
- * (`product.volume`, the tab-list subtotal, the generated calculator URL) stays in credits — the
- * billing unit — so `setVolume` restores and `calculatePrice` agree with us.
+ * Denominations, following the Replay Vision tab: cloud time is entered in hours and converted,
+ * while tokens are entered in credits directly — the billing unit, and the unit PostHog AI's
+ * slider already uses for the same kind of spend. Shared state (`product.volume`, the tab-list
+ * subtotal, the generated calculator URL) is credits throughout, so `setVolume` restores and
+ * `calculatePrice` agree with us.
  */
 
 /** 100 credits = $1. */
@@ -53,7 +55,6 @@ const fetchPricing = async (url: string): Promise<PricingResponse> => {
 
 const Row = ({
     label,
-    prefix,
     suffix,
     value,
     onChange,
@@ -62,7 +63,6 @@ const Row = ({
     note,
 }: {
     label: string
-    prefix?: string
     suffix: string
     value: number
     onChange: (value: number) => void
@@ -74,7 +74,6 @@ const Row = ({
         <div className="col-span-6">
             <p className="mb-2 text-sm font-semibold">{label}</p>
             <p className="mb-2">
-                {prefix}
                 <NumericFormat
                     inputClassName="bg-transparent text-center focus:ring-0 focus:border-red dark:focus:border-yellow focus:bg-white dark:focus:bg-accent-dark font-code max-w-[103px] text-sm border border-light hover:border-button dark:border-dark rounded-sm py-1 px-0 min-w-[25px] px-1"
                     value={value}
@@ -130,36 +129,54 @@ export default function PostHogDesktopTab({
     const computeRate = hourlyComputeUsd(liveCompute ?? PUBLISHED_COMPUTE_RATE_CARD)
     const isPublishedRate = liveCompute === null
 
+    /*
+     * The token slider is denominated in credits and starts at the free allocation, matching
+     * PostHog AI's — the sibling product billed the same way. Both the unit and the starting
+     * point are load-bearing: credits are the billing unit the tiers are priced in, and below
+     * the free allocation there is no arithmetic to show, which is why every other tab treats
+     * `slider.min` and the free tier as the same number.
+     *
+     * Bounds come off the live allocation rather than a literal, so they follow it if it moves.
+     */
+    const tokenSliderMin = Math.max(freeCredits, 1)
+    const tokenSlider = {
+        min: tokenSliderMin,
+        max: tokenSliderMin * 100,
+        marks: [tokenSliderMin, tokenSliderMin * 5, tokenSliderMin * 25, tokenSliderMin * 100],
+    }
+
     const [hours, setHours] = useState(20)
     // Null until the rate card settles. Seeding this at mount would be wrong: the seed splits the
     // shared credit balance into compute and tokens, and the compute half isn't known yet, so an
     // early seed counts the whole balance as tokens and then inflates the estimate the moment the
     // rates land. Waiting one tick costs a skeleton and keeps the arithmetic honest.
-    const [tokenSpend, setTokenSpend] = useState<number | null>(null)
+    const [tokenCredits, setTokenCredits] = useState<number | null>(null)
 
     const computeSpend = hours * computeRate
-    const credits = tokenSpend === null ? 0 : Math.round((computeSpend + tokenSpend) * CREDITS_PER_USD)
+    const computeCredits = Math.round(computeSpend * CREDITS_PER_USD)
+    const credits = tokenCredits === null ? 0 : computeCredits + tokenCredits
     const { total, costByTier } = useMemo(() => calculatePrice(credits, creditTiers), [credits, creditTiers])
 
     // Seed once, from the shared credit volume, so an estimate survives a tab switch and a
     // restored `?posthog_code[volume]=N` lands on the right total. The compute/token split isn't
-    // recoverable from one number, so the remainder after compute is treated as tokens.
+    // recoverable from one number, so the remainder after compute is treated as tokens — floored
+    // at the slider's own minimum, so the thumb can never sit off the start of its track.
     useEffect(() => {
-        if (!pricingSettled || tokenSpend !== null) return
+        if (!pricingSettled || tokenCredits !== null) return
         const external = Number(activeProduct.volume)
-        const spend = Number.isFinite(external) && external > 0 ? external / CREDITS_PER_USD : 0
-        setTokenSpend(Math.max(0, Math.round(spend - computeSpend)))
+        const restored = Number.isFinite(external) && external > 0 ? external - computeCredits : 0
+        setTokenCredits(Math.max(tokenSliderMin, Math.round(restored)))
     }, [pricingSettled])
 
     // Value deps only — `setProduct` is a new function on every `useProducts` render, so listing
     // it would loop the effect. Skipped until seeded, so the shared state never sees the
     // placeholder zero.
     useEffect(() => {
-        if (tokenSpend === null) return
+        if (tokenCredits === null) return
         setProduct('posthog_code', { cost: total, volume: credits, costByTier })
-    }, [total, credits, tokenSpend === null])
+    }, [total, credits, tokenCredits === null])
 
-    if (tokenSpend === null) {
+    if (tokenCredits === null) {
         return <div className="h-64 bg-accent border border-primary rounded-md animate-pulse" />
     }
 
@@ -189,15 +206,14 @@ export default function PostHogDesktopTab({
 
             <Row
                 label="AI tokens"
-                prefix="$"
-                suffix="/month"
-                value={tokenSpend}
-                onChange={(value) => setTokenSpend(Math.round(value))}
-                slider={{ min: 1, max: 2000, marks: [1, 20, 200, 2000] }}
-                cost={tokenSpend}
+                suffix="credits/month"
+                value={tokenCredits}
+                onChange={(value) => setTokenCredits(Math.round(value))}
+                slider={tokenSlider}
+                cost={tokenCredits / CREDITS_PER_USD}
                 note={
                     <>
-                        Billed at exactly what the model provider charges. See the{' '}
+                        Billed at exactly what the model provider charges, with no markup. See the{' '}
                         <Link to="/docs/posthog-desktop/pricing">per-model rates</Link> — a cheaper model on
                         straightforward work is the biggest lever here.
                     </>
