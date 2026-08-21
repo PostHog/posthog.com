@@ -3055,6 +3055,10 @@ export const docsMenu = {
                             url: '/docs/libraries/framer',
                         },
                         {
+                            name: 'GitHub',
+                            url: '/docs/libraries/github',
+                        },
+                        {
                             name: 'Google Tag Manager',
                             url: '/docs/libraries/google-tag-manager',
                         },
