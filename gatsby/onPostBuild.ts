@@ -182,8 +182,12 @@ const createOGImages = async (data) => {
         const { title } = post.frontmatter
         const { timeToRead, excerpt, fields, parent } = post
         const lastUpdated = parent && parent.fields && parent.fields.lastUpdated
-        if (!title || !timeToRead || !excerpt || !lastUpdated || !fields?.contributors) continue
-        const contributors = fields?.contributors.map((contributor) => {
+        // Tutorials share this template but have no contributors, and the template already
+        // renders fine without them — so only require contributors for docs and handbook.
+        const isTutorial = fields?.slug?.startsWith('/tutorials/')
+        if (!title || !timeToRead || !excerpt || !lastUpdated) continue
+        if (!isTutorial && !fields?.contributors) continue
+        const contributors = (fields?.contributors || []).map((contributor) => {
             const { avatar, username } = contributor
             return {
                 username,
@@ -802,16 +806,33 @@ export const onPostBuild: GatsbyNode['onPostBuild'] = async ({ graphql, reporter
                     excerpt(pruneLength: 500)
                 }
             }
+            # Tutorials are rendered with the docs/handbook OG template, so they have to select
+            # the same fields it needs — otherwise every tutorial trips the guard in that loop
+            # and gets skipped, leaving the page pointing at an OG image that was never created.
             tutorials: allMdx(filter: { fields: { slug: { regex: "/^/tutorials/" } } }) {
                 nodes {
                     fields {
                         slug
+                        contributors {
+                            username
+                            avatar
+                        }
                     }
                     frontmatter {
+                        title
                         featuredImage {
                             publicURL
                         }
                     }
+                    parent {
+                        ... on File {
+                            fields {
+                                lastUpdated: gitLogLatestDate(formatString: "MMM D, YYYY")
+                            }
+                        }
+                    }
+                    timeToRead
+                    excerpt(pruneLength: 500)
                 }
             }
             customers: allMdx(filter: { fields: { slug: { regex: "/^/customers/" } } }) {
