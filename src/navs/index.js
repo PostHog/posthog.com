@@ -6718,17 +6718,6 @@ export const docsMenu = {
                     featured: true,
                 },
                 {
-                    name: 'Capture AI events',
-                    url: '/docs/ai-observability/capture-ai',
-                    icon: 'IconSend',
-                    color: 'teal',
-                    featured: true,
-                    badge: {
-                        title: 'Beta',
-                        className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
-                    },
-                },
-                {
                     name: 'Self-driving',
                     url: '/docs/ai-observability/self-driving',
                     icon: 'IconBolt',
@@ -6952,6 +6941,16 @@ export const docsMenu = {
                     icon: 'IconBalance',
                     color: 'green',
                     featured: true,
+                },
+                {
+                    name: 'Large events',
+                    url: '/docs/ai-observability/large-events',
+                    icon: 'IconSend',
+                    color: 'teal',
+                    badge: {
+                        title: 'Beta',
+                        className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
+                    },
                 },
                 {
                     name: 'Evaluations',
