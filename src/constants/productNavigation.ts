@@ -1,5 +1,6 @@
 import React from 'react'
 import * as Icons from '@posthog/icons'
+import { productUrl } from '../data/tools'
 
 /**
  * Curated product/tool handles shown in the taskbar "Browse tools" menu and
@@ -214,7 +215,7 @@ export function buildProductMenuItems(handles: string[], allProducts: any[]): an
             return {
                 type: 'item' as const,
                 label: product.name,
-                ...(!isDisabled && { link: `/${product.slug}` }),
+                ...(!isDisabled && { link: productUrl(product) }),
                 icon: iconElement,
                 ...(isDisabled && { disabled: true }),
             }
@@ -261,7 +262,7 @@ export function buildCategoryMenuItems(category: string, allProducts: any[]): an
         return {
             type: 'item' as const,
             label: product.name,
-            ...(!isDisabled && { link: `/${product.slug}` }),
+            ...(!isDisabled && { link: productUrl(product) }),
             icon: iconElement,
             ...(isDisabled && { disabled: true }),
         }
@@ -333,7 +334,7 @@ export function buildAllProductsMenuItems(allProducts: any[]): any[] {
         return {
             type: 'item' as const,
             label: displayLabel,
-            ...(!isDisabled && { link: `/${product.slug}` }),
+            ...(!isDisabled && { link: productUrl(product) }),
             icon: iconElement,
             ...(isDisabled && { disabled: true }),
         }

@@ -1,13 +1,14 @@
 import { navigate } from 'gatsby'
 import React from 'react'
 import useProduct from './useProduct'
+import { productUrl } from '../data/tools'
 import { TreeMenu } from 'components/TreeMenu'
 
 // Define the navigation structure with handles
 // Section headers are strings without handles, product items are handles
 const dataVizStructure = [
     'Data visualization', // Section header
-    { name: 'Overview', url: '/trends' }, // Manual entry
+    { name: 'Overview', url: '/product-analytics' }, // Manual entry
     'Insights', // Section header
     'trends',
     'funnels',
@@ -37,10 +38,10 @@ const buildNavigationItems = (structure: any[], products: any[]) => {
                 }
 
                 // It's a product handle - build the nav item
-                const { Icon, color, name, slug } = product
+                const { Icon, color, name } = product
                 return {
                     name,
-                    url: `/${slug}`,
+                    url: productUrl(product),
                     icon: Icon ? <Icon className={`size-4 text-${color}`} /> : undefined,
                 }
             }
@@ -73,7 +74,7 @@ export function useDataVizNavigation() {
 
         return {
             name: 'Data visualization',
-            url: '/trends',
+            url: '/product-analytics',
             children,
         }
     }, [products])
