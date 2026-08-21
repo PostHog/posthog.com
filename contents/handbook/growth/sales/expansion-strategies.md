@@ -143,6 +143,7 @@ You've built strong usage and advocacy at the IC and team lead level. Now you en
 - Trying to go upward before you have bottom-up proof. If leadership asks "do our teams actually use this?" and the answer is weak, you've wasted the meeting and it's very hard to get a second one.
 - Treating the executive meeting as a product demo. Executives don't want a tour of features. They want to understand business impact and cost.
 - Moving upward too early in the relationship. If you're still establishing trust with the IC team, forcing an executive conversation feels pushy and premature.
+- Mistaking a coach for a champion. A champion spends their own credibility on you, while a coach tells you useful things but won't put their name to it internally. Coaches are still valuable, but an account with only coaches has no path upward. Asking for an introduction is how you find out which you have.
 
 ## Choosing the right strategy
 
