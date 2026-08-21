@@ -1,4 +1,5 @@
 import React from 'react'
+import { getWizardFrameworkRows } from 'constants/installation-taxonomy'
 import {
     IconEye,
     IconWarning,
@@ -153,6 +154,33 @@ const featureComparisonRows = [
     feature('ai_pricing', 'AI pricing model', 'How the AI analysis is billed.'),
 ]
 
+// Platforms the `replay-vision` wizard accepts. It aborts on anything Session
+// Replay cannot record – pure backend targets and KMP – so the install CTAs
+// must not offer them. Mirrors REPLAY_VISION_SUPPORTED in PostHog/wizard.
+const WIZARD_PLATFORM_SLUGS = new Set([
+    'web',
+    'react',
+    'nextjs',
+    'nuxt',
+    'vue',
+    'angular',
+    'astro',
+    'svelte',
+    'react-router',
+    'tanstack-start',
+    'django',
+    'flask',
+    'fastapi',
+    'rails',
+    'laravel',
+    'react-native',
+    'android',
+    'ios',
+    'flutter',
+])
+
+const wizardSupports = getWizardFrameworkRows().filter((row) => WIZARD_PLATFORM_SLUGS.has(row.slug))
+
 export const replayVision = {
     Icon: IconEye,
     name: 'Replay Vision',
@@ -166,6 +194,12 @@ export const replayVision = {
     forumTopicId: 377,
     color: 'yellow',
     colorSecondary: '[#B56C00]',
+    wizardSupport: true,
+    // Wizard subcommand appended to `npx @posthog/wizard` in the hero and Get
+    // started install CTAs – the bare wizard installs the SDK without creating
+    // any scanners.
+    wizardCommand: 'replay-vision',
+    wizardSupports,
     category: 'product_engineering',
     shortDescription: 'Let AI watch your session recordings for you',
     seo: {

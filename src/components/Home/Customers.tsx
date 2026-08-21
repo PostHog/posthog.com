@@ -11,6 +11,7 @@ export const COL1 = [
     'ukgovt',
     'nationaldesignstudio',
     'trust',
+    'railway',
     'startengine',
     'researchgate',
     'heygen',
@@ -80,9 +81,11 @@ export const companyAttributes: Record<string, string[]> = {
         'wisprflow',
         'paper',
         'ukgovt',
+        'railway',
     ],
     goodBandName: [
         'elevenlabs',
+        'railway',
         'convex',
         'trust',
         'startengine',
@@ -98,6 +101,7 @@ export const companyAttributes: Record<string, string[]> = {
     explainable: [
         'ycombinator',
         'airbus',
+        'railway',
         'startengine',
         'researchgate',
         'exa',
@@ -108,6 +112,7 @@ export const companyAttributes: Record<string, string[]> = {
     shortNames: [
         'airbus',
         'trust',
+        'railway',
         'convex',
         'clerk',
         'hasura',
@@ -124,6 +129,7 @@ export const companyAttributes: Record<string, string[]> = {
         'airbus',
         'convex',
         'trust',
+        'railway',
         'clerk',
         'elevenlabs',
         'startengine',
@@ -150,6 +156,7 @@ export const companyAttributes: Record<string, string[]> = {
         'greptile',
         'paper',
         'posthog',
+        'railway',
     ],
     pokemon: ['convex', 'supabase', 'hasura', 'mistralai', 'raycast', 'resend', 'exa', 'heygen', 'paper', 'greptile'],
     arr: [
@@ -157,6 +164,7 @@ export const companyAttributes: Record<string, string[]> = {
         'airbus',
         'elevenlabs',
         'trust',
+        'railway',
         'clerk',
         'convex',
         'supabase',
@@ -187,6 +195,7 @@ export const companyAttributes: Record<string, string[]> = {
         'greptile',
         'paper',
         'posthog',
+        'railway',
     ],
     usesPostHog: ['ycombinator', 'airbus', 'trust', 'supabase', 'hasura', 'researchgate', 'heygen', 'posthog'],
 }
