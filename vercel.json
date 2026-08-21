@@ -202,6 +202,26 @@
     ],
     "redirects": [
         {
+            "source": "/handbook/company/subprocessors",
+            "destination": "/subprocessors",
+            "statusCode": 301
+        },
+        {
+            "source": "/privacy/subprocessors",
+            "destination": "/subprocessors",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/privacy/subprocessors",
+            "destination": "/subprocessors",
+            "statusCode": 301
+        },
+        {
+            "source": "/legal/subprocessors",
+            "destination": "/subprocessors",
+            "statusCode": 301
+        },
+        {
             "source": "/docs/session-replay/image-bot:ext(\\.md)?",
             "destination": "/docs/ai-research/image-fetcher-bot:ext?",
             "statusCode": 301
