@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { navigate } from 'gatsby'
 import { IconX } from '@posthog/icons'
 import CommunityLayout, { SectionTitle } from 'components/Community/Layout'
+import Link from 'components/Link'
 import OSTable from 'components/OSTable'
 import Select from 'components/Select'
 import Spinner from 'components/Spinner'
@@ -23,13 +24,25 @@ const DraftMarker = ({ team }: { team: AlertTeam }) =>
         </Tooltip>
     ) : null
 
+// The channel ID itself is edited on the team's own page — here we only surface whether one
+// is set, because a team with no channel is silently doing nothing on every topic it's
+// subscribed to.
 const TeamChip = ({ team, onRemove }: { team: AlertTeam; onRemove: () => void }) => (
     <span className="inline-flex items-center gap-1 border border-primary rounded bg-accent px-2 py-0.5 text-sm">
-        <span>{team.name}</span>
+        <Link to={`/teams/${team.slug}`} state={{ newWindow: true }}>
+            {team.name}
+        </Link>
         <DraftMarker team={team} />
-        <span className="opacity-60">
-            {team.slackChannel ? <code className="text-sm">{team.slackChannel}</code> : <Warning>no channel</Warning>}
-        </span>
+        {!team.slackChannel && (
+            <Tooltip
+                content="No Slack channel set on this team, so nothing is posted. Set one on the team's page."
+                placement="top"
+            >
+                <span>
+                    <Warning>no channel</Warning>
+                </span>
+            </Tooltip>
+        )}
         <Tooltip content={`Stop notifying ${team.name}`} placement="top">
             <button onClick={onRemove} className="opacity-60 hover:opacity-100">
                 <IconX className="size-3" />
@@ -38,41 +51,10 @@ const TeamChip = ({ team, onRemove }: { team: AlertTeam; onRemove: () => void })
     </span>
 )
 
-const SlackChannelInput = ({ team, onSave }: { team: AlertTeam; onSave: (channel: string) => void }) => {
-    const [value, setValue] = useState(team.slackChannel ?? '')
-
-    // Resync when a refetch brings back something different from what we typed.
-    useEffect(() => setValue(team.slackChannel ?? ''), [team.slackChannel])
-
-    const save = () => {
-        if (value.trim() === (team.slackChannel ?? '')) return
-        onSave(value)
-    }
-
-    return (
-        <>
-            <input
-                value={value}
-                onChange={(e) => setValue(e.target.value)}
-                onBlur={save}
-                onKeyDown={(e) => e.key === 'Enter' && (e.target as HTMLInputElement).blur()}
-                placeholder="C0123ABCDEF"
-                aria-label={`Slack channel ID for ${team.name}`}
-                className="w-56 border border-primary rounded bg-accent px-2 py-1 text-sm"
-            />
-            {team.topicIDs.length > 0 && !team.slackChannel && (
-                <span className="ml-2 text-sm">
-                    <Warning>subscribed to topics but silent</Warning>
-                </span>
-            )}
-        </>
-    )
-}
-
 export default function CommunityAlerts() {
     const { isModerator, isValidating } = useUser()
     const topicsNav = useTopicsNav()
-    const { topics, teams, loading, error, subscribeTeam, unsubscribeTeam, updateSlackChannel } = useCommunityAlerts()
+    const { topics, teams, loading, error, subscribeTeam, unsubscribeTeam } = useCommunityAlerts()
     const [problemsOnly, setProblemsOnly] = useState(false)
 
     useEffect(() => {
@@ -144,34 +126,14 @@ export default function CommunityAlerts() {
         }
     })
 
-    const teamRows = teams.map((team) => ({
-        key: `team-${team.id}`,
-        cells: [
-            {
-                content: (
-                    <>
-                        <div className="font-semibold">
-                            {team.name} <DraftMarker team={team} />
-                        </div>
-                        <div className="text-sm opacity-60">
-                            {team.topicIDs.length} topic{team.topicIDs.length === 1 ? '' : 's'}
-                        </div>
-                    </>
-                ),
-            },
-            {
-                content: <SlackChannelInput team={team} onSave={(channel) => updateSlackChannel(team.id, channel)} />,
-            },
-        ],
-    }))
-
     return (
         <CommunityLayout menu={topicsNav} title="Question alerts">
             <SectionTitle>Question alerts</SectionTitle>
 
             <p className="text-sm opacity-75">
                 When someone asks a question, PostHog posts it to the Slack channel of every team subscribed to that
-                question&apos;s topic. This page is that mapping. Changes take effect immediately — no deploy.
+                question&apos;s topic. Set which teams a topic notifies here; set each team&apos;s Slack channel on its
+                own team page. Changes take effect immediately — no deploy.
             </p>
             <p className="text-sm opacity-75">
                 A question only notifies Slack when it is <em>created</em>. Adding a topic to an existing question
@@ -196,8 +158,16 @@ export default function CommunityAlerts() {
                                 {silent.length > 0 && (
                                     <li>
                                         <Warning>{silent.length}</Warning> team{silent.length === 1 ? '' : 's'}{' '}
-                                        subscribe to topics but have no Slack channel set:{' '}
-                                        {silent.map((team) => team.name).join(', ')}
+                                        subscribe to topics but have no Slack channel, so nothing is posted. Set one on{' '}
+                                        {silent.map((team, i) => (
+                                            <React.Fragment key={team.id}>
+                                                {i > 0 && ', '}
+                                                <Link to={`/teams/${team.slug}`} state={{ newWindow: true }}>
+                                                    {team.name}
+                                                </Link>
+                                            </React.Fragment>
+                                        ))}
+                                        .
                                     </li>
                                 )}
                             </ul>
@@ -222,20 +192,6 @@ export default function CommunityAlerts() {
                             { name: 'Add', width: 'minmax(180px, auto)' },
                         ]}
                         rows={topicRows}
-                    />
-
-                    <SectionTitle>Slack channels</SectionTitle>
-                    <p className="text-sm opacity-75">
-                        One channel per team, shared across every topic that team subscribes to. Use the Slack channel
-                        ID (in Slack: channel name → About → bottom of the panel), not the <code>#name</code>.
-                    </p>
-                    <OSTable
-                        rowAlignment="top"
-                        columns={[
-                            { name: 'Team', width: 'minmax(200px, 1fr)' },
-                            { name: 'Slack channel ID', width: 'minmax(300px, 2fr)' },
-                        ]}
-                        rows={teamRows}
                     />
                 </>
             )}

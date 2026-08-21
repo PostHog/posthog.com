@@ -12,6 +12,10 @@ import { useUser } from './useUser'
  * and moderators already hold `api::team.team.update` (they do *not* hold
  * `api::topic.topic.update`), so every edit here is a PUT to /api/teams/:id.
  *
+ * This hook owns the topic <-> team associations only. The channel ID itself is edited on
+ * each team's own page (/teams/<slug>); `slackChannel` is read here purely to flag teams
+ * that are subscribed to topics but have no channel, which post nothing.
+ *
  * `Team.slackChannel` is a private field — squeak-strapi's team controller only returns it
  * to moderators, so these requests have to be authenticated to see anything useful.
  */
@@ -152,11 +156,6 @@ export default function useCommunityAlerts() {
     const unsubscribeTeam = (topicID: number, teamID: number) =>
         updateTeam(teamID, { topicSubscriptions: { disconnect: [topicID] } })
 
-    // An emptied input means "no channel". Send null rather than '' so the value reads as
-    // unset in Strapi, matching the `if (!slackChannel) continue` guard in squeak-strapi.
-    const updateSlackChannel = (teamID: number, slackChannel: string) =>
-        updateTeam(teamID, { slackChannel: slackChannel.trim() || null })
-
     useEffect(() => {
         if (!isModerator) return
         setLoading(true)
@@ -174,6 +173,5 @@ export default function useCommunityAlerts() {
         fetchAlerts,
         subscribeTeam,
         unsubscribeTeam,
-        updateSlackChannel,
     }
 }
