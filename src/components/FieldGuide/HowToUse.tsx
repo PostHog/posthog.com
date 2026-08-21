@@ -37,6 +37,25 @@ export default function HowToUse(): JSX.Element {
     return (
         <section className="htu" id="how-to-use">
             <div className="htu-inner">
+                {/* Roughens aged-paper edges so callout + species plate read as torn book pages */}
+                <svg className="htu-plate-defs" aria-hidden="true" focusable="false">
+                    <filter id="fg-torn">
+                        <feTurbulence
+                            type="fractalNoise"
+                            baseFrequency="0.012 0.016"
+                            numOctaves={3}
+                            seed={4}
+                            result="noise"
+                        />
+                        <feDisplacementMap
+                            in="SourceGraphic"
+                            in2="noise"
+                            scale={12}
+                            xChannelSelector="R"
+                            yChannelSelector="G"
+                        />
+                    </filter>
+                </svg>
                 <aside className="htu-ebook-callout">
                     <p className="htu-ebook-text">
                         <strong>Prefer reading it as an ebook?</strong> Take the whole guide with you into the field.{' '}
@@ -79,25 +98,6 @@ export default function HowToUse(): JSX.Element {
                     The species
                 </h3>
                 <figure className="htu-plate">
-                    {/* Roughens the aged-paper edge so the plate reads as a torn book page */}
-                    <svg className="htu-plate-defs" aria-hidden="true" focusable="false">
-                        <filter id="fg-torn">
-                            <feTurbulence
-                                type="fractalNoise"
-                                baseFrequency="0.012 0.016"
-                                numOctaves={3}
-                                seed={4}
-                                result="noise"
-                            />
-                            <feDisplacementMap
-                                in="SourceGraphic"
-                                in2="noise"
-                                scale={12}
-                                xChannelSelector="R"
-                                yChannelSelector="G"
-                            />
-                        </filter>
-                    </svg>
                     <ul className="htu-plate-grid">
                         {ALL_SPECIES.map((s) => (
                             <li key={s.slug}>
@@ -160,15 +160,26 @@ export default function HowToUse(): JSX.Element {
                     color: ${INK};
                 }
                 .htu-ebook-callout {
+                    position: relative;
+                    isolation: isolate;
                     display: flex;
                     align-items: center;
                     gap: clamp(0.75rem, 2cqw, 1.25rem);
-                    background: rgba(247, 165, 1, 0.14);
-                    border: 1px solid rgba(69, 28, 1, 0.2);
-                    border-left: 4px solid var(--yellow, #F7A501);
-                    border-radius: 8px;
-                    padding: clamp(0.85rem, 2.5cqw, 1.35rem) clamp(1rem, 3cqw, 1.75rem);
+                    padding: clamp(1rem, 2.5cqw, 1.6rem) clamp(1.5rem, 3.5cqw, 2.25rem);
                     margin: 0 0 2rem;
+                }
+                /* Torn aged-paper page, matching the species plate */
+                .htu-ebook-callout::before {
+                    content: '';
+                    position: absolute;
+                    inset: 0;
+                    z-index: -1;
+                    background: radial-gradient(120px 80px at 12% 40%, rgba(120, 82, 30, 0.06), transparent 70%),
+                        radial-gradient(140px 90px at 88% 60%, rgba(120, 82, 30, 0.05), transparent 70%),
+                        linear-gradient(158deg, #f6f2e1 0%, #efe8cf 60%, #e7dec1 100%);
+                    border: 1px solid rgba(69, 28, 1, 0.3);
+                    box-shadow: inset 0 0 28px rgba(69, 28, 1, 0.08), 0 8px 20px rgba(69, 28, 1, 0.16);
+                    filter: url(#fg-torn);
                 }
                 .htu-ebook-icon { font-size: clamp(22px, 3cqw, 30px); line-height: 1; flex-shrink: 0; }
                 .htu-ebook-text {
@@ -256,9 +267,16 @@ export default function HowToUse(): JSX.Element {
                     margin: 0;
                     padding: 0;
                     display: grid;
-                    grid-template-columns: repeat(auto-fill, minmax(116px, 1fr));
+                    grid-template-columns: repeat(5, 1fr);
                     grid-auto-rows: 1fr;
-                    gap: clamp(1rem, 3cqw, 2rem) clamp(0.5rem, 2cqw, 1.25rem);
+                    gap: clamp(1.5rem, 3.5cqw, 2.5rem);
+                    align-items: stretch;
+                }
+                @container (max-width: 640px) {
+                    .htu-plate-grid { grid-template-columns: repeat(3, 1fr); }
+                }
+                @container (max-width: 420px) {
+                    .htu-plate-grid { grid-template-columns: repeat(2, 1fr); }
                 }
                 .htu-plate-grid > li { display: flex; }
                 .htu-specimen {
@@ -267,17 +285,16 @@ export default function HowToUse(): JSX.Element {
                     flex-direction: column;
                     align-items: center;
                     justify-content: flex-start;
-                    gap: 0.5rem;
+                    gap: 0.65rem;
                     text-align: center;
                     text-decoration: none;
-                    padding: 0.25rem;
                     transition: transform 150ms ease;
                 }
                 .htu-specimen:hover { transform: translateY(-3px); }
                 .htu-specimen-img {
-                    height: clamp(58px, 9cqw, 84px);
+                    height: clamp(64px, 9cqw, 86px);
                     display: flex;
-                    align-items: flex-end;
+                    align-items: center;
                     justify-content: center;
                 }
                 .htu-specimen-img img {
@@ -295,13 +312,15 @@ export default function HowToUse(): JSX.Element {
                     color: rgba(69, 28, 1, 0.28);
                 }
                 .htu-specimen-name {
-                    font-family: Georgia, 'Iowan Old Style', 'Palatino Linotype', 'Times New Roman', serif;
-                    font-style: italic;
-                    font-size: clamp(12px, 1.5cqw, 14px);
-                    line-height: 1.25;
+                    font-family: 'RoundHog', sans-serif;
+                    font-weight: 800;
+                    text-transform: uppercase;
+                    letter-spacing: 0.4px;
+                    font-size: 11px;
+                    line-height: 1.2;
                     color: ${INK};
                     /* Reserve two lines so single- and double-line names align */
-                    min-height: 2.5em;
+                    min-height: 2.4em;
                     display: flex;
                     align-items: flex-start;
                     justify-content: center;
@@ -314,7 +333,6 @@ export default function HowToUse(): JSX.Element {
                 .htu-plate-caption {
                     margin-top: clamp(1.25rem, 3cqw, 2rem);
                     text-align: center;
-                    font-family: Georgia, 'Iowan Old Style', 'Palatino Linotype', 'Times New Roman', serif;
                     font-style: italic;
                     font-size: clamp(11px, 1.3cqw, 13px);
                     letter-spacing: 0.3px;

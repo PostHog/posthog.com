@@ -1,32 +1,21 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { ComposableMap, Geographies, Geography } from 'react-simple-maps'
-// Self-contained low-res world geodata (GeoJSON FeatureCollection) — no network fetch.
-import worldLow from '@amcharts/amcharts5-geodata/worldLow'
+// Self-contained continent outlines (GeoJSON FeatureCollection) — one clean shape per continent, no network fetch.
+import continentsHigh from '@amcharts/amcharts5-geodata/continentsHigh'
 import Link from 'components/Link'
 import { INK, PAPER, PALETTE } from './heroData'
 import { SPECIES, PENDING_SPECIES, Species } from './speciesData'
 
-// Mean longitude of a geometry, used to band land fills warm→cool west→east.
-function meanLongitude(geometry: any): number {
-    let sum = 0
-    let n = 0
-    const walk = (coords: any) => {
-        if (typeof coords[0] === 'number') {
-            sum += coords[0]
-            n += 1
-            return
-        }
-        coords.forEach(walk)
-    }
-    if (geometry?.coordinates) walk(geometry.coordinates)
-    return n ? sum / n : 0
-}
-
-// Map a longitude (-180..180) to one of the palette "background" washes.
-function landFill(geometry: any): string {
-    const lon = meanLongitude(geometry)
-    const t = Math.min(0.9999, Math.max(0, (lon + 180) / 360))
-    return PALETTE[Math.floor(t * PALETTE.length)].bg
+// Each continent gets its own distinct color from the approved palette.
+const paletteBg = (name: string): string => PALETTE.find((p) => p.name === name)?.bg ?? '#D9EAA6'
+const CONTINENT_FILL: Record<string, string> = {
+    northAmerica: paletteBg('coral'),
+    southAmerica: paletteBg('yellow'),
+    africa: paletteBg('lime'),
+    europe: paletteBg('teal'),
+    asia: paletteBg('violet'),
+    oceania: paletteBg('tangerine'),
+    antarctica: paletteBg('corn blue'),
 }
 
 type Item =
@@ -108,30 +97,16 @@ export default function Hero(): JSX.Element {
                     style={{ width: '100%', height: 'auto' }}
                 >
                     <defs>
-                        {/* Painterly, irregular edges for a watercolor feel */}
-                        <filter id="fg-watercolor" x="-5%" y="-5%" width="110%" height="110%">
-                            <feTurbulence
-                                type="fractalNoise"
-                                baseFrequency="0.013"
-                                numOctaves={2}
-                                seed={7}
-                                result="n"
-                            />
-                            <feDisplacementMap
-                                in="SourceGraphic"
-                                in2="n"
-                                scale={9}
-                                xChannelSelector="R"
-                                yChannelSelector="G"
-                            />
-                            <feGaussianBlur stdDeviation={0.35} />
+                        {/* Whisper of softening only — no displacement, so continents stay accurate */}
+                        <filter id="fg-watercolor" x="-2%" y="-2%" width="104%" height="104%">
+                            <feGaussianBlur stdDeviation={0.3} />
                         </filter>
                     </defs>
-                    <Geographies geography={worldLow}>
+                    <Geographies geography={continentsHigh}>
                         {({ geographies }: { geographies: any[] }) => (
                             <g filter="url(#fg-watercolor)">
                                 {geographies.map((geo) => {
-                                    const fill = landFill(geo.geometry)
+                                    const fill = CONTINENT_FILL[geo.properties?.id] ?? paletteBg('lime')
                                     return (
                                         <Geography
                                             key={geo.rsmKey}
