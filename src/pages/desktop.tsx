@@ -56,8 +56,7 @@ import CloudinaryImage from 'components/CloudinaryImage'
 import WistiaEmbed from 'components/WistiaEmbed'
 import Link from 'components/Link'
 import { IconDiscord } from 'components/OSIcons/Icons'
-import { WaitlistForm } from 'components/WaitlistForm'
-import { DownloadContent } from 'components/Code/DownloadContent'
+import { DownloadContent, DownloadCTA } from 'components/Code/DownloadContent'
 import { usePrefersReducedMotion } from 'components/Code/usePrefersReducedMotion'
 
 // ─────────────────────────────────────────────
@@ -383,7 +382,7 @@ function HeroSection() {
                 <LetPostHogScroller className="text-xl @xl:text-2xl font-bold tracking-tight" />
                 <Link
                     className="group flex shrink-0 items-center gap-1 text-sm font-semibold text-secondary hover:text-primary"
-                    to="https://discord.com/invite/E9xV2WnR98"
+                    to="https://discord.gg/posthog"
                     externalNoIcon
                 >
                     <IconDiscord className="size-6 text-secondary group-hover:text-primary" />
@@ -438,22 +437,18 @@ function HeroSection() {
                                     ))}
                                 </ul>
 
-                                <div className="@container max-w-sm">
-                                    <WaitlistForm />
-                                    <p className="mt-4 text-sm text-secondary">
-                                        Have an invite code?{' '}
-                                        <Link
-                                            to="/desktop#download"
-                                            className="font-bold underline"
-                                            onClick={(e) => {
-                                                e.preventDefault()
-                                                swapToDownload()
-                                            }}
-                                        >
-                                            Get started
-                                        </Link>
-                                    </p>
-                                </div>
+                                <OSButton
+                                    asLink
+                                    to="/desktop#download"
+                                    variant="primary"
+                                    size="md"
+                                    onClick={(event) => {
+                                        event.preventDefault()
+                                        swapToDownload()
+                                    }}
+                                >
+                                    View downloads
+                                </OSButton>
                             </div>
 
                             <div className="w-full min-w-0 @4xl/editor:flex-1">
@@ -1811,7 +1806,7 @@ const SupportedLLMs = () => {
                         <span className="text-sm font-medium italic text-secondary">
                             …and more, if you have{' '}
                             <Link
-                                to="https://discord.com/invite/E9xV2WnR98"
+                                to="https://discord.gg/posthog"
                                 externalNoIcon
                                 className="font-bold not-italic text-red dark:text-yellow"
                             >
@@ -1825,7 +1820,7 @@ const SupportedLLMs = () => {
                         coding work, open source models now perform the same for a tenth of the price.
                     </p>
                     <p className="mb-6 leading-relaxed">
-                        PostHog Desktop runs both. Pay token cost (with no markup) on the best tool for the job.
+                        PostHog Desktop runs both, so you can choose the best model for the work and your budget.
                     </p>
 
                     <div className="flex items-end justify-between gap-4">
@@ -2061,10 +2056,10 @@ const TLDR = () => {
     return (
         <section className="relative mb-12 @xl:mb-16 px-4 @xl:px-8">
             <h2 className="text-2xl font-bold mb-2">Try it</h2>
-            <p className="m-0">PostHog Desktop is launching in Summer 2026.</p>
+            <p className="m-0">Download PostHog Desktop and sign in with your PostHog account.</p>
             <div className="mt-2 grid items-center gap-8 @2xl:grid-cols-2 @2xl:gap-12">
                 <div className="@container bg-blue/10 border border-blue rounded-md px-8 py-6 shadow-xl">
-                    <WaitlistForm />
+                    <DownloadCTA />
                 </div>
                 <div>
                     <MeepNotification className="mb-5 flex justify-center @2xl:justify-start" />
@@ -2295,12 +2290,12 @@ const FAQ_ITEMS = [
         content: (
             <div className="space-y-3">
                 <p>
-                    Yes – PostHog Desktop can both read and write to PostHog, depending on your API key permissions. It
-                    can create feature flags, set up experiments, build dashboards, and define actions.
+                    Yes – PostHog Desktop can both read and write to PostHog, depending on your account and tool
+                    permissions. It can create feature flags, set up experiments, build dashboards, and define actions.
                 </p>
                 <p>
-                    Every write operation requires explicit approval from the agent's permission system – nothing
-                    happens without your confirmation.
+                    Write operations follow your MCP tool policies and the task's autonomy mode. Review those settings
+                    before you allow an agent to change production data.
                 </p>
             </div>
         ),
@@ -2310,13 +2305,12 @@ const FAQ_ITEMS = [
         content: (
             <div className="space-y-3">
                 <p>
-                    PostHog Desktop is usage-based – there's no fixed subscription. You spend AI credits as you go (100
-                    credits = $1), and credits reflect the underlying model's cost exactly, with no markup on top.
+                    PostHog Desktop is usage-based – there's no fixed subscription. AI credit use depends on the model,
+                    token use, and resources required to complete the task.
                 </p>
                 <p>
-                    Every organization gets a $20/month free tier to explore, plus a default $50 billing limit so you
-                    don't rack up costs by accident (customize it anytime). Simple tasks use very few credits; larger,
-                    multi-file work uses more. See the{' '}
+                    Every organization gets a $20/month free tier to explore. Set a billing limit to control additional
+                    use. Simple tasks use very few credits; larger, multi-file work uses more. See the{' '}
                     <a href="/docs/posthog-desktop/pricing" className="underline">
                         pricing docs
                     </a>{' '}
@@ -2336,11 +2330,11 @@ const FAQ_ITEMS = [
                     Yes – MIT licensed
                 </a>
                 , with the monorepo{' '}
-                <a href="https://github.com/PostHog/code" className="underline">
+                <a href="https://github.com/PostHog/posthog/tree/master/products/desktop" className="underline">
                     on GitHub
                 </a>
-                . The desktop app, agent framework, enricher, and bundled skills all live there. macOS is officially
-                supported; Windows is community-maintained.
+                . The desktop app, agent framework, enrichment service, and bundled skills all live there. macOS,
+                Windows, and Linux builds are maintained by PostHog.
             </p>
         ),
     },
@@ -2368,7 +2362,7 @@ function FAQ() {
 export function DownloadButton() {
     return (
         <div className="py-6">
-            <WaitlistForm />
+            <DownloadCTA />
         </div>
     )
 }

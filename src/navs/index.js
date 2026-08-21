@@ -2308,25 +2308,13 @@ const posthogDesktopNav = [
         featured: true,
     },
     {
-        name: 'Features',
+        name: 'Core workflow',
     },
     {
-        name: 'Any model and any harness',
-        url: '/docs/posthog-desktop/use-any-model-and-harness',
-        icon: 'IconGraduationCap',
-        color: 'green',
-    },
-    {
-        name: 'Skills',
-        url: '/docs/posthog-desktop/skills',
-        icon: 'IconMagic',
-        color: 'purple',
-    },
-    {
-        name: 'Command Center',
-        url: '/docs/posthog-desktop/command-center',
-        icon: 'IconGridMasonry',
-        color: 'orange',
+        name: 'Spaces and canvases',
+        url: '/docs/posthog-desktop/spaces',
+        icon: 'IconDashboard',
+        color: 'salmon',
     },
     {
         name: 'Tasks',
@@ -2341,16 +2329,46 @@ const posthogDesktopNav = [
         color: 'seagreen',
     },
     {
+        name: 'Code review',
+        url: '/docs/posthog-desktop/code-review',
+        icon: 'IconCode',
+        color: 'blue',
+    },
+    {
         name: 'Git + GitHub integration',
         url: '/docs/posthog-desktop/git-github-integration',
         icon: 'IconGitBranch',
         color: 'green',
     },
     {
-        name: 'Code review',
-        url: '/docs/posthog-desktop/code-review',
-        icon: 'IconCode',
+        name: 'Customize PostHog Desktop',
+    },
+    {
+        name: 'Any model and any harness',
+        url: '/docs/posthog-desktop/use-any-model-and-harness',
+        icon: 'IconGraduationCap',
+        color: 'green',
+    },
+    {
+        name: 'Skills',
+        url: '/docs/posthog-desktop/skills',
+        icon: 'IconMagic',
+        color: 'purple',
+    },
+    {
+        name: 'MCP servers',
+        url: '/docs/posthog-desktop/mcp-servers',
+        icon: 'IconServer',
         color: 'blue',
+    },
+    {
+        name: 'Settings',
+        url: '/docs/posthog-desktop/settings',
+        icon: 'IconGear',
+        color: 'seagreen',
+    },
+    {
+        name: 'Run and automate',
     },
     {
         name: 'Environments',
@@ -2359,28 +2377,22 @@ const posthogDesktopNav = [
         color: 'purple',
     },
     {
-        name: 'Cloud runs',
-        url: '/docs/posthog-desktop/cloud-runs',
-        icon: 'IconCloud',
-        color: 'blue',
-    },
-    {
         name: 'Worktrees',
         url: '/docs/posthog-desktop/worktrees',
         icon: 'IconGitRepository',
         color: 'orange',
     },
     {
-        name: 'AI-generated content',
-        url: '/docs/posthog-desktop/ai-generated-content',
-        icon: 'IconAI',
-        color: 'purple',
+        name: 'Cloud runs',
+        url: '/docs/posthog-desktop/cloud-runs',
+        icon: 'IconCloud',
+        color: 'blue',
     },
     {
-        name: 'Settings',
-        url: '/docs/posthog-desktop/settings',
-        icon: 'IconGear',
-        color: 'seagreen',
+        name: 'Command Center',
+        url: '/docs/posthog-desktop/command-center',
+        icon: 'IconGridMasonry',
+        color: 'orange',
     },
     {
         name: 'Resources',
@@ -2392,7 +2404,7 @@ const posthogDesktopNav = [
         color: 'green',
     },
     {
-        name: 'Open source',
+        name: 'Contribute',
         url: '/docs/posthog-desktop/open-source',
         icon: 'IconGithub',
         color: 'seagreen',
@@ -2681,7 +2693,8 @@ export const docsMenu = {
                         },
                         {
                             name: 'Identity resolution',
-                            url: '/docs/product-analytics/identity-resolution',
+                            url: 'https://posthog.com/docs/product-analytics/identity-resolution',
+                            external: true,
                         },
                         {
                             name: 'Deploy a proxy',
@@ -3469,7 +3482,8 @@ export const docsMenu = {
                         },
                         {
                             name: 'Data model',
-                            url: '/docs/how-posthog-works/data-model',
+                            url: 'https://posthog.com/docs/how-posthog-works/data-model',
+                            external: true,
                         },
                     ],
                 },
@@ -4372,7 +4386,8 @@ export const docsMenu = {
                 },
                 {
                     name: 'SQL',
-                    url: '/docs/data-warehouse/sql',
+                    url: 'https://posthog.com/docs/data-warehouse/sql',
+                    external: true,
                     icon: 'IconHogQL',
                     color: 'purple',
                 },
