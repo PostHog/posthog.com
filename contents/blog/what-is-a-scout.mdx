@@ -42,7 +42,7 @@ Scouts don't live on their own, they feed our self-driving product pipeline:
 1. **A scout runs** on a schedule, looks at some slice of your PostHog data, and decides whether anything is worth surfacing.
 2. **If it is, the scout emits a [signal](/docs/self-driving/signals)** – a semi-structured finding with evidence, and a suggested action.
 3. **Signals get picked up by the [self-driving pipeline](/docs/self-driving/self-improving-loop)**, grouped, and turned into **[reports](/docs/self-driving/reports)** that land in your PostHog [Inbox](/docs/self-driving/inbox).
-4. **Reports get actioned** – by you, or automatically by a PostHog Code task that picks up the report and ships a fix or improvement.
+4. **Reports get actioned** – by you, or automatically by a PostHog Desktop task that picks up the report and ships a fix or improvement.
 
 A report can be made up of many signals from many sources. Scouts are just one of those sources. 
 
@@ -72,7 +72,7 @@ So the spectrum runs from "a few sentences of English" up to "a skill with refer
 
 The really nice thing here is that it's easy to get a feel for this as you can just ask your agent how a scout is performing for your project using the [exploring-signals-scouts](https://github.com/PostHog/posthog/blob/master/products/signals/skills/exploring-signals-scouts/SKILL.md) skill we ship with the [PostHog AI Plugin](https://github.com/PostHog/ai-plugin).
 
-Or even easier just press one of the suggested questions here on the scouts page in PostHog Code. "Make a scout" will use the [authoring-signals-scouts](https://github.com/PostHog/posthog/blob/master/products/signals/skills/authoring-signals-scouts/SKILL.md) skill, scan your project and suggest some custom scouts for you.
+Or even easier just press one of the suggested questions here on the scouts page in PostHog Desktop. "Make a scout" will use the [authoring-signals-scouts](https://github.com/PostHog/posthog/blob/master/products/signals/skills/authoring-signals-scouts/SKILL.md) skill, scan your project and suggest some custom scouts for you.
 
 ![The scouts page in PostHog Code, with suggested questions for exploring and making scouts](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/Screenshot_2026_06_18_at_11_01_02_101ddc91fe.png)
 
@@ -140,7 +140,7 @@ That's it. The scout reads existing inbox reports and prior runs through plain M
 
 ### Dogfood it yourself, then let PostHog run it
 
-Because a scout is just a skill plus the MCP, you can run one manually in any agent surface where the PostHog MCP is available – PostHog Code, Claude Code, Codex, Cursor, whatever. 
+Because a scout is just a skill plus the MCP, you can run one manually in any agent surface where the PostHog MCP is available – PostHog Desktop, Claude Code, Codex, Cursor, whatever. 
 
 This is a key feature, not an accident: you can dogfood a scout on your own project, watch it work against your real data, and tweak the scout until it's good – grounded in actual usage and the pain points you hit on the way.
 
@@ -279,7 +279,7 @@ The pipeline turned the signal into a report, which even did the root-cause anal
 
 <summary>Step 4: <strong>An agent opens the fix</strong> – <a href="https://github.com/PostHog/posthog/pull/63393" rel="noopener noreferrer">PR #63393</a>, authored autonomously</summary>
 
-A PostHog Code agent picked up the report and opened the PR on its own – introducing a writable `SyncFrequencyField` so the cadence flows into the generated PATCH body, and adding three regression tests (a writable-field guard, a round-trip update, and an invalid-value rejection).
+A PostHog Desktop agent picked up the report and opened the PR on its own – introducing a writable `SyncFrequencyField` so the cadence flows into the generated PATCH body, and adding three regression tests (a writable-field guard, a round-trip update, and an invalid-value rejection).
 
 From the PR's own agent-context section:
 
@@ -373,7 +373,7 @@ Those two are just two shapes. The thing to internalize is that **anything you c
 | Use case | What it does |
 | --- | --- |
 | **Mine any Slack channel** | Sync a channel into the [data warehouse](/docs/data-warehouse) and a scout reads it like any other table – a user-feedback channel, an internal team channel (we run one over our own `#team-self-driving`), an external alerting or on-call channel, even a community Discord relay. The moment it's a table, it's fair game. |
-| **Watch any custom event** | Scouts aren't limited to analytics events – point one at *any* event you capture: a custom customer-support event, a feedback submission, a domain-specific action. Internally we run separate scouts on PostHog AI thumbs-down feedback, PostHog Code task feedback, and the per-product in-app feedback widgets. |
+| **Watch any custom event** | Scouts aren't limited to analytics events – point one at *any* event you capture: a custom customer-support event, a feedback submission, a domain-specific action. Internally we run separate scouts on PostHog AI thumbs-down feedback, PostHog Desktop task feedback, and the per-product in-app feedback widgets. |
 | **Keep an eye on what you already care about** | Hand a scout a curated set of *your* dashboards, insights, and alerts – the metrics your team checks every morning – and have it stay quiet until one of them actually moves against its own baseline. |
 | **Own a funnel or a journey** | A scout can watch your key funnels and activation flows across every PostHog feature you use, flag a conversion or retention regression against the flow's own trailing baseline – and even propose the A/B [experiment](/docs/experiments) to fix the weakest step. |
 | **Have it read your codebase** | Give a scout a repo and a job: scan recent code changes and keep your [agent skills](https://agentskills.io/specification) in sync as things move, catch docs that have drifted out of date, flag a feature shipped with no instrumentation, spot a third-party API version about to be deprecated, or run a static-analysis tool over the last week's diffs. |
@@ -402,7 +402,7 @@ The pattern here is to lean in and embrace being agent pilled, keep the core tin
 
 Scouts are still rolling out gradually and are invite-only for now while we shake out the rough edges – wider access is coming soon. If you want in early, email [team-self-driving@posthog.com](mailto:team-self-driving@posthog.com) and we'll get you set up.
 
-Once they're available to you, the home base is [PostHog](https://app.posthog.com) – your scouts and the signals they surface land in your [Inbox](https://app.posthog.com/inbox). You can drive them from any agent surface with the [PostHog MCP](/docs/model-context-protocol) wired up – [PostHog Code](/desktop), Claude Code, Cursor, whatever you use – where you can explore the set of [canonical scouts](/docs/self-driving/scouts) PostHog ships with as well as make your own custom scouts. The [Self-driving docs](/docs/self-driving) are the place to go deeper.
+Once they're available to you, the home base is [PostHog](https://app.posthog.com) – your scouts and the signals they surface land in your [Inbox](https://app.posthog.com/inbox). You can drive them from any agent surface with the [PostHog MCP](/docs/model-context-protocol) wired up – [PostHog Desktop](/desktop), Claude Code, Cursor, whatever you use – where you can explore the set of [canonical scouts](/docs/self-driving/scouts) PostHog ships with as well as make your own custom scouts. The [Self-driving docs](/docs/self-driving) are the place to go deeper.
 
 ## AGI Buzzword bingo
 
