@@ -1,7 +1,9 @@
 import { useEffect, useState } from 'react'
 
 export const DOWNLOAD_URL = 'https://code.posthog.com/download'
-export const RELEASES_URL = 'https://github.com/PostHog/code/releases/latest'
+// Desktop ships from the PostHog monorepo under `desktop-v*` tags. The old
+// PostHog/code repo was archived in August 2026, so its releases are frozen.
+export const RELEASES_URL = 'https://github.com/PostHog/posthog/releases?q=desktop&expanded=true'
 
 type OS = 'mac' | 'windows' | 'linux' | 'unknown'
 type Arch = 'arm64' | 'x64' | 'unknown'
