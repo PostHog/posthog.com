@@ -7,13 +7,16 @@ showTitle: true
 hideAnchor: true
 author:
     - lizzie-epton
+featuredImage: >-
+    https://res.cloudinary.com/dmukukwp6/image/upload/w_800,c_limit,q_auto,f_auto/this_is_fine_6336efb0ae.jpg
+featuredImageType: full
 category: General
 tags:
     - Data warehouse
     - AI
 seo:
     metaTitle: Mind the context gap
-    metaDescription: "Every data vendor describes AI readiness from inside their own slice of the stack. Here's what the numbers they've all published actually add up to."
+    metaDescription: "Every data vendor describes AI readiness from inside their own slice of the stack. What they're all pointing to needing a context warehouse."
 ---
 
 Part of my job as a product marketer at PostHog is keeping tabs on what every other company in the data space is talking about. So I read a lot of industry reports, and surrendered my email address to a bunch of different mailing lists. Here's what I learned so that you don't have to do the same.
@@ -80,16 +83,14 @@ You need a way to stop building and babysitting pipelines so you can trust that 
 >
 > — [Databricks, State of Data + AI](https://www.databricks.com/discover/state-of-data-ai)
 
-A [context warehouse](https://posthog.com/context-warehouse) wraps ingestion, modeling, storage, and querying in one tool instead of four you wire together with pipelines between them. Here's how that works in PostHog:
+A [context warehouse](/context-warehouse) wraps ingestion, modeling, storage, and querying in one tool instead of four you wire together with pipelines between them. Here's how that works in PostHog:
 
 - **Your product data is already there.** PostHog captures data from experiments, logs, errors (and more) as it happens, so there's no export to get it into a separate warehouse.
 - **External sources sync in.** Connect Stripe, HubSpot, Salesforce, Postgres, and the other 102 sources of data you have, and it lands in the same warehouse. The pipelines are maintained automatically.
-- **Everything runs on the same data.** Analytics, experiments, feature flags, the SQL editor, PostHog AI, and any agent you point at the [PostHog MCP](https://posthog.com/mcp) all read from one place. The [Semantic Layer](/blog/semantic-layer) holds fixed definitions so you know you can trust the answers to your questions.
+- **Everything runs on the same data.** Analytics, experiments, feature flags, the SQL editor, PostHog AI, and any agent you point at the [PostHog MCP](/mcp) all read from one place. The [Semantic Layer](/blog/semantic-layer) holds fixed definitions so you know you can trust the answers to your questions.
 
-Once your product data and business context sit together and an agent can query both, it can do more than answer questions. It can spot the funnel drop, tie it to the revenue at risk, pull the affected cohort, and open a PR. That's [self-driving development](https://posthog.com/products), and it only works when the agent isn't reasoning from an incomplete picture.
+Once your product data and business context sit together and an agent can query both, it can do more than answer questions. It can spot the funnel drop, tie it to the revenue at risk, pull the affected cohort, and open a PR. That's [self-driving development](/products), and it only works when the agent isn't reasoning from an incomplete picture.
 
 The context gap closes, and your product development kickstarts, not because you built a better pipeline, but because you stopped needing one.
 
-Your first data source is free to connect. So is your second. By the time you've connected your third, you'll forget that you ever had to build a pipeline, which is the whole point.
-
-{/* TODO: insert wizard prompt component to scan for warehouse sources */}
+Your [first data source is free to connect](/docs/data-warehouse/sources). So is your second. By the time you've connected your third, you'll forget that you ever had to build a pipeline, which is the whole point.
