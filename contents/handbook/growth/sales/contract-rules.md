@@ -167,7 +167,7 @@ If you believe you have a customer who falls into one of these categories and wo
 
 ## Additional credit purchase
 
-As it's often difficult to right-size the credit needed for a longer term plan, as a standard we let customers buy additional credit in the first half of a contract term (e.g. 6 months for an annual plan) at whichever is better for them: the discount tier from the original order form, or the tier the additional purchase qualifies for on its own. Purchases are priced independently and are never added together to reach a higher tier — see [when they don't have enough credit to cover their term](#when-they-dont-have-enough-credit-to-cover-their-term). Within the first 6 months given our billing usage reports we should be able to predict whether the customer is going to run out of credit or not. There are also alerts set up in `#sales-alerts` to help notify account owners about this.
+It's often difficult to right-size the credit needed for a longer term plan, so customers can buy additional credit in the first half of a contract term (e.g. 6 months for an annual plan). See [when they don't have enough credit to cover their term](#when-they-dont-have-enough-credit-to-cover-their-term) for how those purchases are priced. Within the first 6 months given our billing usage reports we should be able to predict whether the customer is going to run out of credit or not. There are also alerts set up in `#sales-alerts` to help notify account owners about this.
 
 ## Price guarantees & lock-ins
 
