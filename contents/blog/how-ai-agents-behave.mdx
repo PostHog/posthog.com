@@ -37,13 +37,17 @@ The agent poking at your product almost certainly isn't in a chat window; it's i
 
 Turns out, not much (at least not in terms of variety). Thirty million calls, and it mostly comes down to two moves: **running a SQL query** (8.4 million calls – 28% of everything) and **reading the schema** to find out what's queryable in the first place (another 8%).
 
-Between them, those two tools are more than a third of all traffic. 
+Between them, those two are more than a third of all traffic. 
 
 ![What agents actually ask for](https://res.cloudinary.com/dmukukwp6/image/upload/mcp_04_what_agents_ask_for_fb318e2b4a.png)
 
-Other tools barely register, which is a little tragic, because [PostHog's MCP](/mcp) has hundreds of different tools. 
+Reading the schema tells an agent what's in your data (which events you capture, what properties they carry). But another **10%** of calls is the step before that: working out what the tools themselves are; pulling the catalogue, searching it, checking how a particular tool wants to be called. 
 
-Give an agent one a single prompt and it could spin up an A/B test, wait for the results, and ship the winning variant. It could open an error, read the stack trace, jump to the exact replay of the user who hit it, and patch the code. It could point an AI at a week of sessions and ask questioms about it. I could go on.
+So **one in ten is an agent looking for something rather than doing something.**
+
+A lot of our tools barely register, which is a little tragic, because [PostHog's MCP](/mcp) has hundreds of different functionalities available. 
+
+Give an agent one a single prompt and it could spin up an A/B test, wait for the results, and ship the winning variant. It could open an error, read the stack trace, jump to the exact replay of the user who hit it, and patch the code. It could point an AI at a week of sessions and ask questioms about it. The list goes on.
 
 ![Iceberg](https://res.cloudinary.com/dmukukwp6/image/upload/mcp_03_iceberg_a636b1dd90.png)
 
@@ -63,7 +67,7 @@ That said, **Codex is the standout**: it only trips about **once every 70 calls*
 
 The more interesting question, though, isn't who errors, but what they get wrong. 
 
-Agents almost never fail at finding data: reading the schema errors just **1.9%** of the time, about 1 in 53. It's the *querying* that trips them up. The actual SQL call fails **4.9%** of the time, more than two and a half times as often.
+Agents almost never fail at finding data: reading the schema errors just **1.9%** of the time, about 1 in 53. It's the querying that trips them up. The actual SQL call fails **4.9%** of the time, more than two and a half times as often.
 
 That said, agents are remarkably good at recovering from their own mistakes; when an agent hits an error and the session keeps going, 71% of the time its very next move is to call the exact same tool again, and **77% of those retries work.**
 
