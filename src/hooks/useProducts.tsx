@@ -21,6 +21,7 @@ import { logs } from './productData/logs'
 import { realtimeDestinations } from './productData/realtime_destinations'
 import { endpoints } from './productData/endpoints'
 import { inbox } from './productData/inbox'
+import { posthogDesktop } from './productData/posthog_desktop'
 import { replayVision } from './productData/replay_vision'
 
 const initialProducts = [
@@ -39,6 +40,9 @@ const initialProducts = [
     logs,
     workflows,
     inbox,
+    // Sits after Inbox deliberately. Neither handle is in `BROWSE_TOOLS_HANDLES`, so both fall
+    // into the calculator's `Infinity` sort bucket, which keeps this order — see `Tabbed`.
+    posthogDesktop,
     endpoints,
     replayVision,
 ]

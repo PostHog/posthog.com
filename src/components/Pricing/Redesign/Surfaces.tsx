@@ -1,13 +1,18 @@
 import React from 'react'
-import { IconAtSign, IconBolt, IconPlug } from '@posthog/icons'
+import { IconAtSign, IconBolt, IconLaptop, IconPlug } from '@posthog/icons'
 
 /**
- * Where the free tier can be spent: the browser, Slack, or your own agent over MCP.
+ * Where the free tier can be spent: the browser, Slack, the desktop app, or your own agent over
+ * MCP. Each of these meters its own monthly allowance — Desktop's is its own credit balance, not
+ * a share of PostHog AI's — which is why they all appear in the ticker above.
  */
 
 const surfaces = [
     { name: 'PostHog Web', Icon: IconBolt, color: 'text-red' },
     { name: 'PostHog Slack', Icon: IconAtSign, color: 'text-sky-blue' },
+    // Brown is near-black, so it needs the light variant in dark mode — the same pairing
+    // /slack and /self-driving use for this colour.
+    { name: 'PostHog Desktop', Icon: IconLaptop, color: 'text-brown dark:text-brown-dark' },
     { name: 'PostHog MCP', Icon: IconPlug, color: 'text-gray' },
 ]
 
