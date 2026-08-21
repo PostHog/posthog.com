@@ -377,6 +377,33 @@ export const useQuestion = (id: number | string, options?: UseQuestionOptions) =
         }
     }
 
+    // Flags the thread for a PostHog employee to triage in Slack. Community moderators
+    // can't create a support ticket the way staff do, because that attributes the ticket
+    // to the question author and so needs their email, which they aren't allowed to read.
+    // Going through Strapi keeps the email server-side.
+    const escalate = async () => {
+        const res = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/questions/${questionData?.id}/escalate`, {
+            method: 'POST',
+            body: JSON.stringify({ data: {} }),
+            headers: {
+                'content-type': 'application/json',
+                Authorization: `Bearer ${await getJwt()}`,
+            },
+        })
+
+        if (!res.ok) {
+            const errorText = await res.text()
+            posthog?.capture('squeak error', {
+                source: 'useQuestion.escalate',
+                questionId: questionID,
+                error: errorText,
+            })
+            throw new Error(`Failed to escalate question: ${res.status} ${errorText}`)
+        }
+
+        posthog?.capture('squeak escalate question', { questionId: questionID })
+    }
+
     const handleResolve = async (resolved: boolean, resolvedBy: number | null) => {
         try {
             posthog?.capture('squeak resolve start', {
@@ -622,6 +649,7 @@ export const useQuestion = (id: number | string, options?: UseQuestionOptions) =
         isLoading: isValidating || (isLoading && !questionData),
         isError: error,
         handlePublishReply,
+        escalate,
         handleResolve,
         handleReplyDelete,
         voteReply,
