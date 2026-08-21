@@ -56,8 +56,8 @@ import CloudinaryImage from 'components/CloudinaryImage'
 import WistiaEmbed from 'components/WistiaEmbed'
 import Link from 'components/Link'
 import { IconDiscord } from 'components/OSIcons/Icons'
+import { WaitlistForm } from 'components/WaitlistForm'
 import { DownloadButtons } from 'components/Code/DownloadButtons'
-import { DownloadContent, DownloadCTA } from 'components/Code/DownloadContent'
 import { DESKTOP_LAUNCH_FLAG } from 'components/Code/flags'
 import { FeatureFlagged } from 'components/FeatureFlagged'
 import { usePrefersReducedMotion } from 'components/Code/usePrefersReducedMotion'
@@ -403,7 +403,11 @@ function HeroSection() {
                 {showDownload ? (
                     <FeatureFlagged
                         flag={DESKTOP_LAUNCH_FLAG}
-                        fallback={<DownloadContent className="w-full mx-auto py-8 text-center" />}
+                        fallback={
+                            <div className="w-full max-w-lg mx-auto py-8">
+                                <WaitlistForm />
+                            </div>
+                        }
                     >
                         <DownloadButtons className="w-full py-8" align="center" />
                     </FeatureFlagged>
@@ -458,7 +462,7 @@ function HeroSection() {
                                                 swapToDownload()
                                             }}
                                         >
-                                            View downloads
+                                            Join the waitlist
                                         </OSButton>
                                     }
                                 >
@@ -2071,10 +2075,15 @@ const TLDR = () => {
     return (
         <section className="relative mb-12 @xl:mb-16 px-4 @xl:px-8">
             <h2 className="text-2xl font-bold mb-2">Try it</h2>
-            <p className="m-0">Download PostHog Desktop and sign in with your PostHog account.</p>
+            <FeatureFlagged
+                flag={DESKTOP_LAUNCH_FLAG}
+                fallback={<p className="m-0">PostHog Desktop is launching in Summer 2026.</p>}
+            >
+                <p className="m-0">Download PostHog Desktop and sign in with your PostHog account.</p>
+            </FeatureFlagged>
             <div className="mt-2 grid items-center gap-8 @2xl:grid-cols-2 @2xl:gap-12">
                 <div className="@container bg-blue/10 border border-blue rounded-md px-8 py-6 shadow-xl">
-                    <FeatureFlagged flag={DESKTOP_LAUNCH_FLAG} fallback={<DownloadCTA />}>
+                    <FeatureFlagged flag={DESKTOP_LAUNCH_FLAG} fallback={<WaitlistForm />}>
                         <DownloadButtons />
                     </FeatureFlagged>
                 </div>
@@ -2379,7 +2388,7 @@ function FAQ() {
 export function DownloadButton() {
     return (
         <div className="py-6">
-            <FeatureFlagged flag={DESKTOP_LAUNCH_FLAG} fallback={<DownloadCTA />}>
+            <FeatureFlagged flag={DESKTOP_LAUNCH_FLAG} fallback={<WaitlistForm />}>
                 <DownloadButtons />
             </FeatureFlagged>
         </div>

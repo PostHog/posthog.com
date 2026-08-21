@@ -1,7 +1,6 @@
 import List from 'components/List'
 import { FeatureFlagged } from 'components/FeatureFlagged'
 import React from 'react'
-import { DownloadList } from './DownloadContent'
 import { DESKTOP_LAUNCH_FLAG } from './flags'
 import { PLATFORMS } from './platforms'
 
@@ -14,7 +13,30 @@ const listClassName = 'grid gap-4 grid-cols-1 @md:grid-cols-2 not-prose'
  */
 export function DesktopDownloadList(): JSX.Element {
     return (
-        <FeatureFlagged flag={DESKTOP_LAUNCH_FLAG} fallback={<DownloadList />}>
+        <FeatureFlagged
+            flag={DESKTOP_LAUNCH_FLAG}
+            fallback={
+                <List
+                    className={listClassName}
+                    items={[
+                        {
+                            label: 'macOS',
+                            url: '#',
+                            icon: 'IconApple',
+                            badge: 'Coming soon',
+                            description: 'Official app',
+                        },
+                        {
+                            label: 'Windows',
+                            url: '#',
+                            icon: 'IconLaptop',
+                            badge: 'Coming soon',
+                            description: 'Community maintained',
+                        },
+                    ]}
+                />
+            }
+        >
             <List
                 className={listClassName}
                 items={PLATFORMS.map((platform) => ({
