@@ -24,6 +24,14 @@ Hook that returns `true` when the user has `prefers-reduced-motion: reduce` enab
 
 ## Content components
 
+### `platforms`
+Shared platform data and device detection for the launch download UI. Download URLs use `https://desktop.posthog.com/download/*`, which resolves the latest matching artifact.
+
+### `DownloadButtons`
+Feature-flagged launch UI with a detected-platform download, an all-platforms dropdown, and a docs link. Mobile devices get the docs link instead of a download.
+
+**Props:** `className`, `align`, `size`
+
 ### `DownloadContent`
 Download UI for PostHog Desktop, shared by the `/code#download` hero swap and the standalone `/code/download` page. Detects the visitor's OS and architecture client-side (via `userAgentData` where available, with UA sniffing as the Linux fallback), highlights the matching platform, and opens the monorepo release list filtered to Desktop releases. Visitors choose the latest matching asset there.
 

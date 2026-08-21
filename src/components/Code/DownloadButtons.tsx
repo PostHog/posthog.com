@@ -14,23 +14,6 @@ interface DownloadButtonsProps {
 }
 
 /**
- * Reminder that every download link resolves to the latest release. Rendered
- * separately from the buttons so callers can give it the full width of their
- * section instead of squeezing it into a narrow column. Hidden on mobile, where
- * there are no download links for it to qualify.
- */
-export function DownloadNote({ className = '' }: { className?: string }): JSX.Element | null {
-    const { isMobile } = useDetectedDevice()
-    if (isMobile) return null
-
-    return (
-        <p className={`m-0 text-sm text-secondary ${className}`}>
-            These always grab the latest release, since older builds can behave unexpectedly.
-        </p>
-    )
-}
-
-/**
  * Primary "Download for <your OS>" button with a dropdown of every specific
  * build, plus a secondary link into the docs. Every link points at the download
  * worker, which always resolves to the latest published release.
