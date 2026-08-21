@@ -1944,12 +1944,20 @@ export const handbookSidebar = [
                         url: '/handbook/community',
                     },
                     {
+                        name: 'Community channels',
+                        url: '/handbook/community/channels',
+                    },
+                    {
                         name: 'Answering community questions',
                         url: '/handbook/community/questions',
                     },
                     {
                         name: 'Profiles',
                         url: '/handbook/community/profiles',
+                    },
+                    {
+                        name: 'Points & rewards',
+                        url: '/handbook/community/points',
                     },
                 ],
             },
