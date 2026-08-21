@@ -1,0 +1,95 @@
+---
+title: Mind the context gap
+date: 2026-08-21
+rootPage: /blog
+sidebar: Blog
+showTitle: true
+hideAnchor: true
+author:
+    - lizzie-epton
+category: General
+tags:
+    - Data warehouse
+    - AI
+seo:
+    metaTitle: Mind the context gap
+    metaDescription: "Every data vendor describes AI readiness from inside their own slice of the stack. Here's what the numbers they've all published actually add up to."
+---
+
+Part of my job as a product marketer at PostHog is keeping tabs on what every other company in the data space is talking about. So I read a lot of industry reports, and surrendered my email address to a bunch of different mailing lists. Here's what I learned so that you don't have to do the same.
+
+Everyone agrees on the problem their customers are facing: **AI ambition is outrunning data readiness, trust, and governance.** But, most vendors in the data space are specialised, so each is describing the problem from inside their own slice of the stack. The pipeline vendor sees a pipeline problem. The governance vendor sees a governance problem.
+
+Without naming it, every report I read was describing the same fix. I'm going to name it, and back it up with data from all of our competitors. And yes, I know how that sounds: the PostHog PMM thinks the answer is PostHog. Fair. But I didn't run these numbers. My competitors did, and published them. I'm the first to read all of them, saw the pattern, and say why that adds up to a [context warehouse](/blog/what-is-a-context-warehouse).
+
+## Let's agree on what "data readiness" means
+
+> 42% of teams say more than half of their AI projects have stalled, and the cause isn't the model. It's a lack of data readiness.
+>
+> — [Fivetran, AI & Data Readiness Report, 2025](https://www.fivetran.com/resources/reports/ai-data-readiness)
+
+Everyone is talking about how important data readiness is, and nobody agrees on what that actually means. If you're confused about how to get your data "ready," you're not alone. Each vendor defines it through their own lens: clean tables, pipeline uptime, a governance policy. Notice that every one of those definitions happens to describe the exact thing that the vendor sells. A definition that doubles as a sales pitch isn't a definition.
+
+In reality it's all of those things at once, because they all feed into the same outcome: how easily you, and your agents, can reach and understand your data. So here's the definition I'm proposing for everyone to get behind:
+
+**All of your data in one place that is reachable by you and your agents.**
+
+## Agents fail because they have no idea what's going on
+
+> The average company now runs 106 SaaS apps, each one throwing off its own data.
+>
+> — [BetterCloud, SaaS statistics, 2025](https://www.bettercloud.com/monitor/saas-statistics/)
+
+An agent is only as good as the data it can reach. Give it product events but not revenue data, and it can't tell a churn risk from a power user. Give it support tickets but not usage, and it guesses at the cause. Most people don't know when their agent has failed because it keeps handing back confident, wrong answers until you stop trusting it.
+
+> AI-driven acceleration is outpacing trust and governance, and 56% of teams name data quality as their most frequent challenge.
+>
+> — [dbt Labs, State of Analytics Engineering, 2025](https://www.getdbt.com/resources/state-of-analytics-engineering-2025)
+
+This is where AI product development stalls. Teams blame the agent, but the problem is that the agent had no idea what was going on in the business.
+
+> 2/3 of data professionals admit they don't completely trust the data their AI is built on.
+>
+> — [Monte Carlo, State of Data Quality Survey, 2023](https://www.montecarlodata.com/blog-data-quality-survey)
+
+With 106 SaaS apps producing data, that final 1/3rd of people who do trust their data are unlikely to know if a pipeline breaks and they stop getting critical data. AI fills the gap with something reasonable-sounding and simply moves on. Trust isn't the same as correct.
+
+## Pipelines are the primary problem
+
+An agent can't see the full picture, so teams try to build it themselves. That means pipelines: extract data from each source, load it somewhere central, model it, then keep all of it in sync every time a schema changes upstream.
+
+> Over 80% of teams use AI to build pipelines, but overwhelmingly report generic AI tools aren't up to the task, citing hallucinations and missing context.
+>
+> — [Astronomer, State of Apache Airflow, 2026](https://www.astronomer.io/press-releases/astronomer-releases-state-of-apache-airflow-2026-report/)
+
+The industry's answer to having too many fragile pipelines is to build more of them, with AI. The same report admits the AI doing it hallucinates and misses the context it needs. That's fighting a fire with gasoline.
+
+Pipelines are the tax on data readiness. They cost time and money to maintain that you could spend building something new. And because the data tools on the market are mature but highly specialised, you end up needing six different tools to get the answers you want, plus the pipelines to move data between all of them.
+
+> 70% rate pipeline management as complex, and 64% of data teams spend more than half their time on repetitive tasks.
+>
+> — [Matillion, Data Integration & AI-Readiness Report, 2025](https://www.matillion.com/research-reports/data-integration-ai-readiness-report)
+
+That's most of a data team's week going on work that produces no new answers, only the continued ability to ask old ones.
+
+## How to close the context gap
+
+You need a way to stop building and babysitting pipelines so you can trust that your data is in one place, reachable by you and your agents. Which, coincidentally, is the definition of data readiness we started with.
+
+> Information is trapped in silos and data management is split across many different tools, causing teams to struggle to accelerate AI.
+>
+> — [Databricks, State of Data + AI](https://www.databricks.com/discover/state-of-data-ai)
+
+A [context warehouse](https://posthog.com/context-warehouse) wraps ingestion, modeling, storage, and querying in one tool instead of four you wire together with pipelines between them. Here's how that works in PostHog:
+
+- **Your product data is already there.** PostHog captures data from experiments, logs, errors (and more) as it happens, so there's no export to get it into a separate warehouse.
+- **External sources sync in.** Connect Stripe, HubSpot, Salesforce, Postgres, and the other 102 sources of data you have, and it lands in the same warehouse. The pipelines are maintained automatically.
+- **Everything runs on the same data.** Analytics, experiments, feature flags, the SQL editor, PostHog AI, and any agent you point at the [PostHog MCP](https://posthog.com/mcp) all read from one place. The [Semantic Layer](/blog/semantic-layer) holds fixed definitions so you know you can trust the answers to your questions.
+
+Once your product data and business context sit together and an agent can query both, it can do more than answer questions. It can spot the funnel drop, tie it to the revenue at risk, pull the affected cohort, and open a PR. That's [self-driving development](https://posthog.com/products), and it only works when the agent isn't reasoning from an incomplete picture.
+
+The context gap closes, and your product development kickstarts, not because you built a better pipeline, but because you stopped needing one.
+
+Your first data source is free to connect. So is your second. By the time you've connected your third, you'll forget that you ever had to build a pipeline, which is the whole point.
+
+{/* TODO: insert wizard prompt component to scan for warehouse sources */}
