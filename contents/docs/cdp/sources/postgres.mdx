@@ -356,7 +356,7 @@ PostHog-managed mode is the easiest path if the database user has enough privile
 
 When you disable a CDC table, PostHog removes it from the publication. Changes made while the table is disabled are permanently lost from the CDC stream, so re-enabling the table requires a full resync.
 
-When you delete the source, PostHog soft-deletes the warehouse tables and attempts to drop the PostHog-managed replication slot and publication. Cleanup is best-effort, so you should still verify the slot is gone if the source was failing or unreachable.
+When you delete the source, PostHog soft-deletes the warehouse tables and attempts to drop the replication slot and publication it manages. Cleanup is best-effort, so you should still verify the slot is gone if the source was failing or unreachable.
 
 ### Self-managed
 
