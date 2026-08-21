@@ -165,6 +165,9 @@ export default function TeamPage(props: TeamPageProps) {
         leadProfiles,
         teamImage,
         miniCrest,
+        // Private field — squeak-strapi only returns it to moderators, so it's undefined
+        // for everyone else and the input below stays hidden.
+        slackChannel,
     } = (team as any)?.attributes || {}
 
     const data = useStaticQuery(graphql`
@@ -327,6 +330,7 @@ export default function TeamPage(props: TeamPageProps) {
             teamLeads: team?.attributes?.leadProfiles?.data || [],
             miniCrest: miniCrest?.data ? { file: null, objectURL: miniCrest?.data?.attributes?.url } : undefined,
             spiritAnimal: team?.attributes?.spiritAnimal,
+            slackChannel: slackChannel ?? '',
         },
         onSubmit: async ({
             name,
@@ -340,6 +344,7 @@ export default function TeamPage(props: TeamPageProps) {
             teamLeads,
             miniCrest,
             spiritAnimal,
+            slackChannel: submittedSlackChannel,
             ...other
         }) => {
             const jwt = await getJwt()
@@ -387,6 +392,13 @@ export default function TeamPage(props: TeamPageProps) {
                 ...(teamMembers ? { profiles: teamMembers.map(({ id }: any) => ({ id })) } : {}),
                 ...(teamLeads ? { leadProfiles: teamLeads.map(({ id }: any) => ({ id })) } : {}),
                 ...(uploadedMiniCrestImage ? { miniCrest: uploadedMiniCrestImage.id } : {}),
+                // Only send slackChannel when it actually changed. It's a private field, so a
+                // non-moderator (or a moderator hitting a Strapi that predates the change that
+                // exposes it) reads it back as undefined -> ''. Sending that unconditionally
+                // would silently wipe a real channel on any unrelated team edit.
+                ...(submittedSlackChannel !== (slackChannel ?? '')
+                    ? { slackChannel: submittedSlackChannel.trim() || null }
+                    : {}),
             }
             if (!team) {
                 await createTeam(updatedTeam)
@@ -677,6 +689,31 @@ export default function TeamPage(props: TeamPageProps) {
             >
                 {/* <DebugContainerQuery />
                 <DebugContainerQuery name="reader-content" /> */}
+
+                {editing && isModerator && (
+                    <div className="not-prose mb-8">
+                        <Fieldset legend="Community question alerts">
+                            <label htmlFor="slackChannel" className="text-sm opacity-75 mb-1">
+                                New questions in this team's subscribed topics get posted to this Slack channel. Use the
+                                channel ID (in Slack: channel name → About → bottom of the panel), not the #name. Leave
+                                blank to stop notifications. Manage which topics this team subscribes to on{' '}
+                                <Link to="/community/alerts" state={{ newWindow: true }}>
+                                    /community/alerts
+                                </Link>
+                                .
+                            </label>
+                            <input
+                                id="slackChannel"
+                                name="slackChannel"
+                                value={values.slackChannel}
+                                onChange={handleChange}
+                                onBlur={handleBlur}
+                                placeholder="C0123ABCDEF"
+                                className="w-full max-w-xs p-2 text-[15px] rounded-md bg-white dark:bg-accent-dark border border-input"
+                            />
+                        </Fieldset>
+                    </div>
+                )}
 
                 <div className="not-prose grid @lg/reader-content:grid-cols-2 gap-8 mb-8">
                     {heightToHedgehogs > 0 && (
