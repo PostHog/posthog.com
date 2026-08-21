@@ -37,12 +37,12 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     'activity-view': {
         feature: 'Activity view',
         owner: ['product-analytics'],
-        label: false,
+        label: 'feature/events',
     },
     'agentic-provisioning': {
         feature: 'Agentic provisioning',
         owner: ['growth'],
-        label: false,
+        label: 'feature/agentic-provisioning',
     },
     'ai-gateway': {
         feature: 'AI gateway',
@@ -94,12 +94,11 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     'base-currency': {
         feature: 'Base currency',
         owner: ['web-analytics'],
-        label: false,
+        label: 'feature/currency',
     },
     'batch-exports': {
         feature: 'Batch exports',
         owner: ['batch-exports'],
-        label: false,
     },
     billing: {
         feature: 'Billing',
@@ -118,7 +117,6 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
                 symbolication/upload pipeline and symbol/sourcemap upload internals.
             </>
         ),
-        label: 'CLI',
     },
     'client-libraries': {
         feature: 'Client libraries',
@@ -148,7 +146,7 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     'currency-rate-dataset': {
         feature: 'Currency rate dataset',
         owner: ['web-analytics'],
-        label: false,
+        label: 'feature/currency-rate',
     },
     'customer-analytics': {
         feature: 'Customer Analytics',
@@ -161,7 +159,6 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     'dashboard-templates': {
         feature: 'Dashboard templates',
         owner: ['analytics-platform'],
-        label: false,
     },
     'data-colors-themes': {
         feature: 'Data colors & themes',
@@ -184,7 +181,7 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     'data-pipelines': {
         feature: 'Data pipelines',
         owner: ['workflows'],
-        label: 'feature/pipelines',
+        label: 'feature/pipeline',
     },
     'data-warehouse': {
         feature: 'Managed warehouse',
@@ -226,7 +223,6 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     'github-integration': {
         feature: 'GitHub integration',
         owner: ['self-driving'],
-        label: false,
     },
     'group-analytics': {
         feature: 'Group analytics',
@@ -235,7 +231,7 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     'health-alerts': {
         feature: 'Health alerts',
         owner: ['growth'],
-        label: false,
+        label: 'feature/health-alerts',
     },
     heatmaps: {
         feature: 'Heatmaps',
@@ -258,7 +254,7 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     integrations: {
         feature: 'Integrations',
         owner: ['workflows'],
-        label: false,
+        label: 'feature/integrations',
     },
     'internal-messaging': {
         feature: 'Internal messaging (email, notifications)',
@@ -278,7 +274,6 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     'managed-migrations': {
         feature: 'Managed migrations',
         owner: ['ingestion'],
-        label: false,
     },
     'marketing-analytics': {
         feature: 'Marketing analytics',
@@ -317,7 +312,7 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     oauth: {
         feature: 'OAuth',
         owner: ['platform-features', 'growth'],
-        label: false,
+        label: 'feature/oauth',
         notes: (
             <>
                 Growth owns all of the OAuth Applications + marketplace integrations around it. Platform features owns
@@ -332,7 +327,6 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     'organization-management-deletion': {
         feature: 'Organization Management & Deletion',
         owner: ['platform-features'],
-        label: false,
     },
     'path-cleaning': {
         feature: 'Path cleaning',
@@ -360,7 +354,7 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     'pipeline-destinations': {
         feature: 'Pipeline destinations',
         owner: ['workflows'],
-        label: 'feature/pipeline-destinations',
+        label: 'feature/cdp',
     },
     'pipeline-sources': {
         feature: 'Pipeline sources',
@@ -370,7 +364,7 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     platform: {
         feature: 'Platform (US + EU)',
         owner: ['infrastructure'],
-        label: false,
+        label: 'feature/platform',
     },
     'PostHog.com': {
         feature: 'PostHog.com',
@@ -410,12 +404,12 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     'property-filters': {
         feature: 'Property filters',
         owner: ['platform-ux'],
-        label: 'feature/property-filters',
+        label: 'feature/filters',
     },
     qaas: {
         feature: 'Queries as a Service',
         owner: ['data-tools'],
-        label: false,
+        label: 'feature/qaas',
     },
     'query-performance': {
         feature: 'Query performance',
@@ -439,7 +433,7 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     'reverse-proxy': {
         feature: 'Reverse proxy',
         owner: ['platform-features'],
-        label: false,
+        label: 'feature/reverse-proxy',
     },
     'revenue-analytics': {
         feature: 'Revenue analytics',
@@ -476,7 +470,6 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
         feature: 'Security',
         owner: ['security'],
         notes: <>It's every team's job to consider and react to security issues.</>,
-        label: 'security',
     },
     'self-hosting': {
         feature: 'Self-hosting',
@@ -491,17 +484,17 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     'session-analytics': {
         feature: 'Session analytics',
         owner: ['web-analytics'],
-        label: 'feature/session-analytics',
+        label: 'feature/sessions',
     },
     'session-explorer': {
         feature: 'Session explorer',
         owner: ['web-analytics'],
-        label: false,
+        label: 'feature/session-explorer',
     },
     'session-summaries': {
         feature: 'Session summaries',
         owner: ['replay'],
-        label: false,
+        label: 'feature/session-summaries',
     },
     signals: {
         feature: 'Inbox',
@@ -511,7 +504,7 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     signup: {
         feature: 'Signup',
         owner: ['growth'],
-        label: false,
+        label: 'feature/signup',
     },
     'slack-app': {
         feature: 'Slack app',
@@ -521,7 +514,7 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
                 <TeamMember name="Vojta Bartoš" /> is the point owner.
             </>
         ),
-        label: 'slack',
+        label: 'feature/slack-app',
     },
     settings: {
         feature: 'Settings structure (personal & project)',
@@ -558,7 +551,6 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     support: {
         feature: 'Support',
         owner: ['conversations'],
-        label: false,
     },
     surveys: {
         feature: 'Surveys',
@@ -571,7 +563,7 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     terraform: {
         feature: 'Terraform integration',
         owner: ['analytics-platform'],
-        label: false,
+        label: 'feature/terraform',
     },
     'taxonomic-filters': {
         feature: 'Taxonomic filters',
@@ -593,12 +585,11 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     'vscode-extension': {
         feature: 'VS Code extension',
         owner: ['growth'],
-        label: false,
+        label: 'feature/vscode-extension',
     },
     'web-analytics': {
         feature: 'Web analytics',
         owner: ['web-analytics'],
-        label: false,
     },
     'webhook-delivery': {
         feature: 'Webhook delivery service',
@@ -608,7 +599,6 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     'weekly-digest': {
         feature: 'Weekly digest',
         owner: ['growth'],
-        label: false,
     },
     workflows: {
         feature: 'Workflows',
@@ -618,7 +608,6 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     wizard: {
         feature: 'Wizard',
         owner: ['wizard-and-docs'],
-        label: false,
     },
 }
 
