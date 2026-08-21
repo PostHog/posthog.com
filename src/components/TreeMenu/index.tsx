@@ -625,6 +625,10 @@ function TreeMenuItem({
 }) {
     const [open, setOpen] = useState(() => Boolean(item.children) && isOpen(item, activeItem))
     const hasChildren = item.children && item.children.length > 0
+    // A row with both a `url` and children (e.g. "Model Context Protocol") must
+    // not navigate and expand from one click — that flashes the section open,
+    // then redirects. Expand only; the nested "Overview" child carries the link.
+    const collapseOnly = expandOnly || Boolean(hasChildren && item.url)
     const location = useLocation()
     const pathname = replacePath(location?.pathname)
 
@@ -650,7 +654,7 @@ function TreeMenuItem({
                             : 'hover:!bg-dark/10 dark:hover:!bg-light/10'
                     }`}
                     active={activeItem === item}
-                    {...(expandOnly ? {} : { to: item.url || item.children?.[0]?.url, asLink: true })}
+                    {...(collapseOnly ? {} : { to: item.url || item.children?.[0]?.url, asLink: true })}
                     onClick={() => onClick(item)}
                     size="md"
                     hover="background"
