@@ -11,15 +11,13 @@ seo:
   metaDescription: "We logged 30 million tool calls to our MCP server. Which agents call, what they ask for, which ones error least, and what it means if you're building one."
 ---
 
-*(in my best David Attenborough voice):* And here, in its natural habitat, we observe a new species of user emerging. It has no face and needs no mouse. It does not doomscroll or rage-click. Instead, the AI agent approaches quietly through an [MCP server](/docs/model-content-protocol), reaching into your product to forage for data on behalf of its human. 
+*(in my best David Attenborough voice):* And here, in its natural habitat, we observe a new species of user emerging. It has no face and needs no mouse, it does not doomscroll or rage-click. Instead, the AI agent approaches quietly through an [MCP server](/docs/model-content-protocol), reaching into the product to forage for data on behalf of its human. 
 
 We're not describing a particularly mature ecosystem, but rather one that's being born, in real time, on our doorsteps.  
 
-And so, like any responsible naturalists, we began observing them (by which we mean digging through our data to see what they're up to).
+And so, like any responsible naturalists, we began observing it (by which we mean digging through our data to see what these agents are up to).
 
 In the 90 days to August 19, agents made **30 million tool calls** to [PostHog's MCP](/mcp), coming from **100,000 people**.[^1]
-
-MCP traffic on our server went from **3.5 million** calls in June to **12.3 million** in July, and August is running higher still.
 
 ## Who's calling and where are they calling from? 
 
@@ -33,7 +31,7 @@ About **6%** of calls come from clients we can't place at all: homegrown scripts
 
 ![Where are they calling from](https://res.cloudinary.com/dmukukwp6/image/upload/mcp_02_not_a_chat_window_0d3560922a.png)
 
-It's also worth highlighting that the agent poking at your product almost certainly isn't in a chat window; it's in someone's code editor or terminal, running commands. **Barely one call in twenty comes from a chat window.**
+The agent poking at your product almost certainly isn't in a chat window; it's in someone's code editor or terminal, running commands. **Barely one call in twenty comes from a chat window.**
 
 ## What do agents actually want?
 
@@ -43,31 +41,29 @@ Between them, those two tools are more than a third of all traffic.
 
 ![What agents actually ask for](https://res.cloudinary.com/dmukukwp6/image/upload/mcp_04_what_agents_ask_for_fb318e2b4a.png)
 
-Everything else barely registers, which is a little tragic, because PostHog's MCP has hundreds of different tools. 
+Everything else barely registers, which is a little tragic, because [PostHog's MCP](/mcp) has hundreds of different tools. 
 
-Give an agent one a single prompt and it could spin up an A/B test, wait for the results, and ship the winning variant. It could open an error, read the stack trace, jump to the exact replay of the user who hit it, and patch the code. It could point an AI at a week of sessions and ask what confused everyone. I could go on.
+Give an agent one a single prompt and it could spin up an A/B test, wait for the results, and ship the winning variant. It could open an error, read the stack trace, jump to the exact replay of the user who hit it, and patch the code. It could point an AI at a week of sessions and ask questioms about it. I could go on.
 
 ![Iceberg](https://res.cloudinary.com/dmukukwp6/image/upload/mcp_03_iceberg_a636b1dd90.png)
 
-This is partly a note to self (we should advertise this stuff better) and partly free advice for anyone building an MCP: the good stuff needs to be discoverable, and discovery traffic will tell you whether it is.
+This is partly a note to self (we should advertise this stuff better) and partly advice for anyone building an MCP: the good stuff needs to be discoverable, and discovery traffic will tell you whether it is.
 
-If you want agents near the best parts of your product, you have to surface those tools legibly enough that a person remembers to point at them, and an agent can find them without being told. 
+If you want agents near the best parts of your product, you have to surface those tools legibly enough that a person remembers to point at them, but also so that an agent can find them without being told. 
 
 Otherwise the best thing you built stays underwater, and nobody knows it's there.
 
 ## Which agent is the most reliable?
 
-Before anyone fights me: this measures how carefully each client *forms its requests to our MCP*, not how smart the agent is. A chattier, more exploratory agent will "error" more simply because it pokes at more things. 
+Before anyone fights me: this measures how carefully each client forms its requests to our MCP, not how smart the agent is. A chattier, more exploratory agent will "error" more simply because it pokes at more things. 
 
-That said, **Codex is the standout.** A **1.4%** error rate: it trips about **once every 70 calls**. **Claude Code** sits at **5.7%** (about 1 in 18) and **Cowork** at **6.4%** (roughly 1 in 16).
+That said, **Codex is the standout**: it only trips about **once every 70 calls**. **Claude Code** sits at **5.7%** (about 1 in 18) and **Cowork** at **6.4%** (roughly 1 in 16).
 
 ![Error rates]https://res.cloudinary.com/dmukukwp6/image/upload/mcp_05_most_reliable_callers_ce2824ffb9.png
 
-The more interesting question, though, isn't who errors but what they get wrong. 
+The more interesting question, though, isn't who errors, but what they get wrong. 
 
 Agents almost never fail at finding data: reading the schema errors just **1.9%** of the time, about 1 in 53. It's the *querying* that trips them up. The actual SQL call fails **4.9%** of the time, more than two and a half times as often.
-
-When a call fails and the session carries on, the agent immediately retries the same tool about 65% of the time — and roughly three quarters of those retries succeed on the very next call.
 
 That said, agents are remarkably good at recovering from their own mistakes; when an agent hits an error and the session keeps going, 71% of the time its very next move is to call the exact same tool again, and **77% of those retries work.**
 
@@ -79,16 +75,23 @@ If your newest power user is a robot, you should probably know what it's doing; 
 
 So we launched a new analytics tool to help monitor MCP traffic. [It was born from one of our internal hackathons](/newsletter/hackathons), and was built to answer the questions we were asking ourselves.
 
-It's called [MCP analytics](/docs/mcp-analytics) (currently in beta!) and it shows you who's calling, what they're calling, what's erroring and what isn't, how many calls each agent is making, and which tools get hammered versus ignored.
-
-![MCP analytics](https://res.cloudinary.com/dmukukwp6/image/upload/pasted_image_2026_08_19_T19_14_15_496_Z_68955839bb.png)
+It's called [MCP analytics](/docs/mcp-analytics) (currently in beta!) and it shows you who's calling, what they're calling, what's erroring and what isn't, how many calls each agent is making, what did they want that you don't have, and more. 
 
 You can also step through any agent session tool call by tool call – the agent equivalent of a session replay – if you want to watch a robot think.
 
-And it doesn't just watch. Your tool calls can serve as a signal source for [Self-driving](/self-driving). A scout watches $mcp_tool_call telemetry for tools that need attention – high failure rates, agents retrying the same call, slow or bloated responses – weighs them by volume and reach, and files a report grouped by the team that owns the tools.
+![MCP analytics](https://res.cloudinary.com/dmukukwp6/image/upload/pasted_image_2026_08_19_T19_14_15_496_Z_68955839bb.png)
+
+Every number in this post came out of those views, pointed at our own server.
+
+There's also no separate system to learn. Every call lands as a single $mcp_tool_call event on your normal events table, so the purpose-built views are there if you want them – and if you'd rather write SQL, build a dashboard, or point product analytics at it like any other event, that works too.
+
+
+And it doesn't just watch. Your tool calls can serve as a signal source for [Self-driving](/self-driving). A scout watches $mcp_tool_call telemetry for tools that need attention – high failure rates, agents retrying the same call, slow or bloated responses – weighs them by volume and reach, and files a report. If it's a server you own, that report can hand off to a coding agent that opens a pull request. 
 
 **Want to see the agents using *your* product? [Explore MCP analytics →]/docs/mcp-analytics)**
 
+ (note to self: add the custom wizard component here )
+ 
 ---
 
 [^1]: About a third of this is us. [PostHog desktop](/desktop), [CLI](/docs/cli), [Slack app](/slack), and [Signals scouts](/docs/self-driving/signals) all reach the same MCP server as everybody else, and they are heavy users; 31% of every call, from about 10,000 people. The other 69% comes from roughly 97,000 people using their own agents. All figures are from PostHog's own MCP server (the `$mcp_tool_call` event), so read them as "what we see on one busy server," not a census of all MCP everywhere. Headline counts cover the 90 days to August 19, 2026. Client breakdowns use the last 14 days and PostHog's resolved harness label rather than the raw client name the SDK reports – that raw property only rides the session's `initialize` handshake, so grouping on it directly buckets most calls as unknown. Reliable client identification only landed in August 2026, which is why the client window is shorter than the headline window. Per-tool error rates use the last 30 days. Error rate reflects how a client forms requests, not the agent's underlying quality. We deliberately used only tool names, categories, client names, and counts, not the free-text "intent" agents send, so nothing here contains user data.
