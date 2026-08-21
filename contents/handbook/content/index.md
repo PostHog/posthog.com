@@ -29,7 +29,7 @@ Our latest goals can be found on the <SmallTeam slug="content" /> page. You can 
 
 ## Who is our audience?
 
-It should be the same as [who we are building for](/handbook/who-we-are-building-for). Specifically:
+It should be the same as [who we are building for](/handbook/who-we-build-for). Specifically:
 
 - **Product engineers:** Software engineers who want to improve their product skills, understand users, and build successful new products.
 

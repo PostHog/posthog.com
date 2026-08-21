@@ -58,13 +58,8 @@ const getQuestionPages = async (base) => {
 }
 
 module.exports = {
-    // Luma's API blocks browser CORS, so the events form fetches /api/luma-events.
-    // In production Vercel serves api/luma-events.js; mirror that route here so
-    // the form also works under `gatsby develop`. Dev server only — no effect on builds.
     developMiddleware: (app) => {
-        // Vercel serves these from api/*.js in production; mirror them here so the event
-        // form works under `gatsby develop`. Dev only — ignored by `gatsby build`.
-        ;['luma-events', 'notion-events'].forEach((route) => {
+        ;['luma-events', 'notion-events', 'posthog-desktop-pricing'].forEach((route) => {
             app.use(`/api/${route}`, async (req, res) => {
                 try {
                     await require(`./api/${route}`)(req, res)
@@ -196,10 +191,10 @@ module.exports = {
             },
         },
         {
-            resolve: `gatsby-source-strapi-pages`,
+            resolve: `gatsby-source-git-metadata`,
             options: {
-                strapiURL: process.env.STRAPI_URL,
-                strapiKey: process.env.STRAPI_API_KEY,
+                owner: 'PostHog',
+                repo: 'posthog.com',
             },
         },
         `gatsby-plugin-image`,
@@ -238,11 +233,16 @@ module.exports = {
                     return site.siteMetadata.siteUrl
                 },
                 resolvePages: async ({ allSitePage: { nodes: allPages }, site }) => {
-                    const transformedPages = allPages.map(({ path }) => {
-                        return {
-                            path: `${site.siteMetadata.siteUrl}${path}`,
-                        }
-                    })
+                    // Versioned SDK reference pages age out of the build, so keep them out of the sitemap.
+                    const VERSIONED_SDK_REFERENCE = /^\/docs\/references\/[a-z0-9-]+-(\d|latest)/
+
+                    const transformedPages = allPages
+                        .filter(({ path }) => !VERSIONED_SDK_REFERENCE.test(path))
+                        .map(({ path }) => {
+                            return {
+                                path: `${site.siteMetadata.siteUrl}${path}`,
+                            }
+                        })
 
                     let plugins = []
                     try {

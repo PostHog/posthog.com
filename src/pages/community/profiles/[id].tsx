@@ -50,7 +50,7 @@ import { useToast } from '../../../context/Toast'
 import HeaderBar from 'components/OSChrome/HeaderBar'
 import LevelBadge from 'components/Squeak/components/LevelBadge'
 import OSButton from 'components/OSButton'
-import { IconNoEntry, IconStrapi } from 'components/OSIcons'
+import { IconDiscord, IconNoEntry, IconStrapi } from 'components/OSIcons'
 import Points from 'components/Points'
 import ConnectedAccounts from 'components/Squeak/components/ConnectedAccounts'
 import { useWindow } from '../../../context/Window'
@@ -162,6 +162,7 @@ const Links = ({
                         error={errors.github}
                         label="GitHub"
                         name="github"
+                        placeholder="https://github.com/{username}"
                         value={formValues.github}
                         onChange={(e) => setFieldValue('github', e.target.value)}
                     />
@@ -188,6 +189,7 @@ const Links = ({
                         error={errors.twitter}
                         label="X"
                         name="twitter"
+                        placeholder="https://x.com/{username}"
                         value={formValues.twitter}
                         onChange={(e) => setFieldValue('twitter', e.target.value)}
                     />
@@ -214,6 +216,7 @@ const Links = ({
                         error={errors.linkedin}
                         label="LinkedIn"
                         name="linkedin"
+                        placeholder="https://linkedin.com/in/{username}"
                         value={formValues.linkedin}
                         onChange={(e) => setFieldValue('linkedin', e.target.value)}
                     />
@@ -260,6 +263,39 @@ const Links = ({
                     </li>
                 )
             )}
+            {isEditing ? (
+                <li>
+                    <Input
+                        error={errors.discord}
+                        label="Discord"
+                        name="discord"
+                        placeholder="https://discord.com/users/{id}"
+                        value={formValues.discord}
+                        onChange={(e) => setFieldValue('discord', e.target.value)}
+                        tooltip={
+                            <p className="max-w-72 text-sm m-0 leading-normal">
+                                To get your ID, enable <strong>Developer Mode</strong> in Discord's advanced settings,
+                                then right-click your name and choose <strong>Copy User ID</strong>.
+                            </p>
+                        }
+                    />
+                </li>
+            ) : (
+                profile.discord && (
+                    <li>
+                        <Tooltip
+                            delay={0}
+                            trigger={
+                                <Link to={profile.discord} externalNoIcon>
+                                    <IconDiscord className="w-6 h-6 opacity-80 hover:opacity-100 transition-opacity" />
+                                </Link>
+                            }
+                        >
+                            {stripUrlPrefix(profile.discord)}
+                        </Tooltip>
+                    </li>
+                )
+            )}
         </ul>
     )
 }
@@ -272,6 +308,7 @@ const Input = ({
     error,
     dataScheme,
     tooltip,
+    placeholder,
 }: {
     label: string
     name: string
@@ -280,6 +317,7 @@ const Input = ({
     error?: string
     tooltip?: string | React.ReactNode
     dataScheme?: 'primary' | 'secondary' | 'tertiary'
+    placeholder?: string
 }) => {
     return (
         <OSInput
@@ -287,7 +325,7 @@ const Input = ({
             name={name}
             value={value}
             onChange={onChange}
-            placeholder={label}
+            placeholder={placeholder ?? label}
             direction="column"
             error={error}
             touched={!!error}
@@ -1104,6 +1142,7 @@ const ValidationSchema = Yup.object().shape({
     github: Yup.string().url('Invalid URL').nullable(),
     linkedin: Yup.string().url('Invalid URL').nullable(),
     twitter: Yup.string().url('Invalid URL').nullable(),
+    discord: Yup.string().url('Invalid URL').nullable(),
     biography: Yup.string().max(3000, 'Please limit your bio to 3,000 characters, you wordsmith!').nullable(),
     country: Yup.string().nullable(),
     location: Yup.string().nullable(),
@@ -1307,6 +1346,7 @@ export default function ProfilePage({ params }: PageProps) {
             twitter: profile?.twitter,
             linkedin: profile?.linkedin,
             github: profile?.github,
+            discord: profile?.discord,
             avatar: getAvatarURL(profile),
             firstName: profile?.firstName,
             lastName: profile?.lastName,

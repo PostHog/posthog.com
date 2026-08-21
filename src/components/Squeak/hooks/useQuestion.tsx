@@ -6,6 +6,7 @@ import usePostHog from 'hooks/usePostHog'
 
 type UseQuestionOptions = {
     data?: StrapiRecord<QuestionData>
+    onResolve?: () => void
 }
 
 const query = (id: string | number, isModerator: boolean) =>
@@ -418,7 +419,8 @@ export const useQuestion = (id: number | string, options?: UseQuestionOptions) =
 
             await replyRes.json()
 
-            mutate()
+            await mutate()
+            options?.onResolve?.()
 
             posthog?.capture('squeak resolve', {
                 questionId: questionID,
@@ -593,23 +595,6 @@ export const useQuestion = (id: number | string, options?: UseQuestionOptions) =
         }
     }
 
-    const escalate = async (message?: string) => {
-        const body = JSON.stringify({
-            id: questionID,
-            message,
-        })
-        await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/escalate`, {
-            method: 'POST',
-            body,
-            headers: {
-                'Content-Type': 'application/json',
-                Authorization: `Bearer ${await getJwt()}`,
-            },
-        })
-
-        mutate()
-    }
-
     const pinTopics = async (topicIDs: number[]) => {
         if (!topicIDs) return
         const body = JSON.stringify({
@@ -644,7 +629,6 @@ export const useQuestion = (id: number | string, options?: UseQuestionOptions) =
         removeTopic,
         archive,
         pinTopics,
-        escalate,
         mutate,
     }
 }

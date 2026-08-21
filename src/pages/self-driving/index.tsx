@@ -7,6 +7,7 @@ import { CallToAction } from 'components/CallToAction'
 import TabbedCarousel from 'components/TabbedCarousel'
 import type { TabbedCarouselTab } from 'components/TabbedCarousel'
 import Link from 'components/Link'
+import WistiaEmbed from 'components/WistiaEmbed'
 import { WINDOW_BG } from '../../constants/frostedSurfaces'
 import useProduct from 'hooks/useProduct'
 import { useApp } from '../../context/App'
@@ -861,7 +862,7 @@ export default function SelfDrivingPage({
                                     PostHog instruments your codebase, then combines that context with product data like
                                     analytics events, errors, and recordings to understand problems and propose fixes.
                                 </p>
-                                <GetStarted selfDriving />
+                                <GetStarted selfDriving demoTo="/self-driving#see-how-it-works" demoNewWindow={false} />
                             </div>
 
                             <div className="relative overflow-hidden rounded-md border border-primary bg-primary shadow-2xl">
@@ -990,6 +991,14 @@ export default function SelfDrivingPage({
                                 <SelfDrivingTicker prs={selfDrivingPRs} />
                             </div>
                         )}
+
+                        {/* See how it works */}
+                        <h3 id="see-how-it-works" className={sectionHeadingClassName}>
+                            See how it works
+                        </h3>
+                        <div className="not-prose mt-8 mb-12 overflow-hidden rounded-md shadow-2xl">
+                            <WistiaEmbed mediaId="w7ia81gh5x" />
+                        </div>
 
                         {/* Works in your workflow */}
                         <h3 className={sectionHeadingClassName}>Works in your workflow</h3>
