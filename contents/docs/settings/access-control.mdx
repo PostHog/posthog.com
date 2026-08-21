@@ -39,7 +39,7 @@ The three access levels are: Member, Admin, and Owner. An organization must have
 | Permission                                                                   | Member (base level)                           | Admin                                         | Owner                                         |
 | ---------------------------------------------------------------------------- | --------------------------------------------- | --------------------------------------------- | --------------------------------------------- |
 | Viewing and querying project data                                            | <span className="text-green text-lg">✔</span> | <span className="text-green text-lg">✔</span> | <span className="text-green text-lg">✔</span> |
-| Accessing billing management                                                 | <span className="text-red text-lg">✖</span>   | <span className="text-green text-lg">✔</span> | <span className="text-green text-lg">✔</span> |
+| Accessing billing management\*\*                                             | <span className="text-red text-lg">✖</span>   | <span className="text-green text-lg">✔</span> | <span className="text-green text-lg">✔</span> |
 | Managing reverse proxies                                                     | <span className="text-red text-lg">✖</span>   | <span className="text-green text-lg">✔</span> | <span className="text-green text-lg">✔</span> |
 | Creating and deleting projects                                               | <span className="text-red text-lg">✖</span>   | <span className="text-green text-lg">✔</span> | <span className="text-green text-lg">✔</span> |
 | Managing project access controls (see more below)                            | <span className="text-red text-lg">✖</span>   | <span className="text-green text-lg">✔</span> | <span className="text-green text-lg">✔</span> |
@@ -53,6 +53,8 @@ The three access levels are: Member, Admin, and Owner. An organization must have
 | Deleting an organization                                                     | <span className="text-red text-lg">✖</span>   | <span className="text-red text-lg">✖</span>   | <span className="text-green text-lg">✔</span> |
 
 \*This permission is configurable and can be disabled for members by organization admins and owners.
+
+\*\*We can give members read-only access to the **Usage** and **Spend** tabs, without the rest of billing. [Contact support](/questions) to set this up for your organization.
 
 Access levels can be viewed and changed in the [Members section](https://app.posthog.com/settings/organization-members) of organization settings.
 
