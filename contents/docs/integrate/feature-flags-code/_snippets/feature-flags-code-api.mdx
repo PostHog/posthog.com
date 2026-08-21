@@ -287,17 +287,17 @@ Evaluation runtime (server vs. client) is automatically detected based on your r
 
 **How runtime is detected:**
 
-1. **User-Agent patterns** - The system analyzes the User-Agent header:
+1. **User-Agent patterns** – The system analyzes the User-Agent header:
    - **Client-side patterns**: `Mozilla/`, `Chrome/`, `Safari/`, `Firefox/`, `Edge/` (browsers), or mobile SDKs like `posthog-android/`, `posthog-ios/`, `posthog-react-native/`, `posthog-flutter/`
    - **Server-side patterns**: `posthog-python/`, `posthog-ruby/`, `posthog-php/`, `posthog-java/`, `posthog-go/`, `posthog-node/`, `posthog-dotnet/`, `posthog-elixir/`, `python-requests/`, `curl/`
 
-2. **Browser-specific headers** - Presence of these headers indicates client-side:
+2. **Browser-specific headers** – Presence of these headers indicates client-side:
    - `Origin` header
    - `Referer` header  
    - `Sec-Fetch-Mode` header
    - `Sec-Fetch-Site` header
 
-3. **Default behavior** - If runtime can't be determined, the system includes flags with no runtime requirement and those set to "all"
+3. **Default behavior** – If runtime can't be determined, the system includes flags with no runtime requirement and those set to "all"
 
 **Examples of runtime detection:**
 
