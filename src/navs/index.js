@@ -7038,6 +7038,16 @@ export const docsMenu = {
                     featured: true,
                 },
                 {
+                    name: 'Large events',
+                    url: '/docs/ai-observability/large-events',
+                    icon: 'IconSend',
+                    color: 'teal',
+                    badge: {
+                        title: 'Beta',
+                        className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
+                    },
+                },
+                {
                     name: 'Evaluations',
                     url: '/docs/ai-evals',
                     icon: 'IconTarget',
