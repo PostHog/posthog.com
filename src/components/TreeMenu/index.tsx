@@ -659,7 +659,9 @@ function TreeMenuItem({
                     }`}
                     active={activeItem === item}
                     {...(collapseOnly ? {} : { to: item.url || item.children?.[0]?.url, asLink: true })}
-                    onClick={() => onClick(item)}
+                    // A collapse-only row only toggles — it must not steal the active highlight
+                    // from the page the user is on, so skip the activeItem update for it.
+                    onClick={() => !collapseOnly && onClick(item)}
                     size="md"
                     hover="background"
                 >
