@@ -969,6 +969,12 @@ export const SparksJoyItems = {
             iconName: 'games' as AppIconName,
             customIcon: null,
         },
+        {
+            label: 'CardHog',
+            link: '/sparks-joy/cardhog',
+            iconName: 'games' as AppIconName,
+            customIcon: null,
+        },
     ],
     notGames: [
         {
