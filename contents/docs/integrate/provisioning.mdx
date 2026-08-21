@@ -75,28 +75,85 @@ Create a JSON file at a stable HTTPS URL, for example `https://yourapp.com/.well
   "logo_uri": "https://yourapp.com/logo.png",
   "token_endpoint_auth_method": "none",
   "grant_types": ["authorization_code"],
-  "response_types": ["code"]
+  "response_types": ["code"],
+  "com.posthog": {
+    "provisioning": true
+  }
 }
 ```
 
 Requirements:
 
 - **`client_id`** must exactly match the URL where this document is hosted.
+- **`com.posthog.provisioning`** must be `true` to use the provisioning API. Your `client_id` is a public URL, so a request that names it proves nothing about who sent it. Declaring the opt-in in the document, which only you can publish, is what grants your app provisioning access. It must be the JSON literal `true`, not the string `"true"`.
 - **`redirect_uris`** is required and must contain at least one HTTPS URI. This is where PostHog redirects existing users during the consent flow.
 - **`logo_uri`** (optional) must be HTTPS if provided.
-- **`token_endpoint_auth_method`** must be `"none"` (CIMD clients are public clients, no client secret).
+- **`token_endpoint_auth_method`** must be `"none"` (a public client, no client secret) or `"private_key_jwt"` with an HTTPS `jwks_uri`. With `private_key_jwt`, your app authenticates by signing an assertion with your own key, which also raises your [rate limits](#rate-limits).
 - The document must be served with `Content-Type: application/json` and be under 5 KB.
 - The URL must use HTTPS, include a path component, and must not contain query parameters or fragments.
 
 PostHog fetches and caches this document automatically.
 Subsequent requests reuse the cached version and refresh it in the background based on your `Cache-Control: max-age` header (clamped between 5 minutes and 24 hours, default 1 hour).
 
-Once your metadata document is live, you can start calling the API. The first request auto-registers your app and returns HTTP 202; retry after a few seconds.
+### Register your app
+
+Once your metadata document is live, register it. PostHog fetches the document, validates it, and turns on provisioning access if it declares `com.posthog.provisioning`.
+
+This call is not authenticated, because an app that hasn't registered yet has no credential to present. That's why the opt-in lives in your document rather than in this request.
+
+```bash
+curl -X POST https://us.posthog.com/api/agentic/provisioning/client_registration \
+  -H "Content-Type: application/json" \
+  -H "API-Version: 0.1d" \
+  -d '{"client_id": "https://yourapp.com/.well-known/posthog-client.json"}'
+```
+
+**Response** (HTTP 200):
+
+```json
+{
+  "client_id": "https://yourapp.com/.well-known/posthog-client.json",
+  "registered": true,
+  "client_type": "public",
+  "token_endpoint_auth_method": "none",
+  "jwks_uri": null,
+  "scopes": ["insight:read", "project:read"],
+  "provisioning": {
+    "active": true,
+    "can_create_accounts": true,
+    "can_provision_resources": true
+  },
+  "capabilities": {
+    "account_requests": true,
+    "github_grants": false,
+    "wizard_runs": false
+  },
+  "checks": [
+    { "name": "metadata_document", "ok": true, "detail": "Fetched and validated" },
+    { "name": "provisioning_enabled", "ok": true, "detail": "Active" },
+    {
+      "name": "jwks",
+      "ok": true,
+      "detail": "No jwks_uri, so this client authenticates with PKCE only and cannot use the GitHub grant endpoints"
+    }
+  ]
+}
+```
+
+`scopes` is your [scope ceiling](#declare-oauth-scopes-for-your-app-optional): the scopes you declared, or every scope a user can grant if you declared none. `capabilities` says which endpoints you can call, including the ones PostHog has to enable for you.
+
+Each check is reported separately, so a setup problem names its own cause instead of arriving as a bare 401 later. If registration fails, you get HTTP 400 with `"registered": false`, the same `checks` array, and an `error` object whose message is the first failed check.
+
+Call this endpoint again whenever you want to re-check your setup. It re-fetches your document and re-reports every check. Registering again never reactivates an app PostHog has deactivated.
+
+You can also verify a signed assertion end to end by sending `client_assertion` and `client_assertion_type`, which is worth doing once before you depend on `private_key_jwt`. Verifying consumes the assertion's `jti`, so mint a fresh one for the check rather than reusing it afterwards.
+
+Until your app is registered, the other endpoints return HTTP 401 with a message pointing back here.
 
 ### Link your partner app to a PostHog organization (optional)
 
-By default, a CIMD partner app is unverified and capped at 10 account requests per hour.
-You can link the app to a PostHog organization with a verification token to raise that to 100/hour and surface the partner integration to that org's admins.
+By default, a CIMD partner app is unverified.
+You can link the app to a PostHog organization with a verification token, which raises your [rate limits](#rate-limits) and surfaces the partner integration to that org's admins.
 
 1. In PostHog, go to **Organization settings → CIMD verification tokens** and click **Create token**. Copy the `phvt_…` value – it's only shown once.
 2. Add the token inside a `com.posthog` namespace in your CIMD metadata document:
@@ -111,12 +168,13 @@ You can link the app to a PostHog organization with a verification token to rais
      "grant_types": ["authorization_code"],
      "response_types": ["code"],
      "com.posthog": {
+       "provisioning": true,
        "verification_token": "phvt_..."
      }
    }
    ```
 
-3. The next time PostHog refreshes the metadata document, the app is linked to the matching organization and the rate limit is bumped.
+3. The next time PostHog refreshes the metadata document, the app is linked to the matching organization and your rate limits go up.
 
 The token is only used to prove ownership of the partner app – it isn't sent on API requests.
 You can rotate or revoke a token at any time from the same settings page.
@@ -137,6 +195,7 @@ You can declare which OAuth scopes your partner app needs by adding a `scopes` f
   "grant_types": ["authorization_code"],
   "response_types": ["code"],
   "com.posthog": {
+    "provisioning": true,
     "verification_token": "phvt_...",
     "scopes": ["insight:read", "project:read", "person:read"]
   }
@@ -148,6 +207,22 @@ Only scopes a user can grant on the consent screen are accepted – see [availab
 If `com.posthog.scopes` is omitted, your app can request any scope a user can grant. When present, the declared scopes are applied on both initial registration and every subsequent metadata refresh. A scope ceiling is a cap, not a grant – each scope still requires user consent at the authorization step.
 
 CIMD app scopes are managed via the metadata document and are read-only in the PostHog admin UI.
+
+#### Scopes a user can decline
+
+Everything in `scopes` is required, and the user sees it locked on the consent screen. If part of what you ask for is for a feature they may not want, put those scopes in `optional_scopes` instead. Those appear as declinable, and the user can approve the rest without them.
+
+```json
+"com.posthog": {
+  "provisioning": true,
+  "scopes": ["insight:read", "project:read"],
+  "optional_scopes": ["session_recording:read"]
+}
+```
+
+Your ceiling is both lists together, so a token can carry anything in either one, and never anything outside them. Check the scopes on the token you get back before using a feature that depends on a declinable scope, because the user may have said no to it.
+
+`optional_scopes` needs a non-empty `scopes` alongside it: an app offering extras has to declare the base they sit on top of. Both lists are filtered the same way, so an unrecognized or internal scope is dropped from either. Unlike `scopes`, an `optional_scopes` list that ends up empty is fine, and just means you offer no declinable extras.
 
 ## API reference
 
@@ -398,6 +473,8 @@ The returned `url` is valid for 10 minutes and can only be opened once, so don't
 
 This endpoint is gated on the `provisioning_can_issue_deep_links` flag on your partner record, which is only enabled for partners admin-onboarded by PostHog. If you get a `deep_links_not_enabled` 403, ask PostHog to enable it for your CIMD app.
 
+Deep links also require `private_key_jwt` client authentication. A public client, identified only by a client_id anyone can send, has no deep-link budget because a deep link mints a full PostHog session.
+
 ### Rotate project credentials
 
 Rotate the project token for an existing provisioned project:
@@ -506,32 +583,97 @@ Common error codes:
 |---|---|---|
 | `invalid_request` | 400 | Missing or invalid field |
 | `unauthorized` | 401 | Authentication failed |
+| `registration_failed` | 400 | [Registration](#register-your-app) did not complete. The `checks` array in the same response says which step failed |
 | `forbidden` | 403 | Partner not authorized for this action |
 | `expired` | 400 | Account request has expired |
 | `invalid_grant` | 400 | Authorization code is invalid or expired (token endpoint) |
 | `invalid_label_prefix` | 400 | `label_prefix` is not a string, is longer than 25 characters after trimming, or contains control or Unicode format characters |
 | `invalid_path` | 400 | Deep-link `path` is not a relative, same-origin in-app path beginning with a single `/` |
 | `invalid_scope` | 400 | Unrecognized scope requested |
-| `rate_limited` | 429 | Rate limit exceeded |
+| `rate_limited` | 429 | Rate limit exceeded. The `Retry-After` header says how many seconds to wait. See [rate limits](#rate-limits). |
 | `account_creation_failed` | 500 | Server error during account creation |
 
 ## Rate limits
 
-All provisioning endpoints are rate limited.
+Every provisioning endpoint has a per-partner budget: a burst you can spend at once, refilling continuously at an hourly rate. There is no fixed window, so you never wait for the top of the hour. When you run out, the response is a 429 with a `Retry-After` header saying exactly how many seconds until your next request can succeed.
 
-**CIMD registration** (first request from a new `client_id`):
+Requests that fail validation (4xx errors like `invalid_request`) are refunded, so debugging an integration doesn't spend your budget.
 
-- 5 requests per minute per IP (burst)
-- 10 requests per hour per IP (sustained)
+### Your tier
+
+Budgets scale with how strongly your app identifies itself, on two axes:
+
+| Client authentication | Not linked to an org | Linked via a [verification token](#link-your-partner-app-to-a-posthog-organization-optional) |
+| --- | --- | --- |
+| `none` (public, PKCE) | 1x | 2x |
+| `private_key_jwt` | 5x | 10x |
+
+Both upgrades are self-serve and take effect on your next request: declare `private_key_jwt` with a `jwks_uri` in your metadata document, or add a verification token. Nothing to wait for and nobody to ask.
+
+### Budgets
+
+At the 1x tier:
+
+| Endpoints | Burst | Refill |
+| --- | --- | --- |
+| Account requests | 5 | 10/hour |
+| Project provisioning (`/resources`) | 10 | 30/hour |
+| Everything else (token exchange, token refresh, reads, credential rotation, deep links) | 30 | 120/hour |
+
+So account requests, the tightest budget, run at 10/20/50/100 per hour across the four tiers. Token refreshes have their own budget, separate from token exchanges, so keeping many users' tokens alive never competes with onboarding new ones.
+
+Limits are per region: US and EU count separately.
+
+**[Registration](#register-your-app)** is limited separately, because it fetches your document while you wait:
+
+- 30 registration calls per hour per `client_id`
+- 120 registration calls per hour per IP
+- 5 requests per minute per IP, and 10 per hour per IP, for a `client_id` PostHog has never seen
 - 100 new client registrations per hour globally
 - 5 new client registrations per domain per hour
 
-**Account requests** (per partner, per hour):
+If the top tier still isn't enough for production use, open a [support request](https://us.posthog.com/#panel=support%3Asupport%3Alogin%3A%3Atrue) in the app, choosing **Authentication** as the topic. PostHog can set per-endpoint overrides for your app.
 
-- 10/hour for unverified CIMD partners
-- 100/hour for partners linked to a PostHog organization via a [verification token](#link-your-partner-app-to-a-posthog-organization-optional)
+### Check your limits
 
-Open a [support request](https://us.posthog.com/#panel=support%3Asupport%3Alogin%3A%3Atrue) in the app, choosing **Authentication** as the topic, if you need a higher limit for production use.
+Every response that counted against a budget includes `RateLimit-Limit`, `RateLimit-Remaining`, and `RateLimit-Reset` headers, so you can pace requests instead of reacting to 429s.
+
+To see everything at once, call the limits endpoint. It returns your tier, why you have it, and every endpoint's budget with current headroom.
+
+The endpoint is `POST` only, and you have to prove the request is yours. Send an access token, or authenticate as your client the same way you do at the token endpoint:
+
+```bash
+# With an access token. Public clients use this after their first token exchange.
+curl -X POST https://us.posthog.com/api/agentic/provisioning/limits \
+  -H "Authorization: Bearer pha_abc123..."
+
+# Or as a private_key_jwt client, with the signed assertion in the form body
+curl -X POST https://us.posthog.com/api/agentic/provisioning/limits \
+  -d "client_id=https://yourapp.com/.well-known/posthog-client.json" \
+  -d "client_assertion_type=urn:ietf:params:oauth:client-assertion-type:jwt-bearer" \
+  -d "client_assertion=eyJhbGci..."
+```
+
+A `client_id` on its own is not enough. Your `client_id` is published, so accepting it here would let anyone read your limits and spend your budget for this endpoint. Requests that only carry a `client_id` get a 401.
+
+**Response:**
+
+```json
+{
+  "tier": "public_attested",
+  "tier_basis": {
+    "client_authentication": "none",
+    "attested": true
+  },
+  "endpoints": {
+    "account_requests": { "per_hour": 20, "burst": 10, "remaining": 9, "reset": 180 },
+    "token_exchanges": { "per_hour": 40, "burst": 20, "remaining": 20, "reset": 0 },
+    "deep_links": { "blocked": true }
+  }
+}
+```
+
+`remaining` is whole tokens available now, and `reset` is seconds until the budget is full again. A `blocked` endpoint is unavailable at your tier; an `unlimited` one has a PostHog-set override.
 
 ## Full example
 

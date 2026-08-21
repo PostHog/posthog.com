@@ -39,6 +39,7 @@ import PhantomLogo from '../components/CustomerLogos/PhantomLogo'
 import PryLogo from '../components/CustomerLogos/PryLogo'
 import PurpleWaveLogo from '../components/CustomerLogos/PurpleWaveLogo'
 import QredLogo from '../components/CustomerLogos/QredLogo'
+import RailwayLogo from '../components/CustomerLogos/RailwayLogo'
 import RaycastLogo from '../components/CustomerLogos/RaycastLogo'
 import RayfitLogoDark from '../images/customers/rayfitLogodark.png'
 import RayfitLogoLight from '../images/customers/rayfitLogolight.png'
@@ -849,6 +850,15 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
         },
         featured: false,
         height: 6,
+    },
+    railway: {
+        name: 'Railway',
+        toolsUsed: [],
+        industries: ['Devtool'],
+        notes: 'Cloud infrastructure platform',
+        logo: RailwayLogo,
+        featured: true,
+        height: 8,
     },
     rebtel: {
         name: 'Rebtel',

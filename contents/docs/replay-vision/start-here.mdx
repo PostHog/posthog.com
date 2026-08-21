@@ -3,10 +3,23 @@ title: Getting started with Replay Vision
 ---
 
 import { ProductScreenshot } from "components/ProductScreenshot";
+import WizardCommand from 'components/WizardCommand'
 
 This walkthrough takes you from zero to your first observation in about five minutes. We'll create a scanner from a built-in template, run it on a recording you pick, and then query the result as a regular PostHog event.
 
 You should already have [Session Replay](/docs/session-replay) recording sessions for your project. Replay Vision watches those recordings – without them there's nothing to scan.
+
+## AI wizard
+
+The fastest way to get set up is our wizard. Run it in your project directory and it reads your codebase, installs the PostHog SDK if you don't have it yet, and creates three scanners written for your product: one that watches your key flow for breakage, one that watches for user frustration, and one that summarizes sessions. It also works for [LLM coding agents](/blog/envoy-wizard-llm-agent) like Cursor and Bolt:
+
+<WizardCommand command="replay-vision" />
+
+The wizard sets up the client side of recording, but it doesn't flip the **Record user sessions** toggle in your project settings. Turn that on yourself if it isn't already, otherwise there are no recordings for the scanners to watch.
+
+The scanners it creates are ordinary scanners. You can edit the prompt, filters, and sampling rate afterwards, or delete them and start over.
+
+Prefer to create your first scanner by hand, or want to understand each piece? Follow the steps below.
 
 ## 1. Open Replay Vision and pick a template
 
