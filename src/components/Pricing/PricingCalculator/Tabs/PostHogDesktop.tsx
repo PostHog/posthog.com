@@ -8,11 +8,11 @@ import { LogSlider, inverseCurve, sliderCurve } from 'components/Pricing/Pricing
 import { formatUSD } from 'components/Pricing/PricingSlider/pricingSliderLogic'
 import { calculatePrice } from 'components/Pricing/PricingCalculator/calculatorLogic'
 import {
+    BILLABLE_CPU_CORES,
+    BILLABLE_MEMORY_GIB,
     ComputeRateCard,
     PUBLISHED_COMPUTE_RATE_CARD,
     PUBLISHED_RATES_DATE,
-    SANDBOX_CPU_CORES,
-    SANDBOX_MEMORY_GIB,
     hourlyComputeUsd,
 } from 'lib/posthogDesktopCompute'
 
@@ -66,40 +66,55 @@ const Row = ({
     suffix: string
     value: number
     onChange: (value: number) => void
-    slider: { min: number; max: number; marks: number[] }
+    slider: { min: number; max: number; marks: number[]; scaleMin?: number }
     cost: number
     note: React.ReactNode
-}): JSX.Element => (
-    <div className="grid grid-cols-8 mb-6">
-        <div className="col-span-6">
-            <p className="mb-2 text-sm font-semibold">{label}</p>
-            <p className="mb-2">
-                <NumericFormat
-                    inputClassName="bg-transparent text-center focus:ring-0 focus:border-red dark:focus:border-yellow focus:bg-white dark:focus:bg-accent-dark font-code max-w-[103px] text-sm border border-light hover:border-button dark:border-dark rounded-sm py-1 px-0 min-w-[25px] px-1"
-                    value={value}
-                    thousandSeparator=","
-                    onValueChange={({ floatValue }) => onChange(floatValue || 0)}
-                    customInput={AutosizeInput}
-                />{' '}
-                <span className="opacity-70 text-sm">{suffix}</span>
-            </p>
+}): JSX.Element => {
+    /*
+     * A log scale can't place 0 (log(0) is -Infinity), so a row whose real floor is zero runs its
+     * track from `scaleMin` and snaps anything landing at or below it back to 0. `LogSlider`
+     * already supports this — it labels that bottom mark "0" — and Logs and the standalone
+     * add-ons tab use the same `min: 0` / `scaleMin: 1` pairing.
+     */
+    const scaleMin = slider.scaleMin ?? Math.max(slider.min, 1)
+    const fromSlider = (next: number): number => {
+        const rounded = Math.round(sliderCurve(next))
+        return slider.min === 0 && rounded <= scaleMin ? 0 : Math.max(rounded, slider.min)
+    }
+
+    return (
+        <div className="grid grid-cols-8 mb-6">
+            <div className="col-span-6">
+                <p className="mb-2 text-sm font-semibold">{label}</p>
+                <p className="mb-2">
+                    <NumericFormat
+                        inputClassName="bg-transparent text-center focus:ring-0 focus:border-red dark:focus:border-yellow focus:bg-white dark:focus:bg-accent-dark font-code max-w-[103px] text-sm border border-light hover:border-button dark:border-dark rounded-sm py-1 px-0 min-w-[25px] px-1"
+                        value={value}
+                        thousandSeparator=","
+                        onValueChange={({ floatValue }) => onChange(floatValue || 0)}
+                        customInput={AutosizeInput}
+                    />{' '}
+                    <span className="opacity-70 text-sm">{suffix}</span>
+                </p>
+            </div>
+            <div className="col-span-2 text-right pr-3">
+                <p className="font-semibold mb-0">{formatUSD(cost)}</p>
+            </div>
+            <div className="col-span-full pr-1.5">
+                <LogSlider
+                    stepsInRange={100}
+                    marks={slider.marks}
+                    min={slider.min}
+                    max={slider.max}
+                    scaleMin={scaleMin}
+                    onChange={(next) => onChange(fromSlider(next))}
+                    value={inverseCurve(Math.max(value, scaleMin))}
+                />
+            </div>
+            <div className="col-span-full pr-1.5 mt-10 md:mt-8 text-sm text-secondary">{note}</div>
         </div>
-        <div className="col-span-2 text-right pr-3">
-            <p className="font-semibold mb-0">{formatUSD(cost)}</p>
-        </div>
-        <div className="col-span-full pr-1.5">
-            <LogSlider
-                stepsInRange={100}
-                marks={slider.marks}
-                min={slider.min}
-                max={slider.max}
-                onChange={(next) => onChange(sliderCurve(next))}
-                value={inverseCurve(Math.max(value, slider.min))}
-            />
-        </div>
-        <div className="col-span-full pr-1.5 mt-10 md:mt-8 text-sm text-secondary">{note}</div>
-    </div>
-)
+    )
+}
 
 export default function PostHogDesktopTab({
     activeProduct,
@@ -110,8 +125,8 @@ export default function PostHogDesktopTab({
     [key: string]: any
 }): JSX.Element {
     const { data: pricing, error } = useSWR<PricingResponse>('/api/posthog-desktop-pricing', fetchPricing)
-    // A failed rate-card fetch still settles the tab — it just renders without the compute row —
-    // so this is "we know what we're going to know", not "we have prices".
+    // A failed rate-card fetch still settles the tab — it just falls back to the published rates —
+    // so this is "we know what we're going to know", not "we have live prices".
     const pricingSettled = pricing !== undefined || error !== undefined
 
     // The same tier array `setVolume` walks, so the in-tab cost and the shared subtotal cannot
@@ -145,7 +160,15 @@ export default function PostHogDesktopTab({
         marks: [tokenSliderMin, tokenSliderMin * 5, tokenSliderMin * 25, tokenSliderMin * 100],
     }
 
-    const [hours, setHours] = useState(20)
+    /*
+     * Cloud time starts at zero, and zero is a real answer: Desktop runs tasks on your own
+     * machine for free, so plenty of orgs will never start a cloud task. Every other tab opens at
+     * its free tier showing $0, and with tokens seeded at the allocation this one does too.
+     *
+     * Unlike the token row this has no free allowance of its own to anchor to — the $20 is shared
+     * across both meters — so the floor is 0 rather than a starting allocation.
+     */
+    const [hours, setHours] = useState(0)
     // Null until the rate card settles. Seeding this at mount would be wrong: the seed splits the
     // shared credit balance into compute and tokens, and the compute half isn't known yet, so an
     // early seed counts the whole balance as tokens and then inflates the estimate the moment the
@@ -193,12 +216,13 @@ export default function PostHogDesktopTab({
                 suffix="hours/month"
                 value={hours}
                 onChange={(value) => setHours(Math.round(value))}
-                slider={{ min: 1, max: 500, marks: [1, 10, 100, 500] }}
+                slider={{ min: 0, scaleMin: 1, max: 500, marks: [0, 10, 100, 500] }}
                 cost={computeSpend}
                 note={
                     <>
-                        Every task gets {SANDBOX_CPU_CORES} CPU cores and {SANDBOX_MEMORY_GIB} GiB, so cloud time works
-                        out at about {formatUSD(computeRate)}/hour. Tasks you run on your own machine cost nothing.
+                        Tasks you run on your own machine cost nothing. A cloud task bills {BILLABLE_CPU_CORES} CPU
+                        cores and {BILLABLE_MEMORY_GIB} GiB for as long as it runs, so cloud time works out at about{' '}
+                        {formatUSD(computeRate)}/hour.
                         {isPublishedRate && <> Based on the rates published {PUBLISHED_RATES_DATE}.</>}
                     </>
                 }
