@@ -56,7 +56,10 @@ import CloudinaryImage from 'components/CloudinaryImage'
 import WistiaEmbed from 'components/WistiaEmbed'
 import Link from 'components/Link'
 import { IconDiscord } from 'components/OSIcons/Icons'
+import { DownloadButtons } from 'components/Code/DownloadButtons'
 import { DownloadContent, DownloadCTA } from 'components/Code/DownloadContent'
+import { DESKTOP_LAUNCH_FLAG } from 'components/Code/flags'
+import { FeatureFlagged } from 'components/FeatureFlagged'
 import { usePrefersReducedMotion } from 'components/Code/usePrefersReducedMotion'
 
 // ─────────────────────────────────────────────
@@ -398,7 +401,12 @@ function HeroSection() {
                 }}
             >
                 {showDownload ? (
-                    <DownloadContent className="w-full mx-auto py-8 text-center" />
+                    <FeatureFlagged
+                        flag={DESKTOP_LAUNCH_FLAG}
+                        fallback={<DownloadContent className="w-full mx-auto py-8 text-center" />}
+                    >
+                        <DownloadButtons className="w-full py-8" align="center" />
+                    </FeatureFlagged>
                 ) : (
                     <>
                         <h1 className="!mt-0 mb-4 text-xl font-bold leading-tight @xl:mb-8 @xl:text-3xl">
@@ -437,18 +445,25 @@ function HeroSection() {
                                     ))}
                                 </ul>
 
-                                <OSButton
-                                    asLink
-                                    to="/desktop#download"
-                                    variant="primary"
-                                    size="md"
-                                    onClick={(event) => {
-                                        event.preventDefault()
-                                        swapToDownload()
-                                    }}
+                                <FeatureFlagged
+                                    flag={DESKTOP_LAUNCH_FLAG}
+                                    fallback={
+                                        <OSButton
+                                            asLink
+                                            to="/desktop#download"
+                                            variant="primary"
+                                            size="md"
+                                            onClick={(event) => {
+                                                event.preventDefault()
+                                                swapToDownload()
+                                            }}
+                                        >
+                                            View downloads
+                                        </OSButton>
+                                    }
                                 >
-                                    View downloads
-                                </OSButton>
+                                    <DownloadButtons />
+                                </FeatureFlagged>
                             </div>
 
                             <div className="w-full min-w-0 @4xl/editor:flex-1">
@@ -2059,7 +2074,9 @@ const TLDR = () => {
             <p className="m-0">Download PostHog Desktop and sign in with your PostHog account.</p>
             <div className="mt-2 grid items-center gap-8 @2xl:grid-cols-2 @2xl:gap-12">
                 <div className="@container bg-blue/10 border border-blue rounded-md px-8 py-6 shadow-xl">
-                    <DownloadCTA />
+                    <FeatureFlagged flag={DESKTOP_LAUNCH_FLAG} fallback={<DownloadCTA />}>
+                        <DownloadButtons />
+                    </FeatureFlagged>
                 </div>
                 <div>
                     <MeepNotification className="mb-5 flex justify-center @2xl:justify-start" />
@@ -2362,7 +2379,9 @@ function FAQ() {
 export function DownloadButton() {
     return (
         <div className="py-6">
-            <DownloadCTA />
+            <FeatureFlagged flag={DESKTOP_LAUNCH_FLAG} fallback={<DownloadCTA />}>
+                <DownloadButtons />
+            </FeatureFlagged>
         </div>
     )
 }
