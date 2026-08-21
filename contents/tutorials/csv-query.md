@@ -82,7 +82,7 @@ This gets all the data from the CSV.
     alt="Querying CSV data in PostHog"
 />
 
-We can use [the features of SQL](/docs/product-analytics/sql) to filter and transform the data. For example, to get the pro or business users with the highest `total_meetings_hosted`, we can do this:
+We can use [the features of SQL](/docs/data-warehouse/sql) to filter and transform the data. For example, to get the pro or business users with the highest `total_meetings_hosted`, we can do this:
 
 ```sql
 SELECT email, total_meetings_hosted
