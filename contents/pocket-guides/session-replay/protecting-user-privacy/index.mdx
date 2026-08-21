@@ -24,13 +24,13 @@ If a page could contain sensitive data, mask **all** text, then unmask safe cont
 
 The other order is whack-a-mole. Mask fields as you notice them and every screen you forget is recorded in full, and you find out by watching a replay you shouldn't have been able to see.
 
-<Term name="masking">Masking</Term> spreads to everything inside the element you put it on, so you mark a layout, a screen, or a component rather than each field in it. A field someone adds inside a masked layout next month is masked the day it ships.
+A mask spreads to everything inside the element you put it on, so you mark a layout, a screen, or a component rather than each field in it. A field someone adds inside a masked layout next month is masked the day it ships.
 
 ## Where each platform starts
 
 Web is the only one that starts exposed. Everywhere else the SDK masks first and your job is revealing what you've checked.
 
-| Platform | Out of the box | Can you reveal one thing? |
+| Platform | Masked out of the box | Can you unmask individual elements? |
 | --- | --- | --- |
 | Web | Inputs masked, all other text recorded as it appears | Yes, but through a callback rather than a selector |
 | Android | Text and images masked, recorded as a wireframe | Yes, and revealing beats masking |
@@ -46,7 +46,7 @@ Mask unless you need the thing gone completely.
 
 ## Blindspots
 
-Mask every sensitive screen and you've covered what's visible. Four things are still going out.
+Mask every sensitive screen and you've covered what's visible. There are four things that still go out regardless of masking:
 
 - **The URL.** The player shows it and the timeline lists it. Query strings carry auth tokens, emails, and user IDs, and no amount of text masking touches them.
 - **Network payloads.** Request and response bodies and headers, if you've turned network capture on. One callback covers both these and the URL.

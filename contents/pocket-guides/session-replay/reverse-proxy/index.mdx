@@ -16,8 +16,6 @@ bookOrder: 4
 
 # Reverse proxy
 
-You need a reverse proxy to reliably capture replays.
-
 Ad blockers keep lists of know analytics domains and block requests to them. This will often result in incomplete or missing replays being captured. Using a reverse proxy lets you route through your own domain, so captures are not blocked.
 
 ## Set up a reverse proxy
@@ -27,7 +25,7 @@ certificate, the routing, and the maintenance.
 
 <CTA to="https://app.posthog.com/settings/organization-proxy">Set up a managed proxy</CTA>
 
-Two important things to decide with your team:
+Two important things to decide with your team while setting it up:
 
 **Pick a boring subdomain.** Anything containing `analytics`, `tracking`, `telemetry`, `posthog`,
 or `ph` is already on the block lists you're trying to avoid.

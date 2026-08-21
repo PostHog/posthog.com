@@ -44,7 +44,7 @@ This section covers various automations you can configure to automate replay wat
 
 ## Which robot
 
-Four things can watch replays on your behalf:
+Four automations can watch replays on your behalf:
 
 | Robot | What it does | What you get |
 | --- | --- | --- |
@@ -53,7 +53,7 @@ Four things can watch replays on your behalf:
 | Session Replay <Term name="signal" /> | Spots rage clicks and friction, raises them | A <Term name="report" /> in your <Term name="inbox" />, grouped with related findings |
 | <Term name="scout">Scout</Term> | Queries anything in PostHog on a schedule – events, insights, warehouse tables, and the observations above | A report too, but only when the answer to its question changes |
 
-Only the scanner watches the video. The other three read events, so they know what people did but not what the screen showed them.
+Only the Replay Vision scanner watches the video. The other three read events, so they know what people did but not what the screen showed them.
 
 ## Summarize with PostHog AI
 
@@ -74,7 +74,7 @@ Summarizing a session also marks up its player timeline: green segments where th
 
 ## Set up a scanner
 
-A <Term name="scanner" /> is three things: a **prompt** saying what to look for, a **type** saying what shape the answer takes, and **filters** saying which recordings it runs against. PostHog then asks that question of every matching session, forever.
+A Replay Vision <Term name="scanner" /> is three things: a **prompt** saying what to look for, a **type** saying what shape the answer takes, and **filters** saying which recordings it runs against. PostHog then asks that question of every matching session, forever.
 
 Here are some templates to give you inspiration and get you started.
 
