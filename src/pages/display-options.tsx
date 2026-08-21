@@ -200,6 +200,7 @@ export default function DisplayOptions() {
     const [previewScreensaver, setPreviewScreensaver] = useState(false)
 
     const handleColorModeChange = (value: string) => {
+        if (!value) return
         if (typeof window !== 'undefined' && (window as any).__setPreferredTheme) {
             const newTheme = window.__setPreferredTheme(value)
             updateSiteSettings({
