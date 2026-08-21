@@ -73,5 +73,5 @@ If you render this component conditionally yourself, do the same: keep it mounte
 ## Notes
 
 - The number is `aria-hidden`; a `sr-only` sibling reads out "3 unread" (or just "unread" with no count) so the count is not announced as a bare digit next to the link label.
-- The `ring-[1.5px] ring-white` outline keeps the badge readable on dark wallpapers and on top of a glyph.
+- The white outline is real badge background + padding, not a CSS ring. This keeps the outline and colored center in the same transformed layer during desktop icon hover animations.
 - An **inline** wrapper does not work: absolute children of an inline element anchor to the text line box, so the badge lands near the baseline instead of the icon's top corner. Use `inline-flex` (or `block`) on the wrapper.
