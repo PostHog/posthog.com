@@ -164,13 +164,13 @@ Each conversion emits a billable `$workflows_conversion` event. This counts towa
 
 Dispatches are the messages you send, mail, slack, SMS, push, webhook, or any PostHog real time destinations. There are 5 main types of dispatches:
 
-| Dispatch type    | Description                                                                                                                |
-| ---------------- | -------------------------------------------------------------------------------------------------------------------------- |
-| Email            | Send an email natively through PostHog. Configured in the [channels](/docs/workflows/configure-channels) section.          |
-| Slack            | Send a message to a slack channel. Configured in the [channels](/docs/workflows/configure-channels) section.               |
+| Dispatch type    | Description                                                                                                                     |
+| ---------------- | ------------------------------------------------------------------------------------------------------------------------------- |
+| Email            | Send an email natively through PostHog. Configured in the [channels](/docs/workflows/configure-channels) section.               |
+| Slack            | Send a message to a slack channel. Configured in the [channels](/docs/workflows/configure-channels) section.                    |
 | Push             | Send a native mobile push notification (iOS/Android). Configured in the [channels](/docs/workflows/configure-channels) section. |
-| Webhook          | Call external systems. Configured in the [channels](/docs/workflows/configure-channels) section.                           |
-| CDP destinations | Use any [realtime destination](/docs/cdp/destinations) as an dispatch step to deliver messages to users or other services. |
+| Webhook          | Call external systems. Configured in the [channels](/docs/workflows/configure-channels) section.                                |
+| CDP destinations | Use any [realtime destination](/docs/cdp/destinations) as an dispatch step to deliver messages to users or other services.      |
 
 ### Email dispatch options
 
@@ -186,13 +186,14 @@ Marketing emails may also be sent untracked based on your team's email tracking 
 
 ## Delays
 
-Delays help you control the timing of your messages. There are 3 types of delays:
+Delays help you control the timing of your messages. There are 4 types of delays:
 
-| Delay type             | Description                                                                              |
-| ---------------------- | ---------------------------------------------------------------------------------------- |
-| Fixed wait             | Wait for a fixed amount of time (minutes/hours/days).                                    |
-| Wait until condition   | Wait until a specific condition is met (e.g. user has property set to a specific value). |
-| Wait until time window | Wait until a specific time window (e.g. only send on weekdays 9-5).                      |
+| Delay type               | Description                                                                                                      |
+| ------------------------ | ---------------------------------------------------------------------------------------------------------------- |
+| Fixed wait               | Wait for a fixed amount of time (minutes/hours/days).                                                            |
+| Wait until date property | Wait until a date stored on the person or event, with an optional offset (e.g. "1 day before trial_expires_at"). |
+| Wait until condition     | Wait until a specific condition is met (e.g. user has property set to a specific value).                         |
+| Wait until time window   | Wait until a specific time window (e.g. only send on weekdays 9-5).                                              |
 
 You can see an example of a delay in the [email drip campaign](/docs/workflows/email-drip-campaign) tutorial.
 
@@ -204,6 +205,18 @@ A couple of things to keep in mind:
 
 - **Event filters use fixed values.** Filter values are set when you save the workflow and can't reference the trigger event's properties. For example, you can wait for any `order_shipped` event from the person, but you can't wait for an `order_shipped` event whose `order_id` matches the `order_id` on the event that triggered the workflow. Template syntax like `{{event.properties.order_id}}` in a filter value is compared as a literal string, so it will never match.
 - **Each run waits independently.** If the same person triggers the workflow more than once, each run has its own wait step, and a single matching event resumes all of them. If your trigger can fire multiple times per person concurrently, design the workflow so that any matching event is a valid reason to continue.
+
+### Waiting until a date
+
+A **wait until date property** step pauses the workflow until a date stored on the person or the trigger event. You pick a date property, a direction (**before**, **on**, or **after**), and an optional offset amount. For example, "1 day before trial_expires_at" waits until one day before the value of the person's `trial_expires_at` property.
+
+Both person properties and event properties work, as long as the value is a date (an ISO 8601 string, a `DateTime`, or unix seconds).
+
+The offset keeps its full magnitude — "45 days before" means 45 days, not clamped to 30. The wait itself is bounded by the step's maximum duration (30 days by default), so a date further out than that fires at the maximum instead.
+
+**Timezone handling:** dates that already carry timezone information (an ISO 8601 offset like `+05:00`, or unix timestamps) use their stated timezone. For dates without timezone info (e.g. `2026-03-01` or `2026-03-01T09:00:00`), you can pick a fixed timezone or toggle **Use the person's timezone** to read the date in each person's own timezone (based on GeoIP data), with a fallback timezone for people who don't have one set. The default is UTC.
+
+If the calculated target date is in the past, the step continues immediately. If the target date is further out than the maximum wait, the step fires at the maximum instead of waiting indefinitely.
 
 ## Audience splits
 
