@@ -73,5 +73,5 @@ If you render this component conditionally yourself, do the same: keep it mounte
 ## Notes
 
 - The number is `aria-hidden`; a `sr-only` sibling reads out "3 unread" (or just "unread" with no count) so the count is not announced as a bare digit next to the link label.
-- The `ring-[1.5px] ring-white` outline keeps the badge readable on dark wallpapers and on top of a glyph.
+- The `border-[1.5px] border-white` outline keeps the badge readable on dark wallpapers and on top of a glyph. It is a border rather than a shadow-based Tailwind ring so browsers paint it in the same layer as the badge background during icon hover animations.
 - An **inline** wrapper does not work: absolute children of an inline element anchor to the text line box, so the badge lands near the baseline instead of the icon's top corner. Use `inline-flex` (or `block`) on the wrapper.
