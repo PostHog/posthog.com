@@ -85,7 +85,7 @@ TAM removals generally happen at the end of the quarter. Accounts can be added t
 
 The CSM stays on, so nothing about the customer relationship changes from their side. But the TAM knows things the CSM doesn't, and that context has to land somewhere before they leave:
 
-- **A handover note in Vitally** covering: what expansion plays were run and how they went, commercial context (discounts given and why, anything promised, credit terms), open threads, and who the real decision makers are. Use the [handover note skill](https://github.com/PostHog/skills/tree/main/skills/team/product-led-sales/account-handover).
+- **A handover note in Vitally** covering: what expansion plays were run and how they went, commercial context (discounts given and why, anything promised, credit terms), open threads, who the real decision makers are, and who on the customer side owns the renewal (champion or procurement, and how the last one went). Use the [handover note skill](https://github.com/PostHog/skills/tree/main/skills/team/product-led-sales/account-handover).
 - **A 15 minute call with the CSM** to cover what's not in the data. Politics, sensitivities, what you'd try next if a new opportunity shows up.
 - **The Slack channel stays open.** The CSM keeps it. Don't archive it. Channel archival only applies when an account exits managed coverage entirely.
 - **Removing the TAM in Vitally.** Once the note and call are done, the team lead removes the TAM and the `AM Managed` segment from the account, with Ben's approval.
@@ -230,7 +230,7 @@ The incoming TAM should prepare by reviewing the following in Vitally and SFDC b
 #### Self-serve research (do this first)
 
 - [ ] **Vitally account overview** – MRR, ARR, health score, segments, paid products, usage traits
-- [ ] **Billing & contract details** – annual plan dates, credit balances, discounts, renewal date, billing limits
+- [ ] **Billing & contract details** – annual plan dates, credit balances, discounts, renewal date, billing limits, valid payment method on file (in Stripe)
 - [ ] **Product adoption** – which products are they paying for? What's underutilized?
 - [ ] **Usage metrics** – active users, project count, Feature Flag requests, Session Replay volume, insight/dashboard engagement
 - [ ] **Support history** – recent tickets in [PostHog Support](https://us.posthog.com/project/2/support/tickets), tags, priority, resolution status
@@ -264,6 +264,7 @@ This is the most valuable part of the handover – relationship context doesn't 
 
 - [ ] **Open proposals or negotiations** – anything in-flight that needs immediate follow-up?
 - [ ] **Renewal strategy** – what's the plan? Any risks?
+- [ ] **Renewal ownership** – who on the customer side owns the renewal, the champion or procurement? How long did the last one take?
 - [ ] **Discount/credit context** – why were discounts given? What was promised?
 - [ ] **Budget & procurement** – annual budget cycle, procurement process, finance contacts
 - [ ] **Expansion potential** – realistic growth ceiling? New teams, new brands, new products?

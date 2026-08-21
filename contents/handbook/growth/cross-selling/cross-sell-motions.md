@@ -294,6 +294,19 @@ You may want to consider expanding usage of the same product within the same tea
 ## Trial/Evaluation incentives
 If we want customers to use more products, we should incentivize new product adoption. This could be in the form of credits for a specific timeframe to cover adoption and usage of the specific product. For example, if a customer wants to try out data warehouse, we offer 2-3 months of credit for any data warehouse usage as they figure out how they would use it and where it provides additional insight.
 
+### How much credit is reasonable?
+
+Credit retroactively rather than upfront. We don't have per-product credits, so an upfront credit pads whatever the customer's next invoices are, whether or not there's any usage of the new product on them. Let them use the product, then credit back what it cost.
+
+That shapes the sizing:
+
+- **Timebox it** – usually 2-3 months of usage, so the trial ends with a decision point.
+- **Cap it** – agree an upper limit up front, scaled to the account, so trial usage of a metered product (e.g. Replay Vision) can't blow up our infra or margins.
+- **Run the comfort test** – if you'd hesitate to post the number and your reasoning in a public Slack channel, the offer is too big or the reasoning isn't there yet.
+- **Loop in the team that builds the product** – they know what realistic usage costs, and for new or pre-GA products there may already be an official alpha/beta credit offer. Check before inventing your own number.
+
+The mechanics of actually adding the credit are covered in [giving credits to customers](/handbook/growth/revops/credits).
+
 We have opportunities to get creative with how we incentivize new product adoption with users. A few ideas are: 
 
 - Bring them over at competitor pricing for X months
