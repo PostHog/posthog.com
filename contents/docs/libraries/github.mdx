@@ -1,0 +1,87 @@
+---
+title: GitHub
+platformLogo: github
+---
+
+The PostHog GitHub App connects your GitHub organization or account to PostHog. Several products build on it:
+
+- **Self-driving and PostHog Desktop** run agents against your repositories, open pull requests, and post review comments.
+- **Error tracking** creates GitHub issues from errors and links pull requests back to them.
+- **Data warehouse** syncs issues, pull requests, and commits from your repositories as tables.
+
+This page covers how the app is installed, what it can see, and how the two kinds of connection (project and personal) fit together. For the Git menu inside PostHog Desktop, see the [Git + GitHub integration](/docs/posthog-desktop/git-github-integration) page.
+
+## Installing the PostHog GitHub App
+
+You install the app once per GitHub organization or personal account. Every PostHog project that wants to use that organization then links to the same installation.
+
+1. In PostHog, go to **Settings** → **Integrations** → **GitHub integration** and click **Connect account**. In PostHog Desktop, open **Settings** → **GitHub** and click **Connect GitHub** under **Project connection**.
+2. GitHub asks which organization or account to install the app on, and which repositories it can access.
+3. After you approve, GitHub sends you back to PostHog and the project shows the connection with the account name and its repository access.
+
+<!-- TODO(screenshot): GitHub settings in PostHog Desktop showing the project connection and personal account sections -->
+
+The app requests read access to metadata and read and write access to code, issues, and pull requests. GitHub shows the exact list on the install screen.
+
+### If you're not an organization owner
+
+GitHub only lets organization owners install apps. If you're a member, GitHub records an install request and emails the owners instead of installing.
+
+PostHog tracks that request. The GitHub settings in PostHog and PostHog Desktop show a **waiting for approval** notice with a message you can copy and send to an owner. Once an owner approves the request, the notice changes to **approved** and you click **Finish connecting** to link the installation to your project. Nothing else needs to happen on the GitHub side.
+
+<!-- TODO(screenshot): the waiting-for-approval notice with the copy-message button -->
+
+If you can't reach an owner, a PostHog project admin can also connect GitHub for the project. Use **Ask a project admin** in PostHog Desktop, or **Request access** on the integration page in PostHog, to email them.
+
+### All repositories or selected repositories
+
+GitHub asks whether the app can see **all repositories** in the account or **only select repositories**. PostHog shows which one you picked:
+
+- With **all repositories**, PostHog shows the total count instead of listing every repository. New repositories are visible to PostHog automatically.
+- With **selected repositories**, PostHog lists the repositories you picked.
+
+<!-- TODO(screenshot): a connection row showing "All repositories in PostHog (706)" -->
+
+To change the selection later, click **Manage on GitHub** next to the connection. That opens the installation's settings page on GitHub, and PostHog picks up the change on the next refresh.
+
+## Project connection and personal connection
+
+A GitHub installation can be linked to PostHog in two ways, and they show up as two sections in the GitHub settings:
+
+| Connection | Scope | Used for |
+| --- | --- | --- |
+| **Project connection** | One PostHog project | Self-driving, cloud tasks, error tracking issues, data warehouse GitHub source. Anyone on the project can use it; project admins manage it. |
+| **Your GitHub account** | Your PostHog user, across projects | Agents acting as you: commits, pull requests, and review comments attributed to your GitHub login. |
+
+Connecting a project as an admin also links your personal account to the same installation, so you don't need to do both. Members who connect from PostHog Desktop only get a personal connection; the project stays unconnected until an admin connects it or approves an access request.
+
+### Connecting a second project to the same organization
+
+The GitHub App installs once per organization, so a second PostHog project can't install it again. Instead, the GitHub settings offer to **link the existing installation** to the project. Pick the account and click **Connect to this project**.
+
+## Disconnecting
+
+**Disconnect** removes the connection from PostHog. What happens on GitHub depends on whether anything else still uses the installation:
+
+- If other PostHog projects or personal accounts still use the installation, the app stays installed on GitHub and only this project (or your account) stops using it.
+- If this was the last connection to the installation, PostHog also uninstalls the app from the GitHub organization or account and removes every personal link to it.
+
+The confirmation dialog tells you which case applies before you confirm.
+
+<!-- TODO(screenshot): the disconnect confirmation dialog -->
+
+If you uninstall the app directly on GitHub instead, PostHog notices and marks the connection **removed from GitHub**. Click **Remove** to clear it, then connect again if you still need it.
+
+## Troubleshooting
+
+**The connection shows a number instead of the account name.** GitHub didn't return the account details when the app was installed. PostHog retries in the background and replaces the number with the account name; if it doesn't, disconnect and connect again.
+
+**Repositories look out of date.** PostHog caches the repository list for an hour. Click **Refresh repositories** in the repository picker, or **Manage on GitHub** to check the installation's access.
+
+**"Your GitHub account isn't authorized for this installation".** Your GitHub login isn't a member of the organization the app is installed on. Ask an owner to add you, or connect a different GitHub account.
+
+## What's next?
+
+- [Set up Self-driving](/docs/self-driving/setup)
+- [Error tracking integrations](/docs/error-tracking/integrations)
+- [GitHub as a data warehouse source](/docs/cdp/sources/github)
