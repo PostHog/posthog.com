@@ -4,7 +4,7 @@ import Link from 'components/Link'
 import { Popover } from 'components/RadixUI/Popover'
 import usePostHog from 'hooks/usePostHog'
 import React from 'react'
-import { DOWNLOAD_URL, PACKAGES, PLATFORMS, RELEASES_URL, useDetectedDevice } from './platforms'
+import { DOWNLOAD_URL, PACKAGES, PLATFORMS, useDetectedDevice } from './platforms'
 
 interface DownloadButtonsProps {
     className?: string
@@ -25,10 +25,7 @@ export function DownloadNote({ className = '' }: { className?: string }): JSX.El
 
     return (
         <p className={`m-0 text-sm text-secondary ${className}`}>
-            These always grab the latest release, since older builds can behave unexpectedly.{' '}
-            <Link to={RELEASES_URL} external>
-                See what's new
-            </Link>
+            These always grab the latest release, since older builds can behave unexpectedly.
         </p>
     )
 }

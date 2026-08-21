@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react'
 
 export const DOWNLOAD_URL = 'https://desktop.posthog.com/download'
-export const RELEASES_URL = 'https://posthog.com/desktop/releases'
 
 type OS = 'mac' | 'windows' | 'linux' | 'unknown'
 type Arch = 'arm64' | 'x64' | 'unknown'
