@@ -76,6 +76,7 @@ Create a JSON file at a stable HTTPS URL, for example `https://yourapp.com/.well
   "token_endpoint_auth_method": "none",
   "grant_types": ["authorization_code"],
   "response_types": ["code"],
+  "contacts": ["integrations@yourapp.com"],
   "com.posthog": {
     "provisioning": true
   }
@@ -88,6 +89,7 @@ Requirements:
 - **`com.posthog.provisioning`** must be `true` to use the provisioning API. Your `client_id` is a public URL, so a request that names it proves nothing about who sent it. Declaring the opt-in in the document, which only you can publish, is what grants your app provisioning access. It must be the JSON literal `true`, not the string `"true"`.
 - **`redirect_uris`** is required and must contain at least one HTTPS URI. This is where PostHog redirects existing users during the consent flow.
 - **`logo_uri`** (optional) must be HTTPS if provided.
+- **`contacts`** (optional) is a list of up to 5 email addresses for whoever runs the integration. Add one. It is how PostHog reaches you if your client starts failing, and a shared address such as `integrations@yourapp.com` outlasts any one engineer. Addresses PostHog cannot parse are ignored.
 - **`token_endpoint_auth_method`** must be `"none"` (a public client, no client secret) or `"private_key_jwt"` with an HTTPS `jwks_uri`. With `private_key_jwt`, your app authenticates by signing an assertion with your own key, which also raises your [rate limits](#rate-limits).
 - The document must be served with `Content-Type: application/json` and be under 5 KB.
 - The URL must use HTTPS, include a path component, and must not contain query parameters or fragments.
@@ -306,6 +308,8 @@ The user receives a welcome email with a link to set their password and access t
 ```
 
 When `type` is `requires_auth`, redirect the user to the provided URL. After they approve, PostHog redirects them to your `redirect_uris` with a `code` query parameter that you use in step 2.
+
+> **Note:** `requires_auth` is a final answer, not a retryable error. The email already belongs to a PostHog user, so we cannot link the account until that person approves it. The same request returns `requires_auth` every time until they do, and retrying it makes no progress. In an automated test suite with nobody to approve, use a new email address per run, or complete the consent redirect once and reuse the tokens it returns.
 
 ```mermaid
 sequenceDiagram
