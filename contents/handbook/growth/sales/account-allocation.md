@@ -128,6 +128,35 @@ At the start of each quarter, team leads (with Ben's approval) review:
 
 Once the region and any TAM decision are settled, the above tags are applied and team leads assign the specific team member. 
 
+### Assigning tagged accounts to a new owner
+
+This is the other half of [tagging an account as ready for CSM](#tagging-an-account-as-ready-for-csm) – what leads do with the queue once accounts land in it.
+
+**The queue.** Two places to look:
+
+- Accounts tagged `csm handover needed` or `csm overlay needed` in PostHog Customer Analytics – tagged by their current owner and waiting on a decision
+- [$20K accounts without an owner](https://posthog.vitally-eu.io/hubs/152ccd4c-c7b2-4508-865b-b08fea5c3dc6/1c518181-54a5-4c59-98de-f0b0bb54f9c3) – accounts that crossed the threshold on their own and never had one
+
+Work the tag queue continuously rather than saving it for quarter start. Accounts can be added to a book at any time, and a tagged-but-unassigned account is one nobody is actually covering. Removals and rebalancing still batch to quarter end so quota stays clean.
+
+**Who decides what.** Simon reviews the account and the account plan, then works with the CSM leads to assign a new owner. Region routing comes from the automatic region tag rather than a judgment call – the EU and NA mappings, and what to do with multi-region accounts, are in [team lead responsibilities](/handbook/growth/sales/team-leads#populating-a-new-csms-book). Adding or removing a TAM goes through the team leads with Ben's approval, and [Top 40 accounts](#top-40-account-management) are decided by Ben and the team leads directly.
+
+**Choosing the recipient.** Assign against book capacity and shape, not just headcount. The priority order for filling a book is in [team lead responsibilities](/handbook/growth/sales/team-leads#populating-a-new-csms-book); CSM book targets and the expected mix of accounts by ARR band are in [how the CS team works](/handbook/cs-and-onboarding/how-we-work#book-of-business), and TAM targets are in [TAM book balance](#tam-book-balance) above. Beyond that, things worth weighing:
+
+- Whether the receiving book has room in that ARR band, rather than just room in total
+- Existing context – if someone has already worked with this customer or others like them, that's usually worth more than a marginally better capacity fit
+
+If no one in the right region has headroom, say so rather than assigning anyway. An overloaded book is how accounts go quiet.
+
+**When an account gets pushed back.** Receiving CSMs are expected to [push back](#pushing-back) on accounts that aren't in a fit state. When that happens, the lead removes the tag and returns the account to its previous owner with the specific gaps written down. Don't reassign it to a different CSM to get it off the queue – the problem is the account, not the fit.
+
+**Closing the loop.** Once assigned:
+
+- Assign the CSM on the account in Vitally, which adds it to the `CSM Managed` segment automatically
+- Remove the handover or overlay tag so the account drops out of the queue
+- Make sure the outgoing and incoming owners book the [handover call](#account-handover-checklist)
+- Note where the [3 month grace period](#mid-quarter-changes) applies
+
 ### Mid-quarter changes
 
 Account removals should only happen at the end of the quarter so that quota can be calculated correctly. However, accounts can be **added** to your book at any time if you're confident there's growth potential.
@@ -161,7 +190,32 @@ For handover to take place there should be an Account Plan (saved as a note on t
 
 > All open invoices should also have been paid before handing over. It makes sense to use existing relationships to chase payments, rather than the new owner's first action needing to be chasing payments/suspending access for non-payment.
 
-> For TAE accounts being handed over to a CSM, tag the account in PostHog Customer Analytics with `csm handover needed` and then flag this with Simon directly.  There's no need to wait for the end of the quarter to do this.  He will review the plan and current state of the customer and then work with CSM leads to assign a new owner.
+### Tagging an account as ready for CSM
+
+When an account is ready to move, the outgoing owner tags it rather than negotiating a handover directly. This keeps a single queue of accounts waiting for coverage, so nothing sits in someone's head between quarters.
+
+**Which tag.** Both of these are set in PostHog Customer Analytics, and they mean different things:
+
+- `csm handover needed` – you're handing the account over fully. Use this as a TAE once the account is onboarded, or as a TAM where there's no CSM on the account yet.
+- `csm overlay needed` – you're staying on the account but need a CSM alongside you. The account stays in your book.
+
+If instead you're a CSM who has spotted an expansion opportunity, that's `tam overlay needed` – see [adding a TAM](#adding-a-tam-to-an-account).
+
+**When to tag.** For a TAE, that's when the account is onboarded – typically around 3 months after the initial credit purchase, or 12 months in if you've retained it against a specific opportunity. Tag as soon as the prerequisites below are met. There's no need to wait for the end of the quarter.
+
+Coming off an account where a CSM is already in place isn't a handover at all, since the CSM never left. Follow [removing a TAM](#removing-a-tam-from-an-account) instead, and plan those for quarter end.
+
+**Before you tag,** the account needs to be in a state the new owner can pick up:
+
+- A current [account plan](#account-plan) saved as a note in Vitally
+- [Product onboarding](#product-onboarding) complete for everything they're paying for
+- All open invoices paid
+
+Use your existing relationship to close these out. The new owner's first action shouldn't be chasing payment or reconstructing history.
+
+**After you tag.** Flag it with [Simon](/community/profiles/28895) directly, who reviews the account plan and the current state of the customer and works with the CSM leads to assign a new owner. You don't need to work out the region yourself – a daily automation adds a region tag once the handover or overlay tag is on the account.
+
+If an account comes back to you because it isn't ready, the tag is removed and it stays in your book until the gaps are closed. Fix what was flagged and tag it again.
 
 ### Account Plan
 
