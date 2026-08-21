@@ -435,11 +435,11 @@ export const SideProjectForm = ({
     const canSubmit =
         Boolean(
             values.title.trim() &&
-            values.description.trim() &&
-            values.projectAuthor.trim() &&
-            (githubUrl || liveUrl) &&
-            (!githubUrl || isValidProjectUrl(githubUrl)) &&
-            (!liveUrl || isValidProjectUrl(liveUrl))
+                values.description.trim() &&
+                values.projectAuthor.trim() &&
+                (githubUrl || liveUrl) &&
+                (!githubUrl || isValidProjectUrl(githubUrl)) &&
+                (!liveUrl || isValidProjectUrl(liveUrl))
         ) && !submitting
 
     const handleSubmit = async (event: React.FormEvent) => {

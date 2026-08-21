@@ -50,7 +50,7 @@ import { instrument } from "@posthog/mcp"
 
 const server = new Server({ name: "my-mcp-server", version: "1.0.0" })
 
-const posthog = new PostHog(process.env.POSTHOG_PROJECT_API_KEY, {
+const posthog = new PostHog(process.env.POSTHOG_PROJECT_TOKEN, {
   host: "https://us.i.posthog.com",
 })
 
