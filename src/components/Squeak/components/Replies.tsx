@@ -76,13 +76,8 @@ const Collapsed = ({ setExpanded, replies, resolvedBy, isInForum }: CollapsedPro
     const reply = replies?.data?.find((reply) => reply?.id === resolvedBy) || replies.data[replies.data.length - 1]
     const replyCount = replies.data.length
     const maxAvatars = Math.min(replyCount - 1, 3)
-    const {
-        question: {
-            profile: {
-                data: { id: questionProfileID },
-            },
-        },
-    } = useContext(CurrentQuestionContext)
+    const { question } = useContext(CurrentQuestionContext)
+    const questionProfileID = question?.profile?.data?.id
 
     const badgeText = getBadge(questionProfileID, reply?.attributes?.profile?.data?.id)
     const avatars: any[] = []
@@ -176,14 +171,9 @@ const getComunityClasses = (reply, isResolution) => {
 }
 
 const Expanded = ({ replies, isInForum }: ExpandedProps) => {
-    const {
-        question: {
-            profile: {
-                data: { id: questionProfileID },
-            },
-            resolvedBy,
-        },
-    } = useContext(CurrentQuestionContext)
+    const { question } = useContext(CurrentQuestionContext)
+    const questionProfileID = question?.profile?.data?.id
+    const { resolvedBy } = question || {}
     return (
         <>
             {replies.data.map((reply) => {
