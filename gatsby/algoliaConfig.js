@@ -1,5 +1,6 @@
 const Slugger = require('github-slugger')
 const settings = require('./algoliaSettings.json')
+const glossary = require('../src/components/Glossary/glossary.json')
 
 // Lower values win after Algolia's textual relevance criteria tie.
 const PATH_RANKING = {
@@ -243,8 +244,16 @@ const createPageRecord = (page, content, toolPaths) => {
                 ...heading,
                 fragment: slugger.slug(heading.value),
             })),
+            // Glossary terms live in JSON rendered by a React component, so they aren't in
+            // the page's MDX headings/rawBody — index them explicitly.
+            ...(path === '/docs/glossary'
+                ? glossary.terms.map(({ term, slug }) => ({ value: term, depth: 4, fragment: slug }))
+                : []),
         ],
-        rawBody: content?.rawBody || searchTerms.join(' '),
+        rawBody:
+            path === '/docs/glossary'
+                ? [content?.rawBody, ...glossary.terms.map(({ definition }) => definition)].filter(Boolean).join('\n')
+                : content?.rawBody || searchTerms.join(' '),
         excerpt: description,
     }
 }
