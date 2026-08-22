@@ -1,9 +1,9 @@
 import React, { lazy, Suspense, useEffect, useSyncExternalStore } from 'react'
+import { useHasMounted } from 'hooks/useHasMounted'
 
-const HedgeHogModeRenderer =
-    typeof window !== 'undefined'
-        ? lazy(() => import('@posthog/hedgehog-mode').then((module) => ({ default: module.HedgehogModeRenderer })))
-        : () => null
+const HedgeHogModeRenderer = lazy(() =>
+    import('@posthog/hedgehog-mode').then((module) => ({ default: module.HedgehogModeRenderer }))
+)
 
 const HEDGEHOG_MODE_STORAGE_KEY = 'hedgehog-mode-enabled'
 
@@ -44,6 +44,8 @@ export const useHedgehogMode = (): [boolean, (enabled: boolean) => void] => {
 
 export default function HedgeHogModeEmbed(): JSX.Element | null {
     const [hedgehogModeEnabled, setHedgehogModeEnabled] = useHedgehogMode()
+    // Only mount the lazy renderer after hydration so the server and first client render match (avoids React #421).
+    const hasMounted = useHasMounted()
 
     useEffect(() => {
         // check if we have a hedgehog-mode query param
@@ -58,7 +60,7 @@ export default function HedgeHogModeEmbed(): JSX.Element | null {
         }
     }, [])
 
-    return typeof window !== 'undefined' && hedgehogModeEnabled ? (
+    return hasMounted && hedgehogModeEnabled ? (
         <Suspense fallback={<span>Loading...</span>}>
             <HedgeHogModeRenderer
                 config={{
