@@ -6,6 +6,8 @@ You can merge issues representing the same problem from the issue list by:
 
 After merging, all events and aggregated counts from the merged issues are added to the primary issue. The merged issues are then deleted (but the underlying events are not).
 
+If the primary issue has no assignee and all merged issues share exactly one assignee (user or role), the primary issue automatically adopts that assignee. If the primary issue already has an assignee, it keeps its own. If the merged issues have different assignees, the primary issue stays unassigned.
+
 <ProductScreenshot
   imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/merge_light_0489da02c6.png"
   imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/merge_dark_aab4bfcc93.png"
