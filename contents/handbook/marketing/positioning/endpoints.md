@@ -14,7 +14,7 @@ Other tools tell you what happened. PostHog lets you act on your data, and now, 
 
 ## The unique belief (in terms of Endpoints)
 
-PostHog is building the infrastructure for self-driving product development. The product autonomy loop only closes when data can flow freely; into agents, into products, into every surface that needs it.
+PostHog is building the infrastructure for self-driving product development. The self-driving loop only closes when data can flow freely; into agents, into products, into every surface that needs it.
 
 **Endpoints is the egress layer for that loop.** The data is already in PostHog. The hard part was getting it out: building a custom API, maintaining it, versioning it, rate-limiting it, keeping it from breaking when someone tweaked a query. Endpoints removes all of that.
 
@@ -66,7 +66,7 @@ Tinybird and custom-built analytics APIs solve the same surface problem. They do
 
 ### Message 3: The data layer for your AI workflows
 
-**Problem:** Agents running the product autonomy loop need live product signals as context: event counts, funnel states, metric comparisons. Wiring that up today means custom retrieval infrastructure on top of an already complex pipeline.
+**Problem:** Agents running the self-driving loop need live product data as context: event counts, funnel states, metric comparisons. That is the same data behind the reports that land in your [Inbox](/handbook/marketing/positioning/inbox), and agents need to fetch it at query time too. Wiring that up today means custom retrieval infrastructure on top of an already complex pipeline.
 
 **Solution:** Endpoints exposes PostHog data over HTTP to any agent runtime, or MCP-compatible tool. PostHog already has the data. Endpoints makes it fetchable without exposing your entire database.
 
