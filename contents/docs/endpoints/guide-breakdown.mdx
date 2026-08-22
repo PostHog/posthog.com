@@ -55,9 +55,11 @@ The response will only include data where `$os` equals "Mac OS X".
   classes="rounded"
 />
 
-<CalloutBox icon="IconInfo" type="info" title="Variable required for materialized endpoints">
+<CalloutBox icon="IconWarning" type="caution" title="Breakdown variables are required">
 
-If your endpoint is [materialized](/docs/endpoints/materialization), you **must** provide the breakdown variable. This prevents accidentally returning all breakdown values when you intended to filter.
+By default, every breakdown variable on an insight-based endpoint is **required** — calls to `/run` that omit one fail with `400 Required variable(s) … not provided`. This is a safety feature to prevent accidentally returning data aggregated across every value of the breakdown.
+
+You can opt individual breakdowns out by marking them as optional in the endpoint configuration (or by passing `optional_breakdown_properties` on the API). When a breakdown is optional and the caller omits it, the response aggregates across every value of that dimension.
 
 </CalloutBox>
 
