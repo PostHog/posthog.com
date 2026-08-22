@@ -750,11 +750,13 @@ export function useMenuData(): MenuType[] {
             type: 'item' as const,
             label: 'About PostHog',
             link: '/about',
+            icon: getMenuIcon(companyMenu.children, '/about', 'IconLogomark', 'gray'),
         },
         {
             type: 'item' as const,
             label: 'About this website',
             link: '/credits',
+            icon: <Icons.IconInfo className="size-4 text-blue" />,
         },
         {
             type: 'item' as const,
@@ -762,9 +764,17 @@ export function useMenuData(): MenuType[] {
             onClick: () => {
                 navigate('/display-options', { state: { newWindow: true } })
             },
+            icon: <Icons.IconBrightness className="size-4 text-yellow" />,
             shortcut: [','],
         },
     ]
+
+    const homeLogoMenuItem = {
+        type: 'item' as const,
+        label: 'Home',
+        link: '/',
+        icon: <Icons.IconHome className="size-4 text-purple" />,
+    }
 
     // Process main nav items for mobile menu
     const processMobileNavItems = (): MenuItemType[] => {
@@ -845,11 +855,7 @@ export function useMenuData(): MenuType[] {
     // On mobile, include main navigation items in the logo menu
     const logoMenuItems = isMobile
         ? [
-              {
-                  type: 'item' as const,
-                  label: 'Home',
-                  link: '/',
-              },
+              homeLogoMenuItem,
               { type: 'separator' as const },
               // Main navigation items processed for mobile
               ...processMobileNavItems(),
@@ -858,11 +864,7 @@ export function useMenuData(): MenuType[] {
               ...baseLogoMenuItems,
           ]
         : [
-              {
-                  type: 'item' as const,
-                  label: 'Home',
-                  link: '/',
-              },
+              homeLogoMenuItem,
               // Desktop: only show system items
               ...baseLogoMenuItems,
           ]
