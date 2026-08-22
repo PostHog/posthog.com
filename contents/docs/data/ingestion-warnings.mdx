@@ -42,6 +42,7 @@ List of ingestion warnings:
 - [$set or $set_once is ignored on exception events and should not be sent](#set-or-set_once-is-ignored-on-exception-events-and-should-not-be-sent)
 - [Invalid heatmap data](#invalid-heatmap-data)
 - [Discarded $groupidentify event with invalid $group_set](#discarded-groupidentify-event-with-invalid-group_set)
+- [Distinct ID was truncated](#distinct-id-was-truncated)
 
 ## Refused to merge with an illegal distinct ID
 
@@ -129,6 +130,16 @@ posthog.group("company", "company_id_in_your_db", "PostHog");
 ```
 
 `null` or `undefined` values for `$group_set` are accepted and upsert the group with empty properties.
+
+## Distinct ID was truncated
+
+Legacy capture endpoints automatically shorten any `distinct_id` that exceeds 200 characters. When this happens, PostHog ingests the event with a truncated `distinct_id`. This warning means your event was stored under a shortened ID that differs from what you originally sent.
+
+This typically happens when a JWT token, serialized JSON payload, or other long string is accidentally passed as the `distinct_id` instead of a proper user identifier. The truncation can cause person data to fragment because events land under an ID you never intended to use.
+
+To fix this, ensure you're passing a stable, short identifier (such as a database ID or email) as the `distinct_id`. See [identifying users](/docs/product-analytics/identify) for best practices.
+
+> **Note:** The newer v1 capture endpoint rejects oversized distinct IDs outright (`distinct_id_too_large`) rather than truncating them. This warning only applies to legacy capture endpoints.
 
 ## Query warnings via MCP
 
