@@ -92,6 +92,36 @@ A few things to keep in mind:
 - The copy is independent – changes to the original don't sync to the copy, and vice versa.
 - If a dashboard or template with the same name already exists in the destination project, the copy is automatically renamed with a suffix like "(copy)", "(copy 2)", etc.
 
+## Sharing templates across your organization
+
+Dashboard templates have three visibility scopes:
+
+| Scope            | Description                                                   |
+| ---------------- | ------------------------------------------------------------- |
+| **Team**         | Template is only visible within the current project (default) |
+| **Organization** | Template is visible to all projects within your organization  |
+| **Global**       | Official PostHog templates (staff-only)                       |
+
+By default, templates you create are scoped to your current project. You can promote a template to organization scope so every project in your organization can use it.
+
+### Promote a template to organization scope
+
+1. Go to [**Dashboards**](https://app.posthog.com/dashboard) and open the **Templates** tab.
+1. Click the **...** menu on the template you want to share.
+1. Select **Make visible to whole organization**.
+
+If the template contains project-specific references – such as action IDs, cohort IDs, or data warehouse tables – a warning dialog appears before promoting. These references may not resolve correctly in other projects. Events and properties are matched by name and work everywhere.
+
+Organization templates appear in the **Your templates** section of the new-dashboard chooser with an **Organization** badge.
+
+### Demote a template back to team scope
+
+To restrict an organization template back to the current project, click the **...** menu and select **Make visible to this team only**. A confirmation dialog appears to prevent accidental demotions.
+
+### Permissions
+
+Any user with dashboard edit access can promote a template to organization scope. Only the project that created the template can edit, demote, or delete it. Organization template names must be unique within the organization.
+
 ## Dates and filters
 
 ### Date range overrides
