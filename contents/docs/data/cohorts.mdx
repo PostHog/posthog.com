@@ -277,6 +277,18 @@ Has or doesn't have a person property with the following operators:
 
 For a complete list of all available operators, including semver operators for version-based filtering, see the [property filter operators reference](/docs/data/property-filters).
 
+#### Person metadata
+
+Person metadata lets you filter by top-level person attributes that PostHog tracks automatically, rather than custom person properties you set.
+
+| **Field**  | **Description**                                  |
+| ---------- | ------------------------------------------------ |
+| First seen | The date and time when the person was first seen |
+
+Since **First seen** is a `DateTime` field, it supports date operators like `is date before`, `is date after`, and `is date on or after`. For example, you can create a cohort of users first seen in the last 7 days without needing to manually set a custom person property.
+
+> **Note:** Person metadata filters are not supported in realtime cohorts. Feature flag SDKs cannot locally evaluate cohorts with person metadata filters — flags using them automatically fall back to server-side evaluation.
+
 #### Lifecycle
 
 | **Criteria**                      | **Example**                                                                                         |
