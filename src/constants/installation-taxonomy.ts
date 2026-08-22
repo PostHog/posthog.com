@@ -138,7 +138,6 @@ export const TAXONOMY: InstallCategory[] = [
                 librarySlug: 'flutter',
                 wizard: true,
                 wizardOrder: 21,
-                status: 'wip',
             },
             {
                 slug: 'kmp',
