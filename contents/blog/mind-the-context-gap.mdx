@@ -86,7 +86,7 @@ You need a way to stop building and babysitting pipelines so you can trust that 
 A [context warehouse](/context-warehouse) wraps ingestion, modeling, storage, and querying in one tool instead of four you wire together with pipelines between them. Here's how that works in PostHog:
 
 - **Your product data is already there.** PostHog captures data from experiments, logs, errors (and more) as it happens, so there's no export to get it into a separate warehouse.
-- **External sources sync in.** Connect Stripe, HubSpot, Salesforce, Postgres, and the other 102 sources of data you have, and it lands in the same warehouse. The pipelines are maintained automatically.
+- **External sources sync in.** Connect Stripe, HubSpot, Salesforce, Postgres, and the other 102 sources of data you have, and it lands in the same warehouse. The pipelines are maintained automatically with scheduled, by default syncs.
 - **Everything runs on the same data.** Analytics, experiments, feature flags, the SQL editor, PostHog AI, and any agent you point at the [PostHog MCP](/mcp) all read from one place. The [Semantic Layer](/blog/semantic-layer) holds fixed definitions so you know you can trust the answers to your questions.
 
 Once your product data and business context sit together and an agent can query both, it can do more than answer questions. It can spot the funnel drop, tie it to the revenue at risk, pull the affected cohort, and open a PR. That's [self-driving development](/products), and it only works when the agent isn't reasoning from an incomplete picture.
