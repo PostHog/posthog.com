@@ -202,6 +202,11 @@
     ],
     "redirects": [
         {
+            "source": "/docs/references/posthog-python-:version",
+            "destination": "/docs/references/posthog-python",
+            "statusCode": 301
+        },
+        {
             "source": "/docs/session-replay/image-bot:ext(\\.md)?",
             "destination": "/docs/ai-research/image-fetcher-bot:ext?",
             "statusCode": 301
