@@ -128,7 +128,9 @@ def capture_entry(entry):
 distinct_id = entry.get("user_id") or entry.get("device_id")
 event_name = entry["event_type"]
 
-if event_name == "session_start":
+# Skip synthetic session events - Amplitude generates these as markers, but PostHog
+# calculates sessions from timestamp gaps, making these events meaningless
+if event_name in ["session_start", "session_end"]:
 return
 if event_name == "[Amplitude] Page Viewed":
 event_name = "$pageview"
