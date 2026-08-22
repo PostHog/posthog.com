@@ -97,9 +97,37 @@ export type ProfileData = {
     reputation?: number
 }
 
+export interface TransactionMetadata {
+    description?: string
+    redemption?: {
+        title?: string
+        code?: string
+    }
+    achievement?: {
+        iconURL?: string
+        title?: string
+    }
+}
+
+export type Transaction = {
+    id: number
+    amount: number
+    date: string
+    type: 'gift' | 'achievement' | 'redemption'
+    metadata?: TransactionMetadata
+}
+
+export type Wallet = {
+    id?: number
+    balance: number
+    transactions?: Transaction[]
+}
+
 export type UserData = {
     email: string
     distinctId: string | null
+    // Only present when explicitly populated, which Strapi gates to the moderator role
+    wallet?: Wallet | null
 }
 
 export type ProfileQuestionsData = {

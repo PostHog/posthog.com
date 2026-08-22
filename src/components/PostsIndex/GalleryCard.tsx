@@ -1,11 +1,11 @@
 import React from 'react'
 import Link from 'components/Link'
 import PostImage from './PostImage'
-import { BuildModePost } from './types'
+import { PostSummary } from './types'
 import { getByline, getSubtitle } from './utils'
 
 /** One tile in the all-posts grid. */
-export default function GalleryCard({ post }: { post: BuildModePost }): JSX.Element {
+export default function GalleryCard({ post }: { post: PostSummary }): JSX.Element {
     return (
         <Link to={post.fields.slug} state={{ newWindow: true }} className="group block no-underline text-primary">
             <div className="relative aspect-video overflow-hidden rounded-sm border border-primary bg-white shadow-[0_6px_12px_rgba(0,0,0,0.18)] transition-all duration-200 group-hover:-translate-y-0.5 group-hover:shadow-[0_12px_24px_rgba(0,0,0,0.25)]">
