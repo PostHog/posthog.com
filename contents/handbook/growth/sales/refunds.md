@@ -112,7 +112,16 @@ If you want more precision when a single event type is inflated, use the 'Event 
 
 -   Issue credits if the customer's period hasn't ended yet and the invoice isn't finalized. It is much easier and better for users and us to avoid payment if we can!
 -   If invoice is finalized and this is a first time request, issue a refund via a credit note (do not use the refund button, this is important for correct revenue attribution).
--   If the customer has overdue invoices and needs changes on that, we need to apply credit notes. Escalate such cases to RevOps.
+-   If the customer has overdue (open or uncollectible) invoices that need changes, see [Invoice status and what you can do](#invoice-status-and-what-you-can-do) below before acting, and escalate to RevOps if you're unsure.
+
+### Invoice status and what you can do
+
+You don't void invoices or create credit notes by hand. Every refund and correction to an unpaid invoice goes through one place — the Billing Admin refund flow — and it creates the underlying Stripe credit note for you. What you can do just depends on the invoice's status:
+
+-   **`paid`, `open`, and `uncollectible` invoices can be refunded; `draft` and `void` ones can't.** A refund on a `paid` invoice goes back to the payment method and/or customer balance. On an `open` or `uncollectible` invoice, it reduces the amount still owed.
+-   **Hit a "pending payment" error?** The invoice has a payment in flight. Wait for it to resolve and try again, or mark the invoice `uncollectible` in Stripe first — the refund flow won't do that for you.
+-   **Small unpaid invoices resolve themselves.** Once Stripe exhausts its retries on a small invoice (below the amount where CS gets involved, and for customers without a high trust score), billing marks it `uncollectible` and cancels the subscription automatically. RevOps can cancel sooner if needed.
+-   **Two or more `uncollectible` invoices block a customer from re-subscribing.** The block lifts automatically once they have none left, so clearing those invoices is what frees them to subscribe again.
 
 ## How to issue refunds or credits
 
@@ -127,6 +136,8 @@ If you want more precision when a single event type is inflated, use the 'Event 
 7. Include an optional link in the 'Reference link' field, e.g. support ticket, Slack message link, etc.
 8. Click 'Save and view'
 9. After saving, you'll land on the customer view in Billing Admin — confirm the credit now appears on the customer's balance there. You don't need to check Stripe.
+
+**A note on tax:** Tax is added automatically by Anrok through Stripe. It applies to US customers only, isn't managed in billing, and doesn't count toward billing limits — so for customers outside the US there's no tax line and a credit lands cleanly. Tax is also calculated on the full invoice amount *before* credits are applied. That trips people up: if a US customer has hit a billing limit and you credit them exactly that amount expecting a $0 bill, they'll still owe the tax on the pre-credit total. To land a true zero bill, check the applied tax in Stripe and gross the credit up to cover it.
 
 ### Issuing a refund
 Refunds are now initiated through Billing Admin and finalized in Stripe via a credit note. 
