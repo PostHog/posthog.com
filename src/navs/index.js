@@ -1521,6 +1521,10 @@ export const handbookSidebar = [
                         name: 'Working with product engineering',
                         url: '/handbook/forward-deployed-engineering/working-with-product-engineering',
                     },
+                    {
+                        name: 'Advising customers on GDPR and PII',
+                        url: '/handbook/cs-and-onboarding/advising-customers-on-gdpr',
+                    },
                 ],
             },
             {
