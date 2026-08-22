@@ -1,0 +1,177 @@
+---
+title: Find AI failures that return a 200
+shortTitle: Error patterns
+subtitle: 'Your error rate is fine. The model still ignored half the instructions.'
+pocketGuideOrder: 6
+appTemplate: error-patterns
+filters:
+  type:
+    - self-driving
+watches:
+  - name: AI Observability
+    detail: Full traces, not just error flags, so a failure that returned successfully still shows up.
+  - name: Online evaluations
+    detail: Eval failures and negative feedback, used to find traces worth reading rather than to score them.
+  - name: Trace clusters
+    detail: Semantically similar traces, so one failure mode can be counted across the requests it affects.
+requires:
+  - label: AI Observability instrumented, so $ai_generation events are arriving
+    level: required
+  - label: Traces carrying a feature, workflow, or span name, so failures can be grouped by use case
+    level: required
+  - label: Online evaluations or user feedback, to surface failures that never error
+    level: recommended
+schedule: Daily
+report:
+  title: 'AI error pattern: the summarizer drops the last section on long documents'
+  source: Scout · error patterns
+  receivedAgo: 6h
+  affected: ~19% of summarize requests over 8k tokens
+  body: >-
+    Across 22 traces read from the `summarize` workflow, 14 ended with the final document section
+    missing from the output. Every one carried a `max_tokens` stop reason on the last generation
+    and returned HTTP 200, so none of them appear in the error rate.
+
+
+    The pattern is confined to inputs over roughly 8k tokens and has grown from ~4% to ~19% of
+    that segment since the prompt template changed on the 11th. Shorter documents are unaffected.
+  suggestedAction: >-
+    Raise the output token budget for long inputs, or chunk the document and summarize per
+    section, and add an eval that fails when the last section is missing.
+  actionNote: An agent opens the pull request. You review and merge.
+---
+
+<LeftPage>
+
+<DivergenceFigure
+    n={1}
+    caption="Two weeks of the summarize workflow. One of these lines is on your dashboard."
+    markerAt={0.4}
+    markerLabel="prompt template change"
+    series={[
+        {
+            label: 'Error rate',
+            note: 'flat at ~0.4%',
+            values: [0.08, 0.07, 0.09, 0.08, 0.08, 0.09, 0.07, 0.08, 0.09, 0.08],
+        },
+        {
+            label: 'Summaries missing the last section',
+            note: '4% → 19%',
+            emphasis: true,
+            values: [0.2, 0.19, 0.21, 0.2, 0.44, 0.62, 0.74, 0.85, 0.91, 0.95],
+        },
+    ]}
+/>
+
+<TraceFigure
+    n={2}
+    caption="One of the 14. Every generation succeeded, and the summary still comes back short."
+    rows={[
+        {
+            kind: 'trace',
+            label: 'summarize_document',
+            meta: '200 OK · 4.1s · $0.031',
+            depth: 0,
+            marker: {
+                n: 1,
+                label: 'The status',
+                gloss: 'The request succeeded. Nothing here will ever reach your error rate, because nothing threw.',
+            },
+        },
+        { kind: 'span', label: 'load_document', meta: '11,400 tokens in', depth: 1 },
+        { kind: 'generation', label: 'summarize_section_1', meta: 'stop: end_turn · 780 out', depth: 1 },
+        { kind: 'generation', label: 'summarize_section_2', meta: 'stop: end_turn · 812 out', depth: 1 },
+        {
+            kind: 'generation',
+            label: 'summarize_section_3',
+            meta: 'stop: max_tokens · 1,024 out',
+            depth: 1,
+            marker: {
+                n: 2,
+                label: 'What broke first',
+                gloss: 'end_turn means the model finished. max_tokens means it ran out of room and was cut off mid-section. That single word is the whole diagnosis.',
+            },
+        },
+    ]}
+/>
+
+<ReportFigure
+    n={3}
+    caption="What lands in your inbox when the scout finds it."
+    legend="Hover over the figure to learn about each element."
+/>
+
+<ScoutFigure n={4} caption="The scout itself. The file an agent follows on a schedule." />
+
+</LeftPage>
+
+<RightPage>
+
+# Find AI failures that return a 200
+
+Your error rate is a flat green line. LGTM. Also, your AI summarizer has been quietly dropping the last section of every long document for two weeks.
+
+Both of those are true at the same time, and that's the trouble with error rates – they count the failures your code noticed. They say nothing about the ones it didn't.
+
+## Your error rate only counts what threw
+
+PostHog error tracking does good work with the errors it gets. Set `$ai_is_error` and it normalizes the message, so `Request req_abc123 failed` and `Request req_xyz789 failed` collapse into one issue with counts for traces, users, and days seen.
+
+That catches your timeouts, your 429s, and the malformed response that blew up your parser. It catches none of this:
+
+- The model ignored an instruction
+- It answered from the wrong document
+- A tool came back empty and it carried on regardless
+- Its context window ran out and stopped three quarters of the way through
+
+Every one of those can return 200 with a plausible-looking body.
+
+Which is how you end up with the <SeeFig n={1} /> scenario: an error rate that looks normal, and the failure nobody is paying attention to.
+
+## Which traces to read
+
+You can't possibly read every trace yourself, so you need a filter. Here's some examples of filters, and how each would have done against your summarizer's failure:
+
+- **Errors.** Nothing – it's hidden.
+- **A failed <Term name="evaluation" />.** Only if someone already wrote an eval asking "did this cover the whole document?" You can only catch what you thought to check.
+- **Negative <Term name="user feedback" />.** You may get a few, from the people who noticed and bothered to say so.
+- **Token outliers.** Sort by output tokens letting you find generations that stop on the same number of tokens, which shares a common failure mode like hitting your output limit.
+- **Trace clusters.** Won't necessarily find it, but it will stop you reading five copies of the same trace.
+
+So sort by output tokens and take the top of the pile. You now have a reading list, but you still don't know what's wrong.
+
+## Group by what broke first
+
+The top of that pile is 22 `summarize` traces. You read them and fourteen come back with the last section of the document missing from the summary. The other eight are long documents that summarized fine.
+
+Each of these broken traces will exhibit different behavior. One user said it cut off mid-sentence but another said it skipped the risks section entirely. An eval failed on "does this mention the deadline?"
+
+These failure modes look different but are the same underlying issue. To see the commonality, you need the earliest thing that went wrong in each <Term name="trace" />.
+
+## Anatomy of a trace
+
+So open a trace – <SeeFig n={2} />.
+
+The document went in at 11,400 tokens. Sections one and two came back clean, `end_turn` on both. Section three stopped on `max_tokens`.
+
+There it is. This wasn't the prompt, the model, or retrieval. The output budget ran out mid-section and the code shipped whatever it had.
+
+But nothing threw, so the only evidence you have is one word in a stop reason, and you had to open the trace to find it.
+
+## Automate the traces
+
+You aren't going to read 25 traces every morning – so hand it to a <Term name="scout" />. It reads traces on a schedule, up to 25 in a run, and only writes when a failure mode shows up across independent requests.
+
+When it does, you get a <Term name="report" /> with the workflow, the comparison window, what broke first, how often it happens against the whole population, and an action to take. That report will look something like <SeeFig n={3} />.
+
+From there, you can fix it yourself, or choose to have PostHog open a PR to fix it for you.
+
+## Add the scout
+
+The scout itself is just a file an agent follows on a schedule, and <SeeFig n={4} /> is the one this guide is about.
+
+The custom scout for this already lives in PostHog. You just have to enable it, and it's set to run daily at 9:00 AM.
+
+<Enable />
+
+</RightPage>
