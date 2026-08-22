@@ -12,7 +12,7 @@ The [PostHog web app](https://app.posthog.com) is home base for a support engine
 
 Open your inbox from **Support** in [PostHog](https://app.posthog.com). From there you can:
 
-- **Filter** by status, priority, [channel](/docs/support/concepts/channels), SLA state, tags, or assignee
+- **Filter** by status, priority, [channel](/docs/support/concepts/channels), SLA state, tags, or assignee (including a dynamic **Me** option that resolves to whoever is viewing)
 - **Search** by ticket number, customer name, email, or message content
 - **Save** a filter combination as a view, to switch between common queries
 
@@ -72,7 +72,11 @@ The confirmation dialog gives you two choices: **Send and save** commits all cha
 
 ## Assign, tag, and snooze
 
-Assign a ticket to a user or a role from the **Assignee** dropdown in the sidebar. Assignment is manual, with no automatic routing, and each ticket has one assignee. Add free-form tags to categorize and filter tickets, and snooze a ticket until a set time when you're waiting on something external.
+Assign a ticket to a user or a role from the **Assignee** dropdown in the sidebar. Assignment is manual, with no automatic routing, and each ticket has one assignee.
+
+When filtering by assignee, select **Me (current user)** to create views that dynamically resolve to whoever is signed in. Unlike filtering by a specific user, the **Me** filter makes saved views shareable – a "My tickets" view shows each viewer their own tickets. You can combine **Me** with other values like **Unassigned** to see tickets assigned to you or waiting to be claimed.
+
+Add free-form tags to categorize and filter tickets, and snooze a ticket until a set time when you're waiting on something external.
 
 ## Track SLAs
 
@@ -88,5 +92,5 @@ For the repetitive parts, let rules do the work. [Workflows](/docs/support/workf
 - Look at the exceptions panel to identify bugs quickly.
 - Review previous tickets to avoid asking repeat questions.
 - Use **Send and set pending** to reply and mark the ticket as waiting for a customer response in one step.
-- Use saved views to switch between common filter combinations.
+- Use saved views to switch between common filter combinations. Filter to **Me (current user)** to create a shareable "My tickets" view that works for everyone on the team.
 - Snooze tickets when you're waiting on something external, instead of leaving them open.
