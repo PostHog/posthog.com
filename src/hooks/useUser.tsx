@@ -261,10 +261,15 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
                 }),
             })
 
-            const userData = await userRes.json()
+            let userData: any = null
+            try {
+                userData = await userRes.json()
+            } catch {
+                userData = null
+            }
 
             if (!userRes.ok) {
-                throw new Error(userData?.error?.message)
+                throw new Error(userData?.error?.message || `Sign in failed (${userRes.status})`)
             }
 
             const user = await finalizeLogin(userData.jwt)
@@ -278,13 +283,14 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
             posthog?.capture('squeak error', {
                 source: 'useUser.login',
                 email,
-                error: JSON.stringify(error),
+                error: error instanceof Error ? error.message : String(error),
+                errorName: error instanceof Error ? error.name : undefined,
             })
 
             console.error(error)
 
             if (error instanceof Error) {
-                return { error: error.message }
+                return { error: error.message || 'There was an error signing in. Please try again.' }
             }
 
             return null
