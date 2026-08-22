@@ -1,4 +1,5 @@
-import React, { useState, useMemo, useEffect, useRef } from 'react'
+import React, { useState, useMemo, useEffect, useRef, useCallback } from 'react'
+import debounce from 'lodash/debounce'
 import { motion } from 'framer-motion'
 import ProductGrid from './ProductGrid'
 import { getProduct } from './transforms'
@@ -355,12 +356,14 @@ export default function Collection(props: CollectionProps): React.ReactElement {
         return products
     }, [transformedProducts, selectedCategory, searchQuery])
 
-    // Product handlers - close cart when product is opened
-    const handleProductSelect = (product: any) => {
+    // Product handlers - close cart when product is opened.
+    // useCallback keeps this reference stable so the memoized ProductGrid does
+    // not re-render on every Collection state change (e.g. panel resize).
+    const handleProductSelect = useCallback((product: any) => {
         setSelectedProduct(product)
         setOrderHistoryIsOpen(false)
         setCartIsOpen(false) // Close cart when product is opened
-    }
+    }, [])
 
     // Cart handlers - close product when cart is opened
     const handleCartOpen = () => {
@@ -387,9 +390,22 @@ export default function Collection(props: CollectionProps): React.ReactElement {
         setSelectedCategory(value)
     }
 
-    const handleSearch = (query: string) => {
-        setSearchQuery(query)
-    }
+    // Debounce the Fuse search so the full-catalog search + grid re-render does
+    // not run synchronously on every keystroke (a common INP regression source).
+    const debouncedSetSearchQuery = useMemo(() => debounce((query: string) => setSearchQuery(query), 150), [])
+    useEffect(() => () => debouncedSetSearchQuery.cancel(), [debouncedSetSearchQuery])
+    const handleSearch = useCallback(
+        (query: string) => {
+            // Clearing should be immediate; typing is debounced.
+            if (query === '') {
+                debouncedSetSearchQuery.cancel()
+                setSearchQuery('')
+            } else {
+                debouncedSetSearchQuery(query)
+            }
+        },
+        [debouncedSetSearchQuery]
+    )
 
     const ContentWrapper = useMemo(
         () => (appWindow?.size?.width && appWindow.size.width <= 768 ? ScrollArea : React.Fragment),
