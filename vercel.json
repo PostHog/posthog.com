@@ -202,8 +202,8 @@
     ],
     "redirects": [
         {
-            "source": "/docs/references/posthog-python-:version",
-            "destination": "/docs/references/posthog-python",
+            "source": "/docs/references/posthog-python-:version:ext(\\.md)?",
+            "destination": "/docs/references/posthog-python:ext?",
             "statusCode": 301
         },
         {
