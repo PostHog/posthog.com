@@ -5853,6 +5853,10 @@ export const docsMenu = {
                             url: '/docs/error-tracking/installation/rust',
                         },
                         {
+                            name: 'Java',
+                            url: '/docs/error-tracking/installation/java',
+                        },
+                        {
                             name: 'iOS',
                             url: '/docs/error-tracking/installation/ios',
                         },

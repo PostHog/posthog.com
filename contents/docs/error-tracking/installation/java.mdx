@@ -1,0 +1,303 @@
+---
+title: Java error tracking installation
+platformLogo: java
+showStepsToc: true
+---
+
+import { Steps, Step } from 'components/Docs/Steps'
+import { CalloutBox } from 'components/Docs/CalloutBox'
+
+> This guide covers the server-side Java SDK (`posthog-server`), for JVM server applications. For Android apps, see the [Android error tracking installation guide](/docs/error-tracking/installation/android).
+
+<Steps>
+
+<Step title="Install the Java SDK" badge="required">
+
+Install the [PostHog Java SDK](/docs/libraries/java) with Gradle or Maven.
+
+#### Gradle
+
+```gradle_kotlin file=build.gradle
+dependencies {
+  implementation 'com.posthog:posthog-server:2.+'
+}
+```
+
+#### Maven
+
+```xml file=pom.xml
+<dependency>
+  <groupId>com.posthog</groupId>
+  <artifactId>posthog-server</artifactId>
+  <version>LATEST</version>
+</dependency>
+```
+
+<!-- TODO: set minimum version on release -->
+
+<CalloutBox icon="IconInfo" title="Source context not yet supported" type="fyi">
+
+The Java SDK captures stack traces with file names, line numbers, and function names, but does not yet support source context (displaying the surrounding lines of code in the error tracking UI). Symbolication of obfuscated builds is supported through ProGuard/R8 mappings — see [Deobfuscate stack traces](#deobfuscate-stack-traces) below.
+
+</CalloutBox>
+
+</Step>
+
+<Step title="Initialize the client" badge="required">
+
+Build a client once during application startup and reuse it. It uses an internal queue to send events asynchronously.
+
+```java
+import com.posthog.server.PostHog;
+import com.posthog.server.PostHogConfig;
+import com.posthog.server.PostHogInterface;
+
+PostHogConfig config = PostHogConfig
+    .builder("<ph_project_token>")
+    .host("<ph_client_api_host>")
+    .build();
+
+PostHogInterface posthog = PostHog.with(config);
+```
+
+You can find your project token and instance address in your [project settings](https://app.posthog.com/settings/project).
+
+</Step>
+
+<Step title="Capture exceptions" badge="required">
+
+Use `captureException` to send an exception to PostHog as an `$exception` event. The exception type, message, and full stack trace are captured, along with the cause chain and any suppressed exceptions.
+
+```java
+try {
+    // Your code that might throw
+    riskyOperation();
+} catch (Throwable e) {
+    posthog.captureException(e);
+}
+```
+
+By default, exceptions are captured personlessly: the SDK generates a UUID and sets `$process_person_profile` to `false`, so no [person profile](/docs/data/persons) is created.
+
+### Associate a person
+
+Pass a distinct ID to link the exception to a person:
+
+```java
+try {
+    processOrder(orderId);
+} catch (Throwable e) {
+    posthog.captureException(e, "user_distinct_id");
+}
+```
+
+### Add properties
+
+Pass extra properties to include with the event. You can also override reserved exception properties such as `$exception_level` (severity) and `$exception_fingerprint` ([issue grouping](/docs/error-tracking/grouping-issues)) here:
+
+```java
+import java.util.HashMap;
+import java.util.Map;
+
+try {
+    processOrder(orderId);
+} catch (Throwable e) {
+    Map<String, Object> properties = new HashMap<>();
+    properties.put("order_id", orderId);
+    properties.put("$exception_level", "warning");
+
+    posthog.captureException(e, "user_distinct_id", properties);
+}
+```
+
+For finer control over groups, feature flags, or the timestamp, pass [`PostHogCaptureOptions`](/docs/libraries/java) instead of a plain map:
+
+```java
+import com.posthog.server.PostHogCaptureOptions;
+
+posthog.captureException(
+    e,
+    "user_distinct_id",
+    PostHogCaptureOptions
+        .builder()
+        .property("order_id", orderId)
+        .group("company", "company_id_in_your_db")
+        .build()
+);
+```
+
+</Step>
+
+<Step title="Associate exceptions with users via request context" badge="recommended">
+
+Inside a web request, you usually don't want to pass a distinct ID to every `captureException` call. Use [request context](/docs/libraries/java#request-context) to set the distinct ID (and session ID) once per request, so every capture on that thread — including exceptions — is attributed to the right person and associated with session replay.
+
+```java
+try (PostHogRequestContext.Scope ignored = PostHogRequestContext.beginScope(context, true)) {
+    // No distinct ID needed — the request context supplies it
+    posthog.captureException(error);
+}
+```
+
+See the [request context documentation](/docs/libraries/java#request-context) for how to build the context from incoming headers.
+
+</Step>
+
+<Step title="Configure in-app frames" badge="optional">
+
+PostHog classifies each stack frame as either in-app (your code) or library code, which controls how issues are grouped and displayed. This is configured on the client through `inAppExcludes` and `inAppIncludes`.
+
+Out of the box, the SDK ships a sensible default `inAppExcludes` list that marks common JVM and framework packages as library code, so it works with zero configuration. The defaults are:
+
+```
+java.  javax.  jakarta.  kotlin.  kotlinx.  scala.  sun.  com.sun.  jdk.
+org.springframework.  io.netty.  org.apache.  org.eclipse.jetty.  io.undertow.
+okhttp3.  okio.  com.posthog.
+```
+
+Any frame not matched by `inAppExcludes` is considered in-app. To narrow this down to just your own packages, set `inAppIncludes`:
+
+```java
+import java.util.Arrays;
+
+PostHogConfig config = PostHogConfig
+    .builder("<ph_project_token>")
+    .host("<ph_client_api_host>")
+    .inAppIncludes(Arrays.asList("com.yourcompany"))
+    .build();
+```
+
+Excludes always win over includes. Assigning your own `inAppExcludes` list **replaces** the defaults rather than adding to them, so start from the default set above if you only want to add entries.
+
+</Step>
+
+<Step title="Capture uncaught exceptions" badge="optional">
+
+To automatically capture exceptions that crash a thread, opt in with `captureUncaughtExceptions`. On setup, the SDK installs a JVM-wide [`Thread.defaultUncaughtExceptionHandler`](https://docs.oracle.com/javase/8/docs/api/java/lang/Thread.html#setDefaultUncaughtExceptionHandler-java.lang.Thread.UncaughtExceptionHandler-) that captures the crashing exception (marked as fatal, unhandled), flushes, and then delegates to any handler that was previously registered. The handler is removed again when you call `posthog.close()`.
+
+```java
+PostHogConfig config = PostHogConfig
+    .builder("<ph_project_token>")
+    .host("<ph_client_api_host>")
+    .captureUncaughtExceptions(true)
+    .flushAt(1)
+    .build();
+```
+
+<CalloutBox icon="IconWarning" title="Set a low flushAt for the crash path" type="caution">
+
+The handler captures the exception and then calls `flush()`, which drains the queue synchronously on the crashing thread. The capture itself is enqueued asynchronously, though, so it may not have landed in the queue by the time `flush()` runs. The background flush doesn't reliably cover this either: it only sends once `flushAt` events (default `100`) have accumulated, or on the flush interval (default every `5` seconds), neither of which is likely to fire before the process exits. If you rely on capturing the crash, set `flushAt(1)` so the enqueue itself triggers a send — at the cost of batching for every other event on that client. Delivery under an immediate hard exit is best-effort.
+
+</CalloutBox>
+
+</Step>
+
+<Step title="Capture logged errors with Logback" badge="optional">
+
+If your application uses [Logback](https://logback.qos.ch/), you can automatically capture logged errors as exceptions with the PostHog appender, without adding `captureException` calls throughout your code.
+
+Add the appender module:
+
+```gradle_kotlin file=build.gradle
+dependencies {
+  implementation 'com.posthog:posthog-server-logback:0.+'
+}
+```
+
+```xml file=pom.xml
+<dependency>
+  <groupId>com.posthog</groupId>
+  <artifactId>posthog-server-logback</artifactId>
+  <version>LATEST</version>
+</dependency>
+```
+
+<!-- TODO: set minimum version on release -->
+
+Register the appender in your `logback.xml`:
+
+```xml file=logback.xml
+<configuration>
+    <appender name="POSTHOG" class="com.posthog.server.logback.PostHogAppender">
+        <minimumCaptureLevel>ERROR</minimumCaptureLevel>
+    </appender>
+
+    <root level="INFO">
+        <appender-ref ref="POSTHOG" />
+    </root>
+</configuration>
+```
+
+Then register your PostHog client with the appender once during startup, before the logging you want to capture. Registration is process-wide, so events logged before a client is registered are dropped.
+
+```java
+PostHogInterface posthog = PostHog.with(config);
+PostHogAppender.setPostHog(posthog);
+```
+
+Alternatively, let the appender create and own its own client from `logback.xml` by setting `apiKey` (and optionally `host`) instead of calling `setPostHog`:
+
+```xml file=logback.xml
+<appender name="POSTHOG" class="com.posthog.server.logback.PostHogAppender">
+    <apiKey>${POSTHOG_API_KEY}</apiKey>
+    <minimumCaptureLevel>ERROR</minimumCaptureLevel>
+</appender>
+```
+
+A few things to know about what the appender captures:
+
+- Only log events at or above `minimumCaptureLevel` (default `ERROR`) that carry a `Throwable` are captured. Message-only logs are skipped.
+- The log level is mapped onto `$exception_level` (`ERROR` → `error`, `WARN` → `warning`).
+- Events from the SDK's own loggers (`com.posthog.*`) are always skipped, so the SDK can't recursively report its own errors.
+- Because capture runs through the SDK's `captureException`, request-context distinct-id resolution and in-app frame configuration apply automatically.
+- If the same exception is both logged and reaches the uncaught-exception handler, it's captured only once.
+
+</Step>
+
+<Step title="Deobfuscate stack traces" badge="optional">
+
+If you obfuscate your JVM builds with ProGuard or R8, upload the mapping file to PostHog so stack traces are deobfuscated in the error tracking UI.
+
+Set `releaseIdentifier` on the client. This stamps every captured stack frame with a `map_id` that ties it to the uploaded mapping:
+
+```java
+PostHogConfig config = PostHogConfig
+    .builder("<ph_project_token>")
+    .host("<ph_client_api_host>")
+    .releaseIdentifier("my-service@1.2.3")
+    .build();
+```
+
+Then upload the mapping file with the [PostHog CLI](/docs/cli), using the **same** identifier for `--map-id`:
+
+```bash
+posthog-cli proguard upload --path "mapping.txt" --map-id "my-service@1.2.3"
+```
+
+The `--map-id` value must match the `releaseIdentifier` set at runtime for that build. This is only needed for obfuscated builds — non-obfuscated JVM apps produce readable stack traces without any upload.
+
+</Step>
+
+<Step title="Verify error tracking" badge="recommended">
+
+Trigger a test exception to confirm events are being sent to PostHog. You should see it appear in the [error tracking issues view](https://app.posthog.com/error_tracking).
+
+```java
+try {
+    throw new RuntimeException("This is a test exception from Java");
+} catch (Throwable e) {
+    posthog.captureException(e, "test_user");
+}
+
+// Flush before the process exits so the event is sent
+posthog.flush();
+```
+
+</Step>
+
+</Steps>
+
+## What's not supported yet
+
+- **Source context.** Captured frames include file names, line numbers, and function names, but the surrounding lines of source code are not shown in the UI.
+- **Framework middleware.** There is no built-in Spring (or other framework) middleware for automatic capture yet. Use the Logback appender, the uncaught-exception handler, and manual `captureException` calls, wiring request context in your framework integration.
