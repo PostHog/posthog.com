@@ -2,12 +2,40 @@
 title: Discord
 ---
 
-PostHog connects to Discord in two ways:
+PostHog connects to Discord in two ways, depending on where you are:
 
-- **Rich Presence in PostHog Desktop** shows what you're working on in PostHog on your Discord profile.
-- **Event notifications** send messages to a Discord channel when events or actions happen in PostHog, using [data pipelines](/docs/cdp/destinations/discord).
+- In the **web app**, [data pipelines](/docs/cdp/destinations/discord) send messages to a Discord channel when events or actions happen in PostHog.
+- In **PostHog Desktop**, Rich Presence shows what you're working on in PostHog on your Discord profile.
 
-## Rich Presence
+<Tab.Group tabs={['Web', 'Desktop']}>
+
+<Tab.List>
+
+<Tab>Web</Tab>
+<Tab>Desktop</Tab>
+
+</Tab.List>
+<Tab.Panels>
+
+<Tab.Panel>
+
+### Event notifications
+
+To post messages to a Discord channel when something happens in PostHog, use the [Discord destination](/docs/cdp/destinations/discord) in data pipelines. It works with a Discord webhook URL, so you don't need to install anything on the Discord side beyond creating the webhook.
+
+1. In Discord, open **Server Settings** → **Integrations** → **Webhooks**, create a webhook for the channel you want, and copy its URL.
+2. In PostHog, go to **Data pipelines** → **Destinations**, search for **Discord**, and click **+ Create**.
+3. Paste the webhook URL, write the message in the **Content** field using event and person properties, and use **Filters** to pick which events trigger it.
+4. Click **Create & enable**.
+
+<!-- TODO(screenshot): the Discord destination configuration in data pipelines -->
+
+Common use cases include alerting on errors, announcing new signups, and sharing survey responses with your team. The [Discord destination](/docs/cdp/destinations/discord) page has the full configuration reference.
+
+</Tab.Panel>
+<Tab.Panel>
+
+### Rich Presence
 
 PostHog Desktop can show a Rich Presence card on your Discord profile while you work, like the ones games and music apps show. The card shows that you're working in PostHog, and optionally the task title and repository.
 
@@ -28,8 +56,8 @@ With both off, the card only shows that you're working in PostHog. The settings 
 
 <!-- TODO(screenshot): the Rich Presence card preview with task title and repository shown -->
 
-## Event notifications
+</Tab.Panel>
 
-To post messages to a Discord channel when something happens in PostHog, use the [Discord destination](/docs/cdp/destinations/discord) in data pipelines. It works with a Discord webhook URL, so you don't need to install anything on the Discord side beyond creating the webhook.
+</Tab.Panels>
 
-Common use cases include alerting on errors, announcing new signups, and sharing survey responses with your team.
+</Tab.Group>
