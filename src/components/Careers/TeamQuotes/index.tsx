@@ -6,6 +6,7 @@ import Stickers from 'components/ProfileStickers'
 import slugify from 'slugify'
 import Link from 'components/Link'
 import Masonry from 'react-masonry-css'
+import { findProfileByName } from 'components/TeamMember'
 
 const TeamMemberLink = (person) => {
     const {
@@ -121,9 +122,7 @@ const TeamMember: React.FC<{ name: string }> = ({ name }) => {
         }
     `)
 
-    const person = nodes.find(
-        ({ firstName, lastName }) => `${firstName} ${lastName}`.toLowerCase() === name.toLowerCase()
-    )
+    const person = findProfileByName(nodes, name)
 
     return person ? <TeamMemberLink {...person} /> : null
 }
