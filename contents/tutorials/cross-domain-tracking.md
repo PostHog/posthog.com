@@ -175,7 +175,7 @@ function CheckoutButton() {
 export default CheckoutButton
 ```
 
-On your return page, read the IDs from the hash and bootstrap them, the same way you do on a second site you own:
+On your return page, read the IDs from the hash and bootstrap them, the same way you do on a second site you own. Turn off automatic pageview capture at the same time, so you can set the correct referrer on the return pageview yourself (see below):
 
 ```js
 const hashParams = new URLSearchParams(window.location.hash.substring(1))
@@ -184,6 +184,7 @@ const session_id = hashParams.get('session_id')
 
 posthog.init("<ph_project_token>", {
   api_host: "<ph_client_api_host>",
+  capture_pageview: false,
   bootstrap: {
     sessionID: session_id,
     distinctID: distinct_id
@@ -205,9 +206,16 @@ Build a [funnel](/docs/product-analytics/funnels) with `checkout_started` as the
 
 The return redirect arrives with the partner as the `$referrer`. This breaks attribution, because PostHog reads the partner as the source of the visit. The redirect can also start a new session, which splits one journey into two.
 
-The bootstrap above fixes the session reset, because it keeps the same `session_id` across the round trip. To fix the referrer, set the correct value when you capture the return event:
+The bootstrap above fixes the session reset, because it keeps the same `session_id` across the round trip.
+
+The referrer needs one more step. When `posthog.init()` runs on the return page, it captures a `$pageview` automatically, and that pageview reads the partner as the `$referrer`. Setting the referrer on `checkout_returned` alone does not fix this, because the automatic pageview carries the partner value too. This is why the return-page `init` above sets `capture_pageview: false`. Capture the pageview and the return event yourself, with the correct referrer on both:
 
 ```js
+posthog.capture('$pageview', {
+  $referrer: 'https://yoursite.com/checkout',
+  $referring_domain: 'yoursite.com'
+})
+
 posthog.capture('checkout_returned', {
   $referrer: 'https://yoursite.com/checkout',
   $referring_domain: 'yoursite.com'
