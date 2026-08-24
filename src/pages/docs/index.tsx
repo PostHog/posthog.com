@@ -118,7 +118,7 @@ export const DocsIndex = () => {
                     <div className="pb-6">
                         <h1 className="m-0 text-3xl font-bold !leading-tight @xl/docs:text-4xl">PostHog Docs</h1>
                         <p className="mt-3 mb-6 max-w-2xl text-[15px] leading-relaxed text-secondary @xl/docs:text-base">
-                            References for every product and tool, and use case guides to solve your problems.
+                            References for every product and tool, and use case guides to help you succeed.
                         </p>
                         <SearchUI
                             initialFilter="docs"
@@ -172,7 +172,9 @@ export const DocsIndex = () => {
                     {/* The library: the same volumes as /pocket-guides, as spines. */}
                     <aside className="@3xl/docs:w-1/3 shrink-0">
                         <Panel eyebrow="Guides">
-                            <p className="m-0 mb-4 text-[15px] text-secondary">Use case guides, read end to end.</p>
+                            <p className="m-0 mb-4 text-[15px] text-secondary">
+                                Guides for the human reader on the go.
+                            </p>
                             <BookShelf>
                                 {volumes.map((volume) => (
                                     <Book key={volume.id} volume={volume} count={guideCounts[volume.id] ?? 0} />
