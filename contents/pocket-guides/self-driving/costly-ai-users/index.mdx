@@ -137,7 +137,7 @@ So you already have a denominator to divide by, and that $400 splits into two ve
 
 This approach works well for traces. If you're building a multi-turn experience like a chatbot, use `$ai_session_id` instead. It groups traces into a whole conversation, and cost per session is the number that matters.
 
-## Averages are great at hiding things
+## Averages hide expensive users
 
 Watching cost per trace across your whole product works well for regressions that hit everyone, like a bad deploy or a model swap.
 
