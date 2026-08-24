@@ -35,7 +35,7 @@ This is a different concept from per-product **activation** (see [Per-product ac
 
 **Signals that look similar but aren't this definition:** the single event signal `first team event ingested` is sometimes used elsewhere as a setup proxy. This doesn't match the canonical definition.
 
-## Engaged (customer initiated product usage)
+## Engaged (customer initiated product or tool usage)
 
 An org is showing engagement if any of its users triggers one of the following:
 
