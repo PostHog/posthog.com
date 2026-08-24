@@ -312,5 +312,5 @@ Join wherever you're based, plus anywhere you travel often - posting in these ch
 -   **Netherlands:** [#amsterdam](https://posthog.slack.com/archives/C096RNZF75H)
 -   **Portugal:** [#lisbon](https://posthog.slack.com/archives/C097A897XP1)
 -   **Spain:** [#spain](https://posthog.slack.com/archives/C090ADXGJGH), [#barcelona](https://posthog.slack.com/archives/C09E9Q37YCA)
--   **United Kingdom:** [#london](https://posthog.slack.com/archives/C028MN3UUP5)
+-   **United Kingdom:** [#london](https://posthog.slack.com/archives/C028MN3UUP5), [#uk-north](https://posthog.slack.com/archives/C0BSCKLMY12)
 -   **United States:** [#united-states](https://posthog.slack.com/archives/C02J5E678LF),  [#austin-area](https://posthog.slack.com/archives/C0AF8M87ZRC), [#nyc](https://posthog.slack.com/archives/C036JMK2065), [#seattle-area](https://posthog.slack.com/archives/C080RPNHHL1), [#sf-bay-area](https://posthog.slack.com/archives/C034FCE7RCG)
