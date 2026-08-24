@@ -175,6 +175,8 @@ function CheckoutButton() {
 export default CheckoutButton
 ```
 
+> **Note:** The partner receives the full return URL as a request parameter, so it can read and log both the `session_id` and the `distinct_id`, even though they sit in the URL hash. Neither is a PostHog credential, and any script on your own page can already read them, so this grants no access to your PostHog data. However, a `distinct_id` can hold personal data if you set it to an email or account ID, so don't put personal data in the `distinct_id` on this path. The values can also be changed in transit, so don't treat the IDs you read back as trusted.
+
 On your return page, read the IDs from the hash and bootstrap them, the same way you do on a second site you own. Turn off automatic pageview capture at the same time, so you can set the correct referrer on the return pageview yourself (see below):
 
 ```js
