@@ -119,15 +119,21 @@ Tokenmaxxing is so in right now. But tokenmaxxing and value-minning? Less cool.
 
 A token leaderboard shows you your heaviest users – it doesn't show you your most expensive ones. A costly user is the one that should worry you: same work, same impact, more money.
 
-## Sorting by spend tells you almost nothing
+## What makes a user expensive
+
+An expensive user isn't one who uses your product often – it's one who costs more without generating more usage or value. What triggers the cost increase is how you tell the difference.
+
+**Something you deployed triggered the cost change.** A model swap or a broken cache prefix triggers this. This is something you can spot on your AI bill because everyone's cost moves on the same day. [Tell an AI cost spike from real growth](/pocket-guides/self-driving/ai-spend-that-jumps) is the chapter that covers this.
+
+**The user's input caused it.** A 40-page PDF or six-hour conversation. Nothing changed in your code, but what it costs to serve that user did. This is the tokenmaxxing, value-minning user – and where you're actually losing money.
+
+## Divide cost by use
 
 Your top spender is at $400 this month. Is that good or bad?
 
-You probably have no idea, and it isn't because you're missing data. It's because spend is two numbers multiplied together: how much someone used your product, and what each use cost you.
+You probably have no idea because spend is two numbers multiplied together: how much someone used your product, and what each use cost you.
 
-## Divide by something
-
-PostHog does most of this for you. Every AI observability event carries `$ai_trace_id`, and one <Term name="trace" /> is one full interaction:
+To figure it out, you should divide cost by use. PostHog already has the data you need to do this calculation – every AI observability event carries `$ai_trace_id`, and one <Term name="trace" /> is one full interaction:
 
 - The model call
 - Retrieval
@@ -144,14 +150,6 @@ Watching cost per trace across your whole product works well for regressions tha
 This doesn't reveal edge cases and outliers. A retry loop that only fires on documents over 8k tokens hits the handful of accounts that send long documents. Average that in with thousands of healthy traces and it disappears.
 
 So one comparison isn't enough. You need two: how a user's cost per trace compares to everyone else's, and how it compares to their own last week. A user who doubled against themselves is worth a look even if they're nowhere near the top of your bill.
-
-## What makes a user expensive
-
-There's a neat line between two kinds of cost problems.
-
-**Something you deployed triggered the cost change.** This can happen from swapping a model or a broken cache prefix. To spot this, you just have to look at your AI bill, because everyone's will move on the same day. [Tell an AI cost spike from real growth](/pocket-guides/self-driving/ai-spend-that-jumps) is the chapter that covers this.
-
-**A user's own input triggers the bill change.** These vary by user: maybe someone sent a 40 page PDF or kept a conversation going for six hours. Nothing about your code change, but what it costs to serve those people did. This is the tokenmaxxing, value-minning user.
 
 ## Anatomy of a trace
 
@@ -171,7 +169,7 @@ Now you know what to fix.
 
 No one has time to rank users, work out the population baseline, compare every candidate against it, split by model and workflow, and examine their traces? And you need to do this every day.
 
-So hand it to a <Term name="scout" />. A scout runs on a schedule and you only heart about it when something needs your attention.
+So hand it to a <Term name="scout" />. A scout runs on a schedule and you only hear about it when something needs your attention.
 
 When it finds something, you get a <Term name="report" /> with the comparison window, the numbers you need to judge it, the cause it found in the traces, and what action to take. <SeeFig n={3} />
 
