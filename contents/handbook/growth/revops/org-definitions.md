@@ -4,13 +4,13 @@ sidebar: Handbook
 showTitle: true
 ---
 
-Intent, setup, and engagement are customer level concepts that Sales, Marketing & Website, Customer Success, and Growth all rely on. If you think a definition should change (which events qualify, which table is the source of truth, etc.), raise it with RevOps before you edit a dashboard tile so we can all work off of same source of truth.
+Intent, setup, and engagement are customer level concepts that Sales, Marketing & Website, Customer Success, and Growth all rely on. If you think a definition should change (which events qualify, which table is the source of truth, etc.), see "Adding an event to these definitions" section below and suggest here before you edit a dashboard tile so we can all work off of same source of truth.
 
 [Growth's self-serve dashboard](https://us.posthog.com/project/2/dashboard/1849743) tracks these definitions against specific time windows and cohorts (e.g. "% of intent orgs that completed setup within 14 days of signup"). 
 
 ## Level of aggregation
 
-Every definition below is at the **organization** level (PostHog's `organization` group), not the individual person/user level. An org qualifies once *any* of its users has triggered a qualifying action.
+Every definition below is at the **organization** level (PostHog's `organization` group). An org qualifies once *any* of its users has triggered a qualifying action.
 
 **Standard exclusions:** 
 - **PostHog's own organization** because dogfooding is not customer behavior.
@@ -61,15 +61,13 @@ One known blind spot: customer automation can outlive its usefulness. A forgotte
 
 The threshold is deliberately a single event. The quality bar lives in *which* events qualify, not how many times they fire — a count threshold would also quietly set a lower bar for chatty surfaces (one dashboard session emits dozens of events; one Slack question emits two). For health questions, add a window and a tier on top instead: **recurring engagement** = qualifying events on 2+ distinct days in the window, and **team engagement** = 2+ distinct engaged users. 
 
-Related: one action often produces several qualifying events. An agent creating a dashboard over MCP fires both `$mcp_tool_call` and `dashboard created` (with `source = 'mcp'`); opening a dashboard in the app fires `viewed dashboard` plus a `query executed` per tile. Harmless for the definition — an org counts once no matter how many events an action produces — but one more reason never to read summed event counts as "number of actions".
+Related: one action often produces several qualifying events. An agent creating a dashboard over MCP fires both `$mcp_tool_call` and `dashboard created` (with `source = 'mcp'`); opening a dashboard in the app fires `viewed dashboard` plus a `query executed` per tile. Harmless for the definition but another reason never to read summed event counts as "number of actions".
 
 ### The `source` allowlist
 
-Events captured on the server carry `properties.source`, which says which surface made the request. Events marked "allowlist" in the tables below only count when `source` is one of:
+Events captured on the server carry `properties.source`, which says which surface made the request. Events marked "allowlist" in the tables below only count when `source` is one of: `web`, `desktop`, `slack`, `mobile`, `posthog_ai`, `mcp`, `api`, `cli`,`terraform`
 
-`web`, `desktop`, `slack`, `mobile`, `posthog_ai`, `mcp`, `api`, `cli` — plus `terraform` on creation events (some teams manage their flags and other PostHog objects as code in their own repos; that's real usage).
-
-Machine values never count: `cache_warming`, `alert`, `export`, `subscription`, `self_driving` (Signals scouts), `posthog_code` (headless coding agents), `wizard` (setup automation). When a new `source` value appears, it stays excluded until someone classifies it: we'd prefer briefly undercounting a new surface than silently count machines as customers.
+Machine values never count: `cache_warming`, `alert`, `export`, `subscription`, `self_driving` (Signals scouts), `posthog_code` (headless coding agents), `wizard` (setup automation). When a new `source` value appears, it stays excluded until someone classifies it. We'd prefer briefly undercounting a new surface than silently count machines as customers.
 
 Two dates to know: `desktop`, `slack`, `mobile` and `self_driving` only exist since 2026-08-17 ([PostHog/posthog#72941](https://github.com/PostHog/posthog/pull/72941)), and nothing was backfilled. Before that date `$mcp_tool_call` carried no `source` at all, so historical queries on it need `source IS NULL OR source IN (...)` for the older window.
 
