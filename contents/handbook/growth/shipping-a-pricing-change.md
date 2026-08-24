@@ -6,7 +6,7 @@ showTitle: true
 
 [Pricing principles](/handbook/engineering/feature-pricing) covers what we charge for and the principles we hold ourselves to. This page covers the actual work: what you analyze and write, who reviews, who you communicate changes to, and in what order.
 
-Budget roughly six weeks from first draft to migration/launch day. This is definitely a cross-team effort, so communicate changes openly and early to get it across the line effectively.
+Budget roughly six weeks from the first draft of your RFC to migration/launch day. This is definitely a cross-team effort, so communicate changes openly and early to get it across the line effectively.
 
 ## RFC
 
