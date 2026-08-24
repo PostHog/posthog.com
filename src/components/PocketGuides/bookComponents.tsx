@@ -1,6 +1,7 @@
 import Term from './terms'
 
 import Action, { Setup } from './Action'
+import Callout from './Callout'
 import ReaderWrapper, { LeftPage, RightPage } from './ReaderWrapper'
 import {
     AnatomyFigure,
@@ -8,6 +9,7 @@ import {
     DivergenceFigure,
     EvalRunsFigure,
     ExampleFigure,
+    FactorSplitFigure,
     Fig,
     LeakFigure,
     LedgerFigure,
@@ -39,6 +41,7 @@ export const bookMdxComponents = {
     DivergenceFigure,
     EvalRunsFigure,
     ExampleFigure,
+    FactorSplitFigure,
     LedgerFigure,
     LeakFigure,
     ScoutFigure,
@@ -48,6 +51,7 @@ export const bookMdxComponents = {
     Watches,
     Enable,
     Action,
+    Callout,
     Setup,
     Contents,
     SeeAlso,

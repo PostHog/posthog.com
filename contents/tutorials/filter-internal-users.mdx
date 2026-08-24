@@ -48,7 +48,7 @@ Any internal users you identify for a project will apply for _all_ users on that
 
 ## Step 2: Add an internal user filter
 
-> **Tip:** Inline person property filters (e.g., "email does not contain your-domain.com") work everywhere, including real-time [CDP](/docs/cdp) destinations. Alternatively, you can [create a cohort](/docs/data/cohorts#method-2-create-a-new-cohort-from-the-cohorts-page) and add it with a "not in" operator – this works well for analytics queries (insights, dashboards) and also works in CDP destinations if the cohort contains **exclusively person property filters**. Cohorts with behavioral filters or no properties defined will cause CDP destinations to error.
+> **Tip:** Inline person property filters (e.g., "email does not end with @your-domain.com") work everywhere, including real-time [CDP](/docs/cdp) destinations. Alternatively, you can [create a cohort](/docs/data/cohorts#method-2-create-a-new-cohort-from-the-cohorts-page) and add it with a "not in" operator – this works well for analytics queries (insights, dashboards) and also works in CDP destinations if the cohort contains **exclusively person property filters**. Cohorts with behavioral filters or no properties defined will cause CDP destinations to error.
 
 In project settings, scroll down to the ‘_Filter out internal and test users_’ section and click ‘_+ Add filter_’ to begin.
 
@@ -56,7 +56,7 @@ Adding a filter here works exactly the same as it does when you add a filter to 
 
 One of the easiest filters to create is to filter out internal users identified by their email address. We do this at PostHog, using the following filter to create insights based only on users who do not have a PostHog email address:
 
-> email ∌ (doesn’t contain) @posthog.com
+> email ⇻ (doesn’t end with) @posthog.com
 
 <ProductScreenshot
   imageLight={step2Light}
