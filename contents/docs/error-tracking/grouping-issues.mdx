@@ -71,6 +71,8 @@ Every captured exception is assigned a [fingerprint](/docs/error-tracking/finger
 posthog.captureException(error, { $exception_fingerprint: "MyCustomGroup" })
 ```
 
+The first event with a custom fingerprint sets the issue name. By default, PostHog uses `$exception_list[0].type`. Set `$issue_name` on the first event to use a custom name. Later events with the same fingerprint do not rename the issue.
+
 If the exception is autocaptured, you need to modify the properties before the event is sent. The PostHog config offers a [`before_send`](/docs/libraries/js/usage#amending-or-sampling-events) hook that fires for each event which you can use to alter event and add the property:
 
 ```javascript
