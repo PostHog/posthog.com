@@ -1,6 +1,8 @@
 import React from 'react'
 import { motion, useReducedMotion } from 'framer-motion'
 
+import { AnatomyMarker } from './ReportAnatomy'
+
 /** One LLM call, in context: the trace that contains it, the steps around it, what each cost. */
 
 export interface TraceTreeRow {
@@ -12,6 +14,8 @@ export interface TraceTreeRow {
     meta?: string
     /** Nesting depth. The trace is 0; its children are 1. */
     depth?: number
+    /** Annotates this row with a hoverable number, for the one or two rows carrying the point. */
+    marker?: { n: number; label: string; gloss: string }
 }
 
 const KIND: Record<TraceTreeRow['kind'], { text: string; classes: string }> = {
@@ -24,7 +28,7 @@ export default function TraceTree({ rows }: { rows: TraceTreeRow[] }): JSX.Eleme
     const reducedMotion = useReducedMotion()
 
     return (
-        <ul className="@container m-0 list-none space-y-1 p-0">
+        <ul className="@container group/anatomy m-0 list-none space-y-1 p-0">
             {rows.map((row, index) => {
                 const kind = KIND[row.kind]
                 return (
@@ -49,6 +53,7 @@ export default function TraceTree({ rows }: { rows: TraceTreeRow[] }): JSX.Eleme
                         </span>
                         <span className="min-w-0 font-code text-primary">{row.label}</span>
                         {row.meta && <span className="tabular-nums text-secondary">{row.meta}</span>}
+                        {row.marker && <AnatomyMarker {...row.marker} />}
                     </motion.li>
                 )
             })}
