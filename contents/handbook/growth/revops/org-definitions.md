@@ -1,5 +1,5 @@
 ---
-title: Org definitions: intent, setup & engagement
+title: "Org definitions: intent, setup & engagement"
 sidebar: Handbook
 showTitle: true
 ---
