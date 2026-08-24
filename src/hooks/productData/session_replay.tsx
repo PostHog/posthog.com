@@ -152,6 +152,17 @@ export const sessionReplay = {
             // panels at the same size, so one set of panel-level coordinates holds for both.
             // The pocket guide annotates this inline – see contents/pocket-guides/session-replay/101.
         },
+        'player-inspector': {
+            // Cropped to the player and the inspector beside it, 3649x2074 at source. The
+            // transformations are carried inline on purpose – `<ScreenshotFigure>` puts the
+            // dark/light toggle on a wrapper, so CloudinaryImage's comma fallback is harmless.
+            src: 'https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/player_light_d95c9f5cd8.png',
+            srcDark:
+                'https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/player_dark_227437debc.png',
+            alt: "A session playing back on the left, with the inspector's event list and its five views on the right",
+            // Both variants are the same screen at the same size, so one set of coordinates holds.
+            // The pocket guide annotates this inline – see contents/pocket-guides/session-replay/101.
+        },
         home: {
             src: 'https://res.cloudinary.com/dmukukwp6/image/upload/screenshot_replay_timeline_light_9225f869dc.jpg',
             srcDark: 'https://res.cloudinary.com/dmukukwp6/image/upload/screenshot_replay_timeline_dark_f5371a996f.png',

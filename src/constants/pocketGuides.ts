@@ -17,8 +17,8 @@ export interface PocketGuideVolume {
 }
 
 /**
- * Every volume opens the same way: front matter at `bookOrder: 0`, a 101 at 1. Guides are what
- * follows. Authors assigning `bookOrder` in a volume's MDX frontmatter count from here.
+ * Every volume opens the same way: front matter at `pocketGuideOrder: 0`, a 101 at 1. Guides are what
+ * follows. Authors assigning `pocketGuideOrder` in a volume's MDX frontmatter count from here.
  */
 export const FIRST_GUIDE_BOOK_ORDER = 2
 

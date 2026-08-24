@@ -123,19 +123,27 @@ export function ScreenshotFigure({
     return (
         <Fig n={n} caption={caption} legend={legend ?? (items.length > 0 ? <AnatomyHint /> : undefined)}>
             <div className="relative leading-[0]">
-                <CloudinaryImage
-                    src={shot.src as CloudinarySrc}
-                    alt={alt ?? shot.alt ?? ''}
-                    className={shot.srcDark ? 'dark:hidden w-full' : 'w-full'}
-                    imgClassName={imgClasses}
-                />
-                {shot.srcDark && (
+                {/* The theme toggle lives on a wrapper, not on CloudinaryImage's `className`:
+                    a src carrying inline transformations has commas in it, and CloudinaryImage
+                    falls back to a plain <img> for those, dropping className. Both variants would
+                    render at once. */}
+                <span className={`block w-full ${shot.srcDark ? 'dark:hidden' : ''}`}>
                     <CloudinaryImage
-                        src={shot.srcDark as CloudinarySrc}
+                        src={shot.src as CloudinarySrc}
                         alt={alt ?? shot.alt ?? ''}
-                        className="hidden dark:inline-block w-full"
+                        className="w-full"
                         imgClassName={imgClasses}
                     />
+                </span>
+                {shot.srcDark && (
+                    <span className="hidden w-full dark:block">
+                        <CloudinaryImage
+                            src={shot.srcDark as CloudinarySrc}
+                            alt={alt ?? shot.alt ?? ''}
+                            className="w-full"
+                            imgClassName={imgClasses}
+                        />
+                    </span>
                 )}
                 {/* The same markers the anatomy figures use, kept always-visible: on an image
                     they anchor a spot, so a marker hidden until hover leaves nothing to find. */}

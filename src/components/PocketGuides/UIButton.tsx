@@ -41,18 +41,27 @@ export function ViewRecording(): JSX.Element {
     return <RecordingButton label="View recording" />
 }
 
+/** Opens PostHog AI with the prompt prefilled – the site's standard Max deep link. */
+const maxPromptUrl = (prompt: string) => `https://app.posthog.com/#panel=max:${encodeURIComponent(prompt)}`
+
 /**
  * A question you can hand straight to PostHog AI: `<AskAI q="Users who rage clicked…" />`.
+ *
  * Same chrome as the buttons above so it reads as a control rather than a quoted string, with an
  * arrow marking that it leaves the page – the plain link the docs use is easy to miss in a list.
+ * Children override the label: a table cell wants "Set up", not the whole prompt spelled out.
  */
-export function AskAI({ q }: { q: string }): JSX.Element {
+export function AskAI({ q, children }: { q: string; children?: React.ReactNode }): JSX.Element {
     return (
         <a
-            href={`https://app.posthog.com/#panel=max:${encodeURIComponent(q)}`}
-            className={`group/ask ${CHROME_CLASSES} no-underline hover:border-orange hover:text-orange`}
+            href={maxPromptUrl(q)}
+            // A short label is a control and shouldn't break across lines; a whole prompt spelled
+            // out has to wrap or it overflows the page column.
+            className={`group/ask ${CHROME_CLASSES} no-underline hover:border-orange hover:text-orange ${
+                children ? 'whitespace-nowrap' : ''
+            }`}
         >
-            {q}
+            {children ?? q}
             <IconArrowUpRight
                 className="size-[1.1em] shrink-0 text-secondary group-hover/ask:text-orange"
                 aria-hidden="true"

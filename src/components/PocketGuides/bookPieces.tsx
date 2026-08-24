@@ -174,7 +174,9 @@ export const proseComponents = {
             {...props}
         />
     ),
-    h3: (props: any) => <h3 className="mb-[0.3em] mt-[0.65em] text-[1em] font-bold text-primary" {...props} />,
+    // Below the h2 section label, which is 0.8em uppercase: a 1em bold h3 under it inverts the
+    // hierarchy, reading as the larger of the two. Sentence case at 0.9em stays subordinate.
+    h3: (props: any) => <h3 className="mb-[0.3em] mt-[1.1em] text-[0.9em] font-bold text-primary" {...props} />,
     p: (props: any) => <p className="mb-[0.8em] text-[1em] leading-relaxed text-secondary last:mb-0" {...props} />,
     // Lists and tables borrow the site's native docs styling (.article-content in global.css),
     // wrapped per element because the class also styles headings/paragraphs, which the book owns.
