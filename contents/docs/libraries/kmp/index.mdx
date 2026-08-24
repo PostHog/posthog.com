@@ -54,6 +54,16 @@ You can find the latest version on [Maven Central](https://central.sonatype.com/
 
 On iOS, the SDK uses Kotlin's [Swift Package Manager (SwiftPM) integration](https://kotlinlang.org/docs/multiplatform-spm-import.html) to link the native `posthog-ios` package and copy its resources, including privacy manifests, into your app.
 
+If your app supports iOS 13 or 14, set the minimum deployment target in the Gradle module that builds your iOS framework:
+
+```kotlin file=shared/build.gradle.kts
+kotlin {
+    swiftPMDependencies {
+        iosMinimumDeploymentTarget.set("13.0")
+    }
+}
+```
+
 After adding the dependency, run the linkage task once from your project root:
 
 ```bash
@@ -653,7 +663,7 @@ Pass a `SessionRecordingConfig` to `PostHogConfig.sessionRecording`. Defaults ma
 | Platform | Status | Backed by |
 | --- | --- | --- |
 | Android | ✅ | [PostHog Android](/docs/libraries/android) (native) |
-| iOS | ✅ | [PostHog iOS](/docs/libraries/ios) (native, via a Swift bridge) |
+| iOS | ✅ | [PostHog iOS](/docs/libraries/ios) (native, via SwiftPM) |
 | Web | ✅ | [PostHog.js](/docs/libraries/js) |
 | JVM (desktop) | ✅ | `com.posthog:posthog`, the [JVM core library](/docs/libraries/java) the Android SDK is built on |
 
