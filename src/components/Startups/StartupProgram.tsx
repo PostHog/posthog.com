@@ -136,7 +136,7 @@ const perks: { image: string; alt: string; title: string; copy: string }[] = [
     {
         image: 'https://res.cloudinary.com/dmukukwp6/image/upload/perk_merch_b2106b276a.png',
         alt: 'Exclusive PostHog founder merch and swag',
-        title: '$1,000 of founder swag',
+        title: 'Exclusive founder swag',
         copy: 'You can never have too many laptop stickers or free PostHog t-shirts.',
     },
     {
@@ -456,7 +456,7 @@ export default function StartupProgram({ partnerSlug = null }: StartupProgramPro
     const heroBullets = [
         `${creditValue} in PostHog credits for 12 months`,
         '$12,000 in benefits from partners we like',
-        '$1,000 of exclusive PostHog merch',
+        'Exclusive PostHog merch',
     ]
 
     return (

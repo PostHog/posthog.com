@@ -2,10 +2,10 @@ import React from 'react'
 import { GatsbyImage, getImage } from 'gatsby-plugin-image'
 import { IconNewspaper } from '@posthog/icons'
 import CloudinaryImage from 'components/CloudinaryImage'
-import { BuildModePost } from './types'
+import { PostSummary } from './types'
 
 type PostImageProps = {
-    post: BuildModePost
+    post: PostSummary
     /** Applied to the image wrapper (Gatsby/Cloudinary render one). */
     className?: string
     /** Applied to the `<img>` itself — where object-fit/cropping belongs. */
