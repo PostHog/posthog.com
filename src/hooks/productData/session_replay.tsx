@@ -163,6 +163,17 @@ export const sessionReplay = {
             // Both variants are the same screen at the same size, so one set of coordinates holds.
             // The pocket guide annotates this inline – see contents/pocket-guides/session-replay/101.
         },
+        'issue-recordings': {
+            // Cropped to the issue's right-hand pane, where both ways into a replay sit. Source
+            // is 2608x1570; the crop and the resize are carried inline, which is safe because
+            // `<ScreenshotFigure>` puts the dark/light toggle on a wrapper rather than the image.
+            src: 'https://res.cloudinary.com/dmukukwp6/image/upload/c_crop,x_1043,y_20,w_1565,h_1550/w_1600,c_limit,q_auto,f_auto/session_from_error_light_056bf99ba7.png',
+            srcDark:
+                'https://res.cloudinary.com/dmukukwp6/image/upload/c_crop,x_1043,y_20,w_1565,h_1550/w_1600,c_limit,q_auto,f_auto/session_from_error_dark_8efab34ebd.png',
+            alt: 'An Error Tracking issue, with the button for every recording of the issue above and the Recording tab for this one exception below',
+            // Both variants are the same screen at the same size, so one set of coordinates holds.
+            // The pocket guide annotates this inline – see contents/pocket-guides/session-replay/finding-replays.
+        },
         home: {
             src: 'https://res.cloudinary.com/dmukukwp6/image/upload/screenshot_replay_timeline_light_9225f869dc.jpg',
             srcDark: 'https://res.cloudinary.com/dmukukwp6/image/upload/screenshot_replay_timeline_dark_f5371a996f.png',

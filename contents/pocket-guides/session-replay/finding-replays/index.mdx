@@ -20,6 +20,29 @@ pocketGuideOrder: 5
     caption="Click a step in a funnel and you get the people it counted, each one a click away from their recording."
 />
 
+<ScreenshotFigure
+    n={2}
+    product="session_replay"
+    screenshot="issue-recordings"
+    caption="An Error Tracking issue: every recording of the issue from the top, this one exception's recording from the tab."
+    annotations={[
+        {
+            x: 70.8,
+            y: 2.8,
+            title: 'View all recordings associated with this issue',
+            description:
+                'Every session where this error fired, back to back – the whole population behind the issue rather than one instance of it.',
+        },
+        {
+            x: 65.8,
+            y: 42.6,
+            title: 'Watch replays associated with the currently selected instance of this exception',
+            description:
+                'The recording for the one exception you have selected in the list, playing in the issue itself. Open in session replay takes it to the full player.',
+        },
+    ]}
+/>
+
 </LeftPage>
 
 <RightPage>
@@ -47,7 +70,7 @@ Click a point on a trend, or a step in a funnel <SeeFig n={1} />, and you can wa
 
 Sessions and Error Tracking issues are also linked by a person's session. You can see the errors that occur during a replay, and you can also find all replays containing a given error.
 
-Just look for the <ViewRecordings /> button.
+Just look for the <ViewRecordings /> button, or open the **Recording** tab on the exception you have selected <SeeFig n={2} />.
 
 ## Saved filters
 
