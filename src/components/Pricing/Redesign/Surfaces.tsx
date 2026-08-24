@@ -10,8 +10,6 @@ import { IconAtSign, IconBolt, IconLaptop, IconPlug } from '@posthog/icons'
 const surfaces = [
     { name: 'PostHog Web', Icon: IconBolt, color: 'text-red' },
     { name: 'PostHog Slack', Icon: IconAtSign, color: 'text-sky-blue' },
-    // Brown is near-black, so it needs the light variant in dark mode — the same pairing
-    // /slack and /self-driving use for this colour.
     { name: 'PostHog Desktop', Icon: IconLaptop, color: 'text-brown dark:text-brown-dark' },
     { name: 'PostHog MCP', Icon: IconPlug, color: 'text-gray' },
 ]
