@@ -1,10 +1,10 @@
 import { useMemo, useState } from 'react'
-import { BuildModePost } from './types'
+import { PostSummary } from './types'
 
 export type PostSort = 'newest' | 'popular'
 
 /** Fields a post is searched across. */
-const searchableText = (post: BuildModePost): string =>
+const searchableText = (post: PostSummary): string =>
     [
         post.frontmatter.title,
         post.excerpt,
@@ -17,7 +17,7 @@ const searchableText = (post: BuildModePost): string =>
         .toLowerCase()
 
 /** Free-text search + single-tag filtering over a list of posts. */
-export function usePostFilters(posts: BuildModePost[]): {
+export function usePostFilters(posts: PostSummary[]): {
     query: string
     setQuery: (query: string) => void
     activeTag: string | null
@@ -26,7 +26,7 @@ export function usePostFilters(posts: BuildModePost[]): {
     setSort: (sort: PostSort) => void
     /** Every tag in use, most common first. */
     tags: string[]
-    filteredPosts: BuildModePost[]
+    filteredPosts: PostSummary[]
     isFiltered: boolean
     clear: () => void
 } {
