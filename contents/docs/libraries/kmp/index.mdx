@@ -50,9 +50,9 @@ You can find the latest version on [Maven Central](https://central.sonatype.com/
 
 ### Link the iOS Swift package
 
-> **Note:** This setup applies to `posthog-kmp` 0.5.0 and later and requires Kotlin 2.4.10 or later.
+> **Note:** This setup applies to `posthog-kmp` 0.5.0 and later and requires Kotlin 2.4.0 or later.
 
-On iOS, the SDK uses Kotlin's [Swift Package Manager (SwiftPM) integration](https://kotlinlang.org/docs/multiplatform-spm-import.html) to link the native `posthog-ios` package and copy its resources, including privacy manifests, into your app.
+On iOS, the SDK uses Kotlin's [Swift Package Manager (SwiftPM) integration](https://kotlinlang.org/docs/multiplatform/multiplatform-spm-import.html) to link the native `posthog-ios` package and copy its resources, including privacy manifests, into your app.
 
 If your app supports iOS 13 or 14, set the minimum deployment target in the Gradle module that builds your iOS framework:
 
@@ -73,7 +73,7 @@ XCODEPROJ_PATH="$PWD/iosApp/iosApp.xcodeproj" \
 
 Replace `iosApp/iosApp.xcodeproj` with the path to your Xcode project and `:shared` with the Gradle module that builds your iOS framework.
 
-The task generates a `KotlinMultiplatformLinkedPackage` directory and adds it to the Xcode project. Commit the generated package and Xcode project changes. The package is updated automatically when SwiftPM dependencies change. You don't need to add `posthog-ios` to Xcode separately.
+The task generates a `KotlinMultiplatformLinkedPackage` directory and adds it to the Xcode project. Commit the generated package and Xcode project changes. The package is updated automatically when SwiftPM dependencies change. If the first build after a dependency change stops with `Synthetic project state updated`, run the same build again. You don't need to add `posthog-ios` to Xcode separately.
 
 ### Configure the SDK
 
