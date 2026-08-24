@@ -29,20 +29,20 @@ Without naming it, every report I read was describing the same fix. I'm going to
 
 > The average company now runs 106 SaaS apps, each one throwing off its own data.
 >
-> — [BetterCloud, SaaS statistics, 2025](https://www.bettercloud.com/monitor/saas-statistics/)
+> [BetterCloud, SaaS statistics, 2025](https://www.bettercloud.com/monitor/saas-statistics/)
 
 An agent is only as good as the data it can reach. Give it product events but not revenue data, and it can't tell a churn risk from a power user. Give it support tickets but not usage, and it guesses at the cause. Most people don't know when their agent has failed because it keeps handing back confident, wrong answers until you stop trusting it.
 
 ![dbt Labs data](https://res.cloudinary.com/dmukukwp6/image/upload/dbt_screenshot_c970312d5d.png)
 > AI-driven acceleration is outpacing trust and governance, and 56% of teams name data quality as their most frequent challenge.
 >
-> — [dbt Labs, State of Analytics Engineering, 2025](https://www.getdbt.com/resources/state-of-analytics-engineering-2025)
+> [dbt Labs, State of Analytics Engineering, 2025](https://www.getdbt.com/resources/state-of-analytics-engineering-2025)
 
 This is where AI product development stalls. Teams blame the agent, but the problem is that the agent had no idea what was going on in the business.
 
 > 2/3 of data professionals admit they don't completely trust the data their AI is built on.
 >
-> — [Monte Carlo, State of Data Quality Survey, 2023](https://www.montecarlodata.com/blog-data-quality-survey)
+> [Monte Carlo, State of Data Quality Survey, 2023](https://www.montecarlodata.com/blog-data-quality-survey)
 
 With 106 SaaS apps producing data, that final 1/3rd of people who do trust their data are unlikely to know if a pipeline breaks and they stop getting critical data. AI fills the gap with something reasonable-sounding and simply moves on. Trust isn't the same as correct.
 
@@ -53,7 +53,7 @@ An agent can't see the full picture, so teams try to build it themselves. That m
 ![Apache data](https://res.cloudinary.com/dmukukwp6/image/upload/airflow_screenshot_3fecafcffd.png)
 > Over 80% of teams use AI to build pipelines, but overwhelmingly report generic AI tools aren't up to the task, citing hallucinations and missing context.
 >
-> — [Astronomer, State of Apache Airflow, 2026](https://www.astronomer.io/press-releases/astronomer-releases-state-of-apache-airflow-2026-report/)
+> [Astronomer, State of Apache Airflow, 2026](https://www.astronomer.io/press-releases/astronomer-releases-state-of-apache-airflow-2026-report/)
 
 The industry's answer to having too many fragile pipelines is to build more of them, with AI. The same report admits the AI doing it hallucinates and misses the context it needs. That's fighting a fire with gasoline.
 
@@ -61,7 +61,7 @@ Building and maintaining pipelines are the tax on data readiness. They cost time
 
 > 70% rate pipeline management as complex, and 64% of data teams spend more than half their time on repetitive tasks.
 >
-> — [Matillion, Data Integration & AI-Readiness Report, 2025](https://www.matillion.com/research-reports/data-integration-ai-readiness-report)
+> [Matillion, Data Integration & AI-Readiness Report, 2025](https://www.matillion.com/research-reports/data-integration-ai-readiness-report)
 
 That's most of a data team's week going on work that produces no new answers, only the continued ability to ask old ones.
 
@@ -70,7 +70,7 @@ That's most of a data team's week going on work that produces no new answers, on
 ![Fivetran data](https://res.cloudinary.com/dmukukwp6/image/upload/fivetran_screenshot_686e2c07e9.png)
 > 42% of teams say more than half of their AI projects have stalled, and the cause isn't the model. It's a lack of data readiness.
 >
-> — [Fivetran, AI & Data Readiness Report, 2025](https://www.fivetran.com/resources/reports/ai-data-readiness)
+> [Fivetran, AI & Data Readiness Report, 2025](https://www.fivetran.com/resources/reports/ai-data-readiness)
 
 Everyone is talking about how important data readiness is, and nobody agrees on what that actually means. If you're confused about how to get your data "ready," you're not alone. Each vendor defines it through their own lens: clean tables, pipeline uptime, a governance policy. Notice that every one of those definitions happens to describe the exact thing that the vendor sells. A definition that doubles as a sales pitch isn't a definition.
 
@@ -84,7 +84,7 @@ You need a way to stop building and babysitting pipelines so you can trust that 
 
 > Information is trapped in silos and data management is split across many different tools, causing teams to struggle to accelerate AI.
 >
-> — [Databricks, State of Data + AI](https://www.databricks.com/discover/state-of-data-ai)
+> [Databricks, State of Data + AI](https://www.databricks.com/discover/state-of-data-ai)
 
 A [context warehouse](/context-warehouse) wraps ingestion, modeling, storage, and querying in one tool instead of four you wire together with pipelines between them. Here's how that works in PostHog:
 
