@@ -115,7 +115,7 @@ Both of those are true at the same time, and that's the trouble with error rates
 
 ## Your error rate only counts what threw
 
-PostHog error tracking does good work with the errors it gets. Set `$ai_is_error` and it normalizes the message, so `Request req_abc123 failed` and `Request req_xyz789 failed` collapse into one issue with counts for traces, users, and days seen.
+PostHog Error Tracking works if you capture exceptions. Set `$ai_is_error` and it normalizes the message, so `Request req_abc123 failed` and `Request req_xyz789 failed` collapse into one issue with counts for traces, users, and days seen. This catches your timeouts, your 429s, and the malformed response that blew up your parser.
 
 That catches your timeouts, your 429s, and the malformed response that blew up your parser. It catches none of this:
 
