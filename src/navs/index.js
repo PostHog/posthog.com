@@ -8229,14 +8229,14 @@ export const docsMenu = {
             ],
         },
         {
-            name: 'Metrics',
+            name: 'Application metrics',
             icon: 'IconTrends',
             color: 'green',
             url: '/docs/metrics',
             description: 'Send OpenTelemetry metrics to PostHog and analyze them.',
             children: [
                 {
-                    name: 'Metrics',
+                    name: 'Application metrics',
                 },
                 {
                     name: 'Overview',
