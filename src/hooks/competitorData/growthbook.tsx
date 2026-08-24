@@ -137,7 +137,8 @@ export const growthbook = {
             },
         },
         product_analytics: {
-            available: false,
+            available: true,
+            beta: true,
             features: {
                 autocapture: false,
                 cohorts: true,
@@ -156,7 +157,7 @@ export const growthbook = {
             available: false,
         },
         dashboards: {
-            available: false,
+            available: 'Pro',
         },
         surveys: {
             available: false,
@@ -217,7 +218,7 @@ export const growthbook = {
             user_privacy_options: true,
         },
         analytics_integration: {
-            built_in_analytics: false,
+            built_in_analytics: 'Beta',
         },
     },
     pricing: {
