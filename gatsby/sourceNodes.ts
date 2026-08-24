@@ -1065,7 +1065,7 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
         }
 
         await Promise.all([
-            fetchPostHogPipelines('transformation', (pipeline) => pipeline.id.replace('plugin-', '')),
+            fetchPostHogPipelines('transformation', (pipeline) => pipeline.id.replace(/^(plugin|template)-/, '')),
             fetchPostHogPipelines('destination', (pipeline) => pipeline.id.replace('template-', '')),
             fetchPostHogPipelines('source_webhook', (pipeline) => pipeline.id.replace('template-', '')),
         ])
