@@ -46,22 +46,37 @@ stabilises the usual sources of noise before it screenshots:
 Third-party calls (PostHog analytics, Inkeep, YouTube, Wistia) are aborted and
 the page runs with `ph_optout` set so PostHog JS does not load.
 
-## Non-gating rollout
+## Soft-launch rollout
 
-CI runs these as a **tracking** (`--purpose observe`) Visual Review run. That
-means:
+CI runs these as real **review** Visual Review runs, but configures the
+Actions side so they cannot fail a pull request yet. Two different GitHub
+surfaces are involved:
 
-- **It does not fail the build.** Visual Review posts a green, informational
-  `PostHog Visual Review / playwright (tracking)` commit status, and the
-  workflow treats the CLI's exit code as informational so the Actions job
-  stays green even when pages differ.
-- Runs still record every snapshot and its diff history in the
-  [Visual Review UI](https://us.posthog.com/project/2/visual_review), so noisy
-  pages can be spotted and stabilised before we turn gating on.
+- **The `Visual regression tests` Actions job** always stays green for
+  visual changes. The three steps that talk to Visual Review use
+  `continue-on-error`, because `vr run complete` exits 1 whenever diffs are
+  detected (and also would on any VR outage, which must not break PRs either).
+  A capture failing — a page returning an error, layout not settling — still
+  fails the job on its own merits.
+- **The `PostHog Visual Review / playwright` commit status** is the genuine
+  review signal. It is posted by the Visual Review backend, not the workflow:
+  red while a run has unreviewed diffs, green once the run is clean or
+  approved + finalized. During the soft launch it is *not* a required status
+  check on master, so red is information, not a blocked merge.
 
-To start gating on visual changes: switch the workflow `--purpose` back to
-`review`, drop the `continue-on-error`, and approve the first clean run in
-Visual Review to publish the signed baseline to `snapshots.yml`.
+Runs are `purpose: review` so they are fully actionable in the
+[Visual Review UI](https://us.posthog.com/project/2/visual_review): approve
+diffs when they are expected, and finalize writes the signed baseline to
+`snapshots.yml` on the branch so the next run compares against it. That is
+also how we validate the determinism work — re-running the suite on an
+unchanged commit should come back with zero changed snapshots.
+(`purpose: observe` runs cannot be approved, so a tracking-only rollout could
+never build a baseline or tell us whether consecutive runs actually stay
+stable.)
+
+To graduate to a real gate: make `PostHog Visual Review / playwright` a
+required status check on master and drop the `continue-on-error` from the
+`Complete Visual Review run` step.
 
 ## Visual Review setup
 

@@ -304,7 +304,7 @@ jobs:
             - name: Create Visual Review run
               if: steps.changes.outputs.visual == 'true'
               id: vr-create
-              # Tracking-only rollout: a missing/invalid token or a VR outage must not fail PRs.
+              # Soft launch: a missing/invalid token or a VR outage must not fail PRs.
               continue-on-error: true
               shell: bash
               env:
@@ -320,7 +320,7 @@ jobs:
                     --branch "$VR_BRANCH" \
                     --commit "$VR_COMMIT" \
                     --pr "$VR_PR" \
-                    --purpose observe \
+                    --purpose review \
                     --token "$VR_TOKEN")
                   echo "run-id=$RUN_ID" >> "$GITHUB_OUTPUT"
 
@@ -339,10 +339,10 @@ jobs:
 
             - name: Complete Visual Review run
               if: always() && steps.changes.outputs.visual == 'true' && steps.vr-create.outputs.run-id != ''
-              # The run is created with --purpose observe (tracking-only), so visual changes
-              # are expected and must not fail the build. `vr run complete` still exits 1 when
-              # changes are detected, so make the step non-blocking until we switch the run
-              # purpose back to `review` to gate on visual changes.
+              # `vr run complete` exits 1 whenever visual changes are detected. The run is
+              # created with --purpose review, so the Visual Review UI (and its GitHub commit
+              # status) is the real review surface for now; while the snapshots settle we
+              # don't want a red Actions job on every PR too.
               continue-on-error: true
               env:
                   VR_TOKEN: ${{ secrets.VR_API_TOKEN }}
