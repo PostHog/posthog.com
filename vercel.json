@@ -5421,7 +5421,11 @@
         },
         {
             "source": "/docs/cdp/geoip-enrichment:ext(\\.md)?",
-            "destination": "/docs/cdp/transformations/posthog-plugin-geoip:ext?"
+            "destination": "/docs/cdp/transformations/template-geoip:ext?"
+        },
+        {
+            "source": "/docs/cdp/transformations/posthog-plugin-geoip:ext(\\.md)?",
+            "destination": "/docs/cdp/transformations/template-geoip:ext?"
         },
         {
             "source": "/docs/cdp/timestamp-parser:ext(\\.md)?",
