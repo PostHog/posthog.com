@@ -65,7 +65,7 @@ Related: one action often produces several qualifying events. An agent creating 
 
 ### The `source` allowlist
 
-Events captured on the server carry `properties.source`, which says which surface made the request. Events marked "allowlist" in the tables below only count when `source` is one of: `web`, `desktop`, `slack`, `mobile`, `posthog_ai`, `mcp`, `api`, `cli`, `terraform`
+Events captured on the server carry `properties.source`, which says which surface made the request. Events marked "allowlist" in the tables below only count when `source` is one of: `web`, `desktop`, `slack`, `mobile`, `posthog_ai`, `mcp`, `api`, `cli`, `terraform` (creation events only – Terraform re-reads every object on each `terraform plan`, so its consumption events are CI noise)
 
 Machine values never count: `cache_warming`, `alert`, `export`, `subscription`, `self_driving` (Signals scouts), `posthog_code` (headless coding agents), `wizard` (setup automation). When a new `source` value appears, it stays excluded until someone classifies it. We'd prefer briefly undercounting a new surface than silently count machines as customers.
 
@@ -94,7 +94,7 @@ Two dates to know: `desktop`, `slack`, `mobile` and `self_driving` only exist si
 
 ### Creating things
 
-Creating things counts as engagement even before any data gets consumed: a new flag or destination is the org putting PostHog to work. All server-side rows use the allowlist (plus `terraform`).
+Creating things counts as engagement even before any data gets consumed: a new flag or destination is the org putting PostHog to work. All server-side rows use the allowlist, including `terraform`.
 
 | Event | What fires it | Captured from |
 |---|---|---|
