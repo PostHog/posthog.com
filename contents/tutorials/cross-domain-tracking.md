@@ -165,7 +165,7 @@ function CheckoutButton() {
     // The partner returns the user to this URL after checkout.
     const returnUrl = `https://yoursite.com/return#session_id=${sessionId}&distinct_id=${distinctId}`
 
-    posthog.capture('checkout_started')
+    posthog.capture('checkout_started', {}, { transport: 'sendBeacon', send_instantly: true })
     window.location.href = `https://partner.com/pay?return_url=${encodeURIComponent(returnUrl)}`
   }
 
@@ -197,6 +197,8 @@ posthog.init("<ph_project_token>", {
 ### Measure the partner leg with an event pair
 
 You cannot capture events on the partner site. To measure the leg, capture one event when the user leaves and one event when the user comes back. In the example above, the events are `checkout_started` and a `checkout_returned` event on the return page.
+
+`checkout_started` fires right before the browser leaves your site, so the example above captures it with `transport: 'sendBeacon'` and `send_instantly: true`. Without these options, [event batching](/docs/libraries/js/usage#sending-events-before-a-page-unload) can hold the event until after the navigation and drop it, which loses the first funnel step and overstates your conversion rate. Even with them, the browser controls final delivery, so treat it as best effort.
 
 ```js
 posthog.capture('checkout_returned')
