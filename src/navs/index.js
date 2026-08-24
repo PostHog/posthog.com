@@ -3064,8 +3064,16 @@ export const docsMenu = {
                             url: '/docs/libraries/bubble',
                         },
                         {
+                            name: 'Discord',
+                            url: '/docs/libraries/discord',
+                        },
+                        {
                             name: 'Framer',
                             url: '/docs/libraries/framer',
+                        },
+                        {
+                            name: 'GitHub',
+                            url: '/docs/libraries/github',
                         },
                         {
                             name: 'Google Tag Manager',
