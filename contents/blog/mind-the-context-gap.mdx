@@ -87,7 +87,7 @@ My prediction for the next big trend? You need a way to stop building and babysi
 >
 > [Databricks, State of Data + AI](https://www.databricks.com/discover/state-of-data-ai)
 
-A [context warehouse](/context-warehouse) wraps ingestion, modeling, storage, and querying in one tool instead of four you wire together with pipelines between them. Using PostHog's context warehouse means you don't have to set up multiple pipelines between your data sources, warehouse, modeling, and BI tools, creating dependancies that take too much time to keep up with. Here's how it works in PostHog:
+A [context warehouse](/context-warehouse) wraps ingestion, modeling, storage, and querying in one tool instead of four you wire together with pipelines between them. Using PostHog's context warehouse means you don't have to set up multiple pipelines between your data sources, warehouse, modeling, and BI tools, creating dependencies that take too much time to keep up with. Here's how it works in PostHog:
 
 - **Your product data is already there.** PostHog captures data from experiments, logs, errors (and more) as it happens, so there's no export to get it into a separate warehouse.
 - **External sources sync in.** Connect [Stripe](https://posthog.com/docs/data-warehouse/sources/stripe), [HubSpot](https://posthog.com/docs/data-warehouse/sources/hubspot), [Salesforce](https://posthog.com/docs/data-warehouse/sources/salesforce), [Postgres](https://posthog.com/docs/data-warehouse/sources/postgres), and the other 102 sources of data you have, and it lands in the same warehouse. The pipelines are maintained automatically with scheduled, by default syncs.
