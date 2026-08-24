@@ -9,7 +9,6 @@ const docsUrlOverrides: Record<string, string> = {
     realtime_destinations: '/docs/cdp/destinations',
     posthog_ai: '/docs/posthog-ai',
     inbox: '/docs/self-driving/inbox',
-    // Marketing slug is `desktop` (/desktop), but the docs kept the full product name.
     posthog_code: '/docs/posthog-desktop',
 }
 

@@ -40,8 +40,6 @@ const initialProducts = [
     logs,
     workflows,
     inbox,
-    // Sits after Inbox deliberately. Neither handle is in `BROWSE_TOOLS_HANDLES`, so both fall
-    // into the calculator's `Infinity` sort bucket, which keeps this order — see `Tabbed`.
     posthogDesktop,
     endpoints,
     replayVision,

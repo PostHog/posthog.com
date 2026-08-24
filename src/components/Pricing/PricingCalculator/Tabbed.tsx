@@ -418,10 +418,6 @@ export default function Tabbed() {
                                             <div className="flex items-center space-x-2">
                                                 {Icon && (
                                                     <span>
-                                                        {/* `colorDark` is opt-in, for the few brand
-                                                            colours that vanish against a dark
-                                                            background (brown). Everything else
-                                                            reads fine in both modes. */}
                                                         <Icon
                                                             className={`w-5 h-6 text-${color}${
                                                                 colorDark ? ` dark:text-${colorDark}` : ''

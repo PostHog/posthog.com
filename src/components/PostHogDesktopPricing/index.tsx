@@ -201,8 +201,6 @@ const FALLBACK_PRICING: PricingResponse = {
             },
         },
     ],
-    // Shared with the Desktop tab in the /pricing calculator, which quotes the same card as an
-    // hourly rate — see `lib/posthogDesktopCompute`.
     compute: PUBLISHED_COMPUTE_RATE_CARD,
 }
 
