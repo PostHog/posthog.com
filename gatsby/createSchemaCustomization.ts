@@ -13,6 +13,7 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
     }
     type MdxFields {
       slug: String
+      wordCount: Int
       contributors: [Contributors]
       appConfig: [AppConfig]
       commits: [Commit]

@@ -1,24 +1,36 @@
 import React from 'react'
 import Link from 'components/Link'
+import { Accent, accents } from './accents'
 import PostImage from './PostImage'
 import Tape from './Tape'
-import { BuildModePost } from './types'
+import { PostSummary } from './types'
 import { getByline, getSubtitle } from './utils'
 
 /** The newest post, taped up: image left, title, dek, and byline right. */
-export default function FeaturedPost({ post }: { post: BuildModePost }): JSX.Element {
+export default function FeaturedPost({
+    calloutPosition = 'left',
+    post,
+    annotation = 'Hot off the press',
+    accent = 'red',
+}: {
+    calloutPosition?: 'left' | 'right'
+    post: PostSummary
+    annotation?: string
+    accent?: Accent
+}): JSX.Element {
+    const annotationColor = accents[accent].annotation
     return (
         <div className="min-w-0">
             {/* Hand-drawn-style annotation pointing down at the newest post */}
             <div className="mb-3 flex items-start gap-2 pl-1 @2xl:mb-6">
-                <span className="-rotate-2 text-lg font-bold italic text-red-2-dark @2xl:text-xl">
-                    Hot off the press
+                <span className={`-rotate-2 text-lg font-bold italic @2xl:text-xl ${annotationColor}`}>
+                    {annotation}
                 </span>
                 <svg
                     viewBox="0 0 32 32"
                     fill="none"
                     aria-hidden="true"
-                    className="mt-3.5 size-9 text-red-2-dark @2xl:size-10"
+                    className={`mt-3.5 size-9 @2xl:size-10 ${annotationColor}`}
                 >
                     <path d="M6 3 C 20 6, 25 16, 22 28" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" />
                     <path
@@ -33,7 +45,7 @@ export default function FeaturedPost({ post }: { post: BuildModePost }): JSX.Ele
             <Link
                 to={post.fields.slug}
                 state={{ newWindow: true }}
-                className="group flex flex-col gap-3 no-underline text-primary @2xl:flex-row @2xl:items-start @2xl:gap-8"
+                className="group flex no-underline text-primary flex-col gap-8 @2xl:flex-row @2xl:items-start @2xl:gap-8"
             >
                 {/* Image keeps its own aspect ratio — no fixed frame, no cropping */}
                 <div className="relative shrink-0 @2xl:w-[46%]">
