@@ -3,12 +3,11 @@ title: "Nobody watches their session replays. We studied 7.7 million views to pr
 date: 2026-08-24
 author:
   - natalia-amorim
-featuredImage: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/nobody_watches_session_replays_3d44215c4a.png
+featuredImage: https://res.cloudinary.com/dmukukwp6/image/upload/nobody_watches_session_replays_3d44215c4a.png
 featuredImageType: full
 category: General
 tags:
-  - studies
+  - Studies
 seo:
   metaTitle: "Nobody watches their session replays – a study of 7.7 million views"
   metaDescription: "We timed 7.65M session replay views. The median lasts 17 seconds, and 99.8% of recordings are never opened. Here's the data, and the fix" 
@@ -26,13 +25,13 @@ Short answer: we are. The median replay holds attention for just **17 seconds**,
 
 ## How long people actually watch a replay
 
-![Hook](https://res.cloudinary.com/dmukukwp6/image/upload/the_median_replay_5481af9eb3.png)
-
-![Replay retention](https://res.cloudinary.com/dmukukwp6/image/upload/the_median_replay_b28f4c7ceb.png)
-
 Every time anyone opened the player and actually watched something, we timed it. The median session lasted 17 seconds. Two-thirds were over inside 30. 
 
+![Hook](https://res.cloudinary.com/dmukukwp6/image/upload/the_median_replay_5481af9eb3.png)
+
 Meanwhile, the average recording those people were dipping into runs 28 minutes long. So the typical viewer watches **17 seconds of a 28-minute session**, about 1% of it, and moves on.
+
+![Replay retention](https://res.cloudinary.com/dmukukwp6/image/upload/the_median_replay_b28f4c7ceb.png)
 
 Even if you're generous and use the median recording length – a more civilized five minutes – you're still looking at someone sampling about 6% before moving on.
 
@@ -60,7 +59,7 @@ And that's the *median* company. The average one – dragged up by the big custo
 
 But we still wanted to know: who are users actually watching? (bless their hearts)
 
-![Who watches replays?](https://res.cloudinary.com/dmukukwp6/image/upload/the_median_replay_d22bae8f0d.pngg)
+![Who watches replays?](https://res.cloudinary.com/dmukukwp6/image/upload/the_median_replay_d22bae8f0d.png)
 
 Across PostHog's entire customer base, every one of those views came from just **128,000 people** – so the average viewer accounts for about **60 views in 90 days**. 
 
@@ -83,13 +82,19 @@ That's why we built [Replay Vision](/replay-vision).
 You tell it what to look for, and it reads every session for exactly that – scoring frustration, flagging dead-ends, classifying what users came to do, summarizing what happened, or answering any other question about your users you can put into words.
 
 <ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/templates_picker_fb4ef59a19.png"
+  alt="The scanner templates picker with the five built-in templates and the create-from-scratch option"
+  classes="rounded"
+/>
+
+*Those are just the examples we reach for most; it is fully customizable to your needs, so the sky is the limit here.*
+
+<ProductScreenshot
   imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/replay_vision_overview_app_light_9f82e7b066.png"
   imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/replay_vision_overview_app_dark_73d0b2c435.png"
   alt="The Replay Vision overview: observations over time, enabled scanners, the monthly usage meter, and the scanner list"
   classes="rounded"
 />
-
-*Those are just the examples we reach for most; it is fully customizable to your needs, so the sky is the limit here.*
 
 It reads at a pace no person can match. Since launch three weeks ago, it has watched **1,291,000 recordings** – around **51 years** of footage. To get through that much yourself, you'd have had to start watching in **1975** and never stop. 
 
