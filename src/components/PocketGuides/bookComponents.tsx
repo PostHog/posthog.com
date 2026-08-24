@@ -1,18 +1,22 @@
 import Term from './terms'
 
 import Action, { Setup } from './Action'
+import Callout from './Callout'
 import ReaderWrapper, { LeftPage, RightPage } from './ReaderWrapper'
 import {
     AnatomyFigure,
     DetailFigure,
     DivergenceFigure,
     EvalRunsFigure,
+    ExampleFigure,
+    FactorSplitFigure,
     Fig,
     LeakFigure,
     LedgerFigure,
     LoopFigure,
     ReportFigure,
     ScoutFigure,
+    SkillFigure,
     TraceFigure,
 } from './figures'
 import { Contents, Enable, Eyebrow, SeeAlso, SeeFig, Watches, proseComponents } from './bookPieces'
@@ -36,14 +40,18 @@ export const bookMdxComponents = {
     DetailFigure,
     DivergenceFigure,
     EvalRunsFigure,
+    ExampleFigure,
+    FactorSplitFigure,
     LedgerFigure,
     LeakFigure,
     ScoutFigure,
+    SkillFigure,
     TraceFigure,
     LoopFigure,
     Watches,
     Enable,
     Action,
+    Callout,
     Setup,
     Contents,
     SeeAlso,

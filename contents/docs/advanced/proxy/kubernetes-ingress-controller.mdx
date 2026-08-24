@@ -94,6 +94,8 @@ metadata:
     nginx.ingress.kubernetes.io/proxy-ssl-verify: "on"
     nginx.ingress.kubernetes.io/proxy-ssl-server-name: "on"
     nginx.ingress.kubernetes.io/proxy-ssl-name: us-assets.i.posthog.com
+    nginx.ingress.kubernetes.io/configuration-snippet: |
+      proxy_set_header Cookie "";
 spec:
   tls:
   - hosts:
@@ -131,6 +133,8 @@ metadata:
     nginx.ingress.kubernetes.io/proxy-ssl-verify: "on"
     nginx.ingress.kubernetes.io/proxy-ssl-server-name: "on"
     nginx.ingress.kubernetes.io/proxy-ssl-name: us.i.posthog.com
+    nginx.ingress.kubernetes.io/configuration-snippet: |
+      proxy_set_header Cookie "";
 spec:
   tls:
   - hosts:
@@ -188,6 +192,7 @@ The annotations in the Ingress configuration above do the following:
 - `proxy-ssl-secret` supplies the trusted certificate authorities used for upstream verification.
 - `proxy-ssl-verify` requires a valid certificate from the upstream.
 - `proxy-ssl-server-name` and `proxy-ssl-name` send and verify the correct hostname during the TLS handshake.
+- `configuration-snippet` removes browser cookies before sending requests to PostHog.
 
 The API and asset paths use separate Ingress resources because each upstream needs its own Host header and verified TLS hostname. The ExternalName services keep the upstreams as DNS names, allowing ingress-nginx to re-resolve them when their DNS records change.
 

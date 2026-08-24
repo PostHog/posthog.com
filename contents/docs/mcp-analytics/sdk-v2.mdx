@@ -4,7 +4,7 @@ title: MCP SDK v2
 
 import CalloutBox from 'components/Docs/CalloutBox'
 
-The MCP TypeScript SDK has two majors. `@posthog/mcp` supports both, and detects which one you're on at runtime — neither is a dependency of the package.
+The MCP TypeScript SDK has two majors. `@posthog/mcp` supports both, and detects which one you're on at runtime — neither is a dependency of the package. The Python MCP SDK made the same split; see [Python](#python) below.
 
 | Your imports | Major | Protocol revisions it serves |
 | --- | --- | --- |
@@ -12,12 +12,6 @@ The MCP TypeScript SDK has two majors. `@posthog/mcp` supports both, and detects
 | `@modelcontextprotocol/core`, `/server`, `/client` | **v2** | `2025-11-25` and `2026-07-28` |
 
 Use `@posthog/mcp` 0.11.2 or later on v2. Earlier versions captured nothing, silently.
-
-<CalloutBox icon="IconFlask" title="TypeScript today, Python soon" type="fyi">
-
-This page covers the MCP **TypeScript** SDK. The [Python SDK](/docs/mcp-analytics/installation#python) is still in active development: it emits the same `$mcp_*` events, but doesn't support the `2026-07-28` revision yet. That support is on the way.
-
-</CalloutBox>
 
 ## Setup
 
@@ -29,7 +23,7 @@ import { PostHog } from "posthog-node"
 import { instrument } from "@posthog/mcp"
 
 const server = new McpServer({ name: "my-mcp-server", version: "1.0.0" })
-const posthog = new PostHog(process.env.POSTHOG_PROJECT_API_KEY)
+const posthog = new PostHog(process.env.POSTHOG_PROJECT_TOKEN)
 
 instrument(server, posthog)
 
@@ -59,6 +53,32 @@ instrument(server, posthog, {
 })
 ```
 
+## Python
+
+The [Python SDK](/docs/mcp-analytics/installation#python) supports both `mcp` majors too (`mcp>=1.26,<3`), detected at runtime. On 2.x, `FastMCP` was renamed — same `instrument()` call:
+
+```python
+from mcp.server.mcpserver import MCPServer
+from posthog.mcp import instrument
+
+server = MCPServer("my-server")
+instrument(server, posthog)
+```
+
+The low-level `Server` works on both majors. jlowin's standalone `fastmcp` package pins `mcp<2`, so it stays on the 1.x path — nothing to change there.
+
+The header gotcha above applies in Python too: the request context reaches your callbacks in a different shape on each major. Use the exported helper in `identify`, `intent_fallback`, and `event_properties` — it returns a lowercase-keyed dict on HTTP transports, `None` on stdio, and never raises:
+
+```python
+from posthog.mcp import get_request_headers
+
+def identify(request, extra):
+    headers = get_request_headers(extra) or {}
+    return resolve_user(headers.get("authorization"))
+```
+
+[Sessions on `2026-07-28`](#sessions-on-2026-07-28) work as described below: `enable_conversation_id=True` is the only shared `$session_id` on that revision, and both SDKs derive the same session id from the same `conversation_id`, so a mixed TypeScript-and-Python fleet agrees on sessions.
+
 ## Sessions on `2026-07-28`
 
 That revision removed the `initialize` handshake and the `Mcp-Session-Id` header, so the [stateless session token](/docs/mcp-analytics/installation#stateless-and-multi-pod-servers) doesn't apply to it — and left alone, **every request becomes its own `$session_id`**:
@@ -75,6 +95,8 @@ On that revision the client sends its name and version only at `initialize`. If 
 </CalloutBox>
 
 ## Not instrumented yet
+
+These gaps apply to the TypeScript and Python SDKs alike.
 
 | `2026-07-28` feature | What you get today |
 | --- | --- |

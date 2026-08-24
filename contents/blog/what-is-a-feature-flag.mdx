@@ -49,7 +49,7 @@ In PostHog, feature flags support percentage-based rollouts (ship to 5% of users
 
 - **Progressive rollouts** – Ship to a small group, monitor for issues, then expand. This is the classic [canary release](/tutorials/canary-release) pattern.
 - **Kill switches** – Instantly disable a broken feature without rolling back a deployment. No hotfix, no deploy, no waiting.
-- **Internal testing** – Release to your team first (set email contains `@yourcompany.com`), then to beta users, then to everyone.
+- **Internal testing** – Release to your team first (set email ends with `@yourcompany.com`), then to beta users, then to everyone.
 - **Operational toggles** – Maintenance mode, circuit breakers, or infrastructure controls that stay permanent.
 
 [Feature flags have a lot of uses](/product-engineers/feature-flag-benefits-use-cases), but measuring impact isn't one of them. They let you turn something on and off, but, on their own they won't tell you whether "on" is actually good. That's when you pair them with [analytics](/docs/product-analytics) and [experiments](/docs/experiments).

@@ -19,7 +19,7 @@ export default function TransactionTitle({
 }: {
     type: string
     metadata?: TransactionMetadata
-    date?: Date
+    date?: string | Date
     link?: {
         url: string
         label: string

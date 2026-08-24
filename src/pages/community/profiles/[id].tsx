@@ -1000,6 +1000,7 @@ const BodyEditor = ({ values, setFieldValue, bodyKey, initialValue, maxLength })
 const ProfileTabs = ({ profile, firstName, id, isEditing, values, errors, setFieldValue }) => {
     const { appWindow } = useWindow()
     const { user, isModerator } = useUser()
+    const isCurrentUser = user?.profile?.id === id
     const [sort, setSort] = useState(sortOptions[0].label)
     const [hasPosts, setHasPosts] = useState(false)
     const posts = usePosts({
@@ -1102,7 +1103,7 @@ const ProfileTabs = ({ profile, firstName, id, isEditing, values, errors, setFie
                   },
               ]
             : []),
-        ...(user?.profile?.id === id
+        ...(isCurrentUser
             ? [
                   {
                       value: 'likes',
@@ -1118,6 +1119,19 @@ const ProfileTabs = ({ profile, firstName, id, isEditing, values, errors, setFie
                       value: 'points',
                       label: 'Points',
                       content: <Points />,
+                  },
+              ]
+            : []),
+        // Read-only view of someone else's balance. Mutually exclusive with the block above,
+        // so `?tab=points` deep links work for both audiences.
+        ...(isModerator && !isCurrentUser
+            ? [
+                  {
+                      value: 'points',
+                      label: 'Points',
+                      content: (
+                          <Points readOnly wallet={profile?.user?.data?.attributes?.wallet} firstName={firstName} />
+                      ),
                   },
               ]
             : []),
@@ -1204,9 +1218,19 @@ export default function ProfilePage({ params }: PageProps) {
                     },
                 },
                 tShirt: true,
+                // Strapi gates the `user` relation to the moderator role, which is what keeps
+                // email and the points wallet from leaking to regular members.
                 ...(isModerator
                     ? {
-                          user: true,
+                          user: {
+                              populate: {
+                                  wallet: {
+                                      populate: {
+                                          transactions: true,
+                                      },
+                                  },
+                              },
+                          },
                       }
                     : null),
             },
