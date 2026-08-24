@@ -17,6 +17,8 @@ jobs:
         runs-on: depot-ubuntu-latest-8
         timeout-minutes: 45
         if: ${{ !github.event.pull_request.head.repo.fork }}
+        outputs:
+            preview-url: ${{ steps.deploy.outputs.deployment-url }}
         permissions:
             contents: read
             pull-requests: write
@@ -213,3 +215,152 @@ jobs:
                       - **MDX issues** - unescaped `<`/`>` characters, unclosed tags, or malformed JSX
                       - **External API timeouts** - GitHub, Strapi, or Ashby occasionally hiccup
                       </details>
+
+    visual-regression:
+        name: Visual regression tests
+        needs: build-and-deploy
+        runs-on: ubuntu-latest
+        timeout-minutes: 30
+        container:
+            image: ghcr.io/posthog/playwright:v1.60.0
+        permissions:
+            contents: read
+            pull-requests: read
+
+        steps:
+            - name: Checkout
+              uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4.3.1
+
+            - name: Detect visual changes
+              id: changes
+              uses: dorny/paths-filter@fbd0ab8f3e69293af611ebaee6363fc25e6d187d # v4.0.1
+              with:
+                  filters: |
+                      visual:
+                        - '.github/workflows/deploy-preview.yml'
+                        - 'contents/**'
+                        - 'gatsby/**'
+                        - 'gatsby-*.js'
+                        - 'gatsby-*.ts'
+                        - 'plugins/**'
+                        - 'scripts/**'
+                        - 'src/**'
+                        - 'static/**'
+                        - 'patches/**'
+                        - 'package.json'
+                        - 'pnpm-lock.yaml'
+                        - 'pnpm-workspace.yaml'
+                        - 'postcss.config.js'
+                        - 'tailwind.config.js'
+                        - 'tsconfig*.json'
+                        - 'vercel.json'
+                        - 'visual-regression/**'
+
+            - name: Set up pnpm
+              if: steps.changes.outputs.visual == 'true'
+              uses: pnpm/action-setup@c5ba7f7862a0f64c1b1a05fbac13e0b8e86ba08c # v4
+
+            - name: Set up Node.js
+              if: steps.changes.outputs.visual == 'true'
+              uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
+              with:
+                  node-version: '22'
+                  cache: 'pnpm'
+
+            - name: Install dependencies
+              if: steps.changes.outputs.visual == 'true'
+              # The preview is already built and the Playwright container includes Chromium.
+              # Avoid unrelated legacy postinstalls (notably PhantomJS, which requires bzip2).
+              run: pnpm install --frozen-lockfile --ignore-scripts
+
+            - name: Capture preview pages
+              if: steps.changes.outputs.visual == 'true'
+              run: pnpm test:visual
+              env:
+                  BASE_URL: ${{ needs.build-and-deploy.outputs.preview-url }}
+
+            # Use the same Visual Review CLI as PostHog/posthog. The generated API schema is
+            # inside the CLI's TypeScript root and is required to compile it.
+            - name: Checkout Visual Review CLI
+              if: steps.changes.outputs.visual == 'true'
+              uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4.3.1
+              with:
+                  repository: PostHog/posthog
+                  ref: 8e64b74c5516ee20ba90b937c3446a64a07c6a62
+                  path: vr-cli
+                  sparse-checkout: |
+                      products/visual_review/cli
+                      products/visual_review/frontend/generated/api.schemas.ts
+                  sparse-checkout-cone-mode: false
+
+            - name: Install Visual Review CLI
+              if: steps.changes.outputs.visual == 'true'
+              run: |
+                  cd vr-cli/products/visual_review/cli
+                  pnpm --ignore-workspace import
+                  pnpm --ignore-workspace install --frozen-lockfile
+                  pnpm --ignore-workspace build
+
+            - name: Create Visual Review run
+              if: steps.changes.outputs.visual == 'true'
+              id: vr-create
+              # Tracking-only rollout: a missing/invalid token or a VR outage must not fail PRs.
+              continue-on-error: true
+              shell: bash
+              env:
+                  VR_TOKEN: ${{ secrets.VR_API_TOKEN }}
+                  VR_BRANCH: ${{ github.event.pull_request.head.ref }}
+                  VR_COMMIT: ${{ github.event.pull_request.head.sha }}
+                  VR_PR: ${{ github.event.pull_request.number }}
+                  JOB_CHECK_RUN_ID: ${{ job.check_run_id }}
+              run: |
+                  RUN_ID=$(node vr-cli/products/visual_review/cli/dist/cli/src/index.js run create \
+                    --type playwright \
+                    --baseline visual-regression/snapshots.yml \
+                    --branch "$VR_BRANCH" \
+                    --commit "$VR_COMMIT" \
+                    --pr "$VR_PR" \
+                    --purpose observe \
+                    --token "$VR_TOKEN")
+                  echo "run-id=$RUN_ID" >> "$GITHUB_OUTPUT"
+
+            - name: Upload screenshots to Visual Review
+              if: steps.changes.outputs.visual == 'true' && steps.vr-create.outputs.run-id != ''
+              continue-on-error: true
+              env:
+                  VR_TOKEN: ${{ secrets.VR_API_TOKEN }}
+                  VR_RUN_ID: ${{ steps.vr-create.outputs.run-id }}
+              run: |
+                  node vr-cli/products/visual_review/cli/dist/cli/src/index.js run upload \
+                    --run-id "$VR_RUN_ID" \
+                    --dir .visual-regression/screenshots \
+                    --baseline visual-regression/snapshots.yml \
+                    --token "$VR_TOKEN"
+
+            - name: Complete Visual Review run
+              if: always() && steps.changes.outputs.visual == 'true' && steps.vr-create.outputs.run-id != ''
+              # The run is created with --purpose observe (tracking-only), so visual changes
+              # are expected and must not fail the build. `vr run complete` still exits 1 when
+              # changes are detected, so make the step non-blocking until we switch the run
+              # purpose back to `review` to gate on visual changes.
+              continue-on-error: true
+              env:
+                  VR_TOKEN: ${{ secrets.VR_API_TOKEN }}
+                  VR_RUN_ID: ${{ steps.vr-create.outputs.run-id }}
+              run: |
+                  node vr-cli/products/visual_review/cli/dist/cli/src/index.js run complete \
+                    --run-id "$VR_RUN_ID" \
+                    --baseline visual-regression/snapshots.yml \
+                    --token "$VR_TOKEN"
+
+            - name: Upload visual regression artifacts
+              if: always() && steps.changes.outputs.visual == 'true'
+              uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+              with:
+                  name: visual-regression
+                  path: |
+                      .visual-regression/report/
+                      .visual-regression/results/
+                      .visual-regression/screenshots/
+                  if-no-files-found: warn
+                  retention-days: 7
