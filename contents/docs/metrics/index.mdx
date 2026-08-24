@@ -1,10 +1,12 @@
 ---
-title: Metrics
+title: Application metrics
 ---
 
-> **Note:** Metrics is in alpha. Setup details, including the ingestion endpoint, may change before general availability.
+> **Note:** Application metrics is in alpha. Setup details, including the ingestion endpoint, may change before general availability.
 
-PostHog Metrics lets you send application and infrastructure metrics (request counts, latencies, queue depths, resource usage) to PostHog and analyze them alongside your [logs](/docs/logs), [traces](/docs/distributed-tracing), and product data.
+**Application metrics** lets you send application and infrastructure metrics (request counts, latencies, queue depths, resource usage) to PostHog and analyze them alongside your [logs](/docs/logs), [traces](/docs/distributed-tracing), and product data.
+
+We call these *application metrics* to distinguish them from the other kinds of metrics PostHog helps you track — [experiment metrics](/docs/experiments/metrics), [revenue metrics](/docs/revenue-analytics/revenue-metrics), and [usage metrics](/docs/customer-analytics/usage-metrics) measure your product and business, whereas application metrics measure the systems running it.
 
 There are three ways to send metrics:
 
