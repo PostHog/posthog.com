@@ -38,19 +38,21 @@ const Row = ({
     slider,
     cost,
     note,
+    prefix,
 }: {
     label: string
     suffix: string
     value: number
     onChange: (value: number) => void
-    slider: { min: number; max: number; marks: number[]; scaleMin?: number }
+    slider?: { min: number; max: number; marks: number[]; scaleMin?: number }
     cost: number
     note: React.ReactNode
+    prefix?: string
 }): JSX.Element => {
-    const scaleMin = slider.scaleMin ?? Math.max(slider.min, 1)
+    const scaleMin = slider?.scaleMin ?? Math.max(slider?.min ?? 0, 1)
     const fromSlider = (next: number): number => {
         const rounded = Math.round(sliderCurve(next))
-        return slider.min === 0 && rounded <= scaleMin ? 0 : Math.max(rounded, slider.min)
+        return slider?.min === 0 && rounded <= scaleMin ? 0 : Math.max(rounded, slider?.min ?? 0)
     }
 
     return (
@@ -61,7 +63,9 @@ const Row = ({
                     <NumericFormat
                         inputClassName="bg-transparent text-center focus:ring-0 focus:border-red dark:focus:border-yellow focus:bg-white dark:focus:bg-accent-dark font-code max-w-[103px] text-sm border border-light hover:border-button dark:border-dark rounded-sm py-1 px-0 min-w-[25px] px-1"
                         value={value}
+                        prefix={prefix}
                         thousandSeparator=","
+                        decimalScale={prefix ? 2 : 0}
                         onValueChange={({ floatValue }) => onChange(floatValue || 0)}
                         customInput={AutosizeInput}
                     />{' '}
@@ -71,18 +75,22 @@ const Row = ({
             <div className="col-span-2 text-right pr-3">
                 <p className="font-semibold mb-0">{formatUSD(cost)}</p>
             </div>
-            <div className="col-span-full pr-1.5">
-                <LogSlider
-                    stepsInRange={100}
-                    marks={slider.marks}
-                    min={slider.min}
-                    max={slider.max}
-                    scaleMin={scaleMin}
-                    onChange={(next) => onChange(fromSlider(next))}
-                    value={inverseCurve(Math.max(value, scaleMin))}
-                />
+            {slider && (
+                <div className="col-span-full pr-1.5">
+                    <LogSlider
+                        stepsInRange={100}
+                        marks={slider.marks}
+                        min={slider.min}
+                        max={slider.max}
+                        scaleMin={scaleMin}
+                        onChange={(next) => onChange(fromSlider(next))}
+                        value={inverseCurve(Math.max(value, scaleMin))}
+                    />
+                </div>
+            )}
+            <div className={`col-span-full pr-1.5 text-sm text-secondary ${slider ? 'mt-10 md:mt-8' : ''}`}>
+                {note}
             </div>
-            <div className="col-span-full pr-1.5 mt-10 md:mt-8 text-sm text-secondary">{note}</div>
         </div>
     )
 }
@@ -108,34 +116,28 @@ export default function PostHogDesktopTab({
     const computeRate = hourlyComputeUsd(liveCompute ?? PUBLISHED_COMPUTE_RATE_CARD)
     const isPublishedRate = liveCompute === null
 
-    const tokenSliderMin = Math.max(freeCredits, 1)
-    const tokenSlider = {
-        min: tokenSliderMin,
-        max: tokenSliderMin * 100,
-        marks: [tokenSliderMin, tokenSliderMin * 5, tokenSliderMin * 25, tokenSliderMin * 100],
-    }
-
     const [hours, setHours] = useState(0)
-    const [tokenCredits, setTokenCredits] = useState<number | null>(null)
+    const [modelSpend, setModelSpend] = useState<number | null>(null)
 
     const computeSpend = hours * computeRate
     const computeCredits = Math.round(computeSpend * CREDITS_PER_USD)
-    const credits = tokenCredits === null ? 0 : computeCredits + tokenCredits
+    const modelCredits = modelSpend === null ? 0 : Math.round(modelSpend * CREDITS_PER_USD)
+    const credits = computeCredits + modelCredits
     const { total, costByTier } = useMemo(() => calculatePrice(credits, creditTiers), [credits, creditTiers])
 
     useEffect(() => {
-        if (!pricingSettled || tokenCredits !== null) return
+        if (!pricingSettled || modelSpend !== null) return
         const external = Number(activeProduct.volume)
-        const restored = Number.isFinite(external) && external > 0 ? external - computeCredits : 0
-        setTokenCredits(Math.max(tokenSliderMin, Math.round(restored)))
+        const restored = Number.isFinite(external) && external > 0 ? (external - computeCredits) / CREDITS_PER_USD : 0
+        setModelSpend(Math.max(0, restored))
     }, [pricingSettled])
 
     useEffect(() => {
-        if (tokenCredits === null) return
+        if (modelSpend === null) return
         setProduct('posthog_code', { cost: total, volume: credits, costByTier })
-    }, [total, credits, tokenCredits === null])
+    }, [total, credits, modelSpend === null])
 
-    if (tokenCredits === null) {
+    if (modelSpend === null) {
         return <div className="h-64 bg-accent border border-primary rounded-md animate-pulse" />
     }
 
@@ -165,12 +167,12 @@ export default function PostHogDesktopTab({
             />
 
             <Row
-                label="AI tokens"
-                suffix="credits/month"
-                value={tokenCredits}
-                onChange={(value) => setTokenCredits(Math.round(value))}
-                slider={tokenSlider}
-                cost={tokenCredits / CREDITS_PER_USD}
+                label="Estimated model usage"
+                suffix="/month"
+                prefix="$"
+                value={modelSpend}
+                onChange={setModelSpend}
+                cost={modelSpend}
                 note={
                     <>
                         Billed at exactly what the model provider charges, with no markup. See the{' '}
@@ -184,8 +186,8 @@ export default function PostHogDesktopTab({
                 <div className="flex gap-1 items-center pb-2">
                     <IconLightBulb className="size-5 inline-block text-[#4f9032] dark:text-green relative -top-px" />
                     <span className="text-sm text-[#4f9032] dark:text-green font-semibold">
-                        First {freeCredits.toLocaleString()} credits (worth {formatUSD(freeCredits / CREDITS_PER_USD)})
-                        free –&nbsp;<em>every month!</em>
+                        Your first {formatUSD(freeCredits / CREDITS_PER_USD)} of combined model usage and cloud compute
+                        is free every month and applied automatically.
                     </span>
                 </div>
             )}
