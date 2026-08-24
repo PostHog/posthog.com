@@ -4,9 +4,10 @@ import OSButton from 'components/OSButton'
 import { OSInput } from 'components/OSForm'
 import MenuBar from 'components/RadixUI/MenuBar'
 import { Select } from 'components/RadixUI/Select'
+import { Accent, accents } from './accents'
 import GalleryCard from './GalleryCard'
 import TagFilter from './TagFilter'
-import { BuildModePost } from './types'
+import { PostSummary } from './types'
 import { PostSort, usePostFilters } from './usePostFilters'
 
 /** 4 rows of the 3-column grid. */
@@ -62,6 +63,7 @@ function SearchField({
     onKeyDown,
     placeholder = 'Search posts',
     tabIndex,
+    name,
 }: {
     query: string
     setQuery: (query: string) => void
@@ -69,6 +71,7 @@ function SearchField({
     onKeyDown?: (e: React.KeyboardEvent<HTMLInputElement>) => void
     placeholder?: string
     tabIndex?: number
+    name: string
 }): JSX.Element {
     return (
         <div className="relative h-8">
@@ -77,7 +80,7 @@ function SearchField({
                 label="Search posts"
                 showLabel={false}
                 type="search"
-                name="build-mode-search"
+                name={name}
                 placeholder={placeholder}
                 value={query}
                 onChange={(e: React.ChangeEvent<HTMLInputElement>) => setQuery(e.target.value)}
@@ -95,7 +98,15 @@ function SearchField({
     )
 }
 
-function ExpandingSearch({ query, setQuery }: { query: string; setQuery: (query: string) => void }): JSX.Element {
+function ExpandingSearch({
+    query,
+    setQuery,
+    name,
+}: {
+    query: string
+    setQuery: (query: string) => void
+    name: string
+}): JSX.Element {
     const [open, setOpen] = useState(false)
     const containerRef = useRef<HTMLDivElement>(null)
     const expanded = open || query.length > 0
@@ -134,6 +145,7 @@ function ExpandingSearch({ query, setQuery }: { query: string; setQuery: (query:
                 <SearchField
                     query={query}
                     setQuery={setQuery}
+                    name={name}
                     placeholder={expanded ? 'Search posts' : ''}
                     tabIndex={expanded ? undefined : -1}
                     onBlur={() => {
@@ -153,7 +165,19 @@ function ExpandingSearch({ query, setQuery }: { query: string; setQuery: (query:
 }
 
 /** Searchable, tag-filterable, paginated grid of posts. */
-export default function PostsGallery({ posts }: { posts: BuildModePost[] }): JSX.Element {
+export default function PostsGallery({
+    posts,
+    heading = 'Everything else',
+    searchName = 'posts-search',
+    accent = 'red',
+    tagOrderOverride = [],
+}: {
+    posts: PostSummary[]
+    heading?: string
+    searchName?: string
+    accent?: Accent
+    tagOrderOverride?: string[]
+}): JSX.Element {
     const { query, setQuery, activeTag, setActiveTag, sort, setSort, tags, filteredPosts, isFiltered, clear } =
         usePostFilters(posts)
     const [page, setPage] = useState(1)
@@ -171,11 +195,14 @@ export default function PostsGallery({ posts }: { posts: BuildModePost[] }): JSX
         <section>
             <div className="flex items-center justify-between gap-2">
                 <h2 className="m-0 min-w-0 shrink truncate text-lg font-bold">
-                    Everything else{' '}
-                    <span className="text-sm font-medium text-muted">
-                        ({filteredPosts.length}
-                        {isFiltered ? ` of ${posts.length}` : ''})
-                    </span>
+                    {heading}
+                    {isFiltered && (
+                        <span className="text-sm font-medium text-muted">
+                            {' '}
+                            ({filteredPosts.length}
+                            {isFiltered ? ` of ${posts.length}` : ''})
+                        </span>
+                    )}
                 </h2>
                 <div className="flex shrink-0 items-center">
                     <div className="@md:hidden">
@@ -184,10 +211,16 @@ export default function PostsGallery({ posts }: { posts: BuildModePost[] }): JSX
                     <div className="hidden @md:block">
                         <SortSelect sort={sort} setSort={setSort} />
                     </div>
-                    <ExpandingSearch query={query} setQuery={setQuery} />
+                    <ExpandingSearch query={query} setQuery={setQuery} name={searchName} />
                 </div>
             </div>
-            <TagFilter tags={tags} activeTag={activeTag} onChange={setActiveTag} />
+            <TagFilter
+                tags={tags}
+                activeTag={activeTag}
+                onChange={setActiveTag}
+                accent={accent}
+                tagOrderOverride={tagOrderOverride}
+            />
             {filteredPosts.length > 0 ? (
                 <>
                     <div className="grid grid-cols-1 gap-x-4 gap-y-8 @lg:grid-cols-2 @lg:gap-x-6 @lg:gap-y-10 @3xl:grid-cols-3">
@@ -216,7 +249,7 @@ export default function PostsGallery({ posts }: { posts: BuildModePost[] }): JSX
             ) : (
                 <div className="rounded border border-dashed border-input p-8 text-center text-secondary">
                     <p className="m-0">No posts match your search.</p>
-                    <button onClick={clear} className="mt-2 text-sm font-semibold text-red dark:text-yellow">
+                    <button onClick={clear} className={`mt-2 text-sm font-semibold ${accents[accent].clearFilters}`}>
                         Clear filters
                     </button>
                 </div>

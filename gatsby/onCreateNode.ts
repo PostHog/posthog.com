@@ -266,6 +266,13 @@ export const onCreateNode: GatsbyNode['onCreateNode'] = async ({
             }
         }
 
+        const sourceText = typeof node.rawBody === 'string' ? node.rawBody : ''
+        createNodeField({
+            node,
+            name: `wordCount`,
+            value: stripFrontmatter(sourceText).split(/\s+/).length,
+        })
+
         createNodeField({
             node,
             name: `slug`,
