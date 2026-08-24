@@ -48,6 +48,23 @@ posthog-kmp = { group = "com.posthog", name = "posthog-kmp", version.ref = "post
 
 You can find the latest version on [Maven Central](https://central.sonatype.com/artifact/com.posthog/posthog-kmp).
 
+### Link the iOS Swift package
+
+> **Note:** This setup applies to `posthog-kmp` 0.5.0 and later and requires Kotlin 2.4.10 or later.
+
+On iOS, the SDK uses Kotlin's [Swift Package Manager (SwiftPM) integration](https://kotlinlang.org/docs/multiplatform-spm-import.html) to link the native `posthog-ios` package and copy its resources, including privacy manifests, into your app.
+
+After adding the dependency, run the linkage task once from your project root:
+
+```bash
+XCODEPROJ_PATH="$PWD/iosApp/iosApp.xcodeproj" \
+./gradlew :shared:integrateLinkagePackage
+```
+
+Replace `iosApp/iosApp.xcodeproj` with the path to your Xcode project and `:shared` with the Gradle module that builds your iOS framework.
+
+The task generates a `KotlinMultiplatformLinkedPackage` directory and adds it to the Xcode project. Commit the generated package and Xcode project changes. The package is updated automatically when SwiftPM dependencies change. You don't need to add `posthog-ios` to Xcode separately.
+
 ### Configure the SDK
 
 Initialize PostHog once, early in your app's lifecycle, by calling `PostHog.setup()` with a `PostHogConfig` and a platform `PostHogContext`:
