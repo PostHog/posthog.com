@@ -124,7 +124,7 @@ export const DocsIndex = () => {
                             initialFilter="docs"
                             hideFilters
                             isRefinedClassName="bg-accent"
-                            className="max-w-3xl rounded border border-primary bg-primary shadow-sm overflow-hidden [&_input]:bg-primary [&_input]:py-3 [&_input]:text-base"
+                            className="rounded border border-primary bg-primary shadow-sm overflow-hidden [&_input]:bg-primary [&_input]:py-3 [&_input]:text-base"
                             autoFocus={false}
                         />
                     </div>
