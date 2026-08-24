@@ -159,7 +159,7 @@ Back to User B in Fig. 1: cost per trace up 3x, routed through the same workflow
 
 So you open User B's trace, and <SeeFig n={2} /> is what you find.
 
-There's five <Term name="generation">generations</Term> in a request that should take one, against a population median of 1.3. _There's your retry loop._
+There's 5 <Term name="generation">generations</Term> in a request that should take one, against a population median of 1.3. _There's your retry loop._
 
 Except a retry loop isn't automatically expensive. A 429 rejection bills nothing, because the provider never started generating. A generation that ran, produced tokens, and hit `max_tokens` bills in full. So check the stop reason before you blame the retries.
 
