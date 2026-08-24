@@ -1,6 +1,6 @@
 ---
 # Concepts only, no tabs. Every SDK snippet and every per-platform instruction lives in the
-# SKILL.md beside this file, rendered by <SkillFile /> at the foot of the page.
+# SKILL.md beside this file, rendered by <SkillFigure /> on the facing page.
 #
 # The one place platforms genuinely differ for a reader is where they start and whether reveal
 # exists at all – that's the table, not five panels of prose.
@@ -9,6 +9,12 @@ shortTitle: Privacy
 subtitle: Masking happens on the device, before anything is sent. Decide it before real traffic arrives.
 bookOrder: 3
 ---
+
+<LeftPage>
+
+<SkillFigure n={1} caption="The skill itself. Copy it, pass it to your agent, and have masking in place before real traffic arrives." />
+
+</LeftPage>
 
 <RightPage>
 
@@ -55,9 +61,7 @@ Mask every sensitive screen and you've covered what's visible. There are four th
 
 ## Take this skill with you
 
-Pass it to your agent and implement masking before capturing session replays in production. Mask everything by default, then, based on what you need to see, reveal fields and components individually.
-
-<SkillFile />
+Pass it to your agent and implement masking before capturing session replays in production <SeeFig n={1} />. Mask everything by default, then, based on what you need to see, reveal fields and components individually.
 
 <SeeAlso>
 

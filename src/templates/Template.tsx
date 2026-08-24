@@ -99,12 +99,11 @@ export default function Template({ data }) {
     // Every page of a pocket guide is an MDX file rendered into the book layout – the volume's
     // front matter, its chapters, and its use cases all take this branch.
     if (slug.startsWith('/pocket-guides/')) {
-        // The volume names itself – hardcoding one volume's title mislabels every other book.
-        const volumeTitle = volumeById(volumeIdFromUrl(slug) ?? '')?.title
         return (
             <>
                 <SEO
-                    title={volumeTitle ? `${title} – ${volumeTitle} pocket guide` : `${title} – PostHog pocket guide`}
+                    // Named for its own volume: the shelf holds more than one book.
+                    title={`${title} – ${volumeById(volumeIdFromUrl(slug))?.title ?? 'PostHog'} pocket guide`}
                     description={pageData?.frontmatter?.subtitle || description || excerpt}
                     image="/images/og/default.png"
                 />

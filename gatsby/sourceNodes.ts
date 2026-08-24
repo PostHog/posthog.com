@@ -155,6 +155,37 @@ const findAllReferencedSchemas = (items: any[], allSchemas: Record<string, any>)
 export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createContentDigest, createNodeId }) => {
     const { createNode } = actions
 
+    // Canonical MCP tool definitions from the PostHog monorepo, rendered on docs pages
+    // (e.g. /docs/ai-observability/surfaces/mcp). The schema file is kept in sync with the
+    // MCP source by a CI drift check. Failure degrades to an empty list, never a broken build.
+    try {
+        const posthogBranch = process.env.GATSBY_POSTHOG_BRANCH || 'master'
+        const mcpToolsRes = await fetch(
+            `https://raw.githubusercontent.com/PostHog/posthog/${posthogBranch}/services/mcp/schema/tool-definitions-all.json`
+        )
+        if (mcpToolsRes.ok) {
+            const mcpTools: Record<string, any> = await mcpToolsRes.json()
+            Object.entries(mcpTools).forEach(([name, tool]) => {
+                createNode({
+                    id: createNodeId(`mcp-tool-${name}`),
+                    name,
+                    title: tool?.title || name,
+                    summary: tool?.summary || '',
+                    category: tool?.category || '',
+                    feature: tool?.feature || '',
+                    internal: {
+                        type: 'McpTool',
+                        contentDigest: createContentDigest({ name, ...tool }),
+                    },
+                })
+            })
+        } else {
+            console.warn(`Failed to fetch MCP tool definitions: HTTP ${mcpToolsRes.status}`)
+        }
+    } catch (err) {
+        console.warn('Failed to source MCP tool definitions:', err)
+    }
+
     const openApiSpecUrl = process.env.POSTHOG_OPEN_API_SPEC_URL || 'https://app.posthog.com/api/schema/'
     const spec = await fetch(openApiSpecUrl, {
         headers: {

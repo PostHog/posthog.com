@@ -7,6 +7,15 @@
     },
     "headers": [
         {
+            "source": "/.well-known/http-message-signatures-directory",
+            "headers": [
+                {
+                    "key": "Content-Type",
+                    "value": "application/http-message-signatures-directory+json"
+                }
+            ]
+        },
+        {
             "source": "/docs/:path*",
             "headers": [
                 {
@@ -21,6 +30,15 @@
                 {
                     "key": "Vary",
                     "value": "Accept"
+                }
+            ]
+        },
+        {
+            "source": "/(.*\\.md)",
+            "headers": [
+                {
+                    "key": "Content-Type",
+                    "value": "text/plain; charset=utf-8"
                 }
             ]
         },
@@ -183,6 +201,26 @@
         }
     ],
     "redirects": [
+        {
+            "source": "/docs/session-replay/image-bot:ext(\\.md)?",
+            "destination": "/docs/ai-research/image-fetcher-bot:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/posthog-desktop/ai-generated-content:ext(\\.md)?",
+            "destination": "/docs/posthog-desktop/settings#ai-generated-content",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/session-replay/session-summaries-ai:ext(\\.md)?",
+            "destination": "/docs/replay-vision:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/posthog-ai/session-summaries:ext(\\.md)?",
+            "destination": "/docs/replay-vision:ext?",
+            "statusCode": 301
+        },
         {
             "source": "/docs/web-analytics/scroll-depth:ext(\\.md)?",
             "destination": "/docs/web-analytics/dashboard:ext?",
@@ -470,6 +508,14 @@
             "destination": "/teams/apm"
         },
         {
+            "source": "/teams/irl-events",
+            "destination": "/teams/builder-relations"
+        },
+        {
+            "source": "/teams/irl-events/:path*",
+            "destination": "/teams/builder-relations/:path*"
+        },
+        {
             "source": "/teams/query-performance",
             "destination": "/teams/analytics-platform"
         },
@@ -505,7 +551,12 @@
         },
         {
             "source": "/docs/prompt-management/skills-store:ext(\\.md)?",
-            "destination": "/docs/ai-engineering/skills-store:ext?",
+            "destination": "/docs/skills:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/ai-engineering/skills-store:ext(\\.md)?",
+            "destination": "/docs/skills:ext?",
             "statusCode": 301
         },
         {
@@ -893,6 +944,14 @@
         {
             "source": "/docs/integrations/slack:ext(\\.md)?",
             "destination": "/docs/libraries/slack:ext?"
+        },
+        {
+            "source": "/docs/integrations/github:ext(\\.md)?",
+            "destination": "/docs/libraries/github:ext?"
+        },
+        {
+            "source": "/docs/integrations/discord:ext(\\.md)?",
+            "destination": "/docs/libraries/discord:ext?"
         },
         {
             "source": "/docs/posthog-code/slack:ext(\\.md)?",
@@ -5362,7 +5421,11 @@
         },
         {
             "source": "/docs/cdp/geoip-enrichment:ext(\\.md)?",
-            "destination": "/docs/cdp/transformations/posthog-plugin-geoip:ext?"
+            "destination": "/docs/cdp/transformations/template-geoip:ext?"
+        },
+        {
+            "source": "/docs/cdp/transformations/posthog-plugin-geoip:ext(\\.md)?",
+            "destination": "/docs/cdp/transformations/template-geoip:ext?"
         },
         {
             "source": "/docs/cdp/timestamp-parser:ext(\\.md)?",
@@ -5435,6 +5498,10 @@
         {
             "source": "/startups/apply",
             "destination": "https://app.posthog.com/startups"
+        },
+        {
+            "source": "/students/apply",
+            "destination": "https://app.posthog.com/students"
         },
         {
             "source": "/yc-onboarding",
@@ -5606,7 +5673,7 @@
         },
         {
             "source": "/docs/llm-analytics/skills-store:ext(\\.md)?",
-            "destination": "/docs/ai-engineering/skills-store:ext?"
+            "destination": "/docs/skills:ext?"
         },
         {
             "source": "/docs/llm-analytics/:path*",

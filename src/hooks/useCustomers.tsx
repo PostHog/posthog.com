@@ -28,7 +28,6 @@ import CounterPressLogoDark from '../images/customers/counterpress-dark.svg'
 import CroissantLogo from '../images/customers/croissant-light.png'
 import CroissantLogoDark from '../images/customers/croissant-dark.png'
 import JuiceboxLogo from '../components/CustomerLogos/JuiceboxLogo'
-import LovableLogo from 'components/CustomerLogos/LovableLogo'
 import MentionMeLogo from '../components/CustomerLogos/MentionMeLogo'
 import MistralAILogo from '../components/CustomerLogos/MistralAILogo'
 import MintlifyLogo from '../components/CustomerLogos/MintlifyLogo'
@@ -40,6 +39,7 @@ import PhantomLogo from '../components/CustomerLogos/PhantomLogo'
 import PryLogo from '../components/CustomerLogos/PryLogo'
 import PurpleWaveLogo from '../components/CustomerLogos/PurpleWaveLogo'
 import QredLogo from '../components/CustomerLogos/QredLogo'
+import RailwayLogo from '../components/CustomerLogos/RailwayLogo'
 import RaycastLogo from '../components/CustomerLogos/RaycastLogo'
 import RayfitLogoDark from '../images/customers/rayfitLogodark.png'
 import RayfitLogoLight from '../images/customers/rayfitLogolight.png'
@@ -593,28 +593,6 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
         logo: HostAILogo,
         height: 12,
     },
-    lovable: {
-        name: 'Lovable',
-        toolsUsed: ['ai_observability', 'experiments', 'feature_flags'],
-        industries: ['Devtool'],
-        users: ['Engineering'],
-        notes: 'AI app & website builder',
-        featured: true,
-        logo: LovableLogo,
-        height: 8,
-        quotes: {
-            viktor_eriksson: {
-                name: 'Viktor Eriksson',
-                role: 'Software Engineer',
-                image: {
-                    thumb: 'https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/viktor_00c779a706.jpg',
-                },
-                quotes: [
-                    "PostHog is super cool because it is such a broad platform. If you're building a new product or at a startup, it's a no-brainer to use PostHog. It's the only all-in-one platform like it for developers.",
-                ],
-            },
-        },
-    },
     jaxxon: {
         name: 'Jaxxon',
         // toolsUsed: ['feature_flags', 'product_analytics', 'ai_observability'],
@@ -872,6 +850,15 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
         },
         featured: false,
         height: 6,
+    },
+    railway: {
+        name: 'Railway',
+        toolsUsed: [],
+        industries: ['Devtool'],
+        notes: 'Cloud infrastructure platform',
+        logo: RailwayLogo,
+        featured: true,
+        height: 8,
     },
     rebtel: {
         name: 'Rebtel',

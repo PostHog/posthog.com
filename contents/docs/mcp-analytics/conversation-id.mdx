@@ -25,7 +25,7 @@ instrument(server, posthog, {
 With this on, the SDK does three things:
 
 1. **Injects an optional `conversation_id` argument** into every tool's JSON Schema, with a description telling the agent to reuse the value the server returns.
-2. **Mints a UUID** when the agent calls a tool without `conversation_id` and **appends a text block** to the tool's response that asks the agent to echo the same id on subsequent calls.
+2. **Mints a UUID** when the agent calls a tool without `conversation_id`, and returns it on the tool's response as a `{"conversation_id":"…"}` text block — data, not an instruction.
 3. **Captures the supplied or minted value** on every event as `$mcp_conversation_id`, distinct from `$session_id`.
 
 The agent's `conversation_id` (when present) always wins. The SDK only mints when the agent doesn't supply one.
@@ -62,9 +62,17 @@ LIMIT 50
 
 ## Caveats
 
-<CalloutBox icon="IconWarning" title="The prompt-back leaks into agent UIs" type="caution">
+<CalloutBox icon="IconWarning" title="Some tools can't take the injection" type="caution">
 
-The "please echo this `conversation_id`" message is appended as a regular `text` content block — the only channel MCP currently offers for server-to-agent communication. Consumers that surface raw tool-call content to end users will see `[SERVER]: Reuse conversation_id=…` in their UI. If the MCP spec grows a dedicated server-directives channel (e.g. on `_meta`), the SDK will move there.
+The `conversation_id` parameter can't be added to a schema built from `oneOf` / `allOf` / `anyOf` / `$ref`, or to a tool with no input schema. Those tools log a warning and get no handle, so their calls won't correlate. [`identify`](/docs/mcp-analytics/identifying-users) covers them.
+
+A client working from a **stale cached tool listing** won't know to send the parameter either — `ttlMs` caching on `tools/list` makes that more likely over time.
+
+</CalloutBox>
+
+<CalloutBox icon="IconInfo" title="The handle is visible in tool output" type="fyi">
+
+It's returned as a `{"conversation_id":"…"}` text block, so consumers that surface raw tool-call content to end users will show that JSON. It's deliberately data rather than an instruction — an imperative sentence in tool output is indistinguishable from prompt injection, and hardened clients block it.
 
 </CalloutBox>
 

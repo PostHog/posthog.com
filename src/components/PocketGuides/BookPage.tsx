@@ -6,6 +6,7 @@ import Explorer from 'components/Explorer'
 
 import { EnableScoutBar } from 'components/SelfDrivingInbox/EnableScout'
 
+import { ActionBar } from './Action'
 import BookReader from './BookReader'
 import { EntryProvider, bookMdxComponents } from './bookComponents'
 import {
@@ -43,7 +44,6 @@ interface BookPageProps {
 /** Any page of a pocket guide: the layout is fixed, every word comes from the MDX. */
 export default function BookPage({ slug, body }: BookPageProps): JSX.Element | null {
     const url = normalizeUrl(slug)
-    // The page's own volume is the book it's in – tabs, contents, and turns stay inside it.
     const pages = useBookPages(volumeIdFromUrl(url))
     const { fontSize, stepFontSize } = useBookFontSize()
 
@@ -90,9 +90,12 @@ export default function BookPage({ slug, body }: BookPageProps): JSX.Element | n
                     onFontSize={stepFontSize}
                     fontSizes={FONT_SIZES}
                     // Pinned, so a reader convinced early can act without scrolling to the end.
+                    // Scout volumes enable a scout; every other volume authors its own CTA.
                     actionBar={
                         entry.template?.scout ? (
                             <EnableScoutBar scout={entry.template.scout} templateTitle={entry.template.templateTitle} />
+                        ) : entry.cta ? (
+                            <ActionBar cta={entry.cta} title={entry.title} guide={entry.url} />
                         ) : undefined
                     }
                 >

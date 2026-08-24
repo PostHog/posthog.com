@@ -1,14 +1,12 @@
 import React from 'react'
 
-import { MdxCodeBlock } from 'components/CodeBlock'
 import Link from 'components/Link'
-import { CopyableCommand } from 'components/PlatformInstall/CopyableCommand'
-import { buildWizardCommand } from 'components/PlatformInstall/buildCommand'
+import { SingleCodeBlock } from 'components/CodeBlock'
 import EnableScout from 'components/SelfDrivingInbox/EnableScout'
 import { productSource } from 'components/SelfDrivingInbox/sources'
 
 import { useEntry, useTemplate } from './bookContext'
-import { volumeIdFromUrl } from './bookModel'
+import { BookPageEntry, volumeIdFromUrl } from './bookModel'
 import { volumeArt } from './volumeArt'
 
 /** Inline cue to a figure, color only – bold read larger than the surrounding text. */
@@ -16,26 +14,12 @@ export function SeeFig({ n }: { n: number }): JSX.Element {
     return <span className="whitespace-nowrap text-orange">Fig.&nbsp;{n}</span>
 }
 
-/**
- * The setup command, for the prerequisite a volume states once before anyone reaches a chapter.
- * `subcommand` picks the wizard's flavor – omit it for the plain install, which is what a volume
- * needs when its product ships with the SDK rather than behind its own wizard step.
- */
-export function Setup({ subcommand }: { subcommand?: string }): JSX.Element {
-    const wizard = buildWizardCommand({ subcommand })
-    return <CopyableCommand className="my-[0.8em]" command={wizard.displayCommand} copyCommand={wizard.copyCommand} />
-}
-
 /** The small line above a title page's heading. */
 export function Eyebrow({ children }: { children: React.ReactNode }): JSX.Element {
     return <p className="mb-1 text-[0.8em] font-bold uppercase tracking-wide text-secondary">{children}</p>
 }
 
-/**
- * The volume's specimen on its title page – the same hoggie the shelf cover carries, so a book
- * still looks like itself once it's open. Not a numbered figure: it illustrates the volume rather
- * than teaching anything, and the title page keeps its two-column layout only while figure-less.
- */
+/** The volume's specimen drawing, on the pages that open a book. */
 export function Frontispiece(): JSX.Element | null {
     const Art = volumeArt(volumeIdFromUrl(useEntry()?.entry.url ?? ''))
     if (!Art) {
@@ -90,32 +74,73 @@ export function Enable(): JSX.Element | null {
     return <EnableScout scout={template.scout} requires={template.requires} templateTitle={template.templateTitle} />
 }
 
-/** The contents list, built from the book itself. */
+/** One page's row: a link, a dotted leader, and its folio number. */
+function ContentsRow({ page }: { page: BookPageEntry }): JSX.Element {
+    return (
+        <li className="flex items-baseline gap-2">
+            <Link to={page.url} wrapperClassName="min-w-0" className="text-[1em] text-primary hover:underline">
+                {page.title}
+            </Link>
+            {/* The dotted leader, so the row reads as a ToC line. */}
+            <span aria-hidden="true" className="min-w-6 flex-1 border-b border-dotted border-primary opacity-50" />
+            <span className="shrink-0 text-[0.9em] tabular-nums text-secondary">
+                {String(page.page).padStart(2, '0')}
+            </span>
+        </li>
+    )
+}
+
+/**
+ * The contents list, built from the book itself. Groups into named sections when pages declare
+ * a `section` in frontmatter (consecutive by reading order); a book where no page does prints
+ * the same single flat list as before.
+ */
 export function Contents(): JSX.Element | null {
     const book = useEntry()
     if (!book) {
         return null
     }
-    return (
-        <ul className="m-0 list-none space-y-3 p-0">
-            {book.pages
-                .filter((page) => !page.isFrontMatter)
-                .map((page) => (
-                    <li key={page.url} className="flex items-baseline gap-2">
-                        <Link to={page.url} className="min-w-0 text-[1em] text-primary hover:underline">
-                            {page.title}
-                        </Link>
-                        {/* The dotted leader, so the row reads as a ToC line. */}
-                        <span
-                            aria-hidden="true"
-                            className="min-w-6 flex-1 border-b border-dotted border-primary opacity-50"
-                        />
-                        <span className="shrink-0 text-[0.9em] tabular-nums text-secondary">
-                            {String(page.page).padStart(2, '0')}
-                        </span>
-                    </li>
+    const pages = book.pages.filter((page) => !page.isFrontMatter)
+
+    if (pages.every((page) => !page.section)) {
+        return (
+            <ul className="m-0 list-none space-y-3 p-0">
+                {pages.map((page) => (
+                    <ContentsRow key={page.url} page={page} />
                 ))}
-        </ul>
+            </ul>
+        )
+    }
+
+    // Group consecutive pages sharing a section – reading order already sorted them.
+    const groups: { section?: string; pages: BookPageEntry[] }[] = []
+    for (const page of pages) {
+        const current = groups[groups.length - 1]
+        if (current && current.section === page.section) {
+            current.pages.push(page)
+        } else {
+            groups.push({ section: page.section, pages: [page] })
+        }
+    }
+
+    return (
+        <div className="space-y-6">
+            {groups.map((group, i) => (
+                // eslint-disable-next-line react/no-array-index-key
+                <div key={group.section ?? i}>
+                    {group.section && (
+                        <p className="m-0 mb-2 text-[0.8em] font-bold uppercase tracking-wide text-secondary">
+                            {group.section}
+                        </p>
+                    )}
+                    <ul className="m-0 list-none space-y-3 p-0">
+                        {group.pages.map((page) => (
+                            <ContentsRow key={page.url} page={page} />
+                        ))}
+                    </ul>
+                </div>
+            ))}
+        </div>
     )
 }
 
@@ -163,47 +188,46 @@ export const proseComponents = {
             <ol {...props} />
         </div>
     ),
+    // Cells get primary directly – the wrapper's secondary is for prose, and table text is data.
     table: (props: any) => (
-        <div className={`${NATIVE_CONTENT} my-[0.8em] overflow-x-auto`}>
+        <div className={`${NATIVE_CONTENT} my-[0.8em] overflow-x-auto [&_td]:text-primary [&_th]:text-primary`}>
             <table {...props} />
         </div>
     ),
-    // Collapsibles are the one native-styling exception: global.css scopes `details` to `.prose`,
-    // which the book opts out of, and `.article-content` never covers it. So the panel is styled
-    // here instead – em-based like everything else, with the site's own chevron token.
-    details: (props: any) => (
-        <details
-            className="mb-[0.5em] overflow-hidden rounded border border-primary bg-accent text-[1em] dark:bg-accent-dark [&[open]>summary]:border-b [&[open]>summary]:border-primary [&[open]>summary::before]:rotate-90"
-            {...props}
-        />
-    ),
-    summary: (props: any) => (
-        <summary
-            className="relative cursor-pointer list-none py-1.5 pl-8 pr-3 text-[0.95em] font-bold leading-snug text-primary before:absolute before:left-3 before:top-[0.45em] before:size-4 before:bg-bullet-chevron-light before:bg-contain before:bg-center before:bg-no-repeat before:transition-transform before:duration-200 marker:content-[''] dark:before:bg-bullet-chevron-dark [&::-webkit-details-marker]:hidden"
-            {...props}
-        />
-    ),
-    // The site's own code block, same as every other template wires up – syntax highlighting,
-    // copy button, and language tabs all come along. The wrapper sets a text color: the block's
-    // header inherits `currentColor` at half opacity, and the book container sets none, so
-    // without this the language label renders near-invisible against its own background.
-    pre: (props: any) => (
-        <div className="text-primary">
-            <MdxCodeBlock {...props} />
-        </div>
-    ),
-    MultiLanguage: (props: any) => (
-        <div className="text-primary">
-            <MdxCodeBlock {...props} />
-        </div>
-    ),
     strong: (props: any) => <strong className="font-bold text-primary" {...props} />,
+    // Fenced code. MDX v1 sends the block through `code` and inline spans through `inlineCode`,
+    // so `pre` only has to get out of the way – a div inside it would be invalid nesting.
+    // Without this a fence renders unstyled and runs past the page column.
+    pre: ({ children }: any) => <>{children}</>,
+    code: ({ className, children }: any) => (
+        <div className="my-[0.8em] [&_.min-w-fit]:min-w-0 [&_.whitespace-pre]:whitespace-pre-wrap [&_.whitespace-pre]:break-words">
+            <SingleCodeBlock
+                language={String(className ?? '').replace('language-', '') || 'text'}
+                showCopy
+                showAskAI={false}
+            >
+                {String(children).replace(/\n$/, '')}
+            </SingleCodeBlock>
+        </div>
+    ),
+    // text-primary, not inherited: the chips sit on a tinted background inside secondary-colored
+    // prose, and the small mono face can't afford the double contrast loss.
     inlineCode: (props: any) => (
         <code
-            className="rounded border border-primary bg-accent px-1 py-0.5 text-[0.85em] dark:bg-accent-dark"
+            className="rounded border border-primary bg-accent px-1 py-0.5 text-[0.85em] text-primary dark:bg-accent-dark"
             {...props}
         />
     ),
     a: ({ href, ...props }: any) => <Link to={href} state={{ newWindow: true }} className="underline" {...props} />,
     hr: () => <span aria-hidden="true" className="my-6 block w-16 border-t border-primary" />,
+    // A worked-example table inside a <Fig> – illustrative rows, not live data.
+    table: (props: any) => <table className="w-full border-collapse text-left text-[0.85em]" {...props} />,
+    thead: (props: any) => <thead className="border-b border-primary" {...props} />,
+    th: (props: any) => (
+        <th
+            className="py-1.5 pr-3 text-[0.85em] font-bold uppercase tracking-wide text-secondary last:pr-0"
+            {...props}
+        />
+    ),
+    td: (props: any) => <td className="border-b border-primary/30 py-1.5 pr-3 text-primary last:pr-0" {...props} />,
 }

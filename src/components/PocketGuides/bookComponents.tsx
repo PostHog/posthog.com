@@ -1,10 +1,15 @@
-import Term from 'components/SelfDrivingInbox/terms'
+import Term from './terms'
 
+import Action, { Setup } from './Action'
+import Callout from './Callout'
 import ReaderWrapper, { LeftPage, RightPage } from './ReaderWrapper'
 import {
     AnatomyFigure,
     DetailFigure,
     DivergenceFigure,
+    EvalRunsFigure,
+    ExampleFigure,
+    FactorSplitFigure,
     Fig,
     LeakFigure,
     LedgerFigure,
@@ -14,10 +19,11 @@ import {
     ReportFigure,
     ScoutFigure,
     ScreenshotFigure,
+    SkillFigure,
+    TraceFigure,
     TriggerGroupFigure,
 } from './figures'
-import { Contents, Enable, Eyebrow, Frontispiece, SeeAlso, SeeFig, Setup, Watches, proseComponents } from './bookPieces'
-import SkillFile from './SkillFile'
+import { Contents, Enable, Eyebrow, Frontispiece, SeeAlso, SeeFig, Watches, proseComponents } from './bookPieces'
 import { AskAI, CTA, ScannerTemplate, ViewRecording, ViewRecordings } from './UIButton'
 
 export { EntryProvider } from './bookContext'
@@ -39,9 +45,14 @@ export const bookMdxComponents = {
     AnatomyFigure,
     DetailFigure,
     DivergenceFigure,
+    EvalRunsFigure,
+    ExampleFigure,
+    FactorSplitFigure,
     LedgerFigure,
     LeakFigure,
     ScoutFigure,
+    SkillFigure,
+    TraceFigure,
     PersonsModalFigure,
     ScreenshotFigure,
     TriggerGroupFigure,
@@ -49,6 +60,8 @@ export const bookMdxComponents = {
     LoopFigure,
     Watches,
     Enable,
+    Action,
+    Callout,
     Setup,
     Contents,
     SeeAlso,
@@ -57,7 +70,6 @@ export const bookMdxComponents = {
     AskAI,
     CTA,
     ScannerTemplate,
-    SkillFile,
     Term,
     ...proseComponents,
 }

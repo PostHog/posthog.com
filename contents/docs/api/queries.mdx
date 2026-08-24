@@ -292,8 +292,17 @@ If the project's concurrency quota is exhausted, we put the query in queue and w
 Some customers haven't been migrated to the above limit and are on an old limit of 120 queries/hour.
 </CalloutBox>
 
+### Free plan data limit
+
+Organizations without a paid plan can read up to 50 TB of data per calendar month across all API queries. Past that, queries return a `402` response with the code `api_queries_quota_exceeded` and a message that shows your usage and when the allowance resets (the start of the next month, UTC).
+
+Cached results still work while you are over the limit. Queries made in the PostHog app are not affected.
+
+To remove the limit, [subscribe to a paid plan](/pricing). PostHog is pay-as-you-go with no monthly minimum, and access is restored within moments of subscribing. Trials also lift the limit while active.
+
 ## Further reading
 
+- [Project setup for embedded analytics](/docs/data/embedded-analytics-projects)
 - [How to set up embedded analytics with PostHog, Next.js, and Recharts](/tutorials/embedded-analytics)
 - [How to use Recharts to visualize analytics data (with examples)](/tutorials/recharts)
 - [How Mintlify launched user-facing analytics, powered by PostHog](/customers/mintlify)

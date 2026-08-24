@@ -11,7 +11,6 @@ import CloudinaryImage from 'components/CloudinaryImage'
 import PlatformInstall from 'components/PlatformInstall'
 import WizardCTA from 'components/WizardCTA'
 import usePlatformList from 'hooks/docs/usePlatformList'
-import LovableLogo from 'components/CustomerLogos/LovableLogo'
 
 const TOP_COUNT = 8
 const PLATFORM_ORDER = [
@@ -142,7 +141,6 @@ export default function AIObservabilityLanding(): JSX.Element {
 
                 <div className="mb-12 max-w-7xl mx-auto">
                     <div className="flex flex-wrap items-center gap-x-12 gap-y-6 text-primary dark:text-primary-dark">
-                        <LovableLogo className="fill-current object-contain max-w-full h-10" />
                         <CloudinaryImage
                             src="https://res.cloudinary.com/dmukukwp6/image/upload/e_trim,q_auto,f_auto/kilocodelogo_93f0668287.png"
                             alt="Kilo Code"
