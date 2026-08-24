@@ -76,17 +76,6 @@ Summarizing a session also marks up its player timeline: green segments where th
 
 A Replay Vision <Term name="scanner" /> is three things: a **prompt** saying what to look for, a **type** saying what shape the answer takes, and **filters** saying which recordings it runs against. PostHog then asks that question of every matching session, forever.
 
-Here are some templates to give you inspiration and get you started.
-
-<ScannerTemplate name="Dead ends" template="dead_end" type="Monitor" asks="Did the user appear stuck on a page?" answers="Every session comes back yes or no" property="scanner_output_verdict" />
-
-<ScannerTemplate name="User intent" template="user_intent" type="Classifier" asks="What was the user trying to do?" answers="One tag: browsing, purchasing, support_seeking" property="scanner_output_tags" />
-
-<ScannerTemplate name="Session outcome" template="session_outcome" type="Classifier" asks="How did this session end?" answers="One tag: task_completed, task_abandoned, blocked_by_error" property="scanner_output_tags" />
-
-<ScannerTemplate name="Frustration score" template="frustration_score" type="Scorer" asks="How much friction did they hit?" answers="A number on a scale you set" property="scanner_output_score" />
-
-<ScannerTemplate name="Session summary" template="session_summary" type="Summarizer" asks="What happened in this session?" answers="A title and a short narrative" property="scanner_output_title, scanner_output_summary" />
 
 Every answer is saved as a `$recording_observed` event on the session it came from, along with the model's reasoning – citations included, linking to the moments that convinced it – its confidence, and what the observation cost.
 
@@ -112,6 +101,20 @@ A <Term name="scout" /> lets agents monitor those signals and act on them on you
 
 You can learn more about scouts in the [self-driving pocket guide](/pocket-guides/self-driving/101). You can read more about the report shown above in [The page people can't leave](/pocket-guides/self-driving/pages-people-cant-leave).
 
+
+## Scanner templates
+
+Here are some templates to give you inspiration and get you started.
+
+<ScannerTemplate name="Dead ends" template="dead_end" type="Monitor" asks="Did the user appear stuck on a page?" answers="Every session comes back yes or no" property="scanner_output_verdict" />
+
+<ScannerTemplate name="User intent" template="user_intent" type="Classifier" asks="What was the user trying to do?" answers="One tag: browsing, purchasing, support_seeking" property="scanner_output_tags" />
+
+<ScannerTemplate name="Session outcome" template="session_outcome" type="Classifier" asks="How did this session end?" answers="One tag: task_completed, task_abandoned, blocked_by_error" property="scanner_output_tags" />
+
+<ScannerTemplate name="Frustration score" template="frustration_score" type="Scorer" asks="How much friction did they hit?" answers="A number on a scale you set" property="scanner_output_score" />
+
+<ScannerTemplate name="Session summary" template="session_summary" type="Summarizer" asks="What happened in this session?" answers="A title and a short narrative" property="scanner_output_title, scanner_output_summary" />
 
 <SeeAlso>
 

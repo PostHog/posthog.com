@@ -248,6 +248,24 @@ export const TERMS = {
             'PostHog makes your product self-driving: it pairs the full context of your product with agents that find problems and opportunities and ship the fix – reactively when prompted, or proactively via the inbox.',
         slug: '/docs/self-driving',
     },
+    'reverse proxy': {
+        title: 'Reverse proxy',
+        description:
+            'A reverse proxy routes requests to PostHog through your own domain. Ad blockers keep lists of known analytics domains, so traffic sent to a domain they have catalogued is dropped before it reaches PostHog.',
+        slug: '/docs/advanced/proxy',
+    },
+    'managed proxy': {
+        title: 'Managed proxy',
+        description:
+            'PostHog runs the reverse proxy for you on a subdomain you own, handling the SSL certificate, the routing, and the maintenance. Free on PostHog Cloud, and all you need is access to your DNS.',
+        slug: '/docs/advanced/proxy/managed-reverse-proxy',
+    },
+    'content security policy': {
+        title: 'Content Security Policy',
+        description:
+            'A browser policy naming which origins a page may load code and send data to. A policy that does not name PostHog stops the recorder script from being served, so no session is captured.',
+        slug: '/docs/advanced/content-security-policy',
+    },
 } satisfies Record<string, TermDefinition>
 
 export type TermName = keyof typeof TERMS

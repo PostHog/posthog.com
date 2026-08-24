@@ -16,11 +16,11 @@ pocketGuideOrder: 4
 
 # Reverse proxy
 
-Ad blockers keep lists of know analytics domains and block requests to them. This will often result in incomplete or missing replays being captured. Using a reverse proxy lets you route through your own domain, so captures are not blocked.
+Ad blockers keep lists of know analytics domains and block requests to them. This will often result in incomplete or missing replays being captured. Using a <Term name="reverse proxy" /> lets you route through your own domain, so captures are not blocked.
 
 ## Set up a reverse proxy
 
-PostHog runs a free, managed proxy for you. It sits on a subdomain you own, and PostHog handles the SSL
+PostHog runs a free, <Term name="managed proxy">managed proxy</Term> for you. It sits on a subdomain you own, and PostHog handles the SSL
 certificate, the routing, and the maintenance.
 
 <CTA to="https://app.posthog.com/settings/organization-proxy">Set up a managed proxy</CTA>
@@ -40,7 +40,7 @@ The managed proxy routes traffic through Cloudflare, a listed subprocessor in ou
 
 DNS-level blocking follows your subdomain's CNAME chain, sees where it really points, and drops the request before the browser is involved. That needs a custom resolver like NextDNS or Pi-hole, so it's a small share of users, and no proxy gets around it. Browser extensions can't do this – they only see HTTP requests after DNS has already resolved.
 
-Your own `Content-Security-Policy` will also stop `recorder.js` from being served. To make sure this doesn't happen, read or point your agent at [this docs page](/docs/advanced/content-security-policy).
+Your own <Term name="content security policy">`Content-Security-Policy`</Term> will also stop `recorder.js` from being served. To make sure this doesn't happen, read or point your agent at [this docs page](/docs/advanced/content-security-policy).
 
 <SeeAlso>
 

@@ -102,7 +102,11 @@ Recordings come from your PostHog SDKs: JavaScript web, React Native, iOS, Andro
 
 These replays are not videos on the web. The SDK takes a full snapshot of the page's DOM, then records only what changes – clicks, scrolls, mutations – and the player rebuilds the page from that stream. This helps keep cost low and minimize performance implications.
 
-Native Android and iOS record a wireframe of the view hierarchy rather than the real look and feel, unless you turn on screenshot mode; React Native and Flutter always record in screenshot mode.
+| SDK | What it records |
+| --- | --- |
+| JavaScript web | The DOM, rebuilt in the player |
+| Android, iOS | A wireframe of the view hierarchy, rather than the real look and feel, unless you turn on screenshot mode |
+| React Native, Flutter | Always screenshot mode |
 
 ## Install and turn it on
 

@@ -42,7 +42,7 @@ export function ViewRecording(): JSX.Element {
 }
 
 /** Opens PostHog AI with the prompt prefilled – the site's standard Max deep link. */
-const maxPromptUrl = (prompt: string) => `https://app.posthog.com/#panel=max:${encodeURIComponent(prompt)}`
+const maxPromptUrl = (prompt: string) => `https://app.posthog.com/#panel=max:!${encodeURIComponent(prompt)}`
 
 /**
  * A question you can hand straight to PostHog AI: `<AskAI q="Users who rage clicked…" />`.
