@@ -1,10 +1,10 @@
 ---
 title: "Nobody watches their session replays. We studied 7.7 million views to prove it"
-date: 2026-08-12
+date: 2026-08-24
 author:
   - natalia-amorim
 featuredImage: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/general_blog_post_template_2d68884778.png
+  https://res.cloudinary.com/dmukukwp6/image/upload/nobody_watches_session_replays_3d44215c4a.png
 featuredImageType: full
 category: General
 tags:
@@ -26,9 +26,9 @@ Short answer: we are. The median replay holds attention for just **17 seconds**,
 
 ## How long people actually watch a replay
 
-![Hook](https://res.cloudinary.com/dmukukwp6/image/upload/01_hook_17s_05cd1e07c1.png)
+![Hook](https://res.cloudinary.com/dmukukwp6/image/upload/the_median_replay_5481af9eb3.png)
 
-![Replay retention](https://res.cloudinary.com/dmukukwp6/image/upload/03_retention_46e97d2721.png)
+![Replay retention](https://res.cloudinary.com/dmukukwp6/image/upload/the_median_replay_b28f4c7ceb.png)
 
 Every time anyone opened the player and actually watched something, we timed it. The median session lasted 17 seconds. Two-thirds were over inside 30. 
 
@@ -36,11 +36,11 @@ Meanwhile, the average recording those people were dipping into runs 28 minutes 
 
 Even if you're generous and use the median recording length – a more civilized five minutes – you're still looking at someone sampling about 6% before moving on.
 
-![The gap between what you watch and what got recorded](https://res.cloudinary.com/dmukukwp6/image/upload/12_the_gap_c578f39bf0.png)
+![The gap between what you watch and what got recorded](https://res.cloudinary.com/dmukukwp6/image/upload/the_median_replay_00e1247c92.png)
 
 And this is the optimistic framing, because it only counts the replays somebody even bothered to open in the first place.
 
-![Never opened](https://res.cloudinary.com/dmukukwp6/image/upload/04_never_opened_4057ad725a.png)
+![Never opened](https://res.cloudinary.com/dmukukwp6/image/upload/the_median_replay_61c80296dc.png)
 
 Over those same 90 days, fewer than 1 in 600 recordings was opened – or, to put it less politely, roughly 99.8% of recorded sessions are watched by no one, ever.
 
@@ -52,7 +52,7 @@ You could argue an unwatched recording is harmless – a tree falling in an empt
 
 Don't get me wrong: it's not that people are lazy; it's that the backlog is physically unwatchable.
 
-![Company backlog](https://res.cloudinary.com/dmukukwp6/image/upload/05_backlog_b22c7321ba.png)
+![Company backlog](https://res.cloudinary.com/dmukukwp6/image/upload/the_median_replay_368af0638b.png)
 
 The median company on PostHog captured around **340 recordings** in the last 90 days – at a typical five minutes each, that's roughly **28 hours of footage**, or about three and a half working days of nonstop watching just to clear one quarter.
 
@@ -60,7 +60,7 @@ And that's the *median* company. The average one – dragged up by the big custo
 
 But we still wanted to know: who are users actually watching? (bless their hearts)
 
-![Who watches replays?](https://res.cloudinary.com/dmukukwp6/image/upload/06_who_watches_ac7345efed.png)
+![Who watches replays?](https://res.cloudinary.com/dmukukwp6/image/upload/the_median_replay_d22bae8f0d.pngg)
 
 Across PostHog's entire customer base, every one of those views came from just **128,000 people** – so the average viewer accounts for about **60 views in 90 days**. 
 
@@ -70,7 +70,7 @@ And then there's the single most devoted replay-watcher on all of PostHog, who o
 
 The handful who do watch aren't exactly savouring it. When people change the playback speed, they floor it – nearly one in five jumps straight to 8× or 16×.
 
-![Playback speed](https://res.cloudinary.com/dmukukwp6/image/upload/08_speed_6f14e64653.png)
+![Playback speed](https://res.cloudinary.com/dmukukwp6/image/upload/the_median_replay_133a9cf11e.png)
 
 ## This isn't a PostHog problem
 
@@ -82,7 +82,12 @@ That's why we built [Replay Vision](/replay-vision).
 
 You tell it what to look for, and it reads every session for exactly that – scoring frustration, flagging dead-ends, classifying what users came to do, summarizing what happened, or answering any other question about your users you can put into words.
 
-![Replay Vision](https://res.cloudinary.com/dmukukwp6/image/upload/10_scanner_mix_1_a59dc4084e.png)
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/replay_vision_overview_app_light_9f82e7b066.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/replay_vision_overview_app_dark_73d0b2c435.png"
+  alt="The Replay Vision overview: observations over time, enabled scanners, the monthly usage meter, and the scanner list"
+  classes="rounded"
+/>
 
 *Those are just the examples we reach for most; it is fully customizable to your needs, so the sky is the limit here.*
 
