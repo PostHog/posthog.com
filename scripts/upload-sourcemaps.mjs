@@ -13,9 +13,10 @@ const BUILD_DIR = 'public'
 const RELEASE_NAME = 'posthog.com'
 const CLI_VERSION = '0.11.2'
 
-const apiKey = process.env.POSTHOG_CLI_API_KEY || process.env.POSTHOG_CLI_TOKEN
-if (!apiKey) {
-    console.log('[sourcemaps] No POSTHOG_CLI_API_KEY set. Skipping source map upload.')
+// The CLI reads POSTHOG_CLI_API_KEY and POSTHOG_CLI_PROJECT_ID from the environment and needs
+// both. Skip unless both are present, otherwise the CLI would run and fail with a credential error.
+if (!process.env.POSTHOG_CLI_API_KEY || !process.env.POSTHOG_CLI_PROJECT_ID) {
+    console.log('[sourcemaps] POSTHOG_CLI_API_KEY or POSTHOG_CLI_PROJECT_ID not set. Skipping source map upload.')
     process.exit(0)
 }
 
