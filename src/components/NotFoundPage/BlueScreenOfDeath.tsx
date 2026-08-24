@@ -63,10 +63,13 @@ export default function BlueScreenOfDeath(): JSX.Element {
     }, [])
 
     return (
-        <div className="bg-blue-600 flex items-center justify-center">
+        <div
+            className="bg-blue-600 flex min-h-0 w-full items-center justify-center"
+            style={{ height: appWindow?.size.height }}
+        >
             <ScrollArea className="h-full w-full">
                 <div
-                    className="bg-blue-600 text-white font-mono text-sm leading-relaxed p-8"
+                    className="bg-blue-600 min-h-full text-white font-mono text-sm leading-relaxed p-8"
                     style={{
                         fontFamily: 'monospace, "Courier New"',
                         backgroundColor: '#0000aa',
@@ -171,23 +174,26 @@ export default function BlueScreenOfDeath(): JSX.Element {
                                         hideFilters={true}
                                         className="
                                             [&_input]:!bg-transparent 
-                                            [&_input]:!text-green-400 
+                                            [&_input]:!text-white
                                             [&_input]:!border-none 
                                             [&_input]:!outline-none
                                             [&_input]:!p-0
                                             [&_input]:!m-0
                                             [&_input]:!text-base
                                             [&_input]:font-mono
-                                            [&_input]:placeholder-green-600
+                                            [&_input]:placeholder:!text-white/60
                                             [&_.bg-white]:!bg-black
-                                            [&_.border-primary]:!border-green-400
+                                            [&_ul]:!h-auto
+                                            [&_ul]:!max-h-[17.5rem]
+                                            [&_ul]:!border-white
                                             [&_.rounded-md]:!rounded-none
                                             [&_li]:!bg-black
-                                            [&_li]:!text-green-400
-                                            [&_li]:border-green-400
-                                            [&_li.cursor-pointer]:hover:!bg-green-900
-                                            [&_h5]:!text-green-400
-                                            [&_p]:!text-green-300
+                                            [&_li]:!text-white
+                                            [&_li]:border-white
+                                            [&_li.cursor-pointer:hover]:!bg-green-dark
+                                            [&_h5]:!text-white
+                                            [&_p.text-secondary]:line-clamp-1
+                                            [&_p.text-secondary]:!text-white
                                         "
                                     />
                                     {/* Blinking cursor for DOS effect */}
