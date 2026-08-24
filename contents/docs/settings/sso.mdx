@@ -372,6 +372,8 @@ If you already have a custom SAML app configured for PostHog, you can enable SCI
    - **SCIM Base URL** from PostHog
    - **API Token** (the SCIM Token from PostHog)
 
+   Set the **Unique identifier field for users** to a unique attribute for provisioned users. A common choice is `userName` mapped to the user's email address, but any unique identifier works. If not set, PostHog defaults to the user's email.
+
 4. Click **Test API Credentials** to verify the connection.
 
 5. In the **Provisioning to App** settings, enable:
