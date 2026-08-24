@@ -141,7 +141,7 @@ This approach works well for traces. If you're building a multi-turn experience 
 
 Watching cost per trace across your whole product works well for regressions that hit everyone, like a bad deploy or a model swap.
 
-The trouble is the ones that don't. A retry loop that only fires on documents over 8k tokens hits the handful of accounts that send long documents. Average that in with thousands of healthy traces and it disappears.
+This doesn't reveal edge cases and outliers. A retry loop that only fires on documents over 8k tokens hits the handful of accounts that send long documents. Average that in with thousands of healthy traces and it disappears.
 
 So one comparison isn't enough. You need two: how a user's cost per trace compares to everyone else's, and how it compares to their own last week. A user who doubled against themselves is worth a look even if they're nowhere near the top of your bill.
 
