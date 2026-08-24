@@ -60,7 +60,6 @@ test.beforeEach(async ({ page }) => {
 const normalizeVolatileText = async (page: Page) => {
     await page.evaluate(() => {
         const relativeTime = /\b(?:an?|a few|\d+)\s+(?:second|minute|hour|day|week|month|year)s?\s+ago\b/gi
-        const justNow = /\bjust now\b/gi
         const iso = /\b\d{4}-\d{2}-\d{2}(?:[T ]\d{2}:\d{2}(?::\d{2}(?:\.\d+)?)?(?:Z|[+-]\d{2}:?\d{2})?)?\b/g
 
         const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT)
@@ -70,10 +69,7 @@ const normalizeVolatileText = async (page: Page) => {
         }
         for (const node of nodes) {
             if (!node.data) continue
-            node.data = node.data
-                .replace(justNow, 'just now')
-                .replace(relativeTime, '[time ago]')
-                .replace(iso, '[date]')
+            node.data = node.data.replace(relativeTime, '[time ago]').replace(iso, '[date]')
         }
     })
 }

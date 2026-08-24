@@ -226,6 +226,9 @@ jobs:
         permissions:
             contents: read
             pull-requests: read
+        env:
+            VR_TOKEN: ${{ secrets.VR_API_TOKEN }}
+            VR_BASELINE: visual-regression/snapshots.yml
 
         steps:
             - name: Checkout
@@ -308,7 +311,6 @@ jobs:
               continue-on-error: true
               shell: bash
               env:
-                  VR_TOKEN: ${{ secrets.VR_API_TOKEN }}
                   VR_BRANCH: ${{ github.event.pull_request.head.ref }}
                   VR_COMMIT: ${{ github.event.pull_request.head.sha }}
                   VR_PR: ${{ github.event.pull_request.number }}
@@ -316,7 +318,7 @@ jobs:
               run: |
                   RUN_ID=$(node vr-cli/products/visual_review/cli/dist/cli/src/index.js run create \
                     --type playwright \
-                    --baseline visual-regression/snapshots.yml \
+                    --baseline "$VR_BASELINE" \
                     --branch "$VR_BRANCH" \
                     --commit "$VR_COMMIT" \
                     --pr "$VR_PR" \
@@ -328,13 +330,12 @@ jobs:
               if: steps.changes.outputs.visual == 'true' && steps.vr-create.outputs.run-id != ''
               continue-on-error: true
               env:
-                  VR_TOKEN: ${{ secrets.VR_API_TOKEN }}
                   VR_RUN_ID: ${{ steps.vr-create.outputs.run-id }}
               run: |
                   node vr-cli/products/visual_review/cli/dist/cli/src/index.js run upload \
                     --run-id "$VR_RUN_ID" \
                     --dir .visual-regression/screenshots \
-                    --baseline visual-regression/snapshots.yml \
+                    --baseline "$VR_BASELINE" \
                     --token "$VR_TOKEN"
 
             - name: Complete Visual Review run
@@ -345,12 +346,11 @@ jobs:
               # don't want a red Actions job on every PR too.
               continue-on-error: true
               env:
-                  VR_TOKEN: ${{ secrets.VR_API_TOKEN }}
                   VR_RUN_ID: ${{ steps.vr-create.outputs.run-id }}
               run: |
                   node vr-cli/products/visual_review/cli/dist/cli/src/index.js run complete \
                     --run-id "$VR_RUN_ID" \
-                    --baseline visual-regression/snapshots.yml \
+                    --baseline "$VR_BASELINE" \
                     --token "$VR_TOKEN"
 
             - name: Upload visual regression artifacts
