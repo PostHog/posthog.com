@@ -1,5 +1,8 @@
 /** The volumes on the shelf. Data only, so `gatsby/` can import it in Node at build time. */
 
+/** Spine colours. Limited to tokens white text reads on – `Book.tsx` prints the title in white. */
+export type PocketGuideToken = 'orange' | 'purple' | 'blue'
+
 export interface PocketGuideVolume {
     /** URL segment and content directory: /pocket-guides/<id>, contents/pocket-guides/<id>/ */
     id: string
@@ -7,7 +10,7 @@ export interface PocketGuideVolume {
     /** One line on the shelf. What the volume gets you, not what's in it. */
     description: string
     /** Project color token, bare – callers build text-/border-/bg- from it. */
-    token: string
+    token: PocketGuideToken
     /** Printed on the cover. Order on the shelf follows it. */
     volume: number
     /** A hand-written src/pages file owns this route, so don't generate one. */
