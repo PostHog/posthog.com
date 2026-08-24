@@ -30,7 +30,7 @@ export default function CodeOpenPage(): JSX.Element {
                         </p>
 
                         <div className="flex flex-wrap gap-3 justify-center mb-6">
-                            <CallToAction type="primary" size="md" to="/code/download">
+                            <CallToAction type="primary" size="md" to="/desktop#download">
                                 Download PostHog Desktop
                             </CallToAction>
                             <CallToAction type="secondary" size="md" to="/docs/posthog-desktop">
