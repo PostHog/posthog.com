@@ -117,7 +117,7 @@ Both of those are true at the same time, and that's the trouble with error rates
 
 PostHog Error Tracking works if you capture exceptions. Set `$ai_is_error` and it normalizes the message, so `Request req_abc123 failed` and `Request req_xyz789 failed` collapse into one issue with counts for traces, users, and days seen. This catches your timeouts, your 429s, and the malformed response that blew up your parser.
 
-That catches your timeouts, your 429s, and the malformed response that blew up your parser. It catches none of this:
+Error Tracking alone can't catch any of this:
 
 - The model ignored an instruction
 - It answered from the wrong document
