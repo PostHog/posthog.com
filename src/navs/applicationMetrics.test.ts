@@ -39,6 +39,6 @@ describe('the metrics docs section', () => {
         const frontmatter = readFileSync(join(here, '../../contents/docs/metrics/index.mdx'), 'utf8').split(
             /^---$/m
         )[1]
-        assert.match(frontmatter ?? '', /title:\s*Application metrics/i)
+        assert.match(frontmatter ?? '', /title:\s*Application metrics/)
     })
 })
