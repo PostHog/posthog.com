@@ -25,7 +25,7 @@ Everyone agrees on the problem their customers are facing: **Product development
 
 Without naming it, every report I read was describing the same fix – a context warehouse. Yes, I know how that sounds; the PostHog PMM thinks the answer is PostHog. Fair. But I didn't run these numbers. My competitors did, and published them. I'm the first to read all of them, saw the pattern, and say why that adds up to a [context warehouse](/blog/what-is-a-context-warehouse).
 
-## Agents fail because they have no idea what's going on
+## Trend 1: Agents fail because they have no idea what's going on
 
 > The average company now runs 106 SaaS apps, each one throwing off its own data.
 >
@@ -44,9 +44,9 @@ This is where AI product development stalls. Teams blame the agent, but the prob
 >
 > [Monte Carlo, State of Data Quality Survey, 2023](https://www.montecarlodata.com/blog-data-quality-survey)
 
-With 106 SaaS apps producing data, that final 1/3rd of people who do trust their data are unlikely to know if a pipeline breaks and they stop getting critical data. AI fills the gap with something reasonable-sounding and simply moves on. Trust isn't the same as correct.
+The data tells me that even when AI does have access to all the data it needs, 2/3rds of the time teams still have doubts on data quality. Begging the question, how can you trust the output if you don't trust what it's based on? That final 1/3rd of people who do trust their data are unlikely to know if a pipeline breaks and they stop getting critical data. Their AI simply fills the gap with something reasonable-sounding and they trust it.
 
-## Pipelines are the primary problem
+## Trend 2: Pipelines are the primary problem
 
 An agent can't see the full picture, so teams try to build it themselves. That means pipelines: extract data from each source, load it somewhere central, model it, then keep all of it in sync every time a schema changes upstream.
 
@@ -81,13 +81,13 @@ In reality it's all of those things at once, because they all feed into the same
 
 ## How to close the context gap
 
-You need a way to stop building and babysitting pipelines so you can trust that your data is in one place, reachable by you and your agents. Which, coincidentally, is the definition of data readiness we started with.
+My prediction for the next big trend? You need a way to stop building and babysitting pipelines (Solving trend 1) so you can trust that your data is in one place, reachable by you and your agents (solving trend 2). Which, coincidentally, is the definition of data readiness we started with.
 
 > Information is trapped in silos and data management is split across many different tools, causing teams to struggle to accelerate AI.
 >
 > [Databricks, State of Data + AI](https://www.databricks.com/discover/state-of-data-ai)
 
-A [context warehouse](/context-warehouse) wraps ingestion, modeling, storage, and querying in one tool instead of four you wire together with pipelines between them. Here's how that works in PostHog:
+A [context warehouse](/context-warehouse) wraps ingestion, modeling, storage, and querying in one tool instead of four you wire together with pipelines between them. Using PostHog's context warehouse means you don't have to set up multiple pipelines between your data sources, warehouse, modeling, and BI tools, creating dependancies that take too much time to keep up with. Here's how it works in PostHog:
 
 - **Your product data is already there.** PostHog captures data from experiments, logs, errors (and more) as it happens, so there's no export to get it into a separate warehouse.
 - **External sources sync in.** Connect [Stripe](https://posthog.com/docs/data-warehouse/sources/stripe), [HubSpot](https://posthog.com/docs/data-warehouse/sources/hubspot), [Salesforce](https://posthog.com/docs/data-warehouse/sources/salesforce), [Postgres](https://posthog.com/docs/data-warehouse/sources/postgres), and the other 102 sources of data you have, and it lands in the same warehouse. The pipelines are maintained automatically with scheduled, by default syncs.
