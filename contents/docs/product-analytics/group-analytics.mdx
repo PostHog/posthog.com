@@ -235,14 +235,9 @@ PostHog::capture([
 
 </MultiLanguage>
 
-#### Users who belong to more than one group of the same type
+#### Multiple groups per person
 
-A person can be associated with as many individual groups of the same type as you need, like a teacher who works at two schools.
-The limit above applies to a single event, not to a person.
-
-Group associations are stored on events, not on the person.
-PostHog doesn't keep a list of the individual groups a person belongs to, so nothing is overwritten when a user moves between them.
-Set the group to the one the user is working in, and set it again when they switch:
+The limit above applies to events, not people. PostHog doesn't store group membership on the person, so one person can be associated with any number of individual groups of the same type, like a teacher who works at two schools. Set the group to the one the user is working in, and set it again when they switch:
 
 <MultiLanguage>
 
@@ -300,19 +295,7 @@ PostHog::capture([
 
 </MultiLanguage>
 
-Earlier events keep the group they were captured with, so switching doesn't change past data.
-On the JavaScript Web SDK, call `posthog.group()` again each time the user switches.
-On backend SDKs, pass `groups` on every capture, because there's no session to update.
-
-Both individual groups then show up in PostHog. See [view related people and groups](#view-related-people-and-groups).
-
-<CalloutBox icon="IconInfo" title="Counting users across individual groups" type="fyi">
-
-When you break down a person-level metric like unique users by group, a user who was active in two individual groups is counted once in each.
-Adding those individual groups together gives a higher number than your total unique users.
-To count individual groups instead of users, aggregate by group type.
-
-</CalloutBox>
+Earlier events keep the group they were captured with, so switching doesn't change past data. Both individual groups appear in [related people and groups](#view-related-people-and-groups).
 
 #### Capture events for individual groups without a user
 
@@ -381,20 +364,16 @@ To view individual groups and their properties, go to the [people tab](https://a
 
 ### View related people and groups
 
-To see the people and individual groups that a person or group shares events with:
+To see the people and individual groups that share events with a person or group:
 
 - On a person, open the **Related groups** tab.
 - On an individual group, open the **Related people & groups** tab.
 
-A user who was active in more than one individual group of the same type gets a row for each one, and each row links to that group's page.
-PostHog doesn't mark one of them as the current or primary group, because it doesn't store group membership on the person.
-That user also appears under both individual groups when you open those groups directly.
+A user who was active in more than one individual group of the same type gets a row for each one, with no primary or current group. They also appear under each of those groups.
 
 <CalloutBox icon="IconInfo" title="These tabs cover the last 90 days" type="fyi">
 
-Related people and groups are worked out from events in the last 90 days.
-An individual group that a person hasn't been active in for longer than that drops off the list.
-The earlier events are unchanged and still appear in insights.
+PostHog works out related people and groups from the last 90 days of events. An individual group that a person hasn't been active in for longer drops off the list. The earlier events are unchanged and still appear in insights.
 
 </CalloutBox>
 
@@ -519,8 +498,8 @@ Group analytics has a few limitations to be aware of:
 - Maximum of 5 group types per project
 - You can delete group types, but not individual groups
 - Multiple individual groups of the same group type can't be assigned to a single event
-- Group associations are stored on events, not on people, so you can't build a [cohort](/docs/data/cohorts) from a group or filter people by group
-- Related people and groups are based on the last 90 days of events
+- Group associations are stored on events, not people, so you can't build a [cohort](/docs/data/cohorts) from a group
+- Related people and groups only cover the last 90 days of events
 - Group types aren't supported for lifecycle insights or user paths
 - Only individual groups with known properties appear in the [people tab](https://app.posthog.com/persons)
 
