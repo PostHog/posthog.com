@@ -1,0 +1,89 @@
+---
+title: Canvases
+---
+
+A canvas is an interactive app an agent builds around your PostHog data. Use one when a question or workflow needs more than a standard insight or dashboard.
+
+You describe the outcome, and the agent builds the interface and queries. A canvas can combine saved insights with new queries, add filters and date controls, remember shared state, capture events, and offer approved actions.
+
+<ProductScreenshot
+imageLight="/images/docs/posthog-desktop/canvas.png"
+classes="rounded"
+alt="Interactive canvas for exploring compute pricing"
+/>
+
+## Start with the teaching canvas
+
+New teams receive a pinned **Start here** canvas in the general space. It introduces spaces, agents, context, and canvases with a live chart from the selected PostHog project.
+
+If you joined before the teaching canvas was added, open a space, select **Canvases**, and create your own canvas. You can start with any of the prompts below.
+
+## Canvas ideas
+
+### Release health
+
+Combine adoption, errors, support reports, and open pull requests into one release view.
+
+> Build a release health canvas for our latest version. Show adoption, new errors, support volume, and open pull requests. Add a version filter and link each problem to its source.
+
+### Customer lookup
+
+Give support or success teams one place to understand an account before replying.
+
+> Build a customer lookup canvas. Let me search by email or company, then show recent activity, plan, feature access, errors, support conversations, and relevant session recordings.
+
+### Weekly product review
+
+Turn a repeated reporting task into a shared view with current data and commentary.
+
+> Build our weekly product review. Show activation, retention, feature adoption, experiments, and the largest changes from the previous week. Add a date picker and a short summary for each section.
+
+### Feature rollout
+
+Connect rollout progress with behavior, quality, and feedback.
+
+> Build a rollout canvas for this feature flag. Compare exposed and unexposed users, show conversion and errors, include survey feedback, and add links to the experiment and flag.
+
+### Team workflow
+
+Combine data with approved actions when the team needs to act from the same view.
+
+> Build a triage canvas for our product team. Group current problems by priority, show the evidence behind each one, and let an owner mark an item as reviewed.
+
+## Build a canvas
+
+Open a space and select **Canvases**, then describe what you need. You can also ask for a canvas from any agent session. The agent builds the first version against the PostHog project selected in Desktop.
+
+A useful first prompt includes:
+
+- The question or workflow the canvas should support
+- Who will use it
+- The data or saved insights it should include
+- The filters and controls people need
+- Any action a viewer should be able to take
+
+Start with the smallest useful version. Ask the agent to add another data source or control after you confirm the first view answers the main question.
+
+## Improve a canvas
+
+Comment on the whole canvas or select a specific part before leaving feedback. The agent uses the canvas, its source, and your comment as context for the next version.
+
+Each rebuild creates a version. Compare versions to review what changed, and restore an earlier version if a revision does not work.
+
+For a focused request, describe the behavior you want instead of the implementation. For example:
+
+> Keep the summary visible when I change the date range. Add a comparison with the previous period and explain the largest change.
+
+## Share a canvas
+
+A canvas belongs to a [space](/docs/posthog-desktop/spaces), so teammates can find it beside the sessions and context that produced it.
+
+Select **Copy link** to share an HTTPS link. The link opens the canvas in PostHog Desktop. Recipients need access to its PostHog project and shared space.
+
+## Data access and actions
+
+Canvases use the PostHog project selected in Desktop. They can query the same project data available to the agent, including saved insights and supported PostHog products.
+
+A canvas declares the data and actions it needs, and PostHog limits it to those capabilities. Actions run with the viewer's own permissions. Review requested access when an agent builds or updates a canvas, especially when it can capture events or change data.
+
+See [PostHog integration](/docs/posthog-desktop/posthog-integration) for project selection and data access. See [Spaces](/docs/posthog-desktop/spaces) for shared context and collaboration.
