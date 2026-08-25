@@ -1,0 +1,116 @@
+---
+title: "Nobody watches their session replays. We studied 7.7 million views to prove it"
+date: 2026-08-24
+author:
+  - natalia-amorim
+featuredImage: https://res.cloudinary.com/dmukukwp6/image/upload/nobody_watches_session_replays_3d44215c4a.png
+featuredImageType: full
+category: General
+tags:
+  - Studies
+seo:
+  metaTitle: "Nobody watches their session replays – a study of 7.7 million views"
+  metaDescription: "We timed 7.65M session replay views. The median lasts 17 seconds, and 99.8% of recordings are never opened. Here's the data, and the fix" 
+---
+
+Here's an uncomfortable truth about session replay: while we all know replays are a useful tool for understanding user behavior and diagnosing UX issues, almost nobody watches them.
+
+You aren't watching them, neither is your PM, and definitely not the manager who swore at standup they'd "go through a few sessions this week."
+
+Which is an awkward thing to admit, [because we sell it](/session-replay).
+
+So naturally we had to ask: chat, are we cooked? We pulled **7.65 million** replay-viewing sessions[^1] to find out.
+
+Short answer: we are. The median replay holds attention for just **17 seconds**, the average recording it's pulled from runs **28 minutes**, and **99.8% of recordings are never opened by anyone, ever** (but don't worry, there's a silver lining at the end).
+
+## How long people actually watch a replay
+
+Every time anyone opened the player and actually watched something, we timed it. The median session lasted 17 seconds. Two-thirds were over inside 30. 
+
+![Hook](https://res.cloudinary.com/dmukukwp6/image/upload/the_median_replay_5481af9eb3.png)
+
+Meanwhile, the average recording those people were dipping into runs 28 minutes long. So the typical viewer watches **17 seconds of a 28-minute session**, about 1% of it, and moves on.
+
+![Replay retention](https://res.cloudinary.com/dmukukwp6/image/upload/the_median_replay_b28f4c7ceb.png)
+
+Even if you're generous and use the median recording length – a more civilized five minutes – you're still looking at someone sampling about 6% before moving on.
+
+![The gap between what you watch and what got recorded](https://res.cloudinary.com/dmukukwp6/image/upload/the_median_replay_00e1247c92.png)
+
+And this is the optimistic framing, because it only counts the replays somebody even bothered to open in the first place.
+
+![Never opened](https://res.cloudinary.com/dmukukwp6/image/upload/the_median_replay_61c80296dc.png)
+
+Over those same 90 days, fewer than 1 in 600 recordings was opened – or, to put it less politely, roughly 99.8% of recorded sessions are watched by no one, ever.
+
+You could argue an unwatched recording is harmless – a tree falling in an empty forest (one that bills you for storage). But those sessions aren't always blank. In fact, they might be full of people getting stuck, clicking things that don't work, or rage-clicking their way out of your product. 
+
+**Every session you don't watch could be hiding the one problem that decides whether a user stays or leaves, and you'll never know it's there.**
+
+## Who's actually watching?
+
+Don't get me wrong: it's not that people are lazy; it's that the backlog is physically unwatchable.
+
+![Company backlog](https://res.cloudinary.com/dmukukwp6/image/upload/the_median_replay_368af0638b.png)
+
+The median company on PostHog captured around **340 recordings** in the last 90 days – at a typical five minutes each, that's roughly **28 hours of footage**, or about three and a half working days of nonstop watching just to clear one quarter.
+
+And that's the *median* company. The average one – dragged up by the big customers – captured closer to **1,260 hours**, which amounts to around 31 work-weeks of doing nothing but watching.
+
+But we still wanted to know: who are users actually watching? (bless their hearts)
+
+![Who watches replays?](https://res.cloudinary.com/dmukukwp6/image/upload/the_median_replay_d22bae8f0d.png)
+
+Across PostHog's entire customer base, every one of those views came from just **128,000 people** – so the average viewer accounts for about **60 views in 90 days**. 
+
+But that average is a lie: the **median** watcher opened just **12 replays** in three months (call it one a week, if that), and only the **top 1% get past ~800**.
+
+And then there's the single most devoted replay-watcher on all of PostHog, who opened 24,649 of them in 90 days – about 270 a day, every day. We hope they're okay.
+
+The handful who do watch aren't exactly savouring it. When people change the playback speed, they floor it – nearly one in five jumps straight to 8× or 16×.
+
+![Playback speed](https://res.cloudinary.com/dmukukwp6/image/upload/the_median_replay_133a9cf11e.png)
+
+## This isn't a PostHog problem
+
+[Hotjar](/blog/posthog-vs-hotjar), [FullStory](/blog/posthog-vs-fullstory), [LogRocket](/blog/posthog-vs-logrocket), [Microsoft Clarity](/blog/best-microsoft-clarity-alternatives), [Contentsquare](/blog/posthog-vs-contentsquare) – every session replay tool hands you an ocean of footage and a single play button. Over the last couple of years, nearly all of them have shipped some flavour of AI session summary feature that watches sessions so you don't have to.
+
+But watching was only ever half the job. A tidy AI summary still hands you a to-do list. And a to-do list is just a smaller, better-organised pile of things nobody has time to do.
+
+That's why we built [Replay Vision](/replay-vision). 
+
+You tell it what to look for, and it reads every session for exactly that – scoring frustration, flagging dead-ends, classifying what users came to do, summarizing what happened, or answering any other question about your users you can put into words.
+
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/templates_picker_fb4ef59a19.png"
+  alt="The scanner templates picker with the five built-in templates and the create-from-scratch option"
+  classes="rounded"
+/>
+
+*Those are just the examples we reach for most; it is fully customizable to your needs, so the sky is the limit here.*
+
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/replay_vision_overview_app_light_9f82e7b066.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/replay_vision_overview_app_dark_73d0b2c435.png"
+  alt="The Replay Vision overview: observations over time, enabled scanners, the monthly usage meter, and the scanner list"
+  classes="rounded"
+/>
+
+It reads at a pace no person can match. Since launch three weeks ago, it has watched **1,291,000 recordings** – around **51 years** of footage. To get through that much yourself, you'd have had to start watching in **1975** and never stop. 
+
+For scale: that's the year the first digital camera was invented and the personal computer showed up on newsstands. You'd have pressed play the summer Jaws came out and you'd be finishing roughly now, about 447,000 hours of footage later.
+
+And if you [enable PostHog Self-Driving](/self-driving) as well, you can connect it end to end: Replay Vision surfaces the issue, PostHog picks it up and opens the pull request with the fix, and all you do is review and merge.
+
+We said earlier we were cooked... well, turns out we don't have to be, and neither do you.
+
+<WizardCTA
+ command="replay-vision"
+ title="Set up Replay vision with one command"
+ subtitle="The wizard turns on session replay and creates scanners scoped to your product's key flows."
+ learnMoreTo="/docs/replay-vision"
+/>
+
+---
+
+[^1]: A few notes for the people who read footnotes. Watch-time, viewer, backlog, and Replay Vision figures are cross-tenant across PostHog's customer base, last 90 days to ~August 12, 2026; watch time is a median because the mean is dragged around by players left open for hours. "Captured" is the sum of daily per-customer web recording counts (~2.5 billion over the period; a further ~0.5 billion mobile recordings and ~52 million zero-duration recordings are set aside so the denominator matches the web-player "opened" count of ~4.2 million). Footage hours estimate recordings × the ~5-minute median recording length. The per-company backlog uses the median company (~340 recordings); the average is far higher because a handful of large customers dominate. We deliberately left per-page frustration rates out: those events live inside each customer's own project, not ours, so any "average rage-click rate" would only reflect posthog.com itself – not a benchmark worth quoting.
