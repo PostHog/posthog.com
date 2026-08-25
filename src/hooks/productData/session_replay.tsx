@@ -174,6 +174,17 @@ export const sessionReplay = {
             // Both variants are the same screen at the same size, so one set of coordinates holds.
             // The pocket guide annotates this inline – see contents/pocket-guides/session-replay/finding-replays.
         },
+        'player-controls': {
+            // The foot of the player, recropped from the same 3649x2074 source as
+            // `player-inspector` – the controls are worth their own figure, the recording above
+            // them is not. Shown in the pinned layout, which is what the crop makes legible.
+            src: 'https://res.cloudinary.com/dmukukwp6/image/upload/c_crop,x_0,y_1440,w_1752,h_634/w_1600,c_limit,q_auto,f_auto/player_light_d95c9f5cd8.png',
+            srcDark:
+                'https://res.cloudinary.com/dmukukwp6/image/upload/c_crop,x_0,y_1440,w_1752,h_634/w_1600,c_limit,q_auto,f_auto/player_dark_227437debc.png',
+            alt: 'The bottom of the replay player: the seek bar, the transport controls, and the row of capture and comment buttons',
+            // Both variants are the same screen at the same size, so one set of coordinates holds.
+            // The pocket guide annotates this inline – see contents/pocket-guides/session-replay/watching-replays.
+        },
         home: {
             src: 'https://res.cloudinary.com/dmukukwp6/image/upload/screenshot_replay_timeline_light_9225f869dc.jpg',
             srcDark: 'https://res.cloudinary.com/dmukukwp6/image/upload/screenshot_replay_timeline_dark_f5371a996f.png',
