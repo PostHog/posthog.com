@@ -1,0 +1,68 @@
+---
+title: Use Self-driving in PostHog Desktop
+sidebarTitle: Self-driving
+sidebar: Docs
+showTitle: true
+---
+
+PostHog Self-driving watches your product data, investigates problems, and collects the results as reports. PostHog Desktop gives you one place to review those reports, ask follow-up questions, and start fixes.
+
+Self-driving uses the same reports and configuration in PostHog Desktop and the PostHog web app. Changes you make in either app apply to the same project.
+
+## Open Self-driving
+
+Select **Self-driving** in the navigation rail. The page groups reports by what they need from you:
+
+- **Needs your decision** contains reports that need review or have a pull request waiting for you.
+- **Monitoring** contains reports that do not need action yet.
+- **Archive** contains reports you archived and reports resolved by a merged pull request.
+
+Use **For you** to see reports where you are a suggested reviewer. Switch to **Entire project** or choose a teammate to inspect another working set.
+
+Search reports by title. You can also filter by signal source, pull request status, and priority, or change the sort order.
+
+## Review a report
+
+Open a report to read its summary and the evidence behind it. Depending on the report, this can include:
+
+- The agent's verdict and recommended next step
+- The findings and signal sources that contributed to the report
+- Charts that show the affected behavior
+- Suggested reviewers and repository context
+- Research, task, and pull request activity
+
+The available actions reflect the report's current state.
+
+- Select **Fix & monitor** to start an implementation task. You can add direction for the agent before it starts.
+- Select **Continue the task** when implementation work already exists.
+- Select **Defer** to remove the report from the current working set until more evidence arrives.
+- Select **Archive** when you do not want Self-driving to continue with the report. Add a reason to help improve future reports.
+
+PostHog Desktop does not merge changes automatically. Review the pull request and merge it through your normal GitHub workflow.
+
+## Ask questions about a report
+
+Open **Chat** to ask an agent about the report without leaving the page. The conversation includes the report and its evidence as context.
+
+You can ask what caused the problem, who is affected, or how the proposed fix works. Select text in the report and choose **Ask about this** to quote that passage into the conversation.
+
+The same chat follows the report's implementation task when one exists. Use it to request a change, continue the fix, or ask the agent to visualize the report on a canvas. Open the full task when you need its complete timeline, files, or code review tools.
+
+## Configure Self-driving
+
+Select **Configure agents** from the Self-driving page, or open **Settings** and select **Self-driving**. From there, you can:
+
+- Choose which [signal sources](/docs/self-driving/inbox/sources) create reports
+- Set the daily report limit
+- Set the minimum priority for automatically started tasks
+- Choose the base branch for automatically opened pull requests in each repository
+- Configure Slack notifications for new reports and suggested reviewers
+
+Connect your project and personal GitHub accounts before asking Self-driving to work in a repository. See [PostHog Desktop settings](/docs/posthog-desktop/settings#self-driving) for the related GitHub and Slack controls.
+
+## Learn more
+
+- [How Self-driving works](/docs/self-driving)
+- [How reports are created](/docs/self-driving/reports)
+- [How research tasks investigate reports](/docs/self-driving/inbox/research)
+- [How implementation tasks open pull requests](/docs/self-driving/inbox/implementation)
