@@ -1,0 +1,209 @@
+---
+title: Billing usage and spend API
+sidebarTitle: Overview
+sidebar: Docs
+showTitle: true
+---
+
+import { CalloutBox } from 'components/Docs/CalloutBox'
+
+The billing API returns the same usage and spend data that the [billing page](https://us.posthog.com/organization/billing) shows. Use it to pull usage counts and spend amounts into your own scripts, dashboards, or finance tools.
+
+There are two endpoints:
+
+- `GET /api/billing/usage/` returns usage counts, such as events, recordings, or exceptions.
+- `GET /api/billing/spend/` returns spend in US dollars, broken down the same way.
+
+Both endpoints report data for the whole organization. They do not take a project ID in the path. The organization is the one that owns the [personal API key](/docs/api/personal-api-keys) you authenticate with.
+
+## Prerequisites
+
+You need a [personal API key](/docs/api/personal-api-keys) with the **Billing** scope set to **Read** (`billing:read`). You create the key in [your user settings](https://us.posthog.com/settings/user-api-keys#personal-api-keys).
+
+You must also have access to billing usage and spend data for the organization. See [Access](#access) below.
+
+<CalloutBox icon="IconInfo" type="fyi" title="Use the private API domain">
+
+Send billing requests to the private domain: `https://us.posthog.com` for US Cloud or `https://eu.posthog.com` for EU Cloud. Confirm yours by checking your PostHog instance URL.
+
+</CalloutBox>
+
+## Access
+
+Access follows the caller's role in the organization:
+
+- **Owners** always have access.
+- **Admins** have access, unless the organization uses owner-only billing.
+- **Members** have access only when the organization has enabled member access to billing usage and spend data.
+
+PostHog controls the owner-only and member settings. They are not fields you set on the key.
+
+If your key does not have access, the endpoint returns `403 Forbidden`. To fix a `403`:
+
+- Confirm the key has the `billing:read` scope.
+- Use a key that belongs to an owner, or ask an owner to grant access for your role.
+
+## Parameters
+
+Pass all parameters in the query string. Both endpoints accept the same parameters.
+
+| Parameter | Type | Description |
+| --- | --- | --- |
+| `start_date` | string | Start of the range, in `YYYY-MM-DD` format. Relative values such as `-30d` and the value `all` also work. `all` starts at `2020-01-01`. |
+| `end_date` | string | End of the range, in `YYYY-MM-DD` format. Defaults to today when you set `start_date` and omit `end_date`. |
+| `usage_types` | string | JSON array of usage type identifiers to filter on, for example `["event_count_in_period","recording_count_in_period"]`. Omit for all types. See [Usage types](#usage-types). |
+| `team_ids` | string | JSON array of numeric project IDs to filter on, for example `[1,2]`. Omit for all projects you can access. |
+| `breakdowns` | string | JSON array of breakdown dimensions. Valid values are `"type"` and `"team"`, for example `["type","team"]`. Omit for a single aggregate series. |
+| `interval` | string | Size of each time bucket: `day`, `week`, or `month`. Defaults to `day`. |
+
+## Usage types
+
+The `usage_types` parameter accepts usage type identifiers. Each one maps to a line item on your bill. The common identifiers are:
+
+| Label | Identifier |
+| --- | --- |
+| Events | `event_count_in_period` |
+| Identified events | `enhanced_persons_event_count_in_period` |
+| Group analytics | `group_analytics` |
+| Recordings | `recording_count_in_period` |
+| Mobile recordings | `mobile_recording_count_in_period` |
+| Feature flag requests | `billable_feature_flag_requests_count_in_period` |
+| Exceptions | `exceptions_captured_in_period` |
+| Survey responses | `survey_responses_count_in_period` |
+| AI events | `ai_event_count_in_period` |
+| Synced rows | `rows_synced_in_period` |
+| Free synced rows | `free_historical_rows_synced_in_period` |
+| Destinations trigger events | `cdp_billable_invocations_in_period` |
+| Rows exported | `rows_exported_in_period` |
+| PostHog AI credits | `ai_credits_used_in_period` |
+| Logs ingested (MB) | `logs_mb_in_period` |
+
+## Get usage data
+
+<MultiLanguage>
+
+```bash
+curl \
+  -H "Authorization: Bearer $POSTHOG_PERSONAL_API_KEY" \
+  "<ph_app_host>/api/billing/usage/?start_date=2025-08-01&end_date=2025-08-25&usage_types=%5B%22event_count_in_period%22%5D&interval=day"
+```
+
+```python
+import requests
+
+url = "<ph_app_host>/api/billing/usage/"
+headers = {"Authorization": "Bearer {POSTHOG_PERSONAL_API_KEY}"}
+params = {
+    "start_date": "2025-08-01",
+    "end_date": "2025-08-25",
+    "usage_types": '["event_count_in_period"]',
+    "interval": "day",
+}
+response = requests.get(url, headers=headers, params=params)
+print(response.json())
+```
+
+```node
+import fetch from "node-fetch";
+
+async function getUsage() {
+  const params = new URLSearchParams({
+    start_date: "2025-08-01",
+    end_date: "2025-08-25",
+    usage_types: JSON.stringify(["event_count_in_period"]),
+    interval: "day",
+  });
+  const response = await fetch(`<ph_app_host>/api/billing/usage/?${params}`, {
+    headers: { Authorization: "Bearer {POSTHOG_PERSONAL_API_KEY}" },
+  });
+  console.log(await response.json());
+}
+
+getUsage();
+```
+
+</MultiLanguage>
+
+## Get spend data
+
+The spend endpoint takes the same parameters. Each value in `data` is an amount in US dollars.
+
+<MultiLanguage>
+
+```bash
+curl \
+  -H "Authorization: Bearer $POSTHOG_PERSONAL_API_KEY" \
+  "<ph_app_host>/api/billing/spend/?start_date=2025-08-01&end_date=2025-08-25&breakdowns=%5B%22type%22%5D&interval=day"
+```
+
+```python
+import requests
+
+url = "<ph_app_host>/api/billing/spend/"
+headers = {"Authorization": "Bearer {POSTHOG_PERSONAL_API_KEY}"}
+params = {
+    "start_date": "2025-08-01",
+    "end_date": "2025-08-25",
+    "breakdowns": '["type"]',
+    "interval": "day",
+}
+response = requests.get(url, headers=headers, params=params)
+print(response.json())
+```
+
+```node
+import fetch from "node-fetch";
+
+async function getSpend() {
+  const params = new URLSearchParams({
+    start_date: "2025-08-01",
+    end_date: "2025-08-25",
+    breakdowns: JSON.stringify(["type"]),
+    interval: "day",
+  });
+  const response = await fetch(`<ph_app_host>/api/billing/spend/?${params}`, {
+    headers: { Authorization: "Bearer {POSTHOG_PERSONAL_API_KEY}" },
+  });
+  console.log(await response.json());
+}
+
+getSpend();
+```
+
+</MultiLanguage>
+
+## Response
+
+Both endpoints return a time series. Each entry in `results` is one series. The `data` and `dates` arrays line up by index.
+
+```json
+{
+  "status": "ok",
+  "customer_id": 12345,
+  "results": [
+    {
+      "id": 0,
+      "label": "event_count_in_period",
+      "data": [102345, 98211, 110432],
+      "dates": ["2025-08-01", "2025-08-02", "2025-08-03"],
+      "breakdown_type": "type",
+      "breakdown_value": "event_count_in_period"
+    }
+  ],
+  "team_id_options": [1, 2, 3]
+}
+```
+
+| Field | Description |
+| --- | --- |
+| `status` | Request status. |
+| `customer_id` | ID of the billing customer. |
+| `results` | Array of time series. One entry per breakdown value. |
+| `results[].label` | Name of the series. |
+| `results[].data` | Values for each bucket. Counts for usage, US dollar amounts for spend. |
+| `results[].dates` | Bucket dates that match `data` by index. |
+| `results[].breakdown_type` | Breakdown dimension for the series: `type`, `team`, or `multiple`. |
+| `results[].breakdown_value` | Value of the breakdown for the series. |
+| `team_id_options` | Project IDs that have usage in the organization's history. |
+</content>
+</invoke>
