@@ -273,7 +273,7 @@ const TemplatesItem = {
     icon: <Icons.IconMagic className="size-4 text-purple" />,
 }
 
-/** The `goals` arm of DOCS_NAV_FLAG: same entries as DOCS_GROUPS, grouped by what a reader wants to do. */
+/** Goals arm of DOCS_NAV_FLAG: same entries as DOCS_GROUPS, regrouped; a name dropped here falls into `More tools` instead. */
 const DOCS_GROUPS_GOALS: DocsGroup[] = [
     {
         label: 'New to PostHog',
@@ -354,9 +354,19 @@ export const getDocsMenuItems = (groups: DocsGroup[] = DOCS_GROUPS): MenuItemTyp
         return IconComponent ? <IconComponent className={`text-${source.color || 'gray'} size-4`} /> : undefined
     }
 
+    // A name matching no docsMenu entry is dropped by the filters below, so a typo quietly
+    // shortens the menu. Warn in development rather than let it pass unseen.
+    const claim = (label: string): MenuItemType | undefined => {
+        const item = byLabel.get(label)
+        if (!item && process.env.NODE_ENV !== 'production') {
+            console.warn(`[docs menu] "${label}" matches no docs entry, so it will not appear.`)
+        }
+        return item
+    }
+
     const resolve = (entry: string | DocsSubGroup): MenuItemType | undefined => {
-        if (typeof entry === 'string') return byLabel.get(entry)
-        const children = entry.items.map((label) => byLabel.get(label)).filter(Boolean) as MenuItemType[]
+        if (typeof entry === 'string') return claim(entry)
+        const children = entry.items.map(claim).filter(Boolean) as MenuItemType[]
         if (children.length === 0) return undefined
         return { type: 'submenu' as const, label: entry.label, icon: iconFor(entry), items: children }
     }
