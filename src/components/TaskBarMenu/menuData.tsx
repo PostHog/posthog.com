@@ -329,7 +329,7 @@ const buildProductsMenuItems = (allProducts: any[]) => {
             type: 'item',
             label: 'PostHog Desktop',
             link: '/desktop',
-            icon: <Icons.IconCoffee className="size-4 text-brown" />,
+            icon: <Icons.IconCoffee className="size-4 text-brown dark:text-brown-dark" />,
         },
         {
             type: 'item',

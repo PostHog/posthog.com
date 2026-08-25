@@ -1,7 +1,7 @@
 import React from 'react'
 import { motion, useReducedMotion } from 'framer-motion'
 
-import { AnatomyMarker } from './ReportAnatomy'
+import { FigureMarker } from './FigureMarker'
 
 /** One LLM call, in context: the trace that contains it, the steps around it, what each cost. */
 
@@ -53,7 +53,7 @@ export default function TraceTree({ rows }: { rows: TraceTreeRow[] }): JSX.Eleme
                         </span>
                         <span className="min-w-0 font-code text-primary">{row.label}</span>
                         {row.meta && <span className="tabular-nums text-secondary">{row.meta}</span>}
-                        {row.marker && <AnatomyMarker {...row.marker} />}
+                        {row.marker && <FigureMarker {...row.marker} />}
                     </motion.li>
                 )
             })}

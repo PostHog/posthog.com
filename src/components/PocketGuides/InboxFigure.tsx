@@ -3,7 +3,7 @@ import React from 'react'
 import ReportCard from 'components/SelfDrivingInbox/ReportCard'
 import { InboxTemplate } from 'components/SelfDrivingInbox/types'
 
-import { AnatomyMarker } from './ReportAnatomy'
+import { FigureMarker } from './FigureMarker'
 
 /** Anchors a marker over `ReportCard`, which is shared with the app and so stays untouched. */
 function AnchoredMarker({
@@ -17,7 +17,7 @@ function AnchoredMarker({
 }): JSX.Element {
     return (
         <span className={`absolute z-10 ${className}`}>
-            <AnatomyMarker {...marker} />
+            <FigureMarker {...marker} />
         </span>
     )
 }

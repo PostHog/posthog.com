@@ -14,12 +14,17 @@ import {
     LeakFigure,
     LedgerFigure,
     LoopFigure,
+    PersonsModalFigure,
+    RedirectLoopFigure,
     ReportFigure,
     ScoutFigure,
+    ScreenshotFigure,
     SkillFigure,
     TraceFigure,
+    TriggerGroupFigure,
 } from './figures'
-import { Contents, Enable, Eyebrow, SeeAlso, SeeFig, Watches, proseComponents } from './bookPieces'
+import { Contents, Enable, Eyebrow, Frontispiece, SeeAlso, SeeFig, Watches, proseComponents } from './bookPieces'
+import { AskAI, CTA, ScannerTemplate, ViewRecording, ViewRecordings } from './UIButton'
 
 export { EntryProvider } from './bookContext'
 
@@ -34,6 +39,7 @@ export const bookMdxComponents = {
     RightPage,
     SeeFig,
     Eyebrow,
+    Frontispiece,
     Fig,
     ReportFigure,
     AnatomyFigure,
@@ -47,6 +53,10 @@ export const bookMdxComponents = {
     ScoutFigure,
     SkillFigure,
     TraceFigure,
+    PersonsModalFigure,
+    ScreenshotFigure,
+    TriggerGroupFigure,
+    RedirectLoopFigure,
     LoopFigure,
     Watches,
     Enable,
@@ -55,6 +65,11 @@ export const bookMdxComponents = {
     Setup,
     Contents,
     SeeAlso,
+    ViewRecordings,
+    ViewRecording,
+    AskAI,
+    CTA,
+    ScannerTemplate,
     Term,
     ...proseComponents,
 }
