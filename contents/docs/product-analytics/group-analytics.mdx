@@ -237,59 +237,59 @@ PostHog::capture([
 
 #### Multiple groups per person
 
-The limit above applies to events, not people. PostHog doesn't store group membership on the person, so one person can be associated with any number of individual groups of the same type, like a teacher who works at two schools. Set the group to the one the user is working in, and set it again when they switch:
+The limit above applies to events, not people. PostHog doesn't store group membership on the person, so one person can be associated with any number of individual groups of the same type, like a consultant who works with two companies. Set the group to the one the user is working in, and set it again when they switch:
 
 <MultiLanguage>
 
 ```js-web
-// The user is working in school A
-posthog.group('school', 'school_a_id')
-posthog.capture('assignment_created')
+// The user is working in one company
+posthog.group('company', 'company_id_in_your_db');
+posthog.capture('document_created')
 
-// The same user switches to school B
-posthog.group('school', 'school_b_id')
-posthog.capture('assignment_created')
+// The same user switches to another company
+posthog.group('company', 'another_company_id_in_your_db');
+posthog.capture('document_created')
 ```
 
 ```python
 posthog.capture(
-    'assignment_created',
+    'document_created',
     distinct_id='user_distinct_id',
-    groups={'school': 'school_a_id'}
+    groups={'company': 'company_id_in_your_db'}
 )
 
 posthog.capture(
-    'assignment_created',
+    'document_created',
     distinct_id='user_distinct_id',
-    groups={'school': 'school_b_id'}
+    groups={'company': 'another_company_id_in_your_db'}
 )
 ```
 
 ```node
 posthog.capture({
-    event: 'assignment_created',
+    event: 'document_created',
     distinctId: 'user_distinct_id',
-    groups: { school: 'school_a_id' }
+    groups: { company: 'company_id_in_your_db' }
 })
 
 posthog.capture({
-    event: 'assignment_created',
+    event: 'document_created',
     distinctId: 'user_distinct_id',
-    groups: { school: 'school_b_id' }
+    groups: { company: 'another_company_id_in_your_db' }
 })
 ```
 
 ```php
 PostHog::capture([
     'distinctId' => 'user_distinct_id',
-    'event' => 'assignment_created',
-    '$groups' => ['school' => 'school_a_id']
+    'event' => 'document_created',
+    '$groups' => ['company' => 'company_id_in_your_db']
 ]);
 
 PostHog::capture([
     'distinctId' => 'user_distinct_id',
-    'event' => 'assignment_created',
-    '$groups' => ['school' => 'school_b_id']
+    'event' => 'document_created',
+    '$groups' => ['company' => 'another_company_id_in_your_db']
 ]);
 ```
 
