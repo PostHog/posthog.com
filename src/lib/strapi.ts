@@ -107,6 +107,11 @@ export interface TransactionMetadata {
         iconURL?: string
         title?: string
     }
+    reply?: {
+        title?: string
+    }
+    question?: { id: number; subject: string; permalink: string }
+    capped?: boolean
 }
 
 export type Transaction = {
