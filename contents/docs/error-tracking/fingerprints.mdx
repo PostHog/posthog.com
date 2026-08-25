@@ -67,4 +67,6 @@ You can find details about how issue grouping works in the [issues and exception
 
 Fingerprints can be manually set during exception capture. This is a very useful way to group exceptions that are not related to each other. You can find examples of how to do this in the [custom issue grouping](/docs/error-tracking/grouping-issues#option-2-client-side-fingerprint) section.
 
+The first event with a custom fingerprint sets the issue name. By default, PostHog uses `$exception_list[0].type`. Set `$issue_name` on the first event to use a custom name. Later events with the same fingerprint do not rename the issue.
+
 You can also learn more about grouping issues using rules in the [grouping issues](/docs/error-tracking/grouping-issues) guide.
