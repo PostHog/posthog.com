@@ -12,6 +12,7 @@ import CalculatorReveal from 'components/Pricing/Redesign/CalculatorReveal'
 import PricingJourney from 'components/Pricing/Redesign/PricingJourney'
 import Surfaces from 'components/Pricing/Redesign/Surfaces'
 import Philosophy from './philosophy'
+import AgentEstimate from 'components/Pricing/AgentEstimate'
 import ShamelessCTA from 'components/Home/ShamelessCTA'
 
 /**
@@ -69,6 +70,8 @@ export default function Pricing(): JSX.Element {
             </SectionLayout>
 
             <Philosophy />
+
+            <AgentEstimate />
 
             <SectionLayout id="faq" className="mb-12">
                 <h2 className="text-2xl m-0 mb-0 pb-6 border-b border-primary">Pricing FAQ</h2>
