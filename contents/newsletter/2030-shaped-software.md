@@ -109,7 +109,7 @@ Retrofitting maximizes reach, that's where our users already are, but we inherit
 
 Starting fresh means a clean break with years of cumulative UI built on assumptions that might not be valid or relevant. The people who opt in are early adopters who want to co-create the future with us. They don't complain about what's missing, they tell us what they need. The cost of this is convincing existing users to switch (eventually) and splitting focus with our existing products while we do.
 
-We're cheating a bit and going semi-fresh, using [our existing data and infra](/newsletter/you-need-to-find-product-market-fit#8-build-the-new-thing-on-the-asset-your-attackers-cant-copy) on a new surface. We're expanding our existing [PostHog Code app](/code) to fit our 2030 vision first before migrating other surfaces. It's already where the best agents live, it draws exactly the early adopters we want, and it's simple enough to be a genuine blank slate.
+We're cheating a bit and going semi-fresh, using our existing data and infra on a new surface. We're expanding our existing [PostHog Code app](/code) to fit our 2030 vision first before migrating other surfaces. It's already where the best agents live, it draws exactly the early adopters we want, and it's simple enough to be a genuine blank slate.
 
 Without this change, we risk building 2026-shaped software with AI bolted on. We answer "how do we add AI to this" rather than "what is the agent-first version of this?" We can't predict 2030, but don't need to be right about the details to build in the right direction. The companies that matter in 2030 will be the ones who started building for it well before they had to.
 
