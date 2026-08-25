@@ -88,9 +88,7 @@ const Row = ({
                     />
                 </div>
             )}
-            <div className={`col-span-full pr-1.5 text-sm text-secondary ${slider ? 'mt-10 md:mt-8' : ''}`}>
-                {note}
-            </div>
+            <div className={`col-span-full pr-1.5 text-sm text-secondary ${slider ? 'mt-10 md:mt-8' : ''}`}>{note}</div>
         </div>
     )
 }
@@ -158,9 +156,9 @@ export default function PostHogDesktopTab({
                 cost={computeSpend}
                 note={
                     <>
-                        Tasks you run on your own machine cost nothing. A cloud task bills {BILLABLE_CPU_CORES} CPU
-                        cores and {BILLABLE_MEMORY_GIB} GiB for as long as it runs, so cloud time works out at about{' '}
-                        {formatUSD(computeRate)}/hour.
+                        A cloud task bills {BILLABLE_CPU_CORES} CPU cores and {BILLABLE_MEMORY_GIB} GiB for as long as
+                        it runs, so cloud time works out at about {formatUSD(computeRate)}/hour. Local tasks run on your
+                        own machine.
                         {isPublishedRate && <> Based on the rates published {PUBLISHED_RATES_DATE}.</>}
                     </>
                 }
@@ -176,8 +174,10 @@ export default function PostHogDesktopTab({
                 note={
                     <>
                         Billed at exactly what the model provider charges, with no markup. See the{' '}
-                        <Link to="/docs/posthog-desktop/pricing">per-model rates</Link> — a cheaper model on
-                        straightforward work is the biggest lever here.
+                        <Link to="/docs/posthog-desktop/pricing" className="font-semibold underline">
+                            per-model rates
+                        </Link>
+                        .
                     </>
                 }
             />
@@ -186,8 +186,8 @@ export default function PostHogDesktopTab({
                 <div className="flex gap-1 items-center pb-2">
                     <IconLightBulb className="size-5 inline-block text-[#4f9032] dark:text-green relative -top-px" />
                     <span className="text-sm text-[#4f9032] dark:text-green font-semibold">
-                        Your first {formatUSD(freeCredits / CREDITS_PER_USD)} of combined model usage and cloud compute
-                        is free every month and applied automatically.
+                        First {formatUSD(freeCredits / CREDITS_PER_USD)} of combined model usage free –{' '}
+                        <em>every month!</em>
                     </span>
                 </div>
             )}
