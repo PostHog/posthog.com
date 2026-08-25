@@ -14,7 +14,9 @@ There are two endpoints:
 - `GET /api/billing/usage/` returns usage counts, such as events, recordings, or exceptions.
 - `GET /api/billing/spend/` returns spend in US dollars, broken down the same way.
 
-Both endpoints report data for the whole organization. They do not take a project ID in the path. The organization is the one that owns the [personal API key](/docs/api/personal-api-keys) you authenticate with.
+Both endpoints report data for a whole organization, not a single project. They do not take a project ID in the path.
+
+A [personal API key](/docs/api/personal-api-keys) belongs to a user, not to an organization. The endpoints return data for the organization of your current project, which is the project you last selected in PostHog. If you belong to more than one organization, select a project in the organization you want before you call the API. If you do not, the response reflects a different organization. Key scoping limits which organizations and projects a key can reach. It does not select the organization for the request.
 
 ## Prerequisites
 
@@ -42,6 +44,7 @@ If your key does not have access, the endpoint returns `403 Forbidden`. To fix a
 
 - Confirm the key has the `billing:read` scope.
 - Use a key that belongs to an owner, or ask an owner to grant access for your role.
+- Check that your current project is in the organization you want to read. The endpoints use your current project's organization, and a key that cannot reach that organization returns `403`.
 
 ## Parameters
 
