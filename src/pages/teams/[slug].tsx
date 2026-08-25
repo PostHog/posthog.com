@@ -165,8 +165,6 @@ export default function TeamPage(props: TeamPageProps) {
         leadProfiles,
         teamImage,
         miniCrest,
-        // Private field — squeak-strapi only returns it to moderators, so it's undefined
-        // for everyone else and the input below stays hidden.
         slackChannel,
     } = (team as any)?.attributes || {}
 
@@ -392,13 +390,7 @@ export default function TeamPage(props: TeamPageProps) {
                 ...(teamMembers ? { profiles: teamMembers.map(({ id }: any) => ({ id })) } : {}),
                 ...(teamLeads ? { leadProfiles: teamLeads.map(({ id }: any) => ({ id })) } : {}),
                 ...(uploadedMiniCrestImage ? { miniCrest: uploadedMiniCrestImage.id } : {}),
-                // Only send slackChannel when it actually changed. It's a private field, so a
-                // non-moderator (or a moderator hitting a Strapi that predates the change that
-                // exposes it) reads it back as undefined -> ''. Sending that unconditionally
-                // would silently wipe a real channel on any unrelated team edit.
-                ...(submittedSlackChannel !== (slackChannel ?? '')
-                    ? { slackChannel: submittedSlackChannel.trim() || null }
-                    : {}),
+                slackChannel: submittedSlackChannel.trim() || null,
             }
             if (!team) {
                 await createTeam(updatedTeam)

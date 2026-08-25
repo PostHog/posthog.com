@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { navigate } from 'gatsby'
 import { IconX } from '@posthog/icons'
-import CommunityLayout, { SectionTitle } from 'components/Community/Layout'
+import { SectionTitle } from 'components/Community/Layout'
 import Link from 'components/Link'
 import OSTable from 'components/OSTable'
 import Select from 'components/Select'
@@ -9,7 +9,7 @@ import Spinner from 'components/Spinner'
 import Tooltip from 'components/Tooltip'
 import { useUser } from 'hooks/useUser'
 import useCommunityAlerts, { AlertTeam, AlertTopic } from 'hooks/useCommunityAlerts'
-import useTopicsNav from '../../navs/useTopicsNav'
+import ReaderView from 'components/ReaderView'
 
 const Warning = ({ children }: { children: React.ReactNode }) => (
     <span className="text-red dark:text-yellow font-semibold">{children}</span>
@@ -53,7 +53,6 @@ const TeamChip = ({ team, onRemove }: { team: AlertTeam; onRemove: () => void })
 
 export default function CommunityAlerts() {
     const { isModerator, isValidating } = useUser()
-    const topicsNav = useTopicsNav()
     const { topics, teams, loading, error, subscribeTeam, unsubscribeTeam } = useCommunityAlerts()
     const [problemsOnly, setProblemsOnly] = useState(false)
 
@@ -127,7 +126,7 @@ export default function CommunityAlerts() {
     })
 
     return (
-        <CommunityLayout menu={topicsNav} title="Question alerts">
+        <ReaderView hideLeftSidebar hideRightSidebar>
             <SectionTitle>Question alerts</SectionTitle>
 
             <p className="text-sm opacity-75">
@@ -186,6 +185,7 @@ export default function CommunityAlerts() {
 
                     <OSTable
                         rowAlignment="top"
+                        width="full"
                         columns={[
                             { name: 'Topic', width: 'minmax(200px, 1fr)' },
                             { name: 'Notifies', width: 'minmax(300px, 2fr)' },
@@ -195,6 +195,6 @@ export default function CommunityAlerts() {
                     />
                 </>
             )}
-        </CommunityLayout>
+        </ReaderView>
     )
 }

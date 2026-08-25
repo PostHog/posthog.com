@@ -15,9 +15,6 @@ import { useUser } from './useUser'
  * This hook owns the topic <-> team associations only. The channel ID itself is edited on
  * each team's own page (/teams/<slug>); `slackChannel` is read here purely to flag teams
  * that are subscribed to topics but have no channel, which post nothing.
- *
- * `Team.slackChannel` is a private field — squeak-strapi's team controller only returns it
- * to moderators, so these requests have to be authenticated to see anything useful.
  */
 
 const API_HOST = process.env.GATSBY_SQUEAK_API_HOST
@@ -47,7 +44,7 @@ export interface AlertTopic {
 // alerts (as of writing: CDP, PostHog AI, and Pipeline are all unpublished but subscribed).
 const teamsQuery = qs.stringify(
     {
-        fields: ['name', 'slug', 'publishedAt'],
+        fields: ['name', 'slug', 'publishedAt', 'slackChannel'],
         populate: {
             topicSubscriptions: {
                 fields: ['id'],
