@@ -235,6 +235,85 @@ PostHog::capture([
 
 </MultiLanguage>
 
+#### Users who belong to more than one group of the same type
+
+A person can be associated with as many individual groups of the same type as you need, like a teacher who works at two schools.
+The limit above applies to a single event, not to a person.
+
+Group associations are stored on events, not on the person.
+PostHog doesn't keep a list of the individual groups a person belongs to, so nothing is overwritten when a user moves between them.
+Set the group to the one the user is working in, and set it again when they switch:
+
+<MultiLanguage>
+
+```js-web
+// The user is working in school A
+posthog.group('school', 'school_a_id')
+posthog.capture('assignment_created')
+
+// The same user switches to school B
+posthog.group('school', 'school_b_id')
+posthog.capture('assignment_created')
+```
+
+```python
+posthog.capture(
+    'assignment_created',
+    distinct_id='user_distinct_id',
+    groups={'school': 'school_a_id'}
+)
+
+posthog.capture(
+    'assignment_created',
+    distinct_id='user_distinct_id',
+    groups={'school': 'school_b_id'}
+)
+```
+
+```node
+posthog.capture({
+    event: 'assignment_created',
+    distinctId: 'user_distinct_id',
+    groups: { school: 'school_a_id' }
+})
+
+posthog.capture({
+    event: 'assignment_created',
+    distinctId: 'user_distinct_id',
+    groups: { school: 'school_b_id' }
+})
+```
+
+```php
+PostHog::capture([
+    'distinctId' => 'user_distinct_id',
+    'event' => 'assignment_created',
+    '$groups' => ['school' => 'school_a_id']
+]);
+
+PostHog::capture([
+    'distinctId' => 'user_distinct_id',
+    'event' => 'assignment_created',
+    '$groups' => ['school' => 'school_b_id']
+]);
+```
+
+</MultiLanguage>
+
+Earlier events keep the group they were captured with, so switching doesn't change past data.
+On the JavaScript Web SDK, call `posthog.group()` again each time the user switches.
+On backend SDKs, pass `groups` on every capture, because there's no session to update.
+
+Both individual groups then show up in PostHog. See [view related people and groups](#view-related-people-and-groups).
+
+<CalloutBox icon="IconInfo" title="Counting users across individual groups" type="fyi">
+
+When you break down a person-level metric like unique users by group, a user who was active in two individual groups is counted once in each.
+Adding those individual groups together gives a higher number than your total unique users.
+To count individual groups instead of users, aggregate by group type.
+
+</CalloutBox>
+
 #### Capture events for individual groups without a user
 
 If you want to capture events for an individual group without linking them to a specific user, use a single static string as the distinct ID:
@@ -299,6 +378,25 @@ To view individual groups and their properties, go to the [people tab](https://a
     classes="rounded"
     alt="View groups"
 />
+
+### View related people and groups
+
+To see the people and individual groups that a person or group shares events with:
+
+- On a person, open the **Related groups** tab.
+- On an individual group, open the **Related people & groups** tab.
+
+A user who was active in more than one individual group of the same type gets a row for each one, and each row links to that group's page.
+PostHog doesn't mark one of them as the current or primary group, because it doesn't store group membership on the person.
+That user also appears under both individual groups when you open those groups directly.
+
+<CalloutBox icon="IconInfo" title="These tabs cover the last 90 days" type="fyi">
+
+Related people and groups are worked out from events in the last 90 days.
+An individual group that a person hasn't been active in for longer than that drops off the list.
+The earlier events are unchanged and still appear in insights.
+
+</CalloutBox>
 
 ### Analyze insights by group type
 
@@ -421,6 +519,8 @@ Group analytics has a few limitations to be aware of:
 - Maximum of 5 group types per project
 - You can delete group types, but not individual groups
 - Multiple individual groups of the same group type can't be assigned to a single event
+- Group associations are stored on events, not on people, so you can't build a [cohort](/docs/data/cohorts) from a group or filter people by group
+- Related people and groups are based on the last 90 days of events
 - Group types aren't supported for lifecycle insights or user paths
 - Only individual groups with known properties appear in the [people tab](https://app.posthog.com/persons)
 
