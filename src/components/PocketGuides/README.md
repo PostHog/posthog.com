@@ -159,7 +159,8 @@ shows after the `.mdx` file itself changes (or `pnpm clean`).
 |---|---|
 | `Cover.tsx` | The series cover on the shelf: spine, masthead, specimen, volume number |
 | `Book.tsx` | The volume as a coloured spine for the `/docs` library column, plus the `BookShelf` it sits in |
-| `GuidesForProduct.tsx` | The volume for one product, on that product's docs page. Renders nothing when there is none |
+| `VolumeCard.tsx` | One volume pitched as a card: cover, pitch, button. Shared by the docs pages and `/self-driving` |
+| `GuidesForProduct.tsx` | Looks up the volume for a docs slug and renders a `VolumeCard`. Renders nothing when there is none |
 | `BookReader.tsx` | The full-window page: edge book tabs, popovers, turn zones, foot nav |
 | `BookPage.tsx` | Renders one MDX page into the reader |
 | `bookComponents.tsx` | Assembles the MDX vocabulary from the files below |
@@ -204,8 +205,13 @@ and **returns `null` when nothing matches** – most products have no volume, so
 is always safe. Adding a product to the mechanism is one line: set `docsProduct` on its volume in
 `src/constants/pocketGuides.ts`.
 
-It renders the same `Cover` and the same shape as the "Learn it by use case" block on
-`/self-driving` (`src/pages/self-driving/index.tsx`) – one look for the same idea in both places.
+Both it and the "Learn it by use case" block on `/self-driving` (`src/pages/self-driving/index.tsx`)
+render `VolumeCard`, so the card is defined once. `VolumeCard` takes the pitch, the link, and the
+button label as props, because those are the only things the two surfaces disagree on – the docs
+pages send a reader to the volume, `/self-driving` sends them to the whole shelf.
+
+`VolumeCard` deliberately has no `overflow-hidden`: the cover's hover tilt lifts a drop shadow, and
+clipping the card would cut it off.
 
 Volume metadata lives in `src/constants/pocketGuides.ts` (data-only so `gatsby/` can import it).
 The report frontmatter contract and the `.md` agent-mirror constraints are documented in
