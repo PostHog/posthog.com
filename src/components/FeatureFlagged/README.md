@@ -5,7 +5,7 @@ Renders its children only when a PostHog feature flag is enabled for the current
 ```tsx
 import { FeatureFlagged } from 'components/FeatureFlagged'
 
-<FeatureFlagged flag="posthog-desktop-launch" fallback={<WaitlistForm />}>
+<FeatureFlagged flag="my-product-launch" fallback={<WaitlistForm />}>
     <DownloadButtons />
 </FeatureFlagged>
 ```

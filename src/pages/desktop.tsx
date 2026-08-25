@@ -57,10 +57,7 @@ import Glow from 'components/Glow'
 import WistiaEmbed from 'components/WistiaEmbed'
 import Link from 'components/Link'
 import { IconDiscord } from 'components/OSIcons/Icons'
-import { WaitlistForm } from 'components/WaitlistForm'
 import { DownloadButtons } from 'components/Code/DownloadButtons'
-import { DESKTOP_LAUNCH_FLAG } from 'components/Code/flags'
-import { FeatureFlagged } from 'components/FeatureFlagged'
 import { usePrefersReducedMotion } from 'components/Code/usePrefersReducedMotion'
 
 // ─────────────────────────────────────────────
@@ -354,31 +351,6 @@ function PostHogCodeLogomark({ className }) {
 // ─────────────────────────────────────────────
 
 function HeroSection() {
-    const [showDownload, setShowDownload] = useState(false)
-    const [contentVisible, setContentVisible] = useState(true)
-    const prefersReducedMotion = usePrefersReducedMotion()
-
-    // Read the #download hash after mount so SSR and first client render agree (no hydration mismatch).
-    useEffect(() => {
-        if (window.location.hash === '#download') setShowDownload(true)
-    }, [])
-
-    const swapToDownload = () => {
-        if (typeof window !== 'undefined') {
-            window.history.replaceState(null, '', '#download')
-        }
-        if (showDownload) return
-        if (prefersReducedMotion) {
-            setShowDownload(true)
-            return
-        }
-        setContentVisible(false)
-        setTimeout(() => {
-            setShowDownload(true)
-            setContentVisible(true)
-        }, 300)
-    }
-
     return (
         <section className="w-full tracking-[-0.0125em]">
             {/* Top header bar: the page's own title strip (scroller + Discord) with a divider line */}
@@ -395,106 +367,69 @@ function HeroSection() {
                 </Link>
             </div>
 
-            <div
-                style={{
-                    opacity: contentVisible ? 1 : 0,
-                    transition: prefersReducedMotion ? undefined : 'opacity 0.3s ease',
-                }}
-            >
-                {showDownload ? (
-                    <DownloadButtons className="w-full py-8" align="center" />
-                ) : (
-                    <>
-                        <h1 className="!mt-0 mb-4 text-xl font-bold leading-tight @xl:mb-8 @xl:text-3xl">
-                            The{' '}
-                            <RoughAnnotation
-                                type="highlight"
-                                color="rgba(48, 164, 108, 0.2)"
-                                strokeWidth={1}
-                                padding={2}
-                                delay={300}
-                            >
-                                product editor
-                            </RoughAnnotation>
-                            {' for '}
-                            <RoughAnnotation type="underline" color="#F54E00" strokeWidth={2} delay={600}>
-                                <span className="font-bold">product builders</span>
-                            </RoughAnnotation>
-                        </h1>
+            <h1 className="!mt-0 mb-4 text-xl font-bold leading-tight @xl:mb-8 @xl:text-3xl">
+                The{' '}
+                <RoughAnnotation
+                    type="highlight"
+                    color="rgba(48, 164, 108, 0.2)"
+                    strokeWidth={1}
+                    padding={2}
+                    delay={300}
+                >
+                    product editor
+                </RoughAnnotation>
+                {' for '}
+                <RoughAnnotation type="underline" color="#F54E00" strokeWidth={2} delay={600}>
+                    <span className="font-bold">product builders</span>
+                </RoughAnnotation>
+            </h1>
 
-                        <div className="flex flex-col items-start gap-8 @4xl/editor:flex-row">
-                            <div className="@4xl/editor:flex-[0_0_280px]">
-                                <p>
-                                    A multiplayer workspace for you, your team, and your agents – with your product data
-                                    as context, and PostHog tools to ship and measure.
-                                </p>
-                                <ul className="mb-4 list-none space-y-0.5 p-0 text-[15px]">
-                                    {[
-                                        'Build and edit your product',
-                                        'Run a fleet of agents',
-                                        'Turn product signals into PRs',
-                                    ].map((item) => (
-                                        <li key={item} className="relative pl-5">
-                                            <IconCheck className="absolute left-0 top-1 size-4 text-green" />
-                                            {item}
-                                        </li>
-                                    ))}
-                                </ul>
+            <div className="flex flex-col items-start gap-8 @4xl/editor:flex-row">
+                <div className="@4xl/editor:flex-[0_0_280px]">
+                    <p>
+                        A multiplayer workspace for you, your team, and your agents – with your product data as context,
+                        and PostHog tools to ship and measure.
+                    </p>
+                    <ul className="mb-4 list-none space-y-0.5 p-0 text-[15px]">
+                        {['Build and edit your product', 'Run a fleet of agents', 'Turn product signals into PRs'].map(
+                            (item) => (
+                                <li key={item} className="relative pl-5">
+                                    <IconCheck className="absolute left-0 top-1 size-4 text-green" />
+                                    {item}
+                                </li>
+                            )
+                        )}
+                    </ul>
 
-                                <FeatureFlagged
-                                    flag={DESKTOP_LAUNCH_FLAG}
-                                    fallback={
-                                        <div className="@container max-w-sm">
-                                            <WaitlistForm />
-                                            <p className="mt-4 text-sm text-secondary">
-                                                Have an invite code?{' '}
-                                                <Link
-                                                    to="/desktop#download"
-                                                    className="font-bold underline"
-                                                    onClick={(event) => {
-                                                        event.preventDefault()
-                                                        swapToDownload()
-                                                    }}
-                                                >
-                                                    Get started
-                                                </Link>
-                                            </p>
-                                        </div>
-                                    }
-                                >
-                                    <DownloadButtons />
-                                </FeatureFlagged>
-                            </div>
+                    <DownloadButtons />
+                </div>
 
-                            {/* Product shot with the glow + overhanging hog treatment the product pages
-                                use (see Products/ReaderViewProduct/templates/Overview). */}
-                            <div className="w-full min-w-0 @4xl/editor:flex-1">
-                                <Glow color="blue" className="not-prose">
-                                    <CloudinaryImage
-                                        src="https://res.cloudinary.com/dmukukwp6/image/upload/desktop_surveys_canvas_light_160e744e82.png"
-                                        alt="A canvas of survey results open in PostHog Desktop"
-                                        className="w-full dark:hidden"
-                                        imgClassName="w-full h-auto rounded-lg"
-                                    />
-                                    <CloudinaryImage
-                                        src="https://res.cloudinary.com/dmukukwp6/image/upload/desktop_surveys_canvas_dark_085ef34c25.png"
-                                        alt="A canvas of survey results open in PostHog Desktop"
-                                        className="w-full hidden dark:block"
-                                        imgClassName="w-full h-auto rounded-lg"
-                                    />
-                                    <div className="pointer-events-none absolute -bottom-8 -right-4 h-24 @xl/editor:h-32">
-                                        <CloudinaryImage
-                                            src="https://res.cloudinary.com/dmukukwp6/image/upload/multiplayer_hogs_41ec7dc243.png"
-                                            alt="Two hedgehogs building something together"
-                                            className="h-full"
-                                            imgClassName="h-full w-auto"
-                                        />
-                                    </div>
-                                </Glow>
-                            </div>
+                {/* Product shot with the glow + overhanging hog treatment the product pages
+                    use (see Products/ReaderViewProduct/templates/Overview). */}
+                <div className="w-full min-w-0 @4xl/editor:flex-1">
+                    <Glow color="blue" className="not-prose">
+                        <CloudinaryImage
+                            src="https://res.cloudinary.com/dmukukwp6/image/upload/desktop_surveys_canvas_light_160e744e82.png"
+                            alt="A canvas of survey results open in PostHog Desktop"
+                            className="w-full dark:hidden"
+                            imgClassName="w-full h-auto rounded-lg"
+                        />
+                        <CloudinaryImage
+                            src="https://res.cloudinary.com/dmukukwp6/image/upload/desktop_surveys_canvas_dark_085ef34c25.png"
+                            alt="A canvas of survey results open in PostHog Desktop"
+                            className="w-full hidden dark:block"
+                            imgClassName="w-full h-auto rounded-lg"
+                        />
+                        <div className="pointer-events-none absolute -bottom-8 -right-4 h-24 @xl/editor:h-32">
+                            <CloudinaryImage
+                                src="https://res.cloudinary.com/dmukukwp6/image/upload/multiplayer_hogs_41ec7dc243.png"
+                                alt="Two hedgehogs building something together"
+                                className="h-full"
+                                imgClassName="h-full w-auto"
+                            />
                         </div>
-                    </>
-                )}
+                    </Glow>
+                </div>
             </div>
         </section>
     )
@@ -2095,19 +2030,10 @@ const TLDR = () => {
             <div className="grid items-center gap-8 @2xl:grid-cols-2 @2xl:gap-12">
                 <div className="@container bg-blue/10 border border-blue rounded-md px-8 py-6 shadow-xl">
                     <h2 className="mt-0 mb-2 text-2xl font-bold">Try it</h2>
-                    <FeatureFlagged
-                        flag={DESKTOP_LAUNCH_FLAG}
-                        fallback={
-                            <p className="mb-4 text-base leading-loose">PostHog Desktop is launching in Summer 2026.</p>
-                        }
-                    >
-                        <p className="mb-4 text-base leading-loose">
-                            Download PostHog Desktop and sign in with your PostHog account.
-                        </p>
-                    </FeatureFlagged>
-                    <FeatureFlagged flag={DESKTOP_LAUNCH_FLAG} fallback={<WaitlistForm />}>
-                        <DownloadButtons />
-                    </FeatureFlagged>
+                    <p className="mb-4 text-base leading-loose">
+                        Download PostHog Desktop and sign in with your PostHog account.
+                    </p>
+                    <DownloadButtons />
                 </div>
                 <div>
                     <MeepNotification className="mb-5 flex justify-center @2xl:justify-start" />
@@ -2479,9 +2405,7 @@ function FAQ() {
 export function DownloadButton() {
     return (
         <div className="py-6">
-            <FeatureFlagged flag={DESKTOP_LAUNCH_FLAG} fallback={<WaitlistForm />}>
-                <DownloadButtons />
-            </FeatureFlagged>
+            <DownloadButtons />
         </div>
     )
 }
