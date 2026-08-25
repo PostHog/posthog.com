@@ -7,6 +7,7 @@ import ScoutFile from 'components/SelfDrivingInbox/ScoutFile'
 
 import Divergence, { DivergenceSeries } from './Divergence'
 import Figure from './Figure'
+import FactorSplit, { FactorSplitRow } from './FactorSplit'
 import FlagLedger, { FlagLedgerRow } from './FlagLedger'
 import LeakFunnel, { LeakFunnelProps } from './LeakFunnel'
 import InboxFigure from './InboxFigure'
@@ -177,6 +178,29 @@ export function DetailFigure({
                 status={status}
                 actionability={actionability}
             />
+        </Fig>
+    )
+}
+
+/** One total split into the two factors behind it, for rows that share a number but not a story. */
+export function FactorSplitFigure({
+    n = 1,
+    caption,
+    legend,
+    totalLabel,
+    factorLabels,
+    rows,
+}: {
+    n?: number
+    caption: string
+    legend?: string
+    totalLabel: string
+    factorLabels: [string, string]
+    rows: FactorSplitRow[]
+}): JSX.Element {
+    return (
+        <Fig n={n} caption={caption} legend={legend}>
+            <FactorSplit totalLabel={totalLabel} factorLabels={factorLabels} rows={rows} />
         </Fig>
     )
 }

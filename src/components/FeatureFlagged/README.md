@@ -1,11 +1,11 @@
-# FeatureFlagged
+# Feature flagged
 
 Renders its children only when a PostHog feature flag is enabled for the current visitor, with an optional fallback for everyone else. Use it to merge unreleased copy or UI into `master` behind a 0% rollout, then flip the flag to ship.
 
 ```tsx
 import { FeatureFlagged } from 'components/FeatureFlagged'
 
-<FeatureFlagged flag="posthog-desktop-launch" fallback={<DownloadCTA />}>
+<FeatureFlagged flag="my-product-launch" fallback={<WaitlistForm />}>
     <DownloadButtons />
 </FeatureFlagged>
 ```

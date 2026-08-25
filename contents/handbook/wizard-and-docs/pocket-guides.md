@@ -54,6 +54,11 @@ contents/pocket-guides/<volume>/<slug>/
 - **`SKILL.md` is a real file, not a string** – same frontmatter as the canonical scouts in the
   monorepo, so one can be pasted in or lifted out without reformatting. The page renders it
   byte-for-byte, and the "Add this scout" deep link prefills PostHog from it.
+- **When PostHog already ships the scout as a template, set `appTemplate:` and write no
+  `SKILL.md`.** The CTA opens that template in the app, which carries the tags and schedule the
+  encoded deep link doesn't, and the scout file is fetched from the monorepo at build time so the
+  page can't describe a scout the button doesn't create – details in
+  `src/components/SelfDrivingInbox/README.md`.
 
 ## The two MDX traps
 
