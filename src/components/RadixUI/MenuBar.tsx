@@ -29,6 +29,9 @@ export type MenuType = {
     link?: string // Direct link for the menu trigger instead of opening a menu
     mobileLink?: string // Direct link for the menu trigger on mobile
     hideChevron?: boolean // Hide the chevron down icon for this menu in website mode
+    onOpen?: () => void // Fired when this menu opens. Opt-in per menu, so nothing else pays for it.
+    /** Fired when an item in this menu is clicked. Opt-in per menu, like `onOpen`. */
+    onItemClick?: (detail: { label: string; href: string | null }) => void
 }
 
 const RootClasses = 'flex gap-px py-0.5 h-full'
@@ -361,7 +364,13 @@ const MenuBar: React.FC<MenuBarProps> = ({ menus, className, triggerAsChild, cus
             data-scheme="tertiary"
             className={`${RootClasses} ${className || ''}`}
             value={openMenuIndex !== null ? String(openMenuIndex) : ''}
-            onValueChange={(value) => setOpenMenuIndex(value ? Number(value) : null)}
+            onValueChange={(value) => {
+                const nextIndex = value ? Number(value) : null
+                setOpenMenuIndex(nextIndex)
+                if (nextIndex !== null) {
+                    processedMenus[nextIndex]?.onOpen?.()
+                }
+            }}
         >
             {processedMenus.map((menu, menuIndex) => {
                 const triggerLink = menu.link || (isMobile && menu.mobileLink) || null
@@ -394,6 +403,23 @@ const MenuBar: React.FC<MenuBarProps> = ({ menus, className, triggerAsChild, cus
                         </RadixMenubar.Trigger>
                         <RadixMenubar.Portal container={portalContainer || undefined}>
                             <RadixMenubar.Content
+                                onClickCapture={
+                                    menu.onItemClick
+                                        ? (event) => {
+                                              // Links only – submenu triggers and padding aren't navigations.
+                                              const anchor = (event.target as HTMLElement)?.closest?.(
+                                                  'a[href]'
+                                              ) as HTMLAnchorElement | null
+                                              const label = anchor?.textContent?.trim()
+                                              if (label) {
+                                                  menu.onItemClick?.({
+                                                      label,
+                                                      href: anchor.getAttribute('href'),
+                                                  })
+                                              }
+                                          }
+                                        : undefined
+                                }
                                 collisionBoundary={appContainer}
                                 className={`${ContentClasses} max-h-[calc(var(--radix-menubar-content-available-height)-0.75rem)] overflow-hidden flex flex-col`}
                                 align="start"

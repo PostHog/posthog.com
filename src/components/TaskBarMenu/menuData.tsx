@@ -5,6 +5,8 @@ import * as Icons from '@posthog/icons'
 import { Logo } from '@posthog/brand/logo'
 import SearchableProductMenu from './SearchableProductMenu'
 import useProduct from '../../hooks/useProduct'
+import usePostHog from '../../hooks/usePostHog'
+import { DEFAULT_DOCS_NAV_VARIANT, DOCS_NAV_FLAG, DocsNavVariantId, resolveDocsNavVariant } from './docsNavVariants'
 import {
     IconXNotTwitter,
     IconSubstack,
@@ -193,6 +195,8 @@ type DocsSubGroup = {
 type DocsGroup = {
     label: string
     items: (string | DocsSubGroup)[]
+    /** Links that aren't in docsMenu and so can't be referenced by name. */
+    extraItems?: MenuItemType[]
     overflow?: string
     collapse?: boolean
     catchAll?: boolean
@@ -246,7 +250,92 @@ const DOCS_GROUPS: DocsGroup[] = [
     },
 ]
 
-export const getDocsMenuItems = (): MenuItemType[] => {
+const PocketGuidesItem = {
+    type: 'item' as const,
+    label: 'Pocket guides',
+    link: '/pocket-guides',
+    // Orange matches volume one's token in src/constants/pocketGuides.ts.
+    icon: <Icons.IconCompass className="size-4 text-orange" />,
+}
+
+const TutorialsItem = {
+    type: 'item' as const,
+    label: 'Tutorials',
+    link: '/tutorials',
+    icon: <Icons.IconGraduationCap className="size-4 text-purple" />,
+}
+
+const TemplatesItem = {
+    type: 'item' as const,
+    label: 'Templates',
+    link: '/templates',
+    // Matches the Templates entry in src/navs/index.js.
+    icon: <Icons.IconMagic className="size-4 text-purple" />,
+}
+
+/** The `goals` arm of DOCS_NAV_FLAG: same entries as DOCS_GROUPS, grouped by what a reader wants to do. */
+const DOCS_GROUPS_GOALS: DocsGroup[] = [
+    {
+        label: 'New to PostHog',
+        items: ['Self-driving'],
+        extraItems: [PocketGuidesItem, TutorialsItem],
+    },
+    {
+        label: 'Get started',
+        items: [
+            'Install PostHog',
+            'SDKs & frameworks',
+            'PostHog Web',
+            'PostHog Desktop',
+            'PostHog Slack',
+            'PostHog MCP',
+            'PostHog CLI',
+        ],
+    },
+    {
+        label: 'Tools',
+        items: [
+            {
+                label: 'Analytics',
+                icon: 'IconGraph',
+                color: 'blue',
+                items: [
+                    'Product Analytics',
+                    'Web Analytics',
+                    'Customer Analytics',
+                    'Revenue Analytics',
+                    'MCP Analytics',
+                ],
+            },
+            'Session Replay',
+            'AI Observability',
+            'Error Tracking',
+        ],
+        overflow: 'More tools',
+        icon: 'IconApps',
+        color: 'blue',
+    },
+    { label: 'Context', items: ['Data Warehouse', 'Data pipelines', 'Semantic layer'] },
+    {
+        label: 'Reference',
+        collapse: true,
+        icon: 'IconBook',
+        color: 'lilac',
+        items: [
+            'API',
+            'New to PostHog',
+            'AI engineering',
+            'Toolbar & features',
+            'Self-host & deploy',
+            'Billing',
+            'Privacy & GDPR',
+            'How PostHog works',
+            'Glossary',
+        ],
+    },
+]
+
+export const getDocsMenuItems = (groups: DocsGroup[] = DOCS_GROUPS): MenuItemType[] => {
     const items = groupBySectionDividers((docsMenu as DocsMenu).children)
         // Remove any item (submenu or section divider) with label 'Docs'
         .filter((item) => !(item.type === 'submenu' && item.label === 'Docs'))
@@ -255,9 +344,7 @@ export const getDocsMenuItems = (): MenuItemType[] => {
 
     const byLabel = new Map<string, MenuItemType>(items.map((item) => [item.label as string, item]))
     const explicitlyGrouped = new Set(
-        DOCS_GROUPS.flatMap((group) => group.items).flatMap((entry) =>
-            typeof entry === 'string' ? entry : entry.items
-        )
+        groups.flatMap((group) => group.items).flatMap((entry) => (typeof entry === 'string' ? entry : entry.items))
     )
     const byLabelAsc = (a: MenuItemType, b: MenuItemType) =>
         (a.label as string).localeCompare(b.label as string, undefined, { sensitivity: 'base' })
@@ -278,7 +365,7 @@ export const getDocsMenuItems = (): MenuItemType[] => {
 
     const unclaimed = () => items.filter((item) => !explicitlyGrouped.has(item.label as string)).sort(byLabelAsc)
 
-    DOCS_GROUPS.forEach((group) => {
+    groups.forEach((group) => {
         const named = group.catchAll ? unclaimed() : (group.items.map(resolve).filter(Boolean) as MenuItemType[])
 
         if (group.collapse) {
@@ -288,7 +375,7 @@ export const getDocsMenuItems = (): MenuItemType[] => {
             return
         }
 
-        const groupItems = [...named]
+        const groupItems = [...named, ...(group.extraItems ?? [])]
 
         if (group.overflow) {
             const rest = unclaimed()
@@ -316,10 +403,11 @@ export const getDocsMenuItems = (): MenuItemType[] => {
     return grouped.map((item) => (item.items ? { ...item, items: stripIcons(item.items) } : item))
 }
 
-const mergedDocsMenu = (allProducts: any[]) => {
-    const docsItems = getDocsMenuItems()
+const mergedDocsMenu = (allProducts: any[], variant: DocsNavVariantId = DEFAULT_DOCS_NAV_VARIANT) => {
+    const goals = variant === 'goals'
+    const docsItems = getDocsMenuItems(goals ? DOCS_GROUPS_GOALS : DOCS_GROUPS)
     const itemsWithMobileDestinations = addDocsMenuMobileDestinations(docsItems, allProducts)
-    return [...DocsItemsStart, ...itemsWithMobileDestinations, ...DocsItemsEnd]
+    return [...DocsItemsStart, ...itemsWithMobileDestinations, ...(goals ? DocsItemsEndGoals : DocsItemsEnd)]
 }
 
 // Build Products menu items
@@ -390,6 +478,8 @@ export function useMenuData(): MenuType[] {
     const smallTeamsMenuItems = useSmallTeamsMenuItems()
     const allProducts = useProduct() as any[]
     const { isMobile } = useAppSettings()
+    const posthog = usePostHog()
+    const [docsNavVariant, setDocsNavVariant] = React.useState<DocsNavVariantId>(DEFAULT_DOCS_NAV_VARIANT)
 
     // Define main navigation items (excluding logo menu)
     const mainNavItems: MenuType[] = [
@@ -407,7 +497,17 @@ export function useMenuData(): MenuType[] {
             trigger: 'Docs',
             // The docs tree is too deep to browse inside a hamburger; mobile goes to the homepage instead
             mobileLink: '/docs',
-            items: mergedDocsMenu(allProducts),
+            // Read on open, not on render: reading the flag enrols, and most visitors never open this.
+            onOpen: () => setDocsNavVariant(resolveDocsNavVariant(posthog?.getFeatureFlag?.(DOCS_NAV_FLAG))),
+            // What DOCS_NAV_FLAG is measured on; the variant rides along so arms compare without a join.
+            onItemClick: ({ label, href }) =>
+                posthog?.capture('docs_nav_clicked', {
+                    label,
+                    href,
+                    variant: docsNavVariant,
+                    is_pocket_guide: href?.startsWith('/pocket-guides') ?? false,
+                }),
+            items: mergedDocsMenu(allProducts, docsNavVariant),
         },
         {
             trigger: 'Community',
@@ -912,29 +1012,10 @@ export const DocsItemsStart = [
     },
 ]
 
-export const DocsItemsEnd = [
-    { type: 'separator' as const },
-    {
-        type: 'item' as const,
-        label: 'Tutorials',
-        link: '/tutorials',
-        icon: <Icons.IconGraduationCap className="size-4 text-purple" />,
-    },
-    {
-        type: 'item' as const,
-        label: 'Pocket guides',
-        link: '/pocket-guides',
-        // Orange matches volume one's token in src/constants/pocketGuides.ts.
-        icon: <Icons.IconCompass className="size-4 text-orange" />,
-    },
-    {
-        type: 'item' as const,
-        label: 'Templates',
-        link: '/templates',
-        // Matches the Templates entry in src/navs/index.js.
-        icon: <Icons.IconMagic className="size-4 text-purple" />,
-    },
-]
+/** Goals arm: guides lead the menu, so only Templates is left to trail it. */
+export const DocsItemsEndGoals = [{ type: 'separator' as const }, TemplatesItem]
+
+export const DocsItemsEnd = [{ type: 'separator' as const }, TutorialsItem, PocketGuidesItem, TemplatesItem]
 
 import type { AppIconName } from 'components/OSIcons/AppIcon'
 
