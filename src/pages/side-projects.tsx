@@ -9,6 +9,7 @@ import SEO from 'components/seo'
 import {
     SideProjectForm,
     SideProjectGraphic,
+    SideProjectThumbnail,
     findCreatorProfile,
     isAlumniProject,
     normalizeTags,
@@ -81,6 +82,15 @@ const ProjectCard = ({
     const projectUrl = liveUrl || githubUrl
     const profile = findCreatorProfile(profiles, { projectAuthor, authorGitHub })
     const tags = normalizeTags(project.tags)
+    const identityProps = {
+        title,
+        creatorName: projectAuthor,
+        creatorRole: showRole ? profile?.companyRole : undefined,
+        avatarUrl:
+            profile?.avatar?.formats?.thumbnail?.url ||
+            profile?.avatar?.url ||
+            (authorGitHub ? `https://github.com/${authorGitHub}.png?size=256` : undefined),
+    }
 
     return (
         <article
@@ -118,24 +128,9 @@ const ProjectCard = ({
             >
                 <div className="border-b border-primary">
                     {projectThumbnail ? (
-                        <img
-                            src={projectThumbnail}
-                            alt={title}
-                            loading="lazy"
-                            className="aspect-video w-full object-cover"
-                        />
+                        <SideProjectThumbnail src={projectThumbnail} {...identityProps} />
                     ) : (
-                        <SideProjectGraphic
-                            title={title}
-                            creatorName={projectAuthor}
-                            creatorRole={showRole ? profile?.companyRole : undefined}
-                            avatarUrl={
-                                profile?.avatar?.formats?.thumbnail?.url ||
-                                profile?.avatar?.url ||
-                                (authorGitHub ? `https://github.com/${authorGitHub}.png?size=256` : undefined)
-                            }
-                            color={profile?.color}
-                        />
+                        <SideProjectGraphic {...identityProps} color={profile?.color} />
                     )}
                 </div>
                 <div className="p-3 pb-3">

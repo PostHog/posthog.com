@@ -29,6 +29,7 @@ Fields (`SideProject`):
 - `useCreatorProfiles()` – static query for all community (Squeak) profiles.
 - `findCreatorProfile(profiles, { projectAuthor, authorGitHub })` – matches by GitHub username first, then full name.
 - `SideProjectGraphic` – card header adapted from `EventGraphic`: profile color, `font-squeak` title and creator, circular portrait, and a PostHog + job-title bar.
+- `SideProjectThumbnail` – card header for projects with an uploaded image: the image fills the card with a compact identity overlay (title, creator, role, portrait) on a bottom gradient.
 - `normalizeTags(tags)` – dedupes and folds tags through `TAG_ALIASES` so the filter bar stays scannable. Keep raw tags in any search haystack so aliased one-offs stay findable.
 - `isAlumniProject(profiles, project)` – the `alumni` flag wins; otherwise a profile with no small team is treated as alumni.
 - `SideProjectForm` – the add/edit flow (see below).
