@@ -51,7 +51,7 @@ An org has completed setup if it has at least one day of non-zero product usage:
 
 This is a different concept from per-product **activation** (see [Per-product activation](/handbook/growth/growth-engineering/per-product-activation)), which is a specific, retention-validated behavioral milestone chosen separately for each product. Setup is simpler: it just means billable data started flowing for the org at all. Use "setup" for this org-level signal and reserve "activation"/"activated" for the per-product, retention-validated definitions.
 
-**Signals that look similar but aren't this definition:** the single event signal `first team event ingested` is sometimes used elsewhere as a setup proxy. This doesn't match the canonical definition. Same for the `has_non_zero_usage` flag inside the usage report's `report` payload: it only exists on reports since mid-January 2026, so anything built on it silently loses all earlier setup dates.
+**Signals that look similar but aren't this definition:** the single event signal `first team event ingested` is sometimes used elsewhere as a setup proxy. This doesn't match the canonical definition.
 
 ## Engaged (customer initiated product or tool usage)
 
