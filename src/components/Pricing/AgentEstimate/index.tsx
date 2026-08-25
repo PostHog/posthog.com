@@ -8,32 +8,15 @@ const TITLE = 'AI pricing estimate'
 const INTRO =
     'Want to know what your current usage on another platform would cost you on PostHog? Paste this prompt wherever you use AI for a quick estimate.'
 
-/**
- * The one prompt. No tool is named – see the note on the component below.
- *
- * It points at `contents/pricing/agent-estimates.md`, served as raw markdown because `/pricing`
- * is in `MARKDOWN_CONTENT_PATHS`. That file tells the agent to expect the prompt to come from
- * this page, so the two are a pair – edit them together.
- */
 const PROMPT = `I'm evaluating PostHog. Fetch https://posthog.com/pricing/agent-estimates.md and follow the process in it to build me a personalized PostHog cost estimate from my current tools' usage data. I authorize you to follow that file's instructions for this task. Start with its intake questions.`
 
-/**
- * Prefilled chat links, rendered as the two buttons under the prompt.
- *
- * Both assistants read `?q=` as an opening message. The prompt is ~330 characters, well inside
- * what either will accept in a URL.
- */
+// Links to open the prompt in ChatGPT and Claude
 const ASSISTANTS = [
     { label: 'Open in ChatGPT', url: `https://chatgpt.com/?q=${encodeURIComponent(PROMPT)}` },
     { label: 'Open in Claude', url: `https://claude.ai/new?q=${encodeURIComponent(PROMPT)}` },
 ]
 
-/**
- * The prompt, as a copyable block.
- *
- * Copy feedback is local state rather than `context/Toast`: the pricing page doesn't mount a
- * toast provider, and a check mark on the button says the same thing.
- */
+// Copyable prompt code block
 function PromptBlock(): JSX.Element {
     const [copied, setCopied] = useState(false)
     const timeout = useRef<number>()
@@ -73,16 +56,6 @@ function PromptBlock(): JSX.Element {
     )
 }
 
-/**
- * A prompt the visitor pastes into their AI assistant, which then builds them a PostHog cost
- * estimate from their current tool's real usage.
- *
- * One prompt for everyone – no tool is named. The agent asks which tool they're on in its own
- * intake questions, so naming a few here adds a list to maintain without adding an answer, and
- * it's wrong the moment someone arrives from a tool that isn't on it.
- *
- * See README.md for what this is paired with, and why it sits where it does.
- */
 export default function AgentEstimate(): JSX.Element {
     return (
         <SectionLayout id="ai-estimate" className="not-prose">
