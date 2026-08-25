@@ -673,6 +673,11 @@
             "statusCode": 301
         },
         {
+            "source": "/handbook/growth/revops/icp-scoring",
+            "destination": "/handbook/growth/revops/icp-fit-score",
+            "statusCode": 301
+        },
+        {
             "source": "/handbook/growth/marketing/:path*",
             "destination": "/handbook/marketing/:path*",
             "statusCode": 301

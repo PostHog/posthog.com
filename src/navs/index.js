@@ -1301,6 +1301,10 @@ export const handbookSidebar = [
                 url: '/handbook/growth/revops/enrichment-pipeline',
             },
             {
+                name: 'ICP fit score',
+                url: '/handbook/growth/revops/icp-fit-score',
+            },
+            {
                 name: 'SalesOps',
                 url: '',
                 children: [
