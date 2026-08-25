@@ -516,7 +516,7 @@ export const SideProjectForm = ({
     }
 
     return (
-        <div data-scheme="secondary" className="bg-primary p-4">
+        <div data-scheme="secondary" className="bg-primary p-4 text-primary">
             <form onSubmit={handleSubmit} className="space-y-4">
                 <OSInput
                     label="Project name"

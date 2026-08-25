@@ -11,7 +11,7 @@ import MetricsNextSteps from "./_snippets/metrics-next-steps.mdx";
 
 If your Kubernetes workloads already expose Prometheus-format `/metrics` endpoints, the PostHog metrics agent scrapes them and forwards everything to PostHog. One `helm install`, no application changes.
 
-The agent runs as a single-replica Deployment by design – two replicas would double-scrape every target and double-count all metrics.
+The agent runs as a single instance by default. To scale beyond one pod, use [shards](#scale-out-with-shards) rather than replicas: two plain replicas would scrape every target twice and double-count all metrics.
 
 <Steps>
 
@@ -120,9 +120,35 @@ If nothing shows up, check the agent logs for connection or authentication error
 kubectl logs -l app.kubernetes.io/name=posthog-metrics-agent
 ```
 
+The agent also exposes its own metrics (scrape successes, queue depth, points sent or dropped) on port `8888`, so you can monitor the monitor.
+
 <CallToAction type="primary" to="https://app.posthog.com/metrics">
   View your metrics in PostHog
 </CallToAction>
+
+</Step>
+
+<Step title="Keep data through restarts" badge="optional">
+
+By default, if PostHog is briefly unreachable the agent retries from memory, and a pod restart during that window drops whatever was buffered. To keep those samples, back the queue with a persistent volume:
+
+```bash
+--set persistence.enabled=true
+```
+
+The chart provisions a volume per agent (using `persistence.size` and `persistence.storageClass`), and samples scraped during an outage survive restarts and deliver when PostHog is reachable again.
+
+</Step>
+
+<Step title="Scale out with shards" badge="optional">
+
+One agent scrapes every target itself, which is enough for most clusters. For a large target set, run a fleet:
+
+```bash
+--set shards=4
+```
+
+The chart switches to a StatefulSet, each pod works out its own shard from its name, and every target is scraped by exactly one pod: nothing is scraped twice, nothing is missed. Combine with `persistence.enabled=true` to give each shard its own durable queue.
 
 </Step>
 
@@ -141,6 +167,11 @@ kubectl logs -l app.kubernetes.io/name=posthog-metrics-agent
 | `scrape.annotationDiscovery` | `true`                     | Discover pods via `prometheus.io/scrape` annotations                                    |
 | `scrape.staticTargets`       | `[]`                       | Fixed `host:port` targets, e.g. `['my-svc:9090']`                                       |
 | `scrape.extraScrapeConfigs`  | `''`                       | Raw Prometheus `scrape_configs` YAML appended verbatim                                  |
+| `shards`                     | `1`                        | Agent fleet size. Above 1, a StatefulSet partitions targets so each is scraped once     |
+| `persistence.enabled`        | `false`                    | Buffer undelivered batches on a persistent volume so restarts lose nothing              |
+| `persistence.size`           | `10Gi`                     | Size of each agent's queue volume                                                       |
+| `persistence.storageClass`   | `''`                       | StorageClass for the queue volume. Empty uses the cluster default                       |
+| `podEnv`                     | `{}`                       | Extra environment variables for the agent container                                     |
 | `resources.requests.cpu`     | `100m`                     | CPU request                                                                             |
 | `resources.requests.memory`  | `256Mi`                    | Memory request                                                                          |
 | `resources.limits.memory`    | `512Mi`                    | Memory limit                                                                            |

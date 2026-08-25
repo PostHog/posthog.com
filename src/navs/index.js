@@ -1013,6 +1013,10 @@ export const handbookSidebar = [
                 url: '/handbook/engineering/feature-pricing',
             },
             {
+                name: 'Shipping a pricing change',
+                url: '/handbook/growth/shipping-a-pricing-change',
+            },
+            {
                 name: 'Revenue and forecasting',
                 url: '/handbook/engineering/revenue-and-forecasting',
             },
@@ -2323,10 +2327,16 @@ const posthogDesktopNav = [
         name: 'Core workflow',
     },
     {
-        name: 'Spaces and canvases',
+        name: 'Spaces',
         url: '/docs/posthog-desktop/spaces',
         icon: 'IconDashboard',
         color: 'salmon',
+    },
+    {
+        name: 'Canvases',
+        url: '/docs/posthog-desktop/canvases',
+        icon: 'IconGraph',
+        color: 'purple',
     },
     {
         name: 'Tasks',
@@ -8225,14 +8235,14 @@ export const docsMenu = {
             ],
         },
         {
-            name: 'Metrics',
+            name: 'Application metrics',
             icon: 'IconTrends',
             color: 'green',
             url: '/docs/metrics',
             description: 'Send OpenTelemetry metrics to PostHog and analyze them.',
             children: [
                 {
-                    name: 'Metrics',
+                    name: 'Application metrics',
                 },
                 {
                     name: 'Overview',
@@ -8262,6 +8272,8 @@ export const docsMenu = {
                         { name: 'Node.js', url: '/docs/metrics/installation/nodejs' },
                         { name: 'Python', url: '/docs/metrics/installation/python' },
                         { name: 'Other languages', url: '/docs/metrics/installation/other' },
+                        { name: 'Docker', url: '/docs/metrics/installation/docker' },
+                        { name: 'Kubernetes', url: '/docs/metrics/installation/kubernetes' },
                     ],
                 },
                 {
