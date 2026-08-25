@@ -158,6 +158,7 @@ Examples of inappropriate spend include:
 - Personal expenses during business travel (for example: gym sessions/fitness classes, groceries)
 - Entertainment subscriptions for personal use (for example: Spotify, Netflix, Amazon Prime, etc.)
 - Expenses that benefit you personally rather than the business
+- Activities that only some of the team can take part in - see [team socials and activities](#team-socials-and-activities)
 - Anything you wouldn't feel comfortable explaining publicly
 
 If the inappropriate spend was due to a misunderstanding, e.g. you genuinely thought an expense was in PostHog’s best interest, but we disagree, we’ll provide clarification and context. If you knowingly and deliberately spent money in ways that are not in PostHog’s best interest, or tried to intentionally circumvent the guidelines, we will probably treat this as [serious misconduct](/handbook/people/grievances). 
@@ -227,7 +228,7 @@ You can ask for access to team/company tools by submitted a request in Slack. Fi
  - Any other costs outside of the days you are required to be at an event are of course _not_ covered.
 > If you find yourself needing to do extra travel outside of the regular things listed above, e.g. you've been asked to take a last minute trip to work on an emergency project, we may pay for a nicer seat here, especially if you are traveling at very short notice or long haul. Ask on [#team-people-and-ops](https://posthog.slack.com/archives/C017WDX3BFZ) if you think this may apply to you. This is intended for genuine one-offs, not where you've decided you'd like to come along to an extra offsite!
 - We strongly encourage team members to try and work together in person when practical. This isn't limited to just working with people in your team, but we expect that you have a reasonable reason you need to work together. You should default to doing this in SF/London, so you'll run into other PostHog people too.
-- If you're in the same place as other team members, even if you aren't directly working together, PostHog will cover the cost of a dinner or a fun activity
+- If you're in the same place as other team members, even if you aren't directly working together, PostHog will cover the cost of a dinner or a fun activity - see [team socials and activities](#team-socials-and-activities) for what counts
 - When visiting customers (or potential customers), we should look for opportunities to connect with them over a meal. These don't need to be extravagant, but they should be appropriate to the size and expectations of the customer. If you would be comfortable justifying the spend publicly in All Hands, you're probably fine.
   - For a normal customer visit (yourself or a couple of people), just use your personal budget and request an increase through Brex if you need more. If the visit grows into something offsite-like (the whole team, multiple days, etc.), post in [#team-people-and-ops](https://posthog.slack.com/archives/C017WDX3BFZ) and tag Kendal so she can create a separate budget for it.
 
@@ -238,6 +239,38 @@ We encourage people to visit our hubs in SF (Hogpatch) and London (Hedgehouse). 
 There is no specific travel budget, this can come out of your general employee budget. We strongly encourage you to use your budget for this reason!
 
 If you do decide to come, we ask that you make the trip worthwhile - attend a conference, speak at an event, gather a few colleagues to come with you at the same time and work on something specific together. Don't just pop in and put your headphones in while there - make it worth your while.
+
+### Team socials and activities
+
+We cover team socials - dinners, drinks, an escape room, a group activity at an offsite, tickets to a game. What we can't cover is something that is really an individual perk with a few colleagues attached. Tax authorities (the IRS in the US, HMRC in the UK) treat that as a taxable benefit we've given you rather than a company social, which means we'd be paying a personal expense on your behalf - something [we're legally prohibited from doing](#why-documentation-matters).
+
+The line isn't about how fun it is, or whether it's work-related. Plenty of what we expense is neither. It's about whether everyone can take part.
+
+It's a **social activity** when:
+- It's organized as a team thing, and everyone on the team is invited
+- Anyone invited can actually join in - no training, preparation, physical ability, or qualification required
+- The value is the time together, and it ends when the event does
+
+It's a **benefit** when:
+- Taking part depends on individual ability or preparation - you have to train for it, qualify for it, or already do it
+- Only some of the team realistically can or does participate
+- You keep something personal out of it, like a race entry, a season pass, equipment, or fitness
+
+A few teammates signing up for the same thing doesn't make it a team activity. This is the most common way this goes wrong: the plan is genuinely social and everyone is excited about it, but only the people who already run, ski, or surf can join in.
+
+Some examples of what we can cover:
+- A team dinner or drinks that everyone in town is invited to
+- An escape room, bowling, karting, or a group activity booked for the whole team
+- Tickets to a game or a show that anyone can come along to
+- A tour or a meal after an event, open to everyone
+
+And what we can't:
+- Race entry fees, even when several of us are running the same race
+- Surfing, skiing, or golf sessions that only the people who already do them can join
+- Gym memberships, fitness classes, and training plans
+- Sports kit and equipment
+
+Two things worth saying. First, none of this stops you doing the thing - pay for it yourself, and the social parts around it that everyone can join are expensable on the usual terms. Second, we're not going to write more specific rules than this, because we expect people to exercise good judgement. If you can't tell which side of the line something falls on, ask [Janani](https://posthog.com/community/profiles/34497) in [#team-people-and-ops](https://posthog.slack.com/archives/C017WDX3BFZ) _before_ you book it, rather than after.
 
 ### Sponsorships
 If you believe an open-source project is fundamentally important to the success of PostHog then we should set up a recurring sponsorship. In this case, see the [open-source sponsorship Marketing initiative](/handbook/marketing/open-source-sponsorship).
