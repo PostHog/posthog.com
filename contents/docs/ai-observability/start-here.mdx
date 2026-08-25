@@ -9,6 +9,7 @@ import { IconGraph, IconWarning, IconRewindPlay  } from '@posthog/icons'
 import LLMsInstallationPlatforms from './_snippets/llms-installation-platforms.tsx'
 import OSButton from 'components/OSButton'
 import WizardCommand from 'components/WizardCommand'
+import GuidesForProduct from 'components/PocketGuides/GuidesForProduct'
 
 
 <QuestLog firstSpeechBubble="Let's get started!" lastSpeechBubble="Time to integrate AI Observability!">
@@ -180,6 +181,18 @@ Reports land in your [inbox](/docs/self-driving/inbox), where one click turns th
 <OSButton variant="primary" asLink to="/docs/self-driving">
   Set up Self-driving
 </OSButton>
+
+</QuestLogItem>
+
+<QuestLogItem
+  title="Learn it by use case"
+  subtitle="Recommended"
+  icon="IconCompass"
+>
+
+The reference tells you what everything does. The pocket guide walks you through real problems, end to end.
+
+<GuidesForProduct product="ai-observability" />
 
 </QuestLogItem>
 
