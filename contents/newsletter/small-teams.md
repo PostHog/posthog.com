@@ -26,7 +26,7 @@ Right now we're 47 people spread across ten countries working asynchronously and
 
 Most teams cover individual products, such as data warehouse, replay, pipeline, or product analytics, but we also have small teams covering people and operations, marketing, and growth.
 
-When we launch a new product, or a project on an existing team becomes too large for the current team, we often spin out a new small team. This allows us to push forward with new ideas and keep shipping without sacrificing quality.
+When we launch a new product, or a project on an existing team becomes too large for the current team, we often [spin out a new small team](/newsletter/you-need-to-find-product-market-fit#2-fund-the-attacker-yourself). This allows us to push forward with new ideas and keep shipping without sacrificing quality.
 
 ![Small teams](https://res.cloudinary.com/dmukukwp6/image/upload/small_team_1_cdceda04ab.png)
 

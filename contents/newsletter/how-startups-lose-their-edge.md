@@ -102,7 +102,7 @@ The honest truth is I don’t have a perfect answer. Maybe it’s unsolvable as 
 
 But I think there are a few things that matter:
 
-- **Keep taking big bets.** The moment you stop doing things that could fail spectacularly is the moment you stop doing things that could succeed spectacularly. Keep betting on what got you there.
+- **Keep [taking big bets](/newsletter/you-need-to-find-product-market-fit).** The moment you stop doing things that could fail spectacularly is the moment you stop doing things that could succeed spectacularly. Keep betting on what got you there.
 
 - **Resist the “experienced” hire.** Of course, sometimes you need specific expertise. But the moment someone’s resume becomes more important than their culture fit, you’ve started conceding, and concessions compound.
 
