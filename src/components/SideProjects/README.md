@@ -20,7 +20,7 @@ Fields (`SideProject`):
 | `teamLink` | no | Fallback creator link when no community profile matches |
 | `githubUrl` | no* | Repo URL |
 | `liveUrl` | no* | Live app URL. *At least one of `githubUrl`/`liveUrl` is required – cards link to `liveUrl \|\| githubUrl`. Use relative URLs for pages on posthog.com |
-| `projectThumbnail` | no | Optional upload stored in Strapi; gallery cards always use `SideProjectGraphic` |
+| `projectThumbnail` | no | Optional upload (PNG, JPG, WebP, or GIF) shown as the card image; cards without one use `SideProjectGraphic` |
 | `tags` | no | Lowercase kebab-case tags (json array); folded through `TAG_ALIASES` for the filter bar |
 
 ## Exports

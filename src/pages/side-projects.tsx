@@ -76,7 +76,7 @@ const ProjectCard = ({
     onDelete: (projectId: number) => void
     showRole?: boolean
 }) => {
-    const { title, description, projectAuthor, authorGitHub, githubUrl, liveUrl } = project
+    const { title, description, projectAuthor, authorGitHub, githubUrl, liveUrl, projectThumbnail } = project
     // Cards link straight to the project itself; prefer the live app over the repo
     const projectUrl = liveUrl || githubUrl
     const profile = findCreatorProfile(profiles, { projectAuthor, authorGitHub })
@@ -117,17 +117,26 @@ const ProjectCard = ({
                 wrapperClassName="flex h-full min-h-0 flex-1 flex-col"
             >
                 <div className="border-b border-primary">
-                    <SideProjectGraphic
-                        title={title}
-                        creatorName={projectAuthor}
-                        creatorRole={showRole ? profile?.companyRole : undefined}
-                        avatarUrl={
-                            profile?.avatar?.formats?.thumbnail?.url ||
-                            profile?.avatar?.url ||
-                            (authorGitHub ? `https://github.com/${authorGitHub}.png?size=256` : undefined)
-                        }
-                        color={profile?.color}
-                    />
+                    {projectThumbnail ? (
+                        <img
+                            src={projectThumbnail}
+                            alt={title}
+                            loading="lazy"
+                            className="aspect-video w-full object-cover"
+                        />
+                    ) : (
+                        <SideProjectGraphic
+                            title={title}
+                            creatorName={projectAuthor}
+                            creatorRole={showRole ? profile?.companyRole : undefined}
+                            avatarUrl={
+                                profile?.avatar?.formats?.thumbnail?.url ||
+                                profile?.avatar?.url ||
+                                (authorGitHub ? `https://github.com/${authorGitHub}.png?size=256` : undefined)
+                            }
+                            color={profile?.color}
+                        />
+                    )}
                 </div>
                 <div className="p-3 pb-3">
                     {description && (

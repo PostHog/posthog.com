@@ -391,6 +391,7 @@ export const SideProjectForm = ({
     )
     const [submitting, setSubmitting] = useState(false)
     const [error, setError] = useState<string | null>(null)
+    const [imageError, setImageError] = useState<string | null>(null)
 
     // The element key must stay "side-project-form" so the window system resolves the fixed
     // modal's appSettings, which means React reuses this instance when one project's form
@@ -400,6 +401,7 @@ export const SideProjectForm = ({
         setValues(toFormValues(project))
         setFeaturedImage(project?.projectThumbnail ? { id: 0, url: project.projectThumbnail } : undefined)
         setError(null)
+        setImageError(null)
         if (appWindow) {
             setWindowTitle(appWindow, project ? 'Edit project' : 'Add a project')
         }
@@ -575,10 +577,26 @@ export const SideProjectForm = ({
                     </p>
                     <ImageDrop
                         image={featuredImage}
-                        onDrop={(image) => setFeaturedImage(image)}
-                        onRemove={() => setFeaturedImage(undefined)}
+                        onDrop={(image) => {
+                            setFeaturedImage(image)
+                            setImageError(null)
+                        }}
+                        onRemove={() => {
+                            setFeaturedImage(undefined)
+                            setImageError(null)
+                        }}
+                        accept={{
+                            'image/png': ['.png'],
+                            'image/jpeg': ['.jpg', '.jpeg'],
+                            'image/webp': ['.webp'],
+                            'image/gif': ['.gif'],
+                        }}
+                        onDropRejected={() =>
+                            setImageError("That file can't be used – upload a single PNG, JPG, WebP, or GIF.")
+                        }
                         className="h-32"
                     />
+                    {imageError && <p className="m-0 mt-2 text-sm text-red">{imageError}</p>}
                 </div>
                 <OSInput
                     label="Tags"
