@@ -31,6 +31,8 @@ There are separate limits for different kinds of resources.
 
 - For all analytics endpoints (such as calculating insights, retrieving persons, or retrieving session recordings), the rate limits are `240/minute` and `1200/hour`.
 
+- Listing session recordings and fetching their snapshots have extra limits on top of the analytics limits above, and those depend on your plan, so a higher sustained limit is a plan question rather than something to work around. These limits only affect reading recordings through the API. Recordings keep being captured either way.
+
 - For the `events/values` endpoint, the rate limits are `60/minute` and `300/hour`. When using a personal API key, the `event_name` query parameter is required. For queries without event filters, use the [`query`](/docs/api/queries) endpoint instead.
 
 - The [`query`](/docs/api/queries) endpoint has a rate limit of `2400/hour`. Organizations without a paid plan also have a [monthly data-read allowance](/docs/api/queries#free-plan-data-limit) for queries. For large or regular exports of events, use [batch exports](/docs/cdp/batch-exports). For data-powered APIs or user-facing dashboards, [reach out to us](https://posthog.com/talk-to-a-human).
@@ -43,9 +45,11 @@ There are separate limits for different kinds of resources.
 
 - Public POST-only endpoints such as event capture (`/e`, `/i/v0/e`) and feature flag evaluation (`/flags`) have no request-level rate limits. Event capture still returns `200` when your project is over its billing quota, and names the limited resources in the `quota_limited` field of the response body. It also applies a [per-distinct-ID ingestion protection](/docs/how-posthog-works/ingestion-pipeline#rate-limiting-high-volume-distinct-ids): if a single distinct ID sends a high, sustained volume of events (roughly 5,000 per minute), those events are still accepted with a `200` response but are processed without strict ordering and without person profile updates for the duration of the spike. PostHog logs an [ingestion warning](/docs/data/ingestion-warnings) when this happens.
 
-These limits apply to **the entire team** (i.e. all users within your PostHog organization). For example, if a script requesting feature flag metadata hits the rate limit, and another user, using a different personal API key, makes a single request to the persons API, this gets rate limited as well.
+Each limit is counted **per personal API key**. Two keys get two separate budgets, so a script that exhausts one key's limit doesn't throttle requests made with a different key. Requests that aren't authenticated with a personal API key are counted per project instead.
 
-> At this time, we are not offering higher limits than these, but you may wish to try our [endpoints product](/docs/endpoints), which offers query customization and higher limits. Alternatively, you may be able to use our [batch exports product](/docs/cdp/batch-exports) to pull the data that you need from our events or persons tables on a faster cadence.
+This means the shape of your key setup decides how your traffic shares limits. If you're building an integration that covers several projects, create a personal API key per project so their traffic doesn't pile into one budget. If you deliberately want a set of scripts to share a budget, give them the same key.
+
+> Aside from the plan-based session recording limits above, we are not offering higher limits than these at this time, but you may wish to try our [endpoints product](/docs/endpoints), which offers query customization and higher limits. Alternatively, you may be able to use our [batch exports product](/docs/cdp/batch-exports) to pull the data that you need from our events or persons tables on a faster cadence.
 
 ## Responses
 
