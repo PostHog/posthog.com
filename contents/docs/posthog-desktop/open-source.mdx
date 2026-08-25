@@ -1,35 +1,16 @@
 ---
-title: PostHog Desktop open source
+title: Contribute to PostHog Desktop
 sidebar: Docs
 showTitle: true
 ---
 
-PostHog Desktop is open source under the MIT license. The full source for the desktop app, the agent framework, and the bundled PostHog skills lives at [github.com/PostHog/code](https://github.com/PostHog/code).
+PostHog Desktop is open source under the MIT license. Its source lives in [`products/desktop`](https://github.com/PostHog/posthog/tree/master/products/desktop) in the `PostHog/posthog` monorepo.
 
-## What's open
+Use the repository documentation for contributor information:
 
-The repo is a monorepo containing:
+- [README](https://github.com/PostHog/posthog/blob/master/products/desktop/README.md) – Product and repository overview
+- [Contributing guide](https://github.com/PostHog/posthog/blob/master/products/desktop/CONTRIBUTING.md) – Local setup, development commands, tests, and pull requests
+- [Architecture guide](https://github.com/PostHog/posthog/blob/master/products/desktop/docs/ARCHITECTURE.md) – Application structure and package responsibilities
+- [MIT license](https://github.com/PostHog/posthog/blob/master/products/desktop/LICENSE)
 
-| Component | Location |
-|---|---|
-| Desktop app | `apps/code` |
-| Agent framework | `packages/agent` |
-| PostHog enricher | `packages/enricher` |
-| Bundled skills | `apps/code/plugins/posthog/skills` |
-
-## Contributing
-
-We welcome external contributions. To get started:
-
-1. Read [CONTRIBUTING.md](https://github.com/PostHog/code/blob/main/CONTRIBUTING.md) in the repo
-2. Browse issues labeled [`good first issue`](https://github.com/PostHog/code/labels/good%20first%20issue)
-3. Open a PR from a `feat/*` or `fix/*` branch – `pnpm typecheck`, `pnpm lint`, and `pnpm test` should all pass
-4. Drop into the [PostHog Discord](https://discord.gg/posthog) if you want to chat through an idea before writing code
-
-## Reporting bugs
-
-Found something broken? [Open an issue](https://github.com/PostHog/code/issues/new) with the version you're running (visible in **Settings → About**) and steps to reproduce.
-
-## License
-
-PostHog Desktop is released under the [MIT license](https://github.com/PostHog/code/blob/main/LICENSE).
+To report a bug or request a change, [open a GitHub issue](https://github.com/PostHog/posthog/issues/new).

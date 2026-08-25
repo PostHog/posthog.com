@@ -31,6 +31,9 @@ export const aiObservability = {
     teamSlug: 'ai-observability',
     // Community topic is still labelled `llm-analytics` in the forum.
     forumTopicId: 390,
+    // Volume id in src/constants/pocketGuides.ts. Set it and the shared Questions section links
+    // the product's pocket guide; products without a volume leave it out and show nothing.
+    pocketGuideVolume: 'ai-observability',
     color: 'purple',
     colorSecondary: 'green-2',
     wizardSupport: true,
@@ -187,11 +190,6 @@ export const aiObservability = {
             headline: 'keeps visibility into what its AI coding platform is doing',
             description:
                 'Everything we do is about speed. PostHog helps us move fast without losing visibility into what’s actually happening.',
-        },
-        lovable: {
-            headline: 'compared us to every other observability tool, just to be sure',
-            description:
-                "If you're building a new product, just use PostHog. It's a no-brainer. It's the only all-in-one platform like it for developers.",
         },
         posthog: {
             headline: 'monitors the usage and performance of PostHog AI with AI Observability',

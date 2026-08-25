@@ -42,6 +42,7 @@ import { MenuItem, useApp } from '../../context/App'
 import { useActiveFeatureFlags, filterMenuByFlags } from '../../hooks/useActiveFeatureFlags'
 import { Questions } from 'components/Squeak'
 import { DocsPageSurvey } from 'components/DocsPageSurvey'
+import AskAIInput from 'components/AskAIInput'
 import MarkdownActions from 'components/MarkdownActions'
 import CustomerMetadata from './CustomerMetadata'
 import { getVideoClasses } from '../../constants'
@@ -102,12 +103,21 @@ interface ReaderViewProps {
     rightActionButtons?: React.ReactNode
     /** Hide the sidebar's app-options (gear) button. Defaults to false. */
     hideAppOptions?: boolean
+    /**
+     * Hide the "Copy page" markdown actions. For index pages that sit under a
+     * `MARKDOWN_CONTENT_PATHS` prefix but have no `.md` of their own (e.g.
+     * `/newsletter`), where the control would otherwise hold empty space while
+     * its existence check resolves. Defaults to false.
+     */
+    hideMarkdownActions?: boolean
     isEditing?: boolean
     onSearch?: (query: string) => void
     showSurvey?: boolean
     parent?: MenuItem
     showQuestions?: boolean
     showAbout?: boolean
+    /** Renders the "Still have questions?" PostHog AI input just above the survey. */
+    showAskAI?: boolean
     sourceInstanceName?: string
     defaultNavVisible?: boolean
     /**
@@ -428,12 +438,14 @@ export default function ReaderView({
     proseSize = 'sm',
     rightActionButtons,
     hideAppOptions = false,
+    hideMarkdownActions = false,
     isEditing,
     onSearch,
     showSurvey = false,
     parent,
     showQuestions = false,
     showAbout = false,
+    showAskAI = false,
     sourceInstanceName,
     defaultNavVisible,
     chrome = false,
@@ -463,12 +475,14 @@ export default function ReaderView({
                 proseSize={proseSize}
                 rightActionButtons={rightActionButtons}
                 hideAppOptions={hideAppOptions}
+                hideMarkdownActions={hideMarkdownActions}
                 isEditing={isEditing}
                 onSearch={onSearch}
                 showSurvey={showSurvey}
                 parent={parent}
                 showQuestions={showQuestions}
                 showAbout={showAbout}
+                showAskAI={showAskAI}
                 sourceInstanceName={sourceInstanceName}
                 chrome={chrome}
                 menuTabs={menuTabs}
@@ -805,6 +819,7 @@ interface LeftSidebarProps {
     children: React.ReactNode
     contentRef?: React.RefObject<HTMLElement>
     currentPath?: string
+    windowKey?: string
     isMdx?: boolean
     /** On narrow windows the sidebar renders as an off-canvas drawer instead
      *  of an inline column, driven by the props below. */
@@ -935,6 +950,7 @@ const SidebarTabButton = ({ tab, active, showLabel, stacked, onClick }: SidebarT
  * switching tabs instead of reloading from the top on each page.
  */
 const SIDEBAR_SCROLL_MEMORY = new Map<string, number>()
+const SIDEBAR_HOVERED_WINDOWS = new Set<string>()
 
 const sidebarScrollKeyFromPath = (path?: string): string => {
     if (!path) return 'default'
@@ -958,6 +974,7 @@ const LeftSidebar = ({
     children,
     contentRef,
     currentPath,
+    windowKey,
     isMdx = false,
     mobile = false,
     mobileOpen = false,
@@ -993,7 +1010,23 @@ const LeftSidebar = ({
     // transitions and icon-row → icon-column layout flip share the same boolean.
     const isPinned = isNavVisible
     const [searchFocused, setSearchFocused] = useState(false)
-    const [hovered, setHovered] = useState(false)
+    const [hovered, setHovered] = useState(() => !!windowKey && SIDEBAR_HOVERED_WINDOWS.has(windowKey))
+    const panelRef = useRef<HTMLDivElement>(null)
+
+    // A ReaderView remount should not collapse a hovered sidebar during an
+    // in-window navigation. Keep it expanded for the first render, then clear
+    // stale memory after the browser recalculates which element is under the
+    // pointer. Keying by window prevents hover state leaking between windows.
+    useLayoutEffect(() => {
+        if (!hovered || !windowKey || mobile) return
+        const frame = requestAnimationFrame(() => {
+            if (!panelRef.current?.matches(':hover')) {
+                SIDEBAR_HOVERED_WINDOWS.delete(windowKey)
+                setHovered(false)
+            }
+        })
+        return () => cancelAnimationFrame(frame)
+    }, [hovered, mobile, windowKey])
     // On mobile the panel is a drawer: it's fully expanded whenever open and
     // fully hidden otherwise, so pin/hover state is bypassed entirely.
     const expanded = mobile ? mobileOpen : isPinned || searchFocused || hovered
@@ -1059,9 +1092,13 @@ const LeftSidebar = ({
     }
 
     const handleMouseEnter = () => {
-        if (!isPinned && !mobile) setHovered(true)
+        if (!isPinned && !mobile) {
+            if (windowKey) SIDEBAR_HOVERED_WINDOWS.add(windowKey)
+            setHovered(true)
+        }
     }
     const handleMouseLeave = () => {
+        if (windowKey) SIDEBAR_HOVERED_WINDOWS.delete(windowKey)
         setHovered(false)
     }
 
@@ -1084,6 +1121,7 @@ const LeftSidebar = ({
             }`}
         >
             <div
+                ref={panelRef}
                 onTransitionEnd={(e) => {
                     if (e.propertyName === 'width' && e.target === e.currentTarget && !expanded) {
                         setDisplayExpanded(false)
@@ -1349,12 +1387,14 @@ function ReaderViewContent({
     proseSize,
     rightActionButtons,
     hideAppOptions = false,
+    hideMarkdownActions = false,
     isEditing,
     onSearch,
     showSurvey = false,
     parent,
     showQuestions = false,
     showAbout = false,
+    showAskAI = false,
     sourceInstanceName,
     chrome = false,
     menuTabs,
@@ -1570,6 +1610,7 @@ function ReaderViewContent({
                         menuTabs={menuTabs}
                         contentRef={onSearch ? undefined : contentRef}
                         currentPath={appWindow?.path}
+                        windowKey={appWindow?.key}
                         isMdx={body?.type === 'mdx'}
                     >
                         {leftSidebar || (!hideMenu && <Menu parent={parent as MenuItem} />)}
@@ -1667,10 +1708,12 @@ function ReaderViewContent({
                                     {/* Raw markdown actions, for readers handing this page to an LLM.
                                         Self-hides on pages with no generated .md counterpart —
                                         see components/MarkdownActions/README.md. */}
-                                    <MarkdownActions
-                                        pageUrl={appWindow?.path ?? pathname}
-                                        className={`mb-2 transition-all ${contentWidthClass}`}
-                                    />
+                                    {!hideMarkdownActions && (
+                                        <MarkdownActions
+                                            pageUrl={appWindow?.path ?? pathname}
+                                            className={`mb-2 transition-all ${contentWidthClass}`}
+                                        />
+                                    )}
                                     {title && !hideTitle && (
                                         <h1
                                             className={`transition-all ${
@@ -1807,6 +1850,18 @@ function ReaderViewContent({
                                                         : contentMaxWidthClass || 'max-w-2xl'
                                                 }`}
                                             />
+                                        </div>
+                                    )}
+                                    {showAskAI && (
+                                        <div
+                                            className={`mt-8 mx-auto transition-all ${
+                                                fullWidthContent || body?.type !== 'mdx'
+                                                    ? 'max-w-full'
+                                                    : contentMaxWidthClass || 'max-w-2xl'
+                                            }`}
+                                        >
+                                            <h3 className="text-xl font-bold m-0 mb-3">Still have questions?</h3>
+                                            <AskAIInput placeholder="Ask PostHog AI about this page..." />
                                         </div>
                                     )}
                                     {showSurvey && (

@@ -136,7 +136,7 @@ const perks: { image: string; alt: string; title: string; copy: string }[] = [
     {
         image: 'https://res.cloudinary.com/dmukukwp6/image/upload/perk_merch_b2106b276a.png',
         alt: 'Exclusive PostHog founder merch and swag',
-        title: '$1,000 of founder swag',
+        title: 'Exclusive founder swag',
         copy: 'You can never have too many laptop stickers or free PostHog t-shirts.',
     },
     {
@@ -294,9 +294,8 @@ const faqItems = [
         content: (
             <p>
                 Your company needs to be less than 2 years old and have raised less than $5m funding. You need to have
-                signed up any time from Jan 1st 2023 onwards, and your PostHog account needs to use your company's
-                email domain. Applications from personal email addresses, like gmail.com or outlook.com, are not
-                accepted.
+                signed up any time from Jan 1st 2023 onwards, and your PostHog account needs to use your company's email
+                domain. Applications from personal email addresses, like gmail.com or outlook.com, are not accepted.
             </p>
         ),
     },
@@ -457,7 +456,7 @@ export default function StartupProgram({ partnerSlug = null }: StartupProgramPro
     const heroBullets = [
         `${creditValue} in PostHog credits for 12 months`,
         '$12,000 in benefits from partners we like',
-        '$1,000 of exclusive PostHog merch',
+        'Exclusive PostHog merch',
     ]
 
     return (
@@ -660,14 +659,10 @@ export default function StartupProgram({ partnerSlug = null }: StartupProgramPro
                         >
                             ElevenLabs
                         </Link>
-                        ,{' '}
+                        , and{' '}
                         <Link to="/customers/hasura" state={{ newWindow: true }} className="!text-inherit underline">
                             Hasura
                         </Link>
-                        , and{' '}
-                        <Link to="/customers/lovable" state={{ newWindow: true }} className="!text-inherit underline">
-                            Lovable
-                        </Link>{' '}
                         – and built for engineers, with 30k+ stars and 500+ contributors on GitHub.
                     </p>
 

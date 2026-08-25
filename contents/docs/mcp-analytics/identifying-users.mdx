@@ -25,11 +25,11 @@ Events for sessions with **no** resolved identity are sent with `$process_person
 `identify` is an async callback that returns either a `UserIdentity` or `null`. The SDK calls it on each request and caches the result per session, so a stable identity isn't re-resolved on every tool call.
 
 ```ts
-import { instrument } from "@posthog/mcp"
+import { instrument, getRequestHeaders } from "@posthog/mcp"
 
 instrument(server, posthog, {
   identify: async (request, extra) => {
-    const token = extra?.requestInfo?.headers?.authorization
+    const token = getRequestHeaders(extra)?.["authorization"]
     if (!token) return null
 
     const user = await resolveUserFromToken(token)
@@ -50,6 +50,8 @@ instrument(server, posthog, {
   },
 })
 ```
+
+Read headers with `getRequestHeaders`, not by reaching into `extra` — the two MCP SDK majors put them in different places, and a hand-written read that works on one returns `undefined` on the other, sending every event out anonymous. See [MCP SDK v2](/docs/mcp-analytics/sdk-v2#if-your-callbacks-read-headers-change-them).
 
 This is the same shape as posthog-node's [`identify({ distinctId, properties })`](/docs/libraries/node) — just returned from a per-request callback instead of called imperatively. The fields map to PostHog as follows:
 

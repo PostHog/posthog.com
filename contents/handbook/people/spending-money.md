@@ -24,6 +24,7 @@ If not, think again.
 ## How it works
 - All company expenses (offsites, software/tool subscriptions, merch, etc.) will have common company-wide budgets.
 - You'll be assigned a single `User Limit` of $5,000 per month in Brex from which you can spend money on individual subscriptions, coworking/collaboration, equipment (except laptops and Mac Studio Monitors - ping `#team-people-and-ops` for these), training, etc. If you need an increase in the limit, request it on Brex.
+  - The $5,000 is a ceiling, not a target or an allowance to use up – only spend what you can justify as being in PostHog's best interest.
 
 ### Transparency & accountability
 - All expenses are visible company-wide
@@ -164,7 +165,7 @@ If the inappropriate spend was due to a misunderstanding, e.g. you genuinely tho
 ## Expense guidelines
 ### Equipment
 #### Laptop & monitor
-Talk to [Tara](https://posthog.com/community/profiles/34526) who handles most Macbook and Apple Studio Display purchases - ping her on [#team-people-and-ops](https://posthog.slack.com/archives/C017WDX3BFZ).
+Talk to [Tara](https://posthog.com/community/profiles/34526) who handles Macbook and Apple Studio Display purchases - ping her on [#team-people-and-ops](https://posthog.slack.com/archives/C017WDX3BFZ).
   - Having equipment purchases centralized helps ensure accurate accounting and tracking of fixed assets for the audit.
   - We expect you to ship the Macbook and Apple Studio Display back when you leave PostHog.
   - Apple Studio Displays are only for Product Engineers (high density screen), PM's and Sales/CS/Onboarding teams (built-in high quality webcam and microphone). For all other teams that feel they could benefit from an enhanced monitor, there are some really great competitors to the Studio Display at a fraction of the price - like the [Clarity Pro 27"](https://alogic.co.uk/products/clarity-pro-27-uhd-4k-monitor-with-65w-pd-and-webcam) or another solid option is this [LG screen](https://www.amazon.co.uk/LG-UltraFine-Monitor-27U730A-B-Built/dp/B0F7M27H6F/ref=asc_df_B0F7M27H6F?mcid=d91fd0cc5e06349887121f1ba2c4d6b6&tag=googshopuk-21&linkCode=df0&hvadid=696386561242&hvpos=&hvnetw=g&hvrand=11057029523976072922&hvpone=&hvptwo=&hvqmt=&hvdev=c&hvdvcmdl=&hvlocint=&hvlocphy=9045888&hvtargid=pla-2442615442699&psc=1&hvocijid=11057029523976072922-B0F7M27H6F-&hvexpln=0&gad_source=1)  You can purchase these using your personal limit.
@@ -179,11 +180,11 @@ Talk to [Tara](https://posthog.com/community/profiles/34526) who handles most Ma
       - US only: use your Brex since we earn cashback
       - Do not get AppleCare since it doesn't have great value for money
     - You can request a new laptop in `#team-people-and-ops` if it is over 4 years old, (for engineering machines) has less than 48GB of RAM, or is significantly impacting your productivity. We do ask that you do some diligence to make sure it's not a setup issue though - i.e. other applications aren't hogging the memory, etc.
-    - Part of `#team-client-libraries` and need to purchase a phone for testing? Talk to [Tara](https://posthog.com/community/profiles/34526) in `#team-people-and-ops`.
+   - Phones and iPads - if you require a phone (Apple or Android) or an iPad for your role, please reach out to [Tara](https://posthog.com/community/profiles/34526) in `#team-people-and-ops`.
 
 #### Other equipment
-- Keyboard/mouse/laptop stand: Check Amazon and Apple for discounts. Refurbished items usually work just fine. [Nextstand](https://www.amazon.co.uk/NEXSTAND-K2-Adjustable-Foldable-Portable/dp/B01HHYQBB8) make great value laptop stands that are portable.
-- Desk & chair - again, refurbished is a great way to get high quality for less. If you live in the UK, [Office Resale](https://www.officeresale.co.uk/) offer a range of like-new refurbished designer furniture.
+- Keyboard/mouse/laptop stand: Check Amazon and Apple for discounts. Refurbished items usually work just fine. [Nextstand](https://www.amazon.co.uk/NEXSTAND-K2-Adjustable-Foldable-Portable/dp/B01HHYQBB8) make great value laptop stands that are portable. You can use your personal budget for this.
+- Desk & chair - again, refurbished is a great way to get high quality for less. If you live in the UK, [Office Resale](https://www.officeresale.co.uk/) offer a range of like-new refurbished designer furniture. You can use your personal budget for this.
 
 As a guide, here's what we'd consider reasonable spend:
 - Desk - up to $500
@@ -211,6 +212,9 @@ You can ask for access to team/company tools by submitted a request in Slack. Fi
 
 - AI coding tools (Cursor, Claude Code, etc.) are encouraged, but usage-based pricing can climb fast. Most engineers' monthly spend lands around a single max-tier subscription (~$200/month). If yours is running several times higher, that's usually a misconfiguration or inefficient workflow rather than a genuine need – compare setups with your teammates and ask in [#team-people-and-ops](https://posthog.slack.com/archives/C017WDX3BFZ) if you're unsure. We have a team Claude Code account that you can request to be added to using Zluri in slack.
 
+### Coworking
+- If there's a WeWork where you are, use it – we have a company All Access account, so default to that rather than paying for another coworking space. Ask [Kendal](https://posthog.com/community/profiles/28628) in [#team-people-and-ops](https://posthog.slack.com/archives/C017WDX3BFZ) for access.
+
 ### Travel
 - We travel in economy by default and do not pay for business class
   - If you're unsure of your travel plans and believe you may have to cancel, it may be worth spending a bit extra to book flex tickets that allow a full refund to your Brex
@@ -237,3 +241,6 @@ If you do decide to come, we ask that you make the trip worthwhile - attend a co
 
 ### Sponsorships
 If you believe an open-source project is fundamentally important to the success of PostHog then we should set up a recurring sponsorship. In this case, see the [open-source sponsorship Marketing initiative](/handbook/marketing/open-source-sponsorship).
+
+#### Open-source sponsorship for individuals
+You can also sponsor open-source projects that have helped you personally, using your monthly `User Limit`. You don't need approval - just apply the guiding principles above, as you would for any other spend.

@@ -34,6 +34,15 @@
             ]
         },
         {
+            "source": "/(.*\\.md)",
+            "headers": [
+                {
+                    "key": "Content-Type",
+                    "value": "text/plain; charset=utf-8"
+                }
+            ]
+        },
+        {
             "source": "/(.*)",
             "headers": [
                 {
@@ -192,6 +201,16 @@
         }
     ],
     "redirects": [
+        {
+            "source": "/docs/session-replay/image-bot:ext(\\.md)?",
+            "destination": "/docs/ai-research/image-fetcher-bot:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/posthog-desktop/ai-generated-content:ext(\\.md)?",
+            "destination": "/docs/posthog-desktop/settings#ai-generated-content",
+            "statusCode": 301
+        },
         {
             "source": "/docs/session-replay/session-summaries-ai:ext(\\.md)?",
             "destination": "/docs/replay-vision:ext?",
@@ -532,7 +551,12 @@
         },
         {
             "source": "/docs/prompt-management/skills-store:ext(\\.md)?",
-            "destination": "/docs/ai-engineering/skills-store:ext?",
+            "destination": "/docs/skills:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/ai-engineering/skills-store:ext(\\.md)?",
+            "destination": "/docs/skills:ext?",
             "statusCode": 301
         },
         {
@@ -545,11 +569,11 @@
         },
         {
             "source": "/code/download",
-            "destination": "/desktop#download"
+            "destination": "/desktop"
         },
         {
             "source": "/code/download/",
-            "destination": "/desktop#download"
+            "destination": "/desktop"
         },
         {
             "source": "/slack-app",
@@ -925,6 +949,14 @@
         {
             "source": "/docs/integrations/slack:ext(\\.md)?",
             "destination": "/docs/libraries/slack:ext?"
+        },
+        {
+            "source": "/docs/integrations/github:ext(\\.md)?",
+            "destination": "/docs/libraries/github:ext?"
+        },
+        {
+            "source": "/docs/integrations/discord:ext(\\.md)?",
+            "destination": "/docs/libraries/discord:ext?"
         },
         {
             "source": "/docs/posthog-code/slack:ext(\\.md)?",
@@ -5394,7 +5426,11 @@
         },
         {
             "source": "/docs/cdp/geoip-enrichment:ext(\\.md)?",
-            "destination": "/docs/cdp/transformations/posthog-plugin-geoip:ext?"
+            "destination": "/docs/cdp/transformations/template-geoip:ext?"
+        },
+        {
+            "source": "/docs/cdp/transformations/posthog-plugin-geoip:ext(\\.md)?",
+            "destination": "/docs/cdp/transformations/template-geoip:ext?"
         },
         {
             "source": "/docs/cdp/timestamp-parser:ext(\\.md)?",
@@ -5642,7 +5678,7 @@
         },
         {
             "source": "/docs/llm-analytics/skills-store:ext(\\.md)?",
-            "destination": "/docs/ai-engineering/skills-store:ext?"
+            "destination": "/docs/skills:ext?"
         },
         {
             "source": "/docs/llm-analytics/:path*",

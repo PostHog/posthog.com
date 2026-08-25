@@ -691,6 +691,38 @@ const appSettings: AppSettings = {
             center: true,
         },
     },
+    '/newsletter': {
+        size: {
+            min: {
+                width: 700,
+                height: 500,
+            },
+            max: {
+                width: 1200,
+                height: 1500,
+            },
+            fixed: false,
+        },
+        position: {
+            center: true,
+        },
+    },
+    '/blog': {
+        size: {
+            min: {
+                width: 700,
+                height: 500,
+            },
+            max: {
+                width: 1200,
+                height: 1500,
+            },
+            fixed: false,
+        },
+        position: {
+            center: true,
+        },
+    },
     '/research': {
         size: {
             min: {
@@ -1387,6 +1419,24 @@ const appSettings: AppSettings = {
             max: {
                 width: 600,
                 height: 500,
+            },
+            fixed: true,
+            autoHeight: true,
+        },
+        position: {
+            center: true,
+        },
+    },
+    // Add/edit form from /side-projects. Not a route — opened via addWindow.
+    'side-project-form': {
+        size: {
+            min: {
+                width: 560,
+                height: 400,
+            },
+            max: {
+                width: 560,
+                height: 800,
             },
             fixed: true,
             autoHeight: true,
