@@ -4675,6 +4675,12 @@ export const docsMenu = {
                     color: 'purple',
                 },
                 {
+                    name: 'Sending HTTP log events',
+                    url: '/docs/web-analytics/sending-http-logs',
+                    icon: 'IconServer',
+                    color: 'purple',
+                },
+                {
                     name: 'Channels and campaigns',
                 },
                 {
