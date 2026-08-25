@@ -17,7 +17,7 @@ See [getting started with customers](/handbook/cs-and-onboarding/getting-started
 Once you've worked through your book of business, focus on building trust with your champions.
 
 - **Show, don't tell.** When a customer has a question or goal, build the solution rather than linking to docs. Create the insight or dashboard, then share what you did so they can do it themselves next time. Don't create dependency — they should be able to do it without you.
-- **Be timely on alerts.** Our automated alerts flag event spikes, drops, and other unusual behavior. Reach out quickly so the customer can investigate. If a customer's company raises funding or gets press, send congrats.
+- **Be timely on alerts.** Our automated alerts flag event spikes, drops, and other unusual behavior. Reach out quickly, but treat the two directions differently. A drop is usually a problem to solve. A genuine spike is often a growth story: rule out a bug or misconfiguration first, then get ahead of the resulting bill increase proactively, rather than letting the customer (or their finance team) be the one to notice it first. If a customer's company raises funding or gets press, send congrats.
 - **Push beyond the basics.** Look at what they're not using yet. Have they set up tracking funnels for key metrics? Created alerts on important actions? Tried PostHog AI? Implemented error tracking to explain conversion drops? Cross-sell here, but frame it as helping them get more value.
 - **Regularly invite new users to the Slack channel.** The more people on the customer side who know you exist, the more come to you when they hit issues. Monthly is a good cadence — Vitally shows you who's new.
 
