@@ -223,7 +223,7 @@ export const proseComponents = {
     a: ({ href, ...props }: any) => <Link to={href} state={{ newWindow: true }} className="underline" {...props} />,
     hr: () => <span aria-hidden="true" className="my-6 block w-16 border-t border-primary" />,
     // A worked-example table inside a <Fig> – illustrative rows, not live data.
-    table: (props: any) => <table className="w-full border-collapse text-left text-[0.85em]" {...props} />,
+    table: (props: any) => <table className="mb-[0.8em] w-full border-collapse text-left text-[0.85em]" {...props} />,
     thead: (props: any) => <thead className="border-b border-primary" {...props} />,
     th: (props: any) => (
         <th

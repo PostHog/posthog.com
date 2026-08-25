@@ -27,14 +27,14 @@ pocketGuideOrder: 5
     caption="An Error Tracking issue: every recording of the issue from the top, this one exception's recording from the tab."
     annotations={[
         {
-            x: 79.2,
-            y: 5.5,
+            x: 80.1,
+            y: 4.8,
             title: 'View all recordings associated with this issue',
             description:
                 'Every session where this error fired, back to back – the whole population behind the issue rather than one instance of it.',
         },
         {
-            x: 70,
+            x: 71.1,
             y: 41.7,
             title: 'Watch replays associated with the currently selected instance of this exception',
             description:
@@ -74,17 +74,17 @@ Just look for the <ViewRecordings /> button, or open the **Recording** tab on th
 
 ## Saved filters
 
-A **saved filter** is a question you keep asking. If you're always filtering for users whose sessions include the `user_checkout` event and have signed up in the past week, save it as a filter. It live filters for the latest events.
+A <Term name="saved filter">saved filter</Term> is a question you keep asking. If you're always filtering for users whose sessions include the `user_checkout` event and have signed up in the past week, save it as a filter. It live filters for the latest events.
 
 ## Collections
 
-A **collection** is a set of specific recordings you put there by hand. It doesn't change unless you change it. This is useful for keeping track of sessions you want to revisit or share with your team. Common failure patterns, UI papercuts, and evidence supporting your "I told you so, the button should be on the left side" argument can be saved as a collection.
+A <Term name="collection">collection</Term> is a set of specific recordings you put there by hand. It doesn't change unless you change it. This is useful for keeping track of sessions you want to revisit or share with your team. Common failure patterns, UI papercuts, and evidence supporting your "I told you so, the button should be on the left side" argument can be saved as a collection.
 
 ## Asking instead of filtering
 
 You can also describe what you want and let PostHog AI assemble the filter. You don't have to know which field a thing lives under, which is most of the work.
 
-The following prompts open in the PostHog app to help you get started:
+You can try running any of these prompts in PostHog AI to get started:
 
 - <AskAI q="Users who rage clicked on the pricing page last week" />
 - <AskAI q="Sessions where someone hit an error during checkout" />
@@ -99,7 +99,7 @@ The following prompts open in the PostHog app to help you get started:
 
 PostHog can watch sessions for you and report on findings.
 
-If you'd like summaries and reports, use **session summaries** and **scouts**. If you'd like to turn sessions into queryable data, use **Replay Vision scanners**.
+If you'd like summaries and reports, use session summaries and <Term name="scout">scouts</Term>. If you'd like to turn sessions into queryable data, use <Term name="replay vision">Replay Vision</Term> <Term name="scanner">scanners</Term>.
 
 We'll introduce all of them in [the next section](/pocket-guides/session-replay/replay-vision).
 

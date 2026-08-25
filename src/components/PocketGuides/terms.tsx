@@ -266,6 +266,66 @@ export const TERMS = {
             'A browser policy naming which origins a page may load code and send data to. A policy that does not name PostHog stops the recorder script from being served, so no session is captured.',
         slug: '/docs/advanced/content-security-policy',
     },
+    'saved filter': {
+        title: 'Saved filter',
+        description:
+            'A set of recording filters you name and keep. It stays live, so opening it again returns the sessions matching those conditions now, not the ones that matched when you saved it.',
+        slug: '/docs/session-replay/how-to-watch-recordings',
+    },
+    collection: {
+        title: 'Collection',
+        description:
+            'A set of specific recordings you add by hand. Unlike a saved filter it does not change on its own, which makes it the place to keep sessions you want to revisit or share.',
+        slug: '/docs/session-replay/how-to-watch-recordings',
+    },
+    'console log': {
+        title: 'Console log',
+        description:
+            'The browser console output captured alongside a recording – logs, warnings, and errors – placed on the player timeline at the moment each one fired.',
+        slug: '/docs/session-replay/console-log-recording',
+    },
+    'network request': {
+        title: 'Network request',
+        description:
+            'The requests a page made during a recording, with their timing and status. Payloads and headers are captured only if you turn that on, and are subject to your masking rules.',
+        slug: '/docs/session-replay/network-recording',
+    },
+    comment: {
+        title: 'Comment',
+        description:
+            'A note left on a recording at a given timestamp, so a teammate opening the session lands on the moment you meant rather than the start of it.',
+        slug: '/docs/session-replay/how-to-watch-recordings',
+    },
+    subprocessor: {
+        title: 'Subprocessor',
+        description:
+            'A third party PostHog uses to process your data on your behalf. Every one is listed publicly, so you can see who touches the data before you agree to it.',
+        slug: '/subprocessors',
+    },
+    DPA: {
+        title: 'DPA',
+        description:
+            "PostHog's Data Processing Agreement: the contract covering how we process personal data on your behalf, which subprocessors are involved, and where the data is held.",
+        slug: '/dpa',
+    },
+    HIPAA: {
+        title: 'HIPAA',
+        description:
+            'The US health privacy law. Handling protected health information in PostHog means using a HIPAA-eligible configuration and signing a BAA – not every PostHog feature is covered by one.',
+        slug: '/docs/privacy/hipaa-compliance',
+    },
+    BAA: {
+        title: 'BAA',
+        description:
+            'A Business Associate Agreement: the contract HIPAA requires before a vendor may handle protected health information. It covers only the services it names.',
+        slug: '/docs/privacy/hipaa-compliance',
+    },
+    PHI: {
+        title: 'PHI',
+        description:
+            'Protected Health Information: health data tied to an identifiable person. HIPAA governs how it is stored, transmitted, and who may process it.',
+        slug: '/docs/privacy/hipaa-compliance',
+    },
 } satisfies Record<string, TermDefinition>
 
 export type TermName = keyof typeof TERMS

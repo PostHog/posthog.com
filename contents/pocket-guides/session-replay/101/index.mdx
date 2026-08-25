@@ -89,7 +89,7 @@ Select a session on the left and it plays back in the middle, with everything Po
 The right-hand inspector lets you watch replays in context of your PostHog data. They add context so you can answer the who, what, when, where, and how of each replay. You can follow from replay to persons, events, logs, errors, and more.
 
 - **[Overview](/docs/session-replay/how-to-watch-recordings)** – who this is. The <Term name="person" /> and their <Term name="person property">properties</Term>, the screen they were on, which <Term name="experiment" /> variants they got, and who else on your team has already watched this replay.
-- **[Inspector](/docs/session-replay/how-to-watch-recordings)** – events and errors captured during the session on a synced timeline. Your <Term name="event">events</Term>, [console logs](/docs/session-replay/console-log-recording), [network requests](/docs/session-replay/network-recording), and comments, filterable down to one kind at a time.
+- **[Inspector](/docs/session-replay/how-to-watch-recordings)** – events and errors captured during the session on a synced timeline. Your <Term name="event">events</Term>, <Term name="console log">console logs</Term>, <Term name="network request">network requests</Term>, and <Term name="comment">comments</Term>, filterable down to one kind at a time.
 - **[Network waterfall](/docs/session-replay/network-recording)** – what the page was waiting on. Every request laid out by time, so a slow screen in the replay has something to blame.
 - **[Observations](/docs/replay-vision/observations)** – what <Term name="replay vision">Replay Vision</Term> found in this session without you watching it.
 - **[Linked issues](/docs/session-replay/integrations)** – create or find related issues in your issue tracking tool.
@@ -98,7 +98,7 @@ You'll find them all on the right of the player <SeeFig n={2} />.
 
 ## What's actually recorded
 
-Recordings come from your PostHog SDKs: JavaScript web, React Native, iOS, Android, and Flutter.
+Recordings come from your PostHog SDKs. Session Replay is supported by the [JavaScript web](/docs/session-replay/installation/web), [React Native](/docs/session-replay/installation/react-native), [iOS](/docs/session-replay/installation/ios), [Android](/docs/session-replay/installation/android), and [Flutter](/docs/session-replay/installation/flutter) SDKs.
 
 These replays are not videos on the web. The SDK takes a full snapshot of the page's DOM, then records only what changes – clicks, scrolls, mutations – and the player rebuilds the page from that stream. This helps keep cost low and minimize performance implications.
 

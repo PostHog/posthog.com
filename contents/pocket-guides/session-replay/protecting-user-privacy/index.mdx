@@ -20,7 +20,7 @@ pocketGuideOrder: 3
 
 # Protecting user privacy
 
-Session Replay gives you insights into user behavior, but it can also turn creepy if you're not careful.
+Session Replay gives you insights into user behavior, but it can be invasive if misconfigured.
 
 Here are the important privacy controls you should know for each platform, but don't sweat the implementation details, there's a skill you can copy at the end of the guide.
 
@@ -28,13 +28,11 @@ Here are the important privacy controls you should know for each platform, but d
 
 If a page could contain sensitive data, mask **all** text, then unmask safe content explicitly.
 
-The other order is whack-a-mole. Mask fields as you notice them and every screen you forget is recorded in full, and you find out by watching a replay you shouldn't have been able to see.
-
-A mask spreads to everything inside the element you put it on, so you mark a layout, a screen, or a component rather than each field in it. A field someone adds inside a masked layout next month is masked the day it ships.
+You should never allow captures by default. Trying to mask fields individually becomes a dangerous game of whack-a-mole. You'll only notice when you watch a replay with private user information, which is too late.
 
 ## Where each platform starts
 
-Web is the only one that starts exposed. Everywhere else the SDK masks first and your job is revealing what you've checked.
+Each SDK has different default masking behavior and supports different masking rules.
 
 | Platform | Masked out of the box | Can you unmask individual elements? |
 | --- | --- | --- |
