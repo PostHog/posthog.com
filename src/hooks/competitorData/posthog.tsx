@@ -823,7 +823,7 @@ export const posthog = {
             gcs: true,
             google_ads: true,
             google_analytics: false,
-            google_search_console: false,
+            google_search_console: true,
             hubspot: true,
             imports: true,
             intercom: true,
