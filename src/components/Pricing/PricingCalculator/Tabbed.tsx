@@ -18,6 +18,7 @@ import { BROWSE_TOOLS_HANDLES } from 'constants/productNavigation'
 import qs from 'qs'
 import { useUser } from 'hooks/useUser'
 import usePostHog from 'hooks/usePostHog'
+import AgentEstimateLink from 'components/Pricing/AgentEstimateLink'
 import { NumericFormat } from 'react-number-format'
 import AutosizeInput from 'react-input-autosize'
 
@@ -555,9 +556,14 @@ export default function Tabbed() {
                     <p className="m-0 font-bold text-lg leading-none">${totalPrice.toLocaleString()}</p>
                 </div>
             </div>
-            <div className="flex justify-end gap-0.5 mt-2 pr-2 md:pr-0">
-                <IconCopy className="size-5 inline-block text-muted relative -top-px" />
-                <CopyURLButton onClick={generateURL} />
+            {/* Two ways to leave with an estimate: a link to this one, or a prompt that builds
+                one from what the visitor already pays for elsewhere. Same row, same weight. */}
+            <div className="flex flex-wrap items-center justify-between gap-2 mt-2 pr-2 md:pr-0">
+                <AgentEstimateLink source="calculator-total" className="text-sm font-bold text-red dark:text-yellow" />
+                <div className="flex gap-0.5">
+                    <IconCopy className="size-5 inline-block text-muted relative -top-px" />
+                    <CopyURLButton onClick={generateURL} />
+                </div>
             </div>
         </div>
     )

@@ -5,6 +5,7 @@ import Link from 'components/Link'
 import Tooltip from 'components/Tooltip'
 import { graphql, useStaticQuery } from 'gatsby'
 import { IconCode, IconHandMoney, IconRocket } from '@posthog/icons'
+import AgentEstimateLink from 'components/Pricing/AgentEstimateLink'
 
 // The sidebar sits inside a `not-prose` section, so prose's link styling doesn't reach it and
 // `Link` ships no styles of its own — inline links read as plain text without this. Matches the
@@ -226,6 +227,15 @@ export const Calculator = ({ hideHeader = false, id = 'calculator' }: Calculator
                                     this handy guide
                                 </Link>{' '}
                                 to help!
+                            </SidebarListItem>
+                            <SidebarListItem>
+                                Coming from another tool?{' '}
+                                <AgentEstimateLink
+                                    label="Create an estimate"
+                                    source="calculator-sidebar"
+                                    className={sidebarLinkClasses}
+                                />{' '}
+                                using your real usage there.
                             </SidebarListItem>
                         </SidebarList>
                     </div>
