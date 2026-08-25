@@ -1684,7 +1684,10 @@ const getInitialSiteSettings = (): SiteSettings => {
 
 export const Provider = ({ children, element, location }: AppProviderProps) => {
     const isSSR = typeof window === 'undefined'
-    const [compact, setCompact] = useState(false)
+    // Pages that are always embedded (e.g. /service-error, shown only inside the app's
+    // error iframe) declare `isInFrame` in frontmatter so compact mode is server-rendered
+    // from the start, instead of being discovered at runtime and flipped after hydration.
+    const [compact, setCompact] = useState(() => Boolean(element.props?.pageContext?.isInFrame))
     const constraintsRef = useRef<HTMLDivElement>(null)
     const taskbarRef = useRef<HTMLDivElement>(null)
     const [isMobile, setIsMobile] = useState(false)
