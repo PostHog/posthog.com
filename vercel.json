@@ -569,11 +569,11 @@
         },
         {
             "source": "/code/download",
-            "destination": "/desktop#download"
+            "destination": "/desktop"
         },
         {
             "source": "/code/download/",
-            "destination": "/desktop#download"
+            "destination": "/desktop"
         },
         {
             "source": "/slack-app",

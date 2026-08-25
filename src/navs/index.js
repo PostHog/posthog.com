@@ -2327,10 +2327,16 @@ const posthogDesktopNav = [
         name: 'Core workflow',
     },
     {
-        name: 'Spaces and canvases',
+        name: 'Spaces',
         url: '/docs/posthog-desktop/spaces',
         icon: 'IconDashboard',
         color: 'salmon',
+    },
+    {
+        name: 'Canvases',
+        url: '/docs/posthog-desktop/canvases',
+        icon: 'IconGraph',
+        color: 'purple',
     },
     {
         name: 'Tasks',
