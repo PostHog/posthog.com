@@ -5,44 +5,68 @@ showStepsToc: true
 
 import CLIDownload from '../_snippets/cli/download.mdx'
 import CLIAuthenticate from '../_snippets/cli/authenticate.mdx'
-import InjectSourceMap from './_snippets/inject-source-map.mdx'
-import UploadSourceMap from './_snippets/upload-source-map.mdx'
-import WizardSection from './_snippets/wizard-section.mdx'
 
-<WizardSection />
+<CalloutBox icon="IconWarning" title="Do not inject after an Angular service-worker build" type="action">
 
-## Manual setup
+`posthog-cli sourcemap inject` changes JavaScript files. If you run it after Angular creates `ngsw.json`, the service-worker hashes no longer match and Angular rejects the application update. Use the build plugin below so Angular hashes the final JavaScript.
+
+</CalloutBox>
+
+## Setup
 
 <Steps>
 
 <Step title="Install the PostHog CLI" badge="required">
-  
-  <CLIDownload />
 
+<CLIDownload />
+
+</Step>
+
+<Step title="Install the esbuild integration" badge="required">
+
+Install the PostHog esbuild plugin and the community Angular custom-esbuild builder:
+
+```bash
+npm install --save-dev @posthog/esbuild-plugin @angular-builders/custom-esbuild
+```
+
+Use the `@angular-builders/custom-esbuild` major version that matches your Angular major version. For example, use version 20 for Angular 20.
 
 </Step>
 
 <Step title="Authenticate the PostHog CLI" badge="required">
+
 <CLIAuthenticate />
+
 </Step>
 
-<Step title="Output source maps for Angular" badge="required">
+<Step title="Configure the esbuild plugin" badge="required">
 
-You can configure Angular to [generate source maps](https://angular.dev/reference/configs/workspace-config#source-map-configuration) by adding the following to your `angular.json` file:
+Create a workspace-local plugin file:
 
-```json file=angular.json focusOnLines=4-14
+```ts file=tools/posthog-esbuild-plugin.ts
+import posthogEsbuildPlugin from '@posthog/esbuild-plugin'
+
+export default posthogEsbuildPlugin()
+```
+
+Update your production build target in `angular.json`:
+
+```json file=angular.json focusOnLines=7-18
 {
   "projects": {
     "my-app": {
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-angular:application",
+          "builder": "@angular-builders/custom-esbuild:application",
           "options": {
+            "plugins": ["./tools/posthog-esbuild-plugin.ts"],
+            "outputHashing": "all",
             "sourceMap": {
-              "scripts": true, // +
-              "styles": true, // +
-              "hidden": true, // +
-              "vendor": true // +
+              "scripts": true,
+              "styles": false,
+              "hidden": true,
+              "vendor": true
             }
           }
         }
@@ -52,52 +76,76 @@ You can configure Angular to [generate source maps](https://angular.dev/referenc
 }
 ```
 
-Then, build your Angular application:
+Keep `outputHashing` enabled. The plugin uses each content-hashed JavaScript filename as its symbol-set ID.
+
+</Step>
+
+<Step title="Build your application" badge="required">
 
 ```bash
 ng build --configuration production
 ```
 
-</Step>
-
-<Step checkpoint title="Verify source map generation" subtitle="Confirm source maps are generated">
-
-Confirm that the source maps are generated in the `dist/<your-app-name>/` directory. You should see a `.js.map` file for each JS bundle.
+The plugin adds its runtime registration before esbuild computes output hashes. Angular then creates `index.html` and `ngsw.json` from the final JavaScript.
 
 </Step>
 
-<Step title="Inject source map" subtitle="Your goal in this step: Add metadata to associate maps with your code." badge="required">
+<Step checkpoint title="Verify the build output" subtitle="Confirm PostHog metadata is present">
 
-<InjectSourceMap />
+Check a generated JavaScript file in `dist/<your-app-name>/browser`. It must contain this static marker:
+
+```js
+/* posthog-chunk-id: output-filename */
+```
+
+Open the matching `.js.map` file and confirm its `chunk_id` equals the JavaScript filename. For example:
+
+```json
+{
+  "chunk_id": "main-LMD2Y6LY.js"
+}
+```
+
+You won't see a `//# chunkId=` comment. The plugin registers the final filename at runtime instead of adding a random ID after the build.
 
 </Step>
 
-<Step checkpoint title="Verify source map injection" subtitle="Confirm source map comments are present">
+<Step title="Upload source maps" badge="required">
 
-Confirm that the served files are injected with the correct source map comment in production in dev tools:
+Upload the already-processed output without injecting it again:
 
-You should see a comment like this in your minified JS files, for example `main-IX6K2QJM.js`:
+```bash
+posthog-cli sourcemap upload --directory ./dist/<your-app-name>/browser
+```
 
-```js 
-//# chunkId=0197e6db-9a73-7b91-9e80-4e1b7158db5c
-``` 
+Do not use `sourcemap process`, `sourcemap inject`, or `sourcemap upload --delete-after` after this build. Those commands rewrite JavaScript and invalidate hashes that Angular has already computed.
 
-</Step>
+If you don't deploy source maps, remove only the `.map` files after a successful upload:
 
-<Step title="Upload source map" subtitle="Your goal in this step: Send the processed source maps to PostHog." badge="required">
-<UploadSourceMap />
+```bash
+find ./dist/<your-app-name>/browser -name '*.map' -delete
+```
 
 </Step>
 
 <Step checkpoint title="Verify source map upload" subtitle="Confirm source maps are successfully uploaded">
 
-Before proceeding, confirm that source maps are successfully uploaded to PostHog. 
-
 <CallToAction className="my-2" size="sm" type="secondary" to="https://app.posthog.com/error_tracking/configuration#selectedSetting=error-tracking-symbol-sets" external={true}>
-    Check symbol sets in PostHog
+Check symbol sets in PostHog
 </CallToAction>
 
 </Step>
+
 </Steps>
 
+## Fallback without a custom builder
 
+If you can't replace Angular's standard builder, regenerate the service-worker manifest after PostHog changes the bundles:
+
+```bash
+ng build --configuration production
+posthog-cli sourcemap process --directory ./dist/<your-app-name>/browser
+npx ngsw-config ./dist/<your-app-name>/browser ./ngsw-config.json /
+```
+
+Run `ngsw-config` after every command that changes a built asset. This fallback does not repair SRI values or custom CDN manifests. Regenerate those separately after injection.
