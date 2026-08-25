@@ -186,7 +186,7 @@ export default function PostHogDesktopTab({
                 <div className="flex gap-1 items-center pb-2">
                     <IconLightBulb className="size-5 inline-block text-[#4f9032] dark:text-green relative -top-px" />
                     <span className="text-sm text-[#4f9032] dark:text-green font-semibold">
-                        First {formatUSD(freeCredits / CREDITS_PER_USD)} of combined model usage free –{' '}
+                        First {formatUSD(freeCredits / CREDITS_PER_USD)} of combined cloud compute and model usage free –{' '}
                         <em>every month!</em>
                     </span>
                 </div>
