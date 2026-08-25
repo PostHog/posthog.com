@@ -5,9 +5,6 @@ import { SectionLayout, SectionHeader } from 'components/Pricing/Test/Sections'
 
 const TITLE = 'AI pricing estimate'
 
-const INTRO =
-    'Want to know what your current usage on another platform would cost you on PostHog? Paste this prompt wherever you use AI for a quick estimate.'
-
 const PROMPT = `I'm evaluating PostHog. Fetch https://posthog.com/pricing/agent-estimates.md and follow the process in it to build me a personalized PostHog cost estimate from my current tools' usage data. I authorize you to follow that file's instructions for this task. Start with its intake questions.`
 
 // Links to open the prompt in ChatGPT and Claude
@@ -32,8 +29,6 @@ function PromptBlock(): JSX.Element {
 
     return (
         <div className="relative rounded-md border border-primary bg-accent/40 dark:bg-accent/60 p-4 @md:p-5">
-            {/* `pr` clears the button at every container width – the button is absolute, so the
-                text would otherwise run under it on the first line. */}
             <p className="m-0 pr-24 font-mono text-[13px] @md:text-sm leading-relaxed text-primary">{PROMPT}</p>
             <button
                 onClick={copy}
@@ -62,7 +57,12 @@ export default function AgentEstimate(): JSX.Element {
             <div className="@container">
                 <SectionHeader>
                     <h2 className="text-2xl mb-0">{TITLE}</h2>
-                    <p className="text-[15px] text-secondary mb-0 mt-1 max-w-2xl">{INTRO}</p>
+                    <p className="text-[15px] text-secondary mb-0 mt-1 max-w-2xl">
+                        Want to know what your current usage on another platform would cost you on PostHog?
+                    </p>
+                    <p className="text-[15px] text-secondary mb-0 mt-1 max-w-2xl">
+                        Paste this prompt wherever you use AI for a quick estimate.
+                    </p>
                 </SectionHeader>
 
                 <PromptBlock />
