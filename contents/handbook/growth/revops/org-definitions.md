@@ -51,7 +51,7 @@ An org has completed setup if it has at least one day of non-zero product usage:
 
 This is a different concept from per-product **activation** (see [Per-product activation](/handbook/growth/growth-engineering/per-product-activation)), which is a specific, retention-validated behavioral milestone chosen separately for each product. Setup is simpler: it just means billable data started flowing for the org at all. Use "setup" for this org-level signal and reserve "activation"/"activated" for the per-product, retention-validated definitions.
 
-**Signals that look similar but aren't this definition:** the single event signal `first team event ingested` is sometimes used elsewhere as a setup proxy. This doesn't match the canonical definition.
+**Signals that look similar but aren't this definition:** the single event signal `first team event ingested` is sometimes used elsewhere as a setup proxy. This doesn't match the canonical definition. Same for the `has_non_zero_usage` flag inside the usage report's `report` payload: it only exists on reports since mid-January 2026, so anything built on it silently loses all earlier setup dates.
 
 ## Engaged (customer initiated product or tool usage)
 
@@ -69,7 +69,7 @@ Events captured on the server carry `properties.source`, which says which surfac
 
 Machine values never count: `cache_warming`, `alert`, `export`, `subscription`, `self_driving` (Signals scouts), `posthog_code` (headless coding agents), `wizard` (setup automation). When a new `source` value appears, it stays excluded until someone classifies it. We'd prefer briefly undercounting a new surface than silently count machines as customers.
 
-Two dates to know: `desktop`, `slack`, `mobile` and `self_driving` only exist since 2026-08-17 ([#72941](https://github.com/PostHog/posthog/pull/72941)), and older events weren't updated. Before that date `$mcp_tool_call` carried no `source` at all, so historical queries on it need `source IS NULL OR source IN (...)` for the older window.
+Dates to know: `source` stamping is newer than the events themselves, and older events weren't updated. `query executed` carried no `source` before March 2026, and `$mcp_tool_call` none before 2026-08-17 ([#72941](https://github.com/PostHog/posthog/pull/72941)) – the same date `desktop`, `slack`, `mobile` and `self_driving` first appear. Historical windows crossing those dates need `source IS NULL OR source IN (...)` for the older period only – today's `source`-less events are exactly the background paths the allowlist exists to exclude.
 
 ### Consuming data
 
@@ -88,8 +88,6 @@ Two dates to know: `desktop`, `slack`, `mobile` and `self_driving` only exist si
 | `notebook opened` | Opening a notebook | Browser |
 | `Inbox report opened` | Opening a report in the Inbox – the human end of self-driving | Browser |
 | `heatmap screenshot generated` | Generating a heatmap screenshot | Browser |
-| `toolbar mode triggered` | Activating a toolbar mode (heatmap, inspect, actions, flags). Toolbar engagement happens entirely outside the PostHog app but still carries the org group. | Browser – toolbar on the customer's site |
-| `toolbar feature flag overridden` | Overriding a feature flag from the toolbar to test it on their own site | Browser – toolbar on the customer's site |
 | `pr_merged` where `origin_product = 'signal_report'` | A customer merging a scout-authored PR into their own repo. Merging is a human act accepting PostHog's work – the strongest self-driving value signal. Only with this filter; see the exclusion list for unfiltered `pr_merged`. | GitHub webhook |
 
 ### Creating things
@@ -123,8 +121,7 @@ Each of these looks like usage but fires without a customer doing anything delib
 - `first team event ingested` – fires per org *member*, and measures ingestion, not usage.
 - `signals_scout_*` – scheduled machine runs.
 - `Inbox onboarding decided` – records which onboarding mode a user ended up with (defaults included), not a deliberate opt-in.
-- `toolbar loaded` – fires whenever the toolbar loads on a page the user browses; presence, not use. The deliberate acts are the toolbar events above.
-- `toolbar token expired` – fires for *anonymous visitors* of customers' sites carrying a stale token. Its user count roughly equals its event count – the signature of machine-generated events.
+- Toolbar events – deliberate toolbar use on the customer's own site (`toolbar mode triggered`, `toolbar feature flag overridden`, `toolbar selected HTML element`) would qualify in spirit, but the toolbar attaches no organization group to any of its events, so none of them can count toward an org until that's fixed. `toolbar loaded` (presence, not use) and `toolbar token expired` (fires for anonymous visitors of customers' sites; its user count roughly equals its event count – the signature of machine-generated events) wouldn't qualify regardless.
 - `$workflows_email_opened` / `$workflows_email_link_clicked` – PostHog's own lifecycle emails. Opens are pixel-tracked (machine-inflated by mail clients); clicks are human but measure engagement with our emails, not the product – the click lands in-app where real events fire.
 
 ### Adding an event to these definitions
