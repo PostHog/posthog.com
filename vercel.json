@@ -452,6 +452,11 @@
             "statusCode": 301
         },
         {
+            "source": "/security",
+            "destination": "/.well-known/security.txt",
+            "statusCode": 301
+        },
+        {
             "source": "/activity",
             "destination": "/docs/activity",
             "statusCode": 301
