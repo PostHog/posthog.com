@@ -90,28 +90,28 @@ You can also create filters based on pre-prepared cohorts of users, which is esp
 
 The internal and test user filter is controlled with a simple toggle whenever you create a new insight, or edit an existing one. Turn it on and everything in your filter group will be sifted out; turn it off and you’ll see results from all users together.
 
-Defining your filters doesn't switch them on by itself, so that toggle is the setting that decides what each insight shows. Two controls in project settings write to it for you.
+Defining your filters doesn't switch them on, so this toggle decides whether an insight excludes internal users. You can also set it from project settings, without opening each insight.
 
-### Turn the filter on for new insights
+### Set the default for new insights
 
 **Enable this filter on all new insights** sets the starting value for insights created from then on. It doesn't change insights that already exist.
 
-### Turn the filter on for insights you already have
+### Change every insight you already have
 
-Under **Existing insights**, use **Turn on for existing insights** or **Turn off for existing insights** to apply your choice to every insight in the project, including insights other people created. This is the quickest way to clean up your existing dashboards and insights after you set up your filters for the first time. You need to be a project admin to run it.
+Under **Existing insights**, **Turn on for existing insights** and **Turn off for existing insights** set the toggle for every insight in the project, including insights other people created. Run this after setting up your filters for the first time, so your existing dashboards and insights stop counting internal traffic. You need to be a project admin.
 
 Some insights are left as they are:
 
-- **SQL insights**, which have no such toggle. Write the exclusion into the query itself if you need it.
-- **Insights you can't edit.** An organization admin can run it to cover those, or you can ask for [edit access](/docs/settings/access-control).
+- **SQL insights.** These have no such toggle, so write the exclusion into the query itself if you need it.
+- **Insights you can't edit.** An organization admin can cover those, or you can ask for [edit access](/docs/settings/access-control).
 - **Insights saved in an older format.** These keep whatever they were set to. Open one and save it to convert it, then run this again.
 
 After each run, PostHog tells you how many insights it changed, how many already matched, and how many it left alone.
 
-Dashboards show whatever their insights are set to. The exception is a dashboard with its own override for this filter, which keeps that override and ignores the change to the insight underneath.
+Dashboards show whatever their insights are set to. A dashboard with its own override for this filter keeps that override.
 
-> **Note:** There's no bulk undo. Running it the other way sets every insight to the opposite value, rather than restoring the mix that was there before. To get a single insight back, open its activity log. Each change records the insight's previous query, so you can see what it was set to and set it again by hand.
+You can also run this over the API. See [internal and test users](/docs/data/test-accounts) for the endpoint.
 
-For the full reference, including how to apply the filter to existing insights over the API, see [internal and test users](/docs/data/test-accounts).
+> **Note:** There's no bulk undo. Running it the other way sets every insight to the opposite value, rather than restoring what each one had before. To recover a single insight, open its activity log: each change records the previous query, so you can see what it was set to and set it back by hand.
 
 <NewsletterForm />
