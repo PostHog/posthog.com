@@ -247,10 +247,10 @@ Below are a list of Slack channels you may find helpful:
 
 ### Work-related channels
 
--   [#tell-posthog-anything](https://posthog.slack.com/archives/C0351B1DMUY)
--   [#ask-posthog-anything](https://posthog.slack.com/archives/C02E3BKC78F)
--   [#ask-max](https://posthog.slack.com/archives/C07TQR0V16U) - Max has access to all of our documentation and our handbook, and is a great place to start with many questions
--   [#general](https://posthog.slack.com/archives/CSPHFDZH8)
+-   [#tell-posthog-anything](https://posthog.slack.com/archives/C0351B1DMUY) - share news and updates with the entire company
+-   [#ask-posthog-anything](https://posthog.slack.com/archives/C02E3BKC78F) - ask questions or get signposted to the right team
+-   [#at-posthog-anything](https://posthog.slack.com/archives/C07TQR0V16U) - tag ```@posthog``` to draft PRs, pull usage info, or surface content from the handbook
+-   [#general](https://posthog.slack.com/archives/CSPHFDZH8) - see new starters, work anniversaries, birthdays and all-hands recordings
 -   [#brand-mentions](https://posthog.slack.com/archives/C03C60FT1J7)
 -   [#do-more-weird](https://posthog.slack.com/archives/C04JN5NNMPF)
 -   [#newsletters](https://posthog.slack.com/archives/C01RJ7T212S)
