@@ -10,6 +10,7 @@ import {
     IconList,
     IconMagic,
     IconMessage,
+    IconArrowUpRight,
     IconPieChart,
     IconRocket,
     IconSparkles,
@@ -73,6 +74,13 @@ export const featureFlags = {
             group: 'divided',
             icon: <IconSparkles className="size-4" />,
             props: { slides: topFeatures },
+        },
+        {
+            slug: 'use-case-ramp',
+            name: 'Ramp to self-driving',
+            template: 'use-case-ramp',
+            group: 'divided',
+            icon: <IconArrowUpRight className="size-4" />,
         },
         {
             slug: 'ask-anything',
@@ -208,6 +216,95 @@ export const featureFlags = {
                 'Gate infrastructure changes and migrations with gradual rollouts and instant rollback',
             ],
             ['Support Engineers', 'Enable a fix or workaround for a specific customer without shipping a new build'],
+        ],
+    },
+    useCaseRamp: {
+        intro: 'Feature flags work at three levels. You can create and roll out flags yourself, ask an agent to do it for you, or let PostHog work proactively with your data.',
+        scenario: 'Shipping a risky checkout rewrite',
+        columns: [
+            {
+                level: 'Do it yourself',
+                surfaces: ['web'],
+                driver: 'You create the flags, decide who sees each change, and flip the switches yourself.',
+                scenario: {
+                    icon: 'IconToggle',
+                    surfaces: ['web'],
+                    steps: [
+                        'You wrap the new checkout in a flag and turn it on for 10% of users',
+                        'You watch the dashboards, widen to half, then to everyone',
+                        'Months later the flag is still in your code, long after everyone has it',
+                    ],
+                    outcome: "It's a safe rollout, but the cleanup is on you, and it rarely happens.",
+                },
+                points: [
+                    {
+                        title: 'Cleanup is on you',
+                        icon: 'IconHandwave',
+                        body: "You're the one deciding what to roll out, to whom, and when to widen it. You're also the one who has to remember to clean it up once everyone has it.",
+                    },
+                    {
+                        title: 'Point an agent at your flags instead',
+                        icon: 'IconSparkles',
+                        body: 'Every flag you create becomes something PostHog can act on. Point an agent at your flag roster and it will watch the whole thing, catching the ones nobody remembers turning off.',
+                    },
+                ],
+            },
+            {
+                level: 'Ask an agent',
+                surfaces: ['ai', 'slack', 'mcp', 'cli'],
+                driver: 'You describe the flag or rollout you want, and an agent makes the change.',
+                scenario: {
+                    icon: 'IconMagicWand',
+                    surfaces: ['mcp', 'slack'],
+                    steps: [
+                        'From your editor, you ask your coding agent for the flag while you write the code that checks it',
+                        'It creates the flag with the targeting you described, ready to roll out at 10%',
+                        'Later you tag @PostHog in Slack: "widen new-checkout to half of users"',
+                    ],
+                    outcome: 'You never left your editor or Slack, but you still drove every step.',
+                },
+                points: [
+                    {
+                        title: 'Flags are how agents ship safely',
+                        icon: 'IconShield',
+                        body: "An agent that wraps its change in a flag ships with a kill switch built in. That's what makes it safe to let PostHog ship changes on its own at the next level.",
+                    },
+                    {
+                        title: 'The full prompt list is below',
+                        icon: 'IconMessage',
+                        body: 'AI prompts, right below this section, lists everything you can ask: creating, rolling out, inspecting, and cleaning up flags.',
+                    },
+                ],
+            },
+            {
+                level: 'Ship with PostHog',
+                surfaces: ['inbox', 'desktop'],
+                driver: 'A scout audits your flag roster on a schedule and flags what it finds, often with a pull request attached.',
+                scenario: {
+                    icon: 'IconPullRequest',
+                    surfaces: ['inbox', 'desktop'],
+                    steps: [
+                        'A feature flags scout reviews your roster on a schedule and finds new-checkout fully rolled out for months',
+                        'The old code path is dead, so it opens a draft pull request removing the check and the unused branch',
+                        'Flags that need a human call land as a report in your Inbox instead',
+                        'You merge the cleanup, and the codebase ends the week simpler than it started',
+                    ],
+                    outcome:
+                        'You never had to notice the old flag yourself. PostHog found it and opened the pull request to remove it.',
+                },
+                points: [
+                    {
+                        title: 'Your flag roster is the context',
+                        icon: 'IconBrain',
+                        body: "The scout looks at every flag you and your agents have created, and how long each has been rolled out. That's how it tells old dead code from a rollout that quietly broke.",
+                    },
+                    {
+                        title: 'The safety rail for autonomous changes',
+                        icon: 'IconToggleOff',
+                        body: 'When PostHog ships a fix from a report, it goes out behind a flag. Nothing runs until you switch it on, and turning it off again takes one click, no redeploy needed.',
+                    },
+                ],
+            },
         ],
     },
     features,
