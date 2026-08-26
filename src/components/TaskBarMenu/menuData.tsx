@@ -273,7 +273,7 @@ const TemplatesItem = {
     icon: <Icons.IconMagic className="size-4 text-purple" />,
 }
 
-/** Goals arm of DOCS_NAV_FLAG: same entries as DOCS_GROUPS, regrouped; a name dropped here falls into `More tools` instead. */
+/** Goals arm of DOCS_NAV_FLAG: DOCS_GROUPS regrouped by reader goal. A name dropped here lands in `More tools`. */
 const DOCS_GROUPS_GOALS: DocsGroup[] = [
     {
         label: 'New to PostHog',
@@ -354,8 +354,7 @@ export const getDocsMenuItems = (groups: DocsGroup[] = DOCS_GROUPS): MenuItemTyp
         return IconComponent ? <IconComponent className={`text-${source.color || 'gray'} size-4`} /> : undefined
     }
 
-    // A name matching no docsMenu entry is dropped by the filters below, so a typo quietly
-    // shortens the menu. Warn in development rather than let it pass unseen.
+    // A name matching nothing is dropped below, so warn rather than let a typo shorten the menu.
     const claim = (label: string): MenuItemType | undefined => {
         const item = byLabel.get(label)
         if (!item && process.env.NODE_ENV !== 'production') {
@@ -507,7 +506,7 @@ export function useMenuData(): MenuType[] {
             trigger: 'Docs',
             // The docs tree is too deep to browse inside a hamburger; mobile goes to the homepage instead
             mobileLink: '/docs',
-            // Read on open, not on render: reading the flag enrols, and most visitors never open this.
+            // Read on open, not on render: reading the flag enrolls, and most visitors never open this.
             onOpen: () => setDocsNavVariant(resolveDocsNavVariant(posthog?.getFeatureFlag?.(DOCS_NAV_FLAG))),
             // What DOCS_NAV_FLAG is measured on; the variant rides along so arms compare without a join.
             onItemClick: ({ label, href }) =>

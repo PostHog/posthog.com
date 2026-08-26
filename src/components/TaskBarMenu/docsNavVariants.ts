@@ -8,7 +8,7 @@ export const DOCS_NAV_VARIANTS: DocsNavVariantId[] = ['control', 'goals']
 
 export const DEFAULT_DOCS_NAV_VARIANT: DocsNavVariantId = DOCS_NAV_VARIANTS[0]
 
-/** Control covers SSR, ad-blocked visitors, absent flags, and any key we don't recognise. */
+/** Control covers SSR, ad-blocked visitors, absent flags, and any key we don't recognize. */
 export function resolveDocsNavVariant(value: string | boolean | null | undefined): DocsNavVariantId {
     if (!value || typeof value !== 'string') {
         return DEFAULT_DOCS_NAV_VARIANT
