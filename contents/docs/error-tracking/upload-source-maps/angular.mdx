@@ -89,6 +89,29 @@ You should see a comment like this in your minified JS files, for example `main-
 
 </Step>
 
+<Step title="Regenerate the service worker manifest" subtitle="Your goal in this step: Keep the Angular service worker's asset hashes in sync with the injected files." badge="required">
+
+<CalloutBox icon="IconWarning" title="Only needed if you use the Angular service worker" type="caution">
+
+Skip this step if your app doesn't use `@angular/service-worker`.
+
+</CalloutBox>
+
+`ng build` writes a SHA-1 hash of every bundle into `ngsw.json`. `posthog-cli sourcemap inject` rewrites those bundles afterwards, so the recorded hashes no longer match the files. When the service worker detects the mismatch, it rejects the new version and keeps serving the previously cached app, so your deploys silently stop reaching users.
+
+Fix this by regenerating `ngsw.json` after injecting, using the [`ngsw-config`](https://angular.dev/ecosystem/service-workers/config) tool that ships with `@angular/service-worker`:
+
+```bash
+ng build --configuration production
+posthog-cli sourcemap inject --directory ./dist/<your-app-name>/browser
+posthog-cli sourcemap upload --directory ./dist/<your-app-name>/browser
+npx ngsw-config ./dist/<your-app-name>/browser ./ngsw-config.json /
+```
+
+Run `ngsw-config` as the last command that touches the build output. `--delete-after` also rewrites your bundles when it strips the source map comments, so it must run before `ngsw-config` too. The last argument is your app's base href (usually `/`).
+
+</Step>
+
 <Step checkpoint title="Verify source map upload" subtitle="Confirm source maps are successfully uploaded">
 
 Before proceeding, confirm that source maps are successfully uploaded to PostHog. 
