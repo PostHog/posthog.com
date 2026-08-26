@@ -1301,6 +1301,10 @@ export const handbookSidebar = [
                 url: '/handbook/growth/revops/enrichment-pipeline',
             },
             {
+                name: 'ICP fit score',
+                url: '/handbook/growth/revops/icp-fit-score',
+            },
+            {
                 name: 'SalesOps',
                 url: '',
                 children: [
@@ -4672,6 +4676,12 @@ export const docsMenu = {
                     name: 'Managing bot and AI traffic',
                     url: '/docs/web-analytics/managing-bot-traffic',
                     icon: 'IconShieldPeople',
+                    color: 'purple',
+                },
+                {
+                    name: 'Sending HTTP log events',
+                    url: '/docs/web-analytics/sending-http-logs',
+                    icon: 'IconServer',
                     color: 'purple',
                 },
                 {

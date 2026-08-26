@@ -35,33 +35,37 @@ export default function Action(): JSX.Element | null {
     }
     const { href, kind } = destination(cta)
 
+    const trackPromptCopy = () =>
+        posthog?.capture('pocket_guide_interaction', {
+            kind: 'ai_prompt_copy',
+            guide: entry?.url,
+            placement: 'action_section',
+        })
+
+    const trackCtaClick = () =>
+        posthog?.capture('pocket_guide_interaction', { kind, guide: entry?.url, placement: 'action_section' })
+
     return (
         <div>
             {cta.kind === 'prompt' && cta.prompt && (
                 // The prompt is the deliverable, so it's set like the scout file in vol. 1 – same
                 // code block, wrapped locally because `whitespace-pre` scrolls a sentence sideways.
                 <div className="mb-4 [&_.min-w-fit]:min-w-0 [&_.whitespace-pre]:whitespace-pre-wrap [&_.whitespace-pre]:break-words">
-                    <SingleCodeBlock language="text" label="Prompt for PostHog AI" showLabel showCopy showAskAI={false}>
+                    <SingleCodeBlock
+                        language="text"
+                        label="Prompt for PostHog AI"
+                        showLabel
+                        showCopy
+                        showAskAI={false}
+                        onCopy={trackPromptCopy}
+                    >
                         {cta.prompt}
                     </SingleCodeBlock>
                 </div>
             )}
 
             <div className="flex flex-wrap items-center gap-2">
-                <OSButton
-                    asLink
-                    to={href}
-                    external
-                    variant="primary"
-                    size="md"
-                    onClick={() =>
-                        posthog?.capture('pocket_guide_interaction', {
-                            kind,
-                            guide: entry?.url,
-                            placement: 'action_section',
-                        })
-                    }
-                >
+                <OSButton asLink to={href} external variant="primary" size="md" onClick={trackCtaClick}>
                     {cta.label}
                 </OSButton>
                 {cta.note && <span className="text-xs text-secondary">{cta.note}</span>}
@@ -92,8 +96,20 @@ function useWizard() {
  * before anyone reaches a chapter. `<Prerequisite />` repeats it under each CTA.
  */
 export function Setup(): JSX.Element {
+    const posthog = usePostHog()
     const wizard = useWizard()
-    return <CopyableCommand className="my-[0.8em]" command={wizard.displayCommand} copyCommand={wizard.copyCommand} />
+
+    const trackSetupCopy = () =>
+        posthog?.capture('pocket_guide_interaction', { kind: 'setup_command_copy', placement: 'front_matter' })
+
+    return (
+        <CopyableCommand
+            className="my-[0.8em]"
+            command={wizard.displayCommand}
+            copyCommand={wizard.copyCommand}
+            onCopy={trackSetupCopy}
+        />
+    )
 }
 
 /**
@@ -103,11 +119,21 @@ export function Setup(): JSX.Element {
  * no data in this project" is a worse first impression than a sentence saying so up front.
  */
 function Prerequisite({ requires }: { requires: NonNullable<BookPageCta['requires']> }): JSX.Element {
+    const posthog = usePostHog()
+    const entry = useEntry()?.entry
     const wizard = useWizard()
+
+    const trackSetupCopy = () =>
+        posthog?.capture('pocket_guide_interaction', {
+            kind: 'setup_command_copy',
+            guide: entry?.url,
+            placement: 'action_section',
+        })
+
     return (
         <div className="mt-4 border-t border-light pt-3 dark:border-dark">
             <p className="mb-2 text-xs text-secondary">{requires.label}</p>
-            <CopyableCommand command={wizard.displayCommand} copyCommand={wizard.copyCommand} />
+            <CopyableCommand command={wizard.displayCommand} copyCommand={wizard.copyCommand} onCopy={trackSetupCopy} />
         </div>
     )
 }
@@ -128,17 +154,12 @@ export function ActionBar({
     }
     const { href, kind } = destination(cta)
 
+    const trackCtaClick = () => posthog?.capture('pocket_guide_interaction', { kind, guide, placement: 'pinned_bar' })
+
     return (
         <div className="flex items-center gap-3 border-t border-primary bg-primary px-6 py-3">
             <span className="min-w-0 flex-1 truncate text-sm text-secondary">{title}</span>
-            <OSButton
-                asLink
-                to={href}
-                external
-                variant="primary"
-                size="sm"
-                onClick={() => posthog?.capture('pocket_guide_interaction', { kind, guide, placement: 'pinned_bar' })}
-            >
+            <OSButton asLink to={href} external variant="primary" size="sm" onClick={trackCtaClick}>
                 {cta.label}
             </OSButton>
         </div>

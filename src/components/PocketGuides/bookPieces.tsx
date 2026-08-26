@@ -1,5 +1,7 @@
 import React from 'react'
 
+import usePostHog from '../../hooks/usePostHog'
+
 import Link from 'components/Link'
 import { SingleCodeBlock } from 'components/CodeBlock'
 import EnableScout from 'components/SelfDrivingInbox/EnableScout'
@@ -160,6 +162,22 @@ export function SeeAlso({ children }: { children: React.ReactNode }): JSX.Elemen
 const NATIVE_CONTENT =
     'article-content !text-secondary [&_li]:![font-size:1em] [&_p]:![font-size:1em] [&_li]:!leading-relaxed [&_p]:!leading-relaxed [&_li]:![list-style-type:revert] [&_ul]:![list-style-type:revert] [&_ol]:![list-style-type:revert] [&_ul]:[padding-left:revert] [&_ol]:[padding-left:revert]'
 
+/** A prose link, counted like a CTA – some chapters answer with a link, not a button. */
+function BookLink({ href, ...props }: any): JSX.Element {
+    const posthog = usePostHog()
+    const entry = useEntry()?.entry
+
+    const trackLinkClick = () =>
+        posthog?.capture('pocket_guide_interaction', {
+            kind: 'guide_link_click',
+            href,
+            guide: entry?.url,
+            placement: 'prose',
+        })
+
+    return <Link to={href} state={{ newWindow: true }} className="underline" onClick={trackLinkClick} {...props} />
+}
+
 /** Prose defaults. The page container is `not-prose`, so every tag is styled here. */
 export const proseComponents = {
     // Em-based sizes AND margins: the reading-size control scales type and rhythm together.
@@ -220,7 +238,7 @@ export const proseComponents = {
             {...props}
         />
     ),
-    a: ({ href, ...props }: any) => <Link to={href} state={{ newWindow: true }} className="underline" {...props} />,
+    a: (props: any) => <BookLink {...props} />,
     hr: () => <span aria-hidden="true" className="my-6 block w-16 border-t border-primary" />,
     // A worked-example table inside a <Fig> – illustrative rows, not live data.
     table: (props: any) => <table className="mb-[0.8em] w-full border-collapse text-left text-[0.85em]" {...props} />,

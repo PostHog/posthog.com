@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { graphql, useStaticQuery } from 'gatsby'
-import { IconShieldLock } from '@posthog/icons'
+import { IconShieldLock, IconWarning } from '@posthog/icons'
 import { Fieldset } from 'components/OSFieldset'
 import Link from 'components/Link'
 import Tooltip from 'components/RadixUI/Tooltip'
@@ -129,14 +129,26 @@ export default function Points({ wallet: walletProp, readOnly = false, firstName
                                                 <div className="flex-1 min-w-0">
                                                     <TransactionTitle type={type} metadata={metadata} date={date} />
                                                 </div>
-                                                <span
-                                                    className={`font-mono font-bold text-base text-right shrink-0 whitespace-nowrap ${
-                                                        amount > 0 ? 'text-green' : 'text-red'
-                                                    }`}
-                                                >
-                                                    {amount > 0 ? '+' : ''}
-                                                    {amount.toLocaleString()}
-                                                </span>
+                                                <div className="flex items-center gap-1 shrink-0">
+                                                    {metadata?.capped ? (
+                                                        <Tooltip
+                                                            delay={0}
+                                                            className="inline-flex cursor-help"
+                                                            trigger={<IconWarning className="size-4 text-yellow" />}
+                                                        >
+                                                            Daily {type.replace(/_/g, ' ').toLowerCase()} points limit
+                                                            reached
+                                                        </Tooltip>
+                                                    ) : null}
+                                                    <span
+                                                        className={`font-mono font-bold text-base text-right whitespace-nowrap ${
+                                                            amount > 0 ? 'text-green' : 'text-red'
+                                                        }`}
+                                                    >
+                                                        {amount > 0 ? '+' : ''}
+                                                        {amount.toLocaleString()}
+                                                    </span>
+                                                </div>
                                             </div>
                                         ))}
                                     </div>

@@ -1,6 +1,8 @@
 import Link from 'components/Link'
 import React from 'react'
 
+import usePostHog from '../../hooks/usePostHog'
+
 import { Logo } from '@posthog/brand/logo'
 
 import { PocketGuideVolume } from '../../constants/pocketGuides'
@@ -85,15 +87,25 @@ function CoverBody({ volume, count }: CoverProps): JSX.Element {
 }
 
 export default function Cover({ volume, count }: CoverProps): JSX.Element {
+    const posthog = usePostHog()
+
     // Unwritten volumes aren't links – there's nothing behind them yet.
     if (volume.comingSoon) {
         return <CoverBody volume={volume} count={count} />
     }
 
+    const trackCoverClick = () =>
+        posthog?.capture('pocket_guide_interaction', {
+            kind: 'cover_click',
+            volume: volume.id,
+            placement: 'shelf',
+        })
+
     return (
         <Link
             to={`/pocket-guides/${volume.id}`}
             state={{ newWindow: true }}
+            onClick={trackCoverClick}
             // Perspective lives on the link so the hover tilt reads as picking the book up.
             className="group block no-underline [perspective:1200px]"
         >

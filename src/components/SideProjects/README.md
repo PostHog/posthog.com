@@ -13,7 +13,7 @@ Fields (`SideProject`):
 | `id` | no | Strapi entry id |
 | `title` | yes | Project name |
 | `description` | no | One-liner shown on the card |
-| `date` | no | `YYYY-MM-DD`; drives "newest first" ordering – undated legacy entries sort last |
+| `date` | no | `YYYY-MM-DD`; the date the project was added. Not used for ordering – the gallery rotates in a daily-seeded shuffle |
 | `projectAuthor` | yes | Creator's full name; used to match their community profile |
 | `authorGitHub` | no | GitHub username; preferred profile match key, also used for avatar fallback |
 | `alumni` | no | Overrides the automatic current-team/alumni detection |
