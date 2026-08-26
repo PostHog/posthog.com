@@ -339,6 +339,19 @@ const Roadmap = ({
                         {roadmap.description && (
                             <div className="py-2 px-4">
                                 <Markdown>{roadmap.description}</Markdown>
+                                {docsPath && docsPath !== stripPostHogOrigin(roadmap.cta?.url || '') && (
+                                    <div className="mt-4">
+                                        <OSButton
+                                            asLink
+                                            to={docsPath}
+                                            variant="secondary"
+                                            width="full"
+                                            state={{ newWindow: true }}
+                                        >
+                                            Read the docs
+                                        </OSButton>
+                                    </div>
+                                )}
                                 <div className="mt-8 mb-4 flex flex-row flex-wrap gap-1">
                                     <ChangelogEmojiReactions roadmapId={roadmap.id} />
                                 </div>
@@ -363,14 +376,6 @@ const Roadmap = ({
                             state={{ newWindow: true }}
                         >
                             {roadmap.cta.label}
-                        </OSButton>
-                    </div>
-                )}
-
-                {docsPath && docsPath !== stripPostHogOrigin(roadmap.cta?.url || '') && (
-                    <div className="mt-auto py-2 px-4 border-t border-primary">
-                        <OSButton asLink to={docsPath} variant="secondary" width="full" state={{ newWindow: true }}>
-                            Read the docs
                         </OSButton>
                     </div>
                 )}
@@ -458,7 +463,9 @@ const StaticChangelogList = ({ roadmaps }: { roadmaps: RoadmapNode[] }) => {
                                             docsPath &&
                                             docsPath !== stripPostHogOrigin(roadmap.cta?.url || '') && (
                                                 <p className="m-0 text-sm">
-                                                    <Link to={docsPath}>Read the docs</Link>
+                                                    <Link to={docsPath} state={{ newWindow: true }}>
+                                                        Read the docs
+                                                    </Link>
                                                 </p>
                                             )}
                                     </article>
