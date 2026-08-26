@@ -87,7 +87,7 @@ Finally, we use formula mode to divide the amount by 100 and then multiply by th
 
 [Stripe calculates MRR](https://support.stripe.com/questions/calculating-monthly-recurring-revenue-(mrr)-in-billing) by "summing the monthly-normalized amounts of all active subscriptions at that time." 
 
-To mimic this calculation in PostHog, we need to write an [SQL query](/docs/product-analytics/sql) that gets all the subscription items, normalizes the subscription amount, and then sums them up. Because a lot of this data is in `JSON`, we need to extract the values.
+To mimic this calculation in PostHog, we need to write an [SQL query](/docs/data-warehouse/sql) that gets all the subscription items, normalizes the subscription amount, and then sums them up. Because a lot of this data is in `JSON`, we need to extract the values.
 
 ```sql
 WITH subscription_items AS (
