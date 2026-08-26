@@ -77,7 +77,7 @@ Some of the most relevant options are:
 | Attribute | Description |
 | --- | --- |
 | `property_denylist`<br/><br/>**Type:** Array<br/>**Default:** `[]` | A list of properties that should never be sent with `capture` calls. |
-| `person_profiles`<br/><br/>**Type:** Enum: `always`, `identified_only`<br/>**Default:** `identified_only` | Set whether events should capture identified events and process person profiles. |
+| `person_profiles`<br/><br/>**Type:** Enum: `always`, `identified_only`, `never`<br/>**Default:** `identified_only` | Set whether events should capture identified events and process person profiles. |
 | `rate_limiting`<br/><br/>**Type:** Object<br/>**Default:** `{ events_per_second: 10, events_burst_limit: events_per_second * 10 }` | Controls event rate limiting to help you avoid accidentally sending too many events. `events_per_second` determines how many events can be sent per second on average (default: 10). `events_burst_limit` sets the maximum events that can be sent at once (default: 10 times the `events_per_second` value). |
 | `logs`<br/><br/>**Type:** Object<br/>**Default:** `undefined` | Configuration options for browser logs. See [configuring logs](#configuring-logs) below. |
 | `session_recording`<br/><br/>**Type:** Object<br/>**Default:** [See here.](https://github.com/PostHog/posthog-js/blob/96fa9339b9c553a1c69ec5db9d282f31a65a1c25/src/posthog-core.js#L1032) | Configuration options for recordings. More details [found here](/docs/session-replay/manual). When `defaults: '2025-11-30'` or later is set, `strictMinimumDuration` is enabled by default, which checks the minimum duration against actual buffer data rather than session duration. |

@@ -37,6 +37,10 @@ Anything that speaks MCP works. We've tested and documented setup for Claude Cod
 
 No, OAuth is the recommended path and works out of the box with the wizard. If your client doesn't support OAuth, you can use a [personal API key](https://app.posthog.com/settings/user-api-keys?preset=mcp_server) with the `MCP Server` preset – see the [API key authentication](#using-an-api-key-instead-of-oauth) section below.
 
+### Can I use more than one PostHog account, organization, or project at the same time?
+
+Yes, but add one MCP connection for each. A single connection signs in as one account and has one active organization and project. See [working with multiple accounts, organizations, or projects](#working-with-multiple-accounts-organizations-or-projects).
+
 ### Can my organization manage MCP access centrally through our IdP?
 
 Yes. If you're on an enterprise plan, you can use [enterprise-managed authorization (ID-JAG)](/docs/model-context-protocol/enterprise-managed-authorization) to control MCP access through your identity provider (Okta, Entra ID, etc.) instead of per-user OAuth or API keys.
@@ -108,6 +112,49 @@ Example for Cursor (add to `.cursor/mcp.json`):
   }
 }
 ```
+
+### Working with multiple accounts, organizations, or projects
+
+One MCP connection signs in as one account and has one active organization and project. To work across more than one, add a separate MCP server entry for each and give it a distinct name. The name is what your agent sees, so make it say which context it points to:
+
+```json
+{
+  "mcpServers": {
+    "posthog-acme-us": {
+      "url": "https://mcp.posthog.com/mcp",
+      "headers": {
+        "Authorization": "Bearer phx_acme_key_here",
+        "x-posthog-project-id": "acme_project_id"
+      }
+    },
+    "posthog-acme-eu": {
+      "url": "https://mcp.posthog.com/mcp",
+      "headers": {
+        "Authorization": "Bearer phx_acme_eu_key_here",
+        "x-posthog-project-id": "acme_eu_project_id"
+      }
+    },
+    "posthog-personal": {
+      "url": "https://mcp.posthog.com/mcp",
+      "headers": {
+        "Authorization": "Bearer phx_personal_key_here"
+      }
+    }
+  }
+}
+```
+
+#### Different accounts or different regions
+
+Use one connection for each account. The MCP server routes to the US or EU region of the account you authenticate with, so an account in each region always needs two connections.
+
+With OAuth, authorize each entry with the correct account. If your client shares one browser session across entries, it is easy to authorize them all as the same account by mistake. A [personal API key](#using-an-api-key-instead-of-oauth) for each entry prevents this, because each key belongs to one account.
+
+#### Different organizations or projects in the same account
+
+The `switch-organization` and `switch-project` MCP tools change the active context inside one connection. This is sufficient for occasional use, but the agent must keep track of where it is, and a wrong assumption can send a write to the wrong project.
+
+If you work across organizations or projects regularly, [pin each connection](#pinning-to-a-specific-organization-or-project) to one of them instead. Pinning also removes the related switch MCP tools, so the agent cannot move the context.
 
 ### Choosing a tool mode
 

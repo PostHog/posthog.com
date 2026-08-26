@@ -11,6 +11,7 @@ import { LogSlider, inverseCurve, sliderCurve } from '../PricingSlider/Slider'
 import { PricingTiers } from '../Plans'
 import ProductAnalyticsTab, { analyticsSliders, getTotalEnhancedPersonsVolume } from './Tabs/ProductAnalytics'
 import ReplayVisionTab from './Tabs/ReplayVision'
+import PostHogDesktopTab from './Tabs/PostHogDesktop'
 import StandaloneAddonsTab from './Tabs/StandaloneAddonsTab'
 import { EXCLUDED_ADDON_TYPES } from '../../../constants/addons'
 import { BROWSE_TOOLS_HANDLES } from 'constants/productNavigation'
@@ -88,6 +89,7 @@ export const Addon = ({ type, name, description, plans, addons, setAddons, volum
 const productTabs = {
     product_analytics: ProductAnalyticsTab,
     replay_vision: ReplayVisionTab,
+    posthog_code: PostHogDesktopTab,
 }
 
 export const Addons = ({ addons, setAddons, volume, activeProduct, analyticsData }) => {
@@ -399,7 +401,10 @@ export default function Tabbed() {
                 <div className="col-span-12 @2xl:col-span-4 md:pr-6 mb-4 md:mb-0">
                     <ul className="list-none m-0 p-0 pb-2 flex flex-row md:flex-col gap-px overflow-x-auto @md:w-auto -mx-4 px-4 @md:px-0 @md:mx-0">
                         {products.map(
-                            ({ name, Icon, cost, color, billingData, handle, categoryName, pricingBadge }, index) => {
+                            (
+                                { name, Icon, cost, color, colorDark, billingData, handle, categoryName, pricingBadge },
+                                index
+                            ) => {
                                 const active = activeTab === index
                                 const addonsPrice = getAddonsCostForProduct(productAddons, billingData)
                                 return (
@@ -413,7 +418,11 @@ export default function Tabbed() {
                                             <div className="flex items-center space-x-2">
                                                 {Icon && (
                                                     <span>
-                                                        <Icon className={`w-5 h-6 text-${color}`} />
+                                                        <Icon
+                                                            className={`w-5 h-6 text-${color}${
+                                                                colorDark ? ` dark:text-${colorDark}` : ''
+                                                            }`}
+                                                        />
                                                     </span>
                                                 )}
                                                 <span className="flex items-center gap-1.5">

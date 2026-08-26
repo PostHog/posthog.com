@@ -192,15 +192,19 @@ The page renders `CalculatorReveal` immediately after this component, still insi
 
 ### `Surfaces`
 
-One line under the ticker — *Used across any of these products: Web, Slack, MCP* — with an icon each and **no links**.
+One line under the ticker — *Used across any of these products: Web, Slack, Desktop, MCP* — with an icon each and **no links**.
 
 **It replaced a whole `SelfDrivingPricing` section** (deleted; see git history for the component). That section explained how self-driving is billed — models at cost plus ~27%, across four surfaces in a table — and it sat between the philosophy note and the FAQ. Two problems: it was the only thing on the page that didn't follow the page's one story (start free, add a card when you outgrow it), so it read as a second pitch at the exact point the page should be finishing; and most visitors will never touch that billing model. The part worth keeping was the *list of surfaces*, which belongs next to the allowances it applies to.
 
 **So it's a footnote to `FreeTierTicker`, not a section.** "Which of these can I use my free tier from?" is a question about the row directly above it.
 
-**Nothing here links out,** deliberately. These are labels on the allowances, not three more destinations — the top of the page has one CTA and this shouldn't compete with it. That also keeps it from turning back into a section.
+**Nothing here links out,** deliberately. These are labels on the allowances, not four more destinations — the top of the page has one CTA and this shouldn't compete with it. That also keeps it from turning back into a section.
 
-Wording follows the [glossary](/manual/glossary)'s taxonomy, where Web, Slack, MCP, CLI, and Code are PostHog's *products* and analytics, replay, flags, and so on are its *tools*. Three of the five are listed because they're the three most people will use; the icons are `IconBrowser` (`@posthog/icons`) plus `IconSlack` and `IconMCP` from `OSIcons`.
+Wording follows the [glossary](/manual/glossary)'s taxonomy, where Web, Slack, MCP, CLI, and Desktop are PostHog's *products* and analytics, replay, flags, and so on are its *tools*. Four of the five are listed; CLI is the one left off.
+
+**Every product listed here has a row in the ticker above it,** and that's the constraint to hold when editing this list. The line answers "which of these can I spend my free tier from?", so a product named here with no allowance in the ticker reads as sharing someone else's — which is exactly wrong for Desktop, whose $20 is its own `posthog_code_credits` balance and not a slice of PostHog AI's 500. Add to `Test/freeTierData.tsx` and this list together, or neither.
+
+Desktop's icon needs `dark:text-brown-dark` alongside `text-brown`: the brown token is near-black and disappears against the dark background. Same pairing `/slack` and `/self-driving` use.
 
 ### `Home/ShamelessCTA` (reused)
 

@@ -9,6 +9,7 @@ import SEO from 'components/seo'
 import {
     SideProjectForm,
     SideProjectGraphic,
+    SideProjectThumbnail,
     findCreatorProfile,
     isAlumniProject,
     normalizeTags,
@@ -76,11 +77,20 @@ const ProjectCard = ({
     onDelete: (projectId: number) => void
     showRole?: boolean
 }) => {
-    const { title, description, projectAuthor, authorGitHub, githubUrl, liveUrl } = project
+    const { title, description, projectAuthor, authorGitHub, githubUrl, liveUrl, projectThumbnail } = project
     // Cards link straight to the project itself; prefer the live app over the repo
     const projectUrl = liveUrl || githubUrl
     const profile = findCreatorProfile(profiles, { projectAuthor, authorGitHub })
     const tags = normalizeTags(project.tags)
+    const identityProps = {
+        title,
+        creatorName: projectAuthor,
+        creatorRole: showRole ? profile?.companyRole : undefined,
+        avatarUrl:
+            profile?.avatar?.formats?.thumbnail?.url ||
+            profile?.avatar?.url ||
+            (authorGitHub ? `https://github.com/${authorGitHub}.png?size=256` : undefined),
+    }
 
     return (
         <article
@@ -117,17 +127,11 @@ const ProjectCard = ({
                 wrapperClassName="flex h-full min-h-0 flex-1 flex-col"
             >
                 <div className="border-b border-primary">
-                    <SideProjectGraphic
-                        title={title}
-                        creatorName={projectAuthor}
-                        creatorRole={showRole ? profile?.companyRole : undefined}
-                        avatarUrl={
-                            profile?.avatar?.formats?.thumbnail?.url ||
-                            profile?.avatar?.url ||
-                            (authorGitHub ? `https://github.com/${authorGitHub}.png?size=256` : undefined)
-                        }
-                        color={profile?.color}
-                    />
+                    {projectThumbnail ? (
+                        <SideProjectThumbnail src={projectThumbnail} {...identityProps} />
+                    ) : (
+                        <SideProjectGraphic {...identityProps} color={profile?.color} />
+                    )}
                 </div>
                 <div className="p-3 pb-3">
                     {description && (
@@ -164,13 +168,29 @@ const ProjectCard = ({
     )
 }
 
-// Newest first by the explicit added date only – undated legacy entries deliberately sort
-// last, alphabetically. Strapi's createdAt is NOT a fallback: after migration it would make
-// every undated seed outrank dated projects with the migration run's timestamp.
-const byMostRecent = (a: SideProject, b: SideProject): number => {
-    const timeA = a.date ? new Date(a.date).getTime() : 0
-    const timeB = b.date ? new Date(b.date).getTime() : 0
-    return timeB - timeA || a.title.localeCompare(b.title)
+// A plain rolling hash keeps near-identical inputs (sequential ids, one-day-apart seeds) in
+// nearly identical order, which defeats a shuffle – the murmur3 finalizer scrambles them apart
+const hashString = (value: string): number => {
+    let hash = 0
+    for (let i = 0; i < value.length; i++) {
+        hash = Math.imul(hash, 31) + value.charCodeAt(i)
+    }
+    hash ^= hash >>> 16
+    hash = Math.imul(hash, 0x85ebca6b)
+    hash ^= hash >>> 13
+    hash = Math.imul(hash, 0xc2b2ae35)
+    hash ^= hash >>> 16
+    return hash
+}
+
+// Shuffle that reseeds daily, keyed on each project's identity (Strapi id, or title for
+// entries not yet migrated) plus today's date: deterministic within a day (stable across
+// re-renders and identical for every visitor) but different tomorrow, so the same cards
+// aren't permanently at the top of the gallery.
+const byDailyRotation = (projects: SideProject[]): SideProject[] => {
+    const daySeed = new Date().toISOString().slice(0, 10)
+    const rotationKey = (project: SideProject) => hashString(daySeed + String(project.id ?? project.title))
+    return [...projects].sort((a, b) => rotationKey(a) - rotationKey(b) || a.title.localeCompare(b.title))
 }
 
 function SideProjectsPage({ location }: { location: { search: string } }): JSX.Element {
@@ -265,7 +285,7 @@ function SideProjectsPage({ location }: { location: { search: string } }): JSX.E
                 current.push(project)
             }
         })
-        return { currentProjects: current.sort(byMostRecent), alumniProjects: alumni.sort(byMostRecent) }
+        return { currentProjects: byDailyRotation(current), alumniProjects: byDailyRotation(alumni) }
     }, [projects, profiles])
 
     // Tags ranked by how many projects use them; one-off tags stay searchable but don't clutter the bar
@@ -455,10 +475,10 @@ function SideProjectsPage({ location }: { location: { search: string } }): JSX.E
                                     {loading
                                         ? 'Loading…'
                                         : hasActiveFilters
-                                          ? `${filteredCurrent.length + filteredAlumni.length} of ${
-                                                projects.length
-                                            } projects`
-                                          : `${projects.length} projects`}
+                                        ? `${filteredCurrent.length + filteredAlumni.length} of ${
+                                              projects.length
+                                          } projects`
+                                        : `${projects.length} projects`}
                                 </span>
                                 {hasActiveFilters && (
                                     <button

@@ -16,6 +16,12 @@ export interface PocketGuideVolume {
     comingSoon?: boolean
 }
 
+/**
+ * Every volume opens the same way: front matter at `pocketGuideOrder: 0`, a 101 at 1. Guides are what
+ * follows. Authors assigning `pocketGuideOrder` in a volume's MDX frontmatter count from here.
+ */
+export const FIRST_GUIDE_BOOK_ORDER = 2
+
 export const POCKET_GUIDE_VOLUMES: PocketGuideVolume[] = [
     {
         id: 'self-driving',
@@ -26,12 +32,26 @@ export const POCKET_GUIDE_VOLUMES: PocketGuideVolume[] = [
         hasStaticPage: true,
     },
     {
-        id: 'data-warehouse',
-        title: 'Data warehouse',
-        description: 'Getting your other systems into PostHog, and asking questions across all of it.',
-        token: 'blue',
+        id: 'ai-observability',
+        title: 'AI Observability',
+        description: 'Tracing every LLM call, scoring what comes back, and seeing what users do with it.',
+        token: 'purple',
         volume: 2,
-        comingSoon: true,
+    },
+    {
+        id: 'context-warehouse',
+        title: 'Context Warehouse',
+        description:
+            'Model revenue, conversion, activation, and usage once, so every dashboard and downstream model reuses the same definition.',
+        token: 'blue',
+        volume: 3,
+    },
+    {
+        id: 'session-replay',
+        title: 'Session replay',
+        description: 'Watch how people actually use your product – or let Replay Vision watch it for you.',
+        token: 'yellow',
+        volume: 4,
     },
 ]
 

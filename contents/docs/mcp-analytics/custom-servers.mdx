@@ -22,7 +22,7 @@ For those servers, use **`PostHogMCP`** instead. It's a subclass of the [`postho
 ```ts
 import { PostHogMCP } from "@posthog/mcp"
 
-const posthog = new PostHogMCP(process.env.POSTHOG_PROJECT_API_KEY, {
+const posthog = new PostHogMCP(process.env.POSTHOG_PROJECT_TOKEN, {
   host: "https://us.i.posthog.com", // or https://eu.i.posthog.com
   // standard posthog-node options apply, e.g. beforeSend, enableExceptionAutocapture
 })
@@ -147,6 +147,8 @@ posthog.flush()  # PostHogMCP is a posthog client — flush/shutdown it yourself
 ```
 
 `PostHogMCP(api_key, missing_capability_tool_name="get_more_tools", mcp_exception_autocapture=True, **posthog_kwargs)` accepts the standard `posthog` client kwargs (e.g. `host`). Set `mcp_exception_autocapture=False` to stop a failed tool call from emitting a `$exception` sibling. As in TypeScript, the wrapping-path hooks (`identify`, `context`, `intent_fallback`, `event_properties`) don't apply here — pass identity and properties on each `capture_*` call.
+
+The `capture_*` methods also take `error_type` (a low-cardinality failure label for `$mcp_error_type`), `client_user_agent`, and `vendor_client` — the same fields documented in the [event reference](/docs/mcp-analytics/events#core-properties).
 
 ### Stateless / multi-pod dispatchers
 

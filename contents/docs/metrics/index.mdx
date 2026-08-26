@@ -1,15 +1,18 @@
 ---
-title: Metrics
+title: Application metrics
 ---
 
-> **Note:** Metrics is in alpha. Setup details, including the ingestion endpoint, may change before general availability.
+> **Note:** Application metrics is in alpha. Setup details, including the ingestion endpoint, may change before general availability.
 
-PostHog Metrics lets you send application and infrastructure metrics (request counts, latencies, queue depths, resource usage) to PostHog and analyze them alongside your [logs](/docs/logs), [traces](/docs/distributed-tracing), and product data.
+**Application metrics** lets you send application and infrastructure metrics (request counts, latencies, queue depths, resource usage) to PostHog and analyze them alongside your [logs](/docs/logs), [traces](/docs/distributed-tracing), and product data.
 
-There are two ways to send metrics:
+We call these *application metrics* to distinguish them from the other kinds of metrics PostHog helps you track — [experiment metrics](/docs/experiments/metrics), [revenue metrics](/docs/revenue-analytics/revenue-metrics), and [usage metrics](/docs/customer-analytics/usage-metrics) measure your product and business, whereas application metrics measure the systems running it.
+
+There are three ways to send metrics:
 
 1. **Already have PostHog installed?** Record metrics directly with the [`posthog.metrics` API](#already-have-posthog-installed-use-posthogmetrics) built into the PostHog SDK, with no extra packages.
 2. **Using OpenTelemetry?** Point any standard OpenTelemetry library or Collector at [PostHog's OTLP endpoint](#set-up-metrics-with-opentelemetry), with no PostHog-specific packages.
+3. **Already exposing Prometheus metrics?** Run the metrics agent with [Docker](/docs/metrics/installation/docker) or [Kubernetes](/docs/metrics/installation/kubernetes) to scrape your existing `/metrics` endpoints, with no code changes.
 
 ## Already have PostHog installed? Use posthog.metrics
 
@@ -162,6 +165,17 @@ service:
     metrics:
       receivers: [otlp]
       exporters: [otlphttp/posthog]
+```
+
+### Already exposing Prometheus metrics?
+
+If your services expose Prometheus `/metrics` endpoints, you don't need to change any code or run your own Collector. Deploy the PostHog metrics agent with [Docker](/docs/metrics/installation/docker) or the [Kubernetes Helm chart](/docs/metrics/installation/kubernetes) and it scrapes your existing endpoints and forwards them to PostHog, exemplars included:
+
+```bash
+docker run -d \
+  -e POSTHOG_API_KEY=<ph_project_token> \
+  -e SCRAPE_TARGETS=your-app:9090 \
+  posthog/metrics-agent:latest
 ```
 
 ## Supported metric types

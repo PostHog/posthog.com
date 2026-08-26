@@ -14,7 +14,7 @@ The real power of the data warehouse is the ability to combine data from multipl
 
 You can join external data on existing PostHog schemas and other external data tables. These joins are saved and interpreted anytime they're accessed on the origin table.
 
-To define a join, go to the [SQL editor](https://app.posthog.com/sql), click the three dots next to your source table, and click **Add join**. Here you define the source table key, joining table, and joining table key as well as how the fields are accessed.
+To define a join, go to the [SQL editor](https://app.posthog.com/sql), click the three dots next to your source table, and click **Add join**. Alternatively, go to the [Data Catalog](https://app.posthog.com/data-catalog) **Relationships** tab and click **New join**. In either case, you define the source table key, joining table, and joining table key as well as how the fields are accessed.
 
 For example, if you import your Stripe data, you can define a join between the PostHog's `events` table's `distinct_id` key and the `stripe_customer` table's `email` key. You can then access the `stripe_customer` table through the `events` table like `SELECT stripe_customer.id FROM events`.
 
@@ -27,9 +27,9 @@ For example, if you import your Stripe data, you can define a join between the P
 
 Once joined, source properties can be used in filters, breakdowns, and [SQL expressions](/docs/sql/expressions).
 
-To edit or delete a table join, click the three dots next to your source table, click **View table schema**, click the three dots next to your joined table, and select **Edit** or **Delete**.
+To edit or delete a table join, click the three dots next to your source table in the SQL editor, click **View table schema**, then click the three dots next to your joined table and select **Edit** or **Delete**. You can also edit or delete joins from the [Data Catalog](https://app.posthog.com/data-catalog) **Relationships** tab by clicking the more menu on any active join row.
 
-Joins can also come from the [semantic layer](/docs/semantic-layer) (alpha): when a human accepts an AI-proposed [table relationship](/docs/semantic-layer/certifications-and-relationships#relationship-proposals), it's promoted to a regular table join.
+Joins can also come from the [semantic layer](/docs/semantic-layer) (beta): when a human accepts an AI-proposed [table relationship](/docs/semantic-layer/certifications-and-relationships#relationship-proposals), it's promoted to a regular table join.
 
 ## Person joins
 
