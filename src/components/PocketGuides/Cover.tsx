@@ -65,7 +65,7 @@ function ComingSoonSash(): JSX.Element {
     )
 }
 
-function CoverBody({ volume, count }: CoverProps): JSX.Element {
+function CoverBody({ volume, count }: Omit<CoverProps, 'placement'>): JSX.Element {
     const Art = VOLUME_ART[volume.id]
     return (
         <Frame token={volume.token}>
