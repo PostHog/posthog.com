@@ -136,7 +136,7 @@ Example – 12M events, 75K recordings, 3M flag requests:
 https://posthog.com/pricing?calculator=product_analytics&product_analytics[volume]=12000000&session_replay[volume]=75000&feature_flags[volume]=3000000
 ```
 
-Append `&utm_source=agent-estimate` to the end of the link, after all volume parameters.
+Append `&utm_campaign=agent-estimate` to the end of the link, after all volume parameters.
 
 **The calculator link is the deliverable.** Everything else in your reply supports it. Present, in this order:
 
