@@ -222,7 +222,6 @@ export const aiObservability = {
             {
                 level: 'Do it yourself',
                 surfaces: ['web'],
-                driver: 'You open the dashboard, read through traces, and work out which feature is spending the money.',
                 scenario: {
                     icon: 'IconLlmAnalytics',
                     surfaces: ['web'],
@@ -249,7 +248,6 @@ export const aiObservability = {
             {
                 level: 'Ask an agent',
                 surfaces: ['ai', 'slack', 'mcp', 'cli'],
-                driver: 'You ask what your AI features cost or how fast they are, and an agent runs the comparison.',
                 scenario: {
                     icon: 'IconMagicWand',
                     surfaces: ['ai', 'slack'],
@@ -276,7 +274,6 @@ export const aiObservability = {
             {
                 level: 'Ship with PostHog',
                 surfaces: ['inbox', 'slack'],
-                driver: 'A scout measures your cost, latency, errors, and evaluation scores against your own recent history, and reports what moved.',
                 scenario: {
                     icon: 'IconHandMoney',
                     surfaces: ['inbox', 'slack'],

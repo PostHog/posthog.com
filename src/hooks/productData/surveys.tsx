@@ -200,7 +200,6 @@ export const surveys = {
             {
                 level: 'Do it yourself',
                 surfaces: ['web'],
-                driver: 'You write the questions, choose who sees them, and read the answers yourself.',
                 scenario: {
                     icon: 'IconMessage',
                     surfaces: ['web'],
@@ -227,7 +226,6 @@ export const surveys = {
             {
                 level: 'Ask an agent',
                 surfaces: ['ai', 'slack', 'mcp', 'cli'],
-                driver: 'You describe the survey you want, and an agent drafts it and summarizes what came back.',
                 scenario: {
                     icon: 'IconMagicWand',
                     surfaces: ['ai', 'slack'],
@@ -254,7 +252,6 @@ export const surveys = {
             {
                 level: 'Ship with PostHog',
                 surfaces: ['inbox', 'slack'],
-                driver: 'A scout reads your responses on a schedule and flags what it finds, often with a pull request attached.',
                 scenario: {
                     icon: 'IconPullRequest',
                     surfaces: ['inbox', 'slack'],

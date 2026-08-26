@@ -209,13 +209,12 @@ export const errorTracking = {
         ],
     },
     useCaseRamp: {
-        intro: 'Error tracking works at three levels. You can triage exceptions yourself, ask an agent to investigate one for you, or let PostHog work proactively with your data.',
+        intro: 'Error Tracking works at three levels. You can triage exceptions yourself, ask an agent to investigate one for you, or let PostHog work proactively with your data.',
         scenario: 'A deploy starts throwing an error nobody has seen before',
         columns: [
             {
                 level: 'Do it yourself',
                 surfaces: ['web'],
-                driver: 'You watch the issue list, decide which exceptions are worth your time, and read the stack traces yourself.',
                 scenario: {
                     icon: 'IconBug',
                     surfaces: ['web'],
@@ -243,7 +242,6 @@ export const errorTracking = {
             {
                 level: 'Ask an agent',
                 surfaces: ['ai', 'slack', 'mcp', 'cli'],
-                driver: 'You describe the error you care about, and an agent finds it, explains the cause, and drafts the fix.',
                 scenario: {
                     icon: 'IconMagicWand',
                     surfaces: ['mcp', 'slack'],
@@ -270,7 +268,6 @@ export const errorTracking = {
             {
                 level: 'Ship with PostHog',
                 surfaces: ['inbox', 'desktop'],
-                driver: 'Error tracking feeds the loop directly: every exception is a signal, with no scout needed to spot it. When the stack trace points at one file, PostHog writes the fix.',
                 scenario: {
                     icon: 'IconPullRequest',
                     surfaces: ['inbox', 'desktop'],

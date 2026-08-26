@@ -328,13 +328,12 @@ export const sessionReplay = {
         ],
     },
     useCaseRamp: {
-        intro: 'Session replay works at three levels. You can watch recordings yourself, ask an agent to find and summarize them for you, or let PostHog work proactively with your data.',
+        intro: 'Session Replay works at three levels. You can watch recordings yourself, ask an agent to find and summarize them for you, or let PostHog work proactively with your data.',
         scenario: 'Users keep clicking the same button and nothing happens',
         columns: [
             {
                 level: 'Do it yourself',
                 surfaces: ['web'],
-                driver: "You pick which recordings to watch, and you're the one who spots the problem.",
                 scenario: {
                     icon: 'IconRewindPlay',
                     surfaces: ['web'],
@@ -361,7 +360,6 @@ export const sessionReplay = {
             {
                 level: 'Ask an agent',
                 surfaces: ['ai', 'slack', 'mcp', 'cli'],
-                driver: "You describe the session you're looking for, and an agent finds it and tells you what happened in it.",
                 scenario: {
                     icon: 'IconMagicWand',
                     surfaces: ['ai', 'slack'],
@@ -388,7 +386,6 @@ export const sessionReplay = {
             {
                 level: 'Ship with PostHog',
                 surfaces: ['inbox', 'slack'],
-                driver: 'A scout watches for friction or weird user behavior, and reports it before anyone files a ticket.',
                 scenario: {
                     icon: 'IconPullRequest',
                     surfaces: ['inbox', 'slack'],

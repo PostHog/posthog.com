@@ -114,12 +114,6 @@ interface RampColumn {
     surfaces?: string[]
     /** Overrides the badge inherited from `levelMode`. */
     mode?: string
-    /**
-     * Who's driving and what kind of work you'd be doing at this level, in this
-     * tool's terms. Tool-specific by design – there's no generic fallback, because
-     * a shared sentence ends up describing the wrong tool's work.
-     */
-    driver?: string
     /** The running scenario as it plays out at this level. */
     scenario?: RampScenario
     /** What this level means for the ramp – usually two cards. */
@@ -144,10 +138,8 @@ interface UseCaseRampData {
 }
 
 /**
- * How autonomous each level is, keyed by `level`. Only the badge lives here –
- * it's the one thing that's identical on every tool page. The who's-driving
- * sentence is per-tool `driver` data, because it describes the work you'd be
- * doing, which differs by tool.
+ * How autonomous each level is, keyed by `level`. Combined with the level's
+ * primary surface into a single label, e.g. "Hands-on with PostHog Web".
  */
 const levelMode: Record<string, string> = {
     'Do it yourself': 'Hands-on',
@@ -245,88 +237,91 @@ const UseCaseRamp = ({ id, productData }: SectionComponentProps): JSX.Element | 
                         )
                     })}
                 </Tabs.List>
-                {columns.map((column) => (
-                    <Tabs.Content
-                        key={column.level}
-                        value={slugify(column.level)}
-                        /*
-                         * No display utility here. Radix keeps a visited panel mounted as
-                         * `<div hidden>` with empty children, and `hidden` only works through the
-                         * UA rule `[hidden] { display: none }` – an author `display: flex` would
-                         * beat it and leave an empty padded band stacking up above the live panel.
-                         * Layout goes on the inner wrapper instead.
-                         */
-                        className="rounded-b-md rounded-tr-md bg-light p-4 outline-none @md/reader-content:p-6 dark:bg-dark"
-                    >
-                        <div className="flex flex-col gap-5">
-                            <div className="flex flex-col gap-2">
-                                <div className="flex flex-wrap items-center gap-x-3 gap-y-1">
+                {columns.map((column) => {
+                    const primary = resolveSurfaces(column.surfaces)[0]
+                    const mode = column.mode ?? levelMode[column.level]
+                    return (
+                        <Tabs.Content
+                            key={column.level}
+                            value={slugify(column.level)}
+                            /*
+                             * No display utility here. Radix keeps a visited panel mounted as
+                             * `<div hidden>` with empty children, and `hidden` only works through the
+                             * UA rule `[hidden] { display: none }` – an author `display: flex` would
+                             * beat it and leave an empty padded band stacking up above the live panel.
+                             * Layout goes on the inner wrapper instead.
+                             */
+                            className="rounded-b-md rounded-tr-md bg-light p-4 outline-none @md/reader-content:p-6 dark:bg-dark"
+                        >
+                            <div className="flex flex-col gap-5">
+                                <div className="flex flex-col gap-2">
                                     <h3 className="m-0 text-xl font-bold text-primary @md/reader-content:text-2xl">
                                         {column.level}
                                     </h3>
-                                    {(column.mode ?? levelMode[column.level]) && (
-                                        <span className="rounded-sm bg-highlight px-1.5 py-0.5 text-xs font-bold uppercase tracking-wide text-red dark:text-yellow">
-                                            {column.mode ?? levelMode[column.level]}
+                                    {mode && (
+                                        <span className="inline-flex items-center gap-1.5 self-start rounded-sm bg-highlight px-1.5 py-0.5 text-xs font-bold uppercase tracking-wide text-red dark:text-yellow">
+                                            {primary && <primary.Icon className="size-3.5 shrink-0" />}
+                                            {mode}
+                                            {primary && ` with ${primary.name}`}
                                         </span>
                                     )}
                                 </div>
-                                {column.driver && (
-                                    <p className="m-0 text-[15px] leading-relaxed text-secondary">{column.driver}</p>
-                                )}
-                            </div>
-                            {column.scenario && (
-                                <div className="flex flex-col rounded-md border border-primary bg-accent p-3 @md/reader-content:p-4">
-                                    {/*
-                                     * Same title on every tab (from `ramp.scenario`) – the repetition is the point.
-                                     * The "Example:" label makes clear this is one scenario among many, not the
-                                     * only thing this level is good for.
-                                     */}
-                                    <div className="mb-1 flex flex-wrap items-start justify-between gap-x-3 gap-y-1.5">
-                                        <p className="m-0 flex items-center gap-1.5 text-sm font-bold text-primary">
-                                            <UseCaseIcon name={column.scenario.icon} color={productData?.color} />
-                                            <span className="font-normal text-secondary">Example:</span>{' '}
-                                            {ramp?.scenario}
-                                        </p>
-                                        <SurfaceTags keys={column.scenario.surfaces} />
+                                {column.scenario && (
+                                    <div className="flex flex-col rounded-md border border-primary bg-accent p-3 @md/reader-content:p-4">
+                                        {/*
+                                         * Same title on every tab (from `ramp.scenario`) – the repetition is the point.
+                                         * The "Example:" label makes clear this is one scenario among many, not the
+                                         * only thing this level is good for.
+                                         */}
+                                        <div className="mb-1 flex flex-wrap items-start justify-between gap-x-3 gap-y-1.5">
+                                            <p className="m-0 flex items-center gap-1.5 text-sm font-bold text-primary">
+                                                <UseCaseIcon name={column.scenario.icon} color={productData?.color} />
+                                                <span className="font-normal text-secondary">Example:</span>{' '}
+                                                {ramp?.scenario}
+                                            </p>
+                                            <SurfaceTags keys={column.scenario.surfaces} />
+                                        </div>
+                                        {/*
+                                         * `list-decimal` sits on the li, not the ol: the `not-prose` layer sets
+                                         * `list-style-type: none` directly on `.not-prose ol li`, which beats a
+                                         * value inherited from the ol.
+                                         */}
+                                        <ol className="m-0 pl-5 text-[13px] leading-snug text-secondary">
+                                            {column.scenario.steps.map((step) => (
+                                                <li key={step} className="mt-1 list-decimal">
+                                                    {step}
+                                                </li>
+                                            ))}
+                                        </ol>
+                                        {column.scenario.outcome && (
+                                            <p className="m-0 mt-3 border-t border-primary pt-2 text-[13px] font-semibold italic text-primary">
+                                                {column.scenario.outcome}
+                                            </p>
+                                        )}
                                     </div>
-                                    {/*
-                                     * `list-decimal` sits on the li, not the ol: the `not-prose` layer sets
-                                     * `list-style-type: none` directly on `.not-prose ol li`, which beats a
-                                     * value inherited from the ol.
-                                     */}
-                                    <ol className="m-0 pl-5 text-[13px] leading-snug text-secondary">
-                                        {column.scenario.steps.map((step) => (
-                                            <li key={step} className="mt-1 list-decimal">
-                                                {step}
+                                )}
+                                {!!column.points?.length && (
+                                    <ul className="m-0 grid list-none gap-3 p-0 @md/reader-content:grid-cols-2">
+                                        {column.points.map((point) => (
+                                            <li
+                                                key={point.title}
+                                                className="rounded-md border border-primary bg-accent p-3 @md/reader-content:p-4"
+                                            >
+                                                <p className="m-0 mb-1 flex items-center gap-1.5 text-sm font-bold text-primary">
+                                                    <UseCaseIcon name={point.icon} color={productData?.color} />
+                                                    {point.title}
+                                                </p>
+                                                <p className="m-0 text-[13px] leading-snug text-secondary">
+                                                    {point.body}
+                                                </p>
                                             </li>
                                         ))}
-                                    </ol>
-                                    {column.scenario.outcome && (
-                                        <p className="m-0 mt-3 border-t border-primary pt-2 text-[13px] font-semibold italic text-primary">
-                                            {column.scenario.outcome}
-                                        </p>
-                                    )}
-                                </div>
-                            )}
-                            {!!column.points?.length && (
-                                <ul className="m-0 grid list-none gap-3 p-0 @md/reader-content:grid-cols-2">
-                                    {column.points.map((point) => (
-                                        <li
-                                            key={point.title}
-                                            className="rounded-md border border-primary bg-accent p-3 @md/reader-content:p-4"
-                                        >
-                                            <p className="m-0 mb-1 flex items-center gap-1.5 text-sm font-bold text-primary">
-                                                <UseCaseIcon name={point.icon} color={productData?.color} />
-                                                {point.title}
-                                            </p>
-                                            <p className="m-0 text-[13px] leading-snug text-secondary">{point.body}</p>
-                                        </li>
-                                    ))}
-                                </ul>
-                            )}
-                        </div>
-                    </Tabs.Content>
-                ))}
+                                    </ul>
+                                )}
+                            </div>
+                        </Tabs.Content>
+                    )
+                })}
             </Tabs.Root>
         </section>
     )

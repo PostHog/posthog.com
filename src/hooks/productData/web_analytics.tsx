@@ -218,13 +218,12 @@ export const webAnalytics = {
         ],
     },
     useCaseRamp: {
-        intro: 'Web analytics works at three levels. You can read the dashboard yourself, ask an agent about your traffic, or let PostHog work proactively with your data.',
+        intro: 'Web Analytics works at three levels. You can read the dashboard yourself, ask an agent about your traffic, or let PostHog work proactively with your data.',
         scenario: 'Referral traffic suddenly drops',
         columns: [
             {
                 level: 'Do it yourself',
                 surfaces: ['web'],
-                driver: 'You open the dashboard and do the watching yourself.',
                 scenario: {
                     icon: 'IconGlobe',
                     surfaces: ['web'],
@@ -251,7 +250,6 @@ export const webAnalytics = {
             {
                 level: 'Ask an agent',
                 surfaces: ['ai', 'slack', 'mcp', 'cli'],
-                driver: 'You ask about your traffic in plain English, and an agent runs the numbers.',
                 scenario: {
                     icon: 'IconMagicWand',
                     surfaces: ['ai', 'slack'],
@@ -278,7 +276,6 @@ export const webAnalytics = {
             {
                 level: 'Ship with PostHog',
                 surfaces: ['inbox', 'slack'],
-                driver: 'A scout scans your traffic on a schedule and flags what it finds. It opens a pull request when the cause is on your site.',
                 scenario: {
                     icon: 'IconPulse',
                     surfaces: ['inbox', 'slack'],

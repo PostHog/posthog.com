@@ -219,13 +219,12 @@ export const featureFlags = {
         ],
     },
     useCaseRamp: {
-        intro: 'Feature flags work at three levels. You can create and roll out flags yourself, ask an agent to do it for you, or let PostHog work proactively with your data.',
+        intro: 'Feature Flags work at three levels. You can create and roll out flags yourself, ask an agent to do it for you, or let PostHog work proactively with your data.',
         scenario: 'Shipping a risky checkout rewrite',
         columns: [
             {
                 level: 'Do it yourself',
                 surfaces: ['web'],
-                driver: 'You create the flags, decide who sees each change, and flip the switches yourself.',
                 scenario: {
                     icon: 'IconToggle',
                     surfaces: ['web'],
@@ -252,7 +251,6 @@ export const featureFlags = {
             {
                 level: 'Ask an agent',
                 surfaces: ['ai', 'slack', 'mcp', 'cli'],
-                driver: 'You describe the flag or rollout you want, and an agent makes the change.',
                 scenario: {
                     icon: 'IconMagicWand',
                     surfaces: ['mcp', 'slack'],
@@ -279,7 +277,6 @@ export const featureFlags = {
             {
                 level: 'Ship with PostHog',
                 surfaces: ['inbox', 'desktop'],
-                driver: 'A scout audits your flag roster on a schedule and flags what it finds, often with a pull request attached.',
                 scenario: {
                     icon: 'IconPullRequest',
                     surfaces: ['inbox', 'desktop'],

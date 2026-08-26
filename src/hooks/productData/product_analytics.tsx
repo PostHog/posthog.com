@@ -218,13 +218,12 @@ export const productAnalytics = {
         ],
     },
     useCaseRamp: {
-        intro: 'Product analytics works at three levels. You can build funnels and dashboards yourself, ask an agent to build them for you, or let PostHog work proactively with your data.',
+        intro: 'Product Analytics works at three levels. You can build funnels and dashboards yourself, ask an agent to build them for you, or let PostHog work proactively with your data.',
         scenario: 'Fewer people are finishing signup than last week',
         columns: [
             {
                 level: 'Do it yourself',
                 surfaces: ['web'],
-                driver: "You build the funnels and dashboards, and you're the one who checks them.",
                 scenario: {
                     icon: 'IconFunnels',
                     surfaces: ['web'],
@@ -251,7 +250,6 @@ export const productAnalytics = {
             {
                 level: 'Ask an agent',
                 surfaces: ['ai', 'slack', 'mcp', 'cli'],
-                driver: 'You describe what you want to know, and an agent runs the query for you.',
                 scenario: {
                     icon: 'IconMagicWand',
                     surfaces: ['ai', 'slack'],
@@ -278,7 +276,6 @@ export const productAnalytics = {
             {
                 level: 'Ship with PostHog',
                 surfaces: ['inbox', 'slack'],
-                driver: 'Scouts scan your analytics on a schedule and flag what they find, often with a pull request attached.',
                 scenario: {
                     icon: 'IconPullRequest',
                     surfaces: ['inbox', 'slack'],

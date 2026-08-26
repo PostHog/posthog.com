@@ -235,7 +235,6 @@ export const experiments = {
             {
                 level: 'Do it yourself',
                 surfaces: ['web'],
-                driver: 'You set the test up, ship the variant behind a flag, and call the winner yourself.',
                 scenario: {
                     icon: 'IconSplitTesting',
                     surfaces: ['web'],
@@ -262,7 +261,6 @@ export const experiments = {
             {
                 level: 'Ask an agent',
                 surfaces: ['ai', 'slack', 'mcp', 'cli'],
-                driver: 'You describe the test you want, and an agent scaffolds it and reports the results.',
                 scenario: {
                     icon: 'IconMagicWand',
                     surfaces: ['ai', 'slack'],
@@ -289,7 +287,6 @@ export const experiments = {
             {
                 level: 'Ship with PostHog',
                 surfaces: ['inbox', 'desktop'],
-                driver: 'A scout checks your running tests on a schedule and flags what it finds before you trust a bad result.',
                 scenario: {
                     icon: 'IconGraph',
                     surfaces: ['inbox', 'desktop'],
