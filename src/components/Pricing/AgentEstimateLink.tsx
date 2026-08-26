@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { IconCheck, IconCopy } from '@posthog/icons'
 import OSButton from 'components/OSButton'
+import { IconClaudeCode, IconOpenAI } from 'components/OSIcons'
 import { Popover } from 'components/RadixUI/Popover'
 import usePostHog from 'hooks/usePostHog'
 
@@ -10,8 +11,18 @@ const POPOVER_TEXT = `Your assistant reads your current tool's usage and works o
 // Both assistants read `?q=` as an opening message. The prompt is ~330 characters, well inside
 // what either accepts in a URL.
 const ASSISTANTS = [
-    { provider: 'chatgpt', label: 'Open in ChatGPT', url: `https://chatgpt.com/?q=${encodeURIComponent(PROMPT)}` },
-    { provider: 'claude', label: 'Open in Claude', url: `https://claude.ai/new?q=${encodeURIComponent(PROMPT)}` },
+    {
+        provider: 'chatgpt' as const,
+        label: 'Open in ChatGPT',
+        Icon: IconOpenAI,
+        url: `https://chatgpt.com/?q=${encodeURIComponent(PROMPT)}`,
+    },
+    {
+        provider: 'claude' as const,
+        label: 'Open in Claude',
+        Icon: IconClaudeCode,
+        url: `https://claude.ai/new?q=${encodeURIComponent(PROMPT)}`,
+    },
 ]
 
 /** Matches the inline link treatment used across the pricing page. */
@@ -80,33 +91,36 @@ export default function AgentEstimateLink({
         >
             <div className="p-2">
                 <p className="text-[13px] text-secondary mt-0 mb-3">{popoverText}</p>
-                <div className="flex flex-col gap-2">
-                    {ASSISTANTS.map(({ provider, label: assistant, url }) => (
-                        <OSButton
-                            key={provider}
-                            asLink
-                            external
-                            to={url}
-                            variant="primary"
-                            size="md"
-                            width="full"
-                            onClick={() => captureInteraction(provider as 'chatgpt' | 'claude')}
-                        >
-                            {assistant}
-                        </OSButton>
-                    ))}
+
+                <div className="flex items-center justify-between gap-1 border-t border-secondary pt-2">
                     <OSButton
                         onClick={() => {
                             copy()
                             captureInteraction('copy')
                         }}
                         variant="secondary"
-                        size="md"
-                        width="full"
+                        size="sm"
                         icon={copied ? <IconCheck /> : <IconCopy />}
                     >
                         {copied ? 'Copied!' : 'Copy prompt'}
                     </OSButton>
+                    <div className="flex items-center gap-1">
+                        {ASSISTANTS.map(({ provider, label: assistant, url, Icon }) => (
+                            <OSButton
+                                key={provider}
+                                asLink
+                                external
+                                hideExternalIcon
+                                to={url}
+                                size="md"
+                                icon={<Icon />}
+                                tooltip={assistant}
+                                tooltipSide="bottom"
+                                aria-label={assistant}
+                                onClick={() => captureInteraction(provider)}
+                            />
+                        ))}
+                    </div>
                 </div>
             </div>
         </Popover>

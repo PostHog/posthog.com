@@ -37,6 +37,7 @@ interface OSButtonProps extends Omit<React.ButtonHTMLAttributes<HTMLButtonElemen
     iconClassName?: string
     tooltip?: string | React.ReactNode
     tooltipDelay?: number
+    tooltipSide?: 'top' | 'right' | 'bottom' | 'left'
     label?: string
     chip?: string
     chipColor?: string
@@ -66,6 +67,7 @@ export default function OSButton({
     iconClassName,
     tooltip,
     tooltipDelay = 0,
+    tooltipSide = 'top',
     label,
     chip,
     chipColor,
@@ -284,7 +286,7 @@ export default function OSButton({
     )
 
     return tooltip ? (
-        <Tooltip delay={tooltipDelay} sideOffset={tooltipSideOffset[size]} trigger={buttonElement}>
+        <Tooltip delay={tooltipDelay} side={tooltipSide} sideOffset={tooltipSideOffset[size]} trigger={buttonElement}>
             {tooltip}
         </Tooltip>
     ) : (
