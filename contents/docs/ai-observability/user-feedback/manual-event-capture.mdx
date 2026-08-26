@@ -35,7 +35,7 @@ While not required, we recommend emitting `survey shown` events when a user sees
 
 ## Step 2: Collect responses
 
-For a multi-question survey, send one `survey sent` event per question as the user answers, and give every event the same `$survey_submission_id`. Mark the last event with `$survey_completed: true`.
+For a multi-question survey, send one `survey sent` event per question as answers come in, and give every event the same `$survey_submission_id`. Mark the last event with `$survey_completed: true`.
 
 > **Important:** PostHog displays the completed event as the response for a submission, so that final event must include *every* answer collected so far, not just the current question's. If an earlier question's `$survey_response_{questionId}` property is missing from the completed event, that answer won't show up in the response or the question breakdown. The example below shows the pattern.
 
@@ -75,7 +75,7 @@ const submissionId = crypto.randomUUID()
 // User clicked "thumbs down"
 posthog.capture('survey sent', {
   $survey_id: surveyId,
-  [`$survey_response_${firstQuestionId}`]: 1, // 1 = thumbs up, 2 = thumbs down
+  [`$survey_response_${firstQuestionId}`]: 2, // 1 = thumbs up, 2 = thumbs down
   $ai_trace_id: traceId,
   $survey_submission_id: submissionId,
   $survey_completed: false,
@@ -86,7 +86,7 @@ posthog.capture('survey sent', {
 // alongside the follow-up text, so the thumbs rating still shows.
 posthog.capture('survey sent', {
   $survey_id: surveyId,
-  [`$survey_response_${firstQuestionId}`]: 1, // re-send the thumbs response
+  [`$survey_response_${firstQuestionId}`]: 2, // re-send the thumbs response
   [`$survey_response_${secondQuestionId}`]: 'the AI hallucinated hedgehogs everywhere',
   $ai_trace_id: traceId,
   $survey_submission_id: submissionId, // must match the previous event's $survey_submission_id
