@@ -141,14 +141,23 @@ export interface PlatformInstallProps {
     selfDriving?: boolean
     /** Escape hatch to append any other subcommand to the command (display + copy). */
     command?: string
+    /**
+     * Inline only: state the entire command yourself instead of having it built. Shown and copied
+     * verbatim, so `-y`/`@latest` are not added and `command`/`selfDriving` are ignored.
+     */
+    fullCommand?: string
+    /** Clipboard override, if it should differ from what's displayed. */
+    copyCommand?: string
     /** Inline only: hide the "Learn more" tab and fully round the button. */
     slim?: boolean
     /** Inline only: bordered button style. */
     bordered?: boolean
     /** Inline only: "Learn more" link target (default `/wizard`). */
     secondaryTo?: string
-    /** Copy callback (inline). */
+    /** Fired when the main command is copied, in either variant. */
     onCopy?: () => void
+    /** Fired when the schema's `secondaryAction` link is clicked. Card only. */
+    onSecondaryAction?: () => void
 }
 
 export default function PlatformInstall({
@@ -157,10 +166,13 @@ export default function PlatformInstall({
     variant = 'card',
     selfDriving = false,
     command,
+    fullCommand,
+    copyCommand: copyCommandOverride,
     slim = false,
     bordered = false,
     secondaryTo,
     onCopy,
+    onSecondaryAction,
 }: PlatformInstallProps): JSX.Element {
     const [selectedId, setSelectedId] = useState<string | null>(null)
     const [lastSelected, setLastSelected] = useState<Platform | null>(null)
@@ -189,7 +201,7 @@ export default function PlatformInstall({
     // Inline variant: the bare command button (consolidated WizardCommand look). Builds the command
     // from flags via the shared builder so display/copy semantics can never drift from the card.
     if (variant === 'inline') {
-        const inline = buildWizardCommand({ subcommand })
+        const inline = buildWizardCommand({ subcommand, fullCommand, copyOverride: copyCommandOverride })
         return (
             <InlineCommand
                 displayCommand={inline.displayCommand}
@@ -251,6 +263,7 @@ export default function PlatformInstall({
                         <Link
                             to={schema.secondaryAction.to}
                             state={schema.secondaryAction.state}
+                            onClick={onSecondaryAction}
                             className="inline-flex items-center gap-0.5 text-sm text-secondary hover:text-primary whitespace-nowrap"
                         >
                             {schema.secondaryAction.label}
@@ -259,7 +272,7 @@ export default function PlatformInstall({
                     ) : null}
                 </div>
 
-                <CopyableCommand command={displayCommand} copyCommand={copyCommand} animate />
+                <CopyableCommand command={displayCommand} copyCommand={copyCommand} animate onCopy={onCopy} />
 
                 {schema.supports ? <div className="text-sm text-secondary">{schema.supports}</div> : null}
             </div>

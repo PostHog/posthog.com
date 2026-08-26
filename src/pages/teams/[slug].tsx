@@ -1,7 +1,7 @@
 import React, { useState, useRef, useMemo, useEffect } from 'react'
 import { graphql, useStaticQuery, navigate } from 'gatsby'
 import { useUser } from 'hooks/useUser'
-import { IconPencil, IconInfo, IconX, IconCrown, IconShieldLock } from '@posthog/icons'
+import { IconPencil, IconInfo, IconX, IconCrown, IconShieldLock, IconArchive } from '@posthog/icons'
 import dayjs from 'dayjs'
 import OSButton from 'components/OSButton'
 import ReaderView from 'components/ReaderView'
@@ -165,6 +165,7 @@ export default function TeamPage(props: TeamPageProps) {
         leadProfiles,
         teamImage,
         miniCrest,
+        slackChannel,
     } = (team as any)?.attributes || {}
 
     const data = useStaticQuery(graphql`
@@ -327,6 +328,7 @@ export default function TeamPage(props: TeamPageProps) {
             teamLeads: team?.attributes?.leadProfiles?.data || [],
             miniCrest: miniCrest?.data ? { file: null, objectURL: miniCrest?.data?.attributes?.url } : undefined,
             spiritAnimal: team?.attributes?.spiritAnimal,
+            slackChannel: slackChannel ?? '',
         },
         onSubmit: async ({
             name,
@@ -340,6 +342,7 @@ export default function TeamPage(props: TeamPageProps) {
             teamLeads,
             miniCrest,
             spiritAnimal,
+            slackChannel: submittedSlackChannel,
             ...other
         }) => {
             const jwt = await getJwt()
@@ -387,6 +390,7 @@ export default function TeamPage(props: TeamPageProps) {
                 ...(teamMembers ? { profiles: teamMembers.map(({ id }: any) => ({ id })) } : {}),
                 ...(teamLeads ? { leadProfiles: teamLeads.map(({ id }: any) => ({ id })) } : {}),
                 ...(uploadedMiniCrestImage ? { miniCrest: uploadedMiniCrestImage.id } : {}),
+                slackChannel: submittedSlackChannel.trim() || null,
             }
             if (!team) {
                 await createTeam(updatedTeam)
@@ -490,6 +494,31 @@ export default function TeamPage(props: TeamPageProps) {
         setEditing(false)
     }
 
+    const publishedAt = (team as any)?.attributes?.publishedAt
+
+    const handleUnpublishTeam = async () => {
+        if (!(team as any)?.id || !publishedAt) return
+        const confirmed = window.confirm(
+            'Unpublishing will remove this team from the site on the next build. You can republish it later. No data will be lost.'
+        )
+        if (!confirmed) return
+
+        await updateTeam({ publishedAt: null })
+        addToast({
+            title: 'Team unpublished',
+            description: 'This change will appear on the next build.',
+        })
+    }
+
+    const handlePublishTeam = async () => {
+        if (!(team as any)?.id || publishedAt) return
+        await updateTeam({ publishedAt: new Date().toISOString() })
+        addToast({
+            title: 'Team published',
+            description: 'This change will appear on the next build.',
+        })
+    }
+
     // Data calculations
     const teamLength = profiles?.data?.length
     const pineapplePercentage =
@@ -560,18 +589,34 @@ export default function TeamPage(props: TeamPageProps) {
     const editButton = isModerator ? (
         <>
             {!editing && (
-                <OSButton
-                    size="md"
-                    tooltip={
-                        <>
-                            <IconShieldLock className="size-5 relative top-[-2px] inline-block text-secondary" /> Edit
-                            team details
-                        </>
-                    }
-                    tooltipDelay={0}
-                    icon={<IconPencil />}
-                    onClick={() => setEditing(true)}
-                />
+                <>
+                    <OSButton
+                        size="md"
+                        tooltip={
+                            <>
+                                <IconShieldLock className="size-5 relative top-[-2px] inline-block text-secondary" />{' '}
+                                Edit team details
+                            </>
+                        }
+                        tooltipDelay={0}
+                        icon={<IconPencil />}
+                        onClick={() => setEditing(true)}
+                    />
+                    {(team as any)?.id &&
+                        (publishedAt ? (
+                            <Tooltip
+                                trigger={<OSButton size="md" icon={<IconArchive />} onClick={handleUnpublishTeam} />}
+                                delay={0}
+                            >
+                                <IconShieldLock className="size-6 inline-block relative -top-px text-secondary" />{' '}
+                                Unpublish team
+                            </Tooltip>
+                        ) : (
+                            <OSButton size="md" variant="primary" onClick={handlePublishTeam}>
+                                Publish
+                            </OSButton>
+                        ))}
+                </>
             )}
         </>
     ) : null
@@ -636,6 +681,31 @@ export default function TeamPage(props: TeamPageProps) {
             >
                 {/* <DebugContainerQuery />
                 <DebugContainerQuery name="reader-content" /> */}
+
+                {editing && isModerator && (
+                    <div className="not-prose mb-8">
+                        <Fieldset legend="Community question alerts">
+                            <label htmlFor="slackChannel" className="text-sm opacity-75 mb-1">
+                                New questions in this team's subscribed topics get posted to this Slack channel. Use the
+                                channel ID (in Slack: channel name → About → bottom of the panel), not the #name. Leave
+                                blank to stop notifications. Manage which topics this team subscribes to on{' '}
+                                <Link to="/community/alerts" state={{ newWindow: true }}>
+                                    /community/alerts
+                                </Link>
+                                .
+                            </label>
+                            <input
+                                id="slackChannel"
+                                name="slackChannel"
+                                value={values.slackChannel}
+                                onChange={handleChange}
+                                onBlur={handleBlur}
+                                placeholder="C0123ABCDEF"
+                                className="w-full max-w-xs p-2 text-[15px] rounded-md bg-white dark:bg-accent-dark border border-input"
+                            />
+                        </Fieldset>
+                    </div>
+                )}
 
                 <div className="not-prose grid @lg/reader-content:grid-cols-2 gap-8 mb-8">
                     {heightToHedgehogs > 0 && (

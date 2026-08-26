@@ -12,10 +12,6 @@ export const DeuplicateAsStaticCohortDark = "https://res.cloudinary.com/dmukukwp
 
 This page covers troubleshooting for Feature Flags. For setup, see the [installation guides](/docs/feature-flags/installation).
 
-## Have a question? Ask PostHog AI
-
-<AskAIInput placeholder="Type your question and hit enter..." />
-
 ## Why is my feature flag not working as expected?
 
 Here's a list of suggestions to troubleshoot your flag:
@@ -119,13 +115,15 @@ posthog.capture(
 )
 ```
 
-If you plan to call the flag immediately after the event, you will likely need to [set the property for the flag manually](/docs/libraries/js/features#overriding-server-properties) with `setPersonPropertiesForFlags()`.
+If you plan to call the flag immediately after the event, you will likely need to [set the property for the flag manually](/docs/libraries/js/usage#overriding-server-properties) with `setPersonPropertiesForFlags()`.
 
 ```js
 posthog.setPersonPropertiesForFlags({
   business_industry: 'finance'
 })
 ```
+
+[`setPersonProperties()`](/docs/feature-flags/property-overrides#from-setpersonproperties-calls) does both in one call: it persists the property on the person and caches it for flag evaluation. Use `setPersonPropertiesForFlags()` when you don't want to create a person profile for the user.
 
 
 
@@ -152,7 +150,7 @@ This occurs because the `in` and `not_in` operators are reserved for **cohort pr
 
 ### What operators should I use instead?
 
-For person or group properties, use any of the [string, numeric, presence, or semver operators](/docs/data/property-filters). For example: `exact`, `contains`, `regex`, `is set`, or any of the semver operators for version-based targeting.
+For person or group properties, use any of the [string, numeric, presence, or semver operators](/docs/data/property-filters). For example: `exact`, `contains`, `starts with`, `ends with`, `regex`, `is set`, or any of the semver operators for version-based targeting.
 
 For cohort targeting, use the cohort property type with `in` or `not_in` operators to target users who are or aren't members of a specific cohort.
 
@@ -215,6 +213,8 @@ We make a request to fetch feature flags (using the [`/flags` endpoint](/docs/ap
 Feature flags are charged based on the number of requests made to the `/flags` endpoint. This means even if no feature flag events are generated, you may still be charged for feature flag requests.
 
 ## How do I generate reports on feature flag usage?
+
+For how often a flag is called and which values it returns, open the flag's [**Usage** tab](/docs/feature-flags/surfaces/web-app#see-how-a-flag-is-used). For what your flags cost you, use the billing usage template.
 
 import PostHogBillableUsageTemplate from "../_snippets/posthog-billable-usage-template.mdx"
 

@@ -17,12 +17,15 @@ A scout is a scheduled agent that explores your PostHog data and raises a hand w
 
 ## How a scout works
 
-A scout runs on a schedule. Each run, it looks at one slice of your data, decides whether anything is worth surfacing, and if so files what it found. A scout has two ways to do that:
+A scout runs on a schedule. Each run, it looks at one slice of your data, decides whether anything is worth surfacing, and if so files what it found. A scout has three ways to do that:
 
-- **File a report directly.** When a scout finishes its research with a complete, well-formed finding, it authors a [report](/docs/self-driving/reports) straight into your [inbox](/docs/self-driving/inbox) – a title, a summary, the evidence behind it, and a call on how actionable it is. Most of the built-in scouts work this way, and a scout-authored report shows the scout's name in the inbox so you know where it came from.
-- **Emit a signal.** When a finding is a weaker or partial observation – the kind that only becomes meaningful next to other findings – the scout emits a [signal](/docs/self-driving/signals) instead and lets the pipeline deduplicate it and group it with related signals into a report.
+| Method | When it applies |
+|---|---|
+| **File a report directly** | When a scout finishes its research with a complete, well-formed finding, it authors a [report](/docs/self-driving/reports) straight into your [inbox](/docs/self-driving/inbox) – a title, a summary, the evidence behind it, and a call on how actionable it is. Most of the built-in scouts work this way, and a scout-authored report shows the scout's name in the inbox so you know where it came from. |
+| **Emit a signal** | When a finding is a weaker or partial observation – the kind that only becomes meaningful next to other findings – the scout emits a [signal](/docs/self-driving/signals) instead and lets the pipeline deduplicate it and group it with related signals into a report. |
+| **Record structured data** | When the job is scoring, classifying, or extracting rather than surfacing, a scout can record schema-checked structured records as events instead of filing anything to your inbox. See [turn a scout's judgment into a metric](#turn-a-scouts-judgment-into-a-metric). |
 
-Either way, the bar is the same: a structured finding with the evidence behind it and a suggested action. The difference is whether the scout has already done enough research to stand behind the finding as a single inbox item, or whether the pipeline should consolidate it with others first.
+For the first two, the bar is the same: a structured finding with the evidence behind it and a suggested action. The difference is whether the scout has already done enough research to stand behind the finding as a single inbox item, or whether the pipeline should consolidate it with others first. Measurements are different: they aren't findings at all, just data, and they skip the inbox entirely.
 
 A scout is **selective by design**. Holding something back is a decision it makes on purpose, not a gap – most runs close out having found nothing worth your attention, and that's the scout working. If you need every item in a stream handled with no judgement call in between, that's what a [signal source](/docs/self-driving/inbox/sources) is for, and the two are often best run together.
 
@@ -36,8 +39,10 @@ Because scouts run on a schedule, the loop keeps noticing problems and opportuni
 
 Every scout runs on its own schedule, which you set per scout without touching its instructions. There are two ways to express one:
 
-- **An interval** – how long to wait between runs, from every 30 minutes to every 30 days. This is the default, and a new scout starts at every 24 hours. Use it when you care about frequency rather than timing.
-- **A cron expression** – a standard five-field expression that anchors runs to wall-clock slots, like `30 9 * * *` for every day at 09:30, `0 9,17 * * *` for twice a day, or `0 9 * * 1-5` on weekdays only. Occurrences have to be at least 30 minutes apart, the same floor as the interval.
+| Format | Description |
+|---|---|
+| **An interval** | How long to wait between runs, from every 30 minutes to every 30 days. This is the default, and a new scout starts at every 24 hours. Use it when you care about frequency rather than timing. |
+| **A cron expression** | A standard five-field expression that anchors runs to wall-clock slots, like `30 9 * * *` for every day at 09:30, `0 9,17 * * *` for twice a day, or `0 9 * * 1-5` on weekdays only. Occurrences have to be at least 30 minutes apart, the same floor as the interval. |
 
 Cron expressions are evaluated in your project's timezone, so a scout scheduled for 09:00 stays at 09:00 through daylight saving changes. Setting a cron expression takes precedence over the interval.
 
@@ -57,13 +62,23 @@ A scout writes its findings to your inbox by default, which is usually what you 
 
 A dry run consumes a run from your daily budget like any other, so it's a safety net rather than an iteration loop.
 
+<CalloutBox icon="IconInfo" title="When PostHog flags or pauses a scout" type="fyi">
+
+PostHog checks whether a scout's output is being used. A scout that stays quiet is flagged for review but keeps running, because a quiet watchdog may be doing its job. If a scout has established reports that nobody acts on, PostHog warns you first and pauses it after a week unless someone engages with its reports.
+
+An inactivity pause never retries on its own – it stays in place until you enable the scout again, which also exempts it from later inactivity checks. That's separate from the failure safeguard: a scout that fails five runs in a row pauses so a broken configuration doesn't keep consuming runs, then retries once a day until a successful retry resumes it.
+
+</CalloutBox>
+
 ## Steering a scout with a note
 
 Sometimes you don't want to change a scout – you want to tell it something. **Scout notes** are short steering messages you leave for the fleet, which every run reads as context alongside its own memory:
 
-- **Feedback on its output** – "the staging traffic spike you keep flagging is known noise, stop reporting it."
-- **A pointer** – "dig into the EU signup funnel this week, we think something regressed."
-- **Context it couldn't know** – "we shipped a new checkout on Tuesday, treat conversion shifts after that as expected."
+| Type | Example |
+|---|---|
+| **Feedback on its output** | "the staging traffic spike you keep flagging is known noise, stop reporting it." |
+| **A pointer** | "dig into the EU signup funnel this week, we think something regressed." |
+| **Context it couldn't know** | "we shipped a new checkout on Tuesday, treat conversion shifts after that as expected." |
 
 A note can address one scout by name or the whole fleet, and you can give it an expiry date so time-boxed steering ("watch this closely this week") retires itself.
 
@@ -102,6 +117,37 @@ LIMIT 20
 ```
 
 Scout report events are captured against a synthetic per-scout ID with person processing off, so they never create person profiles or mix into your user analytics.
+
+## Turn a scout's judgment into a metric
+
+Not every watching job ends in a report. Sometimes what you want is a number, measured the same way on a schedule: how good, how risky, what kind. A scout can produce that too.
+
+Give a scout a **structured output schema**: a JSON Schema describing one record, set on the scout alongside its schedule. Each run, the scout judges a sample of whatever it watches and records one record per judged item – a classification, a score, a verdict with a reason. Every record is validated against the schema before it's written, so the series stays clean.
+
+Records land in your project as `$scout_structured_output` events, with each field of the record flattened to an `output_<field>` property, a `subject` property naming the item that was judged, and a `skill_name` property naming the scout that recorded it. Because they're ordinary events, the metric works everywhere in PostHog with nothing to wire up: chart the share of items judged `critical` in an insight, break down by any field, set an [alert](/docs/alerts) on a shift, or query the raw records with [SQL](/docs/sql). Filter on `skill_name` whenever more than one scout records measurements, so each scout's series stays its own.
+
+```sql
+SELECT toDate(timestamp) AS day,
+       countIf(properties.output_verdict = 'good') / count() AS good_rate
+FROM events
+WHERE event = '$scout_structured_output'
+  AND properties.skill_name = 'signals-scout-your-scout'
+GROUP BY day
+ORDER BY day DESC
+```
+
+Reach for this when the thing you want to measure is real but too subjective for a query to compute: whether a support reply resolved the question, whether a generated summary sticks to its sources, whether a session looks like a genuine evaluation or a bot. The scout's judgment is the measuring instrument, and the schedule turns it into a time series.
+
+Judging is the headline use, but the channel itself is general: a record is any structured object matching the schema, so a scout can turn anything it reads into events. Extract typed fields from free text, like the product areas and requested features in a support channel. Snapshot state nothing else captures, like a vendor's API health or your own fleet's configuration, so its history becomes chartable. Or land a number from a system that has no SDK. If a scout can see it, the schema can shape it, and it arrives as events.
+
+A few things to know:
+
+- The schema owns the record's shape. The scout's instructions decide what to sample, how to judge it, and how many records a run produces.
+- Small enumerations chart better than 1-to-5 scores, and a free-text reason field on each record keeps individual judgments auditable.
+- A scout in [dry run](#dry-runs) records nothing. Measurements follow the same switch as reports.
+- Measurements and reports combine well: record every judgment, and file a report only when a rate moves enough to need a human.
+
+Like scout report events, these are captured with person processing off, so they never create person profiles or mix into your user analytics.
 
 ## Built-in and custom scouts
 

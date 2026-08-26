@@ -1,236 +1,182 @@
 import React from 'react'
 import {
-    IconDashboard,
-    IconGear,
-    IconListTreeConnected,
-    IconRewindPlay,
-    IconSparkles,
-    IconTarget,
-    IconTrends,
-    IconUser,
-    IconWarning,
-    IconMagicWand,
-    IconLlmPromptEvaluation,
-    IconTerminal,
+    IconChat,
+    IconConfetti,
+    IconCursorClick,
     IconEndpoints,
+    IconEye,
+    IconInfo,
+    IconList,
+    IconMagic,
+    IconMessage,
+    IconRocket,
+    IconSparkles,
 } from '@posthog/icons'
-
-import CloudinaryImage from 'components/CloudinaryImage'
+import { features } from './endpoints/features'
+import { applications, topFeatures } from './endpoints/slides'
 import { getTool } from '../../data/tools'
 
 export const endpoints = {
     ...getTool('endpoints'),
     Icon: IconEndpoints,
     type: 'endpoints',
+    // Beta in product/docs; no billing product yet (free during beta).
+    status: 'beta',
+    teamSlug: 'data-modeling',
+    // Squeak topic: /questions/topic/endpoints (squeakId from page-data).
+    forumTopicId: 393,
     color: 'teal',
     colorSecondary: 'teal',
-
-    // slider: {
-    //     marks: [100000, 1000000, 10000000, 100000000],
-    //     min: 100000,
-    //     max: 100000000,
-    // },
-    // volume: 100000,
+    shortDescription: 'Custom API endpoints powered by your PostHog data',
+    pricingDescription:
+        'Endpoints is free during beta. When pricing ships, it will be usage-based with a generous monthly free tier – billed on compute time and data scanned, like the rest of PostHog.',
+    // Same "How pricing works" section chrome as Experiments (`BilledWithPricing`).
+    pricingLead: 'Pricing is coming soon.',
+    pricingHighlights: [
+        "We'll offer usage-based pricing with a generous monthly free tier – like we do with all of our paid products.",
+    ],
+    pricingFooter: 'Endpoints is free during beta.',
+    pricingEventsLink: false,
     seo: {
         title: 'Endpoints – Custom API endpoints powered by your PostHog data',
         description:
             'Custom API endpoints powered by your PostHog data – the context agents need to build embedded analytics, data feeds, and make your product self-driving.',
     },
+    /**
+     * Sections rendered on the Product surface (`/endpoints`). Each entry
+     * resolves to a section template via `templateRegistry[item.template ?? item.slug]`.
+     * `props` is passed straight to the resolved section component.
+     */
+    productMenu: [
+        { slug: 'overview', name: 'Overview', icon: <IconEye className="size-4" /> },
+        {
+            slug: 'eli5',
+            name: 'What does it do?',
+            hideFromNav: true,
+            group: 'divided',
+            icon: <IconInfo className="size-4" />,
+        },
+        {
+            slug: 'use-cases',
+            name: 'Who is it for?',
+            hideFromNav: true,
+            group: 'divided',
+            icon: <IconMagic className="size-4" />,
+        },
+        {
+            slug: 'applications',
+            name: 'How do I use it?',
+            group: 'divided',
+            icon: <IconCursorClick className="size-4" />,
+            props: { slides: applications },
+        },
+        {
+            slug: 'top-features',
+            name: 'Top features',
+            group: 'divided',
+            icon: <IconSparkles className="size-4" />,
+            props: { slides: topFeatures },
+        },
+        {
+            slug: 'ask-anything',
+            name: 'AI prompts',
+            group: 'divided',
+            icon: <IconChat className="size-4" />,
+        },
+        // No `installation` section: Endpoints isn't an SDK install product.
+        // Getting started is create-an-endpoint → call the URL (see docs start-here).
+        {
+            slug: 'feature-comparison',
+            name: 'Feature comparison',
+            group: 'divided',
+            icon: <IconList className="size-4" />,
+        },
+        { slug: 'community', name: 'Questions?', group: 'divided', icon: <IconMessage className="size-4" /> },
+        { slug: 'pairs-with', name: 'Pairs with...', hideFromNav: true, icon: <IconConfetti className="size-4" /> },
+        { slug: 'getting-started', name: 'Get started', group: 'divided', icon: <IconRocket className="size-4" /> },
+    ],
+    /**
+     * Pricing surface (`/endpoints/pricing`). No billing product yet – Plans /
+     * calculator omitted until billing ships. Uses the same BilledWithPricing
+     * section as Experiments for the coming-soon copy, then comparison-summary.
+     * When billing ships, replace `billed-with` with:
+     *   { slug: 'plans', name: 'Plans', icon: <IconCheckCircle className="size-4" /> },
+     *   { slug: 'calculator', name: 'Pricing calculator', icon: <IconPieChart className="size-4" /> },
+     */
+    pricingMenu: [
+        { slug: 'billed-with', name: 'How pricing works', icon: <IconInfo className="size-4" /> },
+        { slug: 'comparison-summary', name: 'PostHog vs...', icon: <IconList className="size-4" /> },
+        { slug: 'pricing-cta', name: 'Get started', hideFromNav: true },
+    ],
     overview: {
         title: 'Custom API endpoints powered by your PostHog data',
         description:
-            'Use them to build embedded analytics, data feeds, and more – no backend required. Endpoints are how your product’s context flows out to the agents and tools that make it self-driving.',
+            "Use them to build embedded analytics, data feeds, and more – no backend required. Endpoints are how your product's context flows out to the agents and tools that make it self-driving.",
+        eli5: 'Endpoints turns any saved insight or SQL query into a stable, authenticated HTTP URL. You define the query once in PostHog – filters, breakdowns, variables, and all – and your app, agent, or internal tool fetches the results over HTTP. No custom analytics backend, no CSV exports on Monday, no Query API spaghetti. Versioning, caching, materialization, and an OpenAPI spec come with it.',
         textColor: 'text-black',
         layout: 'overlay',
     },
-    videos: {
-        overview: {
-            wistia: 'bl174kpxu8',
-        },
-    },
+    // Previous wistia ID was shared with AI Observability – likely a copy-paste.
+    // Add a real Endpoints overview video when one exists.
+    // videos: { overview: { wistia: '...' } },
     screenshots: {
         overview: {
             src: 'https://res.cloudinary.com/dmukukwp6/image/upload/endpoints_desktop_5ea67ee88c.png',
             srcMobile: 'https://res.cloudinary.com/dmukukwp6/image/upload/endpoints_mobile_de719b9fe0.png',
             alt: 'Endpoints',
             classes: 'mx-4 @2xl:mx-8',
-            // imgClasses: 'rounded-tl-md shadow-2xl',
             classesMobile: '',
             imgClassesMobile: '',
         },
+        // Full hero composition (scientist hog + SQL → dashboard). No separate
+        // hogs.default – the hog is already in the art; Overview hog overlay is optional.
         home: {
-            src: 'https://res.cloudinary.com/dmukukwp6/image/upload/screenshot_llm_analytics_light_a436da72f7.png',
-            srcDark: 'https://res.cloudinary.com/dmukukwp6/image/upload/screenshot_llm_analytics_dark_d8f32c249b.png',
-            alt: 'AI Observability screenshot',
+            src: 'https://res.cloudinary.com/dmukukwp6/image/upload/endpoints_desktop_5ea67ee88c.png',
+            alt: 'Endpoints: turn a PostHog query into an API that powers your analytics',
             classes: 'justify-end items-end pl-4 @lg:pl-6',
             imgClasses: 'rounded-tl-md shadow-2xl',
         },
-    },
-    // hog: {
-    //   src: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/hogs/product-analytics-hog.png',
-    //   alt: 'AI-powered hedgehog',
-    //   classes: 'absolute bottom-0 right-4 max-w-lg',
-    // },
-    customers: {
-        elevenlabs: {
-            headline: 'uses AI Observability with session replays (and everything else)',
-            description:
-                'PostHog is amazing. It reins in the chaos to have everything in one place. Otherwise it’s quite overwhelming to try and understand what’s working and what’s not.',
+        dashboards: {
+            src: 'https://res.cloudinary.com/dmukukwp6/image/upload/endpoints_dashboard_a1e300960b.png',
+            alt: 'A dashboard powered by endpoints',
         },
-        lovable: {
-            headline: 'compared us to every other observability tool, just to be sure',
-            description:
-                "If you're building a new product, just use PostHog. It's a no-brainer. It's the only all-in-one platform like it for developers.",
+        create_query: {
+            src: 'https://res.cloudinary.com/dmukukwp6/image/upload/create_endpoint_query_a7a9087c5a.png',
+            alt: 'Create an endpoint',
         },
-        posthog: {
-            headline: 'monitors the usage and performance of PostHog AI with AI Observability',
-            description:
-                'We use our own AI observability product to attribute costs, monitor latency and errors, compare models, and iterate on prompts in production.',
+        create_builder: {
+            src: 'https://res.cloudinary.com/dmukukwp6/image/upload/create_endpoint_builder_66ff485fc4.png',
+            alt: 'Create an endpoint',
         },
     },
-    features: [
-        {
-            title: 'Dashboards',
-            handle: 'dashboards',
-            template: 'splitImage',
-            headline: 'Build your own dashboards',
-            description: 'Use your PostHog data to power dashboards outside the PostHog UI.',
-            images: [
-                {
-                    src: 'https://res.cloudinary.com/dmukukwp6/image/upload/endpoints_dashboard_a1e300960b.png',
-                    // srcDark: 'https://res.cloudinary.com/dmukukwp6/image/upload/llm_trace_dark_f49aa4dd89.png',
-                    alt: 'A dashboard powered by endpoints',
-                    className: 'justify-end items-end @2xl:mt-8 ml-8 @2xl:ml-0 rounded-md',
-                },
+    // Pricing footer CTA only – reuse the hero composite.
+    hog: {
+        src: 'https://res.cloudinary.com/dmukukwp6/image/upload/endpoints_desktop_5ea67ee88c.png',
+        alt: 'Endpoints: turn a PostHog query into an API that powers your analytics',
+        footerClasses: 'max-w-[550px]',
+    },
+    useCases: {
+        intro: 'Endpoints is used across teams depending on your role.',
+        rows: [
+            [
+                'Product Engineers',
+                'Ship customer-facing analytics or data feeds without building and owning an analytics API',
             ],
-            features: [
-                {
-                    // icon: <IconListTreeConnected />,
-                    title: 'Expose metrics as APIs',
-                    description: 'Create endpoints from insights or SQL and fetch the results from your application.',
-                },
-                {
-                    // icon: <IconUser />,
-                    title: 'Use the queries you already have',
-                    description:
-                        'Endpoints run the exact insight or SQL query defined in PostHog, including filters, breakdowns, and time range.',
-                },
-                {
-                    // icon: <IconRewindPlay />,
-                    title: 'Designed to be called over and over ',
-                    description:
-                        'Endpoints are intended to be called regularly by dashboards, with higher rate limits than standard API queries.',
-                },
+            ['PMs & ops', 'Turn a saved insight into a production URL – no ticket to data engineering required'],
+            ['AI / agent builders', 'Give MCP clients and agent runtimes stable HTTP access to live product context'],
+            [
+                'Growth & marketing',
+                'Automate reports and rankings that used to mean CSV exports or brittle Query API calls',
             ],
-            // children: (<></>)
-        },
-        {
-            title: 'Use cases',
-            handle: 'use_cases',
-            template: 'splitImage',
-            headline: 'Build custom feeds',
-            description:
-                'Make recommendations or build sales enrichment tools. Endpoints work well for lists and summaries that need to update regularly.',
-            images: [
-                {
-                    src: 'https://res.cloudinary.com/dmukukwp6/image/upload/create_endpoint_query_a7a9087c5a.png',
-                    // srcDark: 'https://res.cloudinary.com/dmukukwp6/image/upload/llm_cost_dark_d1efde15fd.png',
-                    alt: 'Create an endpoint',
-                    className: 'mx-4 @2xl:mx-0 @2xl:mt-8',
-                },
-            ],
-            features: [
-                {
-                    // icon: <IconTrends />,
-                    title: 'Predefined aggregate queries',
-                    description:
-                        'Create endpoints for queries like “top selling products for this week” or “most active users”.',
-                },
-                {
-                    // icon: <IconTarget />,
-                    title: 'Stable URLs your app can keep calling',
-                    description: 'Each endpoint has a consistent API URL that applications can call repeatedly.',
-                },
-                {
-                    // icon: <IconSparkles />,
-                    title: 'Optional caching',
-                    description: 'Endpoints return cached results when available, avoiding unnecessary recomputation.',
-                },
-            ],
-        },
-        {
-            title: 'SQL endpoints',
-            handle: 'sql_endpoints',
-            template: 'grid',
-            headline: 'Ship APIs without building a backend',
-            description:
-                'Expose the results of PostHog insights or SQL queries so applications can fetch them directly. Insights keep their existing configuration, while SQL queries can be materialized for scheduled execution and higher rate limits.',
-            children: (
-                <div>
-                    <CloudinaryImage
-                        src="https://res.cloudinary.com/dmukukwp6/image/upload/create_endpoint_builder_66ff485fc4.png"
-                        alt="Create an endpoint"
-                        className="w-full h-full object-contain"
-                    />
-                </div>
-            ),
-        },
-    ],
-    // postHogOnPostHog: {
-    //     title: 'How PostHog uses AI Observability',
-    //     benefits: [
-    //         {
-    //             title: 'Analyze costs',
-    //             description: 'by comparing models and analyzing usage',
-    //         },
-    //         {
-    //             title: 'Spot emergencies',
-    //             description: 'with latency and error rate alerting',
-    //         },
-    //         {
-    //             title: 'Monitor performance',
-    //             description: 'by comparing speed and reliability across models',
-    //         },
-    //         {
-    //             title: 'Muck about',
-    //             description: 'in the prompt playground (meaningfully)',
-    //         },
-    //         {
-    //             title: 'Integrate with other tools',
-    //             description: 'in your LLM observability stack',
-    //         },
-    //         {
-    //             title: 'Build AI features',
-    //             description: 'like PostHog AI, obviously',
-    //         },
-    //     ],
-    // },
-    // questions: [
-    //     {
-    //         question: 'What are my LLM costs by customer?',
-    //     },
-    //     {
-    //         question: 'Which AI features have the highest error rates?',
-    //     },
-    //     {
-    //         question: 'Are there latency spikes in my LLM calls?',
-    //     },
-    //     {
-    //         question: 'Do AI features improve user retention?',
-    //     },
-    //     {
-    //         question: 'Which prompts are most expensive?',
-    //     },
-    //     {
-    //         question: 'How many tokens does each feature consume?',
-    //     },
-    //     {
-    //         question: "What's the ROI of our AI features?",
-    //     },
-    //     {
-    //         question: 'Which model gives the best cost/performance ratio?',
-    //     },
-    // ],
+            ['Data teams', 'Stop being the bottleneck on getting numbers out of PostHog and into other tools'],
+        ],
+    },
+    features,
+    mcp: {
+        title: 'MCP',
+        headline: features.mcp.headline,
+        description: features.mcp.description,
+    },
     comparison: {
         summary: {
             them: [
@@ -239,24 +185,24 @@ export const endpoints = {
                     subtitle: 'and are happy managing data separately',
                 },
                 {
-                    title: 'You’re building analytics directly from raw event data',
+                    title: "You're building analytics directly from raw event data",
                 },
                 {
-                    title: 'You don’t need dashboards, insights, or product context',
+                    title: "You don't need dashboards, insights, or product context",
                 },
                 {
-                    title: 'You’re okay duplicating analytics logic outside PostHog',
+                    title: "You're okay duplicating analytics logic outside PostHog",
                 },
             ],
             us: [
                 {
-                    title: 'Agents and tools can pull your product’s context through a stable API – the data that powers self-driving',
+                    title: "Agents and tools can pull your product's context through a stable API – the data that powers self-driving",
                 },
                 {
                     title: 'Reuse existing insights or SQL queries already in PostHog',
                 },
                 {
-                    title: 'You’re building on PostHog data',
+                    title: "You're building on PostHog data",
                     subtitle: 'like customer-facing dashboards or internal tools',
                 },
                 {
@@ -272,12 +218,10 @@ export const endpoints = {
             {
                 name: 'Tinybird',
                 key: 'tinybird',
-                // link: '/blog/posthog-vs-langfuse',
             },
             {
                 name: 'ClickHouse Cloud',
                 key: 'clickhouse_cloud',
-                // link: '/blog/posthog-vs-langsmith',
             },
             {
                 name: 'PostHog',
@@ -294,12 +238,68 @@ export const endpoints = {
                 'Create insights in PostHog and expose their results through endpoints. Use trends, funnels, or retention analyses to power dashboards, feeds, or summaries in your application, without rebuilding the query elsewhere.',
         },
         {
-            slug: 'data-stack/managed-warehouse',
+            slug: 'context-warehouse/managed-warehouse',
             description:
-                'Combine product analytics data with other datasets using SQL in PostHog’s data warehouse. Expose the results through endpoints when you need more control over how data is shaped or joined.',
+                "Combine product analytics data with other datasets using SQL in PostHog's data warehouse. Expose the results through endpoints when you need more control over how data is shaped or joined.",
+            className: '!size-6',
         },
     ],
     worksWith: ['product_analytics', 'dashboards', 'session_replay', 'feature_flags'],
+    /**
+     * Prompts from contents/docs/endpoints/surfaces/mcp.mdx plus additional
+     * prompts that map 1:1 to verified MCP tools in src/data/mcp-tools.json.
+     * TODO: ai.image / imageAlt once an Endpoints AI hero asset exists.
+     */
+    ai: {
+        intro: 'Ask PostHog AI to create, run, debug, and materialize endpoints.',
+        mcpFeatures: ['endpoints'],
+        groups: [
+            {
+                title: 'Create',
+                tool: 'endpoint-create',
+                prompts: [
+                    'Create an endpoint called weekly-signups from this SQL query',
+                    'Create an endpoint from my daily active users insight',
+                ],
+            },
+            {
+                title: 'List',
+                tool: 'endpoints-get-all',
+                prompts: ['List every endpoint in this project', "Which endpoints haven't been called recently?"],
+            },
+            {
+                title: 'Test',
+                tool: 'endpoint-run',
+                prompts: [
+                    'Run weekly-signups with customer_id set to cust_123 and show me the rows',
+                    'Call my top-products endpoint for the last 7 days and summarize the results',
+                ],
+            },
+            {
+                title: 'Debug',
+                tool: 'endpoint-logs',
+                prompts: [
+                    'Pull the error logs for weekly-signups from the last hour and tell me what broke',
+                    'Show ERROR logs for weekly-signups from the last 24 hours',
+                ],
+            },
+            {
+                title: 'Materialize',
+                tool: 'endpoint-materialization-suggestion',
+                prompts: ["weekly-signups can't be materialized – suggest a rewrite that can"],
+            },
+            {
+                title: 'Versions',
+                tool: 'endpoint-versions',
+                prompts: ['List every version of weekly-signups with the last execution time'],
+            },
+            {
+                title: 'OpenAPI',
+                tool: 'endpoint-openapi-spec',
+                prompts: ['Fetch the OpenAPI spec for weekly-signups so I can generate a typed client'],
+            },
+        ],
+    },
     presenterNotes: {
         overview:
             "<strong>Presenter notes:</strong> Endpoints let you take any insight or SQL query you've already built in PostHog and expose it as a stable API endpoint. Instead of cobbling together your own analytics API or hammering the Query API with ad-hoc requests, you define a query once and get back a URL your application can call repeatedly. The use cases are broad: embedded analytics dashboards for your customers, live metrics on your landing page, data feeds powering recommendations or leaderboards, or internal tools that need product data without the overhead of a custom pipeline. It's a simple three-step workflow – define your data, create the endpoint, retrieve the results – and it's designed to be production-ready from day one, with higher rate limits, optional materialization, caching, versioning, and an OpenAPI spec for every endpoint. During beta, it's completely free to use.",

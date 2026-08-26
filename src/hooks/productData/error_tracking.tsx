@@ -1,20 +1,20 @@
 import React from 'react'
 import {
-    IconWarning,
-    IconEye,
-    IconSparkles,
-    IconList,
-    IconConfetti,
-    IconRocket,
-    IconPieChart,
-    IconCheckCircle,
-    IconInfo,
-    IconCursorClick,
-    IconMagic,
     IconChat,
+    IconCheckCircle,
     IconCode,
+    IconConfetti,
+    IconCursorClick,
+    IconEye,
+    IconInfo,
+    IconList,
+    IconMagic,
     IconMessage,
     IconArrowUpRight,
+    IconPieChart,
+    IconRocket,
+    IconSparkles,
+    IconWarning,
 } from '@posthog/icons'
 import { features } from './error_tracking/features'
 import { applications, topFeatures } from './error_tracking/slides'
@@ -156,8 +156,9 @@ export const errorTracking = {
         },
     },
     hog: {
-        src: 'https://res.cloudinary.com/dmukukwp6/image/upload/error_hog_c2eff84e29.png',
-        alt: 'Just another hedgehog',
+        src: 'https://res.cloudinary.com/dmukukwp6/image/upload/police_hog_eb78977120.png',
+        alt: 'A hedgehog police officer on the case',
+        footerClasses: 'max-w-[200px]',
         classes: 'absolute bottom-0 right-0 max-w-[250px]',
     },
     hogs: {
@@ -448,8 +449,8 @@ export const errorTracking = {
         },
     ],
     ai: {
-        image: 'https://res.cloudinary.com/dmukukwp6/image/upload/ERROR_TRACKING_2f807c123b.png',
-        imageAlt: 'PostHog AI and error tracking',
+        image: 'https://res.cloudinary.com/dmukukwp6/image/upload/Group_9514_d562b785cc.png',
+        imageAlt: 'A hedgehog inspecting a stack trace with a magnifying glass',
         description: 'investigate the exception and ship the fix',
         intro: 'Ask PostHog AI to find issues, inspect stack traces, and help ship the fix.',
         mcpFeatures: ['error_tracking'],

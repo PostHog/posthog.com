@@ -1,20 +1,20 @@
 import React from 'react'
 import {
-    IconRewindPlay,
-    IconEye,
-    IconSparkles,
-    IconList,
-    IconConfetti,
-    IconRocket,
-    IconPieChart,
-    IconCheckCircle,
-    IconInfo,
-    IconCursorClick,
-    IconMagic,
     IconChat,
+    IconCheckCircle,
     IconCode,
+    IconConfetti,
+    IconCursorClick,
+    IconEye,
+    IconInfo,
+    IconList,
+    IconMagic,
     IconMessage,
     IconArrowUpRight,
+    IconPieChart,
+    IconRewindPlay,
+    IconRocket,
+    IconSparkles,
 } from '@posthog/icons'
 import { features } from './session_replay/features'
 import { applications, topFeatures } from './session_replay/slides'
@@ -120,7 +120,7 @@ export const sessionReplay = {
         title: 'See how people use your product',
         description:
             'Session Replay is one of the tools that makes your product self-driving: play back sessions to see exactly why something happened so the fix is obvious. The context agents use to debug UI issues and nuanced user behavior in your product, website, or mobile app.',
-        eli5: "Session Replay records what happens in a user's session — clicks, scrolls, form inputs, page views, network requests, console logs — and plays it back like video. It's like watching a user's screen over their shoulder – it gives the nuance context you only get when you're actually watching them experience your product.",
+        eli5: "Session Replay records what happens in a user's session – clicks, scrolls, form inputs, page views, network requests, console logs – and plays it back like video. It's like watching a user's screen over their shoulder – it gives the nuance context you only get when you're actually watching them experience your product.",
         textColor: 'text-black', // tw
     },
     screenshots: {
@@ -149,12 +149,59 @@ export const sessionReplay = {
                 },
             },
         },
+        'player-overview': {
+            // Store the bare delivery URL: CloudinaryImage falls back to a plain <img> for any
+            // src containing a comma, and that branch drops `className` – which is where the
+            // dark/light toggle lives, so an inline-transformation URL renders both variants.
+            src: 'https://res.cloudinary.com/dmukukwp6/image/upload/replay_player_overview_light_902aadff54.png',
+            srcDark: 'https://res.cloudinary.com/dmukukwp6/image/upload/replay_player_overview_dark_d03f1adf30.png',
+            alt: 'The session replay page: the list of recordings on the left, the player in the middle, the event list on the right',
+            // 2578x1300. The light and dark variants show different sessions but the same three
+            // panels at the same size, so one set of panel-level coordinates holds for both.
+            // The pocket guide annotates this inline – see contents/pocket-guides/session-replay/101.
+        },
+        'player-inspector': {
+            // Cropped to the player and the inspector beside it, 3649x2074 at source. The
+            // transformations are carried inline on purpose – `<ScreenshotFigure>` puts the
+            // dark/light toggle on a wrapper, so CloudinaryImage's comma fallback is harmless.
+            src: 'https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/player_light_d95c9f5cd8.png',
+            srcDark:
+                'https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/player_dark_227437debc.png',
+            alt: "A session playing back on the left, with the inspector's event list and its five views on the right",
+            // Both variants are the same screen at the same size, so one set of coordinates holds.
+            // The pocket guide annotates this inline – see contents/pocket-guides/session-replay/101.
+        },
+        'issue-recordings': {
+            // Cropped to the issue's right-hand pane, where both ways into a replay sit. Source
+            // is 2608x1570; the crop and the resize are carried inline, which is safe because
+            // `<ScreenshotFigure>` puts the dark/light toggle on a wrapper rather than the image.
+            src: 'https://res.cloudinary.com/dmukukwp6/image/upload/c_crop,x_1043,y_20,w_1565,h_1550/w_1600,c_limit,q_auto,f_auto/session_from_error_light_056bf99ba7.png',
+            srcDark:
+                'https://res.cloudinary.com/dmukukwp6/image/upload/c_crop,x_1043,y_20,w_1565,h_1550/w_1600,c_limit,q_auto,f_auto/session_from_error_dark_8efab34ebd.png',
+            alt: 'An Error Tracking issue, with the button for every recording of the issue above and the Recording tab for this one exception below',
+            // Both variants are the same screen at the same size, so one set of coordinates holds.
+            // The pocket guide annotates this inline – see contents/pocket-guides/session-replay/finding-replays.
+        },
+        'player-controls': {
+            // The foot of the player, recropped from the same 3649x2074 source as
+            // `player-inspector` – the controls are worth their own figure, the recording above
+            // them is not. Shown in the pinned layout, which is what the crop makes legible.
+            src: 'https://res.cloudinary.com/dmukukwp6/image/upload/c_crop,x_0,y_1440,w_1752,h_634/w_1600,c_limit,q_auto,f_auto/player_light_d95c9f5cd8.png',
+            srcDark:
+                'https://res.cloudinary.com/dmukukwp6/image/upload/c_crop,x_0,y_1440,w_1752,h_634/w_1600,c_limit,q_auto,f_auto/player_dark_227437debc.png',
+            alt: 'The bottom of the replay player: the seek bar, the transport controls, and the row of capture and comment buttons',
+            // Both variants are the same screen at the same size, so one set of coordinates holds.
+            // The pocket guide annotates this inline – see contents/pocket-guides/session-replay/watching-replays.
+        },
         home: {
             src: 'https://res.cloudinary.com/dmukukwp6/image/upload/screenshot_replay_timeline_light_9225f869dc.jpg',
             srcDark: 'https://res.cloudinary.com/dmukukwp6/image/upload/screenshot_replay_timeline_dark_f5371a996f.png',
             alt: 'Session replay screenshot',
             classes: 'justify-start items-end pr-4 @lg:pr-6',
             imgClasses: 'rounded-tr-md shadow-2xl',
+            // 1110x640, measured against the light variant – the dark one is the same screen at
+            // the same size, so coordinates hold for both.
+            // The pocket guide annotates this inline – see contents/pocket-guides/session-replay/101.
             playlist: {
                 src: 'https://res.cloudinary.com/dmukukwp6/image/upload/recording_list_light_5919aed63e.png',
                 srcDark: 'https://res.cloudinary.com/dmukukwp6/image/upload/recording_list_dark_169d60d6fb.png',
@@ -235,8 +282,9 @@ export const sessionReplay = {
         },
     },
     hog: {
-        src: 'https://res.cloudinary.com/dmukukwp6/image/upload/replay_hog_20fc000c14.png',
-        alt: 'A hedgehog watching some session recordings',
+        src: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/FooterCTA/images/surprised-hog.png',
+        alt: 'A surprised hedgehog',
+        footerClasses: 'max-w-[240px]',
         classes: 'absolute bottom-0 right-0 max-w-[698px]',
     },
     hogs: {
@@ -244,7 +292,8 @@ export const sessionReplay = {
             src: 'https://res.cloudinary.com/dmukukwp6/image/upload/replay_hog_20fc000c14.png',
         },
         mobileHog: {
-            src: 'https://res.cloudinary.com/dmukukwp6/image/upload/w_800,c_limit,q_auto,f_auto/replay_mobile_hog_03d948364a.png',
+            src: 'https://res.cloudinary.com/dmukukwp6/image/upload/SESSION_REPLAY_a3ca565731.png',
+            alt: 'A hedgehog film director with a clapperboard',
         },
     },
     slider: {
@@ -534,8 +583,8 @@ export const sessionReplay = {
         },
     ],
     ai: {
-        image: 'https://res.cloudinary.com/dmukukwp6/image/upload/SESSION_REPLAY_a3ca565731.png',
-        imageAlt: 'PostHog AI and session replay',
+        image: 'https://res.cloudinary.com/dmukukwp6/image/upload/replay_mobile_hog_03d948364a.png',
+        imageAlt: 'A hedgehog filming and a hedgehog peeking around a phone showing session replay',
         intro: 'Ask PostHog AI to find a specific session or summarize a group of them.',
         groups: [
             {

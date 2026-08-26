@@ -171,13 +171,21 @@ export default function StandaloneAddonsTab({ activeProduct, setVolume, setProdu
 
     const totalCost = mainCost + addonData.reduce((sum, addon) => sum + addon.cost, 0)
 
+    // Add-ons like logs 30-day retention meter their volume through the main product's tiers too
+    // (the add-on price is only the premium), so the main product is billed on the combined volume.
+    const parentMeteredAddonVolume = addonBillingData.reduce(
+        (sum, addon, index) => (addon.countsTowardParentVolume ? sum + (addonData[index]?.volume || 0) : sum),
+        0
+    )
+    const billedMainVolume = mainVolume + parentMeteredAddonVolume
+
     useEffect(() => {
         if (mainBillingTiers) {
-            const { total, costByTier } = calculatePrice(mainVolume, mainBillingTiers)
+            const { total, costByTier } = calculatePrice(billedMainVolume, mainBillingTiers)
             setMainCost(total)
             setMainCostByTier(costByTier)
         }
-    }, [mainVolume, mainBillingTiers])
+    }, [billedMainVolume, mainBillingTiers])
 
     useEffect(() => {
         const updatedAddonData = addonData.map((addon, index) => {
@@ -193,18 +201,19 @@ export default function StandaloneAddonsTab({ activeProduct, setVolume, setProdu
 
     useEffect(() => {
         if (mainBillingTiers) {
-            const { costByTier } = calculatePrice(mainVolume, mainBillingTiers)
+            const { costByTier } = calculatePrice(billedMainVolume, mainBillingTiers)
             setProduct(activeProduct.handle, {
                 cost: totalCost,
                 volume: mainVolume,
                 costByTier,
             })
         }
-    }, [totalCost, mainVolume, mainBillingTiers, activeProduct.handle, setProduct])
+    }, [totalCost, mainVolume, billedMainVolume, mainBillingTiers, activeProduct.handle, setProduct])
 
-    const handleMainVolumeChange = (volume, cost) => {
+    // Cost is derived from billedMainVolume in the effect above — the cost SliderRow reports only
+    // covers its own volume, which undercounts when an add-on meters through the main product.
+    const handleMainVolumeChange = (volume) => {
         setMainVolume(volume)
-        setMainCost(cost)
     }
 
     const handleAddonVolumeChange = (index) => (volume, cost) => {
@@ -247,7 +256,8 @@ export default function StandaloneAddonsTab({ activeProduct, setVolume, setProdu
                 (addon, index) =>
                     addon.billingTiers && (
                         <div key={addon.key} className="mb-4">
-                            <h4 className="mb-3 text-base font-semibold">{addon.label}</h4>
+                            <h4 className={`${addon.note ? 'mb-1' : 'mb-3'} text-base font-semibold`}>{addon.label}</h4>
+                            {addon.note && <p className="text-sm opacity-70 mb-3">{addon.note}</p>}
                             <SliderRow
                                 label={addon.unit}
                                 sliderConfig={addon.sliderConfig}
@@ -303,8 +313,22 @@ export default function StandaloneAddonsTab({ activeProduct, setVolume, setProdu
                                     {activeProduct.productVariantName || activeProduct.name}
                                 </h4>
                                 <p className="opacity-70 m-0 text-sm mb-2">
-                                    <strong>{mainVolume.toLocaleString()}</strong>{' '}
-                                    {pluralizeUnit(activeProduct.billingData.unit, mainVolume)}
+                                    <strong>{billedMainVolume.toLocaleString()}</strong>{' '}
+                                    {pluralizeUnit(activeProduct.billingData.unit, billedMainVolume)}
+                                    {parentMeteredAddonVolume > 0 && (
+                                        <>
+                                            {' '}
+                                            (includes{' '}
+                                            {addonBillingData
+                                                .filter(
+                                                    (addon, index) =>
+                                                        addon.countsTowardParentVolume && addonData[index]?.volume > 0
+                                                )
+                                                .map((addon) => addon.label.toLowerCase())
+                                                .join(', ')}{' '}
+                                            volume)
+                                        </>
+                                    )}
                                 </p>
                                 <div className="overflow-auto -mx-4 px-4 md:mx-0 md:px-0">
                                     <div className="p-1 min-w-[500px] md:min-w-auto border border-input rounded-md mt-2">

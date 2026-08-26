@@ -2,33 +2,37 @@ import { navigate } from 'gatsby'
 
 export const customerDataInfrastructureNav = {
     name: 'PostHog context warehouse',
-    url: '/data-stack',
+    url: '/context-warehouse',
     children: [
         {
             name: 'PostHog context warehouse',
         },
         {
             name: 'Overview',
-            url: '/data-stack',
+            url: '/context-warehouse',
+        },
+        {
+            name: 'Start here',
+            url: '/context-warehouse/use-cases',
         },
         {
             name: 'Is PostHog warehouse native?',
-            url: '/data-stack/warehouse-native',
+            url: '/context-warehouse/warehouse-native',
         },
         {
             name: 'Data tools',
         },
         {
             name: 'Managed DuckDB warehouse',
-            url: '/data-stack/managed-warehouse',
+            url: '/context-warehouse/managed-warehouse',
         },
         {
             name: 'PostHog AI',
-            url: '/data-stack/posthog-ai',
+            url: '/context-warehouse/posthog-ai',
         },
         {
             name: 'Data sources & import (ELT)',
-            url: '/data-stack/sources',
+            url: '/context-warehouse/sources',
         },
         {
             name: 'CDP',
@@ -36,26 +40,26 @@ export const customerDataInfrastructureNav = {
         },
         {
             name: 'Data modeling',
-            url: '/data-stack/data-modeling',
+            url: '/context-warehouse/data-modeling',
         },
         {
             name: 'SQL editor',
-            url: '/data-stack/sql-editor',
+            url: '/context-warehouse/sql-editor',
         },
         {
             name: 'Business intelligence (BI)',
-            url: '/data-stack/business-intelligence',
+            url: '/context-warehouse/business-intelligence',
         },
         {
             name: 'Reverse ETL & export',
-            url: '/data-stack/reverse-etl-export',
+            url: '/context-warehouse/reverse-etl-export',
         },
         {
             name: 'Integrations',
         },
         {
             name: 'Integration library',
-            url: '/data-stack/integrations-library',
+            url: '/context-warehouse/integrations-library',
         },
     ],
 }

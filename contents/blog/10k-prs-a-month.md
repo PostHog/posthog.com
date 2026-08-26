@@ -35,7 +35,7 @@ There's no token budget set by some higher-ups at PostHog. We want people to fig
 
 This works because it's a big part of our culture to value trust and feedback over process. If we get to the point where we're uncomfortable with someone's spend, we'll dig into that with them and figure out if the spend is reasonable. Everyone else can learn from that too.
 
-Everybody's using agents and writing skills, but our [self-driving loop](/newsletter/loops) is further fueling the accelerated cadence. Over the last 4 months, we moved from around 20% of our monorepo PRs being opened by agent to 70%. [Self-driving](/blog/self-driving-product) is around 4% of our PRs right now but growing fast.
+Everybody's using agents and [writing skills](/newsletter/writing-agent-skills), but our [self-driving loop](/newsletter/loops) is further fueling the accelerated cadence. Over the last 4 months, we moved from around 20% of our monorepo PRs being opened by agent to 70%. [Self-driving](/blog/self-driving-product) is around 4% of our PRs right now but growing fast.
 
 Speeding up the rate we create PRs doesn't necessarily mean speeding up the rate we can handle them. For that, we're relying on agentic loops getting those PRs ready for human attention. Things like: 
 
@@ -151,7 +151,7 @@ Simple reviews have become like linting. Humans shouldn't be doing either.
 
 For example, if someone told you 12 months ago that a line should be wrapped at a particular character, you would say, "Hey, I've updated the linter, you can ignore this." Agents can basically do this for logic problems and laziness faster, more effectively, and more consistently than a human.
 
-This means we can have a world where humans review code less. And the code reviews they do are more effective as a result. We're continuing to work on tools and agentic flows we can use in CI to make it safe to operate at this new, increased speed.
+This means we can have a world where humans review code less. And the code reviews they do are more effective as a result. We're continuing to work on [tools and agentic flows we can use in CI](/newsletter/software-factories#what-is-a-software-factory) to make it safe to operate at this new, increased speed.
 
 ## Agents need to test more of the code
 

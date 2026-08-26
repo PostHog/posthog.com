@@ -24,7 +24,7 @@ Data warehouses are optimized for analytics, business intelligence (BI), and dat
 
 They'd look like context warehouses: a single tool that stores your business and product data, ingests and models it, and makes it directly available to agents that want to reference and use it as context.
 
-This isn't just an agent bolted onto a data warehouse, or a smarter semantic layer sitting on top of one. Plenty of data warehouses have that. A context warehouse is different because the ingestion pipeline and the modeling that make raw data mean something are part of the same tool as the storage and the querying, not separate pieces you assemble and keep in sync yourself. Nothing has to be piped from one system to another to be useful.
+This isn't just an agent bolted onto a data warehouse, or a smarter [semantic layer](/blog/semantic-layer) sitting on top of one. Plenty of data warehouses have that. A context warehouse is different because the ingestion pipeline and the modeling that make raw data mean something are part of the same tool as the storage and the querying, not separate pieces you assemble and keep in sync yourself. Nothing has to be piped from one system to another to be useful.
 
 Here's how we're thinking about the differences between a data and context warehouse, and how we're building one at PostHog.
 
@@ -68,7 +68,7 @@ The difference isn't the storage engine, it's what's allowed to touch the data w
 
 Your context warehouse starts with data that's already there. Once enabled, PostHog mirrors your product event data to S3, partitioned by organization, as it's captured with no pipeline to build.
 
-Everything else comes in through [Warehouse Sources](/data-stack/sources): 200+ integrations that sync external systems including Stripe, HubSpot, Salesforce, Postgres, and more. Connecting each source is no-code and takes under two minutes, or even more hands-off with the PostHog Wizard. 
+Everything else comes in through [Warehouse Sources](/context-warehouse/sources): 200+ integrations that sync external systems including Stripe, HubSpot, Salesforce, Postgres, and more. Connecting each source is no-code and takes under two minutes, or even more hands-off with the PostHog Wizard. 
 
 Compare that to an ETL pipeline: writing and maintaining extraction jobs, hosting them somewhere, wiring up a destination, and debugging it every time a schema changes upstream. Warehouse Sources allows you to skip all of that.
 
@@ -98,14 +98,14 @@ The context warehouse today is deliberately not a full data stack: land your eve
 
 | Direction | What it means |
 | :---- | :---- |
-| Making our Managed Warehouse generally available | Right now, we're in a closed beta that will be open very soon, you can [get on the waitlist](/data-stack/managed-warehouse) and be the first to hear about it. |
+| Making our Managed Warehouse generally available | Right now, we're in a closed beta that will be open very soon, you can [get on the waitlist](/context-warehouse/managed-warehouse) and be the first to hear about it. |
 | Deeper modeling | Closing the gap with dbt-style transformation maturity for teams with more advanced modeling needs. |
-| More sources | Expanding [Warehouse Sources](/data-stack/sources) coverage so fewer teams need a custom sync to get their systems in. |
+| More sources | Expanding [Warehouse Sources](/context-warehouse/sources) coverage so fewer teams need a custom sync to get their systems in. |
 | More of the loop exposed to agents | As the [self-driving product](/blog/self-driving-product) loop matures, more of what an agent can see in the context warehouse becomes something it can act on directly, not just read. |
 
 ## Try it yourself
 
-[Join the waitlist](/data-stack/managed-warehouse) for the managed warehouse beta, or just [connect your first source](/docs/data-warehouse/start-here) and get a head start, no need to wait around for us. Once you're in, the warehouse lives inside PostHog, same as everything else: sync a source through Warehouse Sources, poke at it in the SQL editor, or hand an agent the keys and see what it does with it.
+[Join the waitlist](/context-warehouse/managed-warehouse) for the managed warehouse beta, or just [connect your first source](/docs/data-warehouse/start-here) and get a head start, no need to wait around for us. Once you're in, the warehouse lives inside PostHog, same as everything else: sync a source through Warehouse Sources, poke at it in the SQL editor, or hand an agent the keys and see what it does with it.
 
 ## FAQ
 

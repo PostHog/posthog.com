@@ -297,7 +297,11 @@ Follow-up with: Now go look at their business and domain. What should they be do
 - **Introduce our beta features** (if relevant). Encourage customers to use them and share feedback. It can positively impact adoption before the feature becomes a paid product. 
 - **If growth signals are strong, plant the seed early**. If the account is on a positive trajectory, introduce the idea of prepaid credits coming with [a discount](https://posthog.com/handbook/growth/sales/contract-rules) and the option of a dedicated PostHog human. 
 
-## Email Follow-up
+## Email & Notebook Follow-up
+
+Given how successful Notebooks have been with our customers, we’re experimenting with creating a concise post-meeting Notebook that includes the same resources you would normally share in your follow-up email, along with the Gong recording.
+
+The goal is to make the information accessible to a wider audience within the customer’s organization. You would send meeting participants a follow-up email containing the relevant resources and a link to the Notebook, while the Notebook would make the same information available to other users within their PostHog instance.
 
 - Send it the same day. Use the momentum!
 - Include the public Gong recording link.
@@ -305,4 +309,5 @@ Follow-up with: Now go look at their business and domain. What should they be do
 - Summarize the call and send resources. Include some extra resources if you feel it would be beneficial as well. For example, our [YouTube playlist](https://www.youtube.com/playlist?list=PLnOY1RYHjDfzBX5wsSUHwLj91xuGnH5Ci%C2%A0) is great!
 - If relevant, give them one quick win. Encourage a small task they can do immediately after the call to lock in value and reinforce learning.
 - If you feel you have built a strong relationship, use your champion to introduce you to other teams that might be interested in PostHog and might be willing to jump on the call to be shown around.
+- Leverage the good relationship you've just established, and ask for direct feedback on the onboarding experience. Link to [our survey](https://us.posthog.com/external_surveys/019c523d-0d90-0000-65ba-4b976e24c83e) in your email/notebook.
 - Share any feedback or feature requests with the relevant product team. Their responsiveness can help you deliver some customer happiness! It's always great to be able to send a GitHub link to follow in your email. 

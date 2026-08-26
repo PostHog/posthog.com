@@ -38,6 +38,11 @@ export const aiObservabilityFeatures = {
             name: 'Alerting',
             description: '',
         },
+        anomaly_detection: {
+            name: 'Anomaly detection',
+            description:
+                'Alerts that learn what normal looks like for cost, latency, and errors – no fixed thresholds to tune',
+        },
         error_tracking: {
             name: 'Error tracking',
             description: 'Grouped error tracking for LLM applications',
@@ -82,13 +87,16 @@ export const aiObservabilityFeatures = {
             name: 'Human annotation/review',
             description: 'Review and label model outputs manually',
         },
-        session_replay: {
-            name: 'Session replay',
-            description: 'Watch recordings of users interacting with AI features',
+        user_feedback: {
+            name: 'User feedback',
+            description: 'Capture ratings and comments from users on AI responses',
         },
-        product_analytics: {
-            name: 'Product analytics',
-            description: 'Analyze AI interactions alongside retention, funnels, and feature adoption',
+        // Session replay and product-analytics context live as `session_replay_link`
+        // and `user_profile_context` in the tracing section – no duplicate rows here.
+        agent_reports: {
+            name: 'Agent reports & pull requests',
+            description:
+                'Agents investigate eval results and anomalies, then file reports you can turn into PRs in one click',
         },
         ai_gateway_proxy: {
             name: 'AI gateway/proxy',
@@ -167,6 +175,10 @@ export const aiObservabilityFeatures = {
                 name: 'Version comparison',
                 description: 'Side-by-side diff of prompt versions',
             },
+            prompt_config: {
+                name: 'Prompt configuration',
+                description: 'Store model parameters and settings with each prompt version',
+            },
             prompt_labels: {
                 name: 'Prompt labels',
                 description: 'Tag prompts as production, staging, latest',
@@ -237,17 +249,9 @@ export const aiObservabilityFeatures = {
                 name: 'Cost trends',
                 description: 'Historical cost over time',
             },
-            cost_by_user: {
-                name: 'Cost by user',
-                description: 'See what individual users cost you',
-            },
-            cost_by_feature: {
-                name: 'Cost by feature',
-                description: 'Break down spending by product feature',
-            },
-            cost_by_cohort: {
-                name: 'Cost by cohort',
-                description: 'Compare costs across user segments',
+            cost_by_custom_tags: {
+                name: 'Cost by custom tags',
+                description: 'Break down spending by feature, environment, or any metadata you attach',
             },
         },
     },

@@ -55,6 +55,16 @@ Here are some common exception event properties you can filter on:
 | Exception level | `$exception_level` | The level of the severity of the error. |
 | Exception was handled | `$exception_handled` | Whether the exception was handled by the application. |
 
+When you group exceptions with a custom fingerprint, set `$issue_name` and `$issue_description` on the same event to name the resulting issue. PostHog uses these two properties only on the event that creates the issue, and truncates each to 255 characters. Later events on the same fingerprint keep the existing name and description. When you do not set them, PostHog uses the exception type as the name and the exception message as the description.
+
+```js
+posthog.captureException(error, {
+  $exception_fingerprint: "MyCustomGroup",
+  $issue_name: "Checkout failures",
+  $issue_description: "Payment provider timeouts during checkout",
+})
+```
+
 You can also set custom properties on the error tracking event to filter on. You can find more about custom properties on exception capture in the [capture guide](/docs/error-tracking/capture).
 
 Grouping rules are evaluated in the order they are configured and can be reordered. The first rule that matches will be used to group exceptions into an issue. This means you should configure the most specific rules first, and then the more general rules. If you configure a catch-all rule first, it will always match and block other rules from being evaluated.
@@ -71,7 +81,7 @@ Every captured exception is assigned a [fingerprint](/docs/error-tracking/finger
 posthog.captureException(error, { $exception_fingerprint: "MyCustomGroup" })
 ```
 
-If the exception is autocaptured, you need to modify the properties before the event is sent. The PostHog config offers a [`before_send`](/docs/libraries/js/features#amending-or-sampling-events) hook that fires for each event which you can use to alter event and add the property:
+If the exception is autocaptured, you need to modify the properties before the event is sent. The PostHog config offers a [`before_send`](/docs/libraries/js/usage#amending-or-sampling-events) hook that fires for each event which you can use to alter event and add the property:
 
 ```javascript
 posthog.init("<ph_project_token>", {

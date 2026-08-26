@@ -16,6 +16,8 @@ Here are examples of the types of events you can send:
 
 Every event request must contain an `api_key`, `distinct_id`, and `event` field with the name. Both the `properties` and `timestamp` fields are optional.
 
+`distinct_id` is limited to 200 characters. Longer values are shortened to the first 200 characters and the event is still ingested, with an [ingestion warning](/docs/data/ingestion-warnings#ingested-event-after-shortening-its-distinct-id-to-the-200-character-limit).
+
 > **Note:** By default, events captured via the API are [identified events](/docs/data/anonymous-vs-identified-events). See the section on [how to capture anonymous events](#anonymous-event-capture) for more.
 
 <MultiLanguage>
@@ -374,7 +376,7 @@ print(response)
 
 Updates person properties. Read more in our [identify docs](/docs/product-analytics/identify).
 
-> **Note:** The `$identify` event works differently from the `identify()` method in the [JavaScript SDK](/docs/libraries/js/features#identifying-users). This event updates the person properties, while the JavaScript `identify()` method connects an anonymous user and a distinct ID.
+> **Note:** The `$identify` event works differently from the `identify()` method in the [JavaScript SDK](/docs/libraries/js/usage#identifying-users). This event updates the person properties, while the JavaScript `identify()` method connects an anonymous user and a distinct ID.
 
 <MultiLanguage>
 

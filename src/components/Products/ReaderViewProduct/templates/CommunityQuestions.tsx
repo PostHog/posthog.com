@@ -5,10 +5,11 @@ import CommunityQuestionsList from './CommunityQuestionsList'
 import OSButton2 from 'components/OSButton/OSButton2'
 import { useQuestions } from 'hooks/useQuestions'
 import { SectionComponentProps } from '../types'
-import OSButton from 'components/OSButton'
+import { SectionHeading } from '../helpers'
 import Link from 'components/Link'
 import { useApp } from '../../../../context/App'
 import SmallTeam from 'components/SmallTeam'
+import { volumeById } from '../../../../constants/pocketGuides'
 
 type CommunityStatsNode = {
     topicId: number | null
@@ -25,7 +26,7 @@ const CommunityQuestions = ({ id, productData }: SectionComponentProps) => {
 
     const { questions, isLoading } = useQuestions({
         topicId: forumTopicId,
-        limit: 5,
+        limit: 3,
         sortBy: 'activity',
     })
 
@@ -47,7 +48,6 @@ const CommunityQuestions = ({ id, productData }: SectionComponentProps) => {
     )
 
     const forumUrl = `/questions/topic/${slug}`
-    const fmt = (n: number) => n.toLocaleString()
     const approxCount = (n: number) => {
         if (n >= 1000) return `With over ${(Math.floor(n / 1000) * 1000).toLocaleString()}`
         if (n >= 100) return `With over ${(Math.floor(n / 100) * 100).toLocaleString()}`
@@ -56,11 +56,14 @@ const CommunityQuestions = ({ id, productData }: SectionComponentProps) => {
 
     const { openNewChat } = useApp()
 
+    // Only products that declare a volume get this; everyone else's Answers list is unchanged.
+    // An announced-but-unwritten volume has no page, so it stays out rather than linking to a 404.
+    const volume = volumeById((productData as any)?.pocketGuideVolume)
+    const pocketGuide = volume?.comingSoon ? undefined : volume
+
     return (
         <section id={id} className="scroll-mt-20">
-            <h2 className="text-3xl @md/reader-content:text-4xl font-bold text-primary m-0 leading-tight">
-                Questions?
-            </h2>
+            <SectionHeading>Questions?</SectionHeading>
 
             <div className="grid grid-cols-1 @2xl/reader-content:grid-cols-2 gap-4 @xl/reader-content:gap-8 @2xl/reader-content:gap-12">
                 <div>
@@ -78,6 +81,16 @@ const CommunityQuestions = ({ id, productData }: SectionComponentProps) => {
                                 We have an entire <SmallTeam slug="docs-wizard" /> dedicated to docs gardening.
                             </p>
                         </li>
+                        {pocketGuide && (
+                            <li className="list-decimal">
+                                <Link to={`/pocket-guides/${pocketGuide.id}`} className="underline font-bold">
+                                    Read the pocket guide
+                                </Link>
+                                <p className="text-secondary text-base">
+                                    PostHog use cases, in your pocket. Each chapter ends with a quick start.
+                                </p>
+                            </li>
+                        )}
                         <li className="list-decimal">
                             <Link to={forumUrl} className="underline font-bold">
                                 Search the community forums
@@ -127,15 +140,6 @@ const CommunityQuestions = ({ id, productData }: SectionComponentProps) => {
                             </p>
                         </li>
                     </ol>
-                    {/*                 
-                    {stats && stats.questions > 0 && (
-                        <ul className="mb-4">
-                            <li>Questions asked: {fmt(stats.questions)}</li>
-                            <li>Questions resolved: {fmt(stats.resolved)}</li>
-                            <li>Community replies: {fmt(stats.replies)}</li>
-                            <li>Replies marked as helpful: {fmt(stats.helpful)}</li>
-                        </ul>
-                    )} */}
                 </div>
 
                 <div>
@@ -157,6 +161,18 @@ const CommunityQuestions = ({ id, productData }: SectionComponentProps) => {
                             <IconArrowRight className="size-4" />
                         </OSButton2>
                     </div>
+
+                    {productData?.teamSlug && (
+                        <div className="mt-8 not-prose">
+                            <h3 className="mb-3 text-secondary !text-lg font-semibold">Who builds this?</h3>
+                            {/* Tilted so the crest reads as a sticker slapped on the page. */}
+                            <SmallTeam
+                                slug={productData.teamSlug}
+                                variant="crest"
+                                crestClassName="size-20 @lg/reader-content:size-24 -rotate-6 group-hover:-rotate-3"
+                            />
+                        </div>
+                    )}
                 </div>
             </div>
         </section>

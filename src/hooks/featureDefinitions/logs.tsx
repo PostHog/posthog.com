@@ -37,6 +37,11 @@ export const logsFeatures = {
             vendor_agnostic_sdks: {
                 name: 'Vendor agnostic SDKs',
             },
+            high_cardinality_indexing: {
+                name: 'High-cardinality indexing',
+                description:
+                    'Index fields like user_id, trace_id, or request_id without cardinality limits causing issues',
+            },
         },
     },
     search: {
