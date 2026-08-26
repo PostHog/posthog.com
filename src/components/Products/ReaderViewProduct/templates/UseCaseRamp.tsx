@@ -138,8 +138,8 @@ interface UseCaseRampData {
 }
 
 /**
- * How autonomous each level is, keyed by `level`. Combined with the level's
- * primary surface into a single label, e.g. "Hands-on with PostHog Web".
+ * How autonomous each level is, keyed by `level`. Rendered as a badge next to
+ * the level's surface tags, e.g. "Agent-assisted with" PostHog AI, PostHog Slack.
  */
 const levelMode: Record<string, string> = {
     'Do it yourself': 'Hands-on',
@@ -165,9 +165,9 @@ const slugify = (value: string): string => value.toLowerCase().replace(/[^a-z0-9
 const resolveSurfaces = (keys?: string[]): Surface[] => (keys ?? []).map((key) => surfaces[key]).filter(Boolean)
 
 /**
- * Which product(s) the scenario happens in, tagged top-right of its card
- * alongside the title. Every scenario carries at least one, so the who's-driving
- * sentence above doesn't have to list them all.
+ * Which product(s) a level or scenario happens in, as icon + name pills.
+ * Used both next to the level heading (`column.surfaces`) and top-right of
+ * the scenario card (`column.scenario.surfaces`).
  */
 const SurfaceTags = ({ keys }: { keys?: string[] }): JSX.Element | null => {
     const resolved = resolveSurfaces(keys)
@@ -238,7 +238,6 @@ const UseCaseRamp = ({ id, productData }: SectionComponentProps): JSX.Element | 
                     })}
                 </Tabs.List>
                 {columns.map((column) => {
-                    const primary = resolveSurfaces(column.surfaces)[0]
                     const mode = column.mode ?? levelMode[column.level]
                     return (
                         <Tabs.Content
@@ -259,11 +258,12 @@ const UseCaseRamp = ({ id, productData }: SectionComponentProps): JSX.Element | 
                                         {column.level}
                                     </h3>
                                     {mode && (
-                                        <span className="inline-flex items-center gap-1.5 self-start rounded-sm bg-highlight px-1.5 py-0.5 text-xs font-bold uppercase tracking-wide text-red dark:text-yellow">
-                                            {primary && <primary.Icon className="size-3.5 shrink-0" />}
-                                            {mode}
-                                            {primary && ` with ${primary.name}`}
-                                        </span>
+                                        <div className="flex flex-wrap items-center gap-x-1.5 gap-y-1">
+                                            <span className="rounded-sm bg-highlight px-1.5 py-0.5 text-xs font-bold uppercase tracking-wide text-red dark:text-yellow">
+                                                {mode} with
+                                            </span>
+                                            <SurfaceTags keys={column.surfaces} />
+                                        </div>
                                     )}
                                 </div>
                                 {column.scenario && (
