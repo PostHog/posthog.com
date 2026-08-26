@@ -17,6 +17,7 @@ import {
     IconSparkles,
 } from '@posthog/icons'
 import { FIFTY_MILLION, MAX_PRODUCT_ANALYTICS, MILLION, TEN_MILLION } from 'components/Pricing/pricingLogic'
+import Link from 'components/Link'
 import { features } from './product_analytics/features'
 import { applications, topFeatures } from './product_analytics/slides'
 import { getTool } from '../../data/tools'
@@ -229,7 +230,7 @@ export const productAnalytics = {
                     steps: [
                         'You happen to open your signup dashboard and the number looks wrong',
                         'You dig through paths and recordings to find the step where people now leave',
-                        'You file the bug, and the fix ships whenever someone picks it up',
+                        'You file the bug with the drop-off step attached, and the fix ships in the next release',
                     ],
                 },
                 points: [
@@ -252,18 +253,18 @@ export const productAnalytics = {
                     icon: 'IconMagicWand',
                     steps: [
                         'You ask PostHog AI: "why did signup conversion drop this week?"',
-                        'It counts how many people reached each step (landing page, signup form, first project) and compares those counts against last week',
-                        'It names the step that fell, and you go fix it',
+                        'It finds the step that fell in seconds, then you ask it to check Error Tracking for that page too',
+                        'It turns up a new JavaScript error, links the session replays that show it, and once the fix ships, confirms in the same thread that the funnel step recovered',
                     ],
                 },
                 points: [
                     {
-                        title: 'Agents read what you built',
+                        title: "Turns out, there's more",
                         icon: 'IconSearch',
-                        body: 'PostHog AI, the Slack app, and your editor through MCP all answer from the events and insights you already have. It can only explain a signup drop if something in your product is actually called a signup.',
+                        body: "Rebuilding the funnel by hand takes a few minutes. Asking PostHog AI to keep digging, pulling in whatever data explains the drop, costs one more message in the same chat, so 'why did this drop' can end at 'here's the bug' instead of a step number.",
                     },
                     {
-                        title: 'Ask, then act',
+                        title: 'No prompt required',
                         icon: 'IconMessage',
                         body: 'A scout runs that same check on your funnels every day without being asked, watching the conversion rate rather than raw traffic, so a quiet Sunday never reads as a drop.',
                     },
@@ -285,7 +286,16 @@ export const productAnalytics = {
                     {
                         title: 'It watches rates, not traffic',
                         icon: 'IconBrain',
-                        body: 'Traffic dropping alone never triggers a report. A conversion rate falling from 40% to 22% does, so the scout can name the exact step that broke instead of flagging every quiet day.',
+                        body: (
+                            <>
+                                Traffic dropping alone never triggers a report. A conversion rate falling from 40% to
+                                22% does, so the{' '}
+                                <Link to="/docs/self-driving/scouts" state={{ newWindow: true }} className="underline">
+                                    scout
+                                </Link>{' '}
+                                can name the exact step that broke instead of flagging every quiet day.
+                            </>
+                        ),
                     },
                     {
                         title: 'More context, better reports',

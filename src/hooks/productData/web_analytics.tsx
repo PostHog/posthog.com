@@ -229,12 +229,12 @@ export const webAnalytics = {
                     steps: [
                         'Monday morning you open the dashboard and referral traffic looks low',
                         'You check the session attribution explorer to see which referrer or UTM stopped showing up',
-                        'You take it to whoever owns that channel',
+                        'You take it to whoever owns that channel, and they get it running again',
                     ],
                 },
                 points: [
                     {
-                        title: 'A digest already lands in your inbox',
+                        title: "Turns out, there's more",
                         icon: 'IconHandwave',
                         body: "A weekly digest emails you visitors, sessions, bounce rate, top pages, and traffic sources, so the numbers reach you without opening the dashboard. It's a fixed weekly snapshot, so a Tuesday drop waits until the next one to show up.",
                     },
@@ -252,18 +252,18 @@ export const webAnalytics = {
                     icon: 'IconMagicWand',
                     steps: [
                         'You ask PostHog AI: "which channels dropped in the last 30 days?"',
-                        'It compares each source against its usual pattern and names the one that fell',
-                        'You share the answer in Slack, so marketing and engineering read the same number',
+                        'It names the channel that fell, and you ask it to check whether that landing page is throwing errors',
+                        'It finds a broken redirect in Error Tracking, and you ask it to open the fix, so the drop ends in a merged pull request instead of just an explanation',
                     ],
                 },
                 points: [
                     {
-                        title: 'Agents read the same digest',
+                        title: "Turns out, there's more",
                         icon: 'IconSearch',
-                        body: 'PostHog AI, Slack, and your editor through MCP all answer from the same weekly digest (visitors, sessions, bounce rate, top pages, and top sources) instead of three different numbers depending who you ask.',
+                        body: "Comparing channels by hand means opening the dashboard and doing the math yourself. Asking PostHog AI to keep digging, whatever the cause turns out to be, costs one more message in the same chat, so a channel drop doesn't stop at 'referral fell' when the real answer is 'the redirect broke.'",
                     },
                     {
-                        title: 'Ask, then act',
+                        title: 'No prompt required',
                         icon: 'IconMessage',
                         body: 'A scout runs that same comparison every day without being asked, and only lands in your Inbox when a channel actually steps away from its own pattern.',
                     },
@@ -290,7 +290,17 @@ export const webAnalytics = {
                     {
                         title: "Most fixes aren't in your code",
                         icon: 'IconStack',
-                        body: 'A referral going dark or broken UTM tagging lives in your campaign tooling, not a repo, so the scout usually files a report for you to act on rather than a pull request. The exception is a web vitals regression it can trace to one asset.',
+                        body: (
+                            <>
+                                A referral going dark or broken UTM tagging lives in your campaign tooling, not a repo,
+                                so the{' '}
+                                <Link to="/docs/self-driving/scouts" state={{ newWindow: true }} className="underline">
+                                    scout
+                                </Link>{' '}
+                                usually files a report for you to act on rather than a pull request. The exception is a
+                                web vitals regression it can trace to one asset.
+                            </>
+                        ),
                     },
                 ],
             },

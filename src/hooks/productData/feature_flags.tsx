@@ -16,6 +16,7 @@ import {
     IconSparkles,
     IconToggle,
 } from '@posthog/icons'
+import Link from 'components/Link'
 import { features } from './feature_flags/features'
 import { applications, topFeatures } from './feature_flags/slides'
 import { getTool } from '../../data/tools'
@@ -230,19 +231,19 @@ export const featureFlags = {
                     steps: [
                         'You wrap the new checkout in a flag and turn it on for 10% of users',
                         'You watch the dashboards, widen to half, then to everyone',
-                        'Months later the flag is still in your code, long after everyone has it',
+                        'Months later, the stale flag might still be sitting in your code',
                     ],
                 },
                 points: [
                     {
-                        title: 'You can already see what’s stale',
+                        title: "Turns out, there's more",
                         icon: 'IconHandwave',
-                        body: 'The flags list can filter to show flags unevaluated in 30+ days, or fully rolled out with no targeting left. Remembering to check it, and to act on what it shows, is still on you.',
+                        body: 'The flags list in PostHog Web can filter to show flags unevaluated in 30+ days, or fully rolled out with no targeting left. Remembering to check it (and to act on what it shows) is still on you.',
                     },
                     {
                         title: 'Point an agent at it instead',
                         icon: 'IconSparkles',
-                        body: 'Every flag write comes with a blast-radius estimate and an audit trail an agent can check before touching anything. Point it at your roster and it can create, roll out, or clean up a flag from a plain-English description.',
+                        body: 'Every flag write comes with a blast-radius estimate and an audit trail an agent can investigate. Point a bot at your roster and it can create, roll out, or clean up a flag from a plain-English description.',
                     },
                 ],
             },
@@ -252,21 +253,21 @@ export const featureFlags = {
                 scenario: {
                     icon: 'IconMagicWand',
                     steps: [
-                        'From your editor, you ask your coding agent for the flag while you write the code that checks it',
+                        "From your editor, you ask your coding agent to flag the change you're ready to ship",
                         'It creates the flag with the targeting you described, ready to roll out at 10%',
-                        'Later you tag @PostHog in Slack: "widen new-checkout to half of users"',
+                        'A few days later, you tag @PostHog in Slack. Metrics looking good? Increase the rollout percentage to 50',
                     ],
                 },
                 points: [
                     {
-                        title: 'Flags are how agents ship safely',
+                        title: "Turns out, there's more",
                         icon: 'IconShield',
-                        body: "An agent that wraps its change in a flag ships with a kill switch built in. That's what makes it safe to let PostHog ship changes on its own at the next level.",
+                        body: "Asking again a few days later doesn't have to depend on you remembering to do it. The same agent can schedule that rollout increase itself, one-off or recurring, so it happens at a set time whether or not anyone sends the message.",
                     },
                     {
-                        title: 'Ask, then act',
+                        title: 'No prompt required',
                         icon: 'IconMessage',
-                        body: "A scout audits the same roster on its own schedule, watching for ghost flags pointing at nothing and evaluation cliffs where a healthy flag's call volume just vanishes.",
+                        body: "The feature flags scout runs an audit on its own schedule, watching for ghost flags pointing at nothing and evaluation cliffs where a healthy flag's call volume vanishes.",
                     },
                 ],
             },
@@ -286,12 +287,21 @@ export const featureFlags = {
                     {
                         title: "It's auditing the wiring, not your judgment",
                         icon: 'IconBrain',
-                        body: 'The scout checks four things on a schedule: evaluation cliffs, ghost flags, response shifts, and plain flag debt. All of it lands in one report instead of one per flag.',
+                        body: (
+                            <>
+                                A{' '}
+                                <Link to="/docs/self-driving/scouts" state={{ newWindow: true }} className="underline">
+                                    scout
+                                </Link>{' '}
+                                checks four things on a schedule: evaluation cliffs, ghost flags, response shifts, and
+                                plain flag debt. All of it lands in one report instead of one per flag.
+                            </>
+                        ),
                     },
                     {
-                        title: 'The safety rail for autonomous changes',
-                        icon: 'IconToggleOff',
-                        body: 'When PostHog ships a fix from a report, it goes out behind a flag. Nothing runs until you switch it on, and turning it off again takes one click, no redeploy needed.',
+                        title: 'The control point for every autonomous fix',
+                        icon: 'IconShield',
+                        body: 'The same applies wherever else self-driving ships a fix, whether the signal came from a scout or a built-in source like error tracking: the pull request wraps it in a flag, so merging the code and switching on the behavior stay two separate steps.',
                     },
                 ],
             },

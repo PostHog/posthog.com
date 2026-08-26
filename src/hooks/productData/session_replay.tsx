@@ -16,6 +16,7 @@ import {
     IconRocket,
     IconSparkles,
 } from '@posthog/icons'
+import Link from 'components/Link'
 import { features } from './session_replay/features'
 import { applications, topFeatures } from './session_replay/slides'
 import { getTool } from '../../data/tools'
@@ -329,7 +330,7 @@ export const sessionReplay = {
     },
     useCaseRamp: {
         intro: 'Session Replay works at three levels. You can watch recordings yourself, ask an agent to find and summarize them for you, or let PostHog work proactively with your data.',
-        scenario: 'Users keep rage-clicking a dead button (why though)',
+        scenario: 'Users keep rage-clicking (why though?)',
         columns: [
             {
                 level: 'Do it yourself',
@@ -337,21 +338,21 @@ export const sessionReplay = {
                 scenario: {
                     icon: 'IconRewindPlay',
                     steps: [
-                        "A support ticket points you at one user's recording, and you watch them click the button six times and give up",
-                        'You filter for other recordings on the same page and find it happening to other people too',
-                        'You file the bug with a link to a recording, so nobody argues about whether it is real',
+                        'Clicks are piling up on one button, so you pull up a handful of recordings to see what users are up to',
+                        "Turns out they're trying to expand a section that looks clickable but isn't",
+                        'You sketch a fix and file it, with a better feel for that page than you had an hour ago. But now you need to prompt an agent (or write the code yourself)',
                     ],
                 },
                 points: [
                     {
-                        title: 'You can already filter for it',
+                        title: "Turns out, there's more",
                         icon: 'IconHandwave',
-                        body: "Recordings are filterable by rage clicks, dead clicks, and errors, so you're not watching blind. Nothing here tells you when a new pattern shows up, though; running the search is still on you.",
+                        body: "Watching a handful of sessions like this is how you build a real feel for your product. Filters in PostHog Web help sort ones worth watching. That feel doesn't scale past your free time for playback.",
                     },
                     {
                         title: 'Point an agent at it instead',
                         icon: 'IconSparkles',
-                        body: 'An agent can run that same filter across every session at once, then watch and summarize what it finds, instead of you doing it one recording at a time.',
+                        body: 'PostHog AI can watch and summarize hundreds of sessions, not just the handful you had time for, turning the same kind of hunch into a pattern you can prove.',
                     },
                 ],
             },
@@ -361,21 +362,21 @@ export const sessionReplay = {
                 scenario: {
                     icon: 'IconMagicWand',
                     steps: [
-                        'You ask PostHog AI for sessions where someone clicked the checkout button more than once',
-                        'It returns the matching recordings and summarizes what they have in common',
-                        'You watch one to confirm, then send the summary to whoever owns checkout',
+                        'You ask PostHog AI what people are doing right before they rage click that button, across every session this week',
+                        "It summarizes the pattern across hundreds of matching recordings: most are trying to expand a section that looks clickable but isn't",
+                        'You watch two or three to confirm the read, then share the evidence with your team',
                     ],
                 },
                 points: [
                     {
-                        title: 'Agents search what you record',
+                        title: "Turns out, there's more",
                         icon: 'IconSearch',
-                        body: 'PostHog AI, Slack, and your editor through MCP all search the same recordings you would open yourself. Turn on error tracking too and an agent can work backwards from an exception to the session that produced it.',
+                        body: "It can slice that same pattern by who's affected, too – ask whether it's your free users or your highest-paying accounts hitting this, and you'll know whether it's a nice-to-fix or a today problem.",
                     },
                     {
-                        title: 'Ask, then act',
+                        title: 'No prompt required',
                         icon: 'IconMessage',
-                        body: 'A scout clusters the same rage clicks and dead ends across every session, and only surfaces the ones concentrated enough on one page to be a real pattern, not a mood.',
+                        body: 'Replay Vision watches every session for the same kind of pattern continuously, no prompt required, turning what it sees into queryable data instead of a one-off answer.',
                     },
                 ],
             },
@@ -385,22 +386,31 @@ export const sessionReplay = {
                 scenario: {
                     icon: 'IconSearch',
                     steps: [
-                        "A session replay scout compares clicks on each page against that page's own normal, so a spike on one button stands out",
-                        'It checks the pattern holds across enough separate people to rule out one frustrated user, then files a report in your Inbox',
-                        'The report links the recordings behind it, so you can watch the failure before deciding anything',
-                        'A replay proves people are stuck but not always why, so you decide the fix yourself and hand it to an agent from here',
+                        "A Replay Vision scanner watches that page's sessions continuously",
+                        'The pattern lands as a signal, and it groups with an error tracking signal on the same page into one report',
+                        'The combined evidence is enough to write the fix: a cursor style and a real click target',
+                        'The pull request ships with a summary attached, so you log the "why" along with the diff',
                     ],
                 },
                 points: [
                     {
-                        title: 'Your recordings are the evidence',
-                        icon: 'IconBrain',
-                        body: 'The scout reads sessions at a volume nobody has time for, which is why a report can name one button on one page instead of guessing. Those same recordings are how you check the fix worked afterwards.',
+                        title: 'It watches the video, not just the clicks',
+                        icon: 'IconEye',
+                        body: (
+                            <>
+                                <Link to="/docs/replay-vision" state={{ newWindow: true }} className="underline">
+                                    Replay Vision
+                                </Link>{' '}
+                                watches each session's actual video alongside the click and pageview events, catching
+                                hesitation and where someone's attention drifts – visual cues no event stream captures
+                                on its own.
+                            </>
+                        ),
                     },
                     {
-                        title: 'Replay Vision does the watching',
-                        icon: 'IconEye',
-                        body: "Describe what to look for once and Replay Vision, in beta, watches every session's video for it, catching hesitation and dead ends that clicks alone miss. Its findings land as events you can chart, so a pattern across hundreds of sessions surfaces on its own.",
+                        title: 'Context for the fix, not the whole story',
+                        icon: 'IconBrain',
+                        body: "When there's a clear code fix, that combined evidence from signal sources rides along in the pull request generated in your inbox. When a replay only shows the symptom, it routes to whoever owns that page instead.",
                     },
                 ],
             },

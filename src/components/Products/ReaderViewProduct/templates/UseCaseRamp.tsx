@@ -1,5 +1,6 @@
 import React from 'react'
 import { Tabs } from 'radix-ui'
+import slugify from 'slugify'
 import * as icons from '@posthog/icons'
 import {
     IconArrowRight,
@@ -13,6 +14,7 @@ import {
     IconSparkles,
     IconTerminal,
 } from '@posthog/icons'
+import Glow from 'components/Glow'
 import Link from 'components/Link'
 import LetPostHogScroller from 'components/LetPostHogScroller'
 import { SectionComponentProps } from '../types'
@@ -21,18 +23,14 @@ interface Surface {
     name: string
     to: string
     Icon: React.ComponentType<{ className?: string }>
-    /** `text-*` class for the icon. */
     color: string
-    /** `bg-*` class for the active tab's underline. */
     accent: string
 }
 
 /**
- * The products (surfaces) a column happens in. Icons, colors and links mirror
- * the global Products nav in `components/TaskBarMenu/menuData.tsx` so a product
- * reads the same here as it does in the nav. PostHog Web and MCP have no
- * productData entry and the inbox has no slug, so these are declared here
- * rather than resolved from `allProducts`.
+ * Mirrors icon/color/link from the global Products nav (`components/TaskBarMenu/menuData.tsx`).
+ * PostHog Web and MCP have no productData entry, and the inbox has no slug, so
+ * these are declared here rather than resolved from `allProducts`.
  */
 const surfaces: Record<string, Surface> = {
     web: { name: 'PostHog Web', to: '/products', Icon: IconBolt, color: 'text-red', accent: 'bg-red' },
@@ -47,37 +45,35 @@ const surfaces: Record<string, Surface> = {
     },
     slack: { name: 'PostHog Slack', to: '/slack', Icon: IconAtSign, color: 'text-sky-blue', accent: 'bg-sky-blue' },
     cli: { name: 'PostHog CLI', to: '/docs/cli', Icon: IconTerminal, color: 'text-green', accent: 'bg-green' },
-    desktop: { name: 'PostHog Desktop', to: '/desktop', Icon: IconCoffee, color: 'text-brown', accent: 'bg-brown' },
+    desktop: {
+        name: 'PostHog Desktop',
+        to: '/desktop',
+        Icon: IconCoffee,
+        color: 'text-brown dark:text-brown-dark',
+        accent: 'bg-brown',
+    },
 }
 
-/**
- * The section's one running scenario, as it plays out at a single level. The
- * scenario itself (its title) is named once in `UseCaseRampData.scenario` and
- * repeated on every tab – following the same incident through all three levels
- * is what teaches the ramp, so each level only supplies its own version of the
- * story, not a new topic.
- */
+/** One level's version of the scenario named in `UseCaseRampData.scenario`. */
 interface RampScenario {
     /**
-     * An `@posthog/icons` export name, e.g. `'IconFunnels'`. Resolved at render
-     * time the same way `components/MainNav` does it, so the data stays free of
-     * JSX and per-hook icon imports. An unknown name renders no icon.
+     * An `@posthog/icons` export name, e.g. `'IconFunnels'`, resolved at render
+     * time so the data stays free of JSX. An unknown name renders no icon.
      */
     icon?: string
     steps: string[]
 }
 
-/**
- * A card explaining what this level means for the ramp – why the manual work
- * above the section is also fuel for the next level, what the scout actually
- * reads, where the full prompt list lives. Prose, not steps: the steps belong
- * to the scenario.
- */
+/** What this level means for the ramp. Prose, not steps – steps belong to `RampScenario`. */
 interface RampPoint {
     title: string
     /** An `@posthog/icons` export name, resolved like `RampScenario.icon`. */
     icon?: string
-    body: string
+    /**
+     * Usually a plain string. Accepts JSX so a point can link out a term a
+     * reader might not know yet – a scout, Replay Vision – to its docs page.
+     */
+    body: React.ReactNode
 }
 
 const UseCaseIcon = ({ name, color }: { name?: string; color?: string }): JSX.Element | null => {
@@ -89,38 +85,18 @@ const UseCaseIcon = ({ name, color }: { name?: string; color?: string }): JSX.El
     return <Icon className={`size-4 shrink-0 ${color ? `text-${color}` : 'text-secondary'}`} />
 }
 
-/**
- * One level of the ramp. Levels are tabs rather than numbered steps – plenty of
- * teams skip one, and an agent-first team may well start at the self-driving end
- * and pick up the hands-on work later.
- */
 interface RampColumn {
-    /** Action-oriented label: what you're doing at this level of autonomy. */
     level: string
-    /**
-     * Keys into `surfaces`: the products this level covers. The first one supplies
-     * the tab's icon and underline colour. Which product each individual use case
-     * happens in is tagged per use case, not from here.
-     */
+    /** Keys into `surfaces`. The first key sets the tab's icon and color. */
     surfaces?: string[]
     /** Overrides the badge inherited from `levelMode`. */
     mode?: string
-    /** The running scenario as it plays out at this level. */
     scenario?: RampScenario
-    /**
-     * What this level means for the ramp – usually two cards. On every column but
-     * the last, the final point doubles as a clickable card into the next tab, so
-     * write its body to end on that pivot (see `UseCaseRamp`'s render of `points`).
-     */
+    /** Usually two cards. The final one doubles as a clickable pivot into the next tab. */
     points?: RampPoint[]
 }
 
 interface UseCaseRampData {
-    /**
-     * Frames the section against the rest of the page: the manual tool above is
-     * level one, and this is how the same data climbs to agents and self-driving.
-     * Tool-specific, like the rest of the ramp copy.
-     */
     intro?: string
     /**
      * Title of the one incident traced through every level, e.g. 'Signup
@@ -132,10 +108,7 @@ interface UseCaseRampData {
     columns?: RampColumn[]
 }
 
-/**
- * How autonomous each level is, keyed by `level`. Rendered as a badge next to
- * the level's surface tags, e.g. "Agent-assisted with" PostHog AI, PostHog Slack.
- */
+/** Badge label per level, rendered next to the surface tags, e.g. "Agent-assisted with". */
 const levelMode: Record<string, string> = {
     'Do it yourself': 'Hands-on',
     'Ask an agent': 'Agent-assisted',
@@ -143,11 +116,8 @@ const levelMode: Record<string, string> = {
 }
 
 /**
- * Tab icon + color, keyed by `level` – deliberately independent of the surface
- * icons/colors used elsewhere (the "PostHog Web"/"PostHog AI" pills), since the
- * tab needs to tell its own story: a hands-on click, then AI, then autonomous.
- * Color ramps blue → purple → red across the three tabs to read as escalating
- * intensity, distinct from any one product's brand color.
+ * Tab icon + color, independent of a column's surface icons/colors. Ramps
+ * blue → purple → red across the three tabs to read as escalating autonomy.
  */
 const levelTabIcon: Record<string, { Icon: React.ComponentType<{ className?: string }>; color: string }> = {
     'Do it yourself': { Icon: IconCursorClick, color: 'text-blue' },
@@ -155,14 +125,10 @@ const levelTabIcon: Record<string, { Icon: React.ComponentType<{ className?: str
     'Ship with PostHog': { Icon: IconRocket, color: 'text-red' },
 }
 
-const slugify = (value: string): string => value.toLowerCase().replace(/[^a-z0-9]+/g, '-')
+const toTabValue = (value: string): string => slugify(value, { lower: true, strict: true })
 
 const resolveSurfaces = (keys?: string[]): Surface[] => (keys ?? []).map((key) => surfaces[key]).filter(Boolean)
 
-/**
- * Which product(s) a level happens in, as icon + name pills next to the level
- * heading. Kept on one line (no wrap) alongside the mode badge.
- */
 const SurfaceTags = ({ keys }: { keys?: string[] }): JSX.Element | null => {
     const resolved = resolveSurfaces(keys)
     if (!resolved.length) return null
@@ -193,7 +159,7 @@ const UseCaseRamp = ({ id, productData }: SectionComponentProps): JSX.Element | 
     const defaultColumn = columns.find((column) => column.level === 'Ask an agent') ?? columns[0]
     // Controlled (rather than `defaultValue`) so the "next tab" CTA cards can jump the
     // reader forward a level with a click, instead of just telling them where to go.
-    const [activeTab, setActiveTab] = React.useState(defaultColumn ? slugify(defaultColumn.level) : '')
+    const [activeTab, setActiveTab] = React.useState(defaultColumn ? toTabValue(defaultColumn.level) : '')
 
     if (!columns.length) return null
 
@@ -218,7 +184,7 @@ const UseCaseRamp = ({ id, productData }: SectionComponentProps): JSX.Element | 
                         return (
                             <Tabs.Trigger
                                 key={column.level}
-                                value={slugify(column.level)}
+                                value={toTabValue(column.level)}
                                 className="group relative flex min-w-[calc(50%-0.25rem)] flex-1 cursor-pointer select-none flex-col items-center gap-1 rounded-t-md px-3 py-2.5 text-sm font-semibold text-secondary transition-colors hover:text-primary data-[state=active]:bg-light data-[state=active]:text-primary @md/reader-content:min-w-0 dark:data-[state=active]:bg-dark"
                             >
                                 {TabIcon && <TabIcon className={`size-5 shrink-0 ${tabColor}`} />}
@@ -239,7 +205,7 @@ const UseCaseRamp = ({ id, productData }: SectionComponentProps): JSX.Element | 
                     return (
                         <Tabs.Content
                             key={column.level}
-                            value={slugify(column.level)}
+                            value={toTabValue(column.level)}
                             /*
                              * No display utility here. Radix keeps a visited panel mounted as
                              * `<div hidden>` with empty children, and `hidden` only works through the
@@ -250,7 +216,7 @@ const UseCaseRamp = ({ id, productData }: SectionComponentProps): JSX.Element | 
                             className="rounded-b-md rounded-tr-md bg-light p-4 outline-none @md/reader-content:p-6 dark:bg-dark"
                         >
                             <div className="flex flex-col gap-5">
-                                <div className="flex flex-col gap-2">
+                                <div className="relative z-10 flex flex-col gap-2">
                                     <h3 className="m-0 text-xl font-bold text-primary @md/reader-content:text-2xl">
                                         {column.level}
                                     </h3>
@@ -264,41 +230,53 @@ const UseCaseRamp = ({ id, productData }: SectionComponentProps): JSX.Element | 
                                     )}
                                 </div>
                                 {column.scenario && (
-                                    <div className="flex flex-col rounded-md border border-primary bg-accent p-3 @md/reader-content:p-4">
-                                        {/*
-                                         * Same title on every tab (from `ramp.scenario`) – the repetition is the point.
-                                         * The "Example:" label makes clear this is one scenario among many, not the
-                                         * only thing this level is good for.
-                                         */}
-                                        <p className="m-0 mb-1 flex items-center gap-1.5 text-sm font-bold text-primary">
-                                            <UseCaseIcon name={column.scenario.icon} color={productData?.color} />
-                                            <span className="font-normal text-secondary">Example:</span>{' '}
-                                            {ramp?.scenario}
-                                        </p>
-                                        {/*
-                                         * `list-decimal` sits on the li, not the ol: the `not-prose` layer sets
-                                         * `list-style-type: none` directly on `.not-prose ol li`, which beats a
-                                         * value inherited from the ol.
-                                         */}
-                                        <ol className="m-0 pl-5 text-[13px] leading-snug text-secondary">
-                                            {column.scenario.steps.map((step) => (
-                                                <li key={step} className="mt-1 list-decimal">
-                                                    {step}
-                                                </li>
-                                            ))}
-                                        </ol>
-                                    </div>
+                                    // `isolate` gives this box its own stacking context so `glowClassName="-z-10"`
+                                    // stays scoped here – without it, the negative z-index escapes to the page
+                                    // root and the glow paints behind the entire page instead of just this card.
+                                    <Glow
+                                        color={productData?.color}
+                                        size="sm"
+                                        intensity="soft"
+                                        rounded="md"
+                                        className="w-full isolate"
+                                        glowClassName="-z-10"
+                                    >
+                                        <div className="flex flex-col rounded-md border border-primary bg-accent p-3 @md/reader-content:p-4">
+                                            {/* The "Example:" label marks this as one scenario among several, not the level's only use case. */}
+                                            <p className="m-0 mb-1 flex items-center gap-1.5 text-sm font-bold text-primary">
+                                                <UseCaseIcon name={column.scenario.icon} color={productData?.color} />
+                                                <span className="font-normal text-secondary">Example:</span>{' '}
+                                                {ramp?.scenario}
+                                            </p>
+                                            {/*
+                                             * `list-decimal` sits on the li, not the ol: the `not-prose` layer sets
+                                             * `list-style-type: none` directly on `.not-prose ol li`, which beats a
+                                             * value inherited from the ol.
+                                             */}
+                                            <ol className="m-0 pl-5 text-[13px] leading-snug text-secondary">
+                                                {column.scenario.steps.map((step) => (
+                                                    <li key={step} className="mt-1 list-decimal">
+                                                        {step}
+                                                    </li>
+                                                ))}
+                                            </ol>
+                                        </div>
+                                    </Glow>
                                 )}
                                 {!!column.points?.length && (
-                                    <ul className="m-0 grid list-none gap-3 p-0 @md/reader-content:grid-cols-2">
+                                    <ul className="relative z-10 m-0 grid list-none gap-3 p-0 @md/reader-content:grid-cols-2">
                                         {column.points.map((point, pointIndex) => {
                                             // The last point doubles as the pivot into the next tab: only the
-                                            // arrow is clickable, so the card itself stays a plain static card.
+                                            // arrow is clickable. It's positioned absolutely, not pushed down
+                                            // with `mt-auto`, so it sits in the corner without stretching the
+                                            // card past its own content.
                                             const isPivot = pointIndex === column.points!.length - 1 && !!nextColumn
                                             return (
                                                 <li
                                                     key={point.title}
-                                                    className="flex h-full flex-col rounded-md border border-primary bg-accent p-3 @md/reader-content:p-4"
+                                                    className={`relative flex flex-col rounded-md border border-primary bg-accent p-3 @md/reader-content:p-4 ${
+                                                        isPivot ? 'pb-9' : ''
+                                                    }`}
                                                 >
                                                     <p className="m-0 mb-1 flex items-center gap-1.5 text-sm font-bold text-primary">
                                                         <UseCaseIcon name={point.icon} color={productData?.color} />
@@ -310,11 +288,11 @@ const UseCaseRamp = ({ id, productData }: SectionComponentProps): JSX.Element | 
                                                     {isPivot && (
                                                         <button
                                                             type="button"
-                                                            onClick={() => setActiveTab(slugify(nextColumn.level))}
+                                                            onClick={() => setActiveTab(toTabValue(nextColumn.level))}
                                                             aria-label={`Go to ${nextColumn.level}`}
-                                                            className="group mt-auto self-end rounded-full p-1 text-secondary transition-colors hover:text-primary"
+                                                            className="group absolute bottom-2 right-2 rounded-full p-1 text-secondary transition-colors hover:text-primary"
                                                         >
-                                                            <IconArrowRight className="size-6 shrink-0 transition-transform group-hover:translate-x-1" />
+                                                            <IconArrowRight className="size-5 shrink-0 transition-transform group-hover:translate-x-1" />
                                                         </button>
                                                     )}
                                                 </li>

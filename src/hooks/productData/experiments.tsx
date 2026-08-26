@@ -1,4 +1,5 @@
 import React from 'react'
+import Link from 'components/Link'
 import { getTool } from '../../data/tools'
 import {
     IconChat,
@@ -245,7 +246,7 @@ export const experiments = {
                 },
                 points: [
                     {
-                        title: 'You can already see this',
+                        title: "Turns out, there's more",
                         icon: 'IconHandwave',
                         body: 'Every experiment page runs a sample ratio mismatch check automatically and flags it right there. You still have to open the page to see whether your test passed it.',
                     },
@@ -264,17 +265,17 @@ export const experiments = {
                     steps: [
                         'You ask PostHog AI: "test the new onboarding, 50/50, measure activation"',
                         'It creates the experiment and the flag behind it, wired to your metric',
-                        'A week later you ask in Slack whether it is significant yet, and it answers with the numbers',
+                        "Once it's significant, you ask what changed between variants. It summarizes the session replays for each group, then you tell it to ship the winner to everyone. It rolls that out and opens the pull request retiring the losing code path",
                     ],
                 },
                 points: [
                     {
-                        title: 'Agents build on your metrics',
+                        title: "Turns out, there's more",
                         icon: 'IconSearch',
-                        body: 'The test an agent scaffolds is wired to the events and metrics you already track, so a well-instrumented product gives it a real metric to decide on instead of a rough proxy.',
+                        body: 'A dashboard tells you which variant won. Ask PostHog AI and it can also summarize the session replays behind each group in the same conversation, so you learn why people activated more, not just that they did.',
                     },
                     {
-                        title: 'Ask, then act',
+                        title: 'No prompt required',
                         icon: 'IconMessage',
                         body: "A scout runs that same sample ratio check on every experiment automatically, and it only flags a split as wrong once there's enough traffic for the math to mean something.",
                     },
@@ -301,7 +302,17 @@ export const experiments = {
                     {
                         title: 'It audits the measurement, not your call',
                         icon: 'IconShield',
-                        body: 'A skewed split, a stalled exposure count, a flag edited mid-run, or a zombie test still running weeks after the answer was clear can all make a real result look fake, or a fake one look real. It only ever reports the problem, never the verdict.',
+                        body: (
+                            <>
+                                A skewed split, a stalled exposure count, a flag edited mid-run, or a zombie test still
+                                running weeks after the answer was clear can each undermine a result without you
+                                noticing. A{' '}
+                                <Link to="/docs/self-driving/scouts" state={{ newWindow: true }} className="underline">
+                                    scout
+                                </Link>{' '}
+                                only ever reports the problem, never the verdict.
+                            </>
+                        ),
                     },
                 ],
             },

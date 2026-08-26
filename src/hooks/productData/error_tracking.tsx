@@ -16,6 +16,7 @@ import {
     IconSparkles,
     IconWarning,
 } from '@posthog/icons'
+import Link from 'components/Link'
 import { features } from './error_tracking/features'
 import { applications, topFeatures } from './error_tracking/slides'
 import { getTool } from '../../data/tools'
@@ -225,9 +226,9 @@ export const errorTracking = {
                 },
                 points: [
                     {
-                        title: 'Triage is on you',
+                        title: 'You can already alert on this',
                         icon: 'IconHandwave',
-                        body: 'Every exception lands in one list, and you decide which of them are worth an afternoon. A rare crash that breaks checkout for your biggest customer looks a lot like noise until somebody reads it.',
+                        body: 'Alerts in PostHog Web already tell you when a new issue appears or spikes. Deciding which of them are worth an afternoon, and reading the stack trace behind each one, is still on you.',
                     },
                     {
                         title: 'Point an agent at it instead',
@@ -243,20 +244,29 @@ export const errorTracking = {
                     icon: 'IconMagicWand',
                     steps: [
                         'From your editor you ask which errors are new since the last deploy',
-                        'It pulls the stack trace, explains the likely cause, and writes the fix in the file you already have open',
-                        'Once it ships, you tag @PostHog in Slack to mark the issue resolved',
+                        'It pulls the stack trace and the session replay attached to it, then writes the fix wrapped behind a flag',
+                        'Once it ships, you tag @PostHog in Slack to check whether the issue actually stopped firing before you widen the rollout',
                     ],
                 },
                 points: [
                     {
-                        title: 'Agents read the trace and the user',
+                        title: "Turns out, there's more",
                         icon: 'IconSearch',
                         body: 'An agent gets the same stack trace, session replay, and person properties you would, so it can name the line rather than guess at the cause. Releases with source linking take it further, pointing straight at the file and commit that shipped the bug.',
                     },
                     {
-                        title: 'Ask, then act',
+                        title: 'No prompt required',
                         icon: 'IconMessage',
-                        body: 'A scout uses the same spike detection that powers your alerts to catch a new error the moment it clears its baseline, no prompt required.',
+                        body: (
+                            <>
+                                A{' '}
+                                <Link to="/docs/self-driving/scouts" state={{ newWindow: true }} className="underline">
+                                    scout
+                                </Link>{' '}
+                                uses the same spike detection that powers your alerts to catch a new error the moment it
+                                clears its baseline, no prompt required.
+                            </>
+                        ),
                     },
                 ],
             },

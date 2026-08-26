@@ -17,6 +17,7 @@ import {
 } from '@posthog/icons'
 import OldWaySection from 'components/AIObservability/OldWaySection'
 import PostHogWaySection from 'components/AIObservability/PostHogWaySection'
+import Link from 'components/Link'
 import { getTool } from '../../data/tools'
 import { features } from './ai_observability/features'
 import { applications, topFeatures, wizardSupports } from './ai_observability/slides'
@@ -227,14 +228,14 @@ export const aiObservability = {
                     steps: [
                         'The invoice from your model provider comes in higher than last month, so you open the cost dashboard',
                         'You break spend down by model, then by feature, and find one prompt sending far more tokens than you expected',
-                        'You open a trace from that feature, read the prompt that went in, and trim it',
+                        'You open a trace from that feature, then edit and trim that prompt in Prompt management',
                     ],
                 },
                 points: [
                     {
                         title: 'You can already alert on this',
                         icon: 'IconHandwave',
-                        body: 'A native anomaly detection alert on the AI Observability dashboard can watch cost, latency, or error rate and fire before you think to check. Finding the one expensive trace behind the spike is still on you.',
+                        body: 'A native anomaly detection alert on the AI Observability dashboard can flag cost spikes before you think to check. Finding the cause of the spike is still on you, though.',
                     },
                     {
                         title: 'Point an agent at it instead',
@@ -250,20 +251,20 @@ export const aiObservability = {
                     icon: 'IconMagicWand',
                     steps: [
                         'You ask PostHog AI what you spent this week, broken down by model',
-                        'It names the model whose spend jumped, then pulls the most expensive individual calls behind it',
-                        'Bonus: move the discussion into Slack and tag @PostHog to deliver more data to the thread, or ship a fix to your codebase',
+                        'It names the model whose spend jumped, then pulls the most expensive calls behind it, along with the exceptions and session replays tied to those same traces',
+                        'You tag @PostHog in Slack to trim that prompt in Prompt management and publish it, then ask it to confirm tomorrow that spend actually dropped',
                     ],
                 },
                 points: [
                     {
-                        title: 'AI that watches your AI',
-                        icon: 'IconSearch',
-                        body: 'Cost, latency, tokens, and errors are captured as ordinary PostHog events, so an agent can query them next to your product analytics, logs and errors.',
+                        title: "Turns out, there's more",
+                        icon: 'IconClockRewind',
+                        body: "Prompt management keeps every version, so publishing the fix doesn't erase anything. It stays live behind a label, and undoing a bad edit is flipping that label back, not writing a second fix.",
                     },
                     {
-                        title: 'Ask, then act',
+                        title: 'No prompt required',
                         icon: 'IconMessage',
-                        body: 'A scout runs the same cost and latency checks against your own baseline automatically, and only lands in your Inbox once a model or feature actually steps outside its normal range.',
+                        body: 'A plain alert only tells you something is off. A scout narrows that same spike to one model and one feature, attaches the sampled traces as evidence, and lands the finished investigation in your Inbox instead of just a ping.',
                     },
                 ],
             },
@@ -276,14 +277,23 @@ export const aiObservability = {
                         'An AI observability scout tracks spend against your own baseline, so it needs no budget threshold to tell that this is unusual',
                         'It narrows the jump to one model and one feature, and attaches the traces it sampled as evidence',
                         'The report lands in your Inbox and Slack, routed to whoever owns that feature',
-                        'Rewriting a prompt is a product decision, so it asks rather than opening a pull request. Reply in the thread and it will write the change',
+                        'Rewriting a prompt is a product decision, so it asks rather than opening a pull request. Reply in the thread and it will publish the new version',
                     ],
                 },
                 points: [
                     {
                         title: 'Your own history is the threshold',
                         icon: 'IconBrain',
-                        body: "The scout compares this week to your own history, not a number someone picked in advance. That's what lets it flag one model drifting without treating a busy afternoon as an incident.",
+                        body: (
+                            <>
+                                A{' '}
+                                <Link to="/docs/self-driving/scouts" state={{ newWindow: true }} className="underline">
+                                    scout
+                                </Link>{' '}
+                                compares this week to your own history, not a number someone picked in advance. That's
+                                what lets it flag one model drifting without treating a busy afternoon as an incident.
+                            </>
+                        ),
                     },
                     {
                         title: 'It watches your evaluations too',

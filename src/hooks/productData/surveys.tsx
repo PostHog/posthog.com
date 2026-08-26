@@ -1,4 +1,5 @@
 import React from 'react'
+import Link from 'components/Link'
 import { getTool } from '../../data/tools'
 import {
     IconChat,
@@ -205,12 +206,12 @@ export const surveys = {
                     steps: [
                         'You launch an open-text survey asking what feature people miss most',
                         'You read a few hundred responses and keep seeing the same request: export to CSV',
-                        'You file it, argue for it in planning, and eventually someone builds it',
+                        'You bring it to planning with the response count behind you, and it makes the roadmap',
                     ],
                 },
                 points: [
                     {
-                        title: 'You can already get pinged per response',
+                        title: 'You can already alert on this',
                         icon: 'IconHandwave',
                         body: 'A native notification can post each new response to Slack or a webhook as it lands. Reading hundreds of them for a pattern is still on you.',
                     },
@@ -229,17 +230,17 @@ export const surveys = {
                     steps: [
                         'You ask PostHog AI for a survey asking what feature people want most',
                         'It drafts the questions and targeting. You edit and launch',
-                        'In Slack you ask what people are asking for, and it summarizes the requests in the thread',
+                        'In Slack you ask what people are asking for, and it drafts the feature spec for the top request, weighted toward what paying customers actually asked for',
                     ],
                 },
                 points: [
                     {
-                        title: 'Agents read what came back',
+                        title: "Turns out, there's more",
                         icon: 'IconSearch',
-                        body: 'PostHog AI, Slack, and your editor all read the same responses, split promoters from detractors on an NPS survey, and compare segments too, like whether free users and paying customers are asking for different things.',
+                        body: 'Reading a few hundred responses for a theme takes an afternoon. Asking PostHog AI takes one message, and it can compare segments in the same answer, like whether free users and paying customers are asking for different things.',
                     },
                     {
-                        title: 'Ask, then act',
+                        title: 'No prompt required',
                         icon: 'IconMessage',
                         body: "A scout reads the same responses on a schedule, clustering scattered comments into one theme, and it holds NPS and CSAT drops to that survey's own baseline instead of a fixed score.",
                     },
@@ -261,12 +262,21 @@ export const surveys = {
                     {
                         title: "It knows what's a pattern and what's noise",
                         icon: 'IconBrain',
-                        body: "Five people describing the same checkout problem becomes one report with their quotes attached, not five you never read. A wobble in a small NPS sample doesn't clear that bar; a score drop against that survey's own baseline does.",
+                        body: "Five people describing the same missing feature becomes one report with their quotes attached, not five you never read. A wobble in a small NPS sample doesn't clear that bar; a score drop against that survey's own baseline does.",
                     },
                     {
                         title: 'You stay in the loop',
                         icon: 'IconPeople',
-                        body: 'Building a feature is a product decision, not an automatic fix, so the scout sends it to a person instead of writing code straight away. The pull request only happens once you ask for it, in the same thread.',
+                        body: (
+                            <>
+                                Building a feature is a product decision, not an automatic fix, so the{' '}
+                                <Link to="/docs/self-driving/scouts" state={{ newWindow: true }} className="underline">
+                                    scout
+                                </Link>{' '}
+                                sends it to a person instead of writing code straight away. The pull request only
+                                happens once you ask for it, in the same thread.
+                            </>
+                        ),
                     },
                 ],
             },
