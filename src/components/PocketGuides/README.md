@@ -213,6 +213,9 @@ pages send a reader to the volume, `/self-driving` sends them to the whole shelf
 `VolumeCard` deliberately has no `overflow-hidden`: the cover's hover tilt lifts a drop shadow, and
 clipping the card would cut it off.
 
+In `.mdx`, wrap the component in a `<div>`. On its own line MDX treats it as a paragraph and emits
+`<p>`, which cannot legally hold the cover's `<article>` and `<header>`.
+
 Volume metadata lives in `src/constants/pocketGuides.ts` (data-only so `gatsby/` can import it).
 The report frontmatter contract and the `.md` agent-mirror constraints are documented in
 `components/SelfDrivingInbox/README.md`.

@@ -19,7 +19,6 @@ export default function GuidesForProduct({ product }: GuidesForProductProps): JS
         return null
     }
 
-    // A `div`, not a `section`: MDX v1 wraps a component that follows prose in a `p`.
     return (
         <div className="not-prose">
             <VolumeCard volume={volume} count={counts[volume.id] ?? 0} />
