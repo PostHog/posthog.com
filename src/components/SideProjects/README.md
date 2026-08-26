@@ -20,8 +20,17 @@ Fields (`SideProject`):
 | `teamLink` | no | Fallback creator link when no community profile matches |
 | `githubUrl` | no* | Repo URL |
 | `liveUrl` | no* | Live app URL. *At least one of `githubUrl`/`liveUrl` is required – cards link to `liveUrl \|\| githubUrl`. Use relative URLs for pages on posthog.com |
-| `projectThumbnail` | no | Optional upload (PNG, JPG, WebP, or GIF) shown as the card image; cards without one use `SideProjectGraphic` |
+| `projectThumbnail` | no | Optional upload (PNG, JPG, WebP, or GIF) shown as the card image – 16:9, 1280×720 recommended (see [Card image](#card-image)); cards without one use `SideProjectGraphic` |
 | `tags` | no | Lowercase kebab-case tags (json array); folded through `TAG_ALIASES` for the filter bar |
+
+## Card image
+
+`SideProjectThumbnail` renders the upload as a plain `<img className="aspect-video w-full object-cover">`. There is no `srcset` and no resize step – Strapi stores the file, the card serves it as-is – so the uploaded dimensions are the dimensions that ship. Two things follow from that:
+
+- **Recommend 16:9 at 1280×720, with 800×450 as the floor.** The grid (`grid-cols-1 @xl:grid-cols-2 @3xl:grid-cols-3 @5xl:grid-cols-4`, inside a `max-w-7xl` container) keeps cards small: measured in the browser, the image renders ~285px wide at 4-up in a maximized window, ~250–350px at 2-up and 3-up, and at most ~550px at 1-up in a narrow window. 1280×720 clears the widest of those on a 2× display and still costs little to download. Below 800×450 the common 2× card starts to look soft.
+- **The bottom half is spoken for.** The identity overlay (title, creator, role, portrait) sits on a gradient that measures 46% of the image height at every card size, so detail low in the frame is covered. Anything off 16:9 is center-cropped by `object-cover`.
+
+`SideProjectForm`'s "Featured image" hint states the same numbers – keep the two in sync.
 
 ## Exports
 

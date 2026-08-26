@@ -618,8 +618,9 @@ export const SideProjectForm = ({
                 <div>
                     <label className="text-[15px] font-semibold">Featured image</label>
                     <p className="m-0 mb-2 text-sm text-secondary">
-                        Optional – a screenshot or artwork for the gallery card. Leave it out and we generate one for
-                        you.
+                        Optional – a screenshot or artwork for the gallery card. Use 16:9 – 1280×720 is ideal, 800×450
+                        the floor. Other shapes get center-cropped, and the title sits over the bottom half. Leave it
+                        out and we generate one for you.
                     </p>
                     <ImageDrop
                         image={featuredImage}
