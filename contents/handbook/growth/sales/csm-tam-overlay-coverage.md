@@ -121,19 +121,19 @@ Make sure you're in lockstep with your counterpart so you can each deepen your i
 But how do you maximize the value of having two PostHog humans on one account? A good starting point is to identify gaps in coverage and every open thread, then prioritize from there.
 
 A non-exhaustive list of questions to explore together to align on starting points: 
-- Is the customer struggling with a specific product? 
-- What frustrations have they surfaced recently? 
+- Is the customer struggling with a specific product? <PrivateLink url="https://posthog.slack.com/archives/C0B0K4EACH2/p1787237987414149">(example)</PrivateLink>
+- What frustrations have they surfaced recently?   
 - What expansion opportunities are there? 
-- Is their implementation healthy? Are they due for a health audit?  
-- Any cost optimization opportunities? 
+- Is their implementation healthy? Are they due for a health audit? <PrivateLink url="https://posthog.slack.com/archives/C0B0UD92EG1/p1782344320472969">(example)</PrivateLink>
+- Any cost optimization opportunities? <PrivateLink url="https://posthog.slack.com/archives/C0BAUUD4R5E/p1783969456929179">(example)</PrivateLink>
 
 Work with your counterpart to prioritize account needs, then explicitly assign each other the dedicated paths to run with. Think of it as delegating tasks that you'd otherwise do yourself if it was only you on the account. Play to your strengths and advantages on the account and give each other work streams where you have the highest likelihood of success. For example, if a TAM has a warm relationship with the champion for a new product expansion, they should continue focusing on that versus handing it off while it's a work in progress. 
 
-**Example scenario:**
+**Example scenario where you can both create value in separate product areas at the same time, whilst playing to your unique strengths as a TAM and CSM:**
 - Customer is a heavy Experiments user, and they run into a lot of issues because of their sophisticated setup. But they're concentrated on that product, so we're also thinking about expansion opportunities to derisk the account. 
 - The CSM could focus on deepening the value the customer gets from Experiments by scheduling 1:1 feedback calls with power users to better understand their pain points and work on fixes.
-- The TAM can focus on a cross-sell opportunity into AIO with a different set of stakeholders and deepen the value from other products that have been adopted. 
-- In this scenario, your parallel efforts unlock goodwill from the customer, bandwidth for the TAM to grow the account, and space for the CSM to go deep on debugging and instrumentation. 
+- The TAM can focus on a net new cross-sell opportunity into AIO with a different set of stakeholders and deepen the value from other products that have been adopted. 
+- In this scenario, your parallel efforts unlock goodwill from the customer, bandwidth for the TAM to grow the account, and space for the CSM to go deep on debugging and instrumentation on their existing product adoption. 
 - The net effect: customer feels supported on multiple fronts.
 
 By no means is this a hard rule (CSMs focused on instrumentation, TAMs focused on expansion). There will be times where you overlap and switch, and other times where you're more siloed due to the nature of the account. 
@@ -147,7 +147,8 @@ The risk we're avoiding is duplicative or irrelevant work. Your time is incredib
 How can you both be the driver if there are two people in the same car? Put another way, if you're sharing an account with someone, how do you avoid blocking each other whilst working together? 
 
 While this process isn't perfect, here are a few good habits that protect your autonomy and effectiveness:
-1. **Post often in the internal channel:** what you're thinking about, who you have a call scheduled with, open questions you have, an opportunity you're chasing down... anything. Write as generously and freely as you would on a private scratchpad - it's the closest thing we have to a shared brain. 
-2. **Use each other to sense check:** consider having a monthly call where you catch up on all things related to your shared accounts - just talking through what you're thinking about can help reveal parallel work streams. 
-3. **Debrief after customer calls:** this is where you'll feel the superpowers that come with a CSM + TAM overlay - give each other feedback, get clear on next steps, and review how the call went. 
-4. **Tag team follow ups:** one of you plugs something in the customer channel; the other is aware of this and stands by to chime in with a follow-up to get a response. Works like a charm for unresponsive customers. 
+1. **Post often in the internal channel:** what you're thinking about, who you have a call scheduled with, open questions you have, an opportunity you're chasing down... anything. Write as generously and freely as you would on a private scratchpad - it's the closest thing we have to a shared brain.
+2. **Document as much as you can in Customer Analytics:** all of the relevant details, developments, learnings, plans, etc. from your internal threads should have their equivalent version as a Notebook in Customer Analytics. 
+3. **Use each other to sense check:** consider having a monthly call where you catch up on all things related to your shared accounts - just talking through what you're thinking about can help reveal parallel work streams. 
+4. **Debrief after customer calls:** this is where you'll feel the superpowers that come with a CSM + TAM overlay - give each other feedback, get clear on next steps, and review how the call went. 
+5. **Tag team follow ups:** one of you plugs something in the customer channel; the other is aware of this and stands by to chime in with a follow-up to get a response. Works like a charm for unresponsive customers. 
