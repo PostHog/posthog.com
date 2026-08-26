@@ -1061,6 +1061,32 @@ export const handbookSidebar = [
                 ],
             },
             {
+                name: 'Community',
+                url: '/handbook/community',
+                children: [
+                    {
+                        name: 'Overview',
+                        url: '/handbook/community',
+                    },
+                    {
+                        name: 'Community channels',
+                        url: '/handbook/community/channels',
+                    },
+                    {
+                        name: 'Answering community questions',
+                        url: '/handbook/community/questions',
+                    },
+                    {
+                        name: 'Profiles',
+                        url: '/handbook/community/profiles',
+                    },
+                    {
+                        name: 'Points & rewards',
+                        url: '/handbook/community/points',
+                    },
+                ],
+            },
+            {
                 name: 'Influencers',
                 url: '/handbook/marketing/influencers',
                 children: [
@@ -1946,32 +1972,6 @@ export const handbookSidebar = [
             {
                 name: 'Editing API docs',
                 url: '/handbook/engineering/posthog-com/api-docs',
-            },
-            {
-                name: 'Community',
-                url: '',
-                children: [
-                    {
-                        name: 'Overview',
-                        url: '/handbook/community',
-                    },
-                    {
-                        name: 'Community channels',
-                        url: '/handbook/community/channels',
-                    },
-                    {
-                        name: 'Answering community questions',
-                        url: '/handbook/community/questions',
-                    },
-                    {
-                        name: 'Profiles',
-                        url: '/handbook/community/profiles',
-                    },
-                    {
-                        name: 'Points & rewards',
-                        url: '/handbook/community/points',
-                    },
-                ],
             },
         ],
     },
