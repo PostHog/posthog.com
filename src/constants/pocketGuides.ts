@@ -1,7 +1,7 @@
 /** The volumes on the shelf. Data only, so `gatsby/` can import it in Node at build time. */
 
-/** Spine colours. Limited to tokens white text reads on – `Book.tsx` prints the title in white. */
-export type PocketGuideToken = 'orange' | 'purple' | 'blue'
+/** Spine colours. Limited to safelisted tokens, since the spine is built as `bg-<token>`. */
+export type PocketGuideToken = 'orange' | 'purple' | 'blue' | 'yellow'
 
 export interface PocketGuideVolume {
     /** URL segment and content directory: /pocket-guides/<id>, contents/pocket-guides/<id>/ */
@@ -18,6 +18,12 @@ export interface PocketGuideVolume {
     /** Announced but unwritten – renders as a cover with a sash and no link. */
     comingSoon?: boolean
 }
+
+/**
+ * Every volume opens the same way: front matter at `pocketGuideOrder: 0`, a 101 at 1. Guides are what
+ * follows. Authors assigning `pocketGuideOrder` in a volume's MDX frontmatter count from here.
+ */
+export const FIRST_GUIDE_BOOK_ORDER = 2
 
 export const POCKET_GUIDE_VOLUMES: PocketGuideVolume[] = [
     {
@@ -42,6 +48,13 @@ export const POCKET_GUIDE_VOLUMES: PocketGuideVolume[] = [
             'Model revenue, conversion, activation, and usage once, so every dashboard and downstream model reuses the same definition.',
         token: 'blue',
         volume: 3,
+    },
+    {
+        id: 'session-replay',
+        title: 'Session replay',
+        description: 'Watch how people actually use your product – or let Replay Vision watch it for you.',
+        token: 'yellow',
+        volume: 4,
     },
 ]
 

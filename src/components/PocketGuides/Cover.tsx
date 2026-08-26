@@ -1,19 +1,13 @@
 import Link from 'components/Link'
 import React from 'react'
 
-import { HedgehogDollHouse, HedgehogImTheDriver, HedgehogXRay } from '@posthog/brand/hoggies'
 import { Logo } from '@posthog/brand/logo'
 
 import usePostHog from '../../hooks/usePostHog'
 
 import { PocketGuideVolume } from '../../constants/pocketGuides'
 
-/** Cover art per volume, so a new volume picks an existing hoggie instead of commissioning one. */
-const VOLUME_ART: Record<string, React.ComponentType<{ size?: number; className?: string }>> = {
-    'self-driving': HedgehogImTheDriver,
-    'ai-observability': HedgehogXRay,
-    'context-warehouse': HedgehogDollHouse,
-}
+import { volumeArt } from './volumeArt'
 
 interface CoverProps {
     volume: PocketGuideVolume
@@ -66,7 +60,7 @@ function ComingSoonSash(): JSX.Element {
 }
 
 function CoverBody({ volume, count }: Omit<CoverProps, 'placement'>): JSX.Element {
-    const Art = VOLUME_ART[volume.id]
+    const Art = volumeArt(volume.id)
     return (
         <Frame token={volume.token}>
             {volume.comingSoon && <ComingSoonSash />}

@@ -131,6 +131,9 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
       # declare one, never hardcoded, so adding a template is a content-only change.
       category: String
       schedule: String
+      # A scout template PostHog already ships, e.g. "costly-users". Points the guide's CTA at
+      # that template in the app instead of encoding this guide's SKILL.md into the link.
+      appTemplate: String
       seo: FrontmatterSEO
       # A scout template's SKILL.md sibling carries the canonical monorepo frontmatter, so these
       # are declared here rather than left to inference – see components/SelfDrivingInbox.

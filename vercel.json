@@ -452,6 +452,11 @@
             "statusCode": 301
         },
         {
+            "source": "/security",
+            "destination": "/.well-known/security.txt",
+            "statusCode": 301
+        },
+        {
             "source": "/activity",
             "destination": "/docs/activity",
             "statusCode": 301
@@ -569,11 +574,11 @@
         },
         {
             "source": "/code/download",
-            "destination": "/desktop#download"
+            "destination": "/desktop"
         },
         {
             "source": "/code/download/",
-            "destination": "/desktop#download"
+            "destination": "/desktop"
         },
         {
             "source": "/slack-app",
@@ -670,6 +675,11 @@
         {
             "source": "/handbook/growth/revops/lead-assignment-ooo",
             "destination": "/handbook/growth/revops/lead-assignment-tracker",
+            "statusCode": 301
+        },
+        {
+            "source": "/handbook/growth/revops/icp-scoring",
+            "destination": "/handbook/growth/revops/icp-fit-score",
             "statusCode": 301
         },
         {

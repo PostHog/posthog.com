@@ -121,9 +121,10 @@ export function useBookPages(volumeId: string): BookPageEntry[] {
     }, [data, templates, volumeId])
 }
 
-/** How a page is named when you're turning toward it. Authors own the front matter's name. */
+/** How a page is named when you're turning toward it: the short name, same as the contents
+ * tabs, so the foot nav fits on a phone instead of truncating mid-title. */
 export function turnLabel(entry: BookPageEntry): string {
-    return entry.isFrontMatter ? entry.shortTitle : entry.title
+    return entry.shortTitle
 }
 
 /** The last numbered page, for `p. N / M` folios. */
