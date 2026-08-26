@@ -12,7 +12,7 @@ This page covers how we work on cost optimizations, how we record them with the 
 
 One of our [customer success principles](/handbook/cs-and-onboarding/customer-success#principles) is to help customers save money, even when it costs us in the short term. A customer who overpays because of a bad implementation isn't revenue, they're a churn risk who hasn't churned yet. Doing what's right for them is the job.
 
-You are not expected to justify a revenue decline that comes from a cost optimization. You are expected to add context to it, so anyone reading the number later can tell the difference between a customer we helped and a customer we're losing. The tag and a Slack message are how you add that context.
+You are not expected to justify a revenue decline that comes from a cost optimization. You are expected to add context to it, so anyone reading the number later can tell the difference between a customer we helped and a customer we aren't fully engaged with. The tag and a Slack message are how you add that context.
 
 This is also why inherited accounts come with a [3 month grace period](/handbook/cs-and-onboarding/how-we-work#how-contractual-bonus-works---technical-csms). We want you to right-size customers, not to leave a bad implementation in place because it happens to pay well.
 
