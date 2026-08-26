@@ -1466,11 +1466,8 @@ function ReaderViewContent({
                     if (detailsParent) {
                         detailsParent.open = true
                     }
-                    // `offsetTop` is measured from the nearest positioned ancestor, not from the
-                    // scroll viewport. Pages built with <Steps> wrap every heading in a
-                    // `relative` step container, so it reports single-digit pixels and the
-                    // scroll lands at the top of the page. Measure against the viewport instead —
-                    // the same math the table of contents and the text-fragment branch below use.
+                    // Not `offsetTop` — that measures from the nearest positioned ancestor, which
+                    // on a <Steps> page is the step container, not the viewport.
                     const targetRect = targetElement.getBoundingClientRect()
                     const scrollRect = scrollElement.getBoundingClientRect()
                     scrollElement.scrollTo({
