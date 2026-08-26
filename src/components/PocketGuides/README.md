@@ -158,6 +158,7 @@ shows after the `.mdx` file itself changes (or `pnpm clean`).
 | File | Responsibility |
 |---|---|
 | `Cover.tsx` | The series cover on the shelf: spine, masthead, specimen, volume number |
+| `Book.tsx` | The volume as a coloured spine for the `/docs` library column, plus the `BookShelf` it sits in |
 | `BookReader.tsx` | The full-window page: edge book tabs, popovers, turn zones, foot nav |
 | `BookPage.tsx` | Renders one MDX page into the reader |
 | `bookComponents.tsx` | Assembles the MDX vocabulary from the files below |
@@ -172,6 +173,28 @@ shows after the `.mdx` file itself changes (or `pnpm clean`).
 | `Figure.tsx` | A framed, captioned exhibit – "Fig. 1 – …" |
 | `InboxFigure.tsx` | One use case's inbox moment, annotated |
 | `TraceTree.tsx` | An LLM trace drawn as nested rows – the AI Observability volume's hero |
+
+`Cover` and `Book` are two views of one volume. `Cover` is the shelf at `/pocket-guides`, where a
+book stands face-out with its art. `Book` is the library column on the `/docs` index, where each
+volume is a single coloured spine – `bg-<token>` with `Vol. N`, the title, and the guide count
+printed along it. Both take `{ volume, count }`, both link with `state={{ newWindow: true }}`, and
+both skip the link for a `comingSoon:` volume. Counts for either come from
+`src/hooks/usePocketGuideCounts.ts`.
+
+**Every spine is the same height.** The guide count is printed on the spine, so it does not also
+need to be implied by the size – and a shelf whose proportions shift each time someone writes a page
+never looks composed.
+
+**Cover art is `Cover`-only.** `VOLUME_ART` is deliberately not exported. A spine is a few
+characters tall; art belongs on the face-out covers, where there is room for it.
+
+**The hover differs between the two on purpose.** `Cover` tilts, hinged at the spine, like picking a
+book off a shelf. `Book` only scales slightly – a tilt on a thin horizontal bar reads as a glitch
+rather than as an object. Both are `motion-safe:`.
+
+`BookShelf` is layout only: a `max-w-[420px]` column. The cap is what keeps a spine spine-shaped –
+when the docs index stacks into one column the library gets the full window width, and without it
+the volumes stretch into wall-wide slivers.
 
 Volume metadata lives in `src/constants/pocketGuides.ts` (data-only so `gatsby/` can import it).
 The report frontmatter contract and the `.md` agent-mirror constraints are documented in

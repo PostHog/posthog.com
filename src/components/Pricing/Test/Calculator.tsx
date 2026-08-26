@@ -4,28 +4,65 @@ import Tabbed from '../PricingCalculator/Tabbed'
 import Link from 'components/Link'
 import Tooltip from 'components/Tooltip'
 import { graphql, useStaticQuery } from 'gatsby'
-
-interface SidebarListProps {
-    children: React.ReactNode
-}
-
-interface SidebarListItemProps {
-    children: React.ReactNode
-}
-
-interface DiscountsProps {
-    children?: React.ReactNode
-}
+import { IconCode, IconHandMoney, IconRocket } from '@posthog/icons'
 
 // The sidebar sits inside a `not-prose` section, so prose's link styling doesn't reach it and
 // `Link` ships no styles of its own — inline links read as plain text without this. Matches the
 // link treatment used elsewhere on the pricing page.
 const sidebarLinkClasses = 'font-semibold text-red dark:text-yellow underline'
 
+const SidebarList = ({ children }: { children: React.ReactNode }) => (
+    <ul className="tw-chevron-bullets flex flex-col gap-1 pl-4">{children}</ul>
+)
+
+const SidebarListItem = ({ children }: { children: React.ReactNode }) => (
+    <li className="leading-snug text-[15px]">{children}</li>
+)
+
+/** Tooltip content for the "discounts" link in the sidebar. */
+const Discounts = () => (
+    <div className="max-w-sm">
+        <h4>Discounts</h4>
+        <ul className="list-none m-0 p-0 divide-y divide-primary">
+            <li className="relative pl-7">
+                <IconRocket className="size-5 absolute left-0 top-0.5 opacity-50" />
+                <strong>Startups</strong>
+                <p className="text-[15px]">
+                    If your startup has raised less than $5 million and is less than 2 years old, you may be interested
+                    in our startup program.{' '}
+                    <Link to="/startups" className="text-red dark:text-yellow font-semibold">
+                        Learn more
+                    </Link>
+                </p>
+            </li>
+            <li className="relative pl-7 pt-4">
+                <IconHandMoney className="size-5 absolute left-0 top-4.5 opacity-50" />
+                <strong>Non-profits</strong>
+                <p className="text-[15px] mb-2">
+                    Most non-profits are eligible for a discount. Get in touch through the app after signing up.
+                </p>
+            </li>
+            <li className="relative pl-7 pt-4">
+                <IconCode className="size-5 absolute left-0 top-4.5 opacity-50" />
+                <strong>Small OSS projects without corporate backing</strong>
+                <p className="text-[15px] mb-2">
+                    If you have an open source project without corporate backing that has less than $200k annual
+                    revenue, you can join our PostHog for Startups program to claim $50,000 of PostHog credits.{' '}
+                    <Link
+                        to="/startups"
+                        className="text-red dark:text-yellow font-semibold"
+                        state={{ newWindow: true }}
+                    >
+                        Apply here
+                    </Link>{' '}
+                    and reach out to our support to get the 12 month credit expiry limit waived.
+                </p>
+            </li>
+        </ul>
+    </div>
+)
+
 interface CalculatorProps {
-    SidebarList: React.FC<SidebarListProps>
-    SidebarListItem: React.FC<SidebarListItemProps>
-    Discounts: React.FC<DiscountsProps>
     /**
      * Drops the "Pricing calculator" heading, for callers that already introduce the
      * calculator themselves (see Redesign/CalculatorReveal).
@@ -35,13 +72,7 @@ interface CalculatorProps {
     id?: string
 }
 
-export const Calculator = ({
-    SidebarList,
-    SidebarListItem,
-    Discounts,
-    hideHeader = false,
-    id = 'calculator',
-}: CalculatorProps): JSX.Element => {
+export const Calculator = ({ hideHeader = false, id = 'calculator' }: CalculatorProps): JSX.Element => {
     const {
         allProductData: {
             nodes: [{ products: billingProducts }],
