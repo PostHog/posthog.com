@@ -1,6 +1,12 @@
 import React from 'react'
 
-import { HedgehogDirector, HedgehogDollHouse, HedgehogImTheDriver, HedgehogXRay } from '@posthog/brand/hoggies'
+import {
+    HedgehogDirector,
+    HedgehogDollHouse,
+    HedgehogImTheDriver,
+    HedgehogReporter,
+    HedgehogXRay,
+} from '@posthog/brand/hoggies'
 
 /**
  * One specimen per volume, so a new volume picks an existing hoggie instead of commissioning one.
@@ -8,6 +14,7 @@ import { HedgehogDirector, HedgehogDollHouse, HedgehogImTheDriver, HedgehogXRay 
  * what makes a book recognizable once it's off the shelf.
  */
 export const VOLUME_ART: Record<string, React.ComponentType<{ size?: number; className?: string }>> = {
+    posthog: HedgehogReporter,
     'self-driving': HedgehogImTheDriver,
     'ai-observability': HedgehogXRay,
     'context-warehouse': HedgehogDollHouse,

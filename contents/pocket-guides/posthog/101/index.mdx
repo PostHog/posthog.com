@@ -1,0 +1,70 @@
+---
+title: Install, and what autocapture caught
+shortTitle: Install
+subtitle: Everything that caught the outage two months later came from one afternoon nobody thought much about.
+pocketGuideOrder: 1
+isPrimer: true
+---
+
+<LeftPage>
+
+<UnterFigure
+    n={1}
+    page="ride"
+    inspect={false}
+    caption="The page as its users saw it, with nothing marked on it."
+/>
+
+<UnterFigure
+    n={2}
+    page="ride"
+    focus="topnav"
+    tools={['core', 'web']}
+    caption="The touchpoint, and the data underneath it."
+/>
+
+<UnterFigure
+    n={3}
+    page="ride"
+    focus="promo-link"
+    tools={['web']}
+    caption="One tool at a time, on the element it belongs to."
+/>
+
+<UnterFigure
+    n={4}
+    page="ride"
+    focus="footer-legal"
+    tools={['core']}
+    caption="Turning capture off, and back on."
+/>
+
+</LeftPage>
+
+<RightPage>
+
+# Install, and what autocapture caught
+
+On the twelfth of January, someone at Unter pasted eleven lines of JavaScript into a template and deployed it <SeeFig n={1} />. It took an afternoon, most of which went on deciding whether to do it at all.
+
+That afternoon is the origin of every number in this guide, including the ones that eventually described a broken map to an agent at four in the morning <SeeFig n={2} />. Here is the site those eleven lines were added to, running as its users saw it.
+
+## What arrived without anyone deciding
+
+Most of what Unter collected in January, nobody chose <SeeFig n={3} />. Autocapture records clicks and pageviews, so the ranking of what people press exists whether or not anyone predicted which buttons would matter. The same eleven lines record where a visit came from, what it was running on, and which campaign sent it.
+
+This is the unglamorous half and it is the half that paid. Two months later, nobody had to have anticipated a tile provider changing a config for the evidence of it to exist.
+
+## The limits of taking everything
+
+Autocapture is broad and shallow. It sees a press on a button with some classes on it, not a signup, and it does not survive a component rename.
+
+Unter learned this the ordinary way. They renamed an event in April, and the four months either side of the rename have never lined up since. Event storage is write-only for practical purposes: renaming does not rewrite history, it forks it.
+
+## Taking everything, except when asked not to
+
+The same eleven lines carry the way out of them <SeeFig n={4} />. A visitor who opts out stops being recorded from that moment, and the call that does it sits in the footer next to the privacy notice, where Unter's lawyer wanted it.
+
+Capture that cannot be turned off is capture nobody can defend, and the afternoon in January included wiring up the off switch.
+
+</RightPage>

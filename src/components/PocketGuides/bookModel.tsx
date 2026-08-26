@@ -135,7 +135,10 @@ export function pageCount(pages: BookPageEntry[]): number {
 /** One tab per page in the book, the current one marked. */
 export function bookTabs(pages: BookPageEntry[], activeUrl: string): BookTab[] {
     return pages.map((entry) => ({
-        label: entry.shortTitle,
+        /* The full title, not `shortTitle`. This panel is a contents list rather than a row of
+           tabs: it has the width for a real chapter name, and the short forms ("The number",
+           "The cost") only make sense to someone who has already read the chapter they name. */
+        label: entry.title,
         url: entry.url,
         number: entry.page ? String(entry.page).padStart(2, '0') : undefined,
         active: normalizeUrl(entry.url) === normalizeUrl(activeUrl),

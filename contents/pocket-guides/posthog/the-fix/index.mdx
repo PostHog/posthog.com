@@ -1,0 +1,50 @@
+---
+title: The fix, and the scout that checked it
+shortTitle: The fix
+subtitle: Quillfeather read the pull request over coffee and merged it at half past nine. The interesting part is the week that followed.
+pocketGuideOrder: 9
+---
+
+<LeftPage>
+
+<UnterFigure
+    n={1}
+    page="safety"
+    focus="coverage-map"
+    inspect={false}
+    caption="The page as its users saw it, with nothing marked on it."
+/>
+
+<LoopFigure n={2} caption="The same four stages, with the eleven days written onto them." />
+
+</LeftPage>
+
+<RightPage>
+
+# The fix, and the scout that checked it
+
+Which brings the story back to 4:12 in the morning.
+
+Thirty-two minutes after the report existed, an agent had read it, gone into Unter's codebase, confirmed the 403 was coming from a tile request that no longer carried an auth header after a January refactor, and written the fix <SeeFig n={1} />. Then it wrote a regression test, opened the pull request with the root cause in the description and a link back to the report, and waited on CI until the checks went green at ten to six.
+
+## Quillfeather read it first
+
+Nothing reaches production on its own, and this did not either <SeeFig n={2} />. Quillfeather read the diff at half past nine, agreed with the root cause, and merged it before she finished her coffee. She has since said the part that unsettled her was not the patch. It was realising she would not have found it.
+
+## Go back and try it
+
+The map below is the same view, eleven days and four lines later.
+
+## The week after
+
+A merge is not evidence. On the twenty-first, a validation scout went back to the funnel step the fix had been aimed at and checked whether it had recovered. It had, to within a point of the February baseline.
+
+That check produced its own events, which is the part that compounds. Unter's data in March was better than its data in January, so the signals raised from it in April were sharper.
+
+## What this needs, honestly
+
+Self-driving is in open beta and it does not get this right every time. It needs a connected repository, AI data processing turned on for the organisation, and a GitHub connection per person.
+
+And it is only as good as what feeds it. Unter's loop worked in March because of an afternoon in January. A product with a thin instrumentation footprint gets a correspondingly thin version of this story.
+
+</RightPage>

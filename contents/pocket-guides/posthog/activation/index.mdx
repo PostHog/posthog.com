@@ -1,0 +1,55 @@
+---
+title: Activation, and choosing the number
+shortTitle: Activation
+subtitle: Two meetings, in February, to decide what counted as a customer. The answer is why the outage was visible at all.
+pocketGuideOrder: 4
+---
+
+<LeftPage>
+
+<UnterFigure
+    n={1}
+    page="highway"
+    inspect={false}
+    caption="The page as its users saw it, with nothing marked on it."
+/>
+
+<UnterFigure
+    n={2}
+    page="highway"
+    focus="hw-form"
+    tools={['product']}
+    caption="The touchpoint, and the data underneath it."
+/>
+
+<UnterFigure
+    n={3}
+    page="highway"
+    focus="btn-start-cutting"
+    tools={['logs', 'error']}
+    caption="One tool at a time, on the element it belongs to."
+/>
+
+</LeftPage>
+
+<RightPage>
+
+# Activation, and choosing the number
+
+Unter's investors wanted one number every Monday <SeeFig n={1} />. Choosing it took two meetings on the eighteenth of February and produced the only real argument in this story.
+
+Signups were the obvious answer and the wrong one <SeeFig n={2} />. A signup is a person who has said they might be interested. Unter's product is a hole in a fence, and a host who signs up and never cuts one has not used the product and will not renew.
+
+## Holes cut, not signups
+
+So the Monday number became holes cut <SeeFig n={3} />. In March, that decision is the difference between noticing the outage in eleven days and noticing it in a quarter.
+
+The host page is where a hole gets registered, which makes it the page the Monday number is counted on.
+
+## Counting it took no new code
+
+Reading how many people got from the booking page to a finished hole required nothing Unter had not been collecting since January. A funnel is a way of reading events in order, and Unter's engineers shipped nothing to produce one.
+
+They wrote the definition down in one place, which sounds like bookkeeping and matters in chapter eight: when an agent went looking for whether the Monday number had moved, it read the same definition the Monday email did.
+
+</RightPage>

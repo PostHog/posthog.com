@@ -1,0 +1,54 @@
+---
+title: Custom events and identify()
+shortTitle: Custom events
+subtitle: Autocapture would have seen the signup too. The March redesign would have taken it away again.
+pocketGuideOrder: 2
+---
+
+<LeftPage>
+
+<UnterFigure
+    n={1}
+    page="ride"
+    focus="btn-signup"
+    tools={['product']}
+    caption="The page as its users saw it, with nothing marked on it."
+/>
+
+<UnterFigure
+    n={2}
+    page="ride"
+    focus="acct-row"
+    tools={['product']}
+    caption="The touchpoint, and the data underneath it."
+/>
+
+<UnterFigure
+    n={3}
+    page="ride"
+    focus="app-row"
+    tools={['core']}
+    caption="One tool at a time, on the element it belongs to."
+/>
+
+</LeftPage>
+
+<RightPage>
+
+# Custom events and identify()
+
+Three events at Unter were written deliberately <SeeFig n={1} />. The one that mattered most was the signup, for the reason every team eventually learns the hard way: autocapture would have caught that click as a press on a button with some classes on it, and the March redesign would have taken it away.
+
+An event written by hand survives a redesign, because it is named after what happened rather than after what it was wearing at the time.
+
+## Tying a session to a person
+
+The last thing they did that afternoon was call `identify()` after signup <SeeFig n={2} />. Which tied everything a stranger had done before making an account to the account they had just made.
+
+In March this is what made it possible to say that the people who hit the broken map were disproportionately new, and that almost none of them came back.
+
+## One person, two devices
+
+Unter's hosts book on a phone and read the safety page on a laptop <SeeFig n={3} />. And the same call that joins a stranger to an account also joins those two sessions to one person, which is why the eleven days could be counted in people rather than in browsers.
+
+</RightPage>

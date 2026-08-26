@@ -1,0 +1,66 @@
+---
+title: Six tools, one instrumentation
+shortTitle: Six tools
+subtitle: By the middle of February Unter was running replay, errors, flags, experiments, surveys and logs. They had wired the site up once.
+pocketGuideOrder: 3
+---
+
+<LeftPage>
+
+<UnterFigure
+    n={1}
+    page="ride"
+    focus="ride-form"
+    tools={['replay']}
+    caption="The page as its users saw it, with nothing marked on it."
+/>
+
+<UnterFigure
+    n={2}
+    page="ride"
+    focus="btn-see-prices"
+    tools={['product']}
+    caption="The touchpoint, and the data underneath it."
+/>
+
+<UnterFigure
+    n={3}
+    page="ride"
+    focus="hero-headline"
+    tools={['experiments']}
+    caption="One tool at a time, on the element it belongs to."
+/>
+
+<UnterFigure
+    n={4}
+    page="ride"
+    focus="reserve-feature"
+    tools={['flags']}
+    caption="The same page, filtered to a different question."
+/>
+
+</LeftPage>
+
+<RightPage>
+
+# Six tools, one instrumentation
+
+Between January and the middle of February, Unter turned on five more things <SeeFig n={1} />. None of them required going back through the codebase.
+
+This is the part that sounds like a detail and is actually the mechanism <SeeFig n={2} />. The booking page did not change. What changed is how many questions could be asked of it.
+
+## The same page, asked a different question
+
+Filter that page to session replay and two touchpoints survive <SeeFig n={3} />. Filter it to product analytics and a different five light up. The page underneath is identical, and turning replay on added no code to it.
+
+## One click, four records
+
+A single press of Unter's See prices button files an event in product analytics <SeeFig n={4} />. The person's profile gains a row. The session it belongs to gets longer. Had it thrown, error tracking would already have it, with the recording attached.
+
+Four tools, one click, and nothing instrumented twice.
+
+## What that bought, in February
+
+Nothing yet. A reader who has run a five-tool analytics stack will recognise the arrangement and not see why it matters. The next four chapters are what it bought.
+
+</RightPage>

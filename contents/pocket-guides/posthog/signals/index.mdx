@@ -1,0 +1,50 @@
+---
+title: Signals, scouts, and the report
+shortTitle: The report
+subtitle: Everything needed to find the bug had existed for eleven days. This is the chapter where something goes and looks.
+pocketGuideOrder: 8
+---
+
+<LeftPage>
+
+<UnterFigure
+    n={1}
+    page="safety"
+    focus="coverage-map"
+    tools={['selfdriving']}
+    caption="The page as its users saw it, with nothing marked on it."
+/>
+
+<ReportFigure n={2} caption="What landed in Unter's inbox at 03:40. Four findings, one problem, and the chart nobody had to rebuild." />
+
+<LoopFigure n={3} caption="Signal, report, pull request, measured. The four stages the fortnight ran on." />
+
+</LeftPage>
+
+<RightPage>
+
+# Signals, scouts, and the report
+
+Nothing in the previous seven chapters explains why anyone found out.
+
+Every tool that recorded McSpine's clicks recorded them somewhere a person had to go and look, and for eleven days no person went and looked <SeeFig n={1} />. There was no failure of instrumentation at Unter. There was a failure of attention, which is the normal condition of a company with one backend engineer and a Monday email.
+
+## Two ways of being told
+
+Signal sources watch one stream and turn every qualifying item into a signal <SeeFig n={2} />. They are deterministic and exhaustive: every new error, every ticket, no judgement involved. Unter's error tracking had been raising signals about the 403 since the third of March.
+
+Scouts are the other kind <SeeFig n={3} />. A scout is a scheduled agent that goes through the data and raises a hand when it finds something worth knowing. It gives up exhaustiveness for judgement, which is what let one of Unter's notice that a funnel step had moved without anyone having written a rule about that step.
+
+## The grouping is the trick
+
+Four signals about four symptoms are four things to ignore. The loop deduplicated them, worked out that they pointed at one underlying problem, and produced a single report with a priority, a state, and the chart of the funnel step that had moved.
+
+This is where the arrangement from chapter three stops being an arrangement. Four tools caught four symptoms because four tools were reading the same events, and one report came out because the signals could be compared.
+
+## The runs that wrote nothing
+
+Those same scouts had run several hundred times since February and written nothing at all. That is the designed behaviour. A scout that files something every day is one that gets muted inside a fortnight, and a muted scout is worse than no scout.
+
+Will a scout miss things? By design, yes. Unter's missed a slow memory leak in the same period, and nobody found that one until June.
+
+</RightPage>

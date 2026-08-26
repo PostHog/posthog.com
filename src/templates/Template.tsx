@@ -102,8 +102,14 @@ export default function Template({ data }) {
         return (
             <>
                 <SEO
-                    // Named for its own volume: the shelf holds more than one book.
-                    title={`${title} – ${volumeById(volumeIdFromUrl(slug))?.title ?? 'PostHog'} pocket guide`}
+                    // Named for its own volume: the shelf holds more than one book. The front
+                    // matter's own title *is* the volume title, so pairing them there prints the
+                    // same name twice.
+                    title={
+                        slug.replace(/^\/|\/$/g, '').split('/').length === 2
+                            ? `${volumeById(volumeIdFromUrl(slug))?.title ?? 'PostHog'} pocket guide`
+                            : `${title} – ${volumeById(volumeIdFromUrl(slug))?.title ?? 'PostHog'} pocket guide`
+                    }
                     description={pageData?.frontmatter?.subtitle || description || excerpt}
                     image="/images/og/default.png"
                 />

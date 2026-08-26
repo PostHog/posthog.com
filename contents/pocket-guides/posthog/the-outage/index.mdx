@@ -1,0 +1,65 @@
+---
+title: Errors, replay, and logs on one outage
+shortTitle: The outage
+subtitle: Hoglet McSpine pressed retry three times and closed the tab. Four hundred and eleven people after him did roughly the same thing.
+pocketGuideOrder: 7
+---
+
+<LeftPage>
+
+<UnterFigure
+    n={1}
+    page="safety"
+    inspect={false}
+    caption="The page as its users saw it, with nothing marked on it."
+/>
+
+<UnterFigure
+    n={2}
+    page="safety"
+    focus="coverage-map"
+    inspect={false}
+    caption="The touchpoint, and the data underneath it."
+/>
+
+<UnterFigure
+    n={3}
+    page="safety"
+    focus="coverage-map"
+    tools={['error', 'replay', 'logs']}
+    caption="One tool at a time, on the element it belongs to."
+/>
+
+</LeftPage>
+
+<RightPage>
+
+# Errors, replay, and logs on one outage
+
+Hoglet McSpine had been meaning to cut a hole in his fence for about a year <SeeFig n={1} />. On the evening of the third of March he sat down to do something about it, got as far as Unter's safety page, and waited for the coverage map to load.
+
+It did not <SeeFig n={2} />. He pressed retry. It spun for about a second and gave up. He pressed it twice more, closed the tab, and has not been back.
+
+Seven hours earlier, a config change at Unter's tile provider had started returning 403 on every request <SeeFig n={3} />. Nothing crashed. The page still rendered, the header still said Coverage in your area, and the box underneath it stayed empty.
+
+## Do what McSpine did
+
+The map below is the one from the story and it is broken in the same way. Press retry. Press it again, the way people do.
+
+Now turn the instrumentation on and look at what those clicks produced.
+
+## Three tools, one dead widget
+
+Error tracking had the exception, with a readable stack trace because the source maps had been uploaded since January. Session replay had tagged the retry presses as a rage click, because pressing the same dead control three times is a shape it recognises. The backend log line sat on the same timeline as both, from the service that returned the 403.
+
+Nobody at Unter had instrumented "the coverage map is broken." Nobody could have. What they instrumented, in January, was the page.
+
+## Eleven days of nobody saying anything
+
+Between the third and the fourteenth of March, 412 people reached the coverage map and left. The status page stayed green, because the service that was down was not Unter's.
+
+The chat widget from the last chapter was two clicks away on every one of those pages, and the escalation counter that had been running since February did not move. Not one of the 412 opened it. The support inbox that had handled six handovers a week in February handled six handovers a week through the outage, which is exactly what a healthy support queue looks like.
+
+The Monday number fell 9% and the team put it down to the weather, which is the sort of thing that is true often enough to be dangerous.
+
+</RightPage>

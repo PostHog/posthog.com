@@ -1,0 +1,63 @@
+---
+title: LLM analytics on a support bot
+shortTitle: LLM analytics
+subtitle: Unter had a help page, a chat widget and a bot that answered most of what it was asked. All of it was recorded, which is the part that mattered later.
+pocketGuideOrder: 6
+---
+
+<LeftPage>
+
+<UnterFigure
+    n={1}
+    page="help"
+    inspect={false}
+    caption="The page as its users saw it, with nothing marked on it."
+/>
+
+<UnterFigure
+    n={2}
+    page="help"
+    focus="chat-widget"
+    tools={['llm', 'replay']}
+    caption="The touchpoint, and the data underneath it."
+/>
+
+<UnterFigure
+    n={3}
+    page="help"
+    focus="help-suggestions"
+    tools={['experiments']}
+    caption="One tool at a time, on the element it belongs to."
+/>
+
+<UnterFigure
+    n={4}
+    page="help"
+    focus="help-escalate"
+    tools={['surveys']}
+    caption="The same page, filtered to a different question."
+/>
+
+</LeftPage>
+
+<RightPage>
+
+# LLM analytics on a support bot
+
+Unter's help page carried a chat widget, and behind the widget a bot that answered most of what it was asked <SeeFig n={1} />. The bot ran on a model, which meant every answer it gave had a cost, a latency and a chance of being wrong.
+
+LLM analytics recorded all three <SeeFig n={2} />. A support bot is a product surface like any other, and an unrecorded one is a place where a company stops knowing what it is telling people.
+
+## What people asked, and what they were told
+
+The widget logged the question, the answer, the model, and the tokens either side <SeeFig n={3} />. Where a conversation ended in a handover, the survey underneath it recorded whether the person got what they came for.
+
+## The way out, when the bot could not help
+
+Every conversation had an escalation at the end of it, and the escalations were counted too <SeeFig n={4} />. In February the widget handled about forty questions a week and passed six of them to a person, which Unter read as the bot working.
+
+By the end of February the help page was the best instrumented thing Unter owned. Every question, every answer, every handover, and a survey on the end of it.
+
+None of that measures the people who never open the widget. A support queue can only report what arrives in it, and an empty one is the same shape whether nothing is wrong or nobody could be bothered to say so.
+
+</RightPage>

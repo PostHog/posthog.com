@@ -24,6 +24,7 @@ import {
     TriggerGroupFigure,
 } from './figures'
 import { Contents, Enable, Eyebrow, Frontispiece, SeeAlso, SeeFig, Watches, proseComponents } from './bookPieces'
+import UnterFigure from './UnterFigure'
 import { AskAI, CTA, ScannerTemplate, ViewRecording, ViewRecordings } from './UIButton'
 
 export { EntryProvider } from './bookContext'
@@ -58,6 +59,7 @@ export const bookMdxComponents = {
     TriggerGroupFigure,
     RedirectLoopFigure,
     LoopFigure,
+    UnterFigure,
     Watches,
     Enable,
     Action,
