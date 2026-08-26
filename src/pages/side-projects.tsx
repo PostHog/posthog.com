@@ -563,7 +563,9 @@ function SideProjectsPage({ location }: { location: { search: string } }): JSX.E
                                                     showAlumni ? '' : '-rotate-90'
                                                 }`}
                                             />
-                                            <h2 className="m-0 text-xl">PostHog Alums...</h2>
+                                            <h2 className="m-0 text-xl">
+                                                Side projects and startups from PostHog alums...
+                                            </h2>
                                             <span className="text-sm text-secondary">
                                                 {filteredAlumni.length} project
                                                 {filteredAlumni.length === 1 ? '' : 's'}
@@ -582,8 +584,8 @@ function SideProjectsPage({ location }: { location: { search: string } }): JSX.E
                                                     >
                                                         be your first investor
                                                     </Link>
-                                                    ! Here are some projects from PostHog alumni that we especially
-                                                    like...
+                                                    ! Here are some side projects and startups from PostHog alumni that
+                                                    we especially like...
                                                 </p>
                                                 <div className="grid grid-cols-1 gap-6 @xl:grid-cols-2 @3xl:grid-cols-3 @5xl:grid-cols-4">
                                                     {filteredAlumni.map((project) => (
