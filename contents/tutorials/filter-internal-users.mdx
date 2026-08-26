@@ -25,7 +25,7 @@ export const step3Light =
 export const step3Dark =
   "https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/filter-internal-users/step3-dark-mode.png";
 
-_Estimated reading time: 4 minutes_ ☕
+_Estimated reading time: 5 minutes_ ☕
 
 When you’re investigating an insight, it’s important to make sure you’re looking at the best possible data and that your findings aren’t skewed. That means checking you understand the definition of events or actions you’re using and, if need be, filtering out groups such as internal users, beta testers and contractors or agencies.
 
@@ -79,7 +79,7 @@ You can create filters which include more than one value by separating values wi
 
 You can also create filters based on pre-prepared cohorts of users, which is especially useful if you’re using cohorts with [Feature Flags](/docs/user-guides/feature-flags) or to run [Experiments](/docs/user-guides/experimentation). To do this, simply select the cohort you wish to add to your internal and test user list.
 
-## Step 4: Apply the filter to an insight
+## Step 4: Apply the filter to your insights
 
 <ProductScreenshot
   imageLight={step3Light}
@@ -88,6 +88,30 @@ You can also create filters based on pre-prepared cohorts of users, which is esp
   alt="Filter Internal Users Step 3"
 />
 
-The internal and test user filter is controlled with a simple toggle whenever you create a new insight, or edit an existing one. Turn it on and everything in your filter group will be sifted out; turn it off and you’ll see results from all users together. Simple!
+The internal and test user filter is controlled with a simple toggle whenever you create a new insight, or edit an existing one. Turn it on and everything in your filter group will be sifted out; turn it off and you’ll see results from all users together.
+
+Defining your filters doesn't switch them on by itself, so that toggle is the setting that decides what each insight shows. Two controls in project settings write to it for you.
+
+### Turn the filter on for new insights
+
+**Enable this filter on all new insights** sets the starting value for insights created from then on. It doesn't change insights that already exist.
+
+### Turn the filter on for insights you already have
+
+Under **Existing insights**, use **Turn on for existing insights** or **Turn off for existing insights** to apply your choice to every insight in the project, including insights other people created. This is the quickest way to clean up your existing dashboards and insights after you set up your filters for the first time. You need to be a project admin to run it.
+
+Some insights are left as they are:
+
+- **SQL insights**, which have no such toggle. Write the exclusion into the query itself if you need it.
+- **Insights you can't edit.** An organization admin can run it to cover those, or you can ask for [edit access](/docs/settings/access-control).
+- **Insights saved in an older format.** These keep whatever they were set to. Open one and save it to convert it, then run this again.
+
+After each run, PostHog tells you how many insights it changed, how many already matched, and how many it left alone.
+
+Dashboards show whatever their insights are set to. The exception is a dashboard with its own override for this filter, which keeps that override and ignores the change to the insight underneath.
+
+> **Note:** There's no bulk undo. Running it the other way sets every insight to the opposite value, rather than restoring the mix that was there before. To get a single insight back, open its activity log. Each change records the insight's previous query, so you can see what it was set to and set it again by hand.
+
+For the full reference, including how to apply the filter to existing insights over the API, see [internal and test users](/docs/data/test-accounts).
 
 <NewsletterForm />
