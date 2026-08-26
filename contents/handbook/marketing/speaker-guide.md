@@ -6,7 +6,7 @@ showTitle: true
 
 You volunteered or have been asked  to speak at a dev meetup, give a demo at a conference, or present PostHog to a virtual or in-person audience. Maybe you said yes before you thought too hard about it. That's fine — good talks happen this way. This guide is for preparing and delivering your talk.
 
->**Want slide examples from other speakers?** See [recent talks](#slides-from-recent-talks). **Have questions?** Ask in [#team-irl-events](https://posthog.slack.com/archives/C0AB78YBCNA) or ping whoever put you up to this. **Still need demo tips?** [Here are 24 more](https://newsletter.posthog.com/p/how-to-demo).
+>**Want slide examples from other speakers?** See [recent talks](#slides-from-recent-talks). **Have questions?** Ask in [#team-builder-relations](https://posthog.slack.com/archives/C0AB78YBCNA) or ping whoever put you up to this. **Still need demo tips?** [Here are 24 more](https://newsletter.posthog.com/p/how-to-demo).
 
 ## **1. Know your room before you write a word**
 
@@ -116,7 +116,7 @@ If you receive a question that you believe is off-topic or unfitting for the set
 
 * **Express an willingness to keep the conversation going** - by letting the audience know that you (and any other team members in the room) are sticking around to chat more.
 * **Write down the questions you couldn't answer** — do this right away so you don't forget and can focus on interacting with attendees the remainder of the event.
-* **Tell the marketing team** — a 2-line Slack in [#team-irl-events](https://posthog.slack.com/archives/C0AB78YBCNA) with the event recap, approximate audience size, and any interesting take-aways.   
+* **Tell the marketing team** — a 2-line Slack in [#team-builder-relations](https://posthog.slack.com/archives/C0AB78YBCNA) with the event recap, approximate audience size, and any interesting take-aways.   
 * **Share your slides** — Share them on social, QR code, email, path of least resistance. Don't make people hunt.
 
 ---

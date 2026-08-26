@@ -66,6 +66,8 @@ export const SEO = ({
                 ? image
                 : `${process.env.GATSBY_DEPLOY_PRIME_URL || siteUrl}${image || defaultImage}`,
         url: `${siteUrl}${pathname}`,
+        // Callers may pass a site-relative path; canonical links have to be absolute.
+        canonical: canonicalUrl?.startsWith('/') ? `${siteUrl}${canonicalUrl}` : canonicalUrl,
     }
 
     useEffect(() => {
@@ -80,7 +82,7 @@ export const SEO = ({
             {noindex && <meta name="robots" content="noindex" />}
             {seo.description && <meta name="description" content={seo.description} />}
             {seo.image && <meta name="image" content={seo.image} />}
-            {<link rel="canonical" href={canonicalUrl ? canonicalUrl : seo.url} />}
+            {<link rel="canonical" href={seo.canonical || seo.url} />}
             {/* Standard.site publication discovery hint for the blog */}
             {pathname?.startsWith('/blog') && (
                 <link
@@ -103,6 +105,8 @@ export const SEO = ({
                     href={href.startsWith('http') ? href : `${siteUrl}${href.startsWith('/') ? href : `/${href}`}`}
                 />
             ))}
+            {/* Site-wide signpost so LLM crawlers on any page can discover the Markdown index. */}
+            <link rel="llms.txt" href={`${siteUrl}/llms.txt`} />
             {isMarkdownContentPath(pathname) && (
                 <link rel="alternate" type="text/markdown" href={`${siteUrl}${pathname.replace(/\/$/, '')}.md`} />
             )}

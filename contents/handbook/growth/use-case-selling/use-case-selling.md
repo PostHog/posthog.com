@@ -46,18 +46,18 @@ Each use case has a full playbook with discovery questions, competitive position
 | Data Warehouse | Data Infrastructure | |
 | Data Pipelines / Batch Exports | Data Infrastructure | Growth & Marketing |
 | Endpoints *beta* | Data Infrastructure | |
-| Semantic layer *alpha* | Data Infrastructure | |
+| Semantic layer *beta* | Data Infrastructure | |
 | Logs | Observability | Customer Experience |
 | Distributed tracing *alpha* | Observability | Release Engineering |
 | Metrics *alpha* | Observability | |
 | Health checks *beta* | Observability | Data Infrastructure |
-| Replay Vision *closed beta* | Product Intelligence | Customer Experience, Observability |
+| Replay Vision | Product Intelligence | Customer Experience, Observability |
 | PostHog AI | Horizontal (all) | |
 | self-driving | Horizontal (all) | Converts fastest in Observability, Release Engineering, and Customer Experience |
 
-**Maturity matters when you're pitching.** Anything marked *alpha*, *beta*, or *closed beta* above needs a caveat in the room, and each playbook carries the specific one. Two are worth knowing before any call:
+**Maturity matters when you're pitching.** Anything marked *alpha* or *beta* above needs a caveat in the room, and each playbook carries the specific one. Two are worth knowing before any call:
 
-- **[Replay Vision](/docs/replay-vision) is closed beta** — waitlist only, quota-limited, and you cannot promise a date.
+- **[Replay Vision](/docs/replay-vision) is generally available** — no waitlist, but usage is metered in credits against a monthly budget, so scope scanners narrowly. See [quota and limits](/docs/replay-vision/quota-and-limits).
 - **[self-driving](/docs/self-driving) is a capability, not a SKU.** Write it lowercase and hyphenated, and keep the customer's product as the subject: we make *their* product self-driving. Never "PostHog is a self-driving product." See [brand foundations](/handbook/brand/foundations#how-we-describe-posthog) and [how to pitch self-driving](/handbook/growth/sales/how-to-pitch-self-driving).
 
 **Products vs tools.** In brand terms, most rows above are *tools* — the capabilities you access through the five *products* (PostHog Web, Slack, MCP, CLI, and [Desktop](/handbook/marketing/positioning/desktop)). That distinction doesn't change how you sell a use case, but it does change the words: don't call PostHog Desktop a tool, and don't call product analytics a product.

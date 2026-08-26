@@ -7,7 +7,7 @@ import ToolsTickerStrip from './ToolsTickerStrip'
 const SECONDS_PER_ITEM = 2.5
 
 // Core products plus notable betas, in the order they scroll.
-const DEFAULT_HANDLES = [
+export const DEFAULT_HANDLES = [
     'product_analytics',
     'web_analytics',
     'session_replay',
@@ -38,12 +38,15 @@ interface ToolsTickerProps {
     handles?: string[]
     label?: string
     className?: string
+    /** Which way the names travel. `'left'` (default) is the homepage direction. */
+    direction?: 'left' | 'right'
 }
 
 export default function ToolsTicker({
     handles = DEFAULT_HANDLES,
     label = 'Built-in tools for your agents:',
     className = '',
+    direction = 'left',
 }: ToolsTickerProps): JSX.Element | null {
     const allProducts = useProduct()
     const [isPaused, setIsPaused] = useState(false)
@@ -74,6 +77,8 @@ export default function ToolsTicker({
                         className="flex w-max motion-reduce:[animation:none!important]"
                         style={{
                             animation: `tools-ticker-marquee ${products.length * SECONDS_PER_ITEM}s linear infinite`,
+                            // Same keyframes played backwards, so the homepage ticker is untouched.
+                            animationDirection: direction === 'right' ? 'reverse' : undefined,
                             animationPlayState: isPaused ? 'paused' : 'running',
                         }}
                     >

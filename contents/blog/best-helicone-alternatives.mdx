@@ -50,7 +50,7 @@ If you do decide to move, look at how each tool fits into your workflow. Helicon
 
 PostHog captures full traces of your LLM calls, so you can follow a request through every prompt, tool call, and model response. For each generation, it tracks token usage, cost, latency, and errors – including per-user cost attribution, so you can see what individual customers cost you, just like Helicone's per-key tracking. 
 
-You can also score outputs with [LLM-as-a-judge or code-based evals](/docs/ai-evals), [manage and version prompts (beta)](/docs/prompt-management) without redeploying code, and query trace data with SQL or through the [MCP server](/mcp) directly from your editor.
+You can also score outputs with [LLM-as-a-judge or code-based evals](/docs/ai-evals), [manage and version prompts](/docs/prompt-management) without redeploying code, and query trace data with SQL or through the [MCP server](/mcp) directly from your editor.
 
 The architectural difference from Helicone is that PostHog instruments via SDK rather than sitting in your request path as a proxy. 
 
@@ -64,7 +64,7 @@ That means more setup (the [install wizard](/wizard) helps) and no gateway featu
 
 - [**AI evals**](/docs/ai-evals/evaluations): Automatically score model outputs using LLM-as-a-judge or code-based checks to track quality and identify regressions over time.
 
-- [**Prompt management**](/docs/prompt-management) *(beta):* Create, version, and update prompts without redeploying code. Compare versions and understand how prompt changes affect outputs.
+- [**Prompt management**](/docs/prompt-management): Create, version, and update prompts without redeploying code. Compare versions and understand how prompt changes affect outputs.
 
 - [**SQL access**](/docs/sql): Query AI observability data with SQL and analyze it alongside product, user, and business data.
 
@@ -426,7 +426,7 @@ Based on user reviews on Gartner Peer Insights and Product Hunt, teams choose La
 
 ### What is Arize Phoenix?
 
-**Arize Phoenix** is an open-source platform for tracing, evaluating, and improving LLM applications and AI agents. It can be run locally, self-hosted, or used as a hosted cloud service.
+**Arize Phoenix** is an open-source platform for tracing, evaluating, and improving LLM applications and AI agents. It can be run locally, self-hosted, or used as a hosted cloud service. They were acquired by Dynatrace in August 2026. 
 
 Phoenix is one of the most genuinely OpenTelemetry-native tools in the space. It instruments via OpenInference, an OTel-based semantic layer, and works with LangChain, LlamaIndex, OpenAI, DSPy, Haystack, and anything else OTel-compatible. It ships with research-backed evaluators for hallucination, faithfulness, relevance, and toxicity out of the box – including retrieval and RAG evaluation – and runs locally, in a container, or as a hosted cloud service.
 

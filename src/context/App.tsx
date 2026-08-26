@@ -358,6 +358,7 @@ export const Context = createContext<AppContextType>({
         wallpaper: 'keyboard-garden',
         screensaverDisabled: true,
         reduceTransparency: false,
+        scrollbars: 'system',
         clickBehavior: 'double',
         performanceBoost: false,
     },
@@ -445,6 +446,7 @@ export const SettingsContext = createContext<AppSettingsContextType>({
         wallpaper: 'keyboard-garden',
         screensaverDisabled: true,
         reduceTransparency: false,
+        scrollbars: 'system',
         clickBehavior: 'double',
         performanceBoost: false,
     },
@@ -506,10 +508,6 @@ export interface AppSettings {
 
 const appSettings: AppSettings = {
     '/': {
-        experiment: {
-            variant: 'control',
-            flag: 'homepage-test',
-        },
         size: {
             min: {
                 width: 700,
@@ -643,6 +641,24 @@ const appSettings: AppSettings = {
             center: true,
         },
     },
+    // The e-reader: tall enough that a guide page reads like a page, wide enough for the
+    // front matter's two columns.
+    '/pocket-guides': {
+        size: {
+            min: {
+                width: 700,
+                height: 600,
+            },
+            max: {
+                width: 1100,
+                height: 1100,
+            },
+            fixed: false,
+        },
+        position: {
+            center: true,
+        },
+    },
     '/tooling': {
         size: {
             min: {
@@ -668,6 +684,38 @@ const appSettings: AppSettings = {
             max: {
                 width: 900,
                 height: 1000,
+            },
+            fixed: false,
+        },
+        position: {
+            center: true,
+        },
+    },
+    '/newsletter': {
+        size: {
+            min: {
+                width: 700,
+                height: 500,
+            },
+            max: {
+                width: 1200,
+                height: 1500,
+            },
+            fixed: false,
+        },
+        position: {
+            center: true,
+        },
+    },
+    '/blog': {
+        size: {
+            min: {
+                width: 700,
+                height: 500,
+            },
+            max: {
+                width: 1200,
+                height: 1500,
             },
             fixed: false,
         },
@@ -705,44 +753,6 @@ const appSettings: AppSettings = {
         },
         position: {
             center: true,
-        },
-    },
-    'home-test': {
-        experiment: {
-            variant: 'test',
-            flag: 'homepage-test',
-        },
-        size: {
-            min: {
-                width: 700,
-                height: 500,
-            },
-            max: {
-                width: 1200,
-                height: 900,
-            },
-            fixed: false,
-        },
-        position: {
-            center: true,
-            getPositionDefaults: (size, windows, getDesktopCenterPosition) => {
-                if (typeof window === 'undefined') {
-                    return {
-                        x: 0,
-                        y: 0,
-                    }
-                }
-
-                const { x, y } = getDesktopCenterPosition(size)
-                const iconColumnRight = 145
-                const keyboardGardenImageLeft = window.innerWidth - 700
-                if (x + size.width > keyboardGardenImageLeft) {
-                    const availableWidth = keyboardGardenImageLeft - iconColumnRight
-                    const newX = iconColumnRight + Math.max(0, (availableWidth - size.width) / 2)
-                    return { x: newX, y }
-                }
-                return { x, y }
-            },
         },
     },
     '/careers-og': {
@@ -839,6 +849,28 @@ const appSettings: AppSettings = {
                 width: 850,
                 height: 1000,
             },
+        },
+    },
+    // Free-tier allowances, opened from the pricing page. Not a route — see
+    // components/Pricing/Redesign/FreeTierModal.
+    'pricing-free-tier': {
+        size: {
+            min: {
+                width: 535,
+                height: 400,
+            },
+            max: {
+                width: 535,
+                height: 680,
+            },
+            fixed: true,
+            autoHeight: true,
+        },
+        position: {
+            center: true,
+        },
+        modal: {
+            type: 'standard',
         },
     },
     '/about': {
@@ -1395,6 +1427,24 @@ const appSettings: AppSettings = {
             center: true,
         },
     },
+    // Add/edit form from /side-projects. Not a route — opened via addWindow.
+    'side-project-form': {
+        size: {
+            min: {
+                width: 560,
+                height: 400,
+            },
+            max: {
+                width: 560,
+                height: 800,
+            },
+            fixed: true,
+            autoHeight: true,
+        },
+        position: {
+            center: true,
+        },
+    },
     'application-success': {
         size: {
             min: {
@@ -1444,6 +1494,24 @@ const appSettings: AppSettings = {
         position: {
             center: true,
         },
+    },
+    '/achievements/manage': {
+        size: {
+            min: {
+                width: 550,
+                height: 700,
+            },
+            max: {
+                width: 550,
+                height: 780,
+            },
+            fixed: true,
+            autoHeight: true,
+        },
+        position: {
+            center: true,
+        },
+        toolbar: true,
     },
     '/community/achievements': {
         size: {
@@ -1581,6 +1649,7 @@ export interface SiteSettings {
     reduceTransparency?: boolean
     clickBehavior?: 'single' | 'double'
     performanceBoost?: boolean
+    scrollbars?: 'system' | 'show' | 'auto'
 }
 
 const isLabel = (item: any) => !item?.url && item?.name
@@ -1598,6 +1667,7 @@ const getInitialSiteSettings = (): SiteSettings => {
         performanceBoost: false,
         screensaverDisabled: true,
         reduceTransparency: false,
+        scrollbars: 'system',
         ...(typeof window !== 'undefined' ? JSON.parse(localStorage.getItem('siteSettings') || '{}') : {}),
     }
 
@@ -1628,6 +1698,7 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
         performanceBoost: false,
         screensaverDisabled: true,
         reduceTransparency: false,
+        scrollbars: 'system',
     })
     const [taskbarHeight, setTaskbarHeight] = useState(59)
     const [lastClickedElementRect, setLastClickedElementRect] = useState<{ x: number; y: number } | null>(null)

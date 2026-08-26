@@ -47,8 +47,16 @@ export const productUsageTabs: Tab[] = [
     },
 ]
 
-// Agentic "@PostHog" carousel — lives on the homepage (Slack-first).
+// Agentic "@PostHog" carousel — lives on the homepage (lowest-friction entry points first).
 export const buildTabs: Tab[] = [
+    {
+        value: 'ask-anything',
+        label: 'Ask PostHog anything',
+        content: <AskAnythingSlide />,
+        color: 'bg-purple',
+        activeText: 'text-white',
+        progressBar: 'bg-white shadow-[0_0_6px_2px_rgba(255,255,255,0.4)]',
+    },
     {
         value: 'slack',
         label: 'Fix bugs from Slack',
@@ -64,13 +72,5 @@ export const buildTabs: Tab[] = [
         color: 'bg-blue',
         activeText: 'text-white',
         progressBar: 'bg-white shadow-[0_0_6px_2px_rgba(0,0,0,0.2)]',
-    },
-    {
-        value: 'ask-anything',
-        label: 'Ask PostHog anything',
-        content: <AskAnythingSlide />,
-        color: 'bg-purple',
-        activeText: 'text-white',
-        progressBar: 'bg-white shadow-[0_0_6px_2px_rgba(255,255,255,0.4)]',
     },
 ]

@@ -230,6 +230,8 @@ Note that surveys rely on feature flags internally, so `advanced_disable_feature
 
 You can send enriched analytics data for feature flags to help uncover replays where people interact with a flag, target people who've interacted with a feature, or build cohorts of people who've viewed a feature.
 
+These events also add two charts to the flag's [**Usage** tab](/docs/feature-flags/surfaces/web-app#see-how-a-flag-is-used) – one for views and one for interactions – so you can compare how many people saw a feature against how many used it. PostHog checks for these events periodically, so the charts don't appear immediately.
+
 To enable this, you can either use our `<PosthogFeature>` [React component](/docs/libraries/react#feature-flags-react-component) (which implements this for you), or implement it yourself.
 
 To do it yourself, there are 3 things you need to do:
@@ -379,7 +381,7 @@ posthog.capture("survey sent", {
 
 To set up [session replay](/docs/session-replay) in your project, all you need to do is install the JavaScript web library and enable "Record user sessions" in [your project settings](https://us.posthog.com/settings/project-replay).
 
-For [fine-tuning control](/docs/session-replay/how-to-control-which-sessions-you-record) of which sessions you record, you can use [feature flags](/docs/session-replay/how-to-control-which-sessions-you-record#with-feature-flags), [sampling](/docs/session-replay/how-to-control-which-sessions-you-record#sampling), [minimum duration](/docs/session-replay/how-to-control-which-sessions-you-record#minimum-duration), or set the `disable_session_recording` [config option](/docs/libraries/js/config) and use the following methods:
+For [fine-tuning control](/docs/session-replay/how-to-control-which-sessions-you-record) of which sessions you record, you can use [feature flags](/docs/session-replay/how-to-control-which-sessions-you-record#feature-flag-triggers), [sampling](/docs/session-replay/how-to-control-which-sessions-you-record#sampling), [minimum duration](/docs/session-replay/how-to-control-which-sessions-you-record#minimum-duration), or set the `disable_session_recording` [config option](/docs/libraries/js/config) and use the following methods:
 
 ```js-web
 // Turns session recording on

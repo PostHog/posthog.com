@@ -40,7 +40,7 @@ PostHog captures full traces of your LLM calls, so you can follow a request thro
 
 Because traces are stored as regular PostHog events, you can connect AI behavior to downstream product metrics – like whether users who hit a slow generation churn, or whether a new prompt version improves activation. 
 
-You can query trace data with SQL or through the [MCP server](/mcp) directly from your editor, and [manage and version prompts (beta)](/docs/prompt-management) without redeploying code. It [supports popular frameworks](/docs/ai-observability/installation), including OpenAI, Anthropic, LangChain, xAI, LlamaIndex, and the Vercel AI SDK.
+You can query trace data with SQL or through the [MCP server](/mcp) directly from your editor, and [manage and version prompts](/docs/prompt-management) without redeploying code. It [supports popular frameworks](/docs/ai-observability/installation), including OpenAI, Anthropic, LangChain, xAI, LlamaIndex, and the Vercel AI SDK.
 
 Engineers and product teams use PostHog to build AI-powered products. Customers include [Lovable](/customers/lovable), [Supabase](/customers/supabase), and [Arena](/customers/arena).
 
@@ -52,7 +52,7 @@ Engineers and product teams use PostHog to build AI-powered products. Customers 
 
 - [**AI evals**](/docs/ai-evals/evaluations): Automatically score model outputs using LLM-as-a-judge or code-based checks to track quality and identify regressions over time.
 
-- [**Prompt management**](/docs/prompt-management) *(beta):* Create, version, and update prompts without redeploying code. Compare versions and understand how prompt changes affect outputs.
+- [**Prompt management**](/docs/prompt-management): Create, version, and update prompts without redeploying code. Compare versions and understand how prompt changes affect outputs.
 
 - [**Session replay:**](/docs/session-replay) Watch [real user sessions alongside LLM traces](/docs/ai-observability/link-session-replay) to understand exactly what happened in context, including console logs and network activity.
 
@@ -313,7 +313,7 @@ Based on usage across Notion, Zapier, Stripe, Vercel, and Cloudflare, teams choo
 
 ### What is Arize Phoenix?
 
-**Arize Phoenix** is the source-available observability and evaluation platform from Arize AI. It provides tracing, evaluations, and debugging for LLM applications using OpenTelemetry-based instrumentation.
+**Arize Phoenix** is the source-available observability and evaluation platform from Arize AI. It provides tracing, evaluations, and debugging for LLM applications using OpenTelemetry-based instrumentation. Arize was acquired by Dynatrace in August 2026.
 
 Phoenix is one of the most genuinely OpenTelemetry-native tools in this space. It instruments via OpenInference, an OTel-based semantic layer, and works with LangChain, LlamaIndex, OpenAI, DSPy, Haystack, and anything else OTel-compatible. 
 
@@ -622,7 +622,7 @@ If you want [open-source](/blog/best-open-source-llm-observability-tools), [lowe
 
 The two bill differently: LangSmith charges per trace (one per user request, regardless of internal steps) plus $39 per seat on its Plus plan. PostHog charges per event – roughly 6 events per request for a typical multi-step app (each LLM call, span, and embedding is one event) – with no seat fees.
 
-Here's what monthly volumes cost, assuming a 5-person team (LangSmith Plus at $195/month in seats, 10K traces included, $2.50 per 1K base trace overage) versus PostHog ($6 per 100K events after 100K free):
+Here's what monthly volumes cost, assuming a 5-person team (LangSmith Plus at $195/month in seats, 10K traces included, $2.50 per 1K base trace overage) versus PostHog (volume-tiered from $35 per 100K events after the first 100K free, falling to $6 per 100K at high volume):
 
 This table is great, but broken for me. You might need to use HTML components to get it working.  
 
@@ -630,16 +630,16 @@ This table is great, but broken for me. You might need to use HTML components to
 
 | Requests/month | LangSmith (5 seats, base retention) | PostHog (~6 events/request) |
 | --- | --- | --- |
-| 100K | ~$420 | ~$30 |
-| 500K | ~$1,420 | ~$174 |
-| 1M | ~$2,670 | ~$354 |
-| 5M | ~$12,670 | ~$1,794 |
+| 100K | ~$420 | ~$68 |
+| 500K | ~$1,420 | ~$240 |
+| 1M | ~$2,670 | ~$450 |
+| 5M | ~$12,670 | ~$2,030 |
 
-Three things drive the gap. LangSmith's per-request rate is higher ($2.50 per 1K traces versus roughly $0.36 per 1K requests' worth of PostHog events). Seats add a fixed floor that grows with your team – a 10-person team starts at $390/month before a single trace. And LangSmith's base rate only buys 14-day retention; extended retention (400 days) doubles the trace rate to $5 per 1K, while PostHog's free plan retains data for a year.
+Three things drive the gap. LangSmith's per-request rate is higher ($2.50 per 1K traces versus roughly $0.39-$0.48 per 1K requests' worth of PostHog events). Seats add a fixed floor that grows with your team – a 10-person team starts at $390/month before a single trace. And LangSmith's base rate only buys 14-day retention; extended retention (400 days) doubles the trace rate to $5 per 1K, while PostHog's free plan retains data for a year.
 
 The honest caveats: PostHog's event count scales with instrumentation depth, so a simple one-call-per-request app emits fewer events (cheaper), while a complex agent emits more (the gap narrows but doesn't close – even at 40 events per request, PostHog is ~$12K at 5M requests, comparable to LangSmith *before* extended retention or extra seats). And LangSmith's included traces (10K on Plus) matter at very low volumes, where both tools are effectively free.
 
-Pricing current as of July 2026. For other alternatives, see our guide to the [cheapest AI observability tools](/blog/cheapest-ai-observability-tools).
+Pricing current as of August 2026. For other alternatives, see our guide to the [cheapest AI observability tools](/blog/cheapest-ai-observability-tools).
 
 </details>
 

@@ -7,7 +7,12 @@ import { DebugContainerQuery } from 'components/DebugContainerQuery'
 
 const Overview = ({ id, productData }: SectionComponentProps) => {
     const { name, Icon, overview, screenshots, status, hogs } = productData ?? {}
-    const HogComponent = hogs?.default?.Component
+    // Sized by height, not width: the art ranges from wide to tall portraits, and
+    // a fixed width makes the tall ones swamp the screenshot. It dips at `@3xl`
+    // because that is where the screenshot's own `max-w-*` cap shrinks it.
+    const hog = hogs?.mobileHog
+    const HogComponent = hog?.Component
+    const hogSizeClasses = hog?.className || 'h-32 @2xl/reader-content:h-52 @3xl/reader-content:h-44'
 
     return (
         <section id={id} className="scroll-mt-20 not-prose flex flex-col gap-12 max-w-9xl mx-auto w-full">
@@ -21,22 +26,27 @@ const Overview = ({ id, productData }: SectionComponentProps) => {
                         <CloudinaryImage
                             src={screenshots.home.src as `https://res.cloudinary.com/${string}`}
                             alt={screenshots.home.alt || name}
-                            className="w-full"
+                            className={`w-full${screenshots.home.srcDark ? ' dark:hidden' : ''}`}
                             imgClassName="h-auto rounded-lg transition-all duration-300"
                         />
-                        {/* Optional – composite heroes (hog already in the art) skip this. */}
-                        {(HogComponent || hogs?.default?.src) && (
-                            <div className="absolute bottom-0 -right-4">
+                        {screenshots.home.srcDark && (
+                            <CloudinaryImage
+                                src={screenshots.home.srcDark as `https://res.cloudinary.com/${string}`}
+                                alt={screenshots.home.alt || name}
+                                className="w-full hidden dark:block"
+                                imgClassName="h-auto rounded-lg transition-all duration-300"
+                            />
+                        )}
+                        {(HogComponent || hog?.src) && (
+                            <div className={`absolute -bottom-3 -right-6 ${hogSizeClasses}`}>
                                 {HogComponent ? (
-                                    <HogComponent
-                                        className="h-36 @2xl/reader-content:h-48 w-auto transition-all duration-300"
-                                        title={hogs.default.alt || name}
-                                    />
+                                    <HogComponent className="h-full w-auto" title={hog.alt || name} />
                                 ) : (
                                     <CloudinaryImage
-                                        src={hogs.default.src as `https://res.cloudinary.com/${string}`}
-                                        alt={hogs.default.alt || name}
-                                        imgClassName="h-36 @2xl/reader-content:h-48 transition-all duration-300"
+                                        src={hog.src as `https://res.cloudinary.com/${string}`}
+                                        alt={hog.alt || `${name} hedgehog`}
+                                        className="h-full"
+                                        imgClassName="h-full w-auto"
                                     />
                                 )}
                             </div>
@@ -61,7 +71,7 @@ const Overview = ({ id, productData }: SectionComponentProps) => {
                         <p className="leading-relaxed">{overview?.description}</p>
                     </div>
                     <div>
-                        <CTAs />
+                        <CTAs wizardCommand={productData?.wizardCommand} />
                     </div>
                 </div>
             </header>

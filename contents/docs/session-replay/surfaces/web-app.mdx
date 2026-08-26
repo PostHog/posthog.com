@@ -8,13 +8,18 @@ The [PostHog web app](https://app.posthog.com) is where you watch replays. Open 
 
 That's the difference between a video and a debugging environment. You can jump to the moment an error fired, read the console output from that instant, and inspect the network waterfall around it without asking the user to reproduce anything.
 
+## Before you start
+
+1. **Set up Session Replay** – [install and enable recording](/docs/session-replay/installation) so there are sessions to watch.
+2. **Open the web app** – no install needed, just sign in to [PostHog](https://app.posthog.com).
+
 ## What you can do here
 
 - **[Watch recordings](/docs/session-replay/how-to-watch-recordings)** – play back a session with the synced activity, console, and network panels.
 - **Filter and build collections** – filter by rage clicks, dead clicks, exceptions, custom events, person properties, or feature flag variant, then save the result as a collection or a saved filter playlist.
 - **[Share and embed replays](/docs/session-replay/sharing)** – send a teammate a link to an exact timestamp, or embed a replay elsewhere.
 - **[Find replays with PostHog AI](/docs/session-replay/find-replays-ai)** – describe the behavior you're looking for in plain language and let PostHog AI build the filters. This is an interaction mode inside the web app, not a separate surface.
-- **[Summarize sessions with PostHog AI](/docs/session-replay/session-summaries-ai)** – have PostHog AI watch a set of sessions and report the pattern back to you.
+- **[Summarize a recording with Replay Vision](/docs/replay-vision/scanner-types#summarizer)** – have Replay Vision watch a recording and write up what the user did.
 - **[Jump in from other PostHog tools](/docs/session-replay/integrations)** – open the replays behind a funnel step, a feature flag variant, or an error tracking issue.
 
 ## Related

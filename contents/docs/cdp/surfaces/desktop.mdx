@@ -12,6 +12,11 @@ PostHog Desktop is in beta. This page is a work in progress.
 
 [PostHog Desktop](/docs/posthog-desktop) is where you review the [Self-driving](/docs/self-driving) work that data pipelines generates. Pipeline failures are quiet – events keep ingesting and your dashboards stay green while a destination silently stops delivering – so a [scout](/docs/self-driving/scouts) watches delivery for you and files what it finds as a report.
 
+## Before you start
+
+1. **Set up a pipeline** – [create a source, destination, or transformation](/docs/cdp/start-here) so there's something to manage.
+2. **Install PostHog Desktop** – [download the app](/docs/posthog-desktop/download-posthog-desktop) and connect it to your project.
+
 ## How a delivery problem becomes a report
 
 A dedicated data pipelines scout runs on a schedule across your destinations, transformations, batch exports, and hog flows. It only cares about the gap between what a pipeline is configured to do and what it's actually doing:

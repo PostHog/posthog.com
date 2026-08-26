@@ -16,7 +16,7 @@ Our support engineers, in the <SmallTeam slug="support" />, triage tickets for [
 
 ## When is my turn?
 
-Most engineering teams run an incident.io schedule, check out the [escalation schedules](/handbook/engineering/operations/on-call-rotation#escalation-schedules).
+Most engineering teams run a `Support Hero: {team}` rotation in incident.io, [defined in Terraform](/handbook/engineering/operations/on-call-rotation#managing-on-call-in-terraform) alongside the team's other [escalation schedules](/handbook/engineering/operations/on-call-rotation#escalation-schedules).
 
 The schedules consist of contiguous blocks, but that definitely doesn't mean working 24/7 – you should just work your normal hours.
 

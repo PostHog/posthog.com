@@ -1,19 +1,19 @@
 import React from 'react'
 import {
-    IconGraph,
-    IconEye,
-    IconSparkles,
-    IconList,
-    IconConfetti,
-    IconRocket,
-    IconPieChart,
-    IconCheckCircle,
-    IconInfo,
-    IconCursorClick,
-    IconMagic,
     IconChat,
+    IconCheckCircle,
     IconCode,
+    IconConfetti,
+    IconCursorClick,
+    IconEye,
+    IconGraph,
+    IconInfo,
+    IconList,
+    IconMagic,
     IconMessage,
+    IconPieChart,
+    IconRocket,
+    IconSparkles,
 } from '@posthog/icons'
 import { FIFTY_MILLION, MAX_PRODUCT_ANALYTICS, MILLION, TEN_MILLION } from 'components/Pricing/pricingLogic'
 import { features } from './product_analytics/features'
@@ -170,14 +170,15 @@ export const productAnalytics = {
         },
     },
     hog: {
-        src: 'https://res.cloudinary.com/dmukukwp6/image/upload/v1/posthog.com/src/components/Product/hogs/product-analytics-hog.png',
-        alt: 'A hedgehog presenting some shocking findings',
+        src: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/products/competitors-hog.png',
+        alt: 'A hedgehog wearing a chart apron',
+        footerClasses: 'max-w-[220px]',
         classes: 'absolute bottom-0 right-4 max-w-lg',
     },
     hogs: {
         default: {
-            src: 'https://res.cloudinary.com/dmukukwp6/image/upload/v1/posthog.com/src/components/Product/hogs/product-analytics-hog.png',
-            alt: 'A hedgehog presenting some shocking findings',
+            src: 'https://res.cloudinary.com/dmukukwp6/image/upload/steve_hogs_17c7900b07.png',
+            alt: 'A hedgehog presenting a chart on stage',
         },
         mobileHog: {
             src: 'https://res.cloudinary.com/dmukukwp6/image/upload/PRODUCT_ANALYTICS_hog_23b2808c18.png',
@@ -384,8 +385,8 @@ export const productAnalytics = {
         },
     ],
     ai: {
-        image: 'https://res.cloudinary.com/dmukukwp6/image/upload/PRODUCT_ANALYTICS_hog_23b2808c18.png',
-        imageAlt: 'PostHog AI and product analytics',
+        image: 'https://res.cloudinary.com/dmukukwp6/image/upload/web_analytics_hog_f6db3a01c9.png',
+        imageAlt: 'A hedgehog presenting some shocking findings',
         intro: 'Ask PostHog AI to answer product questions, build insights, and write SQL.',
         mcpFeatures: ['product_analytics', 'insights', 'sql', 'dashboards'],
         groups: [

@@ -549,8 +549,7 @@ const products: Product[] = [
         Icon: IconLlmPromptManagement,
         color: 'yellow',
         types: ['AI'],
-        status: 'Roadmap',
-        roadmapID: 2168,
+        status: 'Production',
     },
     {
         name: 'Support',

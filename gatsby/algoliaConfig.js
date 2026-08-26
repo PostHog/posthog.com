@@ -6,6 +6,7 @@ const PATH_RANKING = {
     canonical: 0,
     content: 1,
     generic: 10,
+    community: 15,
 }
 
 // Hand-curated canonical routes. Listing a path here has three effects: it gets top ranking
@@ -217,17 +218,24 @@ const createPageRecord = (page, content, toolPaths) => {
     const searchTerms = searchTermsForPath(path, exactTool, { includePathSegments: !content })
     const slugger = new Slugger()
     const isCanonical = isCanonicalPath(path, exactTool)
+    const type = typeForPath(path, exactTool, toolPaths)
 
     return {
         id: content?.id || page.id,
         title,
-        type: typeForPath(path, exactTool, toolPaths),
+        type,
         slug: path === '/' ? '' : path.slice(1),
         fields: {
             ...content?.fields,
             slug: path,
         },
-        path_ranking: isCanonical ? PATH_RANKING.canonical : content ? PATH_RANKING.content : PATH_RANKING.generic,
+        path_ranking: isCanonical
+            ? PATH_RANKING.canonical
+            : type === 'community'
+            ? PATH_RANKING.community
+            : content
+            ? PATH_RANKING.content
+            : PATH_RANKING.generic,
         ...(isCanonical ? { canonicalTerms: canonicalTermsForPath(path, title, exactTool) } : {}),
         headings: [
             ...searchTerms.map((value) => ({ value, depth: 2 })),

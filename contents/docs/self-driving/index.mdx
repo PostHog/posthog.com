@@ -55,11 +55,12 @@ Once data is flowing, PostHog continuously monitors your product and reports beg
 
 </QuestLogItem>
 
-<QuestLogItem title="Learn the concepts" subtitle="Context, signals, sources, scouts, reports, inbox" icon="IconCode2">
+<QuestLogItem title="Learn the concepts" subtitle="Context, skills, signals, sources, scouts, reports, inbox" icon="IconCode2">
 
 There's a small set of terms worth knowing. Here's a breakdown:
 
 - **[Context](/docs/self-driving/context)** – everything your agents need to know about your product, tied together in your context warehouse. The context a general-purpose agent doesn't have.
+- **[Skills](/docs/skills)** – versioned, reusable instructions for agents, stored centrally in PostHog and usable from any MCP-connected agent. Every scout is a skill.
 - **[Signals](/docs/self-driving/signals)** – a structured finding: what's happening, the evidence behind it, and a suggested action. Everything the loop does starts from one.
 - **[Signal sources](/docs/self-driving/inbox/sources)** – built-in pipelines that watch one stream continuously and turn every qualifying item into a signal. Error tracking, session replay, and logs inside PostHog, plus tools like Zendesk, Linear, and Sentry.
 - **[Scouts](/docs/self-driving/scouts)** – scheduled agents that watch a slice of your data and raise a hand when something's worth knowing. Where a source is exhaustive, a scout uses judgement about what to surface – [when to use which](/docs/self-driving/signals#sources-or-scouts).
@@ -124,6 +125,16 @@ We hold it to a simple standard: you pay a flat **$15 per pull request**, your f
 
 <OSButton variant="primary" asLink to="/docs/self-driving/pricing">
   How pricing works
+</OSButton>
+
+</QuestLogItem>
+
+<QuestLogItem title="Learn by use case" subtitle="Pocket guides" icon="IconBook">
+
+The [pocket guides](/pocket-guides) teach self-driving through real scouts: each use case walks through the report a scout files, the pull request it becomes, and the scout file itself – ending in a one-click way to add it to your own product.
+
+<OSButton variant="primary" asLink to="/pocket-guides">
+  Open the pocket guides
 </OSButton>
 
 </QuestLogItem>

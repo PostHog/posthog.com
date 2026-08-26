@@ -37,6 +37,8 @@ Set `$raw_user_agent` on each event, plus `$host`, `$current_url`, `$pathname`, 
 }
 ```
 
+For the full payload reference and copy-paste implementations (Cloudflare Worker, server middleware), see [sending HTTP log events](/docs/web-analytics/sending-http-logs).
+
 Once `$http_log` events are flowing, the functions and virtual properties below classify them alongside your `$pageview` and `$screen` events.
 
 ### Person processing and distinct IDs
@@ -132,13 +134,15 @@ ORDER BY hits DESC
 
 For convenience, PostHog exposes the classification as virtual event properties. They read the user agent for you (falling back from `$raw_user_agent` to `$user_agent`), so you don't have to pass it in. They're available wherever you select event properties, including breakdowns:
 
-| Property                 | Equivalent to             |
-| ------------------------ | ------------------------- |
-| `$virt_is_bot`           | `isLikelyBot(...)`        |
-| `$virt_traffic_type`     | `getTrafficType(...)`     |
-| `$virt_traffic_category` | `getTrafficCategory(...)` |
-| `$virt_bot_name`         | `getBotName(...)`         |
-| `$virt_bot_operator`     | `getBotOperator(...)`     |
+| Property                 | Name in the UI     | Equivalent to             |
+| ------------------------ | ------------------ | ------------------------- |
+| `$virt_is_bot`           | Is bot             | `isLikelyBot(...)`        |
+| `$virt_traffic_type`     | Traffic type       | `getTrafficType(...)`     |
+| `$virt_traffic_category` | Traffic category   | `getTrafficCategory(...)` |
+| `$virt_bot_name`         | Bot name           | `getBotName(...)`         |
+| `$virt_bot_operator`     | Bot operator       | `getBotOperator(...)`     |
+
+The **Property** column is the name you use in SQL. The **Name in the UI** column is what you search for in the property picker when building an insight, dashboard, or breakdown.
 
 For example, to break down traffic without writing out the function:
 
@@ -158,9 +162,9 @@ You don't need to write SQL to break traffic down. As long as your events carry 
 
 For example:
 
-- **Exclude bots from an insight** – add a filter where `$virt_is_bot` equals `false`.
-- **Break down traffic by type** – set the breakdown to `$virt_traffic_type` to split a trend into Regular, AI Agent, Bot, and Automation.
-- **See which crawlers hit a page** – filter to `$virt_is_bot` is `true` and break down by `$virt_bot_name`.
+- **Exclude bots from an insight** – add a filter where **Is bot** equals `false`.
+- **Break down traffic by type** – set the breakdown to **Traffic type** to split a trend into Regular, AI Agent, Bot, and Automation.
+- **See which crawlers hit a page** – filter to **Is bot** is `true` and break down by **Bot name**.
 
 Because the classification reads the raw user agent, this works for any event that carries one – including server-side and `$http_log` traffic – using the standard insight builder.
 
