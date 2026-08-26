@@ -14,6 +14,7 @@ import {
     postProcessMarkdown,
     preprocessHtmlForTabs,
 } from './turndownService'
+import { getChangelogDocsPath, stripPostHogOrigin } from '../src/components/Changelog/docsLinks'
 
 // Prepended to every generated .md file so LLM crawlers landing on a single page
 // still see the pointer to the full index. Pairs with <link rel="llms.txt"> in seo.tsx.
@@ -615,7 +616,7 @@ type ChangelogRoadmapNode = {
     date: string
     cta?: { label?: string; url?: string }
     teams?: { data?: Array<{ attributes?: { name?: string } }> }
-    topic?: { data?: { attributes?: { label?: string } } }
+    topic?: { data?: { attributes?: { label?: string; slug?: string } } }
 }
 
 type ChangelogVideoNode = {
@@ -657,8 +658,17 @@ export const generateChangelogMd = (roadmaps: ChangelogRoadmapNode[], videos: Ch
         const meta = [dayTitle(roadmap.date), team && `${team} Team`, topic].filter(Boolean).join(' · ')
         const description = cleanDescription(roadmap.description)
         const cta = roadmap.cta?.url ? `[${roadmap.cta.label || 'Learn more'}](${absoluteUrl(roadmap.cta.url)})` : ''
+        const docsPath = getChangelogDocsPath(roadmap)
+        const docs =
+            docsPath && docsPath !== stripPostHogOrigin(roadmap.cta?.url || '')
+                ? `[Docs](${absoluteUrl(docsPath)})`
+                : ''
+        const links = [docs, cta].filter(Boolean).join(' · ')
+        const title = roadmap.strapiID
+            ? `### [${roadmap.title}](https://posthog.com/changelog?id=${roadmap.strapiID})`
+            : `### ${roadmap.title}`
 
-        return [`### ${roadmap.title}`, `_${meta}_`, description, cta].filter(Boolean).join('\n\n')
+        return [title, `_${meta}_`, description, links].filter(Boolean).join('\n\n')
     }
 
     // Group entries and videos by YYYY-MM, newest first (input is sorted date DESC)

@@ -20,6 +20,7 @@ import { AnimatePresence, motion, PanInfo } from 'framer-motion'
 import Markdown from 'components/Squeak/components/Markdown'
 import Link from 'components/Link'
 import Filters from 'components/Changelog/Filters'
+import { getChangelogDocsPath, stripPostHogOrigin } from 'components/Changelog/docsLinks'
 import { GatsbyImage } from 'gatsby-plugin-image'
 import type { IGatsbyImageData } from 'gatsby-plugin-image'
 import { useWindow } from '../context/Window'
@@ -107,6 +108,7 @@ type RoadmapNode = {
         data?: {
             attributes?: {
                 label?: string
+                slug?: string
             }
         }
     }
@@ -174,6 +176,7 @@ const Roadmap = ({
     const { isModerator, getJwt } = useUser()
     const { addWindow } = useApp()
     const hasProfiles = (roadmap.profiles?.data?.length ?? 0) > 0
+    const docsPath = getChangelogDocsPath(roadmap)
     const [width, setWidth] = useState(450)
     const [isResizing, setIsResizing] = useState(false)
 
@@ -364,6 +367,14 @@ const Roadmap = ({
                     </div>
                 )}
 
+                {docsPath && docsPath !== stripPostHogOrigin(roadmap.cta?.url || '') && (
+                    <div className="mt-auto py-2 px-4 border-t border-primary">
+                        <OSButton asLink to={docsPath} variant="secondary" width="full" state={{ newWindow: true }}>
+                            Read the docs
+                        </OSButton>
+                    </div>
+                )}
+
                 {/* Resize handle */}
                 <motion.div
                     className="group absolute left-0 top-0 w-1.5 bottom-0 cursor-ew-resize !transform-none z-10"
@@ -421,14 +432,19 @@ const StaticChangelogList = ({ roadmaps }: { roadmaps: RoadmapNode[] }) => {
                             <h2>{dayjs.utc(month).format('MMMM YYYY')}</h2>
                             {items.map((roadmap) => {
                                 const teamName = roadmap.teams?.data?.[0]?.attributes?.name
+                                const topicLabel = roadmap.topic?.data?.attributes?.label
+                                const docsPath = getChangelogDocsPath(roadmap)
                                 return (
                                     <article key={roadmap.id} className="mb-6">
                                         <Heading as="h3" id={slugify(roadmap.title, { lower: true })} className="m-0">
                                             {roadmap.title}
                                         </Heading>
                                         <p className="m-0 text-sm opacity-60">
-                                            {dayjs.utc(roadmap.date).format('MMMM D, YYYY')}
+                                            <a href={`/changelog?id=${roadmap.id}`}>
+                                                {dayjs.utc(roadmap.date).format('MMMM D, YYYY')}
+                                            </a>
                                             {teamName ? ` · ${teamName} Team` : ''}
+                                            {topicLabel ? ` · ${topicLabel}` : ''}
                                         </p>
                                         {fullDetail && roadmap.description && (
                                             <div className="mt-2">
@@ -438,6 +454,13 @@ const StaticChangelogList = ({ roadmaps }: { roadmaps: RoadmapNode[] }) => {
                                         {fullDetail && roadmap.cta?.url && (
                                             <Link to={roadmap.cta.url}>{roadmap.cta.label || 'Learn more'}</Link>
                                         )}
+                                        {fullDetail &&
+                                            docsPath &&
+                                            docsPath !== stripPostHogOrigin(roadmap.cta?.url || '') && (
+                                                <p className="m-0 text-sm">
+                                                    <Link to={docsPath}>Read the docs</Link>
+                                                </p>
+                                            )}
                                     </article>
                                 )
                             })}

@@ -645,6 +645,7 @@ export const onPostBuild: GatsbyNode['onPostBuild'] = async ({ graphql, reporter
                             data {
                                 attributes {
                                     label
+                                    slug
                                 }
                             }
                         }
