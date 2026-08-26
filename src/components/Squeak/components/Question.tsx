@@ -400,7 +400,7 @@ export function Question(props: QuestionProps) {
     } = props
     const [expanded, setExpanded] = useState(props.expanded || false)
     const [isEditingQuestion, setIsEditingQuestion] = useState(false)
-    const { user, notifications, setNotifications, isModerator } = useUser()
+    const { user, notifications, setNotifications, isModerator, isForumModerator } = useUser()
     const { appWindow } = useWindow()
     const { addToast } = useToast()
     const posthog = usePostHog()
@@ -605,9 +605,9 @@ export function Question(props: QuestionProps) {
                             edits={questionData.attributes.edits}
                         />
                         <div className="!ml-auto flex items-center space-x-px [&>*]:inline-flex">
-                            {user?.role?.type === 'moderator' && showActions && (
+                            {isForumModerator && showActions && (
                                 <>
-                                    {!archived && (
+                                    {isModerator && !archived && (
                                         <TopicSelect
                                             onPinTopics={onPinTopics}
                                             selectedTopics={questionData.attributes.pinnedTopics}
@@ -638,13 +638,20 @@ export function Question(props: QuestionProps) {
                                             }
                                         />
                                     )}
-                                    <DeleteButton questionID={questionData.id} />
-                                    <AskMaxButton
-                                        onClick={() =>
-                                            setMaxQuestions([...maxQuestions, { manual: true, withContext: true }])
-                                        }
-                                        askedMax={questionData?.attributes.askedMax}
-                                    />
+                                    {isModerator && (
+                                        <>
+                                            <DeleteButton questionID={questionData.id} />
+                                            <AskMaxButton
+                                                onClick={() =>
+                                                    setMaxQuestions([
+                                                        ...maxQuestions,
+                                                        { manual: true, withContext: true },
+                                                    ])
+                                                }
+                                                askedMax={questionData?.attributes.askedMax}
+                                            />
+                                        </>
+                                    )}
                                 </>
                             )}
                             {!isQuestionAuthor && <ReportSpamButton type="question" id={questionData.id} />}
@@ -733,73 +740,77 @@ export function Question(props: QuestionProps) {
                             isInForum={isInForum}
                         />
                     </div>
-                    {isModerator && isInForum && (
+                    {isForumModerator && isInForum && (
                         <div className="p-4 pb-0">
                             <div className="bg-accent rounded-md p-6 text-primary border border-border">
                                 <h4 className="text-xs opacity-70 mb-2 -mt-2 p-0 font-semibold uppercase">
                                     Moderator tools
                                 </h4>
-                                <div className="grid grid-cols-2">
-                                    <div>
-                                        <Link
-                                            to={`/community/profiles/${questionData?.attributes?.profile?.data?.id}`}
-                                            className="text-yellow font-bold"
-                                        >
-                                            {questionData?.attributes?.profile?.data?.attributes?.firstName
-                                                ? `${questionData?.attributes?.profile?.data?.attributes?.firstName} ${questionData?.attributes?.profile?.data?.attributes?.lastName}`
-                                                : 'Anonymous'}
-                                        </Link>
-                                        <input
-                                            className="w-full m-0 font-normal text-sm text-primary border-none p-0 bg-transparent focus:ring-0"
-                                            type="text"
-                                            value={
-                                                questionData?.attributes?.profile?.data?.attributes?.user?.data
-                                                    ?.attributes?.email
-                                            }
-                                            readOnly
-                                            onFocus={(e) => e.target.select()}
-                                        />
-                                    </div>
-                                    <div className="w-full relative">
-                                        <p className="!text-sm pt-0.5 pb-0 mb-0 flex flex-col items-end space-y-1.5">
+                                {isModerator && (
+                                    <div className="grid grid-cols-2">
+                                        <div>
                                             <Link
-                                                className="font-bold"
-                                                to={questionData.attributes.permalink}
-                                                externalNoIcon
+                                                to={`/community/profiles/${questionData?.attributes?.profile?.data?.id}`}
+                                                className="text-yellow font-bold"
                                             >
-                                                View in PostHog
+                                                {questionData?.attributes?.profile?.data?.attributes?.firstName
+                                                    ? `${questionData?.attributes?.profile?.data?.attributes?.firstName} ${questionData?.attributes?.profile?.data?.attributes?.lastName}`
+                                                    : 'Anonymous'}
                                             </Link>
-                                            <Link
-                                                to={`${process.env.GATSBY_SQUEAK_API_HOST}/admin/content-manager/collection-types/api::question.question/${questionData.id}`}
-                                                externalNoIcon
-                                                className="font-bold"
-                                            >
-                                                View in Strapi
-                                            </Link>
-                                            {conversationsAvailable && (
-                                                <OSButton
-                                                    variant="secondary"
-                                                    size="sm"
-                                                    onClick={handleEscalateToSupport}
-                                                    disabled={escalateState === 'sending' || escalateState === 'sent'}
+                                            <input
+                                                className="w-full m-0 font-normal text-sm text-primary border-none p-0 bg-transparent focus:ring-0"
+                                                type="text"
+                                                value={
+                                                    questionData?.attributes?.profile?.data?.attributes?.user?.data
+                                                        ?.attributes?.email
+                                                }
+                                                readOnly
+                                                onFocus={(e) => e.target.select()}
+                                            />
+                                        </div>
+                                        <div className="w-full relative">
+                                            <p className="!text-sm pt-0.5 pb-0 mb-0 flex flex-col items-end space-y-1.5">
+                                                <Link
+                                                    className="font-bold"
+                                                    to={questionData.attributes.permalink}
+                                                    externalNoIcon
                                                 >
-                                                    {escalateState === 'sending'
-                                                        ? 'Escalating…'
-                                                        : escalateState === 'sent'
-                                                        ? 'Escalated ✓'
-                                                        : 'Escalate to support'}
-                                                </OSButton>
-                                            )}
-                                            {escalateState === 'error' && (
-                                                <span className="text-red text-xs font-semibold">
-                                                    Couldn't create ticket. Try again?
-                                                </span>
-                                            )}
-                                        </p>
+                                                    View in PostHog
+                                                </Link>
+                                                <Link
+                                                    to={`${process.env.GATSBY_SQUEAK_API_HOST}/admin/content-manager/collection-types/api::question.question/${questionData.id}`}
+                                                    externalNoIcon
+                                                    className="font-bold"
+                                                >
+                                                    View in Strapi
+                                                </Link>
+                                                {conversationsAvailable && (
+                                                    <OSButton
+                                                        variant="secondary"
+                                                        size="sm"
+                                                        onClick={handleEscalateToSupport}
+                                                        disabled={
+                                                            escalateState === 'sending' || escalateState === 'sent'
+                                                        }
+                                                    >
+                                                        {escalateState === 'sending'
+                                                            ? 'Escalating…'
+                                                            : escalateState === 'sent'
+                                                            ? 'Escalated ✓'
+                                                            : 'Escalate to support'}
+                                                    </OSButton>
+                                                )}
+                                                {escalateState === 'error' && (
+                                                    <span className="text-red text-xs font-semibold">
+                                                        Couldn't create ticket. Try again?
+                                                    </span>
+                                                )}
+                                            </p>
+                                        </div>
                                     </div>
-                                </div>
-                                <div className="mt-4 border-t border-border">
-                                    <div className="pt-4">
+                                )}
+                                <div className={isModerator ? 'mt-4 border-t border-border' : ''}>
+                                    <div className={isModerator ? 'pt-4' : ''}>
                                         <div className="flex items-center justify-between mb-2">
                                             <h4 className="text-xs text-primary opacity-70 p-0 m-0 font-semibold uppercase">
                                                 Forum topics
