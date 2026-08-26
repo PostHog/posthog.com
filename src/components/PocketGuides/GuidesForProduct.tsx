@@ -21,7 +21,7 @@ export default function GuidesForProduct({ product }: GuidesForProductProps): JS
 
     return (
         <div className="not-prose">
-            <VolumeCard volume={volume} count={counts[volume.id] ?? 0} />
+            <VolumeCard volume={volume} count={counts[volume.id] ?? 0} placement="product_docs" />
         </div>
     )
 }
