@@ -220,31 +220,29 @@ export const featureFlags = {
     },
     useCaseRamp: {
         intro: 'Feature Flags work at three levels. You can create and roll out flags yourself, ask an agent to do it for you, or let PostHog work proactively with your data.',
-        scenario: 'Shipping a risky checkout rewrite',
+        scenario: "Your risky checkout rewrite ships behind a flag (in case it's a disaster)",
         columns: [
             {
                 level: 'Do it yourself',
                 surfaces: ['web'],
                 scenario: {
                     icon: 'IconToggle',
-                    surfaces: ['web'],
                     steps: [
                         'You wrap the new checkout in a flag and turn it on for 10% of users',
                         'You watch the dashboards, widen to half, then to everyone',
                         'Months later the flag is still in your code, long after everyone has it',
                     ],
-                    outcome: "It's a safe rollout, but the cleanup is on you, and it rarely happens.",
                 },
                 points: [
                     {
-                        title: 'Cleanup is on you',
+                        title: 'You can already see what’s stale',
                         icon: 'IconHandwave',
-                        body: "You're the one deciding what to roll out, to whom, and when to widen it. You're also the one who has to remember to clean it up once everyone has it.",
+                        body: 'The flags list can filter to show flags unevaluated in 30+ days, or fully rolled out with no targeting left. Remembering to check it, and to act on what it shows, is still on you.',
                     },
                     {
-                        title: 'Point an agent at your flags instead',
+                        title: 'Point an agent at it instead',
                         icon: 'IconSparkles',
-                        body: 'Every flag you create becomes something PostHog can act on. Point an agent at your flag roster and it will watch the whole thing, catching the ones nobody remembers turning off.',
+                        body: 'Every flag write comes with a blast-radius estimate and an audit trail an agent can check before touching anything. Point it at your roster and it can create, roll out, or clean up a flag from a plain-English description.',
                     },
                 ],
             },
@@ -253,13 +251,11 @@ export const featureFlags = {
                 surfaces: ['ai', 'slack', 'mcp', 'cli'],
                 scenario: {
                     icon: 'IconMagicWand',
-                    surfaces: ['mcp', 'slack'],
                     steps: [
                         'From your editor, you ask your coding agent for the flag while you write the code that checks it',
                         'It creates the flag with the targeting you described, ready to roll out at 10%',
                         'Later you tag @PostHog in Slack: "widen new-checkout to half of users"',
                     ],
-                    outcome: 'You never left your editor or Slack, but you still drove every step.',
                 },
                 points: [
                     {
@@ -268,9 +264,9 @@ export const featureFlags = {
                         body: "An agent that wraps its change in a flag ships with a kill switch built in. That's what makes it safe to let PostHog ship changes on its own at the next level.",
                     },
                     {
-                        title: 'The full prompt list is below',
+                        title: 'Ask, then act',
                         icon: 'IconMessage',
-                        body: 'AI prompts, right below this section, lists everything you can ask: creating, rolling out, inspecting, and cleaning up flags.',
+                        body: "A scout audits the same roster on its own schedule, watching for ghost flags pointing at nothing and evaluation cliffs where a healthy flag's call volume just vanishes.",
                     },
                 ],
             },
@@ -279,21 +275,18 @@ export const featureFlags = {
                 surfaces: ['inbox', 'desktop'],
                 scenario: {
                     icon: 'IconPullRequest',
-                    surfaces: ['inbox', 'desktop'],
                     steps: [
                         'A feature flags scout reviews your roster on a schedule and finds new-checkout fully rolled out for months',
                         'The old code path is dead, so it opens a draft pull request removing the check and the unused branch',
                         'Flags that need a human call land as a report in your Inbox instead',
                         'You merge the cleanup, and the codebase ends the week simpler than it started',
                     ],
-                    outcome:
-                        'You never had to notice the old flag yourself. PostHog found it and opened the pull request to remove it.',
                 },
                 points: [
                     {
-                        title: 'Your flag roster is the context',
+                        title: "It's auditing the wiring, not your judgment",
                         icon: 'IconBrain',
-                        body: "The scout looks at every flag you and your agents have created, and how long each has been rolled out. That's how it tells old dead code from a rollout that quietly broke.",
+                        body: 'The scout checks four things on a schedule: evaluation cliffs, ghost flags, response shifts, and plain flag debt. All of it lands in one report instead of one per flag.',
                     },
                     {
                         title: 'The safety rail for autonomous changes',

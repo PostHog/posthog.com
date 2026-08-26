@@ -219,31 +219,29 @@ export const productAnalytics = {
     },
     useCaseRamp: {
         intro: 'Product Analytics works at three levels. You can build funnels and dashboards yourself, ask an agent to build them for you, or let PostHog work proactively with your data.',
-        scenario: 'Fewer people are finishing signup than last week',
+        scenario: 'Signup conversion drops ten points overnight',
         columns: [
             {
                 level: 'Do it yourself',
                 surfaces: ['web'],
                 scenario: {
                     icon: 'IconFunnels',
-                    surfaces: ['web'],
                     steps: [
                         'You happen to open your signup dashboard and the number looks wrong',
                         'You dig through paths and recordings to find the step where people now leave',
                         'You file the bug, and the fix ships whenever someone picks it up',
                     ],
-                    outcome: 'You caught it, but only because you happened to look.',
                 },
                 points: [
                     {
-                        title: 'Checking it is on you',
+                        title: 'You can already alert on this',
                         icon: 'IconHandwave',
-                        body: "You built this funnel, so it's on you to remember to check it. Nothing here flags a problem unless you go looking for one.",
+                        body: 'Threshold and anomaly detection alerts work on any funnel, trend, or retention insight, so a real drop can message Slack or email on its own. You still have to build the funnel and set the alert up.',
                     },
                     {
                         title: 'Point an agent at it instead',
                         icon: 'IconSparkles',
-                        body: "The same events and insights become something PostHog can act on. Point an agent at your data and it will watch every funnel you have, not just the one you happened to check, and catch drops you'd never think to look for.",
+                        body: 'Every funnel and retention insight has an actors query behind it, listing exactly who dropped off a step. Point an agent at that data and it can pull the list and start digging the moment you ask.',
                     },
                 ],
             },
@@ -252,51 +250,47 @@ export const productAnalytics = {
                 surfaces: ['ai', 'slack', 'mcp', 'cli'],
                 scenario: {
                     icon: 'IconMagicWand',
-                    surfaces: ['ai', 'slack'],
                     steps: [
                         'You ask PostHog AI: "why did signup conversion drop this week?"',
                         'It counts how many people reached each step (landing page, signup form, first project) and compares those counts against last week',
                         'It names the step that fell, and you go fix it',
                     ],
-                    outcome: 'It takes minutes instead of an afternoon, but you still had to ask.',
                 },
                 points: [
                     {
                         title: 'Agents read what you built',
                         icon: 'IconSearch',
-                        body: 'PostHog AI, the Slack app, and your editor through MCP all answer using the events and insights you already have. An agent can only tell you why signups dropped if something in your product is called a signup.',
+                        body: 'PostHog AI, the Slack app, and your editor through MCP all answer from the events and insights you already have. It can only explain a signup drop if something in your product is actually called a signup.',
                     },
                     {
-                        title: 'The full prompt list is below',
+                        title: 'Ask, then act',
                         icon: 'IconMessage',
-                        body: 'AI prompts, right below this section, lists everything you can ask from PostHog AI, Slack, your editor, or the CLI.',
+                        body: 'A scout runs that same check on your funnels every day without being asked, watching the conversion rate rather than raw traffic, so a quiet Sunday never reads as a drop.',
                     },
                 ],
             },
             {
                 level: 'Ship with PostHog',
-                surfaces: ['inbox', 'slack'],
+                surfaces: ['inbox', 'slack', 'desktop'],
                 scenario: {
-                    icon: 'IconPullRequest',
-                    surfaces: ['inbox', 'slack'],
+                    icon: 'IconSearch',
                     steps: [
-                        'A product analytics scout holds a baseline for your signup funnel, so it notices the drop before you do',
-                        'The report lands in your Inbox and Slack, naming the step that fell and the likely cause',
-                        'You tell PostHog to fix it. It writes the code and opens a pull request for you to review',
-                        'After you merge, PostHog re-checks the funnel to confirm the number recovered',
+                        'A product analytics scout watches the conversion rate on your signup funnel, not raw volume, so a real drop stands out from an ordinary quiet day',
+                        'It finds the step that fell, from 40% to 22%, and files a report with the events and session replays behind it',
+                        'You read the evidence and decide what actually happened, since a conversion drop can be a bug, a bad release, or plain seasonality',
+                        'Once you know the fix, you hand it to an agent yourself and review the pull request it opens',
                     ],
-                    outcome: 'PostHog spotted the drop before you did. Fixing it took one review.',
                 },
                 points: [
                     {
-                        title: 'PostHog reads what you built',
+                        title: 'It watches rates, not traffic',
                         icon: 'IconBrain',
-                        body: 'The scout reads the same funnels and events you built by hand. That data is what turns "something changed" into a clear cause and a pull request you can trust.',
+                        body: 'Traffic dropping alone never triggers a report. A conversion rate falling from 40% to 22% does, so the scout can name the exact step that broke instead of flagging every quiet day.',
                     },
                     {
-                        title: 'More data, better fixes',
+                        title: 'More context, better reports',
                         icon: 'IconTrends',
-                        body: "The more of your product's behavior you track in PostHog, the better the scout gets at telling a real problem from normal noise. Pipe in a source like HubSpot or Gong and your deals, tickets, and sales calls sit alongside that behavior, so a report can name which accounts a drop actually cost you.",
+                        body: 'Connect a source like HubSpot or Gong and the report also names which accounts a drop affected, alongside the funnel step that broke.',
                     },
                 ],
             },

@@ -195,31 +195,29 @@ export const surveys = {
     },
     useCaseRamp: {
         intro: 'Surveys work at three levels. You can write the questions and read the answers yourself, ask an agent to summarize what came back, or let PostHog work proactively with your data.',
-        scenario: 'Dozens of users ask for the same feature: exporting their data to CSV',
+        scenario: "Dozens of users beg for the same feature (guess we're building it)",
         columns: [
             {
                 level: 'Do it yourself',
                 surfaces: ['web'],
                 scenario: {
                     icon: 'IconMessage',
-                    surfaces: ['web'],
                     steps: [
                         'You launch an open-text survey asking what feature people miss most',
                         'You read a few hundred responses and keep seeing the same request: export to CSV',
                         'You file it, argue for it in planning, and eventually someone builds it',
                     ],
-                    outcome: 'The demand was in there. You just had to read everything to find it.',
                 },
                 points: [
                     {
-                        title: 'Reading them is on you',
+                        title: 'You can already get pinged per response',
                         icon: 'IconHandwave',
-                        body: "You wrote the question, so you're the one reading every answer. That works fine until there are hundreds of them.",
+                        body: 'A native notification can post each new response to Slack or a webhook as it lands. Reading hundreds of them for a pattern is still on you.',
                     },
                     {
                         title: 'Point an agent at the answers instead',
                         icon: 'IconSparkles',
-                        body: "Every response becomes something PostHog can act on. Point an agent at your survey and it will read every answer as it lands, catching a theme building before you'd ever finish reading them yourself.",
+                        body: 'Every response stays tied to the person who gave it, so an agent can tell you whether the ones asking are the ones paying you. Point it at your survey instead of reading every answer yourself.',
                     },
                 ],
             },
@@ -228,47 +226,42 @@ export const surveys = {
                 surfaces: ['ai', 'slack', 'mcp', 'cli'],
                 scenario: {
                     icon: 'IconMagicWand',
-                    surfaces: ['ai', 'slack'],
                     steps: [
                         'You ask PostHog AI for a survey asking what feature people want most',
                         'It drafts the questions and targeting. You edit and launch',
                         'In Slack you ask what people are asking for, and it summarizes the requests in the thread',
                     ],
-                    outcome: 'Nobody read four hundred raw responses, but somebody still had to ask.',
                 },
                 points: [
                     {
                         title: 'Agents read what came back',
                         icon: 'IconSearch',
-                        body: 'Summaries and themes come from the same responses you would otherwise read yourself. Every answer stays tied to the person who gave it, so an agent can also tell you whether the people asking for a feature are the ones paying you.',
+                        body: 'PostHog AI, Slack, and your editor all read the same responses, split promoters from detractors on an NPS survey, and compare segments too, like whether free users and paying customers are asking for different things.',
                     },
                     {
-                        title: 'The full prompt list is below',
+                        title: 'Ask, then act',
                         icon: 'IconMessage',
-                        body: 'AI prompts, right below this section, lists everything you can ask: drafting surveys, checking results, summarizing answers.',
+                        body: "A scout reads the same responses on a schedule, clustering scattered comments into one theme, and it holds NPS and CSAT drops to that survey's own baseline instead of a fixed score.",
                     },
                 ],
             },
             {
                 level: 'Ship with PostHog',
-                surfaces: ['inbox', 'slack'],
+                surfaces: ['inbox', 'slack', 'desktop'],
                 scenario: {
-                    icon: 'IconPullRequest',
-                    surfaces: ['inbox', 'slack'],
+                    icon: 'IconSearch',
                     steps: [
                         'A surveys scout clusters the open-text answers on a schedule and sees CSV export requested again and again',
                         'The report lands in your Inbox with the count and a few quotes from people asking for it',
                         'You reply in the Slack thread telling PostHog to build it, and it opens a pull request',
                         'You ship it, and the next round of responses stops mentioning it',
                     ],
-                    outcome:
-                        'You never had to read every response yourself. The scout counted the requests, and shipping the most-wanted feature was one Slack reply away.',
                 },
                 points: [
                     {
-                        title: 'Every request comes with a count',
+                        title: "It knows what's a pattern and what's noise",
                         icon: 'IconBrain',
-                        body: "The scout doesn't just spot a request, it tracks how often it comes up. That's what turns a stray comment into a feature worth building.",
+                        body: "Five people describing the same checkout problem becomes one report with their quotes attached, not five you never read. A wobble in a small NPS sample doesn't clear that bar; a score drop against that survey's own baseline does.",
                     },
                     {
                         title: 'You stay in the loop',

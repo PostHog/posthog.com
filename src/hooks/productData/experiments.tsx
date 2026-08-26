@@ -230,31 +230,29 @@ export const experiments = {
     },
     useCaseRamp: {
         intro: 'Experiments work at three levels. You can set up and read a test yourself, ask an agent to scaffold one for you, or let PostHog work proactively with your data.',
-        scenario: 'Does the new onboarding actually work?',
+        scenario: 'Your new onboarding ships blind (fingers crossed)',
         columns: [
             {
                 level: 'Do it yourself',
                 surfaces: ['web'],
                 scenario: {
                     icon: 'IconSplitTesting',
-                    surfaces: ['web'],
                     steps: [
                         'You ship the new onboarding to half of users behind a flag, measuring activation',
                         'You check back for two weeks and wait for the result to settle',
                         'The new version wins, so you roll it out and retire the old one',
                     ],
-                    outcome: "It's a real answer instead of a guess, and you earned it by hand.",
                 },
                 points: [
                     {
-                        title: 'One test at a time',
+                        title: 'You can already see this',
                         icon: 'IconHandwave',
-                        body: 'You pick the metric, ship the variant, and wait for the result. One test at a time, on your own schedule.',
+                        body: 'Every experiment page runs a sample ratio mismatch check automatically and flags it right there. You still have to open the page to see whether your test passed it.',
                     },
                     {
-                        title: 'Point an agent at your results instead',
+                        title: 'Point an agent at it instead',
                         icon: 'IconSparkles',
-                        body: 'Every test you have run becomes something PostHog can act on. Point an agent at your experiments and it will watch every one at once, catching a skewed split before you trust a bad result.',
+                        body: "An agent can run that same check across every experiment you have, not just the one you're watching. Point it at your experiments before you trust a result.",
                     },
                 ],
             },
@@ -263,13 +261,11 @@ export const experiments = {
                 surfaces: ['ai', 'slack', 'mcp', 'cli'],
                 scenario: {
                     icon: 'IconMagicWand',
-                    surfaces: ['ai', 'slack'],
                     steps: [
                         'You ask PostHog AI: "test the new onboarding, 50/50, measure activation"',
                         'It creates the experiment and the flag behind it, wired to your metric',
                         'A week later you ask in Slack whether it is significant yet, and it answers with the numbers',
                     ],
-                    outcome: 'The mechanics are handled, but you still decide what to test.',
                 },
                 points: [
                     {
@@ -278,9 +274,9 @@ export const experiments = {
                         body: 'The test an agent scaffolds is wired to the events and metrics you already track, so a well-instrumented product gives it a real metric to decide on instead of a rough proxy.',
                     },
                     {
-                        title: 'The full prompt list is below',
+                        title: 'Ask, then act',
                         icon: 'IconMessage',
-                        body: 'AI prompts, right below this section, lists everything you can ask: creating tests, checking results, shipping winners.',
+                        body: "A scout runs that same sample ratio check on every experiment automatically, and it only flags a split as wrong once there's enough traffic for the math to mean something.",
                     },
                 ],
             },
@@ -289,14 +285,12 @@ export const experiments = {
                 surfaces: ['inbox', 'desktop'],
                 scenario: {
                     icon: 'IconGraph',
-                    surfaces: ['inbox', 'desktop'],
                     steps: [
                         'PostHog proposes an onboarding fix from a report, and you ask for it to ship as a test rather than to everyone',
                         'The change goes out behind a flag with activation as the deciding metric',
                         'An experiments scout watches the running test for skewed splits, so a broken result cannot fool you',
                         'The number decides whether the change stays, and the outcome feeds what PostHog looks at next',
                     ],
-                    outcome: 'Every change PostHog makes on its own comes with proof that it worked.',
                 },
                 points: [
                     {
@@ -305,9 +299,9 @@ export const experiments = {
                         body: "A pull request is a guess about what will help. An experiment tells you whether the guess was right, so nobody has to take PostHog's word for it.",
                     },
                     {
-                        title: 'The scout catches bad tests too',
+                        title: 'It audits the measurement, not your call',
                         icon: 'IconShield',
-                        body: 'On its own, the scout flags a test whose traffic split looks wrong, and tests that finished weeks ago but are still running. That way, every number PostHog acts on is one you can trust.',
+                        body: 'A skewed split, a stalled exposure count, a flag edited mid-run, or a zombie test still running weeks after the answer was clear can all make a real result look fake, or a fake one look real. It only ever reports the problem, never the verdict.',
                     },
                 ],
             },

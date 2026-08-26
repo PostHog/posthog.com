@@ -329,31 +329,29 @@ export const sessionReplay = {
     },
     useCaseRamp: {
         intro: 'Session Replay works at three levels. You can watch recordings yourself, ask an agent to find and summarize them for you, or let PostHog work proactively with your data.',
-        scenario: 'Users keep clicking the same button and nothing happens',
+        scenario: 'Users keep rage-clicking a dead button (why though)',
         columns: [
             {
                 level: 'Do it yourself',
                 surfaces: ['web'],
                 scenario: {
                     icon: 'IconRewindPlay',
-                    surfaces: ['web'],
                     steps: [
                         "A support ticket points you at one user's recording, and you watch them click the button six times and give up",
                         'You filter for other recordings on the same page and find it happening to other people too',
                         'You file the bug with a link to a recording, so nobody argues about whether it is real',
                     ],
-                    outcome: 'You saw the exact problem, but only because a ticket pointed you at it.',
                 },
                 points: [
                     {
-                        title: 'Finding them is on you',
+                        title: 'You can already filter for it',
                         icon: 'IconHandwave',
-                        body: "You choose which sessions to watch, and there are always more of them than you have time for. Nothing here tells you which recording matters unless you already know what you're looking for.",
+                        body: "Recordings are filterable by rage clicks, dead clicks, and errors, so you're not watching blind. Nothing here tells you when a new pattern shows up, though; running the search is still on you.",
                     },
                     {
-                        title: 'Point an agent at your recordings instead',
+                        title: 'Point an agent at it instead',
                         icon: 'IconSparkles',
-                        body: 'Every session you record becomes something PostHog can act on. Point an agent at them and it will read across thousands at once, catching a pattern you would otherwise only spot if you happened to open the right recording.',
+                        body: 'An agent can run that same filter across every session at once, then watch and summarize what it finds, instead of you doing it one recording at a time.',
                     },
                 ],
             },
@@ -362,13 +360,11 @@ export const sessionReplay = {
                 surfaces: ['ai', 'slack', 'mcp', 'cli'],
                 scenario: {
                     icon: 'IconMagicWand',
-                    surfaces: ['ai', 'slack'],
                     steps: [
                         'You ask PostHog AI for sessions where someone clicked the checkout button more than once',
                         'It returns the matching recordings and summarizes what they have in common',
                         'You watch one to confirm, then send the summary to whoever owns checkout',
                     ],
-                    outcome: 'You skipped the searching, but you still had to know to ask.',
                 },
                 points: [
                     {
@@ -377,25 +373,23 @@ export const sessionReplay = {
                         body: 'PostHog AI, Slack, and your editor through MCP all search the same recordings you would open yourself. Turn on error tracking too and an agent can work backwards from an exception to the session that produced it.',
                     },
                     {
-                        title: 'The full prompt list is below',
+                        title: 'Ask, then act',
                         icon: 'IconMessage',
-                        body: 'AI prompts, right below this section, lists everything you can ask: finding sessions, summarizing them, clustering drop-offs, and building playlists.',
+                        body: 'A scout clusters the same rage clicks and dead ends across every session, and only surfaces the ones concentrated enough on one page to be a real pattern, not a mood.',
                     },
                 ],
             },
             {
                 level: 'Ship with PostHog',
-                surfaces: ['inbox', 'slack'],
+                surfaces: ['inbox', 'slack', 'desktop'],
                 scenario: {
-                    icon: 'IconPullRequest',
-                    surfaces: ['inbox', 'slack'],
+                    icon: 'IconSearch',
                     steps: [
                         "A session replay scout compares clicks on each page against that page's own normal, so a spike on one button stands out",
                         'It checks the pattern holds across enough separate people to rule out one frustrated user, then files a report in your Inbox',
                         'The report links the recordings behind it, so you can watch the failure before deciding anything',
-                        'You reply @PostHog to fix it, and it opens a draft pull request against the code behind that button',
+                        'A replay proves people are stuck but not always why, so you decide the fix yourself and hand it to an agent from here',
                     ],
-                    outcome: 'This time nothing prompted you. The report arrived with the recordings already attached.',
                 },
                 points: [
                     {
@@ -406,7 +400,7 @@ export const sessionReplay = {
                     {
                         title: 'Replay Vision does the watching',
                         icon: 'IconEye',
-                        body: 'Describe what to look for once and Replay Vision, in beta, watches the video of each session for it, catching hesitation and dead ends that clicks alone never show. Its findings land as events you can chart, so a pattern across hundreds of sessions shows up without anyone watching them.',
+                        body: "Describe what to look for once and Replay Vision, in beta, watches every session's video for it, catching hesitation and dead ends that clicks alone miss. Its findings land as events you can chart, so a pattern across hundreds of sessions surfaces on its own.",
                     },
                 ],
             },

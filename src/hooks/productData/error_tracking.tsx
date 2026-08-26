@@ -210,21 +210,18 @@ export const errorTracking = {
     },
     useCaseRamp: {
         intro: 'Error Tracking works at three levels. You can triage exceptions yourself, ask an agent to investigate one for you, or let PostHog work proactively with your data.',
-        scenario: 'A deploy starts throwing an error nobody has seen before',
+        scenario: 'Your latest deploy ships a brand-new error (nice)',
         columns: [
             {
                 level: 'Do it yourself',
                 surfaces: ['web'],
                 scenario: {
                     icon: 'IconBug',
-                    surfaces: ['web'],
                     steps: [
                         'An alert tells you a new issue is spiking, and you open it in the issue list',
                         'The stack trace points at a file, and the session replay attached to it shows what the user did to trigger it',
                         'You write the fix, ship it, and mark the issue resolved',
                     ],
-                    outcome:
-                        'You had everything you needed to fix it. Noticing it in the first place was still on you.',
                 },
                 points: [
                     {
@@ -233,9 +230,9 @@ export const errorTracking = {
                         body: 'Every exception lands in one list, and you decide which of them are worth an afternoon. A rare crash that breaks checkout for your biggest customer looks a lot like noise until somebody reads it.',
                     },
                     {
-                        title: 'Point an agent at your exceptions instead',
+                        title: 'Point an agent at it instead',
                         icon: 'IconSparkles',
-                        body: 'Every exception you capture becomes something PostHog can act on, stack trace and affected user included. Point an agent at your issue list and it will read all of them and tell you which file to open.',
+                        body: "Every exception is captured with its stack trace, release, and affected user attached. That's enough for an agent to triage your issue list and open a fix, instead of you reading every stack trace yourself.",
                     },
                 ],
             },
@@ -244,24 +241,22 @@ export const errorTracking = {
                 surfaces: ['ai', 'slack', 'mcp', 'cli'],
                 scenario: {
                     icon: 'IconMagicWand',
-                    surfaces: ['mcp', 'slack'],
                     steps: [
                         'From your editor you ask which errors are new since the last deploy',
                         'It pulls the stack trace, explains the likely cause, and writes the fix in the file you already have open',
                         'Once it ships, you tag @PostHog in Slack to mark the issue resolved',
                     ],
-                    outcome: 'You never left your editor, but you still had to ask which errors were new.',
                 },
                 points: [
                     {
                         title: 'Agents read the trace and the user',
                         icon: 'IconSearch',
-                        body: 'An agent gets the same stack trace, session replay, and person properties you would, so it can name the line rather than guess at the cause.',
+                        body: 'An agent gets the same stack trace, session replay, and person properties you would, so it can name the line rather than guess at the cause. Releases with source linking take it further, pointing straight at the file and commit that shipped the bug.',
                     },
                     {
-                        title: 'The full prompt list is below',
+                        title: 'Ask, then act',
                         icon: 'IconMessage',
-                        body: 'AI prompts, right below this section, lists everything you can ask: finding errors, inspecting traces, changing status, and routing issues to the right team.',
+                        body: 'A scout uses the same spike detection that powers your alerts to catch a new error the moment it clears its baseline, no prompt required.',
                     },
                 ],
             },
@@ -270,14 +265,12 @@ export const errorTracking = {
                 surfaces: ['inbox', 'desktop'],
                 scenario: {
                     icon: 'IconPullRequest',
-                    surfaces: ['inbox', 'desktop'],
                     steps: [
                         'The new error is a signal the second it fires, so nothing waits for a scheduled check',
                         'Signals for the same crash group into one report, tied to the deploy that introduced it',
                         'The trace names a file in a repo PostHog knows, so it opens a draft pull request with the fix and a regression test',
                         'You review and merge. Anything needing a judgment call lands in your Inbox instead',
                     ],
-                    outcome: 'This is the shortest path PostHog has from a problem to a fix.',
                 },
                 points: [
                     {
@@ -286,9 +279,9 @@ export const errorTracking = {
                         body: 'Most reports need a person to decide what to do. An exception names a file, a line, and the user who hit it, which is enough for PostHog to write the fix and let you check its work.',
                     },
                     {
-                        title: 'Scouts watch the patterns',
+                        title: 'Spike detection is the trigger',
                         icon: 'IconRefresh',
-                        body: 'The source catches each exception. A scout spots what only shows up across them, like an issue you marked resolved firing again, which is also how PostHog checks its own fixes held.',
+                        body: 'Each issue tracks its own rolling baseline, so a new error gets flagged the moment it clears that baseline, no warm-up period needed. The same check also catches a resolved issue firing again, which is how PostHog verifies its own fixes held.',
                     },
                 ],
             },

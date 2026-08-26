@@ -217,31 +217,29 @@ export const aiObservability = {
     },
     useCaseRamp: {
         intro: 'AI Observability works at three levels. You can read the traces yourself, ask an agent what your AI features cost and how fast they are, or let PostHog work proactively with your data.',
-        scenario: 'Your model spend doubles overnight and nobody knows why',
+        scenario: 'Your token spend doubles overnight (wtf?!)',
         columns: [
             {
                 level: 'Do it yourself',
                 surfaces: ['web'],
                 scenario: {
                     icon: 'IconLlmAnalytics',
-                    surfaces: ['web'],
                     steps: [
                         'The invoice from your model provider comes in higher than last month, so you open the cost dashboard',
                         'You break spend down by model, then by feature, and find one prompt sending far more tokens than you expected',
                         'You open a trace from that feature, read the prompt that went in, and trim it',
                     ],
-                    outcome: 'You found it in an afternoon, a month after it started costing you.',
                 },
                 points: [
                     {
-                        title: 'Reading traces is on you',
+                        title: 'You can already alert on this',
                         icon: 'IconHandwave',
-                        body: 'A trace tells you exactly what one call cost and why. Picking which one to read, out of the thousands your product made this week, is the slow part.',
+                        body: 'A native anomaly detection alert on the AI Observability dashboard can watch cost, latency, or error rate and fire before you think to check. Finding the one expensive trace behind the spike is still on you.',
                     },
                     {
-                        title: 'Point an agent at your traces instead',
+                        title: 'Point an agent at it instead',
                         icon: 'IconSparkles',
-                        body: 'Every generation you capture becomes something PostHog can act on, with its model, latency, token count, and cost attached. Point an agent at them and it will compare all of it at once, instead of waiting for you to choose a starting point.',
+                        body: 'Every generation is captured with its model, latency, and cost attached. Point an agent at that data and it compares every trace at once, instead of you picking one to start with.',
                     },
                 ],
             },
@@ -250,46 +248,42 @@ export const aiObservability = {
                 surfaces: ['ai', 'slack', 'mcp', 'cli'],
                 scenario: {
                     icon: 'IconMagicWand',
-                    surfaces: ['ai', 'slack'],
                     steps: [
                         'You ask PostHog AI what you spent this week, broken down by model',
                         'It names the model whose spend jumped, then pulls the most expensive individual calls behind it',
-                        'In Slack you ask whether a cheaper model would be slower, and it compares latency for you',
+                        'Bonus: move the discussion into Slack and tag @PostHog to deliver more data to the thread, or ship a fix to your codebase',
                     ],
-                    outcome: 'Minutes instead of an afternoon, once you thought to check the bill.',
                 },
                 points: [
                     {
-                        title: 'Agents read every generation',
+                        title: 'AI that watches your AI',
                         icon: 'IconSearch',
-                        body: 'Cost, latency, tokens, and errors are captured as ordinary PostHog events, so an agent can query them next to your product analytics. Tag your calls by feature and the answers get specific enough to act on.',
+                        body: 'Cost, latency, tokens, and errors are captured as ordinary PostHog events, so an agent can query them next to your product analytics, logs and errors.',
                     },
                     {
-                        title: 'The full prompt list is below',
+                        title: 'Ask, then act',
                         icon: 'IconMessage',
-                        body: 'AI prompts, right below this section, lists everything you can ask: checking costs, finding expensive traces, catching errors, and comparing models.',
+                        body: 'A scout runs the same cost and latency checks against your own baseline automatically, and only lands in your Inbox once a model or feature actually steps outside its normal range.',
                     },
                 ],
             },
             {
                 level: 'Ship with PostHog',
-                surfaces: ['inbox', 'slack'],
+                surfaces: ['inbox', 'slack', 'desktop'],
                 scenario: {
                     icon: 'IconHandMoney',
-                    surfaces: ['inbox', 'slack'],
                     steps: [
                         'An AI observability scout tracks spend against your own baseline, so it needs no budget threshold to tell that this is unusual',
                         'It narrows the jump to one model and one feature, and attaches the traces it sampled as evidence',
                         'The report lands in your Inbox and Slack, routed to whoever owns that feature',
                         'Rewriting a prompt is a product decision, so it asks rather than opening a pull request. Reply in the thread and it will write the change',
                     ],
-                    outcome: 'A month of overspending became a same-week report.',
                 },
                 points: [
                     {
                         title: 'Your own history is the threshold',
                         icon: 'IconBrain',
-                        body: 'The scout compares this week to your weeks, not to a number somebody picked in advance. That is what lets it flag a latency drift on a single model without treating every busy afternoon as an incident.',
+                        body: "The scout compares this week to your own history, not a number someone picked in advance. That's what lets it flag one model drifting without treating a busy afternoon as an incident.",
                     },
                     {
                         title: 'It watches your evaluations too',

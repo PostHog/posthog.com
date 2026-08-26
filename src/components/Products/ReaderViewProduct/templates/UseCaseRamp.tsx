@@ -2,6 +2,7 @@ import React from 'react'
 import { Tabs } from 'radix-ui'
 import * as icons from '@posthog/icons'
 import {
+    IconArrowRight,
     IconAtSign,
     IconBolt,
     IconCoffee,
@@ -64,16 +65,6 @@ interface RampScenario {
      */
     icon?: string
     steps: string[]
-    /**
-     * One-line takeaway contrasting this level with the others – what the reader
-     * gains (or still has to do) here. Rendered set off from the steps.
-     */
-    outcome?: string
-    /**
-     * Keys into `surfaces`. Names which product(s) this version of the story
-     * happens in, so a reader can tell PostHog AI from Slack from an editor agent.
-     */
-    surfaces?: string[]
 }
 
 /**
@@ -116,7 +107,11 @@ interface RampColumn {
     mode?: string
     /** The running scenario as it plays out at this level. */
     scenario?: RampScenario
-    /** What this level means for the ramp – usually two cards. */
+    /**
+     * What this level means for the ramp – usually two cards. On every column but
+     * the last, the final point doubles as a clickable card into the next tab, so
+     * write its body to end on that pivot (see `UseCaseRamp`'s render of `points`).
+     */
     points?: RampPoint[]
 }
 
@@ -124,7 +119,7 @@ interface UseCaseRampData {
     /**
      * Frames the section against the rest of the page: the manual tool above is
      * level one, and this is how the same data climbs to agents and self-driving.
-     * Tool-specific, like `driver`.
+     * Tool-specific, like the rest of the ramp copy.
      */
     intro?: string
     /**
@@ -165,17 +160,15 @@ const slugify = (value: string): string => value.toLowerCase().replace(/[^a-z0-9
 const resolveSurfaces = (keys?: string[]): Surface[] => (keys ?? []).map((key) => surfaces[key]).filter(Boolean)
 
 /**
- * Which product(s) a level or scenario happens in, as icon + name pills.
- * Used both next to the level heading (`column.surfaces`) and top-right of
- * the scenario card (`column.scenario.surfaces`).
+ * Which product(s) a level happens in, as icon + name pills next to the level
+ * heading. Kept on one line (no wrap) alongside the mode badge.
  */
 const SurfaceTags = ({ keys }: { keys?: string[] }): JSX.Element | null => {
     const resolved = resolveSurfaces(keys)
     if (!resolved.length) return null
 
-    // `bg-light` against the card's `bg-accent` is what stops the tag disappearing.
     return (
-        <div className="flex shrink-0 flex-wrap items-center justify-end gap-1.5">
+        <div className="flex shrink-0 items-center gap-1.5">
             {resolved.map((surface) => (
                 <Link
                     key={surface.name}
@@ -195,11 +188,14 @@ const UseCaseRamp = ({ id, productData }: SectionComponentProps): JSX.Element | 
     const ramp: UseCaseRampData | undefined = productData?.useCaseRamp
     const columns = ramp?.columns ?? []
 
-    if (!columns.length) return null
-
     // Opens on "Ask an agent" rather than the first tab: it's the middle rung, and the
     // one most likely to make someone curious enough to also check the other two.
     const defaultColumn = columns.find((column) => column.level === 'Ask an agent') ?? columns[0]
+    // Controlled (rather than `defaultValue`) so the "next tab" CTA cards can jump the
+    // reader forward a level with a click, instead of just telling them where to go.
+    const [activeTab, setActiveTab] = React.useState(defaultColumn ? slugify(defaultColumn.level) : '')
+
+    if (!columns.length) return null
 
     return (
         <section id={id} className="scroll-mt-20 not-prose">
@@ -208,7 +204,7 @@ const UseCaseRamp = ({ id, productData }: SectionComponentProps): JSX.Element | 
                 {ramp?.intro ??
                     `${productData?.name} works at three levels. Do it yourself, ask an agent to do it for you, or let PostHog work proactively with your data.`}
             </p>
-            <Tabs.Root defaultValue={slugify(defaultColumn.level)}>
+            <Tabs.Root value={activeTab} onValueChange={setActiveTab}>
                 <Tabs.List
                     className="flex flex-wrap @md/reader-content:flex-nowrap"
                     aria-label={`Ways to use ${productData?.name}`}
@@ -237,8 +233,9 @@ const UseCaseRamp = ({ id, productData }: SectionComponentProps): JSX.Element | 
                         )
                     })}
                 </Tabs.List>
-                {columns.map((column) => {
+                {columns.map((column, index) => {
                     const mode = column.mode ?? levelMode[column.level]
+                    const nextColumn = columns[index + 1]
                     return (
                         <Tabs.Content
                             key={column.level}
@@ -258,8 +255,8 @@ const UseCaseRamp = ({ id, productData }: SectionComponentProps): JSX.Element | 
                                         {column.level}
                                     </h3>
                                     {mode && (
-                                        <div className="flex flex-wrap items-center gap-x-1.5 gap-y-1">
-                                            <span className="rounded-sm bg-highlight px-1.5 py-0.5 text-xs font-bold uppercase tracking-wide text-red dark:text-yellow">
+                                        <div className="flex items-center gap-1.5 overflow-x-auto">
+                                            <span className="shrink-0 whitespace-nowrap rounded-sm bg-highlight px-1.5 py-0.5 text-xs font-bold uppercase tracking-wide text-red dark:text-yellow">
                                                 {mode} with
                                             </span>
                                             <SurfaceTags keys={column.surfaces} />
@@ -273,14 +270,11 @@ const UseCaseRamp = ({ id, productData }: SectionComponentProps): JSX.Element | 
                                          * The "Example:" label makes clear this is one scenario among many, not the
                                          * only thing this level is good for.
                                          */}
-                                        <div className="mb-1 flex flex-wrap items-start justify-between gap-x-3 gap-y-1.5">
-                                            <p className="m-0 flex items-center gap-1.5 text-sm font-bold text-primary">
-                                                <UseCaseIcon name={column.scenario.icon} color={productData?.color} />
-                                                <span className="font-normal text-secondary">Example:</span>{' '}
-                                                {ramp?.scenario}
-                                            </p>
-                                            <SurfaceTags keys={column.scenario.surfaces} />
-                                        </div>
+                                        <p className="m-0 mb-1 flex items-center gap-1.5 text-sm font-bold text-primary">
+                                            <UseCaseIcon name={column.scenario.icon} color={productData?.color} />
+                                            <span className="font-normal text-secondary">Example:</span>{' '}
+                                            {ramp?.scenario}
+                                        </p>
                                         {/*
                                          * `list-decimal` sits on the li, not the ol: the `not-prose` layer sets
                                          * `list-style-type: none` directly on `.not-prose ol li`, which beats a
@@ -293,29 +287,39 @@ const UseCaseRamp = ({ id, productData }: SectionComponentProps): JSX.Element | 
                                                 </li>
                                             ))}
                                         </ol>
-                                        {column.scenario.outcome && (
-                                            <p className="m-0 mt-3 border-t border-primary pt-2 text-[13px] font-semibold italic text-primary">
-                                                {column.scenario.outcome}
-                                            </p>
-                                        )}
                                     </div>
                                 )}
                                 {!!column.points?.length && (
                                     <ul className="m-0 grid list-none gap-3 p-0 @md/reader-content:grid-cols-2">
-                                        {column.points.map((point) => (
-                                            <li
-                                                key={point.title}
-                                                className="rounded-md border border-primary bg-accent p-3 @md/reader-content:p-4"
-                                            >
-                                                <p className="m-0 mb-1 flex items-center gap-1.5 text-sm font-bold text-primary">
-                                                    <UseCaseIcon name={point.icon} color={productData?.color} />
-                                                    {point.title}
-                                                </p>
-                                                <p className="m-0 text-[13px] leading-snug text-secondary">
-                                                    {point.body}
-                                                </p>
-                                            </li>
-                                        ))}
+                                        {column.points.map((point, pointIndex) => {
+                                            // The last point doubles as the pivot into the next tab: only the
+                                            // arrow is clickable, so the card itself stays a plain static card.
+                                            const isPivot = pointIndex === column.points!.length - 1 && !!nextColumn
+                                            return (
+                                                <li
+                                                    key={point.title}
+                                                    className="flex h-full flex-col rounded-md border border-primary bg-accent p-3 @md/reader-content:p-4"
+                                                >
+                                                    <p className="m-0 mb-1 flex items-center gap-1.5 text-sm font-bold text-primary">
+                                                        <UseCaseIcon name={point.icon} color={productData?.color} />
+                                                        {point.title}
+                                                    </p>
+                                                    <p className="m-0 text-[13px] leading-snug text-secondary">
+                                                        {point.body}
+                                                    </p>
+                                                    {isPivot && (
+                                                        <button
+                                                            type="button"
+                                                            onClick={() => setActiveTab(slugify(nextColumn.level))}
+                                                            aria-label={`Go to ${nextColumn.level}`}
+                                                            className="group mt-auto self-end rounded-full p-1 text-secondary transition-colors hover:text-primary"
+                                                        >
+                                                            <IconArrowRight className="size-6 shrink-0 transition-transform group-hover:translate-x-1" />
+                                                        </button>
+                                                    )}
+                                                </li>
+                                            )
+                                        })}
                                     </ul>
                                 )}
                             </div>

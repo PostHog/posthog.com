@@ -219,31 +219,29 @@ export const webAnalytics = {
     },
     useCaseRamp: {
         intro: 'Web Analytics works at three levels. You can read the dashboard yourself, ask an agent about your traffic, or let PostHog work proactively with your data.',
-        scenario: 'Referral traffic suddenly drops',
+        scenario: 'Your referral traffic falls off a cliff overnight (uh, why?)',
         columns: [
             {
                 level: 'Do it yourself',
                 surfaces: ['web'],
                 scenario: {
                     icon: 'IconGlobe',
-                    surfaces: ['web'],
                     steps: [
                         'Monday morning you open the dashboard and referral traffic looks low',
-                        'You compare each channel against last month to see how long it has been falling',
+                        'You check the session attribution explorer to see which referrer or UTM stopped showing up',
                         'You take it to whoever owns that channel',
                     ],
-                    outcome: 'You caught it, three weeks after it started.',
                 },
                 points: [
                     {
-                        title: 'Noticing it is on you',
+                        title: 'A digest already lands in your inbox',
                         icon: 'IconHandwave',
-                        body: "You're the one opening the dashboard and comparing this week to last. Nothing here notices a change unless you go looking.",
+                        body: "A weekly digest emails you visitors, sessions, bounce rate, top pages, and traffic sources, so the numbers reach you without opening the dashboard. It's a fixed weekly snapshot, so a Tuesday drop waits until the next one to show up.",
                     },
                     {
-                        title: 'Point an agent at your traffic instead',
+                        title: 'Point an agent at it instead',
                         icon: 'IconSparkles',
-                        body: 'Every session becomes something PostHog can act on. Point an agent at your traffic and it will hold a baseline for every channel, catching a drop the moment it starts.',
+                        body: 'Every session you capture is queryable by source, device, geography, or time. Ask PostHog AI a specific question, or something open-ended like why traffic dropped, and let it run the numbers.',
                     },
                 ],
             },
@@ -252,51 +250,47 @@ export const webAnalytics = {
                 surfaces: ['ai', 'slack', 'mcp', 'cli'],
                 scenario: {
                     icon: 'IconMagicWand',
-                    surfaces: ['ai', 'slack'],
                     steps: [
                         'You ask PostHog AI: "which channels dropped in the last 30 days?"',
                         'It compares each source against its usual pattern and names the one that fell',
                         'You share the answer in Slack, so marketing and engineering read the same number',
                     ],
-                    outcome: 'The comparison took seconds, once you thought to ask.',
                 },
                 points: [
                     {
-                        title: 'Agents read the same stream',
+                        title: 'Agents read the same digest',
                         icon: 'IconSearch',
-                        body: 'PostHog AI, the Slack app, and your editor through MCP all answer using the same traffic history you already have.',
+                        body: 'PostHog AI, Slack, and your editor through MCP all answer from the same weekly digest (visitors, sessions, bounce rate, top pages, and top sources) instead of three different numbers depending who you ask.',
                     },
                     {
-                        title: 'The full prompt list is below',
+                        title: 'Ask, then act',
                         icon: 'IconMessage',
-                        body: 'AI prompts, right below this section, lists everything you can ask: traffic questions, comparisons, weekly summaries.',
+                        body: 'A scout runs that same comparison every day without being asked, and only lands in your Inbox when a channel actually steps away from its own pattern.',
                     },
                 ],
             },
             {
                 level: 'Ship with PostHog',
-                surfaces: ['inbox', 'slack'],
+                surfaces: ['inbox', 'slack', 'desktop'],
                 scenario: {
                     icon: 'IconPulse',
-                    surfaces: ['inbox', 'slack'],
                     steps: [
                         'A web analytics scout compares each channel to its usual pattern for the time of year, unprompted',
                         'It catches the referral drop in week one, and the report lands in your Inbox',
                         'A traffic problem usually lives outside your code, so it routes to you rather than opening a pull request',
                         'When the cause is your site, like a page that went slow, you reply @PostHog and review the pull request it opens',
                     ],
-                    outcome: 'A three-week blind spot became a day-one report.',
                 },
                 points: [
                     {
-                        title: 'Your history is the baseline',
+                        title: 'It checks four windows, not one',
                         icon: 'IconBrain',
-                        body: 'The scout tells drift from noise only because months of your traffic taught it what normal looks like. A site you launched last week has nothing to compare against yet.',
+                        body: "Each finding gets compared against the same week 7, 14, 21, and 28 days back, so a Tuesday dip doesn't get mistaken for a Monday-shaped week. A site launched last week has no history to check against yet.",
                     },
                     {
-                        title: 'One stream, many readers',
+                        title: "Most fixes aren't in your code",
                         icon: 'IconStack',
-                        body: "The same events power product analytics too, so a traffic signal connects to the in-product behavior behind it. That's useful context for the next report.",
+                        body: 'A referral going dark or broken UTM tagging lives in your campaign tooling, not a repo, so the scout usually files a report for you to act on rather than a pull request. The exception is a web vitals regression it can trace to one asset.',
                     },
                 ],
             },
