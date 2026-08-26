@@ -11,7 +11,6 @@ import {
     IconList,
     IconMagic,
     IconMessage,
-    IconArrowUpRight,
     IconPieChart,
     IconRocket,
     IconSparkles,
@@ -75,13 +74,6 @@ export const productAnalytics = {
             group: 'divided',
             icon: <IconSparkles className="size-4" />,
             props: { slides: topFeatures },
-        },
-        {
-            slug: 'use-case-ramp',
-            name: 'Ramp to self-driving',
-            template: 'use-case-ramp',
-            group: 'divided',
-            icon: <IconArrowUpRight className="size-4" />,
         },
         {
             slug: 'ask-anything',
@@ -215,94 +207,6 @@ export const productAnalytics = {
             ['Growth Engineers', 'Find conversion leaks, measure experiments, and track activation end to end'],
             ['Founders', 'Monitor KPIs on a shared dashboard without waiting on a data team'],
             ['Support Engineers', 'Pull the events behind a customer report and jump into the matching session replay'],
-        ],
-    },
-    useCaseRamp: {
-        intro: 'Product analytics works at three levels. You can build funnels and dashboards yourself, ask an agent to build them for you, or let PostHog work proactively with your data.',
-        scenario: 'Fewer people are finishing signup than last week',
-        columns: [
-            {
-                level: 'Do it yourself',
-                surfaces: ['web'],
-                driver: "You build the funnels and dashboards, and you're the one who checks them.",
-                scenario: {
-                    icon: 'IconFunnels',
-                    surfaces: ['web'],
-                    steps: [
-                        'You happen to open your signup dashboard and the number looks wrong',
-                        'You dig through paths and recordings to find the step where people now leave',
-                        'You file the bug, and the fix ships whenever someone picks it up',
-                    ],
-                    outcome: 'You caught it, but only because you happened to look.',
-                },
-                points: [
-                    {
-                        title: 'Checking it is on you',
-                        icon: 'IconHandwave',
-                        body: "You built this funnel, so it's on you to remember to check it. Nothing here flags a problem unless you go looking for one.",
-                    },
-                    {
-                        title: 'Point an agent at it instead',
-                        icon: 'IconSparkles',
-                        body: "The same events and insights become something PostHog can act on. Point an agent at your data and it will watch every funnel you have, not just the one you happened to check, and catch drops you'd never think to look for.",
-                    },
-                ],
-            },
-            {
-                level: 'Ask an agent',
-                surfaces: ['ai', 'slack', 'mcp', 'cli'],
-                driver: 'You describe what you want to know, and an agent runs the query for you.',
-                scenario: {
-                    icon: 'IconMagicWand',
-                    surfaces: ['ai', 'slack'],
-                    steps: [
-                        'You ask PostHog AI: "why did signup conversion drop this week?"',
-                        'It counts how many people reached each step (landing page, signup form, first project) and compares those counts against last week',
-                        'It names the step that fell, and you go fix it',
-                    ],
-                    outcome: 'It takes minutes instead of an afternoon, but you still had to ask.',
-                },
-                points: [
-                    {
-                        title: 'Agents read what you built',
-                        icon: 'IconSearch',
-                        body: 'PostHog AI, the Slack app, and your editor through MCP all answer using the events and insights you already have. An agent can only tell you why signups dropped if something in your product is called a signup.',
-                    },
-                    {
-                        title: 'The full prompt list is below',
-                        icon: 'IconMessage',
-                        body: 'AI prompts, right below this section, lists everything you can ask from PostHog AI, Slack, your editor, or the CLI.',
-                    },
-                ],
-            },
-            {
-                level: 'Ship with PostHog',
-                surfaces: ['inbox', 'slack'],
-                driver: 'Scouts scan your analytics on a schedule and flag what they find, often with a pull request attached.',
-                scenario: {
-                    icon: 'IconPullRequest',
-                    surfaces: ['inbox', 'slack'],
-                    steps: [
-                        'A product analytics scout holds a baseline for your signup funnel, so it notices the drop before you do',
-                        'The report lands in your Inbox and Slack, naming the step that fell and the likely cause',
-                        'You tell PostHog to fix it. It writes the code and opens a pull request for you to review',
-                        'After you merge, PostHog re-checks the funnel to confirm the number recovered',
-                    ],
-                    outcome: 'PostHog spotted the drop before you did. Fixing it took one review.',
-                },
-                points: [
-                    {
-                        title: 'PostHog reads what you built',
-                        icon: 'IconBrain',
-                        body: 'The scout reads the same funnels and events you built by hand. That data is what turns "something changed" into a clear cause and a pull request you can trust.',
-                    },
-                    {
-                        title: 'More data, better fixes',
-                        icon: 'IconTrends',
-                        body: "The more of your product's behavior you track in PostHog, the better the scout gets at telling a real problem from normal noise. Pipe in a source like HubSpot or Gong and your deals, tickets, and sales calls sit alongside that behavior, so a report can name which accounts a drop actually cost you.",
-                    },
-                ],
-            },
         ],
     },
     features,

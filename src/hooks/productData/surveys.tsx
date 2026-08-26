@@ -4,7 +4,6 @@ import {
     IconChat,
     IconCheckCircle,
     IconCode,
-    IconArrowUpRight,
     IconConfetti,
     IconCursorClick,
     IconEye,
@@ -76,13 +75,6 @@ export const surveys = {
             group: 'divided',
             icon: <IconSparkles className="size-4" />,
             props: { slides: topFeatures },
-        },
-        {
-            slug: 'use-case-ramp',
-            name: 'Ramp to self-driving',
-            template: 'use-case-ramp',
-            group: 'divided',
-            icon: <IconArrowUpRight className="size-4" />,
         },
         {
             slug: 'ask-anything',
@@ -191,95 +183,6 @@ export const surveys = {
                 'Trigger satisfaction surveys after solved tickets and route urgent feedback to Slack',
             ],
             ['Founders', 'Collect testimonials and qualitative signal without a separate survey tool'],
-        ],
-    },
-    useCaseRamp: {
-        intro: 'Surveys work at three levels. You can write the questions and read the answers yourself, ask an agent to summarize what came back, or let PostHog work proactively with your data.',
-        scenario: 'Dozens of users ask for the same feature: exporting their data to CSV',
-        columns: [
-            {
-                level: 'Do it yourself',
-                surfaces: ['web'],
-                driver: 'You write the questions, choose who sees them, and read the answers yourself.',
-                scenario: {
-                    icon: 'IconMessage',
-                    surfaces: ['web'],
-                    steps: [
-                        'You launch an open-text survey asking what feature people miss most',
-                        'You read a few hundred responses and keep seeing the same request: export to CSV',
-                        'You file it, argue for it in planning, and eventually someone builds it',
-                    ],
-                    outcome: 'The demand was in there. You just had to read everything to find it.',
-                },
-                points: [
-                    {
-                        title: 'Reading them is on you',
-                        icon: 'IconHandwave',
-                        body: "You wrote the question, so you're the one reading every answer. That works fine until there are hundreds of them.",
-                    },
-                    {
-                        title: 'Point an agent at the answers instead',
-                        icon: 'IconSparkles',
-                        body: "Every response becomes something PostHog can act on. Point an agent at your survey and it will read every answer as it lands, catching a theme building before you'd ever finish reading them yourself.",
-                    },
-                ],
-            },
-            {
-                level: 'Ask an agent',
-                surfaces: ['ai', 'slack', 'mcp', 'cli'],
-                driver: 'You describe the survey you want, and an agent drafts it and summarizes what came back.',
-                scenario: {
-                    icon: 'IconMagicWand',
-                    surfaces: ['ai', 'slack'],
-                    steps: [
-                        'You ask PostHog AI for a survey asking what feature people want most',
-                        'It drafts the questions and targeting. You edit and launch',
-                        'In Slack you ask what people are asking for, and it summarizes the requests in the thread',
-                    ],
-                    outcome: 'Nobody read four hundred raw responses, but somebody still had to ask.',
-                },
-                points: [
-                    {
-                        title: 'Agents read what came back',
-                        icon: 'IconSearch',
-                        body: 'Summaries and themes come from the same responses you would otherwise read yourself. Every answer stays tied to the person who gave it, so an agent can also tell you whether the people asking for a feature are the ones paying you.',
-                    },
-                    {
-                        title: 'The full prompt list is below',
-                        icon: 'IconMessage',
-                        body: 'AI prompts, right below this section, lists everything you can ask: drafting surveys, checking results, summarizing answers.',
-                    },
-                ],
-            },
-            {
-                level: 'Ship with PostHog',
-                surfaces: ['inbox', 'slack'],
-                driver: 'A scout reads your responses on a schedule and flags what it finds, often with a pull request attached.',
-                scenario: {
-                    icon: 'IconPullRequest',
-                    surfaces: ['inbox', 'slack'],
-                    steps: [
-                        'A surveys scout clusters the open-text answers on a schedule and sees CSV export requested again and again',
-                        'The report lands in your Inbox with the count and a few quotes from people asking for it',
-                        'You reply in the Slack thread telling PostHog to build it, and it opens a pull request',
-                        'You ship it, and the next round of responses stops mentioning it',
-                    ],
-                    outcome:
-                        'You never had to read every response yourself. The scout counted the requests, and shipping the most-wanted feature was one Slack reply away.',
-                },
-                points: [
-                    {
-                        title: 'Every request comes with a count',
-                        icon: 'IconBrain',
-                        body: "The scout doesn't just spot a request, it tracks how often it comes up. That's what turns a stray comment into a feature worth building.",
-                    },
-                    {
-                        title: 'You stay in the loop',
-                        icon: 'IconPeople',
-                        body: 'Building a feature is a product decision, not an automatic fix, so the scout sends it to a person instead of writing code straight away. The pull request only happens once you ask for it, in the same thread.',
-                    },
-                ],
-            },
         ],
     },
     features,

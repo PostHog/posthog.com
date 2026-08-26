@@ -3,7 +3,6 @@ import { SectionComponentProps } from '../types'
 import Overview from './Overview'
 import Eli5 from './Eli5'
 import UseCases from './UseCases'
-import UseCaseRamp from './UseCaseRamp'
 import Applications from './Applications'
 import TopFeatures from './TopFeatures'
 import Features from './Features'
@@ -32,7 +31,6 @@ export const templateRegistry: Record<string, React.ComponentType<SectionCompone
     overview: Overview,
     eli5: Eli5,
     'use-cases': UseCases,
-    'use-case-ramp': UseCaseRamp,
     applications: Applications,
     'top-features': TopFeatures,
     features: Features,
@@ -56,7 +54,6 @@ export {
     Overview,
     Eli5,
     UseCases,
-    UseCaseRamp,
     Applications,
     TopFeatures,
     Features,
