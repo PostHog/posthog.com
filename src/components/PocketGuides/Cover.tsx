@@ -1,9 +1,9 @@
 import Link from 'components/Link'
 import React from 'react'
 
-import { Logo } from '@posthog/brand/logo'
-
 import usePostHog from '../../hooks/usePostHog'
+
+import { Logo } from '@posthog/brand/logo'
 
 import { PocketGuideVolume } from '../../constants/pocketGuides'
 
@@ -96,17 +96,18 @@ export default function Cover({ volume, count, placement }: CoverProps): JSX.Ele
         return <CoverBody volume={volume} count={count} />
     }
 
+    const trackCoverClick = () =>
+        posthog?.capture('pocket_guide_interaction', {
+            kind: 'cover_click',
+            volume: volume.id,
+            placement,
+        })
+
     return (
         <Link
             to={`/pocket-guides/${volume.id}`}
             state={{ newWindow: true }}
-            onClick={() =>
-                posthog?.capture('pocket_guide_interaction', {
-                    kind: 'cover_click',
-                    volume: volume.id,
-                    placement,
-                })
-            }
+            onClick={trackCoverClick}
             // Perspective lives on the link so the hover tilt reads as picking the book up.
             className="group block no-underline [perspective:1200px]"
         >
