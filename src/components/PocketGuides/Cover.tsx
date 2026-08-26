@@ -4,6 +4,8 @@ import React from 'react'
 import { HedgehogDollHouse, HedgehogImTheDriver, HedgehogXRay } from '@posthog/brand/hoggies'
 import { Logo } from '@posthog/brand/logo'
 
+import usePostHog from '../../hooks/usePostHog'
+
 import { PocketGuideVolume } from '../../constants/pocketGuides'
 
 /** Cover art per volume, so a new volume picks an existing hoggie instead of commissioning one. */
@@ -17,6 +19,8 @@ interface CoverProps {
     volume: PocketGuideVolume
     /** Guides inside it (the 101 isn't counted), printed the way a series prints its contents. */
     count: number
+    /** Which surface this cover sits on. Required so every open is attributable. */
+    placement: 'shelf' | 'self_driving_page' | 'product_docs'
 }
 
 /** The series frame: colored spine, series name above the subject, specimen on empty ground. */
@@ -90,7 +94,9 @@ function CoverBody({ volume, count }: CoverProps): JSX.Element {
     )
 }
 
-export default function Cover({ volume, count }: CoverProps): JSX.Element {
+export default function Cover({ volume, count, placement }: CoverProps): JSX.Element {
+    const posthog = usePostHog()
+
     // Unwritten volumes aren't links – there's nothing behind them yet.
     if (volume.comingSoon) {
         return <CoverBody volume={volume} count={count} />
@@ -100,6 +106,13 @@ export default function Cover({ volume, count }: CoverProps): JSX.Element {
         <Link
             to={`/pocket-guides/${volume.id}`}
             state={{ newWindow: true }}
+            onClick={() =>
+                posthog?.capture('pocket_guide_interaction', {
+                    kind: 'cover_click',
+                    volume: volume.id,
+                    placement,
+                })
+            }
             // Perspective lives on the link so the hover tilt reads as picking the book up.
             className="group block no-underline [perspective:1200px]"
         >

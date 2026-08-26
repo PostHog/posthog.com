@@ -50,7 +50,7 @@ export default function PocketGuidesPage(): JSX.Element {
                         <ul className="m-0 flex list-none flex-col items-center gap-8 p-0 @xl:flex-row @xl:flex-wrap @xl:items-stretch @xl:gap-6">
                             {volumes.map((volume) => (
                                 <li key={volume.id} className="w-[250px] @xl:w-[210px] @4xl:w-[230px]">
-                                    <Cover volume={volume} count={counts[volume.id] ?? 0} />
+                                    <Cover placement="shelf" volume={volume} count={counts[volume.id] ?? 0} />
                                 </li>
                             ))}
                         </ul>

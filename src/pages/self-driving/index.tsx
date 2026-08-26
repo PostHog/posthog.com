@@ -726,7 +726,7 @@ const PocketGuidesSection = (): JSX.Element | null => {
                 className={`flex flex-col items-center gap-8 overflow-hidden rounded-md border border-primary p-6 @md/reader-content:flex-row @md/reader-content:items-start @md/reader-content:p-8 ${WINDOW_BG}`}
             >
                 <div className="w-[200px] shrink-0">
-                    <Cover volume={volume} count={guides.length} />
+                    <Cover placement="self_driving_page" volume={volume} count={guides.length} />
                 </div>
                 <div className="min-w-0">
                     <p className="m-0 text-base font-bold text-primary">The pocket guide to self-driving</p>

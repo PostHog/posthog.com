@@ -8,11 +8,23 @@ import { AppsList } from 'components/Docs/AppsList'
 import Book, { BookShelf } from 'components/PocketGuides/Book'
 import usePocketGuideCounts from '../../hooks/usePocketGuideCounts'
 import { POCKET_GUIDE_VOLUMES } from '../../constants/pocketGuides'
+import usePostHog from '../../hooks/usePostHog'
 
 /** A surface on the page ground, after `FeaturePanel` on `/desktop`. Colour lives in the icons only. */
-const Panel = ({ eyebrow, children }: { eyebrow: string; children: React.ReactNode }): JSX.Element => (
+const Panel = ({
+    eyebrow,
+    description,
+    children,
+}: {
+    eyebrow: string
+    description?: string
+    children: React.ReactNode
+}): JSX.Element => (
     <section className="@container flex h-full flex-col rounded border border-primary bg-primary p-4 @xl:p-5">
-        <h2 className="m-0 mb-3 text-sm font-bold uppercase tracking-wide text-primary">{eyebrow}</h2>
+        <h2 className={`m-0 text-sm font-bold uppercase tracking-wide text-primary ${description ? 'mb-1' : 'mb-3'}`}>
+            {eyebrow}
+        </h2>
+        {description && <p className="m-0 mb-3 text-sm leading-snug text-secondary">{description}</p>}
         {children}
     </section>
 )
@@ -90,12 +102,13 @@ const surfaces = [
         name: 'Desktop',
         url: '/docs/posthog-desktop',
         icon: 'IconCoffee',
-        color: 'brown',
+        color: 'burnt-orange',
         description: 'Run tasks, review code, and use any model from your desktop.',
     },
 ]
 
 export const DocsIndex = () => {
+    const posthog = usePostHog()
     const guideCounts = usePocketGuideCounts()
     // Reading order: Vol. 1 at the top of the shelf, the way a series is shelved.
     const volumes = [...POCKET_GUIDE_VOLUMES].sort((a, b) => a.volume - b.volume)
@@ -134,7 +147,7 @@ export const DocsIndex = () => {
                     <div className="flex flex-1 flex-col gap-4 @3xl/docs:w-2/3">
                         {/* The tab pattern flattened: grouping stays, nothing hides behind a click. */}
                         <div className="grid grid-cols-1 gap-4 @lg/docs:grid-cols-2">
-                            <Panel eyebrow="Get started">
+                            <Panel eyebrow="Get started" description="Install PostHog and send your first event.">
                                 <div className="flex flex-col gap-2.5">
                                     {pathCards.map((card) => (
                                         <IconLink key={card.name} to={card.url} color={card.color} icon={card.icon}>
@@ -148,7 +161,7 @@ export const DocsIndex = () => {
                             </Panel>
 
                             {/* Not products, so `AppsList` misses them – this is their only entry point. */}
-                            <Panel eyebrow="Products">
+                            <Panel eyebrow="Products" description="Where you use PostHog from.">
                                 <div className="grid grid-cols-1 gap-2.5 @xs:grid-cols-2 @lg/docs:grid-cols-1">
                                     {surfaces.map((surface) => (
                                         <IconLink
@@ -164,17 +177,14 @@ export const DocsIndex = () => {
                             </Panel>
                         </div>
 
-                        <Panel eyebrow="Tools">
+                        <Panel eyebrow="Tools" description="What PostHog does – reference docs for every tool.">
                             <AppsList />
                         </Panel>
                     </div>
 
                     {/* The library: the same volumes as /pocket-guides, as spines. */}
                     <aside className="@3xl/docs:w-1/3 shrink-0">
-                        <Panel eyebrow="Guides">
-                            <p className="m-0 mb-4 text-[15px] text-secondary">
-                                Guides for the human reader on the go.
-                            </p>
+                        <Panel eyebrow="Guides" description="Guides for the human reader on the go.">
                             <BookShelf>
                                 {volumes.map((volume) => (
                                     <Book key={volume.id} volume={volume} count={guideCounts[volume.id] ?? 0} />
@@ -184,6 +194,12 @@ export const DocsIndex = () => {
                                 to="/pocket-guides"
                                 state={{ newWindow: true }}
                                 className="mt-4 inline-block text-sm font-semibold text-primary hover:underline"
+                                onClick={() =>
+                                    posthog?.capture('pocket_guide_interaction', {
+                                        kind: 'shelf_link_click',
+                                        placement: 'docs_index',
+                                    })
+                                }
                             >
                                 All guides &rarr;
                             </Link>
