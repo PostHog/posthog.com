@@ -104,7 +104,6 @@ This call is not authenticated, because an app that hasn't registered yet has no
 ```bash
 curl -X POST https://us.posthog.com/api/agentic/provisioning/client_registration \
   -H "Content-Type: application/json" \
-  -H "API-Version: 0.1d" \
   -d '{"client_id": "https://yourapp.com/.well-known/posthog-client.json"}'
 ```
 
@@ -142,13 +141,47 @@ curl -X POST https://us.posthog.com/api/agentic/provisioning/client_registration
 
 `scopes` is your [scope ceiling](#declare-oauth-scopes-for-your-app-optional): the scopes you declared, or every scope a user can grant if you declared none. `capabilities` says which endpoints you can call, including the ones PostHog has to enable for you.
 
-Each check is reported separately, so a setup problem names its own cause instead of arriving as a bare 401 later. If registration fails, you get HTTP 400 with `"registered": false`, the same `checks` array, and an `error` object whose message is the first failed check.
+Each check is reported separately, so a setup problem names its own cause instead of arriving as a bare 401 later. If registration fails, you get HTTP 400 with `"registered": false`, the same `checks` array, and an `error` object whose message is the first failed check. A failed `jwks` or `client_assertion` check doesn't fail registration: the response is still HTTP 200 with `"registered": true`, and that check has `"ok": false`.
+
+If PostHog has blocked your `client_id`, the response is HTTP 400 with a single failed check, `metadata_document`, whose detail is `This client_id has been blocked`. PostHog doesn't fetch the document. If that's unexpected, open a [support request](https://us.posthog.com/#panel=support%3Asupport%3Alogin%3A%3Atrue) in the app, choosing **Authentication** as the topic.
+
+Registration has its own [rate limits](#rate-limits): 30 calls per hour per `client_id` and 120 per hour per IP address, with lower limits for a `client_id` PostHog has never seen. A refused call gets HTTP 429 with the code `rate_limited`. When the per-`client_id` or the 120-per-IP limit refuses a call, the 429 carries a `Retry-After` header. The first-time limits send no `Retry-After`.
 
 Call this endpoint again whenever you want to re-check your setup. It re-fetches your document and re-reports every check. Registering again never reactivates an app PostHog has deactivated.
 
 You can also verify a signed assertion end to end by sending `client_assertion` and `client_assertion_type`, which is worth doing once before you depend on `private_key_jwt`. Verifying consumes the assertion's `jti`, so mint a fresh one for the check rather than reusing it afterwards.
 
 Until your app is registered, the other endpoints return HTTP 401 with a message pointing back here.
+
+#### Clients that only use OAuth
+
+You can also register a client that reads data through [OAuth](/docs/api/oauth) and never provisions accounts. PostHog fetches the document, validates it, and creates or updates the client record, the same record the OAuth flow uses. That's a way to check a document before your first authorization request, or to register your client in a second region before a user signs in there. Call the endpoint on each region's base URL.
+
+For that client the response is HTTP 400, because the `provisioning_enabled` check fails:
+
+```json
+{
+  "type": "error",
+  "error": {
+    "code": "registration_failed",
+    "message": "This client is not enabled for agentic provisioning. Add \"com.posthog\": {\"provisioning\": true} to your client metadata document, then register again."
+  },
+  "client_id": "https://yourapp.com/.well-known/posthog-client.json",
+  "registered": false,
+  "checks": [
+    { "name": "metadata_document", "ok": true, "detail": "Fetched and validated" },
+    {
+      "name": "provisioning_enabled",
+      "ok": false,
+      "detail": "This client is not enabled for agentic provisioning. Add \"com.posthog\": {\"provisioning\": true} to your client metadata document, then register again."
+    }
+  ]
+}
+```
+
+This is the expected result for a client that doesn't provision. The error refers only to provisioning access, and `"registered": false` means the client isn't a provisioning partner. PostHog still stores the client record, and the passing `metadata_document` check confirms your document is valid. Only the `metadata_document` and `provisioning_enabled` checks run for a client that isn't a partner.
+
+Add `"com.posthog": {"provisioning": true}` to the document only if you want to call the provisioning endpoints.
 
 ### Link your partner app to a PostHog organization (optional)
 
@@ -228,7 +261,7 @@ Your ceiling is both lists together, so a token can carry anything in either one
 
 All endpoints are on `https://us.posthog.com` (US region) or `https://eu.posthog.com` (EU region).
 
-Every request must include the `API-Version: 0.1d` header.
+No `API-Version` header is required, and the provisioning API doesn't read one.
 
 ### Step 1: Create an account
 
@@ -261,7 +294,6 @@ JSON
 
 curl -X POST https://us.posthog.com/api/agentic/provisioning/account_requests \
   -H "Content-Type: application/json" \
-  -H "API-Version: 0.1d" \
   -d "$BODY"
 ```
 
@@ -334,7 +366,6 @@ Exchange the authorization code for an access token and refresh token. The token
 ```bash
 curl -X POST https://us.posthog.com/api/agentic/oauth/token \
   -H "Content-Type: application/x-www-form-urlencoded" \
-  -H "API-Version: 0.1d" \
   -d "grant_type=authorization_code&code=abc123...authorization_code&code_verifier=$CODE_VERIFIER"
 ```
 
@@ -389,7 +420,6 @@ Use the access token to provision a PostHog project and get credentials.
 curl -X POST https://us.posthog.com/api/agentic/provisioning/resources \
   -H "Content-Type: application/json" \
   -H "Authorization: Bearer pha_abc123..." \
-  -H "API-Version: 0.1d" \
   -d '{
     "service_id": "analytics",
     "label_prefix": "Acme Co",
@@ -440,7 +470,6 @@ For recurring deep links from your application into PostHog – the most common 
 curl -X POST https://us.posthog.com/api/agentic/provisioning/deep_links \
   -H "Content-Type: application/json" \
   -H "Authorization: Bearer pha_abc123..." \
-  -H "API-Version: 0.1d" \
   -d '{
     "path": "/project/12345/replay/019e6d10-c3b0-7000-8000-000000000000"
   }'
@@ -483,7 +512,6 @@ Rotate the project token for an existing provisioned project:
 curl -X POST https://us.posthog.com/api/agentic/provisioning/resources/12345/rotate_credentials \
   -H "Content-Type: application/json" \
   -H "Authorization: Bearer pha_abc123..." \
-  -H "API-Version: 0.1d" \
   -d '{
     "label_prefix": "Acme Co"
   }'
@@ -504,7 +532,6 @@ Access tokens expire after 1 hour. Use the refresh token to get new credentials:
 ```bash
 curl -X POST https://us.posthog.com/api/agentic/oauth/token \
   -H "Content-Type: application/x-www-form-urlencoded" \
-  -H "API-Version: 0.1d" \
   -d "grant_type=refresh_token&refresh_token=phr_def456..."
 ```
 
@@ -590,7 +617,7 @@ Common error codes:
 | `invalid_label_prefix` | 400 | `label_prefix` is not a string, is longer than 25 characters after trimming, or contains control or Unicode format characters |
 | `invalid_path` | 400 | Deep-link `path` is not a relative, same-origin in-app path beginning with a single `/` |
 | `invalid_scope` | 400 | Unrecognized scope requested |
-| `rate_limited` | 429 | Rate limit exceeded. The `Retry-After` header says how many seconds to wait. See [rate limits](#rate-limits). |
+| `rate_limited` | 429 | Rate limit exceeded. Partner budgets and the 30-per-`client_id` and 120-per-IP [registration](#register-your-app) limits send a `Retry-After` header with the seconds to wait. The limits for a `client_id` PostHog has never seen send no `Retry-After`. See [rate limits](#rate-limits). |
 | `account_creation_failed` | 500 | Server error during account creation |
 
 ## Rate limits
@@ -695,7 +722,6 @@ async function provisionPostHogAccount(email, name) {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
-      "API-Version": "0.1d",
     },
     body: JSON.stringify({
       id: crypto.randomUUID(),
@@ -731,7 +757,6 @@ async function provisionPostHogAccount(email, name) {
     method: "POST",
     headers: {
       "Content-Type": "application/x-www-form-urlencoded",
-      "API-Version": "0.1d",
     },
     body: new URLSearchParams({
       grant_type: "authorization_code",
@@ -755,7 +780,6 @@ async function provisionPostHogAccount(email, name) {
     headers: {
       "Content-Type": "application/json",
       Authorization: `Bearer ${tokens.access_token}`,
-      "API-Version": "0.1d",
     },
     body: JSON.stringify({
       service_id: "analytics",
@@ -795,7 +819,6 @@ async function getDeepLinkUrl(accessToken, path) {
       headers: {
         'Content-Type': 'application/json',
         Authorization: `Bearer ${accessToken}`,
-        'API-Version': '0.1d',
       },
       body: JSON.stringify(path ? { path } : {}),
     }
