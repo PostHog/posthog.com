@@ -504,14 +504,11 @@ Umami is one of the most similar tools to Plausible on this list. It is open sou
         'platform.deployment.eu_hosting',
         'platform.security.cookieless_tracking',
         'product_analytics',
-        {
-            label: 'Custom events',
-            description: 'Manually capture custom events and properties wherever they happen',
-            values: ['Events only', true],
-        },
+        'product_analytics.features.custom_events',
         'product_analytics.features.user_profiles',
         'product_analytics.features.cohorts',
         'session_replay',
+        'heatmaps',
         'platform.deployment.reverse_proxy',
     ]}
 />
@@ -521,8 +518,8 @@ Umami is one of the most similar tools to Plausible on this list. It is open sou
 <summary>Main differences between Umami and Plausible</summary>
 
 - Umami has a free cloud tier (3 sites, 100k events/month); Plausible has no free tier – plans start at $9/month.
-- Plausible offers conversion funnels and ecommerce revenue tracking on its Business plan; Umami doesn't have native funnel analysis.
-- Plausible supports custom event properties for richer event data; Umami tracks custom events but with limited property support.
+- Plausible keeps conversion funnels and ecommerce revenue tracking on its Business plan; Umami includes funnel, journey, retention, and revenue reports.
+- Umami records session replays and heatmaps; Plausible has neither.
 - Umami's open-source edition is more permissive and full-featured; Plausible's Community Edition excludes premium features like funnels and ecommerce.
 - Plausible has a larger user base and more mature ecosystem with email reports, Slack integration, and a Looker Studio connector; Umami's integration options are more limited.
 

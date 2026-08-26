@@ -20,16 +20,55 @@ export const umami = {
             },
         },
         product_analytics: {
-            available: false,
+            available: 'Limited',
             features: {
+                advertising_analytics: false,
                 autocapture: 'Pageviews',
-                conversion_funnels: true,
-                user_profiles: false,
-                cohorts: true,
+                cohorts: true, // https://docs.umami.is/docs/cohorts
+                custom_events: true,
+                custom_properties: true, // https://docs.umami.is/docs/track-events
+                monetization_analytics: true, // https://docs.umami.is/docs/revenue
+                predictive_insights: false,
+                real_time_view: true,
+                toolbar: false,
+                user_profiles: 'Distinct IDs only', // sessions are not merged across devices
+                funnels: {
+                    available: true, // https://docs.umami.is/docs/funnel
+                    features: {
+                        conversion_funnels: true,
+                        conversion_windows: true,
+                        step_ordering: true,
+                        any_order: false,
+                        correlation_analysis: false,
+                    },
+                },
+                retention: {
+                    available: true, // https://docs.umami.is/docs/retention
+                    features: {},
+                },
+                user_paths: {
+                    available: true, // https://docs.umami.is/docs/journey
+                    features: {},
+                },
             },
         },
         session_replay: {
-            available: false,
+            available: true, // https://docs.umami.is/docs/replays
+            features: {
+                canvas_recording: false,
+                conditional_recording: false,
+                privacy_masking: true,
+            },
+            targeting: {
+                features: {
+                    target_by_sample: true,
+                },
+            },
+            export: {
+                features: {
+                    retention_policy: '30 days',
+                },
+            },
         },
         experiments: {
             available: false,
@@ -41,7 +80,15 @@ export const umami = {
             available: false,
         },
         heatmaps: {
-            available: false,
+            available: true, // https://docs.umami.is/docs/heatmaps
+            features: {
+                clickmaps: true,
+                heatmaps: true,
+                scrollmaps: true,
+                movement_maps: false,
+                rage_clicks: false,
+                toolbar: false,
+            },
         },
     },
     platform: {
@@ -64,7 +111,7 @@ export const umami = {
         integrations: {
             email_reports: true,
             exports: true,
-            imports: false,
+            imports: 'Cloud Pro only', // https://docs.umami.is/docs/cloud/import-data
         },
         security: {
             cookieless_tracking: true,
@@ -72,7 +119,7 @@ export const umami = {
             hipaa_ready: false,
             soc2_certified: false,
             saml_sso: false,
-            two_factor_auth: false,
+            two_factor_auth: true, // https://docs.umami.is/docs/two-factor-authentication
         },
     },
     pricing: {
