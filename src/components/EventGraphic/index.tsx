@@ -101,6 +101,7 @@ const FORMATS = {
         titleWidthSpeaker: 54,
         speakerStepDown: 1,
         titleGap: 2.6,
+        dateFormat: 'dddd, MMMM D',
         infoWidth: 46,
         date: 4,
         time: 3.2,
@@ -141,7 +142,11 @@ const FORMATS = {
         titleWidthSpeaker: 58,
         speakerStepDown: 2,
         titleGap: 2,
-        infoWidth: 32,
+        // The OpenGraph canvas abbreviates the month — "Wednesday, Sep 23" rather than
+        // "Wednesday, September 23". The full string was the widest thing in this layout and the reason
+        // the date column had to be so wide; shortening it buys the space back for the artwork.
+        dateFormat: 'dddd, MMM D',
+        infoWidth: 26,
         date: 2.75,
         time: 2.2,
         venue: 2.4,
@@ -156,9 +161,10 @@ const FORMATS = {
         badgeHeader: 3.94,
         badgeMonth: 2,
         badgeDay: 5.67,
-        artWidth: 27,
-        artRight: -1,
-        artBottom: 7,
+        // Grown to use the space the abbreviated date frees up.
+        artWidth: 34,
+        artRight: -2,
+        artBottom: 5.5,
         // No landscape speaker frame exists in the references, so these hold the square's proportions
         // against the short edge: the portrait fills ~85% of the canvas height and bleeds off the right.
         speakerWidth: 43,
@@ -447,7 +453,7 @@ const EventGraphic = forwardRef<HTMLDivElement, EventGraphicProps>(function Even
                         }}
                     >
                         {/* Landscape sizes this column to its content — a fixed width wrapped long dates
-                            like "Wednesday, September 23" onto a second line and into the footer. */}
+                            like "Wednesday, Sep 23" onto a second line and into the footer. */}
                         <div
                             style={{
                                 minWidth: format === 'landscape' ? `${t.infoWidth}cqw` : undefined,
@@ -459,7 +465,7 @@ const EventGraphic = forwardRef<HTMLDivElement, EventGraphicProps>(function Even
                                     className={format === 'landscape' ? 'whitespace-nowrap' : undefined}
                                     style={{ fontSize: `${t.date}cqw`, color: ink, lineHeight: 1.2 }}
                                 >
-                                    {parsedDate?.format('dddd, MMMM D')}
+                                    {parsedDate?.format(t.dateFormat)}
                                 </div>
                             )}
                             {timeLabel && (
