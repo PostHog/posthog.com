@@ -82,7 +82,7 @@ If the projection is uncomfortably close to your remaining budget, the cheapest 
 
 - **Narrow the filters** – e.g. require a specific URL pattern, exclude bots, restrict to a cohort.
 - **Tighten session coverage** – switching from "All recordings" to "Skip lowest activity" or "Highest activity only" filters out low-activity sessions before sampling, so your budget goes toward recordings with meaningful activity.
-- **Lower the sampling rate** – samples are random, so a 10% rate gives you a representative slice of matching sessions for one-tenth the cost.
+- **Lower the sampling rate** – new scanners default to 20% for medium- and high-activity recordings, and samples are random, so a 10% rate gives you a representative slice of matching sessions for one-tenth the cost.
 - **Pick a cheaper model** – the price difference per observation is up to 7x across the lineup.
 
 To project a hypothetical scanner _before_ creating it (e.g. from a script or agent), use the `vision-scanners-estimate-create` MCP tool. It runs the same projection the editor shows, returning both the observation count and the credits it would cost (`estimated_credits_per_month`).
