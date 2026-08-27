@@ -199,7 +199,7 @@ For apps with SSR enabled you should set `relative` to `false` in the [`paths` o
 
 PostHog works for apps that run on a private network or behind a firewall, but two replay features need a network route to your app.
 
-Product analytics, feature flags, surveys, and error tracking all work. Each SDK sends data to PostHog over an outbound HTTPS connection from the user's browser, so PostHog does not need to reach your app. Your users only need to reach PostHog.
+Product analytics, feature flags, surveys, and error tracking all work. Each SDK sends data to PostHog over an outbound HTTPS connection, so PostHog does not need to reach your app. Web SDKs connect from the user's browser, and server and mobile SDKs connect from their own runtimes. Each runtime that runs an SDK only needs outbound access to PostHog.
 
 Two replay features are different because PostHog fetches assets from your app:
 
