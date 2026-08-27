@@ -31,15 +31,11 @@ Drop a message in [Team YouTube on Slack](https://posthog.slack.com/archives/C01
 
 The team will advise on what else is in progress and whether your timeline is realistic. If it's a yes, you'll move on to a storyboard.
 
-### 3. Agree on the example
+### 3. Agree on the example use case
 
-Decide which example the video will show before you write the storyboard, and agree on it with both the product manager and the product marketer for that feature.
+Decide which example or use case the video will show before you write the storyboard. Product marketer should lead this and collaborate with product manager / product team.
 
-Product marketing knows which framing lands with the audience. The product manager knows which examples are real, current, and representative of what the product is best at. Getting both views up front takes a day. Discovering later that the example undersells the product costs the whole video.
-
-Changing the example after the script is written means starting over. That is the most expensive change you can make, it delays your video, and it pushes back every other video in the queue.
-
-A good example usually:
+A good example use case:
 
 - Comes from our own use of the product, with something real you can put on screen, like a PR, a report, or a session recording.
 - Shows what only this product can do. If another PostHog product could have surfaced the same thing, the example isn't making the case.
