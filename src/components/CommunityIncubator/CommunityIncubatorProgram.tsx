@@ -41,9 +41,11 @@ const FactRow = ({ term, children }: { term: string; children: React.ReactNode }
 )
 
 const PhotoWithCaption = ({ src, alt, caption }: { src: string; alt: string; caption: string }) => (
-    <figure className="not-prose relative m-0 min-h-48 self-stretch overflow-hidden rounded-md">
-        <img src={src} alt={alt} className="absolute inset-0 size-full object-cover" />
-        <figcaption className="absolute inset-x-0 bottom-0 bg-gradient-to-b from-black/0 to-black/70 p-3 pt-12 text-sm font-medium leading-tight text-white">
+    <figure className="not-prose m-0 flex flex-col self-stretch overflow-hidden rounded-md border border-primary bg-primary">
+        <div className="relative min-h-48 flex-1">
+            <img src={src} alt={alt} className="absolute inset-0 size-full object-cover" />
+        </div>
+        <figcaption className="border-t border-primary p-3 text-sm font-medium leading-tight text-primary">
             {caption}
         </figcaption>
     </figure>

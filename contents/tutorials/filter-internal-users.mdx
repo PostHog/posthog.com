@@ -25,7 +25,7 @@ export const step3Light =
 export const step3Dark =
   "https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/filter-internal-users/step3-dark-mode.png";
 
-_Estimated reading time: 4 minutes_ ☕
+_Estimated reading time: 5 minutes_ ☕
 
 When you’re investigating an insight, it’s important to make sure you’re looking at the best possible data and that your findings aren’t skewed. That means checking you understand the definition of events or actions you’re using and, if need be, filtering out groups such as internal users, beta testers and contractors or agencies.
 
@@ -48,7 +48,7 @@ Any internal users you identify for a project will apply for _all_ users on that
 
 ## Step 2: Add an internal user filter
 
-> **Tip:** Inline person property filters (e.g., "email does not contain your-domain.com") work everywhere, including real-time [CDP](/docs/cdp) destinations. Alternatively, you can [create a cohort](/docs/data/cohorts#method-2-create-a-new-cohort-from-the-cohorts-page) and add it with a "not in" operator – this works well for analytics queries (insights, dashboards) and also works in CDP destinations if the cohort contains **exclusively person property filters**. Cohorts with behavioral filters or no properties defined will cause CDP destinations to error.
+> **Tip:** Inline person property filters (e.g., "email does not end with @your-domain.com") work everywhere, including real-time [CDP](/docs/cdp) destinations. Alternatively, you can [create a cohort](/docs/data/cohorts#method-2-create-a-new-cohort-from-the-cohorts-page) and add it with a "not in" operator – this works well for analytics queries (insights, dashboards) and also works in CDP destinations if the cohort contains **exclusively person property filters**. Cohorts with behavioral filters or no properties defined will cause CDP destinations to error.
 
 In project settings, scroll down to the ‘_Filter out internal and test users_’ section and click ‘_+ Add filter_’ to begin.
 
@@ -56,7 +56,7 @@ Adding a filter here works exactly the same as it does when you add a filter to 
 
 One of the easiest filters to create is to filter out internal users identified by their email address. We do this at PostHog, using the following filter to create insights based only on users who do not have a PostHog email address:
 
-> email ∌ (doesn’t contain) @posthog.com
+> email ⇻ (doesn’t end with) @posthog.com
 
 <ProductScreenshot
   imageLight={step2Light}
@@ -79,7 +79,7 @@ You can create filters which include more than one value by separating values wi
 
 You can also create filters based on pre-prepared cohorts of users, which is especially useful if you’re using cohorts with [Feature Flags](/docs/user-guides/feature-flags) or to run [Experiments](/docs/user-guides/experimentation). To do this, simply select the cohort you wish to add to your internal and test user list.
 
-## Step 4: Apply the filter to an insight
+## Step 4: Apply the filter to your insights
 
 <ProductScreenshot
   imageLight={step3Light}
@@ -88,6 +88,30 @@ You can also create filters based on pre-prepared cohorts of users, which is esp
   alt="Filter Internal Users Step 3"
 />
 
-The internal and test user filter is controlled with a simple toggle whenever you create a new insight, or edit an existing one. Turn it on and everything in your filter group will be sifted out; turn it off and you’ll see results from all users together. Simple!
+The internal and test user filter is controlled with a simple toggle whenever you create a new insight, or edit an existing one. Turn it on and everything in your filter group will be sifted out; turn it off and you’ll see results from all users together.
+
+Defining your filters doesn't switch them on, so this toggle decides whether an insight excludes internal users. You can also set it from project settings, without opening each insight.
+
+### Set the default for new insights
+
+**Enable this filter on all new insights** sets the starting value for insights created from then on. It doesn't change insights that already exist.
+
+### Change every insight you already have
+
+Under **Existing insights**, **Turn on for existing insights** and **Turn off for existing insights** set the toggle for every insight in the project, including insights other people created. Run this after setting up your filters for the first time, so your existing dashboards and insights stop counting internal traffic. You need to be a project admin.
+
+Some insights are left as they are:
+
+- **SQL insights.** These have no such toggle, so write the exclusion into the query itself if you need it.
+- **Insights you can't edit.** An organization admin can cover those, or you can ask for [edit access](/docs/settings/access-control).
+- **Insights saved in an older format.** These keep whatever they were set to. Open one and save it to convert it, then run this again.
+
+After each run, PostHog tells you how many insights it changed, how many already matched, and how many it left alone.
+
+Dashboards show whatever their insights are set to. A dashboard with its own override for this filter keeps that override.
+
+You can also run this over the API. See [internal and test users](/docs/data/test-accounts) for the endpoint.
+
+> **Note:** There's no bulk undo. Running it the other way sets every insight to the opposite value, rather than restoring what each one had before. To recover a single insight, open its activity log: each change records the previous query, so you can see what it was set to and set it back by hand.
 
 <NewsletterForm />

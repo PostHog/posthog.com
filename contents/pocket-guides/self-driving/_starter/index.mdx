@@ -17,7 +17,7 @@ subtitle: 'One line on what this use case is, for search results.'
 # Reading order in the book. 0 is the front matter; every other page is numbered in
 # sequence. Leave this out entirely and the page exists but stays out of the book –
 # which is how you keep a draft unlisted.
-# bookOrder: 5
+# pocketGuideOrder: 5
 
 filters:
   type:
@@ -35,6 +35,12 @@ requires:
 
 # The product surface this belongs to. Drives grouping wherever guides are listed.
 schedule: Daily
+
+# Only when PostHog already ships this scout as a template in the app. Set it and you write no
+# SKILL.md at all: the CTA opens that template (which carries its tags and schedule), and the
+# scout file is fetched from the monorepo at build time. Leave it out for a scout that exists
+# only in this guide, and write the sibling SKILL.md as usual.
+# appTemplate: costly-users
 
 # The report the scout would file. This is the most important thing you write –
 # see components/SelfDrivingInbox/README.md for the full field contract.

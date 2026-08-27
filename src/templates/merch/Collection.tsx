@@ -4,8 +4,6 @@ import ProductGrid from './ProductGrid'
 import { getProduct } from './transforms'
 import { CollectionPageContext } from './types'
 import SEO from 'components/seo'
-import OSButton from 'components/OSButton'
-import * as Icons from '@posthog/icons'
 import { ProductPanel } from './ProductPanel'
 import { Cart } from './Cart'
 import { getProductMetafieldByNamespace } from './utils'
@@ -127,34 +125,6 @@ const leftSidebarContent = [
                         look up your order
                     </Link>{' '}
                     and handle it yourself.
-                </p>
-            </>
-        ),
-    },
-    {
-        title: 'Missing a product?',
-        content: (
-            <>
-                <p className="text-sm mb-2">
-                    Is our merch store missing something vital that you need for your closet or desk? Share your product
-                    idea with us on GitHub.
-                </p>
-
-                <p className="text-sm mb-0">
-                    <OSButton
-                        variant="underline"
-                        asLink
-                        align="left"
-                        width="full"
-                        size="md"
-                        to="https://github.com/posthog/posthog.com/issues"
-                        icon={<Icons.IconArrowRight className="text-salmon" />}
-                        iconPosition="right"
-                        className="font-semibold !px-0"
-                        external
-                    >
-                        Submit a product idea
-                    </OSButton>
                 </p>
             </>
         ),

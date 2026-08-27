@@ -42,6 +42,7 @@ import { MenuItem, useApp } from '../../context/App'
 import { useActiveFeatureFlags, filterMenuByFlags } from '../../hooks/useActiveFeatureFlags'
 import { Questions } from 'components/Squeak'
 import { DocsPageSurvey } from 'components/DocsPageSurvey'
+import AskAIInput from 'components/AskAIInput'
 import MarkdownActions from 'components/MarkdownActions'
 import CustomerMetadata from './CustomerMetadata'
 import { getVideoClasses } from '../../constants'
@@ -115,6 +116,8 @@ interface ReaderViewProps {
     parent?: MenuItem
     showQuestions?: boolean
     showAbout?: boolean
+    /** Renders the "Still have questions?" PostHog AI input just above the survey. */
+    showAskAI?: boolean
     sourceInstanceName?: string
     defaultNavVisible?: boolean
     /**
@@ -442,6 +445,7 @@ export default function ReaderView({
     parent,
     showQuestions = false,
     showAbout = false,
+    showAskAI = false,
     sourceInstanceName,
     defaultNavVisible,
     chrome = false,
@@ -478,6 +482,7 @@ export default function ReaderView({
                 parent={parent}
                 showQuestions={showQuestions}
                 showAbout={showAbout}
+                showAskAI={showAskAI}
                 sourceInstanceName={sourceInstanceName}
                 chrome={chrome}
                 menuTabs={menuTabs}
@@ -1389,6 +1394,7 @@ function ReaderViewContent({
     parent,
     showQuestions = false,
     showAbout = false,
+    showAskAI = false,
     sourceInstanceName,
     chrome = false,
     menuTabs,
@@ -1460,8 +1466,12 @@ function ReaderViewContent({
                     if (detailsParent) {
                         detailsParent.open = true
                     }
+                    // Not `offsetTop` — that measures from the nearest positioned ancestor, which
+                    // on a <Steps> page is the step container, not the viewport.
+                    const targetRect = targetElement.getBoundingClientRect()
+                    const scrollRect = scrollElement.getBoundingClientRect()
                     scrollElement.scrollTo({
-                        top: targetElement.offsetTop || 0,
+                        top: Math.max(0, targetRect.top - scrollRect.top + scrollElement.scrollTop),
                         behavior: 'smooth',
                     })
                     return
@@ -1844,6 +1854,18 @@ function ReaderViewContent({
                                                         : contentMaxWidthClass || 'max-w-2xl'
                                                 }`}
                                             />
+                                        </div>
+                                    )}
+                                    {showAskAI && (
+                                        <div
+                                            className={`mt-8 mx-auto transition-all ${
+                                                fullWidthContent || body?.type !== 'mdx'
+                                                    ? 'max-w-full'
+                                                    : contentMaxWidthClass || 'max-w-2xl'
+                                            }`}
+                                        >
+                                            <h3 className="text-xl font-bold m-0 mb-3">Still have questions?</h3>
+                                            <AskAIInput placeholder="Ask PostHog AI about this page..." />
                                         </div>
                                     )}
                                     {showSurvey && (

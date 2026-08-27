@@ -1,5 +1,7 @@
 // Paths that have raw markdown available for copying/downloading. `/pocket-guides` is here so a
 // scout's SKILL.md is fetchable as agent context – see components/SelfDrivingInbox/README.md.
+// `/pricing` covers `/pricing/agent-estimates`; `/pricing.md` itself is built from billing data
+// by `generatePricingMd`, not scraped, because no MDX node has the slug `/pricing`.
 export const MARKDOWN_CONTENT_PATHS = [
     '/docs',
     '/handbook',
@@ -7,6 +9,7 @@ export const MARKDOWN_CONTENT_PATHS = [
     '/newsletter',
     '/changelog',
     '/pocket-guides',
+    '/pricing',
 ] as const
 export const isMarkdownContentPath = (path: string) =>
     MARKDOWN_CONTENT_PATHS.some((p) => path === p || path.startsWith(`${p}/`))
@@ -17,7 +20,7 @@ export const AVATAR_FALLBACK_URL =
 
 export const PRODUCT_COUNT = 10
 export const APP_COUNT = 34 // total of /products - ai agents.md and cdp readme.md
-export const CUSTOMER_COUNT = 190254
+export const CUSTOMER_COUNT = 500000
 
 // screensaver
 export const INACTIVITY_TIMEOUTS = {
