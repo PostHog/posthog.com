@@ -3,7 +3,7 @@ import SEO from 'components/seo'
 import Wizard from 'components/Wizard'
 import Link from 'components/Link'
 import ScrollArea from 'components/RadixUI/ScrollArea'
-import { parseVersionedReferencePath } from 'components/SdkReferences/utils'
+import { parseVersionedReferenceSlug } from 'components/SdkReferences/utils'
 
 /**
  * Served (via a vercel.json rewrite) for versioned SDK reference URLs the build no longer
@@ -15,12 +15,18 @@ import { parseVersionedReferencePath } from 'components/SdkReferences/utils'
  */
 
 export default function VersionUnavailable(): JSX.Element {
-    // Resolved after mount: the static HTML is shared by every SDK, so the requested version is
-    // only knowable on the client. Filling it in during render would break hydration.
+    // The rewrite is server-side, so the address bar still holds the requested versioned URL —
+    // that path is the only place the SDK and version survive. Resolved after mount because one
+    // static page serves every SDK; filling it in during render would break hydration.
+    // `?ref=` is a local override, so the page can be viewed without the rewrite in front of it.
     const [requested, setRequested] = useState<{ sdk: string; version: string } | null>(null)
 
     useEffect(() => {
-        setRequested(parseVersionedReferencePath(window.location.pathname))
+        const override = new URLSearchParams(window.location.search).get('ref')
+        setRequested(
+            parseVersionedReferenceSlug(window.location.pathname) ??
+                (override ? parseVersionedReferenceSlug(override) : null)
+        )
     }, [])
 
     return (
