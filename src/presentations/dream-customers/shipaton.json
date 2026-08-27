@@ -19,9 +19,11 @@
                 "template": "stacked",
                 "name": "Migração em andamento",
                 "title": "Migração em andamento: de analytics para produtos auto-guiados",
-                "description": "<p><strong>De:</strong> \"só analytics\" ou session replay – dashboards abertos por você, replays assistidos por você, regressões caçadas por você.</p><p><strong>Para:</strong> self-driving – o produto observa a si mesmo: scouts vigiam os dados, reports chegam no Inbox, PRs saem.</p><p>Scouts são a peça de vigilância dessa migração – e o assunto dos próximos 4 minutos.</p>",
+                "description": "<p><strong>De:</strong> \"só analytics\" ou session replay – dashboards abertos por você, regressões caçadas por você. <strong>Para:</strong> self-driving – scouts vigiam os dados, reports chegam no Inbox, PRs saem.</p>",
                 "descriptionWidth": "@2xl:w-2/3",
-                "notes": "<p>Enquadramento antes/depois: a mesma plataforma, invertida – em vez de você ir até os dados, os dados vêm até você com uma ação sugerida. <strong>~20s</strong></p>"
+                "notes": "<p>Enquadramento antes/depois: a mesma plataforma, invertida – em vez de você ir até os dados, os dados vêm até você com uma ação sugerida. Scouts são a peça de vigilância dessa migração – e o assunto dos próximos 4 minutos. A piada do carro se conta sozinha. <strong>~20s</strong></p>",
+                "image": "/images/presentations/shipaton/migration-car.png",
+                "imageAlt": "Hedgehog vendedor batendo no teto de um carro PostHog coberto de produtos: this bad boy can fit so many products in it"
             },
             "skill-harness": {
                 "template": "stacked",
