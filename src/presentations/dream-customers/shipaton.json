@@ -10,104 +10,105 @@
             "overview": {
                 "template": "stacked",
                 "name": "Scouts",
-                "title": "Scouts: rode agentes num timer e deixe eles escreverem reports pra você",
-                "description": "Um scout é um agente pequeno que examina os dados do seu projeto PostHog em um cronograma – e só fala quando encontra algo que rende um report no Inbox.",
+                "title": "What is a scout?",
+                "description": "\"A scout is a small agent (don't overthink that word) that looks at, wrangles, and makes sense of any data available in PostHog.\"",
                 "descriptionWidth": "@2xl:w-1/2",
-                "notes": "<p>Elevator pitch e definição em uma linha. Hogzilla de fundo, como na home. Exemplos reais: bundle size, CSP/web vitals, 404s, complexidade de código. <strong>~30s</strong></p>"
+                "notes": "<p>Opening line straight from Andy's post. Real examples: bundle size, CSP/web vitals, 404s, code complexity. <strong>~30s</strong></p>"
             },
             "migration": {
                 "template": "stacked",
-                "name": "Migração em andamento",
-                "title": "Migração em andamento: de analytics para produtos auto-guiados",
-                "description": "<p><strong>De:</strong> \"só analytics\" ou session replay – dashboards abertos por você, regressões caçadas por você. <strong>Para:</strong> self-driving – scouts vigiam os dados, reports chegam no Inbox, PRs saem.</p>",
-                "descriptionWidth": "@2xl:w-2/3",
-                "notes": "<p>Enquadramento antes/depois: a mesma plataforma, invertida – em vez de você ir até os dados, os dados vêm até você com uma ação sugerida. Scouts são a peça de vigilância dessa migração – e o assunto dos próximos 4 minutos. A piada do carro se conta sozinha. <strong>~20s</strong></p>",
+                "name": "Not just analytics",
+                "title": "Not just analytics",
                 "image": "/images/presentations/shipaton/migration-car.png",
-                "imageAlt": "Hedgehog vendedor batendo no teto de um carro PostHog coberto de produtos: this bad boy can fit so many products in it"
+                "imageAlt": "Hedgehog salesman slapping the roof of a PostHog car covered in products: this bad boy can fit so many products in it",
+                "description": "<p>Self-driving: <em>\"an autonomous loop that monitors your product for patterns and drafts fixes.\"</em></p>",
+                "notes": "<p>Before/after framing: instead of you going to the data, the data comes to you with a suggested action. Scouts are the watching piece – the next 4 minutes. The car joke tells itself. <strong>~20s</strong></p>"
             },
             "skill-harness": {
                 "template": "stacked",
                 "name": "Skill + harness",
-                "title": "Um scout é uma skill + um harness",
-                "description": "<p><strong>A skill (quase tudo é markdown):</strong> a lógica de negócio que era um emaranhado de if/else vira algumas centenas de linhas de inglês simples. \"A pesquisa NPS principal precisa de 30+ respostas semanais e queda de 10%+ no score antes de agir.\"</p><p><strong>O harness (encanamento fino):</strong></p><ul><li>Loop de agente + scheduler – a maioria roda a cada hora</li><li>Ferramentas: o mesmo MCP do PostHog que o Claude Code e o Cursor usam</li><li>Sandbox com token restrito ao projeto + scratchpad com cursor, dedupe e achados \"abaixo da barra\"</li></ul>",
+                "title": "\"A scout is, at its core, a skill\"",
+                "description": "<p><em>\"The business logic that used to be a sprawl of if/else branches and helper functions now starts life as a few hundred lines of English anyone can read, write, and improve.\"</em></p><p><em>\"What used to be if response_rate &lt; 0.3 and sample_size &gt; 30: is now a sentence like 'a flagship NPS survey needs ≥30 responses/week and a ≥10% score drop before it's worth acting on.'\"</em></p><p><em>\"Everything else – the loop, the sandbox, the scheduler, the memory – is deliberately thin plumbing around that skill.\"</em></p>",
                 "descriptionWidth": "@2xl:w-2/3",
-                "notes": "<p>Só três ferramentas são exclusivas de scout: emitir sinal, ler/escrever o scratchpad e ver runs passados. O resto é o MCP público – por isso qualquer scout roda também no Claude Code ou Cursor. \"English is the hottest new programming language\" (Karpathy). <strong>~50s</strong></p>"
+                "notes": "<p>The tools are just the PostHog MCP – the same one Claude Code and Cursor use. Only three scout-only tools: emit signal, scratchpad, past runs. <strong>~50s</strong></p>"
             },
             "scout-fleet": {
                 "template": "stacked",
-                "name": "A frota",
-                "title": "Scouts são skills: a frota de verdade",
+                "name": "The fleet",
+                "title": "Scouts are skills: the real fleet",
                 "image": "/images/presentations/shipaton/scout-fleet.png",
-                "imageAlt": "Lista de scouts no app de Skills do PostHog",
-                "notes": "<p>Apontar o scout de complexidade de código criado ao vivo em outro meetup. <strong>~20s</strong></p>"
+                "imageAlt": "Scout list in the PostHog Skills app",
+                "description": "<p><em>\"You start at the easy end and only reach for the heavier machinery when a particular scout actually needs it.\"</em></p>",
+                "notes": "<p>Point out the code-complexity scout created live at another meetup. <strong>~20s</strong></p>"
             },
             "pipeline": {
                 "template": "stacked",
                 "name": "Pipeline",
-                "title": "Scout → sinal → report → ação",
+                "title": "Scout → signal → report → action",
                 "image": "https://res.cloudinary.com/dmukukwp6/image/upload/hoggie_mail_48daf2f4b4.png",
-                "imageAlt": "Hedgehog carteiro do PostHog",
-                "description": "<ul><li><strong>1. O scout roda</strong> no cronograma e inspeciona uma fatia dos dados</li><li><strong>2. Emite um sinal</strong> – um achado com evidência e ação sugerida</li><li><strong>3. Sinais viram reports</strong> no Inbox – um report combina sinais de várias fontes</li><li><strong>4. Reports viram ação</strong> – um humano decide, ou uma task do PostHog Code abre o PR sozinha</li></ul>",
-                "notes": "<p>A parte difícil não é achar coisas – é <strong>não</strong> achar coisas. A skill codifica contenção: barra pra falar, disqualifiers, dedupe e severidade P0–P4. <strong>~35s</strong></p>"
+                "imageAlt": "PostHog mail hedgehog",
+                "description": "<ul><li><em>\"A scout runs on a schedule, looks at some slice of your PostHog data, and decides whether anything is worth surfacing.\"</em></li><li><em>\"If it is, the scout emits a signal – a semi-structured finding with evidence, and a suggested action.\"</em></li><li><em>\"Signals get picked up by the self-driving pipeline, grouped, and turned into reports that land in your PostHog Inbox.\"</em></li><li><em>\"Reports get actioned – by you, or automatically by a PostHog Code task that picks up the report and ships a fix or improvement.\"</em></li></ul>",
+                "notes": "<p>The four steps, verbatim from the post. Restraint is the hard part – disqualifiers, dedupe keys, P0–P4 severity. <strong>~35s</strong></p>"
             },
             "self-driving": {
                 "template": "stacked",
                 "name": "Self-driving",
                 "title": "Signals → Inbox → Pull requests",
                 "image": "/images/presentations/shipaton/self-driving.png",
-                "imageAlt": "Seção self-driving do posthog.com com as abas Signals, Scouts, Inbox e Pull requests",
+                "imageAlt": "The self-driving section of posthog.com with Signals, Scouts, Inbox and Pull requests tabs",
                 "description": "<p><a href=\"/self-driving\">posthog.com/self-driving</a></p>",
-                "notes": "<p>Screenshot da página pública. Scouts são uma das quatro peças: signals entram, o Inbox prioriza, PRs saem. <strong>~15s</strong></p>"
+                "notes": "<p>Screenshot of the public page. Scouts are one of four pieces: signals in, Inbox prioritizes, PRs out. <strong>~15s</strong></p>"
             },
             "superpower": {
                 "template": "stacked",
-                "name": "Superpoderes",
-                "title": "O superpoder: um jeito de validar o próprio trabalho e as ferramentas pra isso",
-                "description": "<p><strong>Case: a reescrita do SQL parser do PostHog</strong> (posthog.com/blog/sql-parser)</p><ul><li>O parser antigo (ANTLR/C++) virou o <strong>oráculo</strong>: ache um SQL onde os dois discordam, corrija, repita</li><li>Property-based testing + fuzzing guiado por cobertura em background, alimentando o agente com casos que falham</li><li>Shadow mode em produção: milhões de parses, zero divergências</li><li>Resultado: 16 mil linhas de Rust escritas pelo agente, <strong>454x mais rápido em produção</strong>, meses de trabalho em dias</li></ul>",
+                "name": "Superpowers",
+                "title": "The superpower: an oracle + the tools to test against it",
+                "description": "<p><strong>Rewriting PostHog's SQL parser</strong> (posthog.com/blog/sql-parser):</p><ul><li><em>\"Having an oracle was critical ... finding some SQL that the parsers disagreed on, fixing the new parser to agree, and repeating.\"</em></li><li><em>\"In shadow mode, I was able to test millions of parses quickly and there were zero divergences.\"</em></li><li><em>\"On production queries, it was on average 454x faster than the previous parser.\"</em></li><li><em>\"It was entirely written by Claude Opus 4.7, in Rust\"</em> – and still: <em>\"I wouldn't call this 'vibe-coded' at all.\"</em></li></ul>",
                 "descriptionWidth": "@2xl:w-2/3",
-                "notes": "<p>Não foi vibe-coding. O segredo não é o modelo – é o loop de validação: um oráculo pra se comparar e ferramentas (ex.: MCP) pra rodar o loop sozinho. Scouts são o mesmo padrão aplicado a dados. <strong>~60s</strong></p>"
+                "notes": "<p>The secret is not the model – it is the validation loop: an oracle to compare against and tools (like MCP) to run the loop alone. Scouts are the same pattern applied to data. <strong>~60s</strong></p>"
             },
             "web-analytics": {
                 "template": "stacked",
                 "name": "Web analytics",
-                "title": "O mesmo padrão em web analytics: um scout pegou uma regressão de verdade",
-                "description": "<ul><li>O scout de <strong>performance de web analytics</strong> compara cache coverage, p95 sem cache e taxa de falha das queries com o baseline de 7 dias da própria frota</li><li>Pegou uma queda de cache coverage e abriu um report no Inbox – que cai direto no canal do time no Slack</li><li>Quando a métrica recuperou, ele <strong>editou o report existente com uma nota de update</strong> em vez de abrir outro: dedupe e contenção funcionando</li><li>Por baixo, o padrão do slide anterior: a skill de query performance define o que é \"lento\" e o MCP dá as ferramentas pra medir</li></ul>",
+                "title": "The same pattern in web analytics",
+                "description": "<ul><li><strong>signals-scout-web-analytics:</strong> <em>\"acquisition channels diverging, attribution breakage, 404 spikes\"</em></li><li>Our performance scout compares cache coverage, uncached p95, and failure rate against the fleet's own 7-day baseline</li><li>It caught a cache-coverage dip, filed a report in the Inbox – then updated the same report when the metric recovered</li></ul>",
                 "descriptionWidth": "@2xl:w-2/3",
-                "notes": "<p>O slide seguinte mostra o report real. <strong>~50s</strong></p>"
+                "notes": "<p>The query-performance skill defines what \"slow\" means; the MCP provides the tools to measure. Next slide shows the real report. <strong>~50s</strong></p>"
             },
             "scout-report": {
                 "template": "stacked",
-                "name": "O report",
-                "title": "Pegou a queda, acompanhou até recuperar",
+                "name": "The report",
+                "title": "Caught the dip, tracked the recovery",
                 "image": "/images/presentations/shipaton/scout-cache-coverage.png",
-                "imageAlt": "Report do scout de performance de web analytics no Slack",
-                "notes": "<p>O update fecha o loop – sem dashboard novo, sem ninguém precisar lembrar de checar. A última resposta da thread rende a risada e prepara o próximo slide. <strong>~20s</strong></p>"
+                "imageAlt": "Web analytics performance scout report in Slack",
+                "description": "<p><em>\"The hard part of a scout isn't finding things. It's not finding things.\"</em></p>",
+                "notes": "<p>The update closes the loop – no new dashboard, nobody had to remember to check. The last reply in the thread gets the laugh and sets up the next slide. <strong>~20s</strong></p>"
             },
             "reply-report": {
                 "template": "stacked",
-                "name": "Responda a thread",
-                "title": "O report é uma conversa: responda a thread e peça o próximo passo",
+                "name": "The conversation",
+                "title": "A report is a conversation",
                 "image": "/images/presentations/shipaton/scout-web-vitals.png",
-                "imageAlt": "Report do scout de web vitals no Slack",
-                "notes": "<p>No print: o scout de web vitals reporta e eu respondo na própria thread pedindo pra ele agir. O report não é um e-mail que você arquiva – é um fio de conversa com quem achou o problema. <strong>~25s</strong></p>",
-                "description": "<p>Cada report chega como thread no Slack – mencione o agente e peça o fix dali mesmo.</p>"
+                "imageAlt": "Web vitals scout report in Slack with a human replying in the thread",
+                "description": "<p>Reply in the thread, mention the agent, and ask for the next step.</p>",
+                "notes": "<p>In the print: the web vitals scout reports and I reply in the thread asking it to act. A report is not an email you archive – it is a conversation with whoever found the problem. <strong>~25s</strong></p>"
             },
             "getting-started": {
                 "template": "stacked",
-                "name": "Comece hoje",
-                "title": "Comece pelo lado fácil do espectro",
+                "name": "Start today",
+                "title": "Start at the easy end",
                 "image": "https://res.cloudinary.com/dmukukwp6/image/upload/happy_hog_ebc59e4658.png",
-                "imageAlt": "Hedgehog feliz do PostHog",
-                "description": "<ul><li><strong>Leia:</strong> posthog.com/blog/what-is-a-scout e posthog.com/blog/sql-parser</li><li><strong>Ligue:</strong> Self-driving / Inbox (beta aberto) – ~20 scouts canônicos: experimentos, revenue, surveys, web analytics, feature flags</li><li><strong>Escreva o seu:</strong> algumas frases em inglês descrevendo o que é normal no seu produto já são um scout</li><li><strong>Rode hoje:</strong> qualquer scout roda no Claude Code ou Cursor com o MCP do PostHog</li></ul>",
-                "notes": "<p>CTA final: descreva em texto o que é normal no seu produto. Isso já é um scout. <strong>~30s</strong></p>"
+                "imageAlt": "Happy PostHog hedgehog",
+                "description": "<ul><li><strong>Read:</strong> posthog.com/blog/what-is-a-scout · posthog.com/blog/sql-parser</li><li><strong>Turn on:</strong> Self-driving / Inbox (open beta) – <em>\"PostHog ships with around 20 canonical scouts out of the box\"</em></li><li><strong>Run one anywhere:</strong> <em>\"you can run one manually in any agent surface where the PostHog MCP is available – PostHog Code, Claude Code, Codex, Cursor, whatever.\"</em></li></ul>",
+                "notes": "<p>Closing: a few sentences of English describing what is normal in your product – that is already a scout. <strong>~30s</strong></p>"
             },
             "appendix-precompute": {
                 "template": "stacked",
-                "name": "Apêndice: MCP no Slack",
-                "title": "Apêndice: pergunte no Slack, o agente mede via MCP",
+                "name": "Appendix",
+                "title": "Appendix: ask in Slack, the agent measures via MCP",
                 "image": "/images/presentations/shipaton/mcp-precompute.png",
-                "imageAlt": "Thread no Slack com o agente respondendo sobre precompute hit ratio com gráfico",
-                "notes": "<p>Slide de apoio pro Q&A: as mesmas ferramentas dos scouts respondem perguntas sob demanda.</p>"
+                "imageAlt": "Slack thread with the agent answering a precompute hit-ratio question with a chart",
+                "notes": "<p>Backup slide for Q&A: the same tools scouts use answer questions on demand.</p>"
             }
         }
     }
