@@ -81,7 +81,7 @@ The request body accepts:
 | `file.compression` | Optional. `zstd`, `lz4`, `snappy`, `gzip`, or `brotli` for `Parquet`. Only `gzip` and `brotli` for `JSONLines`. |
 | `file.max_size_mb` | Optional. Splits the output into multiple files of at most this size, instead of one potentially large file. |
 
-Each project can have up to 20 file download exports running at the same time. Requests beyond that return `429 Too Many Requests`.
+Each project can have up to 20 file download exports running at the same time. Requests beyond that return `429 Too Many Requests`. If you hit this limit, wait for a running export to finish, or [cancel](#canceling-an-export) one you no longer need.
 
 ## SQL queries
 
@@ -169,6 +169,8 @@ curl -L -o export.parquet \
 ```
 
 The endpoint responds with a `302` redirect to a temporary signed URL, so make sure your HTTP client follows redirects (`-L` in curl). The signed URL carries its own authentication, so do not send your API key with it. The URL expires after an hour. If it expires, call the download endpoint again for a fresh one. Treat the signed URL as a secret: anyone who has it can download the file while it is valid.
+
+Exported files are kept for one week. After that they are deleted, the download endpoint returns an error, and you need to run the export again.
 
 In place of the file ID, you can use a zero-based index (`.../download/0/`). If the export produced a single file, you can omit the file identifier entirely (`.../download/`). If you set `file.max_size_mb`, remember to download every file in the `files` array, not just the first.
 
