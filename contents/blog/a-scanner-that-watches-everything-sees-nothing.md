@@ -24,9 +24,9 @@ Nobody was going to watch the vast majority of those millions of recordings anyw
 
 Replay Vision fixes the watching part. It does not fix the thinking part.
 
-We learned this the annoying way. Some scanners pointed us to bugs we could then verify in the linked recordings. Some showed us exactly where a flow became confusing. Others produced plausible descriptions of sessions that nobody wanted to read. The model was not the main difference. The scanner either had a real job or it did not.
+We learned this the annoying (but expected) way. Some scanners pointed us to bugs we could then verify in the linked recordings. Some showed us exactly where a flow became confusing. Others produced plausible descriptions of sessions that nobody wanted to read. The model was not the main difference. The scanner either had a real job or it did not.
 
-A useful scanner has one visible question, a narrow recording set, and permission to answer no or inconclusive. You still bring the judgment.
+Throughout all of this, we've learned that useful scanners have three things: a visible question, a narrow recording set, and permission to answer "no" or "inconclusive". You must still bring the judgment.
 
 <!-- screenshot placeholder: replay vision overview
 show: the scanner list and recent observation counts, using only PostHog dogfood data
@@ -43,7 +43,7 @@ It sounds sensible but then returns with a pile of observations like these: the 
 
 Our first broad scanners produced plausible mush because we had quietly asked the model to decide what mattered for us. It cannot (yet). That is still our job.
 
-The scanners we kept are narrower. One watches sessions with rage clicks and asks whether the clicked control actually failed. One watches first sessions from high-fit signups and reconstructs the setup journey. Another watches Error Tracking investigations and records the path through stack traces, occurrences, replays, logs, and actions.
+The scanners we use now are narrower. One watches sessions with rage clicks and asks whether the clicked control actually failed. One watches first sessions from high-fit signups and reconstructs the setup journey. Another watches Error Tracking investigations and records the path through stack traces, occurrences, recordings, logs, and actions.
 
 Different surfaces with the same shape: a filtered set of recordings, one visible question, and a defined answer.
 
@@ -57,21 +57,21 @@ privacy: use a PostHog-owned scanner and remove IDs or user details
 alt: "a Replay Vision scanner with a narrow recording query and one question"
 -->
 
-There is another boundary that matters, too. One observation is one scanner applied to one recording. That observation cannot compare itself with sessions it has never seen.
+There is another boundary that matters, too. One observation is one scanner applied to one recording. That observation cannot compare itself with sessions it hasn't seen itself.
 
 For an experiment, the scanner can classify what happened to one participant after exposure. Use the same rubric for every variant. A [Digest](/docs/replay-vision/actions), Scout, or another agent can compare patterns across the resulting observations. Asking the per-recording scanner to compare variants only invites it to invent the missing half.
 
-The same rule applies elsewhere. A scanner can describe one recording before a low-NPS response. A Scout can look for repeated friction across several sessions from one respondent, or across many respondents. A scanner can classify one conversion session. Product Analytics can compare the classifier results for converters and drop-offs.
+The same rule applies elsewhere. A scanner can describe one recording before a low-NPS response. A Scout can look for repeated friction across several sessions from one respondent, or across many respondents, who gave low-NPS scores. A scanner can classify one conversion session. Product Analytics can compare the classifier results for converters and drop-offs.
 
 ### Scanners can look for upside too
 
 Bug scanners are the obvious first move. They are also the lowest bar.
 
-We still run them because they work. Dead clicks, broken renders, and setup loops are easier to catch when something watches the footage. But some of our most useful scanners look for product opportunities instead.
+We still run them because they work. Dead clicks, broken renders, and setup loops are easier to catch when something watches the footage. But some of our most valuable scanners look for product opportunities instead.
 
 One watches first sessions from high-fit signups and writes the trip report we would never produce consistently by hand. What did the person evaluate? How far did they get? What slowed them down? Another reconstructs how people investigate Error Tracking issues. It records the entry point, data consulted, impact assessment, queries, actions, and outcome.
 
-These scanners do not magically tell us what to build. They show the workflows people attempted, the manual work they repeated, and the product questions worth investigating. Treat each finding as a hypothesis. A useful observation still has to survive a person opening the linked replay. Product judgment remains a human problem, which is fortunate for those of us employed to provide it.
+These scanners do not magically tell us what to build, though when prompted and aimed properly, they have yielded valuable feature development ideas. They show the workflows people attempted, the manual work they repeated, and the product questions worth investigating. Treat each finding as a hypothesis. Product judgment remains a human problem, which is fortunate for those of us employed to provide it.
 
 We call these opportunity miners. Bug scanners raise the floor. Opportunity miners raise the roof.
 
@@ -92,23 +92,21 @@ The rage click is a clue. The recording must prove the failure.
 
 So the scanner first finds the repeated clicks and checks what happened next. Did the page navigate? Did a menu open? Did content expand? Did a value change? If the product responded, the answer is no. If the recording does not show the click and its result clearly, the answer is inconclusive.
 
-The same proof standard works for harder questions. A self-contradiction scanner should report a finding only when it sees both halves: the product says something is enabled, then later says it is not. An onboarding scanner should report a stall only when it can name the exact step and visible blocker. A user leaving is not proof of confusion. A failed workflow is not automatically the product's fault.
+The same proof standard works for harder questions. A self-contradiction scanner should report a finding only when it sees both halves of the contradiction: the product says something is enabled, then later says it is not. An onboarding scanner should report a stall only when it can name the exact step and visible blocker. A user leaving is not necessarily proof of confusion. A failed workflow is not automatically the product's fault.
 
-This sounds conservative and *gasp* boring. Good. A scanner that is never allowed to be boring eventually starts making things up.
+This sounds conservative and *gasp* boring. Good. A scanner that is never allowed to be boring is at risk of making things up.
 
 ### "Inconclusive" is a feature
 
-Our ghost-bug scanner is deliberately harsh. It watches people using Replay Vision and looks for one class of problem: the product contradicting itself or sending someone into a dead end.
+Our ghost-bug scanner is deliberately harsh. It watches people using Replay Vision and looks for one class of problem: the product contradicting itself or sending someone into a dead end in a way we designed (whether intentionally or unintentionally).
 
-It produced 3,032 succeeded observations. Only 29 were yes results. The rest were no or inconclusive.
+In the first three weeks since launch, it produced 3,032 observations. Only 29 were "yes" results. The rest were "no" or "inconclusive".
 
-<!-- publish-day todo: re-pull the scanner result counts before publishing. -->
-
-That does not prove the scanner was accurate 29 times. We had not rated those observations. An inconclusive result can also mean the recording query reached beyond the prompt's evaluable surface. The result still tells us something useful: the scanner refused to turn most ordinary sessions into findings. The yes pile stayed small enough for a person to inspect.
+That does not prove the scanner was accurate 29 times. An inconclusive result can also mean the recording query reached beyond the prompt's evaluable surface. The result still tells us something useful: the scanner refused to turn most ordinary sessions into findings. The yes pile stayed small enough for a person to inspect.
 
 "Idk" beats confabulation.
 
-Every observation links back to its recording. When a scanner cites a contradiction, open the replay, jump to the cited moments, and watch both halves.
+Every observation links back to its recording. When a scanner cites a contradiction, open the recording, jump to the cited moments, and watch both halves.
 
 <!-- screenshot placeholder: ghost-bug observation distribution
 show: the scanner's yes, no, and inconclusive results with one high-confidence yes observation
@@ -119,7 +117,7 @@ alt: "a ghost-bug scanner observation with linked evidence in the recording"
 
 ### The gear-icon trapdoor
 
-One ghost-bug observation caught a real trapdoor inside Replay Vision itself (yes, we loved pointing Replay Vision at Replay Vision).
+One ghost-bug observation caught a real trapdoor inside Replay Vision itself (yes, we love pointing Replay Vision at Replay Vision).
 
 A user reached the scan conditions step while creating a scanner. Beside "Filter out internal and test users," the product showed a gear icon. The user clicked it. The gear did exactly what the link said it would do: it opened project settings.
 
@@ -127,9 +125,7 @@ It also pulled the user out of the scanner wizard.
 
 One person returned and started the scanner flow again. Another left without creating one. A normal event stream could show a settings visit followed by an abandoned wizard. The recording showed the actual failure: the product told the user to click a control that removed them from the task it wanted them to finish.
 
-Two recordings were enough to show that the trapdoor existed. They were not enough to tell us how often it caused abandonment.
-
-The observation made the fix fairly obvious. Keep the setting inside the wizard instead of sending the user away. A later PR fixed it.
+Two recordings were enough to show that the trapdoor existed, and the observation made the fix fairly obvious: keep the setting inside the wizard instead of sending the user away. A later PR fixed it.
 
 <!-- publish-day todo: link the merged PR that shipped the fix. do not cite the earlier unmerged PR as the shipped change. -->
 
@@ -144,17 +140,17 @@ alt: "the Replay Vision scanner wizard sending a user into project settings"
 
 ### Observations are a new event shape
 
-Events told us what fired. Replay Vision showed what the person experienced around it. That judgment becomes data too.
+Events tells us what fired, while Replay Vision shows what the person experienced around the event that fired. This judgment becomes data too.
 
 Each succeeded observation is emitted as a queryable `$recording_observed` event. A monitor contributes a verdict. A classifier contributes a tag. Scorers and summarizers contribute their own structured outputs. The event also carries confidence and citations back to the recording.
 
-It is still a model's judgment, not ground truth. The confidence and recording citations matter for exactly that reason.
+It is still a model's judgment, not ground truth, so the confidence and recording citations still matter.
 
 That creates a new behavioral event shape: an evidence-backed judgment about what happened inside one recording. Define the judgment once, then apply it to every matching recording. You can query it, chart it, break it down, or alert on it alongside the rest of your product data.
 
-An event can say someone abandoned signup. An observation can show the contradictory copy they read before leaving. An event can say someone clicked summarize. An observation can show a populated trace that the product summarized as empty. An event can say setup completed. An observation can show that the person got there only after hunting, scrolling, and backtracking.
+An event can say someone abandoned signup. An observation can show the contradictory copy they read before leaving. An event can say someone clicked summarize. An observation can show a populated trace that the product wrongfully summarized as empty. An event can say setup completed. An observation can show that the person got there only after painfully hunting, scrolling, and backtracking.
 
-Observations do not replace events. They add a queryable judgment about what happened between them.
+Observations do not replace events. They add a queryable judgment about what happened before, between, and after them.
 
 <!-- screenshot placeholder: observation as a queryable event
 show: a `$recording_observed` event in Product Analytics, broken down by a scanner verdict or classifier tag
@@ -166,11 +162,11 @@ alt: "Replay Vision observations queried as behavioral events in PostHog"
 
 ## 3. Calibrate human judgment
 
-A scanner does not earn trust when you save it. It earns trust when you argue with its first observations and improve the configuration.
+A scanner does not automatically earn it's trust when you save it... It earns it's trust when you validate or invalidate its first observations and improve the configuration.
 
-Create the scanner, then run it against a small batch of recent recordings. Open the observations beside their source recordings. Look for overclaims, missed proof, weak tags, and instructions that looked clear until the model interpreted them literally.
+Create the scanner, then run it against a small batch of recent recordings (the backfill feature makes this easy). Open the observations beside their source recordings. Look for overclaims, missed proof, weak tags, and instructions that looked clear until the model interpreted them literally.
 
-Rate the result in the Calibration tab. Add a sentence when it got the premise wrong. PostHog AI can use that feedback to iterate on the prompt.
+You can do this in bulk using the the Calibration tab. Add a sentence when it got the premise wrong. PostHog AI can use that feedback to iterate on the prompt.
 
 <!-- screenshot placeholder: calibration loop
 show: several rated observations, one written correction, and a PostHog AI configuration recommendation
@@ -181,15 +177,15 @@ alt: "calibrating a Replay Vision scanner with observation ratings and written f
 
 The goal is a short first feedback loop, not a perfect prompt.
 
-The model changes the quality and cost of each observation, so calibrate it too. Start with Standard. If the observations are close but not quite right, tighten the prompt before reaching for Premium. A sharper instruction often fixes the problem.
+The model changes the quality and cost of each observation, so calibrate it too. Start with the `Standard`. If the observations are close but not quite right, tighten the prompt before reaching for the `Pro` model. A sharper instruction often fixes the problem.
 
 These examples are our starting points. Calibration gets final say.
 
-Use Lightweight for high-volume jobs where you care about the distribution, not one observation. Our broken-render classifier is the obvious example. It tags recordings as `nothing_broken`, `media_failed`, `clipped_layout`, or `horizontal_overflow`. One wrong tag nudges a trend. Nobody opens a ticket because of it.
+Use the `Lite` model for high-volume jobs where you care about the distribution, not one observation. Our broken-render classifier is the obvious example. It tags recordings as `nothing_broken`, `media_failed`, `clipped_layout`, or `horizontal_overflow`. One wrong tag nudges a trend (instead of opening a ticket).
 
-Use Standard when the job combines a fixed rubric with some judgment. An experiment classifier fits here. It can tag each post-exposure recording as `smooth`, `hesitation`, `confusion`, `error_or_dead_end`, or `inconclusive`. The scanner judges one recording. The Digest compares the pattern across variants.
+Use the `Standard` model when the job combines a fixed rubric with some judgment. An experiment classifier typically fits well here. It can tag each post-exposure recording as `smooth`, `hesitation`, `confusion`, `error_or_dead_end`, or `inconclusive`. The scanner judges one recording, and the Digest (or whatever Scout you set up) compares the pattern across variants.
 
-Use Premium when a person may act on one observation. Our ghost-bug scanner must verify both halves of a contradiction before it says yes. A high-ICP onboarding scanner reconstructs one signup journey that a product team may inspect immediately. In both cases, a plausible wrong answer wastes someone's time.
+Use the `Pro` model when a person may act on a single observation. Our ghost-bug scanner must verify both halves of a contradiction before it says yes. A high-ICP onboarding scanner reconstructs one signup journey that a product team may inspect immediately. In both cases, a plausible wrong answer wastes someone's time, so the extra resources the `Pro` model uses tends to be worth it.
 
 Choose the model based on the cost of a wrong answer, not the fanciness of the prompt. You can change the model later. The scanner type is the decision that gets locked when you create it.
 
@@ -200,11 +196,11 @@ privacy: no recording or customer data should appear
 alt: "Lightweight, Standard, and Premium model choices for Replay Vision scanners"
 -->
 
-Context changes the answer too. A scanner produces more specific judgments when it knows the real product surface and relevant cohort. It also needs the selection event and the decision behind the question. Use the actual labels and states from your product in the scanner's prompt. Point the scanner at the experiment, survey response, funnel step, or feature flag that gives the recording meaning.
+Context changes the answer too. A scanner produces more specific judgments when it knows the real product surface and relevant cohort. It also needs the selection event and the decision behind the question. Use the actual labels and states from your product in the scanner's prompt. Point the scanner at the experiment, survey response, funnel step, feature flag, or whatever else it is that gives the recording meaning.
 
-[PostHog AI](/ai) can inspect the context already in PostHog. A coding agent such as Claude Code or Codex can add codebase context through the [PostHog MCP server](/docs/replay-vision/mcp). That is useful when the code helps the agent choose real events, URLs, labels, and workflows. More context for its own sake is just a longer route to plausible mush.
+[PostHog AI](/ai) can inspect the context already in PostHog A coding agent such as Claude Code or Codex can add codebase context through the [PostHog MCP server](/docs/replay-vision/mcp). If you use PostHog Self-Driving, PostHog can also add the codebase context. That is useful when the code helps the agent choose real events, URLs, labels, and workflows. More context for its own sake is just a longer route to plausible mush.
 
-PostHog already keeps recordings beside events, cohorts, experiments, surveys, feature flags, and Product Analytics. The agent can use that context to aim the scanner without building another integration first.
+PostHog already keeps recordings right beside events, cohorts, experiments, surveys, feature flags, and Product Analytics. The agent can use that context to aim the scanner without building another integration first.
 
 If you want code-grounded defaults, run [`npx @posthog/wizard replay-vision`](/docs/replay-vision/start-here#ai-wizard) in the project directory. The wizard reads the codebase and creates three scanners around the product's real flows. They are ordinary scanners, so you can change their prompts, filters, models, and sampling afterwards.
 
@@ -217,11 +213,11 @@ privacy: use an internal experiment with no customer content and remove IDs
 alt: "an experiment scanner classifying one recording and a Digest summarizing many observations"
 -->
 
+If you take one thing from this, remember: Replay Vision can watch the sessions, but you still have to bring the question.
+
 ## Prompts for you to steal
 
-These prompts are for PostHog AI or a coding agent connected to PostHog through the MCP server. The agent should inspect your project and create the scanner. It should not paste the whole request into the scanner prompt.
-
-Each scanner still watches one recording at a time. The Digest or Scout does the cross-observation synthesis.
+These prompts are for PostHog AI or a coding agent connected to PostHog through the MCP server. The agent should inspect your project and create the scanner.
 
 <!-- screenshot placeholder: PostHog AI creating a scanner
 show: one short user request followed by the agent resolving real events, estimating monthly credits, and presenting the created scanner link
@@ -385,7 +381,5 @@ after I choose, estimate the scanner against the remaining quota, create it safe
 [Design scanners with PostHog AI](https://app.posthog.com/#panel=max:read%20this%20blog%20post%3A%20%5Burl%5D.%20then%20inspect%20our%20product%20code%2C%20PostHog%20event%20schema%2C%20cohorts%2C%20recordings%2C%20and%20existing%20Replay%20Vision%20scanners.%0A%0Apropose%20five%20scanners%20grounded%20in%20what%20this%20product%20actually%20does.%20each%20proposal%20must%20include%3A%0A-%20one%20visible%20question%20applied%20to%20one%20recording.%0A-%20the%20scanner%20type%20and%20why%20it%20matches%20the%20output.%0A-%20a%20narrow%20recording%20query%20using%20real%20events%2C%20urls%2C%20cohorts%2C%20and%20duration%20filters.%0A-%20the%20exact%20per-recording%20output%20shape%2C%20including%20no%20or%20inconclusive%20behavior.%0A-%20the%20model%2C%20sampling%20mode%2C%20and%20estimated%20monthly%20observations%20and%20credits.%0A-%20the%20cross-observation%20question%20for%20its%20Digest%20or%20Scout.%0A-%20the%20first%20observations%20a%20human%20should%20calibrate.%0A%0Areject%20ideas%20that%20require%20one%20scanner%20observation%20to%20compare%20sessions%2C%20infer%20hidden%20intent%2C%20or%20discover%20what%20matters%20without%20a%20product%20question.%20do%20not%20invent%20event%20names.%0A%0Arank%20the%20five%20ideas%20by%20expected%20product%20value%20and%20evidence%20quality.%20recommend%20one.%20do%20not%20create%20anything%20until%20I%20choose.%0A%0Aafter%20I%20choose%2C%20estimate%20the%20scanner%20against%20the%20remaining%20quota%2C%20create%20it%20safely%2C%20test%20it%20against%20representative%20recordings%2C%20add%20an%20appropriate%20Digest%20or%20alert%2C%20and%20return%20the%20links.)
 
 <!-- presentation note: give each prompt a copy button. the PostHog AI links below open the panel with the full setup prompt prefilled. -->
-
-Replay Vision can watch the sessions. You still have to bring the question.
 
 > PostHog is the leading platform for building self-driving products. With a full suite of developer tools – [AI observability](/ai-observability), [product analytics](/product-analytics), [session replay](/session-replay), [feature flags](/feature-flags), [experiments](/experiments), [error tracking](/error-tracking), [logs](/logs), and more – PostHog captures all the context agents need to diagnose problems, uncover opportunities, and ship fixes. A [data warehouse](/context-warehouse) and [CDP](/cdp) tie it all together, unifying that context into one source agents can read across. You can steer it all from [Slack](/slack), [the web app](/ai), the desktop ([PostHog Desktop](/desktop)), or your own editor via the [MCP](/mcp).
