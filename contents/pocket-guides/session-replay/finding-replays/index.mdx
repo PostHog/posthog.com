@@ -1,0 +1,112 @@
+---
+# Scaffolded from /docs/session-replay/how-to-watch-recordings and /docs/session-replay/find-replays-ai.
+# Facts check out; the editorial pass is yours.
+#
+# High-level only. The filter panel's full field list, the saved-filter editing steps, and the
+# built-in collections all live in how-to-watch-recordings – deliberately not repeated here.
+#
+# Order is deliberate: the two ways in that need no filter come first, because they're the ones
+# that only work because PostHog captured the events too.
+title: Finding the replay you need
+shortTitle: Finding replays
+subtitle: Recording is the easy half. Getting to the one session that explains the problem is the other.
+pocketGuideOrder: 5
+---
+
+<LeftPage>
+
+<PersonsModalFigure
+    n={1}
+    caption="Click a step in a funnel and you get the people it counted, each one a click away from their recording."
+/>
+
+<ScreenshotFigure
+    n={2}
+    product="session_replay"
+    screenshot="issue-recordings"
+    caption="An Error Tracking issue: every recording of the issue from the top, this one exception's recording from the tab."
+    annotations={[
+        {
+            x: 80.1,
+            y: 4.8,
+            title: 'View all recordings associated with this issue',
+            description:
+                'Every session where this error fired, back to back – the whole population behind the issue rather than one instance of it.',
+        },
+        {
+            x: 71.1,
+            y: 41.7,
+            title: 'Watch replays associated with the currently selected instance of this exception',
+            description:
+                'The recording for the one exception you have selected in the list, playing in the issue itself. Open in session replay takes it to the full player.',
+        },
+    ]}
+/>
+
+</LeftPage>
+
+<RightPage>
+
+# Finding the replay you need
+
+A month of recording gives you thousands of sessions, and no obvious way in.
+
+Scrolling the list is the worst place to start. You don't know which session matters until you've already found it. The faster routes start somewhere else and arrive at a replay.
+
+## From an insight
+
+<!-- Source: how-to-watch-recordings.mdx – click a data point in an insight to get the people it
+    counted, each with their recordings. Funnels are the strong case: a step's converted and
+    dropped users are both one click away. -->
+
+Every insight is data related to a set of <Term name="person">people</Term>, and every person has recordings.
+
+Click a point on a trend, or a step in a funnel <SeeFig n={1} />, and you can watch the sessions behind it. The trend or funnel tells you what happened, and the replay tells you how it happened.
+
+## From an error
+
+<!-- Source: /docs/error-tracking – an exception belongs to a session, and the replay is linked
+    from the issue. Console and network are on the player's own timeline (see the 101). -->
+
+Sessions and Error Tracking issues are also linked by a person's session. You can see the errors that occur during a replay, and you can also find all replays containing a given error.
+
+Just look for the <ViewRecordings /> button, or open the **Recording** tab on the exception you have selected <SeeFig n={2} />.
+
+## Saved filters
+
+A <Term name="saved filter">saved filter</Term> is a question you keep asking. If you're always filtering for users whose sessions include the `user_checkout` event and have signed up in the past week, save it as a filter. It live filters for the latest events.
+
+## Collections
+
+A <Term name="collection">collection</Term> is a set of specific recordings you put there by hand. It doesn't change unless you change it. This is useful for keeping track of sessions you want to revisit or share with your team. Common failure patterns, UI papercuts, and evidence supporting your "I told you so, the button should be on the left side" argument can be saved as a collection.
+
+## Asking instead of filtering
+
+You can also describe what you want and let PostHog AI assemble the filter. You don't have to know which field a thing lives under, which is most of the work.
+
+You can try running any of these prompts in PostHog AI to get started:
+
+- <AskAI q="Users who rage clicked on the pricing page last week" />
+- <AskAI q="Sessions where someone hit an error during checkout" />
+- <AskAI q="Recordings from people who saw the new onboarding flag variant" />
+- <AskAI q="Mobile sessions that ended on the signup form without submitting" />
+- <AskAI q="Long sessions from first-time visitors who never reached the dashboard" />
+- <AskAI q="Sessions with dead clicks on the settings page this month" />
+
+## When there are too many to look at
+
+<!-- Deliberately short – name the options and hand off. The next section explains them. -->
+
+PostHog can watch sessions for you and report on findings.
+
+If you'd like summaries and reports, use session summaries and <Term name="scout">scouts</Term>. If you'd like to turn sessions into queryable data, use <Term name="replay vision">Replay Vision</Term> <Term name="scanner">scanners</Term>.
+
+We'll introduce all of them in [the next section](/pocket-guides/session-replay/replay-vision).
+
+<SeeAlso>
+
+See also: [How to watch recordings](/docs/session-replay/how-to-watch-recordings) · [Find replays with AI](/docs/session-replay/find-replays-ai) · [Watching replays yourself](/pocket-guides/session-replay/watching-replays) · [Getting a robot to watch for you](/pocket-guides/session-replay/replay-vision)
+
+</SeeAlso>
+
+</RightPage>

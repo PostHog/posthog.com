@@ -1,5 +1,8 @@
 /** The volumes on the shelf. Data only, so `gatsby/` can import it in Node at build time. */
 
+/** Spine colours. Limited to safelisted tokens, since the spine is built as `bg-<token>`. */
+export type PocketGuideToken = 'orange' | 'purple' | 'blue' | 'yellow'
+
 export interface PocketGuideVolume {
     /** URL segment and content directory: /pocket-guides/<id>, contents/pocket-guides/<id>/ */
     id: string
@@ -7,7 +10,7 @@ export interface PocketGuideVolume {
     /** One line on the shelf. What the volume gets you, not what's in it. */
     description: string
     /** Project color token, bare – callers build text-/border-/bg- from it. */
-    token: string
+    token: PocketGuideToken
     /** Printed on the cover. Order on the shelf follows it. */
     volume: number
     /** A hand-written src/pages file owns this route, so don't generate one. */
@@ -15,6 +18,12 @@ export interface PocketGuideVolume {
     /** Announced but unwritten – renders as a cover with a sash and no link. */
     comingSoon?: boolean
 }
+
+/**
+ * Every volume opens the same way: front matter at `pocketGuideOrder: 0`, a 101 at 1. Guides are what
+ * follows. Authors assigning `pocketGuideOrder` in a volume's MDX frontmatter count from here.
+ */
+export const FIRST_GUIDE_BOOK_ORDER = 2
 
 export const POCKET_GUIDE_VOLUMES: PocketGuideVolume[] = [
     {
@@ -26,12 +35,26 @@ export const POCKET_GUIDE_VOLUMES: PocketGuideVolume[] = [
         hasStaticPage: true,
     },
     {
-        id: 'data-warehouse',
-        title: 'Data warehouse',
-        description: 'Getting your other systems into PostHog, and asking questions across all of it.',
-        token: 'blue',
+        id: 'ai-observability',
+        title: 'AI Observability',
+        description: 'Tracing every LLM call, scoring what comes back, and seeing what users do with it.',
+        token: 'purple',
         volume: 2,
-        comingSoon: true,
+    },
+    {
+        id: 'context-warehouse',
+        title: 'Context Warehouse',
+        description:
+            'Model revenue, conversion, activation, and usage once, so every dashboard and downstream model reuses the same definition.',
+        token: 'blue',
+        volume: 3,
+    },
+    {
+        id: 'session-replay',
+        title: 'Session replay',
+        description: 'Watch how people actually use your product – or let Replay Vision watch it for you.',
+        token: 'yellow',
+        volume: 4,
     },
 ]
 

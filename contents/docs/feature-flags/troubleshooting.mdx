@@ -12,10 +12,6 @@ export const DeuplicateAsStaticCohortDark = "https://res.cloudinary.com/dmukukwp
 
 This page covers troubleshooting for Feature Flags. For setup, see the [installation guides](/docs/feature-flags/installation).
 
-## Have a question? Ask PostHog AI
-
-<AskAIInput placeholder="Type your question and hit enter..." />
-
 ## Why is my feature flag not working as expected?
 
 Here's a list of suggestions to troubleshoot your flag:
@@ -154,7 +150,7 @@ This occurs because the `in` and `not_in` operators are reserved for **cohort pr
 
 ### What operators should I use instead?
 
-For person or group properties, use any of the [string, numeric, presence, or semver operators](/docs/data/property-filters). For example: `exact`, `contains`, `regex`, `is set`, or any of the semver operators for version-based targeting.
+For person or group properties, use any of the [string, numeric, presence, or semver operators](/docs/data/property-filters). For example: `exact`, `contains`, `starts with`, `ends with`, `regex`, `is set`, or any of the semver operators for version-based targeting.
 
 For cohort targeting, use the cohort property type with `in` or `not_in` operators to target users who are or aren't members of a specific cohort.
 

@@ -73,7 +73,8 @@ export const posthog = {
             monitoring: {
                 features: {
                     cron_monitoring: false,
-                    distributed_tracing: 'Alpha',
+                    // Beta since July 2026 (/blog/traces-beta).
+                    distributed_tracing: 'Beta',
                     release_tracking: true,
                     performance_monitoring: true,
                 },
@@ -186,8 +187,10 @@ export const posthog = {
             },
             observability: {
                 features: {
-                    metrics: false,
-                    traces: 'Alpha',
+                    // OTLP metrics ingest + the posthog.metrics SDK API (/docs/metrics).
+                    metrics: 'Alpha',
+                    // Beta since July 2026 (/blog/traces-beta).
+                    traces: 'Beta',
                     infra_monitoring: false,
                     alerting: true,
                 },
@@ -820,7 +823,7 @@ export const posthog = {
             gcs: true,
             google_ads: true,
             google_analytics: false,
-            google_search_console: false,
+            google_search_console: true,
             hubspot: true,
             imports: true,
             intercom: true,

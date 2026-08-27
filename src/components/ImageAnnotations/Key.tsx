@@ -8,7 +8,7 @@ export interface ImageAnnotationsKeyProps {
 }
 
 function ImageAnnotationsKey({ title = 'Key', className = '' }: ImageAnnotationsKeyProps): JSX.Element {
-    const { annotations, type, hoveredIndex, setHoveredIndex } = useImageAnnotations()
+    const { annotations, type, hoveredIndex, setHoveredIndex, markerClassName } = useImageAnnotations()
 
     return (
         <div className={`border-y border-primary py-4 ${className}`}>
@@ -26,14 +26,14 @@ function ImageAnnotationsKey({ title = 'Key', className = '' }: ImageAnnotations
                             }`}
                         >
                             <span
-                                className={`flex-shrink-0 flex items-center justify-center mt-0.5 rounded-full bg-red text-white font-semibold ring-2 ring-white transition-transform duration-200 ${
+                                className={`flex-shrink-0 flex items-center justify-center mt-0.5 rounded-full ${markerClassName} font-semibold ring-2 ring-white transition-transform duration-200 ${
                                     isActive ? 'scale-110' : ''
                                 } ${type === 'numbered' ? 'size-5 text-[12px]' : 'size-3'}`}
                             >
                                 {type === 'numbered' ? index + 1 : ''}
                             </span>
                             <div className="leading-tight pt-0.5">
-                                <span className="text-[15px] font-semibold">{annotation.title}</span>
+                                <span className="text-[15px] font-semibold text-primary">{annotation.title}</span>
                                 {annotation.description && (
                                     <p className="text-sm text-secondary mt-0.5 mb-0 leading-normal">
                                         {annotation.description}
