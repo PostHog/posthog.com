@@ -55,8 +55,8 @@ export default function VersionUnavailable(): JSX.Element {
                                 We keep the reference for the most recent releases only, so older versions age out.
                             </p>
                             <p className="mb-4">
-                                The current reference is always at the unversioned URL, and it documents the latest
-                                release:
+                                The current reference is always at the URL without a version, and it documents the
+                                latest release:
                             </p>
                             <p className="mb-4">
                                 {requested ? (
