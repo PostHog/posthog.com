@@ -20,6 +20,7 @@ export const COL1 = [
 export const COL2 = [
     'supabase',
     'mistralai',
+    'fireworksai',
     'elevenlabs',
     'exa',
     'convex',
@@ -61,6 +62,7 @@ export const companyAttributes: Record<string, string[]> = {
         'supabase',
         'startengine',
         'mistralai',
+        'fireworksai',
         'raycast',
         'heygen',
         'posthog',
@@ -82,6 +84,7 @@ export const companyAttributes: Record<string, string[]> = {
         'paper',
         'ukgovt',
         'railway',
+        'fireworksai',
     ],
     goodBandName: [
         'elevenlabs',
@@ -97,6 +100,7 @@ export const companyAttributes: Record<string, string[]> = {
         'wisprflow',
         'paper',
         'posthog',
+        'fireworksai',
     ],
     explainable: [
         'ycombinator',
@@ -138,6 +142,7 @@ export const companyAttributes: Record<string, string[]> = {
         'nationaldesignstudio',
         'wisprflow',
         'paper',
+        'fireworksai',
     ],
     american: [
         'ycombinator',
@@ -157,6 +162,7 @@ export const companyAttributes: Record<string, string[]> = {
         'paper',
         'posthog',
         'railway',
+        'fireworksai',
     ],
     pokemon: ['convex', 'supabase', 'hasura', 'mistralai', 'raycast', 'resend', 'exa', 'heygen', 'paper', 'greptile'],
     arr: [
@@ -180,6 +186,7 @@ export const companyAttributes: Record<string, string[]> = {
         'greptile',
         'paper',
         'posthog',
+        'fireworksai',
     ],
     devTool: [
         'ycombinator',
@@ -188,6 +195,7 @@ export const companyAttributes: Record<string, string[]> = {
         'supabase',
         'hasura',
         'mistralai',
+        'fireworksai',
         'raycast',
         'clerk',
         'resend',
