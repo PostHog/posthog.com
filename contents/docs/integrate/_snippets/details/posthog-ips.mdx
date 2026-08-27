@@ -9,7 +9,7 @@ import { PostHogIPsInline } from 'components/Docs/PostHogIPs'
 
   These are public, stable IPs used by PostHog services.
 
-  Heatmaps need one more step. PostHog screenshots your page through [Browserless](https://www.browserless.io), so that request arrives from a Browserless IP, not a PostHog one. Allowlist [the IPs Browserless publishes](https://docs.browserless.io/baas/troubleshooting/whitelisting-ips) as well, and check that page for changes. Browserless updates the list as it scales its fleet.
+  PostHog captures heatmap screenshots using [Browserless](https://www.browserless.io), which uses its own IP addresses. Allowlist those too. Browserless [publishes the current list](https://docs.browserless.io/baas/troubleshooting/whitelisting-ips) and updates it as they scale their fleet.
 
   An allowlist does not help when your app has a private address. For apps on an internal network, see [internal and intranet applications](/docs/session-replay/troubleshooting#internal-and-intranet-applications).
 
