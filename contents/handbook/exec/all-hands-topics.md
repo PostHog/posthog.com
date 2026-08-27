@@ -17,6 +17,8 @@ We generally avoid using the topic of the day to announce new things, as these s
 
 The format varies week to week. Sometimes it's a talk, sometimes we invite demos - anyone can be asked or volunteer - and sometimes it's more curated around a particular theme. There is always time for anyone to ask any question.
 
+If you did anything you want to share to everyone, you can volunteer and present it after the topic of the day (unless there is a specific set of demos that day). Demos are not limited to product work, and can be anything you did that's worth sharing. Customer story, customer win, changes in how a team works, event, handbook update... Code is not the only thing worth demoing.
+
 If you have a topic or theme you'd like covered, ask in the [#team-blitzscale](https://posthog.slack.com/archives/C06LMMS3YP4) channel in Slack.
 
 ## Important topics to revisit regularly
