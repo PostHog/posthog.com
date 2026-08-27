@@ -1,0 +1,75 @@
+{
+    "scouts": {
+        "name": "Scouts — Shipaton meetup",
+        "config": {
+            "thumbnails": true,
+            "notes": false,
+            "form": false
+        },
+        "slides": {
+            "overview": {
+                "template": "stacked",
+                "name": "Scouts",
+                "title": "Scouts: rode agentes num timer e deixe eles escreverem reports pra você",
+                "description": "Um scout é um agente pequeno que examina os dados do seu projeto PostHog em um cronograma — e só fala quando encontra algo que vale sua atenção. Os achados viram reports no Inbox.",
+                "descriptionWidth": "@2xl:w-1/2",
+                "notes": "<p>Elevator pitch e definição em uma linha. Não pensem demais na palavra \"agente\": é a peça central do Self-driving. Exemplos reais: bundle size, CSP/web vitals, 404s, complexidade de código. <strong>~30s</strong></p>"
+            },
+            "demo-kickoff": {
+                "template": "stacked",
+                "name": "Demo em background",
+                "title": "Antes de tudo: dispare a demo",
+                "description": "<p>Prompt para colar ao vivo e deixar rodando enquanto apresentamos:</p><blockquote>\"Quero um scout que vigie 404s: pegue as entry paths com status not-found dos últimos 7 dias, compare com o baseline das mesmas janelas de 7/14/21/28 dias atrás, e se houver um spike real escreva um report com as URLs quebradas e os referrers que apontam pra elas. Conforme roda, construa um histórico de padrões que indiquem problemas estruturais de rotas.\"</blockquote><p><em>A gente volta nele no final.</em></p>",
+                "descriptionWidth": "@2xl:w-2/3",
+                "notes": "<p>Truque anti-maldição-da-demo: disparar o prompt <strong>antes</strong> de começar a falar e revelar o resultado no último slide. Abrir o PostHog (ou Claude Code com o MCP) na frente da plateia, colar, e seguir. <strong>~15s</strong></p>"
+            },
+            "skill-harness": {
+                "template": "stacked",
+                "name": "Skill + harness",
+                "title": "Um scout é uma skill + um harness",
+                "description": "<div style=\"display:flex;gap:2rem\"><div style=\"flex:1\"><p><strong>A skill (quase tudo é markdown)</strong></p><ul><li>A lógica que antes era um emaranhado de <code>if/else</code> vira algumas centenas de linhas de inglês simples</li><li>Antes: <code>if response_rate &lt; 0.3 and sample_size &gt; 30:</code></li><li>Depois: \"a pesquisa NPS principal precisa de 30+ respostas semanais e queda de 10%+ no score antes de agir\"</li></ul></div><div style=\"flex:1\"><p><strong>O harness (encanamento fino)</strong></p><ul><li>Loop de agente + scheduler (maioria roda a cada hora)</li><li>Ferramentas: o mesmo MCP do PostHog que o Claude Code e o Cursor usam</li><li>Sandbox com token restrito ao projeto</li><li>Memória: um scratchpad simples (cursor, dedupe, achados \"abaixo da barra\")</li></ul></div></div>",
+                "notes": "<p>Só três ferramentas são exclusivas de scout: emitir sinal, ler/escrever o scratchpad e ver runs passados. Todo o resto é o MCP público — por isso o prompt do slide anterior funciona em qualquer lugar. \"English is the hottest new programming language\" (Karpathy). <strong>~50s</strong></p>"
+            },
+            "pipeline": {
+                "template": "stacked",
+                "name": "Pipeline",
+                "title": "Scout → sinal → report → ação",
+                "description": "<ol><li><strong>Scout roda</strong> no cronograma e inspeciona uma fatia dos dados</li><li><strong>Emite um sinal</strong> — achado semiestruturado com evidência e ação sugerida</li><li><strong>Sinais viram reports</strong> no Inbox (um report pode combinar sinais de várias fontes)</li><li><strong>Reports viram ação</strong> — por um humano, ou automaticamente por uma task do PostHog Code que abre um PR</li></ol>",
+                "descriptionWidth": "@2xl:w-2/3",
+                "notes": "<p>A parte difícil não é achar coisas — é <strong>não</strong> achar coisas. Um scout que dispara em qualquer oscilação treina você a ignorá-lo. A skill codifica contenção: barra pra falar, disqualifiers explícitos, dedupe e severidade P0–P4. <strong>~35s</strong></p>"
+            },
+            "superpower": {
+                "template": "stacked",
+                "name": "Superpoderes",
+                "title": "O superpoder: dar ao agente um modelo de validação + as ferramentas pra isso",
+                "description": "<p><strong>Case: a reescrita do SQL parser do PostHog</strong> (posthog.com/blog/sql-parser)</p><ul><li>O parser antigo (ANTLR/C++) virou o <strong>oráculo</strong>: \"ache um SQL onde os dois discordam, corrija, repita\"</li><li>Property-based testing + fuzzing guiado por cobertura rodando em background, alimentando o agente com casos que falham</li><li>Shadow mode em produção: milhões de parses sem divergência antes do switch</li><li>Resultado: ~16 mil linhas de Rust escritas pelo agente, <strong>centenas de vezes mais rápido em produção</strong>, trabalho de meses feito em dias</li></ul>",
+                "descriptionWidth": "@2xl:w-2/3",
+                "notes": "<p>Não foi vibe-coding. O segredo não é o modelo — é o <strong>loop de validação</strong>: um oráculo pra se comparar e ferramentas (ex.: MCP) pra rodar o loop sozinho. Scouts são o mesmo padrão aplicado a dados: o MCP é a ferramenta, e a skill diz o que é \"normal\" pra ele se validar contra. <strong>~60s</strong></p>"
+            },
+            "web-analytics": {
+                "template": "stacked",
+                "name": "Web analytics",
+                "title": "O mesmo padrão em web analytics: um scout pegando uma regressão de verdade",
+                "description": "<ul><li>O scout de <strong>performance de web analytics</strong> vigia cache coverage, p95 sem cache e taxa de falha das queries contra o baseline da própria frota</li><li>Pegou uma queda de cache coverage e abriu um report no Inbox — que chega direto no canal do time no Slack</li><li>Quando a métrica recuperou, ele <strong>editou o report existente com uma nota de update</strong> em vez de abrir outro: dedupe e contenção na prática</li><li>Por baixo, o padrão do slide anterior: a skill de query performance dá o modelo do que é \"lento/degradado\" e o MCP dá as ferramentas pra medir sozinho</li></ul>",
+                "descriptionWidth": "@2xl:w-2/3",
+                "notes": "<p>Mostrar o print da thread do Slack aqui (trocar de janela ou colar a imagem localmente). O update fecha o loop: ele não só acha a regressão, acompanha até ela sumir — e ninguém precisou montar dashboard nem lembrar de checar. <strong>~50s</strong></p>"
+            },
+            "demo-reveal": {
+                "template": "stacked",
+                "name": "De volta à demo",
+                "title": "O que o scout fez enquanto a gente conversava",
+                "description": "<ul><li>A skill que ele escreveu pra si mesmo — é markdown legível</li><li>O primeiro run: as queries na tabela <code>sessions</code> e o baseline que montou</li><li><strong>O report — ou a decisão de ficar quieto e o porquê</strong></li></ul><p><em>A contenção é a feature.</em></p>",
+                "descriptionWidth": "@2xl:w-2/3",
+                "notes": "<p>Voltar para a aba do slide 2 e mostrar o resultado. Plano B se o background não terminou: screenshots de um run feito em casa com o mesmo prompt. <strong>~45s</strong></p>"
+            },
+            "getting-started": {
+                "template": "stacked",
+                "name": "Comece hoje",
+                "title": "Comece pelo lado fácil do espectro",
+                "description": "<ul><li><strong>Leia:</strong> posthog.com/blog/what-is-a-scout e posthog.com/blog/sql-parser</li><li><strong>Ligue:</strong> Self-driving / Inbox (beta aberto) — ~20 scouts canônicos: experimentos, revenue, surveys, web analytics, feature flags…</li><li><strong>Escreva o seu:</strong> comece com algumas frases em inglês descrevendo o que é normal no seu produto — isso já é um scout</li><li><strong>Rode hoje:</strong> qualquer scout funciona no Claude Code / Cursor com o MCP do PostHog</li></ul>",
+                "descriptionWidth": "@2xl:w-2/3",
+                "notes": "<p>CTA final: descreva em texto o que é normal no seu produto. Isso já é um scout. <strong>~30s</strong></p>"
+            }
+        }
+    }
+}
