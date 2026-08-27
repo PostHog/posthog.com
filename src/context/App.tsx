@@ -12,6 +12,7 @@ import React, {
 import { AppWindow } from './Window'
 import { navigate } from 'gatsby'
 import { isSafeInternalPath } from 'lib/utils'
+import { getStorageItem, setStorageItem } from 'lib/storage'
 import SignIn from 'components/Squeak/components/Classic/SignIn'
 import Register from 'components/Squeak/components/Classic/Register'
 import ForgotPassword from 'components/Squeak/components/Classic/ForgotPassword'
@@ -1665,7 +1666,7 @@ const getInitialSiteSettings = (): SiteSettings => {
         screensaverDisabled: true,
         reduceTransparency: false,
         scrollbars: 'system',
-        ...(typeof window !== 'undefined' ? JSON.parse(localStorage.getItem('siteSettings') || '{}') : {}),
+        ...(typeof window !== 'undefined' ? JSON.parse(getStorageItem('siteSettings') || '{}') : {}),
     }
 
     const retiredWallpapers = ['action-figure', '2001-bliss', 'parade', 'coding-at-night']
@@ -2435,12 +2436,8 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
     }
 
     const updateSiteSettings = (settings: SiteSettings) => {
-        try {
-            setSiteSettings(settings)
-            localStorage.setItem('siteSettings', JSON.stringify(settings))
-        } catch (error) {
-            console.error('Failed to update site settings:', error)
-        }
+        setSiteSettings(settings)
+        setStorageItem('siteSettings', JSON.stringify(settings))
     }
 
     const animateClosingAllWindows = () => {

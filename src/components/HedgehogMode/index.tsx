@@ -1,4 +1,5 @@
 import React, { lazy, Suspense, useEffect, useSyncExternalStore } from 'react'
+import { getStorageItem, setStorageItem } from 'lib/storage'
 
 const HedgeHogModeRenderer =
     typeof window !== 'undefined'
@@ -13,14 +14,14 @@ const HEDGEHOG_MODE_STORAGE_KEY = 'hedgehog-mode-enabled'
 const listeners = new Set<() => void>()
 
 const getHedgehogModeEnabled = (): boolean => {
-    return typeof window !== 'undefined' && localStorage.getItem(HEDGEHOG_MODE_STORAGE_KEY) === 'true'
+    return getStorageItem(HEDGEHOG_MODE_STORAGE_KEY) === 'true'
 }
 
 const setHedgehogModeEnabledStore = (enabled: boolean): void => {
     if (typeof window === 'undefined') {
         return
     }
-    localStorage.setItem(HEDGEHOG_MODE_STORAGE_KEY, enabled.toString())
+    setStorageItem(HEDGEHOG_MODE_STORAGE_KEY, enabled.toString())
     listeners.forEach((listener) => listener())
 }
 
