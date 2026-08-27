@@ -14,6 +14,12 @@ There are still some best practices we can follow to collaborate with the custom
 - Customize the template with the goals, specific products and commitments that make sense for your customer's use case.
 - Share with customer, ideally as a Slack Canvas
 
+## Focus on the outcomes that matter most 
+Use this plan to align on the customer outcome you want to improve and the milestones that will show progress.
+When customizing the plan, work backwards from the customer's primary goal:
+**Business/product goal → baseline → PostHog use case → expected behavior change → measurable outcome**
+PostHog product adoption should support that goal, rather than become the goal itself. Add products or workflows when they help the customer make progress toward the agreed outcome.
+
 # Template
 ## PostHog 30-Day success plan
 **Customer:** [Customer Name] | **CSM:** CSM or AE NAME | **Start Date:** [Date]
@@ -45,12 +51,12 @@ There are still some best practices we can follow to collaborate with the custom
 **Weekly check-in:** [Day/Time] - 30 minutes
 - What findings have you learned from the first few insights you set up?
 - Have you come across any points of friction in the setup or areas of the product you're struggling to understand?
-- What are the next actions steps for us to follow up with in the next meeting?
+- What are the next action steps for us to follow up with in the next meeting?
 
 ---
 
-### Week 2-3: Feature Adoption & Optimization
-**Goal: Expand usage across your team**
+### Week 2-3: Use Case Adoption & Optimization
+**Goal: Make the customer's primary PostHog workflow repeatable and useful**
 
 #### Together We'll:
 - **Session Replay:** Set up recordings for your key user flows
@@ -97,9 +103,9 @@ There are still some best practices we can follow to collaborate with the custom
 | SDK Validated | Day 2 | Data flowing correctly into PostHog | ⏳ |
 | Custom Events Defined | Day 3 | Business-specific tracking configured | ⏳ |
 | Feature Flags & Groups Setup | Day 5 | B2B tracking and flags operational | ⏳ |
-| Team Trained | Day 7 | 3+ people actively using | ⏳ |
+| Relevant Team Enabled | Day 7 | People responsible for the primary use case can use the required workflow | ⏳ |
 | Actionable Insights | Day 10 | 2+ specific findings identified | ⏳ |
-| Feature Expansion | Day 20 | 2+ products actively used | ⏳ |
+| Use Case Adoption | Day 20 | Customer can use PostHog to support their primary use case by using at least 2 products | ⏳ |
 | Business Impact | Day 28 | Measurable metric improvement | ⏳ |
 
 ---
