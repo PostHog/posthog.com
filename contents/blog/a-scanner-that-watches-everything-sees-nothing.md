@@ -26,7 +26,7 @@ Replay Vision fixes the watching part. It does not fix the thinking part.
 
 We learned this the annoying (but expected) way. Some scanners pointed us to bugs we could then verify in the linked recordings. Some showed us exactly where a flow became confusing. Others produced plausible descriptions of sessions that nobody wanted to read. The model was not the main difference. The scanner either had a real job or it did not.
 
-Throughout all of this, we've learned that useful scanners have three things: a visible question, a narrow recording set, and permission to answer "no" or "inconclusive". You must still bring the judgment.
+Useful scanners have three things: a visible question, a narrow recording set, and permission to answer "no" or "inconclusive." You still have to bring the judgment.
 
 <!-- screenshot placeholder: replay vision overview
 show: the scanner list and recent observation counts, using only PostHog dogfood data
@@ -57,11 +57,11 @@ privacy: use a PostHog-owned scanner and remove IDs or user details
 alt: "a Replay Vision scanner with a narrow recording query and one question"
 -->
 
-There is another boundary that matters, too. One observation is one scanner applied to one recording. That observation cannot compare itself with sessions it hasn't seen itself.
+There is another boundary that matters, too. One observation is one scanner applied to one recording. That observation cannot compare itself with sessions it hasn't seen.
 
 For an experiment, the scanner can classify what happened to one participant after exposure. Use the same rubric for every variant. A [Digest](/docs/replay-vision/actions), Scout, or another agent can compare patterns across the resulting observations. Asking the per-recording scanner to compare variants only invites it to invent the missing half.
 
-The same rule applies elsewhere. A scanner can describe one recording before a low-NPS response. A Scout can look for repeated friction across several sessions from one respondent, or across many respondents, who gave low-NPS scores. A scanner can classify one conversion session. Product Analytics can compare the classifier results for converters and drop-offs.
+The same rule applies elsewhere. A scanner can describe one recording before a low-NPS response. A Scout can look for repeated friction across several sessions from one respondent, or across many low-NPS respondents. A scanner can classify one conversion session. Product Analytics can compare the classifier results for converters and drop-offs.
 
 ### Scanners can look for upside too
 
@@ -71,7 +71,7 @@ We still run them because they work. Dead clicks, broken renders, and setup loop
 
 One watches first sessions from high-fit signups and writes the trip report we would never produce consistently by hand. What did the person evaluate? How far did they get? What slowed them down? Another reconstructs how people investigate Error Tracking issues. It records the entry point, data consulted, impact assessment, queries, actions, and outcome.
 
-These scanners do not magically tell us what to build, though when prompted and aimed properly, they have yielded valuable feature development ideas. They show the workflows people attempted, the manual work they repeated, and the product questions worth investigating. Treat each finding as a hypothesis. Product judgment remains a human problem, which is fortunate for those of us employed to provide it.
+These scanners do not magically tell us what to build. When we aim them well, they produce feature ideas worth testing. They show the workflows people attempted, the manual work they repeated, and the product questions worth investigating. Treat each finding as a hypothesis. Product judgment remains a human problem, which is fortunate for those of us employed to provide it.
 
 We call these opportunity miners. Bug scanners raise the floor. Opportunity miners raise the roof.
 
@@ -98,9 +98,9 @@ This sounds conservative and *gasp* boring. Good. A scanner that is never allowe
 
 ### "Inconclusive" is a feature
 
-Our ghost-bug scanner is deliberately harsh. It watches people using Replay Vision and looks for one class of problem: the product contradicting itself or sending someone into a dead end in a way we designed (whether intentionally or unintentionally).
+Our ghost-bug scanner is deliberately harsh. It watches people using Replay Vision and looks for one class of problem: the product contradicting itself or sending someone into a dead end our product created.
 
-In the first three weeks since launch, it produced 3,032 observations. Only 29 were "yes" results. The rest were "no" or "inconclusive".
+In the first three weeks since launch, it produced 3,032 observations. Only 29 returned "yes." The rest returned "no" or "inconclusive."
 
 That does not prove the scanner was accurate 29 times. An inconclusive result can also mean the recording query reached beyond the prompt's evaluable surface. The result still tells us something useful: the scanner refused to turn most ordinary sessions into findings. The yes pile stayed small enough for a person to inspect.
 
@@ -140,7 +140,7 @@ alt: "the Replay Vision scanner wizard sending a user into project settings"
 
 ### Observations are a new event shape
 
-Events tells us what fired, while Replay Vision shows what the person experienced around the event that fired. This judgment becomes data too.
+Events tell us what fired. Replay Vision shows what the person experienced around the event. This judgment becomes data too.
 
 Each succeeded observation is emitted as a queryable `$recording_observed` event. A monitor contributes a verdict. A classifier contributes a tag. Scorers and summarizers contribute their own structured outputs. The event also carries confidence and citations back to the recording.
 
@@ -148,7 +148,7 @@ It is still a model's judgment, not ground truth, so the confidence and recordin
 
 That creates a new behavioral event shape: an evidence-backed judgment about what happened inside one recording. Define the judgment once, then apply it to every matching recording. You can query it, chart it, break it down, or alert on it alongside the rest of your product data.
 
-An event can say someone abandoned signup. An observation can show the contradictory copy they read before leaving. An event can say someone clicked summarize. An observation can show a populated trace that the product wrongfully summarized as empty. An event can say setup completed. An observation can show that the person got there only after painfully hunting, scrolling, and backtracking.
+An event can say someone abandoned signup. An observation can show the contradictory copy they read before leaving. An event can say someone clicked summarize. An observation can show a populated trace that the product incorrectly summarized as empty. An event can say setup completed. An observation can show that the person got there only after painfully hunting, scrolling, and backtracking.
 
 Observations do not replace events. They add a queryable judgment about what happened before, between, and after them.
 
@@ -162,11 +162,11 @@ alt: "Replay Vision observations queried as behavioral events in PostHog"
 
 ## 3. Calibrate human judgment
 
-A scanner does not automatically earn it's trust when you save it... It earns it's trust when you validate or invalidate its first observations and improve the configuration.
+A scanner does not automatically earn trust when you save it. It earns trust when you check its first observations against their recordings and improve the configuration.
 
-Create the scanner, then run it against a small batch of recent recordings (the backfill feature makes this easy). Open the observations beside their source recordings. Look for overclaims, missed proof, weak tags, and instructions that looked clear until the model interpreted them literally.
+Create the scanner, then run it against a small batch of recent recordings. The [bulk scan action](/docs/replay-vision/running-scanners#from-the-recordings-list) makes this easy. Open the observations beside their source recordings. Look for overclaims, missed proof, weak tags, and instructions that looked clear until the model interpreted them literally.
 
-You can do this in bulk using the the Calibration tab. Add a sentence when it got the premise wrong. PostHog AI can use that feedback to iterate on the prompt.
+Use the Calibration tab as a review queue. Rate each result, and add a sentence when it got the premise wrong. PostHog AI can use that feedback to iterate on the prompt.
 
 <!-- screenshot placeholder: calibration loop
 show: several rated observations, one written correction, and a PostHog AI configuration recommendation
@@ -177,28 +177,30 @@ alt: "calibrating a Replay Vision scanner with observation ratings and written f
 
 The goal is a short first feedback loop, not a perfect prompt.
 
-The model changes the quality and cost of each observation, so calibrate it too. Start with the `Standard`. If the observations are close but not quite right, tighten the prompt before reaching for the `Pro` model. A sharper instruction often fixes the problem.
+The model changes the quality and cost of each observation, so calibrate it too. Start with Gemini 3 Flash, the default. If the observations are close but not quite right, tighten the prompt before reaching for Gemini 3.7 Flash. A sharper instruction often fixes the problem.
 
 These examples are our starting points. Calibration gets final say.
 
-Use the `Lite` model for high-volume jobs where you care about the distribution, not one observation. Our broken-render classifier is the obvious example. It tags recordings as `nothing_broken`, `media_failed`, `clipped_layout`, or `horizontal_overflow`. One wrong tag nudges a trend (instead of opening a ticket).
+Use Gemini 3.5 Flash Lite for high-volume jobs where you care about the distribution, not one observation. Our broken-render classifier is the obvious example. It tags recordings as `nothing_broken`, `media_failed`, `clipped_layout`, or `horizontal_overflow`. One wrong tag nudges a trend instead of opening a ticket.
 
-Use the `Standard` model when the job combines a fixed rubric with some judgment. An experiment classifier typically fits well here. It can tag each post-exposure recording as `smooth`, `hesitation`, `confusion`, `error_or_dead_end`, or `inconclusive`. The scanner judges one recording, and the Digest (or whatever Scout you set up) compares the pattern across variants.
+Use Gemini 3 Flash when the job combines a fixed rubric with some judgment. An experiment classifier typically fits well here. It can tag each post-exposure recording as `smooth`, `hesitation`, `confusion`, `error_or_dead_end`, or `inconclusive`. The scanner judges one recording, and the Digest or Scout compares the pattern across variants.
 
-Use the `Pro` model when a person may act on a single observation. Our ghost-bug scanner must verify both halves of a contradiction before it says yes. A high-ICP onboarding scanner reconstructs one signup journey that a product team may inspect immediately. In both cases, a plausible wrong answer wastes someone's time, so the extra resources the `Pro` model uses tends to be worth it.
+Use Gemini 3.7 Flash when a person may act on a single observation. Our ghost-bug scanner must verify both halves of a contradiction before it says yes. A high-ICP onboarding scanner reconstructs one signup journey that a product team may inspect immediately. In both cases, a plausible wrong answer wastes someone's time. Calibration will tell you whether the more expensive model earns its keep.
 
 Choose the model based on the cost of a wrong answer, not the fanciness of the prompt. You can change the model later. The scanner type is the decision that gets locked when you create it.
 
 <!-- screenshot placeholder: model choice with examples
-show: the Lightweight, Standard, and Premium options in the scanner editor
-annotation: pair Lightweight with broken-render tagging, Standard with experiment classification, and Premium with contradiction or high-ICP investigation
+show: the Gemini 3.5 Flash Lite, Gemini 3 Flash, and Gemini 3.7 Flash options in the scanner editor
+annotation: pair Gemini 3.5 Flash Lite with broken-render tagging, Gemini 3 Flash with experiment classification, and Gemini 3.7 Flash with contradiction or high-ICP investigation
 privacy: no recording or customer data should appear
-alt: "Lightweight, Standard, and Premium model choices for Replay Vision scanners"
+alt: "Gemini model choices for Replay Vision scanners"
 -->
 
 Context changes the answer too. A scanner produces more specific judgments when it knows the real product surface and relevant cohort. It also needs the selection event and the decision behind the question. Use the actual labels and states from your product in the scanner's prompt. Point the scanner at the experiment, survey response, funnel step, feature flag, or whatever else it is that gives the recording meaning.
 
-[PostHog AI](/ai) can inspect the context already in PostHog A coding agent such as Claude Code or Codex can add codebase context through the [PostHog MCP server](/docs/replay-vision/mcp). If you use PostHog Self-Driving, PostHog can also add the codebase context. That is useful when the code helps the agent choose real events, URLs, labels, and workflows. More context for its own sake is just a longer route to plausible mush.
+[PostHog AI](/ai) can inspect the context already in PostHog. A coding agent such as Claude Code or Codex can add codebase context through the [PostHog MCP server](/docs/replay-vision/mcp). That is useful when the code helps the agent choose real events, URLs, labels, and workflows. More context for its own sake is just a longer route to plausible mush.
+
+If you [connect GitHub](/docs/libraries/github) and turn on [self-driving](/docs/self-driving), PostHog's agents can also inspect your codebase after a scanner finding becomes a signal. They can investigate it, write the change, and open a pull request for you to review.
 
 PostHog already keeps recordings right beside events, cohorts, experiments, surveys, feature flags, and Product Analytics. The agent can use that context to aim the scanner without building another integration first.
 
