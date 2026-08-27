@@ -12,7 +12,7 @@
                 "name": "Scouts",
                 "title": "What is a scout?",
                 "description": "\"A scout is a small agent (don't overthink that word) that looks at, wrangles, and makes sense of any data available in PostHog.\"",
-                "descriptionWidth": "@2xl:w-1/2",
+                "descriptionWidth": "@2xl:w-2/5",
                 "notes": "<p>Opening line straight from Andy's post. Real examples: bundle size, CSP/web vitals, 404s, code complexity. <strong>~30s</strong></p>"
             },
             "migration": {
@@ -49,23 +49,6 @@
                 "imageAlt": "PostHog mail hedgehog",
                 "description": "<ul><li><em>\"A scout runs on a schedule, looks at some slice of your PostHog data, and decides whether anything is worth surfacing.\"</em></li><li><em>\"If it is, the scout emits a signal – a semi-structured finding with evidence, and a suggested action.\"</em></li><li><em>\"Signals get picked up by the self-driving pipeline, grouped, and turned into reports that land in your PostHog Inbox.\"</em></li><li><em>\"Reports get actioned – by you, or automatically by a PostHog Code task that picks up the report and ships a fix or improvement.\"</em></li></ul><p><em>\"Once the PR merges, the change generates new signals, so your product keeps improving itself over time.\"</em></p>",
                 "notes": "<p>The four steps, verbatim from the post. Restraint is the hard part – disqualifiers, dedupe keys, P0–P4 severity. <strong>~35s</strong></p>"
-            },
-            "self-driving": {
-                "template": "stacked",
-                "name": "Self-driving",
-                "title": "Signals → Inbox → Pull requests",
-                "image": "/images/presentations/shipaton/self-driving.png",
-                "imageAlt": "The self-driving section of posthog.com with Signals, Scouts, Inbox and Pull requests tabs",
-                "description": "<p><em>\"Self-driving is PostHog using your product data as context to proactively improve your product.\"</em> ... <em>\"You're in control to review and merge everything. Nothing ships without you.\"</em></p><p><a href=\"/self-driving\">posthog.com/self-driving</a> · <a href=\"/pocket-guides/self-driving/101\">pocket guide: Self-driving 101</a></p>",
-                "notes": "<p>Screenshot of the public page; quotes from the Self-driving 101 pocket guide. Scouts are one of four pieces: signals in, Inbox prioritizes, PRs out – and nothing merges without a human. <strong>~15s</strong></p>"
-            },
-            "superpower": {
-                "template": "stacked",
-                "name": "Superpowers",
-                "title": "The superpower: an oracle + the tools to test against it",
-                "description": "<p><strong>Rewriting PostHog's SQL parser</strong> (posthog.com/blog/sql-parser):</p><ul><li><em>\"Having an oracle was critical ... finding some SQL that the parsers disagreed on, fixing the new parser to agree, and repeating.\"</em></li><li><em>\"In shadow mode, I was able to test millions of parses quickly and there were zero divergences.\"</em></li><li><em>\"On production queries, it was on average 454x faster than the previous parser.\"</em></li><li><em>\"It was entirely written by Claude Opus 4.7, in Rust\"</em> – and still: <em>\"I wouldn't call this 'vibe-coded' at all.\"</em></li></ul>",
-                "descriptionWidth": "@2xl:w-2/3",
-                "notes": "<p>The secret is not the model – it is the validation loop: an oracle to compare against and tools (like MCP) to run the loop alone. Scouts are the same pattern applied to data. <strong>~60s</strong></p>"
             },
             "web-analytics": {
                 "template": "stacked",
