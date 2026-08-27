@@ -30,7 +30,7 @@ We're busy people with spinning multiple plates around here, so the idea never g
 
 Here's how, and why now.
 
-## Why we finally decided to write a brand study
+## Why we finally decided to write a data study
 
 So what changed? Two things.
 
@@ -54,7 +54,7 @@ What's the angle? What's the headline? Which graphs and visualizations would bes
 
 That's what I signed up for when I decided to become a marketer, and now it's most of the job I've got.
 
-## How I actually wrote the brand study 
+## How I actually wrote it
 
 Onto the meat and potatoes: how did this actually come together? Here's roughly what we did, in order.
 
@@ -66,14 +66,15 @@ I gave my agent a few guardrails to help me brainstorm: no PII, has to be data w
 
 I also wanted to write about a tool I know well, so I seeded it with my favourites ([session replay](/session-replay), [error tracking](/error-tracking), [AI observability](/ai-observability), and [the MCP](/mcp) itself) and let it argue back.
 
-> Prompt I used: You're helping me pick the angle for a data study (a short, very data-heavy blog post built entirely on PostHog's own first-party data). You have the PostHog MCP connected, so check event definitions and property definitions before you pitch me anything.
+> **Prompt I used: **You're helping me pick the angle for a data study (a short, very data-heavy blog post built entirely on PostHog's own first-party data). You have the PostHog MCP connected, so check event definitions and property definitions before you pitch me anything.
 > 
 > Hard guardrails:
 > - No PII, and nothing that identifies a specific customer, company, or user. Aggregates only.
 > - It has to be data we ALREADY collect. No "we should start tracking X."
 > - It has to be pullable in a handful of SQL queries.
 > - It has to be something PostHog would be comfortable publishing.
-> 
+>
+>
 > I want to write about a product I know well, so bias toward session replay, error tracking, AI observability, and the MCP itself, but don't limit yourself to those if there are other interesting alternatives. Give me 6 potential angles. For each one, add the specific events/properties you'd query to prove it, roughly how many charts it produces, and what they'd show. Then rank them: most interesting to a general tech audience, and easiest to actually pull. If those two rankings disagree, say so.
 
 **2. Pull the data with PostHog AI, straight into a notebook.** 
@@ -82,7 +83,7 @@ Once I decided to focus on session replay and [Replay Vision](/replay-vision), I
 
 ![Notebook](https://res.cloudinary.com/dmukukwp6/image/upload/pasted_image_2026_08_17_T21_50_42_567_Z_b0253c8490.png)
 
-> Prompt I used: Make me a notebook called "Replay data study" with every
+> **Prompt I used:** Make me a notebook called "Replay data study" with every
 query and its SQL, so I can re-run them later. Cross-tenant, last 90 days.
 >
 > 1. Every time someone opened the player and watched – how long? Median and full distribution.
@@ -91,6 +92,7 @@ query and its SQL, so I can re-run them later. Cross-tenant, last 90 days.
 > 4. Recordings captured per company. Median and mean separately.
 > 5. Distinct people who watched anything, and replays per watcher.
 > 6. Playback speed when people change it.
+>
 >
 > If a number can't be pulled, explain why and give me alternatives.
 
