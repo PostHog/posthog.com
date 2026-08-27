@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { IconCheck, IconCopy } from '@posthog/icons'
 import OSButton from 'components/OSButton'
-import { IconAnthropic, IconOpenAI } from 'components/OSIcons'
+import { IconClaudeCode, IconOpenAI } from 'components/OSIcons'
 import { Popover } from 'components/RadixUI/Popover'
 import usePostHog from 'hooks/usePostHog'
 
@@ -20,7 +20,8 @@ const ASSISTANTS = [
     {
         provider: 'claude' as const,
         label: 'Open in Claude',
-        Icon: IconAnthropic,
+        Icon: IconClaudeCode,
+        iconClassName: 'text-primary [&_path]:!fill-current',
         url: `https://claude.ai/new?q=${encodeURIComponent(PROMPT)}`,
     },
 ]
@@ -114,7 +115,7 @@ export default function AgentEstimateLink({
                     </OSButton>
                     <div className="flex items-center gap-0.5">
                         <span className="text-xs text-muted whitespace-nowrap mr-0.5">or open in</span>
-                        {ASSISTANTS.map(({ provider, label: assistant, url, Icon }) => (
+                        {ASSISTANTS.map(({ provider, label: assistant, url, Icon, iconClassName }) => (
                             <OSButton
                                 key={provider}
                                 asLink
@@ -122,7 +123,7 @@ export default function AgentEstimateLink({
                                 hideExternalIcon
                                 to={url}
                                 size="sm"
-                                icon={<Icon />}
+                                icon={<Icon className={iconClassName} />}
                                 tooltip={assistant}
                                 tooltipSide="bottom"
                                 aria-label={assistant}
