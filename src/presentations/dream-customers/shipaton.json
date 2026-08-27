@@ -15,21 +15,13 @@
                 "descriptionWidth": "@2xl:w-1/2",
                 "notes": "<p>Elevator pitch e definição em uma linha. Hogzilla de fundo, como na home. Exemplos reais: bundle size, CSP/web vitals, 404s, complexidade de código. <strong>~30s</strong></p>"
             },
-            "demo-kickoff": {
-                "template": "stacked",
-                "name": "Demo em background",
-                "title": "Antes de tudo: dispare a demo",
-                "description": "<p><strong>Prompt para colar ao vivo e deixar rodando enquanto a gente conversa:</strong></p><p><em>\"Quero um scout que vigie 404s: pegue as entry paths com status not-found dos últimos 7 dias, compare com o baseline das mesmas janelas de 7/14/21/28 dias atrás, e se houver um spike real escreva um report com as URLs quebradas e os referrers que apontam pra elas. Conforme roda, construa um histórico de padrões que indiquem problemas estruturais de rotas.\"</em></p><p>A gente volta nele no final.</p>",
-                "descriptionWidth": "@2xl:w-2/3",
-                "notes": "<p>Truque anti-maldição-da-demo: disparar o prompt antes de começar a falar e revelar o resultado no penúltimo slide. <strong>~15s</strong></p>"
-            },
             "skill-harness": {
                 "template": "stacked",
                 "name": "Skill + harness",
                 "title": "Um scout é uma skill + um harness",
                 "description": "<p><strong>A skill (quase tudo é markdown):</strong> a lógica de negócio que era um emaranhado de if/else vira algumas centenas de linhas de inglês simples. \"A pesquisa NPS principal precisa de 30+ respostas semanais e queda de 10%+ no score antes de agir.\"</p><p><strong>O harness (encanamento fino):</strong></p><ul><li>Loop de agente + scheduler – a maioria roda a cada hora</li><li>Ferramentas: o mesmo MCP do PostHog que o Claude Code e o Cursor usam</li><li>Sandbox com token restrito ao projeto + scratchpad com cursor, dedupe e achados \"abaixo da barra\"</li></ul>",
                 "descriptionWidth": "@2xl:w-2/3",
-                "notes": "<p>Só três ferramentas são exclusivas de scout: emitir sinal, ler/escrever o scratchpad e ver runs passados. O resto é o MCP público – por isso o prompt do slide anterior funciona em qualquer lugar. \"English is the hottest new programming language\" (Karpathy). <strong>~50s</strong></p>"
+                "notes": "<p>Só três ferramentas são exclusivas de scout: emitir sinal, ler/escrever o scratchpad e ver runs passados. O resto é o MCP público – por isso qualquer scout roda também no Claude Code ou Cursor. \"English is the hottest new programming language\" (Karpathy). <strong>~50s</strong></p>"
             },
             "scout-fleet": {
                 "template": "stacked",
@@ -80,15 +72,6 @@
                 "image": "/images/presentations/shipaton/scout-cache-coverage.png",
                 "imageAlt": "Report do scout de performance de web analytics no Slack",
                 "notes": "<p>Imagem local: soltar scout-cache-coverage.png em static/images/presentations/shipaton/ no checkout (não commitada – métricas internas). O update fecha o loop – sem dashboard novo, sem ninguém precisar lembrar de checar. Beat de humor: a última resposta da thread. <strong>~20s</strong></p>"
-            },
-            "demo-reveal": {
-                "template": "stacked",
-                "name": "De volta à demo",
-                "title": "O que o scout fez enquanto a gente conversava",
-                "image": "https://res.cloudinary.com/dmukukwp6/image/upload/detective_hog_9b2bb1da51.png",
-                "imageAlt": "Hedgehog detetive do PostHog",
-                "description": "<ul><li>A skill que ele escreveu pra si mesmo – markdown legível, não config</li><li>O primeiro run: as queries na tabela sessions e o baseline que montou</li><li><strong>O report – ou a decisão de ficar quieto e o porquê</strong></li></ul>",
-                "notes": "<p>Trocar pra aba do slide 2 e mostrar o resultado ao vivo. A contenção é a feature. Plano B: screenshots de um run feito em casa com o mesmo prompt. <strong>~45s</strong></p>"
             },
             "getting-started": {
                 "template": "stacked",
