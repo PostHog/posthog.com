@@ -33,9 +33,7 @@ The team will advise on what else is in progress and whether your timeline is re
 
 ### 3. Agree on the example use case
 
-Decide which example or use case the video will show before you write the storyboard. Product marketer should lead this and collaborate with product manager / product team.
-
-A good example use case:
+Product marketer should lead this and collaborate with product manager / product team. A good example use case:
 
 - Comes from our own use of the product, with something real you can put on screen, like a PR, a report, or a session recording.
 - Shows what only this product can do. If another PostHog product could have surfaced the same thing, the example isn't making the case.
