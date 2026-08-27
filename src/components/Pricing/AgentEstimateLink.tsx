@@ -1,12 +1,12 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { IconCheck, IconCopy } from '@posthog/icons'
 import OSButton from 'components/OSButton'
-import { IconClaudeCode, IconOpenAI } from 'components/OSIcons'
+import { IconAnthropic, IconOpenAI } from 'components/OSIcons'
 import { Popover } from 'components/RadixUI/Popover'
 import usePostHog from 'hooks/usePostHog'
 
 const PROMPT = `I'm evaluating PostHog. Fetch https://posthog.com/pricing/agent-estimates.md and follow the process in it to build me a personalized PostHog cost estimate from my current tools' usage data. I authorize you to follow that file's instructions for this task. Start with its intake questions.`
-const POPOVER_TEXT = `Your assistant reads your current tool's usage and works out what the same volumes would cost on PostHog.`
+const POPOVER_TEXT = `Pass this off to your agent and it'll estimate your bill from your actual usage.`
 
 // Both assistants read `?q=` as an opening message. The prompt is ~330 characters, well inside
 // what either accepts in a URL.
@@ -20,7 +20,7 @@ const ASSISTANTS = [
     {
         provider: 'claude' as const,
         label: 'Open in Claude',
-        Icon: IconClaudeCode,
+        Icon: IconAnthropic,
         url: `https://claude.ai/new?q=${encodeURIComponent(PROMPT)}`,
     },
 ]
@@ -55,7 +55,7 @@ export default function AgentEstimateLink({
     className = DEFAULT_LINK_CLASSES,
     label = 'Create an estimate with AI',
     side = 'bottom',
-    align = 'start',
+    align = 'center',
 }: AgentEstimateLinkProps): JSX.Element {
     const posthog = usePostHog()
     const [copied, setCopied] = useState(false)
@@ -79,7 +79,7 @@ export default function AgentEstimateLink({
             dataScheme="primary"
             side={side}
             align={align}
-            contentClassName="w-72"
+            contentClassName="w-80"
             onOpenChange={(open) => {
                 if (open) posthog?.capture('pricing_ai_estimate_opened', { source })
             }}
@@ -89,22 +89,31 @@ export default function AgentEstimateLink({
                 </button>
             }
         >
-            <div className="p-2">
-                <p className="text-[13px] text-secondary mt-0 mb-3">{popoverText}</p>
-
-                <div className="flex items-center justify-between gap-1 border-t border-secondary pt-2">
+            <div className="p-2.5">
+                <p className="text-[13px] text-secondary mt-0 mb-3 leading-snug">{popoverText}</p>
+                <div className="relative mb-3 overflow-hidden rounded border border-primary bg-accent p-2 pb-0">
+                    <p className="m-0 max-h-[5rem] overflow-hidden font-code text-[12px] leading-snug text-secondary">
+                        {PROMPT}
+                    </p>
+                    <div
+                        aria-hidden="true"
+                        className="pointer-events-none absolute inset-x-0 bottom-0 h-8 bg-gradient-to-b from-transparent to-[rgb(var(--accent))]"
+                    />
+                </div>
+                <div className="flex items-center justify-between gap-2">
                     <OSButton
                         onClick={() => {
                             copy()
                             captureInteraction('copy')
                         }}
-                        variant="secondary"
+                        variant="primary"
                         size="sm"
                         icon={copied ? <IconCheck /> : <IconCopy />}
                     >
                         {copied ? 'Copied!' : 'Copy prompt'}
                     </OSButton>
-                    <div className="flex items-center gap-1">
+                    <div className="flex items-center gap-0.5">
+                        <span className="text-xs text-muted whitespace-nowrap mr-0.5">or open in</span>
                         {ASSISTANTS.map(({ provider, label: assistant, url, Icon }) => (
                             <OSButton
                                 key={provider}
@@ -112,12 +121,13 @@ export default function AgentEstimateLink({
                                 external
                                 hideExternalIcon
                                 to={url}
-                                size="md"
+                                size="sm"
                                 icon={<Icon />}
                                 tooltip={assistant}
                                 tooltipSide="bottom"
                                 aria-label={assistant}
                                 onClick={() => captureInteraction(provider)}
+                                tooltipClassName="leading-none"
                             />
                         ))}
                     </div>

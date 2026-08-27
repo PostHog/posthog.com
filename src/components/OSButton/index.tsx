@@ -56,6 +56,7 @@ interface OSButtonProps extends Omit<React.ButtonHTMLAttributes<HTMLButtonElemen
     zoomHover?: boolean | 'xs' | 'sm' | 'md' | 'lg'
     hover?: 'border' | 'background'
     windowButton?: boolean
+    tooltipClassName?: string
 }
 
 export default function OSButton({
@@ -85,6 +86,7 @@ export default function OSButton({
     state = {},
     zoomHover,
     hover = 'border',
+    tooltipClassName = '',
     ...props
 }: OSButtonProps) {
     const baseClasses = `relative items-center rounded ${
@@ -286,7 +288,13 @@ export default function OSButton({
     )
 
     return tooltip ? (
-        <Tooltip delay={tooltipDelay} side={tooltipSide} sideOffset={tooltipSideOffset[size]} trigger={buttonElement}>
+        <Tooltip
+            className={tooltipClassName}
+            delay={tooltipDelay}
+            side={tooltipSide}
+            sideOffset={tooltipSideOffset[size]}
+            trigger={buttonElement}
+        >
             {tooltip}
         </Tooltip>
     ) : (
