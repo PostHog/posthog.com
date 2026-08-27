@@ -203,6 +203,7 @@ export default function DisplayOptions() {
     const [hedgehogModeEnabled, setHedgehogModeEnabled] = useHedgehogMode()
 
     const handleColorModeChange = (value: string) => {
+        if (!value) return
         if (typeof window !== 'undefined' && (window as any).__setPreferredTheme) {
             const newTheme = window.__setPreferredTheme(value)
             updateSiteSettings({

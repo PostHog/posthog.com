@@ -18,6 +18,12 @@ When an email bounces, is rejected, or receives a complaint, the failure details
 
 To find affected invocations, go to the workflow's **Metrics** tab and click a metric tile like **Bounced** or **Blocked**. This navigates to the **Invocations** tab with a log filter applied, showing all invocations that experienced that failure type within the selected timeframe.
 
+## Need to stop runs that are already in flight?
+
+Cancel them from the workflow's **Invocations** tab. Each in-flight run has a **Cancel** button, and **Cancel in-flight runs** stops all of them at once. A batch run has a **Stop** button that also halts audience enrollment. Canceling doesn't undo steps that already ran or recall sent messages.
+
+Disabling a workflow doesn't cancel in-flight runs: parked runs stay parked, and each one is canceled only when it next wakes while the workflow is still disabled. See [stopping runs](/docs/workflows/editing-live-workflows#stopping-runs) for the full behavior.
+
 ## Variables not populating?
 
 Confirm the property exists on the person profile (e.g. `person.name`).

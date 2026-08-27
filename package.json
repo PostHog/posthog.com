@@ -31,7 +31,7 @@
         "update-sprite": "svg-sprite -s --symbol-dest src/components/productFeature/images/icons --symbol-sprite sprited-icons.svg src/components/productFeature/images/icons/*.svg",
         "test-redirects": "jest scripts",
         "test:bundle": "node --test scripts/bundle/check-eager-graph.test.mjs",
-        "test:navs": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON --test src/navs/activeMenu.test.ts",
+        "test:navs": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON --test src/navs/activeMenu.test.ts src/navs/applicationMetrics.test.ts",
         "test:sdk-references": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON --test src/components/SdkReferences/utils.test.ts",
         "check-links-post-build": "node scripts/check-links-post-build.js",
         "check-src-links": "node scripts/check-src-links.js",

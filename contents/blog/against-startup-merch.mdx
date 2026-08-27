@@ -1,0 +1,108 @@
+---
+title: "Your startup shouldn't have merch"
+date: 2026-08-25
+author:
+    - ian-vanagas
+featuredImage: >-
+    https://res.cloudinary.com/dmukukwp6/image/upload/merch_9637e187f8.png
+featuredImageType: full
+category: Inside PostHog
+tags:
+  - Marketing
+  - Culture
+---
+
+Lots of people praise PostHog's [merch](/merch). It inspires startups to want to create merch of their own. After all, how hard could it be to create a t-shirt?
+
+Hard! And it's not just t-shirts. 
+
+We're flattered that we inspire startups to pursue merch of their own, but the journey of merch at PostHog should be a cautionary tale, not an inspiration. This post explains why.
+
+## Why startups want merch and why they are wrong
+
+There are many reasons startups want merch:
+
+- Other companies have it and they feel left out.
+- They want something to wear themselves.
+- They want their customers and fans to wear it, some might even ask for it.
+- They think they could sell the merch and make a little money capitalizing on the brand they built.
+- They think of a lot of fun things to put their logo on like sweater vests, iPhone cases, and water bottles.
+- Having cool merch is a way to build a brand. 
+
+All of these aspirations start to quickly fall apart once they learn how difficult it is. 
+
+- Just because printing a t-shirt is easy does not mean that it will look nice or fit well. The defaults for basically every item suck. 
+
+- Just sticking your logo on something does not make it nice. Merch needs proper design. 
+
+- Even distributing a few t-shirts to team members not located in the same place can become a logistical nightmare. 
+
+- Distributing these to non-team members in countries around the world is even scarier. 
+
+- Want to sell something online? Congrats, you are now an ecommerce site operator with all the set up and maintenance that entails. 
+
+- Between sourcing, design, manufacturing, distribution, and giveaways (to employees and customers), it is almost certain this is a money losing endeavor.
+
+Still with me? Want to know how we know all of this? Read on.
+
+## Our journey to find the right fulfillment partner
+
+Merch started in 2020 with <TeamMember name="James Hawkins" photo /> emailing users for their address and size, ordering merch and having it delivered to his house, and him then posting it internationally to them. We used print-on-demand dropshippers for this. 
+
+We eventually upgraded to a proper merch fulfillment company, but that wasn't the end. We ended up using five separate fulfillment partners in as many years of doing merch at PostHog.
+
+We used this second, proper merch fulfillment company for the longest (2021-2024). Problems really started popping up in April 2024 when we found a huge list of unfulfilled orders dating back to January. PostHog had been automarking these orders as fulfilled so our dashboard lied to us. 
+
+In June 2024, the company changed size IDs on t-shirts so their API rejected any order containing one and didn't say so. It was only after reverse-engineering which SKUs changed that we were able to fix it and save the 32 orders. A similar thing happened with inventory where in Shopify it said we had 80 mugs but the fulfillment company said we had zero.
+
+Along the way, we trialed another company with better quality merch, but they were mostly an internal fulfillment platform, not a replacement. Production and shipping from it was slow while managing two suppliers was a pain.
+
+Eventually, we decided to move to another (fourth) platform, but the migration took us months. In December 2024, we'd officially moved over, but this platform only lasted until July 2025. We ran into more fulfillment problems and they were unresponsive to support issues. 
+
+The company we moved to and are on now is [Micromerch](https://www.micromerch.com/) which fulfilled our need of responsiveness, no annual contract, quick shipping, unlimited outside stock, and support for sourcing the weird things we wanted. 
+
+As you can tell, this process took a long time and a lot of effort from the people involved. Sadly, it wasn't as simple as the "plug and play" merch providers make it seem, especially with custom items and quality standards involved. 
+
+## Distribution was shaped by purpose
+
+Early merch was a sales incentive. The first YC companies got a $50 merch card to take a demo call. YC W21 companies got to choose AirPods or Allbirds. <TeamMember name="Charles Cook" photo /> did manual fulfillment by reading a Google Form and ordering it himself. 
+
+The second fulfillment partner aimed to simplify and automate this. A Shopify store was built into our website too. Startup kits are still a big part of the merch we provide, everyone in our [startup plan](/startups) gets one. It contains a t-shirt, tie, desktop calendar, stickers, and socks. Making sure we have enough of these and that they go out on time has been a test of the platform's distribution capabilities as we have grown.
+
+![Tie](https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/IMG_3798_d981168fe9.jpg)
+
+Another piece of merch we distributed was stickers. We sent these to the thousands of people who applied for jobs at PostHog. We also planned to send 10,000 stickers when [our newsletter](/newsletter) hit 10,000 subscribers. We thought "it's just stickers, how much could it cost?"
+
+On average, $6 each with our second partner (on top of the $1200 per month we paid for the service). We quickly squashed our 10,000 sticker plan, but shipping costs continued to be a problem.
+
+We thought the forth fulfillment partner would improve this, but it only made it worse. We had cases where the shipping costs for a $1 sticker were $62.54 to India and $65 to Indonesia. There was no way to prevent this other than stop or move distributors, so that is what we did.
+
+![Stickers](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/stickers_544dcd8a47.webp)
+
+Many startups think that just having merch is enough, but having a reason beyond just selling it or giving it away to employees has always been core to how we do things. It was an incentive for early-stage sales, startups, and potential hires. And it was these reasons that shaped our distribution strategy.
+
+## Design and production are not for the faint of heart
+
+Graphic design has always been more than a passion at PostHog. <TeamMember name="Lottie Coxon" photo />, an artist, was employee #5 and remained core to designing our merch. 
+
+Everyone has a ton of merch ideas. They say we should do a Hawaiian shirt, a Lego kit, or a collaboration with another company. Although we have done a bunch of these, we have had to cut down significantly because of the amount of time they take. You can't make everyone happy all the time.
+
+Even when we do decide to do an item, it often doesn't get one-shot. Our sweatsuits were too big, our soccer jerseys were too small, cards were the wrong material (twice), cycling jerseys didn't stretch. This is painful when we mess it up and has resulted in spending more time and effort on quality control at the sampling phase.
+
+![Cards](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/cards_60a785d615.webp)
+
+Production is another area where problems can arise. It can slip behind and popular items can end up out of stock (like startup kits). We recently released an Owala water bottle that sold out in a day. A mug we once had was discontinued mid-run so Lottie had to redesign a new one. 
+
+Having a huge amount of different items may look cool, but every one is a lot of work. Even though our [merch processes](/handbook/company/merch-store) are relatively mature at this point, we've had to freeze new requests for now to focus more on the core collection. 
+
+## So what does all this get us?
+
+We do all this to spend [$60,000 every month](/founders/actual-marketing-budget-2026) mostly giving away merch. Basically, 1.5 people are working on merch at PostHog now at any given time. We do have some revenue, but it's not enough to even mention.
+
+The biggest reason we do merch is that it brings us joy. We love seeing our team and our users wearing our merch. It excites people and makes them feel like part of what we're building.
+
+Beyond that, merch extends our [brand](/blog/brand) and we're proud of what we have produced, but I can imagine as an earlier stage startup, all of this could be a huge distraction. We have hundreds of thousands of users (and fans) and a strong brand to amplify through merch, but if we didn't have that, it might not be worth it.
+
+So let our journey be a cautionary tale. You might see the dope shirts we have in our merch store (and maybe even buy one), but that doesn't mean getting it to you was easy. Many founders think building a successful product is hard, so merch must be easy, but our experience shows that's not so much the case.
+
+![Jersey](https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/jersey_7f030fa62f.png)

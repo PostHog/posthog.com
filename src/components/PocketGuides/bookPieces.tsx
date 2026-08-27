@@ -1,12 +1,15 @@
 import React from 'react'
 
+import usePostHog from '../../hooks/usePostHog'
+
 import Link from 'components/Link'
 import { SingleCodeBlock } from 'components/CodeBlock'
 import EnableScout from 'components/SelfDrivingInbox/EnableScout'
 import { productSource } from 'components/SelfDrivingInbox/sources'
 
 import { useEntry, useTemplate } from './bookContext'
-import { BookPageEntry } from './bookModel'
+import { BookPageEntry, volumeIdFromUrl } from './bookModel'
+import { volumeArt } from './volumeArt'
 
 /** Inline cue to a figure, color only – bold read larger than the surrounding text. */
 export function SeeFig({ n }: { n: number }): JSX.Element {
@@ -16,6 +19,20 @@ export function SeeFig({ n }: { n: number }): JSX.Element {
 /** The small line above a title page's heading. */
 export function Eyebrow({ children }: { children: React.ReactNode }): JSX.Element {
     return <p className="mb-1 text-[0.8em] font-bold uppercase tracking-wide text-secondary">{children}</p>
+}
+
+/** The volume's specimen drawing, on the pages that open a book. */
+export function Frontispiece(): JSX.Element | null {
+    const Art = volumeArt(volumeIdFromUrl(useEntry()?.entry.url ?? ''))
+    if (!Art) {
+        return null
+    }
+    return (
+        <div aria-hidden="true" className="mb-[1.2em] mt-[2em] flex justify-center @lg:justify-start">
+            {/* Em-based cap: the specimen scales with the reader's Aa control like everything else. */}
+            <Art className="h-auto w-full max-w-[14em]" />
+        </div>
+    )
 }
 
 /** The signal sources this scout reads, from the use case's `watches` frontmatter. */
@@ -63,7 +80,7 @@ export function Enable(): JSX.Element | null {
 function ContentsRow({ page }: { page: BookPageEntry }): JSX.Element {
     return (
         <li className="flex items-baseline gap-2">
-            <Link to={page.url} className="min-w-0 text-[1em] text-primary hover:underline">
+            <Link to={page.url} wrapperClassName="min-w-0" className="text-[1em] text-primary hover:underline">
                 {page.title}
             </Link>
             {/* The dotted leader, so the row reads as a ToC line. */}
@@ -145,6 +162,22 @@ export function SeeAlso({ children }: { children: React.ReactNode }): JSX.Elemen
 const NATIVE_CONTENT =
     'article-content !text-secondary [&_li]:![font-size:1em] [&_p]:![font-size:1em] [&_li]:!leading-relaxed [&_p]:!leading-relaxed [&_li]:![list-style-type:revert] [&_ul]:![list-style-type:revert] [&_ol]:![list-style-type:revert] [&_ul]:[padding-left:revert] [&_ol]:[padding-left:revert]'
 
+/** A prose link, counted like a CTA – some chapters answer with a link, not a button. */
+function BookLink({ href, ...props }: any): JSX.Element {
+    const posthog = usePostHog()
+    const entry = useEntry()?.entry
+
+    const trackLinkClick = () =>
+        posthog?.capture('pocket_guide_interaction', {
+            kind: 'guide_link_click',
+            href,
+            guide: entry?.url,
+            placement: 'prose',
+        })
+
+    return <Link to={href} state={{ newWindow: true }} className="underline" onClick={trackLinkClick} {...props} />
+}
+
 /** Prose defaults. The page container is `not-prose`, so every tag is styled here. */
 export const proseComponents = {
     // Em-based sizes AND margins: the reading-size control scales type and rhythm together.
@@ -159,7 +192,9 @@ export const proseComponents = {
             {...props}
         />
     ),
-    h3: (props: any) => <h3 className="mb-[0.3em] mt-[0.65em] text-[1em] font-bold text-primary" {...props} />,
+    // Below the h2 section label, which is 0.8em uppercase: a 1em bold h3 under it inverts the
+    // hierarchy, reading as the larger of the two. Sentence case at 0.9em stays subordinate.
+    h3: (props: any) => <h3 className="mb-[0.3em] mt-[1.1em] text-[0.9em] font-bold text-primary" {...props} />,
     p: (props: any) => <p className="mb-[0.8em] text-[1em] leading-relaxed text-secondary last:mb-0" {...props} />,
     // Lists and tables borrow the site's native docs styling (.article-content in global.css),
     // wrapped per element because the class also styles headings/paragraphs, which the book owns.
@@ -203,10 +238,10 @@ export const proseComponents = {
             {...props}
         />
     ),
-    a: ({ href, ...props }: any) => <Link to={href} state={{ newWindow: true }} className="underline" {...props} />,
+    a: (props: any) => <BookLink {...props} />,
     hr: () => <span aria-hidden="true" className="my-6 block w-16 border-t border-primary" />,
     // A worked-example table inside a <Fig> – illustrative rows, not live data.
-    table: (props: any) => <table className="w-full border-collapse text-left text-[0.85em]" {...props} />,
+    table: (props: any) => <table className="mb-[0.8em] w-full border-collapse text-left text-[0.85em]" {...props} />,
     thead: (props: any) => <thead className="border-b border-primary" {...props} />,
     th: (props: any) => (
         <th

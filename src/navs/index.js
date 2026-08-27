@@ -1013,6 +1013,10 @@ export const handbookSidebar = [
                 url: '/handbook/engineering/feature-pricing',
             },
             {
+                name: 'Shipping a pricing change',
+                url: '/handbook/growth/shipping-a-pricing-change',
+            },
+            {
                 name: 'Revenue and forecasting',
                 url: '/handbook/engineering/revenue-and-forecasting',
             },
@@ -1295,6 +1299,10 @@ export const handbookSidebar = [
             {
                 name: 'Signup enrichment pipeline',
                 url: '/handbook/growth/revops/enrichment-pipeline',
+            },
+            {
+                name: 'ICP fit score',
+                url: '/handbook/growth/revops/icp-fit-score',
             },
             {
                 name: 'SalesOps',
@@ -2323,10 +2331,16 @@ const posthogDesktopNav = [
         name: 'Core workflow',
     },
     {
-        name: 'Spaces and canvases',
+        name: 'Spaces',
         url: '/docs/posthog-desktop/spaces',
         icon: 'IconDashboard',
         color: 'salmon',
+    },
+    {
+        name: 'Canvases',
+        url: '/docs/posthog-desktop/canvases',
+        icon: 'IconGraph',
+        color: 'purple',
     },
     {
         name: 'Tasks',
@@ -3064,8 +3078,16 @@ export const docsMenu = {
                             url: '/docs/libraries/bubble',
                         },
                         {
+                            name: 'Discord',
+                            url: '/docs/libraries/discord',
+                        },
+                        {
                             name: 'Framer',
                             url: '/docs/libraries/framer',
+                        },
+                        {
+                            name: 'GitHub',
+                            url: '/docs/libraries/github',
                         },
                         {
                             name: 'Google Tag Manager',
@@ -4654,6 +4676,12 @@ export const docsMenu = {
                     name: 'Managing bot and AI traffic',
                     url: '/docs/web-analytics/managing-bot-traffic',
                     icon: 'IconShieldPeople',
+                    color: 'purple',
+                },
+                {
+                    name: 'Sending HTTP log events',
+                    url: '/docs/web-analytics/sending-http-logs',
+                    icon: 'IconServer',
                     color: 'purple',
                 },
                 {
@@ -7219,6 +7247,14 @@ export const docsMenu = {
                     name: 'Resources',
                 },
                 {
+                    name: 'Pocket guides',
+                    url: '/pocket-guides/ai-observability',
+                    badge: {
+                        title: 'New',
+                        className: 'uppercase !bg-purple/10 !text-purple !dark:text-white !dark:bg-purple/50',
+                    },
+                },
+                {
                     name: 'Calculating LLM costs',
                     url: '/docs/ai-observability/calculating-costs',
                     icon: 'IconBalance',
@@ -8209,14 +8245,14 @@ export const docsMenu = {
             ],
         },
         {
-            name: 'Metrics',
+            name: 'Application metrics',
             icon: 'IconTrends',
             color: 'green',
             url: '/docs/metrics',
             description: 'Send OpenTelemetry metrics to PostHog and analyze them.',
             children: [
                 {
-                    name: 'Metrics',
+                    name: 'Application metrics',
                 },
                 {
                     name: 'Overview',
@@ -8246,6 +8282,8 @@ export const docsMenu = {
                         { name: 'Node.js', url: '/docs/metrics/installation/nodejs' },
                         { name: 'Python', url: '/docs/metrics/installation/python' },
                         { name: 'Other languages', url: '/docs/metrics/installation/other' },
+                        { name: 'Docker', url: '/docs/metrics/installation/docker' },
+                        { name: 'Kubernetes', url: '/docs/metrics/installation/kubernetes' },
                     ],
                 },
                 {

@@ -11,14 +11,19 @@ import { LogSlider, inverseCurve, sliderCurve } from '../PricingSlider/Slider'
 import { PricingTiers } from '../Plans'
 import ProductAnalyticsTab, { analyticsSliders, getTotalEnhancedPersonsVolume } from './Tabs/ProductAnalytics'
 import ReplayVisionTab from './Tabs/ReplayVision'
+import PostHogDesktopTab from './Tabs/PostHogDesktop'
 import StandaloneAddonsTab from './Tabs/StandaloneAddonsTab'
 import { EXCLUDED_ADDON_TYPES } from '../../../constants/addons'
 import { BROWSE_TOOLS_HANDLES } from 'constants/productNavigation'
 import qs from 'qs'
-import { useUser } from 'hooks/useUser'
 import usePostHog from 'hooks/usePostHog'
+import AgentEstimateLink, {
+    AI_PRICING_EXPERIMENT_VARIANTS,
+    AI_PRICING_FLAG,
+} from 'components/Pricing/AgentEstimateLink'
 import { NumericFormat } from 'react-number-format'
 import AutosizeInput from 'react-input-autosize'
+import { RenderInClient } from 'components/RenderInClient'
 
 export const Addon = ({ type, name, description, plans, addons, setAddons, volume, inclusion_only }) => {
     const addon = addons.find((addon) => addon.type === type)
@@ -88,6 +93,7 @@ export const Addon = ({ type, name, description, plans, addons, setAddons, volum
 const productTabs = {
     product_analytics: ProductAnalyticsTab,
     replay_vision: ReplayVisionTab,
+    posthog_code: PostHogDesktopTab,
 }
 
 export const Addons = ({ addons, setAddons, volume, activeProduct, analyticsData }) => {
@@ -399,7 +405,10 @@ export default function Tabbed() {
                 <div className="col-span-12 @2xl:col-span-4 md:pr-6 mb-4 md:mb-0">
                     <ul className="list-none m-0 p-0 pb-2 flex flex-row md:flex-col gap-px overflow-x-auto @md:w-auto -mx-4 px-4 @md:px-0 @md:mx-0">
                         {products.map(
-                            ({ name, Icon, cost, color, billingData, handle, categoryName, pricingBadge }, index) => {
+                            (
+                                { name, Icon, cost, color, colorDark, billingData, handle, categoryName, pricingBadge },
+                                index
+                            ) => {
                                 const active = activeTab === index
                                 const addonsPrice = getAddonsCostForProduct(productAddons, billingData)
                                 return (
@@ -413,7 +422,11 @@ export default function Tabbed() {
                                             <div className="flex items-center space-x-2">
                                                 {Icon && (
                                                     <span>
-                                                        <Icon className={`w-5 h-6 text-${color}`} />
+                                                        <Icon
+                                                            className={`w-5 h-6 text-${color}${
+                                                                colorDark ? ` dark:text-${colorDark}` : ''
+                                                            }`}
+                                                        />
                                                     </span>
                                                 )}
                                                 <span className="flex items-center gap-1.5">
@@ -546,9 +559,26 @@ export default function Tabbed() {
                     <p className="m-0 font-bold text-lg leading-none">${totalPrice.toLocaleString()}</p>
                 </div>
             </div>
-            <div className="flex justify-end gap-0.5 mt-2 pr-2 md:pr-0">
-                <IconCopy className="size-5 inline-block text-muted relative -top-px" />
-                <CopyURLButton onClick={generateURL} />
+            {/* Two ways to leave with an estimate: a link to this one, or a prompt that builds
+                one from what the visitor already pays for elsewhere. Same row, same weight. */}
+            <div className="flex flex-wrap items-center justify-between gap-2 mt-2 pr-2 md:pr-0">
+                <RenderInClient
+                    render={() => {
+                        const variant = window.posthog?.getFeatureFlag?.(AI_PRICING_FLAG)
+                        return variant && variant !== AI_PRICING_EXPERIMENT_VARIANTS.control ? (
+                            <AgentEstimateLink
+                                source="calculator-total"
+                                className="text-sm font-bold text-red dark:text-yellow"
+                            />
+                        ) : (
+                            <></>
+                        )
+                    }}
+                />
+                <div className="flex gap-0.5 ml-auto">
+                    <IconCopy className="size-5 inline-block text-muted relative -top-px" />
+                    <CopyURLButton onClick={generateURL} />
+                </div>
             </div>
         </div>
     )
