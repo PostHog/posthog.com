@@ -29,7 +29,7 @@
                 "title": "Scouts são skills: a frota de verdade",
                 "image": "/images/presentations/shipaton/scout-fleet.png",
                 "imageAlt": "Lista de scouts no app de Skills do PostHog",
-                "notes": "<p>Imagem local: soltar scout-fleet.png em static/images/presentations/shipaton/ no checkout (não commitada – contém dados internos). Apontar o scout de complexidade de código criado ao vivo em outro meetup. <strong>~20s</strong></p>"
+                "notes": "<p>Apontar o scout de complexidade de código criado ao vivo em outro meetup. <strong>~20s</strong></p>"
             },
             "pipeline": {
                 "template": "stacked",
@@ -71,7 +71,7 @@
                 "title": "Pegou a queda, acompanhou até recuperar",
                 "image": "/images/presentations/shipaton/scout-cache-coverage.png",
                 "imageAlt": "Report do scout de performance de web analytics no Slack",
-                "notes": "<p>Imagem local: soltar scout-cache-coverage.png em static/images/presentations/shipaton/ no checkout (não commitada – métricas internas). O update fecha o loop – sem dashboard novo, sem ninguém precisar lembrar de checar. A última resposta da thread rende a risada e prepara o próximo slide. <strong>~20s</strong></p>"
+                "notes": "<p>O update fecha o loop – sem dashboard novo, sem ninguém precisar lembrar de checar. A última resposta da thread rende a risada e prepara o próximo slide. <strong>~20s</strong></p>"
             },
             "reply-report": {
                 "template": "stacked",
@@ -79,7 +79,7 @@
                 "title": "O report é uma conversa: responda a thread e peça o próximo passo",
                 "image": "/images/presentations/shipaton/scout-web-vitals.png",
                 "imageAlt": "Report do scout de web vitals no Slack",
-                "notes": "<p>Imagem local: scout-web-vitals.png em static/images/presentations/shipaton/ (não commitada – métricas internas). No print: o scout de web vitals reporta e eu respondo na própria thread pedindo pra ele agir. O report não é um e-mail que você arquiva – é um fio de conversa com quem achou o problema. <strong>~25s</strong></p>",
+                "notes": "<p>No print: o scout de web vitals reporta e eu respondo na própria thread pedindo pra ele agir. O report não é um e-mail que você arquiva – é um fio de conversa com quem achou o problema. <strong>~25s</strong></p>",
                 "description": "<p>Cada report chega como thread no Slack – mencione o agente e peça o fix dali mesmo.</p>"
             },
             "getting-started": {
@@ -97,7 +97,7 @@
                 "title": "Apêndice: pergunte no Slack, o agente mede via MCP",
                 "image": "/images/presentations/shipaton/mcp-precompute.png",
                 "imageAlt": "Thread no Slack com o agente respondendo sobre precompute hit ratio com gráfico",
-                "notes": "<p>Slide de apoio pro Q&A: as mesmas ferramentas dos scouts respondem perguntas sob demanda. Imagem local: mcp-precompute.png em static/images/presentations/shipaton/ (não commitada – métricas internas).</p>"
+                "notes": "<p>Slide de apoio pro Q&A: as mesmas ferramentas dos scouts respondem perguntas sob demanda.</p>"
             }
         }
     }
