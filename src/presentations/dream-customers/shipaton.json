@@ -15,6 +15,14 @@
                 "descriptionWidth": "@2xl:w-1/2",
                 "notes": "<p>Elevator pitch e definição em uma linha. Hogzilla de fundo, como na home. Exemplos reais: bundle size, CSP/web vitals, 404s, complexidade de código. <strong>~30s</strong></p>"
             },
+            "migration": {
+                "template": "stacked",
+                "name": "Migração em andamento",
+                "title": "Migração em andamento: de analytics para produtos auto-guiados",
+                "description": "<p><strong>De:</strong> \"só analytics\" ou session replay – dashboards abertos por você, replays assistidos por você, regressões caçadas por você.</p><p><strong>Para:</strong> self-driving – o produto observa a si mesmo: scouts vigiam os dados, reports chegam no Inbox, PRs saem.</p><p>Scouts são a peça de vigilância dessa migração – e o assunto dos próximos 4 minutos.</p>",
+                "descriptionWidth": "@2xl:w-2/3",
+                "notes": "<p>Enquadramento antes/depois: a mesma plataforma, invertida – em vez de você ir até os dados, os dados vêm até você com uma ação sugerida. <strong>~20s</strong></p>"
+            },
             "skill-harness": {
                 "template": "stacked",
                 "name": "Skill + harness",
