@@ -71,7 +71,16 @@
                 "title": "Pegou a queda, acompanhou até recuperar",
                 "image": "/images/presentations/shipaton/scout-cache-coverage.png",
                 "imageAlt": "Report do scout de performance de web analytics no Slack",
-                "notes": "<p>Imagem local: soltar scout-cache-coverage.png em static/images/presentations/shipaton/ no checkout (não commitada – métricas internas). O update fecha o loop – sem dashboard novo, sem ninguém precisar lembrar de checar. Beat de humor: a última resposta da thread. <strong>~20s</strong></p>"
+                "notes": "<p>Imagem local: soltar scout-cache-coverage.png em static/images/presentations/shipaton/ no checkout (não commitada – métricas internas). O update fecha o loop – sem dashboard novo, sem ninguém precisar lembrar de checar. A última resposta da thread rende a risada e prepara o próximo slide. <strong>~20s</strong></p>"
+            },
+            "reply-report": {
+                "template": "stacked",
+                "name": "Responda a thread",
+                "title": "O report é uma conversa: responda a thread e peça o próximo passo",
+                "image": "/images/presentations/shipaton/scout-web-vitals.png",
+                "imageAlt": "Report do scout de web vitals no Slack",
+                "notes": "<p>Imagem local: scout-web-vitals.png em static/images/presentations/shipaton/ (não commitada – métricas internas). No print: o scout de web vitals reporta e eu respondo na própria thread pedindo pra ele agir. O report não é um e-mail que você arquiva – é um fio de conversa com quem achou o problema. <strong>~25s</strong></p>",
+                "description": "<p>Cada report chega como thread no Slack – mencione o agente e peça o fix dali mesmo.</p>"
             },
             "getting-started": {
                 "template": "stacked",
@@ -81,14 +90,6 @@
                 "imageAlt": "Hedgehog feliz do PostHog",
                 "description": "<ul><li><strong>Leia:</strong> posthog.com/blog/what-is-a-scout e posthog.com/blog/sql-parser</li><li><strong>Ligue:</strong> Self-driving / Inbox (beta aberto) – ~20 scouts canônicos: experimentos, revenue, surveys, web analytics, feature flags</li><li><strong>Escreva o seu:</strong> algumas frases em inglês descrevendo o que é normal no seu produto já são um scout</li><li><strong>Rode hoje:</strong> qualquer scout roda no Claude Code ou Cursor com o MCP do PostHog</li></ul>",
                 "notes": "<p>CTA final: descreva em texto o que é normal no seu produto. Isso já é um scout. <strong>~30s</strong></p>"
-            },
-            "appendix-web-vitals": {
-                "template": "stacked",
-                "name": "Apêndice: web vitals",
-                "title": "Apêndice: o scout de web vitals no mesmo canal",
-                "image": "/images/presentations/shipaton/scout-web-vitals.png",
-                "imageAlt": "Report do scout de web vitals no Slack",
-                "notes": "<p>Slide de apoio pro Q&A. Imagem local: scout-web-vitals.png em static/images/presentations/shipaton/ (não commitada – métricas internas).</p>"
             },
             "appendix-precompute": {
                 "template": "stacked",
