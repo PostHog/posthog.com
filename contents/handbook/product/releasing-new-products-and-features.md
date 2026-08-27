@@ -98,7 +98,7 @@ Teams are encouraged to collect feedback from users in current betas so that the
 
 Joining an alpha or beta triggers automatic feedback emails from the `beta-feedback@posthog.com` Google Group: alpha users get an immediate email warning of rough edges and asking for feedback, while beta users get an email asking for feedback after 5 days. By default, all team leads and exec team members are in this Google Group and will get daily digests of responses. Others are invited to add themselves to the group, or change their notification settings.
 
-Regardless, replies to this Google Group are relayed into the [#posthog-feedback Slack channel](https://posthog.slack.com/archives/C011L071P8U) for everyone to see. PMs and team leads are encouraged to respond to and action this feedback for their alpha and beta releases, and to give merch credits as a thank you where appropriate.
+Regardless, replies to this Google Group are relayed into the [#posthog-feedback Slack channel](https://posthog.slack.com/archives/C011L071P8U) for everyone to see. They are also routed to the support inbox, where the support team assesses each customer issue or piece of feedback, responds to the customer first, and routes it to the correct engineering team for follow-up. PMs and team leads are still encouraged to action feedback routed to their alpha and beta releases, and to give merch credits as a thank you where appropriate.
 
 Teams can collect additional feedback if needed and the <SmallTeam slug="website" /> is able to help with creating feedback emails or funnels.
 
