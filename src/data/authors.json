@@ -782,5 +782,13 @@
         "link_type": "linkedin",
         "link_url": "https://www.linkedin.com/in/georgis-andonis/",
         "profile_id": 35171
+    },
+    {
+        "handle": "cory-slater",
+        "name": "Cory Slater",
+        "role": "Product Manager",
+        "link_type": "github",
+        "link_url": "https://github.com/fivestarspicy",
+        "profile_id": 34160
     }
 ]

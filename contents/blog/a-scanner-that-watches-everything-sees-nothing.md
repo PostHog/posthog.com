@@ -1,12 +1,14 @@
 ---
 title: "A scanner that watches everything sees nothing"
 date: 2026-08-27
-# author: ["TODO"]
+author:
+  - cory-slater
 # featuredImage: TODO
 # featuredImageType: full
 tags:
   - Using PostHog
   - User research
+  - Replay Vision
   - session replay
 ---
 
