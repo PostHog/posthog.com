@@ -5431,11 +5431,51 @@
         },
         {
             "source": "/docs/cdp/geoip-enrichment:ext(\\.md)?",
-            "destination": "/docs/cdp/transformations/template-geoip:ext?"
+            "destination": "/docs/cdp/transformations/geoip:ext?"
         },
         {
             "source": "/docs/cdp/transformations/posthog-plugin-geoip:ext(\\.md)?",
-            "destination": "/docs/cdp/transformations/template-geoip:ext?"
+            "destination": "/docs/cdp/transformations/geoip:ext?"
+        },
+        {
+            "source": "/docs/cdp/transformations/template-geoip:ext(\\.md)?",
+            "destination": "/docs/cdp/transformations/geoip:ext?"
+        },
+        {
+            "source": "/docs/cdp/transformations/template-drop-events:ext(\\.md)?",
+            "destination": "/docs/cdp/transformations/drop-events:ext?"
+        },
+        {
+            "source": "/docs/cdp/transformations/template-blank-transformation:ext(\\.md)?",
+            "destination": "/docs/cdp/transformations/blank-transformation:ext?"
+        },
+        {
+            "source": "/docs/cdp/transformations/template-bot-detection:ext(\\.md)?",
+            "destination": "/docs/cdp/transformations/bot-detection:ext?"
+        },
+        {
+            "source": "/docs/cdp/transformations/template-ip-anonymization:ext(\\.md)?",
+            "destination": "/docs/cdp/transformations/ip-anonymization:ext?"
+        },
+        {
+            "source": "/docs/cdp/transformations/template-filter-properties:ext(\\.md)?",
+            "destination": "/docs/cdp/transformations/filter-properties:ext?"
+        },
+        {
+            "source": "/docs/cdp/transformations/template-url-normalization:ext(\\.md)?",
+            "destination": "/docs/cdp/transformations/url-normalization:ext?"
+        },
+        {
+            "source": "/docs/cdp/transformations/template-url-masking:ext(\\.md)?",
+            "destination": "/docs/cdp/transformations/url-masking:ext?"
+        },
+        {
+            "source": "/docs/cdp/transformations/template-remove-null-properties:ext(\\.md)?",
+            "destination": "/docs/cdp/transformations/remove-null-properties:ext?"
+        },
+        {
+            "source": "/docs/cdp/transformations/template-hash-properties:ext(\\.md)?",
+            "destination": "/docs/cdp/transformations/hash-properties:ext?"
         },
         {
             "source": "/docs/cdp/timestamp-parser:ext(\\.md)?",
