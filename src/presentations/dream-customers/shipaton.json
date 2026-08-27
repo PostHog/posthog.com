@@ -56,8 +56,8 @@
                 "title": "Signals → Inbox → Pull requests",
                 "image": "/images/presentations/shipaton/self-driving.png",
                 "imageAlt": "The self-driving section of posthog.com with Signals, Scouts, Inbox and Pull requests tabs",
-                "description": "<p><a href=\"/self-driving\">posthog.com/self-driving</a></p>",
-                "notes": "<p>Screenshot of the public page. Scouts are one of four pieces: signals in, Inbox prioritizes, PRs out. <strong>~15s</strong></p>"
+                "description": "<p><em>\"Self-driving is PostHog using your product data as context to proactively improve your product.\"</em> ... <em>\"You're in control to review and merge everything. Nothing ships without you.\"</em></p><p><a href=\"/self-driving\">posthog.com/self-driving</a> · <a href=\"/pocket-guides/self-driving/101\">pocket guide: Self-driving 101</a></p>",
+                "notes": "<p>Screenshot of the public page; quotes from the Self-driving 101 pocket guide. Scouts are one of four pieces: signals in, Inbox prioritizes, PRs out – and nothing merges without a human. <strong>~15s</strong></p>"
             },
             "superpower": {
                 "template": "stacked",
@@ -81,7 +81,7 @@
                 "title": "Caught the dip, tracked the recovery",
                 "image": "/images/presentations/shipaton/scout-cache-coverage.png",
                 "imageAlt": "Web analytics performance scout report in Slack",
-                "description": "<p><em>\"The hard part of a scout isn't finding things. It's not finding things.\"</em></p>",
+                "description": "<p><em>\"The hard part of a scout isn't finding things. It's not finding things.\"</em> – or, as the pocket guide puts it: <em>\"it writes a report, or it writes nothing.\"</em></p>",
                 "notes": "<p>The update closes the loop – no new dashboard, nobody had to remember to check. The last reply in the thread gets the laugh and sets up the next slide. <strong>~20s</strong></p>"
             },
             "reply-report": {
@@ -99,7 +99,7 @@
                 "title": "Start at the easy end",
                 "image": "https://res.cloudinary.com/dmukukwp6/image/upload/happy_hog_ebc59e4658.png",
                 "imageAlt": "Happy PostHog hedgehog",
-                "description": "<ul><li><strong>Read:</strong> posthog.com/blog/what-is-a-scout · posthog.com/blog/sql-parser</li><li><strong>Turn on:</strong> Self-driving / Inbox (open beta) – <em>\"PostHog ships with around 20 canonical scouts out of the box\"</em></li><li><strong>Run one anywhere:</strong> <em>\"you can run one manually in any agent surface where the PostHog MCP is available – PostHog Code, Claude Code, Codex, Cursor, whatever.\"</em></li></ul>",
+                "description": "<ul><li><strong>Read:</strong> <a href=\"/pocket-guides/self-driving/101\">pocket guide: Self-driving 101</a> · posthog.com/blog/what-is-a-scout · posthog.com/blog/sql-parser</li><li><strong>Turn on:</strong> Self-driving / Inbox (open beta) – <em>\"PostHog ships with around 20 canonical scouts out of the box\"</em></li><li><strong>Run one anywhere:</strong> <em>\"you can run one manually in any agent surface where the PostHog MCP is available – PostHog Code, Claude Code, Codex, Cursor, whatever.\"</em></li></ul>",
                 "notes": "<p>Closing: a few sentences of English describing what is normal in your product – that is already a scout. <strong>~30s</strong></p>"
             },
             "appendix-precompute": {
