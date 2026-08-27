@@ -57,8 +57,7 @@ The CSM stays on every $20k+ account, so there's no handoff when a TAM's work is
 	- There is also an additional 6.7% incentive on growth in annual renewals
 	- There is no additional incentive on monthly payments
  - An account counts toward your quota only from the date it is added to your book (when the `AM Managed` segment is applied). Cash paid before that date does not count toward commission, even if it lands in the current quarter. We don't pay retroactively on an account that wasn't yet in your book.
-- Cash collected for [forward deployed engineering](/handbook/forward-deployed-engineering/overview) and other professional services counts toward quota, at the same flat 10% rate as product cash. It counts in the quarter the customer pays. The 6.7% incentives do not apply, because a services engagement is not an annual contract or a renewal.
-	- Services revenue has a different margin profile to product revenue. We are likely to report it separately in a future version of this plan. Until we do, it is simply cash collected.
+- Cash collected for [forward deployed engineering](/handbook/forward-deployed-engineering/overview) and other professional services counts toward quota, in the quarter the customer pays.
 
 **Examples**
 Ator, the TAM has a book account that pays month to month. In the quarter, that account makes 3 payments of $2,200, $2,100, and $2,500 totaling $6,800. The quota realized and paid out to Ator on this account is 10% of the total for that quarter, $680.
