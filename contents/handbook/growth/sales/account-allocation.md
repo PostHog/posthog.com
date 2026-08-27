@@ -107,28 +107,30 @@ If an account is struggling on these dimensions, that's a signal to invest more.
 
 ## Doing the allocation
 
-Each quarter, team leads, with Ben's approval, review coverage: which accounts need a TAM added or removed, and how books should be rebalanced. CSM coverage stays Simon's call. That's the base layer on every $20k+ account. A TAM is added on top where an opportunity qualifies. For accounts with no previous owner, we use PostHog GeoIP data to understand which region the account is primarily based in. We use the following tags in PostHog Customer Analytics:
+### CSM allocation
+
+CSM coverage stays Simon's call. Every $20k+ account should have a CSM. Simon and the CSM team leads use the <PrivateLink url="https://us.posthog.com/code/canvas/55b93018-aa64-4d36-9996-7b9415a043fd/01a0425d-ad76-7a59-9f74-e77d73a9a30a">Uncovered customer backlog</PrivateLink> canvas to review accounts without a CSM and assign an owner.
+
+Accounts can also be flagged for CSM allocation using these tags in PostHog Customer Analytics:
 
 - `csm overlay needed` where a TAM is retaining an account but needs extra help from a CSM
 - `csm handover needed` where a TAM or TAE is ready to hand over an account fully to a CSM
-- `tam overlay needed` where a CSM has identified an opportunity for a TAM to expand an account
 
-And then it is down to the relevant Team Leads to figure out which team member is taking on the customer.
+For accounts with no previous owner, we use PostHog GeoIP data to understand which region the account is primarily based in. The relevant team lead then decides which CSM takes the account.
 
 > Once a day an <PrivateLink url='posthog-code://loop/9f441418-1400-4839-b82c-4ce3f8bcb2cb'>automation</PrivateLink> runs which adds a region tag to the account to assist in routing to the correct team.
 
-### Quarterly allocation process
+### TAM allocation
 
-At the start of each quarter, team leads (with Ben's approval) review:
+A TAM is added on top of CSM coverage where an opportunity qualifies. At the start of each quarter, team leads, with Ben's approval, review:
 
-1. **Accounts that need a CSM assigned** – review and assign them in the <PrivateLink url="https://us.posthog.com/code/canvas/55b93018-aa64-4d36-9996-7b9415a043fd/01a0425d-ad76-7a59-9f74-e77d73a9a30a">Uncovered customer backlog</PrivateLink> canvas
-2. **Accounts flagged for handover** from TAEs and TAMs using the above tags
-3. **TAM books outside the $1.5M-$2M ARR band** – identifying which accounts to rebalance
-4. **Flagged growth opportunities on CSM-only accounts** – identifying where to add a TAM
+1. **Accounts tagged `tam overlay needed`** where a CSM has identified a growth opportunity
+2. **TAM books outside the $1.5M-$2M ARR band** to identify which accounts to rebalance
+3. **Accounts where the TAM should be removed** because expansion is exhausted
 
-Once the region and any TAM decision are settled, the above tags are applied and team leads assign the specific team member. 
+Once the decision is settled, the team lead updates the tags and assigns the specific TAM in Customer Analytics.
 
-### Mid-quarter changes
+### Mid-quarter TAM changes
 
 Account removals should only happen at the end of the quarter so that quota can be calculated correctly. However, accounts can be **added** to your book at any time if you're confident there's growth potential.
 
