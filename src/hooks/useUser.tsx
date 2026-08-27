@@ -43,7 +43,7 @@ export type User = {
         id: number
     } & ProfileData
     role: {
-        type: 'authenticated' | 'public' | 'moderator'
+        type: 'authenticated' | 'public' | 'moderator' | 'community-moderator'
     }
     // Absent until the user first earns points — Strapi only creates the component on write
     wallet?: Wallet
@@ -71,6 +71,7 @@ type UserContextValue = {
     isLoading: boolean
     user: User | null
     isModerator: boolean
+    isForumModerator: boolean
     setUser: React.Dispatch<React.SetStateAction<User | null>>
     fetchUser: (token?: string | null) => Promise<User | null>
     getJwt: () => Promise<string | null>
@@ -126,6 +127,7 @@ export const UserContext = createContext<UserContextValue>({
     isLoading: true,
     user: null,
     isModerator: false,
+    isForumModerator: false,
     setUser: () => {
         // noop
     },
@@ -892,6 +894,7 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
         user,
         setUser,
         isModerator: user?.role?.type === 'moderator',
+        isForumModerator: user?.role?.type === 'moderator' || user?.role?.type === 'community-moderator',
         isLoading,
         getJwt,
         login,
