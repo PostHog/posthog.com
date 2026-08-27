@@ -112,7 +112,7 @@ export const SEO = ({
             )}
 
             {seo.url && <meta property="og:url" content={seo.url} />}
-            {article ? <meta property="og:type" content="article" /> : null}
+            <meta property="og:type" content={article ? 'article' : 'website'} />
             {seo.title && <meta property="og:title" content={seo.title} />}
             {seo.description && <meta property="og:description" content={seo.description} />}
             {seo.image && <meta property="og:image" content={seo.image} />}
