@@ -66,14 +66,13 @@ I gave my agent a few guardrails to help me brainstorm: no PII, has to be data w
 
 I also wanted to write about a tool I know well, so I seeded it with my favourites ([session replay](/session-replay), [error tracking](/error-tracking), [AI observability](/ai-observability), and [the MCP](/mcp) itself) and let it argue back.
 
-> **Prompt I used: **You're helping me pick the angle for a data study (a short, very data-heavy blog post built entirely on PostHog's own first-party data). You have the PostHog MCP connected, so check event definitions and property definitions before you pitch me anything.
+> **Prompt I used:** You're helping me pick the angle for a data study (a short, very data-heavy blog post built entirely on PostHog's own first-party data). You have the PostHog MCP connected, so check event definitions and property definitions before you pitch me anything.
 > 
 > Hard guardrails:
 > - No PII, and nothing that identifies a specific customer, company, or user. Aggregates only.
 > - It has to be data we ALREADY collect. No "we should start tracking X."
 > - It has to be pullable in a handful of SQL queries.
 > - It has to be something PostHog would be comfortable publishing.
->
 >
 > I want to write about a product I know well, so bias toward session replay, error tracking, AI observability, and the MCP itself, but don't limit yourself to those if there are other interesting alternatives. Give me 6 potential angles. For each one, add the specific events/properties you'd query to prove it, roughly how many charts it produces, and what they'd show. Then rank them: most interesting to a general tech audience, and easiest to actually pull. If those two rankings disagree, say so.
 
@@ -92,7 +91,6 @@ query and its SQL, so I can re-run them later. Cross-tenant, last 90 days.
 > 4. Recordings captured per company. Median and mean separately.
 > 5. Distinct people who watched anything, and replays per watcher.
 > 6. Playback speed when people change it.
->
 >
 > If a number can't be pulled, explain why and give me alternatives.
 
@@ -114,7 +112,7 @@ It also turned into a second validation pass almost by accident: a wrong number 
 
 Then I sent the whole thing to our Graphics team, who turned my Temu-grade doodles into something legit.
 
-> Prompt I used: Here are the SQL queries behind my study. Re-run each one through the PostHog MCP and check the numbers still hold – tell me about anything that doesn't match what I've got in the draft.
+> **Prompt I used:** Here are the SQL queries behind my study. Re-run each one through the PostHog MCP and check the numbers still hold – tell me about anything that doesn't match what I've got in the draft.
 >
 > Then, for each query, show me three different ways to visualize the result. Different chart types, and a line on what each one gets across.
 >  
