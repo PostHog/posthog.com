@@ -143,7 +143,9 @@ var posthog = new PostHogClient(new PostHogOptions
 
 ## How evaluation works
 
-When a flag evaluation request is made:
+### Remote evaluation
+
+When your SDK asks PostHog to evaluate a flag:
 
 1. **SDK sends application contexts**: The SDK includes its configured `evaluation_contexts` in the request
 2. **PostHog filters flags**: Only flags matching these criteria are evaluated:
@@ -151,6 +153,14 @@ When a flag evaluation request is made:
    - Flags with empty evaluation contexts
    - Flags where at least one evaluation context matches the SDK's declared contexts
 3. **Results returned**: Only the filtered flags are returned to the SDK
+
+### Local evaluation
+
+Server SDKs that evaluate flags locally poll `/flags/definitions` for flag definitions instead of calling `/flags`. That endpoint accepts no evaluation context parameter. It returns every flag, and each flag carries its own evaluation contexts in the response. The SDK applies the matching rules above to the definitions it polled.
+
+Filtering therefore happens inside the SDK, so it only works on an SDK version that implements it. Check [SDK support](#sdk-support) before relying on it. This matters most with an option like the Node.js `strictLocalEvaluation`, because no remote request is made to fall back on.
+
+Local evaluation downloads the full flag set either way. Evaluation contexts change which flags your SDK evaluates, and they do not reduce the size of the definitions payload.
 
 ### Example scenario
 
@@ -257,7 +267,9 @@ If a flag with evaluation contexts isn't evaluating:
 If you're still seeing all flags despite using evaluation contexts:
 1. Confirm your SDK version supports evaluation contexts
 2. Check that flags have evaluation contexts configured in the **Evaluation Contexts** section (not just tags)
-3. Verify your SDK is sending the `evaluation_contexts` parameter
+3. Verify your SDK is sending the `evaluation_contexts` parameter on its `/flags` requests
+4. Check that flags you expect to be filtered actually have contexts set. A flag with no evaluation contexts always evaluates, whatever contexts your SDK declares.
+5. If you evaluate flags locally, confirm your SDK version filters locally. Node.js does this from 5.51.4+. On earlier versions, evaluation contexts apply only to remote `/flags` requests, so every polled flag still evaluates. See [local evaluation](#local-evaluation).
 
 ### Performance not improved
 
@@ -291,3 +303,12 @@ Evaluation contexts are supported as first-class SDK configuration in the follow
 | [.NET](/docs/libraries/dotnet#evaluation-contexts) | `EvaluationContexts` in `PostHog` 2.8.0+ and `PostHog.AspNetCore` 2.7.0+ | Not supported |
 
 > **Note:** If you're on an older supported SDK version that only supports the legacy option, that will continue to work. We recommend using the current option for new implementations.
+
+The versions above are for remote evaluation. Local evaluation is filtered by the SDK itself, so it needs separate support:
+
+| SDK | Local evaluation support |
+|-----|--------------------------|
+| [Node.js](/docs/libraries/node/) | 5.51.4+ |
+| [.NET](/docs/libraries/dotnet#evaluation-contexts) | Not yet supported |
+
+The other SDKs in the table above evaluate flags remotely, so this doesn't apply to them.
