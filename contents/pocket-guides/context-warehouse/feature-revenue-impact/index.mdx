@@ -36,18 +36,6 @@ The Skill looks for patterns like <SeeFig n={1} />: the exposed cohort earned $6
 after exposure and retained six points better. This shows the experiment was successful, and reporting both cohort sizes
 makes clear the gap reflects a large sample, not noise from a handful of accounts.
 
-## Doing this by hand
-
-1. **If this was a formal [PostHog Experiment](/docs/experiments)**, open its
-   [results page](/docs/experiments/analyzing-results) directly and add a Stripe revenue metric
-   there. PostHog computes exposed-vs-control for you natively, no SQL needed.
-2. **If it was a plain feature flag** instead, connect [Stripe](/docs/cdp/sources/stripe) via
-   [Data pipeline > Sources](/docs/data-warehouse/sources), then build a
-   [Trends](/docs/product-analytics/trends/overview) insight of `$feature_flag_called` broken down
-   by `$feature_flag_response` to see the exposure split.
-3. **Join to revenue** using the [SQL editor](/docs/data-warehouse/sql) or asking PostHog AI to compare
-   post-exposure revenue and retention between variants in one query.
-
 ## Get an agent to do the work
 
 Copy the Skill below and add it to your agent. The agent finds each person's variant from `$feature_flag_called` exposure events and their
@@ -62,6 +50,18 @@ features high-revenue customers already use, with no rollout involved, that's
 [Features & revenue](/pocket-guides/context-warehouse/features-drive-revenue) instead.
 
 <SkillFigure n={2} caption="The Skill itself, copy and paste this into your agent to answer the question." />
+
+## Doing this by hand
+
+1. **If this was a formal [PostHog Experiment](/docs/experiments)**, open its
+   [results page](/docs/experiments/analyzing-results) directly and add a Stripe revenue metric
+   there. PostHog computes exposed-vs-control for you natively, no SQL needed.
+2. **If it was a plain feature flag** instead, connect [Stripe](/docs/cdp/sources/stripe) via
+   [Data pipeline > Sources](/docs/data-warehouse/sources), then build a
+   [Trends](/docs/product-analytics/trends/overview) insight of `$feature_flag_called` broken down
+   by `$feature_flag_response` to see the exposure split.
+3. **Join to revenue** using the [SQL editor](/docs/data-warehouse/sql) or asking PostHog AI to compare
+   post-exposure revenue and retention between variants in one query.
 
 <SeeAlso>
 

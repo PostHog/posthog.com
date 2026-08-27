@@ -2,16 +2,13 @@ import React, { useEffect, useState } from 'react'
 import { useLocation } from '@reach/router'
 import { motion, useReducedMotion } from 'framer-motion'
 import { Calculator } from 'components/Pricing/Test/Calculator'
-import { SidebarList, SidebarListItem, Discounts } from 'components/Pricing/PricingExperiment'
 import { scrollToElement } from 'components/ScrollToElement'
 import usePostHog from 'hooks/usePostHog'
 
 const PANEL_ID = 'calculator-panel'
 
 /**
- * Keeps the pricing calculator collapsed until someone asks for it — the treatment used by the
- * `redesign-calculator-minimized` variant. `CalculatorSection` is the always-visible
- * alternative that plain `redesign` uses.
+ * Keeps the pricing calculator collapsed until someone asks for it.
  *
  * Most visitors to this page are deciding whether to try PostHog for free, and an estimator
  * muddies that: it reframes the page from "this is free for you" to "work out your bill".
@@ -23,9 +20,9 @@ const PANEL_ID = 'calculator-panel'
  * `?calculator` in the URL renders it already open and scrolls to it, so an estimate can be
  * shared as a link. Everything else goes through the link.
  *
- * Expanding fires `pricing_calculator_expanded`, which only exists in this variant. Don't
- * compare it against the other arms — use `pricing_calculator_interacted` for that, which
- * fires on the controls themselves and so means the same thing everywhere.
+ * Expanding fires `pricing_calculator_expanded`. `pricing_calculator_interacted` fires on the
+ * controls themselves, so that's the one to use for engagement — it also covers the people who
+ * arrive with `?calculator` and never click the link.
  */
 export default function CalculatorReveal(): JSX.Element {
     const { search } = useLocation()
@@ -89,15 +86,7 @@ export default function CalculatorReveal(): JSX.Element {
                     `my-0` loses to its `mb-12` in Tailwind's cascade regardless of class order, so
                     it takes a child selector to win on specificity. */}
                 <div className="border-t border-primary mt-4 pt-6 [&>section]:my-0 [&>section]:px-0">
-                    {hasOpened && (
-                        <Calculator
-                            SidebarList={SidebarList}
-                            SidebarListItem={SidebarListItem}
-                            Discounts={Discounts}
-                            hideHeader
-                            id=""
-                        />
-                    )}
+                    {hasOpened && <Calculator hideHeader id="" />}
                 </div>
             </motion.div>
         </div>
