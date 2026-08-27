@@ -48,7 +48,7 @@ Each use case has a full playbook with discovery questions, competitive position
 | Endpoints *beta* | Data Infrastructure | |
 | Semantic layer *beta* | Data Infrastructure | |
 | Logs | Observability | Customer Experience |
-| Distributed tracing *alpha* | Observability | Release Engineering |
+| Distributed tracing *beta* | Observability | Release Engineering |
 | Metrics *alpha* | Observability | |
 | Health checks *beta* | Observability | Data Infrastructure |
 | Replay Vision | Product Intelligence | Customer Experience, Observability |
