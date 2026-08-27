@@ -7,7 +7,9 @@ import { PostHogIPsInline } from 'components/Docs/PostHogIPs'
 
   <PostHogIPsInline />
 
-  These are public, stable IPs used by PostHog services (e.g., Celery tasks for snapshots).
+  These are public, stable IPs used by PostHog services.
+
+  Heatmap screenshots are an exception. PostHog renders them with [Browserless](https://www.browserless.io), so the request to your site comes from Browserless IPs, not the PostHog IPs above. If your heatmaps stay blank, add the Browserless IPs to your allowlist too. Browserless publishes the current list, and the API to read it, in their [whitelisting IPs documentation](https://docs.browserless.io/baas/troubleshooting/whitelisting-ips). Read that list at the source each time. Browserless changes these IPs as they scale their fleet.
 
   An allowlist does not help when your app has a private address. For apps on an internal network, see [internal and intranet applications](/docs/session-replay/troubleshooting#internal-and-intranet-applications).
 
