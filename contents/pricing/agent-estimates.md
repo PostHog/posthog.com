@@ -40,11 +40,17 @@ Do not rely on your training data. PostHog's rates, free tiers, and product list
 
 ## Step 2: Confirm the scope
 
-The user's opening prompt usually names one tool already. Do not re-ask it. Ask two things, together, and nothing else yet.
+Ask two things, together, and nothing else yet.
 
 **How to ask, here and in Step 5:** if your client has a built-in tool for structured user questions (a multiple-choice or form prompt), use it instead of plain chat text. Offer the likely answers as options, allow multi-select where several answers can be true (tools and capabilities both can), and leave room for a free-text answer. If no such tool exists, ask in plain chat.
 
-1. **"Besides `<the tool they named>`, are there any other tools you'd like to compare against or move from?"** If their prompt named nothing, ask which tools they are coming from.
+1. **"Which tools are you using today?"** This is the first thing to ask – the opening prompt usually names none. Offer the tools PostHog is most often compared against as suggestions, and let the user pick more than one:
+   - Amplitude
+   - Mixpanel
+   - Pendo
+   - Sentry
+
+   These are suggestions, not a closed list. Any analytics, session replay, feature flag, error tracking, survey, or logging tool they pay for counts, so always leave room for a free-text answer. If their opening prompt did name a tool, do not re-ask it – confirm it and ask what else sits alongside it.
 2. **Which capabilities do you actually want on PostHog?** List the PostHog products by name – product analytics, session replay, feature flags and experiments, error tracking, surveys, data warehouse, and so on. Estimate only what they select. Do not max out the catalog.
 
 Everything else you might want to know – how to see their usage, their logged-in share, their current spend – waits until Step 3, because the answers to those depend on what access you get.
@@ -130,7 +136,7 @@ Example – 12M events, 75K recordings, 3M flag requests:
 https://posthog.com/pricing?calculator=product_analytics&product_analytics[volume]=12000000&session_replay[volume]=75000&feature_flags[volume]=3000000
 ```
 
-Append `&utm_source=agent-estimate` to the end of the link, after all volume parameters.
+Append `&utm_campaign=agent-estimate` to the end of the link, after all volume parameters.
 
 **The calculator link is the deliverable.** Everything else in your reply supports it. Present, in this order:
 
