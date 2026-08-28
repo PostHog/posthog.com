@@ -1,6 +1,6 @@
 ---
-title: Six tools, one instrumentation
-shortTitle: Six tools
+title: One installation, many tools
+shortTitle: Tools
 subtitle: By the middle of February Unter was running replay, errors, flags, experiments, surveys and logs. They had wired the site up once.
 pocketGuideOrder: 3
 ---
@@ -43,24 +43,34 @@ pocketGuideOrder: 3
 
 <RightPage>
 
-# Six tools, one instrumentation
+# One installation, many tools
 
-Between January and the middle of February, Unter turned on five more things <SeeFig n={1} />. None of them required going back through the codebase.
+By the middle of February, Unter had replay, errors, flags, experiments, surveys and logs running across the site <SeeFig n={1} />. The booking page had not been rebuilt for any of them. They had wired the site once, and kept adding ways to look at what happened.
 
-This is the part that sounds like a detail and is actually the mechanism <SeeFig n={2} />. The booking page did not change. What changed is how many questions could be asked of it.
+Session replay was one of those additions. Turn it on and you can watch the form being used, including the moments when someone hesitates or corrects themselves. The addresses are <Term name="masking">masked</Term>, but the struggle with the form remains.
 
-## The same page, asked a different question
+## The same page, a different question
 
-Filter that page to session replay and two touchpoints survive <SeeFig n={3} />. Filter it to product analytics and a different five light up. The page underneath is identical, and turning replay on added no code to it.
+Product analytics looked at the same page another way <SeeFig n={2} />. The See prices button became a named event, with the distance, number of gaps, and selected tier attached to it.
 
-## One click, four records
+That meant the team could ask who reached that step, who went on to request a ride, and where the conversion fell away. The page stayed the same. The record underneath it got more useful.
 
-A single press of Unter's See prices button files an event in product analytics <SeeFig n={4} />. The person's profile gains a row. The session it belongs to gets longer. Had it thrown, error tracking would already have it, with the recording attached.
+## One page, several ways to look at it
 
-Four tools, one click, and nothing instrumented twice.
+An <Term name="experiment">experiment</Term> put a different headline in front of some visitors <SeeFig n={3} />. The <Term name="feature flag">flag</Term> decided which version they saw, and the exposure was recorded alongside the outcome.
+
+A feature flag could ask a different question again <SeeFig n={4} />. A risky reservation feature could go to a small <Term name="cohort">cohort</Term> first, while the team watched for successful crossings and <Term name="exception">exceptions</Term> before giving it to everyone.
+
+Replay showed what people did. Product analytics counted it. Experiments compared it. Flags controlled who got it.
+
+The tools were different. The page underneath was not.
 
 ## What that bought, in February
 
-Nothing yet. A reader who has run a five-tool analytics stack will recognise the arrangement and not see why it matters. The next four chapters are what it bought.
+Not much, yet.
+
+At this point the setup was mostly infrastructure: a page that could be watched, measured, compared, and changed without instrumenting it again each time.
+
+The reason to build it was waiting in March.
 
 </RightPage>

@@ -1,5 +1,5 @@
 ---
-title: Activation, and choosing the number
+title: What counts as activation
 shortTitle: Activation
 subtitle: Two meetings, in February, to decide what counted as a customer. The answer is why the outage was visible at all.
 pocketGuideOrder: 4
@@ -34,22 +34,32 @@ pocketGuideOrder: 4
 
 <RightPage>
 
-# Activation, and choosing the number
+# What counts as activation
 
-Unter's investors wanted one number every Monday <SeeFig n={1} />. Choosing it took two meetings on the eighteenth of February and produced the only real argument in this story.
+By February, Unter needed one number to take into the Monday meeting <SeeFig n={1} />. Not the number of visits or signups, but the number that meant the product was actually being used.
 
-Signups were the obvious answer and the wrong one <SeeFig n={2} />. A signup is a person who has said they might be interested. Unter's product is a hole in a fence, and a host who signs up and never cuts one has not used the product and will not renew.
+They settled it in two meetings, on the eighteenth of February. Signups were the obvious answer. They were also the wrong one <SeeFig n={2} />.
 
-## Holes cut, not signups
+A person can sign up, look around, and never cut a hole. For Unter, that person had not really used the product.
 
-So the Monday number became holes cut <SeeFig n={3} />. In March, that decision is the difference between noticing the outage in eleven days and noticing it in a quarter.
+## A hole cut is the event
 
-The host page is where a hole gets registered, which makes it the page the Monday number is counted on.
+So activation became a hole cut <SeeFig n={3} />.
 
-## Counting it took no new code
+That made the Monday number a count of people who had actually done the thing Unter existed to help them do. And when the outage arrived in March, that definition mattered. The number moved after eleven days, not after a quarter.
 
-Reading how many people got from the booking page to a finished hole required nothing Unter had not been collecting since January. A funnel is a way of reading events in order, and Unter's engineers shipped nothing to produce one.
+The host page is where the hole gets registered, so that is where the number can be counted.
 
-They wrote the definition down in one place, which sounds like bookkeeping and matters in chapter eight: when an agent went looking for whether the Monday number had moved, it read the same definition the Monday email did.
+## The number was already there
+
+Nothing new had to be instrumented to produce it.
+
+The events Unter had been collecting since January already described the path from booking to a finished hole. A funnel simply put those events in order and counted how many people made it through.
+
+The important part was that they wrote the definition down.
+
+The Monday email used it. The dashboards used it. And when an agent came looking for the number in March, it was the same definition waiting there.
+
+One decision about what counted as a customer turned out to be the thing that made the outage countable.
 
 </RightPage>

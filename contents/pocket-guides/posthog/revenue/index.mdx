@@ -1,5 +1,5 @@
 ---
-title: Warehouse data, and what a fix is worth
+title: What a fix is worth
 shortTitle: Revenue
 subtitle: One backend engineer, a list of things wrong with the site, and no way of ranking them. February is when Unter worked out how.
 pocketGuideOrder: 5
@@ -35,24 +35,40 @@ pocketGuideOrder: 5
 
 <RightPage>
 
-# Warehouse data, and what a fix is worth
+# What a fix is worth
 
-Unter had one backend engineer and a list of things wrong with the site, and no way of ranking them <SeeFig n={1} />. A slow form and a broken link both read as a ticket. Neither says what it costs to leave alone.
+By February, Unter had one backend engineer and a growing list of things that needed fixing <SeeFig n={1} />. A slow form and a broken link both arrived as tickets. Neither said what happened if they stayed broken.
 
-Answering that needs something product data cannot supply on its own.
+The answer was not in product analytics alone.
 
-## Three kinds of thing, in one place
+## Put the money next to the behaviour
 
-What people did in the product, which Unter had collected since January <SeeFig n={2} />. What sat in the warehouse, which for them meant Stripe charges and the subscription table. And the rest of what a company knows: support tickets, the CRM, the issue tracker.
+Unter already knew what people did on the site <SeeFig n={2} />. The warehouse knew what those people were worth: charges in Stripe, subscriptions, renewals.
 
-Land all three in one place and the question stops being a project <SeeFig n={3} />. A host who never cut a hole is a subscription that does not renew, and the join that says so is a join.
+Put those together with the other things the company knew — support tickets, the CRM, the issue tracker — and a ticket stopped being just a ticket <SeeFig n={3} />.
 
-## Why it compounds
+A host who never cut a hole might also be a subscription that never renews.
 
-A host who cannot see coverage is a fence that never gets cut, and every uncut fence is a route Unter cannot offer to the hedgehogs that would have used it. One missing hole costs more than one hole. That is the part the ranking has to account for, and it is why a supporting element on a quiet page can be worth more than a broken button on a loud one.
+That is a very different kind of bug.
 
-## Defined once, asked three ways
+## Some fixes matter more than others
 
-Revenue metrics live as managed views, so the number in the Monday email, the number in the SQL editor and the number PostHog AI returns when asked in English are the same number. In a company of six people that is not governance. It is the difference between one argument and three.
+This changed what got worked on first.
+
+A broken button on a busy page looks important because lots of people see it. But a quieter problem can be worth more if it stops hosts from ever getting to the thing they came to do.
+
+For Unter, one missing hole could mean a lost route, a lost host, and a subscription that never came back.
+
+The ranking had to account for that.
+
+## One number, wherever you ask
+
+Revenue metrics were defined once and reused everywhere.
+
+The number in the Monday email, the number in the SQL editor, and the answer PostHog gave when someone asked for it in plain English all came from the same definition.
+
+There were six people at Unter.
+
+They did not need a governance process for this. They needed everyone to stop arguing about which number was the real one.
 
 </RightPage>

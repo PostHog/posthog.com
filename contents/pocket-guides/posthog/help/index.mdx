@@ -1,7 +1,7 @@
 ---
-title: LLM analytics on a support bot
-shortTitle: LLM analytics
-subtitle: Unter had a help page, a chat widget and a bot that answered most of what it was asked. All of it was recorded, which is the part that mattered later.
+title: AI support
+shortTitle: AI support
+subtitle: Unter had a help page, a chat widget and a bot that answered most of what it was asked. By February, they could see what it cost, where it failed, and when a person had to take over.
 pocketGuideOrder: 6
 ---
 
@@ -42,22 +42,28 @@ pocketGuideOrder: 6
 
 <RightPage>
 
-# LLM analytics on a support bot
+# AI support
 
-Unter's help page carried a chat widget, and behind the widget a bot that answered most of what it was asked <SeeFig n={1} />. The bot ran on a model, which meant every answer it gave had a cost, a latency and a chance of being wrong.
+Unter's help page had a chat widget, and behind it a bot that answered most of what people asked <SeeFig n={1} />. That made the widget a product surface like any other. It had a cost, a response time, and a failure rate.
 
-LLM analytics recorded all three <SeeFig n={2} />. A support bot is a product surface like any other, and an unrecorded one is a place where a company stops knowing what it is telling people.
+LLM analytics put those things beside the conversation itself <SeeFig n={2} />. Each question carried the model, tokens, latency and <Term name="cost calculation">cost</Term> that produced its answer. The bot stopped being a black box.
 
-## What people asked, and what they were told
+## The answer is only half the story
 
-The widget logged the question, the answer, the model, and the tokens either side <SeeFig n={3} />. Where a conversation ended in a handover, the survey underneath it recorded whether the person got what they came for.
+The widget recorded what people asked and what they were told <SeeFig n={3} />. <Term name="session replay">Session replay</Term> showed what happened around the exchange, including the cases where someone tried again, got stuck, or gave up.
 
-## The way out, when the bot could not help
+That made a useful distinction possible. A bot can answer a question without solving the problem.
 
-Every conversation had an escalation at the end of it, and the escalations were counted too <SeeFig n={4} />. In February the widget handled about forty questions a week and passed six of them to a person, which Unter read as the bot working.
+## When a person takes over
 
-By the end of February the help page was the best instrumented thing Unter owned. Every question, every answer, every handover, and a survey on the end of it.
+Some conversations ended with an escalation to a human <SeeFig n={4} />. A <Term name="user feedback">survey</Term> at that point asked the simplest useful question: did the answer help?
 
-None of that measures the people who never open the widget. A support queue can only report what arrives in it, and an empty one is the same shape whether nothing is wrong or nobody could be bothered to say so.
+In February, the bot handled about forty questions a week and passed six to a person. The human answers scored higher, but they cost more. That gave Unter something better than a vague sense that the bot was “working”: a way to see where automation was good enough, and where it wasn't.
+
+By the end of the month, the help page was one of the best-instrumented parts of the site. Questions, answers, costs, handovers and feedback all sat in the same trail.
+
+But there was still a blind spot.
+
+The data said what happened when someone opened the widget. It said nothing about the people who never did. An empty support queue can mean nobody has a problem. It can also mean nobody thought asking would help.
 
 </RightPage>

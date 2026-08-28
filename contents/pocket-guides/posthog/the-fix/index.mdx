@@ -1,7 +1,7 @@
 ---
-title: The fix, and the scout that checked it
+title: The fix, then the check
 shortTitle: The fix
-subtitle: Quillfeather read the pull request over coffee and merged it at half past nine. The interesting part is the week that followed.
+subtitle: Quillfeather read the pull request over coffee and merged it at half past nine. The more important test came in the week after.
 pocketGuideOrder: 9
 ---
 
@@ -21,30 +21,40 @@ pocketGuideOrder: 9
 
 <RightPage>
 
-# The fix, and the scout that checked it
+# The fix, then the check
 
-Which brings the story back to 4:12 in the morning.
+The story comes back to 4:12 in the morning.
 
-Thirty-two minutes after the report existed, an agent had read it, gone into Unter's codebase, confirmed the 403 was coming from a tile request that no longer carried an auth header after a January refactor, and written the fix <SeeFig n={1} />. Then it wrote a regression test, opened the pull request with the root cause in the description and a link back to the report, and waited on CI until the checks went green at ten to six.
+Thirty-two minutes after the report landed, an agent had traced the 403 to a tile request that stopped carrying an auth header after a January refactor. It confirmed the cause in Unter's codebase and wrote a fix <SeeFig n={1} />.
+
+It also added a regression test, opened a pull request with the root cause in the description, linked the report, and left CI to run. The checks passed at ten to six.
 
 ## Quillfeather read it first
 
-Nothing reaches production on its own, and this did not either <SeeFig n={2} />. Quillfeather read the diff at half past nine, agreed with the root cause, and merged it before she finished her coffee. She has since said the part that unsettled her was not the patch. It was realising she would not have found it.
+Nothing reaches production by itself, and this did not either <SeeFig n={2} />. Quillfeather read the diff at half past nine, agreed with the diagnosis, and merged it before she finished her coffee.
+
+Later, she said the unsettling part was not the patch. It was realising that, without the report, she probably would not have found the problem.
 
 ## Go back and try it
 
-The map below is the same view, eleven days and four lines later.
+The map below is the same view, eleven days later, with the fix in place.
 
 ## The week after
 
-A merge is not evidence. On the twenty-first, a validation scout went back to the funnel step the fix had been aimed at and checked whether it had recovered. It had, to within a point of the February baseline.
+A successful merge is not proof that the problem is gone.
 
-That check produced its own events, which is the part that compounds. Unter's data in March was better than its data in January, so the signals raised from it in April were sharper.
+On the twenty-first, a validation scout returned to the funnel step the fix was meant to restore and checked the numbers against the February baseline. They were back to within a point of it.
+
+That check produced events of its own. Those events then became part of the data available to the next round of signals.
+
+That is the useful part of the loop: the data gets better as the system runs. Unter had more useful data in March than it had in January, which meant the signals raised in April could be more precise.
 
 ## What this needs, honestly
 
-Self-driving is in open beta and it does not get this right every time. It needs a connected repository, AI data processing turned on for the organisation, and a GitHub connection per person.
+Self-driving is still in open beta, and it does not get every problem right. It requires a connected repository, AI data processing enabled for the organisation, and a GitHub connection for each person who uses it.
 
-And it is only as good as what feeds it. Unter's loop worked in March because of an afternoon in January. A product with a thin instrumentation footprint gets a correspondingly thin version of this story.
+It also depends on the data coming in.
+
+Unter's March result was possible because the team had instrumented the page back in January. If a product has little instrumentation, there is less for the system to work with—and the resulting loop will be thinner too.
 
 </RightPage>

@@ -1,7 +1,7 @@
 ---
 title: Errors, replay, and logs on one outage
 shortTitle: The outage
-subtitle: Hoglet McSpine pressed retry three times and closed the tab. Four hundred and eleven people after him did roughly the same thing.
+subtitle: The map failed, people kept trying, and the page carried enough evidence to show what happened.
 pocketGuideOrder: 7
 ---
 
@@ -19,7 +19,7 @@ pocketGuideOrder: 7
     page="safety"
     focus="coverage-map"
     inspect={false}
-    caption="The touchpoint, and the data underneath it."
+    caption="The failed map, before anyone looked at the data."
 />
 
 <UnterFigure
@@ -27,7 +27,7 @@ pocketGuideOrder: 7
     page="safety"
     focus="coverage-map"
     tools={['error', 'replay', 'logs']}
-    caption="One tool at a time, on the element it belongs to."
+    caption="The same failure, seen through errors, replay, and logs."
 />
 
 </LeftPage>
@@ -36,30 +36,52 @@ pocketGuideOrder: 7
 
 # Errors, replay, and logs on one outage
 
-Hoglet McSpine had been meaning to cut a hole in his fence for about a year <SeeFig n={1} />. On the evening of the third of March he sat down to do something about it, got as far as Unter's safety page, and waited for the coverage map to load.
+Hoglet McSpine had been meaning to cut a hole in his fence for about a year. On the evening of March 3, he opened Unter's safety page to check where the service was available <SeeFig n={1} />.
 
-It did not <SeeFig n={2} />. He pressed retry. It spun for about a second and gave up. He pressed it twice more, closed the tab, and has not been back.
+The coverage map did not load <SeeFig n={2} />.
 
-Seven hours earlier, a config change at Unter's tile provider had started returning 403 on every request <SeeFig n={3} />. Nothing crashed. The page still rendered, the header still said Coverage in your area, and the box underneath it stayed empty.
+He pressed **Retry**. It spun for about a second and failed again. He pressed it twice more, then closed the tab. He did not come back.
 
-## Do what McSpine did
+At Unter, the page itself looked fine. The header loaded. The rest of the content loaded. Only the map was broken, and there was nothing on the page to tell the team why.
 
-The map below is the one from the story and it is broken in the same way. Press retry. Press it again, the way people do.
+## The failure was already in the data
 
-Now turn the instrumentation on and look at what those clicks produced.
+The map's tile requests had started returning 403 responses seven hours earlier <SeeFig n={3} />. Error tracking had captured the exception, including the stack trace. Session replay showed people repeatedly pressing **Retry**. The tile service logs showed the same 403s from the backend.
 
-## Three tools, one dead widget
+The three records pointed to the same failure.
 
-Error tracking had the exception, with a readable stack trace because the source maps had been uploaded since January. Session replay had tagged the retry presses as a rage click, because pressing the same dead control three times is a shape it recognises. The backend log line sat on the same timeline as both, from the service that returned the 403.
+No one had written an event called `coverage_map_broken`. They did not need to. The error was captured automatically, the interaction was recorded in replay, and the service logs filled in what was happening behind the page.
 
-Nobody at Unter had instrumented "the coverage map is broken." Nobody could have. What they instrumented, in January, was the page.
+## One broken button, three views of it
 
-## Eleven days of nobody saying anything
+Error tracking showed **412 occurrences** that night.
 
-Between the third and the fourteenth of March, 412 people reached the coverage map and left. The status page stayed green, because the service that was down was not Unter's.
+Session replay showed what people did when the map failed: they pressed **Retry**, often more than once. Forty-seven sessions over seven days contained a <Term name="rage click">rage-click</Term> pattern on the button, with one person pressing it 31 times.
 
-The chat widget from the last chapter was two clicks away on every one of those pages, and the escalation counter that had been running since February did not move. Not one of the 412 opened it. The support inbox that had handled six handovers a week in February handled six handovers a week through the outage, which is exactly what a healthy support queue looks like.
+The server logs explained the response. The tile service was returning 403 because its API key had expired.
 
-The Monday number fell 9% and the team put it down to the weather, which is the sort of thing that is true often enough to be dangerous.
+Each tool answered a different question.
+
+**Error tracking:** what failed?
+
+**Session replay:** what did people do?
+
+**Logs:** what happened on the server?
+
+Together, they described the outage without requiring a separate instrument for every possible failure.
+
+## The people who never complained
+
+The outage lasted from March 3 to March 14. During that period, 412 people reached the coverage map and left.
+
+The status page stayed green because the failing service was a dependency, not Unter itself.
+
+The support widget from the previous chapter was available on the same pages. The escalation counter continued to show roughly six handovers a week. None of those 412 people opened the widget.
+
+That was the misleading part.
+
+Unter's support numbers looked normal because the people affected by the outage were not asking for help. The Monday number was down 9%, and the team initially blamed the weather.
+
+The page had been telling them something was wrong. They just had not been looking at the right part of it.
 
 </RightPage>

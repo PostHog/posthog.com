@@ -1,6 +1,6 @@
 ---
-title: Install, and what autocapture caught
-shortTitle: Install
+title: Install and autocapture
+shortTitle: Install and autocapture
 subtitle: Everything that caught the outage two months later came from one afternoon nobody thought much about.
 pocketGuideOrder: 1
 isPrimer: true
@@ -12,7 +12,7 @@ isPrimer: true
     n={1}
     page="ride"
     inspect={false}
-    caption="The page as its users saw it, with nothing marked on it."
+    caption="Unter's website, running as users saw it."
 />
 
 <UnterFigure
@@ -43,28 +43,64 @@ isPrimer: true
 
 <RightPage>
 
-# Install, and what autocapture caught
+# Install and autocapture
 
-On the twelfth of January, someone at Unter pasted eleven lines of JavaScript into a template and deployed it <SeeFig n={1} />. It took an afternoon, most of which went on deciding whether to do it at all.
+On January 12th, someone at Unter pasted eleven lines of JavaScript into a template and deployed it. Nobody thought much about it. Two months later, those eleven lines would give an agent enough information to find a broken page at 4AM.
 
-That afternoon is the origin of every number in this guide, including the ones that eventually described a broken map to an agent at four in the morning <SeeFig n={2} />. Here is the site those eleven lines were added to, running as its users saw it.
+First, there was the site itself <SeeFig n={1} />.
 
-## What arrived without anyone deciding
+The important change happened underneath it. The script in the page's `<head>` connected the site to PostHog. From then on, the site could send data without anyone adding tracking code to every page and button <SeeFig n={2} />.
 
-Most of what Unter collected in January, nobody chose <SeeFig n={3} />. Autocapture records clicks and pageviews, so the ranking of what people press exists whether or not anyone predicted which buttons would matter. The same eleven lines record where a visit came from, what it was running on, and which campaign sent it.
+## The first event arrives
 
-This is the unglamorous half and it is the half that paid. Two months later, nobody had to have anticipated a tile provider changing a config for the evidence of it to exist.
+The first useful thing about the installation was that it did not need much more code.
 
-## The limits of taking everything
+Pageviews started arriving. Page leaves started arriving. Clicks could be captured too. The same snippet also supplied the information around a visit: where someone came from, which campaign brought them in, what device they were using, and where they were in the world.
 
-Autocapture is broad and shallow. It sees a press on a button with some classes on it, not a signup, and it does not survive a component rename.
+That matters because none of this required Unter to predict what would be useful beforehand.
 
-Unter learned this the ordinary way. They renamed an event in April, and the four months either side of the rename have never lined up since. Event storage is write-only for practical purposes: renaming does not rewrite history, it forks it.
+They had installed the library. The data started accumulating.
 
-## Taking everything, except when asked not to
+## Capturing clicks
 
-The same eleven lines carry the way out of them <SeeFig n={4} />. A visitor who opts out stops being recorded from that moment, and the call that does it sits in the footer next to the privacy notice, where Unter's lawyer wanted it.
+Most of what Unter collected in January, nobody had specifically asked for <SeeFig n={3} />.
 
-Capture that cannot be turned off is capture nobody can defend, and the afternoon in January included wiring up the off switch.
+A visitor clicked "Read the announcement". <Term name="autocapture">Autocapture</Term> recorded the interaction because it happened on the page. Unter did not need to create a tracking call for that particular link first.
+
+This is the useful part of autocapture: _it gives you a record of interactions before you know which ones will matter_.
+
+It also gives you less meaning than a deliberately named <Term name="event">event</Term>. A click is still a click. Autocapture can tell you what element was pressed; it does not automatically know that the business event you care about was, say, a signup or a completed purchase.
+
+That distinction becomes important once you start turning observations into product analytics.
+
+## The traffic is already there
+
+The same installation also gave Unter a view of where visitors came from.
+
+The links in the funding announcement carried UTM parameters. When someone arrived through one of them, those parameters came in with the visit and could be used by web analytics to attribute the traffic <SeeFig n={3} />.
+
+No separate redirect service was needed. No tracking call had to be added to the announcement link.
+
+The link carried the campaign information. The pageview carried it into PostHog.
+
+## A mismatch in data
+
+There is a limit to letting the page tell you what happened.
+
+In April, Unter renamed an event. The records from before the rename did not change with it, so comparisons across the change stopped lining up cleanly.
+
+That is one reason autocapture and deliberately named events serve different purposes. Autocapture is good at recording what happened on the page. When you need a stable description of a product action, you usually need to define that action yourself.
+
+## Visitors can stop the recording
+
+There was one more part of the installation to get right: what happens when someone does not want to be captured <SeeFig n={4} />.
+
+The SDK has calls for turning capture off and turning it back on. Unter put the choice behind the privacy link in the footer, and the setting persists across reloads.
+
+So the installation was not just a way to start collecting data. It also included a way to stop.
+
+By the time the site was deployed that afternoon, PostHog could capture the page, collect useful context around a visit, record interactions without someone defining every one of them, and respect a visitor's choice not to be recorded.
+
+Nobody knew yet which of those details would matter two months later.
 
 </RightPage>
