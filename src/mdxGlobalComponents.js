@@ -31,6 +31,7 @@ import { GDPRForm } from './components/GDPRForm'
 import { AdvisoryAnchor } from './components/Heading'
 import { HiddenSection } from './components/HiddenSection'
 import { HubSpotForm } from './components/HubSpotForm'
+import ImageGallery from './components/ImageGallery'
 import ImageSlider from './components/ImageSlider'
 import { KeyboardShortcut } from './components/KeyboardShortcut'
 import { Label } from './components/Label'
@@ -88,6 +89,7 @@ export const shortcodes = {
     HearAboutUsCarousel,
     CloudinaryImage,
     Images,
+    ImageGallery,
     ImageSlider,
     ComparisonTable,
     ProductComparisonTable,
