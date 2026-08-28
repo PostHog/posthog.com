@@ -190,23 +190,23 @@ alt: "calibrating a Replay Vision scanner with observation ratings and written f
 
 The goal is a short first feedback loop, not a perfect prompt.
 
-The model changes the quality and cost of each observation, so calibrate it too. Start with Gemini 3 Flash, the default. If the observations are close but not quite right, tighten the prompt before reaching for Gemini 3.7 Flash. A sharper instruction often fixes the problem.
+The model changes the quality and cost of each observation, so calibrate it too. Start with `Standard`, the default (currently Gemini 3 Flash). If the observations are close but not quite right, tighten the prompt before reaching for `Pro`, the premium (currently Gemini 3.7 Flash). A sharper instruction often fixes the problem.
 
 These examples are our starting points. Calibration gets final say.
 
-Use Gemini 3.5 Flash Lite for high-volume jobs where you care about the distribution, not one observation. Our broken-render classifier is the obvious example. It tags recordings as `nothing_broken`, `media_failed`, `clipped_layout`, or `horizontal_overflow`. One wrong tag nudges a trend instead of opening a ticket.
+Use `Lite` for high-volume jobs where you care about the distribution, not one observation. Our broken-render classifier is the obvious example. It tags recordings as `nothing_broken`, `media_failed`, `clipped_layout`, or `horizontal_overflow`. One wrong tag nudges a trend instead of opening a ticket.
 
-Use Gemini 3 Flash when the job combines a fixed rubric with some judgment. An experiment classifier typically fits well here. It can tag each post-exposure recording as `smooth`, `hesitation`, `confusion`, `error_or_dead_end`, or `inconclusive`. The scanner judges one recording, and the Digest or Scout compares the pattern across variants.
+Use `Standard` when the job combines a fixed rubric with some judgment. An experiment classifier typically fits well here. It can tag each post-exposure recording as `smooth`, `hesitation`, `confusion`, `error_or_dead_end`, or `inconclusive`. The scanner judges one recording, and the Digest or Scout compares the pattern across variants.
 
-Use Gemini 3.7 Flash when a person may act on a single observation. Our ghost-bug scanner must verify both halves of a contradiction before it says yes. A high-ICP onboarding scanner reconstructs one signup journey that a product team may inspect immediately. In both cases, a plausible wrong answer wastes someone's time. Calibration will tell you whether the more expensive model earns its keep.
+Use `Pro` when a person may act on a single observation. Our ghost-bug scanner must verify both halves of a contradiction before it says yes. A high-ICP onboarding scanner reconstructs one signup journey that a product team may inspect immediately. In both cases, a plausible wrong answer wastes someone's time. Calibration will tell you whether the more expensive model earns its keep.
 
 Choose the model based on the cost of a wrong answer, not the fanciness of the prompt. You can change the model later. The scanner type is the decision that gets locked when you create it.
 
 <!-- screenshot placeholder: model choice with examples
-show: the Gemini 3.5 Flash Lite, Gemini 3 Flash, and Gemini 3.7 Flash options in the scanner editor
-annotation: pair Gemini 3.5 Flash Lite with broken-render tagging, Gemini 3 Flash with experiment classification, and Gemini 3.7 Flash with contradiction or high-ICP investigation
+show: the Lite, Standard, and Pro options in the scanner editor
+annotation: pair Lite with broken-render tagging, Standard with experiment classification, and Pro with contradiction or high-ICP investigation
 privacy: no recording or customer data should appear
-alt: "Gemini model choices for Replay Vision scanners"
+alt: "Model choices for Replay Vision scanners"
 -->
 
 Context changes the answer too. A scanner produces more specific judgments when it knows the real product surface and relevant cohort. It also needs the selection event and the decision behind the question. Use the actual labels and states from your product in the scanner's prompt. Point the scanner at the experiment, survey response, funnel step, feature flag, or whatever else it is that gives the recording meaning.
