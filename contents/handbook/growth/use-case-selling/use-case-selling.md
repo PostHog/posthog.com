@@ -50,7 +50,6 @@ Each use case has a full playbook with discovery questions, competitive position
 | Logs | Observability | Customer Experience |
 | Distributed tracing *alpha* | Observability | Release Engineering |
 | Metrics *alpha* | Observability | |
-| Health checks | Observability | Data Infrastructure |
 | Replay Vision | Product Intelligence | Customer Experience, Observability |
 | PostHog AI | Horizontal (all) | |
 | self-driving | Horizontal (all) | Converts fastest in Observability, Release Engineering, and Customer Experience |
