@@ -59,6 +59,12 @@ Beyond total size, a balanced book also needs:
 
 If your book is outside these bounds at quarter start, work with your team lead to rebalance.
 
+## CSM book balance
+
+CSM books target around $2.5M ARR and are balanced by account size as well as total ARR. The current account mix and live capacity calculation are covered in [how the Customer Success team works](/handbook/cs-and-onboarding/how-we-work#account-allocation).
+
+If your book is outside the current target at quarter start, work with your team lead to rebalance it.
+
 ## Adding a TAM to an account
 
 There is no CSM to TAM handoff anymore, because the CSM never leaves. Instead, when someone spots a growth opportunity on a CSM-covered account, they flag it for a TAM.
@@ -107,28 +113,36 @@ If an account is struggling on these dimensions, that's a signal to invest more.
 
 ## Doing the allocation
 
-### CSM allocation
-
-CSM coverage stays Simon's call. Every $20k+ account should have a CSM. Simon and the CSM team leads use the <PrivateLink url="https://us.posthog.com/code/canvas/55b93018-aa64-4d36-9996-7b9415a043fd/01a0425d-ad76-7a59-9f74-e77d73a9a30a">Uncovered customer backlog</PrivateLink> canvas to review accounts without a CSM and assign an owner.
-
-Accounts can also be flagged for CSM allocation using these tags in PostHog Customer Analytics:
-
-- `csm overlay needed` where a TAM is retaining an account but needs extra help from a CSM
-- `csm handover needed` where a TAM or TAE is ready to hand over an account fully to a CSM
-
-For accounts with no previous owner, we use PostHog GeoIP data to understand which region the account is primarily based in. The relevant team lead then decides which CSM takes the account.
-
-> Once a day an <PrivateLink url='posthog-code://loop/9f441418-1400-4839-b82c-4ce3f8bcb2cb'>automation</PrivateLink> runs which adds a region tag to the account to assist in routing to the correct team.
+Each quarter, TAM and CSM team leads review coverage and rebalance books. TAM allocation requires Ben's approval; CSM allocation requires Simon's approval. Accounts can still be added during the quarter when a handover or qualified growth opportunity requires it.
 
 ### TAM allocation
 
-A TAM is added on top of CSM coverage where an opportunity qualifies. At the start of each quarter, team leads, with Ben's approval, review:
+A TAM is added on top of CSM coverage where an opportunity qualifies. At the start of each quarter, TAM team leads, with Ben's approval, review:
 
 1. **Accounts tagged `tam overlay needed`** where a CSM has identified a growth opportunity
 2. **TAM books outside the $1.5M-$2M ARR band** to identify which accounts to rebalance
 3. **Accounts where the TAM should be removed** because expansion is exhausted
 
 Once the decision is settled, the team lead updates the tags and assigns the specific TAM in Customer Analytics.
+
+To request CSM coverage, add:
+
+- `csm overlay needed` when you are keeping the account but need CSM support
+- `csm handover needed` when you are handing the account over to a CSM
+
+### CSM allocation
+
+Every $20k+ account should have a CSM. At the start of each quarter, CSM team leads, with Simon's approval, review:
+
+1. **The <PrivateLink url="https://us.posthog.com/code/canvas/55b93018-aa64-4d36-9996-7b9415a043fd/01a0425d-ad76-7a59-9f74-e77d73a9a30a">Uncovered customer backlog</PrivateLink> canvas** to find accounts without a CSM
+2. **Accounts tagged `csm overlay needed` or `csm handover needed`** that need a CSM assigned
+3. **CSM books outside the current target** to identify which accounts should be rebalanced
+
+For accounts with no previous owner, use PostHog GeoIP data to identify the account's primary region. The relevant team lead then assigns the CSM in Customer Analytics.
+
+> Once a day an <PrivateLink url='posthog-code://loop/9f441418-1400-4839-b82c-4ce3f8bcb2cb'>automation</PrivateLink> runs which adds a region tag to the account to assist in routing to the correct team.
+
+To request TAM coverage for an account with a qualified growth opportunity, add the `tam overlay needed` tag in Customer Analytics.
 
 ### Mid-quarter TAM changes
 
@@ -163,7 +177,7 @@ For handover to take place there should be an Account Plan (saved as a note on t
 
 > All open invoices should also have been paid before handing over. It makes sense to use existing relationships to chase payments, rather than the new owner's first action needing to be chasing payments/suspending access for non-payment.
 
-> For TAE accounts being handed over to a CSM, tag the account in PostHog Customer Analytics with `csm handover needed` and then flag this with Simon directly.  There's no need to wait for the end of the quarter to do this.  He will review the plan and current state of the customer and then work with CSM leads to assign a new owner.
+> For TAE accounts being handed over to a CSM, add the `csm handover needed` tag in PostHog Customer Analytics and flag it with the relevant CSM team lead. There's no need to wait for the end of the quarter. The team lead will review the plan and current state of the customer, then assign a new owner with Simon's approval.
 
 ### Account Plan
 
