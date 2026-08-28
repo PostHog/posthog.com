@@ -12,6 +12,7 @@ import { docsMenu, handbookSidebar } from '../src/navs/index.js'
 import {
     generateRawMarkdownPages,
     generateApiSpecMarkdown,
+    generateOpenApiSpec,
     generateChangelogMd,
     generateLlmsTxt,
     generateSdkReferencesMarkdown,
@@ -502,6 +503,7 @@ export const onPostBuild: GatsbyNode['onPostBuild'] = async ({ graphql, reporter
             },
         }).then((res) => res.json())
 
+        generateOpenApiSpec(spec)
         generateApiSpecMarkdown(spec)
     } catch (error) {
         console.error('Failed to generate API spec markdown:', error)
