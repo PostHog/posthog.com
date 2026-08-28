@@ -1,19 +1,23 @@
 import React, { useMemo } from 'react'
-import { IconBook, IconPiggyBank, IconPresent } from '@posthog/icons'
+import { IconBook, IconGraduationCap, IconPiggyBank, IconPresent } from '@posthog/icons'
 import { TreeMenu } from 'components/TreeMenu'
+import { learnSectionId } from 'components/PocketGuides/LearnSurface'
+import { useBookPages } from 'components/PocketGuides/bookModel'
+import DocsTabLabel from './docsTabLabel'
 import usePlatformList from 'hooks/docs/usePlatformList'
 import type { MenuTab } from 'components/ReaderView'
 import { docsMenu } from '../../../navs'
 import ProductNav from './ProductNav'
 import type { ProductNavItem } from './types'
 
-const TAB_ICON: Record<'product' | 'pricing' | 'docs', React.ReactNode> = {
+const TAB_ICON: Record<'product' | 'pricing' | 'docs' | 'learn', React.ReactNode> = {
     product: <IconPresent className="size-4" />,
     pricing: <IconPiggyBank className="size-4" />,
     docs: <IconBook className="size-4" />,
+    learn: <IconGraduationCap className="size-4" />,
 }
 
-export type ProductSurface = 'product' | 'pricing' | 'docs'
+export type ProductSurface = 'product' | 'pricing' | 'docs' | 'learn'
 
 type DocsMenuItem = {
     name: string
@@ -61,6 +65,24 @@ const DocsTreeMenu = ({
     return <TreeMenu items={itemsWithInstall as any} variant={variant} appearance="sidebar" rootHeading={rootHeading} />
 }
 
+/** One item per page of the volume. A component because `useBookPages` is a hook, as with `DocsTreeMenu`. */
+const LearnNav = ({
+    volumeId,
+    basePath,
+    contentRef,
+}: {
+    volumeId: string
+    basePath: string
+    contentRef?: React.RefObject<HTMLElement>
+}) => {
+    const pages = useBookPages(volumeId)
+    const items: ProductNavItem[] = useMemo(
+        () => pages.map((page) => ({ slug: learnSectionId(page), name: page.shortTitle || page.title })),
+        [pages]
+    )
+    return <ProductNav items={items} basePath={basePath} contentRef={contentRef} />
+}
+
 interface BuildProductMenuTabsArgs {
     /**
      * Resolved product data from `useProduct(...)`. Must include `slug` and
@@ -73,6 +95,8 @@ interface BuildProductMenuTabsArgs {
               name: string
               productMenu?: ProductNavItem[]
               pricingMenu?: ProductNavItem[]
+              /** Volume id from `src/constants/pocketGuides.ts`. Setting it is the whole Learn opt-in. */
+              pocketGuideVolume?: string
           }
         | null
         | undefined
@@ -96,6 +120,8 @@ interface BuildProductMenuTabsArgs {
 
 const surfaceBasePath = (productSlug: string, surface: ProductSurface): string => {
     if (surface === 'pricing') return `/${productSlug}/pricing`
+    // Under /docs so switching between Docs and Learn never leaves the docs sidebar.
+    if (surface === 'learn') return `/docs/${productSlug}/learn`
     return `/${productSlug}`
 }
 
@@ -117,7 +143,7 @@ export function buildProductMenuTabs({
 }: BuildProductMenuTabsArgs): MenuTab[] {
     if (!productData) return []
 
-    const { slug: productSlug, name: productName, productMenu = [], pricingMenu = [] } = productData
+    const { slug: productSlug, name: productName, productMenu = [], pricingMenu = [], pocketGuideVolume } = productData
 
     const navProductMenu = productMenu.filter((item) => !item.hideFromNav)
     const navPricingMenu = pricingMenu.filter((item) => !item.hideFromNav)
@@ -166,7 +192,8 @@ export function buildProductMenuTabs({
 
     if (docsChildren.length > 0) {
         tabs.push({
-            label: 'Docs',
+            // A component so the experiment resolves its own flag; `value` stays 'docs' for routing.
+            label: <DocsTabLabel />,
             value: 'docs',
             icon: TAB_ICON.docs,
             default: activeSurface === 'docs',
@@ -177,6 +204,24 @@ export function buildProductMenuTabs({
                     productName={productName}
                     variant={resolvedNavStyle}
                     rootHeading={productName}
+                />
+            ),
+        })
+    }
+
+    // After Docs: the long-form read you reach for once the reference has not answered the question.
+    if (pocketGuideVolume) {
+        tabs.push({
+            label: 'Learn',
+            value: 'learn',
+            icon: TAB_ICON.learn,
+            default: activeSurface === 'learn',
+            href: surfaceBasePath(productSlug, 'learn'),
+            menu: (
+                <LearnNav
+                    volumeId={pocketGuideVolume}
+                    basePath={surfaceBasePath(productSlug, 'learn')}
+                    contentRef={activeSurface === 'learn' ? contentRef : undefined}
                 />
             ),
         })

@@ -18,6 +18,7 @@ import { ToggleGroup, ToggleOption } from 'components/RadixUI/ToggleGroup'
 import Tooltip from 'components/RadixUI/Tooltip'
 import Link from 'components/Link'
 import { navigate } from 'gatsby'
+import usePostHog from '../../hooks/usePostHog'
 import { MDXRenderer } from 'gatsby-plugin-mdx'
 import { MDXProvider } from '@mdx-js/react'
 import ElementScrollLink, { ScrollSpyProvider } from 'components/ElementScrollLink'
@@ -848,10 +849,12 @@ interface SidebarTabButtonProps {
     showLabel: boolean
     /** Pinned mode renders the tab with icon stacked above label (horizontal row). */
     stacked: boolean
+    /** Share the row equally (`flex-1`). At four tabs the widest label sizes all of them and the row overflows. */
+    equalWidth: boolean
     onClick: () => void
 }
 
-const SidebarTabButton = ({ tab, active, showLabel, stacked, onClick }: SidebarTabButtonProps) => {
+const SidebarTabButton = ({ tab, active, showLabel, stacked, equalWidth, onClick }: SidebarTabButtonProps) => {
     // Manual FLIP for the icon: capture position on every commit, then on the
     // next commit — IF the structural layout changed (`layoutKey`) — animate
     // the icon from its old position to its new one. Click-only re-renders
@@ -860,7 +863,8 @@ const SidebarTabButton = ({ tab, active, showLabel, stacked, onClick }: SidebarT
     // since v4 measures on every render and any sub-pixel delta animates).
     const iconRef = useRef<HTMLSpanElement>(null)
     const prevPosRef = useRef<DOMRect | null>(null)
-    const layoutKey = `${stacked ? 1 : 0}-${showLabel ? 1 : 0}`
+    // In the key because a three-tab to four-tab move resizes every button, so the icon moves.
+    const layoutKey = `${stacked ? 1 : 0}-${showLabel ? 1 : 0}-${equalWidth ? 1 : 0}`
     const prevKeyRef = useRef(layoutKey)
 
     useLayoutEffect(() => {
@@ -894,7 +898,7 @@ const SidebarTabButton = ({ tab, active, showLabel, stacked, onClick }: SidebarT
             aria-selected={active}
             className={`relative rounded text-sm leading-tight flex ${
                 stacked
-                    ? 'flex-1 flex-col items-center text-center gap-1 px-2 py-1.5'
+                    ? `${equalWidth ? 'flex-1' : ''} flex-col items-center text-center gap-1 px-2 py-1.5`
                     : // Icon-only AND with-label both use justify-start so
                       // the icon stays at button x=8 regardless of button
                       // width. `justify-center` tied icon x to width and
@@ -982,6 +986,7 @@ const LeftSidebar = ({
 }: LeftSidebarProps) => {
     const { searchQuery } = useSearch()
     const { hasMounted } = useReaderView()
+    const posthog = usePostHog()
     const hasActiveSearch = !!searchQuery && searchQuery.length >= 2
 
     // Persist/restore the menu scroll position across navigations (ReaderView
@@ -1243,7 +1248,9 @@ const LeftSidebar = ({
                                     }
                                 }}
                                 className={`mx-2 flex gap-px flex-shrink-0 ${
-                                    appliedPinned ? 'flex-row' : 'flex-col items-stretch py-2 border-y border-secondary'
+                                    appliedPinned
+                                        ? 'flex-row justify-between'
+                                        : 'flex-col items-stretch py-2 border-y border-secondary'
                                 }`}
                                 role="tablist"
                                 aria-label="Sidebar mode"
@@ -1255,7 +1262,15 @@ const LeftSidebar = ({
                                         active={t.value === activeTab}
                                         showLabel={expanded}
                                         stacked={appliedPinned}
+                                        // Four tabs at natural widths total ~230px and fit the 234px row.
+                                        equalWidth={menuTabs!.length < 4}
                                         onClick={() => {
+                                            // Proximate metric: downstream outcomes move too slowly to read.
+                                            posthog?.capture('reader_tab_click', {
+                                                tab: t.value,
+                                                from_tab: activeTab,
+                                                tab_count: menuTabs!.length,
+                                            })
                                             if (t.href && t.value !== activeTab) {
                                                 navigate(t.href)
                                             } else {
