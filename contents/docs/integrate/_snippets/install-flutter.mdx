@@ -121,7 +121,11 @@ platform :ios, '13.0'
 # rest of your config
 ```
 
-For Swift Package Manager projects without a `Podfile`, set the **Minimum Deployments** version to iOS 13.0 for the `Runner` target in Xcode (**Runner > General > Minimum Deployments**).
+For Swift Package Manager projects without a `Podfile`, set the **Minimum Deployments** version to iOS 13.0 for the `Runner` target in Xcode (**Runner > General > Minimum Deployments**). After you change **Minimum Deployments**, regenerate the iOS project's configuration files:
+
+```bash
+flutter build ios --config-only
+```
 
 #### Dart setup (For manual step only)
 
