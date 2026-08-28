@@ -158,6 +158,174 @@ export const TERMS = {
             'Classifies the sentiment of user messages as positive, neutral, or negative using a local ML model. Free to run with no LLM cost.',
         slug: '/docs/ai-observability/sentiment',
     },
+    person: {
+        title: 'Person',
+        description:
+            'People in PostHog represent the users behind your events. People have person profiles with properties, which you can filter on, build cohorts from, and use to target feature flags.',
+        slug: '/docs/data/persons',
+    },
+    'person property': {
+        title: 'Person property',
+        description:
+            'Person properties enable you to capture, manage, and analyze specific data about a user. You can use them to create filters or cohorts, which can then be used in insights, feature flags, surveys, and more.',
+        slug: '/docs/product-analytics/person-properties',
+    },
+    event: {
+        title: 'Event',
+        description:
+            'An event is the core unit of data in PostHog. It represents an interaction a user has with your app or website: button clicks, pageviews, query completions, signups.',
+        slug: '/docs/data/events',
+    },
+    session: {
+        title: 'Session',
+        description:
+            'A session is a set of events that capture a single use of your product or visit to your website. A new session starts after 30 minutes of inactivity, and a new session triggers a new session replay.',
+        slug: '/docs/data/sessions',
+    },
+    experiment: {
+        title: 'Experiment',
+        description:
+            'Experiments let you test a change against a control and find out whether it actually worked. You define variants and metrics; PostHog randomizes your users and runs the statistics.',
+        slug: '/docs/experiments',
+    },
+    funnel: {
+        title: 'Funnel',
+        description:
+            'Funnels enable you to visualize your flows and understand where the friction points are so that you can improve them.',
+        slug: '/docs/product-analytics/funnels',
+    },
+    autocapture: {
+        title: 'Autocapture',
+        description:
+            'PostHog can automatically capture a variety of events in your app – clicks, form submissions, pageviews – without specific tracking code.',
+        slug: '/docs/product-analytics/autocapture',
+    },
+    scanner: {
+        title: 'Scanner',
+        description:
+            'A scanner is a Replay Vision probe you configure once: a prompt describing what to look for, a type deciding the shape of the answer, and filters choosing which recordings it runs against.',
+        slug: '/docs/replay-vision/scanner-types',
+    },
+    observation: {
+        title: 'Observation',
+        description:
+            "One scanner applied to one recording. Each observation is saved as a `$recording_observed` event, so a scanner's output behaves like any other event in PostHog.",
+        slug: '/docs/replay-vision/observations',
+    },
+    masking: {
+        title: 'Masking',
+        description:
+            'Masking replaces content with asterisks or a blank box before it leaves the device, so what you mask never reaches PostHog. It applies at capture time – a replay recorded unmasked stays that way.',
+        slug: '/docs/session-replay/privacy',
+    },
+    'trigger group': {
+        title: 'Trigger group',
+        description:
+            'A set of conditions that decide whether a session is recorded, with its own sample rate and minimum duration. Groups are ORed, so a session records if it matches any of them.',
+        slug: '/docs/session-replay/how-to-control-which-sessions-you-record',
+    },
+    'rage click': {
+        title: 'Rage click',
+        description:
+            'Several clicks in quick succession on the same element – PostHog captures it as a `$rageclick` event, and it usually means something looked clickable and did nothing.',
+        slug: '/docs/session-replay/how-to-watch-recordings',
+    },
+    'replay vision': {
+        title: 'Replay Vision',
+        description:
+            'Replay Vision uses AI to automatically watch your session recordings and turn what it sees into structured, queryable data. You configure scanners – named AI probes that describe what to look for – and PostHog applies them to your recordings.',
+        slug: '/docs/replay-vision',
+    },
+    cohort: {
+        title: 'Cohort',
+        description:
+            'Cohorts enable you to easily create a list of users who have something in common, such as completing an action or having the same property.',
+        slug: '/docs/data/cohorts',
+    },
+    'self-driving': {
+        title: 'Self-driving',
+        description:
+            'PostHog makes your product self-driving: it pairs the full context of your product with agents that find problems and opportunities and ship the fix – reactively when prompted, or proactively via the inbox.',
+        slug: '/docs/self-driving',
+    },
+    'reverse proxy': {
+        title: 'Reverse proxy',
+        description:
+            'A reverse proxy routes requests to PostHog through your own domain. Ad blockers keep lists of known analytics domains, so traffic sent to a domain they have catalogued is dropped before it reaches PostHog.',
+        slug: '/docs/advanced/proxy',
+    },
+    'managed proxy': {
+        title: 'Managed proxy',
+        description:
+            'PostHog runs the reverse proxy for you on a subdomain you own, handling the SSL certificate, the routing, and the maintenance. Free on PostHog Cloud, and all you need is access to your DNS.',
+        slug: '/docs/advanced/proxy/managed-reverse-proxy',
+    },
+    'content security policy': {
+        title: 'Content Security Policy',
+        description:
+            'A browser policy naming which origins a page may load code and send data to. A policy that does not name PostHog stops the recorder script from being served, so no session is captured.',
+        slug: '/docs/advanced/content-security-policy',
+    },
+    'saved filter': {
+        title: 'Saved filter',
+        description:
+            'A set of recording filters you name and keep. It stays live, so opening it again returns the sessions matching those conditions now, not the ones that matched when you saved it.',
+        slug: '/docs/session-replay/how-to-watch-recordings',
+    },
+    collection: {
+        title: 'Collection',
+        description:
+            'A set of specific recordings you add by hand. Unlike a saved filter it does not change on its own, which makes it the place to keep sessions you want to revisit or share.',
+        slug: '/docs/session-replay/how-to-watch-recordings',
+    },
+    'console log': {
+        title: 'Console log',
+        description:
+            'The browser console output captured alongside a recording – logs, warnings, and errors – placed on the player timeline at the moment each one fired.',
+        slug: '/docs/session-replay/console-log-recording',
+    },
+    'network request': {
+        title: 'Network request',
+        description:
+            'The requests a page made during a recording, with their timing and status. Payloads and headers are captured only if you turn that on, and are subject to your masking rules.',
+        slug: '/docs/session-replay/network-recording',
+    },
+    comment: {
+        title: 'Comment',
+        description:
+            'A note left on a recording at a given timestamp, so a teammate opening the session lands on the moment you meant rather than the start of it.',
+        slug: '/docs/session-replay/how-to-watch-recordings',
+    },
+    subprocessor: {
+        title: 'Subprocessor',
+        description:
+            'A third party PostHog uses to process your data on your behalf. Every one is listed publicly, so you can see who touches the data before you agree to it.',
+        slug: '/subprocessors',
+    },
+    DPA: {
+        title: 'DPA',
+        description:
+            "PostHog's Data Processing Agreement: the contract covering how we process personal data on your behalf, which subprocessors are involved, and where the data is held.",
+        slug: '/dpa',
+    },
+    HIPAA: {
+        title: 'HIPAA',
+        description:
+            'The US health privacy law. Handling protected health information in PostHog means using a HIPAA-eligible configuration and signing a BAA – not every PostHog feature is covered by one.',
+        slug: '/docs/privacy/hipaa-compliance',
+    },
+    BAA: {
+        title: 'BAA',
+        description:
+            'A Business Associate Agreement: the contract HIPAA requires before a vendor may handle protected health information. It covers only the services it names.',
+        slug: '/docs/privacy/hipaa-compliance',
+    },
+    PHI: {
+        title: 'PHI',
+        description:
+            'Protected Health Information: health data tied to an identifiable person. HIPAA governs how it is stored, transmitted, and who may process it.',
+        slug: '/docs/privacy/hipaa-compliance',
+    },
 } satisfies Record<string, TermDefinition>
 
 export type TermName = keyof typeof TERMS

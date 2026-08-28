@@ -258,6 +258,52 @@ export const SideProjectGraphic = ({
     )
 }
 
+// Card header for projects with an uploaded thumbnail: the image fills the card, with a
+// compact version of the graphic's identity row (title, creator, role, portrait) overlaid
+// on a bottom gradient so that info stays visible.
+export const SideProjectThumbnail = ({
+    src,
+    title,
+    creatorName,
+    creatorRole,
+    avatarUrl,
+    className = '',
+}: {
+    src: string
+    title: string
+    creatorName?: string
+    creatorRole?: string
+    avatarUrl?: string
+    className?: string
+}): JSX.Element => (
+    <div className={`@container relative overflow-hidden ${className}`}>
+        <img src={src} alt="" loading="lazy" className="aspect-video w-full object-cover" />
+        <div className="absolute inset-x-0 bottom-0 flex items-end justify-between gap-[3%] bg-gradient-to-t from-black/80 via-black/40 to-transparent px-[4%] pb-[3%] pt-[10%] text-white">
+            <div className="min-w-0">
+                {/* The card's only rendering of the title (the thumbnail's alt is empty), so it
+                    must stay in the accessibility tree for the project link's accessible name */}
+                <div className="break-words font-squeak text-[5cqw] font-bold uppercase leading-[0.95]">{title}</div>
+                {creatorName && (
+                    <div className="mt-[1.5%] truncate font-squeak text-[3cqw] font-bold uppercase leading-none">
+                        {creatorName}
+                    </div>
+                )}
+                {creatorRole && (
+                    <div className="mt-[1%] truncate font-rounded text-[2.4cqw] font-bold uppercase leading-none tracking-wide opacity-90">
+                        {creatorRole}
+                    </div>
+                )}
+            </div>
+            <img
+                src={avatarUrl || DEFAULT_HEDGEHOG}
+                alt=""
+                loading="lazy"
+                className="aspect-square w-[13cqw] shrink-0 rounded-full border-[0.4cqw] border-white bg-tan object-cover object-top shadow-xl"
+            />
+        </div>
+    </div>
+)
+
 type StrapiEntry = { id: number; attributes: Record<string, unknown> }
 
 const transformStrapiSideProject = (entry: StrapiEntry): SideProject => ({
@@ -391,6 +437,7 @@ export const SideProjectForm = ({
     )
     const [submitting, setSubmitting] = useState(false)
     const [error, setError] = useState<string | null>(null)
+    const [imageError, setImageError] = useState<string | null>(null)
 
     // The element key must stay "side-project-form" so the window system resolves the fixed
     // modal's appSettings, which means React reuses this instance when one project's form
@@ -400,6 +447,7 @@ export const SideProjectForm = ({
         setValues(toFormValues(project))
         setFeaturedImage(project?.projectThumbnail ? { id: 0, url: project.projectThumbnail } : undefined)
         setError(null)
+        setImageError(null)
         if (appWindow) {
             setWindowTitle(appWindow, project ? 'Edit project' : 'Add a project')
         }
@@ -516,7 +564,7 @@ export const SideProjectForm = ({
     }
 
     return (
-        <div data-scheme="secondary" className="bg-primary p-4">
+        <div data-scheme="secondary" className="bg-primary p-4 text-primary">
             <form onSubmit={handleSubmit} className="space-y-4">
                 <OSInput
                     label="Project name"
@@ -575,10 +623,26 @@ export const SideProjectForm = ({
                     </p>
                     <ImageDrop
                         image={featuredImage}
-                        onDrop={(image) => setFeaturedImage(image)}
-                        onRemove={() => setFeaturedImage(undefined)}
+                        onDrop={(image) => {
+                            setFeaturedImage(image)
+                            setImageError(null)
+                        }}
+                        onRemove={() => {
+                            setFeaturedImage(undefined)
+                            setImageError(null)
+                        }}
+                        accept={{
+                            'image/png': ['.png'],
+                            'image/jpeg': ['.jpg', '.jpeg'],
+                            'image/webp': ['.webp'],
+                            'image/gif': ['.gif'],
+                        }}
+                        onDropRejected={() =>
+                            setImageError("That file can't be used – upload a single PNG, JPG, WebP, or GIF.")
+                        }
                         className="h-32"
                     />
+                    {imageError && <p className="m-0 mt-2 text-sm text-red">{imageError}</p>}
                 </div>
                 <OSInput
                     label="Tags"

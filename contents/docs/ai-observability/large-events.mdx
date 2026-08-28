@@ -1,0 +1,109 @@
+---
+title: Capturing large AI events
+---
+
+import CalloutBox from 'components/Docs/CalloutBox'
+
+<CalloutBox icon="IconFlask" title="Public beta" type="fyi">
+
+Large event capture is in public beta, available in [posthog-python](/docs/libraries/python#ai-observability) 7.39+ and [posthog-node](/docs/libraries/node#ai-observability) 5.49+ (with `@posthog/ai` 8.8+). We'd love to [hear your feedback](https://app.posthog.com/ai-observability#panel=support%3Afeedback%3Allm-analytics%3Alow%3Atrue) as we roll it out.
+
+</CalloutBox>
+
+AI events can get big – a single generation can carry megabytes of prompt context or base64-encoded media, more than regular event capture accepts. To handle this, PostHog sends AI events like `$ai_generation` and `$ai_embedding` through a dedicated ingestion path that accepts events up to **8MB**.
+
+During the beta, this path is opt-in. How you opt in depends on how you capture AI events today.
+
+## Using the SDK integrations
+
+By default, our [SDK integrations](/docs/ai-observability/installation) redact base64 media and may truncate very long strings before capture. To capture everything in full, pass a single flag when creating your PostHog client:
+
+<MultiLanguage>
+
+```python
+from posthog import Posthog
+
+posthog = Posthog(
+    "<ph_project_api_key>",
+    host="<ph_client_api_host>",
+    enable_full_ai_capture=True
+)
+```
+
+```ts
+const posthog = new PostHog(
+  '<ph_project_api_key>',
+  {
+    host: '<ph_client_api_host>',
+    enableFullAiCapture: true
+  }
+)
+```
+
+</MultiLanguage>
+
+With the flag on, nothing is truncated or redacted. The one exception is [privacy mode](/docs/ai-observability/privacy-mode): when it's enabled, input and output content is still stripped, flag or no flag.
+
+## Calling capture_ai directly
+
+If you build AI events yourself instead of using the integrations, call `capture_ai` (Python) or `captureAi` (Node) instead of `capture`. It takes the same arguments as `capture` and returns the captured event's UUID.
+
+<MultiLanguage>
+
+```python
+from posthog import Posthog
+
+posthog = Posthog("<ph_project_api_key>", host="<ph_client_api_host>")
+
+uuid = posthog.capture_ai(
+    "$ai_generation",
+    distinct_id="user_123",
+    properties={
+        "$ai_trace_id": trace_id,
+        "$ai_model": "gpt-5",
+        "$ai_input": messages,
+        "$ai_output_choices": choices,
+    },
+)
+```
+
+```ts
+import { PostHog } from 'posthog-node'
+
+const posthog = new PostHog('<ph_project_api_key>', { host: '<ph_client_api_host>' })
+
+const uuid = posthog.captureAi({
+  distinctId: 'user_123',
+  event: '$ai_generation',
+  properties: {
+    $ai_trace_id: traceId,
+    $ai_model: 'gpt-5',
+    $ai_input: messages,
+    $ai_output_choices: choices,
+  },
+})
+```
+
+</MultiLanguage>
+
+Send content as your provider produced it, including base64 and data URIs – there's no need to reshape payloads. `capture_ai` captures exactly what you pass it, without truncating or redacting anything. [Privacy mode](/docs/ai-observability/privacy-mode) doesn't apply here, so leave out any content you don't want stored.
+
+In serverless and other short-lived environments, use the awaitable variant in Node so the event is delivered before the runtime exits:
+
+```ts
+await posthog.captureAiImmediate({ distinctId: 'user_123', event: '$ai_generation', properties })
+```
+
+In Python, call `posthog.flush()` before exit (or enable `sync_mode`), just like with `capture`.
+
+## Other platforms
+
+Not on Python or Node? Build events with [manual capture](/docs/ai-observability/installation/manual-capture) and point your capture requests at the dedicated AI endpoint instead of the regular one – same request format, different path:
+
+```shell
+POST <ph_client_api_host>/i/v0/ai/batch/
+```
+
+## Limits
+
+Events up to **8MB** are accepted for now. The SDKs drop larger events before sending and log an error instead. The limit will increase as the beta continues.

@@ -14,7 +14,7 @@ import WizardCommand from 'components/WizardCommand'
 ## Requirements
 
 - Node.js 20.20+ or 22.22+ (TypeScript/JavaScript), or Python 3.10+ — see [Python](#python) below
-- An MCP server built on the MCP TypeScript SDK — either major, `@modelcontextprotocol/sdk` (v1) or `@modelcontextprotocol/{core,server,client}` (v2), see [MCP SDK v2](/docs/mcp-analytics/sdk-v2) — or the `mcp` package (Python). (Running a custom dispatcher with no server object to wrap? See [Custom servers](/docs/mcp-analytics/custom-servers).)
+- An MCP server built on the MCP TypeScript SDK — either major, `@modelcontextprotocol/sdk` (v1) or `@modelcontextprotocol/{core,server,client}` (v2) — or the Python MCP SDK, also either major (`mcp>=1.26,<3`). See [MCP SDK v2](/docs/mcp-analytics/sdk-v2). (Running a custom dispatcher with no server object to wrap? See [Custom servers](/docs/mcp-analytics/custom-servers).)
 - A PostHog [project API key](/docs/getting-started/project-token) (`phc_…`)
 
 ## AI wizard
@@ -257,11 +257,12 @@ A Python SDK ships inside the [`posthog`](/docs/libraries/python) package (the s
 pip install posthog
 ```
 
-`instrument()` needs the MCP SDK at runtime, but you already have it — you built your server with `mcp` or `fastmcp`, so it's treated as a peer dependency rather than bundled. (`PostHogMCP` for custom dispatchers needs nothing beyond `posthog`.)
+`instrument()` needs the MCP SDK at runtime, but you already have it — you built your server with `mcp` or `fastmcp`, so it's treated as a peer dependency rather than bundled. Both `mcp` majors are supported (`mcp>=1.26,<3`), detected at runtime. (`PostHogMCP` for custom dispatchers needs nothing beyond `posthog`.)
 
 `instrument(server, posthog_client, options?)` works with every common Python MCP server:
 
-- `FastMCP` and the low-level `Server` from the official [`modelcontextprotocol/python-sdk`](https://github.com/modelcontextprotocol/python-sdk) (the `mcp` package)
+- `FastMCP` and the low-level `Server` from the official [`modelcontextprotocol/python-sdk`](https://github.com/modelcontextprotocol/python-sdk) (the `mcp` package, 1.x)
+- `MCPServer` — FastMCP's new name on `mcp` 2.x — and the v2 low-level `Server`, see [MCP SDK v2](/docs/mcp-analytics/sdk-v2#python)
 - [jlowin's standalone **FastMCP 2.0**](https://github.com/jlowin/fastmcp) (the separate `fastmcp` package)
 - `PostHogMCP` for custom dispatchers with no server object (see below)
 
@@ -275,6 +276,10 @@ posthog = Posthog(
     host="https://us.i.posthog.com",  # or https://eu.i.posthog.com
 )
 server = FastMCP("my-server")
+
+# On MCP SDK 2.x, FastMCP was renamed — instrument() works the same:
+# from mcp.server.mcpserver import MCPServer
+# server = MCPServer("my-server")
 
 # register your tools as usual...
 
@@ -341,13 +346,13 @@ await analytics.flush()   # drain in-flight auto-capture events
 posthog.shutdown()        # flush + stop the posthog client
 ```
 
-No server object to wrap (a custom HTTP/edge dispatcher)? Use `PostHogMCP`, a `posthog` client subclass (needs nothing beyond `posthog` — no MCP SDK) with `capture_tool_call()`, `capture_initialize()`, `prepare_tool_list()`, and `prepare_tool_call()` — the Python equivalent of [Custom servers](/docs/mcp-analytics/custom-servers).
+No server object to wrap (a custom HTTP/edge dispatcher)? Use `PostHogMCP`, a `posthog` client subclass (needs nothing beyond `posthog` — no MCP SDK) with `capture_tool_call()`, `capture_initialize()`, `capture_tools_list()`, `capture_missing_capability()`, `prepare_tool_list()`, and `prepare_tool_call()` — the Python equivalent of [Custom servers](/docs/mcp-analytics/custom-servers).
 
 <CalloutBox icon="IconInfo" title="Python SDK is beta" type="fyi">
 
 The Python SDK is in beta (pre-1.0); the API may still change before `v1`, and some TypeScript-only features may land first. It emits the identical `$mcp_*` events documented on the [events](/docs/mcp-analytics/events) page.
 
-It doesn't support the `2026-07-28` protocol revision yet — that's in progress. See [MCP SDK v2](/docs/mcp-analytics/sdk-v2) for what that revision changes.
+It supports both `mcp` majors and the `2026-07-28` protocol revision. See [MCP SDK v2](/docs/mcp-analytics/sdk-v2) for what that revision changes.
 
 </CalloutBox>
 

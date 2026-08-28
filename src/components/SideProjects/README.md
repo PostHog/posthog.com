@@ -13,14 +13,14 @@ Fields (`SideProject`):
 | `id` | no | Strapi entry id |
 | `title` | yes | Project name |
 | `description` | no | One-liner shown on the card |
-| `date` | no | `YYYY-MM-DD`; drives "newest first" ordering – undated legacy entries sort last |
+| `date` | no | `YYYY-MM-DD`; the date the project was added. Not used for ordering – the gallery rotates in a daily-seeded shuffle |
 | `projectAuthor` | yes | Creator's full name; used to match their community profile |
 | `authorGitHub` | no | GitHub username; preferred profile match key, also used for avatar fallback |
 | `alumni` | no | Overrides the automatic current-team/alumni detection |
 | `teamLink` | no | Fallback creator link when no community profile matches |
 | `githubUrl` | no* | Repo URL |
 | `liveUrl` | no* | Live app URL. *At least one of `githubUrl`/`liveUrl` is required – cards link to `liveUrl \|\| githubUrl`. Use relative URLs for pages on posthog.com |
-| `projectThumbnail` | no | Optional upload stored in Strapi; gallery cards always use `SideProjectGraphic` |
+| `projectThumbnail` | no | Optional upload (PNG, JPG, WebP, or GIF) shown as the card image; cards without one use `SideProjectGraphic` |
 | `tags` | no | Lowercase kebab-case tags (json array); folded through `TAG_ALIASES` for the filter bar |
 
 ## Exports
@@ -29,6 +29,7 @@ Fields (`SideProject`):
 - `useCreatorProfiles()` – static query for all community (Squeak) profiles.
 - `findCreatorProfile(profiles, { projectAuthor, authorGitHub })` – matches by GitHub username first, then full name.
 - `SideProjectGraphic` – card header adapted from `EventGraphic`: profile color, `font-squeak` title and creator, circular portrait, and a PostHog + job-title bar.
+- `SideProjectThumbnail` – card header for projects with an uploaded image: the image fills the card with a compact identity overlay (title, creator, role, portrait) on a bottom gradient.
 - `normalizeTags(tags)` – dedupes and folds tags through `TAG_ALIASES` so the filter bar stays scannable. Keep raw tags in any search haystack so aliased one-offs stay findable.
 - `isAlumniProject(profiles, project)` – the `alumni` flag wins; otherwise a profile with no small team is treated as alumni.
 - `SideProjectForm` – the add/edit flow (see below).

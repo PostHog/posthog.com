@@ -1466,8 +1466,12 @@ function ReaderViewContent({
                     if (detailsParent) {
                         detailsParent.open = true
                     }
+                    // Not `offsetTop` — that measures from the nearest positioned ancestor, which
+                    // on a <Steps> page is the step container, not the viewport.
+                    const targetRect = targetElement.getBoundingClientRect()
+                    const scrollRect = scrollElement.getBoundingClientRect()
                     scrollElement.scrollTo({
-                        top: targetElement.offsetTop || 0,
+                        top: Math.max(0, targetRect.top - scrollRect.top + scrollElement.scrollTop),
                         behavior: 'smooth',
                     })
                     return
