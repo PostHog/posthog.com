@@ -101,7 +101,14 @@ const ScrollArea = ({
                 // are unconditional, so both axes always end up `scroll` anyway — setting them
                 // here (Radix spreads `style` last) makes that true in the SSR'd HTML too.
                 style={{ overflowX: 'scroll', overflowY: 'scroll' }}
-                className={`app-scroll-viewport size-full ${viewportClasses} ${fadeHeight ? `pb-${fadeHeight}` : ''}`}
+                // `outline-none`: Blink is the only engine that paints a focus ring on a scroll
+                // container, so a focused viewport draws a blue rectangle in Chrome and nothing
+                // anywhere else. The ring is never useful here — `tabIndex={-1}` keeps the viewport
+                // out of the tab order, so it only ever holds focus because something put it there
+                // to aim the scroll keys, not because a keyboard user navigated to it.
+                className={`app-scroll-viewport size-full outline-none ${viewportClasses} ${
+                    fadeHeight ? `pb-${fadeHeight}` : ''
+                }`}
             >
                 {fullWidth ? <div>{children}</div> : children}
             </RadixScrollArea.Viewport>
