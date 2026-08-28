@@ -94,6 +94,15 @@ export const TAXONOMY: InstallCategory[] = [
                 wizardLogoKey: 'tanstack',
             },
             {
+                slug: 'tanstack-router',
+                name: 'TanStack Router',
+                librarySlug: 'tanstack-router',
+                wizard: true,
+                wizardOrder: 27,
+                wizardDocsUrl: WIZARD_GITHUB_REPO_URL,
+                wizardLogoKey: 'tanstack',
+            },
+            {
                 slug: 'vue',
                 name: 'Vue.js',
                 librarySlug: 'vue-js',
@@ -153,7 +162,15 @@ export const TAXONOMY: InstallCategory[] = [
         title: 'Backend languages',
         splitPopular: true,
         items: [
-            { slug: 'nodejs', name: 'Node.js', librarySlug: 'node', popular: true },
+            {
+                slug: 'nodejs',
+                name: 'Node.js',
+                librarySlug: 'node',
+                popular: true,
+                wizard: true,
+                wizardOrder: 26,
+                wizardLogoKey: 'nodejs',
+            },
             {
                 slug: 'python',
                 name: 'Python',

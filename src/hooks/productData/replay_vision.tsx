@@ -168,6 +168,7 @@ const WIZARD_PLATFORM_SLUGS = new Set([
     'svelte',
     'react-router',
     'tanstack-start',
+    'tanstack-router',
     'django',
     'flask',
     'fastapi',
