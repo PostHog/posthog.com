@@ -87,7 +87,7 @@ Separately from product requests, there are moments where it's worth seeing whet
 
 **Why not just always invite one?**
 
-CSMs here are technical enough to solve real problems without asking our engineers. [You're the expert!](/handbook/cs-and-onboarding/customer-success). Bringing an engineer in is the exception, earned by genuine two-way value (one of the cases above), not a default or a comfort blanket. If you can't say what the engineer would get out of it, that's your answer.
+CSMs here are technical enough to solve real problems without asking our engineers. [You're the expert!](/handbook/cs-and-onboarding/customer-success) Bringing an engineer in is the exception, earned by genuine two-way value (one of the cases above), not a default or a comfort blanket. If you can't say what the engineer would get out of it, that's your answer.
 
 Finally, if you are bringing engineers onto a call, brief them first - what is the call about, who will be there. And then afterwards, summarize what you talked about. This goes a long way to ensuring sales <\> engineering happiness.
 
