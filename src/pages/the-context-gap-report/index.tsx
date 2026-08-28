@@ -59,7 +59,7 @@ export default function ContextGapReport() {
                                 </p>
 
                                 <p className="not-prose text-sm text-secondary mt-2">
-                                    A landing page. For a two-page PDF. We know exactly how this looks, and we're doing
+                                    A landing page. For a three-page PDF. We know exactly how this looks, and we're doing
                                     it anyway.
                                 </p>
 
@@ -115,24 +115,13 @@ export default function ContextGapReport() {
 
                         <div className="relative h-full">
                             {/* -1.5rem offsets CalloutBox's own mb-6, so this bottom edge lines up with the callout's */}
-                            <a
-                                href={PDF_PATH}
-                                target="_blank"
-                                rel="noreferrer"
-                                aria-label="Open The Context Gap report as a PDF in a new tab"
-                                className="not-prose group relative block h-[calc(100%-1.5rem)] border border-primary rounded overflow-hidden bg-accent"
-                            >
+                            <div className="not-prose relative h-[calc(100%-1.5rem)] border border-primary rounded overflow-hidden bg-accent">
                                 <iframe
-                                    src={PDF_PATH}
+                                    src={`${PDF_PATH}#view=FitH`}
                                     title="The Context Gap report preview"
-                                    className="w-full h-full pointer-events-none"
+                                    className="w-full h-full"
                                 />
-                                <div className="absolute inset-0 flex items-center justify-center bg-black/0 group-hover:bg-black/40 transition-colors">
-                                    <span className="opacity-0 group-hover:opacity-100 transition-opacity text-white font-semibold bg-black/60 rounded px-4 py-2">
-                                        Open in new tab ↗
-                                    </span>
-                                </div>
-                            </a>
+                            </div>
 
                             <div className="absolute -top-6 -right-12 pointer-events-none">
                                 <div className="relative">
