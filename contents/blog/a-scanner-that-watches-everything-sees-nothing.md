@@ -12,11 +12,11 @@ tags:
   - session replay
 ---
 
-What we learned from 251,351 succeeded observations: useful scanners start with one visible question and permission to say "I don't know."
+What we learned from 251,351 successful observations: useful scanners start with one visible question and permission to say "I don't know."
 
 <!-- data current through 2026-08-25 10:29 PT. re-pull before publishing. -->
 
-A month ago we launched [Replay Vision](https://github.com/replay-vision), our AI layer over Session Replay. It watches session recordings in batches and writes up what it found, so nobody has to sit through them. You give it work by setting up a scanner: a recording query that picks which sessions to watch, and a prompt that says what to look for.
+A month ago we launched [Replay Vision](/replay-vision), our AI layer over Session Replay. It watches session recordings in batches and writes up what it finds, so nobody has to sit through them. You give it work by setting up a scanner: a recording query that picks which sessions to watch, and a prompt that says what to look for.
 
 In the last few weeks, our own [scanners](/docs/replay-vision/scanner-types) have produced 251,351 successful observations across the millions of sessions we have of people using PostHog.
 
@@ -24,7 +24,7 @@ That number may be a little absurd, but it is not the interesting part. The coun
 
 [Nobody was going to watch](/blog/nobody-watches-session-replays) the vast majority of those millions of recordings anyway. Session replay contains useful evidence. Then the evidence sits in a giant list while everyone goes back to their dashboards.
 
-Replay Vision fixes the watching part but not the thinking part. We learned this the annoying (but expected) way. Some scanners pointed us to bugs we could then verify in the linked recordings, while others showed us exactly where a flow became confusing. Some even produced plausible session descriptions that nobody wanted to read. 
+Replay Vision fixes the watching part but not the thinking part. We learned this the annoying (but expected) way. Some scanners pointed us to bugs we could then verify in the linked recordings, while others showed us exactly where a flow became confusing. Some even produced plausible session descriptions that nobody wanted to read.
 
 In fact, the model wasn't the main difference. The scanner either had a real job or it did not.
 
@@ -76,9 +76,9 @@ We still run them because they work. Dead clicks, broken renders, and setup loop
 
 One watches the first sessions from high-fit signups and writes the trip report we would never produce consistently by hand:
 
-- What did the person evaluate? 
-- How far did they get? 
-- What slowed them down? 
+- What did the person evaluate?
+- How far did they get?
+- What slowed them down?
 
 Another reconstructs how people investigate Error Tracking issues. It records the entry point, data consulted, impact assessment, queries, actions, and outcome.
 
@@ -159,8 +159,8 @@ It is still a model's judgment, not ground truth, so the confidence and recordin
 
 That creates a new behavioral event shape: an evidence-backed judgment about what happened inside one recording. Define the judgment once, then apply it to every matching recording. You can query it, chart it, break it down, or alert on it alongside the rest of your product data.
 
-- An event can say someone abandoned signup. An observation can show the contradictory copy they read before leaving. 
-- An event can say someone clicked **summarize.** An observation can show a populated trace that the product incorrectly summarized as empty. 
+- An event can say someone abandoned signup. An observation can show the contradictory copy they read before leaving.
+- An event can say someone clicked **summarize**. An observation can show a populated trace that the product incorrectly summarized as empty.
 - An event can say setup completed. An observation can show that the person got there only after painfully hunting, scrolling, and backtracking.
 
 Observations do not replace events. They add a queryable judgment about what happened before, between, and after them.
