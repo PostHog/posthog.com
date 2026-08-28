@@ -5,7 +5,7 @@ import LearnPage from 'components/PocketGuides/LearnPage'
 
 const BASE = '/docs/ai-observability/learn'
 
-/** One chapter of the AI Observability volume. Client-only: the indexed copy is /pocket-guides. */
+/** Client-only; the indexed copy is /pocket-guides. */
 export default function AIObservabilityLearnChapter(): JSX.Element {
     const location = useLocation()
     const chapter = (location?.pathname || '').replace(/\/$/, '').slice(BASE.length).replace(/^\//, '')

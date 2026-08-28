@@ -5,28 +5,32 @@ import { ProductSwitcher, buildProductMenuTabs } from 'components/Products/Reade
 import ReaderView from 'components/ReaderView'
 import SEO from 'components/seo'
 import useProduct from 'hooks/useProduct'
+import { useLearnPlacement } from 'components/Products/ReaderViewProduct/learnPlacement'
 
 import LearnSurface from './LearnSurface'
 
 interface LearnPageProps {
     /** `handle` from `src/hooks/productData/*`, e.g. `ai_observability`. */
     productHandle: string
-    /** Chapter slug from the route. Omitted on the index, which shows the volume's front matter. */
+    /** Chapter slug from the route; omitted on the index. */
     chapter?: string
     title: string
     description: string
 }
 
-/** The Learn surface's page shell, shared by the index route and the per-chapter splat route. */
+/** Page shell shared by the index and per-chapter routes. */
 export default function LearnPage({ productHandle, chapter, title, description }: LearnPageProps): JSX.Element {
     const productData = useProduct({ handle: productHandle }) as any
     const contentRef = useRef<HTMLElement>(null)
     const location = useLocation()
+    const learnPlacement = useLearnPlacement()
     const menuTabs = buildProductMenuTabs({
         productData,
         contentRef,
-        activeSurface: 'learn',
+        // No Learn tab in the nested arm, so the reader sits under Docs.
+        activeSurface: learnPlacement === 'nested' ? 'docs' : 'learn',
         currentPath: location?.pathname,
+        learnPlacement,
     })
     const volumeId = productData?.pocketGuideVolume
 
@@ -34,7 +38,7 @@ export default function LearnPage({ productHandle, chapter, title, description }
         <>
             <SEO title={title} description={description} image="/images/og/default.png" />
             <ReaderView
-                // The book carries its own structure; a second contents column would compete with it.
+                // The book carries its own structure; a second contents column competes.
                 hideRightSidebar
                 hideTitle
                 showQuestions={false}

@@ -6,15 +6,14 @@ import { MDXRenderer } from 'gatsby-plugin-mdx'
 import { EntryProvider, bookMdxComponents } from './bookComponents'
 import { BookPageEntry, FONT_SIZES, normalizeUrl, useBookPages } from './bookModel'
 
-/** `BookReader`'s starting size, read from the book's own scale so the two cannot drift. */
+/** `BookReader`'s starting size, from the book's own scale so they cannot drift. */
 const BOOK_BASE_FONT_SIZE = FONT_SIZES[0]
 
-/** The url segment a chapter is reached at. The volume's front matter has none: it is the index. */
+/** A chapter's url segment. The front matter has none: it is the index. */
 export function learnChapterSlug(entry: BookPageEntry): string {
     return entry.order === 0 ? '' : normalizeUrl(entry.url).split('/').pop() || ''
 }
 
-/** `/docs/<product>/learn` for the front matter, `/docs/<product>/learn/<chapter>` for the rest. */
 export function learnChapterPath(basePath: string, entry: BookPageEntry): string {
     const slug = learnChapterSlug(entry)
     return slug ? `${basePath}/${slug}` : basePath
@@ -25,7 +24,7 @@ interface LearnBodyNode {
     fields: { slug: string }
 }
 
-/** Every guide body by url. `useStaticQuery` takes no variables, so read the shelf and filter below. */
+/** Every guide body by url; `useStaticQuery` takes no variables, so read the whole shelf. */
 function useBookBodies(): Map<string, string> {
     const data = useStaticQuery(graphql`
         query PocketGuideLearnBodiesQuery {
@@ -52,11 +51,11 @@ function useBookBodies(): Map<string, string> {
 
 interface LearnSurfaceProps {
     volumeId: string
-    /** Chapter to show. Empty or unknown falls back to the volume's front matter. */
+    /** Empty or unknown falls back to the front matter. */
     chapter?: string
 }
 
-/** One chapter of a volume, in the docs reader. A whole volume in one scroll is not how docs are read. */
+/** One chapter of a volume, rendered in the docs reader. */
 export default function LearnSurface({ volumeId, chapter }: LearnSurfaceProps): JSX.Element | null {
     const pages = useBookPages(volumeId)
     const bodies = useBookBodies()
@@ -65,7 +64,7 @@ export default function LearnSurface({ volumeId, chapter }: LearnSurfaceProps): 
         if (pages.length === 0) {
             return undefined
         }
-        // An unknown chapter falls back to the front matter: a wrong url costs a click, not a dead end.
+        // A wrong url costs a click, not a dead end.
         return (chapter && pages.find((p) => learnChapterSlug(p) === chapter)) || pages[0]
     }, [pages, chapter])
 
@@ -75,7 +74,7 @@ export default function LearnSurface({ volumeId, chapter }: LearnSurfaceProps): 
     }
 
     return (
-        // `not-prose` because the book styles its own; `!p-0` drops a page margin the docs column already gives.
+        // `not-prose`: the book styles its own. `!p-0`: the docs column already pads.
         <div className="not-prose @container [&>div]:!p-0" style={{ fontSize: BOOK_BASE_FONT_SIZE }}>
             <EntryProvider value={{ entry, pages }}>
                 <MDXProvider components={bookMdxComponents}>

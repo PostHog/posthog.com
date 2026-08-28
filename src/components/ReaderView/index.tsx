@@ -849,7 +849,7 @@ interface SidebarTabButtonProps {
     showLabel: boolean
     /** Pinned mode renders the tab with icon stacked above label (horizontal row). */
     stacked: boolean
-    /** Share the row equally (`flex-1`). At four tabs the widest label sizes all of them and the row overflows. */
+    /** Share the row equally (`flex-1`); at four tabs the widest label overflows the row. */
     equalWidth: boolean
     onClick: () => void
 }
@@ -863,7 +863,7 @@ const SidebarTabButton = ({ tab, active, showLabel, stacked, equalWidth, onClick
     // since v4 measures on every render and any sub-pixel delta animates).
     const iconRef = useRef<HTMLSpanElement>(null)
     const prevPosRef = useRef<DOMRect | null>(null)
-    // In the key because a three-tab to four-tab move resizes every button, so the icon moves.
+    // In the key: a three-to-four-tab move resizes every button.
     const layoutKey = `${stacked ? 1 : 0}-${showLabel ? 1 : 0}-${equalWidth ? 1 : 0}`
     const prevKeyRef = useRef(layoutKey)
 

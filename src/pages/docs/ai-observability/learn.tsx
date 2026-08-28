@@ -2,7 +2,6 @@ import React from 'react'
 
 import LearnPage from 'components/PocketGuides/LearnPage'
 
-/** The Learn index: the volume's front matter. Chapters live at `learn/<chapter>`. */
 export default function AIObservabilityLearn(): JSX.Element {
     return (
         <LearnPage
