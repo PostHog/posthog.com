@@ -1,0 +1,229 @@
+---
+title: Best AI evaluation tools for production
+date: 2026-08-28
+rootPage: /blog
+sidebar: Blog
+showTitle: true
+hideAnchor: true
+author:
+    - natalia-amorim
+featuredImage: >-
+    https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/hog_ql.png
+featuredImageType: full
+category: General
+tags:
+    - Comparisons
+seo:
+    {
+        metaTitle: 'Best AI evaluation tools for production',
+        metaDescription: 'The best AI evaluation tools for production: PostHog for observability-linked scores, Braintrust for CI/CD gating, DeepEval for evals-as-code, and more.',
+    }
+---
+
+Your unit tests prove the code runs; they say nothing about whether your LLM handed the user something useful or hallucinated a weird answer instead.
+
+[This is where evals come in](/pocket-guides/ai-observability/quality-output): they score the output itself. 
+
+The tools below all do that, but the best ones judge with both LLM-as-judge and code-based checks, gate your CI/CD on a pass/fail threshold, score offline datasets and live production traffic, and sit next to your traces so a quality dip in production points at what caused it. 
+
+There's no wrong answer here – the right pick comes down to what you care about most:
+
+-   **If you want eval scores tied to real user sessions and product data:** [PostHog](/docs/ai-evals)
+-   **If you gate releases in CI/CD:** Braintrust
+-   **If you want a self-hostable eval and tracing platform in one:** Langfuse
+-   **If you're on an OpenTelemetry stack and want uncapped self-hosted tracing:** Arize Phoenix
+-   **If you want evals as code, run like a unit test suite:** DeepEval
+-   **If your main need is RAG and retrieval quality:** Ragas
+-   **If you're on Snowflake or want agent-specific evaluators:** TruLens
+-   **If you build multi-turn or voice agents:** LangWatch
+
+### What's the best LLM evaluation tool for developers overall?
+
+For most teams, it's **[PostHog](/docs/ai-evals)**. 
+
+Every other tool here scores outputs in isolation, meaning that you learn quality fell without learning who it hurt or what caused it. 
+
+PostHog captures [traces](/docs/ai-observability/traces), [generations](/docs/ai-observability/generations), [cost](/docs/ai-observability/calculating-costs), and latency as standard [AI observability](/ai-observability) events, and eval results become events too, so you can filter to the exact generations that failed, watch the [session replays](/session-replay) where users hit them, and check which model change or [feature flag](/feature-flags) went live right before the regression.
+
+**What makes PostHog good for developers:**
+
+-   **Eval types:** LLM-as-judge with five ready templates (relevance, helpfulness, jailbreak, hallucination, toxicity), code-based checks, and local sentiment analysis
+-   **Observability:** Scores stored as events next to traces, replays, and flags – query them with SQL, put quality next to retention or conversion
+-   **CI/CD:** An [MCP server](/mcp) exposes six tools to create and run evals from Claude Code, Cursor, or any agent
+-   **Pricing:** Free tier of 100K AI observability events/mo; judge evals use your own model key; $0.00035/event after (with volume discounts)
+-   **License:** Open source (MIT)
+
+**Not ideal if:** you want a standalone eval framework and aren't interested in the analytics platform around it.
+
+**Alternatives to consider:** **DeepEval** if you'd rather write evals as pytest assertions; **Braintrust** if CI/CD gating is your priority.
+
+<WizardCTA
+ command="ai-observability"
+ title="Instrument AI Observability with one command"
+ subtitle="The wizard sets up AI observability and starts capturing events."
+ learnMoreTo="/docs/ai-observability/installation"
+/>
+
+### What's the best LLM evaluation tool for gating releases in CI/CD?
+
+**[Braintrust](/blog/best-braintrust-alternatives)** builds its whole workflow around evals, and CI/CD gating is the strongest reason to pick it. Experiments gate releases and score thresholds block a bad prompt from shipping when it drops below a contract you set, with dataset versioning and dev/staging/production tagging for a clean audit trail.
+
+**What makes Braintrust good for developers:**
+
+-   **Eval types:** Deterministic code scorers and LLM-as-judge graders, plus a no-code human-review interface
+-   **Observability:** Side-by-side playground for prompt and model variants; its own experiment dashboards
+-   **CI/CD:** Score-threshold gating that blocks a release below your bar – its headline feature
+-   **Pricing:** Free Starter (10k scores/mo, unlimited seats); Pro jumps to $249/mo flat with no mid-tier
+-   **License:** Proprietary; self-hosting only on an Enterprise contract
+
+**Not ideal if:** you're a one- or two-person team stuck between the free Starter tier and the $249 Pro cliff, or you need self-hosting without an Enterprise deal.
+
+**Alternatives to consider:** **DeepEval** for the same CI/CD gating as open-source code; **PostHog** if you want the score connected to who the bad output actually hit.
+
+### What's the best self-hostable LLM evaluation tool?
+
+**[Langfuse](/blog/best-langfuse-alternatives)** is the one to reach for when prompts and responses have to stay inside your own infrastructure. It's MIT-licensed and fully open source, self-hosts for roughly the cost of a VM and managed Postgres, and offers EU hosting on both cloud and self-hosted builds for GDPR or HIPAA obligations.
+
+**What makes Langfuse good for developers:**
+
+-   **Eval types:** LLM-as-judge, custom code evaluators, and human review through annotation queues
+-   **Observability:** Tracing and evals in one platform; curated datasets and online scoring of live traffic
+-   **CI/CD:** No built-in `evaluate()`, so gating a release means writing your own glue and webhooks
+-   **Pricing:** Unit-based (every trace, span, and score is a unit); free 50k units/mo, Core $29, Pro $199 
+-   **License:** Open source (MIT), self-hostable
+
+**Not ideal if:** you want CI/CD gating out of the box rather than building the wiring yourself.
+
+**Alternatives to consider:** **Arize Phoenix** for an OpenTelemetry-native alternative; **PostHog** if you'd rather scores lived next to product data than in a separate tracing tool.
+
+### What's the best LLM evaluation tool for uncapped self-hosted tracing?
+
+**Arize Phoenix** has the most generous free tier here: the open-source package self-hosts with no caps on spans, ingestion, projects, or retention, and gives you agent tracing, multi-agent graphs, token tracking, and Python/JS SDKs for nothing.
+
+**What makes Arize Phoenix good for developers:**
+
+-   **Eval types:** LLM classification evaluators built from a prompt template, a model, and a label-to-score mapping, written back to spans as annotations
+-   **Observability:** OpenTelemetry-native tracing, uncapped when self-hosted
+-   **CI/CD:** Manual orchestration in the OSS build; automatic and online evals only on the hosted AX product
+-   **Pricing:** Phoenix OSS free and uncapped; AX Free 25k spans, AX Pro $50/mo – billed on span count *and* GB, which double-charges RAG apps
+-   **License:** Open source (OpenTelemetry-based)
+
+**Not ideal if:** you need automatic online evals and production monitoring without paying for AX.
+
+**Alternatives to consider:** **TruLens** for another OTel-native option with agent-specific evaluators; **Langfuse** if you want online scoring built in.
+
+### What's the best LLM evaluation tool for evals as code?
+
+**DeepEval** runs evals the way you already run tests. It's an Apache-2.0 Python framework that plugs into pytest, so a failing eval fails your build like a broken assertion – define an `LLMTestCase`, attach a metric with a numeric `threshold`, and `deepeval test run` turns a subjective quality score into a pass/fail gate.
+
+**What makes DeepEval good for developers:**
+
+-   **Eval types:** 50+ research-backed metrics (hallucination, faithfulness, relevancy, toxicity, bias), plus G-Eval and DAG for conditional logic; span-level scoring for agents
+-   **Observability:** Saves results locally as JSON; optional Confident AI cloud for datasets and monitoring
+-   **CI/CD:** Best-in-class – pytest-native, runs in GitHub Actions, GitLab CI, Jenkins, and more
+-   **Pricing:** Open-source core free forever; Starter plan from $200/mo
+-   **License:** Open source (Apache 2.0)
+
+**Not ideal if:** you want the surrounding context; it scores outputs but won't tell you which users hit a bad one or which release caused the drop.
+
+**Alternatives to consider:** **PostHog** to get that missing context by connecting scores to sessions and releases; **Braintrust** for a hosted CI/CD gating workflow.
+
+### What's the best LLM evaluation tool for RAG and retrieval quality?
+
+**Ragas** is built for one job: measuring whether your retrieval pipeline feeds the model the right context. Faithfulness checks whether the answer stays grounded in retrieved documents; context precision and recall measure whether your retriever surfaced the relevant chunks and left out the noise.
+
+**What makes Ragas good for developers:**
+
+-   **Eval types:** RAG-specific metrics, plus synthetic test-data generation from a knowledge graph of your docs
+-   **CI/CD:** Run it in code or CI and read the scores
+-   **Observability:** None built in – integrates with LangChain, LlamaIndex, Arize, and LangSmith for that
+-   **Pricing:** Fully free (optional paid consulting from the maintainers)
+-   **License:** Open source
+
+**Not ideal if:** you need production monitoring, a dashboard, or issue tracking – you wire up your own storage and visualization.
+
+**Alternatives to consider:** **PostHog** or **Langfuse** if you want RAG scores living alongside traces and dashboards.
+
+### What's the best LLM evaluation tool for agent-specific evaluators?
+
+**TruLens** builds its instrumentation on OpenTelemetry, so every LLM call, retrieval, and tool invocation becomes a span you can send to Jaeger, Grafana Tempo, Datadog, or any OTLP backend. Its feedback-function library goes deep on agents, with purpose-built evaluators like PlanAdherence, ToolSelection, and ExecutionEfficiency that flag redundant steps and wasted compute.
+
+**What makes TruLens good for developers:**
+
+-   **Eval types:** Feedback functions including the RAG Triad and seven agent evaluators; a Selector API to target any span attribute
+-   **CI/CD:** DIY – no GitHub Actions templates documented
+-   **Observability:** OpenTelemetry spans to any OTLP backend, plus deep Snowflake Cortex integration
+-   **Pricing:** Free (no managed tier or usage caps published)
+-   **License:** Open source (MIT)
+
+**Not ideal if:** you want a managed platform or ready-made CI/CD wiring.
+
+**Alternatives to consider:** **Arize Phoenix** for another OTel-native tracer; **PostHog** if you'd rather not run your own observability backend.
+
+### What's the best LLM evaluation tool for multi-turn and voice agents?
+
+**LangWatch** runs a simulated user that pushes your agent through realistic multi-turn conversations, then hands the trace to a JudgeAgent that scores against natural-language success criteria and issues a pass/fail at any turn. That catches failures static test cases miss, like an agent that answers turn one correctly and loses the thread by turn five.
+
+**What makes LangWatch good for developers:**
+
+-   **Eval types:** Simulated-user multi-turn scoring with a JudgeAgent, plus voice-AI simulation across ElevenLabs, OpenAI Realtime, and Twilio
+-   **CI/CD:** Batch evals gated in CI with pytest or vitest
+-   **Observability:** Offline experiments plus online Monitors that score production traffic and alert on drops
+-   **Pricing:** Developer free forever (50k events/mo, 3 scenarios); Growth $34/core-seat; Enterprise for self-hosting
+-   **License:** Open source (Apache 2), self-hosts via Docker
+
+**Not ideal if:** single-response quality is all you test – the multi-turn simulation is overkill.
+
+**Alternatives to consider:** **DeepEval** for single-response evals as code; **PostHog** to connect agent quality back to real user sessions.
+
+## Other frequently asked questions
+
+<details>
+<summary>How is PostHog different from other LLM evaluation tools?</summary>
+
+Every other tool scores outputs in isolation. PostHog stores eval scores as the same events that power [product analytics](/product-analytics), [session replay](/session-replay), [AI observability](/ai-observability), [error tracking](/error-tracking), [APM](/logs), [flags](/feature-flags), and more – so a quality drop points straight at the users who hit it and the release that caused it.
+
+It's also the direction PostHog is built around: a **self-driving product** that acts on its own data. [Scouts](/blog/what-is-a-scout) read across your traces, evals, and product data, sort signal from noise, and an agent picks up what's worth fixing and opens a PR for you to review and merge. 
+
+You can steer it all from [Slack](/slack), the [web app](/ai), the [desktop app](/desktop), or your editor via [the MCP](/mcp) or [CLI](/docs/cli).
+
+</details>
+
+<details>
+<summary>What's the difference between LLM evals and LLM observability?</summary>
+
+**Observability** captures what your app did – traces, spans, latency, token cost, and the exact input and output of each generation. **Evals** score whether those outputs were actually good, using judges or code-based checks that return a pass or fail. 
+
+Learn more with our [AI Observability pocket guides](/pocket-guides/ai-observability).
+
+</details>
+
+<details>
+<summary>Can you run LLM evals in CI/CD?</summary>
+
+Yes. **DeepEval** runs evals as pytest cases through `deepeval test run`, with a numeric threshold on each metric that produces the pass/fail signal CI needs to gate a build (GitHub Actions, GitLab CI, Jenkins, CircleCI, and more). **Braintrust** gates releases on score thresholds, and **LangWatch** gates with pytest or vitest.
+
+</details>
+
+<details>
+<summary>Do you need a dedicated eval tool if you already have observability?</summary>
+
+Not always. If your observability platform already scores outputs, you skip stitching two systems together. **PostHog** runs LLM-as-judge, code-based, and sentiment evals directly on captured generations, so scores query alongside session replays and product analytics through the same pipeline.
+
+</details>
+
+<details>
+<summary>How much does LLM-as-judge cost?</summary>
+
+The judge is a separate LLM call, so you pay per scored generation on top of your app's own inference. **PostHog** charges no platform fee for judge evals beyond the AI observability event and uses your own provider key, and recommends 5–10% sampling – usually enough signal for quality monitoring, which keeps the cost small. Watch your judge-model choice as closely as your eval tool's pricing tier.
+
+</details>
+
+<details>
+<summary>What's the best free LLM evaluation tool?</summary>
+
+**DeepEval's** open-source core is free under Apache 2.0 and runs the full unit and regression suite locally. **PostHog's** free tier includes 100K AI observability events a month, and its code-based and sentiment evals cost nothing since they run in PostHog's own infrastructure without an LLM call. **Ragas** is fully free for retrieval-quality evals.
+
+</details>
+
+<NewsletterForm />
