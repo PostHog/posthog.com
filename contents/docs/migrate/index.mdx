@@ -55,3 +55,15 @@ An example `cURL` implementation using the `batch` API endpoint looks like this:
 - Build resumability into your exports and imports, so you can just resume the process from the last successful point if any problems occur. For example, we use a cursor-based approach in our self-hosted migration tool.
 
 - To batch user updates, use the same request but with the `$identify` event. Same for groups and the `$group_identify` event.
+
+### Limit your import rate
+
+Add rate limiting to your import script and keep the total below a few thousand events per second across all workers and processes. A faster import does not land your data sooner. It fills the ingestion queue, which delays your own events and the events of other customers. If your import destabilizes ingestion, we can delay or drop your events to protect the pipeline.
+
+A [managed migration](/docs/migrate/managed-migrations) does this for you, so use one if your source is Amplitude, Mixpanel, or an S3 bucket.
+
+### Send events in timestamp order
+
+Group your events into batches that each cover a short time range, then import the batches from oldest to newest. One day per batch is a good default.
+
+A strict sort is not necessary. What matters is that a single batch does not mix events from across your full history. Scrambled timestamps make ClickHouse write many small data parts instead of a few large ones. This causes `too many parts` errors, which slow your import and can lose events.
