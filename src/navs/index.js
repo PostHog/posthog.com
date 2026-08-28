@@ -339,6 +339,13 @@ export const dataPipelines = {
             ],
         },
         {
+            name: 'File download exports',
+            url: '/docs/cdp/file-download-exports',
+            icon: 'IconDownload',
+            color: 'seagreen',
+            featured: true,
+        },
+        {
             name: 'Transformations',
         },
         {
