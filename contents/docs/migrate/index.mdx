@@ -66,4 +66,4 @@ A [managed migration](/docs/migrate/managed-migrations) does this for you, so us
 
 Group your events into batches that each cover a short time range, then import the batches from oldest to newest. One day per batch is a good default.
 
-A strict sort is not necessary. What matters is that a single batch does not mix events from across your full history. Scrambled timestamps make ClickHouse write many small data parts instead of a few large ones. This causes `too many parts` errors, which slow your import and can lose events.
+A strict sort is not necessary. What matters is that a single batch does not mix events from across your full history. Scrambled timestamps make ClickHouse write many small data parts instead of a few large ones.
