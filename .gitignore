@@ -16,6 +16,7 @@ node_modules
 
 .vscode
 .idea
+.playwright-mcp/
 
 package-lock.json
 pr_diff
@@ -33,6 +34,7 @@ CLAUDE.local.md
 
 # Generated data files
 src/data/mcp-tools.json
+src/data/scout-skills.json
 .cloudinary-resources.json
 
 # Python cache

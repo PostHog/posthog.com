@@ -1,10 +1,8 @@
 # Pricing page redesign
 
-Components for the redesigned pricing page, served on **`/pricing`** as two of the three arms of the `pricing-page-redesign` experiment. The page that assembles them is `Pricing/Experiment/RedesignPage`; see `Pricing/Experiment/README.md` for how a variant gets chosen and how to preview one.
+Components for the pricing page, served on **`/pricing`**. The page that assembles them is `pages/pricing/index.tsx`.
 
-The previous page (`PricingExperiment` and friends) is the experiment's control, and lives in `Pricing/Experiment/ControlPage`. The two share only `pages/pricing/philosophy`, `Pricing/FAQs`, and `Test/Sections` — everything in this folder belongs to the redesign alone, so editing it can't move the control.
-
-These components used to have their own route at `/pricing/redesign`. It was removed when the experiment went in: the redesign now only ever renders through the flag.
+These components shipped behind the `pricing-page-redesign` experiment, which ran three arms: the old page, the redesign with the calculator as its own section, and the redesign with the calculator minimized. The minimized redesign won, and it is now the only pricing page — the flag, the arm-picking code, the old page, and the always-visible `CalculatorSection` are all deleted. Nothing here reads a feature flag.
 
 ## Why
 
@@ -13,13 +11,15 @@ The existing page tries to serve everyone at once and ends up making the visitor
 1. **People trying something out** — usually small, don't know what they want yet. They need to be assured of zero risk and easy setup. Answered by the hero, the free-tier grid, and a single no-card CTA.
 2. **People sizing PostHog up for scale** — already large or getting there. They need a credible estimate and a human. Answered by the calculator, the FAQ, and `MoreOptions`.
 
-## What was cut from `/pricing`
+## What was cut from the previous `/pricing`
+
+Everything in the `Component` column is deleted, except `Test/ImageSlider` and `Pricing/Quote`, which other pages still use.
 
 | Removed | Component | Reason |
 | --- | --- | --- |
 | Usage-based pricing / rates | `Test/PaidPricing` (rates accordion) | Per-product rate tables ahead of the calculator. The calculator answers the same question better. |
 | Compare plans | `Test/PlanColumns` | Three plan columns implied a decision that doesn't exist at signup. Replaced by `PricingJourney`. |
-| "Give PostHog a try" | inline in `PricingExperiment` | Redundant mid-page CTA. |
+| "Give PostHog a try" | inline in `Pricing/PricingExperiment` | Redundant mid-page CTA. |
 | Y Combinator quote | `Pricing/Quote` | Single-quote social proof, replaced by `CustomerLogos`. |
 | Product comparisons | `Test/SimilarProducts` | Competitor feature grid — a different question than "what will this cost me". |
 | Add-ons | `Test/Addons` | Detail for existing customers, not people deciding. Still on `/platform-packages` and `/addons`. |
@@ -29,8 +29,8 @@ The existing page tries to serve everyone at once and ends up making the visitor
 
 Kept and reused: `Test/FreeTier`, `Test/Calculator`, `FAQs`, and `pages/pricing/philosophy`.
 
-- **`Test/Calculator`** — two optional props (`hideHeader`, `id`), both defaulting to its previous behavior.
-- **`Test/FreeTier`** — its hard-coded list of products moved into `Test/freeTierData` and the component now maps over it. Pure refactor: same items, same order, same markup. It was extracted so `FreeTierModal` could render the same allowances in a different shape without a second copy of the numbers. **Update allowances there, not in a component.** Three places render it (`FreeTierTicker`, `PricingExperiment`, `Presentation/Templates/PricingTemplate`) plus the modal, so a stale duplicate would be hard to spot.
+- **`Test/Calculator`** — two optional props (`hideHeader`, `id`), both defaulting to its previous behavior. Its sidebar pieces (`SidebarList`, `SidebarListItem`, `Discounts`) used to be passed in as props from `Pricing/PricingExperiment`; they moved into the component when that file was deleted.
+- **`Test/FreeTier`** — its hard-coded list of products moved into `Test/freeTierData` and the component now maps over it. Pure refactor: same items, same order, same markup. It was extracted so `FreeTierModal` could render the same allowances in a different shape without a second copy of the numbers. **Update allowances there, not in a component.** Two places render it (`FreeTierTicker` and `Presentation/Templates/PricingTemplate`) plus the modal, so a stale duplicate would be hard to spot.
 
 ## Page order
 
@@ -38,11 +38,10 @@ Kept and reused: `Test/FreeTier`, `Test/Calculator`, `FAQs`, and `pages/pricing/
 2. `FreeTierTicker` — the free allowances, auto-scrolling in one row, with `Surfaces` as a one-line footnote under it
 3. `PricingJourney` — the two billing stages, as a journey
 4. `CustomerLogos`
-5. `MoreOptions` — three cards, plus `CalculatorReveal` as a footnote in the `minimized` arm
-6. `CalculatorSection` — the pricing calculator in its own section, in the `section` arm only
-7. Philosophy note
-8. FAQ
-9. `Home/ShamelessCTA` — the homepage's boxed-software CTA, reused verbatim
+5. `MoreOptions` — three cards, plus `CalculatorReveal` as a footnote
+6. Philosophy note
+7. FAQ
+8. `Home/ShamelessCTA` — the homepage's boxed-software CTA, reused verbatim
 
 `MoreOptions` comes before the philosophy note, not after: the note ends on a signup CTA, and following that with three "actually, maybe you need something else" cards undoes it. The note is the last word on the page before the FAQ.
 
@@ -122,24 +121,15 @@ Unlike `components/Home/Customers`, there's no shuffle button or breakdown label
 
 ### `pages/pricing/philosophy`
 
-James's pricing note is shared by all three experiment arms and the standalone `/pricing/philosophy` route. His photo, name, and co-founder title lead the card so the attribution is clear before the note begins.
+James's pricing note is shared by `/pricing` and the standalone `/pricing/philosophy` route. His photo, name, and co-founder title lead the card so the attribution is clear before the note begins.
 
 The copy is intentionally limited to four commitments: no loss leaders, cheapest-at-scale pricing, financial stability, and an MIT-licensed open source option. The old biographical sign-off and secondary FAQ/contact paragraph were removed so the note ends on its signup CTA.
 
-**This is the one piece both variants render**, so a copy edit here changes `/pricing` too. That's intentional — the note is a company position, not a design — but it does mean the philosophy card isn't a fair thing to vary in a test. If it needs to differ per variant, split it into a `Redesign/Philosophy` first.
+**A copy edit here changes both routes**, which is intentional — the note is a company position, not a design.
 
-### `CalculatorSection` and `CalculatorReveal`
+### `CalculatorReveal`
 
-Two treatments of the same calculator, and **the only difference between the experiment's two redesign arms.** `RedesignPage`'s `calculator` prop picks one:
-
-| Prop value  | Component           | Arm                             |
-| ----------- | ------------------- | ------------------------------- |
-| `section`   | `CalculatorSection` | `redesign`                      |
-| `minimized` | `CalculatorReveal`  | `redesign-calculator-minimized` |
-
-Keep everything else identical between the two — they're a two-arm test of calculator prominence, so any other difference is a confound.
-
-**`CalculatorReveal` is the original design, and the hypothesis the third arm exists to test.** One sentence — `Most companies stay on the free tier. Calculate what you'd pay past it` — where the second half is a text link that expands the estimator in place and swaps to `Hide the calculator` once open. The argument: an estimator muddies this page's frame, turning "this is free for you" into "work out your bill," which is the wrong question for the ~97% who never pay. So it has no card, no fill, no border, and no heading, and it sits as a footnote *inside* the `more-options` section rather than as a section of its own. It owns `#calculator` in this mode, and the calculator only mounts once opened, so it costs everyone else nothing.
+The calculator, collapsed behind a link. This treatment beat an always-visible calculator section in the redesign experiment. One sentence — `Most companies stay on the free tier. Calculate what you'd pay past it` — where the second half is a text link that expands the estimator in place and swaps to `Hide the calculator` once open. The argument: an estimator muddies this page's frame, turning "this is free for you" into "work out your bill," which is the wrong question for the ~97% who never pay. So it has no card, no fill, no border, and no heading, and it sits as a footnote *inside* the `more-options` section rather than as a section of its own. It owns `#calculator`, and the calculator only mounts once opened, so it costs everyone else nothing.
 
 It's deliberately *not* built on `RadixUI/Accordion`, whose `AccordionContent` hardcodes `overflow-hidden` — that would break the calculator's `sticky` sidebar and clip its tooltips. Three details are load-bearing:
 
@@ -147,15 +137,13 @@ It's deliberately *not* built on `RadixUI/Accordion`, whose `AccordionContent` h
 - **`overflow` returns to `visible` once the open animation finishes**, because a permanent `overflow-hidden` breaks the sticky sidebar and clips tooltips. The same `settled` flag applies `invisible` when fully collapsed, keeping the mounted calculator out of the tab order.
 - **The calculator stays mounted after the first open**, so volumes someone dialled in survive a hide/show.
 
-Expanding fires `pricing_calculator_expanded`. **That event only exists in this arm** — the other two have nothing to expand — so it is not a cross-arm engagement metric. Use `pricing_calculator_interacted` for comparisons; see `Pricing/Experiment/README.md`.
+Expanding fires `pricing_calculator_expanded`. For engagement, prefer `pricing_calculator_interacted`, which fires on the controls themselves — it also counts people who arrive with `?calculator` and so never click the link.
 
-**`CalculatorSection` is the plain treatment:** always visible, under a `Pricing calculator` heading like every other section on the page. The heading and the `#calculator` anchor live in `RedesignPage`, not in the component, so they match the sibling sections exactly.
+**Nothing earlier in the page points at it.** `PricingJourney` step 2 used to link "at usage-based rates" down to `#calculator`; that link is gone and the detail is plain text like its three siblings. Worth keeping that way — the page has one signup CTA, and internal jump links compete with it.
 
-**Nothing earlier in the page points at either.** `PricingJourney` step 2 used to link "at usage-based rates" down to `#calculator`; that link is gone and the detail is plain text like its three siblings. Worth keeping that way — the page has one signup CTA, and internal jump links compete with it.
+`?calculator` in the URL opens the calculator and scrolls to it, so an estimate can be shared as a link.
 
-`?calculator` in the URL scrolls to the calculator in both modes, and opens it in the minimized one, so an estimate can be shared as a link.
-
-**Both render `Test/Calculator` with `hideHeader` and `id=""`.** `hideHeader` drops the calculator's own `<h2>Pricing calculator</h2>`, whose bordered, section-weight styling doesn't match this page; `id=""` stops `#calculator` existing twice in the DOM, since the page (or the reveal wrapper) owns that anchor.
+**It renders `Test/Calculator` with `hideHeader` and `id=""`.** `hideHeader` drops the calculator's own `<h2>Pricing calculator</h2>`, whose bordered, section-weight styling doesn't match this page; `id=""` stops `#calculator` existing twice in the DOM, since the reveal wrapper owns that anchor.
 
 Its `SectionLayout` margins and `@5xl:px-4` still need neutralizing, and that's done locally with `[&>section]:my-0 [&>section]:px-0` rather than a third prop. A `className` prop wouldn't work: `SectionLayout` appends caller classes after its own, and `my-0` loses to `mb-12` in Tailwind's cascade no matter the order in the attribute, so it takes a child selector to win on specificity.
 
@@ -192,15 +180,19 @@ The page renders `CalculatorReveal` immediately after this component, still insi
 
 ### `Surfaces`
 
-One line under the ticker — *Used across any of these products: Web, Slack, MCP* — with an icon each and **no links**.
+One line under the ticker — *Used across any of these products: Web, Slack, Desktop, MCP* — with an icon each and **no links**.
 
 **It replaced a whole `SelfDrivingPricing` section** (deleted; see git history for the component). That section explained how self-driving is billed — models at cost plus ~27%, across four surfaces in a table — and it sat between the philosophy note and the FAQ. Two problems: it was the only thing on the page that didn't follow the page's one story (start free, add a card when you outgrow it), so it read as a second pitch at the exact point the page should be finishing; and most visitors will never touch that billing model. The part worth keeping was the *list of surfaces*, which belongs next to the allowances it applies to.
 
 **So it's a footnote to `FreeTierTicker`, not a section.** "Which of these can I use my free tier from?" is a question about the row directly above it.
 
-**Nothing here links out,** deliberately. These are labels on the allowances, not three more destinations — the top of the page has one CTA and this shouldn't compete with it. That also keeps it from turning back into a section.
+**Nothing here links out,** deliberately. These are labels on the allowances, not four more destinations — the top of the page has one CTA and this shouldn't compete with it. That also keeps it from turning back into a section.
 
-Wording follows the [glossary](/manual/glossary)'s taxonomy, where Web, Slack, MCP, CLI, and Code are PostHog's *products* and analytics, replay, flags, and so on are its *tools*. Three of the five are listed because they're the three most people will use; the icons are `IconBrowser` (`@posthog/icons`) plus `IconSlack` and `IconMCP` from `OSIcons`.
+Wording follows the [glossary](/manual/glossary)'s taxonomy, where Web, Slack, MCP, CLI, and Desktop are PostHog's *products* and analytics, replay, flags, and so on are its *tools*. Four of the five are listed; CLI is the one left off.
+
+**Every product listed here has a row in the ticker above it,** and that's the constraint to hold when editing this list. The line answers "which of these can I spend my free tier from?", so a product named here with no allowance in the ticker reads as sharing someone else's — which is exactly wrong for Desktop, whose $20 is its own `posthog_code_credits` balance and not a slice of PostHog AI's 500. Add to `Test/freeTierData.tsx` and this list together, or neither.
+
+Desktop's icon needs `dark:text-brown-dark` alongside `text-brown`: the brown token is near-black and disappears against the dark background. Same pairing `/slack` and `/self-driving` use.
 
 ### `Home/ShamelessCTA` (reused)
 

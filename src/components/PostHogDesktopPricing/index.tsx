@@ -2,6 +2,7 @@ import React from 'react'
 import useSWR from 'swr'
 
 import OSTable from 'components/OSTable'
+import { ComputeRateCard, PUBLISHED_COMPUTE_RATE_CARD, PUBLISHED_RATES_DATE } from 'lib/posthogDesktopCompute'
 
 interface ModelPricing {
     prompt: string
@@ -14,11 +15,6 @@ interface Model {
     id: string
     display_name: string
     pricing: ModelPricing
-}
-
-interface ComputeRateCard {
-    cpu_core_second_usd: string
-    memory_gib_second_usd: string
 }
 
 interface PricingResponse {
@@ -46,9 +42,166 @@ const MODEL_DISPLAY_NAMES: Record<string, string> = {
     'gpt-5.6-luna': 'GPT-5.6 Luna',
     'gpt-5.5': 'GPT-5.5',
     'gpt-5.4': 'GPT-5.4',
+    'zai-org/glm-5.3': 'GLM-5.3',
     '@cf/zai-org/glm-5.2': 'GLM-5.2',
     'moonshotai/kimi-k3': 'Kimi K3',
     'deepseek-ai/deepseek-v4-flash-0731': 'DeepSeek V4 Flash',
+}
+
+const FALLBACK_PRICING: PricingResponse = {
+    models: [
+        {
+            id: 'claude-fable-5',
+            display_name: 'claude-fable-5',
+            pricing: {
+                prompt: '0.00001',
+                completion: '0.00005',
+                input_cache_read: '0.000001',
+                input_cache_write: '0.0000125',
+            },
+        },
+        {
+            id: 'claude-opus-5',
+            display_name: 'claude-opus-5',
+            pricing: {
+                prompt: '0.000005',
+                completion: '0.000025',
+                input_cache_read: '0.0000005',
+                input_cache_write: '0.00000625',
+            },
+        },
+        {
+            id: 'claude-opus-4-8',
+            display_name: 'claude-opus-4-8',
+            pricing: {
+                prompt: '0.000005',
+                completion: '0.000025',
+                input_cache_read: '0.0000005',
+                input_cache_write: '0.00000625',
+            },
+        },
+        {
+            id: 'claude-opus-4-7',
+            display_name: 'claude-opus-4-7',
+            pricing: {
+                prompt: '0.000005',
+                completion: '0.000025',
+                input_cache_read: '0.0000005',
+                input_cache_write: '0.00000625',
+            },
+        },
+        {
+            id: 'claude-sonnet-5',
+            display_name: 'claude-sonnet-5',
+            pricing: {
+                prompt: '0.000002',
+                completion: '0.00001',
+                input_cache_read: '0.0000002',
+                input_cache_write: '0.0000025',
+            },
+        },
+        {
+            id: 'claude-sonnet-4-6',
+            display_name: 'claude-sonnet-4-6',
+            pricing: {
+                prompt: '0.000003',
+                completion: '0.000015',
+                input_cache_read: '0.0000003',
+                input_cache_write: '0.00000375',
+            },
+        },
+        {
+            id: 'moonshotai/kimi-k3',
+            display_name: 'moonshotai/kimi-k3',
+            pricing: {
+                prompt: '0.000003',
+                completion: '0.000015',
+                input_cache_read: '0.0000003',
+                input_cache_write: '0.000003',
+            },
+        },
+        {
+            id: 'deepseek-ai/deepseek-v4-flash-0731',
+            display_name: 'deepseek-ai/deepseek-v4-flash-0731',
+            pricing: {
+                prompt: '0.00000013',
+                completion: '0.00000026',
+                input_cache_read: '0.000000028',
+                input_cache_write: '0.00000013',
+            },
+        },
+        {
+            id: 'gpt-5.6-sol',
+            display_name: 'gpt-5.6-sol',
+            pricing: {
+                prompt: '0.000005',
+                completion: '0.00003',
+                input_cache_read: '0.0000005',
+                input_cache_write: '0.00000625',
+            },
+        },
+        {
+            id: 'gpt-5.6-terra',
+            display_name: 'gpt-5.6-terra',
+            pricing: {
+                prompt: '0.000002',
+                completion: '0.000012',
+                input_cache_read: '0.0000002',
+                input_cache_write: '0.0000025',
+            },
+        },
+        {
+            id: 'gpt-5.6-luna',
+            display_name: 'gpt-5.6-luna',
+            pricing: {
+                prompt: '0.0000002',
+                completion: '0.0000012',
+                input_cache_read: '0.00000002',
+                input_cache_write: '0.00000025',
+            },
+        },
+        {
+            id: 'gpt-5.5',
+            display_name: 'gpt-5.5',
+            pricing: {
+                prompt: '0.000005',
+                completion: '0.00003',
+                input_cache_read: '0.0000005',
+                input_cache_write: '0.000005',
+            },
+        },
+        {
+            id: 'gpt-5.4',
+            display_name: 'gpt-5.4',
+            pricing: {
+                prompt: '0.0000025',
+                completion: '0.000015',
+                input_cache_read: '0.00000025',
+                input_cache_write: '0.0000025',
+            },
+        },
+        {
+            id: 'zai-org/glm-5.3',
+            display_name: 'zai-org/glm-5.3',
+            pricing: {
+                prompt: '0.0000014',
+                completion: '0.0000044',
+                input_cache_read: '0.00000014',
+                input_cache_write: '0.0000014',
+            },
+        },
+        {
+            id: '@cf/zai-org/glm-5.2',
+            display_name: '@cf/zai-org/glm-5.2',
+            pricing: {
+                prompt: '0.0000014',
+                completion: '0.0000044',
+                input_cache_read: null,
+                input_cache_write: null,
+            },
+        },
+    ],
+    compute: PUBLISHED_COMPUTE_RATE_CARD,
 }
 
 const creditsPerMillionTokens = (rate: string | null): string => {
@@ -64,20 +217,22 @@ const fetchPricing = async (url: string): Promise<PricingResponse> => {
     if (!response.ok) {
         throw new Error(`Pricing request returned ${response.status}`)
     }
-    return response.json() as Promise<PricingResponse>
+    const pricing = (await response.json()) as PricingResponse
+    if (!Array.isArray(pricing.models) || pricing.models.length === 0) {
+        throw new Error('Pricing response contains no models')
+    }
+    return pricing
 }
 
 export const PostHogDesktopPricing = (): React.ReactElement => {
-    const { data: pricing, error } = useSWR<PricingResponse>('/api/posthog-desktop-pricing', fetchPricing)
+    const { data, error } = useSWR<PricingResponse>('/api/posthog-desktop-pricing', fetchPricing)
 
-    if (error) {
-        return <p>Pricing is currently unavailable. Refresh the page to try again.</p>
-    }
-
-    if (!pricing) {
+    if (!data && !error) {
         return <p>Loading current pricing...</p>
     }
 
+    const pricing = data?.models.length ? data : FALLBACK_PRICING
+    const isFallback = pricing === FALLBACK_PRICING
     const rows = pricing.models.map((model) => ({
         key: model.id,
         cells: [
@@ -86,12 +241,11 @@ export const PostHogDesktopPricing = (): React.ReactElement => {
         ],
     }))
 
-    if (rows.length === 0) {
-        return <p>Pricing is currently unavailable. Refresh the page to try again.</p>
-    }
-
     return (
         <>
+            {isFallback && (
+                <p>Live pricing is temporarily unavailable. Showing rates published {PUBLISHED_RATES_DATE}.</p>
+            )}
             <OSTable columns={[{ name: 'Model' }, ...TOKEN_COLUMNS]} rows={rows} width="full" />
             {pricing.compute && (
                 <>

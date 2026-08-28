@@ -144,7 +144,9 @@ Future<void> main() async {
 
 #### Web setup
 
-For Web, add your `Web snippet` (which you can find in [your project settings](https://us.posthog.com/settings/project#snippet)) in the `<header>` of your `web/index.html` file:
+If your project has a `web/` directory, this step is required. `Posthog().setup()` is a no-op on web, so a web build without the snippet below captures nothing.
+
+Add your `Web snippet` (which you can find in [your project settings](https://us.posthog.com/settings/project#snippet)) in the `<header>` of your `web/index.html` file. Write your project token into the snippet as a literal string. It's public, the same token ships to every visitor, and it needs no build-time or deploy-time injection:
 
 ```html file=web/index.html
 <!DOCTYPE html>

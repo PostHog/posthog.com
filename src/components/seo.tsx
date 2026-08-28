@@ -66,6 +66,8 @@ export const SEO = ({
                 ? image
                 : `${process.env.GATSBY_DEPLOY_PRIME_URL || siteUrl}${image || defaultImage}`,
         url: `${siteUrl}${pathname}`,
+        // Callers may pass a site-relative path; canonical links have to be absolute.
+        canonical: canonicalUrl?.startsWith('/') ? `${siteUrl}${canonicalUrl}` : canonicalUrl,
     }
 
     useEffect(() => {
@@ -80,7 +82,7 @@ export const SEO = ({
             {noindex && <meta name="robots" content="noindex" />}
             {seo.description && <meta name="description" content={seo.description} />}
             {seo.image && <meta name="image" content={seo.image} />}
-            {<link rel="canonical" href={canonicalUrl ? canonicalUrl : seo.url} />}
+            {<link rel="canonical" href={seo.canonical || seo.url} />}
             {/* Standard.site publication discovery hint for the blog */}
             {pathname?.startsWith('/blog') && (
                 <link
@@ -110,7 +112,7 @@ export const SEO = ({
             )}
 
             {seo.url && <meta property="og:url" content={seo.url} />}
-            {article ? <meta property="og:type" content="article" /> : null}
+            <meta property="og:type" content={article ? 'article' : 'website'} />
             {seo.title && <meta property="og:title" content={seo.title} />}
             {seo.description && <meta property="og:description" content={seo.description} />}
             {seo.image && <meta property="og:image" content={seo.image} />}

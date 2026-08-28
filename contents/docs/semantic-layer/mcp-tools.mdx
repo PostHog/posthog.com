@@ -4,13 +4,13 @@ sidebar: Docs
 showTitle: true
 ---
 
-import AlphaCallout from './_snippets/alpha-callout'
+import BetaCallout from './_snippets/beta-callout'
 
-The [PostHog MCP server](/docs/model-context-protocol) is how agents work with the semantic layer. This page is the reference for the semantic layer's tools – they're alpha-only, so they don't appear in the [general MCP tools list](/docs/model-context-protocol/tools) yet, and they only show up in your client when the alpha is enabled for your organization.
+The [PostHog MCP server](/docs/model-context-protocol) is how agents work with the semantic layer. This page is the reference for the semantic layer's tools – they're also listed under **Data catalog** in the [general MCP tools list](/docs/model-context-protocol/tools), alongside every other PostHog tool.
 
 This works in any MCP client – Claude Code, Claude Desktop, Cursor, Codex, Windsurf, VS Code, and others. Install with the [AI wizard](/docs/ai-engineering/ai-wizard) (`npx @posthog/wizard mcp add`) – see the [MCP server docs](/docs/model-context-protocol) for full setup instructions.
 
-<AlphaCallout />
+<BetaCallout />
 
 ## Catalog-first routing
 
@@ -23,6 +23,12 @@ With the semantic layer enabled, the MCP server changes how agents answer metric
 
 This routing takes precedence over the agent's generic query-writing behavior. The effect: governed definitions win by default, and you always know when a number is a one-off derivation instead.
 
+## How confirmations work
+
+Every promoting or vetoing action ships as a pair of tools. The `-prepare` half validates the arguments and returns a signed `confirmation_hash` along with a message to show you. You reply with the literal word "confirm". The `-execute` half verifies that hash and your typed word, then performs the action.
+
+Your agent makes both calls – you read the message and type "confirm". The split is what keeps the moment of promotion a separate human step that an agent can't autocomplete. In the tables below, these pairs are listed as `-prepare` / `-execute`.
+
 ## Metric tools
 
 | Tool | What it does | Confirmation | Scopes |
@@ -30,7 +36,8 @@ This routing takes precedence over the agent's generic query-writing behavior. T
 | `data-catalog-metric-run` | Runs a governed metric. Executable metrics return results, the compiled query, and a `posthog_url` deep link; markdown metrics return calculation steps in `instructions`. Accepts `date_from`/`date_to`/`interval` overrides (rejected for `HogQLQuery` metrics) and a `refresh` cache option. | – | `data_catalog:read`, `query:read` |
 | `data-catalog-metric-create` | Creates a metric, or refines the one already holding that name (upserts on `name`). Always lands `proposed`. The definition is an executable query or a `MarkdownDefinition`. | – | `data_catalog:write` |
 | `data-catalog-metric-update` | Updates a metric's fields, including renaming it via `new_name` (which frees the old name and breaks references to it). Editing an approved metric's definition, name, description, or unit resets it to `proposed`. | – | `data_catalog:write` |
-| `data-catalog-metric-approve` | Blesses a metric as canonical. Blocked while the metric is drifted from its source insight. | Typed "confirm" | `data_catalog_approval:write`, `data_catalog:read` |
+| `data-catalog-metrics-refresh-from-insight-create` | Re-snapshots the linked insight's current query into the metric to clear drift. If the snapshot changes an approved metric's definition, the metric resets to `proposed`. Requires the metric to have a `source_insight_short_id`. | – | `data_catalog:write`, `insight:read` |
+| `data-catalog-metric-approve-prepare` / `-execute` | Blesses a metric as canonical. Blocked while the metric is drifted from its source insight – refresh or unlink it first. | Typed "confirm" | `data_catalog_approval:write`, `data_catalog:read` |
 
 There's deliberately no "list metrics" tool: agents discover metrics with `execute-sql` over `system.information_schema.metrics` – see the [SQL reference](/docs/semantic-layer/query). There's also no delete tool: agents can propose and update metrics, but [deleting one](/docs/semantic-layer/metrics#renaming-and-deleting) is a human act, done from the Data Catalog UI or the API.
 
@@ -38,17 +45,17 @@ There's deliberately no "list metrics" tool: agents discover metrics with `execu
 
 | Tool | What it does | Confirmation | Scopes |
 |------|--------------|--------------|--------|
-| `data-catalog-certification-propose` | Proposes a trust mark on a warehouse table or view. Address the target by id or by name – an ambiguous name returns the candidate ids to pick from. | – | `data_catalog:write` |
-| `data-catalog-certification-certify` | Marks a table or view as `certified` (prefer this source). | Typed "confirm" | `data_catalog_approval:write`, `data_catalog:read` |
-| `data-catalog-certification-deprecate` | Marks a table or view as `deprecated` (avoid this source). | Typed "confirm" | `data_catalog_approval:write`, `data_catalog:read` |
+| `data-catalog-certification-propose` | Proposes a trust mark on a warehouse table or view. Address the target by ID or by name – an ambiguous name returns the candidate IDs to pick from. | – | `data_catalog:write` |
+| `data-catalog-certification-certify-prepare` / `-execute` | Marks a table or view as `certified` (prefer this source). | Typed "confirm" | `data_catalog_approval:write`, `data_catalog:read` |
+| `data-catalog-certification-deprecate-prepare` / `-execute` | Marks a table or view as `deprecated` (avoid this source). | Typed "confirm" | `data_catalog_approval:write`, `data_catalog:read` |
 
 ## Relationship tools
 
 | Tool | What it does | Confirmation | Scopes |
 |------|--------------|--------------|--------|
 | `data-catalog-relationship-propose` | Proposes a reviewed join between two warehouse tables, with confidence and sampling evidence (match rates, sample values). Proposals are deduped regardless of direction. | – | `data_catalog:write` |
-| `data-catalog-relationship-accept` | Promotes a proposal to a real [warehouse join](/docs/data-warehouse/join), after re-validating and probing it. | Typed "confirm" | `data_catalog_approval:write`, `data_catalog:read`, `query:read`, `warehouse_view:write` |
-| `data-catalog-relationship-reject` | Rejects a proposal. Permanent – the pair is never re-proposed. | Typed "confirm" | `data_catalog_approval:write`, `data_catalog:read` |
+| `data-catalog-relationship-accept-prepare` / `-execute` | Promotes a proposal to a real [warehouse join](/docs/data-warehouse/join), after re-validating and probing it. | Typed "confirm" | `data_catalog_approval:write`, `data_catalog:read`, `query:read`, `warehouse_view:write` |
+| `data-catalog-relationship-reject-prepare` / `-execute` | Rejects a proposal. Permanent – the pair is never re-proposed. | Typed "confirm" | `data_catalog_approval:write`, `data_catalog:read` |
 
 ## Example prompts
 

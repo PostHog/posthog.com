@@ -12,6 +12,10 @@ export const customerDataInfrastructureNav = {
             url: '/context-warehouse',
         },
         {
+            name: 'Start here',
+            url: '/context-warehouse/use-cases',
+        },
+        {
             name: 'Is PostHog warehouse native?',
             url: '/context-warehouse/warehouse-native',
         },
