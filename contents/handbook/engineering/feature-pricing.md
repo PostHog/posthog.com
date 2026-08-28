@@ -29,7 +29,7 @@ Sometimes these principles still leave room for questions – what, if anything,
 
 For these types of questions, we've defined a runbook for deciding which plans, and at what limits, features should be assigned to.
 
-### Usage-based pricing as the default, with exceptions
+### Usage-based pricing as the default
 
 The more a customer uses a product, generally the higher their bill should be. This has several benefits: 
 
@@ -37,9 +37,9 @@ The more a customer uses a product, generally the higher their bill should be. T
 - As our costs for providing a product scale through increased usage, so does our revenue
 - A customer's bill, and therefore our revenue, scales with their success (more users, more usage of our platform, etc.). This means our incentives are aligned
 
-There can be exceptions to the rule: for some products the engineering time is the most expensive part, and in these cases we should consider tiered fees, monthly flat fees, or seat-based pricing where it makes sense.
+The main exception to this rule are our platform packages, which are flat-fee monthly add-ons. These are designed to give our larger customers additional flexibility & controls (e.g. RBAC), without hindering individual user adoption (vs. a per-seat price). Flat-fee add-ons should be reserved for functionality where cost _doesn't_ scale with usage, e.g. extended retention should be charged usage-based, not as a flat-fee add-on.
 
-### Each product should pay for itself
+### Each product should have a path to pay for itself
 
 When picking the pricing for a new product, we should ensure we pick a pricing that allows the product to pay for itself in the mid term.
 
