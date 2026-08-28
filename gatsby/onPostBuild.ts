@@ -492,8 +492,7 @@ const createOrUpdateStrapiPosts = async (posts, roadmaps) => {
     )
 }
 
-export const onPostBuild: GatsbyNode['onPostBuild'] = async ({ graphql, reporter }) => {
-    if (process.env.GATSBY_MINIMAL === 'true') return
+const generateMarkdownArtifacts = async (graphql: any) => {
     // Generate API spec markdown files first
     try {
         const openApiSpecUrl = process.env.POSTHOG_OPEN_API_SPEC_URL || 'https://app.posthog.com/api/schema/'
@@ -673,18 +672,31 @@ export const onPostBuild: GatsbyNode['onPostBuild'] = async ({ graphql, reporter
     } catch (error) {
         console.error('Failed to generate changelog markdown:', error)
     }
+}
+
+export const onPostBuild: GatsbyNode['onPostBuild'] = async ({ graphql }) => {
+    if (process.env.GATSBY_MINIMAL === 'true') return
+
+    const isAwsPipeline = process.env.AWS_CODEPIPELINE === 'true'
+
+    // Markdown artifacts are served by Vercel. CodePipeline only needs OG images + Strapi.
+    if (isAwsPipeline) {
+        console.log('Skipping markdown artifact generation (AWS CodePipeline)')
+    } else {
+        await generateMarkdownArtifacts(graphql)
+    }
 
     // Publish/update Standard.site document records for blog posts.
     // Self-gates on env (AWS_CODEPIPELINE / STANDARD_SITE_SYNC) and BSKY_APP_PASSWORD; safe no-op otherwise.
-    // Placed before the prod-only return so STANDARD_SITE_SYNC=true can drive a local/dry run.
+    // Placed before the AWS-only return so STANDARD_SITE_SYNC=true can drive a local/dry run.
     await syncStandardSiteDocuments(graphql)
 
-    if (process.env.AWS_CODEPIPELINE !== 'true') {
-        console.log('Skipping onPostBuild tasks')
+    if (!isAwsPipeline) {
+        console.log('Skipping OG image and Strapi tasks')
         return
     }
 
-    console.log('Running onPostBuild tasks')
+    console.log('Running OG image and Strapi tasks')
 
     const { data } = await graphql(`
         query {
