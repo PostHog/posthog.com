@@ -115,23 +115,24 @@ export default function ContextGapReport() {
 
                         <div className="relative h-full">
                             {/* -1.5rem offsets CalloutBox's own mb-6, so this bottom edge lines up with the callout's */}
-                            <div className="not-prose relative h-[calc(100%-1.5rem)] border border-primary rounded overflow-hidden bg-accent">
+                            <a
+                                href={PDF_PATH}
+                                target="_blank"
+                                rel="noreferrer"
+                                aria-label="Open The Context Gap report as a PDF in a new tab"
+                                className="not-prose group relative block h-[calc(100%-1.5rem)] border border-primary rounded overflow-hidden bg-accent"
+                            >
                                 <iframe
-                                    src={`${PDF_PATH}#view=FitH`}
+                                    src={PDF_PATH}
                                     title="The Context Gap report preview"
-                                    className="w-full h-full"
+                                    className="w-full h-full pointer-events-none"
                                 />
-                                <a
-                                    href={pdfUrl}
-                                    target="_blank"
-                                    rel="noreferrer"
-                                    aria-label="Open The Context Gap report as a PDF in a new tab"
-                                    className="absolute top-2 right-2 flex items-center gap-1 text-xs font-semibold text-white bg-black/60 hover:bg-black/80 transition-colors rounded px-2 py-1"
-                                >
-                                    <IconOpenSidebar className="size-3.5" />
-                                    Open in new tab
-                                </a>
-                            </div>
+                                <div className="absolute inset-0 flex items-center justify-center bg-black/0 group-hover:bg-black/40 transition-colors">
+                                    <span className="opacity-0 group-hover:opacity-100 transition-opacity text-white font-semibold bg-black/60 rounded px-4 py-2">
+                                        Open in new tab ↗
+                                    </span>
+                                </div>
+                            </a>
 
                             <div className="absolute -top-6 -right-12 pointer-events-none">
                                 <div className="relative">
