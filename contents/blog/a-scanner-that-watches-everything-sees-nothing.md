@@ -1,5 +1,5 @@
 ---
-title: "A scanner that watches everything sees nothing"
+title: "Watching PostHog watch itself: A scanner that watches everything sees nothing"
 date: 2026-08-27
 author:
   - cory-slater
@@ -16,15 +16,17 @@ What we learned from 251,351 succeeded observations: useful scanners start with 
 
 <!-- data current through 2026-08-25 10:29 PT. re-pull before publishing. -->
 
-In the last few weeks, our own [Replay Vision](/replay-vision) scanners have produced 251,351 succeeded observations across the millions of sessions we have of people using PostHog.
+A month ago we launched [Replay Vision](https://github.com/replay-vision), our AI layer over Session Replay. It watches session recordings in batches and writes up what it found, so nobody has to sit through them. You give it work by setting up a scanner: a recording query that picks which sessions to watch, and a prompt that says what to look for.
+
+In the last few weeks, our own [scanners](/docs/replay-vision/scanner-types) have produced 251,351 successful observations across the millions of sessions we have of people using PostHog.
 
 That number may be a little absurd, but it is not the interesting part. The count does not represent 251,351 unique recordings, and it is nowhere close to all those sessions. Each observation is one scanner applied to one recording. It is a thin slice selected because it matched a question we asked.
 
-Nobody was going to watch the vast majority of those millions of recordings anyway. That is the problem [Natalia wrote about](/blog/nobody-watches-session-replays). Session replay contains useful evidence. Then the evidence sits in a giant list while everyone goes back to their dashboards.
+[Nobody was going to watch](/blog/nobody-watches-session-replays) the vast majority of those millions of recordings anyway. Session replay contains useful evidence. Then the evidence sits in a giant list while everyone goes back to their dashboards.
 
-Replay Vision fixes the watching part. It does not fix the thinking part.
+Replay Vision fixes the watching part but not the thinking part. We learned this the annoying (but expected) way. Some scanners pointed us to bugs we could then verify in the linked recordings, while others showed us exactly where a flow became confusing. Some even produced plausible session descriptions that nobody wanted to read. 
 
-We learned this the annoying (but expected) way. Some scanners pointed us to bugs we could then verify in the linked recordings. Some showed us exactly where a flow became confusing. Others produced plausible descriptions of sessions that nobody wanted to read. The model was not the main difference. The scanner either had a real job or it did not.
+In fact, the model wasn't the main difference. The scanner either had a real job or it did not.
 
 Useful scanners have three things: a visible question, a narrow recording set, and permission to answer "no" or "inconclusive." You still have to bring the judgment.
 
@@ -45,9 +47,12 @@ Our first broad scanners produced plausible mush because we had quietly asked th
 
 The scanners we use now are narrower. One watches sessions with rage clicks and asks whether the clicked control actually failed. One watches first sessions from high-fit signups and reconstructs the setup journey. Another watches Error Tracking investigations and records the path through stack traces, occurrences, recordings, logs, and actions.
 
-Different surfaces with the same shape: a filtered set of recordings, one visible question, and a defined answer.
+Same shape on every surface: a filtered set of recordings, one visible question, and a defined answer. The recording query and the prompt do different work:
 
-The recording query and the prompt do different work. The query decides which sessions deserve inspection. The prompt decides what judgment to make inside each one. A high-intent event, relevant URL, useful cohort, or minimum duration usually improves quality more than another paragraph of instructions.
+- The query decides which sessions deserve inspection.
+- The prompt decides what judgment to make inside each one.
+
+A high-intent event, relevant URL, useful cohort, or minimum duration usually improves quality more than another paragraph of instructions.
 
 <!-- screenshot placeholder: narrow scanner configuration
 show: one scanner with its recording filters, scanner type, prompt, model, and sampling controls
@@ -69,7 +74,13 @@ Bug scanners are the obvious first move. They are also the lowest bar.
 
 We still run them because they work. Dead clicks, broken renders, and setup loops are easier to catch when something watches the footage. But some of our most valuable scanners look for product opportunities instead.
 
-One watches first sessions from high-fit signups and writes the trip report we would never produce consistently by hand. What did the person evaluate? How far did they get? What slowed them down? Another reconstructs how people investigate Error Tracking issues. It records the entry point, data consulted, impact assessment, queries, actions, and outcome.
+One watches the first sessions from high-fit signups and writes the trip report we would never produce consistently by hand:
+
+- What did the person evaluate? 
+- How far did they get? 
+- What slowed them down? 
+
+Another reconstructs how people investigate Error Tracking issues. It records the entry point, data consulted, impact assessment, queries, actions, and outcome.
 
 These scanners do not magically tell us what to build. When we aim them well, they produce feature ideas worth testing. They show the workflows people attempted, the manual work they repeated, and the product questions worth investigating. Treat each finding as a hypothesis. Product judgment remains a human problem, which is fortunate for those of us employed to provide it.
 
@@ -148,7 +159,9 @@ It is still a model's judgment, not ground truth, so the confidence and recordin
 
 That creates a new behavioral event shape: an evidence-backed judgment about what happened inside one recording. Define the judgment once, then apply it to every matching recording. You can query it, chart it, break it down, or alert on it alongside the rest of your product data.
 
-An event can say someone abandoned signup. An observation can show the contradictory copy they read before leaving. An event can say someone clicked summarize. An observation can show a populated trace that the product incorrectly summarized as empty. An event can say setup completed. An observation can show that the person got there only after painfully hunting, scrolling, and backtracking.
+- An event can say someone abandoned signup. An observation can show the contradictory copy they read before leaving. 
+- An event can say someone clicked **summarize.** An observation can show a populated trace that the product incorrectly summarized as empty. 
+- An event can say setup completed. An observation can show that the person got there only after painfully hunting, scrolling, and backtracking.
 
 Observations do not replace events. They add a queryable judgment about what happened before, between, and after them.
 
