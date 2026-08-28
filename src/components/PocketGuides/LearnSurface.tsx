@@ -65,8 +65,7 @@ export default function LearnSurface({ volumeId, chapter }: LearnSurfaceProps): 
         if (pages.length === 0) {
             return undefined
         }
-        // An unknown chapter shows the front matter rather than an empty page: the sidebar is
-        // right there, so a wrong url costs the reader a click, not a dead end.
+        // An unknown chapter falls back to the front matter: a wrong url costs a click, not a dead end.
         return (chapter && pages.find((p) => learnChapterSlug(p) === chapter)) || pages[0]
     }, [pages, chapter])
 
@@ -76,9 +75,7 @@ export default function LearnSurface({ volumeId, chapter }: LearnSurfaceProps): 
     }
 
     return (
-        // `not-prose`: the book styles its own prose. The pinned size keeps its em and rem spacing in step.
-        // `[&>div]:!p-0` strips the per-page frame, which is a page margin in the book and dead
-        // space here; the docs column already supplies its own padding.
+        // `not-prose` because the book styles its own; `!p-0` drops a page margin the docs column already gives.
         <div className="not-prose @container [&>div]:!p-0" style={{ fontSize: BOOK_BASE_FONT_SIZE }}>
             <EntryProvider value={{ entry, pages }}>
                 <MDXProvider components={bookMdxComponents}>

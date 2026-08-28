@@ -66,10 +66,7 @@ const DocsTreeMenu = ({
     return <TreeMenu items={itemsWithInstall as any} variant={variant} appearance="sidebar" rootHeading={rootHeading} />
 }
 
-/**
- * One item per chapter, each its own page. Not `ProductNav`: that scrolls within one long
- * surface, and a volume read as one scroll is not how anyone reads a chapter.
- */
+/** One item per chapter, each its own page. Not `ProductNav`: that scrolls within one long surface. */
 const LearnNav = ({
     volumeId,
     basePath,
