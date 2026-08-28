@@ -299,6 +299,10 @@ export default function BlogPost({ data, pageContext, location, mobile = false }
     } = postData?.frontmatter
     const lastUpdated = postData?.parent?.fields?.gitLogLatestDate
     const filePath = postData?.parent?.relativePath
+    // The composed OG cards this template used to point at are no longer built, so use the post's
+    // featured image instead. c_limit only scales down, so nothing gets cropped out of the card.
+    // Falls back to the site default image when a post has no featured image.
+    const ogImage = featuredImage?.publicURL?.replace('/image/upload/', '/image/upload/c_limit,w_1200,f_jpg,q_auto/')
     const category = postData?.parent?.category
     const components = {
         h1: (props) => Heading({ as: 'h1', ...props }),
@@ -393,8 +397,7 @@ export default function BlogPost({ data, pageContext, location, mobile = false }
                 title={seo?.metaTitle || title + ' - PostHog'}
                 description={seo?.metaDescription || excerpt}
                 article
-                image={`${process.env.GATSBY_CLOUDFRONT_OG_URL}/${fields.slug.replace(/\//g, '')}.jpeg`}
-                imageType="absolute"
+                image={ogImage}
                 lang={lang || (languageAlternates ? 'en' : undefined)}
                 languageAlternates={languageAlternates}
                 // Standard.site document rkey (only for /blog posts; this template is shared with other sections)
