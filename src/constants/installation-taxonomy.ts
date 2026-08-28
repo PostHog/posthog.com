@@ -176,7 +176,6 @@ export const TAXONOMY: InstallCategory[] = [
                 librarySlug: 'elixir',
                 wizard: true,
                 wizardOrder: 20,
-                status: 'wip',
             },
             {
                 slug: 'go',
@@ -184,7 +183,6 @@ export const TAXONOMY: InstallCategory[] = [
                 librarySlug: 'go',
                 wizard: true,
                 wizardOrder: 22,
-                status: 'wip',
             },
             {
                 slug: 'java',
@@ -192,7 +190,6 @@ export const TAXONOMY: InstallCategory[] = [
                 librarySlug: 'java',
                 wizard: true,
                 wizardOrder: 23,
-                status: 'wip',
             },
             { slug: 'php', name: 'PHP', librarySlug: 'php' },
             {
@@ -201,7 +198,6 @@ export const TAXONOMY: InstallCategory[] = [
                 librarySlug: 'rust',
                 wizard: true,
                 wizardOrder: 24,
-                status: 'wip',
             },
         ],
     },
