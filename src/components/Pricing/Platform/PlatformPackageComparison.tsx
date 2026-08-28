@@ -193,3 +193,129 @@ export function PlatformFeatureTable(): JSX.Element {
 
     return <OSTable columns={columns} rows={[...featureRows, ctaRow]} size="md" className="text-sm" width="full" />
 }
+
+/**
+ * What a package adds over the one before it: features the previous package does not have,
+ * plus features whose limit or note improved (activity-log retention, alert counts, response
+ * times). Support response time is folded into "Priority support" the same way the table does.
+ */
+function incrementalFeatures(addon: any, previous?: any): any[] {
+    const features = (addon.plans[0].features || []).filter((f: any) => f.key !== 'support_response_time')
+    if (!previous) return features
+    const before = new Map<string, any>((previous.plans[0].features || []).map((f: any) => [f.key, f]))
+    return features.filter((f: any) => {
+        const prior = before.get(f.key)
+        return !prior || prior.limit !== f.limit || prior.note !== f.note
+    })
+}
+
+// Which benefits lead on the compact cards, most important first. Anything not listed falls in
+// behind these, and anything past MAX_HIGHLIGHTS folds into a "+N more" link, so the three cards
+// stay the same height.
+const HIGHLIGHTS = [
+    'hipaa_baa',
+    'sso_enforcement',
+    '2fa_enforcement',
+    'saml',
+    'scim',
+    'role_based_access',
+    'dedicated_support',
+    'priority_support',
+    'organizations_projects',
+    'white_labelling',
+    'access_control',
+    'approvals',
+    'training',
+    'terms_and_conditions',
+    'invoice_payments',
+    'audit_logs',
+    'real_time_alerts',
+    'xaa_authentication',
+    'property_access_control',
+    'bespoke_pricing',
+    'session_replay_data_retention',
+]
+const MAX_HIGHLIGHTS = 6
+
+const rank = (f: any): number => {
+    const i = HIGHLIGHTS.indexOf(f.key)
+    return i === -1 ? HIGHLIGHTS.length : i
+}
+
+/** The number or note that qualifies a feature, e.g. "2 months", "Unlimited". */
+const featureDetail = (f: any): string | null =>
+    f.limit ? `${f.limit} ${pluralizeUnit(f.limit, f.unit)}`.trim() : f.note || null
+
+/**
+ * One card per package: name, price, description, and the top benefits that package adds over
+ * the one before it (the rest are one link away). Used on /enterprise; the packages page keeps
+ * the list + full table.
+ */
+export function PlatformPackageCards(): JSX.Element {
+    const packages = usePlatformPackages()
+    const getCTA = usePackageCTA()
+
+    return (
+        <div className="@container">
+            <div className="grid gap-4 @2xl:grid-cols-3 @2xl:gap-6">
+                {packages.map((addon: any, i: number) => {
+                    const plan = addon.plans[addon.plans.length - 1]
+                    const previous = packages[i - 1]
+                    const ranked = incrementalFeatures(addon, previous).sort((a: any, b: any) => rank(a) - rank(b))
+                    const features = ranked.slice(0, MAX_HIGHLIGHTS)
+                    const more = ranked.length - features.length
+                    return (
+                        <div key={addon.name} className="flex flex-col rounded-md border border-primary bg-primary p-5">
+                            <div className="flex items-baseline justify-between gap-3">
+                                <h3 className="m-0 text-xl font-semibold">{addon.name}</h3>
+                                {addon.type === 'enterprise' ? (
+                                    <span className="whitespace-nowrap font-semibold">Custom pricing</span>
+                                ) : (
+                                    plan?.flat_rate && (
+                                        <span className="whitespace-nowrap">
+                                            <strong>${plan.unit_amount_usd.replace('.00', '')}</strong>
+                                            <span className="text-sm text-secondary">/mo</span>
+                                        </span>
+                                    )
+                                )}
+                            </div>
+                            <p className="mb-0 mt-2 text-sm text-secondary">{addon.description}</p>
+                            {previous && (
+                                <p className="mb-0 mt-4 text-sm font-semibold text-primary">
+                                    Everything in {previous.name}, plus
+                                </p>
+                            )}
+                            <ul className={`m-0 list-none space-y-1.5 p-0 text-sm ${previous ? 'mt-2' : 'mt-4'}`}>
+                                {features.map((f: any) => {
+                                    const detail = featureDetail(f)
+                                    return (
+                                        <li key={f.key} className="flex gap-2">
+                                            <IconCheck className="mt-0.5 size-4 shrink-0 text-green" />
+                                            <span>
+                                                {f.name}
+                                                {detail && <span className="text-secondary"> · {detail}</span>}
+                                            </span>
+                                        </li>
+                                    )
+                                })}
+                            </ul>
+
+                            {more > 0 && (
+                                <Link
+                                    to="/platform-packages"
+                                    state={{ newWindow: true }}
+                                    className="mt-2 text-sm text-secondary underline hover:text-primary"
+                                >
+                                    +{more} more on the packages page
+                                </Link>
+                            )}
+                            <div className="mt-auto pt-5">
+                                <PackageCTA addon={addon} getCTA={getCTA} />
+                            </div>
+                        </div>
+                    )
+                })}
+            </div>
+        </div>
+    )
+}
