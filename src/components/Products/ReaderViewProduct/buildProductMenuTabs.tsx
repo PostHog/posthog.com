@@ -1,7 +1,8 @@
 import React, { useMemo } from 'react'
 import { IconBook, IconGraduationCap, IconPiggyBank, IconPresent } from '@posthog/icons'
 import { TreeMenu } from 'components/TreeMenu'
-import { learnSectionId } from 'components/PocketGuides/LearnSurface'
+import Link from 'components/Link'
+import { learnChapterPath } from 'components/PocketGuides/LearnSurface'
 import { useBookPages } from 'components/PocketGuides/bookModel'
 import DocsTabLabel from './docsTabLabel'
 import usePlatformList from 'hooks/docs/usePlatformList'
@@ -65,22 +66,44 @@ const DocsTreeMenu = ({
     return <TreeMenu items={itemsWithInstall as any} variant={variant} appearance="sidebar" rootHeading={rootHeading} />
 }
 
-/** One item per page of the volume. A component because `useBookPages` is a hook, as with `DocsTreeMenu`. */
+/**
+ * One item per chapter, each its own page. Not `ProductNav`: that scrolls within one long
+ * surface, and a volume read as one scroll is not how anyone reads a chapter.
+ */
 const LearnNav = ({
     volumeId,
     basePath,
-    contentRef,
+    currentPath,
 }: {
     volumeId: string
     basePath: string
-    contentRef?: React.RefObject<HTMLElement>
+    currentPath?: string
 }) => {
     const pages = useBookPages(volumeId)
-    const items: ProductNavItem[] = useMemo(
-        () => pages.map((page) => ({ slug: learnSectionId(page), name: page.shortTitle || page.title })),
-        [pages]
+    return (
+        <nav>
+            <ul className="list-none m-0 p-0 flex flex-col gap-px">
+                {pages.map((page) => {
+                    const to = learnChapterPath(basePath, page)
+                    const active = currentPath ? currentPath.replace(/\/$/, '') === to : false
+                    return (
+                        <li key={page.url} className="m-0 p-0">
+                            <Link
+                                to={to}
+                                className={`block w-full px-2 py-1 rounded text-sm hover:bg-accent ${
+                                    active
+                                        ? 'font-semibold text-primary bg-accent'
+                                        : 'text-secondary hover:text-primary'
+                                }`}
+                            >
+                                <span data-sidebar-label>{page.shortTitle || page.title}</span>
+                            </Link>
+                        </li>
+                    )
+                })}
+            </ul>
+        </nav>
     )
-    return <ProductNav items={items} basePath={basePath} contentRef={contentRef} />
 }
 
 interface BuildProductMenuTabsArgs {
@@ -110,6 +133,8 @@ interface BuildProductMenuTabsArgs {
     contentRef?: React.RefObject<HTMLElement>
     /** Seeds which tab is active on first render. */
     activeSurface: ProductSurface
+    /** Current url, so the Learn menu can mark the chapter being read. */
+    currentPath?: string
     /**
      * Optional override for the docs tab rendering style. When omitted, the
      * style is read from the product's `navStyle` in `docsMenu` so the index
@@ -139,6 +164,7 @@ export function buildProductMenuTabs({
     productData,
     contentRef,
     activeSurface,
+    currentPath,
     navStyle,
 }: BuildProductMenuTabsArgs): MenuTab[] {
     if (!productData) return []
@@ -221,7 +247,7 @@ export function buildProductMenuTabs({
                 <LearnNav
                     volumeId={pocketGuideVolume}
                     basePath={surfaceBasePath(productSlug, 'learn')}
-                    contentRef={activeSurface === 'learn' ? contentRef : undefined}
+                    currentPath={activeSurface === 'learn' ? currentPath : undefined}
                 />
             ),
         })

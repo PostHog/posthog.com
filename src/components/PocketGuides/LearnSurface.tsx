@@ -9,9 +9,15 @@ import { BookPageEntry, FONT_SIZES, normalizeUrl, useBookPages } from './bookMod
 /** `BookReader`'s starting size, read from the book's own scale so the two cannot drift. */
 const BOOK_BASE_FONT_SIZE = FONT_SIZES[0]
 
-/** The anchor a Learn menu item scrolls to. Front matter is `overview`, which `ProductNav` pins to the top. */
-export function learnSectionId(entry: BookPageEntry): string {
-    return entry.order === 0 ? 'overview' : normalizeUrl(entry.url).split('/').pop() || 'overview'
+/** The url segment a chapter is reached at. The volume's front matter has none: it is the index. */
+export function learnChapterSlug(entry: BookPageEntry): string {
+    return entry.order === 0 ? '' : normalizeUrl(entry.url).split('/').pop() || ''
+}
+
+/** `/docs/<product>/learn` for the front matter, `/docs/<product>/learn/<chapter>` for the rest. */
+export function learnChapterPath(basePath: string, entry: BookPageEntry): string {
+    const slug = learnChapterSlug(entry)
+    return slug ? `${basePath}/${slug}` : basePath
 }
 
 interface LearnBodyNode {
@@ -44,40 +50,41 @@ function useBookBodies(): Map<string, string> {
     }, [data])
 }
 
-/** A volume rendered in the docs reader. `ReaderWrapper` already emits one reflowing column, so it just fits. */
-export default function LearnSurface({ volumeId }: { volumeId: string }): JSX.Element | null {
+interface LearnSurfaceProps {
+    volumeId: string
+    /** Chapter to show. Empty or unknown falls back to the volume's front matter. */
+    chapter?: string
+}
+
+/** One chapter of a volume, in the docs reader. A whole volume in one scroll is not how docs are read. */
+export default function LearnSurface({ volumeId, chapter }: LearnSurfaceProps): JSX.Element | null {
     const pages = useBookPages(volumeId)
     const bodies = useBookBodies()
 
-    if (pages.length === 0) {
+    const entry = React.useMemo(() => {
+        if (pages.length === 0) {
+            return undefined
+        }
+        // An unknown chapter shows the front matter rather than an empty page: the sidebar is
+        // right there, so a wrong url costs the reader a click, not a dead end.
+        return (chapter && pages.find((p) => learnChapterSlug(p) === chapter)) || pages[0]
+    }, [pages, chapter])
+
+    const body = entry && bodies.get(normalizeUrl(entry.url))
+    if (!entry || !body) {
         return null
     }
 
     return (
         // `not-prose`: the book styles its own prose. The pinned size keeps its em and rem spacing in step.
-        <div className="not-prose @container" style={{ fontSize: BOOK_BASE_FONT_SIZE }}>
-            {pages.map((entry, index) => {
-                const body = bodies.get(normalizeUrl(entry.url))
-                if (!body) {
-                    return null
-                }
-                return (
-                    <section
-                        key={entry.url}
-                        id={learnSectionId(entry)}
-                        // Undo per-page framing here, not in `ReaderWrapper`, which the book still needs:
-                        // `> div` is its page container (80px of stacked padding), `aside` is SeeAlso's
-                        // `mt-12` (what made boundaries uneven), and `mt-16` is the one deliberate gap.
-                        className={`scroll-mt-20 [&>div]:!p-0 [&>div>aside]:!mt-8 ${index === 0 ? '' : 'mt-16'}`}
-                    >
-                        <EntryProvider value={{ entry, pages }}>
-                            <MDXProvider components={bookMdxComponents}>
-                                <MDXRenderer>{body}</MDXRenderer>
-                            </MDXProvider>
-                        </EntryProvider>
-                    </section>
-                )
-            })}
+        // `[&>div]:!p-0` strips the per-page frame, which is a page margin in the book and dead
+        // space here; the docs column already supplies its own padding.
+        <div className="not-prose @container [&>div]:!p-0" style={{ fontSize: BOOK_BASE_FONT_SIZE }}>
+            <EntryProvider value={{ entry, pages }}>
+                <MDXProvider components={bookMdxComponents}>
+                    <MDXRenderer>{body}</MDXRenderer>
+                </MDXProvider>
+            </EntryProvider>
         </div>
     )
 }
