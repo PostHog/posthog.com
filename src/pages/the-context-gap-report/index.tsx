@@ -121,6 +121,16 @@ export default function ContextGapReport() {
                                     title="The Context Gap report preview"
                                     className="w-full h-full"
                                 />
+                                <a
+                                    href={pdfUrl}
+                                    target="_blank"
+                                    rel="noreferrer"
+                                    aria-label="Open The Context Gap report as a PDF in a new tab"
+                                    className="absolute top-2 right-2 flex items-center gap-1 text-xs font-semibold text-white bg-black/60 hover:bg-black/80 transition-colors rounded px-2 py-1"
+                                >
+                                    <IconOpenSidebar className="size-3.5" />
+                                    Open in new tab
+                                </a>
                             </div>
 
                             <div className="absolute -top-6 -right-12 pointer-events-none">
