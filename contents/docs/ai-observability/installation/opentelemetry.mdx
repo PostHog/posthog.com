@@ -52,6 +52,13 @@ import { OpenTelemetryInstallation } from 'onboarding/ai-observability/opentelem
 import { OnboardingContentWrapper } from 'components/Docs/OnboardingContentWrapper'
 import NotableGenerationProperties from '../_snippets/notable-generation-properties.mdx'
 import { addNextStepsStep } from './_snippets/shared-helpers.tsx'
+import CalloutBox from 'components/Docs/CalloutBox'
+
+<CalloutBox icon="IconWarning" title="Large traces have size limits" type="fyi">
+
+The OTLP path caps each export at **4MB** and each span at **8MB**. Oversize data is dropped without an application error. See [capturing large AI events](/docs/ai-observability/large-events#sending-over-opentelemetry) to avoid silent data loss.
+
+</CalloutBox>
 
 <OnboardingContentWrapper snippets={{ NotableGenerationProperties }}>
     <OpenTelemetryInstallation modifySteps={addNextStepsStep} />

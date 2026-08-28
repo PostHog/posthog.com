@@ -104,6 +104,25 @@ Not on Python or Node? Build events with [manual capture](/docs/ai-observability
 POST <ph_client_api_host>/i/v0/ai/batch/
 ```
 
+## Sending over OpenTelemetry
+
+If you send AI traces with [OpenTelemetry](/docs/ai-observability/installation/opentelemetry), your spans arrive over OTLP at a dedicated path:
+
+```shell
+POST <ph_client_api_host>/i/v0/ai/otel
+```
+
+Two size limits apply on this path:
+
+- **4MB per export.** PostHog accepts an OTLP export body up to 4MB. This cap is lower than the per-event ceiling, so a batch of spans can exceed it before any single span does.
+- **8MB per event.** Each span becomes one AI event, held to the same 8MB ceiling as the other paths.
+
+An export or span over these limits is dropped, but the request still returns success. A failure response would only make your collector retry the same oversize data, so PostHog accepts the request and discards what does not fit. The only signal is a `MessageSizeTooLarge` [ingestion warning](/docs/data/ingestion-warnings) – your application gets no error, and the data is lost silently.
+
+To stay under the 4MB export cap, add the [`batch` processor](https://github.com/open-telemetry/opentelemetry-collector/blob/main/processor/batchprocessor/README.md) to your collector and set a small `send_batch_max_size`, so it splits large batches into smaller exports. For a single span that is too large on its own, capture it with [`capture_ai`](#calling-capture_ai-directly) instead.
+
 ## Limits
 
 Events up to **8MB** are accepted for now. The SDKs drop larger events before sending and log an error instead. The limit will increase as the beta continues.
+
+Over [OpenTelemetry](#sending-over-opentelemetry), a lower **4MB** per-export cap also applies, and oversize data is dropped without an application error.
