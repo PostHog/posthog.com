@@ -108,7 +108,7 @@ config.sessionReplayConfig.sampleRate = 1.0;
 ## Troubleshooting
 
 - Update your SDK and iOS Pods.
-- Make sure to set the minimum platform version to iOS 13.0 in your Podfile.
+- Make sure to set the minimum platform version to iOS 13.0 in your `Podfile`, or, for Swift Package Manager projects, in the `Runner` target's **Minimum Deployments** in Xcode.
 - Make sure you have disabled automatic SDK initialization.
 - Run a clean build if you experience issues.
 - For blank recordings for mobile session replay, be sure to set up the [Widget and observer](/docs/session-replay/installation/flutter#widget-and-observer-setup).
