@@ -49,7 +49,7 @@ PostHog captures [traces](/docs/ai-observability/traces), [generations](/docs/ai
 
 -   **Eval types:** LLM-as-judge with five ready templates (relevance, helpfulness, jailbreak, hallucination, toxicity), code-based checks, and local sentiment analysis
 -   **Observability:** Scores stored as events next to traces, replays, and flags – query them with SQL, put quality next to retention or conversion
--   **CI/CD:** An [MCP server](/mcp) exposes six tools to create and run evals from Claude Code, Cursor, or any agent
+-   **CI/CD:** An [MCP server](/mcp) to create and run evals from Claude Code, Cursor, or any agent
 -   **Pricing:** Free tier of 100K AI observability events/mo; judge evals use your own model key; $0.00035/event after (with volume discounts)
 -   **License:** Open source (MIT)
 
@@ -98,17 +98,17 @@ PostHog captures [traces](/docs/ai-observability/traces), [generations](/docs/ai
 
 ### What's the best LLM evaluation tool for uncapped self-hosted tracing?
 
-**Arize Phoenix** has the most generous free tier here: the open-source package self-hosts with no caps on spans, ingestion, projects, or retention, and gives you agent tracing, multi-agent graphs, token tracking, and Python/JS SDKs for nothing.
+**Arize Phoenix** has the most generous free tier here: the self-hosted package has no feature gates and no vendor-imposed limits, and gives you agent tracing, multi-agent graphs, token tracking, and Python/JS SDKs for nothing.
 
 **What makes Arize Phoenix good for developers:**
 
 -   **Eval types:** LLM classification evaluators built from a prompt template, a model, and a label-to-score mapping, written back to spans as annotations
 -   **Observability:** OpenTelemetry-native tracing, uncapped when self-hosted
 -   **CI/CD:** Manual orchestration in the OSS build; automatic and online evals only on the hosted AX product
--   **Pricing:** Phoenix OSS free and uncapped; AX Free 25k spans, AX Pro $50/mo – billed on span count *and* GB, which double-charges RAG apps
+-   **Pricing:** Phoenix free and uncapped when self-hosted; AX Free 25k spans and 1 GB, AX Pro $50/mo for 50k spans and 10 GB
 -   **License:** Elastic License 2.0
 
-**Not ideal if:** you need automatic online evals and production monitoring without paying for AX.
+**Not ideal if:** you need an OSI-approved license, or want managed monitoring at volume rather than on AX's free tier.
 
 **Alternatives to consider:** **TruLens** for another OTel-native option with agent-specific evaluators; **Langfuse** if you want online scoring built in.
 
@@ -169,7 +169,7 @@ PostHog captures [traces](/docs/ai-observability/traces), [generations](/docs/ai
 -   **Eval types:** Simulated-user multi-turn scoring with a JudgeAgent, plus voice-AI simulation across ElevenLabs, OpenAI Realtime, and Twilio
 -   **CI/CD:** Batch evals gated in CI with pytest or vitest
 -   **Observability:** Offline experiments plus online Monitors that score production traffic and alert on drops
--   **Pricing:** Developer free forever (50k events/mo, 3 scenarios); Growth $34/core-seat; Enterprise for self-hosting
+-   **Pricing:** Developer free forever (50k events/mo, 3 scenarios); Growth $34/core-seat
 -   **License:** Open source (Apache 2), self-hosts via Docker
 
 **Not ideal if:** single-response quality is all you test – the multi-turn simulation is overkill.
@@ -181,7 +181,7 @@ PostHog captures [traces](/docs/ai-observability/traces), [generations](/docs/ai
 <details>
 <summary>How is PostHog different from other LLM evaluation tools?</summary>
 
-Every other tool scores outputs in isolation. PostHog stores eval scores as the same events that power [product analytics](/product-analytics), [session replay](/session-replay), [AI observability](/ai-observability), [error tracking](/error-tracking), [APM](/logs), [flags](/feature-flags), and more – so a quality drop points straight at the users who hit it and the release that caused it.
+Every other tool stop at the trace. PostHog stores eval scores as the same events that power [product analytics](/product-analytics), [session replay](/session-replay), [AI observability](/ai-observability), [error tracking](/error-tracking), [APM](/logs), [flags](/feature-flags), and more – so a quality drop points straight at the users who hit it and the release that caused it.
 
 It's also the direction PostHog is built around: a **self-driving product** that acts on its own data. [Scouts](/blog/what-is-a-scout) read across your traces, evals, and product data, sort signal from noise, and an agent picks up what's worth fixing and opens a PR for you to review and merge. 
 
@@ -201,7 +201,7 @@ Learn more with our [AI Observability pocket guides](/pocket-guides/ai-observabi
 <details>
 <summary>Can you run LLM evals in CI/CD?</summary>
 
-Yes. **DeepEval** runs evals as pytest cases through `deepeval test run`, with a numeric threshold on each metric that produces the pass/fail signal CI needs to gate a build (GitHub Actions, GitLab CI, Jenkins, CircleCI, and more). **Braintrust** gates releases on score thresholds, and **LangWatch** gates with pytest or vitest.
+Yes. **DeepEval** runs evals as pytest cases through `deepeval test run`, with a numeric threshold on each metric that produces the pass/fail signal CI needs to gate a build (GitHub Actions, GitLab CI, Jenkins, CircleCI, and more). **Braintrust** posts eval results to the PR through a first-party GitHub Action, and **LangWatch** gates with pytest or vitest.
 
 </details>
 
@@ -222,7 +222,7 @@ The judge is a separate LLM call, so you pay per scored generation on top of you
 <details>
 <summary>What's the best free LLM evaluation tool?</summary>
 
-**DeepEval's** open-source core is free under Apache 2.0 and runs the full unit and regression suite locally. **PostHog's** free tier includes 100K AI observability events a month, and its code-based and sentiment evals cost nothing since they run in PostHog's own infrastructure without an LLM call. **Ragas** is fully free for retrieval-quality evals.
+**DeepEval's** open-source core is free under Apache 2.0 and runs the full unit and regression suite locally. **PostHog's** free tier includes 100K AI observability events a month, and its code-based and sentiment evals cost nothing since they run in PostHog's own infrastructure without an LLM call (each run still counts as one of your 100K events). **Ragas** is fully free for retrieval-quality evals.
 
 </details>
 
