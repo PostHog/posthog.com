@@ -56,15 +56,13 @@ That's what I signed up for when I decided to become a marketer, and now it's mo
 
 ## How I actually wrote it
 
-Onto the meat and potatoes: how did this actually come together? Here's roughly what we did, in order.
+Here's roughly what we did, in order.
 
-**1. Brainstormed the angle with [our MCP](/mcp).** 
-
-First things first, I needed to figure out what the study would be about.
+### 1. Brainstormed the angle with [our MCP](/mcp) 
 
 I gave my agent a few guardrails to help me brainstorm: no PII, has to be data we already collect, and has to be something PostHog AI can pull relatively easily. 
 
-I also wanted to write about a tool I know well, so I seeded it with my favourites ([session replay](/session-replay), [error tracking](/error-tracking), [AI observability](/ai-observability), and [the MCP](/mcp) itself) and let it argue back.
+I also wanted to write about a tool I know well, so I seeded it with my favourites ([Session Replay](/session-replay), [Error Tracking](/error-tracking), [AI Observability](/ai-observability), and [the MCP](/mcp) itself) and let it argue back.
 
 > **Prompt I used:** You're helping me pick the angle for a data study (a short, very data-heavy blog post built entirely on PostHog's own first-party data). You have the PostHog MCP connected, so check event definitions and property definitions before you pitch me anything.
 > 
@@ -76,14 +74,13 @@ I also wanted to write about a tool I know well, so I seeded it with my favourit
 >
 > I want to write about a product I know well, so bias toward session replay, error tracking, AI observability, and the MCP itself, but don't limit yourself to those if there are other interesting alternatives. Give me 6 potential angles. For each one, add the specific events/properties you'd query to prove it, roughly how many charts it produces, and what they'd show. Then rank them: most interesting to a general tech audience, and easiest to actually pull. If those two rankings disagree, say so.
 
-**2. Pull the data with PostHog AI, straight into a notebook.** 
+### 2. Pull the data with PostHog AI, straight into a notebook 
 
 Once I decided to focus on session replay and [Replay Vision](/replay-vision), I asked PostHog AI to pull the data I needed, and to create a Notebook to hold all my SQL queries and charts in one place I could go back and reference.
 
 ![Notebook](https://res.cloudinary.com/dmukukwp6/image/upload/pasted_image_2026_08_17_T21_50_42_567_Z_b0253c8490.png)
 
-> **Prompt I used:** Make me a notebook called "Replay data study" with every
-query and its SQL, so I can re-run them later. Cross-tenant, last 90 days.
+> **Prompt I used:** Make me a notebook called "Replay data study" with every query and its SQL, so I can re-run them later. Cross-tenant, last 90 days.
 >
 > 1. Every time someone opened the player and watched – how long? Median and full distribution.
 > 2. Median and mean length of the recordings themselves.
@@ -94,17 +91,17 @@ query and its SQL, so I can re-run them later. Cross-tenant, last 90 days.
 >
 > If a number can't be pulled, explain why and give me alternatives.
 
-**3. Interrogate the product with the PostHog Slack bot.** 
+### 3. Interrogate the product with the PostHog Slack bot
 
 Since I'm not the person who built Replay Vision, I asked the Slack bot to gather all the context I needed to better understand it. It pulled in links to relevant docs, existing PRs, and it gave me a summary of the product and its features.
 
 ![Slack](https://res.cloudinary.com/dmukukwp6/image/upload/pasted_image_2026_08_17_T21_29_39_660_Z_44a5a32e0e.png)
 
-**4. Write the first draft.** 
+### 4. Write the first draft 
 
 The fun part. Self explanatory.
 
-**5. Mock up the graphs with Claude + the PostHog MCP.**
+### 5. Mock up the graphs with Claude + the PostHog MCP
 
 By now I had the raw numbers, but a table of medians doesn't exactly make a story. I wanted to see them and to play around with what different visualizations could look like, so I went back to the MCP and had Claude sketch a few versions of each. 
 
@@ -118,7 +115,7 @@ Then I sent the whole thing to our Graphics team, who turned my Temu-grade doodl
 >  
 > One self-contained HTML file I can scroll through as well as a separate ZIP folder with PNGs I can send to my graphics team.
 
-**6. Send it to review and ship it.**
+### 6. Send it to review and ship it
 
 [You can read it here](/blog/nobody-watches-session-replays). Is it perfect? No, it's an MVP, and I can already see about 10 things I can do better next time. 
 
