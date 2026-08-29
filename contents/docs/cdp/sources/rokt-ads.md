@@ -15,7 +15,7 @@ This source is currently in **alpha**. The interface and available tables may ch
 
 </CalloutBox>
 
-The Rokt Ads connector pulls your Rokt performance data – campaigns, creatives, audiences, demographics, and partner transactions – into the PostHog data warehouse.
+The Rokt Ads connector pulls your Rokt performance data – campaigns, creatives, audiences, demographics, and partner transactions – into the PostHog Data Warehouse.
 
 The connector reads through the [Rokt Query API](https://docs.rokt.com/developers/api-reference/reporting/query-api/). It covers advertiser reports and partner reports. Rokt tells PostHog which dimensions and metrics your account can request, so the columns you get depend on what your account is entitled to.
 
