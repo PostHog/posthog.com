@@ -37,6 +37,8 @@
         "check-product-changelogs": "node scripts/check-product-changelogs.js",
         "generate-md-redirects": "node scripts/generate-md-redirects.js",
         "generate-brand-assets": "node scripts/generate-brand-assets.mjs",
+        "strapi-sync": "npx --yes tsx@4.20.6 scripts/run-post-build-tasks.ts strapi",
+        "og-images": "npx --yes tsx@4.20.6 scripts/run-post-build-tasks.ts og",
         "storybook": "start-storybook -s ./static -p 6006",
         "build-storybook": "build-storybook",
         "postinstall": "patch-package",
