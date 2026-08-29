@@ -115,7 +115,7 @@ export const createOGImages = async (data) => {
 
         await page.screenshot({
             type: 'jpeg',
-            path: `${dir}/${slug.replace(/\//g, '')}.jpeg`,
+            path: `${ogImagesDir}/${slug.replace(/\//g, '')}.jpeg`,
             quality: 100,
         })
     }
