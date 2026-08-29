@@ -41,16 +41,16 @@ Once the syncs are complete, you can start using Rokt Ads data in PostHog.
 
 ## Available tables
 
-| Table                    | Description                                                    | Sync method  |
-| ------------------------ | -------------------------------------------------------------- | ------------ |
-| `Accounts`               | Rokt accounts the connected credentials can read               | Full refresh |
-| `CampaignPerformance`    | Daily advertiser spend and outcome metrics per campaign        | Incremental  |
-| `CreativePerformance`    | Daily advertiser metrics per creative within a campaign        | Incremental  |
-| `AudiencePerformance`    | Daily advertiser metrics per targeted audience                 | Incremental  |
-| `CampaignDemographics`   | Daily advertiser metrics split by age range, gender, and device | Incremental  |
-| `TransactionPerformance` | Daily partner transaction and impression metrics               | Incremental  |
+| Table                    | Description                                                     | Sync methods                |
+| ------------------------ | --------------------------------------------------------------- | --------------------------- |
+| `Accounts`               | Rokt accounts the connected credentials can read                | Full refresh                |
+| `CampaignPerformance`    | Daily advertiser spend and outcome metrics per campaign         | Incremental or full refresh |
+| `CreativePerformance`    | Daily advertiser metrics per creative within a campaign         | Incremental or full refresh |
+| `AudiencePerformance`    | Daily advertiser metrics per targeted audience                  | Incremental or full refresh |
+| `CampaignDemographics`   | Daily advertiser metrics split by age range, gender, and device | Incremental or full refresh |
+| `TransactionPerformance` | Daily partner transaction and impression metrics                | Incremental or full refresh |
 
-`Accounts` is a small dimension table, so it uses full refresh. The five report tables group rows by calendar day and sync incrementally on their `datetime` field.
+`Accounts` is a small dimension table, so it only offers full refresh. The five report tables group rows by calendar day. Each one can sync incrementally on its `datetime` field, which is what we recommend, because a full refresh re-reads up to two years of report days on every run.
 
 Each account exposes its own set of dimensions and metrics. If your account cannot serve a metric, that column is dropped from the report instead of failing the sync. If your account cannot serve a dimension, the sync fails with an error naming that dimension, because a dimension sets the row grain and dropping it would collapse rows onto a key that no longer identifies them. Deselect the affected table to continue.
 
