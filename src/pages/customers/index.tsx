@@ -134,7 +134,11 @@ export default function Customers(): JSX.Element {
 
     return (
         <>
-            <SEO title="Customers – PostHog" description="" image={`/images/og/customers.jpg`} />
+            <SEO
+                title="Customers – PostHog"
+                description="See how companies like Y Combinator, Supabase, ElevenLabs, and Hasura use PostHog for product analytics, session replay, feature flags, and experiments."
+                image={`/images/og/customers.jpg`}
+            />
             <ReaderView
                 hideTitle
                 proseSize="lg"
@@ -145,9 +149,16 @@ export default function Customers(): JSX.Element {
                 defaultNavVisible={false}
             >
                 <div className="w-full max-w-5xl mx-auto">
-                    <h1 className="text-2xl font-bold">Customers</h1>
-                    <p className="!mt-0 mb-2">Here are some customers who use PostHog.</p>
-                    <p className="!mt-0">You can use the filters below to read how they use different products.</p>
+                    <h1 className="text-2xl font-bold">Customer stories</h1>
+                    <p className="!mt-0 mb-2">
+                        Thousands of companies use PostHog to build better products. Read case studies from teams like{' '}
+                        <Link to="/customers/ycombinator">Y Combinator</Link>,{' '}
+                        <Link to="/customers/supabase">Supabase</Link>,{' '}
+                        <Link to="/customers/elevenlabs">ElevenLabs</Link>, and{' '}
+                        <Link to="/customers/hasura">Hasura</Link> to learn how they use product analytics, session
+                        replay, feature flags, and experiments.
+                    </p>
+                    <p className="!mt-0">Use the filters below to find companies by the products they use.</p>
                     <ViewerFilters
                         availableFilters={[
                             {
