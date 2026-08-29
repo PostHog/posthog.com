@@ -51,7 +51,6 @@ jobs:
               run: pnpm og-images
 
             - name: Upload OG images to CloudFront origin
-              if: ${{ secrets.OG_IMAGES_S3_BUCKET != '' }}
               env:
                   OG_IMAGES_S3_BUCKET: ${{ secrets.OG_IMAGES_S3_BUCKET }}
                   AWS_ACCESS_KEY_ID: ${{ secrets.OG_IMAGES_AWS_ACCESS_KEY_ID }}
