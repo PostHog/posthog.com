@@ -1630,6 +1630,10 @@
             "destination": "/docs/api/persons:ext?"
         },
         {
+            "source": "/docs/api/persons-4:ext(\\.md)?",
+            "destination": "/docs/api/persons:ext?"
+        },
+        {
             "source": "/handbook/engineering/k8s-overview",
             "destination": "/docs/self-host/architecture"
         },
