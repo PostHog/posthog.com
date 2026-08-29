@@ -119,14 +119,14 @@ posthog.init("${process.env.GATSBY_POSTHOG_API_KEY}", {
         // and is marked in_app, so it reads as a first-party error and each new
         // page URL mints a new fingerprint. Our own code loads from separate script
         // files, never inline in the page, so this shape is always extension noise.
-        var documentUrl = window.location.href.split('#')[0].replace(/\/$/, '')
+        var documentUrl = window.location.href.split('#')[0].replace(/\\/$/, '')
         var isInjectedInlineScript = exceptions.some(function (ex) {
             var frames = (ex && ex.stacktrace && ex.stacktrace.frames) || []
             if (frames.length !== 1) {
                 return false
             }
             var frame = frames[0]
-            var filename = (frame && frame.filename ? frame.filename : '').split('#')[0].replace(/\/$/, '')
+            var filename = (frame && frame.filename ? frame.filename : '').split('#')[0].replace(/\\/$/, '')
             return frame && frame.function === 'global code' && frame.lineno === 1 && filename === documentUrl
         })
         if (isInjectedInlineScript) {
