@@ -131,7 +131,7 @@ Raising money does let you build more stuff, but whether you should is very ques
 
 ## 9. Trust and feedback over process
 
-This is one of [our values](/handbook/company/values). It's simply up to the person building in most situations. Building and scaling something people want is a nuanced problem, so we let people use their judgement. When they get it wrong, we are direct and give feedback.
+This is one of [our values](/handbook/values). It's simply up to the person building in most situations. Building and scaling something people want is a nuanced problem, so we let people use their judgement. When they get it wrong, we are direct and give feedback.
 
 To quote one of our team: "process is scar tissue" – it often overcorrects, but because [humans are risk-adverse](https://www.adamjuliangoldstein.com/blog/anxiety-algorithm/) it feels natural to implement it when a company starts growing. Humans overcorrect by default. That's why large corporations are (in more cases than not) irrationally-obstructive to getting work done.
 

@@ -26,7 +26,7 @@ Here's what we learned - good and bad...
 
 We hired [world class people](/people), and we let people go quickly when it wasn't working (paying much greater [severance](../handbook/people/offboarding#involuntary-departure) than industry standard when this happened).
 
-Tim and I believed that people working with great people is a huge motivator - [talent compounds](../handbook/company/values#talent-compounds) is one of our [values](../handbook/company/values). Feedback from our team surveys have since confirmed our team agrees. 
+Tim and I believed that people working with great people is a huge motivator - [talent compounds](../handbook/values#talent-compounds) is one of our [values](../handbook/values). Feedback from our team surveys have since confirmed our team agrees. 
 
 However, when things didn't work out, we often didn't re-hire for the role quickly, or at all. We got scar tissue! We must've been hiring for the role in the first place for a reason.
 
