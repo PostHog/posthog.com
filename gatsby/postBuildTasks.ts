@@ -113,11 +113,13 @@ export const createOGImages = async (data) => {
 
             await page.evaluateHandle('document.fonts.ready')
 
+            const imagePath = `${ogImagesDir}/${slug.replace(/\//g, '')}.jpeg`
             await page.screenshot({
                 type: 'jpeg',
-                path: `${ogImagesDir}/${slug.replace(/\//g, '')}.jpeg`,
+                path: imagePath,
                 quality: 100,
             })
+            console.log(`Created OG image: ${path.basename(imagePath)}`)
         } finally {
             await page.close()
         }
