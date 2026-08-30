@@ -436,12 +436,14 @@ const useInkeepSettings = (): InkeepSharedSettings => {
     const [aiChatSettings, setAiChatSettings] = useState(defaultAiChatSettings)
 
     useEffect(() => {
-        setBaseSettings({
-            ...baseSettings,
+        // Merge into the latest settings so a write here does not drop a field
+        // that `useChat` set on the same object (for example `onEvent`).
+        setBaseSettings((prev) => ({
+            ...prev,
             colorMode: {
                 forcedColorMode: websiteTheme === 'dark' ? 'dark' : 'light',
             },
-        })
+        }))
     }, [websiteTheme])
 
     return { baseSettings, aiChatSettings, setBaseSettings, setAiChatSettings }

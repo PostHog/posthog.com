@@ -1,6 +1,7 @@
-import React, { createContext, useContext, useState, useEffect, useCallback, useMemo } from 'react'
+import React, { createContext, useContext, useState, useEffect, useCallback, useMemo, useRef } from 'react'
 import { navigate } from 'gatsby'
 import useInkeepSettings, { defaultQuickQuestions } from './useInkeepSettings'
+import usePostHog from './usePostHog'
 import { ChatFrame } from 'components/Chat'
 import { useApp } from '../context/App'
 
@@ -41,6 +42,7 @@ export function ChatProvider({
     codeSnippet?: { code: string; language: string; sourceUrl: string }
 }): JSX.Element {
     const { baseSettings, aiChatSettings, setBaseSettings, setAiChatSettings } = useInkeepSettings()
+    const posthog = usePostHog()
     const [hasUnread, setHasUnread] = useState(false)
     const [loading, setLoading] = useState(true)
     const [hasFirstResponse, setHasFirstResponse] = useState(false)
@@ -50,6 +52,7 @@ export function ChatProvider({
     const [EmbeddedChat, setEmbeddedChat] = useState<any>()
     const [firstResponse, setFirstResponse] = useState<string | null>(null)
     const conversationStartedDate = useMemo(() => date || new Date().toISOString(), [])
+    const removeLinkListenerRef = useRef<(() => void) | null>(null)
 
     const logConversation = async (event: any) => {
         const conversationId = event?.properties?.conversation?.id
@@ -80,6 +83,7 @@ export function ChatProvider({
                 setFirstResponse(
                     event.properties.conversation.messages.filter((m: any) => m.role === 'user')[0].content
                 )
+                posthog?.capture('chat question submitted', { conversation_id: event?.properties?.conversation?.id })
             }
             if (event?.eventName === 'assistant_message_received') {
                 if (!hasFirstResponse) {
@@ -87,32 +91,36 @@ export function ChatProvider({
                 }
             }
             if (event?.eventName === 'assistant_answer_displayed') {
+                posthog?.capture('chat answer displayed', { conversation_id: event?.properties?.conversation?.id })
                 const shadowRoot = document.querySelector('#embedded-chat-target>div')?.shadowRoot
-                if (shadowRoot) {
-                    const links = Array.from(shadowRoot.querySelectorAll('a'))
-                    for (const link of links) {
-                        link.addEventListener('click', (e: Event) => {
-                            e.preventDefault()
-                            e.stopPropagation()
-                            const href = link.getAttribute('href')
-                            if (!href) return
-                            try {
-                                const url = new URL(href, window.location.origin)
-                                if (url.origin === 'https://posthog.com' || href.startsWith('/')) {
-                                    navigate(url.pathname, { state: { newWindow: true } })
-                                } else {
-                                    window.open(href, '_blank', 'noopener,noreferrer')
-                                }
-                            } catch {
+                // Attach one delegated listener rather than one per link on every
+                // answer, so listeners can never pile up across a conversation.
+                if (shadowRoot && !removeLinkListenerRef.current) {
+                    const handleLinkClick = (e: Event) => {
+                        const link = (e.target as HTMLElement)?.closest?.('a')
+                        if (!link) return
+                        const href = link.getAttribute('href')
+                        if (!href) return
+                        e.preventDefault()
+                        e.stopPropagation()
+                        try {
+                            const url = new URL(href, window.location.origin)
+                            if (url.origin === 'https://posthog.com' || href.startsWith('/')) {
+                                navigate(url.pathname, { state: { newWindow: true } })
+                            } else {
                                 window.open(href, '_blank', 'noopener,noreferrer')
                             }
-                        })
+                        } catch {
+                            window.open(href, '_blank', 'noopener,noreferrer')
+                        }
                     }
+                    shadowRoot.addEventListener('click', handleLinkClick, true)
+                    removeLinkListenerRef.current = () => shadowRoot.removeEventListener('click', handleLinkClick, true)
                 }
             }
             logConversation(event)
         },
-        [hasFirstResponse]
+        [hasFirstResponse, firstResponse, posthog]
     )
 
     const addContext = (newContext: { type: 'page'; value: { path: string; label: string } }) => {
@@ -139,6 +147,9 @@ export function ChatProvider({
         renderChat()
         const conversations = JSON.parse(localStorage.getItem('conversations') || '[]')
         setConversationHistory(conversations)
+        return () => {
+            removeLinkListenerRef.current?.()
+        }
     }, [])
 
     useEffect(() => {
@@ -166,36 +177,40 @@ export function ChatProvider({
     }, [hasFirstResponse])
 
     useEffect(() => {
-        setBaseSettings({
-            ...baseSettings,
+        // Reinstall when the callback identity changes so `onEvent` keeps a fresh
+        // view of `firstResponse` and `hasFirstResponse` instead of the mount-time one.
+        setBaseSettings((prev) => ({
+            ...prev,
             onEvent: logEventCallback,
-        })
-    }, [])
+        }))
+    }, [logEventCallback])
 
     useEffect(() => {
         const contextPrompts = context.map((c) =>
             c.type === 'page' ? `The user is currently viewing the page ${c.value.label} at ${c.value.path}` : ``
         )
         // codePrompt is now handled in Chat/index.tsx and passed through Inkeep.tsx
-        setAiChatSettings({
-            ...aiChatSettings,
+        // Each write merges into the latest settings, so these three effects no
+        // longer clobber each other's fields on mount.
+        setAiChatSettings((prev) => ({
+            ...prev,
             prompts: contextPrompts,
-        })
+        }))
     }, [context])
 
     useEffect(() => {
-        setAiChatSettings({
-            ...aiChatSettings,
+        setAiChatSettings((prev) => ({
+            ...prev,
             exampleQuestions: quickQuestions,
-        })
+        }))
     }, [quickQuestions])
 
     useEffect(() => {
         if (chatId) {
-            setAiChatSettings({
-                ...aiChatSettings,
+            setAiChatSettings((prev) => ({
+                ...prev,
                 chatId,
-            })
+            }))
         }
     }, [chatId])
 
