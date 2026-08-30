@@ -53,6 +53,10 @@ export function ChatProvider({
     const [firstResponse, setFirstResponse] = useState<string | null>(null)
     const conversationStartedDate = useMemo(() => date || new Date().toISOString(), [])
     const removeLinkListenerRef = useRef<(() => void) | null>(null)
+    // Inkeep can resolve a streamed answer after this provider unmounts, invoking the
+    // captured `onEvent` on a dead provider. This flag lets those late callbacks bail
+    // out so a closed chat cannot touch the DOM or analytics of the next one.
+    const isMountedRef = useRef(true)
 
     const logConversation = async (event: any) => {
         const conversationId = event?.properties?.conversation?.id
@@ -90,7 +94,10 @@ export function ChatProvider({
                     setHasFirstResponse(true)
                 }
             }
-            if (event?.eventName === 'assistant_answer_displayed') {
+            // Skip when unmounted: a late answer from a closed chat must not record a
+            // phantom `chat answer displayed`, nor install a listener on the globally
+            // queried container, which now belongs to whichever chat is open next.
+            if (event?.eventName === 'assistant_answer_displayed' && isMountedRef.current) {
                 posthog?.capture('chat answer displayed', { conversation_id: event?.properties?.conversation?.id })
                 const target = document.getElementById('embedded-chat-target')
                 // Attach one delegated listener on the stable container, not on the
@@ -151,10 +158,12 @@ export function ChatProvider({
     }
 
     useEffect(() => {
+        isMountedRef.current = true
         renderChat()
         const conversations = JSON.parse(localStorage.getItem('conversations') || '[]')
         setConversationHistory(conversations)
         return () => {
+            isMountedRef.current = false
             removeLinkListenerRef.current?.()
         }
     }, [])
