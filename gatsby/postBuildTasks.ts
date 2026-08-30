@@ -100,25 +100,30 @@ export const createOGImages = async (data) => {
         executablePath: revisionInfo.executablePath || process.env.PUPPETEER_EXECUTABLE_PATH,
         headless: true,
     })
-    const page = await browser.newPage()
-    await page.setViewport({
-        width: 1200,
-        height: 630,
-    })
-
     async function createOG({ html, slug }) {
-        await page.setContent(html, {
-            waitUntil: ['domcontentloaded', 'networkidle0'],
-        })
+        const page = await browser.newPage()
+        try {
+            await page.setViewport({
+                width: 1200,
+                height: 630,
+            })
+            await page.setContent(html, {
+                waitUntil: ['domcontentloaded', 'networkidle0'],
+            })
 
-        await page.evaluateHandle('document.fonts.ready')
+            await page.evaluateHandle('document.fonts.ready')
 
-        await page.screenshot({
-            type: 'jpeg',
-            path: `${ogImagesDir}/${slug.replace(/\//g, '')}.jpeg`,
-            quality: 100,
-        })
+            await page.screenshot({
+                type: 'jpeg',
+                path: `${ogImagesDir}/${slug.replace(/\//g, '')}.jpeg`,
+                quality: 100,
+            })
+        } finally {
+            await page.close()
+        }
     }
+
+    const jobs = []
 
     // Blog post OG
     for (const post of data.blog.nodes) {
@@ -135,10 +140,14 @@ export const createOGImages = async (data) => {
                     image,
                 }
             })[0]
-        await createOG({
-            html: blogTemplate({ title, authorData: author, image, font }),
-            slug: post.fields.slug,
-        })
+        jobs.push(
+            limit(() =>
+                createOG({
+                    html: blogTemplate({ title, authorData: author, image, font }),
+                    slug: post.fields.slug,
+                })
+            )
+        )
     }
 
     const docsHandbookMenus = flattenMenu([...handbookSidebar, ...docsMenu.children])
@@ -163,27 +172,31 @@ export const createOGImages = async (data) => {
                 return true
             }
         })
-        await createOG({
-            html: docsHandbookTemplate({
-                font,
-                title,
-                timeToRead,
-                excerpt,
-                lastUpdated,
-                contributors,
-                breadcrumbs: [
-                    {
-                        name: fields.slug.startsWith('/docs')
-                            ? 'Docs'
-                            : fields.slug.startsWith('/tutorials')
-                            ? 'Tutorials'
-                            : 'Handbook',
-                    },
-                    ...(breadcrumbs || []),
-                ],
-            }),
-            slug: fields.slug,
-        })
+        jobs.push(
+            limit(() =>
+                createOG({
+                    html: docsHandbookTemplate({
+                        font,
+                        title,
+                        timeToRead,
+                        excerpt,
+                        lastUpdated,
+                        contributors,
+                        breadcrumbs: [
+                            {
+                                name: fields.slug.startsWith('/docs')
+                                    ? 'Docs'
+                                    : fields.slug.startsWith('/tutorials')
+                                    ? 'Tutorials'
+                                    : 'Handbook',
+                            },
+                            ...(breadcrumbs || []),
+                        ],
+                    }),
+                    slug: fields.slug,
+                })
+            )
+        )
     }
 
     // Customers OG
@@ -191,15 +204,19 @@ export const createOGImages = async (data) => {
         const { frontmatter } = post
         const featuredImage = frontmatter.featuredImage?.publicURL
         const logo = frontmatter.logo?.publicURL
-        await createOG({
-            html: customerTemplate({
-                title: frontmatter.title,
-                featuredImage,
-                logo,
-                font,
-            }),
-            slug: post.fields.slug,
-        })
+        jobs.push(
+            limit(() =>
+                createOG({
+                    html: customerTemplate({
+                        title: frontmatter.title,
+                        featuredImage,
+                        logo,
+                        font,
+                    }),
+                    slug: post.fields.slug,
+                })
+            )
+        )
     }
 
     for (const job of data.careers.nodes) {
@@ -209,11 +226,17 @@ export const createOGImages = async (data) => {
             fields: { slug },
         } = job
         const timezone = parent?.customFields?.find(({ title }) => title === 'Timezone(s)')?.value
-        await createOG({
-            html: jobTemplate({ role: title, font, timezone }),
-            slug,
-        })
+        jobs.push(
+            limit(() =>
+                createOG({
+                    html: jobTemplate({ role: title, font, timezone }),
+                    slug,
+                })
+            )
+        )
     }
+
+    await Promise.all(jobs)
 
     // Tutorials OG
     // for (const post of data.tutorials.nodes) {
