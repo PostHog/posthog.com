@@ -15,6 +15,7 @@ import jobTemplate from '../src/templates/OG/job.js'
 import { flattenMenu } from './utils'
 
 const limit = pLimit(10)
+const ogLimit = pLimit(20)
 const ogImagesDir = path.resolve(__dirname, '../og-images')
 
 export const createCareersOG = async () => {
@@ -143,7 +144,7 @@ export const createOGImages = async (data) => {
                 }
             })[0]
         jobs.push(
-            limit(() =>
+            ogLimit(() =>
                 createOG({
                     html: blogTemplate({ title, authorData: author, image, font }),
                     slug: post.fields.slug,
@@ -175,7 +176,7 @@ export const createOGImages = async (data) => {
             }
         })
         jobs.push(
-            limit(() =>
+            ogLimit(() =>
                 createOG({
                     html: docsHandbookTemplate({
                         font,
@@ -207,7 +208,7 @@ export const createOGImages = async (data) => {
         const featuredImage = frontmatter.featuredImage?.publicURL
         const logo = frontmatter.logo?.publicURL
         jobs.push(
-            limit(() =>
+            ogLimit(() =>
                 createOG({
                     html: customerTemplate({
                         title: frontmatter.title,
@@ -229,7 +230,7 @@ export const createOGImages = async (data) => {
         } = job
         const timezone = parent?.customFields?.find(({ title }) => title === 'Timezone(s)')?.value
         jobs.push(
-            limit(() =>
+            ogLimit(() =>
                 createOG({
                     html: jobTemplate({ role: title, font, timezone }),
                     slug,
