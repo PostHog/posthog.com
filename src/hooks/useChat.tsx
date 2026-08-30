@@ -92,12 +92,19 @@ export function ChatProvider({
             }
             if (event?.eventName === 'assistant_answer_displayed') {
                 posthog?.capture('chat answer displayed', { conversation_id: event?.properties?.conversation?.id })
-                const shadowRoot = document.querySelector('#embedded-chat-target>div')?.shadowRoot
-                // Attach one delegated listener rather than one per link on every
-                // answer, so listeners can never pile up across a conversation.
-                if (shadowRoot && !removeLinkListenerRef.current) {
+                const target = document.getElementById('embedded-chat-target')
+                // Attach one delegated listener on the stable container, not on the
+                // Inkeep shadow root. React replaces that shadow host whenever the
+                // viewport crosses the mobile breakpoint (`Container` swaps between
+                // `ScrollArea` and `React.Fragment`), which would leave the old
+                // handler on a detached root and, because of the ref guard below,
+                // block re-attachment. `composedPath()` still reaches anchors inside
+                // the shadow tree from a listener on the light-DOM container.
+                if (target && !removeLinkListenerRef.current) {
                     const handleLinkClick = (e: Event) => {
-                        const link = (e.target as HTMLElement)?.closest?.('a')
+                        const link = e
+                            .composedPath()
+                            .find((el): el is HTMLAnchorElement => el instanceof HTMLElement && el.tagName === 'A')
                         if (!link) return
                         const href = link.getAttribute('href')
                         if (!href) return
@@ -114,8 +121,8 @@ export function ChatProvider({
                             window.open(href, '_blank', 'noopener,noreferrer')
                         }
                     }
-                    shadowRoot.addEventListener('click', handleLinkClick, true)
-                    removeLinkListenerRef.current = () => shadowRoot.removeEventListener('click', handleLinkClick, true)
+                    target.addEventListener('click', handleLinkClick, true)
+                    removeLinkListenerRef.current = () => target.removeEventListener('click', handleLinkClick, true)
                 }
             }
             logConversation(event)
