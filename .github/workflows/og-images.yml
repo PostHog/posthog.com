@@ -50,12 +50,12 @@ jobs:
                   CLOUDFRONT_FONT_URL: ${{ secrets.CLOUDFRONT_FONT_URL }}
               run: pnpm og-images
 
-            # - name: Upload OG images to CloudFront origin
-            #   env:
-            #       OG_IMAGES_S3_BUCKET: ${{ secrets.OG_IMAGES_S3_BUCKET }}
-            #       AWS_ACCESS_KEY_ID: ${{ secrets.OG_IMAGES_AWS_ACCESS_KEY_ID }}
-            #       AWS_SECRET_ACCESS_KEY: ${{ secrets.OG_IMAGES_AWS_SECRET_ACCESS_KEY }}
-            #       AWS_DEFAULT_REGION: ${{ secrets.OG_IMAGES_AWS_REGION }}
-            #   run: |
-            #       export AWS_DEFAULT_REGION="${AWS_DEFAULT_REGION:-us-east-1}"
-            #       aws s3 sync og-images/ "s3://${OG_IMAGES_S3_BUCKET}/" --cache-control "public, max-age=31536000"
+            - name: Upload OG images to CloudFront origin
+              env:
+                  OG_IMAGES_S3_BUCKET: ${{ secrets.OG_IMAGES_S3_BUCKET }}
+                  AWS_ACCESS_KEY_ID: ${{ secrets.OG_IMAGES_AWS_ACCESS_KEY_ID }}
+                  AWS_SECRET_ACCESS_KEY: ${{ secrets.OG_IMAGES_AWS_SECRET_ACCESS_KEY }}
+                  AWS_DEFAULT_REGION: ${{ secrets.OG_IMAGES_AWS_REGION }}
+              run: |
+                  export AWS_DEFAULT_REGION="${AWS_DEFAULT_REGION:-us-east-1}"
+                  aws s3 sync og-images/ "s3://${OG_IMAGES_S3_BUCKET}/" --cache-control "public, max-age=31536000"
