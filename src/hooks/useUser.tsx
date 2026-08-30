@@ -55,6 +55,7 @@ export type User = {
         monthlyCount: number
     }
     picasso?: boolean
+    webmaster?: boolean
     // Surfaced by the Strapi `me` override (the raw posthogUserId is private).
     // True when a PostHog OAuth identity is linked to this account.
     hasPosthogLogin?: boolean
