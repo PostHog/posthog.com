@@ -193,6 +193,9 @@ export const replayVision = {
     // from the same sources.
     teamSlug: 'replay',
     forumTopicId: 377,
+    // Forum topic 377 lives under Session Replay's slug – there is no
+    // /questions/topic/replay-vision page – so community links point there.
+    forumTopicSlug: sessionReplay.slug,
     color: 'yellow',
     colorSecondary: '[#B56C00]',
     wizardSupport: true,
