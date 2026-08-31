@@ -1263,6 +1263,10 @@
             "destination": "/docs/api/capture:ext?"
         },
         {
+            "source": "/docs/api/error-tracking-7:ext(\\.md)?",
+            "destination": "/docs/api/error-tracking"
+        },
+        {
             "source": "/docs/contribute/overview:ext(\\.md)?",
             "destination": "/docs/contribute:ext?"
         },
