@@ -453,7 +453,7 @@
         },
         {
             "source": "/security",
-            "destination": "/.well-known/security.txt",
+            "destination": "/handbook/company/security",
             "statusCode": 301
         },
         {
