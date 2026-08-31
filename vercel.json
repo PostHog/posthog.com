@@ -3779,10 +3779,6 @@
             "destination": "/founders/ceo-diary-4"
         },
         {
-            "source": "/docs/billing:ext(\\.md)?",
-            "destination": "/docs/billing/estimating-usage-costs:ext?"
-        },
-        {
             "source": "/docs/billing-and-payments:ext(\\.md)?",
             "destination": "/docs/billing/estimating-usage-costs:ext?"
         },
