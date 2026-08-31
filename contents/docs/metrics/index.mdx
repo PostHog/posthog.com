@@ -20,31 +20,31 @@ If [posthog-js](/docs/libraries/js) is already running on your site, you can rec
 
 ```js
 // A counter for things that only go up
-posthog.metrics.count('checkout.completed')
+posthog.metrics.count("checkout.completed");
 
 // A gauge for values that go up and down
-posthog.metrics.gauge('cart.items', 3)
+posthog.metrics.gauge("cart.items", 3);
 
 // A histogram for distributions like durations
-posthog.metrics.histogram('api.request.duration', 187, { unit: 'ms' })
+posthog.metrics.histogram("api.request.duration", 187, { unit: "ms" });
 ```
 
 Add attributes to slice a metric by dimension, and set a service name so your metrics are easy to find and filter:
 
 ```js
-posthog.init('<ph_project_api_key>', {
-    api_host: '<ph_client_api_host>',
-    metrics: {
-        serviceName: 'storefront-web',
-        environment: 'production',
-    },
-})
+posthog.init("<ph_project_api_key>", {
+  api_host: "<ph_client_api_host>",
+  metrics: {
+    serviceName: "storefront-web",
+    environment: "production",
+  },
+});
 
-posthog.metrics.count('checkout.completed', 1, { attributes: { plan: 'pro' } })
-posthog.metrics.histogram('api.request.duration', 187, {
-    unit: 'ms',
-    attributes: { route: '/api/checkout', status: '200' },
-})
+posthog.metrics.count("checkout.completed", 1, { attributes: { plan: "pro" } });
+posthog.metrics.histogram("api.request.duration", 187, {
+  unit: "ms",
+  attributes: { route: "/api/checkout", status: "200" },
+});
 ```
 
 Metrics are safe to record from hot paths. Samples are aggregated in memory and sent as one data point per series every 10 seconds, so a burst of 10,000 `count()` calls costs one data point on the wire. Pending metrics are flushed automatically when the page is hidden or closed, and you can force a flush with `posthog.metrics.flush()`.
@@ -122,29 +122,29 @@ npm install @opentelemetry/api @opentelemetry/sdk-metrics @opentelemetry/exporte
 ```
 
 ```typescript
-import { metrics } from '@opentelemetry/api'
-import { OTLPMetricExporter } from '@opentelemetry/exporter-metrics-otlp-http'
-import { MeterProvider, PeriodicExportingMetricReader } from '@opentelemetry/sdk-metrics'
+import { metrics } from "@opentelemetry/api";
+import { OTLPMetricExporter } from "@opentelemetry/exporter-metrics-otlp-http";
+import { MeterProvider, PeriodicExportingMetricReader } from "@opentelemetry/sdk-metrics";
 
 const exporter = new OTLPMetricExporter({
-    url: '<ph_client_api_host>/i/v1/metrics',
-    headers: { Authorization: 'Bearer <ph_project_token>' },
-})
+  url: "<ph_client_api_host>/i/v1/metrics",
+  headers: { Authorization: "Bearer <ph_project_token>" },
+});
 
 const meterProvider = new MeterProvider({
-    readers: [new PeriodicExportingMetricReader({ exporter, exportIntervalMillis: 15000 })],
-})
-metrics.setGlobalMeterProvider(meterProvider)
+  readers: [new PeriodicExportingMetricReader({ exporter, exportIntervalMillis: 15000 })],
+});
+metrics.setGlobalMeterProvider(meterProvider);
 
-const meter = metrics.getMeter('my-app')
+const meter = metrics.getMeter("my-app");
 
 // A counter for things that only go up
-const checkouts = meter.createCounter('checkouts', { description: 'Completed checkouts' })
-checkouts.add(1, { plan: 'pro' })
+const checkouts = meter.createCounter("checkouts", { description: "Completed checkouts" });
+checkouts.add(1, { plan: "pro" });
 
 // A gauge for values that go up and down
-const queueDepth = meter.createGauge('queue.depth')
-queueDepth.record(17, { queue: 'emails' })
+const queueDepth = meter.createGauge("queue.depth");
+queueDepth.record(17, { queue: "emails" });
 ```
 
 > **Note:** If your language isn't listed, any OpenTelemetry SDK works. Check the [OpenTelemetry documentation](https://opentelemetry.io/docs/languages/) for your language and point its OTLP metrics exporter at PostHog.
@@ -182,13 +182,13 @@ docker run -d \
 
 PostHog ingests all OTLP metric types:
 
-| Type | What it's for | Example |
-|------|---------------|---------|
-| **Counter (sum)** | Values that only go up | Requests served, checkouts completed |
-| **Gauge** | Values that go up and down | Queue depth, memory in use, active connections |
-| **Histogram** | Distributions | Request duration, payload size |
+| Type                      | What it's for                          | Example                                                      |
+| ------------------------- | -------------------------------------- | ------------------------------------------------------------ |
+| **Counter (sum)**         | Values that only go up                 | Requests served, checkouts completed                         |
+| **Gauge**                 | Values that go up and down             | Queue depth, memory in use, active connections               |
+| **Histogram**             | Distributions                          | Request duration, payload size                               |
 | **Exponential histogram** | Distributions with automatic bucketing | Same as histogram, with better resolution across wide ranges |
-| **Summary** | Pre-computed quantiles | Latency percentiles from legacy clients |
+| **Summary**               | Pre-computed quantiles                 | Latency percentiles from legacy clients                      |
 
 A metric's identity is its **name, type, and attributes** together. `http.requests` with `{route: "/home"}` and `http.requests` with `{route: "/checkout"}` are separate series, so keep attribute values low-cardinality. Attach things like route, status, or plan, not user IDs or request IDs.
 
@@ -217,6 +217,17 @@ The **Viewer** tab lets you explore metrics without writing any queries:
 - **Choose an aggregation**: sum, average, count, p95, rate, or increase. The viewer recommends one based on the metric's type: increase for counters, average for gauges, p95 for histograms
 - **Group by attributes** to break a metric down into one line per value, like per route or per status code
 - **Filter** to the series you care about, and adjust the date range
+
+### Navigate from metrics to traces
+
+If your metrics carry trace context (the `trace_id` and `span_id` attributes set automatically when using OpenTelemetry instrumentation), the viewer chart shows trace exemplars: small dots along the bottom of the chart that link directly to traces.
+
+- Each dot represents a metric sample that has a linked trace
+- Clicking a dot opens the associated trace, so you can jump from a latency spike straight to a request that experienced it
+- Dots cluster where traced emissions occur, making it easy to spot which parts of a spike have trace coverage
+- If you don't have tracing access, the dots are hidden
+
+This lets you move from aggregate numbers to individual requests without leaving the viewer. You can also open the **Samples** tab to see all raw metric samples and pivot to traces from there.
 
 ### Query metrics with SQL
 
