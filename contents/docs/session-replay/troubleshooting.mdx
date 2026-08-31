@@ -293,7 +293,7 @@ The recorder applies a mutation ceiling while it captures. When a page passes th
 If a recording looks incomplete during a burst of DOM activity:
 
 - Lower the DOM churn on the affected view where you can. A virtualized list that reuses nodes produces fewer mutations than one that rebuilds the whole list on each change.
-- Mask or ignore the noisy element so the recorder skips it. See [privacy controls](/docs/session-replay/privacy).
+- Exclude the noisy element from capture with the `ph-no-capture` class, so the recorder skips it and the DOM changes inside it. Masking does not help here — it redacts the content but still records the element and its mutations. See [excluding elements from capture](/docs/session-replay/privacy#other-elements).
 
 ### Skipped auto-loading of risky recordings
 
