@@ -15,6 +15,8 @@ interface MenuItem {
     icon?: React.ReactNode
     /** Renders a trailing ↗ and opens in a new tab. Also inferred for `http(s)` URLs. */
     external?: boolean
+    /** Start this collapsible item expanded (otherwise it only opens when a child is active). */
+    defaultOpen?: boolean
     badge?: {
         title: string
         className?: string
@@ -627,7 +629,7 @@ function TreeMenuItem({
     onClick: (item: MenuItem) => void
     expandOnly?: boolean
 }) {
-    const [open, setOpen] = useState(false)
+    const [open, setOpen] = useState(() => item.defaultOpen ?? false)
     const hasChildren = item.children && item.children.length > 0
     const location = useLocation()
     const pathname = replacePath(location?.pathname)
