@@ -4367,6 +4367,14 @@
             "destination": "/ai-observability#community"
         },
         {
+            "source": "/docs/ai-observability/pricing",
+            "destination": "/ai-observability/pricing"
+        },
+        {
+            "source": "/docs/ai-observability/pricing.md",
+            "destination": "/ai-observability/pricing"
+        },
+        {
             "source": "/llm-analytics/pricing",
             "destination": "/ai-observability/pricing"
         },
