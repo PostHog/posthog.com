@@ -246,6 +246,18 @@ Three filter behaviors are intentional but can be surprising when a recording sh
 
 **Group filters match any event in the session.** Filtering recordings by a group matches every session containing at least one event tagged with that group, regardless of who sent it. A single group-tagged event inside an otherwise unrelated session is enough for the recording to match.
 
+## Tabs are recorded as separate sessions
+
+PostHog records all tabs of your site into one recording by default. Read [recordings across multiple tabs and windows](/docs/session-replay/how-to-watch-recordings#recordings-across-multiple-tabs-and-windows) for how this works. Check the causes below if each tab starts its own recording.
+
+- **The tabs use a different browser, device, or browser profile.** PostHog cannot join these into one session. A normal window and an incognito window are also separate.
+- **The tabs use different domains.** PostHog stores the session ID for one domain only. A user who moves from `example.com` to `example.org` starts a new session. Read the [session ID note](/docs/data/sessions#how-does-posthog-define-a-session) if you must join two domains yourself.
+- **`persistence` is set to `sessionStorage` or `memory`.** Both values store the session ID for one tab only. Use the default value `localStorage+cookie` for cross-tab recording. Read [persistence](/docs/libraries/js/persistence).
+- **`cross_subdomain_cookie` is set to `false` and the tabs use different subdomains.** Remove this setting, or set it to `true`. Read [configuration](/docs/libraries/js/config).
+- **Your site runs on `herokuapp.com`, `vercel.app`, or `netlify.app`.** PostHog does not set a cross-subdomain cookie on these shared domains. Tabs on different subdomains get separate sessions. Use a custom domain to prevent this.
+- **Your code calls `posthog.reset()`.** This call always starts a new session and a new recording.
+- **The session reached a limit.** PostHog starts a new session after 30 minutes without activity, or after 24 hours. Read [how PostHog defines a session](/docs/data/sessions#how-does-posthog-define-a-session).
+
 ## Recording not found
 
 There are several valid reasons why recordings aren't captured. To keep the site fast we don't actively confirm a recording has been captured before showing the "view recording" button.
