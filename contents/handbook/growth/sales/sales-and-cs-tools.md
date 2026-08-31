@@ -92,7 +92,7 @@ Unless otherwise indicated, you can self-serve access requests to the following 
 - <PrivateLink url='https://posthog.slack.com/archives/C08UNFX75ST'>#closed-won</PrivateLink> - yay!
 - <PrivateLink url='https://posthog.slack.com/archives/C096DC85NH5'>#closed-lost</PrivateLink> - boo!
 - <PrivateLink url='https://posthog.slack.com/archives/C09HKF565MZ'>#customer-churn</PrivateLink> - discussion of potential and actual customer churn.
-- <PrivateLink url='https://posthog.slack.com/archives/C09HKF565MZ'>#changelog</PrivateLink> - product launches.
+- <PrivateLink url='https://posthog.slack.com/archives/C099B0YCULT'>#changelog</PrivateLink> - product launches.
 - <PrivateLink url='https://posthog.slack.com/archives/C0975UEGHT5'>#today-i-learned</PrivateLink> - where we share our learnings.
 - <PrivateLink url='https://posthog.slack.com/archives/C07TQR0V16U'>#ask-max</PrivateLink> - bot focused on internal processes and questions.
 - <PrivateLink url='https://posthog.slack.com/archives/C0AP5NXF8D7'>#demo-posthog-anything</PrivateLink> - show off something cool or see how others are demoing things.
