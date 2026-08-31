@@ -10,7 +10,7 @@ The PostHog Slack app is in beta. Commands, scopes, and behavior are still movin
 
 `@PostHog` brings PostHog into any Slack channel, thread, or DM. Mention the bot with a question about your product data and it answers in-thread using the PostHog [MCP](/docs/model-context-protocol). You can also send the bot a direct message – no mention needed – for a private one-on-one conversation.
 
-Mention `@PostHog` with a fix, an edit, or a feature idea and it plans the work in a sandboxed environment, edits files, runs your checks, and opens a draft PR. The same agent that powers [PostHog AI](/docs/posthog-ai) and [PostHog Desktop](/desktop), just summoned from where your team already chats.
+Mention `@PostHog` with a fix, an edit, or a feature idea and it plans the work in a sandboxed environment, edits files, runs your checks, and opens a draft PR. The PR links back to the Slack thread it came from, so reviewers can find the original context. The same agent that powers [PostHog AI](/docs/posthog-ai) and [PostHog Desktop](/desktop), just summoned from where your team already chats.
 
 <ProductScreenshot
 imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2026_05_04_at_4_47_08_PM_b8ba794fdc.png"
@@ -44,7 +44,7 @@ to the onboarding flow to lift the drop-off between step 2 and step 3
 
 If you have a single repo connected, the task runs against it immediately. If you have several, the bot opens a repo picker in-thread. Pick one and the task starts. The picker times out after 15 minutes ; after that, re-mention the bot to try again.
 
-Once the agent finishes, it posts a final summary of its work to the thread. Every reply from the bot includes a footer with links to the run on web and desktop, the model and reasoning effort used, and a **Configure** link that opens the [App Home tab](#the-app-home-tab).
+Once the agent finishes, it posts a final summary of its work to the thread. Every reply from the bot includes a footer with links to the run on web and desktop, the model used (plus the reasoning effort, when one is set), and a **Configure** link that opens the [App Home tab](#the-app-home-tab).
 
 ## Follow-ups in a thread
 
@@ -55,6 +55,8 @@ Once the agent finishes, you can reply to it by sending a new message in the thr
 Anyone in the thread can send follow-ups. Each message is forwarded to the running agent as a new turn in the same conversation, so teammates can steer the run together, drop in extra context, or answer a question the agent asked.
 
 Follow-ups are properly multiplayer: each turn runs under the identity of whoever sent it. The agent switches to the sender's own GitHub and PostHog integrations before the turn runs, so commits and PRs land under the name of the person who actually asked for them – not the person who started the thread.
+
+If a teammate sends a follow-up without a [personal GitHub connection](/docs/slack/setup), the agent can't fetch, push, or open PRs on their turn. It replies with a link to connect GitHub, and the rest of the conversation carries on as normal.
 
 ### Reply without tagging the bot
 
@@ -72,6 +74,8 @@ The setting applies to every reply in threads you started, including your own. T
 
 You don't need a channel to talk to the bot – open a DM with **PostHog** and message it directly. Everything that works in a channel mention works in a DM: data questions, coding tasks, follow-ups, and attachments. It's a good place for quick tasks (or embarrassing questions) you'd rather not spam a channel with.
 
+Group DMs work too – start one with the bot and your teammates as members. What you can't do is mention the bot in an existing DM it isn't part of: it can't see or join those conversations.
+
 In a DM, drop the mention from commands: `project <id>` instead of `@PostHog project <id>`.
 
 ## Pick a model
@@ -84,7 +88,7 @@ Tasks run on **Claude Opus 5** by default. To use a different model, just ask fo
 
 Any model available in [PostHog Desktop](/desktop) works, and you can request a reasoning effort the same way ("do this with max effort"). To change your default, set a personal preference in the [App Home tab](#the-app-home-tab) under **AI model** – the precedence is: model named in the message → your personal preference → the default.
 
-You can also switch models mid-run from a follow-up message, with one constraint: the runtime (Claude or Codex) is fixed once an agent starts, so moving to a model from the other family means starting a new thread. Each reply's footer shows the model and reasoning effort actually used.
+You can also switch models mid-run from a follow-up message, with one constraint: the runtime (Claude or Codex) is fixed once an agent starts, so moving to a model from the other family requires starting a new thread. For example, you can go from Opus to Fable mid-run, but not from a Claude model to a Codex one. Each reply's footer shows the model and reasoning effort actually used.
 
 ## Attachments, files, and canvases
 

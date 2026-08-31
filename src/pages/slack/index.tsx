@@ -598,7 +598,8 @@ const faqItems = [
             <p>
                 Yes. DM the bot directly for quick tasks (or embarrassing questions) without spamming your team –
                 everything that works in a channel mention works in a DM: data questions, coding tasks, follow-ups, and
-                attachments.
+                attachments. You can also start a group DM that includes the bot to work with teammates. The only thing
+                that doesn't work is mentioning it in an existing DM it isn't part of – it can't see or join those.
             </p>
         ),
     },
@@ -606,9 +607,10 @@ const faqItems = [
         trigger: 'Do I have to tag the bot on every message?',
         content: (
             <p>
-                Only to start. Once a task is running in a thread, the bot can pick up untagged replies too – whoever
-                started the thread chooses between "leave them alone" (the default), "ask them first", and "pick them up
-                automatically" in the App Home tab.
+                Only to start. Once a task is running in a thread, the bot can pick up untagged replies too. In the App
+                Home tab, you can choose how it handles them: "leave them alone" (the default), "ask them first", or
+                "pick them up automatically". The setting of the person who started the thread applies to every reply in
+                it.
             </p>
         ),
     },
