@@ -459,6 +459,7 @@ export function Question(props: QuestionProps) {
         posthog.capture('community question escalated', {
             questionId: questionData.id,
             subject: questionData.attributes.subject,
+            body: questionData.attributes.body,
             url: `https://posthog.com/questions/${questionData.attributes.permalink}`,
             permalink: questionData.attributes.permalink,
             authorName,
