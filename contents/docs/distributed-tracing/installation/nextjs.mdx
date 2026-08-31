@@ -12,15 +12,17 @@ There are two ways to send spans from a Next.js app.
 |                             | `@posthog/next`                                       | OpenTelemetry                                                        |
 | --------------------------- | ------------------------------------------------------ | -------------------------------------------------------------------- |
 | **Packages**                | The SDK you already use for analytics                   | Six `@opentelemetry/*` packages                                       |
-| **Instrumentation**         | Manual – you wrap the operations you care about         | Manual, plus auto-instrumentation for HTTP, Express, databases, and more |
+| **Instrumentation**         | Manual – you wrap the operations you care about         | Manual, plus auto-instrumentation for HTTP, databases, and more        |
 | **Person and session join** | Automatic – the server client resolves the request identity | Set the attributes yourself                                       |
 | **Setup**                   | Your existing server module                             | An `instrumentation.ts` file and, before Next.js 15, a config change   |
 
-Use `@posthog/next` if PostHog is the only place your spans go. Use OpenTelemetry if you already run it, or if you want auto-instrumentation of the libraries you call.
+Pick OpenTelemetry if you already run it, or if you want spans from your HTTP and database calls without writing them yourself. Pick `@posthog/next` if PostHog is your only tracing backend – the tracing API is `posthog-node`'s, reached through the server client you already have, so there's nothing new to install.
 
 ## With `@posthog/next`
 
-> **Minimum version:** `posthog-node@5.52.0` or later. `@posthog/next` builds on it, so this applies to both.
+> **Server-side only.** Spans come from `posthog-node`, which `@posthog/next` uses for its server client. There is no browser span API, so Client Components, `instrumentation-client.ts`, and anything else running in the browser can't create spans.
+
+> **Minimum version:** an `@posthog/next` release built on `posthog-node` 5.52.0 or later. Run `npm ls posthog-node` to see which version you resolve.
 
 <Steps>
 

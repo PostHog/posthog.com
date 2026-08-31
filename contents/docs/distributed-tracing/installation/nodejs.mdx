@@ -16,7 +16,7 @@ There are two ways to send spans from Node.js.
 | **Instrumentation**            | Manual – you wrap the operations you care about              | Manual, plus auto-instrumentation for HTTP, Express, databases, and more |
 | **Person and session join**    | Automatic inside a PostHog request context                   | Set the attributes yourself                                           |
 
-Use `posthog-node` if PostHog is the only place your spans go. Use OpenTelemetry if you already run it, or if you want auto-instrumentation of the libraries you call.
+Pick OpenTelemetry if you already run it, or if you want spans from your HTTP server and database driver without writing them yourself. Pick `posthog-node` if PostHog is your only tracing backend and you'd rather instrument a handful of operations by hand than add an exporter pipeline.
 
 Both routes send OTLP spans to the same endpoint, so you can start with one and switch later without losing your traces.
 
