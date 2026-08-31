@@ -7,122 +7,11 @@ showStepsToc: true
 import { Steps, Step } from 'components/Docs/Steps'
 import TracingNextSteps from './_snippets/tracing-next-steps.mdx'
 
-There are two ways to send spans from a Next.js app.
-
-|                             | `@posthog/next`                                       | OpenTelemetry                                                        |
-| --------------------------- | ------------------------------------------------------ | -------------------------------------------------------------------- |
-| **Packages**                | The SDK you already use for analytics                   | Six `@opentelemetry/*` packages                                       |
-| **Instrumentation**         | Manual – you wrap the operations you care about         | Manual, plus auto-instrumentation for HTTP, databases, and more        |
-| **Person and session join** | Automatic – the server client resolves the request identity | Set the attributes yourself                                       |
-| **Setup**                   | Your existing server module                             | An `instrumentation.ts` file and, before Next.js 15, a config change   |
-
-Pick OpenTelemetry if you already run it, or if you want spans from your HTTP and database calls without writing them yourself. Pick `@posthog/next` if PostHog is your only tracing backend – the tracing API is `posthog-node`'s, reached through the server client you already have, so there's nothing new to install.
-
-## With `@posthog/next`
-
-> **Server-side only.** Spans come from `posthog-node`, which `@posthog/next` uses for its server client. There is no browser span API, so Client Components, `instrumentation-client.ts`, and anything else running in the browser can't create spans.
-
-> **Minimum version:** an `@posthog/next` release built on `posthog-node` 5.52.0 or later. Run `npm ls posthog-node` to see which version you resolve.
+> **Already using `posthog-node` on the server?** Route handlers, server actions, and server components can create spans with its own span API instead of OpenTelemetry, with no extra packages – see the [Node.js guide](/docs/distributed-tracing/installation/nodejs). Either way, spans are server-side only: there is no browser span API.
 
 <Steps>
 
-<Step title="Enable tracing on the server client" badge="required" titleSize="h3">
-
-If you haven't set up `@posthog/next` yet, follow the [Next.js installation guide](/docs/libraries/next-js) first. Then add the `traces` option to your shared server module. Tracing is off until you set it, and there's no OpenTelemetry dependency to add.
-
-```typescript file=lib/posthog.ts
-import 'server-only'
-import { createPostHog } from '@posthog/next'
-import { auth } from '@/auth'
-
-export const { getPostHog } = createPostHog({
-    getDistinctId: async () => (await auth())?.user?.id,
-    options: {
-        traces: {
-            serviceName: 'my-nextjs-app',
-            environment: process.env.VERCEL_ENV ?? 'development',
-        },
-    },
-})
-```
-
-Using `posthog-node` directly rather than `@posthog/next`? The setup is the same – see the [Node.js guide](/docs/distributed-tracing/installation/nodejs).
-
-</Step>
-
-<Step title="Create spans" badge="required" titleSize="h3">
-
-`withSpan` runs a callback with a span active for its duration and ends the span for you, including when it throws. Spans created inside the callback nest underneath it automatically.
-
-```typescript file=app/api/checkout/route.ts
-import { after } from 'next/server'
-import { getPostHog } from '@/lib/posthog'
-
-export async function POST() {
-    const posthog = await getPostHog()
-
-    const order = await posthog.withSpan('POST /api/checkout', { kind: 'server' }, async (span) => {
-        span.setAttribute('cart.items', cart.length)
-
-        const created = await posthog.withSpan('create-order', () => createOrder(cart))
-        await posthog.withSpan('charge-card', () => stripe.charge(created))
-
-        return created
-    })
-
-    // Flush before the function freezes
-    after(async () => {
-        await posthog.flush()
-    })
-
-    return Response.json(order)
-}
-```
-
-Because these spans come from the request-scoped client, they carry the person and session that `getPostHog()` resolved, which is what makes a trace reachable from a person or a Session Replay recording.
-
-Span names should be low-cardinality operation names – `POST /api/checkout`, not a name with an order ID in it. Variable values belong in attributes. See the [Node.js SDK docs](/docs/libraries/node#distributed-tracing) for the full span API.
-
-</Step>
-
-<Step title="Flush before the function freezes" badge="required" titleSize="h3">
-
-On a serverless platform, the function can freeze before queued spans are exported. `@posthog/next` registers a `waitUntil` flush when you capture an event, but creating a span doesn't trigger one, so call `flush()` at the end of a handler that produces spans.
-
-```typescript
-import { after } from 'next/server'
-
-after(async () => {
-    await posthog.flush()
-})
-```
-
-`after()` is stable in Next.js 15.1+ (available as `unstable_after` in 15.0). On Next.js 14 and earlier, `await posthog.flush()` before returning the response instead.
-
-Call `flush()`, not `shutdown()` – the container is reused across invocations, so `shutdown()` would throw away the connection pool and the flag cache.
-
-</Step>
-
-<Step title="Check your runtimes" badge="recommended" titleSize="h3">
-
-The Node.js runtime tracks the active span with `AsyncLocalStorage`, so nested `withSpan` calls parent themselves. The edge runtime – middleware, and routes with `export const runtime = 'edge'` – can't, so a span created after an `await` starts a new trace unless you pass `parent` explicitly:
-
-```typescript
-const parent = posthog.startSpan('handler', { kind: 'server' })
-const child = posthog.startSpan('fetch-config', { parent })
-child.end()
-parent.end()
-```
-
-</Step>
-
-</Steps>
-
-## With OpenTelemetry
-
-<Steps>
-
-<Step title="Install OpenTelemetry packages" badge="required" titleSize="h3">
+<Step title="Install OpenTelemetry packages" badge="required">
 
 For the complete SDK reference, see the [OpenTelemetry JavaScript docs](https://opentelemetry.io/docs/languages/js/).
 
@@ -134,7 +23,7 @@ npm install @opentelemetry/api @opentelemetry/sdk-trace-node @opentelemetry/sdk-
 
 </Step>
 
-<Step title="Get your project token" badge="required" titleSize="h3">
+<Step title="Get your project token" badge="required">
 
 You'll need your PostHog project token to authenticate trace requests. This is the same token you use for capturing events with the PostHog SDK.
 
@@ -144,7 +33,7 @@ You can find your project token in [Project settings](https://app.posthog.com/se
 
 </Step>
 
-<Step title="Enable instrumentation in Next.js" badge="required" titleSize="h3">
+<Step title="Enable instrumentation in Next.js" badge="required">
 
 > **Note:** This step is only needed on Next.js 13.2–14.x. For Next.js 15 and later, `instrumentation.ts` is enabled by default and the `experimental.instrumentationHook` option is deprecated — remove it from your config if it's set.
 
@@ -163,7 +52,7 @@ module.exports = nextConfig
 
 </Step>
 
-<Step title="Create the instrumentation file" badge="required" titleSize="h3">
+<Step title="Create the instrumentation file" badge="required">
 
 Create an `instrumentation.ts` (or `instrumentation.js`) file in the root of your project (or inside `src/` if you use that folder).
 
@@ -212,7 +101,7 @@ new OTLPTraceExporter({
 
 </Step>
 
-<Step title="Create spans" badge="required" titleSize="h3">
+<Step title="Create spans" badge="required">
 
 Wrap the operations you want to measure in spans, and attach attributes for context. Then flush the provider before the serverless function freezes.
 
@@ -259,13 +148,9 @@ export async function GET() {
 
 </Step>
 
-</Steps>
+<Step title="Test your setup" badge="recommended">
 
-<Steps>
-
-<Step checkpoint title="Test your setup" subtitle="Confirm spans are reaching PostHog">
-
-Whichever route you took:
+Once everything is configured, confirm spans are reaching PostHog:
 
 1. Run your application and trigger the instrumented code
 2. Open the PostHog Tracing interface
