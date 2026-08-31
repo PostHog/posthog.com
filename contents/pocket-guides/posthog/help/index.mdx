@@ -46,17 +46,13 @@ pocketGuideOrder: 6
 
 Unter's help page had a chat widget, and behind it a bot that answered most of what people asked <SeeFig n={1} />. That made the widget a product surface like any other. It had a cost, a response time, and a failure rate.
 
-LLM analytics put those things beside the conversation itself <SeeFig n={2} />. Each question carried the model, tokens, latency and <Term name="cost calculation">cost</Term> that produced its answer. The bot stopped being a black box.
+LLM analytics put those things beside the conversation itself <SeeFig n={2} />. Each question carried the model, tokens, latency and <Term name="cost calculation">cost</Term> that produced its answer. This meant the bot wasn't a black box.
 
-## The answer is only half the story
-
-The widget recorded what people asked and what they were told <SeeFig n={3} />. <Term name="session replay">Session replay</Term> showed what happened around the exchange, including the cases where someone tried again, got stuck, or gave up.
-
-That made a useful distinction possible. A bot can answer a question without solving the problem.
+The widget recorded what people asked and what they were told <SeeFig n={3} />. [Experiments](/docs/experiments) allowed them to test whether example questions helped. Did someone escalate to their support queue if they provided an example question and answer?
 
 ## When a person takes over
 
-Some conversations ended with an escalation to a human <SeeFig n={4} />. A <Term name="user feedback">survey</Term> at that point asked the simplest useful question: did the answer help?
+Some conversations ended with an escalation to a human <SeeFig n={4} />. A <Term name="user feedback">survey</Term> at that point asked the simplest useful question: _did the answer help?_
 
 In February, the bot handled about forty questions a week and passed six to a person. The human answers scored higher, but they cost more. That gave Unter something better than a vague sense that the bot was “working”: a way to see where automation was good enough, and where it wasn't.
 
@@ -64,6 +60,6 @@ By the end of the month, the help page was one of the best-instrumented parts of
 
 But there was still a blind spot.
 
-The data said what happened when someone opened the widget. It said nothing about the people who never did. An empty support queue can mean nobody has a problem. It can also mean nobody thought asking would help.
+The data said what happened when someone opened the widget. It said nothing about the people who never did.
 
 </RightPage>

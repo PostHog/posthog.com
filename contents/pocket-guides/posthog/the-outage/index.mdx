@@ -42,45 +42,39 @@ The coverage map did not load <SeeFig n={2} />.
 
 He pressed **Retry**. It spun for about a second and failed again. He pressed it twice more, then closed the tab. He did not come back.
 
-At Unter, the page itself looked fine. The header loaded. The rest of the content loaded. Only the map was broken, and there was nothing on the page to tell the team why.
+At Unter, the page itself looked fine. Only the map was broken, and there was nothing on the page to tell the team why. Unless an Unter employee stumbled on the page, they were blissfully unaware.
 
 ## The failure was already in the data
 
-The map's tile requests had started returning 403 responses seven hours earlier <SeeFig n={3} />. Error tracking had captured the exception, including the stack trace. Session replay showed people repeatedly pressing **Retry**. The tile service logs showed the same 403s from the backend.
+The map's tile requests had started returning 403 responses seven hours earlier <SeeFig n={3} />. [Error Tracking](/docs/error-tracking) had captured the exception, including the stack trace. [Session Replay](/docs/session-replay) showed people repeatedly pressing **Retry**. The tile service logs showed the same 403s from the backend.
 
 The three records pointed to the same failure.
 
-No one had written an event called `coverage_map_broken`. They did not need to. The error was captured automatically, the interaction was recorded in replay, and the service logs filled in what was happening behind the page.
+No one had written an event called `coverage_map_broken`, because why would they? Instead, the error was captured automatically, the interaction was recorded in replay, and the [Logs](/docs/logs) filled in what was happening behind the page.
 
-## One broken button, three views of it
+## One broken button
 
-Error tracking showed **412 occurrences** that night.
+Error Tracking showed **412 occurrences** that night.
 
-Session replay showed what people did when the map failed: they pressed **Retry**, often more than once. Forty-seven sessions over seven days contained a <Term name="rage click">rage-click</Term> pattern on the button, with one person pressing it 31 times.
+Session Replay showed what people did when the map failed: they pressed **Retry**, often more than once. 47 sessions over 7 days contained a <Term name="rage click">rage-click</Term> pattern on the button, with one person pressing it 31 times.
 
 The server logs explained the response. The tile service was returning 403 because its API key had expired.
 
 Each tool answered a different question.
 
-**Error tracking:** what failed?
-
-**Session replay:** what did people do?
-
-**Logs:** what happened on the server?
+- **Error Tracking:** what failed?
+- **Session Replay:** what did people do?
+- **Logs:** what happened on the server?
 
 Together, they described the outage without requiring a separate instrument for every possible failure.
 
 ## The people who never complained
 
-The outage lasted from March 3 to March 14. During that period, 412 people reached the coverage map and left.
-
-The status page stayed green because the failing service was a dependency, not Unter itself.
+The outage lasted from March 3 to March 14. During that period, 412 people reached the coverage map and left. The status page stayed green because the failing service was a dependency, not Unter itself.
 
 The support widget from the previous chapter was available on the same pages. The escalation counter continued to show roughly six handovers a week. None of those 412 people opened the widget.
 
-That was the misleading part.
-
-Unter's support numbers looked normal because the people affected by the outage were not asking for help. The Monday number was down 9%, and the team initially blamed the weather.
+That was the misleading bit. Unter's support numbers looked normal because the people affected by the outage were not asking for help. The Monday number was down 9%, and the team initially blamed the weather.
 
 The page had been telling them something was wrong. They just had not been looking at the right part of it.
 

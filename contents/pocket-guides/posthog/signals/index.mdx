@@ -31,19 +31,15 @@ pocketGuideOrder: 8
 
 # How Unter found the bug
 
-The evidence had been there for eleven days.
-
-Error tracking had the 403s. Session replay had the retry clicks. The server logs had the expired API key. All of it was being recorded, but none of it was being turned into a <Term name="report">report</Term> <SeeFig n={1} />.
+The evidence had been there for eleven days. All of it was being recorded, but none of it was being turned into a <Term name="report">report</Term> <SeeFig n={1} />.
 
 Then, at 03:40, something went looking.
 
 ## Two ways to notice a problem
 
-Signals come from events that match a rule <SeeFig n={2} />. Every new exception can become a <Term name="signal">signal</Term>. Every qualifying event can raise its hand. Unter's error tracking had been producing signals about the 403s since March 3.
+Signals come from events that match a rule. Every new exception can become a <Term name="signal">signal</Term>. Unter's error tracking had been producing signals about the 403s since March 3.
 
-Scouts work differently <SeeFig n={3} />. They run on a schedule, look across the data, and decide whether something is worth reporting.
-
-That distinction mattered.
+Scouts work differently. They run on a schedule, look across the data, and decide whether something is worth reporting.
 
 The signals knew that the tile service was failing. The <Term name="scout">scout</Term> noticed that several pieces of evidence were describing the same failure.
 
@@ -53,36 +49,20 @@ The scout found the errors, the service logs, the repeated retries, and the chan
 
 Instead of sending four separate alerts, it grouped them into one problem: coverage tile requests failing with 403.
 
-It also found the cause. The API key had expired 366 days earlier.
+It also found the cause: the API key had expired 366 days earlier.
 
-The useful part was not that another tool had collected another event. Unter already had those events. The useful part was that something compared them.
+Because Unter already had those events, the scout was able to find the anamoly in the data.
 
 ## Then the report became a fix
 
 The report opened a pull request to rotate the key, add a calendar reminder, and fall back to a cached layer.
 
-The agent did not need a new event to tell it what to inspect. The evidence was already there. It used the error, the logs, and the behaviour around the failed widget to work backwards from symptom to cause.
+The agent did not need a new event to tell it what to inspect. It used the error, the logs, and the behaviour around the failed widget to work backwards from symptom to cause.
 
 Unter still had to review and merge the change.
 
 After that, the same system measured whether the fix worked <SeeFig n={3} />. The result went back into the data as another signal.
 
-Signal. Report. Pull request. Measured.
-
-The point of the loop was not to automate every decision. It was to make the distance between **something happened** and **someone did something about it** much shorter.
-
-## The scouts that found nothing
-
-The scouts had already run hundreds of times since February without filing a report.
-
-That was the point.
-
-A scout that reports something every day becomes another inbox to ignore. A scout that stays quiet until several pieces of evidence line up has a better chance of being useful when it speaks.
-
-It will miss things. Unter missed a slow memory leak during the same period. Nobody found that one until June.
-
-Automation did not replace attention.
-
-It gave attention somewhere better to start.
+The loop made the distance between _something happened_ to _someone did something about it_ much shorter.
 
 </RightPage>

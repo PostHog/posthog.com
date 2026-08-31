@@ -10,20 +10,13 @@ pocketGuideOrder: 4
 <UnterFigure
     n={1}
     page="highway"
-    inspect={false}
-    caption="The page as its users saw it, with nothing marked on it."
-/>
-
-<UnterFigure
-    n={2}
-    page="highway"
     focus="hw-form"
     tools={['product']}
     caption="The touchpoint, and the data underneath it."
 />
 
 <UnterFigure
-    n={3}
+    n={2}
     page="highway"
     focus="btn-start-cutting"
     tools={['logs', 'error']}
@@ -36,30 +29,20 @@ pocketGuideOrder: 4
 
 # What counts as activation
 
-By February, Unter needed one number to take into the Monday meeting <SeeFig n={1} />. Not the number of visits or signups, but the number that meant the product was actually being used.
+By February, Unter needed one number to take into their Bizness Board Meeting. They were hunting for the magic number: the one that meant the product was actually being used.
 
-They settled it in two meetings, on the eighteenth of February. Signups were the obvious answer. They were also the wrong one <SeeFig n={2} />.
+Signups seemed like the obvious answer, but they were wrong – <SeeFig n={1} />.
 
 A person can sign up, look around, and never cut a hole. For Unter, that person had not really used the product.
 
 ## A hole cut is the event
 
-So activation became a hole cut <SeeFig n={3} />.
+So activation became a hole cut, tracked from sign up to logs – <SeeFig n={2} />.
 
-That made the Monday number a count of people who had actually done the thing Unter existed to help them do. And when the outage arrived in March, that definition mattered. The number moved after eleven days, not after a quarter.
-
-The host page is where the hole gets registered, so that is where the number can be counted.
+With tangible proof that a signup meant activation, Unter went to their Bizness Board Meeting with a real number of people who had used Unter. And when the outage arrived in March, this number helped them understand the impact.
 
 ## The number was already there
 
-Nothing new had to be instrumented to produce it.
-
-The events Unter had been collecting since January already described the path from booking to a finished hole. A funnel simply put those events in order and counted how many people made it through.
-
-The important part was that they wrote the definition down.
-
-The Monday email used it. The dashboards used it. And when an agent came looking for the number in March, it was the same definition waiting there.
-
-One decision about what counted as a customer turned out to be the thing that made the outage countable.
+Producing the activation number didn't require more instrumentation. The events Unter had been collecting since January already described the path from booking to a finished hole. A funnel simply put those events in order and added meaning to them.
 
 </RightPage>
