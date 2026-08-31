@@ -45,13 +45,13 @@ Every other tool here stops at the trace. You learn quality fell, and you can re
 
 PostHog captures [traces](/docs/ai-observability/traces), [generations](/docs/ai-observability/generations), [cost](/docs/ai-observability/calculating-costs), and latency as standard [AI observability](/ai-observability) events, and eval results become events too, so you can filter to the exact generations that failed, watch the [session replays](/session-replay) where users hit them, and check which model change or [feature flag](/feature-flags) went live right before the regression.
 
-**What makes PostHog good for developers:**
-
--   **Eval types:** LLM-as-judge with five ready templates (relevance, helpfulness, jailbreak, hallucination, toxicity), code-based checks, and local sentiment analysis
--   **Observability:** Scores stored as events next to traces, replays, and flags – query them with SQL, put quality next to retention or conversion
--   **CI/CD:** An [MCP server](/mcp) to create and run evals from Claude Code, Cursor, or any agent
--   **Pricing:** Free tier of 100K AI observability events/mo; judge evals use your own model key; $0.00035/event after (with volume discounts)
--   **License:** Open source (MIT)
+| | |
+|---|---|
+| **Eval types** | LLM-as-judge with five ready templates (relevance, helpfulness, jailbreak, hallucination, toxicity), code-based checks, and local sentiment analysis |
+| **Observability** | Scores stored as events next to traces, replays, and flags – query them with SQL, put quality next to retention or conversion |
+| **CI/CD** | An [MCP server](/mcp) to create and run evals from Claude Code, Cursor, or any agent |
+| **Pricing** | Free tier of 100K AI observability events/mo; judge evals use your own model key; $0.00035/event after (with volume discounts) |
+| **License** | Open source (MIT) |
 
 **Not ideal if:** you want a standalone eval framework and aren't interested in the analytics platform around it.
 
@@ -68,13 +68,13 @@ PostHog captures [traces](/docs/ai-observability/traces), [generations](/docs/ai
 
 **[Braintrust](/blog/best-braintrust-alternatives)** puts experiments at the center of the workflow. Its first-party GitHub Action is the cleanest hosted path from an eval run to a comment on the pull request. `bt eval` exits non-zero when an eval throws, and a custom Reporter() turns a score into a pass or fail that the build acts on. Datasets are versioned, so an experiment pins to the exact test cases it ran against.
 
-**What makes Braintrust good for developers:**
-
--   **Eval types:** Deterministic code scorers and LLM-as-judge graders, plus a no-code human-review interface
--   **Observability:** Side-by-side playground for prompt and model variants; its own experiment dashboards
--   **CI/CD:** First-party GitHub Action that posts eval results to the PR; hard score gates need a Reporter() you write
--   **Pricing:** Free Starter (10k scores/mo, unlimited seats), then $2.50 per 1,000; Pro $249/mo for 50k scores, with no mid-tier
--   **License:** Proprietary; self-hosting only on an Enterprise contract
+| | |
+|---|---|
+| **Eval types** | Deterministic code scorers and LLM-as-judge graders, plus a no-code human-review interface |
+| **Observability** | Side-by-side playground for prompt and model variants; its own experiment dashboards |
+| **CI/CD** | First-party GitHub Action that posts eval results to the PR; hard score gates need a Reporter() you write |
+| **Pricing** | Free Starter (10k scores/mo, unlimited seats), then $2.50 per 1,000; Pro $249/mo for 50k scores, with no mid-tier |
+| **License** | Proprietary; self-hosting only on an Enterprise contract |
 
 **Not ideal if:** you're a one- or two-person team stuck between the free Starter tier and the $249 Pro cliff, or you need self-hosting without an Enterprise deal.
 
@@ -84,13 +84,13 @@ PostHog captures [traces](/docs/ai-observability/traces), [generations](/docs/ai
 
 **[Langfuse](/blog/best-langfuse-alternatives)** is the one to reach for when prompts and responses have to stay inside your own infrastructure. Its core is MIT-licensed and self-hostable, with a handful of enterprise features behind a license key. ClickHouse acquired Langfuse in January 2026 and committed to keeping it MIT and self-hostable. EU and Japan cloud regions cover GDPR; a separate US region covers HIPAA on Enterprise
 
-**What makes Langfuse good for developers:**
-
--   **Eval types:** LLM-as-judge, custom code evaluators, and human review through annotation queues
--   **Observability:** Tracing and evals in one platform; curated datasets and online scoring of live traffic
--   **CI/CD:** `run_experiment()` in the SDK plus a first-party GitHub Action
--   **Pricing:** Unit-based (every trace, span, and score is a unit); free 50k units/mo, Core $29, Pro $199 
--   **License:** Open source (MIT), self-hostable
+| | |
+|---|---|
+| **Eval types** | LLM-as-judge, custom code evaluators, and human review through annotation queues |
+| **Observability** | Tracing and evals in one platform; curated datasets and online scoring of live traffic |
+| **CI/CD** | `run_experiment()` in the SDK plus a first-party GitHub Action |
+| **Pricing** | Unit-based (every trace, span, and score is a unit); free 50k units/mo, Core $29, Pro $199 |
+| **License** | Open source (MIT), self-hostable |
 
 **Not ideal if:** you want a light self-hosted footprint. The stack needs ClickHouse, Redis, and object storage alongside Postgres.
 
@@ -100,13 +100,13 @@ PostHog captures [traces](/docs/ai-observability/traces), [generations](/docs/ai
 
 **[Arize Phoenix](https://phoenix.arize.com/)** has the most generous free tier here: the self-hosted package has no feature gates and no vendor-imposed limits, and gives you agent tracing, multi-agent graphs, token tracking, and Python/JS SDKs for nothing.
 
-**What makes Arize Phoenix good for developers:**
-
--   **Eval types:** LLM classification evaluators built from a prompt template, a model, and a label-to-score mapping, written back to spans as annotations
--   **Observability:** OpenTelemetry-native tracing, uncapped when self-hosted
--   **CI/CD:** Manual orchestration in the OSS build; automatic and online evals only on the hosted AX product
--   **Pricing:** Phoenix free and uncapped when self-hosted; AX Free 25k spans and 1 GB, AX Pro $50/mo for 50k spans and 10 GB
--   **License:** Elastic License 2.0
+| | |
+|---|---|
+| **Eval types** | LLM classification evaluators built from a prompt template, a model, and a label-to-score mapping, written back to spans as annotations |
+| **Observability** | OpenTelemetry-native tracing, uncapped when self-hosted |
+| **CI/CD** | Manual orchestration in the OSS build; automatic and online evals only on the hosted AX product |
+| **Pricing** | Phoenix free and uncapped when self-hosted; AX Free 25k spans and 1 GB, AX Pro $50/mo for 50k spans and 10 GB |
+| **License** | Elastic License 2.0 |
 
 **Not ideal if:** you need an OSI-approved license, or want managed monitoring at volume rather than on AX's free tier.
 
@@ -116,13 +116,13 @@ PostHog captures [traces](/docs/ai-observability/traces), [generations](/docs/ai
 
 **[DeepEval](https://deepeval.com/)** runs evals the way you already run tests. It's an Apache-2.0 Python framework that plugs into pytest, so a failing eval fails your build like a broken assertion – define an `LLMTestCase`, attach a metric with a numeric `threshold`, and `deepeval test run` turns a subjective quality score into a pass/fail gate.
 
-**What makes DeepEval good for developers:**
-
--   **Eval types:** 50+ research-backed metrics (hallucination, faithfulness, relevancy, toxicity, bias), plus G-Eval and DAG for conditional logic; span-level scoring for agents
--   **Observability:** Saves results locally as JSON; optional Confident AI cloud for datasets and monitoring
--   **CI/CD:** Best-in-class – pytest-native, runs in GitHub Actions, GitLab CI, Jenkins, and more
--   **Pricing:** Open-source core free forever; Starter plan from $200/mo
--   **License:** Open source (Apache 2.0)
+| | |
+|---|---|
+| **Eval types** | 50+ research-backed metrics (hallucination, faithfulness, relevancy, toxicity, bias), plus G-Eval and DAG for conditional logic; span-level scoring for agents |
+| **Observability** | Saves results locally as JSON; optional Confident AI cloud for datasets and monitoring |
+| **CI/CD** | Best-in-class – pytest-native, runs in GitHub Actions, GitLab CI, Jenkins, and more |
+| **Pricing** | Open-source core free forever; Starter plan from $200/mo |
+| **License** | Open source (Apache 2.0) |
 
 **Not ideal if:** you want the surrounding context; it scores outputs but won't tell you which users hit a bad one or which release caused the drop.
 
@@ -132,13 +132,13 @@ PostHog captures [traces](/docs/ai-observability/traces), [generations](/docs/ai
 
 **[Ragas](https://www.ragas.io/)** started as a RAG evaluation library, and retrieval is still what it does best. Faithfulness checks whether the answer stays grounded in retrieved documents; context precision measures whether the retriever ranked the relevant chunks above the irrelevant ones, and context recall whether it missed any.
 
-**What makes Ragas good for developers:**
-
--   **Eval types:** RAG metrics at the core, plus agent, SQL, and general-purpose metrics, and synthetic test-data generation from a knowledge graph of your docs
--   **CI/CD:** Run it in code or CI and read the scores
--   **Observability:** None built in – integrates with LangChain, LlamaIndex, Arize, and LangSmith for that
--   **Pricing:** Fully free (optional paid consulting from the maintainers)
--   **License:** Apache 2.0
+| | |
+|---|---|
+| **Eval types** | RAG metrics at the core, plus agent, SQL, and general-purpose metrics, and synthetic test-data generation from a knowledge graph of your docs |
+| **CI/CD** | Run it in code or CI and read the scores |
+| **Observability** | None built in – integrates with LangChain, LlamaIndex, Arize, and LangSmith for that |
+| **Pricing** | Fully free (optional paid consulting from the maintainers) |
+| **License** | Apache 2.0 |
 
 **Not ideal if:** you need production monitoring, a dashboard, or issue tracking – you wire up your own storage and visualization.
 
@@ -148,13 +148,13 @@ PostHog captures [traces](/docs/ai-observability/traces), [generations](/docs/ai
 
 **[TruLens](https://www.trulens.org/)** builds its instrumentation on OpenTelemetry, so every LLM call, retrieval, and tool invocation becomes a span you can send to Jaeger, Grafana Tempo, Datadog, or any OTLP backend. Its feedback-function library goes deep on agents, with purpose-built evaluators like PlanAdherence, ToolSelection, and ExecutionEfficiency that flag redundant steps and wasted compute.
 
-**What makes TruLens good for developers:**
-
--   **Eval types:** Feedback functions including the RAG Triad and seven agent evaluators; a Selector API to target any span attribute
--   **CI/CD:** Copy-pasteable templates for GitHub Actions, Azure Pipelines, CircleCI, and pre-commit that fail the build below a score threshold
--   **Observability:** OpenTelemetry spans to any OTLP backend, plus deep Snowflake Cortex integration
--   **Pricing:** Free (no managed tier or usage caps published). The managed path is Snowflake AI Observability, billed as Snowflake consumption
--   **License:** Open source (MIT)
+| | |
+|---|---|
+| **Eval types** | Feedback functions including the RAG Triad and seven agent evaluators; a Selector API to target any span attribute |
+| **CI/CD** | Copy-pasteable templates for GitHub Actions, Azure Pipelines, CircleCI, and pre-commit that fail the build below a score threshold |
+| **Observability** | OpenTelemetry spans to any OTLP backend, plus deep Snowflake Cortex integration |
+| **Pricing** | Free (no managed tier or usage caps published). The managed path is Snowflake AI Observability, billed as Snowflake consumption |
+| **License** | Open source (MIT) |
 
 **Not ideal if:** you want a hosted UI without Snowflake.
 
@@ -164,13 +164,13 @@ PostHog captures [traces](/docs/ai-observability/traces), [generations](/docs/ai
 
 **[LangWatch](https://langwatch.ai/)** runs a simulated user that pushes your agent through realistic multi-turn conversations, then hands the trace to a JudgeAgent that scores against natural-language success criteria and issues a pass/fail at any turn. That catches failures static test cases miss, like an agent that answers turn one correctly and loses the thread by turn five.
 
-**What makes LangWatch good for developers:**
-
--   **Eval types:** Simulated-user multi-turn scoring with a JudgeAgent, plus voice-AI simulation across ElevenLabs, OpenAI Realtime, and Twilio
--   **CI/CD:** Batch evals gated in CI with pytest or vitest
--   **Observability:** Offline experiments plus online Monitors that score production traffic and alert on drops
--   **Pricing:** Developer free forever (50k events/mo, 3 scenarios); Growth $34/core-seat
--   **License:** Open source (Apache 2), self-hosts via Docker
+| | |
+|---|---|
+| **Eval types** | Simulated-user multi-turn scoring with a JudgeAgent, plus voice-AI simulation across ElevenLabs, OpenAI Realtime, and Twilio |
+| **CI/CD** | Batch evals gated in CI with pytest or vitest |
+| **Observability** | Offline experiments plus online Monitors that score production traffic and alert on drops |
+| **Pricing** | Developer free forever (50k events/mo, 3 scenarios); Growth $34/core-seat |
+| **License** | Open source (Apache 2), self-hosts via Docker |
 
 **Not ideal if:** single-response quality is all you test – the multi-turn simulation is overkill.
 
