@@ -596,10 +596,10 @@ const faqItems = [
         trigger: 'Does the PostHog Slack app work in DMs?',
         content: (
             <p>
-                Yes. DM the bot directly for quick tasks (or embarrassing questions) without spamming your team –
-                everything that works in a channel mention works in a DM: data questions, coding tasks, follow-ups, and
-                attachments. You can also start a group DM that includes the bot to work with teammates. The only thing
-                that doesn't work is mentioning it in an existing DM it isn't part of – it can't see or join those.
+                Yes. Everything that works in a channel mention works in a DM: data questions, coding tasks, follow-ups,
+                and attachments. To bring the bot into a DM with one or more colleagues, start a new conversation with
+                @PostHog and one or more of your peers (the agent can't be added to existing DMs). To DM the bot
+                privately, you can do so in the Chat tab of the app.
             </p>
         ),
     },

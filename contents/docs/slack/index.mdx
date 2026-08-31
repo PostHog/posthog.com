@@ -10,7 +10,7 @@ The PostHog Slack app is in beta. Commands, scopes, and behavior are still movin
 
 `@PostHog` brings PostHog into any Slack channel, thread, or DM. Mention the bot with a question about your product data and it answers in-thread using the PostHog [MCP](/docs/model-context-protocol). You can also send the bot a direct message – no mention needed – for a private one-on-one conversation.
 
-Mention `@PostHog` with a fix, an edit, or a feature idea and it plans the work in a sandboxed environment, edits files, runs your checks, and opens a draft PR. The PR links back to the Slack thread it came from, so reviewers can find the original context. The same agent that powers [PostHog AI](/docs/posthog-ai) and [PostHog Desktop](/desktop), just summoned from where your team already chats.
+Mention `@PostHog` with a fix, an edit, or a feature idea and it plans the work in a sandboxed environment, edits files, runs your checks, and opens a draft PR. The PR links back to the Slack thread it came from, so reviewers can find the original context. It's the same agent that powers [PostHog AI](/docs/posthog-ai) and [PostHog Desktop](/desktop), summoned to where your team already chats.
 
 <ProductScreenshot
 imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2026_05_04_at_4_47_08_PM_b8ba794fdc.png"
@@ -42,7 +42,7 @@ to everyone with an @example.com email address
 to the onboarding flow to lift the drop-off between step 2 and step 3
 ```
 
-If you have a single repo connected, the task runs against it immediately. If you have several, the bot opens a repo picker in-thread. Pick one and the task starts. The picker times out after 15 minutes ; after that, re-mention the bot to try again.
+If you have a single repo connected, the task runs against it immediately. If you have several, the bot opens a repo picker in-thread. Pick one and the task starts. The picker times out after 15 minutes; after that, re-mention the bot to try again.
 
 Once the agent finishes, it posts a final summary of its work to the thread. Every reply from the bot includes a footer with links to the run on web and desktop, the model used (plus the reasoning effort, when one is set), and a **Configure** link that opens the [App Home tab](#the-app-home-tab).
 
