@@ -141,6 +141,13 @@ export interface PlatformInstallProps {
     selfDriving?: boolean
     /** Escape hatch to append any other subcommand to the command (display + copy). */
     command?: string
+    /**
+     * Inline only: state the entire command yourself instead of having it built. Shown and copied
+     * verbatim, so `-y`/`@latest` are not added and `command`/`selfDriving` are ignored.
+     */
+    fullCommand?: string
+    /** Clipboard override, if it should differ from what's displayed. */
+    copyCommand?: string
     /** Inline only: hide the "Learn more" tab and fully round the button. */
     slim?: boolean
     /** Inline only: bordered button style. */
@@ -159,6 +166,8 @@ export default function PlatformInstall({
     variant = 'card',
     selfDriving = false,
     command,
+    fullCommand,
+    copyCommand: copyCommandOverride,
     slim = false,
     bordered = false,
     secondaryTo,
@@ -192,7 +201,7 @@ export default function PlatformInstall({
     // Inline variant: the bare command button (consolidated WizardCommand look). Builds the command
     // from flags via the shared builder so display/copy semantics can never drift from the card.
     if (variant === 'inline') {
-        const inline = buildWizardCommand({ subcommand })
+        const inline = buildWizardCommand({ subcommand, fullCommand, copyOverride: copyCommandOverride })
         return (
             <InlineCommand
                 displayCommand={inline.displayCommand}

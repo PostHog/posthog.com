@@ -4,6 +4,7 @@ import path from 'path'
 import fs from 'fs'
 
 import { fetchAndProcessMCPTools, writeMCPToolsToFile } from './utils/fetchMCPTools'
+import { fetchScoutSkills, writeScoutSkillsToFile } from './utils/fetchScoutSkills'
 import { enrichVideos } from './enrichVideos'
 
 export const PAGEVIEW_CACHE_KEY = 'onPreBootstrap@@posthog-pageviews'
@@ -119,6 +120,10 @@ posthog.init("${process.env.GATSBY_POSTHOG_API_KEY}", {
     // Fetch and process MCP tool definitions
     const mcpToolsData = await fetchAndProcessMCPTools()
     writeMCPToolsToFile(mcpToolsData)
+
+    // Fetch the scout SKILL.md files the pocket guides render. The monorepo owns them, so a guide
+    // and the app's create-scout modal can never disagree about what a scout does.
+    writeScoutSkillsToFile(await fetchScoutSkills())
 
     // Cache the data if successful
     if (!mcpToolsData.error && mcpToolsData.categories) {

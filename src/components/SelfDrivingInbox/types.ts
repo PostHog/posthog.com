@@ -38,6 +38,13 @@ export interface ScoutSpec {
     raw?: string
     /** Display-only, e.g. "Daily" – the app owns the real schedule. Lives in index.mdx. */
     schedule?: string
+    /**
+     * A template key PostHog already ships, e.g. `costly-users`. Set it and the CTA opens that
+     * template in the app instead of encoding this SKILL.md into the link – the app's own copy
+     * carries tags and a schedule, which the `#createScout=` payload deliberately doesn't.
+     * Lives in index.mdx.
+     */
+    appTemplate?: string
 }
 
 /** Fallback rail label for a template that hasn't declared a category yet. */
@@ -49,7 +56,7 @@ export interface InboxTemplate {
     category: string
     /** Route to the guide page, e.g. /pocket-guides/self-driving/silent-failure-core-action */
     url: string
-    /** The template's own title, e.g. "Silent failure in your core action" */
+    /** The template's own title, e.g. "Catch a core action failing without errors" */
     templateTitle: string
     /** Short name for tight surfaces like the index tabs. Fall back to `templateTitle`. */
     templateShortTitle?: string

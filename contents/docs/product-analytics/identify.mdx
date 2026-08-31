@@ -91,7 +91,7 @@ Many frameworks wrap the base SDKs, so the way you access PostHog to call `ident
 
 You pass that same `distinct_id` into your server-side code and use it when capturing backend events. It's your job to find a way for the frontend and backend IDs to agree, whether through the user's auth session, or by passing the ID as a part of your API requests.
 
-Backend SDKs have no concept of an anonymous session, so there's nothing to merge. Instead, pass the same `distinct_id` you use on the frontend when capturing events. Some SDKs expose an `identify` method, while others set [person properties](/docs/data/user-properties) with `$set` on a captured event.
+Backend SDKs have no concept of an anonymous session, so there's nothing to merge. Instead, pass the same `distinct_id` you use on the frontend when capturing events. Some SDKs expose an `identify` method, while others set [person properties](/docs/product-analytics/person-properties) with `$set` on a captured event.
 
 <CalloutBox icon="IconInfo" title="`$set` and `$set_once` aren't stored on events" type="fyi">
 
@@ -428,7 +428,7 @@ posthog.alias("user2", "user1");
 
 </MultiLanguage>
 
-You can view whether a user can be merged into another user using `alias` when [viewing their properties](/docs/data/user-properties#how-to-view-user-properties) in the PostHog app. Under their ID, you'll see `Merge restrictions`. This will indicate whether there are merge restrictions or not, i.e. whether you can use their ID as an `alias_id` or not.
+You can view whether a user can be merged into another user using `alias` when [viewing their properties](/docs/product-analytics/person-properties#how-to-view-and-edit-a-person-profile-and-properties) in the PostHog app. Under their ID, you'll see `Merge restrictions`. This will indicate whether there are merge restrictions or not, i.e. whether you can use their ID as an `alias_id` or not.
 
 <ProductScreenshot
 imageLight = {mergeRestrictionsLight}

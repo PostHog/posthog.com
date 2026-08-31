@@ -6,12 +6,13 @@ import usePostHog from 'hooks/usePostHog'
 
 type UseQuestionOptions = {
     data?: StrapiRecord<QuestionData>
+    onResolve?: () => void
 }
 
-const query = (id: string | number, isModerator: boolean) =>
+const query = (id: string | number, isModerator: boolean, isForumModerator: boolean) =>
     qs.stringify(
         {
-            publicationState: isModerator ? 'preview' : 'live',
+            publicationState: isForumModerator ? 'preview' : 'live',
             filters: {
                 ...(typeof id === 'string'
                     ? {
@@ -59,7 +60,7 @@ const query = (id: string | number, isModerator: boolean) =>
                 },
                 replies: {
                     sort: ['createdAt:asc'],
-                    publicationState: isModerator ? 'preview' : 'live',
+                    publicationState: isForumModerator ? 'preview' : 'live',
                     populate: {
                         edits: {
                             sort: ['date:desc'],
@@ -113,13 +114,13 @@ const query = (id: string | number, isModerator: boolean) =>
     )
 
 export const useQuestion = (id: number | string, options?: UseQuestionOptions) => {
-    const { getJwt, fetchUser, user, isModerator, isValidating } = useUser()
+    const { getJwt, fetchUser, user, isModerator, isForumModerator, isValidating } = useUser()
     const posthog = usePostHog()
 
     const key =
         isValidating || options?.data
             ? null
-            : `${process.env.GATSBY_SQUEAK_API_HOST}/api/questions?${query(id, isModerator)}`
+            : `${process.env.GATSBY_SQUEAK_API_HOST}/api/questions?${query(id, isModerator, isForumModerator)}`
 
     const {
         data: question,
@@ -418,7 +419,8 @@ export const useQuestion = (id: number | string, options?: UseQuestionOptions) =
 
             await replyRes.json()
 
-            mutate()
+            await mutate()
+            options?.onResolve?.()
 
             posthog?.capture('squeak resolve', {
                 questionId: questionID,

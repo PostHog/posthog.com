@@ -137,7 +137,7 @@ export default function LeakFunnel({
                         <span className="inline-flex items-baseline gap-1.5">
                             <span
                                 aria-hidden="true"
-                                className="inline-block h-0.5 w-3 shrink-0 self-center bg-primary opacity-45"
+                                className="inline-block h-0.5 w-3 shrink-0 self-center bg-current text-primary opacity-45"
                             />
                             {startsLabel}
                         </span>

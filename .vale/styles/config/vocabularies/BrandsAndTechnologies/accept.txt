@@ -152,6 +152,7 @@ Kameleoon
 Kibana
 [Kk]inesis
 Klaviyo
+KMP
 Knative
 [Kk]nock
 [Kk]oala
@@ -189,6 +190,7 @@ MinIO
 Mixpanel
 Moloco
 MongoDB
+Multiplatform
 MySQL
 Netlify
 NGINX
@@ -233,6 +235,7 @@ Replit
 Revolut
 RevX
 [Rr]ipe
+Rokt
 RudderStack
 [Rr]unway
 Salesforce
@@ -381,6 +384,7 @@ JSX
 JWT
 JWTs
 KPIs
+kmp
 kubectl
 Kubernetes
 Laravel

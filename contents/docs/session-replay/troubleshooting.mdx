@@ -4,10 +4,6 @@ title: Session Replay troubleshooting
 
 This page covers troubleshooting for Session Replay. For setup, see the [installation guides](/docs/session-replay/installation).
 
-## Have a question? Ask PostHog AI
-
-<AskAIInput placeholder="Type your question and hit enter..." />
-
 ## Update `posthog-js`
 
 Having trouble with recordings? The most common solution is to update `posthog-js` to the latest version.
@@ -142,7 +138,7 @@ There are a few common reasons that you may not see recordings appear in your pr
 
 **1. Authorized domains for recordings**
 
-Authorized domains for recordings is deprecated, you should use URL triggers instead. [Read more in our replay controls doc](/docs/session-replay/how-to-control-which-sessions-you-record#with-url-trigger-conditions).
+Authorized domains for recordings is deprecated, you should use URL triggers instead. [Read more in our replay controls doc](/docs/session-replay/how-to-control-which-sessions-you-record#url-triggers).
 
 In your [project replay settings](https://app.posthog.com/settings/environment-replay#replay-authorized-domains), for older projects, there is a section for 'Authorized domains for replay'. This is the list of domains where PostHog will capture recordings. You should make sure it's not too restrictive.
 
@@ -199,6 +195,19 @@ By default, `base` and `assets` imported from `$app/paths` in Svelte use relativ
 
 For apps with SSR enabled you should set `relative` to `false` in the [`paths` object of your config](https://kit.svelte.dev/docs/configuration#paths). This ensures all asset URLs will correctly be resolved against the base URL rather than the current page.
 
+## Internal and intranet applications
+
+PostHog works for apps that run on a private network or behind a firewall, but two replay features need a network route to your app.
+
+Product analytics, feature flags, surveys, and error tracking all work. Each SDK sends data to PostHog over an outbound HTTPS connection, so PostHog does not need to reach your app. Web SDKs connect from the user's browser, and server and mobile SDKs connect from their own runtimes. Each runtime that runs an SDK only needs outbound access to PostHog.
+
+Two replay features are different because PostHog fetches assets from your app:
+
+- **Replay assets that PostHog cannot inline.** PostHog captures most assets [inline](#ensure-your-website-permits-posthog-cors), but it loads the rest from your web server during playback. A viewer on your private network sees these assets. A viewer outside the network does not, because the browser cannot reach your server.
+- **Server-side heatmap screenshots.** To render a [heatmap](/docs/toolbar/heatmaps) over a screenshot, PostHog fetches the page from its own servers. This fails for a private address, because PostHog cannot reach it. Adding [PostHog's outbound IPs](/docs/toolbar/heatmaps#viewing-heatmaps-in-posthog-beta) to your firewall does not help when the address is private.
+
+When PostHog cannot render a heatmap screenshot, it [falls back to session recordings](/docs/toolbar/heatmaps#screenshot-or-iframe-heatmap-fails-to-load) that visited the same page. This shows heatmap data over a recording snapshot, so heatmaps still work for internal apps.
+
 ## Images and videos do not appear in the replay
 
 PostHog captures session replays by capturing the DOM, not videos or screenshots. When you watch a replay, PostHog tries to reconstruct the DOM.
@@ -226,6 +235,16 @@ The most common reason for this is that you're trying to filter by events that w
 Session Replay relies on the `$session_id` property added to events by the web SDK to link events to sessions.
 
 To workaround this, you can use the `posthog.onSessionId` method in the web SDK to register a callback that will be called each time the session ID changes. You can send this to your backend and add the `$session_id` property to your backend events.
+
+## Filters return recordings that don't seem to match
+
+Three filter behaviors are intentional but can be surprising when a recording shows up that doesn't look like it matches:
+
+**Person filters match the whole person, including older sessions.** Filtering by a person property (like an email) matches every session belonging to that person, across all of their identifiers. When an anonymous session is later linked to a person via `identify()` or `alias()`, that older session starts matching the person's filters too, even though no event inside it carries the filtered property. To see why a specific recording matched, open it and check the highlighted matching events in the player sidebar.
+
+**"Did not perform event" filters only look within the selected date range.** A filter like "users who did not perform `signed_up`" excludes sessions where that event happened inside the queried date range (plus a day of margin). Someone who performed the event before the range still appears. To exclude people based on their full history, use a [cohort](/docs/data/cohorts) with an event condition instead.
+
+**Group filters match any event in the session.** Filtering recordings by a group matches every session containing at least one event tagged with that group, regardless of who sent it. A single group-tagged event inside an otherwise unrelated session is enough for the recording to match.
 
 ## Recording not found
 

@@ -38,7 +38,7 @@ To help you pick the best of these tools, we put together this list. All of the 
 - GitHub stars: 32.1k as of March 2026
 - [PostHog on GitHub](https://github.com/PostHog/posthog)
 
-[PostHog](/) is an all-in-one developer platform that combines [LLM observability](/llm-analytics) with several other developer-focused tools, such as [product](/product-analytics) and [web analytics](/web-analytics), [session replay](/session-replay), [feature flags](/feature-flags), [experiments](/experiments), [error tracking](/error-tracking), and [surveys](/surveys).
+[PostHog](/) is an all-in-one developer platform that combines [LLM observability](/ai-observability) with several other developer-focused tools, such as [product](/product-analytics) and [web analytics](/web-analytics), [session replay](/session-replay), [feature flags](/feature-flags), [experiments](/experiments), [error tracking](/error-tracking), and [surveys](/surveys).
 
 Its LLM observability product (known as [AI Observability](/docs/ai-observability)) integrates with popular LLM providers, captures details of generations, provides an aggregated metrics dashboard, and more.
 
@@ -130,7 +130,7 @@ It integrates with the broader OpenTelemetry ecosystem, meaning it can instrumen
 
 Phoenix is an open source AI observability platform. It provides tracing, evaluation, experiments, prompt management, and more. It works out-of-the-box with frameworks like LlamaIndex and LangChain as well as LLM providers like OpenAI, Bedrock, and more. It’s built by Arize AI, a unified AI observability and evaluation platform. 
 
-Arize doesn’t provide a free hosted version of Phoenix. Their product, AX Pro, starts at $50 per month for 10k spans and up to 3 users.
+Arize doesn’t provide a free hosted version of Phoenix. Their product, AX Pro, starts at $50 per month for 10k spans and up to 3 users. They were acquired by Dynatrace in August 2026, so this may change in the near future though. 
 
 ![Phoenix](https://res.cloudinary.com/dmukukwp6/image/upload/phoenix_fb7498c189.png)
 
