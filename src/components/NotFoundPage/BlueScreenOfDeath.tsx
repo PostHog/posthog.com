@@ -63,11 +63,8 @@ export default function BlueScreenOfDeath(): JSX.Element {
     }, [])
 
     return (
-        <div
-            className="bg-blue-600 flex min-h-0 w-full items-center justify-center"
-            style={{ height: appWindow?.size.height }}
-        >
-            <ScrollArea className="h-full w-full">
+        <div className="h-full bg-blue-600">
+            <ScrollArea>
                 <div
                     className="bg-blue-600 min-h-full text-white font-mono text-sm leading-relaxed p-8"
                     style={{
