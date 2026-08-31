@@ -14,6 +14,8 @@ Setup requires beta access. Not in yet? [Join the waitlist](/context-warehouse/m
 
 Setting up the warehouse takes a few minutes: you pick a name, PostHog provisions the infrastructure, and then historical data starts loading. Everything happens in the **Data ops** section of the app, which appears in your navigation once your organization has beta access.
 
+During the beta, PostHog enables the Data ops UI and imported-source loading separately. The **Overview** tab shows **Not configured** until imported-source loading is enabled for the current project.
+
 ## Before you start
 
 - You need to be an **organization admin** to provision, deprovision, or manage credentials. Other members can see status but can't change anything.
@@ -50,7 +52,7 @@ You don't need to wait for backfills to finish before connecting – data that's
 
 ## Add sources
 
-Anything you connect as a [source](/docs/cdp/sources) syncs into the warehouse automatically alongside its regular imports – there's no separate warehouse configuration per source. Manage sources as usual in [Data pipelines > Sources](https://app.posthog.com/data-management/sources).
+After imported-source loading is enabled for the project, anything you connect as a [source](/docs/cdp/sources) syncs into the warehouse alongside its regular imports. There's no separate warehouse configuration per source. Manage sources as usual in [Data pipelines > Sources](https://app.posthog.com/data-management/sources).
 
 ## Add more projects
 
