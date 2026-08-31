@@ -284,7 +284,7 @@ If you consistently see late snapshot warnings, make sure your `posthog-js` vers
 
 ## Recording is skipped or won't auto-play because of heavy DOM changes
 
-Session replay records changes to the page DOM. Some pages rewrite the DOM very fast — for example a large virtualized list, a canvas-heavy view, or an animation that redraws many nodes each frame. This client-side DOM churn can produce more DOM mutations than PostHog can safely capture or play back. PostHog limits this in two places, so a recording of such a page can look incomplete or refuse to auto-play.
+Session replay records changes to the page DOM. Some pages rewrite the DOM very fast — for example a large virtualized list or an animation that redraws many nodes each frame. This client-side DOM churn can produce more DOM mutations than PostHog can safely capture or play back. PostHog limits this in two places, so a recording of such a page can look incomplete or refuse to auto-play.
 
 ### The DOM mutation ceiling during capture
 
