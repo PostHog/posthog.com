@@ -98,7 +98,7 @@ PostHog captures [traces](/docs/ai-observability/traces), [generations](/docs/ai
 
 ### What's the best LLM evaluation tool for uncapped self-hosted tracing?
 
-**Arize Phoenix** has the most generous free tier here: the self-hosted package has no feature gates and no vendor-imposed limits, and gives you agent tracing, multi-agent graphs, token tracking, and Python/JS SDKs for nothing.
+**[Arize Phoenix](https://phoenix.arize.com/)** has the most generous free tier here: the self-hosted package has no feature gates and no vendor-imposed limits, and gives you agent tracing, multi-agent graphs, token tracking, and Python/JS SDKs for nothing.
 
 **What makes Arize Phoenix good for developers:**
 
@@ -114,7 +114,7 @@ PostHog captures [traces](/docs/ai-observability/traces), [generations](/docs/ai
 
 ### What's the best LLM evaluation tool for evals as code?
 
-**DeepEval** runs evals the way you already run tests. It's an Apache-2.0 Python framework that plugs into pytest, so a failing eval fails your build like a broken assertion – define an `LLMTestCase`, attach a metric with a numeric `threshold`, and `deepeval test run` turns a subjective quality score into a pass/fail gate.
+**[DeepEval](https://deepeval.com/)** runs evals the way you already run tests. It's an Apache-2.0 Python framework that plugs into pytest, so a failing eval fails your build like a broken assertion – define an `LLMTestCase`, attach a metric with a numeric `threshold`, and `deepeval test run` turns a subjective quality score into a pass/fail gate.
 
 **What makes DeepEval good for developers:**
 
@@ -130,7 +130,7 @@ PostHog captures [traces](/docs/ai-observability/traces), [generations](/docs/ai
 
 ### What's the best LLM evaluation tool for RAG and retrieval quality?
 
-**Ragas** started as a RAG evaluation library, and retrieval is still what it does best. Faithfulness checks whether the answer stays grounded in retrieved documents; context precision measures whether the retriever ranked the relevant chunks above the irrelevant ones, and context recall whether it missed any.
+**[Ragas](https://www.ragas.io/)** started as a RAG evaluation library, and retrieval is still what it does best. Faithfulness checks whether the answer stays grounded in retrieved documents; context precision measures whether the retriever ranked the relevant chunks above the irrelevant ones, and context recall whether it missed any.
 
 **What makes Ragas good for developers:**
 
@@ -146,7 +146,7 @@ PostHog captures [traces](/docs/ai-observability/traces), [generations](/docs/ai
 
 ### What's the best LLM evaluation tool for agent-specific evaluators?
 
-**TruLens** builds its instrumentation on OpenTelemetry, so every LLM call, retrieval, and tool invocation becomes a span you can send to Jaeger, Grafana Tempo, Datadog, or any OTLP backend. Its feedback-function library goes deep on agents, with purpose-built evaluators like PlanAdherence, ToolSelection, and ExecutionEfficiency that flag redundant steps and wasted compute.
+**[TruLens](https://www.trulens.org/)** builds its instrumentation on OpenTelemetry, so every LLM call, retrieval, and tool invocation becomes a span you can send to Jaeger, Grafana Tempo, Datadog, or any OTLP backend. Its feedback-function library goes deep on agents, with purpose-built evaluators like PlanAdherence, ToolSelection, and ExecutionEfficiency that flag redundant steps and wasted compute.
 
 **What makes TruLens good for developers:**
 
@@ -162,7 +162,7 @@ PostHog captures [traces](/docs/ai-observability/traces), [generations](/docs/ai
 
 ### What's the best LLM evaluation tool for multi-turn and voice agents?
 
-**LangWatch** runs a simulated user that pushes your agent through realistic multi-turn conversations, then hands the trace to a JudgeAgent that scores against natural-language success criteria and issues a pass/fail at any turn. That catches failures static test cases miss, like an agent that answers turn one correctly and loses the thread by turn five.
+**[LangWatch](https://langwatch.ai/)** runs a simulated user that pushes your agent through realistic multi-turn conversations, then hands the trace to a JudgeAgent that scores against natural-language success criteria and issues a pass/fail at any turn. That catches failures static test cases miss, like an agent that answers turn one correctly and loses the thread by turn five.
 
 **What makes LangWatch good for developers:**
 
