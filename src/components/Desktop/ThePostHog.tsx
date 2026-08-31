@@ -4,6 +4,7 @@ import MediaPlayer from 'components/MediaPlayer'
 import { useAppActions } from '../../context/App'
 import { useWindow } from '../../context/Window'
 import { useToast } from '../../context/Toast'
+import usePostHog from '../../hooks/usePostHog'
 
 const VIDEO_ID = 'vndjn7wus5'
 const POSTER = 'https://res.cloudinary.com/dmukukwp6/image/upload/the_posthog_shining_thumb_781edacf00.jpg'
@@ -25,6 +26,7 @@ function ThePostHogPlayer({}: { location: { pathname: string }; newWindow?: bool
 export default function ThePostHog(): null {
     const { addWindow } = useAppActions()
     const { addToast, removeToast } = useToast()
+    const posthog = usePostHog()
     const toastId = useRef<number | null>(null)
     const [hasDismissed, setHasDismissed] = useState(() => {
         try {
@@ -47,6 +49,7 @@ export default function ThePostHog(): null {
     }
 
     const openPlayer = () => {
+        posthog?.capture('the-posthog-toast-watched', { video_id: VIDEO_ID })
         dismiss()
         addWindow((<ThePostHogPlayer location={{ pathname: 'the-posthog' }} key="the-posthog" newWindow />) as never)
     }
@@ -82,7 +85,10 @@ export default function ThePostHog(): null {
                 actionAsIcon: <IconX className="size-4" />,
                 verticalAlign: 'items-start',
                 duration: 999999999,
-                onAction: () => dismiss(),
+                onAction: () => {
+                    posthog?.capture('the-posthog-toast-dismissed')
+                    dismiss()
+                },
                 actionClassName: '!absolute -top-2 -right-2',
             })
         }, 1000)
