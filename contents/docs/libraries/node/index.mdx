@@ -441,12 +441,14 @@ Spans created outside a request context simply omit those attributes.
 
 ### Shutdown and short-lived processes
 
-`shutdown()` exports spans that have already ended. Spans still open at that point are discarded, so end your spans before shutting down — `withSpan` does this for you.
+Both `flush()` and `shutdown()` export spans that have already ended. Spans still open at that point are discarded, so end your spans before either call — `withSpan` does this for you.
+
+In a serverless handler, call `flush()`: the container is reused across invocations, so `shutdown()` would throw away the connection pool and the flag cache. Events and spans are flushed concurrently, so it costs one round trip, not two.
 
 ```ts
 export const handler = async () => {
   await posthog.withSpan('handler', () => doWork())
-  await posthog.shutdown()
+  await posthog.flush()
 }
 ```
 
