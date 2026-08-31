@@ -38,7 +38,7 @@ To help you pick the best of these tools, we put together this list. All of the 
 - GitHub stars: 32.1k as of March 2026
 - [PostHog on GitHub](https://github.com/PostHog/posthog)
 
-[PostHog](/) is an all-in-one developer platform that combines [LLM observability](/llm-analytics) with several other developer-focused tools, such as [product](/product-analytics) and [web analytics](/web-analytics), [session replay](/session-replay), [feature flags](/feature-flags), [experiments](/experiments), [error tracking](/error-tracking), and [surveys](/surveys).
+[PostHog](/) is an all-in-one developer platform that combines [LLM observability](/ai-observability) with several other developer-focused tools, such as [product](/product-analytics) and [web analytics](/web-analytics), [session replay](/session-replay), [feature flags](/feature-flags), [experiments](/experiments), [error tracking](/error-tracking), and [surveys](/surveys).
 
 Its LLM observability product (known as [AI Observability](/docs/ai-observability)) integrates with popular LLM providers, captures details of generations, provides an aggregated metrics dashboard, and more.
 
