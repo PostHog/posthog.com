@@ -5,11 +5,121 @@ showStepsToc: true
 ---
 
 import { Steps, Step } from 'components/Docs/Steps'
+import InstallNodePackageManagers from '../../integrate/_snippets/install-node-package-managers.mdx'
 import TracingNextSteps from './_snippets/tracing-next-steps.mdx'
+
+There are two ways to send spans from Node.js.
+
+|                                | `posthog-node`                                              | OpenTelemetry                                                        |
+| ------------------------------ | ----------------------------------------------------------- | -------------------------------------------------------------------- |
+| **Packages**                   | The SDK you already use for analytics                        | Six `@opentelemetry/*` packages                                       |
+| **Instrumentation**            | Manual – you wrap the operations you care about              | Manual, plus auto-instrumentation for HTTP, Express, databases, and more |
+| **Person and session join**    | Automatic inside a PostHog request context                   | Set the attributes yourself                                           |
+
+Use `posthog-node` if PostHog is the only place your spans go. Use OpenTelemetry if you already run it, or if you want auto-instrumentation of the libraries you call.
+
+Both routes send OTLP spans to the same endpoint, so you can start with one and switch later without losing your traces.
+
+## With `posthog-node`
+
+> **Minimum version:** `posthog-node@5.52.0` or later.
 
 <Steps>
 
-<Step title="Install OpenTelemetry packages" badge="required">
+<Step title="Install posthog-node" badge="required" titleSize="h3">
+
+<InstallNodePackageManagers />
+
+</Step>
+
+<Step title="Enable tracing" badge="required" titleSize="h3">
+
+Tracing is off until you set the `traces` option. There's no OpenTelemetry dependency to add.
+
+```javascript
+import { PostHog } from 'posthog-node'
+
+export const posthog = new PostHog('<ph_project_token>', {
+  host: '<ph_client_api_host>',
+  traces: {
+    serviceName: 'checkout-api',
+    environment: 'production',
+  },
+})
+```
+
+| Option               | Description                                                          |
+| -------------------- | -------------------------------------------------------------------- |
+| `serviceName`        | Identifies the service in the Tracing UI. Maps to `service.name`      |
+| `serviceVersion`     | Release version. Maps to `service.version`                            |
+| `environment`        | Deployment environment, e.g. `production`. Maps to `deployment.environment` |
+| `resourceAttributes` | Additional OpenTelemetry resource attributes                          |
+
+Use your **project token** (the same one you use for capturing events), not a [personal API key](/docs/api#authentication).
+
+See the [Node.js SDK docs](/docs/libraries/node#configuration) for batching and queue options.
+
+</Step>
+
+<Step title="Create spans" badge="required" titleSize="h3">
+
+`withSpan` runs a callback with a span active for its duration and ends the span for you. Spans created inside the callback nest underneath it automatically.
+
+```javascript
+await posthog.withSpan('POST /checkout', { kind: 'server' }, async (span) => {
+  span.setAttribute('plan', user.plan)
+
+  const order = await posthog.withSpan('create-order', () => createOrder(cart))
+  await posthog.withSpan('charge-card', () => stripe.charge(order))
+
+  return order
+})
+```
+
+If the callback throws or rejects, the span records the exception, its status is set to `error`, and your original error propagates unchanged.
+
+Span names should be low-cardinality operation names – `GET /users/:id`, not `GET /users/123`. Variable values belong in attributes.
+
+For work that can't wrap a callback, `startSpan` returns a span you end yourself. See the [Node.js SDK docs](/docs/libraries/node#distributed-tracing) for the full span API and for continuing a trace across services with W3C `traceparent` headers.
+
+</Step>
+
+<Step title="Link spans to people and sessions" badge="recommended" titleSize="h3">
+
+Spans created inside a PostHog request context carry `posthogDistinctId` and `sessionId` attributes, which is what makes a trace reachable from a person or a Session Replay recording.
+
+```javascript
+posthog.withContext({ distinctId: user.id, sessionId }, async () => {
+  await posthog.withSpan('POST /checkout', () => processOrder())
+})
+```
+
+If you use Express, the [PostHog middleware](/docs/libraries/node#add-request-context-to-express) sets this up for every request, and reads the `X-POSTHOG-DISTINCT-ID` and `X-POSTHOG-SESSION-ID` headers that [`tracing_headers`](/docs/libraries/js/config#tracing-headers) sends from the browser.
+
+</Step>
+
+<Step title="Flush before the process exits" badge="recommended" titleSize="h3">
+
+Queued spans are exported on an interval, so a short-lived process can exit before they're sent. Both `flush()` and `shutdown()` export spans that have already ended.
+
+```javascript
+export const handler = async () => {
+  await posthog.withSpan('handler', () => doWork())
+  await posthog.flush()
+}
+```
+
+In a serverless handler, call `flush()` rather than `shutdown()`: the container is reused across invocations, so `shutdown()` would throw away the connection pool and the flag cache. Call `shutdown()` when the process is genuinely exiting.
+
+</Step>
+
+</Steps>
+
+## With OpenTelemetry
+
+<Steps>
+
+<Step title="Install OpenTelemetry packages" badge="required" titleSize="h3">
 
 For the complete SDK reference, see the [OpenTelemetry JavaScript docs](https://opentelemetry.io/docs/languages/js/).
 
@@ -21,7 +131,7 @@ npm install @opentelemetry/api @opentelemetry/sdk-trace-node @opentelemetry/sdk-
 
 </Step>
 
-<Step title="Get your project token" badge="required">
+<Step title="Get your project token" badge="required" titleSize="h3">
 
 You'll need your PostHog project token to authenticate trace requests. This is the same token you use for capturing events with the PostHog SDK.
 
@@ -31,7 +141,7 @@ You can find your project token in [Project settings](https://app.posthog.com/se
 
 </Step>
 
-<Step title="Configure the SDK" badge="required">
+<Step title="Configure the SDK" badge="required" titleSize="h3">
 
 Set up the OpenTelemetry SDK to export spans to PostHog over OTLP HTTP.
 
@@ -72,7 +182,7 @@ OTEL_SERVICE_NAME="my-service"
 
 </Step>
 
-<Step title="Create spans" badge="required">
+<Step title="Create spans" badge="required" titleSize="h3">
 
 Wrap the operations you want to measure in spans, and attach attributes for context.
 
@@ -98,11 +208,17 @@ function chargeCustomer(customerId) {
 }
 ```
 
+To join these spans to a person or a Session Replay recording, set `posthogDistinctId` and `sessionId` attributes yourself, from the `X-POSTHOG-DISTINCT-ID` and `X-POSTHOG-SESSION-ID` headers that [`tracing_headers`](/docs/libraries/js/config#tracing-headers) sends from the browser.
+
 </Step>
 
-<Step title="Test your setup" badge="recommended">
+</Steps>
 
-Once everything is configured, confirm spans are reaching PostHog:
+<Steps>
+
+<Step checkpoint title="Test your setup" subtitle="Confirm spans are reaching PostHog">
+
+Whichever route you took:
 
 1. Run your application and trigger the instrumented code
 2. Open the PostHog Tracing interface

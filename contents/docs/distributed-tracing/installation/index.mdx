@@ -4,7 +4,9 @@ title: Install OpenTelemetry tracing
 
 import TracingInstallationPlatforms from './_snippets/installation-platforms'
 
-PostHog Tracing works with any OpenTelemetry-compatible client. You don't need any PostHog-specific packages – use standard OpenTelemetry libraries to export your spans.
+PostHog Tracing works with any OpenTelemetry-compatible client – point its OTLP trace exporter at PostHog and you're done, with no PostHog-specific packages.
+
+On Node.js, `posthog-node` can also create and export spans on its own, with no OpenTelemetry dependency. See the [Node.js guide](/docs/distributed-tracing/installation/nodejs) for both routes.
 
 ## Platforms
 
