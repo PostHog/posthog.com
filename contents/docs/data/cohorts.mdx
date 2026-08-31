@@ -304,7 +304,11 @@ For more details on activity tracking across PostHog, see the [activity logs](/d
 
 ### How often are dynamic cohorts updated?
 
-Dynamic cohorts are updated once every 24 hours.
+Dynamic cohorts recalculate on a rolling schedule, typically about once a day. A cohort also recalculates as soon as you save a change to its definition.
+
+Membership is a snapshot. An insight filtered by a dynamic cohort uses the membership from the last calculation, not from when the query runs.
+
+If you need a filter that is always current, filter on the person or event property directly instead of putting it in a cohort. Property filters are evaluated when the query runs, so they don't lag. For example, filter on the `Country code` event property rather than building a cohort of visitors in the US and filtering by that.
 
 ### Can you use a dynamic cohort as a feature flag target?
 
