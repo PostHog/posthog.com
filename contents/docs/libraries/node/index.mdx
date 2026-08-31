@@ -13,6 +13,7 @@ features:
   surveys: false
   aiObservability: true
   errorTracking: true
+  tracing: true
 ---
 
 If you're working with Node.js (versions 20+), the official `posthog-node` library is the simplest way to integrate your software with PostHog. This library uses an internal queue to make calls fast and non-blocking. It also batches requests and flushes asynchronously, making it perfect to use in any part of your web app or other server-side application that needs performance. And in addition to event capture, [feature flags](/docs/feature-flags) are supported as well.
@@ -320,7 +321,7 @@ If you're using [PostHog JS](/docs/libraries/js) on the frontend, configure [`tr
 
 Tracing records **spans** — timed units of work — so you can see where time went in a request and how work fans out across your services. Spans created inside a request context automatically carry the person and session they belong to, so a slow trace links back to the user who experienced it.
 
-Tracing is off until you set the `traces` option. No OpenTelemetry dependency is required.
+Tracing is off until you set the `traces` option. No OpenTelemetry dependency is required. For what you can do with spans once they arrive, see [Distributed tracing](/docs/distributed-tracing/start-here).
 
 ```ts file=server.ts
 import { PostHog } from 'posthog-node'
@@ -350,7 +351,7 @@ await posthog.withSpan('POST /checkout', async (span) => {
 })
 ```
 
-If the callback throws or rejects, the span records the exception, its status is set to `error`, and your original error is rethrown unchanged.
+If the callback throws or rejects, the span records the exception, its status is set to `error`, and your original error propagates unchanged.
 
 Use `startSpan` for work that can't wrap a callback. **`startSpan` does not make the span active**, so spans created afterwards are not its children unless you pass `parent` explicitly — and you must call `end()` yourself.
 
@@ -417,7 +418,7 @@ A missing or malformed `traceparent` starts a new trace rather than throwing.
 
 ### Linking traces to people and sessions
 
-Spans created inside a PostHog request context automatically carry `posthogDistinctId` and `sessionId` attributes, which is what makes a trace reachable from a person or a session replay. Use the [Express middleware](#add-request-context-to-express) or [`withContext`](#contexts):
+Spans created inside a PostHog request context automatically carry `posthogDistinctId` and `sessionId` attributes, which is what makes a trace reachable from a person or a Session Replay recording. Use the [Express middleware](#add-request-context-to-express) or [`withContext`](#contexts):
 
 ```ts
 posthog.withContext({ distinctId: user.id, sessionId }, async () => {
