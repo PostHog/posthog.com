@@ -39,11 +39,7 @@ alt: "Replay Vision scanners and their recent observations in PostHog"
 
 ## 1. Bring one question
 
-The first scanner everyone wants to build, us included, watches everything and asks for "anything interesting."
-
-It sounds sensible but then returns with a pile of observations like these: the user browsed, the user may have hesitated, the user seemed interested, the user left. These are not necessarily wrong. But they also do not answer a question anyone actually had.
-
-Our first broad scanners produced plausible mush because we had quietly asked the model to decide what mattered for us. It cannot (yet). That is still our job.
+The first scanner everyone wants to build, us included, watches everything and asks for "anything interesting." This doesn't work because models can't decide what matters to you. That's still your job.
 
 The scanners we use now are narrower. One watches sessions with rage clicks and asks whether the clicked control actually failed. One watches first sessions from high-fit signups and reconstructs the setup journey. Another watches Error Tracking investigations and records the path through stack traces, occurrences, recordings, logs, and actions.
 
@@ -151,9 +147,9 @@ alt: "the Replay Vision scanner wizard sending a user into project settings"
 
 ### Observations are a new event shape
 
-Events tell us what fired. Replay Vision shows what the person experienced around the event. This judgment becomes data too.
+Events tell us what fired. Replay Vision shows what the person experienced around the event. This judgment becomes data, too.
 
-Each succeeded observation is emitted as a queryable `$recording_observed` event. A monitor contributes a verdict. A classifier contributes a tag. Scorers and summarizers contribute their own structured outputs. The event also carries confidence and citations back to the recording.
+Each successful observation is emitted as a queryable `$recording_observed` event. A monitor contributes a verdict. A classifier contributes a tag. Scorers and summarizers contribute their own structured outputs. The event also carries confidence and citations back to the recording.
 
 It is still a model's judgment, not ground truth, so the confidence and recording citations still matter.
 
