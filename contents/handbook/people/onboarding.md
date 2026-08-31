@@ -36,6 +36,8 @@ Each new joiner will have a dedicated Slack channel just for onboarding, named `
 
 It's the best place to ask questions during your onboarding and first few days. Once you've signed your contract, we'll get you set up with everything you need to hit the ground running: your PostHog Google account and email, Slack, GitHub, a company card, access to the ops platform, and the tools specific to your role.
 
+> **A note on timing:** We invite your Github account to the PostHog organization at or close to your start date rather than earlier. Our SOC 2 controls only allow us to grant access, such as the ability to merge code, to active team members and service providers.
+
 ### Guidance for onboarding buddies
 
 -   Say hi to your new joiner in their onboarding channel and decide together where and when the in-person onboarding will happen. Request a budget through the Slack offsite app `/offsite`! For the budget and travel, see [In-person onboarding](/handbook/people/onboarding#in-person-onboarding).
