@@ -37,9 +37,9 @@ pocketGuideOrder: 2
 
 # Custom events and identify()
 
-By January, Unter could see clicks, pageviews, and where visitors came from. But there was one thing the data could not tell them reliably: _whether someone had actually signed up_.
+By January, Under could see clicks, pageviews, and where visitors came from. But there was one thing the data could not tell them reliably: _whether someone had actually signed up_.
 
-The signup button was just another click to autocapture <SeeFig n={1} />. That was useful, but Unter wanted the event to mean something specific, and to keep meaning the same thing after the page changed.
+The signup button was just another click to autocapture <SeeFig n={1} />. That was useful, but Under wanted the event to mean something specific, and to keep meaning the same thing after the page changed.
 
 So they gave the action a name: `user_signed_up`.
 
@@ -51,28 +51,28 @@ That small distinction matters. A button can move, change classes, or be replace
 
 The same call can also attach properties to the <Term name="person">person</Term>. Some <Term name="person property">properties</Term> can change later, like `tier`. Others describe something that should only be recorded once, like the campaign that originally brought them in. PostHog handles those differently with `$set` and `$set_once`.
 
-Now Unter had an event they could put in a <Term name="funnel">funnel</Term>, count over time, and still recognize after the March redesign.
+Now Under had an event they could put in a <Term name="funnel">funnel</Term>, count over time, and still recognize after the March redesign.
 
 ## When a visitor becomes a person
 
 There was another problem hiding in the signup.
 
-Before someone logged in, PostHog only knew them through anonymous activity. After signup, Unter knew which account they belonged to. The two histories needed to become one <SeeFig n={2} />.
+Before someone logged in, PostHog only knew them through anonymous activity. After signup, Under knew which account they belonged to. The two histories needed to become one <SeeFig n={2} />.
 
 That is what `identify()` was for.
 
-On successful authentication, Unter called `identify()` with the person's stable ID. PostHog could then connect the events from before login with the events that came after it.
+On successful authentication, Under called `identify()` with the person's stable ID. PostHog could then connect the events from before login with the events that came after it.
 
 The result is one timeline instead of two: the pages they visited as a stranger, followed by the signup, followed by everything they did as an account holder.
 
 ## Keep the ID the same everywhere
 
-Unter had a web app and mobile apps. A person could sign up on the website, then open the app to check a crossing <SeeFig n={3} />.
+Under had a web app and mobile apps. A person could sign up on the website, then open the app to check a crossing <SeeFig n={3} />.
 
 Both platforms sent their events to the same PostHog project. More importantly, both used the same person ID when calling `identify()`.
 
 That is what lets PostHog treat those events as belonging to one person rather than one browser and one phone.
 
-Without that shared ID, Unter would still have the events. They just would not have the person.
+Without that shared ID, Under would still have the events. They just would not have the person.
 
 </RightPage>
