@@ -214,6 +214,9 @@ You can ask for access to team/company tools by submitted a request in Slack. Fi
 
 ### Coworking
 - If there's a WeWork where you are, use it – we have a company All Access account, so default to that rather than paying for another coworking space. Ask [Kendal](https://posthog.com/community/profiles/28628) in [#team-people-and-ops](https://posthog.slack.com/archives/C017WDX3BFZ) for access.
+- We pay for _one_ place to work from, not two. Either we cover a coworking space, or we cover what you buy to work from a cafe – not both. If you have a coworking space, your own food and drink there is a personal expense.
+- Some coworking spaces bundle food and drink into a flat daily fee. Opt out of that fee if it is optional. If you cannot separate it from the day rate, ask in [#team-people-and-ops](https://posthog.slack.com/archives/C017WDX3BFZ) before you expense it.
+- This is different from a meal with colleagues or a customer, which we do cover – see [Travel](#travel).
 
 ### Travel
 - We travel in economy by default and do not pay for business class
