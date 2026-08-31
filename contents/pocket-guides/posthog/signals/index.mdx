@@ -1,5 +1,5 @@
 ---
-title: How Under found the bug
+title: How Unter found the bug
 shortTitle: The report
 subtitle: Everything needed to find the bug had existed for eleven days. What changed was that something finally went looking.
 pocketGuideOrder: 8
@@ -29,7 +29,7 @@ pocketGuideOrder: 8
 
 <RightPage>
 
-# How Under found the bug
+# How Unter found the bug
 
 The evidence had been there for eleven days.
 
@@ -55,7 +55,7 @@ Instead of sending four separate alerts, it grouped them into one problem: cover
 
 It also found the cause. The API key had expired 366 days earlier.
 
-The useful part was not that another tool had collected another event. Under already had those events. The useful part was that something compared them.
+The useful part was not that another tool had collected another event. Unter already had those events. The useful part was that something compared them.
 
 ## Then the report became a fix
 
@@ -63,7 +63,7 @@ The report opened a pull request to rotate the key, add a calendar reminder, and
 
 The agent did not need a new event to tell it what to inspect. The evidence was already there. It used the error, the logs, and the behaviour around the failed widget to work backwards from symptom to cause.
 
-Under still had to review and merge the change.
+Unter still had to review and merge the change.
 
 After that, the same system measured whether the fix worked <SeeFig n={3} />. The result went back into the data as another signal.
 
@@ -79,7 +79,7 @@ That was the point.
 
 A scout that reports something every day becomes another inbox to ignore. A scout that stays quiet until several pieces of evidence line up has a better chance of being useful when it speaks.
 
-It will miss things. Under missed a slow memory leak during the same period. Nobody found that one until June.
+It will miss things. Unter missed a slow memory leak during the same period. Nobody found that one until June.
 
 Automation did not replace attention.
 

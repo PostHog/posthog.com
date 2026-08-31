@@ -45,7 +45,7 @@ isPrimer: true
 
 # Install and autocapture
 
-On January 12th, someone at Under pasted eleven lines of JavaScript into a template and deployed it. Nobody thought much about it. Two months later, those eleven lines would give an agent enough information to find a broken page at 4AM.
+On January 12th, someone at Unter pasted eleven lines of JavaScript into a template and deployed it. Nobody thought much about it. Two months later, those eleven lines would give an agent enough information to find a broken page at 4AM.
 
 First, there was the site itself <SeeFig n={1} />.
 
@@ -57,15 +57,15 @@ The first useful thing about the installation was that it did not need much more
 
 Pageviews started arriving. Page leaves started arriving. Clicks could be captured too. The same snippet also supplied the information around a visit: where someone came from, which campaign brought them in, what device they were using, and where they were in the world.
 
-That matters because none of this required Under to predict what would be useful beforehand.
+That matters because none of this required Unter to predict what would be useful beforehand.
 
 They had installed the library. The data started accumulating.
 
 ## Capturing clicks
 
-Most of what Under collected in January, nobody had specifically asked for <SeeFig n={3} />.
+Most of what Unter collected in January, nobody had specifically asked for <SeeFig n={3} />.
 
-A visitor clicked "Read the announcement". <Term name="autocapture">Autocapture</Term> recorded the interaction because it happened on the page. Under did not need to create a tracking call for that particular link first.
+A visitor clicked "Read the announcement". <Term name="autocapture">Autocapture</Term> recorded the interaction because it happened on the page. Unter did not need to create a tracking call for that particular link first.
 
 This is the useful part of autocapture: _it gives you a record of interactions before you know which ones will matter_.
 
@@ -75,7 +75,7 @@ That distinction becomes important once you start turning observations into prod
 
 ## The traffic is already there
 
-The same installation also gave Under a view of where visitors came from.
+The same installation also gave Unter a view of where visitors came from.
 
 The links in the funding announcement carried UTM parameters. When someone arrived through one of them, those parameters came in with the visit and could be used by web analytics to attribute the traffic <SeeFig n={3} />.
 
@@ -87,7 +87,7 @@ The link carried the campaign information. The pageview carried it into PostHog.
 
 There is a limit to letting the page tell you what happened.
 
-In April, Under renamed an event. The records from before the rename did not change with it, so comparisons across the change stopped lining up cleanly.
+In April, Unter renamed an event. The records from before the rename did not change with it, so comparisons across the change stopped lining up cleanly.
 
 That is one reason autocapture and deliberately named events serve different purposes. Autocapture is good at recording what happened on the page. When you need a stable description of a product action, you usually need to define that action yourself.
 
@@ -95,7 +95,7 @@ That is one reason autocapture and deliberately named events serve different pur
 
 There was one more part of the installation to get right: what happens when someone does not want to be captured <SeeFig n={4} />.
 
-The SDK has calls for turning capture off and turning it back on. Under put the choice behind the privacy link in the footer, and the setting persists across reloads.
+The SDK has calls for turning capture off and turning it back on. Unter put the choice behind the privacy link in the footer, and the setting persists across reloads.
 
 So the installation was not just a way to start collecting data. It also included a way to stop.
 
