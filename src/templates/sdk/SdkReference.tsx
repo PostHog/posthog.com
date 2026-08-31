@@ -61,6 +61,8 @@ export interface SdkReferenceData {
     info: {
         description: string
         id: string
+        // Always the bare referenceId (`posthog-python`), even on versioned pages. Not the page's
+        // own slug — use PageContext.slugPrefix for anything that builds a URL.
         slugPrefix: string
         specUrl: string
         title: string
@@ -85,7 +87,7 @@ export interface PageContext {
     fullReference: SdkReferenceData
     types: string[]
     // Slug segment type cross-links resolve under, owned by gatsby/createPages.ts (latest →
-    // referenceId, versioned → id). Not `info.slugPrefix`, which is a spec field, unused here.
+    // referenceId, versioned → id). Passed in so the template never re-derives page routing.
     slugPrefix: string
 }
 
@@ -157,6 +159,9 @@ export default function SdkReference({ pageContext, data }: { pageContext: PageC
     const canonicalPath = `/docs/references/${fullReference.referenceId}`
     const hasConcreteVersionLabel = hasConcreteVersion(fullReference.info.version)
 
+    // Every sourced version, not just the ones that got pages. Minimal preview builds create the
+    // `latest` pages only (createSdkReferencePages in gatsby/createPages.ts), so picking any other
+    // version 404s in a preview. The full build emits every version.
     const sdkVersions = data.allSdkReferences.nodes
 
     const currentReferenceId = fullReference.referenceId

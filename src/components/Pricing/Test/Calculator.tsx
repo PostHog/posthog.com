@@ -1,10 +1,15 @@
 import React from 'react'
-import { section, SectionLayout, SectionHeader, SectionColumns, SectionMainCol, SectionSidebar } from './Sections'
+import { SectionLayout, SectionHeader } from './Sections'
 import Tabbed from '../PricingCalculator/Tabbed'
 import Link from 'components/Link'
 import Tooltip from 'components/Tooltip'
 import { graphql, useStaticQuery } from 'gatsby'
 import { IconCode, IconHandMoney, IconRocket } from '@posthog/icons'
+import AgentEstimateLink, {
+    AI_PRICING_EXPERIMENT_VARIANTS,
+    AI_PRICING_FLAG,
+} from 'components/Pricing/AgentEstimateLink'
+import { RenderInClient } from 'components/RenderInClient'
 
 // The sidebar sits inside a `not-prose` section, so prose's link styling doesn't reach it and
 // `Link` ships no styles of its own — inline links read as plain text without this. Matches the
@@ -227,6 +232,24 @@ export const Calculator = ({ hideHeader = false, id = 'calculator' }: Calculator
                                 </Link>{' '}
                                 to help!
                             </SidebarListItem>
+                            <RenderInClient
+                                render={() => {
+                                    const variant = window.posthog?.getFeatureFlag?.(AI_PRICING_FLAG)
+                                    return variant && variant !== AI_PRICING_EXPERIMENT_VARIANTS.control ? (
+                                        <SidebarListItem>
+                                            Coming from another tool?{' '}
+                                            <AgentEstimateLink
+                                                label="Create an estimate"
+                                                source="pricing-page-estimating-usage"
+                                                className={sidebarLinkClasses}
+                                            />{' '}
+                                            using your real usage there.
+                                        </SidebarListItem>
+                                    ) : (
+                                        <></>
+                                    )
+                                }}
+                            />
                         </SidebarList>
                     </div>
                 </div>

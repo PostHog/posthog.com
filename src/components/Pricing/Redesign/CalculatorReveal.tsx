@@ -4,6 +4,11 @@ import { motion, useReducedMotion } from 'framer-motion'
 import { Calculator } from 'components/Pricing/Test/Calculator'
 import { scrollToElement } from 'components/ScrollToElement'
 import usePostHog from 'hooks/usePostHog'
+import { RenderInClient } from 'components/RenderInClient'
+import AgentEstimateLink, {
+    AI_PRICING_EXPERIMENT_VARIANTS,
+    AI_PRICING_FLAG,
+} from 'components/Pricing/AgentEstimateLink'
 
 const PANEL_ID = 'calculator-panel'
 
@@ -70,6 +75,27 @@ export default function CalculatorReveal(): JSX.Element {
                 >
                     {open ? 'Hide the calculator' : "Calculate what you'd pay past it"}
                 </button>
+                <RenderInClient
+                    render={() => {
+                        return window.posthog?.getFeatureFlag?.(AI_PRICING_FLAG) ===
+                            AI_PRICING_EXPERIMENT_VARIANTS.outside_calculator ? (
+                            <>
+                                {' or '}
+                                <AgentEstimateLink
+                                    source={AI_PRICING_EXPERIMENT_VARIANTS.outside_calculator}
+                                    label="get AI to do it for you"
+                                    popoverText={
+                                        open
+                                            ? `It's probably easier for you to close the calculator yourself... that said, AI can certainly help you estimate your bill. Try it out:`
+                                            : undefined
+                                    }
+                                />
+                            </>
+                        ) : (
+                            <></>
+                        )
+                    }}
+                />
             </p>
 
             <motion.div
