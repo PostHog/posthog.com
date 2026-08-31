@@ -314,6 +314,148 @@ Properties and `distinctId` passed directly to `capture` take precedence over re
 
 If you're using [PostHog JS](/docs/libraries/js) on the frontend, configure [`tracing_headers`](/docs/libraries/js/config#tracing-headers) for your Express backend hostname so browser requests include `X-POSTHOG-SESSION-ID` and `X-POSTHOG-DISTINCT-ID`, which the Express middleware reads automatically.
 
+## Distributed tracing
+
+> Requires `posthog-node` version >= 5.52.0.
+
+Tracing records **spans** — timed units of work — so you can see where time went in a request and how work fans out across your services. Spans created inside a request context automatically carry the person and session they belong to, so a slow trace links back to the user who experienced it.
+
+Tracing is off until you set the `traces` option. No OpenTelemetry dependency is required.
+
+```ts file=server.ts
+import { PostHog } from 'posthog-node'
+
+const posthog = new PostHog('<ph_project_token>', {
+  host: '<ph_client_api_host>',
+  traces: {
+    serviceName: 'checkout-api',
+  },
+})
+```
+
+Set `serviceName` — PostHog groups operations by service and span name.
+
+### Creating spans
+
+`withSpan` runs a callback with a span active for its duration and ends the span for you: at return for a synchronous callback, when the promise settles for an async one. Spans created inside the callback nest underneath it automatically.
+
+```ts
+await posthog.withSpan('POST /checkout', async (span) => {
+  span.setAttribute('plan', user.plan)
+
+  const order = await posthog.withSpan('create-order', () => createOrder(cart))
+  await posthog.withSpan('charge-card', () => stripe.charge(order))
+
+  return order
+})
+```
+
+If the callback throws or rejects, the span records the exception, its status is set to `error`, and your original error is rethrown unchanged.
+
+Use `startSpan` for work that can't wrap a callback. **`startSpan` does not make the span active**, so spans created afterwards are not its children unless you pass `parent` explicitly — and you must call `end()` yourself.
+
+```ts
+const span = posthog.startSpan('background-sync', { attributes: { queue: 'emails' } })
+
+// Explicitly parent a child to a span that isn't active.
+const child = posthog.startSpan('send-batch', { parent: span })
+child.end()
+
+span.end()
+```
+
+`getActiveSpan()` returns the span currently active on this execution path, or `null` outside any `withSpan` callback.
+
+### Span names and attributes
+
+Span names should be low-cardinality operation names — `GET /users/:id`, not `GET /users/123`. Variable values belong in attributes, which accept strings, numbers, booleans, bigints, and arrays of those.
+
+```ts
+await posthog.withSpan('GET /users/:id', { kind: 'server' }, async (span) => {
+  span.setAttributes({ 'user.id': id, 'db.rows': rows.length })
+  span.addEvent('cache-miss')
+
+  if (rows.length === 0) {
+    span.setStatus('error', 'user not found')
+  }
+})
+```
+
+| Method | Description |
+|---|---|
+| `setAttribute(key, value)` | Set a single attribute |
+| `setAttributes(attributes)` | Merge several attributes at once |
+| `addEvent(name, attributes?, timestamp?)` | Record a timestamped event within the span |
+| `setStatus(status, message?)` | Set the outcome: `'ok'` or `'error'` |
+| `recordException(error)` | Attach an exception event and set status to `error` |
+| `updateName(name)` | Replace the span name, e.g. once a route template resolves |
+| `traceparent()` | This span's W3C `traceparent` header value |
+| `end(endTime?)` | End the span and queue it for export |
+
+Set `kind` to describe what the work is: `'internal'` (default), `'server'` for an inbound request, `'client'` for an outbound call, `'producer'` or `'consumer'` for queue work.
+
+### Tracing across services
+
+Spans use [W3C Trace Context](https://www.w3.org/TR/trace-context/), so a trace can span several services. Pass an inbound `traceparent` header as `parent` to continue a trace another service started, and send `span.traceparent()` onward when you call out.
+
+```ts file=server.ts
+app.post('/checkout', async (req, res) => {
+  await posthog.withSpan('POST /checkout', { kind: 'server', parent: req.get('traceparent') }, async (span) => {
+    const traceparent = span.traceparent()
+
+    await fetch('https://payments.internal/charge', {
+      method: 'POST',
+      headers: traceparent ? { traceparent } : {},
+    })
+
+    res.json({ status: 'ok' })
+  })
+})
+```
+
+A missing or malformed `traceparent` starts a new trace rather than throwing.
+
+### Linking traces to people and sessions
+
+Spans created inside a PostHog request context automatically carry `posthogDistinctId` and `sessionId` attributes, which is what makes a trace reachable from a person or a session replay. Use the [Express middleware](#add-request-context-to-express) or [`withContext`](#contexts):
+
+```ts
+posthog.withContext({ distinctId: user.id, sessionId }, async () => {
+  await posthog.withSpan('POST /checkout', () => processOrder())
+})
+```
+
+Spans created outside a request context simply omit those attributes.
+
+### Configuration
+
+| Option | Default | Description |
+|---|---|---|
+| `serviceName` | – | Name of the service producing spans. Set this |
+| `serviceVersion` | – | Version of the service |
+| `environment` | – | Deployment environment, e.g. `production` |
+| `resourceAttributes` | – | Extra OTLP resource attributes. Takes precedence over the fields above |
+| `flushIntervalMs` | `5000` | How often queued spans are exported |
+| `maxExportBatchSize` | `512` | Maximum spans per request |
+| `maxQueueSize` | `2048` | Maximum spans held in memory. Spans beyond this are dropped |
+
+### Shutdown and short-lived processes
+
+`shutdown()` exports spans that have already ended. Spans still open at that point are discarded, so end your spans before shutting down — `withSpan` does this for you.
+
+```ts
+export const handler = async () => {
+  await posthog.withSpan('handler', () => doWork())
+  await posthog.shutdown()
+}
+```
+
+<CalloutBox icon="IconInfo" title="Edge runtimes">
+
+On edge runtimes, spans nest across `await` only when you pass `parent` explicitly. The Node runtime tracks the active span with `AsyncLocalStorage`; the edge build cannot, so a span created after an `await` starts a new trace unless it is given a parent.
+
+</CalloutBox>
+
 ## Feature flags
 
 import FeatureFlagsLibsIntro from "../_snippets/feature-flags-libs-intro.mdx"
