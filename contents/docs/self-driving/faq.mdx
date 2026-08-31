@@ -43,7 +43,7 @@ Nothing reaches production without a human clicking merge.
 
 ## Do you use this on PostHog itself?
 
-Yes, heavily. A troop of 35 scouts watches the PostHog app, and reports about posthog.com become pull requests on [the public repo that builds this site](https://github.com/PostHog/posthog.com/pulls), where you can read them. We're the first customer of every part of the loop, and the first to feel it when something's off.
+Yes, heavily. A troop of more than 90 scouts – the canonical fleet plus dozens our own teams have written – watches the PostHog app, and reports about posthog.com become pull requests on [the public repo that builds this site](https://github.com/PostHog/posthog.com/pulls), where you can read them. We're the first customer of every part of the loop, and the first to feel it when something's off.
 
 ## What happens when it gets something wrong?
 
@@ -62,6 +62,22 @@ The scouts themselves aren't a black box either: every canonical scout is a read
 ## How is this different from alerts and monitoring?
 
 Monitoring tells you something broke, then the work begins: triage the alert, reproduce the bug, find the owner, write the fix. Self-driving does that pipeline for you. A signal is investigated, grouped with related evidence, root-caused against your code, and handed to you as a reviewed-and-ready pull request. The [anatomy of a pull request](/docs/self-driving/anatomy-of-a-pr) walks through the difference on a single bug.
+
+## Do I need scouts or signal sources?
+
+Usually both, and they're not competing – they make a trade against each other.
+
+A [signal source](/docs/self-driving/inbox/sources) is deterministic and exhaustive: turn one on and every qualifying item in that stream is processed, continuously, with no bar to clear and nothing skipped because an agent judged it uninteresting. A [scout](/docs/self-driving/scouts) trades some of that for judgement: it runs on a schedule, explores rather than following a fixed stream, and decides what's worth surfacing, so it can weigh and rank and stay quiet – but it's selective by design rather than exhaustive.
+
+Use a source when the stream is well-defined and missing an item would be unacceptable. Use a scout when everything in the stream is technically "something" and you need judgement applied, when what you care about spans several surfaces, or when "worth knowing" is a matter of opinion only your team can define. They stack, too: a scout can sit on top of an existing detector, bundling related items and flagging what nobody actioned, while the source keeps its guaranteed coverage.
+
+[Sources or scouts?](/docs/self-driving/signals#sources-or-scouts) has the side-by-side breakdown.
+
+## Will a scout miss things?
+
+By design, yes – that's the difference between a scout and a source, and it's the point rather than a bug. A scout holds a bar, so most runs close out having found nothing worth your attention, and it deliberately stays quiet on a quiet day. If it talked every day you'd stop reading it.
+
+If you need guaranteed handling of a specific stream, use a [signal source](/docs/self-driving/inbox/sources) for that stream, and let scouts cover the questions nobody is holding. If a scout is holding back things you *do* want, you don't have to edit it: dismiss a report with a note explaining why, or leave a [scout note](/docs/self-driving/scouts#steering-a-scout-with-a-note) in plain English, and later runs read both.
 
 ## How do I control what it watches, and what it costs?
 

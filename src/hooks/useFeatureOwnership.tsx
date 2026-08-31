@@ -32,6 +32,7 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     'activity-log': {
         feature: 'Activity log',
         owner: ['platform-features'],
+        label: 'feature/activity-logs',
     },
     'activity-view': {
         feature: 'Activity view',
@@ -51,6 +52,16 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     'ai-playground': {
         feature: 'AI playground',
         owner: ['ai-gateway'],
+        label: false,
+    },
+    'ai-plugin': {
+        feature: 'AI plugin (Claude Code, Codex, Cursor, Gemini CLI)',
+        owner: ['self-driving'],
+        notes: (
+            <>
+                <TeamMember name="Georgiy Tarasov" /> is the point owner.
+            </>
+        ),
         label: false,
     },
     alerts: {
@@ -74,6 +85,7 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     authentication: {
         feature: 'Authentication',
         owner: ['platform-features'],
+        label: 'feature/auth',
     },
     autocapture: {
         feature: 'Autocapture',
@@ -98,7 +110,13 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     },
     cli: {
         feature: 'CLI',
-        owner: ['error-tracking'],
+        owner: ['error-tracking', 'self-driving'],
+        notes: (
+            <>
+                <TeamMember name="Chris Volzer" /> is the point owner for agentic use cases. Error tracking owns the
+                symbolication/upload pipeline and symbol/sourcemap upload internals.
+            </>
+        ),
     },
     'client-libraries': {
         feature: 'Client libraries',
@@ -117,7 +135,7 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     },
     comments: {
         feature: 'Comments/Discussions',
-        owner: ['platform-features'],
+        owner: ['conversations'],
         label: 'feature/comments',
     },
     'csp-tracking': {
@@ -168,10 +186,16 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     'data-warehouse': {
         feature: 'Managed warehouse',
         owner: ['managed-warehouse'],
+        label: 'feature/data-warehouse',
     },
     'embedding-worker': {
         feature: 'Embedding worker',
         owner: ['self-driving'],
+        notes: (
+            <>
+                <TeamMember name="Oliver Browne" /> is the point owner.
+            </>
+        ),
         label: false,
     },
     'early-access-features': {
@@ -242,6 +266,11 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
         owner: ['clickhouse'],
         label: false,
     },
+    loops: {
+        feature: 'Loops',
+        owner: ['posthog-desktop'],
+        label: false,
+    },
     'managed-migrations': {
         feature: 'Managed migrations',
         owner: ['ingestion'],
@@ -258,7 +287,22 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     'mcp-server': {
         feature: 'MCP server',
         owner: ['self-driving'],
+        notes: (
+            <>
+                <TeamMember name="Georgiy Tarasov" /> is the point owner.
+            </>
+        ),
         label: 'feature/mcp',
+    },
+    'mcp-store': {
+        feature: 'MCP store',
+        owner: ['self-driving'],
+        notes: (
+            <>
+                <TeamMember name="Chris Volzer" /> is the point owner.
+            </>
+        ),
+        label: false,
     },
     notebooks: {
         feature: 'Notebooks',
@@ -330,6 +374,11 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     'posthog-ai': {
         feature: 'PostHog AI platform',
         owner: ['self-driving'],
+        notes: (
+            <>
+                <TeamMember name="Georgiy Tarasov" /> is the point owner.
+            </>
+        ),
         label: 'feature/posthog-ai',
     },
     'posthog-code': {
@@ -448,7 +497,7 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
         label: 'feature/session-summaries',
     },
     signals: {
-        feature: 'Signals',
+        feature: 'Inbox',
         owner: ['self-driving'],
         label: 'feature/signals',
     },
@@ -460,6 +509,11 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     'slack-app': {
         feature: 'Slack app',
         owner: ['self-driving'],
+        notes: (
+            <>
+                <TeamMember name="Vojta Bartoš" /> is the point owner.
+            </>
+        ),
         label: 'feature/slack-app',
     },
     settings: {

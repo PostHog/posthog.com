@@ -37,26 +37,7 @@ import { ToggleGroup } from 'components/RadixUI/ToggleGroup'
 import FloatingModal from 'components/FloatingModal'
 import { MOTION_LAYER, WINDOW_BG } from '../../constants/frostedSurfaces'
 
-const recursiveSearch = (array: MenuItem[] | undefined, value: string): boolean => {
-    if (!array) return false
-
-    for (let i = 0; i < array.length; i++) {
-        const element = array[i]
-
-        if (element.url?.split('?')[0] === value) {
-            return true
-        }
-
-        if (element.children) {
-            const found = recursiveSearch(element.children, value)
-            if (found) {
-                return true
-            }
-        }
-    }
-
-    return false
-}
+import { containsURL, getActiveMenuSection } from '../../navs/activeMenu'
 
 const snapThreshold = -50
 
@@ -232,7 +213,7 @@ export default function AppWindow({ item, chrome = true }: { item: AppWindowType
     const parent =
         (appMenu as Menu).find(({ children, url }) => {
             const currentURL = item?.path
-            return currentURL === url?.split('?')[0] || recursiveSearch(children, currentURL)
+            return currentURL === url?.split('?')[0] || containsURL(children, currentURL)
         }) ||
         appMenu.find(({ url }) => url === `/${item?.path?.split('/')[1]}`) ||
         appMenu.find(({ name }) => name === 'Docs')
@@ -240,10 +221,7 @@ export default function AppWindow({ item, chrome = true }: { item: AppWindowType
     const internalMenu = parent?.children || []
 
     const getActiveInternalMenu = useCallback(() => {
-        return internalMenu?.find((menuItem: MenuItem) => {
-            const currentURL = item?.path
-            return currentURL === menuItem.url?.split('?')[0] || recursiveSearch(menuItem.children, currentURL)
-        })
+        return getActiveMenuSection<MenuItem>(internalMenu, item?.path)
     }, [internalMenu, item])
 
     const [activeInternalMenu, setActiveInternalMenu] = useState<MenuItem | undefined>(getActiveInternalMenu())
@@ -737,7 +715,10 @@ export default function AppWindow({ item, chrome = true }: { item: AppWindowType
                             : ''
                     } ${
                         item.appSettings?.size?.fixed
-                            ? '!absolute top-2 left-1/2 -translate-x-1/2 z-50 w-[calc(100%-1rem)]'
+                            ? // The max height keeps auto-height modals inside the desktop area on short
+                              // screens — without it they grow past the bottom edge and get clipped by the
+                              // desktop's `overflow-clip` with nothing left to scroll.
+                              '!absolute top-2 left-1/2 -translate-x-1/2 z-50 w-[calc(100%-1rem)] max-h-[calc(100%-1rem)]'
                             : item.windowed
                             ? 'h-[95%] w-[80%]'
                             : 'size-full'
@@ -832,7 +813,14 @@ export default function AppWindow({ item, chrome = true }: { item: AppWindowType
                         ref={contentRef}
                         className={`size-full flex-grow ${
                             chrome
-                                ? `overflow-hidden rounded-lg ${hasToolbar ? 'rounded-t-none' : ''} ${
+                                ? `${
+                                      // A modal's auto height makes percentage heights inside it resolve to
+                                      // `auto`, so its own ScrollAreas never overflow and can't scroll. Scroll
+                                      // the content here instead of clipping whatever doesn't fit.
+                                      item.appSettings?.size?.fixed
+                                          ? 'overflow-x-hidden overflow-y-auto'
+                                          : 'overflow-clip'
+                                  } rounded-lg ${hasToolbar ? 'rounded-t-none' : ''} ${
                                       item.expanded
                                           ? 'rounded-tr-none rounded-tl-none'
                                           : item.snapped === 'left'

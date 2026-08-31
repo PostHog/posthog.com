@@ -60,7 +60,7 @@ Here's how the most popular mobile app A/B testing tools compare:
 
 ### What is PostHog?
 
-[PostHog](/) (that's us!) is an all-in-one developer platform built to help engineers create better products. It includes [experimentation](/experiments) and a whole bunch more, such as [product analytics](/product-analytics), [session replays](/session-replay), [feature flags](/feature-flags), [surveys](/surveys), [error tracking](/error-tracking), [LLM observability](/llm-analytics), and an [AI assistant](/ai).
+[PostHog](/) (that's us!) is an all-in-one developer platform built to help engineers create better products. It includes [experimentation](/experiments) and a whole bunch more, such as [product analytics](/product-analytics), [session replays](/session-replay), [feature flags](/feature-flags), [surveys](/surveys), [error tracking](/error-tracking), [LLM observability](/ai-observability), and an [AI assistant](/ai).
 
 Because everything lives in a single platform, you can launch an experiment, deploy it behind a feature flag, see how it impacts funnels or retention, and watch session replays of how users in each variant actually behave – without stitching together separate tools or juggling data exports.
 
@@ -414,6 +414,19 @@ It's completely free to get started – no credit card required. Our [setup wiza
 <WizardCTA />
 
 ## FAQ
+
+<details>
+<summary>PostHog says it makes your product "self-driving" – what does that mean?</summary>
+
+It means PostHog digs through your product data, finds what's worth fixing, and has agents do the work.
+
+It starts with context. A full suite of developer tools – [AI Observability](/ai-observability), [Product Analytics](/product-analytics), [Session Replay](/session-replay), [Feature Flags](/feature-flags), [Experiments](/experiments), [Error Tracking](/error-tracking), [Logs](/logs), and more – captures everything happening in your product, and a [Context Warehouse](/blog/what-is-a-context-warehouse) unifies it into one source agents can read across.
+
+From there, [Scouts](/blog/what-is-a-scout) read across all of it and sort what's worth knowing from what's just noise. What clears the bar becomes a report in your inbox: an agent picks it up, roots out the cause, and opens a PR. You review and merge.
+
+You can steer it from [Slack](/slack), the [web app](/ai), the [desktop app](/desktop), or your own editor via [the MCP](/mcp) or [CLI](/docs/cli).
+
+</details>
 
 <details>
   <summary>What is mobile app A/B testing?</summary>

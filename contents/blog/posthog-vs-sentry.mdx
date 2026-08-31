@@ -20,7 +20,7 @@ PostHog and [Sentry](/blog/best-sentry-alternatives) are multi-product platforms
 
 1. **Sentry** is an application monitoring tool with error and performance monitoring, session replay, code coverage, and more. It's built for engineers and devops teams.
 
-2. **PostHog** is an all-in-one platform for building successful products. On top of [error tracking](/error-tracking), it includes [product analytics](/product-analytics), [experiments](/experiments), [session replays](/session-replay), [feature flags](/experiments), [surveys](/surveys), [LLM observability](/llm-analytics), an [AI assistant](/ai), and more. It's built for engineers and product teams.
+2. **PostHog** is an all-in-one platform for building successful products. On top of [error tracking](/error-tracking), it includes [product analytics](/product-analytics), [experiments](/experiments), [session replays](/session-replay), [feature flags](/experiments), [surveys](/surveys), [LLM observability](/ai-observability), an [AI assistant](/ai), and more. It's built for engineers and product teams.
 
 ## How is PostHog different?
 
@@ -104,7 +104,7 @@ The core of PostHog and Sentry are different. Sentry focuses on error and perfor
 
 ### Error and performance monitoring
 
-Error and performance monitoring is the main focus of Sentry. PostHog has a full error tracking product as well as [network performance recording](/docs/session-replay/network-recording) and [distributed tracing](/docs/distributed-tracing) (in alpha), though Sentry's tracing and monitoring features are more mature.
+Error and performance monitoring is the main focus of Sentry. PostHog has a full error tracking product as well as [network performance recording](/docs/session-replay/network-recording), [distributed tracing](/traces) (in beta), and [metrics](/docs/metrics) (in alpha), though Sentry's tracing and monitoring features are more mature.
 
 <p>
 <ProductComparisonTable
@@ -140,7 +140,7 @@ Replays enable you to watch how users experience your app, diagnose issues, impr
         'session_replay.privacy.privacy_masking',
         'session_replay.analysis.console_logs',
         'session_replay.features.canvas_recording',
-        { label: 'Free allowance', description: 'Free recordings per month', values: ['5,000', '50'] },
+        { label: 'Free allowance', description: 'Free recordings per month', values: ['5,000 web + 2,500 mobile', '50'] },
         { label: '50k replays cost', description: 'Cost per month of 50,000 replays', values: ['$173', '$172'] },
         { label: '100k replays cost', description: 'Cost per month of 100,000 replays', values: ['$273', '$314'] },
     ]}
@@ -256,7 +256,7 @@ Choosing the right error tracking tool depends on what problem you're solving. H
 - **Sentry** – More mature crash symbolication, native SDK support, and longer track record with complex mobile debugging.
 
 **For privacy-conscious and regulated organizations**
-- Both are SOC 2 certified and GDPR-ready with EU data residency options. **PostHog** is HIPAA-ready and offers raw data access via its [data warehouse](/data-stack). **Sentry** provides BAA agreements and enterprise compliance packages.
+- Both are SOC 2 certified and GDPR-ready with EU data residency options. **PostHog** is HIPAA-ready and offers raw data access via its [data warehouse](/context-warehouse). **Sentry** provides BAA agreements and enterprise compliance packages.
 
 **For early-stage startups**
 - **PostHog** – A single platform that scales from landing pages to product analytics without rebuilding your stack as you grow. The generous free tier means you won't outgrow it quickly. [Startups can also qualify for free credits](/startups). For all the details about how much PostHog might cost, see [our pricing page](/pricing).
@@ -265,7 +265,7 @@ Choosing the right error tracking tool depends on what problem you're solving. H
 | --------------------------------- | ------------------------ |
 | **Error tracking**                | 100k errors              |
 | **Product analytics**             | 1 million events         |
-| **Session replay**                | 5,000 recordings         |
+| **Session replay**                | 5,000 web + 2,500 mobile recordings |
 | **Surveys**                       | 1500 responses           |
 | **LLM observability**             | 100k events              |
 | **Feature flags and A/B testing** | 1 million API requests   |
@@ -274,6 +274,19 @@ Choosing the right error tracking tool depends on what problem you're solving. H
 <WizardCTA />
 
 ## Frequently asked questions
+
+<details>
+<summary>PostHog says it makes your product "self-driving" – what does that mean?</summary>
+
+It means PostHog digs through your product data, finds what's worth fixing, and has agents do the work.
+
+It starts with context. A full suite of developer tools – [AI Observability](/ai-observability), [Product Analytics](/product-analytics), [Session Replay](/session-replay), [Feature Flags](/feature-flags), [Experiments](/experiments), [Error Tracking](/error-tracking), [Logs](/logs), and more – captures everything happening in your product, and a [Context Warehouse](/blog/what-is-a-context-warehouse) unifies it into one source agents can read across.
+
+From there, [Scouts](/blog/what-is-a-scout) read across all of it and sort what's worth knowing from what's just noise. What clears the bar becomes a report in your inbox: an agent picks it up, roots out the cause, and opens a PR. You review and merge.
+
+You can steer it from [Slack](/slack), the [web app](/ai), the [desktop app](/desktop), or your own editor via [the MCP](/mcp) or [CLI](/docs/cli).
+
+</details>
 
 <details>
   <summary>What's the difference between PostHog and Sentry?</summary>
@@ -378,7 +391,7 @@ Yes. **PostHog** (MIT) and **GlitchTip** (MIT) offer open-source editions. **Sen
 
 **Error tracking** focuses on catching and diagnosing bugs, crashes, and exceptions. **APM (Application Performance Monitoring)** measures response times, throughput, and resource usage to identify slowdowns and bottlenecks. 
 
-Many tools like **Sentry** offer both, while **PostHog** combines error tracking with product analytics instead of traditional APM.
+Many tools like **Sentry** offer both. **PostHog** has both too – error tracking next to [distributed tracing](/traces) (beta) and [metrics](/docs/metrics) (alpha) – and adds the product analytics context that shows you who the slowdown affected.
 
 </details>
 

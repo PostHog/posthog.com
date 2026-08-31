@@ -35,7 +35,7 @@ If you've outgrown it or just want to compare your options, here are the best al
 
 ### What is PostHog?
 
-[PostHog](/) (that's us 👋) is an all-in-one developer platform combining [web](/web-analytics) and [product analytics](/product-analytics), [session replay](/session-replay), [experiments](/experiments), [feature flags](/feature-flags), [error tracking](/error-tracking), [LLM observability](/llm-analytics), [user surveys](/user-surveys), and more into one product. 
+[PostHog](/) (that's us 👋) is an all-in-one developer platform combining [web](/web-analytics) and [product analytics](/product-analytics), [session replay](/session-replay), [experiments](/experiments), [feature flags](/feature-flags), [error tracking](/error-tracking), [LLM observability](/ai-observability), [user surveys](/user-surveys), and more into one product. 
 
 This means it's not only an alternative to [Matomo](/blog/posthog-vs-matomo) but also tools like [Mixpanel](/blog/posthog-vs-mixpanel), [Amplitude](/blog/posthog-vs-amplitude), [Sentry](/blog/posthog-vs-sentry), and [LaunchDarkly](/blog/posthog-vs-launchdarkly).
 
@@ -86,7 +86,7 @@ Another big difference is pricing. Matomo's session replay, heatmaps, and A/B te
 - PostHog is entirely usage-based with a generous free tier; Matomo Cloud is subscription-based and On-Premise requires paid plugins for most advanced features.
 - PostHog has an official [MCP server](/docs/model-context-protocol) for AI coding tools; Matomo's MCP options are third party community projects, not officially maintained by Matomo. 
 - PostHog is HIPAA-ready on Cloud; Matomo Cloud cannot be made HIPAA compliant, just the self-hosted On-Premise version can.
-- PostHog includes a built-in [data warehouse](/data-stack) for importing and querying data from sources like Stripe, HubSpot, and S3 alongside your analytics. Matomo can export to BigQuery but has no warehouse import or unified query layer.
+- PostHog includes a built-in [data warehouse](/context-warehouse) for importing and querying data from sources like Stripe, HubSpot, and S3 alongside your analytics. Matomo can export to BigQuery but has no warehouse import or unified query layer.
 
 </details>
  
@@ -516,7 +516,7 @@ Amplitude is a product analytics tool; Matomo is a web analytics tool. They serv
 - Amplitude has an AI insight builder for natural language queries and predictive analytics; Matomo has no equivalent AI features.
 - Matomo has strong ecommerce and CMS integrations; Amplitude focuses on app and product behavior.
 - Amplitude offers native in-app guides and surveys; Matomo has no equivalent.
-- Amplitude charges per Monthly Tracked User (MTU); Matomo charges per hit volume.
+- Amplitude charges per event; Matomo charges per hit volume.
 - Matomo is open source and self-hostable; Amplitude is closed-source and cloud-only.
 
 </details>
@@ -739,6 +739,19 @@ It's completely free to get started – no credit card required. Our [setup wiza
 
 ## Frequently asked questions
  
+<details>
+<summary>PostHog says it makes your product "self-driving" – what does that mean?</summary>
+
+It means PostHog digs through your product data, finds what's worth fixing, and has agents do the work.
+
+It starts with context. A full suite of developer tools – [AI Observability](/ai-observability), [Product Analytics](/product-analytics), [Session Replay](/session-replay), [Feature Flags](/feature-flags), [Experiments](/experiments), [Error Tracking](/error-tracking), [Logs](/logs), and more – captures everything happening in your product, and a [Context Warehouse](/blog/what-is-a-context-warehouse) unifies it into one source agents can read across.
+
+From there, [Scouts](/blog/what-is-a-scout) read across all of it and sort what's worth knowing from what's just noise. What clears the bar becomes a report in your inbox: an agent picks it up, roots out the cause, and opens a PR. You review and merge.
+
+You can steer it from [Slack](/slack), the [web app](/ai), the [desktop app](/desktop), or your own editor via [the MCP](/mcp) or [CLI](/docs/cli).
+
+</details>
+
 <details>
 <summary>What is Matomo used for?</summary>
 

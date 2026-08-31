@@ -73,7 +73,7 @@ PostHog is an all-in-one developer platform that goes beyond error tracking and 
 
 Each exception can be linked to the related session replay, user, and feature flag version. You can also view the user's actions, console output, and API calls leading up to the issue, then ship a fix behind a feature flag, test it, and measure the impact in analytics without ever having to switch between tools.
 
-PostHog also [supports autocapture of unhandled exceptions](/docs/error-tracking/capture), [filter by error type](/docs/error-tracking/monitoring), and [set event-based alerts](/docs/error-tracking/alerts) that trigger when specific issues occur, and offers built in [LLM observability](/llm-analytics) for teams that need to observe and optimize AI products as well.
+PostHog also [supports autocapture of unhandled exceptions](/docs/error-tracking/capture), [filter by error type](/docs/error-tracking/monitoring), and [set event-based alerts](/docs/error-tracking/alerts) that trigger when specific issues occur, and offers built in [LLM observability](/ai-observability) for teams that need to observe and optimize AI products as well.
 
 **Strengths:**
 
@@ -255,6 +255,19 @@ It's completely free to get started – no credit card required. Our [setup wiza
 ## FAQ
 
 <details>
+<summary>PostHog says it makes your product "self-driving" – what does that mean?</summary>
+
+It means PostHog digs through your product data, finds what's worth fixing, and has agents do the work.
+
+It starts with context. A full suite of developer tools – [AI Observability](/ai-observability), [Product Analytics](/product-analytics), [Session Replay](/session-replay), [Feature Flags](/feature-flags), [Experiments](/experiments), [Error Tracking](/error-tracking), [Logs](/logs), and more – captures everything happening in your product, and a [Context Warehouse](/blog/what-is-a-context-warehouse) unifies it into one source agents can read across.
+
+From there, [Scouts](/blog/what-is-a-scout) read across all of it and sort what's worth knowing from what's just noise. What clears the bar becomes a report in your inbox: an agent picks it up, roots out the cause, and opens a PR. You review and merge.
+
+You can steer it from [Slack](/slack), the [web app](/ai), the [desktop app](/desktop), or your own editor via [the MCP](/mcp) or [CLI](/docs/cli).
+
+</details>
+
+<details>
   <summary>What's the best error tracking tool for developers?</summary>
 
 If you want full context, including stack traces, user sessions, and console logs, **PostHog** is the best choice. It combines error tracking, session replay, analytics, and feature flags in one platform. For large-scale reliability and performance monitoring, **Sentry** is another strong option.
@@ -264,7 +277,7 @@ If you want full context, including stack traces, user sessions, and console log
 <details>
   <summary>What's the difference between PostHog and Sentry?</summary>
 
-**Sentry** focuses primarily on deep error monitoring and performance tracing. **PostHog** provides a broader context by combining error tracking with product analytics, session replays, feature flags, and more.
+**Sentry** focuses primarily on deep error monitoring and performance tracing. **PostHog** has error tracking, [logs](/logs), and [distributed tracing](/traces) too, and adds the broader context of product analytics, session replays, feature flags, and more.
 
 </details>
 
@@ -308,7 +321,7 @@ If your focus is on application-level errors and user experience rather than inf
 
 PostHog is more than an error tracker – it gives developers full context by combining [all the tools needed to build a successful product](/products) in one platform.  
 
-- **All-in-one toolkit:** [Product analytics](/product-analytics), [web analytics](/web-analytics), [session replay](/session-replay), [feature flags](/feature-flags), [experiments](/experiments), [surveys](/surveys), [LLM observability](/llm-analytics), and [error tracking](/error-tracking)  
+- **All-in-one toolkit:** [Product analytics](/product-analytics), [web analytics](/web-analytics), [session replay](/session-replay), [feature flags](/feature-flags), [experiments](/experiments), [surveys](/surveys), [LLM observability](/ai-observability), and [error tracking](/error-tracking)  
 - **Developer-first:** Transparent APIs, SQL query builder, open source, and a public roadmap  
 - **Transparent pricing:** Generous free tiers and [usage-based billing](/pricing)  
 - **Trusted by teams:** Used by [Supabase, Lovable, ElevenLabs, ResearchGate](/customers), and more

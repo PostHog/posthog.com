@@ -15,7 +15,7 @@ export const postsMenu: IMenu[] = [
         children: [
             {
                 name: 'Being a founder',
-                url: '/founders/being-a-founder',
+                url: '/founders/founders',
                 icon: 'IconCoffee',
                 color: 'salmon',
             },
@@ -96,7 +96,7 @@ export const postsMenu: IMenu[] = [
             },
             {
                 name: 'Feature management',
-                url: '/product-engineers/feature-management',
+                url: '/product-engineers/feature-flags',
                 icon: 'IconGanttChart',
                 color: 'purple',
             },
@@ -235,7 +235,7 @@ export const postsMenu: IMenu[] = [
             },
             {
                 name: 'AI Observability',
-                url: '/tutorials/ai-engineering',
+                url: '/tutorials/ai-observability',
                 color: 'purple',
                 icon: 'IconLlmAnalytics',
                 tag: 'AI Observability',

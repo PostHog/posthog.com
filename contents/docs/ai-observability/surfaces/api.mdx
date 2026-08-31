@@ -1,0 +1,52 @@
+---
+title: AI Observability API
+sidebar: Docs
+showTitle: true
+---
+
+The API is both how trace data gets into PostHog and how you drive AI Observability from your own code. Your app sends LLM events through the [capture API](/docs/api/capture), and the [PostHog API](/docs/api) exposes the rest of the product – evaluations, datasets, review queues, clustering, summarization, and provider keys – so you can wire scoring and review into CI or your own tooling instead of clicking through the app.
+
+## Before you start
+
+1. **Set up AI Observability** – [install a PostHog LLM SDK or provider integration](/docs/ai-observability/installation) so traces are captured.
+2. **Get API access** – [create a personal API key](/docs/api/personal-api-keys) with the scopes you need. See [authentication](#authentication) below.
+
+## What you can do here
+
+**Send traces in**
+
+Everything AI Observability shows is built from events your app captures: `$ai_generation` for a single model call, `$ai_trace` for the request that wrapped it, `$ai_span` for the steps in between, `$ai_metric` for numbers you attach yourself, and `$ai_feedback` for what your users thought. The [PostHog SDKs](/docs/ai-observability/installation) send these for you when you wrap your model provider, and you can also [capture them manually](/docs/ai-observability/installation/manual-capture) if your setup isn't covered.
+
+**Query your trace data**
+
+The [query API](/docs/api/query) runs HogQL against your LLM events, so cost by model, latency percentiles, and error rates are all available without the dashboard. Prompts and completions live on the `posthog.ai_events` table rather than `events` – see the [data model](/docs/ai-observability/basics) for which fields go where.
+
+**Run evaluations and reviews**
+
+[Evaluations](/docs/ai-evals), their runs, and their scheduled reports are all API resources, alongside the [taggers](/docs/ai-evals/taggers) and score definitions that decide what gets scored. [Datasets](/docs/ai-evals/datasets) and dataset items, review queues, and individual trace reviews are too, so a human-review workflow can be built into your own tools.
+
+**Manage enrichment**
+
+[Clustering](/docs/ai-observability/clusters) runs and configuration, [trace summarization](/docs/ai-observability/summarization), and [custom parser](/docs/ai-observability/custom-parser) recipes are all callable, so the enrichment that normally happens in the app can be triggered from a pipeline.
+
+**Configure model access**
+
+Provider keys and their validation are managed through the API, as is the list of models available to your project. There's also a hosted LLM proxy that forwards completions to your configured provider, so the playground and evaluation runs have a model to call.
+
+## Authentication
+
+Use a [personal API key](/docs/api#authentication) passed as a bearer token, scoped to the least it needs.
+
+```bash
+curl -H "Authorization: Bearer $POSTHOG_PERSONAL_API_KEY" \
+  https://us.posthog.com/api/projects/:project_id/evaluations/
+```
+
+Two things worth being careful about here. A personal API key belongs in a secret store, never in client-side code or a committed file. And provider keys – the credentials PostHog uses to call your model provider – are write-only through the API: you can set and validate one, but you can't read it back.
+
+## Related
+
+- See the full [PostHog API reference](/docs/api).
+- Explore the same data in the [web app](/docs/ai-observability/surfaces/web-app).
+- Ask for it conversationally over [MCP](/docs/ai-observability/surfaces/mcp), which wraps much of this API in tools an agent can call.
+- Get your app sending traces with [installation](/docs/ai-observability/installation).

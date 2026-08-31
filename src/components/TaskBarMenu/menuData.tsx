@@ -1,9 +1,8 @@
 import { MenuType, MenuItemType } from 'components/RadixUI/MenuBar'
 import React from 'react'
-import { companyMenu, docsMenu, pricingMenu } from '../../navs'
+import { companyMenu, docsMenu } from '../../navs'
 import * as Icons from '@posthog/icons'
 import { Logo } from '@posthog/brand/logo'
-import { APP_COUNT } from '../../constants'
 import SearchableProductMenu from './SearchableProductMenu'
 import useProduct from '../../hooks/useProduct'
 import {
@@ -18,7 +17,6 @@ import {
 } from 'components/OSIcons'
 import { useAppSettings } from '../../context/App'
 import { IconChevronDown } from '@posthog/icons'
-import { useHedgehogMode } from 'components/HedgehogMode'
 import { navigate } from 'gatsby'
 import { useSmallTeamsMenuItems } from './SmallTeamsMenuItems'
 
@@ -158,6 +156,8 @@ const processMenuItemWithGrouping = (item: DocsMenuItem): any => {
         // FLATTEN: If the first child is a submenu with the same label, bring its children up one level
         if (grouped.length > 0 && grouped[0].type === 'submenu' && grouped[0].label === item.name) {
             grouped = [...grouped[0].items, ...grouped.slice(1)]
+        } else if (grouped.length === 1 && grouped[0].type === 'submenu' && Array.isArray(grouped[0].items)) {
+            grouped = grouped[0].items
         }
         baseItem.items = grouped
         return baseItem
@@ -183,37 +183,137 @@ const processMenuItemWithGrouping = (item: DocsMenuItem): any => {
     return null
 }
 
-// Prioritized products, ordered to line up with the surfaces under the Products menu
-// (PostHog Desktop, Research, Slack, MCP, Context Warehouse) mapped to their docs categories.
-// Everything else falls through to alphabetical order below.
-const DOCS_PRIORITY = ['PostHog Desktop', 'PostHog AI', 'Slack app', 'MCP Analytics', 'Data Warehouse']
+type DocsSubGroup = {
+    label: string
+    items: string[]
+    icon?: keyof typeof Icons
+    color?: string
+}
 
-const getDocsMenuItems = () => {
-    let items = groupBySectionDividers((docsMenu as DocsMenu).children)
+type DocsGroup = {
+    label: string
+    items: (string | DocsSubGroup)[]
+    overflow?: string
+    collapse?: boolean
+    catchAll?: boolean
+    icon?: keyof typeof Icons
+    color?: string
+}
 
-    // Remove any item (submenu or section divider) with label 'Docs'
-    items = items.filter((item) => {
-        // Remove if submenu with label 'Docs'
-        if (item.type === 'submenu' && item.label === 'Docs') return false
-        return true
+const DOCS_GROUPS: DocsGroup[] = [
+    { label: 'Get started', items: ['Install PostHog', 'SDKs & frameworks', 'Self-driving'] },
+    { label: 'Products', items: ['PostHog Web', 'PostHog Desktop', 'PostHog Slack', 'PostHog MCP', 'PostHog CLI'] },
+    {
+        label: 'Tools',
+        items: [
+            {
+                label: 'Analytics',
+                icon: 'IconGraph',
+                color: 'blue',
+                items: [
+                    'Product Analytics',
+                    'Web Analytics',
+                    'Customer Analytics',
+                    'Revenue Analytics',
+                    'MCP Analytics',
+                ],
+            },
+            'Session Replay',
+            'AI Observability',
+            'Error Tracking',
+        ],
+        overflow: 'More tools',
+        icon: 'IconApps',
+        color: 'blue',
+    },
+    { label: 'Context', items: ['Data Warehouse', 'Data pipelines', 'Semantic layer'] },
+    {
+        label: 'Reference',
+        collapse: true,
+        icon: 'IconBook',
+        color: 'lilac',
+        items: [
+            'API',
+            'New to PostHog',
+            'AI engineering',
+            'Toolbar & features',
+            'Self-host & deploy',
+            'Billing',
+            'Privacy & GDPR',
+            'How PostHog works',
+            'Glossary',
+        ],
+    },
+]
+
+export const getDocsMenuItems = (): MenuItemType[] => {
+    const items = groupBySectionDividers((docsMenu as DocsMenu).children)
+        // Remove any item (submenu or section divider) with label 'Docs'
+        .filter((item) => !(item.type === 'submenu' && item.label === 'Docs'))
+        // Drop nav-derived separators; grouping below supplies its own
+        .filter((item) => item.type !== 'separator' && item.label)
+
+    const byLabel = new Map<string, MenuItemType>(items.map((item) => [item.label as string, item]))
+    const explicitlyGrouped = new Set(
+        DOCS_GROUPS.flatMap((group) => group.items).flatMap((entry) =>
+            typeof entry === 'string' ? entry : entry.items
+        )
+    )
+    const byLabelAsc = (a: MenuItemType, b: MenuItemType) =>
+        (a.label as string).localeCompare(b.label as string, undefined, { sensitivity: 'base' })
+
+    const iconFor = (source: { icon?: keyof typeof Icons; color?: string }) => {
+        const IconComponent = source.icon && Icons[source.icon]
+        return IconComponent ? <IconComponent className={`text-${source.color || 'gray'} size-4`} /> : undefined
+    }
+
+    const resolve = (entry: string | DocsSubGroup): MenuItemType | undefined => {
+        if (typeof entry === 'string') return byLabel.get(entry)
+        const children = entry.items.map((label) => byLabel.get(label)).filter(Boolean) as MenuItemType[]
+        if (children.length === 0) return undefined
+        return { type: 'submenu' as const, label: entry.label, icon: iconFor(entry), items: children }
+    }
+
+    const grouped: MenuItemType[] = []
+
+    const unclaimed = () => items.filter((item) => !explicitlyGrouped.has(item.label as string)).sort(byLabelAsc)
+
+    DOCS_GROUPS.forEach((group) => {
+        const named = group.catchAll ? unclaimed() : (group.items.map(resolve).filter(Boolean) as MenuItemType[])
+
+        if (group.collapse) {
+            if (named.length === 0) return
+            if (grouped.length > 0) grouped.push({ type: 'separator' as const })
+            grouped.push({ type: 'submenu' as const, label: group.label, icon: iconFor(group), items: named })
+            return
+        }
+
+        const groupItems = [...named]
+
+        if (group.overflow) {
+            const rest = unclaimed()
+            if (rest.length > 0) {
+                groupItems.push({
+                    type: 'submenu' as const,
+                    label: group.overflow,
+                    icon: iconFor(group),
+                    items: rest,
+                })
+            }
+        }
+
+        if (groupItems.length === 0) return
+
+        if (grouped.length > 0) grouped.push({ type: 'separator' as const })
+        grouped.push({ type: 'label' as const, label: group.label })
+        grouped.push(...groupItems)
     })
 
-    // Keep only real product entries (drop separators) so we can present one clean list:
-    // prioritized products first, then everything else alphabetically.
-    items = items
-        .filter((item) => item.type !== 'separator' && item.label)
-        .sort((a, b) => {
-            const aPriority = DOCS_PRIORITY.indexOf(a.label)
-            const bPriority = DOCS_PRIORITY.indexOf(b.label)
-            if (aPriority !== -1 || bPriority !== -1) {
-                if (aPriority === -1) return 1
-                if (bPriority === -1) return -1
-                return aPriority - bPriority
-            }
-            return a.label.localeCompare(b.label, undefined, { sensitivity: 'base' })
-        })
+    // Icons stay on the top level only; nested levels are noisy and inconsistently sourced.
+    const stripIcons = (menuItems: MenuItemType[]): MenuItemType[] =>
+        menuItems.map(({ icon, ...item }) => (item.items ? { ...item, items: stripIcons(item.items) } : item))
 
-    return items
+    return grouped.map((item) => (item.items ? { ...item, items: stripIcons(item.items) } : item))
 }
 
 const mergedDocsMenu = (allProducts: any[]) => {
@@ -229,7 +329,7 @@ const buildProductsMenuItems = (allProducts: any[]) => {
             type: 'item',
             label: 'PostHog Desktop',
             link: '/desktop',
-            icon: <Icons.IconCoffee className="size-4 text-brown" />,
+            icon: <Icons.IconCoffee className="size-4 text-brown dark:text-brown-dark" />,
         },
         {
             type: 'item',
@@ -258,7 +358,7 @@ const buildProductsMenuItems = (allProducts: any[]) => {
         {
             type: 'item',
             label: 'Context Warehouse',
-            link: '/data-stack',
+            link: '/context-warehouse',
             icon: <Icons.IconDatabase className="size-4 text-blue" />,
         },
         {
@@ -274,19 +374,12 @@ const buildProductsMenuItems = (allProducts: any[]) => {
             type: 'separator',
         },
         {
-            type: 'item',
-            label: `Browse all tools (${APP_COUNT})`,
-            link: '/products',
-            icon: <Icons.IconApps className="size-4 text-red" />,
-            mobileDestination: '/products',
-        },
-        {
             type: 'submenu' as const,
-            label: 'Search tools',
+            label: 'Browse tools',
             link: '/products',
             items: <SearchableProductMenu products={allProducts} />,
-            icon: <Icons.IconSearch className="size-4 text-gray" />,
-            mobileDestination: false, // Omit from mobile menu; desktop-only search
+            icon: <Icons.IconApps className="size-4 text-red" />,
+            mobileDestination: '/products', // Desktop shows the searchable submenu; mobile links to the tools list
         },
     ]
 
@@ -297,7 +390,6 @@ export function useMenuData(): MenuType[] {
     const smallTeamsMenuItems = useSmallTeamsMenuItems()
     const allProducts = useProduct() as any[]
     const { isMobile } = useAppSettings()
-    const [hedgehogModeEnabled, setHedgehogModeEnabled] = useHedgehogMode()
 
     // Define main navigation items (excluding logo menu)
     const mainNavItems: MenuType[] = [
@@ -307,56 +399,14 @@ export function useMenuData(): MenuType[] {
         },
         {
             trigger: 'Pricing',
-            items: [
-                {
-                    type: 'item',
-                    label: 'Plans & usage-based pricing',
-                    link: '/pricing',
-                    icon: getMenuIcon(pricingMenu.children, '/pricing', 'IconReceipt', 'blue'),
-                },
-                {
-                    type: 'item',
-                    label: 'How we do "sales"',
-                    link: '/sales',
-                    icon: getMenuIcon(pricingMenu.children, '/sales', 'IconPercentage', 'green'),
-                },
-                {
-                    type: 'item',
-                    label: 'Startups',
-                    link: '/startups',
-                    icon: getMenuIcon(pricingMenu.children, '/startups', 'IconRocket', 'purple'),
-                },
-                { type: 'separator' },
-                {
-                    type: 'item',
-                    label: 'Learn more',
-                    disabled: true,
-                },
-                {
-                    type: 'item',
-                    label: 'Watch a demo',
-                    link: '/demo',
-                    icon: getMenuIcon(pricingMenu.children, '/demo', 'IconPlay', 'blue'),
-                },
-                {
-                    type: 'item',
-                    label: 'How instrumentation works',
-                    link: '/instrumentation',
-                    icon: getMenuIcon(pricingMenu.children, '/instrumentation', 'IconMagicWand', 'orange'),
-                    // Omit from mobile: the page is a side-by-side demo and sidebar
-                    // that needs the width to make any sense.
-                    mobileDestination: false,
-                },
-                {
-                    type: 'item',
-                    label: 'Talk to a human',
-                    link: '/talk-to-a-human',
-                    icon: getMenuIcon(pricingMenu.children, '/talk-to-a-human', 'IconHeadset', 'purple'),
-                },
-            ],
+            link: '/pricing',
+            items: [],
+            hideChevron: true,
         },
         {
             trigger: 'Docs',
+            // The docs tree is too deep to browse inside a hamburger; mobile goes to the homepage instead
+            mobileLink: '/docs',
             items: mergedDocsMenu(allProducts),
         },
         {
@@ -375,10 +425,23 @@ export function useMenuData(): MenuType[] {
                     icon: <Icons.IconPencil className="size-4 text-yellow" />,
                 },
                 {
+                    type: 'item',
+                    label: 'Founders hub',
+                    link: '/founders',
+                    icon: <Icons.IconRocket className="size-4 text-purple" />,
+                },
+                {
                     type: 'item' as const,
                     label: 'Forums',
                     link: '/questions',
                     icon: <Icons.IconMessage className="size-4 text-green" />,
+                },
+                { type: 'separator' },
+                {
+                    type: 'item',
+                    label: 'Startups',
+                    link: '/startups',
+                    icon: <Icons.IconPresent className="size-4 text-purple" />,
                 },
                 {
                     type: 'item',
@@ -391,6 +454,18 @@ export function useMenuData(): MenuType[] {
                     label: 'Events',
                     link: '/events',
                     icon: <Icons.IconCalendar className="size-4 text-red" />,
+                },
+                {
+                    type: 'item',
+                    label: 'Students',
+                    link: '/students',
+                    icon: <Icons.IconGraduationCap className="size-4 text-blue" />,
+                },
+                {
+                    type: 'item',
+                    label: 'Incubator',
+                    link: '/community-incubator',
+                    icon: <Icons.IconFlask className="size-4 text-seagreen" />,
                 },
                 {
                     type: 'item',
@@ -435,12 +510,6 @@ export function useMenuData(): MenuType[] {
                 },
                 {
                     type: 'item',
-                    label: 'WIP',
-                    link: '/wip',
-                    icon: getMenuIcon(companyMenu.children, '/wip', 'IconWrench', 'green'),
-                },
-                {
-                    type: 'item',
                     label: 'Changelog',
                     link: '/changelog',
                     icon: getMenuIcon(companyMenu.children, '/changelog', 'IconCalendar', 'red'),
@@ -472,6 +541,12 @@ export function useMenuData(): MenuType[] {
                     label: 'Careers',
                     link: '/careers',
                     icon: getMenuIcon(companyMenu.children, '/careers', 'IconLaptop', 'purple'),
+                },
+                {
+                    type: 'item',
+                    label: 'Side projects',
+                    link: '/side-projects',
+                    icon: getMenuIcon(companyMenu.children, '/side-projects', 'IconRocket', 'purple'),
                 },
                 {
                     type: 'item',
@@ -552,33 +627,6 @@ export function useMenuData(): MenuType[] {
                     label: 'Things that spark joy',
                     icon: <IconSparksJoy className="size-4" />,
                     items: [
-                        {
-                            type: 'item',
-                            onClick: () => setHedgehogModeEnabled(!hedgehogModeEnabled),
-                            node: (
-                                <span className="px-2.5 flex w-full justify-between items-center gap-2">
-                                    <span>Hedgehog mode</span>
-                                    {/* Presentational toggle — the whole row is the clickable menu item */}
-                                    <span className="relative inline-flex items-center justify-center h-2 w-8 flex-shrink-0">
-                                        <span
-                                            aria-hidden
-                                            className="pointer-events-none absolute w-full h-full rounded-md bg-[#c4c4c4] dark:bg-[#5A5A5A]"
-                                        />
-                                        <span
-                                            aria-hidden
-                                            className={`pointer-events-none absolute left-0 inline-block h-4 w-4 rounded-full transition-transform ease-in-out duration-200 ${
-                                                hedgehogModeEnabled
-                                                    ? 'translate-x-5 bg-teal'
-                                                    : 'translate-x-0 bg-[#555] dark:bg-[#999]'
-                                            }`}
-                                        />
-                                    </span>
-                                </span>
-                            ),
-                        },
-                        {
-                            type: 'separator',
-                        },
                         {
                             type: 'item',
                             label: 'Browse all',
@@ -702,11 +750,13 @@ export function useMenuData(): MenuType[] {
             type: 'item' as const,
             label: 'About PostHog',
             link: '/about',
+            icon: getMenuIcon(companyMenu.children, '/about', 'IconLogomark', 'gray'),
         },
         {
             type: 'item' as const,
             label: 'About this website',
             link: '/credits',
+            icon: <Icons.IconInfo className="size-4 text-blue" />,
         },
         {
             type: 'item' as const,
@@ -714,21 +764,29 @@ export function useMenuData(): MenuType[] {
             onClick: () => {
                 navigate('/display-options', { state: { newWindow: true } })
             },
+            icon: <Icons.IconBrightness className="size-4 text-yellow" />,
             shortcut: [','],
         },
     ]
+
+    const homeLogoMenuItem = {
+        type: 'item' as const,
+        label: 'Home',
+        link: '/',
+        icon: <Icons.IconHome className="size-4 text-purple" />,
+    }
 
     // Process main nav items for mobile menu
     const processMobileNavItems = (): MenuItemType[] => {
         const mobileItems: MenuItemType[] = []
 
         mainNavItems.forEach((menu) => {
-            // If menu has mobileLink, convert to simple item
-            if (menu.mobileLink) {
+            const link = menu.link || menu.mobileLink
+            if (link) {
                 mobileItems.push({
                     type: 'item' as const,
                     label: typeof menu.trigger === 'string' ? menu.trigger : 'Menu',
-                    link: menu.mobileLink,
+                    link,
                 })
             } else {
                 // Process items and filter out those with mobileDestination === false
@@ -797,11 +855,7 @@ export function useMenuData(): MenuType[] {
     // On mobile, include main navigation items in the logo menu
     const logoMenuItems = isMobile
         ? [
-              {
-                  type: 'item' as const,
-                  label: 'home.mdx',
-                  link: '/',
-              },
+              homeLogoMenuItem,
               { type: 'separator' as const },
               // Main navigation items processed for mobile
               ...processMobileNavItems(),
@@ -810,11 +864,7 @@ export function useMenuData(): MenuType[] {
               ...baseLogoMenuItems,
           ]
         : [
-              {
-                  type: 'item' as const,
-                  label: 'Home',
-                  link: '/',
-              },
+              homeLogoMenuItem,
               // Desktop: only show system items
               ...baseLogoMenuItems,
           ]
@@ -855,7 +905,7 @@ export const DocsItemsStart = [
         type: 'item' as const,
         label: 'Overview',
         link: '/docs',
-        icon: <Icons.IconBook className="size-4 text-purple" />,
+        icon: <Icons.IconHome className="size-4 text-purple" />,
     },
     {
         type: 'separator' as const,
@@ -868,7 +918,21 @@ export const DocsItemsEnd = [
         type: 'item' as const,
         label: 'Tutorials',
         link: '/tutorials',
-        icon: <Icons.IconBook className="size-4 text-purple" />,
+        icon: <Icons.IconGraduationCap className="size-4 text-purple" />,
+    },
+    {
+        type: 'item' as const,
+        label: 'Pocket guides',
+        link: '/pocket-guides',
+        // Orange matches volume one's token in src/constants/pocketGuides.ts.
+        icon: <Icons.IconCompass className="size-4 text-orange" />,
+    },
+    {
+        type: 'item' as const,
+        label: 'Templates',
+        link: '/templates',
+        // Matches the Templates entry in src/navs/index.js.
+        icon: <Icons.IconMagic className="size-4 text-purple" />,
     },
 ]
 
@@ -972,8 +1036,9 @@ export function useMenuSelectOptions() {
         {
             label: 'Pricing',
             items: [
-                { value: 'pricing', label: 'Plans & usage-based pricing' },
-                { value: 'sales', label: 'How we do "sales"' },
+                { value: 'pricing', label: 'Usage-based pricing' },
+                { value: 'platform-packages', label: 'Platform packages' },
+                { value: 'sales', label: 'How we do sales' },
                 { value: 'startups', label: 'Startups' },
             ],
         },

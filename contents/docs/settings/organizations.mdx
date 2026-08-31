@@ -33,6 +33,8 @@ Organization members have different access levels based on their membership type
 
 By default, any organization member can create and view organization invites. Admins and owners can restrict this by disabling **Members can invite** in organization settings – when disabled, only admins and owners can create and view invites. Members can only see invites at or below their own membership level. Invites are valid **for 3 days** after creation and **only for the specified email**. Emails can be resent by removing and re-adding the invitee.
 
+Sending invites is subject to [rate limits](/docs/api#rate-limiting), which apply across your organization.
+
 In an [email-enabled PostHog instance](/docs/self-host/configure/email) (including PostHog Cloud) the invite is sent automatically to the specified email. If the PostHog instance can't send emails, remember to share the invite link yourself.
 
 If there's no account associated with that email, the invited person will have to create an account. Otherwise, they'll be able to join with their existing account.
@@ -85,3 +87,13 @@ You can search the table by owner name, email, or scope. Click any of the **Owne
 The secret key value and key label are never exposed.
 
 > **Note:** This feature requires a plan that includes organization security settings. Only admins and owners can access this section.
+
+### Member list visibility
+
+Organization admins and owners can restrict members from viewing the full list of org members. This is useful if you invite external collaborators into separate projects, like when you set up [embedded analytics](/tutorials/embedded-analytics).
+
+Find this setting under [**Settings** > **Organization** > **Security**](https://app.posthog.com/settings/organization-security), labeled **Members can see the full member list**.
+
+When disabled, members only see themselves and other members in their projects.
+
+> **Note:** This feature requires the [Boost, Scale, or Enterprise plan](/platform-packages).

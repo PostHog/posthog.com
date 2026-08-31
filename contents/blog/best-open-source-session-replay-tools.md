@@ -89,13 +89,11 @@ OpenReplay is a developer-friendly tool. It allows engineers to see how users ar
 
 ### How much does OpenReplay cost?
 
-OpenReplay has three cloud plans and a free self-hosted option. 
+OpenReplay offers three ways to deploy, plus a custom enterprise option:
 
-- The **Free** cloud plan is $0 and includes up to 1,000 sessions/month, 2 users, 1 project, and 30-day data retention. 
-- The **Serverless** plan is $5.95 per 1,000 sessions/month with unlimited users and projects, also with 30-day retention. 
-- The **Dedicated** plan starts at $0.25/hour (roughly $179/month) and gives you a dedicated VM with configurable data retention, SSO/SAML, conditional recording, and data residency across 35+ regions. 
-
-The **self-hosted open source edition** is completely free and includes all core features.
+- The **open source** edition is free and includes all core features, but you host it on your own infrastructure and manage storage, scaling, and retention yourself. 
+- **Dedicated** is a fully managed, single-tenant instance starting at $199/month, billed hourly at $0.276/hour with no limits on users, recordings, or retention. It adds SSO, custom data retention, and data residency across 50 regions.
+- **Serverless** is a usage-based option where you pay only for the sessions you record. It's free up to 1,000 sessions/month, and then $5.95 per 1K sessions/month with unlimited users, projects, and 30-day retention.
 
 > #### Bottom line
 >
@@ -254,6 +252,19 @@ It's completely free to get started – no credit card required. Our [AI setup w
 <WizardCTA />
 
 ## Frequently asked questions
+
+<details>
+<summary>PostHog says it makes your product "self-driving" – what does that mean?</summary>
+
+It means PostHog digs through your product data, finds what's worth fixing, and has agents do the work.
+
+It starts with context. A full suite of developer tools – [AI Observability](/ai-observability), [Product Analytics](/product-analytics), [Session Replay](/session-replay), [Feature Flags](/feature-flags), [Experiments](/experiments), [Error Tracking](/error-tracking), [Logs](/logs), and more – captures everything happening in your product, and a [Context Warehouse](/blog/what-is-a-context-warehouse) unifies it into one source agents can read across.
+
+From there, [Scouts](/blog/what-is-a-scout) read across all of it and sort what's worth knowing from what's just noise. What clears the bar becomes a report in your inbox: an agent picks it up, roots out the cause, and opens a PR. You review and merge.
+
+You can steer it from [Slack](/slack), the [web app](/ai), the [desktop app](/desktop), or your own editor via [the MCP](/mcp) or [CLI](/docs/cli).
+
+</details>
 
 <details>
 <summary>What is open source session replay?</summary>

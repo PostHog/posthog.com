@@ -1,0 +1,125 @@
+---
+# Scaffolded from /docs/replay-vision/start-here, /docs/replay-vision/creating-scanners, and
+# /docs/session-replay/find-replays-ai. Facts check out; the editorial pass is yours.
+#
+# The volume's cover already links here at /pocket-guides/session-replay/replay-vision.
+#
+# Scope: how to turn each of these on, and where to go for the detail. Signals and scouts belong
+# to self-driving, so they get a pointer to that volume rather than an explanation here.
+title: Getting a robot to watch for you
+shortTitle: Getting a robot to watch for you
+subtitle: Nobody watches a thousand recordings. Make a robot do it and then tell you what it saw.
+pocketGuideOrder: 7
+---
+
+<LeftPage>
+
+<AnatomyFigure
+    n={1}
+    caption="What a scout files when replay signals add up to something: the claim on the card, the recordings inside the report."
+    priority="P2"
+    status="Ready"
+    actionability="Actionable"
+    headline="Accounts that left onboarding midway can't get past step two. The workspace they created last time blocks them, and the name it holds is their own"
+    report={{
+        title: "Accounts that left onboarding midway can no longer finish it",
+        source: 'Scout · dead-end pages',
+        receivedAgo: '5h',
+        affected: '~180 accounts stuck, ~40 more each day',
+        body: "Sessions reaching `/onboarding/step-1` now end there 41% of the time, up from 9% across the trailing two weeks. Signup volume is unchanged and nothing threw.\n\nOnboarding creates the workspace at step two and writes `onboarding_complete` at step four. Anyone who left between the two has a workspace but an incomplete account, so the guard sends them back to step one – where step two now returns a 409, because the name is taken by the workspace they made last time. The form shows it as a validation error under the name field.\n\nThe recordings are people trying variations of their own company name against the same wall, four attempts before the tab closes.",
+        suggestedAction: 'Have step two adopt the existing workspace, and resume at the first unfinished step.',
+        actionNote: 'An agent opens the pull request – you review and merge.',
+    }}
+/>
+
+</LeftPage>
+
+<RightPage>
+
+# Getting a robot to watch for you
+
+You can watch a dozen replays, but you can't watch a thousand. Have a robot watch it for you.
+
+This section covers various automations you can configure to automate replay watching.
+
+## Which robot
+
+Four automations can watch replays on your behalf:
+
+| Robot | What it does | What you get |
+| --- | --- | --- |
+| Session summary | PostHog AI reads the event stream of one session, or twenty, and writes what happened | A written account, and the pattern across a batch |
+| <Term name="replay vision">Replay Vision</Term> <Term name="scanner" /> | Our model that watches every matching replay, continuously | An <Term name="observation" /> per session, saved as a `$recording_observed` event you can query |
+| Session Replay <Term name="signal" /> | Spots rage clicks and friction, raises them | A <Term name="report" /> in your <Term name="inbox" />, grouped with related findings |
+| <Term name="scout">Scout</Term> | Queries anything in PostHog on a schedule – events, insights, warehouse tables, and the observations above | A report too, but only when the answer to its question changes |
+
+Only the Replay Vision scanner watches the video. The other three read events, so they know what people did but not what the screen showed them.
+
+## Summarize with PostHog AI
+
+You can ask PostHog AI to find and summarize sessions. PostHog will summarize the both the sessions replay and the events stream containing pageviews, clicks, inputs, and errors recorded during that session.
+
+Rather than watching them all to spot a pattern, ask for the batch and let it surface what's common.
+
+- <AskAI q="Summarize the last 5 session replays where users dropped off during checkout" />
+- <AskAI q="What patterns do you see in sessions with rage clicks?" />
+- <AskAI q="What are users struggling with on the pricing page?" />
+- <AskAI q="Summarize sessions from enterprise users who churned" />
+
+It's at its best on <Term name="experiment">experiments</Term>. Metrics tell you which variant won, summaries tell you why.
+
+- <AskAI q="What behavioral differences do you see between variant A and variant B?" />
+
+Summarizing a session also marks up its player timeline: green segments where things went well, red where they didn't. Click a marker to jump to that moment, or click a segment in the summary sidebar to move the player there. Summarizing a replay makes it easier to navigate for your whole team down the road.
+
+## Set up a scanner
+
+A Replay Vision <Term name="scanner" /> is three things: a **prompt** saying what to look for, a **type** saying what shape the answer takes, and **filters** saying which recordings it runs against. PostHog then asks that question of every matching session, forever.
+
+
+Every answer is saved as a `$recording_observed` event on the session it came from, along with the model's reasoning – citations included, linking to the moments that convinced it – its confidence, and what the observation cost.
+
+So "how many people got stuck on pricing last week" is a query:
+
+```sql
+SELECT count()
+FROM events
+WHERE event = '$recording_observed'
+  AND properties.scanner_name = 'Dead-end pages'
+  AND properties.scanner_output_verdict = 'yes'
+  AND timestamp > now() - INTERVAL 7 DAY
+```
+
+
+## Signals and scouts
+
+Signals and scouts make your product <Term name="self-driving" />.
+
+A <Term name="signal" /> is a finding with its evidence attached. Session Replay raises them two ways: it spots <Term name="rage click">rage clicks</Term> and friction on its own, and any scanner can hand over what it finds by flipping **Emit findings as Signals** in the editor. Related signals group into a <Term name="report" /> in your <Term name="inbox" />, so one problem arrives as one item rather than three.
+
+A <Term name="scout" /> lets agents monitor those signals and act on them on your behalf – dig into the root cause, then draft a pull request <SeeFig n={1} />. You stay in control of what ships.
+
+You can learn more about scouts in the [self-driving pocket guide](/pocket-guides/self-driving/101). You can read more about the report shown above in [The page people can't leave](/pocket-guides/self-driving/pages-people-cant-leave).
+
+
+## Scanner templates
+
+Here are some templates to give you inspiration and get you started.
+
+<ScannerTemplate name="Dead ends" template="dead_end" type="Monitor" asks="Did the user appear stuck on a page?" answers="Every session comes back yes or no" property="scanner_output_verdict" />
+
+<ScannerTemplate name="User intent" template="user_intent" type="Classifier" asks="What was the user trying to do?" answers="One tag: browsing, purchasing, support_seeking" property="scanner_output_tags" />
+
+<ScannerTemplate name="Session outcome" template="session_outcome" type="Classifier" asks="How did this session end?" answers="One tag: task_completed, task_abandoned, blocked_by_error" property="scanner_output_tags" />
+
+<ScannerTemplate name="Frustration score" template="frustration_score" type="Scorer" asks="How much friction did they hit?" answers="A number on a scale you set" property="scanner_output_score" />
+
+<ScannerTemplate name="Session summary" template="session_summary" type="Summarizer" asks="What happened in this session?" answers="A title and a short narrative" property="scanner_output_title, scanner_output_summary" />
+
+<SeeAlso>
+
+More: [Find replays with PostHog AI](/docs/session-replay/find-replays-ai) · [Get started](/docs/replay-vision/start-here) · [Creating scanners](/docs/replay-vision/creating-scanners) · [Scanner types](/docs/replay-vision/scanner-types) · [Observations](/docs/replay-vision/observations) · [Calibration](/docs/replay-vision/calibration) · [Digests and alerts](/docs/replay-vision/actions) · [Pocket guide to self-driving](/pocket-guides/self-driving/101) · [Signal sources](/docs/self-driving/inbox/sources) · [Scouts](/docs/self-driving/scouts)
+
+</SeeAlso>
+
+</RightPage>

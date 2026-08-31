@@ -22,7 +22,7 @@ For those servers, use **`PostHogMCP`** instead. It's a subclass of the [`postho
 ```ts
 import { PostHogMCP } from "@posthog/mcp"
 
-const posthog = new PostHogMCP(process.env.POSTHOG_PROJECT_API_KEY, {
+const posthog = new PostHogMCP(process.env.POSTHOG_PROJECT_TOKEN, {
   host: "https://us.i.posthog.com", // or https://eu.i.posthog.com
   // standard posthog-node options apply, e.g. beforeSend, enableExceptionAutocapture
 })
@@ -70,7 +70,7 @@ posthog.capture({
 | `distinctId` | `distinct_id` | Supplying it enables person processing so `$set` lands on a real person. Omit it for anonymous traffic — events are sent with `$process_person_profile: false`. |
 | `sessionId` | `$session_id` | Omitted from the event entirely when you don't pass one (so stateless captures don't bucket into a non-existent [Session Replay](/docs/session-replay) session). |
 | `groups` | `$groups` | `{ groupType: groupKey }`, stamped on the event so you never hand-write the `$groups` key. |
-| `setProperties` | `$set` | Person properties (`{ name, email, plan }`), same as the `properties` you'd pass to `identify`. |
+| `setProperties` | `$set` | Person properties (`{ name, email, plan }`), same as the `properties` you'd pass to `identify`. Updates the person profile; not retained on the stored event, so query them as [person properties](/docs/product-analytics/person-properties). |
 | `properties` | spread verbatim | Extra event properties, sitting alongside the `$mcp_*` keys. Values must be JSON-serializable. |
 | `timestamp` | event time | Defaults to the time of the capture call. |
 
@@ -147,3 +147,31 @@ posthog.flush()  # PostHogMCP is a posthog client — flush/shutdown it yourself
 ```
 
 `PostHogMCP(api_key, missing_capability_tool_name="get_more_tools", mcp_exception_autocapture=True, **posthog_kwargs)` accepts the standard `posthog` client kwargs (e.g. `host`). Set `mcp_exception_autocapture=False` to stop a failed tool call from emitting a `$exception` sibling. As in TypeScript, the wrapping-path hooks (`identify`, `context`, `intent_fallback`, `event_properties`) don't apply here — pass identity and properties on each `capture_*` call.
+
+The `capture_*` methods also take `error_type` (a low-cardinality failure label for `$mcp_error_type`), `client_user_agent`, and `vendor_client` — the same fields documented in the [event reference](/docs/mcp-analytics/events#core-properties).
+
+### Stateless / multi-pod dispatchers
+
+On a stateless deployment (a fresh server per request, often across pods) there's no connection to carry a session, so `$session_id` fragments and the client name/version — sent only at `initialize` — go missing from later requests. Add the mint middleware to your ASGI app once. It mints a self-encoded token onto the `Mcp-Session-Id` response header at `initialize` and decodes the client's replay on every later request, so every pod recovers the same values with no shared store:
+
+```python
+from posthog.mcp import PostHogMcpStatelessSessionMiddleware, get_mcp_session
+
+app.add_middleware(PostHogMcpStatelessSessionMiddleware)
+
+# ...then in your request handler, feed the recovered session into each capture.
+# The token carries the client identity too — pass it as $mcp_client_* properties
+# (capture_tool_call takes session_id directly, client name/version via properties):
+sess = get_mcp_session(request)  # None until the client replays the token
+posthog.capture_tool_call(
+    name,
+    session_id=sess.session_id if sess else None,
+    intent=prepared.intent,
+    properties={
+        "$mcp_client_name": sess.client_name if sess else None,
+        "$mcp_client_version": sess.client_version if sess else None,
+    },
+)
+```
+
+The token is unsigned and carries only what the client volunteered at `initialize` — treat `$session_id` and `$mcp_client_*` as analytics labels, not authentication.

@@ -1,0 +1,58 @@
+---
+title: MCP Analytics in PostHog Web
+sidebar: Docs
+showTitle: true
+---
+
+<CalloutBox icon="IconFlask" title="Open beta" type="fyi">
+
+The MCP Analytics views are in beta.
+
+</CalloutBox>
+
+The [PostHog web app](https://app.posthog.com) is where you explore how agents use your MCP tools. Once your server is [sending events](/docs/mcp-analytics/installation), open **MCP Analytics** to get dashboards, session drill-downs, per-tool quality, and clustered intent – all built on the `$mcp_tool_call` stream.
+
+## Before you start
+
+1. **Set up MCP Analytics** – [install the SDK in your MCP server](/docs/mcp-analytics/installation) so tool calls are captured.
+2. **Open the web app** – no install needed, just sign in to [PostHog](https://app.posthog.com).
+
+## What you can do here
+
+The scene is organized into tabs, each answering a different question.
+
+### Dashboard
+
+The at-a-glance view: KPI tiles for sessions, tool calls, error rate, and p95 latency, a breakdown of which clients and harnesses are calling you, and charts for tool usage and errors over time.
+
+### Activity
+
+A live feed of tool calls as they arrive. Useful when you're verifying a new instrumentation or watching a release land.
+
+### Sessions
+
+Every MCP session, with notable ones surfaced first. Open a session to step through its tool calls, intents, and errors in order – the agent equivalent of a [session replay](/docs/session-replay). You can filter into a playlist and jump between sessions from the detail view.
+
+### Tool quality
+
+Per-tool stats: call volume, error rate, latency, and the failure modes behind them. Drill into any tool to see the calls that failed and why.
+
+This tab has a **Create fix task** button. It hands the failing tool to a coding agent, which works against a repository you choose and opens a pull request – the same run a [Self-driving](/docs/self-driving) report starts automatically when you own the server. It needs the GitHub integration connected, and stays disabled without it. See [PostHog Desktop](/docs/mcp-analytics/surfaces/desktop) for how that flow works.
+
+### Intent clustering
+
+Groups what agents said they were trying to do into themes, so you can see the jobs your server actually gets used for. Includes a journey view of how agents move between tools within a cluster. Intent comes from [`$mcp_intent`](/docs/mcp-analytics/intent) plus generated session summaries.
+
+## Ask PostHog AI
+
+[PostHog AI](/docs/posthog-ai) works over this data directly in the web app – it's an interaction mode here, not a separate surface. Ask it to explore sessions, dig into tool usage or quality, break down intent clusters, or suggest improvements to your tools, and it answers using the same MCP Analytics data. Views include an **Ask PostHog AI** link that opens it with the relevant question prefilled.
+
+## Build your own views
+
+Every signal is a normal PostHog event, so you aren't limited to these tabs. Query `$mcp_*` events in [product analytics](/docs/product-analytics), the [SQL editor](/docs/data-warehouse/sql), and [dashboards](/docs/product-analytics/dashboards). See [sample queries](/docs/mcp-analytics/queries) for recipes.
+
+## Related
+
+- Query the same data from your editor over [MCP](/docs/mcp-analytics/surfaces/mcp).
+- Pull it into your own systems with the [API](/docs/mcp-analytics/surfaces/api).
+- Learn what lands on each event in the [event reference](/docs/mcp-analytics/events).

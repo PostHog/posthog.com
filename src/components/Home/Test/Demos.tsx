@@ -421,7 +421,7 @@ const Image = ({ src, className }: { src: string; className?: string }) => {
 }
 
 // Customer constants and breakdowns
-const COL1 = ['ycombinator', 'airbus', 'trust', 'lovable', 'startengine', 'researchgate', 'exa', 'heygen']
+const COL1 = ['ycombinator', 'airbus', 'trust', 'startengine', 'researchgate', 'exa', 'heygen']
 const COL2 = ['supabase', 'mistralai', 'elevenlabs', 'hasura', 'raycast', 'posthog']
 
 const companyBreakdowns = {
@@ -435,24 +435,24 @@ const companyBreakdowns = {
         col1: 'Companies you can explain to your parents',
         col2: 'Companies your parents will never understand',
     },
-    shortNames: { col1: 'Names with 7 letters or less', col2: 'Names you can easily mistype' },
+    shortNames: { col1: 'Names with 7 letters or fewer', col2: 'Names you can easily mistype' },
     realWords: { col1: 'Real words', col2: 'Not real words' },
     american: { col1: 'Founded in America', col2: 'Not founded in America' },
     pokemon: { col1: 'Could be a Pokémon', col2: 'Could be a Bond Villain' },
 }
 
 const companyAttributes = {
-    colorful: ['ycombinator', 'trust', 'lovable', 'supabase', 'startengine', 'mistralai', 'raycast', 'posthog'],
+    colorful: ['ycombinator', 'trust', 'supabase', 'startengine', 'mistralai', 'raycast', 'posthog'],
     hardware: ['airbus', 'posthog'],
     planes: ['airbus'],
-    caseStudy: ['ycombinator', 'elevenlabs', 'lovable', 'supabase', 'hasura', 'researchgate', 'exa', 'posthog'],
+    caseStudy: ['ycombinator', 'elevenlabs', 'supabase', 'hasura', 'researchgate', 'exa', 'posthog'],
     easyToYell: ['airbus', 'trust', 'raycast', 'exa', 'heygen', 'posthog'],
-    goodBandName: ['elevenlabs', 'lovable', 'trust', 'startengine', 'raycast', 'researchgate', 'posthog'],
-    explainable: ['ycombinator', 'airbus', 'lovable', 'startengine', 'researchgate', 'exa'],
-    shortNames: ['airbus', 'trust', 'lovable', 'hasura', 'raycast', 'exa', 'heygen', 'posthog'],
-    realWords: ['airbus', 'trust', 'lovable', 'elevenlabs', 'startengine', 'researchgate', 'posthog'],
+    goodBandName: ['elevenlabs', 'trust', 'startengine', 'raycast', 'researchgate', 'posthog'],
+    explainable: ['ycombinator', 'airbus', 'startengine', 'researchgate', 'exa'],
+    shortNames: ['airbus', 'trust', 'hasura', 'raycast', 'exa', 'heygen', 'posthog'],
+    realWords: ['airbus', 'trust', 'elevenlabs', 'startengine', 'researchgate', 'posthog'],
     american: ['ycombinator', 'trust', 'supabase', 'hasura', 'startengine', 'researchgate', 'exa', 'heygen', 'posthog'],
-    pokemon: ['lovable', 'supabase', 'hasura', 'mistralai', 'raycast', 'exa', 'heygen'],
+    pokemon: ['supabase', 'hasura', 'mistralai', 'raycast', 'exa', 'heygen'],
 }
 
 const Customers = () => {
@@ -745,7 +745,7 @@ const jsxComponentDescriptors: JsxComponentDescriptor[] = [
         name: 'ButtonDataStack',
         kind: 'flow',
         props: [],
-        Editor: () => <Button url="/data-stack">README: PostHog data stack.md</Button>,
+        Editor: () => <Button url="/context-warehouse">README: PostHog data stack.md</Button>,
     },
     {
         name: 'ButtonPricing',

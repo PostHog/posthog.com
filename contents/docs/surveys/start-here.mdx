@@ -1,0 +1,121 @@
+---
+title: Get started with Surveys
+hideRightSidebar: true
+contentMaxWidthClass: max-w-5xl
+---
+
+import { QuestLog, QuestLogItem } from 'components/Docs/QuestLog'
+import OSButton from 'components/OSButton'
+import { IconMessage, IconTarget, IconGraph, IconMagic, IconPullRequest, IconPerson } from '@posthog/icons'
+
+<QuestLog firstSpeechBubble="Let's ask your users what they think!" lastSpeechBubble="You're listening to your users!">
+
+<QuestLogItem title="Install the SDK" subtitle="So surveys can appear in your product" icon="IconBook">
+
+Surveys are rendered by the PostHog SDK you already have installed. Add PostHog to your app – or check that your existing install is recent enough – and surveys can start showing without any extra UI work from you.
+
+Web has the most complete feature support; mobile platforms have some limitations. Check [SDK feature support](/docs/surveys/sdk-feature-support) before you plan a survey for a specific platform.
+
+<OSButton variant="primary" asLink to="/docs/surveys/installation">Install an SDK</OSButton>
+
+</QuestLogItem>
+
+<QuestLogItem title="Create your first survey" subtitle="Start from a template" icon="IconMessage">
+
+Build a survey in the [PostHog web app](/docs/surveys/surfaces/web-app). Start from a template – NPS, product-market fit, churn, or open feedback – or write your own questions from scratch. You can preview exactly how it will look before anyone sees it.
+
+<div className="not-prose grid grid-cols-1 @sm:grid-cols-2 gap-3 my-4">
+  <div className="flex items-start gap-2.5 rounded border border-primary bg-accent p-3">
+    <IconMessage className="size-5 shrink-0 text-blue mt-0.5" />
+    <div>
+      <p className="m-0 text-sm font-bold text-primary">Popover</p>
+      <p className="m-0 mt-0.5 text-xs text-secondary">The default: a targeted popup inside your product</p>
+    </div>
+  </div>
+  <div className="flex items-start gap-2.5 rounded border border-primary bg-accent p-3">
+    <IconTarget className="size-5 shrink-0 text-red mt-0.5" />
+    <div>
+      <p className="m-0 text-sm font-bold text-primary">Widget</p>
+      <p className="m-0 mt-0.5 text-xs text-secondary">An always-available feedback button or custom selector</p>
+    </div>
+  </div>
+  <div className="flex items-start gap-2.5 rounded border border-primary bg-accent p-3">
+    <IconGraph className="size-5 shrink-0 text-purple mt-0.5" />
+    <div>
+      <p className="m-0 text-sm font-bold text-primary">Hosted form</p>
+      <p className="m-0 mt-0.5 text-xs text-secondary">A shareable public URL for email, social, or a QR code</p>
+    </div>
+  </div>
+  <div className="flex items-start gap-2.5 rounded border border-primary bg-accent p-3">
+    <IconPullRequest className="size-5 shrink-0 text-seagreen mt-0.5" />
+    <div>
+      <p className="m-0 text-sm font-bold text-primary">API</p>
+      <p className="m-0 mt-0.5 text-xs text-secondary">Headless, for a fully custom implementation</p>
+    </div>
+  </div>
+</div>
+
+<OSButton variant="primary" asLink to="/docs/surveys/creating-surveys">Create a survey</OSButton>
+
+</QuestLogItem>
+
+<QuestLogItem title="Target the right users" subtitle="Ask the right people at the right moment" icon="IconTarget">
+
+A survey everyone sees is a survey nobody answers. Narrow it down with display conditions – URL matches, event triggers, device type, person properties, cohorts, or a linked [feature flag](/docs/feature-flags) – and set a wait period so you're not interrupting the same person twice.
+
+Then use [conditional questions](/docs/surveys/conditional-questions) so people only answer what's relevant to them: send detractors down one path and promoters down another.
+
+<OSButton variant="primary" asLink to="/docs/surveys/conditional-questions">Set up conditional questions</OSButton>
+
+</QuestLogItem>
+
+<QuestLogItem title="Read the results" subtitle="With the replay attached" icon="IconGraph">
+
+Responses land as events, so you can read them on the survey's results tab, add a survey widget to a [dashboard](/docs/product-analytics/dashboards), or build your own [insights](/docs/product-analytics/insights) and SQL queries. Every response links back to the respondent's [session replay](/docs/session-replay) and events, so vague feedback comes with evidence.
+
+<OSButton variant="primary" asLink to="/docs/surveys/viewing-results">View survey results</OSButton>
+
+</QuestLogItem>
+
+<QuestLogItem title="Get responses where your team already is" subtitle="Slack, Discord, Teams, or a webhook" icon="IconLive">
+
+Nobody checks a results tab every day. Add a notification from the survey's **Notifications** tab and each response is posted to Slack, Discord, Microsoft Teams, or a webhook as it arrives, with the question text and respondent details filled in.
+
+<OSButton variant="primary" asLink to="/docs/surveys/destinations">Set up destinations</OSButton>
+
+</QuestLogItem>
+
+<QuestLogItem title="Let PostHog AI do the reading" subtitle="Themes, sentiment, and summaries" icon="IconSparkles">
+
+Hundreds of open-text answers are useless if nobody reads them. [PostHog AI](/docs/posthog-ai) can build a survey for you from a plain-language description, and summarize the responses afterwards into themes, sentiment, and segment comparisons. It works right inside the web app.
+
+<OSButton variant="primary" asLink to="/docs/surveys/summarize-responses-ai">Summarize with PostHog AI</OSButton>
+
+</QuestLogItem>
+
+<QuestLogItem title="Let Self-driving read them for you" subtitle="Surveys feed Self-driving" icon="IconMagic">
+
+Surveys aren't just a results tab – they're a signal source. A dedicated [Self-driving](/docs/self-driving) scout watches your active surveys for score regressions and abandonment spikes, and clusters open-text answers into recurring themes. Each validated theme becomes one report in the inbox, routed to a human reviewer rather than a coding agent – what to do about user sentiment is a product decision, not a mechanical code fix.
+
+<div className="not-prose flex flex-wrap items-center gap-x-3 gap-y-2 my-4">
+  <span className="flex items-center gap-1.5 text-sm text-secondary">
+    <IconMessage className="size-5 shrink-0" />
+    Responses
+  </span>
+  <span className="text-muted" aria-hidden="true">→</span>
+  <span className="flex items-center gap-1.5 text-sm text-secondary">
+    <IconMagic className="size-5 shrink-0" />
+    Self-driving report
+  </span>
+  <span className="text-muted" aria-hidden="true">→</span>
+  <span className="flex items-center gap-1.5 text-sm text-secondary">
+    <IconPerson className="size-5 shrink-0" />
+    Human review
+  </span>
+</div>
+
+<OSButton variant="primary" asLink to="/docs/self-driving">Surveys and Self-driving</OSButton>
+
+</QuestLogItem>
+
+</QuestLog>

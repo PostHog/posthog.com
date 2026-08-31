@@ -9,41 +9,69 @@ availability:
 sourceId: SendGrid
 ---
 
-<CalloutBox icon="IconFlask" title="Alpha release" type="action">
+import AlphaRelease from "../_snippets/alpha-release.mdx"
+import SourceSetupIntro from "../_snippets/source-setup-intro.mdx"
+import SyncModes from "../_snippets/sync-modes.mdx"
+import TroubleshootingLink from "../_snippets/dw-troubleshooting-link.mdx"
 
-This source is currently in **alpha**. The interface and available tables may change.
+<AlphaRelease />
 
-</CalloutBox>
+The SendGrid connector pulls your SendGrid data into the PostHog data warehouse, covering suppressions, daily email statistics, per-message activity, unsubscribe groups, marketing lists, and email templates.
 
-Enter your SendGrid API key to pull your SendGrid data into the PostHog data warehouse.
+## Prerequisites
+
+You need a SendGrid account with permission to create API keys. Marketing lists additionally require an account with Marketing Campaigns, which is covered under [required scopes](#required-scopes) below.
 
 ## Adding a data source
 
-1. Go to the [sources tab](https://app.posthog.com/data-management/sources) of the data pipeline section in PostHog.
-2. Click **+ New source** and then click **Link** next to SendGrid.
-3. You need an API key from SendGrid. Create one in your [SendGrid account settings](https://app.sendgrid.com/settings/api_keys) under **Settings → API Keys**. Grant the following read access (Restricted Access) so the key can reach the data you want to sync:
-   - **Suppressions** — bounces, blocks, invalid emails, spam reports, global unsubscribes, unsubscribe groups
-   - **Marketing** — marketing lists
-   - **Template Engine** — templates
-4. Back in PostHog, paste the key in the `API key` field and click **Next**.
-5. Select the tables you want to sync, set the sync method and frequency, then click **Import**.
+<SourceSetupIntro />
 
-Once the syncs are complete, you can start using SendGrid data in PostHog.
+The only credential this source needs is a SendGrid API key. Create one in your [SendGrid API keys settings](https://app.sendgrid.com/settings/api_keys) under **Settings > API Keys**. Give it **Restricted Access** and grant read access to the areas you want to sync:
 
-## Available tables
+- **Suppressions** for bounces, blocks, invalid emails, spam reports, global unsubscribes, and unsubscribe groups
+- **Stats** for daily email statistics
+- **Marketing** for marketing lists
+- **Template Engine** for templates
+- **Email Activity** for message activity
 
-| Table | Description | Sync method |
-| ----- | ----------- | ----------- |
-| `bounces` | Suppressed addresses that hard or soft bounced | Incremental |
-| `blocks` | Addresses blocked from receiving mail | Incremental |
-| `invalid_emails` | Addresses rejected as invalid | Incremental |
-| `spam_reports` | Recipients who marked your mail as spam | Incremental |
-| `global_unsubscribes` | Globally unsubscribed addresses | Incremental |
-| `unsubscribe_groups` | Unsubscribe (suppression) groups | Full refresh |
-| `marketing_lists` | Marketing contact lists | Full refresh |
-| `templates` | Email templates (legacy and dynamic) | Full refresh |
+The key value starts with `SG.` and SendGrid shows it only once, so copy it before closing the dialog.
 
-**Incremental** tables sync only new or updated records on each run. **Full refresh** tables reload all data on each sync.
+### Required scopes
+
+SendGrid grants scopes per endpoint, so a key that reads one table often cannot read another. Each table needs the scope below, spelled as SendGrid's `/v3/scopes` endpoint reports it:
+
+| Table                 | SendGrid scope                      |
+| --------------------- | ----------------------------------- |
+| `bounces`             | `suppression.bounces.read`          |
+| `blocks`              | `suppression.blocks.read`           |
+| `invalid_emails`      | `suppression.invalid_emails.read`   |
+| `spam_reports`        | `suppression.spam_reports.read`     |
+| `global_unsubscribes` | `suppression.unsubscribes.read`     |
+| `stats`               | `stats.read`                        |
+| `unsubscribe_groups`  | `asm.groups.read`                   |
+| `marketing_lists`     | `marketing.read`                    |
+| `templates`           | `templates.read`                    |
+| `message_activity`    | `email_activity.read`               |
+
+You don't have to grant every scope. When you paste the key, PostHog checks each table and flags the ones the key can't read, so you can connect with a narrow key and sync only what you need.
+
+<CalloutBox icon="IconWarning" title="Marketing lists need Marketing Campaigns" type="caution">
+
+`marketing_lists` reads SendGrid's Marketing Campaigns API, so `marketing.read` alone isn't always enough. Accounts without Marketing Campaigns, and accounts still on legacy Marketing Campaigns, return a permission error for this table however the key is scoped. If that's your account, leave `marketing_lists` unselected. Every other table still syncs.
+
+</CalloutBox>
+
+<CalloutBox icon="IconWarning" title="Message activity needs the email activity add-on" type="caution">
+
+`message_activity` reads SendGrid's Email Activity feed, which is a paid add-on. Accounts without the additional email activity history add-on return a permission error for this table even with `email_activity.read` granted. The table is unselected by default for that reason. The add-on stores 30 days of history, so the first sync backfills at most the last 30 days.
+
+</CalloutBox>
+
+## Sync modes
+
+<SyncModes />
+
+The suppression tables filter server side on their immutable `created` timestamp, so they sync incrementally. `stats` filters on its daily aggregate date, and backfills the last year on the first sync. `message_activity` narrows a time window over the Email Activity feed. The remaining tables have no timestamp filter in the SendGrid API and sync as a full refresh.
 
 ## Configuration
 
@@ -52,3 +80,23 @@ Once the syncs are complete, you can start using SendGrid data in PostHog.
 ## Supported tables
 
 <SourceTables />
+
+## Troubleshooting
+
+### A table is paused with a missing scope error
+
+The key authenticated but isn't allowed to read that table, so adding the scope fixes it. You don't need to generate a new key:
+
+1. In SendGrid, go to **Settings > API Keys** and edit the existing key.
+2. Add read access for the table's area, using the [required scopes](#required-scopes) table above.
+3. In PostHog, re-enable the sync for that table. A paused table stays paused until you turn it back on.
+
+Allow a few minutes after updating a key before retrying, since SendGrid takes a moment to apply new permissions.
+
+If only `marketing_lists` or `message_activity` fails while the other tables sync, check your account's add-ons before changing scopes. `marketing_lists` needs Marketing Campaigns, and `message_activity` needs the additional email activity history add-on. Without them, no scope grant will make those tables sync.
+
+### The key is rejected when adding the source
+
+A rejected key is invalid or expired rather than under-scoped. Generate a new key in SendGrid and paste the full value, including the `SG.` prefix.
+
+<TroubleshootingLink />

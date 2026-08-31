@@ -42,7 +42,7 @@ Everyone gets a monthly [open-source sponsorship](/handbook/people/spending-mone
 
 ## We'll be your first investor
 
-We'll be your first investor and biggest cheerleader, if you spend two years at PostHog and leave to start a new company. We're looking for entrepreneurs and a strong [Why not now?](/handbook/company/values#why-not-now)!
+We'll be your first investor and biggest cheerleader, if you spend two years at PostHog and leave to start a new company. We're looking for entrepreneurs and a strong [Why not now?](/handbook/values#why-not-now)!
 
 ## Learning and development
 

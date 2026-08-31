@@ -64,7 +64,7 @@ Here's how some of the most popular mobile app analytics tools compare:
 
 ### What is PostHog?
 
-[PostHog](/) (that's us 👋) is an all-in-one platform built to help engineers create better products. It includes product analytics and a whole bunch more, such as [A/B testing](/experiments), [feature flags](/feature-flags), [error tracking](/error-tracking), [LLM observability](/llm-analytics), [web analytics](/web-analytics), [surveys](/surveys), and [session replays](/session-replay).
+[PostHog](/) (that's us 👋) is an all-in-one platform built to help engineers create better products. It includes product analytics and a whole bunch more, such as [A/B testing](/experiments), [feature flags](/feature-flags), [error tracking](/error-tracking), [LLM observability](/ai-observability), [web analytics](/web-analytics), [surveys](/surveys), and [session replays](/session-replay).
 
 It's designed for product-minded engineers, growth teams, and product managers who need to move fast and iterate based on reliable, actionable insights.
 
@@ -202,7 +202,7 @@ Looking at [G2 reviews](https://www.g2.com/products/uxcam/reviews), companies ch
 
 ### How much does Amplitude cost?
 
-Amplitude has a free Starter plan with 10,000 monthly tracked users (MTUs), 1,000 session replays, and core analytics features. The Plus plan starts at $49/month on an annual plan. Growth and Enterprise plans have custom pricing based on MTUs and event volume.
+Amplitude has a free plan with 2 million events per month, 1,000 session replays, and core analytics features. The Plus plan is usage-based, with the first 2 million events free and pricing scaling with event volume. Growth and Enterprise plans have custom, event-based pricing.
 
 ### Why do companies use Amplitude?
 
@@ -363,6 +363,19 @@ It's completely free to get started – no credit card required. Our [setup wiza
 <WizardCTA />
 
 ## FAQ
+
+<details>
+<summary>PostHog says it makes your product "self-driving" – what does that mean?</summary>
+
+It means PostHog digs through your product data, finds what's worth fixing, and has agents do the work.
+
+It starts with context. A full suite of developer tools – [AI Observability](/ai-observability), [Product Analytics](/product-analytics), [Session Replay](/session-replay), [Feature Flags](/feature-flags), [Experiments](/experiments), [Error Tracking](/error-tracking), [Logs](/logs), and more – captures everything happening in your product, and a [Context Warehouse](/blog/what-is-a-context-warehouse) unifies it into one source agents can read across.
+
+From there, [Scouts](/blog/what-is-a-scout) read across all of it and sort what's worth knowing from what's just noise. What clears the bar becomes a report in your inbox: an agent picks it up, roots out the cause, and opens a PR. You review and merge.
+
+You can steer it from [Slack](/slack), the [web app](/ai), the [desktop app](/desktop), or your own editor via [the MCP](/mcp) or [CLI](/docs/cli).
+
+</details>
 
 <details>
   <summary>What is mobile app analytics?</summary>

@@ -76,7 +76,7 @@ The other reason to set up early: [activation metrics](/product-engineers/activa
 
 #### PostHog
 
-[PostHog](/) bundles [product analytics](/product-analytics] with [web analytics](/web-analytics), [session replay](/session-replay), [feature flags](/feature-flags), [A/B testing](/experiments), [surveys](/surveys), [error tracking](/error-tracking), [LLM observability](/llm-analytics), and more – which means it covers all layers of this guide on its own. The free tier includes 1M events per month, and over 90% of users pay $0.
+[PostHog](/) bundles [product analytics](/product-analytics) with [web analytics](/web-analytics), [session replay](/session-replay), [feature flags](/feature-flags), [A/B testing](/experiments), [surveys](/surveys), [error tracking](/error-tracking), [LLM observability](/ai-observability), and more – which means it covers all layers of this guide on its own. The free tier includes 1M events per month, and over 90% of users pay $0.
 
 For vibe coders specifically, three things stand out:
 
@@ -219,7 +219,7 @@ A few things to look for:
 
 #### 1. PostHog
 
-[PostHog's LLM observability](/llm-analytics) tracks cost, latency, token usage, model performance, and output quality alongside your product analytics. The advantage: you can correlate AI feature usage with retention and conversion in the same tool. 
+[PostHog's LLM observability](/ai-observability) tracks cost, latency, token usage, model performance, and output quality alongside your product analytics. The advantage: you can correlate AI feature usage with retention and conversion in the same tool. 
 
 It also includes [evals](/docs/ai-evals) (so you can score model outputs and catch regressions when you tweak a prompt) and [prompt management](/docs/prompt-management) (versioning, A/B testing, and rollback for production prompts).
 
@@ -290,6 +290,19 @@ And if you want your product to *drive itself* (aka pick up signals from errors,
 It's the next step beyond reactive analytics: instead of waiting for you to notice a bug or churn signal, it proactively spots them and opens a pull request to fix it.
 
 ## Frequently asked questions
+
+<details>
+<summary>PostHog says it makes your product "self-driving" – what does that mean?</summary>
+
+It means PostHog digs through your product data, finds what's worth fixing, and has agents do the work.
+
+It starts with context. A full suite of developer tools – [AI Observability](/ai-observability), [Product Analytics](/product-analytics), [Session Replay](/session-replay), [Feature Flags](/feature-flags), [Experiments](/experiments), [Error Tracking](/error-tracking), [Logs](/logs), and more – captures everything happening in your product, and a [Context Warehouse](/blog/what-is-a-context-warehouse) unifies it into one source agents can read across.
+
+From there, [Scouts](/blog/what-is-a-scout) read across all of it and sort what's worth knowing from what's just noise. What clears the bar becomes a report in your inbox: an agent picks it up, roots out the cause, and opens a PR. You review and merge.
+
+You can steer it from [Slack](/slack), the [web app](/ai), the [desktop app](/desktop), or your own editor via [the MCP](/mcp) or [CLI](/docs/cli).
+
+</details>
 
 <details>
 <summary>Do I really need analytics if I'm just shipping a weekend project?</summary>

@@ -4,19 +4,21 @@ hideRightSidebar: true
 contentMaxWidthClass: max-w-5xl
 ---
 
-import AlphaCallout from './_snippets/alpha-callout'
+import BetaCallout from './_snippets/beta-callout'
 import { CalloutBox } from 'components/Docs/CalloutBox'
+import PlatformInstall from 'components/PlatformInstall'
 
 In this guide you'll take a metric that only exists in people's heads – MRR – and turn it into a governed definition every AI session agrees on. The whole thing is one agent conversation: the agent proposes, you approve, and from then on every client that asks about MRR gets the same number.
 
-<AlphaCallout />
+<BetaCallout />
 
 ## Prerequisites
 
-- The semantic layer alpha enabled for your organization
-- The [PostHog MCP server](/docs/model-context-protocol) connected to your agent (Claude Code, Cursor, Claude Desktop, or any MCP client)
 - An API key with the `data_catalog` scope – add `data_catalog_approval` too, since you'll approve a metric in this guide (see [governance](/docs/semantic-layer/governance#api-scopes) for why they're separate)
 - Some revenue-ish data in your [data warehouse](/docs/data-warehouse), like a synced `stripe_subscriptions` table
+- The [PostHog MCP server](/docs/model-context-protocol) connected to your agent (Claude Code, Cursor, Claude Desktop, or any MCP client)
+
+<PlatformInstall />
 
 ## Step 1: See the problem
 
@@ -38,9 +40,9 @@ Instead of letting every session re-derive MRR, catalog it:
 
 The metric now exists, but it has no authority yet. Every AI-created object in the catalog lands as `proposed` – that's the "AI generates" half of the model.
 
-<CalloutBox icon="IconInfo" title="Names are write-once" type="fyi">
+<CalloutBox icon="IconInfo" title="Names are references" type="fyi">
 
-A metric's `name` is an identifier, like an API route: lowercase, no spaces, unique in your project. It can never be renamed or reused – even after deletion, the name stays reserved so a stored reference never silently changes meaning. Pick `mrr`, not `monthly_recurring_revenue_v2_final`. The `display_name` is the human label and stays editable.
+A metric's `name` is an identifier, like an API route: lowercase, no spaces, unique among your project's live metrics. You *can* rename or delete a metric later, but that frees the name and breaks anything that stored it – saved queries, API calls, links – so pick a name worth keeping. Pick `mrr`, not `monthly_recurring_revenue_v2_final`. The `display_name` is the human label and can change freely.
 
 </CalloutBox>
 
@@ -54,11 +56,11 @@ Now the "a human owns" half. Look at what the agent proposed before you sign it:
 >
 > **You:** Looks right. Approve the `mrr` metric.
 >
-> **Agent:** _Calls `data-catalog-metric-approve`._ About to approve metric 'mrr' as a canonical, human-vouched metric. Reply 'confirm' to proceed.
+> **Agent:** _Calls `data-catalog-metric-approve-prepare`._ About to approve metric 'mrr' as a canonical, human-vouched metric. Reply 'confirm' to proceed.
 >
 > **You:** confirm
 >
-> **Agent:** Done – `mrr` is now `approved`.
+> **Agent:** _Calls `data-catalog-metric-approve-execute`._ Done – `mrr` is now `approved`.
 
 The typed "confirm" is deliberate: it's the human signature that makes a metric canonical, and an agent can't autocomplete it. Approval also requires the `data_catalog_approval` scope, so a key without it can propose but never promote.
 

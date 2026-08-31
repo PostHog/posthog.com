@@ -10,7 +10,7 @@ import OSButton from 'components/OSButton'
 import CalloutBox from 'components/Docs/CalloutBox'
 import WizardCommand from 'components/WizardCommand'
 
-<CalloutBox icon="IconFlask" title="MCP Analytics is in beta" type="action">
+<CalloutBox icon="IconFlask" title="MCP Analytics is in beta" type="fyi">
 
 `@posthog/mcp` is published as a `0.1.x` release on npm. We're building it in public – the event shape, options, and tracing behavior may still change before `1.0`. Pin a specific version and don't depend on it for production reporting yet.
 
@@ -33,7 +33,7 @@ MCP Analytics gives you visibility into how AI agents actually use the MCP serve
 - 🧵 The full session, end to end
 - 🚧 Capabilities the agent wished existed (with `reportMissing`)
 
-The SDK supports any TypeScript MCP server built on `@modelcontextprotocol/sdk`. The fastest way to get set up is our wizard, which installs the package and wires up `instrument()` for you (it also works for [LLM coding agents](/blog/envoy-wizard-llm-agent) like Cursor and Bolt):
+The SDK supports any TypeScript MCP server, on [either major](/docs/mcp-analytics/sdk-v2) of the MCP SDK. The fastest way to get set up is our wizard, which installs the package and wires up `instrument()` for you (it also works for [LLM coding agents](/blog/envoy-wizard-llm-agent) like Cursor and Bolt):
 
 <WizardCommand command="mcp-analytics" />
 
@@ -50,7 +50,7 @@ import { instrument } from "@posthog/mcp"
 
 const server = new Server({ name: "my-mcp-server", version: "1.0.0" })
 
-const posthog = new PostHog(process.env.POSTHOG_PROJECT_API_KEY, {
+const posthog = new PostHog(process.env.POSTHOG_PROJECT_TOKEN, {
   host: "https://us.i.posthog.com",
 })
 
@@ -125,7 +125,7 @@ Learn about intent capture
     icon="IconLineGraph"
 >
 
-Every event is a normal PostHog event, so insights, dashboards, alerts, and SQL all work without further setup – and the [MCP Analytics view](/docs/mcp-analytics) (in beta – [enable the feature preview](https://app.posthog.com/settings/user-feature-previews#mcp-analytics)) gives you the most useful cuts out of the box. The four queries we suggest building (or reading straight from the dashboard) first:
+Every event is a normal PostHog event, so insights, dashboards, alerts, and SQL all work without further setup – and the [MCP Analytics view](/docs/mcp-analytics) (in beta) gives you the most useful cuts out of the box. The four queries we suggest building (or reading straight from the dashboard) first:
 
 - ### <IconGraph className="text-blue w-7 -mt-1 inline-block"/> Top tools per server
   Where is your agent traffic concentrated? Which tools earn their keep?
@@ -163,9 +163,11 @@ Copy-paste queries
 By default each event is attributed to the MCP connection's session ID. To attribute calls to a real user – for per-user retention, group analytics, and person properties – wire an `identify` callback:
 
 ```ts
+import { instrument, getRequestHeaders } from "@posthog/mcp"
+
 instrument(server, posthog, {
   identify: async (request, extra) => {
-    const token = extra?.requestInfo?.headers?.authorization
+    const token = getRequestHeaders(extra)?.["authorization"]
     const user = token ? await resolveUserFromToken(token) : null
     return user ? { distinctId: user.id, properties: { name: user.name } } : null
   },

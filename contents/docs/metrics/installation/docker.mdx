@@ -1,0 +1,120 @@
+---
+title: Docker metrics installation
+platformLogo: docker
+showStepsToc: true
+---
+
+import { Steps, Step } from "components/Docs/Steps";
+import MetricsNextSteps from "./_snippets/metrics-next-steps.mdx";
+
+> **Note:** Metrics is in alpha. Setup details, including the ingestion endpoint, may change before general availability.
+
+If your services already expose Prometheus-format `/metrics` endpoints, the PostHog metrics agent scrapes them and forwards everything to PostHog. One `docker run`, no application changes.
+
+Running Kubernetes? Use the [Helm chart](/docs/metrics/installation/kubernetes) instead, which also discovers annotated pods automatically.
+
+<Steps>
+
+<Step title="Get your project token" badge="required">
+
+You'll need your PostHog project token to authenticate metrics requests. This is the same token you use for capturing events with the PostHog SDK.
+
+> **Important:** Use your **project token**, which starts with `phc_`. Do **not** use a personal API key (which starts with `phx_`).
+
+You can find your project token in [Project Settings](https://app.posthog.com/settings).
+
+</Step>
+
+<Step title="Run the agent" badge="required">
+
+Point the agent at one or more `host:port` targets that expose `/metrics`:
+
+```bash
+docker run -d --name posthog-metrics-agent \
+  -e POSTHOG_API_KEY=<ph_project_token> \
+  -e POSTHOG_HOST=<ph_client_api_host> \
+  -e SCRAPE_TARGETS=your-app:9090,your-worker:9091 \
+  posthog/metrics-agent:latest
+```
+
+The agent scrapes each target every 15 seconds by default. Two common adjustments:
+
+```bash
+  -e SCRAPE_INTERVAL=30s \
+  -e SCRAPE_METRICS_PATH=/custom/metrics \
+```
+
+Set `SCRAPE_JOB_NAME` to control the `service_name` your metrics arrive under. It defaults to `posthog-metrics-agent`.
+
+</Step>
+
+<Step title="Verify metrics are flowing" badge="recommended">
+
+1. Check the agent started cleanly:
+
+```bash
+docker logs posthog-metrics-agent
+```
+
+You should see `Everything is ready. Begin running and processing data.` Scrape or export errors appear in the same log.
+
+2. Open [**Metrics**](https://app.posthog.com/metrics) in PostHog and pick a metric from the name picker. Data points should appear within a minute.
+
+The agent also exposes its own health: `:13133` answers health probes, and `:8888/metrics` serves the agent's own metrics, including scrape successes, queue depth, and points sent or dropped.
+
+<CallToAction type="primary" to="https://app.posthog.com/metrics">
+  View your metrics in PostHog
+</CallToAction>
+
+</Step>
+
+<Step title="Keep data through restarts" badge="optional">
+
+By default, if PostHog is briefly unreachable the agent retries from memory, and a restart during that window drops whatever was buffered. To keep those samples, back the queue with disk:
+
+```bash
+docker run -d --name posthog-metrics-agent \
+  -e POSTHOG_API_KEY=<ph_project_token> \
+  -e SCRAPE_TARGETS=your-app:9090 \
+  -e PERSIST_QUEUE=1 \
+  -v posthog-agent-queue:/var/lib/posthog-agent \
+  posthog/metrics-agent:latest
+```
+
+Samples scraped during an outage then survive restarts and deliver when PostHog is reachable again.
+
+</Step>
+
+<Step title="Scale out with shards" badge="optional">
+
+One agent scrapes every target itself, which is enough for most setups. For a large target set, run a fleet: set `SHARD_COUNT` on every instance and give each one a distinct `SHARD_INDEX` from `0` to `SHARD_COUNT - 1`. Each instance then scrapes only the targets whose address hashes to its shard, so nothing is scraped twice and nothing is missed.
+
+Don't scale with plain copies of one agent: two unsharded agents scraping the same targets record every metric twice.
+
+</Step>
+
+<MetricsNextSteps />
+
+</Steps>
+
+## Configuration reference
+
+| Variable              | Default                    | Description                                                                  |
+| --------------------- | -------------------------- | ---------------------------------------------------------------------------- |
+| `POSTHOG_API_KEY`     | required                   | Project token (`phc_...`), sent as a bearer token                            |
+| `POSTHOG_HOST`        | `https://us.i.posthog.com` | PostHog ingestion origin. Set to `https://eu.i.posthog.com` for EU Cloud     |
+| `SCRAPE_TARGETS`      | required                   | Comma-separated `host:port` list to scrape                                   |
+| `SCRAPE_INTERVAL`     | `15s`                      | How often to scrape each target                                              |
+| `SCRAPE_METRICS_PATH` | `/metrics`                 | Metrics path on the targets                                                  |
+| `SCRAPE_JOB_NAME`     | `posthog-metrics-agent`    | Becomes `service_name` on every metric                                       |
+| `SHARD_COUNT`         | `1`                        | Fleet size. Above 1, each instance scrapes only its share of the targets     |
+| `SHARD_INDEX`         | from hostname ordinal      | This instance's shard, `0` to `SHARD_COUNT - 1`                              |
+| `PERSIST_QUEUE`       | off                        | Set to `1` to buffer undelivered batches on disk                             |
+| `QUEUE_DIR`           | `/var/lib/posthog-agent`   | Where the persistent queue is stored                                         |
+| `POSTHOG_DEBUG`       | off                        | Set to `1` to also log exported batches to stdout                            |
+
+For custom Prometheus `scrape_configs` or a full OpenTelemetry Collector config, mount them into the container. The [agent README](https://github.com/PostHog/posthog/tree/master/products/metrics/agent) documents both escape hatches.
+
+## Exemplars: link metrics to traces
+
+If your Prometheus client attaches exemplars (trace and span IDs on counters and histograms), the agent preserves them, and the metrics viewer links those data points to the matching [traces](/docs/distributed-tracing). The agent requests the OpenMetrics format automatically, because it's the only Prometheus format that carries exemplars. If your endpoint only serves classic Prometheus text, metrics still flow, only without trace links.

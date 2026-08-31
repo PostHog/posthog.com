@@ -34,7 +34,7 @@ Beyond PostHog's free tier, we try to be as cheap as possible and transparent. W
 
 [Web analytics](/web-analytics) is a core feature of PostHog, but we offer many more tools to help you analyze, test, observe, and deploy your site and app.
 
-These include [product analytics](/product-analytics), [session replay](/session-replay), [surveys](/surveys), [experiments](/experiments), [feature flags](/feature-flags), a [data warehouse](/data-warehouse), [error tracking](/error-tracking), [LLM observability](/llm-analytics), [logs](/logs), [workflows](/workflows), a [CDP](/cdp), and more.
+These include [product analytics](/product-analytics), [session replay](/session-replay), [surveys](/surveys), [experiments](/experiments), [feature flags](/feature-flags), a [data warehouse](/data-warehouse), [error tracking](/error-tracking), [LLM observability](/ai-observability), [logs](/logs), [workflows](/workflows), a [CDP](/cdp), and more.
 
 ### 3. We're multi-platform
 
@@ -189,9 +189,9 @@ PostHog is [entirely usage-based](/pricing). Its free tier includes:
 | Feature flags and A/B testing |    1 million API requests   |  From $0.0001/request    |
 | Surveys                       |    1,500 responses          |  From $0.10/response     |
 | Error tracking                |    100,000 exceptions       |  From $0.00037/exception |
-| LLM observability             |    100,000 events           |  From $0.00006/event     |
+| LLM observability             |    100,000 events           |  From $0.00035/event     |
 | Data warehouse                |    1 million synced rows    |  From $0.000015/row      |
-| Logs                          |    50 GB ingested           |  From $0.25/GB           |
+| Logs                          |    10 GB ingested           |  From $0.25/GB           |
 | Workflows                     |    10,000 messages/channel  |  From $0.003/email       |
 | PostHog AI                    |    500 credits              |  From $1 per 100 credits |
 
@@ -215,7 +215,7 @@ Choosing the right analytics tool depends on what you need it to do. Here's a qu
 - **Plausible** – Clean, real-time dashboard that shows pageviews, referrers, and top pages at a glance. No training needed, no cookie banners, and a script that's significantly smaller than Google Analytics.
 
 **For marketing teams**
-- **Plausible** – UTM campaign tracking, Google Search Console integration, and conversion goals without the complexity of GA4. PostHog also covers these basics via [web analytics](/web-analytics) and can send conversion data to ad platforms like Google and Meta via its [CDP](/docs/cdp), but adds product-level depth most marketers won't need.
+- **Plausible** – UTM campaign tracking, Google Search Console integration, and conversion goals without the complexity of GA4. PostHog also covers these basics via [web analytics](/web-analytics) and a [Google Search Console source](/docs/cdp/sources/google-search-console), and can send conversion data to ad platforms like Google and Meta via its [CDP](/docs/cdp), but adds product-level depth most marketers won't need.
 
 **For privacy-conscious and regulated organizations**
 - Both are open source, GDPR-ready, and hosted in the EU. PostHog is also SOC 2 certified, HIPAA-ready, and offers a built-in [data warehouse](/data-warehouse) for full data access. Plausible is cookieless by default with no personal data collection, which can eliminate the need for consent banners entirely.
@@ -226,6 +226,19 @@ Choosing the right analytics tool depends on what you need it to do. Here's a qu
 <WizardCTA />
 
 ## Frequently asked questions
+
+<details>
+<summary>PostHog says it makes your product "self-driving" – what does that mean?</summary>
+
+It means PostHog digs through your product data, finds what's worth fixing, and has agents do the work.
+
+It starts with context. A full suite of developer tools – [AI Observability](/ai-observability), [Product Analytics](/product-analytics), [Session Replay](/session-replay), [Feature Flags](/feature-flags), [Experiments](/experiments), [Error Tracking](/error-tracking), [Logs](/logs), and more – captures everything happening in your product, and a [Context Warehouse](/blog/what-is-a-context-warehouse) unifies it into one source agents can read across.
+
+From there, [Scouts](/blog/what-is-a-scout) read across all of it and sort what's worth knowing from what's just noise. What clears the bar becomes a report in your inbox: an agent picks it up, roots out the cause, and opens a PR. You review and merge.
+
+You can steer it from [Slack](/slack), the [web app](/ai), the [desktop app](/desktop), or your own editor via [the MCP](/mcp) or [CLI](/docs/cli).
+
+</details>
 
 <details>
 <summary>How much do PostHog and Plausible cost?</summary>
@@ -293,7 +306,7 @@ No. **Plausible** doesn't offer experimentation or feature flag tools. If you ne
 <details>
 <summary>Which is better for SEO tracking?</summary>
 
-**Plausible** integrates with Google Search Console and displays this data directly on its main dashboard. **PostHog** doesn't have a direct GSC integration, but supports tracking through [web analytics](/web-analytics) with the added ability to connect traffic data to product behavior like sign-ups, conversions, and feature usage.
+**Plausible** integrates with Google Search Console and displays this data directly on its main dashboard. **PostHog** connects to Google Search Console as a [data warehouse source](/docs/cdp/sources/google-search-console) – syncing clicks, impressions, CTR, and average position – and adds the ability to connect that traffic data to product behavior like sign-ups, conversions, and feature usage through [web analytics](/web-analytics).
 
 </details>
 

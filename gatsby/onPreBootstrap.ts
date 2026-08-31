@@ -4,6 +4,7 @@ import path from 'path'
 import fs from 'fs'
 
 import { fetchAndProcessMCPTools, writeMCPToolsToFile } from './utils/fetchMCPTools'
+import { fetchScoutSkills, writeScoutSkillsToFile } from './utils/fetchScoutSkills'
 import { enrichVideos } from './enrichVideos'
 
 export const PAGEVIEW_CACHE_KEY = 'onPreBootstrap@@posthog-pageviews'
@@ -81,6 +82,16 @@ posthog.init("${process.env.GATSBY_POSTHOG_API_KEY}", {
     error_tracking: {
         __capturePostHogExceptions: true,
     },
+    // Drop exceptions coming from local dev servers so developers' local
+    // exceptions (e.g. Gatsby dev-server ChunkLoadErrors on hot recompiles)
+    // don't pollute production error tracking. Real users are never on localhost.
+    before_send: function (event) {
+        var hostname = window.location.hostname
+        if (event && event.event === '$exception' && (hostname === 'localhost' || hostname === '127.0.0.1')) {
+            return null
+        }
+        return event
+    },
     person_profiles: 'identified_only',
     __preview_heatmaps: true,
     opt_in_site_apps: true,
@@ -109,6 +120,10 @@ posthog.init("${process.env.GATSBY_POSTHOG_API_KEY}", {
     // Fetch and process MCP tool definitions
     const mcpToolsData = await fetchAndProcessMCPTools()
     writeMCPToolsToFile(mcpToolsData)
+
+    // Fetch the scout SKILL.md files the pocket guides render. The monorepo owns them, so a guide
+    // and the app's create-scout modal can never disagree about what a scout does.
+    writeScoutSkillsToFile(await fetchScoutSkills())
 
     // Cache the data if successful
     if (!mcpToolsData.error && mcpToolsData.categories) {

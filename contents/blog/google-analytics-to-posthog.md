@@ -154,7 +154,7 @@ Although [PostHog is event-based](/docs/how-posthog-works/data-model), it still 
 
 - Every event contains a distinct ID for a person.
 - With the snippet, every person gets an anonymous distinct ID. This gets stored in a cookie and automatically added to the events they trigger.
-- You can use the [identify](/docs/data/identify) function to connect a person with a distinct ID like email or username.
+- You can use the [identify](/docs/product-analytics/identify) function to connect a person with a distinct ID like email or username.
 - You can use the [group](/docs/product-analytics/group-analytics) function to connect a person with a group like an organization or company.
 
 ![Event structure](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/google-analytics-to-posthog/event.png)
@@ -165,7 +165,7 @@ You can then use all of this data in your insights. For example, you can aggrega
 
 Like Google Analytics, each of the event series, insights, and dashboards is filterable. Filters are largely created with our version of "dimensions," named [properties](/docs/data/events#event-properties). 
 
-Properties are keys and values set on events, persons, and groups adding more details about them. For example, the pageview event contains properties for the timestamp, OS, browser, current URL, referring domain, geographic data, and more. PostHog automatically adds some properties, but if you capture [custom events](/docs/libraries/js/features#custom-event-capture), you can also send as many custom properties as you want.
+Properties are keys and values set on events, persons, and groups adding more details about them. For example, the pageview event contains properties for the timestamp, OS, browser, current URL, referring domain, geographic data, and more. PostHog automatically adds some properties, but if you capture [custom events](/docs/libraries/js/usage#capturing-events), you can also send as many custom properties as you want.
 
 ```js
 posthog.capture('signed up', {email: 'ian@posthog.com', paid: true});
@@ -231,7 +231,7 @@ This makes it an easy way to track new and returning visitors to your website, a
 
 ## Added benefits of PostHog
 
-- Easy [custom event capture](/docs/libraries/js/features#custom-event-capture) with nearly limitless custom properties.
+- Easy [custom event capture](/docs/libraries/js/usage#capturing-events) with nearly limitless custom properties.
 
 - [Session replays](/docs/session-replay) with visuals of actual user behavior on your site and performance stats.
 

@@ -93,7 +93,7 @@ What separates Langfuse from simple cost trackers is the depth of its eval and d
 <details>
 <summary>Quick PostHog vs Langfuse free tier comparison</summary>
 
-- PostHog has 100K free events/month, Langfuse has 50K free events/month
+- PostHog has 100K free events/month, Langfuse has 50K free units/month
 - PostHog includes unlimited free seats, Langfuse includes 2 free seats
 - Both include 30-day free data retention
 - Both have an evergreen free tier
@@ -139,7 +139,7 @@ Developers who want vendor-neutral, OpenTelemetry-native instrumentation they ca
 
 ### 4. Arize (Phoenix)
 
-**Arize** built Phoenix, a popular open source AI observability project with no limits on traces, retention, or users when self-hosted.
+**Arize** built Phoenix, a popular open source AI observability project with no limits on traces, retention, or users when self-hosted. Arize was acquired by Dynatrace in August 2026.
 
 AX Free is the hosted version of that same project for teams who would rather not run infra, and it adds online (production) evaluations that the local open source build does not include.
 
@@ -266,7 +266,7 @@ Its "Loop" assistant agent generates scorers, prompts, and datasets from plain-l
 **Strengths:**
 - Unlimited users on the free plan, rare in this list
 - Scores-and-evals-first UX, strong for teams measuring output quality
-- SOC 2 Type II and multi-factor authentication (MFA) on the free tier
+- SOC 2 Type 2 and multi-factor authentication (MFA) on the free tier
 
 <details>
 <summary>Quick PostHog vs Braintrust free tier comparison</summary>
@@ -355,11 +355,24 @@ Enterprises already standardized on Datadog who want LLM traces correlated with 
 #### For enterprises with compliance needs
 
 - **Datadog** when you already run their platform and want LLM traces beside infrastructure and APM telemetry (expect per-host platform pricing)
-- **PostHog** for [CDP](/cdp), [data warehouse](/data-stack), and AI observability under one vendor, with self-host and EU hosting for data residency
+- **PostHog** for [CDP](/cdp), [data warehouse](/context-warehouse), and AI observability under one vendor, with self-host and EU hosting for data residency
 
 <WizardCTA />
 
 ## Frequently asked questions
+
+<details>
+<summary>PostHog says it makes your product "self-driving" – what does that mean?</summary>
+
+It means PostHog digs through your product data, finds what's worth fixing, and has agents do the work.
+
+It starts with context. A full suite of developer tools – [AI Observability](/ai-observability), [Product Analytics](/product-analytics), [Session Replay](/session-replay), [Feature Flags](/feature-flags), [Experiments](/experiments), [Error Tracking](/error-tracking), [Logs](/logs), and more – captures everything happening in your product, and a [Context Warehouse](/blog/what-is-a-context-warehouse) unifies it into one source agents can read across.
+
+From there, [Scouts](/blog/what-is-a-scout) read across all of it and sort what's worth knowing from what's just noise. What clears the bar becomes a report in your inbox: an agent picks it up, roots out the cause, and opens a PR. You review and merge.
+
+You can steer it from [Slack](/slack), the [web app](/ai), the [desktop app](/desktop), or your own editor via [the MCP](/mcp) or [CLI](/docs/cli).
+
+</details>
 
 <details>
 <summary>Do all AI observability tools have a free tier?</summary>

@@ -9,6 +9,14 @@ PostHog is now available on AWS Marketplace for SaaS products. The way we've cho
 
 AWS Marketplace lets vendors use their own terms and MSA. For now, PostHog team members set the price as a lump sum credit purchase for **annual pre-payment only**. Down the road, if we change our listing to public on the marketplace, we could set up usage-based billing through AWS (but that's future state).
 
+## Default to Stripe
+
+**Stripe is our default billing method. Only use AWS Marketplace when the customer specifically asks for it.**
+
+Stripe charges a flat fee per bank transfer regardless of deal size, and the cash lands with us straight away. AWS Marketplace takes a percentage cut on new contracts and disburses on its own schedule, so we get paid less and later, with more admin along the way.
+
+That said, we don't want to block customers from buying the way that's easiest for them. If procuring through their existing AWS spend is what unblocks the deal, use AWS Marketplace — it's available, we're just not promoting it. Don't offer it unprompted.
+
 ## Why this matters
 
 1. **Our ICP lives in AWS** - Product engineers already have AWS access and budget. Adding PostHog to their AWS bill just makes sense since we're part of their product infrastructure stack
@@ -20,7 +28,7 @@ AWS Marketplace lets vendors use their own terms and MSA. For now, PostHog team 
 
 For now, we're keeping it simple:
 - **Annual contracts only** (upfront payment)
-- **Minimum $100k deal size** (this is flexible, but let's start here)
+- **No minimum deal size beyond our usual [sales-assist threshold](/handbook/growth/sales/new-sales#leads-below-the-sales-assist-threshold-less-than-20k-arr)** – there's no extra overhead in selling this way, so if a customer wants to procure via AWS Marketplace, go ahead
 
 ## Using Clazar for private offers
 
@@ -49,6 +57,7 @@ Since AWS Marketplace can be a pain to navigate, we're using Clazar to manage th
    - Set as **upfront payment** (non-FPS offer)
    - Enter the negotiated price
    - Currency: USD (can do EUR, GBP, JPY if needed)
+   - **PostHog credits are post-discount** – the credit balance we apply equals the discounted amount the customer pays through AWS, not the pre-discount list value
 6. **Choose EULA type:**
    - Use **Standard Contract for AWS Marketplace** unless legal says otherwise
    - If custom EULA needed, upload the PDF (max 5 docs)
@@ -74,6 +83,7 @@ If you need more control or Salesforce isn't cooperating:
    - Add your product dimensions
    - Set prices for each dimension
    - For annual deals, configure as single upfront payment
+   - **PostHog credits are post-discount** – the credit balance we apply equals the discounted amount the customer pays through AWS, not the pre-discount list value
 7. **Legal terms:**
    - Select EULA type (Standard Contract or Custom)
    - Upload any additional documents if needed

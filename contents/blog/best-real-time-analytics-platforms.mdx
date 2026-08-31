@@ -57,7 +57,7 @@ The best real-time analytics tools go further with:
 
 The real-time dashboard is currently in alpha.
 
-What makes [PostHog](/) different from a standalone analytics tool is that it's a [multi-tool developer platform](/products). The same events powering your live view are also available across [product analytics](/product-analytics), [session replay](/session-replay), [feature flags](/feature-flags), [experiments](/experiments), [error tracking](/error-tracking), [LLM observability](/llm-analytics) and more, all in one place.
+What makes [PostHog](/) different from a standalone analytics tool is that it's a [multi-tool developer platform](/products). The same events powering your live view are also available across [product analytics](/product-analytics), [session replay](/session-replay), [feature flags](/feature-flags), [experiments](/experiments), [error tracking](/error-tracking), [LLM observability](/ai-observability) and more, all in one place.
 
 Watch a launch spike land in real time, then jump into a session replay to see what users actually did when they arrived. If error tracking flags a problem mid-deploy, you can see who was affected, watch their sessions, and ship a fix behind a feature flag without leaving the tool. The anonymous visitor on your pricing page right now is already connected to the journey they'll have tomorrow when they sign up.
 
@@ -238,6 +238,19 @@ It's completely free to get started – no credit card required. Our [setup wiza
 <WizardCTA />
 
 ## Frequently asked questions
+
+<details>
+<summary>PostHog says it makes your product "self-driving" – what does that mean?</summary>
+
+It means PostHog digs through your product data, finds what's worth fixing, and has agents do the work.
+
+It starts with context. A full suite of developer tools – [AI Observability](/ai-observability), [Product Analytics](/product-analytics), [Session Replay](/session-replay), [Feature Flags](/feature-flags), [Experiments](/experiments), [Error Tracking](/error-tracking), [Logs](/logs), and more – captures everything happening in your product, and a [Context Warehouse](/blog/what-is-a-context-warehouse) unifies it into one source agents can read across.
+
+From there, [Scouts](/blog/what-is-a-scout) read across all of it and sort what's worth knowing from what's just noise. What clears the bar becomes a report in your inbox: an agent picks it up, roots out the cause, and opens a PR. You review and merge.
+
+You can steer it from [Slack](/slack), the [web app](/ai), the [desktop app](/desktop), or your own editor via [the MCP](/mcp) or [CLI](/docs/cli).
+
+</details>
 
 <details>
   <summary>What is a real-time analytics tool?</summary>

@@ -1,6 +1,6 @@
 ---
 title: 'The best Datadog alternatives & competitors, compared'
-date: 2026-02-19
+date: 2026-08-24
 author:
     - ian-vanagas
 rootpage: /blog
@@ -576,13 +576,17 @@ Here's what G2 reviewers like about Better Stack:
 
 ### What is PostHog?
 
-[PostHog](/) (that's us 👋) is an all-in-one platform combining [logs](/logs), [error tracking](/error-tracking), [session replays](/session-replay), [product analytics](/product-analytics), [A/B testing](/experiments), [feature flags](/feature-flags), [user surveys](/surveys), [LLM observability](/llm-analytics), and more into one product. 
+[PostHog](/) (that's us 👋) is an all-in-one platform combining [logs](/logs), [distributed tracing](/traces), metrics, [error tracking](/error-tracking), [session replays](/session-replay), [product analytics](/product-analytics), [A/B testing](/experiments), [feature flags](/feature-flags), [user surveys](/surveys), [LLM observability](/ai-observability), and more into one product. 
 
 This means it's not only an alternative to Datadog but also tools like [Amplitude](/blog/posthog-vs-amplitude), [Sentry](/blog/posthog-vs-sentry), and [LaunchDarkly](/blog/posthog-vs-launchdarkly).
 
 #### Key features
 
 - **Logs:** Filter, aggregate, and explore logs by attributes instead of scrolling text and combine with all the rest of your analytics data. Works with OpenTelemetry data.
+
+- **Distributed tracing (beta):** Follow one request across every service, queue, database, and third-party API it touches, then read the result as a waterfall. Point your existing [OpenTelemetry](/docs/distributed-tracing) exporter at PostHog – there is no proprietary agent or SDK to install.
+
+- **Metrics (alpha):** Send counters, gauges, and histograms over OpenTelemetry, with the `posthog.metrics` API in the SDK you already have, or with a [Helm chart](/docs/metrics/installation/kubernetes) that scrapes the Prometheus endpoints your Kubernetes pods already expose.
 
 - **Error tracking:** [Capture errors and exceptions](/docs/error-tracking/installation). Provide stack traces to debug issues. Correlate with product usage data.
 
@@ -620,9 +624,13 @@ This means it's not only an alternative to Datadog but also tools like [Amplitud
 <details>
   <summary>Main differences between PostHog and Datadog</summary>
 
-- PostHog is not a complete observability platform (yet). It includes logs, but no APM, cloud monitoring, or other monitoring features. PostHog focuses more on user experience products.
+- PostHog covers all three observability signals: logs, [distributed tracing](/traces), and metrics. Datadog goes further into infrastructure and cloud monitoring, incident management, on-call, and uptime monitoring, which PostHog does not have.
 
-- PostHog offers a generous free tier for its products including 100k errors, 50GB of logs, 1M analytics events, 5k session replays, and more. Datadog has a free tier for some products, but not all (like logs, error tracking, or product analytics).
+- PostHog ingests logs, traces, and metrics as standard OpenTelemetry over OTLP, so an existing collector is a config change. Datadog ingests OpenTelemetry data too, but maps it to its own model and reserves some features for its own agent.
+
+- A span in PostHog lands in the same project as the session replay, the error, and the person who triggered it, so you can go from a slow request to the user who waited. Datadog keeps observability and product data further apart.
+
+- PostHog offers a generous free tier for its products including 100k errors, 10GB of logs, 1M analytics events, 5k session replays, and more. Datadog has a free tier for some products, but not all (like logs, error tracking, or product analytics).
 
 - All PostHog products tie together with shared data models. Datadog's products are much more siloed. 
 
@@ -633,7 +641,7 @@ This means it's not only an alternative to Datadog but also tools like [Amplitud
 <details>
   <summary>Main similarities between PostHog and Datadog</summary>
 
-- Both include important DevOps features like logs, error tracking, performance monitoring, and more.
+- Both include the core observability signals – logs, traces, and metrics – along with error tracking and alerting.
 
 - Beyond these, they both offer "digital experience" products like product analytics, session replays, and real user monitoring. They both also have feature flags. 
 
@@ -655,7 +663,7 @@ According to [reviews on G2](https://www.g2.com/products/posthog/reviews), compa
 
 > #### Bottom line
 >
-> If you're looking for logs, [error tracking](/docs/error-tracking), and [session replay](/docs/session-replay), along with many more tools for making your product better, PostHog is a great alternative to Datadog. This is especially the case for startups and scale ups, thanks to PostHog's generous free tier.
+> If you're looking for [logs](/logs), [traces](/traces), [metrics](/docs/metrics), [error tracking](/docs/error-tracking), and [session replay](/docs/session-replay), along with many more tools for making your product better, PostHog is a great alternative to Datadog. This is especially the case for startups and scale ups, thanks to PostHog's generous free tier.
 
 <p>
   <CallToAction to="https://posthog.com/docs/logs/start-here">
@@ -671,7 +679,7 @@ According to [reviews on G2](https://www.g2.com/products/posthog/reviews), compa
 * Prefer AI-powered infrastructure monitoring with simpler agent setup? **Dynatrace** makes deployment easy.
 * Want an affordable, OpenTelemetry-native solution for logs and traces? Try **SigNoz**.
 * Looking for a cheap observability option with error tracking and incident management for startups? Check out **Better Stack**.
-* Want an all-in-one platform that connects logs and errors to user sessions, analytics, feature flags, LLM observability, and more? Go with **PostHog**.
+* Want an all-in-one platform that connects logs, traces, metrics, and errors to user sessions, analytics, feature flags, LLM observability, and more? Go with **PostHog**.
 
 
 ## Is PostHog right for you?
@@ -689,6 +697,19 @@ Check out [logs install guide](/docs/logs/installation) and [read our docs](/doc
 <ArrayCTA />
 
 ## Frequently asked questions
+
+<details>
+<summary>PostHog says it makes your product "self-driving" – what does that mean?</summary>
+
+It means PostHog digs through your product data, finds what's worth fixing, and has agents do the work.
+
+It starts with context. A full suite of developer tools – [AI Observability](/ai-observability), [Product Analytics](/product-analytics), [Session Replay](/session-replay), [Feature Flags](/feature-flags), [Experiments](/experiments), [Error Tracking](/error-tracking), [Logs](/logs), and more – captures everything happening in your product, and a [Context Warehouse](/blog/what-is-a-context-warehouse) unifies it into one source agents can read across.
+
+From there, [Scouts](/blog/what-is-a-scout) read across all of it and sort what's worth knowing from what's just noise. What clears the bar becomes a report in your inbox: an agent picks it up, roots out the cause, and opens a PR. You review and merge.
+
+You can steer it from [Slack](/slack), the [web app](/ai), the [desktop app](/desktop), or your own editor via [the MCP](/mcp) or [CLI](/docs/cli).
+
+</details>
 
 <details>
   <summary>What is Datadog used for?</summary>
@@ -712,6 +733,15 @@ For most teams, **New Relic** is the closest like-for-like alternative to Datado
 </details>
 
 <details>
+  <summary>Does PostHog have APM and distributed tracing?</summary>
+
+Yes. **PostHog** has [distributed tracing](/traces) in beta and [metrics](/docs/metrics) in alpha, next to [logs](/logs) and [error tracking](/error-tracking). All of them use OpenTelemetry over OTLP, so you can point an existing collector at PostHog instead of installing a new agent.
+
+What PostHog does not have is the operations layer around it: infrastructure and cloud monitoring, incident management, on-call scheduling, status pages, and uptime monitoring. If you need those, look at **Datadog** or **Better Stack**.
+
+</details>
+
+<details>
   <summary>Which Datadog alternatives are open source?</summary>
 
 **PostHog** is fully open source under the MIT license with a public roadmap. **SigNoz**, **Grafana**, and **Elastic** are also open source and offer self-hosting.
@@ -721,7 +751,7 @@ For most teams, **New Relic** is the closest like-for-like alternative to Datado
 <details>
   <summary>Which Datadog alternative has the best free tier?</summary>
 
-**PostHog** offers 50GB of logs, 100k errors, 1M analytics events, 5k session replays, and unlimited team members. **New Relic** offers 100 GB/month of data ingest.
+**PostHog** offers 10GB of logs, 100k errors, 1M analytics events, 5k session replays, and unlimited team members. **New Relic** offers 100 GB/month of data ingest.
 
 </details>
 

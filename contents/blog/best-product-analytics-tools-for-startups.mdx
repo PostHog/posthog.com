@@ -101,7 +101,7 @@ We've compared the best [session replay tools](/blog/best-session-replay-tools),
 - [Feature flags](/feature-flags) – gradual rollouts (1% → 10% → 100%), kill switches, targeting for beta access
 - [A/B testing](/experiments) – test onboarding flows, pricing pages, feature gates against retention or conversion goals. 
 - [Error tracking](/error-tracking) – correlate bugs with churn ("Users who hit the checkout error in v2.3.1 churned at 3x the normal rate").
-- [LLM observability](/llm-analytics) – if you're shipping AI features, track cost, latency, and output quality per model
+- [LLM observability](/ai-observability) – if you're shipping AI features, track cost, latency, and output quality per model
 
 Not sure which tools to use? 
 
@@ -123,7 +123,7 @@ We've compared the best [feature flag tools](/blog/best-open-source-feature-flag
 
 **Pair your analytics tool with:**
 
-- **[Data warehouse](/data-stack)** – create a single source of truth and query data from across product analytics, sales, finances, ops, and more. 
+- **[Data warehouse](/context-warehouse)** – create a single source of truth and query data from across product analytics, sales, finances, ops, and more. 
 - **[Group analytics](/docs/product-analytics/group-analytics)** – track funnels, retention, and feature adoption at the account level, not just individual users
 - **[Logs](/logs)** – debug issues across your backend alongside user behavior and error data
 - **[SQL access](/docs/product-analytics/sql)** – write custom queries when the UI doesn't cover your edge case, build views for your data team
@@ -151,7 +151,7 @@ Now that you have a rough idea of what to measure, here's what to measure it wit
 
 ### What is PostHog and why should startups consider it?
 
-[PostHog](/) is an all-in-one developer platform that bundles [product analytics](/product-analytics) with [web analytics](/web-analytics), [session replay](/session-replay), [feature flags](/feature-flags), [A/B testing](/experiments), [surveys](/surveys), [error tracking](/error-tracking), [logs](/logs), [LLM observability](/llm-analytics), [workflows](/workflows), and more. It's open source at its core, with cloud hosting in both the US [and EU](/blog/posthog-cloud-eu). 
+[PostHog](/) is an all-in-one developer platform that bundles [product analytics](/product-analytics) with [web analytics](/web-analytics), [session replay](/session-replay), [feature flags](/feature-flags), [A/B testing](/experiments), [surveys](/surveys), [error tracking](/error-tracking), [logs](/logs), [LLM observability](/ai-observability), [workflows](/workflows), and more. It's open source at its core, with cloud hosting in both the US [and EU](/blog/posthog-cloud-eu). 
 
 PostHog ships fast, so the platform keeps getting better; check the [changelog](/changelog) to see what's new.
 
@@ -193,7 +193,7 @@ Want to skip the manual setup entirely? You can try out the [PostHog wizard](/do
 | Error tracking | 100K exceptions | $0.00037/exception |
 | Data warehouse | 1M synced rows | $0.000015/row |
 | LLM observability | 100K events | $0.00006/event |
-| Logs | 50GB ingested | $0.25/GB |
+| Logs | 10GB ingested | $0.25/GB |
 | Workflows | 10K messages/channel | $0.003000/email |
 | PostHog AI | 500 credits | $1 per 100 credits |
 
@@ -301,7 +301,7 @@ If [you're pre-PMF and just need funnels and retention](/founders/early-stage-an
 
 The platform has expanded well beyond analytics. It now includes session replay, feature flags, A/B testing (Amplitude Experiment), and Guides & Surveys. A Unified Browser SDK lets you initialize analytics, replay, experiments, and guides in a single call.
 
-[Amplitude](/blog/best-amplitude-alternatives) uses a monthly tracked user (MTU) billing model. One user who triggers 500 events costs the same as one who triggers 5 – attractive for products with high per-user engagement. However, anonymous users count as MTUs until merged, which can inflate costs for products with lots of anonymous traffic.
+[Amplitude](/blog/best-amplitude-alternatives) bills on event volume, with 2 million events per month included free. That puts it on the same footing as PostHog and Mixpanel, so the comparison comes down to what's bundled. Amplitude gates advanced analytics behind plan tiers and add-ons, and only publishes pricing for events on its Plus plan.
 
 ### Key features
 
@@ -322,9 +322,9 @@ For data already in a warehouse, connect Snowflake, BigQuery, or Redshift direct
 
 | Plan | Price | Includes |
 |---|---|---|
-| Starter | Free | 50K MTUs, 10M events, unlimited flags, session replay, AI chat |
-| Plus | From $49/mo (annual) | 300K MTUs or 25M events, behavioral cohorts, saved charts, web experiments |
-| Growth | Contact sales | Custom MTUs, causal insights, predictive audiences, feature experimentation |
+| Free | Free | 2M events and 1K session replay per month, unlimited flags, AI chat |
+| Plus | Usage-based, first 2M events free | Custom events and formulas, 20 behavioral cohorts, alerts, heatmaps, web experiments |
+| Growth | Contact sales | Causal insights, predictive audiences, feature experimentation, SSO |
 | Enterprise | Contact sales | Cross-product analytics, multi-armed bandits, warehouse-native, EU residency |
 
 Guides & Surveys, extra session replay volume, and additional automated syncs are available as add-ons on Plus plans.
@@ -333,7 +333,7 @@ Guides & Surveys, extra session replay volume, and additional automated syncs ar
 <summary>Amplitude is for you if...</summary>
 
 - Retention curves and cohort comparisons are your primary analytical workflow
-- Your product has high per-user engagement (MTU billing rewards lots of events per user)
+- You want the largest free event allowance to start with (2M/month)
 - You want experiment exposure events excluded from your analytics bill
 - You need governance and taxonomy tools as your data team grows
 
@@ -342,8 +342,7 @@ Guides & Surveys, extra session replay volume, and additional automated syncs ar
 <details>
 <summary>Amplitude is not for you if...</summary>
 
-- Your product has lots of anonymous traffic – anonymous users count as distinct MTUs until merged, inflating costs
-- You want simple, transparent pricing – Growth/Enterprise require sales conversations
+- You want simple, transparent pricing – only the Plus plan has published rates, and Growth/Enterprise/Add-ons require sales conversations
 - You need error tracking or logs – Amplitude doesn't offer either
 - You're pre-PMF and just need basic funnels and retention – the depth of tooling can be more than you need right now
 
@@ -565,7 +564,7 @@ Some tools give you the full product at low volume. Others gate core features be
 |---|---|---|---|---|---|
 | **PostHog** | 1M events/mo | Events (per product) | Yes | All-in-one platform | Nothing – it's bundled |
 | **Mixpanel** | 1M events/mo | Events | Yes | Pure funnel/cohort analysis | Replay, flags, surveys, errors |
-| **Amplitude** | 10K MTUs | MTUs | Partial | Retention depth | Replay, flags, surveys, errors |
+| **Amplitude** | 2M events/mo | Events | Partial | Retention depth | Error tracking, logs |
 | **Heap** | 10K sessions/mo | Sessions | Yes | Retroactive autocapture | Flags, surveys, errors |
 | **Fullstory** | 10K sessions/mo | Contact sales | No | Replay-first analysis | Flags, surveys, errors |
 | **Pendo** | 500 MAUs | MAUs | Free tier | Analytics + in-app guides | Replay, flags, errors |
@@ -593,13 +592,26 @@ Some tools give you the full product at low volume. Others gate core features be
 - **Fullstory** if your primary workflow is watching sessions and quantifying what you see
 
 **For teams building AI-powered products**
-- **PostHog** if you want [LLM observability](/llm-analytics) (cost, latency, token usage, output quality) alongside product analytics, replay, and experiments in one platform
+- **PostHog** if you want [LLM observability](/ai-observability) (cost, latency, token usage, output quality) alongside product analytics, replay, and experiments in one platform
 - **Amplitude** if you're already using Amplitude for analytics and want to layer experiments on top of AI features
 - **Mixpanel** if you need to track AI feature adoption and conversion funnels but handle observability separately with a dedicated tool
 
 <WizardCTA />
 
 ## FAQs
+
+<details>
+<summary>PostHog says it makes your product "self-driving" – what does that mean?</summary>
+
+It means PostHog digs through your product data, finds what's worth fixing, and has agents do the work.
+
+It starts with context. A full suite of developer tools – [AI Observability](/ai-observability), [Product Analytics](/product-analytics), [Session Replay](/session-replay), [Feature Flags](/feature-flags), [Experiments](/experiments), [Error Tracking](/error-tracking), [Logs](/logs), and more – captures everything happening in your product, and a [Context Warehouse](/blog/what-is-a-context-warehouse) unifies it into one source agents can read across.
+
+From there, [Scouts](/blog/what-is-a-scout) read across all of it and sort what's worth knowing from what's just noise. What clears the bar becomes a report in your inbox: an agent picks it up, roots out the cause, and opens a PR. You review and merge.
+
+You can steer it from [Slack](/slack), the [web app](/ai), the [desktop app](/desktop), or your own editor via [the MCP](/mcp) or [CLI](/docs/cli).
+
+</details>
 
 <details>
 <summary>How do I track analytics for my MVP with PostHog?</summary>
@@ -624,7 +636,7 @@ A tracking plan is a document that defines every event you track, its properties
 
 Match tool to stage: [activation metrics](/product-engineers/activation-metrics) pre-PMF, retention cohorts post-PMF. 
 
-Compare pricing models against your product's usage pattern: events (PostHog, Mixpanel), MTUs (Amplitude), MAUs (Pendo). 
+Compare pricing models against your product's usage pattern: events (PostHog, Mixpanel, Amplitude), sessions (Heap), MAUs (Pendo). 
 
 Check whether you need adjacent tools (replay, flags, experiments, surveys, error tracking...) in the same platform or are fine managing separate vendors. 
 

@@ -76,11 +76,11 @@ Because it can easily combine product and business data, [PostHog](#1-posthog) i
   classes="rounded"
 />
 
-PostHog is an all-in-one developer platform that combines business intelligence with several other developer-focused tools, such as [product](/product-analytics) and [web analytics](/web-analytics), [session replay](/session-replay), [experiments](/experiments), [error tracking](/error-tracking), [LLM observability](/llm-analytics), [surveys](/surveys), and more.
+PostHog is an all-in-one developer platform that combines business intelligence with several other developer-focused tools, such as [product](/product-analytics) and [web analytics](/web-analytics), [session replay](/session-replay), [experiments](/experiments), [error tracking](/error-tracking), [LLM observability](/ai-observability), [surveys](/surveys), and more.
 
 Its business intelligence stack contains three key pieces:
 
-1. A [data warehouse](/data-stack) that stores data captured into PostHog and syncs with external sources you already use, like [Stripe](/docs/data-warehouse/sources/stripe), [Hubspot](/docs/data-warehouse/sources/hubspot), [Postgres](/docs/data-warehouse/sources/postgres), [Google Sheets](/docs/data-warehouse/sources/google-sheets), [S3](/docs/data-warehouse/sources/s3), [Snowflake](/docs/data-warehouse/sources/snowflake), and more.
+1. A [data warehouse](/context-warehouse) that stores data captured into PostHog and syncs with external sources you already use, like [Stripe](/docs/data-warehouse/sources/stripe), [Hubspot](/docs/data-warehouse/sources/hubspot), [Postgres](/docs/data-warehouse/sources/postgres), [Google Sheets](/docs/data-warehouse/sources/google-sheets), [S3](/docs/data-warehouse/sources/s3), [Snowflake](/docs/data-warehouse/sources/snowflake), and more.
 
 2. [Product analytics](/docs/product-analytics) which provides a simple but powerful interface for building dashboards and insights including trends, funnels, retention graphs, user paths, and more. 
 
@@ -101,6 +101,19 @@ You can use the [setup wizard](/wizard) to get started in minutes – no credit 
 <WizardCTA />
 
 #### FAQ
+
+<details>
+<summary>PostHog says it makes your product "self-driving" – what does that mean?</summary>
+
+It means PostHog digs through your product data, finds what's worth fixing, and has agents do the work.
+
+It starts with context. A full suite of developer tools – [AI Observability](/ai-observability), [Product Analytics](/product-analytics), [Session Replay](/session-replay), [Feature Flags](/feature-flags), [Experiments](/experiments), [Error Tracking](/error-tracking), [Logs](/logs), and more – captures everything happening in your product, and a [Context Warehouse](/blog/what-is-a-context-warehouse) unifies it into one source agents can read across.
+
+From there, [Scouts](/blog/what-is-a-scout) read across all of it and sort what's worth knowing from what's just noise. What clears the bar becomes a report in your inbox: an agent picks it up, roots out the cause, and opens a PR. You review and merge.
+
+You can steer it from [Slack](/slack), the [web app](/ai), the [desktop app](/desktop), or your own editor via [the MCP](/mcp) or [CLI](/docs/cli).
+
+</details>
 
 <details>
   <summary>What tools does PostHog replace?</summary>
@@ -161,7 +174,7 @@ Metabase can connect to a bunch of popular databases including BigQuery, ClickHo
 <details>
   <summary>Is there a hosted version?</summary>
 
-Metabase Cloud provides a fully managed Metabase instance hosted in your region. They offer a free 14-day trial, then starts at $85 per month plus $5 per month per user.
+Metabase Cloud provides a fully managed Metabase instance hosted in your region. They offer a free 14-day trial, then the Starter plan costs $100 per month for the first five users, plus $6 per month for each extra user.
 
 </details>
 <details>
@@ -398,7 +411,7 @@ Lightdash is reliant on dbt and has fewer integrations than other tools on this 
 <details>
   <summary>Is there a hosted version?</summary>
 
-Lightdash has a cloud hosted option that requires zero configuration, is updated daily, and enables unlimited users and visualizations. It starts at $800 per month with a 21-day free trial.
+Lightdash has a cloud hosted option that requires zero configuration, is updated daily, and enables unlimited users and visualizations. It starts at $3,000 per month with a 21-day free trial.
 
 </details>
 <details>
@@ -515,7 +528,7 @@ For most teams, a managed cloud option (PostHog Cloud, Metabase Cloud, Grafana C
 <details>
   <summary>Can I use PostHog as a BI tool?</summary>
 
-Yes. PostHog includes a [data warehouse](/data-stack) that syncs with external sources like Stripe, HubSpot, Postgres, Snowflake, and BigQuery. 
+Yes. PostHog includes a [data warehouse](/context-warehouse) that syncs with external sources like Stripe, HubSpot, Postgres, Snowflake, and BigQuery. 
 
 You can query this data alongside your product events using PostHog's [SQL editor](/docs/data-warehouse/query), build dashboards, and share insights across your team – all from the same platform where you run product analytics, session replay, and feature flags.
 

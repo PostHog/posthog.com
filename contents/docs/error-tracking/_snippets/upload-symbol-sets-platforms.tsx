@@ -49,9 +49,19 @@ const UploadSymbolSetsPlatforms = () => {
             image: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/integrate/flutter.svg',
         },
         {
+            label: 'Go',
+            url: '/docs/error-tracking/upload-source-maps/go',
+            image: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/integrate/go.svg',
+        },
+        {
             label: 'iOS',
             url: '/docs/error-tracking/upload-source-maps/ios',
             image: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/integrate/ios.svg',
+        },
+        {
+            label: 'Kotlin Multiplatform',
+            url: '/docs/error-tracking/upload-debug-symbols/kmp',
+            image: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/integrate/kmp.svg',
         },
         {
             label: 'Rust',

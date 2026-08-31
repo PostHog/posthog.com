@@ -4,10 +4,6 @@ title: Data Warehouse troubleshooting
 
 This page covers troubleshooting for Data Warehouse. For setup, see the [installation guides](/docs/data-warehouse/sources).
 
-## Have a question? Ask PostHog AI
-
-<AskAIInput placeholder="Type your question and hit enter..." />
-
 ## How can I see why my syncs are failing?
 
 From the [source page](https://app.posthog.com/data-management/sources), click the source that's failing, scroll over to the **Status** column and hover over the error message.
@@ -127,6 +123,27 @@ To fix this:
    - Or verify the Account ID matches the account your key is authorized for.
 3. If you connected via OAuth, reconnect your Stripe account by selecting the OAuth authentication method and authorizing PostHog again.
 4. Re-run the sync.
+
+## Why is my Cloudflare source failing during validation?
+
+When you link a Cloudflare source, PostHog validates your API token against Cloudflare's `/user/tokens/verify` endpoint. Validation can fail for two reasons:
+
+### "Couldn't reach Cloudflare to verify your API token"
+
+This means PostHog couldn't connect to Cloudflare's API – typically due to a network error, timeout, 5xx server error, or 429 rate limiting. Your token may be perfectly valid.
+
+Wait a moment and retry. If the error persists, check the [Cloudflare status page](https://www.cloudflarestatus.com/) for any ongoing incidents.
+
+### "Invalid Cloudflare API token"
+
+This means Cloudflare rejected the token outright (401 Unauthorized, 403 Forbidden, or the verification endpoint returned `success: false`).
+
+To fix this:
+
+1. Verify your token hasn't been revoked in the [Cloudflare dashboard](https://dash.cloudflare.com/profile/api-tokens).
+2. Check that the token has the required read permissions: **Account Settings**, **Zone**, and **DNS**.
+3. If the token was revoked or is missing permissions, create a new one following the [Cloudflare source setup guide](/docs/cdp/sources/cloudflare).
+4. In PostHog, go to [**Data pipelines > Sources**](https://app.posthog.com/data-management/sources), update your Cloudflare source with the new token, and retry.
 
 ## Why is my Microsoft SQL Server sync failing with 'Invalid object name'?
 
