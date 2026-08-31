@@ -56,7 +56,7 @@ import CalloutBox from 'components/Docs/CalloutBox'
 
 <CalloutBox icon="IconWarning" title="Large traces have size limits" type="fyi">
 
-The OTLP path caps each export at **4MB** and each span at **8MB**. Oversize data is dropped without an application error. See [capturing large AI events](/docs/ai-observability/large-events#sending-over-opentelemetry) to avoid silent data loss.
+The OTLP path caps each export at **4MB** and each span at **8MB**. An export over 4MB is rejected with HTTP 413, while an oversize span is dropped from an otherwise successful export without an application error. See [capturing large AI events](/docs/ai-observability/large-events#sending-over-opentelemetry) for how to stay under both limits.
 
 </CalloutBox>
 
