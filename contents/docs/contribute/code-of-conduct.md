@@ -39,19 +39,25 @@ Examples of unacceptable behavior include:
 * Other conduct which could reasonably be considered inappropriate in a
   professional setting
 
-## No solicitation
+## Sharing your own work
 
-The following are not allowed within any community space without prior permission 
-from the community moderators:
+Show and tell is encouraged. Post what you're building, link your project, ask for feedback, and mention your company when it's part of the conversation. The introductions channel exists for exactly this, and so does anywhere else the conversation invites it.
 
-- Pitching of a business, product, or service (outside of the introductions channel). Keep it non spammy!
+Two things we ask:
+
+- **It fits the conversation you're in.** Answering someone's question with your thing is helpful. Dropping the same link into five channels is not.
+- **It isn't the only thing you ever post.** Someone who takes part and occasionally mentions their thing is a member of the community. Someone who only shows up to post links is running ads.
+
+Check with a moderator before you use the community as an audience rather than a conversation – recruiting and market research both count. The answer is usually yes. We just like to know.
+
+Two things we'd rather you didn't do at all:
+
 - Trying to hire the PostHog core team to work on your thing. We need them to build our thing.
-- Market or competitor research. This is just annoying.
-- Encouraging a fork of the main PostHog project or promoting / soliciting people to build a service that competes directly with us. You may be able to do some of this legally, but if it's successful it would harm our project's performance. So, it's not in the project's interest to provide a place to promote something like this. If you want to partner, email sales at our company.com so we can work something out.
+- Organizing a fork of the main PostHog project, or recruiting people here to build a service that competes directly with us. You may well be able to do this legally, but we're paying for the venue, so it's a strange place to do it. If you want to partner, email [sales@posthog.com](mailto:sales@posthog.com) so we can work something out.
 
 It's feasible that a community member may do something outside of the list above that we've not foreseen which isn't in the project's best interest. We will handle these cases carefully when they come up and will edit these guidelines accordingly.
 
-If you're unsure, contact the community moderators via hey@posthog.com.
+If you're unsure, contact the community moderators via [community@posthog.com](mailto:community@posthog.com).
 
 ## Enforcement responsibilities
 
@@ -77,7 +83,7 @@ representative at an online or offline event.
 
 Instances of abusive, harassing, or otherwise unacceptable behavior may be
 reported to the community leaders responsible for enforcement at
-hey@posthog.com.
+[community@posthog.com](mailto:community@posthog.com).
 All complaints will be reviewed and investigated promptly and fairly.
 
 All community leaders are obligated to respect the privacy and security of the
