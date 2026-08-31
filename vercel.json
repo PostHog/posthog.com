@@ -221,8 +221,6 @@
     ],
     "redirects": [
         {
-            "source": "/old-home",
-            "destination": "/",
             "source": "/docs/session-replay/image-bot:ext(\\.md)?",
             "destination": "/docs/ai-research/image-fetcher-bot:ext?",
             "statusCode": 301
