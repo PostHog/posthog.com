@@ -1206,6 +1206,24 @@ const appSettings: AppSettings = {
             center: true,
         },
     },
+    'the-posthog': {
+        size: {
+            min: {
+                width: 960,
+                height: 682,
+            },
+            max: {
+                width: 960,
+                height: 682,
+            },
+            fixed: true,
+            autoHeight: true,
+        },
+        position: {
+            center: true,
+        },
+        toolbar: true,
+    },
     'ask-max': {
         size: {
             min: {
