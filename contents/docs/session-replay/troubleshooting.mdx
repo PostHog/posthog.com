@@ -282,6 +282,29 @@ A recording with **no** full snapshot anywhere shows a full error screen because
 
 If you consistently see late snapshot warnings, make sure your `posthog-js` version is up to date and check that nothing is interfering with network requests to PostHog (see [ad/tracking blockers](#adtracking-blockers) and [content security policy](#content-security-policy) above).
 
+## Recording is skipped or won't auto-play because of heavy DOM changes
+
+Session replay records changes to the page DOM. Some pages rewrite the DOM very fast — for example a large virtualized list, a canvas-heavy view, or an animation that redraws many nodes each frame. This client-side DOM churn can produce more DOM mutations than PostHog can safely capture or play back. PostHog limits this in two places, so a recording of such a page can look incomplete or refuse to auto-play.
+
+### The DOM mutation ceiling during capture
+
+The recorder applies a mutation ceiling while it captures. When a page passes the ceiling, the recorder throttles the extra DOM mutations to protect the user's browser from freezing. The rest of the session still records, but the throttled part can look incomplete, because some DOM changes were never captured.
+
+If a recording looks incomplete during a burst of DOM activity:
+
+- Lower the DOM churn on the affected view where you can. A virtualized list that reuses nodes produces fewer mutations than one that rebuilds the whole list on each change.
+- Mask or ignore the noisy element so the recorder skips it. See [privacy controls](/docs/session-replay/privacy).
+
+### Skipped auto-loading of risky recordings
+
+A very large recording can freeze or crash the browser tab if it loads without warning. To prevent this, the player does not auto-load a recording it detects as risky to render. The recording is not lost — the player waits for you to load it instead of loading it on its own.
+
+When this happens:
+
+- Load the recording manually from the player when you are ready for it.
+- Expect slower seeking in a very large recording. Seek in smaller steps.
+- Reduce the DOM churn that made the recording large, using the same steps as for the mutation ceiling above.
+
 ## Person not found
 
 If you are able to capture a replay, but the entry says "person not found," this is replay has been captured from an anonymous user and a [person profile](/docs/data/persons) has **not** been created for them.
