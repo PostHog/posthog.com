@@ -18,6 +18,10 @@ The SDK does not capture:
 
 `$mcp_tool_call` payloads include `$mcp_parameters` (the request arguments) and `$mcp_response` (the tool's result), after the pipeline below.
 
+When the TypeScript wrapper can confirm that it owns an injected analytics argument, it removes the argument before the tool handler runs. On supported high-level server paths, `context`, `conversation_id`, and `llm_model` don't appear in `$mcp_parameters`. Their accepted values are captured separately as `$mcp_intent`, `$mcp_conversation_id`, and `$mcp_llm_model`.
+
+`$mcp_llm_model` is self-reported by the agent when `captureModel` is enabled. It isn't verified by the MCP protocol. Don't use it for billing, authorization, or other security decisions.
+
 ## The redaction pipeline
 
 Every event runs through these stages before being sent to PostHog:
