@@ -1,0 +1,178 @@
+---
+title: 'Are these loops or graphs?'
+date: 2026-09-15
+rootPage: /blog
+sidebar: Blog
+showTitle: true
+hideAnchor: true
+author:
+    - andy-maguire
+category: Engineering
+tags:
+    - Explainers
+seo:
+    metaTitle: 'Are these loops or graphs?'
+    metaDescription: 'Five real agent loops the self-driving team runs every day to build self-driving in PostHog - what each one watches, what it takes off our plate, and where the human sits.'
+---
+
+{/*
+DRAFT – working notes (delete before publish)
+
+Spec:
+- Follow-up to /blog/what-is-a-scout, same tone: technically grounded, self-aware
+  about hype, real artifacts over hand-waving.
+- Framing from dev.md: hype fatigue is fine, tools + skills endure, harnesses
+  should be boring, loops are the one buzzword with substance – but keep the
+  human in them.
+- Body: 5 real loops we run to build self-driving, each grounded in the actual
+  scout that runs it, each ending with a "loop or graph?" verdict.
+- Payoff: zoom in, it's a loop; zoom out, it's a graph with cycles. The label
+  doesn't matter – where you sit in it does.
+
+TODO before publish:
+- featuredImage (Cloudinary) + featuredImageType: full
+- Real run artifacts for each loop (like the <details> traces in the scout post):
+  - agent feedback: one feedback event -> report -> PR chain
+  - mcp struggles: a real friction finding from a random walk
+  - skill issues: a real lint/dogfood finding
+  - scratchpad miner: a real "silent workaround" it turned into a bug report
+  - inbox product ideas: a real distilled idea + the sources it pulled from
+- Maybe a short video walkthrough of one loop (worked well last time)
+- Decide: keep "honorable mentions" table or cut for length
+- Link to changelog/newsletter coverage if the auto-merged PR story ships there
+*/}
+
+Are loops still a thing? Or is it graphs now? I thought the graphs thing was a meme, but I've seen enough diagrams this month that I'm no longer sure.
+
+I can't keep up. None of us can. And that's fine.
+
+The useful move, every few months, is to ignore the buzz and ask a boring question: which of these things is making my own work easier, right now? For me the honest answers have been stable for a while – **tools** and **skills** have stood the test of time. Harnesses are the new hotness, but a harness should be boring – if yours feels special and magical, something has probably gone wrong.
+
+And then there are **loops**. Loops are the one part of the buzz I keep getting value from – with one caveat: most of the time I still want to be *in* the loop, not replaced by it.
+
+A good loop, for me, does three jobs:
+
+1. **Solves detection and surfacing.** It watches something I care about so I don't have to.
+2. **Takes the boring parts off my plate.** The triage, the dedupe, the "is this the same issue as last week?"
+3. **Leaves me feeling in charge.** I can read exactly what it did, why it stayed quiet, and step in anywhere.
+
+So instead of arguing about terminology, here's something more concrete: five real loops the self-driving team runs every day *to build self-driving itself*. Each one is [a scout](/blog/what-is-a-scout) – a small scheduled agent whose logic lives in a markdown skill – plugged into the [self-driving pipeline](/docs/self-driving/self-improving-loop) that turns findings into [inbox](/docs/self-driving/inbox) reports and, sometimes, PRs.
+
+For each loop: what it watches, what it takes off our plate, where the human sits – and a verdict on the title question.
+
+## Loop 1: The agent feedback loop
+
+The [PostHog MCP](/docs/model-context-protocol) has an `agent-feedback` tool. When an agent (Claude Code, Cursor, PostHog Code, whatever) hits friction using PostHog – a confusing schema, a tool that silently drops a parameter, a missing capability – it can file structured feedback, headlessly, right from the session where it happened.
+
+That feedback becomes a single event stream: `mcp feedback submitted`. The `signals-scout-agent-feedback` scout watches it:
+
+- It groups negative and blocked (`task_completed=false`) submissions into per-type friction themes – anchored on *distinct organizations converging* on the same problem, not raw row counts.
+- It routes each theme to its owner: MCP, a product area, docs, or the signals team itself.
+- It corroborates MCP themes against actual `mcp_tool_call` error rates before speaking up.
+- Above the confidence bar, it authors a report into the inbox. A PostHog Code task can then pick that report up and open the PR.
+
+Then the part that makes it a loop rather than a funnel: the scout **checks back on things it thinks got fixed**. It keeps notes in its scratchpad about what was reported and what shipped, and validates that the fix held before considering a theme closed.
+
+**Where I sit:** reviewing the reports, and reviewing the PRs. The detection, triage, dedupe, and root-cause legwork all happened before I arrived.
+
+**Loop or graph?** Loop. Agents complain → scout distills → report → PR → agents stop complaining (verified). It eats its own output.
+
+{/*TODO: real end-to-end artifact, like the sync_frequency trace in the scout post*/}
+
+## Loop 2: The MCP struggles loop
+
+The feedback loop above is passive – it waits for agents to complain. `signals-scout-mcp-struggles` doesn't wait.
+
+Each run, it wakes up and *uses our MCP*, first-hand. It random-walks a slice of the tool surface – querying, error tracking, replay, flags, data warehouse, LLM analytics – and runs a few realistic read-only tasks through the tools the way a real agent would, following the MCP's own search → info → schema → call discipline. Then it notices where the tools fight back: ambiguous descriptions, token-budget-blowing output, unhelpful errors, misleading instructions.
+
+A coverage map in its scratchpad drives the walk, so over runs it spreads across the whole surface instead of re-treading the same tools every tick. Rough edges above the bar become inbox reports; below the bar they become durable "mcp-gap" memory.
+
+The result: MCP improvements grounded in an agent *actually exercising the thing regularly*, not in what we guess agents might struggle with.
+
+**Where I sit:** nowhere, until a report lands. This is the closest thing we have to a QA engineer who works nights.
+
+**Loop or graph?** Loop, with a twist – the thing being tested and the thing doing the testing are the same product. Draw that honestly and you get a cycle.
+
+{/*TODO: real finding from a recent random walk*/}
+
+## Loop 3: The skill issues loop
+
+Same shape, different surface. We ship [agent skills](https://agentskills.io/specification) for the jobs people do with PostHog – querying data, investigating errors, exploring LLM costs, creating experiments. Skills are markdown, and markdown rots.
+
+`signals-scout-skill-issues` (yes, that's its name) wakes up and dogfoods them. It reads the latest `SKILL.md` files straight from `posthog/posthog` at `origin/HEAD` – so issues get caught before they reach users – then does two things:
+
+1. **Lints** a slice against the Agent Skills spec and authoring best practices: frontmatter validity, description quality, stale tool anchors, anti-patterns.
+2. **Dogfoods** one or two end-to-end – actually following the skill's steps, read-only, against our live project, the way a real agent would – and notices where the skill misleads, breaks, or fights back.
+
+A commit cursor plus a coverage map rotate it across the corpus over runs.
+
+**Where I sit:** reviewing the occasional "this skill promises a job it can't complete" report. The alternative – a human periodically re-reading and re-testing 100+ skills – was never going to happen.
+
+**Loop or graph?** Loop. It's the mcp-struggles loop pointed at a different layer of the same stack. (At this point you may notice the loops themselves are starting to look like a family. Hold that thought.)
+
+{/*TODO: real lint/dogfood finding*/}
+
+## Loop 4: The scratchpad miner loop
+
+This one is my favorite, because it finds bugs nobody filed.
+
+Every scout has a [scratchpad](/blog/what-is-a-scout#the-scratchpad-how-a-scout-remembers) – its durable memory. And scouts, it turns out, behave like experienced engineers: when they hit something broken, they often don't file a bug. They **work around it and leave themselves a note.** "This table's sync is unreliable, fall back to raw events." "This tool truncates, page manually."
+
+`signals-scout-interesting-scratchpad-highlights` mines the *global* scratchpad – every team's scouts, both regions – for exactly those notes. Its lanes include the conventions scouts independently converge on, the jobs the scratchpad gets pressed into beyond memory (cursors, queues, gates, ledgers), the etiquette scouts invent to talk to each other – and the **silent workarounds**, where a scout hit a broken capability, wrote a fallback into memory, and moved on.
+
+Each silent workaround is a bug report we never received, recoverable from the fact that something is being routed around. It counts convergence in distinct skills, not teams, so a canonical scout seeded onto hundreds of teams doesn't masquerade as independent invention.
+
+**Where I sit:** reading the two-reports-per-run maximum it files, occasionally muttering "how long has *that* been broken?"
+
+**Loop or graph?** Graph, honestly. A scout that reads the memory of every other scout, including its own, is not a tidy circle. It's the fleet observing itself.
+
+{/*TODO: real silent-workaround finding -> bug it surfaced*/}
+
+## Loop 5: The inbox product ideas loop
+
+The first four loops end in something an agent can often just fix. This one deliberately doesn't.
+
+`signals-scout-inbox-product-ideas` mines every surface where people express feedback about the inbox and self-driving:
+
+- The in-product free-text streams: Discuss questions, Dismiss reasons, report feedback notes, and PR refund notes (the one with money attached).
+- The self-driving slice of our community Discord, relayed into the [data warehouse](/docs/data-warehouse) as a table.
+- The Replay Vision scanner fleet watching `/inbox` session recordings – behavioral evidence for the friction nobody writes down, held to a stricter bar.
+
+It distills all of that into product-idea reports for the team: "multiple independent voices want X", "people keep dismissing reports for reason Y, maybe the fix is Z".
+
+And then it stops. These reports need team discussion, prioritization, and product judgment – higher-level decisions that shouldn't self-drive. This loop is pure detection and surfacing, and that's the point: not every loop should close itself.
+
+**Where I sit:** in the middle. The loop does the listening; the team does the deciding.
+
+**Loop or graph?** Neither closes without humans. Call it a graph where several of the nodes are us.
+
+{/*TODO: real distilled idea + its sources*/}
+
+## The loops inside the loops
+
+Two behaviors cut across the whole fleet and don't belong to any single scout:
+
+- **Self-validation.** About 10% of the time, a scout run isn't looking for anything new – it's checking back on something it believes was dealt with, using its scratchpad to track what needs re-verifying and when. Trust, but re-run.
+- **Self-improvement.** About 0.5% of the time, a scout notices *itself* struggling and files a self-improvement report. On top of that, `signals-scout-self-improvement` reviews the fleet: it picks one scout per run and sense-checks its recent behavior against what its own skill promises – emit calibration, memory hygiene, runs that ignore their own disqualifiers – and recommends the fix, naming the exact file to change.
+
+Scouts watching data, scouts watching scouts, scouts watching themselves. Each one is a simple loop. Together they are very obviously not.
+
+{/*Possible honorable-mentions table: task goblin (fleet-wide tasks/cost watcher),
+    interesting-scouts (taxonomy of what users build, flags canonicalization
+    candidates). Decide during iteration whether these earn their place.*/}
+
+## So: loops or graphs?
+
+Zoom in on any one of these and it's a loop – a small agent on a schedule, reading, deciding, emitting, remembering. That's the level where you build, debug, and reason about them, and it's the level that fits in one markdown file.
+
+Zoom out and it's undeniably a graph. The mcp-struggles scout files agent feedback that the agent-feedback scout picks up. The scratchpad miner reads the memory the other loops write. The self-improvement scout edits the skills the other scouts run. Reports become PRs that change the product that the loops are watching.
+
+Nobody designed that graph top-down. We wrote small loops, each with a legible job and a human in a deliberate seat, and the graph emerged from them feeding each other.
+
+So my answer to the title: it's loops all the way down, and a graph when you stand back – and neither word is the interesting part. The interesting part is the three jobs from the top of this post. Does it detect and surface for you? Does it take the boring work? Do you still know what's going on? Get those right and you can call it whatever the meme demands this quarter.
+
+## Try it yourself
+
+Everything above runs on [scouts](/docs/self-driving/scouts), which ship with [Self-driving](/docs/self-driving) in PostHog. The loops we described are custom scouts we wrote for our own project – you can write yours the same way: point your agent at the `authoring-signals-scouts` skill, describe the surface you wish someone was watching, and put yourself wherever in the loop you want to sit.
+
+The [What is a Scout?](/blog/what-is-a-scout) deep dive covers the machinery – the harness, the scratchpad, the signal pipeline – if you want to go a level down.
