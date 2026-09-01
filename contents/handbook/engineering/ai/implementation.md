@@ -42,15 +42,15 @@ PostHog Desktop is a desktop agent that turns PostHog signals into shipped code.
 
 Engineers who prefer to work in Claude Code, Cursor, Codex, or any other MCP-compatible tool get access to the same PostHog capabilities.
 
-## Headless first, then react, then UI
+## Headless first, then wire up the UI you have, then build one the agent renders
 
 Product teams must think about AI features as **headless (UI-less) workflows**. Agents don't need UI – they compose tools and follow skills to accomplish goals. But customers do need UI, and there are two different things that can mean.
 
-The rule of thumb: **headless first, then make your existing UI react, then a dedicated UI for a persona.**
+The rule of thumb: **headless first, then wire up the UI you already have, then build a new one the agent renders.**
 
 1. **Build the capability headless** – expose your product's API as MCP tools and write skills that teach agents how to use them. This makes the capability available across all surfaces immediately.
-2. **Make your existing UI react to the agent** – tell the agent what the user has open, and update the page when the agent changes something. This is a small amount of frontend work on the product you already have, and it's what makes the side panel feel like part of your product instead of a chat window next to it. See [integrating your product's UI](#integrating-your-products-ui-with-posthog-ai) below.
-3. **Then build a dedicated UI where it matters** – if a persona (product manager, engineer, analyst) needs an experience of their own, build an MCP App that provides the right UI for that workflow.
+2. **Wire up the UI you already have** – tell the agent what the user has open, and update the page when the agent changes something. This is a small amount of frontend work on the product you already have, and it's what makes the side panel feel like part of your product instead of a chat window next to it. See [integrating your product's UI](#integrating-your-products-ui-with-posthog-ai) below.
+3. **Then build a UI the agent renders** – if a persona (product manager, engineer, analyst) needs an experience of their own, build an MCP App. That UI lives in the agent client, not in the PostHog app.
 
 This order matters because headless capabilities are reusable across every surface, while UI is specific to one. If you build UI first, you've created something that only works in one place. If you build headless first, you've created something that works everywhere, and you can always add UI later.
 
@@ -209,9 +209,9 @@ The LangGraph runtime is frozen. Don't add `useMaxTool` registrations, `MaxUICon
 
 2. **Write skills for jobs to be done.** If your product has jobs that require domain knowledge – specific tool ordering, constraints, query patterns, or reasoning about what data to check – write a skill that teaches agents how to accomplish that job well. See [Writing skills](/handbook/engineering/ai/writing-skills).
 
-3. **Make your existing UI react.** Attach the entity the user has open, add a trusted instruction describing what this page is for, and update when the agent changes something you're displaying. Each of these is a hook call on a component you already have, and together they're what makes the side panel useful on your product. See [integrating your product's UI](#integrating-your-products-ui-with-posthog-ai).
+3. **Wire up the UI you already have.** Attach the entity the user has open, add a trusted instruction describing what this page is for, and update when the agent changes something you're displaying. Each of these is a hook call on a component you already have, and together they're what makes the side panel useful on your product. See [integrating your product's UI](#integrating-your-products-ui-with-posthog-ai).
 
-4. **Build a dedicated UI only when a specific persona needs it.** Don't start with a UI-specific AI feature. Start headless, validate that agents can accomplish the workflow, then add UI if a persona needs an experience of their own.
+4. **Build a UI the agent renders only when a specific persona needs it.** Don't start with a UI-specific AI feature. Start headless, validate that agents can accomplish the workflow, then add an MCP App if a persona needs an experience of their own.
 
 ### Serializer best practices
 
