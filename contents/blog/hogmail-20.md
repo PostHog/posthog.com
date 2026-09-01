@@ -21,7 +21,7 @@ Seriously, though, there are too many ways to count, but bad hiring is one obvio
 
 Here's what's new on PostHog.com:
 
-- [Myths (and truths) I've learned from 10 years of startup hiring](https://posthog.com/blog/early-stage-startup-hiring-strategy) by Charles Cook
+- [Myths (and truths) I've learned from 10 years of startup hiring](https://posthog.com/founders/early-stage-startup-hiring-strategy) by Charles Cook
  
 - [Should startups hire product engineers, product managers, or both?](https://posthog.com/blog/product-engineer-vs-product-manager) by Ian Vanagas
  
