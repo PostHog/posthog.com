@@ -1,6 +1,6 @@
 ---
 title: 'Are these loops or graphs?'
-date: 2026-09-15
+date: 2026-09-01
 rootPage: /blog
 sidebar: Blog
 showTitle: true
@@ -15,7 +15,7 @@ seo:
     metaDescription: 'Five real agent loops the self-driving team runs every day to build self-driving in PostHog - what each one watches, what it takes off our plate, and where the human sits.'
 ---
 
-{/*
+<!--
 DRAFT – working notes (delete before publish)
 
 Spec:
@@ -31,6 +31,8 @@ Spec:
 
 TODO before publish:
 - featuredImage (Cloudinary) + featuredImageType: full
+- Set the real publish date. NB: a future date means NO page gets built
+  (createPages filters isFuture) - keep it <= today while iterating locally.
 - Real run artifacts for each loop (like the <details> traces in the scout post):
   - agent feedback: one feedback event -> report -> PR chain
   - mcp struggles: a real friction finding from a random walk
@@ -52,7 +54,7 @@ TODO before publish:
   dev server and play it before PR. The "my best is 94" p.s. is a placeholder,
   replace with Andy's real score. PR will need before/after screenshots plus a
   GIF of the game (it moves), narrow + wide, light + dark.
-*/}
+-->
 
 ![Hamel Husain's post on X: "Loop Engineering Is Dead. Enter Graph Engineering" - followed by the Michael Jordan "Stop it." meme](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/hamel_loops_graphs_tweet_64bed5ca01.jpg)
 
@@ -91,7 +93,7 @@ Then the part that makes it a loop rather than a funnel: the scout **checks back
 
 **Loop or graph?** Loop. Agents complain → scout distills → report → PR → agents stop complaining (verified). It eats its own output.
 
-{/*TODO: real end-to-end artifact, like the sync_frequency trace in the scout post*/}
+<!--TODO: real end-to-end artifact, like the sync_frequency trace in the scout post-->
 
 ## Loop 2: The MCP struggles loop
 
@@ -107,7 +109,7 @@ The result: MCP improvements grounded in an agent *actually exercising the thing
 
 **Loop or graph?** Loop, with a twist – the thing being tested and the thing doing the testing are the same product. Draw that honestly and you get a cycle.
 
-{/*TODO: real finding from a recent random walk*/}
+<!--TODO: real finding from a recent random walk-->
 
 ## Loop 3: The skill issues loop
 
@@ -124,7 +126,7 @@ A commit cursor plus a coverage map rotate it across the corpus over runs.
 
 **Loop or graph?** Loop. It's the mcp-struggles loop pointed at a different layer of the same stack. (At this point you may notice the loops themselves are starting to look like a family. Hold that thought.)
 
-{/*TODO: real lint/dogfood finding*/}
+<!--TODO: real lint/dogfood finding-->
 
 ## Loop 4: The scratchpad miner loop
 
@@ -140,7 +142,7 @@ Each silent workaround is a bug report we never received, recoverable from the f
 
 **Loop or graph?** Graph, honestly. A scout that reads the memory of every other scout, including its own, is not a tidy circle. It's the fleet observing itself.
 
-{/*TODO: real silent-workaround finding -> bug it surfaced*/}
+<!--TODO: real silent-workaround finding -> bug it surfaced-->
 
 ## Loop 5: The inbox product ideas loop
 
@@ -160,7 +162,7 @@ And then it stops. These reports need team discussion, prioritization, and produ
 
 **Loop or graph?** Neither closes without humans. Call it a graph where several of the nodes are us.
 
-{/*TODO: real distilled idea + its sources*/}
+<!--TODO: real distilled idea + its sources-->
 
 ## Loop 6: The issues → PRs loop
 
@@ -179,10 +181,10 @@ The dedupe is part of the loop too: before drafting anything, the scout checks t
 
 So the human effort moved to the two ends – a better spec going in, a real sense-check coming out – and the boring middle belongs to the agents. That's what lets me scale horizontally: my ceiling is no longer how many screens I can watch, it's how many good specs I can write.
 
-{/*TODO: real issue -> report -> PR -> merged example. Also consider the
+<!--TODO: real issue -> report -> PR -> merged example. Also consider the
     auto-merge anecdote from Alex (first PR written, reviewed, approved, and
     merged with zero humans - then we turned that off): great line, confirm
-    with Alex/team before publishing.*/}
+    with Alex/team before publishing.-->
 
 **Where I sit:** at both ends, on purpose. Spec quality in, merge judgment out.
 
@@ -210,9 +212,9 @@ Two behaviors cut across the whole fleet and don't belong to any single scout:
 
 Scouts watching data, scouts watching scouts, scouts watching themselves. Each one is a simple loop. Together they are very obviously not.
 
-{/*Possible honorable-mentions table: task goblin (fleet-wide tasks/cost watcher),
+<!--Possible honorable-mentions table: task goblin (fleet-wide tasks/cost watcher),
     interesting-scouts (taxonomy of what users build, flags canonicalization
-    candidates). Decide during iteration whether these earn their place.*/}
+    candidates). Decide during iteration whether these earn their place.-->
 
 ## So: loops or graphs?
 

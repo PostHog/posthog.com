@@ -128,7 +128,11 @@ export default function LoopGame(): JSX.Element {
     }
 
     const onPointerDown = (e: React.PointerEvent<HTMLCanvasElement>) => {
-        e.currentTarget.setPointerCapture(e.pointerId)
+        try {
+            e.currentTarget.setPointerCapture(e.pointerId)
+        } catch {
+            // synthetic or already-released pointers can't be captured - drawing still works
+        }
         drawingRef.current = true
         pointsRef.current = [toPoint(e)]
         setResult(null)
