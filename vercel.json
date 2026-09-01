@@ -58,6 +58,25 @@
     ],
     "rewrites": [
         {
+            "source": "/docs/references/:slug(.*-\\d.*).md",
+            "destination": "/docs/references/version-unavailable.md"
+        },
+        {
+            "source": "/docs/references/:slug(.*-\\d.*)",
+            "has": [
+                {
+                    "type": "header",
+                    "key": "accept",
+                    "value": "(?:.*text/markdown.*)"
+                }
+            ],
+            "destination": "/docs/references/version-unavailable.md"
+        },
+        {
+            "source": "/docs/references/:slug(.*-\\d.*)",
+            "destination": "/docs/references/version-unavailable/index.html"
+        },
+        {
             "source": "/docs/:path*/",
             "has": [
                 {
