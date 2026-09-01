@@ -329,14 +329,23 @@ const titleSizeFor = (
     // The auto-fit tier is the default; `scale` lets the organizer nudge it. Two clamps then keep the
     // result inside the canvas no matter the scale: the width fit stops a word running off the edge or
     // breaking mid-word, and the height fit stops a multi-line title growing down into the info block and
-    // footer. The height clamp counts lines at the *desired* size, which can only over- (never under-)
-    // estimate them as the size shrinks, so the result is always conservative — it never collides.
+    // footer.
     const autoSize = sizes[Math.min(tier + stepDown, sizes.length - 1)]
     const desired = Math.min(autoSize * scale, fitToLongestWord(title, columnWidth))
-    const lines = wrapLineCount(title, columnWidth, desired)
-    // Line pitch is 0.9em (the title's line-height), and the last line adds its own cap height on top.
-    const maxByHeight = heightBudget / (0.9 * lines + 0.1)
-    return Math.min(desired, maxByHeight)
+
+    // Height fit: shrink until the wrapped title fits the budget. Each pass measures the lines at the
+    // current size and, if too tall, shrinks to exactly that line count's limit — which is strictly
+    // smaller, so the size only ever decreases and can never settle on a colliding value. Shrinking can
+    // drop a line, which frees room, so re-measuring recovers the size a one-shot count would have thrown
+    // away (the reason a long title like "Build and Grow Sessions" no longer sets needlessly small).
+    let size = desired
+    for (let pass = 0; pass < 5; pass++) {
+        // Line pitch is 0.9em (the title's line-height); the last line adds its own cap height on top.
+        const height = (0.9 * wrapLineCount(title, columnWidth, size) + 0.1) * size
+        if (height <= heightBudget) break
+        size = heightBudget / (height / size)
+    }
+    return size
 }
 
 /**
