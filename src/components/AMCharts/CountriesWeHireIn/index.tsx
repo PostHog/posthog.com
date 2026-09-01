@@ -158,12 +158,12 @@ export default function CountriesWeHireIn({
 
         const chart = root.container.children.push(
             am5map.MapChart.new(root, {
-                projection: am5map.geoEqualEarth(),
+                projection: am5map.geoOrthographic(),
                 panX: 'rotateX',
-                panY: 'translateY',
+                panY: 'rotateY',
                 wheelY: 'zoom',
                 homeGeoPoint: { latitude: 20, longitude: 0 },
-                zoomLevel: 1.2,
+                zoomLevel: 1,
             })
         )
 
