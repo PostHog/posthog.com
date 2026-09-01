@@ -6828,6 +6828,11 @@ export const docsMenu = {
                             icon: 'IconGemini',
                         },
                         {
+                            name: 'Google ADK',
+                            url: '/docs/ai-observability/installation/google-adk',
+                            icon: 'IconGemini',
+                        },
+                        {
                             name: 'Vercel AI SDK',
                             url: '/docs/ai-observability/installation/vercel-ai',
                             platformLogo: 'vercel',
