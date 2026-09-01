@@ -1189,7 +1189,7 @@ export default function EventForm({ onSuccess, event }: { onSuccess?: () => void
                             )}
                         </OSButton>
                         <div className="flex items-center gap-1 sm:ml-auto">
-                            <span className="text-sm text-secondary mr-1">Landscape title</span>
+                            <span className="text-sm text-secondary mr-1">Landscape title size</span>
                             <OSButton
                                 size="sm"
                                 variant="secondary"
@@ -1201,7 +1201,7 @@ export default function EventForm({ onSuccess, event }: { onSuccess?: () => void
                                     setLandscapeTitleStep((step) => Math.max(TITLE_SCALE_MIN_STEP, step - 1))
                                 }
                             >
-                                A–
+                                –
                             </OSButton>
                             <OSButton
                                 size="sm"
@@ -1214,7 +1214,7 @@ export default function EventForm({ onSuccess, event }: { onSuccess?: () => void
                                     setLandscapeTitleStep((step) => Math.min(TITLE_SCALE_MAX_STEP, step + 1))
                                 }
                             >
-                                A+
+                                +
                             </OSButton>
                         </div>
                     </div>
