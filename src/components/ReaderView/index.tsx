@@ -849,12 +849,12 @@ interface SidebarTabButtonProps {
     showLabel: boolean
     /** Pinned mode renders the tab with icon stacked above label (horizontal row). */
     stacked: boolean
-    /** Share the row equally (`flex-1`); at four tabs the widest label overflows the row. */
-    equalWidth: boolean
+    /** Smaller type when the stacked row is crowded (more than 3 tabs). */
+    compact: boolean
     onClick: () => void
 }
 
-const SidebarTabButton = ({ tab, active, showLabel, stacked, equalWidth, onClick }: SidebarTabButtonProps) => {
+const SidebarTabButton = ({ tab, active, showLabel, stacked, compact, onClick }: SidebarTabButtonProps) => {
     // Manual FLIP for the icon: capture position on every commit, then on the
     // next commit — IF the structural layout changed (`layoutKey`) — animate
     // the icon from its old position to its new one. Click-only re-renders
@@ -863,8 +863,7 @@ const SidebarTabButton = ({ tab, active, showLabel, stacked, equalWidth, onClick
     // since v4 measures on every render and any sub-pixel delta animates).
     const iconRef = useRef<HTMLSpanElement>(null)
     const prevPosRef = useRef<DOMRect | null>(null)
-    // In the key: a three-to-four-tab move resizes every button.
-    const layoutKey = `${stacked ? 1 : 0}-${showLabel ? 1 : 0}-${equalWidth ? 1 : 0}`
+    const layoutKey = `${stacked ? 1 : 0}-${showLabel ? 1 : 0}`
     const prevKeyRef = useRef(layoutKey)
 
     useLayoutEffect(() => {
@@ -896,9 +895,9 @@ const SidebarTabButton = ({ tab, active, showLabel, stacked, equalWidth, onClick
             onClick={onClick}
             role="tab"
             aria-selected={active}
-            className={`relative rounded text-sm leading-tight flex ${
+            className={`relative rounded ${compact ? 'text-xs' : 'text-sm'} leading-tight flex ${
                 stacked
-                    ? `${equalWidth ? 'flex-1' : ''} flex-col items-center text-center gap-1 px-2 py-1.5`
+                    ? 'flex-1 flex-col items-center text-center gap-1 px-2 py-1.5'
                     : // Icon-only AND with-label both use justify-start so
                       // the icon stays at button x=8 regardless of button
                       // width. `justify-center` tied icon x to width and
@@ -1262,8 +1261,7 @@ const LeftSidebar = ({
                                         active={t.value === activeTab}
                                         showLabel={expanded}
                                         stacked={appliedPinned}
-                                        // Four tabs at natural widths total ~230px and fit the 234px row.
-                                        equalWidth={menuTabs!.length < 4}
+                                        compact={appliedPinned && menuTabs?.length > 3}
                                         onClick={() => {
                                             // Proximate metric: downstream outcomes move too slowly to read.
                                             posthog?.capture('reader_tab_click', {
