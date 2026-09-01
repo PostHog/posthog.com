@@ -41,6 +41,7 @@ import Contributor from 'components/Docs/Contributors'
 import { useProductInterestFromPathname } from 'hooks/useProductInterest'
 import useProduct from 'hooks/useProduct'
 import { buildProductMenuTabs, ProductSwitcher } from 'components/Products/ReaderViewProduct'
+import { useLearnPlacement } from 'components/Products/ReaderViewProduct/learnPlacement'
 import slugify from 'slugify'
 import usePostHog from 'hooks/usePostHog'
 import { RenderInClient } from 'components/RenderInClient'
@@ -395,8 +396,14 @@ export default function Handbook({ data: { post, postHogSource }, pageContext: {
               .sort((a: any, b: any) => (b.productMenu?.length ? 1 : 0) - (a.productMenu?.length ? 1 : 0))[0]
         : null
     const isProductDocsPage = !!productSurfaceData?.productMenu?.length
+    const learnPlacement = useLearnPlacement()
     const productMenuTabs = isProductDocsPage
-        ? buildProductMenuTabs({ productData: productSurfaceData, activeSurface: 'docs' })
+        ? buildProductMenuTabs({
+              productData: productSurfaceData,
+              activeSurface: 'docs',
+              learnPlacement,
+              currentPath: slug,
+          })
         : undefined
     const productSelect = isProductDocsPage ? <ProductSwitcher activeHandle={productSurfaceData.handle} /> : undefined
 
