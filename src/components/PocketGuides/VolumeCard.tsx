@@ -3,6 +3,7 @@ import React from 'react'
 
 import { WINDOW_BG } from '../../constants/frostedSurfaces'
 import type { PocketGuideVolume } from '../../constants/pocketGuides'
+import usePostHog from '../../hooks/usePostHog'
 import Cover from './Cover'
 
 interface VolumeCardProps {
@@ -27,6 +28,17 @@ export default function VolumeCard({
     to,
     ctaLabel = 'Read the pocket guide',
 }: VolumeCardProps): JSX.Element {
+    const posthog = usePostHog()
+
+    // The button opens the same guide as the cover, so it needs its own event – otherwise every
+    // open through it is invisible next to the cover's `cover_click` (#19681 tracked the cover only).
+    const trackCtaClick = () =>
+        posthog?.capture('pocket_guide_interaction', {
+            kind: 'volume_cta_click',
+            volume: volume.id,
+            placement,
+        })
+
     return (
         // Always stacked: side by side squeezed the copy at ordinary widths (#19713 review).
         // No `overflow-hidden`: the cover's hover tilt lifts a drop shadow that clipping would cut off.
@@ -43,6 +55,7 @@ export default function VolumeCard({
                 <CallToAction
                     to={to ?? `/pocket-guides/${volume.id}`}
                     state={{ newWindow: true }}
+                    onClick={trackCtaClick}
                     type="secondary"
                     size="md"
                     className="mt-4"
