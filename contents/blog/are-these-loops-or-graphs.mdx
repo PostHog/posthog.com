@@ -292,6 +292,32 @@ Two behaviors cut across the whole fleet and don't belong to any single scout:
 - **Self-validation.** About 10% of the time, a scout run isn't looking for anything new – it's checking back on something it believes was dealt with, using its scratchpad to track what needs re-verifying and when. Trust, but re-run.
 - **Self-improvement.** About 0.5% of the time, a scout notices *itself* struggling and files a self-improvement report. On top of that, `signals-scout-self-improvement` reviews the fleet: it picks one scout per run and sense-checks its recent behavior against what its own skill promises – emit calibration, memory hygiene, runs that ignore their own disqualifiers – and recommends the fix, naming the exact file to change.
 
+<details>
+
+<summary>Self-validation, for real: <strong>"validated – fix held"</strong></summary>
+
+The clearest trace of the validation habit is in the scratchpad, where the appointments live. On August 31st the task goblin surfaced missing attribution on `sandbox_started` events; [PR #92058](https://github.com/PostHog/posthog/pull/92058) merged the same day. The story could have ended there. Instead the scout left itself a follow-up entry with a concrete probe, and the next morning:
+
+> validated – fix held on 2026-09-01. Rechecked for the 04:00–05:00 UTC hour: all 978 `sandbox_started` events had `origin_product`, `team_id`, and `task_run_id` populated.
+
+Surfaced, fixed, merged, *and re-measured against live data* – inside 30 hours, no human asking for the re-check. And validation cuts the other way too: the same week, the skill-issues scout re-probed one of its own earlier findings at `origin/HEAD`, found the gap still there, and appended fresh evidence to the still-live report instead of filing a duplicate. The fleet's scratchpad is full of these dated appointments: *"pending – validate after 2026-09-04, probe: …"*
+
+</details>
+
+<details>
+
+<summary>Self-improvement, for real – including the time it was <strong>wrong</strong></summary>
+
+The flattering example: the self-improvement scout reviewed `signals-scout-mcp-struggles` (Loop 2!) and caught its body instructing runs to call a tool that no longer exists – while 56 completed runs had quietly used the replacement instead. Body says one thing, behavior does another: that's exactly its discriminator, and the fix shipped as [a PR to the skill](https://github.com/PostHog/skills/pull/170).
+
+The honest example: it once diagnosed a feedback scout's zero-row thread queries as a schema problem – *"the live Slack table has `root` and no `thread_ts`"* – and recommended rewriting the queries around `root`. The human review checked the live table before applying it: `thread_ts` was fine (343 populated rows), `root` was empty in 820 of 821 rows, and the real cause was wall-clock windowing against a lagging sync. The recommended change would have *broken* the scout. The fix that actually shipped came from the human, and the dismissal note ends with an instruction to make the scout forget its own false finding.
+
+Which is the whole thesis in one anecdote: the loop that fixes the loops still gets reviewed – and sometimes overruled – by the human in the seat.
+
+<!-- inbox refs: 01a02e15 (removed-tool), 01a01264 (thread_ts, see dismissal_note) -->
+
+</details>
+
 Scouts watching data, scouts watching scouts, scouts watching themselves. Each one is a simple loop. Together they are very obviously not.
 
 <!--Possible honorable-mentions table: task goblin (fleet-wide tasks/cost watcher),
