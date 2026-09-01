@@ -525,7 +525,6 @@ export const Pizza = () => {
             </div>
 
             <Swiper
-                key={filter}
                 modules={[Navigation, Pagination, A11y]}
                 autoHeight={true}
                 spaceBetween={20}

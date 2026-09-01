@@ -150,12 +150,11 @@ const processMobileMenuItems = (items: MenuItemType[]): MenuItemType[] => {
 // Components
 const MenuItem: React.FC<{
     portalContainer: HTMLElement | null
-    appContainer: HTMLElement | null
     item: MenuItemType
     forceIconIndent?: boolean
     menuIndex: number
     onCloseMenu?: () => void
-}> = ({ item, forceIconIndent, menuIndex, portalContainer, appContainer, onCloseMenu }) => {
+}> = ({ item, forceIconIndent, menuIndex, portalContainer, onCloseMenu }) => {
     if (item.type === 'separator') {
         return <RadixMenubar.Separator className={SeparatorClasses} />
     }
@@ -200,7 +199,6 @@ const MenuItem: React.FC<{
                     )}
                     <RadixMenubar.Portal container={portalContainer || undefined}>
                         <RadixMenubar.SubContent
-                            collisionBoundary={appContainer}
                             className={`${ContentClasses} max-h-[calc(var(--radix-menubar-content-available-height)-0.75rem)] overflow-hidden flex flex-col`}
                             alignOffset={-5}
                             data-scheme="primary"
@@ -213,7 +211,6 @@ const MenuItem: React.FC<{
                                         forceIconIndent={anyChildHasIcon}
                                         menuIndex={menuIndex}
                                         portalContainer={portalContainer}
-                                        appContainer={appContainer}
                                         onCloseMenu={onCloseMenu}
                                     />
                                 ))}
@@ -239,12 +236,7 @@ const MenuItem: React.FC<{
                         </div>
                     </RadixMenubar.SubTrigger>
                     <RadixMenubar.Portal container={portalContainer || undefined}>
-                        <RadixMenubar.SubContent
-                            collisionBoundary={appContainer}
-                            className={ContentClasses}
-                            alignOffset={-5}
-                            data-scheme="primary"
-                        >
+                        <RadixMenubar.SubContent className={ContentClasses} alignOffset={-5} data-scheme="primary">
                             {React.cloneElement(item.items as unknown as React.ReactElement, { onCloseMenu })}
                         </RadixMenubar.SubContent>
                     </RadixMenubar.Portal>
@@ -323,7 +315,6 @@ const MenuBar: React.FC<MenuBarProps> = ({ menus, className, triggerAsChild, cus
     const [openMenuIndex, setOpenMenuIndex] = React.useState<number | null>(null)
     const rootRef = React.useRef<HTMLDivElement | null>(null)
     const [portalContainer, setPortalContainer] = React.useState<HTMLElement | null>(null)
-    const appContainer: HTMLElement | null = null
 
     React.useEffect(() => {
         if (!rootRef.current) {
@@ -394,7 +385,6 @@ const MenuBar: React.FC<MenuBarProps> = ({ menus, className, triggerAsChild, cus
                         </RadixMenubar.Trigger>
                         <RadixMenubar.Portal container={portalContainer || undefined}>
                             <RadixMenubar.Content
-                                collisionBoundary={appContainer}
                                 className={`${ContentClasses} max-h-[calc(var(--radix-menubar-content-available-height)-0.75rem)] overflow-hidden flex flex-col`}
                                 align="start"
                                 sideOffset={5}
@@ -408,7 +398,6 @@ const MenuBar: React.FC<MenuBarProps> = ({ menus, className, triggerAsChild, cus
                                             item={item}
                                             menuIndex={menuIndex}
                                             portalContainer={portalContainer}
-                                            appContainer={appContainer}
                                             onCloseMenu={closeMenu}
                                         />
                                     ))}
