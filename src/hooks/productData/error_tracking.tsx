@@ -210,8 +210,8 @@ export const errorTracking = {
         ],
     },
     useCaseRamp: {
-        intro: 'Error Tracking works at three levels. You can triage exceptions yourself, ask an agent to investigate one for you, or let PostHog work proactively with your data.',
-        scenario: 'Your latest deploy ships a brand-new error (nice)',
+        intro: 'Error Tracking works at three levels. You can triage exceptions yourself, ask an agent to investigate for you, or let PostHog work proactively with your data.',
+        scenario: 'Your latest deploy ships a brand-new error (whoops)',
         columns: [
             {
                 level: 'Do it yourself',
@@ -219,21 +219,34 @@ export const errorTracking = {
                 scenario: {
                     icon: 'IconBug',
                     steps: [
-                        'An alert tells you a new issue is spiking, and you open it in the issue list',
-                        'The stack trace points at a file, and the session replay attached to it shows what the user did to trigger it',
-                        'You write the fix, ship it, and mark the issue resolved',
+                        'PostHog captures $exception events whenever errors are thrown by the client or server application',
+                        'Exceptions are grouped into issues based on event information like type, message, and stack trace',
+                        "It's on you and your team to manage them, and merge any bug fixes",
                     ],
                 },
                 points: [
                     {
-                        title: 'You can already alert on this',
-                        icon: 'IconHandwave',
-                        body: 'Alerts in PostHog Web already tell you when a new issue appears or spikes. Deciding which of them are worth an afternoon, and reading the stack trace behind each one, is still on you.',
+                        title: 'Get notified of new errors',
+                        icon: 'IconBell',
+                        body: 'You can set up alerts for new issues being created or reopened, with notifications sent via Slack, Discord, Teams, or an HTTP webhook. You can also create trend alerts on $exception events for more flexibility.',
                     },
                     {
                         title: 'Point an agent at it instead',
                         icon: 'IconSparkles',
-                        body: "Every exception is captured with its stack trace, release, and affected user attached. That's enough for an agent to triage your issue list and open a fix, instead of you reading every stack trace yourself.",
+                        body: (
+                            <>
+                                Connect with the PostHog MCP server to enable autonomous debugging with AI agents. You
+                                can also copy our{' '}
+                                <Link
+                                    to="/docs/error-tracking/surfaces/web-app#quest-item-debug-with-ai"
+                                    state={{ newWindow: true }}
+                                    className="underline"
+                                >
+                                    premade AI prompts
+                                </Link>{' '}
+                                which include full stack traces and curated instructions for the AI to follow.
+                            </>
+                        ),
                     },
                 ],
             },
@@ -243,28 +256,28 @@ export const errorTracking = {
                 scenario: {
                     icon: 'IconMagicWand',
                     steps: [
-                        'From your editor you ask which errors are new since the last deploy',
-                        'It pulls the stack trace and the session replay attached to it, then writes the fix wrapped behind a flag',
-                        'Once it ships, you tag @PostHog in Slack to check whether the issue actually stopped firing before you widen the rollout',
+                        'In Cursor or Claude Code, you ask which error is causing the most crashes in production',
+                        'The MCP server pulls its stack trace, and the agent proposes a fix based on it',
+                        'Once the fix ships, you ask it to mark the issue as resolved',
                     ],
                 },
                 points: [
                     {
-                        title: "Turns out, there's more",
+                        title: 'Bring errors into your other tools',
                         icon: 'IconSearch',
-                        body: 'An agent gets the same stack trace, session replay, and person properties you would, so it can name the line rather than guess at the cause. Releases with source linking take it further, pointing straight at the file and commit that shipped the bug.',
+                        body: 'Combining the PostHog MCP server with Error Tracking lets your agent act on what it finds, proposing fixes, updating issue status, or linking the issue straight to a GitHub, GitLab, Linear, or Jira ticket.',
                     },
                     {
                         title: 'No prompt required',
                         icon: 'IconMessage',
                         body: (
                             <>
-                                A{' '}
-                                <Link to="/docs/self-driving/scouts" state={{ newWindow: true }} className="underline">
-                                    scout
-                                </Link>{' '}
-                                uses the same spike detection that powers your alerts to catch a new error the moment it
-                                clears its baseline, no prompt required.
+                                Your exceptions are a signal source for{' '}
+                                <Link to="/docs/self-driving" state={{ newWindow: true }} className="underline">
+                                    Self-driving
+                                </Link>
+                                : recurring, high-impact issues become reports, and when there's a code fix, a pull
+                                request you review and merge.
                             </>
                         ),
                     },
@@ -279,14 +292,14 @@ export const errorTracking = {
                         'The new error is a signal the second it fires, so nothing waits for a scheduled check',
                         'Signals for the same crash group into one report, tied to the deploy that introduced it',
                         'The trace names a file in a repo PostHog knows, so it opens a draft pull request with the fix and a regression test',
-                        'You review and merge. Anything needing a judgment call lands in your Inbox instead',
+                        'You review and merge the PR. Anything needing a judgment call lands in your Inbox instead',
                     ],
                 },
                 points: [
                     {
                         title: 'A stack trace is enough to act on',
                         icon: 'IconBrain',
-                        body: 'Most reports need a person to decide what to do. An exception names a file, a line, and the user who hit it, which is enough for PostHog to write the fix and let you check its work.',
+                        body: 'An exception names a file, a line, and the user who hit it, which is concrete enough for PostHog to draft the fix itself. Only the genuinely ambiguous ones, where a person has to make the call, land in your inbox instead of a pull request.',
                     },
                     {
                         title: 'Spike detection is the trigger',

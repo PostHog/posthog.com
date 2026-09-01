@@ -252,7 +252,7 @@ export const surveys = {
                 scenario: {
                     icon: 'IconSearch',
                     steps: [
-                        'A dedicated Self-driving scout watches your active surveys for score regressions and abandonment spikes',
+                        'a dedicated scout watches your active surveys for score regressions and abandonment spikes',
                         'It clusters open-text answers into recurring themes. Each validated theme becomes one report in the inbox',
                         "Every response links back to the respondent's session replay and events, so vague feedback comes with evidence",
                     ],
