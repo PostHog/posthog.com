@@ -135,6 +135,43 @@ A few things to keep in mind:
 - The copy is independent – changes to the original don't sync to the copy, and vice versa.
 - If a dashboard or template with the same name already exists in the destination project, the copy is automatically renamed with a suffix like "(copy)", "(copy 2)", etc.
 
+## Creating your own dashboard templates
+
+You can save any dashboard as a reusable template for your project or organization. This lets your team create new dashboards from a standardized starting point without rebuilding insights from scratch.
+
+### Saving a dashboard as a template
+
+1. Open the dashboard you want to save as a template.
+1. Click the **...** menu at the top of the dashboard.
+1. Select **Save as dashboard template**.
+1. Fill in the template name, description, and tags.
+1. Click **Save template**.
+
+The template captures the dashboard's insights and layout. You and your teammates can then select it when creating a new dashboard.
+
+### Managing templates
+
+To view and manage your templates, go to [**Dashboards**](https://app.posthog.com/dashboard) and click the **Templates** tab.
+
+From the **Templates** tab you can:
+
+- **Edit a template** – Click the **...** menu on a template and select **Edit template** to update its name, description, or tags.
+- **Delete a template** – Click the **...** menu on a template and select **Delete**. Deletion can be undone via the toast notification that appears.
+
+### Sharing templates across your organization
+
+By default, templates are scoped to the project where they were created. You can promote a template to organization-wide visibility so all projects in your organization can use it.
+
+To share a template with your organization:
+
+1. Go to the **Templates** tab on the [**Dashboards**](https://app.posthog.com/dashboard) page.
+1. Click the **...** menu on the template.
+1. Select **Share with organization**.
+
+To restrict a template back to the current project, click the **...** menu and select **Make project-only**.
+
+> **Note:** Templates that reference project-specific items like actions, cohorts, or data warehouse tables may show errors when used in other projects. Events and properties work everywhere. PostHog warns you about these references before you confirm sharing.
+
 ## Dates and filters
 
 ### Date range overrides
