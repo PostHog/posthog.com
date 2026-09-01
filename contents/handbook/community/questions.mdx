@@ -4,45 +4,63 @@ sidebar: Handbook
 showTitle: true
 ---
 
-Every small team should subscribe to the forum topics that are relevant to them. <SmallTeam slug="builder-relations" /> can help you configure notifications so questions get posted in your team's Slack channel.
+This page is for anyone answering questions on [posthog.com/questions](/questions): community members, community moderators, and the PostHog team. Most of it applies to all three. The last section is internal setup that only concerns PostHog team members.
 
-## Who should answer community questions?
+If you have the community moderator role, see [community moderator tools](/handbook/community/moderator-tools) for what those tools do and when to use them.
 
-**We encourage all team members to watch for community questions related to their product area, and answer them if they can.**
+## Who answers questions
 
-- Teams should be responsible for staying on top of community questions within their product areas. <SmallTeam slug="builder-relations" /> is building tooling to make this as easy as possible.
+**Anyone can, and we would rather it was not always us.** A forum where only PostHog employees answer is a support queue with extra steps. Answers from people who have actually run into the problem are usually better anyway.
 
-- Teams can decide if they want their weekly [support hero](/handbook/engineering/operations/support-hero) to handle them, or if they want to collectively keep an eye on content.
+**PostHog team members** should watch for questions in their product area and answer them when they can. Teams stay on top of their own areas, and can decide whether their weekly [support hero](/handbook/engineering/operations/support-hero) handles them or whether the team watches collectively.
 
-## Guidelines
+## Answering well
 
-### Phrasing & tone
+Answer from your own experience. What you tried, what worked, what you would do differently. That is the thing nobody else can post.
 
-When possible, respond in a phrase that doesn’t directly indicate you work for PostHog. (We can encourage community engagement by intentionally separating ourselves from the image it's a support forum where only PostHog employees respond.)
+If you do not know the answer, it is fine to say so, or to say nothing. A half-answer that sounds confident costs the next reader more time than silence.
 
-- Instead of... _“We are launching a new feature that will solve this - here’s the pull request.”_
-- Try... _“There’s a pull request out for this feature now.”_
+## Using AI
 
-### Various cases you may come across...
+Use AI to find things. Do not use it to write your reply.
 
-Some questions don’t make sense to be public, and some answers should be more widely accessible. Here’s how to handle those:
+Searching the docs, checking the codebase, and looking something up are all fair game. Reading what you find and answering in your own words is the whole job. Pasting the output is obvious to everyone reading, and it does not help: the person asking could have done that themselves.
 
-- If an answer is worth adding to docs, the moderator has a few options:
-    - Answer the question and update the docs directly
-    - Tag the question (`Internal: documentation`) so the Website & Docs Team can triage
-    - Create an issue in `posthog/posthog.com` with the `technical documentation` label
-    - If the topic is worth creating a tutorial, tag it with `Internal: tutorial idea`
+**If you would need AI to answer it, do something else instead.** Ask a follow-up question to narrow the problem down, or point them at PostHog AI in their own project. Suggest what to ask it, for example "why is this insight showing no data" or "which events is this flag matching on."
 
-- If a question is better off a private support ticket, reply asking them to create a ticket within the app (or better yet: [create one for them](/handbook/support/posthog-support#creating-tickets-on-behalf-of-customers) and reply to let them know!)
-    - After responding, use the Archive button. This hides the question from being listed within a forum category and removes the question from search indexes.
-    - _Note that free users might not have the option to directly message support in-app, so get context as to who the person is before pointing them there._
+That is worth suggesting even when a thread already has an AI reply on it. The naming here is admittedly confusing: the answers that appear on threads automatically come from [Inkeep](/blog/ai-community-answers), which reads our public docs, tutorials, and repos. PostHog AI in your dashboard is a different thing, connected to your project and able to look at your actual data. So an auto answer getting it wrong tells you nothing about whether PostHog AI can help, and it usually can.
 
-### Thread resolution
+## Where to send people
 
-We want the OP (original poster) to mark a solution themselves, but they'll rarely come back to do so. We'll be adding reminders, but in the meantime, <SmallTeam slug="builder-relations" /> will monitor this and follow up with OP and mark as solution if there's no reply after some time or it's obvious the question was resolved.
+Some questions do not belong on the forum, and saying so is more useful than answering around the edges. The full routing table is in [community channels](/handbook/community/channels#pull-support-out), but the two that come up most:
 
-## Context
+- **A feature request** goes on the [roadmap](/roadmap), where people can vote on it.
+- **A bug, or something that might be one**, goes to support. Point them at the AI assistant in their project first. It will help them work out whether it is really a bug, and if it is, it gives support the context to act on the ticket faster.
 
-Moderators can see additional info about a user when viewing a question. (If you're not yet a moderator, create an account, then ask your team lead to add you to your small team's page. Once you're added there, you'll instantly be upgraded to moderator status.)
+## Thread resolution
 
-**Below the question** is a moderator panel with the user's name and email, as well as a link to their record in PostHog Cloud.
+We want the person who asked to mark the solution themselves, but they rarely come back to do it. <SmallTeam slug="builder-relations" /> and community moderators follow up when a thread has gone quiet. See [mark as solution](/handbook/community/moderator-tools#mark-as-solution) for how long to wait and when it is safe to mark it yourself.
+
+## For PostHog team members
+
+### Getting notified
+
+Every small team should subscribe to the forum topics relevant to them, so questions get posted in your team's Slack channel.
+
+[Question alerts](/community/alerts) is where you do that. It shows which teams are subscribed to which topics, and you can add or remove your own team from any topic there. It also flags the two ways this quietly breaks: topics no team is watching, and teams subscribed to a topic without a Slack channel set. You need moderator access to open it. <SmallTeam slug="builder-relations" /> can help if you are stuck.
+
+### Phrasing and tone
+
+When possible, answer as a person rather than as the company. We would rather the forum did not read as a place where only PostHog employees respond.
+
+- Instead of... _"We are launching a new feature that will solve this – here's the pull request."_
+- Try... _"There's a pull request out for this feature now."_
+
+### Questions worth turning into something else
+
+- If an answer belongs in the docs, you can update the docs directly, tag the question `Internal: documentation` for the Website & Docs team to triage, or open an issue in `posthog/posthog.com` with the `technical documentation` label. If it is worth a tutorial, tag it `Internal: tutorial idea`.
+- If a question is better off as a private support ticket, ask them to open one in the app, or [create one for them](/handbook/support/posthog-support#creating-tickets-on-behalf-of-customers) and reply to say you have. Archive the thread afterwards. Note that free users may not be able to message support in-app, so check who you are talking to before pointing them there.
+
+### Extra context on the asker
+
+Staff moderators see a panel below the question with the name and email of the person who asked, and a link to their record in PostHog Cloud. If you are not a moderator yet, create an account and ask your team lead to add you to your small team's page. You will be upgraded automatically.

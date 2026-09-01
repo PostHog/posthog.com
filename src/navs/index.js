@@ -1971,6 +1971,10 @@ export const handbookSidebar = [
                         url: '/handbook/community/questions',
                     },
                     {
+                        name: 'Community moderator tools',
+                        url: '/handbook/community/moderator-tools',
+                    },
+                    {
                         name: 'Profiles',
                         url: '/handbook/community/profiles',
                     },
