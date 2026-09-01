@@ -195,8 +195,8 @@ export const surveys = {
         ],
     },
     useCaseRamp: {
-        intro: 'Surveys work at three levels. You can write the questions and read the answers yourself, ask an agent to summarize what came back, or let PostHog work proactively with your data.',
-        scenario: "Dozens of users beg for the same feature (guess we're building it)",
+        intro: 'Surveys work at three levels. You can write the questions and read the answers yourself, ask an agent to summarize responses, or let PostHog work proactively with your data.',
+        scenario: 'You want feedback from users on what to build next',
         columns: [
             {
                 level: 'Do it yourself',
@@ -204,21 +204,21 @@ export const surveys = {
                 scenario: {
                     icon: 'IconMessage',
                     steps: [
-                        'You launch an open-text survey asking what feature people miss most',
+                        'You launch an open-text survey asking "what feature or capability would you like us to add?"',
                         'You read a few hundred responses and keep seeing the same request: export to CSV',
-                        'You bring it to planning with the response count behind you, and it makes the roadmap',
+                        'You bring the summary to sprint planning and it gets added to the roadmap',
                     ],
                 },
                 points: [
                     {
-                        title: 'You can already alert on this',
+                        title: 'Get notified of new responses',
                         icon: 'IconHandwave',
-                        body: 'A native notification can post each new response to Slack or a webhook as it lands. Reading hundreds of them for a pattern is still on you.',
+                        body: 'You can send survey responses to Slack, Discord, Microsoft Teams, or a custom webhook. For more advanced use cases, you can also use data pipeline destinations.',
                     },
                     {
                         title: 'Point an agent at the answers instead',
                         icon: 'IconSparkles',
-                        body: 'Every response stays tied to the person who gave it, so an agent can tell you whether the ones asking are the ones paying you. Point it at your survey instead of reading every answer yourself.',
+                        body: 'You can add a Survey Results widget to any dashboard to track survey performance alongside other metrics. Instead of reading hundreds of responses manually, ask PostHog AI to surface the patterns.',
                     },
                 ],
             },
@@ -228,16 +228,16 @@ export const surveys = {
                 scenario: {
                     icon: 'IconMagicWand',
                     steps: [
-                        'You ask PostHog AI for a survey asking what feature people want most',
+                        'You ask PostHog AI to set up a survey asking what feature users want',
                         'It drafts the questions and targeting. You edit and launch',
-                        'In Slack you ask what people are asking for, and it drafts the feature spec for the top request, weighted toward what paying customers actually asked for',
+                        'PostHog AI reads through the survey responses and extracts themes and actionable insights. It can even classify feedback as positive, neutral, or negative',
                     ],
                 },
                 points: [
                     {
-                        title: "Turns out, there's more",
+                        title: 'Bring surveys into where you build',
                         icon: 'IconSearch',
-                        body: 'Reading a few hundred responses for a theme takes an afternoon. Asking PostHog AI takes one message, and it can compare segments in the same answer, like whether free users and paying customers are asking for different things.',
+                        body: "The PostHog MCP server exposes PostHog's API as function calling tools to any MCP client. An agent can run your surveys for you, and pull the responses back into your editor.",
                     },
                     {
                         title: 'No prompt required',
@@ -252,17 +252,16 @@ export const surveys = {
                 scenario: {
                     icon: 'IconSearch',
                     steps: [
-                        'A surveys scout clusters the open-text answers on a schedule and sees CSV export requested again and again',
-                        'The report lands in your Inbox with the count and a few quotes from people asking for it',
-                        'You reply in the Slack thread telling PostHog to build it, and it opens a pull request',
-                        'You ship it, and the next round of responses stops mentioning it',
+                        'A dedicated Self-driving scout watches your active surveys for score regressions and abandonment spikes',
+                        'It clusters open-text answers into recurring themes. Each validated theme becomes one report in the inbox',
+                        "Every response links back to the respondent's session replay and events, so vague feedback comes with evidence",
                     ],
                 },
                 points: [
                     {
-                        title: "It knows what's a pattern and what's noise",
+                        title: 'Surveys feed self-driving',
                         icon: 'IconBrain',
-                        body: "Five people describing the same missing feature becomes one report with their quotes attached, not five you never read. A wobble in a small NPS sample doesn't clear that bar; a score drop against that survey's own baseline does.",
+                        body: "Surveys aren't just a results tab – they're a signal source to make your product self-driving. Scouts connect sentiment to other data points to know what's a real pattern versus noise.",
                     },
                     {
                         title: 'You stay in the loop',
