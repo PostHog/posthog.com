@@ -4,6 +4,7 @@ type ExclusionReason = 'sanctions' | 'high-cost' | 'contractors' | 'timezone'
 interface CountryRestriction {
     code: string
     reason: ExclusionReason
+    reasonLabel?: string
 }
 
 // Map of country names to ISO2 codes and exclusion reasons
@@ -29,6 +30,13 @@ const countryRestrictions: { [key: string]: CountryRestriction } = {
     // Contractors only
     Brazil: { code: 'BR', reason: 'contractors' },
     Uruguay: { code: 'UY', reason: 'contractors' },
+
+    // Outside timezone rage (Antarctica as special case)
+    Antarctica: {
+        code: 'AQ',
+        reason: 'timezone',
+        reasonLabel: 'We don’t currently hire in Antarctica. Sorry penguins we’re a hedgehog company 🦔.',
+    },
 
     // Outside timezone range (UTC+3 and beyond, or UTC-9 and beyond)
     Afghanistan: { code: 'AF', reason: 'timezone' },
@@ -212,7 +220,6 @@ export default function CountriesWeHireIn({
         const polygonSeries = chart.series.push(
             am5map.MapPolygonSeries.new(root, {
                 geoJSON: am5geodata_worldLow,
-                exclude: ['AQ'], // Antarctica
             })
         )
 
@@ -274,7 +281,7 @@ export default function CountriesWeHireIn({
                 const icon = restriction.reason === 'contractors' ? '' : xIcon
                 const marginStyle = restriction.reason === 'contractors' ? '' : 'margin-left: 28px;'
                 return `${icon}<strong>${name}</strong><br/><span style="${marginStyle}">${
-                    reasonLabels[restriction.reason]
+                    restriction.reasonLabel ?? reasonLabels[restriction.reason]
                 }</span>`
             }
             return `${checkIcon} We hire from ${name}!`
