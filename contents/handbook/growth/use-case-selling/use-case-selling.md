@@ -46,11 +46,10 @@ Each use case has a full playbook with discovery questions, competitive position
 | Data Warehouse | Data Infrastructure | |
 | Data Pipelines / Batch Exports | Data Infrastructure | Growth & Marketing |
 | Endpoints *beta* | Data Infrastructure | |
-| Semantic layer *alpha* | Data Infrastructure | |
+| Semantic layer *beta* | Data Infrastructure | |
 | Logs | Observability | Customer Experience |
 | Distributed tracing *alpha* | Observability | Release Engineering |
 | Metrics *alpha* | Observability | |
-| Health checks *beta* | Observability | Data Infrastructure |
 | Replay Vision | Product Intelligence | Customer Experience, Observability |
 | PostHog AI | Horizontal (all) | |
 | self-driving | Horizontal (all) | Converts fastest in Observability, Release Engineering, and Customer Experience |

@@ -1,0 +1,70 @@
+---
+# Scoped to trigger groups only. Retention, cost, "what else you can turn on", and "when replay
+# isn't an option" were cut from this page – they're in git if any of them earns a home later.
+#
+# Masking moved to Protecting user privacy.
+title: Control which sessions to record
+shortTitle: Which sessions to record
+subtitle: Configure which sessions to record and keep costs low.
+pocketGuideOrder: 2
+---
+
+<RightPage>
+
+# Control which sessions to record
+
+If you get thousands or millions of visitors a day, you can't watch _every_ replay. PostHog gives you a few knobs to keep only the useful sessions and keep costs low.
+
+## Trigger groups
+
+Sessions are recorded when they meet the conditions of a <Term name="trigger group" />. These rules decide when a session recording _begins_ and _ends_.
+
+<TriggerGroupFigure
+    n={1}
+    caption="One trigger group: the conditions that start a recording, and the sample rate and minimum duration that thin it."
+/>
+
+## The controls
+
+Every trigger group is built from the same five controls. Conditions decide which sessions match; sample rate and minimum duration thin what's left.
+
+| Control | Reach for it when |
+| --- | --- |
+| Sample rate | Select N% of sessions to record at random. |
+| Minimum duration | Discard sessions that are too short or are bounces. |
+| Event triggers | Only sessions where something specific happened, like someone visiting the pricing page. |
+| URL patterns | Only record sessions that match your URL patterns, like checkout. |
+| Feature flag | You're rolling something out and want the sessions of the people who got it. |
+
+## How groups play together
+
+It can be difficult to understand exactly how these rules play together. A few things hold in every case:
+- Groups are combined with `OR` logic, so a session records if it matches any of them
+- Inside a group, the `match type` decides whether a session needs any of the conditions or all of them
+- The sample rate is applied last to the matching set of sessions.
+
+## Examples
+
+Each example below combines trigger groups. Hand the prompt to PostHog AI and it sets the group up for you.
+
+| Example | How it works | Set it up |
+| --- | --- | --- |
+| **Record every checkout session, and 5% of everything else** | Two groups. The first has a URL pattern for your checkout path and a 100% sample rate. The second has no conditions at all and a 5% sample rate.<br /><br />The first group catches checkouts, the second groups applies a 5% sample on everything else. | <AskAI q="Set up Session Replay trigger groups: record 100% of sessions that visit my checkout URL, and 5% of everything else">Set up</AskAI> |
+| **Record sessions where a paying customer hit an exception** | One group, match type set to **all**: an event trigger on your exception event, plus a feature flag you've rolled out to paying customers. | <AskAI q="Set up a Session Replay trigger group that records only sessions where a user on my paying-customer feature flag hit an exception">Set up</AskAI> |
+| **Record marketing-site visits, but not bounces** | One group with URL patterns for your marketing pages and a minimum duration of 10 seconds. Sessions shorter than that are never recorded. | <AskAI q="Set up a Session Replay trigger group that records sessions on my marketing pages only when they last at least 10 seconds">Set up</AskAI> |
+
+## Sane defaults
+
+If you don't know what to set yet, start here:
+
+- **Record 100% of sessions.** Turn the sample rate down once you know how much you're actually recording, not before. Be realistic about how many you plan to watch.
+- **Set a minimum duration of 2 seconds or more.** A one-second bounce is billed like any other recording with nothing in it to watch, this will reduce junk volume.
+
+
+<SeeAlso>
+
+See also: [Control which sessions you record](/docs/session-replay/how-to-control-which-sessions-you-record) · [Recording retention](/docs/session-replay/recording-retention) · [Pricing](/session-replay/pricing) · [Privacy controls](/pocket-guides/session-replay/protecting-user-privacy)
+
+</SeeAlso>
+
+</RightPage>

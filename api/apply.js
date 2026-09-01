@@ -44,13 +44,18 @@ const handler = async (req, res) => {
         formData,
     }
     const submission = await new Promise((resolve, reject) => {
-        request(options, function (err, res) {
-            if (err) throw new Error(err)
-            resolve(res.body)
+        request(options, function (err, response) {
+            if (err) return reject(err)
+
+            try {
+                resolve(JSON.parse(response.body))
+            } catch (error) {
+                reject(error)
+            }
         })
     })
 
-    res.status(200).json({ submission })
+    res.status(200).json(submission)
 }
 
 export default handler

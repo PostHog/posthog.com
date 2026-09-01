@@ -6,7 +6,7 @@ import CalloutBox from 'components/Docs/CalloutBox'
 
 [`instrument()`](/docs/mcp-analytics/installation) works by wrapping a `@modelcontextprotocol/sdk` `Server` or `McpServer` — it patches that object's request handlers. But not every MCP server is built that way. If you run a **custom dispatcher** — a [Hono](https://hono.dev/) or Express HTTP handler, a Cloudflare Worker / Vercel edge function, or anything that speaks the MCP protocol without the SDK's server abstraction — there's no object for `instrument()` to wrap.
 
-For those servers, use **`PostHogMCP`** instead. It's a subclass of the [`posthog-node`](/docs/libraries/node) client, so it's a drop-in replacement for your existing PostHog client — `capture`, `identify`, `flush`, `shutdown`, and feature flags all work unchanged — with `captureToolCall` and `captureInitialize` added on top. You resolve identity and context per request and call those methods yourself. They build the same canonical `$mcp_*` events as `instrument()` (same sanitization, truncation, and `$exception` fan-out) and hand them to the inherited `capture()`, so nothing downstream (insights, dashboards, error tracking) can tell the difference.
+For those servers, use **`PostHogMCP`** instead. It's a subclass of the [`posthog-node`](/docs/libraries/node) client, so it's a drop-in replacement for your existing PostHog client. It adds preparation helpers for tool schemas and calls, plus capture methods for tool calls, tool listings, initialization, and missing capabilities. You resolve request metadata and call the matching methods yourself. They build the same canonical `$mcp_*` events as `instrument()` and use the same sanitization, truncation, and `$exception` fan-out.
 
 ## When to use which
 
@@ -22,7 +22,7 @@ For those servers, use **`PostHogMCP`** instead. It's a subclass of the [`postho
 ```ts
 import { PostHogMCP } from "@posthog/mcp"
 
-const posthog = new PostHogMCP(process.env.POSTHOG_PROJECT_API_KEY, {
+const posthog = new PostHogMCP(process.env.POSTHOG_PROJECT_TOKEN, {
   host: "https://us.i.posthog.com", // or https://eu.i.posthog.com
   // standard posthog-node options apply, e.g. beforeSend, enableExceptionAutocapture
 })
@@ -44,14 +44,16 @@ posthog.captureToolCall({
   isError: false,
   distinctId: user.id,                       // → distinct_id (enables person processing)
   sessionId: mcpSessionId,                    // → $session_id (omitted if you don't pass one)
+  protocolVersion: requestProtocolVersion,    // → $mcp_protocol_version
   groups: { organization: user.orgId },       // → $groups
   properties: { $mcp_client_name: "claude-code" }, // any extra props, spread verbatim
 })
 
-// On the initialize handshake:
+// Only on a 2025-11-25 initialize handshake:
 posthog.captureInitialize({
   clientName: "claude-code",
   clientVersion: "1.2.3",
+  protocolVersion: "2025-11-25",
   distinctId: user.id,
 })
 
@@ -69,6 +71,9 @@ posthog.capture({
 |---|---|---|
 | `distinctId` | `distinct_id` | Supplying it enables person processing so `$set` lands on a real person. Omit it for anonymous traffic — events are sent with `$process_person_profile: false`. |
 | `sessionId` | `$session_id` | Omitted from the event entirely when you don't pass one (so stateless captures don't bucket into a non-existent [Session Replay](/docs/session-replay) session). |
+| `protocolVersion` | `$mcp_protocol_version` | Pass the revision from each request. The `2026-07-28` revision doesn't have an initialize request that can carry this state forward. |
+| `clientUserAgent` | `$mcp_client_user_agent` | Pass the raw `User-Agent` header on HTTP transports. |
+| `vendorClient` | `$mcp_vendor_client` | Pass the raw vendor client header, such as `x-anthropic-client`, when present. |
 | `groups` | `$groups` | `{ groupType: groupKey }`, stamped on the event so you never hand-write the `$groups` key. |
 | `setProperties` | `$set` | Person properties (`{ name, email, plan }`), same as the `properties` you'd pass to `identify`. Updates the person profile; not retained on the stored event, so query them as [person properties](/docs/product-analytics/person-properties). |
 | `properties` | spread verbatim | Extra event properties, sitting alongside the `$mcp_*` keys. Values must be JSON-serializable. |
@@ -84,13 +89,17 @@ posthog.capture({
 
 </CalloutBox>
 
-## What you don't get (vs `instrument()`)
+## What you don't get compared with `instrument()`
 
 Because there's no wrapped server, `PostHogMCP` does **not** manage these for you — you pass the equivalent data per call:
 
 - **Sessions** — no MCP-session-derived `$session_id` or inactivity rollover. Pass your own `sessionId`.
 - **Identity caching / `$identify` dedupe** — pass `distinctId` (and optional `setProperties`) on each call.
-- **The injected `context` argument, `intentFallback`, `reportMissing`, and `conversation_id`** — these patch tool schemas and request handlers, which only the wrapping path can do.
+- **Automatic intent and missing-capability handling** — use `prepareToolList()` and `prepareToolCall()`, then pass their output to the matching capture method.
+- **Conversation IDs** — pass your own stable `sessionId`. The custom dispatcher helpers don't inject or echo `conversation_id`.
+- **Model capture** — `captureModel` and the injected `llm_model` argument are currently available only through `instrument()` on a supported TypeScript server wrapper. Don't add `$mcp_llm_model` manually.
+
+The `2026-07-28` revision has no initialize handshake or protocol session. Don't fabricate `$mcp_initialize`. Capture each request's `protocolVersion`, and pass an authenticated user id or your own stable session id when you need correlation across requests.
 
 Everything from the [event reference](/docs/mcp-analytics/events) onward — event names, property shapes, sanitization, error tracking — is identical.
 
@@ -147,6 +156,8 @@ posthog.flush()  # PostHogMCP is a posthog client — flush/shutdown it yourself
 ```
 
 `PostHogMCP(api_key, missing_capability_tool_name="get_more_tools", mcp_exception_autocapture=True, **posthog_kwargs)` accepts the standard `posthog` client kwargs (e.g. `host`). Set `mcp_exception_autocapture=False` to stop a failed tool call from emitting a `$exception` sibling. As in TypeScript, the wrapping-path hooks (`identify`, `context`, `intent_fallback`, `event_properties`) don't apply here — pass identity and properties on each `capture_*` call.
+
+The `capture_*` methods also take `error_type` (a low-cardinality failure label for `$mcp_error_type`), `client_user_agent`, and `vendor_client` — the same fields documented in the [event reference](/docs/mcp-analytics/events#core-properties).
 
 ### Stateless / multi-pod dispatchers
 

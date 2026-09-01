@@ -1,7 +1,7 @@
 import { useContext } from 'react'
 import React, { createContext, useEffect, useState } from 'react'
 import qs from 'qs'
-import { ProfileData, SQUEAK_HOST } from 'lib/strapi'
+import { ProfileData, SQUEAK_HOST, Wallet } from 'lib/strapi'
 import usePostHog from './usePostHog'
 import Link from 'components/Link'
 import { useToast } from '../context/Toast'
@@ -43,18 +43,10 @@ export type User = {
         id: number
     } & ProfileData
     role: {
-        type: 'authenticated' | 'public' | 'moderator'
+        type: 'authenticated' | 'public' | 'moderator' | 'community-moderator'
     }
-    wallet: {
-        balance: number
-        transactions: {
-            id: number
-            amount: number
-            date: Date
-            type: 'achievement' | 'gift'
-            metadata: any
-        }[]
-    }
+    // Absent until the user first earns points — Strapi only creates the component on write
+    wallet?: Wallet
     imageGenerationRateLimit?: {
         remaining: number
         limit: number
@@ -63,9 +55,11 @@ export type User = {
         monthlyCount: number
     }
     picasso?: boolean
+    webmaster?: boolean
     // Surfaced by the Strapi `me` override (the raw posthogUserId is private).
     // True when a PostHog OAuth identity is linked to this account.
     hasPosthogLogin?: boolean
+    distinctId?: string | null
 }
 
 export type DisambiguationResult = {
@@ -78,6 +72,7 @@ type UserContextValue = {
     isLoading: boolean
     user: User | null
     isModerator: boolean
+    isForumModerator: boolean
     setUser: React.Dispatch<React.SetStateAction<User | null>>
     fetchUser: (token?: string | null) => Promise<User | null>
     getJwt: () => Promise<string | null>
@@ -133,6 +128,7 @@ export const UserContext = createContext<UserContextValue>({
     isLoading: true,
     user: null,
     isModerator: false,
+    isForumModerator: false,
     setUser: () => {
         // noop
     },
@@ -195,7 +191,7 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
 
     // Shared post-authentication steps once a JWT has been obtained (via password
     // login or an OAuth provider): hydrate the user and persist the token, then
-    // fire off the distinct-id link + achievements check WITHOUT awaiting them.
+    // fire off the achievements check WITHOUT awaiting it.
     const finalizeLogin = async (token: string): Promise<User> => {
         const user = await fetchUser(token)
 
@@ -206,42 +202,20 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
         localStorage.setItem('jwt', token)
         setJwt(token)
 
-        // Fire-and-forget: neither the distinct-id link nor the achievements check
-        // gates sign-in, and awaiting them adds serial round-trips to the
-        // "Signing you in…" spinner. Kick them off and return immediately; the
-        // returned `user` is unaffected (it was fetched above, before these run).
+        // Fire-and-forget: the achievements check does not gate sign-in.
         // `.catch` keeps a failed request from surfacing as an unhandled rejection.
-        try {
-            const distinctId = posthog?.get_distinct_id?.()
-
-            if (distinctId && distinctId !== COOKIELESS_SENTINEL_VALUE) {
-                fetch(`${SQUEAK_HOST}/api/users/${user.id}`, {
-                    method: 'PUT',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        Authorization: `Bearer ${token}`,
-                    },
-                    body: JSON.stringify({
-                        distinctId,
-                    }),
-                }).catch((error) => console.error(error))
-            }
-
-            fetch(`${SQUEAK_HOST}/api/achievements/check`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    Authorization: `Bearer ${token}`,
+        fetch(`${SQUEAK_HOST}/api/achievements/check`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${token}`,
+            },
+            body: JSON.stringify({
+                data: {
+                    date: new Date(),
                 },
-                body: JSON.stringify({
-                    data: {
-                        date: new Date(),
-                    },
-                }),
-            }).catch((error) => console.error(error))
-        } catch (error) {
-            console.error(error)
-        }
+            }),
+        }).catch((error) => console.error(error))
 
         return user
     }
@@ -606,6 +580,18 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
 
         setUser(meData)
 
+        const distinctId = posthog?.get_distinct_id?.()
+        if (token && !meData.distinctId && distinctId && distinctId !== COOKIELESS_SENTINEL_VALUE) {
+            fetch(`${SQUEAK_HOST}/api/users-permissions/distinct-id`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    Authorization: `Bearer ${token}`,
+                },
+                body: JSON.stringify({ distinctId }),
+            }).catch((error) => console.error(error))
+        }
+
         const notifications = await fetch(`${SQUEAK_HOST}/api/profile/notifications`, {
             headers: {
                 Authorization: `Bearer ${token}`,
@@ -909,6 +895,7 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
         user,
         setUser,
         isModerator: user?.role?.type === 'moderator',
+        isForumModerator: user?.role?.type === 'moderator' || user?.role?.type === 'community-moderator',
         isLoading,
         getJwt,
         login,

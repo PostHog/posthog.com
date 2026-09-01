@@ -41,6 +41,7 @@ import Contributor from 'components/Docs/Contributors'
 import { useProductInterestFromPathname } from 'hooks/useProductInterest'
 import useProduct from 'hooks/useProduct'
 import { buildProductMenuTabs, ProductSwitcher } from 'components/Products/ReaderViewProduct'
+import { useLearnPlacement } from 'components/Products/ReaderViewProduct/learnPlacement'
 import slugify from 'slugify'
 import usePostHog from 'hooks/usePostHog'
 import { RenderInClient } from 'components/RenderInClient'
@@ -373,6 +374,12 @@ export default function Handbook({ data: { post, postHogSource }, pageContext: {
         pathname.startsWith('/docs/ai-observability/installation/') &&
         !['claude-code', 'openclaw', 'opencode', 'pi'].includes(pathname.split('/').filter(Boolean).pop() ?? '')
 
+    // Every docs article gets a "Still have questions?" PostHog AI input above the page survey.
+    // Gated on the MDX slug (not `pathname`) so the /docs/data-warehouse/sources/* alias pages —
+    // which render /docs/cdp/sources/* content — are covered either way. Scoped to /docs so the
+    // handbook and the Using PostHog manual, which share this template, stay unchanged.
+    const showAskAI = typeof slug === 'string' && slug.startsWith('/docs/')
+
     // Track product interest for cross-subdomain cookie
     useProductInterestFromPathname(slug)
 
@@ -384,14 +391,19 @@ export default function Handbook({ data: { post, postHogSource }, pageContext: {
     const allProducts = useProduct() as any[]
     const docsProductSlug = typeof slug === 'string' && slug.startsWith('/docs/') ? slug.split('/')[2] : null
     const productSurfaceData = docsProductSlug
-        ? allProducts.find((p: any) => {
-              const lastSegment = p.slug?.split('/').pop()
-              return lastSegment === docsProductSlug
-          })
+        ? allProducts
+              .filter((p: any) => p.slug?.split('/').pop() === docsProductSlug)
+              .sort((a: any, b: any) => (b.productMenu?.length ? 1 : 0) - (a.productMenu?.length ? 1 : 0))[0]
         : null
     const isProductDocsPage = !!productSurfaceData?.productMenu?.length
+    const learnPlacement = useLearnPlacement()
     const productMenuTabs = isProductDocsPage
-        ? buildProductMenuTabs({ productData: productSurfaceData, activeSurface: 'docs' })
+        ? buildProductMenuTabs({
+              productData: productSurfaceData,
+              activeSurface: 'docs',
+              learnPlacement,
+              currentPath: slug,
+          })
         : undefined
     const productSelect = isProductDocsPage ? <ProductSwitcher activeHandle={productSurfaceData.handle} /> : undefined
 
@@ -465,6 +477,7 @@ export default function Handbook({ data: { post, postHogSource }, pageContext: {
             commits={commits}
             filePath={post.parent?.relativePath}
             showSurvey
+            showAskAI={showAskAI}
             hideRightSidebar={hideRightSidebar}
             contentMaxWidthClass={contentMaxWidthClass}
             sourceInstanceName={post.parent?.sourceInstanceName}

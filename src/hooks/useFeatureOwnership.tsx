@@ -32,6 +32,7 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     'activity-log': {
         feature: 'Activity log',
         owner: ['platform-features'],
+        label: 'feature/activity-logs',
     },
     'activity-view': {
         feature: 'Activity view',
@@ -51,6 +52,16 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     'ai-playground': {
         feature: 'AI playground',
         owner: ['ai-gateway'],
+        label: false,
+    },
+    'ai-plugin': {
+        feature: 'AI plugin (Claude Code, Codex, Cursor, Gemini CLI)',
+        owner: ['self-driving'],
+        notes: (
+            <>
+                <TeamMember name="Georgiy Tarasov" /> is the point owner.
+            </>
+        ),
         label: false,
     },
     alerts: {
@@ -74,6 +85,7 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     authentication: {
         feature: 'Authentication',
         owner: ['platform-features'],
+        label: 'feature/auth',
     },
     autocapture: {
         feature: 'Autocapture',
@@ -174,6 +186,7 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     'data-warehouse': {
         feature: 'Managed warehouse',
         owner: ['managed-warehouse'],
+        label: 'feature/data-warehouse',
     },
     'embedding-worker': {
         feature: 'Embedding worker',
