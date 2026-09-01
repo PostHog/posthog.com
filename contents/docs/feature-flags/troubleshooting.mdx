@@ -12,10 +12,6 @@ export const DeuplicateAsStaticCohortDark = "https://res.cloudinary.com/dmukukwp
 
 This page covers troubleshooting for Feature Flags. For setup, see the [installation guides](/docs/feature-flags/installation).
 
-## Have a question? Ask PostHog AI
-
-<AskAIInput placeholder="Type your question and hit enter..." />
-
 ## Why is my feature flag not working as expected?
 
 Here's a list of suggestions to troubleshoot your flag:
@@ -154,7 +150,7 @@ This occurs because the `in` and `not_in` operators are reserved for **cohort pr
 
 ### What operators should I use instead?
 
-For person or group properties, use any of the [string, numeric, presence, or semver operators](/docs/data/property-filters). For example: `exact`, `contains`, `regex`, `is set`, or any of the semver operators for version-based targeting.
+For person or group properties, use any of the [string, numeric, presence, or semver operators](/docs/data/property-filters). For example: `exact`, `contains`, `starts with`, `ends with`, `regex`, `is set`, or any of the semver operators for version-based targeting.
 
 For cohort targeting, use the cohort property type with `in` or `not_in` operators to target users who are or aren't members of a specific cohort.
 
@@ -209,7 +205,7 @@ You can read more about how feature flags are billed and how to reduce your bill
 We make a request to fetch feature flags (using the [`/flags` endpoint](/docs/api/flags)) when one of the below occurs:
 
 - The PostHog SDK is initialized
-- A user is [identified](/docs/data/identify) 
+- A user is [identified](/docs/product-analytics/identify) 
 - A user's [properties](/docs/product-analytics/person-properties) are updated
 - You call `posthog.reloadFeatureFlags()` in your code
 - You create a [group](/docs/product-analytics/group-analytics)
@@ -228,27 +224,13 @@ import PostHogBillableUsageTemplate from "../_snippets/posthog-billable-usage-te
 
 ### Async compatibility (Python / FastAPI)
 
-The `posthog-python` SDK is synchronous — it uses the `requests` library internally. In async Python web frameworks (FastAPI, Starlette), calling SDK methods directly blocks the event loop. Under concurrent load, a single slow PostHog call (e.g., 3-second timeout during an outage) blocks all other requests.
+Version `7.45.0` and later of the Python SDK includes the asyncio-native `AsyncPosthog` client. Use it in FastAPI, Starlette, and other asyncio apps to capture events, evaluate flags, and fetch remote config without blocking the event loop. See the [Python asyncio client guide](/docs/libraries/python#use-the-asyncio-client) for installation and lifecycle examples.
 
-**Fix:** Wrap SDK calls in `asyncio.to_thread()`:
+The synchronous `Posthog` client remains supported. If you keep it in an asyncio app, run network-bound calls in a worker thread with `asyncio.to_thread()` instead of calling them on the event loop.
 
-```python
-import asyncio
-from posthog import Posthog
+### Payload format differs between Python APIs
 
-posthog_client = Posthog('phc_xxx', host='https://us.i.posthog.com')
-
-async def get_flags(distinct_id, properties=None):
-    return await asyncio.to_thread(
-        posthog_client.get_all_flags_and_payloads,
-        distinct_id,
-        person_properties=properties,
-    )
-```
-
-### Payload format differs between SDKs
-
-The Python SDK returns flag payloads as JSON strings — you need to parse them yourself:
+The legacy `Posthog.get_all_flags_and_payloads()` method returns payloads as JSON strings, so you need to parse them:
 
 ```python
 result = posthog_client.get_all_flags_and_payloads('user-123')
@@ -257,7 +239,7 @@ import json
 payload = json.loads(result['featureFlagPayloads']['my-flag'])
 ```
 
-The Node SDK automatically parses payloads into objects — no manual parsing needed.
+`Posthog.evaluate_flags()` and `await AsyncPosthog.evaluate_flags()` return snapshots. Their `get_flag_payload()` accessor returns the parsed payload, so don't pass its result to `json.loads()`.
 
 ## Solved community questions
 

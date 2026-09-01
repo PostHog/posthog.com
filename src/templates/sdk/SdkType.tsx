@@ -3,7 +3,7 @@ import Link from '../../components/Link'
 import SEO from '../../components/seo'
 import Parameters from '../../components/SdkReferences/Parameters'
 import { SingleCodeBlock } from '../../components/CodeBlock'
-import { getLanguageFromSdkId } from '../../components/SdkReferences/utils'
+import { getLanguageFromSdkId, isLatestVersion } from '../../components/SdkReferences/utils'
 import ReaderView from 'components/ReaderView'
 import { useApp } from '../../context/App'
 
@@ -15,6 +15,8 @@ interface Property {
 }
 
 interface TypeData {
+    /** Slug used in the page path — see `createPages.ts`. */
+    id: string
     name: string
     description: string
     properties: Property[]
@@ -25,22 +27,28 @@ interface TypeData {
 interface PageContext {
     typeData: TypeData
     version: string
-    id: string
-    noDocsTypes: string[]
-    types: string[]
+    /** Unversioned SDK id, e.g. `posthog-js`. */
+    referenceId: string
+    /** `referenceId` on the latest row, `<sdk>-<version>` otherwise — keeps crosslinks in-version. */
     slugPrefix: string
+    types: string[]
 }
 
 export default function SdkType({ pageContext }: { pageContext: PageContext }) {
     const { menu } = useApp()
-    const { typeData, version, id, types, slugPrefix } = pageContext
+    const { typeData, version, referenceId, slugPrefix, types } = pageContext
 
-    // Get the language for this SDK type
-    const sdkLanguage = getLanguageFromSdkId(id)
+    const sdkLanguage = getLanguageFromSdkId(referenceId)
+    const isLatest = isLatestVersion(version)
 
     return (
         <ReaderView parent={menu.find(({ name }) => name === 'Docs')}>
-            <SEO title={`${typeData.name} - PostHog`} />
+            {/* Versioned copies age out of the build, so only the unversioned page is indexable. */}
+            <SEO
+                title={`${typeData.name} - PostHog`}
+                canonicalUrl={`/docs/references/${referenceId}/types/${typeData.id}`}
+                noindex={!isLatest}
+            />
             <div>
                 <div className="mb-8">
                     <h1 className="text-4xl font-bold mb-4">{typeData.name}</h1>

@@ -12,23 +12,24 @@ We don't offer discounts to customers paying monthly, irrespective of commitment
 
 Although our standard monthly [pricing](/pricing) has volume discounts built in, it's common practice when negotiating software contracts for the customer (and their procurement team) to ask for a discount. We follow the [4 discount levers framework](http://transparentsalesleader.com/), being transparent about what drives our discounting:
 
-### The 4 discount levers & why they matter to us
+### The discount levers & why they matter to us
 
 Our general principle is that discounts are earned, not given. Each lever represents real benefit to both parties:
-1. **Volume:** The amount of credits purchased - *Larger deals have economies of scale. Our cost to serve a $500k customer is not 10x a $50k customer, so we can share those savings*
-2. **Timing of Cash:** When we receive payment - *Money today is worth more than money tomorrow. Cash in hand lets us invest in product, hire engineers, and grow the business faster*
-3. **Length of Commitment:** Contract duration - *Longer commitments reduce our customer acquisition costs. We spend less on people doing renewals and can invest more in product development*
-4. **Ability to Forecast:** Mutual agreement to timing - *When both parties commit to specific dates (contract close, renewal timing), it helps us plan resources and helps customers secure budget*
 
-Every discount reflects a value exchange that provides a sound basis for our pricing. We don't offer unilateral concessions - better pricing comes from moving on one or more of these levers. This framework gives both sides a clear frame of reference for what drives pricing decisions.
+1. **Volume:** The amount of credits purchased. *Larger deals have economies of scale. Our cost to serve a $500k customer is not 10x a $50k customer, so we can share those savings*
+2. **Timing of Cash:** When we receive payment. *Money today is worth more than money tomorrow. Cash in hand lets us invest in product, hire engineers, and grow the business faster*
+3. **Ability to Forecast:** Mutual agreement to timing. *When both parties commit to specific dates (contract close, renewal timing), it helps us plan resources and helps customers secure budget*
+
+We don't use the framework's fourth lever, **length of commitment** - see [contract term length](#contract-term-length) below.
+
 
 ### How our discounts work
 
 In our consumption-based pricing model, the first way for a customer to reduce spend is to ensure that they are only sending data to us which is valuable to them. There is [different guidance here](/docs/billing/estimating-usage-costs) depending on which product(s) they are looking at.
 
-Beyond optimization, we offer discounts based on four levers:
+Beyond optimization, we offer discounts based on three levers:
 
-#### 1. Volume discount (based on credit purchase amount - Customers **must** qualify for this discount before receiving discounts 2 through 4)
+#### 1. Volume discount (based on credit purchase amount per contract year - Customers **must** qualify for this discount before receiving discounts 2 and 3)
 - **$25-59k:** 20% base discount
 - **$60-99k:** 25% base discount
 - **$100-249k:** 30% base discount
@@ -36,22 +37,19 @@ Beyond optimization, we offer discounts based on four levers:
 - **$500-999k:** 40% base discount
 - **$1M+:** Contact us for custom pricing
 
-#### 2. Length of commitment discount (additive)
-- **1-year commitment:** No additional discount
-- **2-year commitment:** +3% additional discount
-- **3-year commitment:** +5% additional discount (doesn't stack)
-- **4-years or more:** Contact us for custom pricing
+> Two things to be clear on when working out which tier applies:
+>
+> - **It's credit value, not cash.** The tier is set by the amount of credit the customer receives (the pre-discount, list-price value), not the amount they pay us after discounts.
+> - **It's per contract year, not per term.** On a multi-year deal, use the credit allocated for a single contract year. A 2-year deal with $250k of credit a year sits in the $250-499k tier at 35%, not the $500-999k tier at 40% — the reward for paying for more of the term upfront is the timing of cash lever below, not a bigger volume tier.
 
-> Note: This discount lever does not apply to additional credit purchases made within the first half of the term and applies only to the initial order form's credit purchase.
-
-#### 3. Timing of cash discount (additive)
+#### 2. Timing of cash discount (additive)
 - **Net 30 (our standard):** No additional discount
-- **Multi-year deals:** +2.5% per additional year paid upfront (i.e. +2.5% for 2 years, +5% for 3 years)
+- **Multi-year deals:** +2.5% per additional year paid upfront (+2.5% for 2 years, +5% for 3 years. capped at +5%)
 - **Extended payment terms:** -2.5% for every 15 days beyond Net 30 (e.g., Net 60 = -5% from total discount)
 
 > Note: We require upfront payment for all discounted contracts. Quarterly or split payment terms are not available as they impact our cash flow and add administrative overhead. If the full projected amount exceeds budget, customers can purchase fewer credits upfront at the corresponding discount tier and then add more later. 
 
-#### 4. Ability to forecast - mutual commitment to timing (additive)
+#### 3. Ability to forecast - mutual commitment to timing (additive)
 
 **For monthly-to-annual conversions & net new agreements:** +5% additional, non-recurring discount
 - Available when both parties commit to specific, mutually agreed date for contract signature (this is not an end-of-quarter discount)
@@ -60,13 +58,26 @@ Beyond optimization, we offer discounts based on four levers:
 - This is a one-time discount, which will be offered once during a monthly-to-annual conversion or net new agreement cycle
 
 **For renewals:** +5% additional discount
-- Early renewal commitment (60+ days before expiration)
-- Customer must be actively on a prepaid credit plan at the time of signing. If credits ran out before a new order form is signed and the customer rolled onto pay-as-you-go, the +5% does not apply; this is treated as a re-entry into a credit plan, not an early renewal. The spirit of this discount is to reward customers committing to a new renewal plan earlier than required, often because of recent rapid growth or a planned increase in usage, both of which result in a deeper partnership. 
-
+- Early renewal commitment. Available in the last 6 months of the contract term and 60+ days before it expires. For a standard 12-month term that means months 7-10, up to 60 days out. 
+- Eligibility is measured against the current term's natural end date, not against when the customer's credits happen to run out. A customer who consumes credits early can [top up or start a new term early](#starting-a-new-term-early), but that doesn't move the window.
+- Eligibility is judged at signature. The customer must still be on prepaid credits when they sign. If credits ran out first and they've already rolled onto pay-as-you-go, the +5% doesn't apply, because that's a re-entry into a credit plan rather than an early renewal. A customer who signs inside the window and then runs out before the new term starts keeps the discount.
+- This discount applies to the full credit purchase on the order form. On a multi-year renewal the +5% applies to the whole term's credits. This is deliberate: an early, fully prepaid, multi-year renewal is the best deal we offer.
 
 **If timelines change:** We will handle these on a case by case basis, but the default is to withdraw the additional discount if the customer does not sign an order form by the time that was originally agreed. 
 
 > You shouldn't offer discounts above the levels outlined here. If you go outside of these rules without clearing it with <TeamMember name="Ben Bradley" showOnlyFirstName photo /> (TAEs or TAMs) or <TeamMember name="Simon Fisher" showOnlyFirstName photo /> (CSMs), you should assume by default that the deal will not count toward your quota.
+
+### Contract term length
+
+Our standard contract term is 12 months. Terms of up to 36 months are available on request, either invoiced annually or paid upfront. A multi-year term invoiced annually prices the same as consecutive 1-year terms, while extra years paid upfront earn the timing of cash discount above. We reward the prepayment rather than the signature because cash in hand is a stronger commitment than a promise to pay later.
+
+We cap terms at 36 months because our products and pricing evolve quickly: a contract that outlives the pricing model it was signed under can create confusion and manual work for both sides, and since credits are dollar-denominated, a long lock may imply less certainty than it appears.
+
+Customers wanting a better rate can buy more credits (lever 1), pay for more of the term upfront (lever 2), or commit to a mutual timeline (lever 3).
+
+### One-off credits
+
+One-off free credits appear on order forms in three cases: [contract buyouts](#contract-buyouts), [new business renewal credits](#new-business-renewal-credits) (competitor win-backs), and [startup plan roll-offs](#startup-plan-discounts). We don't generally add free credits to close a deal, bridge a coverage gap, or substitute for a discount the levers don't provide. A one-off credit is a larger discount wearing a disguise, and it breaks the transparency the levers exist to protect.
 
 ### Why we require up-front payment for credit purchases
 
@@ -156,7 +167,7 @@ If you believe you have a customer who falls into one of these categories and wo
 
 ## Additional credit purchase
 
-As it's often difficult to right-size the credit needed for a longer term plan as a standard we offer to honor the discount provided in the original purchase for any additional credit purchased in the first half of a contract term (e.g. 6 months for an annual plan). Within the first 6 months given our billing usage reports we should be able to predict whether the customer is going to run out of credit or not. There are also alerts set up in `#sales-alerts` to help notify account owners about this.
+It's often difficult to right-size the credit needed for a longer term plan, so customers can buy additional credit in the first half of a contract term (e.g. 6 months for an annual plan). See [when they don't have enough credit to cover their term](#when-they-dont-have-enough-credit-to-cover-their-term) for how those purchases are priced. Within the first 6 months given our billing usage reports we should be able to predict whether the customer is going to run out of credit or not. There are also alerts set up in `#sales-alerts` to help notify account owners about this.
 
 ## Price guarantees & lock-ins
 
@@ -264,29 +275,57 @@ In order for this to not mess up later renewals, the way we do this is by giving
 
 In order to qualify for this, the customer needs to send us the full quote document from the competitor.
 
+## Contracts for customers on time-limited plans
+
+Some customers are on a plan that is cheaper than list pricing and has an end date — a [campaign coupon](/handbook/marketing/campaigns-and-coupons) (Lenny's Newsletter grants a free Scale package and 2x free tier limits for 12 months), a beta plan for a product we haven't finished pricing, or a promotional increase to their free tier. These customers are paying us today, and they will pay more for the same usage once the plan ends.
+
+This covers pricing packages granted in Billing, not the [Stripe coupons and discounts](/handbook/growth/sales/billing#coupons-and-discounts) we apply per contract (legacy 30% off, non-profit discounts, and so on). This is also not the same situation as the [startup plan](#startup-plan-discounts). Startup credits make usage free, which is why we future-date that contract to sit after the free period. 
+
+### Don't touch the plan to close the deal
+
+Don't extend, swap, or cancel a customer's coupon or beta plan as a negotiating lever, or promise to carry its benefits into the contract term. Campaign benefits expire automatically and move the customer onto the standard paid plan with nobody doing anything. Every manual exception replaces that with a bespoke plan configuration plus something a human has to remember to undo months later, which is how we end up with legacy plans we then spend months migrating people off.
+
+### The contract itself is standard
+
+Start date follows the [normal rules](/handbook/growth/sales/contracts#creating-an-order-form). Discounts follow the [standard levers](#how-our-discounts-work). 
+
+### Size the credits for the step-up
+
+Because the plan may end partway through the term, credits burn at one rate before that date and a faster rate after it. Sizing on today's spend may undersize the deal.
+
+**If the plan has a known end date** you can blend the two rates:
+
+> (months remaining on the plan × current monthly run rate) + (remaining months of the term × post-plan monthly run rate)
+
+Apply your usual growth assumption to both halves. The post-plan run rate is their current spend plus whatever the plan is currently absorbing: the list price of any free add-on, and the usage that currently falls inside an inflated free tier.
+
+**If the plan has no fixed end date** (e.g. beta plans where we may change pricing at any time) don't guess. Size on current usage, tell the customer that pricing isn't final, and use the [additional credit purchase](#additional-credit-purchase) provision to right-size once pricing changes.
+
+### Tell the customer about the step-up
+
+Their costs rise on a known date whether or not they sign, so it belongs in the conversation. It's a reason to commit now, rather than something for them to discover at renewal. Sizing it properly often moves them into a better volume discount tier as well, which is a much better trade than giving away the plan benefits.
+
 ## Credit over/under usage for contracts
+
+### Starting a new term early
+
+Sometimes a customer's usage grows faster than the credits they bought, and they exhaust the term's credits with months left to run. They have two options.
+
+1. **Top up the current term.** They buy additional credits that expire with the existing term on a new order form. Available in the first half of the term.
+2. **Start a new term.** The current order form is replaced by a new term. The new purchase must be sized in good faith against the full new term: a credible forecast of usage across all 12 months, not a bridge to the next conversation. A customer expecting their usage to settle below its current peak can price against that, provided they're candid about the assumption.
+
+Running out of credit early neither creates nor destroys eligibility for the early renewal discount, because eligibility is always measured against the term's natural end date. A top-up prices on the volume lever alone. A new term earns the +5% only if it's signed inside the normal [early renewal window](#3-ability-to-forecast---mutual-commitment-to-timing-additive) — in the last 6 months of the original term, 60+ days before its natural end date, and while the customer is still on prepaid credits. Burning through credits faster than planned doesn't open that window sooner.
 
 ### When they don't have enough credit to cover their term
 
 We have CreditBot alerts set up in <PrivateLink url="https://posthog.slack.com/archives/C071PGWKBQS">#sales-alerts</PrivateLink> when a customer is going to run out of credit before their contract term ends, with the estimated runway remaining. The Vitally account owner (AE or CSM) will be tagged in this message. It's best to be proactive here so that the customer is right-sized well before the credit runs out:
 
--   If they will run out of credit or wish to buy more within the **first half** of the contract term (1 year = 6 months, 2 years = 12 months, 3 years = 18 months), they can still take advantage of their initial discount. You'll need to have them sign a new order form which adds the additional credit, and it should expire on the date of the original order form.
-    -   Example: Their original order form was signed on 1st January with a 12-month term. Their expansion order form could be signed on 1st June with a 7-month term. Make sure the end date lines up with the end date of the original contract to avoid any issues with the billing server and ARR calculation.
--   If they will run out of credit with **less than 2 months** remaining on their initial term, as long as they sign a renewal order form to start at the end of the original contract term we will cover their usage for free until the renewal date, assuming the renewal order form is signed before they run out of credit and their new contract amount is equal to or greater than the current contract amount.
--   If they fall **in between** the two cases above (running out of credit with <6 months and >2 months to go) then we need them to sign a new 12 month (or longer) order form lined up with their monthly billing date. This makes ARR calculation slightly trickier as there are two overlapping contracts in play at the same time.
-    -   Example: Their original order form was signed on 1st January with a 12-month term and they run out of credits in September. We need a new 12-month order form in place with a Contract Start Date of September 1st.
-
-#### How to actually cover the gap
-
-Where we've agreed to cover usage for free until the renewal date, do it by adding a one-off credit allocation to the customer's credit balance in billing admin. You don't need billing engineering to do this.
-
-Always add the credit _before_ the invoice is generated. If you wait for the invoice and credit it afterwards, we've charged the customer an amount we already knew we weren't going to collect.
-
-You don't need to get the amount exactly right. Add your best estimate of the remaining usage and top it up the day before invoice is generated if it falls short. Over-allocating is fine: the balance resets at the actual contract end date, so anything left over doesn't carry into the new contract. Make sure to note this in other details field in the related Salesforce opportunity so the revops team can make sure the final credit balance is correct during contract setup.
-
-For any of the above scenarios you should use our [discounting principles](contract-rules#discounts) which apply to the credit purchase amount.
-
-> In scenario one above, if their expansion credit purchase takes them into a higher volume discount tier, we should include this discount tier for them in the expansion contract. We won't issue a refund for the difference in discount when the expansion order form discount tier is greater than the discount tier of the original order form.
+-   If they run out of credit in the first half of the term, they can purchase additional credits that expire with the current term. Each purchase is priced independently — we don't add it to previous purchases to reach a higher discount tier. The customer gets whichever of these two is better for them:
+    -   The tier from their initial order form
+    -   The tier the additional purchase amount qualifies for by itself
+    -   Example: a customer buys $105k of credits (30% tier). Later they add $400k, which qualifies for 35% on its own (not treated as $505k). If the same customer adds $30k in credits, that qualifies for 20% on its own, which is lower than the original purchase tier, so they keep the original 30% rate from their initial order form.
+-   If they will run out of credit in the second half of the 12 month contract term, they should sign a renewal order form. Signing 60+ days before the current term ends while still on prepaid credits qualifies for the [early renewal discount](#3-ability-to-forecast---mutual-commitment-to-timing-additive). The renewal order form can start when the credits run out rather than waiting for the original end date.
+-   If credits run out before a renewal order form is in effect, the account rolls onto our standard pay-as-you-go rates until the new term starts. We don't cover gap usage for free. CreditBot gives account owners months of runway warning, so a customer paying list price for a gap is a customer we failed to engage early.
 
 ### When they will end the contract term with credit remaining
 

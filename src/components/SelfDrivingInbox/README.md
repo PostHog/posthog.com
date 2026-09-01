@@ -18,7 +18,7 @@ direction – if a browse-all surface returns, build it on the hook, not from gi
 ## Adding a template
 
 **Copy `contents/pocket-guides/self-driving/_starter/` and rename it.** It's a commented skeleton of both files,
-kept out of every gallery and given no URL by the `_` prefix. That's the whole workflow — you
+kept out of every gallery and given no URL by the `_` prefix. That's the whole workflow – you
 should not need to reverse-engineer an existing template.
 
 A template is two files:
@@ -34,10 +34,36 @@ scouts in the monorepo (`products/signals/skills/signals-scout-*/SKILL.md`), so 
 in or lift one out without reformatting. It gets syntax highlighting, markdownlint, and Vale,
 none of which reach a markdown document flattened into a YAML block scalar.
 
-The page renders it verbatim via `rawBody`, frontmatter included — nothing is reassembled, so the
+The page renders it verbatim via `rawBody`, frontmatter included – nothing is reassembled, so the
 code block on the page is byte-for-byte what you wrote. `scoutInstructions()` in
 `scoutDeepLink.ts` strips the frontmatter for the deep link's Instructions field, since the app
 takes name and description as separate form fields.
+
+### When PostHog already ships this scout as a template
+
+Set `appTemplate: <key>` in the guide's `index.mdx` and **write no `SKILL.md` at all**. Keys are the
+template keys in the monorepo's `aiObservabilityScoutTemplates.ts` – today `daily-digest`,
+`costly-users`, `error-patterns`.
+
+Two things follow from that one line:
+
+- **Both CTAs point at that template in the app**
+  (`/ai-observability/self-driving#template=<key>`) instead of encoding a `SKILL.md` into a
+  `#createScout=` link. That matters because **the `#createScout=` payload is prefill-only: it
+  carries name, description, and body, and deliberately no config**. A scout created from the
+  encoded link gets the default schedule and none of the template's tags, so it never appears on
+  the AI observability tab the guide just taught. The app's own copy carries both.
+- **The scout file is fetched from the monorepo at build time**, by
+  `gatsby/utils/fetchScoutSkills.ts` (same shape as `fetchMCPTools.ts`: raw from `refs/heads/master`,
+  15s timeout, written to a gitignored `src/data/scout-skills.json`). The monorepo file at
+  `products/ai_observability/backend/scouts/<name>.md` is the only copy — the app imports it too.
+
+This is what stops a guide describing a scout the button doesn't create. Hand-writing a second copy
+here was tried and drifted within one sitting: different headings, a dropped section, and invented
+numeric thresholds that appeared nowhere in the app.
+
+If the fetch fails, `skills` is null, the guide's `scout` is undefined, and `ScoutFigure` renders
+nothing. The page still builds. Showing a possibly-stale scout would be worse than showing none.
 
 Two guards keep sibling files from becoming pages, and both must agree if you rename anything:
 `gatsby/createPages.ts` skips slugs ending `/SKILL` or containing a `_`-prefixed segment, and the
@@ -50,7 +76,7 @@ The report lives in the template's **frontmatter**, not its MDX body. Add a `rep
 
 ```yaml
 ---
-title: Silent failure in your core action
+title: Catch a core action failing without errors
 subtitle: 'Where does your most important flow fail without telling anyone?'
 filters:
   type:
@@ -71,22 +97,22 @@ report:
 ---
 ```
 
-Do **not** also hand-write a "What lands in your inbox" section in the MDX body — the page
+Do **not** also hand-write a "What lands in your inbox" section in the MDX body – the page
 renders this block for you. Two copies drift.
 
 ### Fields
 
 | Field | Required | Notes |
 |---|---|---|
-| `title` | yes | The finding as a **claim with its evidence in it**, not a topic. "Publish completions down 34% while attempts hold steady" — not "Checkout issues". This is the single most important line you write; in the gallery it's often all someone reads. |
+| `title` | yes | The finding as a **claim with its evidence in it**, not a topic. "Publish completions down 34% while attempts hold steady" – not "Checkout issues". This is the single most important line you write; in the gallery it's often all someone reads. |
 | `source` | yes | What surfaced it: `Scout · core action funnel`, `Error tracking`, `Support · ticket clustering`. The `·` separator is the house style. |
-| `body` | yes | 2–4 sentences. Markdown: `**bold**`, `` `code` ``, and links render. Lead with the observation, then the corroborating evidence from other sources. |
+| `body` | yes | Two to four sentences. Markdown: `**bold**`, `` `code` ``, and links render. Lead with the observation, then the corroborating evidence from other sources. |
 | `suggestedAction` | no | What the agent proposes doing. Markdown. |
 | `actionNote` | no | One line on what happens next, rendered dimmed. |
 | `affected` | no | Impact, e.g. `47 users affected`. |
 | `receivedAgo` | no | A static string like `2h`. See "no fake liveness" below. |
 
-### The discriminator — the part of `SKILL.md` that matters most
+### The discriminator – the part of `SKILL.md` that matters most
 
 Not frontmatter. It lives in the scout file, under `## Discriminator`, and the guide page shows it
 as part of "The scout itself":
@@ -108,7 +134,7 @@ Two things follow, and both are easy to get wrong:
   queried your data, it cost a full agent run, and it decided you didn't need to hear about it. A
   scout that reports every day is one you'll mute inside a week.
 - **The quiet half is the harder half to write, and the more valuable one.** If you can't say
-  crisply what would make this scout stay silent, the guide isn't ready — you've described a
+  crisply what would make this scout stay silent, the guide isn't ready – you've described a
   metric, not a discriminator. "Completions fell" is a metric. "Completions fell *while attempts
   held steady*" is a discriminator, because it names what it ignores.
 
@@ -152,7 +178,7 @@ mirror and search engines.
 
 The scout block is rendered in the canonical `SKILL.md` shape the monorepo uses
 (`products/signals/skills/signals-scout-*/SKILL.md`; contract in
-`authoring-scouts/references/scout-anatomy.md`) — `name` must match `signals-scout-<kebab>` or
+`authoring-scouts/references/scout-anatomy.md`) – `name` must match `signals-scout-<kebab>` or
 the harness never runs it, and `description` doubles as the description on the config API. An
 agent reading the mirror can create the scout verbatim instead of translating it.
 
@@ -174,9 +200,9 @@ agent reading the mirror can create the scout verbatim instead of translating it
 | `ReportCard.tsx` | The report body. `variant: 'preview' \| 'page'` |
 | `ScoutFile.tsx` | The SKILL.md, shown verbatim as a code block |
 | `EnableScout.tsx` | The "add this scout" CTA, plus the book's pinned bottom bar |
-| `scoutDeepLink.ts` | Builds the `#createScout=` deep link from a `ScoutSpec` |
+| `scoutDeepLink.ts` | Builds the CTA target: a `#createScout=` deep link, or an `appTemplate` link |
 | `sources.ts` | Product-source metadata: icons, color tokens, install and docs links |
-| `terms.tsx` | `<Term>` glossary hover links for self-driving vocabulary |
+| _(terms moved)_ | `<Term>` and its definitions now live in `components/PocketGuides/terms.tsx` – the vocabulary spans every volume, not just self-driving |
 | `types.ts` | `SelfDrivingReport`, `InboxTemplate` |
 
 The frontmatter type is declared in `gatsby/createSchemaCustomization.ts` (`FrontmatterReport`).
