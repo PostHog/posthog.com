@@ -36,7 +36,7 @@ The optional `@posthog/react-native-plugin` package adds native features such as
 | --- | --- | --- |
 | CocoaPods | A React Native project that uses CocoaPods | CocoaPods resolves the plugin and `posthog-ios`. This remains the default path. |
 | CocoaPods with `posthog-ios` through Swift Package Manager | React Native 0.75 or later and a CocoaPods project with dynamic frameworks | CocoaPods resolves the plugin. Swift Package Manager resolves `posthog-ios`. |
-| Full Swift Package Manager | Verified with an iOS-only React Native 0.87.0 app and React Native Community CLI 20.2.0.<br/><br/>Requires `@posthog/react-native-plugin` 2.4.0 or later, Xcode 16 or later, and an iOS 15.1 or later app deployment target. | React Native's experimental Swift Package Manager integration resolves the plugin and `posthog-ios`. This path does not use CocoaPods. |
+| Full Swift Package Manager | Verified with an iOS-only React Native 0.87.1 app and React Native Community CLI 20.2.0.<br/><br/>Requires `@posthog/react-native-plugin` 2.4.0 or later, Xcode 16 or later, and an iOS 15.1 or later app deployment target. | React Native's experimental Swift Package Manager integration resolves the plugin and `posthog-ios`. This path does not use CocoaPods. |
 
 This verification does not cover Expo or other React Native versions. Use CocoaPods or the hybrid path unless you validate the full Swift Package Manager path for your configuration.
 
@@ -88,30 +88,7 @@ npx react-native spm add --deintegrate --yes
 
 The `--deintegrate` option removes the complete CocoaPods integration from the iOS project. React Native then finds the plugin's `ios/Package.swift` manifest. Swift Package Manager resolves the plugin and `posthog-ios`. Do not run `pod install` for this path.
 
-##### React Native 0.87.0 Hermes workaround
-
-React Native 0.87.0's Swift Package Manager tooling can select a Hermes compiler with an incompatible bytecode version. Use the following exact development dependency until React Native ships matching runtime and compiler versions. Install your JavaScript dependencies again after this change:
-
-```json
-{
-  "devDependencies": {
-    "hermes-compiler": "260318099.0.1"
-  }
-}
-```
-
-After the conversion, set the generated project's `HERMES_CLI_PATH` to the pinned compiler. Run this command from the `ios` directory. Replace `YourProjectName` with the Xcode project name:
-
-```bash
-PROJECT_NAME="YourProjectName"
-hermesc="$PWD/../node_modules/hermes-compiler/hermesc/osx-bin/hermesc"
-sed -i '' -E "s#HERMES_CLI_PATH = .*;#HERMES_CLI_PATH = \"$hermesc\";#" \
-  "$PROJECT_NAME.xcodeproj/project.pbxproj"
-```
-
-This command writes a checkout-specific absolute path. Do not commit the generated `HERMES_CLI_PATH` override. Run the command in every checkout and CI job before the Xcode build.
-
-PostHog CI verifies this path with the configuration in the requirements table. It applies the Hermes workaround before Debug and Release builds. The verified app sets its deployment target to iOS 15.1. The plugin package manifest has a separate iOS 15 minimum. The CocoaPods and hybrid paths keep the plugin podspec's iOS 13 minimum.
+PostHog CI verifies this path with the configuration in the requirements table. The verified app sets its deployment target to iOS 15.1. The plugin package manifest has a separate iOS 15 minimum. The CocoaPods and hybrid paths keep the plugin podspec's iOS 13 minimum.
 
 <DetailSetUpReverseProxy />
 
