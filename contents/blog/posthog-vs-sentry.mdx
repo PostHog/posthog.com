@@ -20,7 +20,7 @@ PostHog and [Sentry](/blog/best-sentry-alternatives) are multi-product platforms
 
 1. **Sentry** is an application monitoring tool with error and performance monitoring, session replay, code coverage, and more. It's built for engineers and devops teams.
 
-2. **PostHog** is an all-in-one platform for building successful products. On top of [error tracking](/error-tracking), it includes [product analytics](/product-analytics), [experiments](/experiments), [session replays](/session-replay), [feature flags](/experiments), [surveys](/surveys), [LLM observability](/llm-analytics), an [AI assistant](/ai), and more. It's built for engineers and product teams.
+2. **PostHog** is an all-in-one platform for building successful products. On top of [error tracking](/error-tracking), it includes [product analytics](/product-analytics), [experiments](/experiments), [session replays](/session-replay), [feature flags](/experiments), [surveys](/surveys), [LLM observability](/ai-observability), an [AI assistant](/ai), and more. It's built for engineers and product teams.
 
 ## How is PostHog different?
 
@@ -140,7 +140,7 @@ Replays enable you to watch how users experience your app, diagnose issues, impr
         'session_replay.privacy.privacy_masking',
         'session_replay.analysis.console_logs',
         'session_replay.features.canvas_recording',
-        { label: 'Free allowance', description: 'Free recordings per month', values: ['5,000', '50'] },
+        { label: 'Free allowance', description: 'Free recordings per month', values: ['5,000 web + 2,500 mobile', '50'] },
         { label: '50k replays cost', description: 'Cost per month of 50,000 replays', values: ['$173', '$172'] },
         { label: '100k replays cost', description: 'Cost per month of 100,000 replays', values: ['$273', '$314'] },
     ]}
@@ -265,7 +265,7 @@ Choosing the right error tracking tool depends on what problem you're solving. H
 | --------------------------------- | ------------------------ |
 | **Error tracking**                | 100k errors              |
 | **Product analytics**             | 1 million events         |
-| **Session replay**                | 5,000 recordings         |
+| **Session replay**                | 5,000 web + 2,500 mobile recordings |
 | **Surveys**                       | 1500 responses           |
 | **LLM observability**             | 100k events              |
 | **Feature flags and A/B testing** | 1 million API requests   |

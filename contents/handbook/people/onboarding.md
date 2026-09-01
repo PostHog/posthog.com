@@ -248,16 +248,35 @@ Below are a list of Slack channels you may find helpful:
 ### Work-related channels
 
 -   `#ask-max` - Max has access to all of our documentation and our handbook, and is a great place to start with many questions
--   `#content-docs-ideas` - for suggesting ideas for the newsletter, tutorials, and docs to be written by the content and docs team
--   `#brand-mentions`
--   `#do-more-weird`
--   `#newsletters`
--   `#team-blitzscale`
--   `#dev`
+-   `#ask-posthog-anything` - ask the team when you cannot find an answer in the handbook, the docs, or `#ask-max`
+-   `#tell-posthog-anything` - company-wide announcements about our people, products, policies, and projects
 -   `#general`
--   `#alerts`
--   `#industry-news`
 -   `#changelog` - keep up with all the cool things we're shipping across the team
+-   `#today-i-learned` - where we share what we learn
+-   `#demo-posthog-anything` - show the team something you built, or see what others are building
+-   `#phishing-attempts` - report suspicious emails, texts, and messages here
+-   `#content-docs-ideas` - for suggesting ideas for the newsletter, tutorials, and docs to be written by the content and docs team
+-   `#newsletters`
+-   `#brand-mentions`
+-   `#industry-news`
+-   `#team-blitzscale`
+
+### Engineering channels
+
+If you are an engineer, join these in addition to the work-related channels above:
+
+-   `#dev` - general engineering discussion
+-   `#dev-ai` - how we use AI tools and coding agents in our own work
+-   `#dev-stamp-exchange` - ask for a quick review when nobody on your team is free. See [how we review](/handbook/engineering/how-we-review)
+-   `#github-rfcs` - all of our [RFCs](/handbook/company/communication#requests-for-comment-rfcs) are posted here
+-   `#flakey-tests` - reports of tests that fail intermittently in CI
+-   `#incidents` - incident declarations and post-mortem summaries. Set this channel to notify you about every message
+-   `#alerts` - company-wide alerts. Teams also have their own `#alerts-[team-name]` channels
+-   `#support-infrastructure` - deployment problems, infrastructure questions, and requests for cloud access
+-   `#aws-access` - use the `/awsaccess` command here to get temporary AWS permissions. See [cloud providers](/handbook/engineering/cloud-providers)
+-   `#papercuts` - small product annoyances that anyone at PostHog can report. Your team's [support hero](/handbook/engineering/support-hero) picks up the ones in your area
+
+Every small team also has a `#team-[team-name]` channel and a `#support-[team-name]` channel, named after the team on the [teams page](/teams). Join the channels for your own team, then add the teams you work with most.
 
 ### Social channels
 
@@ -273,9 +292,13 @@ We encourage you to join and create channels focused around different types of h
 -   `#climbing`
 -   `#coffee-snobs`
 -   `#dad-jokes`
+-   `#do-more-weird`
 -   `#fitness`
 -   `#hoglife`
+-   `#merch`
 -   `#rockets`
+-   `#shitposters-unite`
+-   `#skiing`
 -   `#stonks`
 -   `#cycling`
 -   `#listening-to`
@@ -286,4 +309,6 @@ We encourage you to join and create channels focused around different types of h
 -   `#london`
 -   `#germany`
 -   `#sf-bay-area`
+-   `#barcelona`
+-   `#nyc`
     etc.

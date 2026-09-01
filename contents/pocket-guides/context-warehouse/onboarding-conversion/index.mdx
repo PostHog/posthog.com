@@ -38,6 +38,18 @@ The Skill looks for patterns like <SeeFig n={1} />: only 9% of non-payers ever c
 project, versus 52% of payers, the biggest gap in the funnel. Inviting a teammate looks
 important on its own, but the gap between payers and non-payers is smaller. This tells you to focus on closing the gap for people who don't create a second project.
 
+## Get an agent to do the work
+
+Copy the Skill below and add it to your agent. The agent finds your signup-to-activation events and each user's first successful Stripe
+payment, joined on email. From there it either builds a funnel broken down by paid vs unpaid, or
+computes the completion-rate lift of each step among payers versus non-payers, whichever fits
+what you asked.
+
+The agent looks at the onboarding *path* in aggregate. For scoring which individual leads sales should
+call right now instead, that's [Lead scoring](/pocket-guides/context-warehouse/lead-scoring).
+
+<SkillFigure n={2} caption="The Skill itself, copy and paste this into your agent to answer the question." />
+
 ## Doing this by hand
 
 1. **Build the [funnel](/docs/product-analytics/funnels) natively.** Go to Product analytics >
@@ -50,18 +62,6 @@ important on its own, but the gap between payers and non-payers is smaller. This
    breakdown.
 4. **Compare completion rates**, open the [SQL editor](/docs/data-warehouse/sql), or ask PostHog AI if you
    want the lift computed for you in one query instead of reading two funnels side by side.
-
-## Get an agent to do the work
-
-Copy the Skill below and add it to your agent. The agent finds your signup-to-activation events and each user's first successful Stripe
-payment, joined on email. From there it either builds a funnel broken down by paid vs unpaid, or
-computes the completion-rate lift of each step among payers versus non-payers, whichever fits
-what you asked.
-
-The agent looks at the onboarding *path* in aggregate. For scoring which individual leads sales should
-call right now instead, that's [Lead scoring](/pocket-guides/context-warehouse/lead-scoring).
-
-<SkillFigure n={2} caption="The Skill itself, copy and paste this into your agent to answer the question." />
 
 <SeeAlso>
 

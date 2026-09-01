@@ -1,6 +1,8 @@
 import Link from 'components/Link'
 import React from 'react'
 
+import usePostHog from '../../hooks/usePostHog'
+
 import { Logo } from '@posthog/brand/logo'
 
 import { PocketGuideVolume } from '../../constants/pocketGuides'
@@ -11,6 +13,8 @@ interface CoverProps {
     volume: PocketGuideVolume
     /** Guides inside it (the 101 isn't counted), printed the way a series prints its contents. */
     count: number
+    /** Which surface this cover sits on. Required so every open is attributable. */
+    placement: 'shelf' | 'self_driving_page' | 'product_docs'
 }
 
 /** The series frame: colored spine, series name above the subject, specimen on empty ground. */
@@ -55,7 +59,7 @@ function ComingSoonSash(): JSX.Element {
     )
 }
 
-function CoverBody({ volume, count }: CoverProps): JSX.Element {
+function CoverBody({ volume, count }: Omit<CoverProps, 'placement'>): JSX.Element {
     const Art = volumeArt(volume.id)
     return (
         <Frame token={volume.token}>
@@ -84,16 +88,26 @@ function CoverBody({ volume, count }: CoverProps): JSX.Element {
     )
 }
 
-export default function Cover({ volume, count }: CoverProps): JSX.Element {
+export default function Cover({ volume, count, placement }: CoverProps): JSX.Element {
+    const posthog = usePostHog()
+
     // Unwritten volumes aren't links – there's nothing behind them yet.
     if (volume.comingSoon) {
         return <CoverBody volume={volume} count={count} />
     }
 
+    const trackCoverClick = () =>
+        posthog?.capture('pocket_guide_interaction', {
+            kind: 'cover_click',
+            volume: volume.id,
+            placement,
+        })
+
     return (
         <Link
             to={`/pocket-guides/${volume.id}`}
             state={{ newWindow: true }}
+            onClick={trackCoverClick}
             // Perspective lives on the link so the hover tilt reads as picking the book up.
             className="group block no-underline [perspective:1200px]"
         >

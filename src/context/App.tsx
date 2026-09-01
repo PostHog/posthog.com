@@ -1615,9 +1615,6 @@ const appSettings: AppSettings = {
             fixed: true,
         },
     },
-    '/docs': {
-        toolbar: true,
-    },
     '/merch': {
         toolbar: true,
         hideTitle: true,

@@ -14,6 +14,14 @@ import { Requirement, RequirementLevel, ScoutSpec } from './types'
 /** Pinned shortcut to the enable block, which sits last because the page teaches top-to-bottom. */
 export function EnableScoutBar({ scout, templateTitle }: Pick<EnableScoutProps, 'scout' | 'templateTitle'>) {
     const posthog = usePostHog()
+
+    const trackAddScout = () =>
+        posthog?.capture('pocket_guide_interaction', {
+            kind: 'add_scout_click',
+            scout: scout?.name,
+            placement: 'pinned_bar',
+        })
+
     return (
         <div className="flex items-center gap-3 border-t border-primary bg-primary px-6 py-3">
             <span className="min-w-0 flex-1 truncate text-sm text-secondary">
@@ -25,13 +33,7 @@ export function EnableScoutBar({ scout, templateTitle }: Pick<EnableScoutProps, 
                 external
                 variant="primary"
                 size="sm"
-                onClick={() =>
-                    posthog?.capture('pocket_guide_interaction', {
-                        kind: 'add_scout_click',
-                        scout: scout?.name,
-                        placement: 'pinned_bar',
-                    })
-                }
+                onClick={trackAddScout}
             >
                 Add this scout
             </OSButton>
@@ -86,6 +88,20 @@ export default function EnableScout({ scout, requires, templateTitle }: EnableSc
     const hasScout = Boolean(scout?.name && scout?.description)
     const selfDrivingCommand = buildSelfDrivingCommand()
 
+    const trackAddScout = () =>
+        posthog?.capture('pocket_guide_interaction', {
+            kind: 'add_scout_click',
+            scout: scout?.name,
+            placement: 'enable_section',
+        })
+
+    const trackSetupCopy = () =>
+        posthog?.capture('pocket_guide_interaction', {
+            kind: 'setup_command_copy',
+            scout: scout?.name,
+            placement: 'enable_section',
+        })
+
     // No card chrome or heading of its own: the page hosting it owns the gutter and label.
     return (
         <div>
@@ -117,20 +133,7 @@ export default function EnableScout({ scout, requires, templateTitle }: EnableSc
             )}
 
             <div className="flex flex-wrap items-center gap-2">
-                <OSButton
-                    asLink
-                    to={deepLink}
-                    external
-                    variant="primary"
-                    size="md"
-                    onClick={() =>
-                        posthog?.capture('pocket_guide_interaction', {
-                            kind: 'add_scout_click',
-                            scout: scout?.name,
-                            placement: 'enable_section',
-                        })
-                    }
-                >
+                <OSButton asLink to={deepLink} external variant="primary" size="md" onClick={trackAddScout}>
                     Add this scout
                 </OSButton>
                 <span className="text-xs text-secondary">
@@ -149,6 +152,7 @@ export default function EnableScout({ scout, requires, templateTitle }: EnableSc
                 <CopyableCommand
                     command={selfDrivingCommand.displayCommand}
                     copyCommand={selfDrivingCommand.copyCommand}
+                    onCopy={trackSetupCopy}
                 />
             </div>
         </div>

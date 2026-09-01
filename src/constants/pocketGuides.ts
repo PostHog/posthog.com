@@ -1,5 +1,8 @@
 /** The volumes on the shelf. Data only, so `gatsby/` can import it in Node at build time. */
 
+/** Spine colours. Limited to safelisted tokens, since the spine is built as `bg-<token>`. */
+export type PocketGuideToken = 'orange' | 'purple' | 'blue' | 'yellow'
+
 export interface PocketGuideVolume {
     /** URL segment and content directory: /pocket-guides/<id>, contents/pocket-guides/<id>/ */
     id: string
@@ -7,9 +10,11 @@ export interface PocketGuideVolume {
     /** One line on the shelf. What the volume gets you, not what's in it. */
     description: string
     /** Project color token, bare – callers build text-/border-/bg- from it. */
-    token: string
+    token: PocketGuideToken
     /** Printed on the cover. Order on the shelf follows it. */
     volume: number
+    /** Docs slug of the product this volume teaches. Omit when it teaches no single product. */
+    docsProduct?: string
     /** A hand-written src/pages file owns this route, so don't generate one. */
     hasStaticPage?: boolean
     /** Announced but unwritten – renders as a cover with a sash and no link. */
@@ -29,6 +34,7 @@ export const POCKET_GUIDE_VOLUMES: PocketGuideVolume[] = [
         description: 'Scouts that watch your product and open a pull request when something breaks.',
         token: 'orange',
         volume: 1,
+        docsProduct: 'self-driving',
         hasStaticPage: true,
     },
     {
@@ -37,6 +43,7 @@ export const POCKET_GUIDE_VOLUMES: PocketGuideVolume[] = [
         description: 'Tracing every LLM call, scoring what comes back, and seeing what users do with it.',
         token: 'purple',
         volume: 2,
+        docsProduct: 'ai-observability',
     },
     {
         id: 'context-warehouse',
@@ -54,6 +61,11 @@ export const POCKET_GUIDE_VOLUMES: PocketGuideVolume[] = [
         volume: 4,
     },
 ]
+
+/** The volume that teaches a product, if one does. Drives `GuidesForProduct` on tool docs pages. */
+export function volumeForProduct(docsProduct: string): PocketGuideVolume | undefined {
+    return POCKET_GUIDE_VOLUMES.find((v) => v.docsProduct === docsProduct && !v.comingSoon)
+}
 
 export function volumeById(id: string): PocketGuideVolume | undefined {
     return POCKET_GUIDE_VOLUMES.find((v) => v.id === id)

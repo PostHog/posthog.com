@@ -452,7 +452,64 @@ const AvatarBlock = ({
     )
 }
 
-const Details = ({ profile, isEditing, setFieldValue, values, errors, isTeamMember, isModerator }) => {
+const getUserRoleId = (profile: any) =>
+    profile?.user?.data?.attributes?.role?.data?.id ?? profile?.user?.data?.attributes?.role?.id
+
+const RoleField = ({
+    roleId,
+    isEditing,
+    setFieldValue,
+}: {
+    roleId?: string | number
+    isEditing: boolean
+    setFieldValue: (field: string, value: any) => void
+}) => {
+    const { getJwt } = useUser()
+    const { data: roles } = useSWR(`${process.env.GATSBY_SQUEAK_API_HOST}/api/users-permissions/roles`, async (url) => {
+        const jwt = await getJwt()
+        const res = await fetch(url, { headers: { Authorization: `Bearer ${jwt}` } })
+        const json = await res.json()
+        return json.roles || []
+    })
+
+    const label = roles?.find((role: { id: number }) => role.id === roleId)?.name
+    return (
+        <p className="flex justify-between m-0 gap-2 items-center">
+            <span className="font-semibold inline-flex items-center gap-1 leading-none">
+                Role
+                <Tooltip
+                    delay={0}
+                    className="inline-flex items-center text-secondary"
+                    trigger={<IconShieldLock className="size-4" />}
+                >
+                    Only visible to moderators
+                </Tooltip>
+            </span>
+            {isEditing ? (
+                <Select
+                    value={roleId}
+                    onValueChange={(next) => setFieldValue('userRole', next)}
+                    groups={[
+                        {
+                            label: 'Role',
+                            items: (roles || [])
+                                .filter((role: { type: string }) => role.type !== 'public')
+                                .sort((a: { name: string }, b: { name: string }) => a.name.localeCompare(b.name))
+                                .map((role: { id: number; name: string }) => ({
+                                    label: role.name,
+                                    value: role.id,
+                                })),
+                        },
+                    ]}
+                />
+            ) : (
+                <span>{label || '—'}</span>
+            )}
+        </p>
+    )
+}
+
+const Details = ({ profile, isEditing, setFieldValue, values, errors, isTeamMember, isModerator, isEditingRole }) => {
     const [showPronounsInput, setShowPronounsInput] = useState(!!values.pronouns)
     const email = profile?.user?.data?.attributes?.email
 
@@ -462,6 +519,9 @@ const Details = ({ profile, isEditing, setFieldValue, values, errors, isTeamMemb
     }, [values.pronouns])
     return (
         <div className="text-sm space-y-3">
+            {isModerator && (
+                <RoleField roleId={values.userRole} isEditing={isEditingRole} setFieldValue={setFieldValue} />
+            )}
             {isModerator && email && (
                 <p className="flex justify-between m-0 gap-2 items-center">
                     <span className="font-semibold inline-flex items-center gap-1 leading-none">
@@ -1176,6 +1236,10 @@ export default function ProfilePage({ params }: PageProps) {
 
     const isCurrentUser = user?.profile?.id === id
     const isModerator = user?.role?.type === 'moderator'
+    const canFullyEdit = isCurrentUser || (isModerator && user?.webmaster)
+    const canEditRole = isModerator && !isCurrentUser
+    const isEditingProfile = isEditing && canFullyEdit
+    const isEditingRole = isEditing && canEditRole
 
     const profileQuery = qs.stringify(
         {
@@ -1229,6 +1293,7 @@ export default function ProfilePage({ params }: PageProps) {
                                           transactions: true,
                                       },
                                   },
+                                  role: true,
                               },
                           },
                       }
@@ -1364,7 +1429,7 @@ export default function ProfilePage({ params }: PageProps) {
         : {}
 
     const { submitForm, isSubmitting, setFieldValue, values, resetForm, errors } = useFormik({
-        validationSchema: ValidationSchema,
+        validationSchema: canFullyEdit ? ValidationSchema : undefined,
         enableReinitialize: true,
         initialValues: {
             website: profile?.website,
@@ -1388,13 +1453,49 @@ export default function ProfilePage({ params }: PageProps) {
             companyRole: profile?.companyRole,
             amaEnabled: profile?.amaEnabled,
             tShirt: profile?.tShirt || { fit: null, size: null, additionalInfo: null },
+            userRole: getUserRoleId(profile),
         },
-        onSubmit: async ({ avatar, images, ...values }) => {
+        onSubmit: async ({ avatar, images, userRole, ...values }) => {
             try {
                 posthog?.capture('squeak profile update start', {
                     profileId: id,
                     ...values,
                 })
+
+                const currentRole = getUserRoleId(profile)
+                const roleChanged = canEditRole && userRole && userRole !== currentRole
+                if (roleChanged) {
+                    const jwt = await getJwt()
+                    const userId = profile?.user?.data?.id
+                    if (!userId) {
+                        addToast({ description: 'Failed to update role', error: true, duration: 3000 })
+                        return
+                    }
+                    const response = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/users/${userId}`, {
+                        method: 'PUT',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            Authorization: `Bearer ${jwt}`,
+                        },
+                        body: JSON.stringify({ role: userRole }),
+                    })
+                    if (!response.ok) {
+                        addToast({ description: 'Failed to update role', error: true, duration: 3000 })
+                        return
+                    }
+                    await mutate()
+                    addToast({
+                        description: (
+                            <>
+                                <IconCheck className="text-green size-4 inline-block mr-1" />
+                                Role saved successfully
+                            </>
+                        ),
+                        duration: 3000,
+                    })
+                }
+
+                if (!canFullyEdit) return
 
                 const JWT = await getJwt()
                 let image = avatar
@@ -1574,33 +1675,34 @@ export default function ProfilePage({ params }: PageProps) {
                         <div className="@2xl:max-w-xs w-full flex-shrink-0 pb-4">
                             <AvatarBlock
                                 profile={profile}
-                                isEditing={isEditing}
+                                isEditing={isEditingProfile}
                                 name={name}
                                 setFieldValue={setFieldValue}
                                 values={values}
                                 errors={errors}
                             />
 
-                            {(isEditing ||
+                            {(isEditingProfile ||
                                 profile.reputation != null ||
                                 profile.pineappleOnPizza !== null ||
                                 profile.pronouns ||
                                 profile.location ||
-                                (isModerator && profile?.user?.data?.attributes?.email)) && (
+                                isModerator) && (
                                 <Block title="Details">
                                     <Details
                                         profile={profile}
-                                        isEditing={isEditing}
+                                        isEditing={isEditingProfile}
                                         setFieldValue={setFieldValue}
                                         values={values}
                                         errors={errors}
                                         isTeamMember={isTeamMember}
                                         isModerator={isModerator}
+                                        isEditingRole={isEditingRole}
                                     />
                                 </Block>
                             )}
 
-                            {(isEditing ||
+                            {(isEditingProfile ||
                                 profile.github ||
                                 profile.twitter ||
                                 profile.linkedin ||
@@ -1611,7 +1713,7 @@ export default function ProfilePage({ params }: PageProps) {
                                         setFieldValue={setFieldValue}
                                         formValues={values}
                                         profile={profile}
-                                        isEditing={isEditing}
+                                        isEditing={isEditingProfile}
                                     />
                                 </Block>
                             )}
@@ -1625,18 +1727,18 @@ export default function ProfilePage({ params }: PageProps) {
                                     />
                                 </Block>
                             )}
-                            {isEditing && <BackgroundImageField setFieldValue={setFieldValue} values={values} />}
-                            {isEditing && isCurrentUser && (
+                            {isEditingProfile && <BackgroundImageField setFieldValue={setFieldValue} values={values} />}
+                            {isEditingProfile && isCurrentUser && (
                                 <Block title="Connected accounts">
                                     <ConnectedAccounts hideHeading stacked />
                                 </Block>
                             )}
-                            {isModerator && isEditing && (
+                            {isModerator && isEditingProfile && (
                                 <Block title="Special employee things">
                                     <ModeratorFields setFieldValue={setFieldValue} values={values} errors={errors} />
                                 </Block>
                             )}
-                            {(isCurrentUser || (isModerator && user?.webmaster)) && (
+                            {(isCurrentUser || isModerator) && (
                                 <div className="flex gap-2 mt-4">
                                     {isEditing ? (
                                         <>
@@ -1678,7 +1780,7 @@ export default function ProfilePage({ params }: PageProps) {
                                 profile={profile}
                                 firstName={firstName}
                                 id={id}
-                                isEditing={isEditing}
+                                isEditing={isEditingProfile}
                                 values={values}
                                 errors={errors}
                                 setFieldValue={setFieldValue}
