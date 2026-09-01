@@ -18,6 +18,7 @@ import { ToggleGroup, ToggleOption } from 'components/RadixUI/ToggleGroup'
 import Tooltip from 'components/RadixUI/Tooltip'
 import Link from 'components/Link'
 import { navigate } from 'gatsby'
+import usePostHog from '../../hooks/usePostHog'
 import { MDXRenderer } from 'gatsby-plugin-mdx'
 import { MDXProvider } from '@mdx-js/react'
 import ElementScrollLink, { ScrollSpyProvider } from 'components/ElementScrollLink'
@@ -42,6 +43,7 @@ import { MenuItem, useApp } from '../../context/App'
 import { useActiveFeatureFlags, filterMenuByFlags } from '../../hooks/useActiveFeatureFlags'
 import { Questions } from 'components/Squeak'
 import { DocsPageSurvey } from 'components/DocsPageSurvey'
+import AskAIInput from 'components/AskAIInput'
 import MarkdownActions from 'components/MarkdownActions'
 import CustomerMetadata from './CustomerMetadata'
 import { getVideoClasses } from '../../constants'
@@ -102,12 +104,21 @@ interface ReaderViewProps {
     rightActionButtons?: React.ReactNode
     /** Hide the sidebar's app-options (gear) button. Defaults to false. */
     hideAppOptions?: boolean
+    /**
+     * Hide the "Copy page" markdown actions. For index pages that sit under a
+     * `MARKDOWN_CONTENT_PATHS` prefix but have no `.md` of their own (e.g.
+     * `/newsletter`), where the control would otherwise hold empty space while
+     * its existence check resolves. Defaults to false.
+     */
+    hideMarkdownActions?: boolean
     isEditing?: boolean
     onSearch?: (query: string) => void
     showSurvey?: boolean
     parent?: MenuItem
     showQuestions?: boolean
     showAbout?: boolean
+    /** Renders the "Still have questions?" PostHog AI input just above the survey. */
+    showAskAI?: boolean
     sourceInstanceName?: string
     defaultNavVisible?: boolean
     /**
@@ -428,12 +439,14 @@ export default function ReaderView({
     proseSize = 'sm',
     rightActionButtons,
     hideAppOptions = false,
+    hideMarkdownActions = false,
     isEditing,
     onSearch,
     showSurvey = false,
     parent,
     showQuestions = false,
     showAbout = false,
+    showAskAI = false,
     sourceInstanceName,
     defaultNavVisible,
     chrome = false,
@@ -463,12 +476,14 @@ export default function ReaderView({
                 proseSize={proseSize}
                 rightActionButtons={rightActionButtons}
                 hideAppOptions={hideAppOptions}
+                hideMarkdownActions={hideMarkdownActions}
                 isEditing={isEditing}
                 onSearch={onSearch}
                 showSurvey={showSurvey}
                 parent={parent}
                 showQuestions={showQuestions}
                 showAbout={showAbout}
+                showAskAI={showAskAI}
                 sourceInstanceName={sourceInstanceName}
                 chrome={chrome}
                 menuTabs={menuTabs}
@@ -805,6 +820,7 @@ interface LeftSidebarProps {
     children: React.ReactNode
     contentRef?: React.RefObject<HTMLElement>
     currentPath?: string
+    windowKey?: string
     isMdx?: boolean
     /** On narrow windows the sidebar renders as an off-canvas drawer instead
      *  of an inline column, driven by the props below. */
@@ -833,10 +849,12 @@ interface SidebarTabButtonProps {
     showLabel: boolean
     /** Pinned mode renders the tab with icon stacked above label (horizontal row). */
     stacked: boolean
+    /** Smaller type when the stacked row is crowded (more than 3 tabs). */
+    compact: boolean
     onClick: () => void
 }
 
-const SidebarTabButton = ({ tab, active, showLabel, stacked, onClick }: SidebarTabButtonProps) => {
+const SidebarTabButton = ({ tab, active, showLabel, stacked, compact, onClick }: SidebarTabButtonProps) => {
     // Manual FLIP for the icon: capture position on every commit, then on the
     // next commit — IF the structural layout changed (`layoutKey`) — animate
     // the icon from its old position to its new one. Click-only re-renders
@@ -877,7 +895,7 @@ const SidebarTabButton = ({ tab, active, showLabel, stacked, onClick }: SidebarT
             onClick={onClick}
             role="tab"
             aria-selected={active}
-            className={`relative rounded text-sm leading-tight flex ${
+            className={`relative rounded ${compact ? 'text-xs' : 'text-sm'} leading-tight flex ${
                 stacked
                     ? 'flex-1 flex-col items-center text-center gap-1 px-2 py-1.5'
                     : // Icon-only AND with-label both use justify-start so
@@ -935,6 +953,7 @@ const SidebarTabButton = ({ tab, active, showLabel, stacked, onClick }: SidebarT
  * switching tabs instead of reloading from the top on each page.
  */
 const SIDEBAR_SCROLL_MEMORY = new Map<string, number>()
+const SIDEBAR_HOVERED_WINDOWS = new Set<string>()
 
 const sidebarScrollKeyFromPath = (path?: string): string => {
     if (!path) return 'default'
@@ -958,6 +977,7 @@ const LeftSidebar = ({
     children,
     contentRef,
     currentPath,
+    windowKey,
     isMdx = false,
     mobile = false,
     mobileOpen = false,
@@ -965,6 +985,7 @@ const LeftSidebar = ({
 }: LeftSidebarProps) => {
     const { searchQuery } = useSearch()
     const { hasMounted } = useReaderView()
+    const posthog = usePostHog()
     const hasActiveSearch = !!searchQuery && searchQuery.length >= 2
 
     // Persist/restore the menu scroll position across navigations (ReaderView
@@ -993,7 +1014,23 @@ const LeftSidebar = ({
     // transitions and icon-row → icon-column layout flip share the same boolean.
     const isPinned = isNavVisible
     const [searchFocused, setSearchFocused] = useState(false)
-    const [hovered, setHovered] = useState(false)
+    const [hovered, setHovered] = useState(() => !!windowKey && SIDEBAR_HOVERED_WINDOWS.has(windowKey))
+    const panelRef = useRef<HTMLDivElement>(null)
+
+    // A ReaderView remount should not collapse a hovered sidebar during an
+    // in-window navigation. Keep it expanded for the first render, then clear
+    // stale memory after the browser recalculates which element is under the
+    // pointer. Keying by window prevents hover state leaking between windows.
+    useLayoutEffect(() => {
+        if (!hovered || !windowKey || mobile) return
+        const frame = requestAnimationFrame(() => {
+            if (!panelRef.current?.matches(':hover')) {
+                SIDEBAR_HOVERED_WINDOWS.delete(windowKey)
+                setHovered(false)
+            }
+        })
+        return () => cancelAnimationFrame(frame)
+    }, [hovered, mobile, windowKey])
     // On mobile the panel is a drawer: it's fully expanded whenever open and
     // fully hidden otherwise, so pin/hover state is bypassed entirely.
     const expanded = mobile ? mobileOpen : isPinned || searchFocused || hovered
@@ -1059,9 +1096,13 @@ const LeftSidebar = ({
     }
 
     const handleMouseEnter = () => {
-        if (!isPinned && !mobile) setHovered(true)
+        if (!isPinned && !mobile) {
+            if (windowKey) SIDEBAR_HOVERED_WINDOWS.add(windowKey)
+            setHovered(true)
+        }
     }
     const handleMouseLeave = () => {
+        if (windowKey) SIDEBAR_HOVERED_WINDOWS.delete(windowKey)
         setHovered(false)
     }
 
@@ -1084,6 +1125,7 @@ const LeftSidebar = ({
             }`}
         >
             <div
+                ref={panelRef}
                 onTransitionEnd={(e) => {
                     if (e.propertyName === 'width' && e.target === e.currentTarget && !expanded) {
                         setDisplayExpanded(false)
@@ -1205,7 +1247,9 @@ const LeftSidebar = ({
                                     }
                                 }}
                                 className={`mx-2 flex gap-px flex-shrink-0 ${
-                                    appliedPinned ? 'flex-row' : 'flex-col items-stretch py-2 border-y border-secondary'
+                                    appliedPinned
+                                        ? 'flex-row justify-between'
+                                        : 'flex-col items-stretch py-2 border-y border-secondary'
                                 }`}
                                 role="tablist"
                                 aria-label="Sidebar mode"
@@ -1217,7 +1261,14 @@ const LeftSidebar = ({
                                         active={t.value === activeTab}
                                         showLabel={expanded}
                                         stacked={appliedPinned}
+                                        compact={appliedPinned && menuTabs?.length > 3}
                                         onClick={() => {
+                                            // Proximate metric: downstream outcomes move too slowly to read.
+                                            posthog?.capture('reader_tab_click', {
+                                                tab: t.value,
+                                                from_tab: activeTab,
+                                                tab_count: menuTabs!.length,
+                                            })
                                             if (t.href && t.value !== activeTab) {
                                                 navigate(t.href)
                                             } else {
@@ -1349,12 +1400,14 @@ function ReaderViewContent({
     proseSize,
     rightActionButtons,
     hideAppOptions = false,
+    hideMarkdownActions = false,
     isEditing,
     onSearch,
     showSurvey = false,
     parent,
     showQuestions = false,
     showAbout = false,
+    showAskAI = false,
     sourceInstanceName,
     chrome = false,
     menuTabs,
@@ -1393,8 +1446,6 @@ function ReaderViewContent({
         ? backgroundImageOptions.find((option) => option.value === backgroundImage)
         : null
 
-    const previousPath = useRef<string | undefined>(undefined)
-
     useEffect(() => {
         const scrollElement = contentRef.current?.closest('[data-radix-scroll-area-viewport]') as HTMLElement
         if (!scrollElement) return
@@ -1421,29 +1472,104 @@ function ReaderViewContent({
             })
             await Promise.all(imageLoadPromises)
             await new Promise((resolve) => setTimeout(resolve, 100))
-            const targetElement = document.getElementById(hash.replace('#', ''))
-            if (targetElement) {
-                const detailsParent = targetElement.closest('details')
-                if (detailsParent) {
-                    detailsParent.open = true
+            if (hash) {
+                const targetElement = document.getElementById(hash.replace('#', ''))
+                if (targetElement) {
+                    const detailsParent = targetElement.closest('details')
+                    if (detailsParent) {
+                        detailsParent.open = true
+                    }
+                    // Not `offsetTop` — that measures from the nearest positioned ancestor, which
+                    // on a <Steps> page is the step container, not the viewport.
+                    const targetRect = targetElement.getBoundingClientRect()
+                    const scrollRect = scrollElement.getBoundingClientRect()
+                    scrollElement.scrollTo({
+                        top: Math.max(0, targetRect.top - scrollRect.top + scrollElement.scrollTop),
+                        behavior: 'smooth',
+                    })
+                    return
                 }
-                scrollElement.scrollTo({
-                    top: targetElement.offsetTop || 0,
-                    behavior: 'smooth',
-                })
             }
+            // Text fragment (`#:~:text=start[,end]`). Same shape as the anchor lookup above:
+            // hydration nukes the browser's native scroll, so we re-find and re-scroll ourselves.
+            // Chrome strips `:~:text=` from location.hash after processing — read the original URL
+            // from the navigation entry, which preserves it.
+            const container = contentRef.current
+            const navUrl = performance.getEntriesByType('navigation')[0]?.name
+            const textMatch = navUrl && /:~:text=([^&]+)/.exec(navUrl)
+            if (!container || !textMatch) return
+            const [textStart, textEnd] = textMatch[1]
+                .split(',')
+                .slice(0, 2)
+                .map((s) => {
+                    try {
+                        return decodeURIComponent(s)
+                    } catch {
+                        return s
+                    }
+                })
+            if (!textStart || textStart.endsWith('-') || (textEnd && textEnd.startsWith('-'))) return
+            const cssApi = typeof CSS !== 'undefined' ? (CSS as unknown as { highlights?: Map<string, unknown> }) : null
+            const HighlightCtor = (window as unknown as { Highlight?: new (...r: Range[]) => unknown }).Highlight
+
+            // Runs twice: once immediately, once after a short delay. Images and other
+            // async content can shift the target's position after the first scroll, so we
+            // re-walk the DOM and re-scroll to catch that. Repainting the highlight the
+            // second time also survives React re-renders that would detach the first Range.
+            // Instant `auto` scroll avoids racing with images during a smooth animation.
+            const scrollAndHighlight = () => {
+                const walker = document.createTreeWalker(container, NodeFilter.SHOW_TEXT)
+                const nodes: Text[] = []
+                const offsets: number[] = []
+                let concat = ''
+                let n: Node | null
+                while ((n = walker.nextNode())) {
+                    nodes.push(n as Text)
+                    offsets.push(concat.length)
+                    concat += (n as Text).textContent || ''
+                }
+                const startIdx = concat.indexOf(textStart)
+                if (startIdx === -1) return
+                const endIdx = textEnd
+                    ? concat.indexOf(textEnd, startIdx + textStart.length) + textEnd.length
+                    : startIdx + textStart.length
+                if (endIdx <= 0) return
+                const locate = (pos: number) => {
+                    let i = 0
+                    for (let k = 1; k < offsets.length; k++) if (offsets[k] <= pos) i = k
+                    return { node: nodes[i], offset: pos - offsets[i] }
+                }
+                const range = document.createRange()
+                const s = locate(startIdx)
+                const e = locate(endIdx)
+                range.setStart(s.node, s.offset)
+                range.setEnd(e.node, e.offset)
+                const rangeRect = range.getBoundingClientRect()
+                const scrollRect = scrollElement.getBoundingClientRect()
+                scrollElement.scrollTo({
+                    top: Math.max(0, rangeRect.top - scrollRect.top + scrollElement.scrollTop - 80),
+                    behavior: 'auto',
+                })
+                // Paint highlight matching Chrome's default `::target-text`. Styled via
+                // `::highlight(text-fragment-target)` in global.css. Falls back to no
+                // highlight on older browsers.
+                if (cssApi?.highlights && HighlightCtor) {
+                    try {
+                        cssApi.highlights.set('text-fragment-target', new HighlightCtor(range))
+                    } catch {
+                        /* older browsers without CSS Custom Highlight — scroll only */
+                    }
+                }
+            }
+            scrollAndHighlight()
+            setTimeout(scrollAndHighlight, 400)
         }
 
-        const pathChanged = previousPath.current !== undefined && previousPath.current !== appWindow?.path
-        previousPath.current = appWindow?.path
+        const hasTextFragment = /:~:text=/.test(performance.getEntriesByType('navigation')[0]?.name || '')
 
-        if (hash) {
+        if (hash || hasTextFragment) {
             waitForImagesAndScroll()
-        } else if (pathChanged) {
-            // Reset-to-top only applies to same-window navigations to a new page. On first
-            // mount (and any effect re-runs before `appWindow` settles), the browser has
-            // already positioned us — for a `:~:text=` URL, native scroll-to-fragment;
-            // otherwise top of page. Don't fight the browser.
+        } else {
             scrollElement.scrollTo({
                 top: 0,
             })
@@ -1501,6 +1627,7 @@ function ReaderViewContent({
                         menuTabs={menuTabs}
                         contentRef={onSearch ? undefined : contentRef}
                         currentPath={appWindow?.path}
+                        windowKey={appWindow?.key}
                         isMdx={body?.type === 'mdx'}
                     >
                         {leftSidebar || (!hideMenu && <Menu parent={parent as MenuItem} />)}
@@ -1598,10 +1725,12 @@ function ReaderViewContent({
                                     {/* Raw markdown actions, for readers handing this page to an LLM.
                                         Self-hides on pages with no generated .md counterpart —
                                         see components/MarkdownActions/README.md. */}
-                                    <MarkdownActions
-                                        pageUrl={appWindow?.path ?? pathname}
-                                        className={`mb-2 transition-all ${contentWidthClass}`}
-                                    />
+                                    {!hideMarkdownActions && (
+                                        <MarkdownActions
+                                            pageUrl={appWindow?.path ?? pathname}
+                                            className={`mb-2 transition-all ${contentWidthClass}`}
+                                        />
+                                    )}
                                     {title && !hideTitle && (
                                         <h1
                                             className={`transition-all ${
@@ -1738,6 +1867,18 @@ function ReaderViewContent({
                                                         : contentMaxWidthClass || 'max-w-2xl'
                                                 }`}
                                             />
+                                        </div>
+                                    )}
+                                    {showAskAI && (
+                                        <div
+                                            className={`mt-8 mx-auto transition-all ${
+                                                fullWidthContent || body?.type !== 'mdx'
+                                                    ? 'max-w-full'
+                                                    : contentMaxWidthClass || 'max-w-2xl'
+                                            }`}
+                                        >
+                                            <h3 className="text-xl font-bold m-0 mb-3">Still have questions?</h3>
+                                            <AskAIInput placeholder="Ask PostHog AI about this page..." />
                                         </div>
                                     )}
                                     {showSurvey && (

@@ -140,6 +140,17 @@ function getPublicID(image: string) {
     return imagePath.substring(0, imagePath.lastIndexOf('.'))
 }
 
+// onCreateNode runs once per source node (thousands of Mdx/MarkdownRemark nodes). The
+// pageviews cache is written once in onPreBootstrap and never changes mid-build, so fetch
+// it at most once here instead of re-reading it from the on-disk cache for every node.
+let pageViewsPromise: Promise<Record<string, number> | undefined> | null = null
+function getPageViews(cache): Promise<Record<string, number> | undefined> {
+    if (!pageViewsPromise) {
+        pageViewsPromise = cache.get(PAGEVIEW_CACHE_KEY)
+    }
+    return pageViewsPromise
+}
+
 export const onCreateNode: GatsbyNode['onCreateNode'] = async ({
     node,
     getNode,
@@ -255,6 +266,13 @@ export const onCreateNode: GatsbyNode['onCreateNode'] = async ({
             }
         }
 
+        const sourceText = typeof node.rawBody === 'string' ? node.rawBody : ''
+        createNodeField({
+            node,
+            name: `wordCount`,
+            value: stripFrontmatter(sourceText).split(/\s+/).length,
+        })
+
         createNodeField({
             node,
             name: `slug`,
@@ -262,7 +280,7 @@ export const onCreateNode: GatsbyNode['onCreateNode'] = async ({
         })
 
         if (slug) {
-            const pageViews = await cache.get(PAGEVIEW_CACHE_KEY)
+            const pageViews = await getPageViews(cache)
 
             if (pageViews && slug.slice(0, -1) in pageViews) {
                 createNodeField({

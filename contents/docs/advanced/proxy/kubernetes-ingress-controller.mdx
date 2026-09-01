@@ -59,6 +59,23 @@ This setup works with the ingress-nginx controller, the most widely used Ingress
 
 <Steps>
 
+<Step title="Create the upstream CA secret">
+
+Download the Mozilla CA bundle, then create a Secret from it so ingress-nginx can verify PostHog's upstream certificates:
+
+```bash
+curl --fail --location https://curl.se/ca/cacert.pem --output ca-certificates.crt
+```
+
+```bash
+kubectl create secret generic posthog-upstream-ca \
+  --from-file=ca.crt=ca-certificates.crt
+```
+
+If you already have a CA bundle locally, you can use its path instead of downloading this file. The Secret and Ingress resources must use the same namespace. The example below uses the `default` namespace.
+
+</Step>
+
 <Step title="Create a configuration file">
 
 Create a file named `posthog-proxy.yaml`:
@@ -68,14 +85,17 @@ Create a file named `posthog-proxy.yaml`:
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: posthog-proxy
+  name: posthog-assets-proxy
   annotations:
     kubernetes.io/ingress.class: nginx
-    nginx.ingress.kubernetes.io/upstream-vhost: us.i.posthog.com
+    nginx.ingress.kubernetes.io/upstream-vhost: us-assets.i.posthog.com
     nginx.ingress.kubernetes.io/backend-protocol: https
+    nginx.ingress.kubernetes.io/proxy-ssl-secret: default/posthog-upstream-ca
+    nginx.ingress.kubernetes.io/proxy-ssl-verify: "on"
+    nginx.ingress.kubernetes.io/proxy-ssl-server-name: "on"
+    nginx.ingress.kubernetes.io/proxy-ssl-name: us-assets.i.posthog.com
     nginx.ingress.kubernetes.io/configuration-snippet: |
-      proxy_ssl_name "us.i.posthog.com";
-      proxy_ssl_server_name "on";
+      proxy_set_header Cookie "";
 spec:
   tls:
   - hosts:
@@ -99,6 +119,31 @@ spec:
             name: posthog-assets-proxy
             port:
               name: https
+
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: posthog-proxy
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    nginx.ingress.kubernetes.io/upstream-vhost: us.i.posthog.com
+    nginx.ingress.kubernetes.io/backend-protocol: https
+    nginx.ingress.kubernetes.io/proxy-ssl-secret: default/posthog-upstream-ca
+    nginx.ingress.kubernetes.io/proxy-ssl-verify: "on"
+    nginx.ingress.kubernetes.io/proxy-ssl-server-name: "on"
+    nginx.ingress.kubernetes.io/proxy-ssl-name: us.i.posthog.com
+    nginx.ingress.kubernetes.io/configuration-snippet: |
+      proxy_set_header Cookie "";
+spec:
+  tls:
+  - hosts:
+    - e.yourdomain.com
+    secretName: your-tls-secret
+  rules:
+  - host: e.yourdomain.com
+    http:
+      paths:
       - pathType: Prefix
         path: /
         backend:
@@ -144,7 +189,12 @@ The annotations in the Ingress configuration above do the following:
 
 - `upstream-vhost` sets the Host header sent to PostHog. Without this, PostHog receives your subdomain as the Host header and can't route the request, causing 401 errors.
 - `backend-protocol` tells the Ingress Controller to use HTTPS when connecting to PostHog's domains.
-- `configuration-snippet` configures SSL settings for the upstream connection. The `proxy_ssl_name` ensures proper SNI handling.
+- `proxy-ssl-secret` supplies the trusted certificate authorities used for upstream verification.
+- `proxy-ssl-verify` requires a valid certificate from the upstream.
+- `proxy-ssl-server-name` and `proxy-ssl-name` send and verify the correct hostname during the TLS handshake.
+- `configuration-snippet` removes browser cookies before sending requests to PostHog.
+
+The API and asset paths use separate Ingress resources because each upstream needs its own Host header and verified TLS hostname. The ExternalName services keep the upstreams as DNS names, allowing ingress-nginx to re-resolve them when their DNS records change.
 
 </Step>
 
@@ -159,7 +209,7 @@ kubectl apply -f posthog-proxy.yaml
 Verify the resources were created:
 
 ```bash
-kubectl get ingress posthog-proxy
+kubectl get ingress posthog-proxy posthog-assets-proxy
 kubectl get service posthog-proxy posthog-assets-proxy
 ```
 

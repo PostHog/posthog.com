@@ -94,7 +94,7 @@ Like previous hires, Lottie did some paid contract work first and immediately im
 
 Lottie is responsible for all the cool artwork and [branding on our website](/), our [awesome merch](/merch), and so much more. You can see how it’s evolved over time below.
 
-> **What we learned:** [Talent compounds](/handbook/company/values#talent-compounds). Lottie was early in her career when she joined PostHog, but she quickly showed she had bags of talent. Don't just look for plausible looking resume, look for talent that will motivate others to do their best work.
+> **What we learned:** [Talent compounds](/handbook/values#talent-compounds). Lottie was early in her career when she joined PostHog, but she quickly showed she had bags of talent. Don't just look for plausible looking resume, look for talent that will motivate others to do their best work.
 
 ## 5. Michael Matloka
 
