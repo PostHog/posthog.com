@@ -35,6 +35,23 @@ A scout also keeps a durable memory between runs. Each run, it reads back what e
 
 Because scouts run on a schedule, the loop keeps noticing problems and opportunities on its own, instead of waiting for someone to file a ticket.
 
+## Configuring a scout
+
+Every setting below lives in one place. Go to [**Self-driving > Scouts**](https://app.posthog.com/inbox/scouts), open the scout you want to change, and click **Settings** – or click the gear on its row in the fleet list, which opens the same panel. Changes take effect on the scout's next run.
+
+| Setting | What it does |
+|---|---|
+| **Write signals to the inbox** | On by default. Turn it off for a [dry run](#dry-runs). |
+| **Schedule** | A rolling cadence, or a set time each day. See [setting a scout's schedule](#setting-a-scouts-schedule). |
+| **Network access** | What the scout can reach while it runs. **Trusted domains**, the default, covers PostHog, GitHub, and common package registries. **Full access** lets it reach any site, for a scout that has to read a vendor's status page or external docs. |
+| **Opt out of auto-pause** | Keeps PostHog from pausing this scout when nobody acts on its reports, and from flagging it when it surfaces nothing. |
+| **Tags** | Group scouts so you can filter the fleet list by them. |
+| **Slack destination** | Send this scout's output to a Slack channel or a direct message. See [sending a scout's output to Slack](#sending-a-scouts-output-to-slack). |
+| **MCP servers** | Which of your team's shared MCP servers this scout can use, on top of the PostHog MCP it always has. |
+| **Delete scout** | Only on scouts your team authored, and permanent. To pause a scout without losing it, turn it off instead. |
+
+Turning a scout on and off is the switch on its row in the fleet list, not a setting in the panel. Most settings need the scout enabled first, but the dry run switch, network access, and MCP servers stay editable while it's off – a scout you just enabled is due immediately, so those have to be set before the first run.
+
 ## Setting a scout's schedule
 
 Every scout runs on its own schedule, which you set per scout without touching its instructions. There are two ways to express one:
@@ -52,7 +69,7 @@ Since every run costs a share of your project's daily run budget, the schedule i
 
 ## Running a scout on demand
 
-Scouts run themselves on their schedule, but you can also trigger a run on demand – useful to test a scout right after authoring it, or to refresh its findings without waiting for the next scheduled run. A scout that's still disabled can be run this way too, so you can see what it would surface before turning it on.
+Scouts run themselves on their schedule, but you can also trigger a run on demand – useful to test a scout right after authoring it, or to refresh its findings without waiting for the next scheduled run. Open the scout from [**Self-driving > Scouts**](https://app.posthog.com/inbox/scouts) and click **Run now**. A scout that's still disabled can be run this way too, so you can see what it would surface before turning it on.
 
 On-demand runs count against the same daily run budget as scheduled runs, so repeatedly re-running the same scout can use up your project's daily allowance.
 
@@ -98,9 +115,18 @@ The practical upshot: triaging your inbox honestly is how scouts get quieter. Yo
 
 ## Sending a scout's output to Slack
 
-Each scout can send what it finds to a Slack channel or as a direct message to selected Slack members, set per scout. A channel lets you route a scout to a shared team space – the revenue scout to `#growth`, the APM scout to `#on-call`. Direct messages let you send a scout's output privately to the people who need it. You can select up to five Slack members for direct messages.
+Each scout can send what it finds to a Slack channel or as a direct message to selected Slack members, set per scout. A channel lets you route a scout to a shared team space – the revenue scout to `#growth`, the APM scout to `#on-call`. Direct messages let you send a scout's output privately to the people who need it.
 
-This is per scout and separate from the project-wide **#posthog-inbox** notification you set up when [connecting Slack](/docs/self-driving/setup). Connect your Slack workspace once, then choose a channel or Slack members on any scout you want routed. The selected members must belong to the connected Slack workspace and be eligible to receive messages.
+To set it up, [connect your Slack workspace](/docs/self-driving/setup) once. Then open the scout's [settings](#configuring-a-scout), go to **Slack destination**, pick the workspace, and choose **Channel** or **Direct message**:
+
+- **Channel** – pick the channel to post in. Only the first page of channels is listed, so type to search for a specific one. PostHog has to be in the channel, so invite it with `/invite @PostHog` first.
+- **Direct message** – pick up to five members of the connected workspace. Each person gets their own message from the PostHog app.
+
+With a channel selected, you can also turn on **Post reports as a thread**. PostHog then posts a short lead message in the channel and splits the rest of the report by its headings into replies, so the channel stays readable and a long summary isn't cut off.
+
+To stop sending a scout's output to Slack, click the trash button next to the channel or member picker.
+
+This is per scout and separate from the project-wide **#posthog-inbox** notification you set up when [connecting Slack](/docs/self-driving/setup).
 
 ## Every report is also an event
 
