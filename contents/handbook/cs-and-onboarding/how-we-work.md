@@ -77,18 +77,6 @@ Sometimes an existing or potential customer may ask us to fix an issue or build 
 - We already have [principles](/handbook/how-we-make-money#principles-for-dealing-with-big-customers) for how we build for big customers - if you have a big customer with a niche use case that isn't applicable to anyone else, you should assume we won't build for them (don't be mad!)
 - For any [feature requests](/handbook/cs-and-onboarding/feature-requests) customers care deeply about, we should file and track those in Vitally.
 
-**Inviting a product engineer into a customer conversation**
-
-Separately from product requests, there are moments where it's worth seeing whether a product engineer wants to join a customer conversation - as much for what _they_ get out of it as the customer. Always pitch this as an open invitation ("this might be an interesting call, would anyone like to join?"), never as "we need an engineer on this call." Situations where it's usually worth asking:
-
-- **A customer is moving to or from another tool.** If someone's weighing PostHog feature flags against LaunchDarkly, or shifting their error tracking to Sentry - in either direction - the relevant product engineer often wants in. It's a first-hand look at why a customer picks one platform over another and the trade-offs they weigh, which is useful to us whichever way they're moving.
-- **The customer's on early-access or giving feedback.** For anything in alpha, beta, or just shipped - or a not-yet-GA product they're already using and forming opinions on - engineers get a lot from hearing live first impressions, and the customer gets direct access to the people building it. A customer actively feeding back on pre-release features is exactly the kind of call worth pulling the team into.
-- **You're meeting the customer in person.** An on-site visit is a great chance to bring along a product engineer who's local, if there's one whose area matches what the customer uses (e.g. someone from the experiments team for a heavy experiments customer). This doesn't need to fit the two cases above - a good match nearby is reason enough. Have an agenda, and keep it to topics relevant to whoever's joining.
-
-**Why not just always invite one?**
-
-CSMs here are technical enough to solve real problems without asking our engineers. [You're the expert!](/handbook/cs-and-onboarding/customer-success) Bringing an engineer in is the exception, earned by genuine two-way value (one of the cases above), not a default or a comfort blanket. If you can't say what the engineer would get out of it, that's your answer.
-
 Finally, if you are bringing engineers onto a call, brief them first - what is the call about, who will be there. And then afterwards, summarize what you talked about. This goes a long way to ensuring sales <\> engineering happiness.
 
 **Complicated technical questions**
