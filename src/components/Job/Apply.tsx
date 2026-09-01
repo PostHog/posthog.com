@@ -24,6 +24,17 @@ interface IResumeComponentProps {
     placeholder: string
 }
 
+interface AshbySubmissionResponse {
+    success: boolean
+    errors?: Array<{ message?: string }>
+    results?: {
+        formMessages?: {
+            blocked?: boolean
+            blockMessageForCandidateHtml?: string
+        }
+    }
+}
+
 const components = {
     valueselect: ({
         title,
@@ -254,6 +265,26 @@ const Form = ({
                     )
                 }
                 throw new Error('Failed to submit application. Please try again.')
+            }
+
+            const submission: AshbySubmissionResponse = await res.json()
+            const { blocked, blockMessageForCandidateHtml } = submission.results?.formMessages || {}
+
+            if (blocked) {
+                if (blockMessageForCandidateHtml) {
+                    throw new Error(
+                        'We could not submit this application because you reached one of our application limits. Please wait before you apply again.'
+                    )
+                }
+                throw new Error('Failed to submit application. Please try again.')
+            }
+
+            if (!submission.success) {
+                const message = submission.errors
+                    ?.map((error) => error.message)
+                    .filter(Boolean)
+                    .join(' ')
+                throw new Error(message || 'Failed to submit application. Please try again.')
             }
 
             onSubmit()
