@@ -40,6 +40,7 @@ export const TopicSelector = (props: TopicSelectorProps) => {
                     return (
                         <li key={topic.id} className="m-0 p-0">
                             <button
+                                aria-pressed={Boolean(isSelected)}
                                 className="w-full border-b border-primary text-sm px-3 py-1.5 flex items-center space-x-2 hover:bg-accent dark:hover:bg-black/30"
                                 onClick={isSelected ? () => removeTopic(topic) : () => addTopic(topic)}
                             >
