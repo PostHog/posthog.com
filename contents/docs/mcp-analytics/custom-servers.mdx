@@ -15,6 +15,8 @@ For those servers, use **`PostHogMCP`** instead. It's a subclass of the [`postho
 | Built on `@modelcontextprotocol/sdk`'s `Server` / `McpServer` | [`instrument(server, posthog, options?)`](/docs/mcp-analytics/installation) |
 | A custom HTTP/Hono/edge dispatcher with no server object to wrap | `new PostHogMCP(apiKey, options?)` |
 
+The examples below are TypeScript. Python has the same helper with the same methods in snake_case — skip to [Python](#python).
+
 ## Set up
 
 `PostHogMCP` takes the exact same constructor arguments as `posthog-node`'s `PostHog`, so swap the class and you keep one client for your whole app:
@@ -110,45 +112,81 @@ ctx.waitUntil(posthog.flush())
 The Python SDK ships the same custom-dispatcher path as `PostHogMCP`, a subclass of the [`posthog`](/docs/libraries/python) client. Method names are snake_case and arguments are keyword args rather than an options object:
 
 ```python
+import time
 from posthog.mcp import PostHogMCP, get_more_tools_result
 
 posthog = PostHogMCP("phc_your_project_api_key", host="https://us.i.posthog.com")
 
-# Decorate your tools/list response so agents state their intent (and, optionally,
-# advertise the get_more_tools virtual tool):
+# Advertise your tools with the injected `context` intent argument (and, optionally,
+# the get_more_tools virtual tool):
 tools = posthog.prepare_tool_list(my_tools, report_missing=True)
 
-# On an inbound tools/call, pull the intent and strip the injected `context`:
-prepared = posthog.prepare_tool_call(name, arguments)
-if prepared.is_missing_capability:
-    posthog.capture_missing_capability(context=prepared.intent, distinct_id=user_id)
-    return get_more_tools_result()
+def handle_tools_call(request, name, arguments):
+    # Pull the agent's intent off the call and strip the injected `context`:
+    prepared = posthog.prepare_tool_call(name, arguments)
 
-result = run_tool(name, prepared.args)
+    # Pass these on every capture — see "Attributing the caller" below:
+    common = dict(
+        distinct_id=user_id,
+        session_id=mcp_session_id,
+        client_user_agent=request.headers.get("user-agent"),
+        vendor_client=request.headers.get("x-anthropic-client"),
+        groups={"organization": org_id},
+    )
 
-# Capture the call (fire-and-forget, like posthog.capture):
-posthog.capture_tool_call(
-    name,
-    intent=prepared.intent,
-    intent_source=prepared.intent_source,
-    parameters=arguments,
-    response=result,
-    duration_ms=elapsed_ms,
-    is_error=False,
-    distinct_id=user_id,
-    session_id=mcp_session_id,
-    groups={"organization": org_id},
-)
+    if prepared.is_missing_capability:
+        posthog.capture_missing_capability(context=prepared.intent, **common)
+        return get_more_tools_result()
 
-# On the handshake:
-posthog.capture_initialize(client_name="claude-code", client_version="1.2.3", distinct_id=user_id)
+    start = time.monotonic()
+    try:
+        result = run_tool(name, prepared.args)
+    except Exception as exc:
+        posthog.capture_tool_call(
+            name,
+            parameters=prepared.args,
+            duration_ms=(time.monotonic() - start) * 1000,
+            is_error=True,
+            error=exc,  # → $mcp_error_message, $mcp_error_type, and the $exception sibling
+            **common,
+        )
+        raise
+
+    posthog.capture_tool_call(
+        name,
+        intent=prepared.intent,
+        intent_source=prepared.intent_source,
+        parameters=prepared.args,
+        response=result,
+        duration_ms=(time.monotonic() - start) * 1000,
+        **common,
+    )
+    return result
+```
+
+Capture the handshake and the tool listing the same way:
+
+```python
+posthog.capture_initialize(client_name="claude-code", client_version="1.2.3", **common)
+posthog.capture_tools_list(tool_names=[t["name"] for t in tools], **common)
 
 posthog.flush()  # PostHogMCP is a posthog client — flush/shutdown it yourself
 ```
 
-`PostHogMCP(api_key, missing_capability_tool_name="get_more_tools", mcp_exception_autocapture=True, **posthog_kwargs)` accepts the standard `posthog` client kwargs (e.g. `host`). Set `mcp_exception_autocapture=False` to stop a failed tool call from emitting a `$exception` sibling. As in TypeScript, the wrapping-path hooks (`identify`, `context`, `intent_fallback`, `event_properties`) don't apply here — pass identity and properties on each `capture_*` call.
+`PostHogMCP(api_key, missing_capability_tool_name="get_more_tools", mcp_exception_autocapture=True, **posthog_kwargs)` accepts the standard `posthog` client kwargs — `host`, and [`before_send`](/docs/mcp-analytics/privacy#python) if you need to drop or rewrite payloads. Set `mcp_exception_autocapture=False` to stop a failed tool call from emitting a `$exception` sibling. As in TypeScript, the wrapping-path hooks (`identify`, `context`, `intent_fallback`, `event_properties`) don't apply here — pass identity and properties on each `capture_*` call.
 
-The `capture_*` methods also take `error_type` (a low-cardinality failure label for `$mcp_error_type`), `client_user_agent`, and `vendor_client` — the same fields documented in the [event reference](/docs/mcp-analytics/events#core-properties).
+### Failed calls
+
+Pass `error=exc` with `is_error=True` and the SDK reads `$mcp_error_message` and `$mcp_error_type` off the exception, so the failures view shows *why* a call failed instead of an empty row. The message is sanitized and capped at 2048 characters. Add `error_type="timeout"` (or any low-cardinality label) to override the thrown class name with your own category. Requires `posthog>=7.41`; upgrade to `7.45.3` or later, which also unwraps the generic `ToolError` that `mcp>=2.1` raises in place of your exception.
+
+### Attributing the caller
+
+`clientInfo.name` reports `claude-code` from the CLI, the Agent SDK, the VS Code extension and the desktop app alike, so on its own it collapses every surface into one bucket and the harness breakdown reads mostly "Other". The distinguishing detail is in the raw transport headers, which a custom dispatcher has to pass itself (`instrument()` reads them off the request for you):
+
+- `client_user_agent` → `$mcp_client_user_agent` — the parenthetical carries the build (`claude-code/2.1.0 (cli)` vs `(sdk-ts)`).
+- `vendor_client` → `$mcp_vendor_client` — from vendor headers like `x-anthropic-client`, the only thing that separates Anthropic's pooled surfaces (Claude.ai, Cowork, Claude Design) from each other.
+
+Both are captured raw and classified at query time, so labels improve without an SDK release. Requires `posthog>=7.42`. stdio and in-memory transports carry no headers, so leave them unset there.
 
 ### Stateless / multi-pod dispatchers
 
