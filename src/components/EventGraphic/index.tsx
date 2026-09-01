@@ -98,10 +98,12 @@ const FORMATS = {
         titleWidth: 76,
         // A speaker portrait is much wider than the hog art, so the title column narrows to clear the
         // face — and the title steps down with it, or long words break mid-word in the narrower column.
-        titleWidthSpeaker: 54,
+        titleWidthSpeaker: 49,
         speakerStepDown: 1,
         titleGap: 2.6,
-        dateFormat: 'dddd, MMMM D',
+        // Abbreviated, as the reference speaker frames are ("Saturday, Jan 31"). The shorter line keeps
+        // the date clear of the portrait, which is what lets the portrait sit as large as it does.
+        dateFormat: 'dddd, MMM D',
         infoWidth: 46,
         date: 4,
         time: 3.2,
@@ -120,12 +122,16 @@ const FORMATS = {
         artWidth: 54,
         artRight: -3,
         artBottom: 11,
-        // The portrait is drawn much larger than the hog art so the face reads at a distance, sized off
-        // the reference frames. The reference artwork is framed head-left with the shoulder bleeding off
-        // the right edge, but uploaded avatars centre the head in a square crop, so the bleed here is
-        // smaller than the reference's — enough to keep the face whole rather than clipping it.
+        // The portrait is drawn much larger than the hog art so the face reads at a distance.
+        //
+        // It sits flush to the right edge with NO bleed, unlike the reference frames. Those were drawn
+        // around one illustration whose subject is head-left with the shoulder trailing off-canvas, so a
+        // bleed there clips only jacket. Measuring the 101 speaker avatars actually in Strapi, the head
+        // reaches 0.82–0.99 of the source frame — several touch the right edge outright — so the same
+        // bleed cuts faces in half. Flush right puts the head at x 0.50–0.96 of the canvas, which is
+        // within a couple of percent of where the reference frame puts it, and no face is ever clipped.
         speakerWidth: 80,
-        speakerRight: -15,
+        speakerRight: 0,
         barHeight: 13.95,
     },
     landscape: {
@@ -166,9 +172,9 @@ const FORMATS = {
         artRight: -2,
         artBottom: 5.5,
         // No landscape speaker frame exists in the references, so these hold the square's proportions
-        // against the short edge: the portrait fills ~85% of the canvas height and bleeds off the right.
-        speakerWidth: 43,
-        speakerRight: -8,
+        // against the short edge. Flush right for the same reason as the square — see above.
+        speakerWidth: 46,
+        speakerRight: 0,
         barHeight: 7.3,
     },
 } as const
