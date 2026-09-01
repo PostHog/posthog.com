@@ -55,6 +55,12 @@ export type EventGraphicProps = {
     format?: EventGraphicFormat
     /** Resolves to a hue + light/dark variant. Defaults to a stable hash of the title. */
     styleIndex?: number
+    /**
+     * Organizer nudge on the title size, on top of the per-format auto-fit and its base scale. 1 = the
+     * format's default; the landscape stepper in the form steps it up and down. Always width-clamped, so
+     * no value can push a word off the edge or break it mid-word.
+     */
+    titleScale?: number
     className?: string
 }
 
@@ -133,6 +139,11 @@ const FORMATS = {
         speakerWidth: 80,
         speakerRight: 0,
         barHeight: 13.95,
+        // The square already fills its height, so its auto-fit size is the baseline (1).
+        titleBaseScale: 1,
+        // High enough that the square title (which is well within its tall canvas) never hits it — the
+        // height clamp only exists to protect the short landscape canvas.
+        titleHeightBudget: 60,
     },
     landscape: {
         aspect: '52.5%',
@@ -176,6 +187,16 @@ const FORMATS = {
         speakerWidth: 46,
         speakerRight: 0,
         barHeight: 7.3,
+        // The landscape canvas is short and wide, so the title tiers step down hard to protect the
+        // footer — which left the type floating in empty space (the brand team's feedback). The auto-fit
+        // size is scaled up by default so a graphic looks right with no manual input, which matters
+        // because most of these are generated for events that never uploaded a photo, with nobody at the
+        // size control. The width clamp still applies afterwards, so this can't push a word off the edge.
+        titleBaseScale: 1.3,
+        // The title must clear the info block and the footer on the 52.5cqw-tall canvas. This caps its
+        // height so a multi-line title (or a large manual size) stops growing instead of colliding — the
+        // key guard for auto-generated graphics, where nobody is watching to fix an overlap.
+        titleHeightBudget: 30,
     },
 } as const
 
@@ -273,9 +294,49 @@ const fitToLongestWord = (text: string, columnWidth: number): number => {
     return widest > 0 ? columnWidth / widest : Infinity
 }
 
-const titleSizeFor = (title: string, sizes: readonly number[], columnWidth: number, stepDown = 0): number => {
+/**
+ * How many lines `text` greedily wraps onto in a `columnWidth`-wide column at `size` cqw — the same
+ * greedy fill the browser does with `break-words`. Used to hold the title inside a vertical budget so a
+ * long title can't grow down into the info block and footer (see `titleSizeFor`).
+ */
+const wrapLineCount = (text: string, columnWidth: number, size: number): number => {
+    const space = SQUEAK_ADVANCE[' '] * size
+    let lines = 1
+    let width = 0
+    for (const word of text.split(/\s+/).filter(Boolean)) {
+        const wordWidth = squeakWidth(word) * size
+        if (width === 0) {
+            width = wordWidth
+        } else if (width + space + wordWidth <= columnWidth) {
+            width += space + wordWidth
+        } else {
+            lines += 1
+            width = wordWidth
+        }
+    }
+    return lines
+}
+
+const titleSizeFor = (
+    title: string,
+    sizes: readonly number[],
+    columnWidth: number,
+    stepDown = 0,
+    scale = 1,
+    heightBudget = Infinity
+): number => {
     const tier = title.length <= 20 ? 0 : title.length <= 32 ? 1 : title.length <= 48 ? 2 : title.length <= 64 ? 3 : 4
-    return Math.min(sizes[Math.min(tier + stepDown, sizes.length - 1)], fitToLongestWord(title, columnWidth))
+    // The auto-fit tier is the default; `scale` lets the organizer nudge it. Two clamps then keep the
+    // result inside the canvas no matter the scale: the width fit stops a word running off the edge or
+    // breaking mid-word, and the height fit stops a multi-line title growing down into the info block and
+    // footer. The height clamp counts lines at the *desired* size, which can only over- (never under-)
+    // estimate them as the size shrinks, so the result is always conservative — it never collides.
+    const autoSize = sizes[Math.min(tier + stepDown, sizes.length - 1)]
+    const desired = Math.min(autoSize * scale, fitToLongestWord(title, columnWidth))
+    const lines = wrapLineCount(title, columnWidth, desired)
+    // Line pitch is 0.9em (the title's line-height), and the last line adds its own cap height on top.
+    const maxByHeight = heightBudget / (0.9 * lines + 0.1)
+    return Math.min(desired, maxByHeight)
 }
 
 /**
@@ -305,6 +366,7 @@ const EventGraphic = forwardRef<HTMLDivElement, EventGraphicProps>(function Even
         partners,
         format = 'square',
         styleIndex,
+        titleScale = 1,
         className = '',
     },
     ref
@@ -327,7 +389,11 @@ const EventGraphic = forwardRef<HTMLDivElement, EventGraphicProps>(function Even
         displayTitle,
         t.titleSizes,
         titleWidth,
-        (subtitle ? t.subtitleStepDown : 0) + (speaker?.avatarUrl ? t.speakerStepDown : 0)
+        (subtitle ? t.subtitleStepDown : 0) + (speaker?.avatarUrl ? t.speakerStepDown : 0),
+        t.titleBaseScale * titleScale,
+        // A subtitle sits under the title and eats into the same vertical space, so hand the title a
+        // smaller height budget when one is present.
+        subtitle ? t.titleHeightBudget * 0.66 : t.titleHeightBudget
     )
     const subtitleWidth = Math.min(t.subtitleWidth, titleWidth)
     const subtitleSize = subtitle ? Math.min(titleSize * t.subtitleScale, fitToLongestWord(subtitle, subtitleWidth)) : 0

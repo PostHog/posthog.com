@@ -242,6 +242,14 @@ const GRAPHIC_EXPORT_SIZES: Record<EventGraphicFormat, { width: number; height: 
     landscape: { width: 1200, height: 630 },
 }
 
+// The landscape title auto-fits, but its wide/short canvas can leave the type looking small, so the
+// organizer can nudge it up or down in fixed steps. Each step is 15% off the format's default; the range
+// is clamped so a press can't run past a sensible size (the graphic itself still width-clamps every word).
+// It's steps rather than a slider deliberately — no drag thumb to style across browsers, nothing to break.
+const TITLE_SCALE_STEP = 0.15
+const TITLE_SCALE_MIN_STEP = -2
+const TITLE_SCALE_MAX_STEP = 2
+
 const transformEventToFormValues = (event: Event, speakerOptions?: SelectOption[]): EventFormValues => {
     const parsed = dayjs(event?.date)
     const dateStr = parsed.isValid() ? parsed.format('YYYY-MM-DD') : ''
@@ -286,6 +294,10 @@ export default function EventForm({ onSuccess, event }: { onSuccess?: () => void
     const [downloadingGraphic, setDownloadingGraphic] = React.useState<EventGraphicFormat | null>(null)
     // Null means "follow the event name"; shuffling pins an explicit hue + light/dark combo.
     const [graphicStyleOverride, setGraphicStyleOverride] = React.useState<number | null>(null)
+    // Landscape-only title-size nudge. 0 = the format default; each step is ±15%. Since the landscape
+    // graphic is download-only (only the square is auto-uploaded), this only ever needs to drive the live
+    // preview and the downloaded PNG — no persisted field.
+    const [landscapeTitleStep, setLandscapeTitleStep] = React.useState<number>(0)
     const graphicRef = React.useRef<HTMLDivElement>(null)
     const landscapeGraphicRef = React.useRef<HTMLDivElement>(null)
     const data = useStaticQuery(graphql`
@@ -770,6 +782,8 @@ export default function EventForm({ onSuccess, event }: { onSuccess?: () => void
         styleIndex: graphicStyleIndex,
     }
 
+    const landscapeTitleScale = 1 + landscapeTitleStep * TITLE_SCALE_STEP
+
     const handleDownloadGraphic = async (format: EventGraphicFormat) => {
         const node = format === 'landscape' ? landscapeGraphicRef.current : graphicRef.current
         if (!node) return
@@ -798,6 +812,7 @@ export default function EventForm({ onSuccess, event }: { onSuccess?: () => void
     // this reverts to the saved event rather than emptying the form.
     const clearForm = () => {
         formik.resetForm()
+        setLandscapeTitleStep(0)
         setCityQuery('')
         setCitySuggestions([])
         setCityOpen(false)
@@ -1126,6 +1141,7 @@ export default function EventForm({ onSuccess, event }: { onSuccess?: () => void
                         These graphics are generated from the details above. If you don't upload a photo, the square one
                         is saved automatically and used as the event's photo everywhere on the site. Shuffle to try a
                         different color and light/dark treatment — whatever is showing when you save is what gets used.
+                        The landscape (link preview) graphic has its own title-size control below.
                     </p>
                     <div className="grid gap-3 sm:grid-cols-2">
                         <EventGraphic
@@ -1138,6 +1154,7 @@ export default function EventForm({ onSuccess, event }: { onSuccess?: () => void
                             ref={landscapeGraphicRef}
                             {...graphicProps}
                             format="landscape"
+                            titleScale={landscapeTitleScale}
                             className="rounded border border-primary self-start"
                         />
                     </div>
@@ -1171,6 +1188,35 @@ export default function EventForm({ onSuccess, event }: { onSuccess?: () => void
                                 'Download landscape (1200×630)'
                             )}
                         </OSButton>
+                        <div className="flex items-center gap-1 sm:ml-auto">
+                            <span className="text-sm text-secondary mr-1">Landscape title</span>
+                            <OSButton
+                                size="sm"
+                                variant="secondary"
+                                type="button"
+                                aria-label="Make the landscape title smaller"
+                                tooltip="Smaller landscape title"
+                                disabled={landscapeTitleStep <= TITLE_SCALE_MIN_STEP}
+                                onClick={() =>
+                                    setLandscapeTitleStep((step) => Math.max(TITLE_SCALE_MIN_STEP, step - 1))
+                                }
+                            >
+                                A–
+                            </OSButton>
+                            <OSButton
+                                size="sm"
+                                variant="secondary"
+                                type="button"
+                                aria-label="Make the landscape title bigger"
+                                tooltip="Bigger landscape title"
+                                disabled={landscapeTitleStep >= TITLE_SCALE_MAX_STEP}
+                                onClick={() =>
+                                    setLandscapeTitleStep((step) => Math.min(TITLE_SCALE_MAX_STEP, step + 1))
+                                }
+                            >
+                                A+
+                            </OSButton>
+                        </div>
                     </div>
                 </div>
                 <OSTextarea
