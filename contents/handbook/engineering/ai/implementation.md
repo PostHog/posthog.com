@@ -12,6 +12,19 @@ PostHog AI isn't a single product – it's a platform that works wherever custom
 
 All of these surfaces share the same underlying capabilities. The MCP server exposes PostHog's API as atomic tools, and skills teach agents how to compose those tools into workflows. When a product team adds a new MCP tool or writes a new skill, every surface benefits automatically.
 
+PostHog AI renders its own interface in several places. The one that matters most for product teams is the side panel, which opens beside whatever page the user is already on:
+
+| Surface | What it is |
+| --- | --- |
+| The side panel | Opens anywhere in the PostHog app, next to the page the user is working on. |
+| `/ai` | The full-page scene. `/max` redirects here, and `/ai/history` lists past threads. |
+| `/home` | The AI-first project homepage embeds an instance. |
+| `/tasks` | The standalone agent-run scene. |
+| Signals inbox | Read-only embeds of a finished run. |
+| PostHog Desktop | A separate app that runs the same agent implementation on top of tasks. It has its own interface, so it needs its own UI integration. |
+
+The first five are the PostHog web app, and the frontend seams described below apply to all of them. PostHog Desktop shares the agent but not the frontend, so an integration there is separate work.
+
 ### PostHog AI in the web
 
 PostHog AI in the web is a sandboxed coding agent built on the Agents SDK (Claude Code's harness). It runs in a controlled environment with access to PostHog's full API surface and unlocks use cases that go beyond what a simple chat interface can offer:
@@ -20,17 +33,6 @@ PostHog AI in the web is a sandboxed coding agent built on the Agents SDK (Claud
 - **Advanced SQL writing and analysis** – the agent writes HogQL queries, executes them, and reasons over large result sets to answer complex analytical questions.
 - **Automatic instrumentation for non-technical users** – users who aren't engineers can describe what they want to track and the agent generates instrumentation code.
 - **User-created custom skills and capabilities** – customers can create their own skills to teach the agent domain-specific workflows.
-- **Generative UI for complex needs** – for the most complex UI requirements, the agent can generate custom visualizations and interfaces on the fly.
-
-It renders in several places, and the one that matters most for product teams is the side panel, which opens beside whatever page the user is already on:
-
-| Surface | What it is |
-| --- | --- |
-| The side panel | Opens anywhere in the app, next to the page the user is working on. |
-| `/ai` | The full-page scene. `/max` redirects here, and `/ai/history` lists past threads. |
-| `/home` | The AI-first project homepage embeds an instance. |
-| `/tasks` | The standalone agent-run scene. |
-| Signals inbox | Read-only embeds of a finished run. |
 
 ### PostHog Desktop
 
@@ -40,14 +42,14 @@ PostHog Desktop is a desktop agent that turns PostHog signals into shipped code.
 
 Engineers who prefer to work in Claude Code, Cursor, Codex, or any other MCP-compatible tool get access to the same PostHog capabilities.
 
-## Headless first, then cooperate, then UI
+## Headless first, then react, then UI
 
 Product teams must think about AI features as **headless (UI-less) workflows**. Agents don't need UI – they compose tools and follow skills to accomplish goals. But customers do need UI, and there are two different things that can mean.
 
-The rule of thumb: **headless first, then make your existing UI cooperate, then a dedicated UI for a persona.**
+The rule of thumb: **headless first, then make your existing UI react, then a dedicated UI for a persona.**
 
 1. **Build the capability headless** – expose your product's API as MCP tools and write skills that teach agents how to use them. This makes the capability available across all surfaces immediately.
-2. **Make your existing UI cooperate with the agent** – tell the agent what the user has open, and react when the agent changes something. This is a small amount of frontend work on the product you already have, and it's what makes the side panel feel like part of your product instead of a chat window next to it. See [integrating your product's UI](#integrating-your-products-ui-with-posthog-ai) below.
+2. **Make your existing UI react to the agent** – tell the agent what the user has open, and update the page when the agent changes something. This is a small amount of frontend work on the product you already have, and it's what makes the side panel feel like part of your product instead of a chat window next to it. See [integrating your product's UI](#integrating-your-products-ui-with-posthog-ai) below.
 3. **Then build a dedicated UI where it matters** – if a persona (product manager, engineer, analyst) needs an experience of their own, build an MCP App that provides the right UI for that workflow.
 
 This order matters because headless capabilities are reusable across every surface, while UI is specific to one. If you build UI first, you've created something that only works in one place. If you build headless first, you've created something that works everywhere, and you can always add UI later.
@@ -207,7 +209,7 @@ The LangGraph runtime is frozen. Don't add `useMaxTool` registrations, `MaxUICon
 
 2. **Write skills for jobs to be done.** If your product has jobs that require domain knowledge – specific tool ordering, constraints, query patterns, or reasoning about what data to check – write a skill that teaches agents how to accomplish that job well. See [Writing skills](/handbook/engineering/ai/writing-skills).
 
-3. **Make your existing UI cooperate.** Attach the entity the user has open, add a trusted instruction describing what this page is for, and react when the agent changes something you're displaying. Each of these is a hook call on a component you already have, and together they're what makes the side panel useful on your product. See [integrating your product's UI](#integrating-your-products-ui-with-posthog-ai).
+3. **Make your existing UI react.** Attach the entity the user has open, add a trusted instruction describing what this page is for, and update when the agent changes something you're displaying. Each of these is a hook call on a component you already have, and together they're what makes the side panel useful on your product. See [integrating your product's UI](#integrating-your-products-ui-with-posthog-ai).
 
 4. **Build a dedicated UI only when a specific persona needs it.** Don't start with a UI-specific AI feature. Start headless, validate that agents can accomplish the workflow, then add UI if a persona needs an experience of their own.
 
