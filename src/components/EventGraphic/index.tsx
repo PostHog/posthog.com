@@ -333,19 +333,25 @@ const titleSizeFor = (
     const autoSize = sizes[Math.min(tier + stepDown, sizes.length - 1)]
     const desired = Math.min(autoSize * scale, fitToLongestWord(title, columnWidth))
 
-    // Height fit: shrink until the wrapped title fits the budget. Each pass measures the lines at the
-    // current size and, if too tall, shrinks to exactly that line count's limit — which is strictly
-    // smaller, so the size only ever decreases and can never settle on a colliding value. Shrinking can
-    // drop a line, which frees room, so re-measuring recovers the size a one-shot count would have thrown
-    // away (the reason a long title like "Build and Grow Sessions" no longer sets needlessly small).
-    let size = desired
-    for (let pass = 0; pass < 5; pass++) {
-        // Line pitch is 0.9em (the title's line-height); the last line adds its own cap height on top.
-        const height = (0.9 * wrapLineCount(title, columnWidth, size) + 0.1) * size
-        if (height <= heightBudget) break
-        size = heightBudget / (height / size)
+    // Height fit: the largest size, up to `desired`, whose wrapped line count still clears the vertical
+    // budget. Line pitch is 0.9em (the title's line-height), and the last line adds its own cap height on
+    // top. Growing the size can only add line breaks, never remove them, so this height is monotonic in
+    // size — a binary search converges on the exact crossover. (A one-shot "solve backwards from the
+    // measured line count" can't: shrinking enough to drop a line reveals headroom at the new, smaller
+    // line count that it never goes back to spend, understating the true maximum.)
+    const heightAt = (size: number) => (0.9 * wrapLineCount(title, columnWidth, size) + 0.1) * size
+    if (heightAt(desired) <= heightBudget) return desired
+    let lo = 0
+    let hi = desired
+    for (let pass = 0; pass < 20; pass++) {
+        const mid = (lo + hi) / 2
+        if (heightAt(mid) <= heightBudget) {
+            lo = mid
+        } else {
+            hi = mid
+        }
     }
-    return size
+    return lo
 }
 
 /**

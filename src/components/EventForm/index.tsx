@@ -1201,7 +1201,7 @@ export default function EventForm({ onSuccess, event }: { onSuccess?: () => void
                                     setLandscapeTitleStep((step) => Math.max(TITLE_SCALE_MIN_STEP, step - 1))
                                 }
                             >
-                                –
+                                A-
                             </OSButton>
                             <OSButton
                                 size="sm"
@@ -1214,7 +1214,7 @@ export default function EventForm({ onSuccess, event }: { onSuccess?: () => void
                                     setLandscapeTitleStep((step) => Math.min(TITLE_SCALE_MAX_STEP, step + 1))
                                 }
                             >
-                                +
+                                A+
                             </OSButton>
                         </div>
                     </div>
