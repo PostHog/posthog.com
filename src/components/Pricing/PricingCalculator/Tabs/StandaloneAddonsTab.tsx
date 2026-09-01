@@ -210,6 +210,16 @@ export default function StandaloneAddonsTab({ activeProduct, setVolume, setProdu
         }
     }, [totalCost, mainVolume, billedMainVolume, mainBillingTiers, activeProduct.handle, setProduct])
 
+    // Adopt a volume written from outside the tab – Tabbed's mount effect restores
+    // `?<product>[volume]=N` via setVolume once this tab has already seeded mainVolume at 0.
+    // Converges: the effect above then reports the same volume back, so the next run bails.
+    useEffect(() => {
+        const external = Number(activeProduct.volume)
+        if (Number.isFinite(external) && external > 0 && external !== mainVolume) {
+            setMainVolume(external)
+        }
+    }, [activeProduct.volume])
+
     // Cost is derived from billedMainVolume in the effect above — the cost SliderRow reports only
     // covers its own volume, which undercounts when an add-on meters through the main product.
     const handleMainVolumeChange = (volume) => {

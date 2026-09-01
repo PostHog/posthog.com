@@ -451,13 +451,22 @@ export default function ProductAnalyticsTab({
         Object.keys(analyticsData).forEach((key) => setAnalyticsVolume(key, analyticsData[key].volume))
         const urlParams = new URLSearchParams(window.location.search)
         const volumes = qs.parse(urlParams.toString())
-        if (volumes['product_analytics']?.types) {
-            Object.keys(volumes['product_analytics'].types).forEach((subtype) => {
-                const volume = volumes['product_analytics'].types[subtype]?.volume
+        const types = volumes['product_analytics']?.types
+        if (types) {
+            Object.keys(types).forEach((subtype) => {
+                const volume = types[subtype]?.volume
                 if (volume) {
                     setAnalyticsVolume(subtype, Number(volume))
                 }
             })
+            return
+        }
+        // A link carrying only a total and no per-type split – anything built outside "Generate
+        // calculator URL". Put the total on identified events so the tab shows the number the
+        // link asked for rather than zero.
+        const total = Number(volumes['product_analytics']?.volume)
+        if (Number.isFinite(total) && total > 0) {
+            setAnalyticsVolume('productAnalyticsEvents', total)
         }
     }, [])
 

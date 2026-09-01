@@ -2,7 +2,7 @@ import React from 'react'
 // import { allProductsData } from 'components/Pricing/Pricing'
 import { calculatePrice } from 'components/Pricing/PricingSlider/pricingSliderLogic'
 import { graphql, useStaticQuery } from 'gatsby'
-import { useMemo, useState } from 'react'
+import { useCallback, useMemo, useState } from 'react'
 
 // Import individual product data
 import { productAnalytics } from './productData/product_analytics'
@@ -89,25 +89,34 @@ export default function useProducts() {
 
     const monthlyTotal = useMemo(() => products.reduce((acc, product) => acc + (product.cost || 0), 0), [products])
 
-    const setProduct = (handle: string, data: any) => {
-        const target = baseProducts.find((product) => product.handle === handle)
-        if (!target || (target as any).billedWith) return
-        setOverrides((prev) => ({ ...prev, [handle]: { ...(prev[handle] || {}), ...data } }))
-    }
+    // Stable across renders: tabs list these in effect dependencies, and every call writes a new
+    // overrides object. A fresh function each render makes those effects re-run on their own
+    // output, so the tab writes its volume back over anything set from outside it.
+    const setProduct = useCallback(
+        (handle: string, data: any) => {
+            const target = baseProducts.find((product) => product.handle === handle)
+            if (!target || (target as any).billedWith) return
+            setOverrides((prev) => ({ ...prev, [handle]: { ...(prev[handle] || {}), ...data } }))
+        },
+        [baseProducts]
+    )
 
-    const setVolume = (handle: string, volume: number) => {
-        const rounded = Math.round(volume)
-        const product = baseProducts.find((product) => product.handle === handle)
-        const { total, costByTier } = calculatePrice(
-            rounded,
-            product?.billingData?.plans.find((plan: any) => plan.tiers)?.tiers
-        )
-        setProduct(handle, {
-            volume: rounded,
-            cost: total,
-            costByTier,
-        })
-    }
+    const setVolume = useCallback(
+        (handle: string, volume: number) => {
+            const rounded = Math.round(volume)
+            const product = baseProducts.find((product) => product.handle === handle)
+            const { total, costByTier } = calculatePrice(
+                rounded,
+                product?.billingData?.plans.find((plan: any) => plan.tiers)?.tiers
+            )
+            setProduct(handle, {
+                volume: rounded,
+                cost: total,
+                costByTier,
+            })
+        },
+        [baseProducts, setProduct]
+    )
 
     return { products, setVolume, setProduct, monthlyTotal }
 }
