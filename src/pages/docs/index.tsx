@@ -132,21 +132,23 @@ export const DocsIndex = () => {
                 <header>
                     <div className="pb-6">
                         <h1 className="m-0 text-3xl font-bold !leading-tight @xl/docs:text-4xl">PostHog Docs</h1>
-                        <div className="mt-3 flex flex-col items-start gap-3 @md/docs:flex-row @md/docs:items-center @md/docs:justify-between">
+                        <div className="mt-3 flex flex-col items-start gap-3 @lg/docs:flex-row @lg/docs:items-center @lg/docs:justify-between">
                             <p className="m-0 max-w-2xl flex-1 text-[15px] leading-relaxed text-secondary @xl/docs:text-base">
                                 References for every product and tool, and use case guides to help you succeed.
                             </p>
-                            <OSButton
-                                type="button"
-                                variant="secondary"
-                                size="md"
-                                icon={<Icons.IconSearch />}
-                                aria-label="Search docs"
-                                className="shrink-0 self-end @md/docs:self-auto"
-                                onClick={() => openSearch('docs')}
-                            >
-                                Search the docs
-                            </OSButton>
+                            <div className="w-full @lg/docs:w-auto @lg/docs:shrink-0">
+                                <OSButton
+                                    type="button"
+                                    variant="secondary"
+                                    size="md"
+                                    width="full"
+                                    icon={<Icons.IconSearch />}
+                                    aria-label="Search docs"
+                                    onClick={() => openSearch('docs')}
+                                >
+                                    Search the docs
+                                </OSButton>
+                            </div>
                         </div>
                     </div>
                 </header>
