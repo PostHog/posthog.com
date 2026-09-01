@@ -62,6 +62,7 @@ Some of the most relevant options are:
 | `strict_script_versioning`<br/><br/>**Type:** Boolean<br/>**Default:** `false`                                                                                                            | Loads external dependency scripts from versioned asset paths, such as `/static/1.370.0/recorder.js`, instead of legacy query-string URLs like `/static/recorder.js?v=1.370.0`. Recommended whenever your setup can serve versioned `/static/*` asset paths, so feature scripts load from the same SDK version as `array.js`.                                                                  |
 | `asset_host`<br/><br/>**Type:** String or null<br/>**Default:** `null`                                                                                                                    | Optional host override for static assets loaded by PostHog, such as `recorder.js`, `surveys.js`, or `toolbar.js`. Only applies to `/static/*` assets.                                                                                         |
 | `flags_api_host`<br/><br/>**Type:** String<br/>**Default:** `null`                                                                                                                        | A separate reverse proxy host for feature flag requests. If set, all feature flag evaluation requests will use this host instead of `api_host`. This requires setting up your own [reverse proxy](/docs/advanced/proxy) and creates a logical separation between feature flags and analytics, which can help prevent feature flags from being blocked by ad blockers. See [preventing feature flags from being blocked](/tutorials/flags-adblock-prevention) for more details. |
+| [`rewriteRequestPath`](#customize-reverse-proxy-request-paths)<br/><br/>**Type:** `(url: URL) => URL`<br/>**Default:** `undefined` | Rewrites fully resolved PostHog API, Feature Flags, remote config, and asset request URLs. Use it when your reverse proxy exposes custom paths. UI links are not rewritten. |
 | [`tracing_headers`](#tracing-headers)<br/><br/>**Type:** Array of strings<br/>**Default:** `undefined`                                                                                                        | Hostnames for which PostHog should add tracing headers to `fetch` and `XMLHttpRequest` calls. Use hostnames only (for example, `api.example.com` or `localhost`), not full URLs. Matching requests include `X-POSTHOG-DISTINCT-ID` and `X-POSTHOG-SESSION-ID`, which lets backend events, logs, errors, and LLM traces link back to frontend sessions and replays. Deprecated aliases: `addTracingHeaders` and `__add_tracing_headers`. |
 | `loaded`<br/><br/>**Type:** Function<br/>**Default:** `function () {}`                                                                                                                    | A function to be called once the PostHog scripts have loaded successfully.                                                                                                                                                                                                                                     |
 | `mask_all_text`<br/><br/>**Type:** Boolean<br/>**Default:** `false`                                                                                                                       | Prevent PostHog autocapture from capturing any text from your elements.                                                                                                                                                                                                                                        |
@@ -85,6 +86,55 @@ Some of the most relevant options are:
 | `surveys`<br/><br/>**Type:** Object<br/>**Default:** `undefined` | [Survey](/docs/surveys)-specific configuration: `prefillFromUrl` (prefill responses from URL parameters), `autoSubmitIfComplete`, and `autoSubmitDelay`. |
 | `xhr_headers`<br/><br/>**Type:** Object<br/>**Default:** `{}` | Any additional headers you wish to pass with the XHR requests to the PostHog API. |
 | `rageclick`<br/><br/>**Type:** Boolean or RageclickConfig<br/>**Default:** `true` | Determines if PostHog should automatically capture rage click events when users rapidly click on non-responsive elements. When `defaults: '2025-11-30'` or later is set, `content_ignorelist` is enabled by default to ignore elements with navigation-related text. [See below for `RageclickConfig`](#configuring-rageclick). |
+
+## Customize reverse proxy request paths
+
+Use `rewriteRequestPath` when your reverse proxy exposes different paths from the standard PostHog paths. This option requires `posthog-js` version `1.416.0` or later.
+
+The function receives a fully resolved `URL` after the SDK selects `api_host`, `flags_api_host`, or the asset host. If a host setting includes a path, such as `api_host: '/ingest'`, `url.pathname` includes that prefix. Mutate this object or return a new `URL`.
+
+```js
+const pathRewrites = [
+  ['/i/v0/e/', '/a1/'],
+  ['/e/', '/a2/'],
+  ['/s/', '/a3/'],
+  ['/flags/', '/a4/'],
+  ['/array/', '/a5/'],
+  ['/static/', '/a6/'],
+]
+
+posthog.init('<ph_project_token>', {
+  api_host: 'https://e.yourdomain.com',
+  ui_host: 'https://us.posthog.com', // Use https://eu.posthog.com for EU projects.
+  rewriteRequestPath: (url) => {
+    const rewrite = pathRewrites.find(([posthogPath]) => url.pathname.startsWith(posthogPath))
+
+    if (rewrite) {
+      const [posthogPath, proxyPath] = rewrite
+      url.pathname = proxyPath + url.pathname.slice(posthogPath.length)
+    }
+
+    return url
+  },
+})
+```
+
+This example rewrites event API, Session Replay ingestion, Feature Flags, remote config, and static asset paths. Other PostHog API paths keep their standard path on `api_host`. Because the function changes only `url.pathname`, each URL keeps its resolved origin and query parameters.
+
+Configure your proxy to reverse every mapping:
+
+| Browser path | PostHog path | PostHog upstream |
+| --- | --- | --- |
+| `/a1/*` | `/i/v0/e/*` | API host |
+| `/a2/*` | `/e/*` | API host |
+| `/a3/*` | `/s/*` | API host |
+| `/a4/*` | `/flags/*` | API host |
+| `/a5/*` | `/array/*` | Asset host |
+| `/a6/*` | `/static/*` | Asset host |
+
+The proxy routes must preserve query parameters and match every path that the function returns. See the [self-hosted proxy reference](/docs/advanced/proxy/proxy-reference) for upstream hosts and other requirements.
+
+`rewriteRequestPath` does not replace `api_host`, `flags_api_host`, `asset_host`, or `ui_host`. The SDK does not apply it to PostHog UI links.
 
 ## HTML snippet and script versioning
 
