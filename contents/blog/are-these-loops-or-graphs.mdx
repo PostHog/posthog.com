@@ -40,6 +40,14 @@ TODO before publish:
 - Maybe a short video walkthrough of one loop (worked well last time)
 - Decide: keep "honorable mentions" table or cut for length
 - Link to changelog/newsletter coverage if the auto-merged PR story ships there
+- Loop 6 (issues -> PRs) needs a real issue -> report -> PR trace; confirm the
+  auto-merge anecdote with Alex before using it
+- Rapid-fire table: consider trimming to 3 rows if the post runs long; the
+  personal-github one is the most cuttable
+- Recent inbox evidence worth mining for artifacts: "chore(signals): Product
+  brief for 2026-09-01" (repo digest), "docs(mcp): document reading PostHog AI
+  chat threads" (docs sync), "feat(signals): Show CI status on inbox report
+  list PR pills" (github source, issues loop)
 */}
 
 ![Hamel Husain's post on X: "Loop Engineering Is Dead. Enter Graph Engineering" - followed by the Michael Jordan "Stop it." meme](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/hamel_loops_graphs_tweet_64bed5ca01.jpg)
@@ -58,7 +66,7 @@ A good loop, for me, does three jobs:
 2. **Takes the boring parts off my plate.** The triage, the dedupe, the "is this the same issue as last week?"
 3. **Leaves me feeling in charge.** I can read exactly what it did, why it stayed quiet, and step in anywhere.
 
-So instead of arguing about terminology, here's something more concrete: five real loops the self-driving team runs every day *to build self-driving itself*. Each one is [a scout](/blog/what-is-a-scout) – a small scheduled agent whose logic lives in a markdown skill – plugged into the [self-driving pipeline](/docs/self-driving/self-improving-loop) that turns findings into [inbox](/docs/self-driving/inbox) reports and, sometimes, PRs.
+So instead of arguing about terminology, here's something more concrete: six real loops the self-driving team runs every day *to build self-driving itself*. Each one is [a scout](/blog/what-is-a-scout) – a small scheduled agent whose logic lives in a markdown skill – plugged into the [self-driving pipeline](/docs/self-driving/self-improving-loop) that turns findings into [inbox](/docs/self-driving/inbox) reports and, sometimes, PRs.
 
 For each loop: what it watches, what it takes off our plate, where the human sits – and a verdict on the title question.
 
@@ -150,6 +158,45 @@ And then it stops. These reports need team discussion, prioritization, and produ
 
 {/*TODO: real distilled idea + its sources*/}
 
+## Loop 6: The issues → PRs loop
+
+This is the loop that has changed how I personally work the most.
+
+The old way: write a rough issue, eventually pick it up yourself, or hand it to an agent and then *watch the agent code* – which is just typing with extra steps. The number of terminals I can babysit is the ceiling on my output.
+
+The new way inverts where the effort goes. I spend real time upfront **writing the spec** – a GitHub issue with the intended behavior actually thought through. Then:
+
+1. `signals-scout-self-driving-github-issues` sweeps our open team-labeled issues hourly and judges each one for **readiness**: unclaimed × unblocked × scoped.
+2. A ready issue whose intended behavior is clear becomes an inbox report marked *immediately actionable*, and a draft PR opens for review – sometimes on its own, sometimes because I hit "create PR" on the report. Anything touching permissions, billing, or security, or needing a product call, files as *requires human input* instead.
+3. The review bots take it from there – ReviewHog reviews the diff, StampHog approves what clears the bar.
+4. I show up at the end and spend my time on **QA before merge** – the judgment work – instead of watching the code get typed.
+
+The dedupe is part of the loop too: before drafting anything, the scout checks the inbox's GitHub source for an existing report on the same issue, because two agents solving one issue is how you get dueling PRs.
+
+So the human effort moved to the two ends – a better spec going in, a real sense-check coming out – and the boring middle belongs to the agents. That's what lets me scale horizontally: my ceiling is no longer how many screens I can watch, it's how many good specs I can write.
+
+{/*TODO: real issue -> report -> PR -> merged example. Also consider the
+    auto-merge anecdote from Alex (first PR written, reviewed, approved, and
+    merged with zero humans - then we turned that off): great line, confirm
+    with Alex/team before publishing.*/}
+
+**Where I sit:** at both ends, on purpose. Spec quality in, merge judgment out.
+
+**Loop or graph?** A loop with a human valve at each end. Tighten either valve and the whole thing safely stops.
+
+## Rapid fire: the smaller loops we lean on
+
+Not every loop deserves 500 words. A few more we run daily, each solving one nagging "someone should really be watching this":
+
+| Loop | What it does | Where the human sits |
+|---|---|---|
+| **Docs sync** | `signals-scout-scouts-docs` and its siblings watch merged code changes in `posthog/posthog` and catch when they leave a public doc making a now-wrong claim – a renamed config field, a feature still marked beta after going GA. Verified mechanical drift files as immediately actionable, so a draft docs PR opens with a paste-ready edit. | Reviewing a docs PR instead of noticing stale docs months later (usually via a confused user). |
+| **Repo digest** | `signals-scout-repo-summary-self-driving` reads yesterday's merged PRs touching the team's code paths and writes one skimmable brief: the 3-5 blocks of work that mattered, weighted by change type × blast radius × surface criticality. | Reading it with coffee. The whole team stays current on how our slice of the codebase is evolving without anyone trawling the merge log. |
+| **Team channel** | `signals-scout-team-self-driving` watches our own `#team-self-driving` Slack (synced to the warehouse as a table) for bug reports, feature ideas, and relayed customer feedback buried in threads – aggregating by thread and skipping the banter. | Nothing said in passing gets lost; the good ideas resurface as reports instead of scrolling away. |
+| **Personal GitHub** | `signals-scout-andy-github` rebuilds my open PRs, review requests, and assigned issues hourly, and keeps one living report per day current with an attention list: failing CI, changes requested, reviews waiting over 24 hours. | It's my morning triage, pre-done. |
+
+The pattern: each of these existed first as a human habit someone was bad at keeping. Now the habit runs hourly and the human just reads the output.
+
 ## The loops inside the loops
 
 Two behaviors cut across the whole fleet and don't belong to any single scout:
@@ -167,7 +214,7 @@ Scouts watching data, scouts watching scouts, scouts watching themselves. Each o
 
 Zoom in on any one of these and it's a loop – a small agent on a schedule, reading, deciding, emitting, remembering. That's the level where you build, debug, and reason about them, and it's the level that fits in one markdown file.
 
-Zoom out and it's undeniably a graph. The mcp-struggles scout files agent feedback that the agent-feedback scout picks up. The scratchpad miner reads the memory the other loops write. The self-improvement scout edits the skills the other scouts run. Reports become PRs that change the product that the loops are watching.
+Zoom out and it's undeniably a graph. The mcp-struggles scout files agent feedback that the agent-feedback scout picks up. The scratchpad miner reads the memory the other loops write. The self-improvement scout edits the skills the other scouts run. The docs loops rewrite the docs that describe the loops. Reports become PRs that ReviewHog reviews and StampHog approves, changing the product that the loops are watching.
 
 Nobody designed that graph top-down. We wrote small loops, each with a legible job and a human in a deliberate seat, and the graph emerged from them feeding each other.
 
