@@ -1,0 +1,71 @@
+---
+title: Workflow suggestions
+sidebar: Docs
+showTitle: true
+---
+
+> Workflow suggestions are in beta. [Ask us for access](https://posthog.com/questions) if you'd like to try them.
+
+Most workflows are set up once and then left alone. Workflow suggestions close that loop: PostHog reads how a workflow is actually performing, and when a step looks like it's underperforming, it drafts a specific change for you to review — a rewritten subject line, not a note telling you to write one.
+
+Nothing changes on its own. A suggestion opens as a draft on the workflow, and only reaches the people in that workflow when you publish it.
+
+## Turn it on for a workflow
+
+Suggestions are off by default, and you turn them on one workflow at a time.
+
+1. Open the workflow.
+2. Turn on **Suggest improvements** above the workflow tabs.
+
+Only the workflows you turn on are read. Turning it off again stops new suggestions and leaves any you already have, so you can still act on them.
+
+Turning suggestions on or off is recorded in the workflow's **History** tab, along with who did it.
+
+## What you get
+
+A suggestion appears above the workflow's tabs with:
+
+- **What it proposes** — the concrete change, with the current and proposed content.
+- **Why** — the metric behind it, the target it's under, and the time window.
+- **How much data it's based on** — the number of sends behind the rate. A suggestion drawn from too little data is labelled rather than presented as a finding.
+- **The counter-metrics** — complaint and bounce rates over the same window, so an improvement that costs you deliverability is visible before you accept it.
+
+You can then:
+
+- **Approve as draft** — stages the change on the workflow. The live version keeps running until you publish.
+- **Reject** — the suggestion stays in the workflow's history as rejected, and that step isn't suggested for again on the same grounds.
+
+## After you publish
+
+Once you publish a change that came from a suggestion, the workflow page shows what it did: the target metric and its counter-metrics for the version before the change and the version after, each with the number of sends behind it.
+
+This compares two time windows, not two audiences, so read it as a signal worth looking into rather than proof. If you need a controlled comparison, run an experiment.
+
+## What gets looked at
+
+Today suggestions cover email steps, and read delivery metrics: sends, opens, clicks, bounces, and complaints. Open and click rates are measured against sends that had tracking on, since a send with tracking off can never record an open.
+
+A step is left alone when:
+
+- It has too few sends to say anything.
+- Its bounce or complaint rate is high — that's a deliverability problem, and rewriting copy makes it worse rather than better.
+- Most of its sends have open and click tracking off, which makes the open rate unreadable rather than bad.
+- Its numbers are already at or above target.
+
+## Frequently asked questions
+
+### Can a suggestion change my workflow without me?
+
+No. Approving a suggestion stages it as a draft, and publishing that draft is a separate, explicit step — the same one you use for your own edits. There's no setting that lets a suggestion go live on its own.
+
+### Does this send emails to my users?
+
+No. Suggestions read metrics that already exist and propose changes. Nothing is sent as part of making a suggestion.
+
+### Which workflows does it read?
+
+Only the ones you turned **Suggest improvements** on for. A workflow you never turned on is never read.
+
+### Can I use it for SMS, push, or webhook steps?
+
+Not yet. Suggestions cover email steps today.
