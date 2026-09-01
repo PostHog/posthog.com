@@ -48,6 +48,10 @@ TODO before publish:
   brief for 2026-09-01" (repo digest), "docs(mcp): document reading PostHog AI
   chat threads" (docs sync), "feat(signals): Show CI status on inbox report
   list PR pills" (github source, issues loop)
+- LoopGame (src/components/LoopGame): not yet tested in a browser - run the
+  dev server and play it before PR. The "my best is 94" p.s. is a placeholder,
+  replace with Andy's real score. PR will need before/after screenshots plus a
+  GIF of the game (it moves), narrow + wide, light + dark.
 */}
 
 ![Hamel Husain's post on X: "Loop Engineering Is Dead. Enter Graph Engineering" - followed by the Michael Jordan "Stop it." meme](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/hamel_loops_graphs_tweet_64bed5ca01.jpg)
@@ -225,3 +229,11 @@ So my answer to the title: it's loops all the way down, and a graph when you sta
 Everything above runs on [scouts](/docs/self-driving/scouts), which ship with [Self-driving](/docs/self-driving) in PostHog. The loops we described are custom scouts we wrote for our own project – you can write yours the same way: point your agent at the `authoring-signals-scouts` skill, describe the surface you wish someone was watching, and put yourself wherever in the loop you want to sit.
 
 The [What is a Scout?](/blog/what-is-a-scout) deep dive covers the machinery – the harness, the scratchpad, the signal pipeline – if you want to go a level down.
+
+## Okay, now *you* draw a loop
+
+Three thousand words of me insisting loops are still a thing. Time to hold up your end: draw one. One continuous stroke, close it where you started. You get points for accuracy – and if you score low enough, well, you've drawn a graph, and the meme claims another victim.
+
+<LoopGame />
+
+(p.s. my best is 94. The scouts remain undefeated.)

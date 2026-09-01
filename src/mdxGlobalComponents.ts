@@ -23,6 +23,7 @@ import { FormulaScreenshot } from './components/FormulaScreenshot'
 import { GDPRForm } from './components/GDPRForm'
 import ImageSlider from './components/ImageSlider'
 import Link from './components/Link'
+import LoopGame from './components/LoopGame'
 import OSButton from './components/OSButton'
 import { OSQuote } from './components/OSQuote'
 import { OverflowXSection } from './components/OverflowXSection'
@@ -64,6 +65,7 @@ export const shortcodes = {
     Quote,
     OSButton,
     Link,
+    LoopGame,
     PrivateLink,
     ProductChangelog,
     ProductScreenshot,
