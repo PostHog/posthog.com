@@ -33,17 +33,16 @@ TODO before publish:
 - featuredImage (Cloudinary) + featuredImageType: full
 - Set the real publish date. NB: a future date means NO page gets built
   (createPages filters isFuture) - keep it <= today while iterating locally.
-- Real run artifacts for each loop (like the <details> traces in the scout post):
-  - agent feedback: one feedback event -> report -> PR chain
-  - mcp struggles: a real friction finding from a random walk
-  - skill issues: a real lint/dogfood finding
-  - scratchpad miner: a real "silent workaround" it turned into a bug report
-  - inbox product ideas: a real distilled idea + the sources it pulled from
+- DONE 2026-09-01: every loop now has a real <details> example from Andy's
+  assigned inbox reports (last 14 days), with public GitHub links in the text
+  and inbox report IDs in comments. Loop 4's example is the emergent-taxonomy
+  lane, not a silent-workaround one - swap in a silent-workaround find if a
+  good one lands before publish.
 - Maybe a short video walkthrough of one loop (worked well last time)
 - Decide: keep "honorable mentions" table or cut for length
 - Link to changelog/newsletter coverage if the auto-merged PR story ships there
-- Loop 6 (issues -> PRs) needs a real issue -> report -> PR trace; confirm the
-  auto-merge anecdote with Alex before using it
+- Confirm the auto-merge anecdote with Alex before using it (TODO sits in the
+  Loop 6 details block)
 - Rapid-fire table: consider trimming to 3 rows if the post runs long; the
   personal-github one is the most cuttable
 - Recent inbox evidence worth mining for artifacts: "chore(signals): Product
@@ -97,7 +96,21 @@ Then the part that makes it a loop rather than a funnel: the scout **checks back
 
 **Loop or graph?** Loop. Agents complain → scout distills → report → PR → agents stop complaining (verified). It eats its own output.
 
-<!--TODO: real end-to-end artifact, like the sync_frequency trace in the scout post-->
+<details>
+
+<summary>A real one, from this week: <strong>the fix that didn't ship</strong></summary>
+
+On September 1st, three separate organizations filed agent feedback within 33 minutes of each other: the virtual traffic properties that `read-data-schema` advertises get warned about or rejected by `execute-sql`. One agent's checkout analysis returned zero purchases after applying a bot filter; another couldn't trust its bot exclusion at all.
+
+The scout's finding wasn't "this is broken" – it was "this is broken *again*":
+
+> Virtual traffic filters still fail for 3 organizations, **and the prior fix closed without merging.** The prior virtual traffic taxonomy report is suppressed. Its implementation PR [#69285](https://github.com/PostHog/posthog/pull/69285) closed without merging.
+
+It had reported this defect before, watched a fix PR get opened, and – because it checks back on what it believes got fixed – noticed that PR died without merging. So it re-emitted, citing its own earlier report as evidence. The new report went out as immediately actionable and [PR #92104](https://github.com/PostHog/posthog/pull/92104) picked it up.
+
+<!-- inbox ref: 01a05b3f-aa00-766b-ac56-f6b9527f58d0 -->
+
+</details>
 
 ## Loop 2: The MCP struggles loop
 
@@ -113,7 +126,19 @@ The result: MCP improvements grounded in an agent *actually exercising the thing
 
 **Loop or graph?** Loop, with a twist – the thing being tested and the thing doing the testing are the same product. Draw that honestly and you get a cycle.
 
-<!--TODO: real finding from a recent random walk-->
+<details>
+
+<summary>A real one, from this week: <strong>the schema that argues with its own validator</strong></summary>
+
+On a September 1st walk, the scout followed the discipline into LLM traces: read the tool's schema, then call it exactly as documented. The schema for `query-llm-traces-list` declares its discriminator as `kind: "TraceQuery"`. The call failed:
+
+> A bounded call using that documented value failed validation with: `parameter "kind": Invalid input: expected "TracesQuery"`. Retrying the identical read with `kind: "TracesQuery"` succeeded and returned 100 traces from the last day, confirming a contract mismatch rather than an empty-data condition.
+
+The kicker: this exact defect was fixed and merged before ([PR #70263](https://github.com/PostHog/posthog/pull/70263)) – so this is a regression, caught only because the scout re-walks the surface instead of assuming past fixes hold. The recommended fix included a contract test that calls the published schema value, and [PR #92282](https://github.com/PostHog/posthog/pull/92282) followed.
+
+<!-- inbox ref: 01a05c58-b62f-7a5d-a7c8-f8de663073c9 -->
+
+</details>
 
 ## Loop 3: The skill issues loop
 
@@ -130,7 +155,19 @@ A commit cursor plus a coverage map rotate it across the corpus over runs.
 
 **Loop or graph?** Loop. It's the mcp-struggles loop pointed at a different layer of the same stack. (At this point you may notice the loops themselves are starting to look like a family. Hold that thought.)
 
-<!--TODO: real lint/dogfood finding-->
+<details>
+
+<summary>A real one, from this week: <strong>the skill that disagrees with itself</strong></summary>
+
+Dogfooding `setting-up-a-data-warehouse-source`, the scout hit a contradiction a human reviewer had read past who knows how many times:
+
+> The recommended one-step flow says `All discovered tables are enabled` and creates the source in one call. The same skill later says `Don't auto-select them all`, requires presenting row counts and relevance, and tells the reader to let the user opt in explicitly before creating.
+
+Both policies, one skill. An agent following the first reading against a large database creates every discovered table and the sync bill that comes with it. The scout's report doesn't pick a side – it asks us to: choose one policy, state it consistently, and if auto-enabling is intentional, call out the cost tradeoff before the create step.
+
+<!-- inbox ref: 01a050dc-4f18-72e4-ad2c-c12091118fb9 -->
+
+</details>
 
 ## Loop 4: The scratchpad miner loop
 
@@ -146,7 +183,21 @@ Each silent workaround is a bug report we never received, recoverable from the f
 
 **Loop or graph?** Graph, honestly. A scout that reads the memory of every other scout, including its own, is not a tidy circle. It's the fleet observing itself.
 
-<!--TODO: real silent-workaround finding -> bug it surfaced-->
+<details>
+
+<summary>A real one, from this week: <strong>the vocabulary nobody designed</strong></summary>
+
+The miner's recent reports are a study in emergent convention. In one week it found that:
+
+- **14 distinct scout skills**, across 4 teams, independently invented a `blocked:` scratchpad prefix (44 entries) for work that can't safely proceed,
+- **12 skills** converged on `cursor:` for scan watermarks,
+- **28 skills** converged on `catalog:` for governed metric decisions –
+
+none of which exist in the documented scratchpad taxonomy. Nobody told the fleet to do this. Separate skills, written by separate people for separate jobs, kept reaching for the same words – and the miner's report is essentially "the fleet has voted with its feet; make it official." Counting convergence in distinct *skills* (never teams) is what keeps a canonical scout seeded onto hundreds of teams from stuffing the ballot.
+
+<!-- inbox refs: 01a04cc2 (blocked), 01a051e9 (cursor), 01a047a5 (catalog) -->
+
+</details>
 
 ## Loop 5: The inbox product ideas loop
 
@@ -166,7 +217,21 @@ And then it stops. These reports need team discussion, prioritization, and produ
 
 **Loop or graph?** Neither closes without humans. Call it a graph where several of the nodes are us.
 
-<!--TODO: real distilled idea + its sources-->
+<details>
+
+<summary>A real one, from this week: <strong>three voices asking for the same loop</strong></summary>
+
+A community user asked in Discord for a Linear issue to become the starting signal for the full research → report → PR loop. The scout didn't just relay the ask – it assembled the case:
+
+> The same user said they built a scout that reads specially labeled Linear issues and emits reports. A self-driving team member independently said they use the same custom-scout pattern for internal GitHub issues.
+
+One request, one user-built workaround proving the demand, one internal corroboration – distilled into a single decision-shaped report: should external issues get a first-class "research as a signal" action, or a documented recipe? That's a product call, so the report stops there and waits for us.
+
+(You may notice the internal corroboration is *this post's Loop 6*. The loops keep finding each other.)
+
+<!-- inbox ref: 01a03c26-5434-7436-a686-0c39f6b3f435 -->
+
+</details>
 
 ## Loop 6: The issues → PRs loop
 
@@ -185,10 +250,23 @@ The dedupe is part of the loop too: before drafting anything, the scout checks t
 
 So the human effort moved to the two ends – a better spec going in, a real sense-check coming out – and the boring middle belongs to the agents. That's what lets me scale horizontally: my ceiling is no longer how many screens I can watch, it's how many good specs I can write.
 
-<!--TODO: real issue -> report -> PR -> merged example. Also consider the
-    auto-merge anecdote from Alex (first PR written, reviewed, approved, and
-    merged with zero humans - then we turned that off): great line, confirm
-    with Alex/team before publishing.-->
+<details>
+
+<summary>A real one, from this week: <strong>both valves, one morning</strong></summary>
+
+On the morning of September 1st, one hourly sweep exercised both ends of the loop:
+
+- **The fast path.** [Issue #92447](https://github.com/PostHog/posthog/issues/92447) – a scoped Signals dataset change, intended behavior spelled out – was judged ready at 12:42, filed as immediately actionable, and [draft PR #92455](https://github.com/PostHog/posthog/pull/92455) opened. The report was reviewed and resolved by 15:45. Spec in the morning, QA in the afternoon, no terminal-watching in between.
+- **The human valve.** The same sweep picked up [issue #91700](https://github.com/PostHog/posthog/issues/91700) – an alerts change I'd written up myself, adding an evaluation delay for laggy warehouse metrics. The scout judged the implementation clear but the *public behavior* undecided (how the delay interacts with ongoing intervals, what the notification says), and filed it as requires-human-input instead of drafting a PR. Which is exactly where I want that one held.
+
+Same loop, same hour, opposite outcomes – decided by the quality and completeness of the spec going in.
+
+<!-- inbox refs: 01a05cfe (92447 -> PR 92455), 01a05875-31cb (91700 held) -->
+<!--TODO: consider the auto-merge anecdote from Alex (first PR written, reviewed,
+    approved, and merged with zero humans - then we turned that off): great line,
+    confirm with Alex/team before publishing.-->
+
+</details>
 
 **Where I sit:** at both ends, on purpose. Spec quality in, merge judgment out.
 
