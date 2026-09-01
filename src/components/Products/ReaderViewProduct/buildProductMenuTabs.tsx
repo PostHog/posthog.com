@@ -2,9 +2,8 @@ import React, { useMemo } from 'react'
 import { IconBook, IconGraduationCap, IconPiggyBank, IconPresent } from '@posthog/icons'
 import { TreeMenu } from 'components/TreeMenu'
 import Link from 'components/Link'
-import { learnChapterPath } from 'components/PocketGuides/LearnSurface'
 import { DEFAULT_LEARN_PLACEMENT, type LearnPlacement } from './learnPlacement'
-import { useBookPages } from 'components/PocketGuides/bookModel'
+import { learnChapterPath, useBookPages } from 'components/PocketGuides/bookModel'
 import usePlatformList from 'hooks/docs/usePlatformList'
 import type { MenuTab } from 'components/ReaderView'
 import { docsMenu } from '../../../navs'
@@ -179,7 +178,7 @@ interface BuildProductMenuTabsArgs {
     navStyle?: 'grouped' | 'listed'
 }
 
-const surfaceBasePath = (productSlug: string, surface: ProductSurface): string => {
+export const surfaceBasePath = (productSlug: string, surface: ProductSurface): string => {
     if (surface === 'pricing') return `/${productSlug}/pricing`
     // Under /docs so switching to Learn never leaves the docs sidebar.
     if (surface === 'learn') return `/docs/${productSlug}/learn`

@@ -4,20 +4,10 @@ import { graphql, useStaticQuery } from 'gatsby'
 import { MDXRenderer } from 'gatsby-plugin-mdx'
 
 import { EntryProvider, bookMdxComponents } from './bookComponents'
-import { BookPageEntry, FONT_SIZES, normalizeUrl, useBookPages } from './bookModel'
+import { FONT_SIZES, learnChapterSlug, normalizeUrl, useBookPages } from './bookModel'
 
 /** `BookReader`'s starting size, from the book's own scale so they cannot drift. */
 const BOOK_BASE_FONT_SIZE = FONT_SIZES[0]
-
-/** A chapter's url segment. The front matter has none: it is the index. */
-export function learnChapterSlug(entry: BookPageEntry): string {
-    return entry.order === 0 ? '' : normalizeUrl(entry.url).split('/').pop() || ''
-}
-
-export function learnChapterPath(basePath: string, entry: BookPageEntry): string {
-    const slug = learnChapterSlug(entry)
-    return slug ? `${basePath}/${slug}` : basePath
-}
 
 interface LearnBodyNode {
     body: string
@@ -53,10 +43,12 @@ interface LearnSurfaceProps {
     volumeId: string
     /** Empty or unknown falls back to the front matter. */
     chapter?: string
+    /** This surface's route root, so in-page links stay in the Learn tab. */
+    basePath: string
 }
 
 /** One chapter of a volume, rendered in the docs reader. */
-export default function LearnSurface({ volumeId, chapter }: LearnSurfaceProps): JSX.Element | null {
+export default function LearnSurface({ volumeId, chapter, basePath }: LearnSurfaceProps): JSX.Element | null {
     const pages = useBookPages(volumeId)
     const bodies = useBookBodies()
 
@@ -76,7 +68,7 @@ export default function LearnSurface({ volumeId, chapter }: LearnSurfaceProps): 
     return (
         // `not-prose`: the book styles its own. `!p-0`: the docs column already pads.
         <div className="not-prose @container [&>div]:!p-0" style={{ fontSize: BOOK_BASE_FONT_SIZE }}>
-            <EntryProvider value={{ entry, pages }}>
+            <EntryProvider value={{ entry, pages, basePath }}>
                 <MDXProvider components={bookMdxComponents}>
                     <MDXRenderer>{body}</MDXRenderer>
                 </MDXProvider>

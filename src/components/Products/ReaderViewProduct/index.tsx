@@ -11,7 +11,7 @@ import buildProductMenuTabs, { type ProductSurface } from './buildProductMenuTab
 import ProductSwitcher from './ProductSwitcher'
 import { templateRegistry } from './templates'
 
-export { default as buildProductMenuTabs } from './buildProductMenuTabs'
+export { default as buildProductMenuTabs, surfaceBasePath } from './buildProductMenuTabs'
 export type { ProductSurface } from './buildProductMenuTabs'
 export { default as ProductNav } from './ProductNav'
 export { default as ProductSwitcher } from './ProductSwitcher'

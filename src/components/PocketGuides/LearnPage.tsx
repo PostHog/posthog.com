@@ -1,7 +1,7 @@
 import React, { useRef } from 'react'
 import { useLocation } from '@reach/router'
 
-import { ProductSwitcher, buildProductMenuTabs } from 'components/Products/ReaderViewProduct'
+import { ProductSwitcher, buildProductMenuTabs, surfaceBasePath } from 'components/Products/ReaderViewProduct'
 import ReaderView from 'components/ReaderView'
 import SEO from 'components/seo'
 import useProduct from 'hooks/useProduct'
@@ -46,7 +46,13 @@ export default function LearnPage({ productHandle, chapter, title, description }
                 productSelect={<ProductSwitcher activeHandle={productHandle} />}
             >
                 <article ref={contentRef}>
-                    {volumeId ? <LearnSurface volumeId={volumeId} chapter={chapter} /> : null}
+                    {volumeId ? (
+                        <LearnSurface
+                            volumeId={volumeId}
+                            chapter={chapter}
+                            basePath={surfaceBasePath(productData.slug, 'learn')}
+                        />
+                    ) : null}
                 </article>
             </ReaderView>
         </>
