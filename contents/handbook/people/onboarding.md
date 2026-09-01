@@ -280,10 +280,12 @@ We encourage you to join and create channels focused around different types of h
 -   `#cycling`
 -   `#listening-to`
 -   `#design-inspiration`
+-   `#skiing`
 
 ### Location specific channels
 
 -   `#london`
 -   `#germany`
 -   `#sf-bay-area`
+-   `#barcelona`
     etc.
