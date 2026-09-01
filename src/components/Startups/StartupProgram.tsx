@@ -404,13 +404,23 @@ const faqItems = [
         ),
     },
     {
-        trigger: 'What level of customer support do I get?',
+        trigger: 'What level of customer support do I get? Do I get a dedicated account manager?',
         content: (
             <p>
                 PostHog is run by a small team and, as such, we're only able to offer support to paying customers.
                 Organizations which are part of our startup plan are therefore not eligible for high priority customer
-                support, and only qualify for normal priority and community support. This is still the case even if you
-                apply your credits towards a platform package.
+                support, and only qualify for normal priority and community support. You also don't get a dedicated
+                account manager, customer success manager, or sales contact. This is still the case even if you apply
+                your credits towards a platform package, such as the enterprise add-on. If you want one-to-one help
+                getting set up, you can{' '}
+                <Link
+                    to="/merch?product=30-min-onboarding-consultation"
+                    state={{ newWindow: true }}
+                    className="underline font-semibold"
+                >
+                    purchase a 30-minute onboarding call with our team
+                </Link>
+                .
             </p>
         ),
     },
