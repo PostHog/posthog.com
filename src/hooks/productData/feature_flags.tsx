@@ -323,12 +323,12 @@ export const featureFlags = {
             {
                 name: 'Optimizely',
                 key: 'optimizely',
-                link: '/blog/posthog-vs-optimizely',
+                link: '/compare/posthog-vs-optimizely',
             },
             {
                 name: 'LaunchDarkly',
                 key: 'launchdarkly',
-                link: '/blog/posthog-vs-launchdarkly',
+                link: '/compare/posthog-vs-launchdarkly',
             },
             {
                 name: 'Flagsmith',
@@ -337,12 +337,12 @@ export const featureFlags = {
             {
                 name: 'GrowthBook',
                 key: 'growthbook',
-                link: '/blog/posthog-vs-growthbook',
+                link: '/compare/posthog-vs-growthbook',
             },
             {
                 name: 'Statsig',
                 key: 'statsig',
-                link: '/blog/posthog-vs-statsig',
+                link: '/compare/posthog-vs-statsig',
             },
             {
                 name: 'PostHog',

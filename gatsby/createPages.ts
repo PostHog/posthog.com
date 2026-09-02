@@ -313,6 +313,28 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
                     }
                 }
             }
+            comparePosts: allMdx(
+                filter: {
+                    isFuture: { eq: false }
+                    frontmatter: { date: { ne: null } }
+                    fields: { slug: { regex: "/^/compare/" } }
+                }
+            ) {
+                nodes {
+                    id
+                    headings {
+                        depth
+                        value
+                    }
+                    fields {
+                        slug
+                    }
+                    frontmatter {
+                        category
+                        tags
+                    }
+                }
+            }
             libraryArticles: allMdx(
                 filter: {
                     isFuture: { eq: false }
@@ -856,6 +878,22 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
         })
     })
 
+    result.data.comparePosts.nodes.forEach((node) => {
+        const { slug } = node.fields
+        const tableOfContents = node.headings && formatToc(node.headings)
+        createPage({
+            path: replacePath(slug),
+            component: BlogPostTemplate,
+            context: {
+                id: node.id,
+                tableOfContents,
+                slug,
+                post: true,
+                article: true,
+            },
+        })
+    })
+
     result.data.libraryArticles.nodes.forEach((node) => {
         const { slug } = node.fields
         const tableOfContents = node.headings && formatToc(node.headings)
@@ -1135,17 +1173,14 @@ function createSdkReferencePages({
         isLatestVersion(node.version) ? node.referenceId : node.id
 
     // Each row crosslinks against its own types, so a versioned page describes that version.
-    const typesByRow = typeNodes.reduce(
-        (acc, node) => {
-            acc[node.id] = (node.types ?? [])
-                .filter(typeHasPage)
-                .map(({ name }: { name: string }) => name)
-                // A type with no usable name can't be linked to, so keep it out of the allowlist.
-                .filter((name: string) => name && name !== 'null')
-            return acc
-        },
-        {} as Record<string, string[]>
-    )
+    const typesByRow = typeNodes.reduce((acc, node) => {
+        acc[node.id] = (node.types ?? [])
+            .filter(typeHasPage)
+            .map(({ name }: { name: string }) => name)
+            // A type with no usable name can't be linked to, so keep it out of the allowlist.
+            .filter((name: string) => name && name !== 'null')
+        return acc
+    }, {} as Record<string, string[]>)
 
     // Latest-only builds leave the version picker pointing at pages that don't exist — see the
     // note above `sdkVersions` in src/templates/sdk/SdkReference.tsx.

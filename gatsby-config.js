@@ -269,8 +269,8 @@ module.exports = {
                     if (path === '/') {
                         priority = 1.0
                         changefreq = 'monthly'
-                    } else if (path.includes('blog')) {
-                        if (path === '/blog') {
+                    } else if (path.includes('blog') || path.includes('compare')) {
+                        if (path === '/blog' || path === '/compare') {
                             changefreq = 'weekly'
                         } else {
                             changefreq = 'yearly'

@@ -14,31 +14,31 @@ const companies = {
         comparisonURL: '/blog/posthog-vs-mixpanel',
     },
     Heap: {
-        comparisonURL: '/blog/posthog-vs-heap',
+        comparisonURL: '/compare/posthog-vs-heap',
     },
     FullStory: {
-        comparisonURL: '/blog/posthog-vs-fullstory',
+        comparisonURL: '/compare/posthog-vs-fullstory',
     },
     GA4: {
         comparisonURL: '/blog/posthog-vs-ga4',
     },
     Hotjar: {
-        comparisonURL: '/blog/posthog-vs-hotjar',
+        comparisonURL: '/compare/posthog-vs-hotjar',
     },
     Optimizely: {
-        comparisonURL: '/blog/posthog-vs-optimizely',
+        comparisonURL: '/compare/posthog-vs-optimizely',
     },
     LaunchDarkly: {
-        comparisonURL: '/blog/posthog-vs-launchdarkly',
+        comparisonURL: '/compare/posthog-vs-launchdarkly',
     },
     Pendo: {
-        comparisonURL: '/blog/posthog-vs-pendo',
+        comparisonURL: '/compare/posthog-vs-pendo',
     },
     Matomo: {
-        comparisonURL: '/blog/posthog-vs-matomo',
+        comparisonURL: '/compare/posthog-vs-matomo',
     },
     LogRocket: {
-        comparisonURL: '/blog/posthog-vs-logrocket',
+        comparisonURL: '/compare/posthog-vs-logrocket',
     },
     Sentry: {
         comparisonURL: '/blog/posthog-vs-sentry',
@@ -50,7 +50,7 @@ const companies = {
         comparisonURL: '',
     },
     GrowthBook: {
-        comparisonURL: '/blog/posthog-vs-growthbook',
+        comparisonURL: '/compare/posthog-vs-growthbook',
     },
     Sprig: {
         comparisonURL: '',

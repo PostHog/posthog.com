@@ -221,6 +221,298 @@
     ],
     "redirects": [
         {
+            "source": "/blog/posthog-vs-fathom",
+            "destination": "/compare/posthog-vs-fathom"
+        },
+        {
+            "source": "/blog/posthog-vs-fullstory",
+            "destination": "/compare/posthog-vs-fullstory"
+        },
+        {
+            "source": "/blog/posthog-vs-growthbook",
+            "destination": "/compare/posthog-vs-growthbook"
+        },
+        {
+            "source": "/blog/posthog-vs-heap",
+            "destination": "/compare/posthog-vs-heap"
+        },
+        {
+            "source": "/blog/posthog-vs-hotjar",
+            "destination": "/compare/posthog-vs-hotjar"
+        },
+        {
+            "source": "/blog/posthog-vs-langfuse",
+            "destination": "/compare/posthog-vs-langfuse"
+        },
+        {
+            "source": "/blog/posthog-vs-launchdarkly",
+            "destination": "/compare/posthog-vs-launchdarkly"
+        },
+        {
+            "source": "/blog/posthog-vs-logrocket",
+            "destination": "/compare/posthog-vs-logrocket"
+        },
+        {
+            "source": "/blog/posthog-vs-matomo",
+            "destination": "/compare/posthog-vs-matomo"
+        },
+        {
+            "source": "/blog/posthog-vs-optimizely",
+            "destination": "/compare/posthog-vs-optimizely"
+        },
+        {
+            "source": "/blog/posthog-vs-pendo",
+            "destination": "/compare/posthog-vs-pendo"
+        },
+        {
+            "source": "/blog/posthog-vs-plausible",
+            "destination": "/compare/posthog-vs-plausible"
+        },
+        {
+            "source": "/blog/posthog-vs-statsig",
+            "destination": "/compare/posthog-vs-statsig"
+        },
+        {
+            "source": "/blog/best-activecampaign-alternatives",
+            "destination": "/compare/best-activecampaign-alternatives"
+        },
+        {
+            "source": "/blog/best-adobe-analytics-alternatives",
+            "destination": "/compare/best-adobe-analytics-alternatives"
+        },
+        {
+            "source": "/blog/best-amplitude-alternatives",
+            "destination": "/compare/best-amplitude-alternatives"
+        },
+        {
+            "source": "/blog/best-braintrust-alternatives",
+            "destination": "/compare/best-braintrust-alternatives"
+        },
+        {
+            "source": "/blog/best-contentsquare-alternatives",
+            "destination": "/compare/best-contentsquare-alternatives"
+        },
+        {
+            "source": "/blog/best-datadog-alternatives",
+            "destination": "/compare/best-datadog-alternatives"
+        },
+        {
+            "source": "/blog/best-eppo-alternatives",
+            "destination": "/compare/best-eppo-alternatives"
+        },
+        {
+            "source": "/blog/best-fathom-alternatives",
+            "destination": "/compare/best-fathom-alternatives"
+        },
+        {
+            "source": "/blog/best-flagsmith-alternatives",
+            "destination": "/compare/best-flagsmith-alternatives"
+        },
+        {
+            "source": "/blog/best-fullstory-alternatives",
+            "destination": "/compare/best-fullstory-alternatives"
+        },
+        {
+            "source": "/blog/best-grafana-loki-alternatives",
+            "destination": "/compare/best-grafana-loki-alternatives"
+        },
+        {
+            "source": "/blog/best-growthbook-alternatives",
+            "destination": "/compare/best-growthbook-alternatives"
+        },
+        {
+            "source": "/blog/best-heap-alternatives",
+            "destination": "/compare/best-heap-alternatives"
+        },
+        {
+            "source": "/blog/best-helicone-alternatives",
+            "destination": "/compare/best-helicone-alternatives"
+        },
+        {
+            "source": "/blog/best-hotjar-alternatives",
+            "destination": "/compare/best-hotjar-alternatives"
+        },
+        {
+            "source": "/blog/best-langfuse-alternatives",
+            "destination": "/compare/best-langfuse-alternatives"
+        },
+        {
+            "source": "/blog/best-langsmith-alternatives",
+            "destination": "/compare/best-langsmith-alternatives"
+        },
+        {
+            "source": "/blog/best-launchdarkly-alternatives",
+            "destination": "/compare/best-launchdarkly-alternatives"
+        },
+        {
+            "source": "/blog/best-logrocket-alternatives",
+            "destination": "/compare/best-logrocket-alternatives"
+        },
+        {
+            "source": "/blog/best-matomo-alternatives",
+            "destination": "/compare/best-matomo-alternatives"
+        },
+        {
+            "source": "/blog/best-mixpanel-alternatives",
+            "destination": "/compare/best-mixpanel-alternatives"
+        },
+        {
+            "source": "/blog/best-mouseflow-alternatives",
+            "destination": "/compare/best-mouseflow-alternatives"
+        },
+        {
+            "source": "/blog/best-optimizely-alternatives",
+            "destination": "/compare/best-optimizely-alternatives"
+        },
+        {
+            "source": "/blog/best-pendo-alternatives",
+            "destination": "/compare/best-pendo-alternatives"
+        },
+        {
+            "source": "/blog/best-plausible-alternatives",
+            "destination": "/compare/best-plausible-alternatives"
+        },
+        {
+            "source": "/blog/best-rollbar-alternatives",
+            "destination": "/compare/best-rollbar-alternatives"
+        },
+        {
+            "source": "/blog/best-split-alternatives",
+            "destination": "/compare/best-split-alternatives"
+        },
+        {
+            "source": "/blog/best-splunk-alternatives",
+            "destination": "/compare/best-splunk-alternatives"
+        },
+        {
+            "source": "/blog/best-sprig-alternatives",
+            "destination": "/compare/best-sprig-alternatives"
+        },
+        {
+            "source": "/blog/best-statsig-alternatives",
+            "destination": "/compare/best-statsig-alternatives"
+        },
+        {
+            "source": "/blog/best-survicate-alternatives",
+            "destination": "/compare/best-survicate-alternatives"
+        },
+        {
+            "source": "/blog/best-userpilot-alternatives",
+            "destination": "/compare/best-userpilot-alternatives"
+        },
+        {
+            "source": "/blog/best-uxcam-alternatives",
+            "destination": "/compare/best-uxcam-alternatives"
+        },
+        {
+            "source": "/blog/best-vwo-alternatives",
+            "destination": "/compare/best-vwo-alternatives"
+        },
+        {
+            "source": "/blog/ga4-alternatives",
+            "destination": "/compare/ga4-alternatives"
+        },
+        {
+            "source": "/blog/hotjar-for-mobile-ios-android-react-native-flutter",
+            "destination": "/compare/hotjar-for-mobile-ios-android-react-native-flutter"
+        },
+        {
+            "source": "/blog/smartlook-alternatives",
+            "destination": "/compare/smartlook-alternatives"
+        },
+        {
+            "source": "/blog/best-ai-observability-tools",
+            "destination": "/compare/best-ai-observability-tools"
+        },
+        {
+            "source": "/blog/best-analytics-stack-for-vibe-coded-apps",
+            "destination": "/compare/best-analytics-stack-for-vibe-coded-apps"
+        },
+        {
+            "source": "/blog/best-customer-data-platforms-for-developers",
+            "destination": "/compare/best-customer-data-platforms-for-developers"
+        },
+        {
+            "source": "/blog/best-error-tracking-tools",
+            "destination": "/compare/best-error-tracking-tools"
+        },
+        {
+            "source": "/blog/best-gdpr-compliant-analytics-tools",
+            "destination": "/compare/best-gdpr-compliant-analytics-tools"
+        },
+        {
+            "source": "/blog/best-hipaa-compliant-ab-testing-tools",
+            "destination": "/compare/best-hipaa-compliant-ab-testing-tools"
+        },
+        {
+            "source": "/blog/best-hipaa-compliant-analytics-tools",
+            "destination": "/compare/best-hipaa-compliant-analytics-tools"
+        },
+        {
+            "source": "/blog/best-inapp-survey-tools",
+            "destination": "/compare/best-inapp-survey-tools"
+        },
+        {
+            "source": "/blog/best-log-monitoring-tools",
+            "destination": "/compare/best-log-monitoring-tools"
+        },
+        {
+            "source": "/blog/best-mcp-servers-for-startups",
+            "destination": "/compare/best-mcp-servers-for-startups"
+        },
+        {
+            "source": "/blog/best-mobile-app-ab-testing-tools",
+            "destination": "/compare/best-mobile-app-ab-testing-tools"
+        },
+        {
+            "source": "/blog/best-mobile-app-session-replay-tools",
+            "destination": "/compare/best-mobile-app-session-replay-tools"
+        },
+        {
+            "source": "/blog/best-open-source-feature-flag-tools",
+            "destination": "/compare/best-open-source-feature-flag-tools"
+        },
+        {
+            "source": "/blog/best-product-analytics-tools-for-startups",
+            "destination": "/compare/best-product-analytics-tools-for-startups"
+        },
+        {
+            "source": "/blog/best-real-time-analytics-platforms",
+            "destination": "/compare/best-real-time-analytics-platforms"
+        },
+        {
+            "source": "/blog/best-session-replay-tools",
+            "destination": "/compare/best-session-replay-tools"
+        },
+        {
+            "source": "/blog/best-web-analytics-tools",
+            "destination": "/compare/best-web-analytics-tools"
+        },
+        {
+            "source": "/blog/cheapest-ai-observability-tools",
+            "destination": "/compare/cheapest-ai-observability-tools"
+        },
+        {
+            "source": "/blog/best-web-analytics-tools-for-developers",
+            "destination": "/compare/best-web-analytics-tools-for-developers"
+        },
+        {
+            "source": "/blog/tags/comparisons",
+            "destination": "/compare"
+        },
+        {
+            "source": "/blog/comparisons",
+            "destination": "/compare"
+        },
+        {
+            "source": "/blog/tags/comparisons/:path*",
+            "destination": "/compare"
+        },
+        {
+            "source": "/blog/comparisons/:path*",
+            "destination": "/compare"
+        },
+        {
             "source": "/docs/session-replay/image-bot:ext(\\.md)?",
             "destination": "/docs/ai-research/image-fetcher-bot:ext?",
             "statusCode": 301
@@ -2354,7 +2646,7 @@
         },
         {
             "source": "/blog/categories/comparisons",
-            "destination": "/blog/tags/comparisons"
+            "destination": "/compare"
         },
         {
             "source": "/blog/categories/guides",
@@ -4935,7 +5227,7 @@
         },
         {
             "source": "/blog/posthog-vs-kubit",
-            "destination": "/blog/tags/comparisons"
+            "destination": "/compare"
         },
         {
             "source": "/pricing",

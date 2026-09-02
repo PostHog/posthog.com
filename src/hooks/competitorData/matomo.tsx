@@ -3,7 +3,7 @@ export const matomo = {
     key: 'matomo',
     assets: {
         icon: '/images/competitors/matomo.svg',
-        comparisonArticle: '/blog/posthog-vs-matomo',
+        comparisonArticle: '/compare/posthog-vs-matomo',
     },
     products: {
         product_analytics: {

@@ -437,22 +437,22 @@ export const sessionReplay = {
             {
                 name: 'FullStory',
                 key: 'fullstory',
-                link: '/blog/posthog-vs-fullstory',
+                link: '/compare/posthog-vs-fullstory',
             },
             {
                 name: 'Hotjar',
                 key: 'hotjar',
-                link: '/blog/posthog-vs-hotjar',
+                link: '/compare/posthog-vs-hotjar',
             },
             // {
             //     name: 'Matomo',
             //     key: 'matomo',
-            //     link: '/blog/posthog-vs-matomo',
+            //     link: '/compare/posthog-vs-matomo',
             // },
             {
                 name: 'LogRocket',
                 key: 'logrocket',
-                link: '/blog/posthog-vs-logrocket',
+                link: '/compare/posthog-vs-logrocket',
             },
             {
                 name: 'Clarity',
@@ -461,7 +461,7 @@ export const sessionReplay = {
             {
                 name: 'Statsig',
                 key: 'statsig',
-                link: '/blog/posthog-vs-statsig',
+                link: '/compare/posthog-vs-statsig',
             },
             {
                 name: 'PostHog',

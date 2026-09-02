@@ -52,7 +52,7 @@ That's a lot of [Slack messages](/docs/cdp/destinations/slack), [ad conversions]
 
 To learn more about usage-based pricing beyond free tiers and to calculate potential costs, check out our [pricing page and calculator](/pricing).
 
-*Still exploring CDP alternatives? We compare the tradeoffs in our [guide to the best CDPs for developers.](/blog/best-customer-data-platforms-for-developers)*
+*Still exploring CDP alternatives? We compare the tradeoffs in our [guide to the best CDPs for developers.](/compare/best-customer-data-platforms-for-developers)*
 
 ## What's next?
 

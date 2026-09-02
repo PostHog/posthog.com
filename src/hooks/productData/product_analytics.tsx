@@ -347,17 +347,17 @@ export const productAnalytics = {
             {
                 name: 'Heap',
                 key: 'heap',
-                link: '/blog/posthog-vs-heap',
+                link: '/compare/posthog-vs-heap',
             },
             {
                 name: 'Pendo',
                 key: 'pendo',
-                link: '/blog/posthog-vs-pendo',
+                link: '/compare/posthog-vs-pendo',
             },
             {
                 name: 'Statsig',
                 key: 'statsig',
-                link: '/blog/posthog-vs-statsig',
+                link: '/compare/posthog-vs-statsig',
             },
             {
                 name: 'PostHog',

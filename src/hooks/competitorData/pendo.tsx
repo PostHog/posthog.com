@@ -3,7 +3,7 @@ export const pendo = {
     key: 'pendo',
     assets: {
         icon: '/images/competitors/pendo.svg',
-        comparisonArticle: '/blog/posthog-vs-pendo',
+        comparisonArticle: '/compare/posthog-vs-pendo',
     },
     products: {
         product_analytics: {

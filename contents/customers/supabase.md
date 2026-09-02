@@ -6,7 +6,7 @@ featuredImage: >-
 date: 2025-06-15
 ---
 
-When he joined Supabase’s marketing team, Aleksi Immonen says most of the data he needed was fragmented across a handful of different tools and point solutions. The team used [Plausible](/blog/posthog-vs-plausible) to track website traffic, for example, and internal tools for some of the event tracking.
+When he joined Supabase’s marketing team, Aleksi Immonen says most of the data he needed was fragmented across a handful of different tools and point solutions. The team used [Plausible](/compare/posthog-vs-plausible) to track website traffic, for example, and internal tools for some of the event tracking.
 
 “The result was that it was quite challenging to do even basic attribution or usage-pattern analysis with the data,” says Aleksi. “We were self-hosting Plausible, and we had some data there, but it was quite limited, and the UI was just a little too slow for people to want to use it. So we did basically everything through BigQuery.”
 

@@ -89,7 +89,7 @@ Experiments in PostHog deploy behind a disabled feature flag. No users see it. F
 
 ## So is no-code dead?
 
-No. No-code visual editors ([PostHog toolbar](/docs/experiments/no-code-web-experiments), [VWO](/blog/best-vwo-alternatives), etc.) still work for quick, disposable tests where you don't care about flickering and don't plan to ship the result long-term. But I wouldn't make no-code the primary experimentation strategy. Not when AI code generation lets you run proper, production-quality experiments with the same or less total effort.
+No. No-code visual editors ([PostHog toolbar](/docs/experiments/no-code-web-experiments), [VWO](/compare/best-vwo-alternatives), etc.) still work for quick, disposable tests where you don't care about flickering and don't plan to ship the result long-term. But I wouldn't make no-code the primary experimentation strategy. Not when AI code generation lets you run proper, production-quality experiments with the same or less total effort.
 
 The future is experiments that produce _actual code_, written by AI and reviewed by humans. No DOM injection, no re-render issues, no gap between "the test won" and "we shipped it."
 

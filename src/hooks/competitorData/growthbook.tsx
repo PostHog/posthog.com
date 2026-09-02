@@ -3,7 +3,7 @@ export const growthbook = {
     key: 'growthbook',
     assets: {
         icon: '/images/competitors/growthbook.svg',
-        comparisonArticle: '/blog/posthog-vs-growthbook',
+        comparisonArticle: '/compare/posthog-vs-growthbook',
     },
     products: {
         feature_flags: {

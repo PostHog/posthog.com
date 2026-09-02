@@ -16,7 +16,7 @@ tags:
   - Guides
 ---
 
-With the sunsetting of the Google Analytics Universal Analytics platform and unhappiness with its replacement, Google Analytics 4 (GA4), many are [looking for alternatives](/blog/ga4-alternatives). 
+With the sunsetting of the Google Analytics Universal Analytics platform and unhappiness with its replacement, Google Analytics 4 (GA4), many are [looking for alternatives](/compare/ga4-alternatives). 
 
 We’re biased, but PostHog is a great one. When [compared with Google Analytics](/blog/posthog-vs-ga4), it is:
 

@@ -330,7 +330,7 @@ export const experiments = {
             {
                 name: 'Optimizely',
                 key: 'optimizely',
-                link: '/blog/posthog-vs-optimizely',
+                link: '/compare/posthog-vs-optimizely',
             },
             {
                 name: 'Amplitude',
@@ -340,7 +340,7 @@ export const experiments = {
             // {
             //     name: 'Pendo',
             //     key: 'pendo',
-            //     link: '/blog/posthog-vs-pendo',
+            //     link: '/compare/posthog-vs-pendo',
             // },
             {
                 name: 'VWO',
@@ -349,7 +349,7 @@ export const experiments = {
             {
                 name: 'Statsig',
                 key: 'statsig',
-                link: '/blog/posthog-vs-statsig',
+                link: '/compare/posthog-vs-statsig',
             },
             {
                 name: 'PostHog',

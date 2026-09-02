@@ -620,8 +620,8 @@ ORDER BY pageview_count DESC
 ## Further reading
 
 - [Best mobile app analytics tools](/blog/best-mobile-app-analytics-tools)
-- [The 9 best mobile app A/B testing tools](/blog/best-mobile-app-ab-testing-tools)
-- [7 best session replay tools for mobile apps (iOS & Android)](/blog/best-mobile-app-session-replay-tools)
+- [The 9 best mobile app A/B testing tools](/compare/best-mobile-app-ab-testing-tools)
+- [7 best session replay tools for mobile apps (iOS & Android)](/compare/best-mobile-app-session-replay-tools)
 
 #### Footnotes
 

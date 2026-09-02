@@ -1,0 +1,767 @@
+---
+title: 'The best Splunk alternatives & competitors, compared'
+date: 2026-07-24
+author:
+    - natalia-amorim
+    - rohan-taneja
+rootPage: /compare
+featuredImage: https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/hog_ql.png
+featuredImageType: full
+category: General
+tags:
+    - Alternatives
+seo:
+  metaTitle: 'The best Splunk alternatives & competitors, compared'
+  metaDescription: 'Looking for a Splunk alternative? Compare the best log monitoring and observability tools, including PostHog, Grafana Loki, Datadog, and more.'
+sidebar: Compare
+---
+
+Splunk has been a solid answer to "where do our logs go?" for two decades. It's a vast platform: [log management](/compare/best-log-monitoring-tools), observability, and SIEM (security information and event management) in one engine that scales to petabytes and handles security operations for big enterprises.
+
+In March 2024, it was acquired by Cisco and now sits inside their security and networking portfolio.
+
+If you're shopping for Splunk alternatives, it's usually for one of five reasons:
+
+- **Cost.** Ingest-based pricing runs roughly $100 to $180 per GB per day at list, so six- and seven-figure annual bills are routine.
+- **Complexity.** "Splunk administrator" is a real job with its own certification track (someone to manage indexes, capacity, and licenses). And SPL, its query language, is powerful but proprietary.
+- **Post-Cisco uncertainty.** Renewals might increasingly come with pressure to bundle into wider Cisco contracts.
+- **Cloud-native fit.** Splunk's cloud-native observability lives in a separate product (Splunk Observability Cloud) with its own bill. OTel-first teams often may prefer tools where that's the default instead of an add-on.
+- **Connected debugging.** Some teams want their logs tool next to their [error tracking](/error-tracking) and [product analytics](/product-analytics) solutions, not in a silo.
+
+This post covers the log management observability, application performance monitoring (APM) parts on Splunk's offering, the job most engineers, SREs, and technical founders are shopping for.
+
+*SIEM is a separate purchase, usually a security-team decision, and Splunk is still the benchmark there. Of the tools below, only Elastic competes on that front.*
+
+## 1. PostHog
+
+- **Founded:** 2020
+- **Most similar to:** Better Stack, Grafana Loki
+- **Typical users:** Engineers, full-stack developers, technical founders
+- **Typical customers:** Engineering-led startups and scale-ups
+
+![PostHog Logs search interface](https://res.cloudinary.com/dmukukwp6/image/upload/1_Posthog_9631678a14.png)
+
+### What is PostHog?
+
+PostHog (that's us 👋) is an all-in-one developer platform for building self-driving products. It brings [centralized log monitoring](/logs) and [distributed traces](/docs/distributed-tracing) to the same workspace as your [error tracking](/error-tracking), [AI observability](/ai-observability), [product analytics](/product-analytics), [session replay](/session-replay), [feature flags](/feature-flags), and more, so you can debug user-facing issues without switching between multiple tools.
+
+
+[Looking at an exception](/error-tracking), the surrounding logs are right there. Watching a [session replay](/session-replay), you see what the backend was doing during that exact interaction. You move from a log line to the user's session to the [feature flag](/feature-flags) they were on without switching tools or rebuilding the timeframe by hand.
+
+That breadth is why hundreds of thousands of companies use PostHog, including names like Supabase, Lovable, and ElevenLabs. 
+
+### Key features
+
+- **OpenTelemetry-native:** Logs is a standard OTLP receiver. Send logs with any OpenTelemetry SDK, point it at PostHog with your existing project token, and you're done – no proprietary agent, though SDKs for popular frontend and backend languages exist if you want them. See the [docs](/docs/logs).
+
+- **No query language to learn:** Filter and aggregate by log attributes with sparklines that surface spikes as you go. No SPL, no bespoke DSL, only SQL if you want it.
+
+- **Connected to users and errors:** Browser and backend logs tie to user IDs and [session replays](/session-replay). Logged `$exception` events become issues you can assign, resolve, and alert on, so [error tracking](/error-tracking) is built in.
+
+- **Feeds self-driving mode:** Logs are a signal source for [self-driving](/self-driving) – PostHog watches them alongside errors and sessions, turns problems into researched reports, and opens PRs with the fix.
+
+- **AI investigation:** Natural-language search and summarization via [PostHog AI](/ai), and the [MCP server](/docs/model-context-protocol) lets Cursor, Claude Code, or any MCP client query production logs from your editor.
+
+- **Alerting and cost controls:** Threshold alerts on log volume and patterns routed to Slack or webhooks, plus PII scrubbing, sampling, and level-based filtering to keep ingest (and spend) down.
+
+### How does PostHog compare to Splunk?
+
+<p>
+<ProductComparisonTable
+    competitors={['posthog', 'splunk']}
+    rows={[
+        'platform.pricing.self_serve',
+        'platform.pricing.free_tier',
+        'logs.pricing.predictable_at_scale',
+        'logs.core_logging_and_ingestion.centralized_log_ingestion_search',
+        'logs.search.features.full_text_search',
+        'logs.search.features.no_proprietary_query_language',
+        'logs.core_logging_and_ingestion.native_open_telemetry_ingest',
+        'logs.observability.metrics',
+        'logs.observability.traces',
+        'logs.debugging_integrations.product_analytics_context',
+        'logs.debugging_integrations.built_in_session_replay',
+        'logs.debugging_integrations.built_in_error_tracking',
+        'logs.security_and_compliance.features.siem',
+        'platform.deployment.open_source',
+    ]}
+/>
+</p>
+
+<details>
+<summary>Main differences between PostHog and Splunk</summary>
+
+- Splunk is priced on data volume or workload and usually run by dedicated admins; PostHog Logs is usage-based, self-serve, free to start, and built for engineers.
+- Splunk is queried with SPL; PostHog uses log attributes with no language to learn.
+- Splunk goes deep on SIEM, compliance, and petabyte scale; PostHog ties logs to replays, errors, and product analytics.
+- Splunk shows you the problem; PostHog can also act on it with its [self-driving mode](/self-driving) mode.
+- Splunk is closed source. PostHog is MIT-licensed and open source.
+
+</details>
+
+<details>
+<summary>Main similarities between PostHog and Splunk</summary>
+
+- Both centralize log collection and let you search and analyze logs to find and fix issues.
+- Both support OpenTelemetry – Splunk retrofitted, PostHog as a plain OTLP receiver from the start.
+- Both surface anomalies automatically – Splunk through its ML toolkit, PostHog through log patterns and [scouts](/self-driving).
+
+</details>
+
+### Why do companies use PostHog?
+
+According to [G2 user reviews](https://www.g2.com/products/posthog/reviews), teams choose PostHog because:
+
+- **Debugging context lives together:** Logs, errors, replays, and analytics share one data model, so an investigation doesn't scatter across separate tools and tabs.
+
+- **Adoption is a config change:** Logs ingests OTLP directly, so teams already on OpenTelemetry point it at PostHog instead of re-instrumenting.
+
+- **Pricing is transparent and starts free:** 10GB of logs a month free, then [$0.25/GB](/pricing), with no seats and no sales call. More than 90% of companies use PostHog entirely for free.
+
+> #### Bottom line
+>
+> What Splunk makes hard, PostHog makes default: self-serve instead of a sales cycle, attributes instead of SPL, 10 GB free, and logs connected to the errors, replays, and users they belong to. If your problem is debugging rather than security, PostHog is a great choice.
+
+<WizardCTA />
+
+## 2. Grafana Loki
+
+- **Founded:** 2018
+- **Most similar to:** SigNoz
+- **Typical users:** Platform engineers, SREs, Kubernetes-heavy teams
+- **Typical customers:** Cloud-native orgs already running Prometheus and Grafana
+
+![Grafana Cloud Logs](https://res.cloudinary.com/dmukukwp6/image/upload/2_Grafana_Loki_a681252007.png)
+
+### What is Grafana Loki?
+
+**Grafana Loki** is an open-source log aggregation system from Grafana Labs, licensed AGPLv3 and modeled on Prometheus. 
+
+Its defining choice is to index only a small set of metadata labels per log stream rather than the full text of every line, with the log content itself compressed into cheap object storage like S3. For a Splunk refugee, retaining large log volumes at a fraction of the cost is a strong selling point, but it also means giving up something Splunk users lean on the most. 
+
+There's no arbitrary full-text search across your entire log history: fast queries depend on filtering by label first, and a search across a long time range without good labels means scanning compressed chunks, slowly. Coming from SPL, that's the adjustment to plan for.
+
+Loki also assumes an ecosystem. It's built to sit beside Prometheus and Grafana, sharing label conventions so logs land on the same dashboards as your metrics.
+
+Grafana Cloud offers a managed option with 50 GB of logs free per month and Pro plans from $19/month.
+
+### Key features
+
+- **Label-based indexing:** Indexing labels instead of content is what keeps storage and operating costs low at high volume.
+
+- **LogQL:** A query language modeled on PromQL, so a team already fluent in Prometheus is productive quickly.
+
+- **Object-storage scale:** Logs persist to S3-style storage for durable, horizontally scalable retention.
+
+- **Native Grafana fit:** View logs beside metrics (Mimir) and traces (Tempo) in a stack you may already run.
+
+- **Alerting via the Ruler:** Evaluate LogQL expressions on a schedule and fire alerts through the same Alertmanager your Prometheus setup already uses.
+
+### How does Grafana Loki compare to Splunk?
+
+<p>
+<ProductComparisonTable
+    competitors={['grafana_loki', 'splunk']}
+    rows={[
+        'platform.pricing.self_serve',
+        'platform.pricing.free_tier',
+        'logs.pricing.predictable_at_scale',
+        'logs.core_logging_and_ingestion.centralized_log_ingestion_search',
+        'logs.search.features.full_text_search',
+        'logs.search.features.no_proprietary_query_language',
+        'logs.core_logging_and_ingestion.native_open_telemetry_ingest',
+        'logs.observability.metrics',
+        'logs.observability.traces',
+        'logs.debugging_integrations.product_analytics_context',
+        'logs.debugging_integrations.built_in_session_replay',
+        'logs.debugging_integrations.built_in_error_tracking',
+        'logs.security_and_compliance.features.siem',
+        'platform.deployment.open_source',
+    ]}
+/>
+</p>
+
+<details>
+<summary>Main differences between Grafana Loki and Splunk</summary>
+
+- Loki has no SIEM and no native metrics or traces without the wider Grafana stack.
+- Splunk runs arbitrary full-text queries across your entire log history; Loki needs label filters first.
+- Splunk is a turnkey commercial platform with dedicated support. Running Loki yourself means operating a multi-component distributed system (the price you don't pay in licensing, you pay in ops).
+- Splunk is queried with SPL; Loki uses LogQL, modeled on PromQL – a much shorter climb for Prometheus-fluent teams, but a new language either way.
+
+</details>
+
+<details>
+<summary>Main similarities between Grafana Loki and Splunk</summary>
+
+- Both scale to very large log volumes – Splunk to enterprise petabytes, Loki to multi-tenant retention on object storage.
+- Both offer a managed cloud option on top of self-managed deployments.
+- Both alert on log data.
+
+</details>
+
+### Why do companies use Grafana Loki?
+
+According to G2 user reviews, teams pick Loki because:
+
+- **It's cheap at scale:** Label-only indexing plus object storage make it one of the cheapest ways to retain large log volumes.
+
+- **It fits Prometheus and Grafana:** Logs land in the same UI teams already use for metrics, with a query language they know.
+
+- **It's open source:** No per-GB software licensing, and full control over data and deployment.
+
+> #### Bottom line
+>
+> If you're already running Prometheus and Grafana on Kubernetes, Loki is the missing piece of a stack you own. If you're not in that ecosystem, one of other alternatives will likely serve you better.
+
+## 3. Better Stack
+
+- **Founded:** 2021
+- **Most similar to:** New Relic, PostHog
+- **Typical users:** Developers and SREs at small-to-mid-sized teams
+- **Typical customers:** Mid-market teams wanting logs and uptime in one tool
+
+![Better Stack Telemetry](https://res.cloudinary.com/dmukukwp6/image/upload/3_Better_Stack_c8da4edc75.png)
+
+### What is Better Stack?
+
+**Better Stack** (formerly Logtail) is a managed log tool on a ClickHouse backend with a fast, clean interface. 
+
+In practice, a critical log line becomes an alert, the alert pages someone, the page becomes an incident, and a status page has to tell customers what's happening. Splunk covers the first step and leaves the rest to PagerDuty, Statuspage, and whatever glue you write; Better Stack covers the whole chain in one product.
+
+It bundles log management with uptime monitoring, incident management, on-call, and status pages, so a smaller team covers several jobs in one subscription.
+
+That scope has a ceiling, and Better Stack doesn't pretend otherwise. It isn't built for petabyte retention, SIEM workloads, or the compliance depth that some users seek out Splunk for.
+
+Their free tier covers personal projects: 10 monitors, a status page, 100K exceptions, 5K session replays, and 3 GB each of logs, traces, and web events (retained 3 days) plus 30 GB of metrics. Paid plans cost around $30/month, and you can be ingesting logs the same afternoon you sign up.
+
+### Key features
+
+- **SQL querying:** Query structured logs like a database, with no proprietary language to learn.
+
+- **OpenTelemetry-native ingestion:** Native OTLP support plugs modern pipelines in directly.
+
+- **Bundled uptime and incidents:** Heartbeats, alerting, on-call routing, and public status pages in the same product.
+
+- **ClickHouse performance:** A fast analytical backend keeps queries responsive at volume.
+
+- **AI SRE agent:** A Slack-native agent investigates incidents using your logs, metrics, traces, and errors, plus an MCP server for your own coding agents.
+
+- **Logs-to-metrics and anomaly alerts:** Turn log queries into tracked metrics and get alerted on unusual patterns.
+
+### How does Better Stack compare to Splunk?
+
+<p>
+<ProductComparisonTable
+    competitors={['better_stack', 'splunk']}
+    rows={[
+        'platform.pricing.self_serve',
+        'platform.pricing.free_tier',
+        'logs.pricing.predictable_at_scale',
+        'logs.core_logging_and_ingestion.centralized_log_ingestion_search',
+        'logs.search.features.full_text_search',
+        'logs.search.features.no_proprietary_query_language',
+        'logs.core_logging_and_ingestion.native_open_telemetry_ingest',
+        'logs.observability.metrics',
+        'logs.observability.traces',
+        'logs.debugging_integrations.product_analytics_context',
+        'logs.debugging_integrations.built_in_session_replay',
+        'logs.debugging_integrations.built_in_error_tracking',
+        'logs.security_and_compliance.features.siem',
+        'platform.deployment.open_source',
+    ]}
+/>
+</p>
+
+<details>
+<summary>Main differences between Better Stack and Splunk</summary>
+
+- Splunk needs dedicated admins, capacity planning, and a sales cycle. Better Stack is self-serve.
+- Splunk is queried with SPL, a proprietary language with a learning curve. Better Stack uses plain SQL.
+- Splunk goes deep: SIEM, compliance, petabyte retention. Better Stack goes wide: uptime, on-call, incidents, and status pages bundled with logs.
+
+</details>
+
+<details>
+<summary>Main similarities between Better Stack and Splunk</summary>
+
+- Both ingest, store, and search logs centrally and alert on log data.
+- Both alert on thresholds, patterns, and anomalies in log data.
+- Both are available as managed cloud services.
+- Both consolidate different tools – Splunk bundles logs, observability, and security; Better Stack bundles logs, uptime, and incidents. 
+
+</details>
+
+### Why do companies use Better Stack?
+
+According to G2 user reviews, teams choose Better Stack because:
+
+- **SQL beats a new query language:** Anyone who knows SQL is productive immediately, with no DSL to climb.
+
+- **It consolidates tools:** Logs, uptime, incidents, and status pages in one subscription cut tool sprawl.
+
+- **The pricing fits mid-market:** A fast interface at rates well under enterprise incumbents, with no procurement marathon.
+
+> #### Bottom line
+>
+> The pick for small-to-mid-sized teams wanting a fast, SQL-queryable log tool with uptime and incident management included, at a reasonable price.
+
+## 4. SigNoz
+
+- **Founded:** 2021
+- **Most similar to:** Splunk
+- **Typical users:** Engineers and SREs wanting open-source observability
+- **Typical customers:** Teams self-hosting to avoid lock-in
+
+![Signoz](https://res.cloudinary.com/dmukukwp6/image/upload/4_Signoz_383679960c.png)
+
+### What is SigNoz?
+
+**SigNoz** is an open-source observability platform built natively on OpenTelemetry, with logs, metrics, traces, and exception tracking in one application on a ClickHouse backend. 
+
+While most Splunk alternatives replace one slice of what Splunk does, SigNoz replaces the whole observability suite: logs, metrics, and APM-style tracing in one UI. 
+
+And because instrumentation is OpenTelemetry from day one, your telemetry stays portable; if SigNoz ever stops being a good fit, the same instrumentation points anywhere else, which is the opposite of the SPL-and-proprietary-format lock-in that makes leaving Splunk hard in the first place.
+
+The cost is operational since running SigNoz means running ClickHouse, which adds infrastructure work, and there's no SIEM, so the security half of Splunk's job stays unsolved. SigNoz Cloud exists for teams that want the platform without the ops.
+
+SigNoz's community edition is free to run yourself. SigNoz Cloud starts at $49/month (e.g. 163 GB logs/traces or 490 mn metric samples), then bills at $0.30/GB for logs and traces and $0.10 per million metric samples. 
+
+There are no per-seat or per-host fees, so costs track data volume, not team size, and eligible early-stage startups get the same plan at $19/month.
+
+### Key features
+
+- **OpenTelemetry-native from day one:** Instrumentation stays portable and vendor-free, with no proprietary agents.
+
+- **Three pillars in one app:** Logs, metrics, traces, and APM correlated in a single UI.
+
+- **ClickHouse storage:** Fast queries on high-cardinality data with hot and cold tiers for cost control.
+
+- **Flexible querying:** A query builder plus PromQL and ClickHouse SQL cover most needs.
+
+- **Built-in alerting and dashboards:** Threshold and anomaly-based alerts across all telemetry, routed to Slack, PagerDuty, and webhooks.
+
+- **Exceptions tracking:** Errors and stack traces grouped and searchable alongside the traces that produced them.
+
+### How does SigNoz compare to Splunk?
+
+<p>
+<ProductComparisonTable
+    competitors={['signoz', 'splunk']}
+    rows={[
+        'platform.pricing.self_serve',
+        'platform.pricing.free_tier',
+        'logs.pricing.predictable_at_scale',
+        'logs.core_logging_and_ingestion.centralized_log_ingestion_search',
+        'logs.search.features.full_text_search',
+        'logs.search.features.no_proprietary_query_language',
+        'logs.core_logging_and_ingestion.native_open_telemetry_ingest',
+        'logs.observability.metrics',
+        'logs.observability.traces',
+        'logs.debugging_integrations.product_analytics_context',
+        'logs.debugging_integrations.built_in_session_replay',
+        'logs.debugging_integrations.built_in_error_tracking',
+        'logs.security_and_compliance.features.siem',
+        'platform.deployment.open_source',
+    ]}
+/>
+</p>
+
+<details>
+<summary>Main differences between SigNoz and Splunk</summary>
+
+- SigNoz is open source, OpenTelemetry-native, and self-hostable; Splunk is commercial with bolted-on OTel.
+- Splunk adds SIEM, deep compliance, and managed support that SigNoz doesn't.
+- Splunk is priced on ingest at enterprise rates via sales. SigNoz is free to self-run, with cloud from $49/month.
+
+</details>
+<details>
+<summary>Main similarities between SigNoz and Splunk</summary>
+
+- Both centralize logs and broader observability data and support alerting and dashboards.
+- Both alert on telemetry with dashboards and anomaly detection.
+- Both handle high-cardinality data at volume (Splunk via its index, SigNoz via ClickHouse).
+
+</details>
+
+### Why do companies use SigNoz?
+
+According to Product Hunt user reviews, teams pick SigNoz because:
+
+- **One tool for all three signals:** Logs, metrics, and traces correlated in a single UI, simpler than a multi-system stack.
+
+- **No lock-in:** Instrument once with OpenTelemetry and the data stays portable to any compliant backend.
+
+- **ClickHouse keeps it affordable:** Good performance on large volumes without Elasticsearch-style storage costs.
+
+> #### Bottom line
+>
+> The pick for teams wanting open-source, OpenTelemetry-native observability across all three pillars, who are comfortable running ClickHouse or paying for SigNoz Cloud.
+
+<WizardCTA />
+
+## 5. Datadog
+
+- **Founded:** 2010
+- **Most similar to:** Splunk, New Relic
+- **Typical users:** DevOps, SRE, and platform teams
+- **Typical customers:** Large, cloud-native enterprises
+
+![Datadog](https://res.cloudinary.com/dmukukwp6/image/upload/5_Datadog_5fe95cd80b.png)
+
+### What is Datadog?
+
+[Datadog](/compare/best-datadog-alternatives) is a cloud observability platform with wide coverage: logs, APM, infrastructure, real user monitoring, security, and over a thousand integrations in one place. 
+
+In many ways, Datadog is what Splunk would look like if it were designed cloud-first. It's self-serve instead of contract-first, broader out of the box, and stronger on infrastructure monitoring and APM. Splunk keeps its edge on security: SIEM is a core Splunk product but a Datadog add-on, and Splunk can run in your own data center while Datadog is cloud-only.
+
+One thing switching won't fix is the bill. Datadog charges for logs on two axes – ingest plus indexing – with separate meters for retention tiers and archive rehydration. It also bills OpenTelemetry metrics as premium custom metrics, which penalizes OTel-first stacks. You'll be trading one complicated enterprise bill for another.
+
+### Key features
+
+- **Full-stack observability:** Logs, traces, infrastructure, RUM, and security in one connected platform.
+- **Two-part log pricing:** Ingest cheaply, then choose which logs to index for search.
+- **1000+ integrations:** Hooks into almost anything in a modern stack.
+- **Mature dashboards and alerting:** Deep visualization and anomaly detection across signals.
+
+### How does Datadog compare to Splunk?
+
+<p>
+<ProductComparisonTable
+    competitors={['datadog', 'splunk']}
+    rows={[
+        'platform.pricing.self_serve',
+        'platform.pricing.free_tier',
+        'logs.pricing.predictable_at_scale',
+        'logs.core_logging_and_ingestion.centralized_log_ingestion_search',
+        'logs.search.features.full_text_search',
+        'logs.search.features.no_proprietary_query_language',
+        'logs.core_logging_and_ingestion.native_open_telemetry_ingest',
+        'logs.observability.metrics',
+        'logs.observability.traces',
+        'logs.debugging_integrations.product_analytics_context',
+        'logs.debugging_integrations.built_in_session_replay',
+        'logs.debugging_integrations.built_in_error_tracking',
+        'logs.security_and_compliance.features.siem',
+        'platform.deployment.open_source',
+    ]}
+/>
+</p>
+
+<details>
+<summary>Main differences between Datadog and Splunk</summary>
+
+- Datadog is cloud-only with the broadest observability coverage; Splunk is log-and-SIEM-first and can self-host.
+- Splunk's cost is one big number driven by ingest. Datadog's is many small meters – ingest, indexing, retention, rehydration, custom metrics.
+- Datadog meters OpenTelemetry metrics as premium custom metrics; Splunk doesn't.
+
+</details>
+
+<details>
+<summary>Main similarities between Datadog and Splunk</summary>
+
+- Both are mature enterprise platforms centralizing logs and telemetry at very large scale.
+- Both offer real full-text search.
+- Both carry deep integration ecosystems and a reputation for steep bills.
+
+</details>
+
+### Why do companies use Datadog?
+
+According to G2 user reviews, teams choose Datadog because:
+
+- **It covers nearly everything:** Infrastructure, APM, logs, and security, interconnected, reducing the need for separate tools.
+
+- **It integrates with everything:** Reviewers describe integrations for "literally everything" in a modern stack.
+
+- **The depth is real:** The volume of data it collects and the analysis on top make it highly customizable for complex environments.
+
+> #### Bottom line
+>
+> Datadog is a good pick for large, cloud-native teams wanting the broadest coverage from one vendor and have made peace with large, complex bills.
+
+## 6. Elastic (Elastic Stack)
+
+- **Founded:** 2012
+- **Most similar to:** Datadog
+- **Typical users:** Engineers, SREs, and security teams
+- **Typical customers:** Teams needing full-text search and a SIEM option
+
+![Elastic](https://res.cloudinary.com/dmukukwp6/image/upload/6_Elastic_db19a9679c.png)
+
+### What is Elastic?
+
+**Elastic** is the company behind the Elastic Stack, formerly ELK: Elasticsearch, Logstash, and Kibana. Elasticsearch gives you mature full-text search, Elastic Observability layers logs, metrics, and APM on top, and Elastic Security adds SIEM. It's a very complete Splunk alternative because it competes on both observability and security.
+
+On the observability side, Elasticsearch offers mature full-text search across raw log text, at petabyte scale. Elastic Observability adds logs, metrics, and APM on top, queryable with ES|QL and visualized in Kibana. Elastic Security adds the SIEM.
+
+The downside is that running Elasticsearch well means cluster sizing, shard management, and hot-warm-cold index tiering, meaning it requires real engineering work, and retention only stays affordable if you get the tiering right. 
+
+Moving from Splunk to Elastic doesn't reduce complexity; it swaps one demanding platform for a cheaper, open-source one. If you'd rather skip the cluster ops entirely, Elastic Cloud handles them for you at managed-service prices.
+
+### Key features
+
+- **Full-text search:** The closest thing on this list to Splunk's search depth.
+
+- **Observability suite:** Logs, metrics, and APM indexed into one searchable platform with Kibana.
+
+- **Elastic Security:** A real SIEM with detection rules and threat intelligence.
+
+- **ES|QL:** A piped query language for filtering, aggregating, and transforming results, with the advantage that Elasticsearch skills transfer across the industry, unlike SPL.
+
+- **Machine learning anomaly detection:** Automatically flags unusual log rates and patterns without hand-written thresholds.
+
+- **Tiered retention:** Hot-warm-cold-frozen tiers and searchable snapshots keep older logs queryable at lower storage cost.
+
+### How does Elastic compare to Splunk?
+
+<p>
+<ProductComparisonTable
+    competitors={['elastic', 'splunk']}
+    rows={[
+        'platform.pricing.self_serve',
+        'platform.pricing.free_tier',
+        'logs.pricing.predictable_at_scale',
+        'logs.core_logging_and_ingestion.centralized_log_ingestion_search',
+        'logs.search.features.full_text_search',
+        'logs.search.features.no_proprietary_query_language',
+        'logs.core_logging_and_ingestion.native_open_telemetry_ingest',
+        'logs.observability.metrics',
+        'logs.observability.traces',
+        'logs.debugging_integrations.product_analytics_context',
+        'logs.debugging_integrations.built_in_session_replay',
+        'logs.debugging_integrations.built_in_error_tracking',
+        'logs.security_and_compliance.features.siem',
+        'platform.deployment.open_source',
+    ]}
+/>
+</p>
+
+<details>
+<summary>Main differences between Elastic and Splunk</summary>
+
+- Splunk is queried with SPL; Elastic uses ES|QL plus Kibana's query bar.
+- Elastic is OpenTelemetry-native via EDOT; Splunk's OTel support is retrofitted.
+- Splunk's schema-on-read ingests anything as-is; Elastic rewards structuring data at ingest with mappings and pipelines.
+
+</details>
+
+<details>
+<summary>Main similarities between Elastic and Splunk</summary>
+
+- Both offer full-text search and span log management, observability, and SIEM.
+- Both scale to large enterprise volumes and run self-hosted or as managed cloud.
+- Both scale to petabyte enterprise volumes, with compliance and RBAC depth.
+
+</details>
+
+### Why do companies use Elastic?
+
+According to G2 user reviews, teams choose Elastic because:
+
+- **The search is powerful:** Full-text search handles ad-hoc log analysis in ways label-based tools can't.
+
+- **It covers observability and security:** One ecosystem for logs, APM, and SIEM appeals to teams replacing Splunk on both fronts.
+
+- **It can be self-hosted:** Open-stack roots give full control over data and deployment.
+
+> #### Bottom line
+>
+> Elastic is a great choice when you can't give up full-text search and need a real SIEM in the same stack. 
+
+## 7. New Relic
+
+- **Founded:** 2008
+- **Most similar to:** Splunk
+- **Typical users:** Engineers, SREs, and DevOps teams
+- **Typical customers:** Mid-market and enterprise teams wanting full observability with a free tier
+
+![New Relic](https://res.cloudinary.com/dmukukwp6/image/upload/7_New_Relic_7f8b7cca14.png)
+
+### What is New Relic?
+
+**New Relic** is a cloud observability platform with full-stack coverage: APM, logs, infrastructure, and digital experience monitoring, with usage-based pricing built around a large free tier of roughly 100 GB of ingest per month.
+
+Logs come with distributed tracing attached, queries run in NRQL (its SQL-like language), and the platform covers the same observability ground as Datadog with a much lower cost of entry.
+
+Two things to model before scaling up. Above the free tier, New Relic charges per GB ingested *and* per user – and full-platform user seats are expensive enough that seat count, not data volume, often becomes the bigger line item for mid-sized teams. 
+
+And on security, New Relic is the lightest option here: its SIEM capabilities are limited, so if security analytics is part of why you run Splunk, New Relic answers the observability half only.
+
+### Key features
+
+- **Full-stack observability:** Applications, infrastructure, logs, and user experience in one platform.
+
+- **Log management with tracing:** Aggregate and analyze logs with distributed tracing.
+
+- **100GB/month free:** A free tier large enough to lower the barrier to starting.
+
+- **Broad integrations:** Connects with hundreds of tools and open-source ecosystems.
+
+### How does New Relic compare to Splunk?
+
+<p>
+<ProductComparisonTable
+    competitors={['newrelic', 'splunk']}
+    rows={[
+        'platform.pricing.self_serve',
+        'platform.pricing.free_tier',
+        'logs.pricing.predictable_at_scale',
+        'logs.core_logging_and_ingestion.centralized_log_ingestion_search',
+        'logs.search.features.full_text_search',
+        'logs.search.features.no_proprietary_query_language',
+        'logs.core_logging_and_ingestion.native_open_telemetry_ingest',
+        'logs.observability.metrics',
+        'logs.observability.traces',
+        'logs.debugging_integrations.product_analytics_context',
+        'logs.debugging_integrations.built_in_session_replay',
+        'logs.debugging_integrations.built_in_error_tracking',
+        'logs.security_and_compliance.features.siem',
+        'platform.deployment.open_source',
+    ]}
+/>
+</p>
+
+<details>
+<summary>Main differences between New Relic and Splunk</summary>
+
+- New Relic is cloud-only and self-serve, with a 100 GB/month free tier. Splunk is contract-first and can run in your own data center.
+- Above the free tier, New Relic charges per GB and per user. Splunk's cost is ingest-driven.
+- Splunk goes deep on SIEM and security analytics; New Relic's SIEM capabilities are limited.
+- New Relic is queried with NRQL, a SQL-like language; Splunk uses SPL.
+
+</details>
+
+<details>
+<summary>Main similarities between New Relic and Splunk</summary>
+
+- Both centralize logs and observability data and support alerting, dashboards, and distributed tracing.
+- Both offer full-text search across log content.
+- Both serve enterprise teams troubleshooting complex systems.
+
+</details>
+
+### Why do companies use New Relic?
+
+According to [user reviews](https://www.g2.com/products/new-relic/reviews), teams choose New Relic because:
+
+- **It's all-in-one observability:** Apps, infrastructure, and logs in one place with the tools to find and fix issues.
+- **It's easy to start:** Pre-built dashboards and quick setup get teams going fast.
+- **The free tier is real:** ~100GB a month meaningfully lowers the cost of adopting full observability.
+
+> #### Bottom line
+>
+> The pick for teams wanting enterprise observability they can start free, lighter on SIEM than Splunk but far easier to adopt.
+
+## Which Splunk alternative should you choose?
+
+- Want logs connected to a full suite of developer tools – and a platform that finds bugs and opens PRs via [self-driving mode](/self-driving)? Go with **PostHog**.
+- Mainly escaping the bill, with the Kubernetes expertise to self-host? Pick **Grafana Loki**.
+- A small-to-mid-sized team wanting a SQL-queryable log tool with uptime and incidents bundled? Try **Better Stack**.
+- Open-source observability across logs, metrics, and traces? Choose **SigNoz**.
+- A large, cloud-native team wanting the broadest coverage from one vendor? **Datadog** is the fit.
+- Need full-text search depth plus a real SIEM? **Elastic** is built for exactly that.
+- Enterprise observability you can start for free? Start with **New Relic**.
+
+If you need SIEM, enterprise compliance, or petabyte-scale security analytics, that's still Splunk's territory, or Elastic's. Everything else here is for teams whose needs have outgrown Splunk's strengths.
+
+## Is PostHog right for you?
+
+We're biased, obviously, but we think PostHog is the perfect Splunk replacement if:
+
+- Your problem is debugging, not security, and you want [logs](/logs) next to [error tracking](/error-tracking), [session replay](/session-replay), [product analytics](/product-analytics), and a lot more.
+- You're already on OpenTelemetry, so adopting Logs is a config change, not a migration.
+- You value transparency: we're open source, and pricing is usage-based and public.
+
+It's completely free to get started – no credit card required. Our [setup wizard](/wizard) handles configuration in minutes, or you can check out [our docs](/docs) to do it yourself.
+
+<WizardCTA />
+
+## Frequently asked questions
+
+<details>
+<summary>What is Splunk used for?</summary>
+
+**Splunk** is an enterprise platform for log management, observability, and SIEM. Teams collect machine data across their infrastructure and applications, search it with SPL, and power monitoring, troubleshooting, and security threat detection at scale.
+
+</details>
+
+<details>
+<summary>Why look for a Splunk alternative?</summary>
+
+Cost, complexity, post-Cisco uncertainty, and fit. Ingest pricing scales into six and seven figures, SPL and administration take effort, and cloud-native teams on Kubernetes and OpenTelemetry often find tools like **Grafana Loki**, **SigNoz**, or **PostHog** match their stack better.
+
+</details>
+
+<details>
+<summary>Why has Splunk become so expensive?</summary>
+
+Splunk's traditional model licenses daily ingest capacity: you buy the right to index a set amount per day, priced on peak volume, negotiated through sales. Add-ons like Enterprise Security for SIEM carry their own licensing on top.
+
+As systems generate more log data, that capacity license only ratchets up. A workload-based option (SVC pricing) exists, but it's complex, and heavy search workloads can end up costing more than ingest-based plans.
+
+</details>
+
+<details>
+<summary>What's the cheapest Splunk alternative?</summary>
+
+For raw storage at scale, **Grafana Loki** is typically cheapest, since it indexes only labels and uses inexpensive object storage, if you can run it. **SigNoz** self-hosted is also low-cost. 
+
+Among managed tools, **PostHog** and **Better Stack** are far more predictable than Splunk, both with a free tier.
+
+</details>
+
+<details>
+<summary>Is there an open-source Splunk alternative?</summary>
+
+Several. **Grafana Loki** for log aggregation, **SigNoz** for OpenTelemetry-native logs, metrics, and traces, **Elastic** for full-text search and SIEM, and **OpenSearch**. 
+
+**PostHog** is also open source, with [Logs](/logs) part of its broader developer platform for those interested in building self-driving products.
+
+</details>
+
+<details>
+<summary>Can PostHog replace Splunk?</summary>
+
+For debugging-focused teams, often yes. **[PostHog](/logs)** handles log management with logs tied to errors, replays, and product analytics, OpenTelemetry-native, on transparent pricing. It also has [distributed tracing](/traces) in beta and [metrics](/docs/metrics) in alpha. It can't replace Splunk's SIEM or petabyte-scale compliance retention.
+
+</details>
+
+<details>
+<summary>Which Splunk alternative is best for SIEM?</summary>
+
+**Elastic**, via Elastic Security, pairing full-text search with a real security offering. **Datadog** also offers Cloud SIEM as an add-on. Most others here, including **PostHog**, **Grafana Loki**, **Better Stack**, and **SigNoz**, aren't SIEMs. For dedicated SIEM, **Splunk** itself is still the benchmark, which is why security and observability are usually separate purchases.
+
+</details>
+
+<details>
+<summary>Which is best for cloud-native or Kubernetes workloads?</summary>
+
+**Grafana Loki** is purpose-built for Kubernetes-heavy, Prometheus-and-Grafana stacks. **SigNoz** is OpenTelemetry-native and a strong microservices fit. **PostHog** suits cloud-native teams wanting connected debugging. All three lean into OpenTelemetry.
+
+</details>
+
+<details>
+<summary>What's the difference between log management and observability?</summary>
+
+Log management is collecting, storing, and searching logs. Observability is broader, understanding a system's internal state from its outputs across logs, metrics, and traces. **Grafana Loki** focuses on logs; **SigNoz**, **Datadog**, **New Relic**, **Better Stack**, and **Splunk** span the wider picture. **PostHog** covers all three signals and adds a fourth angle by tying them to user data and a lot of other [signals](/self-driving).
+
+</details>
+
+<details>
+<summary>How hard is it to migrate from Splunk?</summary>
+
+It depends on depth. SPL queries, dashboards, and proprietary formats create switching cost. 
+
+Migration is easiest with an OpenTelemetry-native tool, since **PostHog**, **SigNoz**, and **Better Stack** all ingest OTLP, so if you already emit OpenTelemetry you mostly change an endpoint. Rebuilding SPL searches in the new query language is the bigger lift.
+
+</details>
+
+<details>
+<summary>Is there a Splunk alternative with built-in product analytics?</summary>
+
+**PostHog**. Beyond [logs](/logs), it includes [product analytics](/product-analytics), [web analytics](/web-analytics), [session replay](/session-replay), [feature flags](/feature-flags), [experiments](/experiments), [surveys](/surveys), and more, so you can connect a log line to which users were affected and what they were doing. No traditional log tool ties logs to product analytics this way.
+
+</details>
+
+<NewsletterForm />

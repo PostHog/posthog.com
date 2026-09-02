@@ -17,6 +17,7 @@ const CANONICAL_ROUTES = {
     '/docs': ['Documentation', 'PostHog docs', 'Get started', 'Important links'],
     '/handbook': ['Company', 'How we work', 'People', 'Engineering', 'Design', 'Sales & marketing'],
     '/blog': ['PostHog blog', 'Inside PostHog', 'Product updates', 'Guides', 'Startups', 'Open source', 'CEO diaries'],
+    '/compare': ['Compare tools', 'PostHog vs', 'Alternatives'],
     '/pricing': [
         'Cost',
         'PostHog pricing',
@@ -55,7 +56,7 @@ const PAGE_TYPE_RULES = [
     {
         type: 'blog',
         pattern:
-            /^\/(?:(?:blog|spotlight|library|features|founders|newsletter|product-engineers)(?:\/|$)|ko\/newsletter(?:\/|$))/,
+            /^\/(?:(?:blog|compare|spotlight|library|features|founders|newsletter|product-engineers)(?:\/|$)|ko\/newsletter(?:\/|$))/,
     },
     { type: 'tutorial', pattern: /^\/tutorials(?:\/|$)/ },
     { type: 'customers', pattern: /^\/customers(?:\/|$)/ },

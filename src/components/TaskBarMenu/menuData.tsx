@@ -431,6 +431,12 @@ export function useMenuData(): MenuType[] {
                     icon: <Icons.IconRocket className="size-4 text-purple" />,
                 },
                 {
+                    type: 'item',
+                    label: 'Compare',
+                    link: '/compare',
+                    icon: <Icons.IconColumns className="size-4 text-lilac" />,
+                },
+                {
                     type: 'item' as const,
                     label: 'Forums',
                     link: '/questions',
