@@ -4,12 +4,11 @@ title: Use your metrics
 
 > **Note:** Metrics is in alpha. The views on this page reflect the current product and may change before general availability.
 
-Once metrics are flowing, open [Metrics](https://app.posthog.com/metrics) in PostHog. The metrics scene has four tabs:
+Once metrics are flowing, open [Metrics](https://app.posthog.com/metrics) in PostHog. The metrics scene has three tabs:
 
 - **Overview** — is anything arriving, and from which services
 - **Viewer** — chart one metric, break it down, and pivot into logs and traces
 - **SQL** — query your metrics directly as the `posthog.metrics` table
-- **Fundamentals** — the rules a correct chart follows, and a way to check one against real data
 
 ## Overview
 
@@ -39,7 +38,7 @@ From there you can shape the chart itself:
 
 When the metric you're charting moves, the viewer does the first pass of the investigation for you. If the most recent slice of the selected window is statistically different from the rest, an **anomaly badge** appears on the chart showing the percent change against the baseline and when the shift started. Click it to see the **biggest movers** — the label values that drove the change — and pick one to narrow the chart to it.
 
-The **Fundamentals** tab explains the rules a correct chart follows and can take a real bucket apart to show how the number was computed from the raw samples.
+This is investigation, not alerting. The badge is computed when you open a chart — it helps you spot and explain a change you're already looking at. It doesn't watch your metrics around the clock or notify you; for that, set up an [alert](#alerting).
 
 ### Pivot into logs and traces
 
@@ -70,6 +69,18 @@ When a chart is worth keeping, turn it into something durable:
 - **Save as insight** saves the current chart as a reusable insight.
 - **Add to dashboard** drops it onto an existing or new dashboard.
 - **New service dashboard** builds a starter dashboard in one step — pick the metrics (optionally scoped to a service) and PostHog creates one insight per metric, each charted with its recommended aggregation.
+
+## Alerting
+
+Charts and dashboards are for when you're watching; an alert is for when you're not. To get notified when a metric crosses a threshold, save the chart as an insight first — metric alerts are built on insights, so they live alongside your other alerts on the insights and dashboards you already use.
+
+1. In the viewer, click **Save as insight** (or **Add to dashboard**).
+2. Open the saved insight, click **Actions** in the sidebar, and choose **Alerts**.
+3. Click **New alert**, name it, and set the threshold you want to be notified about.
+
+Alerts are threshold-based: you set a bound the metric must stay above or below, and PostHog notifies you (Slack, Microsoft Teams, or webhook) when it crosses. Because a metric alert is just an alert on a metric insight, it uses the same alerting platform and notification channels as every other insight.
+
+See [Alerts](/docs/alerts) for the full setup, including [thresholds](/docs/alerts#thresholds) and [notification channels](/docs/alerts#notifications).
 
 ## Next steps
 
