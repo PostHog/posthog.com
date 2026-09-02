@@ -23,9 +23,9 @@ See [Pick a project](/docs/slack/setup#pick-a-project).
 
 ## The `/posthog` slash command
 
-Every configuration command above is also available as a `/posthog` slash command – `/posthog rules list`, `/posthog project <id>`, and so on. Bare `/posthog` does the same as `/posthog help`. Slash commands do configuration only: to start a task, mention `@PostHog` or [DM the bot](/docs/slack#dm-the-bot). There is no slash command for task creation.
+The configuration commands above are also available as `/posthog` slash commands – `/posthog rules list`, `/posthog project <id>`, and so on. Some have surface-specific behavior, described below. Bare `/posthog` does the same as `/posthog help`. Slash commands do configuration only: to start a task, mention `@PostHog` or [DM the bot](/docs/slack#dm-the-bot). There is no slash command for task creation.
 
-Two commands work on one surface only:
+Two commands behave differently depending on the surface:
 
 - `help` shows the command list on the slash surface only. `@PostHog help`, in a channel or in a DM, replies with a pointer to `/posthog help`.
 - `rules add` needs the repo inline on the slash surface (`/posthog rules add "description" org/repo`), because there's no thread to open a picker in.
