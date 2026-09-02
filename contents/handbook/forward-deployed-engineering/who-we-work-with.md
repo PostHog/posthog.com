@@ -33,7 +33,7 @@ The [coverage map](/handbook/growth/sales/customer-journey) marks us conditional
 | **Expanding** | A mature account moving into a product area with no playbook yet. |
 | **Steady state** | A churn prevention play, fixing an implementation the customer no longer trusts. |
 
-At risk is a status, not a phase. An account can be at risk in any of these phases.
+An account can be at risk in any of these phases.
 
 ## How we use this
 
