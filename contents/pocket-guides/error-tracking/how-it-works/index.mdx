@@ -1,0 +1,279 @@
+---
+# Scaffolded from /docs/error-tracking/grouping-issues, /docs/error-tracking/fingerprints,
+# /docs/error-tracking/stack-traces, /docs/error-tracking/upload-source-maps,
+# /docs/error-tracking/releases, /docs/error-tracking/rate-limiting, and the _snippets for
+# suppression rules, burst protection, and before-send.
+#
+# One page, three sections – the three things that decide whether the product is usable:
+# does it group right, can you read the trace, and are you drowning in noise.
+#
+# The 18 source map pages are a reference. Link, don't repeat.
+title: How Error Tracking works
+shortTitle: How it works
+subtitle: Grouping decides what you end up looking at. Source maps decide whether you can read it.
+pocketGuideOrder: 2
+section: Instrument
+---
+
+<LeftPage>
+
+<ScreenshotFigure
+    n={1}
+    product="error_tracking"
+    screenshot="grouping-rule"
+    caption="A grouping rule: what it matches on, and what it would have grouped before you save it."
+/>
+
+<StackTraceFigure
+    n={2}
+    caption="The same exception without source maps: every frame is a bundle, and none of it is yours."
+    type="TypeError"
+    message="Cannot read properties of null (reading 'useContext')"
+    frames={[
+        {
+            fn: 'exports.useContext',
+            source: '/node_modules/.vite/deps/chunk-OV4LOSH3.js@911:27',
+            unresolved: true,
+            marker: {
+                n: 1,
+                label: 'An unresolved frame',
+                gloss: 'PostHog could not map this back to source, so it names a column in a bundle. Hover the warning in the app for the same message.',
+            },
+        },
+        { fn: 'useParams', source: '/node_modules/.vite/deps/chunk-CUMSS5G5.js@5663:28', unresolved: true },
+        {
+            fn: 'useRouteComponentProps',
+            source: '/node_modules/.vite/deps/chunk-CUMSS5G5.js@6856:13',
+            unresolved: true,
+        },
+        { fn: 'renderWithHooks', source: '/node_modules/.vite/deps/react-dom_client.js@5654:24', unresolved: true },
+        {
+            fn: 'performUnitOfWork',
+            source: '/node_modules/.vite/deps/react-dom_client.js@12561:98',
+            unresolved: true,
+            marker: {
+                n: 2,
+                label: 'Nothing here is yours',
+                gloss: 'Every frame belongs to a dependency or the framework, so the fingerprint has none of your code to group on.',
+            },
+        },
+    ]}
+/>
+
+<StackTraceFigure
+    n={3}
+    caption="The same exception with them uploaded: your own frames, in bold, at the top of the trace."
+    type="TypeError"
+    message="Cannot read properties of null (reading 'useContext')"
+    frames={[
+        {
+            fn: 'useWorkspace',
+            source: 'src/workspace/useWorkspace.ts@17:9',
+            inApp: true,
+            marker: {
+                n: 1,
+                label: 'Your own code',
+                gloss: 'Set in bold, and the frame the fingerprint uses. Click it to open the source around the failing line.',
+            },
+            context: {
+                startLine: 15,
+                failingLine: 17,
+                lines: [
+                    'export function useWorkspace() {',
+                    '  const { id } = useParams()',
+                    '  const workspace = useContext(WorkspaceContext).byId[id]',
+                    '  return workspace',
+                    '}',
+                ],
+            },
+        },
+        { fn: 'WorkspaceProvider', source: 'src/workspace/WorkspaceProvider.tsx@42:18', inApp: true },
+        {
+            fn: 'useParams',
+            source: 'node_modules/react-router/index.tsx@5663:28',
+            marker: {
+                n: 2,
+                label: 'A dependency',
+                gloss: 'Still readable, but not yours. PostHog only falls back to these when the trace holds nothing from your own code.',
+            },
+        },
+        { fn: 'renderWithHooks', source: 'node_modules/react-dom/client.js@5654:24' },
+        { fn: 'performUnitOfWork', source: 'node_modules/react-dom/client.js@12561:98' },
+    ]}
+/>
+
+<TimelineFigure
+    n={4}
+    caption="The issue's Timeline tab: the steps you recorded, in order, among everything else the session did."
+    rows={[
+        {
+            time: '15:06:58',
+            category: 'pageview',
+            primary: '/workspaces/8f21c4',
+            marker: {
+                n: 1,
+                label: 'A pageview',
+                gloss: 'Captured for you. Every page the person opened during the session lands here without you writing anything.',
+            },
+        },
+        {
+            time: '15:07:02',
+            category: 'exception step',
+            primary: 'cache_miss',
+            secondary: 'key workspace:8f21c4',
+            marker: {
+                n: 2,
+                label: 'An exception step',
+                gloss: 'One addExceptionStep call. The name is yours, and so are the properties beside it – this row exists only because you wrote it.',
+            },
+        },
+        {
+            time: '15:07:09',
+            category: 'exception step',
+            primary: 'read_from_replica',
+            secondary: 'region eu-west-1 · lag_ms 180',
+        },
+        {
+            time: '15:07:11',
+            category: 'exception',
+            primary: 'Error',
+            secondary: 'Minified React error #418; visit https://reactjs.org/docs/error-deco…',
+            current: true,
+            marker: {
+                n: 3,
+                label: 'The exception',
+                gloss: 'The throw itself, and the row the steps above were buffered for. Everything before it is the run-up.',
+            },
+        },
+        { time: '15:07:19', category: 'pageview', primary: '/workspaces' },
+    ]}
+/>
+
+</LeftPage>
+
+<RightPage>
+
+# How Error Tracking works
+
+Three things decide whether Error Tracking produces high quality signals or noise:
+- Whether it groups exceptions into issues the way you would have
+- Whether you can read the traces it hands you
+- Whether you are storing the ones worth storing
+
+This section covers how to configure each of these topics.
+
+## Grouping
+
+An exception joins an <Term name="issue" /> by the first of these that applies:
+
+1. **A fingerprint you set at capture time.** Set at runtime, wins over everything else.
+2. **A grouping rule you defined in PostHog.** Runs at ingestion, no deployment or release needed.
+3. **The fingerprint PostHog generates.** What you get when you have done neither.
+
+Taking those from the bottom up.
+
+### Automatic fingerprinting
+
+By default, PostHog builds a <Term name="fingerprint" /> from whatever the exception gives it:
+
+1. The exception type, always.
+2. The error message, when there is no <Term name="stack trace" /> PostHog could read.
+3. The frames from your own code, when the trace has any.
+4. The first frame in the trace, when every frame belongs to a library, the framework, or the browser.
+
+Generated fingerprints can be fragile. Without a <Term name="source map" /> they are built from minified bundles like `a.min.js:1:48210`, instead of a concrete file and line like `checkout.ts:42`, so every deploy splits one bug into a new issue. Changing an exception type or message between <Term name="release">releases</Term> splits it the same way.
+
+### Grouping rules
+
+A fingerprint needs a code change. A rule doesn't – it runs during ingestion, so it can match on any event property, including the unminified <Term name="stack trace" />.
+
+A rule is a set of filters and a choice of whether an exception has to match all of them or any <SeeFig n={1} />. The properties you'll reach for most are the exception type, its message, the source file, the severity, and whether your code handled it, alongside anything custom you set at capture.
+
+### Setting your own fingerprint
+
+Pass `$exception_fingerprint` when you capture and every exception carrying it lands in one issue, whatever its type or message says.
+
+The usual reason is a message that carries an ID. `Workspace 8f21c4 failed to load` is one bug, but the generated fingerprint reads the ID as part of the message and opens an issue per workspace:
+
+```js
+try {
+  await loadWorkspace(workspaceId)
+} catch (error) {
+  posthog.captureException(error, {
+    $exception_fingerprint: 'workspace-load-failed',
+    $issue_name: 'Workspace failed to load',
+    $issue_description: 'loadWorkspace threw. The id is in the message, so these group by hand.',
+    workspace_id: workspaceId,
+  })
+}
+```
+
+Reach for a grouping rule first – it does the same job, and you can test and edit it. A fingerprint ships in your code, so it only applies to exceptions captured after the deploy, and you cannot change your mind retroactively.
+
+## Readable stack traces
+
+A <Term name="stack trace" /> shows you the exact line of code that caused the exception. If you bundle, compile, or minify the bundle you distribute, there's no way to trace the code in the bundle back to your source code – so it shows up as **unresolved** <SeeFig n={2} />.
+
+If you upload a <Term name="source map" />, it ties the bundled or compiled code, and stack traces will accurately reference your source code <SeeFig n={3} />.
+
+You need to upload whenever you don't distribute your source code directly:
+- a bundled web app
+- a minified or obfuscated build
+- a compiled language.
+
+For web, the wizard wires it into your build:
+
+```bash
+npx @posthog/wizard@latest upload-source-maps
+```
+
+Mobile uploads a different artifact through different tooling – Android goes through a Gradle plugin, and native code needs its debug symbols alongside – but the job is the same. Point your agent at the [upload guide](/docs/error-tracking/upload-source-maps) for your platform.
+
+### Breadcrumbs before the throw
+
+Sometimes the traces themselves aren't enough to paint a full picture. Error Tracking's timeline will already show you the events that led up to the error, but sometimes you need ot leave more clues.
+
+Breadcrumbs help you do that. They're like events, but cached locally and sent only if an exception occurs. This distinguishes them from regular events, which capture user actions, and avoid polluting your project.
+
+```js
+posthog.addExceptionStep('cache_miss', { key: `workspace:${workspaceId}` })
+posthog.addExceptionStep('token_refreshed', { age_ms: 4200 })
+posthog.addExceptionStep('read_from_replica', { region: 'eu-west-1', lag_ms: 180 })
+
+try {
+  await loadWorkspace(workspaceId)
+} catch (error) {
+  posthog.captureException(error)
+}
+```
+
+Breadcrumbs surface on the issue's **Timeline** tab <SeeFig n={4} />, in order, along with events and exceptions from the same session – so you read the run-up to the throw rather than the throw on its own.
+
+## Keeping the signal
+
+<!-- WHAT TO WRITE
+     Capture-time controls, in the order you reach for them. This lived on the cut
+     "Decide what to fix first" page, but it is Instrument, not Report – none of it
+     changes what you look at, it changes what gets stored.
+
+     - Sampling and rate limiting: how much you keep, before you pay for it.
+       Source: /docs/error-tracking/rate-limiting.
+     - Burst protection: one client in a loop cannot spend your whole quota.
+       Source: /docs/error-tracking/_snippets/burst-protection.
+     - Suppression rules: browser extensions, ResizeObserver, third-party noise you will
+       never fix. Source: /docs/error-tracking/_snippets/suppression-rules.
+     - before_send: the last hook before anything leaves. Also where you redact.
+       Source: /docs/error-tracking/_snippets/before-send-hook.
+
+     Worth stating once: suppression drops it at ingestion, so it is not retroactive and
+     not recoverable. Different from resolving an issue, which keeps the data. -->
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.
+
+<SeeAlso>
+
+See also: [Grouping exceptions into issues](/docs/error-tracking/grouping-issues) · [Fingerprints](/docs/error-tracking/fingerprints) · [Stack traces](/docs/error-tracking/stack-traces) · [Upload source maps](/docs/error-tracking/upload-source-maps) · [Releases](/docs/error-tracking/releases) · [Rate limiting](/docs/error-tracking/rate-limiting)
+
+</SeeAlso>
+
+</RightPage>

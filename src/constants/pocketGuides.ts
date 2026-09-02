@@ -1,7 +1,7 @@
 /** The volumes on the shelf. Data only, so `gatsby/` can import it in Node at build time. */
 
 /** Spine colours. Limited to safelisted tokens, since the spine is built as `bg-<token>`. */
-export type PocketGuideToken = 'orange' | 'purple' | 'blue' | 'yellow'
+export type PocketGuideToken = 'orange' | 'purple' | 'blue' | 'yellow' | 'red'
 
 export interface PocketGuideVolume {
     /** URL segment and content directory: /pocket-guides/<id>, contents/pocket-guides/<id>/ */
@@ -60,6 +60,13 @@ export const POCKET_GUIDE_VOLUMES: PocketGuideVolume[] = [
         token: 'yellow',
         volume: 4,
         docsProduct: 'session-replay',
+    },
+    {
+        id: 'error-tracking',
+        title: 'Error tracking',
+        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit sed do eiusmod tempor.',
+        token: 'red',
+        volume: 5,
     },
 ]
 

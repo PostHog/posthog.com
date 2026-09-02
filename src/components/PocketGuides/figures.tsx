@@ -19,6 +19,8 @@ import EvalRuns, { EvalRun } from './EvalRuns'
 import PersonsModal, { PersonsModalProps } from './PersonsModal'
 import RedirectLoop from './RedirectLoop'
 import ReportAnatomy, { AnatomyHint } from './ReportAnatomy'
+import SessionTimeline, { TimelineRow } from './SessionTimeline'
+import StackFrames, { StackFramesProps } from './StackFrames'
 import ReportDetailAnatomy from './ReportDetailAnatomy'
 import TraceTree, { TraceTreeRow } from './TraceTree'
 import TriggerGroupForm, { TriggerGroupFormProps } from './TriggerGroupForm'
@@ -464,6 +466,43 @@ export function RedirectLoopFigure({
     return (
         <Fig n={n} caption={caption} legend={legend}>
             <RedirectLoop />
+        </Fig>
+    )
+}
+
+/** The issue's Timeline tab: the session around the throw, steps included. */
+export function TimelineFigure({
+    n = 1,
+    caption,
+    legend,
+    rows,
+}: {
+    n?: number
+    caption: string
+    legend?: string
+    rows: TimelineRow[]
+}): JSX.Element {
+    return (
+        <Fig n={n} caption={caption} legend={legend}>
+            <SessionTimeline rows={rows} />
+        </Fig>
+    )
+}
+
+/** A stack trace as the issue page draws it – resolved through a source map, or not. */
+export function StackTraceFigure({
+    n = 1,
+    caption,
+    legend,
+    ...trace
+}: StackFramesProps & {
+    n?: number
+    caption: string
+    legend?: string
+}): JSX.Element {
+    return (
+        <Fig n={n} caption={caption} legend={legend}>
+            <StackFrames {...trace} />
         </Fig>
     )
 }

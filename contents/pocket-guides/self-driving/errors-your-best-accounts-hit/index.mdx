@@ -1,0 +1,102 @@
+---
+# Scaffolded from the error-tracking and customer-analytics canonical scouts, plus
+# /docs/product-analytics/group-analytics and /docs/revenue-analytics/connect-to-customers.
+#
+# The seam: signals-scout-error-tracking discriminates on count vs distinct_users, so it knows
+# how many people an issue reached but never which accounts. signals-scout-customer-analytics
+# has the account join and weights by commercial ownership, but watches engagement, not errors.
+# This scout borrows that join and points it at $exception.
+#
+# Paired from the error tracking volume – see contents/pocket-guides/error-tracking/who-it-breaks.
+title: Find the errors your best accounts hit
+shortTitle: Errors by account value
+subtitle: 'Which broken thing is your paying customers'' problem, not just your loudest?'
+pocketGuideOrder: 7
+filters:
+  type:
+    - self-driving
+watches:
+  - name: Error Tracking
+    detail: Every exception of the last seven days, grouped by issue and by the account that hit it.
+  - name: Customer analytics
+    detail: Your account roster, so an exception resolves to an organization rather than an anonymous person.
+  - name: Revenue analytics
+    detail: What those accounts pay, so an issue can be ranked by money rather than by volume.
+requires:
+  - label: Error Tracking instrumented, with exceptions reaching PostHog
+    level: required
+  - label: >-
+      Group analytics configured, so exceptions carry the account that hit them – without it
+      there is nothing to join an issue to
+    level: required
+  - label: >-
+      Revenue connected to persons, through revenue events or a mapped warehouse source. Without
+      it the scout can rank by account weight but not by amount
+    level: recommended
+  - label: A CSM or account executive assigned on your accounts, which is what makes weight legible
+    level: optional
+schedule: Daily
+report:
+  title: One issue is 71% concentrated in four paying accounts
+  source: Scout · errors by account value
+  receivedAgo: 3h
+  affected: 4 accounts, ~$180k combined ARR
+  body: >-
+    `TypeError: Cannot read properties of null` fired 2,340 times this week across 31 accounts.
+    Four of them account for 71% of those exceptions while making up 9% of your overall traffic,
+    and all four carry a Stripe customer ID.
+
+
+    The issue does not rank in your top ten by occurrences, because a single unauthenticated
+    retry loop on a free account is generating more volume than all four combined.
+  suggestedAction: >-
+    Reproduce against one of the four accounts rather than the loudest one. Their shared trait is
+    a workspace created before the schema change in March.
+  actionNote: An agent opens the pull request – you review and merge.
+---
+
+<LeftPage>
+
+<AnatomyFigure
+    n={1}
+    caption="The report as it lands: the claim on the card, the accounts and the comparison inside it."
+    priority="P1"
+    status="Ready"
+    actionability="Actionable"
+    headline="Four paying accounts carry 71% of one issue while making up 9% of traffic – it does not rank in your top ten by volume"
+/>
+
+<ScoutFigure n={2} caption="The scout itself – the file an agent follows on a schedule." />
+
+</LeftPage>
+
+<RightPage>
+
+# Find the errors your best accounts hit
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.
+
+## What the scout looks at
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.
+
+## The report in your inbox
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore <SeeFig n={1} />.
+
+## The scout itself
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor <SeeFig n={2} />.
+
+<!-- Rendered from the `watches:` list in this file's frontmatter – edit it there. -->
+<Watches />
+
+<Enable />
+
+<SeeAlso>
+
+See also: [Scouts](/docs/self-driving/scouts) · [Group analytics](/docs/product-analytics/group-analytics) · [Revenue analytics](/docs/revenue-analytics/start-here) · [Size the impact of an issue](/pocket-guides/error-tracking/who-it-breaks)
+
+</SeeAlso>
+
+</RightPage>

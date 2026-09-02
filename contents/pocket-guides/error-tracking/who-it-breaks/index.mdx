@@ -1,0 +1,107 @@
+---
+# Scaffolded from /docs/data/cohorts, /docs/error-tracking/monitoring, and
+# /docs/revenue-analytics/connect-to-customers.
+#
+# The use case: an exception is an event, so the person on it is the same person every other
+# product uses. A standalone error tracker has an anonymous user ID and stops there.
+#
+# Not groups. Error tracking's filter taxonomy allows EventProperties, PersonProperties, and
+# Cohorts – see products/error_tracking/frontend/components/Breakdowns/consts.ts in the posthog
+# repo. Cohorts are the documented route to an account anyway: /docs/data/cohorts recommends
+# them over groups when you only need a list of users, and they need no instrumentation.
+#
+# Merged with the old "Put a number on an error" page – which customers and what they pay is
+# one question, and splitting it made both halves thin.
+title: Size the impact of an issue
+shortTitle: Impact
+subtitle: An error that fires 391 times might be eleven customers, or one retry loop.
+pocketGuideOrder: 3
+section: Report
+---
+
+<LeftPage>
+
+<!-- Figure: the affected-accounts list for one issue. Needs a capture or a drawn figure. -->
+
+</LeftPage>
+
+<RightPage>
+
+# Size the impact of an issue
+
+Every exception is an event, so it carries the person it happened to. That is the difference between knowing an error fires 391 times and knowing it fires for eleven accounts, three of them on your largest plan.
+
+Occurrences is the number the issue list sorts by out of the box. It is also the number that lies to you the most.
+
+## Not all exceptions are equal
+
+An issue that fired ten thousand times might be one integration retrying against a dead endpoint. An issue that fired forty times might be forty different people, on your four largest accounts, failing to check out.
+
+Occurrences cannot tell those apart, and it is the number an issue leads with.
+
+The questions that rank an issue are further out than error tracking:
+
+- How many people did it reach?
+- Are any of them paying you?
+- Did they come back afterwards?
+- What do those accounts pay, in total?
+
+Every one of those is answerable, because an exception is an event and it carries the person it happened to. The rest of this page is those four questions in order.
+
+<Prompt>
+Rank my error tracking issues from the last 7 days by affected users rather than occurrences, and show me the ratio between the two.
+</Prompt>
+
+## The rate to watch
+
+Counts move when your traffic moves, which makes them useless for telling whether your product is getting worse. Crash-free sessions is the rate underneath them – sessions that ran into nothing, over sessions in total – and it only falls when something actually broke.
+
+<Prompt>
+Show me crash-free sessions as a percentage over the last 30 days, broken down by release.
+</Prompt>
+
+## Break one issue apart
+
+An <Term name="issue" /> breaks down by any property on the exceptions inside it – browser, device, OS, path, and any <Term name="person property" /> you capture.
+
+Do this before you read the <Term name="stack trace" />. An issue that is 94% one browser is a compatibility bug, and an issue spread evenly across every browser is not, so you have narrowed the cause before opening a single frame.
+
+<Prompt>
+Break my top error tracking issue down by browser, OS, and plan tier, and tell me which dimension it concentrates in.
+</Prompt>
+
+## Name the accounts behind it
+
+Error tracking has no account filter. It has <Term name="cohort">cohorts</Term>, which is the same thing reached differently: a cohort is a set of people, and an account is a set of people who share something.
+
+The cheap version is the email domain – everyone whose email ends `@acme.com` is Acme, and it needs no instrumentation. The durable version is a person property you already set, a plan tier or an organization ID, which gives you every enterprise account rather than one named customer.
+
+You do not have to build it by hand.
+
+<Prompt>
+Create a cohort of people whose email domain matches our top 20 accounts, then show me which error tracking issues those people hit most in the last 7 days.
+</Prompt>
+
+## Put revenue on it
+
+Revenue is already attached to the same people. Capture revenue events, or map a warehouse source to them, and PostHog connects payments to persons for you – which makes the last step a query rather than a spreadsheet.
+
+<Prompt>
+Rank my error tracking issues by the revenue of the accounts hitting them. For each issue show affected users, the accounts behind it, and their combined subscription revenue.
+</Prompt>
+
+## Or let a scout size it for you
+
+All of this is a triage pass you would rather not repeat every morning. A <Term name="scout" /> runs it on a schedule, and only writes when an issue concentrates in accounts worth caring about.
+
+<Callout to="/pocket-guides/self-driving/errors-your-best-accounts-hit" label="Add the errors-by-account-value scout">
+It files a <Term name="report" /> in your <Term name="inbox" /> when an issue concentrates in paying accounts, with their share of the issue against their share of your traffic – and an agent can open the pull request from there.
+</Callout>
+
+<SeeAlso>
+
+See also: [Group analytics](/docs/product-analytics/group-analytics) · [Monitor and search issues](/docs/error-tracking/monitoring) · [Issues and exceptions](/docs/error-tracking/issues-and-exceptions)
+
+</SeeAlso>
+
+</RightPage>
