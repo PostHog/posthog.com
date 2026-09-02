@@ -539,6 +539,7 @@ export default function Collection(props: CollectionProps): React.ReactElement {
                                 {/* <ShippingBanner /> */}
                                 <div className="flex gap-4">
                                     <div className="@container flex-1 not-prose">
+                                        <h2 className="sr-only">Products</h2>
                                         <ProductGrid
                                             products={filteredProducts}
                                             onProductClick={handleProductSelect}
