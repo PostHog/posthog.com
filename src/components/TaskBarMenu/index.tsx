@@ -38,7 +38,7 @@ const NAV_MENU_CLASS = '[&_button]:px-2 [&_button:not(:first-child)]:hidden md:[
 
 function ExperimentNavMenus(): JSX.Element {
     const posthog = usePostHog()
-    const menuData = useMenuData(posthog?.getFeatureFlag?.(NAVBAR_TOOLS_FLAG) === 'test')
+    const menuData = useMenuData(true)
     return <MenuBar menus={menuData} className={NAV_MENU_CLASS} />
 }
 
