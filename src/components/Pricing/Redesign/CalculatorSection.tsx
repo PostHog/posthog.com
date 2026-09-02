@@ -4,9 +4,8 @@ import { Calculator } from 'components/Pricing/Test/Calculator'
 import { scrollToElement } from 'components/ScrollToElement'
 
 /**
- * The pricing calculator as a plain, always-visible section — the `redesign` variant's
- * treatment from the pricing-page-redesign experiment. `CalculatorReveal` was the
- * collapsed alternative that won that test; this is that section again, now the default.
+ * The pricing calculator as a plain, always-visible section. Used by the `shown` arm of
+ * `pricing-calculator-visibility`. `CalculatorReveal` is the collapsed `control` treatment.
  *
  * The section title lives on the page (`pages/pricing`), which also owns the
  * `#calculator` anchor, so the heading matches its siblings. This component is just the
