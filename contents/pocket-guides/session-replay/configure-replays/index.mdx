@@ -7,6 +7,7 @@ title: Control which sessions to record
 shortTitle: Which sessions to record
 subtitle: Configure which sessions to record and keep costs low.
 pocketGuideOrder: 2
+section: Instrument
 ---
 
 <RightPage>
@@ -14,6 +15,12 @@ pocketGuideOrder: 2
 # Control which sessions to record
 
 If you get thousands or millions of visitors a day, you can't watch _every_ replay. PostHog gives you a few knobs to keep only the useful sessions and keep costs low.
+
+## What a recording actually is
+
+Recordings come from your PostHog SDKs. Session Replay is supported by the [JavaScript web](/docs/session-replay/installation/web), [React Native](/docs/session-replay/installation/react-native), [iOS](/docs/session-replay/installation/ios), [Android](/docs/session-replay/installation/android), and [Flutter](/docs/session-replay/installation/flutter) SDKs.
+
+These replays are not videos on the web. The SDK takes a full snapshot of the page's DOM, then records only what changes – clicks, scrolls, mutations – and the player rebuilds the page from that stream. This helps keep cost low and minimize performance implications.
 
 ## Trigger groups
 

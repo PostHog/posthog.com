@@ -3,70 +3,35 @@ title: Session Replay 101
 shortTitle: Session Replay 101
 subtitle: What a replay actually is, where the recording comes from, and what watches them besides you.
 pocketGuideOrder: 1
+section: Instrument
 ---
 
 <LeftPage>
-
-<!-- Marker coordinates are percentages of the image. Grab new ones from /image-annotator. -->
 
 <ScreenshotFigure
     n={1}
     product="session_replay"
     screenshot="player-overview"
-    caption="The replay page: pick a session on the left, watch it in the middle, read what happened on the right."
-    annotations={[
-        {
-            x: 20.5,
-            y: 29.5,
-            title: 'The sessions list',
-            description: 'Recordings to watch based on your filters.',
-        },
-        {
-            x: 55,
-            y: 72,
-            title: 'The player',
-            description:
-                'Plays back sessions like a video, showing scrolling and mouse movement. You can scrub through like a video, too.',
-        },
-        {
-            x: 75,
-            y: 54,
-            title: 'The inspector panel',
-            description:
-                'The right side panel shows you events captured to PostHog, synced with the playback timestamps. This panel also contains network, performance, and other tools. More about them below.',
-        },
-    ]}
+    alt="A session playing back, with the sessions list on the left and the captured events on the right"
+    caption="A replay playing back, with the events PostHog captured beside it."
 />
 
-<ScreenshotFigure
+<AnatomyFigure
     n={2}
-    product="session_replay"
-    screenshot="player-inspector"
-    alt="A session playing back on the left, with the inspector's event list beside it"
-    caption="The player up close: the session on the left, everything PostHog recorded about it on the right."
-    annotations={[
-        {
-            x: 24,
-            y: 40,
-            title: "The session you're watching",
-            description:
-                'The session played back. It is the rendered page, not a video file, which is why it stays sharp and searchable.',
-        },
-        {
-            x: 93.4,
-            y: 4.8,
-            title: 'Flip between Overview, Inspector, Network waterfall, Observations, and create Linked issues',
-            description:
-                'Three views onto the same session, plus two more that appear when they have something to show.',
-        },
-        {
-            x: 72,
-            y: 45,
-            title: 'Follow the events and people in this replay across PostHog',
-            description:
-                'The same events you query everywhere else, in order. Each one seeks the player to that moment, and leads back out to the person, the exception, or the insight it belongs to.',
-        },
-    ]}
+    caption="Where this ends up: a report in your inbox, with the recordings that back it inside."
+    priority="P2"
+    status="Ready"
+    actionability="Actionable"
+    headline="Accounts that left onboarding midway can't get past step two. The workspace they created last time blocks them, and the name it holds is their own"
+    report={{
+        title: "Accounts that left onboarding midway can no longer finish it",
+        source: 'Scout · dead-end pages',
+        receivedAgo: '5h',
+        affected: '~180 accounts stuck, ~40 more each day',
+        body: "Sessions reaching `/onboarding/step-1` now end there 41% of the time, up from 9% across the trailing two weeks. Signup volume is unchanged and nothing threw.\n\nOnboarding creates the workspace at step two and writes `onboarding_complete` at step four. Anyone who left between the two has a workspace but an incomplete account, so the guard sends them back to step one – where step two now returns a 409, because the name is taken by the workspace they made last time. The form shows it as a validation error under the name field.\n\nThe recordings are people trying variations of their own company name against the same wall, four attempts before the tab closes.",
+        suggestedAction: 'Have step two adopt the existing workspace, and resume at the first unfinished step.',
+        actionNote: 'An agent opens the pull request – you review and merge.',
+    }}
 />
 
 </LeftPage>
@@ -75,38 +40,21 @@ pocketGuideOrder: 1
 
 # Session Replay 101
 
-Session Replay records what real users do in your product and plays it back like a DVR, with a synced dev tool panel showing console logs, network requests, and errors at the exact moment they happened.
+Session Replay records what real users do in your product and plays it back like a DVR <SeeFig n={1} />, with a synced dev tool panel showing console logs, network requests, and errors at the exact moment they happened. This is one of the tools that makes your product <Term name="self-driving">self-driving</Term>.
 
-## Anatomy of a replay
+A replay is not a video. The SDK records what changed on the page and the player rebuilds it, alongside the events, errors, and person PostHog already had. We'll take the player apart properly in [Watching replays yourself](/pocket-guides/session-replay/watching-replays).
 
-When you head to [Session Replay](https://us.posthog.com/replay) in PostHog, you'll be greeted with a player <SeeFig n={1} /> with all your recordings. You'll spend a lot of time here, so let's go on a tour.
+## Path to self-driving
 
-Select a session on the left and it plays back in the middle, with everything PostHog knows about it on the right. That context is what makes PostHog's Session Replay powerful.
+Session Replay enables self-driving by providing you and your agents the context they need to make informed decisions. Session Replays let you do this in different levels:
 
-## Session context
+- **Instrument** - First, you need high quality Session replays. You'll want to install Session Replay, filter out noise, configure privacy protection, and set up a reverse proxy.
+- **Observe** - Then, watch a few replays yourself and build collections to share with your team. It's a lot of fun!
+- **Self-drive** - Finally, when you find yourself drowning in replays, get a robot to watch replays for you and even open PRs for improvements and fixes!
 
+The goal is actionable reports landing in your inbox on their own, like this one <SeeFig n={2} />.
 
-The right-hand inspector lets you watch replays in context of your PostHog data. They add context so you can answer the who, what, when, where, and how of each replay. You can follow from replay to persons, events, logs, errors, and more.
-
-- **[Overview](/docs/session-replay/how-to-watch-recordings)** – who this is. The <Term name="person" /> and their <Term name="person property">properties</Term>, the screen they were on, which <Term name="experiment" /> variants they got, and who else on your team has already watched this replay.
-- **[Inspector](/docs/session-replay/how-to-watch-recordings)** – events and errors captured during the session on a synced timeline. Your <Term name="event">events</Term>, <Term name="console log">console logs</Term>, <Term name="network request">network requests</Term>, and <Term name="comment">comments</Term>, filterable down to one kind at a time.
-- **[Network waterfall](/docs/session-replay/network-recording)** – what the page was waiting on. Every request laid out by time, so a slow screen in the replay has something to blame.
-- **[Observations](/docs/replay-vision/observations)** – what <Term name="replay vision">Replay Vision</Term> found in this session without you watching it.
-- **[Linked issues](/docs/session-replay/integrations)** – create or find related issues in your issue tracking tool.
-
-You'll find them all on the right of the player <SeeFig n={2} />.
-
-## What's actually recorded
-
-Recordings come from your PostHog SDKs. Session Replay is supported by the [JavaScript web](/docs/session-replay/installation/web), [React Native](/docs/session-replay/installation/react-native), [iOS](/docs/session-replay/installation/ios), [Android](/docs/session-replay/installation/android), and [Flutter](/docs/session-replay/installation/flutter) SDKs.
-
-These replays are not videos on the web. The SDK takes a full snapshot of the page's DOM, then records only what changes – clicks, scrolls, mutations – and the player rebuilds the page from that stream. This helps keep cost low and minimize performance implications.
-
-| SDK | What it records |
-| --- | --- |
-| JavaScript web | The DOM, rebuilt in the player |
-| Android, iOS | A wireframe of the view hierarchy, rather than the real look and feel, unless you turn on screenshot mode |
-| React Native, Flutter | Always screenshot mode |
+This pocket guide will walk you through each level of autonomy you can achieve with Session Replay.
 
 ## Install and turn it on
 

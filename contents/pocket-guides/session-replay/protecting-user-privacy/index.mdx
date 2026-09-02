@@ -8,6 +8,7 @@ title: Protecting user privacy
 shortTitle: Privacy
 subtitle: Masking happens on the device, before anything is sent. Decide it before real traffic arrives.
 pocketGuideOrder: 3
+section: Instrument
 ---
 
 <LeftPage>
@@ -32,15 +33,15 @@ You should never allow captures by default. Trying to mask fields individually b
 
 ## Where each platform starts
 
-Each SDK has different default masking behavior and supports different masking rules.
+Each SDK records something different, and starts from a different default.
 
-| Platform | Masked out of the box | Can you unmask individual elements? |
-| --- | --- | --- |
-| Web | Inputs masked, all other text recorded as it appears | Yes, but through a callback rather than a selector |
-| Android | Text and images masked, recorded as a wireframe | Yes, and revealing beats masking |
-| iOS | Text and images masked, recorded as a wireframe | Yes, and revealing beats masking |
-| React Native | Text, inputs, and images masked, always a screenshot | No – only an app-wide default |
-| Flutter | Text and images masked, always a screenshot | No – only an app-wide default |
+| Platform | What it records | Masked out of the box | Unmask individually? |
+| --- | --- | --- | --- |
+| Web | The DOM, rebuilt in the player | Inputs only | Yes, through a callback rather than a selector |
+| Android | A wireframe, or screenshots if you turn screenshot mode on | Text and images | Yes, and revealing beats masking |
+| iOS | A wireframe, or screenshots if you turn screenshot mode on | Text and images | Yes, and revealing beats masking |
+| React Native | Always screenshots | Text, inputs, and images | No – only an app-wide default |
+| Flutter | Always screenshots | Text and images | No – only an app-wide default |
 
 ## Blocking is not masking
 
