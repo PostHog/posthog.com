@@ -1,62 +1,52 @@
 import React, { useEffect, useRef, useState } from 'react'
-import { ComposableMap, Geographies, Geography } from 'react-simple-maps'
-// Self-contained continent outlines (GeoJSON FeatureCollection) — one clean shape per continent, no network fetch.
-import continentsHigh from '@amcharts/amcharts5-geodata/continentsHigh'
 import Link from 'components/Link'
-import { INK, PAPER, PALETTE } from './heroData'
-import { SPECIES, PENDING_SPECIES, Species } from './speciesData'
+import { INK, PAPER } from './heroData'
+import { SPECIES_BY_SLUG } from './speciesData'
 
-// Each continent gets its own distinct color from the approved palette.
-const paletteBg = (name: string): string => PALETTE.find((p) => p.name === name)?.bg ?? '#D9EAA6'
-const CONTINENT_FILL: Record<string, string> = {
-    northAmerica: paletteBg('coral'),
-    southAmerica: paletteBg('yellow'),
-    africa: paletteBg('lime'),
-    europe: paletteBg('teal'),
-    asia: paletteBg('violet'),
-    oceania: paletteBg('tangerine'),
-    antarctica: paletteBg('corn blue'),
-}
+// Creature-free yellow map (hosted on Cloudinary).
+const MAP_SRC = 'https://res.cloudinary.com/dmukukwp6/image/upload/Mac_Book_Pro_16_2_a54490c1f4.png'
+const img = (slug: string) => `/images/field-guide/hero/${slug}.png`
 
-type Item =
-    | { kind: 'species'; species: Species; top: number; left: number }
-    | { kind: 'placeholder'; name: string; top: number; left: number }
-
-const ITEMS: Item[] = [
-    ...SPECIES.map((s): Item => ({ kind: 'species', species: s, top: s.map.top, left: s.map.left })),
-    ...PENDING_SPECIES.map((p): Item => ({ kind: 'placeholder', name: p.name, top: p.map.top, left: p.map.left })),
+// Each creature placed at its exact spot on the 1728×1117 map (top-left, % of frame),
+// with the tooltip card on whichever side keeps it on the map.
+type Specimen = { slug: string; left: number; top: number; width: number }
+const SPECIMENS: Specimen[] = [
+    { slug: 'rage-clicker', left: 25.04, top: 14.32, width: 17.75 },
+    { slug: 'tab-hopper', left: 45.6, top: 19.79, width: 19.03 },
+    { slug: 'modal-slammer', left: 62.66, top: 7.4, width: 21.63 },
+    { slug: 'phantom-returner', left: 67.78, top: 31.24, width: 16.8 },
+    { slug: 'console-opener', left: 27.28, top: 46.37, width: 17.6 },
+    { slug: 'pricing-page-loiterer', left: 47.31, top: 41.99, width: 18.63 },
+    { slug: 'tutorial-skipper', left: 70.67, top: 49.78, width: 19.32 },
+    { slug: 'mid-form-fleer', left: 24.24, top: 67.95, width: 17.22 },
+    { slug: 'refreshing-pilgrim', left: 49.58, top: 77.98, width: 17.11 },
+    { slug: 'dead-end-wanderer', left: 59.0, top: 79.77, width: 19.71 },
 ]
 
-function SpecimenCard({ item, index, inView }: { item: Item; index: number; inView: boolean }): JSX.Element {
-    const style: React.CSSProperties = {
-        top: `${item.top}%`,
-        left: `${item.left}%`,
-        transform: inView ? undefined : 'translate(-50%, -46%) scale(0.9)',
-        opacity: inView ? 1 : 0,
-        transitionDelay: `${index * 90}ms`,
-    }
-    if (item.kind === 'placeholder') {
-        return (
-            <div className="fg-specimen" style={style}>
-                <div className="fg-frame fg-frame--pending" aria-hidden="true">
-                    <span className="fg-pending-mark">?</span>
-                    <span className="fg-pending-label">Specimen pending</span>
-                </div>
-            </div>
-        )
-    }
-    const { species } = item
+function SpecimenLink({ item, index, inView }: { item: Specimen; index: number; inView: boolean }): JSX.Element {
+    const species = SPECIES_BY_SLUG[item.slug]
+    const tipSide = item.left < 50 ? 'right' : 'left'
     return (
-        <div className="fg-specimen" style={style}>
-            <Link
-                to={species.route}
-                state={{ newWindow: true }}
-                className="fg-animal-link"
-                aria-label={`${species.name} — open field guide entry`}
-            >
-                <img className="fg-animal" src={species.heroImage} alt={species.name} loading="lazy" />
-            </Link>
-        </div>
+        <Link
+            to={species.route}
+            state={{ newWindow: true }}
+            className="fg-specimen"
+            data-tip={tipSide}
+            aria-label={`${species.name} — open field guide entry`}
+            style={{
+                left: `${item.left}%`,
+                top: `${item.top}%`,
+                width: `${item.width}%`,
+                opacity: inView ? 1 : 0,
+                transitionDelay: `${index * 70}ms`,
+            }}
+        >
+            <img src={img(item.slug)} alt={species.name} loading="lazy" />
+            <span className="fg-tip" aria-hidden="true">
+                <span className="fg-tip-name">{species.name}</span>
+                <span className="fg-tip-latin">{species.latin}</span>
+            </span>
+        </Link>
     )
 }
 
@@ -78,7 +68,7 @@ export default function Hero(): JSX.Element {
                     obs.disconnect()
                 }
             },
-            { threshold: 0.2 }
+            { threshold: 0.15 }
         )
         obs.observe(el)
         return () => obs.disconnect()
@@ -87,73 +77,15 @@ export default function Hero(): JSX.Element {
     return (
         <div ref={rootRef} className="fg-hero" data-in-view={inView}>
             <div className="fg-map-wrap">
-                {/* The watercolor world map (renders empty first; specimens fade in after) */}
-                <ComposableMap
-                    projection="geoEqualEarth"
-                    projectionConfig={{ scale: 165, center: [10, 0] }}
-                    width={900}
-                    height={440}
-                    className="fg-map"
-                    style={{ width: '100%', height: 'auto' }}
-                >
-                    <defs>
-                        {/* Whisper of softening only — no displacement, so continents stay accurate */}
-                        <filter id="fg-watercolor" x="-2%" y="-2%" width="104%" height="104%">
-                            <feGaussianBlur stdDeviation={0.3} />
-                        </filter>
-                    </defs>
-                    <Geographies geography={continentsHigh}>
-                        {({ geographies }: { geographies: any[] }) => (
-                            <g filter="url(#fg-watercolor)">
-                                {geographies.map((geo) => {
-                                    const fill = CONTINENT_FILL[geo.properties?.id] ?? paletteBg('lime')
-                                    return (
-                                        <Geography
-                                            key={geo.rsmKey}
-                                            geography={geo}
-                                            style={{
-                                                default: {
-                                                    fill,
-                                                    stroke: 'rgba(69,28,1,0.10)',
-                                                    strokeWidth: 0.3,
-                                                    outline: 'none',
-                                                },
-                                                hover: { fill, outline: 'none' },
-                                                pressed: { fill, outline: 'none' },
-                                            }}
-                                        />
-                                    )
-                                })}
-                            </g>
-                        )}
-                    </Geographies>
-                </ComposableMap>
-
-                {/* Paper grain overlay */}
-                <svg className="fg-grain" aria-hidden="true">
-                    <filter id="fg-grain-f">
-                        <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves={2} stitchTiles="stitch" />
-                    </filter>
-                    <rect width="100%" height="100%" filter="url(#fg-grain-f)" />
-                </svg>
-
-                {/* Specimens scattered over the map */}
-                <div className="fg-specimens">
-                    {ITEMS.map((item, i) => (
-                        <SpecimenCard
-                            key={item.kind === 'species' ? item.species.slug : item.name}
-                            item={item}
-                            index={i}
-                            inView={inView}
-                        />
-                    ))}
-                </div>
+                <img
+                    className="fg-map-bg"
+                    src={MAP_SRC}
+                    alt="A hand-drawn map of the territories where wild users are found"
+                />
+                {SPECIMENS.map((item, i) => (
+                    <SpecimenLink key={item.slug} item={item} index={i} inView={inView} />
+                ))}
             </div>
-
-            <p className="fg-map-note">
-                Ranges are illustrative and the cartography wholly invented; the species observe no borders and neither,
-                it seems, did our mapmaker.
-            </p>
 
             <div className="fg-title-block">
                 <h1 className="fg-title">The Field Guide to Wild Users</h1>
@@ -166,97 +98,79 @@ export default function Hero(): JSX.Element {
             </div>
 
             <style>{`
-                /* Remove ReaderView's default top padding above field-guide content */
                 [class~="pt-12"]:has(.fg-hero) { padding-top: 0 !important; }
                 .fg-hero {
                     container-type: inline-size;
                     position: relative;
                     width: 100%;
-                    padding: 0.75rem 1rem 3rem;
+                    padding: 0 0 3rem;
                     background: ${PAPER};
                     color: ${INK};
                 }
-                .fg-map-wrap {
-                    position: relative;
-                    max-width: 1100px;
-                    margin: 0 auto;
-                }
-                .fg-map { display: block; overflow: visible; }
-                .fg-grain {
-                    position: absolute;
-                    inset: 0;
-                    width: 100%;
-                    height: 100%;
-                    opacity: 0.05;
-                    mix-blend-mode: multiply;
-                    pointer-events: none;
-                }
-                .fg-specimens { position: absolute; inset: 0; pointer-events: none; }
+                .fg-map-wrap { position: relative; width: 100%; line-height: 0; }
+                .fg-map-bg { display: block; width: 100%; height: auto; }
+
                 .fg-specimen {
                     position: absolute;
-                    width: clamp(60px, 10cqw, 110px);
-                    transform: translate(-50%, -50%);
-                    text-align: center;
-                    transition: opacity 700ms ease, transform 700ms cubic-bezier(0.22, 1, 0.36, 1);
-                    will-change: opacity, transform;
-                    pointer-events: auto;
-                }
-                .fg-animal-link {
                     display: block;
+                    margin: 0;
+                    line-height: 0;
                     cursor: pointer;
-                    transition: transform 200ms ease;
+                    transition: opacity 700ms ease;
+                    will-change: opacity;
                 }
-                .fg-animal-link:hover { transform: translateY(-5px) scale(1.05); }
-                .fg-animal-link:focus-visible {
-                    outline: 2px solid ${INK};
-                    outline-offset: 4px;
-                    border-radius: 4px;
-                }
-                .fg-animal {
+                .fg-specimen img {
                     display: block;
                     width: 100%;
                     height: auto;
-                    filter: drop-shadow(2px 4px 3px rgba(69, 28, 1, 0.22));
+                    transition: transform 200ms ease, filter 250ms ease;
                 }
-                .fg-frame {
-                    position: relative;
-                    aspect-ratio: 271 / 211;
+                .fg-specimen:hover { z-index: 10; }
+                .fg-specimen:hover img { transform: scale(1.06); }
+                /* When any creature is hovered, the others recede into gold. */
+                .fg-map-wrap:has(.fg-specimen:hover) .fg-specimen:not(:hover) img {
+                    filter: sepia(0.9) saturate(3) hue-rotate(-12deg) brightness(0.82) contrast(0.9);
+                    opacity: 0.92;
+                }
+
+                /* Tooltip card, shown on hover */
+                .fg-tip {
+                    position: absolute;
+                    top: 40%;
+                    transform: translateY(-50%);
                     display: flex;
-                    align-items: center;
-                    justify-content: center;
                     flex-direction: column;
-                    gap: 0.2rem;
-                    border: 1.5px dashed rgba(69, 28, 1, 0.5);
-                    border-radius: 2px;
+                    gap: 2px;
+                    background: #fff;
+                    border: 1px solid rgba(69, 28, 1, 0.15);
+                    border-radius: 8px;
+                    padding: 0.5rem 0.75rem;
+                    box-shadow: 0 6px 18px rgba(69, 28, 1, 0.18);
+                    white-space: nowrap;
+                    line-height: 1.2;
+                    opacity: 0;
+                    pointer-events: none;
+                    transition: opacity 150ms ease;
+                    z-index: 2;
                 }
-                .fg-pending-mark {
+                .fg-specimen[data-tip='left'] .fg-tip { right: 100%; margin-right: 0.5rem; }
+                .fg-specimen[data-tip='right'] .fg-tip { left: 100%; margin-left: 0.5rem; }
+                .fg-specimen:hover .fg-tip { opacity: 1; }
+                .fg-tip-name {
                     font-family: 'RoundHog', sans-serif;
                     font-weight: 800;
-                    font-size: clamp(20px, 4cqw, 34px);
-                    color: rgba(69, 28, 1, 0.45);
-                    line-height: 1;
-                }
-                .fg-pending-label {
-                    font-style: italic;
-                    font-size: clamp(8px, 1.4cqw, 11px);
-                    color: rgba(69, 28, 1, 0.6);
-                }
-                .fg-map-note {
-                    text-align: center;
-                    font-style: italic;
-                    font-size: clamp(9px, 1.05cqw, 12px);
-                    line-height: 1.4;
-                    opacity: 0.5;
-                    max-width: none;
-                    margin: 0.75rem auto 0;
-                    padding-inline: 1rem;
+                    text-transform: uppercase;
+                    letter-spacing: 0.4px;
+                    font-size: clamp(11px, 1.1cqw, 14px);
                     color: ${INK};
                 }
-                .fg-title-block {
-                    text-align: center;
-                    margin-top: 1rem;
-                    padding-inline: clamp(1.5rem, 7cqw, 6rem);
+                .fg-tip-latin {
+                    font-style: italic;
+                    font-size: clamp(10px, 1cqw, 12px);
+                    color: rgba(69, 28, 1, 0.7);
                 }
+
+                .fg-title-block { text-align: center; margin-top: 1.5rem; padding-inline: clamp(1.5rem, 7cqw, 6rem); }
                 .fg-title {
                     font-family: 'RoundHog', sans-serif;
                     font-weight: 800;
@@ -268,12 +182,7 @@ export default function Hero(): JSX.Element {
                     color: ${INK};
                     margin: 0;
                 }
-                .fg-subtitle {
-                    font-style: italic;
-                    font-size: clamp(12px, 1.8cqw, 18px);
-                    margin: 0.6rem 0 0;
-                    color: ${INK};
-                }
+                .fg-subtitle { font-style: italic; font-size: clamp(12px, 1.8cqw, 18px); margin: 0.6rem 0 0; color: ${INK}; }
                 .fg-subtitle-link {
                     color: ${INK};
                     text-decoration: underline;
@@ -282,8 +191,8 @@ export default function Hero(): JSX.Element {
                 }
                 .fg-subtitle-link:hover { color: #E1554E; }
                 @media (prefers-reduced-motion: reduce) {
-                    .fg-specimen { transition: opacity 400ms ease; transform: translate(-50%, -50%) !important; }
-                    .fg-animal-link:hover { transform: none; }
+                    .fg-specimen { transition: opacity 300ms ease; }
+                    .fg-specimen:hover img { transform: none; }
                 }
             `}</style>
         </div>
