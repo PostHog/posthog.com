@@ -64,9 +64,3 @@ Persona is the role of the person we work alongside inside the account. Whoever 
 **Who we work alongside.** An engineer, or the one person who owns the data pipeline. They know the codebase, they don't know PostHog's failure modes, and they have other work. Our job is to leave them able to maintain it themselves.
 
 **The anti persona.** A team that wants a pair of hands for a few weeks. That work still happens, and sales scopes and bills it as professional services. We look for what compounds inside it anyway, because that's the habit we bring to every engagement, but we don't proactively look for this type of work.
-
-## What this page doesn't cover
-
-- **What we listen for.** The signals that surface a candidate account, and what makes one urgent. We're experimenting with ways to track this proactively and will add the additional context here as we learn.
-
-- **Free versus paid.** Outbound from us is free and inbound through Sales or a TAM is paid.
