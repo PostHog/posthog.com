@@ -94,13 +94,16 @@ const ScrollArea = ({
         >
             <RadixScrollArea.Viewport
                 ref={setViewportRef}
+                tabIndex={-1}
                 // Radix derives the viewport's overflow from Root state that only flips to
                 // `scroll` in the Scrollbar's effect, so server-rendered markup ships
                 // `overflow: hidden` and nothing scrolls until hydration. Both scrollbars below
                 // are unconditional, so both axes always end up `scroll` anyway — setting them
                 // here (Radix spreads `style` last) makes that true in the SSR'd HTML too.
                 style={{ overflowX: 'scroll', overflowY: 'scroll' }}
-                className={`app-scroll-viewport size-full ${viewportClasses} ${fadeHeight ? `pb-${fadeHeight}` : ''}`}
+                className={`app-scroll-viewport size-full outline-none ${viewportClasses} ${
+                    fadeHeight ? `pb-${fadeHeight}` : ''
+                }`}
             >
                 {fullWidth ? <div>{children}</div> : children}
             </RadixScrollArea.Viewport>

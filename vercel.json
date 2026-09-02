@@ -7,6 +7,15 @@
     },
     "headers": [
         {
+            "source": "/.well-known/http-message-signatures-directory",
+            "headers": [
+                {
+                    "key": "Content-Type",
+                    "value": "application/http-message-signatures-directory+json"
+                }
+            ]
+        },
+        {
             "source": "/docs/:path*",
             "headers": [
                 {
@@ -25,6 +34,15 @@
             ]
         },
         {
+            "source": "/(.*\\.md)",
+            "headers": [
+                {
+                    "key": "Content-Type",
+                    "value": "text/plain; charset=utf-8"
+                }
+            ]
+        },
+        {
             "source": "/(.*)",
             "headers": [
                 {
@@ -39,6 +57,25 @@
         }
     ],
     "rewrites": [
+        {
+            "source": "/docs/references/:slug(.*-\\d.*).md",
+            "destination": "/docs/references/version-unavailable.md"
+        },
+        {
+            "source": "/docs/references/:slug(.*-\\d.*)",
+            "has": [
+                {
+                    "type": "header",
+                    "key": "accept",
+                    "value": "(?:.*text/markdown.*)"
+                }
+            ],
+            "destination": "/docs/references/version-unavailable.md"
+        },
+        {
+            "source": "/docs/references/:slug(.*-\\d.*)",
+            "destination": "/docs/references/version-unavailable/index.html"
+        },
         {
             "source": "/docs/:path*/",
             "has": [
@@ -183,6 +220,26 @@
         }
     ],
     "redirects": [
+        {
+            "source": "/docs/session-replay/image-bot:ext(\\.md)?",
+            "destination": "/docs/ai-research/image-fetcher-bot:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/posthog-desktop/ai-generated-content:ext(\\.md)?",
+            "destination": "/docs/posthog-desktop/settings#ai-generated-content",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/session-replay/session-summaries-ai:ext(\\.md)?",
+            "destination": "/docs/replay-vision:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/posthog-ai/session-summaries:ext(\\.md)?",
+            "destination": "/docs/replay-vision:ext?",
+            "statusCode": 301
+        },
         {
             "source": "/docs/web-analytics/scroll-depth:ext(\\.md)?",
             "destination": "/docs/web-analytics/dashboard:ext?",
@@ -414,6 +471,11 @@
             "statusCode": 301
         },
         {
+            "source": "/security",
+            "destination": "/handbook/company/security",
+            "statusCode": 301
+        },
+        {
             "source": "/activity",
             "destination": "/docs/activity",
             "statusCode": 301
@@ -470,6 +532,14 @@
             "destination": "/teams/apm"
         },
         {
+            "source": "/teams/irl-events",
+            "destination": "/teams/builder-relations"
+        },
+        {
+            "source": "/teams/irl-events/:path*",
+            "destination": "/teams/builder-relations/:path*"
+        },
+        {
             "source": "/teams/query-performance",
             "destination": "/teams/analytics-platform"
         },
@@ -488,6 +558,14 @@
             "statusCode": 301
         },
         {
+            "source": "/teams/product-led-sales",
+            "destination": "/teams/sales-product-led"
+        },
+        {
+            "source": "/teams/product-led-sales/:path*",
+            "destination": "/teams/sales-product-led/:path*"
+        },
+        {
             "source": "/teams/customer-success",
             "destination": "/teams/customer-success-eu"
         },
@@ -497,7 +575,12 @@
         },
         {
             "source": "/docs/prompt-management/skills-store:ext(\\.md)?",
-            "destination": "/docs/ai-engineering/skills-store:ext?",
+            "destination": "/docs/skills:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/ai-engineering/skills-store:ext(\\.md)?",
+            "destination": "/docs/skills:ext?",
             "statusCode": 301
         },
         {
@@ -510,11 +593,11 @@
         },
         {
             "source": "/code/download",
-            "destination": "/desktop#download"
+            "destination": "/desktop"
         },
         {
             "source": "/code/download/",
-            "destination": "/desktop#download"
+            "destination": "/desktop"
         },
         {
             "source": "/slack-app",
@@ -611,6 +694,11 @@
         {
             "source": "/handbook/growth/revops/lead-assignment-ooo",
             "destination": "/handbook/growth/revops/lead-assignment-tracker",
+            "statusCode": 301
+        },
+        {
+            "source": "/handbook/growth/revops/icp-scoring",
+            "destination": "/handbook/growth/revops/icp-fit-score",
             "statusCode": 301
         },
         {
@@ -885,6 +973,14 @@
         {
             "source": "/docs/integrations/slack:ext(\\.md)?",
             "destination": "/docs/libraries/slack:ext?"
+        },
+        {
+            "source": "/docs/integrations/github:ext(\\.md)?",
+            "destination": "/docs/libraries/github:ext?"
+        },
+        {
+            "source": "/docs/integrations/discord:ext(\\.md)?",
+            "destination": "/docs/libraries/discord:ext?"
         },
         {
             "source": "/docs/posthog-code/slack:ext(\\.md)?",
@@ -5354,7 +5450,11 @@
         },
         {
             "source": "/docs/cdp/geoip-enrichment:ext(\\.md)?",
-            "destination": "/docs/cdp/transformations/posthog-plugin-geoip:ext?"
+            "destination": "/docs/cdp/transformations/template-geoip:ext?"
+        },
+        {
+            "source": "/docs/cdp/transformations/posthog-plugin-geoip:ext(\\.md)?",
+            "destination": "/docs/cdp/transformations/template-geoip:ext?"
         },
         {
             "source": "/docs/cdp/timestamp-parser:ext(\\.md)?",
@@ -5427,6 +5527,10 @@
         {
             "source": "/startups/apply",
             "destination": "https://app.posthog.com/startups"
+        },
+        {
+            "source": "/students/apply",
+            "destination": "https://app.posthog.com/students"
         },
         {
             "source": "/yc-onboarding",
@@ -5598,7 +5702,7 @@
         },
         {
             "source": "/docs/llm-analytics/skills-store:ext(\\.md)?",
-            "destination": "/docs/ai-engineering/skills-store:ext?"
+            "destination": "/docs/skills:ext?"
         },
         {
             "source": "/docs/llm-analytics/:path*",
@@ -6062,6 +6166,26 @@
         {
             "source": "/wizard",
             "destination": "/docs/ai-engineering/ai-wizard",
+            "statusCode": 301
+        },
+        {
+            "source": "/product-analytics-explorer/pricing",
+            "destination": "/product-analytics/pricing",
+            "statusCode": 301
+        },
+        {
+            "source": "/about-us",
+            "destination": "/about",
+            "statusCode": 301
+        },
+        {
+            "source": "/company",
+            "destination": "/about",
+            "statusCode": 301
+        },
+        {
+            "source": "/contact-us",
+            "destination": "/talk-to-a-human",
             "statusCode": 301
         }
     ]

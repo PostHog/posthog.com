@@ -136,7 +136,7 @@ const perks: { image: string; alt: string; title: string; copy: string }[] = [
     {
         image: 'https://res.cloudinary.com/dmukukwp6/image/upload/perk_merch_b2106b276a.png',
         alt: 'Exclusive PostHog founder merch and swag',
-        title: '$1,000 of founder swag',
+        title: 'Exclusive founder swag',
         copy: 'You can never have too many laptop stickers or free PostHog t-shirts.',
     },
     {
@@ -241,11 +241,38 @@ const faqItems = [
         ),
     },
     {
-        trigger: 'Can I use my credits on self-driving features?',
+        trigger: 'Can I use my credits on all PostHog products?',
         content: (
             <p>
-                Yes. Your credits work across every PostHog product, including AI observability, the context warehouse,
-                and self-driving. Use them on whatever gives your startup the most value.
+                Almost all of them. From September 14, 2026, startup credits can no longer be used towards bills
+                incurred on AI tools such as PostHog Desktop, the PostHog Slack app, Replay Vision, PostHog AI, and
+                Inbox. This is due to the prohibitive and unpredictable nature of token-based pricing. Credits still
+                cover everything else, including AI observability and the context warehouse.
+            </p>
+        ),
+    },
+    {
+        trigger: 'Can I use credits to claim a BAA under the Boost plan?',
+        content: (
+            <p>
+                Credits cannot be used to claim a BAA under the Boost plan due to legal risk. If you’d like to claim a
+                BAA, you can instead{' '}
+                <Link to="/talk-to-a-human" state={{ newWindow: true }} className="underline font-semibold">
+                    contact us to discuss options
+                </Link>
+                . Credits can be used towards other aspects of the Boost package.
+            </p>
+        ),
+    },
+    {
+        trigger: 'Why can I not use my credits on AI features?',
+        content: (
+            <p>
+                From September 14, 2026, startup credits can no longer be used towards bills incurred on AI tools such
+                as PostHog Desktop, the PostHog Slack app, Replay Vision, PostHog AI, and Inbox. Token-based pricing
+                makes the cost of these tools prohibitive and unpredictable, which makes them harder for us to
+                subsidize. If you joined PostHog for Startups before September 14, 2026, usage before this cut-off can
+                still be paid with credits.
             </p>
         ),
     },
@@ -257,8 +284,9 @@ const faqItems = [
                 <Link to="https://app.posthog.com/startups" external className="underline font-semibold">
                     form
                 </Link>
-                . We will apply the credit automatically if you're eligible. If you're accepted into the startups
-                program, we will notify you by email.
+                . Apply from a PostHog account that uses your company email address. We will apply the credit
+                automatically if you're eligible. If you're accepted into the startups program, we will notify you by
+                email.
             </p>
         ),
     },
@@ -267,7 +295,20 @@ const faqItems = [
         content: (
             <p>
                 Your company needs to be less than 2 years old and have raised less than $5m funding. You need to have
-                signed up any time from Jan 1st 2023 onwards.
+                signed up any time from Jan 1st 2023 onwards, and your PostHog account needs to use your company's email
+                domain. Applications from personal email addresses, like gmail.com or outlook.com, are not accepted.
+            </p>
+        ),
+    },
+    {
+        trigger: "What if we don't have a company email domain yet?",
+        content: (
+            <p>
+                You need one to apply, but you don't need credits to start. Every PostHog product has a{' '}
+                <Link to="/pricing" state={{ newWindow: true }} className="underline font-semibold">
+                    monthly free allowance
+                </Link>
+                , so you can build on PostHog for free and apply for the program once you have a company domain.
             </p>
         ),
     },
@@ -278,19 +319,6 @@ const faqItems = [
                 Yes, but only if you signed up after Jan 1st 2023. If your startup meets the eligibility criteria but
                 you signed up to PostHog before Jan 1st, we won't apply the credits but are still happy to enroll you in
                 the rest of the program.
-            </p>
-        ),
-    },
-    {
-        trigger: 'Can I use credits to claim a BAA under the Boost plan?',
-        content: (
-            <p>
-                Unfortunately, no. Credits cannot be used to claim a BAA under the Boost plan due to legal risk. If
-                you'd like to claim a BAA, you can instead{' '}
-                <Link to="/talk-to-a-human" state={{ newWindow: true }} className="underline font-semibold">
-                    contact us to discuss options
-                </Link>
-                . Credits can be used towards all other aspects of the Boost package.
             </p>
         ),
     },
@@ -376,13 +404,23 @@ const faqItems = [
         ),
     },
     {
-        trigger: 'What level of customer support do I get?',
+        trigger: 'What level of customer support do I get? Do I get a dedicated account manager?',
         content: (
             <p>
                 PostHog is run by a small team and, as such, we're only able to offer support to paying customers.
                 Organizations which are part of our startup plan are therefore not eligible for high priority customer
-                support, and only qualify for normal priority and community support. This is still the case even if you
-                apply your credits towards a platform package.
+                support, and only qualify for normal priority and community support. You also don't get a dedicated
+                account manager, customer success manager, or sales contact. This is still the case even if you apply
+                your credits towards a platform package, such as the enterprise add-on. If you want one-to-one help
+                getting set up, you can{' '}
+                <Link
+                    to="/merch?product=30-min-onboarding-consultation"
+                    state={{ newWindow: true }}
+                    className="underline font-semibold"
+                >
+                    purchase a 30-minute onboarding call with our team
+                </Link>
+                .
             </p>
         ),
     },
@@ -395,20 +433,24 @@ const faqStructuredData = [
         answer: 'A product that improves itself without waiting to be prompted. PostHog watches how people use your product, finds what is worth fixing, writes the code, and opens a pull request – all you do is hit merge.',
     },
     {
-        question: 'Can I use my PostHog for Startups credits on self-driving features?',
-        answer: 'Yes. Your credits work across every PostHog product, including AI observability, the context warehouse, and self-driving. Use them on whatever gives your startup the most value.',
+        question: 'Can I use my PostHog for Startups credits on all PostHog products?',
+        answer: 'Almost all of them. From September 14, 2026, startup credits can no longer be used towards bills incurred on AI tools such as PostHog Desktop, the PostHog Slack app, Replay Vision, PostHog AI, and Inbox, due to the prohibitive and unpredictable nature of token-based pricing. Credits still cover everything else, including AI observability and the context warehouse.',
     },
     {
         question: 'How do I apply to PostHog for Startups?',
-        answer: 'Sign up to a paid plan in PostHog (you are only charged for usage) and complete the startups application form. We apply the credit automatically if you are eligible and notify you by email once accepted.',
+        answer: 'Sign up to a paid plan in PostHog (you are only charged for usage) and complete the startups application form from an account that uses your company email address. We apply the credit automatically if you are eligible and notify you by email once accepted.',
     },
     {
         question: 'Who is eligible for PostHog for Startups?',
-        answer: 'Your company needs to be less than 2 years old and have raised less than $5m in funding, and you need to have signed up any time from Jan 1st 2023 onwards.',
+        answer: 'Your company needs to be less than 2 years old and have raised less than $5m in funding, you need to have signed up any time from Jan 1st 2023 onwards, and your PostHog account needs to use your company email domain. Applications from personal email addresses, like gmail.com or outlook.com, are not accepted.',
+    },
+    {
+        question: 'What if my startup does not have a company email domain yet?',
+        answer: 'You need a company email domain to apply, but you do not need credits to start. Every PostHog product has a monthly free allowance, so you can build on PostHog for free and apply for the program once you have a company domain.',
     },
     {
         question: 'How far does $50,000 in PostHog credits go?',
-        answer: 'It covers roughly 950 million events, more than 6 million session recordings, over 840 million LLM analytics events, or 396 million error tracking events – mix and match across products however makes sense for your startup.',
+        answer: 'A long way. It covers roughly 950 million events, more than 6 million session recordings, over 840 million LLM analytics events, or 396 million error tracking events. Credits cannot be used towards AI tools such as PostHog Desktop, the PostHog Slack app, Replay Vision, PostHog AI, and Inbox.',
     },
 ]
 
@@ -425,19 +467,19 @@ export default function StartupProgram({ partnerSlug = null }: StartupProgramPro
     const heroBullets = [
         `${creditValue} in PostHog credits for 12 months`,
         '$12,000 in benefits from partners we like',
-        '$1,000 of exclusive PostHog merch',
+        'Exclusive PostHog merch',
     ]
 
     return (
         <>
             <SEO
-                title="PostHog for Startups | $50K credits to build a self-driving product"
-                description="Get over $50,000 in credits to build a self-driving product with PostHog. Analytics, session replay, feature flags, AI, and agents that find and fix issues for you. Plus merch and partner perks. Apply in 2 minutes."
+                title="PostHog for Startups | $50K in credits for early-stage teams"
+                description="Get over $50,000 in PostHog credits for analytics, session replay, feature flags, and more, while you build a self-driving product. Plus merch and partner perks. Apply in 2 minutes."
                 image="/images/og/default.png"
                 structuredData={buildProductStructuredData({
                     name: 'PostHog for Startups',
                     description:
-                        'Over $50,000 in PostHog credits to build a self-driving product, plus exclusive merch and partner perks for early-stage teams.',
+                        'Over $50,000 in PostHog credits, plus exclusive merch and partner perks for early-stage teams building self-driving products.',
                     slug: 'startups',
                     faq: faqStructuredData,
                 })}
@@ -466,7 +508,7 @@ export default function StartupProgram({ partnerSlug = null }: StartupProgramPro
                         {/* show is set explicitly because the scroll trigger's -15% rootMargin never
                             fires for a heading this close to the top of the pane. */}
                         <h1 className="!mt-0 mb-4 text-xl font-bold leading-tight @xl/reader-content:mb-8 @xl/reader-content:text-3xl">
-                            {creditValue} in credits to build a{' '}
+                            {creditValue} in credits while you build a{' '}
                             <RoughAnnotation
                                 type="highlight"
                                 color="rgba(48, 164, 108, 0.2)"
@@ -484,8 +526,8 @@ export default function StartupProgram({ partnerSlug = null }: StartupProgramPro
                             <div className="min-w-0 @2xl/reader-content:flex-1 max-w-2xl">
                                 <p className="mt-0 mb-4">
                                     PostHog finds what's worth fixing, writes the code, and opens the pull request. You
-                                    get the credits to run it – plus swag and partner perks perfect for anyone building
-                                    AI products.
+                                    get credits for the whole platform – plus swag and partner perks perfect for anyone
+                                    building AI products.
                                 </p>
                                 <ul className="mb-4 list-none space-y-0.5 p-0 text-[15px]">
                                     {heroBullets.map((item) => (
@@ -539,7 +581,7 @@ export default function StartupProgram({ partnerSlug = null }: StartupProgramPro
                     </div>
 
                     <h3>
-                        Build a <Highlight>self-driving product</Highlight> with {creditValue} in credits
+                        Build a <Highlight>self-driving product</Highlight> with PostHog
                     </h3>
                     <p>
                         Building products used to mean manually writing code, running analysis, diagnosing bugs, and
@@ -573,8 +615,9 @@ export default function StartupProgram({ partnerSlug = null }: StartupProgramPro
                     </h3>
                     <p>
                         A <em>very</em> long way. Here's what your credits are worth if you spent them all in one place,
-                        but you can mix and match in whatever way makes sense for your startup. We're not fussy. We just
-                        want you to spend the money.
+                        but you can mix and match them across most PostHog products. The exceptions are AI tools such as
+                        PostHog Desktop, the PostHog Slack app, Replay Vision, PostHog AI, and Inbox, which credits
+                        can't be used for. Otherwise we're not fussy. We just want you to spend the money.
                     </p>
                     <div className="not-prose grid grid-cols-2 @2xl/reader-content:grid-cols-4 gap-4 my-6">
                         {creditBreakdown.map(({ Icon, color, amount, unit }) => (
@@ -627,14 +670,10 @@ export default function StartupProgram({ partnerSlug = null }: StartupProgramPro
                         >
                             ElevenLabs
                         </Link>
-                        ,{' '}
+                        , and{' '}
                         <Link to="/customers/hasura" state={{ newWindow: true }} className="!text-inherit underline">
                             Hasura
                         </Link>
-                        , and{' '}
-                        <Link to="/customers/lovable" state={{ newWindow: true }} className="!text-inherit underline">
-                            Lovable
-                        </Link>{' '}
                         – and built for engineers, with 30k+ stars and 500+ contributors on GitHub.
                     </p>
 
@@ -736,6 +775,7 @@ export default function StartupProgram({ partnerSlug = null }: StartupProgramPro
                                                 <ul className="pl-0 list-none ml-0">
                                                     <li>&lt;$5m in funding</li>
                                                     <li>&lt;2 years old</li>
+                                                    <li>Company email domain</li>
                                                 </ul>
                                             ),
                                             className: 'bg-[#FFF6DE] dark:bg-yellow/10 !border-l-2 !border-l-yellow',

@@ -38,7 +38,7 @@ To help you pick the best of these tools, we put together this list. All of the 
 - GitHub stars: 32.1k as of March 2026
 - [PostHog on GitHub](https://github.com/PostHog/posthog)
 
-[PostHog](/) is an all-in-one developer platform that combines [LLM observability](/llm-analytics) with several other developer-focused tools, such as [product](/product-analytics) and [web analytics](/web-analytics), [session replay](/session-replay), [feature flags](/feature-flags), [experiments](/experiments), [error tracking](/error-tracking), and [surveys](/surveys).
+[PostHog](/) is an all-in-one developer platform that combines [LLM observability](/ai-observability) with several other developer-focused tools, such as [product](/product-analytics) and [web analytics](/web-analytics), [session replay](/session-replay), [feature flags](/feature-flags), [experiments](/experiments), [error tracking](/error-tracking), and [surveys](/surveys).
 
 Its LLM observability product (known as [AI Observability](/docs/ai-observability)) integrates with popular LLM providers, captures details of generations, provides an aggregated metrics dashboard, and more.
 
@@ -73,7 +73,8 @@ Use the [setup wizard](/wizard) to get started in minutes – no sales call or e
 
 [Langfuse](/docs/ai-observability/integrations/langfuse-posthog) (recently acquired by ClickHouse) is an open source LLM engineering platform. It provides LLM call tracking and tracing, prompt management, evaluation, datasets, and more. These give LLM app developers tools they need for their entire workflow.
 
-Langfuse can be self-hosted for free. If you prefer a managed service, Langfuse Cloud is free to use up to 50k events per month and 2 users, but this only includes 30 day data access. Pricing beyond this starts at $29/m for 100k events with additional events at $8/m more.
+Langfuse can be self-hosted for free. If you prefer a managed service, Langfuse Cloud is free to use up to 50k units per month and 2 users, but this only includes 30 day data access. Pricing beyond this starts at $29/month for 100k units, with every additional 100k units being $8.
+
 
 ![Langfuse dashboard](https://res.cloudinary.com/dmukukwp6/image/upload/langfuse_6db7c2d9e7.png)
 
@@ -129,7 +130,7 @@ It integrates with the broader OpenTelemetry ecosystem, meaning it can instrumen
 
 Phoenix is an open source AI observability platform. It provides tracing, evaluation, experiments, prompt management, and more. It works out-of-the-box with frameworks like LlamaIndex and LangChain as well as LLM providers like OpenAI, Bedrock, and more. It’s built by Arize AI, a unified AI observability and evaluation platform. 
 
-Arize doesn’t provide a free hosted version of Phoenix. Their product, AX Pro, starts at $50 per month for 10k spans and up to 3 users.
+Arize doesn’t provide a free hosted version of Phoenix. Their product, AX Pro, starts at $50 per month for 10k spans and up to 3 users. They were acquired by Dynatrace in August 2026, so this may change in the near future though. 
 
 ![Phoenix](https://res.cloudinary.com/dmukukwp6/image/upload/phoenix_fb7498c189.png)
 

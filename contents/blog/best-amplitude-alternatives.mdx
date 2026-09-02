@@ -22,7 +22,7 @@ import ProductComparisonTable from 'components/ProductComparisonTable'
 
 [Amplitude](/blog/posthog-vs-amplitude) is a solid product analytics platform – it's powerful, mature, and trusted by thousands of companies – but it's not the right fit for every team.
 
-Maybe you need [error tracking](/error-tracking) or [LLM observability](/llm-analytics) that Amplitude doesn't offer. Maybe you're looking for a more developer-friendly platform. Maybe you just want to see what's out there; whatever the case, there are alternatives worth considering.
+Maybe you need [error tracking](/error-tracking) or [LLM observability](/ai-observability) that Amplitude doesn't offer. Maybe you're looking for a more developer-friendly platform. Maybe you just want to see what's out there; whatever the case, there are alternatives worth considering.
 
 In this guide, we compare the best Amplitude alternatives across analytics, session replay, experimentation, and more so you can find the right fit for your team and use case.
 
@@ -37,7 +37,7 @@ In this guide, we compare the best Amplitude alternatives across analytics, sess
 
 ### What is PostHog?
 
-[PostHog](/) (that's us 👋) is an all-in-one platform combining [product analytics](/product-analytics), [session replay](/session-replay), [feature flags](/feature-flags), [error tracking](/error-tracking), [LLM observability](/llm-analytics), [A/B testing](/experiments), and [user surveys](/surveys) into one product. This means it's not just an alternative to Amplitude, but also tools like [LaunchDarkly](/blog/best-launchdarkly-alternatives) and [FullStory](/blog/best-fullstory-alternatives).
+[PostHog](/) (that's us 👋) is an all-in-one platform combining [product analytics](/product-analytics), [session replay](/session-replay), [feature flags](/feature-flags), [error tracking](/error-tracking), [LLM observability](/ai-observability), [A/B testing](/experiments), and [user surveys](/surveys) into one product. This means it's not just an alternative to Amplitude, but also tools like [LaunchDarkly](/blog/best-launchdarkly-alternatives) and [FullStory](/blog/best-fullstory-alternatives).
 
 Typical PostHog users are engineers, founders, and product managers at startups and mid-size companies, particularly B2B companies. Customers include [Supabase](/customers/supabase), [Lovable](/customers/lovable), [ElevenLabs](/customers/elevenlabs), and many more.
 
@@ -84,8 +84,8 @@ Typical PostHog users are engineers, founders, and product managers at startups 
 <details>
 <summary>Main differences between PostHog and Amplitude</summary>
 
-- PostHog uses usage-based pricing (pay per event/replay); Amplitude charges per Monthly Tracked User (MTU).
-- PostHog offers 1M events, 5,000 replays, 1,500 survey responses free; Amplitude offers 10K MTUs and 1,000 replays.
+- Both charge by usage, but PostHog publishes per-unit rates for every product; Amplitude only publishes pricing for events on its Plus plan.
+- PostHog offers 1M events, 5,000 replays, 1,500 survey responses free; Amplitude offers 2M events and 1,000 replays.
 - PostHog includes error tracking, LLM observability, and SQL access; Amplitude lacks error tracking and LLM observability entirely.
 - PostHog is built for engineering-led teams; Amplitude is designed for product and marketing teams.
 
@@ -172,7 +172,7 @@ Mixpanel and Amplitude are the original product analytics platforms and have bat
 <details>
 <summary>Main differences between Mixpanel and Amplitude</summary>
 
-- Mixpanel charges per event with 1M events free; Amplitude charges per Monthly Tracked User (MTU) with 10K MTUs free.
+- Both charge per event; Mixpanel includes 1M events free, Amplitude includes 2M.
 - Amplitude offers warehouse-native queries directly on your data; Mixpanel syncs bidirectionally but doesn't sit on top of your warehouse.
 - Amplitude includes Guides & Surveys as an add-on; Mixpanel doesn't offer native survey functionality.
 - Amplitude launched session replay earlier; Mixpanel's is newer but includes mobile support and AI summaries.
@@ -707,7 +707,7 @@ According to G2, users are big fans of Statsig because:
 
 ## Which Amplitude alternative should you choose?
 
-- Want an [all-in-one developer platform](/products) with [analytics](/product-analytics), [error tracking](/error-tracking), [feature flags](/feature-flags), [experiments](/experiments), [LLM observability](/llm-analytics), [surveys](/surveys), and more, and [transparent pricing](/pricing)? Go with **PostHog**.
+- Want an [all-in-one developer platform](/products) with [analytics](/product-analytics), [error tracking](/error-tracking), [feature flags](/feature-flags), [experiments](/experiments), [LLM observability](/ai-observability), [surveys](/surveys), and more, and [transparent pricing](/pricing)? Go with **PostHog**.
 - Need focused product analytics without extra features? **Mixpanel** keeps it simple.
 - Looking for in-app guides, product tours, and roadmap tools? **Pendo** is built for product experience.
 - Want comprehensive autocapture with minimal setup? **Heap** gets you started fast.
@@ -755,7 +755,7 @@ You can steer it from [Slack](/slack), the [web app](/ai), the [desktop app](/de
 <details>
 <summary>Why look for an Amplitude alternative?</summary>
 
-Common reasons include: needing features Amplitude doesn't offer (like error tracking or LLM observability), wanting more transparent usage-based pricing instead of MTU-based contracts, preferring a more developer-friendly or open-source platform, or simply wanting more features in one tool.
+Common reasons include: needing features Amplitude doesn't offer (like error tracking or LLM observability), wanting self-serve pricing instead of a custom contract, preferring a more developer-friendly or open-source platform, or simply wanting more features in one tool.
 
 </details>
 
@@ -776,14 +776,14 @@ For most teams, **PostHog** is the best alternative. It includes everything Ampl
 <details>
 <summary>Which alternative has the best free tier?</summary>
 
-**PostHog** offers the most generous free tier: 1 million events, 5,000 session replays, and 1 million feature flag requests per month. Amplitude's free tier includes 10K MTUs and 1,000 session replays. Mixpanel offers 1 million events free but lacks session replay on free plans.
+**PostHog** offers the most generous free tier: 1 million events, 5,000 session replays, and 1 million feature flag requests per month. Amplitude's free tier includes 2 million events and 1,000 session replays. Mixpanel offers 1 million events free but lacks session replay on free plans.
 
 </details>
 
 <details>
 <summary>Which alternative is best for startups?</summary>
 
-**PostHog** stands out for early-stage companies. Beyond the generous free tier, startups can apply for [PostHog for Startups](/startups) to get $50,000 in additional credits. The usage-based pricing also means you only pay for what you use as you scale, rather than committing to seat-based or MTU contracts upfront.
+**PostHog** stands out for early-stage companies. Beyond the generous free tier, startups can apply for [PostHog for Startups](/startups) to get $50,000 in additional credits. The usage-based pricing also means you only pay for what you use as you scale, rather than committing to a custom contract.
 
 </details>
 
@@ -818,7 +818,7 @@ No. Amplitude does not offer error tracking or crash reporting. If you need to m
 <details>
 <summary>Does Amplitude have LLM observability?</summary>
 
-No. Amplitude does not offer LLM observability or AI analytics features. **PostHog** is currently the only analytics platform on this list that includes [LLM observability](/llm-analytics) for tracking AI product usage, monitoring model performance, analyzing token costs, and debugging LLM interactions.
+No. Amplitude does not offer LLM observability or AI analytics features. **PostHog** is currently the only analytics platform on this list that includes [LLM observability](/ai-observability) for tracking AI product usage, monitoring model performance, analyzing token costs, and debugging LLM interactions.
 
 </details>
 

@@ -29,6 +29,7 @@ import HedgeHogModeEmbed from 'components/HedgehogMode'
 import ReactConfetti from 'react-confetti'
 import { useToast } from '../../context/Toast'
 import { navigate } from 'gatsby'
+import useDesktopBadges from '../../hooks/useDesktopBadges'
 
 interface Product {
     name: string
@@ -196,8 +197,14 @@ function Desktop() {
                   }
                 : app
         )
-    const leftApps = applyGlow(productLinks)
-    const rightApps = applyGlow(apps)
+    // Notification badges come from app state (see useDesktopBadges), so they are
+    // merged in here rather than baked into the static `apps` array above.
+    const badges = useDesktopBadges()
+    const applyBadges = (items: AppItem[]) =>
+        items.map((app) => (app.url && badges[app.url] ? { ...app, badge: badges[app.url] } : app))
+
+    const leftApps = applyBadges(applyGlow(productLinks))
+    const rightApps = applyBadges(applyGlow(apps))
 
     // Mobile: one continuous wrapping grid (avoids a gap when left apps don't fill a row).
     // sm+: classic left/right desktop columns that wrap into extra columns when short on height.

@@ -1,8 +1,8 @@
 ---
-title: AI spend that jumps overnight
+title: Tell an AI cost spike from real growth
 shortTitle: AI spend
 subtitle: 'Did your AI feature get more expensive without more usage?'
-bookOrder: 2
+pocketGuideOrder: 2
 filters:
   type:
     - self-driving
@@ -81,33 +81,42 @@ report:
 
 <RightPage>
 
-# AI spend that jumps overnight
+# Tell an AI cost spike from real growth
 
 An LLM bill moves for one of two reasons: more conversations, or more cost per conversation. The
 first is growth. The second is a regression – a prompt grew, a model changed, a cache stopped
-hitting, a retry looped. This scout watches your LLM traces for the second kind.
+hitting, a retry looped, or someone abused your API for free inference.
+
+This scout watches your LLM traces for regressions.
 
 ## What the scout looks at
 
-The scout looks for patterns like <SeeFig n={1} />: you deployed a new version of your feature at `09:14`. Your conversation costs is rising, but volume is stable. This is a signal that LLM costs are rising. If both were rising, this is just growth.
+You deployed a new version of your feature at `09:14`. Your conversation costs are rising, but volume is stable. Which case is it?
+
+- If both are rising together, it's just growth. The scout stays _quiet_.
+- If costs rise while volume is stable, it signals a possible regression. The scout _**reports**_.
+
+That second pattern is what the scout looks for – <SeeFig n={1} /> shows the divergence it caught.
 
 ## The report in your inbox
 
-When your product emits <Term name="signal">signals</Term> that indicate AI costs are rising, a <Term name="scout" /> opens a <Term name="report" />. <SeeFig n={2} /> breaks the card down part by part. Click **Review** and the report opens <SeeFig n={3} /> with the full evidence, the raw signals, and options to take action. Yours would look like this one, but name your events, your deploys, and your users.
+When your product emits <Term name="signal">signals</Term> that indicate AI costs are rising, a <Term name="scout" /> opens a <Term name="report" />. <SeeFig n={2} /> breaks the card down part by part. Click **Review** and the report opens <SeeFig n={3} /> with the full evidence, the raw signals, and options to take action.
 
 ## The pull request you merge
 
-When you're ready to open a pull request, the agent does it for you, attaching the evidence along the way. You review and merge it like any other – nothing merges without you.
+When you're ready to open a pull request, PostHog dispatches an agent to do it for you with the report and evidence attached as context. You review and merge it like any other PR – nothing merges without you.
 
 Reports are free. Pull requests are **$15 each**, with your first three a month **free**. See self-driving [Pricing](/docs/self-driving/pricing).
 
 ## The scout itself
 
-Scouts are the heart of the self-driving system – they're instructions an agent follows on a schedule – <SeeFig n={4} /> is the actual file for this guide's custom scout.
+Scouts are the heart of the self-driving system – they're instructions an agent follows on a schedule – <SeeFig n={4} /> is the actual skill file for this guide's custom scout.
 
-It reads more than one <Term name="signal source" />, so the report can name a likely cause, not
-just a number that moved.
+It reads more than one <Term name="signal source" />, so the report will name a likely cause, not just a number that moved.
 
+This scout's signal sources come from the following product data:
+
+<!-- Rendered from the `watches:` list in this file's frontmatter – edit it there. -->
 <Watches />
 
 ## The schedule it runs on
@@ -116,6 +125,8 @@ This custom scout runs **daily** by default. You can choose to run it every 30 m
 
 ## Add this to your scout troop
 
+<!-- The requirement checklist comes from `requires:` in this file's frontmatter;
+    the scout itself (name, description, what the button prefills) is ../SKILL.md. -->
 <Enable />
 
 </RightPage>

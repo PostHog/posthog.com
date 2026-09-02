@@ -83,7 +83,7 @@ In this case, you can use `alias` to assign another distinct ID to the same user
 PostHog.alias("distinct_id")
 ```
 
-We strongly recommend reading our docs on [alias](/docs/data/identify#alias-assigning-multiple-distinct-ids-to-the-same-user) to best understand how to correctly use this method.
+We strongly recommend reading our docs on [alias](/docs/product-analytics/identify#alias-assigning-multiple-distinct-ids-to-the-same-user) to best understand how to correctly use this method.
 
 ## Anonymous and identified events
 
@@ -106,7 +106,7 @@ import HowToCaptureIdentifiedEvents from '../../product-analytics/_snippets/how-
 
 ## Setting person properties
 
-To set [properties](/docs/data/user-properties) on your users via an event, you can leverage the event properties `userProperties` and `userPropertiesSetOnce`.
+To set [properties](/docs/product-analytics/person-properties) on your users via an event, you can leverage the event properties `userProperties` and `userPropertiesSetOnce`.
 
 When capturing an event, you can pass a property called `userProperties` as an event property, and specify its value to be an object with properties to be set on the user that will be associated with the user who triggered the event.
 
@@ -491,6 +491,10 @@ config.addBeforeSend { event ->
     }
 }
 ```
+
+# Push notifications
+
+The Android SDK can register a device for [Workflows](/docs/workflows) push notifications and capture when a user opens one. For setup, including automatic and manual registration, capturing opens, opting out, and identity verification, see [Push notifications](/docs/workflows/push-notifications).
 
 # FAQ
 

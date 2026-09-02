@@ -359,7 +359,7 @@ function SidebarCollapsibleItem({
 const getActiveItem = (items: MenuItem[], currentUrl: string): MenuItem | undefined => {
     const url = currentUrl.replace(/\/$/, '')
     for (const item of items) {
-        if (item.url?.replace(/\/$/, '') === url && !getActiveItem(item.children || [], url)) {
+        if (item.url?.split('?')[0].replace(/\/$/, '') === url && !getActiveItem(item.children || [], url)) {
             return item
         }
         if (item.children?.length) {
@@ -606,14 +606,10 @@ function CollapsibleSection({
     )
 }
 
-const isOpen = (children: MenuItem[], activeItem: MenuItem | undefined): boolean => {
+const isOpen = (item: MenuItem, activeItem: MenuItem | undefined): boolean => {
     if (!activeItem) return false
-    return (
-        children &&
-        children.some((child: MenuItem) => {
-            return child === activeItem || (child.children && isOpen(child.children, activeItem))
-        })
-    )
+    if (item === activeItem) return true
+    return (item.children || []).some((child) => isOpen(child, activeItem))
 }
 
 function TreeMenuItem({
@@ -629,7 +625,7 @@ function TreeMenuItem({
     onClick: (item: MenuItem) => void
     expandOnly?: boolean
 }) {
-    const [open, setOpen] = useState(() => item.defaultOpen ?? false)
+    const [open, setOpen] = useState(() => item.defaultOpen || (Boolean(item.children) && isOpen(item, activeItem)))
     const hasChildren = item.children && item.children.length > 0
     const location = useLocation()
     const pathname = replacePath(location?.pathname)
@@ -640,7 +636,7 @@ function TreeMenuItem({
 
     useEffect(() => {
         if (item.children && !open && activeItem) {
-            setOpen(isOpen(item.children, activeItem))
+            setOpen(isOpen(item, activeItem))
         }
     }, [pathname])
 

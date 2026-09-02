@@ -1,25 +1,26 @@
 ---
-title: Startups & Y Combinator
+title: Startup programs and partnerships
 sidebar: Handbook
 showTitle: true
 ---
 
 > **Want to apply for our startups program?** [Sign-up here](/startups), or [apply on Bookface if you're in Y Combinator](https://bookface.ycombinator.com/deals/687). 
 
-We run two special programs for early-stage teams. The primary place for discussing both programs is the [#project-startups-and-yc](https://posthog.slack.com/archives/C088RSQKH2T) channel in Slack.
+We run two special programs for early-stage teams, plus external partnerships with [Lenny's Product Pass and Every.to](#external-partnerships). The primary place for discussing these is the [#project-startups-and-students](https://posthog.slack.com/archives/C088RSQKH2T) channel in Slack, where we also discuss [PostHog for Students](/students).
 
 | Feature                     | Startups                                              | Y Combinator                                          |
 | --------------------------- | ----------------------------------------------------- | ----------------------------------------------------- |
-| Eligibility                 | <2 years old, <$5M raised, not acquired               | Must be in YC, <$25m raised                           |
+| Eligibility                 | <2 years old, <$5M raised, not acquired, company email domain | Must be in YC, <$25m raised, company email domain     |
 | Credit                      | $50,000 for 12 months                                 | $50k per year, whilst eligible                        |
 | Can use credit for add-ons? | ⚠️ Yes, but cannot use credit for BAA in Boost package | ✅ Yes, and can use credit for BAA in Boost package    |
+| Can use credit for AI tools? | ❌ No, from September 14, 2026 (PostHog Desktop, PostHog Slack app, Replay Vision, PostHog AI, Inbox) | ❌ No, from September 14, 2026 (PostHog Desktop, PostHog Slack app, Replay Vision, PostHog AI, Inbox) |
 | Founder merch               | Welcome pack (max 1)                                  | Different welcome pack (max 4)                        |
 | Community                   | —                                                     | Tim's Whatsapp, priority support                      |
 | Apply via…                  | [Startup page](/startups)                             | [Secret YC page](https://app.posthog.com/startups/yc) |
 
 ## PostHog for Startups
 
-Any company that is <2 years old and has raised less than $5M in funding is eligible to apply and claim the following:
+Any company that is <2 years old and has raised less than $5M in funding is eligible to apply, from a PostHog account that uses the company's email domain, and claim the following:
 
 -   $50,000 in PostHog credits (valid for 12 months)
 -   One unique welcome pack for founders
@@ -28,9 +29,13 @@ Any company that is <2 years old and has raised less than $5M in funding is elig
 
 > ❗Credits **cannot** be used toward a BAA under the Boost plan.
 
+> ❗From September 14, 2026, credits **cannot** be used toward AI tools such as PostHog Desktop, the PostHog Slack app, Replay Vision, PostHog AI, and Inbox, due to the prohibitive and unpredictable nature of token-based pricing. Teams that joined before that date can still pay for usage incurred before the cut-off with credits.
+
 > ⭐ **Small open source projects** without corporate backing and less than $200k annual revenue can contact support to have the 12-month credit expiry waived.
 
 All applications are **automatically approved**, then **manually reviewed** for eligibility.
+
+Applications from free or disposable email domains (gmail.com, outlook.com, and similar) are rejected automatically at submission. This applies to both programs. Founders who don't have a company domain yet can still use the monthly free allowance on every product and apply once they have one.
 
 We track all PostHog for Startups applications in [this Zapier table](http://tables.zapier.com/app/tables/t/01JRARGWTSDYCGNS12HXN3B6DY) and [this Zap](https://zapier.com/editor/291861515/published?conversationId=6e76ea6b-ef2d-4851-9520-55be39df1232).
 
@@ -52,9 +57,30 @@ You can find the copy for the latest deal on Bookface in this [doc](https://docs
 
 > ✅ Credits **can** be used to claim a BAA under the Boost plan.
 
-YC teams must apply via [our secret YC page](https://app.posthog.com/startups/yc), where we ask for a screenshot from Bookface to prove their eligibility.
+YC teams must apply via [our secret YC page](https://app.posthog.com/startups/yc), from a PostHog account that uses the company's email domain, and we ask for a screenshot from Bookface to prove their eligibility.
 
 We track all PostHog for YC applications in [this Zapier table](https://tables.zapier.com/app/tables/t/01JRCYMWYAJNP3K0B6GTYKKBQB).
+
+## External partnerships
+
+Alongside the two programs above, we run two external partnerships that offer PostHog benefits to partner audiences. See [campaigns and coupons](/handbook/marketing/campaigns-and-coupons) for how redemption works.
+
+### Lenny's Product Pass
+
+Subscribers with [Lenny's Newsletter](https://www.lennysnewsletter.com/) Product Pass who are new paying customers get:
+
+-   2x the free tier limits on all usage-based products
+-   The Scale add-on for free
+-   Valid for one year
+
+Product exclusions are the same as for the PostHog for Startups plan, including PostHog Desktop, the PostHog Slack app, Inbox, and Replay Vision. See [posthog.com/startups](/startups) for more detail.
+
+### Every.to
+
+Subscribers to [Every](https://every.to/) get:
+
+-   $2,000 in credits for core products (only for new paying customers), with the same exclusions as for the PostHog for Startups program
+-   $2,000 in credits for AI products, covering products excluded from the PostHog for Startups program
 
 ## What happens after companies apply?
 
@@ -98,10 +124,13 @@ We send a short, founder-focused newsletter once per month to all program partic
 
 ## Credit usage
 
-Credits can be used for almost all PostHog tools and add-ons, including [platform packages](/platform-packages).
+Credits can be used for most PostHog tools and add-ons, including [platform packages](/platform-packages).
 
 -   **Startups**: ❌ Cannot use credits toward a BAA due to legal risk.
 -   **YC teams**: ✅ Can use credits for a BAA under the Boost plan.
+-   **AI tools**: ❌ From September 14, 2026, credits cannot be used toward AI tools such as PostHog Desktop, the PostHog Slack app, Replay Vision, PostHog AI, and Inbox, due to the prohibitive and unpredictable nature of token-based pricing. Usage incurred before the cut-off can still be paid with credits.
+
+Buying a platform package with credits – including the enterprise add-on – does not come with a dedicated account manager, CSM, or sales contact, in the same way it does not come with high priority support. Those are for paying customers. Founders who want one-to-one help can buy a [30-minute onboarding call](/merch?product=30-min-onboarding-consultation) from the merch store.
 
 Credits are valid are not transferable, and don’t carry over or convert to cash. They are valid for 12 months and that timer begins at application. Once expired or fully used, teams are moved to standard billing.
 

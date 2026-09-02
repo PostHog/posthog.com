@@ -49,9 +49,6 @@ export type QuestionData = {
     activeAt: string
     pinnedTopics: StrapiData<TopicData[]>
     slugs: { is: number; slug: string }[]
-    escalated: boolean
-    zendeskTicketID: number
-    autoLinkedToZendesk: boolean
 }
 
 export type AvatarData = {
@@ -64,6 +61,7 @@ export type ProfileData = {
     biography: string | null
     company: string | null
     companyRole: string | null
+    discord: string | null
     github: string | null
     linkedin: string | null
     location: string | null
@@ -99,9 +97,42 @@ export type ProfileData = {
     reputation?: number
 }
 
+export interface TransactionMetadata {
+    description?: string
+    redemption?: {
+        title?: string
+        code?: string
+    }
+    achievement?: {
+        iconURL?: string
+        title?: string
+    }
+    reply?: {
+        title?: string
+    }
+    question?: { id: number; subject: string; permalink: string }
+    capped?: boolean
+}
+
+export type Transaction = {
+    id: number
+    amount: number
+    date: string
+    type: 'gift' | 'achievement' | 'redemption'
+    metadata?: TransactionMetadata
+}
+
+export type Wallet = {
+    id?: number
+    balance: number
+    transactions?: Transaction[]
+}
+
 export type UserData = {
     email: string
     distinctId: string | null
+    // Only present when explicitly populated, which Strapi gates to the moderator role
+    wallet?: Wallet | null
 }
 
 export type ProfileQuestionsData = {

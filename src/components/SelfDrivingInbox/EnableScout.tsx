@@ -14,6 +14,14 @@ import { Requirement, RequirementLevel, ScoutSpec } from './types'
 /** Pinned shortcut to the enable block, which sits last because the page teaches top-to-bottom. */
 export function EnableScoutBar({ scout, templateTitle }: Pick<EnableScoutProps, 'scout' | 'templateTitle'>) {
     const posthog = usePostHog()
+
+    const trackAddScout = () =>
+        posthog?.capture('pocket_guide_interaction', {
+            kind: 'add_scout_click',
+            scout: scout?.name,
+            placement: 'pinned_bar',
+        })
+
     return (
         <div className="flex items-center gap-3 border-t border-primary bg-primary px-6 py-3">
             <span className="min-w-0 flex-1 truncate text-sm text-secondary">
@@ -25,13 +33,7 @@ export function EnableScoutBar({ scout, templateTitle }: Pick<EnableScoutProps, 
                 external
                 variant="primary"
                 size="sm"
-                onClick={() =>
-                    posthog?.capture('pocket_guide_interaction', {
-                        kind: 'add_scout_click',
-                        scout: scout?.name,
-                        placement: 'pinned_bar',
-                    })
-                }
+                onClick={trackAddScout}
             >
                 Add this scout
             </OSButton>
@@ -86,73 +88,52 @@ export default function EnableScout({ scout, requires, templateTitle }: EnableSc
     const hasScout = Boolean(scout?.name && scout?.description)
     const selfDrivingCommand = buildSelfDrivingCommand()
 
+    const trackAddScout = () =>
+        posthog?.capture('pocket_guide_interaction', {
+            kind: 'add_scout_click',
+            scout: scout?.name,
+            placement: 'enable_section',
+        })
+
+    const trackSetupCopy = () =>
+        posthog?.capture('pocket_guide_interaction', {
+            kind: 'setup_command_copy',
+            scout: scout?.name,
+            placement: 'enable_section',
+        })
+
     // No card chrome or heading of its own: the page hosting it owns the gutter and label.
     return (
         <div>
-            <p className="mb-4 text-[15px] text-secondary">
-                This is how the scout appears in PostHog once it's running – a scheduled agent that files a report when
-                it finds something.
-            </p>
-
-            {/* Labeled and inert: a toggle in its on state otherwise reads as a live control. */}
-            <p className="mb-1 text-[11px] font-bold uppercase tracking-wide text-secondary">Preview</p>
-            <div
-                aria-hidden="true"
-                className="pointer-events-none mb-4 flex select-none items-center gap-3 rounded border border-light bg-accent px-3 py-2.5 dark:border-dark dark:bg-accent-dark"
-            >
-                <span className="min-w-0 flex-1">
-                    <span className="flex items-center gap-2">
-                        <span className="truncate font-mono text-[13px] font-semibold text-primary">
-                            {scout?.name || 'signals-scout-custom'}
-                        </span>
-                        <span className="shrink-0 rounded-sm bg-highlight px-1 py-0.5 text-[11px] font-medium text-primary">
-                            Custom
-                        </span>
-                    </span>
-                    <span className="mt-0.5 block truncate text-[11px] text-secondary">
-                        {scout?.schedule || 'Daily'} · writes findings to your inbox
-                    </span>
-                </span>
-                {/* Not RadixUI/Switch – that renders a real form and label, wrong for a mock. */}
-                <span className="relative block h-[27px] w-[44px] shrink-0 rounded-full border border-primary bg-green">
-                    <span className="absolute top-1/2 left-[19px] block size-[21px] -translate-y-1/2 rounded-full bg-white" />
-                </span>
-            </div>
-
             {requires && requires.length > 0 && (
-                <ul className="mb-4 list-none space-y-1.5 p-0">
-                    {requires.map((requirement) => {
-                        const badge = REQUIREMENT_BADGE[requirement.level || 'required']
-                        return (
-                            <li key={requirement.label} className="flex items-start gap-2 text-[15px] text-primary">
-                                {/* Fixed width, not `shrink-0`: three badge widths left a ragged left edge. */}
-                                <span className="mt-0.5 w-[104px] shrink-0">
-                                    <span className={badgeClasses(badge.color)}>{badge.text}</span>
-                                </span>
-                                <span>
-                                    <RequirementLabel label={requirement.label} />
-                                </span>
-                            </li>
-                        )
-                    })}
-                </ul>
+                <>
+                    <p className="mb-[0.8em] text-[1em] leading-relaxed text-secondary">
+                        You'll need these to run this scout.
+                    </p>
+                    <ul className="mb-4 list-none space-y-1.5 p-0">
+                        {requires.map((requirement) => {
+                            const badge = REQUIREMENT_BADGE[requirement.level || 'required']
+                            return (
+                                <li
+                                    key={requirement.label}
+                                    className="flex items-start gap-2 text-[1em] leading-relaxed text-primary"
+                                >
+                                    {/* Fixed width, not `shrink-0`: three badge widths left a ragged left edge. */}
+                                    <span className="mt-0.5 w-[104px] shrink-0">
+                                        <span className={badgeClasses(badge.color)}>{badge.text}</span>
+                                    </span>
+                                    <span>
+                                        <RequirementLabel label={requirement.label} />
+                                    </span>
+                                </li>
+                            )
+                        })}
+                    </ul>
+                </>
             )}
 
             <div className="flex flex-wrap items-center gap-2">
-                <OSButton
-                    asLink
-                    to={deepLink}
-                    external
-                    variant="primary"
-                    size="md"
-                    onClick={() =>
-                        posthog?.capture('pocket_guide_interaction', {
-                            kind: 'add_scout_click',
-                            scout: scout?.name,
-                            placement: 'enable_section',
-                        })
-                    }
-                >
+                <OSButton asLink to={deepLink} external variant="primary" size="md" onClick={trackAddScout}>
                     Add this scout
                 </OSButton>
                 <span className="text-xs text-secondary">
@@ -171,6 +152,7 @@ export default function EnableScout({ scout, requires, templateTitle }: EnableSc
                 <CopyableCommand
                     command={selfDrivingCommand.displayCommand}
                     copyCommand={selfDrivingCommand.copyCommand}
+                    onCopy={trackSetupCopy}
                 />
             </div>
         </div>

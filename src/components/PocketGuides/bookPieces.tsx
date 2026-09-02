@@ -1,10 +1,15 @@
 import React from 'react'
 
+import usePostHog from '../../hooks/usePostHog'
+
 import Link from 'components/Link'
+import { SingleCodeBlock } from 'components/CodeBlock'
 import EnableScout from 'components/SelfDrivingInbox/EnableScout'
 import { productSource } from 'components/SelfDrivingInbox/sources'
 
 import { useEntry, useTemplate } from './bookContext'
+import { BookPageEntry, learnChapterPath, normalizeUrl, volumeIdFromUrl } from './bookModel'
+import { volumeArt } from './volumeArt'
 
 /** Inline cue to a figure, color only – bold read larger than the surrounding text. */
 export function SeeFig({ n }: { n: number }): JSX.Element {
@@ -14,6 +19,20 @@ export function SeeFig({ n }: { n: number }): JSX.Element {
 /** The small line above a title page's heading. */
 export function Eyebrow({ children }: { children: React.ReactNode }): JSX.Element {
     return <p className="mb-1 text-[0.8em] font-bold uppercase tracking-wide text-secondary">{children}</p>
+}
+
+/** The volume's specimen drawing, on the pages that open a book. */
+export function Frontispiece(): JSX.Element | null {
+    const Art = volumeArt(volumeIdFromUrl(useEntry()?.entry.url ?? ''))
+    if (!Art) {
+        return null
+    }
+    return (
+        <div aria-hidden="true" className="mb-[1.2em] mt-[2em] flex justify-center @lg:justify-start">
+            {/* Em-based cap: the specimen scales with the reader's Aa control like everything else. */}
+            <Art className="h-auto w-full max-w-[14em]" />
+        </div>
+    )
 }
 
 /** The signal sources this scout reads, from the use case's `watches` frontmatter. */
@@ -57,32 +76,76 @@ export function Enable(): JSX.Element | null {
     return <EnableScout scout={template.scout} requires={template.requires} templateTitle={template.templateTitle} />
 }
 
-/** The contents list, built from the book itself. */
+/** One page's row: a link, a dotted leader, and its folio number. */
+function ContentsRow({ page, basePath }: { page: BookPageEntry; basePath?: string }): JSX.Element {
+    // Inside the Learn tab the contents keep the reader in the tab; the standalone reader's
+    // pages are their own routes.
+    const to = basePath ? learnChapterPath(basePath, page) : page.url
+    return (
+        <li className="flex items-baseline gap-2">
+            <Link to={to} wrapperClassName="min-w-0" className="text-[1em] text-primary hover:underline">
+                {page.title}
+            </Link>
+            {/* The dotted leader, so the row reads as a ToC line. */}
+            <span aria-hidden="true" className="min-w-6 flex-1 border-b border-dotted border-primary opacity-50" />
+            <span className="shrink-0 text-[0.9em] tabular-nums text-secondary">
+                {String(page.page).padStart(2, '0')}
+            </span>
+        </li>
+    )
+}
+
+/**
+ * The contents list, built from the book itself. Groups into named sections when pages declare
+ * a `section` in frontmatter (consecutive by reading order); a book where no page does prints
+ * the same single flat list as before.
+ */
 export function Contents(): JSX.Element | null {
     const book = useEntry()
     if (!book) {
         return null
     }
-    return (
-        <ul className="m-0 list-none space-y-3 p-0">
-            {book.pages
-                .filter((page) => !page.isFrontMatter)
-                .map((page) => (
-                    <li key={page.url} className="flex items-baseline gap-2">
-                        <Link to={page.url} className="min-w-0 text-[1em] text-primary hover:underline">
-                            {page.title}
-                        </Link>
-                        {/* The dotted leader, so the row reads as a ToC line. */}
-                        <span
-                            aria-hidden="true"
-                            className="min-w-6 flex-1 border-b border-dotted border-primary opacity-50"
-                        />
-                        <span className="shrink-0 text-[0.9em] tabular-nums text-secondary">
-                            {String(page.page).padStart(2, '0')}
-                        </span>
-                    </li>
+    const pages = book.pages.filter((page) => !page.isFrontMatter)
+
+    if (pages.every((page) => !page.section)) {
+        return (
+            <ul className="m-0 list-none space-y-3 p-0">
+                {pages.map((page) => (
+                    <ContentsRow key={page.url} page={page} basePath={book.basePath} />
                 ))}
-        </ul>
+            </ul>
+        )
+    }
+
+    // Group consecutive pages sharing a section – reading order already sorted them.
+    const groups: { section?: string; pages: BookPageEntry[] }[] = []
+    for (const page of pages) {
+        const current = groups[groups.length - 1]
+        if (current && current.section === page.section) {
+            current.pages.push(page)
+        } else {
+            groups.push({ section: page.section, pages: [page] })
+        }
+    }
+
+    return (
+        <div className="space-y-6">
+            {groups.map((group, i) => (
+                // eslint-disable-next-line react/no-array-index-key
+                <div key={group.section ?? i}>
+                    {group.section && (
+                        <p className="m-0 mb-2 text-[0.8em] font-bold uppercase tracking-wide text-secondary">
+                            {group.section}
+                        </p>
+                    )}
+                    <ul className="m-0 list-none space-y-3 p-0">
+                        {group.pages.map((page) => (
+                            <ContentsRow key={page.url} page={page} basePath={book.basePath} />
+                        ))}
+                    </ul>
+                </div>
+            ))}
+        </div>
     )
 }
 
@@ -94,6 +157,38 @@ export function SeeAlso({ children }: { children: React.ReactNode }): JSX.Elemen
             <span aria-hidden="true" className="mb-2.5 block w-24 border-t border-primary" />
             {children}
         </aside>
+    )
+}
+
+// Borrows .article-content, overriding its red 'unstyled' alarm color and its fixed font
+// sizes – the book's type is em-based so the Aa control can scale everything together.
+const NATIVE_CONTENT =
+    'article-content !text-secondary [&_li]:![font-size:1em] [&_p]:![font-size:1em] [&_li]:!leading-relaxed [&_p]:!leading-relaxed [&_li]:![list-style-type:revert] [&_ul]:![list-style-type:revert] [&_ol]:![list-style-type:revert] [&_ul]:[padding-left:revert] [&_ol]:[padding-left:revert]'
+
+/** A prose link, counted like a CTA – some chapters answer with a link, not a button. */
+function BookLink({ href, ...props }: any): JSX.Element {
+    const posthog = usePostHog()
+    const book = useEntry()
+    const entry = book?.entry
+
+    // A link to another chapter of this book: inside the Learn tab it turns the page there,
+    // rather than sending the reader out to the standalone reader in a new window.
+    const basePath = book?.basePath
+    const chapter = basePath ? book?.pages.find((page) => page.url === normalizeUrl(href ?? '')) : undefined
+    const chapterPath = basePath && chapter ? learnChapterPath(basePath, chapter) : undefined
+
+    const trackLinkClick = () =>
+        posthog?.capture('pocket_guide_interaction', {
+            kind: 'guide_link_click',
+            href,
+            guide: entry?.url,
+            placement: 'prose',
+        })
+
+    return chapterPath ? (
+        <Link to={chapterPath} className="underline" onClick={trackLinkClick} {...props} />
+    ) : (
+        <Link to={href} state={{ newWindow: true }} className="underline" onClick={trackLinkClick} {...props} />
     )
 }
 
@@ -111,22 +206,62 @@ export const proseComponents = {
             {...props}
         />
     ),
-    h3: (props: any) => <h3 className="mb-[0.3em] mt-[0.65em] text-[1em] font-bold text-primary" {...props} />,
+    // Below the h2 section label, which is 0.8em uppercase: a 1em bold h3 under it inverts the
+    // hierarchy, reading as the larger of the two. Sentence case at 0.9em stays subordinate.
+    h3: (props: any) => <h3 className="mb-[0.3em] mt-[1.1em] text-[0.9em] font-bold text-primary" {...props} />,
     p: (props: any) => <p className="mb-[0.8em] text-[1em] leading-relaxed text-secondary last:mb-0" {...props} />,
+    // Lists and tables borrow the site's native docs styling (.article-content in global.css),
+    // wrapped per element because the class also styles headings/paragraphs, which the book owns.
     ul: (props: any) => (
-        <ul className="mb-[0.8em] mt-0 list-disc space-y-1 pl-5 text-[1em] text-secondary" {...props} />
+        <div className={NATIVE_CONTENT}>
+            <ul {...props} />
+        </div>
     ),
     ol: (props: any) => (
-        <ol className="mb-[0.8em] mt-0 list-decimal space-y-1 pl-5 text-[1em] text-secondary" {...props} />
+        <div className={NATIVE_CONTENT}>
+            <ol {...props} />
+        </div>
     ),
-    li: (props: any) => <li className="leading-relaxed" {...props} />,
+    // Cells get primary directly – the wrapper's secondary is for prose, and table text is data.
+    table: (props: any) => (
+        <div className={`${NATIVE_CONTENT} my-[0.8em] overflow-x-auto [&_td]:text-primary [&_th]:text-primary`}>
+            <table {...props} />
+        </div>
+    ),
     strong: (props: any) => <strong className="font-bold text-primary" {...props} />,
+    // Fenced code. MDX v1 sends the block through `code` and inline spans through `inlineCode`,
+    // so `pre` only has to get out of the way – a div inside it would be invalid nesting.
+    // Without this a fence renders unstyled and runs past the page column.
+    pre: ({ children }: any) => <>{children}</>,
+    code: ({ className, children }: any) => (
+        <div className="my-[0.8em] [&_.min-w-fit]:min-w-0 [&_.whitespace-pre]:whitespace-pre-wrap [&_.whitespace-pre]:break-words">
+            <SingleCodeBlock
+                language={String(className ?? '').replace('language-', '') || 'text'}
+                showCopy
+                showAskAI={false}
+            >
+                {String(children).replace(/\n$/, '')}
+            </SingleCodeBlock>
+        </div>
+    ),
+    // text-primary, not inherited: the chips sit on a tinted background inside secondary-colored
+    // prose, and the small mono face can't afford the double contrast loss.
     inlineCode: (props: any) => (
         <code
-            className="rounded border border-primary bg-accent px-1 py-0.5 text-[0.85em] dark:bg-accent-dark"
+            className="rounded border border-primary bg-accent px-1 py-0.5 text-[0.85em] text-primary dark:bg-accent-dark"
             {...props}
         />
     ),
-    a: ({ href, ...props }: any) => <Link to={href} state={{ newWindow: true }} className="underline" {...props} />,
+    a: (props: any) => <BookLink {...props} />,
     hr: () => <span aria-hidden="true" className="my-6 block w-16 border-t border-primary" />,
+    // A worked-example table inside a <Fig> – illustrative rows, not live data.
+    table: (props: any) => <table className="mb-[0.8em] w-full border-collapse text-left text-[0.85em]" {...props} />,
+    thead: (props: any) => <thead className="border-b border-primary" {...props} />,
+    th: (props: any) => (
+        <th
+            className="py-1.5 pr-3 text-[0.85em] font-bold uppercase tracking-wide text-secondary last:pr-0"
+            {...props}
+        />
+    ),
+    td: (props: any) => <td className="border-b border-primary/30 py-1.5 pr-3 text-primary last:pr-0" {...props} />,
 }

@@ -716,6 +716,7 @@ export default function Inbox(props) {
                                                         showSlug
                                                         isInForum={true}
                                                         onPinTopics={refresh}
+                                                        refreshList={refresh}
                                                     />
                                                 </div>
                                             </ScrollArea>

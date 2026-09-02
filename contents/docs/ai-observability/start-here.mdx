@@ -9,6 +9,7 @@ import { IconGraph, IconWarning, IconRewindPlay  } from '@posthog/icons'
 import LLMsInstallationPlatforms from './_snippets/llms-installation-platforms.tsx'
 import OSButton from 'components/OSButton'
 import WizardCommand from 'components/WizardCommand'
+import GuidesForProduct from 'components/PocketGuides/GuidesForProduct'
 
 
 <QuestLog firstSpeechBubble="Let's get started!" lastSpeechBubble="Time to integrate AI Observability!">
@@ -81,8 +82,8 @@ PostHog's SDK wrappers handle all the heavy lifting. Use your LLM provider as no
   - **Code-based (Hog)** – deterministic checks written in code
   - **Sentiment analysis** – classifies user sentiment as positive, neutral, or negative
 
-<ProductScreenshot
-  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/evaluations_screenshot_959ba893da.png"
+<ProductVideo
+  videoLight="https://res.cloudinary.com/dmukukwp6/video/upload/evals_e00c3b28ea.mp4"
   alt="AI Observability evaluations"
   classes="rounded"
 />
@@ -180,6 +181,20 @@ Reports land in your [inbox](/docs/self-driving/inbox), where one click turns th
 <OSButton variant="primary" asLink to="/docs/self-driving">
   Set up Self-driving
 </OSButton>
+
+</QuestLogItem>
+
+<QuestLogItem
+  title="Learn it by use case"
+  subtitle="Recommended"
+  icon="IconCompass"
+>
+
+The reference tells you what everything does. The pocket guide walks you through real problems, end to end.
+
+<div>
+  <GuidesForProduct product="ai-observability" />
+</div>
 
 </QuestLogItem>
 

@@ -253,7 +253,11 @@ export default function BookReader({
                             className="mt-auto flex items-baseline justify-between gap-4 px-5 pb-8 text-sm @xl:px-12"
                         >
                             {prev ? (
-                                <Link to={prev.url} className="min-w-0 truncate text-secondary hover:text-primary">
+                                <Link
+                                    to={prev.url}
+                                    wrapperClassName="min-w-0 truncate"
+                                    className="text-secondary hover:text-primary"
+                                >
                                     ‹ {prev.label}
                                 </Link>
                             ) : (
@@ -275,7 +279,8 @@ export default function BookReader({
                             {next ? (
                                 <Link
                                     to={next.url}
-                                    className="min-w-0 truncate text-right text-secondary hover:text-primary"
+                                    wrapperClassName="min-w-0 truncate text-right"
+                                    className="text-secondary hover:text-primary"
                                 >
                                     {next.label} ›
                                 </Link>
