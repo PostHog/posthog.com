@@ -3,29 +3,32 @@ import Link from 'components/Link'
 import { INK, PAPER } from './heroData'
 import { SPECIES_BY_SLUG } from './speciesData'
 
-// Creature-free yellow map (hosted on Cloudinary).
-const MAP_SRC = 'https://res.cloudinary.com/dmukukwp6/image/upload/Mac_Book_Pro_16_2_a54490c1f4.png'
-const img = (slug: string) => `/images/field-guide/hero/${slug}.png`
+// Creature-free color map (hosted on Cloudinary).
+const MAP_SRC = 'https://res.cloudinary.com/dmukukwp6/image/upload/color_map_e05cd23b04.png'
+const color = (slug: string) => `/images/field-guide/${slug}.png`
+const bw = (slug: string) => `/images/field-guide/hero/${slug}.png`
 
-// Each creature placed at its exact spot on the 1728×1117 map (top-left, % of frame),
-// with the tooltip card on whichever side keeps it on the map.
-type Specimen = { slug: string; left: number; top: number; width: number }
+// Each creature placed at its exact spot on the 1728×1117 map (top-left, % of frame).
+// The 6 illustrated species use their color art; the 4 pending ones keep the
+// black-and-white cutouts until color art exists.
+type Specimen = { slug: string; img: string; left: number; top: number; width: number }
 const SPECIMENS: Specimen[] = [
-    { slug: 'rage-clicker', left: 25.04, top: 14.32, width: 17.75 },
-    { slug: 'tab-hopper', left: 45.6, top: 19.79, width: 19.03 },
-    { slug: 'modal-slammer', left: 62.66, top: 7.4, width: 21.63 },
-    { slug: 'phantom-returner', left: 67.78, top: 31.24, width: 16.8 },
-    { slug: 'console-opener', left: 27.28, top: 46.37, width: 17.6 },
-    { slug: 'pricing-page-loiterer', left: 47.31, top: 41.99, width: 18.63 },
-    { slug: 'tutorial-skipper', left: 70.67, top: 49.78, width: 19.32 },
-    { slug: 'mid-form-fleer', left: 24.24, top: 67.95, width: 17.22 },
-    { slug: 'refreshing-pilgrim', left: 49.58, top: 77.98, width: 17.11 },
-    { slug: 'dead-end-wanderer', left: 59.0, top: 79.77, width: 19.71 },
+    { slug: 'rage-clicker', img: color('rage-clicker'), left: 30.09, top: 14.32, width: 8.01 },
+    { slug: 'tab-hopper', img: color('tab-hopper'), left: 51.1, top: 19.79, width: 8.04 },
+    { slug: 'modal-slammer', img: bw('modal-slammer'), left: 62.66, top: 7.4, width: 21.63 },
+    { slug: 'phantom-returner', img: bw('phantom-returner'), left: 67.78, top: 31.24, width: 16.8 },
+    { slug: 'console-opener', img: bw('console-opener'), left: 27.28, top: 46.37, width: 17.6 },
+    { slug: 'pricing-page-loiterer', img: color('pricing-page-loiterer'), left: 52.31, top: 41.99, width: 8.97 },
+    { slug: 'tutorial-skipper', img: color('tutorial-skipper'), left: 75.64, top: 49.78, width: 9.38 },
+    { slug: 'mid-form-fleer', img: color('mid-form-fleer'), left: 29.4, top: 67.95, width: 6.9 },
+    { slug: 'refreshing-pilgrim', img: color('refreshing-pilgrim'), left: 54.75, top: 77.98, width: 6.78 },
+    { slug: 'dead-end-wanderer', img: bw('dead-end-wanderer'), left: 59.0, top: 79.77, width: 19.71 },
 ]
 
 function SpecimenLink({ item, index, inView }: { item: Specimen; index: number; inView: boolean }): JSX.Element {
     const species = SPECIES_BY_SLUG[item.slug]
-    const tipSide = item.left < 50 ? 'right' : 'left'
+    // Point the card outward toward the empty map margin so it never covers another creature.
+    const tipSide = item.left < 50 ? 'left' : 'right'
     return (
         <Link
             to={species.route}
@@ -41,7 +44,7 @@ function SpecimenLink({ item, index, inView }: { item: Specimen; index: number; 
                 transitionDelay: `${index * 70}ms`,
             }}
         >
-            <img src={img(item.slug)} alt={species.name} loading="lazy" />
+            <img src={item.img} alt={species.name} loading="lazy" />
             <span className="fg-tip" aria-hidden="true">
                 <span className="fg-tip-name">{species.name}</span>
                 <span className="fg-tip-latin">{species.latin}</span>
@@ -127,10 +130,10 @@ export default function Hero(): JSX.Element {
                 }
                 .fg-specimen:hover { z-index: 10; }
                 .fg-specimen:hover img { transform: scale(1.06); }
-                /* When any creature is hovered, the others recede into gold. */
+                /* When any creature is hovered, the others recede (dim + desaturate). */
                 .fg-map-wrap:has(.fg-specimen:hover) .fg-specimen:not(:hover) img {
-                    filter: sepia(0.9) saturate(3) hue-rotate(-12deg) brightness(0.82) contrast(0.9);
-                    opacity: 0.92;
+                    filter: saturate(0.5) brightness(1.02);
+                    opacity: 0.4;
                 }
 
                 /* Tooltip card, shown on hover */
