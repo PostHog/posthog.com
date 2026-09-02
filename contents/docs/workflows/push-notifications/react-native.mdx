@@ -31,7 +31,7 @@ Both behaviors are on by default. An app that already has push configured and th
 
 On iOS the native SDK hooks the app delegate's remote-notification registration callback, so it picks up the APNs token once your app registers for remote notifications. On Android it fetches the FCM token at startup when Firebase Messaging is on the classpath (`@react-native-firebase/messaging` sets this up). The token is registered under the current distinct ID, so it follows the user across `identify()`.
 
-Open coverage differs per platform. On iOS every tap on a remote notification is captured whatever the app state; locally-scheduled notifications are ignored. On Android only cold-start taps are captured. Capture the rest manually (below).
+Open coverage differs per platform. On iOS every tap on a remote notification is captured whatever the app state, provided your app sets `UNUserNotificationCenter.current().delegate` — without one iOS reports the tap to nobody; locally-scheduled notifications are ignored. On Android only cold-start taps are captured. Capture the rest manually (below).
 
 The Android startup fetch doesn't see later token refreshes, so forward those yourself to keep the registered token current:
 
