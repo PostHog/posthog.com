@@ -106,6 +106,7 @@ export default function TalkToAHuman() {
                 description="PostHog is self-serve, but our team is here if you need us. Book a demo to get setup help, discuss your technical requirements, or see features in action."
                 image={`/images/og/talk-to-a-human.png`}
             />
+            <h1 className="sr-only">Talk to a human</h1>
             <ScrollArea>
                 <div data-scheme="primary" className="bg-accent text-primary h-full pt-2" data-default-form-id="509041">
                     <ContactSales formConfig={formConfig as any} />

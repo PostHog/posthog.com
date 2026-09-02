@@ -31,6 +31,7 @@ import { motion } from 'framer-motion'
 import KoreanMDXViewer from '../../components/Korean/KoreanMDXViewer'
 import KoreanHeroCarousel from '../../components/Korean/KoreanHeroCarousel'
 import { KoreanCustomers, getKoreanSharedDescriptors } from '../../components/Korean/KoreanHomeShared'
+import Hero from 'components/Home/Sections/Hero'
 
 type TranslateFn = (value: string) => string
 type ProductSummary = {
@@ -291,6 +292,7 @@ function HeroImage(): JSX.Element {
 }
 
 const jsxComponentDescriptors: JsxComponentDescriptor[] = [
+    { name: 'Hero', kind: 'flow', props: [], Editor: () => <Hero /> },
     { name: 'Tagline', kind: 'flow', props: [], Editor: () => <Tagline /> },
     { name: 'AppCount', kind: 'flow', props: [], Editor: () => <AppCount /> },
     { name: 'CompanyStageTabs', kind: 'flow', props: [], Editor: () => <CompanyStageTabs /> },
@@ -345,6 +347,7 @@ const jsxComponentDescriptors: JsxComponentDescriptor[] = [
 ]
 
 const getJsxComponentDescriptors = (t: TranslateFn): JsxComponentDescriptor[] => [
+    { name: 'Hero', kind: 'flow', props: [], Editor: () => <Hero /> },
     { name: 'Tagline', kind: 'flow', props: [], Editor: () => <Tagline t={t} /> },
     { name: 'AppCount', kind: 'flow', props: [], Editor: () => <AppCount t={t} /> },
     { name: 'CompanyStageTabs', kind: 'flow', props: [], Editor: () => <CompanyStageTabs t={t} /> },
