@@ -3,12 +3,13 @@ import { SEO } from 'components/seo'
 import Link from 'components/Link'
 import * as Icons from '@posthog/icons'
 import ReaderView from 'components/ReaderView'
-import { SearchUI } from 'components/SearchUI'
+import OSButton from 'components/OSButton'
 import { AppsList } from 'components/Docs/AppsList'
 import Book, { BookShelf } from 'components/PocketGuides/Book'
 import usePocketGuideCounts from '../../hooks/usePocketGuideCounts'
 import { POCKET_GUIDE_VOLUMES } from '../../constants/pocketGuides'
 import usePostHog from '../../hooks/usePostHog'
+import { useApp } from '../../context/App'
 
 /** A surface on the page ground, after `FeaturePanel` on `/desktop`. Colour lives in the icons only. */
 const Panel = ({
@@ -109,6 +110,7 @@ const surfaces = [
 
 export const DocsIndex = () => {
     const posthog = usePostHog()
+    const { openSearch } = useApp()
     const guideCounts = usePocketGuideCounts()
     // Reading order: Vol. 1 at the top of the shelf, the way a series is shelved.
     const volumes = [...POCKET_GUIDE_VOLUMES].sort((a, b) => a.volume - b.volume)
@@ -130,16 +132,24 @@ export const DocsIndex = () => {
                 <header>
                     <div className="pb-6">
                         <h1 className="m-0 text-3xl font-bold !leading-tight @xl/docs:text-4xl">PostHog Docs</h1>
-                        <p className="mt-3 mb-6 max-w-2xl text-[15px] leading-relaxed text-secondary @xl/docs:text-base">
-                            References for every product and tool, and use case guides to help you succeed.
-                        </p>
-                        <SearchUI
-                            initialFilter="docs"
-                            hideFilters
-                            isRefinedClassName="bg-accent"
-                            className="rounded border border-primary bg-primary shadow-sm overflow-hidden [&_input]:bg-primary [&_input]:py-3 [&_input]:text-base"
-                            autoFocus={false}
-                        />
+                        <div className="mt-3 flex flex-col items-start gap-3 @lg/docs:flex-row @lg/docs:items-center @lg/docs:justify-between">
+                            <p className="m-0 max-w-2xl flex-1 text-[15px] leading-relaxed text-secondary @xl/docs:text-base">
+                                References for every product and tool, and use case guides to help you succeed.
+                            </p>
+                            <div className="w-full @lg/docs:w-auto @lg/docs:shrink-0">
+                                <OSButton
+                                    type="button"
+                                    variant="secondary"
+                                    size="md"
+                                    width="full"
+                                    icon={<Icons.IconSearch />}
+                                    aria-label="Search docs"
+                                    onClick={() => openSearch('docs')}
+                                >
+                                    Search the docs
+                                </OSButton>
+                            </div>
+                        </div>
                     </div>
                 </header>
 

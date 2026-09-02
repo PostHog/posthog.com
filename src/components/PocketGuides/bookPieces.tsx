@@ -8,7 +8,7 @@ import EnableScout from 'components/SelfDrivingInbox/EnableScout'
 import { productSource } from 'components/SelfDrivingInbox/sources'
 
 import { useEntry, useTemplate } from './bookContext'
-import { BookPageEntry, volumeIdFromUrl } from './bookModel'
+import { BookPageEntry, learnChapterPath, normalizeUrl, volumeIdFromUrl } from './bookModel'
 import { volumeArt } from './volumeArt'
 
 /** Inline cue to a figure, color only – bold read larger than the surrounding text. */
@@ -77,10 +77,13 @@ export function Enable(): JSX.Element | null {
 }
 
 /** One page's row: a link, a dotted leader, and its folio number. */
-function ContentsRow({ page }: { page: BookPageEntry }): JSX.Element {
+function ContentsRow({ page, basePath }: { page: BookPageEntry; basePath?: string }): JSX.Element {
+    // Inside the Learn tab the contents keep the reader in the tab; the standalone reader's
+    // pages are their own routes.
+    const to = basePath ? learnChapterPath(basePath, page) : page.url
     return (
         <li className="flex items-baseline gap-2">
-            <Link to={page.url} wrapperClassName="min-w-0" className="text-[1em] text-primary hover:underline">
+            <Link to={to} wrapperClassName="min-w-0" className="text-[1em] text-primary hover:underline">
                 {page.title}
             </Link>
             {/* The dotted leader, so the row reads as a ToC line. */}
@@ -108,7 +111,7 @@ export function Contents(): JSX.Element | null {
         return (
             <ul className="m-0 list-none space-y-3 p-0">
                 {pages.map((page) => (
-                    <ContentsRow key={page.url} page={page} />
+                    <ContentsRow key={page.url} page={page} basePath={book.basePath} />
                 ))}
             </ul>
         )
@@ -137,7 +140,7 @@ export function Contents(): JSX.Element | null {
                     )}
                     <ul className="m-0 list-none space-y-3 p-0">
                         {group.pages.map((page) => (
-                            <ContentsRow key={page.url} page={page} />
+                            <ContentsRow key={page.url} page={page} basePath={book.basePath} />
                         ))}
                     </ul>
                 </div>
@@ -165,7 +168,14 @@ const NATIVE_CONTENT =
 /** A prose link, counted like a CTA – some chapters answer with a link, not a button. */
 function BookLink({ href, ...props }: any): JSX.Element {
     const posthog = usePostHog()
-    const entry = useEntry()?.entry
+    const book = useEntry()
+    const entry = book?.entry
+
+    // A link to another chapter of this book: inside the Learn tab it turns the page there,
+    // rather than sending the reader out to the standalone reader in a new window.
+    const basePath = book?.basePath
+    const chapter = basePath ? book?.pages.find((page) => page.url === normalizeUrl(href ?? '')) : undefined
+    const chapterPath = basePath && chapter ? learnChapterPath(basePath, chapter) : undefined
 
     const trackLinkClick = () =>
         posthog?.capture('pocket_guide_interaction', {
@@ -175,7 +185,11 @@ function BookLink({ href, ...props }: any): JSX.Element {
             placement: 'prose',
         })
 
-    return <Link to={href} state={{ newWindow: true }} className="underline" onClick={trackLinkClick} {...props} />
+    return chapterPath ? (
+        <Link to={chapterPath} className="underline" onClick={trackLinkClick} {...props} />
+    ) : (
+        <Link to={href} state={{ newWindow: true }} className="underline" onClick={trackLinkClick} {...props} />
+    )
 }
 
 /** Prose defaults. The page container is `not-prose`, so every tag is styled here. */

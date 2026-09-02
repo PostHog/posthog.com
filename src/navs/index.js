@@ -15,7 +15,7 @@ export const dataPipelines = {
             color: 'seagreen',
         },
         {
-            name: 'Get started',
+            name: 'Setup',
         },
         {
             name: 'Start here',
@@ -1971,6 +1971,10 @@ export const handbookSidebar = [
                         url: '/handbook/community/questions',
                     },
                     {
+                        name: 'Community moderator tools',
+                        url: '/handbook/community/moderator-tools',
+                    },
+                    {
                         name: 'Profiles',
                         url: '/handbook/community/profiles',
                     },
@@ -2318,7 +2322,7 @@ export const companyMenu = {
 // PostHog Desktop docs nav — nested inside Self-driving
 const posthogDesktopNav = [
     {
-        name: 'Getting started',
+        name: 'Setup',
     },
     {
         name: 'Quick Tour',
@@ -2584,7 +2588,7 @@ export const docsMenu = {
                     },
                 },
                 {
-                    name: 'Get started',
+                    name: 'Setup',
                 },
                 {
                     name: 'Set up self-driving',
@@ -4232,7 +4236,7 @@ export const docsMenu = {
                     color: 'seagreen',
                 },
                 {
-                    name: 'Get started',
+                    name: 'Setup',
                 },
                 {
                     name: 'Start here',
@@ -4556,7 +4560,7 @@ export const docsMenu = {
                     featured: true,
                 },
                 {
-                    name: 'Get started',
+                    name: 'Setup',
                 },
                 {
                     name: 'Start here',
@@ -4780,7 +4784,7 @@ export const docsMenu = {
                     color: 'seagreen',
                 },
                 {
-                    name: 'Get started',
+                    name: 'Setup',
                 },
                 {
                     name: 'Start here',
@@ -5136,7 +5140,7 @@ export const docsMenu = {
                     color: 'seagreen',
                 },
                 {
-                    name: 'Get started',
+                    name: 'Setup',
                 },
                 {
                     name: 'Start here',
@@ -5411,7 +5415,7 @@ export const docsMenu = {
                     color: 'seagreen',
                 },
                 {
-                    name: 'Get started',
+                    name: 'Setup',
                 },
                 {
                     name: 'Start here',
@@ -5769,7 +5773,7 @@ export const docsMenu = {
                     color: 'seagreen',
                 },
                 {
-                    name: 'Get started',
+                    name: 'Setup',
                 },
                 {
                     name: 'Start here',
@@ -6189,7 +6193,7 @@ export const docsMenu = {
                     color: 'seagreen',
                 },
                 {
-                    name: 'Get started',
+                    name: 'Setup',
                 },
                 {
                     name: 'Start here',
@@ -6353,7 +6357,7 @@ export const docsMenu = {
                     color: 'teal',
                 },
                 {
-                    name: 'Getting started',
+                    name: 'Setup',
                 },
                 {
                     name: 'Start here',
@@ -6472,7 +6476,7 @@ export const docsMenu = {
                     color: 'seagreen',
                 },
                 {
-                    name: 'Get started',
+                    name: 'Setup',
                 },
                 {
                     name: 'Start here',
@@ -6701,7 +6705,7 @@ export const docsMenu = {
                     },
                 },
                 {
-                    name: 'Getting started',
+                    name: 'Setup',
                 },
                 {
                     name: 'Start here',
@@ -6772,7 +6776,7 @@ export const docsMenu = {
                     color: 'seagreen',
                 },
                 {
-                    name: 'Get started',
+                    name: 'Setup',
                 },
                 {
                     name: 'Start here',
@@ -7369,7 +7373,7 @@ export const docsMenu = {
                     color: 'seagreen',
                 },
                 {
-                    name: 'Get started',
+                    name: 'Setup',
                 },
                 {
                     name: 'Start here',
@@ -7516,7 +7520,7 @@ export const docsMenu = {
                     },
                 },
                 {
-                    name: 'Getting started',
+                    name: 'Setup',
                 },
                 {
                     name: 'Start here',
@@ -7651,7 +7655,7 @@ export const docsMenu = {
                     },
                 },
                 {
-                    name: 'Getting started',
+                    name: 'Setup',
                 },
                 {
                     name: 'Start here',
@@ -7774,7 +7778,7 @@ export const docsMenu = {
                     color: 'seagreen',
                 },
                 {
-                    name: 'Get started',
+                    name: 'Setup',
                 },
                 {
                     name: 'Start here',
@@ -7929,7 +7933,7 @@ export const docsMenu = {
                     color: 'seagreen',
                 },
                 {
-                    name: 'Get started',
+                    name: 'Setup',
                 },
                 {
                     name: 'Start here',
@@ -8103,7 +8107,7 @@ export const docsMenu = {
                     color: 'blue',
                 },
                 {
-                    name: 'Get started',
+                    name: 'Setup',
                 },
                 {
                     name: 'Start here',
@@ -8249,6 +8253,12 @@ export const docsMenu = {
                     icon: 'IconHome',
                     color: 'seagreen',
                 },
+                {
+                    name: 'Community skills',
+                    url: '/docs/skills/community',
+                    icon: 'IconPeople',
+                    color: 'blue',
+                },
             ],
         },
         {
@@ -8268,7 +8278,7 @@ export const docsMenu = {
                     color: 'seagreen',
                 },
                 {
-                    name: 'Getting started',
+                    name: 'Setup',
                 },
                 {
                     name: 'Start here',
@@ -8324,7 +8334,7 @@ export const docsMenu = {
                     color: 'seagreen',
                 },
                 {
-                    name: 'Getting started',
+                    name: 'Setup',
                 },
                 {
                     name: 'Start here',
@@ -8376,7 +8386,7 @@ export const docsMenu = {
                     color: 'seagreen',
                 },
                 {
-                    name: 'Get started',
+                    name: 'Setup',
                 },
                 {
                     name: 'Start here',
