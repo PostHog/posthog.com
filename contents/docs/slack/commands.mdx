@@ -3,7 +3,7 @@ title: PostHog Slack app commands and limitations
 sidebarTitle: Commands
 ---
 
-The full set of commands `@PostHog` accepts, in the same order it lists them when you run `@PostHog help`:
+The full set of commands the app accepts, in the same order `/posthog help` lists them:
 
 | Command | What it does |
 | ------------------------------------------- | ------------------------------------------------------------------- |
@@ -15,7 +15,7 @@ The full set of commands `@PostHog` accepts, in the same order it lists them whe
 | `@PostHog project` | Show which PostHog project your mentions route to in this workspace |
 | `@PostHog project <id>` | Set the PostHog project your mentions route to in this workspace |
 | `@PostHog project workspace <id>` | Set the workspace-wide default project (Slack admins/owners only) |
-| `@PostHog help` | Show the command list |
+| `/posthog help` | Show the command list. `@PostHog help` only replies with a pointer to this slash command |
 
 For repo selection, the bot checks routing rules first. If nothing matches and you have multiple repos, it opens the in-thread picker. If you only have one repo connected, the task runs against it directly. The `project` commands only matter if your Slack workspace is connected to multiple PostHog projects.
 
@@ -23,7 +23,12 @@ See [Pick a project](/docs/slack/setup#pick-a-project).
 
 ## The `/posthog` slash command
 
-Every command above is also available as a `/posthog` slash command – `/posthog help`, `/posthog rules list`, `/posthog project <id>`, and so on. Bare `/posthog` shows the command list. Slash commands are for configuration only: to start a task, mention `@PostHog` or [DM the bot](/docs/slack#dm-the-bot). One difference: `/posthog rules add` needs the repo inline (`/posthog rules add "description" org/repo`) since there's no thread to open a picker in.
+Every configuration command above is also available as a `/posthog` slash command – `/posthog rules list`, `/posthog project <id>`, and so on. Bare `/posthog` does the same as `/posthog help`. Slash commands do configuration only: to start a task, mention `@PostHog` or [DM the bot](/docs/slack#dm-the-bot). There is no slash command for task creation.
+
+Two commands work on one surface only:
+
+- `help` shows the command list on the slash surface only. `@PostHog help`, in a channel or in a DM, replies with a pointer to `/posthog help`.
+- `rules add` needs the repo inline on the slash surface (`/posthog rules add "description" org/repo`), because there's no thread to open a picker in.
 
 In a DM with the bot, drop the mention instead: `project <id>`, `rules list`, etc.
 
