@@ -108,6 +108,7 @@ export default function TalkToAHuman() {
             />
             <ScrollArea>
                 <div data-scheme="primary" className="bg-accent text-primary h-full pt-2" data-default-form-id="509041">
+                    <h1 className="sr-only">Talk to a human</h1>
                     <ContactSales formConfig={formConfig as any} />
                 </div>
             </ScrollArea>

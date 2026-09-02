@@ -423,7 +423,7 @@ export default function Collection(props: CollectionProps): React.ReactElement {
             <HeaderBar
                 showBack
                 showForward
-                showCustomLeft={<h2 className="text-primary">Merch store</h2>}
+                showCustomLeft={<h1 className="text-primary">Merch store</h1>}
                 onCartOpen={handleCartOpen}
                 onCartClose={handleCartClose}
                 isCartOpen={cartIsOpen}
@@ -539,6 +539,7 @@ export default function Collection(props: CollectionProps): React.ReactElement {
                                 {/* <ShippingBanner /> */}
                                 <div className="flex gap-4">
                                     <div className="@container flex-1 not-prose">
+                                        <h2 className="sr-only">Products</h2>
                                         <ProductGrid
                                             products={filteredProducts}
                                             onProductClick={handleProductSelect}
