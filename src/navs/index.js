@@ -8613,12 +8613,6 @@ export const pricingMenu = {
         //     url: '/events',
         // },
         {
-            name: 'Add-ons',
-            icon: 'IconPuzzle',
-            color: 'seagreen',
-            url: '/addons',
-        },
-        {
             name: 'Platform packages',
             icon: 'IconServer',
             color: 'purple',
