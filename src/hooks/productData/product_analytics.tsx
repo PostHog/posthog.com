@@ -24,6 +24,7 @@ export const productAnalytics = {
     ...getTool('product_analytics'),
     Icon: IconGraph,
     type: 'product_analytics',
+    categoryName: 'Analytics',
     teamSlug: 'product-analytics',
     forumTopicId: 349,
     color: 'blue',

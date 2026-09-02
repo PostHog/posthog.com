@@ -9,10 +9,25 @@ import FreeTierTicker from 'components/Pricing/Redesign/FreeTierTicker'
 import CustomerLogos from 'components/Pricing/Redesign/CustomerLogos'
 import MoreOptions from 'components/Pricing/Redesign/MoreOptions'
 import CalculatorReveal from 'components/Pricing/Redesign/CalculatorReveal'
+import CalculatorSection from 'components/Pricing/Redesign/CalculatorSection'
 import PricingJourney from 'components/Pricing/Redesign/PricingJourney'
 import Surfaces from 'components/Pricing/Redesign/Surfaces'
 import Philosophy from './philosophy'
 import ShamelessCTA from 'components/Home/ShamelessCTA'
+import { RenderInClient } from 'components/RenderInClient'
+
+export const PRICING_CALCULATOR_FLAG = 'pricing-calculator-visibility'
+
+export const PRICING_CALCULATOR_VARIANTS = {
+    control: 'control',
+    shown: 'shown',
+} as const
+
+function isShownVariant(): boolean {
+    // Called from RenderInClient after flags resolve (or after the 5s fallback).
+    // An unresolved flag is control — the collapsed calculator.
+    return window.posthog?.getFeatureFlag?.(PRICING_CALCULATOR_FLAG) === PRICING_CALCULATOR_VARIANTS.shown || true
+}
 
 /**
  * `/pricing`.
@@ -63,10 +78,23 @@ export default function Pricing(): JSX.Element {
                     <h2 className="text-2xl mb-0">Platform features, volume discounts, and onboarding help</h2>
                 </SectionHeader>
                 <MoreOptions />
-                {/* The calculator is a footnote *inside* this section, so the cards and the
-                    calculator share one section break. It owns `#calculator`. */}
-                <CalculatorReveal />
+                <RenderInClient render={() => (isShownVariant() ? <></> : <CalculatorReveal />)} />
             </SectionLayout>
+
+            <RenderInClient
+                render={() =>
+                    isShownVariant() ? (
+                        <SectionLayout id="calculator" className="not-prose">
+                            <SectionHeader>
+                                <h2 className="text-2xl mb-0">Pricing calculator</h2>
+                            </SectionHeader>
+                            <CalculatorSection />
+                        </SectionLayout>
+                    ) : (
+                        <></>
+                    )
+                }
+            />
 
             <Philosophy />
 
