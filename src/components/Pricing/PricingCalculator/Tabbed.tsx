@@ -261,6 +261,42 @@ const DEFAULT_PRODUCT_TYPES = [
 ]
 
 const PLATFORM_PACKAGES_TYPE = 'platform_packages'
+const EMPTY_STATE_STARTER_TYPES = ['product_analytics', 'session_replay', 'feature_flags']
+
+const EmptyEstimate = ({ products, onAdd }) => {
+    const starters = EMPTY_STATE_STARTER_TYPES.map((type) => products.find((product) => product.type === type)).filter(
+        Boolean
+    )
+    return (
+        <div className="p-4 border border-primary rounded-md border-dashed">
+            <h3 className="m-0 text-2xl">Nothing to estimate yet</h3>
+            <p className="mt-2 mb-0 text-sm text-secondary max-w-lg">
+                Add what you'd actually ship. Every product has its own monthly free tier, so an estimate of $0 is a
+                real answer.
+            </p>
+            <p className="mt-4 mb-2 text-xs font-semibold uppercase tracking-wide text-secondary">Start with</p>
+            <div className="flex flex-wrap gap-2">
+                {starters.map(({ type, name, categoryName, Icon, color, colorDark }) => (
+                    <button
+                        key={type}
+                        type="button"
+                        onClick={() => onAdd(type)}
+                        className="flex items-center gap-1.5 px-2 py-1 rounded-md border border-primary bg-white dark:bg-accent-dark text-sm font-semibold click hover:bg-accent"
+                    >
+                        {Icon && (
+                            <Icon
+                                className={`w-4 h-4 shrink-0 text-${color}${
+                                    colorDark ? ` dark:text-${colorDark}` : ''
+                                }`}
+                            />
+                        )}
+                        <span>{categoryName || name}</span>
+                    </button>
+                ))}
+            </div>
+        </div>
+    )
+}
 
 const CopyURLButton = ({ onClick }) => {
     const [copied, setCopied] = useState(false)
@@ -292,8 +328,8 @@ export default function Tabbed() {
         }, [])
     )
     const platform = billingProducts.find((product) => product.type === 'platform_and_support')
-    const [activeType, setActiveType] = useState(DEFAULT_PRODUCT_TYPES[0])
-    const [selectedTypes, setSelectedTypes] = useState(DEFAULT_PRODUCT_TYPES)
+    const [activeType, setActiveType] = useState<string | null>(DEFAULT_PRODUCT_TYPES[0])
+    const [selectedTypes, setSelectedTypes] = useState<string[]>(DEFAULT_PRODUCT_TYPES)
     const [addingProduct, setAddingProduct] = useState(false)
     const [productSearch, setProductSearch] = useState('')
     const addProductRef = useRef(null)
@@ -673,6 +709,10 @@ export default function Tabbed() {
                     </div>
                 </div>
                 <div className="col-span-12 @2xl:col-span-8 md:pl-0 flex flex-col">
+                    {selectedProducts.length === 0 && !platformPackagesActive && (
+                        <EmptyEstimate products={products} onAdd={addProduct} />
+                    )}
+
                     {platformPackagesActive && (
                         <>
                             <div className="flex items-center gap-2.5 mb-1">
