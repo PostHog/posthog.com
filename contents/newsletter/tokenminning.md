@@ -48,7 +48,7 @@ Tracking quality also reveals failures like bad queries, repeated retries, and a
 
 <NewsletterForm />
 
-## 2. Optimize your `AGENTS.md`
+## 2. [Optimize your `AGENTS.md`](/newsletter/fix-your-agents)
 
 Your `AGENTS.md` is like a backpack you carry wherever you go. Its goal is to save your agent tokens when they read it. To best do that, it should include:
 
@@ -63,7 +63,7 @@ It shouldn't include:
 - One ls or grep answers, like directory trees, the list of packages, 200 line reference components
 - Docs meant for humans, like mission statements or contributing etiquette
 
-An `AGENTS.md` file is [definitely worth having](/newsletter/fix-your-agents) though. [One study](https://arxiv.org/abs/2601.20404) showed “the presence of `AGENTS.md` is associated with a lower median runtime (Δ 28.64%) and reduced output token consumption (Δ 16.58%), while maintaining a comparable task completion behavior.” That’s tokenminning if I ever heard it.
+An `AGENTS.md` file is definitely worth having though. [One study](https://arxiv.org/abs/2601.20404) showed “the presence of `AGENTS.md` is associated with a lower median runtime (Δ 28.64%) and reduced output token consumption (Δ 16.58%), while maintaining a comparable task completion behavior.” That’s tokenminning if I ever heard it.
 
 ## 3. Audit your MCP servers
 
