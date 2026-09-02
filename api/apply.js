@@ -52,6 +52,14 @@ const submitApplication = async (req) => {
         request(options, function (err, response) {
             if (err) return reject(err)
 
+            // request() only reports transport failures through err; an Ashby HTTP 4xx/5xx
+            // arrives as a normal response. Reject on those so the handler logs and answers a
+            // matching status, instead of passing an error body through as a 200. The status
+            // alone is enough — the body can quote candidate input, so it is left out.
+            if (response.statusCode < 200 || response.statusCode >= 300) {
+                return reject(new Error(`Ashby responded with status ${response.statusCode}`))
+            }
+
             try {
                 resolve(JSON.parse(response.body))
             } catch (error) {
