@@ -8198,6 +8198,12 @@ export const docsMenu = {
                     color: 'green',
                 },
                 {
+                    name: 'Log-based metrics',
+                    url: '/docs/logs/metrics',
+                    icon: 'IconTrends',
+                    color: 'purple',
+                },
+                {
                     name: 'PII scrubbing',
                     url: '/docs/logs/pii-scrubbing',
                     icon: 'IconShield',
