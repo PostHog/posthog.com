@@ -321,7 +321,7 @@ const Form = ({
                 reason: expected ? err.reason : 'unexpected_error',
             })
             if (!expected) {
-                posthog?.captureException(err)
+                posthog?.captureException?.(err)
             }
         } finally {
             setLoading(false)
