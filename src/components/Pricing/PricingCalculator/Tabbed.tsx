@@ -1,6 +1,6 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react'
 import Tooltip from 'components/Tooltip'
-import { IconChevronDown, IconCopy, IconInfo, IconLightBulb, IconPlus, IconSearch, IconX } from '@posthog/icons'
+import { IconCopy, IconInfo, IconLightBulb, IconMinus, IconPlus, IconSearch, IconX } from '@posthog/icons'
 import Toggle from 'components/Toggle'
 import { formatUSD } from '../PricingSlider/pricingSliderLogic'
 import { buildProductAddons, calculatePrice, getAddonsCostForProduct, getCalculatorTotal } from './calculatorLogic'
@@ -256,7 +256,6 @@ const DEFAULT_PRODUCT_TYPES = [
     'replay_vision',
     'feature_flags',
     'posthog_ai',
-    'error_tracking',
 ]
 
 const CopyURLButton = ({ onClick }) => {
@@ -315,6 +314,7 @@ export default function Tabbed() {
         .filter(Boolean)
     const availableProducts = products.filter((product) => !selectedTypes.includes(product.type))
     const activeProduct = selectedProducts.find((product) => product.type === activeType) || selectedProducts[0]
+    const ActiveIcon = activeProduct?.Icon
 
     // Capture pricing calculator interactions for the experiment.
     const posthog = usePostHog()
@@ -478,6 +478,8 @@ export default function Tabbed() {
         }
     }
 
+    const productCount = selectedProducts.length
+
     return (
         // Capture-phase handlers so an interaction still registers if a control stops propagation.
         // Keyboard is covered separately: slider handles move on arrow keys without firing either
@@ -490,6 +492,14 @@ export default function Tabbed() {
         >
             <div className="grid grid-cols-12 mb-1">
                 <div className="col-span-12 @2xl:col-span-4 md:pr-6 mb-4 md:mb-0">
+                    <div className="mb-2">
+                        <p className="m-0 text-sm">
+                            <strong>Your estimate</strong>{' '}
+                            <span className="text-secondary text-xs">
+                                {productCount} {productCount === 1 ? 'product' : 'products'}
+                            </span>
+                        </p>
+                    </div>
                     <ul className="list-none m-0 p-0 flex flex-row md:flex-col gap-px overflow-x-auto @md:w-auto -mx-4 px-4 @md:px-0 @md:mx-0">
                         {selectedProducts.map(
                             ({ name, type, Icon, cost, color, colorDark, billingData, categoryName, pricingBadge }) => {
@@ -497,54 +507,40 @@ export default function Tabbed() {
                                 const addonsPrice = getAddonsCostForProduct(productAddons, billingData)
                                 return (
                                     <li key={type} className="flex-1">
-                                        <div
-                                            className={`flex items-center rounded-md ${
-                                                active ? 'bg-accent' : 'hover:bg-accent'
+                                        <button
+                                            type="button"
+                                            onClick={() => setActiveType(type)}
+                                            className={`p-2 rounded-md font-semibold text-sm flex flex-col md:flex-row space-x-2 whitespace-nowrap items-start md:items-center justify-between w-full click ${
+                                                active ? 'font-bold bg-accent' : 'hover:bg-accent'
                                             }`}
                                         >
-                                            <button
-                                                type="button"
-                                                onClick={() => setActiveType(type)}
-                                                className={`p-2 pr-0 font-semibold text-sm flex flex-col md:flex-row space-x-2 whitespace-nowrap items-start md:items-center justify-between w-full click ${
-                                                    active ? 'font-bold' : ''
-                                                }`}
-                                            >
-                                                <div className="flex items-center space-x-2">
-                                                    {Icon && (
-                                                        <span>
-                                                            <Icon
-                                                                className={`w-5 h-6 text-${color}${
-                                                                    colorDark ? ` dark:text-${colorDark}` : ''
-                                                                }`}
-                                                            />
+                                            <div className="flex items-center space-x-2">
+                                                {Icon && (
+                                                    <span>
+                                                        <Icon
+                                                            className={`w-5 h-6 text-${color}${
+                                                                colorDark ? ` dark:text-${colorDark}` : ''
+                                                            }`}
+                                                        />
+                                                    </span>
+                                                )}
+                                                <span className="flex items-center gap-1.5">
+                                                    <span>{categoryName || name}</span>
+                                                    {pricingBadge && (
+                                                        <span className="bg-yellow uppercase text-2xs rounded-xs px-0.5 py-0.5 font-semibold text-black leading-none">
+                                                            {pricingBadge}
                                                         </span>
                                                     )}
-                                                    <span className="flex items-center gap-1.5">
-                                                        <span>{categoryName || name}</span>
-                                                        {pricingBadge && (
-                                                            <span className="bg-yellow uppercase text-2xs rounded-xs px-0.5 py-0.5 font-semibold text-black leading-none">
-                                                                {pricingBadge}
-                                                            </span>
-                                                        )}
-                                                    </span>
+                                                </span>
+                                            </div>
+                                            {name == 'Experiments' ? (
+                                                <span className="opacity-25">--</span>
+                                            ) : (
+                                                <div className="opacity-70 pl-5 md:pl-0">
+                                                    {formatUSD(cost + addonsPrice)}
                                                 </div>
-                                                {name == 'Experiments' ? (
-                                                    <span className="opacity-25">--</span>
-                                                ) : (
-                                                    <div className="opacity-70 pl-5 md:pl-0">
-                                                        {formatUSD(cost + addonsPrice)}
-                                                    </div>
-                                                )}
-                                            </button>
-                                            <button
-                                                type="button"
-                                                aria-label={`Remove ${categoryName || name}`}
-                                                onClick={() => removeProduct(type)}
-                                                className="shrink-0 p-2 text-secondary hover:text-primary"
-                                            >
-                                                <IconX className="size-3" />
-                                            </button>
-                                        </div>
+                                            )}
+                                        </button>
                                     </li>
                                 )
                             }
@@ -559,7 +555,7 @@ export default function Tabbed() {
                             >
                                 <span className="flex items-center gap-1.5">
                                     <IconPlus className="size-4 shrink-0" />
-                                    <span className="font-bold">Add a product</span>
+                                    <span className="font-bold">Add to your estimate</span>
                                 </span>
                                 <span className="opacity-60">{availableProducts.length} more</span>
                             </button>
@@ -640,11 +636,22 @@ export default function Tabbed() {
                 <div className="col-span-12 @2xl:col-span-8 md:pl-0 flex flex-col">
                     {activeProduct && (
                         <>
-                            <div className="flex space-x-12 justify-between items-center mb-2">
-                                <h3>Estimate your price</h3>
-                                {!activeProduct.name == 'Experiments' && (
-                                    <p className="m-0 opacity-70 text-sm font-bold pr-3">Subtotal</p>
+                            <div className="flex items-center gap-2.5 mb-4">
+                                {ActiveIcon && (
+                                    <ActiveIcon
+                                        className={`size-6 shrink-0 text-${activeProduct.color}${
+                                            activeProduct.colorDark ? ` dark:text-${activeProduct.colorDark}` : ''
+                                        }`}
+                                    />
                                 )}
+                                <h3 className="m-0 leading-none">{activeProduct.categoryName || activeProduct.name}</h3>
+                                <button
+                                    type="button"
+                                    onClick={() => removeProduct(activeProduct.type)}
+                                    className="text-xs text-secondary underline leading-none shrink-0  mt-0.5"
+                                >
+                                    Remove from estimate
+                                </button>
                             </div>
 
                             <TabContent
@@ -663,19 +670,9 @@ export default function Tabbed() {
                     <div className="mt-auto">
                         <div
                             data-scheme="secondary"
-                            className="bg-primary rounded relative border border-primary overflow-hidden"
+                            className="bg-primary rounded relative border border-primary overflow-hidden mt-2"
                         >
-                            <div className="flex items-center justify-between p-3">
-                                <div>
-                                    <h3 className="m-0 text-[15px]">Estimated total</h3>
-                                    <p className="text-sm opacity-60 mb-0">for all products & add-ons</p>
-                                </div>
-
-                                <div className="text-right">
-                                    <p className="m-0 font-bold text-lg leading-none">${totalPrice.toLocaleString()}</p>
-                                </div>
-                            </div>
-                            <div className="border-t border-primary">
+                            <div>
                                 <button
                                     type="button"
                                     onClick={() => setShowPlatformPackages((open) => !open)}
@@ -685,11 +682,11 @@ export default function Tabbed() {
                                         <span className="font-bold shrink-0">Add a platform package</span>
                                         <span className="opacity-60 truncate">{platformPackageSummary}</span>
                                     </span>
-                                    <IconChevronDown
-                                        className={`size-5 text-secondary shrink-0 ${
-                                            showPlatformPackages ? 'rotate-180' : ''
-                                        }`}
-                                    />
+                                    {showPlatformPackages ? (
+                                        <IconMinus className="size-4 text-secondary shrink-0" />
+                                    ) : (
+                                        <IconPlus className="size-4 text-secondary shrink-0" />
+                                    )}
                                 </button>
                                 {showPlatformPackages && (
                                     <div className="px-3 pb-3">
@@ -762,6 +759,16 @@ export default function Tabbed() {
                                     </div>
                                 )}
                             </div>
+                            <div className="flex items-center justify-between p-3 border-t border-primary">
+                                <div>
+                                    <h3 className="m-0 text-[15px]">Estimated total</h3>
+                                    <p className="text-sm opacity-60 mb-0">for all products & add-ons</p>
+                                </div>
+
+                                <div className="text-right">
+                                    <p className="m-0 font-bold text-lg leading-none">${totalPrice.toLocaleString()}</p>
+                                </div>
+                            </div>
                         </div>
                         {/* Two ways to leave with an estimate: a link to this one, or a prompt that builds
                         one from what the visitor already pays for elsewhere. Same row, same weight. */}
@@ -779,10 +786,6 @@ export default function Tabbed() {
                                     )
                                 }}
                             />
-                            <div className="flex gap-0.5 ml-auto">
-                                <IconCopy className="size-5 inline-block text-muted relative -top-px" />
-                                <CopyURLButton onClick={generateURL} />
-                            </div>
                         </div>
                     </div>
                 </div>
