@@ -12,6 +12,8 @@ Metrics arrive over the OpenTelemetry Protocol (OTLP) via HTTP at `/i/v1/metrics
 
 Each incoming data point carries a metric name, a metric type, a value (or histogram buckets), a timestamp, resource attributes describing the sender (service name, host), and data point attributes describing the measurement (route, status). Ingestion validates the payload, applies your project's quota, and writes data points to a columnar time series store.
 
+Not every metric arrives over OTLP. A [log-based metric](/docs/logs/metrics) is generated at ingestion from your logs: log lines matching a rule are tallied as they arrive and emitted as a metric into the same store, so it shows up in the metrics viewer like any instrumented metric.
+
 ## The series model
 
 A **series** is one stream of values identified by the combination of:
@@ -44,6 +46,13 @@ Queries resolve over a shared time grid. PostHog picks a bucket size automatical
 Filters match attribute values with equality, negation, or regular expressions, and can target resource attributes, data point attributes, or both. Group by splits the result into one series per attribute value, keeping the largest series when there are too many to chart.
 
 Through the query API you can also combine multiple metrics with a formula, for example an error ratio computed as `errors / requests`, evaluated server side on the shared grid.
+
+## Anomaly detection and samples
+
+Two more things sit between storage and the chart:
+
+- **Anomaly detection.** When you chart a metric, PostHog compares the most recent slice of the window against a baseline and, if they differ statistically, finds the onset and ranks which label values drove the move. That powers the anomaly badge and biggest-movers panel in the [viewer](/docs/metrics/explore).
+- **Raw samples.** Alongside the aggregated series, PostHog keeps the individual emissions. The Samples view in the viewer reads these to show the exact data points behind a chart, and to link each one to the trace it was recorded in when trace context is present.
 
 ## Storage and SQL access
 

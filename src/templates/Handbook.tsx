@@ -396,7 +396,11 @@ export default function Handbook({ data: { post, postHogSource }, pageContext: {
         : null
     const isProductDocsPage = !!productSurfaceData?.productMenu?.length
     const productMenuTabs = isProductDocsPage
-        ? buildProductMenuTabs({ productData: productSurfaceData, activeSurface: 'docs' })
+        ? buildProductMenuTabs({
+              productData: productSurfaceData,
+              activeSurface: 'docs',
+              currentPath: slug,
+          })
         : undefined
     const productSelect = isProductDocsPage ? <ProductSwitcher activeHandle={productSurfaceData.handle} /> : undefined
 

@@ -13,6 +13,7 @@ import PricingJourney from 'components/Pricing/Redesign/PricingJourney'
 import Surfaces from 'components/Pricing/Redesign/Surfaces'
 import Philosophy from './philosophy'
 import ShamelessCTA from 'components/Home/ShamelessCTA'
+import AskMax from 'components/AskMax'
 
 /**
  * `/pricing`.
@@ -75,9 +76,18 @@ export default function Pricing(): JSX.Element {
                 <FAQs />
                 <p className="my-6 relative">
                     Have another pricing-related question?{' '}
-                    <Link to="/questions/topic/pricing" state={{ newWindow: true }}>
-                        Ask in our community forum
-                    </Link>{' '}
+                    <AskMax
+                        linkOnly
+                        className="underline font-semibold"
+                        quickQuestions={[
+                            'How much will PostHog cost for my usage?',
+                            'What counts against my free tier each month?',
+                            'How do startup credits work?',
+                            'Can I set a billing limit?',
+                        ]}
+                    >
+                        Ask PostHog AI
+                    </AskMax>{' '}
                     or{' '}
                     <Link to="/talk-to-a-human" state={{ newWindow: true }}>
                         talk to a human
