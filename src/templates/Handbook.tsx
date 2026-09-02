@@ -373,6 +373,12 @@ export default function Handbook({ data: { post, postHogSource }, pageContext: {
         pathname.startsWith('/docs/ai-observability/installation/') &&
         !['claude-code', 'openclaw', 'opencode', 'pi'].includes(pathname.split('/').filter(Boolean).pop() ?? '')
 
+    // Every docs article gets a "Still have questions?" PostHog AI input above the page survey.
+    // Gated on the MDX slug (not `pathname`) so the /docs/data-warehouse/sources/* alias pages —
+    // which render /docs/cdp/sources/* content — are covered either way. Scoped to /docs so the
+    // handbook and the Using PostHog manual, which share this template, stay unchanged.
+    const showAskAI = typeof slug === 'string' && slug.startsWith('/docs/')
+
     // Track product interest for cross-subdomain cookie
     useProductInterestFromPathname(slug)
 
@@ -390,7 +396,11 @@ export default function Handbook({ data: { post, postHogSource }, pageContext: {
         : null
     const isProductDocsPage = !!productSurfaceData?.productMenu?.length
     const productMenuTabs = isProductDocsPage
-        ? buildProductMenuTabs({ productData: productSurfaceData, activeSurface: 'docs' })
+        ? buildProductMenuTabs({
+              productData: productSurfaceData,
+              activeSurface: 'docs',
+              currentPath: slug,
+          })
         : undefined
     const productSelect = isProductDocsPage ? <ProductSwitcher activeHandle={productSurfaceData.handle} /> : undefined
 
@@ -464,6 +474,7 @@ export default function Handbook({ data: { post, postHogSource }, pageContext: {
             commits={commits}
             filePath={post.parent?.relativePath}
             showSurvey
+            showAskAI={showAskAI}
             hideRightSidebar={hideRightSidebar}
             contentMaxWidthClass={contentMaxWidthClass}
             sourceInstanceName={post.parent?.sourceInstanceName}

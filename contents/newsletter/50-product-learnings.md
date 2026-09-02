@@ -26,7 +26,7 @@ To celebrate 50k subscribers to build mode, here are the 50 most important lesso
 
 4. Trust is also built with [transparency](https://newsletter.posthog.com/i/143650666/they-value-transparency-and-trust). Work in public, have discussions in the open, and document what you're working on. This gives everyone the context they need, and eliminates the political squabbles that plague many companies.  
 
-5. Rely on [trust and feedback](https://newsletter.posthog.com/i/138480760/trust-and-feedback-over-process), not process. This is one of our [core values](/handbook/company/values). Building and scaling something people want is a nuanced problem, so we let people use their judgement. When they get it wrong, we are direct and give feedback.  
+5. Rely on [trust and feedback](https://newsletter.posthog.com/i/138480760/trust-and-feedback-over-process), not process. This is one of our [core values](/handbook/values). Building and scaling something people want is a nuanced problem, so we let people use their judgement. When they get it wrong, we are direct and give feedback.  
 
 6. Execs should [share company goals](https://newsletter.posthog.com/i/152182724/a-product-engineers-set-their-own-quarterly-goals); product teams (engineers) should figure out what to build to achieve them and set their own goals. Both should review that what they're building is having an actual impact using metrics and user feedback.  
 

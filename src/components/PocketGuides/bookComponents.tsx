@@ -1,21 +1,30 @@
 import Term from './terms'
 
 import Action, { Setup } from './Action'
+import Callout from './Callout'
 import ReaderWrapper, { LeftPage, RightPage } from './ReaderWrapper'
 import {
     AnatomyFigure,
     DetailFigure,
     DivergenceFigure,
     EvalRunsFigure,
+    ExampleFigure,
+    FactorSplitFigure,
     Fig,
     LeakFigure,
     LedgerFigure,
     LoopFigure,
+    PersonsModalFigure,
+    RedirectLoopFigure,
     ReportFigure,
     ScoutFigure,
+    ScreenshotFigure,
+    SkillFigure,
     TraceFigure,
+    TriggerGroupFigure,
 } from './figures'
-import { Contents, Enable, Eyebrow, SeeAlso, SeeFig, Watches, proseComponents } from './bookPieces'
+import { Contents, Enable, Eyebrow, Frontispiece, SeeAlso, SeeFig, Watches, proseComponents } from './bookPieces'
+import { AskAI, CTA, ScannerTemplate, ViewRecording, ViewRecordings } from './UIButton'
 
 export { EntryProvider } from './bookContext'
 
@@ -30,23 +39,37 @@ export const bookMdxComponents = {
     RightPage,
     SeeFig,
     Eyebrow,
+    Frontispiece,
     Fig,
     ReportFigure,
     AnatomyFigure,
     DetailFigure,
     DivergenceFigure,
     EvalRunsFigure,
+    ExampleFigure,
+    FactorSplitFigure,
     LedgerFigure,
     LeakFigure,
     ScoutFigure,
+    SkillFigure,
     TraceFigure,
+    PersonsModalFigure,
+    ScreenshotFigure,
+    TriggerGroupFigure,
+    RedirectLoopFigure,
     LoopFigure,
     Watches,
     Enable,
     Action,
+    Callout,
     Setup,
     Contents,
     SeeAlso,
+    ViewRecordings,
+    ViewRecording,
+    AskAI,
+    CTA,
+    ScannerTemplate,
     Term,
     ...proseComponents,
 }

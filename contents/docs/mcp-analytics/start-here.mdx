@@ -12,25 +12,26 @@ import WizardCommand from 'components/WizardCommand'
 
 <CalloutBox icon="IconFlask" title="MCP Analytics is in beta" type="fyi">
 
-`@posthog/mcp` is published as a `0.1.x` release on npm. We're building it in public – the event shape, options, and tracing behavior may still change before `1.0`. Pin a specific version and don't depend on it for production reporting yet.
+`@posthog/mcp` is published as a pre-1.0 release on npm. We're building it in public, so the event shape, options, and tracing behavior may still change before `1.0`. Pin a specific version and don't depend on it for production reporting yet.
 
 </CalloutBox>
 
 <QuestLog firstSpeechBubble="Let's instrument your MCP server!" lastSpeechBubble="Time to ship MCP Analytics!">
 
 <QuestLogItem
-    title="Add @posthog/mcp to your MCP server"
-    subtitle="Required"
-    icon="IconPlug"
+title="Add @posthog/mcp to your MCP server"
+subtitle="Required"
+icon="IconPlug"
 >
 
 MCP Analytics gives you visibility into how AI agents actually use the MCP server you ship. With one wrapper call you can track:
 
 - 🛠️ Every tool call (parameters, response, duration, errors)
 - 🎯 Agent intent – the *why* behind each call, not just the *what*
+- 🤖 The model the agent reports it is using
 - 🧭 Every `tools/list` so you can compare advertised vs called
 - 🪪 The MCP client name and version
-- 🧵 The full session, end to end
+- 🧵 Sessions across legacy connections and modern requests when conversation IDs are enabled
 - 🚧 Capabilities the agent wished existed (with `reportMissing`)
 
 The SDK supports any TypeScript MCP server, on [either major](/docs/mcp-analytics/sdk-v2) of the MCP SDK. The fastest way to get set up is our wizard, which installs the package and wires up `instrument()` for you (it also works for [LLM coding agents](/blog/envoy-wizard-llm-agent) like Cursor and Bolt):
@@ -50,46 +51,72 @@ import { instrument } from "@posthog/mcp"
 
 const server = new Server({ name: "my-mcp-server", version: "1.0.0" })
 
-const posthog = new PostHog(process.env.POSTHOG_PROJECT_API_KEY, {
+const posthog = new PostHog(process.env.POSTHOG_PROJECT_TOKEN, {
   host: "https://us.i.posthog.com",
 })
 
-instrument(server, posthog)
+instrument(server, posthog, {
+  captureModel: true,
+})
 ```
 
 <OSButton variant="primary" asLink to="/docs/mcp-analytics/installation">
+
 Full installation guide
+
 </OSButton>
 
 </QuestLogItem>
 
 <QuestLogItem
-    title="See your first events"
-    subtitle="Required"
-    icon="IconGraph"
+title="See your first events"
+subtitle="Required"
+icon="IconGraph"
 >
 
-Run your MCP server and connect an agent to it (Claude Desktop, Cursor, Codex, or your own). Within seconds of the first tool call, PostHog will receive `$mcp_tool_call`, `$mcp_tools_list`, and `$mcp_initialize` events – all prefixed with `$mcp_*` so they never collide with anything else in your project.
+Run your MCP server and connect an agent to it (Claude Desktop, Cursor, Codex, or your own). Within seconds of the first tool call, PostHog receives `$mcp_tool_call` and `$mcp_tools_list` events. Clients using the `2025-11-25` revision also produce `$mcp_initialize`. The handshake-free `2026-07-28` revision doesn't have an initialize event.
 
 Open the [activity feed](https://us.posthog.com/project/2/activity) and filter for `event = $mcp_tool_call`. You should see one row per agent tool invocation, each with `$mcp_tool_name`, `$mcp_parameters`, `$mcp_response`, `$mcp_duration_ms`, and `$mcp_is_error`.
 
 <ProductScreenshot
-  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/mcp_activity_feed_light_197cb57f3c.png"
-  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/mcp_activity_feed_dark_e795d95547.png"
-  alt="PostHog activity feed filtered to $mcp_tool_call events, with tool name, client, error state, and duration columns"
-  classes="rounded"
+imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/mcp_activity_feed_light_197cb57f3c.png"
+imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/mcp_activity_feed_dark_e795d95547.png"
+alt="PostHog activity feed filtered to $mcp_tool_call events, with tool name, client, error state, and duration columns"
+classes="rounded"
 />
 
 <OSButton variant="primary" asLink to="/docs/mcp-analytics/events">
+
 See every event the SDK emits
+
 </OSButton>
 
 </QuestLogItem>
 
 <QuestLogItem
-    title="Capture what the agent was trying to do"
-    subtitle="Recommended"
-    icon="IconAIText"
+title="Compare tool quality by model"
+subtitle="Recommended"
+icon="IconAIText"
+>
+
+For TypeScript servers, enable `captureModel` to ask the agent for the exact model identifier it is running. The SDK strips the injected `llm_model` argument before your tool runs, then captures it as `$mcp_llm_model` with `$mcp_llm_model_source = "self_reported"`.
+
+```ts
+instrument(server, posthog, {
+  captureModel: true,
+})
+```
+
+The MCP protocol doesn't send a verified model identifier. Treat this value as an analytics signal for comparing quality, latency, and errors across models. Don't use it for billing, authorization, or other security decisions. If the agent reports `unknown`, the SDK omits the property.
+
+After the agent calls a tool, inspect the `$mcp_tool_call` event for `$mcp_llm_model` and `$mcp_llm_model_source = "self_reported"`. Some clients return an exact model name, some return a model family, and some return `unknown`.
+
+</QuestLogItem>
+
+<QuestLogItem
+title="Capture what the agent was trying to do"
+subtitle="Recommended"
+icon="IconAIText"
 >
 
 The single most useful signal in MCP Analytics is **intent**: the user goal that led the agent to call this tool. The SDK injects a required `context` argument into every tool's schema and captures it as `$mcp_intent`. Your tool implementation never sees it.
@@ -114,53 +141,57 @@ instrument(server, posthog, {
 ```
 
 <OSButton variant="primary" asLink to="/docs/mcp-analytics/intent">
+
 Learn about intent capture
+
 </OSButton>
 
 </QuestLogItem>
 
 <QuestLogItem
-    title="Build your first dashboard"
-    subtitle="Recommended"
-    icon="IconLineGraph"
+title="Build your first dashboard"
+subtitle="Recommended"
+icon="IconLineGraph"
 >
 
 Every event is a normal PostHog event, so insights, dashboards, alerts, and SQL all work without further setup – and the [MCP Analytics view](/docs/mcp-analytics) (in beta) gives you the most useful cuts out of the box. The four queries we suggest building (or reading straight from the dashboard) first:
 
 - ### <IconGraph className="text-blue w-7 -mt-1 inline-block"/> Top tools per server
-  Where is your agent traffic concentrated? Which tools earn their keep?
+Where is your agent traffic concentrated? Which tools earn their keep?
 
 - ### <IconWarning className="text-red w-7 -mt-1 inline-block"/> Error rate per tool
-  Which tools throw most often? Pair with `$exception` events to triage.
+Which tools throw most often? Pair with `$exception` events to triage.
 
 - ### <IconAIText className="text-purple w-7 -mt-1 inline-block"/> Intent samples by source
-  How much of your traffic supplies explicit context vs falls back to `intentFallback`?
+How much of your traffic supplies explicit context vs falls back to `intentFallback`?
 
 - ### <IconWrench className="text-orange w-7 -mt-1 inline-block"/> Advertised tools that never get called
-  Find dead surface area by joining `$mcp_tools_list` against `$mcp_tool_call`.
+Find dead surface area by joining `$mcp_tools_list` against `$mcp_tool_call`.
 
 The tool quality tab surfaces error rate and latency percentiles per tool, with a row to drill into for any single tool:
 
 <ProductScreenshot
-  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/mcp_tool_quality_light_f91f27f6e1.png"
-  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/mcp_tool_quality_dark_add2659eaa.png"
-  alt="MCP Analytics tool quality tab showing calls and errors, success rate, latency percentiles, and a per-tool table"
-  classes="rounded"
+imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/mcp_tool_quality_light_f91f27f6e1.png"
+imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/mcp_tool_quality_dark_add2659eaa.png"
+alt="MCP Analytics tool quality tab showing calls and errors, success rate, latency percentiles, and a per-tool table"
+classes="rounded"
 />
 
 <OSButton variant="primary" asLink to="/docs/mcp-analytics/queries">
+
 Copy-paste queries
+
 </OSButton>
 
 </QuestLogItem>
 
 <QuestLogItem
-    title="Identify the user behind the agent"
-    subtitle="Recommended"
-    icon="IconPerson"
+title="Identify the user behind the agent"
+subtitle="Recommended"
+icon="IconPerson"
 >
 
-By default each event is attributed to the MCP connection's session ID. To attribute calls to a real user – for per-user retention, group analytics, and person properties – wire an `identify` callback:
+By default, each event is attributed to an SDK-generated session ID. To attribute calls to a real user – for per-user retention, group analytics, and person properties – wire an `identify` callback:
 
 ```ts
 import { instrument, getRequestHeaders } from "@posthog/mcp"
@@ -177,15 +208,17 @@ instrument(server, posthog, {
 The SDK emits a `$identify` event the first time it sees a new identity for a session, and PostHog's standard merge takes care of attributing prior anonymous activity.
 
 <OSButton variant="primary" asLink to="/docs/mcp-analytics/identifying-users">
+
 Identify users
+
 </OSButton>
 
 </QuestLogItem>
 
 <QuestLogItem
-    title="Find capability gaps with `reportMissing`"
-    subtitle="Recommended"
-    icon="IconWrench"
+title="Find capability gaps with `reportMissing`"
+subtitle="Recommended"
+icon="IconWrench"
 >
 
 The most actionable signal for an MCP server owner is *the agent wanted to do something I don't support*. Enable `reportMissing: true` and the SDK registers a `get_more_tools` virtual tool. When the agent invokes it, you get a queryable feed of unmet asks – straight into your roadmap.
@@ -209,15 +242,17 @@ ORDER BY times_asked DESC
 ```
 
 <OSButton variant="primary" asLink to="/docs/mcp-analytics/missing-capability">
+
 Track missing capabilities
+
 </OSButton>
 
 </QuestLogItem>
 
 <QuestLogItem
-    title="Ship safely"
-    subtitle="Required"
-    icon="IconLock"
+title="Ship safely"
+subtitle="Required"
+icon="IconLock"
 >
 
 The SDK runs every event through automatic sanitization (image/audio/binary stubs, sensitive-key masking like `authorization`, `cookie`, `password`, PostHog key patterns) and truncation to fit ingestion limits. For full control, add a `beforeSend` hook that runs on each built PostHog payload right before it's sent – mutate and return the event to send it, or return a nullish value to drop it.
@@ -232,7 +267,9 @@ instrument(server, posthog, {
 ```
 
 <OSButton variant="primary" asLink to="/docs/mcp-analytics/privacy">
+
 Privacy & redaction
+
 </OSButton>
 
 ---
@@ -240,7 +277,9 @@ Privacy & redaction
 That's it. You're ready to ship `@posthog/mcp` to production agents – within the beta caveats above.
 
 <OSButton variant="primary" asLink to="/docs/mcp-analytics/installation">
+
 Install MCP Analytics
+
 </OSButton>
 
 </QuestLogItem>

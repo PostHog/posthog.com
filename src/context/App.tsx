@@ -707,6 +707,22 @@ const appSettings: AppSettings = {
             center: true,
         },
     },
+    '/blog': {
+        size: {
+            min: {
+                width: 700,
+                height: 500,
+            },
+            max: {
+                width: 1200,
+                height: 1500,
+            },
+            fixed: false,
+        },
+        position: {
+            center: true,
+        },
+    },
     '/research': {
         size: {
             min: {
@@ -1598,9 +1614,6 @@ const appSettings: AppSettings = {
             },
             fixed: true,
         },
-    },
-    '/docs': {
-        toolbar: true,
     },
     '/merch': {
         toolbar: true,

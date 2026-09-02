@@ -1,0 +1,51 @@
+---
+# Sources for each section are noted in a comment above it.
+#
+# Scope: why you need one, and how to set one up with PostHog. The managed proxy is the answer
+# for almost everyone, so it gets the most room; rolling your own is the caveat, not the path.
+#
+# "Do you already have one?" is from the internal handbook, originally in CS voice
+# (it says "the customer"): handbook/cs-and-onboarding/foundation-check.md:26-30
+title: Reverse proxy
+shortTitle: Reverse proxy
+subtitle: Ad blockers drop requests to known analytics domains. A reverse proxy routes them through yours instead.
+pocketGuideOrder: 4
+---
+
+<RightPage>
+
+# Reverse proxy
+
+Ad blockers keep lists of know analytics domains and block requests to them. This will result in incomplete or missing replays being captured. Using a <Term name="reverse proxy" /> lets you route through your own domain, so captures are not blocked.
+
+## Set up a reverse proxy
+
+PostHog runs a free, <Term name="managed proxy">managed proxy</Term> for you. It sits on a subdomain you own, and PostHog handles the SSL
+certificate, the routing, and the maintenance.
+
+<CTA to="https://app.posthog.com/settings/organization-proxy">Set up a managed proxy</CTA>
+
+Two important things to decide with your team while setting it up:
+
+**Pick a boring subdomain.** Anything containing `analytics`, `tracking`, `telemetry`, `posthog`,
+or `ph` is already on the block lists you're trying to avoid.
+
+**Turn your DNS provider's own proxy off.** On Cloudflare that's the grey cloud, not the orange
+one. Leaving it on breaks certificate provisioning.
+
+
+## Limits of a proxy
+
+The managed proxy routes traffic through Cloudflare, a listed <Term name="subprocessor" /> in our <Term name="DPA" />. It's also not <Term name="HIPAA" />-compliant, so a <Term name="BAA" /> with PostHog doesn't cover it – run your own if you handle <Term name="PHI" />.
+
+DNS-level blocking follows your subdomain's CNAME chain, sees where it really points, and drops the request before the browser is involved. That needs a custom resolver like NextDNS or Pi-hole, so it's a small share of users, and no proxy gets around it. Browser extensions can't do this – they only see HTTP requests after DNS has already resolved.
+
+Your own <Term name="content security policy">`Content-Security-Policy`</Term> will also stop `recorder.js` from being served. To make sure this doesn't happen, read or point your agent at [this docs page](/docs/advanced/content-security-policy).
+
+<SeeAlso>
+
+See also: [Deploy a reverse proxy](/docs/advanced/proxy) · [Managed reverse proxy](/docs/advanced/proxy/managed-reverse-proxy) · [Content security policy](/docs/advanced/content-security-policy) · [Replay troubleshooting](/docs/session-replay/troubleshooting)
+
+</SeeAlso>
+
+</RightPage>

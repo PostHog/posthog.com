@@ -1,19 +1,22 @@
 import React, { useMemo } from 'react'
-import { IconBook, IconPiggyBank, IconPresent } from '@posthog/icons'
+import { IconBook, IconGraduationCap, IconPiggyBank, IconPresent } from '@posthog/icons'
 import { TreeMenu } from 'components/TreeMenu'
+import Link from 'components/Link'
+import { learnChapterPath, useBookPages } from 'components/PocketGuides/bookModel'
 import usePlatformList from 'hooks/docs/usePlatformList'
 import type { MenuTab } from 'components/ReaderView'
 import { docsMenu } from '../../../navs'
 import ProductNav from './ProductNav'
 import type { ProductNavItem } from './types'
 
-const TAB_ICON: Record<'product' | 'pricing' | 'docs', React.ReactNode> = {
+const TAB_ICON: Record<'product' | 'pricing' | 'docs' | 'learn', React.ReactNode> = {
     product: <IconPresent className="size-4" />,
     pricing: <IconPiggyBank className="size-4" />,
     docs: <IconBook className="size-4" />,
+    learn: <IconGraduationCap className="size-4" />,
 }
 
-export type ProductSurface = 'product' | 'pricing' | 'docs'
+export type ProductSurface = 'product' | 'pricing' | 'docs' | 'learn'
 
 type DocsMenuItem = {
     name: string
@@ -34,11 +37,13 @@ const DocsTreeMenu = ({
     productName,
     variant,
     rootHeading,
+    activeUrl,
 }: {
     items: DocsMenuItem[]
     productName: string
     variant: 'grouped' | 'listed'
     rootHeading: string
+    activeUrl?: string
 }) => {
     const installItem = useMemo(() => items.find((i) => i.url && /\/installation$/.test(i.url)), [items])
     const installBase = installItem?.url ? installItem.url.replace(/^\//, '') : 'docs/__no-install__/installation'
@@ -58,7 +63,52 @@ const DocsTreeMenu = ({
         )
     }, [items, installItem, platforms])
 
-    return <TreeMenu items={itemsWithInstall as any} variant={variant} appearance="sidebar" rootHeading={rootHeading} />
+    return (
+        <TreeMenu
+            items={itemsWithInstall as any}
+            variant={variant}
+            appearance="sidebar"
+            rootHeading={rootHeading}
+            activeUrl={activeUrl}
+        />
+    )
+}
+
+/** One item per chapter, each its own page; `ProductNav` scrolls within one instead. */
+const LearnNav = ({
+    volumeId,
+    basePath,
+    currentPath,
+}: {
+    volumeId: string
+    basePath: string
+    currentPath?: string
+}) => {
+    const pages = useBookPages(volumeId)
+    return (
+        <nav>
+            <ul className="list-none m-0 p-0 flex flex-col gap-px">
+                {pages.map((page) => {
+                    const to = learnChapterPath(basePath, page)
+                    const active = currentPath ? currentPath.replace(/\/$/, '') === to : false
+                    return (
+                        <li key={page.url} className="m-0 p-0">
+                            <Link
+                                to={to}
+                                className={`block w-full px-2 py-1 rounded text-sm hover:bg-accent ${
+                                    active
+                                        ? 'font-semibold text-primary bg-accent'
+                                        : 'text-secondary hover:text-primary'
+                                }`}
+                            >
+                                <span data-sidebar-label>{page.shortTitle || page.title}</span>
+                            </Link>
+                        </li>
+                    )
+                })}
+            </ul>
+        </nav>
+    )
 }
 
 interface BuildProductMenuTabsArgs {
@@ -73,6 +123,8 @@ interface BuildProductMenuTabsArgs {
               name: string
               productMenu?: ProductNavItem[]
               pricingMenu?: ProductNavItem[]
+              /** Volume id from `src/constants/pocketGuides.ts`; setting it is the whole opt-in. */
+              pocketGuideVolume?: string
           }
         | null
         | undefined
@@ -86,6 +138,7 @@ interface BuildProductMenuTabsArgs {
     contentRef?: React.RefObject<HTMLElement>
     /** Seeds which tab is active on first render. */
     activeSurface: ProductSurface
+    currentPath?: string
     /**
      * Optional override for the docs tab rendering style. When omitted, the
      * style is read from the product's `navStyle` in `docsMenu` so the index
@@ -94,8 +147,10 @@ interface BuildProductMenuTabsArgs {
     navStyle?: 'grouped' | 'listed'
 }
 
-const surfaceBasePath = (productSlug: string, surface: ProductSurface): string => {
+export const surfaceBasePath = (productSlug: string, surface: ProductSurface): string => {
     if (surface === 'pricing') return `/${productSlug}/pricing`
+    // Under /docs so switching to Learn never leaves the docs sidebar.
+    if (surface === 'learn') return `/docs/${productSlug}/learn`
     return `/${productSlug}`
 }
 
@@ -113,11 +168,12 @@ export function buildProductMenuTabs({
     productData,
     contentRef,
     activeSurface,
+    currentPath,
     navStyle,
 }: BuildProductMenuTabsArgs): MenuTab[] {
     if (!productData) return []
 
-    const { slug: productSlug, name: productName, productMenu = [], pricingMenu = [] } = productData
+    const { slug: productSlug, name: productName, productMenu = [], pricingMenu = [], pocketGuideVolume } = productData
 
     const navProductMenu = productMenu.filter((item) => !item.hideFromNav)
     const navPricingMenu = pricingMenu.filter((item) => !item.hideFromNav)
@@ -177,6 +233,24 @@ export function buildProductMenuTabs({
                     productName={productName}
                     variant={resolvedNavStyle}
                     rootHeading={productName}
+                    activeUrl={currentPath}
+                />
+            ),
+        })
+    }
+
+    if (pocketGuideVolume) {
+        tabs.push({
+            label: 'Learn',
+            value: 'learn',
+            icon: TAB_ICON.learn,
+            default: activeSurface === 'learn',
+            href: surfaceBasePath(productSlug, 'learn'),
+            menu: (
+                <LearnNav
+                    volumeId={pocketGuideVolume}
+                    basePath={surfaceBasePath(productSlug, 'learn')}
+                    currentPath={activeSurface === 'learn' ? currentPath : undefined}
                 />
             ),
         })

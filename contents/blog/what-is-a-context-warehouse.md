@@ -24,7 +24,7 @@ Data warehouses are optimized for analytics, business intelligence (BI), and dat
 
 They'd look like context warehouses: a single tool that stores your business and product data, ingests and models it, and makes it directly available to agents that want to reference and use it as context.
 
-This isn't just an agent bolted onto a data warehouse, or a smarter semantic layer sitting on top of one. Plenty of data warehouses have that. A context warehouse is different because the ingestion pipeline and the modeling that make raw data mean something are part of the same tool as the storage and the querying, not separate pieces you assemble and keep in sync yourself. Nothing has to be piped from one system to another to be useful.
+This isn't just an agent bolted onto a data warehouse, or a smarter [semantic layer](/blog/semantic-layer) sitting on top of one. Plenty of data warehouses have that. A context warehouse is different because the ingestion pipeline and the modeling that make raw data mean something are part of the same tool as the storage and the querying, not separate pieces you assemble and keep in sync yourself. Nothing has to be piped from one system to another to be useful.
 
 Here's how we're thinking about the differences between a data and context warehouse, and how we're building one at PostHog.
 

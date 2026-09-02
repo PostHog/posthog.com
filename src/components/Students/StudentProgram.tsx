@@ -164,6 +164,7 @@ function CampusMixerForm({ school, setSchool, campusTarget }: CampusMixerFormPro
         const form = formRef.current
         const nameInput = form?.elements.namedItem('name') as HTMLInputElement | null
         const emailInput = form?.elements.namedItem('email') as HTMLInputElement | null
+        const linkedinInput = form?.elements.namedItem('linkedin') as HTMLInputElement | null
         const pitchInput = form?.elements.namedItem('pitch') as HTMLTextAreaElement | null
 
         // The school dropdown isn't a native form control, so validate it by hand.
@@ -185,6 +186,8 @@ function CampusMixerForm({ school, setSchool, campusTarget }: CampusMixerFormPro
                 name: nameInput?.value,
                 email: emailInput.value,
                 school,
+                // Optional field, so send the key only when the applicant filled it in.
+                linkedin: linkedinInput?.value || undefined,
                 pitch: pitchInput?.value,
             })
             form?.reset()
@@ -220,6 +223,14 @@ function CampusMixerForm({ school, setSchool, campusTarget }: CampusMixerFormPro
                             }}
                             touched={schoolTouched}
                             error={schoolTouched && !school ? 'Please pick your school' : undefined}
+                        />
+                        <Input
+                            label="Your LinkedIn profile"
+                            name="linkedin"
+                            type="text"
+                            direction="column"
+                            description="Optional"
+                            placeholder="linkedin.com/in/your-profile"
                         />
                         <Textarea
                             label={`Tell us about ${campusTarget} and the event you'd run`}

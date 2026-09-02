@@ -18,6 +18,7 @@ import { ToggleGroup, ToggleOption } from 'components/RadixUI/ToggleGroup'
 import Tooltip from 'components/RadixUI/Tooltip'
 import Link from 'components/Link'
 import { navigate } from 'gatsby'
+import usePostHog from '../../hooks/usePostHog'
 import { MDXRenderer } from 'gatsby-plugin-mdx'
 import { MDXProvider } from '@mdx-js/react'
 import ElementScrollLink, { ScrollSpyProvider } from 'components/ElementScrollLink'
@@ -42,6 +43,7 @@ import { MenuItem, useApp } from '../../context/App'
 import { useActiveFeatureFlags, filterMenuByFlags } from '../../hooks/useActiveFeatureFlags'
 import { Questions } from 'components/Squeak'
 import { DocsPageSurvey } from 'components/DocsPageSurvey'
+import AskAIInput from 'components/AskAIInput'
 import MarkdownActions from 'components/MarkdownActions'
 import CustomerMetadata from './CustomerMetadata'
 import { getVideoClasses } from '../../constants'
@@ -115,6 +117,8 @@ interface ReaderViewProps {
     parent?: MenuItem
     showQuestions?: boolean
     showAbout?: boolean
+    /** Renders the "Still have questions?" PostHog AI input just above the survey. */
+    showAskAI?: boolean
     sourceInstanceName?: string
     defaultNavVisible?: boolean
     /**
@@ -442,6 +446,7 @@ export default function ReaderView({
     parent,
     showQuestions = false,
     showAbout = false,
+    showAskAI = false,
     sourceInstanceName,
     defaultNavVisible,
     chrome = false,
@@ -478,6 +483,7 @@ export default function ReaderView({
                 parent={parent}
                 showQuestions={showQuestions}
                 showAbout={showAbout}
+                showAskAI={showAskAI}
                 sourceInstanceName={sourceInstanceName}
                 chrome={chrome}
                 menuTabs={menuTabs}
@@ -843,10 +849,12 @@ interface SidebarTabButtonProps {
     showLabel: boolean
     /** Pinned mode renders the tab with icon stacked above label (horizontal row). */
     stacked: boolean
+    /** Smaller type when the stacked row is crowded (more than 3 tabs). */
+    compact: boolean
     onClick: () => void
 }
 
-const SidebarTabButton = ({ tab, active, showLabel, stacked, onClick }: SidebarTabButtonProps) => {
+const SidebarTabButton = ({ tab, active, showLabel, stacked, compact, onClick }: SidebarTabButtonProps) => {
     // Manual FLIP for the icon: capture position on every commit, then on the
     // next commit — IF the structural layout changed (`layoutKey`) — animate
     // the icon from its old position to its new one. Click-only re-renders
@@ -887,7 +895,7 @@ const SidebarTabButton = ({ tab, active, showLabel, stacked, onClick }: SidebarT
             onClick={onClick}
             role="tab"
             aria-selected={active}
-            className={`relative rounded text-sm leading-tight flex ${
+            className={`relative rounded ${compact ? 'text-xs' : 'text-sm'} leading-tight flex ${
                 stacked
                     ? 'flex-1 flex-col items-center text-center gap-1 px-2 py-1.5'
                     : // Icon-only AND with-label both use justify-start so
@@ -977,6 +985,7 @@ const LeftSidebar = ({
 }: LeftSidebarProps) => {
     const { searchQuery } = useSearch()
     const { hasMounted } = useReaderView()
+    const posthog = usePostHog()
     const hasActiveSearch = !!searchQuery && searchQuery.length >= 2
 
     // Persist/restore the menu scroll position across navigations (ReaderView
@@ -1238,7 +1247,9 @@ const LeftSidebar = ({
                                     }
                                 }}
                                 className={`mx-2 flex gap-px flex-shrink-0 ${
-                                    appliedPinned ? 'flex-row' : 'flex-col items-stretch py-2 border-y border-secondary'
+                                    appliedPinned
+                                        ? 'flex-row justify-between'
+                                        : 'flex-col items-stretch py-2 border-y border-secondary'
                                 }`}
                                 role="tablist"
                                 aria-label="Sidebar mode"
@@ -1250,7 +1261,14 @@ const LeftSidebar = ({
                                         active={t.value === activeTab}
                                         showLabel={expanded}
                                         stacked={appliedPinned}
+                                        compact={appliedPinned && menuTabs?.length > 3}
                                         onClick={() => {
+                                            // Proximate metric: downstream outcomes move too slowly to read.
+                                            posthog?.capture('reader_tab_click', {
+                                                tab: t.value,
+                                                from_tab: activeTab,
+                                                tab_count: menuTabs!.length,
+                                            })
                                             if (t.href && t.value !== activeTab) {
                                                 navigate(t.href)
                                             } else {
@@ -1389,6 +1407,7 @@ function ReaderViewContent({
     parent,
     showQuestions = false,
     showAbout = false,
+    showAskAI = false,
     sourceInstanceName,
     chrome = false,
     menuTabs,
@@ -1460,8 +1479,12 @@ function ReaderViewContent({
                     if (detailsParent) {
                         detailsParent.open = true
                     }
+                    // Not `offsetTop` — that measures from the nearest positioned ancestor, which
+                    // on a <Steps> page is the step container, not the viewport.
+                    const targetRect = targetElement.getBoundingClientRect()
+                    const scrollRect = scrollElement.getBoundingClientRect()
                     scrollElement.scrollTo({
-                        top: targetElement.offsetTop || 0,
+                        top: Math.max(0, targetRect.top - scrollRect.top + scrollElement.scrollTop),
                         behavior: 'smooth',
                     })
                     return
@@ -1844,6 +1867,18 @@ function ReaderViewContent({
                                                         : contentMaxWidthClass || 'max-w-2xl'
                                                 }`}
                                             />
+                                        </div>
+                                    )}
+                                    {showAskAI && (
+                                        <div
+                                            className={`mt-8 mx-auto transition-all ${
+                                                fullWidthContent || body?.type !== 'mdx'
+                                                    ? 'max-w-full'
+                                                    : contentMaxWidthClass || 'max-w-2xl'
+                                            }`}
+                                        >
+                                            <h3 className="text-xl font-bold m-0 mb-3">Still have questions?</h3>
+                                            <AskAIInput placeholder="Ask PostHog AI about this page..." />
                                         </div>
                                     )}
                                     {showSurvey && (

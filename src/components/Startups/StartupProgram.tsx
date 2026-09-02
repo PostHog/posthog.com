@@ -136,7 +136,7 @@ const perks: { image: string; alt: string; title: string; copy: string }[] = [
     {
         image: 'https://res.cloudinary.com/dmukukwp6/image/upload/perk_merch_b2106b276a.png',
         alt: 'Exclusive PostHog founder merch and swag',
-        title: '$1,000 of founder swag',
+        title: 'Exclusive founder swag',
         copy: 'You can never have too many laptop stickers or free PostHog t-shirts.',
     },
     {
@@ -245,9 +245,9 @@ const faqItems = [
         content: (
             <p>
                 Almost all of them. From September 14, 2026, startup credits can no longer be used towards bills
-                incurred on AI tools such as PostHog Desktop, Replay Vision, PostHog AI, and Inbox. This is due to the
-                prohibitive and unpredictable nature of token-based pricing. Credits still cover everything else,
-                including AI observability and the context warehouse.
+                incurred on AI tools such as PostHog Desktop, the PostHog Slack app, Replay Vision, PostHog AI, and
+                Inbox. This is due to the prohibitive and unpredictable nature of token-based pricing. Credits still
+                cover everything else, including AI observability and the context warehouse.
             </p>
         ),
     },
@@ -269,9 +269,10 @@ const faqItems = [
         content: (
             <p>
                 From September 14, 2026, startup credits can no longer be used towards bills incurred on AI tools such
-                as PostHog Desktop, Replay Vision, PostHog AI, and Inbox. Token-based pricing makes the cost of these
-                tools prohibitive and unpredictable, which makes them harder for us to subsidize. If you joined PostHog
-                for Startups before September 14, 2026, usage before this cut-off can still be paid with credits.
+                as PostHog Desktop, the PostHog Slack app, Replay Vision, PostHog AI, and Inbox. Token-based pricing
+                makes the cost of these tools prohibitive and unpredictable, which makes them harder for us to
+                subsidize. If you joined PostHog for Startups before September 14, 2026, usage before this cut-off can
+                still be paid with credits.
             </p>
         ),
     },
@@ -403,13 +404,23 @@ const faqItems = [
         ),
     },
     {
-        trigger: 'What level of customer support do I get?',
+        trigger: 'What level of customer support do I get? Do I get a dedicated account manager?',
         content: (
             <p>
                 PostHog is run by a small team and, as such, we're only able to offer support to paying customers.
                 Organizations which are part of our startup plan are therefore not eligible for high priority customer
-                support, and only qualify for normal priority and community support. This is still the case even if you
-                apply your credits towards a platform package.
+                support, and only qualify for normal priority and community support. You also don't get a dedicated
+                account manager, customer success manager, or sales contact. This is still the case even if you apply
+                your credits towards a platform package, such as the enterprise add-on. If you want one-to-one help
+                getting set up, you can{' '}
+                <Link
+                    to="/merch?product=30-min-onboarding-consultation"
+                    state={{ newWindow: true }}
+                    className="underline font-semibold"
+                >
+                    purchase a 30-minute onboarding call with our team
+                </Link>
+                .
             </p>
         ),
     },
@@ -423,7 +434,7 @@ const faqStructuredData = [
     },
     {
         question: 'Can I use my PostHog for Startups credits on all PostHog products?',
-        answer: 'Almost all of them. From September 14, 2026, startup credits can no longer be used towards bills incurred on AI tools such as PostHog Desktop, Replay Vision, PostHog AI, and Inbox, due to the prohibitive and unpredictable nature of token-based pricing. Credits still cover everything else, including AI observability and the context warehouse.',
+        answer: 'Almost all of them. From September 14, 2026, startup credits can no longer be used towards bills incurred on AI tools such as PostHog Desktop, the PostHog Slack app, Replay Vision, PostHog AI, and Inbox, due to the prohibitive and unpredictable nature of token-based pricing. Credits still cover everything else, including AI observability and the context warehouse.',
     },
     {
         question: 'How do I apply to PostHog for Startups?',
@@ -439,7 +450,7 @@ const faqStructuredData = [
     },
     {
         question: 'How far does $50,000 in PostHog credits go?',
-        answer: 'A long way. It covers roughly 950 million events, more than 6 million session recordings, over 840 million LLM analytics events, or 396 million error tracking events. Credits cannot be used towards AI tools such as PostHog Desktop, Replay Vision, PostHog AI, and Inbox.',
+        answer: 'A long way. It covers roughly 950 million events, more than 6 million session recordings, over 840 million LLM analytics events, or 396 million error tracking events. Credits cannot be used towards AI tools such as PostHog Desktop, the PostHog Slack app, Replay Vision, PostHog AI, and Inbox.',
     },
 ]
 
@@ -456,7 +467,7 @@ export default function StartupProgram({ partnerSlug = null }: StartupProgramPro
     const heroBullets = [
         `${creditValue} in PostHog credits for 12 months`,
         '$12,000 in benefits from partners we like',
-        '$1,000 of exclusive PostHog merch',
+        'Exclusive PostHog merch',
     ]
 
     return (
@@ -605,8 +616,8 @@ export default function StartupProgram({ partnerSlug = null }: StartupProgramPro
                     <p>
                         A <em>very</em> long way. Here's what your credits are worth if you spent them all in one place,
                         but you can mix and match them across most PostHog products. The exceptions are AI tools such as
-                        PostHog Desktop, Replay Vision, PostHog AI, and Inbox, which credits can't be used for.
-                        Otherwise we're not fussy. We just want you to spend the money.
+                        PostHog Desktop, the PostHog Slack app, Replay Vision, PostHog AI, and Inbox, which credits
+                        can't be used for. Otherwise we're not fussy. We just want you to spend the money.
                     </p>
                     <div className="not-prose grid grid-cols-2 @2xl/reader-content:grid-cols-4 gap-4 my-6">
                         {creditBreakdown.map(({ Icon, color, amount, unit }) => (
