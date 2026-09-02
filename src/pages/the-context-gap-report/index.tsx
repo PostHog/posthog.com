@@ -58,11 +58,6 @@ export default function ContextGapReport() {
                                     We read 10 industry reports so you don't have to give anyone your email.
                                 </p>
 
-                                <p className="not-prose text-sm text-secondary mt-2">
-                                    A landing page. For a three-page PDF. We know exactly how this looks, and we're doing
-                                    it anyway.
-                                </p>
-
                                 <div className="flex justify-center @lg:justify-start mt-4">
                                     <CallToAction to={pdfUrl} externalNoIcon size="md">
                                         Open the report
