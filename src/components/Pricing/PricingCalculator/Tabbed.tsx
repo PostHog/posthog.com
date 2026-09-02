@@ -361,6 +361,9 @@ export default function Tabbed() {
             .map((addon) => platformAddons.find((platformAddon) => platformAddon.type === addon.type)?.price)
             .filter((price) => Number.isFinite(price))
     )
+    const platformPackagesTotal = platformAddons
+        .filter((addon) => addon.checked)
+        .reduce((sum, addon) => sum + (addon.price || 0), 0)
     const selectedAddonTypes = new Set(
         selectedProducts.flatMap((product) => (product.billingData?.addons || []).map((addon) => addon.type))
     )
@@ -650,7 +653,7 @@ export default function Tabbed() {
                             )}
                         </div>
                     )}
-                    <div className="mt-3 pt-3 border-t border-primary">
+                    <div className="mt-3 pt-3 border-t border-primary @6xl:mb-0 mb-6">
                         <button type="button" onClick={openAllRates} className="text-sm text-secondary underline">
                             See all products and per-unit rates
                         </button>
@@ -692,46 +695,52 @@ export default function Tabbed() {
 
                     <div className="mt-auto">
                         <div
-                            data-scheme="secondary"
-                            className="bg-primary rounded relative border border-primary overflow-hidden mt-2"
+                            data-scheme="primary"
+                            className="bg-accent rounded relative border border-primary overflow-hidden mt-2"
                         >
-                            <div>
-                                <button
-                                    type="button"
-                                    onClick={() => setShowPlatformPackages((open) => !open)}
-                                    className="flex items-center justify-between gap-3 p-3 text-sm text-left w-full"
-                                >
-                                    <span className="flex items-center gap-1.5 min-w-0">
-                                        <span className="font-bold shrink-0">Add a platform package</span>
-                                        <span className="opacity-60 truncate">{platformPackageSummary}</span>
-                                    </span>
+                            <button
+                                type="button"
+                                onClick={() => setShowPlatformPackages((open) => !open)}
+                                className="flex items-center justify-between gap-3 p-3 text-sm text-left w-full"
+                            >
+                                <span className="flex items-center gap-1.5 min-w-0">
                                     {showPlatformPackages ? (
                                         <IconMinus className="size-4 text-secondary shrink-0" />
                                     ) : (
                                         <IconPlus className="size-4 text-secondary shrink-0" />
                                     )}
-                                </button>
-                                {showPlatformPackages && (
-                                    <div className="px-3 pb-3">
-                                        {visiblePlatformAddons.map(({ type, name, description }) => {
-                                            const platformAddon = platformAddons.find((addon) => addon.type === type)
-                                            const checked = platformAddon?.checked
-                                            return (
-                                                <div key={type} className="grid grid-cols-6 gap-8 items-center mt-2">
-                                                    <div className="col-span-3 sm:col-span-4 flex items-center justify-between">
-                                                        <div className="flex space-x-1 items-center">
-                                                            <p className="m-0 text-sm font-bold">{name}</p>
-                                                            <Tooltip
-                                                                content={description}
-                                                                tooltipClassName="max-w-[250px]"
-                                                                placement="top"
-                                                            >
-                                                                <span className="relative">
-                                                                    <IconInfo className="size-5 opacity-70" />
-                                                                </span>
-                                                            </Tooltip>
-                                                        </div>
-                                                        {type !== 'enterprise' && (
+                                    <span className="font-bold shrink-0">Add a platform package</span>
+                                    <span className="opacity-60 truncate">{platformPackageSummary}</span>
+                                </span>
+                                <span className="font-semibold shrink-0">
+                                    ${platformPackagesTotal.toLocaleString()}
+                                </span>
+                            </button>
+                            {showPlatformPackages && (
+                                <div className="px-4">
+                                    {visiblePlatformAddons.map(({ type, name, description }) => {
+                                        const platformAddon = platformAddons.find((addon) => addon.type === type)
+                                        const checked = platformAddon?.checked
+                                        return (
+                                            <div
+                                                key={type}
+                                                className="flex items-center justify-between gap-4 first:pt-0 py-3 border-b border-primary last:border-b-0"
+                                            >
+                                                <div className="min-w-0 max-w-[400px]">
+                                                    <p className="m-0 text-sm font-bold">{name}</p>
+                                                    <p className="m-0 text-xs text-secondary">{description}</p>
+                                                </div>
+                                                <div className="flex items-center gap-2 shrink-0">
+                                                    {type === 'enterprise' ? (
+                                                        <Link
+                                                            to="/talk-to-a-human?edition=enterprise"
+                                                            className="text-red dark:text-yellow font-semibold text-sm"
+                                                            state={{ newWindow: true }}
+                                                        >
+                                                            Contact us
+                                                        </Link>
+                                                    ) : (
+                                                        <>
                                                             <Toggle
                                                                 checked={checked}
                                                                 onChange={(checked) =>
@@ -745,44 +754,23 @@ export default function Tabbed() {
                                                                     )
                                                                 }
                                                             />
-                                                        )}
-                                                    </div>
-                                                    <div className="col-span-3 sm:col-span-2 flex justify-between">
-                                                        {type === 'enterprise' ? (
-                                                            <Link
-                                                                to="/talk-to-a-human?edition=enterprise"
-                                                                className="text-red dark:text-yellow font-semibold text-sm"
-                                                                state={{ newWindow: true }}
-                                                            >
-                                                                Contact us
-                                                            </Link>
-                                                        ) : (
-                                                            <>
-                                                                <div>
-                                                                    <strong className="text-[15px] md:text-base">
-                                                                        ${platformAddon.price.toLocaleString()}
-                                                                    </strong>
-                                                                    <span className="text-sm opacity-70">/mo</span>
-                                                                </div>
-                                                                <div className="text-right">
-                                                                    <p
-                                                                        className={`font-semibold m-0 ${
-                                                                            checked ? '' : 'opacity-50'
-                                                                        }`}
-                                                                    >
-                                                                        ${checked ? platformAddon?.price : 0}
-                                                                    </p>
-                                                                </div>
-                                                            </>
-                                                        )}
-                                                    </div>
+                                                            <span className="font-semibold text-sm">
+                                                                ${platformAddon.price.toLocaleString()}/mo
+                                                            </span>
+                                                        </>
+                                                    )}
                                                 </div>
-                                            )
-                                        })}
-                                    </div>
-                                )}
-                            </div>
-                            <div className="flex items-center justify-between p-3 border-t border-primary">
+                                            </div>
+                                        )
+                                    })}
+                                </div>
+                            )}
+                        </div>
+                        <div
+                            data-scheme="secondary"
+                            className="bg-primary rounded relative border border-primary overflow-hidden mt-2"
+                        >
+                            <div className="flex items-center justify-between p-3">
                                 <div>
                                     <h3 className="m-0 text-[15px]">Estimated total</h3>
                                     <p className="text-sm opacity-60 mb-0">for all products & add-ons</p>
