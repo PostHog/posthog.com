@@ -497,6 +497,10 @@
             "destination": "/compare/best-web-analytics-tools-for-developers"
         },
         {
+            "source": "/blog/best-ai-evaluation-tools-for-production",
+            "destination": "/compare/best-ai-evaluation-tools-for-production"
+        },
+        {
             "source": "/blog/tags/comparisons",
             "destination": "/compare"
         },
