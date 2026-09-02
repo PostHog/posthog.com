@@ -1291,7 +1291,7 @@ async function createMinimalPages({
                     frontmatter: { date: { ne: null } }
                     fields: {
                         slug: {
-                            regex: "/^/(blog|library|founders|product-engineers|features|newsletter|spotlight|customers|tutorials)/"
+                            regex: "/^/(blog|compare|library|founders|product-engineers|features|newsletter|spotlight|customers|tutorials)/"
                         }
                     }
                 }
