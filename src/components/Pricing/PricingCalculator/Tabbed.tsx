@@ -1,6 +1,6 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react'
 import Tooltip from 'components/Tooltip'
-import { IconChevronDown, IconCopy, IconInfo, IconLightBulb } from '@posthog/icons'
+import { IconChevronDown, IconCopy, IconInfo, IconLightBulb, IconPlus, IconSearch, IconX } from '@posthog/icons'
 import Toggle from 'components/Toggle'
 import { formatUSD } from '../PricingSlider/pricingSliderLogic'
 import { buildProductAddons, calculatePrice, getAddonsCostForProduct, getCalculatorTotal } from './calculatorLogic'
@@ -249,7 +249,13 @@ const addonDefaults = {
     },
 }
 
-const PREVIEW_COUNT = 8
+const DEFAULT_PRODUCT_TYPES = [
+    'product_analytics',
+    'session_replay',
+    'ai_observability',
+    'replay_vision',
+    'feature_flags',
+]
 
 const CopyURLButton = ({ onClick }) => {
     const [copied, setCopied] = useState(false)
@@ -281,9 +287,12 @@ export default function Tabbed() {
         }, [])
     )
     const platform = billingProducts.find((product) => product.type === 'platform_and_support')
-    const [activeTab, setActiveTab] = useState(0)
-    const [showAllProducts, setShowAllProducts] = useState(false)
-    const { products: initialProducts, setVolume, setProduct, monthlyTotal } = useProducts()
+    const [activeType, setActiveType] = useState(DEFAULT_PRODUCT_TYPES[0])
+    const [selectedTypes, setSelectedTypes] = useState(DEFAULT_PRODUCT_TYPES)
+    const [addingProduct, setAddingProduct] = useState(false)
+    const [productSearch, setProductSearch] = useState('')
+    const addProductRef = useRef(null)
+    const { products: initialProducts, setVolume, setProduct } = useProducts()
     // Listed in the same order as the taskbar's "Browse tools" menu, so the tools appear where
     // people have already learned to look for them. Metered products missing from that curated
     // list (Managed warehouse, PostHog AI, Inbox) fall to the end, keeping their relative order —
@@ -299,9 +308,11 @@ export default function Tabbed() {
             )
             .sort((a, b) => navOrder(a) - navOrder(b))
     }, [initialProducts])
-    const visibleProducts = showAllProducts ? products : products.slice(0, PREVIEW_COUNT)
-    const hiddenCount = products.length - PREVIEW_COUNT
-    const activeProduct = products[activeTab]
+    const selectedProducts = selectedTypes
+        .map((type) => products.find((product) => product.type === type))
+        .filter(Boolean)
+    const availableProducts = products.filter((product) => !selectedTypes.includes(product.type))
+    const activeProduct = selectedProducts.find((product) => product.type === activeType) || selectedProducts[0]
 
     // Capture pricing calculator interactions for the experiment.
     const posthog = usePostHog()
@@ -345,16 +356,20 @@ export default function Tabbed() {
             .map((addon) => platformAddons.find((platformAddon) => platformAddon.type === addon.type)?.price)
             .filter((price) => Number.isFinite(price))
     )
-    const totalPrice = useMemo(
-        () => getCalculatorTotal(monthlyTotal, productAddons, platformAddons),
-        [monthlyTotal, productAddons, platformAddons]
+    const selectedAddonTypes = new Set(
+        selectedProducts.flatMap((product) => (product.billingData?.addons || []).map((addon) => addon.type))
+    )
+    const totalPrice = getCalculatorTotal(
+        selectedProducts.reduce((total, product) => total + (product.cost || 0), 0),
+        productAddons.filter((addon) => selectedAddonTypes.has(addon.type)),
+        platformAddons
     )
 
     const generateURL = () => {
         const params = {
             ...(activeProduct && { calculator: activeProduct.type }),
         }
-        products.forEach((product) => {
+        selectedProducts.forEach((product) => {
             if (product.volume) {
                 params[product.type] = { volume: product.volume }
                 if (product.type === 'product_analytics') {
@@ -380,17 +395,19 @@ export default function Tabbed() {
         const params = qs.parse(urlParams.toString())
         const { calculator, ...volumeParams } = params
 
-        if (calculator) {
-            const productIndex = products.findIndex((product) => product.type === calculator)
-            if (productIndex !== -1) {
-                setActiveTab(productIndex)
-                if (productIndex >= PREVIEW_COUNT) {
-                    setShowAllProducts(true)
-                }
+        const volumeTypes = Object.keys(volumeParams).filter((type) =>
+            products.some((product) => product.type === type)
+        )
+        const typesFromUrl = [calculator, ...volumeTypes].filter((type) =>
+            products.some((product) => product.type === type)
+        )
+        if (typesFromUrl.length > 0) {
+            setSelectedTypes((current) => [...current, ...typesFromUrl.filter((type) => !current.includes(type))])
+            if (calculator && products.some((product) => product.type === calculator)) {
+                setActiveType(calculator)
             }
         }
 
-        const volumeTypes = Object.keys(volumeParams)
         volumeTypes.forEach((type) => {
             setVolume(type, volumeParams[type].volume)
         })
@@ -401,6 +418,63 @@ export default function Tabbed() {
             window.scrollTo({ top: y, behavior: 'smooth' })
         }
     }, [])
+
+    useEffect(() => {
+        if (!addingProduct) return
+        addProductRef.current?.querySelector('input')?.focus()
+        const onPointerDown = (event) => {
+            if (!addProductRef.current?.contains(event.target)) {
+                setAddingProduct(false)
+                setProductSearch('')
+            }
+        }
+        document.addEventListener('mousedown', onPointerDown)
+        return () => document.removeEventListener('mousedown', onPointerDown)
+    }, [addingProduct])
+
+    const closeProductPicker = () => {
+        setAddingProduct(false)
+        setProductSearch('')
+    }
+
+    const addProduct = (type) => {
+        if (!type || selectedTypes.includes(type)) return
+        setSelectedTypes((current) => [...current, type])
+        setActiveType(type)
+        closeProductPicker()
+    }
+
+    const filteredAvailableProducts = productSearch.trim()
+        ? availableProducts.filter((product) =>
+              (product.categoryName || product.name).toLowerCase().includes(productSearch.trim().toLowerCase())
+          )
+        : availableProducts
+
+    const removeProduct = (type) => {
+        const product = products.find((item) => item.type === type)
+        if (product) {
+            setVolume(product.handle, 0)
+            const addonTypes = new Set((product.billingData?.addons || []).map((addon) => addon.type))
+            setProductAddons((addons) =>
+                addons.map((addon) => (addonTypes.has(addon.type) ? { ...addon, checked: false, totalCost: 0 } : addon))
+            )
+        }
+        if (type === 'product_analytics') {
+            setAnalyticsData(
+                analyticsSliders.reduce((acc, slider) => {
+                    slider.types.forEach(({ type: sliderType, enhanced }) => {
+                        acc[sliderType] = { volume: 0, cost: 0, enhanced: enhanced || false }
+                    })
+                    return acc
+                }, [])
+            )
+        }
+        const remaining = selectedTypes.filter((selectedType) => selectedType !== type)
+        setSelectedTypes(remaining)
+        if (activeType === type) {
+            setActiveType(remaining[0] || null)
+        }
+    }
 
     return (
         // Capture-phase handlers so an interaction still registers if a control stops propagation.
@@ -415,92 +489,174 @@ export default function Tabbed() {
             <div className="grid grid-cols-12 mb-1">
                 <div className="col-span-12 @2xl:col-span-4 md:pr-6 mb-4 md:mb-0">
                     <ul className="list-none m-0 p-0 flex flex-row md:flex-col gap-px overflow-x-auto @md:w-auto -mx-4 px-4 @md:px-0 @md:mx-0">
-                        {visibleProducts.map(
-                            (
-                                { name, Icon, cost, color, colorDark, billingData, handle, categoryName, pricingBadge },
-                                index
-                            ) => {
-                                const active = activeTab === index
+                        {selectedProducts.map(
+                            ({ name, type, Icon, cost, color, colorDark, billingData, categoryName, pricingBadge }) => {
+                                const active = activeProduct?.type === type
                                 const addonsPrice = getAddonsCostForProduct(productAddons, billingData)
                                 return (
-                                    <li key={name} className="flex-1">
-                                        <button
-                                            onClick={() => setActiveTab(index)}
-                                            className={`p-2 rounded-md font-semibold text-sm flex flex-col md:flex-row space-x-2 whitespace-nowrap items-start md:items-center justify-between w-full click ${
-                                                active ? 'font-bold bg-accent' : 'hover:bg-accent'
+                                    <li key={type} className="flex-1">
+                                        <div
+                                            className={`flex items-center rounded-md ${
+                                                active ? 'bg-accent' : 'hover:bg-accent'
                                             }`}
                                         >
-                                            <div className="flex items-center space-x-2">
-                                                {Icon && (
-                                                    <span>
-                                                        <Icon
-                                                            className={`w-5 h-6 text-${color}${
-                                                                colorDark ? ` dark:text-${colorDark}` : ''
-                                                            }`}
-                                                        />
-                                                    </span>
-                                                )}
-                                                <span className="flex items-center gap-1.5">
-                                                    <span>{categoryName || name}</span>
-                                                    {pricingBadge && (
-                                                        <span className="bg-yellow uppercase text-2xs rounded-xs px-0.5 py-0.5 font-semibold text-black leading-none">
-                                                            {pricingBadge}
+                                            <button
+                                                type="button"
+                                                onClick={() => setActiveType(type)}
+                                                className={`p-2 pr-0 font-semibold text-sm flex flex-col md:flex-row space-x-2 whitespace-nowrap items-start md:items-center justify-between w-full click ${
+                                                    active ? 'font-bold' : ''
+                                                }`}
+                                            >
+                                                <div className="flex items-center space-x-2">
+                                                    {Icon && (
+                                                        <span>
+                                                            <Icon
+                                                                className={`w-5 h-6 text-${color}${
+                                                                    colorDark ? ` dark:text-${colorDark}` : ''
+                                                                }`}
+                                                            />
                                                         </span>
                                                     )}
-                                                </span>
-                                            </div>
-                                            {name == 'Experiments' ? (
-                                                <span className="opacity-25">--</span>
-                                            ) : (
-                                                <div className="opacity-70 pl-5 md:pl-0">
-                                                    {formatUSD(cost + addonsPrice)}
+                                                    <span className="flex items-center gap-1.5">
+                                                        <span>{categoryName || name}</span>
+                                                        {pricingBadge && (
+                                                            <span className="bg-yellow uppercase text-2xs rounded-xs px-0.5 py-0.5 font-semibold text-black leading-none">
+                                                                {pricingBadge}
+                                                            </span>
+                                                        )}
+                                                    </span>
                                                 </div>
-                                            )}
-                                        </button>
+                                                {name == 'Experiments' ? (
+                                                    <span className="opacity-25">--</span>
+                                                ) : (
+                                                    <div className="opacity-70 pl-5 md:pl-0">
+                                                        {formatUSD(cost + addonsPrice)}
+                                                    </div>
+                                                )}
+                                            </button>
+                                            <button
+                                                type="button"
+                                                aria-label={`Remove ${categoryName || name}`}
+                                                onClick={() => removeProduct(type)}
+                                                className="shrink-0 p-2 text-secondary hover:text-primary"
+                                            >
+                                                <IconX className="size-3" />
+                                            </button>
+                                        </div>
                                     </li>
                                 )
                             }
                         )}
                     </ul>
-                    <hr className="border-primary !my-1" />
-                    {hiddenCount > 0 && (
-                        <button
-                            type="button"
-                            onClick={() => {
-                                if (showAllProducts && activeTab >= PREVIEW_COUNT) {
-                                    setActiveTab(0)
-                                }
-                                setShowAllProducts((open) => !open)
-                            }}
-                            className="flex items-center gap-1.5 p-2 text-sm text-left w-full rounded-md hover:bg-accent"
-                        >
-                            <IconChevronDown
-                                className={`size-5 text-secondary shrink-0 ${showAllProducts ? 'rotate-180' : ''}`}
-                            />
-                            <span className="font-bold">
-                                {showAllProducts ? 'Show fewer products' : `View ${hiddenCount} more products`}
-                            </span>
-                        </button>
+                    {availableProducts.length > 0 && (
+                        <div ref={addProductRef} className="relative mt-2">
+                            <button
+                                type="button"
+                                onClick={() => (addingProduct ? closeProductPicker() : setAddingProduct(true))}
+                                className="flex items-center justify-between gap-3 p-2 text-sm text-left w-full rounded-md hover:bg-accent"
+                            >
+                                <span className="flex items-center gap-1.5">
+                                    <IconPlus className="size-4 shrink-0" />
+                                    <span className="font-bold">Add a product</span>
+                                </span>
+                                <span className="opacity-60">{availableProducts.length} more</span>
+                            </button>
+                            {addingProduct && (
+                                <div className="absolute z-50 left-0 top-0 right-0 overflow-hidden rounded bg-white dark:bg-accent-dark shadow-xl border border-primary">
+                                    <div className="flex items-center gap-2 px-2.5 py-2 border-b border-primary">
+                                        <IconSearch className="size-4 text-muted shrink-0" />
+                                        <input
+                                            type="text"
+                                            value={productSearch}
+                                            onChange={(event) => setProductSearch(event.target.value)}
+                                            placeholder="Search products"
+                                            className="flex-1 min-w-0 bg-transparent border-0 outline-none ring-0 focus:ring-0 text-sm text-primary placeholder:text-muted px-0 py-0"
+                                            onKeyDown={(event) => {
+                                                if (event.key === 'Escape') {
+                                                    event.preventDefault()
+                                                    closeProductPicker()
+                                                }
+                                            }}
+                                        />
+                                        <button
+                                            type="button"
+                                            aria-label="Close"
+                                            onClick={closeProductPicker}
+                                            className="text-muted hover:text-primary"
+                                        >
+                                            <IconX className="size-4" />
+                                        </button>
+                                    </div>
+                                    <div className="p-1 max-h-60 overflow-auto">
+                                        {filteredAvailableProducts.length > 0 ? (
+                                            filteredAvailableProducts.map(
+                                                ({
+                                                    type,
+                                                    name,
+                                                    Icon,
+                                                    color,
+                                                    colorDark,
+                                                    categoryName,
+                                                    startsAt,
+                                                    unit,
+                                                }) => (
+                                                    <button
+                                                        key={type}
+                                                        type="button"
+                                                        onClick={() => addProduct(type)}
+                                                        className="flex w-full items-center justify-between gap-3 rounded px-2 py-1.5 text-sm hover:bg-accent"
+                                                    >
+                                                        <span className="flex items-center gap-2 min-w-0">
+                                                            {Icon && (
+                                                                <Icon
+                                                                    className={`w-5 h-6 shrink-0 text-${color}${
+                                                                        colorDark ? ` dark:text-${colorDark}` : ''
+                                                                    }`}
+                                                                />
+                                                            )}
+                                                            <span className="font-semibold truncate">
+                                                                {categoryName || name}
+                                                            </span>
+                                                        </span>
+                                                        {startsAt && unit && (
+                                                            <span className="text-secondary shrink-0">
+                                                                ${startsAt}/{unit}
+                                                            </span>
+                                                        )}
+                                                    </button>
+                                                )
+                                            )
+                                        ) : (
+                                            <p className="m-0 px-2 py-1.5 text-sm text-muted">No products found</p>
+                                        )}
+                                    </div>
+                                </div>
+                            )}
+                        </div>
                     )}
                 </div>
                 <div className="col-span-12 @2xl:col-span-8 md:pl-0 flex flex-col">
-                    <div className="flex space-x-12 justify-between items-center mb-2">
-                        <h3>Estimate your price</h3>
-                        {!activeProduct.name == 'Experiments' && (
-                            <p className="m-0 opacity-70 text-sm font-bold pr-3">Subtotal</p>
-                        )}
-                    </div>
+                    {activeProduct && (
+                        <>
+                            <div className="flex space-x-12 justify-between items-center mb-2">
+                                <h3>Estimate your price</h3>
+                                {!activeProduct.name == 'Experiments' && (
+                                    <p className="m-0 opacity-70 text-sm font-bold pr-3">Subtotal</p>
+                                )}
+                            </div>
 
-                    <TabContent
-                        key={activeProduct.type}
-                        addons={productAddons}
-                        setAddons={setProductAddons}
-                        activeProduct={activeProduct}
-                        setVolume={setVolume}
-                        setProduct={setProduct}
-                        analyticsData={analyticsData}
-                        setAnalyticsData={setAnalyticsData}
-                    />
+                            <TabContent
+                                key={activeProduct.type}
+                                addons={productAddons}
+                                setAddons={setProductAddons}
+                                activeProduct={activeProduct}
+                                setVolume={setVolume}
+                                setProduct={setProduct}
+                                analyticsData={analyticsData}
+                                setAnalyticsData={setAnalyticsData}
+                            />
+                        </>
+                    )}
 
                     <div className="mt-auto">
                         <div
