@@ -503,107 +503,106 @@ export default function Tabbed() {
                     />
 
                     <div className="mt-auto">
-                        <div className="pt-2 pb-6 md:border-t border-primary">
-                            <button
-                                type="button"
-                                onClick={() => setShowPlatformPackages((open) => !open)}
-                                className="flex items-center justify-between gap-3 pt-2 text-sm text-left w-full"
-                            >
-                                <span className="flex items-center gap-1.5 min-w-0">
-                                    <IconChevronDown
-                                        className={`size-5 text-secondary shrink-0 ${
-                                            showPlatformPackages ? '' : '-rotate-90'
-                                        }`}
-                                    />
-                                    <span className="font-bold shrink-0">Platform packages</span>
-                                    <span className="text-secondary truncate">
-                                        {platformPackageSummary}
-                                        {Number.isFinite(platformStartingPrice) && (
-                                            <> · from ${platformStartingPrice.toLocaleString()}/mo</>
-                                        )}
-                                    </span>
-                                </span>
-                                <span className="text-secondary shrink-0">Optional</span>
-                            </button>
-                            {showPlatformPackages &&
-                                visiblePlatformAddons.map(({ type, name, description }) => {
-                                    const platformAddon = platformAddons.find((addon) => addon.type === type)
-                                    const checked = platformAddon?.checked
-                                    return (
-                                        <div key={type} className="grid grid-cols-6 gap-8 items-center mt-2 ml-8.5">
-                                            <div className="col-span-3 sm:col-span-4 flex items-center justify-between">
-                                                <div className="flex space-x-1 items-center">
-                                                    <p className="m-0 text-sm font-bold">{name}</p>
-                                                    <Tooltip
-                                                        content={description}
-                                                        tooltipClassName="max-w-[250px]"
-                                                        placement="top"
-                                                    >
-                                                        <span className="relative">
-                                                            <IconInfo className="size-5 opacity-70" />
-                                                        </span>
-                                                    </Tooltip>
-                                                </div>
-                                                {type !== 'enterprise' && (
-                                                    <Toggle
-                                                        checked={checked}
-                                                        onChange={(checked) =>
-                                                            setPlatformAddons(
-                                                                platformAddons.map((addon) => {
-                                                                    if (addon.type === type) {
-                                                                        return { ...addon, checked }
-                                                                    }
-                                                                    return addon
-                                                                })
-                                                            )
-                                                        }
-                                                    />
-                                                )}
-                                            </div>
-                                            <div className="col-span-3 sm:col-span-2 flex justify-between">
-                                                {type === 'enterprise' ? (
-                                                    <Link
-                                                        to="/talk-to-a-human?edition=enterprise"
-                                                        className="text-red dark:text-yellow font-semibold text-sm"
-                                                        state={{ newWindow: true }}
-                                                    >
-                                                        Contact us
-                                                    </Link>
-                                                ) : (
-                                                    <>
-                                                        <div>
-                                                            <strong className="text-[15px] md:text-base">
-                                                                ${platformAddon.price.toLocaleString()}
-                                                            </strong>
-                                                            <span className="text-sm opacity-70">/mo</span>
-                                                        </div>
-                                                        <div className="text-right">
-                                                            <p
-                                                                className={`font-semibold m-0 pr-3 ${
-                                                                    checked ? '' : 'opacity-50'
-                                                                }`}
-                                                            >
-                                                                ${checked ? platformAddon?.price : 0}
-                                                            </p>
-                                                        </div>
-                                                    </>
-                                                )}
-                                            </div>
-                                        </div>
-                                    )
-                                })}
-                        </div>
                         <div
                             data-scheme="secondary"
-                            className="flex items-center justify-between p-3 bg-primary rounded relative border border-primary"
+                            className="bg-primary rounded relative border border-primary overflow-hidden"
                         >
-                            <div>
-                                <h3 className="m-0 text-[15px]">Estimated total</h3>
-                                <p className="text-sm opacity-60 mb-0">for all products & add-ons</p>
-                            </div>
+                            <div className="flex items-center justify-between p-3">
+                                <div>
+                                    <h3 className="m-0 text-[15px]">Estimated total</h3>
+                                    <p className="text-sm opacity-60 mb-0">for all products & add-ons</p>
+                                </div>
 
-                            <div className="text-right">
-                                <p className="m-0 font-bold text-lg leading-none">${totalPrice.toLocaleString()}</p>
+                                <div className="text-right">
+                                    <p className="m-0 font-bold text-lg leading-none">${totalPrice.toLocaleString()}</p>
+                                </div>
+                            </div>
+                            <div className="border-t border-primary">
+                                <button
+                                    type="button"
+                                    onClick={() => setShowPlatformPackages((open) => !open)}
+                                    className="flex items-center justify-between gap-3 p-3 text-sm text-left w-full"
+                                >
+                                    <span className="flex items-center gap-1.5 min-w-0">
+                                        <span className="font-bold shrink-0">Add a platform package</span>
+                                        <span className="opacity-60 truncate">{platformPackageSummary}</span>
+                                    </span>
+                                    <IconChevronDown
+                                        className={`size-5 text-secondary shrink-0 ${
+                                            showPlatformPackages ? 'rotate-180' : ''
+                                        }`}
+                                    />
+                                </button>
+                                {showPlatformPackages && (
+                                    <div className="px-3 pb-3">
+                                        {visiblePlatformAddons.map(({ type, name, description }) => {
+                                            const platformAddon = platformAddons.find((addon) => addon.type === type)
+                                            const checked = platformAddon?.checked
+                                            return (
+                                                <div key={type} className="grid grid-cols-6 gap-8 items-center mt-2">
+                                                    <div className="col-span-3 sm:col-span-4 flex items-center justify-between">
+                                                        <div className="flex space-x-1 items-center">
+                                                            <p className="m-0 text-sm font-bold">{name}</p>
+                                                            <Tooltip
+                                                                content={description}
+                                                                tooltipClassName="max-w-[250px]"
+                                                                placement="top"
+                                                            >
+                                                                <span className="relative">
+                                                                    <IconInfo className="size-5 opacity-70" />
+                                                                </span>
+                                                            </Tooltip>
+                                                        </div>
+                                                        {type !== 'enterprise' && (
+                                                            <Toggle
+                                                                checked={checked}
+                                                                onChange={(checked) =>
+                                                                    setPlatformAddons(
+                                                                        platformAddons.map((addon) => {
+                                                                            if (addon.type === type) {
+                                                                                return { ...addon, checked }
+                                                                            }
+                                                                            return addon
+                                                                        })
+                                                                    )
+                                                                }
+                                                            />
+                                                        )}
+                                                    </div>
+                                                    <div className="col-span-3 sm:col-span-2 flex justify-between">
+                                                        {type === 'enterprise' ? (
+                                                            <Link
+                                                                to="/talk-to-a-human?edition=enterprise"
+                                                                className="text-red dark:text-yellow font-semibold text-sm"
+                                                                state={{ newWindow: true }}
+                                                            >
+                                                                Contact us
+                                                            </Link>
+                                                        ) : (
+                                                            <>
+                                                                <div>
+                                                                    <strong className="text-[15px] md:text-base">
+                                                                        ${platformAddon.price.toLocaleString()}
+                                                                    </strong>
+                                                                    <span className="text-sm opacity-70">/mo</span>
+                                                                </div>
+                                                                <div className="text-right">
+                                                                    <p
+                                                                        className={`font-semibold m-0 ${
+                                                                            checked ? '' : 'opacity-50'
+                                                                        }`}
+                                                                    >
+                                                                        ${checked ? platformAddon?.price : 0}
+                                                                    </p>
+                                                                </div>
+                                                            </>
+                                                        )}
+                                                    </div>
+                                                </div>
+                                            )
+                                        })}
+                                    </div>
+                                )}
                             </div>
                         </div>
                         {/* Two ways to leave with an estimate: a link to this one, or a prompt that builds
