@@ -1513,6 +1513,10 @@ export const handbookSidebar = [
                         url: '/handbook/forward-deployed-engineering/overview',
                     },
                     {
+                        name: 'Who we work with',
+                        url: '/handbook/forward-deployed-engineering/who-we-work-with',
+                    },
+                    {
                         name: 'How to get an FDE involved',
                         url: '/handbook/forward-deployed-engineering/how-to-get-fde-involved',
                     },
