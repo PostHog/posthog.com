@@ -67,7 +67,7 @@ const Overview = ({ id, productData }: SectionComponentProps) => {
                         )}
                     </div>
                     <div>
-                        <h2 className="text-4xl font-bold leading-tight">{overview?.title || name}</h2>
+                        <h1 className="text-4xl font-bold leading-tight">{overview?.title || name}</h1>
                         <p className="leading-relaxed">{overview?.description}</p>
                     </div>
                     <div>
