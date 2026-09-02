@@ -388,7 +388,7 @@ await posthog.withSpan('GET /users/:id', { kind: 'server' }, async (span) => {
 | `setAttributes(attributes)` | Merge several attributes at once |
 | `addEvent(name, attributes?, timestamp?)` | Record a timestamped event within the span |
 | `setStatus(status, message?)` | Set the outcome: `'ok'` or `'error'` |
-| `recordException(error)` | Attach an exception event and set status to `error` |
+| `recordException(error)` | Attach an exception event carrying the type, message and stack, and set status to `error` |
 | `updateName(name)` | Replace the span name, e.g. once a route template resolves |
 | `traceparent()` | This span's W3C `traceparent` header value |
 | `end(endTime?)` | End the span and queue it for export |
@@ -428,6 +428,39 @@ posthog.withContext({ distinctId: user.id, sessionId }, async () => {
 
 Spans created outside a request context simply omit those attributes.
 
+### Scrubbing and dropping spans
+
+`beforeSpanSend` runs on every finished span before it's queued for export. Edit the span in place to strip attributes you don't want leaving your process, or return `null` to drop the span entirely.
+
+```ts
+const posthog = new PostHog('<ph_project_token>', {
+  host: '<ph_client_api_host>',
+  traces: {
+    serviceName: 'checkout-api',
+    beforeSpanSend: (span) => {
+      if (span.attributes['http.route'] === '/health') return null
+
+      delete span.attributes['http.request.header.authorization']
+      return span
+    },
+  },
+})
+```
+
+The hook sees plain values rather than the OTLP wire encoding, so `span.attributes.userId` reads as `42`, not `{ intValue: '42' }`. It runs after PostHog attaches `posthogDistinctId` and `sessionId`, so those are visible to the hook and can be scrubbed too.
+
+- `traceId`, `spanId` and `parentSpanId` are read-only. Rewriting them would orphan child spans that have already been exported, so assignments are ignored.
+- A hook that throws drops the span rather than exporting it unscrubbed.
+- Pass an array to run several hooks left to right. The first one to return `null` stops the chain.
+
+### Span limits
+
+A span is capped at 128 attributes and 128 events, and each string attribute value at 8192 characters. The endpoint rejects a span that's too large, and a rejected span is lost whole rather than truncated, so the caps bound a span before it gets there.
+
+Past the cap, the earliest attributes and events are kept and the number dropped is reported alongside the span, so a truncated span reads as truncated rather than as quietly incomplete. The attributes PostHog attaches itself — `posthogDistinctId` and `sessionId` — don't count toward the cap and are never dropped, so a span at the limit still links back to its person and session.
+
+The length bound reaches inside a value, including strings nested in arrays and objects, and applies to `exception.stacktrace` like any other attribute. All three caps are re-applied after `beforeSpanSend`, so a hook that enriches a span can't push it back over.
+
 ### Configuration
 
 | Option | Default | Description |
@@ -439,6 +472,12 @@ Spans created outside a request context simply omit those attributes.
 | `flushIntervalMs` | `5000` | How often queued spans are exported |
 | `maxExportBatchSize` | `512` | Maximum spans per request |
 | `maxQueueSize` | `2048` | Maximum spans held in memory. Spans beyond this are dropped |
+| `maxLiveSpans` | `10000` | Maximum spans open at once. At the limit `startSpan` returns an inert handle |
+| `maxSpanAgeMs` | `3600000` | A span still open after this is treated as leaked and never exported |
+| `beforeSpanSend` | – | Edit or drop each finished span before export. Return `null` to drop it |
+| `maxAttributesPerSpan` | `128` | Maximum attributes you set on one span |
+| `maxEventsPerSpan` | `128` | Maximum events on one span |
+| `maxAttributeValueLength` | `8192` | Maximum characters in a string attribute value |
 
 ### Shutdown and short-lived processes
 

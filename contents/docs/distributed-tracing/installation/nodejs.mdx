@@ -57,7 +57,7 @@ export const posthog = new PostHog('<ph_project_token>', {
 
 Use your **project token** (the same one you use for capturing events), not a [personal API key](/docs/api#authentication).
 
-See the [Node.js SDK docs](/docs/libraries/node#configuration) for batching and queue options.
+See the [Node.js SDK docs](/docs/libraries/node#configuration) for batching, queue and span-limit options, and [`beforeSpanSend`](/docs/libraries/node#scrubbing-and-dropping-spans) for scrubbing attributes or dropping spans before they're exported.
 
 </Step>
 
