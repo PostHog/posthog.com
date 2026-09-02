@@ -22,13 +22,23 @@ Beyond this, we recommend:
 
 2. Documenting conclusions and findings in the description field of your experiment. This helps preserve historical context for future team members.
 
-3. Removing the experiment and losing variant's code.
+3. Removing the experiment and losing variant's code. PostHog can do this for you by [opening a flag cleanup PR](#opening-a-flag-cleanup-pr).
 
 4. Archiving the experiment.
 
 5. Disabling or deleting the feature flag once the winning variant is hardcoded in your application and the flag check has been removed from your code. You can [delete flags linked to non-running experiments](/docs/feature-flags/creating-feature-flags#deleting-flags-linked-to-experiments) without losing the experiment's historical data. Every active flag counts toward your [feature flag billing](/docs/feature-flags/cutting-costs), even if it's rolled out to 100% and no longer doing anything useful.
 
 Remember, experimentation is an iterative process. Each experiment teaches you something about your users, even when results aren't what you expected.
+
+### Opening a flag cleanup PR
+
+When ending an experiment, you can ask PostHog to clean up the feature flag code for you. Check **Open a draft PR removing `<flag key>` from your code** in the end experiment dialog. PostHog scans your repository for references to the flag and opens a draft pull request that removes the flag checks. If you shipped a variant, its code path is kept. If the repository contains no references to the flag, no PR is opened.
+
+This requires the GitHub integration to be connected in your project settings. If more than one repository is connected, select the repository for the PR in the dialog. Project admins can save the selection as the default for all experiments in the project, or change it later in experiment settings under **Default repository for flag cleanup PRs**.
+
+The PR is a draft, so review it before merging. After the experiment ends, a link to the cleanup task appears next to the experiment's conclusion.
+
+This feature is rolling out gradually. If you don't see the checkbox when ending an experiment, it isn't available on your project yet.
 
 ### Ending an already rolled out experiment
 
