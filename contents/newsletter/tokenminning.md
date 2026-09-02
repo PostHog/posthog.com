@@ -63,7 +63,7 @@ It shouldn't include:
 - One ls or grep answers, like directory trees, the list of packages, 200 line reference components
 - Docs meant for humans, like mission statements or contributing etiquette
 
-An `AGENTS.md` file is definitely worth having though. [One study](https://arxiv.org/abs/2601.20404) showed “the presence of `AGENTS.md` is associated with a lower median runtime (Δ 28.64%) and reduced output token consumption (Δ 16.58%), while maintaining a comparable task completion behavior.” That’s tokenminning if I ever heard it.
+An `AGENTS.md` file is [definitely worth having](/newsletter/fix-your-agents) though. [One study](https://arxiv.org/abs/2601.20404) showed “the presence of `AGENTS.md` is associated with a lower median runtime (Δ 28.64%) and reduced output token consumption (Δ 16.58%), while maintaining a comparable task completion behavior.” That’s tokenminning if I ever heard it.
 
 ## 3. Audit your MCP servers
 
