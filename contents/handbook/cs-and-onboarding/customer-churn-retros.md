@@ -1,5 +1,5 @@
 ---
-title: Learn from churn
+title: Learn from churn and contraction
 sidebar: Handbook
 showTitle: true
 ---
@@ -62,6 +62,25 @@ What do we need to change in how we work?
 - Tools or data we needed but didn't have
 - Handoff failures (sales → CS, onboarding → CS, etc.)
 - Communication cadence issues
+
+## Contraction retros
+when an account in an AM's book contracts or fails to grow and the AM wants it removed from the book, we should retro the account like a churn. We should run these any time an account is removed from a book, a cross-sell is lost, or we see usage contraction about 10% (either overall or for a specific product).
+
+### Basic info
+- **Customer name:**
+- **Current ARR:** $X,XXX
+- **Tenure:** X months/years\
+- **Time in book:**
+- **Number of products adopted:**
+
+**Primary reason for contraction / lack of growth:** This is the meat of the retro and what we care about qualitatively to help us refine book composition.
+
+- We grew the account to their saturation point - are there any current or future products that make sense? Have we really saturated them? What would trigger bringing them back into your book?
+- We thought it was a growth account and it wasn't - why did we think it was a growth account, what do we know now that clarifies the growth status, what could we / should we have known when adding them?
+- Something changed on the customer's side between adding to the book and removal - i.e. they were acquired, their business folded, the champion left, their priorities changed, the market dried up, 
+- There was a product gap / fit issue - did we enroll them in a beta that was rocky, did they try a product and run into issues, did we sunset a product they need / use, did their product needs change, did they choose a competitor over us?
+- Regulatory / operational barriers - they had legal requirements we couldn't meet, they had an approval process that killed the growth, the decision to move forward lay with a different business unit, 
+
 
 ## Example retro
 
