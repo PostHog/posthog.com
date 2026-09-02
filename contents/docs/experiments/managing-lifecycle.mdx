@@ -32,13 +32,9 @@ Remember, experimentation is an iterative process. Each experiment teaches you s
 
 ### Opening a flag cleanup PR
 
-When ending an experiment, you can ask PostHog to clean up the feature flag code for you. Check **Open a draft PR removing `<flag key>` from your code** in the end experiment dialog. PostHog scans your repository for references to the flag and opens a draft pull request that removes the flag checks. If you shipped a variant, its code path is kept. If the repository contains no references to the flag, no PR is opened.
+When ending an experiment, you can check **Open a draft PR removing `<flag key>` from your code** in the end experiment dialog. PostHog opens a draft pull request in your GitHub repository that removes the flag checks from your code. If you shipped a variant, its code path is kept. Review the PR before merging.
 
-This requires the GitHub integration to be connected in your project settings. If more than one repository is connected, select the repository for the PR in the dialog. Project admins can save the selection as the default for all experiments in the project, or change it later in experiment settings under **Default repository for flag cleanup PRs**.
-
-The PR is a draft, so review it before merging. After the experiment ends, a link to the cleanup task appears next to the experiment's conclusion.
-
-This feature is rolling out gradually. If you don't see the checkbox when ending an experiment, it isn't available on your project yet.
+This requires the GitHub integration to be connected in your project settings. If more than one repository is connected, pick one in the dialog. You can also set a default repository for all experiments in experiment settings.
 
 ### Ending an already rolled out experiment
 
