@@ -25,7 +25,7 @@ export type MenuItemType = {
 export type MenuType = {
     trigger: React.ReactNode
     bold?: boolean
-    items: MenuItemType[]
+    items: MenuItemType[] | React.ReactElement
     link?: string // Direct link for the menu trigger instead of opening a menu
     mobileLink?: string // Direct link for the menu trigger on mobile
     hideChevron?: boolean // Hide the chevron down icon for this menu in website mode
@@ -346,7 +346,7 @@ const MenuBar: React.FC<MenuBarProps> = ({ menus, className, triggerAsChild, cus
 
             return {
                 ...menu,
-                items: processMobileMenuItems(menu.items),
+                items: Array.isArray(menu.items) ? processMobileMenuItems(menu.items) : menu.items,
             }
         })
     }, [menus, isMobile])
@@ -401,18 +401,22 @@ const MenuBar: React.FC<MenuBarProps> = ({ menus, className, triggerAsChild, cus
                                 alignOffset={-3}
                                 data-scheme="primary"
                             >
-                                <ScrollArea className="min-h-0 !overflow-y-auto overscroll-contain">
-                                    {menu.items.map((item, itemIndex) => (
-                                        <MenuItem
-                                            key={`${menuIndex}-${itemIndex}`}
-                                            item={item}
-                                            menuIndex={menuIndex}
-                                            portalContainer={portalContainer}
-                                            appContainer={appContainer}
-                                            onCloseMenu={closeMenu}
-                                        />
-                                    ))}
-                                </ScrollArea>
+                                {Array.isArray(menu.items) ? (
+                                    <ScrollArea className="min-h-0 !overflow-y-auto overscroll-contain">
+                                        {menu.items.map((item, itemIndex) => (
+                                            <MenuItem
+                                                key={`${menuIndex}-${itemIndex}`}
+                                                item={item}
+                                                menuIndex={menuIndex}
+                                                portalContainer={portalContainer}
+                                                appContainer={appContainer}
+                                                onCloseMenu={closeMenu}
+                                            />
+                                        ))}
+                                    </ScrollArea>
+                                ) : (
+                                    React.cloneElement(menu.items, { onCloseMenu: closeMenu })
+                                )}
                             </RadixMenubar.Content>
                         </RadixMenubar.Portal>
                     </RadixMenubar.Menu>

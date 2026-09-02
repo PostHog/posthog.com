@@ -386,7 +386,15 @@ const buildProductsMenuItems = (allProducts: any[]) => {
     return items
 }
 
-export function useMenuData(): MenuType[] {
+const buildToolsMenu = (allProducts: any[]): MenuType => ({
+    trigger: 'Tools',
+    // Same searchable list as Products → Browse tools. Mobile has no room for
+    // that panel, so the trigger becomes a link to the tools index.
+    mobileLink: '/products',
+    items: <SearchableProductMenu products={allProducts} />,
+})
+
+export function useMenuData(showNavbarTools = false): MenuType[] {
     const smallTeamsMenuItems = useSmallTeamsMenuItems()
     const allProducts = useProduct() as any[]
     const { isMobile } = useAppSettings()
@@ -397,6 +405,7 @@ export function useMenuData(): MenuType[] {
             trigger: 'Products',
             items: buildProductsMenuItems(allProducts),
         },
+        ...(showNavbarTools ? [buildToolsMenu(allProducts)] : []),
         {
             trigger: 'Pricing',
             link: '/pricing',
@@ -788,7 +797,7 @@ export function useMenuData(): MenuType[] {
                     label: typeof menu.trigger === 'string' ? menu.trigger : 'Menu',
                     link,
                 })
-            } else {
+            } else if (Array.isArray(menu.items)) {
                 // Process items and filter out those with mobileDestination === false
                 const filteredItems: MenuItemType[] = []
                 const menuItemsCopy = [...menu.items]

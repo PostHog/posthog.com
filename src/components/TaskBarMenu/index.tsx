@@ -26,10 +26,21 @@ import Tooltip from 'components/RadixUI/Tooltip'
 import { useUser } from 'hooks/useUser'
 import getAvatarURL from 'components/Squeak/util/getAvatar'
 import { useMenuData } from './menuData'
+import { NAVBAR_TOOLS_FLAG } from './navbarToolsExperiment'
+import { RenderInClient } from 'components/RenderInClient'
+import usePostHog from '../../hooks/usePostHog'
 import CloudinaryImage from 'components/CloudinaryImage'
 import MediaUploadModal from 'components/MediaUploadModal'
 import KeyboardShortcut from 'components/KeyboardShortcut'
 import { MOTION_LAYER, TASKBAR_BG } from '../../constants/frostedSurfaces'
+
+const NAV_MENU_CLASS = '[&_button]:px-2 [&_button:not(:first-child)]:hidden md:[&_button:not(:first-child)]:flex'
+
+function ExperimentNavMenus(): JSX.Element {
+    const posthog = usePostHog()
+    const menuData = useMenuData(posthog?.getFeatureFlag?.(NAVBAR_TOOLS_FLAG) === 'test')
+    return <MenuBar menus={menuData} className={NAV_MENU_CLASS} />
+}
 
 function TaskBarMenu() {
     const {
@@ -46,7 +57,7 @@ function TaskBarMenu() {
     const [isAnimating, setIsAnimating] = useState(false)
 
     const { user, notifications, logout, isModerator } = useUser()
-    const menuData = useMenuData()
+    const controlMenuData = useMenuData(false)
 
     const isLoggedIn = !!user
 
@@ -327,9 +338,9 @@ function TaskBarMenu() {
                         }}
                     />
                     <div className="mx-auto transition-all duration-300 flex justify-between items-center w-full max-w-full">
-                        <MenuBar
-                            menus={menuData}
-                            className="[&_button]:px-2 [&_button:not(:first-child)]:hidden md:[&_button:not(:first-child)]:flex"
+                        <RenderInClient
+                            placeholder={<MenuBar menus={controlMenuData} className={NAV_MENU_CLASS} />}
+                            render={() => <ExperimentNavMenus />}
                         />
                         <aside data-scheme="secondary" className="flex items-center gap-0.5 py-1">
                             {/* <MenuBar
