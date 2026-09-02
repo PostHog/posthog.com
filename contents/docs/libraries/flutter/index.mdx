@@ -60,7 +60,7 @@ await Posthog().alias(
 );
 ```
 
-We strongly recommend reading our docs on [alias](/docs/data/identify#alias-assigning-multiple-distinct-ids-to-the-same-user) to best understand how to correctly use this method.
+We strongly recommend reading our docs on [alias](/docs/product-analytics/identify#alias-assigning-multiple-distinct-ids-to-the-same-user) to best understand how to correctly use this method.
 
 ## Anonymous vs identified events
 
@@ -204,6 +204,10 @@ On Flutter Web, masking (`maskAllTexts`, `maskAllImages`, `PostHogMaskWidget`) a
 > **Note:** Surveys are supported in Flutter for **Web**, **iOS**, and **Android** platforms.
 
 [Surveys](/docs/surveys) launched with [popover presentation](/docs/surveys/creating-surveys#presentation) are automatically shown to users matching the [display conditions](/docs/surveys/creating-surveys#display-conditions) you set up.
+
+## Push notifications
+
+The Flutter SDK can register a device for [Workflows](/docs/workflows) push notifications and capture when a user opens one. For setup, including automatic and manual registration, capturing opens, opting out, and identity verification, see [Push notifications](/docs/workflows/push-notifications).
 
 ## Flush
 

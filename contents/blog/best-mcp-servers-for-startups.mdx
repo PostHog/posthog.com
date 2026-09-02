@@ -101,7 +101,7 @@ The loop: **define the question → find the right data source → run the query
 The servers:
 
 - **A database MCP** for application data: the [official Postgres MCP](https://github.com/modelcontextprotocol/servers-archived/tree/main/src/postgres) (a reference implementation; the repo is archived but the server still works) or **[Supabase MCP](https://supabase.com/docs/guides/getting-started/mcp)** if that's your stack. Both can run in read-only mode, which is the right default for production databases.
-- **[PostHog MCP](/docs/model-context-protocol)** for event and product data: query analytics with SQL, pull from your [data warehouse](/context-warehouse), or analyze [LLM traces and costs](/llm-analytics). Good for "users who did X and then Y" queries.
+- **[PostHog MCP](/docs/model-context-protocol)** for event and product data: query analytics with SQL, pull from your [data warehouse](/context-warehouse), or analyze [LLM traces and costs](/ai-observability). Good for "users who did X and then Y" queries.
 
 A real prompt: _"Pull MRR by plan tier from Postgres, then break down feature usage by tier from PostHog, and give me a single table comparing them."_
 
@@ -135,7 +135,7 @@ Once you've picked your stack, the install pattern is similar across servers:
 2. **Use the AI wizard if available.** PostHog, Linear, and Notion all have one-click installers from their docs that handle config and OAuth. Save yourself the JSON wrangling.
 3. **For manual setup, edit your client's config file.** Claude Desktop uses `claude_desktop_config.json`, Cursor uses `~/.cursor/mcp.json`, and so on. Each server's docs show the exact JSON snippet.
 4. **Start with read-only mode.** Most servers support it. Ship-stop-ship-stop is the right pattern when you're learning what an agent will actually do with new tools.
-5. **Watch your token budget.** Every server adds tool definitions to your context window. Ten servers with five tools each is fifty tool definitions before you've asked anything.
+5. **Watch your token budget.** Every server adds [tool definitions to your context window](/newsletter/tokenminning#3-audit-your-mcp-servers). Ten servers with five tools each is fifty tool definitions before you've asked anything.
 
 ## Is PostHog right for you?
 
@@ -194,7 +194,7 @@ Each server adds tool definitions to your agent's context window, which costs to
 The workflows above show what composes well together. Most startups end up running 3-9 servers, enough to cover daily loops without bloating their agent's context window. Some rough starting points:
 
 - **SaaS startup:** GitHub, a deployment MCP (Vercel/Render/Cloudflare), Linear or Notion, PostHog, Brave Search, Filesystem.
-- **AI-native startup:** Same foundation, but lean on PostHog's [LLM observability](/llm-analytics) for traces and costs, and pick a deployment MCP that supports edge inference (Vercel or Cloudflare).
+- **AI-native startup:** Same foundation, but lean on PostHog's [LLM observability](/ai-observability) for traces and costs, and pick a deployment MCP that supports edge inference (Vercel or Cloudflare).
 - **Operations or content-heavy team:** Notion + Linear/Asana/ClickUp, Slack, a search MCP, and PostHog if you have a product. Skip the dev tooling unless engineers will use it.
 
 Start with two or three, then add more as concrete use cases come up. Resist the urge to install everything just because you can.

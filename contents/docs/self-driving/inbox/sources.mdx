@@ -14,7 +14,7 @@ Self-driving is in open beta. It's improving quickly – expect rough edges, and
 
 </CalloutBox>
 
-Signal sources are what fill your inbox. A [signal](/docs/self-driving/signals) can be a production error, a support conversation, a Session Replay pattern, a log alert changing state, a Replay Vision scanner finding, or an issue from an external tracker. Each source watches one of these streams and turns what it finds into work worth investigating.
+Signal sources are what fill your inbox. A [signal](/docs/self-driving/signals) can be a production error, a support conversation, a Session Replay pattern, a log alert changing state, a Replay Vision scanner finding, an LLM trace regression, an insight anomaly, or an issue from an external tracker. Each source watches one of these streams and turns what it finds into work worth investigating.
 
 ## Configure sources
 
@@ -64,8 +64,22 @@ These sources are available when the matching PostHog product has data in your p
     {
       label: "Replay Vision",
       url: "/docs/replay-vision",
-      icon: "IconReplayVision",
-      description: "Actionable product issues detected by scanners.",
+      icon: "IconEye",
+      description: "Scanner findings, plus each scanner's signal, report, and pull request counts.",
+      lineClamp: 2,
+    },
+    {
+      label: "AI Observability",
+      url: "/docs/ai-observability",
+      icon: "IconLlmAnalytics",
+      description: "Findings from your LLM traffic.",
+      lineClamp: 2,
+    },
+    {
+      label: "Product analytics",
+      url: "/docs/product-analytics",
+      icon: "IconGraph",
+      description: "Investigated anomalies from your insights.",
       lineClamp: 2,
     },
     {
@@ -77,6 +91,8 @@ These sources are available when the matching PostHog product has data in your p
     },
   ]}
 />
+
+**Replay Vision** scanners can send their findings into Signals. Open a scanner to see how many signals it has emitted, how many reports those signals contributed to, and how many pull requests were opened or merged. Reports can combine signals from several scanners and other sources, so these counts show the scanner's contribution, not sole ownership of a report.
 
 ## External sources
 

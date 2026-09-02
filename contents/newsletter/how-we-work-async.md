@@ -49,7 +49,7 @@ These are opportunities to clarify:
 2. **Quarterly goals**, so small teams can share their specific plans.
 3. **Ownership**, so everyone knows who is delivering those goals / projects.
 
-We use our weekly Monday all-hands meeting to re-emphasize, update and scrutinize our goals, through a combination of announcements, team updates, and James’ topic of the day. Recent topics include how we build an enduring company, reviewing PostHog’s [values](/handbook/company/values), and how to balance planning vs. collaborating vs. shipping.
+We use our weekly Monday all-hands meeting to re-emphasize, update and scrutinize our goals, through a combination of announcements, team updates, and James’ topic of the day. Recent topics include how we build an enduring company, reviewing PostHog’s [values](/handbook/values), and how to balance planning vs. collaborating vs. shipping.
 
 With this context, people are empowered to work async. Teams require less synchronous communication to get their work done throughout the week. Instead, they rely a lot on…
 

@@ -7,6 +7,15 @@
     },
     "headers": [
         {
+            "source": "/.well-known/http-message-signatures-directory",
+            "headers": [
+                {
+                    "key": "Content-Type",
+                    "value": "application/http-message-signatures-directory+json"
+                }
+            ]
+        },
+        {
             "source": "/docs/:path*",
             "headers": [
                 {
@@ -25,6 +34,15 @@
             ]
         },
         {
+            "source": "/(.*\\.md)",
+            "headers": [
+                {
+                    "key": "Content-Type",
+                    "value": "text/plain; charset=utf-8"
+                }
+            ]
+        },
+        {
             "source": "/(.*)",
             "headers": [
                 {
@@ -39,6 +57,25 @@
         }
     ],
     "rewrites": [
+        {
+            "source": "/docs/references/:slug(.*-\\d.*).md",
+            "destination": "/docs/references/version-unavailable.md"
+        },
+        {
+            "source": "/docs/references/:slug(.*-\\d.*)",
+            "has": [
+                {
+                    "type": "header",
+                    "key": "accept",
+                    "value": "(?:.*text/markdown.*)"
+                }
+            ],
+            "destination": "/docs/references/version-unavailable.md"
+        },
+        {
+            "source": "/docs/references/:slug(.*-\\d.*)",
+            "destination": "/docs/references/version-unavailable/index.html"
+        },
         {
             "source": "/docs/:path*/",
             "has": [
@@ -172,9 +209,272 @@
         {
             "source": "/posts/:path*",
             "destination": "/posts/[slug]/index.html"
+        },
+        {
+            "source": "/teams/:path*",
+            "destination": "/teams/[slug]/index.html"
+        },
+        {
+            "source": "/startups/:path*",
+            "destination": "/startups/[...slug]/index.html"
         }
     ],
     "redirects": [
+        {
+            "source": "/docs/session-replay/image-bot:ext(\\.md)?",
+            "destination": "/docs/ai-research/image-fetcher-bot:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/posthog-desktop/ai-generated-content:ext(\\.md)?",
+            "destination": "/docs/posthog-desktop/settings#ai-generated-content",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/session-replay/session-summaries-ai:ext(\\.md)?",
+            "destination": "/docs/replay-vision:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/posthog-ai/session-summaries:ext(\\.md)?",
+            "destination": "/docs/replay-vision:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/web-analytics/scroll-depth:ext(\\.md)?",
+            "destination": "/docs/web-analytics/dashboard:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/support/teams:ext(\\.md)?",
+            "destination": "/docs/support:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/session-replay/network-performance-recording:ext(\\.md)?",
+            "destination": "/docs/session-replay/network-recording:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/session-replay/pricing",
+            "destination": "/session-replay/pricing",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/session-replay/pricing.md",
+            "destination": "/session-replay/pricing",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/data/max-ai:ext(\\.md)?",
+            "destination": "/docs/posthog-ai:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/data/cookieless-tracking",
+            "destination": "/tutorials/cookieless-tracking",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/data/cookieless-tracking.md",
+            "destination": "/tutorials/cookieless-tracking",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/data/data-residency:ext(\\.md)?",
+            "destination": "/docs/privacy/data-storage:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/data/data-retention:ext(\\.md)?",
+            "destination": "/docs/data:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/data/environments:ext(\\.md)?",
+            "destination": "/docs/settings/projects:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/data/regions:ext(\\.md)?",
+            "destination": "/docs/privacy/data-storage:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/privacy/cookieless-tracking",
+            "destination": "/tutorials/cookieless-tracking",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/privacy/cookieless-tracking.md",
+            "destination": "/tutorials/cookieless-tracking",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/product-analytics/cookieless-tracking",
+            "destination": "/tutorials/cookieless-tracking",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/product-analytics/cookieless-tracking.md",
+            "destination": "/tutorials/cookieless-tracking",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/product-analytics/alerts:ext(\\.md)?",
+            "destination": "/docs/alerts:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/cdp/apps:ext(\\.md)?",
+            "destination": "/docs/cdp/destinations:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/cdp/sources/custom:ext(\\.md)?",
+            "destination": "/docs/cdp/sources/custom-rest-source:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/data-warehouse/sources/customerio:ext(\\.md)?",
+            "destination": "/docs/cdp/sources/customer-io:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/revenue-analytics/getting-started:ext(\\.md)?",
+            "destination": "/docs/revenue-analytics/start-here:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/libraries/rails:ext(\\.md)?",
+            "destination": "/docs/libraries/ruby-on-rails:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/libraries/nuxt:ext(\\.md)?",
+            "destination": "/docs/libraries/nuxt-js:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/libraries/sentry:ext(\\.md)?",
+            "destination": "/docs/error-tracking:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/libraries/js/installation:ext(\\.md)?",
+            "destination": "/docs/libraries/js:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/error-tracking/installation/nodejs:ext(\\.md)?",
+            "destination": "/docs/error-tracking/installation/node:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/workflows/customerio-import:ext(\\.md)?",
+            "destination": "/docs/workflows/import-customerio-optouts:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/messaging:ext(\\.md)?",
+            "destination": "/docs/workflows:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/mcp:ext(\\.md)?",
+            "destination": "/docs/model-context-protocol:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/settings/environments:ext(\\.md)?",
+            "destination": "/docs/settings/projects:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/ai-observability/installation/vercel-ai-gateway:ext(\\.md)?",
+            "destination": "/docs/ai-observability/installation/vercel-ai:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/ai-observability/manual-capture:ext(\\.md)?",
+            "destination": "/docs/ai-observability/installation/manual-capture:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/ai-engineering/manual-capture:ext(\\.md)?",
+            "destination": "/docs/ai-observability/installation/manual-capture:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/ai-analytics:ext(\\.md)?",
+            "destination": "/docs/ai-observability:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/api/rate-limits:ext(\\.md)?",
+            "destination": "/docs/api:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/live-events/cli:ext(\\.md)?",
+            "destination": "/docs/activity:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/handbook/growth/customer-support:ext(\\.md)?",
+            "destination": "/handbook/support/customer-support:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/changelog/2024",
+            "destination": "/changelog",
+            "statusCode": 301
+        },
+        {
+            "source": "/changelog/2026",
+            "destination": "/changelog",
+            "statusCode": 301
+        },
+        {
+            "source": "/jobs",
+            "destination": "/careers",
+            "statusCode": 301
+        },
+        {
+            "source": "/manual/session-recordings",
+            "destination": "/docs/session-replay",
+            "statusCode": 301
+        },
+        {
+            "source": "/sitemap.xml",
+            "destination": "/sitemap/sitemap-0.xml",
+            "statusCode": 301
+        },
+        {
+            "source": "/blog/rss.xml",
+            "destination": "/rss.xml",
+            "statusCode": 301
+        },
+        {
+            "source": "/blog/feed",
+            "destination": "/rss.xml",
+            "statusCode": 301
+        },
+        {
+            "source": "/feed",
+            "destination": "/rss.xml",
+            "statusCode": 301
+        },
+        {
+            "source": "/status",
+            "destination": "https://status.posthog.com",
+            "statusCode": 301
+        },
+        {
+            "source": "/security",
+            "destination": "/handbook/company/security",
+            "statusCode": 301
+        },
         {
             "source": "/activity",
             "destination": "/docs/activity",
@@ -232,6 +532,14 @@
             "destination": "/teams/apm"
         },
         {
+            "source": "/teams/irl-events",
+            "destination": "/teams/builder-relations"
+        },
+        {
+            "source": "/teams/irl-events/:path*",
+            "destination": "/teams/builder-relations/:path*"
+        },
+        {
             "source": "/teams/query-performance",
             "destination": "/teams/analytics-platform"
         },
@@ -250,6 +558,14 @@
             "statusCode": 301
         },
         {
+            "source": "/teams/product-led-sales",
+            "destination": "/teams/sales-product-led"
+        },
+        {
+            "source": "/teams/product-led-sales/:path*",
+            "destination": "/teams/sales-product-led/:path*"
+        },
+        {
             "source": "/teams/customer-success",
             "destination": "/teams/customer-success-eu"
         },
@@ -259,7 +575,12 @@
         },
         {
             "source": "/docs/prompt-management/skills-store:ext(\\.md)?",
-            "destination": "/docs/ai-engineering/skills-store:ext?",
+            "destination": "/docs/skills:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/ai-engineering/skills-store:ext(\\.md)?",
+            "destination": "/docs/skills:ext?",
             "statusCode": 301
         },
         {
@@ -272,11 +593,11 @@
         },
         {
             "source": "/code/download",
-            "destination": "/desktop#download"
+            "destination": "/desktop"
         },
         {
             "source": "/code/download/",
-            "destination": "/desktop#download"
+            "destination": "/desktop"
         },
         {
             "source": "/slack-app",
@@ -373,6 +694,11 @@
         {
             "source": "/handbook/growth/revops/lead-assignment-ooo",
             "destination": "/handbook/growth/revops/lead-assignment-tracker",
+            "statusCode": 301
+        },
+        {
+            "source": "/handbook/growth/revops/icp-scoring",
+            "destination": "/handbook/growth/revops/icp-fit-score",
             "statusCode": 301
         },
         {
@@ -647,6 +973,14 @@
         {
             "source": "/docs/integrations/slack:ext(\\.md)?",
             "destination": "/docs/libraries/slack:ext?"
+        },
+        {
+            "source": "/docs/integrations/github:ext(\\.md)?",
+            "destination": "/docs/libraries/github:ext?"
+        },
+        {
+            "source": "/docs/integrations/discord:ext(\\.md)?",
+            "destination": "/docs/libraries/discord:ext?"
         },
         {
             "source": "/docs/posthog-code/slack:ext(\\.md)?",
@@ -5116,7 +5450,11 @@
         },
         {
             "source": "/docs/cdp/geoip-enrichment:ext(\\.md)?",
-            "destination": "/docs/cdp/transformations/posthog-plugin-geoip:ext?"
+            "destination": "/docs/cdp/transformations/template-geoip:ext?"
+        },
+        {
+            "source": "/docs/cdp/transformations/posthog-plugin-geoip:ext(\\.md)?",
+            "destination": "/docs/cdp/transformations/template-geoip:ext?"
         },
         {
             "source": "/docs/cdp/timestamp-parser:ext(\\.md)?",
@@ -5189,6 +5527,10 @@
         {
             "source": "/startups/apply",
             "destination": "https://app.posthog.com/startups"
+        },
+        {
+            "source": "/students/apply",
+            "destination": "https://app.posthog.com/students"
         },
         {
             "source": "/yc-onboarding",
@@ -5360,7 +5702,7 @@
         },
         {
             "source": "/docs/llm-analytics/skills-store:ext(\\.md)?",
-            "destination": "/docs/ai-engineering/skills-store:ext?"
+            "destination": "/docs/skills:ext?"
         },
         {
             "source": "/docs/llm-analytics/:path*",
@@ -5473,10 +5815,6 @@
         {
             "source": "/handbook/cs-and-onboarding/customer-industry-segments",
             "destination": "/handbook/growth/sales/customer-industry-segments"
-        },
-        {
-            "source": "/startups/[...slug]",
-            "destination": "/startups"
         },
         {
             "source": "/customer-data-infrastructure/:path*",
@@ -5828,6 +6166,26 @@
         {
             "source": "/wizard",
             "destination": "/docs/ai-engineering/ai-wizard",
+            "statusCode": 301
+        },
+        {
+            "source": "/product-analytics-explorer/pricing",
+            "destination": "/product-analytics/pricing",
+            "statusCode": 301
+        },
+        {
+            "source": "/about-us",
+            "destination": "/about",
+            "statusCode": 301
+        },
+        {
+            "source": "/company",
+            "destination": "/about",
+            "statusCode": 301
+        },
+        {
+            "source": "/contact-us",
+            "destination": "/talk-to-a-human",
             "statusCode": 301
         }
     ]

@@ -28,7 +28,7 @@ It is _a lot_ of fun getting things right, and this motivated me early in the co
 
 * Having a board that is focused on the long run.
 
-* [Hiring people that we are _excited_ to work with](../handbook/company/values). No matter how well you manage stuff, 90% of problems can be avoided by getting the right people in the first place.
+* [Hiring people that we are _excited_ to work with](/handbook/values). No matter how well you manage stuff, 90% of problems can be avoided by getting the right people in the first place.
 
 * Paying everyone according to [a system](../handbook/people/compensation) versus random bargaining. This cuts down churn and politics.
 

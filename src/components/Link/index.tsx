@@ -203,6 +203,7 @@ export default function Link({
                                 slug={url}
                                 description={preview.description}
                                 video={preview.video}
+                                ctaLabel={preview.ctaLabel}
                             />
                         )}
                     >
@@ -256,6 +257,7 @@ export default function Link({
                                 slug={url}
                                 description={preview.description}
                                 video={preview.video}
+                                ctaLabel={preview.ctaLabel}
                             />
                         )}
                     >

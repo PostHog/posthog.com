@@ -10,6 +10,15 @@ Onboarding here is mostly self-serve - we won't sit you in a room for training f
 
 Below is a rough plan for your first month - use it as a guide, not a contract. The handbook itself is a work in progress, so you'll find gaps as you ramp up, things you needed to know that weren't written down. That's normal, and when you find a gap your job is to fill it in so the next person has it easier.
 
+## General advice
+
+A few things every recent joiner has run into:
+
+- Everyone will seem to know everything. They've just been here longer. Asking in public is the culture working, not you falling short.
+- It won't all stick, and it's not supposed to. Onboarding is an info dump - the goal is knowing where to look things up, not remembering it all.
+- Breadth beats depth early. Don't build a big write-up per account you'll never reopen - a shallow pass over your whole book serves you better in the first weeks.
+- Don't let product knowledge get in the way of jumping in. You will learn fastest by working with your customers. Be the driver and start building relationships and solving customer requests.
+
 ## Week 1 – how we talk about PostHog
 
 This week is about getting set up and learning how we talk about PostHog. You'll feel extremely unproductive, and that's fine - the aim is to set yourself up for in-person onboarding in Week 2. Read everything you can, work through the product fundamentals, and come to Week 2 with questions we can work through together.
@@ -19,12 +28,13 @@ This week is about getting set up and learning how we talk about PostHog. You'll
 - Setting up the day-to-day tools you'll be using - Vitally, our [canonical call stack](/handbook/growth/sales/sales-and-cs-tools#our-canonical-call-stack) (Zoom, Gong, and Granola), Slack, and Metabase. See [sales and CS tools](/handbook/growth/sales/sales-and-cs-tools) for set-up, and start copying other CSM's views and automations (or even better, build your own!)
 - Reading the [CS](/handbook/cs-and-onboarding/customer-success) and [sales](/handbook/growth/sales/) sections of the handbook.
 - Preparing your PostHog demo.
-- Picking a recent customer call on Gong to watch, and asking team members to add you to as many of their live calls as you can - the goal is exposure to how we talk about PostHog and how we talk to customers.
-- Nailing the product fundamentals - use the [framework](#learning-posthog) as a guide and work through the [onboarding exercise](/handbook/cs-and-onboarding/new-hire-onboarding-exercise). Use the demo environments or your own PostHog project to test different features and use cases.
+- Picking a recent customer call on Gong to watch, and asking team members to add you to as many of their live calls as you can - the goal is exposure to how we talk about PostHog and how we talk to customers. Best way to do this is check folks' calendars and just ask to join calls that work with your schedule.
+- Nailing the product fundamentals - use the [framework](#learning-posthog) as a guide. For hands-on exercises, the [onboarding exercise](/handbook/cs-and-onboarding/new-hire-onboarding-exercise) gets you familiar with the PostHog product, and the [HogLabs](https://github.com/PostHog/hoglabs-gtm) with implementing it. 
   - [Events](/docs/data/events), [persons](/docs/data/persons), and [product analytics](/docs/product-analytics) are the foundation for everything else - start here.
   - [Session replay](/docs/session-replay), [feature flags](/docs/feature-flags), and [experiments](/docs/experiments) are the next priority. They're PostHog's most mature products with the most overlap with everything else. But let your book guide you - if your customers are all-in on [error tracking](/docs/error-tracking), [logs](/docs/logs), or [AI observability](/docs/ai-observability), that's an opportunity to go deep early.
   - Learn how to use the [MCP](/docs/ai-engineering) across all products. This is increasingly how customers will interact with PostHog.
-- Exploring Slack. We're public by default, so Slack is one of the richest resources you have. You'll find outreach messages that worked, prior conversations with customers, PostHog history on decisions like pricing changes, and context that didn't make it into the handbook.
+- Exploring Slack. We're public by default, so Slack is one of the richest resources you have. You'll find outreach messages that worked, prior conversations with customers, PostHog history on decisions like pricing changes, and context that didn't make it into the handbook. Channels to join from day one: #team-customer-success (ask questions here by default), #group-cs-sales-support, #team-product-led-sales, #closed-won, #spike-detector, #customer-churn, and your local city/country channel. For #spike-detector, ask your team lead to add you and tag you as owner on your accounts.
+- Get your AI investigation setup running early - PostHog Desktop, Claude Code, and the MCPs. It quickly becomes a go-to for digging into accounts.
 
 **How to think about each product.** As you go through the fundamentals, for each product you're trying to be able to answer:
 
@@ -57,7 +67,7 @@ This is when you start working with your customers. Reach out, take the first ca
 
 - Reaching out to customers in your book to establish contact, scheduling handovers for any coming from existing owners. [Getting started with customers](/handbook/cs-and-onboarding/getting-started-with-customers) covers the playbook for early outreach and intro calls.
 - Picking up customer questions and tickets as they come in - this is where the bulk of customer work happens. See [handling customer issues](/handbook/cs-and-onboarding/handling-customer-issues) for how tickets flow.
-- Evaluating implementations as you go - is the customer set up well, are they getting value? The [foundation check](/handbook/cs-and-onboarding/foundation-check) and [health check](/handbook/cs-and-onboarding/health-checks) are the structured ways to do this.
+- Evaluating implementations as you go - is the customer set up well, are they getting value? The [basic implementation review](/handbook/cs-and-onboarding/foundation-check) and [health check](/handbook/cs-and-onboarding/health-checks) are the structured ways to do this.
 - Refining your demo with each conversation.
 - Starting to respond to Vitally signals on your book - what triggers your attention, what's the right next move? You'll feel confused at first, and that's fine, the goal is to start building a feel for it.
 
@@ -102,11 +112,13 @@ This is the bar for end of month 1.
 
 ## Learning PostHog
 
-PostHog has a lot of products, and you can't learn them all upfront, so trying to will just frustrate you. The lenses in Week 1 are the bar for each product you do learn; this section is how to figure out which products to focus on, and what to do when you hit something you don't know.
+PostHog has a lot of products, and you can't learn them all upfront, so trying to will just frustrate you. The lenses in Week 1 are the bar for each product you do learn. This section is how to figure out which products to focus on, how to get hands-on, and what to do when you hit something you don't know.
 
 **Find out the products your customers are using.** Once you have your book of business, you can see this in Vitally in a few places: the product usage widget in the CSM dashboard, the paid products widget in the default 360 dashboard, or the `paid products` trait. These look at paid usage only and won't include free-tier usage, though most of our customers aren't in free tier anyway. There's no point going deep on session replay initially if none of your customers use it, so use your book to guide what to prioritise first.
 
 **Start with the foundations, then focus on what your book uses.** Events, persons, and product analytics are useful regardless of who your customers are. Session replay, feature flags, and experiments are the next priority - they're PostHog's most mature products and have the most overlap with everything else. Past that, prioritise the products that show up most in your book, that keep coming up in customer conversations, and that have expansion opportunities. Implementation, billing, and MCP are worth learning alongside all of the above.
+
+**If you learn better by doing, check out the [HogLabs](https://github.com/PostHog/hoglabs-gtm).** It's a self-contained course on implementing PostHog: create a PostHog project, instrument a small app from zero, and use product analytics, session replay, feature flags, and experiments on data you generated. Then the lab will break your implementation using failure modes from [health checks](/handbook/cs-and-onboarding/health-checks) and the [basic implementation review](/handbook/cs-and-onboarding/foundation-check), and you diagnose each one and draft the reply you'd send. The lab is modular, so you can do just the foundations, or explore sections based on what your customers use.
 
 **When you hit something you don't know:**
 
@@ -114,7 +126,7 @@ PostHog has a lot of products, and you can't learn them all upfront, so trying t
 - Search Slack — you'll find that someone might've already asked the same question or documented the answer in a thread
 - Post in #team-customer-success
 
-Below is a per-product reading list to work through. Add and modify as you go - products are added frequently and the list goes out of date fast.
+Below is a per-product reading list to work through - the reference you come back to when you need the detail. Add and modify as you go - products are added frequently and the list goes out of date fast.
 
 ### Product analytics
 1. [Quick primer on Product analytics](https://www.loom.com/share/645de3987e4947ba8164b4d7b7cc719b?sid=ae5f8a50-dc56-4cc4-93d5-d398b398d5a0)

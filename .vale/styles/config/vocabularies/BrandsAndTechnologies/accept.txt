@@ -152,6 +152,7 @@ Kameleoon
 Kibana
 [Kk]inesis
 Klaviyo
+KMP
 Knative
 [Kk]nock
 [Kk]oala
@@ -189,6 +190,7 @@ MinIO
 Mixpanel
 Moloco
 MongoDB
+Multiplatform
 MySQL
 Netlify
 NGINX
@@ -233,6 +235,7 @@ Replit
 Revolut
 RevX
 [Rr]ipe
+Rokt
 RudderStack
 [Rr]unway
 Salesforce
@@ -381,6 +384,7 @@ JSX
 JWT
 JWTs
 KPIs
+kmp
 kubectl
 Kubernetes
 Laravel
@@ -470,5 +474,12 @@ MCPcat
 [Pp]ageleave
 [Pp]roxied
 [Uu]nproxied
+[Uu]nscoped
 [Uu]ndercount(s|ed|ing)?
 [Rr]esync(s|ed|ing)?
+[Ss]hard(s|ed|ing)?
+Altinity
+[Bb]ackreference(s)?
+[Ll]ookahead(s)?
+[Ll]ookaround(s)?
+[Ll]ookbehind(s)?

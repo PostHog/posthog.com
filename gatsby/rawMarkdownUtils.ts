@@ -1,7 +1,12 @@
 import path from 'path'
 import fs from 'fs'
 import { SdkReferenceData } from '../src/templates/sdk/SdkReference'
-import { getLanguageFromSdkId } from '../src/components/SdkReferences/utils'
+import {
+    getLanguageFromSdkId,
+    hasConcreteVersion,
+    isLatestVersion,
+    typeHasPage,
+} from '../src/components/SdkReferences/utils'
 import {
     createTurndownService,
     extractTitleFromHtml,
@@ -9,6 +14,13 @@ import {
     postProcessMarkdown,
     preprocessHtmlForTabs,
 } from './turndownService'
+
+// Prepended to every generated .md file so LLM crawlers landing on a single page
+// still see the pointer to the full index. Pairs with <link rel="llms.txt"> in seo.tsx.
+const AGENT_SIGNPOST =
+    "> AI agents: this is one page from PostHog's docs. Full index of Markdown docs for LLMs: https://posthog.com/llms.txt\n\n"
+
+const withAgentSignpost = (markdown: string): string => `${AGENT_SIGNPOST}${markdown}`
 
 export const generateRawMarkdownPages = async (
     docsNodes: Array<{ fields: { slug: string }; frontmatter: { title: string } }>
@@ -62,7 +74,7 @@ export const generateRawMarkdownPages = async (
                 fs.mkdirSync(dirPath, { recursive: true })
             }
 
-            fs.writeFileSync(outputPath, markdown, 'utf8')
+            fs.writeFileSync(outputPath, withAgentSignpost(markdown), 'utf8')
             console.log(`Generated: ${slug}.md`)
             processedPages.push({ slug, title })
         } catch (error) {
@@ -74,6 +86,17 @@ export const generateRawMarkdownPages = async (
         fields: { slug: page.slug },
         frontmatter: { title: page.title },
     }))
+}
+
+// Publish the OpenAPI document itself, alongside the per-operation markdown below.
+// The markdown is for LLMs reading prose; this is the machine-readable artifact that
+// API clients, codegen and function-calling tools expect to find at a stable URL.
+export const generateOpenApiSpec = (spec: any) => {
+    console.log('Writing openapi.json...')
+
+    const filePath = path.join(process.cwd(), 'public', 'openapi.json')
+    fs.writeFileSync(filePath, JSON.stringify(spec), 'utf8')
+    console.log(`✅ Wrote openapi.json (${Object.keys(spec.paths || {}).length} paths)`)
 }
 
 // Function to generate individual API endpoint markdown files from the OpenAPI spec
@@ -172,13 +195,65 @@ ${jsonContent}
 `
 
                 // Write the file
-                fs.writeFileSync(filePath, markdownContent, 'utf8')
+                fs.writeFileSync(filePath, withAgentSignpost(markdownContent), 'utf8')
                 console.log(`Generated: open-api-spec/${filename}`)
             }
         })
     })
 
     console.log(`✅ Generated ${totalEndpoints} API endpoint markdown files in /docs/open-api-spec/`)
+}
+
+const renderTypeAsText = (type: string): string => {
+    return type
+}
+
+const renderParameters = (params: any[], title = 'Parameters'): string => {
+    if (!params || params.length === 0) return ''
+
+    const paramLines = params.map((param) => {
+        const name = param.isOptional ? `${param.name}?` : param.name
+        const type = renderTypeAsText(param.type)
+        let paramLine = `- **\`${name}\`** (\`${type}\`)`
+
+        if (param.description) {
+            paramLine += ` - ${param.description}`
+        }
+        return paramLine
+    })
+
+    return `### ${title}\n\n${paramLines.join('\n')}`
+}
+
+const renderReturnType = (returnType: any): string => {
+    if (!returnType) return ''
+
+    const typeString = returnType.name
+    const isUnionOrIntersection = typeString.includes('|') || typeString.includes('&')
+
+    if (isUnionOrIntersection) {
+        const separator = typeString.includes('|') ? '|' : '&'
+        const types = typeString.split(separator).map((t: string) => t.trim())
+        const label = separator === '|' ? 'Union of' : 'Intersection of'
+
+        const typeLines = types.map((type) => `- \`${renderTypeAsText(type)}\``)
+        return `### Returns\n\n**${label}:**\n${typeLines.join('\n')}`
+    } else {
+        return `### Returns\n\n- \`${renderTypeAsText(typeString)}\``
+    }
+}
+
+const renderExamples = (examples: any[], language: string, title = 'Examples'): string => {
+    if (!examples || examples.length === 0) return ''
+
+    if (examples.length === 1) {
+        return `### ${title}\n\n\`\`\`${language}\n${examples[0].code.trim()}\n\`\`\``
+    } else {
+        const exampleBlocks = examples.map(
+            (example) => `#### ${example.name}\n\n\`\`\`${language}\n${example.code.trim()}\n\`\`\``
+        )
+        return `### ${title}\n\n${exampleBlocks.join('\n\n')}`
+    }
 }
 
 export const generateSdkReferencesMarkdown = (sdkReferences: SdkReferenceData) => {
@@ -191,7 +266,7 @@ export const generateSdkReferencesMarkdown = (sdkReferences: SdkReferenceData) =
 
     // Follow the same path logic as createPages.ts
     let fileName: string
-    if (sdkReferences.version.includes('latest')) {
+    if (isLatestVersion(sdkReferences.version)) {
         fileName = `${sdkReferences.referenceId}.md`
     } else {
         fileName = `${sdkReferences.id}.md`
@@ -199,62 +274,12 @@ export const generateSdkReferencesMarkdown = (sdkReferences: SdkReferenceData) =
 
     const filePath = path.join(sdkSpecDir, fileName)
 
-    const renderTypeAsText = (type: string): string => {
-        return type
-    }
-
-    const renderParameters = (params: any[]): string => {
-        if (!params || params.length === 0) return ''
-
-        const paramLines = params.map((param) => {
-            const name = param.isOptional ? `${param.name}?` : param.name
-            const type = renderTypeAsText(param.type)
-            let paramLine = `- **\`${name}\`** (\`${type}\`)`
-
-            if (param.description) {
-                paramLine += ` - ${param.description}`
-            }
-            return paramLine
-        })
-
-        return `### Parameters\n\n${paramLines.join('\n')}`
-    }
-
-    const renderReturnType = (returnType: any): string => {
-        if (!returnType) return ''
-
-        const typeString = returnType.name
-        const isUnionOrIntersection = typeString.includes('|') || typeString.includes('&')
-
-        if (isUnionOrIntersection) {
-            const separator = typeString.includes('|') ? '|' : '&'
-            const types = typeString.split(separator).map((t: string) => t.trim())
-            const label = separator === '|' ? 'Union of' : 'Intersection of'
-
-            const typeLines = types.map((type) => `- \`${renderTypeAsText(type)}\``)
-            return `### Returns\n\n**${label}:**\n${typeLines.join('\n')}`
-        } else {
-            return `### Returns\n\n- \`${renderTypeAsText(typeString)}\``
-        }
-    }
-
-    const renderExamples = (examples: any[], language: string): string => {
-        if (!examples || examples.length === 0) return ''
-
-        if (examples.length === 1) {
-            return `### Examples\n\n\`\`\`${language}\n${examples[0].code.trim()}\n\`\`\``
-        } else {
-            const exampleBlocks = examples.map(
-                (example) => `#### ${example.name}\n\n\`\`\`${language}\n${example.code.trim()}\n\`\`\``
-            )
-            return `### Examples\n\n${exampleBlocks.join('\n\n')}`
-        }
-    }
-
     const markdownNodes: string[] = []
 
     markdownNodes.push(`# ${sdkReferences.info.title}`)
-    markdownNodes.push(`**SDK Version:** ${sdkReferences.info.version}`)
+    if (hasConcreteVersion(sdkReferences.info.version)) {
+        markdownNodes.push(`**SDK Version:** ${sdkReferences.info.version}`)
+    }
     markdownNodes.push(sdkReferences.info.description)
 
     if (sdkReferences.categories && sdkReferences.categories.length > 0) {
@@ -324,7 +349,45 @@ export const generateSdkReferencesMarkdown = (sdkReferences: SdkReferenceData) =
 
     const markdownContent = markdownNodes.join('\n\n')
 
-    fs.writeFileSync(filePath, markdownContent, 'utf8')
+    fs.writeFileSync(filePath, withAgentSignpost(markdownContent), 'utf8')
+}
+
+/** Writes the `.md` sibling of each SDK type page, mirroring the paths built by createPages.ts. */
+export const generateSdkTypeMarkdown = (sdkReferences: SdkReferenceData) => {
+    if (!isLatestVersion(sdkReferences.version)) {
+        return
+    }
+
+    const typesDir = path.join(process.cwd(), 'public', 'docs', 'references', sdkReferences.referenceId, 'types')
+    fs.mkdirSync(typesDir, { recursive: true })
+
+    const sdkLanguage = getLanguageFromSdkId(sdkReferences.referenceId)
+
+    sdkReferences.types?.forEach((type) => {
+        if (!typeHasPage(type)) {
+            return
+        }
+
+        const markdownNodes: string[] = [`# ${type.name}`, `**SDK:** ${sdkReferences.info.title}`]
+
+        if (type.description) {
+            markdownNodes.push(type.description)
+        }
+
+        const propertiesMarkdown = renderParameters(type.properties, 'Properties')
+        if (propertiesMarkdown) {
+            markdownNodes.push(propertiesMarkdown)
+        }
+
+        const exampleMarkdown = type.example
+            ? renderExamples([{ code: type.example }], sdkLanguage, 'Example values')
+            : ''
+        if (exampleMarkdown) {
+            markdownNodes.push(exampleMarkdown)
+        }
+
+        fs.writeFileSync(path.join(typesDir, `${type.id}.md`), markdownNodes.join('\n\n'), 'utf8')
+    })
 }
 
 // Function to generate llms.txt file according to spec
@@ -447,6 +510,24 @@ const PLATFORM_ITEMS: PlatformItem[] = [
         layer: 'tool',
         oneLiner: 'The interface humans and agents use to understand the product.',
     },
+    {
+        name: 'Support',
+        layer: 'tool',
+        link: 'https://posthog.com/docs/support',
+        oneLiner: 'Tickets triaged with full product context — agents draft replies and fixes from the same data.',
+    },
+    {
+        name: 'Customer analytics',
+        layer: 'tool',
+        link: 'https://posthog.com/docs/customer-analytics/start-here',
+        oneLiner: 'Accounts, usage metrics, and customer journeys — the account-level context behind every signal.',
+    },
+    {
+        name: 'Replay Vision',
+        layer: 'tool',
+        link: 'https://posthog.com/docs/replay-vision',
+        oneLiner: 'Agents that watch session recordings at scale and turn what users hit into observations.',
+    },
 ]
 
 const CONTEXT_BLURB =
@@ -494,11 +575,12 @@ ${CONTEXT_WAREHOUSE_BLURB}
 
 ---
 
+Self-driving in depth — signals, Inbox, scouts, and the PR loop: https://posthog.com/docs/self-driving.md
 Pricing: every tool has a generous free tier, then usage-based pricing. Exact numbers: https://posthog.com/pricing.md
 All docs are available as Markdown (append \`.md\` to any docs URL). Full index: https://posthog.com/llms.txt
 `
 
-    fs.writeFileSync(path.join(publicPath, 'platform.md'), content, 'utf8')
+    fs.writeFileSync(path.join(publicPath, 'platform.md'), withAgentSignpost(content), 'utf8')
     console.log('Generated: platform.md')
 }
 
@@ -532,7 +614,7 @@ For features, screenshots, and details, see ${pageLinkFor(item)}.
         const outputPath = path.join(publicPath, `${item.slug}.md`)
         const dirPath = path.dirname(outputPath)
         if (!fs.existsSync(dirPath)) fs.mkdirSync(dirPath, { recursive: true })
-        fs.writeFileSync(outputPath, content, 'utf8')
+        fs.writeFileSync(outputPath, withAgentSignpost(content), 'utf8')
         console.log(`Generated: ${item.slug}.md`)
     }
 }
@@ -636,7 +718,7 @@ New features, improvements, and fixes shipped in PostHog. ${scope} Regenerated o
         header(`This file covers the last ${recentMonthKeys.length} months.`) +
         recentMonthKeys.map(monthMarkdown).join('\n\n') +
         '\n'
-    fs.writeFileSync(path.join(publicPath, 'changelog.md'), changelogMd, 'utf8')
+    fs.writeFileSync(path.join(publicPath, 'changelog.md'), withAgentSignpost(changelogMd), 'utf8')
     console.log('Generated: changelog.md')
 
     // Per-year archives: public/changelog/{year}.md
@@ -645,7 +727,7 @@ New features, improvements, and fixes shipped in PostHog. ${scope} Regenerated o
     for (const year of years) {
         const yearMonthKeys = sortedMonthKeys.filter((key) => key.startsWith(year))
         const yearMd = header(`This file covers ${year}.`) + yearMonthKeys.map(monthMarkdown).join('\n\n') + '\n'
-        fs.writeFileSync(path.join(changelogDir, `${year}.md`), yearMd, 'utf8')
+        fs.writeFileSync(path.join(changelogDir, `${year}.md`), withAgentSignpost(yearMd), 'utf8')
         console.log(`Generated: changelog/${year}.md`)
     }
 }
@@ -715,6 +797,7 @@ export const generateLlmsTxt = (pages) => {
         'docs-hog': 'Hog (Query Language)',
         'docs-model-context-protocol': 'Model Context Protocol (MCP)',
         'docs-ai-engineering': 'AI Engineering',
+        templates: 'Self-driving scout templates',
     }
 
     const formatSectionTitle = (section: string): string => {
@@ -1098,6 +1181,6 @@ All prices are in USD, excluding taxes.
         fs.mkdirSync(publicPath, { recursive: true })
     }
 
-    fs.writeFileSync(pricingMdPath, content, 'utf8')
+    fs.writeFileSync(pricingMdPath, withAgentSignpost(content), 'utf8')
     console.log('Generated: pricing.md')
 }

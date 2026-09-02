@@ -22,23 +22,26 @@ It's the human side of the [self-improving loop](/docs/self-driving/self-improvi
 - **Reports** – grouped [signals](/docs/self-driving/signals) framed as one problem, with the evidence behind them.
 - **Pull requests** – the changes an agent opens for actionable reports.
 
-Each item is ranked by priority, so you work top-down instead of triaging a flat list.
+Reports appear in one list that you filter by state and reviewer scope. Filter by `For you`, `Entire project`, or a teammate. Then choose the states to show, such as `Needs decision`, `Review and merge`, `Resolved`, or `Dismissed`. Reports are ordered by priority by default. To change the order, use the sort control and choose a different order, such as `Last updated first`, `Newest first`, or `Oldest first`.
 
 ## What you do here
 
 From the inbox you:
 
 - **Review** a report and dig into the evidence.
+- **[Ask AI](/docs/self-driving/reports#ask-ai-about-a-report)** a question about a report, with its evidence already in context.
 - **Steer** the work: approve it, snooze it, or decline what self-driving proposes.
 - **Merge** the pull requests you're happy with, the same as any other PR.
 
 Nothing ships without you. The inbox is where you stay in control of what self-driving does.
 
+A resolved report stays resolved. If the same problem returns later, self-driving files a new report. It does not reopen the old one. Dismissed reports stay available in the `Dismissed` view, so you can review them or restore one.
+
 Triage is also how you teach the loop. When you dismiss or snooze a report and say why, that note is [forwarded to the scout that filed it](/docs/self-driving/scouts#your-inbox-feedback-steers-scouts-too), so later runs read it before deciding what to surface. Explaining a bad report is the cheapest way to stop getting it.
 
 ## Where to find it
 
-The inbox is available across surfaces – the [web app](/docs/self-driving/web), [PostHog Desktop](/docs/posthog-desktop), and Slack – so you can review and act on work wherever you are. It's the same inbox everywhere; only the way you open it changes.
+The inbox is available across surfaces – the [web app](/docs/self-driving/web), [PostHog Desktop](/docs/posthog-desktop/self-driving), and Slack – so you can review and act on work wherever you are. It's the same inbox everywhere; only the way you open it changes.
 
 Self-driving is one shared setup, not a separate one per surface. Your [signal sources](/docs/self-driving/inbox/sources), [scouts](/docs/self-driving/scouts), [reports](/docs/self-driving/reports), and inbox state are the same whether you open PostHog Desktop or the web app – connect a source or tune a scout in one place and it takes effect everywhere.
 
