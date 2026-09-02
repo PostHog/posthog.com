@@ -66,7 +66,7 @@ Each bet has to name the “sacred cow” being sacrificed (CAC payback, margin,
 
 I don't take all of the bets seriously. I take about one in five, which is roughly the hit rate I want, adapting as needed. I then copy and paste my favorite to the relevant team and pretend I came up with it myself. 
 
-I also periodically [ask Cowork to check its own setup](/newsletter/fix-your-agents#3-ask-agents-for-feedback-directly)! “Where are you getting that from?” or “What context do you have on blah?”. This works surprisingly well - often Cowork will tell me about things like duplicate or stale files, and then suggest a solution. 
+I also periodically ask Cowork to check its own setup! “Where are you getting that from?” or “What context do you have on blah?”. This works surprisingly well - often Cowork will tell me about things like duplicate or stale files, and then suggest a solution. 
 
 ## Give it context it can't guess
 
