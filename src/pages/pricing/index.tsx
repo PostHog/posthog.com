@@ -8,7 +8,7 @@ import Hero from 'components/Pricing/Redesign/Hero'
 import FreeTierTicker from 'components/Pricing/Redesign/FreeTierTicker'
 import CustomerLogos from 'components/Pricing/Redesign/CustomerLogos'
 import MoreOptions from 'components/Pricing/Redesign/MoreOptions'
-import CalculatorReveal from 'components/Pricing/Redesign/CalculatorReveal'
+import CalculatorSection from 'components/Pricing/Redesign/CalculatorSection'
 import PricingJourney from 'components/Pricing/Redesign/PricingJourney'
 import Surfaces from 'components/Pricing/Redesign/Surfaces'
 import Philosophy from './philosophy'
@@ -63,9 +63,13 @@ export default function Pricing(): JSX.Element {
                     <h2 className="text-2xl mb-0">Platform features, volume discounts, and onboarding help</h2>
                 </SectionHeader>
                 <MoreOptions />
-                {/* The calculator is a footnote *inside* this section, so the cards and the
-                    calculator share one section break. It owns `#calculator`. */}
-                <CalculatorReveal />
+            </SectionLayout>
+
+            <SectionLayout id="calculator" className="not-prose">
+                <SectionHeader>
+                    <h2 className="text-2xl mb-0">Pricing calculator</h2>
+                </SectionHeader>
+                <CalculatorSection />
             </SectionLayout>
 
             <Philosophy />

@@ -1,18 +1,16 @@
-import CloudinaryImage from 'components/CloudinaryImage'
-import { IconCheck, IconInfo, IconX } from '@posthog/icons'
+import { IconInfo, IconLightBulb, IconX } from '@posthog/icons'
 import Checkbox from 'components/Checkbox'
 import { PricingTiers } from 'components/Pricing/Plans'
 import { NonLinearSlider, nonLinearCurve, reverseNonLinearCurve } from 'components/Pricing/PricingSlider/Slider'
-import { formatUSD } from 'components/Pricing/PricingSlider/pricingSliderLogic'
-import { calculatePrice, getAddonsCostForProduct } from 'components/Pricing/PricingCalculator/calculatorLogic'
+import { calculatePrice } from 'components/Pricing/PricingCalculator/calculatorLogic'
 import React, { useEffect, useMemo, useState } from 'react'
 import { NumericFormat } from 'react-number-format'
 import AutosizeInput from 'react-input-autosize'
 import qs from 'qs'
 import Tooltip from 'components/Tooltip'
-import { StaticImage } from 'gatsby-plugin-image'
-import Link from 'components/Link'
 import { Addons } from '../Tabbed'
+import { useApp } from '../../../../context/App'
+import EventTypesModal, { EVENT_TYPES_MODAL_KEY } from '../EventTypesModal'
 
 const getTotalAnalyticsVolume = (analyticsData: any) => {
     return Object.keys(analyticsData).reduce((acc, key) => acc + analyticsData[key].volume, 0)
@@ -42,27 +40,6 @@ export const analyticsSliders = [
         types: [{ type: 'websiteAnalyticsEvents', label: 'Anonymous events' }],
         checked: true,
     },
-    {
-        label: 'Mobile app',
-        types: [
-            { type: 'mobileAppAnonymousEvents', label: 'Anonymous events' },
-            { type: 'mobileAppAuthenticatedEvents', label: 'Identified events', enhanced: true },
-        ],
-    },
-    {
-        label: 'API events',
-        types: [
-            { type: 'apiAnonymousEvents', label: 'Anonymous events' },
-            { type: 'apiAuthenticatedEvents', label: 'Identified events', enhanced: true },
-        ],
-    },
-    {
-        label: 'Other events',
-        types: [
-            { type: 'otherAnonymousEvents', label: 'Anonymous events' },
-            { type: 'otherAuthenticatedEvents', label: 'Identified events', enhanced: true },
-        ],
-    },
 ]
 
 const getLabelByType = (key) => {
@@ -73,192 +50,16 @@ const getLabelByType = (key) => {
         : slider.label
 }
 
-const Modal = ({ onClose, isVisible }) => {
-    return (
-        <>
-            <div
-                className={`bg-accent-dark/50 fixed h-screen left-0 right-0 top-0 bg-opacity-40 flex justify-center items-center ${
-                    !isVisible ? 'hidden' : 'z-[1000000]'
-                }`}
-                onClick={() => onClose()}
-            ></div>
-            <div
-                className={`max-w-full z-[1000001] fixed left-4 md:left-8 right-4 md:right-8 bottom-4 md:bottom-8 rounded-tl md:rounded-tl-lg rounded-tr md:rounded-tr-lg flex flex-col bg-white dark:bg-accent-dark transition-all duration-300 ease-out
-          ${isVisible ? '!opacity-100 top-4' : 'opacity-0 top-[100vh]'}`}
-            >
-                <div className="w-full h-fit flex justify-between p-4 border-b border-primary">
-                    <span className="font-bold text-xl">Event types, explained</span>
+const AnalyticsSlider = ({ marks, min, max, className = '', label, onChange, value, enhanced = '' }) => {
+    const { addWindow } = useApp()
 
-                    <button onClick={() => onClose()}>
-                        <IconX className="size-5" />
-                    </button>
-                </div>
-
-                <div className="flex-1 min-h-0 overflow-y-auto px-4 py-4 md:pb-8">
-                    {/* <h3 className="mb-2 text-lg">Save money if you don't need user properties</h3>
-                    <p className="font-semibold opacity-70 text-[15px]">(Custom user properties more expensive to process)</p>
-                    <p className="mb-2">The more data we store about users, the higher the cost. So the less data you need, the more you can save.</p> */}
-
-                    <p className="mb-8 text-[15px]">
-                        Events are billed at different rates based on volume and if you choose to send custom user
-                        properties with the event.
-                    </p>
-
-                    <section className="grid md:grid-cols-5 gap-6 md:gap-12 pb-12">
-                        <div className="col-span-1 md:col-span-2 md:flex justify-center">
-                            <h3 className="mb-4 md:hidden">Anonymous events</h3>
-                            <div className="max-w-md">
-                                <CloudinaryImage
-                                    src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Pricing/PricingCalculator/Tabs/event-anonymous.png"
-                                    alt="Anonymous event example"
-                                    className=""
-                                    placeholder="blurred"
-                                />
-                            </div>
-                        </div>
-                        <div className="col-span-1 md:col-span-3 max-w-xl">
-                            <h3 className="hidden md:block mb-1">Anonymous events</h3>
-                            <p className="opacity-70 mb-3">
-                                No individually-identifiable info, analyzed in aggregate, don't use person profiles
-                            </p>
-                            <p className="mb-2">
-                                By default, events are anonymous, meaning they don't have any personally-identifiable
-                                information attached to them.
-                            </p>
-                            <p className="mb-2">
-                                They come with info about the browser and device, visitor's location, and any UTM
-                                parameters.
-                            </p>
-
-                            <h4 className="text-base">With anonymous events, you can:</h4>
-                            <ul className="list-none pl-0 mb-6 space-y-1">
-                                <li className="relative pl-8">
-                                    <IconCheck className="size-5 inline-block text-green absolute top-1 left-1" />
-                                    See a Google Analytics-style dashboard
-                                </li>
-                                <li className="relative pl-8">
-                                    <IconCheck className="size-5 inline-block text-green absolute top-1 left-1" />
-                                    Access properties like UTMs, location, referrer, page views
-                                </li>
-                                <li className="relative pl-8">
-                                    <IconCheck className="size-5 inline-block text-green absolute top-1 left-1" />
-                                    <p className="mb-0">
-                                        Create{' '}
-                                        <strong>
-                                            <em>aggregate</em>
-                                        </strong>{' '}
-                                        insights in <strong>Product analytics</strong>
-                                    </p>
-                                    <ul className="[&_li]:text-sm opacity-70 pl-4 pt-1">
-                                        <li>How many times users click an element on a page</li>
-                                        <li>Group visitors by device type or location</li>
-                                        <li>Filter to interactions on a specific page</li>
-                                        <li>Track anonymous users across sessions</li>
-                                    </ul>
-                                </li>
-                            </ul>
-
-                            <p className="m-0 text-sm opacity-70">Pricing starts at </p>
-                            <p className="m-0">
-                                <strong>$0.00005</strong>
-                                <span className="opacity-70 text-sm">/event</span>
-                            </p>
-                            <p className="text-green m-0 text-sm font-semibold">First 1 million events/mo free</p>
-                        </div>
-                    </section>
-
-                    <section className="grid md:grid-cols-5 gap-6 md:gap-12 pb-4">
-                        <div className="col-span-1 md:col-span-2 md:flex justify-center">
-                            <h3 className="mb-4 md:hidden">Identified events</h3>
-                            <div className="max-w-md">
-                                <CloudinaryImage
-                                    src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Pricing/PricingCalculator/Tabs/event-identified.png"
-                                    alt="Identified event example"
-                                    placeholder="blurred"
-                                />
-                            </div>
-                        </div>
-                        <div className="col-span-1 md:col-span-3 max-w-xl">
-                            <h3 className="hidden md:block mb-1">Identified events</h3>
-                            <p className="opacity-70 mb-3">
-                                Track usage of specific, logged in users by using{' '}
-                                <Link to="/docs/data/persons" external>
-                                    person profiles
-                                </Link>
-                                .
-                            </p>
-                            <p className="mb-2">
-                                Identify users by their email address or other unique identifier, and attach custom
-                                properties to their person profiles.
-                            </p>
-
-                            <h4 className="text-base">In addition to anonymous event capabilities, you can:</h4>
-                            <ul className="list-none pl-0 mb-6 space-y-1">
-                                <li className="relative pl-8">
-                                    <IconCheck className="size-5 inline-block text-green absolute top-1 left-1" />
-                                    <p className="mb-0">Merge anonymous users with their eventual identified user</p>
-                                    <ul className="[&_li]:text-sm opacity-70 pl-2 pt-1 list-none">
-                                        <li>
-                                            Like when they sign up for your product or use different devices - enables
-                                            analyzing the user's path
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li className="relative pl-8">
-                                    <IconCheck className="size-5 inline-block text-green absolute top-1 left-1" />
-                                    <p className="mb-0">Store custom properties on users</p>
-                                    <ul className="[&_li]:text-sm opacity-70 pl-2 pt-1 list-none">
-                                        <li>
-                                            Use these properties in cohorts, session replay, experiments, and feature
-                                            flags
-                                        </li>
-                                    </ul>
-                                </li>
-
-                                <li className="relative pl-8">
-                                    <IconCheck className="size-5 inline-block text-green absolute top-1 left-1" />
-                                    <p className="mb-0">
-                                        Create{' '}
-                                        <strong>
-                                            <em>user-specific</em>
-                                        </strong>{' '}
-                                        insights in <strong>Product analytics</strong>
-                                    </p>
-                                    <ul className="[&_li]:text-sm opacity-70 pl-4 pt-1">
-                                        <li>
-                                            How many times <em>specific users</em> click an element on a page
-                                        </li>
-                                        <li>
-                                            Group <em>cohorts of users</em> by device type, location, or property
-                                        </li>
-                                        <li>
-                                            Filter to interactions on a specific page <em>by specific users</em>
-                                        </li>
-                                    </ul>
-                                </li>
-                            </ul>
-
-                            <div className="flex gap-8">
-                                <div className="flex-1">
-                                    <p className="m-0 text-sm opacity-70">Pricing starts at</p>
-                                    <p className="m-0">
-                                        <strong>$0.000248</strong>
-                                        <span className="opacity-70 text-sm">/event</span>
-                                    </p>
-                                    <p className="text-green m-0 text-sm font-semibold">
-                                        First 1 million events/mo free
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                    </section>
-                </div>
-            </div>
-        </>
-    )
-}
-
-const AnalyticsSlider = ({ marks, min, max, className = '', label, onChange, value, enhanced = '', setModalOpen }) => {
+    const openEventTypes = () => {
+        addWindow(
+            (
+                <EventTypesModal location={{ pathname: EVENT_TYPES_MODAL_KEY }} key={EVENT_TYPES_MODAL_KEY} newWindow />
+            ) as any
+        )
+    }
     return (
         <div className={`${className} relative ${label ? 'pt-7' : ''}`}>
             {label && (
@@ -275,7 +76,7 @@ const AnalyticsSlider = ({ marks, min, max, className = '', label, onChange, val
                                         </p>
                                         <p className="text-sm mb-0">
                                             <button
-                                                onClick={() => setModalOpen(true)}
+                                                onClick={openEventTypes}
                                                 className="text-red dark:text-yellow font-semibold text-sm"
                                             >
                                                 Explain event types
@@ -305,15 +106,7 @@ const AnalyticsSlider = ({ marks, min, max, className = '', label, onChange, val
     )
 }
 
-const SliderToggle = ({
-    label = '',
-    types,
-    activeProduct,
-    setAnalyticsVolume,
-    analyticsData,
-    setModalOpen,
-    ...other
-}) => {
+const SliderToggle = ({ label = '', types, activeProduct, setAnalyticsVolume, analyticsData, ...other }) => {
     const [volume, setVolume] = useState({})
     const [checked, setChecked] = useState(other.checked || false)
 
@@ -349,7 +142,6 @@ const SliderToggle = ({
                                         className="col-span-5 pl-8"
                                         label={label}
                                         enhanced={analyticsData[type].enhanced}
-                                        setModalOpen={setModalOpen}
                                     />
                                     <div className="col-span-1 text-right font-bold m-0 self-end -mb-1.5 flex justify-end">
                                         <NumericFormat
@@ -385,8 +177,6 @@ export default function ProductAnalyticsTab({
     addons,
 }) {
     const [showBreakdown, setShowBreakdown] = useState(false)
-    const [modalOpen, setModalOpen] = useState(false)
-
     const productAnalyticsTiers = useMemo(() => activeProduct?.billingData.plans.find((plan) => plan.tiers).tiers, [])
     const enhancedPersonsAddonTiers = useMemo(
         () =>
@@ -395,14 +185,7 @@ export default function ProductAnalyticsTab({
                 .plans.find((plan) => plan.tiers).tiers,
         []
     )
-    // `addons` is shared across every product in the calculator, so scope it to this product's
-    // add-ons before adding them to the subtotal
-    const productAnalyticsAddonsCost = useMemo(
-        () => getAddonsCostForProduct(addons, activeProduct?.billingData),
-        [addons, activeProduct]
-    )
     const totalProductAnalyticsVolume = getTotalAnalyticsVolume(analyticsData)
-    const totalProductAnalyticsPrice = calculatePrice(totalProductAnalyticsVolume, productAnalyticsTiers).total
     const totalEnhancedPersonsVolume = getTotalEnhancedPersonsVolume(analyticsData)
     const enhancedPersonsCost = calculatePrice(totalEnhancedPersonsVolume, enhancedPersonsAddonTiers)
 
@@ -462,140 +245,102 @@ export default function ProductAnalyticsTab({
     }, [])
 
     return (
-        <>
-            <Modal onClose={() => setModalOpen(false)} isVisible={modalOpen} />
-            <div className="mb-4">
-                <div className="border border-green bg-green/25 px-3 py-2 rounded italic mb-4 text-sm">
-                    First 1,000,000 events free – every month!
-                </div>
-                <div className="grid grid-cols-6 gap-8 items-end mb-2">
-                    <h3 className="col-span-3 @2xl:col-span-4 m-0 text-base">
-                        Event usage{' '}
-                        <button
-                            onClick={() => setModalOpen(true)}
-                            className="text-red dark:text-yellow font-semibold text-sm"
-                        >
-                            explain event types
-                        </button>
-                    </h3>
-                    <p className="col-span-3 @2xl:col-span-2 m-0 text-right opacity-70 text-sm">Events/mo</p>
-                </div>
-
-                {analyticsSliders.map((slider) => (
-                    <SliderToggle
-                        key={slider.label}
-                        analyticsData={analyticsData}
-                        setAnalyticsVolume={setAnalyticsVolume}
-                        activeProduct={activeProduct}
-                        setModalOpen={setModalOpen}
-                        {...slider}
-                    />
-                ))}
-                <div className="mt-4">
-                    <Addons
-                        activeProduct={activeProduct}
-                        addons={addons}
-                        setAddons={setAddons}
-                        volume={totalProductAnalyticsVolume || 0}
-                        analyticsData={analyticsData}
-                    />
-                </div>
-                <div className="grid grid-cols-6 gap-x-8 pt-2 border-t border-primary">
-                    <div className="col-span-full flex justify-between items-center">
+        <div>
+            {analyticsSliders.map((slider) => (
+                <SliderToggle
+                    key={slider.label}
+                    analyticsData={analyticsData}
+                    setAnalyticsVolume={setAnalyticsVolume}
+                    activeProduct={activeProduct}
+                    {...slider}
+                />
+            ))}
+            <div className="pr-1.5 mt-2 flex gap-3 items-center justify-between">
+                <span className="flex gap-1 items-center min-w-0">
+                    <IconLightBulb className="size-5 inline-block text-[#4f9032] dark:text-green relative -top-px shrink-0" />
+                    <span className="text-sm text-[#4f9032] dark:text-green font-semibold">
+                        {activeProduct.freeAllocationText ? (
+                            activeProduct.freeAllocationText
+                        ) : (
+                            <>
+                                First {Math.round(activeProduct.slider.min).toLocaleString()}{' '}
+                                {activeProduct.billingData.unit}s free –&nbsp;
+                                <em>every month!</em>
+                            </>
+                        )}
+                    </span>
+                </span>
+                <button
+                    onClick={() => setShowBreakdown(!showBreakdown)}
+                    className="text-red dark:text-yellow font-semibold text-sm shrink-0"
+                >
+                    {showBreakdown ? 'Hide how we calculate this' : 'See how we calculate this'}
+                </button>
+            </div>
+            {showBreakdown && (
+                <div className="p-4 mt-4 rounded border border-primary bg-white dark:bg-accent-dark relative">
+                    <h4 className="mb-1">How event pricing is calculated</h4>
+                    <p className="text-sm font-normal mb-2">
+                        All events are billed at a single base rate. Events for users who have been identified or have
+                        custom properties stored on them are charged an additional rate called Person profiles.
+                    </p>
+                    <p className="my-4 font-bold border-t border-primary pt-4">Here's how your estimate breaks down:</p>
+                    <div className="space-y-8">
                         <div>
-                            <h3 className="m-0 text-base">Event cost subtotal</h3>
-                            {showBreakdown ? (
-                                <button
-                                    onClick={() => setShowBreakdown(false)}
-                                    className="text-red dark:text-yellow font-semibold text-sm"
-                                >
-                                    Hide how we calculate this
-                                </button>
-                            ) : (
-                                <button
-                                    onClick={() => setShowBreakdown(true)}
-                                    className="text-red dark:text-yellow font-semibold text-sm"
-                                >
-                                    See how we calculate this
-                                </button>
+                            <h4 className="text-lg m-0">All events (base rate)</h4>
+                            {anonymousUsed.length > 0 && (
+                                <p className="opacity-70 m-0 text-sm">
+                                    <strong>Used for:</strong>{' '}
+                                    {anonymousUsed.map((type) => getLabelByType(type)).join(', ')}
+                                </p>
                             )}
+                            <div className="overflow-auto -mx-4 px-4 md:mx-0 md:px-0">
+                                <div className="p-1 min-w-[500px] md:min-w-auto border border-input rounded-md mt-2">
+                                    <PricingTiers
+                                        plans={[{ tiers: activeProduct.costByTier }]}
+                                        unit={activeProduct.billingData.unit}
+                                        type={'product_analytics'}
+                                        showSubtotal
+                                    />
+                                </div>
+                            </div>
                         </div>
                         <div>
-                            <strong>
-                                {formatUSD(
-                                    totalProductAnalyticsPrice + enhancedPersonsCost.total + productAnalyticsAddonsCost
-                                )}
-                            </strong>
+                            <h4 className="text-lg m-0">Person profiles (charged on identified events)</h4>
+                            <p className="text-sm mb-1">
+                                Person profiles are charged for events that are associated with identified users. Your
+                                first 1 million person profile events are free.
+                            </p>
+                            {identifiedUsed.length > 0 && (
+                                <p className="opacity-70 m-0 text-sm">
+                                    <strong>Used for:</strong>{' '}
+                                    {identifiedUsed.map((type) => getLabelByType(type)).join(', ')}
+                                </p>
+                            )}
+                            <div className="overflow-auto -mx-4 px-4 md:mx-0 md:px-0">
+                                <div className="p-1 min-w-[500px] md:min-w-auto border border-input rounded-md mt-2">
+                                    <PricingTiers
+                                        plans={[{ tiers: enhancedPersonsCost.costByTier }]}
+                                        unit={activeProduct.billingData.unit}
+                                        type={'product_analytics'}
+                                        showSubtotal
+                                    />
+                                </div>
+                            </div>
                         </div>
                     </div>
-
-                    {showBreakdown && (
-                        <div className="col-span-full p-4 mt-4 rounded border border-primary bg-white dark:bg-accent-dark relative">
-                            <div className="absolute top-4 right-4">
-                                <button
-                                    onClick={() => setShowBreakdown(false)}
-                                    className="text-muted hover:text-primary"
-                                >
-                                    <IconX className="size-5 inline-block" />
-                                </button>
-                            </div>
-                            <h4 className="mb-1">How event pricing is calculated</h4>
-                            <p className="text-sm font-normal mb-2">
-                                All events are billed at a single base rate. Events for users who have been identified
-                                or have custom properties stored on them are charged an additional rate called Person
-                                profiles.
-                            </p>
-                            <p className="my-4 font-bold border-t border-primary pt-4">
-                                Here's how your estimate breaks down:
-                            </p>
-                            <div className="space-y-8">
-                                <div>
-                                    <h4 className="text-lg m-0">All events (base rate)</h4>
-                                    {anonymousUsed.length > 0 && (
-                                        <p className="opacity-70 m-0 text-sm">
-                                            <strong>Used for:</strong>{' '}
-                                            {anonymousUsed.map((type) => getLabelByType(type)).join(', ')}
-                                        </p>
-                                    )}
-                                    <div className="overflow-auto -mx-4 px-4 md:mx-0 md:px-0">
-                                        <div className="p-1 min-w-[500px] md:min-w-auto border border-input rounded-md mt-2">
-                                            <PricingTiers
-                                                plans={[{ tiers: activeProduct.costByTier }]}
-                                                unit={activeProduct.billingData.unit}
-                                                type={'product_analytics'}
-                                                showSubtotal
-                                            />
-                                        </div>
-                                    </div>
-                                </div>
-                                <div>
-                                    <h4 className="text-lg m-0">Person profiles (charged on identified events)</h4>
-                                    <p className="text-sm mb-1">
-                                        Person profiles are charged for events that are associated with identified
-                                        users. Your first 1 million person profile events are free.
-                                    </p>
-                                    {identifiedUsed.length > 0 && (
-                                        <p className="opacity-70 m-0 text-sm">
-                                            <strong>Used for:</strong>{' '}
-                                            {identifiedUsed.map((type) => getLabelByType(type)).join(', ')}
-                                        </p>
-                                    )}
-                                    <div className="overflow-auto -mx-4 px-4 md:mx-0 md:px-0">
-                                        <div className="p-1 min-w-[500px] md:min-w-auto border border-input rounded-md mt-2">
-                                            <PricingTiers
-                                                plans={[{ tiers: enhancedPersonsCost.costByTier }]}
-                                                unit={activeProduct.billingData.unit}
-                                                type={'product_analytics'}
-                                                showSubtotal
-                                            />
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    )}
                 </div>
+            )}
+            <div className="mt-4 border-t border-primary -mb-3">
+                <Addons
+                    activeProduct={activeProduct}
+                    addons={addons}
+                    setAddons={setAddons}
+                    volume={totalProductAnalyticsVolume || 0}
+                    analyticsData={analyticsData}
+                    hideHeading
+                />
             </div>
-        </>
+        </div>
     )
 }

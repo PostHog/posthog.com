@@ -1,6 +1,6 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react'
 import Tooltip from 'components/Tooltip'
-import { IconCopy, IconInfo, IconLightBulb } from '@posthog/icons'
+import { IconChevronDown, IconCopy, IconInfo, IconLightBulb } from '@posthog/icons'
 import Toggle from 'components/Toggle'
 import { formatUSD } from '../PricingSlider/pricingSliderLogic'
 import { buildProductAddons, calculatePrice, getAddonsCostForProduct, getCalculatorTotal } from './calculatorLogic'
@@ -63,7 +63,7 @@ export const Addon = ({ type, name, description, plans, addons, setAddons, volum
         <div className="grid grid-cols-6 gap-8 items-center">
             <div className="col-span-3 sm:col-span-4 flex justify-between items-center">
                 <div className="flex space-x-1 items-center">
-                    <p className="m-0 text-sm font-bold">{name}</p>
+                    <p className="!m-0 text-sm font-bold">{name}</p>
                     <Tooltip content={description} tooltipClassName="max-w-[250px]" placement="top">
                         <span className="relative">
                             <IconInfo className="size-5 opacity-70" />
@@ -74,7 +74,7 @@ export const Addon = ({ type, name, description, plans, addons, setAddons, volum
             </div>
             <div className="col-span-3 sm:col-span-2 flex justify-between">
                 <div>
-                    <p className="m-0 text-sm opacity-70">Starts at</p>
+                    <p className="!m-0 text-sm opacity-70">Starts at</p>
                     <strong className="text-[15px] md:text-base">
                         ${plans[plans.length - 1].tiers.find((tier) => tier.unit_amount_usd !== '0').unit_amount_usd}
                     </strong>
@@ -96,10 +96,10 @@ const productTabs = {
     posthog_code: PostHogDesktopTab,
 }
 
-export const Addons = ({ addons, setAddons, volume, activeProduct, analyticsData }) => {
+export const Addons = ({ addons, setAddons, volume, activeProduct, analyticsData, hideHeading }) => {
     return activeProduct.billingData.addons.length > 0 ? (
         <div>
-            <p className="opacity-70 text-sm m-0">Product add-ons</p>
+            {!hideHeading && <p className="opacity-70 text-sm m-0">Product add-ons</p>}
             <ul className="list-none m-0 p-0 divide-y divide-primary">
                 {activeProduct.billingData.addons
                     .filter((addon) => !addon.inclusion_only && !EXCLUDED_ADDON_TYPES.includes(addon.type))
@@ -139,7 +139,7 @@ export const TabContent = ({
 
     return (
         <>
-            <div>
+            <div className="mb-3">
                 {productTabs[activeProduct.type]?.({
                     activeProduct,
                     setVolume,
@@ -190,38 +190,33 @@ export const TabContent = ({
                                         />
                                     </div>
                                 )}
-                                <div className="col-span-full pr-1.5 mt-10 md:mt-8 pb-4 flex gap-1 items-center">
-                                    <IconLightBulb className="size-5 inline-block text-[#4f9032] dark:text-green relative -top-px" />
-                                    <span className="text-sm text-[#4f9032] dark:text-green font-semibold">
-                                        {freeAllocationText ? (
-                                            freeAllocationText
-                                        ) : (
-                                            <>
-                                                First {Math.round(slider.min).toLocaleString()} {billingData.unit}s free
-                                                –&nbsp;
-                                                <em>every month!</em>
-                                            </>
-                                        )}
+                                <div className="col-span-full pr-1.5 mt-10 md:mt-8 pb-4 flex gap-3 items-center justify-between">
+                                    <span className="flex gap-1 items-center min-w-0">
+                                        <IconLightBulb className="size-5 inline-block text-[#4f9032] dark:text-green relative -top-px shrink-0" />
+                                        <span className="text-sm text-[#4f9032] dark:text-green font-semibold">
+                                            {freeAllocationText ? (
+                                                freeAllocationText
+                                            ) : (
+                                                <>
+                                                    First {Math.round(slider.min).toLocaleString()} {billingData.unit}s
+                                                    free –&nbsp;
+                                                    <em>every month!</em>
+                                                </>
+                                            )}
+                                        </span>
                                     </span>
+                                    {costByTier && (
+                                        <button
+                                            onClick={() => setShowBreakdown(!showBreakdown)}
+                                            className="text-red dark:text-yellow font-semibold text-sm shrink-0"
+                                        >
+                                            {showBreakdown ? 'Hide how we calculate this' : 'See how we calculate this'}
+                                        </button>
+                                    )}
                                 </div>
                             </div>
                             {costByTier && (
                                 <>
-                                    {showBreakdown ? (
-                                        <button
-                                            onClick={() => setShowBreakdown(false)}
-                                            className="text-red dark:text-yellow font-semibold text-sm"
-                                        >
-                                            Hide how we calculate this
-                                        </button>
-                                    ) : (
-                                        <button
-                                            onClick={() => setShowBreakdown(true)}
-                                            className="text-red dark:text-yellow font-semibold text-sm"
-                                        >
-                                            See how we calculate this
-                                        </button>
-                                    )}
                                     {showBreakdown && (
                                         <div className="mb-4 p-1 border border-input rounded-md">
                                             <PricingTiers
@@ -254,6 +249,8 @@ const addonDefaults = {
     },
 }
 
+const PREVIEW_COUNT = 8
+
 const CopyURLButton = ({ onClick }) => {
     const [copied, setCopied] = useState(false)
     const copyURL = () => {
@@ -285,6 +282,7 @@ export default function Tabbed() {
     )
     const platform = billingProducts.find((product) => product.type === 'platform_and_support')
     const [activeTab, setActiveTab] = useState(0)
+    const [showAllProducts, setShowAllProducts] = useState(false)
     const { products: initialProducts, setVolume, setProduct, monthlyTotal } = useProducts()
     // Listed in the same order as the taskbar's "Browse tools" menu, so the tools appear where
     // people have already learned to look for them. Metered products missing from that curated
@@ -301,6 +299,8 @@ export default function Tabbed() {
             )
             .sort((a, b) => navOrder(a) - navOrder(b))
     }, [initialProducts])
+    const visibleProducts = showAllProducts ? products : products.slice(0, PREVIEW_COUNT)
+    const hiddenCount = products.length - PREVIEW_COUNT
     const activeProduct = products[activeTab]
 
     // Capture pricing calculator interactions for the experiment.
@@ -337,6 +337,14 @@ export default function Tabbed() {
     }, [])
     const [productAddons, setProductAddons] = useState(initialProductAddons)
     const [platformAddons, setPlatformAddons] = useState(initialPlatformAddons)
+    const [showPlatformPackages, setShowPlatformPackages] = useState(false)
+    const visiblePlatformAddons = platform.addons.filter((addon) => !addon.legacy_product)
+    const platformPackageSummary = visiblePlatformAddons.map((addon) => addon.name).join(', ')
+    const platformStartingPrice = Math.min(
+        ...visiblePlatformAddons
+            .map((addon) => platformAddons.find((platformAddon) => platformAddon.type === addon.type)?.price)
+            .filter((price) => Number.isFinite(price))
+    )
     const totalPrice = useMemo(
         () => getCalculatorTotal(monthlyTotal, productAddons, platformAddons),
         [monthlyTotal, productAddons, platformAddons]
@@ -376,6 +384,9 @@ export default function Tabbed() {
             const productIndex = products.findIndex((product) => product.type === calculator)
             if (productIndex !== -1) {
                 setActiveTab(productIndex)
+                if (productIndex >= PREVIEW_COUNT) {
+                    setShowAllProducts(true)
+                }
             }
         }
 
@@ -403,8 +414,8 @@ export default function Tabbed() {
         >
             <div className="grid grid-cols-12 mb-1">
                 <div className="col-span-12 @2xl:col-span-4 md:pr-6 mb-4 md:mb-0">
-                    <ul className="list-none m-0 p-0 pb-2 flex flex-row md:flex-col gap-px overflow-x-auto @md:w-auto -mx-4 px-4 @md:px-0 @md:mx-0">
-                        {products.map(
+                    <ul className="list-none m-0 p-0 flex flex-row md:flex-col gap-px overflow-x-auto @md:w-auto -mx-4 px-4 @md:px-0 @md:mx-0">
+                        {visibleProducts.map(
                             (
                                 { name, Icon, cost, color, colorDark, billingData, handle, categoryName, pricingBadge },
                                 index
@@ -451,8 +462,28 @@ export default function Tabbed() {
                             }
                         )}
                     </ul>
+                    <hr className="border-primary !my-1" />
+                    {hiddenCount > 0 && (
+                        <button
+                            type="button"
+                            onClick={() => {
+                                if (showAllProducts && activeTab >= PREVIEW_COUNT) {
+                                    setActiveTab(0)
+                                }
+                                setShowAllProducts((open) => !open)
+                            }}
+                            className="flex items-center gap-1.5 p-2 text-sm text-left w-full rounded-md hover:bg-accent"
+                        >
+                            <IconChevronDown
+                                className={`size-5 text-secondary shrink-0 ${showAllProducts ? 'rotate-180' : ''}`}
+                            />
+                            <span className="font-bold">
+                                {showAllProducts ? 'Show fewer products' : `View ${hiddenCount} more products`}
+                            </span>
+                        </button>
+                    )}
                 </div>
-                <div className="col-span-12 @2xl:col-span-8 md:pl-0">
+                <div className="col-span-12 @2xl:col-span-8 md:pl-0 flex flex-col">
                     <div className="flex space-x-12 justify-between items-center mb-2">
                         <h3>Estimate your price</h3>
                         {!activeProduct.name == 'Experiments' && (
@@ -470,114 +501,133 @@ export default function Tabbed() {
                         analyticsData={analyticsData}
                         setAnalyticsData={setAnalyticsData}
                     />
-                </div>
 
-                <div className="hidden @2xl:block col-span-4" />
-                <div className="col-span-12 @2xl:col-span-8 py-2 md:border-t border-primary">
-                    <h4 className="mb-0.5 md:mb-1 font-normal text-sm opacity-70">Platform packages</h4>
-
-                    {platform.addons
-                        .filter((a) => !a.legacy_product)
-                        .map(({ type, name, description }) => {
-                            const platformAddon = platformAddons.find((addon) => addon.type === type)
-                            const checked = platformAddon?.checked
-                            return (
-                                <div key={type} className="grid grid-cols-6 gap-8 items-center">
-                                    <div className="col-span-3 sm:col-span-4 flex items-center justify-between">
-                                        <div className="flex space-x-1 items-center">
-                                            <p className="m-0 text-sm font-bold">{name}</p>
-                                            <Tooltip
-                                                content={description}
-                                                tooltipClassName="max-w-[250px]"
-                                                placement="top"
-                                            >
-                                                <span className="relative">
-                                                    <IconInfo className="size-5 opacity-70" />
-                                                </span>
-                                            </Tooltip>
-                                        </div>
-                                        {type !== 'enterprise' && (
-                                            <Toggle
-                                                checked={checked}
-                                                onChange={(checked) =>
-                                                    setPlatformAddons(
-                                                        platformAddons.map((addon) => {
-                                                            if (addon.type === type) {
-                                                                return { ...addon, checked }
-                                                            }
-                                                            return addon
-                                                        })
-                                                    )
-                                                }
-                                            />
+                    <div className="mt-auto">
+                        <div className="pt-2 pb-6 md:border-t border-primary">
+                            <button
+                                type="button"
+                                onClick={() => setShowPlatformPackages((open) => !open)}
+                                className="flex items-center justify-between gap-3 pt-2 text-sm text-left w-full"
+                            >
+                                <span className="flex items-center gap-1.5 min-w-0">
+                                    <IconChevronDown
+                                        className={`size-5 text-secondary shrink-0 ${
+                                            showPlatformPackages ? '' : '-rotate-90'
+                                        }`}
+                                    />
+                                    <span className="font-bold shrink-0">Platform packages</span>
+                                    <span className="text-secondary truncate">
+                                        {platformPackageSummary}
+                                        {Number.isFinite(platformStartingPrice) && (
+                                            <> · from ${platformStartingPrice.toLocaleString()}/mo</>
                                         )}
-                                    </div>
-                                    <div className="col-span-3 sm:col-span-2 flex justify-between">
-                                        {type === 'enterprise' ? (
-                                            <Link
-                                                to="/talk-to-a-human?edition=enterprise"
-                                                className="text-red dark:text-yellow font-semibold text-sm"
-                                                state={{ newWindow: true }}
-                                            >
-                                                Contact us
-                                            </Link>
-                                        ) : (
-                                            <>
-                                                <div>
-                                                    <strong className="text-[15px] md:text-base">
-                                                        ${platformAddon.price.toLocaleString()}
-                                                    </strong>
-                                                    <span className="text-sm opacity-70">/mo</span>
-                                                </div>
-                                                <div className="text-right">
-                                                    <p
-                                                        className={`font-semibold m-0 pr-3 ${
-                                                            checked ? '' : 'opacity-50'
-                                                        }`}
+                                    </span>
+                                </span>
+                                <span className="text-secondary shrink-0">Optional</span>
+                            </button>
+                            {showPlatformPackages &&
+                                visiblePlatformAddons.map(({ type, name, description }) => {
+                                    const platformAddon = platformAddons.find((addon) => addon.type === type)
+                                    const checked = platformAddon?.checked
+                                    return (
+                                        <div key={type} className="grid grid-cols-6 gap-8 items-center mt-2 ml-8.5">
+                                            <div className="col-span-3 sm:col-span-4 flex items-center justify-between">
+                                                <div className="flex space-x-1 items-center">
+                                                    <p className="m-0 text-sm font-bold">{name}</p>
+                                                    <Tooltip
+                                                        content={description}
+                                                        tooltipClassName="max-w-[250px]"
+                                                        placement="top"
                                                     >
-                                                        ${checked ? platformAddon?.price : 0}
-                                                    </p>
+                                                        <span className="relative">
+                                                            <IconInfo className="size-5 opacity-70" />
+                                                        </span>
+                                                    </Tooltip>
                                                 </div>
-                                            </>
-                                        )}
-                                    </div>
-                                </div>
-                            )
-                        })}
-                </div>
-            </div>
-            <div
-                data-scheme="secondary"
-                className="flex items-center justify-between p-3 bg-primary rounded relative border border-primary"
-            >
-                <div>
-                    <h3 className="m-0 text-[15px]">Estimated total</h3>
-                    <p className="text-sm opacity-60 mb-0">for all products & add-ons</p>
-                </div>
+                                                {type !== 'enterprise' && (
+                                                    <Toggle
+                                                        checked={checked}
+                                                        onChange={(checked) =>
+                                                            setPlatformAddons(
+                                                                platformAddons.map((addon) => {
+                                                                    if (addon.type === type) {
+                                                                        return { ...addon, checked }
+                                                                    }
+                                                                    return addon
+                                                                })
+                                                            )
+                                                        }
+                                                    />
+                                                )}
+                                            </div>
+                                            <div className="col-span-3 sm:col-span-2 flex justify-between">
+                                                {type === 'enterprise' ? (
+                                                    <Link
+                                                        to="/talk-to-a-human?edition=enterprise"
+                                                        className="text-red dark:text-yellow font-semibold text-sm"
+                                                        state={{ newWindow: true }}
+                                                    >
+                                                        Contact us
+                                                    </Link>
+                                                ) : (
+                                                    <>
+                                                        <div>
+                                                            <strong className="text-[15px] md:text-base">
+                                                                ${platformAddon.price.toLocaleString()}
+                                                            </strong>
+                                                            <span className="text-sm opacity-70">/mo</span>
+                                                        </div>
+                                                        <div className="text-right">
+                                                            <p
+                                                                className={`font-semibold m-0 pr-3 ${
+                                                                    checked ? '' : 'opacity-50'
+                                                                }`}
+                                                            >
+                                                                ${checked ? platformAddon?.price : 0}
+                                                            </p>
+                                                        </div>
+                                                    </>
+                                                )}
+                                            </div>
+                                        </div>
+                                    )
+                                })}
+                        </div>
+                        <div
+                            data-scheme="secondary"
+                            className="flex items-center justify-between p-3 bg-primary rounded relative border border-primary"
+                        >
+                            <div>
+                                <h3 className="m-0 text-[15px]">Estimated total</h3>
+                                <p className="text-sm opacity-60 mb-0">for all products & add-ons</p>
+                            </div>
 
-                <div className="text-right">
-                    <p className="m-0 font-bold text-lg leading-none">${totalPrice.toLocaleString()}</p>
-                </div>
-            </div>
-            {/* Two ways to leave with an estimate: a link to this one, or a prompt that builds
-                one from what the visitor already pays for elsewhere. Same row, same weight. */}
-            <div className="flex flex-wrap items-center justify-between gap-2 mt-2 pr-2 md:pr-0">
-                <RenderInClient
-                    render={() => {
-                        const variant = window.posthog?.getFeatureFlag?.(AI_PRICING_FLAG)
-                        return variant && variant !== AI_PRICING_EXPERIMENT_VARIANTS.control ? (
-                            <AgentEstimateLink
-                                source="calculator-total"
-                                className="text-sm font-bold text-red dark:text-yellow"
+                            <div className="text-right">
+                                <p className="m-0 font-bold text-lg leading-none">${totalPrice.toLocaleString()}</p>
+                            </div>
+                        </div>
+                        {/* Two ways to leave with an estimate: a link to this one, or a prompt that builds
+                        one from what the visitor already pays for elsewhere. Same row, same weight. */}
+                        <div className="flex flex-wrap items-center justify-between gap-2 mt-2 pr-2 md:pr-0">
+                            <RenderInClient
+                                render={() => {
+                                    const variant = window.posthog?.getFeatureFlag?.(AI_PRICING_FLAG)
+                                    return variant && variant !== AI_PRICING_EXPERIMENT_VARIANTS.control ? (
+                                        <AgentEstimateLink
+                                            source="calculator-total"
+                                            className="text-sm font-bold text-red dark:text-yellow"
+                                        />
+                                    ) : (
+                                        <></>
+                                    )
+                                }}
                             />
-                        ) : (
-                            <></>
-                        )
-                    }}
-                />
-                <div className="flex gap-0.5 ml-auto">
-                    <IconCopy className="size-5 inline-block text-muted relative -top-px" />
-                    <CopyURLButton onClick={generateURL} />
+                            <div className="flex gap-0.5 ml-auto">
+                                <IconCopy className="size-5 inline-block text-muted relative -top-px" />
+                                <CopyURLButton onClick={generateURL} />
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
