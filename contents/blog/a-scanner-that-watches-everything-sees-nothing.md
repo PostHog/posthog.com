@@ -20,8 +20,6 @@ The biggest thing we learned from all that watching? Replay Vision fixes the wat
 - a clear slice of relevant recordings that could actually answer it
 - permission to say "no" or "inconclusive"
 
-
-
 ## Remind me, what is Replay Vision, anyway?
 
 A quick introduction for those who are new here. Replay Vision is built around scanners, and a scanner is a job you set up to watch recordings. Each scanner has a query that chooses which recordings to watch and a prompt that tells it how to judge each one. When a scanner watches a recording, it produces an observation.
@@ -33,11 +31,7 @@ Replay Vision has four scanner types, depending on the answer you want:
 - A scorer gives the recording a numerical score.
 - A summarizer writes up what happened.
 
-
-
 ## 1. One question = one scanner
-
-
 
 ### Broad scanners produce more words, not better answers
 
@@ -55,8 +49,6 @@ The scanner we built is a classifier called "[Error Tracking] Escape to AI assis
 - Prompt: asks what the person was trying to do, where the UI stopped helping, and what job they handed to PostHog AI.
 - Labels: tag the recording using our preset list or a free-form label when the scanner finds something we hadn't predicted. Examples include explaining an error spike, separating third-party noise from failures worth fixing, or deciding what to fix next.
 - Short explanation: tells us what the scanner saw and why it chose that label. For example, the person opened PostHog AI after the issue view gave them no obvious way to separate third-party noise from the spike they were investigating.
-
-
 
 ### Context makes the question more specific
 
@@ -82,11 +74,7 @@ Most of this happens through the query. Use the event, URL, cohort, experiment e
 - Funnels: a scanner helps tease out what makes someone convert vs drop off
 - Surveys: a scanner checks behavior right before a survey response is submitted
 
-
-
 ## 3. Demand visible proof
-
-
 
 ### Make the model prove the premise
 
