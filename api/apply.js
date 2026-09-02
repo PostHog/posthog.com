@@ -3,35 +3,40 @@ const request = require('request')
 const multiparty = require('multiparty')
 const fs = require('fs')
 
-const handler = async (req, res) => {
+const submitApplication = async (req) => {
     const form = new multiparty.Form()
     const formData = await new Promise((resolve, reject) => {
         form.parse(req, function (err, fields, files) {
-            if (err) reject({ err })
-            const fieldSubmissions = []
-            Object.keys(fields).forEach((key) => {
-                if (key !== 'jobPostingId') {
-                    fieldSubmissions.push({
-                        path: key,
-                        value: fields[key][0],
-                    })
-                }
-            })
-            const resumeKey = Object.keys(files)[0]
-            const file = files[resumeKey][0]
-            const data = {
-                applicationForm: JSON.stringify({ fieldSubmissions }),
-                jobPostingId: fields['jobPostingId'][0],
-                [resumeKey]: {
-                    value: fs.createReadStream(file.path),
-                    options: {
-                        filename: file.originalFilename,
-                        contentType: null,
-                    },
-                },
-            }
+            if (err) return reject(err)
 
-            resolve(data)
+            try {
+                const fieldSubmissions = []
+                Object.keys(fields).forEach((key) => {
+                    if (key !== 'jobPostingId') {
+                        fieldSubmissions.push({
+                            path: key,
+                            value: fields[key][0],
+                        })
+                    }
+                })
+                const resumeKey = Object.keys(files)[0]
+                const file = files[resumeKey][0]
+                const data = {
+                    applicationForm: JSON.stringify({ fieldSubmissions }),
+                    jobPostingId: fields['jobPostingId'][0],
+                    [resumeKey]: {
+                        value: fs.createReadStream(file.path),
+                        options: {
+                            filename: file.originalFilename,
+                            contentType: null,
+                        },
+                    },
+                }
+
+                resolve(data)
+            } catch (error) {
+                reject(error)
+            }
         })
     })
     const options = {
@@ -55,7 +60,16 @@ const handler = async (req, res) => {
         })
     })
 
-    res.status(200).json(submission)
+    return submission
+}
+
+const handler = async (req, res) => {
+    try {
+        res.status(200).json(await submitApplication(req))
+    } catch (error) {
+        console.error('Job application submission failed:', error)
+        res.status(500).json({ success: false, error: 'Failed to submit application' })
+    }
 }
 
 export default handler
