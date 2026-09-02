@@ -73,6 +73,16 @@ Every call to that tool includes `$mcp_tool_category: "Logs"`. Tools without `_m
 
 For [custom servers](/docs/mcp-analytics/custom-servers), pass `category` directly to `captureToolCall()`.
 
+### How the harness label is resolved
+
+The **harness** — the friendly client label on the dashboard's breakdown ("Claude Code", "Cursor", "ChatGPT", …) — is resolved at query time from exactly three of the properties above, checked in priority order:
+
+1. **`$mcp_vendor_client`** — the vendor header (e.g. `x-anthropic-client`), the only signal separating Anthropic's pooled surfaces (Claude.ai, Cowork, Claude Design) from each other, since they all report the same `clientInfo.name`.
+2. **`$mcp_client_user_agent`** — carries the build surface for Claude Code (`(cli)` vs `(sdk-ts)` vs `(claude-vscode)` vs `(claude-desktop)`), and acts as the generic fallback when no client name arrived.
+3. **`$mcp_client_name`** — the `clientInfo.name` the client reported.
+
+A call carrying none of the three shows as unattributed, and an unrecognized client collapses into "Other". If your breakdown reads mostly "Other", check that these properties are populated — on HTTP transports the SDK captures the headers automatically (TypeScript ≥ 0.11.0, Python ≥ 7.42.0); a [custom dispatcher](/docs/mcp-analytics/custom-servers#attributing-the-caller) has to pass them itself, and stdio/in-memory transports carry no headers at all, so there the client name is the only signal.
+
 ## Exception properties
 
 Present on `$exception` events emitted alongside any failed tool call. The SDK reuses `@posthog/core`'s error-tracking parser, so these are the same `$exception_list` properties every other PostHog SDK emits — they slot straight into [Error tracking](/docs/error-tracking). Set `enableExceptionAutocapture: false` (default `true`) to stop a failed tool call from emitting the `$exception` sibling.
