@@ -48,7 +48,7 @@ Tracking quality also reveals failures like bad queries, repeated retries, and a
 
 <NewsletterForm />
 
-## 2. [Optimize your `AGENTS.md`](/newsletter/fix-your-agents)
+## 2. Optimize your `AGENTS.md`
 
 Your `AGENTS.md` is like a backpack you carry wherever you go. Its goal is to save your agent tokens when they read it. To best do that, it should include:
 
@@ -145,7 +145,7 @@ A bad memory might have a key of `note-1` and content of all the context. This r
 
 There is a lot of stupid advice about tokenminning, like spending your time optimizing over single words. I've seen influencers say you shouldn't say "please" or "thank you" because those are wasted tokens.
 
-Optimizing a prompt you use a handful of times isn’t worth it. Neither is a workflow that doesn’t use many tokens. Our [AI installation wizard](/docs/ai-engineering/ai-wizard) is an example of the shape that’s worth optimizing for. It runs hundreds of times per day and costs ~$7 each time. Look at per-run cost to find waste and run count to decide if it’s worth changing.
+[Optimizing a prompt](/newsletter/fix-your-agents) you use a handful of times isn’t worth it. Neither is a workflow that doesn’t use many tokens. Our [AI installation wizard](/docs/ai-engineering/ai-wizard) is an example of the shape that’s worth optimizing for. It runs hundreds of times per day and costs ~$7 each time. Look at per-run cost to find waste and run count to decide if it’s worth changing.
 
 Don’t optimize something whose shape isn’t settled. Prototypes get rewritten. Tuning caching and model selection on an in-progress workflow just means doing it again later.
 
