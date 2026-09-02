@@ -353,6 +353,8 @@ await posthog.withSpan('POST /checkout', async (span) => {
 
 If the callback throws or rejects, the span records the exception, its status is set to `error`, and your original error propagates unchanged.
 
+The recorded exception includes the stack trace, which contains file paths from your server. If you'd rather those didn't leave your process, delete `exception.stacktrace` in [`beforeSpanSend`](#scrubbing-and-dropping-spans).
+
 Use `startSpan` for work that can't wrap a callback. **`startSpan` does not make the span active**, so spans created afterwards are not its children unless you pass `parent` explicitly — and you must call `end()` yourself.
 
 ```ts
@@ -459,7 +461,7 @@ A span is capped at 128 attributes and 128 events, and each string attribute val
 
 Past the cap, the earliest attributes and events are kept and the number dropped is reported alongside the span, so a truncated span reads as truncated rather than as quietly incomplete. The attributes PostHog attaches itself — `posthogDistinctId` and `sessionId` — don't count toward the cap and are never dropped, so a span at the limit still links back to its person and session.
 
-Exception events are the exception: a span that fills its events and then throws would otherwise lose the only record of why it failed, so `recordException` keeps a small reserve of its own beyond the event cap.
+Exception events get one concession: once a span has spent its event cap, a small reserve stays available to them, so a span that fills its events and then throws still carries the exception rather than only an `error` status. Below the cap an exception is an ordinary event.
 
 The length bound reaches inside a value, including strings nested in arrays and objects, and applies to `exception.stacktrace` like any other attribute. All three caps are re-applied after `beforeSpanSend`, so a hook that enriches a span can't push it back over.
 
