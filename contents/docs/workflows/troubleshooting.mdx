@@ -26,12 +26,14 @@ Disabling a workflow doesn't cancel in-flight runs: parked runs stay parked, and
 
 ## Batch run marked as failed?
 
-The **Invocations** tab shows only a batch run's status. When a run is marked **failed**, the reason is written to the workflow's **Logs** tab as an entry starting with `Batch resolver failed:`.
+The **Invocations** tab shows a batch run's status but not the reason it failed. A run marked **failed** with no runs listed under it never enrolled anyone: resolving the audience failed before the first person was added, so there are no per-person runs or logs to inspect.
 
-The most common reason is `Audience fetch failed permanently`: the query that resolves the batch audience (who the run targets) timed out repeatedly, so the run failed before enrolling anyone. If this keeps happening:
+The most common cause is the audience query timing out. Resolving who a batch targets runs a query over your persons, and a slow query is retried a few times and then the run is marked failed. If this keeps happening:
 
 - Narrow the audience filters. Broad or complex property and cohort filters make the audience query slower.
 - On self-hosted deployments, raise the audience query's time budget by setting the `CDP_HOG_FLOW_BATCH_AUDIENCE_FETCH_TIMEOUT_MS` environment variable on the plugin server (the Node.js worker that runs workflows). The value is in milliseconds and defaults to `30000`. On PostHog Cloud this budget is managed for you.
+
+If the run still fails after narrowing the audience, [contact support](/docs/support) with the workflow and the time of the run so we can check the failure reason for you.
 
 ## Variables not populating?
 
