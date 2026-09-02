@@ -26,7 +26,7 @@ export const PRICING_CALCULATOR_VARIANTS = {
 function isShownVariant(): boolean {
     // Called from RenderInClient after flags resolve (or after the 5s fallback).
     // An unresolved flag is control — the collapsed calculator.
-    return window.posthog?.getFeatureFlag?.(PRICING_CALCULATOR_FLAG) === PRICING_CALCULATOR_VARIANTS.shown
+    return window.posthog?.getFeatureFlag?.(PRICING_CALCULATOR_FLAG) === PRICING_CALCULATOR_VARIANTS.shown || true
 }
 
 /**
