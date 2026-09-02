@@ -11,13 +11,13 @@ This isn't a great system for giving engineers autonomy – it's literally desig
 
 These systems are motivated by the desire for control, accountability (i.e. "who's to blame for this problem?"), and a lack of trust. They condition engineers to only care about their small area of influence and to disregard the wider impact of their work on customers or the business. 
 
-The result is a maze of half-baked features, and it’s [just plain slow](/newsletter/this-is-why-youre-not-shipping). PMs become the bottleneck and gatekeeper for decisions, and engineers feel frustrated. 
+The result is a maze of half-baked features, and it’s [just plain slow](/newsletter/this-is-why-youre-not-shipping). Product Managers become the bottleneck and gatekeeper for decisions, and engineers feel frustrated. 
 
 To realize the potential of product engineer as a role, there are two principles your product team needs to follow:
 
 ## 1. Engineers own product decisions
 
-This is the most important principle. At PostHog, PMs don't own the roadmap, make product decisions, or shield engineers from users or the wider business goals.
+This is the most important principle. At PostHog, Product Managers don't own the roadmap, make product decisions, or shield engineers from users or the wider business goals.
 
 Instead, product engineers manage product teams. They have complete autonomy. They [talk to users](/newsletter/talk-to-users), [decide how to prioritize the roadmap](/newsletter/how-we-decide-what-to-build), and are ultimately responsible for the impact of their decisions on the business – i.e. revenue, user satisfaction, and retention.
 
@@ -35,7 +35,7 @@ This is a core reason we believe in product engineers as a concept, but it only 
 
 While product engineers own the product and the roadmap, product managers act as a product team's compass. They feed their product engineers with useful context that help them make better decisions.
 
-One way they do this at PostHog is by owning growth reviews. Growth reviews exist to evaluate the impact of each team’s work and we do every month. PMs collect all the vital data on the product, such as: 
+One way they do this at PostHog is by owning growth reviews. Growth reviews exist to evaluate the impact of each team’s work and we do every month. Product Managers collect all the vital data on the product, such as: 
 
 - **Revenue metrics:** e.g., MRR, month-on-month growth, revenue churn rate, total paying customers count.
 - **Product analytics:** e.g., active users, user growth rate, organization growth rate, [user retention rate](/product-engineers/customer-retention-metrics).
