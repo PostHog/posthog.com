@@ -8,9 +8,11 @@ import WizardCommand from 'components/WizardCommand'
 
 ## AI wizard
 
-Install PostHog in seconds with our wizard by running this command in your project directory with your terminal (it also works for [LLM coding agents](/blog/envoy-wizard-llm-agent) like Cursor and Bolt):
+On Next.js App Router 15.3+, add the cheap flags path with this command (it also works for [LLM coding agents](/blog/envoy-wizard-llm-agent) like Cursor and Bolt):
 
-<WizardCommand />
+<WizardCommand command="feature-flags" />
+
+This extends an existing PostHog install. It does not replace `npx @posthog/wizard`. Full walkthrough: [AI wizard feature flags installation](/docs/feature-flags/installation/ai-wizard). Other platforms: pick one below.
 
 Wait for it to finish and test the setup once the wizard is complete.
 
