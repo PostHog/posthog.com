@@ -459,6 +459,8 @@ A span is capped at 128 attributes and 128 events, and each string attribute val
 
 Past the cap, the earliest attributes and events are kept and the number dropped is reported alongside the span, so a truncated span reads as truncated rather than as quietly incomplete. The attributes PostHog attaches itself — `posthogDistinctId` and `sessionId` — don't count toward the cap and are never dropped, so a span at the limit still links back to its person and session.
 
+Exception events are the exception: a span that fills its events and then throws would otherwise lose the only record of why it failed, so `recordException` keeps a small reserve of its own beyond the event cap.
+
 The length bound reaches inside a value, including strings nested in arrays and objects, and applies to `exception.stacktrace` like any other attribute. All three caps are re-applied after `beforeSpanSend`, so a hook that enriches a span can't push it back over.
 
 ### Configuration
