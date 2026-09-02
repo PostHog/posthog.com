@@ -24,7 +24,11 @@ const biFeatures: BIFeature[] = [
     },
     {
         title: 'Advanced visualizations',
-        description: 'Pivot table, pie chart, scatter plot, heatmap, world maps, and more.',
+        description: 'Pie chart, scatter plot, and 2d heatmap.',
+    },
+    {
+        title: 'Pivot tables and world maps',
+        description: 'Summarize values in a pivot table, or plot them on a world map.',
         status: 'coming_soon',
     },
     {
