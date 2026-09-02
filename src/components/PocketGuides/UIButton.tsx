@@ -2,6 +2,7 @@ import React from 'react'
 
 import { IconArrowUpRight, IconRewindPlay } from '@posthog/icons'
 
+import { SingleCodeBlock } from 'components/CodeBlock'
 import OSButton from 'components/OSButton'
 
 /**
@@ -67,6 +68,28 @@ export function AskAI({ q, children }: { q: string; children?: React.ReactNode }
                 aria-hidden="true"
             />
         </a>
+    )
+}
+
+/**
+ * A prompt a section ends on, set the way `<Action />` sets a chapter's one CTA – labelled code
+ * block with copy, then the button that opens it in PostHog AI. Same treatment, but authored
+ * inline so a page can end more than one section on something to run.
+ */
+export function Prompt({ children, label = 'Ask PostHog AI' }: { children: string; label?: string }): JSX.Element {
+    const prompt = String(children).trim()
+    return (
+        <span className="not-prose my-[0.8em] block">
+            {/* whitespace-pre would scroll a sentence sideways, so it wraps here. */}
+            <span className="mb-3 block [&_.min-w-fit]:min-w-0 [&_.whitespace-pre]:whitespace-pre-wrap [&_.whitespace-pre]:break-words">
+                <SingleCodeBlock language="text" label="Prompt for PostHog AI" showLabel showCopy showAskAI={false}>
+                    {prompt}
+                </SingleCodeBlock>
+            </span>
+            <OSButton asLink to={maxPromptUrl(prompt)} external variant="primary" size="md">
+                {label}
+            </OSButton>
+        </span>
     )
 }
 

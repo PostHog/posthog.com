@@ -121,6 +121,25 @@ export const errorTracking = {
             alt: 'Screenshot of the PostHog error tracking',
             classes: '',
         },
+        'issue-anatomy': {
+            // The issue page whole, for the pocket guide's anatomy figure. 3663x2676 at source;
+            // the resize is carried inline, which is safe because `<ScreenshotFigure>` puts the
+            // dark/light toggle on a wrapper rather than on the image.
+            src: 'https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/issue_light_ff97a284e7.png',
+            srcDark:
+                'https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/issue_dark_b2245fed4f.png',
+            alt: 'An error tracking issue: its title, how many people it hit, the exceptions grouped into it, what self-driving is doing about it, and its stack trace',
+            // Both variants are the same screen at the same size, so one set of coordinates holds.
+            // The pocket guide annotates this inline – see contents/pocket-guides/error-tracking/101.
+        },
+        'grouping-rule': {
+            // The rule editor, reused from /docs/error-tracking/grouping-issues. Small enough at
+            // source that no resize is needed.
+            src: 'https://res.cloudinary.com/dmukukwp6/image/upload/pasted_image_2026_06_24_T10_35_56_474_Z_03f7bcfafb.png',
+            srcDark:
+                'https://res.cloudinary.com/dmukukwp6/image/upload/pasted_image_2026_06_24_T10_36_15_781_Z_a162179a94.png',
+            alt: 'The grouping rule editor: a filter on exception message, a match mode, and a test result counting the exceptions the rule would group',
+        },
         home: {
             src: 'https://res.cloudinary.com/dmukukwp6/image/upload/screenshot_error_tracking_light_93bfa1393d.png',
             srcDark: 'https://res.cloudinary.com/dmukukwp6/image/upload/screenshot_error_tracking_dark_ef481dc7a5.png',

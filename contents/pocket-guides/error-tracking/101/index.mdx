@@ -1,0 +1,121 @@
+---
+# Scaffolded from /docs/error-tracking/index, /docs/error-tracking/issues-and-exceptions,
+# /docs/error-tracking/stack-traces, and /docs/error-tracking/installation.
+#
+# Scope: what the product captures and what a reader sees on an issue. Grouping mechanics,
+# source maps, and volume controls belong to "How Error Tracking works" – this page only
+# names them.
+#
+# Section 4 is the one no standalone error tracker can print: the exception is an event, so
+# every product that reads events can read it too.
+title: Error Tracking 101
+shortTitle: Error Tracking 101
+subtitle: What an exception carries, how it becomes an issue, and what else in PostHog can read it.
+pocketGuideOrder: 1
+section: Instrument
+---
+
+<LeftPage>
+
+<ScreenshotFigure
+    n={1}
+    product="error_tracking"
+    screenshot="issue-anatomy"
+    caption="One issue, whole: what it is, who it hit, the exceptions inside it, and what is already being done about it."
+    annotations={[
+        {
+            x: 24.4,
+            y: 7.4,
+            title: 'The issue, named by the exception it groups',
+            description:
+                'PostHog names it from the exception type unless you set one, and the pencil renames it. Assigning, resolving, and alerting all happen here rather than on the individual throws.',
+        },
+        {
+            x: 28.8,
+            y: 25.7,
+            title: 'When it started, and whether it still happens',
+            description:
+                'Exception volume over the range, marked first seen and last seen. A bar that stops is a fixed issue. One that restarts after a quiet week is a regression.',
+        },
+        {
+            x: 77.2,
+            y: 12.1,
+            title: 'What self-driving is already doing about it',
+            description:
+                'Agents that picked the issue up, what they are researching, and which ones have a fix ready for you to review.',
+        },
+        {
+            x: 86.2,
+            y: 39,
+            title: 'Stack trace, properties, timeline, and the recording',
+            description:
+                'Four views onto the same exception. The recording is the session it was thrown in, so you can watch what the person did to reach it.',
+        },
+        {
+            x: 80,
+            y: 54.2,
+            title: 'The stack trace, with your code beside it',
+            description:
+                'The frames that led to the throw, innermost first, with the source around the failing line. Readable only if you uploaded something that maps the bundle back to your repository.',
+        },
+    ]}
+/>
+
+</LeftPage>
+
+<RightPage>
+
+# Error Tracking 101
+
+Error Tracking takes exceptions thrown by your application and aggregates them into issues in context of your product data. This lets you understand more that just what broke:
+
+- Which customers are impacted?
+- Does it impact conversion and retention?
+- Can this error be tied to loss in revenue?
+- Were they part of any feature flag or experiment rollouts?
+- What's shown on the user's page before and after the exception is thrown?
+
+With this context, Error Tracking makes your product self-driving. Agents will have the context to triage the issues based on impact and open PRs to fix them.
+
+## Exceptions and issues
+
+Like everything else in PostHog, each instance of an exception is captured as a `$exception` event. Similar are aggregated into issues like this <SeeFig n={1} />.
+
+In Error Tracking, you diagnose, triage, assign, and fix _issues_ as the base unit of work, not individual exceptions.
+
+## What lands on an exception
+
+An exception carries the usual event properties – the person, the session, the URL, the browser, the feature flags they had – plus a handful of its own:
+
+| Property | What it holds |
+| --- | --- |
+| `$exception_list` | The type, the message, the stack frames, and whether your code handled it. Chained exceptions arrive as several entries |
+| `$exception_fingerprint` | The value that decides which issue this exception joins |
+| `$exception_level` | How severe it is |
+
+## Analyzing errors in context
+
+An exception is an event, so every product that reads events reads it too:
+
+- **Insights and funnels** put an exception in a chart, or beside a conversion step, so you can see who errored and who then dropped.
+- **Session replay** holds the recording it was thrown in, and marks it on the player timeline.
+- **Cohorts** turn "everyone who hit this" into a group, so you can follow what they did next.
+- **Self-driving** reads the issue, works out what caused it, and opens a pull request.
+
+This pocket guide will explore all of these usecases in detail.
+
+## Install and turn it on
+
+None of it works until a PostHog SDK is in your app. The wizard installs and configures one for you, or you can [install it yourself](/docs/error-tracking/installation).
+
+<Setup />
+
+Capture is a project setting as well as an SDK one, so switch on [exception autocapture](https://app.posthog.com/error_tracking/configuration#selectedSetting=error-tracking-exception-autocapture) before you expect to see anything. We'll go over how exceptions become issues in [the next page](/pocket-guides/error-tracking/how-it-works).
+
+<SeeAlso>
+
+See also: [Error tracking](/docs/error-tracking) · [Start here](/docs/error-tracking/start-here) · [Issues and exceptions](/docs/error-tracking/issues-and-exceptions) · [Installation](/docs/error-tracking/installation)
+
+</SeeAlso>
+
+</RightPage>

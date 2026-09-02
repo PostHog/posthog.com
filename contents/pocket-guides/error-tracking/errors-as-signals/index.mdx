@@ -1,0 +1,77 @@
+---
+# Scaffolded from /docs/self-driving/inbox/sources (error tracking is a built-in source, line 37:
+# "New exceptions, reopened issues, and error volume spikes"), /docs/self-driving/signals
+# (sources vs scouts, line 41 onward), and /docs/self-driving/reports.
+#
+# First rung of Act, and the one nobody knows exists. Turning error tracking on as a signal
+# source costs nothing and runs continuously – no schedule, no bar to clear, no agent judgement.
+#
+# WHAT TO WRITE
+#
+# ## What a signal is
+#   A signal is a finding with its evidence attached, not a notification. Related signals group
+#   into one report in the inbox, so one problem arrives once rather than three times.
+#   Contrast with the alerts page before it: an alert tells you a threshold moved and stops.
+#   Source: /docs/self-driving/signals, /docs/self-driving/reports.
+#
+# ## Turning error tracking on as a source
+#   It is a toggle, not a build. Once on, every new exception, reopened issue, and volume spike
+#   is processed continuously as it happens. Nothing is skipped because something weighed it.
+#   Source: /docs/self-driving/inbox/sources line 37 and line 132.
+#
+# ## Exhaustive, not selective
+#   The trade this page exists to explain, quoting the docs' own table: a source is exhaustive
+#   and continuous with predictable behaviour; a scout is selective, scheduled, and uses
+#   judgement. "Neither is the upgrade from the other, and most projects run both."
+#   Say plainly what a source will NOT do: rank, cluster, weigh, or stay quiet on a busy day.
+#   Source: /docs/self-driving/signals lines 41-55.
+#
+# ## What lands in the inbox
+#   Signals from several sources describing one problem are deduplicated and grouped into a
+#   single report. Worth showing the report card here – reuse AnatomyFigure with an inline
+#   report rather than inventing a new figure.
+#   Source: /docs/self-driving/reports.
+#
+# Figure: the inbox report an error signal produces. AnatomyFigure with an inline report.
+title: Turn errors into signals
+shortTitle: Errors as signals
+subtitle: A toggle, not a build. Every new exception goes to your inbox without anyone deciding it was interesting.
+pocketGuideOrder: 6
+section: Act
+---
+
+<LeftPage>
+
+<!-- Figure: the report an error signal lands as. AnatomyFigure with an inline report. -->
+
+</LeftPage>
+
+<RightPage>
+
+# Turn errors into signals
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.
+
+## What a signal is
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.
+
+## Turning error tracking on as a source
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.
+
+## Exhaustive, not selective
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.
+
+## What lands in the inbox
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.
+
+<SeeAlso>
+
+See also: [Signals](/docs/self-driving/signals) · [Signal sources](/docs/self-driving/inbox/sources) · [Reports](/docs/self-driving/reports) · [Inbox](/docs/self-driving/inbox)
+
+</SeeAlso>
+
+</RightPage>
