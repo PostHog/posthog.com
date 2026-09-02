@@ -39,8 +39,6 @@ At risk is a status, not a phase. An account can be at risk in any of these phas
 
 This page decides who we approach, not whether we say yes when a customer or someone in sales comes to us. That account has already found us, so what's left is capacity and scoping.
 
-Use it to make a call, not to rule an account out.
-
 Any PostHog customer is technically interesting, so without a shared definition every account looks like a candidate and we spread thin. This page helps us stop that.
 
 We take work outside the ICP on purpose from time to time, because that's the only way to find out the ICP has gone stale. How we split FDE from professional services is our current reading, and it will move as we learn.
