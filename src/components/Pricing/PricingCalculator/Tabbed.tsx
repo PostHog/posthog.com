@@ -1,6 +1,6 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react'
 import Tooltip from 'components/Tooltip'
-import { IconCopy, IconInfo, IconLightBulb, IconMinus, IconPlus, IconSearch, IconX } from '@posthog/icons'
+import { IconCopy, IconInfo, IconLightBulb, IconPlus, IconSearch, IconStack, IconX } from '@posthog/icons'
 import Toggle from 'components/Toggle'
 import { formatUSD } from '../PricingSlider/pricingSliderLogic'
 import { buildProductAddons, calculatePrice, getAddonsCostForProduct, getCalculatorTotal } from './calculatorLogic'
@@ -260,6 +260,8 @@ const DEFAULT_PRODUCT_TYPES = [
     'posthog_ai',
 ]
 
+const PLATFORM_PACKAGES_TYPE = 'platform_packages'
+
 const CopyURLButton = ({ onClick }) => {
     const [copied, setCopied] = useState(false)
     const copyURL = () => {
@@ -316,7 +318,10 @@ export default function Tabbed() {
         .map((type) => products.find((product) => product.type === type))
         .filter(Boolean)
     const availableProducts = products.filter((product) => !selectedTypes.includes(product.type))
-    const activeProduct = selectedProducts.find((product) => product.type === activeType) || selectedProducts[0]
+    const platformPackagesActive = activeType === PLATFORM_PACKAGES_TYPE
+    const activeProduct = platformPackagesActive
+        ? undefined
+        : selectedProducts.find((product) => product.type === activeType) || selectedProducts[0]
     const ActiveIcon = activeProduct?.Icon
 
     // Capture pricing calculator interactions for the experiment.
@@ -353,14 +358,7 @@ export default function Tabbed() {
     }, [])
     const [productAddons, setProductAddons] = useState(initialProductAddons)
     const [platformAddons, setPlatformAddons] = useState(initialPlatformAddons)
-    const [showPlatformPackages, setShowPlatformPackages] = useState(false)
     const visiblePlatformAddons = platform.addons.filter((addon) => !addon.legacy_product)
-    const platformPackageSummary = visiblePlatformAddons.map((addon) => addon.name).join(', ')
-    const platformStartingPrice = Math.min(
-        ...visiblePlatformAddons
-            .map((addon) => platformAddons.find((platformAddon) => platformAddon.type === addon.type)?.price)
-            .filter((price) => Number.isFinite(price))
-    )
     const platformPackagesTotal = platformAddons
         .filter((addon) => addon.checked)
         .reduce((sum, addon) => sum + (addon.price || 0), 0)
@@ -653,13 +651,84 @@ export default function Tabbed() {
                             )}
                         </div>
                     )}
-                    <div className="mt-3 pt-3 border-t border-primary @6xl:mb-0 mb-6">
+                    <div className="mt-2 pt-1 border-t border-primary">
+                        <button
+                            type="button"
+                            onClick={() => setActiveType(PLATFORM_PACKAGES_TYPE)}
+                            className={`p-2 rounded-md font-semibold text-sm flex items-center justify-between w-full click ${
+                                platformPackagesActive ? 'font-bold bg-accent' : 'hover:bg-accent'
+                            }`}
+                        >
+                            <span className="flex items-center space-x-2">
+                                <IconStack className="w-5 h-6 shrink-0" />
+                                <span>Platform packages</span>
+                            </span>
+                            <span className="opacity-70">{formatUSD(platformPackagesTotal)}</span>
+                        </button>
+                    </div>
+                    <div className="mt-1 pt-2 border-t border-primary @6xl:mb-0 mb-6">
                         <button type="button" onClick={openAllRates} className="text-sm text-secondary underline">
                             See all products and per-unit rates
                         </button>
                     </div>
                 </div>
                 <div className="col-span-12 @2xl:col-span-8 md:pl-0 flex flex-col">
+                    {platformPackagesActive && (
+                        <>
+                            <div className="flex items-center gap-2.5 mb-1">
+                                <IconStack className="size-6 shrink-0" />
+                                <h3 className="m-0 leading-none">Platform packages</h3>
+                            </div>
+                            <div>
+                                {visiblePlatformAddons.map(({ type, name, description }) => {
+                                    const platformAddon = platformAddons.find((addon) => addon.type === type)
+                                    const checked = platformAddon?.checked
+                                    return (
+                                        <div
+                                            key={type}
+                                            className="flex items-center justify-between gap-4 py-3 border-b border-primary last:border-b-0"
+                                        >
+                                            <div className="min-w-0 max-w-[400px]">
+                                                <p className="m-0 text-sm font-bold">{name}</p>
+                                                <p className="m-0 text-xs text-secondary">{description}</p>
+                                            </div>
+                                            <div className="flex items-center gap-2 shrink-0">
+                                                {type === 'enterprise' ? (
+                                                    <Link
+                                                        to="/talk-to-a-human?edition=enterprise"
+                                                        className="text-red dark:text-yellow font-semibold text-sm"
+                                                        state={{ newWindow: true }}
+                                                    >
+                                                        Contact us
+                                                    </Link>
+                                                ) : (
+                                                    <>
+                                                        <Toggle
+                                                            checked={checked}
+                                                            onChange={(checked) =>
+                                                                setPlatformAddons(
+                                                                    platformAddons.map((addon) => {
+                                                                        if (addon.type === type) {
+                                                                            return { ...addon, checked }
+                                                                        }
+                                                                        return addon
+                                                                    })
+                                                                )
+                                                            }
+                                                        />
+                                                        <span className="font-semibold text-sm">
+                                                            ${platformAddon.price.toLocaleString()}/mo
+                                                        </span>
+                                                    </>
+                                                )}
+                                            </div>
+                                        </div>
+                                    )
+                                })}
+                            </div>
+                        </>
+                    )}
+
                     {activeProduct && (
                         <>
                             <div className="flex items-center gap-2.5 mb-4">
@@ -694,78 +763,6 @@ export default function Tabbed() {
                     )}
 
                     <div className="mt-auto">
-                        <div
-                            data-scheme="primary"
-                            className="bg-accent rounded relative border border-primary overflow-hidden mt-2"
-                        >
-                            <button
-                                type="button"
-                                onClick={() => setShowPlatformPackages((open) => !open)}
-                                className="flex items-center justify-between gap-3 p-3 text-sm text-left w-full"
-                            >
-                                <span className="flex items-center gap-1.5 min-w-0">
-                                    {showPlatformPackages ? (
-                                        <IconMinus className="size-4 text-secondary shrink-0" />
-                                    ) : (
-                                        <IconPlus className="size-4 text-secondary shrink-0" />
-                                    )}
-                                    <span className="font-bold shrink-0">Add a platform package</span>
-                                    <span className="opacity-60 truncate">{platformPackageSummary}</span>
-                                </span>
-                                <span className="font-semibold shrink-0">
-                                    ${platformPackagesTotal.toLocaleString()}
-                                </span>
-                            </button>
-                            {showPlatformPackages && (
-                                <div className="px-4">
-                                    {visiblePlatformAddons.map(({ type, name, description }) => {
-                                        const platformAddon = platformAddons.find((addon) => addon.type === type)
-                                        const checked = platformAddon?.checked
-                                        return (
-                                            <div
-                                                key={type}
-                                                className="flex items-center justify-between gap-4 first:pt-0 py-3 border-b border-primary last:border-b-0"
-                                            >
-                                                <div className="min-w-0 max-w-[400px]">
-                                                    <p className="m-0 text-sm font-bold">{name}</p>
-                                                    <p className="m-0 text-xs text-secondary">{description}</p>
-                                                </div>
-                                                <div className="flex items-center gap-2 shrink-0">
-                                                    {type === 'enterprise' ? (
-                                                        <Link
-                                                            to="/talk-to-a-human?edition=enterprise"
-                                                            className="text-red dark:text-yellow font-semibold text-sm"
-                                                            state={{ newWindow: true }}
-                                                        >
-                                                            Contact us
-                                                        </Link>
-                                                    ) : (
-                                                        <>
-                                                            <Toggle
-                                                                checked={checked}
-                                                                onChange={(checked) =>
-                                                                    setPlatformAddons(
-                                                                        platformAddons.map((addon) => {
-                                                                            if (addon.type === type) {
-                                                                                return { ...addon, checked }
-                                                                            }
-                                                                            return addon
-                                                                        })
-                                                                    )
-                                                                }
-                                                            />
-                                                            <span className="font-semibold text-sm">
-                                                                ${platformAddon.price.toLocaleString()}/mo
-                                                            </span>
-                                                        </>
-                                                    )}
-                                                </div>
-                                            </div>
-                                        )
-                                    })}
-                                </div>
-                            )}
-                        </div>
                         <div
                             data-scheme="secondary"
                             className="bg-primary rounded relative border border-primary overflow-hidden mt-2"
