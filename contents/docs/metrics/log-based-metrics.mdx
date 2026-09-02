@@ -1,0 +1,66 @@
+---
+title: Log-based metrics
+---
+
+> **Note:** Metrics is in alpha. Log-based metrics are part of metrics, so they follow the same alpha status and may change before general availability.
+
+**Log-based metrics** generate a metric from your logs at ingestion time. Log lines matching a filter are tallied as they arrive and emitted as a metric you can chart, query, and alert on in [Application metrics](/docs/metrics).
+
+This is the cheapest way to keep a long-term trend on something you already log. Metrics are computed *before* [drop rules](/docs/logs/best-practices) run, so you can drop noisy log lines to cut storage costs and still keep the trend they would have told you.
+
+## When to use a log-based metric
+
+A log line tells you about one event. A log-based metric summarizes all of them, so it's the right tool when you want:
+
+- **A trend over time**: error count per service, signups per minute, jobs processed per worker
+- **A value aggregated from a log attribute**: average or total `duration_ms` from request logs
+- **A trend you can keep while dropping the logs behind it**: the metric is computed before drop rules, so you can drop high-volume `INFO` logs and still see their rate
+
+If you need to see the individual log lines behind a number, that's a job for [log search](/docs/logs/search), not a metric.
+
+## Create a log-based metric
+
+Log-based metrics are managed under [**Settings** > **Environment** > **Logs** > **Log-based metrics**](https://app.posthog.com/settings/environment-logs#logs-metric-rules).
+
+1. Click **New metric rule**.
+2. Give the rule a descriptive name (e.g. "API errors").
+3. Set the **metric name** the generated metric appears under in the metrics viewer (e.g. `log.api_errors`).
+4. Add [filters](#configure-filters) to decide which log lines feed the metric. Leave empty to match all logs.
+5. (Optional) Set a **value attribute** to aggregate a numeric log attribute instead of counting lines.
+6. (Optional) Add **group by** dimensions to split the metric into one series per value.
+7. Toggle the rule **enabled** and save.
+
+The filter preview shows how many recent log lines would have matched, so you can sanity-check the rule before enabling it.
+
+You can also create a rule from any log line: hover the line in the [logs viewer](/docs/logs/search) and click the **Create log-based metric** button, which pre-fills the rule with that line's service and severity.
+
+## Configure filters
+
+Filters use the same shape as [log search](/docs/logs/search) filters, so you can match on severity, service name, and log or resource attributes. Only matching lines feed the metric. Leave filters empty to match every ingested log line.
+
+## Count lines or aggregate a value
+
+With no value attribute, the rule **counts matching log lines**, emitted as a counter you chart with `rate` or `increase`.
+
+Set a **value attribute** (e.g. `attributes.duration_ms`) and the rule instead aggregates that numeric attribute into a distribution, so you can chart how the value's count and sum change over time. The attribute must be numeric; address nested attributes with the `attributes.` or `resource_attributes.` prefix.
+
+The metric name and value attribute can't be changed after creation, because changing either starts a brand-new series and orphans the old one. Create a new rule instead.
+
+## Group by
+
+Add group-by dimensions to split the metric into one series per distinct value combination, for example per `service_name` or `severity_text`. Top-level keys `service_name`, `severity_text`, and `event_name` are available directly; anything else is addressed through the `attributes.` / `resource_attributes.` prefixes.
+
+As with any metric, keep group-by cardinality low: each distinct value combination is its own series, so avoid user or request IDs. A rule can have at most 5 group-by keys.
+
+## Limits and behavior
+
+- A project can have at most **10 enabled** log-based metrics. Every enabled rule is evaluated against every ingested log line, so the cap bounds ingestion cost.
+- Metrics are computed at ingestion, **before** drop rules. Dropping a log line never removes its contribution to a metric.
+- Rules start **disabled** by default; toggle one on when its filters look right in the preview.
+- The generated metric lives in your project like any other metric, so it's queryable in the [metrics viewer](/docs/metrics), through SQL as `posthog.metrics`, and via the [PostHog MCP server](/docs/model-context-protocol).
+
+## Next steps
+
+- [Get started with metrics](/docs/metrics/start-here)
+- [Why you need metrics](/docs/metrics/basics)
+- [Logging best practices](/docs/logs/best-practices)

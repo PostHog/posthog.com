@@ -14,6 +14,8 @@ There are three ways to send metrics:
 2. **Using OpenTelemetry?** Point any standard OpenTelemetry library or Collector at [PostHog's OTLP endpoint](#set-up-metrics-with-opentelemetry), with no PostHog-specific packages.
 3. **Already exposing Prometheus metrics?** Run the metrics agent with [Docker](/docs/metrics/installation/docker) or [Kubernetes](/docs/metrics/installation/kubernetes) to scrape your existing `/metrics` endpoints, with no code changes.
 
+Already capturing logs? You can also [generate a metric from your logs](/docs/metrics/log-based-metrics) at ingestion time, with no new instrumentation.
+
 ## Already have PostHog installed? Use posthog.metrics
 
 If [posthog-js](/docs/libraries/js) is already running on your site, you can record metrics immediately: no OpenTelemetry setup, no new dependencies, and no extra authentication beyond the project API key you already configured:

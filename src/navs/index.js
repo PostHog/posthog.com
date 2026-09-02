@@ -8308,6 +8308,12 @@ export const docsMenu = {
                     ],
                 },
                 {
+                    name: 'Log-based metrics',
+                    url: '/docs/metrics/log-based-metrics',
+                    icon: 'IconFilter',
+                    color: 'orange',
+                },
+                {
                     name: 'Why you need metrics',
                     url: '/docs/metrics/basics',
                     icon: 'IconBook',
