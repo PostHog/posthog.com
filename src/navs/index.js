@@ -8314,6 +8314,12 @@ export const docsMenu = {
                     ],
                 },
                 {
+                    name: 'Use your metrics',
+                    url: '/docs/metrics/explore',
+                    icon: 'IconTrends',
+                    color: 'blue',
+                },
+                {
                     name: 'Why you need metrics',
                     url: '/docs/metrics/basics',
                     icon: 'IconBook',
