@@ -42,7 +42,7 @@ The same goes for error budgets and latency. A `rate` on an error counter divide
 
 Most teams keep metrics in a separate system from everything else, so answering "did that latency spike affect signups?" means tab switching and timestamp matching. In PostHog, metrics live alongside your [logs](/docs/logs), [traces](/docs/distributed-tracing), product analytics, and session replays, in the same project with the same query language.
 
-Everything is queryable as SQL through the `posthog.metrics` table, and the [PostHog MCP server](/docs/model-context-protocol) exposes metrics to AI agents, so your tools can chart, compare, and investigate metrics for you.
+Everything is queryable as SQL through the `posthog.metrics` table, and the [PostHog MCP server](/docs/model-context-protocol) exposes metrics to AI agents, so your tools can chart, compare, and investigate metrics for you. PostHog also watches the metrics you chart: when one moves against its baseline, an anomaly badge surfaces the change and the label values behind it, and the raw samples stay linked to the logs and traces that explain them.
 
 ## Next steps
 

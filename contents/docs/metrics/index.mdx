@@ -207,26 +207,7 @@ Good starting points:
 
 ## Use your metrics
 
-Once metrics are flowing, open [Metrics](https://app.posthog.com/metrics) in PostHog.
-
-### Chart metrics in the viewer
-
-The **Viewer** tab lets you explore metrics without writing any queries:
-
-- **Pick a metric** by name to chart it over time
-- **Choose an aggregation**: sum, average, count, p95, rate, or increase. The viewer recommends one based on the metric's type: increase for counters, average for gauges, p95 for histograms
-- **Group by attributes** to break a metric down into one line per value, like per route or per status code
-- **Filter** to the series you care about, and adjust the date range
-
-### Query metrics with SQL
-
-The **SQL** tab gives you direct access to your metrics with [SQL](/docs/sql):
-
-```sql
-SELECT * FROM posthog.metrics LIMIT 10
-```
-
-Use it for anything the viewer doesn't cover, joining metrics against each other, custom math, or ad-hoc exploration of raw data points.
+Once metrics are flowing, open [Metrics](https://app.posthog.com/metrics) in PostHog. The metrics scene has four tabs — **Overview** for ingestion health, **Viewer** to chart and break down a metric, **SQL** to query the raw data, and **Fundamentals** to check how a number was computed. Chart any metric over time, group and filter it by attribute, let the anomaly badge point at what changed, and pivot into the logs and traces behind it. See [Use your metrics](/docs/metrics/explore) for the full tour.
 
 ## Troubleshooting
 
