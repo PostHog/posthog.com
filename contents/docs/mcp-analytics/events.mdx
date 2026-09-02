@@ -60,6 +60,8 @@ The **harness** — the friendly client label on the dashboard's breakdown ("Cla
 2. **`$mcp_client_user_agent`** — carries the build surface for Claude Code (`(cli)` vs `(sdk-ts)` vs `(claude-vscode)` vs `(claude-desktop)`), and acts as the generic fallback when no client name arrived.
 3. **`$mcp_client_name`** — the `clientInfo.name` the client reported.
 
+One limitation is baked into the wire: traffic proxied through a vendor's server-side gateway carries the gateway's identity, not the end surface's. Claude.ai connectors are the common case — web, desktop, and mobile all reach your server through Anthropic's fetcher with the same `User-Agent` (`Claude-User`) and the same vendor header value, so all three resolve to the single "Claude.ai" label and no signal on the request can tell them apart.
+
 A call carrying none of the three shows as unattributed, and an unrecognized client collapses into "Other". If your breakdown reads mostly "Other", check that these properties are populated — on HTTP transports the SDK captures the headers automatically (TypeScript ≥ 0.11.0, Python ≥ 7.42.0); a [custom dispatcher](/docs/mcp-analytics/custom-servers#attributing-the-caller) has to pass them itself, and stdio/in-memory transports carry no headers at all, so there the client name is the only signal.
 
 ## Exception properties
