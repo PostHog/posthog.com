@@ -24,6 +24,8 @@ import AgentEstimateLink, {
 import { NumericFormat } from 'react-number-format'
 import AutosizeInput from 'react-input-autosize'
 import { RenderInClient } from 'components/RenderInClient'
+import { useApp } from '../../../context/App'
+import AllProductsRatesModal, { ALL_PRODUCTS_RATES_MODAL_KEY } from './AllProductsRatesModal'
 
 export const Addon = ({ type, name, description, plans, addons, setAddons, volume, inclusion_only }) => {
     const addon = addons.find((addon) => addon.type === type)
@@ -294,6 +296,7 @@ export default function Tabbed() {
     const [productSearch, setProductSearch] = useState('')
     const addProductRef = useRef(null)
     const { products: initialProducts, setVolume, setProduct } = useProducts()
+    const { addWindow } = useApp()
     // Listed in the same order as the taskbar's "Browse tools" menu, so the tools appear where
     // people have already learned to look for them. Metered products missing from that curated
     // list (Managed warehouse, PostHog AI, Inbox) fall to the end, keeping their relative order —
@@ -444,6 +447,21 @@ export default function Tabbed() {
         setSelectedTypes((current) => [...current, type])
         setActiveType(type)
         closeProductPicker()
+    }
+
+    const openAllRates = () => {
+        addWindow(
+            (
+                <AllProductsRatesModal
+                    location={{ pathname: ALL_PRODUCTS_RATES_MODAL_KEY }}
+                    key={ALL_PRODUCTS_RATES_MODAL_KEY}
+                    newWindow
+                    products={products}
+                    selectedTypes={selectedTypes}
+                    onAdd={addProduct}
+                />
+            ) as any
+        )
     }
 
     const filteredAvailableProducts = productSearch.trim()
@@ -632,6 +650,11 @@ export default function Tabbed() {
                             )}
                         </div>
                     )}
+                    <div className="mt-3 pt-3 border-t border-primary">
+                        <button type="button" onClick={openAllRates} className="text-sm text-secondary underline">
+                            See all products and per-unit rates
+                        </button>
+                    </div>
                 </div>
                 <div className="col-span-12 @2xl:col-span-8 md:pl-0 flex flex-col">
                     {activeProduct && (
