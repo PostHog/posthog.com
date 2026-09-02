@@ -42,7 +42,7 @@ Scouts don't live on their own, they feed our self-driving product pipeline:
 1. **A scout runs** on a schedule, looks at some slice of your PostHog data, and decides whether anything is worth surfacing.
 2. **If it is, the scout emits a [signal](/docs/self-driving/signals)** – a semi-structured finding with evidence, and a suggested action.
 3. **Signals get picked up by the [self-driving pipeline](/docs/self-driving/self-improving-loop)**, grouped, and turned into **[reports](/docs/self-driving/reports)** that land in your PostHog [Inbox](/docs/self-driving/inbox).
-4. **Reports get actioned** – by you, or automatically by a PostHog Desktop task that picks up the report and ships a fix or improvement.
+4. **Reports get actioned** – by you, or automatically by a [self-driving](/docs/self-driving) task that picks up the report and ships a fix or improvement.
 
 A report can be made up of many signals from many sources. Scouts are just one of those sources. 
 
@@ -279,7 +279,7 @@ The pipeline turned the signal into a report, which even did the root-cause anal
 
 <summary>Step 4: <strong>An agent opens the fix</strong> – <a href="https://github.com/PostHog/posthog/pull/63393" rel="noopener noreferrer">PR #63393</a>, authored autonomously</summary>
 
-A PostHog Desktop agent picked up the report and opened the PR on its own – introducing a writable `SyncFrequencyField` so the cadence flows into the generated PATCH body, and adding three regression tests (a writable-field guard, a round-trip update, and an invalid-value rejection).
+A [self-driving](/docs/self-driving) agent picked up the report and opened the PR on its own – introducing a writable `SyncFrequencyField` so the cadence flows into the generated PATCH body, and adding three regression tests (a writable-field guard, a round-trip update, and an invalid-value rejection).
 
 From the PR's own agent-context section:
 
