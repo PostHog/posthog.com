@@ -25,7 +25,31 @@ await Posthog().setup(config);
 
 On iOS the native SDK hooks the app delegate's remote-notification registration callback, so it picks up the APNs token once your app registers for remote notifications. On Android it fetches the FCM token at startup when `firebase-messaging` is on the classpath. The token is registered under the current distinct ID, so it follows the user across `identify()`.
 
-Open coverage differs per platform. On iOS every tap on a remote notification is captured whatever the app state; locally-scheduled notifications are ignored. On Android only cold-start taps are captured. Capture the rest manually (below).
+Every tap on a remote notification is captured on both platforms, whether the notification cold-launched the app or it was already running. Locally-scheduled notifications are ignored — capture those manually (below).
+
+Cold-start capture needs posthog-ios 3.72.0 on iOS and posthog-android 3.62.0 on Android, which the plugin's version floors bring in. On Android a tap is recognized by the `google.message_id` extra that Firebase puts on the intent, so push delivered outside FCM isn't seen.
+
+<CalloutBox icon="IconWarning" title="iOS needs a notification delegate" type="caution">
+
+iOS only reports a notification tap to your app through `UNUserNotificationCenter.current().delegate`. A stock Flutter app sets none, and `flutter_local_notifications` doesn't set one either — so without this, iOS reports the tap to nobody and `$push_notification_opened` is never captured, in any app state.
+
+Set it in `ios/Runner/AppDelegate.swift`:
+
+```swift
+import UserNotifications
+
+override func application(
+  _ application: UIApplication,
+  didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?
+) -> Bool {
+  UNUserNotificationCenter.current().delegate = self
+  return super.application(application, didFinishLaunchingWithOptions: launchOptions)
+}
+```
+
+The SDK logs a warning when the delegate is still missing shortly after setup, if you set `debug = true` on `PostHogConfig`.
+
+</CalloutBox>
 
 The Android startup fetch doesn't see later token refreshes, so forward those yourself to keep the registered token current:
 
@@ -61,21 +85,17 @@ Registration and unregistration are durable. If the device is offline or the req
 
 ## Capturing opens
 
-For the opens automatic capture misses (locally-scheduled notifications on either platform, plus warm-start taps and foreground messages on Android), call the manual API:
+Taps on remote notifications are captured for you. Call the manual API only for opens automatic capture can't see — locally-scheduled notifications, notifications you display yourself from a foreground message, and push delivered outside FCM on Android:
 
 ```dart
-if (Platform.isAndroid) {
-  FirebaseMessaging.onMessageOpenedApp.listen((message) {
-    Posthog().capturePushNotificationOpened(
-      title: message.notification?.title,
-      body: message.notification?.body,
-      payload: message.data,
-    );
-  });
-}
+Posthog().capturePushNotificationOpened(
+  title: 'Your order shipped',
+  body: 'Track it in the app',
+  payload: {'order_id': '1234'},
+);
 ```
 
-Only call it for opens automatic capture can't see itself, or the tap is counted twice.
+Don't wire this to `FirebaseMessaging.onMessageOpenedApp` or `getInitialMessage()`. The SDK already captures those taps, and the manual call isn't deduplicated against them, so the open is counted twice.
 
 The `$push_notification_opened` event includes `$notification_title` and `$notification_body` (plus `$notification_subtitle` on iOS), and `$notification_action` for action-button taps. Notification content is only captured for notifications sent by PostHog. Opens of other notifications are still captured, but without title or body.
 
@@ -104,4 +124,5 @@ config.pushIdentityProvider = (distinctId, appId) async {
 | --- | --- |
 | Token never registers | Confirm push is set up in your app and the user granted notification permission. On Android, confirm `firebase-messaging` is on the classpath (`firebase_messaging` sets this up). Any manual `registerPushNotificationToken` call must come after `setup()` completes. |
 | Push doesn't arrive | Confirm the channel's Firebase project (Android) or APNs environment and bundle id (iOS) match your app. |
+| `$push_notification_opened` never fires | On iOS, confirm your `AppDelegate` sets `UNUserNotificationCenter.current().delegate`. On Android, confirm the notification is sent through FCM — detection keys on the `google.message_id` intent extra — and that your launcher activity still has `android:launchMode="singleTop"`, without which the system resumes the task instead of delivering the tap. |
 | Registration rejected on a Required channel | Your `pushIdentityProvider` isn't returning a valid token in time. See [Identity verification](/docs/workflows/push-notifications#identity-verification). |

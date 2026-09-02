@@ -51,7 +51,20 @@ Registration and unregistration are durable. If the device is offline or the req
 
 ## Capturing opens
 
-Automatic open capture detects cold-start taps on a notification from the system tray. Warm-start taps (handled in `onNewIntent`) and notifications you display yourself from a foreground data message need the manual API:
+Automatic open capture detects cold-start taps on a notification from the system tray, recognized by the `google.message_id` extra that Firebase puts on the intent.
+
+Android gives libraries no way to observe `Activity.onNewIntent`, so a tap that arrives while your app is already running needs one line in your activity:
+
+```kotlin
+override fun onNewIntent(intent: Intent) {
+    super.onNewIntent(intent)
+    PostHogAndroid.capturePushNotificationOpened(intent)
+}
+```
+
+Your launcher activity needs `android:launchMode="singleTop"`, or the system resumes the task instead of delivering the tap here. Requires Android SDK 3.62.0 or newer. `PostHogAndroid.capturePushNotificationOpened` is deduplicated against the automatic path by message id, so it can't double-count with it — unlike `PostHog.capturePushNotificationOpened` below, which isn't.
+
+Notifications you display yourself from a foreground data message, and push delivered outside FCM, aren't detected at all — capture those with the fully manual API:
 
 ```kotlin
 PostHog.capturePushNotificationOpened(
