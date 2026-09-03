@@ -88,7 +88,7 @@ export const amplitude = {
         session_replay: {
             available: true,
             pricing: {
-                free_tier: '1,000 recordings',
+                free_tier: '10,000 recordings',
             },
             features: {
                 canvas_recording: false,
@@ -145,7 +145,7 @@ export const amplitude = {
         feature_flags: {
             available: true,
             pricing: {
-                free_tier: '2M events/mo',
+                free_tier: 'Unlimited flags',
             },
             features: {
                 boolean_flags: true,
@@ -204,7 +204,7 @@ export const amplitude = {
         experiments: {
             available: true,
             pricing: {
-                free_tier: '50,000 impressions per month',
+                free_tier: '1 active experiment',
             },
             features: {
                 count_value_metrics: true,

@@ -22,7 +22,7 @@ Everything in the `Component` column is deleted, except `Test/ImageSlider` and `
 | "Give PostHog a try" | inline in `Pricing/PricingExperiment` | Redundant mid-page CTA. |
 | Y Combinator quote | `Pricing/Quote` | Single-quote social proof, replaced by `CustomerLogos`. |
 | Product comparisons | `Test/SimilarProducts` | Competitor feature grid — a different question than "what will this cost me". |
-| Add-ons | `Test/Addons` | Detail for existing customers, not people deciding. Still on `/platform-packages` and `/addons`. |
+| Add-ons | `Test/Addons` | Detail for existing customers, not people deciding. Available in the pricing calculator. |
 | Frequently purchased with | `Test/PurchasedWith` | Logo carousel of unrelated tools. |
 | Product screenshot slider | `Test/ImageSlider` | Didn't fit alongside a full-width headline, and screenshots aren't a pricing question. |
 | "Jump to" table of contents | `ReaderView` right sidebar | Suppressed with `hideRightSidebar`; buys ~290px of content width. |
