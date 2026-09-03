@@ -131,7 +131,7 @@ export const tools = [
         handle: 'traces',
         name: 'Traces',
         description: 'Distributed tracing that goes straight to the line that broke',
-        slug: 'traces',
+        slug: 'tracing',
         category: 'product_engineering',
         status: 'beta',
     },
