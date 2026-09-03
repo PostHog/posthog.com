@@ -59,7 +59,7 @@ We send reminder emails 30 days, 15 days, and 1 day before your data first enter
 
 A few options, depending on what works best for you:
 
-- **Upgrade your plan.** Each tier comes with longer retention by default. If you're regularly querying data older than your window, this is usually the right call. See [platform packages](/platform-packages) for options.
+- **Upgrade your plan.** Each tier comes with longer retention by default. If you're regularly querying data older than your window, this is usually the right call. See [platform packages](/platform-packages) for options. A longer window applies to all your events, including any that are hidden but not yet deleted. Events that have already been deleted can't be recovered.
 - **Export to your own warehouse.** If you want indefinite control over your data, set up a [batch export](/docs/cdp/batch-exports) to BigQuery, Snowflake, S3, or Postgres. We'll keep sending you fresh data; you keep it as long as you want.
 
 ## Changing plans
