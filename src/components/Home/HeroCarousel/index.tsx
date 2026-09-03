@@ -31,7 +31,7 @@ export default function HeroCarousel({ tabs = productUsageTabs, className }: { t
 
     const effectivelyPaused = isPaused || isHovering || holds > 0
 
-    const captureSlideViewed = (slide: string, trigger: 'auto' | 'click') => {
+    const captureSlideViewed = (slide: string, trigger: 'auto' | 'user') => {
         posthog?.capture('hero_carousel_slide_viewed', {
             slide,
             slide_index: tabs.findIndex((t) => t.value === slide),
@@ -48,7 +48,7 @@ export default function HeroCarousel({ tabs = productUsageTabs, className }: { t
     }
 
     const handleTabChange = (value: string) => {
-        captureSlideViewed(value, 'click')
+        captureSlideViewed(value, 'user')
         setActiveTab(value)
         setProgressKey((k) => k + 1)
     }
