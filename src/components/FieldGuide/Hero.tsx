@@ -4,7 +4,7 @@ import { INK, PAPER } from './heroData'
 import { SPECIES_BY_SLUG } from './speciesData'
 
 // Creature-free color map (hosted on Cloudinary).
-const MAP_SRC = 'https://res.cloudinary.com/dmukukwp6/image/upload/color_map_e05cd23b04.png'
+const MAP_SRC = '/images/field-guide/map-centered.png'
 const color = (slug: string) => `/images/field-guide/${slug}.png`
 
 // Each creature (color art) placed at its exact spot on the 1728×1117 map (top-left, % of frame).
@@ -12,16 +12,16 @@ type Specimen = { slug: string; left: number; top: number; width: number; tip?: 
 // Sizes are normalized so every creature's drawn area is equal; `tip` overrides the
 // default card side for creatures near an edge so the card is never clipped.
 const SPECIMENS: Specimen[] = [
-    { slug: 'rage-clicker', left: 30.38, top: 15.32, width: 7.09 },
-    { slug: 'tab-hopper', left: 50.64, top: 19.33, width: 8.32 },
-    { slug: 'modal-slammer', left: 69.59, top: 11.53, width: 7.64, tip: 'left' },
-    { slug: 'phantom-returner', left: 71.89, top: 29.59, width: 8.19, tip: 'left' },
-    { slug: 'console-opener', left: 31.93, top: 45.79, width: 8.24 },
-    { slug: 'pricing-page-loiterer', left: 51.47, top: 41.3, width: 10.87 },
-    { slug: 'tutorial-skipper', left: 75.32, top: 49.44, width: 9.96, tip: 'left' },
-    { slug: 'mid-form-fleer', left: 28.86, top: 67.11, width: 7.87 },
-    { slug: 'refreshing-pilgrim', left: 49.08, top: 74.99, width: 8.83 },
-    { slug: 'dead-end-wanderer', left: 67.75, top: 79.21, width: 9.25 },
+    { slug: 'rage-clicker', left: 65.65, top: 31.74, width: 5.32, tip: 'left' },
+    { slug: 'tab-hopper', left: 45.04, top: 23.04, width: 6.49 },
+    { slug: 'modal-slammer', left: 23.96, top: 16.19, width: 7.18 },
+    { slug: 'phantom-returner', left: 59.86, top: 10.36, width: 10.42, tip: 'left' },
+    { slug: 'console-opener', left: 27.43, top: 48.41, width: 7.18 },
+    { slug: 'pricing-page-loiterer', left: 57.78, top: 78.64, width: 9.03, tip: 'left' },
+    { slug: 'tutorial-skipper', left: 70.05, top: 50.95, width: 9.04, tip: 'left' },
+    { slug: 'mid-form-fleer', left: 23.26, top: 67.35, width: 6.49 },
+    { slug: 'refreshing-pilgrim', left: 47.81, top: 73.63, width: 6.49 },
+    { slug: 'dead-end-wanderer', left: 43.65, top: 44.69, width: 8.34 },
 ]
 
 function SpecimenLink({ item, index, inView }: { item: Specimen; index: number; inView: boolean }): JSX.Element {
