@@ -3,7 +3,7 @@ export const optimizely = {
     key: 'optimizely',
     assets: {
         icon: '/images/competitors/optimizely.svg',
-        comparisonArticle: '/blog/posthog-vs-optimizely',
+        comparisonArticle: '/compare/posthog-vs-optimizely',
     },
     products: {
         experiments: {

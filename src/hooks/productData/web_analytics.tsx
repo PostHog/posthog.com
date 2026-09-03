@@ -338,7 +338,7 @@ export const webAnalytics = {
             {
                 name: 'Matomo',
                 key: 'matomo',
-                link: '/blog/posthog-vs-matomo',
+                link: '/compare/posthog-vs-matomo',
             },
             {
                 name: 'PostHog',

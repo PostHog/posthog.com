@@ -145,7 +145,7 @@ Ultimately our goal was brand awareness. In the 30 days following the site's lau
 
 ## What’s next?
 
-We continue to update the site as there are further developments across the EU. We also launched [PostHog Cloud EU](https://posthog.com/eu), providing a fully-managed [EU-hosted Google Analytics alternative](/blog/ga4-alternatives) for our customers.
+We continue to update the site as there are further developments across the EU. We also launched [PostHog Cloud EU](https://posthog.com/eu), providing a fully-managed [EU-hosted Google Analytics alternative](/compare/ga4-alternatives) for our customers.
 
 More recently, France found Google Analytics to be illegal, so we recently [added that to the site.](https://isgoogleanalyticsillegal.com/france/) In fact, we saw a huge spike in traffic to the site around this time.
 
