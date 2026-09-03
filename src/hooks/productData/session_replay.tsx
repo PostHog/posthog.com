@@ -26,6 +26,8 @@ export const sessionReplay = {
     type: 'session_replay',
     teamSlug: 'replay',
     forumTopicId: 377,
+    // Volume id in src/constants/pocketGuides.ts – gives the docs a Learn tab.
+    pocketGuideVolume: 'session-replay',
     color: 'yellow',
     colorSecondary: '[#B56C00]',
     wizardSupport: true,
