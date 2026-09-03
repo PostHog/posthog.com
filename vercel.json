@@ -6192,6 +6192,21 @@
             "statusCode": 301
         },
         {
+            "source": "/docs/api/dashboards-3:ext(\\.md)?",
+            "destination": "/docs/api/dashboards:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/api/insights-3:ext(\\.md)?",
+            "destination": "/docs/api/insights:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/api/error-tracking-7:ext(\\.md)?",
+            "destination": "/docs/api/error-tracking:ext?",
+            "statusCode": 301
+        },
+        {
             "source": "/contact-us",
             "destination": "/talk-to-a-human",
             "statusCode": 301
