@@ -6,7 +6,6 @@ import Link from 'components/Link'
 import Tooltip from 'components/Tooltip'
 
 const APP_LEGAL_URL = 'https://app.posthog.com/legal'
-const EU_APP_LEGAL_URL = 'https://eu.posthog.com/legal'
 
 function DpaGenerator() {
     const [mode, setMode] = useState('pretty')
@@ -178,12 +177,7 @@ function DpaGenerator() {
                     </p>
                     <p className="text-sm">
                         It's self-serve and takes a couple of minutes. Nobody has to approve it and there's nothing to
-                        wait for. We countersign it on the spot, on any plan, including the free one. On PostHog Cloud
-                        EU, use{' '}
-                        <Link to={EU_APP_LEGAL_URL} external className="font-semibold underline">
-                            eu.posthog.com/legal
-                        </Link>{' '}
-                        instead.
+                        wait for. We countersign it on the spot, on any plan, including the free one.
                     </p>
                     <p className="text-sm">
                         The version below is the exact same agreement, just rendered here for your reading pleasure (and
