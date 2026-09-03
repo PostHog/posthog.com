@@ -75,7 +75,7 @@ const sections = [
             },
             {
                 label: 'Debug & fix issues',
-                handles: ['error_tracking', 'logs', 'session_replay', 'profiles'],
+                handles: ['error_tracking', 'logs', 'traces', 'session_replay', 'profiles'],
             },
             {
                 label: 'Ship features & get feedback',
