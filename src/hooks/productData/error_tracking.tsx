@@ -219,9 +219,9 @@ export const errorTracking = {
                 scenario: {
                     icon: 'IconBug',
                     steps: [
-                        'PostHog captures $exception events whenever errors are thrown by the client or server application',
-                        'Exceptions are grouped into issues based on event information like type, message, and stack trace',
-                        "It's on you and your team to manage them, and merge any bug fixes",
+                        'Your deploy goes out and the new error starts firing. PostHog groups every instance of it into one issue',
+                        'You open the issue and read the stack trace, which release it started in, and how many people it hit',
+                        'You write the fix, ship it, and mark the issue resolved',
                     ],
                 },
                 points: [
@@ -241,16 +241,16 @@ export const errorTracking = {
                         icon: 'IconSparkles',
                         body: (
                             <>
-                                Connect with the PostHog MCP server to enable autonomous debugging with AI agents. You
-                                can also copy our{' '}
+                                Point your coding agent at PostHog through the MCP server and it can pull the stack
+                                trace and propose a fix without you leaving the editor. Or copy one of our{' '}
                                 <Link
-                                    to="/docs/error-tracking/surfaces/web-app#quest-item-debug-with-ai"
+                                    to="/docs/error-tracking/surfaces/web-app#fix-with-ai-prompts"
                                     state={{ newWindow: true }}
                                     className="underline"
                                 >
                                     premade AI prompts
-                                </Link>{' '}
-                                which include full stack traces and curated instructions for the AI to follow.
+                                </Link>
+                                , which bundle the full stack trace with instructions for the AI to follow.
                             </>
                         ),
                     },
@@ -269,9 +269,9 @@ export const errorTracking = {
                 },
                 points: [
                     {
-                        title: 'Bring errors into your other tools',
+                        title: 'Bring errors into where you build',
                         icon: 'IconSearch',
-                        body: 'Combining the PostHog MCP server with Error Tracking lets your agent act on what it finds, proposing fixes, updating issue status, or linking the issue straight to a GitHub, GitLab, Linear, or Jira ticket.',
+                        body: 'The PostHog MCP server gives your coding agent write access to your triage setup. Ask it to assign every TypeError to the backend team, or to widen a grouping rule so NullPointerException lands in the same issue, and it makes the change in PostHog without you opening the app.',
                     },
                     {
                         title: 'No prompt required',
@@ -308,9 +308,9 @@ export const errorTracking = {
                         body: 'An exception names a file, a line, and the user who hit it, which is concrete enough for PostHog to draft the fix itself. Only the genuinely ambiguous ones, where a person has to make the call, land in your inbox instead of a pull request.',
                     },
                     {
-                        title: 'Spike detection is the trigger',
+                        title: 'It checks its own work',
                         icon: 'IconRefresh',
-                        body: 'Each issue tracks its own rolling baseline, so a new error gets flagged the moment it clears that baseline, no warm-up period needed. The same check also catches a resolved issue firing again, which is how PostHog verifies its own fixes held.',
+                        body: 'A resolved issue that starts firing again is a signal in its own right, so every fix PostHog ships gets re-measured once the deploy lands. If the error comes back, the issue reopens and returns to your Inbox.',
                     },
                 ],
             },

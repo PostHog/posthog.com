@@ -196,7 +196,7 @@ export const surveys = {
     },
     useCaseRamp: {
         intro: 'Surveys work at three levels. You can write the questions and read the answers yourself, ask an agent to summarize responses, or let PostHog work proactively with your data.',
-        scenario: 'You want feedback from users on what to build next',
+        scenario: 'You need to know what to build next (and users have opinions)',
         columns: [
             {
                 level: 'Do it yourself',
@@ -229,16 +229,16 @@ export const surveys = {
                         icon: 'IconSparkles',
                         body: (
                             <>
-                                You can add a{' '}
+                                Instead of reading a few hundred{' '}
                                 <Link
                                     to="/docs/surveys/viewing-results"
                                     state={{ newWindow: true }}
                                     className="underline"
                                 >
-                                    Survey Results widget
+                                    responses
                                 </Link>{' '}
-                                to any dashboard to track survey performance alongside other metrics. Instead of reading
-                                hundreds of responses manually, ask PostHog AI to surface the patterns.
+                                by hand, ask PostHog AI for the recurring themes. It reads all of them, and can sort
+                                each one as positive, neutral, or negative while it goes.
                             </>
                         ),
                     },
@@ -252,14 +252,14 @@ export const surveys = {
                     steps: [
                         'You ask PostHog AI to set up a survey asking what feature users want',
                         'It drafts the questions and targeting. You edit and launch',
-                        'PostHog AI reads through the survey responses and extracts themes and actionable insights. It can even classify feedback as positive, neutral, or negative',
+                        'Once the answers come in, you ask what people said. PostHog AI reads every response and reports back the recurring themes, with the strongest one on top',
                     ],
                 },
                 points: [
                     {
                         title: 'Bring surveys into where you build',
                         icon: 'IconSearch',
-                        body: "The PostHog MCP server exposes PostHog's API as function calling tools to any MCP client. An agent can run your surveys for you, and pull the responses back into your editor.",
+                        body: 'The PostHog MCP server gives your AI agent tools to launch a survey, change its targeting, and pull the responses back into your editor. It works in any MCP client, like Cursor or Claude Code.',
                     },
                     {
                         title: 'No prompt required',
@@ -283,37 +283,39 @@ export const surveys = {
                 scenario: {
                     icon: 'IconSearch',
                     steps: [
-                        'a dedicated scout watches your active surveys for score regressions and abandonment spikes',
-                        'It clusters open-text answers into recurring themes. Each validated theme becomes one report in the inbox',
-                        "Every response links back to the respondent's session replay and events, so vague feedback comes with evidence",
+                        'A scout watches your active surveys for falling scores and for people abandoning them part way',
+                        'It clusters the open-text answers into recurring themes, and each theme it can confirm becomes one report in your Inbox',
+                        'Every response links back to that person\'s session replay and events, so "add CSV export" arrives with proof of who asked and what they were doing',
+                        'You reply in the thread asking for it, and PostHog opens the pull request',
                     ],
                 },
                 points: [
                     {
-                        title: 'Surveys feed self-driving',
-                        icon: 'IconBrain',
+                        title: 'Ask the people it happened to',
+                        icon: 'IconTarget',
                         body: (
                             <>
-                                Your surveys are a signal source for{' '}
-                                <Link to="/docs/self-driving" state={{ newWindow: true }} className="underline">
-                                    Self-driving
-                                </Link>
-                                . Scouts connect sentiment to other data points to know what's a real pattern versus
-                                noise.
+                                A{' '}
+                                <Link to="/docs/self-driving/reports" state={{ newWindow: true }} className="underline">
+                                    report
+                                </Link>{' '}
+                                tells you what changed, not always why. An agent can draft a survey aimed at exactly the
+                                people it happened to (filtered by the event or flag they share), and nothing reaches a
+                                user until you launch it.
                             </>
                         ),
                     },
                     {
-                        title: 'You stay in the loop',
-                        icon: 'IconPeople',
+                        title: 'You decide what gets built',
+                        icon: 'IconMap',
                         body: (
                             <>
-                                Building a feature is a product decision, not an automatic fix, so the{' '}
+                                PostHog won't decide what your product should be. A{' '}
                                 <Link to="/docs/self-driving/scouts" state={{ newWindow: true }} className="underline">
                                     scout
                                 </Link>{' '}
-                                sends it to a person instead of writing code straight away. The pull request only
-                                happens once you ask for it, in the same thread.
+                                brings the evidence and stops there, so choosing what's worth building stays your call.
+                                Ask @PostHog in Slack once you've made it.
                             </>
                         ),
                     },

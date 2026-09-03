@@ -35,8 +35,7 @@ import OSButton from 'components/OSButton'
 import { Accordion } from 'components/RadixUI/Accordion'
 import Modal from 'components/RadixUI/Modal'
 import Tooltip from 'components/RadixUI/Tooltip'
-import SlotMachineText from 'components/SlotMachineText'
-import posthogIcon from '../images/posthog-icon-white.svg'
+import LetPostHogScroller from 'components/LetPostHogScroller'
 import { LOGOS, type LogoKey } from 'constants/logos'
 import TabbedCarousel from 'components/TabbedCarousel'
 import type { TabbedCarouselTab } from 'components/TabbedCarousel'
@@ -100,26 +99,6 @@ function KeyBadge({ children }: { children: React.ReactNode }) {
         <span className="inline-flex items-center gap-1 rounded px-1.5 py-0.5 text-xs font-sans font-medium align-middle mx-0.5 relative -top-0.5 bg-[#1d1f27] text-white dark:bg-white dark:text-[#1d1f27]">
             {children}
         </span>
-    )
-}
-
-// "Let [icon] PostHog {analyze|debug|…|code}" — the animated wordmark, reused as the
-// header brand and as the punch line at the end of the opening narrative.
-function LetPostHogScroller({ className = 'text-2xl @xl:text-3xl font-bold tracking-tight' }: { className?: string }) {
-    return (
-        <SlotMachineText
-            className={className}
-            words={['analyze', 'debug', 'instrument', 'ship', 'experiment', 'query', 'flag', 'code']}
-            holdDuration={4000}
-            wordClassName="text-red dark:text-yellow"
-            prefix={
-                <span className="inline-flex items-center gap-2">
-                    <span>Let</span>
-                    <img src={posthogIcon} alt="" aria-hidden className="size-6 rounded-md @xl:size-7" />
-                    <span>PostHog</span>
-                </span>
-            }
-        />
     )
 }
 

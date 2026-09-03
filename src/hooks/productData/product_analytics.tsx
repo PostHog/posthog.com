@@ -220,7 +220,7 @@ export const productAnalytics = {
     },
     useCaseRamp: {
         intro: 'Product Analytics works at three levels. You can query events and build insights yourself, ask an agent to build them for you, or let PostHog work proactively with your data.',
-        scenario: 'Did paying customers actually adopt the feature you just shipped?',
+        scenario: "The feature you just shipped isn't getting used (by anyone paying, anyway)",
         columns: [
             {
                 level: 'Do it yourself',
@@ -259,7 +259,7 @@ export const productAnalytics = {
                 },
                 points: [
                     {
-                        title: 'Bring analytics into where you build',
+                        title: 'Bring product analytics into where you build',
                         icon: 'IconSearch',
                         body: 'The PostHog MCP server lets your AI coding agent query funnels, retention, trends, and paths, and list the exact people behind any data point. It works with any MCP client like Cursor or Claude Code.',
                     },
@@ -285,8 +285,8 @@ export const productAnalytics = {
                 scenario: {
                     icon: 'IconSearch',
                     steps: [
-                        'Low adoption on the feature you shipped is one signal among several PostHog is already watching',
-                        'It groups with a spike in related error tracking issues and a cluster of session replays showing people trying the feature, then giving up',
+                        'Your adoption insight dips, and PostHog picks it up as a signal',
+                        'It groups with a spike in related errors and a cluster of session replays showing people trying the feature, then giving up',
                         'The combined evidence points to a bug blocking the flow, so PostHog opens a pull request with the fix and a regression test',
                         'You merge it, and PostHog checks adoption again after the fix ships to confirm it actually worked',
                     ],
@@ -297,12 +297,15 @@ export const productAnalytics = {
                         icon: 'IconBrain',
                         body: (
                             <>
-                                Your events, insights, and dashboards are a signal source for{' '}
+                                Your insights are a signal source for{' '}
                                 <Link to="/docs/self-driving" state={{ newWindow: true }} className="underline">
                                     Self-driving
                                 </Link>
-                                , and rarely the only one. A low-adoption signal groups with matching error tracking and
-                                session replay signals into a single report instead of three separate ones.
+                                . It watches the charts you have already built, so there is nothing extra to set up. A{' '}
+                                <Link to="/docs/self-driving/scouts" state={{ newWindow: true }} className="underline">
+                                    scout
+                                </Link>{' '}
+                                covers your busiest dashboards too, watching for bursts, drops, and flat-lines.
                             </>
                         ),
                     },

@@ -236,14 +236,14 @@ export const featureFlags = {
                 },
                 points: [
                     {
-                        title: 'The flags list can filter itself for cleanup',
+                        title: 'The flags list can find your dead flags',
                         icon: 'IconFilter',
-                        body: 'The flags list in PostHog Web can filter to show flags unevaluated in 30+ days, or fully rolled out with no targeting left. Remembering to check it (and to act on what it shows) is still on you.',
+                        body: 'PostHog Web can filter the list down to flags your code has not checked in 30 days, or flags rolled out to everyone with no targeting left to do. Remembering to look (and to act on what you find) is still on you.',
                     },
                     {
                         title: 'Point an agent at it instead',
                         icon: 'IconSparkles',
-                        body: 'Every flag write comes with a blast-radius estimate and an audit trail an agent can investigate. Point a bot at your roster and it can create, roll out, or clean up a flag from a plain-English description.',
+                        body: 'Describe the flag you want in plain English and an agent creates it, rolls it out, or cleans it up. Before it changes anything, it tells you how many users that change reaches, and every edit is logged for you to review.',
                     },
                 ],
             },
@@ -273,8 +273,8 @@ export const featureFlags = {
                                 <Link to="/docs/self-driving/scouts" state={{ newWindow: true }} className="underline">
                                     scout
                                 </Link>{' '}
-                                runs an audit on its own schedule, watching for ghost flags pointing at nothing and
-                                evaluation cliffs where a healthy flag's call volume vanishes.
+                                audits your flags on its own schedule, watching for flags your code no longer checks and
+                                for a healthy flag whose traffic suddenly stops.
                             </>
                         ),
                     },
@@ -298,12 +298,13 @@ export const featureFlags = {
                         icon: 'IconBrain',
                         body: (
                             <>
-                                Your flags are a signal source for{' '}
+                                Flag cleanup is the kind of maintenance{' '}
                                 <Link to="/docs/self-driving" state={{ newWindow: true }} className="underline">
                                     Self-driving
-                                </Link>
-                                . A scout watches your flag roster against the <code>$feature_flag_called</code> stream
-                                and files a report whenever the two contradict each other.
+                                </Link>{' '}
+                                handles well. A scout reads your flags and your codebase together, so a flag sitting at
+                                100% with a dead branch still behind it becomes a pull request rather than a note in
+                                your Inbox.
                             </>
                         ),
                     },

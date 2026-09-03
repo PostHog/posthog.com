@@ -240,7 +240,7 @@ export const webAnalytics = {
                 },
                 points: [
                     {
-                        title: 'Get alerts wherever you look',
+                        title: 'Get notified when traffic moves',
                         icon: 'IconLetter',
                         body: 'Send visitors, sessions, bounce rate, top pages, and traffic sources to your email or a Slack channel on a schedule. Or set a fixed threshold or percentage change instead, and get notified the moment something dips or spikes.',
                     },
@@ -266,7 +266,7 @@ export const webAnalytics = {
                     {
                         title: 'Bring web analytics into where you build',
                         icon: 'IconSearch',
-                        body: "The PostHog MCP server lets your AI agent query web analytics data. Check traffic after a deploy, investigate a drop, audit your UTM tagging, or read a page's heatmap in your editor or agent chat.",
+                        body: "The PostHog MCP server lets your AI agent query web analytics data. Check traffic after a deploy, investigate a drop, audit your UTM tagging, or pull a page's heatmap into Claude, Cursor, or any MCP client.",
                     },
                     {
                         title: 'No prompt required',
@@ -278,8 +278,8 @@ export const webAnalytics = {
                                     scout
                                 </Link>{' '}
                                 does this every day for each traffic source (organic search, paid ads, referral links,
-                                and so on), comparing it to its own baseline for that day of the week. It only lands a
-                                report in your Inbox when one source actually breaks pattern.
+                                and so on), comparing it to baseline. It only lands a report in your Inbox when one
+                                breaks pattern.
                             </>
                         ),
                     },
@@ -294,7 +294,7 @@ export const webAnalytics = {
                         'A scout catches the referral drop on its own and posts a summary in Slack',
                         'You reply asking what changed, and it cross-references session replays, web vitals, and your UTM tagging to find the cause',
                         'It turns up a slow, broken redirect on the referral landing page',
-                        'You reply "ship it" in the thread, and it opens a pull request with the fix for you to merge',
+                        'You reply "fix the redirect" in the thread, and it opens a pull request with the change for you to merge',
                     ],
                 },
                 points: [
@@ -307,8 +307,8 @@ export const webAnalytics = {
                                 <Link to="/docs/self-driving" state={{ newWindow: true }} className="underline">
                                     Self-driving
                                 </Link>
-                                . A scout compares each channel, entry path, and referrer against its own
-                                seasonality-matched baseline and files a report when one steps out of line.
+                                . A scout compares each channel, entry path, and referrer against what it normally does
+                                on that day of the week, and files a report when one steps out of line.
                             </>
                         ),
                     },

@@ -245,7 +245,7 @@ export const aiObservability = {
                     {
                         title: 'Point an agent at it instead',
                         icon: 'IconSparkles',
-                        body: 'PostHog AI monitors quality trends across your AI products using natural language. Ask about token usage, latency, errors, or costs and PostHog AI queries your trace data to find answers.',
+                        body: 'Ask PostHog AI about token usage, latency, errors, or cost in plain English and it queries your trace data for the answer. No SQL to write, no dashboard to build first.',
                     },
                 ],
             },
@@ -268,24 +268,21 @@ export const aiObservability = {
                 },
                 points: [
                     {
-                        title: 'Test the trimmed prompt first',
-                        icon: 'IconTestTube',
+                        title: 'It can tell you whose spend it is',
+                        icon: 'IconPieChart',
                         body: (
                             <>
-                                Before publishing, open the trace in the{' '}
+                                Tag your traces with{' '}
                                 <Link
-                                    to="/docs/ai-observability/playground"
+                                    to="/docs/ai-observability/custom-properties"
                                     state={{ newWindow: true }}
                                     className="underline"
                                 >
-                                    Playground
+                                    properties
                                 </Link>{' '}
-                                to replay it against the trimmed prompt. Compare models, tokens, and latency side by
-                                side, then save the version that works to{' '}
-                                <Link to="/docs/prompt-management" state={{ newWindow: true }} className="underline">
-                                    Prompt management
-                                </Link>
-                                .
+                                like plan tier, feature, or tenant, and the agent can break cost down by any of them.
+                                One heavy account causing the spike is a different problem from every user costing a
+                                little more.
                             </>
                         ),
                     },
@@ -294,12 +291,13 @@ export const aiObservability = {
                         icon: 'IconMessage',
                         body: (
                             <>
-                                An AI observability{' '}
+                                A{' '}
                                 <Link to="/docs/self-driving/scouts" state={{ newWindow: true }} className="underline">
                                     scout
                                 </Link>{' '}
-                                watches cost, latency, errors, evals, and tool usage across your traffic against their
-                                own baselines, so it catches a spike like this one without you asking.
+                                runs this check for you on a schedule, holding each model and feature to its own recent
+                                history. You never have to pick a spend threshold, because it files a report the moment
+                                one breaks pattern.
                             </>
                         ),
                     },
@@ -319,7 +317,7 @@ export const aiObservability = {
                 },
                 points: [
                     {
-                        title: 'LLM data feeds self driving',
+                        title: 'AI observability feeds self-driving',
                         icon: 'IconBrain',
                         body: (
                             <>

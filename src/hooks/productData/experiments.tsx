@@ -239,7 +239,7 @@ export const experiments = {
                 scenario: {
                     icon: 'IconSplitTesting',
                     steps: [
-                        'You create an experiment for the new onboarding, which sets up the feature flag and a 50/50 split for you',
+                        'You create an A/B test for the new onboarding, which sets up the feature flag and a 50/50 split for you',
                         'You set activation as the primary metric, then launch it',
                         'Two weeks later, the results page shows the test variant winning with statistical significance, so you roll it out to everyone',
                     ],
@@ -264,9 +264,9 @@ export const experiments = {
                         ),
                     },
                     {
-                        title: 'Let the agent run the experiment',
+                        title: 'Point an agent at it instead',
                         icon: 'IconSparkles',
-                        body: 'PostHog AI can set up any experiment with your specified split percentages and goal metrics. It even creates the feature flag with the right variants, and configures targeting rules if you specify a user segment.',
+                        body: "An inconclusive test and a broken one look identical on the results page. PostHog AI tells them apart, so you don't spend two more weeks waiting on a number that was never going to move.",
                     },
                 ],
             },
@@ -285,7 +285,7 @@ export const experiments = {
                     {
                         title: 'Bring experiments into where you build',
                         icon: 'IconSearch',
-                        body: 'The PostHog MCP server exposes experiments as function calling tools, so an AI agent can create an experiment, launch it, read its results, and end it without you switching to the PostHog app. It works in any MCP client like Cursor and Claude Code.',
+                        body: 'The PostHog MCP server gives your AI agent tools to create an experiment, launch it, read its results, and end it, so you never leave your editor. It works in any MCP client, like Cursor or Claude Code.',
                     },
                     {
                         title: 'No prompt required',
@@ -296,8 +296,8 @@ export const experiments = {
                                 <Link to="/docs/self-driving/scouts" state={{ newWindow: true }} className="underline">
                                     scout
                                 </Link>{' '}
-                                runs the same sample ratio check on every experiment automatically, and only flags a
-                                split once there's enough exposures to trust it.
+                                runs that same sample ratio check on every experiment for you, and only flags a lopsided
+                                split once there are enough users in the test to trust the number.
                             </>
                         ),
                     },

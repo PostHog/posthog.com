@@ -2,11 +2,7 @@ import React from 'react'
 import SlotMachineText from 'components/SlotMachineText'
 import posthogIcon from 'images/posthog-icon-white.svg'
 
-/**
- * "Let [icon] PostHog {analyze|debug|…|code}" – the animated wordmark used as
- * the Desktop page's header brand, and reused wherever the page is making the
- * same point: PostHog doing the work, not just watching it.
- */
+/** "Let [icon] PostHog {analyze|debug|…|code}" – the animated wordmark. */
 const LetPostHogScroller = ({
     className = 'text-2xl @xl:text-3xl font-bold tracking-tight',
 }: {

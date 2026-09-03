@@ -340,7 +340,7 @@ export const sessionReplay = {
                     steps: [
                         'Clicks are piling up on one button, so you pull up a handful of recordings to see what users are up to',
                         "Turns out they're trying to expand a section that looks clickable but isn't",
-                        'You sketch a fix and file it, with a better feel for that page than you had an hour ago. But now you need to prompt an agent (or write the code yourself)',
+                        'You sketch a fix and file it, with a better feel for that page than you had an hour ago (which is also how long it took)',
                     ],
                 },
                 points: [
@@ -352,7 +352,7 @@ export const sessionReplay = {
                     {
                         title: 'Point an agent at it instead',
                         icon: 'IconSparkles',
-                        body: "PostHog AI can watch and summarize hundreds of sessions, not just the handful you had time for. Describe the behavior you're looking for, then let the bot build the filters and identify patterns.",
+                        body: "PostHog AI can watch and summarize hundreds of sessions in the time it takes you to get through a handful. Describe the behavior you're looking for and it builds the filters and reports back the pattern.",
                     },
                 ],
             },
@@ -371,19 +371,20 @@ export const sessionReplay = {
                     {
                         title: 'Bring replays into where you build',
                         icon: 'IconSearch',
-                        body: 'The PostHog MCP server lets any MCP client like Cursor and Claude find and read sessions replays. Investigate a bug report, or check how users actually move through a feature before you change it.',
+                        body: 'The PostHog MCP server lets any MCP client, like Cursor or Claude Code, find and read session replays. Investigate a bug report, or check how users actually move through a feature before you change it.',
                     },
                     {
                         title: 'No prompt required',
                         icon: 'IconMessage',
                         body: (
                             <>
-                                Session replay is a signal source for{' '}
-                                <Link to="/docs/self-driving" state={{ newWindow: true }} className="underline">
-                                    Self-driving
-                                </Link>
-                                : it watches every session continuously for rage clicks and other UX friction, and files
-                                what it finds as a report in your inbox.
+                                A{' '}
+                                <Link to="/docs/self-driving/scouts" state={{ newWindow: true }} className="underline">
+                                    scout
+                                </Link>{' '}
+                                watches every session for rage clicks, dead clicks, and other friction, without you
+                                describing what to look for first. It only files a report once the same behavior shows
+                                up across enough sessions to be a pattern.
                             </>
                         ),
                     },
@@ -402,30 +403,34 @@ export const sessionReplay = {
                             </Link>{' '}
                             scanner watches that page's sessions continuously
                         </>,
-                        'The pattern lands as a signal, and it groups with an error tracking signal on the same page into one report',
+                        'The pattern lands as a signal, and groups with an error signal from the same page into one report',
                         'The combined evidence is enough to write the fix: a cursor style and a real click target',
                         'The pull request ships with a summary attached, so you log the "why" along with the diff',
                     ],
                 },
                 points: [
                     {
-                        title: 'It watches the video, not just the clicks',
-                        icon: 'IconEye',
+                        title: 'Session replay feeds self-driving',
+                        icon: 'IconBrain',
                         body: (
                             <>
+                                Your recordings are a signal source for{' '}
+                                <Link to="/docs/self-driving" state={{ newWindow: true }} className="underline">
+                                    Self-driving
+                                </Link>
+                                .{' '}
                                 <Link to="/docs/replay-vision" state={{ newWindow: true }} className="underline">
                                     Replay Vision
                                 </Link>{' '}
-                                watches each session's actual video alongside the click and pageview events, catching
-                                hesitation and where someone's attention drifts (visual cues no event stream can
-                                capture).
+                                watches the actual video alongside the click and pageview events, so it also catches
+                                hesitation and drifting attention (visual cues the events alone never show).
                             </>
                         ),
                     },
                     {
-                        title: 'Context for the fix, not the whole story',
-                        icon: 'IconBrain',
-                        body: "When there's a clear code fix, that combined evidence rides along in the pull request. When a replay only shows the symptom, it lands in your inbox as a report instead, with a reviewer suggested from git blame.",
+                        title: 'When a replay is enough to fix it',
+                        icon: 'IconPullRequest',
+                        body: "A recording that points at a specific element gets a pull request, with the evidence attached. A recording that only shows the symptom lands in your Inbox as a report instead, with a reviewer suggested from the file's git history.",
                     },
                 ],
             },
