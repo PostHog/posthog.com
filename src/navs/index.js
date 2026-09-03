@@ -3798,10 +3798,6 @@ export const docsMenu = {
                             url: '/docs/privacy/data-storage',
                         },
                         {
-                            name: 'Data retention',
-                            url: '/docs/privacy/data-retention',
-                        },
-                        {
                             name: 'GDPR compliance',
                             url: '/docs/privacy/gdpr-compliance',
                         },
@@ -4507,6 +4503,10 @@ export const docsMenu = {
                     url: '/docs/product-analytics/privacy',
                     icon: 'IconShield',
                     color: 'orange',
+                },
+                {
+                    name: 'Data retention',
+                    url: '/docs/product-analytics/data-retention',
                 },
                 {
                     name: 'Resources',
