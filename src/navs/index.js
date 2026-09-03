@@ -5161,6 +5161,7 @@ export const docsMenu = {
                     featured: true,
                     children: [
                         { name: 'Overview', url: '/docs/feature-flags/installation' },
+                        { name: 'AI wizard', url: '/docs/feature-flags/installation/ai-wizard' },
                         { name: 'Web', url: '/docs/feature-flags/installation/web' },
                         { name: '.NET', url: '/docs/feature-flags/installation/dotnet' },
                         { name: 'Android', url: '/docs/feature-flags/installation/android' },
