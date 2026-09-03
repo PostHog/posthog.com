@@ -2,7 +2,6 @@ import React, { useMemo } from 'react'
 import { IconBook, IconGraduationCap, IconPiggyBank, IconPresent } from '@posthog/icons'
 import { TreeMenu } from 'components/TreeMenu'
 import Link from 'components/Link'
-import { DEFAULT_LEARN_PLACEMENT, type LearnPlacement } from './learnPlacement'
 import { learnChapterPath, useBookPages } from 'components/PocketGuides/bookModel'
 import usePlatformList from 'hooks/docs/usePlatformList'
 import type { MenuTab } from 'components/ReaderView'
@@ -38,17 +37,12 @@ const DocsTreeMenu = ({
     productName,
     variant,
     rootHeading,
-    learnVolumeId,
-    learnBasePath,
     activeUrl,
 }: {
     items: DocsMenuItem[]
     productName: string
     variant: 'grouped' | 'listed'
     rootHeading: string
-    /** Set only in the `nested` arm; empty yields no Learn item. */
-    learnVolumeId?: string
-    learnBasePath?: string
     activeUrl?: string
 }) => {
     const installItem = useMemo(() => items.find((i) => i.url && /\/installation$/.test(i.url)), [items])
@@ -69,32 +63,9 @@ const DocsTreeMenu = ({
         )
     }, [items, installItem, platforms])
 
-    // Unconditional: a hook cannot be called behind a branch.
-    const learnPages = useBookPages(learnVolumeId || '')
-
-    const itemsWithLearn = useMemo(() => {
-        if (!learnVolumeId || !learnBasePath || learnPages.length === 0) return itemsWithInstall
-        // A childless item with no `url` is how `buildSections` marks a heading.
-        const learnSection = [
-            { name: 'Learn' },
-            ...learnPages.map((page) => ({
-                name: page.shortTitle || page.title,
-                url: learnChapterPath(learnBasePath, page),
-            })),
-        ]
-        // Skips index 0, the root heading, so Learn lands after Overview.
-        const firstHeading = itemsWithInstall.findIndex(
-            (item, i) => i > 0 && !item.url && !(item.children && item.children.length > 0)
-        )
-        const at = firstHeading === -1 ? itemsWithInstall.length : firstHeading
-        return [...itemsWithInstall.slice(0, at), ...learnSection, ...itemsWithInstall.slice(at)]
-    }, [itemsWithInstall, learnVolumeId, learnBasePath, learnPages])
-
     return (
         <TreeMenu
-            // `TreeMenu` freezes `props.items` (empty-dep `useMemo`); only a remount updates it.
-            key={itemsWithLearn === itemsWithInstall ? 'docs' : 'docs-with-learn'}
-            items={itemsWithLearn as any}
+            items={itemsWithInstall as any}
             variant={variant}
             appearance="sidebar"
             rootHeading={rootHeading}
@@ -168,8 +139,6 @@ interface BuildProductMenuTabsArgs {
     /** Seeds which tab is active on first render. */
     activeSurface: ProductSurface
     currentPath?: string
-    /** From `useLearnPlacement()`: own tab, or heading the Docs tree. */
-    learnPlacement?: LearnPlacement
     /**
      * Optional override for the docs tab rendering style. When omitted, the
      * style is read from the product's `navStyle` in `docsMenu` so the index
@@ -200,7 +169,6 @@ export function buildProductMenuTabs({
     contentRef,
     activeSurface,
     currentPath,
-    learnPlacement = DEFAULT_LEARN_PLACEMENT,
     navStyle,
 }: BuildProductMenuTabsArgs): MenuTab[] {
     if (!productData) return []
@@ -265,15 +233,13 @@ export function buildProductMenuTabs({
                     productName={productName}
                     variant={resolvedNavStyle}
                     rootHeading={productName}
-                    learnVolumeId={learnPlacement === 'nested' ? pocketGuideVolume : undefined}
-                    learnBasePath={surfaceBasePath(productSlug, 'learn')}
                     activeUrl={currentPath}
                 />
             ),
         })
     }
 
-    if (pocketGuideVolume && learnPlacement === 'tab') {
+    if (pocketGuideVolume) {
         tabs.push({
             label: 'Learn',
             value: 'learn',

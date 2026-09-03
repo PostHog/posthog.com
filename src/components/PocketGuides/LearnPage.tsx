@@ -5,7 +5,6 @@ import { ProductSwitcher, buildProductMenuTabs, surfaceBasePath } from 'componen
 import ReaderView from 'components/ReaderView'
 import SEO from 'components/seo'
 import useProduct from 'hooks/useProduct'
-import { useLearnPlacement } from 'components/Products/ReaderViewProduct/learnPlacement'
 
 import LearnSurface from './LearnSurface'
 
@@ -23,14 +22,11 @@ export default function LearnPage({ productHandle, chapter, title, description }
     const productData = useProduct({ handle: productHandle }) as any
     const contentRef = useRef<HTMLElement>(null)
     const location = useLocation()
-    const learnPlacement = useLearnPlacement()
     const menuTabs = buildProductMenuTabs({
         productData,
         contentRef,
-        // No Learn tab in the nested arm, so the reader sits under Docs.
-        activeSurface: learnPlacement === 'nested' ? 'docs' : 'learn',
+        activeSurface: 'learn',
         currentPath: location?.pathname,
-        learnPlacement,
     })
     const volumeId = productData?.pocketGuideVolume
 
