@@ -4470,6 +4470,10 @@ export const docsMenu = {
                     color: 'purple',
                 },
                 {
+                    name: 'Data retention',
+                    url: '/docs/product-analytics/data-retention',
+                },
+                {
                     name: 'People & identity',
                 },
                 {
@@ -4503,10 +4507,6 @@ export const docsMenu = {
                     url: '/docs/product-analytics/privacy',
                     icon: 'IconShield',
                     color: 'orange',
-                },
-                {
-                    name: 'Data retention',
-                    url: '/docs/product-analytics/data-retention',
                 },
                 {
                     name: 'Resources',
