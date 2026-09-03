@@ -275,6 +275,9 @@ export const PENDING_SPECIES: Species[] = [
         route: '/field-guide/the-modal-slammer',
         name: 'The Modal Slammer',
         latin: 'Closeus immediatus',
+        heroImage: '/images/field-guide/modal-slammer.png',
+        plateI: img('modal-slammer', 1),
+        plateII: img('modal-slammer', 2),
         map: { top: 13, left: 33 },
         sections: [
             {
@@ -312,6 +315,9 @@ export const PENDING_SPECIES: Species[] = [
         route: '/field-guide/the-phantom-returner',
         name: 'The Phantom Returner',
         latin: 'Quartum revertus',
+        heroImage: '/images/field-guide/phantom-returner.png',
+        plateI: img('phantom-returner', 1),
+        plateII: img('phantom-returner', 2),
         map: { top: 20, left: 61 },
         sections: [
             {
@@ -351,6 +357,9 @@ Schedule a weekday digest of those summaries to Slack. Every Monday you get a sh
         route: '/field-guide/the-dead-end-wanderer',
         name: 'The Dead-End Wanderer',
         latin: 'Quattuor-zero-quattuor vagus',
+        heroImage: '/images/field-guide/dead-end-wanderer.png',
+        plateI: img('dead-end-wanderer', 1),
+        plateII: img('dead-end-wanderer', 2),
         map: { top: 54, left: 80 },
         sections: [
             {
@@ -388,6 +397,9 @@ Schedule a weekday digest of those summaries to Slack. Every Monday you get a sh
         route: '/field-guide/the-console-opener',
         name: 'The Console-Opener',
         latin: 'Devtoolus curiosus',
+        heroImage: '/images/field-guide/console-opener.png',
+        plateI: img('console-opener', 1),
+        plateII: img('console-opener', 2),
         map: { top: 50, left: 63 },
         sections: [
             {

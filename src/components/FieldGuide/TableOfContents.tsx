@@ -7,8 +7,7 @@ const CORAL = '#E1554E'
 // Field-guide navigation, rendered with the same TreeMenu the docs/handbook
 // sidebars use, so hover, spacing, icons, and the active state all match the site.
 const NAV = [
-    { name: 'The Field Guide' }, // section label
-    { name: 'Contents', url: '/field-guide' },
+    { name: 'The Field Guide', url: '/field-guide' }, // guide home
     { name: 'Foreword', url: '/field-guide/foreword' },
     { name: 'How to use this guide', url: '/field-guide#how-to-use' },
     {

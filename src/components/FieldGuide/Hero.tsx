@@ -6,29 +6,29 @@ import { SPECIES_BY_SLUG } from './speciesData'
 // Creature-free color map (hosted on Cloudinary).
 const MAP_SRC = 'https://res.cloudinary.com/dmukukwp6/image/upload/color_map_e05cd23b04.png'
 const color = (slug: string) => `/images/field-guide/${slug}.png`
-const bw = (slug: string) => `/images/field-guide/hero/${slug}.png`
 
-// Each creature placed at its exact spot on the 1728×1117 map (top-left, % of frame).
-// The 6 illustrated species use their color art; the 4 pending ones keep the
-// black-and-white cutouts until color art exists.
-type Specimen = { slug: string; img: string; left: number; top: number; width: number }
+// Each creature (color art) placed at its exact spot on the 1728×1117 map (top-left, % of frame).
+type Specimen = { slug: string; left: number; top: number; width: number; tip?: 'left' | 'right' }
+// Sizes are normalized so every creature's drawn area is equal; `tip` overrides the
+// default card side for creatures near an edge so the card is never clipped.
 const SPECIMENS: Specimen[] = [
-    { slug: 'rage-clicker', img: color('rage-clicker'), left: 30.09, top: 14.32, width: 8.01 },
-    { slug: 'tab-hopper', img: color('tab-hopper'), left: 51.1, top: 19.79, width: 8.04 },
-    { slug: 'modal-slammer', img: bw('modal-slammer'), left: 62.66, top: 7.4, width: 21.63 },
-    { slug: 'phantom-returner', img: bw('phantom-returner'), left: 67.78, top: 31.24, width: 16.8 },
-    { slug: 'console-opener', img: bw('console-opener'), left: 27.28, top: 46.37, width: 17.6 },
-    { slug: 'pricing-page-loiterer', img: color('pricing-page-loiterer'), left: 52.31, top: 41.99, width: 8.97 },
-    { slug: 'tutorial-skipper', img: color('tutorial-skipper'), left: 75.64, top: 49.78, width: 9.38 },
-    { slug: 'mid-form-fleer', img: color('mid-form-fleer'), left: 29.4, top: 67.95, width: 6.9 },
-    { slug: 'refreshing-pilgrim', img: color('refreshing-pilgrim'), left: 54.75, top: 77.98, width: 6.78 },
-    { slug: 'dead-end-wanderer', img: bw('dead-end-wanderer'), left: 59.0, top: 79.77, width: 19.71 },
+    { slug: 'rage-clicker', left: 30.38, top: 15.32, width: 7.09 },
+    { slug: 'tab-hopper', left: 50.64, top: 19.33, width: 8.32 },
+    { slug: 'modal-slammer', left: 69.59, top: 11.53, width: 7.64, tip: 'left' },
+    { slug: 'phantom-returner', left: 71.89, top: 29.59, width: 8.19, tip: 'left' },
+    { slug: 'console-opener', left: 31.93, top: 45.79, width: 8.24 },
+    { slug: 'pricing-page-loiterer', left: 51.47, top: 41.3, width: 10.87 },
+    { slug: 'tutorial-skipper', left: 75.32, top: 49.44, width: 9.96, tip: 'left' },
+    { slug: 'mid-form-fleer', left: 28.86, top: 67.11, width: 7.87 },
+    { slug: 'refreshing-pilgrim', left: 49.08, top: 74.99, width: 8.83 },
+    { slug: 'dead-end-wanderer', left: 67.75, top: 79.21, width: 9.25 },
 ]
 
 function SpecimenLink({ item, index, inView }: { item: Specimen; index: number; inView: boolean }): JSX.Element {
     const species = SPECIES_BY_SLUG[item.slug]
-    // Point the card outward toward the empty map margin so it never covers another creature.
-    const tipSide = item.left < 50 ? 'left' : 'right'
+    // Point the card outward toward the empty map margin so it never covers another creature;
+    // per-specimen `tip` overrides this near edges so the card is never clipped.
+    const tipSide = item.tip ?? (item.left < 50 ? 'left' : 'right')
     return (
         <Link
             to={species.route}
@@ -44,7 +44,7 @@ function SpecimenLink({ item, index, inView }: { item: Specimen; index: number; 
                 transitionDelay: `${index * 70}ms`,
             }}
         >
-            <img src={item.img} alt={species.name} loading="lazy" />
+            <img src={color(item.slug)} alt={species.name} loading="lazy" />
             <span className="fg-tip" aria-hidden="true">
                 <span className="fg-tip-name">{species.name}</span>
                 <span className="fg-tip-latin">{species.latin}</span>
