@@ -7,6 +7,51 @@
     },
     "headers": [
         {
+            "source": "/docs/:path*",
+            "headers": [
+                {
+                    "key": "Vary",
+                    "value": "Accept"
+                }
+            ]
+        },
+        {
+            "source": "/handbook/:path*",
+            "headers": [
+                {
+                    "key": "Vary",
+                    "value": "Accept"
+                }
+            ]
+        },
+        {
+            "source": "/blog/:path*",
+            "headers": [
+                {
+                    "key": "Vary",
+                    "value": "Accept"
+                }
+            ]
+        },
+        {
+            "source": "/newsletter/:path*",
+            "headers": [
+                {
+                    "key": "Vary",
+                    "value": "Accept"
+                }
+            ]
+        },
+        {
+            "source": "/changelog",
+            "headers": [
+                {
+                    "key": "Vary",
+                    "value": "Accept"
+                }
+            ]
+        },
+        {
             "source": "/(.*\\.md)",
             "headers": [
                 {
