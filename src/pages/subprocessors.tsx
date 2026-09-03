@@ -9,7 +9,9 @@ type TabKey = 'all' | 'core' | 'ai' | 'internal'
 
 type SubprocessorRecord = {
     name: string
+    type: 'cloud' | 'ai' | 'internal'
     reason: string
+    duration?: string
     location: string
     details: string[]
     regions: string[]
@@ -18,14 +20,18 @@ type SubprocessorRecord = {
 const internalSubprocessors: SubprocessorRecord[] = [
     {
         name: 'Hiberly Ltd.',
+        type: 'internal',
         reason: 'Provision of the PostHog services',
+        duration: 'Duration of the agreement',
         location: 'United Kingdom',
         details: [],
         regions: ['United Kingdom'],
     },
     {
         name: 'PostHog GmbH',
+        type: 'internal',
         reason: 'Provision of the PostHog services',
+        duration: 'Duration of the agreement',
         location: 'Germany',
         details: [],
         regions: ['Germany'],
@@ -33,13 +39,23 @@ const internalSubprocessors: SubprocessorRecord[] = [
 ]
 
 const tabs: { key: TabKey; label: string }[] = [
+    { key: 'all', label: 'All Subprocessors' },
     { key: 'core', label: 'Third-Party Subprocessors (Core Services)' },
     { key: 'ai', label: 'Third-Party AI Subprocessors (Only if AI Features are Enabled)' },
     { key: 'internal', label: 'Internal Subprocessors' },
 ]
 
+// Each vendor's `details` array lists their trust center first and their own subprocessor
+// list second. Prefer the URL's own wording, but fall back to that ordering for opaque links
+// (e.g. Microsoft's servicetrust DocumentPage URL) that name neither document in the path.
+function detailLabel(url: string, index: number): string {
+    const namesSubprocessorList =
+        url.toLowerCase().includes('subprocessor') || url.toLowerCase().includes('sub-processor')
+    return namesSubprocessorList || index > 0 ? "Vendor's own subprocessor list" : 'Trust center'
+}
+
 function SubprocessorsPage(): JSX.Element {
-    const [activeTab, setActiveTab] = useState<TabKey>('core')
+    const [activeTab, setActiveTab] = useState<TabKey>('all')
 
     const coreSubprocessors = useMemo(
         () => subprocessors.filter((subprocessor) => subprocessor.type === 'cloud') as unknown as SubprocessorRecord[],
@@ -54,15 +70,12 @@ function SubprocessorsPage(): JSX.Element {
         if (activeTab === 'all') {
             return [...coreSubprocessors, ...aiSubprocessors, ...internalSubprocessors]
         }
-
         if (activeTab === 'core') {
             return coreSubprocessors
         }
-
         if (activeTab === 'ai') {
             return aiSubprocessors
         }
-
         return internalSubprocessors
     }, [activeTab, aiSubprocessors, coreSubprocessors])
 
@@ -79,13 +92,20 @@ function SubprocessorsPage(): JSX.Element {
     const tableRows = useMemo(
         () =>
             activeRows.map((subprocessor) => ({
-                key: subprocessor.name,
+                key: `${subprocessor.type}:${subprocessor.name}`,
                 cells: [
                     {
                         content: <span className="font-semibold">{subprocessor.name}</span>,
                     },
                     {
-                        content: subprocessor.reason,
+                        content: (
+                            <div>
+                                <div>{subprocessor.reason}</div>
+                                {subprocessor.duration && (
+                                    <div className="text-sm opacity-70 mt-1">{subprocessor.duration}</div>
+                                )}
+                            </div>
+                        ),
                     },
                     {
                         content: <div dangerouslySetInnerHTML={{ __html: subprocessor.location }} />,
@@ -94,15 +114,16 @@ function SubprocessorsPage(): JSX.Element {
                         content:
                             subprocessor.details.length > 0 ? (
                                 <div className="space-y-1">
-                                    {subprocessor.details.map((detail) => (
+                                    {subprocessor.details.map((detail, index) => (
                                         <div key={detail}>
                                             <a
                                                 href={detail}
                                                 target="_blank"
                                                 rel="noopener noreferrer"
+                                                title={detail}
                                                 className="[overflow-wrap:anywhere]"
                                             >
-                                                {detail}
+                                                {detailLabel(detail, index)}
                                             </a>
                                         </div>
                                     ))}
@@ -145,20 +166,26 @@ function SubprocessorsPage(): JSX.Element {
                     the applicable contract for services between us and Customer.
                 </p>
 
-                <div className="not-prose mt-6 flex justify-between items-end">
-                    <div>
-                        <div className="flex flex-wrap gap-2">
-                            {tabs.map((tab) => (
-                                <OSButton
-                                    key={tab.key}
-                                    onClick={() => setActiveTab(tab.key)}
-                                    active={activeTab === tab.key}
-                                    className="border border-primary"
-                                >
-                                    {tab.label}
-                                </OSButton>
-                            ))}
-                        </div>
+                <p>
+                    Use the tabs below to view the Subprocessors that apply to your setup. AI Subprocessors apply only
+                    while AI Features are enabled, and each row's <strong>Location of processing</strong> shows where the
+                    vendor processes data for US Cloud and EU Cloud. The <strong>Additional information</strong> column
+                    links to each vendor's own subprocessor list and trust center.
+                </p>
+
+                <div className="not-prose mt-6">
+                    <div className="flex flex-wrap gap-2">
+                        {tabs.map((tab) => (
+                            <OSButton
+                                key={tab.key}
+                                onClick={() => setActiveTab(tab.key)}
+                                active={activeTab === tab.key}
+                                aria-pressed={activeTab === tab.key}
+                                className="border border-primary"
+                            >
+                                {tab.label}
+                            </OSButton>
+                        ))}
                     </div>
                 </div>
 
