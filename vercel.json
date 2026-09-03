@@ -6193,17 +6193,17 @@
         },
         {
             "source": "/docs/api/dashboards-3:ext(\\.md)?",
-            "destination": "/docs/api/dashboards:ext?",
+            "destination": "/docs/api/dashboards",
             "statusCode": 301
         },
         {
             "source": "/docs/api/insights-3:ext(\\.md)?",
-            "destination": "/docs/api/insights:ext?",
+            "destination": "/docs/api/insights",
             "statusCode": 301
         },
         {
             "source": "/docs/api/error-tracking-7:ext(\\.md)?",
-            "destination": "/docs/api/error-tracking:ext?",
+            "destination": "/docs/api/error-tracking",
             "statusCode": 301
         },
         {
