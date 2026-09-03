@@ -13,7 +13,7 @@ tags:
     - AI
 seo:
     metaTitle: 'Are these loops or graphs?'
-    metaDescription: 'Six real agent loops the self-driving team runs every day to build self-driving in PostHog - what each one watches, what it takes off our plate, and where the human sits.'
+    metaDescription: 'Seven real agent loops the self-driving team runs every day to build self-driving in PostHog - what each one watches, what it takes off our plate, and where the human sits.'
 ---
 
 <!--
@@ -98,9 +98,9 @@ A good loop, for me, does three jobs:
 2. **Takes the boring parts off my plate.** The triage, the dedupe, the "is this the same issue as last week?"
 3. **Leaves me feeling in charge.** I can read exactly what it did, why it stayed quiet, and step in anywhere to steer as needed.
 
-So instead of arguing about terminology, here's something more concrete: six real loops the self-driving team runs every day *to build self-driving itself*. 
+So instead of arguing about terminology, here's something more concrete: seven real loops the self-driving team runs every day *to build self-driving itself*. 
 
-Each one is a [scout](/blog/what-is-a-scout) – a small scheduled agent whose logic lives in a markdown skill – plugged into the [self-driving pipeline](/docs/self-driving/self-improving-loop) that turns findings into [inbox](/docs/self-driving/inbox) reports and, often, PRs when that makes sense.
+Six of them are [scouts](/blog/what-is-a-scout) – small scheduled agents whose logic lives in a markdown skill. The seventh has no scout in it at all: a signal source watching the product get used. All of them plug into the same [self-driving pipeline](/docs/self-driving/self-improving-loop) that turns findings into [inbox](/docs/self-driving/inbox) reports and, often, PRs when that makes sense.
 
 For each loop: what it watches, what it takes off our plate, where the human sits – and a verdict on the title question.
 
@@ -312,6 +312,39 @@ Same loop, same hour, opposite outcomes – decided by the quality and completen
 **Where I sit:** at both ends, on purpose. Spec quality in, merge judgment out.
 
 **Loop or graph?** A loop with a human valve at each end. Tighten either valve and the whole thing safely stops.
+
+## Loop 7: The replay vision loop
+
+Every loop so far started with a scout deciding to go looking. This one starts with a person using the product.
+
+[Replay Vision](/docs/replay-vision) watches session recordings – the actual sped-up video, alongside the session's events – and turns what it sees into structured observations. We run a monitor scanner called "Desktop onboarding friction" over recordings of [PostHog Desktop](/desktop). Its prompt is roughly: *watch for people getting visibly stuck*.
+
+An observation with a real problem in it becomes a signal. From there it's the same pipeline as everything else in this post, with one step that deserves a mention: before signals cluster into a report, the pipeline asks whether **one PR would fix all of them**. If the honest answer is no, they stay apart. That check is what stops a vision model's findings collapsing into one useless "fix all the errors" report.
+
+**Where I sit:** nowhere, on this one. I read the report after the fix had merged. The report had already routed itself to the engineer whose commits introduced the code it was pointing at, via git blame on the relevant paths.
+
+**Loop or graph?** Loop, and the first in this post with no scout in it. Someone hits a bug → the recording gets watched → report → PR → merged → the banner stops appearing in recordings. The signal source is the product being used.
+
+<details>
+
+<summary>A real one, from this week: <strong>the bug that only the video saw</strong></summary>
+
+On September 2nd, someone spent the morning in PostHog Desktop working a task. Partway through, a red banner: `Internal error: API Error: Context block is not a thinking block`. Later in the same session they typed a follow-up to the agent and got `Couldn't deliver your message` – and lost what they'd typed.
+
+Fifty minutes after the session ended, the scanner had watched it and emitted two observations, timestamped to the second in the recording. The clustering step matched them as one defect with two faces – and, notably, *refused* to fold them into an existing group about suppressing transient LLM errors, on the grounds that this one needed fixing, not suppressing.
+
+Then the research pass did the part I'd have spent an afternoon on. It found the hard-coded list of retryable provider errors, the exact commit that created it, and the commit that added the last entry – proving the new wording had never been admitted. It checked events: thirteen occurrences across roughly four people, all on September 1st and 2nd, nothing in the nineteen days before. And it wrote down the line that makes this a Replay Vision story:
+
+> The follow-up rejection in this signal produced no analytics event of its own. The session recording is the only telemetry for this surface.
+
+The interactive path kept the run alive on delivery failure and never marked it failed, so nothing was captured. No error tracking issue, no metric to alert on. Only the video.
+
+[PR #93181](https://github.com/PostHog/posthog/pull/93181) opened 36 minutes after the report, 372 lines across 12 files. It matched the whole `API Error: Content block …` family with a regex instead of adding a third string literal, and swapped the raw provider text for something a person can act on. The engineer the report had routed to approved it, drove eight rounds of fixes through the agent, and it merged at 16:34 – six and a half hours after the observation landed.
+
+<!-- inbox ref: 01a0618f-9ed3-77e9-addd-febb4698e435 -->
+<!-- runner-up from the same scanner: 01a03ec0 "gated model says auth failed" -> PR #93611, merged 09-03 -->
+
+</details>
 
 ## Rapid fire: the smaller loops we lean on
 
