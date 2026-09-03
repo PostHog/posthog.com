@@ -251,24 +251,18 @@ Breadcrumbs surface on the issue's **Timeline** tab <SeeFig n={4} />, in order, 
 
 ## Keeping the signal
 
-<!-- WHAT TO WRITE
-     Capture-time controls, in the order you reach for them. This lived on the cut
-     "Decide what to fix first" page, but it is Instrument, not Report – none of it
-     changes what you look at, it changes what gets stored.
+What gets stored is decided before anyone looks at it. Four controls, in the order you reach for them:
 
-     - Sampling and rate limiting: how much you keep, before you pay for it.
-       Source: /docs/error-tracking/rate-limiting.
-     - Burst protection: one client in a loop cannot spend your whole quota.
-       Source: /docs/error-tracking/_snippets/burst-protection.
-     - Suppression rules: browser extensions, ResizeObserver, third-party noise you will
-       never fix. Source: /docs/error-tracking/_snippets/suppression-rules.
-     - before_send: the last hook before anything leaves. Also where you redact.
-       Source: /docs/error-tracking/_snippets/before-send-hook.
+- **Rate limits** cap how many exceptions PostHog ingests, project-wide or per <Term name="issue" />. A token bucket refills across the window you set, so a short burst is absorbed and a runaway loop is not. Anything dropped here is never stored, so it is never billed.
+- **Burst protection** is the same idea on the client. The web and Node SDKs capture ten exceptions of one type in ten seconds, then one every ten seconds after that, so one browser in a loop cannot spend your quota before the server sees it.
+- **Suppression rules** drop every future exception that matches, before it becomes an event. Browser extensions, `ResizeObserver` noise, third-party scripts you will never fix.
+- **`before_send`** is the last hook before anything leaves the client. It is where you drop an exception type outright, and where you redact what you do not want stored.
 
-     Worth stating once: suppression drops it at ingestion, so it is not retroactive and
-     not recoverable. Different from resolving an issue, which keeps the data. -->
+Suppression is not the same as resolving. Resolving an issue keeps its data and reopens it if the error comes back. Suppressing drops the exceptions at ingestion, so it is not retroactive, and what it drops is not recoverable.
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.
+<Prompt>
+Show me my noisiest error tracking issues from the last 7 days and tell me which ones look like retry loops or browser extension noise I should suppress or rate limit.
+</Prompt>
 
 <SeeAlso>
 
