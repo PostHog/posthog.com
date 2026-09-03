@@ -29,8 +29,7 @@ What's included in the events data retention policy:
 - **Feature flag and experiment configurations** (the rules themselves) stick around as long as the flag exists. The _evaluation events_ generated when a flag is checked follow the events retention table above.
 - **Survey responses** are stored as events, so they follow events retention, but the survey definitions themselves stay until you delete them.
 - **Error tracking** `$exception` events are stored as events and follow the same retention policy.
-
-> **Note:** Person profiles are not deleted as long as your organization stays active (any plan, including Free, with at least one event in the past 12 months).
+- **Person profiles** are not affected by events retention.
 
 ## How retention works
 
