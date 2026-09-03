@@ -172,8 +172,13 @@ function DpaGenerator() {
                         <Link to={APP_LEGAL_URL} external className="font-semibold underline">
                             app.posthog.com/legal
                         </Link>{' '}
-                        inside your PostHog organization. That's where you generate, sign, and download a real, valid
-                        DPA — countersigned by us.
+                        inside your PostHog organization. That's where you generate a real, valid DPA — countersigned by
+                        us.
+                    </p>
+                    <p className="text-sm">
+                        It's self-serve and takes a couple of minutes. Nobody at PostHog has to approve it — you add
+                        your company details, we generate the agreement with our signature already on it, and PandaDoc
+                        emails it to you to sign. It's effective the moment you do. Any plan, including the free one.
                     </p>
                     <p className="text-sm">
                         The version below is the exact same agreement, just rendered here for your reading pleasure (and
@@ -299,7 +304,8 @@ function DpaGenerator() {
 
                     <div className="bg-yellow/25 py-3 px-4 text-sm text-center -mx-4 @3xl:-mx-8 mt-0 border-b border-light dark:text-black">
                         <strong>Heads up:</strong> This is a preview. To get a countersigned, valid DPA, generate it
-                        inside your PostHog organization at{' '}
+                        inside your PostHog organization. It's self-serve, and we've already signed it before it reaches
+                        you, so all that's left is your signature. Go to{' '}
                         <a
                             href={APP_LEGAL_URL}
                             target="_blank"
@@ -1224,7 +1230,7 @@ function DpaGenerator() {
                             <p>
                                 10.3. <strong>Data Privacy Framework.</strong> Processor confirms that it participates
                                 in the EU-US Data Privacy Framework, the UK Extension to this Framework and the
-                                Swiss-U.S. Data Privacy Framework (together, the "<strong>DPF</strong>"). The Supplier
+                                Swiss-U.S. Data Privacy Framework (together, the "<strong>DPF</strong>"). The Processor
                                 undertakes to maintain its self-certification to the DPF; to notify Company without
                                 undue delay if Processor determines that it will cease to self-certify to the DPF; and
                                 to notify Company immediately if Processor's participation in the DPF is otherwise
