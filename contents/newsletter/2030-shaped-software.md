@@ -89,7 +89,7 @@ The question to ask is: is a human looking at this for trust and judgement, or t
 
 ## Be everywhere
 
-Agents don't work like apps. They run on their own, often for a long time. Nobody should have to sit in a browser tab watching them. 2030 [products](/products) come to their users, no matter if that means [desktop](/desktop), [Slack](/slack), mobile, email, API, or voice.
+Agents don't work like apps. They run on their own, often for a long time. Nobody should have to sit in a browser tab watching them. 2030 [products](/products) come to their users, no matter if that means [Desktop](/desktop), [Slack](/slack), mobile, email, API, or voice.
 
 These are a shared control plane between humans and agents. Thin clients over a shared backend, so the experience is the same anywhere and the handoff between surfaces is seamless.
 
