@@ -57,41 +57,20 @@ export const surveyDark =
 
 Notebooks enable you to combine the tools of PostHog into a single space for analysis. Rather than jumping between dashboards, insights, replays, experiment results, and more, your chain of analysis exists on a single page.
 
-Notebooks are built out of **cells**. A SQL cell runs [HogQL](/docs/data-warehouse/sql) against your PostHog and [data warehouse](/docs/data-warehouse) data. A Python cell runs in a sandboxed kernel that can read and reshape any previous cell's result. Markdown cells hold prose. Component cells embed insights, replays, feature flags, surveys, and other PostHog objects. It's one page for the query, the analysis, the visualization, and the narrative.
+It provides a flexible interface for doing deeper data analysis, exploring data from different sources, bug investigations, internal documentation, and feature releases by yourself or with your team.
 
-It provides a flexible interface for organizing ad-hoc analysis, bug investigations, internal documentation, and feature releases by yourself or with your team.
+You can write PostHog SQL to query your PostHog specific data or any of your connected warehouse sources.
+Notebooks allow you to write Python code to analyse your data further, and use the output of your queries/analysis in following query nodes for going deeper in your analysis and have a complete analysis.
 
 You can get started with notebooks by going to [the notebook tab](https://app.posthog.com/notebooks) in your PostHog instance and clicking "New notebook."
 
-> **In beta.** Executable SQL and Python cells and the sandbox kernel that powers them are rolling out behind a feature flag. Some features described below (the executable-cell types, the kernel, cross-cell dataframes, and the notebook cell tools over MCP) may not be visible in your project yet. Ask your PostHog contact if you'd like early access.
-
-## Accessing the notebook popover
-
-Critical to combining the functionality of PostHog is being able to access notebooks from anywhere, like a scratchpad for analysis which you can organize and clean up later.
-
-You can access a notebook by clicking it in the sidebar or by clicking and dragging a link anywhere in PostHog.
-
-<ProductVideo
-  videoLight={popoverLight}
-  videoDark={popoverDark}
-  alt="Popover icon"
-  classes="rounded"
-/>
-
-To switch the notebook that opens in the popover, click the title button in the top left of the popover.
-
-<ProductVideo
-  videoLight={switchLight}
-  videoDark={switchDark}
-  alt="Switch popover notebook"
-  classes="rounded"
-/>
+> **In beta.** Python cells are being rolled out behind a feature flag. Some features described related to those (cross-cell dataframes, and the notebook cell tools over MCP) may not be visible in your project yet. Ask your PostHog contact if you'd like early access.
 
 ## Adding content to notebooks
 
 To start adding content to notebooks, start typing. There are three main ways to add content to notebooks:
 
-1. **Slash commands.** Within a notebook, type `/` and a menu will pop up with options for you. For example, `/trend` creates a trend insight.
+1. **Slash commands.** Within a notebook, type `/` and a menu will pop up with options for you. For example, `/trend` adds a trend insight.
 
 <ProductVideo videoLight={slashLight} videoDark={slashDark} alt="Slash command" classes="rounded" />
 
@@ -112,28 +91,26 @@ Every SQL and Python cell has:
 - **Code**, in HogQL for a SQL cell or Python for a Python cell.
 - A **run button** that dispatches the code and streams back the result. Results are stored on the cell, so the notebook still shows the last result when you reopen it.
 - A **result view** below the code, with the table (SQL), rendered figures (Python matplotlib), and any `stdout`/`stderr`.
+- A **dataframe name** given for its output, so that other cells can reference (see below).
 - A **title** in the cell header. Set it to say what the cell shows, so a reader can skim the notebook without reading the code.
-- A **dataframe name** other cells can reference (see below).
 
-Add an executable cell with the slash menu (`/sql`, `/python`) or the `+` button on an empty line. A notebook holds at most 50 cells.
+Add an executable cell with the slash menu (`/sql`, `/python`) or the `+` button on an empty line.
 
 ### SQL cells
 
 SQL cells run HogQL against your events, persons, sessions, and any synced [data warehouse](/docs/data-warehouse) tables. The result renders as a table you can chart.
-
-A SQL cell that references a dataframe another cell created (for example a Python cell's `pandas.DataFrame`) runs on the notebook's local DuckDB engine automatically. The syntax is the same as for a ClickHouse-backed query, so you can join local dataframes with warehouse tables in a single cell.
+A SQL cell that references a dataframe another cell created (for example a Python cell's `pandas.DataFrame`) runs on the notebook's local engine automatically. You can join local dataframes with warehouse tables in a single cell.
 
 ### Python cells
 
-Python cells run in a sandboxed kernel with pandas, numpy, scipy, scikit-learn, and matplotlib preinstalled. Use them for analysis a query can't express: reshaping a SQL result, joining across dataframes, statistics, clustering, forecasting, plotting.
+Python cells run in a sandboxed compute with pandas, numpy, scipy, scikit-learn, and matplotlib preinstalled. Use them for deeper analysis: reshaping a SQL result, joining across dataframes, statistics, clustering, forecasting, plotting.
+The first Python cell in a notebook starts the node, which takes a few seconds. Subsequent cells reuse the same compute, so dataframes stay in memory across runs. SQL-only notebooks never start a compute node.
 
-The first Python cell in a notebook starts the kernel, which takes a few seconds. Subsequent cells reuse the same kernel, so dataframes stay in memory across runs. SQL-only notebooks never start a kernel.
-
-You can configure the kernel's CPU cores, memory, and idle timeout from the **compute menu** at the top of the notebook. Changing these while a kernel is running requires a restart, which clears any materialized dataframes.
+You can choose a pre-set defined compute for your notebook, or configure it manually (CPU cores, memory, timeout) as it fits best to your needs, from the **compute menu** at the top of the notebook. Changing these while a node is running requires a restart, which clears any materialized dataframes.
 
 ### Sharing data between cells
 
-Every SQL and Python cell produces a named **dataframe** (`sql_df`, `df`, or a name you pick). Other cells reference that dataframe by name:
+Every SQL and Python cell produces a named **dataframe** (`top_mrr_clients_df`, `uploads_per_month`, or a name you pick). Other cells reference that dataframe by name:
 
 - A Python cell reads it as a `pandas.DataFrame` variable.
 - A SQL cell reads it as a table via the local DuckDB engine.
@@ -291,8 +268,8 @@ If you've [connected the PostHog MCP server](/docs/model-context-protocol#get-st
 - Updating a cell's code and re-running it, with a list of downstream cells that are now stale.
 - Deleting a cell, with a list of any dataframe references now orphaned.
 - Reading the notebook's current state: title, markdown, cells, dependencies, and which cells are stale.
-- Listing the kernel's live dataframes with columns, types, and row counts.
-- Configuring the kernel's compute (CPU, memory, idle timeout).
+- Listing your node's live dataframes with columns, types, and row counts.
+- Configuring the compute (CPU, memory, idle timeout).
 
 See the [notebook tools in the MCP reference](/docs/model-context-protocol/tools) for the full list, and the [MCP use cases](/docs/model-context-protocol/use-cases#analyze-data-in-a-notebook) for prompt examples.
 
@@ -300,7 +277,8 @@ See the [notebook tools in the MCP reference](/docs/model-context-protocol/tools
 
 ### How much do notebooks cost?
 
-Notebooks are free. [Sign up for free](https://app.posthog.com/signup) to try them out.
+Notebooks are free except the sandboxed compute you attach to them when you're running Python nodes.
+You can choose a pre-set defined compute, or configure it manually as it fits best to your needs.
 
 ### What are the differences between dashboards and notebooks?
 
