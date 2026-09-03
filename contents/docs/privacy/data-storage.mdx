@@ -16,6 +16,7 @@ This guide covers the following features:
 | ----------------------------------------------------------------- | ---------------------------------------------------------------- |
 | [Data storage location](#data-storage-location)                   | Control where your data is physically stored for GDPR compliance |
 | [Processing data before storage](#processing-data-before-storage) | Redact or filter data before it's stored in PostHog              |
+| [Data retention](#data-retention)                                 | How long events stay queryable on each plan                      |
 | [Data deletion](#data-deletion)                                   | Tools to help comply with data deletion requests                 |
 | [Data access control](#data-access-control)                       | Manage who can access what data in PostHog                       |
 
@@ -96,6 +97,24 @@ This allows you to enrich your events with location data or filter out bot traff
 | IP Address                  | `$ip`                   | `192.168.1.1`              |
 
 </details>
+
+## Data retention
+
+How long PostHog keeps your events depends on your plan. Retention is measured from the event's own timestamp, not from when it was ingested, so a historical import of events older than your window ages out immediately.
+
+| Plan          | Events retention |
+| ------------- | ---------------- |
+| Free          | 1 year           |
+| Pay-as-you-go | 2 years          |
+| Boost         | 5 years          |
+| Scale         | 7 years          |
+| Enterprise    | 7 years          |
+
+These windows apply to organizations that subscribe to a paid plan on or after September 3, 2026. Organizations that were already on a paid plan before that date keep 7 years of retention for as long as they stay on a paid plan. Retention is set at the organization level, so every project in an organization shares the same window.
+
+Events retention covers everything stored as an event: pageviews, autocapture, custom events, feature flag evaluation events, survey responses, and error tracking exceptions. It does not cover feature flag, experiment, or survey definitions, which stay until you delete them, and it does not delete person profiles while your organization is active. Session recordings have their own [retention settings](/docs/session-replay/recording-retention).
+
+Events older than your window are hidden from queries. They are not deleted right away: we keep hidden events for at least six months, and upgrading to a plan with a longer window during that time restores access. After that, they can be permanently deleted. If you need the data for longer, upgrade your plan or set up a [batch export](/docs/cdp/batch-exports) to your own warehouse.
 
 ## Data deletion
 
