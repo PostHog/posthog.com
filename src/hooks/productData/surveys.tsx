@@ -213,12 +213,34 @@ export const surveys = {
                     {
                         title: 'Get notified of new responses',
                         icon: 'IconHandwave',
-                        body: 'You can send survey responses to Slack, Discord, Microsoft Teams, or a custom webhook. For more advanced use cases, you can also use data pipeline destinations.',
+                        body: (
+                            <>
+                                You can send survey responses to Slack, Discord, Microsoft Teams, or a custom webhook.
+                                For more advanced use cases, you can also use{' '}
+                                <Link to="/docs/cdp/destinations" state={{ newWindow: true }} className="underline">
+                                    data pipeline destinations
+                                </Link>
+                                .
+                            </>
+                        ),
                     },
                     {
                         title: 'Point an agent at the answers instead',
                         icon: 'IconSparkles',
-                        body: 'You can add a Survey Results widget to any dashboard to track survey performance alongside other metrics. Instead of reading hundreds of responses manually, ask PostHog AI to surface the patterns.',
+                        body: (
+                            <>
+                                You can add a{' '}
+                                <Link
+                                    to="/docs/surveys/viewing-results"
+                                    state={{ newWindow: true }}
+                                    className="underline"
+                                >
+                                    Survey Results widget
+                                </Link>{' '}
+                                to any dashboard to track survey performance alongside other metrics. Instead of reading
+                                hundreds of responses manually, ask PostHog AI to surface the patterns.
+                            </>
+                        ),
                     },
                 ],
             },
@@ -242,7 +264,16 @@ export const surveys = {
                     {
                         title: 'No prompt required',
                         icon: 'IconMessage',
-                        body: "A scout reads the same responses on a schedule, clustering scattered comments into one theme, and it holds NPS and CSAT drops to that survey's own baseline instead of a fixed score.",
+                        body: (
+                            <>
+                                A{' '}
+                                <Link to="/docs/self-driving/scouts" state={{ newWindow: true }} className="underline">
+                                    scout
+                                </Link>{' '}
+                                reads the same responses on a schedule, clustering scattered comments into one theme,
+                                and it holds NPS and CSAT drops to that survey's own baseline instead of a fixed score.
+                            </>
+                        ),
                     },
                 ],
             },
@@ -261,7 +292,16 @@ export const surveys = {
                     {
                         title: 'Surveys feed self-driving',
                         icon: 'IconBrain',
-                        body: "Surveys aren't just a results tab – they're a signal source to make your product self-driving. Scouts connect sentiment to other data points to know what's a real pattern versus noise.",
+                        body: (
+                            <>
+                                Your surveys are a signal source for{' '}
+                                <Link to="/docs/self-driving" state={{ newWindow: true }} className="underline">
+                                    Self-driving
+                                </Link>
+                                . Scouts connect sentiment to other data points to know what's a real pattern versus
+                                noise.
+                            </>
+                        ),
                     },
                     {
                         title: 'You stay in the loop',

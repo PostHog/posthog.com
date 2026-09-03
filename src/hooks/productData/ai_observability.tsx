@@ -217,8 +217,8 @@ export const aiObservability = {
         ],
     },
     useCaseRamp: {
-        intro: 'AI Observability works at three levels. You can read the traces yourself, ask an agent what your AI features cost and how fast they are, or let PostHog work proactively with your data.',
-        scenario: 'Your token spend doubles overnight (wtf?!)',
+        intro: 'AI Observability works at three levels. You can read the traces yourself, ask an agent to summarize and analyze them, or let PostHog work proactively with your data.',
+        scenario: 'Your AI token bill doubles (wtf?!)',
         columns: [
             {
                 level: 'Do it yourself',
@@ -226,21 +226,26 @@ export const aiObservability = {
                 scenario: {
                     icon: 'IconLlmAnalytics',
                     steps: [
-                        'The invoice from your model provider comes in higher than last month, so you open the cost dashboard',
+                        'The invoice from your model provider comes in much higher than last month',
                         'You break spend down by model, then by feature, and find one prompt sending far more tokens than you expected',
-                        'You open a trace from that feature, then edit and trim that prompt in Prompt management',
+                        <>
+                            You open a trace from that feature, then edit and trim that prompt in{' '}
+                            <Link to="/docs/prompt-management" state={{ newWindow: true }} className="underline">
+                                Prompt management
+                            </Link>
+                        </>,
                     ],
                 },
                 points: [
                     {
-                        title: 'You can already alert on this',
-                        icon: 'IconHandwave',
-                        body: 'A native anomaly detection alert on the AI Observability dashboard can flag cost spikes before you think to check. Finding the cause of the spike is still on you, though.',
+                        title: 'Keep an eye on your AI',
+                        icon: 'IconEye',
+                        body: 'AI Observability captures every call your AI product makes and the tools it reached for along the way. It stitches them into traces so when something goes wrong, you see the whole conversation instead of a single failed request.',
                     },
                     {
                         title: 'Point an agent at it instead',
                         icon: 'IconSparkles',
-                        body: 'Every generation is captured with its model, latency, and cost attached. Point an agent at that data and it compares every trace at once, instead of you picking one to start with.',
+                        body: 'PostHog AI monitors quality trends across your AI products using natural language. Ask about token usage, latency, errors, or costs and PostHog AI queries your trace data to find answers.',
                     },
                 ],
             },
@@ -252,19 +257,51 @@ export const aiObservability = {
                     steps: [
                         'You ask PostHog AI what you spent this week, broken down by model',
                         'It names the model whose spend jumped, then pulls the most expensive calls behind it, along with the exceptions and session replays tied to those same traces',
-                        'You tag @PostHog in Slack to trim that prompt in Prompt management and publish it, then ask it to confirm tomorrow that spend actually dropped',
+                        <>
+                            You tag @PostHog in Slack to trim that prompt in{' '}
+                            <Link to="/docs/prompt-management" state={{ newWindow: true }} className="underline">
+                                Prompt management
+                            </Link>{' '}
+                            and publish it, then ask it to confirm tomorrow that spend actually dropped
+                        </>,
                     ],
                 },
                 points: [
                     {
-                        title: "Turns out, there's more",
-                        icon: 'IconClockRewind',
-                        body: "Prompt management keeps every version, so publishing the fix doesn't erase anything. It stays live behind a label, and undoing a bad edit is flipping that label back, not writing a second fix.",
+                        title: 'Test the trimmed prompt first',
+                        icon: 'IconTestTube',
+                        body: (
+                            <>
+                                Before publishing, open the trace in the{' '}
+                                <Link
+                                    to="/docs/ai-observability/playground"
+                                    state={{ newWindow: true }}
+                                    className="underline"
+                                >
+                                    Playground
+                                </Link>{' '}
+                                to replay it against the trimmed prompt. Compare models, tokens, and latency side by
+                                side, then save the version that works to{' '}
+                                <Link to="/docs/prompt-management" state={{ newWindow: true }} className="underline">
+                                    Prompt management
+                                </Link>
+                                .
+                            </>
+                        ),
                     },
                     {
                         title: 'No prompt required',
                         icon: 'IconMessage',
-                        body: 'A plain alert only tells you something is off. A scout narrows that same spike to one model and one feature, attaches the sampled traces as evidence, and lands the finished investigation in your Inbox instead of just a ping.',
+                        body: (
+                            <>
+                                An AI observability{' '}
+                                <Link to="/docs/self-driving/scouts" state={{ newWindow: true }} className="underline">
+                                    scout
+                                </Link>{' '}
+                                watches cost, latency, errors, evals, and tool usage across your traffic against their
+                                own baselines, so it catches a spike like this one without you asking.
+                            </>
+                        ),
                     },
                 ],
             },
@@ -274,31 +311,31 @@ export const aiObservability = {
                 scenario: {
                     icon: 'IconHandMoney',
                     steps: [
-                        'An AI observability scout tracks spend against your own baseline, so it needs no budget threshold to tell that this is unusual',
-                        'It narrows the jump to one model and one feature, and attaches the traces it sampled as evidence',
-                        'The report lands in your Inbox and Slack, routed to whoever owns that feature',
-                        'Rewriting a prompt is a product decision, so it asks rather than opening a pull request. Reply in the thread and it will publish the new version',
+                        'A scout catches the spike against its own history the moment it happens, no alert threshold required',
+                        'It isolates the model and feature behind it, with the sampled traces attached as evidence',
+                        'The report lands in your Inbox, tagged to whoever owns that feature. Reply to approve the trimmed prompt and it publishes the new version',
+                        'A week later, it checks that same baseline again to confirm spend actually dropped',
                     ],
                 },
                 points: [
                     {
-                        title: 'Your own history is the threshold',
+                        title: 'LLM data feeds self driving',
                         icon: 'IconBrain',
                         body: (
                             <>
-                                A{' '}
-                                <Link to="/docs/self-driving/scouts" state={{ newWindow: true }} className="underline">
-                                    scout
-                                </Link>{' '}
-                                compares this week to your own history, not a number someone picked in advance. That's
-                                what lets it flag one model drifting without treating a busy afternoon as an incident.
+                                Your LLM traces are a signal source for{' '}
+                                <Link to="/docs/self-driving" state={{ newWindow: true }} className="underline">
+                                    Self-driving
+                                </Link>
+                                . A scout watches cost, latency, errors, volume, and evaluation performance, and routes
+                                reports to human reviewers.
                             </>
                         ),
                     },
                     {
-                        title: 'It watches your evaluations too',
-                        icon: 'IconLlmPromptEvaluation',
-                        body: 'Cost and latency are easy to put on a dashboard. A scoring evaluation drifting downward, or one that broke and has been passing everything since, is the kind of thing a scout is there to catch.',
+                        title: 'Bring traces into where you build',
+                        icon: 'IconSearch',
+                        body: "The PostHog MCP server lets your AI coding agent query LLM traces directly from your code editor. Pull up real traces and behavior data while you're building the AI feature in your product.",
                     },
                 ],
             },

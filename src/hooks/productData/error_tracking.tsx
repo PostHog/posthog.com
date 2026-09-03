@@ -228,7 +228,13 @@ export const errorTracking = {
                     {
                         title: 'Get notified of new errors',
                         icon: 'IconBell',
-                        body: 'You can set up alerts for new issues being created or reopened, with notifications sent via Slack, Discord, Teams, or an HTTP webhook. You can also create trend alerts on $exception events for more flexibility.',
+                        body: (
+                            <>
+                                You can set up alerts for new issues being created or reopened, with notifications sent
+                                via Slack, Discord, Teams, or an HTTP webhook. You can also create trend alerts on{' '}
+                                <code>$exception</code> events for more flexibility.
+                            </>
+                        ),
                     },
                     {
                         title: 'Point an agent at it instead',

@@ -345,14 +345,14 @@ export const sessionReplay = {
                 },
                 points: [
                     {
-                        title: "Turns out, there's more",
-                        icon: 'IconHandwave',
-                        body: "Watching a handful of sessions like this is how you build a real feel for your product. Filters in PostHog Web help sort ones worth watching. That feel doesn't scale past your free time for playback.",
+                        title: 'Find replays worth watching',
+                        icon: 'IconFilter',
+                        body: 'Watching user behavior is how you build a real feel for your product. Filter by rage clicks, exceptions, custom events, person properties, or feature flag variant, then save what you find as a collection and share or embed it.',
                     },
                     {
                         title: 'Point an agent at it instead',
                         icon: 'IconSparkles',
-                        body: 'PostHog AI can watch and summarize hundreds of sessions, not just the handful you had time for, turning the same kind of hunch into a pattern you can prove.',
+                        body: "PostHog AI can watch and summarize hundreds of sessions, not just the handful you had time for. Describe the behavior you're looking for, then let the bot build the filters and identify patterns.",
                     },
                 ],
             },
@@ -369,14 +369,23 @@ export const sessionReplay = {
                 },
                 points: [
                     {
-                        title: "Turns out, there's more",
+                        title: 'Bring replays into where you build',
                         icon: 'IconSearch',
-                        body: "It can slice that same pattern by who's affected, too – ask whether it's your free users or your highest-paying accounts hitting this, and you'll know whether it's a nice-to-fix or a today problem.",
+                        body: 'The PostHog MCP server lets any MCP client like Cursor and Claude find and read sessions replays. Investigate a bug report, or check how users actually move through a feature before you change it.',
                     },
                     {
                         title: 'No prompt required',
                         icon: 'IconMessage',
-                        body: 'Replay Vision watches every session for the same kind of pattern continuously, no prompt required, turning what it sees into queryable data instead of a one-off answer.',
+                        body: (
+                            <>
+                                Session replay is a signal source for{' '}
+                                <Link to="/docs/self-driving" state={{ newWindow: true }} className="underline">
+                                    Self-driving
+                                </Link>
+                                : it watches every session continuously for rage clicks and other UX friction, and files
+                                what it finds as a report in your inbox.
+                            </>
+                        ),
                     },
                 ],
             },
@@ -386,7 +395,13 @@ export const sessionReplay = {
                 scenario: {
                     icon: 'IconSearch',
                     steps: [
-                        "A Replay Vision scanner watches that page's sessions continuously",
+                        <>
+                            A{' '}
+                            <Link to="/docs/replay-vision" state={{ newWindow: true }} className="underline">
+                                Replay Vision
+                            </Link>{' '}
+                            scanner watches that page's sessions continuously
+                        </>,
                         'The pattern lands as a signal, and it groups with an error tracking signal on the same page into one report',
                         'The combined evidence is enough to write the fix: a cursor style and a real click target',
                         'The pull request ships with a summary attached, so you log the "why" along with the diff',
@@ -402,15 +417,15 @@ export const sessionReplay = {
                                     Replay Vision
                                 </Link>{' '}
                                 watches each session's actual video alongside the click and pageview events, catching
-                                hesitation and where someone's attention drifts – visual cues no event stream captures
-                                on its own.
+                                hesitation and where someone's attention drifts (visual cues no event stream can
+                                capture).
                             </>
                         ),
                     },
                     {
                         title: 'Context for the fix, not the whole story',
                         icon: 'IconBrain',
-                        body: "When there's a clear code fix, that combined evidence from signal sources rides along in the pull request generated in your inbox. When a replay only shows the symptom, it routes to whoever owns that page instead.",
+                        body: "When there's a clear code fix, that combined evidence rides along in the pull request. When a replay only shows the symptom, it lands in your inbox as a report instead, with a reviewer suggested from git blame.",
                     },
                 ],
             },

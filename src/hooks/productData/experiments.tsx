@@ -248,7 +248,20 @@ export const experiments = {
                     {
                         title: 'Your test already checks itself',
                         icon: 'IconHandwave',
-                        body: 'Once an experiment has enough exposures, PostHog runs a sample ratio mismatch check automatically and flags it right there on the page. You still have to open the page to see whether your test passed it.',
+                        body: (
+                            <>
+                                Once an experiment has enough exposures, PostHog runs a{' '}
+                                <Link
+                                    to="/docs/experiments/exposures#sample-ratio-mismatch-detection"
+                                    state={{ newWindow: true }}
+                                    className="underline"
+                                >
+                                    sample ratio mismatch
+                                </Link>{' '}
+                                check automatically and flags it right there on the page. You still have to open the
+                                page to see whether your test passed it.
+                            </>
+                        ),
                     },
                     {
                         title: 'Let the agent run the experiment',
@@ -277,7 +290,16 @@ export const experiments = {
                     {
                         title: 'No prompt required',
                         icon: 'IconMessage',
-                        body: "A scout runs the same sample ratio check on every experiment automatically, and only flags a split once there's enough exposures to trust it.",
+                        body: (
+                            <>
+                                A{' '}
+                                <Link to="/docs/self-driving/scouts" state={{ newWindow: true }} className="underline">
+                                    scout
+                                </Link>{' '}
+                                runs the same sample ratio check on every experiment automatically, and only flags a
+                                split once there's enough exposures to trust it.
+                            </>
+                        ),
                     },
                 ],
             },
@@ -296,8 +318,18 @@ export const experiments = {
                 points: [
                     {
                         title: 'Experiments feed self-driving',
-                        icon: 'IconRefresh',
-                        body: 'Experiments are a signal source for Self-driving. A scout reads the exposure stream of every running experiment against the split, status, and flag state you configured, and files each confirmed contradiction as a report in your inbox.',
+                        icon: 'IconBrain',
+                        body: (
+                            <>
+                                Experiments are a signal source for{' '}
+                                <Link to="/docs/self-driving" state={{ newWindow: true }} className="underline">
+                                    Self-driving
+                                </Link>
+                                . A scout reads the exposure stream of every running experiment against the split,
+                                status, and flag state you configured, and files each confirmed contradiction as a
+                                report in your inbox.
+                            </>
+                        ),
                     },
                     {
                         title: 'It can propose the test itself',

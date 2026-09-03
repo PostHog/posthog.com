@@ -61,7 +61,7 @@ interface RampScenario {
      * time so the data stays free of JSX. An unknown name renders no icon.
      */
     icon?: string
-    steps: string[]
+    steps: React.ReactNode[]
 }
 
 /** What this level means for the ramp. Prose, not steps – steps belong to `RampScenario`. */
@@ -254,8 +254,8 @@ const UseCaseRamp = ({ id, productData }: SectionComponentProps): JSX.Element | 
                                              * value inherited from the ol.
                                              */}
                                             <ol className="m-0 pl-5 text-[13px] leading-snug text-secondary">
-                                                {column.scenario.steps.map((step) => (
-                                                    <li key={step} className="mt-1 list-decimal">
+                                                {column.scenario.steps.map((step, stepIndex) => (
+                                                    <li key={stepIndex} className="mt-1 list-decimal">
                                                         {step}
                                                     </li>
                                                 ))}

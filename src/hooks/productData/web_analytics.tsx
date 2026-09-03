@@ -228,15 +228,21 @@ export const webAnalytics = {
                     icon: 'IconGlobe',
                     steps: [
                         'Monday morning you open the dashboard and referral traffic looks low',
-                        'You check the session attribution explorer to see which referrer or UTM stopped showing up',
+                        <>
+                            You check the{' '}
+                            <Link to="/docs/web-analytics/dashboard" state={{ newWindow: true }} className="underline">
+                                session attribution explorer
+                            </Link>{' '}
+                            to see which referrer or UTM stopped showing up
+                        </>,
                         'You take it to whoever owns that channel, and they get it running again',
                     ],
                 },
                 points: [
                     {
-                        title: "Turns out, there's more",
-                        icon: 'IconHandwave',
-                        body: "A weekly digest emails you visitors, sessions, bounce rate, top pages, and traffic sources, so the numbers reach you without opening the dashboard. It's a fixed weekly snapshot, so a Tuesday drop waits until the next one to show up.",
+                        title: 'Get alerts wherever you look',
+                        icon: 'IconLetter',
+                        body: 'Send visitors, sessions, bounce rate, top pages, and traffic sources to your email or a Slack channel on a schedule. Or set a fixed threshold or percentage change instead, and get notified the moment something dips or spikes.',
                     },
                     {
                         title: 'Point an agent at it instead',
@@ -251,21 +257,31 @@ export const webAnalytics = {
                 scenario: {
                     icon: 'IconMagicWand',
                     steps: [
-                        'You ask PostHog AI: "which channels dropped in the last 30 days?"',
-                        'It names the channel that fell, and you ask it to check whether that landing page is throwing errors',
-                        'It finds a broken redirect in Error Tracking, and you ask it to open the fix, so the drop ends in a merged pull request instead of just an explanation',
+                        'You ask PostHog AI: "how\'s my traffic doing this week?"',
+                        'It breaks visitors down by source, device, and landing page in one answer. You ask it to look closer at referral, the channel dragging the average down',
+                        'PostHog AI traces the drop to a broken redirect on that referral page in Error Tracking. It can even check whether the same broken link is costing you traffic on other pages',
                     ],
                 },
                 points: [
                     {
-                        title: "Turns out, there's more",
+                        title: 'Bring web analytics into where you build',
                         icon: 'IconSearch',
-                        body: "Comparing channels by hand means opening the dashboard and doing the math yourself. Asking PostHog AI to keep digging, whatever the cause turns out to be, costs one more message in the same chat, so a channel drop doesn't stop at 'referral fell' when the real answer is 'the redirect broke.'",
+                        body: "The PostHog MCP server lets your AI agent query web analytics data. Check traffic after a deploy, investigate a drop, audit your UTM tagging, or read a page's heatmap in your editor or agent chat.",
                     },
                     {
                         title: 'No prompt required',
                         icon: 'IconMessage',
-                        body: 'A scout runs that same comparison every day without being asked, and only lands in your Inbox when a channel actually steps away from its own pattern.',
+                        body: (
+                            <>
+                                A{' '}
+                                <Link to="/docs/self-driving/scouts" state={{ newWindow: true }} className="underline">
+                                    scout
+                                </Link>{' '}
+                                does this every day for each traffic source (organic search, paid ads, referral links,
+                                and so on), comparing it to its own baseline for that day of the week. It only lands a
+                                report in your Inbox when one source actually breaks pattern.
+                            </>
+                        ),
                     },
                 ],
             },
@@ -275,21 +291,30 @@ export const webAnalytics = {
                 scenario: {
                     icon: 'IconPulse',
                     steps: [
-                        'A web analytics scout compares each channel to its usual pattern for the time of year, unprompted',
-                        'It catches the referral drop in week one, and the report lands in your Inbox',
-                        'A traffic problem usually lives outside your code, so it routes to you rather than opening a pull request',
-                        'When the cause is your site, like a page that went slow, you reply @PostHog and review the pull request it opens',
+                        'A scout catches the referral drop on its own and posts a summary in Slack',
+                        'You reply asking what changed, and it cross-references session replays, web vitals, and your UTM tagging to find the cause',
+                        'It turns up a slow, broken redirect on the referral landing page',
+                        'You reply "ship it" in the thread, and it opens a pull request with the fix for you to merge',
                     ],
                 },
                 points: [
                     {
-                        title: 'It checks four windows, not one',
+                        title: 'Your web traffic feeds self-driving',
                         icon: 'IconBrain',
-                        body: "Each finding gets compared against the same week 7, 14, 21, and 28 days back, so a Tuesday dip doesn't get mistaken for a Monday-shaped week. A site launched last week has no history to check against yet.",
+                        body: (
+                            <>
+                                Web Analytics is a signal source for{' '}
+                                <Link to="/docs/self-driving" state={{ newWindow: true }} className="underline">
+                                    Self-driving
+                                </Link>
+                                . A scout compares each channel, entry path, and referrer against its own
+                                seasonality-matched baseline and files a report when one steps out of line.
+                            </>
+                        ),
                     },
                     {
                         title: "Most fixes aren't in your code",
-                        icon: 'IconStack',
+                        icon: 'IconExternal',
                         body: (
                             <>
                                 A referral going dark or broken UTM tagging lives in your campaign tooling, not a repo,

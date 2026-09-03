@@ -219,30 +219,30 @@ export const productAnalytics = {
         ],
     },
     useCaseRamp: {
-        intro: 'Product Analytics works at three levels. You can build funnels and dashboards yourself, ask an agent to build them for you, or let PostHog work proactively with your data.',
-        scenario: 'Signup conversion drops ten points overnight',
+        intro: 'Product Analytics works at three levels. You can query events and build insights yourself, ask an agent to build them for you, or let PostHog work proactively with your data.',
+        scenario: 'Did paying customers actually adopt the feature you just shipped?',
         columns: [
             {
                 level: 'Do it yourself',
                 surfaces: ['web'],
                 scenario: {
-                    icon: 'IconFunnels',
+                    icon: 'IconGraph',
                     steps: [
-                        'You happen to open your signup dashboard and the number looks wrong',
-                        'You dig through paths and recordings to find the step where people now leave',
-                        'You file the bug with the drop-off step attached, and the fix ships in the next release',
+                        'You track clicks on the new feature as one metric',
+                        'You chart it as a trend, then break it down by plan using your Stripe data synced into PostHog',
+                        'Paying customers barely touch it, but free users love it, so you flag it to the team',
                     ],
                 },
                 points: [
                     {
-                        title: 'You can already alert on this',
-                        icon: 'IconHandwave',
-                        body: 'Threshold and anomaly detection alerts work on any funnel, trend, or retention insight, so a real drop can message Slack or email on its own. You still have to build the funnel and set the alert up.',
+                        title: "It's all under one roof",
+                        icon: 'IconDatabase',
+                        body: 'Every event ties back to the person or company that triggered it, and the Data Warehouse syncs in external sources like Stripe, HubSpot, and Zendesk. Product usage and business data both live in PostHog.',
                     },
                     {
                         title: 'Point an agent at it instead',
                         icon: 'IconSparkles',
-                        body: 'Every funnel and retention insight has an actors query behind it, listing exactly who dropped off a step. Point an agent at that data and it can pull the list and start digging the moment you ask.',
+                        body: 'Ask PostHog AI in plain English and it builds the trend, joins in your Stripe data, and hands you the breakdown. What used to take an afternoon of SQL queries now takes one prompt.',
                     },
                 ],
             },
@@ -252,21 +252,30 @@ export const productAnalytics = {
                 scenario: {
                     icon: 'IconMagicWand',
                     steps: [
-                        'You ask PostHog AI: "why did signup conversion drop this week?"',
-                        'It finds the step that fell in seconds, then you ask it to check Error Tracking for that page too',
-                        'It turns up a new JavaScript error, links the session replays that show it, and once the fix ships, confirms in the same thread that the funnel step recovered',
+                        'You tag @PostHog in Slack: "are paying customers using the feature we shipped last week?"',
+                        'It replies in the thread with a breakdown by plan, and the rest of the team jumps in with follow-up questions',
+                        'It confirms free users are the ones actually engaging, and offers to turn the thread into a dashboard everyone can watch',
                     ],
                 },
                 points: [
                     {
-                        title: "Turns out, there's more",
+                        title: 'Bring analytics into where you build',
                         icon: 'IconSearch',
-                        body: "Rebuilding the funnel by hand takes a few minutes. Asking PostHog AI to keep digging, pulling in whatever data explains the drop, costs one more message in the same chat, so 'why did this drop' can end at 'here's the bug' instead of a step number.",
+                        body: 'The PostHog MCP server lets your AI coding agent query funnels, retention, trends, and paths, and list the exact people behind any data point. It works with any MCP client like Cursor or Claude Code.',
                     },
                     {
                         title: 'No prompt required',
                         icon: 'IconMessage',
-                        body: 'A scout runs that same check on your funnels every day without being asked, watching the conversion rate rather than raw traffic, so a quiet Sunday never reads as a drop.',
+                        body: (
+                            <>
+                                A{' '}
+                                <Link to="/docs/self-driving/scouts" state={{ newWindow: true }} className="underline">
+                                    scout
+                                </Link>{' '}
+                                can watch any dashboard or insight you already care about, comparing it to its own
+                                baseline, and only surfaces a report once something actually moves.
+                            </>
+                        ),
                     },
                 ],
             },
@@ -276,31 +285,31 @@ export const productAnalytics = {
                 scenario: {
                     icon: 'IconSearch',
                     steps: [
-                        'A product analytics scout watches the conversion rate on your signup funnel, not raw volume, so a real drop stands out from an ordinary quiet day',
-                        'It finds the step that fell, from 40% to 22%, and files a report with the events and session replays behind it',
-                        'You read the evidence and decide what actually happened, since a conversion drop can be a bug, a bad release, or plain seasonality',
-                        'Once you know the fix, you hand it to an agent yourself and review the pull request it opens',
+                        'Low adoption on the feature you shipped is one signal among several PostHog is already watching',
+                        'It groups with a spike in related error tracking issues and a cluster of session replays showing people trying the feature, then giving up',
+                        'The combined evidence points to a bug blocking the flow, so PostHog opens a pull request with the fix and a regression test',
+                        'You merge it, and PostHog checks adoption again after the fix ships to confirm it actually worked',
                     ],
                 },
                 points: [
                     {
-                        title: 'It watches rates, not traffic',
+                        title: 'Product analytics feeds self-driving',
                         icon: 'IconBrain',
                         body: (
                             <>
-                                Traffic dropping alone never triggers a report. A conversion rate falling from 40% to
-                                22% does, so the{' '}
-                                <Link to="/docs/self-driving/scouts" state={{ newWindow: true }} className="underline">
-                                    scout
-                                </Link>{' '}
-                                can name the exact step that broke instead of flagging every quiet day.
+                                Your events, insights, and dashboards are a signal source for{' '}
+                                <Link to="/docs/self-driving" state={{ newWindow: true }} className="underline">
+                                    Self-driving
+                                </Link>
+                                , and rarely the only one. A low-adoption signal groups with matching error tracking and
+                                session replay signals into a single report instead of three separate ones.
                             </>
                         ),
                     },
                     {
-                        title: 'More context, better reports',
-                        icon: 'IconTrends',
-                        body: 'Connect a source like HubSpot or Gong and the report also names which accounts a drop affected, alongside the funnel step that broke.',
+                        title: 'A bug becomes a PR, a decision becomes a report',
+                        icon: 'IconPullRequest',
+                        body: "When the combined evidence points to a bug, PostHog opens a pull request with the fix. When it's a product call, like whether the feature needs a different rollout, it lands in your Inbox instead.",
                     },
                 ],
             },

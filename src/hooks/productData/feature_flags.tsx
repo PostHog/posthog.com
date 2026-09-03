@@ -236,8 +236,8 @@ export const featureFlags = {
                 },
                 points: [
                     {
-                        title: "Turns out, there's more",
-                        icon: 'IconHandwave',
+                        title: 'The flags list can filter itself for cleanup',
+                        icon: 'IconFilter',
                         body: 'The flags list in PostHog Web can filter to show flags unevaluated in 30+ days, or fully rolled out with no targeting left. Remembering to check it (and to act on what it shows) is still on you.',
                     },
                     {
@@ -260,14 +260,23 @@ export const featureFlags = {
                 },
                 points: [
                     {
-                        title: "Turns out, there's more",
-                        icon: 'IconShield',
+                        title: 'It can schedule the next rollout itself',
+                        icon: 'IconCalendar',
                         body: "Asking again a few days later doesn't have to depend on you remembering to do it. The same agent can schedule that rollout increase itself, one-off or recurring, so it happens at a set time whether or not anyone sends the message.",
                     },
                     {
                         title: 'No prompt required',
                         icon: 'IconMessage',
-                        body: "The feature flags scout runs an audit on its own schedule, watching for ghost flags pointing at nothing and evaluation cliffs where a healthy flag's call volume vanishes.",
+                        body: (
+                            <>
+                                The feature flags{' '}
+                                <Link to="/docs/self-driving/scouts" state={{ newWindow: true }} className="underline">
+                                    scout
+                                </Link>{' '}
+                                runs an audit on its own schedule, watching for ghost flags pointing at nothing and
+                                evaluation cliffs where a healthy flag's call volume vanishes.
+                            </>
+                        ),
                     },
                 ],
             },
@@ -285,23 +294,23 @@ export const featureFlags = {
                 },
                 points: [
                     {
-                        title: "It's auditing the wiring, not your judgment",
+                        title: 'Feature flags feed self-driving',
                         icon: 'IconBrain',
                         body: (
                             <>
-                                A{' '}
-                                <Link to="/docs/self-driving/scouts" state={{ newWindow: true }} className="underline">
-                                    scout
-                                </Link>{' '}
-                                checks four things on a schedule: evaluation cliffs, ghost flags, response shifts, and
-                                plain flag debt. All of it lands in one report instead of one per flag.
+                                Your flags are a signal source for{' '}
+                                <Link to="/docs/self-driving" state={{ newWindow: true }} className="underline">
+                                    Self-driving
+                                </Link>
+                                . A scout watches your flag roster against the <code>$feature_flag_called</code> stream
+                                and files a report whenever the two contradict each other.
                             </>
                         ),
                     },
                     {
                         title: 'The control point for every autonomous fix',
                         icon: 'IconShield',
-                        body: 'The same applies wherever else self-driving ships a fix, whether the signal came from a scout or a built-in source like error tracking: the pull request wraps it in a flag, so merging the code and switching on the behavior stay two separate steps.',
+                        body: 'For a risky change, a self-driving pull request can ship behind a flag instead of going straight to everyone. Merging the code and switching on the behavior stay two separate steps you control.',
                     },
                 ],
             },
