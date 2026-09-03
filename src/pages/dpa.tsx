@@ -176,8 +176,9 @@ function DpaGenerator() {
                         DPA — countersigned by us.
                     </p>
                     <p className="text-sm">
-                        It's self-serve and takes a couple of minutes. Nobody has to approve it and there's nothing to
-                        wait for. We countersign it on the spot, on any plan, including the free one.
+                        It's self-serve and takes a couple of minutes. Nobody at PostHog has to approve it — you add
+                        your company details, we generate the agreement with our signature already on it, and PandaDoc
+                        emails it to you to sign. It's effective the moment you do. Any plan, including the free one.
                     </p>
                     <p className="text-sm">
                         The version below is the exact same agreement, just rendered here for your reading pleasure (and
@@ -303,8 +304,8 @@ function DpaGenerator() {
 
                     <div className="bg-yellow/25 py-3 px-4 text-sm text-center -mx-4 @3xl:-mx-8 mt-0 border-b border-light dark:text-black">
                         <strong>Heads up:</strong> This is a preview. To get a countersigned, valid DPA, generate it
-                        inside your PostHog organization. It's self-serve and we countersign it on the spot, so there's
-                        nothing to wait for. Go to{' '}
+                        inside your PostHog organization. It's self-serve, and we've already signed it before it reaches
+                        you, so all that's left is your signature. Go to{' '}
                         <a
                             href={APP_LEGAL_URL}
                             target="_blank"
