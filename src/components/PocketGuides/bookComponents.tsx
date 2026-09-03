@@ -1,3 +1,5 @@
+import { ProductVideo } from '../ProductVideo'
+
 import Term from './terms'
 
 import Action, { Setup } from './Action'
@@ -66,6 +68,7 @@ export const bookMdxComponents = {
     Enable,
     Action,
     Callout,
+    ProductVideo,
     Setup,
     Contents,
     SeeAlso,
