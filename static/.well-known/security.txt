@@ -1,4 +1,5 @@
 Contact: mailto:security-reports@posthog.com
+Expires: 2027-08-30T00:00:00.000Z
 Encryption: https://posthog.com/.well-known/pgp-key.txt
 # PGP fingerprint: 35CA 7526 FA8B 9A8A 0254 6EAD F3E0 B94E 3088 9B51
 Preferred-Languages: en

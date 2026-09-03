@@ -101,7 +101,9 @@ const ScrollArea = ({
                 // are unconditional, so both axes always end up `scroll` anyway — setting them
                 // here (Radix spreads `style` last) makes that true in the SSR'd HTML too.
                 style={{ overflowX: 'scroll', overflowY: 'scroll' }}
-                className={`app-scroll-viewport size-full ${viewportClasses} ${fadeHeight ? `pb-${fadeHeight}` : ''}`}
+                className={`app-scroll-viewport size-full outline-none ${viewportClasses} ${
+                    fadeHeight ? `pb-${fadeHeight}` : ''
+                }`}
             >
                 {fullWidth ? <div>{children}</div> : children}
             </RadixScrollArea.Viewport>

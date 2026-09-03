@@ -23,7 +23,9 @@ The [PostHog MCP server](/docs/model-context-protocol) gives AI agents and MCP c
 
 **Control ordering and state.** Reorder transformation execution, and enable or disable a function without deleting it.
 
-**Manage batch exports.** List, create, update, and delete batch exports, and request file downloads for exported data.
+**Manage batch exports.** List, create, update, and delete batch exports.
+
+**Export data as files.** Start a [file download export](/docs/cdp/file-download-exports), check whether it has finished, and cancel one that is still running. Downloading the finished files happens over the API.
 
 ## Example prompts
 
@@ -33,6 +35,7 @@ The [PostHog MCP server](/docs/model-context-protocol) gives AI agents and MCP c
 - `Show me the logs for my HubSpot destination from the last hour.`
 - `Move my PII redaction transformation to run before everything else.`
 - `Disable the destination that's erroring the most.`
+- `Export last week's pageview events as Parquet and tell me when the files are ready.`
 
 ## Install the MCP server
 

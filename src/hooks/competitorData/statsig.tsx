@@ -3,7 +3,7 @@ export const statsig = {
     key: 'statsig',
     assets: {
         icon: '/images/competitors/statsig.svg',
-        comparisonArticle: '/blog/posthog-vs-statsig',
+        comparisonArticle: '/compare/posthog-vs-statsig',
     },
     products: {
         cdp: {

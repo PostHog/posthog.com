@@ -17,7 +17,7 @@ featuredImageType: full
 
 Want to know more about what we're up to? [Subscribe to our new newsletter](https://newsletter.posthog.com/subscribe), which we send once every two weeks!
 
-> **Need to update a self-hosted instance?** [Check the runbook docs for instructions](/docs/runbook/upgrading-posthog)!
+> **Need to update a self-hosted instance?** [Check the runbook docs for instructions](/docs/self-host)!
 
 ## PostHog 1.43.0 release notes
 ### New: Performance improvements

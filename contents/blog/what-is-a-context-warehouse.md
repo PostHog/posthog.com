@@ -88,7 +88,7 @@ The main ingredients:
 
 ### Agents read your data and drive development
 
-None of this matters to an agent unless the agent can actually query it. PostHog exposes the context warehouse over [MCP](/mcp), [PostHog Web](/self-driving), [Slack](/slack), or [PostHog Code](/code). An agent working the [self-driving product](/blog/self-driving-product) loop reads product events and business context through the identical interface a human would use in the SQL editor.
+None of this matters to an agent unless the agent can actually query it. PostHog exposes the context warehouse over [MCP](/mcp), [PostHog Web](/self-driving), [Slack](/slack), or [PostHog Desktop](/desktop). An agent working the [self-driving product](/blog/self-driving-product) loop reads product events and business context through the identical interface a human would use in the SQL editor.
 
 That's what makes this a context warehouse rather than a data warehouse with an AI feature bolted on: the context an agent needs to make a good decision is already there, and it can use it to drive development autonomously or answer your questions.
 

@@ -48,7 +48,7 @@ Awesome work and thanks again Mohamad!
 
 ## PostHog 1.26.0 Release Notes
 
-> If you're self-hosting and want to upgrade for a better experience and new features, remember to [update your PostHog instance](/docs/runbook/upgrading-posthog).
+> If you're self-hosting and want to upgrade for a better experience and new features, remember to [update your PostHog instance](/docs/self-host).
 
 
 ### Feature flags for Node.js and Go

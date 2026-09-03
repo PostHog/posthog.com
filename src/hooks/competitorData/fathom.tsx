@@ -3,7 +3,7 @@ export const fathom = {
     key: 'fathom',
     assets: {
         icon: '/images/competitors/fathom.svg',
-        comparisonArticle: '/blog/posthog-vs-fathom',
+        comparisonArticle: '/compare/posthog-vs-fathom',
     },
     available: true,
     products: {
