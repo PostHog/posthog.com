@@ -78,8 +78,8 @@ export function proxy(request) {
 
   const requestHeaders = new Headers(request.headers)
   requestHeaders.set('host', hostname)
-  // Optional: remove cookies before forwarding to PostHog
-  // requestHeaders.delete('cookie')
+  // Remove cookies before forwarding to PostHog
+  requestHeaders.delete('cookie')
 
   url.protocol = 'https'
   url.hostname = hostname
@@ -107,8 +107,8 @@ export function proxy(request) {
 
   const requestHeaders = new Headers(request.headers)
   requestHeaders.set('host', hostname)
-  // Optional: remove cookies before forwarding to PostHog
-  // requestHeaders.delete('cookie')
+  // Remove cookies before forwarding to PostHog
+  requestHeaders.delete('cookie')
 
   url.protocol = 'https'
   url.hostname = hostname
@@ -143,8 +143,8 @@ export function middleware(request) {
 
   const requestHeaders = new Headers(request.headers)
   requestHeaders.set('host', hostname)
-  // Optional: remove cookies before forwarding to PostHog
-  // requestHeaders.delete('cookie')
+  // Remove cookies before forwarding to PostHog
+  requestHeaders.delete('cookie')
 
   url.protocol = 'https'
   url.hostname = hostname
@@ -172,8 +172,8 @@ export function middleware(request) {
 
   const requestHeaders = new Headers(request.headers)
   requestHeaders.set('host', hostname)
-  // Optional: remove cookies before forwarding to PostHog
-  // requestHeaders.delete('cookie')
+  // Remove cookies before forwarding to PostHog
+  requestHeaders.delete('cookie')
 
   url.protocol = 'https'
   url.hostname = hostname
@@ -303,8 +303,8 @@ export default authMiddleware({
 
       const requestHeaders = new Headers(req.headers)
       requestHeaders.set('host', hostname)
-      // Optional: remove cookies before forwarding to PostHog
-      // requestHeaders.delete('cookie')
+      // Remove cookies before forwarding to PostHog
+      requestHeaders.delete('cookie')
 
       url.protocol = 'https'
       url.hostname = hostname
@@ -331,8 +331,8 @@ export default authMiddleware({
 
       const requestHeaders = new Headers(req.headers)
       requestHeaders.set('host', hostname)
-      // Optional: remove cookies before forwarding to PostHog
-      // requestHeaders.delete('cookie')
+      // Remove cookies before forwarding to PostHog
+      requestHeaders.delete('cookie')
 
       url.protocol = 'https'
       url.hostname = hostname
