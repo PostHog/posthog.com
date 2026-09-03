@@ -6195,6 +6195,11 @@
             "source": "/contact-us",
             "destination": "/talk-to-a-human",
             "statusCode": 301
+        },
+        {
+            "source": "/traces",
+            "destination": "/tracing",
+            "statusCode": 301
         }
     ]
 }

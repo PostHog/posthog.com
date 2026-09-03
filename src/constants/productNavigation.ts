@@ -18,6 +18,7 @@ export const BROWSE_TOOLS_HANDLES = [
     'experiments',
     'error_tracking',
     'logs',
+    'traces',
     'endpoints',
     'workflows_emails',
     'surveys',

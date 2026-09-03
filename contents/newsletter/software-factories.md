@@ -100,7 +100,7 @@ The same applies to coding agents. An agent makes better architectural choices i
 
 Looking at signals from prod is especially valuable for enabling code *maintainability* since most software changes happen in response to actual usage. At PostHog, for example, 63% of changed lines are in files that already exist, and fix is [our largest commit type](/blog/10k-prs-a-month#how-we-validate-posthog-isnt-breaking) at 40%.
 
-And if you think about the last time you addressed an incident in prod or a piece of user feedback, you probably relied more on [logs](/logs) and [traces](/traces) to figure out a fix instead of trusting someone else’s secondhand account of the problem.
+And if you think about the last time you addressed an incident in prod or a piece of user feedback, you probably relied more on [logs](/logs) and [traces](/tracing) to figure out a fix instead of trusting someone else’s secondhand account of the problem.
 
 These are the kinds of problems we’re working on at PostHog to make [self-driving products](/blog/what-if-your-product-built-itself) a reality: giving agents the same context that human engineers would use to make better design decisions.
 
