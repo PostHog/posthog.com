@@ -1,0 +1,91 @@
+---
+title: Events data retention
+sidebarTitle: Data retention
+sidebar: Docs
+showTitle: true
+---
+
+We don't keep your data forever. Storing every event from every customer for all eternity isn't free, and most of it isn't useful past a certain point, so we have retention policies that scale with your plan.
+
+This page explains how long we keep your events data, what happens when it ages out, and how to extend retention if you need more. For session replay retention, see [recording retention](/docs/session-replay/recording-retention).
+
+## Events retention by plan
+
+| Plan          | Maximum retention |
+| ------------- | ----------------- |
+| Free          | 1 year            |
+| Pay-as-you-go | 2 years           |
+| Boost         | 5 years           |
+| Scale         | 7 years           |
+| Enterprise    | 7 years           |
+
+This table applies to organizations that subscribe to a paid plan on or after September 3, 2026. Organizations that were already on a paid plan before that date keep 7 years of retention for as long as they stay on any paid plan, including when they add or remove a platform package. Moving to the Free plan ends that, and subscribing again later uses the table above.
+
+Retention is measured from the event's timestamp, which is the time the event actually occurred, not when it was ingested. Backfills and historical imports use the original event time, so importing data older than your retention window means it ages out immediately.
+
+What's included in the events data retention policy:
+
+- **All events**, including pageviews, autocapture, custom events, anonymous events, and identified events you send.
+- **Feature flag and experiment configurations** (the rules themselves) stick around as long as the flag exists. The _evaluation events_ generated when a flag is checked follow the events retention table above.
+- **Survey responses** are stored as events, so they follow events retention, but the survey definitions themselves stay until you delete them.
+- **Error tracking** `$exception` events are stored as events and follow the same retention policy.
+
+> **Note:** Person profiles are not deleted as long as your organization stays active (any plan, including Free, with at least one event in the past 12 months).
+
+## How retention works
+
+Your retention window has two parts:
+
+1. **Your plan's retention period** (e.g. 1 year on Free): data is fully visible and queryable.
+2. **A six-month recoverable window** where data is hidden but not yet deleted. Upgrade your plan during this window and we can restore access.
+
+After both windows pass, data is permanently deleted and can't be recovered.
+
+## Retention timeline
+
+Here's how that plays out for a Free plan event with a July 2026 timestamp:
+
+| Phase                  | When                       | What you see                                                                     | Recoverable?               |
+| ---------------------- | -------------------------- | -------------------------------------------------------------------------------- | -------------------------- |
+| Fully visible          | Jul 2026 to Jul 31, 2027   | Your full 1-year retention. Data is queryable as normal.                         | Not needed                 |
+| Hidden but recoverable | Aug 1, 2027 to Jan 31, 2028 | Data is hidden from the app but not yet deleted. Upgrade and we restore access. | Yes, by upgrading          |
+| Deleted                | Feb 1, 2028 onward         | Data is removed from our database.                                               | No                         |
+
+Data ages out on the 1st of the month _after_ the retention period ends, so calendar-month and year-over-year comparisons always line up.
+
+We send reminder emails 30 days, 15 days, and 1 day before your data first enters the hidden window. We repeat the same sequence before it's permanently deleted.
+
+## Need more retention than your plan includes?
+
+A few options, depending on what works best for you:
+
+- **Upgrade your plan.** Each tier comes with longer retention by default. If you're regularly querying data older than your window, this is usually the right call. See [platform packages](/platform-packages) for options.
+- **Export to your own warehouse.** If you want indefinite control over your data, set up a [batch export](/docs/cdp/batch-exports) to BigQuery, Snowflake, S3, or Postgres. We'll keep sending you fresh data; you keep it as long as you want.
+
+## Changing plans
+
+**Downgrading:** If you drop to a plan with shorter retention, here's what happens:
+
+- **1st of the next month:** Data outside your new retention window gets hidden from the app.
+- **6 months later:** That data is deleted.
+- **Every month thereafter:** Anything else aging out of your new retention window follows the same schedule (hidden first, deleted 6 months later).
+
+The 6-month gap exists so you have time to change your mind. Upgrade again within that window and we'll restore access to the hidden data. If you need data longer-term, export it before the deletion date.
+
+## Common questions
+
+**Is data retention set at the project or organization level?**
+
+Organization level. All projects within an organization share the same retention policy.
+
+**Why does data age out on the 1st of the next month instead of the exact retention date?**
+
+So calendar-month and year-over-year comparisons always work. If data dropped off mid-month, "this month vs. the same month last year" would lose part of last year's data partway through, which makes year-over-year analysis weirdly fragile.
+
+**Why the 6-month gap before deletion?**
+
+So you have time to change your mind. If you downgrade and then realize you need that data, you can upgrade again and we can restore access, no support ticket needed.
+
+**Can I delete data earlier than the retention period?**
+
+Yes, you can delete specific events or properties on demand. See [data deletion](/docs/privacy/data-storage#data-deletion).

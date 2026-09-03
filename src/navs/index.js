@@ -3798,6 +3798,10 @@ export const docsMenu = {
                             url: '/docs/privacy/data-storage',
                         },
                         {
+                            name: 'Data retention',
+                            url: '/docs/privacy/data-retention',
+                        },
+                        {
                             name: 'GDPR compliance',
                             url: '/docs/privacy/gdpr-compliance',
                         },
