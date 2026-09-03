@@ -172,8 +172,8 @@ function DpaGenerator() {
                         <Link to={APP_LEGAL_URL} external className="font-semibold underline">
                             app.posthog.com/legal
                         </Link>{' '}
-                        inside your PostHog organization. That's where you generate, sign, and download a real, valid
-                        DPA — countersigned by us.
+                        inside your PostHog organization. That's where you generate a real, valid DPA — countersigned by
+                        us.
                     </p>
                     <p className="text-sm">
                         It's self-serve and takes a couple of minutes. Nobody at PostHog has to approve it — you add
