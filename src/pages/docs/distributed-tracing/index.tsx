@@ -4,6 +4,8 @@ import ResourceItem from 'components/Docs/ResourceItem'
 import Intro from 'components/Docs/Intro'
 import ReaderView from 'components/ReaderView'
 import Link from 'components/Link'
+import useProduct from 'hooks/useProduct'
+import { buildProductMenuTabs, ProductSwitcher } from 'components/Products/ReaderViewProduct'
 
 export const Content = () => {
     return (
@@ -89,8 +91,20 @@ export const Content = () => {
 }
 
 const DistributedTracing: React.FC = () => {
+    // Same Product / Pricing / Docs tab strip and product switcher as /tracing,
+    // so the sidebar stays put when you move between the product and its docs.
+    const productData = useProduct({ handle: 'traces' }) as any
+    const menuTabs = buildProductMenuTabs({
+        productData,
+        activeSurface: 'docs',
+        currentPath: '/docs/distributed-tracing',
+    })
+
     return (
-        <ReaderView>
+        <ReaderView
+            menuTabs={menuTabs}
+            productSelect={productData ? <ProductSwitcher activeHandle={productData.handle} /> : undefined}
+        >
             <SEO title="Distributed tracing - Docs - PostHog" />
 
             <div className="mx-auto max-w-4xl">

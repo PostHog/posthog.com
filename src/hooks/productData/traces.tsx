@@ -1,5 +1,5 @@
 import React from 'react'
-import { IconEye, IconGanttChart, IconCursorClick, IconList, IconRocket, IconSparkles } from '@posthog/icons'
+import { IconEye, IconGanttChart, IconCursorClick, IconInfo, IconList, IconRocket, IconSparkles } from '@posthog/icons'
 import { getTool } from '../../data/tools'
 import { applications, topFeatures } from './traces/slides'
 
@@ -9,6 +9,17 @@ export const traces = {
     type: 'traces',
     color: 'blue',
     colorSecondary: 'sky-blue',
+    // The docs live at /docs/distributed-tracing, which matches neither the
+    // product name nor its slug, so the Docs tab is pointed there explicitly.
+    docsSlug: 'distributed-tracing',
+    // Beta in product/docs; no billing product yet (free during beta). Same
+    // "How pricing works" section chrome as Endpoints (`BilledWithPricing`).
+    pricingLead: 'Pricing is coming soon.',
+    pricingHighlights: [
+        "We'll offer usage-based pricing with a generous monthly free tier – like we do with all of our paid products.",
+    ],
+    pricingFooter: 'Traces is free during beta.',
+    pricingEventsLink: false,
     seo: {
         title: 'Traces – Distributed tracing with PostHog',
         description:
@@ -30,13 +41,20 @@ export const traces = {
             icon: <IconSparkles className="size-4" />,
             props: { slides: topFeatures },
         },
-        {
-            slug: 'comparison-summary',
-            name: 'PostHog vs...',
-            group: 'divided',
-            icon: <IconList className="size-4" />,
-        },
         { slug: 'getting-started', name: 'Get started', group: 'divided', icon: <IconRocket className="size-4" /> },
+    ],
+    /**
+     * Pricing surface (`/tracing/pricing`). No billing product yet – Plans /
+     * calculator omitted until billing ships. Uses the same BilledWithPricing
+     * section as Endpoints for the coming-soon copy, then comparison-summary.
+     * When billing ships, replace `billed-with` with:
+     *   { slug: 'plans', name: 'Plans', icon: <IconCheckCircle className="size-4" /> },
+     *   { slug: 'calculator', name: 'Pricing calculator', icon: <IconPieChart className="size-4" /> },
+     */
+    pricingMenu: [
+        { slug: 'billed-with', name: 'How pricing works', icon: <IconInfo className="size-4" /> },
+        { slug: 'comparison-summary', name: 'PostHog vs...', icon: <IconList className="size-4" /> },
+        { slug: 'pricing-cta', name: 'Get started', hideFromNav: true },
     ],
     overview: {
         title: 'Straight to the line that broke',
