@@ -74,8 +74,11 @@ const faqs = [
         a: (
             <>
                 <p>
-                    Events and metadata are guaranteed to be retained for 7 years on any paid plan and 1 year on a free
-                    plan. After 1 year, data may be moved into cold storage so queries may run more slowly.
+                    Events and metadata are retained for 1 year on the free plan and 2 years on pay-as-you-go. The Boost
+                    package extends this to 5 years, and Scale and Enterprise to 7 years. Organizations that subscribed
+                    to a paid plan before September 3, 2026 keep 7 years for as long as they stay on a paid plan. See{' '}
+                    <Link to="/docs/privacy/data-storage#data-retention">data retention</Link> for details. After 1
+                    year, data may be moved into cold storage so queries may run more slowly.
                 </p>
                 <p>
                     Recordings on the free plan are retained for 1 month. On the pay-as-you-go plan, recordings are
@@ -88,7 +91,13 @@ const faqs = [
     },
     {
         q: 'What happens after the data retention period elapses?',
-        a: <p>Any data stored for more than the retention period may be permanently deleted from our systems.</p>,
+        a: (
+            <p>
+                Events older than your retention window are hidden from queries. We keep them for at least six months
+                after that, and upgrading to a plan with a longer window restores access. After that, they may be
+                permanently deleted from our systems.
+            </p>
+        ),
     },
     {
         q: 'Is there a free trial on paid plans?',
