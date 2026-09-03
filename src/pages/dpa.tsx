@@ -185,14 +185,6 @@ function DpaGenerator() {
                         choice of font). It's not binding on its own — only the one you generate and countersign through
                         the app counts.
                     </p>
-                    <p className="text-sm">
-                        Need changes to this DPA?{' '}
-                        <Link to="/talk-to-a-human" state={{ newWindow: true }} className="font-semibold underline">
-                            Contact us
-                        </Link>{' '}
-                        first.
-                    </p>
-
                     <Link
                         to={APP_LEGAL_URL}
                         external
