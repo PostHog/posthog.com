@@ -36,11 +36,11 @@ There's no wrong answer here – the right pick comes down to what you care abou
 ### What's the best data warehouse for developers overall?
 
 For most developers, it's **[PostHog](/context-warehouse)**. It's a [context warehouse](/blog/what-is-a-context-warehouse), not just a data warehouse: your product and business data live together, wired directly into the tools and agents that act on it, with no pipelines to maintain.
- 
-You get two ways in: connect an existing warehouse (Snowflake, BigQuery, Databricks, ClickHouse...) as a source and sync the tables you need, or use PostHog's integrated warehouse so data never travels. 
+
+You get two ways in: connect an existing warehouse (Snowflake, BigQuery, Databricks, ClickHouse...) as a source and sync the tables you need, or use PostHog's integrated warehouse so data never travels.
 
 Either way, queries run on PostHog compute and the results sit next to [product analytics](/product-analytics), [session replay](/session-replay), [feature flags](/feature-flags), [error tracking](/error-tracking), [and more](/products) – so a query that turns up an odd event leads straight to the user's session or the error behind it, without matching records across tools.
- 
+
 Because the data is already unified, PostHog's own agents can query it the same way you do. That's the basis for a [self-driving product](/self-driving): [Scouts](/blog/what-is-a-scout) read across product signals and business context together, and an agent picks up what's worth fixing and opens a PR, with no manual data wrangling required.
 
 ![Context warehouse diagram](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/Context_Warehouse_Blog_flow_chart_2_bf07f8cdee.png)
@@ -48,7 +48,7 @@ Because the data is already unified, PostHog's own agents can query it the same 
 **What makes PostHog good for developers:**
 
 -   **Setup:** `npx @posthog/wizard warehouse` auto-detects your databases and APIs and connects them (managed, with no pipelines to maintain)
--   **Ingestion:** Direct SDK event capture, 500+ ELT connectors (Postgres, Stripe, Snowflake, BigQuery, and more), and CDC from Postgres/MySQL
+-   **Ingestion:** Direct SDK event capture, 500+ ELT connectors (Postgres, Stripe, Snowflake, BigQuery, and more), and CDC from Postgres (alpha)
 -   **Data access:** SQL, REST API, an [MCP server](/mcp), and [PostHog AI](/context-warehouse/posthog-ai) for natural-language queries
 -   **Pricing:** Usage-based with per-product allowances; a free tier lets you start without an enterprise contract
 -   **License:** Open source core (MIT, except the proprietary `ee/` directory)
@@ -66,7 +66,7 @@ Because the data is already unified, PostHog's own agents can query it the same 
 
 ### What's the best data warehouse for embedded and local-first analytics?
 
-**MotherDuck** runs DuckDB as a serverless cloud service, so you can build analytics features without managing database servers or giving up the local DuckDB workflow. 
+**MotherDuck** runs DuckDB as a serverless cloud service, so you can build analytics features without managing database servers or giving up the local DuckDB workflow.
 
 Queries can span local files and cloud-hosted data, so you develop locally and move larger workloads to the cloud when you're ready.
 
@@ -84,7 +84,7 @@ Queries can span local files and cloud-hosted data, so you develop locally and m
 
 ### What's the best data warehouse for real-time analytics at scale?
 
-**ClickHouse** fits teams that need low-latency queries across large event datasets. 
+**ClickHouse** fits teams that need low-latency queries across large event datasets.
 
 Its columnar engine reads only the columns a query touches, and compression plus vectorized execution let it scan huge volumes fast – a strong fit for observability data, customer-facing dashboards, and event analytics. Self-host the open-source database or use ClickHouse Cloud.
 
@@ -102,7 +102,7 @@ Its columnar engine reads only the columns a query touches, and compression plus
 
 ### What's the best data warehouse for unified data and AI/ML workloads?
 
-**Databricks** fits organizations running data engineering and machine learning on shared datasets. 
+**Databricks** fits organizations running data engineering and machine learning on shared datasets.
 
 Its lakehouse model pairs warehouse-style SQL with data lake storage, notebooks, pipeline orchestration, and model-lifecycle tools, so engineers and data scientists work on the same governed data without copying it between systems.
 
@@ -120,7 +120,7 @@ Its lakehouse model pairs warehouse-style SQL with data lake storage, notebooks,
 
 ### What's the best data warehouse for enterprise-scale data?
 
-**Snowflake** suits large organizations that need a managed warehouse with strong governance, high concurrency, and deployment across major clouds. 
+**Snowflake** suits large organizations that need a managed warehouse with strong governance, high concurrency, and deployment across major clouds.
 
 It separates storage from compute, so you scale query capacity without reorganizing the data, and independent compute clusters let analysts, apps, and pipelines share data without competing for one pool.
 
@@ -138,7 +138,7 @@ It separates storage from compute, so you scale query capacity without reorganiz
 
 ### What's the best data warehouse for teams already on Google Cloud?
 
-**BigQuery** fits teams already on Google Cloud that need to analyze product, advertising, or operational data without managing warehouse infrastructure. 
+**BigQuery** fits teams already on Google Cloud that need to analyze product, advertising, or operational data without managing warehouse infrastructure.
 
 Google Analytics 4 can export events straight to BigQuery, and the Data Transfer Service can import Google Ads data, which cuts the ingestion work of comparing acquisition campaigns with downstream behavior.
 
@@ -161,7 +161,7 @@ Google Analytics 4 can export events straight to BigQuery, and the Data Transfer
 
 A general-purpose warehouse stores data for varied reporting, engineering, and ML work. PostHog frames its [Context Warehouse](/blog/what-is-a-context-warehouse) around product work: warehouse data sits with [product analytics](/product-analytics), [session replay](/session-replay), [feature flags](/feature-flags), [error tracking](/error-tracking), [logs](/logs), and more, so a query result connects straight to the user session or error behind it.
 
-It's also the direction PostHog is built around: a **self-driving product** that acts on its own data. [Scouts](/blog/what-is-a-scout) read across your warehouse, product data, and errors, sort signal from noise, and an agent picks up what's worth fixing and opens a PR for you to review and merge. 
+It's also the direction PostHog is built around: a **self-driving product** that acts on its own data. [Scouts](/blog/what-is-a-scout) read across your warehouse, product data, and errors, sort signal from noise, and an agent picks up what's worth fixing and opens a PR for you to review and merge.
 
 You can steer it all from [Slack](/slack), the [web app](/ai), the [desktop app](/desktop), or your editor via [the MCP](/mcp) or [CLI](/docs/cli).
 
@@ -170,7 +170,7 @@ You can steer it all from [Slack](/slack), the [web app](/ai), the [desktop app]
 <details>
 <summary>Which data warehouses offer free options?</summary>
 
-**PostHog** has free usage allowances, **MotherDuck** has a free plan, and **ClickHouse** is free to self-host under Apache 2.0. **Snowflake** and **BigQuery** offer trials or limited monthly capacity. A free tier lets you test real workloads and query patterns before committing.
+**PostHog** has free usage allowances, **MotherDuck** has a free plan, and **ClickHouse** is free to self-host under Apache 2.0, though ClickHouse Cloud is trial-only. **Snowflake** and **BigQuery** offer trials or limited monthly capacity.
 
 </details>
 
@@ -184,7 +184,7 @@ You can steer it all from [Slack](/slack), the [web app](/ai), the [desktop app]
 <details>
 <summary>Should I choose a general-purpose or analytics-native warehouse?</summary>
 
-A general-purpose warehouse supports broad data-engineering workloads; an analytics-native one connects stored data directly to product analysis. 
+A general-purpose warehouse supports broad data-engineering workloads; an analytics-native one connects stored data directly to product analysis.
 
 **PostHog** fits product developers who want analytics, replay, flags, errors, and warehouse queries together. **Databricks**, **Snowflake**, or **BigQuery** fit better when a data platform has to serve the wider business.
 
