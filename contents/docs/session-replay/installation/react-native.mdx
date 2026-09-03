@@ -16,17 +16,13 @@ import { SRReactNativeInstallationWrapper } from './_snippets/sr-installation-wr
 
 ## iOS dependency resolution
 
-By default, the optional React Native native plugin resolves `posthog-ios` through CocoaPods.
+The native plugin supports three additive iOS dependency paths:
 
-If your iOS project uses Swift Package Manager for native dependencies, you can opt in to resolving `posthog-ios` through SPM instead. Add the following to `ios/Podfile.properties.json`:
+- CocoaPods for the plugin and `posthog-ios`. This remains the default path.
+- CocoaPods for the plugin, with `posthog-ios` resolved through Swift Package Manager.
+- React Native's experimental full Swift Package Manager integration, with no CocoaPods. PostHog verifies an iOS-only React Native 0.87.1 app with React Native Community CLI 20.2.0. This path requires `@posthog/react-native-plugin` 2.4.0 or later, Xcode 16 or later, and an iOS 15.1 or later app deployment target.
 
-```json
-{
-  "posthog.useSpm": "true"
-}
-```
-
-This path requires `use_frameworks! :linkage => :dynamic` in your `ios/Podfile`. Without `posthog.useSpm`, the default CocoaPods resolution path is unchanged.
+See [iOS dependency paths for the React Native native plugin](/docs/libraries/react-native#choose-an-ios-dependency-path-for-the-native-plugin) for the requirements and setup steps. This verification does not cover Expo or other React Native versions. Use CocoaPods or the hybrid path unless you validate full Swift Package Manager for your configuration.
 
 ## Troubleshooting
 

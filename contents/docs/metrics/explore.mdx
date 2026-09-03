@@ -1,0 +1,89 @@
+---
+title: Use your metrics
+---
+
+> **Note:** Metrics is in alpha. The views on this page reflect the current product and may change before general availability.
+
+Once metrics are flowing, open [Metrics](https://app.posthog.com/metrics) in PostHog. The metrics scene has three tabs:
+
+- **Overview** — is anything arriving, and from which services
+- **Viewer** — chart one metric, break it down, and pivot into logs and traces
+- **SQL** — query your metrics directly as the `posthog.metrics` table
+
+## Overview
+
+The **Overview** tab is the first place to check whether ingestion is healthy. It shows an ingestion rollup over the last day:
+
+- **Services**, **Metric names**, and **Active series** counts
+- A per-service table with each service's metric count, active series, and **last seen** time. A service that has gone quiet is flagged so you can spot a dropped exporter before it becomes an outage.
+
+Click a service to jump into the viewer scoped to that service. If nothing has arrived yet, the tab links you to the [setup guide](/docs/metrics).
+
+## Viewer
+
+The **Viewer** tab is where you explore a single metric without writing any queries.
+
+- **Pick a metric** by name to chart it over time.
+- **Choose an aggregation** — sum, average, series count, min, max, p95, rate, or increase. The viewer recommends one based on the metric's type: `increase` for counters, `avg` for gauges, `p95` for histograms and summaries.
+- **Group by** an attribute to break the metric into one line per value, for example request rate per route or queue depth per worker.
+- **Filter** with `key=value` chips to focus on one service, environment, or status, and adjust the date range.
+
+From there you can shape the chart itself:
+
+- **Display type** — line, area, or bar.
+- **Chart settings** — add goal lines, switch the Y axis between linear and logarithmic, toggle begin-at-zero, and pin a min or max bound.
+- **Auto-refresh** — refresh the chart every 15 seconds while you watch a deploy or an incident.
+
+### Spot what changed
+
+When the metric you're charting moves, the viewer does the first pass of the investigation for you. If the most recent slice of the selected window is statistically different from the rest, an **anomaly badge** appears on the chart showing the percent change against the baseline and when the shift started. Click it to see the **biggest movers** — the label values that drove the change — and pick one to narrow the chart to it.
+
+This is investigation, not alerting. The badge is computed when you open a chart — it helps you spot and explain a change you're already looking at. It doesn't watch your metrics around the clock or notify you; for that, set up an [alert](#alerting).
+
+### Pivot into logs and traces
+
+A metric tells you something changed; logs and traces tell you why. The viewer keeps those one click away, scoped to the same service and time window:
+
+- **Exemplar markers** — metrics sent with trace context show clickable dots along the chart baseline, one per traced emission, that open the trace directly.
+- **Samples** — a side panel lists the raw emissions behind the chart. The **Samples** view links each emission to the trace it was recorded in; the **Aggregates** view shows per-series latest and total.
+- **Related** — jump to the **Logs**, **Error logs**, or **Traces** for the chart's service and time window. Filter or group by a service first so the jump lands on the right slice.
+
+### Log-based metrics
+
+A metric generated from your logs by a [log-based metric](/docs/logs/metrics) rule carries a **From logs** tag. Click it to view the source logs the rule matches, or to open the rule in settings.
+
+## Query with SQL
+
+The **SQL** tab gives you direct access to your metrics with [SQL](/docs/sql):
+
+```sql
+SELECT * FROM posthog.metrics LIMIT 10
+```
+
+Use it for anything the viewer doesn't cover: joining metrics against each other, custom math, or ad-hoc exploration of raw data points.
+
+## Save and share
+
+When a chart is worth keeping, turn it into something durable:
+
+- **Save as insight** saves the current chart as a reusable insight.
+- **Add to dashboard** drops it onto an existing or new dashboard.
+- **New service dashboard** builds a starter dashboard in one step — pick the metrics (optionally scoped to a service) and PostHog creates one insight per metric, each charted with its recommended aggregation.
+
+## Alerting
+
+Charts and dashboards are for when you're watching; an alert is for when you're not. To get notified when a metric crosses a threshold, save the chart as an insight first — metric alerts are built on insights, so they live alongside your other alerts on the insights and dashboards you already use.
+
+1. In the viewer, click **Save as insight** (or **Add to dashboard**).
+2. Open the saved insight, click **Actions** in the sidebar, and choose **Alerts**.
+3. Click **New alert**, name it, and set the threshold you want to be notified about.
+
+Alerts are threshold-based: you set a bound the metric must stay above or below, and PostHog notifies you (Slack, Microsoft Teams, or webhook) when it crosses. Because a metric alert is just an alert on a metric insight, it uses the same alerting platform and notification channels as every other insight.
+
+See [Alerts](/docs/alerts) for the full setup, including [thresholds](/docs/alerts#thresholds) and [notification channels](/docs/alerts#notifications).
+
+## Next steps
+
+- [Get started with metrics](/docs/metrics/start-here)
+- [Generate a metric from your logs](/docs/logs/metrics)
+- [How metrics works under the hood](/docs/metrics/architecture)

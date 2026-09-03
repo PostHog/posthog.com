@@ -4,9 +4,9 @@ title: Conversation IDs
 
 import CalloutBox from 'components/Docs/CalloutBox'
 
-A PostHog `$session_id` is per MCP connection — it rotates when the protocol session does. That's the right granularity for "which TCP/WebSocket connection is this?" but it can split a single user conversation into multiple sessions when the client reconnects.
+A PostHog `$session_id` normally follows the MCP protocol session. The handshake-free `2026-07-28` revision has no protocol session, so each request gets a new session unless you add another correlation signal.
 
-`$mcp_conversation_id` is an opt-in property that lets you stitch those calls together at the conversation level instead.
+`$mcp_conversation_id` is an opt-in property that lets you stitch those calls together at the conversation level. The SDK also derives `$session_id` from it, so PostHog session queries group the same calls.
 
 <CalloutBox icon="IconWarning" title="Opt-in, with caveats" type="caution">
 
@@ -25,10 +25,10 @@ instrument(server, posthog, {
 With this on, the SDK does three things:
 
 1. **Injects an optional `conversation_id` argument** into every tool's JSON Schema, with a description telling the agent to reuse the value the server returns.
-2. **Mints a UUID** when the agent calls a tool without `conversation_id` and **appends a text block** to the tool's response that asks the agent to echo the same id on subsequent calls.
-3. **Captures the supplied or minted value** on every event as `$mcp_conversation_id`, distinct from `$session_id`.
+2. **Mints a UUID** when the agent calls a tool without `conversation_id`, and returns it on the tool's response as a `{"conversation_id":"…"}` text block — data, not an instruction.
+3. **Captures the supplied or minted value** on every event as `$mcp_conversation_id` and derives a stable `$session_id` from it.
 
-The agent's `conversation_id` (when present) always wins. The SDK only mints when the agent doesn't supply one.
+The SDK reuses an echoed UUIDv7 that matches the handles it mints. It replaces missing or arbitrary values with a new handle to avoid merging unrelated conversations.
 
 ## How it lands in events
 
@@ -36,15 +36,15 @@ The agent's `conversation_id` (when present) always wins. The SDK only mints whe
 {
   event: "$mcp_tool_call",
   properties: {
-    "$session_id": "ses_2a3f…",            // MCP connection
-    "$mcp_conversation_id": "c_8b1d…",     // logical conversation
+    "$session_id": "ses_2a3f…",            // derived from the conversation handle
+    "$mcp_conversation_id": "0198f2d6-…",  // echoed UUIDv7 conversation handle
     "$mcp_tool_name": "search_events",
     ...
   }
 }
 ```
 
-A new connection (new `$session_id`) made by the same agent re-using the same `conversation_id` will share `$mcp_conversation_id`. You can group by it in HogQL to see the whole conversation:
+A new request or connection made by the same agent reusing the same `conversation_id` shares both `$mcp_conversation_id` and `$session_id`. You can group by the conversation property in HogQL:
 
 ```sql
 SELECT
@@ -62,29 +62,37 @@ LIMIT 50
 
 ## Caveats
 
-<CalloutBox icon="IconWarning" title="The prompt-back leaks into agent UIs" type="caution">
+<CalloutBox icon="IconWarning" title="Some tools can't take the injection" type="caution">
 
-The "please echo this `conversation_id`" message is appended as a regular `text` content block — the only channel MCP currently offers for server-to-agent communication. Consumers that surface raw tool-call content to end users will see `[SERVER]: Reuse conversation_id=…` in their UI. If the MCP spec grows a dedicated server-directives channel (e.g. on `_meta`), the SDK will move there.
+The `conversation_id` parameter can't be added to a schema built from `oneOf` / `allOf` / `anyOf` / `$ref`, or to a tool with no input schema. Those tools log a warning and get no handle, so their calls won't correlate. [`identify`](/docs/mcp-analytics/identifying-users) covers them.
+
+A client working from a **stale cached tool listing** won't know to send the parameter either — `ttlMs` caching on `tools/list` makes that more likely over time.
+
+</CalloutBox>
+
+<CalloutBox icon="IconInfo" title="The handle is visible in tool output" type="fyi">
+
+It's returned as a `{"conversation_id":"…"}` text block, so consumers that surface raw tool-call content to end users will show that JSON. It's deliberately data rather than an instruction — an imperative sentence in tool output is indistinguishable from prompt injection, and hardened clients block it.
 
 </CalloutBox>
 
 <CalloutBox icon="IconWarning" title="Agent-controlled values" type="caution">
 
-When the agent supplies a `conversation_id`, the SDK accepts any non-empty string. You can bind it to your own session scheme (chat id, JWT `jti`, request id) by having the agent send that value, but nothing prevents a misbehaving client from sending arbitrary strings. Don't use `$mcp_conversation_id` as a security boundary.
+The SDK only reuses UUIDv7 values that match the shape of handles it can mint. It replaces other values with a new handle. A client can still reuse a valid-looking handle across users, so don't use `$mcp_conversation_id` as a security boundary.
 
 </CalloutBox>
 
-<CalloutBox icon="IconInfo" title="It's not a session id" type="fyi">
+<CalloutBox icon="IconInfo" title="It also anchors the PostHog session" type="fyi">
 
-`$session_id` is what PostHog's session-level joins and identity resolution use. `$mcp_conversation_id` is purely a logical grouping label — handy for joins, useless for everything else.
+PostHog's session-level joins use `$session_id`. When conversation IDs are enabled, the SDK hashes the accepted `conversation_id` into a deterministic `$session_id`. Separate server instances derive the same value without shared storage.
 
 </CalloutBox>
 
 ## When to skip this
 
-If your MCP server runs over a long-lived connection that already aligns with what you'd call a "conversation" — for example, a stdio server attached to a single Claude Desktop chat — `$session_id` is already doing the right thing. Leave `enableConversationId` off.
+If your MCP server runs over a long-lived `2025-11-25` connection that already aligns with what you'd call a conversation, `$session_id` is already doing the right thing. Leave `enableConversationId` off.
 
 Turn it on when:
 
 - The same logical conversation crosses connections (HTTP/SSE clients that reconnect).
-- You want to correlate MCP events with a conversation id you already own elsewhere (chat platform, support ticket, JWT) and you're happy to plumb that id through the agent.
+- Your server handles the `2026-07-28` revision and you want more than one request in each PostHog session.

@@ -24,6 +24,7 @@ If not, think again.
 ## How it works
 - All company expenses (offsites, software/tool subscriptions, merch, etc.) will have common company-wide budgets.
 - You'll be assigned a single `User Limit` of $5,000 per month in Brex from which you can spend money on individual subscriptions, coworking/collaboration, equipment (except laptops and Mac Studio Monitors - ping `#team-people-and-ops` for these), training, etc. If you need an increase in the limit, request it on Brex.
+  - The $5,000 is a ceiling, not a target or an allowance to use up – only spend what you can justify as being in PostHog's best interest.
 
 ### Transparency & accountability
 - All expenses are visible company-wide
@@ -211,6 +212,9 @@ You can ask for access to team/company tools by submitted a request in Slack. Fi
 
 - AI coding tools (Cursor, Claude Code, etc.) are encouraged, but usage-based pricing can climb fast. Most engineers' monthly spend lands around a single max-tier subscription (~$200/month). If yours is running several times higher, that's usually a misconfiguration or inefficient workflow rather than a genuine need – compare setups with your teammates and ask in [#team-people-and-ops](https://posthog.slack.com/archives/C017WDX3BFZ) if you're unsure. We have a team Claude Code account that you can request to be added to using Zluri in slack.
 
+### Coworking
+- If there's a WeWork where you are, use it – we have a company All Access account, so default to that rather than paying for another coworking space. Ask [Kendal](https://posthog.com/community/profiles/28628) in [#team-people-and-ops](https://posthog.slack.com/archives/C017WDX3BFZ) for access.
+
 ### Travel
 - We travel in economy by default and do not pay for business class
   - If you're unsure of your travel plans and believe you may have to cancel, it may be worth spending a bit extra to book flex tickets that allow a full refund to your Brex
@@ -237,3 +241,6 @@ If you do decide to come, we ask that you make the trip worthwhile - attend a co
 
 ### Sponsorships
 If you believe an open-source project is fundamentally important to the success of PostHog then we should set up a recurring sponsorship. In this case, see the [open-source sponsorship Marketing initiative](/handbook/marketing/open-source-sponsorship).
+
+#### Open-source sponsorship for individuals
+You can also sponsor open-source projects that have helped you personally, using your monthly `User Limit`. You don't need approval - just apply the guiding principles above, as you would for any other spend.

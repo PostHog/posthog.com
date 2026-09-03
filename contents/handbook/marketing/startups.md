@@ -13,7 +13,7 @@ We run two special programs for early-stage teams, plus external partnerships wi
 | Eligibility                 | <2 years old, <$5M raised, not acquired, company email domain | Must be in YC (proven with a [YC verification link](https://www.ycombinator.com/verify)), <$25m raised, company email domain |
 | Credit                      | $50,000 for 12 months                                 | $50k per year, whilst eligible                        |
 | Can use credit for add-ons? | ⚠️ Yes, but cannot use credit for BAA in Boost package | ✅ Yes, and can use credit for BAA in Boost package    |
-| Can use credit for AI tools? | ❌ No, from September 14, 2026 (PostHog Desktop, Replay Vision, PostHog AI, Inbox) | ❌ No, from September 14, 2026 (PostHog Desktop, Replay Vision, PostHog AI, Inbox) |
+| Can use credit for AI tools? | ❌ No, from September 14, 2026 (PostHog Desktop, PostHog Slack app, Replay Vision, PostHog AI, Inbox) | ❌ No, from September 14, 2026 (PostHog Desktop, PostHog Slack app, Replay Vision, PostHog AI, Inbox) |
 | Founder merch               | Welcome pack (max 1)                                  | Different welcome pack (max 4)                        |
 | Community                   | —                                                     | Tim's Whatsapp, priority support                      |
 | Apply via…                  | [Startup page](/startups)                             | [Secret YC page](https://app.posthog.com/startups/yc) |
@@ -29,7 +29,7 @@ Any company that is <2 years old and has raised less than $5M in funding is elig
 
 > ❗Credits **cannot** be used toward a BAA under the Boost plan.
 
-> ❗From September 14, 2026, credits **cannot** be used toward AI tools such as PostHog Desktop, Replay Vision, PostHog AI, and Inbox, due to the prohibitive and unpredictable nature of token-based pricing. Teams that joined before that date can still pay for usage incurred before the cut-off with credits.
+> ❗From September 14, 2026, credits **cannot** be used toward AI tools such as PostHog Desktop, the PostHog Slack app, Replay Vision, PostHog AI, and Inbox, due to the prohibitive and unpredictable nature of token-based pricing. Teams that joined before that date can still pay for usage incurred before the cut-off with credits.
 
 > ⭐ **Small open source projects** without corporate backing and less than $200k annual revenue can contact support to have the 12-month credit expiry waived.
 
@@ -76,7 +76,7 @@ Subscribers with [Lenny's Newsletter](https://www.lennysnewsletter.com/) Product
 -   The Scale add-on for free
 -   Valid for one year
 
-Product exclusions are the same as for the PostHog for Startups plan, including PostHog Desktop, Inbox, and Replay Vision. See [posthog.com/startups](/startups) for more detail.
+Product exclusions are the same as for the PostHog for Startups plan, including PostHog Desktop, the PostHog Slack app, Inbox, and Replay Vision. See [posthog.com/startups](/startups) for more detail.
 
 ### Every.to
 
@@ -131,7 +131,9 @@ Credits can be used for most PostHog tools and add-ons, including [platform pack
 
 -   **Startups**: ❌ Cannot use credits toward a BAA due to legal risk.
 -   **YC teams**: ✅ Can use credits for a BAA under the Boost plan.
--   **AI tools**: ❌ From September 14, 2026, credits cannot be used toward AI tools such as PostHog Desktop, Replay Vision, PostHog AI, and Inbox, due to the prohibitive and unpredictable nature of token-based pricing. Usage incurred before the cut-off can still be paid with credits.
+-   **AI tools**: ❌ From September 14, 2026, credits cannot be used toward AI tools such as PostHog Desktop, the PostHog Slack app, Replay Vision, PostHog AI, and Inbox, due to the prohibitive and unpredictable nature of token-based pricing. Usage incurred before the cut-off can still be paid with credits.
+
+Buying a platform package with credits – including the enterprise add-on – does not come with a dedicated account manager, CSM, or sales contact, in the same way it does not come with high priority support. Those are for paying customers. Founders who want one-to-one help can buy a [30-minute onboarding call](/merch?product=30-min-onboarding-consultation) from the merch store.
 
 Credits are valid are not transferable, and don’t carry over or convert to cash. They are valid for 12 months and that timer begins at application. Once expired or fully used, teams are moved to standard billing.
 

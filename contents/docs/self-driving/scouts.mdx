@@ -82,6 +82,8 @@ Sometimes you don't want to change a scout – you want to tell it something. **
 
 A note can address one scout by name or the whole fleet, and you can give it an expiry date so time-boxed steering ("watch this closely this week") retires itself.
 
+A note can also target a report-pipeline stage with a reserved `pipeline:*` audience. Use `pipeline:report-research` for guidance about how reports are researched, judged, and routed. The note reaches that stage and no scout. It is the only pipeline audience available today. Other `pipeline:*` values are rejected.
+
 Notes are advisory. They direct a scout's attention, but they don't lower its evidence bar or force it to file anything – a note saying "report X" still gets an honest investigation. Each run says which notes it acted on and how, and folds anything durable into its memory.
 
 A note is the right tool for steering *this project, right now*, and for trying a nudge before committing to it. Once a steer becomes permanent policy – a threshold, a disqualifier, a change of scope – edit the scout instead. A note you keep re-leaving is a scout edit waiting to happen.
@@ -96,9 +98,9 @@ The practical upshot: triaging your inbox honestly is how scouts get quieter. Yo
 
 ## Sending a scout's output to Slack
 
-Each scout can post what it finds to a Slack channel of your choosing, set per scout. That lets you route scouts to the teams that care – the revenue scout to `#growth`, the APM scout to `#on-call` – instead of sending everything to one firehose channel.
+Each scout can send what it finds to a Slack channel or as a direct message to selected Slack members, set per scout. A channel lets you route a scout to a shared team space – the revenue scout to `#growth`, the APM scout to `#on-call`. Direct messages let you send a scout's output privately to the people who need it. You can select up to five Slack members for direct messages.
 
-This is per scout and separate from the project-wide **#posthog-inbox** notification you set up when [connecting Slack](/docs/self-driving/setup). Connect your Slack workspace once, then pick a channel on any scout you want routed.
+This is per scout and separate from the project-wide **#posthog-inbox** notification you set up when [connecting Slack](/docs/self-driving/setup). Connect your Slack workspace once, then choose a channel or Slack members on any scout you want routed. The selected members must belong to the connected Slack workspace and be eligible to receive messages.
 
 ## Every report is also an event
 

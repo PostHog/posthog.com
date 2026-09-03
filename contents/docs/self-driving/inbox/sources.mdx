@@ -65,7 +65,7 @@ These sources are available when the matching PostHog product has data in your p
       label: "Replay Vision",
       url: "/docs/replay-vision",
       icon: "IconEye",
-      description: "Actionable product issues detected by scanners.",
+      description: "Scanner findings, plus each scanner's signal, report, and pull request counts.",
       lineClamp: 2,
     },
     {
@@ -91,6 +91,8 @@ These sources are available when the matching PostHog product has data in your p
     },
   ]}
 />
+
+**Replay Vision** scanners can send their findings into Signals. Open a scanner to see how many signals it has emitted, how many reports those signals contributed to, and how many pull requests were opened or merged. Reports can combine signals from several scanners and other sources, so these counts show the scanner's contribution, not sole ownership of a report.
 
 ## External sources
 
