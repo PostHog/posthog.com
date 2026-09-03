@@ -5717,6 +5717,14 @@
             "destination": "/ai-observability"
         },
         {
+            "source": "/addons",
+            "destination": "/pricing?calculator"
+        },
+        {
+            "source": "/add-ons",
+            "destination": "/pricing?calculator"
+        },
+        {
             "source": "/platform-addons",
             "destination": "/platform-packages"
         },

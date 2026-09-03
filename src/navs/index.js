@@ -6828,6 +6828,11 @@ export const docsMenu = {
                             icon: 'IconGemini',
                         },
                         {
+                            name: 'Google ADK',
+                            url: '/docs/ai-observability/installation/google-adk',
+                            icon: 'IconGemini',
+                        },
+                        {
                             name: 'Vercel AI SDK',
                             url: '/docs/ai-observability/installation/vercel-ai',
                             platformLogo: 'vercel',
@@ -8198,6 +8203,12 @@ export const docsMenu = {
                     color: 'green',
                 },
                 {
+                    name: 'Log-based metrics',
+                    url: '/docs/logs/metrics',
+                    icon: 'IconTrends',
+                    color: 'purple',
+                },
+                {
                     name: 'PII scrubbing',
                     url: '/docs/logs/pii-scrubbing',
                     icon: 'IconShield',
@@ -8306,6 +8317,12 @@ export const docsMenu = {
                         { name: 'Docker', url: '/docs/metrics/installation/docker' },
                         { name: 'Kubernetes', url: '/docs/metrics/installation/kubernetes' },
                     ],
+                },
+                {
+                    name: 'Use your metrics',
+                    url: '/docs/metrics/explore',
+                    icon: 'IconTrends',
+                    color: 'blue',
                 },
                 {
                     name: 'Why you need metrics',
@@ -8612,12 +8629,6 @@ export const pricingMenu = {
         //     color: 'purple',
         //     url: '/events',
         // },
-        {
-            name: 'Add-ons',
-            icon: 'IconPuzzle',
-            color: 'seagreen',
-            url: '/addons',
-        },
         {
             name: 'Platform packages',
             icon: 'IconServer',
