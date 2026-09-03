@@ -25,6 +25,7 @@ import ToolsTicker from 'components/Home/ToolsTicker'
 // GetStarted, the carousel) is the only PostHog.com-side glue and is not present on 9000.
 import PlatformInstall, { wizardInstallSchema } from 'components/PlatformInstall'
 import HeroCTA from 'components/Home/HeroCTA'
+import ThePostHog from 'components/Desktop/ThePostHog'
 import Customers from '../Customers'
 import { RoughAnnotation } from 'components/Code/RoughAnnotation'
 import { cn } from '../../../utils'
@@ -251,6 +252,7 @@ export default function HomeTest() {
 
     return (
         <ReaderView proseSize="lg" hideLeftSidebar showQuestions={false}>
+            <ThePostHog />
             <div className="space-y-12">
                 <Hero />
                 <Customers />
