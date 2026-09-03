@@ -169,6 +169,8 @@ const UseCaseRamp = ({ id, productData }: SectionComponentProps): JSX.Element | 
                     const mode = levels[column.level]?.mode
                     const points = column.points ?? []
                     const nextColumn = columns[index + 1]
+                    const isFirst = index === 0
+                    const isLast = index === columns.length - 1
                     return (
                         <Tabs.Content
                             key={column.level}
@@ -180,7 +182,9 @@ const UseCaseRamp = ({ id, productData }: SectionComponentProps): JSX.Element | 
                              * beat it and leave an empty padded band stacking up above the live panel.
                              * Layout goes on the inner wrapper instead.
                              */
-                            className="rounded-b-md rounded-tr-md bg-light p-4 outline-none @md/reader-content:p-6 dark:bg-dark"
+                            className={`rounded-b-md bg-light p-4 outline-none @md/reader-content:p-6 dark:bg-dark ${
+                                !isFirst ? 'rounded-tl-md' : ''
+                            } ${!isLast ? 'rounded-tr-md' : ''}`}
                         >
                             <div className="flex flex-col gap-5">
                                 <div className="relative z-10 flex flex-col gap-2">
