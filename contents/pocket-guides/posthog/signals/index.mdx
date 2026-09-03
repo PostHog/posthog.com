@@ -1,0 +1,68 @@
+---
+title: How Unter found the bug
+shortTitle: The report
+subtitle: Everything needed to find the bug had existed for eleven days. What changed was that something finally went looking.
+pocketGuideOrder: 8
+---
+
+<LeftPage>
+
+<UnterFigure
+    n={1}
+    page="safety"
+    focus="coverage-map"
+    tools={['selfdriving']}
+    caption="The failed map, with the evidence underneath it."
+/>
+
+<ReportFigure
+    n={2}
+    caption="What landed in Unter's inbox at 03:40. Four findings, one problem, and the chart nobody had to rebuild."
+/>
+
+<LoopFigure
+    n={3}
+    caption="Signal, report, pull request, measured. The four stages the fortnight ran on."
+/>
+
+</LeftPage>
+
+<RightPage>
+
+# How Unter found the bug
+
+The evidence had been there for eleven days. All of it was being recorded, but none of it was being turned into a <Term name="report">report</Term> <SeeFig n={1} />.
+
+Then, at 03:40, something went looking.
+
+## Two ways to notice a problem
+
+Signals come from events that match a rule. Every new exception can become a <Term name="signal">signal</Term>. Unter's error tracking had been producing signals about the 403s since March 3.
+
+Scouts work differently. They run on a schedule, look across the data, and decide whether something is worth reporting.
+
+The signals knew that the tile service was failing. The <Term name="scout">scout</Term> noticed that several pieces of evidence were describing the same failure.
+
+## One report instead of four alerts
+
+The scout found the errors, the service logs, the repeated retries, and the change in the funnel.
+
+Instead of sending four separate alerts, it grouped them into one problem: coverage tile requests failing with 403.
+
+It also found the cause: the API key had expired 366 days earlier.
+
+Because Unter already had those events, the scout was able to find the anamoly in the data.
+
+## Then the report became a fix
+
+The report opened a pull request to rotate the key, add a calendar reminder, and fall back to a cached layer.
+
+The agent did not need a new event to tell it what to inspect. It used the error, the logs, and the behaviour around the failed widget to work backwards from symptom to cause.
+
+Unter still had to review and merge the change.
+
+After that, the same system measured whether the fix worked <SeeFig n={3} />. The result went back into the data as another signal.
+
+The loop made the distance between _something happened_ to _someone did something about it_ much shorter.
+
+</RightPage>

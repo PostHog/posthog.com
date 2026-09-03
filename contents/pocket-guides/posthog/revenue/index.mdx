@@ -1,0 +1,64 @@
+---
+title: What a fix is worth
+shortTitle: Revenue
+subtitle: One backend engineer, a list of things wrong with the site, and no way of ranking them. February is when Unter worked out how.
+pocketGuideOrder: 5
+---
+
+<LeftPage>
+
+<UnterFigure
+    n={1}
+    page="highway"
+    focus="impact-calc"
+    tools={['product']}
+    caption="The page as its users saw it, with nothing marked on it."
+/>
+
+<UnterFigure
+    n={2}
+    page="highway"
+    focus="host-faq"
+    tools={['product']}
+    caption="The touchpoint, and the data underneath it."
+/>
+
+<UnterFigure
+    n={3}
+    page="highway"
+    focus="refer-block"
+    tools={['experiments']}
+    caption="One tool at a time, on the element it belongs to."
+/>
+
+</LeftPage>
+
+<RightPage>
+
+# What a fix is worth
+
+By February, Unter had one backend engineer and a growing list of things that needed fixing. A slow form and a broken link both arrived as support tickets – <SeeFig n={1} />. Neither said what happened if they stayed broken, or which one was causing the most impact.
+
+## Put the money next to the behavior
+
+Unter already knew what people did on the site <SeeFig n={2} />, and what those people were worth: charges in Stripe, subscriptions, renewals.
+
+So they put those together with the other things they knew – support tickets, their CRM, and an issue tracker – and suddenly a ticket stopped being just a ticket.
+
+A host who never cut a hole might also be a subscription that never renews – <SeeFig n={3} />. That is a very different kind of bug.
+
+## Some fixes matter more than others
+
+This changed what got worked on first.
+
+A broken button on a busy page looks important because lots of people see it. But a quieter problem can be worth more if it stops hosts from ever getting to the thing they came to do.
+
+For Unter, one missing hole could mean a lost route, a lost host, and a subscription that never came back.
+
+## One number, wherever you ask
+
+Revenue metrics were defined once and reused everywhere.
+
+The number in a Monday email, the number in the SQL editor, and the answer PostHog gave when someone asked for it in plain English all came from the same definition.
+
+</RightPage>

@@ -1,0 +1,74 @@
+---
+title: One installation, many tools
+shortTitle: Tools
+subtitle: By the middle of February Unter was running replay, errors, flags, experiments, surveys and logs. They had wired the site up once.
+pocketGuideOrder: 3
+---
+
+<LeftPage>
+
+<UnterFigure
+    n={1}
+    page="ride"
+    focus="ride-form"
+    tools={['replay']}
+    caption="The page as its users saw it, with nothing marked on it."
+/>
+
+<UnterFigure
+    n={2}
+    page="ride"
+    focus="btn-see-prices"
+    tools={['product']}
+    caption="The touchpoint, and the data underneath it."
+/>
+
+<UnterFigure
+    n={3}
+    page="ride"
+    focus="hero-headline"
+    tools={['experiments']}
+    caption="One tool at a time, on the element it belongs to."
+/>
+
+<UnterFigure
+    n={4}
+    page="ride"
+    focus="reserve-feature"
+    tools={['flags']}
+    caption="The same page, filtered to a different question."
+/>
+
+</LeftPage>
+
+<RightPage>
+
+# One installation, many tools
+
+By the middle of February, Unter had [Session Replay](/docs/session-replay), [Error Tracking](/docs/error-tracking), [Feature Flags](/docs/feature-flags), [Experiments](/docs/experiments), [Surveys](/docs/surveys) and [Logs](/docs/logs) running across the site <SeeFig n={1} />. The booking page had not been rebuilt for any of them. They had installed PostHog once, and kept adding tools to monitor product usage.
+
+With Session Replay, Unter could watch how forms were being used, including the moments when someone hesitates or corrects themselves. The addresses are <Term name="masking">masked</Term> for privacy, but the user behavior becomes watchable.
+
+## Using different tools on one page
+
+[Product Analytics](/docs/product-analytics) looked at the same page another way <SeeFig n={2} />. The "See prices" button became a named event, with the distance, number of gaps, and selected tier attached to it.
+
+That meant the team could ask who reached that step, who went on to request a ride, and where the conversion fell away.
+
+## Experiments and feature flags
+
+An <Term name="experiment">experiment</Term> put a different headline in front of some visitors <SeeFig n={3} />. The <Term name="feature flag">flag</Term> decided which version they saw, and the exposure was recorded alongside the outcome.
+
+A feature flag could ask a different question again <SeeFig n={4} />. A risky reservation feature could go to a small <Term name="cohort">cohort</Term> first, while the team watched for successful crossings and <Term name="exception">exceptions</Term> before giving it to everyone.
+
+## What the data told Unter
+
+Session Replay showed what people did. Product Analytics counted it. Experiments compared it. Feature Flags controlled who got it.
+
+But the data didn't tell Unter much, yet.
+
+At this point the setup was mostly infrastructure: a page that could be watched, measured, compared, and changed without instrumenting it again each time.
+
+The reason to build it was waiting once their users started arriving.
+
+</RightPage>
