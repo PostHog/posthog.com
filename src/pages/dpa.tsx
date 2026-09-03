@@ -1224,7 +1224,7 @@ function DpaGenerator() {
                             <p>
                                 10.3. <strong>Data Privacy Framework.</strong> Processor confirms that it participates
                                 in the EU-US Data Privacy Framework, the UK Extension to this Framework and the
-                                Swiss-U.S. Data Privacy Framework (together, the "<strong>DPF</strong>"). The Supplier
+                                Swiss-U.S. Data Privacy Framework (together, the "<strong>DPF</strong>"). The Processor
                                 undertakes to maintain its self-certification to the DPF; to notify Company without
                                 undue delay if Processor determines that it will cease to self-certify to the DPF; and
                                 to notify Company immediately if Processor's participation in the DPF is otherwise
