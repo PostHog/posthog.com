@@ -2,12 +2,14 @@ import React, { useCallback, useMemo, useState } from 'react'
 import { Tabs } from 'radix-ui'
 import { IconPauseFilled, IconPlayFilled } from '@posthog/icons'
 import Tooltip from 'components/RadixUI/Tooltip'
+import usePostHog from 'hooks/usePostHog'
 import { Tab, productUsageTabs } from './tabs'
 import { AutoAdvanceGateContext, SlideActiveContext } from './autoAdvanceGate'
 
 const SLIDE_DURATION = 5000
 
 export default function HeroCarousel({ tabs = productUsageTabs, className }: { tabs?: Tab[]; className?: string }) {
+    const posthog = usePostHog()
     const [activeTab, setActiveTab] = useState(tabs[0].value)
     const [isPaused, setIsPaused] = useState(false)
     const [isHovering, setIsHovering] = useState(false)
@@ -29,15 +31,24 @@ export default function HeroCarousel({ tabs = productUsageTabs, className }: { t
 
     const effectivelyPaused = isPaused || isHovering || holds > 0
 
-    const advance = useCallback(() => {
-        setActiveTab((prev) => {
-            const idx = tabs.findIndex((t) => t.value === prev)
-            return tabs[(idx + 1) % tabs.length].value
+    const captureSlideViewed = (slide: string, trigger: 'auto' | 'click') => {
+        posthog?.capture('hero_carousel_slide_viewed', {
+            slide,
+            slide_index: tabs.findIndex((t) => t.value === slide),
+            trigger,
         })
+    }
+
+    const advance = () => {
+        const idx = tabs.findIndex((t) => t.value === activeTab)
+        const next = tabs[(idx + 1) % tabs.length].value
+        captureSlideViewed(next, 'auto')
+        setActiveTab(next)
         setProgressKey((k) => k + 1)
-    }, [])
+    }
 
     const handleTabChange = (value: string) => {
+        captureSlideViewed(value, 'click')
         setActiveTab(value)
         setProgressKey((k) => k + 1)
     }
