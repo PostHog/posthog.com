@@ -22,11 +22,9 @@ Mobile:  [Logo Menu ▼] (contains all navigation items)
 
 ## Navbar Tools experiment
 
-`navbar-tools` is a multivariate experiment. Control keeps Tools nested under Products as "Browse tools". Test inserts a top-level Tools menu (same searchable list) after Products, and leaves Browse tools in the Products menu.
+`navbar-tools` is a multivariate experiment. Control keeps Tools nested under Products as "Browse tools". Test inserts a top-level Tools menu after Products (same curated tools, as regular menu items), and leaves Browse tools in the Products menu.
 
 The taskbar wraps the nav in `RenderInClient`. Until flags resolve, it shows the control nav. After flags load, `getFeatureFlag('navbar-tools') === 'test'` inserts Tools. Create the experiment in the website PostHog project with variants `control` and `test` before launch.
-
-On mobile, the test Tools item is a link to `/products` via `mobileLink`.
 
 ## Mobile Menu Configuration
 
@@ -149,7 +147,7 @@ Submenus are automatically converted to simple links on mobile:
 - `menuData.tsx` – Menu data and mobile processing logic
 - `navbarToolsExperiment.ts` – `navbar-tools` flag key (`NAVBAR_TOOLS_FLAG`)
 - `index.tsx` – TaskBar component that renders the menu
-- `../RadixUI/MenuBar.tsx` – Base menu component with mobile support. Top-level `items` may be a menu-item array or a React element (used by the Tools experiment).
+- `../RadixUI/MenuBar.tsx` – Base menu component with mobile support
 
 ## Testing Mobile Menu
 

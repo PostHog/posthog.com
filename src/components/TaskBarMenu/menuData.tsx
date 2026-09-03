@@ -19,6 +19,7 @@ import { useAppSettings } from '../../context/App'
 import { IconChevronDown } from '@posthog/icons'
 import { navigate } from 'gatsby'
 import { useSmallTeamsMenuItems } from './SmallTeamsMenuItems'
+import { BROWSE_TOOLS_HANDLES, buildProductMenuItems } from 'constants/productNavigation'
 
 interface DocsMenuItem {
     name: string
@@ -388,10 +389,7 @@ const buildProductsMenuItems = (allProducts: any[]) => {
 
 const buildToolsMenu = (allProducts: any[]): MenuType => ({
     trigger: 'Tools',
-    // Same searchable list as Products → Browse tools. Mobile has no room for
-    // that panel, so the trigger becomes a link to the tools index.
-    mobileLink: '/products',
-    items: <SearchableProductMenu products={allProducts} />,
+    items: buildProductMenuItems([...BROWSE_TOOLS_HANDLES], allProducts),
 })
 
 export function useMenuData(showNavbarTools = false): MenuType[] {
@@ -797,7 +795,7 @@ export function useMenuData(showNavbarTools = false): MenuType[] {
                     label: typeof menu.trigger === 'string' ? menu.trigger : 'Menu',
                     link,
                 })
-            } else if (Array.isArray(menu.items)) {
+            } else {
                 // Process items and filter out those with mobileDestination === false
                 const filteredItems: MenuItemType[] = []
                 const menuItemsCopy = [...menu.items]
