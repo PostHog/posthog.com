@@ -125,15 +125,29 @@ Then the part that makes it a loop rather than a funnel: the scout **checks back
 
 <details>
 
-<summary>A real one, from this week: <strong>the fix that didn't ship</strong></summary>
+<summary>A real one, from last week: <strong>complaint to production in seven hours</strong></summary>
 
-On September 1st, three separate organizations filed agent feedback within 33 minutes of each other: the virtual traffic properties that `read-data-schema` advertises get warned about or rejected by `execute-sql`. One agent's checkout analysis returned zero purchases after applying a bot filter; another couldn't trust its bot exclusion at all.
+On August 28th at 11:28 UTC, an agent working in a customer's project filed `missing_tool` feedback with `task_completed=false`. It wanted to define catalog events before any had been ingested. The MCP had `event-definition-update` but no create, so its workaround was firing one anonymous seed capture per event and then calling update. Ugly.
 
-The scout's finding wasn't "this is broken" – it was "this is broken *again*":
+Six minutes later the scout emitted a report. It had already checked that the REST create endpoint existed, so it knew only the MCP tool was missing – and it could find no open PR or issue covering it. Eight minutes after that, [PR #90832](https://github.com/PostHog/posthog/pull/90832) was open: 280 lines across 13 files, including integration tests.
 
-> Virtual traffic filters still fail for 3 organizations, **and the prior fix closed without merging.** The prior virtual traffic taxonomy report is suppressed. Its implementation PR [#69285](https://github.com/PostHog/posthog/pull/69285) closed without merging.
+Then the review layer earned its keep. PostHog Review flagged two must-fixes within the first minute, including that the returned URL used the event name where the route only accepts a UUID, so every link would have 404'd. A couple of hours later Codex found the interesting one: on self-hosted builds the base serializer silently dropped `description`, `verified`, and `hidden`, so the tool would report success while losing most of the metadata it promised. That fix went into the backend, with a 400 and regression tests. Codex came back once more for a Unicode edge case in tag length after lowercasing.
 
-It had reported this defect before, watched a fix PR get opened, and – because it checks back on what it believes got fixed – noticed that PR died without merging. So it re-emitted, citing its own earlier report as evidence. The new report went out as immediately actionable and [PR #92104](https://github.com/PostHog/posthog/pull/92104) picked it up.
+I approved at 14:22, hit `/trunk merge` at 17:27, and it was live in prod by 18:56. Complaint to production in about seven and a half hours, with three reviewers layered on the PR and me reading rather than writing.
+
+<!-- inbox ref: 01a04826-35d3-7170-aa2c-2180a5a30e66 -->
+
+</details>
+
+<details>
+
+<summary>And the check-back in action: <strong>the fix that didn't ship</strong></summary>
+
+On September 1st, three separate organizations filed agent feedback within 33 minutes of each other: the virtual traffic properties that `read-data-schema` advertises get warned about or rejected by `execute-sql`. The scout's finding wasn't "this is broken" – it was "this is broken *again*":
+
+> Virtual traffic filters still fail for 3 organizations, **and the prior fix closed without merging.** Its implementation PR [#69285](https://github.com/PostHog/posthog/pull/69285) closed without merging.
+
+It had reported this defect before, watched a fix PR get opened, and – because it checks back on what it believes got fixed – noticed that PR died. So it re-emitted, citing its own earlier report as evidence, and [PR #92104](https://github.com/PostHog/posthog/pull/92104) picked it up.
 
 <!-- inbox ref: 01a05b3f-aa00-766b-ac56-f6b9527f58d0 -->
 
