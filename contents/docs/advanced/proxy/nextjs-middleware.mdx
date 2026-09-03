@@ -78,8 +78,9 @@ export function proxy(request) {
 
   const requestHeaders = new Headers(request.headers)
   requestHeaders.set('host', hostname)
-  // Remove cookies before forwarding to PostHog
+  // Remove cookies and auth headers before forwarding to PostHog
   requestHeaders.delete('cookie')
+  requestHeaders.delete('authorization')
 
   url.protocol = 'https'
   url.hostname = hostname
@@ -107,8 +108,9 @@ export function proxy(request) {
 
   const requestHeaders = new Headers(request.headers)
   requestHeaders.set('host', hostname)
-  // Remove cookies before forwarding to PostHog
+  // Remove cookies and auth headers before forwarding to PostHog
   requestHeaders.delete('cookie')
+  requestHeaders.delete('authorization')
 
   url.protocol = 'https'
   url.hostname = hostname
@@ -143,8 +145,9 @@ export function middleware(request) {
 
   const requestHeaders = new Headers(request.headers)
   requestHeaders.set('host', hostname)
-  // Remove cookies before forwarding to PostHog
+  // Remove cookies and auth headers before forwarding to PostHog
   requestHeaders.delete('cookie')
+  requestHeaders.delete('authorization')
 
   url.protocol = 'https'
   url.hostname = hostname
@@ -172,8 +175,9 @@ export function middleware(request) {
 
   const requestHeaders = new Headers(request.headers)
   requestHeaders.set('host', hostname)
-  // Remove cookies before forwarding to PostHog
+  // Remove cookies and auth headers before forwarding to PostHog
   requestHeaders.delete('cookie')
+  requestHeaders.delete('authorization')
 
   url.protocol = 'https'
   url.hostname = hostname
@@ -303,8 +307,9 @@ export default authMiddleware({
 
       const requestHeaders = new Headers(req.headers)
       requestHeaders.set('host', hostname)
-      // Remove cookies before forwarding to PostHog
+      // Remove cookies and auth headers before forwarding to PostHog
       requestHeaders.delete('cookie')
+      requestHeaders.delete('authorization')
 
       url.protocol = 'https'
       url.hostname = hostname
@@ -331,8 +336,9 @@ export default authMiddleware({
 
       const requestHeaders = new Headers(req.headers)
       requestHeaders.set('host', hostname)
-      // Remove cookies before forwarding to PostHog
+      // Remove cookies and auth headers before forwarding to PostHog
       requestHeaders.delete('cookie')
+      requestHeaders.delete('authorization')
 
       url.protocol = 'https'
       url.hostname = hostname

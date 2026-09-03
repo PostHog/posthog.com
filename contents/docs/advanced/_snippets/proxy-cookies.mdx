@@ -2,12 +2,13 @@ import { CalloutBox } from 'components/Docs/CalloutBox'
 
 <CalloutBox icon="IconInfo" title="Cookies being forwarded to PostHog" type="fyi">
 
-By default, the proxy forwards all headers including cookies to PostHog. If you don't want to forward authentication cookies, delete them from the request:
+By default, the proxy forwards all headers including cookies to PostHog. If you don't want to forward authentication cookies and headers, delete them from the request:
 
 ```js
 const requestHeaders = new Headers(request.headers)
 requestHeaders.set('host', hostname)
 requestHeaders.delete('cookie')
+requestHeaders.delete('authorization')
 ```
 
 Alternatively, configure PostHog to use `localStorage` instead of cookies:
