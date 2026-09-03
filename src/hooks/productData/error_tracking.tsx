@@ -140,6 +140,13 @@ export const errorTracking = {
                 'https://res.cloudinary.com/dmukukwp6/image/upload/pasted_image_2026_06_24_T10_36_15_781_Z_a162179a94.png',
             alt: 'The grouping rule editor: a filter on exception message, a match mode, and a test result counting the exceptions the rule would group',
         },
+        'assignment-rule': {
+            // The assignment rule editor, reused from /docs/error-tracking/assigning-issues.
+            src: 'https://res.cloudinary.com/dmukukwp6/image/upload/pasted_image_2026_06_24_T10_30_30_887_Z_7a01202bc4.png',
+            srcDark:
+                'https://res.cloudinary.com/dmukukwp6/image/upload/pasted_image_2026_06_24_T10_30_54_381_Z_d468514190.png',
+            alt: 'The assignment rule editor: filters on the exception, an assignee, and a test result counting the exceptions the rule would have matched in the last 7 days',
+        },
         home: {
             src: 'https://res.cloudinary.com/dmukukwp6/image/upload/screenshot_error_tracking_light_93bfa1393d.png',
             srcDark: 'https://res.cloudinary.com/dmukukwp6/image/upload/screenshot_error_tracking_dark_ef481dc7a5.png',

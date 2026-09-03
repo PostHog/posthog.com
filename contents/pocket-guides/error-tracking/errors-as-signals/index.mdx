@@ -42,7 +42,23 @@ section: Act
 
 <LeftPage>
 
-<!-- Figure: the report an error signal lands as. AnatomyFigure with an inline report. -->
+<AnatomyFigure
+    n={1}
+    caption="What an error signal lands as: one report, with the exception, the sessions, and the accounts already attached."
+    priority="P1"
+    status="Ready"
+    actionability="Actionable"
+    headline="Checkout confirm fails when the cart contains a discounted item. The confirm step reads a total the discount path never set"
+    report={{
+        title: 'Checkout confirm fails when the cart contains a discounted item',
+        source: 'Error tracking · new issue',
+        receivedAgo: '2h',
+        affected: '47 sessions, 12 accounts, 3 on paid plans',
+        body: "A new exception, `TypeError: Cannot read properties of undefined (reading 'total')` in `checkout/confirm.ts`, first seen at 09:14, four minutes after release 1.4.2 went out. It only fires for carts holding a discounted item.\n\nThe same sessions show a rage-click cluster on the Confirm order button, and two support conversations this morning describe not being able to complete an order. All three arrived as separate signals and were grouped into this one report.\n\nThe confirm step reads `cart.pricing.total`. The discount path builds `cart.pricing` without a `total`, so the read fails before the order is placed.",
+        suggestedAction: 'Have the discount path set the total, and make the confirm step fall back to summing line items when it is missing.',
+        actionNote: 'An agent opens the pull request – you review and merge.',
+    }}
+/>
 
 </LeftPage>
 
@@ -50,23 +66,35 @@ section: Act
 
 # Turn errors into signals
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.
+Everything on the Report pages ends with a person reading something. This page is the first step past that, and it is a toggle rather than a build.
 
 ## What a signal is
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.
+A <Term name="signal" /> is a finding with its evidence attached: what happened, who it happened to, and what the evidence suggests doing about it. An alert tells you a threshold moved and stops there. A signal carries enough that the next step can be taken without you.
+
+Signals that describe the same problem are grouped into one <Term name="report" />, so a problem that shows up in error tracking, in a session recording, and in a support conversation arrives in your <Term name="inbox" /> once, not three times.
 
 ## Turning error tracking on as a source
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.
+Open the inbox settings and switch error tracking on as a <Term name="signal source" />. That is the whole setup.
+
+From then on, every new exception, every reopened issue, and every volume spike is processed as it happens. There is no schedule and no bar to clear. Nothing is skipped because something weighed it and decided it was not interesting.
 
 ## Exhaustive, not selective
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.
+A source is exhaustive, continuous, and predictable. It watches one stream and processes everything in it, the same way every time.
+
+It is worth being plain about what that means. A source does not rank. It does not cluster three related issues into one story. It does not weigh whether the people affected pay you, and it does not stay quiet on a busy day. Everything that qualifies comes through.
+
+That is the right trade when missing an item would be unacceptable, and for production errors it usually is. The judgement a source lacks is what a <Term name="scout" /> adds, and that is the next page. Neither is the upgrade from the other. Most projects run both.
 
 ## What lands in the inbox
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.
+Signals from every source go through one pipeline. Related ones are deduplicated and grouped into a single report, ranked by priority <SeeFig n={1} />. An agent then investigates it: it connects the report to your codebase, checks who is affected, and marks it **Actionable** when a code fix is possible.
+
+<Callout to="/pocket-guides/error-tracking/fix-while-you-sleep" label="Next: get it fixed while you sleep">
+A source gets every error into the inbox. A scout decides which ones matter, and an agent opens the pull request.
+</Callout>
 
 <SeeAlso>
 
