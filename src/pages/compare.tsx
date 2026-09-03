@@ -10,7 +10,8 @@ import SEO from 'components/seo'
 const TAG_ORDER_OVERRIDE = ['Comparisons', 'Alternatives', 'Roundups']
 
 /** The PostHog logomark (light/dark pair) with "Compare" beside it. */
-function CompareWordmark(): JSX.Element {
+function CompareWordmark({ asHeading = false }: { asHeading?: boolean }): JSX.Element {
+    const labelClass = 'text-3xl font-bold leading-none m-0'
     return (
         <div className="flex items-center gap-3">
             <Logo layout="logomark" className="h-8 w-[59px] dark:hidden" width="auto" title="PostHog" />
@@ -22,15 +23,15 @@ function CompareWordmark(): JSX.Element {
                 width="auto"
                 title="PostHog"
             />
-            <span className="text-3xl font-bold leading-none">Compare</span>
+            {asHeading ? <h1 className={labelClass}>Compare</h1> : <span className={labelClass}>Compare</span>}
         </div>
     )
 }
 
-function CompareHeader(): JSX.Element {
+function CompareHeader({ asHeading = false }: { asHeading?: boolean }): JSX.Element {
     return (
         <div className="flex flex-row items-center justify-between gap-4 py-2 flex-wrap">
-            <CompareWordmark />
+            <CompareWordmark asHeading={asHeading} />
         </div>
     )
 }
@@ -53,7 +54,7 @@ export default function ComparePage({ data }: { data: { posts: { nodes: PostSumm
                 hideMarkdownActions
             >
                 <div className="@container not-prose text-pretty text-primary">
-                    <CompareHeader />
+                    <CompareHeader asHeading />
                     <div className="relative mx-auto w-full max-w-6xl px-4 pb-12 @2xl:pb-20 @xl:px-8">
                         <div className="mt-2 @lg:mt-10 flex @2xl:flex-row flex-col items-center gap-8 @2xl:gap-16">
                             {featured && (
