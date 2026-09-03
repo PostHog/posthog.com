@@ -794,7 +794,12 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
         ({ attributes: { folder: categoryFolder, label: categoryLabel, post_tags } }) => {
             const isHub = categoryFolder === 'founders' || categoryFolder === 'product-engineers'
             // Folders with hand-written index pages in src/pages/ are excluded here
-            if (!isHub && categoryFolder !== 'newsletter' && categoryFolder !== 'blog') {
+            if (
+                !isHub &&
+                categoryFolder !== 'newsletter' &&
+                categoryFolder !== 'blog' &&
+                categoryFolder !== 'compare'
+            ) {
                 createPage({
                     path: `/${categoryFolder}`,
                     component: PostListingTemplate,
