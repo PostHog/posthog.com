@@ -45,13 +45,24 @@ function BodySlot(): JSX.Element {
  */
 export const HeroHeadline = ({ className }: { className?: string }): JSX.Element => (
     <RenderInClient
-        placeholder={<HeadlineMarkup headline={DEFAULT_HERO_COPY_VARIANT.headline} className={className} />}
+        placeholder={
+            <div className="invisible">
+                <HeadlineMarkup headline={DEFAULT_HERO_COPY_VARIANT.headline} className={className} />
+            </div>
+        }
         render={() => <HeadlineSlot className={className} />}
     />
 )
 
 export const HeroBody = (): JSX.Element => (
-    <RenderInClient placeholder={<BodyMarkup Body={DEFAULT_HERO_COPY_VARIANT.Body} />} render={() => <BodySlot />} />
+    <RenderInClient
+        placeholder={
+            <div className="invisible">
+                <BodyMarkup Body={DEFAULT_HERO_COPY_VARIANT.Body} />
+            </div>
+        }
+        render={() => <BodySlot />}
+    />
 )
 
 export { HERO_COPY_VARIANTS, DEFAULT_HERO_COPY_VARIANT, resolveHeroCopyVariant } from './variants'
