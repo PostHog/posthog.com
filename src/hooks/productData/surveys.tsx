@@ -274,12 +274,12 @@ export const surveys = {
             {
                 name: 'Pendo',
                 key: 'pendo',
-                link: '/blog/posthog-vs-pendo',
+                link: '/compare/posthog-vs-pendo',
             },
             {
                 name: 'Hotjar',
                 key: 'hotjar',
-                link: '/blog/posthog-vs-hotjar',
+                link: '/compare/posthog-vs-hotjar',
             },
             {
                 name: 'Sprig',

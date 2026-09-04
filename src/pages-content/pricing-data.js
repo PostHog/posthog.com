@@ -237,10 +237,11 @@ const faqs = [
                 <p>
                     You can read how we stack up against competitors like{' '}
                     <Link to="/blog/posthog-vs-amplitude">Amplitude</Link>,{' '}
-                    <Link to="/blog/posthog-vs-mixpanel">Mixpanel</Link>, <Link to="/blog/posthog-vs-heap">Heap</Link>,{' '}
-                    <Link to="/blog/posthog-vs-fullstory">FullStory</Link>,{' '}
-                    <Link to="/blog/posthog-vs-hotjar">Hotjar</Link>, <Link to="/blog/posthog-vs-ga4">GA4</Link>, and a
-                    lot more in our <Link to="/blog/comparisons">comparison blogs</Link>.
+                    <Link to="/blog/posthog-vs-mixpanel">Mixpanel</Link>,{' '}
+                    <Link to="/compare/posthog-vs-heap">Heap</Link>,{' '}
+                    <Link to="/compare/posthog-vs-fullstory">FullStory</Link>,{' '}
+                    <Link to="/compare/posthog-vs-hotjar">Hotjar</Link>, <Link to="/blog/posthog-vs-ga4">GA4</Link>, and
+                    a lot more in our <Link to="/compare">comparison blogs</Link>.
                 </p>
             </>
         ),

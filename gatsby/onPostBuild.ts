@@ -234,7 +234,7 @@ export const onPostBuild: GatsbyNode['onPostBuild'] = async ({ graphql }) => {
                 filter: {
                     fields: {
                         slug: {
-                            regex: "/^/blog|^/tutorials|^/customers|^/spotlight|^/founders|^/product-engineers|^/features|^/newsletter/"
+                            regex: "/^/blog|^/compare|^/tutorials|^/customers|^/spotlight|^/founders|^/product-engineers|^/features|^/newsletter/"
                         }
                     }
                     frontmatter: { date: { ne: null } }

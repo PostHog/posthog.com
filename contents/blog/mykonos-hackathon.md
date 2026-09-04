@@ -180,7 +180,7 @@ As part of the project, we also revamped our system for categorizing and trackin
 
 <BuiltBy people={["Sandy Spicer", "Tim Glaser"]} />
 
-PostHog crunches a lot of data, especially on very complext queries. To help users better understand the hard work we’re doing when they make a query, we built a loading bar that includes live data on how much data we're crunching (database rows and data volume) and CPU usage we're deploying to generate an answer for you.
+PostHog crunches a lot of data, especially on very complex queries. To help users better understand the hard work we’re doing when they make a query, we built a loading bar that includes live data on how much data we're crunching (database rows and data volume) and CPU usage we're deploying to generate an answer for you.
 
 ![Data crunching](https://res.cloudinary.com/dmukukwp6/image/upload/datacrunch1_7ab73f5ab4.jpg)
 
