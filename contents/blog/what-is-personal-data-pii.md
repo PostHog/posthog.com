@@ -46,7 +46,7 @@ Again, we're leaning on the NIST here, which provides numerous examples of PII:
 
 - **Names**, including an individual's full name, maiden name, mother's maiden name, or known aliases
 
-- **Personal identification numbers**, such as such a social security number (SSN), passport number, driver‘s license, taxpayer identification number, patient identification number, and financial accounts or credit card numbers
+- **Personal identification numbers**, such as a social security number (SSN), passport number, driver‘s license, taxpayer identification number, patient identification number, and financial accounts or credit card numbers
 
 - **Digital identifiers**, which includes but is not limited to static IP addresses, MAC addresses, and unique device identifiers (UDI)
 
@@ -54,7 +54,7 @@ Again, we're leaning on the NIST here, which provides numerous examples of PII:
 
 - **Personal characteristics**, such as photos of an individual's face or other distinguishing characteristics, x-rays, fingerprints, and biometric data
 
-- **Any other linked of linkable information**, including date of birth, place of birth, race, religion, weight, employment information, medical data, education information, financial information, and most kinds of geographical identifier.
+- **Any other linked or linkable information**, including date of birth, place of birth, race, religion, weight, employment information, medical data, education information, financial information, and most kinds of geographical identifier.
 
 ### What's the difference between PII and PHI?
 

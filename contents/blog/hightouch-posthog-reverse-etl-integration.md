@@ -77,7 +77,7 @@ You absolutely can.
 
 PostHog is open source and we love it when people contribute to making the product better for everyone. The community has already contributed apps for, to name just a few, [Salesforce](https://github.com/Vinovest/posthog-salesforce), [Google Pub Sub](https://github.com/vendasta/pubsub-plugin), and [Rudderstack](https://github.com/rudderlabs/rudderstack-posthog-plugin).
 
-We also recently ran a [PostHog App Bounty](https://github.com/PostHog/posthog/issues/8437) for a few specific apps we'd like have on PostHog. All current bounties have been assigned, but we're always open to suggestions.
+We also recently ran a [PostHog App Bounty](https://github.com/PostHog/posthog/issues/8437) for a few specific apps we'd like to have on PostHog. All current bounties have been assigned, but we're always open to suggestions.
 
 Whether you have an idea for an app or just need some help, please [let us know](https://app.posthog.com/home#supportModal) if you'd like to get involved.
 

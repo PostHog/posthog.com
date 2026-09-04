@@ -97,7 +97,7 @@ I personally love this syntax. It feels super readable to me and reminds me a bi
 
 So that's all well and cool, but what about making sure that in a fit of intense focus and momentum we don't inadvertently push a breaking change to master? We need someone or something to act as a gatekeeper to keep us from shooting ourselves in the foot. We need CI.
 
-We could use Travis, or Jekins, or CircleCI… but as you may have noticed we keep almost everything about PostHog in GitHub, from our product roadmap, issues, this blog, everything is in GitHub. So it made sense to us to keep our CI in GitHub if we could. We decided to give GitHub Actions a test. So far, we have loved it.
+We could use Travis, or Jenkins, or CircleCI… but as you may have noticed we keep almost everything about PostHog in GitHub, from our product roadmap, issues, this blog, everything is in GitHub. So it made sense to us to keep our CI in GitHub if we could. We decided to give GitHub Actions a test. So far, we have loved it.
 
 [GitHub actions](https://github.com/features/actions) are basically a workflow you can trigger from events that occur on your GitHub repo. We trigger ours on the creation of a pull request. We also require that our actions all return 👍&nbsp;&nbsp;before you can merge your PR into master. Thus, we keep master clean.
 
