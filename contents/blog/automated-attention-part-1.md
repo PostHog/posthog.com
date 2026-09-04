@@ -8,7 +8,7 @@ hideAnchor: true
 author:
     - tue-haulund
 featuredImage: >-
-    https://res.cloudinary.com/dmukukwp6/image/upload/TODO_hero.png
+    https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/open-source-hotjar-alternatives/replayhog.png
 featuredImageType: full
 category: Engineering
 tags:
