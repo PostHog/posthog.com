@@ -2,7 +2,7 @@
 title: Identifying users
 ---
 
-By default, every MCP event is attributed to the connection's session id (`ses_…`). That gives you per-session analytics, but you can't yet say "Alice from Acme is calling this tool 200 times a day" — because the SDK doesn't know who Alice is.
+By default, every MCP event is attributed to an SDK-generated session id (`ses_…`). On `2025-11-25`, that normally follows the protocol session. On the handshake-free `2026-07-28` revision, each request gets a new session unless [conversation IDs](/docs/mcp-analytics/conversation-id) are enabled. Either way, you can't yet say "Alice from Acme is calling this tool 200 times a day" — because the SDK doesn't know who Alice is.
 
 The `identify` option lets you teach it.
 

@@ -27,13 +27,13 @@ The answer? A lot.
 
 Let's start with a big one.
 
-You could use [Amplitude](/blog/best-amplitude-alternatives) for product analytics, Hotjar for session recording, Flagsmith for feature control, Segment as your customer data platform, [Optimizely](/blog/best-optimizely-alternatives) for testing, and Redshift for your data warehouse – these are sensible choices.
+You could use [Amplitude](/compare/best-amplitude-alternatives) for product analytics, Hotjar for session recording, Flagsmith for feature control, Segment as your customer data platform, [Optimizely](/compare/best-optimizely-alternatives) for testing, and Redshift for your data warehouse – these are sensible choices.
 
 But you can replace some (or even all) of them with just PostHog.
 
 We've built PostHog so companies don't have to run multiple services to get the insights they need. 
 
-[PostHog Cloud](/pricing) delivers a complete set a tools to help you build better products, while our integration with numerous data platforms means many of our customers end up ditching products like Segment for organizing and syncing customer data. 
+[PostHog Cloud](/pricing) delivers a complete set of tools to help you build better products, while our integration with numerous data platforms means many of our customers end up ditching products like Segment for organizing and syncing customer data. 
 
 And if you [self-host PostHog](/docs/self-host), you get a built-in data warehouse based on ClickHouse into the bargain. 
 
@@ -193,7 +193,7 @@ Don't fancy building your own? Don't hesitate to suggest one on the [PostHog rep
 
 ![posthog insight subscriptions](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/using-posthog/subscriptions.png)
 
-You don't need to login to PostHog everyday to get insights. Instead, setup your most valuable insights and dashboards, and then get them sent to your inbox on any schedule and time to suit you. You can also send updates to multiple addresses, which is ideal for keeping stakeholders up-to-date.
+You don't need to log in to PostHog every day to get insights. Instead, setup your most valuable insights and dashboards, and then get them sent to your inbox on any schedule and time to suit you. You can also send updates to multiple addresses, which is ideal for keeping stakeholders up-to-date.
 
 Coming soon: Slack channel subscriptions!
 

@@ -21,6 +21,7 @@ import {
     IconThumbsUp,
     IconThumbsUpFilled,
     IconTrash,
+    IconUndo,
 } from '@posthog/icons'
 import usePostHog from 'hooks/usePostHog'
 import { IconFeatures } from '@posthog/icons'
@@ -93,7 +94,7 @@ const AIDisclaimerMod = ({ opName, replyID, mutate }) => {
 const AIDisclaimer = ({ replyID, mutate, topic, confidence, resolvable }) => {
     const posthog = usePostHog()
     const { getJwt } = useUser()
-    const { handleResolve } = useContext(CurrentQuestionContext)
+    const { handleResolve, mutateList } = useContext(CurrentQuestionContext)
     const [helpful, setHelpful] = useState<boolean | null>(null)
 
     const handleHelpful = async (helpful: boolean, feedback: string) => {
@@ -268,14 +269,13 @@ export default function Reply({ reply, badgeText, isInForum = false }: ReplyProp
     const deleteTimeoutRef = useRef<NodeJS.Timeout | null>(null)
     const toastCreatedAtRef = useRef<number | null>(null)
     const { addToast, removeToast } = useToast()
-    const { user } = useUser()
-    const isModerator = user?.role?.type === 'moderator'
+    const { user, isModerator, isForumModerator } = useUser()
     const isAuthor = user?.profile?.id === questionProfile?.data?.id
     const isReplyAuthor = user?.profile?.id === profile?.data?.id
     const isTeamMember = profile?.data?.attributes?.teams?.data?.length > 0
     const resolvable =
         !resolved &&
-        (isAuthor || isModerator) &&
+        (isAuthor || isForumModerator) &&
         topics?.data?.every((topic) => !topic.attributes.label.startsWith('#'))
 
     const handleDelete = async (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -420,7 +420,7 @@ export default function Reply({ reply, badgeText, isInForum = false }: ReplyProp
                         <span className="border rounded-sm text-[#008200cc] text-xs font-semibold py-0.5 px-1 uppercase">
                             Solution
                         </span>
-                        {(isAuthor || isModerator) && (
+                        {(isAuthor || isForumModerator) && (
                             <button
                                 onClick={() => handleResolve(false, null)}
                                 className="text-sm font-semibold text-red dark:text-yellow"
@@ -431,7 +431,7 @@ export default function Reply({ reply, badgeText, isInForum = false }: ReplyProp
                     </>
                 )}
                 <div className="!ml-auto flex items-center space-x-1">
-                    {isModerator && (
+                    {isForumModerator && (
                         <OSButton
                             size="sm"
                             tooltip={
@@ -441,7 +441,7 @@ export default function Reply({ reply, badgeText, isInForum = false }: ReplyProp
                                 </>
                             }
                             onClick={() => handlePublishReply(!!publishedAt, id)}
-                            icon={<IconArchive />}
+                            icon={publishedAt ? <IconArchive /> : <IconUndo />}
                         />
                     )}
                     {isModerator && (
@@ -506,7 +506,7 @@ export default function Reply({ reply, badgeText, isInForum = false }: ReplyProp
                                 </div>
                             )}
                             <Markdown>{body}</Markdown>
-                            {!publishedAt && isModerator && (
+                            {!publishedAt && isForumModerator && (
                                 <p className="font-bold text-sm mt-2 mb-4 italic p-2 bg-accent border border-primary rounded">
                                     This reply is unpublished and only visible to moderators
                                 </p>
@@ -525,7 +525,7 @@ export default function Reply({ reply, badgeText, isInForum = false }: ReplyProp
                         )}
 
                         <div className="space-y-1 mt-2">
-                            {(isModerator || resolvable) && !(resolved && resolvedBy?.data?.id === id) && (
+                            {(isForumModerator || resolvable) && !(resolved && resolvedBy?.data?.id === id) && (
                                 <OSButton
                                     onClick={async () => {
                                         setResolving(true)

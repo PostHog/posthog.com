@@ -49,7 +49,7 @@ To accomplish these tasks, they need a combination of engineering, business, pro
 
 ### Engineering skills
 
-Growth engineers write code to implement their ideas and experiments. If they couldn’t code, they wouldn’t be an engineer, and that is half the name. They must be comfortable across the stack, use new tools like external APIs, and work we unfamiliar tech if necessary.
+Growth engineers write code to implement their ideas and experiments. If they couldn’t code, they wouldn’t be an engineer, and that is half the name. They must be comfortable across the stack, use new tools like external APIs, and work with unfamiliar tech if necessary.
 
 > **Growth engineers vs growth hackers:** Growth hackers also aim to drive growth but focus on more non-product, non-technical solutions. Growth engineering, for some teams, might include this, but for us, the role focuses on technical work across products.
 

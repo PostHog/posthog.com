@@ -151,7 +151,7 @@ response = requests.get(
 
 </MultiLanguage>
 
-To delete persons and their events, use the [DELETE Persons API endpoint](/docs/api/persons-4#post-api-projects-project_id-persons-bulk_delete) with the person's UUID (returned as `id` in the persons API response). To delete the person's corresponding events, add the `delete_events=true` parameter. To also delete their session recordings, add `delete_recordings=true`:
+To delete persons and their events, use the [DELETE Persons API endpoint](/docs/api/persons#post-api-projects-project_id-persons-bulk_delete) with the person's UUID (returned as `id` in the persons API response). To delete the person's corresponding events, add the `delete_events=true` parameter. To also delete their session recordings, add `delete_recordings=true`:
 
 <MultiLanguage>
 
@@ -197,7 +197,7 @@ This request deletes all events of the person(s) captured before the deletion re
 
 #### Bulk delete response
 
-When using the [bulk_delete endpoint](/docs/api/persons-4#post-api-projects-project_id-persons-bulk_delete), the API returns a response with details about the deletion operation:
+When using the [bulk_delete endpoint](/docs/api/persons#post-api-projects-project_id-persons-bulk_delete), the API returns a response with details about the deletion operation:
 
 | Field                            | Type    | Description                                                                  |
 | -------------------------------- | ------- | ---------------------------------------------------------------------------- |

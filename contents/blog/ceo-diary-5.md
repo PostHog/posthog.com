@@ -26,7 +26,7 @@ Here's what we learned - good and bad...
 
 We hired [world class people](/people), and we let people go quickly when it wasn't working (paying much greater [severance](../handbook/people/offboarding#involuntary-departure) than industry standard when this happened).
 
-Tim and I believed that people working with great people is a huge motivator - [talent compounds](../handbook/company/values#talent-compounds) is one of our [values](../handbook/company/values). Feedback from our team surveys have since confirmed our team agrees. 
+Tim and I believed that people working with great people is a huge motivator - talent compounds is one of our [values](/handbook/values). Feedback from our team surveys have since confirmed our team agrees. 
 
 However, when things didn't work out, we often didn't re-hire for the role quickly, or at all. We got scar tissue! We must've been hiring for the role in the first place for a reason.
 
@@ -61,7 +61,7 @@ Don't they just dictate what to build to our team, thus annoying our team, and p
 At our first offsite in 2020, we ran a [full team feedback session](../handbook/people/feedback#full-team-feedback-sessions). This is a unique experience:
 
 - Everyone sits around a table. Ok, you've probably done that before.
-- The person who's turn it is, gets [feedback from everyone else in the team](/newsletter/how-to-give-feedback)
+- The person whose turn it is, gets [feedback from everyone else in the team](/newsletter/how-to-give-feedback)
 - This feedback is moderated to be 70% [constructive and as specific as possible](../handbook/people/feedback#how-to-give-good-feedback)
 
 Tim and I were both given the feedback that we've seen product done badly in our previous careers, and as a result, we aren't building this discipline at all into the company. We were just a bunch of engineers building what we felt users wanted - which was probably the right choice in the first few months, but not the path to building a world-class experience.
@@ -72,7 +72,7 @@ We thought about it, and realized this was something we needed to act on. We put
 
 The best part? We've not had to sacrifice engineering autonomy.
 
-Both Marcus and Paolo can write code, and they both ship from time to time. This creates a more collaborative environment with engineering (and it helps them understand our end users better). Our structure also promotes this - we rely on [small teams](../handbook/company/small-teams), with individuals setting their own priorities each week or two, to give real ownership of what people choose to build. Product gives very valuable context and high level guidance so engineers can make better decisions in this situations.
+Both Marcus and Paolo can write code, and they both ship from time to time. This creates a more collaborative environment with engineering (and it helps them understand our end users better). Our structure also promotes this - we rely on [small teams](../handbook/company/small-teams), with individuals setting their own priorities each week or two, to give real ownership of what people choose to build. Product gives very valuable context and high level guidance so engineers can make better decisions in these situations.
 
 ## How to build a design team
 

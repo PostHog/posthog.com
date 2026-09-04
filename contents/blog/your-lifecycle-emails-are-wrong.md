@@ -19,7 +19,7 @@ seo:
     metaDescription: 'High open rates can hide a deeper problem: your messaging tool may be working from outdated user data. Here is how data gets in, where it breaks, and how to audit it.'
 ---
 
-Messaging tools like Customer.io and [ActiveCampaign](/blog/best-activecampaign-alternatives) were built for a specific job: broadcast email with some segmentation on top. You upload a list, you define some basic audience filters, and set up a drip sequence. That model worked well for a long time – and it's still fine for newsletters, product announcements, and campaigns where you're addressing a stable audience with a consistent message.
+Messaging tools like Customer.io and [ActiveCampaign](/compare/best-activecampaign-alternatives) were built for a specific job: broadcast email with some segmentation on top. You upload a list, you define some basic audience filters, and set up a drip sequence. That model worked well for a long time – and it's still fine for newsletters, product announcements, and campaigns where you're addressing a stable audience with a consistent message.
 
 PLG lifecycle messaging is a different job entirely. It needs to reason about sequences of behavior. 
 

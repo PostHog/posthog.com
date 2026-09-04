@@ -102,4 +102,12 @@ let options = ClientOptionsBuilder::default()
 let client = posthog_rs::client(options).await;
 ```
 
+```elixir file=config/runtime.exs
+config :posthog,
+  api_host: "<ph_client_api_host>",
+  api_key: "<ph_project_token>",
+  secret_key: System.fetch_env!("POSTHOG_FEATURE_FLAGS_SECURE_API_KEY"),
+  feature_flags_poll_interval_ms: 30_000
+```
+
 </MultiLanguage>

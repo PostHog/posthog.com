@@ -11,7 +11,8 @@ export interface HTMLProps {
 
 export default function HTML(props: HTMLProps): JSX.Element {
     return (
-        <html {...props.htmlAttributes}>
+        // `lang` is a default: pages that set their own (e.g. /ko) override it via htmlAttributes.
+        <html lang="en" {...props.htmlAttributes}>
             <head>
                 <meta charSet="utf-8" />
                 <meta httpEquiv="x-ua-compatible" content="ie=edge" />

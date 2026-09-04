@@ -61,7 +61,7 @@ import JSIdentify from './_snippets/identify.mdx'
 
 ## Setting person properties
 
-To set [person properties](/docs/data/user-properties) in these profiles, include them when capturing an event:
+To set [person properties](/docs/product-analytics/person-properties) in these profiles, include them when capturing an event:
 
 ```js-web
 posthog.capture(
@@ -82,7 +82,7 @@ posthog.setPersonProperties(
 )
 ```
 
-This creates a special `$set` event that is sent to PostHog. For more details on the difference between `$set` and `$set_once`, see our [person properties docs](/docs/data/user-properties#what-is-the-difference-between-set-and-set_once).
+This creates a special `$set` event that is sent to PostHog. For more details on the difference between `$set` and `$set_once`, see our [person properties docs](/docs/product-analytics/person-properties#what-is-the-difference-between-set-and-set_once).
 
 To remove person properties, use `unsetPersonProperties()`. See [person properties](/docs/product-analytics/person-properties#how-to-remove-person-properties) for examples.
 
@@ -114,7 +114,7 @@ In this case, you can use `alias` to assign another distinct ID to the same user
 posthog.alias('alias_id', 'distinct_id');
 ```
 
-We recommend reading our docs on [alias](/docs/data/identify#alias-assigning-multiple-distinct-ids-to-the-same-user) to best understand how to correctly use this method.
+We recommend reading our docs on [alias](/docs/product-analytics/identify#alias-assigning-multiple-distinct-ids-to-the-same-user) to best understand how to correctly use this method.
 
 ## Group analytics
 

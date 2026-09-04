@@ -17,7 +17,7 @@ featuredImageType: full
 
 Want to know more about what we're up to? [Subscribe to our new newsletter](https://newsletter.posthog.com/subscribe), which we send once every two weeks!
 
-> **Need to update a self-hosted instance?** [Check the runbook docs for instructions](/docs/runbook/upgrading-posthog)!
+> **Need to update a self-hosted instance?** [Check the runbook docs for instructions](/docs/self-host)!
 
 ## PostHog 1.43.0 release notes
 ### New: Performance improvements
@@ -78,7 +78,7 @@ A regular complaint used to be that, if you made a mistake while making an exper
 Finally, as a bonus, you can now have up to nine variants in an experiment, instead of the usual three!
 
 ### Improved: Browsing recordings and creating playlists
-Following up on our new playlists feature, we've improve the recordings UX to make browsing and pinning recordings as quick and intuitive as possible. You can now scroll the list of recordings independently of the player and creating a playlists of pinned recordings is much faster too!
+Following up on our new playlists feature, we've improved the recordings UX to make browsing and pinning recordings as quick and intuitive as possible. You can now scroll the list of recordings independently of the player and creating a playlist of pinned recordings is much faster too!
 
 ### Improved: Recording playback controls 
 We've revamped the recording seekbar to make it easier to find user activity at a glance, to show where tracked events occur and display what time you're scrubbing to.

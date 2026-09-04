@@ -13,6 +13,21 @@ export default function ScoutFile({ scout }: { scout: ScoutSpec }): JSX.Element 
     const posthog = usePostHog()
     const code = (scout.raw ?? '').trim()
 
+    // Only the open direction is a signal – a collapse says nothing about interest.
+    const toggleExpanded = () => {
+        if (!expanded) {
+            posthog?.capture('pocket_guide_interaction', { kind: 'scout_file_expanded' })
+        }
+        setExpanded(!expanded)
+    }
+
+    const trackSkillFileCopy = () =>
+        posthog?.capture('pocket_guide_interaction', {
+            kind: 'skill_file_copy',
+            scout: scout.name,
+            placement: 'figure',
+        })
+
     return (
         <div>
             {/* Wrap locally: `whitespace-pre` scrolls long lines off a pane this narrow. */}
@@ -27,6 +42,7 @@ export default function ScoutFile({ scout }: { scout: ScoutSpec }): JSX.Element 
                     showLabel
                     showCopy
                     showAskAI={false}
+                    onCopy={trackSkillFileCopy}
                 >
                     {code}
                 </SingleCodeBlock>
@@ -40,12 +56,7 @@ export default function ScoutFile({ scout }: { scout: ScoutSpec }): JSX.Element 
             {/* Plus/minus, as RadixUI/Accordion does – the label alone didn't read as a control. */}
             <button
                 type="button"
-                onClick={() => {
-                    if (!expanded) {
-                        posthog?.capture('pocket_guide_interaction', { kind: 'scout_file_expanded' })
-                    }
-                    setExpanded(!expanded)
-                }}
+                onClick={toggleExpanded}
                 className="mt-2 flex items-center gap-1.5 font-sans text-sm font-semibold text-secondary hover:text-primary"
             >
                 {expanded ? (

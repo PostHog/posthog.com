@@ -1,4 +1,4 @@
-Read https://github.com/PostHog/posthog/blob/master/tools/pr-approval-agent/README.md and build the equivalent for the repo at <path>.
+Read https://github.com/PostHog/posthog/blob/master/products/stamphog/packages/pr-approval-agent/README.md and build the equivalent for the repo at <path>.
 
 Copy the architecture; preserve its safety invariants exactly (fail closed, never request changes or merge, LLM can tighten gates but never loosen).
 

@@ -1,0 +1,61 @@
+name: OG images
+
+on:
+    workflow_dispatch:
+    deployment_status:
+
+concurrency:
+    group: og-images
+    cancel-in-progress: false
+
+permissions:
+    contents: read
+
+jobs:
+    og-images:
+        name: Generate OG images
+        if: |
+            github.event_name == 'workflow_dispatch' ||
+            (github.event.deployment_status.state == 'success' &&
+             (github.event.deployment.environment == 'Production' ||
+              github.event.deployment.environment == 'production'))
+        runs-on: depot-ubuntu-latest-8
+        timeout-minutes: 120
+
+        steps:
+            - name: Checkout
+              uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+
+            - name: Set up pnpm
+              uses: pnpm/action-setup@c5ba7f7862a0f64c1b1a05fbac13e0b8e86ba08c # v4
+
+            - name: Set up Node.js
+              uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
+              with:
+                  node-version: '22'
+                  cache: 'pnpm'
+
+            - name: Install Chrome
+              run: |
+                  wget -q https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+                  sudo apt-get update
+                  sudo apt-get install -y ./google-chrome-stable_current_amd64.deb
+                  rm google-chrome-stable_current_amd64.deb
+
+            - name: Install dependencies
+              run: pnpm install --frozen-lockfile
+
+            - name: Generate OG images
+              env:
+                  CLOUDFRONT_FONT_URL: ${{ secrets.CLOUDFRONT_FONT_URL }}
+              run: pnpm og-images
+
+            - name: Upload OG images to CloudFront origin
+              env:
+                  OG_IMAGES_S3_BUCKET: ${{ secrets.OG_IMAGES_S3_BUCKET }}
+                  AWS_ACCESS_KEY_ID: ${{ secrets.OG_IMAGES_AWS_ACCESS_KEY_ID }}
+                  AWS_SECRET_ACCESS_KEY: ${{ secrets.OG_IMAGES_AWS_SECRET_ACCESS_KEY }}
+                  AWS_DEFAULT_REGION: ${{ secrets.OG_IMAGES_AWS_REGION }}
+              run: |
+                  export AWS_DEFAULT_REGION="${AWS_DEFAULT_REGION:-us-east-1}"
+                  aws s3 sync og-images/ "s3://${OG_IMAGES_S3_BUCKET}/" --cache-control "public, max-age=31536000"

@@ -1,12 +1,14 @@
 import React from 'react'
 
+import usePostHog from '../../hooks/usePostHog'
+
 import Link from 'components/Link'
 import { SingleCodeBlock } from 'components/CodeBlock'
 import EnableScout from 'components/SelfDrivingInbox/EnableScout'
 import { productSource } from 'components/SelfDrivingInbox/sources'
 
 import { useEntry, useTemplate } from './bookContext'
-import { BookPageEntry, volumeIdFromUrl } from './bookModel'
+import { BookPageEntry, learnChapterPath, normalizeUrl, volumeIdFromUrl } from './bookModel'
 import { volumeArt } from './volumeArt'
 
 /** Inline cue to a figure, color only – bold read larger than the surrounding text. */
@@ -75,10 +77,13 @@ export function Enable(): JSX.Element | null {
 }
 
 /** One page's row: a link, a dotted leader, and its folio number. */
-function ContentsRow({ page }: { page: BookPageEntry }): JSX.Element {
+function ContentsRow({ page, basePath }: { page: BookPageEntry; basePath?: string }): JSX.Element {
+    // Inside the Learn tab the contents keep the reader in the tab; the standalone reader's
+    // pages are their own routes.
+    const to = basePath ? learnChapterPath(basePath, page) : page.url
     return (
         <li className="flex items-baseline gap-2">
-            <Link to={page.url} wrapperClassName="min-w-0" className="text-[1em] text-primary hover:underline">
+            <Link to={to} wrapperClassName="min-w-0" className="text-[1em] text-primary hover:underline">
                 {page.title}
             </Link>
             {/* The dotted leader, so the row reads as a ToC line. */}
@@ -106,7 +111,7 @@ export function Contents(): JSX.Element | null {
         return (
             <ul className="m-0 list-none space-y-3 p-0">
                 {pages.map((page) => (
-                    <ContentsRow key={page.url} page={page} />
+                    <ContentsRow key={page.url} page={page} basePath={book.basePath} />
                 ))}
             </ul>
         )
@@ -135,7 +140,7 @@ export function Contents(): JSX.Element | null {
                     )}
                     <ul className="m-0 list-none space-y-3 p-0">
                         {group.pages.map((page) => (
-                            <ContentsRow key={page.url} page={page} />
+                            <ContentsRow key={page.url} page={page} basePath={book.basePath} />
                         ))}
                     </ul>
                 </div>
@@ -159,6 +164,33 @@ export function SeeAlso({ children }: { children: React.ReactNode }): JSX.Elemen
 // sizes – the book's type is em-based so the Aa control can scale everything together.
 const NATIVE_CONTENT =
     'article-content !text-secondary [&_li]:![font-size:1em] [&_p]:![font-size:1em] [&_li]:!leading-relaxed [&_p]:!leading-relaxed [&_li]:![list-style-type:revert] [&_ul]:![list-style-type:revert] [&_ol]:![list-style-type:revert] [&_ul]:[padding-left:revert] [&_ol]:[padding-left:revert]'
+
+/** A prose link, counted like a CTA – some chapters answer with a link, not a button. */
+function BookLink({ href, ...props }: any): JSX.Element {
+    const posthog = usePostHog()
+    const book = useEntry()
+    const entry = book?.entry
+
+    // A link to another chapter of this book: inside the Learn tab it turns the page there,
+    // rather than sending the reader out to the standalone reader in a new window.
+    const basePath = book?.basePath
+    const chapter = basePath ? book?.pages.find((page) => page.url === normalizeUrl(href ?? '')) : undefined
+    const chapterPath = basePath && chapter ? learnChapterPath(basePath, chapter) : undefined
+
+    const trackLinkClick = () =>
+        posthog?.capture('pocket_guide_interaction', {
+            kind: 'guide_link_click',
+            href,
+            guide: entry?.url,
+            placement: 'prose',
+        })
+
+    return chapterPath ? (
+        <Link to={chapterPath} className="underline" onClick={trackLinkClick} {...props} />
+    ) : (
+        <Link to={href} state={{ newWindow: true }} className="underline" onClick={trackLinkClick} {...props} />
+    )
+}
 
 /** Prose defaults. The page container is `not-prose`, so every tag is styled here. */
 export const proseComponents = {
@@ -220,7 +252,7 @@ export const proseComponents = {
             {...props}
         />
     ),
-    a: ({ href, ...props }: any) => <Link to={href} state={{ newWindow: true }} className="underline" {...props} />,
+    a: (props: any) => <BookLink {...props} />,
     hr: () => <span aria-hidden="true" className="my-6 block w-16 border-t border-primary" />,
     // A worked-example table inside a <Fig> – illustrative rows, not live data.
     table: (props: any) => <table className="mb-[0.8em] w-full border-collapse text-left text-[0.85em]" {...props} />,

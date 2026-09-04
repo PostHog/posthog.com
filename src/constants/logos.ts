@@ -35,6 +35,7 @@ export const LOGOS = {
     cloudfront: 'https://res.cloudinary.com/dmukukwp6/image/upload/Cloud_Front_76c0f62ab5.svg',
     dedalus: 'https://res.cloudinary.com/dmukukwp6/image/upload/dedalus_labs_logo_e03bb97137.svg',
     deepseek: 'https://res.cloudinary.com/dmukukwp6/image/upload/deepseek_df02608124.svg',
+    discord: 'https://cdn.simpleicons.org/discord/5865F2',
     django: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/docs/integrate/frameworks/django.svg',
     docusaurus:
         'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/integrate/frameworks/docusaurus.svg',

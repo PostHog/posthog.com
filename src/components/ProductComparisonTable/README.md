@@ -294,7 +294,7 @@ Product pages automatically use `productData.comparison` via `SlidesTemplate` wi
 export const experiments = {
     comparison: {
         companies: [
-            { name: 'Optimizely', key: 'optimizely', link: '/blog/posthog-vs-optimizely' },
+            { name: 'Optimizely', key: 'optimizely', link: '/compare/posthog-vs-optimizely' },
             { name: 'Amplitude', key: 'amplitude', link: '/blog/posthog-vs-amplitude' },
             { name: 'PostHog', key: 'posthog' },
         ],
