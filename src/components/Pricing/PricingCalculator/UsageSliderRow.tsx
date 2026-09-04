@@ -51,7 +51,7 @@ export default function UsageSliderRow({
     return (
         <div className={`flex items-center gap-4 py-3 ${value ? '' : 'opacity-60'}`}>
             <div className="w-48 shrink-0">
-                <p className="m-0 text-sm font-bold mb-0.5">
+                <p className="m-0 text-sm font-bold mb-0.5 first-letter:uppercase">
                     {label}
                     {labelAccessory ? <> {labelAccessory}</> : null}
                 </p>
