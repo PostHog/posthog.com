@@ -644,6 +644,11 @@
             "statusCode": 301
         },
         {
+            "source": "/sitemap_index.xml",
+            "destination": "/sitemap/sitemap-index.xml",
+            "statusCode": 301
+        },
+        {
             "source": "/blog/rss.xml",
             "destination": "/rss.xml",
             "statusCode": 301
