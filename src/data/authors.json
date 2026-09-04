@@ -782,5 +782,11 @@
         "link_type": "linkedin",
         "link_url": "https://www.linkedin.com/in/georgis-andonis/",
         "profile_id": 35171
+    },
+    {
+        "handle": "daniel-zaltsman",
+        "name": "Daniel Zaltsman",
+        "role": "Builder relations team lead",
+        "profile_id": 34023
     }
 ]
