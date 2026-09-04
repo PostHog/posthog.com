@@ -15,14 +15,15 @@ tags:
     - Inside PostHog
     - Engineering
     - Session replay
+    - AI
 seo:
     metaTitle: 'Automated attention, part 1: Freezing time for fun and profit'
-    metaDescription: 'Why Replay Vision needs video instead of rrweb data, how our first rasterizer fell apart under CPU contention, and how Chrome beginFrame and virtual time fixed it.'
+    metaDescription: "How we turn session replays into video for Replay Vision, and how Chrome's beginFrame fixed our rasterizer under load."
 ---
 
 Almost none of the recordings we ingest with Session Replay are watched. The overwhelming majority are stored, never opened, and expire at the end of their retention period without ever receiving any attention at all. It's no wonder, really: even a moderately busy product results in tens of thousands of recordings per day. You'd need an army of humans doing nothing but watching these recordings to cover all, or even most, of them. As a result, most of what the Session Replay team has shipped over the past couple of years is some form of search: filters on events and properties, relevance sorting, collections, session summaries. All of them are attempts to help our users find the needle in the haystack and maximize the value they can get with the limited amount of human attention available to them.
 
-Replay Vision started from the thought that we should stop rationing attention and start automating it instead. Recent multimodal models are good enough at watching video that you can hand them a recording and get a sensible account of what the user did and where it went wrong. If that works at all, it works for every recording, not just the ones someone had time for.
+[Replay Vision](/replay-vision) started from the thought that we should stop rationing attention and start automating it instead. Recent multimodal models are good enough at watching video that you can hand them a recording and get a sensible account of what the user did and where it went wrong. If that works at all, it works for every recording, not just the ones someone had time for.
 
 This is the first of two posts about building it. This one is about the pipeline that turns recording data into videos that a model can look at. The second is about the model, and about controlling what it pays attention to.
 
@@ -72,8 +73,10 @@ We use [puppeteer-capture](https://www.npmjs.com/package/puppeteer-capture) for 
 
 ## Putting it all together
 
-![Doc Brown hoggie connecting the cable at the moment the lightning strikes](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/doc_brown_76d9d75886.png)
-
 With `beginFrame` gating the compositor and the virtual clock gating the player, the two failure modes from earlier simply stop existing. If rendering is starved, the clock waits for the frame. If capture is starved, the renderer waits for the next `beginFrame` call. Either way, the next frame in the video is the next frame in the recording, and CPU contention only changes how long the job takes, not what comes out of it. We can run as many jobs per pod as we like, and the same recording produces the same video every time.
 
-This version of our rasterizer has been in production since March 2026 and powers all of Replay Vision as well as some features in Session Replay itself. At the time of writing the rasterizer has produced 75.6 years worth of video.
+The rasterizer was the unlock we needed to turn every recording into something a multimodal model can watch. But a model that can see everything will happily look at everything, most of which doesn't matter. Part two is about directing its attention: what we show it, what we don't let it see, and how we stopped it fixating on irrelevant details.
+
+![Doc Brown hoggie connecting the cable at the moment the lightning strikes](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/doc_brown_76d9d75886.png)
+
+The version of our rasterizer described in this blog post has been in production since March 2026 and powers all of Replay Vision as well as some features in Session Replay itself. At the time of writing it has rasterized more than 370 years of recordings into roughly 3.5 million videos.
