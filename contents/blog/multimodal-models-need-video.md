@@ -21,19 +21,19 @@ seo:
     metaDescription: "How we turn session replays into video for Replay Vision, and how Chrome's beginFrame fixed our rasterizer under load."
 ---
 
-Almost none of the session recordings we ingest [are watched](/blog/nobody-watches-session-replays). The majority are stored, never opened, and expire without receiving any attention. 
+Almost none of the session recordings we ingest [are watched](/blog/nobody-watches-session-replays). The majority are stored, never opened, and expire without receiving any attention.
 
-It's no wonder, really: a moderately busy product results in tens of thousands of recordings per day. You'd need an army of humans doing nothing but watching to get through them all. 
+It's no wonder, really: a moderately busy product results in tens of thousands of recordings per day. You'd need an army of humans doing nothing but watching to get through them all.
 
 As a result, most of what the Session Replay team has shipped over the past couple of years is some form of search: filters on events and properties, relevance sorting, collections, session summaries. All of them are attempts to help our users find the needle in the haystack and maximize the value they can get with the limited amount of human attention available to them.
 
-[Replay Vision](/replay-vision) started from the thought that we should stop rationing attention and start automating it instead. Recent multimodal AI models are good enough at watching video that you can hand them a recording and get a sensible account of what the user did and where it went wrong. Apply this to session recordings, and you get details on every one, not just the ones someone had time for. 
+[Replay Vision](/replay-vision) started from the thought that we should stop rationing attention and start automating it instead. Recent multimodal AI models are good enough at watching video that you can hand them a recording and get a sensible account of what the user did and where it went wrong. Apply this to session recordings, and you get details on every one, not just the ones someone had time for.
 
 This post covers the first big problem we hit building it: models couldn't actually see a replay.
 
 ## A session replay might look like a video, but it's not (and we needed it to be)
 
-A replay looks like a screen recording when you play it, but there's no video anywhere in the pipeline. What the SDK captures, using rrweb, is a serialized copy of the DOM at the moment recording starts, and then a stream of events describing what changed: 
+A replay looks like a screen recording when you play it, but there's no video anywhere in the pipeline. What our SDK captures, using rrweb, is a serialized copy of the DOM at the moment recording starts, and then a stream of events describing what changed:
 
 - This node was inserted under that parent
 - This attribute changed value
@@ -42,11 +42,11 @@ A replay looks like a screen recording when you play it, but there's no video an
 
 When you press play, a browser rebuilds the DOM from the snapshot and applies the mutations one at a time, with the page's real stylesheets, using the browser's real layout engine.
 
-Handing this data to an LLM proved fruitless. It is verbose, often many megabytes of JSON per recording, and even the most recent models have limited context windows, so they simply cannot hold a whole recording in context at once. 
+Handing this data to an LLM proved fruitless. It is verbose, often many megabytes of JSON per recording, and even the most recent models have limited context windows, so they simply cannot hold a whole recording in context at once.
 
-The bigger problem is that the model has no idea what it's looking at. An rrweb stream is a changelog against a tree. To know what the screen showed at second 42, it would have to hold the whole tree in context, apply every mutation up to that point, and then run layout and paint  as well. The model will happily tell you that a `div` gained a class called `is-disabled`. It cannot tell you that the checkout button just went grey and slid underneath the cookie banner, because that fact only exists after layout has run.
+The bigger problem is that the model has no idea what it's looking at. An rrweb stream is a changelog against a tree. To know what the screen showed at second 42, it would have to hold the whole tree in context, apply every mutation up to that point, and then run layout and paint as well. The model will happily tell you that a `div` gained a class called `is-disabled`. It cannot tell you that the checkout button just went grey and slid underneath the cookie banner, because that fact only exists after layout has run.
 
-Modern multimodal models like Gemini need actual video in order to make sense of a recording. A good mental model for this is vector versus raster graphics. The rrweb data is a series of instructions that lets the browser _perfectly_ recreate the original session, in the same way an SVG is a mathematical description that lets a renderer recreate an image. 
+Modern multimodal models like Gemini need actual video in order to make sense of a recording. A good mental model for this is vector versus raster graphics. The rrweb data is a series of instructions that lets the browser _perfectly_ recreate the original session, in the same way an SVG is a mathematical description that lets a renderer recreate an image.
 
 What we needed was the rasterized version of the recording: an MP4, a compressed stream of pixels. Which meant the first piece of Replay Vision was a rasterizer. rrweb goes in, an MP4 comes out. Load the player in a headless browser, record the screen, encode it.
 
@@ -66,7 +66,7 @@ The rasterizer worked well during initial testing, but once we started running m
 
 ## Two processes, one clock
 
-We saw videos that skipped over sections of the recording, and others that froze for several seconds at a time. The same recording would often produce videos of different lengths. 
+We saw videos that skipped over sections of the recording, and others that froze for several seconds at a time. The same recording would often produce videos of different lengths.
 
 It became clear that the rasterizer was very sensitive to CPU contention. Essentially we were running two independent processes, one rendering the recording and one capturing the frames. If rendering slowed down because another process was taking all the available CPU, capture would keep streaming on schedule and ffmpeg would just repeat the last frame it was given. That's the freeze. Or conversely, capture could be starved while rendering continued, and eventually frames would pile up and some would get dropped. That's the skip.
 
