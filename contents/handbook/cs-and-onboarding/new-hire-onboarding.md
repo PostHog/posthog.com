@@ -177,7 +177,7 @@ Below is a per-product reading list to work through - the reference you come bac
 
 ### Experiments
 1. [Creating an experiment](/docs/experiments/creating-an-experiment) from PostHog UI
-2. Understanding MDE, primary metrics, secondary metrics, interpreting results
+2. Understanding MDE, [primary metrics, secondary metrics](/docs/experiments/metrics#primary-and-secondary-metrics), interpreting results
 3. [Traffic allocation](/docs/experiments/traffic-allocation) - configuring it and validating it. What are some reasons why 80/20 split may not be an 80/20 split?
 4. Returning users: user sees variant A in session 1, does not convert; user sees variant B in session 2, does convert
     - Does this happen? Can the same user see different variants in different sessions? If so, how does this affect the results?
