@@ -185,8 +185,8 @@ export default function StandaloneAddonsTab({ activeProduct, setVolume, setProdu
                             labelAccessory={
                                 info ? (
                                     <Tooltip content={info} tooltipClassName="max-w-[250px]" placement="top">
-                                        <span className="relative">
-                                            <IconInfo className="size-4 opacity-70" />
+                                        <span className="relative inline-block">
+                                            <IconInfo className="size-4 opacity-70 inline-block" />
                                         </span>
                                     </Tooltip>
                                 ) : null
