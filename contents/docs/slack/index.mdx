@@ -86,7 +86,9 @@ Tasks run on **Claude Opus 5** by default. To use a different model, just ask fo
 @PostHog investigate the checkout drop-off and use fable for it
 ```
 
-Any model available in [PostHog Desktop](/desktop) works, and you can request a reasoning effort the same way ("do this with max effort"). To change your default, set a personal preference in the [App Home tab](#the-app-home-tab) under **AI model** – the precedence is: model named in the message → your personal preference → the default.
+Any model available in [PostHog Desktop](/desktop) works, and you can request a reasoning effort the same way ("do this with max effort"). To change your default, set a personal preference in the [App Home tab](#the-app-home-tab) under **AI model**, or set a project- or user-level default in PostHog under **Settings → Environment → Task agents**. The task agent defaults apply everywhere: Slack, the task composer, and PostHog Desktop.
+
+The precedence is: model named in the message → your personal Slack preference → your PostHog **My default model** → the **Project default model** → the built-in default.
 
 You can also switch models mid-run from a follow-up message, with one constraint: the runtime (Claude or Codex) is fixed once an agent starts, so moving to a model from the other family requires starting a new thread. For example, you can go from Opus to Fable mid-run, but not from a Claude model to a Codex one. Each reply's footer shows the model and reasoning effort actually used.
 

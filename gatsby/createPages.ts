@@ -313,6 +313,28 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
                     }
                 }
             }
+            comparePosts: allMdx(
+                filter: {
+                    isFuture: { eq: false }
+                    frontmatter: { date: { ne: null } }
+                    fields: { slug: { regex: "/^/compare/" } }
+                }
+            ) {
+                nodes {
+                    id
+                    headings {
+                        depth
+                        value
+                    }
+                    fields {
+                        slug
+                    }
+                    frontmatter {
+                        category
+                        tags
+                    }
+                }
+            }
             libraryArticles: allMdx(
                 filter: {
                     isFuture: { eq: false }
@@ -772,7 +794,12 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
         ({ attributes: { folder: categoryFolder, label: categoryLabel, post_tags } }) => {
             const isHub = categoryFolder === 'founders' || categoryFolder === 'product-engineers'
             // Folders with hand-written index pages in src/pages/ are excluded here
-            if (!isHub && categoryFolder !== 'newsletter' && categoryFolder !== 'blog') {
+            if (
+                !isHub &&
+                categoryFolder !== 'newsletter' &&
+                categoryFolder !== 'blog' &&
+                categoryFolder !== 'compare'
+            ) {
                 createPage({
                     path: `/${categoryFolder}`,
                     component: PostListingTemplate,
@@ -841,6 +868,22 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
     })
 
     result.data.blogPosts.nodes.forEach((node) => {
+        const { slug } = node.fields
+        const tableOfContents = node.headings && formatToc(node.headings)
+        createPage({
+            path: replacePath(slug),
+            component: BlogPostTemplate,
+            context: {
+                id: node.id,
+                tableOfContents,
+                slug,
+                post: true,
+                article: true,
+            },
+        })
+    })
+
+    result.data.comparePosts.nodes.forEach((node) => {
         const { slug } = node.fields
         const tableOfContents = node.headings && formatToc(node.headings)
         createPage({
@@ -1135,17 +1178,14 @@ function createSdkReferencePages({
         isLatestVersion(node.version) ? node.referenceId : node.id
 
     // Each row crosslinks against its own types, so a versioned page describes that version.
-    const typesByRow = typeNodes.reduce(
-        (acc, node) => {
-            acc[node.id] = (node.types ?? [])
-                .filter(typeHasPage)
-                .map(({ name }: { name: string }) => name)
-                // A type with no usable name can't be linked to, so keep it out of the allowlist.
-                .filter((name: string) => name && name !== 'null')
-            return acc
-        },
-        {} as Record<string, string[]>
-    )
+    const typesByRow = typeNodes.reduce((acc, node) => {
+        acc[node.id] = (node.types ?? [])
+            .filter(typeHasPage)
+            .map(({ name }: { name: string }) => name)
+            // A type with no usable name can't be linked to, so keep it out of the allowlist.
+            .filter((name: string) => name && name !== 'null')
+        return acc
+    }, {} as Record<string, string[]>)
 
     // Latest-only builds leave the version picker pointing at pages that don't exist — see the
     // note above `sdkVersions` in src/templates/sdk/SdkReference.tsx.
@@ -1256,7 +1296,7 @@ async function createMinimalPages({
                     frontmatter: { date: { ne: null } }
                     fields: {
                         slug: {
-                            regex: "/^/(blog|library|founders|product-engineers|features|newsletter|spotlight|customers|tutorials)/"
+                            regex: "/^/(blog|compare|library|founders|product-engineers|features|newsletter|spotlight|customers|tutorials)/"
                         }
                     }
                 }

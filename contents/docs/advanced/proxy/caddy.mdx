@@ -46,18 +46,24 @@ e.yourdomain.com {
   handle /static/* {
     reverse_proxy https://us-assets.i.posthog.com:443 {
       header_up Host us-assets.i.posthog.com
+      header_up -Cookie
+      header_up -Authorization
       header_down -Access-Control-Allow-Origin
     }
   }
   handle /array/* {
     reverse_proxy https://us-assets.i.posthog.com:443 {
       header_up Host us-assets.i.posthog.com
+      header_up -Cookie
+      header_up -Authorization
       header_down -Access-Control-Allow-Origin
     }
   }
   handle {
     reverse_proxy https://us.i.posthog.com:443 {
       header_up Host us.i.posthog.com
+      header_up -Cookie
+      header_up -Authorization
       header_down -Access-Control-Allow-Origin
     }
   }
@@ -69,18 +75,24 @@ e.yourdomain.com {
   handle /static/* {
     reverse_proxy https://eu-assets.i.posthog.com:443 {
       header_up Host eu-assets.i.posthog.com
+      header_up -Cookie
+      header_up -Authorization
       header_down -Access-Control-Allow-Origin
     }
   }
   handle /array/* {
     reverse_proxy https://eu-assets.i.posthog.com:443 {
       header_up Host eu-assets.i.posthog.com
+      header_up -Cookie
+      header_up -Authorization
       header_down -Access-Control-Allow-Origin
     }
   }
   handle {
     reverse_proxy https://eu.i.posthog.com:443 {
       header_up Host eu.i.posthog.com
+      header_up -Cookie
+      header_up -Authorization
       header_down -Access-Control-Allow-Origin
     }
   }
@@ -92,6 +104,8 @@ e.yourdomain.com {
 Replace `e.yourdomain.com` with your chosen subdomain.
 
 The `header_up Host` directive tells PostHog which domain the request is for. Without this, PostHog won't know how to route your request and you'll get 401 errors.
+
+The `header_up -Cookie` and `header_up -Authorization` directives remove the browser's cookies and auth headers before the request goes to PostHog. PostHog does not need them, because ingestion authenticates on the project token in the request body.
 
 The `header_down -Access-Control-Allow-Origin` directive removes CORS headers from PostHog's response. This prevents conflicts with your own CORS configuration.
 
@@ -173,6 +187,8 @@ In your working directory, create a file named `Caddyfile`:
     rewrite * /static/{path}
     reverse_proxy https://us-assets.i.posthog.com:443 {
       header_up Host us-assets.i.posthog.com
+      header_up -Cookie
+      header_up -Authorization
       header_down -Access-Control-Allow-Origin
     }
   }
@@ -181,6 +197,8 @@ In your working directory, create a file named `Caddyfile`:
     rewrite * /array/{path}
     reverse_proxy https://us-assets.i.posthog.com:443 {
       header_up Host us-assets.i.posthog.com
+      header_up -Cookie
+      header_up -Authorization
       header_down -Access-Control-Allow-Origin
     }
   }
@@ -189,6 +207,8 @@ In your working directory, create a file named `Caddyfile`:
     rewrite * {path}
     reverse_proxy https://us.i.posthog.com:443 {
       header_up Host us.i.posthog.com
+      header_up -Cookie
+      header_up -Authorization
       header_down -Access-Control-Allow-Origin
     }
   }
@@ -203,6 +223,8 @@ In your working directory, create a file named `Caddyfile`:
     rewrite * /static/{path}
     reverse_proxy https://eu-assets.i.posthog.com:443 {
       header_up Host eu-assets.i.posthog.com
+      header_up -Cookie
+      header_up -Authorization
       header_down -Access-Control-Allow-Origin
     }
   }
@@ -211,6 +233,8 @@ In your working directory, create a file named `Caddyfile`:
     rewrite * /array/{path}
     reverse_proxy https://eu-assets.i.posthog.com:443 {
       header_up Host eu-assets.i.posthog.com
+      header_up -Cookie
+      header_up -Authorization
       header_down -Access-Control-Allow-Origin
     }
   }
@@ -219,6 +243,8 @@ In your working directory, create a file named `Caddyfile`:
     rewrite * {path}
     reverse_proxy https://eu.i.posthog.com:443 {
       header_up Host eu.i.posthog.com
+      header_up -Cookie
+      header_up -Authorization
       header_down -Access-Control-Allow-Origin
     }
   }
@@ -396,18 +422,24 @@ e.yourdomain.com {
   handle /static/* {
     reverse_proxy https://us-assets.i.posthog.com:443 {
       header_up Host us-assets.i.posthog.com
+      header_up -Cookie
+      header_up -Authorization
       header_down -Access-Control-Allow-Origin
     }
   }
   handle /array/* {
     reverse_proxy https://us-assets.i.posthog.com:443 {
       header_up Host us-assets.i.posthog.com
+      header_up -Cookie
+      header_up -Authorization
       header_down -Access-Control-Allow-Origin
     }
   }
   handle {
     reverse_proxy https://us.i.posthog.com:443 {
       header_up Host us.i.posthog.com
+      header_up -Cookie
+      header_up -Authorization
       header_down -Access-Control-Allow-Origin
     }
   }
@@ -423,18 +455,24 @@ e.yourdomain.com {
   handle /static/* {
     reverse_proxy https://eu-assets.i.posthog.com:443 {
       header_up Host eu-assets.i.posthog.com
+      header_up -Cookie
+      header_up -Authorization
       header_down -Access-Control-Allow-Origin
     }
   }
   handle /array/* {
     reverse_proxy https://eu-assets.i.posthog.com:443 {
       header_up Host eu-assets.i.posthog.com
+      header_up -Cookie
+      header_up -Authorization
       header_down -Access-Control-Allow-Origin
     }
   }
   handle {
     reverse_proxy https://eu.i.posthog.com:443 {
       header_up Host eu.i.posthog.com
+      header_up -Cookie
+      header_up -Authorization
       header_down -Access-Control-Allow-Origin
     }
   }
@@ -565,18 +603,24 @@ e.yourdomain.com {
   handle /static/* {
     reverse_proxy https://us-assets.i.posthog.com:443 {
       header_up Host us-assets.i.posthog.com
+      header_up -Cookie
+      header_up -Authorization
       header_down -Access-Control-Allow-Origin
     }
   }
   handle /array/* {
     reverse_proxy https://us-assets.i.posthog.com:443 {
       header_up Host us-assets.i.posthog.com
+      header_up -Cookie
+      header_up -Authorization
       header_down -Access-Control-Allow-Origin
     }
   }
   handle {
     reverse_proxy https://us.i.posthog.com:443 {
       header_up Host us.i.posthog.com
+      header_up -Cookie
+      header_up -Authorization
       header_down -Access-Control-Allow-Origin
     }
   }
@@ -602,18 +646,24 @@ e.yourdomain.com {
   handle /static/* {
     reverse_proxy https://eu-assets.i.posthog.com:443 {
       header_up Host eu-assets.i.posthog.com
+      header_up -Cookie
+      header_up -Authorization
       header_down -Access-Control-Allow-Origin
     }
   }
   handle /array/* {
     reverse_proxy https://eu-assets.i.posthog.com:443 {
       header_up Host eu-assets.i.posthog.com
+      header_up -Cookie
+      header_up -Authorization
       header_down -Access-Control-Allow-Origin
     }
   }
   handle {
     reverse_proxy https://eu.i.posthog.com:443 {
       header_up Host eu.i.posthog.com
+      header_up -Cookie
+      header_up -Authorization
       header_down -Access-Control-Allow-Origin
     }
   }
