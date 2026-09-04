@@ -16,6 +16,7 @@ import {
     IconPeople,
     IconPinFilled,
     IconBadge,
+    IconShare,
 } from '@posthog/icons'
 import { useAppActions, useAppSettings } from '../../context/App'
 
@@ -246,6 +247,13 @@ function TaskBarMenu() {
                                     label: 'Image annotation',
                                     link: '/image-annotator',
                                     icon: <IconPinFilled className="opacity-50 group-hover/item:opacity-75 size-4" />,
+                                },
+                                {
+                                    type: 'item' as const,
+                                    label: 'QR mogging',
+                                    link: 'https://qr-mogging.hosthog.dev',
+                                    external: true,
+                                    icon: <IconShare className="opacity-50 group-hover/item:opacity-75 size-4" />,
                                 },
                             ]
                           : []),
