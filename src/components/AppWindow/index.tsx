@@ -259,6 +259,7 @@ export default function AppWindow({ item, chrome = true }: { item: AppWindowType
     const hasToolbar = item.appSettings?.toolbar
     const hideTitle = item.appSettings?.hideTitle
     const isCompositorActive = animating || dragging || leftDragResizing || closing
+    const edgeToEdgeReaderChrome = integratedChrome && (item.expanded || size.width < 672)
     const inView = useMemo(() => {
         if (item.expanded) return true
 
@@ -803,7 +804,9 @@ export default function AppWindow({ item, chrome = true }: { item: AppWindowType
                             : 'size-full'
                     } !select-auto flex flex-col border-primary ${WINDOW_BG} ${
                         isCompositorActive ? MOTION_LAYER : ''
-                    } rounded-lg border ${item.expanded ? 'shadow-none' : 'shadow-md'} ${
+                    } ${edgeToEdgeReaderChrome ? 'rounded-none border-0' : 'rounded-lg border'} ${
+                        item.expanded ? 'shadow-none' : 'shadow-md'
+                    } ${
                         item.expanded
                             ? 'rounded-tr-none rounded-tl-none'
                             : item.snapped === 'left'
@@ -884,7 +887,9 @@ export default function AppWindow({ item, chrome = true }: { item: AppWindowType
                                       item.appSettings?.size?.fixed
                                           ? 'overflow-x-hidden overflow-y-auto'
                                           : 'overflow-clip'
-                                  } rounded-lg ${hasToolbar ? 'rounded-t-none' : ''} ${
+                                  } ${edgeToEdgeReaderChrome ? 'rounded-none' : 'rounded-lg'} ${
+                                      hasToolbar ? 'rounded-t-none' : ''
+                                  } ${
                                       item.expanded
                                           ? 'rounded-tr-none rounded-tl-none'
                                           : item.snapped === 'left'

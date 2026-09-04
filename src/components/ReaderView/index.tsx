@@ -1542,7 +1542,7 @@ function ReaderViewContent({
     hideMenu = false,
     className = '',
 }: ReaderViewProps) {
-    const { appWindow, activeInternalMenu, setIntegratedChrome } = useWindow()
+    const { appWindow, activeInternalMenu, isExpanded, setIntegratedChrome } = useWindow()
     const { hash, pathname } = useLocation()
     const contentRef = useRef<HTMLDivElement>(null)
     const articleColumnRef = useRef<HTMLDivElement>(null)
@@ -1555,13 +1555,24 @@ function ReaderViewContent({
 
     const { isNavVisible, isNarrow, fullWidthContent, backgroundImage, toggleNav } = useReaderView()
 
-    // Narrow windows use the same fully hidden edge state. The invisible edge
-    // target supports hover, keyboard focus, and touch.
-    const showMobileNav = isNarrow
+    const [canHover, setCanHover] = useState(true)
+    useEffect(() => {
+        const hoverQuery = window.matchMedia('(any-hover: hover)')
+        const updateCanHover = () => setCanHover(hoverQuery.matches)
+        updateCanHover()
+        hoverQuery.addEventListener('change', updateCanHover)
+        return () => hoverQuery.removeEventListener('change', updateCanHover)
+    }, [])
+
+    // Narrow windows and devices without hover use a drawer. Forced-minimized
+    // pages keep only the edge target, while other pages get a visible trigger.
+    const useDrawerNav = isNarrow || !canHover
+    const edgeToEdgeContent = isExpanded || useDrawerNav
     const [mobileNavOpen, setMobileNavOpen] = useState(false)
     const mobileNavTriggerRef = useRef<HTMLButtonElement>(null)
     const focusMobileNavOnOpenRef = useRef(false)
     const mobileSidebarId = `reader-sidebar-${appWindow?.key || 'active'}`
+    const mobileSidebarTriggerId = `reader-sidebar-trigger-${appWindow?.key || 'active'}`
 
     useLayoutEffect(() => {
         if (appWindow?.appSettings?.size?.fixed) return
@@ -1723,8 +1734,10 @@ function ReaderViewContent({
         'relative',
         // This overlays the translucent window surface, so the article stays
         // slightly more opaque than the surrounding chrome without becoming solid.
-        'bg-primary/40 border border-primary rounded-md overflow-hidden',
-        !showMobileNav && isNavVisible && !hideLeftSidebar ? 'my-2 mr-2 ml-0' : 'm-2',
+        'bg-primary/40 overflow-hidden',
+        edgeToEdgeContent
+            ? 'm-0 rounded-none border-0'
+            : `border border-primary rounded-md ${isNavVisible && !hideLeftSidebar ? 'my-2 mr-2 ml-0' : 'm-2'}`,
         selectedBackgroundOption && selectedBackgroundOption.value !== 'none'
             ? 'before:absolute before:inset-0 before:bg-primary before:opacity-75 before:pointer-events-none'
             : '',
@@ -1753,11 +1766,15 @@ function ReaderViewContent({
                 <LeftSidebar
                     isNavVisible={isNavVisible}
                     toggleNav={toggleNav}
-                    mobile={showMobileNav}
+                    mobile={useDrawerNav}
                     mobileOpen={mobileNavOpen}
                     onMobileClose={() => {
                         setMobileNavOpen(false)
-                        requestAnimationFrame(() => mobileNavTriggerRef.current?.focus())
+                        requestAnimationFrame(() => {
+                            const visibleTrigger = document.getElementById(mobileSidebarTriggerId)
+                            if (visibleTrigger instanceof HTMLElement) visibleTrigger.focus()
+                            else mobileNavTriggerRef.current?.focus()
+                        })
                     }}
                     forceMinimized={hideLeftSidebar}
                     isEditing={isEditing}
@@ -1770,7 +1787,7 @@ function ReaderViewContent({
                     inlineSearch={<InlineSearch contentRef={onSearch ? undefined : contentRef} onSearch={onSearch} />}
                     menuTabs={menuTabs}
                     tableOfContents={tableOfContents}
-                    hideTableOfContents={hideRightSidebar || (showMobileNav && hideMobileTableOfContents)}
+                    hideTableOfContents={hideRightSidebar || (useDrawerNav && hideMobileTableOfContents)}
                     contentRef={onSearch ? undefined : contentRef}
                     currentPath={appWindow?.path}
                     windowKey={appWindow?.key}
@@ -1779,7 +1796,27 @@ function ReaderViewContent({
                     {leftSidebar || (!hideMenu && <Menu parent={parent as MenuItem} />)}
                 </LeftSidebar>
 
-                {showMobileNav && (
+                {useDrawerNav && !hideLeftSidebar && !mobileNavOpen && (
+                    <div data-scheme="secondary" className="absolute bottom-4 left-4 z-30">
+                        <OSButton
+                            id={mobileSidebarTriggerId}
+                            size="lg"
+                            aria-label="Open navigation and search"
+                            aria-controls={mobileSidebarId}
+                            aria-expanded={false}
+                            onClick={() => {
+                                focusMobileNavOnOpenRef.current = true
+                                setMobileNavOpen(true)
+                            }}
+                            icon={<IconSidebarClose />}
+                            tooltip="Open navigation and search"
+                            tooltipSide="right"
+                            className={`size-11 border-primary shadow-md ${PANEL_BG}`}
+                        />
+                    </div>
+                )}
+
+                {useDrawerNav && hideLeftSidebar && (
                     <button
                         ref={mobileNavTriggerRef}
                         type="button"
@@ -1799,7 +1836,7 @@ function ReaderViewContent({
                     />
                 )}
 
-                {showMobileNav && (
+                {useDrawerNav && (
                     <div
                         aria-hidden
                         onClick={() => setMobileNavOpen(false)}

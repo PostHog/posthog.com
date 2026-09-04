@@ -36,6 +36,8 @@ The rail-to-content seam, corner radii, and control alignment are consistent. Th
 7. Final narrow review: passed in light and dark themes; the drawer opens from the left and contains search, navigation, and the table of contents.
 8. Accessibility review: hidden panels are inert, edge targets report their expanded state, keyboard focus enters the narrow drawer, and reduced-motion preferences disable the transitions.
 9. Translucency review: the main content remains readable while the wallpaper shows through both surfaces. Forced-minimized pages disable the sidebar control and explain the restriction in its tooltip.
+10. Mobile navigation review: standard pages show a 44-pixel drawer control at the bottom-left on narrow or non-hover devices. The control overlays the window without changing the content layout. Forced-minimized pages do not show the control.
+11. Edge-to-edge review: expanded and narrow reader windows remove the outer and inner borders, margins, and corner radii. The content fills the app window in these states.
 
 ## Final result
 
