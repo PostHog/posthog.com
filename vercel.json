@@ -579,6 +579,16 @@
             "statusCode": 301
         },
         {
+            "source": "/docs/mcp/:path*",
+            "destination": "/docs/model-context-protocol/:path*",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/model-context-protocol/installation:ext(\\.md)?",
+            "destination": "/docs/model-context-protocol:ext?",
+            "statusCode": 301
+        },
+        {
             "source": "/docs/settings/environments:ext(\\.md)?",
             "destination": "/docs/settings/projects:ext?",
             "statusCode": 301
@@ -5206,6 +5216,11 @@
                     "value": "workflows"
                 }
             ]
+        },
+        {
+            "source": "/pricing/:product(ab-testing|ai-observability|endpoints|error-tracking|experiments|feature-flags|llm-analytics|logs|product-analytics|replay-vision|session-replay|surveys|web-analytics|workflows)",
+            "destination": "/:product/pricing",
+            "statusCode": 301
         },
         {
             "source": "/handbook/growth/sales/icp",
