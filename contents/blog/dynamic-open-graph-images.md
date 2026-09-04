@@ -194,7 +194,7 @@ Believe it or not, we can address all of these questions using visual cues in th
 
 **Blog post**
 
-There are a considerations for our blog posts:
+There are considerations for our blog posts:
 
 - If we place an image in the background, text layered on top needs to be readable. The fix? We added subtle text shadows and partially transparent gradients layered between the text and image.
 - Some posts have multiple authors, so that needs to be factored in.
@@ -282,7 +282,7 @@ It's important to note that some websites cache Open Graph on their servers. If 
 
 This was a really fun project to work on, as it adds immediate value on a daily basis to anyone seeing a link to PostHog.com. On a personal note, it’s pretty special to work at a company where this type of polish is valued.
 
-We still consider this a v1 approach, as there are plenty of edge cases to work through - not to mention what to do with article's begin with images or titles - like how to format it all.
+We still consider this a v1 approach, as there are plenty of edge cases to work through - not to mention what to do with articles that begin with images or titles - like how to format it all.
 
 In a future update, we plan to [make our Tutorials Open Graph images transparent](https://github.com/PostHog/posthog.com/issues/2720) so they naturally work in both light and dark modes.
 

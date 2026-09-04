@@ -59,6 +59,7 @@ export const POCKET_GUIDE_VOLUMES: PocketGuideVolume[] = [
         description: 'Watch how people actually use your product – or let Replay Vision watch it for you.',
         token: 'yellow',
         volume: 4,
+        docsProduct: 'session-replay',
     },
 ]
 

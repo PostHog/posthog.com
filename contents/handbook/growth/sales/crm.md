@@ -37,20 +37,18 @@ People currently come into Salesforce through one of the following ways:
 
 ### New PostHog signups
 
-When a `user signed up` (Cloud signup) event is ingested into PostHog
-we use the [Salesforce App](https://github.com/PostHog/Salesforce-plugin) to sync contact data into Salesforce. We also populate
-the following Salesforce properties if they are set in the PostHog event:
+When a `user signed up` (Cloud signup) event is ingested into PostHog, a <PrivateLink url="https://us.posthog.com/project/2/pipeline/destinations">data pipeline destination</PrivateLink> ("Salesforce create contact for signups") creates a contact record in Salesforce with `Record Source` set to `product-signup`. It maps the following Salesforce properties if they are set on the PostHog event or person:
 
--   selected_deployment_type - usually `cloud` or `hosted_clickhouse`
--   product_signup_ts - the time they signed up/purchased a license
+-   role_at_organization - the role they self-selected when signing up (used in lead scoring)
 -   is_organization_first_user - whether they have created a new organization or joined an existing one
--   role_at_organization - the role they self-selected when signing up (used in Lead scoring)
+-   The PostHog organization ID and name
+-   Marketing opt-in, the signup URLs, and the PostHog distinct ID
 
 ### Completed contact form
 
 We have a [contact us form](/talk-to-a-human) on posthog.com where we ask users can get in touch with us. The sales@ alias gets an email notification and a notification is also sent to [#sales-leads](https://posthog.slack.com/archives/C054BJSHG82) in Slack when one of these forms is submitted.
 
-These submissions are processed through the Default app and routed into Salesforce as tasks. Tasks are then automatically assigned to the right team member based on account ownership and territory (see below).
+Each submission sends a server-side PostHog event and a webhook into our lead routing pipeline (Default). The [lead-gateway](https://github.com/PostHog/lead-gateway) then creates or updates the Salesforce contact, links it to the account, and creates a Lead Task. Tasks are then automatically assigned to the right team member based on account ownership and territory (see below).
 
 If the submission is clearly a support or billing request, you don’t need to reach out manually:
 - On the task, select the disqualification reason **Billing Support Request** or **Support Request**.

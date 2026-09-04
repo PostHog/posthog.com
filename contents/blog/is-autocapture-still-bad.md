@@ -45,7 +45,7 @@ Also, what's the alternative here? Having less data because you can only track t
 
 Amplitude argues autocapture means you need someone to police and clean the data. This may have been an issue for teams in the past, but with modern tools it’s possible to simply give users the information they need instead. 
 
-At PostHog, we do this through our [Data Management suite](/docs/user-guides/data-management), which lets you to add tags, descriptions and more to every event you track — whether autocaptured or not. At a glance you can see when an event has been created,  modified, deleted or gone ‘stale’.
+At PostHog, we do this through our [Data Management suite](/docs/user-guides/data-management), which lets you add tags, descriptions and more to every event you track — whether autocaptured or not. At a glance you can see when an event has been created,  modified, deleted or gone ‘stale’.
 
 The article also raises the point that someone may make changes to your product which throw off your data without your knowledge. However this isn’t a risk that’s exclusive to autocapture, as it can happen with manual instrumentation as well. Ultimately, no analytics tool can protect your codebase from rogue engineers!
 
