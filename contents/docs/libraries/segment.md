@@ -53,13 +53,23 @@ The simple Segment destination only supports tracking of pageviews, custom event
          for (
            void 0 !== a ? (u = e[a] = []) : (a = "posthog"),
              u.people = u.people || [],
-             u.toString = function (t) {
-               var e = "posthog";
-               return ("posthog" !== a && (e += "." + a), t || (e += " (stub)"), e);
-             },
-             u.people.toString = function () {
-               return u.toString(1) + ".people (stub)";
-             },
+             Object.defineProperty(u, "toString", {
+               configurable: !0,
+               enumerable: !0,
+               writable: !0,
+               value: function (t) {
+                 var e = "posthog";
+                 return ("posthog" !== a && (e += "." + a), t || (e += " (stub)"), e);
+               },
+             }),
+             Object.defineProperty(u.people, "toString", {
+               configurable: !0,
+               enumerable: !0,
+               writable: !0,
+               value: function () {
+                 return u.toString(1) + ".people (stub)";
+               },
+             }),
              o =
                "capture identify alias people.set people.set_once set_config register register_once unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled onFeatureFlags getFeatureFlag getFeatureFlagResult reloadFeatureFlags group updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures getActiveMatchingSurveys getSurveys getNextSurveyStep".split(
                  " ",
