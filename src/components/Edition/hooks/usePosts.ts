@@ -34,6 +34,7 @@ export const usePosts = ({ params }: { params?: any }) => {
     return {
         posts,
         isLoading,
+        error,
         isValidating,
         fetchMore: () => setSize(size + 1),
         mutate,
