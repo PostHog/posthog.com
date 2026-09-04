@@ -319,6 +319,12 @@ If you're using [PostHog JS](/docs/libraries/js) on the frontend, configure [`tr
 
 > Requires `posthog-node` version >= 5.52.0.
 
+<CalloutBox icon="IconFlask" title="The span API is experimental" type="action">
+
+Tracing is new in `posthog-node` and its API can still change in a minor release. Spans you send are kept — it's the SDK surface that isn't frozen yet.
+
+</CalloutBox>
+
 Tracing records **spans** — timed units of work — so you can see where time went in a request and how work fans out across your services. Spans created inside a request context automatically carry the person and session they belong to, so a slow trace links back to the user who experienced it.
 
 Tracing is off until you set the `traces` option. No OpenTelemetry dependency is required. For what you can do with spans once they arrive, see [Distributed tracing](/docs/distributed-tracing/start-here).
@@ -393,9 +399,18 @@ await posthog.withSpan('GET /users/:id', { kind: 'server' }, async (span) => {
 | `recordException(error)` | Attach an exception event carrying the type, message and stack, and set status to `error` |
 | `updateName(name)` | Replace the span name, e.g. once a route template resolves |
 | `traceparent()` | This span's W3C `traceparent` header value |
+| `tracestate()` | This span's W3C `tracestate` value, or `null` when it has none |
 | `end(endTime?)` | End the span and queue it for export |
 
-Set `kind` to describe what the work is: `'internal'` (default), `'server'` for an inbound request, `'client'` for an outbound call, `'producer'` or `'consumer'` for queue work.
+Both `withSpan` and `startSpan` take the same options:
+
+| Option | Description |
+|---|---|
+| `kind` | What the work is: `'internal'` (default), `'server'` for an inbound request, `'client'` for an outbound call, `'producer'` or `'consumer'` for queue work |
+| `attributes` | Attributes to set at span start |
+| `parent` | A span handle, or an inbound W3C `traceparent` string to continue a trace another service started |
+| `tracestate` | The W3C `tracestate` accompanying a `traceparent` string. Ignored when `parent` is a span handle, which inherits its parent's |
+| `startTime` | Backdate the span's start, as a millisecond epoch or a `Date`. A start more than 24 hours old is warned about, because the server clamps it to receive time |
 
 ### Tracing across services
 
@@ -417,6 +432,8 @@ app.post('/checkout', async (req, res) => {
 ```
 
 A missing or malformed `traceparent` starts a new trace rather than throwing.
+
+A continued trace propagates the sampled flag it was handed, so a downstream sampler sees the decision the head service made. PostHog itself doesn't sample — a span is recorded and exported whichever way that flag is set.
 
 ### Linking traces to people and sessions
 
@@ -457,13 +474,13 @@ The hook sees plain values rather than the OTLP wire encoding, so `span.attribut
 
 ### Span limits
 
-A span is capped at 128 attributes and 128 events, and each string attribute value at 8192 characters. The endpoint rejects a span that's too large, and a rejected span is lost whole rather than truncated, so the caps bound a span before it gets there.
+A span is capped at 128 attributes and 128 events, each event at 128 attributes, and each string attribute value at 8192 characters. The endpoint rejects a span that's too large, and a rejected span is lost whole rather than truncated, so the caps bound a span before it gets there.
 
 Past the cap, the earliest attributes and events are kept and the number dropped is reported alongside the span, so a truncated span reads as truncated rather than as quietly incomplete. The attributes PostHog attaches itself — `posthogDistinctId` and `sessionId` — don't count toward the cap and are never dropped, so a span at the limit still links back to its person and session.
 
-Exception events get one concession: once a span has spent its event cap, a small reserve stays available to them, so a span that fills its events and then throws still carries the exception rather than only an `error` status. Below the cap an exception is an ordinary event.
+The event cap is absolute: an `exception` event the SDK records for you spends an ordinary slot like any other. A span that fills its events and then throws keeps its `error` status but not the exception detail, and reports the loss in `droppedEventsCount`. Raise `maxEventsPerSpan` on spans that record many events and can also fail.
 
-The length bound reaches inside a value, including strings nested in arrays and objects, and applies to `exception.stacktrace` like any other attribute. All three caps are re-applied after `beforeSpanSend`, so a hook that enriches a span can't push it back over.
+The length bound reaches inside a value, including strings nested in arrays and objects, and applies to `exception.stacktrace` like any other attribute. All four caps are re-applied after `beforeSpanSend`, so a hook that enriches a span can't push it back over.
 
 ### Configuration
 
@@ -481,6 +498,7 @@ The length bound reaches inside a value, including strings nested in arrays and 
 | `beforeSpanSend` | – | Edit or drop each finished span before export. Return `null` to drop it |
 | `maxAttributesPerSpan` | `128` | Maximum attributes you set on one span |
 | `maxEventsPerSpan` | `128` | Maximum events on one span |
+| `maxAttributesPerEvent` | `128` | Maximum attributes on one span event, including the `exception.*` attributes the SDK records for you |
 | `maxAttributeValueLength` | `8192` | Maximum characters in a string attribute value |
 
 ### Shutdown and short-lived processes
