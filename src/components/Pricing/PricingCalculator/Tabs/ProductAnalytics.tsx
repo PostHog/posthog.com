@@ -1,11 +1,8 @@
-import { IconInfo, IconLightBulb, IconX } from '@posthog/icons'
-import Checkbox from 'components/Checkbox'
+import { IconInfo } from '@posthog/icons'
 import { PricingTiers } from 'components/Pricing/Plans'
 import { NonLinearSlider, nonLinearCurve, reverseNonLinearCurve } from 'components/Pricing/PricingSlider/Slider'
 import { calculatePrice } from 'components/Pricing/PricingCalculator/calculatorLogic'
 import React, { useEffect, useMemo, useState } from 'react'
-import { NumericFormat } from 'react-number-format'
-import AutosizeInput from 'react-input-autosize'
 import qs from 'qs'
 import Tooltip from 'components/Tooltip'
 import { Addons } from '../Tabbed'
@@ -29,6 +26,36 @@ export const getTotalEnhancedPersonsVolume = (analyticsData: any) => {
         : null
 }
 
+const IDENTIFIED_TYPE = 'productAnalyticsEvents'
+const ANONYMOUS_TYPE = 'websiteAnalyticsEvents'
+
+const SIZE_PRESETS = [
+    { id: 'side_project', label: 'Side project', identified: 200_000, anonymous: 800_000 },
+    { id: 'startup', label: 'Startup', identified: 3_000_000, anonymous: 1_000_000 },
+    { id: 'scale_up', label: 'High volume', identified: 15_000_000, anonymous: 4_000_000 },
+    { id: 'custom', label: 'Custom' },
+]
+
+const DEFAULT_SIZE_PRESET = SIZE_PRESETS[0]
+
+export const getDefaultAnalyticsData = () =>
+    analyticsSliders.reduce((acc, slider) => {
+        slider.types.forEach(({ type, enhanced }) => {
+            acc[type] = {
+                volume: enhanced ? DEFAULT_SIZE_PRESET.identified : DEFAULT_SIZE_PRESET.anonymous,
+                cost: 0,
+                enhanced: enhanced || false,
+            }
+        })
+        return acc
+    }, {})
+
+const presetIdForVolumes = (data) =>
+    SIZE_PRESETS.find(
+        (preset) =>
+            preset.identified === data[IDENTIFIED_TYPE]?.volume && preset.anonymous === data[ANONYMOUS_TYPE]?.volume
+    )?.id ?? 'custom'
+
 export const analyticsSliders = [
     {
         label: 'Product analytics',
@@ -42,6 +69,20 @@ export const analyticsSliders = [
     },
 ]
 
+const formatCompact = (n) =>
+    Intl.NumberFormat('en', { notation: 'compact', compactDisplay: 'short', maximumFractionDigits: 1 }).format(n || 0)
+
+const parseCompact = (value) => {
+    const match = String(value)
+        .trim()
+        .match(/^([\d.]+)\s*([kmb])?$/i)
+    if (!match) return 0
+    const suffix = { k: 1e3, m: 1e6, b: 1e9 }[match[2]?.toLowerCase()] ?? 1
+    return Number(match[1]) * suffix
+}
+
+const firstPaidUnitAmount = (tiers) => tiers?.find((tier) => parseFloat(tier.unit_amount_usd) > 0)?.unit_amount_usd
+
 const getLabelByType = (key) => {
     const slider = analyticsSliders.find((slider) => slider.types.some((type) => type.type === key))
     const type = slider?.types.find((type) => type.type === key)
@@ -50,7 +91,7 @@ const getLabelByType = (key) => {
         : slider.label
 }
 
-const AnalyticsSlider = ({ marks, min, max, className = '', label, onChange, value, enhanced = '' }) => {
+const AnalyticsSlider = ({ marks, min, max, className = '', label, onChange, value, enhanced = '', unitPrice }) => {
     const { addWindow } = useApp()
 
     const openEventTypes = () => {
@@ -61,110 +102,81 @@ const AnalyticsSlider = ({ marks, min, max, className = '', label, onChange, val
         )
     }
     return (
-        <div className={`${className} relative ${label ? 'pt-7' : ''}`}>
-            {label && (
-                <p className="m-0 text-sm absolute left-8 top-0">
+        <div className={`${className} flex items-center gap-4 py-3 ${value ? '' : 'opacity-60'}`}>
+            <div className="w-48 shrink-0">
+                <p className="m-0 text-sm font-bold mb-0.5">
                     {label}{' '}
-                    {enhanced ? (
-                        <span className="text-secondary">
-                            <Tooltip
-                                content={() => (
-                                    <div className="max-w-[250px]">
-                                        <p className="text-sm mb-2">
-                                            Typically used for authenticated users where you know their email address or
-                                            want to send custom properties
-                                        </p>
-                                        <p className="text-sm mb-0">
-                                            <button
-                                                onClick={openEventTypes}
-                                                className="text-red dark:text-yellow font-semibold text-sm"
-                                            >
-                                                Explain event types
-                                            </button>
-                                        </p>
-                                    </div>
-                                )}
-                                placement="right"
-                            >
-                                <IconInfo className="size-4 inline-block relative -top-0.5" />
-                            </Tooltip>
-                        </span>
-                    ) : (
-                        <span className="text-secondary"></span>
-                    )}
+                    <span className="text-secondary">
+                        <Tooltip
+                            content={() => (
+                                <div className="max-w-[250px]">
+                                    <p className="text-sm mb-2">
+                                        {enhanced
+                                            ? 'Typically used for authenticated users where you know their email address or want to send custom properties'
+                                            : "No individually-identifiable info, analyzed in aggregate. These don't use person profiles."}
+                                    </p>
+                                    <p className="text-sm mb-0">
+                                        <button
+                                            onClick={openEventTypes}
+                                            className="text-red dark:text-yellow font-semibold text-sm"
+                                        >
+                                            Explain event types
+                                        </button>
+                                    </p>
+                                </div>
+                            )}
+                            placement="right"
+                        >
+                            <IconInfo className="size-4 inline-block relative -top-0.5" />
+                        </Tooltip>
+                    </span>
                 </p>
-            )}
-            <NonLinearSlider
-                stepsInRange={100}
-                marks={marks}
-                min={min}
-                max={max}
-                onChange={(value) => onChange(reverseNonLinearCurve(value))}
-                value={nonLinearCurve(value)}
+                {unitPrice && <p className="m-0 text-xs text-secondary">${unitPrice} each after the first 1M</p>}
+            </div>
+            <div className="flex-1 flex justify-end min-w-0">
+                <div className="w-full @md:w-3/4">
+                    <NonLinearSlider
+                        stepsInRange={100}
+                        marks={marks}
+                        min={0}
+                        max={max}
+                        onChange={(value) => onChange(reverseNonLinearCurve(value))}
+                        value={nonLinearCurve(value || 0)}
+                    />
+                </div>
+            </div>
+            <input
+                type="text"
+                className="w-14 bg-transparent text-center font-bold text-sm border border-light dark:border-dark rounded-md py-1 px-1.5 focus:ring-0 focus:border-red dark:focus:border-yellow focus:bg-white dark:focus:bg-accent-dark"
+                value={formatCompact(value)}
+                onChange={(e) => onChange(parseCompact(e.target.value))}
             />
         </div>
     )
 }
 
-const SliderToggle = ({ label = '', types, activeProduct, setAnalyticsVolume, analyticsData, ...other }) => {
-    const [volume, setVolume] = useState({})
-    const [checked, setChecked] = useState(other.checked || false)
-
-    const handleCheck = () => {
-        if (checked) {
-            const volume = {}
-            types.forEach(({ type }) => {
-                volume[type] = analyticsData[type].volume
-                setAnalyticsVolume(type, 0)
-            })
-            setVolume(volume)
-        } else {
-            types.forEach(({ type }) => {
-                setAnalyticsVolume(type, volume[type] || 0)
-            })
-        }
-        setChecked(!checked)
-    }
-
+const SliderToggle = ({
+    types,
+    activeProduct,
+    setAnalyticsVolume,
+    analyticsData,
+    anonymousUnitPrice,
+    identifiedUnitPrice,
+}) => {
     return (
-        <div className={`mt-2 grid grid-cols-6 gap-8 ${checked ? 'mb-10' : 'mb-2'}`}>
-            <div className={`space-y-3 ${checked ? 'col-span-6' : 'col-span-5'}`}>
-                <Checkbox className="!text-base" checked={checked} onChange={handleCheck} value={label} />
-                {checked && (
-                    <div className="space-y-12">
-                        {types.map(({ type, label }) => (
-                            <div key={type}>
-                                <div className="grid grid-cols-6 gap-8">
-                                    <AnalyticsSlider
-                                        {...activeProduct.slider}
-                                        onChange={(value) => setAnalyticsVolume(type, value)}
-                                        value={analyticsData[type].volume}
-                                        className="col-span-5 pl-8"
-                                        label={label}
-                                        enhanced={analyticsData[type].enhanced}
-                                    />
-                                    <div className="col-span-1 text-right font-bold m-0 self-end -mb-1.5 flex justify-end">
-                                        <NumericFormat
-                                            inputClassName="bg-transparent text-center focus:ring-0 focus:border-red dark:focus:border-yellow focus:bg-white dark:focus:bg-accent-dark font-code max-w-[103px] text-sm border border-light hover:border-button dark:border-dark rounded-sm py-1 px-0 min-w-[25px] px-1"
-                                            value={analyticsData[type].volume}
-                                            thousandSeparator=","
-                                            onValueChange={({ floatValue }) => setAnalyticsVolume(type, floatValue)}
-                                            customInput={AutosizeInput}
-                                        />
-                                        {/* {formatUSD(analyticsData[type].cost)} */}
-                                    </div>
-                                </div>
-                            </div>
-                        ))}
-                    </div>
-                )}
-            </div>
-            {!checked && (
-                <>
-                    <span className="opacity-25 text-right">--&nbsp;</span>
-                </>
-            )}
-        </div>
+        <>
+            {types.map(({ type, label }) => (
+                <AnalyticsSlider
+                    key={type}
+                    {...activeProduct.slider}
+                    onChange={(value) => setAnalyticsVolume(type, value)}
+                    value={analyticsData[type].volume}
+                    label={label}
+                    enhanced={analyticsData[type].enhanced}
+                    unitPrice={analyticsData[type].enhanced ? identifiedUnitPrice : anonymousUnitPrice}
+                />
+            ))}
+        </>
     )
 }
 
@@ -177,6 +189,7 @@ export default function ProductAnalyticsTab({
     addons,
 }) {
     const [showBreakdown, setShowBreakdown] = useState(false)
+    const [sizePreset, setSizePreset] = useState(() => presetIdForVolumes(analyticsData))
     const productAnalyticsTiers = useMemo(() => activeProduct?.billingData.plans.find((plan) => plan.tiers).tiers, [])
     const enhancedPersonsAddonTiers = useMemo(
         () =>
@@ -188,39 +201,57 @@ export default function ProductAnalyticsTab({
     const totalProductAnalyticsVolume = getTotalAnalyticsVolume(analyticsData)
     const totalEnhancedPersonsVolume = getTotalEnhancedPersonsVolume(analyticsData)
     const enhancedPersonsCost = calculatePrice(totalEnhancedPersonsVolume, enhancedPersonsAddonTiers)
+    const anonymousUnitPrice = firstPaidUnitAmount(productAnalyticsTiers)
+    const identifiedUnitPrice = firstPaidUnitAmount(enhancedPersonsAddonTiers)
 
     const anonymousUsed = Object.keys(analyticsData).filter((key) => analyticsData[key].volume > 0)
     const identifiedUsed = Object.keys(analyticsData).filter(
         (key) => analyticsData[key].enhanced && analyticsData[key].volume > 0
     )
 
+    const priceAnalyticsData = (data) => {
+        const totalProductAnalyticsVolume = getTotalAnalyticsVolume(data)
+        const totalCost = calculatePrice(totalProductAnalyticsVolume, productAnalyticsTiers).total
+        const totalEnhancedPersonsVolume = getTotalEnhancedPersonsVolume(data)
+        const totalEnhancedPersonsCost = calculatePrice(totalEnhancedPersonsVolume, enhancedPersonsAddonTiers).total
+        const priced = {}
+        Object.keys(data).forEach((key) => {
+            const volume = data[key].volume
+            const percentageOfTotalVolume = (volume / totalProductAnalyticsVolume) * 100
+            let cost = (percentageOfTotalVolume / 100) * totalCost
+            if (data[key].enhanced) {
+                const percentageOfEnhancedPersonsVolume = (volume / totalEnhancedPersonsVolume) * 100
+                cost += (percentageOfEnhancedPersonsVolume / 100) * totalEnhancedPersonsCost
+            }
+            priced[key] = { ...data[key], cost: cost || 0 }
+        })
+        return priced
+    }
+
     const setAnalyticsVolume = (type: string, volume: number) => {
-        setAnalyticsData((data) => {
-            const newAnalyticsData = {
+        setSizePreset('custom')
+        setAnalyticsData((data) =>
+            priceAnalyticsData({
                 ...data,
                 [type]: {
                     ...data[type],
-                    volume: Math.round(volume),
+                    volume: Math.round(volume || 0),
                 },
-            }
-            const totalProductAnalyticsVolume = getTotalAnalyticsVolume(newAnalyticsData)
-            const totalCost = calculatePrice(totalProductAnalyticsVolume, productAnalyticsTiers).total
-            const totalEnhancedPersonsVolume = getTotalEnhancedPersonsVolume(newAnalyticsData)
-            const enhancedPersonsCost = calculatePrice(totalEnhancedPersonsVolume, enhancedPersonsAddonTiers)
-            const totalEnhancedPersonsCost = enhancedPersonsCost.total
-            Object.keys(newAnalyticsData).forEach((key) => {
-                const volume = newAnalyticsData[key].volume
-                const percentageOfTotalVolume = (volume / totalProductAnalyticsVolume) * 100
-                let cost = (percentageOfTotalVolume / 100) * totalCost
-                if (newAnalyticsData[key].enhanced) {
-                    const percentageOfEnhancedPersonsVolume = (volume / totalEnhancedPersonsVolume) * 100
-                    const enhancedPersonsCost = (percentageOfEnhancedPersonsVolume / 100) * totalEnhancedPersonsCost
-                    cost += enhancedPersonsCost
-                }
-                newAnalyticsData[key].cost = cost || 0
             })
-            return newAnalyticsData
-        })
+        )
+    }
+
+    const applySizePreset = (id: string) => {
+        setSizePreset(id)
+        const preset = SIZE_PRESETS.find((item) => item.id === id)
+        if (!preset || id === 'custom') return
+        setAnalyticsData((data) =>
+            priceAnalyticsData({
+                ...data,
+                [IDENTIFIED_TYPE]: { ...data[IDENTIFIED_TYPE], volume: preset.identified },
+                [ANONYMOUS_TYPE]: { ...data[ANONYMOUS_TYPE], volume: preset.anonymous },
+            })
+        )
     }
 
     useEffect(() => {
@@ -231,7 +262,6 @@ export default function ProductAnalyticsTab({
     }, [analyticsData])
 
     useEffect(() => {
-        Object.keys(analyticsData).forEach((key) => setAnalyticsVolume(key, analyticsData[key].volume))
         const urlParams = new URLSearchParams(window.location.search)
         const volumes = qs.parse(urlParams.toString())
         if (volumes['product_analytics']?.types) {
@@ -241,41 +271,69 @@ export default function ProductAnalyticsTab({
                     setAnalyticsVolume(subtype, Number(volume))
                 }
             })
+            return
         }
+        setAnalyticsData((data) => priceAnalyticsData(data))
     }, [])
 
     return (
-        <div>
-            {analyticsSliders.map((slider) => (
-                <SliderToggle
-                    key={slider.label}
-                    analyticsData={analyticsData}
-                    setAnalyticsVolume={setAnalyticsVolume}
+        <div className="@container">
+            <div className="flex flex-wrap items-center gap-2 pb-4">
+                <span className="text-sm text-secondary">Roughly your size</span>
+                <div className="flex flex-wrap">
+                    {SIZE_PRESETS.map(({ id, label }) => {
+                        const selected = sizePreset === id
+                        return (
+                            <button
+                                key={id}
+                                type="button"
+                                onClick={() => applySizePreset(id)}
+                                className={`px-2 py-0.5 text-sm rounded-md border border-transparent ${
+                                    selected ? 'bg-accent font-bold border-primary' : ''
+                                }`}
+                            >
+                                {label}
+                            </button>
+                        )
+                    })}
+                </div>
+            </div>
+            <div className="flex items-center gap-4 pb-1">
+                <span className="w-48 shrink-0 text-xs uppercase text-secondary font-semibold">Usage</span>
+                <span className="flex-1" />
+                <span className="text-xs uppercase text-secondary shrink-0 font-semibold">Events / mo</span>
+            </div>
+            <div className="divide-y divide-primary border-t border-primary">
+                {analyticsSliders.map((slider) => (
+                    <SliderToggle
+                        key={slider.label}
+                        analyticsData={analyticsData}
+                        setAnalyticsVolume={setAnalyticsVolume}
+                        activeProduct={activeProduct}
+                        anonymousUnitPrice={anonymousUnitPrice}
+                        identifiedUnitPrice={identifiedUnitPrice}
+                        {...slider}
+                    />
+                ))}
+                <Addons
                     activeProduct={activeProduct}
-                    {...slider}
+                    addons={addons}
+                    setAddons={setAddons}
+                    volume={totalProductAnalyticsVolume || 0}
+                    analyticsData={analyticsData}
+                    hideHeading
                 />
-            ))}
-            <div className="pr-1.5 mt-2 flex gap-3 items-center justify-between">
-                <span className="flex gap-1 items-center min-w-0">
-                    <IconLightBulb className="size-5 inline-block text-[#4f9032] dark:text-green relative -top-px shrink-0" />
-                    <span className="text-sm text-[#4f9032] dark:text-green font-semibold">
-                        {activeProduct.freeAllocationText ? (
-                            activeProduct.freeAllocationText
-                        ) : (
-                            <>
-                                First {Math.round(activeProduct.slider.min).toLocaleString()}{' '}
-                                {activeProduct.billingData.unit}s free –&nbsp;
-                                <em>every month!</em>
-                            </>
-                        )}
-                    </span>
+            </div>
+            <div className="pr-1.5 pt-3 border-t border-primary">
+                <span className="text-sm text-secondary">
+                    The first 1M events are free, every month.{' '}
+                    <button
+                        onClick={() => setShowBreakdown(!showBreakdown)}
+                        className="text-red dark:text-yellow font-semibold underline"
+                    >
+                        {showBreakdown ? 'Hide how we calculate this' : 'See how we calculate this'}
+                    </button>
                 </span>
-                <button
-                    onClick={() => setShowBreakdown(!showBreakdown)}
-                    className="text-red dark:text-yellow font-semibold text-sm shrink-0"
-                >
-                    {showBreakdown ? 'Hide how we calculate this' : 'See how we calculate this'}
-                </button>
             </div>
             {showBreakdown && (
                 <div className="p-4 mt-4 rounded border border-primary bg-white dark:bg-accent-dark relative">
@@ -331,16 +389,6 @@ export default function ProductAnalyticsTab({
                     </div>
                 </div>
             )}
-            <div className="mt-4 border-t border-primary -mb-3">
-                <Addons
-                    activeProduct={activeProduct}
-                    addons={addons}
-                    setAddons={setAddons}
-                    volume={totalProductAnalyticsVolume || 0}
-                    analyticsData={analyticsData}
-                    hideHeading
-                />
-            </div>
         </div>
     )
 }

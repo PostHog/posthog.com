@@ -1,6 +1,6 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react'
 import Tooltip from 'components/Tooltip'
-import { IconCopy, IconInfo, IconLightBulb, IconPlus, IconSearch, IconStack, IconX } from '@posthog/icons'
+import { IconInfo, IconLightBulb, IconPlus, IconSearch, IconStack, IconX } from '@posthog/icons'
 import Toggle from 'components/Toggle'
 import { formatUSD } from '../PricingSlider/pricingSliderLogic'
 import { buildProductAddons, calculatePrice, getAddonsCostForProduct, getCalculatorTotal } from './calculatorLogic'
@@ -8,8 +8,12 @@ import { Link, useStaticQuery } from 'gatsby'
 import { allProductsData } from '../Pricing'
 import useProducts from 'hooks/useProducts'
 import { LogSlider, inverseCurve, sliderCurve } from '../PricingSlider/Slider'
-import { PricingTiers } from '../Plans'
-import ProductAnalyticsTab, { analyticsSliders, getTotalEnhancedPersonsVolume } from './Tabs/ProductAnalytics'
+import { CTA, PricingTiers } from '../Plans'
+import ProductAnalyticsTab, {
+    analyticsSliders,
+    getDefaultAnalyticsData,
+    getTotalEnhancedPersonsVolume,
+} from './Tabs/ProductAnalytics'
 import ReplayVisionTab from './Tabs/ReplayVision'
 import PostHogDesktopTab from './Tabs/PostHogDesktop'
 import StandaloneAddonsTab from './Tabs/StandaloneAddonsTab'
@@ -27,7 +31,7 @@ import { RenderInClient } from 'components/RenderInClient'
 import { useApp } from '../../../context/App'
 import AllProductsRatesModal, { ALL_PRODUCTS_RATES_MODAL_KEY } from './AllProductsRatesModal'
 
-export const Addon = ({ type, name, description, plans, addons, setAddons, volume, inclusion_only }) => {
+export const Addon = ({ type, name, description, plans, addons, setAddons, volume, inclusion_only, hidePrice }) => {
     const addon = addons.find((addon) => addon.type === type)
     const checked = addon?.checked
     const [percentage, setPercentage] = useState(50)
@@ -62,32 +66,34 @@ export const Addon = ({ type, name, description, plans, addons, setAddons, volum
     }
 
     return (
-        <div className="grid grid-cols-6 gap-8 items-center">
-            <div className="col-span-3 sm:col-span-4 flex justify-between items-center">
-                <div className="flex space-x-1 items-center">
-                    <p className="!m-0 text-sm font-bold">{name}</p>
+        <div className={`flex items-center gap-4 ${checked ? '' : 'opacity-60'}`}>
+            <div className="w-48 shrink-0">
+                <div className="flex space-x-1 items-center mb-0.5">
+                    <p className="!m-0 text-sm font-bold">
+                        {name}
+                        {type === 'group_analytics' && hidePrice ? (
+                            <span className="font-normal text-secondary text-xs"> add-on</span>
+                        ) : null}
+                    </p>
                     <Tooltip content={description} tooltipClassName="max-w-[250px]" placement="top">
                         <span className="relative">
-                            <IconInfo className="size-5 opacity-70" />
+                            <IconInfo className="size-4 opacity-70" />
                         </span>
                     </Tooltip>
                 </div>
+                <p className="!m-0 text-xs text-secondary">
+                    ${plans[plans.length - 1].tiers.find((tier) => tier.unit_amount_usd !== '0').unit_amount_usd}
+                    {type === 'group_analytics' ? ' per identified event' : '/event'}
+                </p>
+            </div>
+            <div className="flex-1 flex justify-end">
                 <Toggle checked={checked} onChange={handleToggle} />
             </div>
-            <div className="col-span-3 sm:col-span-2 flex justify-between">
-                <div>
-                    <p className="!m-0 text-sm opacity-70">Starts at</p>
-                    <strong className="text-[15px] md:text-base">
-                        ${plans[plans.length - 1].tiers.find((tier) => tier.unit_amount_usd !== '0').unit_amount_usd}
-                    </strong>
-                    <span className="text-sm opacity-70">/event</span>
+            {hidePrice ? null : (
+                <div className="w-24 text-right shrink-0 whitespace-nowrap">
+                    <p className="font-semibold m-0">{formatUSD(checked ? addon?.totalCost : 0)}</p>
                 </div>
-                <div className="text-right">
-                    <p className={`font-semibold m-0 ${checked ? '' : 'opacity-50'}`}>
-                        {formatUSD(checked ? addon?.totalCost : 0)}
-                    </p>
-                </div>
-            </div>
+            )}
         </div>
     )
 }
@@ -98,7 +104,7 @@ const productTabs = {
     posthog_code: PostHogDesktopTab,
 }
 
-export const Addons = ({ addons, setAddons, volume, activeProduct, analyticsData, hideHeading }) => {
+export const Addons = ({ addons, setAddons, volume, activeProduct, analyticsData, hideHeading = false }) => {
     return activeProduct.billingData.addons.length > 0 ? (
         <div>
             {!hideHeading && <p className="opacity-70 text-sm m-0">Product add-ons</p>}
@@ -107,7 +113,7 @@ export const Addons = ({ addons, setAddons, volume, activeProduct, analyticsData
                     .filter((addon) => !addon.inclusion_only && !EXCLUDED_ADDON_TYPES.includes(addon.type))
                     .map((addon) => {
                         return (
-                            <li key={addon.type} className="py-2">
+                            <li key={addon.type} className="py-3">
                                 <Addon
                                     key={addon.type}
                                     addons={addons}
@@ -118,6 +124,7 @@ export const Addons = ({ addons, setAddons, volume, activeProduct, analyticsData
                                             : getTotalEnhancedPersonsVolume(analyticsData)
                                     }
                                     {...addon}
+                                    hidePrice={hideHeading}
                                 />
                             </li>
                         )
@@ -141,7 +148,7 @@ export const TabContent = ({
 
     return (
         <>
-            <div className="mb-3">
+            <div>
                 {productTabs[activeProduct.type]?.({
                     activeProduct,
                     setVolume,
@@ -319,14 +326,7 @@ export default function Tabbed() {
             nodes: [{ products: billingProducts }],
         },
     } = useStaticQuery(allProductsData)
-    const [analyticsData, setAnalyticsData] = useState(
-        analyticsSliders.reduce((acc, slider) => {
-            slider.types.forEach(({ type, enhanced }) => {
-                acc[type] = { volume: 0, cost: 0, enhanced: enhanced || false }
-            })
-            return acc
-        }, [])
-    )
+    const [analyticsData, setAnalyticsData] = useState(getDefaultAnalyticsData)
     const platform = billingProducts.find((product) => product.type === 'platform_and_support')
     const [activeType, setActiveType] = useState<string | null>(DEFAULT_PRODUCT_TYPES[0])
     const [selectedTypes, setSelectedTypes] = useState<string[]>(DEFAULT_PRODUCT_TYPES)
@@ -481,6 +481,9 @@ export default function Tabbed() {
 
     const addProduct = (type) => {
         if (!type || selectedTypes.includes(type)) return
+        if (type === 'product_analytics') {
+            setAnalyticsData(getDefaultAnalyticsData())
+        }
         setSelectedTypes((current) => [...current, type])
         setActiveType(type)
         closeProductPicker()
@@ -548,7 +551,7 @@ export default function Tabbed() {
             <div className="grid grid-cols-12 mb-1">
                 <div className="col-span-12 @2xl:col-span-4 md:pr-6 mb-4 md:mb-0">
                     <div className="mb-2">
-                        <p className="m-0 text-sm">
+                        <p className="m-0 text-sm flex justify-between">
                             <strong>Your estimate</strong>{' '}
                             <span className="text-secondary text-xs">
                                 {productCount} {productCount === 1 ? 'product' : 'products'}
@@ -703,7 +706,11 @@ export default function Tabbed() {
                         </button>
                     </div>
                     <div className="mt-1 pt-2 border-t border-primary @6xl:mb-0 mb-6">
-                        <button type="button" onClick={openAllRates} className="text-sm text-secondary underline">
+                        <button
+                            type="button"
+                            onClick={openAllRates}
+                            className="text-sm text-secondary underline font-semibold"
+                        >
                             See all products and per-unit rates
                         </button>
                     </div>
@@ -729,7 +736,7 @@ export default function Tabbed() {
                                             className="flex items-center justify-between gap-4 py-3 border-b border-primary last:border-b-0"
                                         >
                                             <div className="min-w-0 max-w-[400px]">
-                                                <p className="m-0 text-sm font-bold">{name}</p>
+                                                <p className="m-0 text-sm font-bold mb-0.5">{name}</p>
                                                 <p className="m-0 text-xs text-secondary">{description}</p>
                                             </div>
                                             <div className="flex items-center gap-2 shrink-0">
@@ -785,7 +792,7 @@ export default function Tabbed() {
                                     onClick={() => removeProduct(activeProduct.type)}
                                     className="text-xs text-secondary underline leading-none shrink-0  mt-0.5"
                                 >
-                                    Remove from estimate
+                                    Remove
                                 </button>
                             </div>
 
@@ -802,39 +809,38 @@ export default function Tabbed() {
                         </>
                     )}
 
-                    <div className="mt-auto">
-                        <div
-                            data-scheme="secondary"
-                            className="bg-primary rounded relative border border-primary overflow-hidden mt-2"
-                        >
-                            <div className="flex items-center justify-between p-3">
-                                <div>
-                                    <h3 className="m-0 text-[15px]">Estimated total</h3>
-                                    <p className="text-sm opacity-60 mb-0">for all products & add-ons</p>
-                                </div>
+                    <div
+                        data-scheme="secondary"
+                        className="bg-primary rounded relative border border-primary overflow-hidden mt-5"
+                    >
+                        <div className="flex flex-wrap items-center justify-between gap-3 p-3">
+                            <div>
+                                <h3 className="m-0 text-[15px] leading-snug">Estimated total</h3>
+                                <p className="text-sm opacity-60 mb-0">for all products & add-ons</p>
+                            </div>
 
-                                <div className="text-right">
-                                    <p className="m-0 font-bold text-lg leading-none">${totalPrice.toLocaleString()}</p>
-                                </div>
+                            <div className="flex items-center gap-4">
+                                <p className="m-0 font-bold text-3xl leading-none">${totalPrice.toLocaleString()}</p>
+                                <CTA size="sm" intent="calculator-total" />
                             </div>
                         </div>
-                        {/* Two ways to leave with an estimate: a link to this one, or a prompt that builds
+                    </div>
+                    {/* Two ways to leave with an estimate: a link to this one, or a prompt that builds
                         one from what the visitor already pays for elsewhere. Same row, same weight. */}
-                        <div className="flex flex-wrap items-center justify-between gap-2 mt-2 pr-2 md:pr-0">
-                            <RenderInClient
-                                render={() => {
-                                    const variant = window.posthog?.getFeatureFlag?.(AI_PRICING_FLAG)
-                                    return variant && variant !== AI_PRICING_EXPERIMENT_VARIANTS.control ? (
-                                        <AgentEstimateLink
-                                            source="calculator-total"
-                                            className="text-sm font-bold text-red dark:text-yellow"
-                                        />
-                                    ) : (
-                                        <></>
-                                    )
-                                }}
-                            />
-                        </div>
+                    <div className="flex flex-wrap items-center justify-between gap-2 mt-2 pr-2 md:pr-0">
+                        <RenderInClient
+                            render={() => {
+                                const variant = window.posthog?.getFeatureFlag?.(AI_PRICING_FLAG)
+                                return variant && variant !== AI_PRICING_EXPERIMENT_VARIANTS.control ? (
+                                    <AgentEstimateLink
+                                        source="calculator-total"
+                                        className="text-sm font-bold text-red dark:text-yellow"
+                                    />
+                                ) : (
+                                    <></>
+                                )
+                            }}
+                        />
                     </div>
                 </div>
             </div>

@@ -15,7 +15,7 @@ import {
     IconRocket,
     IconSparkles,
 } from '@posthog/icons'
-import { FIFTY_MILLION, MAX_PRODUCT_ANALYTICS, MILLION, TEN_MILLION } from 'components/Pricing/pricingLogic'
+import { MAX_PRODUCT_ANALYTICS, MILLION, TEN_MILLION } from 'components/Pricing/pricingLogic'
 import { features } from './product_analytics/features'
 import { applications, topFeatures } from './product_analytics/slides'
 import { getTool } from '../../data/tools'
@@ -188,7 +188,7 @@ export const productAnalytics = {
     },
     slider: {
         // LogSlider uses Math.log – min/marks must be > 0 or labels stack at -Infinity.
-        marks: [MILLION, TEN_MILLION, FIFTY_MILLION, MAX_PRODUCT_ANALYTICS],
+        marks: [MILLION, TEN_MILLION, MAX_PRODUCT_ANALYTICS],
         min: MILLION,
         max: MAX_PRODUCT_ANALYTICS,
     },

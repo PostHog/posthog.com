@@ -1389,11 +1389,11 @@ body.dark {
 }
 
 .rc-slider.slider .rc-slider-track {
-    @apply bg-black/60 dark:bg-white/50;
+    @apply h-1.5 bg-black/60 dark:bg-white/50;
 }
 
 .rc-slider.slider .rc-slider-handle {
-    @apply bg-red border-3 border-white h-[21px] w-[21px] shadow-md -mt-[7px];
+    @apply bg-black dark:bg-white border-0 size-4 shadow-none -mt-[5px];
 }
 
 .rc-slider.slider .rc-slider-handle:active {
@@ -1404,12 +1404,8 @@ body.dark {
     display: none;
 }
 
-.rc-slider.slider .rc-slider-mark-text {
-    @apply text-secondary;
-
-    &.rc-slider-mark-text-active {
-        @apply text-secondary font-bold;
-    }
+.rc-slider.slider .rc-slider-mark {
+    display: none;
 }
 
 /* Slider base styles */
@@ -2126,12 +2122,12 @@ li.squeak-left-border {
 .rc-slider {
     /* entire bar */
     .rc-slider-rail {
-        @apply h-[8px] rounded-full bg-black/10 dark:bg-white/10;
+        @apply h-1.5 rounded-full bg-black/15 dark:bg-white/15;
     }
 
     /* filled in portion of bar */
     .rc-slider-track {
-        @apply h-[8px];
+        @apply h-1.5;
     }
 
     /* legend plots */
