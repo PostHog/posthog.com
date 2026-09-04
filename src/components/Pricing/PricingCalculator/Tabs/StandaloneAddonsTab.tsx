@@ -2,7 +2,7 @@ import React, { useEffect, useMemo, useState } from 'react'
 import { IconX } from '@posthog/icons'
 import { calculatePrice } from '../../PricingSlider/pricingSliderLogic'
 import { PricingTiers } from '../../Plans'
-import { afterFirstFree, formatCompact, pluralizeUnit } from '../../utils'
+import { afterFirstFree, formatCompact, pluralizeUnit, unitWhenNotInLabel } from '../../utils'
 import UsageSliderRow, { UsageSliderHeader } from '../UsageSliderRow'
 
 const TriggerEventsModal = ({ onClose, isVisible }) => {
@@ -175,17 +175,18 @@ export default function StandaloneAddonsTab({ activeProduct, setVolume, setProdu
                     if (!addon.billingTiers) return null
                     const price = firstPaidUnitAmount(addon.billingTiers)
                     const free = addon.freeAllocation ?? addon.sliderConfig.min
+                    const unit = addon.unit || activeProduct.billingData.unit
                     return (
                         <UsageSliderRow
                             key={addon.key}
                             label={addon.label}
                             subtitle={
                                 price
-                                    ? `$${price} each${afterFirstFree(
-                                          free,
-                                          addon.unit || activeProduct.billingData.unit,
-                                          addon.label
-                                      )}`
+                                    ? `$${price} each${
+                                          free
+                                              ? afterFirstFree(free, unit, addon.label)
+                                              : unitWhenNotInLabel(unit, addon.label)
+                                      }`
                                     : undefined
                             }
                             value={addonData[index]?.volume || 0}

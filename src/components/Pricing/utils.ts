@@ -25,13 +25,14 @@ export const pluralizeUnit = (unit: string, count: number): string => {
     return pluralizeWord(unit, count)
 }
 
-export const afterFirstFree = (amount: number, unit?: string, label?: string): string => {
-    if (!amount) return ''
-    const qty = formatCompact(amount)
-    if (!unit) return ` after the first ${qty}`
-    const unitText = pluralizeUnit(unit, amount)
+export const unitWhenNotInLabel = (unit?: string, label?: string): string => {
+    if (!unit) return ''
+    const unitText = pluralizeUnit(unit, 2)
     const labelHasUnit =
         !!label &&
         (label.toLowerCase().includes(unit.toLowerCase()) || label.toLowerCase().includes(unitText.toLowerCase()))
-    return labelHasUnit ? ` after the first ${qty}` : ` after the first ${qty} ${unitText}`
+    return labelHasUnit ? '' : ` ${unitText}`
 }
+
+export const afterFirstFree = (amount: number, unit?: string, label?: string): string =>
+    amount ? ` after the first ${formatCompact(amount)}${unitWhenNotInLabel(unit, label)}` : ''
