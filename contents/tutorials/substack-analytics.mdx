@@ -1,0 +1,54 @@
+---
+title: How to set up Substack analytics and session replay
+date: 2026-09-04
+author:
+  - ian-vanagas
+tags:
+  - product analytics
+  - web analytics
+  - session replay
+---
+
+import GTMInstall from "../docs/integrate/_snippets/install-gtm.mdx"
+
+[Substack](https://substack.com) gives you subscriber counts and open rates, but it tells you very little about the people who read your publication on the web. PostHog adds [web analytics](/docs/web-analytics), [product analytics](/docs/product-analytics), and [session replay](/docs/session-replay), so you can see how readers find your posts, which posts hold their attention, and where they subscribe.
+
+Substack has no code injection field, so you cannot paste the PostHog snippet into it directly. It does support [Google Tag Manager](/docs/libraries/google-tag-manager), and that is the route this tutorial uses. PostHog is free to start, so [sign up](https://us.posthog.com/signup) and follow along.
+
+## 1. Create a Google Tag Manager container
+
+Go to [Google Tag Manager](https://tagmanager.google.com/) and create an account if you do not have one. Add a container, give it the address of your publication as the name, and select **Web** as the target platform.
+
+Tag Manager then shows you two code snippets. You do not need them, because Substack adds them for you. Close the dialog and copy the container ID at the top of the workspace instead. It starts with `GTM-`.
+
+## 2. Add the container to Substack
+
+In your Substack dashboard, go to **Settings**, then select **Analytics** in the sidebar. Paste the container ID into the **Google Tag Manager** field and save.
+
+Make sure there is no space before or after the ID. Substack does not recognize the container if there is one.
+
+## 3. Add PostHog to the container
+
+<GTMInstall />
+
+## 4. Check that it works
+
+Open your publication in a browser and read one or two posts. Your events show up in [the activity tab](https://us.posthog.com/activity/explore) after a few minutes.
+
+Move between posts with the links on the page, not with the browser reload button. Substack changes the page in the browser instead of loading a new one. This confirms that PostHog captures a pageview for each navigation, not only for the first one.
+
+Then go to the [web analytics tab](https://us.posthog.com/web) to see your traffic sources and your most popular posts. To record what readers do on the page, enable session replay in [your project settings](https://us.posthog.com/settings/project-replay#replay) under **Record user sessions**, and watch the recordings in [the replay tab](https://us.posthog.com/replay/home).
+
+## What PostHog can and cannot see
+
+PostHog runs on the web pages of your publication, both on your `substack.com` address and on a custom domain. It captures pageviews, clicks, subscribe forms, and session recordings there.
+
+PostHog cannot run in the emails Substack sends, or in the Substack app, because neither one runs your Tag Manager container. Use the open rates and the click rates in Substack for those. To measure what readers do after they click a link in an email, add [UTM parameters](/tutorials/performance-marketing) to the links that point at your own site.
+
+## Further reading
+
+- [What to do after installing PostHog in 5 steps](/tutorials/next-steps-after-installing)
+- [How to set up Ghost analytics and session replay](/tutorials/ghost-analytics)
+- [How to track performance marketing in PostHog](/tutorials/performance-marketing)
+
+<NewsletterForm />
