@@ -1,0 +1,83 @@
+import React, { useEffect, useState } from 'react'
+import SEO from 'components/seo'
+import Wizard from 'components/Wizard'
+import Link from 'components/Link'
+import ScrollArea from 'components/RadixUI/ScrollArea'
+import { parseVersionedReferenceSlug } from 'components/SdkReferences/utils'
+
+/**
+ * Served (via a vercel.json rewrite) for versioned SDK reference URLs the build no longer
+ * publishes. Only the newest few versions per SDK are built, so older ones age out — see
+ * MAX_VERSIONS_PER_SDK in gatsby/sourceNodes.ts.
+ *
+ * The rewrite is transparent, so the requested URL is still in the address bar. One page serves
+ * every SDK, which is why the copy below is generic and the specifics are filled in on the client.
+ */
+
+export default function VersionUnavailable(): JSX.Element {
+    // The rewrite is server-side, so the address bar still holds the requested versioned URL —
+    // that path is the only place the SDK and version survive. Resolved after mount because one
+    // static page serves every SDK; filling it in during render would break hydration.
+    // `?ref=` is a local override, so the page can be viewed without the rewrite in front of it.
+    const [requested, setRequested] = useState<{ sdk: string; version: string } | null>(null)
+
+    useEffect(() => {
+        const override = new URLSearchParams(window.location.search).get('ref')
+        setRequested(
+            parseVersionedReferenceSlug(window.location.pathname) ??
+                (override ? parseVersionedReferenceSlug(override) : null)
+        )
+    }, [])
+
+    return (
+        <>
+            <SEO
+                title="SDK reference version not available"
+                description="This version of the SDK reference is no longer published. The current reference is available instead."
+                noindex
+            />
+            <Wizard>
+                <div className="bg-accent h-full">
+                    <ScrollArea>
+                        <div className="p-6 text-sm">
+                            <h1 className="text-lg mb-4">This SDK reference version is not available</h1>
+                            <p className="mb-2">
+                                {requested ? (
+                                    <>
+                                        <strong>
+                                            {requested.sdk} {requested.version}
+                                        </strong>{' '}
+                                        is no longer published.
+                                    </>
+                                ) : (
+                                    <>The version you asked for is no longer published.</>
+                                )}{' '}
+                                We keep the reference for the most recent releases only, so older versions age out.
+                            </p>
+                            <p className="mb-4">
+                                The current reference is always at the URL without a version, and it documents the
+                                latest release:
+                            </p>
+                            <p className="mb-4">
+                                {requested ? (
+                                    <Link to={`/docs/references/${requested.sdk}`} className="underline font-medium">
+                                        /docs/references/{requested.sdk}
+                                    </Link>
+                                ) : (
+                                    <Link to="/docs/libraries" className="underline font-medium">
+                                        Browse all SDK docs
+                                    </Link>
+                                )}
+                            </p>
+                            <p className="mb-2 opacity-75">
+                                Its contents describe the latest version, so anything you read there may not match the
+                                version you asked for. To pin behavior to a specific release, check that version's
+                                changelog in the SDK repository.
+                            </p>
+                        </div>
+                    </ScrollArea>
+                </div>
+            </Wizard>
+        </>
+    )
+}

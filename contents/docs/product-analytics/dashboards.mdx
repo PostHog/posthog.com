@@ -53,6 +53,49 @@ When you create a blank dashboard, the empty state includes a set of AI-powered 
 
 Click any prompt to open [PostHog AI](/docs/posthog-ai) in the side panel with a pre-filled request. PostHog AI then builds the insights and adds them to your dashboard automatically.
 
+## Creating custom dashboard templates
+
+You can save any dashboard as a reusable template for your project or organization. Templates appear alongside PostHog's built-in templates when creating new dashboards.
+
+### Saving a dashboard as a template
+
+1. Open the dashboard you want to save as a template.
+2. Click **Edit** in the menu bar.
+3. Select **Save as dashboard template**.
+4. Enter a name, and optionally add a description and tags.
+5. Click **Save template**.
+
+The template is now available when creating new dashboards.
+
+### Template visibility
+
+Templates have two visibility scopes:
+
+- **Team** (default) – Only visible within the current project.
+- **Organization** – Visible to all projects in your organization.
+
+To change a template's visibility, go to the **Templates** tab, click the **⋯** menu on the template, and select **Make visible to whole organization** or **Make visible to this team only**.
+
+> **Note:** When promoting a template to organization scope, PostHog warns you if it contains project-specific references (like actions, cohorts, or data warehouse tables) that may not resolve in other projects.
+
+### Managing templates
+
+To view and manage your templates:
+
+1. Go to [**Dashboards**](https://app.posthog.com/dashboard).
+2. Click the **Templates** tab.
+
+From here you can:
+
+- **Filter templates** by type: Official (PostHog built-in), Team (project-specific), or Organization (shared across projects).
+- **Search** for templates by name.
+- **Edit** a template's name, description, or tags from the **⋯** menu.
+- **Change visibility** to share a team template with your whole organization, or restrict an organization template back to your project.
+- **Copy to another project** to duplicate a team template to a different project in your organization.
+- **Delete** templates you no longer need.
+
+> **Note:** You can only edit or delete templates owned by your project. Official PostHog templates cannot be modified.
+
 ## Organizing dashboards into folders
 
 You can organize dashboards into folders for easier navigation. There are two ways to move a dashboard into a folder:

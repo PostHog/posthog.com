@@ -16,7 +16,7 @@ tags:
   - Guides
 ---
 
-With the sunsetting of the Google Analytics Universal Analytics platform and unhappiness with its replacement, Google Analytics 4 (GA4), many are [looking for alternatives](/blog/ga4-alternatives). 
+With the sunsetting of the Google Analytics Universal Analytics platform and unhappiness with its replacement, Google Analytics 4 (GA4), many are [looking for alternatives](/compare/ga4-alternatives). 
 
 We’re biased, but PostHog is a great one. When [compared with Google Analytics](/blog/posthog-vs-ga4), it is:
 
@@ -154,7 +154,7 @@ Although [PostHog is event-based](/docs/how-posthog-works/data-model), it still 
 
 - Every event contains a distinct ID for a person.
 - With the snippet, every person gets an anonymous distinct ID. This gets stored in a cookie and automatically added to the events they trigger.
-- You can use the [identify](/docs/data/identify) function to connect a person with a distinct ID like email or username.
+- You can use the [identify](/docs/product-analytics/identify) function to connect a person with a distinct ID like email or username.
 - You can use the [group](/docs/product-analytics/group-analytics) function to connect a person with a group like an organization or company.
 
 ![Event structure](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/google-analytics-to-posthog/event.png)

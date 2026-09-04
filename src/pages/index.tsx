@@ -1,5 +1,5 @@
 import React from 'react'
-import SEO from 'components/seo'
+import SEO, { buildProductStructuredData } from 'components/seo'
 import Test from '../components/Home/Test'
 
 export default function Home() {
@@ -15,6 +15,12 @@ export default function Home() {
                     { hrefLang: 'ko', href: '/ko' },
                     { hrefLang: 'x-default', href: '/' },
                 ]}
+                structuredData={buildProductStructuredData({
+                    name: 'PostHog',
+                    description:
+                        'PostHog automatically diagnoses problems, fixes bugs, and generates pull requests – all without you having to prompt it.',
+                    slug: '',
+                })}
             />
             <Test />
         </>

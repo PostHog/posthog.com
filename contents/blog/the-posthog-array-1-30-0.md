@@ -26,7 +26,7 @@ PostHog 1.30.0 is a milestone release! We've introduced a brand new, faster user
 
 ## PostHog 1.30.0 release notes
 
-> Don't see the new features on your self-hosted deployment? Remember to [update your PostHog instance](/docs/runbook/upgrading-posthog).
+> Don't see the new features on your self-hosted deployment? Remember to [update your PostHog instance](/docs/self-host).
 
 **Release highlights:**
 

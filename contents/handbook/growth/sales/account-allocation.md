@@ -31,7 +31,7 @@ We used to route accounts between TAM and CSM based on primary product adoption 
 
 ### Churn saves
 
-An at-risk account follows the [risk mitigation and churn prevention](/handbook/growth/sales/risk-mitigation-and-churn-prevention) playbook, same as always. Flag early with the Churn Risk segment, dig into the why, and run the save.
+An at-risk account follows the [risk mitigation and churn prevention](/handbook/growth/sales/risk-mitigation-and-churn-prevention) playbook, same as always. Flag early with the Churn Risk tag, dig into the why, and run the save.
 
 When both a TAM and a CSM are on the account, they co-own the save. Both are responsible, and neither should assume the other is handling it.
 
@@ -59,15 +59,21 @@ Beyond total size, a balanced book also needs:
 
 If your book is outside these bounds at quarter start, work with your team lead to rebalance.
 
+## CSM book balance
+
+CSM books target around $2.5M ARR and are balanced by account size as well as total ARR. The current account mix and live capacity calculation are covered in [how the Customer Success team works](/handbook/cs-and-onboarding/how-we-work#account-allocation).
+
+If your book is outside the current target at quarter start, work with your team lead to rebalance it.
+
 ## Adding a TAM to an account
 
 There is no CSM to TAM handoff anymore, because the CSM never leaves. Instead, when someone spots a growth opportunity on a CSM-covered account, they flag it for a TAM.
 
 Anyone can flag: the CSM, a TAE, support, or automated alerts. The flag routes to a TAM in the right region for qualification.
 
-The receiving TAM qualifies the opportunity using the [growth potential framework](/handbook/growth/sales/evaluating-growth-potential). If it holds up, they join the account as the overlay, open the opp, and intro themselves to the customer with the CSM's help. If it doesn't, they document why in Vitally and the account stays CSM-only. A documented "no" is still useful. It stops the next person re-litigating the same idea in 3 months.
+The receiving TAM qualifies the opportunity using the [growth potential framework](/handbook/growth/sales/evaluating-growth-potential). If it holds up, they join the account as the overlay, open the opp, and intro themselves to the customer with the CSM's help. If it doesn't, they document why in Customer Analytics and the account stays CSM-only. A documented "no" is still useful. It stops the next person re-litigating the same idea in 3 months.
 
-We track coverage in Vitally with the existing segments: `CSM Managed` for the base layer and `AM Managed` for the TAM overlay. An account with both segments has both.
+We track coverage in Customer Analytics with the existing tags: `CSM Managed` for the base layer and `AM Managed` for the TAM overlay. An account with both tags has both.
 
 ---
 
@@ -85,10 +91,10 @@ TAM removals generally happen at the end of the quarter. Accounts can be added t
 
 The CSM stays on, so nothing about the customer relationship changes from their side. But the TAM knows things the CSM doesn't, and that context has to land somewhere before they leave:
 
-- **A handover note in Vitally** covering: what expansion plays were run and how they went, commercial context (discounts given and why, anything promised, credit terms), open threads, and who the real decision makers are. Use the [handover note skill](https://github.com/PostHog/skills/tree/main/skills/team/product-led-sales/account-handover).
+- **A handover note in Customer Analytics** covering: what expansion plays were run and how they went, commercial context (discounts given and why, anything promised, credit terms), open threads, who the real decision makers are, and who on the customer side owns the renewal (champion or procurement, and how the last one went). Use the [handover note skill](https://github.com/PostHog/skills/tree/main/skills/team/product-led-sales/account-handover).
 - **A 15 minute call with the CSM** to cover what's not in the data. Politics, sensitivities, what you'd try next if a new opportunity shows up.
 - **The Slack channel stays open.** The CSM keeps it. Don't archive it. Channel archival only applies when an account exits managed coverage entirely.
-- **Removing the TAM in Vitally.** Once the note and call are done, the team lead removes the TAM and the `AM Managed` segment from the account, with Ben's approval.
+- **Removing the TAM in Customer Analytics.** Once the note and call are done, the team lead removes the TAM and the `AM Managed` tag from the account, with Ben's approval.
 
 If the same account gets a qualified opportunity later, it goes back through the normal flag and qualification path. The handover note is what lets the next TAM (maybe you) pick it up fast.
 
@@ -107,34 +113,44 @@ If an account is struggling on these dimensions, that's a signal to invest more.
 
 ## Doing the allocation
 
-Each quarter, team leads, with Ben's approval, review coverage: which accounts need a TAM added or removed, and how books should be rebalanced. CSM coverage stays Simon's call. That's the base layer on every $20k+ account, including the list of [$20K accounts without an owner](https://posthog.vitally-eu.io/hubs/152ccd4c-c7b2-4508-865b-b08fea5c3dc6/1c518181-54a5-4c59-98de-f0b0bb54f9c3). A TAM is added on top where an opportunity qualifies. For accounts with no previous owner, we use PostHog GeoIP data to understand which region the account is primarily based in. We use the following tags in PostHog Customer Analytics:
+Each quarter, TAM and CSM team leads review coverage and rebalance books. TAM allocation requires Ben's approval; CSM allocation requires Simon's approval. Accounts can still be added during the quarter when a handover or qualified growth opportunity requires it.
 
-- `csm overlay needed` where a TAM is retaining an account but needs extra help from a CSM
-- `csm handover needed` where a TAM or TAE is ready to hand over an account fully to a CSM
-- `tam overlay needed` where a CSM has identified an opportunity for a TAM to expand an account
+### TAM allocation
 
-And then it is down to the relevant Team Leads to figure out which team member is taking on the customer.
+A TAM is added on top of CSM coverage where an opportunity qualifies. At the start of each quarter, TAM team leads, with Ben's approval, review:
+
+1. **Accounts tagged `tam overlay needed`** where a CSM has identified a growth opportunity
+2. **TAM books outside the $1.5M-$2M ARR band** to identify which accounts to rebalance
+3. **Accounts where the TAM should be removed** because expansion is exhausted
+
+Once the decision is settled, the team lead updates the tags and assigns the specific TAM in Customer Analytics.
+
+To request CSM coverage, add:
+
+- `csm overlay needed` when you are keeping the account but need CSM support
+- `csm handover needed` when you are handing the account over to a CSM
+
+### CSM allocation
+
+Every $20k+ account should have a CSM. At the start of each quarter, CSM team leads, with Simon's approval, review:
+
+1. **The <PrivateLink url="https://us.posthog.com/code/canvas/55b93018-aa64-4d36-9996-7b9415a043fd/01a0425d-ad76-7a59-9f74-e77d73a9a30a">Uncovered customer backlog</PrivateLink> canvas** to find accounts without a CSM
+2. **Accounts tagged `csm overlay needed` or `csm handover needed`** that need a CSM assigned
+3. **CSM books outside the current target** to identify which accounts should be rebalanced
+
+For accounts with no previous owner, use PostHog GeoIP data to identify the account's primary region. The relevant team lead then assigns the CSM in Customer Analytics.
 
 > Once a day an <PrivateLink url='posthog-code://loop/9f441418-1400-4839-b82c-4ce3f8bcb2cb'>automation</PrivateLink> runs which adds a region tag to the account to assist in routing to the correct team.
 
-### Quarterly allocation process
+To request TAM coverage for an account with a qualified growth opportunity, add the `tam overlay needed` tag in Customer Analytics.
 
-At the start of each quarter, team leads (with Ben's approval) review:
-
-1. **[$20K accounts without an owner](https://posthog.vitally-eu.io/hubs/152ccd4c-c7b2-4508-865b-b08fea5c3dc6/1c518181-54a5-4c59-98de-f0b0bb54f9c3)** – accounts that need a CSM assigned
-2. **Accounts flagged for handover** from TAEs and TAMs using the above tags
-3. **TAM books outside the $1.5M-$2M ARR band** – identifying which accounts to rebalance
-4. **Flagged growth opportunities on CSM-only accounts** – identifying where to add a TAM
-
-Once the region and any TAM decision are settled, the above tags are applied and team leads assign the specific team member. 
-
-### Mid-quarter changes
+### Mid-quarter TAM changes
 
 Account removals should only happen at the end of the quarter so that quota can be calculated correctly. However, accounts can be **added** to your book at any time if you're confident there's growth potential.
 
 If you're assigned an account with a previous owner, work with them on a proper handover. If the customer isn't in a healthy state (usage and engagement-wise), push back and ask the previous owner to get them to a good state first.
 
-> New accounts with no previous owner come with a 3 month grace period – if they churn in that initial period, they won't count against your quota. Don't ask for the `AM Managed` segment to be added until you're confident there's growth potential.
+> New accounts with no previous owner come with a 3 month grace period – if they churn in that initial period, they won't count against your quota. Don't ask for the `AM Managed` tag to be added until you're confident there's growth potential.
 
 ---
 
@@ -157,21 +173,21 @@ TAM add and removal aren't handoffs, since the CSM stays throughout. See [Adding
 - When judging growth potential, use [how to evaluate an account's revenue growth potential](/handbook/growth/sales/evaluating-growth-potential)
 - When in doubt, ask yourself: do I see this account growing in the next year? If not, it doesn't need a TAM
 
-For handover to take place there should be an Account Plan (saved as a note on the account in Vitally) and the customer should have been onboarded properly to the products they are currently paying for.
+For handover to take place there should be an Account Plan (saved as a note on the account in Customer Analytics) and the customer should have been onboarded properly to the products they are currently paying for.
 
 > All open invoices should also have been paid before handing over. It makes sense to use existing relationships to chase payments, rather than the new owner's first action needing to be chasing payments/suspending access for non-payment.
 
-> For TAE accounts being handed over to a CSM, tag the account in PostHog Customer Analytics with `csm handover needed` and then flag this with Simon directly.  There's no need to wait for the end of the quarter to do this.  He will review the plan and current state of the customer and then work with CSM leads to assign a new owner.
+> For TAE accounts being handed over to a CSM, add the `csm handover needed` tag in PostHog Customer Analytics and flag it with the relevant CSM team lead. There's no need to wait for the end of the quarter. The team lead will review the plan and current state of the customer, then assign a new owner with Simon's approval.
 
 ### Account Plan
 
-Every account being handed over should have an up-to-date [Account Plan](/handbook/growth/sales/risk-mitigation-and-churn-prevention#quarterly-account-planning) saved as a note in Vitally. The existing owner should ensure that this is current and schedule a handover call to walk through it with the new owner. Feel free to push back and ask for it as the new owner if this doesn't happen! Ask your team lead or [Simon](/community/profiles/28895) for help with this if you're not getting the information you need from the previous owner.
+Every account being handed over should have an up-to-date [Account Plan](/handbook/growth/sales/risk-mitigation-and-churn-prevention#quarterly-account-planning) saved as a note in Customer Analytics. The existing owner should ensure that this is current and schedule a handover call to walk through it with the new owner. Feel free to push back and ask for it as the new owner if this doesn't happen! Ask your team lead or [Simon](/community/profiles/28895) for help with this if you're not getting the information you need from the previous owner.
 
 ### Product Onboarding
 
 Before handing over a customer, the existing owner needs to ensure that the customer is onboarded properly to the products they are paying for. We should first ensure that they are only paying for what they need to as detailed in the [health checks](/handbook/cs-and-onboarding/health-tracking) section of the handbook and then ensure the following steps have been completed, depending on the products they are paying for:
 
-> This is an initial pass at what good onboarding looks like for each product. We will refine this and add it to Vitally as a checklist to work through with the customer.
+> This is an initial pass at what good onboarding looks like for each product. We will refine this checklist as we learn what works.
 
 #### General principles
 
@@ -225,23 +241,23 @@ Every account handover should include a 15-30 minute call between the outgoing a
 
 ### Before the handover call
 
-The incoming TAM should prepare by reviewing the following in Vitally and SFDC before the call, so the handover conversation can focus on context that *isn't* in the data.
+The incoming TAM should prepare by reviewing the following in Customer Analytics and SFDC before the call, so the handover conversation can focus on context that *isn't* in the data.
 
 #### Self-serve research (do this first)
 
-- [ ] **Vitally account overview** – MRR, ARR, health score, segments, paid products, usage traits
+- [ ] **Customer Analytics account overview** – review the account profile and available customer context
 - [ ] **Billing & contract details** – annual plan dates, credit balances, discounts, renewal date, billing limits
 - [ ] **Product adoption** – which products are they paying for? What's underutilized?
 - [ ] **Usage metrics** – active users, project count, Feature Flag requests, Session Replay volume, insight/dashboard engagement
 - [ ] **Support history** – recent tickets in [PostHog Support](https://us.posthog.com/project/2/support/tickets), tags, priority, resolution status
-- [ ] **Conversations & notes** – read all Vitally notes, meeting summaries, and conversation history
+- [ ] **Conversations & notes** – read all Customer Analytics notes, meeting summaries, and conversation history
 - [ ] **Customer Slack channel** – scan the shared channel for who's actually active on the customer side, what issues have come up, and any open threads worth asking the previous owner about. This is often where the most useful context lives.
-- [ ] **Internal Slack discussions** – search our own Slack (outside the shared channel) for mentions of the customer. Engineering debates, pricing conversations, support escalations, and context from the previous owner often surface things that were never written down in Vitally.
+- [ ] **Internal Slack discussions** – search our own Slack (outside the shared channel) for mentions of the customer. Engineering debates, pricing conversations, support escalations, and context from the previous owner often surface things that were never written down in Customer Analytics.
 - [ ] **SFDC opportunity** – deal value, stage, next steps, close date
 - [ ] **Admin emails & user list** – identify who's active, who has admin access, what domains are in play
 - [ ] **The customer's product** – sign up or browse their website. Understand what they do and how they make money
 
-Prepare questions based on gaps in the data. The handover call should focus on things you *can't* learn from Vitally.
+Prepare questions based on gaps in the data. The handover call should focus on things you *can't* learn from Customer Analytics.
 
 ### Handover call agenda
 
@@ -264,6 +280,7 @@ This is the most valuable part of the handover – relationship context doesn't 
 
 - [ ] **Open proposals or negotiations** – anything in-flight that needs immediate follow-up?
 - [ ] **Renewal strategy** – what's the plan? Any risks?
+- [ ] **Renewal ownership** – who on the customer side owns the renewal, the champion or procurement? How long did the last one take?
 - [ ] **Discount/credit context** – why were discounts given? What was promised?
 - [ ] **Budget & procurement** – annual budget cycle, procurement process, finance contacts
 - [ ] **Expansion potential** – realistic growth ceiling? New teams, new brands, new products?
@@ -287,21 +304,21 @@ This is the most valuable part of the handover – relationship context doesn't 
 
 #### Immediate actions (within 1 week)
 
-- [ ] **Update Vitally** – ensure New Owner trait is set, update account plan note with handover context
-- [ ] **Save an account plan** – create or update the [account plan](/handbook/growth/sales/account-planning) as a Vitally note, incorporating handover insights
+- [ ] **Update Customer Analytics** – ensure New Owner property is set, update account plan note with handover context
+- [ ] **Save an account plan** – create or update the [account plan](/handbook/growth/sales/account-planning) as a Customer Analytics note, incorporating handover insights
 - [ ] **Introduce yourself to the customer** – warm intro (ideally the TAE introduces you) or cold intro via Slack/email
 - [ ] **Follow up on any open items** – pick up in-flight proposals, unresolved tickets, or pending conversations
 
 ### Tips for a good handover
 
-- **Focus the call on what's not in the data.** You can read Vitally yourself – use the call for relationship context, political dynamics, and unwritten history.
+- **Focus the call on what's not in the data.** You can read Customer Analytics yourself – use the call for relationship context, political dynamics, and unwritten history.
 - **Ask "what would you do next if you were keeping this account?"** This often surfaces the most actionable insight.
 - **Move fast on your intro.** The longer the gap between handover and first contact, the more momentum you lose.
 - **Keep the previous owner in the loop** for the first few weeks if there are open commercial conversations. In some cases they can also serve as a secondary support point for timezone coverage or as an escalation contact.
 
-### Unassign yourself in Vitally
+### Unassign yourself in Customer Analytics
 
-Once the handover is complete, the outgoing owner should unassign themselves from the account in Vitally. This keeps Vitally accurate about who is actually on the account.
+Once the handover is complete, the outgoing owner should unassign themselves from the account in Customer Analytics. This keeps Customer Analytics accurate about who is actually on the account.
 
 ---
 

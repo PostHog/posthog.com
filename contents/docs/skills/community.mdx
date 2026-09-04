@@ -1,0 +1,95 @@
+---
+title: Community skills
+---
+
+The community skills store is a public catalog of agent skills shared by PostHog users. You can browse it, install skills into your project with one click, and publish your own [skills](/docs/skills) for everyone else to use.
+
+The catalog is backed by the public [PostHog/community-skills](https://github.com/PostHog/community-skills) GitHub repo. Every skill in the catalog lives there as a `SKILL.md` (following the [Agent Skills specification](https://agentskills.io/specification)) plus any bundled files, and every published skill goes through a pull request review before it appears in the store.
+
+## Browse and install skills
+
+Open **[Skills](https://app.posthog.com/skills)** in PostHog and switch to the **Community** tab (or go directly to [`/skills/community`](https://app.posthog.com/skills/community)).
+
+From there you can:
+
+- **Search** by name, description, or tag
+- **Filter** by trust tier (official, verified, or community)
+- **Sort** by most installed, top rated, newest, or name
+- **Upvote** skills you find useful – votes power the "top rated" sort
+- **View the source** – every card links to the skill's directory on GitHub, so you can read exactly what you're installing
+
+Clicking **Install** copies the skill into your project as a regular team skill. From that point on it behaves like any skill you created yourself: you can edit it, version it, and use it from any MCP-connected agent via `skill-get`.
+
+A few things to know about installing:
+
+- **Installing is a copy, not a subscription.** Your installed skill doesn't auto-update when the community version changes. If you want the latest version later, install it again under a new name and compare.
+- **Name conflicts:** if your project already has a skill with the same name, install it under a different name.
+- **Reserved names:** the `signals-scout-` and `review-hog-` prefixes are reserved for PostHog-managed skills that run with elevated permissions, so you can't install a community skill under those names. Install it under a different name instead.
+- **Review before you rely on it.** A skill is instructions your agent will follow. Trust tiers help (see below), but for anything sensitive, read the skill body on GitHub first – the same way you'd review a dependency.
+
+## Trust tiers
+
+Every skill in the catalog carries a trust tier badge:
+
+| Tier          | Meaning                                                              |
+| ------------- | -------------------------------------------------------------------- |
+| **Official**  | Written and maintained by PostHog                                     |
+| **Verified**  | Community-written, reviewed more closely by the catalog's maintainers |
+| **Community** | Community-written, passed the standard review                         |
+
+Tiers are assigned by the maintainers of the community-skills repo when they review a submission – publishers can't set their own tier.
+
+## Templates
+
+Some community skills are **templates**: skills with declared variables that get filled in at install time. They show a `Template` tag on their card, and the install button opens a short form with one field per variable (each with a prompt and an optional default).
+
+The values you provide are substituted into `{{ variable }}` placeholders in the skill body and bundled files. Substitution is plain text replacement – templates can't execute logic or read your data. This is what makes a generic community skill (say, a release-notes writer) adaptable to your repo, product name, or conventions without editing the body by hand after install.
+
+## Publish a skill to the community
+
+If you've built a skill your team finds useful, you can share it with everyone.
+
+### Prerequisites
+
+- You must be an **owner** of the skill. A skill with no owners can't be published – add yourself as an owner first.
+- You must be viewing the **latest version** of the skill.
+
+### Publishing
+
+1. Open the skill in **[Skills](https://app.posthog.com/skills)** and choose **Publish to community** from its **More** menu (it's also in the overflow menu on the skills list)
+2. Fill in the dialog:
+   - **Display name** – how the skill appears in the catalog
+   - **Tags** – comma-separated, used for search and filtering
+   - **Your GitHub handle** (optional) – credited as the author on the skill's card
+3. Click **Publish**
+
+PostHog renders your skill – its instructions, bundled files, and any template variables – into the community-skills repo and opens a pull request for a maintainer to review. You get a link to the PR so you can follow along.
+
+> **The contents are public from the moment you submit**, before any review happens. Don't publish skills that contain credentials, customer data, or internal details.
+
+### Review and sync
+
+A maintainer reviews the PR for safety and quality, and assigns a trust tier. Once merged, the catalog syncs automatically – your skill appears in the community store within about an hour.
+
+If you update your skill and publish again before the first PR is merged, the same PR is updated rather than a new one being opened.
+
+## Limits
+
+- Skill descriptions are capped at 1,024 characters (per the Agent Skills spec)
+- Up to 200 bundled files, 1 MB each, text files only
+- The whole skill (body plus files) must be under 5 MB
+- Publishing is rate-limited per project, so batch your edits locally and publish when the skill is ready
+
+## FAQ
+
+### Do I need MCP to use community skills?
+
+Browsing, installing, and publishing all happen in the PostHog UI. Once a skill is installed, it's a regular team skill – your agents fetch it through the [MCP `skill-*` tools](/docs/skills) like any other.
+
+### What happens if a skill is removed from the catalog?
+
+Nothing changes for you. Installed skills are copies in your project, so they keep working even if the community version is removed.
+
+### Can I publish a skill anonymously?
+
+The GitHub handle field is optional and self-reported. If you leave it out, no author is credited on the card. Either way, the pull request comes from PostHog's publishing bot, not your GitHub account.
