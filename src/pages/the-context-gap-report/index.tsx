@@ -1,7 +1,7 @@
 import React from 'react'
 import SEO from 'components/seo'
 import ReaderView from 'components/ReaderView'
-import { CallToAction } from 'components/CallToAction'
+import { TrackedCTA } from 'components/CallToAction'
 import CopyButton from 'components/Points/CopyButton'
 import Link from 'components/Link'
 import TeamMember from 'components/TeamMember'
@@ -10,6 +10,7 @@ import { Bang } from 'components/Icons'
 import CloudinaryImage from 'components/CloudinaryImage'
 import { Hedgehog996 } from '@posthog/brand/hoggies'
 import { IconSparkles, IconOpenSidebar } from '@posthog/icons'
+import usePostHog from 'hooks/usePostHog'
 
 const PDF_PATH = '/brand/The-Context-Gap-Report.pdf'
 
@@ -29,6 +30,8 @@ const CLAUDE_URL = `https://claude.ai/new?q=${encodeURIComponent(AGENT_PROMPT)}`
 const MAX_URL = `https://app.posthog.com/#panel=max:!${encodeURIComponent(AGENT_PROMPT)}`
 
 export default function ContextGapReport() {
+    const posthog = usePostHog()
+
     // components/Link treats any path starting with "/" as internal and ignores the `external`
     // prop (no target="_blank"), so this needs an absolute URL to open in a new tab.
     const pdfUrl = typeof window !== 'undefined' ? `${window.location.origin}${PDF_PATH}` : PDF_PATH
@@ -59,9 +62,14 @@ export default function ContextGapReport() {
                                 </p>
 
                                 <div className="flex justify-center @lg:justify-start mt-4">
-                                    <CallToAction to={pdfUrl} externalNoIcon size="md">
+                                    <TrackedCTA
+                                        to={pdfUrl}
+                                        externalNoIcon
+                                        size="md"
+                                        event={{ name: 'context_gap_report_opened', placement: 'hero' }}
+                                    >
                                         Open the report
-                                    </CallToAction>
+                                    </TrackedCTA>
                                 </div>
                             </div>
                             <div className="shrink-0 flex justify-center">
@@ -82,16 +90,19 @@ export default function ContextGapReport() {
                             </p>
 
                             <p>
-                                When you read industry reports back-to-back you notice every vendor is talking about the same problem:{' '}
+                                When you read industry reports back-to-back you notice every vendor is talking about the
+                                same problem:{' '}
                                 <strong>AI ambition is outrunning data readiness, trust, and governance.</strong>
                             </p>
 
                             <p>
-                                We wrote our own industry report to tell you why a context warehouse is the thing our competitors have been looking for, backed up by their own data. 
+                                We wrote our own industry report to tell you why a context warehouse is the thing our
+                                competitors have been looking for, backed up by their own data.
                             </p>
 
                             <p>
-                                You don't have to read everyone's reports to know what's important in data infrastructure, just read ours:
+                                You don't have to read everyone's reports to know what's important in data
+                                infrastructure, just read ours:
                             </p>
                             <ul className="list-disc pl-5 space-y-1">
                                 <li>It's only 2 pages, not 300.</li>
@@ -102,8 +113,7 @@ export default function ContextGapReport() {
                             <CalloutBox icon="IconDatabase" title="Why is a context warehouse the answer?" type="fyi">
                                 <p>
                                     A <Link to="/context-warehouse">context warehouse</Link> is a data warehouse, plus
-                                    the pipeline, modeling, and query tools - in one system, optimized for
-                                    agents.
+                                    the pipeline, modeling, and query tools - in one system, optimized for agents.
                                 </p>
                             </CalloutBox>
                         </div>
@@ -114,6 +124,7 @@ export default function ContextGapReport() {
                                 href={PDF_PATH}
                                 target="_blank"
                                 rel="noreferrer"
+                                onClick={() => posthog?.capture('context_gap_report_opened', { placement: 'preview' })}
                                 aria-label="Open The Context Gap report as a PDF in a new tab"
                                 className="not-prose group relative block h-[calc(100%-1.5rem)] border border-primary rounded overflow-hidden bg-accent"
                             >
@@ -161,7 +172,10 @@ export default function ContextGapReport() {
                                 <span className="font-code font-medium text-xs uppercase tracking-wide text-secondary">
                                     Prompt for your agent
                                 </span>
-                                <CopyButton text={AGENT_PROMPT} />
+                                <CopyButton
+                                    text={AGENT_PROMPT}
+                                    onCopy={() => posthog?.capture('context_gap_prompt_copied')}
+                                />
                             </div>
                             <pre className="font-code text-[13px] leading-relaxed whitespace-pre-wrap break-words p-4 m-0 overflow-x-auto">
                                 {AGENT_PROMPT}
@@ -170,18 +184,28 @@ export default function ContextGapReport() {
                     </div>
 
                     <div className="flex flex-wrap gap-3">
-                        <CallToAction to={CLAUDE_URL} externalNoIcon size="md">
+                        <TrackedCTA
+                            to={CLAUDE_URL}
+                            externalNoIcon
+                            size="md"
+                            event={{ name: 'context_gap_prompt_handoff', agent: 'claude' }}
+                        >
                             <span className="inline-flex items-center justify-center gap-2">
                                 <IconSparkles className="size-4" />
                                 Just ask Claude
                             </span>
-                        </CallToAction>
-                        <CallToAction to={MAX_URL} externalNoIcon size="md">
+                        </TrackedCTA>
+                        <TrackedCTA
+                            to={MAX_URL}
+                            externalNoIcon
+                            size="md"
+                            event={{ name: 'context_gap_prompt_handoff', agent: 'posthog_ai' }}
+                        >
                             <span className="inline-flex items-center justify-center gap-2">
                                 <IconOpenSidebar className="size-4" />
                                 Just ask PostHog AI
                             </span>
-                        </CallToAction>
+                        </TrackedCTA>
                     </div>
                 </div>
             </div>

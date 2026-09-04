@@ -1,12 +1,13 @@
 import React, { useState } from 'react'
 import { IconCheck, IconCopy } from '@posthog/icons'
 
-export default function CopyButton({ text }: { text: string }) {
+export default function CopyButton({ text, onCopy }: { text: string; onCopy?: () => void }) {
     const [copied, setCopied] = useState(false)
 
     const handleCopy = async () => {
         await navigator.clipboard.writeText(text)
         setCopied(true)
+        onCopy?.()
         setTimeout(() => setCopied(false), 2000)
     }
 
