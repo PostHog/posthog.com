@@ -1,6 +1,6 @@
 ---
 title: The best data warehouses for developers, compared
-date: 2026-09-03
+date: 2026-09-04
 rootPage: /blog
 sidebar: Blog
 showTitle: true
@@ -37,7 +37,9 @@ There's no wrong answer here – the right pick comes down to what you care abou
 
 For most developers, it's **[PostHog](/context-warehouse)**. It's a [context warehouse](/blog/what-is-a-context-warehouse), not just a data warehouse: your product and business data live together, wired directly into the tools and agents that act on it, with no pipelines to maintain.
 
-You get two ways in: connect an existing warehouse (Snowflake, BigQuery, Databricks, ClickHouse...) as a source and sync the tables you need, or use PostHog's integrated warehouse so data never travels.
+You get two ways in: connect an existing warehouse ([Snowflake](/docs/data-warehouse/sources/snowflake), [BigQuery](/docs/data-warehouse/sources/bigquery), [Databricks](/docs/data-warehouse/sources/databricks), [ClickHouse](/docs/data-warehouse/sources/clickhouse)) as a source and sync the tables you need, or use PostHog's integrated warehouse so data never travels.
+
+Other popular sources are [Stripe](/docs/data-warehouse/sources/stripe), [Postgres](/docs/data-warehouse/sources/postgres), and [Google Sheets](/docs/data-warehouse/sources/google-sheets), which can be fiddly to wire into a general-purpose warehouse, but are just a few clicks in PostHog.
 
 Either way, queries run on PostHog compute and the results sit next to [product analytics](/product-analytics), [session replay](/session-replay), [feature flags](/feature-flags), [error tracking](/error-tracking), [and more](/products) – so a query that turns up an odd event leads straight to the user's session or the error behind it, without matching records across tools.
 
@@ -53,7 +55,7 @@ Because the data is already unified, PostHog's own agents can query it the same 
 -   **Pricing:** Usage-based with per-product allowances; a free tier lets you start without an enterprise contract
 -   **License:** Open source core (MIT, except the proprietary `ee/` directory)
 
-**Not ideal if:** you need queries to run inside your existing warehouse. PostHog runs them on its own compute, it is not warehouse-native.
+**Not ideal if:** you need to leave data in your existing warehouse and query it in place, or you need a general-purpose lakehouse for ML and company-wide data engineering.
 
 **Alternatives to consider:** **ClickHouse** if you specifically want an open-source warehouse engine; **Snowflake** or **BigQuery** if a data platform has to serve the whole business.
 
@@ -66,7 +68,7 @@ Because the data is already unified, PostHog's own agents can query it the same 
 
 ### What's the best data warehouse for embedded and local-first analytics?
 
-**MotherDuck** runs DuckDB as a serverless cloud service, so you can build analytics features without managing database servers or giving up the local DuckDB workflow.
+**MotherDuck** runs [DuckDB](/blog/duckdb-vs-clickhouse) as a serverless cloud service, so you can build analytics features without managing database servers or giving up the local DuckDB workflow.
 
 Queries can span local files and cloud-hosted data, so you develop locally and move larger workloads to the cloud when you're ready.
 
@@ -116,7 +118,7 @@ Its lakehouse model pairs warehouse-style SQL with data lake storage, notebooks,
 
 **Not ideal if:** you mainly want event analytics, dashboards, or occasional SQL – it's more platform than the job needs.
 
-**Alternatives to consider:** **Snowflake** for enterprise SQL without a heavy ML requirement; **ClickHouse** for high-volume event analytics; **PostHog** if your questions are about users and product, not pipelines, since it skips the modeling and BI layer entirely.
+**Alternatives to consider:** **Snowflake** for enterprise SQL without a heavy ML requirement; **ClickHouse** for high-volume event analytics; **PostHog** if your questions are about users and product, not pipelines.
 
 ### What's the best data warehouse for enterprise-scale data?
 
