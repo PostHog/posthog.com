@@ -21,7 +21,11 @@ seo:
     metaDescription: "How we turn session replays into video for Replay Vision, and how Chrome's beginFrame fixed our rasterizer under load."
 ---
 
-Almost none of the recordings we ingest with Session Replay are watched. The overwhelming majority are stored, never opened, and expire at the end of their retention period without ever receiving any attention at all. It's no wonder, really: even a moderately busy product results in tens of thousands of recordings per day. You'd need an army of humans doing nothing but watching these recordings to cover all, or even most, of them. As a result, most of what the Session Replay team has shipped over the past couple of years is some form of search: filters on events and properties, relevance sorting, collections, session summaries. All of them are attempts to help our users find the needle in the haystack and maximize the value they can get with the limited amount of human attention available to them.
+Almost none of the session recordings we ingest [are watched](/blog/nobody-watches-session-replays). The majority are stored, never opened, and expire without receiving any attention. 
+
+It's no wonder, really: a moderately busy product results in tens of thousands of recordings per day. You'd need an army of humans doing nothing but watching to get through them all. 
+
+As a result, most of what the Session Replay team has shipped over the past couple of years is some form of search: filters on events and properties, relevance sorting, collections, session summaries. All of them are attempts to help our users find the needle in the haystack and maximize the value they can get with the limited amount of human attention available to them.
 
 [Replay Vision](/replay-vision) started from the thought that we should stop rationing attention and start automating it instead. Recent multimodal AI models are good enough at watching video that you can hand them a recording and get a sensible account of what the user did and where it went wrong. Apply this to session recordings, and you get details on every one, not just the ones someone had time for. 
 
@@ -70,7 +74,7 @@ It became clear that the rasterizer was very sensitive to CPU contention. Essent
 
 We needed a way to ensure determinism across these processes, regardless of the available resources. The same input data should always result in the same output data.
 
-## Roads? Where we're going, we don't need roads
+## Solving our problems by manipulating time
 
 Another way to frame the problem is _time_. The capture process expects frames to arrive in real time, and the render process expects to be captured in real time. Each depends on the other keeping up. We were hoping these processes would always stay in agreement, but on a modern preemptive OS this was a fool's hope.
 
@@ -84,7 +88,7 @@ The trick is to _freeze time_ inside the JS virtual machine. Before playback sta
 
 We use [puppeteer-capture](https://www.npmjs.com/package/puppeteer-capture) for this, a Puppeteer plugin that conveniently bundles the virtual time shims together with the `beginFrame` loop.
 
-## Putting it all together
+## Roads? Where we're going, we don't need roads
 
 With `beginFrame` gating the compositor and the virtual clock gating the player, the two failure modes from earlier simply stop existing. If rendering is starved, the clock waits for the frame. If capture is starved, the renderer waits for the next `beginFrame` call. Either way, the next frame in the video is the next frame in the recording, and CPU contention only changes how long the job takes, not what comes out of it. We can run as many jobs per pod as we like, and the same recording produces the same video every time.
 
