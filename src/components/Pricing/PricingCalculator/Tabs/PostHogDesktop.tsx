@@ -1,12 +1,11 @@
 import React, { useEffect, useMemo, useState } from 'react'
 import useSWR from 'swr'
-import { IconLightBulb } from '@posthog/icons'
-import { NumericFormat } from 'react-number-format'
-import AutosizeInput from 'react-input-autosize'
+import { IconInfo } from '@posthog/icons'
 import Link from 'components/Link'
-import { LogSlider, inverseCurve, sliderCurve } from 'components/Pricing/PricingSlider/Slider'
+import Tooltip from 'components/Tooltip'
 import { formatUSD } from 'components/Pricing/PricingSlider/pricingSliderLogic'
 import { calculatePrice } from 'components/Pricing/PricingCalculator/calculatorLogic'
+import UsageSliderRow, { UsageSliderHeader } from '../UsageSliderRow'
 import {
     BILLABLE_CPU_CORES,
     BILLABLE_MEMORY_GIB,
@@ -28,69 +27,6 @@ const fetchPricing = async (url: string): Promise<PricingResponse> => {
         throw new Error(`Pricing request returned ${response.status}`)
     }
     return response.json() as Promise<PricingResponse>
-}
-
-const Row = ({
-    label,
-    suffix,
-    value,
-    onChange,
-    slider,
-    cost,
-    note,
-    prefix,
-}: {
-    label: string
-    suffix: string
-    value: number
-    onChange: (value: number) => void
-    slider?: { min: number; max: number; marks: number[]; scaleMin?: number }
-    cost: number
-    note: React.ReactNode
-    prefix?: string
-}): JSX.Element => {
-    const scaleMin = slider?.scaleMin ?? Math.max(slider?.min ?? 0, 1)
-    const fromSlider = (next: number): number => {
-        const rounded = Math.round(sliderCurve(next))
-        return slider?.min === 0 && rounded <= scaleMin ? 0 : Math.max(rounded, slider?.min ?? 0)
-    }
-
-    return (
-        <div className="grid grid-cols-8 mb-6">
-            <div className="col-span-6">
-                <p className="mb-2 text-sm font-semibold">{label}</p>
-                <p className="mb-2">
-                    <NumericFormat
-                        inputClassName="bg-transparent text-center focus:ring-0 focus:border-red dark:focus:border-yellow focus:bg-white dark:focus:bg-accent-dark font-code max-w-[103px] text-sm border border-light hover:border-button dark:border-dark rounded-sm py-1 px-0 min-w-[25px] px-1"
-                        value={value}
-                        prefix={prefix}
-                        thousandSeparator=","
-                        decimalScale={prefix ? 2 : 0}
-                        onValueChange={({ floatValue }) => onChange(floatValue || 0)}
-                        customInput={AutosizeInput}
-                    />{' '}
-                    <span className="opacity-70 text-sm">{suffix}</span>
-                </p>
-            </div>
-            <div className="col-span-2 text-right pr-3">
-                <p className="font-semibold mb-0">{formatUSD(cost)}</p>
-            </div>
-            {slider && (
-                <div className="col-span-full pr-1.5">
-                    <LogSlider
-                        stepsInRange={100}
-                        marks={slider.marks}
-                        min={slider.min}
-                        max={slider.max}
-                        scaleMin={scaleMin}
-                        onChange={(next) => onChange(fromSlider(next))}
-                        value={inverseCurve(Math.max(value, scaleMin))}
-                    />
-                </div>
-            )}
-            <div className={`col-span-full pr-1.5 text-sm text-secondary ${slider ? 'mt-10 md:mt-8' : ''}`}>{note}</div>
-        </div>
-    )
 }
 
 export default function PostHogDesktopTab({
@@ -139,55 +75,76 @@ export default function PostHogDesktopTab({
         return <div className="h-64 bg-accent border border-primary rounded-md animate-pulse" />
     }
 
+    const freeUsd = freeCredits / CREDITS_PER_USD
+
     return (
         <div className="@container mb-4">
-            <div className="bg-accent border border-primary rounded-md px-4 py-3 mb-6 text-sm">
+            <div className="bg-accent border border-primary rounded-md px-4 py-3 mb-4 text-sm">
                 PostHog Desktop bills tokens and cloud compute to a single credit balance (100 credits = $1). Tokens are
                 passed through at the model provider's price with <strong>no markup</strong>; cloud tasks add the
                 sandbox they run on.
+                {isPublishedRate ? ` Cloud time uses the rates published ${PUBLISHED_RATES_DATE}.` : ''}
             </div>
 
-            <Row
-                label="Cloud task time"
-                suffix="hours/month"
-                value={hours}
-                onChange={(value) => setHours(Math.round(value))}
-                slider={{ min: 0, scaleMin: 1, max: 500, marks: [0, 10, 100, 500] }}
-                cost={computeSpend}
-                note={
-                    <>
-                        A cloud task bills {BILLABLE_CPU_CORES} CPU cores and {BILLABLE_MEMORY_GIB} GiB for as long as
-                        it runs, so cloud time works out at about {formatUSD(computeRate)}/hour. Local tasks run on your
-                        own machine.
-                        {isPublishedRate && <> Based on the rates published {PUBLISHED_RATES_DATE}.</>}
-                    </>
-                }
-            />
+            <UsageSliderHeader unit="Hours" />
+            <div className="divide-y divide-primary border-t border-primary">
+                <UsageSliderRow
+                    label="Cloud task time"
+                    subtitle={
+                        <span className="inline-flex items-center gap-1">
+                            {formatUSD(computeRate)} per hour
+                            <Tooltip
+                                content={`A cloud task bills ${BILLABLE_CPU_CORES} CPU cores and ${BILLABLE_MEMORY_GIB} GiB for as long as it runs, so cloud time works out at about ${formatUSD(
+                                    computeRate
+                                )}/hour. Local tasks run on your own machine.`}
+                                tooltipClassName="max-w-[250px]"
+                                placement="top"
+                            >
+                                <span className="relative inline-block">
+                                    <IconInfo className="size-3.5 opacity-70 inline-block" />
+                                </span>
+                            </Tooltip>
+                        </span>
+                    }
+                    value={hours}
+                    onChange={(next) => setHours(Math.max(0, Math.round(next)))}
+                    marks={[0, 10, 100, 500]}
+                    min={0}
+                    max={500}
+                />
+            </div>
 
-            <Row
-                label="Estimated model usage"
-                suffix="/month"
-                prefix="$"
-                value={modelSpend}
-                onChange={setModelSpend}
-                cost={modelSpend}
-                note={
-                    <>
-                        Billed at exactly what the model provider charges, with no markup. See the{' '}
-                        <Link to="/docs/posthog-desktop/pricing" className="font-semibold underline">
-                            per-model rates
-                        </Link>
-                        .
-                    </>
-                }
-            />
+            <div className="pt-3">
+                <UsageSliderHeader unit="USD" />
+                <div className="divide-y divide-primary border-t border-primary">
+                    <UsageSliderRow
+                        label="Estimated model usage"
+                        subtitle={
+                            <>
+                                Billed at exactly what the model provider charges, with no markup. See the{' '}
+                                <Link
+                                    to="/docs/posthog-desktop/pricing"
+                                    className="text-red dark:text-yellow font-semibold"
+                                >
+                                    per-model rates
+                                </Link>
+                                .
+                            </>
+                        }
+                        value={modelSpend}
+                        inputPrefix="$"
+                        onChange={(next) => setModelSpend(Math.max(0, Math.round(next * 100) / 100))}
+                        marks={[0, 20, 100, 500]}
+                        min={0}
+                        max={500}
+                    />
+                </div>
+            </div>
 
             {freeCredits > 0 && (
-                <div className="flex gap-1 items-center pb-2">
-                    <IconLightBulb className="size-5 inline-block text-[#4f9032] dark:text-green relative -top-px" />
-                    <span className="text-sm text-[#4f9032] dark:text-green font-semibold">
-                        First {formatUSD(freeCredits / CREDITS_PER_USD)} of combined cloud compute and model usage free
-                        – <em>every month!</em>
+                <div className="pr-1.5 pt-3 border-t border-primary">
+                    <span className="text-sm text-secondary">
+                        The first {formatUSD(freeUsd)} of combined cloud compute and model usage are free, every month.
                     </span>
                 </div>
             )}

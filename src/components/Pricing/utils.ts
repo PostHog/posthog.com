@@ -6,6 +6,7 @@ export const formatCompact = (n: number): string =>
 export const parseCompact = (value: string): number => {
     const match = String(value)
         .trim()
+        .replace(/^\$/, '')
         .match(/^([\d.]+)\s*([kmb])?$/i)
     if (!match) return 0
     const suffix = { k: 1e3, m: 1e6, b: 1e9 }[match[2]?.toLowerCase()] ?? 1

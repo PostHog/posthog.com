@@ -28,10 +28,11 @@ export default function UsageSliderRow({
     max,
     scaleMin,
     curve = 'nonlinear',
+    inputPrefix,
 }: {
     label: string
     labelAccessory?: React.ReactNode
-    subtitle?: string
+    subtitle?: React.ReactNode
     value: number
     onChange: (value: number) => void
     marks: number[]
@@ -39,6 +40,7 @@ export default function UsageSliderRow({
     max: number
     scaleMin?: number
     curve?: 'log' | 'nonlinear'
+    inputPrefix?: string
 }) {
     const effectiveScaleMin = scaleMin ?? marks.find((mark) => mark > 0) ?? 1
     const sliderValue = Math.max(value || 0, effectiveScaleMin)
@@ -83,8 +85,10 @@ export default function UsageSliderRow({
             </div>
             <input
                 type="text"
-                className="w-14 bg-transparent text-center font-bold text-sm border border-light dark:border-dark rounded-md py-1 px-1.5 focus:ring-0 focus:border-red dark:focus:border-yellow focus:bg-white dark:focus:bg-accent-dark"
-                value={formatCompact(value)}
+                className={`${
+                    inputPrefix ? 'w-16' : 'w-14'
+                } bg-transparent text-center font-bold text-sm border border-light dark:border-dark rounded-md py-1 px-1.5 focus:ring-0 focus:border-red dark:focus:border-yellow focus:bg-white dark:focus:bg-accent-dark`}
+                value={`${inputPrefix ?? ''}${formatCompact(value)}`}
                 onChange={(e) => onChange(parseCompact(e.target.value))}
             />
         </div>
