@@ -8,7 +8,7 @@ import { runInNewContext } from 'node:vm'
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..')
 
-const trackedSnippetFiles = execFileSync('git', ['ls-files', 'gatsby', 'contents'], {
+const trackedSnippetFiles = execFileSync('git', ['ls-files', 'gatsby', 'contents/docs'], {
     cwd: root,
     encoding: 'utf-8',
 })
