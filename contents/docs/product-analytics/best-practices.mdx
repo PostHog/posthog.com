@@ -176,3 +176,63 @@ We recommend to track both your marketing site and app in the same [project](/do
 3. Calculate accurate customer acquisition costs (CAC) and lifetime value (LTV)
 4. Analyze how marketing activities impact product metrics like retention and churn
 5. Create cross-platform funnels (e.g., from blog post → signup → feature usage)
+
+## 11. Give related events a shared correlation key
+
+Events that describe the same real-world thing must carry a property that identifies that thing. Without it, there is no key to join the events on, so you cannot connect them later.
+
+For example, an `order_submitted` event and a `payment_completed` event both belong to one order. If only one of them carries the order ID, you cannot measure how many submitted orders were paid.
+
+Put the ID on every event in the sequence:
+
+```js
+posthog.capture('order_submitted', { order_id: orderId, item_count: 3 })
+posthog.capture('payment_completed', { order_id: orderId, amount_usd: 49.99 })
+```
+
+Use the same rule for smaller units. If an event describes a single line in an order, add a line-level key – for example `order_id` and `line_number` – to each of those events. A SKU alone is not enough, because a customer can buy the same SKU in two different orders.
+
+Some guidelines:
+
+- Use an ID your backend already owns, such as an order ID, a transaction ID, a subscription ID, or a request ID. Do not create a new ID only for analytics.
+- Use the same property name on every event. `order_id` on one event and `orderId` on another do not join.
+- Add the key before you send the events. PostHog cannot add a property to events that you already sent, so you can only correct a missing key for future events.
+- Do not use `distinct_id` as the correlation key. It links events to a person, not to one order, so it cannot separate two orders from the same person.
+
+### Join two events on a correlation key
+
+With a shared key, you can join the events in a [SQL insight](/docs/product-analytics/sql):
+
+```sql
+SELECT
+    submitted.properties.order_id AS order_id,
+    submitted.timestamp AS submitted_at,
+    paid.timestamp AS paid_at,
+    dateDiff('second', submitted.timestamp, paid.timestamp) AS seconds_to_pay
+FROM events AS submitted
+INNER JOIN events AS paid
+    ON submitted.properties.order_id = paid.properties.order_id
+WHERE submitted.event = 'order_submitted'
+    AND paid.event = 'payment_completed'
+    AND submitted.timestamp > now() - INTERVAL 7 DAY
+    AND paid.timestamp > now() - INTERVAL 7 DAY
+ORDER BY submitted_at DESC
+```
+
+A join reads the events table two times. If the query is slow or runs out of memory, shorten the date range, or read the table one time and group by the key instead:
+
+```sql
+SELECT
+    properties.order_id AS order_id,
+    minIf(timestamp, event = 'order_submitted') AS submitted_at,
+    minIf(timestamp, event = 'payment_completed') AS paid_at,
+    dateDiff('second', submitted_at, paid_at) AS seconds_to_pay
+FROM events
+WHERE event IN ('order_submitted', 'payment_completed')
+    AND timestamp > now() - INTERVAL 7 DAY
+GROUP BY order_id
+HAVING submitted_at > 0 AND paid_at > 0
+ORDER BY submitted_at DESC
+```
+
+If a key can occur more than one time on each side – for example a retried payment – the join gives you one row for each combination. Aggregate the duplicates with `min()` or `argMin()`, or group by the key as shown above.
