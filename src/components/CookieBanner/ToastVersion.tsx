@@ -4,6 +4,7 @@ import usePostHog from '../../hooks/usePostHog'
 import CloudinaryImage from 'components/CloudinaryImage'
 import Tooltip from 'components/RadixUI/Tooltip'
 import { IconX } from '@posthog/icons'
+import { getStorageItem, setStorageItem } from 'lib/storage'
 
 export default function CookieBannerToast() {
     const { addToast } = useToast()
@@ -11,7 +12,7 @@ export default function CookieBannerToast() {
     const [hasShownBanner, setHasShownBanner] = useState(false)
 
     useEffect(() => {
-        const consent = localStorage.getItem('cookie_consent')
+        const consent = getStorageItem('cookie_consent')
 
         if (!consent && !hasShownBanner) {
             setHasShownBanner(true)
@@ -51,7 +52,7 @@ export default function CookieBannerToast() {
                     </div>
                 ),
                 onAction: () => {
-                    localStorage.setItem('cookie_consent', 'acknowledged')
+                    setStorageItem('cookie_consent', 'acknowledged')
                     posthog?.set_config({ persistence: 'localStorage+cookie' })
                 },
                 actionLabel: 'Close',

@@ -12,6 +12,7 @@ import React, {
 import { AppWindow } from './Window'
 import { navigate } from 'gatsby'
 import { isSafeInternalPath } from 'lib/utils'
+import { getStorageItem, removeStorageItem, setStorageItem } from 'lib/storage'
 import SignIn from 'components/Squeak/components/Classic/SignIn'
 import Register from 'components/Squeak/components/Classic/Register'
 import ForgotPassword from 'components/Squeak/components/Classic/ForgotPassword'
@@ -1687,6 +1688,28 @@ const isLabel = (item: any) => !item?.url && item?.name
 
 const useIsomorphicLayoutEffect = typeof window !== 'undefined' ? useLayoutEffect : useEffect
 
+// Read the saved site settings, tolerating a value that is not valid JSON.
+// `getStorageItem` already degrades to `null` when storage is blocked, but the
+// stored value can still be corrupt (an extension, an older build, or a hand
+// edit). A bare `JSON.parse` would throw from the startup layout effect and,
+// with no error boundary above it, blank the whole site on every load. Fall
+// back to defaults and drop the bad value so the next load recovers.
+const getSavedSiteSettings = (): Partial<SiteSettings> => {
+    if (typeof window === 'undefined') {
+        return {}
+    }
+    const saved = getStorageItem('siteSettings')
+    if (!saved) {
+        return {}
+    }
+    try {
+        return JSON.parse(saved)
+    } catch {
+        removeStorageItem('siteSettings')
+        return {}
+    }
+}
+
 const getInitialSiteSettings = (): SiteSettings => {
     const siteSettings: SiteSettings = {
         colorMode: (typeof window !== 'undefined' && (window as any).__theme) || 'light',
@@ -1699,7 +1722,7 @@ const getInitialSiteSettings = (): SiteSettings => {
         screensaverDisabled: true,
         reduceTransparency: false,
         scrollbars: 'system',
-        ...(typeof window !== 'undefined' ? JSON.parse(localStorage.getItem('siteSettings') || '{}') : {}),
+        ...getSavedSiteSettings(),
     }
 
     const retiredWallpapers = ['action-figure', '2001-bliss', 'parade', 'coding-at-night']
@@ -2469,12 +2492,8 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
     }
 
     const updateSiteSettings = (settings: SiteSettings) => {
-        try {
-            setSiteSettings(settings)
-            localStorage.setItem('siteSettings', JSON.stringify(settings))
-        } catch (error) {
-            console.error('Failed to update site settings:', error)
-        }
+        setSiteSettings(settings)
+        setStorageItem('siteSettings', JSON.stringify(settings))
     }
 
     const animateClosingAllWindows = () => {
