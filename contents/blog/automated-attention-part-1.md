@@ -75,8 +75,8 @@ We use [puppeteer-capture](https://www.npmjs.com/package/puppeteer-capture) for 
 
 With `beginFrame` gating the compositor and the virtual clock gating the player, the two failure modes from earlier simply stop existing. If rendering is starved, the clock waits for the frame. If capture is starved, the renderer waits for the next `beginFrame` call. Either way, the next frame in the video is the next frame in the recording, and CPU contention only changes how long the job takes, not what comes out of it. We can run as many jobs per pod as we like, and the same recording produces the same video every time.
 
-The rasterizer was the unlock we needed to turn every recording into something a multimodal model can watch. But a model that can see everything will happily look at everything, most of which doesn't matter. Part two is about directing its attention: what we show it, what we don't let it see, and how we stopped it fixating on irrelevant details.
-
 ![Doc Brown hoggie connecting the cable at the moment the lightning strikes](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/doc_brown_76d9d75886.png)
+
+The rasterizer was the unlock we needed to turn every recording into something a multimodal model can watch. But a model that can see everything will happily look at everything, most of which doesn't matter. Part two is about directing its attention: what we show it, what we don't let it see, and how we stopped it fixating on irrelevant details.
 
 The version of our rasterizer described in this blog post has been in production since March 2026 and powers all of Replay Vision as well as some features in Session Replay itself. At the time of writing it has rasterized more than 370 years of recordings into roughly 3.5 million videos.
