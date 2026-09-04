@@ -437,15 +437,9 @@ export default function Tabbed() {
             }
         }
 
-        if (volumeTypes.length > 0) {
-            volumeTypes.forEach((type) => {
-                setVolume(type, volumeParams[type].volume)
-            })
-        } else {
-            products
-                .filter((product) => selectedTypes.includes(product.type))
-                .forEach((product) => setVolume(product.handle, 0))
-        }
+        volumeTypes.forEach((type) => {
+            setVolume(type, volumeParams[type].volume)
+        })
 
         const el = document.getElementById('calculator')
         if (el && products.some((product) => volumeTypes.includes(product.type))) {
@@ -478,7 +472,7 @@ export default function Tabbed() {
             setAnalyticsData(getDefaultAnalyticsData())
         }
         const product = products.find((item) => item.type === type)
-        if (product) setVolume(product.handle, 0)
+        if (product) setVolume(product.handle, product.freeLimit ?? product.slider?.min ?? 0)
         setSelectedTypes((current) => [...current, type])
         setActiveType(type)
         closeProductPicker()

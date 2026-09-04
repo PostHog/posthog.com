@@ -30,7 +30,7 @@ export const getDefaultAnalyticsData = () =>
     analyticsSliders.reduce((acc, slider) => {
         slider.types.forEach(({ type, enhanced }) => {
             acc[type] = {
-                volume: 0,
+                volume: enhanced ? 800_000 : 200_000,
                 cost: 0,
                 enhanced: enhanced || false,
             }

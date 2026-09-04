@@ -1,9 +1,8 @@
 import React, { useMemo } from 'react'
-import { LogSlider, sliderCurve, inverseCurve } from 'components/Pricing/PricingSlider/Slider'
 import { calculatePrice, formatUSD } from 'components/Pricing/PricingSlider/pricingSliderLogic'
 import type { BillingTier } from 'components/Pricing/PricingCalculator/calculatorLogic'
-import { NumericFormat } from 'react-number-format'
-import AutosizeInput from 'react-input-autosize'
+import UsageSliderRow, { UsageSliderHeader } from 'components/Pricing/PricingCalculator/UsageSliderRow'
+import { formatCompact } from 'components/Pricing/utils'
 
 /*
  * The interactive Replay Vision cost estimator: model selector, observation-
@@ -46,7 +45,7 @@ export interface ReplayVisionEstimate {
     freeObservations: number
     /** The credit tiers re-denominated in observations for the selected model. */
     observationTiers: BillingTier[]
-    /** Observations clamped to [freeObservations, MAX_OBSERVATIONS] — what the UI displays. */
+    /** Observations clamped to [0, MAX_OBSERVATIONS] — what the UI displays. */
     clampedObservations: number
     /** Clamped observations converted back to credits — the denomination shared calculator state uses. */
     credits: number
@@ -71,7 +70,6 @@ export const estimateReplayVisionPricing = ({
     )
     // Free allocation = the `up_to` of the $0 tier, the same rule `useProducts` uses for `freeLimit`.
     const freeCredits = creditTiers.find((tier) => parseFloat(tier.unit_amount_usd) === 0)?.up_to ?? 0
-    // LogSlider applies Math.log to min/max/marks, so the floor must stay positive.
     const freeObservations = Math.max(Math.round(freeCredits / model.creditsPerObservation), 1)
 
     const observationTiers = creditTiers.map((tier) => ({
@@ -79,7 +77,7 @@ export const estimateReplayVisionPricing = ({
         unit_amount_usd: (parseFloat(tier.unit_amount_usd) * model.creditsPerObservation).toFixed(2),
     }))
 
-    const clampedObservations = Math.min(Math.max(observations, freeObservations), MAX_OBSERVATIONS)
+    const clampedObservations = Math.min(Math.max(observations, 0), MAX_OBSERVATIONS)
     const { total: cost, costByTier } = calculatePrice(clampedObservations, observationTiers)
 
     return {
@@ -114,8 +112,6 @@ export default function PricingEstimator({
         [observations, modelKey, creditTiers]
     )
 
-    // Marks always start at the free allocation and stay positive (LogSlider
-    // applies Math.log to min/max/marks, so 0 would break it).
     const marks = useMemo(
         () =>
             estimate
@@ -128,7 +124,7 @@ export default function PricingEstimator({
 
     if (!estimate) return null
 
-    const { creditPrice, freeObservations, observationTiers, clampedObservations: volume, cost, costByTier } = estimate
+    const { creditPrice, freeObservations, observationTiers, clampedObservations: volume, costByTier } = estimate
 
     const dp = 2
     const formatPrice = (str: string) => {
@@ -231,34 +227,26 @@ export default function PricingEstimator({
                 })}
             </div>
 
-            {/* Slider + input */}
-            <div className="pl-4 pr-1 mt-6">
-                <div className="flex items-center justify-between mb-2">
-                    <div className="flex items-center gap-1.5">
-                        <NumericFormat
-                            inputClassName="bg-primary text-center text-lg font-bold border border-primary hover:border-button dark:border-dark rounded-sm py-1 px-1 min-w-[30px] max-w-[150px]"
-                            value={volume}
-                            thousandSeparator=","
-                            onValueChange={({ floatValue }) => {
-                                if (floatValue !== undefined) onObservationsChange(Math.round(floatValue))
-                            }}
-                            customInput={AutosizeInput}
-                        />
-                        <span className="text-sm text-primary/60">observations/mo</span>
-                    </div>
-                    <span className="text-base font-bold text-primary tabular-nums">{formatUSD(cost)}</span>
+            <div className="@container mt-6">
+                <UsageSliderHeader unit="Observations" />
+                <div className="divide-y divide-primary border-t border-primary">
+                    <UsageSliderRow
+                        label="Observations"
+                        subtitle={`$${(estimate.model.creditsPerObservation * creditPrice).toFixed(
+                            2
+                        )} each after the first ${formatCompact(freeObservations)}`}
+                        value={observations}
+                        onChange={onObservationsChange}
+                        marks={marks}
+                        min={0}
+                        max={MAX_OBSERVATIONS}
+                    />
                 </div>
-                <LogSlider
-                    stepsInRange={100}
-                    marks={marks}
-                    min={freeObservations}
-                    max={MAX_OBSERVATIONS}
-                    onChange={(value: number) => onObservationsChange(Math.round(sliderCurve(value)))}
-                    value={inverseCurve(volume)}
-                />
-                <p className="text-sm text-green font-semibold mt-8 mb-0">
-                    First {freeObservations.toLocaleString()} observations free –&nbsp;<em>every month!</em>
-                </p>
+                <div className="pr-1.5 pt-3 border-t border-primary">
+                    <span className="text-sm text-secondary">
+                        The first {formatCompact(freeObservations)} observations are free, every month.
+                    </span>
+                </div>
             </div>
         </>
     )

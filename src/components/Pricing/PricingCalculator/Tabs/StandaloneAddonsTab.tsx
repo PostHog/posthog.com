@@ -55,7 +55,7 @@ export default function StandaloneAddonsTab({ activeProduct, setVolume, setProdu
     const [addonData, setAddonData] = useState(
         () =>
             activeProduct.addonSliders?.map((addon) => ({
-                volume: 0,
+                volume: addon.volume ?? addon.sliderConfig?.min ?? 0,
                 cost: 0,
                 costByTier: [],
             })) || []
