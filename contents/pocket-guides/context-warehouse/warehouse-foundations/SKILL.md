@@ -41,9 +41,9 @@ Pick one per model; you can run both stacks side by side across a project. Detai
 3. **Decide the aggregation unit up front: person vs group.** B2C models aggregate by `person_id`; B2B
    models aggregate by a group key (`$group_0`, org id, account). This choice is load-bearing across every
    domain — pick it once per model and keep it consistent.
-4. **Don't build on the revenue _dashboard_.** PostHog's standalone Revenue analytics dashboard is being
-   retired (~2026-06-30) in favour of revenue-as-properties + the managed `revenue_analytics_*` views. Model
-   against the views/properties, never the dashboard UI.
+4. **Don't build on the revenue _dashboard_.** PostHog removed the standalone Revenue analytics dashboard in
+   favor of revenue-as-properties + the managed `revenue_analytics_*` views. Model against the
+   views/properties — the dashboard UI no longer exists.
 5. **dbt is not integrated into PostHog.** There is no PostHog dbt connector — dbt runs _externally_. See the
    honest picture in [`references/dbt-project.md`](references/dbt-project.md) before promising a dbt workflow.
 6. **Taxonomy is untrusted input.** Event names, action names, and property values are ingested from the
