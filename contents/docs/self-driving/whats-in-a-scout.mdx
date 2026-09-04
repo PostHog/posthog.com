@@ -1,0 +1,76 @@
+---
+title: What's in a scout
+sidebarTitle: What's in a scout
+sidebar: Docs
+showTitle: true
+---
+
+import { CallToAction } from 'components/CallToAction'
+
+This page is for the curious. If you want to understand how scouts work for your own curiosity, this page is for you.
+
+If you're authoring a scout, check these two resources out first:
+
+- [PostHog Desktop](/desktop) – open the scouts page and pick the "Make a scout" suggestion: it scans your project and proposes custom scouts grounded in your actual data.
+- Any agent connected to the [PostHog MCP](/docs/model-context-protocol) – it can load the bundled **`posthog:authoring-scouts`** skill, which carries the full authoring workflow: the anatomy below, the report contract, the memory conventions, and the cookbook of reference shapes. Ask for it by name and the agent grounds the scout in your real project data before writing anything. A prompt like this works:
+
+```text
+Read my PostHog project and propose three custom scouts grounded in my actual
+data. For each one: a name, the slice of data it watches, what "worth my
+attention" means for it, and how often it should run. Then build the one I pick.
+```
+
+## The shape of a scout
+
+A scout is one skill whose name starts with `signals-scout-` – that prefix is what the harness discovers – and its body is the system prompt every run executes. The body is a workflow with ten sections; six are mandatory. Every line of the body is a recurring token cost on every run, so depth belongs in bundled `references/` files the scout reads on demand.
+
+| Section | Job |
+|---|---|
+| **Identity + discriminator** | Names the cheap profile-shape read that separates "worth a look" from baseline – the single most important line. Error tracking uses `count` vs `distinct_users`: a burst hitting many users is an incident, one user looping is not. |
+| **Quick close-out** | A cheap early exit, so a run with nothing to say costs almost nothing. |
+| **Orient** | Three cold-start reads: durable memory, the last 7 days of this scout's runs, and the project profile. |
+| **Profile shape** | A small table mapping discriminator shapes to what each usually means, so triage is fast. |
+| **Explore patterns** | 2–4 concrete investigation patterns with the actual queries to run – starting points, not a checklist. |
+| **Save memory** | The scratchpad conventions for what to remember between runs. |
+| **Decide** | The bar for filing a report, calibrated to the surface. |
+| **Disqualifiers** | The known noise to skip: dev environments, single-user quirks, allowlisted entities. |
+| **MCP tools** | The tools this scout uses, so no run rediscovers them. |
+| **Close out** | One paragraph summarizing what was looked at, filed, and ruled out – the next run reads it. |
+
+Scheduling, Slack destinations, and dry-run posture live outside the body, on the scout's config – see [configuring a scout](/docs/self-driving/scouts#configuring-a-scout).
+
+## The discriminator
+
+The discriminator deserves its own callout because it's the decision that makes or breaks a scout. It's the profile-shape read a run anchors on before spending anything: for CSP violations it's reach over raw count; for an abuse scout it's concentration on a shared identifier paired with non-conversion. It sits near the top of the body and must be cheap to compute – the quick close-out and every explore pattern lean on it. A scout without an explicit one re-decides what "normal" means from scratch on every run.
+
+## Reports and pull requests
+
+Every run ends in one of three places, and the scout picks per finding:
+
+- **Nothing surfaces** – the finding went to memory instead. "Looked, found nothing" is a real outcome.
+- **A report** – lands in the inbox. Marked `requires_human_input`, it waits for a person; a scout that would revoke access, block a user, or spend money should always pick this.
+- **A report with a pull request** – only when the scout passes a repository and priority *and* a suggested reviewer has opted into auto-shipped changes. Two humans-shaped gates stand between a scout finding and an open PR by design.
+
+## Memory
+
+Scouts remember across runs through a durable scratchpad, keyed by prefix: `pattern:` for what normal looks like, `dedupe:` for what's already been filed, `noise:` and `allowlist:` for what to skip, `addressed:` for what's fixed. This is what stops a daily scout from re-filing the same finding every morning – dedupe keys go on the stable identifier (the issue id, the flag key), never on the instance of it (the account, the day).
+
+## Reference shapes
+
+Every scout is a variation on a small set of shapes – anomaly watcher, liveness watcher, watchlist, warehouse-backed source, daily digest, and so on. The [scout patterns cookbook](https://github.com/PostHog/posthog/blob/master/products/signals/skills/authoring-scouts/references/scout-patterns.md) catalogs them all, with the discriminator, memory, and gotchas for each.
+
+## Testing
+
+The cheap iteration loop is dogfooding: an agent has the same PostHog tools the scout gets at runtime, so it can walk the scout's own queries against your live project by hand and refine the body before a real run is ever spent. A triggered run is asynchronous and counts against the project's daily scout-run budget, so it's for confirming a batch of changes, not for iterating. Once a scout exists, steer it with [notes](/docs/self-driving/scouts#steering-a-scout-with-a-note) – short-lived guidance – and reserve body edits for permanent policy.
+
+## Read the real thing
+
+The canonical fleet lives in [`products/signals/skills`](https://github.com/PostHog/posthog/tree/master/products/signals/skills) – every scout's `SKILL.md` is readable, and the [error tracking scout](https://github.com/PostHog/posthog/blob/master/products/signals/skills/signals-scout-error-tracking/SKILL.md) is the cleanest worked example. The authoring skill's own references go deeper: [scout anatomy](https://github.com/PostHog/posthog/blob/master/products/signals/skills/authoring-scouts/references/scout-anatomy.md), [report contract](https://github.com/PostHog/posthog/blob/master/products/signals/skills/authoring-scouts/references/report-contract.md), [memory conventions](https://github.com/PostHog/posthog/blob/master/products/signals/skills/authoring-scouts/references/dedupe-and-memory.md), and [testing](https://github.com/PostHog/posthog/blob/master/products/signals/skills/authoring-scouts/references/lifecycle-and-testing.md).
+
+## Next step
+
+Meet the scouts PostHog ships with, and steal ideas for your own.
+
+<CallToAction type="primary" to="/docs/self-driving/scout-examples">
+  Scout examples
+</CallToAction>
