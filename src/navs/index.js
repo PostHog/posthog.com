@@ -1492,6 +1492,10 @@ export const handbookSidebar = [
                         url: '/handbook/cs-and-onboarding/engaging-unengaged-customers',
                     },
                     {
+                        name: 'Cost optimization',
+                        url: '/handbook/cs-and-onboarding/cost-optimization',
+                    },
+                    {
                         name: 'Automation & AI',
                     },
                     {
