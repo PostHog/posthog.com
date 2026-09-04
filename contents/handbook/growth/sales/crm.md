@@ -48,7 +48,7 @@ When a `user signed up` (Cloud signup) event is ingested into PostHog, a <Privat
 
 We have a [contact us form](/talk-to-a-human) on posthog.com where we ask users can get in touch with us. The sales@ alias gets an email notification and a notification is also sent to [#sales-leads](https://posthog.slack.com/archives/C054BJSHG82) in Slack when one of these forms is submitted.
 
-Each submission sends a server-side PostHog event and a webhook into our lead routing pipeline (Default). The lead gateway then creates or updates the Salesforce contact, links it to the account, and creates a Lead Task. Tasks are then automatically assigned to the right team member based on account ownership and territory (see below).
+Each submission sends a server-side PostHog event and a webhook into our lead routing pipeline (Default). The [lead-gateway](https://github.com/PostHog/lead-gateway) then creates or updates the Salesforce contact, links it to the account, and creates a Lead Task. Tasks are then automatically assigned to the right team member based on account ownership and territory (see below).
 
 If the submission is clearly a support or billing request, you don’t need to reach out manually:
 - On the task, select the disqualification reason **Billing Support Request** or **Support Request**.
