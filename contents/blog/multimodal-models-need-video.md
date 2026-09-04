@@ -29,7 +29,7 @@ As a result, most of what the Session Replay team has shipped over the past coup
 
 [Replay Vision](/replay-vision) started from the thought that we should stop rationing attention and start automating it instead. Recent multimodal AI models are good enough at watching video that you can hand them a recording and get a sensible account of what the user did and where it went wrong. Apply this to session recordings, and you get details on every one, not just the ones someone had time for. 
 
-This is the first of two posts about building it. This one is about the pipeline that turns recording data into videos that a model can look at. The second is about the model, and about controlling what it pays attention to.
+This post covers the first big problem we hit building it: models couldn't actually see a replay.
 
 ## A session replay might look like a video, but it's not (and we needed it to be)
 
@@ -94,6 +94,6 @@ With `beginFrame` gating the compositor and the virtual clock gating the player,
 
 ![Doc Brown hoggie connecting the cable at the moment the lightning strikes](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/doc_brown_76d9d75886.png)
 
-The rasterizer was the unlock we needed to get recordings in front of a multimodal model at all. Getting useful answers out of the model turned out to be a separate problem. Part two is about what we show the model, what we leave out, and how we stopped it fixating on irrelevant details.
+The rasterizer was the unlock we needed to get recordings in front of a multimodal model at all. Getting useful answers out of the model turned out to be a separate problem: what to show it, what to leave out, and how to stop it fixating on irrelevant details. That's a post of its own, coming soon.
 
 The version of our rasterizer described in this blog post has been in production since March 2026. It runs as hundreds of concurrent jobs across many pods and powers all of Replay Vision, as well as some features in Session Replay itself. At the time of writing it has rasterized more than 370 years of recordings into roughly 3.5 million videos.
