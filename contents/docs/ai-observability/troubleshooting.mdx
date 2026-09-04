@@ -19,6 +19,22 @@ There are a few reasons why you might not be seeing any LLM events:
 - There might be a delay in the events being processed. You can check the status of our ingestion on the [PostHog status page](https://status.posthog.com/).
 - If you are in a serverless environment make sure you are calling `posthog.shutdown()` before ending the request.
 
+## Why does my generation show no output?
+
+The trace view shows **No output** when a generation event has no response content to render. When the event carries enough signal to explain the gap, a sentence appears under the box. Each sentence points at a different cause:
+
+| The notice says | What happened | What to do |
+| --- | --- | --- |
+| The response hit its token limit. | The provider stopped the response at the request's output limit, so the content was cut off. | Raise `max_tokens` (or your provider's equivalent) on the request. |
+| The provider blocked the response. | The provider's safety or content filter stopped the response before any content was returned. | Review the prompt and your provider's safety settings. The provider's own response includes the details. |
+| The model may have spent its budget on reasoning. | The model used the output budget on reasoning tokens and returned no text. | Raise the output token limit, or lower the reasoning effort or thinking budget. |
+| All of them may have been reasoning. | The reasoning token count matches the output token count, so every billed token was likely reasoning. | Raise the output token limit, or lower the reasoning effort or thinking budget. |
+| None of them were text. | The provider reported that none of the output tokens were text. The output may have been another modality, like audio or images. | Check which output modalities the request asked for. |
+| The response may have been cut short, or the SDK may not have captured it. | The event has no stop reason, so PostHog can't tell whether the response was interrupted or the content never reached the event. | Update the PostHog SDK to the latest version. If you [capture generation events manually](/docs/ai-observability/installation/manual-capture), include `$ai_output_choices` and `$ai_stop_reason`. |
+| Only *No output*, with no sentence under it | The provider billed no tokens for this generation. | Check the provider-side logs for this request. |
+
+These sentences are read from the event's `$ai_output_tokens`, `$ai_reasoning_tokens`, `$ai_text_output_tokens`, and `$ai_stop_reason` properties. Events captured by older SDK versions often lack `$ai_stop_reason`, so updating the SDK is the quickest way to get a specific explanation.
+
 ## Solved community questions
 
 <SolvedQuestions

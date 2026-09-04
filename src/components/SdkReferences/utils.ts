@@ -34,3 +34,20 @@ export const hasConcreteVersion = (version?: string): boolean => Boolean(version
  */
 export const typeHasPage = (type?: { id?: string; properties?: unknown; example?: unknown }): boolean =>
     Boolean(type?.id && type.id !== 'null' && (type.properties || type.example))
+
+/**
+ * Split a versioned SDK reference slug into its SDK and version.
+ *
+ * `posthog-python-7.26.0` -> `{ sdk: 'posthog-python', version: '7.26.0' }`
+ *
+ * Returns null for an unversioned or unrecognized slug, so callers can tell "no version asked
+ * for" from "a version that is no longer published".
+ */
+export const parseVersionedReferenceSlug = (slug: string): { sdk: string; version: string } | null => {
+    const trimmed = slug.replace(/^\/docs\/references\//, '').replace(/\.md$/, '')
+    // Longest id first, or `posthog-react-native-1.2.3` resolves to `posthog-react`.
+    const sdk = [...SUPPORTED_SDK_IDS].sort((a, b) => b.length - a.length).find((id) => trimmed.startsWith(`${id}-`))
+    if (!sdk) return null
+    const version = trimmed.slice(sdk.length + 1).split('/')[0]
+    return version ? { sdk, version } : null
+}

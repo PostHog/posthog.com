@@ -22,13 +22,19 @@ Beyond this, we recommend:
 
 2. Documenting conclusions and findings in the description field of your experiment. This helps preserve historical context for future team members.
 
-3. Removing the experiment and losing variant's code.
+3. Removing the experiment and losing variant's code. PostHog can do this for you by [opening a flag cleanup PR](#opening-a-flag-cleanup-pr).
 
 4. Archiving the experiment.
 
 5. Disabling or deleting the feature flag once the winning variant is hardcoded in your application and the flag check has been removed from your code. You can [delete flags linked to non-running experiments](/docs/feature-flags/creating-feature-flags#deleting-flags-linked-to-experiments) without losing the experiment's historical data. Every active flag counts toward your [feature flag billing](/docs/feature-flags/cutting-costs), even if it's rolled out to 100% and no longer doing anything useful.
 
 Remember, experimentation is an iterative process. Each experiment teaches you something about your users, even when results aren't what you expected.
+
+### Opening a flag cleanup PR
+
+When ending an experiment, you can check **Open a draft PR removing `<flag key>` from your code** in the end experiment dialog. PostHog opens a draft pull request in your GitHub repository that removes the flag checks from your code. If you shipped a variant, its code path is kept. Review the PR before merging.
+
+This requires the GitHub integration to be connected in your project settings. If more than one repository is connected, pick one in the dialog. You can also set a default repository for all experiments in experiment settings.
 
 ### Ending an already rolled out experiment
 

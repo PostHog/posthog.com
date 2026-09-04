@@ -8,7 +8,7 @@ availability:
   enterprise: full
 ---
 
-> **Note:** Local evaluation is only available in the [Node](/docs/libraries/node), [Ruby](/docs/libraries/ruby), [Go](/docs/libraries/go), [Python](/docs/libraries/python), [C#/.NET](/docs/libraries/dotnet), [PHP](/docs/libraries/php), [Java](/docs/libraries/java), and [Rust](/docs/libraries/rust) SDKs. It requires a [feature flags secure API key](#step-1-find-your-feature-flags-secure-api-key), which is secret and must **not** be used in the frontend or exposed to users.
+> **Note:** Local evaluation is only available in the [Node](/docs/libraries/node), [Ruby](/docs/libraries/ruby), [Go](/docs/libraries/go), [Python](/docs/libraries/python), [C#/.NET](/docs/libraries/dotnet), [PHP](/docs/libraries/php), [Java](/docs/libraries/java), [Rust](/docs/libraries/rust), and [Elixir](/docs/libraries/elixir) SDKs. It requires a [feature flags secure API key](#step-1-find-your-feature-flags-secure-api-key), which is secret and must **not** be used in the frontend or exposed to users.
 
 > **Building a frontend, mobile, or CLI app?** Don't use local evaluation or the secure API key on the client. Instead, evaluate flags with a [client-side SDK](/docs/libraries) or by calling the public [`/flags` endpoint](/docs/api/flags) with your [project API key](/docs/feature-flags/installation#where-to-find-your-project-api-key) — the project API key is public and safe to expose to users.
 
@@ -284,6 +284,27 @@ let flags = client.evaluate_flags(
 let flag = flags.get_flag("flag-key");
 ```
 
+```elixir
+{:ok, flags} =
+  PostHog.FeatureFlags.evaluate_flags(%{
+    distinct_id: "distinct_id_of_the_user",
+    # Include any person properties, groups, or group properties required to evaluate the flag
+    person_properties: %{property_name: "value"},
+    groups: %{
+      your_group_type: "your_group_id",
+      another_group_type: "another_group_id"
+    },
+    group_properties: %{
+      your_group_type: %{group_property_name: "value"},
+      another_group_type: %{group_property_name: "another value"}
+    },
+    # Optional. Defaults to false. Set to true to prevent remote fallback.
+    only_evaluate_locally: false
+  })
+
+flag_value = PostHog.FeatureFlags.Evaluations.get_flag(flags, "flag-key")
+```
+
 </MultiLanguage>
 
 ## Reloading flags
@@ -322,6 +343,12 @@ posthog.reloadFeatureFlags()
 // Manual reload is not currently supported.
 ```
 
+```elixir
+# The Elixir SDK automatically reloads flags in the background at the interval
+# specified by feature_flags_poll_interval_ms (default: 30_000).
+# Manual reload is not currently supported.
+```
+
 </MultiLanguage>
 
 ## Restriction on local evaluation
@@ -334,7 +361,7 @@ Local evaluation is not possible for flags that:
 2. Are linked to an [early access feature](/docs/feature-flags/early-access-feature-management)
 3. Depend on [static cohorts](/docs/data/cohorts#static-cohorts)
 4. Use the `is_not_set` property operator, since local evaluation can only check properties you provide — it can't determine whether a property is absent on a person.
-5. Have ["Stop evaluation at first matching condition set"](/docs/feature-flags/creating-feature-flags#stop-evaluation-at-first-matching-condition-set) (early exit) enabled. Local evaluation currently always evaluates all condition groups, even when this setting is enabled. This is a temporary limitation while support is rolled out across SDKs. For now, the setting only takes effect when flags are evaluated through the `/flags` endpoint.
+5. Have ["Stop evaluation at first matching condition set"](/docs/feature-flags/creating-feature-flags#stop-evaluation-at-first-matching-condition-set) (early exit) enabled. This restriction does not apply to v2.15.0 and above of our [Elixir](/docs/libraries/elixir) SDK, which honors early exit during local evaluation. Other SDKs currently evaluate all condition groups locally, even when this setting is enabled. This is a temporary limitation while support is rolled out across SDKs. For those SDKs, the setting only takes effect when flags are evaluated through the `/flags` endpoint.
 
 ### Dynamic cohort restrictions
 
@@ -348,4 +375,4 @@ However, there are a few constraints, and cohorts cannot be evaluated locally if
 2. They have non-person properties.
 3. There's more than one cohort in the feature flag definition.
 4. The cohort in the feature flag is in the same group as another condition.
-5. The cohort has nested AND-OR filters. Only simple cohorts that have a top level OR group, and inner level ANDs will be evaluated locally.
+5. The cohort has nested AND-OR filters. In affected SDKs, only simple cohorts that have a top level OR group, and inner level ANDs can be evaluated locally. This restriction does not apply to v2.15.0 and above of our [Elixir](/docs/libraries/elixir) SDK, which supports nested AND/OR groups and negation during local evaluation.

@@ -9,6 +9,10 @@ import { useToast } from '../context/Toast'
 // Sentinel value used by posthog-js for cookieless tracking mode
 const COOKIELESS_SENTINEL_VALUE = '$posthog_cookieless'
 
+// Deadline for the OAuth resolve call. Without it a slow or hung request keeps
+// the sign-in page on an unbounded spinner with no way out.
+const RESOLVE_TIMEOUT_MS = 15000
+
 // Shared POST + JSON-parse + Strapi error extraction for the /api/auth/posthog/*
 // endpoints. Returns the parsed body plus a normalized `error` string; callers
 // handle the success shape (jwt vs ok). Throws only on network/JSON failure.
@@ -43,7 +47,7 @@ export type User = {
         id: number
     } & ProfileData
     role: {
-        type: 'authenticated' | 'public' | 'moderator'
+        type: 'authenticated' | 'public' | 'moderator' | 'community-moderator'
     }
     // Absent until the user first earns points — Strapi only creates the component on write
     wallet?: Wallet
@@ -55,6 +59,7 @@ export type User = {
         monthlyCount: number
     }
     picasso?: boolean
+    webmaster?: boolean
     // Surfaced by the Strapi `me` override (the raw posthogUserId is private).
     // True when a PostHog OAuth identity is linked to this account.
     hasPosthogLogin?: boolean
@@ -71,6 +76,7 @@ type UserContextValue = {
     isLoading: boolean
     user: User | null
     isModerator: boolean
+    isForumModerator: boolean
     setUser: React.Dispatch<React.SetStateAction<User | null>>
     fetchUser: (token?: string | null) => Promise<User | null>
     getJwt: () => Promise<string | null>
@@ -126,6 +132,7 @@ export const UserContext = createContext<UserContextValue>({
     isLoading: true,
     user: null,
     isModerator: false,
+    isForumModerator: false,
     setUser: () => {
         // noop
     },
@@ -284,19 +291,41 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
         try {
             posthog?.capture('squeak oauth login start', { provider })
 
-            const res = await fetch(
-                `${SQUEAK_HOST}/api/auth/posthog/resolve?access_token=${encodeURIComponent(accessToken)}`
-            )
+            const controller = new AbortController()
+            const timeout = setTimeout(() => controller.abort(), RESOLVE_TIMEOUT_MS)
+            let res: Response
+            try {
+                res = await fetch(
+                    `${SQUEAK_HOST}/api/auth/posthog/resolve?access_token=${encodeURIComponent(accessToken)}`,
+                    { signal: controller.signal }
+                )
+            } finally {
+                clearTimeout(timeout)
+            }
 
             const data = await res.json()
 
             if (!res.ok) {
-                throw new Error(data?.error?.message || data?.message)
+                const message = data?.error?.message || data?.message || `Sign-in failed (HTTP ${res.status}).`
+                // Capture the status and message so the failure is diagnosable.
+                posthog?.capture('squeak error', {
+                    source: 'useUser.loginWithProvider',
+                    provider,
+                    status: res.status,
+                    error: message,
+                })
+                console.error(message)
+                return { error: message }
             }
 
             // Non-employee with no durable link and no email match: the redirect
             // page renders the disambiguation screen (create vs. log in to link).
             if (data.status === 'needs_disambiguation') {
+                // Emit an event so this fork is not read as a silent failure.
+                posthog?.capture('squeak oauth login needs disambiguation', {
+                    provider,
+                    emailInUse: data.emailInUse,
+                })
                 return {
                     status: 'needs_disambiguation',
                     pendingToken: data.pendingToken,
@@ -313,13 +342,20 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
 
             return user
         } catch (error) {
+            const timedOut = error instanceof DOMException && error.name === 'AbortError'
+
             posthog?.capture('squeak error', {
                 source: 'useUser.loginWithProvider',
                 provider,
-                error: JSON.stringify(error),
+                timed_out: timedOut,
+                error: error instanceof Error ? error.message : String(error),
             })
 
             console.error(error)
+
+            if (timedOut) {
+                return { error: 'Signing in took too long. Please try again.' }
+            }
 
             if (error instanceof Error) {
                 return { error: error.message }
@@ -892,6 +928,7 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
         user,
         setUser,
         isModerator: user?.role?.type === 'moderator',
+        isForumModerator: user?.role?.type === 'moderator' || user?.role?.type === 'community-moderator',
         isLoading,
         getJwt,
         login,

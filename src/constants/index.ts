@@ -11,8 +11,20 @@ export const MARKDOWN_CONTENT_PATHS = [
     '/pocket-guides',
     '/pricing',
 ] as const
-export const isMarkdownContentPath = (path: string) =>
-    MARKDOWN_CONTENT_PATHS.some((p) => path === p || path.startsWith(`${p}/`))
+
+// Section index pages have no scraped `.md`. generateRawMarkdownPages only sees nodes
+// matching `/^/(docs|handbook|...)/` (onPostBuild.ts) — note the trailing slash, which
+// requires a segment after the section name — so `/docs` and friends are never processed.
+// `/changelog` and `/pricing` are the exceptions: generateChangelogMd and generatePricingMd
+// write those two by hand.
+const SECTION_ROOTS_WITH_MARKDOWN: readonly string[] = ['/changelog', '/pricing']
+
+export const isMarkdownContentPath = (path: string): boolean => {
+    const normalized = path.replace(/\/$/, '')
+    return MARKDOWN_CONTENT_PATHS.some((p) =>
+        normalized === p ? SECTION_ROOTS_WITH_MARKDOWN.includes(p) : normalized.startsWith(`${p}/`)
+    )
+}
 
 // Default avatar fallback (Max the hedgehog)
 export const AVATAR_FALLBACK_URL =

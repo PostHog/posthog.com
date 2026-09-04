@@ -62,7 +62,7 @@ Protected Health Information (PHI) is a _type_ of PII as defined by the US HIPAA
 
 PHI that's connected to individual identifiers, such as name, address, etc.,  must be treated with extreme care under HIPAA. Penalties for breaches include fines and even jail time in extreme cases.
 
-If HIPAA compliance is a concern for your business, read our guide to the [best HIPAA-compliant analytics tools](/blog/best-hipaa-compliant-analytics-tools). And, in case you were wondering, [Google Analytics is not HIPAA compliant](/blog/is-google-analytics-hipaa-compliant).
+If HIPAA compliance is a concern for your business, read our guide to the [best HIPAA-compliant analytics tools](/compare/best-hipaa-compliant-analytics-tools). And, in case you were wondering, [Google Analytics is not HIPAA compliant](/blog/is-google-analytics-hipaa-compliant).
 
 ## What is personal data?
 

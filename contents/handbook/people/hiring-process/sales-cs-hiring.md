@@ -78,7 +78,7 @@ A Sales and CS SuperDay usually looks like this (_there is a degree of flexibili
 
 Overall, you should spend at least 80% of your time and energy on the task and less than 20% on meeting people, as we will base our decision on your output of the day. However, we encourage everyone to use the Slack channel as much as needed for any questions or problems. 
 
-> In line with our [values](/handbook/company/values) and [culture](/handbook/company/culture), you might get short replies like "step on toes" or "bias for action".
+> In line with our [values](/handbook/values) and [culture](/handbook/company/culture), you might get short replies like "step on toes" or "bias for action".
 
 ### CS and FDE hiring process
 
@@ -111,4 +111,4 @@ A CS and FDE SuperDay usually looks like this (_there is a degree of flexibility
 
 Overall, you should spend at least 80% of your time and energy on the task and less than 20% on meeting people, as we will base our decision on your output of the day. However, we encourage everyone to use the Slack channel as much as needed for any questions or problems.
 
-> In line with our [values](/handbook/company/values) and [culture](/handbook/company/culture), you might get short replies like "step on toes" or "bias for action".
+> In line with our [values](/handbook/values) and [culture](/handbook/company/culture), you might get short replies like "step on toes" or "bias for action".

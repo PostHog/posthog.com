@@ -172,7 +172,7 @@ No more than 6 people, but that's the only rule. It could be any group of people
 
 Eventually, yes. Other companies have a UX team that build components for everyone to use. Since we currently use [Ant Design](https://ant.design/), we don't need this just yet.
 
-### Can I still [step on toes](/handbook/company/values)?
+### Can I still [step on toes](/handbook/values)?
 
 Yes. In fact, it's actively encouraged. 
 

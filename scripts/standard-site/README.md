@@ -30,8 +30,7 @@ A manifest of everything the sync would write is always emitted to **`public/sta
 
 | Env var | Effect |
 |---|---|
-| `AWS_CODEPIPELINE=true` | Production build → sync runs (this is the normal CI path). |
-| `STANDARD_SITE_SYNC=true` | Forces the sync to run in any build (e.g. locally). |
+| `STANDARD_SITE_SYNC=true` | Sync runs (required for production and local). |
 | `STANDARD_SITE_DRY_RUN=true` | Computes records + writes the manifest, but makes **no** PDS calls. |
 | `BSKY_APP_PASSWORD` | A `posthog.com` Bluesky app password. Required for real writes; if absent the sync logs and no-ops (never fails the build). |
 
@@ -39,7 +38,7 @@ The sync never throws fatally — any error is logged and the build continues.
 
 ### CI setup (one time)
 
-Add **`BSKY_APP_PASSWORD`** as a secret in the production build environment (AWS CodePipeline). Generate it while signed in as `posthog.com` at https://bsky.app/settings/app-passwords. Once set, every production deploy keeps the document records in sync (just like the RSS feed regenerates — but as authenticated PDS writes).
+Add **`BSKY_APP_PASSWORD`** and **`STANDARD_SITE_SYNC=true`** in the production build environment. Generate the password while signed in as `posthog.com` at https://bsky.app/settings/app-passwords. Once set, every production deploy keeps the document records in sync (just like the RSS feed regenerates — but as authenticated PDS writes).
 
 ### Local preview (no writes)
 

@@ -240,7 +240,7 @@ Some rules:
 -   They need to share a copy of their current contract/pricing/bank statement as proof.
 -   They sign up to an annual contract worth $20k+/year, paid up front.
 -   Their usage in the overlap period needs to be proportionate to the contract they've signed with PostHog, ie. if they sign a $50k PostHog contract and have 6 months to run, they get $25k of PostHog credit for free.
--   The competitor they're using has to be 'real', ie. not some random side project. As a general rule, anyone we have written a [comparison article](/blog/tags/comparisons) about counts.
+-   The competitor they're using has to be 'real', ie. not some random side project. As a general rule, anyone we have written a [comparison article](/compare) about counts.
 -   Any buyout is subject to team lead approval before it goes on an order form.
 -   We have final discretion on deciding who gets the deal.
 -   We can still provide a standard free trial period of 2-4 weeks before they sign the contract, as they will likely need to figure out whether PostHog is right for them before committing.
@@ -266,7 +266,7 @@ This is also structure 3 in [how to structure free credits in special terms](#ho
 
 ## New business renewal credits
 
-If a customer is currently _not_ a paying user of PostHog, but is a user of one of [our competitors](/blog/tags/comparisons), about to renew, and is shopping for a better deal, we are willing to significantly undercut the quoted renewal price. This is because those customers are not that likely to move over to us anyway, and quoting them a lower price works out in our favour either way:
+If a customer is currently _not_ a paying user of PostHog, but is a user of one of [our competitors](/compare), about to renew, and is shopping for a better deal, we are willing to significantly undercut the quoted renewal price. This is because those customers are not that likely to move over to us anyway, and quoting them a lower price works out in our favour either way:
 
 1. If the competitor matches our much lower offer, and the customer accepts, we've reduced their revenue by a significant amount
 2. If the customer accepts, we've gained net new revenue we otherwise would have missed out on, and we have the opportunity to sell more.
