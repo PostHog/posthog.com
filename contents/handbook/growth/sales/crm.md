@@ -332,6 +332,8 @@ The "Opportunity Notes" section is to track key actions and next steps to manage
   -   For the New Business Sales Team, the Next Step should have three specific elements:  1) a timestamp  -- when was this change made, 2) the owner at the customer for the next step -- who do we expect to take the action? 3) a binary outcome - (what will we/you get) related to the stage, with the next step date reflecting when the outcome is expected.
 -   Next Step Date: Enter the date by which the next step should be completed. This helps in maintaining timelines and keeping follow-ups on track.
 
+> Make sure you accurately track known competitors in the relevant field, as we may trigger a TAE/TAM/CSM overlay to improve our chances of closing the deal.
+
 ### Opportunity closure details
 
 This section is to add additional information for opportunities that are won or lost to capture context and details to setup customer account correctly:
