@@ -43,7 +43,7 @@ export const dataWarehouse = {
         classes: 'absolute bottom-0 right-0 max-w-[140px]',
     },
     slider: {
-        marks: [1000000, 10000000, 100000000, 1000000000],
+        marks: [1000000, 100000000, 1000000000],
         min: 1000000,
         max: 1000000000,
     },
@@ -54,7 +54,7 @@ export const dataWarehouse = {
             key: 'data_warehouse_historical',
             label: 'Data warehouse historical syncs',
             sliderConfig: {
-                marks: [1000000, 10000000, 100000000, 1000000000, 10000000000],
+                marks: [1000000, 1000000000, 10000000000],
                 min: 1000000,
                 max: 10000000000,
             },
