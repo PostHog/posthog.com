@@ -1,11 +1,11 @@
 import { IconInfo } from '@posthog/icons'
 import { PricingTiers } from 'components/Pricing/Plans'
-import { NonLinearSlider, nonLinearCurve, reverseNonLinearCurve } from 'components/Pricing/PricingSlider/Slider'
 import { calculatePrice } from 'components/Pricing/PricingCalculator/calculatorLogic'
 import React, { useEffect, useMemo, useState } from 'react'
 import qs from 'qs'
 import Tooltip from 'components/Tooltip'
 import { Addons } from '../Tabbed'
+import UsageSliderRow, { UsageSliderHeader } from '../UsageSliderRow'
 import { useApp } from '../../../../context/App'
 import EventTypesModal, { EVENT_TYPES_MODAL_KEY } from '../EventTypesModal'
 
@@ -69,18 +69,6 @@ export const analyticsSliders = [
     },
 ]
 
-const formatCompact = (n) =>
-    Intl.NumberFormat('en', { notation: 'compact', compactDisplay: 'short', maximumFractionDigits: 1 }).format(n || 0)
-
-const parseCompact = (value) => {
-    const match = String(value)
-        .trim()
-        .match(/^([\d.]+)\s*([kmb])?$/i)
-    if (!match) return 0
-    const suffix = { k: 1e3, m: 1e6, b: 1e9 }[match[2]?.toLowerCase()] ?? 1
-    return Number(match[1]) * suffix
-}
-
 const firstPaidUnitAmount = (tiers) => tiers?.find((tier) => parseFloat(tier.unit_amount_usd) > 0)?.unit_amount_usd
 
 const getLabelByType = (key) => {
@@ -91,7 +79,7 @@ const getLabelByType = (key) => {
         : slider.label
 }
 
-const AnalyticsSlider = ({ marks, min, max, className = '', label, onChange, value, enhanced = '', unitPrice }) => {
+const EventTypeInfo = ({ enhanced }) => {
     const { addWindow } = useApp()
 
     const openEventTypes = () => {
@@ -101,57 +89,32 @@ const AnalyticsSlider = ({ marks, min, max, className = '', label, onChange, val
             ) as any
         )
     }
+
     return (
-        <div className={`${className} flex items-center gap-4 py-3 ${value ? '' : 'opacity-60'}`}>
-            <div className="w-48 shrink-0">
-                <p className="m-0 text-sm font-bold mb-0.5">
-                    {label}{' '}
-                    <span className="text-secondary">
-                        <Tooltip
-                            content={() => (
-                                <div className="max-w-[250px]">
-                                    <p className="text-sm mb-2">
-                                        {enhanced
-                                            ? 'Typically used for authenticated users where you know their email address or want to send custom properties'
-                                            : "No individually-identifiable info, analyzed in aggregate. These don't use person profiles."}
-                                    </p>
-                                    <p className="text-sm mb-0">
-                                        <button
-                                            onClick={openEventTypes}
-                                            className="text-red dark:text-yellow font-semibold text-sm"
-                                        >
-                                            Explain event types
-                                        </button>
-                                    </p>
-                                </div>
-                            )}
-                            placement="right"
-                        >
-                            <IconInfo className="size-4 inline-block relative -top-0.5" />
-                        </Tooltip>
-                    </span>
-                </p>
-                {unitPrice && <p className="m-0 text-xs text-secondary">${unitPrice} each after the first 1M</p>}
-            </div>
-            <div className="flex-1 flex justify-end min-w-0">
-                <div className="w-full @md:w-3/4">
-                    <NonLinearSlider
-                        stepsInRange={100}
-                        marks={marks}
-                        min={0}
-                        max={max}
-                        onChange={(value) => onChange(reverseNonLinearCurve(value))}
-                        value={nonLinearCurve(value || 0)}
-                    />
-                </div>
-            </div>
-            <input
-                type="text"
-                className="w-14 bg-transparent text-center font-bold text-sm border border-light dark:border-dark rounded-md py-1 px-1.5 focus:ring-0 focus:border-red dark:focus:border-yellow focus:bg-white dark:focus:bg-accent-dark"
-                value={formatCompact(value)}
-                onChange={(e) => onChange(parseCompact(e.target.value))}
-            />
-        </div>
+        <span className="text-secondary">
+            <Tooltip
+                content={() => (
+                    <div className="max-w-[250px]">
+                        <p className="text-sm mb-2">
+                            {enhanced
+                                ? 'Typically used for authenticated users where you know their email address or want to send custom properties'
+                                : "No individually-identifiable info, analyzed in aggregate. These don't use person profiles."}
+                        </p>
+                        <p className="text-sm mb-0">
+                            <button
+                                onClick={openEventTypes}
+                                className="text-red dark:text-yellow font-semibold text-sm"
+                            >
+                                Explain event types
+                            </button>
+                        </p>
+                    </div>
+                )}
+                placement="right"
+            >
+                <IconInfo className="size-4 inline-block relative -top-0.5" />
+            </Tooltip>
+        </span>
     )
 }
 
@@ -165,17 +128,23 @@ const SliderToggle = ({
 }) => {
     return (
         <>
-            {types.map(({ type, label }) => (
-                <AnalyticsSlider
-                    key={type}
-                    {...activeProduct.slider}
-                    onChange={(value) => setAnalyticsVolume(type, value)}
-                    value={analyticsData[type].volume}
-                    label={label}
-                    enhanced={analyticsData[type].enhanced}
-                    unitPrice={analyticsData[type].enhanced ? identifiedUnitPrice : anonymousUnitPrice}
-                />
-            ))}
+            {types.map(({ type, label }) => {
+                const unitPrice = analyticsData[type].enhanced ? identifiedUnitPrice : anonymousUnitPrice
+                return (
+                    <UsageSliderRow
+                        key={type}
+                        label={label}
+                        labelAccessory={<EventTypeInfo enhanced={analyticsData[type].enhanced} />}
+                        subtitle={unitPrice ? `$${unitPrice} each after the first 1M` : undefined}
+                        value={analyticsData[type].volume}
+                        onChange={(value) => setAnalyticsVolume(type, value)}
+                        marks={activeProduct.slider.marks}
+                        min={0}
+                        max={activeProduct.slider.max}
+                        curve="nonlinear"
+                    />
+                )
+            })}
         </>
     )
 }
@@ -298,11 +267,7 @@ export default function ProductAnalyticsTab({
                     })}
                 </div>
             </div>
-            <div className="flex items-center gap-4 pb-1">
-                <span className="w-48 shrink-0 text-xs uppercase text-secondary font-semibold">Usage</span>
-                <span className="flex-1" />
-                <span className="text-xs uppercase text-secondary shrink-0 font-semibold">Events / mo</span>
-            </div>
+            <UsageSliderHeader unit="Events" />
             <div className="divide-y divide-primary border-t border-primary">
                 {analyticsSliders.map((slider) => (
                     <SliderToggle

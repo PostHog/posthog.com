@@ -1,13 +1,14 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react'
 import Tooltip from 'components/Tooltip'
-import { IconInfo, IconLightBulb, IconPlus, IconSearch, IconStack, IconX } from '@posthog/icons'
+import { IconInfo, IconPlus, IconSearch, IconStack, IconX } from '@posthog/icons'
 import Toggle from 'components/Toggle'
 import { formatUSD } from '../PricingSlider/pricingSliderLogic'
 import { buildProductAddons, calculatePrice, getAddonsCostForProduct, getCalculatorTotal } from './calculatorLogic'
 import { Link, useStaticQuery } from 'gatsby'
 import { allProductsData } from '../Pricing'
 import useProducts from 'hooks/useProducts'
-import { LogSlider, inverseCurve, sliderCurve } from '../PricingSlider/Slider'
+import UsageSliderRow, { UsageSliderHeader } from './UsageSliderRow'
+import { formatCompact, pluralizeUnit } from '../utils'
 import { CTA, PricingTiers } from '../Plans'
 import ProductAnalyticsTab, {
     analyticsSliders,
@@ -25,8 +26,6 @@ import AgentEstimateLink, {
     AI_PRICING_EXPERIMENT_VARIANTS,
     AI_PRICING_FLAG,
 } from 'components/Pricing/AgentEstimateLink'
-import { NumericFormat } from 'react-number-format'
-import AutosizeInput from 'react-input-autosize'
 import { RenderInClient } from 'components/RenderInClient'
 import { useApp } from '../../../context/App'
 import AllProductsRatesModal, { ALL_PRODUCTS_RATES_MODAL_KEY } from './AllProductsRatesModal'
@@ -143,8 +142,10 @@ export const TabContent = ({
     analyticsData,
     setAnalyticsData,
 }) => {
-    const { type, cost, volume, billingData, slider, costByTier, freeAllocationText } = activeProduct
+    const { type, volume, billingData, slider, costByTier, freeAllocationText, startsAt, freeLimit } = activeProduct
     const [showBreakdown, setShowBreakdown] = useState(false)
+    const freeAmount = freeLimit || slider?.min
+    const unitLabel = pluralizeUnit(billingData.unit, 2)
 
     return (
         <>
@@ -170,82 +171,68 @@ export const TabContent = ({
                             setProduct={setProduct}
                         />
                     ) : (
-                        <>
-                            <div className="grid grid-cols-8">
-                                <div className="col-span-6">
-                                    <p className="mb-2">
-                                        <NumericFormat
-                                            inputClassName="bg-transparent text-center focus:ring-0 focus:border-red dark:focus:border-yellow focus:bg-white dark:focus:bg-accent-dark font-code max-w-[103px] text-sm border border-light hover:border-button dark:border-dark rounded-sm py-1 px-0 min-w-[25px] px-1"
+                        <div className="@container">
+                            {slider && (
+                                <>
+                                    <UsageSliderHeader unit={unitLabel} />
+                                    <div className="divide-y divide-primary border-t border-primary">
+                                        <UsageSliderRow
+                                            label={unitLabel}
+                                            subtitle={
+                                                startsAt
+                                                    ? `$${startsAt} each after the first ${formatCompact(freeAmount)}`
+                                                    : undefined
+                                            }
                                             value={volume}
-                                            thousandSeparator=","
-                                            onValueChange={({ floatValue }) => setVolume(type, floatValue)}
-                                            customInput={AutosizeInput}
-                                        />{' '}
-                                        <span className="opacity-70 text-sm">{billingData.unit}s/month</span>
-                                    </p>
-                                </div>
-                                <div className="col-span-2 text-right pr-3">
-                                    <p className="font-semibold mb-0">{formatUSD(cost)}</p>
-                                </div>
-                                {slider && (
-                                    <div className="col-span-full pr-1.5">
-                                        <LogSlider
-                                            stepsInRange={100}
+                                            onChange={(next) => setVolume(type, next)}
                                             marks={slider.marks}
-                                            min={slider.min}
+                                            min={0}
                                             max={slider.max}
-                                            onChange={(value) => setVolume(type, sliderCurve(value))}
-                                            value={inverseCurve(volume)}
+                                        />
+                                        <Addons
+                                            activeProduct={activeProduct}
+                                            addons={addons}
+                                            setAddons={setAddons}
+                                            volume={volume || slider.min}
+                                            analyticsData={analyticsData}
+                                            hideHeading
                                         />
                                     </div>
-                                )}
-                                <div className="col-span-full pr-1.5 mt-10 md:mt-8 pb-4 flex gap-3 items-center justify-between">
-                                    <span className="flex gap-1 items-center min-w-0">
-                                        <IconLightBulb className="size-5 inline-block text-[#4f9032] dark:text-green relative -top-px shrink-0" />
-                                        <span className="text-sm text-[#4f9032] dark:text-green font-semibold">
+                                    <div className="pr-1.5 pt-3 border-t border-primary">
+                                        <span className="text-sm text-secondary">
                                             {freeAllocationText ? (
-                                                freeAllocationText
+                                                <>{freeAllocationText} </>
                                             ) : (
                                                 <>
-                                                    First {Math.round(slider.min).toLocaleString()} {billingData.unit}s
-                                                    free –&nbsp;
-                                                    <em>every month!</em>
+                                                    The first {formatCompact(freeAmount)}{' '}
+                                                    {pluralizeUnit(billingData.unit, freeAmount)} are free, every month.{' '}
                                                 </>
                                             )}
+                                            {costByTier && (
+                                                <button
+                                                    onClick={() => setShowBreakdown(!showBreakdown)}
+                                                    className="text-red dark:text-yellow font-semibold underline"
+                                                >
+                                                    {showBreakdown
+                                                        ? 'Hide how we calculate this'
+                                                        : 'See how we calculate this'}
+                                                </button>
+                                            )}
                                         </span>
-                                    </span>
-                                    {costByTier && (
-                                        <button
-                                            onClick={() => setShowBreakdown(!showBreakdown)}
-                                            className="text-red dark:text-yellow font-semibold text-sm shrink-0"
-                                        >
-                                            {showBreakdown ? 'Hide how we calculate this' : 'See how we calculate this'}
-                                        </button>
-                                    )}
-                                </div>
-                            </div>
-                            {costByTier && (
-                                <>
-                                    {showBreakdown && (
-                                        <div className="mb-4 p-1 border border-input rounded-md">
-                                            <PricingTiers
-                                                plans={[{ tiers: costByTier }]}
-                                                unit={billingData.unit}
-                                                type={type}
-                                                showSubtotal
-                                            />
-                                        </div>
-                                    )}
-                                    <Addons
-                                        activeProduct={activeProduct}
-                                        addons={addons}
-                                        setAddons={setAddons}
-                                        volume={volume || slider.min}
-                                        analyticsData={analyticsData}
-                                    />
+                                    </div>
                                 </>
                             )}
-                        </>
+                            {showBreakdown && costByTier && (
+                                <div className="p-4 mt-4 rounded border border-primary bg-white dark:bg-accent-dark relative">
+                                    <PricingTiers
+                                        plans={[{ tiers: costByTier }]}
+                                        unit={billingData.unit}
+                                        type={type}
+                                        showSubtotal
+                                    />
+                                </div>
+                            )}
+                        </div>
                     ))}
             </div>
         </>
@@ -450,9 +437,15 @@ export default function Tabbed() {
             }
         }
 
-        volumeTypes.forEach((type) => {
-            setVolume(type, volumeParams[type].volume)
-        })
+        if (volumeTypes.length > 0) {
+            volumeTypes.forEach((type) => {
+                setVolume(type, volumeParams[type].volume)
+            })
+        } else {
+            products
+                .filter((product) => selectedTypes.includes(product.type) && product.type !== 'product_analytics')
+                .forEach((product) => setVolume(product.handle, 0))
+        }
 
         const el = document.getElementById('calculator')
         if (el && products.some((product) => volumeTypes.includes(product.type))) {
@@ -483,6 +476,9 @@ export default function Tabbed() {
         if (!type || selectedTypes.includes(type)) return
         if (type === 'product_analytics') {
             setAnalyticsData(getDefaultAnalyticsData())
+        } else {
+            const product = products.find((item) => item.type === type)
+            if (product) setVolume(product.handle, 0)
         }
         setSelectedTypes((current) => [...current, type])
         setActiveType(type)
