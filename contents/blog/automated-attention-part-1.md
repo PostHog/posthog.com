@@ -1,5 +1,5 @@
 ---
-title: 'Automated attention, part 1: Freezing time for fun and profit'
+title: 'Multimodal models need video, we froze time to give it to them'
 date: 2026-09-03
 rootPage: /blog
 sidebar: Blog
