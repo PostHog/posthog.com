@@ -77,6 +77,6 @@ With `beginFrame` gating the compositor and the virtual clock gating the player,
 
 ![Doc Brown hoggie connecting the cable at the moment the lightning strikes](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/doc_brown_76d9d75886.png)
 
-The rasterizer was the unlock we needed to turn every recording into something a multimodal model can watch. But a model that can see everything will happily look at everything, most of which doesn't matter. Part two is about directing its attention: what we show it, what we don't let it see, and how we stopped it fixating on irrelevant details.
+The rasterizer was the unlock we needed to get recordings in front of a multimodal model at all. Getting useful answers out of the model turned out to be a separate problem. Part two is about what we show the model, what we leave out, and how we stopped it fixating on irrelevant details.
 
-The version of our rasterizer described in this blog post has been in production since March 2026 and powers all of Replay Vision as well as some features in Session Replay itself. At the time of writing it has rasterized more than 370 years of recordings into roughly 3.5 million videos.
+The version of our rasterizer described in this blog post has been in production since March 2026. It runs as hundreds of concurrent jobs across many pods and powers all of Replay Vision, as well as some features in Session Replay itself. At the time of writing it has rasterized more than 370 years of recordings into roughly 3.5 million videos.
