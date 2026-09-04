@@ -76,10 +76,12 @@ We do provide some guidelines, resources, and assets from the brand team. For ex
 4. Official branded slides, logos, hogs – anything [brand asset](/handbook/brand/assets) related is readily available
 5. Guide on how to do optimal demos / talks – we've got the team [covered](/newsletter/how-to-demo) if they need it
 
-Even before reaching out to speakers with opportunities, we use a speaker-expertise skill that fellow builder relations teammate, [Kliment](/community/profiles/42638) created, that takes that employee's GitHub handle, researches their merged PRs across the PostHog org over the last 6 months and then produces an outline of their work, candidate tech-talk topics with detail, and a /10 talk-worthiness score per topic. This helps us come to the table with starting ideas rather than putting that on the employee.
+Even before reaching out to speakers with opportunities, we use a [speaker-expertise skill](https://github.com/PostHog/posthog.com/tree/master/.claude/skills/speaker-expertise) that fellow builder relations teammate, [Kliment](/community/profiles/42638) created, that takes that employee's GitHub handle, researches their merged PRs across the PostHog org over the last 6 months and then produces an outline of their work, candidate tech-talk topics with detail, and a /10 talk-worthiness score per topic. This helps us come to the table with starting ideas rather than putting that on the employee.
+
+*Here's an excerpt of a suggested talk topic that the skill provided when looking at [Alex L](https://posthog.com/community/profiles/33371)'s work. And below that you see Alex in action at the WAWTECH event in Warsaw*
+[The speaker-expertise skill in action identifying a talk topic based on a teammate's Github activity](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/event_blog_post_image_6_8828dcb046.png)
 
 ![Photos and a Slack recap from WAWTECH in Warsaw, where PostHog spoke about Self-driving to a packed room](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/event_blog_post_image_4_285b1afa5c.png)
-
 
 Some engineers organize their own events (dinners and meetups mostly) and speak at events without us even being involved. We love that and it's yet another example of our ["you're the driver"](/handbook/values#youre-the-driver) company value.
 
