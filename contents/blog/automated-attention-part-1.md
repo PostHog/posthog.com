@@ -52,7 +52,7 @@ The rasterizer worked well during initial testing, but once we started running m
 
 We saw videos that skipped over sections of the recording, and others that froze for several seconds at a time. The same recording would often produce videos of different lengths. It became clear that the rasterizer was very sensitive to CPU contention. Essentially we were running two independent processes, one rendering the recording and one capturing the frames. If rendering slowed down because another process was taking all the available CPU, capture would keep streaming on schedule and ffmpeg would just repeat the last frame it was given. That's the freeze. Or conversely, capture could be starved while rendering continued, and eventually frames would pile up and some would get dropped. That's the skip.
 
-![Four filmstrips: the rrweb data stream, the complete video with no contention, the freeze from starved rendering, and the skip from starved capture](https://res.cloudinary.com/dmukukwp6/image/upload/contention-filmstrip.png)
+![Four filmstrips: the rrweb data stream, the complete video with no contention, the freeze from starved rendering, and the skip from starved capture](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/contention_filmstrip_8aa21fe8fa.png)
 
 We needed a way to ensure determinism across these processes, regardless of the available resources. The same input data should always result in the same output data.
 
@@ -66,13 +66,13 @@ However, the JS-based rrweb player does not wait for the browser. If the browser
 
 The trick is to _freeze time_ inside the JS virtual machine. Before playback starts, we override `Date.now`, `performance.now`, `requestAnimationFrame`, `setTimeout` and `setInterval` inside the page with versions that don't track the wall clock at all. Time only moves when we call `beginFrame`, and it moves by exactly one frame interval. The player asks for an animation frame and gets one, it reads the clock and sees it ticking forward at a steady rate, and it never notices that a single tick might have taken 20 milliseconds or two seconds of real time to produce.
 
-![Four filmstrips: the rrweb data stream, the complete video with no contention, and complete videos for both starved rendering and starved capture, where each starved frame takes longer to produce but none go missing](https://res.cloudinary.com/dmukukwp6/image/upload/beginframe-filmstrip.png)
+![Four filmstrips: the rrweb data stream, the complete video with no contention, and complete videos for both starved rendering and starved capture, where each starved frame takes longer to produce but none go missing](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/beginframe_filmstrip_ba28e7a844.png)
 
 We use [puppeteer-capture](https://www.npmjs.com/package/puppeteer-capture) for this, a Puppeteer plugin that conveniently bundles the virtual time shims together with the `beginFrame` loop.
 
 ## Putting it all together
 
-![Doc Brown hoggie connecting the cable at the moment the lightning strikes](https://raw.githubusercontent.com/PostHog/brand/main/assets/hoggies/png/doc-brown.png)
+![Doc Brown hoggie connecting the cable at the moment the lightning strikes](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/doc_brown_76d9d75886.png)
 
 With `beginFrame` gating the compositor and the virtual clock gating the player, the two failure modes from earlier simply stop existing. If rendering is starved, the clock waits for the frame. If capture is starved, the renderer waits for the next `beginFrame` call. Either way, the next frame in the video is the next frame in the recording, and CPU contention only changes how long the job takes, not what comes out of it. We can run as many jobs per pod as we like, and the same recording produces the same video every time.
 
