@@ -10,7 +10,7 @@ This page is for the curious. If you want to understand how scouts work under th
 If you're authoring a scout, check these two resources out first:
 
 - Head to your [inbox](https://app.posthog.com/inbox/scouts) and on the top right, click **Suggest a scout**. This spawns an agent that grooms your project data and proposes scouts you can tweak with the agent.
-- Any agent connected to the [PostHog MCP](/docs/model-context-protocol) can also load the **`posthog:authoring-scouts`** skill – it carries the full authoring workflow for the scout you need: the anatomy below, the report contract, the memory conventions, and the cookbook of reference shapes.
+- Any agent connected to the [PostHog MCP](/docs/model-context-protocol) can also load the **`posthog:authoring-scouts`** skill. It carries the full authoring workflow for the scout you need, including the anatomy below, the report contract, the memory conventions, and the cookbook of reference shapes.
 
 But if you're determined to write a scout yourself, or just want to understand how they work, read on.
 
@@ -18,25 +18,25 @@ But if you're determined to write a scout yourself, or just want to understand h
 
 A scout is a set of prompts and skills that an agent executes on a schedule. The body of that prompt is a workflow with ten sections. Every line of the body is a recurring token cost on every run, so depth belongs in bundled `references/` files the scout reads on demand.
 
-- **Identity + discriminator** — this is how the scout distinguishes something "worth a look" from baseline. It's the single most important bit. For example: error tracking compares an error's raw count against the number of users it hit — a burst reaching many users is an incident, one user looping is not. An abuse scout checks concentration on a shared identifier paired with non-conversion — many signups from one domain that never activate, where legitimate users spread thinly across identifiers.
-- **Quick close-out** — a cheap early exit, so a run with nothing to say doesn't produce noise.
-- **Orient** — reads durable memory, the last 7 days of this scout's runs, and the project profile to understand what's going on.
-- **Save memory** — the scratchpad conventions for what to remember between runs. This helps it improve its own efficiency and accuracy between runs.
-- **Decide** — the bar for filing a report.
-- **Disqualifiers** — known noise to skip: dev environments, single-user quirks, allowlisted entities.
-- **MCP tools** — the tools this scout uses, so no run rediscovers them.
-- **Close out** — one paragraph summarizing what was looked at, filed, and ruled out for future runs.
+- **Identity + discriminator**. this is how the scout distinguishes something "worth a look" from baseline. It's the single most important bit. For example, error tracking compares an error's raw count against the number of users it hit. A burst reaching many users is an incident. One user looping is not. An abuse scout checks concentration on a shared identifier paired with non-conversion. Many signups from one domain that never activate stand out, because legitimate users spread thinly across identifiers.
+- **Quick close-out**. a cheap early exit, so a run with nothing to say doesn't produce noise.
+- **Orient**. reads durable memory, the last 7 days of this scout's runs, and the project profile to understand what's going on.
+- **Save memory**. the scratchpad conventions for what to remember between runs. This helps it improve its own efficiency and accuracy between runs.
+- **Decide**. the bar for filing a report.
+- **Disqualifiers**. known noise to skip: dev environments, single-user quirks, allowlisted entities.
+- **MCP tools**. the tools this scout uses, so no run rediscovers them.
+- **Close out**. one paragraph summarizing what was looked at, filed, and ruled out for future runs.
 
 ## Memory
 
-Scouts remember across runs through a durable scratchpad, keyed by prefix: `pattern:` for what normal looks like, `dedupe:` for what's already been filed, `noise:` and `allowlist:` for what to skip, `addressed:` for what's fixed. This is what stops a daily scout from re-filing the same finding every morning – dedupe keys go on the stable identifier (the issue id, the flag key), never on the instance of it (the account, the day).
+Scouts remember across runs through a durable scratchpad, keyed by prefix: `pattern:` for what normal looks like, `dedupe:` for what's already been filed, `noise:` and `allowlist:` for what to skip, `addressed:` for what's fixed. This is what stops a daily scout from re-filing the same finding every morning. Dedupe keys go on the stable identifier (the issue id, the flag key), never on the instance of it (the account, the day).
 
 ## Reference shapes
 
-Every scout is a variation on a small set of shapes – anomaly watcher, liveness watcher, watchlist, warehouse-backed source, daily digest, and so on. The [scout patterns cookbook](https://github.com/PostHog/posthog/blob/master/products/signals/skills/authoring-scouts/references/scout-patterns.md) catalogs them all, with the discriminator, memory, and gotchas for each.
+Every scout is a variation on a small set of shapes: anomaly watcher, liveness watcher, watchlist, warehouse-backed source, daily digest, and so on. The [scout patterns cookbook](https://github.com/PostHog/posthog/blob/master/products/signals/skills/authoring-scouts/references/scout-patterns.md) catalogs them all, with the discriminator, memory, and gotchas for each.
 
 ## Testing
 
 The cheap iteration loop is to run the skill with your own agent by giving it the same PostHog tools the scout gets at runtime. This is why we recommend you author scouts with the help of PostHog Desktop or another agent — they'll have a better idea of what's available and what patterns work.
 
-Once a scout exists, steer it with [notes](/docs/self-driving/scouts#steering-a-scout-with-a-note) – short-lived guidance – and reserve body edits for permanent policy.
+Once a scout exists, steer it with [notes](/docs/self-driving/scouts#steering-a-scout-with-a-note) for short-lived guidance, and reserve body edits for permanent policy.
