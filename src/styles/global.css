@@ -1404,8 +1404,12 @@ body.dark {
     display: none;
 }
 
-.rc-slider.slider .rc-slider-mark {
-    display: none;
+.rc-slider.slider .rc-slider-mark-text {
+    @apply text-secondary;
+
+    &.rc-slider-mark-text-active {
+        @apply text-secondary font-bold;
+    }
 }
 
 /* Slider base styles */

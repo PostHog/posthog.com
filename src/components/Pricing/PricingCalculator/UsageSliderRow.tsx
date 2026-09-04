@@ -27,7 +27,7 @@ export default function UsageSliderRow({
     min,
     max,
     scaleMin,
-    curve = 'log',
+    curve = 'nonlinear',
 }: {
     label: string
     labelAccessory?: React.ReactNode
@@ -40,7 +40,7 @@ export default function UsageSliderRow({
     scaleMin?: number
     curve?: 'log' | 'nonlinear'
 }) {
-    const effectiveScaleMin = scaleMin ?? 1
+    const effectiveScaleMin = scaleMin ?? marks.find((mark) => mark > 0) ?? 1
     const sliderValue = Math.max(value || 0, effectiveScaleMin)
 
     const handleLogChange = (next: number) => {
@@ -58,7 +58,7 @@ export default function UsageSliderRow({
                 {subtitle ? <p className="m-0 text-xs text-secondary">{subtitle}</p> : null}
             </div>
             <div className="flex-1 flex justify-end min-w-0">
-                <div className="w-full @md:w-3/4">
+                <div className="w-full @md:w-3/4 pb-5">
                     {curve === 'nonlinear' ? (
                         <NonLinearSlider
                             stepsInRange={100}

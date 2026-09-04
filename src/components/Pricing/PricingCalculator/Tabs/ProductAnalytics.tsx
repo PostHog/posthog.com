@@ -26,35 +26,17 @@ export const getTotalEnhancedPersonsVolume = (analyticsData: any) => {
         : null
 }
 
-const IDENTIFIED_TYPE = 'productAnalyticsEvents'
-const ANONYMOUS_TYPE = 'websiteAnalyticsEvents'
-
-const SIZE_PRESETS = [
-    { id: 'side_project', label: 'Side project', identified: 200_000, anonymous: 800_000 },
-    { id: 'startup', label: 'Startup', identified: 3_000_000, anonymous: 1_000_000 },
-    { id: 'scale_up', label: 'High volume', identified: 15_000_000, anonymous: 4_000_000 },
-    { id: 'custom', label: 'Custom' },
-]
-
-const DEFAULT_SIZE_PRESET = SIZE_PRESETS[0]
-
 export const getDefaultAnalyticsData = () =>
     analyticsSliders.reduce((acc, slider) => {
         slider.types.forEach(({ type, enhanced }) => {
             acc[type] = {
-                volume: enhanced ? DEFAULT_SIZE_PRESET.identified : DEFAULT_SIZE_PRESET.anonymous,
+                volume: 0,
                 cost: 0,
                 enhanced: enhanced || false,
             }
         })
         return acc
     }, {})
-
-const presetIdForVolumes = (data) =>
-    SIZE_PRESETS.find(
-        (preset) =>
-            preset.identified === data[IDENTIFIED_TYPE]?.volume && preset.anonymous === data[ANONYMOUS_TYPE]?.volume
-    )?.id ?? 'custom'
 
 export const analyticsSliders = [
     {
@@ -141,7 +123,6 @@ const SliderToggle = ({
                         marks={activeProduct.slider.marks}
                         min={0}
                         max={activeProduct.slider.max}
-                        curve="nonlinear"
                     />
                 )
             })}
@@ -158,7 +139,6 @@ export default function ProductAnalyticsTab({
     addons,
 }) {
     const [showBreakdown, setShowBreakdown] = useState(false)
-    const [sizePreset, setSizePreset] = useState(() => presetIdForVolumes(analyticsData))
     const productAnalyticsTiers = useMemo(() => activeProduct?.billingData.plans.find((plan) => plan.tiers).tiers, [])
     const enhancedPersonsAddonTiers = useMemo(
         () =>
@@ -198,7 +178,6 @@ export default function ProductAnalyticsTab({
     }
 
     const setAnalyticsVolume = (type: string, volume: number) => {
-        setSizePreset('custom')
         setAnalyticsData((data) =>
             priceAnalyticsData({
                 ...data,
@@ -206,19 +185,6 @@ export default function ProductAnalyticsTab({
                     ...data[type],
                     volume: Math.round(volume || 0),
                 },
-            })
-        )
-    }
-
-    const applySizePreset = (id: string) => {
-        setSizePreset(id)
-        const preset = SIZE_PRESETS.find((item) => item.id === id)
-        if (!preset || id === 'custom') return
-        setAnalyticsData((data) =>
-            priceAnalyticsData({
-                ...data,
-                [IDENTIFIED_TYPE]: { ...data[IDENTIFIED_TYPE], volume: preset.identified },
-                [ANONYMOUS_TYPE]: { ...data[ANONYMOUS_TYPE], volume: preset.anonymous },
             })
         )
     }
@@ -247,26 +213,6 @@ export default function ProductAnalyticsTab({
 
     return (
         <div className="@container">
-            <div className="flex flex-wrap items-center gap-2 pb-4">
-                <span className="text-sm text-secondary">Roughly your size</span>
-                <div className="flex flex-wrap">
-                    {SIZE_PRESETS.map(({ id, label }) => {
-                        const selected = sizePreset === id
-                        return (
-                            <button
-                                key={id}
-                                type="button"
-                                onClick={() => applySizePreset(id)}
-                                className={`px-2 py-0.5 text-sm rounded-md border border-transparent ${
-                                    selected ? 'bg-accent font-bold border-primary' : ''
-                                }`}
-                            >
-                                {label}
-                            </button>
-                        )
-                    })}
-                </div>
-            </div>
             <UsageSliderHeader unit="Events" />
             <div className="divide-y divide-primary border-t border-primary">
                 {analyticsSliders.map((slider) => (

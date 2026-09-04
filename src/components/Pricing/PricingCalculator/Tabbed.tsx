@@ -443,7 +443,7 @@ export default function Tabbed() {
             })
         } else {
             products
-                .filter((product) => selectedTypes.includes(product.type) && product.type !== 'product_analytics')
+                .filter((product) => selectedTypes.includes(product.type))
                 .forEach((product) => setVolume(product.handle, 0))
         }
 
@@ -476,10 +476,9 @@ export default function Tabbed() {
         if (!type || selectedTypes.includes(type)) return
         if (type === 'product_analytics') {
             setAnalyticsData(getDefaultAnalyticsData())
-        } else {
-            const product = products.find((item) => item.type === type)
-            if (product) setVolume(product.handle, 0)
         }
+        const product = products.find((item) => item.type === type)
+        if (product) setVolume(product.handle, 0)
         setSelectedTypes((current) => [...current, type])
         setActiveType(type)
         closeProductPicker()
