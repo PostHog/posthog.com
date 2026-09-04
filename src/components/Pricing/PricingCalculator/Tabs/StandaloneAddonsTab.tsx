@@ -1,9 +1,10 @@
 import React, { useEffect, useMemo, useState } from 'react'
-import { IconX } from '@posthog/icons'
+import { IconInfo, IconX } from '@posthog/icons'
 import { calculatePrice } from '../../PricingSlider/pricingSliderLogic'
 import { PricingTiers } from '../../Plans'
 import { afterFirstFree, formatCompact, pluralizeUnit, unitWhenNotInLabel } from '../../utils'
 import UsageSliderRow, { UsageSliderHeader } from '../UsageSliderRow'
+import Tooltip from 'components/Tooltip'
 
 const TriggerEventsModal = ({ onClose, isVisible }) => {
     return (
@@ -176,10 +177,20 @@ export default function StandaloneAddonsTab({ activeProduct, setVolume, setProdu
                     const price = firstPaidUnitAmount(addon.billingTiers)
                     const free = addon.freeAllocation ?? addon.sliderConfig.min
                     const unit = addon.unit || activeProduct.billingData.unit
+                    const info = addon.note || addon.pricingDescription
                     return (
                         <UsageSliderRow
                             key={addon.key}
                             label={addon.label}
+                            labelAccessory={
+                                info ? (
+                                    <Tooltip content={info} tooltipClassName="max-w-[250px]" placement="top">
+                                        <span className="relative">
+                                            <IconInfo className="size-4 opacity-70" />
+                                        </span>
+                                    </Tooltip>
+                                ) : null
+                            }
                             subtitle={
                                 price
                                     ? `$${price} each${
