@@ -10,6 +10,13 @@ export interface Tool {
     status?: ToolStatus
     aliases?: readonly string[]
     /**
+     * Where this tool's nav entries and tiles should link, when that isn't `/${slug}`. Set this only
+     * when the tool has no page of its own and shares another product's page — `slug` stays as the
+     * historical route so search indexing and redirects keep working. Read it via `productUrl()`
+     * rather than building `/${slug}` by hand.
+     */
+    url?: string
+    /**
      * Title to use when this tool's page appears in search results. Set this only when `name` is
      * presentational for the OS UI (a document filename, an abbreviation) and would read poorly as
      * a search result. Everything else falls back to `name`.
@@ -223,6 +230,8 @@ export const tools = [
         name: 'Graphs & trends',
         searchDescription: 'Plot events over time with filters and breakdowns.',
         slug: 'trends',
+        // The standalone /trends page was retired in favour of /product-analytics.
+        url: '/product-analytics',
         category: 'dataviz',
     },
     {
@@ -378,3 +387,11 @@ export const getTool = <Handle extends ToolHandle>(
     }
     return tool as Extract<(typeof tools)[number], { handle: Handle }>
 }
+
+/**
+ * Page a product/tool tile or nav entry should link to. Prefers an explicit `url` override (for
+ * tools with no page of their own) and otherwise derives the route from `slug`. Returns
+ * `undefined` for products with neither, so callers can render them as plain text.
+ */
+export const productUrl = (product?: { url?: string; slug?: string }): string | undefined =>
+    product?.url ?? (product?.slug ? `/${product.slug}` : undefined)

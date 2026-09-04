@@ -95,7 +95,7 @@ export const productAnalyticsFeatures = {
         summary: {
             name: 'Graphs & trends',
             description: 'Build custom insights and visualizations',
-            url: '/trends',
+            url: '/product-analytics',
             docsUrl: '/docs/product-analytics/trends',
         },
         features: {
