@@ -17,7 +17,7 @@ tags:
     - Session replay
     - AI
 seo:
-    metaTitle: 'Automated attention, part 1: Freezing time for fun and profit'
+    metaTitle: 'Multimodal models need video, we froze time to give it to them'
     metaDescription: "How we turn session replays into video for Replay Vision, and how Chrome's beginFrame fixed our rasterizer under load."
 ---
 
@@ -31,7 +31,7 @@ As a result, most of what the Session Replay team has shipped over the past coup
 
 This is the first of two posts about building it. This one is about the pipeline that turns recording data into videos that a model can look at. The second is about the model, and about controlling what it pays attention to.
 
-## Vector vs raster
+## A session replay might look like a video, but it's not (and we needed it to be)
 
 A replay looks like a screen recording when you play it, but there's no video anywhere in the pipeline. What the SDK captures, using rrweb, is a serialized copy of the DOM at the moment recording starts, and then a stream of events describing what changed: 
 
@@ -50,7 +50,7 @@ Modern multimodal models like Gemini need actual video in order to make sense of
 
 What we needed was the rasterized version of the recording: an MP4, a compressed stream of pixels. Which meant the first piece of Replay Vision was a rasterizer. rrweb goes in, an MP4 comes out. Load the player in a headless browser, record the screen, encode it.
 
-## The first attempt
+## The obvious way to build a rasterizer
 
 The rasterizer would need to handle a large volume of recordings to keep up with what we ingest. The service consists of a number of moving parts:
 
@@ -64,7 +64,7 @@ Upon receiving a new task, the service would load the frontend bundle in one of 
 
 The rasterizer worked well during initial testing, but once we started running multiple instances of the service on the same hardware, problems began to appear.
 
-## Mangled output
+## Two processes, one clock
 
 We saw videos that skipped over sections of the recording, and others that froze for several seconds at a time. The same recording would often produce videos of different lengths. 
 
