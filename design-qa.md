@@ -12,7 +12,7 @@
 
 The implementation matches the main structural direction of the reference:
 
-- The content surface is opaque and rounded.
+- The content surface is translucent, rounded, and denser than the surrounding chrome.
 - The left rail uses the desktop background and stays visually separate from the content surface.
 - Close, expand, sidebar, back, and forward controls are in the left rail.
 - Search and page navigation stay in the left rail.
@@ -23,7 +23,7 @@ The PostHog desktop, navigation content, typography, and brand colors stay nativ
 
 ## Focused comparison
 
-The rail-to-content seam, corner radii, and control alignment are consistent. The opaque content panel has a clear edge against the translucent rail. The inner panel uses a smaller radius than the outer window so the border stays even at each corner. No content is cropped at the tested wide or narrow widths.
+The rail-to-content seam, corner radii, and control alignment are consistent. The translucent content panel has a clear edge against the lighter rail. The inner panel uses a smaller radius than the outer window so the border stays even at each corner. No content is cropped at the tested wide or narrow widths.
 
 ## QA history
 
@@ -35,6 +35,7 @@ The rail-to-content seam, corner radii, and control alignment are consistent. Th
 6. Forced-minimized review: `/pricing`, which supplies `hideLeftSidebar`, keeps the sidebar available from the hidden edge state.
 7. Final narrow review: passed in light and dark themes; the drawer opens from the left and contains search, navigation, and the table of contents.
 8. Accessibility review: hidden panels are inert, edge targets report their expanded state, keyboard focus enters the narrow drawer, and reduced-motion preferences disable the transitions.
+9. Translucency review: the main content remains readable while the wallpaper shows through both surfaces. Forced-minimized pages disable the sidebar control and explain the restriction in its tooltip.
 
 ## Final result
 

@@ -814,6 +814,7 @@ interface ReaderWindowControlsProps {
     onSidebarAction: () => void
     sidebarLabel: string
     sidebarIcon: React.ReactNode
+    sidebarDisabled?: boolean
     separatorClassName?: string
 }
 
@@ -822,6 +823,7 @@ const ReaderWindowControls = ({
     onSidebarAction,
     sidebarLabel,
     sidebarIcon,
+    sidebarDisabled = false,
     separatorClassName = 'my-1',
 }: ReaderWindowControlsProps) => {
     const { close, toggleExpanded, canToggleExpanded, isExpanded, goBack, goForward, canGoBack, canGoForward } =
@@ -853,7 +855,15 @@ const ReaderWindowControls = ({
                 </Tooltip>
             )}
             <Tooltip
-                trigger={<OSButton size="md" aria-label={sidebarLabel} onClick={onSidebarAction} icon={sidebarIcon} />}
+                trigger={
+                    <OSButton
+                        size="md"
+                        aria-label={sidebarLabel}
+                        disabled={sidebarDisabled}
+                        onClick={onSidebarAction}
+                        icon={sidebarIcon}
+                    />
+                }
                 side={tooltipSide}
             >
                 {sidebarLabel}
@@ -1321,12 +1331,13 @@ const LeftSidebar = ({
                                     mobile
                                         ? 'Close navigation'
                                         : forceMinimized
-                                        ? 'Hide sidebar'
+                                        ? 'This page keeps the sidebar minimized'
                                         : isPinned
                                         ? 'Collapse sidebar'
                                         : 'Keep sidebar open'
                                 }
                                 sidebarIcon={isPinned ? <IconSidebarOpen /> : <IconSidebarClose />}
+                                sidebarDisabled={forceMinimized && !mobile}
                             />
                         </div>
 
@@ -1710,7 +1721,9 @@ function ReaderViewContent({
         'flex',
         'flex-col',
         'relative',
-        'bg-primary border border-primary rounded-md overflow-hidden',
+        // This overlays the translucent window surface, so the article stays
+        // slightly more opaque than the surrounding chrome without becoming solid.
+        'bg-primary/40 border border-primary rounded-md overflow-hidden',
         !showMobileNav && isNavVisible && !hideLeftSidebar ? 'my-2 mr-2 ml-0' : 'm-2',
         selectedBackgroundOption && selectedBackgroundOption.value !== 'none'
             ? 'before:absolute before:inset-0 before:bg-primary before:opacity-75 before:pointer-events-none'
