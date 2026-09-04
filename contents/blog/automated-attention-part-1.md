@@ -1,6 +1,6 @@
 ---
 title: 'Automated attention, part 1: Freezing time for fun and profit'
-date: 2026-09-04
+date: 2026-09-03
 rootPage: /blog
 sidebar: Blog
 showTitle: true
