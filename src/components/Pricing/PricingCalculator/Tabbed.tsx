@@ -8,7 +8,7 @@ import { Link, useStaticQuery } from 'gatsby'
 import { allProductsData } from '../Pricing'
 import useProducts from 'hooks/useProducts'
 import UsageSliderRow, { UsageSliderHeader } from './UsageSliderRow'
-import { formatCompact, pluralizeUnit } from '../utils'
+import { afterFirstFree, formatCompact, pluralizeUnit } from '../utils'
 import { CTA, PricingTiers } from '../Plans'
 import ProductAnalyticsTab, {
     analyticsSliders,
@@ -180,7 +180,11 @@ export const TabContent = ({
                                             label={unitLabel}
                                             subtitle={
                                                 startsAt
-                                                    ? `$${startsAt} each after the first ${formatCompact(freeAmount)}`
+                                                    ? `$${startsAt} each${afterFirstFree(
+                                                          freeAmount,
+                                                          billingData.unit,
+                                                          unitLabel
+                                                      )}`
                                                     : undefined
                                             }
                                             value={volume}

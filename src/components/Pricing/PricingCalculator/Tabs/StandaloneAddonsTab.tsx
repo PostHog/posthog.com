@@ -2,7 +2,7 @@ import React, { useEffect, useMemo, useState } from 'react'
 import { IconX } from '@posthog/icons'
 import { calculatePrice } from '../../PricingSlider/pricingSliderLogic'
 import { PricingTiers } from '../../Plans'
-import { formatCompact, pluralizeUnit } from '../../utils'
+import { afterFirstFree, formatCompact, pluralizeUnit } from '../../utils'
 import UsageSliderRow, { UsageSliderHeader } from '../UsageSliderRow'
 
 const TriggerEventsModal = ({ onClose, isVisible }) => {
@@ -134,7 +134,7 @@ export default function StandaloneAddonsTab({ activeProduct, setVolume, setProdu
 
     const mainUnitLabel = pluralizeUnit(activeProduct.billingData.unit, 2)
     const mainStartsAt = firstPaidUnitAmount(mainBillingTiers)
-    const mainFree = activeProduct.slider.min
+    const mainFree = activeProduct.freeLimit || activeProduct.slider.min
 
     return (
         <div className="@container mb-4">
@@ -156,7 +156,13 @@ export default function StandaloneAddonsTab({ activeProduct, setVolume, setProdu
                 <UsageSliderRow
                     label={activeProduct.productVariantName || mainUnitLabel}
                     subtitle={
-                        mainStartsAt ? `$${mainStartsAt} each after the first ${formatCompact(mainFree)}` : undefined
+                        mainStartsAt
+                            ? `$${mainStartsAt} each${afterFirstFree(
+                                  mainFree,
+                                  activeProduct.billingData.unit,
+                                  activeProduct.productVariantName || mainUnitLabel
+                              )}`
+                            : undefined
                     }
                     value={mainVolume}
                     onChange={handleMainVolumeChange}
@@ -165,32 +171,32 @@ export default function StandaloneAddonsTab({ activeProduct, setVolume, setProdu
                     max={activeProduct.slider.max}
                     scaleMin={activeProduct.slider.scaleMin}
                 />
-                {addonBillingData.map(
-                    (addon, index) =>
-                        addon.billingTiers && (
-                            <UsageSliderRow
-                                key={addon.key}
-                                label={addon.label}
-                                subtitle={
-                                    firstPaidUnitAmount(addon.billingTiers)
-                                        ? `$${firstPaidUnitAmount(
-                                              addon.billingTiers
-                                          )} each after the first ${formatCompact(
-                                              addon.freeAllocation !== undefined
-                                                  ? addon.freeAllocation
-                                                  : addon.sliderConfig.min
-                                          )}`
-                                        : undefined
-                                }
-                                value={addonData[index]?.volume || 0}
-                                onChange={handleAddonVolumeChange(index)}
-                                marks={addon.sliderConfig.marks}
-                                min={0}
-                                max={addon.sliderConfig.max}
-                                scaleMin={addon.sliderConfig.scaleMin}
-                            />
-                        )
-                )}
+                {addonBillingData.map((addon, index) => {
+                    if (!addon.billingTiers) return null
+                    const price = firstPaidUnitAmount(addon.billingTiers)
+                    const free = addon.freeAllocation ?? addon.sliderConfig.min
+                    return (
+                        <UsageSliderRow
+                            key={addon.key}
+                            label={addon.label}
+                            subtitle={
+                                price
+                                    ? `$${price} each${afterFirstFree(
+                                          free,
+                                          addon.unit || activeProduct.billingData.unit,
+                                          addon.label
+                                      )}`
+                                    : undefined
+                            }
+                            value={addonData[index]?.volume || 0}
+                            onChange={handleAddonVolumeChange(index)}
+                            marks={addon.sliderConfig.marks}
+                            min={0}
+                            max={addon.sliderConfig.max}
+                            scaleMin={addon.sliderConfig.scaleMin}
+                        />
+                    )
+                })}
             </div>
             <div className="pr-1.5 pt-3 border-t border-primary">
                 <span className="text-sm text-secondary">

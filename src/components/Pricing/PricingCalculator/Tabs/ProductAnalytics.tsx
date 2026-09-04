@@ -6,6 +6,7 @@ import qs from 'qs'
 import Tooltip from 'components/Tooltip'
 import { Addons } from '../Tabbed'
 import UsageSliderRow, { UsageSliderHeader } from '../UsageSliderRow'
+import { afterFirstFree } from '../../utils'
 import { useApp } from '../../../../context/App'
 import EventTypesModal, { EVENT_TYPES_MODAL_KEY } from '../EventTypesModal'
 
@@ -117,7 +118,9 @@ const SliderToggle = ({
                         key={type}
                         label={label}
                         labelAccessory={<EventTypeInfo enhanced={analyticsData[type].enhanced} />}
-                        subtitle={unitPrice ? `$${unitPrice} each after the first 1M` : undefined}
+                        subtitle={
+                            unitPrice ? `$${unitPrice} each${afterFirstFree(1_000_000, 'event', label)}` : undefined
+                        }
                         value={analyticsData[type].volume}
                         onChange={(value) => setAnalyticsVolume(type, value)}
                         marks={activeProduct.slider.marks}

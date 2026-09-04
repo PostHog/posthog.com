@@ -2,7 +2,7 @@ import React, { useMemo } from 'react'
 import { calculatePrice, formatUSD } from 'components/Pricing/PricingSlider/pricingSliderLogic'
 import type { BillingTier } from 'components/Pricing/PricingCalculator/calculatorLogic'
 import UsageSliderRow, { UsageSliderHeader } from 'components/Pricing/PricingCalculator/UsageSliderRow'
-import { formatCompact } from 'components/Pricing/utils'
+import { afterFirstFree, formatCompact } from 'components/Pricing/utils'
 
 /*
  * The interactive Replay Vision cost estimator: model selector, observation-
@@ -234,7 +234,7 @@ export default function PricingEstimator({
                         label="Observations"
                         subtitle={`$${(estimate.model.creditsPerObservation * creditPrice).toFixed(
                             2
-                        )} each after the first ${formatCompact(freeObservations)}`}
+                        )} each${afterFirstFree(freeObservations, 'observation', 'Observations')}`}
                         value={observations}
                         onChange={onObservationsChange}
                         marks={marks}
