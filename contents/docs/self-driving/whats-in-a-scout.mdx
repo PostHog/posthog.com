@@ -7,18 +7,14 @@ showTitle: true
 
 import { CallToAction } from 'components/CallToAction'
 
-This page is for the curious. If you want to understand how scouts work for your own curiosity, this page is for you.
+This page is for the curious. If you want to understand how scouts work under the hood, this page is for you.
 
 If you're authoring a scout, check these two resources out first:
 
-- [PostHog Desktop](/desktop) – open the scouts page and pick the "Make a scout" suggestion: it scans your project and proposes custom scouts grounded in your actual data.
-- Any agent connected to the [PostHog MCP](/docs/model-context-protocol) – it can load the bundled **`posthog:authoring-scouts`** skill, which carries the full authoring workflow: the anatomy below, the report contract, the memory conventions, and the cookbook of reference shapes. Ask for it by name and the agent grounds the scout in your real project data before writing anything. A prompt like this works:
+- Head to your [inbox](/docs/self-driving/inbox) and on the top right, click **Suggest a scout**. This spawns an agent that grooms your project data and proposes scouts you can tweak with the agent.
+- Any agent connected to the [PostHog MCP](/docs/model-context-protocol) can also load the **`posthog:authoring-scouts`** skill – it carries the full authoring workflow for the scout you need: the anatomy below, the report contract, the memory conventions, and the cookbook of reference shapes.
 
-```text
-Read my PostHog project and propose three custom scouts grounded in my actual
-data. For each one: a name, the slice of data it watches, what "worth my
-attention" means for it, and how often it should run. Then build the one I pick.
-```
+But if you're determined to write a scout yourself, or just want to understand how they work, read on.
 
 ## The shape of a scout
 
