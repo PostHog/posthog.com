@@ -82,16 +82,19 @@ export default function ContextGapReport() {
                             </p>
 
                             <p>
-                                When you read industry reports back-to-back you notice every vendor is talking about the same problem:{' '}
+                                When you read industry reports back-to-back you notice every vendor is talking about the
+                                same problem:{' '}
                                 <strong>AI ambition is outrunning data readiness, trust, and governance.</strong>
                             </p>
 
                             <p>
-                                We wrote our own industry report to tell you why a context warehouse is the thing our competitors have been looking for, backed up by their own data. 
+                                We wrote our own industry report to tell you why a context warehouse is the thing our
+                                competitors have been looking for, backed up by their own data.
                             </p>
 
                             <p>
-                                You don't have to read everyone's reports to know what's important in data infrastructure, just read ours:
+                                You don't have to read everyone's reports to know what's important in data
+                                infrastructure, just read ours:
                             </p>
                             <ul className="list-disc pl-5 space-y-1">
                                 <li>It's only 3 pages, not 300.</li>
@@ -102,8 +105,7 @@ export default function ContextGapReport() {
                             <CalloutBox icon="IconDatabase" title="Why is a context warehouse the answer?" type="fyi">
                                 <p>
                                     A <Link to="/context-warehouse">context warehouse</Link> is a data warehouse, plus
-                                    the pipeline, modeling, and query tools - in one system, optimized for
-                                    agents.
+                                    the pipeline, modeling, and query tools - in one system, optimized for agents.
                                 </p>
                             </CalloutBox>
                         </div>
@@ -129,7 +131,7 @@ export default function ContextGapReport() {
                                 </div>
                             </a>
 
-                            <div className="absolute -top-6 -right-12 pointer-events-none">
+                            <div className="absolute -top-6 -right-4 pointer-events-none">
                                 <div className="relative">
                                     <Bang className="w-40 @lg:w-52 animate-grow" />
                                     <p className="px-7 text-center m-0 absolute inset-0 flex flex-col items-center justify-center text-black uppercase leading-tight font-bold text-xs @lg:text-sm rotate-6">
@@ -152,7 +154,7 @@ export default function ContextGapReport() {
                         long version, sources and all. Consider it the corporate version.
                     </p>
 
-                    <div className="relative">
+                    <div className="relative mt-28 @5xl:mt-0">
                         <div className="absolute right-10 bottom-full translate-y-1/3 -z-10 w-32 @lg:w-40">
                             <Hedgehog996 className="w-full h-auto" />
                         </div>
