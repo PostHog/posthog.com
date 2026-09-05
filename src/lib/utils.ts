@@ -131,3 +131,30 @@ export const slugifyTeamName = (name: string): string => {
 }
 
 export const formatTeamName = (name: string): string => `${name.trim().replace(/\s+team$/i, '')} Team`
+
+// localStorage throws when storage is full or blocked (Safari private mode,
+// partitioned storage). These wrappers keep such a failure from taking down the
+// render — the preference is simply not saved or not read.
+export const safeLocalStorageGet = (key: string): string | null => {
+    try {
+        return localStorage.getItem(key)
+    } catch {
+        return null
+    }
+}
+
+export const safeLocalStorageSet = (key: string, value: string): void => {
+    try {
+        localStorage.setItem(key, value)
+    } catch {
+        // preference not saved
+    }
+}
+
+export const safeLocalStorageRemove = (key: string): void => {
+    try {
+        localStorage.removeItem(key)
+    } catch {
+        // preference not removed
+    }
+}
