@@ -1139,6 +1139,28 @@ const appSettings: AppSettings = {
             type: 'standard',
         },
     },
+    // Opened from the desktop icon via addWindow — not a route.
+    'the-posthog': {
+        toolbar: true,
+        size: {
+            min: {
+                width: 960,
+                height: 682,
+            },
+            max: {
+                width: 960,
+                height: 682,
+            },
+            fixed: true,
+            autoHeight: true,
+        },
+        position: {
+            center: true,
+        },
+        modal: {
+            type: 'standard',
+        },
+    },
     '/changelog-video': {
         size: {
             min: {
