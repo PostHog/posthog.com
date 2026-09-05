@@ -43,6 +43,7 @@ A reference index to the per-tool pages. Each follows the same shape – unique 
 
 - [**Analytics**](/handbook/marketing/positioning/analytics) – Product analytics built for engineers, not dashboard tourists
 - [**Session replay**](/handbook/marketing/positioning/session-replay) – Watching real users beats imagining them
+- [**Replay vision**](/handbook/marketing/positioning/replay-vision) – Batch AI analysis that reads your session replays so nobody has to watch them
 - [**Feature flags**](/handbook/marketing/positioning/feature-flags) – Shipping switches that don't require a separate vendor
 - [**Experiments**](/handbook/marketing/positioning/experiments) – A/B testing wired to the same data as everything else
 - [**Data pipelines**](/handbook/marketing/positioning/data-pipelines) – CDP, reverse-ETL, and transformations bundled – typically 5–10x cheaper than Segment
