@@ -50,14 +50,20 @@ type ChangelogDocsSource = {
 
 export const stripPostHogOrigin = (url: string): string => url.replace(/^https?:\/\/(www\.)?posthog\.com/, '')
 
+// The first /docs link written into an entry's Markdown description, if any.
+export const getDescriptionDocsPath = (description?: string): string | null => {
+    const match = description?.match(/\]\((?:https?:\/\/(?:www\.)?posthog\.com)?(\/docs\/[^)\s]+)\)/)
+    return match ? match[1] : null
+}
+
 // The docs page for a changelog entry: an explicit docs CTA wins, then the
 // first /docs link written into the description, then the topic's docs home.
 export const getChangelogDocsPath = (roadmap: ChangelogDocsSource): string | null => {
     const ctaPath = stripPostHogOrigin(roadmap.cta?.url || '')
     if (ctaPath.startsWith('/docs/')) return ctaPath
 
-    const descriptionMatch = roadmap.description?.match(/\]\((?:https?:\/\/(?:www\.)?posthog\.com)?(\/docs\/[^)\s]+)\)/)
-    if (descriptionMatch) return descriptionMatch[1]
+    const descriptionPath = getDescriptionDocsPath(roadmap.description)
+    if (descriptionPath) return descriptionPath
 
     const topicSlug = roadmap.topic?.data?.attributes?.slug
     return (topicSlug && CHANGELOG_TOPIC_DOCS[topicSlug]) || null
