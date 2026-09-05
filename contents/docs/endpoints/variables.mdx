@@ -118,6 +118,45 @@ Breakdown variables work with:
 - TrendsQuery
 - RetentionQuery
 
+### Required and optional breakdowns
+
+Breakdown variables are **required by default** when the endpoint is [materialized](/docs/endpoints/materialization).
+A request that omits a required breakdown variable fails with a 400 error.
+This is a safety feature: it prevents a call from accidentally returning unfiltered data across every value of the breakdown.
+
+If callers should be able to omit a breakdown, mark it as optional.
+Omitting an optional breakdown variable returns results aggregated across all values of that dimension.
+For example, with an optional `$browser` breakdown, calling the endpoint without `$browser` returns a series for every browser instead of filtering to one.
+
+Configure this from the endpoint's **Configuration** tab, where the **Variables** panel lists every breakdown of the query with a **Required** checkbox:
+
+<ProductScreenshot
+  imageLight="CLOUDINARY_LIGHT_URL"
+  imageDark="CLOUDINARY_DARK_URL"
+  alt="Variables panel in the endpoint Configuration tab with a Required checkbox per breakdown"
+  classes="rounded"
+/>
+
+You can also set it via the API with the `optional_breakdown_properties` field when creating or updating an endpoint:
+
+```bash
+curl -X PATCH \
+  -H "Authorization: Bearer $POSTHOG_PERSONAL_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{"optional_breakdown_properties": ["$browser"]}' \
+  "<ph_app_host>/api/projects/{project_id}/endpoints/{endpoint_name}"
+```
+
+Every property name in the list must be a breakdown of the endpoint's query.
+The required or optional status of each variable also flows into the endpoint's generated [OpenAPI spec](/docs/endpoints/openapi-sdk-generation), so generated SDK clients only enforce the variables that are actually required.
+
+<CalloutBox icon="IconWarning" type="caution" title="Keep tenant-scoping breakdowns required">
+
+If a breakdown exists to scope data to a single customer, account, or team (for example `account_id`), keep it required.
+Marking it optional means a single call without that variable returns data across **all** of your customers.
+
+</CalloutBox>
+
 ### Date variables
 
 For non-materialized insight endpoints, you can also use `date_from` and `date_to` variables to filter by date:
@@ -143,6 +182,8 @@ curl -X POST \
 ### Materialization
 
 Materialized insight-based endpoints only support breakdown property variables. Date variables (`date_from`, `date_to`) are not available for materialized endpoints because the data is pre-computed.
+
+Breakdown variables must be provided on every request unless you mark them optional, see [required and optional breakdowns](#required-and-optional-breakdowns).
 
 If your insight has a breakdown, you can still filter by that property:
 
