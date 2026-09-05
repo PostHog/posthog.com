@@ -26,7 +26,6 @@ import ToolsTicker from 'components/Home/ToolsTicker'
 import PlatformInstall, { wizardInstallSchema } from 'components/PlatformInstall'
 import HeroCTA from 'components/Home/HeroCTA'
 import { HeroBody, HeroHeadline } from 'components/Home/HeroCopy'
-import ThePostHog from 'components/Desktop/ThePostHog'
 import Customers from '../Customers'
 
 /** Loads HeroCarousel + Typecaast slides only in the browser so SSR/Helmet aren't affected. */
@@ -191,7 +190,6 @@ export default function HomeTest() {
 
     return (
         <ReaderView proseSize="lg" hideLeftSidebar showQuestions={false}>
-            <ThePostHog />
             <div className="space-y-12">
                 <Hero />
                 <Customers />

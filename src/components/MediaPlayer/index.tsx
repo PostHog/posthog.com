@@ -398,25 +398,23 @@ export default function MediaPlayer({
                                     step={0.1}
                                 />
                                 <div
-                                    className="absolute top-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none"
+                                    className="absolute top-1/2 -translate-y-1/2 pointer-events-none"
                                     style={{
-                                        left: `${
-                                            playerState.duration
-                                                ? ((isScrubbing ? scrubTime : playerState.currentTime) /
-                                                      playerState.duration) *
-                                                  100
-                                                : 0
-                                        }%`,
+                                        left: `calc(${
+                                            ((isScrubbing ? scrubTime : playerState.currentTime) /
+                                                playerState.duration) *
+                                            100
+                                        }% + 5.5px)`,
                                     }}
                                 >
-                                    <IconPlayhead className="w-[11px] h-[15px] shrink-0" />
+                                    <IconPlayhead className="w-[11px] h-[15px]" />
                                 </div>
                             </div>
                         </div>
 
                         {/* Control bar */}
-                        <div className="flex items-center px-2 @md:px-4 py-2 bg-accent border-t border-primary gap-1 @md:gap-2">
-                            <div className="flex flex-row gap-1 @md:gap-2 items-center shrink-0">
+                        <div className="grid grid-cols-12 px-4 py-2 bg-accent border-t border-primary gap-2">
+                            <div className="col-span-3 flex flex-row gap-2 items-center">
                                 <button
                                     onClick={toggleMute}
                                     className="text-sm font-semibold text-right dark:text-white"
@@ -435,13 +433,13 @@ export default function MediaPlayer({
                                     max="100"
                                     value={playerState.volume}
                                     onChange={handleVolumeChange}
-                                    className="hidden @md:block w-24 volume-slider"
+                                    className="w-24 volume-slider"
                                     style={{
                                         accentColor: 'currentColor',
                                     }}
                                 />
                             </div>
-                            <div className="flex-1 min-w-0 flex flex-row gap-1 @md:gap-2 items-center justify-center">
+                            <div className="col-span-6 flex flex-row gap-2 items-center justify-center">
                                 <ZoomHover size="md">
                                     <button
                                         onClick={() => handleSeek(-10)}
@@ -471,25 +469,23 @@ export default function MediaPlayer({
                                     </button>
                                 </ZoomHover>
                             </div>
-                            <div className="flex flex-row gap-1 @md:gap-2 justify-end items-center shrink-0">
-                                <div className="hidden @md:block">
-                                    <Select
-                                        value={playerState.playbackRate.toString()}
-                                        onValueChange={(value) => handlePlaybackRateChange(parseFloat(value))}
-                                        groups={[
-                                            {
-                                                label: 'Playback Speed',
-                                                items: [
-                                                    { value: '0.5', label: '0.5x' },
-                                                    { value: '1', label: '1x' },
-                                                    { value: '1.5', label: '1.5x' },
-                                                    { value: '2', label: '2x' },
-                                                ],
-                                            },
-                                        ]}
-                                        className="text-sm font-semibold text-right dark:text-white"
-                                    />
-                                </div>
+                            <div className="col-span-3 flex flex-row gap-2 justify-end items-center">
+                                <Select
+                                    value={playerState.playbackRate.toString()}
+                                    onValueChange={(value) => handlePlaybackRateChange(parseFloat(value))}
+                                    groups={[
+                                        {
+                                            label: 'Playback Speed',
+                                            items: [
+                                                { value: '0.5', label: '0.5x' },
+                                                { value: '1', label: '1x' },
+                                                { value: '1.5', label: '1.5x' },
+                                                { value: '2', label: '2x' },
+                                            ],
+                                        },
+                                    ]}
+                                    className="text-sm font-semibold text-right dark:text-white"
+                                />
                                 <button
                                     onClick={toggleFullscreen}
                                     className="text-sm font-semibold text-right dark:text-white"
