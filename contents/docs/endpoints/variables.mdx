@@ -85,6 +85,14 @@ WHERE event LIKE {variables.event_pattern}
 
 For insight-based endpoints, variables work differently. Instead of defining them in your query, certain **magic variables** are automatically available based on your insight configuration.
 
+<CalloutBox icon="IconWarning" type="caution" title="Breakdown variables are required">
+
+By default, every breakdown variable on an insight-based endpoint is **required** — calls to `/run` that omit one fail. This is a safety feature: omitting the value would otherwise return data aggregated across every value of that breakdown, which is rarely what you want when exposing an endpoint to customers.
+
+You can opt individual breakdowns out by marking them as optional in the endpoint configuration. An optional breakdown can be omitted on `/run`; the response then aggregates across every value of that dimension.
+
+</CalloutBox>
+
 ### Breakdown property variables
 
 If your insight has breakdowns configured, each breakdown property name automatically becomes a variable. For example, if your TrendsQuery breaks down by `$browser`, you can filter results by passing that property as a variable:
