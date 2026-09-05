@@ -1,5 +1,6 @@
 import { AVATAR_FALLBACK_URL } from 'constants/index'
 import { IconPin } from '@posthog/icons'
+import { PlaceSuggestion, usePlaceSuggestions } from 'components/PlaceAutocomplete/usePlaceSuggestions'
 import React, { useEffect, useMemo, useRef, useState } from 'react'
 
 interface EmployeeLike {
@@ -12,13 +13,7 @@ interface EmployeeLike {
     avatar?: { url?: string }
 }
 
-interface LocationSuggestion {
-    id: string
-    name: string
-    subtitle: string
-}
-
-type DropdownItem = { type: 'employee'; member: EmployeeLike } | { type: 'location'; suggestion: LocationSuggestion }
+type DropdownItem = { type: 'employee'; member: EmployeeLike } | { type: 'location'; suggestion: PlaceSuggestion }
 
 interface PeopleMapSearchProps {
     members: EmployeeLike[]
@@ -33,10 +28,6 @@ interface PeopleMapSearchProps {
 
 const fullName = (m: EmployeeLike): string => [m.firstName, m.lastName].filter(Boolean).join(' ')
 
-// Session token for Search Box API billing (rotated after each selection)
-const makeSessionToken = (): string =>
-    typeof crypto !== 'undefined' && crypto.randomUUID ? crypto.randomUUID() : Math.random().toString(36).slice(2)
-
 // Map search box: matches team members by name first, then Mapbox places.
 export default function PeopleMapSearch({
     members,
@@ -49,13 +40,11 @@ export default function PeopleMapSearch({
     onClear,
 }: PeopleMapSearchProps): JSX.Element {
     const [query, setQuery] = useState(value)
-    const [locationResults, setLocationResults] = useState<LocationSuggestion[]>([])
     const [isOpen, setIsOpen] = useState(false)
     const [highlightIndex, setHighlightIndex] = useState(-1)
-    const [sessionToken, setSessionToken] = useState(makeSessionToken)
     const containerRef = useRef<HTMLDivElement>(null)
     const inputRef = useRef<HTMLInputElement>(null)
-    const abortRef = useRef<AbortController | null>(null)
+    const { suggestions: locationResults, resetSession } = usePlaceSuggestions(query, token)
 
     // Sync the input when the committed term changes (e.g. hash load)
     useEffect(() => {
@@ -67,50 +56,6 @@ export default function PeopleMapSearch({
         if (!q) return []
         return members.filter((m) => fullName(m).toLowerCase().includes(q)).slice(0, 6)
     }, [members, query])
-
-    // Debounced Mapbox place suggestions
-    useEffect(() => {
-        const q = query.trim()
-        const canSearch = typeof window !== 'undefined' && token && q.length >= 2
-        if (!canSearch) {
-            if (abortRef.current) {
-                abortRef.current.abort()
-                abortRef.current = null
-            }
-            setLocationResults([])
-            return
-        }
-        const controller = new AbortController()
-        abortRef.current = controller
-        const handle = setTimeout(async () => {
-            try {
-                const url = new URL('https://api.mapbox.com/search/searchbox/v1/suggest')
-                url.searchParams.set('q', q)
-                url.searchParams.set('limit', '5')
-                // Countries, regions, and cities only (Mapbox "place" == city/town)
-                url.searchParams.set('types', 'country,region,place')
-                url.searchParams.set('language', 'en')
-                url.searchParams.set('session_token', sessionToken)
-                url.searchParams.set('access_token', token as string)
-                const resp = await fetch(url.toString(), { signal: controller.signal })
-                const json = await resp.json()
-                const feats = Array.isArray(json?.suggestions) ? json.suggestions : []
-                setLocationResults(
-                    feats.map((f: Record<string, any>) => ({
-                        id: f.mapbox_id || f.feature_id || f.id,
-                        name: f.name || f.place_formatted || f.description || 'Unknown',
-                        subtitle: f.place_formatted || f.full_address || '',
-                    }))
-                )
-            } catch {
-                // ignore (including aborts)
-            }
-        }, 200)
-        return () => {
-            clearTimeout(handle)
-            controller.abort()
-        }
-    }, [query, token, sessionToken])
 
     const items: DropdownItem[] = useMemo(
         () => [
@@ -140,7 +85,7 @@ export default function PeopleMapSearch({
             setQuery(item.suggestion.name)
             onSelectLocation(item.suggestion.name)
         }
-        setSessionToken(makeSessionToken())
+        resetSession()
     }
 
     const onKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
@@ -162,7 +107,6 @@ export default function PeopleMapSearch({
 
     const handleClear = () => {
         setQuery('')
-        setLocationResults([])
         setIsOpen(false)
         setHighlightIndex(-1)
         onClear?.()
