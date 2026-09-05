@@ -15,6 +15,7 @@ import {
     WORK_HERE_SILHOUETTE,
     TRASH_SILHOUETTE,
     CONTEXT_WAREHOUSE_SILHOUETTE,
+    FIELD_GUIDE_SILHOUETTE,
 } from 'components/OSIcons/glyphs'
 import { AppItem } from 'components/OSIcons/AppIcon'
 import ContextMenu from 'components/RadixUI/ContextMenu'
@@ -83,6 +84,12 @@ export const useProductLinks = () => {
                 label: 'Talk to a human',
                 Icon: <GlassIcon path={TALK_TO_A_HUMAN_SILHOUETTE} />,
                 url: '/talk-to-a-human',
+                source: 'desktop',
+            },
+            {
+                label: 'Field guide to wild users',
+                Icon: <GlassIcon path={FIELD_GUIDE_SILHOUETTE} fillRule="evenodd" />,
+                url: '/field-guide',
                 source: 'desktop',
             },
         ],

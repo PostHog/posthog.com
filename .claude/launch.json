@@ -1,0 +1,10 @@
+{
+    "version": "0.0.1",
+    "configurations": [
+        {
+            "name": "posthog.com",
+            "url": "http://localhost:8001",
+            "port": 8001
+        }
+    ]
+}
