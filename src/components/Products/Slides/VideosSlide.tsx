@@ -8,6 +8,7 @@ import SmallTeam from 'components/SmallTeam'
 import { useToast } from '../../../context/Toast'
 import OSButton from 'components/OSButton'
 import { Link, graphql, useStaticQuery } from 'gatsby'
+import { findProfileByName } from 'components/TeamMember'
 
 interface VideoChapter {
     title: string
@@ -384,10 +385,7 @@ function AuthorInfo({ name }: { name: string }) {
         }
     `)
 
-    const person = nodes.find(
-        ({ firstName, lastName }: { firstName: string; lastName: string }) =>
-            `${firstName} ${lastName}`.toLowerCase() === name.toLowerCase()
-    )
+    const person = findProfileByName(nodes, name)
 
     if (!person) return null
 
