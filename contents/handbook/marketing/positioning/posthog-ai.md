@@ -10,13 +10,13 @@ showTitle: true
 
 PostHog AI understands your full data model – event taxonomy, user properties, cohorts, flags, experiments, warehouse sources. Ask it a question in plain English. It writes the query, runs it, and explains the result. No prompt engineering. No schema briefing. No waiting for a data team ticket to be picked up. It will also speak like a pirate to you on International Speak Like A Pirate Day. 
 
-PostHog AI is wired into PostHog Desktop via MCP, so it's not just a query interface for humans – it's the intelligence layer that agents use to understand product impact, measure experiment results, and evaluate whether their changes worked. A key part of the product autonomy loop.
+PostHog AI is available to agents via MCP, so it's not just a query interface for humans – it's the intelligence layer that agents use to understand product impact, measure experiment results, and evaluate whether their changes worked. In self-driving, it's the layer the loop leans on to answer those questions, distinct from the [Inbox](/handbook/marketing/positioning/inbox), where reports and PRs land for you to review and merge.
 
 ## The unique belief (in terms of PostHog AI)
 
 General-purpose AI is impressive but context-blind. When you ask ChatGPT "why did signups drop last Tuesday?", it doesn't know your event taxonomy, your funnel structure, your user cohorts, or what shipped last Monday. Without an MCP (which PostHog also has) you spend more time explaining the context than getting the answer.
 
-PostHog AI is different because it already has the context. It knows your event names, your properties, your SQL schema, and your product's entire behavioral history. It doesn't need to be briefed. It's the query interface for humans and agents alike – and in the [product autonomy loop](/blog/self-driving-product), it's the layer that connects PostHog Desktop to every insight, dashboard, and metric in the platform.
+PostHog AI is different because it already has the context. It knows your event names, your properties, your SQL schema, and your product's entire behavioral history. It doesn't need to be briefed. It's the query interface for humans and agents alike – and in [self-driving](/blog/self-driving-product), it's the layer the loop uses to reach every insight, dashboard, and metric in the platform.
 
 **PostHog AI isn't AI added onto analytics. It's the interface through which a self-driving product understands itself.**
 
@@ -40,7 +40,7 @@ PostHog AI is different because it already has the context. It knows your event 
 
 **Problem:** Product data is valuable but inaccessible to most of the people who need it. Non-technical stakeholders can't write SQL. Engineers don't want to context-switch to write a dashboard for a one-off question. Agents need to query metrics programmatically without human intervention.
 
-**Solution:** PostHog AI serves all three audiences from the same interface. A PM asks "what do power users do in their first session?" PostHog AI writes the query and shows the answer. PostHog Desktop asks "did this deploy regress conversion?" and gets a structured result it can use in the evaluation step of the autonomy loop.
+**Solution:** PostHog AI serves all three audiences from the same interface. A PM asks "what do power users do in their first session?" PostHog AI writes the query and shows the answer. An agent asks "did this deploy regress conversion?" and gets a structured result self-driving uses to measure whether a change worked.
 
 **Supporting features:**
 - Natural language to HogQL query generation
@@ -81,7 +81,7 @@ PostHog AI is different because it already has the context. It knows your event 
 **Where PostHog wins:**
 - PostHog AI has access to the full PostHog platform – analytics, flags, experiments, replay, and warehouse in one context
 - MCP integration for agent access – Amplitude has no equivalent
-- PostHog Desktop integration: PostHog AI powers the evaluation step of the product autonomy loop
+- Self-driving: PostHog AI is the layer the loop uses to measure whether a change worked
 
 ### vs ChatGPT / Claude (direct)
 
@@ -111,4 +111,4 @@ PostHog AI is different because it already has the context. It knows your event 
 
 PostHog AI is included in the platform – there's no separate AI product to price. The enterprise conversation is usually about **data governance** (can AI generate queries on sensitive user data?) and **access controls** (can we restrict which users can use PostHog AI?).
 
-The forward-looking pitch: teams that have PostHog AI set up properly today are the teams that will have the most capable PostHog Desktop autonomous loop tomorrow. The MCP integration between PostHog AI and coding agents is the technical foundation for self-driving product development – and it starts with getting the query layer instrumented and accessible. Enterprises which don't adopt it are falling behind faster every day.
+The forward-looking pitch: teams that have PostHog AI set up properly today are the teams that will have the most capable self-driving loop tomorrow. The MCP integration between PostHog AI and coding agents is the query and measurement layer self-driving leans on – and it starts with getting the query layer instrumented and accessible. Enterprises which don't adopt it are falling behind faster every day.

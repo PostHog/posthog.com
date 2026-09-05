@@ -18,7 +18,7 @@ Snowflake stores data. The context warehouse stores data *and* acts on it.
 
 PostHog is building the platform for self-driving product development, and the context warehouse is the layer everything else is built on. The [product autonomy loop](/blog/self-driving-product) – signals in, work out, evaluation, repeat – only closes when agents can see the full picture. That means product events *and* business context: revenue, plan tier, support history, CRM data.
 
-**The context warehouse is where that picture lives.** Every event PostHog captures, every Stripe charge, every HubSpot deal, every Zendesk ticket – it all lands in one place, queryable together. That unified store is what makes PostHog Desktop meaningful. Agents running the autonomy loop need context, and the context warehouse is the context layer.
+**The context warehouse is where that picture lives.** Every event PostHog captures, every Stripe charge, every HubSpot deal, every Zendesk ticket – it all lands in one place, queryable together. That unified store is what makes self-driving meaningful. Scouts (scheduled agents that read your data, including warehouse tables, through the same PostHog MCP you connect to Claude Code or Cursor) turn that business context into ranked reports in the [Inbox](/handbook/marketing/positioning/inbox). Self-driving needs context, and the context warehouse is the context layer.
 
 Snowflake, BigQuery, and Databricks are powerful. They're also expensive, complex to operate, and don't connect to your product tools without significant glue, which usually has to be owned by a dedicated data team. The context warehouse is different: it's integrated, not bolted on. Your data never needs to leave the platform that acts on it.
 

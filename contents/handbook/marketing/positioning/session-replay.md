@@ -8,7 +8,7 @@ showTitle: true
 
 ## Elevator pitch
 
-PostHog Session Replay records every user session across web and mobile. From any analytics insight, jump to the sessions behind it. From any error in Error Tracking, watch exactly what the user was doing when it happened. From any rage click pattern, let PostHog Desktop Inbox research and open a fix PR.
+PostHog Session Replay records every user session across web and mobile. From any analytics insight, jump to the sessions behind it. From any error in Error Tracking, watch exactly what the user was doing when it happened. From any rage click pattern, let self-driving research it and open a fix PR.
 
 Want to watch sessions manually but overwhelmed by the amount of data? PostHog AI can group and summarize sessions for you, separating signal from noise in an efficient way. 
 
@@ -16,7 +16,7 @@ FullStory and Hotjar record sessions. PostHog records sessions *and* connects th
 
 ## The unique belief (in terms of session replay)
 
-Session replay used to be reactive – you watched what went wrong *after* a user complained. In the [product autonomy loop](/blog/self-driving-product), replay is a proactive signal source. PostHog Desktop's Inbox reads replay patterns – rage clicks, dead ends, unexpected exits – and converts them into researched, prioritized fix PRs before users ever file a ticket.
+Session replay used to be reactive – you watched what went wrong *after* a user complained. In the [product autonomy loop](/blog/self-driving-product), replay is a proactive signal source. Self-driving reads replay patterns (rage clicks, dead ends, unexpected exits), groups them into ranked reports in your [Inbox](/handbook/marketing/positioning/inbox), and opens a fix PR when one is actionable, before users ever file a ticket.
 
 The shift is fundamental: replay isn't just evidence of a problem. It's the trigger that starts automated remediation. Watching sessions is what humans do. Generating signals from sessions is what self-driving product development does.
 
@@ -52,10 +52,10 @@ The shift is fundamental: replay isn't just evidence of a problem. It's the trig
 
 **Problem:** Most teams watch session replays when something goes wrong. The signal is already cold – the user has churned or complained. Proactive replay analysis requires someone to watch hundreds of recordings, which doesn't scale.
 
-**Solution:** PostHog Desktop's Inbox connects to Session Replay as a signal source. Replay patterns – rage clicks, repeated form abandonment, dead-click clusters – are automatically surfaced, researched, and converted into prioritized fix PRs. Sessions feed directly into PR, while AI summarization enables manual review to scale as PostHog AI can group and summarize sessions for you.
+**Solution:** Session Replay is a signal source for self-driving. Replay patterns – rage clicks, repeated form abandonment, dead-click clusters – are automatically surfaced, researched, and ranked as reports in your [Inbox](/handbook/marketing/positioning/inbox) (in the app, and piped to Slack), where an agent takes the worst offenders into a fix PR. AI summarization enables manual review to scale too, as PostHog AI can group and summarize sessions for you.
 
 **Supporting features:**
-- PostHog Desktop Inbox integration with Session Replay as a signal source
+- Session Replay is a signal source for self-driving (reports land in your Inbox, in the app and piped to Slack)
 - Session replay summarization and automatic playlist generation
 - Rage click and dead click detection
 - Session collections for grouping related recordings
@@ -81,7 +81,7 @@ The shift is fundamental: replay isn't just evidence of a problem. It's the trig
 
 **Where PostHog wins:**
 - Native connection to analytics, feature flags, experiments, and error tracking
-- PostHog Desktop agent integration – replays become inputs to automated fix PRs
+- Self-driving integration – replay is a signal source, so replays become ranked reports in your inbox and automated fix PRs
 - Significantly lower cost at equivalent session volume
 - More generous free tier (5,000 sessions/month forever vs FullStory's trial limits)
 - AI summarization and automatic playlist generation
@@ -102,7 +102,7 @@ The shift is fundamental: replay isn't just evidence of a problem. It's the trig
 
 **Where PostHog wins:**
 - Broader platform – analytics, flags, experiments, warehouse, and error tracking included
-- PostHog Desktop Inbox integration – LogRocket has no equivalent agent loop
+- Replay feeds self-driving as a signal source – LogRocket has no equivalent agent loop
 - Usage-based pricing without seat limits
 
 ## Objections
@@ -125,4 +125,4 @@ The shift is fundamental: replay isn't just evidence of a problem. It's the trig
 
 Enterprise session replay customers get volume discounts, extended mobile replay retention, advanced access controls, SOC 2, and EU data residency. The consolidation pitch is particularly strong here: FullStory and Hotjar contracts are often standalone line items that can be eliminated when replay is included in a PostHog annual deal.
 
-The forward-looking pitch: replay as a signal source for PostHog Desktop Inbox is a capability no other vendor offers. Teams that instrument replay properly now will have a fully automated UX investigation loop as the agent features mature.
+The forward-looking pitch: replay as a signal source for self-driving is a capability no other vendor offers. Teams that instrument replay properly now will have a fully automated UX investigation loop as the agent features mature.

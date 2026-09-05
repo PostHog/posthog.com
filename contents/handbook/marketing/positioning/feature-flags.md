@@ -8,13 +8,13 @@ showTitle: true
 
 ## Elevator pitch
 
-PostHog Feature Flags support boolean flags, multivariate variants, JSON payloads for config changes without deploys, and local evaluation for <50ms latency. Every flag is queryable alongside your analytics and session replay – filter any insight by which flag variant a user saw. And every flag PostHog Desktop ships is automatically wired into the analytics that measures whether it worked.
+PostHog Feature Flags support boolean flags, multivariate variants, JSON payloads for config changes without deploys, and local evaluation for <50ms latency. Every flag is queryable alongside your analytics and session replay – filter any insight by which flag variant a user saw. And every flag self-driving ships is automatically wired into the analytics that measures whether it worked.
 
 LaunchDarkly manages flags. PostHog manages flags *and* shows you the impact of every rollout.
 
 ## The unique belief (in terms of feature flags)
 
-Feature flags started as deployment safety nets – a way to ship code slowly without exposing too much to users. In the [product autonomy loop](/blog/self-driving-product), they're the mechanism through which agents ship code safely. PostHog Desktop's `instrument-feature-flags` skill wraps relevant changes it opens in a flag by default. The enricher shows stale flags inline in your editor. When an agent ships a fix, the flag is the rollout control.
+Feature flags started as deployment safety nets – a way to ship code slowly without exposing too much to users. In the [product autonomy loop](/blog/self-driving-product), they're the mechanism through which agents ship code safely. Self-driving's `instrument-feature-flags` skill wraps relevant changes it opens in a flag by default. The enricher shows stale flags inline in your editor. When an actionable report in the [Inbox](/handbook/marketing/positioning/inbox) becomes a pull request, self-driving ships the change behind a flag so it can roll out gradually and roll back if needed. The flag is the rollout control at the ship end of the loop.
 
 **Flags aren't just for humans anymore. They're the guardrails that let agents work autonomously and safely.**
 
@@ -40,10 +40,10 @@ Without flags, agents can't ship incrementally. Without incremental shipping, ag
 
 **Problem:** Coding agents that ship without feature flags are unsafe. A bad change rolls out to 100% of users with no kill switch. Evaluating whether the change worked requires manually querying separate analytics.
 
-**Solution:** PostHog Desktop can add flags automatically to every PR it opens. The enricher detects existing flags in your codebase and shows rollout percentage, staleness status, and flag evaluation inline – without leaving your editor. Close the loop: agent ships with flag → analytics measures impact → agent evaluates → agent removes stale flag.
+**Solution:** Self-driving can add flags automatically to every PR it opens. The enricher detects existing flags in your codebase and shows rollout percentage, staleness status, and flag evaluation inline – without leaving your editor. Close the loop: agent ships with flag → analytics measures impact → agent evaluates → agent removes stale flag.
 
 **Supporting features:**
-- PostHog Desktop `instrument-feature-flags` skill: adds flags to PRs automatically
+- Self-driving `instrument-feature-flags` skill: adds flags to PRs automatically
 - Enricher: detects `isFeatureEnabled` calls and shows live rollout data inline
 - Stale flag detection built into the enricher
 - MCP exposes flag state to any connected agent runtime
@@ -81,7 +81,7 @@ Without flags, agents can't ship incrementally. Without incremental shipping, ag
 **Where PostHog wins:**
 - No per-developer pricing – typically 80-90% cheaper for equal team sizes
 - Native analytics and session replay – LaunchDarkly requires separate tools for impact measurement
-- PostHog Desktop integration – LaunchDarkly has no agent loop equivalent
+- Self-driving integration – LaunchDarkly has no agent loop equivalent
 - Sources are free in PostHog; every PostHog tool shares the same event stream
 
 ### vs GrowthBook
@@ -91,7 +91,7 @@ Without flags, agents can't ship incrementally. Without incremental shipping, ag
 **Where PostHog wins:**
 - Fully managed – no infrastructure to run (this is better, trust us)
 - Replay, analytics, error tracking included
-- PostHog Desktop integration
+- Self-driving integration
 - Still open source (MIT)
 
 ## Objections
