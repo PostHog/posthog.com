@@ -17,7 +17,7 @@ New products at PostHog go through four phases:
 
 1. **Setting up** - Initial planning and alpha development behind a feature flag
 2. **Alpha** - Slowly adding customers you've spoken with to the feature flag
-3. **Beta** - Opening up to all users who want to opt-in
+3. **Beta** - Opening up to all users who want to opt-in (free for most products, but see [pricing betas](#pricing-betas) for token-heavy exceptions)
 4. **General availability (GA)** - Full release with pricing, and marketing launch
 
 Please refer to the new product RFC for what the actual steps are. Duplicating them here would cause them to go out-of-sync extremely quickly. We'll simply explain the rationale behind each of the stages.
@@ -91,6 +91,14 @@ Betas do not need to be performant for high-volume users and can have big bugs, 
   It's helpful to let the marketing team know when new betas are added. They'll then add the beta to [the changelog](/changelog), organize any marketing announcements, plan [a full announcement](https://github.com/PostHog/marketing/issues/new?template=launch-plan.md) for full release, create an email onboarding flow to help you collect user feedback, and anything else you need. You can let them know via [the marketing Slack channel](https://posthog.slack.com/archives/C08CG24E3SR).
 
 </CalloutBox>
+
+### Pricing betas
+
+Betas are free for most products. We want as many people as possible trying them and giving feedback, and that's easiest when there's no cost in the way.
+
+There are exceptions. Some products – particularly token-heavy AI products – are genuinely expensive to run, so much so that offering them for free at any meaningful scale isn't viable. In those cases it's fine to charge during beta. A product being new and rough around the edges doesn't disqualify it from being paid; if the cost of providing it is significant, charging is the honest option.
+
+When we do charge for a beta, we should have a generous refund policy, and it should be documented and linkable from our docs. The goal is to not frustrate paying users when they hit the rough edges that come with any beta – if something goes wrong or doesn't deliver, they should be able to get their money back easily.
 
 ### Collecting beta feedback
 
