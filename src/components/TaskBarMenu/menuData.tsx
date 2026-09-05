@@ -19,6 +19,7 @@ import { useAppSettings } from '../../context/App'
 import { IconChevronDown } from '@posthog/icons'
 import { navigate } from 'gatsby'
 import { useSmallTeamsMenuItems } from './SmallTeamsMenuItems'
+import { BROWSE_TOOLS_HANDLES, buildProductMenuItems } from 'constants/productNavigation'
 
 interface DocsMenuItem {
     name: string
@@ -386,7 +387,12 @@ const buildProductsMenuItems = (allProducts: any[]) => {
     return items
 }
 
-export function useMenuData(): MenuType[] {
+const buildToolsMenu = (allProducts: any[]): MenuType => ({
+    trigger: 'Tools',
+    items: buildProductMenuItems([...BROWSE_TOOLS_HANDLES], allProducts),
+})
+
+export function useMenuData(showNavbarTools = false): MenuType[] {
     const smallTeamsMenuItems = useSmallTeamsMenuItems()
     const allProducts = useProduct() as any[]
     const { isMobile } = useAppSettings()
@@ -397,6 +403,7 @@ export function useMenuData(): MenuType[] {
             trigger: 'Products',
             items: buildProductsMenuItems(allProducts),
         },
+        ...(showNavbarTools ? [buildToolsMenu(allProducts)] : []),
         {
             trigger: 'Pricing',
             link: '/pricing',
