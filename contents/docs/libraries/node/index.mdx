@@ -13,6 +13,7 @@ features:
   surveys: false
   aiObservability: true
   errorTracking: true
+  tracing: true
 ---
 
 If you're working with Node.js (versions 20+), the official `posthog-node` library is the simplest way to integrate your software with PostHog. This library uses an internal queue to make calls fast and non-blocking. It also batches requests and flushes asynchronously, making it perfect to use in any part of your web app or other server-side application that needs performance. And in addition to event capture, [feature flags](/docs/feature-flags) are supported as well.
@@ -313,6 +314,211 @@ Properties and `distinctId` passed directly to `capture` take precedence over re
 ### Send headers from the client
 
 If you're using [PostHog JS](/docs/libraries/js) on the frontend, configure [`tracing_headers`](/docs/libraries/js/config#tracing-headers) for your Express backend hostname so browser requests include `X-POSTHOG-SESSION-ID` and `X-POSTHOG-DISTINCT-ID`, which the Express middleware reads automatically.
+
+## Distributed tracing
+
+> Requires `posthog-node` version >= 5.52.0.
+
+<CalloutBox icon="IconFlask" title="The span API is experimental" type="action">
+
+Tracing is new in `posthog-node` and its API can still change in a minor release. Spans you send are kept — it's the SDK surface that isn't frozen yet.
+
+</CalloutBox>
+
+Tracing records **spans** — timed units of work — so you can see where time went in a request and how work fans out across your services. Spans created inside a request context automatically carry the person and session they belong to, so a slow trace links back to the user who experienced it.
+
+Tracing is off until you set the `traces` option. No OpenTelemetry dependency is required. For what you can do with spans once they arrive, see [Distributed tracing](/docs/distributed-tracing/start-here).
+
+```ts file=server.ts
+import { PostHog } from 'posthog-node'
+
+const posthog = new PostHog('<ph_project_token>', {
+  host: '<ph_client_api_host>',
+  traces: {
+    serviceName: 'checkout-api',
+  },
+})
+```
+
+Set `serviceName` — PostHog groups operations by service and span name.
+
+### Creating spans
+
+`withSpan` runs a callback with a span active for its duration and ends the span for you: at return for a synchronous callback, when the promise settles for an async one. Spans created inside the callback nest underneath it automatically.
+
+```ts
+await posthog.withSpan('POST /checkout', async (span) => {
+  span.setAttribute('plan', user.plan)
+
+  const order = await posthog.withSpan('create-order', () => createOrder(cart))
+  await posthog.withSpan('charge-card', () => stripe.charge(order))
+
+  return order
+})
+```
+
+If the callback throws or rejects, the span records the exception, its status is set to `error`, and your original error propagates unchanged.
+
+The recorded exception includes the stack trace, which contains file paths from your server. If you'd rather those didn't leave your process, delete `exception.stacktrace` in [`beforeSpanSend`](#scrubbing-and-dropping-spans).
+
+Use `startSpan` for work that can't wrap a callback. **`startSpan` does not make the span active**, so spans created afterwards are not its children unless you pass `parent` explicitly — and you must call `end()` yourself.
+
+```ts
+const span = posthog.startSpan('background-sync', { attributes: { queue: 'emails' } })
+
+// Explicitly parent a child to a span that isn't active.
+const child = posthog.startSpan('send-batch', { parent: span })
+child.end()
+
+span.end()
+```
+
+`getActiveSpan()` returns the span currently active on this execution path, or `null` outside any `withSpan` callback.
+
+### Span names and attributes
+
+Span names should be low-cardinality operation names — `GET /users/:id`, not `GET /users/123`. Variable values belong in attributes, which accept strings, numbers, booleans, bigints, and arrays of those.
+
+```ts
+await posthog.withSpan('GET /users/:id', { kind: 'server' }, async (span) => {
+  span.setAttributes({ 'user.id': id, 'db.rows': rows.length })
+  span.addEvent('cache-miss')
+
+  if (rows.length === 0) {
+    span.setStatus('error', 'user not found')
+  }
+})
+```
+
+| Method | Description |
+|---|---|
+| `setAttribute(key, value)` | Set a single attribute |
+| `setAttributes(attributes)` | Merge several attributes at once |
+| `addEvent(name, attributes?, timestamp?)` | Record a timestamped event within the span |
+| `setStatus(status, message?)` | Set the outcome: `'ok'` or `'error'` |
+| `recordException(error)` | Attach an exception event carrying the type, message and stack, and set status to `error` |
+| `updateName(name)` | Replace the span name, e.g. once a route template resolves |
+| `traceparent()` | This span's W3C `traceparent` header value |
+| `tracestate()` | This span's W3C `tracestate` value, or `null` when it has none |
+| `end(endTime?)` | End the span and queue it for export |
+
+Both `withSpan` and `startSpan` take the same options:
+
+| Option | Description |
+|---|---|
+| `kind` | What the work is: `'internal'` (default), `'server'` for an inbound request, `'client'` for an outbound call, `'producer'` or `'consumer'` for queue work |
+| `attributes` | Attributes to set at span start |
+| `parent` | A span handle, or an inbound W3C `traceparent` string to continue a trace another service started |
+| `tracestate` | The W3C `tracestate` accompanying a `traceparent` string. Ignored when `parent` is a span handle, which inherits its parent's |
+| `startTime` | Backdate the span's start, as a millisecond epoch or a `Date`. A start more than 24 hours old is warned about, because the server clamps it to receive time |
+
+### Tracing across services
+
+Spans use [W3C Trace Context](https://www.w3.org/TR/trace-context/), so a trace can span several services. Pass an inbound `traceparent` header as `parent` to continue a trace another service started, and send `span.traceparent()` onward when you call out.
+
+```ts file=server.ts
+app.post('/checkout', async (req, res) => {
+  await posthog.withSpan('POST /checkout', { kind: 'server', parent: req.get('traceparent') }, async (span) => {
+    const traceparent = span.traceparent()
+
+    await fetch('https://payments.internal/charge', {
+      method: 'POST',
+      headers: traceparent ? { traceparent } : {},
+    })
+
+    res.json({ status: 'ok' })
+  })
+})
+```
+
+A missing or malformed `traceparent` starts a new trace rather than throwing.
+
+A continued trace propagates the sampled flag it was handed, so a downstream sampler sees the decision the head service made. PostHog itself doesn't sample — a span is recorded and exported whichever way that flag is set.
+
+### Linking traces to people and sessions
+
+Spans created inside a PostHog request context automatically carry `posthogDistinctId` and `sessionId` attributes, which is what makes a trace reachable from a person or a Session Replay recording. Use the [Express middleware](#add-request-context-to-express) or [`withContext`](#contexts):
+
+```ts
+posthog.withContext({ distinctId: user.id, sessionId }, async () => {
+  await posthog.withSpan('POST /checkout', () => processOrder())
+})
+```
+
+Spans created outside a request context simply omit those attributes.
+
+### Scrubbing and dropping spans
+
+`beforeSpanSend` runs on every finished span before it's queued for export. Edit the span in place to strip attributes you don't want leaving your process, or return `null` to drop the span entirely.
+
+```ts
+const posthog = new PostHog('<ph_project_token>', {
+  host: '<ph_client_api_host>',
+  traces: {
+    serviceName: 'checkout-api',
+    beforeSpanSend: (span) => {
+      if (span.attributes['http.route'] === '/health') return null
+
+      delete span.attributes['http.request.header.authorization']
+      return span
+    },
+  },
+})
+```
+
+The hook sees plain values rather than the OTLP wire encoding, so `span.attributes.userId` reads as `42`, not `{ intValue: '42' }`. It runs after PostHog attaches `posthogDistinctId` and `sessionId`, so those are visible to the hook and can be scrubbed too.
+
+- `traceId`, `spanId` and `parentSpanId` are read-only. Rewriting them would orphan child spans that have already been exported, so assignments are ignored.
+- A hook that throws drops the span rather than exporting it unscrubbed.
+- Pass an array to run several hooks left to right. The first one to return `null` stops the chain.
+
+### Span limits
+
+A span is capped at 128 attributes and 128 events, each event at 128 attributes, and each string attribute value at 8192 characters. The endpoint rejects a span that's too large, and a rejected span is lost whole rather than truncated, so the caps bound a span before it gets there.
+
+Past the cap, the earliest attributes and events are kept and the number dropped is reported alongside the span, so a truncated span reads as truncated rather than as quietly incomplete. The attributes PostHog attaches itself — `posthogDistinctId` and `sessionId` — don't count toward the cap and are never dropped, so a span at the limit still links back to its person and session.
+
+The event cap is absolute: an `exception` event the SDK records for you spends an ordinary slot like any other. A span that fills its events and then throws keeps its `error` status but not the exception detail, and reports the loss in `droppedEventsCount`. Raise `maxEventsPerSpan` on spans that record many events and can also fail.
+
+The length bound reaches inside a value, including strings nested in arrays and objects, and applies to `exception.stacktrace` like any other attribute. All four caps are re-applied after `beforeSpanSend`, so a hook that enriches a span can't push it back over.
+
+### Configuration
+
+| Option | Default | Description |
+|---|---|---|
+| `serviceName` | – | Name of the service producing spans. Set this |
+| `serviceVersion` | – | Version of the service |
+| `environment` | – | Deployment environment, e.g. `production` |
+| `resourceAttributes` | – | Extra OTLP resource attributes. Takes precedence over the fields above |
+| `flushIntervalMs` | `5000` | How often queued spans are exported |
+| `maxExportBatchSize` | `512` | Maximum spans per request |
+| `maxQueueSize` | `2048` | Maximum spans held in memory. Spans beyond this are dropped |
+| `maxLiveSpans` | `10000` | Maximum spans open at once. At the limit `startSpan` returns an inert handle |
+| `maxSpanAgeMs` | `3600000` | A span still open after this is treated as leaked and never exported |
+| `beforeSpanSend` | – | Edit or drop each finished span before export. Return `null` to drop it |
+| `maxAttributesPerSpan` | `128` | Maximum attributes you set on one span |
+| `maxEventsPerSpan` | `128` | Maximum events on one span |
+| `maxAttributesPerEvent` | `128` | Maximum attributes on one span event, including the `exception.*` attributes the SDK records for you |
+| `maxAttributeValueLength` | `8192` | Maximum characters in a string attribute value |
+
+### Shutdown and short-lived processes
+
+Both `flush()` and `shutdown()` export spans that have already ended. Spans still open at that point are discarded, so end your spans before either call — `withSpan` does this for you.
+
+In a serverless handler, call `flush()`: the container is reused across invocations, so `shutdown()` would throw away the connection pool and the flag cache. Events and spans are flushed concurrently, so it costs one round trip, not two.
+
+```ts
+export const handler = async () => {
+  await posthog.withSpan('handler', () => doWork())
+  await posthog.flush()
+}
+```
+
+<CalloutBox icon="IconInfo" title="Edge runtimes">
+
+On edge runtimes, spans nest across `await` only when you pass `parent` explicitly. The Node runtime tracks the active span with `AsyncLocalStorage`; the edge build cannot, so a span created after an `await` starts a new trace unless it is given a parent.
+
+</CalloutBox>
 
 ## Feature flags
 
