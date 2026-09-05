@@ -67,6 +67,7 @@ export const query = graphql`
                     data {
                         attributes {
                             label
+                            slug
                         }
                     }
                 }
