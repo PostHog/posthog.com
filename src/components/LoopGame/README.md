@@ -1,32 +1,39 @@
 # LoopGame
 
-A small canvas game for MDX content: the reader draws a loop in one stroke and gets a 0-100 score for how loop-like it is, plus a one-line verdict. Built for the "Are these loops or graphs?" blog post - low scores are declared graphs.
-
-## Usage
-
-Registered as a global MDX shortcode, so any MDX file can use it directly:
+**Ride the loop hype wave!** is a canvas rollercoaster tracing game for the "Are these loops or graphs?" blog post. It is registered as a global MDX shortcode with no props:
 
 ```mdx
 <LoopGame />
 ```
 
-No props.
+## Playing
 
-## How scoring works
+Each challenge generates a dashed blue track with one, two, or occasionally three loops (40%, 45%, and 15% of layouts). Trace it from START to FINISH in one stroke using a mouse, pen, or finger. The orange rails are the player's actual drawing, lightly smoothed to remove pointer jitter. Select **Launch Max** to ride those rails.
 
-On pointer release the stroke is scored against an ideal circle:
+- **Difficulty** defaults to Easy. Easy adds grip and a 0.12-second bump grace period; Medium reduces both; Hard uses minimal grip and no grace period. Switching difficulty preserves the drawing and resets the ride result.
+- **Launch speed** changes the starting momentum. It is locked during a ride.
+- **Stop ride** stops the animation; the same rails can be launched again.
+- **Clear** removes the drawing and keeps the current guide.
+- **New track** generates another layout and resets its suggested launch speed.
 
-- **Centroid fit** - the centroid and mean radius of the drawn points define the ideal circle (drawn as a dashed overlay after scoring).
-- **Circularity** - RMS deviation of point radii from the mean radius, normalized by the mean radius.
-- **Closure** - distance between the stroke's first and last points, relative to the mean radius.
-- **Coverage** - total angle swept around the centroid. Under ~260 degrees is called an arc; over ~1.6 laps is called `while(true)`.
+The cart must reach FINISH and complete the guide's number of full turns. A straight shortcut is not a win. Results explain whether the cart stalled, lost contact upside down, or hit a bend too fast. Progress shows the proportion of rail traveled and the completed loop count.
 
-`score = 100 x circularity x (0.55 + 0.45 x closure) x coverage`, with early exits (too few points, too small, arc, multi-lap) mapped to fixed low scores and bespoke verdicts.
+## Implementation
 
-## Implementation notes
+`physics.ts` generates tracks, resamples and smooths drawings, and advances the ride. Tracks use a fixed 600 × 450 coordinate space, with samples approximately four units apart. Their arc lengths, tangents, and curvature determine cart position, rotation, and rail contact. Each ride follows stroke order, including at overlapping rails.
 
-- Pointer events with pointer capture, so it works with mouse and touch; `touch-action: none` stops the page scrolling mid-draw.
-- The canvas backing store is sized from its CSS box and `devicePixelRatio` on demand (no ResizeObserver) - resolution is set on the first draw after any resize.
-- Stroke color is PostHog red (`#f54e00`), fitted circle PostHog blue (`#1d4aff`), on `bg-primary`, so it reads in both color modes.
-- Best score is component state only - it resets on navigation, deliberately (no storage).
-- All styling uses project color tokens (`bg-accent`, `bg-primary`, `border-primary`, `text-primary`, `text-secondary`, `text-muted`).
+The physics is an arcade approximation. On Easy: gravity changes speed along the rail, friction removes energy, and an arcade grip allowance holds the cart through brief negative normal loads (up to 2 g). On Easy, a load below −2 g or above 16 g must persist for more than 0.12 seconds before the cart leaves the track. This makes hand-drawn bumps more forgiving. A detached cart follows a ballistic path. The loop counter measures full net tangent rotations, not circle accuracy. Suggested speeds are tuned to the generated loop sizes.
+
+`index.tsx` owns pointer capture, controls, canvas rendering, and animation. Only the primary pointer can draw, cancellation discards an unfinished drawing, and drawing is disabled during a ride. A `ResizeObserver` preserves drawings and animation through resizing, and a body theme observer repaints for color changes. Both observers and the animation frame are cleaned up on unmount. Animation uses substeps no longer than 1/120 second and clamps elapsed time after a background-tab pause.
+
+The rider reuses the existing superhero Max asset from `src/images/max.png`, loaded once and drawn on a small wheelbase that rotates with the track. The UI uses project colors, container queries, and the shared `OSButton`. Status messages use a live region. Drawing requires a pointing device; the launch, speed, stop, clear, and new-track controls are keyboard accessible. Nothing is persisted across visits.
+
+## Verification
+
+Run with Node 22:
+
+```sh
+pnpm exec node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON --test src/components/LoopGame/physics.test.ts
+```
+
+The tests cover 100 generated layouts, successful rides, stalling, derailment, shortcuts, repeated pointer points, empty strokes, and forgiving rides over small tracing wobbles. Browser checks should cover tracing, touch input, cancellation, replay, stop, new tracks, and resizing during a ride. Capture narrow/wide light/dark screenshots and before/after GIFs for visual changes.
