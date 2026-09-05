@@ -21,6 +21,7 @@ import { FeatureAvailability } from './components/FeatureAvailability'
 import FeatureOwnershipTable from './components/FeatureOwnershipTable'
 import { FormulaScreenshot } from './components/FormulaScreenshot'
 import { GDPRForm } from './components/GDPRForm'
+import Glossary from './components/Glossary'
 import ImageSlider from './components/ImageSlider'
 import Link from './components/Link'
 import OSButton from './components/OSButton'
@@ -57,6 +58,7 @@ export const shortcodes = {
     Emoji,
     FeatureAvailability,
     FormulaScreenshot,
+    Glossary,
     ImageSlider,
     GDPRForm,
     OverflowXSection,
