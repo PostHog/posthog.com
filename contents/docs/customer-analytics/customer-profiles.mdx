@@ -4,36 +4,37 @@ sidebar: Docs
 showTitle: true
 ---
 
-import CustomerAnalyticsBetaWarning from './_snippets/customer-analytics-beta-warning.mdx'
+import CustomerAnalyticsBetaWarning from "./_snippets/customer-analytics-beta-warning.mdx";
 
 <CustomerAnalyticsBetaWarning />
 
 Customer profiles consolidate everything about a customer in one place. Instead of jumping between different parts of PostHog to understand a customer, you get their full picture in a single view.
 
 <ProductScreenshot
-    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/pasted_image_2025_12_19_T12_30_34_040_Z_e0dea14b33.png"
-    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/pasted_image_2025_12_19_T12_30_59_919_Z_8a54ff12bf.png"
-    alt="Person profile"
-    classes="rounded"
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/pasted_image_2025_12_19_T12_30_34_040_Z_e0dea14b33.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/pasted_image_2025_12_19_T12_30_59_919_Z_8a54ff12bf.png"
+  alt="Person profile"
+  classes="rounded"
 />
 
 ## What's included in a profile
 
 Customer profiles pull together data from across PostHog and connected sources:
 
-| Data type | Source | Requirements |
-| --- | --- | --- |
-| Events | [Product analytics](/docs/product-analytics) | Automatic |
-| Errors | [Error tracking](/docs/error-tracking) | Error tracking enabled |
-| LLM traces | [LLM observability](/docs/ai-engineering/observability) | LLM observability enabled |
-| Support tickets | [Zendesk](/docs/cdp/sources/zendesk) | Zendesk data warehouse source connected |
-| Customer journeys | [Customer journeys](#customer-journeys) | Journeys configured with funnel insights |
+| Data type         | Source                                                  | Requirements                                   |
+| ----------------- | ------------------------------------------------------- | ---------------------------------------------- |
+| Events            | [Product analytics](/docs/product-analytics)            | Automatic                                      |
+| Errors            | [Error tracking](/docs/error-tracking)                  | Error tracking enabled                         |
+| LLM traces        | [LLM observability](/docs/ai-engineering/observability) | LLM observability enabled                      |
+| Support tickets   | [Zendesk](/docs/cdp/sources/zendesk)                    | Zendesk data warehouse source connected        |
+| Customer journeys | [Customer journeys](#customer-journeys)                 | Journeys configured with funnel insights       |
+| Event stream      | [Event stream](#event-stream)                           | Event stream configured with Slack integration |
 
 ## Viewing a customer profile
 
 You can access customer profiles in two main ways:
 
-1. **From the dashboard**: Click on any customer in the [customer analytics dashboard](https://us.posthog.com/customer_analytics)
+1. **From the dashboard**: Click on any customer in the [customer analytics dashboard](https://app.posthog.com/customer_analytics)
 2. **From customer lists**: Click any [person](https://app.posthog.com/persons) or [group](https://app.posthog.com/groups/0) from the lists to open their profile
 
 Accessing customers from insights and other producs will also land in their profile page.
@@ -52,10 +53,10 @@ This is useful for B2B products where you care about company-level activity, not
 Each customer profile displays [usage metrics](/docs/customer-analytics/usage-metrics) you've defined.
 
 <ProductScreenshot
-    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/pasted_image_2025_12_19_T12_47_09_424_Z_893c3cd740.png"
-    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/pasted_image_2025_12_19_T12_46_51_933_Z_ef9223c947.png"
-    alt="Usage metrics in customer profile"
-    classes="rounded"
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/pasted_image_2025_12_19_T12_47_09_424_Z_893c3cd740.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/pasted_image_2025_12_19_T12_46_51_933_Z_ef9223c947.png"
+  alt="Usage metrics in customer profile"
+  classes="rounded"
 />
 
 ## Customer journeys
@@ -71,6 +72,19 @@ The journey node displays:
 You can switch between different journeys using the dropdown selector in the node. If no journeys are configured, click **Configure journeys** to set them up.
 
 For details on creating and managing journeys, see [Create customer journeys](/docs/customer-analytics/create-customer-journeys).
+
+## Event stream
+
+Account profiles include an **Event stream** tab where you can add or remove accounts from your personal event stream. When enabled, selected events from that account are delivered to a Slack channel of your choice in real time.
+
+Each team member configures their own stream independently. To set yours up:
+
+1. Go to **Customer analytics** > [**Configuration**](https://app.posthog.com/customer_analytics/configuration?tab=customer-analytics-event-stream) and select the events you want to stream.
+2. Connect a Slack workspace and pick a channel for delivery.
+3. Open an account profile and switch to the **Event stream** tab.
+4. Toggle **Include in my event stream** to start streaming that account's events.
+
+> **Note:** Only accounts with an `external_id` can have their events matched and streamed. Accounts missing this identifier show a warning on the toggle.
 
 ## Connecting support tickets
 
