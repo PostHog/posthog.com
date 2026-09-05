@@ -3,7 +3,6 @@ import { AnimatePresence, motion, PanInfo, useDragControls } from 'framer-motion
 import {
     IconChevronDown,
     IconDocument,
-    IconMinus,
     IconX,
     IconCollapse45Chevrons,
     IconSquare,
@@ -130,6 +129,79 @@ function SnapIndicator({ side }: { side: 'left' | 'right' }) {
     )
 }
 
+const WindowRail = ({
+    canGoBack,
+    canGoForward,
+    goBack,
+    goForward,
+    expanded,
+    onToggleExpanded,
+    onClose,
+}: {
+    canGoBack: boolean
+    canGoForward: boolean
+    goBack: () => void
+    goForward: () => void
+    expanded: boolean
+    onToggleExpanded: () => void
+    onClose: () => void
+}) => (
+    <div
+        data-app="WindowRail"
+        className="absolute inset-y-0 left-0 z-30 flex w-12 flex-col items-center px-1 py-2 print:hidden"
+    >
+        <Tooltip
+            trigger={<OSButton windowButton size="md" aria-label="Close window" onClick={onClose} icon={<IconX />} />}
+            side="right"
+        >
+            Close window
+        </Tooltip>
+        <Tooltip
+            trigger={
+                <OSButton
+                    windowButton
+                    size="md"
+                    aria-label={expanded ? 'Restore window' : 'Expand window'}
+                    onClick={onToggleExpanded}
+                    icon={expanded ? <IconCollapse45Chevrons /> : <IconSquare className="scale-110" />}
+                />
+            }
+            side="right"
+        >
+            {expanded ? 'Restore window' : 'Expand window'}
+        </Tooltip>
+        <div className="my-2 w-6 border-t border-primary" />
+        <Tooltip
+            trigger={
+                <OSButton
+                    size="md"
+                    aria-label="Go back"
+                    disabled={!canGoBack}
+                    onClick={goBack}
+                    icon={<IconArrowLeft />}
+                />
+            }
+            side="right"
+        >
+            Go back
+        </Tooltip>
+        <Tooltip
+            trigger={
+                <OSButton
+                    size="md"
+                    aria-label="Go forward"
+                    disabled={!canGoForward}
+                    onClick={goForward}
+                    icon={<IconArrowRight />}
+                />
+            }
+            side="right"
+        >
+            Go forward
+        </Tooltip>
+    </div>
+)
+
 export default function AppWindow({ item, chrome = true }: { item: AppWindowType; chrome?: boolean }) {
     const { addToast, toasts } = useToast()
     const {
@@ -173,6 +245,7 @@ export default function AppWindow({ item, chrome = true }: { item: AppWindowType
     const [closing, setClosing] = useState(false)
     const [closed, setClosed] = useState(false)
     const [minimizing, setMinimizing] = useState(false)
+    const [integratedChrome, setIntegratedChrome] = useState(false)
     // The open animation should only play once, on mount. `playOpenAnimation` is
     // decided from mount-time props and cleared when the animation finishes, so
     // later state changes (expand/collapse) never replay the pop-in.
@@ -186,6 +259,7 @@ export default function AppWindow({ item, chrome = true }: { item: AppWindowType
     const hasToolbar = item.appSettings?.toolbar
     const hideTitle = item.appSettings?.hideTitle
     const isCompositorActive = animating || dragging || leftDragResizing || closing
+    const edgeToEdgeReaderChrome = integratedChrome && (item.expanded || size.width < 672)
     const inView = useMemo(() => {
         if (item.expanded) return true
 
@@ -667,6 +741,11 @@ export default function AppWindow({ item, chrome = true }: { item: AppWindowType
             hasDeveloperMode={hasDeveloperMode}
             setHasDeveloperMode={setHasDeveloperMode}
             animating={animating}
+            close={handleClose}
+            toggleExpanded={toggleExpanded}
+            canToggleExpanded={!item.fixedSize}
+            isExpanded={item.expanded}
+            setIntegratedChrome={setIntegratedChrome}
         >
             <WindowContainer closing={closing}>
                 {item.appSettings?.size?.fixed && (
@@ -725,7 +804,7 @@ export default function AppWindow({ item, chrome = true }: { item: AppWindowType
                             : 'size-full'
                     } !select-auto flex flex-col border-primary ${WINDOW_BG} ${
                         isCompositorActive ? MOTION_LAYER : ''
-                    } rounded-lg ${item.appSettings?.size?.fixed ? 'border' : item.expanded ? 'border-t' : ''} ${
+                    } ${edgeToEdgeReaderChrome ? 'rounded-none border-0' : 'rounded-lg border'} ${
                         item.expanded ? 'shadow-none' : 'shadow-md'
                     } ${
                         item.expanded
@@ -747,73 +826,59 @@ export default function AppWindow({ item, chrome = true }: { item: AppWindowType
                             : undefined
                     }
                 >
-                    <div className={`print:hidden ${hasToolbar ? 'bg-primary flex items-center py-0.5 px-1' : ''}`}>
-                        {hasToolbar && (
-                            <>
-                                {!hideTitle && (
-                                    <p className="text-primary text-left text-sm font-semibold ml-1.5 my-0 line-clamp-1">
-                                        {item.meta?.title?.replace(/ - PostHog$/, '')}
-                                    </p>
-                                )}
-                                <div className="flex-1" />
-                            </>
-                        )}
-                        <div
-                            data-scheme="tertiary"
-                            onDoubleClick={handleDoubleClick}
-                            className={`inline-flex gap-1 items-center py-0.5 pl-1.5 pr-0.5 skin-classic:bg-primary opacity-40 hover:opacity-75 transition-opacity duration-100 ${
-                                hasToolbar ? 'flex-1 justify-end' : 'absolute z-20 right-1 top-1'
-                            }`}
-                        >
-                            {!item.fixedSize && (
-                                <div className="window-expand-control flex justify-end">
+                    {!item.appSettings?.size?.fixed && !integratedChrome && (
+                        <WindowRail
+                            canGoBack={canGoBack}
+                            canGoForward={canGoForward}
+                            goBack={goBack}
+                            goForward={goForward}
+                            expanded={item.expanded}
+                            onToggleExpanded={toggleExpanded}
+                            onClose={handleClose}
+                        />
+                    )}
+                    {item.appSettings?.size?.fixed && (
+                        <div className={`print:hidden ${hasToolbar ? 'bg-primary flex items-center py-0.5 px-1' : ''}`}>
+                            {hasToolbar && (
+                                <>
+                                    {!hideTitle && (
+                                        <p className="text-primary text-left text-sm font-semibold ml-1.5 my-0 line-clamp-1">
+                                            {item.meta?.title?.replace(/ - PostHog$/, '')}
+                                        </p>
+                                    )}
+                                    <div className="flex-1" />
+                                </>
+                            )}
+                            <div
+                                data-scheme="tertiary"
+                                onDoubleClick={handleDoubleClick}
+                                className={`inline-flex gap-1 items-center py-0.5 pl-1.5 pr-0.5 skin-classic:bg-primary opacity-40 hover:opacity-75 transition-opacity duration-100 ${
+                                    hasToolbar ? 'flex-1 justify-end' : 'absolute z-20 right-1 top-1'
+                                }`}
+                            >
+                                <div className="flex justify-end">
                                     <Tooltip
                                         trigger={
-                                            <OSButton
-                                                windowButton
-                                                size="md"
-                                                onClick={toggleExpanded}
-                                                icon={
-                                                    item.expanded ? (
-                                                        <IconCollapse45Chevrons />
-                                                    ) : (
-                                                        <IconSquare className="scale-110" />
-                                                    )
-                                                }
-                                            />
+                                            <OSButton windowButton size="md" onClick={handleClose} icon={<IconX />} />
                                         }
                                     >
                                         <div className="flex flex-col items-center gap-2">
-                                            <span>{item.expanded ? 'Restore window' : 'Expand window'}</span>
+                                            <span>Close window</span>
                                             <div>
                                                 <KeyboardShortcut text="Shift" size="xs" />
                                                 &nbsp;
-                                                <KeyboardShortcut text="↑" size="xs" />
+                                                <KeyboardShortcut text="W" size="xs" />
                                             </div>
                                         </div>
                                     </Tooltip>
                                 </div>
-                            )}
-                            <div className="flex justify-end">
-                                <Tooltip
-                                    trigger={<OSButton windowButton size="md" onClick={handleClose} icon={<IconX />} />}
-                                >
-                                    <div className="flex flex-col items-center gap-2">
-                                        <span>Close window</span>
-                                        <div>
-                                            <KeyboardShortcut text="Shift" size="xs" />
-                                            &nbsp;
-                                            <KeyboardShortcut text="W" size="xs" />
-                                        </div>
-                                    </div>
-                                </Tooltip>
                             </div>
                         </div>
-                    </div>
+                    )}
                     <div
                         ref={contentRef}
                         data-app="AppWindowContent"
-                        className={`size-full flex-grow ${
+                        className={`size-full flex-grow ${!item.appSettings?.size?.fixed ? 'pl-12' : ''} ${
                             chrome
                                 ? `${
                                       // A modal's auto height makes percentage heights inside it resolve to
@@ -822,7 +887,9 @@ export default function AppWindow({ item, chrome = true }: { item: AppWindowType
                                       item.appSettings?.size?.fixed
                                           ? 'overflow-x-hidden overflow-y-auto'
                                           : 'overflow-clip'
-                                  } rounded-lg ${hasToolbar ? 'rounded-t-none' : ''} ${
+                                  } ${edgeToEdgeReaderChrome ? 'rounded-none' : 'rounded-lg'} ${
+                                      hasToolbar ? 'rounded-t-none' : ''
+                                  } ${
                                       item.expanded
                                           ? 'rounded-tr-none rounded-tl-none'
                                           : item.snapped === 'left'

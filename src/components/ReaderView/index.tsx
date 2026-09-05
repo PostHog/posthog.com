@@ -1,5 +1,5 @@
 import React, { useEffect, useLayoutEffect, useRef, useState } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
+import { motion, AnimatePresence, useReducedMotion } from 'framer-motion'
 import OSButton from 'components/OSButton'
 import {
     IconPencil,
@@ -11,6 +11,11 @@ import {
     IconSidebarClose,
     IconSidebarOpen,
     IconTableOfContents,
+    IconArrowLeft,
+    IconArrowRight,
+    IconCollapse45Chevrons,
+    IconSquare,
+    IconX,
 } from '@posthog/icons'
 import ScrollArea from 'components/RadixUI/ScrollArea'
 import { Popover } from '../RadixUI/Popover'
@@ -39,7 +44,7 @@ import { useLocation } from '@reach/router'
 import { getProseClasses } from '../../constants'
 import { PANEL_BG } from '../../constants/frostedSurfaces'
 import { useWindow } from '../../context/Window'
-import { MenuItem, useApp } from '../../context/App'
+import { MenuItem } from '../../context/App'
 import { useActiveFeatureFlags, filterMenuByFlags } from '../../hooks/useActiveFeatureFlags'
 import { Questions } from 'components/Squeak'
 import { DocsPageSurvey } from 'components/DocsPageSurvey'
@@ -64,9 +69,8 @@ export interface MenuTab {
     /** When true, this tab is active on first render. */
     default?: boolean
     /**
-     * Optional icon for this tab. Used by the LeftSidebar's collapsed-state
-     * vertical icon stack so the user can recognize / switch tabs without
-     * expanding the sidebar. The pinned `ToggleGroup` already renders whatever
+     * Optional icon for this tab. Used by the LeftSidebar's unpinned tab stack
+     * so the user can recognize and switch tabs. The pinned `ToggleGroup` renders whatever
      * `label` you pass (so embed the icon in the label JSX if you want both).
      */
     icon?: React.ReactNode
@@ -383,13 +387,13 @@ const AppOptionsButton = ({ isMdx }: { isMdx: boolean }) => {
 
 interface TableOfContentsProps {
     tableOfContents: any[]
-    contentRef: React.RefObject<HTMLDivElement>
+    contentRef?: React.RefObject<HTMLDivElement>
     title?: string
     className?: string
 }
 
 const TableOfContents = ({ tableOfContents, contentRef, title = 'Jump to:', className = '' }: TableOfContentsProps) => {
-    if (!tableOfContents || tableOfContents.length === 0) {
+    if (!contentRef || !tableOfContents || tableOfContents.length === 0) {
         return null
     }
 
@@ -805,6 +809,102 @@ const SidebarSearchResults = ({
     )
 }
 
+interface ReaderWindowControlsProps {
+    direction: 'horizontal' | 'vertical'
+    onSidebarAction: () => void
+    sidebarLabel: string
+    sidebarIcon: React.ReactNode
+    sidebarDisabled?: boolean
+    separatorClassName?: string
+}
+
+const ReaderWindowControls = ({
+    direction,
+    onSidebarAction,
+    sidebarLabel,
+    sidebarIcon,
+    sidebarDisabled = false,
+    separatorClassName = 'my-1',
+}: ReaderWindowControlsProps) => {
+    const { close, toggleExpanded, canToggleExpanded, isExpanded, goBack, goForward, canGoBack, canGoForward } =
+        useWindow()
+    const tooltipSide = direction === 'horizontal' ? 'bottom' : 'right'
+
+    return (
+        <>
+            <Tooltip
+                trigger={<OSButton windowButton size="md" aria-label="Close window" onClick={close} icon={<IconX />} />}
+                side={tooltipSide}
+            >
+                Close window
+            </Tooltip>
+            {canToggleExpanded && (
+                <Tooltip
+                    trigger={
+                        <OSButton
+                            windowButton
+                            size="md"
+                            aria-label={isExpanded ? 'Restore window' : 'Expand window'}
+                            onClick={toggleExpanded}
+                            icon={isExpanded ? <IconCollapse45Chevrons /> : <IconSquare className="scale-110" />}
+                        />
+                    }
+                    side={tooltipSide}
+                >
+                    {isExpanded ? 'Restore window' : 'Expand window'}
+                </Tooltip>
+            )}
+            <Tooltip
+                trigger={
+                    <OSButton
+                        size="md"
+                        aria-label={sidebarLabel}
+                        disabled={sidebarDisabled}
+                        onClick={onSidebarAction}
+                        icon={sidebarIcon}
+                    />
+                }
+                side={tooltipSide}
+            >
+                {sidebarLabel}
+            </Tooltip>
+            {direction === 'horizontal' ? (
+                <div className="flex-1" />
+            ) : (
+                <div className={`${separatorClassName} w-6 border-t border-primary`} />
+            )}
+            <Tooltip
+                trigger={
+                    <OSButton
+                        size="md"
+                        aria-label="Go back"
+                        disabled={!canGoBack}
+                        onClick={goBack}
+                        icon={<IconArrowLeft />}
+                    />
+                }
+                side={tooltipSide}
+            >
+                Go back
+            </Tooltip>
+            <Tooltip
+                trigger={
+                    <OSButton
+                        size="md"
+                        aria-label="Go forward"
+                        disabled={!canGoForward}
+                        onClick={goForward}
+                        icon={<IconArrowRight />}
+                    />
+                }
+                side={tooltipSide}
+            >
+                Go forward
+            </Tooltip>
+        </>
+    )
+}
+
 interface LeftSidebarProps {
     isNavVisible: boolean
     toggleNav: () => void
@@ -817,8 +917,10 @@ interface LeftSidebarProps {
     productSelect?: React.ReactNode
     inlineSearch?: React.ReactNode
     menuTabs?: MenuTab[]
+    tableOfContents?: any[]
+    hideTableOfContents?: boolean
     children: React.ReactNode
-    contentRef?: React.RefObject<HTMLElement>
+    contentRef?: React.RefObject<HTMLDivElement>
     currentPath?: string
     windowKey?: string
     isMdx?: boolean
@@ -827,9 +929,11 @@ interface LeftSidebarProps {
     mobile?: boolean
     mobileOpen?: boolean
     onMobileClose?: () => void
+    forceMinimized?: boolean
 }
 
 const SIDEBAR_CSS_TRANSITION = 'width 300ms cubic-bezier(0.32, 0.72, 0, 1)'
+const SIDEBAR_SLIDE_TRANSITION = 'transform 300ms cubic-bezier(0.32, 0.72, 0, 1)'
 
 /**
  * Tracks whether the LeftSidebar is currently expanded (pinned, hovered, or
@@ -974,6 +1078,8 @@ const LeftSidebar = ({
     productSelect,
     inlineSearch,
     menuTabs,
+    tableOfContents,
+    hideTableOfContents = false,
     children,
     contentRef,
     currentPath,
@@ -982,9 +1088,11 @@ const LeftSidebar = ({
     mobile = false,
     mobileOpen = false,
     onMobileClose,
+    forceMinimized = false,
 }: LeftSidebarProps) => {
     const { searchQuery } = useSearch()
     const { hasMounted } = useReaderView()
+    const prefersReducedMotion = useReducedMotion()
     const posthog = usePostHog()
     const hasActiveSearch = !!searchQuery && searchQuery.length >= 2
 
@@ -1006,13 +1114,11 @@ const LeftSidebar = ({
     const [activeTab, setActiveTab] = useState(initialTab)
     const activeMenu = hasTabs ? menuTabs!.find((t) => t.value === activeTab)?.menu : null
 
-    // `isPinned` is the persisted user preference (toggled via the bottom-row
-    // toggle button, written to localStorage in ReaderViewContext). When NOT
-    // pinned the inner panel collapses to 48px and only expands as an overlay
-    // when the user hovers it OR clicks the search icon (`searchFocused`).
-    // We track hover in JS (rather than CSS group-hover) so the CSS width
-    // transitions and icon-row → icon-column layout flip share the same boolean.
-    const isPinned = isNavVisible
+    // `isPinned` is the persisted user preference. When it is false, the panel
+    // moves fully behind the window edge and slides out as an overlay on hover.
+    // Pages that previously removed the sidebar use `forceMinimized` to start
+    // from this same edge state without losing the window controls.
+    const isPinned = isNavVisible && !forceMinimized
     const [searchFocused, setSearchFocused] = useState(false)
     const [hovered, setHovered] = useState(() => !!windowKey && SIDEBAR_HOVERED_WINDOWS.has(windowKey))
     const panelRef = useRef<HTMLDivElement>(null)
@@ -1034,18 +1140,20 @@ const LeftSidebar = ({
     // On mobile the panel is a drawer: it's fully expanded whenever open and
     // fully hidden otherwise, so pin/hover state is bypassed entirely.
     const expanded = mobile ? mobileOpen : isPinned || searchFocused || hovered
+    const panelVisible = mobile ? mobileOpen : expanded
+    const sidebarId = `reader-sidebar-${windowKey || 'active'}`
 
-    // `displayExpanded` mirrors `expanded` instantly when growing, but only
-    // flips to false AFTER the panel's shrink transition finishes (driven by
-    // `onTransitionEnd` below). Things that should appear on expand but only
-    // disappear once the wrapper is fully collapsed — the product switcher
-    // swap, the menu's label-hide rule — read this instead of `expanded`.
-    // Wrapper widths still use `expanded` so they transition with the
-    // hover/blur immediately.
+    // `displayExpanded` mirrors the visible state and stays true until the
+    // slide-out transition ends. Narrow drawers use it to keep their contents
+    // mounted during the animation.
     const [displayExpanded, setDisplayExpanded] = useState(expanded)
     useEffect(() => {
         if (expanded) setDisplayExpanded(true)
     }, [expanded])
+
+    useLayoutEffect(() => {
+        if (panelRef.current) panelRef.current.inert = !panelVisible
+    }, [panelVisible])
 
     // The tab strip wrapper transitions its width 32 ↔ 234 in lockstep
     // with the panel. If the user pins WHILE that transition is mid-flight
@@ -1060,7 +1168,8 @@ const LeftSidebar = ({
     // changes (a new transition will run) and back to false on the
     // wrapper's `onTransitionEnd`. While animating, pin/unpin updates are
     // queued and applied only when the wrapper is settled.
-    const tabsWidthTarget = isPinned || expanded ? 234 : 32
+    const contentExpanded = mobile ? displayExpanded : displayExpanded || !isPinned
+    const tabsWidthTarget = contentExpanded ? 234 : 32
     const tabsWidthTargetRef = useRef(tabsWidthTarget)
     const [tabsAnimating, setTabsAnimating] = useState(false)
     useEffect(() => {
@@ -1095,16 +1204,34 @@ const LeftSidebar = ({
         if (e.key === 'Escape') setSearchFocused(false)
     }
 
+    const handleSidebarReveal = () => {
+        if (windowKey) SIDEBAR_HOVERED_WINDOWS.add(windowKey)
+        setHovered(true)
+    }
     const handleMouseEnter = () => {
-        if (!isPinned && !mobile) {
-            if (windowKey) SIDEBAR_HOVERED_WINDOWS.add(windowKey)
-            setHovered(true)
-        }
+        if (!isPinned && !mobile) handleSidebarReveal()
     }
     const handleMouseLeave = () => {
         if (windowKey) SIDEBAR_HOVERED_WINDOWS.delete(windowKey)
         setHovered(false)
     }
+
+    useEffect(() => {
+        const panel = panelRef.current
+        if (!panel || mobile || isPinned) return
+        const handleTransitionStart = (e: TransitionEvent) => {
+            if (e.propertyName !== 'transform') return
+            if (panel.parentElement?.matches(':hover')) {
+                if (windowKey) SIDEBAR_HOVERED_WINDOWS.add(windowKey)
+                setHovered(true)
+            } else {
+                if (windowKey) SIDEBAR_HOVERED_WINDOWS.delete(windowKey)
+                setHovered(false)
+            }
+        }
+        panel.addEventListener('transitionstart', handleTransitionStart)
+        return () => panel.removeEventListener('transitionstart', handleTransitionStart)
+    }, [isPinned, mobile, windowKey])
 
     // Wrap toggleNav so unpin clears `appliedPinned` in the SAME render batch
     // as the toggle. Without this, React commits one intermediate render with
@@ -1120,37 +1247,56 @@ const LeftSidebar = ({
     return (
         <aside
             data-scheme="secondary"
-            className={`relative flex-shrink-0 ${hasMounted && !mobile ? 'transition-[flex-basis] duration-300' : ''} ${
-                mobile ? 'basis-0' : isPinned ? 'basis-[250px]' : 'basis-12'
-            }`}
+            onMouseOver={handleMouseEnter}
+            onPointerEnter={handleMouseEnter}
+            onFocusCapture={!mobile && !isPinned ? handleSidebarReveal : undefined}
+            onBlurCapture={(e) => {
+                if (!e.currentTarget.contains(e.relatedTarget as Node | null)) handleMouseLeave()
+            }}
+            className={`group/reader-sidebar relative flex-shrink-0 ${
+                hasMounted && !mobile && !prefersReducedMotion ? 'transition-[flex-basis] duration-300' : ''
+            } ${mobile ? 'basis-0' : isPinned ? 'basis-[250px]' : 'basis-0'}`}
         >
+            {!mobile && !isPinned && (
+                <button
+                    type="button"
+                    aria-label="Show sidebar"
+                    aria-controls={sidebarId}
+                    aria-expanded={panelVisible}
+                    onFocus={handleSidebarReveal}
+                    onClick={handleSidebarReveal}
+                    onMouseEnter={handleSidebarReveal}
+                    onPointerEnter={handleSidebarReveal}
+                    className="absolute inset-y-0 left-0 z-40 w-6 cursor-default bg-transparent"
+                />
+            )}
             <div
+                id={sidebarId}
                 ref={panelRef}
                 onTransitionEnd={(e) => {
-                    if (e.propertyName === 'width' && e.target === e.currentTarget && !expanded) {
+                    if (e.propertyName === 'transform' && e.target === e.currentTarget && !panelVisible) {
                         setDisplayExpanded(false)
                     }
                 }}
                 onMouseEnter={handleMouseEnter}
                 onMouseLeave={handleMouseLeave}
+                onPointerEnter={handleMouseEnter}
+                onPointerLeave={handleMouseLeave}
+                aria-hidden={!panelVisible ? true : undefined}
                 data-scheme="secondary"
                 style={{
-                    width: mobile ? 250 : expanded ? 250 : 48,
-                    transform: mobile && !mobileOpen ? 'translateX(-110%)' : undefined,
-                    transition: hasMounted
-                        ? mobile
-                            ? 'transform 300ms cubic-bezier(0.32, 0.72, 0, 1)'
-                            : SIDEBAR_CSS_TRANSITION
-                        : 'none',
+                    width: 250,
+                    transform: mobile ? (panelVisible ? 'translateX(0)' : 'translateX(-110%)') : undefined,
+                    transition: hasMounted && !prefersReducedMotion ? SIDEBAR_SLIDE_TRANSITION : 'none',
                 }}
-                className={`absolute inset-y-0 left-0 flex flex-col min-h-0 overflow-hidden border-r border-primary transform-gpu ${
+                className={`absolute inset-y-0 left-0 flex flex-col min-h-0 overflow-hidden transform-gpu motion-reduce:!transition-none ${
                     // On mobile the panel is always an overlay drawer above the
                     // content; it just slides off-screen when closed.
                     mobile
                         ? `z-50 shadow-2xl ${PANEL_BG} ${mobileOpen ? '' : 'pointer-events-none'}`
-                        : !isPinned && expanded
-                        ? `z-50 shadow-2xl ${PANEL_BG}`
-                        : 'z-30'
+                        : isPinned
+                        ? 'z-30 translate-x-0'
+                        : `z-50 -translate-x-full shadow-2xl ${PANEL_BG} group-hover/reader-sidebar:translate-x-0 group-focus-within/reader-sidebar:translate-x-0`
                 }`}
             >
                 {/* Middle content — always rendered so the bottom row stays
@@ -1159,14 +1305,42 @@ const LeftSidebar = ({
                     menu items, anything else — so they all fade in lockstep
                     when the user mouses out, keeping the disappearance
                     smooth instead of an abrupt cut. */}
-                <SidebarExpandedContext.Provider value={displayExpanded}>
+                <SidebarExpandedContext.Provider value={contentExpanded}>
                     <div
                         className={`flex-1 min-h-0 flex flex-col w-[250px] pt-2 [&_[data-sidebar-label]]:transition-opacity [&_[data-sidebar-label]]:duration-200 ${
-                            expanded
+                            contentExpanded
                                 ? ''
                                 : '[&_[data-sidebar-label]]:opacity-0 [&_a]:!bg-transparent [&_button]:!bg-transparent [&_a]:!border-transparent [&_button]:!border-transparent'
                         }`}
                     >
+                        <div
+                            className={`mx-2 mb-2 flex flex-shrink-0 items-center gap-px ${
+                                contentExpanded ? 'h-8' : 'w-8 flex-col'
+                            }`}
+                        >
+                            <ReaderWindowControls
+                                direction={contentExpanded ? 'horizontal' : 'vertical'}
+                                onSidebarAction={
+                                    mobile
+                                        ? () => onMobileClose?.()
+                                        : forceMinimized
+                                        ? handleMouseLeave
+                                        : handleToggleNav
+                                }
+                                sidebarLabel={
+                                    mobile
+                                        ? 'Close navigation'
+                                        : forceMinimized
+                                        ? 'This page keeps the sidebar minimized'
+                                        : isPinned
+                                        ? 'Collapse sidebar'
+                                        : 'Keep sidebar open'
+                                }
+                                sidebarIcon={isPinned ? <IconSidebarOpen /> : <IconSidebarClose />}
+                                sidebarDisabled={forceMinimized && !mobile}
+                            />
+                        </div>
+
                         {/* Product slot: width-animates 32 ↔ 234 like the search
                         and tab strip. When collapsed, ProductSwitcher renders
                         a centered icon that lands at panel center; on
@@ -1181,11 +1355,11 @@ const LeftSidebar = ({
                         {productSelect && (
                             <div
                                 style={{
-                                    width: expanded ? 234 : 32,
-                                    transition: hasMounted ? SIDEBAR_CSS_TRANSITION : 'none',
+                                    width: contentExpanded ? 234 : 32,
+                                    transition: hasMounted && !prefersReducedMotion ? SIDEBAR_CSS_TRANSITION : 'none',
                                 }}
                                 className={`mx-2 pb-2 flex-shrink-0 [&_button>svg:last-child]:transition-opacity [&_button>svg:last-child]:duration-200 [&_button>span>span>span:nth-child(2)]:transition-opacity [&_button>span>span>span:nth-child(2)]:duration-200 ${
-                                    expanded
+                                    contentExpanded
                                         ? ''
                                         : '[&_button>svg:last-child]:opacity-0 [&_button>span>span>span:nth-child(2)]:opacity-0'
                                 }`}
@@ -1209,11 +1383,12 @@ const LeftSidebar = ({
                             >
                                 <div
                                     style={{
-                                        width: expanded ? 234 : 32,
-                                        transition: hasMounted ? SIDEBAR_CSS_TRANSITION : 'none',
+                                        width: contentExpanded ? 234 : 32,
+                                        transition:
+                                            hasMounted && !prefersReducedMotion ? SIDEBAR_CSS_TRANSITION : 'none',
                                     }}
                                     className={`overflow-hidden [&_input]:transition-colors [&_input]:duration-200 ${
-                                        expanded ? '' : '[&_input]:!bg-transparent [&_input]:!border-transparent'
+                                        contentExpanded ? '' : '[&_input]:!bg-transparent [&_input]:!border-transparent'
                                     }`}
                                 >
                                     {inlineSearch}
@@ -1238,7 +1413,7 @@ const LeftSidebar = ({
                             <div
                                 style={{
                                     width: tabsWidthTarget,
-                                    transition: hasMounted ? SIDEBAR_CSS_TRANSITION : 'none',
+                                    transition: hasMounted && !prefersReducedMotion ? SIDEBAR_CSS_TRANSITION : 'none',
                                 }}
                                 onTransitionEnd={(e) => {
                                     if (e.propertyName === 'width' && e.target === e.currentTarget) {
@@ -1259,7 +1434,7 @@ const LeftSidebar = ({
                                         key={t.value}
                                         tab={t}
                                         active={t.value === activeTab}
-                                        showLabel={expanded}
+                                        showLabel={contentExpanded}
                                         stacked={appliedPinned}
                                         compact={appliedPinned && menuTabs?.length > 3}
                                         onClick={() => {
@@ -1295,86 +1470,38 @@ const LeftSidebar = ({
                                 )}
                             </ScrollArea>
                         </div>
+                        {!hideTableOfContents &&
+                            !hasActiveSearch &&
+                            contentExpanded &&
+                            tableOfContents &&
+                            tableOfContents.length > 0 && (
+                                <div className="max-h-[42%] min-h-0 flex-shrink border-t border-primary">
+                                    <ScrollArea className="px-3 py-3">
+                                        <div className="mb-2 flex items-center gap-1.5 text-primary">
+                                            <IconTableOfContents className="size-4" />
+                                            <span className="text-xs font-semibold uppercase tracking-wide">
+                                                On this page
+                                            </span>
+                                        </div>
+                                        <TableOfContents
+                                            tableOfContents={tableOfContents}
+                                            contentRef={contentRef}
+                                            title=""
+                                        />
+                                    </ScrollArea>
+                                </div>
+                            )}
                     </div>
                 </SidebarExpandedContext.Provider>
 
-                {/* Bottom action row: single flex-row layout in every
-                    state. The pin button is pushed to panel x=24 via
-                    `pl-2.5` so its icon center aligns with every other
-                    icon-only element when collapsed AND stays put when the
-                    sidebar expands. Edit/gear ride along on the right via
-                    `ml-auto` and only mount once `displayExpanded` is true,
-                    so they appear/disappear cleanly without nudging the
-                    pin. */}
-                <div className="flex-shrink-0 border-t border-primary py-1 pl-2.5 pr-1 flex items-center">
-                    <Tooltip
-                        trigger={
-                            <OSButton
-                                size="md"
-                                onClick={mobile ? onMobileClose : handleToggleNav}
-                                active={!mobile && isPinned}
-                                icon={
-                                    mobile ? <IconSidebarOpen /> : isPinned ? <IconSidebarOpen /> : <IconSidebarClose />
-                                }
-                            />
-                        }
-                        side="right"
-                    >
-                        {mobile ? 'Close' : isPinned ? 'Unpin sidebar' : 'Pin sidebar'}
-                    </Tooltip>
-                    {displayExpanded && (
-                        <div className="ml-auto flex items-center gap-px">
-                            <EditHistoryPopover commits={commits || []} />
-                            <EditOnGitHubButton filePath={filePath} sourceInstanceName={sourceInstanceName} />
-                            {!hideAppOptions && <AppOptionsButton isMdx={isMdx} />}
-                            {rightActionButtons}
-                        </div>
-                    )}
-                </div>
-            </div>
-        </aside>
-    )
-}
-
-interface FloatingTOCProps {
-    isTocVisible: boolean
-    toggleToc: () => void
-    tableOfContents: any
-    contentRef: React.RefObject<HTMLDivElement>
-}
-
-/**
- * Lives INSIDE the article column's ScrollArea so it shares the article's scrolling
- * context. `position: sticky` keeps it pinned to the top of the visible viewport as
- * the article scrolls beneath it. `maxHeight` is set to the live height of the
- * scroll viewport so the TOC never extends past the visible area; an inner
- * ScrollArea handles overflow within that height.
- */
-const FloatingTOC = ({ isTocVisible, toggleToc, tableOfContents, contentRef }: FloatingTOCProps) => {
-    const { hasMounted } = useReaderView()
-    return (
-        <aside
-            data-scheme="secondary"
-            className={`flex-shrink-0 hidden @4xl/app-reader:flex flex-col border-l border-primary ${
-                hasMounted ? 'transition-[width] duration-300' : ''
-            } overflow-hidden ${isTocVisible ? 'w-[250px]' : 'w-12'} `}
-        >
-            <div className="flex-1 min-h-0 flex flex-col w-[250px]">
-                {isTocVisible && (
-                    <ScrollArea className="px-2 pb-2 pt-8 flex-1 min-h-0">
-                        <TableOfContents tableOfContents={tableOfContents} contentRef={contentRef} />
-                    </ScrollArea>
+                {contentExpanded && (
+                    <div className="flex flex-shrink-0 items-center justify-end gap-px border-t border-primary px-1 py-1">
+                        <EditHistoryPopover commits={commits || []} />
+                        <EditOnGitHubButton filePath={filePath} sourceInstanceName={sourceInstanceName} />
+                        {!hideAppOptions && <AppOptionsButton isMdx={isMdx} />}
+                        {rightActionButtons}
+                    </div>
                 )}
-            </div>
-            <div className="flex-shrink-0 border-t border-primary py-1 px-2.5 flex items-center">
-                <Tooltip
-                    trigger={
-                        <OSButton size="md" icon={<IconTableOfContents />} active={isTocVisible} onClick={toggleToc} />
-                    }
-                    side="left"
-                >
-                    {isTocVisible ? 'Hide' : 'Show'} table of contents
-                </Tooltip>
             </div>
         </aside>
     )
@@ -1415,8 +1542,7 @@ function ReaderViewContent({
     hideMenu = false,
     className = '',
 }: ReaderViewProps) {
-    const { compact } = useApp()
-    const { appWindow, activeInternalMenu } = useWindow()
+    const { appWindow, activeInternalMenu, isExpanded, setIntegratedChrome } = useWindow()
     const { hash, pathname } = useLocation()
     const contentRef = useRef<HTMLDivElement>(null)
     const articleColumnRef = useRef<HTMLDivElement>(null)
@@ -1427,20 +1553,43 @@ function ReaderViewContent({
     // Handle slug-to-key mapping (e.g., great-expectations → greatexpectations)
     const customerKey = customerSlug ? customerSlug.replace(/-/g, '') : null
 
-    const { isNavVisible, isTocVisible, isNarrow, fullWidthContent, backgroundImage, toggleNav, toggleToc } =
-        useReaderView()
+    const { isNavVisible, isNarrow, fullWidthContent, backgroundImage, toggleNav } = useReaderView()
 
-    const showSidebar = tableOfContents && tableOfContents?.length > 0 && !hideRightSidebar
-    const renderLeftSidebar = !compact && !hideLeftSidebar
-    // On narrow windows the left rail is hidden and replaced by a floating
-    // control cluster that opens the sidebar as an off-canvas drawer.
-    const showMobileNav = renderLeftSidebar && isNarrow
+    const [canHover, setCanHover] = useState(true)
+    useEffect(() => {
+        const hoverQuery = window.matchMedia('(any-hover: hover)')
+        const updateCanHover = () => setCanHover(hoverQuery.matches)
+        updateCanHover()
+        hoverQuery.addEventListener('change', updateCanHover)
+        return () => hoverQuery.removeEventListener('change', updateCanHover)
+    }, [])
+
+    // Narrow windows and devices without hover use a drawer. Forced-minimized
+    // pages keep only the edge target, while other pages get a visible trigger.
+    const useDrawerNav = isNarrow || !canHover
+    const edgeToEdgeContent = isExpanded || useDrawerNav
     const [mobileNavOpen, setMobileNavOpen] = useState(false)
+    const mobileNavTriggerRef = useRef<HTMLButtonElement>(null)
+    const focusMobileNavOnOpenRef = useRef(false)
+    const mobileSidebarId = `reader-sidebar-${appWindow?.key || 'active'}`
+    const mobileSidebarTriggerId = `reader-sidebar-trigger-${appWindow?.key || 'active'}`
+
+    useLayoutEffect(() => {
+        if (appWindow?.appSettings?.size?.fixed) return
+        setIntegratedChrome(true)
+        return () => setIntegratedChrome(false)
+    }, [appWindow?.key, setIntegratedChrome])
 
     // Close the drawer whenever the reader navigates to a new page.
     useEffect(() => {
         setMobileNavOpen(false)
     }, [appWindow?.path])
+
+    useEffect(() => {
+        if (!mobileNavOpen || !focusMobileNavOnOpenRef.current) return
+        focusMobileNavOnOpenRef.current = false
+        document.getElementById(mobileSidebarId)?.querySelector<HTMLElement>('button:not([disabled])')?.focus()
+    }, [mobileNavOpen, mobileSidebarId])
 
     const selectedBackgroundOption = backgroundImage
         ? backgroundImageOptions.find((option) => option.value === backgroundImage)
@@ -1583,7 +1732,12 @@ function ReaderViewContent({
         'flex',
         'flex-col',
         'relative',
-        chrome ? 'bg-primary border border-primary rounded m-2' : '',
+        // This overlays the translucent window surface, so the article stays
+        // slightly more opaque than the surrounding chrome without becoming solid.
+        'bg-primary/40 overflow-hidden',
+        edgeToEdgeContent
+            ? 'm-0 rounded-none border-0'
+            : `border border-primary rounded-md ${isNavVisible && !hideLeftSidebar ? 'my-2 mr-2 ml-0' : 'm-2'}`,
         selectedBackgroundOption && selectedBackgroundOption.value !== 'none'
             ? 'before:absolute before:inset-0 before:bg-primary before:opacity-75 before:pointer-events-none'
             : '',
@@ -1605,40 +1759,88 @@ function ReaderViewContent({
             <div
                 data-scheme="secondary"
                 data-app="ReaderView"
-                className={`@container/app-reader relative w-full h-full flex min-h-0 max-w-full ${className}`}
+                className={`@container/app-reader relative h-full flex min-h-0 max-w-none ${
+                    appWindow?.appSettings?.size?.fixed ? 'w-full' : '-ml-12 w-[calc(100%+3rem)]'
+                } ${className}`}
             >
-                {renderLeftSidebar && (
-                    <LeftSidebar
-                        isNavVisible={isNavVisible}
-                        toggleNav={toggleNav}
-                        mobile={showMobileNav}
-                        mobileOpen={mobileNavOpen}
-                        onMobileClose={() => setMobileNavOpen(false)}
-                        isEditing={isEditing}
-                        filePath={filePath}
-                        sourceInstanceName={sourceInstanceName}
-                        commits={commits}
-                        rightActionButtons={rightActionButtons}
-                        hideAppOptions={hideAppOptions}
-                        productSelect={productSelect}
-                        inlineSearch={
-                            <InlineSearch contentRef={onSearch ? undefined : contentRef} onSearch={onSearch} />
-                        }
-                        menuTabs={menuTabs}
-                        contentRef={onSearch ? undefined : contentRef}
-                        currentPath={appWindow?.path}
-                        windowKey={appWindow?.key}
-                        isMdx={body?.type === 'mdx'}
-                    >
-                        {leftSidebar || (!hideMenu && <Menu parent={parent as MenuItem} />)}
-                    </LeftSidebar>
+                <LeftSidebar
+                    isNavVisible={isNavVisible}
+                    toggleNav={toggleNav}
+                    mobile={useDrawerNav}
+                    mobileOpen={mobileNavOpen}
+                    onMobileClose={() => {
+                        setMobileNavOpen(false)
+                        requestAnimationFrame(() => {
+                            const visibleTrigger = document.getElementById(mobileSidebarTriggerId)
+                            if (visibleTrigger instanceof HTMLElement) visibleTrigger.focus()
+                            else mobileNavTriggerRef.current?.focus()
+                        })
+                    }}
+                    forceMinimized={hideLeftSidebar}
+                    isEditing={isEditing}
+                    filePath={filePath}
+                    sourceInstanceName={sourceInstanceName}
+                    commits={commits}
+                    rightActionButtons={rightActionButtons}
+                    hideAppOptions={hideAppOptions}
+                    productSelect={productSelect}
+                    inlineSearch={<InlineSearch contentRef={onSearch ? undefined : contentRef} onSearch={onSearch} />}
+                    menuTabs={menuTabs}
+                    tableOfContents={tableOfContents}
+                    hideTableOfContents={hideRightSidebar || (useDrawerNav && hideMobileTableOfContents)}
+                    contentRef={onSearch ? undefined : contentRef}
+                    currentPath={appWindow?.path}
+                    windowKey={appWindow?.key}
+                    isMdx={body?.type === 'mdx'}
+                >
+                    {leftSidebar || (!hideMenu && <Menu parent={parent as MenuItem} />)}
+                </LeftSidebar>
+
+                {useDrawerNav && !hideLeftSidebar && !mobileNavOpen && (
+                    <div data-scheme="secondary" className="absolute bottom-4 left-4 z-30">
+                        <OSButton
+                            id={mobileSidebarTriggerId}
+                            size="lg"
+                            aria-label="Open navigation and search"
+                            aria-controls={mobileSidebarId}
+                            aria-expanded={false}
+                            onClick={() => {
+                                focusMobileNavOnOpenRef.current = true
+                                setMobileNavOpen(true)
+                            }}
+                            icon={<IconSidebarClose />}
+                            tooltip="Open navigation and search"
+                            tooltipSide="right"
+                            className={`size-11 border-primary shadow-md ${PANEL_BG}`}
+                        />
+                    </div>
                 )}
 
-                {showMobileNav && (
+                {useDrawerNav && hideLeftSidebar && (
+                    <button
+                        ref={mobileNavTriggerRef}
+                        type="button"
+                        aria-label="Open navigation and search"
+                        aria-controls={mobileSidebarId}
+                        aria-expanded={mobileNavOpen}
+                        onFocus={() => {
+                            focusMobileNavOnOpenRef.current = true
+                            setMobileNavOpen(true)
+                        }}
+                        onMouseEnter={() => {
+                            focusMobileNavOnOpenRef.current = false
+                            setMobileNavOpen(true)
+                        }}
+                        onClick={() => setMobileNavOpen(true)}
+                        className="absolute inset-y-0 left-0 z-30 w-6 cursor-default bg-transparent"
+                    />
+                )}
+
+                {useDrawerNav && (
                     <div
                         aria-hidden
                         onClick={() => setMobileNavOpen(false)}
-                        className={`absolute inset-0 z-40 bg-black/40 transition-opacity duration-300 ${
+                        className={`absolute inset-0 z-40 bg-black/40 transition-opacity duration-300 motion-reduce:transition-none ${
                             mobileNavOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'
                         }`}
                     />
@@ -1659,18 +1861,6 @@ function ReaderViewContent({
                             : undefined
                     }
                 >
-                    {showMobileNav && (
-                        <button
-                            type="button"
-                            aria-label="Open navigation"
-                            onClick={() => setMobileNavOpen(true)}
-                            className={`absolute bottom-4 right-4 z-30 flex size-11 items-center justify-center rounded-full border border-primary text-primary shadow-lg transition-opacity duration-200 hover:bg-accent ${PANEL_BG} ${
-                                mobileNavOpen ? 'opacity-0 pointer-events-none' : 'opacity-100'
-                            }`}
-                        >
-                            <IconSidebarClose className="size-5" />
-                        </button>
-                    )}
                     <div className="flex flex-1 min-h-0">
                         <ScrollArea
                             dataScheme="primary"
@@ -1786,28 +1976,6 @@ function ReaderViewContent({
                                             )}
                                         </div>
                                     )}
-                                    {tableOfContents &&
-                                        tableOfContents.length > 0 &&
-                                        !hideMobileTableOfContents &&
-                                        !hideRightSidebar && (
-                                            <div
-                                                id="mobile-toc"
-                                                data-scheme="secondary"
-                                                className={`@4xl/app-reader:hidden mt-4 transition-all ${
-                                                    fullWidthContent || body?.type !== 'mdx'
-                                                        ? 'max-w-full'
-                                                        : contentMaxWidthClass
-                                                        ? contentMaxWidthClass
-                                                        : 'mx-auto max-w-2xl'
-                                                }`}
-                                            >
-                                                <TableOfContents
-                                                    tableOfContents={tableOfContents}
-                                                    contentRef={contentRef}
-                                                    title="Contents"
-                                                />
-                                            </div>
-                                        )}
                                     {body?.featuredVideo && (
                                         <iframe
                                             src={body.featuredVideo}
@@ -1895,14 +2063,6 @@ function ReaderViewContent({
                                 </div>
                             </article>
                         </ScrollArea>
-                        {showSidebar && (
-                            <FloatingTOC
-                                isTocVisible={isTocVisible}
-                                toggleToc={toggleToc}
-                                tableOfContents={tableOfContents}
-                                contentRef={contentRef}
-                            />
-                        )}
                     </div>
                 </div>
             </div>
