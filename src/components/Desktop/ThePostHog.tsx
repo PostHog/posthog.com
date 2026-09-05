@@ -25,7 +25,7 @@ function ThePostHogPlayer({}: { location: { pathname: string }; newWindow?: bool
 
 export default function ThePostHog(): null {
     const { addWindow } = useAppActions()
-    const { addToast, removeToast, toasts } = useToast()
+    const { addToast, removeToast } = useToast()
     const posthog = usePostHog()
     const toastId = useRef<number | null>(null)
     const [hasDismissed, setHasDismissed] = useState(() => {
@@ -56,8 +56,6 @@ export default function ThePostHog(): null {
 
     useEffect(() => {
         if (hasDismissed) return
-
-        if (toasts.some((toast) => toast.title === 'The PostHog')) return
 
         const timer = setTimeout(() => {
             toastId.current = addToast({
