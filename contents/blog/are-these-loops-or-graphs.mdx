@@ -16,22 +16,6 @@ seo:
     metaDescription: "Seven loops we use to build self-driving in PostHog, from agent feedback to Replay Vision. Real reports, merged PRs, and where humans still fit."
 ---
 
-<!--
-DRAFT – working notes (delete before publish)
-
-- Seven agreed examples, each linked to a merged PR. Andy participated in
-  review or merge for Loops 1–6; Loop 7 showcases Replay Vision.
-- Audited 2026-09-07: 35 observed resolve clicks by Andy, 100 resolved reports
-  in his reviewer inbox updated since August 30, plus featured scout history.
-  Implementation and merge outcomes cross-checked against GitHub.
-- Screenshots added for Loops 1, 2, 3, 5, 6, and 7. They are local site assets for
-  review; replace paths with posthog.com media-library URLs before publishing.
-- Add featuredImage (Cloudinary) + featuredImageType: full.
-- Set actual publish date; keep it <= today while previewing locally.
-- Before PR: check requirements for the existing LoopGame, including narrow
-  and wide windows, light and dark mode, screenshots, and motion capture.
--->
-
 <ProductScreenshot
     imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/hamel_tweet_top_b17caabd1a.jpg"
     classes="rounded"
@@ -130,8 +114,6 @@ I approved at 14:22 and hit `/trunk merge` at 17:27. It merged at 18:02, and the
 
 *The actual report: a missing-tool complaint, supporting evidence, and a concrete next step.*
 
-<!-- inbox ref: 01a04826-35d3-7170-aa2c-2180a5a30e66. GitHub confirms merge and deployment; inbox PR state is stale. -->
-
 </details>
 
 ## Loop 2: the team Slack channel
@@ -166,8 +148,6 @@ The Slack agent found a second bug in the middle of discussing the first. The ta
 The team scout picked up the conversation and authored an inbox report. The pipeline opened [PR #88912](https://github.com/PostHog/posthog/pull/88912), which made the task page use the same shared-thread visibility rule as the run. Tests checked that teammates could open shared tasks while direct-message tasks stayed private. On a later pass, the scout added corroboration to the same report and noted that the PR was already in flight.
 
 I added Vojta and Georgiy as reviewers on September 4. Vojta approved the PR, and it merged that day. The Slack agent did the diagnosis; the scout carried the finding into tracked work. A bug we stumbled over while talking about another bug made it through to a fix.
-
-<!-- inbox ref: 01a03b66-8c65-7af9-b55b-e572fccdbffd. Slack thread: https://posthog.slack.com/archives/C09SK2PAGKF/p1787694424184919. PR #88912 merged September 4; Andy routed the report, Vojta approved the PR. -->
 
 </details>
 
@@ -204,8 +184,6 @@ While the PR was under review, the scout kept adding evidence of the same failur
 
 I requested the merge on September 7, and it merged that morning. The code change is confirmed; proving the failure stays gone is the follow-up job.
 
-<!-- inbox ref: 01a05eac-08d0-7306-9917-1fa75e95480d. PR #92909 merged September 7. -->
-
 </details>
 
 ## Loop 4: error tracking
@@ -229,8 +207,6 @@ The outer JSON object had been cut off. Our fallback parser searched for another
 The resulting schema error hid the truncation, and retries repeated work without addressing it. [PR #93477](https://github.com/PostHog/posthog/pull/93477) made the parser recognize truncated output instead of accepting a nested object from an unfinished response. It also stopped the affected one-shot review stages from retrying that failure.
 
 I approved the PR, and it merged on September 3. The tests cover the distinction that matters: a complete response with trailing prose is fine; an inner object rescued from a truncated response isn't.
-
-<!-- inbox ref: 01a06272-772c-7b17-910b-c3cf8f622ca3. PR #93477 merged September 3. -->
 
 </details>
 
@@ -271,13 +247,6 @@ So, no, the alert didn't autonomously fix production while I made coffee. It cau
 
 *The alert landed in Slack with a chart and an initial investigation. I picked up the thread from there.*
 
-<!-- Sources: https://posthog.slack.com/archives/C0BQ8KW9Q5B/p1788616958831549
-     https://posthog.slack.com/archives/C0AEM55RJ77/p1788622117039149
-     Investigation notebook: https://us.posthog.com/notebooks/aX1XIBtL
-     PR #95623 merged September 5. PR #95621 open as of September 7.
-     Screenshot: original Slack alert, chart, and Andy’s follow-up. The previous
-     recording-analyzed example and chart have been retired. -->
-
 </details>
 
 ## Loop 6: issues → reports → PRs
@@ -314,8 +283,6 @@ I approved it on September 7, and it merged that morning. A feature I wanted, fr
 />
 
 *The result: a Rename dialog that keeps the skill’s history and owners. Screenshot from the merged PR’s Storybook example.*
-
-<!-- inbox ref: 01a06b57-01ec-7944-b39d-d964b2153166. PR #95499 merged September 7. -->
 
 </details>
 
@@ -354,8 +321,6 @@ The PR explicitly leaves open whether a retry clears the provider rejection in p
 
 *The report as generated, with timestamped Replay Vision observations beside the diagnosis. The implementation later corrected “Context block” to “Content block.”*
 
-<!-- inbox ref: 01a0618f-9ed3-77e9-addd-febb4698e435. PR #93181 merged September 2. -->
-
 </details>
 
 ## A few smaller ones
@@ -376,15 +341,6 @@ Over the last month, roughly **one in ten scout runs** included a self-validatio
     padding={true}
     classes="rounded"
 />
-
-<!-- Chart source: https://us.posthog.com/project/2/insights/3Ki9SVdL
-     Percentage-only blog copy: https://us.posthog.com/project/2/insights/1buKRx1Z
-     Captured September 7. Denominator: signals_scouts_runs WHERE has_derived=1.
-     Behaviors can overlap; self-validation does not mean the fix was successful. -->
-
-<!-- Restored self-improvement examples: inbox 01a02e15 (removed tool),
-     01a01264 (incorrect schema diagnosis; see dismissal_note).
-     PR #170 documents the stale skill-sync investigation, not a merged skill fix. -->
 
 ## So: loops or graphs?
 
