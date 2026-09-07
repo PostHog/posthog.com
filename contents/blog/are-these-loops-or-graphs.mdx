@@ -24,7 +24,7 @@ DRAFT – working notes (delete before publish)
 - Audited 2026-09-07: 35 observed resolve clicks by Andy, 100 resolved reports
   in his reviewer inbox updated since August 30, plus featured scout history.
   Implementation and merge outcomes cross-checked against GitHub.
-- Screenshots added for Loops 1, 5, 6, and 7. They are local site assets for
+- Screenshots added for Loops 1, 2, 3, 5, 6, and 7. They are local site assets for
   review; replace paths with posthog.com media-library URLs before publishing.
 - Add featuredImage (Cloudinary) + featuredImageType: full.
 - Set actual publish date; keep it <= today while previewing locally.
@@ -142,29 +142,38 @@ Some of our best bug reports start as someone saying "is this happening to anyon
 
 This is particularly useful for the stuff that is annoying enough to mention but hasn't quite made it onto someone's to-do list. Often this is exactly the messy complex stuff that still needs someone from the team to steer a bit to get over the line.
 
-**Where I sit:** reviewing the proposed fix. The Slack thread is the starting point; the report needs evidence from the system before it becomes something to merge.
+**Where I sit:** reproducing problems, reviewing the reports, and bringing in the right people to review the fix. Sometimes the investigation starts right in the Slack thread.
 
 **Loop or graph?** Loop. Team notices something → scout picks it up → investigation → PR → back to using the product.
 
 <details>
 
-<summary>A real one: <strong>please stop starting all the sandboxes at once</strong></summary>
+<summary>A real one: <strong>you shared a task, but I can't open it</strong></summary>
 
-Our weekly repository activity refresh helps keep reviewer information current. It also tried to start a Modal sandbox for every repository in one big burst. Modal had opinions about that.
+On August 25, Dylan shared a task in our team channel while asking about a GitHub integration problem. I clicked the link and got "Task not found." I'd been hitting this too, so I asked `@PostHog` why I couldn't open it.
 
-The report connected the refresh to a spike in rate-limit failures. [PR #92034](https://github.com/PostHog/posthog/pull/92034) confirmed the cause: the job queued all the repositories together, and each one needed a sandbox to run `git log`.
+The Slack agent found a second bug in the middle of discussing the first. The task existed, and its run was readable, but the task page used a different visibility check. It rejected the request before the page could load. Someone sharing a perfectly real task made it look like it had been deleted.
 
-The fix sends batches of ten, a minute apart, with a stable cursor so repositories don't get skipped or processed twice. Tests follow the chain of batches and check that each repository is handled once.
+<ProductScreenshot
+    imageLight="/images/blog/self-driving-loops/slack-shared-task.png"
+    alt="Dylan shares a task in Slack, Andy gets Task not found, and PostHog identifies two endpoints with different visibility checks."
+    padding={false}
+    classes="rounded"
+/>
 
-I approved it and requested the merge on September 1. It's a small scheduling change, but a good example of turning a team conversation into a specific, tested fix.
+*The original Slack exchange: a shared link, a second bug, and the start of an investigation.*
 
-<!-- inbox ref: 01a059a8-1428-7dd7-ac98-79446f65a37e. PR #92034 merged September 1. -->
+The team scout picked up the conversation and authored an inbox report. The pipeline opened [PR #88912](https://github.com/PostHog/posthog/pull/88912), which made the task page use the same shared-thread visibility rule as the run. Tests checked that teammates could open shared tasks while direct-message tasks stayed private. On a later pass, the scout added corroboration to the same report and noted that the PR was already in flight.
+
+I added Vojta and Georgiy as reviewers on September 4. Vojta approved the PR, and it merged that day. The Slack agent did the diagnosis; the scout carried the finding into tracked work. A bug we stumbled over while talking about another bug made it through to a fix.
+
+<!-- inbox ref: 01a03b66-8c65-7af9-b55b-e572fccdbffd. Slack thread: https://posthog.slack.com/archives/C09SK2PAGKF/p1787694424184919. PR #88912 merged September 4; Andy routed the report, Vojta approved the PR. -->
 
 </details>
 
 ## Loop 3: logs
 
-`signals-scout-self-driving-logs` looks for problems in our runtime logs. The useful part isn't just finding an error string. It's working out what failed, whether repeated lines are one retry loop or many separate failures, and whether someone is already fixing it.
+`signals-scout-self-driving-logs` looks for problems in the self driving related slices of our runtime [logs](/logs). The useful part isn't just finding an error string. It's working out what failed, whether repeated lines are one retry loop or many separate failures, and whether someone is already fixing it.
 
 It also keeps checking existing findings. New evidence can go onto the report that's already under review, instead of starting another competing investigation.
 
@@ -176,11 +185,22 @@ It also keeps checking existing findings. New evidence can go onto the report th
 
 <summary>A real one: <strong>the identifier that was too long to start a sandbox</strong></summary>
 
-A task couldn't start its Hogland sandbox because one of its metadata tags was too long. The tag included a workflow ID made from a prefix and two UUIDs. Metadata that had worked with Modal ran into a limit with a different provider.
+A task couldn't start its Hogland (an internal VM service) sandbox because one of its metadata tags was too long. The tag included a workflow ID made from a prefix and two UUIDs. Metadata that had worked with a previous provider ran into a limit with a different provider.
 
 [PR #92909](https://github.com/PostHog/posthog/pull/92909) bounded the tag strings sent to Hogland and added tests for their lengths. Task and run IDs remained available as separate tags.
 
 While the PR was under review, the scout kept adding evidence of the same failure to the existing report. It even saw a quiet period followed by more failures – a useful reminder that "nothing broke in this window" doesn't mean an unmerged fix somehow worked.
+
+<div className="max-w-sm mx-auto">
+    <ProductScreenshot
+        imageLight="/images/blog/self-driving-loops/logs-scout-evidence.png"
+        alt="The report's Evidence section shows three updates from the Self driving logs scout, with time windows, recurring sandbox failures, and affected pull requests."
+        padding={false}
+        classes="rounded"
+    />
+</div>
+
+*The report's Evidence section: fresh findings from later scout runs accumulate on the same report.*
 
 I requested the merge on September 7, and it merged that morning. The code change is confirmed; proving the failure stays gone is the follow-up job.
 
@@ -226,15 +246,6 @@ This one needed more steering from me than some of the others. The alert found t
 
 **Loop or graph?** Loop. Metric moves → alert → investigation → fix → keep watching the metric. A few of those arrows go through me.
 
-<ProductScreenshot
-    imageLight="/images/blog/self-driving-loops/slack-anomaly-alert.png"
-    alt="An MCP error-rate anomaly alert in Slack, with its chart and Andy asking PostHog to root cause the issue."
-    padding={false}
-    classes="rounded"
-/>
-
-*The alert landed in Slack with a chart and an initial investigation. I picked up the thread from there.*
-
 <details>
 
 <summary>A real one: <strong>the scheduler and the worker disagreed</strong></summary>
@@ -250,6 +261,15 @@ The agent connected the failures to a deployment that gave scouts optional extra
 I also opened [PR #95621](https://github.com/PostHog/posthog/pull/95621) to fix the deployment filter that had skipped the tasks worker when shared OAuth code changed. That follow-up is still open as I write this.
 
 So, no, the alert didn't autonomously fix production while I made coffee. It caught the problem, gave me a starting investigation, and helped me get a compatibility fix merged. I'll take that.
+
+<ProductScreenshot
+    imageLight="/images/blog/self-driving-loops/slack-anomaly-alert.png"
+    alt="An MCP error-rate anomaly alert in Slack, with its chart and Andy asking PostHog to root cause the issue."
+    padding={false}
+    classes="rounded"
+/>
+
+*The alert landed in Slack with a chart and an initial investigation. I picked up the thread from there.*
 
 <!-- Sources: https://posthog.slack.com/archives/C0BQ8KW9Q5B/p1788616958831549
      https://posthog.slack.com/archives/C0AEM55RJ77/p1788622117039149
@@ -274,15 +294,6 @@ I can have more of these going at once because I don't need to watch each agent 
 
 **Loop or graph?** Loop. I give it a clear issue, review what comes back, and use the thing it built.
 
-<ProductScreenshot
-    imageLight="/images/blog/self-driving-loops/skill-rename.png"
-    alt="The Rename skill dialog explains that renaming preserves version history and owners."
-    padding={false}
-    classes="rounded"
-/>
-
-*The result: a Rename dialog that keeps the skill’s history and owners. Screenshot from the merged PR’s Storybook example.*
-
 <details>
 
 <summary>A real one: <strong>renaming a skill should not require a new identity</strong></summary>
@@ -294,6 +305,15 @@ The issues scout picked it up that morning. [PR #95499](https://github.com/PostH
 There are deliberate boundaries: the final implementation blocks renames involving the reserved `signals-scout-` and `review-hog-` prefixes.
 
 I approved it on September 7, and it merged that morning. A feature I wanted, from an issue I wrote, with a concrete result to review at the other end.
+
+<ProductScreenshot
+    imageLight="/images/blog/self-driving-loops/skill-rename.png"
+    alt="The Rename skill dialog explains that renaming preserves version history and owners."
+    padding={false}
+    classes="rounded"
+/>
+
+*The result: a Rename dialog that keeps the skill’s history and owners. Screenshot from the merged PR’s Storybook example.*
 
 <!-- inbox ref: 01a06b57-01ec-7944-b39d-d964b2153166. PR #95499 merged September 7. -->
 
@@ -311,15 +331,6 @@ An observation with a real problem in it becomes a signal. From there it's the s
 
 **Loop or graph?** Loop. Product usage → recording → observation → report → PR → back to watching the product get used.
 
-<ProductScreenshot
-    imageLight="/images/blog/self-driving-loops/replay-vision-report.png"
-    alt="Replay Vision observations with recording timestamps beside the report diagnosing failed agent follow-up messages."
-    padding={false}
-    classes="rounded"
-/>
-
-*The report as generated, with timestamped Replay Vision observations beside the diagnosis. The implementation later corrected “Context block” to “Content block.”*
-
 <details>
 
 <summary>A real one: <strong>the failed message in the recording</strong></summary>
@@ -334,27 +345,50 @@ There was telemetry for related task failures, but the report identified the fol
 
 The PR explicitly leaves open whether a retry clears the provider rejection in production. The concrete improvement is how we preserve and handle the failed interaction. The exciting part is how we found it: someone got stuck, and the recording became a starting point for a fix.
 
+<ProductScreenshot
+    imageLight="/images/blog/self-driving-loops/replay-vision-report.png"
+    alt="Replay Vision observations with recording timestamps beside the report diagnosing failed agent follow-up messages."
+    padding={false}
+    classes="rounded"
+/>
+
+*The report as generated, with timestamped Replay Vision observations beside the diagnosis. The implementation later corrected “Context block” to “Content block.”*
+
 <!-- inbox ref: 01a0618f-9ed3-77e9-addd-febb4698e435. PR #93181 merged September 2. -->
 
 </details>
 
-## The part after merge
+## A few smaller ones
 
-Merged isn't the same as verified in production. A scout can [leave follow-up notes in its scratchpad](https://github.com/PostHog/posthog/blob/master/products/signals/backend/scout_harness/prompt.py) and spend a later run checking an old finding instead of looking for a new one.
+We also have scouts that catch docs drifting behind shipped code, maintain our key dashboards, summarize yesterday's merged PRs, and keep my GitHub review requests and failing CI in one attention list. Small things, but all things someone would otherwise have to remember to check.
 
-The logs example shows why this matters: the error went quiet before the fix merged, then came back. A quiet window alone would have been a very convenient, very wrong victory lap.
+## The loops inside the loops
 
-That's the habit I want from these loops. Remember what you reported, check what actually shipped, and go back to the evidence before saying it worked.
+**Self-validation:** merged isn't the same as verified in production. The harness tells scouts to [leave follow-up notes and re-check the evidence](https://github.com/PostHog/posthog/blob/9811d194f82eba77bc5264b10ace8c8c3c9d7708/products/signals/backend/scout_harness/prompt.py#L275-L284). The logs example shows why: the error went quiet before the fix merged, then came back.
+
+**Self-improvement:** the harness also tells custom scouts to [suggest changes to their own instructions](https://github.com/PostHog/posthog/blob/9811d194f82eba77bc5264b10ace8c8c3c9d7708/products/signals/backend/scout_harness/prompt.py#L648-L693), with evidence for their owners to review.
+
+Over the last month, roughly **one in ten scout runs** included a self-validation pass. Checking old findings is a regular part of the work.
+
+<ProductScreenshot
+    imageLight="/images/blog/self-driving-loops/scout-validation-percentages.png"
+    alt="Daily share of measured US scout runs: self-validation stays around 9–12%, while runs authoring self-improvement reports stay below 0.4%."
+    padding={true}
+    classes="rounded"
+/>
+
+<!-- Chart source: https://us.posthog.com/project/2/insights/3Ki9SVdL
+     Percentage-only blog copy: https://us.posthog.com/project/2/insights/1buKRx1Z
+     Captured September 7. Denominator: signals_scouts_runs WHERE has_derived=1.
+     Behaviors can overlap; self-validation does not mean the fix was successful. -->
+
+<!-- Restored self-improvement examples: inbox 01a02e15 (removed tool),
+     01a01264 (incorrect schema diagnosis; see dismissal_note).
+     PR #170 documents the stale skill-sync investigation, not a merged skill fix. -->
 
 ## So: loops or graphs?
 
-I still think about these as individual loops when I'm working on them. What does this one look at, what should it do when it finds something, and how will we know if the fix worked? For the scouts, most of that is written down in a skill.
-
-Once you draw the connections between them, sure, it's a graph. The same bug can show up in a Slack thread, a log, an exception, and a recording. An alert investigation can send us into the same code the scouts depend on. Reports become PRs, changing the product that the loops are watching.
-
-We didn't plan all those connections upfront. We kept adding things we wanted someone to check, and some of them ended up using each other's findings.
-
-Call them whatever you like. I'm getting useful fixes out of them, spending less time watching agents code, and still getting to disagree with them when they're wrong.
+Who cares, call them whatever you like. I'm getting useful fixes out of them, spending less time watching agents code, and still getting to nudge and steer when they're going off track or just need product direction.
 
 ## Try it yourself
 
