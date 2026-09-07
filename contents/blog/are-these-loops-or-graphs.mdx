@@ -106,7 +106,7 @@ The first version still needed fixing. PostHog Review flagged two must-fixes. A 
 I approved at 14:22 and hit `/trunk merge` at 17:27. It merged at 18:02, and the deployment bot recorded both production regions deployed by 18:56. So about seven and a half hours from the complaint to production. I spent my time reviewing the changes.
 
 <ProductScreenshot
-    imageLight="/images/blog/self-driving-loops/agent-feedback.png"
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/agent_feedback_95beae7245.png"
     alt="The agent-feedback report identifies the missing event-definition-create tool and recommends a fix."
     padding={false}
     classes="rounded"
@@ -137,7 +137,7 @@ On August 25, Dylan shared a task in our team channel while asking about a GitHu
 The Slack agent found a second bug in the middle of discussing the first. The task existed, and its run was readable, but the task page used a different visibility check. It rejected the request before the page could load. Someone sharing a perfectly real task made it look like it had been deleted.
 
 <ProductScreenshot
-    imageLight="/images/blog/self-driving-loops/slack-shared-task.png"
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/slack_shared_task_d6ace51111.png"
     alt="Dylan shares a task in Slack, Andy gets Task not found, and PostHog identifies two endpoints with different visibility checks."
     padding={false}
     classes="rounded"
@@ -173,7 +173,7 @@ While the PR was under review, the scout kept adding evidence of the same failur
 
 <div className="max-w-sm mx-auto">
     <ProductScreenshot
-        imageLight="/images/blog/self-driving-loops/logs-scout-evidence.png"
+        imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/logs_scout_evidence_a9c8a0e887.png"
         alt="The report's Evidence section shows three updates from the Self driving logs scout, with time windows, recurring sandbox failures, and affected pull requests."
         padding={false}
         classes="rounded"
@@ -239,7 +239,7 @@ I also opened [PR #95621](https://github.com/PostHog/posthog/pull/95621) to fix 
 So, no, the alert didn't autonomously fix production while I made coffee. It caught the problem, gave me a starting investigation, and helped me get a compatibility fix merged. I'll take that.
 
 <ProductScreenshot
-    imageLight="/images/blog/self-driving-loops/slack-anomaly-alert.png"
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/slack_anomaly_alert_59fbbfb511.png"
     alt="An MCP error-rate anomaly alert in Slack, with its chart and Andy asking PostHog to root cause the issue."
     padding={false}
     classes="rounded"
@@ -276,7 +276,7 @@ There are deliberate boundaries: the final implementation blocks renames involvi
 I approved it on September 7, and it merged that morning. A feature I wanted, from an issue I wrote, with a concrete result to review at the other end.
 
 <ProductScreenshot
-    imageLight="/images/blog/self-driving-loops/skill-rename.png"
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/skill_rename_9db6538850.png"
     alt="The Rename skill dialog explains that renaming preserves version history and owners."
     padding={false}
     classes="rounded"
@@ -313,7 +313,7 @@ There was telemetry for related task failures, but the report identified the fol
 The PR explicitly leaves open whether a retry clears the provider rejection in production. The concrete improvement is how we preserve and handle the failed interaction. The exciting part is how we found it: someone got stuck, and the recording became a starting point for a fix.
 
 <ProductScreenshot
-    imageLight="/images/blog/self-driving-loops/replay-vision-report.png"
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/replay_vision_report_29736e3d42.png"
     alt="Replay Vision observations with recording timestamps beside the report diagnosing failed agent follow-up messages."
     padding={false}
     classes="rounded"
@@ -336,7 +336,7 @@ We also have scouts that catch docs drifting behind shipped code, maintain our k
 Over the last month, roughly **one in ten scout runs** included a self-validation pass. Checking old findings is a regular part of the work.
 
 <ProductScreenshot
-    imageLight="/images/blog/self-driving-loops/scout-validation-percentages.png"
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/scout_validation_percentages_5c647d719c.png"
     alt="Daily share of measured US scout runs: self-validation stays around 9–12%, while runs authoring self-improvement reports stay below 0.4%."
     padding={true}
     classes="rounded"
