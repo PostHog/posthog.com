@@ -5,22 +5,19 @@
 - 100% of PostHog support tickets flow through the Support product
 - Zendesk is stopped
 
-### Objective 2: AI bot resolves tickets (private beta)
-- AI bot available in private beta for a group of customers (PostHog is first)
-- Satisfaction tracking in place (thumbs up/down + notes)
-- 90% satisfaction on AI-resolved tickets
+### Objective 2: AI bot investigates tickets
+- AI bot performs the initial investigation before a human responds
+- It gathers relevant context and identifies the likely issue
+- Its findings help the human respond faster and more accurately
 
-### Objective 3: Support AI bot feeds Tasks
-- AI bot detects when a ticket needs a bug fix, docs update, or similar change
-- Support becomes a source for Tasks, which creates PRs from there
+### Objective 3: Business knowledge improves itself
+- Resolved tickets trigger a pipeline that compares the AI investigation with the human response
+- The pipeline identifies missing knowledge and adds it to Business Knowledge as ready for review
+- Humans review and approve drafted knowledge instead of writing it from scratch
 
-### Objective 4: Business knowledge becomes a hive mind
-- Every knowledge item links to related items — connections between rows, not just search hits
-- Agents traverse those connections to pull the bigger picture, not only fetch a single answer
-
-### Objective 5: Hire a new team member
-- Scope of work across GA, AI bot, Tasks, and knowledge is large for the current team of one
-- Hire and onboard a new engineer in Q3
+### Objective 4: Make Support reliable
+- Support Amazon SES as an alternative to Mailgun for the email channel, removing the dependency on a single provider
+- Process incoming events through a dedicated Kafka/WarpStream queue, isolating Support traffic from other workloads
 
 ## Previous goals
 <details>
