@@ -412,7 +412,7 @@ export const posthog = {
                     aa_testing: true,
                     ab_testing: true,
                     abn_testing: true,
-                    data_warehouse_experiments: 'Beta',
+                    data_warehouse_experiments: true,
                     fake_door_testing: true,
                     holdout_testing: true,
                     multi_armed_bandit: false,
@@ -428,6 +428,7 @@ export const posthog = {
                     geographic_targeting: true,
                     group_level_experiments: true,
                     holdouts: true,
+                    target_by_percentage: true,
                 },
             },
             implementation: {

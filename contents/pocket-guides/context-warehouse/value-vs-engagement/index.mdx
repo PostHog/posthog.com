@@ -36,16 +36,6 @@ PostHog engagement score and flags the high-ARR, low-engagement quadrant.
 The skill looks for patterns like <SeeFig n={1} />: Globex Corp pays more than Acme Co but logged
 activity on only 2 of the last 30 days. The gap between the two numbers is the risk to watch.
 
-## Doing this by hand
-
-1. **Connect [Salesforce](/docs/cdp/sources/salesforce) or [HubSpot](/docs/cdp/sources/hubspot)**
-   via [Data pipeline > Sources](/docs/data-warehouse/sources) for ARR.
-2. **Build an engagement [Trends](/docs/product-analytics/trends/overview) insight**, broken down
-   by group (account): active days or a count of key events.
-3. **Export both and join in a spreadsheet** on account name or domain, sorting by ARR to spot
-   the low-engagement outliers by eye. The [SQL editor](/docs/data-warehouse/sql) does the same
-   join live, or you can ask PostHog AI to analyze the insight, and your list updates itself instead of going stale.
-
 ## Get an agent to do the work
 
 Copy the Skill below and add it to your agent. The agent confirms how you track accounts (a PostHog group, or persons aggregated by email
@@ -60,6 +50,16 @@ This measures CRM-ARR versus engagement health. For expansion candidates based o
 [Upsell-ready accounts](/pocket-guides/context-warehouse/upsell-ready-accounts).
 
 <SkillFigure n={2} caption="The Skill itself, copy and paste this into your agent to answer the question." />
+
+## Doing this by hand
+
+1. **Connect [Salesforce](/docs/cdp/sources/salesforce) or [HubSpot](/docs/cdp/sources/hubspot)**
+   via [Data pipeline > Sources](/docs/data-warehouse/sources) for ARR.
+2. **Build an engagement [Trends](/docs/product-analytics/trends/overview) insight**, broken down
+   by group (account): active days or a count of key events.
+3. **Export both and join in a spreadsheet** on account name or domain, sorting by ARR to spot
+   the low-engagement outliers by eye. The [SQL editor](/docs/data-warehouse/sql) does the same
+   join live, or you can ask PostHog AI to analyze the insight, and your list updates itself instead of going stale.
 
 <SeeAlso>
 

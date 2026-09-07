@@ -687,8 +687,10 @@ export default function TeamPage(props: TeamPageProps) {
                         <Fieldset legend="Community question alerts">
                             <label htmlFor="slackChannel" className="text-sm opacity-75 mb-1">
                                 New questions in this team's subscribed topics get posted to this Slack channel. Use the
-                                channel ID (in Slack: channel name → About → bottom of the panel), not the #name. Leave
-                                blank to stop notifications. Manage which topics this team subscribes to on{' '}
+                                channel ID (in Slack: channel name → About → bottom of the panel), not the #name. You
+                                must also add the Community bot app to the channel. If the app is not a member, Slack
+                                rejects the post and no alert appears. Leave blank to stop notifications. Manage which
+                                topics this team subscribes to on{' '}
                                 <Link to="/community/alerts" state={{ newWindow: true }}>
                                     /community/alerts
                                 </Link>

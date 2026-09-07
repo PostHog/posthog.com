@@ -174,7 +174,7 @@ You should now have a better understanding on common experimentation pitfalls to
 To read up more on experimentation, check out our guides on:
 
 - [When and how to run group-targeted A/B tests](/blog/running-group-targeted-ab-tests)
-- [The 9 best mobile app A/B testing tools](/blog/best-mobile-app-ab-testing-tools)
+- [The 9 best mobile app A/B testing tools](/compare/best-mobile-app-ab-testing-tools)
 - [The most useful product health metrics](/blog/product-health-metrics)
 
 <NewsletterForm />

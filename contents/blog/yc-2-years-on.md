@@ -90,6 +90,6 @@ Most importantly, and as cheesy a conclusion as this is, it has changed how we s
 
 Being part of YC means we see people we know very well go on to build very successful companies, sharing what they're up to along the way. 
 
-Before YC, we felt like outsiders. After YC, we have the confidence to build a impactful product, and that's hugely valuable.
+Before YC, we felt like outsiders. After YC, we have the confidence to build an impactful product, and that's hugely valuable.
 
 <NewsletterForm />

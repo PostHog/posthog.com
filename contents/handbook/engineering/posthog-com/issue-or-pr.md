@@ -26,8 +26,6 @@ See [Developing the website](/handbook/engineering/posthog-com/developing-the-we
 - Removing or hiding a feature that's already live on the site
 - Anything you'd normally expect an engineer or a designer to review
 
-Rough test: if you couldn't have made the change without an AI agent writing it for you, an issue is the better route.
-
 Use the [bug report template](https://github.com/PostHog/posthog.com/issues/new?template=bug-report.md) for something broken and the [website request template](https://github.com/PostHog/posthog.com/issues/new?template=website-request.md) for everything else. Include the URL, a screenshot or recording, what you expected, and what happened instead. Issues get triaged onto the [website project board](https://github.com/orgs/PostHog/projects/131).
 
 Then let the website team pick the fix. It's often not the obvious one, and sometimes there isn't a problem to fix.

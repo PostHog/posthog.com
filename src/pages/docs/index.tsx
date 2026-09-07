@@ -1,13 +1,55 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { SEO } from 'components/seo'
 import Link from 'components/Link'
 import * as Icons from '@posthog/icons'
-import AskMax from 'components/AskMax'
-import ZoomHover from 'components/ZoomHover'
-import ScrollArea from 'components/RadixUI/ScrollArea'
-import { SearchUI } from 'components/SearchUI'
-import { useApp } from '../../context/App'
+import ReaderView from 'components/ReaderView'
+import OSButton from 'components/OSButton'
 import { AppsList } from 'components/Docs/AppsList'
+import Book, { BookShelf } from 'components/PocketGuides/Book'
+import usePocketGuideCounts from '../../hooks/usePocketGuideCounts'
+import { POCKET_GUIDE_VOLUMES } from '../../constants/pocketGuides'
+import usePostHog from '../../hooks/usePostHog'
+import { useApp } from '../../context/App'
+
+/** A surface on the page ground, after `FeaturePanel` on `/desktop`. Colour lives in the icons only. */
+const Panel = ({
+    eyebrow,
+    description,
+    children,
+}: {
+    eyebrow: string
+    description?: string
+    children: React.ReactNode
+}): JSX.Element => (
+    <section className="@container flex h-full flex-col rounded border border-primary bg-primary p-4 @xl:p-5">
+        <h2 className={`m-0 text-sm font-bold uppercase tracking-wide text-primary ${description ? 'mb-1' : 'mb-3'}`}>
+            {eyebrow}
+        </h2>
+        {description && <p className="m-0 mb-3 text-sm leading-snug text-secondary">{description}</p>}
+        {children}
+    </section>
+)
+
+/** An icon link, the size and weight the product pages use for their icon rows. */
+const IconLink = ({
+    to,
+    color,
+    icon,
+    children,
+}: {
+    to: string
+    color: string
+    icon: string
+    children: React.ReactNode
+}) => {
+    const Icon = (Icons[icon as keyof typeof Icons] as any) || Icons.IconBook
+    return (
+        <Link to={to} className="flex items-start gap-2 text-sm font-medium text-primary hover:underline">
+            <Icon className={`mt-0.5 size-4 shrink-0 text-${color}`} />
+            <span className="leading-snug">{children}</span>
+        </Link>
+    )
+}
 
 // Quick-start entry cards for the docs hub
 const pathCards = [
@@ -61,106 +103,121 @@ const surfaces = [
         name: 'Desktop',
         url: '/docs/posthog-desktop',
         icon: 'IconCoffee',
-        color: 'brown',
+        color: 'burnt-orange',
         description: 'Run tasks, review code, and use any model from your desktop.',
     },
 ]
 
 export const DocsIndex = () => {
-    const [isMac, setIsMac] = React.useState<boolean | undefined>(undefined)
-    useEffect(() => {
-        setIsMac(typeof window !== 'undefined' && window.navigator.userAgent.toLowerCase().includes('macintosh'))
-    }, [])
+    const posthog = usePostHog()
+    const { openSearch } = useApp()
+    const guideCounts = usePocketGuideCounts()
+    // Reading order: Vol. 1 at the top of the shelf, the way a series is shelved.
+    const volumes = [...POCKET_GUIDE_VOLUMES].sort((a, b) => a.volume - b.volume)
 
-    const { websiteMode } = useApp()
-
+    // ReaderView is the shell every other docs page uses – see `src/templates/Handbook.tsx`.
     return (
-        <div data-scheme="secondary" className="bg-primary h-full text-primary border-t border-primary">
-            <SEO title="Documentation - PostHog" />
-            <ScrollArea className={`${websiteMode ? '@container' : ''}`}>
-                <div className={`flex @4xl:flex-row flex-col gap-4 @4xl:gap-8 h-full py-2 @xl:py-4 px-2 @xl:px-4`}>
-                    <section className="flex-1">
-                        <h1 className="sr-only">PostHog documentation</h1>
-                        <SearchUI
-                            initialFilter="docs"
-                            hideFilters
-                            isRefinedClassName="bg-accent"
-                            className="mb-6 rounded border border-primary bg-primary shadow-sm overflow-hidden [&_input]:bg-primary [&_input]:py-3 [&_input]:text-base"
-                            autoFocus={false}
-                        />
-                        <h2 className="text-lg mb-1">Get started</h2>
-                        <p className="text-sm opacity-70 mb-3">New to PostHog? Pick a starting point.</p>
-                        {/* Curated entry paths */}
-                        <div data-scheme="primary" className="grid grid-cols-1 @md:grid-cols-3 gap-3 mb-6">
-                            {pathCards.map((card) => {
-                                const Icon = (Icons[card.icon as keyof typeof Icons] as any) || Icons.IconBook
-                                return (
-                                    <ZoomHover key={card.name} className="[&>span]:w-full">
-                                        <Link
-                                            to={card.url}
-                                            className="bg-accent border border-transparent hover:border-primary px-4 py-4 rounded flex items-start gap-3 h-full w-full"
-                                        >
-                                            <Icon className={`size-6 shrink-0 text-${card.color}`} />
-                                            <div>
-                                                <div className="font-semibold leading-tight">{card.name}</div>
-                                                <div className="text-sm opacity-70 leading-tight mt-0.5">
-                                                    {card.description}
-                                                </div>
-                                            </div>
-                                        </Link>
-                                    </ZoomHover>
-                                )
-                            })}
-                            {/* Ask PostHog AI opens the in-docs chat */}
-                            <ZoomHover className="[&>span]:w-full">
-                                <AskMax
-                                    linkOnly
-                                    className="bg-accent border border-transparent hover:border-primary px-4 py-4 rounded flex items-start gap-3 h-full w-full text-left"
+        <ReaderView
+            title="PostHog Docs"
+            hideTitle
+            hideLeftSidebar
+            hideRightSidebar
+            hideMarkdownActions
+            showQuestions={false}
+        >
+            <SEO title="PostHog Docs" />
+            {/* not-prose: ReaderView wraps children in prose, which would restyle every link here. */}
+            <div className="@container/docs not-prose pb-12">
+                {/* No divider: the panels below already read as a separate band. */}
+                <header>
+                    <div className="pb-6">
+                        <h1 className="m-0 text-3xl font-bold !leading-tight @xl/docs:text-4xl">PostHog Docs</h1>
+                        <div className="mt-3 flex flex-col items-start gap-3 @lg/docs:flex-row @lg/docs:items-center @lg/docs:justify-between">
+                            <p className="m-0 max-w-2xl flex-1 text-[15px] leading-relaxed text-secondary @xl/docs:text-base">
+                                References for every product and tool, and use case guides to help you succeed.
+                            </p>
+                            <div className="w-full @lg/docs:w-auto @lg/docs:shrink-0">
+                                <OSButton
+                                    type="button"
+                                    variant="secondary"
+                                    size="md"
+                                    width="full"
+                                    icon={<Icons.IconSearch />}
+                                    aria-label="Search docs"
+                                    onClick={() => openSearch('docs')}
                                 >
-                                    <Icons.IconSparkles className="size-6 shrink-0 text-purple" />
-                                    <div>
-                                        <div className="font-semibold leading-tight">Ask PostHog AI</div>
-                                        <div className="text-sm opacity-70 leading-tight mt-0.5">
-                                            Get answers without reading the docs.
-                                        </div>
-                                    </div>
-                                </AskMax>
-                            </ZoomHover>
+                                    Search the docs
+                                </OSButton>
+                            </div>
                         </div>
+                    </div>
+                </header>
 
-                        {/* Use PostHog from anywhere: the surfaces */}
-                        <h2 className="text-lg mb-1">Use PostHog from anywhere</h2>
-                        <p className="text-sm opacity-70 mb-3">Pick the surface that fits how you work.</p>
-                        <div data-scheme="primary" className="grid grid-cols-1 @md:grid-cols-3 gap-3 mb-6">
-                            {surfaces.map((surface) => {
-                                const Icon = (Icons[surface.icon as keyof typeof Icons] as any) || Icons.IconBook
-                                return (
-                                    <ZoomHover key={surface.name} className="[&>span]:w-full">
-                                        <Link
+                <div className="flex flex-col gap-4 @3xl/docs:flex-row @3xl/docs:gap-6">
+                    <div className="flex flex-1 flex-col gap-4 @3xl/docs:w-2/3">
+                        {/* The tab pattern flattened: grouping stays, nothing hides behind a click. */}
+                        <div className="grid grid-cols-1 gap-4 @lg/docs:grid-cols-2">
+                            <Panel eyebrow="Get started" description="Install PostHog and send your first event.">
+                                <div className="flex flex-col gap-2.5">
+                                    {pathCards.map((card) => (
+                                        <IconLink key={card.name} to={card.url} color={card.color} icon={card.icon}>
+                                            {card.name}
+                                            <span className="block text-sm font-normal text-secondary">
+                                                {card.description}
+                                            </span>
+                                        </IconLink>
+                                    ))}
+                                </div>
+                            </Panel>
+
+                            {/* Not products, so `AppsList` misses them – this is their only entry point. */}
+                            <Panel eyebrow="Products" description="Where you use PostHog from.">
+                                <div className="grid grid-cols-1 gap-2.5 @xs:grid-cols-2 @lg/docs:grid-cols-1">
+                                    {surfaces.map((surface) => (
+                                        <IconLink
+                                            key={surface.name}
                                             to={surface.url}
-                                            className="bg-accent border border-transparent hover:border-primary px-4 py-4 rounded flex flex-col h-full w-full gap-1.5"
+                                            color={surface.color}
+                                            icon={surface.icon}
                                         >
-                                            <div className="flex items-center gap-2">
-                                                <Icon className={`size-5 shrink-0 text-${surface.color}`} />
-                                                <span className="font-semibold leading-tight">{surface.name}</span>
-                                            </div>
-                                            <p className="text-sm opacity-70 leading-tight m-0">
-                                                {surface.description}
-                                            </p>
-                                        </Link>
-                                    </ZoomHover>
-                                )
-                            })}
+                                            {surface.name}
+                                        </IconLink>
+                                    ))}
+                                </div>
+                            </Panel>
                         </div>
 
-                        {/* Tools: the PostHog tools you use from any surface */}
-                        <h2 className="text-lg mb-1">Tools</h2>
-                        <p className="text-sm opacity-70 mb-3">Use every PostHog tool from any surface.</p>
-                        <AppsList />
-                    </section>
+                        <Panel eyebrow="Tools" description="What PostHog does – reference docs for every tool.">
+                            <AppsList />
+                        </Panel>
+                    </div>
+
+                    {/* The library: the same volumes as /pocket-guides, as spines. */}
+                    <aside className="@3xl/docs:w-1/3 shrink-0">
+                        <Panel eyebrow="Guides" description="Guides for the human reader on the go.">
+                            <BookShelf>
+                                {volumes.map((volume) => (
+                                    <Book key={volume.id} volume={volume} count={guideCounts[volume.id] ?? 0} />
+                                ))}
+                            </BookShelf>
+                            <Link
+                                to="/pocket-guides"
+                                state={{ newWindow: true }}
+                                className="mt-4 inline-block text-sm font-semibold text-primary hover:underline"
+                                onClick={() =>
+                                    posthog?.capture('pocket_guide_interaction', {
+                                        kind: 'shelf_link_click',
+                                        placement: 'docs_index',
+                                    })
+                                }
+                            >
+                                All guides &rarr;
+                            </Link>
+                        </Panel>
+                    </aside>
                 </div>
-            </ScrollArea>
-        </div>
+            </div>
+        </ReaderView>
     )
 }
 

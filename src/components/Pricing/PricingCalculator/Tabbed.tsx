@@ -16,10 +16,14 @@ import StandaloneAddonsTab from './Tabs/StandaloneAddonsTab'
 import { EXCLUDED_ADDON_TYPES } from '../../../constants/addons'
 import { BROWSE_TOOLS_HANDLES } from 'constants/productNavigation'
 import qs from 'qs'
-import { useUser } from 'hooks/useUser'
 import usePostHog from 'hooks/usePostHog'
+import AgentEstimateLink, {
+    AI_PRICING_EXPERIMENT_VARIANTS,
+    AI_PRICING_FLAG,
+} from 'components/Pricing/AgentEstimateLink'
 import { NumericFormat } from 'react-number-format'
 import AutosizeInput from 'react-input-autosize'
+import { RenderInClient } from 'components/RenderInClient'
 
 export const Addon = ({ type, name, description, plans, addons, setAddons, volume, inclusion_only }) => {
     const addon = addons.find((addon) => addon.type === type)
@@ -555,9 +559,26 @@ export default function Tabbed() {
                     <p className="m-0 font-bold text-lg leading-none">${totalPrice.toLocaleString()}</p>
                 </div>
             </div>
-            <div className="flex justify-end gap-0.5 mt-2 pr-2 md:pr-0">
-                <IconCopy className="size-5 inline-block text-muted relative -top-px" />
-                <CopyURLButton onClick={generateURL} />
+            {/* Two ways to leave with an estimate: a link to this one, or a prompt that builds
+                one from what the visitor already pays for elsewhere. Same row, same weight. */}
+            <div className="flex flex-wrap items-center justify-between gap-2 mt-2 pr-2 md:pr-0">
+                <RenderInClient
+                    render={() => {
+                        const variant = window.posthog?.getFeatureFlag?.(AI_PRICING_FLAG)
+                        return variant && variant !== AI_PRICING_EXPERIMENT_VARIANTS.control ? (
+                            <AgentEstimateLink
+                                source="calculator-total"
+                                className="text-sm font-bold text-red dark:text-yellow"
+                            />
+                        ) : (
+                            <></>
+                        )
+                    }}
+                />
+                <div className="flex gap-0.5 ml-auto">
+                    <IconCopy className="size-5 inline-block text-muted relative -top-px" />
+                    <CopyURLButton onClick={generateURL} />
+                </div>
             </div>
         </div>
     )

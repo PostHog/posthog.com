@@ -38,7 +38,7 @@ To help you pick the best of these tools, we put together this list. All of the 
 - GitHub stars: 32.1k as of March 2026
 - [PostHog on GitHub](https://github.com/PostHog/posthog)
 
-[PostHog](/) is an all-in-one developer platform that combines [LLM observability](/llm-analytics) with several other developer-focused tools, such as [product](/product-analytics) and [web analytics](/web-analytics), [session replay](/session-replay), [feature flags](/feature-flags), [experiments](/experiments), [error tracking](/error-tracking), and [surveys](/surveys).
+[PostHog](/) is an all-in-one developer platform that combines [LLM observability](/ai-observability) with several other developer-focused tools, such as [product](/product-analytics) and [web analytics](/web-analytics), [session replay](/session-replay), [feature flags](/feature-flags), [experiments](/experiments), [error tracking](/error-tracking), and [surveys](/surveys).
 
 Its LLM observability product (known as [AI Observability](/docs/ai-observability)) integrates with popular LLM providers, captures details of generations, provides an aggregated metrics dashboard, and more.
 
@@ -112,7 +112,7 @@ OpenLLMetry is an open-source observability product for LLM applications based o
 
 Traceloop is free up to 50k spans per month and 5 seats, but this only provides 24-hour data retention. Beyond this, you’ll need to talk to sales. 
 
-OpenLLMetry can capture data from a range of LLM providers, vector DBs, and LLM frameworks. It can then send this data to a range of supported destinations from Traceloop to [Datadog](/blog/best-datadog-alternatives) to Honeycomb.
+OpenLLMetry can capture data from a range of LLM providers, vector DBs, and LLM frameworks. It can then send this data to a range of supported destinations from Traceloop to [Datadog](/compare/best-datadog-alternatives) to Honeycomb.
 
 ![OpenLLMetry dashboard](https://res.cloudinary.com/dmukukwp6/image/upload/openllmetry_aa916c3921.png)
 
@@ -272,6 +272,6 @@ For specific provider support, check each tool's documentation.
 
 - [PostHog LLM observability documentation](/docs/ai-observability)
 - [How to A/B test LLM prompts with PostHog](/tutorials/llm-ab-tests)
-- [The best error tracking tools](/blog/best-error-tracking-tools) – if you're also instrumenting the rest of your app alongside the LLM parts
+- [The best error tracking tools](/compare/best-error-tracking-tools) – if you're also instrumenting the rest of your app alongside the LLM parts
 
 <NewsletterForm />

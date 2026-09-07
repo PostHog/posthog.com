@@ -115,7 +115,7 @@ We didn’t have observability and evaluation early and regretted it. We wish we
 
 - Automated scorers like [LLM-as-judge](/blog/stop-ai-slop) and deterministic checks
 
-Basically, [AI Observability](/llm-analytics).
+Basically, [AI Observability](/ai-observability).
 
 Unfortunately, AI Observability alone isn’t enough. Reality is gnarly and to deal with it, our team often looks at real usage.
 

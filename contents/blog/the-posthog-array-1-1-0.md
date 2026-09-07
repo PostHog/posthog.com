@@ -16,7 +16,7 @@ tags:
 
 Major update time (hence the change to 1.*1*.0) - push-based integrations have been introduced!
 
-Like what you see and self-hosting? [Update](/docs/runbook/upgrading-posthog) your instance.
+Like what you see and self-hosting? [Update](/docs/self-host) your instance.
 
 First our updates and new features.
 
@@ -149,7 +149,7 @@ Want to get involved? [Email us to schedule a 30 minute call](mailto:hey@posthog
 
 ## PostHog news
 
-* It’s been a big week at PostHog towers, this was another really big release and now our [future updates](https://github.com/PostHog/posthog/projects/5) will be focusing on [our roadmap](/handbook/strategy/roadmap). James has put a lot of work in ensuring PostHog abides by its [values](/handbook/company/values) and remains transparent  – if you have thoughts write an issue or create a pr.
+* It’s been a big week at PostHog towers, this was another really big release and now our [future updates](https://github.com/PostHog/posthog/projects/5) will be focusing on [our roadmap](/handbook/strategy/roadmap). James has put a lot of work in ensuring PostHog abides by its [values](/handbook/values) and remains transparent  – if you have thoughts write an issue or create a pr.
 * PostHog is now Aaron, Eric, James, and Tim. A big welcome to the team – watch this space for more new joiners
 
 <ArrayCTA />

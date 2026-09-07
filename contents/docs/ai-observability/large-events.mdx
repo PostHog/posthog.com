@@ -104,6 +104,32 @@ Not on Python or Node? Build events with [manual capture](/docs/ai-observability
 POST <ph_client_api_host>/i/v0/ai/batch/
 ```
 
+## Sending over OpenTelemetry
+
+If you send AI traces with [OpenTelemetry](/docs/ai-observability/installation/opentelemetry), your spans arrive over OTLP at a dedicated path:
+
+```shell
+POST <ph_client_api_host>/i/v0/ai/otel
+```
+
+Two size limits apply on this path, and they fail in different ways:
+
+- **4MB per export.** PostHog rejects an OTLP export body over 4MB (measured after decompression for gzipped exports) with HTTP 413 and ingests none of its spans. Your collector logs the failure but does not retry it, per the OTLP spec, so the whole export is lost. This cap is lower than the per-event ceiling, so a batch of spans can exceed it before any single span does.
+- **8MB per event.** Each span becomes one AI event, held to the same 8MB ceiling as the other paths. A span whose converted event exceeds the ceiling is dropped, but the rest of the export is ingested and the request still returns success. A failure response would only make your collector retry a span that can never fit. The only signal is a `MessageSizeTooLarge` [ingestion warning](/docs/data/ingestion-warnings): your application gets no error, and the span is lost silently.
+
+To stay under the 4MB export cap, add the [`batch` processor](https://github.com/open-telemetry/opentelemetry-collector/blob/main/processor/batchprocessor/README.md) to your collector and lower both of its batch size settings, so it splits large batches into smaller exports:
+
+```yaml
+processors:
+  batch:
+    send_batch_size: 100
+    send_batch_max_size: 100
+```
+
+Set both values: the collector refuses to start if `send_batch_max_size` is below `send_batch_size`, which defaults to 8192. Both settings count spans rather than bytes, so a batch of a few very large spans can pass the count and still exceed 4MB. Pick values that match your span sizes. Keep `send_batch_max_size` at or below 100: the endpoint also rejects any export containing more than 100 AI spans. For a single span that is too large on its own, capture it with [`capture_ai`](#calling-capture_ai-directly) instead.
+
 ## Limits
 
 Events up to **8MB** are accepted for now. The SDKs drop larger events before sending and log an error instead. The limit will increase as the beta continues.
+
+Over [OpenTelemetry](#sending-over-opentelemetry), a lower **4MB** per-export cap also applies: an export over it is rejected with HTTP 413, while a span whose event exceeds 8MB is dropped without an application error.

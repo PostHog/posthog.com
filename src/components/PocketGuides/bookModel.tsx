@@ -132,6 +132,16 @@ export function pageCount(pages: BookPageEntry[]): number {
     return pages.reduce((max, entry) => Math.max(max, entry.page ?? 0), 0)
 }
 
+/** A chapter's url segment. The front matter has none: it is the index. */
+export function learnChapterSlug(entry: BookPageEntry): string {
+    return entry.order === 0 ? '' : normalizeUrl(entry.url).split('/').pop() || ''
+}
+
+export function learnChapterPath(basePath: string, entry: BookPageEntry): string {
+    const slug = learnChapterSlug(entry)
+    return slug ? `${basePath}/${slug}` : basePath
+}
+
 /** One tab per page in the book, the current one marked. */
 export function bookTabs(pages: BookPageEntry[], activeUrl: string): BookTab[] {
     return pages.map((entry) => ({

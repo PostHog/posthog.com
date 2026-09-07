@@ -1,10 +1,11 @@
-import { IconCopy, IconSpinner } from '@posthog/icons'
+import { IconCopy, IconSpinner, IconTrash } from '@posthog/icons'
 import { useToast } from '../../context/Toast'
 import React, { useEffect, useState } from 'react'
 import CreatableMultiSelect from 'components/CreatableMultiSelect'
 import { useUser } from 'hooks/useUser'
 import Link from 'components/Link'
 import { OSSelect } from 'components/OSForm'
+import OSButton from 'components/OSButton'
 import { useMediaLibraryContext } from './context'
 import Tooltip from 'components/Tooltip'
 import dayjs from 'dayjs'
@@ -33,6 +34,7 @@ interface ImageProps {
     height?: number
     id: number | string
     profiles?: Array<{ id: number; firstName?: string; lastName?: string }>
+    related?: Array<{ id: number; __type?: string; firstName?: string; lastName?: string }>
     tags?: Array<{ id: string; attributes: { label: string } }>
     onMoved?: () => void
     mediaFolder: any
@@ -49,6 +51,7 @@ export default function Image({
     height,
     id,
     profiles = [],
+    related = [],
     tags: initialTags = [],
     onMoved,
     mediaFolder,
@@ -58,12 +61,17 @@ export default function Image({
     const { folders, tags: allTags, fetchTags } = useMediaLibraryContext()
     const { public_id, resource_type } = provider_metadata || {}
     const { addToast } = useToast()
-    const { getJwt, fetchUser } = useUser()
+    const { getJwt, fetchUser, user } = useUser()
     const [loadingSize, setLoadingSize] = useState<string | number | null>(null)
     const [tags, setTags] = useState(initialTags)
     const [availableOptions, setAvailableOptions] = useState(allTags)
     const [uploader] = profiles
     const [isMoving, setIsMoving] = useState(false)
+    const [isDeleting, setIsDeleting] = useState(false)
+    const profileId = user?.profile?.id
+    const isOwner =
+        profileId != null && related.some((item) => item.__type === 'api::profile.profile' && item.id === profileId)
+    const canDelete = Boolean(user?.webmaster || isOwner)
     const currentFolderId = mediaFolder?.id
     const formattedDuration = generationDurationMs ? formatDuration(generationDurationMs) : null
 
@@ -262,6 +270,40 @@ export default function Image({
         }
     }
 
+    const handleDelete = async () => {
+        if (!canDelete) return
+        if (!confirm(`Are you sure you want to delete "${name || 'this file'}"?`)) return
+
+        setIsDeleting(true)
+        try {
+            const jwt = await getJwt()
+            if (!jwt) return
+
+            const response = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/upload/files/${id}`, {
+                method: 'DELETE',
+                headers: {
+                    Authorization: `Bearer ${jwt}`,
+                },
+            })
+
+            if (!response.ok) {
+                throw new Error(response.statusText)
+            }
+
+            addToast({
+                description: 'File deleted',
+                duration: 3000,
+            })
+
+            onMoved?.()
+        } catch (error) {
+            console.error('Failed to delete file:', error)
+            addToast({ description: 'Failed to delete file', error: true, duration: 3000 })
+        } finally {
+            setIsDeleting(false)
+        }
+    }
+
     return (
         <li className="flex space-x-2 items-start">
             <div
@@ -275,14 +317,25 @@ export default function Image({
                 />
             </div>
             <div className="flex-grow">
-                <p className="m-0 font-bold line-clamp-1 text-ellipsis max-w-xl leading-none">
-                    {name}
-                    {isImage && width && height && (
-                        <span className="text-sm text-secondary font-normal ml-1">
-                            ({width}x{height})
-                        </span>
+                <div className="flex items-start justify-between gap-2">
+                    <p className="m-0 font-bold line-clamp-1 text-ellipsis max-w-xl leading-none">
+                        {name}
+                        {isImage && width && height && (
+                            <span className="text-sm text-secondary font-normal ml-1">
+                                ({width}x{height})
+                            </span>
+                        )}
+                    </p>
+                    {canDelete && (
+                        <OSButton
+                            size="sm"
+                            icon={isDeleting ? <IconSpinner className="animate-spin" /> : <IconTrash />}
+                            tooltip="Delete"
+                            onClick={handleDelete}
+                            disabled={isDeleting}
+                        />
                     )}
-                </p>
+                </div>
                 {isImage ? (
                     <div className="flex flex-wrap gap-1 mt-1.5">
                         {availableSizes.map((size) => (

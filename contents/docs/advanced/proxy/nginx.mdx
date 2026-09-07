@@ -80,6 +80,8 @@ server {
     location /static/ {
         proxy_pass https://$posthog_assets_host;
         proxy_set_header Host $posthog_assets_host;
+        proxy_set_header Cookie "";
+        proxy_set_header Authorization "";
         proxy_ssl_server_name on;
         proxy_ssl_name $posthog_assets_host;
         proxy_ssl_verify on;
@@ -89,6 +91,8 @@ server {
     location /array/ {
         proxy_pass https://$posthog_assets_host;
         proxy_set_header Host $posthog_assets_host;
+        proxy_set_header Cookie "";
+        proxy_set_header Authorization "";
         proxy_ssl_server_name on;
         proxy_ssl_name $posthog_assets_host;
         proxy_ssl_verify on;
@@ -98,6 +102,8 @@ server {
     location / {
         proxy_pass https://$posthog_api_host;
         proxy_set_header Host $posthog_api_host;
+        proxy_set_header Cookie "";
+        proxy_set_header Authorization "";
         proxy_ssl_server_name on;
         proxy_ssl_name $posthog_api_host;
         proxy_ssl_verify on;
@@ -114,6 +120,7 @@ Here's what each directive does:
 - `set`: Stores each upstream hostname in a variable. nginx only re-resolves names used through variables in `proxy_pass`.
 - `proxy_pass`: The upstream URL nginx forwards requests to. Omitting a URI preserves the complete request path.
 - `proxy_set_header Host`: Sets the Host header sent to PostHog. Without this, PostHog receives your domain and can't route the request, causing 401 errors.
+- `proxy_set_header Cookie` and `proxy_set_header Authorization`: Clear the browser's cookies and auth headers before the request goes to PostHog.
 - `proxy_ssl_server_name on`: Enables Server Name Indication (SNI) for the upstream SSL connection. Required because PostHog uses virtual hosting.
 - `proxy_ssl_name`: The hostname to use for SNI. Must match the upstream domain.
 - `proxy_ssl_verify on`: Verifies that the upstream certificate is valid for the hostname in `proxy_ssl_name`.
@@ -253,6 +260,8 @@ http {
         location /static/ {
             proxy_pass https://$posthog_assets_host;
             proxy_set_header Host $posthog_assets_host;
+            proxy_set_header Cookie "";
+            proxy_set_header Authorization "";
             proxy_ssl_server_name on;
             proxy_ssl_name $posthog_assets_host;
             proxy_ssl_verify on;
@@ -265,6 +274,8 @@ http {
         location /array/ {
             proxy_pass https://$posthog_assets_host;
             proxy_set_header Host $posthog_assets_host;
+            proxy_set_header Cookie "";
+            proxy_set_header Authorization "";
             proxy_ssl_server_name on;
             proxy_ssl_name $posthog_assets_host;
             proxy_ssl_verify on;
@@ -277,6 +288,8 @@ http {
         location / {
             proxy_pass https://$posthog_api_host;
             proxy_set_header Host $posthog_api_host;
+            proxy_set_header Cookie "";
+            proxy_set_header Authorization "";
             proxy_ssl_server_name on;
             proxy_ssl_name $posthog_api_host;
             proxy_ssl_verify on;

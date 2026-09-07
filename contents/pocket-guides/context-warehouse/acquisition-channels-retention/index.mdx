@@ -37,17 +37,6 @@ The Skill looks for patterns like <SeeFig n={1} />: paid social brought in the m
 but organic search and content brought in more *retained* revenue at a fraction of the CAC, the
 real signal for where budget belongs.
 
-## Doing this by hand
-
-1. **Connect [Stripe](/docs/cdp/sources/stripe), and [Google Ads](/docs/cdp/sources/google-ads) or
-   [Meta Ads](/docs/cdp/sources/meta-ads)**, via
-   [Data pipeline > Sources](/docs/data-warehouse/sources).
-2. **Build a [Trends](/docs/product-analytics/trends/overview) insight of signups broken down by
-   [`$initial_utm_source`](/docs/data/utm-segmentation)**: native to PostHog, no join needed for
-   this part.
-3. **Pull revenue and spend per channel separately** from Stripe's and your ad platform's own
-   reports, then match them up using the [SQL editor](/docs/data-warehouse/sql) or PostHog AI.
-
 ## Get an agent to do the work
 
 Copy the Skill below and add it to your agent. The agent attributes each person to a channel from first-touch UTM properties, pulls revenue and
@@ -62,6 +51,17 @@ specific rollout's revenue impact, that's
 [Feature revenue impact](/pocket-guides/context-warehouse/feature-revenue-impact).
 
 <SkillFigure n={2} caption="The Skill itself, copy and paste this into your agent to answer the question." />
+
+## Doing this by hand
+
+1. **Connect [Stripe](/docs/cdp/sources/stripe), and [Google Ads](/docs/cdp/sources/google-ads) or
+   [Meta Ads](/docs/cdp/sources/meta-ads)**, via
+   [Data pipeline > Sources](/docs/data-warehouse/sources).
+2. **Build a [Trends](/docs/product-analytics/trends/overview) insight of signups broken down by
+   [`$initial_utm_source`](/docs/data/utm-segmentation)**: native to PostHog, no join needed for
+   this part.
+3. **Pull revenue and spend per channel separately** from Stripe's and your ad platform's own
+   reports, then match them up using the [SQL editor](/docs/data-warehouse/sql) or PostHog AI.
 
 <SeeAlso>
 

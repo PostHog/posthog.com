@@ -39,17 +39,6 @@ The Skill looks for patterns like <SeeFig n={1} />: engagement doesn't fall off 
 erodes, roughly halving every week for a month before cancellation. That decay curve is the
 early-warning signal so you can start re-engaging users when their engagement first begins to dip.
 
-## Doing this by hand
-
-1. **Connect [Stripe](/docs/cdp/sources/stripe) or [Chargebee](/docs/cdp/sources/chargebee)** via
-   [Data pipeline > Sources](/docs/data-warehouse/sources) for cancellation dates.
-2. **Pick a handful of recently churned accounts** and open each one in PostHog's
-   [Persons](/docs/data/persons) (or Groups) explorer to read their activity timeline in the weeks
-   before they left.
-3. **Look for the shared pattern**: Use the
-   [SQL editor](/docs/data-warehouse/sql) or ask PostHog AI to
-   average the number of weeks-to-churn across the accounts you've selected.
-
 ## Get an agent to do the work
 
 Copy the Skill below and add it to your agent. The agent finds each account's cancellation timestamp (Stripe's `canceled_at`, or the Chargebee
@@ -62,6 +51,17 @@ support tickets predicting churn, that's
 [Tickets & churn](/pocket-guides/context-warehouse/support-tickets-churn) instead.
 
 <SkillFigure n={2} caption="The Skill itself, copy and paste this into your agent to answer the question." />
+
+## Doing this by hand
+
+1. **Connect [Stripe](/docs/cdp/sources/stripe) or [Chargebee](/docs/cdp/sources/chargebee)** via
+   [Data pipeline > Sources](/docs/data-warehouse/sources) for cancellation dates.
+2. **Pick a handful of recently churned accounts** and open each one in PostHog's
+   [Persons](/docs/data/persons) (or Groups) explorer to read their activity timeline in the weeks
+   before they left.
+3. **Look for the shared pattern**: Use the
+   [SQL editor](/docs/data-warehouse/sql) or ask PostHog AI to
+   average the number of weeks-to-churn across the accounts you've selected.
 
 <SeeAlso>
 

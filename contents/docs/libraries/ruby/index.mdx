@@ -127,7 +127,7 @@ import RubySendEvents from '../../integrate/send-events/_snippets/send-events-ru
 
 ## Person profiles and properties
 
-The Ruby SDK captures identified events by default. These create [person profiles](/docs/data/persons). To set [person properties](/docs/data/user-properties) in these profiles, include them when capturing an event:
+The Ruby SDK captures identified events by default. These create [person profiles](/docs/data/persons). To set [person properties](/docs/product-analytics/person-properties) in these profiles, include them when capturing an event:
 
 ```ruby
 posthog.capture({
@@ -140,7 +140,7 @@ posthog.capture({
 })
 ```
 
-For more details on the difference between `$set` and `$set_once`, see our [person properties docs](/docs/data/user-properties#what-is-the-difference-between-set-and-set_once).
+For more details on the difference between `$set` and `$set_once`, see our [person properties docs](/docs/product-analytics/person-properties#what-is-the-difference-between-set-and-set_once).
 
 To capture [anonymous events](/docs/data/anonymous-vs-identified-events) without person profiles, set the event's `$process_person_profile` property to `false`:
 
@@ -167,7 +167,7 @@ posthog.alias({
 })
 ```
 
-We strongly recommend reading our docs on [alias](/docs/data/identify#alias-assigning-multiple-distinct-ids-to-the-same-user) to best understand how to correctly use this method.
+We strongly recommend reading our docs on [alias](/docs/product-analytics/identify#alias-assigning-multiple-distinct-ids-to-the-same-user) to best understand how to correctly use this method.
 
 ## Feature flags
 
