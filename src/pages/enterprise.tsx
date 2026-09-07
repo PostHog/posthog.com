@@ -129,7 +129,7 @@ export default function Enterprise(): JSX.Element {
                     <div className="relative grid pt-8 @3xl:grid-cols-[minmax(0,1fr)_27%]">
                         <div className="col-span-full col-start-1 row-start-1 flex flex-col justify-between">
                             <Hero />
-                            <div className="relative z-10 pb-5 pt-3 @3xl:pr-[44%]">
+                            <div className="relative z-10 pb-5 pt-8 @3xl:pr-[44%] @3xl:pt-[16%]">
                                 <h2 className="m-0 text-2xl font-semibold tracking-tight">Platform packages</h2>
                                 <p className="m-0 mt-2 max-w-2xl text-pretty text-sm text-secondary">
                                     Security, compliance, and team controls that sit on top of every PostHog product.

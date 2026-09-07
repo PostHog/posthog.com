@@ -243,7 +243,7 @@ export function BusinessProof(): JSX.Element {
     const [active, setActive] = useState(PILLARS[0].key)
 
     return (
-        <section className="relative flex flex-1 flex-col pb-10 pt-10">
+        <section className="relative flex flex-1 flex-col py-10 @3xl:py-[calc(2.5rem+10%)]">
             <h2 className="relative z-30 m-0 mb-6 flex flex-wrap items-center gap-x-3 text-2xl font-bold tracking-tight @3xl:pr-[28%]">
                 Not convinced? Check out these five corporate buzzwords.
             </h2>
