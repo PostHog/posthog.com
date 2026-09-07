@@ -441,7 +441,7 @@ export default function Handbook({ data: { post, postHogSource }, pageContext: {
                 </OverflowXSection>
             </p>
         ),
-        NewsletterForm: () => <NewsletterForm placement="handbook" />,
+        NewsletterForm: (props) => <NewsletterForm {...props} placement="handbook" />,
         ...shortcodes,
     }
 
