@@ -1,6 +1,6 @@
 ---
 title: "From 1 to 100 IRL events in a year: The secret to getting engineers to demo"
-date: 2026-09-04
+date: 2026-09-07
 rootPage: /blog
 sidebar: Blog
 showTitle: true
@@ -36,7 +36,7 @@ But so do many other companies building products at a fast pace. <!-- TODO: orig
 
 Making it public isn't just for views, though. Whether in written form or a demo format, sharing helps others take advantage of what we're learning, builds trust, and also forces us to be clear about our thinking. All of that becomes a self-reinforcing loop:
 
-![A flow diagram: engineers build stuff, share what they built (and what they learned along the way), which flows into written word (blogs and social) and spoken word and visuals (talks and video), all feeding back into feedback and learning](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/event_blog_post_image_1_fdceac63cb.png)
+![A flow diagram: engineers build stuff, share what they built (and what they learned along the way), which flows into written word (blogs and social) and spoken word and visuals (talks and video), all feeding back into feedback and learning](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/demo_blog_post_image_1_ee41b44c98.png)
 
 The problem I see at other companies is if engineers in your org need convincing to share what they've made is actually better for customers. This is painless at PostHog because most of our engineers are product engineers:
 
@@ -46,7 +46,7 @@ With more ownership and transparency, engineers will naturally _want_ to demo th
 
 This event recap from [Meikel](/community/profiles/32489) after he did a talk at a [dev meetup in Milan](/events/186) earlier this summer shows what it looks like when product engineers love what they work on and sharing it with users:
 
-![A Slack recap from Meikel after speaking at a dev meetup in Milan, encouraging others to get out to IRL events](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/event_blog_post_image_2_3145536574.png)
+![A Slack recap from Meikel after speaking at a dev meetup in Milan, encouraging others to get out to IRL events](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/demo_blog_post_image_4_9dbad6d692.png)
 
 
 ## Culture of demoing
@@ -58,7 +58,7 @@ It also helps that demoing is second-nature here. You can't get far on any given
 - **Our #demo-posthog-anything channel.** People post here at any time to keep demos going all week long, rather than waiting for the next all-hands. 
 
 For example, here's Sam demoing scatter plots working in our SQL insights product:
-![A screenshot of the #demo-posthog-anything Slack channel showing an engineer demoing a new scatter plot in SQL insights](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/event_blog_post_image_3_fc79500b73.png)
+![A screenshot of the #demo-posthog-anything Slack channel showing an engineer demoing a new scatter plot in SQL insights](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/demo_blog_post_image_2_ab85ec61f2.png)
 
 Keep in mind that a demo != a slide deck. We care about showing the thing working, not just talking about it. Many of the latest AI community meetups around the world prioritize the same because it contributes to better attendance, participation, and enthusiasm. 
 
@@ -82,11 +82,11 @@ Even before reaching out to speakers with opportunities, we use a [speaker-exper
 
 Here's an excerpt from the skill output after looking at [Alex Lebedev](https://posthog.com/community/profiles/33371)'s work: 
 
-![The speaker-expertise skill in action identifying a talk topic based on a teammate's GitHub activity](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/event_blog_post_image_6_8828dcb046.png)
+![The speaker-expertise skill in action identifying a talk topic based on a teammate's GitHub activity](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/demo_blog_post_image_6_4d350267e9.png)
 
 He used this as a starting point for his talk on self-driving at WAWTECH in Warsaw, which drew a large crowd:
 
-![Photos and a Slack recap from WAWTECH in Warsaw, where PostHog spoke about Self-driving to a packed room](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/event_blog_post_image_4_285b1afa5c.png)
+![Photos and a Slack recap from WAWTECH in Warsaw, where PostHog spoke about Self-driving to a packed room](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/demo_blog_post_image_5_10f428bae5.png)
 
 Some engineers even go on to organize their own events (dinners and meetups mostly) and speak at events without us even being involved. We love that – it's yet another example of our ["you're the driver"](/handbook/values#youre-the-driver) company value.
 
@@ -100,7 +100,7 @@ We also take the geography into consideration with demo opportunities. In places
 
 [Dylan](https://posthog.com/community/profiles/30455) is one of our engineers in Seattle who is often willing to demo and genuinely enjoys it. Here's a recap of his event where he demoed self-driving for his local [AI Tinkerers dev tools edition](https://seattle.aitinkerers.org/talks/rsvp_AOTRq88tjJo) meetup:
 
-![A Slack recap from Dylan after demoing Self-driving at AI Tinkerers, sharing takes on the event and the community](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/event_blog_post_image_5_f01f403da1.png)
+![A Slack recap from Dylan after demoing Self-driving at AI Tinkerers, sharing takes on the event and the community](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/demo_blog_post_image_3_5e7cda8041.png)
 
 ---
 
