@@ -24,16 +24,16 @@ export const umami = {
             features: {
                 advertising_analytics: false,
                 autocapture: 'Pageviews',
-                cohorts: true, // https://docs.umami.is/docs/cohorts
+                cohorts: true,
                 custom_events: true,
-                custom_properties: true, // https://docs.umami.is/docs/track-events
-                monetization_analytics: true, // https://docs.umami.is/docs/revenue
+                custom_properties: true,
+                monetization_analytics: true,
                 predictive_insights: false,
                 real_time_view: true,
                 toolbar: false,
                 user_profiles: 'Distinct IDs only', // sessions are not merged across devices
                 funnels: {
-                    available: true, // https://docs.umami.is/docs/funnel
+                    available: true,
                     features: {
                         conversion_funnels: true,
                         conversion_windows: true,
@@ -43,17 +43,17 @@ export const umami = {
                     },
                 },
                 retention: {
-                    available: true, // https://docs.umami.is/docs/retention
+                    available: true,
                     features: {},
                 },
                 user_paths: {
-                    available: true, // https://docs.umami.is/docs/journey
+                    available: true,
                     features: {},
                 },
             },
         },
         session_replay: {
-            available: true, // https://docs.umami.is/docs/replays
+            available: true,
             features: {
                 canvas_recording: false,
                 conditional_recording: false,
@@ -80,7 +80,7 @@ export const umami = {
             available: false,
         },
         heatmaps: {
-            available: true, // https://docs.umami.is/docs/heatmaps
+            available: true,
             features: {
                 clickmaps: true,
                 heatmaps: true,
@@ -111,7 +111,7 @@ export const umami = {
         integrations: {
             email_reports: true,
             exports: true,
-            imports: 'Cloud Pro only', // https://docs.umami.is/docs/cloud/import-data
+            imports: 'Cloud Pro only',
         },
         security: {
             cookieless_tracking: true,
@@ -119,7 +119,7 @@ export const umami = {
             hipaa_ready: false,
             soc2_certified: false,
             saml_sso: false,
-            two_factor_auth: true, // https://docs.umami.is/docs/two-factor-authentication
+            two_factor_auth: true,
         },
     },
     pricing: {
