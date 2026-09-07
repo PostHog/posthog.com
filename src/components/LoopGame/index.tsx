@@ -333,7 +333,7 @@ export default function LoopGame(): JSX.Element {
     return (
         <div className="not-prose @container my-6 max-w-2xl rounded-md border border-primary bg-accent p-4">
             <div className="mb-3 flex flex-col gap-2 @sm:flex-row @sm:items-baseline @sm:justify-between">
-                <div className="text-lg font-bold text-primary">Ride the loop hype wave! Now in 3D.</div>
+                <div className="text-lg font-bold text-primary">Ride the loop hype wave!</div>
                 <span className="text-xs text-secondary">
                     {loopCount === 1 ? 'One loop' : `${loopCount} loops`}. Trace it. Send Max.
                 </span>

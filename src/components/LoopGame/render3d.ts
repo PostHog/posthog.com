@@ -198,7 +198,7 @@ export function render3d(
     ctx.fillStyle = color
     ctx.font = 'bold 14px sans-serif'
     ctx.textAlign = 'left'
-    ctx.fillText(pov ? 'RIDE POV · REGRET IN FIRST PERSON' : '3D · WE GAVE THE BLOG POST A GAME ENGINE', 18, 28)
+    ctx.fillText(pov ? 'RIDE POV' : '3D FANCY VIEW', 18, 28)
     ctx.font = '12px sans-serif'
     ctx.fillText(
         ride.state === 'flying' || ride.state === 'crashed'
