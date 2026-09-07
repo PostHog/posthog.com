@@ -37,3 +37,9 @@ pnpm exec node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON --test src/compone
 ```
 
 The tests cover 100 generated layouts, successful rides, stalling, derailment, shortcuts, repeated pointer points, empty strokes, and forgiving rides over small tracing wobbles. Browser checks should cover tracing, touch input, cancellation, replay, stop, new tracks, and resizing during a ride. Capture narrow/wide light/dark screenshots and before/after GIFs for visual changes.
+
+## 3D ride
+
+Tracing stays in the original 2D canvas. Launch switches to a perspective 3D miniature with paired rails, sleepers, support towers, ground shadows, and a solid cart. **Ride POV** puts the camera in the front seat and follows the track orientation through inversions; **Overview** restores the miniature view. **Edit track** stops the ride and returns to tracing without removing the rails. Clear and New track also return to drawing mode.
+
+`render3d.ts` projects 3D geometry into the existing canvas and sorts faces by camera depth. It reuses the same physics and Max image without adding a rendering dependency. Faces are clipped against the near camera plane in POV. Depth sorting is an arcade approximation, so intersecting geometry can overlap imperfectly. The mascot remains a sprite. Rendering is demand-driven when stopped and follows the existing animation loop during rides. No camera animation runs separately.

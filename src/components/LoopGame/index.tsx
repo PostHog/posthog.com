@@ -1,3 +1,4 @@
+import { render3d } from './render3d'
 import React, { useEffect, useRef, useState } from 'react'
 import OSButton from 'components/OSButton'
 import { Select } from 'components/RadixUI/Select'
@@ -27,6 +28,8 @@ export default function LoopGame(): JSX.Element {
     const trackRef = useRef<TrackPoint[]>([])
     const rideRef = useRef<Ride | null>(null)
     const frameRef = useRef(0)
+    const viewRef = useRef<'draw' | 'overview' | 'pov'>('draw')
+    const [view, setView] = useState<'draw' | 'overview' | 'pov'>('draw')
     const pointerRef = useRef<number | null>(null)
     const [hasTrack, setHasTrack] = useState(false)
     const [running, setRunning] = useState(false)
@@ -50,6 +53,10 @@ export default function LoopGame(): JSX.Element {
         const color = getComputedStyle(canvas).color
         ctx.setTransform(width / WIDTH, 0, 0, height / HEIGHT, 0, 0)
         ctx.clearRect(0, 0, WIDTH, HEIGHT)
+        if (viewRef.current !== 'draw' && rideRef.current && trackRef.current.length) {
+            render3d(ctx, trackRef.current, rideRef.current, viewRef.current === 'pov', color, mascotRef.current)
+            return
+        }
         ctx.lineCap = 'round'
         ctx.lineJoin = 'round'
         ctx.strokeStyle = color
@@ -166,6 +173,12 @@ export default function LoopGame(): JSX.Element {
         ctx.restore()
     }
 
+    const changeView = (next: 'draw' | 'overview' | 'pov') => {
+        viewRef.current = next
+        setView(next)
+        redraw()
+    }
+
     const stop = () => {
         cancelAnimationFrame(frameRef.current)
         setRunning(false)
@@ -200,6 +213,7 @@ export default function LoopGame(): JSX.Element {
         stop()
         trackRef.current = track
         rideRef.current = launchRide(track, speed)
+        changeView(viewRef.current === 'pov' ? 'pov' : 'overview')
         setHasTrack(true)
         setRunning(true)
         setProgress({ percent: 0, loops: 0 })
@@ -247,6 +261,8 @@ export default function LoopGame(): JSX.Element {
         pointerRef.current = null
         if (pointer !== null && canvasRef.current?.hasPointerCapture(pointer))
             canvasRef.current.releasePointerCapture(pointer)
+        viewRef.current = 'draw'
+        setView('draw')
         pointsRef.current = []
         trackRef.current = []
         rideRef.current = null
@@ -272,7 +288,8 @@ export default function LoopGame(): JSX.Element {
     }
 
     const onPointerDown = (e: React.PointerEvent<HTMLCanvasElement>) => {
-        if (!e.isPrimary || e.button !== 0 || pointerRef.current !== null || running) return
+        if (!e.isPrimary || e.button !== 0 || pointerRef.current !== null || running || viewRef.current !== 'draw')
+            return
         if (distance(toPoint(e), START) > 35) {
             setMessage('Start at the blue circle on the left, then trace the dashed guide to FINISH.')
             return
@@ -316,22 +333,52 @@ export default function LoopGame(): JSX.Element {
     return (
         <div className="not-prose @container my-6 max-w-2xl rounded-md border border-primary bg-accent p-4">
             <div className="mb-3 flex flex-col gap-2 @sm:flex-row @sm:items-baseline @sm:justify-between">
-                <div className="text-lg font-bold text-primary">Ride the loop hype wave!</div>
+                <div className="text-lg font-bold text-primary">Ride the loop hype wave! Now in 3D.</div>
                 <span className="text-xs text-secondary">
                     {loopCount === 1 ? 'One loop' : `${loopCount} loops`}. Trace it. Send Max.
                 </span>
             </div>
             <canvas
                 ref={canvasRef}
-                aria-label="Trace the dashed rollercoaster track from the left start marker through each loop to the right finish marker"
+                aria-label={
+                    view === 'draw'
+                        ? 'Trace the dashed rollercoaster track from the left start marker through each loop to the right finish marker'
+                        : view === 'pov'
+                        ? 'Front-seat view of Max riding your rollercoaster'
+                        : '3D overview of Max riding your rollercoaster'
+                }
                 onPointerDown={onPointerDown}
                 onPointerMove={onPointerMove}
                 onPointerUp={onPointerUp}
                 onPointerCancel={cancel}
                 onLostPointerCapture={cancel}
                 className="block w-full rounded-md border border-primary bg-primary text-primary"
-                style={{ touchAction: 'none', aspectRatio: '4 / 3', cursor: running ? 'default' : 'crosshair' }}
+                style={{
+                    touchAction: view === 'draw' ? 'none' : 'auto',
+                    aspectRatio: '4 / 3',
+                    cursor: running || view !== 'draw' ? 'default' : 'crosshair',
+                }}
             />
+            {view !== 'draw' && (
+                <div className="mt-3 flex flex-wrap gap-2" role="group" aria-label="Ride camera">
+                    <OSButton size="sm" aria-pressed={view === 'overview'} onClick={() => changeView('overview')}>
+                        Overview
+                    </OSButton>
+                    <OSButton size="sm" aria-pressed={view === 'pov'} onClick={() => changeView('pov')}>
+                        Ride POV
+                    </OSButton>
+                    <OSButton
+                        size="sm"
+                        onClick={() => {
+                            stop()
+                            changeView('draw')
+                            setMessage('Trace another track, or launch these rails again.')
+                        }}
+                    >
+                        Edit track
+                    </OSButton>
+                </div>
+            )}
             <div className="mt-3 flex flex-wrap items-center gap-2 text-sm text-primary">
                 <span>Difficulty</span>
                 <Select
@@ -351,6 +398,7 @@ export default function LoopGame(): JSX.Element {
                         const next = value as Difficulty
                         setDifficulty(next)
                         rideRef.current = null
+                        changeView('draw')
                         setProgress({ percent: 0, loops: 0 })
                         setMessage(hasTrack ? "Ready for another ride. Launch Max when you're ready." : INSTRUCTIONS)
                         redraw()
