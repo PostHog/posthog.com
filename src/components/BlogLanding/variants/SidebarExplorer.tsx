@@ -53,7 +53,7 @@ export default function SidebarExplorer({ folder, title, intro }: LandingVariant
                         />
                     }
                 />
-                <NewsletterForm placement="blog-index" />
+                <NewsletterForm placement="blog-sidebar-explorer" variant="blog-index" />
             </div>
         </ReaderView>
     )

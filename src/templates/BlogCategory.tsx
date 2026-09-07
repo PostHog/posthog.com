@@ -42,7 +42,7 @@ const BlogCategory = ({
                     posts={posts.slice(0, 4)}
                     action={<PostToggle checked={allPostsFilter === 'popular'} onChange={handleToggleChange} />}
                 />
-                <NewsletterForm />
+                <NewsletterForm placement="blog-category" />
                 <Posts posts={posts.slice(4, 12)} />
                 {posts.length > 12 && (
                     <>

@@ -34,7 +34,7 @@ const Tutorials = ({
                     }
                     posts={allPostsRecent.slice(0, 4)}
                 />
-                <NewsletterForm />
+                <NewsletterForm placement="tutorials-all" />
                 <Posts posts={allPostsRecent.slice(4)} />
                 <Pagination currentPage={currentPage} numPages={numPages} base={base} />
             </PostLayout>

@@ -44,7 +44,7 @@ const TutorialsCategory = ({
                     posts={posts.slice(0, 4)}
                     action={<PostToggle checked={allPostsFilter === 'popular'} onChange={handleToggleChange} />}
                 />
-                <NewsletterForm />
+                <NewsletterForm placement="tutorials-category" />
                 <Posts posts={posts.slice(4)} />
                 <Pagination currentPage={currentPage} numPages={numPages} base={base} />
             </PostLayout>

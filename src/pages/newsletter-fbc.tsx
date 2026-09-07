@@ -103,7 +103,7 @@ function NewsletterSubscribeForm({
         const fbclid = urlParams.get('fbclid')
         const utmSource = urlParams.get('utm_source')
 
-        posthog?.capture('newsletter_subscribed', { email })
+        posthog?.capture('newsletter_subscribed', { email, placement: 'newsletter-fbc' })
         posthog?.capture('user_signed_up_to_newsletter_from_ad', {
             ad_source: utmSource || 'undefined',
             email: email,

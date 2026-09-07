@@ -331,7 +331,7 @@ const Main = () => {
                         <Posts />
 
                         <div className="@container pt-4 pb-0 @3xl:pt-8 @3xl:pb-4">
-                            <NewsletterForm placement="community" />
+                            <NewsletterForm placement="community" variant="community" />
                         </div>
                         <div className="py-4">
                             <Changelog />
