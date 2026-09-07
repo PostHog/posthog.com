@@ -3253,6 +3253,10 @@ export const docsMenu = {
                             url: '/docs/data',
                         },
                         {
+                            name: 'Events data retention',
+                            url: '/docs/data/events-retention',
+                        },
+                        {
                             name: 'Properties',
                             url: '/docs/data/event-spec/ecommerce-events',
                             children: [

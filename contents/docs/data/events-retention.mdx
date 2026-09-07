@@ -1,0 +1,48 @@
+---
+title: Events data retention
+---
+
+PostHog keeps your events for a period that your plan sets. This page tells you what that period is, where to read it, and what it does not do.
+
+Events data retention is separate from [session recording retention](/docs/session-replay/recording-retention), from the 30-day window on the large properties of [AI events](/docs/ai-observability/data-retention), and from the [data deletion tools](/docs/privacy/data-storage#data-deletion) that answer a deletion request.
+
+## Your retention period
+
+Your retention period comes from your plan:
+
+| Plan | Events data retention |
+|-----------|---------------|
+| Free | 1 year
+| Paid plans | 7 years
+
+Two read-only fields on the [projects API](/docs/api/projects) report it:
+
+- `event_retention_months` – the length of the window in months. A value of `84` is 7 years.
+- `events_retention_enforced` – whether the window applies to your project today.
+
+You cannot change these two fields, and PostHog support cannot change them for you. The window follows your plan.
+
+<CalloutBox type="fyi" title="Enforcement is a gradual rollout">
+
+PostHog applies retention project by project. While `events_retention_enforced` is `false`, retention removes no events from your project, whatever `event_retention_months` shows.
+
+</CalloutBox>
+
+Retention applies on PostHog Cloud only. A self-hosted instance keeps your events until you remove them.
+
+## What retention does to your data
+
+When retention applies to your project:
+
+- A query on the events table reads only the events inside the window. PostHog does not include older events in the result.
+- An insight whose date range goes past the window shows a banner, so that you do not read a smaller number as a drop in your product.
+- Tables in the [data warehouse](/docs/data-warehouse) keep all of their rows, because retention applies to the events table only.
+
+## Retention is not a deletion tool
+
+You cannot make your retention period shorter to remove data, and a shorter period is not available on request. To remove data, use the tools in [controlling data storage](/docs/privacy/data-storage#data-deletion):
+
+- Delete a person, together with their events and recordings, to answer a [right to be forgotten](/docs/privacy/data-storage#right-to-be-forgotten) request.
+- Delete a project or an organization to remove all of the events in it.
+
+To keep events for longer than your retention period, send them to your own storage with a [batch export](/docs/cdp/batch-exports).
