@@ -6,7 +6,9 @@ export const datadog = {
     },
     products: {
         replay_vision: {
-            available: true,
+            // AI summaries, smart chapters, and AI Investigations run over replays, but as
+            // fixed jobs – no scanners you point at a recording set with your own prompt.
+            available: 'Partial',
             features: {
                 point_scanner: false,
                 configurable_types: 'Fixed job',
@@ -66,9 +68,51 @@ export const datadog = {
         },
         product_analytics: {
             available: true,
+            features: {
+                // RUM's trackUserInteractions collects clicks automatically.
+                autocapture: true,
+                // Bits AI + Conversion Analysis surface correlated attributes.
+                ai_analysis: true,
+                user_profiles: true,
+                funnels: {
+                    available: true,
+                },
+                // datadogRum.setAccount() stamps account.id onto RUM events (and propagates it
+                // to backend traces), with an Account Profiles page and aggregation by account.
+                // One account dimension, where PostHog allows up to 5 group types.
+                group_analytics: {
+                    available: true,
+                },
+                insights: {
+                    features: {
+                        sql_editor: true,
+                    },
+                },
+            },
         },
         session_replay: {
             available: true,
+            pricing: {
+                free_tier: 'Trial',
+            },
+            features: {
+                ai_summaries: true,
+            },
+            platform_support: {
+                features: {
+                    mobile_app_recordings: true,
+                },
+            },
+            analysis: {
+                features: {
+                    network_monitor: true,
+                },
+            },
+            export: {
+                features: {
+                    retention_policy: '30 days (15 months add-on)',
+                },
+            },
         },
         logs: {
             available: true,
@@ -79,6 +123,7 @@ export const datadog = {
                     native_open_telemetry_ingest: 'Partial',
                     vendor_agnostic_sdks: true,
                     high_cardinality_indexing: true,
+                    retention: '15 days (Flex to 15 months)',
                 },
             },
             search: {
@@ -98,7 +143,7 @@ export const datadog = {
                 features: {
                     built_in_error_tracking: true,
                     built_in_session_replay: true,
-                    product_analytics_context: false,
+                    product_analytics_context: true,
                 },
             },
             observability: {
@@ -107,17 +152,22 @@ export const datadog = {
                     traces: true,
                     alerting: true,
                     infra_monitoring: true,
+                    synthetic_monitoring: true,
+                    on_call_incident_management: true,
+                    service_map: true,
+                    code_level_profiling: true,
                 },
             },
             security_and_compliance: {
                 features: {
                     siem: 'Add-on',
                     enterprise_scale_compliance: true,
+                    security_monitoring: true,
                 },
             },
             pricing: {
                 features: {
-                    ingest_only_pricing: false,
+                    ingest_only_pricing: "$0.10 per GB",
                     no_query_compute_fees: false,
                     predictable_at_scale: false,
                 },
@@ -129,6 +179,21 @@ export const datadog = {
         ai_observability: {
             available: true,
         },
+        feature_flags: {
+            available: true,
+        },
+        experiments: {
+            available: true,
+        },
+        web_analytics: {
+            available: false,
+        },
+        data_warehouse: {
+            available: false,
+        },
+        cdp: {
+            available: false,
+        },
     },
     platform: {
         deployment: {
@@ -139,13 +204,17 @@ export const datadog = {
             self_host: false,
         },
         pricing: {
-            free_tier: 'Trial',
+            free_tier: 'Limited',
             self_serve: true,
             transparent_pricing: true,
             usage_based_pricing: true,
+            free_team_members: 'Except on-call and incident seats',
+            billing_units: 'Hosts, GB, events, sessions, seats',
         },
         developer: {
             api: true,
+            mcp_scope: 'Most products, read and write',
+            agent_surfaces: 'App, Slack, CLI, editors, mobile',
             collaboration: false,
             mobile_sdks: true,
             native_data_sources: false,
@@ -203,7 +272,7 @@ export const datadog = {
             role_based_access_control: true,
             saml_sso: true,
             siem: true,
-            soc2_certified: false,
+            soc2_certified: true,
             two_factor_auth: true,
             user_privacy_options: true,
         },
