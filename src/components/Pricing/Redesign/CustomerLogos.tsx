@@ -1,5 +1,5 @@
 import React from 'react'
-import { useCustomers } from 'hooks/useCustomers'
+import { Customer, useCustomers } from 'hooks/useCustomers'
 import Link from 'components/Link'
 
 /**
@@ -46,8 +46,8 @@ const LOGO_HEIGHT_CLASSES: Record<number, string> = {
     14: 'h-8',
 }
 
-const Logo = ({ customer }: { customer: any }) => {
-    const heightClass = LOGO_HEIGHT_CLASSES[customer.height as number] ?? 'h-6'
+const Logo = ({ customer, marquee = false }: { customer: Customer; marquee?: boolean }) => {
+    const heightClass = marquee ? 'h-9' : LOGO_HEIGHT_CLASSES[customer.height as number] ?? 'h-6'
 
     if (!customer.logo) {
         return <span className="text-sm font-semibold opacity-60">{customer.name}</span>
@@ -78,9 +78,11 @@ const Logo = ({ customer }: { customer: any }) => {
 export default function CustomerLogos({
     title = '600k+ companies',
     subtitle = 'from side projects to public companies',
+    scrolling = false,
 }: {
     title?: string
     subtitle?: string
+    scrolling?: boolean
 }): JSX.Element {
     const { getCustomers } = useCustomers()
     const customers = getCustomers(TRUST_LOGOS)
@@ -88,8 +90,10 @@ export default function CustomerLogos({
     return (
         <div className="@container not-prose">
             <div
-                data-scheme="secondary"
-                className="bg-primary border border-primary rounded-md px-5 py-4 flex flex-col @2xl:flex-row @2xl:items-center gap-4 @2xl:gap-6"
+                data-scheme={scrolling ? undefined : 'secondary'}
+                className={`border border-primary rounded-md px-5 py-4 flex flex-col @2xl:flex-row @2xl:items-center gap-4 @2xl:gap-6 ${
+                    scrolling ? 'bg-accent' : 'bg-primary'
+                }`}
             >
                 <div className="shrink-0 @2xl:max-w-[13rem]">
                     <p className="text-[15px] font-bold leading-tight mb-0.5">{title}</p>
@@ -100,11 +104,43 @@ export default function CustomerLogos({
                     </Link>
                 </div>
 
-                <div className="flex flex-wrap items-center gap-x-6 gap-y-3 @2xl:border-l @2xl:border-primary @2xl:pl-6 opacity-90">
-                    {customers.map((customer) => (
-                        <Logo key={customer.slug} customer={customer} />
-                    ))}
-                </div>
+                {scrolling ? (
+                    <div className="group min-w-0 flex-1 @2xl:border-l @2xl:border-primary @2xl:pl-6">
+                        <div
+                            tabIndex={0}
+                            role="region"
+                            aria-label="Customer logos"
+                            className="overflow-hidden rounded-sm outline-none focus-visible:ring-2 focus-visible:ring-red motion-reduce:overflow-x-auto [mask-image:linear-gradient(to_right,transparent,#000_2rem,#000_calc(100%-2rem),transparent)] [-webkit-mask-image:linear-gradient(to_right,transparent,#000_2rem,#000_calc(100%-2rem),transparent)]"
+                        >
+                            <div
+                                className="flex w-max motion-reduce:!animate-none group-hover:[animation-play-state:paused!important] group-focus-within:[animation-play-state:paused!important]"
+                                style={{
+                                    animation: 'tools-ticker-marquee 45s linear infinite',
+                                }}
+                            >
+                                {[false, true].map((duplicate) => (
+                                    <div
+                                        key={String(duplicate)}
+                                        aria-hidden={duplicate || undefined}
+                                        className={`flex shrink-0 items-center gap-8 pr-8 [&>*]:shrink-0 ${
+                                            duplicate ? 'motion-reduce:hidden' : ''
+                                        }`}
+                                    >
+                                        {customers.map((customer) => (
+                                            <Logo key={customer.slug} customer={customer} marquee />
+                                        ))}
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+                    </div>
+                ) : (
+                    <div className="flex flex-wrap items-center gap-x-6 gap-y-3 @2xl:border-l @2xl:border-primary @2xl:pl-6 opacity-90">
+                        {customers.map((customer) => (
+                            <Logo key={customer.slug} customer={customer} />
+                        ))}
+                    </div>
+                )}
             </div>
         </div>
     )

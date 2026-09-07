@@ -1,22 +1,8 @@
 import React, { useState } from 'react'
 import { Tabs } from 'radix-ui'
 import Link from 'components/Link'
-import { HedgehogStampApproved } from '@posthog/brand/hoggies'
-import { Logo } from '@posthog/brand/logo'
-import towerTile from '../../images/enterprise/skyscraper-tile.png'
 
-/**
- * The five things an enterprise buyer needs to hear before they will take PostHog seriously,
- * under the title "5 reasons enterprises love PostHog": an oversized editorial index (01 Compliance …
- * 05 Support) with a detail pane beside it. The pane holds the active pillar's proof – a lead, a rule,
- * and a two-column list of points – and changes as you click (or arrow and press Enter) through the
- * index. The pane sits on top of a run of skyscraper floors, so the tower from the hero appears to
- * pass behind it on its way to the platform.
- *
- * Every point here traces to a public PostHog source (the handbook, the docs, the platform
- * package data, or a customer story). Keep it that way: no certifications we do not hold, no
- * throughput or uptime numbers we do not publish, no promises about the future. See README.md.
- */
+/** Source-backed enterprise proof. Keep the claims and links intact; see README.md. */
 
 type Point = {
     title: string
@@ -36,7 +22,7 @@ const PILLARS: Pillar[] = [
     {
         key: 'compliance',
         title: 'Compliance',
-        lead: 'You decide where data lives, what gets captured, and how long it stays. The paperwork is self-service.',
+        lead: 'Keeping regulators happy since 2020. PostHog is GDPR, HIPAA, and CCPA compliant.',
         points: [
             {
                 title: 'US or EU Cloud',
@@ -73,12 +59,12 @@ const PILLARS: Pillar[] = [
     {
         key: 'security',
         title: 'Security',
-        lead: 'Audited, tested, and written down. The report and the policies are public, and the controls your security team will ask about are built in.',
+        lead: "We try to break our product so you don't have to. We publicly publish our findings and security advisories and give you fine-grained controls to protect your data.",
         points: [
             {
                 title: 'SOC 2 Type 2',
-                detail: 'Audited every year by an external firm. The latest report is public, not behind a form.',
-                href: '/handbook/company/security',
+                detail: 'Audited every year by an external firm. The latest report is public and available via the link above.',
+                href: '/handbook/company/security#soc-2',
             },
             {
                 title: 'Annual third-party penetration testing',
@@ -110,7 +96,7 @@ const PILLARS: Pillar[] = [
     {
         key: 'scalability',
         title: 'Scalability',
-        lead: 'PostHog fits into the data platform you already have, and it keeps up when your traffic does.',
+        lead: "Love vendor lock-in? Yeah, we don't either. We're building a platform that scales with your business, not the other way around.",
         points: [
             {
                 title: 'Sync from your warehouse',
@@ -138,7 +124,7 @@ const PILLARS: Pillar[] = [
                 href: '/platform-packages',
             },
             {
-                title: 'Proof: AssemblyAI',
+                title: 'Case study: AssemblyAI',
                 detail: 'Moved millions of events a day to PostHog and stopped throttling ingestion.',
                 href: '/customers/assemblyai',
             },
@@ -151,30 +137,40 @@ const PILLARS: Pillar[] = [
         points: [
             {
                 title: 'Open source',
-                detail: 'The core is MIT-licensed and on GitHub. Read the code your data runs through.',
+                detail: 'The core is MIT-licensed and on GitHub. Read the code your data runs through, or have an agent do it for you.',
                 href: 'https://github.com/posthog/posthog',
             },
             {
                 title: 'Transparent by default',
-                detail: 'Our handbook, roadmap, pricing, and how we pay people are all public. It is one of our values.',
-                href: '/handbook/values',
-            },
-            {
-                title: 'Default alive',
-                detail: 'We have been cashflow positive since December 2024 and plan the company around staying that way.',
-                href: '/handbook/story',
+                detail: "Our handbook, roadmap, pricing, and how we pay people are all public. We're proud of what we do and we want you to be too.",
+                href: '/handbook/values#make-it-public',
             },
             {
                 title: 'Pricing you can compute',
-                detail: 'Every product is priced on the website by usage. Enterprise adds controls and support, not a seat meter.',
+                detail: 'Every product is priced on the website by usage with publicly available rates. Enterprise adds controls and support without changes to usage-based pricing.',
                 href: '/pricing',
+            },
+            {
+                title: 'Your data stays yours',
+                detail: 'You own the data you send to PostHog. We process it on your behalf and never sell it to third parties.',
+                href: '/handbook/company/security#overview',
+            },
+            {
+                title: 'Public incident reviews',
+                detail: 'We publish detailed reviews of significant incidents, including root causes, customer impact, and concrete fixes.',
+                href: '/handbook/company/post-mortems',
+            },
+            {
+                title: 'Proven in production',
+                detail: "ResearchGate replaced its in-house experimentation tools with PostHog after evaluating multiple providers. Read the engineering team's experience.",
+                href: '/customers/researchgate',
             },
         ],
     },
     {
         key: 'support',
         title: 'Support',
-        lead: 'People, not a queue. Enterprise puts a named human on your account and engineers within reach when you need them.',
+        lead: 'You can listen to hold music on your own time. Enterprise gives you a named human and engineers within reach when you need them.',
         points: [
             {
                 title: 'Dedicated account manager',
@@ -242,168 +238,137 @@ function PointItem({ point }: { point: Point }): JSX.Element {
     )
 }
 
-/** The proof for one pillar: its lead, a rule, then the points as a two-column list. */
-function ProofPane({ pillar }: { pillar: Pillar }): JSX.Element {
-    return (
-        <div className="rounded-md border-2 border-primary bg-primary p-4 shadow-xl @2xl:p-6">
-            <p className="m-0 max-w-xl text-pretty text-lg font-semibold leading-snug text-primary @2xl:text-xl">
-                {pillar.lead}
-            </p>
-            <ul className="m-0 mt-4 grid list-none gap-x-8 gap-y-3 border-t border-primary p-0 pt-4 @xl:grid-cols-2">
-                {pillar.points.map((point) => (
-                    <PointItem key={point.title} point={point} />
-                ))}
-            </ul>
-        </div>
-    )
-}
-
-// Tower behind the pane. It fades in above the title, runs past the bottom of this block into
-// the hand-off section's top padding, and fades out just above its resources column.
-const TOWER_RUN_MASK = 'linear-gradient(to bottom, transparent, #000 8rem, #000 calc(100% - 8rem), transparent)'
-
+/** All panels share a grid cell, so changing tabs never moves the building or content below. */
 export function BusinessProof(): JSX.Element {
     const [active, setActive] = useState(PILLARS[0].key)
 
     return (
-        <div className="mx-auto w-full max-w-6xl px-4 pt-5 @xl:px-8 @2xl:pt-8">
-            {/* Positioned on the content box (inside the gutters), so the run's x matches the tower in the hero
-                and on the platform, which are laid out on the same box. */}
-            <div className="relative">
-                <div
-                    aria-hidden="true"
-                    className="absolute -bottom-40 -top-10 left-[calc(75%+0.75rem)] hidden w-44 -translate-x-1/2 bg-[length:100%_auto] bg-repeat-y @2xl:-top-16 @2xl:block"
-                    style={{
-                        backgroundImage: `url(${towerTile})`,
-                        maskImage: TOWER_RUN_MASK,
-                        WebkitMaskImage: TOWER_RUN_MASK,
-                    }}
-                />
-
-                <h2 className="relative m-0 mb-4 flex flex-wrap items-center gap-x-3 text-2xl font-bold tracking-tight @2xl:mb-5 @2xl:text-4xl">
-                    <span>5 reasons enterprises love</span>
-                    <span className="sr-only">PostHog</span>
-                    <Logo layout="logomark" aria-hidden="true" className="h-7 w-auto @2xl:h-9 dark:hidden" />
-                    <Logo
-                        layout="logomark"
-                        variant="mono"
-                        color="white"
-                        aria-hidden="true"
-                        className="hidden h-7 w-auto @2xl:h-9 dark:block"
-                    />
-                </h2>
-
-                <Tabs.Root
-                    value={active}
-                    onValueChange={setActive}
-                    orientation="vertical"
-                    activationMode="manual"
-                    className="relative grid gap-8 @2xl:grid-cols-[minmax(0,2fr)_minmax(0,3fr)] @2xl:gap-12"
-                >
-                    {/* The index, top-aligned beside the pane. Click (or arrow + Enter) switches the pane. */}
-                    <Tabs.List
-                        aria-label="Why enterprises choose PostHog"
-                        className="flex flex-wrap gap-x-6 gap-y-1 self-start @2xl:flex-col @2xl:gap-1"
-                    >
-                        {PILLARS.map((p, i) => {
-                            const isActive = p.key === active
-                            return (
-                                <Tabs.Trigger
-                                    key={p.key}
-                                    value={p.key}
-                                    className="group flex items-baseline gap-3 rounded-sm py-1 text-left outline-none focus-visible:ring-2 focus-visible:ring-red @2xl:gap-4 dark:focus-visible:ring-yellow"
-                                >
-                                    <span
-                                        className={`font-code text-sm tabular-nums transition-colors @2xl:text-base ${
-                                            isActive ? 'text-red dark:text-yellow' : 'text-muted'
-                                        }`}
-                                    >
-                                        {String(i + 1).padStart(2, '0')}
+        <section className="relative flex flex-1 flex-col pb-10 pt-10">
+            <h2 className="relative z-30 m-0 mb-6 flex flex-wrap items-center gap-x-3 text-2xl font-bold tracking-tight @3xl:pr-[28%]">
+                Not convinced? Check out these five corporate buzzwords.
+            </h2>
+            <Tabs.Root
+                value={active}
+                onValueChange={setActive}
+                orientation="vertical"
+                activationMode="manual"
+                className="relative grid flex-1 grid-cols-[2.75rem_minmax(0,1fr)] @xl:grid-cols-[3.5rem_minmax(0,1fr)]"
+            >
+                <Tabs.List aria-label="Why enterprises choose PostHog" className="flex flex-col self-stretch py-3">
+                    {PILLARS.map((pillar, i) => (
+                        <Tabs.Trigger
+                            key={pillar.key}
+                            value={pillar.key}
+                            aria-label={`${i + 1}. ${pillar.title}`}
+                            className={`relative min-h-16 flex-1 rounded-l-xl text-lg font-semibold outline-none focus-visible:z-30 focus-visible:ring-2 focus-visible:ring-red dark:focus-visible:ring-yellow ${
+                                active === pillar.key
+                                    ? 'z-10 bg-primary text-primary'
+                                    : 'bg-accent text-secondary shadow-inner hover:text-primary'
+                            }`}
+                        >
+                            {i + 1}.
+                        </Tabs.Trigger>
+                    ))}
+                </Tabs.List>
+                <div className="grid min-w-0 rounded-xl bg-primary shadow-xl @3xl:pr-[30%]">
+                    {PILLARS.map((pillar) => (
+                        <Tabs.Content
+                            key={pillar.key}
+                            value={pillar.key}
+                            forceMount
+                            className={`col-start-1 row-start-1 min-w-0 p-5 outline-none focus-visible:ring-2 focus-visible:ring-red @xl:p-7 ${
+                                pillar.key === active ? 'visible' : 'invisible'
+                            }`}
+                        >
+                            <div className="grid items-start gap-3 border-b border-primary pb-5 @4xl:grid-cols-[auto_minmax(0,1fr)] @4xl:gap-6">
+                                <h3 className="m-0 text-2xl font-bold tracking-tight @4xl:text-3xl">
+                                    <span className="rounded bg-blue/10 px-1 text-blue dark:text-yellow dark:bg-yellow/10">
+                                        {pillar.title}
                                     </span>
-                                    <span
-                                        className={`text-2xl font-bold tracking-tight transition-colors @2xl:text-4xl ${
-                                            isActive ? 'text-primary' : 'text-muted group-hover:text-secondary'
-                                        }`}
-                                    >
-                                        {p.title}
-                                    </span>
-                                </Tabs.Trigger>
-                            )
-                        })}
-                    </Tabs.List>
-
-                    {/* Every pane is mounted and stacked in the same grid cell, so the area is always as tall as the
-                        tallest pane and nothing below shifts when you switch. Only the active one is visible; the
-                        others fade out and go invisible (so their links leave the tab order). */}
-                    <div className="grid">
-                        {PILLARS.map((p) => (
-                            <Tabs.Content
-                                key={p.key}
-                                value={p.key}
-                                forceMount
-                                className={`col-start-1 row-start-1 transition-[opacity,visibility] duration-300 motion-reduce:transition-none ${
-                                    p.key === active ? 'opacity-100' : 'invisible opacity-0'
-                                }`}
-                            >
-                                <ProofPane pillar={p} />
-                            </Tabs.Content>
-                        ))}
-                    </div>
-                </Tabs.Root>
-            </div>
-        </div>
+                                </h3>
+                                <p className="m-0 text-base leading-snug text-secondary">{pillar.lead}</p>
+                            </div>
+                            <ul className="m-0 grid list-none gap-x-7 gap-y-6 p-0 pt-6 @2xl:grid-cols-2">
+                                {pillar.points.map((point) => (
+                                    <PointItem key={point.title} point={point} />
+                                ))}
+                            </ul>
+                        </Tabs.Content>
+                    ))}
+                </div>
+            </Tabs.Root>
+        </section>
     )
 }
 
-/** The hand-off: a meeting with sales, and the reading a buyer can do before it. */
+/** An unboxed sales introduction sits beside the end of the middle stack. */
 export function WorkWithUs(): JSX.Element {
     return (
-        <section className="mx-auto w-full max-w-6xl px-4 @xl:px-8">
-            <div className="grid items-start gap-8 pb-12 pt-8 @2xl:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] @2xl:items-end @2xl:gap-14 @2xl:pb-28 @2xl:pt-10">
-                <div>
-                    <div aria-hidden="true" className="mx-auto mb-6 w-48 [&>svg]:h-auto [&>svg]:w-full @2xl:w-56">
-                        <HedgehogStampApproved />
-                    </div>
-                    <h2 className="m-0 text-balance text-2xl font-bold tracking-tight @2xl:text-3xl">
-                        Want your business to use PostHog?
-                    </h2>
-                    <p className="m-0 mt-3 max-w-xl text-pretty text-base text-secondary @2xl:text-lg">
-                        Believe it or not, so do we!{' '}
-                        <Link
-                            to="/talk-to-a-human"
-                            state={{ newWindow: true }}
-                            className="font-semibold text-red underline dark:text-yellow"
-                        >
-                            Set up a meeting
-                        </Link>{' '}
-                        with our sales team and we will work out how to make it happen: a focused trial with your real
-                        data, and pricing, procurement, security, and legal running in parallel.
+        <section className="relative z-10 pb-8 pt-4 @3xl:pr-[36%]">
+            <h2 className="m-0 text-balance text-2xl font-bold tracking-tight @2xl:text-3xl">
+                Want your business to use PostHog?
+            </h2>
+            <p className="mb-0 mt-4 max-w-3xl text-pretty text-base text-secondary @2xl:text-lg">
+                <em>Believe it or not, so do we!</em>{' '}
+                <Link
+                    to="/talk-to-a-human"
+                    state={{ newWindow: true }}
+                    className="font-semibold text-red underline dark:text-yellow"
+                >
+                    Set up a meeting
+                </Link>{' '}
+                with our sales team and we'll work out how to make it happen.
+            </p>
+        </section>
+    )
+}
+
+/** Public resources presented as an email, with ordinary website links. */
+export function BuyerResources(): JSX.Element {
+    return (
+        <section>
+            <article aria-label="Email to your CTO" className="rounded-md border border-primary bg-primary shadow-xl">
+                <header className="rounded-t-md border-b border-primary bg-accent px-5 py-5 @xl:px-8">
+                    <dl className="m-0 grid grid-cols-[auto_minmax(0,1fr)] gap-x-4 gap-y-2 text-sm">
+                        <dt className="text-secondary">To:</dt>
+                        <dd className="m-0">CTO</dd>
+                        <dt className="text-secondary">Subject:</dt>
+                        <dd className="m-0 font-semibold">Urgent strategic alignment on PostHog</dd>
+                    </dl>
+                </header>
+                <div className="px-5 py-6 text-sm leading-relaxed @xl:px-8">
+                    <p className="m-0">Good morning CTO,</p>
+                    <p className="mb-0 mt-4">
+                        I hope your morning is off to an exceptionally productive start. I am writing to bring a matter
+                        of urgent strategic importance to your attention: the potential adoption of PostHog. To
+                        facilitate a comprehensive, cross-functional assessment of this opportunity, I have proactively
+                        consolidated the following documentation into a single, conveniently actionable correspondence.
                     </p>
-                </div>
-                <div>
-                    <h3 className="m-0 text-base font-semibold">In the meantime, the reading is public</h3>
-                    <p className="m-0 mt-1 text-sm text-secondary">
-                        Most of what a security or procurement review needs is already online.
-                    </p>
-                    <ul className="m-0 mt-4 grid list-none gap-3 p-0 @xl:grid-cols-2">
+                    <ul className="m-0 my-6 grid list-none gap-x-6 gap-y-5 border-y border-primary py-6 pl-0 @xl:grid-cols-2 @3xl:grid-cols-3 @5xl:grid-cols-4">
                         {RESOURCES.map((r) => (
                             <li key={r.href}>
                                 <Link
                                     to={r.href}
                                     state={isExternal(r.href) ? undefined : { newWindow: true }}
                                     externalNoIcon={isExternal(r.href)}
-                                    className="group block !no-underline"
+                                    className="block rounded-sm !no-underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-red"
                                 >
-                                    <span className="block text-sm font-semibold text-red group-hover:underline dark:text-yellow">
+                                    <span className="block font-semibold text-red underline underline-offset-2 dark:text-yellow">
                                         {r.label}
                                     </span>
-                                    <span className="block text-sm text-secondary">{r.note}</span>
+                                    <span className="block text-secondary">{r.note}</span>
                                 </Link>
                             </li>
                         ))}
                     </ul>
+                    <p className="m-0">
+                        Kind regards,
+                        <br />
+                        Your proactively aligned colleague
+                    </p>
+                    <p className="mb-0 mt-3 text-xs text-secondary">(Sent using Microsoft Outlook 2007)</p>
                 </div>
-            </div>
+            </article>
         </section>
     )
 }

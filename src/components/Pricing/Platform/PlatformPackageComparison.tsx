@@ -254,18 +254,24 @@ const featureDetail = (f: any): string | null =>
 export function PlatformPackageCards(): JSX.Element {
     const packages = usePlatformPackages()
     const getCTA = usePackageCTA()
+    // Keep the upgrade hierarchy intact before reversing the display order.
+    const cards = packages.map((addon: any, i: number) => ({ addon, previous: packages[i - 1] })).reverse()
 
     return (
         <div className="@container">
             <div className="grid gap-4 @2xl:grid-cols-3 @2xl:gap-6">
-                {packages.map((addon: any, i: number) => {
+                {cards.map(({ addon, previous }) => {
                     const plan = addon.plans[addon.plans.length - 1]
-                    const previous = packages[i - 1]
                     const ranked = incrementalFeatures(addon, previous).sort((a: any, b: any) => rank(a) - rank(b))
                     const features = ranked.slice(0, MAX_HIGHLIGHTS)
                     const more = ranked.length - features.length
                     return (
-                        <div key={addon.name} className="flex flex-col rounded-md border border-primary bg-primary p-5">
+                        <div
+                            key={addon.name}
+                            className={`flex flex-col rounded-md border border-primary p-5 ${
+                                addon.type === 'enterprise' ? 'bg-primary shadow-lg' : 'border-dotted bg-accent'
+                            }`}
+                        >
                             <div className="flex items-baseline justify-between gap-3">
                                 <h3 className="m-0 text-xl font-semibold">{addon.name}</h3>
                                 {addon.type === 'enterprise' ? (
