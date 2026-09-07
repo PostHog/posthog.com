@@ -4,16 +4,14 @@ sidebar: Docs
 showTitle: true
 ---
 
-At PostHog we aim to recognize all contributions made to our open source codebases. We do this largely via automated processes that ensure our contributors are recognized. 
+At PostHog we aim to recognize all contributions made to our open source codebases. If you get a pull request merged into a repository under the `PostHog` organization, we'd like to send you a code for [our merch store](https://merch.posthog.com) as a thank you.
 
-# Pull requests
+## How to get your merch code
 
-If you submit a Pull Request to a repository under the `PostHog` organization, a bot will automatically send you an email to get in touch with us for a merch code. 
+Once your pull request is merged, email us at [hey@posthog.com](mailto:hey@posthog.com) with a link to the PR and your GitHub handle. Someone on the PostHog team will send you a code. You can also ask the person who reviewed your PR in a comment.
 
-We usually give out up to $100 for a product or app-related PR at our discretion, and $25 for something on posthog.com (but we have gone over and above this for particularly large community PRs before!)
+We usually give $50 for a code contribution, and more for larger or multiple contributions. Amounts are at our discretion. Codes are single use and don't expire.
 
-If, after a few days of having had your PR merged, you still didn't get a merch code, you can email us at _[hey@posthog.com](mailto:hey@posthog.com)_ and we'll sort it out! Someone on the PostHog team will send you a code [manually](/handbook/company/merch-store#individuals). 
+## For the PostHog team
 
-
-### Sending out merch
-Follow instructions on [giving away merch for free](/handbook/company/merch-store)
+To send a code, follow the instructions for [merch giveaways](/handbook/company/merch-store#merch-giveaways) in the handbook.
