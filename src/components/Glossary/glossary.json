@@ -1,0 +1,921 @@
+{
+    "letterNotes": {
+        "J": "We couldn't think of anything that begins with a J. If you can, let us know by [opening a GitHub issue](https://github.com/PostHog) or joining [our community](/questions).",
+        "X": "We couldn't think of anything that begins with an X. If you can, let us know by [opening a GitHub issue](https://github.com/PostHog) or joining [our community](/questions).",
+        "Z": "We couldn't think of anything that begins with a Z. If you can, let us know by [opening a GitHub issue](https://github.com/PostHog) or joining [our community](/questions)."
+    },
+    "terms": [
+        {
+            "term": "Action",
+            "slug": "action",
+            "posthog": true,
+            "definition": "Actions are a way to organize [events](#event) into a more useful format. In their simplest form, an action is one or more events grouped under a new, descriptive name – such as \"Viewed glossary page\". [Learn more about actions](/docs/data/actions)."
+        },
+        {
+            "term": "Active user",
+            "slug": "active-user",
+            "posthog": false,
+            "definition": "A person who currently uses your product. A user who stops being active may have [churned](#churn)."
+        },
+        {
+            "term": "Agent",
+            "slug": "agent",
+            "posthog": false,
+            "definition": "An AI agent that works inside PostHog to diagnose problems, uncover opportunities, and ship fixes on your behalf. Agents are the engine of [self-driving](#self-driving): they read the full [context](#context) of your product and act on it, either reactively (when you prompt one, for example via [Max](#max-ai) or [Slack](#product)) or proactively (via [scouts](#scout) and the [inbox](#inbox)). [Learn more about self-driving](/docs/self-driving)."
+        },
+        {
+            "term": "Alert",
+            "slug": "alert",
+            "posthog": true,
+            "definition": "A rule that watches an [insight](#insights) and notifies you when a metric crosses a threshold you set or when anomaly detection spots something unusual. Alerts work on [trends](#trend), [funnels](#funnel), and [SQL](#sql) insights, and you can also alert on [error tracking](#error-tracking) issues and [logs](#logs). [Learn more about alerts](/docs/alerts)."
+        },
+        {
+            "term": "Alias",
+            "slug": "alias",
+            "posthog": true,
+            "definition": "A related user account. In PostHog, an alias connects two identities – and their data – together. For example, merging an anonymous user with the account they create when they sign up. See [identifying users](/docs/getting-started/identify-users)."
+        },
+        {
+            "term": "Annotation",
+            "slug": "annotation",
+            "posthog": true,
+            "definition": "A short text note you can attach to a point in time on your data, to record context for later or signal it to others. A common use is marking feature releases or marketing pushes on a shared chart. [Learn more about annotations](/docs/data/annotations)."
+        },
+        {
+            "term": "APM",
+            "slug": "apm",
+            "posthog": false,
+            "definition": "Application performance monitoring. Observing the health, latency, and errors of your running application in production. In PostHog this is covered by [traces](#traces) (distributed tracing), alongside [error tracking](#error-tracking) and [logs](#logs)."
+        },
+        {
+            "term": "App",
+            "slug": "app",
+            "posthog": true,
+            "definition": "Historically, apps (originally called plugins) were add-ons that extended PostHog – transforming events, or sending data to other systems. That functionality now lives in [data pipelines](#data-pipeline) as [transformations](/docs/cdp/transformations) and [destinations](/docs/cdp/destinations), and PostHog's own capabilities are now called [tools](#tool). See also [Hog](#hog)."
+        },
+        {
+            "term": "ARR",
+            "slug": "arr",
+            "posthog": false,
+            "definition": "Annual recurring revenue – roughly, how much recurring revenue you expect to make each year."
+        },
+        {
+            "term": "Autocapture",
+            "slug": "autocapture",
+            "posthog": false,
+            "definition": "The ability to capture user behavior – events, pageviews, and more – automatically, without writing dedicated instrumentation for each interaction. [Learn more about autocapture](/docs/product-analytics/autocapture)."
+        },
+        {
+            "term": "A/B test",
+            "slug": "ab-test",
+            "posthog": false,
+            "definition": "A test where you serve two versions of something to different portions of your users to see which performs better. With more than two versions, it's a [multivariate test](#multivariate-test). PostHog runs both as [experiments](#experiment)."
+        },
+        {
+            "term": "B2B",
+            "slug": "b2b",
+            "posthog": false,
+            "definition": "Business to business. Making money by selling to other businesses rather than to individual people. Tools such as [group analytics](#group-analytics) are especially useful for B2B companies."
+        },
+        {
+            "term": "B2C",
+            "slug": "b2c",
+            "posthog": false,
+            "definition": "Business to consumer. Making money by selling to individual people rather than to other businesses. Tools such as [experiments](#experiment) are especially useful for B2C companies."
+        },
+        {
+            "term": "BAA",
+            "slug": "baa",
+            "posthog": false,
+            "definition": "Business Associate Agreement (or Business Associate Contract). A legal document signed by contractors who may handle [personal health information](#phi), so they agree to satisfy the requirements of [HIPAA](#hipaa). [Learn about PostHog and HIPAA](/docs/privacy/hipaa-compliance)."
+        },
+        {
+            "term": "Batch export",
+            "slug": "batch-export",
+            "posthog": true,
+            "definition": "A scheduled export of your PostHog data, in bulk, to an external data store such as S3, BigQuery, Snowflake, Postgres, or Redshift. Batch exports are part of [data pipelines](#data-pipeline) and are typically used to feed a [data warehouse](#data-warehouse). [Learn more about batch exports](/docs/cdp/batch-exports)."
+        },
+        {
+            "term": "Bounce rate",
+            "slug": "bounce-rate",
+            "posthog": false,
+            "definition": "A bounce is a [session](#session) with a single pageview, no autocaptured interactions, and less than 10 seconds spent on the page. Your bounce rate is the percentage of sessions that bounce. Used in the [web analytics dashboard](/docs/web-analytics/dashboard)."
+        },
+        {
+            "term": "CAC",
+            "slug": "cac",
+            "posthog": false,
+            "definition": "Cost of acquisition – the amount spent on marketing, promotion, or advertising to acquire a customer. Calculated as `money spent on acquisition / number of customers acquired`."
+        },
+        {
+            "term": "CDP",
+            "slug": "cdp",
+            "posthog": false,
+            "definition": "Customer data platform. A CDP collects, unifies, and routes customer data between sources and destinations. PostHog has a built-in CDP for [importing data from sources](/docs/cdp/sources) and [sending it to destinations](/docs/cdp/destinations). See [data pipelines](#data-pipeline)."
+        },
+        {
+            "term": "Chart",
+            "slug": "chart",
+            "posthog": false,
+            "definition": "A visual representation of data, such as a line, bar, or pie chart. In PostHog, charts appear in [insights](#insights); [trend](#trend) insights support several [chart types](/docs/product-analytics/trends)."
+        },
+        {
+            "term": "Churn",
+            "slug": "churn",
+            "posthog": false,
+            "definition": "When a user stops using your product and is no longer an [active user](#active-user). The rate at which users churn is your _churn rate_; if it's higher than the rate you acquire new users, your product is shrinking."
+        },
+        {
+            "term": "ClickHouse",
+            "slug": "clickhouse",
+            "posthog": false,
+            "definition": "An [open source](#open-source), column-oriented database. [We like it a lot, and use it to power PostHog](/docs/how-posthog-works/clickhouse)."
+        },
+        {
+            "term": "Cloud",
+            "slug": "cloud",
+            "posthog": false,
+            "definition": "Computing infrastructure, services, or storage hosted for on-demand use, with less setup and maintenance for you. You can run PostHog on PostHog Cloud instead of [self-hosting](#self-host)."
+        },
+        {
+            "term": "Cluster",
+            "slug": "cluster",
+            "posthog": true,
+            "definition": "In [LLM observability](#llm-observability), an automatic grouping of similar [traces](/docs/ai-observability/traces) or [generations](#generation), so you can discover patterns in how people use your AI features – and spot outliers – without reading every conversation. [Learn more about clusters](/docs/ai-observability/clusters)."
+        },
+        {
+            "term": "Cohort",
+            "slug": "cohort",
+            "posthog": true,
+            "definition": "A group of users defined by shared properties or behavior. Cohorts can be static (a fixed list) or dynamic (continually updated as people match or stop matching). Cohorts and [groups](#groups) are similar, but [not the same](/docs/product-analytics/group-analytics). [Learn more about cohorts](/docs/data/cohorts)."
+        },
+        {
+            "term": "Command palette",
+            "slug": "command-palette",
+            "posthog": true,
+            "definition": "A keyboard-driven way to search PostHog, jump between pages, and trigger actions without reaching for the mouse. Open it with `Cmd+K` (or `Ctrl+K`). [Learn more about the command palette](/docs/cmd-k)."
+        },
+        {
+            "term": "Compliance",
+            "slug": "compliance",
+            "posthog": false,
+            "definition": "The act of complying with laws or regulations such as [HIPAA](#hipaa) or [GDPR](#gdpr). [Learn how to use PostHog in compliance with common regulations](/docs/privacy)."
+        },
+        {
+            "term": "Context",
+            "slug": "context",
+            "posthog": true,
+            "definition": "Everything an [agent](#agent) needs to know about your product, tied together in one place: events, recordings, errors, and logs from PostHog, plus other business data like Slack, code, Notion, and support tickets. Context is the fuel that powers [self-driving](#self-driving). [Learn more about context](/docs/self-driving/context)."
+        },
+        {
+            "term": "Context warehouse",
+            "slug": "context-warehouse",
+            "posthog": true,
+            "definition": "The platform self-driving is built on: your [data warehouse](#data-warehouse) plus the full context-ingestion pipeline ([data pipelines](#data-pipeline), [batch exports](#batch-export), and so on) that brings all of your [context](#context) together in one place."
+        },
+        {
+            "term": "Contributor",
+            "slug": "contributor",
+            "posthog": true,
+            "definition": "As an [open source](#open-source) company, PostHog lets anyone add to our codebase or submit ideas as [issues](#issue) or [pull requests](#pull-request). When someone does, they become a contributor and can earn rewards such as [merch](https://merch.posthog.com), invitations, and public thank-yous. Sometimes they even [get hired](/careers). We love our contributors!"
+        },
+        {
+            "term": "Conversion",
+            "slug": "conversion",
+            "posthog": false,
+            "definition": "When a user moves into a new, usually more desirable, state – for example, from a lead into an [active user](#active-user). You can track conversions with tools such as [funnels](#funnel)."
+        },
+        {
+            "term": "CPA",
+            "slug": "cpa",
+            "posthog": false,
+            "definition": "Cost per acquisition. How much it costs to acquire a user through an advertising campaign, calculated as `cost of the campaign / number of conversions`."
+        },
+        {
+            "term": "CSP",
+            "slug": "csp",
+            "posthog": false,
+            "definition": "Content Security Policy. A browser security feature that helps prevent cross-site scripting (XSS) attacks. You can send CSP violation reports to PostHog to catch attacks and misconfigured policies. [Learn more about CSP reporting](/docs/csp-tracking)."
+        },
+        {
+            "term": "CTA",
+            "slug": "cta",
+            "posthog": false,
+            "definition": "Call to action. A message intended to prompt an action from your users, like this one: [star PostHog on GitHub!](https://github.com/PostHog/posthog)"
+        },
+        {
+            "term": "CTR",
+            "slug": "ctr",
+            "posthog": false,
+            "definition": "Click-through rate. The proportion of people who saw a [CTA](#cta) and actually clicked it. CTR is usually a good measure of [engagement](#engagement)."
+        },
+        {
+            "term": "Customer analytics",
+            "slug": "customer-analytics",
+            "posthog": true,
+            "definition": "A [tool](#tool) for tracking the metrics that matter while you're finding product-market fit – active users, signups, conversions, and engagement – without building [dashboards](#dashboard) from scratch. [Learn more about customer analytics](/docs/customer-analytics)."
+        },
+        {
+            "term": "Dashboard",
+            "slug": "dashboard",
+            "posthog": true,
+            "definition": "A place to collect multiple [insights](#insights) so you can see them together, share them, and collaborate. [Learn more about dashboards](/docs/product-analytics/dashboards)."
+        },
+        {
+            "term": "Data pipeline",
+            "slug": "data-pipeline",
+            "posthog": true,
+            "definition": "PostHog's system for moving data in and out. It covers [sources](/docs/cdp/sources) (importing data), [transformations](/docs/cdp/transformations) (modifying events in-flight), [destinations](#destination) (streaming events to other tools in real time), and [batch exports](#batch-export). Also known as the [CDP](#cdp). [Learn more about data pipelines](/docs/cdp)."
+        },
+        {
+            "term": "Data warehouse",
+            "slug": "data-warehouse",
+            "posthog": false,
+            "definition": "A system for storing processed data for known, ongoing use. PostHog's [data warehouse](/docs/data-warehouse) lets you sync data from external sources (Stripe, Postgres, Hubspot, and more) and query it alongside your product data. See also [data lake](#data-lake)."
+        },
+        {
+            "term": "Data lake",
+            "slug": "data-lake",
+            "posthog": false,
+            "definition": "A system for storing raw data. Unlike a [data warehouse](#data-warehouse), a data lake stores data in its original form for an as-yet-undefined purpose, keeping it flexible and quick to add to."
+        },
+        {
+            "term": "DAU",
+            "slug": "dau",
+            "posthog": false,
+            "definition": "Daily active users – how many [active users](#active-user) you have each day. [You can track this with a simple trends insight](/docs/product-analytics/trends)."
+        },
+        {
+            "term": "Destination",
+            "slug": "destination",
+            "posthog": true,
+            "definition": "A tool or system that PostHog streams your events to in real time, such as Slack, webhooks, BigQuery, or a marketing platform. Destinations are part of [data pipelines](#data-pipeline). [Browse destinations](/docs/cdp/destinations)."
+        },
+        {
+            "term": "Distinct ID",
+            "slug": "distinct-id",
+            "posthog": true,
+            "definition": "A unique identifier for a specific user. Every event is associated with a distinct ID. For anonymous users, PostHog generates a random one; when a user is [identified](#identify), it's typically set to a value from your own system, such as a user ID or email. [Learn more about identifying users](/docs/product-analytics/identify)."
+        },
+        {
+            "term": "Dormant user",
+            "slug": "dormant-user",
+            "posthog": false,
+            "definition": "In PostHog's [lifecycle](#lifecycle) insight, a user who did _not_ perform the specified action in the current period but had done so in the previous one."
+        },
+        {
+            "term": "Endpoint",
+            "slug": "endpoint",
+            "posthog": true,
+            "definition": "A saved query exposed as an API route, so you can call it from your own code and get results back without rebuilding the query each time. [Learn more about endpoints](/docs/endpoints)."
+        },
+        {
+            "term": "Engagement",
+            "slug": "engagement",
+            "posthog": false,
+            "definition": "How involved or active someone is with your product. A regular user is said to have _high_ engagement, or to be highly engaged."
+        },
+        {
+            "term": "Error tracking",
+            "slug": "error-tracking",
+            "posthog": true,
+            "definition": "A [tool](#tool) for capturing, grouping, and monitoring exceptions and errors in your application, so you can see what's breaking, how often, and for whom. [Learn more about error tracking](/docs/error-tracking)."
+        },
+        {
+            "term": "Evaluation",
+            "slug": "evaluation",
+            "posthog": true,
+            "definition": "An automated quality check on your LLM [generations](#generation). PostHog supports LLM-as-a-judge, code-based ([Hog](#hog)), and [sentiment](#sentiment) evaluations, each scoring generations so you can catch regressions in your AI features. Often shortened to \"evals\". [Learn more about evaluations](/docs/ai-evals)."
+        },
+        {
+            "term": "Event",
+            "slug": "event",
+            "posthog": true,
+            "definition": "The core building block of PostHog. Any activity a user performs – clicking a button, viewing a page – is an event. Events are [ingested](#ingestion) into PostHog and can be grouped into [actions](#action). [Learn more about events](/docs/data/events)."
+        },
+        {
+            "term": "Experiment",
+            "slug": "experiment",
+            "posthog": true,
+            "definition": "A controlled test that measures the impact of a change by comparing [variants](#variants) against a baseline, using statistical analysis to tell you which performed best. Experiments are powered by [feature flags](#feature-flag) and can be simple [A/B tests](#ab-test) or [multivariate tests](#multivariate-test). [Learn more about experiments](/docs/experiments)."
+        },
+        {
+            "term": "Feature flag",
+            "slug": "feature-flag",
+            "posthog": false,
+            "definition": "A switch that divides users into those a feature is enabled for and those it isn't. Based on flag status, each user is served a version of your product where a feature is – or isn't – available. Flags power [experiments](#experiment) and safe, gradual rollouts. [Learn more about feature flags](/docs/feature-flags)."
+        },
+        {
+            "term": "First-party cookies",
+            "slug": "first-party-cookies",
+            "posthog": false,
+            "definition": "Cookies served by the website you're actually visiting, typically used to store your preferences. Because self-hosted PostHog is deployed on your own servers, it can collect additional information through first-party cookies. See also [third-party cookies](#third-party-cookies)."
+        },
+        {
+            "term": "Formula",
+            "slug": "formula",
+            "posthog": true,
+            "definition": "An equation or calculation that combines or modifies data from one or more series in an [insight](#insights)."
+        },
+        {
+            "term": "FOSS",
+            "slug": "foss",
+            "posthog": false,
+            "definition": "Free and open source software. FOSS products are exactly that: free, and open source. [PostHog has a FOSS edition too!](https://github.com/PostHog/posthog-foss)"
+        },
+        {
+            "term": "Funnel",
+            "slug": "funnel",
+            "posthog": true,
+            "definition": "A way to track users through a sequence of steps – such as pageview → sign up → activate. PostHog's [funnel](/docs/product-analytics/funnels) insight shows how many users make it through each step and where they drop off."
+        },
+        {
+            "term": "GDPR",
+            "slug": "gdpr",
+            "posthog": false,
+            "definition": "General Data Protection Regulation. An EU regulation governing how personal data must be processed, protected, and kept private. [Learn about complying with GDPR while using PostHog](/docs/privacy/gdpr-compliance)."
+        },
+        {
+            "term": "Generation",
+            "slug": "generation",
+            "posthog": true,
+            "definition": "An [LLM observability](#llm-observability) event capturing a single call to an AI model and its response, including the prompt, the output, token counts, cost, and latency. Generations are grouped, together with [spans](#span), into [traces](/docs/ai-observability/traces). [Learn more about generations](/docs/ai-observability/generations)."
+        },
+        {
+            "term": "Group analytics",
+            "slug": "group-analytics",
+            "posthog": true,
+            "definition": "Analysis that aggregates events by something other than an individual user – a company, team, project, or account – using [groups](#groups). Especially valuable for [B2B](#b2b) products. [Learn more about group analytics](/docs/product-analytics/group-analytics)."
+        },
+        {
+            "term": "Groups",
+            "slug": "groups",
+            "posthog": true,
+            "definition": "A way to aggregate events by an entity other than an individual person, such as a company, team, device, or pricing tier. [Groups are different from cohorts](/docs/product-analytics/group-analytics) and power [group analytics](#group-analytics)."
+        },
+        {
+            "term": "Group type",
+            "slug": "group-type",
+            "posthog": true,
+            "definition": "A category of [group](#groups) you define – such as \"company\", \"project\", or \"team\". Each group type contains the individual groups that belong to it, and you can define up to five per project. [Learn more about group analytics](/docs/product-analytics/group-analytics)."
+        },
+        {
+            "term": "GTM",
+            "slug": "gtm",
+            "posthog": false,
+            "definition": "Go-to-market. The plan for how you'll bring a new product or feature to market, often informed by product analytics."
+        },
+        {
+            "term": "Heatmap",
+            "slug": "heatmap",
+            "posthog": true,
+            "definition": "A visualization of user activity overlaid on your page, with warmer colors showing where the most activity happens. PostHog heatmaps show where users click, move, and how far they scroll, and are available via the [toolbar](#toolbar). [Learn more about the toolbar](/docs/toolbar)."
+        },
+        {
+            "term": "Hedgehog",
+            "slug": "hedgehog",
+            "posthog": false,
+            "definition": "Incredibly cute creatures which are sadly becoming increasingly rare around the world. Hedgehogs are recognizable for their prickly backs, dislike of badgers, and [ever-changing fashion habits](/blog/drawing-hedgehogs). PostHog's mascot is [a hedgehog called Max](/max), designed by [our graphic designer, Lottie](/founders/posthog-first-five#4-lottie-coxon)."
+        },
+        {
+            "term": "Hog",
+            "slug": "hog",
+            "posthog": true,
+            "definition": "PostHog's own programming language, used to write the functions that power [data pipeline](#data-pipeline) transformations and destinations. See also [HogQL](#hogql). [Learn more about Hog](/docs/hog)."
+        },
+        {
+            "term": "HogQL",
+            "slug": "hogql",
+            "posthog": true,
+            "definition": "PostHog's SQL dialect, built on top of ClickHouse SQL, with shortcuts for accessing event and person properties. It powers the [SQL](#sql) insight and is used throughout PostHog's query interface. [Learn more about HogQL](/docs/sql)."
+        },
+        {
+            "term": "HIPAA",
+            "slug": "hipaa",
+            "posthog": false,
+            "definition": "Health Insurance Portability and Accountability Act. US legislation covering, among other things, how [personal health information](#phi) must be handled. [Learn how to use PostHog in a way that complies with HIPAA](/docs/privacy/hipaa-compliance)."
+        },
+        {
+            "term": "Holdout",
+            "slug": "holdout",
+            "posthog": true,
+            "definition": "A set of users deliberately held out of all [experiments](#experiment) so you can measure the long-term, cumulative impact of your changes – often over months – rather than just the short-term effect of a single test. [Learn more about holdouts](/docs/experiments/holdouts)."
+        },
+        {
+            "term": "Identify",
+            "slug": "identify",
+            "posthog": false,
+            "definition": "The process of connecting collected data to a specific user – and of de-anonymizing an anonymous user by attaching [properties](#property) to them. [Learn more about identifying users](/docs/product-analytics/identify)."
+        },
+        {
+            "term": "Inbox",
+            "slug": "inbox",
+            "posthog": true,
+            "definition": "The place in PostHog where [agents](#agent) proactively surface problems and opportunities they've found, as reports you can review and act on. It's how [self-driving](#self-driving) reaches you without being prompted. [Learn more about the inbox](/docs/self-driving/inbox)."
+        },
+        {
+            "term": "Ingestion",
+            "slug": "ingestion",
+            "posthog": false,
+            "definition": "The process of getting the [events](#event) your users trigger into PostHog, whether you're [sending live data](/docs/getting-started/send-events) or [migrating historic data](/docs/migrate)."
+        },
+        {
+            "term": "Insights",
+            "slug": "insights",
+            "posthog": true,
+            "definition": "A core PostHog feature for querying your data and visualizing the results. [Funnels](#funnel), [trends](#trend), [retention](#retention), [paths](#path), and more are all types of insight. [Learn more about insights](/docs/product-analytics/insights)."
+        },
+        {
+            "term": "Internal users",
+            "slug": "internal-users",
+            "posthog": false,
+            "definition": "People on your own team. You'll often want to filter internal users out of your analysis so they don't skew results. [Learn how to filter internal users](/tutorials/filter-internal-users)."
+        },
+        {
+            "term": "Issue",
+            "slug": "issue",
+            "posthog": false,
+            "definition": "On GitHub, what we use to log bugs, discuss ideas, and make decisions. An issue is better than a [community question](/questions), but not as good as a [pull request](#pull-request). In [error tracking](#error-tracking), an issue is also a group of similar exceptions bundled together."
+        },
+        {
+            "term": "K factor",
+            "slug": "k-factor",
+            "posthog": false,
+            "definition": "A measure of your product's virality. Calculate it by taking the number of invitations or recommendations each user makes, then multiplying by the success rate of those invitations. Any result greater than 1 indicates viral growth, as each user you acquire will, on average, bring in at least one more."
+        },
+        {
+            "term": "KPI",
+            "slug": "kpi",
+            "posthog": false,
+            "definition": "Key performance indicator. A measurable metric used to judge the success (or failure) of a person, team, or product. Teams often have several KPIs they're accountable for."
+        },
+        {
+            "term": "Lifecycle",
+            "slug": "lifecycle",
+            "posthog": true,
+            "definition": "A PostHog insight that breaks your active users down into new, returning, resurrecting, and dormant, so you can see how engagement grows and decays over time. See [new user](#new-user), [returning user](#returning-user), [resurrecting user](#resurrecting-user), and [dormant user](#dormant-user). [Learn more about lifecycle](/docs/product-analytics/lifecycle)."
+        },
+        {
+            "term": "LLM observability",
+            "slug": "llm-observability",
+            "posthog": true,
+            "definition": "A [tool](#tool) for capturing and analyzing the behavior, cost, and latency of your LLM-powered features – [traces](/docs/ai-observability/traces), [generations](#generation), [spans](#span), and the prompts and responses inside them. [Learn more about LLM observability](/docs/ai-observability)."
+        },
+        {
+            "term": "Logs",
+            "slug": "logs",
+            "posthog": true,
+            "definition": "A [tool](#tool) for collecting, searching, and analyzing the log lines emitted by your applications and services, alongside the rest of your PostHog data. [Learn more about logs](/docs/logs)."
+        },
+        {
+            "term": "LTV",
+            "slug": "ltv",
+            "posthog": false,
+            "definition": "Lifetime value. The total revenue you expect from the average user before they [churn](#churn)."
+        },
+        {
+            "term": "Marketing analytics",
+            "slug": "marketing-analytics",
+            "posthog": true,
+            "definition": "A [tool](#tool) for measuring the performance and return on investment of your marketing campaigns and channels, tying ad spend to outcomes in your product. [Learn more about marketing analytics](/docs/web-analytics/marketing-analytics)."
+        },
+        {
+            "term": "MAU",
+            "slug": "mau",
+            "posthog": false,
+            "definition": "Monthly active users – how many [active users](#active-user) you have each month."
+        },
+        {
+            "term": "Max AI",
+            "slug": "max-ai",
+            "posthog": true,
+            "definition": "PostHog's AI [agent](#agent), named after [our hedgehog mascot](#hedgehog). Max can answer questions about your data, build insights, and take actions across PostHog using the full [context](#context) of your product. [Learn more about Max](/docs/posthog-ai)."
+        },
+        {
+            "term": "MCP",
+            "slug": "mcp",
+            "posthog": true,
+            "definition": "Model Context Protocol. An open standard that lets AI tools talk to external systems. PostHog MCP is one of PostHog's [products](#product) – it exposes your PostHog data and [tools](#tool) to AI assistants and agents. [Learn more about PostHog MCP](/docs/model-context-protocol)."
+        },
+        {
+            "term": "MCP analytics",
+            "slug": "mcp-analytics",
+            "posthog": true,
+            "definition": "A [tool](#tool) that shows how AI agents actually use your [MCP](#mcp) tools – which tools get called, what the agent was trying to do, where calls fail, and which capabilities were requested that you don't offer yet. [Learn more about MCP analytics](/docs/mcp-analytics)."
+        },
+        {
+            "term": "Metrics",
+            "slug": "metrics",
+            "posthog": true,
+            "definition": "A [tool](#tool) for sending application and infrastructure metrics – request counts, latencies, queue depths, resource usage – to PostHog and analyzing them alongside your [logs](#logs), [traces](#traces), and product data. [Learn more about metrics](/docs/metrics)."
+        },
+        {
+            "term": "MOM",
+            "slug": "mom",
+            "posthog": false,
+            "definition": "Month-on-month (or month-over-month). Used to track performance from one month to the next, e.g. \"we grew revenue 10% month-on-month\"."
+        },
+        {
+            "term": "MQL",
+            "slug": "mql",
+            "posthog": false,
+            "definition": "Marketing qualified lead. Someone who's shown interest in your product through marketing activity, such as responding to an ad or downloading content. See also [PQL](#pql)."
+        },
+        {
+            "term": "MRR",
+            "slug": "mrr",
+            "posthog": false,
+            "definition": "Monthly recurring revenue – roughly, how much recurring revenue you expect to make each month."
+        },
+        {
+            "term": "Multivariate test",
+            "slug": "multivariate-test",
+            "posthog": false,
+            "definition": "An [experiment](#experiment) that runs with more than two variants. See also [A/B test](#ab-test)."
+        },
+        {
+            "term": "MVP",
+            "slug": "mvp",
+            "posthog": false,
+            "definition": "Minimum viable product. The simplest – and usually cheapest and fastest – version of something you can build to test an idea. We build a _lot_ of MVPs."
+        },
+        {
+            "term": "New user",
+            "slug": "new-user",
+            "posthog": true,
+            "definition": "In PostHog's [lifecycle](#lifecycle) insight, someone who was first seen within the specified period and performed the investigated action in that same period."
+        },
+        {
+            "term": "North star",
+            "slug": "north-star",
+            "posthog": false,
+            "definition": "A single metric or objective that guides your decision-making. [Learn how to set north stars and why they matter](/founders/north-star-metrics)."
+        },
+        {
+            "term": "Notebook",
+            "slug": "notebook",
+            "posthog": true,
+            "definition": "A flexible, freeform canvas in PostHog where you can combine insights, session replays, text, and queries into a single document – handy for investigations, playbooks, and sharing findings. [Learn more about notebooks](/docs/notebooks)."
+        },
+        {
+            "term": "NPS",
+            "slug": "nps",
+            "posthog": false,
+            "definition": "Net promoter score. A measure of customer satisfaction and loyalty based on how likely users are to recommend your product, from 0 (not likely) to 10 (extremely likely). Scores of 9–10 are Promoters, 0–6 are Detractors, and the rest are Passives. Subtracting the percentage of Detractors from Promoters gives a score between -100 and +100. You can run NPS surveys with [surveys](#survey)."
+        },
+        {
+            "term": "OKR",
+            "slug": "okr",
+            "posthog": false,
+            "definition": "Objectives and key results. Like [KPIs](#kpi), a system for organizing goals and measuring performance – but focused on setting ambitious objectives and judging how far you get toward them."
+        },
+        {
+            "term": "Open source",
+            "slug": "open-source",
+            "posthog": false,
+            "definition": "A model of distribution that lets others inspect, modify, and share what you create. PostHog is both an open source product – [we distribute our software under an open source MIT license](https://github.com/PostHog/posthog) – and [an open source company, because we work transparently](/handbook/company/culture)."
+        },
+        {
+            "term": "OpenTelemetry",
+            "slug": "opentelemetry",
+            "posthog": false,
+            "definition": "Often shortened to OTel. An open standard for generating and exporting [traces](#traces), metrics, and logs from your applications. PostHog's [distributed tracing](#traces) ingests spans from any OpenTelemetry client, so no PostHog-specific SDK is required. [Learn more about distributed tracing](/docs/distributed-tracing)."
+        },
+        {
+            "term": "Path",
+            "slug": "path",
+            "posthog": true,
+            "definition": "A visualization of the routes users take through your product, built with the [paths](/docs/product-analytics/paths) insight. Paths let you see, for example, everything users did after visiting a particular page."
+        },
+        {
+            "term": "Persons",
+            "slug": "persons",
+            "posthog": true,
+            "definition": "How PostHog aggregates the behavior of an individual user, whether or not they've been [identified](#identify). [Learn more about persons](/docs/data/persons)."
+        },
+        {
+            "term": "PHI",
+            "slug": "phi",
+            "posthog": false,
+            "definition": "Personal health information. Regulations such as [HIPAA](#hipaa) require that any information about an individual's health be processed and stored in accordance with the law."
+        },
+        {
+            "term": "PII",
+            "slug": "pii",
+            "posthog": false,
+            "definition": "Personally identifiable information. Under regulations such as [HIPAA](#hipaa), any information that can identify a user – birthday, ethnicity, address, and so on – must be handled in accordance with the law."
+        },
+        {
+            "term": "Pivot",
+            "slug": "pivot",
+            "posthog": false,
+            "definition": "A rapid change in company direction. [One of our favorite hobbies](/founders/story-about-pivots)."
+        },
+        {
+            "term": "Plugin",
+            "slug": "plugin",
+            "posthog": false,
+            "definition": "The original name for [apps](#app). We don't call them plugins – or apps – anymore; the functionality now lives in [data pipelines](#data-pipeline)."
+        },
+        {
+            "term": "PQL",
+            "slug": "pql",
+            "posthog": false,
+            "definition": "Product qualified lead. A user who's shown interest through actions in the product itself, such as completing a free trial or hitting a usage milestone. See also [MQL](#mql)."
+        },
+        {
+            "term": "Product",
+            "slug": "product",
+            "posthog": true,
+            "definition": "One of the surfaces you access PostHog through: [PostHog Web](/docs/self-driving/web) (the web app, where the [inbox](#inbox) and [Max](#max-ai) live), [PostHog Slack](/docs/slack), [PostHog MCP](#mcp), the [PostHog CLI](/docs/cli), and [PostHog Desktop](/docs/posthog-desktop). Products are how you reach PostHog's [tools](#tool) and [self-driving](#self-driving) – distinct from the tools themselves."
+        },
+        {
+            "term": "Product analytics",
+            "slug": "product-analytics",
+            "posthog": true,
+            "definition": "The [tool](#tool) for understanding how identified and anonymous users interact with your product, through [insights](#insights) like [trends](#trend), [funnels](#funnel), [retention](#retention), and [paths](#path). Product analytics is typically deeper than [web analytics](#web-analytics). [Learn more about product analytics](/docs/product-analytics)."
+        },
+        {
+            "term": "Prompt management",
+            "slug": "prompt-management",
+            "posthog": true,
+            "definition": "A [tool](#tool) for creating and updating LLM prompts inside PostHog and fetching them at runtime via the [SDK](#sdk), so product and content teams can iterate on prompts without shipping code. [Learn more about prompt management](/docs/prompt-management)."
+        },
+        {
+            "term": "PR",
+            "slug": "pr",
+            "posthog": false,
+            "definition": "Sometimes this means public relations. But when _we_ say PR we usually mean a [pull request](#pull-request), because [we don't do much of the other sort](/handbook/marketing)."
+        },
+        {
+            "term": "Property",
+            "slug": "property",
+            "posthog": false,
+            "definition": "Additional information stored on an [event](#event) or [person](#persons) – such as the device someone's using or their location. [Learn more about properties](/docs/how-posthog-works/queries)."
+        },
+        {
+            "term": "Pull request",
+            "slug": "pull-request",
+            "posthog": false,
+            "definition": "A proposed change to a piece of software, opened for review before it's merged. The best thing anyone on PostHog's team can be doing."
+        },
+        {
+            "term": "Query",
+            "slug": "query",
+            "posthog": true,
+            "definition": "Asking a question of your data. Every time you create an [insight](#insights) you're running a query. [Learn how querying works in PostHog](/docs/how-posthog-works/queries)."
+        },
+        {
+            "term": "Rageclick",
+            "slug": "rageclick",
+            "posthog": false,
+            "definition": "A rapid burst of clicks in the same spot, usually a sign that a user is frustrated because something isn't responding or isn't clickable when they expect it to be. PostHog detects rageclicks (and dead clicks) and surfaces them in [heatmaps](#heatmap) and [session replay](#session-replay)."
+        },
+        {
+            "term": "Release condition",
+            "slug": "release-condition",
+            "posthog": false,
+            "definition": "The rules that decide which users a [feature flag](#feature-flag) is active for – for example, your internal team, or 50% of all users."
+        },
+        {
+            "term": "Replay Vision",
+            "slug": "replay-vision",
+            "posthog": true,
+            "definition": "A [tool](#tool) (currently in alpha) that uses AI to watch your [session replays](#session-replay) and turn what it sees – hesitation, confusion, where a user's attention goes – into structured, queryable data. You define scanners that describe what to look for, and PostHog runs them across your recordings. [Learn more about Replay Vision](/docs/replay-vision)."
+        },
+        {
+            "term": "Retention",
+            "slug": "retention",
+            "posthog": true,
+            "definition": "A PostHog insight that shows how many users come back to your product over time after first performing an action. [Learn more about retention](/docs/product-analytics/retention)."
+        },
+        {
+            "term": "Returning user",
+            "slug": "returning-user",
+            "posthog": true,
+            "definition": "In PostHog's [lifecycle](#lifecycle) insight, a user who performed the specified action in both the current _and_ the previous period."
+        },
+        {
+            "term": "Resurrecting user",
+            "slug": "resurrecting-user",
+            "posthog": true,
+            "definition": "In PostHog's [lifecycle](#lifecycle) insight, a user who performed the specified action in the current period, didn't in the previous one, but had at some earlier point. That earlier activity is what separates them from a [new user](#new-user)."
+        },
+        {
+            "term": "Revenue analytics",
+            "slug": "revenue-analytics",
+            "posthog": true,
+            "definition": "A [tool](#tool) for tracking revenue metrics – [MRR](#mrr), [ARR](#arr), [churn](#churn), and more – by combining payment data (for example from Stripe) with your product data. [Learn more about revenue analytics](/docs/revenue-analytics)."
+        },
+        {
+            "term": "Reverse proxy",
+            "slug": "reverse-proxy",
+            "posthog": false,
+            "definition": "A server on your own domain that forwards analytics requests to PostHog. Because requests go through a domain you control (like `e.yourdomain.com`), ad blockers are less likely to block them, so you capture more complete data. [Learn more about reverse proxies](/docs/advanced/proxy)."
+        },
+        {
+            "term": "SAML",
+            "slug": "saml",
+            "posthog": false,
+            "definition": "Security Assertion Markup Language. A standard that lets users authenticate to multiple systems with a single set of credentials. See also [SSO](#sso)."
+        },
+        {
+            "term": "Scout",
+            "slug": "scout",
+            "posthog": true,
+            "definition": "A scheduled [agent](#agent) that regularly scans your project for a specific kind of problem or opportunity and writes what it finds into the [inbox](#inbox). Scouts are how [self-driving](#self-driving) keeps watch proactively. [Learn more about scouts](/docs/self-driving/scouts)."
+        },
+        {
+            "term": "SDK",
+            "slug": "sdk",
+            "posthog": false,
+            "definition": "Software development kit. The libraries you use to send data to and integrate with PostHog. [PostHog has many SDKs](/docs/libraries)."
+        },
+        {
+            "term": "Segment",
+            "slug": "segment",
+            "posthog": false,
+            "definition": "Dividing users into groups based on demographic, geographic, behavioral, or technographic properties, so you can analyze them separately. (Not to be confused with the CDP of the same name.)"
+        },
+        {
+            "term": "Self-driving",
+            "slug": "self-driving",
+            "posthog": true,
+            "definition": "PostHog's overall positioning: PostHog makes your product self-driving. It pairs the full [context](#context) of your product with [agents](#agent) that find problems and opportunities and ship the fix – reactively (when prompted, e.g. via [Slack](#product)) or proactively (e.g. via the [inbox](#inbox)). [Learn more about self-driving](/docs/self-driving)."
+        },
+        {
+            "term": "Self-host",
+            "slug": "self-host",
+            "posthog": false,
+            "definition": "Running and managing PostHog yourself, on your own infrastructure, rather than using PostHog Cloud. [Learn more about self-hosting](/docs/self-host)."
+        },
+        {
+            "term": "Semantic layer",
+            "slug": "semantic-layer",
+            "posthog": true,
+            "definition": "A shared set of definitions – metrics, dimensions, and their relationships – that sits between your raw data and the people querying it, so everyone works from the same, consistent definitions. [Learn more about the semantic layer](/docs/semantic-layer)."
+        },
+        {
+            "term": "Sentiment",
+            "slug": "sentiment",
+            "posthog": true,
+            "definition": "In [LLM observability](#llm-observability), an automatic read of the emotional tone of a user's messages to your AI features – positive, neutral, or negative – so you can spot frustration at scale. [Learn more about sentiment](/docs/ai-observability/sentiment)."
+        },
+        {
+            "term": "Service",
+            "slug": "service",
+            "posthog": false,
+            "definition": "In [distributed tracing](#traces), a named component of your system – an app, API, or worker – that emits [spans](#span). Every span records the service it ran in, so you can follow a request as it moves between them."
+        },
+        {
+            "term": "Session",
+            "slug": "session",
+            "posthog": false,
+            "definition": "A period during which a user is actively interacting with your product. PostHog can [record sessions as replays](/docs/session-replay). [Learn more about sessions](/docs/data/sessions)."
+        },
+        {
+            "term": "Session replay",
+            "slug": "session-replay",
+            "posthog": true,
+            "definition": "A [tool](#tool) that records and plays back individual user sessions, so you can watch exactly how real users navigate your product – clicks, scrolls, inputs, and page transitions included. [Learn more about session replay](/docs/session-replay)."
+        },
+        {
+            "term": "Signal",
+            "slug": "signal",
+            "posthog": true,
+            "definition": "An individual observation a [scout](#scout) or [agent](#agent) picks up while scanning your data – a spike, an anomaly, a broken funnel step – which can become a report in the [inbox](#inbox). [Learn more about signals](/docs/self-driving/signals)."
+        },
+        {
+            "term": "Source",
+            "slug": "source",
+            "posthog": true,
+            "definition": "A system PostHog imports data from – Stripe, Postgres, Hubspot, and more – so you can query it alongside your product data. Sources feed the [data warehouse](#data-warehouse), are part of [data pipelines](#data-pipeline), and are the counterpart to [destinations](#destination). [Browse sources](/docs/cdp/sources)."
+        },
+        {
+            "term": "Span",
+            "slug": "span",
+            "posthog": false,
+            "definition": "A single unit of work within a [trace](#traces) – an operation such as an incoming HTTP request, a database query, a function call, or, in [LLM observability](#llm-observability), a step like a vector search. Spans each carry a name, service, timing, status, and attributes, and nest into a tree that shows how a request flowed and where the time went. [Learn more about spans](/docs/ai-observability/spans)."
+        },
+        {
+            "term": "SQL",
+            "slug": "sql",
+            "posthog": false,
+            "definition": "Structured Query Language (pronounced \"sequel\"). A language for querying relational databases. In PostHog you write SQL using [HogQL](#hogql). [Learn more about SQL in PostHog](/docs/sql)."
+        },
+        {
+            "term": "SSO",
+            "slug": "sso",
+            "posthog": false,
+            "definition": "Single sign-on. A system that lets users log in to one service (such as PostHog) using their credentials from another (such as Google Workspace). See also [SAML](#saml)."
+        },
+        {
+            "term": "Statistical significance",
+            "slug": "statistical-significance",
+            "posthog": false,
+            "definition": "In an [experiment](#experiment), a result is statistically significant when the difference between [variants](#variants) is unlikely to be down to chance. PostHog reports significance so you know whether a change really moved the metric before you act on it. [Learn more about analyzing experiment results](/docs/experiments)."
+        },
+        {
+            "term": "Stickiness",
+            "slug": "stickiness",
+            "posthog": true,
+            "definition": "A PostHog insight showing how many times users perform an action within a given period – a measure of how habit-forming your product is. [Learn more about stickiness](/docs/product-analytics/stickiness)."
+        },
+        {
+            "term": "Survey",
+            "slug": "survey",
+            "posthog": true,
+            "definition": "A [tool](#tool) for asking your users questions directly in your product – for [NPS](#nps), feedback, feature interest, and more – and analyzing the responses. [Learn more about surveys](/docs/surveys)."
+        },
+        {
+            "term": "Symbolication",
+            "slug": "symbolication",
+            "posthog": true,
+            "definition": "Converting the minified or obfuscated frames in a [stack trace](/docs/error-tracking/stack-traces) back into readable file names, functions, and line numbers, using source maps or symbol files you upload. It's what makes [error tracking](#error-tracking) stack traces actually useful. [Learn more about uploading source maps](/docs/error-tracking/upload-source-maps)."
+        },
+        {
+            "term": "Third-party cookies",
+            "slug": "third-party-cookies",
+            "posthog": false,
+            "definition": "Cookies served not by the website you're visiting but by a third party, typically an advertising company. See also [first-party cookies](#first-party-cookies)."
+        },
+        {
+            "term": "Tool",
+            "slug": "tool",
+            "posthog": true,
+            "definition": "One of PostHog's functional capabilities – [product analytics](#product-analytics), [session replay](#session-replay), [feature flags](#feature-flag), [experiments](#experiment), [error tracking](#error-tracking), [surveys](#survey), [web analytics](#web-analytics), and so on. Tools are accessed through PostHog's [products](#product), and the data they capture becomes the [context](#context) that powers [self-driving](#self-driving). (We used to call these \"apps\".)"
+        },
+        {
+            "term": "Toolbar",
+            "slug": "toolbar",
+            "posthog": true,
+            "definition": "A widget PostHog injects into your own site that gives you quick access to useful actions and information. The toolbar lets you inspect elements, view [heatmaps](#heatmap), create [actions](#action), and toggle [feature flags](#feature-flag). [Learn more about the toolbar](/docs/toolbar)."
+        },
+        {
+            "term": "Traces",
+            "slug": "traces",
+            "posthog": true,
+            "definition": "PostHog's distributed tracing [tool](#tool) (currently in alpha). A trace follows a single request as it travels through your application – across functions, [services](#service), databases, and APIs – so you can see what called what, in what order, and where the time or failure actually came from. Traces are built from [spans](#span) and ingested via [OpenTelemetry](#opentelemetry), providing [APM](#apm)-style visibility. This is distinct from the traces in [LLM observability](#llm-observability), which capture a full interaction with an AI model. [Learn more about distributed tracing](/docs/distributed-tracing)."
+        },
+        {
+            "term": "Transformation",
+            "slug": "transformation",
+            "posthog": true,
+            "definition": "A step in a [data pipeline](#data-pipeline) that modifies, enriches, or filters [events](#event) in-flight as they're ingested, written as [Hog](#hog) functions. [Learn more about transformations](/docs/cdp/transformations)."
+        },
+        {
+            "term": "Trend",
+            "slug": "trend",
+            "posthog": true,
+            "definition": "The default PostHog [insight](#insights) type, which plots data onto a [chart](#chart) over time. Trends support many [chart types](/docs/product-analytics/trends) and options, including [formulas](#formula). [Learn more about trends](/docs/product-analytics/trends)."
+        },
+        {
+            "term": "UGC",
+            "slug": "ugc",
+            "posthog": false,
+            "definition": "User-generated content. Any content users create within, or using, your product to share with others. Posts on social media are a typical example."
+        },
+        {
+            "term": "UTM",
+            "slug": "utm",
+            "posthog": false,
+            "definition": "Urchin Tracking Module. Parameters appended to a URL to help attribute traffic in marketing campaigns."
+        },
+        {
+            "term": "Variants",
+            "slug": "variants",
+            "posthog": false,
+            "definition": "The different versions served in an [experiment](#experiment). In PostHog, variants are controlled by [feature flags](#feature-flag)."
+        },
+        {
+            "term": "VM",
+            "slug": "vm",
+            "posthog": false,
+            "definition": "Virtual machine. An emulated, isolated computing environment. We historically ran [apps](#app) in VMs; today that logic runs as [Hog](#hog) functions."
+        },
+        {
+            "term": "Web analytics",
+            "slug": "web-analytics",
+            "posthog": true,
+            "definition": "A [tool](#tool) for understanding how visitors interact with your website – pageviews, sessions, sources, and more – with a privacy-friendly, cookieless-capable dashboard. Typically lighter-weight than [product analytics](#product-analytics). [Learn more about web analytics](/docs/web-analytics)."
+        },
+        {
+            "term": "Web vitals",
+            "slug": "web-vitals",
+            "posthog": true,
+            "definition": "Google's Core Web Vitals – metrics like largest contentful paint (LCP), cumulative layout shift (CLS), interaction to next paint (INP), and first contentful paint (FCP) – that measure real-user page performance. PostHog's [web analytics](#web-analytics) captures them automatically. [Learn more about web vitals](/docs/web-analytics/web-vitals)."
+        },
+        {
+            "term": "Workflows",
+            "slug": "workflows",
+            "posthog": true,
+            "definition": "A [tool](#tool) for automating messaging and actions from your product data – event-triggered sequences, drip campaigns, and emails that respond to what users do. [Learn more about workflows](/docs/workflows)."
+        },
+        {
+            "term": "YOY",
+            "slug": "yoy",
+            "posthog": false,
+            "definition": "Year-on-year (or year-over-year). Used to track performance from one year to the next, e.g. \"we grew revenue 10% year-on-year\"."
+        }
+    ]
+}
