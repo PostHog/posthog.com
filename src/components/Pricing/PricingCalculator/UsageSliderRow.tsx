@@ -9,6 +9,13 @@ import {
 } from '../PricingSlider/Slider'
 import { formatCompact, parseCompact } from '../utils'
 
+const snapToMark = (value: number, marks: number[]) => {
+    const rounded = Math.round(value)
+    if (rounded <= 0) return 0
+    const compact = formatCompact(rounded)
+    return marks.find((mark) => formatCompact(mark) === compact) ?? rounded
+}
+
 export const UsageSliderHeader = ({ unit }: { unit: string }) => (
     <div className="flex items-center gap-4 pb-1">
         <span className="w-48 shrink-0 text-xs uppercase text-secondary font-semibold">Usage</span>
@@ -48,14 +55,16 @@ export default function UsageSliderRow({
     const [draft, setDraft] = useState<string | null>(null)
     const displayValue = draft ?? `${inputPrefix ?? ''}${formatCompact(value)}`
 
+    const emit = (next: number) => onChange(snapToMark(next, marks))
+
     const handleLogChange = (next: number) => {
         const rounded = Math.round(sliderCurve(next))
-        onChange(rounded <= effectiveScaleMin ? 0 : rounded)
+        emit(rounded <= effectiveScaleMin ? 0 : rounded)
     }
 
     const commitDraft = () => {
         if (draft === null) return
-        onChange(parseCompact(draft))
+        emit(parseCompact(draft))
         setDraft(null)
     }
 
@@ -76,7 +85,7 @@ export default function UsageSliderRow({
                             marks={marks}
                             min={0}
                             max={max}
-                            onChange={(next) => onChange(reverseNonLinearCurve(next))}
+                            onChange={(next) => emit(reverseNonLinearCurve(next))}
                             value={nonLinearCurve(value || 0)}
                         />
                     ) : (
