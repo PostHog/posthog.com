@@ -8,7 +8,7 @@ We use Vitally as a customer success platform.  You can log in via Google SSO to
 
 ## Health scoring
 
-This section covers the computed score. For the rating you set by hand on your own accounts, see [CSM sentiment](/handbook/cs-and-onboarding/health-tracking#csm-relationship).
+This section covers the computed score. For the rating you set by hand on your own accounts, see [CSM relationship](/handbook/cs-and-onboarding/health-tracking#csm-relationship).
 
 ### Overview
 
