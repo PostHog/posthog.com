@@ -1,69 +1,46 @@
 import React from 'react'
-import { RenderInClient } from 'components/RenderInClient'
-import usePostHog from '../../../hooks/usePostHog'
+import { RoughAnnotation } from 'components/Code/RoughAnnotation'
 import { cn } from '../../../utils'
-import { DEFAULT_HERO_COPY_VARIANT, resolveHeroCopyVariant } from './variants'
-import type { HeroCopyVariant } from './variants'
 
-export const HERO_COPY_FLAG = 'homepage-hero-copy'
+const Highlight = ({ children, delay = 0 }: { children: React.ReactNode; delay?: number }) => (
+    <RoughAnnotation
+        type="highlight"
+        color="rgba(247, 165, 1, 0.15)"
+        strokeWidth={1}
+        padding={2}
+        delay={delay}
+        multiline
+    >
+        {children}
+    </RoughAnnotation>
+)
 
-function assignedVariant(posthog: ReturnType<typeof usePostHog>): HeroCopyVariant {
-    return resolveHeroCopyVariant(posthog?.getFeatureFlag?.(HERO_COPY_FLAG)) ?? DEFAULT_HERO_COPY_VARIANT
-}
+const Underline = ({ children, delay = 0 }: { children: React.ReactNode; delay?: number }) => (
+    <RoughAnnotation
+        type="underline"
+        color="currentColor"
+        strokeWidth={1}
+        delay={delay}
+        multiline
+        className="text-secondary"
+    >
+        {children}
+    </RoughAnnotation>
+)
 
-const HeadlineMarkup = ({ headline, className }: { headline: HeroCopyVariant['headline']; className?: string }) => (
+export const HeroHeadline = ({ className }: { className?: string }): JSX.Element => (
     <h1 className={cn('!text-3xl @xl:!text-4xl mt-0', className)}>
-        {headline.lead}{' '}
-        <span className="bg-blue/10 dark:bg-blue/20 text-blue rounded-md px-1 @xl:whitespace-nowrap">
-            {headline.emphasis}
-        </span>
+        Make your product{' '}
+        <span className="bg-blue/10 dark:bg-blue/20 text-blue rounded-md px-1 @xl:whitespace-nowrap">self-driving</span>
     </h1>
 )
 
-const BodyMarkup = ({ Body }: { Body: HeroCopyVariant['Body'] }) => (
+export const HeroBody = (): JSX.Element => (
     <>
-        <Body />
+        <p className="text-balance @xl:text-wrap text-[17px]">
+            PostHog already has your <Highlight>analytics and errors</Highlight>. Now it{' '}
+            <Underline delay={900}>ships&nbsp;code</Underline> to help you build a better product.
+        </p>
         <p className="text-balance @xl:text-wrap text-secondary">Join 500,000+ teams already shipping with PostHog.</p>
     </>
 )
-
-function HeadlineSlot({ className }: { className?: string }): JSX.Element {
-    return <HeadlineMarkup headline={assignedVariant(usePostHog()).headline} className={className} />
-}
-
-function BodySlot(): JSX.Element {
-    return <BodyMarkup Body={assignedVariant(usePostHog()).Body} />
-}
-
-/**
- * The headline and the body copy sit in different cells of the hero grid, so they resolve the flag
- * in two slots rather than one. Both read the same flag, so a visitor always gets a matched pair.
- *
- * Unlike the CTA slot, these render the control copy as the placeholder instead of nothing: the
- * hero holds the page's only `h1`, and it has to be in the server-rendered HTML for SEO. The cost
- * is that a visitor in a test variant sees control copy until flags resolve, then sees it swap.
- */
-export const HeroHeadline = ({ className }: { className?: string }): JSX.Element => (
-    <RenderInClient
-        placeholder={
-            <div className="invisible">
-                <HeadlineMarkup headline={DEFAULT_HERO_COPY_VARIANT.headline} className={className} />
-            </div>
-        }
-        render={() => <HeadlineSlot className={className} />}
-    />
-)
-
-export const HeroBody = (): JSX.Element => (
-    <RenderInClient
-        placeholder={
-            <div className="invisible">
-                <BodyMarkup Body={DEFAULT_HERO_COPY_VARIANT.Body} />
-            </div>
-        }
-        render={() => <BodySlot />}
-    />
-)
-
-export { HERO_COPY_VARIANTS, DEFAULT_HERO_COPY_VARIANT, resolveHeroCopyVariant } from './variants'
-export type { HeroCopyVariant } from './variants'
