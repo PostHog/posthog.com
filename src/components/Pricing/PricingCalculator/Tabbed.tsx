@@ -243,6 +243,7 @@ const DEFAULT_PRODUCT_TYPES = [
     'ai_observability',
     'replay_vision',
     'feature_flags',
+    'error_tracking',
     'posthog_ai',
 ]
 
