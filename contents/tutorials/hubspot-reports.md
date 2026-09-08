@@ -59,7 +59,7 @@ You can also visualize other tables like `hubspot_companies` and `hubspot_contac
 
 The best part of adding your Hubspot data to PostHog is querying it next to usage data. 
 
-An example of this is figuring out the leads with the most usage. To do this, we create an [SQL insight](/docs/product-analytics/sql) where we get leads from `hubspot_contacts`, join their email with PostHog's `distinct_id`, and get a count of events.
+An example of this is figuring out the leads with the most usage. To do this, we create an [SQL insight](/docs/data-warehouse/sql) where we get leads from `hubspot_contacts`, join their email with PostHog's `distinct_id`, and get a count of events.
 
 ```sql
 with
