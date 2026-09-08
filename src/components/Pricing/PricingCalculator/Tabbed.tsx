@@ -202,28 +202,16 @@ export const TabContent = ({
                                             hideHeading
                                         />
                                     </div>
-                                    <div className="pr-1.5 pt-3 border-t border-primary">
-                                        <span className="text-sm text-secondary">
-                                            {freeAllocationText ? (
-                                                <>{freeAllocationText} </>
-                                            ) : (
-                                                <>
-                                                    The first {formatCompact(freeAmount)}{' '}
-                                                    {pluralizeUnit(billingData.unit, freeAmount)} are free, every month.{' '}
-                                                </>
-                                            )}
-                                            {costByTier && (
-                                                <button
-                                                    onClick={() => setShowBreakdown(!showBreakdown)}
-                                                    className="text-red dark:text-yellow font-semibold underline"
-                                                >
-                                                    {showBreakdown
-                                                        ? 'Hide how we calculate this'
-                                                        : 'See how we calculate this'}
-                                                </button>
-                                            )}
-                                        </span>
-                                    </div>
+                                    {costByTier && (
+                                        <div className="pr-1.5 pt-3 border-t border-primary">
+                                            <button
+                                                onClick={() => setShowBreakdown(!showBreakdown)}
+                                                className="text-sm text-red dark:text-yellow font-semibold underline"
+                                            >
+                                                {showBreakdown ? 'Hide breakdown' : 'Show breakdown'}
+                                            </button>
+                                        </div>
+                                    )}
                                 </>
                             )}
                             {showBreakdown && costByTier && (
@@ -544,10 +532,10 @@ export default function Tabbed() {
             <div className="grid grid-cols-12 mb-1">
                 <div className="col-span-12 @2xl:col-span-4 md:pr-6 mb-4 md:mb-0">
                     <div className="mb-2">
-                        <p className="m-0 text-sm flex justify-between">
+                        <p className="m-0 text-sm flex gap-1 items-baseline">
                             <strong>Your estimate</strong>{' '}
                             <span className="text-secondary text-xs">
-                                {productCount} {productCount === 1 ? 'product' : 'products'}
+                                ({productCount} {productCount === 1 ? 'product' : 'products'})
                             </span>
                         </p>
                     </div>
@@ -606,7 +594,7 @@ export default function Tabbed() {
                             >
                                 <span className="flex items-center gap-1.5">
                                     <IconPlus className="size-4 shrink-0" />
-                                    <span className="font-bold">Add to your estimate</span>
+                                    <span className="font-bold">Add a product</span>
                                 </span>
                                 <span className="opacity-60">{availableProducts.length} more</span>
                             </button>
@@ -770,23 +758,49 @@ export default function Tabbed() {
                     )}
 
                     {activeProduct && (
-                        <>
+                        <div>
                             <div className="flex items-center gap-2.5 mb-4">
                                 {ActiveIcon && (
                                     <ActiveIcon
-                                        className={`size-6 shrink-0 text-${activeProduct.color}${
+                                        className={`size-9 shrink-0 text-${activeProduct.color}${
                                             activeProduct.colorDark ? ` dark:text-${activeProduct.colorDark}` : ''
                                         }`}
                                     />
                                 )}
-                                <h3 className="m-0 leading-none">{activeProduct.categoryName || activeProduct.name}</h3>
-                                <button
-                                    type="button"
-                                    onClick={() => removeProduct(activeProduct.type)}
-                                    className="text-xs text-secondary underline leading-none shrink-0  mt-0.5"
-                                >
-                                    Remove
-                                </button>
+                                <div className="w-full">
+                                    <div className="flex items-center gap-2.5 justify-between">
+                                        <h3 className="m-0 leading-none">
+                                            {activeProduct.categoryName || activeProduct.name}
+                                        </h3>
+                                        <button
+                                            type="button"
+                                            onClick={() => removeProduct(activeProduct.type)}
+                                            className="text-xs text-secondary underline leading-none shrink-0 mt-0.5"
+                                        >
+                                            Remove
+                                        </button>
+                                    </div>
+                                    {activeProduct.name !== 'Experiments' &&
+                                        (activeProduct.freeAllocationText ||
+                                            activeProduct.freeLimit ||
+                                            activeProduct.slider?.min) && (
+                                            <p className="m-0 mt-1 text-sm text-secondary">
+                                                {activeProduct.freeAllocationText || (
+                                                    <>
+                                                        The first{' '}
+                                                        {formatCompact(
+                                                            activeProduct.freeLimit || activeProduct.slider?.min
+                                                        )}{' '}
+                                                        {pluralizeUnit(
+                                                            activeProduct.billingData?.unit || activeProduct.unit,
+                                                            activeProduct.freeLimit || activeProduct.slider?.min
+                                                        )}{' '}
+                                                        are <strong className="font-black">free</strong>, every month.
+                                                    </>
+                                                )}
+                                            </p>
+                                        )}
+                                </div>
                             </div>
 
                             <TabContent
@@ -799,7 +813,7 @@ export default function Tabbed() {
                                 analyticsData={analyticsData}
                                 setAnalyticsData={setAnalyticsData}
                             />
-                        </>
+                        </div>
                     )}
 
                     <div
@@ -813,8 +827,17 @@ export default function Tabbed() {
                             </div>
 
                             <div className="flex items-center gap-4">
-                                <p className="m-0 font-bold text-3xl leading-none">${totalPrice.toLocaleString()}</p>
-                                <CTA size="sm" intent="calculator-total" />
+                                <p className="m-0 font-bold text-3xl leading-none">
+                                    {totalPrice === 0 ? (
+                                        <strong className="font-black text-green">Free</strong>
+                                    ) : (
+                                        <>
+                                            ${totalPrice.toLocaleString()}
+                                            <span className="text-base font-normal text-secondary/60">/mo</span>
+                                        </>
+                                    )}
+                                </p>
+                                <CTA size="sm" intent="calculator-total" ctaText="Get started" />
                             </div>
                         </div>
                     </div>

@@ -2,7 +2,7 @@ import React, { useEffect, useMemo, useState } from 'react'
 import { IconInfo, IconX } from '@posthog/icons'
 import { calculatePrice } from '../../PricingSlider/pricingSliderLogic'
 import { PricingTiers } from '../../Plans'
-import { afterFirstFree, formatCompact, pluralizeUnit, unitWhenNotInLabel } from '../../utils'
+import { afterFirstFree, pluralizeUnit, unitWhenNotInLabel } from '../../utils'
 import UsageSliderRow, { UsageSliderHeader } from '../UsageSliderRow'
 import Tooltip from 'components/Tooltip'
 
@@ -211,22 +211,12 @@ export default function StandaloneAddonsTab({ activeProduct, setVolume, setProdu
                 })}
             </div>
             <div className="pr-1.5 pt-3 border-t border-primary">
-                <span className="text-sm text-secondary">
-                    {activeProduct.freeAllocationText ? (
-                        <>{activeProduct.freeAllocationText} </>
-                    ) : (
-                        <>
-                            The first {formatCompact(mainFree)}{' '}
-                            {pluralizeUnit(activeProduct.billingData.unit, mainFree)} are free, every month.{' '}
-                        </>
-                    )}
-                    <button
-                        onClick={() => setShowBreakdown(!showBreakdown)}
-                        className="text-red dark:text-yellow font-semibold underline"
-                    >
-                        {showBreakdown ? 'Hide how we calculate this' : 'See how we calculate this'}
-                    </button>
-                </span>
+                <button
+                    onClick={() => setShowBreakdown(!showBreakdown)}
+                    className="text-sm text-red dark:text-yellow font-semibold underline"
+                >
+                    {showBreakdown ? 'Hide breakdown' : 'Show breakdown'}
+                </button>
             </div>
 
             {showBreakdown && (

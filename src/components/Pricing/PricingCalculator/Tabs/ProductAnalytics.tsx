@@ -239,15 +239,12 @@ export default function ProductAnalyticsTab({
                 />
             </div>
             <div className="pr-1.5 pt-3 border-t border-primary">
-                <span className="text-sm text-secondary">
-                    The first 1M events are free, every month.{' '}
-                    <button
-                        onClick={() => setShowBreakdown(!showBreakdown)}
-                        className="text-red dark:text-yellow font-semibold underline"
-                    >
-                        {showBreakdown ? 'Hide how we calculate this' : 'See how we calculate this'}
-                    </button>
-                </span>
+                <button
+                    onClick={() => setShowBreakdown(!showBreakdown)}
+                    className="text-sm text-red dark:text-yellow font-semibold underline"
+                >
+                    {showBreakdown ? 'Hide breakdown' : 'Show breakdown'}
+                </button>
             </div>
             {showBreakdown && (
                 <div className="p-4 mt-4 rounded border border-primary bg-white dark:bg-accent-dark relative">
