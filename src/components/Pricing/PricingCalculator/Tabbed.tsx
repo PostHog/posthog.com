@@ -827,7 +827,7 @@ export default function Tabbed() {
                             </div>
 
                             <div className="flex items-center gap-4">
-                                <p className="m-0 font-bold text-3xl leading-none">
+                                <p className="m-0 font-bold text-2xl leading-none">
                                     {totalPrice === 0 ? (
                                         <strong className="font-black text-green">Free</strong>
                                     ) : (
