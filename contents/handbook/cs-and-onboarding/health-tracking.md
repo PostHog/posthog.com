@@ -8,7 +8,7 @@ We use Vitally as a customer success platform.  You can log in via Google SSO to
 
 ## Health scoring
 
-This section covers the computed score. For the rating you set by hand on your own accounts, see [CSM sentiment](/handbook/cs-and-onboarding/health-tracking#csm-sentiment).
+This section covers the computed score. For the rating you set by hand on your own accounts, see [CSM sentiment](/handbook/cs-and-onboarding/health-tracking#csm-relationship).
 
 ### Overview
 
@@ -177,9 +177,9 @@ Applied if the Forecasted MRR Change is more than 10%, indicating an increase in
 
 Applied if the Owner role has been added to a user in the last 14 days. This is a good opportunity to reach out to a potential champion if you've not met them before. 
 
-## CSM sentiment
+## CSM relationship
 
-The health score above is computed for you. CSM sentiment is a rating you set by hand on your own accounts, in <PrivateLink url="https://us.posthog.com/project/2/accounts">Customer analytics</PrivateLink>.
+The health score above is computed for you. CSM relationship is a rating you set by hand on your own accounts, in <PrivateLink url="https://us.posthog.com/project/2/accounts">Customer analytics</PrivateLink>.
 
 It records the relationship *you personally* have with the account. It does not measure how the account is doing from a usage/spend/metrics standpoint. A large, healthy, fully self-serve account can sit at the bottom of the scale, and that is a correct reading in a product-led book, "assigned to you" and "known to you" are different things. 
 
@@ -191,7 +191,7 @@ It records the relationship *you personally* have with the account. It does not 
 | 4 - Working relationship | You have regular two-way contact with a named person who replies to you and takes meetings. |
 | 5 - Trusted advisor | You are multi-threaded in the account. They bring you problems early and include you in their plans. |
 
-To set the rating, add the **CSM sentiment** column to your account view, then click the cell.
+To set the rating, add the **CSM relationship** column to your account view, then click the cell.
 
 ### How to use it
 
