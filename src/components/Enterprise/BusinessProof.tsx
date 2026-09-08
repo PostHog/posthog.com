@@ -38,23 +38,23 @@ const PILLARS: Pillar[] = [
             },
             {
                 title: 'HIPAA-ready with a BAA',
-                detail: 'A standard BAA on Boost, Scale, and Enterprise, generated in the app. Custom BAAs on Enterprise.',
+                detail: 'Standard BAAs on Boost, Scale, and Enterprise; custom BAAs on Enterprise. Our guidance covers setup requirements and features excluded from the BAA.',
                 href: '/docs/privacy/hipaa-compliance',
             },
             {
-                title: 'Consent-first capture',
-                detail: 'Start every visitor opted out, then opt them in from your consent manager. Nothing is sent until then.',
-                href: '/docs/privacy/data-collection',
+                title: 'Your data stays yours',
+                detail: 'You own the customer data you send to PostHog. We process it on your behalf, separately from analytics about your use of PostHog.',
+                href: '/handbook/company/security#overview',
             },
             {
-                title: 'IP capture controls',
-                detail: 'Turn off IP storage per project or across the whole organization.',
-                href: '/docs/privacy/data-collection',
+                title: 'Data deletion controls',
+                detail: 'Respond to deletion requests by removing people, their events, and their recordings through the UI or API.',
+                href: '/docs/privacy/data-storage#data-deletion',
             },
             {
-                title: 'Data deletion',
-                detail: 'Delete a person, their events, and their recordings on request, from the UI or the API.',
-                href: '/docs/privacy/data-storage',
+                title: 'Documents for vendor review',
+                detail: 'Review our SOC 2 report, penetration test report, subprocessors, and security policies in the Trust Center.',
+                href: 'https://trust.posthog.com',
             },
         ],
     },
@@ -129,43 +129,6 @@ const PILLARS: Pillar[] = [
                 title: 'Case study: AssemblyAI',
                 detail: 'Moved millions of events a day to PostHog and stopped throttling ingestion.',
                 href: '/customers/assemblyai',
-            },
-        ],
-    },
-    {
-        key: 'trust',
-        title: 'Trust',
-        lead: 'We work in public, on purpose. You can read how the product is built, how the company runs, and how it is doing.',
-        points: [
-            {
-                title: 'Open source',
-                detail: 'The core is MIT-licensed and on GitHub. Read the code your data runs through, or have an agent do it for you.',
-                href: 'https://github.com/posthog/posthog',
-            },
-            {
-                title: 'Transparent by default',
-                detail: "Our handbook, roadmap, pricing, and how we pay people are all public. We're proud of what we do and we want you to be too.",
-                href: '/handbook/values#make-it-public',
-            },
-            {
-                title: 'Pricing you can compute',
-                detail: 'Every product is priced on the website by usage with publicly available rates. Enterprise adds controls and support without changes to usage-based pricing.',
-                href: '/pricing',
-            },
-            {
-                title: 'Your data stays yours',
-                detail: 'You own the data you send to PostHog. We process it on your behalf and never sell it to third parties.',
-                href: '/handbook/company/security#overview',
-            },
-            {
-                title: 'Public incident reviews',
-                detail: 'We publish detailed reviews of significant incidents, including root causes, customer impact, and concrete fixes.',
-                href: '/handbook/company/post-mortems',
-            },
-            {
-                title: 'Proven in production',
-                detail: "ResearchGate replaced its in-house experimentation tools with PostHog after evaluating multiple providers. Read the engineering team's experience.",
-                href: '/customers/researchgate',
             },
         ],
     },
@@ -247,32 +210,33 @@ export function BusinessProof(): JSX.Element {
     return (
         <section className="relative flex flex-1 flex-col py-10 @3xl:py-[calc(2.5rem+10%)]">
             <h2 className="relative z-30 m-0 mb-6 flex flex-wrap items-center gap-x-3 text-2xl font-bold tracking-tight @3xl:pr-[28%]">
-                Not convinced? Check out these five corporate buzzwords.
+                Not convinced? Check out these four corporate buzzwords.
             </h2>
             <Tabs.Root
                 value={active}
                 onValueChange={setActive}
-                orientation="vertical"
+                orientation="horizontal"
                 activationMode="manual"
-                className="relative grid flex-1 grid-cols-[2.75rem_minmax(0,1fr)] @xl:grid-cols-[3.5rem_minmax(0,1fr)]"
+                className="relative flex min-w-0 flex-1 flex-col"
             >
-                <Tabs.List aria-label="Why enterprises choose PostHog" className="flex flex-col self-stretch py-3">
-                    {PILLARS.map((pillar, i) => (
-                        <Tabs.Trigger
-                            key={pillar.key}
-                            value={pillar.key}
-                            aria-label={`${i + 1}. ${pillar.title}`}
-                            className={`relative min-h-16 flex-1 rounded-l-xl text-lg font-semibold outline-none focus-visible:z-30 focus-visible:ring-2 focus-visible:ring-red dark:focus-visible:ring-yellow ${
-                                active === pillar.key
-                                    ? 'z-10 bg-primary text-primary'
-                                    : 'bg-accent text-secondary shadow-inner hover:text-primary'
-                            }`}
-                        >
-                            {i + 1}.
-                        </Tabs.Trigger>
-                    ))}
-                </Tabs.List>
-                <div className="grid min-w-0 rounded-xl bg-primary shadow-xl @3xl:pr-[30%]">
+                <div className="min-w-0 @3xl:pr-[30%]">
+                    <Tabs.List aria-label="Why enterprises choose PostHog" className="flex overflow-x-auto pt-1">
+                        {PILLARS.map((pillar) => (
+                            <Tabs.Trigger
+                                key={pillar.key}
+                                value={pillar.key}
+                                className={`relative -mr-px shrink-0 whitespace-nowrap rounded-t-sm border border-b-0 px-4 py-2 last:mr-0 text-sm font-semibold outline-none focus-visible:z-30 focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-red dark:focus-visible:ring-yellow ${
+                                    active === pillar.key
+                                        ? 'z-10 border-primary bg-primary text-primary'
+                                        : 'border-primary bg-accent text-secondary hover:text-primary'
+                                }`}
+                            >
+                                {pillar.title}
+                            </Tabs.Trigger>
+                        ))}
+                    </Tabs.List>
+                </div>
+                <div className="grid min-w-0 flex-1 rounded-b-xl rounded-tr-xl bg-primary shadow-xl @3xl:pr-[30%]">
                     {PILLARS.map((pillar) => (
                         <Tabs.Content
                             key={pillar.key}
@@ -284,7 +248,7 @@ export function BusinessProof(): JSX.Element {
                         >
                             <div className="grid items-start gap-3 border-b border-primary pb-5 @4xl:grid-cols-[auto_minmax(0,1fr)] @4xl:gap-6">
                                 <h3 className="m-0 text-2xl font-bold tracking-tight @4xl:text-3xl">
-                                    <span className="rounded bg-blue/10 px-1 text-blue dark:text-yellow dark:bg-yellow/10">
+                                    <span className="rounded bg-blue/10 px-1 text-blue dark:bg-green/10 dark:text-green">
                                         {pillar.title}
                                     </span>
                                 </h3>

@@ -4,6 +4,7 @@ import SEO from 'components/seo'
 import Editor from 'components/Editor'
 import { SignupCTA } from 'components/SignupCTA'
 import OSButton from 'components/OSButton'
+import Link from 'components/Link'
 import { Accordion } from 'components/RadixUI/Accordion'
 import { RoughAnnotation } from 'components/Code/RoughAnnotation'
 import { BusinessProof, WorkWithUs, BuyerResources } from 'components/Enterprise/BusinessProof'
@@ -26,6 +27,30 @@ const FAQ_ITEMS = [
             <p>
                 Ask us for the current SOC 2 report and our security documentation. Talk to a human and we will send it
                 over.
+            </p>
+        ),
+    },
+    {
+        trigger: 'Is PostHog FedRAMP authorized?',
+        content: (
+            <p>
+                PostHog Cloud does not currently have a listing in the{' '}
+                <Link
+                    to="https://www.fedramp.gov/marketplace/products/"
+                    externalNoIcon
+                    className="underline text-red dark:text-yellow"
+                >
+                    FedRAMP Marketplace
+                </Link>
+                . If FedRAMP authorization is a requirement for your organization,{' '}
+                <Link to="/talk-to-a-human" state={{ newWindow: true }} className="underline text-red dark:text-yellow">
+                    talk to our team
+                </Link>{' '}
+                before proceeding. Our{' '}
+                <Link to="https://trust.posthog.com" externalNoIcon className="underline text-red dark:text-yellow">
+                    Trust Center
+                </Link>{' '}
+                lists our current compliance documents.
             </p>
         ),
     },
