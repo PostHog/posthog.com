@@ -13,3 +13,36 @@ See the docs runbook for more info: https://posthog.com/handbook/wizard-and-docs
 import { SRFlutterInstallationWrapper } from './_snippets/sr-installation-wrapper.tsx'
 
 <SRFlutterInstallationWrapper />
+
+## Configure Android native-screen screenshots
+
+Use these experimental `sessionReplayConfig` options to control Android native-screen screenshot resolution, compression, and bitmap memory use independently. They apply only to [native screens captured with `captureNativeScreens`](/docs/session-replay/privacy?tab=Flutter#capturing-native-screens). They don't affect normal Flutter widget screenshots, iOS recordings, or Flutter web.
+
+| Option | Android default | Description |
+| --- | --- | --- |
+| `screenshotScale` | `1.0` | Multiplies the physical width and height of native-screen screenshots. Values are clamped to `0.1`–`1.0`. A scale of `0.5` captures half the width and height, or one quarter of the pixels. |
+| `screenshotCompressionQuality` | `30` | WebP compression quality, as an integer clamped to `0`–`100`. Higher values generally retain more detail and produce larger payloads. This doesn't change screenshot resolution. |
+| `screenshotColorMode` | `ARGB_8888` | Android bitmap pixel format. `ARGB_8888` uses four bytes per pixel and preserves transparency and color precision before compression. `RGB_565` uses two bytes per pixel, with reduced color precision and no transparency. |
+
+For example, configure half-size Android native-screen screenshots before calling `Posthog().setup(config)`. This example retains the default color mode and masking settings:
+
+```dart
+final config = PostHogConfig("<ph_project_token>");
+config.host = "<ph_client_api_host>";
+config.sessionReplay = true;
+config.sessionReplayConfig.captureNativeScreens = true;
+config.sessionReplayConfig.screenshotScale = 0.5;
+config.sessionReplayConfig.screenshotCompressionQuality = 30;
+
+await Posthog().setup(config);
+```
+
+Session replay must also be enabled in your project settings. `captureNativeScreens` is a separate opt-in that records supported native screens covering your Flutter app. Review its [capture limitations and masking behavior](/docs/session-replay/privacy?tab=Flutter#capturing-native-screens) before enabling it.
+
+Keep these trade-offs in mind:
+
+- **Resolution** - Lower scales reduce image detail. The Android SDK rounds each scaled dimension up to at least one pixel. Replay viewport dimensions and mask positions remain aligned with the original screen.
+- **Color and transparency** - With `RGB_565`, transparent window regions appear black. If a device rejects this format, the Android SDK uses `ARGB_8888` for later captures.
+- **Compression** - WebP compression is lossy, including at quality `100`, except on Android 10 (API 29), where quality `100` uses lossless compression.
+
+Screenshot resolution, compression quality, and color mode don't change the capture interval. Check text readability and [privacy masking](/docs/session-replay/privacy?tab=Flutter) in your app before deploying these settings.
