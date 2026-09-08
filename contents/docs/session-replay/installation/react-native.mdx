@@ -16,13 +16,17 @@ import { SRReactNativeInstallationWrapper } from './_snippets/sr-installation-wr
 
 ## Configure Android screenshot capture
 
+Lowering screenshot resolution and using the smaller `RGB_565` pixel format reduce capture time and memory use on Android. This helps keep your app responsive while recording.
+
+For the best balance of performance and image quality, we recommend a scale of `0.5`, the `RGB_565` color mode, and compression quality `30`.
+
 Use these experimental `sessionReplayConfig` options to control Android screenshot resolution, compression, and bitmap memory use independently. They require `@posthog/react-native-plugin` and don't affect iOS recordings. Session Replay must still be enabled with `enableSessionReplay: true` and in your project settings.
 
-| Option | Android default | Description |
-| --- | --- | --- |
-| `screenshotScale` | `1.0` | Multiplies the physical width and height of screenshots. Values are clamped to `0.1`–`1.0`. A scale of `0.5` captures half the width and height, or one quarter of the pixels. |
-| `screenshotCompressionQuality` | `30` | WebP compression quality, as an integer clamped to `0`–`100`. Higher values generally retain more detail and produce larger payloads. This doesn't change screenshot resolution. |
-| `screenshotColorMode` | `ARGB_8888` | Android bitmap pixel format. `ARGB_8888` uses four bytes per pixel and preserves transparency and color precision before compression. `RGB_565` uses two bytes per pixel, with reduced color precision and no transparency. |
+- `screenshotScale` (Android default: `1.0`) – Multiplies the physical width and height of screenshots. Values are clamped to `0.1`–`1.0`. A scale of `0.5` captures half the width and height, or one quarter of the pixels.
+
+- `screenshotCompressionQuality` (Android default: `30`) – WebP compression quality, as an integer clamped to `0`–`100`. Higher values generally retain more detail and produce larger payloads. This doesn't change screenshot resolution.
+
+- `screenshotColorMode` (Android default: `ARGB_8888`) – Android bitmap pixel format. `ARGB_8888` uses four bytes per pixel and preserves transparency and color precision before compression. `RGB_565` uses two bytes per pixel, with reduced color precision and no transparency.
 
 For example, capture Android screenshots at half the width and height while retaining the default color mode:
 
