@@ -294,15 +294,6 @@ function Desktop() {
                         ),
                         shortcut: [','],
                     },
-                    {
-                        type: 'item',
-                        children: (
-                            <Link to="/kbd" state={{ newWindow: true }}>
-                                Keyboard shortcuts
-                            </Link>
-                        ),
-                        shortcut: ['.'],
-                    },
                 ]}
             >
                 <div

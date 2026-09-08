@@ -1063,41 +1063,6 @@ const appSettings: AppSettings = {
             center: true,
         },
     },
-    '/credits': {
-        closeOnEscape: true,
-        size: {
-            min: {
-                width: 300,
-                height: 700,
-            },
-            max: {
-                width: 300,
-                height: 700,
-            },
-            fixed: true,
-        },
-        position: {
-            center: true,
-        },
-    },
-    '/kbd': {
-        closeOnEscape: true,
-        size: {
-            min: {
-                width: 600,
-                height: 625,
-            },
-            max: {
-                width: 600,
-                height: 625,
-            },
-            fixed: true,
-            autoHeight: true,
-        },
-        position: {
-            center: true,
-        },
-    },
     'research-talk': {
         size: {
             min: {
@@ -2584,11 +2549,6 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
                 e.preventDefault()
                 // Open display options
                 navigate('/display-options', { state: { newWindow: true } })
-            }
-            if (e.key === '.' && !e.shiftKey && !e.ctrlKey && !e.metaKey && !e.altKey) {
-                e.preventDefault()
-                // Open keyboard shortcuts pane
-                navigate('/kbd', { state: { newWindow: true } })
             }
 
             // Theme toggle with m key

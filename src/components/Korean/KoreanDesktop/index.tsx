@@ -379,15 +379,6 @@ export default function Desktop(): JSX.Element {
                     {
                         type: 'item',
                         children: (
-                            <Link to="/kbd" state={{ newWindow: true }}>
-                                {translateKo('Keyboard shortcuts')}
-                            </Link>
-                        ),
-                        shortcut: ['.'],
-                    },
-                    {
-                        type: 'item',
-                        children: (
                             <button
                                 onClick={() => {
                                     localStorage.removeItem(STORAGE_KEY)

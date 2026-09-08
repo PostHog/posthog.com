@@ -352,15 +352,15 @@ const buildProductsMenuItems = (allProducts: any[]) => {
         },
         {
             type: 'item',
-            label: 'Context Warehouse',
-            link: '/context-warehouse',
-            icon: <Icons.IconDatabase className="size-4 text-blue" />,
-        },
-        {
-            type: 'item',
             label: 'PostHog Slack',
             link: '/slack',
             icon: <Icons.IconAtSign className="size-4 text-sky-blue" />,
+        },
+        {
+            type: 'item',
+            label: 'Context Warehouse',
+            link: '/context-warehouse',
+            icon: <Icons.IconDatabase className="size-4 text-blue" />,
         },
         {
             type: 'separator',
@@ -737,13 +737,6 @@ export function useMenuData(showNavbarTools = false): MenuType[] {
                     },
                     icon: <Icons.IconBrightness className="size-4 text-yellow" />,
                     mobileDestination: false, // Already exposed as a system item in the mobile logo menu
-                },
-                {
-                    type: 'item',
-                    label: 'Keyboard shortcuts',
-                    link: '/kbd',
-                    icon: <Icons.IconKeyboard className="size-4 text-primary" />,
-                    shortcut: ['.'],
                 },
                 {
                     type: 'item',
