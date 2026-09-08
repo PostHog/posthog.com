@@ -33,7 +33,7 @@ That’s the vision we have for PostHog – an all-in-one platform where you can
 
 No more tool juggling, compatibility wrestling, unclear pricing, or botched integrations – just a single, open-source platform that does it all.
 
-Surveys aren’t [our defining feature](/handbook/company/values#we-havent-built-our-defining-feature-yet), but they’re an essential part of this vision. They add valuable real user feedback to the powerful, qualitative data you can already analyze using PostHog
+Surveys aren’t [our defining feature](/handbook/values#optimistic-by-default), but they’re an essential part of this vision. They add valuable real user feedback to the powerful, qualitative data you can already analyze using PostHog
 
 ## What's new in PostHog surveys?
 

@@ -11,6 +11,87 @@ const markdownLinkExtractor = require('markdown-link-extractor')
 
 const isMinimalBuild = process.env.GATSBY_MINIMAL === 'true'
 
+// GraphQL selection shared by the full and minimal builds so the fields
+// createSdkReferencePages() reads stay in sync across both query sites. Interpolated into the
+// runtime graphql() template literals below (not a statically extracted page query).
+const SDK_REFERENCE_QUERY_FIELDS = `
+    allSdkReferences {
+        nodes {
+            info {
+                description
+                id
+                specUrl
+                slugPrefix
+                title
+                version
+            }
+            referenceId
+            hogRef
+            id
+            categories
+            classes {
+                description
+                functions {
+                    category
+                    description
+                    details
+                    examples {
+                        code
+                        name
+                        id
+                    }
+                    id
+                    params {
+                        description
+                        isOptional
+                        name
+                        type
+                    }
+                    path
+                    releaseTag
+                    showDocs
+                    returnType {
+                        id
+                        name
+                    }
+                    title
+                }
+                id
+                title
+            }
+            version
+        }
+    }
+    allSdkTypes: allSdkReferences {
+        nodes {
+            id
+            version
+            referenceId
+            info {
+                description
+                id
+                slugPrefix
+                specUrl
+                title
+                version
+            }
+            hogRef
+            categories
+            types {
+                example
+                id
+                name
+                path
+                properties {
+                    description
+                    name
+                    type
+                }
+            }
+        }
+    }
+`
+
 export const createPages: GatsbyNode['createPages'] = async ({ actions: { createPage }, graphql }) => {
     if (isMinimalBuild) {
         return createMinimalPages({ createPage, graphql })
@@ -42,8 +123,6 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
 
     const DataPipeline = path.resolve(`src/templates/DataPipeline.tsx`)
     const DataWarehouseSource = path.resolve(`src/templates/DataWarehouseSource.tsx`)
-    const SdkReferenceTemplate = path.resolve(`src/templates/sdk/SdkReference.tsx`)
-    const SdkTypeTemplate = path.resolve(`src/templates/sdk/SdkType.tsx`)
 
     const result = (await graphql(`
         {
@@ -219,6 +298,28 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
                 }
             ) {
                 totalCount
+                nodes {
+                    id
+                    headings {
+                        depth
+                        value
+                    }
+                    fields {
+                        slug
+                    }
+                    frontmatter {
+                        category
+                        tags
+                    }
+                }
+            }
+            comparePosts: allMdx(
+                filter: {
+                    isFuture: { eq: false }
+                    frontmatter: { date: { ne: null } }
+                    fields: { slug: { regex: "/^/compare/" } }
+                }
+            ) {
                 nodes {
                     id
                     headings {
@@ -432,81 +533,7 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
                     }
                 }
             }
-            allSdkReferences {
-                nodes {
-                    info {
-                        description
-                        id
-                        specUrl
-                        slugPrefix
-                        title
-                        version
-                    }
-                    referenceId
-                    hogRef
-                    id
-                    categories
-                    classes {
-                        description
-                        functions {
-                            category
-                            description
-                            details
-                            examples {
-                                code
-                                name
-                                id
-                            }
-                            id
-                            params {
-                                description
-                                isOptional
-                                name
-                                type
-                            }
-                            path
-                            releaseTag
-                            showDocs
-                            returnType {
-                                id
-                                name
-                            }
-                            title
-                        }
-                        id
-                        title
-                    }
-                    version
-                }
-            }
-            allSdkTypes: allSdkReferences {
-                nodes {
-                    id
-                    version
-                    referenceId
-                    info {
-                        description
-                        id
-                        slugPrefix
-                        specUrl
-                        title
-                        version
-                    }
-                    hogRef
-                    categories
-                    types {
-                        example
-                        id
-                        name
-                        path
-                        properties {
-                            description
-                            name
-                            type
-                        }
-                    }
-                }
-            }
+            ${SDK_REFERENCE_QUERY_FIELDS}
         }
     `)) as GatsbyContentResponse
 
@@ -767,7 +794,12 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
         ({ attributes: { folder: categoryFolder, label: categoryLabel, post_tags } }) => {
             const isHub = categoryFolder === 'founders' || categoryFolder === 'product-engineers'
             // Folders with hand-written index pages in src/pages/ are excluded here
-            if (!isHub && categoryFolder !== 'newsletter' && categoryFolder !== 'blog') {
+            if (
+                !isHub &&
+                categoryFolder !== 'newsletter' &&
+                categoryFolder !== 'blog' &&
+                categoryFolder !== 'compare'
+            ) {
                 createPage({
                     path: `/${categoryFolder}`,
                     component: PostListingTemplate,
@@ -836,6 +868,22 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
     })
 
     result.data.blogPosts.nodes.forEach((node) => {
+        const { slug } = node.fields
+        const tableOfContents = node.headings && formatToc(node.headings)
+        createPage({
+            path: replacePath(slug),
+            component: BlogPostTemplate,
+            context: {
+                id: node.id,
+                tableOfContents,
+                slug,
+                post: true,
+                article: true,
+            },
+        })
+    })
+
+    result.data.comparePosts.nodes.forEach((node) => {
         const { slug } = node.fields
         const tableOfContents = node.headings && formatToc(node.headings)
         createPage({
@@ -1099,35 +1147,63 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
         })
     })
 
+    // Build every SDK reference page (latest + versioned) from the sourced nodes.
+    createSdkReferencePages({
+        createPage,
+        referenceNodes: result.data.allSdkReferences.nodes,
+        typeNodes: result.data.allSdkTypes.nodes,
+    })
+}
+
+// Create SDK reference pages and their type sub-pages from already-sourced `SdkReferences`
+// nodes. Shared by the full build and the minimal (preview) build. `latestOnly` restricts
+// output to the `latest` rows, keeping the minimal preview deploy small (Cloudflare Pages caps
+// deployments at 20k files) while still rendering /docs/references/* for review.
+function createSdkReferencePages({
+    createPage,
+    referenceNodes,
+    typeNodes,
+    latestOnly = false,
+}: {
+    createPage: Parameters<GatsbyNode['createPages']>[0]['actions']['createPage']
+    referenceNodes: any[]
+    typeNodes: any[]
+    latestOnly?: boolean
+}) {
+    const SdkReferenceTemplate = path.resolve(`src/templates/sdk/SdkReference.tsx`)
+    const SdkTypeTemplate = path.resolve(`src/templates/sdk/SdkType.tsx`)
+
     // The `latest` row is served unversioned; every other row keeps its `<sdk>-<version>` id.
     const slugPrefixFor = (node: { version: string; referenceId: string; id: string }) =>
         isLatestVersion(node.version) ? node.referenceId : node.id
 
     // Each row crosslinks against its own types, so a versioned page describes that version.
-    const typesByRow = result.data.allSdkTypes.nodes.reduce(
-        (acc, node) => {
-            acc[node.id] = (node.types ?? [])
-                .filter(typeHasPage)
-                .map(({ name }) => name)
-                // A type with no usable name can't be linked to, so keep it out of the allowlist.
-                .filter((name) => name && name !== 'null')
-            return acc
-        },
-        {} as Record<string, string[]>
-    )
+    const typesByRow = typeNodes.reduce((acc, node) => {
+        acc[node.id] = (node.types ?? [])
+            .filter(typeHasPage)
+            .map(({ name }: { name: string }) => name)
+            // A type with no usable name can't be linked to, so keep it out of the allowlist.
+            .filter((name: string) => name && name !== 'null')
+        return acc
+    }, {} as Record<string, string[]>)
 
-    result.data.allSdkReferences.nodes.forEach((node) => {
+    // Latest-only builds leave the version picker pointing at pages that don't exist — see the
+    // note above `sdkVersions` in src/templates/sdk/SdkReference.tsx.
+    referenceNodes.forEach((node) => {
+        if (latestOnly && !isLatestVersion(node.version)) {
+            return
+        }
         const slugPrefix = slugPrefixFor(node)
-        const path = `/docs/references/${slugPrefix}`
+        const pagePath = `/docs/references/${slugPrefix}`
 
         createPage({
-            path,
+            path: pagePath,
             component: SdkReferenceTemplate,
             context: {
                 name: node.info.title,
                 description: node.info.description,
                 fullReference: node,
-                regex: path,
+                regex: pagePath,
                 // Must match the type page paths created below.
                 slugPrefix,
                 // Null checks, only affects type crosslinking, won't break build
@@ -1136,10 +1212,13 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
         })
     })
 
-    result.data.allSdkTypes.nodes.forEach((node) => {
+    typeNodes.forEach((node) => {
+        if (latestOnly && !isLatestVersion(node.version)) {
+            return
+        }
         const slugPrefix = slugPrefixFor(node)
 
-        node.types?.forEach((type) => {
+        node.types?.forEach((type: any) => {
             if (typeHasPage(type)) {
                 createPage({
                     path: `/docs/references/${slugPrefix}/types/${type.id}`,
@@ -1217,7 +1296,7 @@ async function createMinimalPages({
                     frontmatter: { date: { ne: null } }
                     fields: {
                         slug: {
-                            regex: "/^/(blog|library|founders|product-engineers|features|newsletter|spotlight|customers|tutorials)/"
+                            regex: "/^/(blog|compare|library|founders|product-engineers|features|newsletter|spotlight|customers|tutorials)/"
                         }
                     }
                 }
@@ -1247,6 +1326,7 @@ async function createMinimalPages({
                     }
                 }
             }
+            ${SDK_REFERENCE_QUERY_FIELDS}
             pocketGuides: allMdx(filter: { fields: { slug: { regex: "/^/pocket-guides//" } } }) {
                 nodes {
                     id
@@ -1339,6 +1419,8 @@ async function createMinimalPages({
         productEngineerHandbook: { nodes: any[] }
         posts: { nodes: any[] }
         localizedNewsletter: { nodes: any[] }
+        allSdkReferences: { nodes: any[] }
+        allSdkTypes: { nodes: any[] }
         pocketGuides: { nodes: any[] }
     }
 
@@ -1380,5 +1462,14 @@ async function createMinimalPages({
                 localizedRoot: 'newsletter',
             },
         })
+    })
+
+    // Render SDK reference pages (latest only) so /docs/references/* is reviewable in previews
+    // without the full site's file count exceeding Cloudflare Pages' 20k-file deploy limit.
+    createSdkReferencePages({
+        createPage,
+        referenceNodes: data.allSdkReferences.nodes,
+        typeNodes: data.allSdkTypes.nodes,
+        latestOnly: true,
     })
 }

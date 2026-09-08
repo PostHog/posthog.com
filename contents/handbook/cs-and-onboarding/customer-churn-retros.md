@@ -1,5 +1,5 @@
 ---
-title: Learn from churn
+title: Learn from churn and contraction
 sidebar: Handbook
 showTitle: true
 ---
@@ -62,6 +62,27 @@ What do we need to change in how we work?
 - Tools or data we needed but didn't have
 - Handoff failures (sales → CS, onboarding → CS, etc.)
 - Communication cadence issues
+
+## Contraction retros
+when an account in an AM's book contracts or fails to grow and the AM wants it removed from the book, we should retro the account like a churn. We should run these any time an account is removed from a book, a cross-sell is lost, or we see usage contraction about 10% (either overall or for a specific product). Use
+
+### Basic info
+- **Customer name:**
+- **Current ARR:** $X,XXX
+- **Tenure:** X months/years\
+- **Time in book:**
+- **Number of products adopted:**
+
+**Primary reason for contraction / lack of growth:** This is the meat of the retro and what we care about qualitatively to help us refine book composition.
+
+| #   | Primary reason                                         | Diagnostic questions (the qualitative meat)                                                                                                                                                     | Headroom heuristic — what to check                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
+| --- | ------------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| 1   | **Grew to saturation point**                           | Are there current or future products that make sense? Have we _really_ saturated them? What would trigger bringing them back into a book?                                                       | Test all four headroom sources before accepting saturation: use case gaps, workloads (apps/products/BUs instrumented vs. total), free-tier usage below paid threshold, commercial levers (credit conversion, annual, package fit). Saturation is only real if _most_ of these hold: all applicable use cases at meaningful spend; single fully-instrumented workload; customer states no expansion roadmap; flat/declining usage 2+ quarters; failed expansion convos with no actionable reason; price sensitivity dominating. |
+| 2   | **Mis-qualified — we thought it was a growth account** | Why did we think it was a growth account? What was the _specific_ opportunity we were targeting? What do we know now that clarifies growth status? What could/should we have known at add time? | The opportunity must have attached to a person. A generic product observation ("they don't use session replay") was never an opportunity. Also check whether the original size estimate was bottom-up (usage × published pricing, customer-provided budgets/team sizes, comparable accounts) or a guess.                                                                                                                                                                                                                       |
+| 3   | **Customer-side change post-add**                      | Acquired? Business folded? Champion left? Priorities shifted? Market dried up?                                                                                                                  | Headroom may still exist but is unworkable today. Identify the event that would re-open it (new champion, funding, post-integration replatform, budget cycle).                                                                                                                                                                                                                                                                                                                                                                 |
+| 4   | **Product gap / fit issue**                            | Rocky beta enrollment? Tried a product and hit issues? Did we sunset something they need/use? Did their product needs change? Did they pick a competitor?                                       | Re-run use case gaps against their _current_ business model, not the one at add time. Distinguish "gap we can close" (roadmap/beta maturity → Nurture) from "gap we won't close" (competitor won, product sunset → Release). Feed to product as a fit signal either way.                                                                                                                                                                                                                                                       |
+| 5   | **Regulatory / operational barriers**                  | Legal requirements we couldn't meet? Approval process that killed the growth? Did the decision sit with a different business unit?                                                              | Headroom is real but there is no priority is making it happen. Note whether the blocker is permanent (compliance we won't build for) or procedural (wrong BU, security review) — the latter is a re-entry path via a new workload/BU owner.                                                                                                                                                                                                                                                                                    | 
+
 
 ## Example retro
 

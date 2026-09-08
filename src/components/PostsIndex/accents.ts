@@ -2,7 +2,7 @@
  * Per-page accent palettes. Full literal class strings (not composed) so
  * Tailwind's scanner sees every class; only project color tokens.
  */
-export type Accent = 'red' | 'blue'
+export type Accent = 'red' | 'blue' | 'purple'
 
 export const accents: Record<
     Accent,
@@ -28,5 +28,11 @@ export const accents: Record<
         pillOverflowActive: 'border-blue text-blue',
         clearFilters: 'text-blue dark:text-blue-2',
         annotation: 'text-blue dark:text-blue-2',
+    },
+    purple: {
+        pillActive: 'border-purple bg-purple text-white',
+        pillOverflowActive: 'border-purple text-purple',
+        clearFilters: 'text-purple dark:text-light-purple',
+        annotation: 'text-purple dark:text-light-purple',
     },
 }

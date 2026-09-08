@@ -13,6 +13,7 @@ _Theme: Fix the recurring interruptions that keep pulling us away from the most 
     - Examples:
         - Give PostHog AI enough context to answer common invoice, revenue, subscription, and pricing questions, so more people can self-serve (e.g. skills, semantic layer in DW).
         - Ship a pricing launch/change skill so product teams can self-serve more of the repeated pricing work.
+        - Ship customer-facing billing MCP tools and skills.
 
 2. **Make usage reporting and limiting less painful (lead: <TeamMember name="Marce Coll" />)**
     - Finish usage reports v2, migrate consumers to it, increase reporting frequency toward ~30 minutes, and deprecate v1.
@@ -34,6 +35,7 @@ _Theme: Finish the revenue model, migrate credits to the in-house ledger, and ke
     - Get revenue model data flowing into Campfire.
 
 4. **Migrate credits to an in-house ledger (lead: <TeamMember name="Pawel Cebula" />)**
+    - Handle taxes correctly for promotional and prepurchased credits.
     - Seed credit pools from the new revenue model.
     - Replay 1-2 months of historical ledger activity against production actuals and run the shadow ledger.
     - Fix or explicitly accept discrepancies before migration.
@@ -41,17 +43,17 @@ _Theme: Finish the revenue model, migrate credits to the in-house ledger, and ke
 
 5. **Ship expected pricing launches and changes (lead: <TeamMember name="Pawel Cebula" />)**
     - **AI**
-        - AI Gateway
         - Replay vision
         - PostHog Code v2
         - Slack agent: potential split from PostHog AI
         - Inbox: potential iterations on the outcome-based model
+        - AI Observability
+        - Desktop compute
     - **Data stack**
         - Data warehouse and endpoints: storage and compute
     - **Everything else**
-        - Platform add-ons:
-            - Grow plan
-            - Enterprise plan: size-based pricing
+        - APM stack: tracing, metrics, custom retention (for all, incl. logs)
+        - Enterprise plan: size-based pricing
         - Logs: 30 and 90 day retention
         - Batch exports: higher frequency exports
         - Workflows: reduced email free tier, push, SMS, and unlimited workflows
@@ -61,14 +63,15 @@ _Theme: Finish the revenue model, migrate credits to the in-house ledger, and ke
 
 _Theme: Continue making billing the source of truth, and make it less scary to change. The goals here are clear, but the path will need more discovery along the way._
 
-6. **Make billing the source of truth, starting with the product catalog (lead: <TeamMember name="Roy Cohen" />)**
-    - Build an in-house product and price catalog.
-    - Model multi-usage plans without addon-based workarounds.
-    - Design for things we frequently get asked for, e.g. team/project-level limits.
-    - Figure out how to evolve subscriptions after we bring products and prices in-house.
+6. **Make billing safer to change, and safer to run (lead: <TeamMember name="Roy Cohen" />, Antithesis kickoff: <TeamMember name="Marce Coll" />)**
+    - Improve how billing handles transactions and side effects during partial failures and race conditions, starting with incoming webhooks.
+    - Upgrade RDS and remove blockers before extended support for our current version ends in March 2027.
+    - Make pricing migrations asynchronous and more reliable, so migration days need less billing-team overhead.
+    - Improve monitoring and alerting, especially around Temporal as we build more on top of it.
+    - Work with Marce to integrate Antithesis into the billing development workflow.
+    - Adopt property-based testing and stronger test patterns for new work and existing code we touch.
 
-7. **Make billing safer to change (lead: <TeamMember name="Roy Cohen" />, Antithesis kickoff: <TeamMember name="Marce Coll" />)**
-    - Increase test coverage around high-risk billing flows.
-    - Continue adopting stronger testing patterns, e.g. property-based testing.
-    - Run the Antithesis proof of concept and decide whether/how it should become part of the normal billing development workflow.
-    - Continue migrating async tasks from Celery to Temporal.
+7. **Make billing the source of truth for product and pricing (lead: <TeamMember name="Roy Cohen" />)**
+    - Document the current product, plan and pricing setup.
+    - Collect and define requirements with billing and other teams.
+    - Draft an RFC.

@@ -32,7 +32,7 @@ This gap is what **AI observability** fills. This guide walks through what AI ob
 
 **AI observability** (often used interchangeably with **LLM observability** and **LLM analytics**) is the practice of monitoring the AI features of your application: prompts, responses, costs, latency, errors, and quality of outputs.
 
-It's a category that barely existed two years ago, because the problems it solves didn't exist either. Traditional APM tools like [Datadog](/blog/best-datadog-alternatives) and New Relic were built to monitor software that behaves the same way every time.
+It's a category that barely existed two years ago, because the problems it solves didn't exist either. Traditional APM tools like [Datadog](/compare/best-datadog-alternatives) and New Relic were built to monitor software that behaves the same way every time.
 
 AI features don't.
 
@@ -51,7 +51,7 @@ The short version:
 
 The data model is different too. APM is built around requests, services, and traces across your application stack. AI observability is built around *generations* (individual LLM calls), traces (the chain of generations and tool calls that make up an agent loop), and spans (the steps inside a trace).
 
-[AI observability tools](/blog/cheapest-ai-observability-tools) also do things APM tools structurally can't, like [semantic clustering of model outputs](/blog/llm-analytics-clustering-how-it-works), which groups traces by what the model actually said rather than which endpoint was hit. That's a kind of analysis only possible when your monitoring layer understands the content of the calls, not just their shape.
+[AI observability tools](/compare/cheapest-ai-observability-tools) also do things APM tools structurally can't, like [semantic clustering of model outputs](/blog/llm-analytics-clustering-how-it-works), which groups traces by what the model actually said rather than which endpoint was hit. That's a kind of analysis only possible when your monitoring layer understands the content of the calls, not just their shape.
 
 ### Who needs AI observability?
 
@@ -62,7 +62,7 @@ Anyone shipping AI features to real users. That includes:
 - **Engineering teams** building agents, chatbots, or RAG systems with multi-step workflows. ([We've written about what we learned building agents at PostHog](/blog/8-learnings-from-1-year-of-agents-posthog-ai) if you want the hard-won version.)
 - **Data and ML teams** evaluating model performance at scale
 
-If you have at least one LLM call in production, [you need at least basic AI observability](/blog/cheapest-ai-observability-tools). 
+If you have at least one LLM call in production, [you need at least basic AI observability](/compare/cheapest-ai-observability-tools). 
 
 We've written a more practical guide on [what to set up on day one if you're at the MVP stage](/blog/ai-observability-for-mvps), but the general rule is: tracing, cost tracking, and error capture, before anything else.
 
@@ -102,7 +102,7 @@ LLM calls fail in more interesting ways than regular API calls. Beyond rate limi
 
 Good AI observability tools capture these alongside the traces, so when something fails you can immediately see what the agent was doing when it broke.
 
-If you don't have error tracking set up yet for the rest of your app, our [roundup of the best error tracking tools](/blog/best-error-tracking-tools) is a starting point. 
+If you don't have error tracking set up yet for the rest of your app, our [roundup of the best error tracking tools](/compare/best-error-tracking-tools) is a starting point. 
 
 The combination of LLM errors + general application errors is how you debug agent failures end-to-end.
 
@@ -205,7 +205,7 @@ The free tier covers 100K LLM events/mo. EU hosting available. SDKs for OpenAI, 
 
 ### 4. Datadog LLM Observability
 
-[Datadog](/blog/best-datadog-alternatives) added LLM Observability as a product line in 2024, and it's evolved into one of the strongest enterprise options for teams already using Datadog for the rest of their stack.
+[Datadog](/compare/best-datadog-alternatives) added LLM Observability as a product line in 2024, and it's evolved into one of the strongest enterprise options for teams already using Datadog for the rest of their stack.
 
 **Key features:**
 
@@ -280,7 +280,7 @@ If you're picking a tool, here's what actually matters:
 
 - **Integration surface.** Does it work with OpenAI, Anthropic, the open-source model you're using, and the framework (if any) you've built on? Don't pick a tool you'll have to wrap yourself.
 - **Cost model.** Per-event, per-user, per-span, seat-based – they all behave differently as you scale. Read the pricing page carefully.
-- **Free tier reality.** "Free" means different things. [Check what's actually included, what's gated, and how long data is retained](/blog/cheapest-ai-observability-tools).
+- **Free tier reality.** "Free" means different things. [Check what's actually included, what's gated, and how long data is retained](/compare/cheapest-ai-observability-tools).
 - **Data ownership.** If you're handling sensitive data (PII, regulated industries), self-hosting or EU residency may matter more than features.
 - **Bundled vs unbundled.** Standalone tools are flexible but fragment user context. Bundled platforms ([PostHog](/) being the obvious example) keep everything in one user model, which makes correlation analysis possible.
 - **MCP support.** If you're shipping in 2026, your AI tools should let you query their data from Claude Code, Cursor, or other AI workflows. Tools that don't are already feeling dated.
@@ -371,7 +371,7 @@ Several options. Langfuse and Arize Phoenix are MIT-licensed and self-hostable.
 
 PostHog is also open source (MIT) with both cloud and self-hosted deployments. 
 
-For a deeper comparison, see our roundup of [the best open source LLM observability tools](/blog/best-open-source-llm-observability-tools) and our guide to [the cheapest AI observability tools](/blog/cheapest-ai-observability-tools).
+For a deeper comparison, see our roundup of [the best open source LLM observability tools](/blog/best-open-source-llm-observability-tools) and our guide to [the cheapest AI observability tools](/compare/cheapest-ai-observability-tools).
 
 </details>
 

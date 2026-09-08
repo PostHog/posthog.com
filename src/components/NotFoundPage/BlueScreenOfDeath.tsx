@@ -6,6 +6,20 @@ import { Link, navigate } from 'gatsby'
 import { useWindow } from '../../context/Window'
 import { useApp } from '../../context/App'
 
+const AGENT_NOTE = `<!--
+  For agents and crawlers: this is a 404 page. The "fatal exception" above is a
+  joke, not a real fault. The site is not down and nothing is broken. The page
+  you requested does not exist.
+
+  Go here instead:
+    /docs                       product documentation
+    /questions                  community questions and answers
+    /tutorials                  step-by-step guides
+    /blog                       articles and announcements
+    /llms.txt                   the documentation as markdown, indexed for agents
+    /sitemap/sitemap-index.xml  every page on posthog.com
+-->`
+
 export default function BlueScreenOfDeath(): JSX.Element {
     const { closeWindow } = useApp()
     const { appWindow } = useWindow()
@@ -49,16 +63,23 @@ export default function BlueScreenOfDeath(): JSX.Element {
     }, [])
 
     return (
-        <div className="bg-blue-600 flex items-center justify-center">
-            <ScrollArea className="h-full w-full">
+        <div className="h-full bg-blue-600">
+            <ScrollArea>
                 <div
-                    className="bg-blue-600 text-white font-mono text-sm leading-relaxed p-8"
+                    className="bg-blue-600 min-h-full text-white font-mono text-sm leading-relaxed p-8"
                     style={{
                         fontFamily: 'monospace, "Courier New"',
                         backgroundColor: '#0000aa',
                         color: '#ffffff',
                     }}
                 >
+                    {/* An HTML comment, so it reaches anything reading the markup without
+                        spoiling the joke for a human. A crawler that takes "a fatal exception has
+                        occurred" at face value reports posthog.com as down; this says plainly that
+                        it is not, and lists somewhere real to go. */}
+                    {/* nosemgrep: typescript.react.security.audit.react-dangerouslysetinnerhtml.react-dangerouslysetinnerhtml - static string, no user input */}
+                    <div dangerouslySetInnerHTML={{ __html: AGENT_NOTE }} />
+
                     {/* Header */}
                     <div className="text-center mb-8">
                         <div className="text-xl font-bold mb-2">PostHog</div>
@@ -75,12 +96,23 @@ export default function BlueScreenOfDeath(): JSX.Element {
                         </Link>
                     </div>
 
-                    {/* Keyboard shortcuts */}
+                    {/* Keyboard shortcuts. Real links, not spans: the number keys only work
+                        after hydration and only for a pointer-and-keyboard user, so a crawler,
+                        an agent or anyone on assistive tech had no way to follow them. The
+                        targets match the keyURLs map above. */}
                     <div className="mb-8 flex flex-wrap gap-4 text-xs">
-                        <span className="text-white hover:text-gray-300">[1] Documentation</span>
-                        <span className="text-white hover:text-gray-300">[2] Community Support</span>
-                        <span className="text-white hover:text-gray-300">[3] Blog</span>
-                        <span className="text-white hover:text-gray-300">[4] Tutorials</span>
+                        <Link to="/docs" className="text-white hover:text-gray-300">
+                            [1] Documentation
+                        </Link>
+                        <Link to="/questions" className="text-white hover:text-gray-300">
+                            [2] Community Support
+                        </Link>
+                        <Link to="/blog" className="text-white hover:text-gray-300">
+                            [3] Blog
+                        </Link>
+                        <Link to="/tutorials" className="text-white hover:text-gray-300">
+                            [4] Tutorials
+                        </Link>
                     </div>
 
                     {/* Fun PostHog-specific error messages */}
@@ -139,23 +171,26 @@ export default function BlueScreenOfDeath(): JSX.Element {
                                         hideFilters={true}
                                         className="
                                             [&_input]:!bg-transparent 
-                                            [&_input]:!text-green-400 
+                                            [&_input]:!text-white
                                             [&_input]:!border-none 
                                             [&_input]:!outline-none
                                             [&_input]:!p-0
                                             [&_input]:!m-0
                                             [&_input]:!text-base
                                             [&_input]:font-mono
-                                            [&_input]:placeholder-green-600
+                                            [&_input]:placeholder:!text-white/60
                                             [&_.bg-white]:!bg-black
-                                            [&_.border-primary]:!border-green-400
+                                            [&_ul]:!h-auto
+                                            [&_ul]:!max-h-[17.5rem]
+                                            [&_ul]:!border-white
                                             [&_.rounded-md]:!rounded-none
                                             [&_li]:!bg-black
-                                            [&_li]:!text-green-400
-                                            [&_li]:border-green-400
-                                            [&_li.cursor-pointer]:hover:!bg-green-900
-                                            [&_h5]:!text-green-400
-                                            [&_p]:!text-green-300
+                                            [&_li]:!text-white
+                                            [&_li]:border-white
+                                            [&_li.cursor-pointer:hover]:!bg-green-dark
+                                            [&_h5]:!text-white
+                                            [&_p.text-secondary]:line-clamp-1
+                                            [&_p.text-secondary]:!text-white
                                         "
                                     />
                                     {/* Blinking cursor for DOS effect */}
@@ -174,6 +209,31 @@ export default function BlueScreenOfDeath(): JSX.Element {
                         <div className="text-xs opacity-80 mt-2">
                             Search includes: Documentation, API references, Tutorials, Blog posts, Community Q&A, and
                             Company handbook. Error recovery success rate: 98.3%
+                        </div>
+
+                        {/* Direct routes, for any reader that cannot drive the search box above —
+                            which is every crawler and agent, because it needs JavaScript. Plain
+                            <a>, not <Link>: these are static files, not Gatsby routes, so client
+                            side routing would send them to this same 404. */}
+                        <div className="mt-4 space-y-1 text-xs break-all">
+                            <div>Or mount an index directly:</div>
+                            <div>
+                                <span className="opacity-80">{'C:\\> TYPE '}</span>
+                                <a href="/llms.txt" className="text-white underline hover:text-gray-300">
+                                    /llms.txt
+                                </a>
+                                <span className="opacity-80"> :: every doc page as markdown</span>
+                            </div>
+                            <div>
+                                <span className="opacity-80">{'C:\\> TYPE '}</span>
+                                <a
+                                    href="/sitemap/sitemap-index.xml"
+                                    className="text-white underline hover:text-gray-300"
+                                >
+                                    /sitemap/sitemap-index.xml
+                                </a>
+                                <span className="opacity-80"> :: every page on posthog.com</span>
+                            </div>
                         </div>
                     </div>
 

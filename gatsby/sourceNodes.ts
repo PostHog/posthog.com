@@ -435,12 +435,24 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
         })
     }
 
-    const sourcePostCategories = async () => {
-        const postCategories = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/post-categories?populate=*`).then(
-            (res) => res.json()
+    const sourcePostCategories = async (page = 1) => {
+        const query = qs.stringify(
+            {
+                pagination: {
+                    page,
+                    pageSize: 100,
+                },
+                populate: '*',
+            },
+            {
+                encodeValuesOnly: true,
+            }
         )
+        const { data: postCategories, meta } = await fetch(
+            `${process.env.GATSBY_SQUEAK_API_HOST}/api/post-categories?${query}`
+        ).then((res) => res.json())
 
-        postCategories.data.forEach(({ id, ...other }) => {
+        postCategories?.forEach(({ id, ...other }) => {
             const node = {
                 id: createNodeId(`post-category-${id}`),
                 internal: {
@@ -451,6 +463,7 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
             }
             createNode(node)
         })
+        if (meta?.pagination?.pageCount > meta?.pagination?.page) await sourcePostCategories(page + 1)
     }
 
     const sourceCommunityStats = async () => {

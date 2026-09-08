@@ -20,7 +20,7 @@ seo:
 
 A lot of "LLM observability" content out there is written for teams running production AI at scale: enterprise governance, fancy eval pipelines, dedicated AI platform engineers. Useful if you're there, but wildly over-engineered if you just shipped your first AI feature on a Tuesday.
 
-This guide is for the other half – the small teams, vibe coders, and solo founders who have a couple of agents or LLM calls in their app, no data team, and no idea where to [start with AI observability](/blog/cheapest-ai-observability-tools). 
+This guide is for the other half – the small teams, vibe coders, and solo founders who have a couple of agents or LLM calls in their app, no data team, and no idea where to [start with AI observability](/compare/cheapest-ai-observability-tools). 
 
 The answer isn't to set up everything, but to set up the minimum that keeps you from getting blindsided, skip the stuff that won't pay off yet, and add depth as your product earns it.
 
@@ -31,7 +31,7 @@ Here's what that looks like in practice.
 
 **[AI observability](/docs/ai-observability)** (often used interchangeably with **LLM observability** and **LLM analytics**) is the practice of monitoring what's happening inside the AI features of your app: the prompts you send, the responses you get back, how long calls take, how much they cost, and whether the outputs are any good.
 
-Traditional APM tools ([Datadog](/blog/best-datadog-alternatives) or New Relic weren't built for this. They can tell you your API call to OpenAI succeeded with a 200, but they can't tell you the response was a hallucination, or that your prompt is costing 3x what it should be. 
+Traditional APM tools ([Datadog](/compare/best-datadog-alternatives) or New Relic weren't built for this. They can tell you your API call to OpenAI succeeded with a 200, but they can't tell you the response was a hallucination, or that your prompt is costing 3x what it should be. 
 
 AI observability fills that gap.
 
@@ -104,7 +104,7 @@ You want all of these surfaced. If you already have error tracking set up for th
 
 If you don't, [add it](/blog/best-error-tracking-tools-for-developers).
 
-The combination of traces + errors + [logs](/blog/best-log-monitoring-tools) is how you debug AI features without losing your mind. Errors tell you something broke; traces tell you what the agent was doing when it broke; logs (tool calls, intermediate state, decisions) tell you why.
+The combination of traces + errors + [logs](/compare/best-log-monitoring-tools) is how you debug AI features without losing your mind. Errors tell you something broke; traces tell you what the agent was doing when it broke; logs (tool calls, intermediate state, decisions) tell you why.
 
 ## What to add later
 
@@ -146,7 +146,7 @@ Don't do it. You'll spend a month building something half as good as what alread
 
 You can always migrate later, but realistically you won't need to (also, migrations normally suck, so save yourself the headache).
 
-There are free tiers everywhere – [PostHog gives you 100K LLM events/mo free](/ai-observability), Langfuse is free to self-host, [Datadog](/blog/best-datadog-alternatives) includes 40K LLM spans/mo on its free tier... use one of them instead.
+There are free tiers everywhere – [PostHog gives you 100K LLM events/mo free](/ai-observability), Langfuse is free to self-host, [Datadog](/compare/best-datadog-alternatives) includes 40K LLM spans/mo on its free tier... use one of them instead.
 
 > For a deeper dive into free and self-hostable options, see our comparison of [the best open source LLM observability tools](/blog/best-open-source-llm-observability-tools).
 
@@ -167,7 +167,7 @@ As your product matures, the bar for observability rises. Here's the rough order
 
 **Add user feedback collection.** Even a simple thumbs up/down on AI outputs is gold for debugging. Pair that signal with the trace and you can quickly find patterns in what users hate – [PostHog surveys](/surveys) handle this in-app and tie responses back to the same user.
 
-**[Add session replay](/session-replay).** Watching how users actually react to AI outputs reveals things no metric will. Did they retry? Edit? Copy-paste? Close the tab? See our guide on [the best session replay tools](/blog/best-session-replay-tools) if you don't already have this.
+**[Add session replay](/session-replay).** Watching how users actually react to AI outputs reveals things no metric will. Did they retry? Edit? Copy-paste? Close the tab? See our guide on [the best session replay tools](/compare/best-session-replay-tools) if you don't already have this.
 
 </details>
 
@@ -216,7 +216,7 @@ A quick pitch, since this is our blog after all:
 - **[Session replay](/docs/ai-observability/link-session-replay)** alongside traces, so you can see exactly what the user was doing when the model misbehaved
 - **An [MCP server](/docs/model-context-protocol)** and [CLI](/docs/cli) that let you query traces, costs, and evals directly from Claude Code or Cursor while you're iterating
 
-If you want to take it for a spin, [you can start free](/blog/cheapest-ai-observability-tools) – no credit card needed.
+If you want to take it for a spin, [you can start free](/compare/cheapest-ai-observability-tools) – no credit card needed.
 
 And if you'd rather skip the manual setup entirely, the [PostHog Wizard](/wizard) handles instrumentation for you. 
 
@@ -247,7 +247,7 @@ Once you can't keep up with the volume, that's the signal to set up [automated e
 <details>
 <summary>How much should I expect to spend on observability as a solo founder?</summary>
 
-For most MVPs: nothing; even at a few thousand users, [you can usually stay on a free or cheap plan](/blog/cheapest-ai-observability-tools). The thing that costs money is the *LLM calls themselves* – which is exactly why you want cost tracking from day one.
+For most MVPs: nothing; even at a few thousand users, [you can usually stay on a free or cheap plan](/compare/cheapest-ai-observability-tools). The thing that costs money is the *LLM calls themselves* – which is exactly why you want cost tracking from day one.
 
 </details>
 

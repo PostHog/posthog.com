@@ -160,7 +160,7 @@ export const logs = {
     },
     slider: {
         // Values in GB (display_friendly=true converts MB to GB)
-        marks: [0, 10, 50, 100, 500, 1000, 5000],
+        marks: [0, 10, 100, 1000, 5000],
         min: 0,
         scaleMin: 1,
         max: 5000,
@@ -176,7 +176,7 @@ export const logs = {
             countsTowardParentVolume: true,
             note: 'These GB also count toward logs ingestion above – this price is just the added cost of storing them longer.',
             sliderConfig: {
-                marks: [0, 10, 50, 100, 500, 1000, 5000],
+                marks: [0, 10, 100, 1000, 5000],
                 min: 0,
                 scaleMin: 1,
                 max: 5000,

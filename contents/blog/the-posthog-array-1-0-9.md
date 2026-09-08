@@ -16,7 +16,7 @@ tags:
 
 We’re in the thick of our release schedule this week!
 
-Like what you see and self-hosting? [Update](/docs/runbook/upgrading-posthog) your instance.
+Like what you see and self-hosting? [Update](/docs/self-host) your instance.
 
 First our updates and new features.
 

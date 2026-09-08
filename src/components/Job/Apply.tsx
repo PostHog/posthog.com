@@ -24,6 +24,28 @@ interface IResumeComponentProps {
     placeholder: string
 }
 
+interface AshbySubmissionResponse {
+    success: boolean
+    errors?: Array<{ message?: string }>
+    results?: {
+        formMessages?: {
+            blocked?: boolean
+            blockMessageForCandidateHtml?: string
+        }
+    }
+}
+
+// A failure we expect: the message is safe to show to the candidate, and `reason` is safe to capture.
+// Anything else is a bug or a network failure, and the candidate must not see its raw message.
+class ApplicationError extends Error {
+    reason: string
+
+    constructor(reason: string, message: string) {
+        super(message)
+        this.reason = reason
+    }
+}
+
 const components = {
     valueselect: ({
         title,
@@ -215,6 +237,7 @@ const Form = ({
     isInExcludedCountry?: boolean
 }) => {
     const { setConfetti } = useApp()
+    const posthog = usePostHog()
     const [error, setError] = useState<string | null>(null)
     const [loading, setLoading] = useState(false)
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -231,7 +254,10 @@ const Form = ({
                 const path = el?.dataset.path
                 if (el?.type === 'file') {
                     if (!allowedFileTypes.includes((value as File).type)) {
-                        throw new Error(`Allowed file types: ${allowedFileTypes.join(', ')}`)
+                        throw new ApplicationError(
+                            'invalid_file_type',
+                            `Allowed file types: ${allowedFileTypes.join(', ')}`
+                        )
                     }
                     form.append(name, value)
                     form.append(path || '', name)
@@ -249,17 +275,54 @@ const Form = ({
 
             if (!res.ok) {
                 if (res.status === 413) {
-                    throw new Error(
+                    throw new ApplicationError(
+                        'file_too_large',
                         'Your resume is a little too impressive to upload. Please reduce the file size and try again.'
                     )
                 }
-                throw new Error('Failed to submit application. Please try again.')
+                throw new ApplicationError(`http_${res.status}`, 'Failed to submit application. Please try again.')
             }
 
+            const submission: AshbySubmissionResponse = await res.json()
+            const { blocked, blockMessageForCandidateHtml } = submission.results?.formMessages || {}
+
+            if (blocked) {
+                if (blockMessageForCandidateHtml) {
+                    throw new ApplicationError(
+                        'blocked_by_limit',
+                        'We could not submit this application because you reached one of our application limits. Please wait before you apply again.'
+                    )
+                }
+                throw new ApplicationError('blocked', 'Failed to submit application. Please try again.')
+            }
+
+            if (!submission.success) {
+                const message = submission.errors
+                    ?.map((error) => error.message)
+                    .filter(Boolean)
+                    .join(' ')
+                throw new ApplicationError('rejected', message || 'Failed to submit application. Please try again.')
+            }
+
+            posthog?.capture('job application submitted', { jobPostingId: id })
             onSubmit()
             setConfetti(true)
         } catch (err) {
-            setError(err instanceof Error ? err.message : 'An unexpected error occurred. Please try again.')
+            const expected = err instanceof ApplicationError
+            // A raw browser message ("Failed to fetch") means nothing to a candidate, so only show our own.
+            setError(
+                expected
+                    ? err.message
+                    : 'We could not submit your application. Please try again, or email us at careers@posthog.com.'
+            )
+            // Ashby error text can quote what the candidate typed, so capture the reason and not the message.
+            posthog?.capture('job application failed', {
+                jobPostingId: id,
+                reason: expected ? err.reason : 'unexpected_error',
+            })
+            if (!expected) {
+                posthog?.captureException?.(err)
+            }
         } finally {
             setLoading(false)
         }

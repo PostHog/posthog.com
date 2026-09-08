@@ -136,6 +136,27 @@ export const SEO = ({
 export default SEO
 
 /**
+ * PostHog as a schema.org Organization. Shared so the homepage and every product page
+ * describe the same entity rather than drifting copies of it.
+ */
+const POSTHOG_ORGANIZATION = {
+    '@context': 'https://schema.org',
+    '@type': 'Organization',
+    name: 'PostHog',
+    url: 'https://posthog.com',
+    logo: 'https://posthog.com/brand/posthog-logo-stacked.png',
+    sameAs: ['https://twitter.com/PostHog', 'https://github.com/PostHog', 'https://www.linkedin.com/company/posthog'],
+    address: {
+        '@type': 'PostalAddress',
+        streetAddress: '2261 Market Street #4008',
+        addressLocality: 'San Francisco',
+        addressRegion: 'CA',
+        postalCode: '94114',
+        addressCountry: 'US',
+    },
+}
+
+/**
  * Build schema.org JSON-LD for a product/app page: a SoftwareApplication, the PostHog
  * Organization, and (optionally) a FAQPage. Pass the result to <SEO structuredData={...} />.
  * FAQ entries without an `answer` are skipped, so FAQPage only renders once answers exist.
@@ -170,18 +191,7 @@ export const buildProductStructuredData = ({
             },
             publisher: { '@type': 'Organization', name: 'PostHog', url: 'https://posthog.com' },
         },
-        {
-            '@context': 'https://schema.org',
-            '@type': 'Organization',
-            name: 'PostHog',
-            url: 'https://posthog.com',
-            logo: 'https://posthog.com/images/og/default.png',
-            sameAs: [
-                'https://twitter.com/PostHog',
-                'https://github.com/PostHog',
-                'https://www.linkedin.com/company/posthog',
-            ],
-        },
+        POSTHOG_ORGANIZATION,
     ]
     const faqEntities = (faq || [])
         .filter((q) => q && q.question && q.answer)
