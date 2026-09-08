@@ -12,7 +12,13 @@ The customer should never have to figure out who to contact. They reach out to e
 
 Which accounts get both, and when a TAM joins or comes off, is covered in [account allocation](/handbook/growth/sales/account-allocation). This page is about what the two of you do once you're both on.
 
-How much of the below is worth doing depends on the account. A strategic account (our [Top 40](/handbook/growth/sales/account-allocation#top-40-account-management) are the clearest example) with several teams in play, a big org to navigate and a renewal on the horizon justifies real structure. A smaller growth account with one champion and a single use case usually doesn't, and over-engineering it just creates admin neither of you reads. Treat everything here as a starting point to adapt rather than a checklist to comply with, and scale the effort to what the account is worth.
+## Why the overlay exists
+
+Two people on one account is a real investment, so it should buy something one person can't. Done well, the customer gets depth on their implementation *and* depth on where PostHog goes next for them, instead of one person trading one off against the other. More of their org knows us, so the account isn't resting on a single champion. And there's always someone with context when the other one is asleep or on holiday.
+
+Done badly, two people is worse than one. The customer answers the same question twice, gets contradictory advice, or falls into the gap where each of you assumed the other had it covered. That isn't a people problem, it's just what happens by default without a few shared habits. Everything below is those habits: the small things that make the second person feel like better coverage to the customer rather than more admin to us.
+
+How much of it is worth doing depends on the account. A strategic account (our [Top 40](/handbook/growth/sales/account-allocation#top-40-account-management) are the clearest example) with several teams in play, a big org to navigate and a renewal on the horizon justifies real structure. A smaller growth account with one champion and a single use case usually doesn't, and over-engineering it just creates admin neither of you reads. Treat everything here as a starting point to adapt rather than a checklist to comply with, and scale the effort to what the account is worth.
 
 ## What each role focuses on
 
