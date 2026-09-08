@@ -48,17 +48,17 @@ const FAQ_ITEMS = [
 function CTAs(): JSX.Element {
     return (
         <>
-            <SignupCTA size="md" text="Get started" />
             <OSButton
                 asLink
                 to="/talk-to-a-human"
-                variant="secondary"
-                size="md"
+                variant="primary"
+                size="xl"
                 state={{ newWindow: true }}
                 event="clicked Talk to a human"
             >
                 Talk to a human
             </OSButton>
+            <SignupCTA size="xl" type="secondary" text="Get started" />
         </>
     )
 }
@@ -129,7 +129,7 @@ export default function Enterprise(): JSX.Element {
                     <div className="relative grid pt-8 @3xl:grid-cols-[minmax(0,1fr)_27%]">
                         <div className="col-span-full col-start-1 row-start-1 flex flex-col justify-between">
                             <Hero />
-                            <div className="relative z-10 pb-5 pt-8 @3xl:pr-[44%] @3xl:pt-[16%]">
+                            <div className="relative z-10 pb-5 pt-6 @3xl:pr-[44%] @3xl:pt-[10%]">
                                 <h2 className="m-0 text-2xl font-semibold tracking-tight">Platform packages</h2>
                                 <p className="m-0 mt-2 max-w-2xl text-pretty text-sm text-secondary">
                                     Security, compliance, and team controls that sit on top of every PostHog product.
@@ -150,7 +150,7 @@ export default function Enterprise(): JSX.Element {
                             <BusinessProof />
                             <WorkWithUs />
                             <h3 className="relative z-10 m-0 pb-5 text-base font-semibold @3xl:pr-[36%]">
-                                In the meantime - forward this email to your CTO
+                                In the meantime - forward this email to your CISO
                             </h3>
                         </div>
                         <BuildingArt section="middle" className="z-20" landingRef={emailRef} />
@@ -159,17 +159,17 @@ export default function Enterprise(): JSX.Element {
                         <BuyerResources />
                     </div>
                     <div className="relative z-30 grid @3xl:grid-cols-[minmax(0,1fr)_27%]">
-                        <div className="relative z-10 col-span-full col-start-1 row-start-1 flex min-w-0 flex-col pt-10 @3xl:pr-[36%]">
-                            <section className="mt-auto pb-12 pt-12 @3xl:pb-20">
+                        <div className="relative z-10 col-span-full col-start-1 row-start-1 flex min-w-0 flex-col justify-center py-8 @3xl:pr-[36%]">
+                            <section>
                                 <h2 className="m-0 max-w-xl text-balance text-2xl font-bold tracking-tight @2xl:text-3xl">
-                                    Build your business on a foundation you can trust
+                                    Bring PostHog to your team.
                                 </h2>
                                 <div className="mt-5 flex flex-col items-start gap-2 @xs:flex-row @xs:items-center">
                                     <CTAs />
                                 </div>
                             </section>
                         </div>
-                        <BuildingArt section="bottom" className="z-20 @3xl:aspect-[4/7]" />
+                        <BuildingArt section="bottom" className="z-20 @3xl:aspect-[5/7]" />
                     </div>
                     {/* FAQ – scaffold; see FAQ_ITEMS. */}
                     <section className="relative z-10 border-t-2 border-primary pb-16 pt-10">

@@ -1,8 +1,10 @@
 import React, { useState } from 'react'
 import { Tabs } from 'radix-ui'
+import { IconSend } from '@posthog/icons'
+import OSButton from 'components/OSButton'
 import Link from 'components/Link'
 
-/** Source-backed enterprise proof. Keep the claims and links intact; see README.md. */
+/** Source-backed enterprise proof. Keep the claims and links intact. */
 
 type Point = {
     title: string
@@ -324,26 +326,102 @@ export function WorkWithUs(): JSX.Element {
 }
 
 /** Public resources presented as an email, with ordinary website links. */
+const EMAIL = {
+    subject: 'Urgent strategic alignment on PostHog',
+    greeting: 'Good morning CISO,',
+    intro: 'I hope your morning is off to an exceptionally productive start. I am writing to bring a matter of urgent strategic importance to your attention: the potential adoption of PostHog. To facilitate a comprehensive, cross-functional assessment of this opportunity, I have proactively consolidated the following documentation into a single, conveniently actionable correspondence.',
+    signOff: 'Kind regards,',
+    sender: 'Your proactively aligned colleague',
+    footer: '(Sent using Microsoft Outlook 2007)',
+}
+
+// These families are already registered globally in components/Layout/Fonts.css.
+const EMAIL_FONTS = ['RoundHog', 'Charter', 'Fairytale', 'Computer Modern', 'Squeak']
+const EMAIL_FONT_SIZES = [12, 14, 16, 18, 20, 24]
+
 export function BuyerResources(): JSX.Element {
+    const [fontFamily, setFontFamily] = useState(EMAIL_FONTS[0])
+    const [fontSize, setFontSize] = useState(14)
+    const body = [
+        EMAIL.greeting,
+        EMAIL.intro,
+        ...RESOURCES.map(
+            (resource) => `${resource.label} — ${resource.note}\n${new URL(resource.href, 'https://posthog.com').href}`
+        ),
+        `${EMAIL.signOff}\n${EMAIL.sender}`,
+        EMAIL.footer,
+    ].join('\n\n')
+    const draftUrl = `mailto:?subject=${encodeURIComponent(EMAIL.subject)}&body=${encodeURIComponent(body)}`
     return (
         <section>
-            <article aria-label="Email to your CTO" className="rounded-md border border-primary bg-primary shadow-xl">
-                <header className="rounded-t-md border-b border-primary bg-accent px-5 py-5 @xl:px-8">
-                    <dl className="m-0 grid grid-cols-[auto_minmax(0,1fr)] gap-x-4 gap-y-2 text-sm">
+            <article aria-label="Email to your CISO" className="rounded-md border border-primary bg-primary shadow-xl">
+                <header className="rounded-t-md border-b border-primary bg-accent font-[Tahoma,Arial,sans-serif]">
+                    <div className="rounded-t-md border-b border-primary bg-primary px-4 py-2 text-xs font-bold @3xl:pr-[32%]">
+                        Message (HTML)
+                    </div>
+                    <div className="flex flex-wrap items-center gap-x-5 gap-y-3 border-b border-primary px-4 py-3">
+                        <div className="flex flex-wrap items-center gap-3 text-xs">
+                            <select
+                                aria-label="Email font"
+                                value={fontFamily}
+                                onChange={(event) => setFontFamily(event.target.value)}
+                                className="max-w-full rounded-none border border-primary bg-primary py-1 pl-2 pr-7 text-xs leading-4 text-primary focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue"
+                            >
+                                {EMAIL_FONTS.map((font) => (
+                                    <option key={font} value={font}>
+                                        {font}
+                                    </option>
+                                ))}
+                            </select>
+                            <select
+                                aria-label="Email font size (px)"
+                                value={fontSize}
+                                onChange={(event) => setFontSize(Number(event.target.value))}
+                                className="rounded-none border border-primary bg-primary py-1 pl-2 pr-7 text-xs leading-4 text-primary focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue"
+                            >
+                                {EMAIL_FONT_SIZES.map((size) => (
+                                    <option key={size} value={size}>
+                                        {size}
+                                    </option>
+                                ))}
+                            </select>
+                            {/* The remaining formatting marks are decorative. */}
+                            <span aria-hidden="true" className="flex gap-4 border-x border-primary px-3 text-sm">
+                                <b>B</b>
+                                <i>I</i>
+                                <u>U</u>
+                            </span>
+                            <span aria-hidden="true" className="hidden items-center gap-2 @xl:flex">
+                                <span className="font-bold text-red dark:text-yellow">!</span> High importance
+                            </span>
+                        </div>
+                        <div className="ml-auto shrink-0">
+                            <OSButton
+                                asLink
+                                to={draftUrl}
+                                variant="secondary"
+                                size="md"
+                                icon={<IconSend className="size-4" />}
+                                title="Open this draft in your email app"
+                                aria-label="Send — open a draft in your email app"
+                            >
+                                Send
+                            </OSButton>
+                        </div>
+                    </div>
+                    <dl className="m-0 grid grid-cols-[auto_minmax(0,1fr)] items-baseline gap-x-4 px-5 py-3 text-sm @xl:px-8">
                         <dt className="text-secondary">To:</dt>
-                        <dd className="m-0">CTO</dd>
+                        <dd className="m-0 border-b border-primary py-2">CISO</dd>
                         <dt className="text-secondary">Subject:</dt>
-                        <dd className="m-0 font-semibold">Urgent strategic alignment on PostHog</dd>
+                        <dd className="m-0 border-b border-primary py-2 font-semibold">{EMAIL.subject}</dd>
                     </dl>
                 </header>
-                <div className="px-5 py-6 text-sm leading-relaxed @xl:px-8">
-                    <p className="m-0">Good morning CTO,</p>
-                    <p className="mb-0 mt-4">
-                        I hope your morning is off to an exceptionally productive start. I am writing to bring a matter
-                        of urgent strategic importance to your attention: the potential adoption of PostHog. To
-                        facilitate a comprehensive, cross-functional assessment of this opportunity, I have proactively
-                        consolidated the following documentation into a single, conveniently actionable correspondence.
-                    </p>
+                <div
+                    className="break-words px-5 py-6 leading-relaxed @xl:px-8"
+                    style={{ fontFamily: `"${fontFamily}"`, fontSize }}
+                >
+                    <p className="m-0">{EMAIL.greeting}</p>
+                    <p className="mb-0 mt-4">{EMAIL.intro}</p>
                     <ul className="m-0 my-6 grid list-none gap-x-6 gap-y-5 border-y border-primary py-6 pl-0 @xl:grid-cols-2 @3xl:grid-cols-3 @5xl:grid-cols-4">
                         {RESOURCES.map((r) => (
                             <li key={r.href}>
@@ -362,11 +440,11 @@ export function BuyerResources(): JSX.Element {
                         ))}
                     </ul>
                     <p className="m-0">
-                        Kind regards,
+                        {EMAIL.signOff}
                         <br />
-                        Your proactively aligned colleague
+                        {EMAIL.sender}
                     </p>
-                    <p className="mb-0 mt-3 text-xs text-secondary">(Sent using Microsoft Outlook 2007)</p>
+                    <p className="mb-0 mt-3 text-[0.857em] text-secondary">{EMAIL.footer}</p>
                 </div>
             </article>
         </section>
