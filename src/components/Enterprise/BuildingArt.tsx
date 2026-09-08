@@ -11,9 +11,44 @@ const SOURCES = {
     'double-story-3': 'https://res.cloudinary.com/dmukukwp6/image/upload/flat_double_story_3_21a278817f.svg',
 }
 
+const DARK_SOURCES: Record<keyof typeof SOURCES, string> = {
+    'single-story-1': 'https://res.cloudinary.com/dmukukwp6/image/upload/flat_single_story_1_dark_f1749430db.svg',
+    'single-story-2': 'https://res.cloudinary.com/dmukukwp6/image/upload/flat_single_story_2_dark_c866156d4d.svg',
+    'single-story-3': 'https://res.cloudinary.com/dmukukwp6/image/upload/flat_single_story_3_dark_6633ec7772.svg',
+    'double-story-1': 'https://res.cloudinary.com/dmukukwp6/image/upload/flat_double_story_1_dark_bca8f75719.svg',
+    'double-story-2': 'https://res.cloudinary.com/dmukukwp6/image/upload/flat_double_story_2_dark_8637ee0d1b.svg',
+    'double-story-3': 'https://res.cloudinary.com/dmukukwp6/image/upload/flat_double_story_3_dark_af5b70d807.svg',
+}
+
 const hedgehog = 'https://res.cloudinary.com/dmukukwp6/image/upload/atlas_hog_00bfae9921.svg'
+const darkHedgehog = 'https://res.cloudinary.com/dmukukwp6/image/upload/atlas_hog_dark_08202dd9d6.svg'
 const cloud1 = 'https://res.cloudinary.com/dmukukwp6/image/upload/cloud_1_6ec7ea72d6.svg'
 const cloud2 = 'https://res.cloudinary.com/dmukukwp6/image/upload/cloud_2_553c4f548d.svg'
+const star = 'https://res.cloudinary.com/dmukukwp6/image/upload/star_d5d59b3685.svg'
+
+/** Both sources share geometry; the site's pre-paint theme class selects the image. */
+function ThemedArt({
+    src,
+    darkSrc,
+    className = '',
+    ...props
+}: React.ImgHTMLAttributes<HTMLImageElement> & { darkSrc: string }): JSX.Element {
+    return (
+        <>
+            <img {...props} src={src} alt="" className={`${className} dark:hidden`} />
+            <img {...props} src={darkSrc} alt="" className={`${className} hidden dark:block`} />
+        </>
+    )
+}
+
+/** One parallax origin stays mounted when CSS switches clouds to smaller stars. */
+function SkyArt({ src, speed, className }: { src: string; speed: string; className: string }): JSX.Element {
+    return (
+        <div data-cloud-speed={speed} className={className}>
+            <ThemedArt src={src} darkSrc={star} className="w-full" />
+        </div>
+    )
+}
 
 /** Follow the Editor's own scroll viewport, including when the app is resized. */
 export function EnterpriseScene({ children }: { children: React.ReactNode }): JSX.Element {
@@ -130,12 +165,13 @@ export function BuildingArt({
                     landingRef.current
                 )}
             {section === 'top' && (
-                <img src={cloud1} alt="" data-cloud-speed="0.05" className="absolute -right-3 top-[14%] z-0 w-12" />
+                <SkyArt src={cloud1} speed="0.05" className="absolute -right-3 top-[14%] z-0 w-12 dark:w-6" />
             )}
             {stack?.modules.map((module, index) => (
-                <img
+                <ThemedArt
                     key={`${module.name}-${index}`}
                     src={SOURCES[module.name]}
+                    darkSrc={DARK_SOURCES[module.name]}
                     alt=""
                     data-building-module={module.name}
                     data-base-y={MODULES[module.name].baseY / MODULES[module.name].height}
@@ -152,24 +188,28 @@ export function BuildingArt({
                 />
             ))}
             {section === 'bottom' && stack && (
-                <img src={hedgehog} alt="" className="absolute z-50 max-w-none" style={stack.hog} />
+                <ThemedArt
+                    src={hedgehog}
+                    darkSrc={darkHedgehog}
+                    className="absolute z-50 max-w-none"
+                    style={stack.hog}
+                />
             )}
             {section === 'top' && (
-                <img src={cloud2} alt="" data-cloud-speed="0.035" className="absolute -left-6 top-[55%] z-40 w-10" />
+                <SkyArt src={cloud2} speed="0.035" className="absolute -left-6 top-[55%] z-40 w-10 dark:w-5" />
             )}
             {section === 'middle' && (
                 <>
-                    <img src={cloud1} alt="" data-cloud-speed="0.035" className="absolute -left-5 top-[24%] z-0 w-10" />
-                    <img
+                    <SkyArt src={cloud1} speed="0.035" className="absolute -left-5 top-[24%] z-0 w-10 dark:w-5" />
+                    <SkyArt
                         src={cloud2}
-                        alt=""
-                        data-cloud-speed="0.09"
-                        className="absolute -right-3 top-[67%] z-40 w-16"
+                        speed="0.09"
+                        className="absolute -right-20 top-[67%] z-40 w-16 dark:-right-12 dark:w-8"
                     />
                 </>
             )}
             {section === 'bottom' && (
-                <img src={cloud1} alt="" data-cloud-speed="0.07" className="absolute -left-7 top-[24%] z-0 w-14" />
+                <SkyArt src={cloud1} speed="0.07" className="absolute -left-7 top-[24%] z-0 w-14 dark:w-7" />
             )}
             {(section === 'top' || section === 'bottom') && (
                 <div
