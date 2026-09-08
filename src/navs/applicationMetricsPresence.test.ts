@@ -12,7 +12,7 @@
  */
 import assert from 'node:assert/strict'
 import { describe, test } from 'node:test'
-import { readFileSync, existsSync } from 'node:fs'
+import { readFileSync, existsSync, readdirSync, statSync } from 'node:fs'
 import { fileURLToPath } from 'node:url'
 import { dirname, join } from 'node:path'
 
@@ -67,5 +67,29 @@ describe('the application metrics tool', () => {
         const tools = readFileSync(join(here, '../data/tools.ts'), 'utf8')
         const entry = tools.match(/\{[^{}]*handle:\s*'metrics'[^{}]*\}/)?.[0] ?? ''
         assert.match(entry, /status:\s*'alpha'/, 'expected the metrics tool to carry an alpha status badge')
+    })
+})
+
+// Metrics is in public alpha with self-serve signup, so the docs must not tell
+// readers it is private or gated to selected teams.
+const metricsDocsDir = join(here, '../../contents/docs/metrics')
+const listMdx = (dir: string): string[] =>
+    readdirSync(dir).flatMap((entry) => {
+        const full = join(dir, entry)
+        if (statSync(full).isDirectory()) return listMdx(full)
+        return entry.endsWith('.mdx') ? [full] : []
+    })
+
+describe('the application metrics alpha wording', () => {
+    test('no metrics doc calls the alpha private or gated to selected teams', () => {
+        const offenders = listMdx(metricsDocsDir).filter((file) => {
+            const text = readFileSync(file, 'utf8')
+            return /private alpha/i.test(text) || /selected teams/i.test(text)
+        })
+        assert.deepEqual(
+            offenders.map((file) => file.replace(`${metricsDocsDir}/`, '')),
+            [],
+            'expected no "private alpha" / "selected teams" wording in the metrics docs'
+        )
     })
 })
