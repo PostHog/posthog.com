@@ -8,6 +8,8 @@ showTitle: true
 
 When you start as a Technical CSM, you're assigned a book of business with ~30 accounts. Customer engagement falls into three stages.
 
+The stages line up with [CSM sentiment](/handbook/cs-and-onboarding/health-tracking#csm-sentiment), the rating you give your own relationship with an account. Stage 1 covers ratings 1 to 3, stage 2 is rating 4, and stage 3 is rating 5.
+
 ## Stage 1: Getting started
 
 See [getting started with customers](/handbook/cs-and-onboarding/getting-started-with-customers).

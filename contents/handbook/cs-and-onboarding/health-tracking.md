@@ -8,6 +8,8 @@ We use Vitally as a customer success platform.  You can log in via Google SSO to
 
 ## Health scoring
 
+This section covers the computed score. For the rating you set by hand on your own accounts, see [CSM sentiment](/handbook/cs-and-onboarding/health-tracking#csm-sentiment).
+
 ### Overview
 
 Health scores are a great way to assess whether your customer is at risk of churn or in a good state and are a common pattern in Customer Success tracking.  We compute an overall <PrivateLink url="https://posthog.vitally-eu.io/settings/health/accounts">health score</PrivateLink> out of 10 based on the following factors and weighting.  You can read more about how Vitally health scores work in their docs <PrivateLink url="https://docs.vitally.io/account-health-scores-and-metrics/health-scores">here</PrivateLink>.
@@ -174,3 +176,28 @@ Applied if the Forecasted MRR Change is more than 10%, indicating an increase in
 #### Organization owner recently added
 
 Applied if the Owner role has been added to a user in the last 14 days. This is a good opportunity to reach out to a potential champion if you've not met them before. 
+
+## CSM sentiment
+
+The health score above is computed for you. CSM sentiment is not — it is a rating you set by hand on your own accounts, in <PrivateLink url="https://us.posthog.com/project/2/accounts">Customer analytics</PrivateLink>.
+
+It records the relationship *you personally* have with the account. It does not measure how the account is doing. A large, healthy, fully self-serve account can sit at the bottom of the scale, and that is a correct reading — in a product-led book, "assigned to you" and "known to you" are different things. When the health score and your sentiment disagree, they are usually both right.
+
+| Rating | What it means |
+|--------|---------------|
+| 1 - No relationship | The account is yours on paper only. It is fully self-serve, and you have no two-way contact with anyone there. |
+| 2 - Warm handover | The relationship came to you from another CSM or a teammate. You have an introduction, but no direct trust yet. |
+| 3 - Reactive | They contact you when they need something, and there is no contact between times. |
+| 4 - Working relationship | You have regular two-way contact with a named person who replies to you and takes meetings. |
+| 5 - Trusted advisor | You are multi-threaded in the account. They bring you problems early and include you in their plans. |
+
+To set the rating, add the **CSM sentiment** column to your account view, then click the cell.
+
+### How to use it
+
+- Only the CSM on the account sets the rating. Do not rate an account for somebody else.
+- Change it when the relationship changes. There is no review schedule.
+- On handover, rate your own relationship. Start again at 2 instead of keeping the rating the previous CSM gave. If you keep their rating, the field tells you about the history of the book and not about the relationship the account has today.
+- Be honest. A book of all fives is less useful than an accurate one, and a one is not a failure — it tells us which accounts are self-serve by nature and which ones need a human.
+
+Each label starts with a digit, so the scale sorts in the accounts table and totals in HogQL and PostHog AI. Use `toInt32OrNull(substring(value, 1, 1))` to get the number.
