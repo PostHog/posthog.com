@@ -3,6 +3,8 @@ title: Shopify
 platformLogo: shopify
 ---
 
+import Snippet from "../integrate/snippet.mdx";
+
 export const eventLight =
   "https://res.cloudinary.com/dmukukwp6/image/upload/v1711383938/posthog.com/contents/images/tutorials/shopify/event-light.png";
 export const eventDark =
@@ -27,6 +29,32 @@ This guide walks you through integrating PostHog into your Shopify store using a
 3. Click the green save button on the top right and you're good to go - PostHog should now be capturing events on your Shopify store!
 
 > To confirm PostHog is configured correctly, visit your store and then check if the events from your session appear in the [PostHog activity tab](https://us.posthog.com/events). This may take a few minutes.
+
+### Reducing the impact on page speed
+
+The snippet loads PostHog asynchronously from a separate assets host, so it does not block your store from rendering. Shoppers are sensitive to page weight, so you can trim PostHog further by turning off the parts you do not use:
+
+<!-- prettier-ignore -->
+```js
+posthog.init('<ph_project_token>', {
+    api_host: '<ph_client_api_host>',
+    defaults: '<ph_posthog_js_defaults>',
+    autocapture: false, // no click or form capture
+    capture_heatmaps: false, // no heatmap data
+    disable_session_recording: true, // no session replay script
+    disable_surveys: true, // no surveys script
+    capture_performance: false, // no web vitals or network timing
+    advanced_disable_flags: true, // no /flags request
+})
+```
+
+Each option removes a feature, so set only the ones you can do without:
+
+- `disable_session_recording` and `disable_surveys` stop PostHog from downloading `recorder.js` and `surveys.js`. These are the largest scripts PostHog loads after the library itself.
+- `advanced_disable_flags` removes one network request per page load. Leave this option out if you use [feature flags](/docs/feature-flags), [experiments](/docs/experiments), or [surveys](/docs/surveys), because they all need that request.
+- `autocapture: false` cuts your event volume, but you then need [`posthog.capture()`](/docs/product-analytics/capture-events) calls for the actions you still want to measure. To keep autocapture on a smaller set of elements instead, use [`autocapture` allowlists](/docs/libraries/js/config#configuring-autocapture).
+
+See the [JavaScript config reference](/docs/libraries/js/config) for the full list of options.
 
 ### Enabling heatmap
 
@@ -77,75 +105,16 @@ Shopify's checkout flow doesn't allow arbitrary JavaScript to be run, so the Pos
 
 To set this up, first, go to the [customer events](https://admin.shopify.com/settings/customer_events) tab in your store settings, click "Add custom pixel," and give your pixel a name.
 
-Next, add code that contains:
+Next, paste your PostHog snippet at the top of the pixel code, above any `analytics.subscribe` call. Put it at the top level rather than inside a subscribe callback, so PostHog loads once instead of on every event. You can also copy it pre-filled from [your project settings](https://us.posthog.com/settings/project#snippet).
 
-1. The customer events you want to subscribe to. You can find a complete list in Shopify's [Web Pixels API documentation](https://shopify.dev/docs/api/web-pixels-api/standard-events).
+<Snippet />
 
-2. Your PostHog JavaScript snippet which you can get from [your project settings](https://us.posthog.com/settings/project#snippet).
-
-3. The rest of your PostHog capture logic.
+Below the snippet, subscribe to the customer events you want to capture. Shopify's [Web Pixels API documentation](https://shopify.dev/docs/api/web-pixels-api/standard-events) lists them all.
 
 As an example, here is the code for subscribing to a `checkout_completed` event. Every time a user checks out, we capture an event. We also call [`posthog.identify()`](/docs/product-analytics/identify) so that we can track the user across different sessions:
 
 ```js
 analytics.subscribe("checkout_completed", (event) => {
-  !(function (t, e) {
-    var o, n, p, r;
-    e.__SV ||
-      ((window.posthog = e),
-      (e._i = []),
-      (e.init = function (i, s, a) {
-        function g(t, e) {
-          var o = e.split(".");
-          (2 == o.length && ((t = t[o[0]]), (e = o[1])),
-            (t[e] = function () {
-              t.push([e].concat(Array.prototype.slice.call(arguments, 0)));
-            }));
-        }
-        (((p = t.createElement("script")).type = "text/javascript"),
-          (p.crossOrigin = "anonymous"),
-          (p.async = !0),
-          (p.src = s.api_host + "/static/array.js"),
-          (r = t.getElementsByTagName("script")[0]).parentNode.insertBefore(p, r));
-        var u = e;
-        for (
-          void 0 !== a ? (u = e[a] = []) : (a = "posthog"),
-            u.people = u.people || [],
-            Object.defineProperty(u, "toString", {
-              configurable: !0,
-              enumerable: !0,
-              writable: !0,
-              value: function (t) {
-                var e = "posthog";
-                return ("posthog" !== a && (e += "." + a), t || (e += " (stub)"), e);
-              },
-            }),
-            Object.defineProperty(u.people, "toString", {
-              configurable: !0,
-              enumerable: !0,
-              writable: !0,
-              value: function () {
-                return u.toString(1) + ".people (stub)";
-              },
-            }),
-            o =
-              "capture identify alias people.set people.set_once set_config register register_once unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled onFeatureFlags getFeatureFlag getFeatureFlagResult reloadFeatureFlags group updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures getActiveMatchingSurveys getSurveys getNextSurveyStep onSessionId".split(
-                " ",
-              ),
-            n = 0;
-          n < o.length;
-          n++
-        )
-          g(u, o[n]);
-        e._i.push([i, s, a]);
-      }),
-      (e.__SV = 1));
-  })(document, window.posthog || []);
-  posthog.init("<ph_project_token>", {
-    api_host: "<ph_client_api_host>",
-    defaults: "<ph_posthog_js_defaults>",
-  });
-
   const checkout = event.data.checkout;
 
   posthog.identify(checkout.email, {
