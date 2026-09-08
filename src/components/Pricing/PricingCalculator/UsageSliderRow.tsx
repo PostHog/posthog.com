@@ -12,8 +12,8 @@ import { formatCompact, parseCompact } from '../utils'
 export const UsageSliderHeader = ({ unit }: { unit: string }) => (
     <div className="flex items-center gap-4 pb-1">
         <span className="w-48 shrink-0 text-xs uppercase text-secondary font-semibold">Usage</span>
-        <span className="flex-1" />
-        <span className="text-xs uppercase text-secondary shrink-0 font-semibold">{unit} / mo</span>
+        <span className="hidden @md:block flex-1" />
+        <span className="text-xs uppercase text-secondary shrink-0 font-semibold ml-auto">{unit} / mo</span>
     </div>
 )
 
@@ -59,7 +59,7 @@ export default function UsageSliderRow({
                 </div>
                 {subtitle ? <p className="m-0 text-xs text-secondary">{subtitle}</p> : null}
             </div>
-            <div className="flex-1 flex justify-end min-w-0">
+            <div className="hidden @md:flex flex-1 justify-end min-w-0">
                 <div className="w-full @md:w-3/4 pb-5">
                     {curve === 'nonlinear' ? (
                         <NonLinearSlider
@@ -87,7 +87,7 @@ export default function UsageSliderRow({
                 type="text"
                 className={`${
                     inputPrefix ? 'w-16' : 'w-14'
-                } bg-transparent text-center font-bold text-sm border border-light dark:border-dark rounded-md py-1 px-1.5 focus:ring-0 focus:border-red dark:focus:border-yellow focus:bg-white dark:focus:bg-accent-dark`}
+                } bg-transparent text-center font-bold text-sm border border-light dark:border-dark rounded-md py-1 px-1.5 focus:ring-0 focus:border-red dark:focus:border-yellow focus:bg-white dark:focus:bg-accent-dark ml-auto`}
                 value={`${inputPrefix ?? ''}${formatCompact(value)}`}
                 onChange={(e) => onChange(parseCompact(e.target.value))}
             />
