@@ -198,6 +198,6 @@ To set the rating, add the **CSM sentiment** column to your account view, then c
 - Only the CSM on the account sets the rating. Do not rate an account for somebody else.
 - Change it when the relationship changes. There is no review schedule.
 - On handover, rate your own relationship. Start again at 2 instead of keeping the rating the previous CSM gave. If you keep their rating, the field tells you about the history of the book and not about the relationship the account has today.
-- Be honest. A book of all fives is less useful than an accurate one, and a one is not a failure — it tells us which accounts are self-serve by nature and which ones need a human.
+- Be honest. A book of all fives is less useful than an accurate one, and a one is not a failure — it tells us which accounts might need more focus from the CSM team and beyond.
 
 Each label starts with a digit, so the scale sorts in the accounts table and totals in HogQL and PostHog AI. Use `toInt32OrNull(substring(value, 1, 1))` to get the number.
