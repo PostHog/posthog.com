@@ -61,7 +61,8 @@ const BodyReviewAndMerge = () => (
 const BodyShipsCode = () => (
     <Paragraph>
         PostHog already has your <Highlight>analytics and errors</Highlight>. Now it{' '}
-        <Underline delay={900}>ships code</Underline> to help you build a better product.
+        {/* A non-breaking space keeps the two words on one line, so the underline is one stroke. */}
+        <Underline delay={900}>ships&nbsp;code</Underline> to help you build a better product.
     </Paragraph>
 )
 
