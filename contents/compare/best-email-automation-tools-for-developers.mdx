@@ -37,9 +37,17 @@ There's no wrong answer here, the right pick comes down to what you care about m
 
 For product-led teams, it's **[PostHog Workflows](/workflows)**. 
 
-It triggers messages from the [events](/docs/data/events), [cohorts](/docs/data/cohorts), [feature flags](/feature-flags), and [experiment](/experiments) results already recorded in PostHog, so you can email everyone who finished onboarding, entered a behavioral cohort, or hit a specific flag without exporting anyone to a marketing database first. And because automation lives next to your analytics, you can check what recipients did before and after the send without reconciling two datasets.
+It's a no-code, drag-and-drop builder that runs on the [events](/docs/data/events) and person properties already in your PostHog project (no separate marketing dataset) so you can email everyone who finished onboarding, landed in a behavioral cohort, or hit a specific [feature flag](/feature-flags) without exporting anyone first. Add delays and audience splits, and because it all lives next to your analytics, you can check what recipients did before and after the send without reconciling two datasets.
 
+And you're not stuck in the UI: build and edit workflows in code through the [PostHog API](/docs/api) or the [MCP server](/mcp), so a workflow can live in version control and ship alongside the rest of your changes.
 
+A few workflows we actually run at PostHog:
+
+-   **Weekly error digest email.** A webhook sends one digest per organization, and the workflow renders it with Liquid: total exceptions with a bar chart, crash-free session rate, and top and new issues with sparklines – plus a nudge with the exact wizard command when stack traces aren't symbolicated.
+-   **Post-merge feedback email.** When a developer merges the pull request our setup wizard opened, a workflow emails them to ask how the wizard went.
+-   **Broken CI → an agent.** When CI goes red on the main branch, a workflow starts an AI agent task that reads our CI-debugging playbook and replies in the alert thread with a verdict, the failing job, and the next step for a human (it's not allowed to re-run CI or push code) – then a later step flips a physical alert light in the office on, and a companion workflow turns it off when CI is green again.
+-   **Infra alert triage.** A new firing alert kicks off a focused AI investigation and posts the findings back into the thread that raised it.
+-   **AI code review.** A pull request labeled for a given team triggers a standing review agent that comments on the PR.
 
 **What makes PostHog Workflows good for developers:**
 
@@ -53,7 +61,12 @@ It triggers messages from the [events](/docs/data/events), [cohorts](/docs/data/
 
 **Alternatives to consider:** **Customer.io** or **Brevo** for deep lifecycle campaigns; **n8n** if self-hosting is the deciding factor; **Zapier** for a bigger catalog of app integrations.
 
-<WizardCTA />
+<WizardCTA
+ command="wizard"
+ title="Get your product events flowing, then automate on them"
+ subtitle="The setup wizard instruments PostHog in one command so your events are ready to trigger workflows."
+ learnMoreTo="/docs/workflows"
+/>
 
 ### What's the best email automation tool for connecting SaaS apps?
 
@@ -67,7 +80,7 @@ It triggers messages from the [events](/docs/data/events), [cohorts](/docs/data/
 -   **Pricing:** Per task; free plan covers 100 tasks/month and two-step Zaps; paid plans from ~$19.99/month billed annually
 -   **License:** Proprietary SaaS, no self-hosted version
 
-**Not ideal if:** emails need to respond directly to product events, cohorts, flags, or experiments without first copying that data into connected apps – or one platform already holds your product data and messaging logic.
+**Not ideal if:** emails need to respond directly to product events, cohorts, flags, or experiments without first copying that data into connected apps, or one platform already holds your product data and messaging logic.
 
 **Alternatives to consider:** **Make** for a more flexible branching builder; **n8n** for self-hosting; **PostHog Workflows** for product-led automation.
 
