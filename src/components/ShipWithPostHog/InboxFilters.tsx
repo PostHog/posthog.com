@@ -1,52 +1,51 @@
 import React, { useState } from 'react'
-import {
-    IconCheck,
-    IconChevronDown,
-    IconSort,
-    IconFlag,
-    IconFilter,
-    IconClock,
-    IconCalendar,
-    IconRefresh,
-    IconCompass,
-} from '@posthog/icons'
+import { IconCheck, IconChevronDown } from '@posthog/icons'
 import { Popover } from 'components/RadixUI/Popover'
 import { PRIORITIES, PRIORITY_META } from './PriorityBadge'
-import { SOURCE_META, sourceKeyOf, type InboxItem, type Priority, type SourceKey } from './inboxData'
+import { DEFAULT_STATUSES, STATUSES, statusOf, type InboxItem, type Priority, type ReportStatus } from './inboxData'
 
 /**
- * The Inbox filter bar: sort, source, and priority, mirroring the real product's
- * controls. All three actually filter the list – see `applyFilters`.
+ * The inbox filter bar: priority, status, and sort, mirroring the redesigned product.
+ * All three actually filter the list – see `applyFilters`.
  *
- * Sort is single-select. Source and priority are multi-select, matching the real Inbox:
- * clicking an option toggles it and leaves the menu open so several can be picked in one
- * go. Clearing every option in a menu returns it to "off", and the reset button beside
- * the bar clears all three at once.
+ * Priority and sort are single-select and close on pick. Status is multi-select and
+ * stays open, so several can be ticked in one go. There's no reset button: the app has
+ * none, and each menu's own "All priorities" row or checkboxes already clear it.
+ *
+ * The Source menu is gone. The redesign dropped it from the bar, and with it the nested
+ * Scout group – scouts are their own tab now rather than a facet of this list.
  */
 
 export type SortKey = 'priority' | 'updated' | 'newest' | 'oldest'
 
 export interface InboxFilterState {
     sort: SortKey
-    /** Discovery channels that found the report, not the products it lives in. Empty = all. */
-    sources: SourceKey[]
-    /** Scout categories, the other half of the Source menu. Empty = all. */
-    scouts: string[]
-    /** Empty = all. */
-    priorities: Priority[]
+    /** Null = every priority, which the menu shows as "All priorities". */
+    priority: Priority | null
+    /** Empty = none match, so the list empties. Defaults to the two open states. */
+    statuses: ReportStatus[]
 }
 
-export const DEFAULT_FILTERS: InboxFilterState = { sort: 'priority', sources: [], scouts: [], priorities: [] }
+export const DEFAULT_FILTERS: InboxFilterState = {
+    sort: 'priority',
+    priority: null,
+    // Copied, so resetting can't hand out a reference to the shared default.
+    statuses: [...DEFAULT_STATUSES],
+}
+
+/** Whether the status menu has been moved off its default, whatever the count. */
+const statusesChanged = (statuses: ReportStatus[]): boolean =>
+    statuses.length !== DEFAULT_STATUSES.length || statuses.some((status) => !DEFAULT_STATUSES.includes(status))
 
 /** Add or remove `value`, so a menu row can toggle its own selection. */
 const toggle = <T,>(list: T[], value: T): T[] =>
     list.includes(value) ? list.filter((entry) => entry !== value) : [...list, value]
 
-const SORT_OPTIONS: { key: SortKey; label: string; Icon: React.ComponentType<{ className?: string }> }[] = [
-    { key: 'priority', label: 'Priority first', Icon: IconSort },
-    { key: 'updated', label: 'Last updated first', Icon: IconRefresh },
-    { key: 'newest', label: 'Newest first', Icon: IconCalendar },
-    { key: 'oldest', label: 'Oldest first', Icon: IconClock },
+const SORT_OPTIONS: { key: SortKey; label: string }[] = [
+    { key: 'priority', label: 'Priority first' },
+    { key: 'updated', label: 'Last updated first' },
+    { key: 'newest', label: 'Newest first' },
+    { key: 'oldest', label: 'Oldest first' },
 ]
 
 const MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
@@ -75,16 +74,8 @@ const priorityRank = (item: InboxItem): number => Number(item.priority.slice(1))
  * Returns a new array; `items` is untouched.
  */
 export const applyFilters = (items: InboxItem[], filters: InboxFilterState): InboxItem[] => {
-    // Sources and scouts are two halves of one menu, so they union rather than intersect –
-    // picking "Replay Vision" and the "Cohorts" scout shows both, not neither.
-    const sourceFacetOff = !filters.sources.length && !filters.scouts.length
-    const matchesSource = (item: InboxItem): boolean =>
-        sourceFacetOff ||
-        filters.sources.includes(sourceKeyOf(item)) ||
-        (item.origin.kind === 'scout' && filters.scouts.includes(item.origin.scout))
-
     const matching = items.filter(
-        (item) => matchesSource(item) && (!filters.priorities.length || filters.priorities.includes(item.priority))
+        (item) => (!filters.priority || item.priority === filters.priority) && filters.statuses.includes(statusOf(item))
     )
 
     const sorted = [...matching]
@@ -108,43 +99,13 @@ export const applyFilters = (items: InboxItem[], filters: InboxFilterState): Inb
     return sorted
 }
 
-/**
- * The signal sources present in the data, so no option in the menu leads to an empty list.
- *
- * `signals_scout` is deliberately excluded: scouts get their own group below, listed by
- * name, and a flat "Scout" row beside that group would be a second control for the same
- * thing – the menu rendered "Scout" twice. Matching the product, where the scout filter
- * takes skill names rather than the bare source product.
- */
-export const sourcesInUse = (items: InboxItem[]): SourceKey[] => {
-    const seen: SourceKey[] = []
-    items.forEach((item) => {
-        const key = sourceKeyOf(item)
-        if (key !== 'signals_scout' && !seen.includes(key)) seen.push(key)
-    })
-    return seen
-}
-
-/**
- * The scout categories present in the data, for the Source menu's nested Scout group.
- * Currently empty – every real report on this page was found by a signal source rather
- * than a scout – so the group renders only once scout-authored items exist.
- */
-export const scoutsInUse = (items: InboxItem[]): string[] => {
-    const seen: string[] = []
-    items.forEach((item) => {
-        if (item.origin.kind === 'scout' && !seen.includes(item.origin.scout)) seen.push(item.origin.scout)
-    })
-    return seen
-}
-
 const MenuItem = ({
     icon,
     label,
     selected,
     onSelect,
 }: {
-    icon: React.ReactNode
+    icon?: React.ReactNode
     label: React.ReactNode
     selected: boolean
     onSelect: () => void
@@ -154,12 +115,40 @@ const MenuItem = ({
         onClick={onSelect}
         className="flex w-full items-center gap-2 rounded px-2 py-1 text-left text-sm text-primary transition-colors hover:bg-accent"
     >
-        <span className="flex size-4 shrink-0 items-center justify-center">{icon}</span>
+        {icon !== undefined && <span className="flex size-4 shrink-0 items-center justify-center">{icon}</span>}
         <span className="flex-1 whitespace-nowrap">{label}</span>
         {/* Reserve the tick's width always, so labels don't shift as selection moves. */}
         <span className="flex size-4 shrink-0 items-center justify-center">
             {selected && <IconCheck className="size-4 text-primary" />}
         </span>
+    </button>
+)
+
+/** A checkbox row, for the multi-select status menu. */
+const CheckboxItem = ({
+    label,
+    checked,
+    onSelect,
+}: {
+    label: React.ReactNode
+    checked: boolean
+    onSelect: () => void
+}): JSX.Element => (
+    <button
+        type="button"
+        onClick={onSelect}
+        role="menuitemcheckbox"
+        aria-checked={checked}
+        className="flex w-full items-center gap-2 rounded px-2 py-1 text-left text-sm text-primary transition-colors hover:bg-accent"
+    >
+        <span
+            className={`flex size-4 shrink-0 items-center justify-center rounded-sm border ${
+                checked ? 'border-red bg-red text-white dark:border-yellow dark:bg-yellow' : 'border-primary'
+            }`}
+        >
+            {checked && <IconCheck className="size-3" />}
+        </span>
+        <span className="flex-1 whitespace-nowrap">{label}</span>
     </button>
 )
 
@@ -169,14 +158,12 @@ const MenuItem = ({
  */
 const FilterMenu = ({
     name,
-    icon,
     label,
     active,
     children,
 }: {
     /** Stable name of the control. `label` shows the current value, so it can't do this. */
     name: string
-    icon: React.ReactNode
     label: string
     /** Styles the chip as set. */
     active: boolean
@@ -203,7 +190,6 @@ const FilterMenu = ({
                             : 'border-primary bg-primary text-secondary hover:text-primary'
                     }`}
                 >
-                    {icon}
                     {label}
                     <IconChevronDown className="size-3.5 text-secondary/70" />
                 </button>
@@ -217,44 +203,88 @@ const FilterMenu = ({
 export default function InboxFilterBar({
     filters,
     onChange,
-    sources,
-    scouts = [],
 }: {
     filters: InboxFilterState
     onChange: (next: InboxFilterState) => void
-    sources: SourceKey[]
-    /** Scout categories in the active tab's data. Omitted or empty hides the Scout group. */
-    scouts?: string[]
 }): JSX.Element {
     const activeSort = SORT_OPTIONS.find((option) => option.key === filters.sort) ?? SORT_OPTIONS[0]
 
-    // The chip reads as the single selection when there's one, and a count beyond that.
-    const sourceCount = filters.sources.length + filters.scouts.length
-    const onlySource = filters.sources.length === 1 && !filters.scouts.length ? filters.sources[0] : null
-    const SourceIcon = onlySource ? SOURCE_META[onlySource].Icon : IconFilter
-    const sourceLabel = onlySource
-        ? SOURCE_META[onlySource].label
-        : sourceCount === 1
-        ? `Scout · ${filters.scouts[0]}`
-        : sourceCount > 1
-        ? `${sourceCount} sources`
-        : 'Source'
-
-    const priorityLabel = filters.priorities.length ? [...filters.priorities].sort().join(', ') : 'Priority'
+    /*
+     * The status chip counts rather than lists: the labels are long enough that two of
+     * them would push the bar wider than the list it sits above. One selection is worth
+     * naming, though – that's the case where the count tells you nothing.
+     */
+    const statusLabel = filters.statuses.length === 1 ? filters.statuses[0] : `${filters.statuses.length} statuses`
 
     return (
-        <div className="flex items-center gap-2">
+        <div className="flex flex-wrap items-center gap-2">
             <FilterMenu
-                name="Sort"
-                icon={<IconSort className="size-3.5" />}
-                label={filters.sort === 'priority' ? 'Sort' : activeSort.label}
-                active={filters.sort !== 'priority'}
+                name="Priority"
+                label={
+                    filters.priority
+                        ? `${filters.priority} · ${PRIORITY_META[filters.priority].label}`
+                        : 'All priorities'
+                }
+                active={filters.priority !== null}
             >
+                {(close) => (
+                    <>
+                        <MenuItem
+                            label="All priorities"
+                            selected={filters.priority === null}
+                            onSelect={() => {
+                                onChange({ ...filters, priority: null })
+                                close()
+                            }}
+                        />
+                        {PRIORITIES.map((key) => {
+                            const { color, label } = PRIORITY_META[key]
+                            return (
+                                <MenuItem
+                                    key={key}
+                                    icon={
+                                        <span
+                                            className="size-2 rounded-full"
+                                            style={{ backgroundColor: color }}
+                                            aria-hidden
+                                        />
+                                    }
+                                    label={
+                                        <>
+                                            {key} <span className="text-secondary">· {label}</span>
+                                        </>
+                                    }
+                                    selected={filters.priority === key}
+                                    onSelect={() => {
+                                        onChange({ ...filters, priority: key })
+                                        close()
+                                    }}
+                                />
+                            )
+                        })}
+                    </>
+                )}
+            </FilterMenu>
+
+            {/* Multi-select, so it doesn't close on pick. */}
+            <FilterMenu name="Status" label={statusLabel} active={statusesChanged(filters.statuses)}>
+                {() =>
+                    STATUSES.map((status) => (
+                        <CheckboxItem
+                            key={status}
+                            label={status}
+                            checked={filters.statuses.includes(status)}
+                            onSelect={() => onChange({ ...filters, statuses: toggle(filters.statuses, status) })}
+                        />
+                    ))
+                }
+            </FilterMenu>
+
+            <FilterMenu name="Sort" label={`Sort: ${activeSort.label}`} active={filters.sort !== 'priority'}>
                 {(close) =>
-                    SORT_OPTIONS.map(({ key, label, Icon }) => (
+                    SORT_OPTIONS.map(({ key, label }) => (
                         <MenuItem
                             key={key}
-                            icon={<Icon className="size-4 text-secondary" />}
                             label={label}
                             selected={filters.sort === key}
                             onSelect={() => {
@@ -265,90 +295,6 @@ export default function InboxFilterBar({
                     ))
                 }
             </FilterMenu>
-
-            {/* Source and Priority are multi-select, so neither closes on pick. */}
-            <FilterMenu
-                name="Source"
-                icon={<SourceIcon className={`size-3.5 ${onlySource ? SOURCE_META[onlySource].color : ''}`} />}
-                label={sourceLabel}
-                active={sourceCount > 0}
-            >
-                {() => (
-                    <>
-                        {sources.map((key) => {
-                            const { label, Icon, color } = SOURCE_META[key]
-                            return (
-                                <MenuItem
-                                    key={key}
-                                    icon={<Icon className={`size-4 ${color}`} />}
-                                    label={label}
-                                    selected={filters.sources.includes(key)}
-                                    onSelect={() => onChange({ ...filters, sources: toggle(filters.sources, key) })}
-                                />
-                            )
-                        })}
-                        {/* Only rendered when scout-authored items exist, so it can't dead-end. */}
-                        {scouts.length > 0 && (
-                            <>
-                                <p className="m-0 mt-1 px-2 py-1 text-xs font-semibold uppercase tracking-wide text-secondary">
-                                    Scout
-                                </p>
-                                {scouts.map((scout) => (
-                                    <MenuItem
-                                        key={scout}
-                                        icon={<IconCompass className="size-4 text-secondary" />}
-                                        label={scout}
-                                        selected={filters.scouts.includes(scout)}
-                                        onSelect={() => onChange({ ...filters, scouts: toggle(filters.scouts, scout) })}
-                                    />
-                                ))}
-                            </>
-                        )}
-                    </>
-                )}
-            </FilterMenu>
-
-            <FilterMenu
-                name="Priority"
-                icon={<IconFlag className="size-3.5" />}
-                label={priorityLabel}
-                active={filters.priorities.length > 0}
-            >
-                {() =>
-                    PRIORITIES.map((key) => {
-                        const { color, label } = PRIORITY_META[key]
-                        return (
-                            <MenuItem
-                                key={key}
-                                icon={
-                                    <span
-                                        className="size-2 rounded-full"
-                                        style={{ backgroundColor: color }}
-                                        aria-hidden
-                                    />
-                                }
-                                label={
-                                    <>
-                                        {key} <span className="text-secondary">· {label}</span>
-                                    </>
-                                }
-                                selected={filters.priorities.includes(key)}
-                                onSelect={() => onChange({ ...filters, priorities: toggle(filters.priorities, key) })}
-                            />
-                        )
-                    })
-                }
-            </FilterMenu>
-
-            <button
-                type="button"
-                onClick={() => onChange(DEFAULT_FILTERS)}
-                title="Reset sort and filters"
-                aria-label="Reset sort and filters"
-                className="inline-flex size-8 shrink-0 items-center justify-center rounded border border-primary bg-primary text-secondary transition-colors hover:text-primary"
-            >
-                <IconRefresh className="size-3.5" />
-            </button>
         </div>
     )
 }

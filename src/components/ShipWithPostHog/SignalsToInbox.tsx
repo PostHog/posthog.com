@@ -1,16 +1,16 @@
 import React, { useState } from 'react'
 import SelfDrivingStory from 'components/SelfDrivingStory'
-import { INBOX_ITEMS, REPORT_ITEMS, originMeta, type InboxItem } from './inboxData'
+import { ALL_ITEMS, originMeta, type InboxItem } from './inboxData'
 
 /*
  * Only items that actually have a walkthrough. Steps are optional on InboxItem, so
  * adding a report to the inbox can never leave a selector button here that opens nothing.
  *
- * Both arrays, because a product's story doesn't depend on whether its report reached a
- * pull request: APM and Feature flags are genuine `requires_human_input` reports and live
- * in `REPORT_ITEMS`, but they narrate their product as well as any merged one does.
+ * The whole list, because a product's story doesn't depend on whether its report reached
+ * a pull request: APM and Feature flags are genuine `requires_human_input` reports with no
+ * pull request, but they narrate their product as well as any merged one does.
  */
-const WALKTHROUGHS: InboxItem[] = [...INBOX_ITEMS, ...REPORT_ITEMS].filter((item) => item.steps?.length)
+const WALKTHROUGHS: InboxItem[] = ALL_ITEMS.filter((item) => item.steps?.length)
 
 /**
  * Selector label. The source alone isn't unique – several of these were found by Replay
@@ -23,7 +23,7 @@ const selectorLabel = (item: InboxItem): string =>
 
 /**
  * "How signals get to your Inbox" – the section below the inbox. Each merged pull
- * request gets its own Scout → Signal → Investigate → PR → Merge walkthrough, and a
+ * request gets its own Signal → Report → PR walkthrough, and a
  * selector switches between them. Read-only: reviewing happens up in the inbox itself.
  */
 export default function SignalsToInbox(): JSX.Element | null {
@@ -37,8 +37,8 @@ export default function SignalsToInbox(): JSX.Element | null {
             <div className="mx-auto mb-6 max-w-3xl text-center">
                 <h2 className="text-2xl font-bold @md:text-3xl">How signals get to your Inbox</h2>
                 <p className="mt-3 text-secondary @2xl:text-lg">
-                    Every one of these took the same four steps – something gets caught, an agent investigates, it opens
-                    the pull request, and someone merges it. Pick one to see how it played out.
+                    Built-in signal sources catch these as they happen. Scouts go looking on a schedule. Either way the
+                    same three steps follow. Pick one to see how it played out.
                 </p>
             </div>
 

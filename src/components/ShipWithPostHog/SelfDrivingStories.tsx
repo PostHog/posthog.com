@@ -96,7 +96,7 @@ export default function SelfDrivingStories({ posts }: { posts: SelfDrivingPost[]
             <div className="mx-auto mb-6 max-w-3xl text-center">
                 <h2 className="text-2xl font-bold @md:text-3xl">The stories behind the pull requests</h2>
                 <p className="mt-3 text-secondary @2xl:text-lg">
-                    Every walkthrough above is a real merged PR, and most of them got written up properly – what the
+                    Every walkthrough above is a real merged PR, and most of them got written up properly. What the
                     agent caught, what it got wrong on the first pass, and what we changed as a result.
                 </p>
             </div>

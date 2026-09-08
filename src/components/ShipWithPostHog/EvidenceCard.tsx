@@ -81,7 +81,7 @@ export default function EvidenceCard({ item }: { item: EvidenceItem }): JSX.Elem
                         }
                     >
                         The files the agent opened while working this finding out. Straight from the report, and the
-                        most concrete evidence that it read the code rather than guessed.
+                        most concrete evidence that it read the code instead of guessing.
                     </Hint>
                     <ul className="m-0 list-none p-0">
                         {item.codePaths.map((path) => (

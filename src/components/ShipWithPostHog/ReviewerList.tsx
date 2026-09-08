@@ -88,7 +88,7 @@ export default function ReviewerList({ reviewers }: { reviewers: Reviewer[] }): 
                         <div className="flex items-center gap-2">
                             <Hint trigger={avatar}>
                                 {profile?.companyRole
-                                    ? `${reviewer.name} – ${profile.companyRole}`
+                                    ? `${reviewer.name}, ${profile.companyRole}`
                                     : `${reviewer.name} isn't in the team directory, so this falls back to an initial.`}
                             </Hint>
                             <div className="flex min-w-0 flex-wrap items-baseline gap-x-2 gap-y-0.5">

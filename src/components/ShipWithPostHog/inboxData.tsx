@@ -123,13 +123,13 @@ export const SOURCE_META: Record<SourceKey, SourceMeta> = {
         // IconToggle and seagreen are what the rest of the site uses for this product.
         Icon: IconToggle,
         color: 'text-seagreen',
-        found: 'A flag drifted – stale, renamed, or evaluating off a cliff.',
+        found: 'A flag drifted. Stale, renamed, or evaluating off a cliff.',
     },
     signals_scout: {
         label: 'Scout',
         Icon: IconCompass,
         color: 'text-purple',
-        found: 'A scout went looking on a schedule, rather than waiting for something to break.',
+        found: 'A scout went looking on a schedule, without waiting for something to break.',
     },
 }
 
@@ -307,7 +307,7 @@ export interface InboxItem {
      */
     intro?: React.ReactNode
     /**
-     * The Scout → Signal → Investigate → PR → Merge walkthrough for `SignalsToInbox`.
+     * The Signal → Report → PR walkthrough for `SignalsToInbox`.
      * Optional for the same reason: only items with steps show up in the selector, so an
      * item added to the inbox never breaks that section by having nothing to narrate.
      */
@@ -354,60 +354,80 @@ export interface InboxItem {
  * the public API, the report half needs project 2 access.
  */
 export const INBOX_ITEMS: InboxItem[] = [
-    // 1 — PostHog/posthog#75725. Found by error tracking.
+    // 1 — PostHog/posthog-js#4151. Found by error tracking.
     {
+        /*
+         * Report 019... on project 2, and the pull request it produced:
+         * PostHog/posthog-js#4151, merged 2026-07-15.
+         *
+         * The GitHub half is verbatim from the public API (`/repos/PostHog/posthog-js/pulls/4151`,
+         * `/reviews`, `/files`): title, branch, base, diff totals, file list, the approver, and the
+         * hunk under Files changed. The report half is read from a capture of the report itself,
+         * because project 2's API isn't reachable from here – see the note in README.md.
+         *
+         * This is the one item whose repo isn't `PostHog/posthog`. `repoOf()` parses it from
+         * `prUrl`, so the row names posthog-js without anything else needing to know.
+         */
         id: 'error-tracking',
         commitType: 'fix',
-        scope: 'insights',
-        title: "don't fail queries when the cache size lookup errors",
+        // The report's own scope, which is `replay` – the PR that came out of it says `rrweb`.
+        scope: 'replay',
+        title: 'Guard rrweb native setter hooks against Illegal invocation',
         summary:
-            '172 insight queries failed in three minutes even though the queries had already succeeded – a bookkeeping read in the cache write path took the response down with it.',
-        priority: 'P1',
-        signalCount: 1,
-        timeAgo: 'Merged Jul 30',
+            'Users recording sessions hit a recurring TypeError inside the session recorder, degrading replay capture and filling error tracking with fresh fingerprints of the same bug.',
+        /*
+         * NOT VERIFIED. The report's priority isn't in the capture – the app shows the chip on the
+         * Files-changed tab, and the capture is of Summary. P2 is inferred from the report's own
+         * impact language: it degrades capture quality without being fatal to the host page. Worth
+         * correcting against the report.
+         */
+        priority: 'P2',
+        signalCount: 2,
+        timeAgo: 'Merged Jul 15',
         origin: { kind: 'signal', product: 'error_tracking' },
-        prUrl: 'https://github.com/PostHog/posthog/pull/75725',
-        prNumber: 75725,
+        prUrl: 'https://github.com/PostHog/posthog-js/pull/4151',
+        prNumber: 4151,
         // Product-level narration rather than this one PR, so the scope would be noise.
         walkthroughLabel: 'Error tracking',
-        intro: "Error tracking turns exceptions into grouped, ranked issues – the loop's most direct route from signal to fix.",
+        intro: "Error tracking turns exceptions into grouped, ranked issues. It's the loop's most direct route from signal to fix.",
         steps: [
             {
                 stage: 'signal',
                 copy: 'New exceptions, reopened issues, and volume spikes arrive as signals, grouped so that seven fingerprints of the same bug land as one report. A scout can keep closer watch on a single service or release.',
-                image: 'https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2026_08_05_at_14_28_33_2x_95119ac46a.png',
+                image: 'https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2026_09_08_at_11_59_22_2x_bf6ec34f73.png',
             },
             {
                 stage: 'investigate',
+                label: 'Report',
                 copy: "The agent walks the stack traces to the code they share, checks who's affected and since when, and writes it up with the issues attached.",
-                image: 'https://res.cloudinary.com/dmukukwp6/image/upload/Report_Investigate_Mock_Error_tracking_92da14dd9f.png',
+                image: 'https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2026_09_08_at_11_47_46_2x_bce5d16e66.png',
             },
             {
                 stage: 'pr',
-                copy: 'Error tracking hands the agent a stack trace, so it goes straight to a draft PR without waiting for a human decision. The PR lands in your Inbox next to the report that produced it.',
-                image: 'https://res.cloudinary.com/dmukukwp6/image/upload/Git_Hub_PR_Mock_Error_tracking_e283365724.png',
-            },
-            {
-                stage: 'merge',
-                copy: 'Merging one PR can close a whole family of grouped issues at once. Dismissing it works too – the reason you give steers what error tracking surfaces after that.',
-                image: 'https://res.cloudinary.com/dmukukwp6/image/upload/Git_Hub_PR_Merged_Mock_Error_tracking_ef7e6bea2a.png',
+                copy: 'Error tracking hands the agent a stack trace, so it goes straight to a draft PR without waiting for a human decision. The PR lands in your Inbox next to the report that produced it, and merging it can close a whole family of grouped issues at once. Dismissing it works too, and the reason you give steers what error tracking surfaces after that.',
+                image: 'https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2026_09_08_at_11_45_28_2x_52fe679c8a.png',
             },
         ],
         detail: {
             status: 'Actionable',
-            firstSeen: 'Jul 30, 2026',
-            lastUpdated: 'Jul 30, 2026',
-            branch: 'posthog-code/query-cache-failsoft-team-limit',
+            /*
+             * `firstSeen` is a real first-seen date the report quotes for one of the fingerprints in
+             * its cluster; `lastUpdated` is the merge. Both from the sources named above.
+             */
+            firstSeen: 'Jul 9, 2026',
+            lastUpdated: 'Jul 15, 2026',
+            branch: 'posthog-code/rrweb-hooksetter-illegal-invocation',
             contributingSources: ['error_tracking'],
-            stats: { added: 39, removed: 3, files: 4, commits: 4 },
-            approvers: ['andyzzhao'],
+            // Real whole-PR totals from the GitHub API.
+            stats: { added: 102, removed: 1, files: 3, commits: 2 },
+            approvers: ['turnipdabeets'],
             summary: [
                 {
                     paragraphs: [
                         <>
-                            <strong>172 insight queries failed in a three-minute window</strong> even though the queries
-                            themselves had already succeeded. A Postgres bookkeeping read in the query cache write path
-                            blew up and took the response with it.
+                            Users recording sessions hit a recurring <Code>TypeError: Illegal invocation</Code> thrown
+                            inside the rrweb session recorder, degrading replay capture and polluting error tracking
+                            with churning fingerprints.
                         </>,
                     ],
                 },
@@ -415,11 +435,14 @@ export const INBOX_ITEMS: InboxItem[] = [
                     heading: 'Problem',
                     paragraphs: [
                         <>
-                            <Code>QueryCache.store_result()</Code> writes the result, then asks{' '}
-                            <Code>get_team_cache_limit()</Code> for the team's cache cap. That helper reads an optional
-                            override from Postgres and only catches <Code>Team.DoesNotExist</Code>, so when the
-                            connection pooler saturates and raises <Code>OperationalError</Code> a successful ClickHouse
-                            query becomes a 500 over a config value that has a perfectly good default.
+                            rrweb's input observer calls <Code>hookSetter</Code> to redefine the native{' '}
+                            <Code>value</Code> / <Code>checked</Code> / <Code>selectedIndex</Code> setters on the
+                            input-element prototypes. The redefined setter then runs the original native setter plus a
+                            deferred mock event handler that reads native accessors. When <Code>this</Code> is{' '}
+                            <strong>not a genuine native element</strong> (a custom element, a cross-realm object, or a
+                            proxy another library placed on the prototype chain), the native accessor rejects the call
+                            with 'Illegal invocation'. That deferred call is unwrapped, so it propagates instead of
+                            being swallowed.
                         </>,
                     ],
                 },
@@ -427,9 +450,14 @@ export const INBOX_ITEMS: InboxItem[] = [
                     heading: 'Impact',
                     paragraphs: [
                         <>
-                            172 exceptions in three minutes, each one a query someone paid for and didn't get back. It
-                            only fires when Postgres is already under pressure, so it amplifies database incidents
-                            rather than dripping constantly.
+                            This isn't isolated. Error tracking shows a cluster of sibling issues with identical name,
+                            description, and source that keep spawning fresh fingerprints, with new ones still appearing
+                            weeks after the first. It's non-fatal to the host page, but it degrades replay capture
+                            quality and the churn pollutes error tracking.
+                        </>,
+                        <>
+                            Because the fix ships in <Code>posthog-js</Code> and not in the app, it reaches every SDK
+                            user instead of one project.
                         </>,
                     ],
                 },
@@ -437,49 +465,33 @@ export const INBOX_ITEMS: InboxItem[] = [
                     heading: 'Solution',
                     paragraphs: [
                         <>
-                            Catch <Code>DatabaseError</Code> and fall back to the default limit, and wrap the
-                            bookkeeping call in <Code>store_result()</Code> so cache accounting can never fail a query
-                            that already ran.
+                            Wrap the <strong>deferred</strong> setter call in a <Code>try</Code>/<Code>catch</Code> so
+                            an illegal <Code>this</Code> drops that one replay update instead of throwing.
+                        </>,
+                        <>
+                            The synchronous call beside it is left deliberately unguarded: it runs inside the page's own
+                            assignment, where the platform throws even for genuine elements. Setting a file input's{' '}
+                            <Code>value</Code>, say. Swallowing there would turn real errors into silent no-ops and
+                            change host-page behaviour.
                         </>,
                     ],
                 },
             ],
-            reviewers: [
-                {
-                    name: 'Andy Zhao',
-                    githubLogin: 'andyzzhao',
-                    approved: true,
-                    commits: [
-                        {
-                            sha: 'a93db7e',
-                            url: 'https://github.com/PostHog/posthog/commit/a93db7eb3e11bce139529b57baa550330f64e412',
-                        },
-                        {
-                            sha: 'dd25283',
-                            url: 'https://github.com/PostHog/posthog/commit/dd25283cd3a812b26299f6eddcf5ba2d737c483b',
-                        },
-                    ],
-                    reason: (
-                        <>
-                            Introduced <Code>get_team_cache_limit()</Code>, which put a synchronous Postgres read into
-                            the ClickHouse result-cache write path – the call that raises in the reported traceback.
-                            Also authored the current <Code>store_result()</Code>, the frame that lets a bookkeeping
-                            failure escape and fail an already-successful query.
-                        </>
-                    ),
-                },
-            ],
+            /*
+             * No reviewers panel: the PR's approver is real and is on `approvers`, but the report's
+             * own rationale for suggesting them isn't in the capture, and README.md's rule is to omit
+             * a reviewer rather than dress one up.
+             */
             evidence: [
                 {
-                    id: 'exception-burst',
+                    id: 'illegal-invocation-new-issue',
                     source: 'error_tracking',
-                    title: '172 events in a three-minute window',
+                    title: 'New issue: TypeError: Illegal invocation',
                     body: (
                         <>
-                            Queried <Code>$exception</Code> events: the timeout arrives in project-wide bursts, then
-                            goes near-silent for about ten days. Narrowed to this path, 172 events land inside three
-                            minutes, 171 of them as <Code>OperationalError</Code> with <Code>ProtocolViolation</Code>. A
-                            GitHub search confirmed nobody had an open branch on either file.
+                            Error tracking opened this the first time the exception was seen, with frames inside the
+                            bundled recorder and not in any application code. Re-worded from the finding: the stored
+                            prose carries issue fingerprints and per-project counts.
                         </>
                     ),
                     tags: [
@@ -490,92 +502,177 @@ export const INBOX_ITEMS: InboxItem[] = [
                         },
                     ],
                     verified: true,
-                    codePaths: [
-                        'posthog/query_cache/size_tracker.py',
-                        'posthog/query_cache/cache.py',
-                        'posthog/cache_utils.py',
-                        'posthog/hogql_queries/query_runner.py',
-                        'posthog/settings/schedules.py',
-                    ],
+                    codePaths: ['packages/rrweb/rrweb/src/utils.ts', 'packages/rrweb/rrweb/src/record/observer.ts'],
+                },
+                {
+                    id: 'illegal-invocation-siblings',
+                    source: 'error_tracking',
+                    title: 'A cluster of sibling issues with the same source',
+                    body: (
+                        <>
+                            Further issues arrived with an identical name, description, and source frame, each under its
+                            own fingerprint. That's what turns one recorder bug into a stream of apparently separate
+                            errors.
+                        </>
+                    ),
+                    tags: [{ label: 'Grouped', tone: 'blue', tooltip: 'Separate signals describing one problem.' }],
+                    codePaths: ['packages/rrweb/rrweb/src/utils.ts'],
                 },
             ],
+            /*
+             * The real file list from `/pulls/4151/files`. The hunk below is the actual patch on
+             * `utils.ts`, trimmed to the changed region.
+             */
             files: [
                 {
-                    path: 'posthog/query_cache/cache.py',
+                    path: 'packages/rrweb/rrweb/src/utils.ts',
                     added: 12,
-                    removed: 3,
-                    hunk: '@@ -4,6 +4,8 @@',
+                    removed: 1,
+                    hunk: '@@ -155,9 +155,20 @@',
                     lines: [
-                        { kind: 'context', text: 'from django.conf import settings' },
-                        { kind: 'context', text: '' },
-                        { kind: 'add', text: 'import structlog' },
-                        { kind: 'add', text: '' },
-                        { kind: 'context', text: 'from posthog.cache_utils import OrjsonJsonSerializer' },
+                        { kind: 'context', text: '          set(value) {' },
                         {
                             kind: 'context',
-                            text: 'from posthog.query_cache.size_tracker import TeamCacheSizeTracker',
+                            text: '            // put hooked setter into event loop to avoid of set latency',
                         },
+                        { kind: 'context', text: '            setTimeout(() => {' },
+                        { kind: 'remove', text: '              d.set!.call(this, value);' },
+                        {
+                            kind: 'add',
+                            text: "              // the accessors read inside `d.set` throw 'Illegal invocation'",
+                        },
+                        {
+                            kind: 'add',
+                            text: '              // when `this` is not a genuine native element (e.g. a proxy);',
+                        },
+                        {
+                            kind: 'add',
+                            text: '              // the page cannot observe this deferred call, so drop the',
+                        },
+                        { kind: 'add', text: '              // update rather than throw' },
+                        { kind: 'add', text: '              try {' },
+                        { kind: 'add', text: '                d.set!.call(this, value);' },
+                        { kind: 'add', text: '              } catch {' },
+                        { kind: 'add', text: '                // noop' },
+                        { kind: 'add', text: '              }' },
+                        { kind: 'context', text: '            }, 0);' },
+                        { kind: 'context', text: '            if (original && original.set) {' },
+                        {
+                            kind: 'add',
+                            text: '              // deliberately unguarded: this runs synchronously inside the',
+                        },
+                        {
+                            kind: 'add',
+                            text: "              // page's own assignment, where the platform throws even for",
+                        },
+                        { kind: 'add', text: "              // genuine elements (e.g. setting a file input's value)" },
+                        { kind: 'context', text: '              original.set.call(this, value);' },
+                        { kind: 'context', text: '            }' },
+                    ],
+                },
+                {
+                    path: 'packages/rrweb/rrweb/test/util.test.ts',
+                    added: 83,
+                    removed: 0,
+                    hunk: '@@ -100,6 +101,88 @@',
+                    lines: [
+                        { kind: 'context', text: '    });' },
+                        { kind: 'context', text: '  });' },
                         { kind: 'context', text: '' },
-                        { kind: 'add', text: 'logger = structlog.get_logger(__name__)' },
+                        { kind: 'add', text: "  describe('hookSetter()', () => {" },
+                        {
+                            kind: 'add',
+                            text: "    it('should contain a failing deferred hooked setter and preserve the native throw', () => {",
+                        },
+                        { kind: 'add', text: '      vi.useFakeTimers();' },
+                        { kind: 'add', text: '      try {' },
+                        { kind: 'add', text: '        // emulates a native accessor rejecting a foreign `this`' },
+                        { kind: 'add', text: '        const proto = {} as Record<string, unknown>;' },
+                        { kind: 'add', text: "        Object.defineProperty(proto, 'value', {" },
+                        { kind: 'add', text: '          configurable: true,' },
+                        { kind: 'add', text: '          set() {' },
+                        { kind: 'add', text: "            throw new TypeError('Illegal invocation');" },
+                        { kind: 'add', text: '          },' },
                     ],
                 },
             ],
         },
     },
-    // 2 — PostHog/posthog#72382. Found by Replay Vision.
+    // 2 — PostHog/posthog#86244. Found by Replay Vision.
     {
+        /*
+         * The report Replay Vision's scanners filed, and the pull request it produced:
+         * PostHog/posthog#86244, merged 2026-08-20.
+         *
+         * A good illustration of why these are grouped by discovery channel rather than by product.
+         * The bug is in AI observability's summarisation path, but nothing in AI observability
+         * noticed it – Replay Vision's scanners did, by watching people hit it in recordings. The
+         * affected product only shows up in the commit scope.
+         *
+         * GitHub half verbatim from the public API (`/pulls/86244`, `/reviews`, `/files`). Report
+         * half read from a capture of the report; project 2's API isn't reachable from here.
+         */
         id: 'replay-vision',
         commitType: 'fix',
-        scope: 'cohorts',
-        title: 'validate negation against sibling groups under outer AND',
+        scope: 'aio',
+        title: "stop summarizing traces the formatters can't read",
         summary:
-            "A valid cohort couldn't be saved when a negation sat in its own group, and the obvious workaround silently built a different cohort.",
-        priority: 'P2',
-        signalCount: 3,
-        timeAgo: 'Merged Jul 29',
+            'Trace summaries came back either confidently empty for a trace that clearly had content, or as a raw error code, so a paid feature was quietly describing the wrong thing.',
+        /*
+         * NOT VERIFIED. The capture is of the Summary tab, which doesn't show the priority chip.
+         * P1 is inferred from the report's own impact language: it calls the silent case "a paid
+         * feature actively lying about the data" and names two projects hit within hours. Worth
+         * correcting against the report.
+         */
+        priority: 'P1',
+        signalCount: 2,
+        timeAgo: 'Merged Aug 20',
         origin: { kind: 'signal', product: 'replay_vision' },
-        prUrl: 'https://github.com/PostHog/posthog/pull/72382',
-        prNumber: 72382,
-        // The scope would read "Replay Vision · cohorts", but this walkthrough narrates the
-        // product rather than this one cohort bug, so the button carries the product alone.
+        prUrl: 'https://github.com/PostHog/posthog/pull/86244',
+        prNumber: 86244,
+        // The scope would read "Replay Vision · aio", but this walkthrough narrates the product
+        // rather than this one summarisation bug, so the button carries the product alone.
         walkthroughLabel: 'Replay Vision',
         intro: 'Replay Vision watches your recordings with vision models, so findings come from the footage itself.',
         steps: [
             {
                 stage: 'signal',
                 copy: 'Scanners watch recordings with vision models and flag frustration, dead ends, and bad outcomes. Repeat findings become reports, and writing a new scanner takes a prompt.',
-                image: 'https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2026_08_05_at_14_20_35_2x_ace6f4a89a.png',
+                image: 'https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2026_09_08_at_13_49_13_2x_ee11a9ed21.png',
             },
             {
                 stage: 'investigate',
-                copy: 'The agent pulls the flagged recordings and confirms what the scanner saw before touching code – vision models can be wrong, and the report says so when they are. Confirmed findings get traced to the responsible component.',
-                image: 'https://res.cloudinary.com/dmukukwp6/image/upload/Report_Investigate_Mock_Replay_Vision_79e51365f5.png',
+                label: 'Report',
+                copy: 'The agent pulls the flagged recordings and confirms what the scanner saw before touching code. Vision models can be wrong, and the report says so when they are. Confirmed findings get traced to the responsible component.',
+                image: 'https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2026_09_08_at_13_04_05_2x_36403ed9ca.png',
             },
             {
                 stage: 'pr',
-                copy: 'Scanner findings get a human look before any code changes. When you confirm what it saw, the agent writes the fix and opens the PR.',
-                image: 'https://res.cloudinary.com/dmukukwp6/image/upload/Git_Hub_PR_Mock_Replay_Vision_9f7ebbb82a.png',
-            },
-            {
-                stage: 'merge',
-                copy: 'You review the diff with the clips beside it. If the scanner misread the situation, Improve scanner takes your correction and adjusts what it looks for.',
-                image: 'https://res.cloudinary.com/dmukukwp6/image/upload/Git_Hub_PR_Merged_Mock_Replay_Vision_f022dc3f54.png',
+                copy: 'Scanner findings get a human look before any code changes. When you confirm what it saw, the agent writes the fix and opens the PR. You review the diff with the clips beside it, and if the scanner misread the situation, Improve scanner takes your correction and adjusts what it looks for.',
+                image: 'https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2026_09_08_at_13_03_39_2x_b50488f158.png',
             },
         ],
         detail: {
             status: 'Actionable',
-            firstSeen: 'Jul 6, 2026',
-            lastUpdated: 'Jul 29, 2026',
-            branch: 'posthog-code/fix-cohort-negation-sibling-group',
+            // `firstSeen` is the report's own generation date from the capture; `lastUpdated` is the merge.
+            firstSeen: 'Aug 20, 2026',
+            lastUpdated: 'Aug 20, 2026',
+            branch: 'posthog-self-driving/fixaio-stop-summarizing-traces-the-39e624',
             contributingSources: ['replay_vision'],
-            stats: { added: 89, removed: 9, files: 3, commits: 2 },
-            approvers: ['gustavohstrassburger'],
+            // Real whole-PR totals from the GitHub API.
+            stats: { added: 256, removed: 56, files: 8, commits: 9 },
+            /*
+             * Only the human approver. The reviews endpoint also lists `stamphog[bot]` and
+             * `posthog[bot]`, which are ours rather than a person's judgment.
+             */
+            approvers: ['carlos-marchal-ph'],
             summary: [
                 {
                     paragraphs: [
                         <>
-                            A "did not complete event" negation in its own criteria group made a valid cohort
-                            unsaveable, even with the top-level operator set to match all criteria.
+                            Users on the AI observability trace view were getting broken summaries. Either a confident{' '}
+                            <strong>"empty input"</strong> summary of a trace that clearly has content, or a red toast
+                            with a raw error code in it.
                         </>,
                     ],
                 },
@@ -583,9 +680,17 @@ export const INBOX_ITEMS: InboxItem[] = [
                     heading: 'Problem',
                     paragraphs: [
                         <>
-                            <Code>validateGroup</Code> checks negation one group at a time. A negation alone in its
-                            group makes that group entirely negated, so the check fires and throws – it never looks at
-                            the positive criterion in a sibling group, or at the top-level AND.
+                            Once summarising moved to being done by id, the server built the text representation itself
+                            and <strong>handed it to the model without ever checking it held content</strong>. Two
+                            things fed it empty. The generation formatter read only the plain input and output
+                            properties, while the span formatter, the trace formatter, and the frontend all fall back to
+                            the <Code>_state</Code> variants, so a generation whose SDK wrote the state properties
+                            renders in the UI but summarises as nothing.
+                        </>,
+                        <>
+                            The formatters also <strong>crash outright on shapes they don't expect</strong>: one threw
+                            an <Code>AttributeError</Code> on a string where it expected a mapping, and another threw a
+                            formatting error, both thousands of times over.
                         </>,
                     ],
                 },
@@ -593,9 +698,9 @@ export const INBOX_ITEMS: InboxItem[] = [
                     heading: 'Impact',
                     paragraphs: [
                         <>
-                            Three independent recordings caught this across two regions over about three weeks, so it's
-                            a recurring trap. People either delete the negation they wanted, or switch the group to
-                            "any" to get past the error and <strong>silently build a different cohort</strong>.
+                            Two different projects hit this within hours of each other, one silently wrong and one
+                            loudly broken. The silent case is the worse of the two: a made-up summary of a populated
+                            trace is a paid feature actively describing data that isn't there.
                         </>,
                     ],
                 },
@@ -603,219 +708,293 @@ export const INBOX_ITEMS: InboxItem[] = [
                     heading: 'Solution',
                     paragraphs: [
                         <>
-                            Make negation validation reason about the whole cohort instead of each group in isolation:
-                            when the outer operator is AND, a negation in one group is satisfied by a positive criterion
-                            in any sibling group.
+                            Add the <Code>_state</Code> fallback to the generation formatter so it matches what the
+                            frontend and the span formatter already do, make the message formatters tolerate
+                            string-shaped entries instead of raising, and stop handing the model a representation that
+                            holds no content.
                         </>,
                     ],
                 },
             ],
+            /*
+             * No reviewers panel: the approver is real and recorded above, but the report's own
+             * rationale for suggesting them isn't in the capture, and README.md's rule is to omit a
+             * reviewer rather than dress one up.
+             */
             evidence: [
                 {
-                    id: 'vision-1',
+                    id: 'scanner-empty-input-toast',
                     source: 'replay_vision',
-                    title: 'Traced the error text to the validator',
-                    body: 'Confirmed from a recording plus the code that new subgroups default to the "any" operator, that the negation check fires for any non-AND group, and that the message matches the client-side error constant exactly. Blame put all of it in the original cohort filters commit.',
-                    tags: [{ label: 'Verified', tone: 'green' }],
-                    verified: true,
-                    codePaths: [
-                        'frontend/src/scenes/cohorts/cohortUtils.tsx',
-                        'frontend/src/scenes/cohorts/CohortFilters/constants.tsx',
-                        'frontend/src/scenes/cohorts/CohortFilters/types.ts',
-                        'frontend/src/scenes/cohorts/cohortEditLogic.ts',
-                    ],
-                },
-                {
-                    id: 'vision-2',
-                    source: 'replay_vision',
-                    title: 'A second session reproduced it',
-                    body: 'Another observed session hit the same block, and the described reproduction matched the traced code path exactly. Two regions, three weeks apart.',
-                    tags: [{ label: 'Verified', tone: 'green' }],
-                    verified: true,
-                    codePaths: [
-                        'frontend/src/scenes/cohorts/cohortUtils.tsx',
-                        'frontend/src/scenes/cohorts/cohortEditLogic.ts',
-                    ],
-                },
-            ],
-            files: [
-                {
-                    path: 'frontend/src/scenes/cohorts/cohortUtils.tsx',
-                    added: 24,
-                    removed: 7,
-                    hunk: '@@ -182,8 +182,22 @@',
-                    lines: [
-                        { kind: 'add', text: '/** Whether a group contributes at least one positive criterion. */' },
-                        { kind: 'add', text: 'function hasPositiveCriterion(group): boolean {' },
-                        { kind: 'add', text: '    if (!isCohortCriteriaGroup(group)) {' },
-                        { kind: 'add', text: '        return !group.negation' },
-                        { kind: 'add', text: '    }' },
-                        {
-                            kind: 'add',
-                            text: '    return group.values.filter((g) => !isCohortCriteriaGroup(g)).some(...)',
-                        },
-                        { kind: 'add', text: '}' },
-                        { kind: 'context', text: '' },
-                        { kind: 'context', text: 'export function validateGroup(' },
-                        { kind: 'remove', text: '    group: CohortCriteriaGroupFilter | AnyCohortCriteriaType' },
-                        { kind: 'add', text: '    group: CohortCriteriaGroupFilter | AnyCohortCriteriaType,' },
-                        { kind: 'add', text: '    outerOperator?: FilterLogicalOperator,' },
-                    ],
-                },
-            ],
-        },
-    },
-    // 3 — PostHog/posthog#73901. Found by a support conversation.
-    {
-        id: 'conversations',
-        commitType: 'fix',
-        scope: 'integrations',
-        title: 'land OAuth integration on the initiating project',
-        summary:
-            'Connecting Slack from one project landed the integration on a different one, and it looked like it had worked.',
-        priority: 'P2',
-        signalCount: 2,
-        timeAgo: 'Merged Jul 30',
-        origin: { kind: 'signal', product: 'conversations' },
-        prUrl: 'https://github.com/PostHog/posthog/pull/73901',
-        prNumber: 73901,
-        // No `steps`, so this one stays in the inbox but out of the walkthrough selector.
-        detail: {
-            status: 'Actionable',
-            firstSeen: 'Jul 27, 2026',
-            lastUpdated: 'Jul 30, 2026',
-            branch: 'posthog-code/fix-oauth-integration-lands-on-wrong-project',
-            contributingSources: ['conversations'],
-            stats: { added: 89, removed: 9, files: 6, commits: 4 },
-            approvers: ['andrewm4894'],
-            summary: [
-                {
-                    paragraphs: [
+                    title: 'Summarisation failed with an empty-input error, across multiple traces',
+                    body: (
                         <>
-                            People with more than one project who connect Slack end up with the integration on the wrong
-                            project, because the OAuth callback creates it against their default team rather than the
-                            project they started from.
-                        </>,
-                    ],
-                },
-                {
-                    heading: 'Problem',
-                    paragraphs: [
-                        <>
-                            <Code>authorize_url</Code> puts only <Code>{'{next, token}'}</Code> in the OAuth{' '}
-                            <Code>state</Code> and sends Slack to a callback that isn't project-scoped. That full-page
-                            round-trip reloads the app, so the current team re-resolves to the user's persisted default
-                            and the create call writes against <Code>@current</Code>. <Code>state.next</Code> then
-                            bounces the UI back to the right project, which is exactly why it looks like it worked.
-                        </>,
-                    ],
-                },
-                {
-                    heading: 'Impact',
-                    paragraphs: [
-                        <>
-                            Hits any multi-project customer wiring up Slack, or any other OAuth integration – they share
-                            the flow. There's a workaround (switch default project first), but it's a confusing
-                            onboarding snag that generates support tickets.
-                        </>,
-                    ],
-                },
-                {
-                    heading: 'Solution',
-                    paragraphs: [
-                        <>
-                            Carry the initiating <Code>team_id</Code> through the OAuth <Code>state</Code> and create
-                            against that team, as the GitHub flow already does.
-                        </>,
-                    ],
-                },
-            ],
-            evidence: [
-                {
-                    id: 'conv-1',
-                    source: 'conversations',
-                    title: 'Repeat connect attempts collapsing onto one project',
-                    body: 'Queried the integration-created events: Slack is the highest-volume integration kind by a wide margin over 60 days, across thousands of distinct projects. Several people show three or four Slack connect attempts in a single day that all resolve to exactly one project – including on the day it was reported.',
-                    tags: [{ label: 'Verified', tone: 'green' }],
-                    verified: true,
-                    codePaths: [
-                        'frontend/src/lib/integrations/integrationsLogic.ts',
-                        'posthog/models/integration.py',
-                        'posthog/api/integration.py',
-                        'frontend/src/scenes/IntegrationsRedirect/IntegrationsRedirect.tsx',
-                        'posthog/api/github_callback/types.py',
-                    ],
-                },
-                {
-                    id: 'conv-2',
-                    source: 'conversations',
-                    title: 'Confirmed from the code path alone',
-                    body: 'The affected rows live in Postgres rather than in queryable event data, so this one rests on the code: the create call resolves its team from @current, and the callback that is not project-scoped re-resolves to the persisted default team.',
+                            A scanner watching the traces page saw the summary fail and surface a raw status code to the
+                            user, on more than one trace, which is enough to read as recurring instead of a one-off.
+                            Re-worded from the finding: the stored prose carries session ids.
+                        </>
+                    ),
                     tags: [
                         {
-                            label: 'Code analysis',
-                            tone: 'blue',
-                            tooltip:
-                                'The finding could not be confirmed in event data, and the report says so rather than overstating it.',
+                            label: 'Scanner finding',
+                            tone: 'yellow',
+                            tooltip: 'A vision model watching the recording flagged this, not an exception.',
                         },
                     ],
-                    verified: false,
+                    codePaths: ['products/ai_observability/backend/api/summarization.py'],
+                },
+                {
+                    id: 'scanner-empty-input-populated-trace',
+                    source: 'replay_vision',
+                    title: 'A populated conversation summarised as "empty input with no actions"',
+                    body: (
+                        <>
+                            The other half of the bug, and the one nobody would have reported: the summary tab stated
+                            the user had provided no content for a generation whose conversation history was plainly
+                            there in the trace beside it.
+                        </>
+                    ),
+                    tags: [
+                        {
+                            label: 'Scanner finding',
+                            tone: 'yellow',
+                            tooltip: 'A vision model watching the recording flagged this, not an exception.',
+                        },
+                    ],
                     codePaths: [
-                        'frontend/src/lib/integrations/integrationsLogic.ts',
-                        'posthog/models/integration.py',
-                        'posthog/api/integration.py',
+                        'products/ai_observability/backend/text_repr/formatters/message_formatter.py',
+                        'products/ai_observability/frontend/summary-view/summaryViewLogic.ts',
                     ],
                 },
             ],
+            // Real file list and patch from `/pulls/86244/files`.
             files: [
                 {
-                    path: 'frontend/src/lib/integrations/integrationsLogic.ts',
+                    path: 'products/ai_observability/backend/text_repr/formatters/message_formatter.py',
                     added: 14,
                     removed: 5,
-                    hunk: '@@ -858,7 +858,7 @@',
+                    hunk: '@@ -218,17 +218,26 @@',
                     lines: [
-                        { kind: 'context', text: 'handleOauthCallback: async ({ kind, searchParams }) => {' },
-                        {
-                            kind: 'remove',
-                            text: '    const { next, token, source, server_id } = fromParamsGivenUrl(state)',
-                        },
-                        {
-                            kind: 'add',
-                            text: '    const { next, token, source, server_id, team_id } = fromParamsGivenUrl(state)',
-                        },
+                        { kind: 'remove', text: 'def format_tool_calls(tool_calls: list[ToolCall]) -> list[str]:' },
+                        { kind: 'add', text: 'def format_tool_calls(tool_calls: list[Any]) -> list[str]:' },
+                        { kind: 'context', text: '    lines: list[str] = []' },
                         { kind: 'context', text: '' },
-                        { kind: 'remove', text: '    const integration = await api.integrations.create({' },
-                        { kind: 'remove', text: '        kind: resolvedKind,' },
-                        { kind: 'remove', text: '        config: { state, code },' },
-                        { kind: 'remove', text: '    })' },
+                        { kind: 'context', text: '    for tc in tool_calls:' },
+                        { kind: 'add', text: '        if not isinstance(tc, dict):' },
+                        { kind: 'add', text: '            lines.append(f"  - {tc}")' },
+                        { kind: 'add', text: '            continue' },
+                        { kind: 'add', text: '' },
+                        { kind: 'remove', text: '        if tc.get("function"):' },
+                        { kind: 'remove', text: '            name = tc["function"].get("name", "unknown")' },
+                        { kind: 'add', text: '        function = tc.get("function")' },
+                        { kind: 'add', text: '        if isinstance(function, dict):' },
+                        { kind: 'add', text: '            name = function.get("name", "unknown")' },
+                        { kind: 'context', text: '        else:' },
+                        { kind: 'context', text: '            name = tc.get("name", "unknown")' },
+                    ],
+                },
+                {
+                    path: 'products/ai_observability/backend/api/summarization.py',
+                    added: 74,
+                    removed: 12,
+                    hunk: '@@ -33,7 +33,14 @@',
+                    lines: [
+                        { kind: 'context', text: 'from posthog.api.routing import TeamAndOrgViewSetMixin' },
+                        {
+                            kind: 'context',
+                            text: 'from posthog.clickhouse.query_tagging import Feature, Product, tags_context',
+                        },
+                        { kind: 'context', text: 'from posthog.event_usage import report_user_action' },
                         {
                             kind: 'add',
-                            text: '    // The callback URL is not project-scoped, so after this full-page',
+                            text: 'from posthog.hogql_queries.ai.ai_table_resolver import AIEventsExpiredError, AIEventsUnavailableError, query_ai_events',
                         },
                         {
-                            kind: 'add',
-                            text: "    // round-trip the SPA may have re-resolved to the user's default team.",
+                            kind: 'context',
+                            text: 'from posthog.hogql_queries.ai.trace_query_runner import TraceQueryRunner',
                         },
-                        { kind: 'add', text: '    // Target the team that started the flow instead.' },
+                        { kind: 'add', text: 'from posthog.hogql_queries.ai.utils import (' },
+                        { kind: 'add', text: '    HEAVY_COLUMN_NAMES,' },
+                        { kind: 'add', text: '    HEAVY_PROPERTY_NAMES,' },
+                        { kind: 'add', text: '    merge_heavy_properties,' },
                     ],
                 },
             ],
         },
     },
-    // 4 — PostHog/posthog#70918. Found by a support conversation.
+    // 3 — PostHog/posthog#90772. Found by a support conversation.
+    {
+        id: 'conversations',
+        // A docs fix rather than a code fix – the report's own type and scope.
+        commitType: 'docs',
+        scope: 'llm-analytics',
+        title: "Clarify batch exports don't include AI prompts/completions",
+        summary:
+            'Our own event definition promised batch exports carried AI prompts and completions. They never did, and two customers lost trace data before anyone noticed the docs were wrong.',
+        priority: 'P2',
+        signalCount: 2,
+        timeAgo: 'Merged Sep 1',
+        origin: { kind: 'signal', product: 'conversations' },
+        prUrl: 'https://github.com/PostHog/posthog/pull/90772',
+        prNumber: 90772,
+        walkthroughLabel: 'Conversations',
+        intro: 'Conversations reads your support threads, so a problem reaches the loop in the words the customer used to describe it.',
+        steps: [
+            {
+                stage: 'signal',
+                /*
+                 * The same inbox capture the Error tracking walkthrough uses. It shows the list
+                 * rather than any one report, so it suits whichever channel it sits under.
+                 */
+                copy: 'Support threads are read as they arrive, so a problem a customer described in their own words becomes a signal without anyone triaging it by hand. Repeat tickets about the same thing group into one report.',
+                image: 'https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2026_09_08_at_13_49_13_2x_ee11a9ed21.png',
+            },
+            {
+                stage: 'investigate',
+                label: 'Report',
+                copy: 'The agent reads the whole thread and checks the claim against the product instead of taking the ticket at face value, so the report says when the customer was right about the symptom and wrong about the cause, and names what it actually found.',
+                image: 'https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2026_09_08_at_14_25_36_2x_260986ac3a.png',
+            },
+            {
+                stage: 'pr',
+                copy: 'A support-sourced report often needs a human call first, because the fix might be code, documentation, or simply a better answer. Once that call is made the agent opens the PR, and the reply back to the customer can point at it.',
+                image: 'https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2026_09_08_at_13_31_26_2x_70675f0e6e.png',
+            },
+        ],
+        detail: {
+            status: 'Actionable',
+            // Report generation date from the capture; `lastUpdated` is the merge.
+            firstSeen: 'Aug 8, 2026',
+            lastUpdated: 'Sep 1, 2026',
+            branch: 'posthog-self-driving/fixllm-analytics-stop-telling-users-3ba44a',
+            contributingSources: ['conversations'],
+            // Real whole-PR totals from the GitHub API.
+            stats: { added: 35, removed: 2, files: 2, commits: 4 },
+            approvers: ['carlos-marchal-ph'],
+            summary: [
+                {
+                    paragraphs: [
+                        <>
+                            Every LLM analytics user was told <Code>$ai_generation</Code> contains the input prompt and
+                            output, but the events table they query and export has neither, and customers lost trace
+                            data to that gap before anyone noticed.
+                        </>,
+                    ],
+                },
+                {
+                    heading: 'Problem',
+                    paragraphs: [
+                        <>
+                            Our own event definition said <Code>$ai_generation</Code> "contains the input prompt,
+                            output, model used and costs". That is <strong>false for the events table</strong>:
+                            ingestion deliberately strips the large AI properties from the events copy and keeps the
+                            full event only in the AI events table. So someone reads the definition, sets up an export
+                            of <Code>$ai_generation</Code>, watches it succeed, and gets metadata only.
+                        </>,
+                        <>
+                            The public data-retention page contradicted itself the same way: it says the events table
+                            never holds the large properties, then tells readers an export preserves raw prompts past
+                            thirty days.
+                        </>,
+                    ],
+                },
+                {
+                    heading: 'Impact',
+                    paragraphs: [
+                        <>
+                            The failure is silent and then irreversible. The real rows expire on a thirty-day TTL, so by
+                            the time the gap shows, the data it was supposed to preserve is already gone. Two separate
+                            support threads two weeks apart hit this same trap.
+                        </>,
+                    ],
+                },
+                {
+                    heading: 'Solution',
+                    paragraphs: [
+                        <>
+                            Fix the copy in both taxonomy files to say the prompt and completion live on the AI events
+                            table, name that table as the one to query, and correct the retention page. Copy only, with
+                            no ingestion behaviour changes.
+                        </>,
+                    ],
+                },
+            ],
+            /*
+             * No reviewers panel: the approver is real and recorded above, but the report's rationale
+             * for suggesting them isn't in the capture.
+             */
+            evidence: [
+                {
+                    id: 'ticket-export-missing-prompts',
+                    source: 'conversations',
+                    title: 'Support thread: trace data batch export missing prompts and completions',
+                    body: (
+                        <>
+                            A customer set up a daily export filtered on the AI generation and trace events to keep LLM
+                            data past retention. The exports ran successfully and carried metadata only. Support
+                            confirmed the behaviour was correct and the documentation misleading, and escalated it.
+                        </>
+                    ),
+                    tags: [
+                        {
+                            label: 'Ticket',
+                            tone: 'orange',
+                            tooltip: 'A support conversation, read as a signal instead of triaged by hand.',
+                        },
+                    ],
+                    codePaths: [
+                        'posthog/taxonomy/taxonomy.py',
+                        'frontend/src/taxonomy/core-filter-definitions-by-group.json',
+                    ],
+                },
+                {
+                    id: 'ticket-export-second-report',
+                    source: 'conversations',
+                    title: 'A second thread, two weeks later, describing the same gap',
+                    body: (
+                        <>
+                            The same misunderstanding arrived again from a different thread, which is what turned one
+                            ticket into a documentation bug instead of a one-off answer.
+                        </>
+                    ),
+                    tags: [{ label: 'Grouped', tone: 'blue', tooltip: 'Separate signals describing one problem.' }],
+                },
+            ],
+            // Real file list and patch from `/pulls/90772/files`.
+            files: [
+                {
+                    path: 'posthog/taxonomy/taxonomy.py',
+                    added: 1,
+                    removed: 1,
+                    hunk: '@@ -250,1 +250,1 @@',
+                    lines: [
+                        {
+                            kind: 'remove',
+                            text: '        "description": "Contains the input prompt, output, model used and costs.",',
+                        },
+                        {
+                            kind: 'add',
+                            text: '        "description": "Contains the model used and costs. The input prompt and output are not on the events table - query posthog.ai_events for those.",',
+                        },
+                    ],
+                },
+            ],
+        },
+    },
+    // 4 — PostHog/posthog#88073. Found by AI observability's own eval reports.
     {
         id: 'ai-observability',
         commitType: 'fix',
         scope: 'aio',
-        title: 'chunk eval summary to avoid ai-gateway 30s timeout',
+        title: 'guard eval report IDs by handled set, not UUID shape',
         summary:
-            'Generating an AI eval summary failed about two-thirds of the time, because one slow LLM call ran into a hard gateway timeout.',
+            'Roughly one AI observability eval report in 45 shipped a dead identifier that nobody could click, because the guard meant to catch them only recognised one shape of ID.',
         priority: 'P1',
         signalCount: 1,
-        timeAgo: 'Merged Jul 29',
-        origin: { kind: 'signal', product: 'conversations' },
-        prUrl: 'https://github.com/PostHog/posthog/pull/70918',
-        prNumber: 70918,
+        timeAgo: 'Merged Aug 27',
+        // The report's evidence is AI observability's own evaluation reports.
+        origin: { kind: 'signal', product: 'ai_observability' },
+        prUrl: 'https://github.com/PostHog/posthog/pull/88073',
+        prNumber: 88073,
         /*
          * The report really was discovered by Conversations, with AI observability
          * confirming it – see `contributingSources` below – so the origin stays honest and
@@ -826,40 +1005,38 @@ export const INBOX_ITEMS: InboxItem[] = [
         steps: [
             {
                 stage: 'signal',
-                copy: 'Evals score your LLM traffic for correctness, cost, latency, and struggle, and failing patterns become reports. The scout sweeps for the trends you have no eval written for yet.',
-                image: 'https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2026_08_05_at_15_07_06_2x_19076236d0.png',
+                copy: 'Evals score your LLM traffic for correctness, cost and latency, and failing patterns become reports. The scout sweeps for the trends you have no eval written for yet.',
+                image: 'https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2026_09_08_at_13_49_13_2x_ee11a9ed21.png',
             },
             {
                 stage: 'investigate',
+                label: 'Report',
                 copy: 'The agent reads the failing traces against the passing ones and follows them back to the prompt, tool, or model call responsible. The report cites the failing traces, so you can read exactly what the model was asked and what it answered.',
-                image: 'https://res.cloudinary.com/dmukukwp6/image/upload/Report_Investigate_Mock_AI_observability_3bdb92d6e5.png',
+                image: 'https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2026_09_08_at_13_36_55_2x_7e30697cdc.png',
             },
             {
                 stage: 'pr',
-                copy: 'Most AI bugs are prompt bugs, so the fix is often a diff in a prompt file. The agent opens it like any other PR.',
-                image: 'https://res.cloudinary.com/dmukukwp6/image/upload/Git_Hub_PR_Mock_AI_observability_4261e76fa5.png',
-            },
-            {
-                stage: 'merge',
-                copy: 'You review the prompt diff with the failing traces beside it. After the merge, the eval that caught it becomes the regression test that keeps it fixed.',
-                image: 'https://res.cloudinary.com/dmukukwp6/image/upload/Git_Hub_PR_Merged_Mock_AI_observability_b9ffb78366.png',
+                copy: 'Most AI bugs are prompt bugs, so the fix is often a diff in a prompt file. The agent opens it like any other PR, and you review it with the failing traces beside it. Once it is merged, the eval that caught the bug becomes the regression test that keeps it fixed.',
+                image: 'https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2026_09_08_at_13_35_01_2x_29bb66b7f2.png',
             },
         ],
         detail: {
             status: 'Actionable',
-            firstSeen: 'Jul 14, 2026',
-            lastUpdated: 'Jul 29, 2026',
-            branch: 'posthog-code/eval-summary-chunked-map-reduce',
-            contributingSources: ['conversations', 'ai_observability'],
-            stats: { added: 997, removed: 94, files: 13, commits: 12 },
-            approvers: ['Radu-Raicea'],
+            // Report generation date from the capture; `lastUpdated` is the merge.
+            firstSeen: 'Aug 22, 2026',
+            lastUpdated: 'Aug 27, 2026',
+            branch: 'posthog-self-driving/fixaio-extend-the-eval-report-id-guard-f2063d',
+            contributingSources: ['ai_observability'],
+            // Real whole-PR totals from the GitHub API.
+            stats: { added: 313, removed: 38, files: 5, commits: 8 },
+            approvers: ['carlos-marchal-ph'],
             summary: [
                 {
                     paragraphs: [
                         <>
-                            Generating an AI eval summary failed <strong>roughly two-thirds of the time</strong>,
-                            because the request ran as one slow synchronous LLM call that the internal gateway killed at
-                            30 seconds.
+                            The team reading AI observability eval reports still got dead identifiers in about one
+                            report in 45. An id in backticks that looks clickable, isn't, and has to be copied and
+                            searched by hand.
                         </>,
                     ],
                 },
@@ -867,9 +1044,11 @@ export const INBOX_ITEMS: InboxItem[] = [
                     heading: 'Problem',
                     paragraphs: [
                         <>
-                            The endpoint fires a single blocking completion analysing up to 250 runs in one prompt. That
-                            takes 20 to 30+ seconds, and the call routes through a gateway with a hard ~30s timeout. The
-                            Python-side 120s timeout never applies, because the gateway aborts first and returns a 502.
+                            The agent is told to wrap ids in backticks so the renderer can link them, but the linker
+                            only links ids that came through <Code>add_citation</Code>. An earlier fix added a preflight
+                            check to catch the mismatch, and it worked. The catch is its regex, which{' '}
+                            <strong>matches canonical UUIDs only</strong>. Opaque session ids are invisible to it and
+                            are genuinely citable, so they shipped dead. Report titles had no guard at all.
                         </>,
                     ],
                 },
@@ -877,9 +1056,10 @@ export const INBOX_ITEMS: InboxItem[] = [
                     heading: 'Impact',
                     paragraphs: [
                         <>
-                            16 of the last 24 generations failed with a 502, all pinned at about 30s latency (a{' '}
-                            <strong>67% failure rate</strong>), while the 8 that succeeded squeaked under the cliff at
-                            up to 29.3s.
+                            This is internal pain, for the people who read these reports to chase regressions. Ten to
+                            seventeen of 650 daily runs shipped a dead id, and the rate sat between one and three
+                            percent every window since the first fix landed. It was a standing gap and not a decaying
+                            one, and each dead id cost a reader a manual copy-paste-and-search.
                         </>,
                     ],
                 },
@@ -887,76 +1067,77 @@ export const INBOX_ITEMS: InboxItem[] = [
                     heading: 'Solution',
                     paragraphs: [
                         <>
-                            Summarize as a bounded concurrent map-reduce, chunking the run set so no single gateway
-                            request approaches the timeout.
+                            Rekey the guard on <strong>the set of ids the session actually handled</strong> instead of
+                            on the shape of the id, using the allowlists already held in state, and extend it to cover
+                            the title. That's the same rule the evaluation grades on.
                         </>,
                     ],
                 },
             ],
+            /*
+             * No reviewers panel: the approver is real and recorded above, but the report's rationale
+             * for suggesting them isn't in the capture.
+             */
             evidence: [
                 {
-                    id: 'aio-1',
+                    id: 'eval-inline-ids-all-cited',
                     source: 'ai_observability',
-                    title: 'Every failure pinned to the 30s boundary',
+                    title: 'Evaluation "inline IDs are all cited" started failing more often',
                     body: (
                         <>
-                            Queried <Code>$ai_generation</Code> events for this feature over 30 days, grouped by error
-                            state and HTTP status with average and max latency: 16 errors, all 502, max latency 30.0s
-                            and average 29.1s, against 8 successes up to 29.3s. Failures clustered at the boundary
-                            rather than spread out, which points at a hard timeout instead of variable model slowness.
+                            The evaluation that checks every backticked identifier has a matching structured citation
+                            saw its fail rate rise across a few hundred runs in a day. Failing sessions shared a
+                            pattern: both canonical UUIDs and opaque strings appeared in report text with no matching
+                            citation call, so they rendered as plain text instead of links.
                         </>
                     ),
-                    tags: [{ label: 'Verified', tone: 'green' }],
+                    tags: [
+                        {
+                            label: 'Evaluation report',
+                            tone: 'blue',
+                            tooltip: "AI observability grading its own agents' output, not an exception.",
+                        },
+                    ],
                     verified: true,
                     codePaths: [
-                        'products/ai_observability/backend/summarization/llm/evaluation_summary.py',
-                        'products/ai_observability/backend/api/evaluation_summary.py',
-                        'posthog/llm/gateway_client.py',
-                        'products/ai_observability/backend/summarization/constants.py',
+                        'posthog/temporal/ai_observability/eval_reports/report_agent/tools.py',
+                        'posthog/temporal/ai_observability/eval_reports/report_agent/prompts.py',
                     ],
                 },
             ],
+            // Real file list and patch from `/pulls/88073/files`.
             files: [
                 {
-                    path: 'products/ai_observability/backend/summarization/constants.py',
-                    added: 10,
-                    removed: 0,
-                    hunk: '@@ -11,3 +11,13 @@',
+                    path: 'posthog/temporal/ai_observability/eval_reports/report_agent/tools.py',
+                    added: 83,
+                    removed: 18,
+                    hunk: '@@ -70,6 +70,12 @@',
                     lines: [
-                        { kind: 'context', text: '# Evaluation summary limits' },
-                        { kind: 'context', text: 'EVALUATION_SUMMARY_MAX_RUNS = 250' },
-                        { kind: 'add', text: '' },
-                        {
-                            kind: 'add',
-                            text: '# Large or verbose inputs are summarized as a bounded concurrent map-reduce so no',
-                        },
-                        {
-                            kind: 'add',
-                            text: '# individual ai-gateway request approaches its ~30s hard timeout.',
-                        },
-                        { kind: 'add', text: 'EVALUATION_SUMMARY_CHUNK_SIZE = 20' },
-                        { kind: 'add', text: 'EVALUATION_SUMMARY_PROMPT_MAX_CHARS = 20_000' },
-                        { kind: 'add', text: 'EVALUATION_SUMMARY_MAX_CONCURRENT_MAP_CALLS = 5' },
+                        { kind: 'remove', text: '_BACKTICKED_UUID_RE = re.compile(' },
+                        { kind: 'add', text: '# a backticked token is dead when the session never handled that id,' },
+                        { kind: 'add', text: '# whatever shape the id happens to have' },
+                        { kind: 'add', text: '_BACKTICKED_TOKEN_RE = re.compile(' },
                     ],
                 },
             ],
         },
     },
-    // 5 — PostHog/posthog#67019. Found by Replay Vision.
+    // 5 — PostHog/posthog#76517. Found by Session replay.
     {
         id: 'session-replay',
         commitType: 'fix',
-        scope: 'settings',
-        title: 'redirect removed toolbar section to web analytics',
+        scope: 'dashboards',
+        title: 'remove cursor pointer from non-interactive chart elements',
         summary:
-            'A removed settings route showed "Setting not found" while the sidebar still highlighted it as the current page.',
+            'Users clicked data points, table cells, and big-number tiles and got nothing back. Drill-down is silently disabled on formula charts, and the cursor still promised it would work.',
         priority: 'P2',
         signalCount: 3,
-        timeAgo: 'Merged Jul 28',
-        origin: { kind: 'signal', product: 'replay_vision' },
-        prUrl: 'https://github.com/PostHog/posthog/pull/67019',
-        prNumber: 67019,
-        intro: 'Session replay is where self-driving sees what users actually did – including the problems that never threw an exception.',
+        timeAgo: 'Merged Aug 4',
+        // The report's evidence is session-replay problem segments.
+        origin: { kind: 'signal', product: 'session_replay' },
+        prUrl: 'https://github.com/PostHog/posthog/pull/76517',
+        prNumber: 76517,
+        intro: 'Session replay is where self-driving sees what users did, including the problems that never threw an exception.',
         // This walkthrough is the general session-replay story, so its selector button reads
         // "Session replay" even though the underlying report was discovered by Replay Vision.
         walkthroughLabel: 'Session replay',
@@ -969,38 +1150,37 @@ export const INBOX_ITEMS: InboxItem[] = [
             {
                 stage: 'signal',
                 copy: "The signal source reads every new recording for rage clicks, dead ends, and blocking errors, and files recurring problems as reports. For one flow you're worried about, make a scout and give it a schedule.",
-                image: 'https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2026_07_30_at_15_24_02_2x_1_1054be2650.png',
+                image: 'https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2026_09_08_at_13_49_13_2x_ee11a9ed21.png',
             },
             {
                 stage: 'investigate',
+                label: 'Report',
                 copy: 'The agent watches the flagged sessions, sizes the damage against your product data, and traces it to the responsible code. The report links the replays as evidence.',
-                image: 'https://res.cloudinary.com/dmukukwp6/image/upload/Report_Investigate_Mock_Session_replay_c67c6ef4d4.png',
+                image: 'https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2026_09_08_at_13_48_09_2x_a654bdcf92.png',
             },
             {
                 stage: 'pr',
-                copy: 'A replay shows the symptom rather than the cause, so the report waits for your call. Once you decide what the fix should be, the agent writes it and opens the PR.',
-                image: 'https://res.cloudinary.com/dmukukwp6/image/upload/Git_Hub_PR_Mock_Session_replay_4207c634ad.png',
-            },
-            {
-                stage: 'merge',
-                copy: "You review the diff next to the replays and merge when you're satisfied. If you dismiss the report instead, your note is forwarded to the scout, which reads it before deciding what to surface next.",
-                image: 'https://res.cloudinary.com/dmukukwp6/image/upload/Git_Hub_PR_Merged_Mock_Session_replay_c1198f45ea.png',
+                copy: 'A replay shows the symptom and not the cause, so the report waits for your call. Once you decide what the fix should be, the agent writes it and opens the PR. You review the diff next to the replays and merge when you are satisfied. Dismiss it instead and your note is forwarded to the scout, which reads it before deciding what to surface next.',
+                image: 'https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2026_09_08_at_13_47_07_2x_f462450931.png',
             },
         ],
         detail: {
             status: 'Actionable',
-            firstSeen: 'Jun 29, 2026',
-            lastUpdated: 'Jul 28, 2026',
-            branch: 'posthog-code/fix-dead-settings-and-alerts-routes',
-            contributingSources: ['replay_vision', 'session_replay'],
-            stats: { added: 57, removed: 0, files: 3, commits: 3 },
-            approvers: ['rafaeelaudibert'],
+            // Report generation date from the capture; `lastUpdated` is the merge.
+            firstSeen: 'Aug 3, 2026',
+            lastUpdated: 'Aug 4, 2026',
+            branch: 'posthog-self-driving/fixinsights-make-formula-charts-stop-e1eaef',
+            contributingSources: ['session_replay'],
+            // Real whole-PR totals from the GitHub API.
+            stats: { added: 131, removed: 12, files: 4, commits: 2 },
+            approvers: ['sampennington'],
             summary: [
                 {
                     paragraphs: [
                         <>
-                            Opening the old toolbar settings URL gave a "Setting not found" page, while the sidebar went
-                            on highlighting Toolbar as though you were on it.
+                            Users were clicking data points, table cells, big-number tiles and dashboard titles and
+                            getting nothing back. Drill-down is silently disabled on formula charts, and the pointer
+                            cursor over a dead target promised otherwise.
                         </>,
                     ],
                 },
@@ -1008,10 +1188,16 @@ export const INBOX_ITEMS: InboxItem[] = [
                     heading: 'Problem',
                     paragraphs: [
                         <>
-                            The section was removed when toolbar configuration folded into web analytics. The settings
-                            router canonicalizes old section ids through a legacy map, but that map only covered one
-                            earlier rename – so this id falls through, the selected section resolves to null, and the
-                            scene renders its not-found state.
+                            Nine recordings across two days, from nine different people, show the same thing: someone
+                            clicks something on a dashboard, nothing happens, they click again, and eventually give up.
+                            Several were ratio charts, which in PostHog means a{' '}
+                            <strong>multi-series formula trend</strong>, and the guard that disables the persons modal
+                            for those also leaves the chart with no click handler attached at all.
+                        </>,
+                        <>
+                            The chart still renders exactly like an interactive one. There's no fallback either: only
+                            the tile title is a link, so clicking the plot area neither drills down nor opens the
+                            insight.
                         </>,
                     ],
                 },
@@ -1019,10 +1205,9 @@ export const INBOX_ITEMS: InboxItem[] = [
                     heading: 'Impact',
                     paragraphs: [
                         <>
-                            A papercut rather than a hard block, since the sidebar link itself still works. But it's
-                            broad: not-found events on that exact path appear across{' '}
-                            <strong>more than 20 distinct projects over 90 days</strong>, so something stale is still
-                            linking to it.
+                            This is the kind of bug nobody files. Nothing errors and nothing is logged. The click does
+                            nothing, and the person assumes they used it wrong. It only surfaced because a scanner
+                            watched people give up.
                         </>,
                     ],
                 },
@@ -1030,92 +1215,66 @@ export const INBOX_ITEMS: InboxItem[] = [
                     heading: 'Solution',
                     paragraphs: [
                         <>
-                            Add the removed section to the legacy map so the router redirects to where the settings
-                            actually live now.
+                            Say so instead of going silent. The tooltip now explains drill-down isn't available for
+                            formula insights, and on dashboard tiles a click navigates to the underlying insight instead
+                            of dead-ending.
                         </>,
                     ],
                 },
             ],
-            reviewers: [
-                {
-                    name: 'Rafael Audibert',
-                    githubLogin: 'rafaeelaudibert',
-                    approved: true,
-                    commits: [
-                        {
-                            sha: '93e6bdf',
-                            url: 'https://github.com/PostHog/posthog/commit/93e6bdff54a3e28ef0683796afc6f135f62c39c6',
-                        },
-                    ],
-                    reason: (
-                        <>
-                            Removed the Toolbar settings section and its authorized-URL setting during the web analytics
-                            revamp, which is what left this URL with no matching section. Causative.
-                        </>
-                    ),
-                },
-                {
-                    name: 'Marius Andra',
-                    githubLogin: 'mariusandra',
-                    commits: [
-                        {
-                            sha: '8a8fe72',
-                            url: 'https://github.com/PostHog/posthog/commit/8a8fe725455bcb59421003e8891d18377ee381d2',
-                        },
-                    ],
-                    reason: <>Restructured the routes and tabs mapping that decides which paths resolve to a scene.</>,
-                },
-            ],
+            /*
+             * No reviewers panel: the approver is real and recorded above, but the report's rationale
+             * for suggesting them isn't in the capture.
+             */
             evidence: [
                 {
-                    id: 'settings-1',
-                    source: 'replay_vision',
-                    title: 'Not-found events across 20+ projects',
+                    id: 'replay-dead-clicks-dashboard',
+                    source: 'session_replay',
+                    title: 'Repeated dead clicks on dashboard charts, then abandonment',
                     body: (
                         <>
-                            Counted <Code>not_found_shown</Code> events over 90 days for that path: it appears across
-                            more than twenty distinct projects in both regions, with multiple distinct users each,
-                            confirming a widespread and reproducible "Setting not found".
+                            A problem segment caught someone reviewing a dashboard where a click on a chart did not
+                            respond, then moving on to another view. Re-worded from the finding: the stored prose
+                            carries session ids.
                         </>
                     ),
-                    tags: [{ label: 'Verified', tone: 'green' }],
-                    verified: true,
+                    tags: [
+                        {
+                            label: 'Problem segment',
+                            tone: 'orange',
+                            tooltip: 'A stretch of a recording the scanner judged to be going wrong.',
+                        },
+                    ],
                     codePaths: [
-                        'frontend/src/scenes/settings/settingsSceneLogic.ts',
-                        'frontend/src/scenes/settings/SettingsMap.tsx',
-                        'frontend/src/scenes/settings/Settings.tsx',
-                        'frontend/src/lib/components/NotFound/index.tsx',
+                        'products/product_analytics/frontend/insights/trends/TrendsLineChart/TrendsLineChart.tsx',
+                        'products/product_analytics/frontend/insights/shared/InsightSeriesTooltip.tsx',
                     ],
                 },
+                {
+                    id: 'replay-dead-clicks-summary-metrics',
+                    source: 'session_replay',
+                    title: 'Clicks on summary metrics and section headers did nothing visible',
+                    body: (
+                        <>
+                            A second segment, a different person: they scrolled the dashboard for other metrics and
+                            found that clicking the summary numbers and headers triggered no visible action.
+                        </>
+                    ),
+                    tags: [{ label: 'Grouped', tone: 'blue', tooltip: 'Separate signals describing one problem.' }],
+                },
             ],
+            // Real file list from `/pulls/76517/files`.
             files: [
                 {
-                    path: 'frontend/src/scenes/settings/settingsSceneLogic.ts',
-                    added: 25,
-                    removed: 0,
-                    hunk: '@@ -17,10 +17,16 @@',
+                    path: 'products/product_analytics/frontend/insights/trends/TrendsLineChart/TrendsLineChart.tsx',
+                    added: 47,
+                    removed: 7,
+                    hunk: '@@ -130,6 +130,12 @@',
                     lines: [
-                        {
-                            kind: 'add',
-                            text: "const WEB_ANALYTICS_SETTINGS_SECTION: SettingSectionId = 'project-web-analytics'",
-                        },
-                        { kind: 'context', text: '' },
-                        {
-                            kind: 'context',
-                            text: 'const LEGACY_SETTINGS_SECTIONS: Record<string, SettingSectionId> = {',
-                        },
-                        {
-                            kind: 'context',
-                            text: "    'project-llm-analytics': AI_OBSERVABILITY_SETTINGS_SECTION,",
-                        },
-                        {
-                            kind: 'add',
-                            text: '    // The dedicated Toolbar section was removed; its authorized-URL',
-                        },
-                        { kind: 'add', text: '    // config now lives under Web analytics.' },
-                        { kind: 'add', text: "    'environment-toolbar': WEB_ANALYTICS_SETTINGS_SECTION," },
-                        { kind: 'add', text: "    'project-toolbar': WEB_ANALYTICS_SETTINGS_SECTION," },
-                        { kind: 'context', text: '}' },
+                        { kind: 'context', text: '    const canHandleClick = !isMultiSeriesFormula' },
+                        { kind: 'add', text: '    // a formula chart cannot drill down, so say why instead of' },
+                        { kind: 'add', text: '    // rendering a dead interactive-looking target' },
+                        { kind: 'add', text: '    const formulaTooltipOverride = isMultiSeriesFormula' },
                     ],
                 },
             ],
@@ -1131,13 +1290,15 @@ export const INBOX_ITEMS: InboxItem[] = [
     {
         id: 'product-analytics',
         commitType: 'fix',
-        scope: 'funnels',
-        title: 'placeholder – awaiting the real product analytics pull request',
+        scope: 'insights',
+        title: 'stop counting aborted requests in the query failure metric',
         summary:
-            'Placeholder summary. A conversion step quietly stopped firing, so the funnel read as a real decline against its own baseline.',
+            'A real outage nearly went unnoticed: most of what the query-failure metric counted was people navigating away mid-request, so genuine failures sat buried about 100x under their own noise floor.',
         priority: 'P2',
         signalCount: 4,
-        timeAgo: 'Updated Aug 5',
+        timeAgo: 'Merged Aug 13',
+        prUrl: 'https://github.com/PostHog/posthog/pull/76435',
+        prNumber: 76435,
         /*
          * `analytics` already exists in SOURCE_META, labelled exactly "Product analytics",
          * with `found: 'The numbers moved against their own baseline.'` – so this needs no
@@ -1152,24 +1313,143 @@ export const INBOX_ITEMS: InboxItem[] = [
             {
                 stage: 'signal',
                 copy: 'Funnel and trend regressions arrive as signals, measured on complete cohorts against their own baseline. For a metric you currently watch by hand, make a scout and hand it the schedule.',
-                image: 'https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2026_08_05_at_15_58_19_2x_d963127c6f.png',
+                image: 'https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2026_09_08_at_13_49_13_2x_ee11a9ed21.png',
             },
             {
                 stage: 'investigate',
+                label: 'Report',
                 copy: 'The agent segments the drop by browser, OS, cohort, and experiment exposure, then follows the failing step into the code that renders it. The funnel comparison stays attached to the report.',
-                image: 'https://res.cloudinary.com/dmukukwp6/image/upload/Report_Investigate_Mock_Product_analytics_e06fca8e82.png',
+                image: 'https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2026_09_08_at_14_41_33_2x_fe6438c076.png',
             },
             {
                 stage: 'pr',
-                copy: "A conversion bug gets the same treatment as a crash: the agent opens the fix, and adds events on the step the funnel couldn't see before.",
-                image: 'https://res.cloudinary.com/dmukukwp6/image/upload/Git_Hub_PR_Mock_Product_analytics_6cc1777e40.png',
-            },
-            {
-                stage: 'merge',
-                copy: 'You review the diff with the funnel beside it. The recovery gets measured by the next complete cohort, in the same comparison that caught the drop.',
-                image: 'https://res.cloudinary.com/dmukukwp6/image/upload/Git_Hub_PR_Merged_Mock_Product_analytics_4a9be451bb.png',
+                copy: 'A conversion bug gets the same treatment as a crash. The agent opens the fix and adds events on the step the funnel could not see before. You review it with the funnel beside it, and the recovery gets measured by the next complete cohort, in the same comparison that caught the drop.',
+                image: 'https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2026_09_08_at_14_40_08_2x_86e8a03f9a.png',
             },
         ],
+        detail: {
+            status: 'Actionable',
+            // Report generation date from the capture; `lastUpdated` is the merge.
+            firstSeen: 'Aug 2, 2026',
+            lastUpdated: 'Aug 13, 2026',
+            branch: 'posthog-self-driving/fixinsights-stop-counting-aborted-05d742',
+            contributingSources: ['analytics'],
+            // Real whole-PR totals from the GitHub API.
+            stats: { added: 32, removed: 13, files: 3, commits: 3 },
+            approvers: ['carlos-marchal-ph'],
+            summary: [
+                {
+                    paragraphs: [
+                        <>
+                            The query-failure alert caught a real outage, thousands of 500s in an hour across hundreds
+                            of people. But it <strong>almost didn't</strong>, because most of what the metric counts is
+                            people navigating away mid-request.
+                        </>,
+                    ],
+                },
+                {
+                    heading: 'Problem',
+                    paragraphs: [
+                        <>
+                            The headline "Query failures" insight counts an event the frontend fires whenever a query
+                            throws. That catch block doesn't distinguish a server error from a request the browser
+                            aborted because the user clicked away, so{' '}
+                            <strong>
+                                hundreds of aborted requests an hour sit in the metric as permanent background noise
+                            </strong>
+                            . Genuine server failures normally run at single digits per hour, which means the signal is
+                            buried under about a hundred times its own volume.
+                        </>,
+                    ],
+                },
+                {
+                    heading: 'Impact',
+                    paragraphs: [
+                        <>
+                            On the day it fired, the app returned thousands of 500s inside an hour, up from a handful
+                            per hour earlier that morning. That's a real, broad incident, but because of the noise floor
+                            the metric only moved about five-fold when the thing it is supposed to detect moved roughly
+                            two hundred-fold.
+                        </>,
+                        <>
+                            The ensemble detector caught it that time. A smaller outage in the same shape wouldn't have
+                            cleared the baseline at all, and everyone watching the dashboard would have missed it.
+                        </>,
+                    ],
+                },
+                {
+                    heading: 'Solution',
+                    paragraphs: [
+                        <>
+                            Skip the capture when the caught error is an abort, reusing the check the API layer already
+                            has. Error propagation is untouched. The caller still sees the rejection and handles
+                            cancellation exactly as before. Only the analytics capture is skipped.
+                        </>,
+                    ],
+                },
+            ],
+            /*
+             * No reviewers panel: the approver is real and recorded above, but the report's rationale
+             * for suggesting them isn't in the capture.
+             */
+            evidence: [
+                {
+                    id: 'anomaly-query-failures',
+                    source: 'analytics',
+                    title: 'Anomaly investigation on the "Query failures" headline, verdict true positive',
+                    body: (
+                        <>
+                            The detector ensemble flagged the headline metric jumping to roughly five times its
+                            prior-24h range and well above the previous twelve-day peak. The failure window broke down
+                            into network errors, client cancellations and concurrency limits, which points at a real
+                            capacity or connectivity incident, not noise.
+                        </>
+                    ),
+                    tags: [
+                        {
+                            label: 'True positive',
+                            tone: 'green',
+                            tooltip: 'The investigation confirmed the anomaly was real, not a detector artefact.',
+                        },
+                    ],
+                    verified: true,
+                    codePaths: ['frontend/src/queries/query.ts', 'frontend/src/lib/api.ts'],
+                },
+            ],
+            // Real file list and patch from `/pulls/76435/files`.
+            files: [
+                {
+                    path: 'frontend/src/queries/query.ts',
+                    added: 16,
+                    removed: 12,
+                    hunk: '@@ -284,17 +284,21 @@',
+                    lines: [
+                        { kind: 'context', text: '    } catch (e) {' },
+                        {
+                            kind: 'remove',
+                            text: '        // Raw error detail/message can echo query fragments, so telemetry only gets status and code',
+                        },
+                        { kind: 'remove', text: "        posthog.capture('query failed', {" },
+                        {
+                            kind: 'add',
+                            text: '        // an aborted request is the user navigating away, not a failure',
+                        },
+                        { kind: 'add', text: '        if (!isAbortError(e)) {' },
+                        { kind: 'add', text: "            posthog.capture('query failed', {" },
+                    ],
+                },
+                {
+                    path: 'frontend/src/lib/api.ts',
+                    added: 1,
+                    removed: 1,
+                    hunk: '@@ -1,1 +1,1 @@',
+                    lines: [
+                        { kind: 'remove', text: 'const isAbortError = (e: unknown): boolean =>' },
+                        { kind: 'add', text: 'export const isAbortError = (e: unknown): boolean =>' },
+                    ],
+                },
+            ],
+        },
     },
     /*
      * NOTE: APM and Feature flags used to sit here. Both turned out to be real reports with
@@ -1213,14 +1493,14 @@ export const REPORT_ITEMS: InboxItem[] = [
         scope: 'query',
         title: 'Events-list endpoint is timing out at 11.5%',
         summary:
-            'The events-list endpoint started failing at a materially higher rate than the week before, with latency worsening alongside it – a sustained step, not a traffic artifact.',
+            'The events-list endpoint started failing at a materially higher rate than the week before, with latency worsening alongside it. A sustained step, not a traffic artifact.',
         priority: 'P1',
         signalCount: 3,
         timeAgo: 'Updated Jul 31',
         origin: { kind: 'scout', scout: 'APM' },
         // Metrics, logs and traces are one story here, so the button drops the scope.
         walkthroughLabel: 'APM',
-        intro: 'APM gives the loop your traces, logs, and metrics – what broke, what it said, and where it happened.',
+        intro: 'APM gives the loop your traces, logs, and metrics. What broke, what it said, and where it happened.',
         steps: [
             {
                 stage: 'signal',
@@ -1229,18 +1509,14 @@ export const REPORT_ITEMS: InboxItem[] = [
             },
             {
                 stage: 'investigate',
+                label: 'Report',
                 copy: 'The agent lines the slow traces up against the fast ones, pulls the logs on the failing spans, and finds what they share. Because a trace names the service, operation, and line, the agent starts at the problem instead of searching for it.',
                 image: 'https://res.cloudinary.com/dmukukwp6/image/upload/Report_Investigate_Mock_APM_68ef834f95.png',
             },
             {
                 stage: 'pr',
-                copy: 'The agent fixes what the trace located and opens the PR, with instrumentation included so the effect of the change shows up in the same metrics.',
+                copy: 'The agent fixes what the trace located and opens the PR, with instrumentation included so the effect of the change shows up in the same metrics. You review it with the waterfall beside it, and after you merge, the same check that raised the alarm watches the graph come back down.',
                 image: 'https://res.cloudinary.com/dmukukwp6/image/upload/Git_Hub_PR_Mock_APM_62fd9d0412.png',
-            },
-            {
-                stage: 'merge',
-                copy: 'You review the diff with the waterfall beside it. After you merge, the same check that raised the alarm watches the graph come back down.',
-                image: 'https://res.cloudinary.com/dmukukwp6/image/upload/Git_Hub_PR_Merged_Mock_APM_5caee0bbd3.png',
             },
         ],
         detail: {
@@ -1253,8 +1529,8 @@ export const REPORT_ITEMS: InboxItem[] = [
                     paragraphs: [
                         <>
                             The events-list endpoint's failure rate stepped up sharply against the same window a week
-                            earlier, while traffic barely moved – so this is a real regression in the query path rather
-                            than load. Latency at the 95th percentile worsened alongside it.
+                            earlier, while traffic barely moved, so this is a real regression in the query path and not
+                            load. Latency at the 95th percentile worsened alongside it.
                         </>,
                     ],
                 },
@@ -1291,7 +1567,7 @@ export const REPORT_ITEMS: InboxItem[] = [
         timeAgo: 'Updated Aug 3',
         origin: { kind: 'scout', scout: 'Feature flags' },
         walkthroughLabel: 'Feature flags',
-        intro: 'Feature flags accumulate faster than anyone cleans them up. This is the part of the loop that does.',
+        intro: 'Feature flags accumulate faster than anyone cleans them up. The loop does the cleaning.',
         steps: [
             {
                 stage: 'signal',
@@ -1300,18 +1576,14 @@ export const REPORT_ITEMS: InboxItem[] = [
             },
             {
                 stage: 'investigate',
+                label: 'Report',
                 copy: 'The agent finds the call sites, works out which SDK and deployment they ship in, and separates cached noise from live code still checking a dead key.',
                 image: 'https://res.cloudinary.com/dmukukwp6/image/upload/Report_Investigate_Mock_Feature_flags_641e6583a6.png',
             },
             {
                 stage: 'pr',
-                copy: "Flag cleanup is the PR that never makes it off anyone's backlog, so the agent opens it: the checks migrate to the right key and the dead branch comes out.",
+                copy: "Flag cleanup is the PR that never makes it off anyone's backlog, so the agent opens it. The checks migrate to the right key and the dead branch comes out. You review it with the evaluation graph beside it, and once the old key's calls decay to zero the cleanup is confirmed in the same graph.",
                 image: 'https://res.cloudinary.com/dmukukwp6/image/upload/Git_Hub_PR_Mock_Feature_flags_3e6586debd.png',
-            },
-            {
-                stage: 'merge',
-                copy: "You review the diff with the evaluation graph beside it. Once the old key's calls decay to zero, the cleanup is confirmed in the same graph.",
-                image: 'https://res.cloudinary.com/dmukukwp6/image/upload/Git_Hub_PR_Merged_Mock_Feature_flags_952d61c07a.png',
             },
         ],
         detail: {
@@ -1325,7 +1597,7 @@ export const REPORT_ITEMS: InboxItem[] = [
                         <>
                             A flag key was renamed, but the old key kept being evaluated every day afterwards. The
                             roster has no live flag under the old name, so nearly all of those calls resolved to nothing
-                            – callers were reading a default rather than the flag they meant.
+                            . Callers were reading a default instead of the flag they meant.
                         </>,
                     ],
                 },
@@ -1360,13 +1632,13 @@ export const REPORT_ITEMS: InboxItem[] = [
         scope: 'web-analytics',
         title: 'gate session replay tile behind experiment flag',
         summary:
-            'A running experiment produced no exposures, because the flag it was built on was never read in the serving path – so neither variant could fill and the readout would have been empty.',
+            'A running experiment produced no exposures, because the flag it was built on was never read in the serving path, so neither variant could fill and the readout would have been empty.',
         priority: 'P2',
         signalCount: 2,
         timeAgo: 'Updated Jul 28',
         origin: { kind: 'scout', scout: 'Experiments' },
         walkthroughLabel: 'Experiments',
-        intro: 'An experiment is only as good as the data underneath it. This is the part of the loop that checks.',
+        intro: 'An experiment is only as good as the data underneath it. Something has to check that data, and this is it.',
         steps: [
             {
                 stage: 'signal',
@@ -1375,18 +1647,14 @@ export const REPORT_ITEMS: InboxItem[] = [
             },
             {
                 stage: 'investigate',
+                label: 'Report',
                 copy: 'The agent traces the exposure stream back through the serving path: whether the flag is read at all, where the exposure event fires, and whether the split you configured is the split users get.',
                 image: 'https://res.cloudinary.com/dmukukwp6/image/upload/Report_Investigate_Mock_Experiments_bcb10f1ea2.png',
             },
             {
                 stage: 'pr',
-                copy: 'Wiring problems are code problems, so the agent opens the PR: the flag read goes into the serving path, with tests that keep it there, and a note on resetting the experiment so the empty window stays out of the analysis.',
+                copy: 'Wiring problems are code problems, so the agent opens the PR. The flag read goes into the serving path, with tests that keep it there, and a note on resetting the experiment so the empty window stays out of the analysis. You review it with the exposure data beside it; both variants start filling after the merge, and the readout you eventually get is one you can trust.',
                 image: 'https://res.cloudinary.com/dmukukwp6/image/upload/Git_Hub_PR_Mock_Experiments_af42b8b94b.png',
-            },
-            {
-                stage: 'merge',
-                copy: 'You review the diff with the exposure data beside it. Both variants start filling after the merge, and the readout you eventually get is one you can trust.',
-                image: 'https://res.cloudinary.com/dmukukwp6/image/upload/Git_Hub_PR_Merged_Mock_Experiments_1983ea7703.png',
             },
         ],
         detail: {
@@ -1400,7 +1668,7 @@ export const REPORT_ITEMS: InboxItem[] = [
                     paragraphs: [
                         <>
                             The experiment was configured and running, but its flag was never read on the path that
-                            serves the tile – so no exposure event fired for either variant and the test could not
+                            serves the tile, so no exposure event fired for either variant and the test could not
                             produce a readout at all.
                         </>,
                     ],
@@ -1454,7 +1722,7 @@ export const REPORT_ITEMS: InboxItem[] = [
                             on both a false <Code>mcp-analytics</Code> flag eval <em>and</em> a failed RBAC check. The
                             sessions list was left on flag-only <Code>PostHogFeatureFlagPermission</Code>, so{' '}
                             <strong>the two halves of the product can give the same user different answers</strong>.
-                            Worse, both gates <em>raise</em> rather than degrade, so one denied tile query escalates
+                            Worse, both gates <em>raise</em> instead of degrading, so one denied tile query escalates
                             through the scene error boundary and takes the whole view down instead of showing that one
                             tile as unavailable.
                         </>,
@@ -1485,7 +1753,7 @@ export const REPORT_ITEMS: InboxItem[] = [
                             <Code>mcp_analytics</Code> RBAC resource the query runners use, so a user who can see the
                             dashboard can see its sessions. Then{' '}
                             <strong>stop treating a not-yet-propagated flag eval as an access denial</strong>, and have
-                            the overview loader fail the individual tile rather than throwing to the scene error
+                            the overview loader fail the individual tile instead of throwing to the scene error
                             boundary. Two open pull requests are already reworking that loader's error handling, so new
                             work should stay on the backend gating and leave those files alone.
                         </>,
@@ -1514,8 +1782,8 @@ export const REPORT_ITEMS: InboxItem[] = [
                         <>
                             Introduced <Code>validate_mcp_analytics_access</Code>, whose first branch raises{' '}
                             <Code>UserAccessControlError</Code> when the <Code>mcp-analytics</Code> flag evaluates false
-                            server-side – still a live failure path when the eval fails or hasn't propagated. Also
-                            authored the session-selection button behind the reported dead click.
+                            server-side, which is still a live failure path when the eval fails or hasn't propagated.
+                            Also authored the session-selection button behind the reported dead click.
                         </>
                     ),
                 },
@@ -1532,7 +1800,7 @@ export const REPORT_ITEMS: InboxItem[] = [
                         <>
                             Added the RBAC assertion to the query runners and registered <Code>mcp_analytics</Code> in{' '}
                             <Code>ACCESS_CONTROL_RESOURCES</Code>. This is now the live mechanism by which one colleague
-                            can see MCP analytics and another cannot – it replaced the beta email allow-list as the
+                            can see MCP analytics and another cannot. It replaced the beta email allow-list as the
                             differing-access cause, and it's the layer any fix has to address.
                         </>
                     ),
@@ -1548,7 +1816,7 @@ export const REPORT_ITEMS: InboxItem[] = [
                     ],
                     reason: (
                         <>
-                            Set <Code>PostHogFeatureFlagPermission</Code> on the MCP analytics viewsets – the
+                            Set <Code>PostHogFeatureFlagPermission</Code> on the MCP analytics viewsets, which is the
                             sessions-list gate that 403s a non-enabled user. That gate is still flag-only and was never
                             moved onto the RBAC model, which is exactly why it and the query runners can now disagree.
                         </>
@@ -1563,10 +1831,10 @@ export const REPORT_ITEMS: InboxItem[] = [
                     body: (
                         <>
                             A recording shows someone enable MCP Analytics in settings, open the dashboard, and hit an
-                            access-control error, then explore its dashboards, sessions, and tool-quality metrics – with
+                            access-control error, then explore its dashboards, sessions, and tool-quality metrics, with
                             one dead click when trying to select a session. The view failed as a whole-scene error
-                            rather than a single unavailable tile, with a scout configuration panel stuck mid-load
-                            behind it.
+                            instead of a single unavailable tile, with a scout configuration panel stuck mid-load behind
+                            it.
                         </>
                     ),
                     tags: [
@@ -1593,8 +1861,8 @@ export const REPORT_ITEMS: InboxItem[] = [
                         <>
                             A support ticket from someone who couldn't compute insights or see sessions while a
                             colleague on the same team could. At the time the flag was an email allow-list, which
-                            explained it – but the allow-list is gone and the asymmetry isn't, which is what pointed at
-                            a second, independent gate.
+                            explained it. But the allow-list is gone and the asymmetry isn't, which is what pointed at a
+                            second, independent gate.
                         </>
                     ),
                     tags: [
@@ -1617,8 +1885,8 @@ export const REPORT_ITEMS: InboxItem[] = [
                     title: 'Denials continue after the flag went to 100%',
                     body: (
                         <>
-                            Queried <Code>query access control error</Code> events: they still fire every day – 42 on
-                            one day, 15 the next, between 1 and 42 a day across a month – and they carried on{' '}
+                            Queried <Code>query access control error</Code> events: they still fire every day, 42 on one
+                            day and 15 the next, between 1 and 42 a day across a month, and they carried on{' '}
                             <em>after</em> the flag opened to everyone. That's what rules out the flag as the remaining
                             cause and points at the RBAC gate added later.
                         </>
@@ -1680,7 +1948,7 @@ export const REPORT_ITEMS: InboxItem[] = [
                             : when path cleaning is on, the row shows a cleaned value but the backend matches literally
                             against the raw stored path, so nothing matches. <Code>webAnalyticsLogic.tsx</Code> already
                             rewrites these to <Code>IsCleanedPathExact</Code> for dashboard filters, but the button
-                            never got that treatment – and <Code>WebAnalyticsTile.tsx</Code>{' '}
+                            never got that treatment, and <Code>WebAnalyticsTile.tsx</Code>{' '}
                             <strong>forwards the web analytics date range verbatim</strong> with no clamping to
                             recording retention, so a range predating retention forces a guaranteed-empty list plus a
                             misleading ad-blocker warning.
@@ -1731,7 +1999,7 @@ export const REPORT_ITEMS: InboxItem[] = [
                             <strong>
                                 skip the <Code>-3d</Code> default whenever <Code>session_ids</Code> are present
                             </strong>{' '}
-                            – an explicit ID lookup shouldn't be date-bounded at all.
+                            . An explicit ID lookup shouldn't be date-bounded at all.
                         </>,
                     ],
                 },
@@ -1751,7 +2019,7 @@ export const REPORT_ITEMS: InboxItem[] = [
                             The cross-sell cell in <Code>WebAnalyticsTile.tsx</Code> forwards the web analytics date
                             range verbatim into the replay button with no clamping against recording retention. A 90-day
                             range therefore reaches replay unchanged even though recordings for most plans expire well
-                            before 90 days – the concrete reason the list is empty while the table shows visitors.
+                            before 90 days, the concrete reason the list is empty while the table shows visitors.
                         </>
                     ),
                 },
@@ -1815,7 +2083,7 @@ export const REPORT_ITEMS: InboxItem[] = [
                         {
                             label: 'Confusion',
                             tone: 'orange',
-                            tooltip: 'The segment was classified as the user being confused rather than blocked.',
+                            tooltip: 'The segment was classified as the user being confused, not blocked.',
                         },
                     ],
                     codePaths: [
@@ -1904,9 +2172,9 @@ export const REPORT_ITEMS: InboxItem[] = [
                         <>
                             This lives in the <strong>core product-analytics editing flow</strong>, which is high
                             traffic. Evidence is 3 individual sessions across 3 projects, and there's a real workaround
-                            (hit Refresh). The aggregate blast radius isn't quantifiable from here – the recordings and
-                            error events for those projects were cross-region and unreachable from this environment – so
-                            this reads as recurring, annoying friction rather than a confirmed broken flow.
+                            (hit Refresh). The aggregate blast radius isn't quantifiable from here. The recordings and
+                            error events for those projects were cross-region and unreachable from this environment, so
+                            this reads as recurring, annoying friction and not a confirmed broken flow.
                         </>,
                     ],
                 },
@@ -1916,7 +2184,7 @@ export const REPORT_ITEMS: InboxItem[] = [
                         <>
                             Don't ship the originally-proposed fix blindly: it would be a{' '}
                             <strong>no-op in the editor</strong> and just add redundant recomputes. Instead, a human
-                            with insight-editor access should confirm the true cause first – candidates are{' '}
+                            with insight-editor access should confirm the true cause first. Candidates are{' '}
                             <strong>expensive multi-breakdown queries timing out or OOMing in ClickHouse</strong>, an
                             aborted-query race, or genuinely-empty data for the chosen breakdown and date window. If
                             it's query cost, the real fix is optimizing that path or adding smarter auto-retry so users
@@ -1939,7 +2207,7 @@ export const REPORT_ITEMS: InboxItem[] = [
                         <>
                             Introduced multi-column breakdown query construction in trends. A two-property breakdown
                             combined with <Code>unique_session</Code> aggregation greatly expands the query's cost,
-                            making ClickHouse timeouts and memory errors – surfaced as a 500 – far more likely than a
+                            making ClickHouse timeouts and memory errors, surfaced as a 500, far more likely than a
                             single breakdown.
                         </>
                     ),
@@ -1956,8 +2224,8 @@ export const REPORT_ITEMS: InboxItem[] = [
                     reason: (
                         <>
                             Reworked the <Code>loadData</Code> error handling that captures the backend 500 and drives
-                            the reducers feeding <Code>InsightErrorState</Code> – the component the user actually sees
-                            when this fails.
+                            the reducers feeding <Code>InsightErrorState</Code>, the component the user sees when this
+                            fails.
                         </>
                     ),
                 },
@@ -1977,7 +2245,7 @@ export const REPORT_ITEMS: InboxItem[] = [
                     reason: (
                         <>
                             Introduced the refresh-type distinction and the cached-results short-circuit that lets a
-                            stale or empty cached response be served without a fresh server query – the mechanism the
+                            stale or empty cached response be served without a fresh server query, the mechanism the
                             first diagnosis blamed, and the one this investigation ruled out for the new-insight editor.
                         </>
                     ),
@@ -1992,8 +2260,8 @@ export const REPORT_ITEMS: InboxItem[] = [
                         <>
                             After adding a breakdown to a trend insight, the chart area shows a "nothing matching query
                             results" message and a Reload button. The user clicks it twice before the chart eventually
-                            populates – a failure to handle the initial loading state gracefully, or a query timeout
-                            that needs manual intervention.
+                            populates. A failure to handle the initial loading state gracefully, or a query timeout that
+                            needs manual intervention.
                         </>
                     ),
                     tags: [
@@ -2049,9 +2317,9 @@ export const REPORT_ITEMS: InboxItem[] = [
                     paragraphs: [
                         <>
                             <Code>relationshipsLogic.tsx</Code> deletes a join through <Code>deleteWithUndo</Code> and
-                            then stops – there's no <Code>posthog.capture</Code> on that path. The shared join modal
+                            then stops. There's no <Code>posthog.capture</Code> on that path. The shared join modal
                             already captures <Code>join created</Code> and <Code>join updated</Code>, so the codebase
-                            has a settled idiom for this; deletion is simply the one that didn't get it.
+                            has a settled idiom for this. Deletion is the one that didn't get it.
                         </>,
                     ],
                 },
@@ -2059,7 +2327,7 @@ export const REPORT_ITEMS: InboxItem[] = [
                     heading: 'Impact',
                     paragraphs: [
                         <>
-                            Nothing is broken for anyone – this is a measurement gap, not a defect. The cost is that
+                            Nothing is broken for anyone. This is a measurement gap and not a defect. The cost is that
                             warehouse-join cleanup can't be measured at all, so there's no way to see whether people
                             build joins and keep them, or build them and immediately undo them.
                         </>,
@@ -2070,7 +2338,7 @@ export const REPORT_ITEMS: InboxItem[] = [
                     paragraphs: [
                         <>
                             The change itself is a few lines, but the event name and its properties are a contract that
-                            outlives the patch. The agent stopped rather than guess a schema: the Data Catalog owner
+                            outlives the patch. The agent stopped instead of guessing a schema: the Data Catalog owner
                             should confirm the shape before anyone writes it.
                         </>,
                     ],
@@ -2098,7 +2366,7 @@ export const REPORT_ITEMS: InboxItem[] = [
                             The user-facing Delete action landed in commit <Code>c0b14ee2</Code> and calls{' '}
                             <Code>deleteWithUndo</Code> against the warehouse view-link endpoint. Searched that path for{' '}
                             <Code>posthog.capture</Code>, <Code>report_user_action</Code>, and the other capture helpers
-                            used in this repo – none of them appear.
+                            used in this repo. None of them appear.
                         </>
                     ),
                     tags: [
@@ -2122,8 +2390,8 @@ export const REPORT_ITEMS: InboxItem[] = [
                         <>
                             Searched the event schema for <Code>join deleted</Code> and its near-synonyms. It carries{' '}
                             <Code>join created</Code>, <Code>join updated</Code>, and two data-catalog relationship
-                            events, but nothing for deletion – confirming the gap from the data side as well as the code
-                            side.
+                            events, but nothing for deletion, which confirms the gap from the data side as well as the
+                            code side.
                         </>
                     ),
                     tags: [{ label: 'Verified', tone: 'green' }],
@@ -2187,3 +2455,56 @@ export const diffStat = (detail: ReportDetail): { added: number; removed: number
         (acc, file) => ({ added: acc.added + file.added, removed: acc.removed + file.removed }),
         { added: 0, removed: 0 }
     )
+
+/* ── The unified list ──────────────────────────────────────────────────────── */
+
+/**
+ * Every item the inbox shows, in one list.
+ *
+ * The app used to split these across a Pull requests tab and a Reports tab; it now
+ * shows a single Reports list where a pull request is a property of an item rather
+ * than a category of its own. The two arrays above stay separate because they're
+ * sourced and privacy-reviewed differently (see the notes on each), but nothing
+ * downstream should care which one an item came from – ask `prNumber` instead.
+ */
+export const ALL_ITEMS: InboxItem[] = [...INBOX_ITEMS, ...REPORT_ITEMS]
+
+/**
+ * The status facet, replacing the old Actionable / Needs-input row badge.
+ *
+ * These are the app's own five, in its order. The first two are the open states and
+ * are the ones selected by default; the last three are closed states that no item on
+ * this page is in, because a report nobody has acted on is the whole point of showing
+ * it here. They're listed anyway because the scale is part of the product, the same
+ * reason the priority menu lists levels that match nothing.
+ */
+export const STATUSES = ['Review and merge', 'Needs decision', 'Resolved', 'Dismissed', 'Not actionable'] as const
+
+export type ReportStatus = (typeof STATUSES)[number]
+
+/** The two open states, which the app pre-selects – hence its "2 statuses" chip. */
+export const DEFAULT_STATUSES: ReportStatus[] = ['Review and merge', 'Needs decision']
+
+/**
+ * Derived rather than stored, so the detail payloads don't each need a new field that
+ * would only restate what `prNumber` already says.
+ *
+ * A pull request is the thing you review and merge, so an item that has one is in that
+ * state and an item that doesn't is waiting on a human to decide what happens next.
+ *
+ * This deliberately drops the report's own Actionable / Needs-input judgment, which the
+ * old row badged. The redesign has no such badge – "Actionable" and "Needs input" both
+ * describe a report with no pull request yet, which is one status here. The judgment is
+ * still on `detail.status` for the detail view.
+ */
+export const statusOf = (item: InboxItem): ReportStatus => (item.prNumber ? 'Review and merge' : 'Needs decision')
+
+/**
+ * The repo an item's pull request lives in, parsed from its own URL so the row can't
+ * name a repo the link doesn't go to. Undefined without a pull request – the app shows
+ * no repo on a report that hasn't produced one, because there's nothing to name yet.
+ */
+export const repoOf = (item: InboxItem): string | undefined => {
+    const match = /github\.com\/([^/]+\/[^/]+)\/pull\//.exec(item.prUrl ?? '')
+    return match?.[1]
+}
