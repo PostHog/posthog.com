@@ -179,7 +179,7 @@ Applied if the Owner role has been added to a user in the last 14 days. This is 
 
 ## CSM sentiment
 
-The health score above is computed for you. CSM sentiment is not — it is a rating you set by hand on your own accounts, in <PrivateLink url="https://us.posthog.com/project/2/accounts">Customer analytics</PrivateLink>.
+The health score above is computed for you. CSM sentiment is a rating you set by hand on your own accounts, in <PrivateLink url="https://us.posthog.com/project/2/accounts">Customer analytics</PrivateLink>.
 
 It records the relationship *you personally* have with the account. It does not measure how the account is doing. A large, healthy, fully self-serve account can sit at the bottom of the scale, and that is a correct reading — in a product-led book, "assigned to you" and "known to you" are different things. When the health score and your sentiment disagree, they are usually both right.
 
