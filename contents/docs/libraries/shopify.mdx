@@ -51,8 +51,8 @@ posthog.init('<ph_project_token>', {
 Each option removes a feature, so set only the ones you can do without:
 
 - `disable_session_recording` and `disable_surveys` stop PostHog from downloading `recorder.js` and `surveys.js`. These are the largest scripts PostHog loads after the library itself.
-- `advanced_disable_flags` removes one network request per page load. Leave this option out if you use [feature flags](/docs/feature-flags), [experiments](/docs/experiments), or [surveys](/docs/surveys), because they all need that request.
-- `autocapture: false` cuts your event volume, but you then need [`posthog.capture()`](/docs/product-analytics/capture-events) calls for the actions you still want to measure. To keep autocapture on a smaller set of elements instead, use [`autocapture` allowlists](/docs/libraries/js/config#configuring-autocapture).
+- `advanced_disable_flags` removes one network request per page load. Leave this option out if you use [Feature Flags](/docs/feature-flags), [Experiments](/docs/experiments), or [Surveys](/docs/surveys), because they all need that request.
+- `autocapture: false` cuts your event volume, but you then need [`posthog.capture()`](/docs/product-analytics/capture-events) calls for the actions you still want to measure. To keep autocapture on a smaller set of elements instead, set [`element_allowlist` or `css_selector_allowlist`](/docs/libraries/js/config#configuring-autocapture).
 
 See the [JavaScript config reference](/docs/libraries/js/config) for the full list of options.
 
