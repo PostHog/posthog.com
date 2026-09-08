@@ -27,7 +27,7 @@ On iOS the native SDK hooks the app delegate's remote-notification registration 
 
 Every tap on a remote notification is captured on both platforms, whether the notification cold-launched the app or it was already running. Locally-scheduled notifications are ignored — capture those manually (below).
 
-Cold-start capture needs posthog-ios 3.72.0 on iOS and posthog-android 3.62.0 on Android, which the plugin's version floors bring in. On Android a tap is recognized by the `google.message_id` extra that Firebase puts on the intent, so push delivered outside FCM isn't seen.
+Cold-start capture on both platforms, and warm-start capture on Android, arrive in an upcoming Flutter SDK release — they need posthog-ios 3.72.0 and posthog-android 3.62.0, which that release's version floors bring in. On Android a tap is recognized by the `google.message_id` extra that Firebase puts on the intent, so push delivered outside FCM isn't seen.
 
 <CalloutBox icon="IconWarning" title="iOS needs a notification delegate" type="caution">
 
