@@ -17,6 +17,7 @@ type RatesProduct = {
     unit?: string
     startsAt?: string | number
     freeLimit?: number
+    billedWith?: string
 }
 
 interface AllProductsRatesModalProps {
@@ -80,6 +81,7 @@ export default function AllProductsRatesModal({
                                         unit,
                                         startsAt,
                                         freeLimit,
+                                        billedWith,
                                     }) => {
                                         const added = addedTypes.includes(type)
                                         return (
@@ -99,7 +101,11 @@ export default function AllProductsRatesModal({
                                                     </div>
                                                 </td>
                                                 <td className="py-2.5 pr-4">
-                                                    {unit && startsAt ? (
+                                                    {billedWith ? (
+                                                        <span className="text-secondary">
+                                                            Billed with {billedWith.toLowerCase()}
+                                                        </span>
+                                                    ) : unit && startsAt ? (
                                                         <span>
                                                             <span className="capitalize">{pluralizeUnit(unit, 2)}</span>{' '}
                                                             <span className="text-secondary">
@@ -111,7 +117,9 @@ export default function AllProductsRatesModal({
                                                     )}
                                                 </td>
                                                 <td className="py-2.5 pr-4">
-                                                    {freeLimit ? (
+                                                    {billedWith ? (
+                                                        <span className="text-secondary">—</span>
+                                                    ) : freeLimit ? (
                                                         `${Number(freeLimit).toLocaleString()} ${pluralizeUnit(
                                                             unit,
                                                             freeLimit

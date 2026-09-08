@@ -636,6 +636,7 @@ export default function Tabbed() {
                                                     categoryName,
                                                     startsAt,
                                                     unit,
+                                                    billedWith,
                                                 }) => (
                                                     <button
                                                         key={type}
@@ -655,11 +656,13 @@ export default function Tabbed() {
                                                                 {categoryName || name}
                                                             </span>
                                                         </span>
-                                                        {startsAt && unit && (
-                                                            <span className="text-secondary shrink-0">
-                                                                ${startsAt}/{unit}
-                                                            </span>
-                                                        )}
+                                                        <span className="text-secondary shrink-0">
+                                                            {billedWith
+                                                                ? `Billed with ${billedWith.toLowerCase()}`
+                                                                : startsAt && unit
+                                                                ? `$${startsAt}/${unit}`
+                                                                : null}
+                                                        </span>
                                                     </button>
                                                 )
                                             )
