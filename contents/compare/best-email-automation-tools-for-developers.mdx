@@ -20,9 +20,11 @@ seo:
     }
 ---
 
-Most email automation tools are marketed at – surprise, surprise – marketers. But there's more to life than engagement emails; sometimes the send you need is a weekly error digest, an onboarding nudge, or an alert that kicks off an agent. And sometimes there's just no marketing hire yet, so the job lands on whoever's closest to the code.
+Most email automation tools are marketed at – surprise, surprise – marketers. 
 
-Either way, if you're a developer, this list is for you – ranked by how the tools actually fit product and engineering work. The right tool depends on where your triggers come from. If they're product behavior, you want automation that reads your product data directly; if they're app-to-app, you want breadth of integrations.
+But there's more to life than engagement emails; sometimes you need to send a weekly error digest, an onboarding nudge, or an alert that kicks off an agent. And sometimes there's just no marketing hire yet, so the job lands on whoever's closest to the code.
+
+Either way, if you're a developer, this list is for you – ranked by how the tools actually fit product and engineering work. 
 
 There's no wrong answer here, the right pick comes down to what you care about most:
 
@@ -37,7 +39,11 @@ There's no wrong answer here, the right pick comes down to what you care about m
 
 For product-led teams, it's **[PostHog Workflows](/workflows)**. 
 
-It's a no-code, drag-and-drop builder that runs on the [events](/docs/data/events) and person properties already in your PostHog project (no separate marketing dataset) so you can email everyone who finished onboarding, landed in a behavioral cohort, or hit a specific [feature flag](/feature-flags) without exporting anyone first. Add delays and audience splits, and because it all lives next to your analytics, you can check what recipients did before and after the send without reconciling two datasets.
+https://res.cloudinary.com/dmukukwp6/image/upload/workflows_screenshot_light_a9f00e201e_d4b5079303.avif
+
+It's a no-code, drag-and-drop builder that runs on the [events](/docs/data/events) and person properties already in your PostHog project (no separate marketing dataset) so you can email everyone who finished onboarding, landed in a behavioral cohort, or hit a specific [feature flag](/feature-flags) without exporting anyone first. 
+
+Add delays and audience splits, and because it all lives next to your analytics, you can check what recipients did before and after the send without reconciling two datasets.
 
 And you're not stuck in the UI: build and edit workflows in code through the [PostHog API](/docs/api) or the [MCP server](/mcp), so a workflow can live in version control and ship alongside the rest of your changes.
 
@@ -52,7 +58,7 @@ A few workflows we actually run at PostHog:
 **What makes PostHog Workflows good for developers:**
 
 -   **Triggers:** Product events, webhooks, batches (audience = person properties, cohorts, or distinct IDs), and tracking pixels.
--   **Channels:** Email today – but any step can be a Slack post, an HTTP call, or an AI agent task, so email is just one destination among many
+-   **Channels:** Any dispatch step – email, Slack, push (iOS/Android), webhook, or any CDP destination; a webhook step can call out to anything else you run, so email is just one of them
 -   **Hosting:** PostHog Cloud 
 -   **Pricing:** 10,000 emails/month free, then $0.003/email with volume discounts
 -   **License:** PostHog core is open source (MIT); Workflows itself is a managed cloud product
@@ -62,7 +68,6 @@ A few workflows we actually run at PostHog:
 **Alternatives to consider:** **Customer.io** or **Brevo** for deep lifecycle campaigns; **n8n** if self-hosting is the deciding factor; **Zapier** for a bigger catalog of app integrations.
 
 <WizardCTA
- command="wizard"
  title="Get your product events flowing, then automate on them"
  subtitle="The setup wizard instruments PostHog in one command so your events are ready to trigger workflows."
  learnMoreTo="/docs/workflows"
