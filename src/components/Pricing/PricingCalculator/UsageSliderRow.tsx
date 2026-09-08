@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import {
     LogSlider,
     NonLinearSlider,
@@ -45,9 +45,18 @@ export default function UsageSliderRow({
     const effectiveScaleMin = scaleMin ?? marks.find((mark) => mark > 0) ?? 1
     const sliderValue = Math.max(value || 0, effectiveScaleMin)
 
+    const [draft, setDraft] = useState<string | null>(null)
+    const displayValue = draft ?? `${inputPrefix ?? ''}${formatCompact(value)}`
+
     const handleLogChange = (next: number) => {
         const rounded = Math.round(sliderCurve(next))
         onChange(rounded <= effectiveScaleMin ? 0 : rounded)
+    }
+
+    const commitDraft = () => {
+        if (draft === null) return
+        onChange(parseCompact(draft))
+        setDraft(null)
     }
 
     return (
@@ -88,8 +97,15 @@ export default function UsageSliderRow({
                 className={`${
                     inputPrefix ? 'w-16' : 'w-14'
                 } bg-transparent text-center font-bold text-sm border border-light dark:border-dark rounded-md py-1 px-1.5 focus:ring-0 focus:border-red dark:focus:border-yellow focus:bg-white dark:focus:bg-accent-dark ml-auto`}
-                value={`${inputPrefix ?? ''}${formatCompact(value)}`}
-                onChange={(e) => onChange(parseCompact(e.target.value))}
+                value={displayValue}
+                onFocus={() => setDraft(displayValue)}
+                onChange={(e) => setDraft(e.target.value)}
+                onBlur={commitDraft}
+                onKeyDown={(e) => {
+                    if (e.key === 'Enter') {
+                        ;(e.target as HTMLInputElement).blur()
+                    }
+                }}
             />
         </div>
     )
