@@ -723,6 +723,22 @@ const appSettings: AppSettings = {
             center: true,
         },
     },
+    '/compare': {
+        size: {
+            min: {
+                width: 700,
+                height: 500,
+            },
+            max: {
+                width: 1200,
+                height: 1500,
+            },
+            fixed: false,
+        },
+        position: {
+            center: true,
+        },
+    },
     '/research': {
         size: {
             min: {
@@ -1147,6 +1163,28 @@ const appSettings: AppSettings = {
         },
     },
     '/demo': {
+        toolbar: true,
+        size: {
+            min: {
+                width: 960,
+                height: 682,
+            },
+            max: {
+                width: 960,
+                height: 682,
+            },
+            fixed: true,
+            autoHeight: true,
+        },
+        position: {
+            center: true,
+        },
+        modal: {
+            type: 'standard',
+        },
+    },
+    // Opened from the desktop icon via addWindow — not a route.
+    'the-posthog': {
         toolbar: true,
         size: {
             min: {

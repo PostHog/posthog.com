@@ -366,7 +366,9 @@ await analytics.flush()   # drain in-flight auto-capture events
 posthog.shutdown()        # flush + stop the posthog client
 ```
 
-No server object to wrap (a custom HTTP/edge dispatcher)? Use `PostHogMCP`, a `posthog` client subclass (needs nothing beyond `posthog` — no MCP SDK) with `capture_tool_call()`, `capture_initialize()`, `capture_tools_list()`, `capture_missing_capability()`, `prepare_tool_list()`, and `prepare_tool_call()` — the Python equivalent of [Custom servers](/docs/mcp-analytics/custom-servers).
+### Custom dispatchers (no server object to wrap)
+
+If you hand-rolled your own dispatcher, there's nothing for `instrument()` to patch. Use `PostHogMCP` instead — a `posthog` client subclass (needs nothing beyond `posthog`, no MCP SDK) that lets you build the events yourself: `capture_tool_call()`, `capture_initialize()`, `capture_tools_list()`, `capture_missing_capability()`, plus `prepare_tool_list()` and `prepare_tool_call()` for intent capture. Same events, same redaction and truncation as `instrument()`. See [Custom servers](/docs/mcp-analytics/custom-servers#python) for a full dispatcher example.
 
 <CalloutBox icon="IconInfo" title="Python SDK is beta" type="fyi">
 

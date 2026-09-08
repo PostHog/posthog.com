@@ -1225,11 +1225,14 @@ article .article-content {
 }
 
 .quicktime-scrubber::-webkit-slider-thumb {
+    -webkit-appearance: none;
     appearance: none;
     width: 28px;
     height: 28px;
     background: transparent;
     border: none;
+    box-shadow: none;
+    opacity: 0;
     cursor: pointer;
     position: relative;
     z-index: 2;
@@ -1254,6 +1257,8 @@ article .article-content {
     height: 28px;
     background: transparent;
     border: none;
+    box-shadow: none;
+    opacity: 0;
     cursor: pointer;
 }
 
@@ -1262,6 +1267,8 @@ article .article-content {
     height: 28px;
     background: transparent;
     border: none;
+    box-shadow: none;
+    opacity: 0;
     cursor: pointer;
 }
 

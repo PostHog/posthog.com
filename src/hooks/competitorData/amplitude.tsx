@@ -88,7 +88,7 @@ export const amplitude = {
         session_replay: {
             available: true,
             pricing: {
-                free_tier: '1,000 recordings',
+                free_tier: '10,000 recordings',
             },
             features: {
                 canvas_recording: false,
@@ -145,7 +145,7 @@ export const amplitude = {
         feature_flags: {
             available: true,
             pricing: {
-                free_tier: '2M events/mo',
+                free_tier: 'Unlimited flags',
             },
             features: {
                 boolean_flags: true,
@@ -204,7 +204,7 @@ export const amplitude = {
         experiments: {
             available: true,
             pricing: {
-                free_tier: '50,000 impressions per month',
+                free_tier: '1 active experiment',
             },
             features: {
                 count_value_metrics: true,
@@ -212,14 +212,16 @@ export const amplitude = {
                 dynamic_cohorts: true,
                 experiment_analysis: true,
                 funnel_metrics: true,
+                funnel_tests: true,
                 namespacing: false,
-                native_goal_tracking: false,
+                native_goal_tracking: true,
                 no_code_experiments: true,
+                low_code_experiments: true,
                 ratio_metrics: false,
-                recommended_run_time: false,
+                recommended_run_time: true,
                 secondary_metrics: true,
-                shared_metrics_library: false,
-                split_testing: false,
+                shared_metrics_library: true,
+                split_testing: true,
                 visual_editor: true,
             },
             supported_tests: {
@@ -230,8 +232,8 @@ export const amplitude = {
                     data_warehouse_experiments: false,
                     fake_door_testing: true,
                     holdout_testing: true,
-                    multi_armed_bandit: 'Enterprise',
-                    mutually_exclusive_experiments: 'Enterprise',
+                    multi_armed_bandit: 'Growth',
+                    mutually_exclusive_experiments: 'Growth',
                     redirect_testing: true,
                 },
             },
@@ -241,7 +243,7 @@ export const amplitude = {
                     custom_targeting: true,
                     exclusion_rules: false,
                     geographic_targeting: true,
-                    group_level_experiments: false,
+                    group_level_experiments: true,
                     holdouts: true,
                     target_by_percentage: true,
                 },
@@ -250,7 +252,7 @@ export const amplitude = {
                 features: {
                     api_access: true,
                     feature_flag_foundation: true,
-                    json_payloads: false,
+                    json_payloads: true,
                     multivariate_testing: true,
                 },
             },

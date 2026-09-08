@@ -469,8 +469,8 @@ export function Question(props: QuestionProps) {
         })
         setEscalateState('sent')
         addToast({
-            title: 'Escalated to support',
-            description: 'Support has been notified.',
+            title: 'Escalated',
+            description: 'Moderators have been notified.',
             duration: 3000,
         })
     }
@@ -712,7 +712,7 @@ export function Question(props: QuestionProps) {
                                                     onClick={handleEscalateToSupport}
                                                     disabled={escalateState === 'sent'}
                                                 >
-                                                    {escalateState === 'sent' ? 'Escalated ✓' : 'Escalate to support'}
+                                                    {escalateState === 'sent' ? 'Escalated ✓' : 'Escalate'}
                                                 </OSButton>
                                             </p>
                                         </div>
@@ -726,7 +726,7 @@ export function Question(props: QuestionProps) {
                                             onClick={handleEscalateToSupport}
                                             disabled={escalateState === 'sent'}
                                         >
-                                            {escalateState === 'sent' ? 'Escalated ✓' : 'Escalate to support'}
+                                            {escalateState === 'sent' ? 'Escalated ✓' : 'Escalate'}
                                         </OSButton>
                                     </div>
                                 )}

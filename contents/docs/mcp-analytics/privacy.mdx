@@ -35,8 +35,9 @@ The SDK runs a deterministic sanitizer:
 - **Long base64-looking strings (≥10KB)** → replaced with `"[binary data redacted...]"`.
 - **Keys matching the sensitive-key pattern** — `authorization`, `cookie`, `password`, `token`, `secret`, `api_key`, `private_key`, and similar — have their values replaced with `"[redacted]"`.
 - **PostHog API key patterns** (`ph[a-z]_…`) in any string value → replaced with `"[redacted]"`.
+- **Credential-looking words** — detected by entropy and known key formats (`sk-…`, PEM markers) — replaced word by word, in `$mcp_parameters`, `$mcp_response`, the captured intent, and exception messages. A message like `auth failed for sk-…` keeps its diagnostic text and loses only the key.
 
-This stage is not configurable. It's safety net behavior — if you have stricter requirements, encode them in `beforeSend`.
+This stage is not configurable, and it is a safety net rather than a general-purpose credential scrubber: it catches known key formats and obviously sensitive keys, not every secret your tools might echo. Free text your server writes — exception messages especially — is passed through as-is once those patterns are gone. If you have stricter requirements, encode them in `beforeSend`.
 
 ### 2. Truncation
 
@@ -98,6 +99,41 @@ beforeSend: (event) => {
 You own the `posthog-node` client's lifecycle. Call `posthog.shutdown()` (or `posthog.flush()`) from your `SIGTERM` / `beforeExit` handler — or explicitly at the end of each serverless invocation — so in-flight events aren't dropped. See [Installation](/docs/mcp-analytics/installation#graceful-shutdown) for the snippet.
 
 </CalloutBox>
+
+## Python
+
+The pipeline is identical in Python — same sanitizer, same truncation caps, same `$exception` fan-out — and `before_send` is the same final say. Exception messages are sanitized and capped at 2048 characters from `posthog>=7.41`.
+
+On the `instrument()` path it's an `MCPAnalyticsOptions` field. On the `PostHogMCP` path it's the standard `posthog` client kwarg, which MCP events run through like any other capture:
+
+```python
+from posthog.mcp import instrument, PostHogMCP
+from posthog.mcp.types import MCPAnalyticsOptions
+
+def before_send(event):
+    if event["event"] == "$exception":
+        return None  # drop
+    return event
+
+instrument(server, posthog, MCPAnalyticsOptions(before_send=before_send))
+
+# custom dispatchers:
+posthog = PostHogMCP("phc_your_project_api_key", before_send=before_send)
+```
+
+The callback receives the built payload — `event`, `distinct_id`, `properties`, `timestamp` — may be sync or async, and runs once per emitted event, including the `$exception` sibling. Return the event to send it, or `None` to drop it. A raised exception drops it too and is routed to the logger.
+
+For zero payload retention, strip the payload keys and keep the timing and attribution metadata:
+
+```python
+def before_send(event):
+    event["properties"].pop("$mcp_parameters", None)
+    event["properties"].pop("$mcp_response", None)
+    event["properties"].pop("$mcp_error_message", None)
+    return event
+```
+
+Set `enable_exception_autocapture=False` (`MCPAnalyticsOptions`) or `mcp_exception_autocapture=False` (`PostHogMCP`) to suppress the `$exception` sibling entirely.
 
 ## Buffering and back-pressure
 
