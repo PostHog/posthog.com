@@ -16,39 +16,13 @@ seo:
     metaDescription: "Seven loops we use to build self-driving in PostHog, from agent feedback to Replay Vision. Real reports, merged PRs, and where humans still fit."
 ---
 
-<ProductScreenshot
-    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/hamel_tweet_top_b17caabd1a.jpg"
-    classes="rounded"
-    alt="Hamel Husain's post on X: &quot;Loop Engineering Is Dead. Enter Graph Engineering&quot;"
-/>
+Are loops still a thing? Or is it graphs now? I thought graphs were a meme, was it not?
 
-<details>
+I've given up keeping up. Every few months I ignore all of it and ask what I'm actually getting use out of. 
 
-<summary>You already know how that article ends. Click to confirm.</summary>
+Two things always make the list: **tools** and **skills** (if you're sleeping on the [PostHog skills store](/docs/skills#why-use-posthog-as-your-skills-store), you're missing out – almost everything I do each day runs through it). 
 
-![The Michael Jordan "Stop it." meme, from the same post](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/hamel_tweet_meme_6b36e0eb8f.jpg)
-
-</details>
-
-## The great loop debate
-
-Are loops still a thing? Or is it graphs now? I thought the graphs thing was a meme, was it not?
-
-I've given up keeping up.
-
-Every few months I try to ignore all this and ask what I'm actually getting use out of.
-
-I keep coming back to **tools** and **skills** (p.s. if you're sleeping on the [PostHog skills store](/docs/skills#why-use-posthog-as-your-skills-store), you're missing out. Almost everything I do each day involves skills in there).
-
-Harnesses are the new hotness, but a harness should be boring – if yours feels special and magical, something has probably gone wrong.
-
-I like "meta-harness" sometimes too. PostHog [Self-driving](/self-driving) is trying to be a sort of meta product engineering harness in some sense.
-
-But then I catch myself and try not to overthink it – just build cool useful stuff, don't play word games.
-
-My guess is a lot of the harness stuff gets sucked into the model layer over time. Very useful for now, but I wonder how much of it we'll still need in 2030.
-
-And then there are **loops**. Obligatory [Steinberger](https://x.com/steipete/status/2063697162748260627) tweet reference:
+The third, and the one bit of the buzz I hate to admit keeps delivering, is **loops**.
 
 <ProductScreenshot
     imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/steipete_loops_tweet_e71ee20547.png"
@@ -56,15 +30,13 @@ And then there are **loops**. Obligatory [Steinberger](https://x.com/steipete/st
     alt="Peter Steinberger's post on X: &quot;Here's your monthly reminder that you shouldn't be prompting coding agents anymore. You should be designing loops that prompt your agents.&quot;"
 />
 
-Loops are the one part of the buzz I hate to admit that I _do_ keep getting value from – with one caveat: most of the time I still want to be *in* the loop, not replaced by it (just yet).
-
 A good loop, for me, does three jobs:
 
 1. **Finds things worth looking at.** It surfaces or watches something I care about so I don't have to.
 2. **Takes the boring parts off my plate.** The triage, the dedupe, the "is this the same issue as last week?", and more and more, large chunks of the actual implementation work (I'm not going to lie to you here).
-3. **Leaves me feeling involved and in charge.** I can read exactly what my agent did, why it did it, and step in anywhere to steer as needed.
+3. **Keeps me involved.** I can read exactly what it did and why, and step in anywhere to steer. Most of the time I still want to be *in* the loop rather than replaced by it. I'm on the fence about how long that lasts, but for now the loop finds and fixes, and I still like deciding what actually ships most of the time.
 
-To be more concrete with all of this, here are 6 or 7 loops we use on the self-driving team to help build self-driving itself.
+Here are 6 or 7 loops we use on the self-driving team to help build self-driving itself.
 
 Four of them are [scouts](/docs/self-driving/scouts) ([explainer blog](/blog/what-is-a-scout)) – small scheduled agents whose logic lives in a markdown skill. The other three start from [signals](/docs/self-driving/signals) like error tracking, analytics, and Replay Vision.
 
