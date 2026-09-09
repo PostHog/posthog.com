@@ -215,8 +215,25 @@ export const Calculator = ({ hideHeader = false, id = 'calculator' }: Calculator
                         <h4 className="text-lg mb-2">Estimating usage</h4>
                         <SidebarList>
                             <SidebarListItem>
-                                Not sure what your volume looks like? Add the tracking code to your site and check back
-                                in a few days – no credit card required.
+                                Not sure what your volume looks like?{' '}
+                                <RenderInClient
+                                    placeholder={<>Add</>}
+                                    render={() =>
+                                        window.posthog?.getFeatureFlag?.(AI_PRICING_FLAG) ===
+                                        AI_PRICING_EXPERIMENT_VARIANTS.outside_calculator ? (
+                                            <>
+                                                <AgentEstimateLink
+                                                    label="Generate an AI estimate"
+                                                    source="pricing-page-estimating-usage"
+                                                />{' '}
+                                                or add
+                                            </>
+                                        ) : (
+                                            <>Add</>
+                                        )
+                                    }
+                                />{' '}
+                                the tracking code to your site and check back in a few days – no credit card required.
                             </SidebarListItem>
                             <SidebarListItem>
                                 If something stupid happens and you get an unexpected bill (like if{' '}
@@ -232,24 +249,6 @@ export const Calculator = ({ hideHeader = false, id = 'calculator' }: Calculator
                                 </Link>{' '}
                                 to help!
                             </SidebarListItem>
-                            <RenderInClient
-                                render={() => {
-                                    const variant = window.posthog?.getFeatureFlag?.(AI_PRICING_FLAG)
-                                    return variant && variant !== AI_PRICING_EXPERIMENT_VARIANTS.control ? (
-                                        <SidebarListItem>
-                                            Coming from another tool?{' '}
-                                            <AgentEstimateLink
-                                                label="Create an estimate"
-                                                source="pricing-page-estimating-usage"
-                                                className={sidebarLinkClasses}
-                                            />{' '}
-                                            using your real usage there.
-                                        </SidebarListItem>
-                                    ) : (
-                                        <></>
-                                    )
-                                }}
-                            />
                         </SidebarList>
                     </div>
                 </div>
