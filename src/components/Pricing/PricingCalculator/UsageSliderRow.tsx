@@ -55,7 +55,7 @@ export default function UsageSliderRow({
     const [draft, setDraft] = useState<string | null>(null)
     const displayValue = draft ?? `${inputPrefix ?? ''}${formatCompact(value)}`
 
-    const emit = (next: number) => onChange(snapToMark(next, marks))
+    const emit = (next: number) => onChange(inputPrefix === '$' ? next : snapToMark(next, marks))
 
     const handleLogChange = (next: number) => {
         const rounded = Math.round(sliderCurve(next))
@@ -64,7 +64,8 @@ export default function UsageSliderRow({
 
     const commitDraft = () => {
         if (draft === null) return
-        emit(parseCompact(draft))
+        const next = parseCompact(draft)
+        if (next !== value) emit(next)
         setDraft(null)
     }
 
@@ -103,16 +104,17 @@ export default function UsageSliderRow({
             </div>
             <input
                 type="text"
+                aria-label={label}
                 className={`${
                     inputPrefix ? 'w-16' : 'w-14'
                 } bg-transparent text-center font-bold text-sm border border-light dark:border-dark rounded-md py-1 px-1.5 focus:ring-0 focus:border-red dark:focus:border-yellow focus:bg-white dark:focus:bg-accent-dark ml-auto`}
                 value={displayValue}
-                onFocus={() => setDraft(displayValue)}
+                onFocus={() => setDraft(`${inputPrefix ?? ''}${value}`)}
                 onChange={(e) => setDraft(e.target.value)}
                 onBlur={commitDraft}
                 onKeyDown={(e) => {
                     if (e.key === 'Enter') {
-                        ;(e.target as HTMLInputElement).blur()
+                        e.currentTarget.blur()
                     }
                 }}
             />

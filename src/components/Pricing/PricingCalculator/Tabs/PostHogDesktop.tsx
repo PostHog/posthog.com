@@ -29,6 +29,14 @@ const fetchPricing = async (url: string): Promise<PricingResponse> => {
     return response.json() as Promise<PricingResponse>
 }
 
+export const useDesktopPricing = (enabled = true) => {
+    const { data: pricing } = useSWR<PricingResponse>(enabled ? '/api/posthog-desktop-pricing' : null, fetchPricing)
+    return {
+        computeRate: hourlyComputeUsd(pricing?.compute ?? PUBLISHED_COMPUTE_RATE_CARD),
+        isPublishedRate: !pricing?.compute,
+    }
+}
+
 export default function PostHogDesktopTab({
     activeProduct,
     setProduct,
@@ -37,8 +45,7 @@ export default function PostHogDesktopTab({
     setProduct: (handle: string, data: any) => void
     [key: string]: any
 }): JSX.Element {
-    const { data: pricing, error } = useSWR<PricingResponse>('/api/posthog-desktop-pricing', fetchPricing)
-    const pricingSettled = pricing !== undefined || error !== undefined
+    const { computeRate, isPublishedRate } = useDesktopPricing()
 
     const creditTiers = useMemo(() => activeProduct?.billingData?.plans.find((plan: any) => plan.tiers)?.tiers, [])
     const freeCredits = useMemo(
@@ -46,34 +53,20 @@ export default function PostHogDesktopTab({
         [creditTiers]
     )
 
-    const liveCompute = pricing?.compute ?? null
-    const computeRate = hourlyComputeUsd(liveCompute ?? PUBLISHED_COMPUTE_RATE_CARD)
-    const isPublishedRate = liveCompute === null
-
-    const [hours, setHours] = useState(0)
-    const [modelSpend, setModelSpend] = useState<number | null>(null)
+    const [hours, setHours] = useState(activeProduct.hours ?? 0)
+    const [modelSpend, setModelSpend] = useState(
+        activeProduct.modelSpend ?? (activeProduct.volume ?? 0) / CREDITS_PER_USD
+    )
 
     const computeSpend = hours * computeRate
     const computeCredits = Math.round(computeSpend * CREDITS_PER_USD)
-    const modelCredits = modelSpend === null ? 0 : Math.round(modelSpend * CREDITS_PER_USD)
+    const modelCredits = Math.round(modelSpend * CREDITS_PER_USD)
     const credits = computeCredits + modelCredits
     const { total, costByTier } = useMemo(() => calculatePrice(credits, creditTiers), [credits, creditTiers])
 
     useEffect(() => {
-        if (!pricingSettled || modelSpend !== null) return
-        const external = Number(activeProduct.volume)
-        const restored = Number.isFinite(external) && external > 0 ? (external - computeCredits) / CREDITS_PER_USD : 0
-        setModelSpend(Math.max(0, restored))
-    }, [pricingSettled])
-
-    useEffect(() => {
-        if (modelSpend === null) return
-        setProduct('posthog_code', { cost: total, volume: credits, costByTier })
-    }, [total, credits, modelSpend === null])
-
-    if (modelSpend === null) {
-        return <div className="h-64 bg-accent border border-primary rounded-md animate-pulse" />
-    }
+        setProduct('posthog_code', { cost: total, volume: credits, costByTier, hours, modelSpend })
+    }, [total, credits, hours, modelSpend])
 
     const freeUsd = freeCredits / CREDITS_PER_USD
 
