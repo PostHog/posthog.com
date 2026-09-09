@@ -143,7 +143,7 @@ These warnings are raised when PostHog rejects a request as it arrives, before t
 
 Rejected events are dropped, and the warning is the only record of them: details carry identifiers and sizes (the SDK name and version, the endpoint, and an occurrence count) rather than event contents. To inspect a rejected payload, capture it at the sender – look for `400` responses to your ingestion endpoint in your browser's network tab, enable [debug mode](/docs/libraries/js/usage#debug-mode) with `posthog.debug()`, or log the event in a [`before_send`](/docs/libraries/js/usage#amending-or-sampling-events) hook.
 
-Start with the `lib` and `lib_version` details. Warnings clustered on a single older SDK version point to an upgrade. When both read `unknown`, the request carried no `$lib` property, so no PostHog SDK sent it. Your project token is public and visible in your web app's source, so anything that finds it can post malformed events to your ingestion endpoint – crawlers, security scanners, and researchers probing your site all do. Check the sender before you look for a bug in your own instrumentation.
+Start with the `lib` and `lib_version` details. Warnings clustered on a single older SDK version point to an upgrade. When both read `unknown`, the request carried no `$lib` property, so no PostHog SDK sent it. Your project token is public and visible in your web app's source, so anything that finds it can post malformed events to your ingestion endpoint – crawlers, security scanners, and researchers probing your site, for example. Check the sender before you look for a bug in your own instrumentation.
 
 ### Discarded event with no distinct ID
 
@@ -151,11 +151,11 @@ Every event needs a `distinct_id` to attribute it to a person. PostHog reads the
 
 PostHog accepts a wide range of values here: numbers and objects are converted to strings, and literal strings like `"null"`, `"undefined"`, and `"anonymous"` are valid IDs. [Prefer real user IDs](/docs/getting-started/identify-users#2-use-unique-strings-for-distinct-ids) – placeholder values group unrelated users onto a single person, and merging them later raises [`cannot_merge_with_illegal_distinct_id`](#refused-to-merge-with-an-illegal-distinct-id).
 
-posthog-js blocks the obvious mistakes for you. `identify()` refuses `null`, `undefined`, an empty string, and the literal strings `"null"` and `"undefined"`. It logs `Unique user id has not been set in posthog.identify` and sends nothing, so a plain `identify()` call is rarely the source of this warning. Common causes include:
+Most PostHog SDKs block the obvious mistakes for you - for example in the posthog-js SDK, `identify()` refuses `null`, `undefined`, an empty string, and the literal strings `"null"` and `"undefined"`. It logs `Unique user id has not been set in posthog.identify` and sends nothing, so a plain `identify()` call is rarely the source of this warning. Common causes include:
 
 - **A `null` `bootstrap.distinctID`.** The ID comes from another system, such as a server-rendered page or a native app handover, and is sometimes `null`. Every event from that page load is unattributable.
 - **A layer that removes the ID in transit.** A [`before_send`](/docs/libraries/js/usage#amending-or-sampling-events) hook, a reverse proxy, or middleware can remove `distinct_id` after the SDK sets it.
-- **Requests that don't come from a PostHog SDK.** Hand-built calls to the [capture API](/docs/api/capture) have no client-side guard. A `lib` detail of `unknown` points at a sender outside your SDKs.
+- **Requests that don't come from a PostHog SDK.** Hand-built calls to the [capture API](/docs/api/capture) have no client-side guard. A `lib` detail of `unknown` points at a sender outside PostHog SDKs.
 
 Check where the ID comes from: your `bootstrap` value, or wherever you call `identify()`. Pass `bootstrap` only when you have an ID. An omitted `distinctID` or an empty string is safe – posthog-js generates an anonymous ID instead.
 
