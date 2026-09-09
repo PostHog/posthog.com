@@ -104,6 +104,34 @@ The simple Segment destination only supports tracking of pageviews, custom event
    });
    ```
 
+#### Filter PostHog properties sent to Segment
+
+> **Note:** This option requires `posthog-js` v1.429.0 or later.
+
+The integration adds PostHog-generated properties to Segment events before Segment sends them to all destinations. To control these properties, replace `segment: window.analytics` in the initialization above with:
+
+```js
+segment: {
+  analytics: window.analytics,
+  filterProperties: (properties) => {
+    for (const key of Object.keys(properties)) {
+      if (key.startsWith("$sdk_debug_")) {
+        delete properties[key];
+      }
+    }
+    return properties;
+  },
+},
+```
+
+This example removes PostHog's `$sdk_debug_*` properties from Segment enrichment. Without `filterProperties`, the integration adds PostHog properties as usual.
+
+`filterProperties` accepts a function or an array of functions that run in order. The first filter receives a fresh shallow copy of PostHog-generated properties, excluding keys already present in the original Segment event. Each later filter receives the previous filter's returned properties. Original Segment properties take precedence over any properties returned by the filters.
+
+Return the properties to add, or `null` to skip all PostHog enrichment for that event. If a filter returns `null` or throws, the remaining filters don't run and the original Segment event continues unchanged. This doesn't drop the event.
+
+Filtering only affects Segment enrichment, not events captured directly by the PostHog SDK. The top-level [`before_send`](/docs/libraries/js/usage#amending-or-sampling-events) hook doesn't run for Segment enrichment.
+
 ## Sending events to PostHog
 
 Once you set up your Segment source and PostHog destination, you can send events via Segment to PostHog. You do this through one of its source libraries or its API. The PostHog destination supports the identify, track, page, screen, group, and alias definitions.
