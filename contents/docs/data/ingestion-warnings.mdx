@@ -161,7 +161,7 @@ Check where the ID comes from: your `bootstrap` value, or wherever you call `ide
 
 ### Discarded event with no event name
 
-The `event` field was missing or empty, so there was no name to record the event under. The usual cause is an empty variable at the `capture()` call site. posthog-js only rejects a name that is missing or not a string, so `capture("")` reaches PostHog and is dropped here.
+The `event` field was missing or empty, so there was no name to record the event under.
 
 ### Discarded session replay batches
 
