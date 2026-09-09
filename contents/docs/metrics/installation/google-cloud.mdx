@@ -148,5 +148,5 @@ The Helm values mirror these under `gcp.`: `projectId`, `metrics`, `metricFilter
 
 - **One puller only.** Cloud Monitoring can't be sharded: every agent instance would pull the same series and double-count. Don't combine with `SHARD_COUNT` / Helm `shards` – the agent refuses to start. Run a separate single instance for Cloud Monitoring alongside a sharded scrape fleet.
 - **Quota and cost.** Each metric type or filter costs one `timeSeries.list` API call per interval. At the default 60 seconds that's 1,440 calls per entry per day, within the free Cloud Monitoring API allocation for typical lists – raise `GCP_COLLECTION_INTERVAL` for large lists.
-- **Freshness.** Cloud Monitoring itself adds latency before a point is queryable (often 1–3 minutes for some services), so the newest data in PostHog lags real time by that plus one pull interval.
+- **Freshness.** Cloud Monitoring itself adds latency before a point is queryable (often one to three minutes for some services), so the newest data in PostHog lags real time by that plus one pull interval.
 - **Alpha upstream.** The agent uses the OpenTelemetry Collector's `googlecloudmonitoring` receiver, which is alpha: metric naming and attributes can change when the collector version is bumped, and a restart can leave a gap of up to one pull interval.
