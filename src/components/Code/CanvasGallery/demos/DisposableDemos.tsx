@@ -16,7 +16,7 @@ export function SignupDipDemo(): JSX.Element {
     ]
     const step = tick % 3
     return (
-        <CanvasFrame title="why-did-signups-dip-tuesday.canvas">
+        <CanvasFrame>
             <div className="grid gap-2 @md:grid-cols-5 h-full">
                 <Panel title="Signups, last 14 days" className="@md:col-span-3">
                     <Sparkline data={signups} className="text-blue" height={64} highlightIndex={9} />
@@ -72,7 +72,7 @@ export function CustomerLookupDemo(): JSX.Element {
     const ready = typed.length === query.length
     const events = series(3, 24, 40, 30)
     return (
-        <CanvasFrame title="customer-lookup.canvas" scheme="primary">
+        <CanvasFrame scheme="primary">
             <div className="flex flex-col gap-2 h-full">
                 <div className="flex items-center gap-2 rounded border border-input bg-primary px-2 py-1.5 text-xs">
                     <IconSearch className="size-3.5 text-muted shrink-0" />
@@ -140,7 +140,7 @@ export function PostDeployCheckDemo(): JSX.Element {
         { label: 'Flag rollout reached 25%', ok: true },
     ]
     return (
-        <CanvasFrame title="did-deploy-4127-break-anything.canvas">
+        <CanvasFrame>
             <div className="grid gap-2 @md:grid-cols-3 h-full">
                 <Panel
                     title="Error rate per minute · deploy at 14:31"

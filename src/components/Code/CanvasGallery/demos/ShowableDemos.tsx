@@ -58,7 +58,7 @@ export function LiveDeckDemo(): JSX.Element {
     ]
     const index = tick % slides.length
     return (
-        <CanvasFrame title="q3-review.deck.canvas" scheme="primary">
+        <CanvasFrame scheme="primary">
             <div className="flex flex-col h-full">
                 <div className="flex gap-1 mb-2">
                     {slides.map((_, i) => (
@@ -201,7 +201,7 @@ export function GlobeDemo(): JSX.Element {
     }, [reducedMotion])
 
     return (
-        <CanvasFrame title="where-is-everyone.canvas" scheme="primary">
+        <CanvasFrame scheme="primary">
             <span ref={gridColorRef} className="text-muted hidden" />
             <span ref={dotColorRef} className="text-blue hidden" />
             <div className="grid @md:grid-cols-[1fr_auto] gap-2 h-full items-stretch">
@@ -232,7 +232,7 @@ export function IncidentReportDemo(): JSX.Element {
         { at: '14:31', label: 'Resolved. Root cause: null tenant id in export job', kind: 'green' },
     ]
     return (
-        <CanvasFrame title="incident-2026-09-04.canvas">
+        <CanvasFrame>
             <div className="grid gap-2 @md:grid-cols-3 h-full">
                 <Panel title="Errors per minute" className="@md:col-span-2">
                     <div className="relative">
@@ -302,7 +302,7 @@ export function FishTankDemo(): JSX.Element {
     }))
     const fishClass = ['text-blue', 'text-orange', 'text-purple']
     return (
-        <CanvasFrame title="fish.canvas" scheme="primary">
+        <CanvasFrame scheme="primary">
             <div className="flex flex-col h-full gap-2">
                 <div className="relative flex-1 min-h-[160px] rounded border border-primary bg-blue/10 overflow-hidden">
                     <svg

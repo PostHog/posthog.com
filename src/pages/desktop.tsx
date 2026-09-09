@@ -1571,7 +1571,7 @@ const alphaTabs: TabbedCarouselTab[] = [
                 Ask for a report, a dashboard, or random internal tool, get exactly what you want in a{' '}
                 <strong className="text-primary">canvas</strong> built with generative UI on PostHog's actual data
                 model.{' '}
-                <Link to="/desktop/canvases" state={{ newWindow: true }} className="underline">
+                <Link to="/desktop-gallery" state={{ newWindow: true }} className="underline">
                     Browse the canvas gallery
                 </Link>
                 .

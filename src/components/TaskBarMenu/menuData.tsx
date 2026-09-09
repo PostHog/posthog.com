@@ -950,7 +950,7 @@ export const DocsItemsEnd = [
     {
         type: 'item' as const,
         label: 'Canvas gallery',
-        link: '/desktop/canvases',
+        link: '/desktop-gallery',
         icon: <Icons.IconPalette className="size-4 text-salmon" />,
     },
 ]

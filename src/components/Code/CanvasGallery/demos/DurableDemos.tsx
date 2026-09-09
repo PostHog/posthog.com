@@ -28,7 +28,7 @@ export function MorningSkimDemo(): JSX.Element {
         { name: 'skip-email-verify', lift: 11.9, sig: true },
     ]
     return (
-        <CanvasFrame title="morning.canvas">
+        <CanvasFrame>
             <div className="flex flex-col gap-2 h-full">
                 <div className="grid grid-cols-3 @md:grid-cols-6 gap-2">
                     <Stat label="Signups" value={formatNumber(jitter(1284, 20))} delta={3.4} />
@@ -117,7 +117,7 @@ export function CreditBurnDemo(): JSX.Element {
     ]
     const pct = (used / limit) * 100
     return (
-        <CanvasFrame title="credits.canvas" scheme="primary">
+        <CanvasFrame scheme="primary">
             <div className="flex flex-col gap-2 h-full">
                 <Panel
                     title="AI credits this month"
@@ -197,7 +197,7 @@ export function RetentionGridDemo(): JSX.Element {
     )
     const focusRow = tick % weeks
     return (
-        <CanvasFrame title="retention.canvas">
+        <CanvasFrame>
             <div className="flex flex-col gap-2 h-full">
                 <div className="flex items-center justify-between text-[11px]">
                     <span className="text-secondary font-semibold">Weekly retention · signups → any activity</span>

@@ -189,14 +189,12 @@ export function Panel({
     )
 }
 
-// Every demo sits in one of these. It is the "window" of the fake canvas.
+// Every demo sits in one of these.
 export function CanvasFrame({
-    title,
     children,
     className = '',
     scheme = 'secondary',
 }: {
-    title: string
     children: React.ReactNode
     className?: string
     scheme?: 'primary' | 'secondary'
@@ -206,13 +204,6 @@ export function CanvasFrame({
             data-scheme={scheme}
             className={`@container size-full flex flex-col bg-primary text-primary font-sans text-left ${className}`}
         >
-            <div className="flex items-center gap-1.5 px-2 py-1 border-b border-primary bg-accent shrink-0">
-                <span className="size-2 rounded-full bg-red/70" />
-                <span className="size-2 rounded-full bg-yellow/70" />
-                <span className="size-2 rounded-full bg-green/70" />
-                <span className="ml-1 text-[11px] text-muted truncate">{title}</span>
-                <span className="ml-auto text-[10px] text-muted hidden @sm:inline">dummy data · refreshes live</span>
-            </div>
             <div className="flex-1 min-h-0 overflow-hidden p-2 @sm:p-3">{children}</div>
         </div>
     )
