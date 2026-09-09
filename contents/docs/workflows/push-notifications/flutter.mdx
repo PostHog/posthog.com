@@ -25,9 +25,9 @@ await Posthog().setup(config);
 
 On iOS the native SDK hooks the app delegate's remote-notification registration callback, so it picks up the APNs token once your app registers for remote notifications. On Android it fetches the FCM token at startup when `firebase-messaging` is on the classpath. The token is registered under the current distinct ID, so it follows the user across `identify()`.
 
-Every tap on a remote notification is captured on both platforms, whether the notification cold-launched the app or it was already running. Locally-scheduled notifications are ignored — capture those manually (below).
+Cold-start capture on both platforms, and warm-start capture on Android, need an upcoming Flutter SDK release — the one that raises its native floors to posthog-ios 3.72.0 and posthog-android 3.62.0. From that release on, every tap on a remote notification is captured on both platforms, whether the notification cold-launched the app or it was already running.
 
-Cold-start capture on both platforms, and warm-start capture on Android, arrive in an upcoming Flutter SDK release — they need posthog-ios 3.72.0 and posthog-android 3.62.0, which that release's version floors bring in. On Android a tap is recognized by the `google.message_id` extra that Firebase puts on the intent, so push delivered outside FCM isn't seen.
+Locally-scheduled notifications are ignored — capture those manually (below). On Android a tap is recognized by the `google.message_id` extra that Firebase puts on the intent, so push delivered outside FCM isn't seen.
 
 <CalloutBox icon="IconWarning" title="iOS needs a notification delegate" type="caution">
 
