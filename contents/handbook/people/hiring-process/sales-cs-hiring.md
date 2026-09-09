@@ -99,7 +99,7 @@ If you've been invited to a PostHog [SuperDay](/handbook/people/hiring-process#p
 
 ##### What the SuperDay looks like
 
-The SuperDay is a paid full day of work (1,000 USD). You'll receive some tasks at the start of your day and submit your work at the end. Whilst you won't be working with real customers (which would be risky!), the tasks are meant to be as representative as possible of a day in the life of a CSM at PostHog. Expect to spend the majority of your day on them.
+The SuperDay is a paid full day of work (1,000 USD). You'll receive some tasks at the start of your day and submit your work at the end. While you won't be working with real customers (which would be risky!), the tasks are meant to be as representative as possible of a day in the life of a CSM at PostHog. Expect to spend the majority of your day on them.
 
 Scheduled throughout the day, you'll also have:
 
@@ -112,7 +112,7 @@ You'll also have access to a dedicated Slack channel with the team throughout th
 
 ##### How to prepare for the day
 
-*   Read the CS section of the handbook thoroughly. You will be expected to have opinions!
+*   Read the [CS section of the handbook](/handbook/cs-and-onboarding/customer-success) thoroughly. You will be expected to have opinions!
 *   Install and get familiar with PostHog - you'll be expected to have a good understanding of PostHog going into SuperDay.
 
 ##### During the day
