@@ -80,7 +80,7 @@ Papercuts are also routed to the Signals inbox, so before you start work, check 
 
 Vulnerabilities in code your team owns are also yours to fix, and the support hero is the person who picks them up alongside the normal support workload. Some findings are critical, so give them the same priority as a customer ticket.
 
-Findings for your team are collected in <PrivateLink url="https://security.posthog.dev">security.posthog.dev</PrivateLink>. Each team also gets a weekly post in its Slack channel that lists the vulnerabilities found in the code it owns.
+Findings come from the AI pentesting services we use, currently Veria Labs and Parameter. They are triaged automatically, and the true positives go to the product team that owns the code. Your team's findings are collected in <PrivateLink url="https://security.posthog.dev">security.posthog.dev</PrivateLink>, and your team also gets a weekly post in its Slack channel that lists them.
 
 Work through the findings for your team during your rotation. If you cannot finish one, hand it over to the next support hero. If you are not sure how serious a finding is, or how to fix it, ask in `#team-security`.
 
