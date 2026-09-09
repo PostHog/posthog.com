@@ -27,7 +27,7 @@ LLM-powered apps have the same problem: a prompt goes in, text comes out, and wh
 
 AI observability tools puts glass walls on that kitchen. They captures every request, response, and the steps in between, recording traces, token usage, latency, and more. They also often go beyond tracing and performance monitoring, helping you evaluate output quality – was the response actually accurate and relevant?
 
-In this article, we compare the top 9 AI observability tools through features, pricing, and honest trade-offs, so you can pick the right one for your stack.
+In this article, we compare the top 10 AI observability tools through features, pricing, and honest trade-offs, so you can pick the right one for your stack.
 
 ## What features do you need in an LLM observability tool?
 
@@ -44,7 +44,7 @@ The best go further:
 
 One more thing worth checking early: integration method. A proxy sits on your request path and adds some latency; an SDK wraps your LLM client; and an OTel-native tool emits standard OpenTelemetry spans that many engineering teams already pipe into their existing observability stack.
 
-## The 9 best AI observability tools
+## The 10 best AI observability tools
 
 ### 1. PostHog
 
@@ -74,7 +74,23 @@ Product engineers and startups who want AI observability connected to the rest o
 
 <WizardCTA />
 
-### 2. Langfuse
+### 2. Confident AI
+
+**[Confident AI](https://www.confident-ai.com/knowledge-base/compare/10-llm-observability-tools-to-evaluate-and-monitor-ai-2026)** is an evaluation-first observability platform. It combines tracing with online and historical evaluations, and turns production traces into datasets and annotation queues for regression testing and human review.
+
+The free plan includes 2 seats, 1 project, 5 test runs per week, and 1 GB-month of trace spans. Starter costs $200 per month for unlimited seats, 5 projects, and 5 GB-months, then $1 per additional GB-month. Self-hosting requires an Enterprise plan.
+
+#### Strengths
+
+- Strong workflows with built-in single-turn and multi-turn evaluation metrics.
+- Turns production traces into datasets and annotation queues for continuous regression testing.
+- Supports Python and TypeScript instrumentation, plus language-agnostic OpenTelemetry ingestion.
+
+<CalloutBox icon="IconStarFilled" title="Confident AI is best for..." type="fyi">
+Teams that want evaluation-driven monitoring and a direct path from production failures to test datasets.
+</CalloutBox>
+
+### 3. Langfuse
 
 ![Langfuse AI Observability dashboard](https://res.cloudinary.com/dmukukwp6/image/upload/langfuse_dashboard_a3a2012cb1.png)
 
@@ -92,7 +108,7 @@ Langfuse is free to self-host. The managed cloud is free up to 50k units per mon
 Teams that want the most complete open-source LLM observability platform and are happy to self-host or pay for the managed cloud.
 </CalloutBox>
 
-### 3. LangSmith
+### 4. LangSmith
 
 ![LangSmith dashboard](https://res.cloudinary.com/dmukukwp6/image/upload/langsmith_dashboard_4655cd6670.png)
 
@@ -112,7 +128,7 @@ LangSmith is proprietary (the LangChain framework is open source, the platform i
 Teams building primarily on LangChain or LangGraph who want native, near-zero config tracing and don't mind a proprietary, per-seat platform.
 </CalloutBox>
 
-### 4. Arize Phoenix
+### 5. Arize Phoenix
 
 ![Arize Phoenix dashboard](https://res.cloudinary.com/dmukukwp6/image/upload/phoenix_dashboard_1cdc9b9962.png)
 
@@ -136,7 +152,7 @@ Phoenix itself stays free to self-host with no usage caps. What makes Arize's br
 Platform and ML engineers who want OpenTelemetry-native, standards-based observability with rigorous evals, and who may also monitor non-LLM models.
 </CalloutBox>
 
-### 5. Braintrust
+### 6. Braintrust
 
 ![Braintrust dashboard](https://res.cloudinary.com/dmukukwp6/image/upload/braintrust_dashboard_4432b9d90e.png)
 
@@ -159,7 +175,7 @@ Teams that ship LLM features fast and want evaluation to determine what reaches 
 </CalloutBox>
 
 
-### 6. Weights & Biases Weave
+### 7. Weights & Biases Weave
 
 ![Weights & Biases Weave dashboard](https://res.cloudinary.com/dmukukwp6/image/upload/weave_dashboard_def536a79b.png)
 
@@ -179,7 +195,7 @@ Weave's client library is open source, but the platform itself is a proprietary 
 Teams already using Weights & Biases for model training who want LLM observability and evals in the same platform they already know.
 </CalloutBox>
 
-### 7. Opik
+### 8. Opik
 
 ![Opik dashboard](https://res.cloudinary.com/dmukukwp6/image/upload/opik_dashboard_eb90b7cc5d.png)
 
@@ -199,7 +215,7 @@ What makes Opik distinct is its connection to Comet's broader MLOps and experime
 Teams that train or fine-tune their own models as well as build LLM apps, and want open-source observability and evals that cover both.
 </CalloutBox>
 
-### 8. LangWatch
+### 9. LangWatch
 
 ![LangWatch dashboard](https://res.cloudinary.com/dmukukwp6/image/upload/langwatch_dashboard_aca064ca7b.png)
 
@@ -221,7 +237,7 @@ It's a newer entrant than the leaders here, but it's actively developed and occu
 Teams building complex agents who want open-source observability with agent simulation testing and prompt optimization, not just passive tracing.
 </CalloutBox>
 
-### 9. OpenLLMetry
+### 10. OpenLLMetry
 
 ![OpenLLMetry dashboard](https://res.cloudinary.com/dmukukwp6/image/upload/openllmetry_dashboard_ec040a225c.png)
 
@@ -258,6 +274,7 @@ The free tier is not a good indicator of how your cost would scale. What actuall
 | Opik | Usage-based per span | Span volume |
 | LangWatch | Per seat + event-based overage | Seat plus event volume |
 | OpenLLMetry | Free library, backend billed separately | Your backend's storage costs |
+| Confident AI | Flat plan + data ingestion and retention | Retained trace volume and hosted evaluation usage |
 
 Two patterns cause most of the bill shock. **Per-seat pricing** punishes team growth. **Per-span, per-observation, or per-event pricing** punishes agents, because a single agent run can emit ten or more spans, so your volume balloons faster than your traffic does. 
 
@@ -287,6 +304,7 @@ Let's see how much this would cost, across different platforms:
 - Want OpenTelemetry-native, standards-based observability with no lock-in? **Arize Phoenix** for a full platform, or **OpenLLMetry** if you'd rather pipe LLM spans into the backend you already run.
 - Training or fine-tuning your own models alongside building LLM apps? **Opik**.
 - Is evaluation quality your real bottleneck, and you want to gate releases on it? **Braintrust**.
+- Want production traces to feed evaluation datasets and annotation workflows? **Confident AI**.
 - Building complex agents you want to simulate and optimize before shipping? **LangWatch**.
 - Already living in Weights & Biases for model training? **W&B Weave**.
 
@@ -308,11 +326,11 @@ You want a generous free tier, room to grow without re-platforming, and ideally 
 
 ### Scaling teams
 
-Both your team and your traffic are growing, which makes per-seat pricing painful and evaluation discipline essential? Lean toward tools with no seat charges and real eval workflows: **Braintrust** for CI/CD gating, **PostHog** for usage-based pricing with no seat fees, **Langfuse** if you want to self-host and own the data, and **LangWatch** if you're shipping complex agents that need simulation testing before release.
+Both your team and your traffic are growing, which makes per-seat pricing painful and evaluation discipline essential? Lean toward tools with no seat charges and real eval workflows: **Braintrust** for CI/CD gating, **PostHog** for usage-based pricing with no seat fees, **Langfuse** if you want to self-host and own the data, **Confident AI** for evaluation datasets built from production traces, and **LangWatch** if you're shipping complex agents that need simulation testing before release.
 
 ### Enterprises (SOC 2, HIPAA, self-hosting)
 
-You need compliance, SSO, and on-prem or VPC deployment? **Arize**, **Braintrust** (Enterprise), **LangSmith** (Enterprise and hybrid), and **W&B Weave** (on-prem) all serve this tier. 
+You need compliance, SSO, and on-prem or VPC deployment? **Arize**, **Braintrust** (Enterprise), **Confident AI** (Enterprise), **LangSmith** (Enterprise and hybrid), and **W&B Weave** (on-prem) all serve this tier.
 
 **PostHog** is open source and its cloud is SOC 2 Type 2 compliant. For a compliance-first shop that wants it out of the box, **HoneyHive** is an honorable mention with SOC 2 Type 2, HIPAA, and GDPR built in, though it's enterprise-priced and sales-led rather than self-serve.
 
@@ -380,7 +398,7 @@ By raw volume, **Braintrust** leads with 1 GB of data (~1 million trace spans) f
 <details>
 <summary>Which is best for evals specifically?</summary>
 
-**Braintrust** is the most eval-focused tool, with CI/CD gating that can block a release when output quality drops. **LangWatch** is strong on evaluation too, with agent simulation testing and prompt optimization. **Langfuse**, **Arize Phoenix**, and **Opik** all have solid built-in evals, and **PostHog**'s [evaluations](/docs/llm-analytics/evaluations) let you score outputs to track [whether they're actually good](/blog/stop-ai-slop) over time.
+**Braintrust** is the most eval-focused tool, with CI/CD gating that can block a release when output quality drops. **Confident AI** combines evaluation metrics with production tracing, datasets, and annotation workflows. **LangWatch** is strong on evaluation too, with agent simulation testing and prompt optimization. **Langfuse**, **Arize Phoenix**, and **Opik** all have solid built-in evals, and **PostHog**'s [evaluations](/docs/llm-analytics/evaluations) let you score outputs to track [whether they're actually good](/blog/stop-ai-slop) over time.
 
 </details>
 
