@@ -1,6 +1,6 @@
 ---
 title: "From 1 to 100 IRL events in a year: The secret to getting engineers to demo"
-date: 2026-09-07
+date: 2026-09-09
 rootPage: /blog
 sidebar: Blog
 showTitle: true
@@ -8,7 +8,7 @@ hideAnchor: true
 author:
     - daniel-zaltsman
 featuredImage: >-
-    https://res.cloudinary.com/dmukukwp6/image/upload/f_webp,h_630,w_1200,c_fill,g_auto,q_auto/v1/posthog.com/contents/images/blog/posthog-company-culture-blog
+    https://res.cloudinary.com/dmukukwp6/image/upload/demo_58471b4cf2.png
 featuredImageType: full
 category: Inside PostHog
 tags:
