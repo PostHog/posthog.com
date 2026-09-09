@@ -106,7 +106,7 @@ For information about current and past security advisories and CVEs, see our [ad
 
 ## Fixing vulnerabilities in our own code
 
-Security findings in our own code are collected in <PrivateLink url="https://security.posthog.dev">security.posthog.dev</PrivateLink>. Each team also gets a monthly post in its Slack channel that lists the vulnerabilities found in the code it owns.
+Security findings in our own code are collected in <PrivateLink url="https://security.posthog.dev">security.posthog.dev</PrivateLink>. Each team also gets a weekly post in its Slack channel that lists the vulnerabilities found in the code it owns.
 
 Each team fixes the findings for the code it owns. The team's [support hero](/handbook/engineering/operations/support-hero#security-findings) picks these up alongside the normal support workload.
 
