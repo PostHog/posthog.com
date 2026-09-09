@@ -1,5 +1,5 @@
 ---
-title: 'Multimodal models need video, we froze time to give it to them'
+title: 'Multimodal models need video. We froze time to give it to them'
 date: 2026-09-03
 rootPage: /blog
 sidebar: Blog
@@ -44,7 +44,7 @@ When you press play, a browser rebuilds the DOM from the snapshot and applies th
 
 Handing this data to an LLM proved fruitless. It is verbose, often many megabytes of JSON per recording, and even the most recent models have limited context windows, so they simply cannot hold a whole recording in context at once.
 
-The bigger problem is that the model has no idea what it's looking at. An rrweb stream is a changelog against a tree. To know what the screen showed at second 42, it would have to hold the whole tree in context, apply every mutation up to that point, and then run layout and paint as well. The model will happily tell you that a `div` gained a class called `is-disabled`. It cannot tell you that the checkout button just went grey and slid underneath the cookie banner, because that fact only exists after layout has run.
+The bigger problem is that the model has no idea what it's looking at. An rrweb stream is a changelog against a tree. To know what the screen showed at second 42, it would have to hold the whole tree in context, apply every mutation up to that point, and then run layout and paint as well. The model will happily tell you that a `div` gained a class called `is-disabled`. It cannot tell you that the checkout button just went gray and slid underneath the cookie banner, because that fact only exists after layout has run.
 
 Modern multimodal models like Gemini need actual video in order to make sense of a recording. A good mental model for this is vector versus raster graphics. The rrweb data is a series of instructions that lets the browser _perfectly_ recreate the original session, in the same way an SVG is a mathematical description that lets a renderer recreate an image.
 
@@ -96,4 +96,4 @@ With `beginFrame` gating the compositor and the virtual clock gating the player,
 
 The version of our rasterizer described in this blog post has been in production since March 2026. It runs as hundreds of concurrent jobs across many pods and powers all of Replay Vision, as well as some features in Session Replay itself. At the time of writing it has rasterized more than 370 years of recordings into roughly 3.5 million videos.
 
-The rasterizer was the unlock we needed to get recordings in front of a multimodal model at all. Getting useful answers out of the model turned out to be a separate problem: what to show it, what to leave out, and how to stop it fixating on irrelevant details. That's a post of its own, coming soon.
+The rasterizer was the unlock we needed to get recordings in front of a multimodal model at all. Getting useful answers out of the model turned out to be a separate problem: what to show it, what to leave out, and how to stop it from fixating on irrelevant details. That's a post of its own, coming soon.
