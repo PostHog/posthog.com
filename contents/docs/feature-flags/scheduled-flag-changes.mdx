@@ -30,7 +30,7 @@ This means if your project is set to `America/New_York` and you schedule a chang
 2. Select the **Schedule** tab.
 3. Under **Change type**:
    - Select **Change status** to enable or disable your flag at a scheduled time.
-   - Select **Add condition** to append rollout conditions to your flag at a scheduled time.
+   - Select **Add condition** to append rollout conditions to your flag at a scheduled time. To ramp a rollout percentage up over time, see [Schedule a gradual rollout](#schedule-a-gradual-rollout).
    - Select **Update variants** to update the variant keys, descriptions, payloads, or rollouts.
 4. Select the **Date and time** of your scheduled change using the date picker.
 5. Optionally, use the **Repeats** dropdown to set a recurrence interval. You can choose from **Daily**, **Weekly**, **Monthly**, **Yearly**, or **Custom (cron)** for flexible scheduling with a cron expression. When the change type is **Change status**, the dropdown also includes **Paired schedules** presets (see [below](#paired-schedule-presets)). When a repeat option is selected, an **Ends** date picker appears to set an optional end date for the recurring schedule.
@@ -44,6 +44,24 @@ Scheduled changes appear below the form, grouped into an **Active & upcoming** s
   alt="Scheduled flag changes"
   classes="rounded"
 />
+
+## Schedule a gradual rollout
+
+**Add condition** appends a new release condition to the bottom of the flag's list. It does not replace the conditions that are already there. To ramp a percentage rollout up over time, schedule one **Add condition** change for each phase, and give each phase a higher rollout percentage:
+
+| Date   | Scheduled change | Conditions on the flag | Who gets the flag |
+| ------ | ---------------- | ---------------------- | ----------------- |
+| Day 0  | 25% rollout      | 25%                    | 25% of users      |
+| Day 7  | 50% rollout      | 25%, 50%               | 50% of users      |
+| Day 14 | 100% rollout     | 25%, 50%, 100%         | All users         |
+
+The earlier conditions stay on the flag, but they do not hold the rollout back. [All condition sets are evaluated, and a pass on any condition is a pass](/docs/feature-flags/creating-feature-flags#release-conditions), so the highest rollout percentage decides the result. A user's rollout bucket also comes from the flag key and their identifier, not from the condition set, so everybody in the 25% bucket is also in the 50% bucket. Nobody loses access part way through the ramp.
+
+Keep these limits in mind:
+
+- **This only ramps a rollout up.** A later condition with a lower percentage has no effect, because the wider condition still passes. To reduce a rollout, edit the flag directly.
+- **Delete the earlier conditions when the ramp is complete.** A scheduled change never removes a condition, so the flag keeps all three.
+- **Do not use early exit.** If the flag has [Stop evaluation at first matching condition set](/docs/feature-flags/creating-feature-flags#stop-evaluation-at-first-matching-condition-set) turned on, the 25% condition returns `false` for everybody outside its rollout percentage, and the later conditions never run.
 
 ## Edit a scheduled change
 
