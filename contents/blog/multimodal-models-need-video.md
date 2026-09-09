@@ -1,6 +1,6 @@
 ---
 title: 'Multimodal models need video. We froze time to give it to them'
-date: 2026-09-03
+date: 2026-09-09
 rootPage: /blog
 sidebar: Blog
 showTitle: true
