@@ -8,7 +8,7 @@ hideAnchor: true
 author:
     - tue-haulund
 featuredImage: >-
-    https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/open-source-hotjar-alternatives/replayhog.png
+    https://res.cloudinary.com/dmukukwp6/image/upload/multimodal_d76de5eac7.png
 featuredImageType: full
 category: Engineering
 tags:
