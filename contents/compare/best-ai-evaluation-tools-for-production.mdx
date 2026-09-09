@@ -16,7 +16,7 @@ tags:
 seo:
     {
         metaTitle: 'Best AI evaluation tools for production',
-        metaDescription: 'The best AI evaluation tools for production: PostHog for observability-linked scores, Braintrust for experiment tracking, DeepEval for evals-as-code, and more.',
+        metaDescription: 'The best AI evaluation tools for production: PostHog for observability-linked scores, Confident AI for production quality workflows, DeepEval for evals-as-code, and more.',
     }
 ---
 
@@ -33,6 +33,7 @@ There's no wrong answer here – the right pick comes down to what you care abou
 -   **If you want a self-hostable eval and tracing platform in one:** Langfuse
 -   **If you're on an OpenTelemetry stack and want uncapped self-hosted tracing:** Arize Phoenix
 -   **If you want evals as code, run like a unit test suite:** DeepEval
+-   **If you want workflows that classify, surface, and route production quality issues:** Confident AI
 -   **If your main need is RAG and retrieval quality:** Ragas
 -   **If you're on Snowflake or want agent-specific evaluators:** TruLens
 -   **If you build multi-turn or voice agents:** LangWatch
@@ -127,6 +128,22 @@ PostHog captures [traces](/docs/ai-observability/traces), [generations](/docs/ai
 **Not ideal if:** you want the surrounding context; it scores outputs but won't tell you which users hit a bad one or which release caused the drop.
 
 **Alternatives to consider:** **PostHog** to get that missing context by connecting scores to sessions and releases; **Braintrust** for the same workflow hosted.
+
+### What's the best LLM evaluation tool for production quality workflows?
+
+**[Confident AI](https://www.confident-ai.com/)** is built around evaluating AI applications in production. It scores live single-turn and multi-turn traces with built-in quality metrics, while custom workflows classify and surface issues, route traces into annotation queues, and turn production data into evaluation datasets. Tracking across agent and prompt versions helps teams connect regressions to specific changes and detect drift or anomalous behavior.
+
+| | |
+|---|---|
+| **Eval types** | 50+ research-backed single-turn and multi-turn metrics, custom metrics, human annotations, and online evaluations |
+| **Observability** | Production tracing with quality monitoring across agent versions, prompts, and use cases |
+| **Workflows** | Classifies and surfaces quality issues, routes traces for annotation, and turns production failures into regression datasets |
+| **Pricing** | Free plan with 2 seats, 1 project, 5 test runs per week, and 1 GB-month of trace spans; Starter from $200/mo |
+| **License** | Proprietary; self-hosting requires an Enterprise plan |
+
+**Not ideal if:** you need an open-source platform you can self-host without an Enterprise contract, or want eval scores connected directly to product analytics and session replay.
+
+**Alternatives to consider:** **DeepEval** if you only need open-source evals as code; **PostHog** if you want production quality scores tied to user behavior and releases.
 
 ### What's the best LLM evaluation tool for RAG and retrieval quality?
 
