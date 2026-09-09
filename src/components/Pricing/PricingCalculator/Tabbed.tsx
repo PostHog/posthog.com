@@ -923,12 +923,15 @@ export default function Tabbed() {
                     </div>
                     {/* Two ways to leave with an estimate: a link to this one, or a prompt that builds
                         one from what the visitor already pays for elsewhere. Same row, same weight. */}
-                    <div className="flex flex-wrap items-center justify-between gap-2 mt-2">
+                    <div
+                        className="flex flex-wrap items-center justify-between gap-2 mt-2"
+                        data-ai-estimate-placement="inside-calculator"
+                    >
                         <CopyURLButton onClick={generateURL} />
                         <RenderInClient
                             render={() => {
                                 const variant = window.posthog?.getFeatureFlag?.(AI_PRICING_FLAG)
-                                return variant && variant !== AI_PRICING_EXPERIMENT_VARIANTS.control ? (
+                                return variant === AI_PRICING_EXPERIMENT_VARIANTS.inside_calculator ? (
                                     <AgentEstimateLink
                                         source="calculator-total"
                                         className="text-sm font-bold text-red dark:text-yellow"
