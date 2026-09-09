@@ -219,15 +219,15 @@ export function BusinessProof(): JSX.Element {
                 activationMode="manual"
                 className="relative flex min-w-0 flex-1 flex-col"
             >
-                <div className="min-w-0 @3xl:pr-[30%]">
-                    <Tabs.List aria-label="Why enterprises choose PostHog" className="flex overflow-x-auto pt-1">
+                <div className="relative z-10 min-w-0 @3xl:pr-[30%]">
+                    <Tabs.List aria-label="Why enterprises choose PostHog" className="flex gap-1 pt-1">
                         {PILLARS.map((pillar) => (
                             <Tabs.Trigger
                                 key={pillar.key}
                                 value={pillar.key}
-                                className={`relative -mr-px shrink-0 whitespace-nowrap rounded-t-sm border border-b-0 px-4 py-2 last:mr-0 text-sm font-semibold outline-none focus-visible:z-30 focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-red dark:focus-visible:ring-yellow ${
+                                className={`relative shrink-0 whitespace-nowrap rounded-t-sm border border-b-0 px-4 py-2 text-sm font-semibold outline-none focus-visible:z-30 focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-red dark:focus-visible:ring-yellow ${
                                     active === pillar.key
-                                        ? 'z-10 border-primary bg-primary text-primary'
+                                        ? 'z-10 border-primary bg-primary text-primary after:pointer-events-none after:absolute after:inset-x-0 after:-bottom-px after:h-px after:bg-primary'
                                         : 'border-primary bg-accent text-secondary hover:text-primary'
                                 }`}
                             >
@@ -236,7 +236,7 @@ export function BusinessProof(): JSX.Element {
                         ))}
                     </Tabs.List>
                 </div>
-                <div className="grid min-w-0 flex-1 rounded-b-xl rounded-tr-xl bg-primary shadow-xl @3xl:pr-[30%]">
+                <div className="grid min-w-0 flex-1 rounded-b-xl rounded-tr-xl border border-primary bg-primary shadow-xl @3xl:pr-[30%]">
                     {PILLARS.map((pillar) => (
                         <Tabs.Content
                             key={pillar.key}
