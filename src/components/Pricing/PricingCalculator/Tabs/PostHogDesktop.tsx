@@ -54,9 +54,7 @@ export default function PostHogDesktopTab({
     )
 
     const [hours, setHours] = useState(activeProduct.hours ?? 0)
-    const [modelSpend, setModelSpend] = useState(
-        activeProduct.modelSpend ?? (activeProduct.volume ?? 0) / CREDITS_PER_USD
-    )
+    const [modelSpend, setModelSpend] = useState(activeProduct.modelSpend)
 
     const computeSpend = hours * computeRate
     const computeCredits = Math.round(computeSpend * CREDITS_PER_USD)

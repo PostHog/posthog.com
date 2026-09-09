@@ -55,7 +55,7 @@ export default function UsageSliderRow({
     const [draft, setDraft] = useState<string | null>(null)
     const displayValue = draft ?? `${inputPrefix ?? ''}${formatCompact(value)}`
 
-    const emit = (next: number) => onChange(inputPrefix === '$' ? next : snapToMark(next, marks))
+    const emit = (next: number) => onChange(snapToMark(next, marks))
 
     const handleLogChange = (next: number) => {
         const rounded = Math.round(sliderCurve(next))

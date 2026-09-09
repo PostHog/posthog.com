@@ -57,7 +57,7 @@ export const priceProductInputs = (product: any, inputs: ProductInputs, computeR
     let volume = inputs.volume ?? 0
     let extraCost = 0
     let parentVolume = 0
-    if (inputs.types) {
+    if (product.type === 'product_analytics') {
         volume = Object.values(inputs.types).reduce((sum: number, value: any) => sum + value.volume, 0)
         const enhancedTiers = product.billingData?.addons
             .find((addon: any) => addon.type === 'enhanced_persons')
@@ -72,7 +72,7 @@ export const priceProductInputs = (product: any, inputs: ProductInputs, computeR
         extraCost += calculatePrice(addonVolume, addonTiers).total
         if (addon.countsTowardParentVolume) parentVolume += addonVolume
     }
-    if (inputs.model !== undefined) {
+    if (product.type === 'replay_vision') {
         const estimate = estimateReplayVisionPricing({
             observations: inputs.observations,
             modelKey: inputs.model,
@@ -85,7 +85,7 @@ export const priceProductInputs = (product: any, inputs: ProductInputs, computeR
             costByTier: estimate?.costByTier ?? [],
         }
     }
-    if (inputs.hours !== undefined)
+    if (product.type === 'posthog_code')
         volume = Math.round(inputs.hours * computeRate * 100) + Math.round(inputs.modelSpend * 100)
     const price = calculatePrice(volume + parentVolume, tiers)
     return { ...inputs, volume, cost: product.billedWith ? 0 : price.total + extraCost, costByTier: price.costByTier }
