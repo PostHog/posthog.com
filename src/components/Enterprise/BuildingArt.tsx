@@ -1,6 +1,14 @@
-import React, { useEffect, useRef, useState } from 'react'
-import { createPortal } from 'react-dom'
-import { BuildingSection, layoutBuilding, MODULES } from './buildingStack'
+import React, { useEffect, useRef } from 'react'
+import {
+    BuildingSection,
+    MODULES,
+    STACK_FLOORS,
+    OFFSETS,
+    BASE_OFFSETS,
+    BASE_MODULES,
+    FLOOR_QUERIES,
+} from './buildingStack'
+import './buildingStack.css'
 
 const SOURCES = {
     'single-story-1': 'https://res.cloudinary.com/dmukukwp6/image/upload/flat_single_story_1_11a0ee640d.svg',
@@ -95,105 +103,97 @@ export function EnterpriseScene({ children }: { children: React.ReactNode }): JS
 
     return (
         <div className="@container not-prose text-pretty text-primary">
-            <div ref={ref} className="relative isolate mx-auto w-full max-w-6xl px-4 @xl:px-8">
+            <style>{FLOOR_QUERIES}</style>
+            <div
+                ref={ref}
+                className="enterprise-building-scene relative isolate mx-auto w-full max-w-6xl px-4 @xl:px-8"
+            >
                 {children}
             </div>
         </div>
     )
 }
 
-/** Artwork stays out of the reading and pointer order. The copy remains real text. */
+type BuildingStyle = React.CSSProperties & { [key: `--${string}`]: number | string }
+
+/** The landing card owns its shadow, so it needs no portal or measured offset. */
+export function BuildingShadow({ section }: { section: 'top' | 'middle' }): JSX.Element {
+    const art = MODULES[BASE_MODULES[section]]
+    return (
+        <div
+            aria-hidden="true"
+            data-building-shadow={section}
+            className="pointer-events-none absolute inset-0 z-10 hidden overflow-hidden rounded-md @3xl:block"
+            style={{ '--base-offset': BASE_OFFSETS[section], '--base-x': art.baseX / art.width } as BuildingStyle}
+        >
+            <div className="building-shadow-column">
+                <svg
+                    viewBox="0 0 100 20"
+                    preserveAspectRatio="none"
+                    className="building-shadow overflow-visible opacity-25 dark:opacity-40"
+                >
+                    <path d="M0 -5H100L50 14Z" fill="black" />
+                </svg>
+            </div>
+        </div>
+    )
+}
+
+/** All floors and both themes are present at first paint; CSS reveals extra floors. */
 export function BuildingArt({
     section,
     className = '',
-    landingRef,
 }: {
     section: BuildingSection
     className?: string
-    landingRef?: React.RefObject<HTMLElement>
 }): JSX.Element {
-    const ref = useRef<HTMLDivElement>(null)
-    const [size, setSize] = useState({ width: 0, height: 0, landingLeft: 0 })
-    useEffect(() => {
-        const node = ref.current
-        if (!node) return
-        const observer = new ResizeObserver(([entry]) => {
-            const { width, height } = entry.contentRect
-            const landingLeft = landingRef?.current
-                ? node.getBoundingClientRect().left - landingRef.current.getBoundingClientRect().left
-                : 0
-            setSize((previous) =>
-                previous.width === width && previous.height === height && previous.landingLeft === landingLeft
-                    ? previous
-                    : { width, height, landingLeft }
-            )
-        })
-        observer.observe(node)
-        return () => observer.disconnect()
-    }, [landingRef])
-    const stack = layoutBuilding(section, size.width, size.height)
-    const base = stack?.modules[stack.modules.length - 1]
+    let riseBefore = 0
+    const floors = [...STACK_FLOORS[section], { name: BASE_MODULES[section], minRatio: 0 }]
     return (
         <div
-            ref={ref}
             aria-hidden="true"
             data-building-stack={section}
-            className={`pointer-events-none relative col-start-2 row-start-1 hidden min-h-0 self-stretch @3xl:block ${className}`}
+            className={`building-stack pointer-events-none relative col-start-2 row-start-1 hidden min-h-0 self-stretch @3xl:block ${className}`}
+            style={{ '--base-offset': BASE_OFFSETS[section] } as BuildingStyle}
         >
-            {base &&
-                landingRef?.current &&
-                createPortal(
-                    <div
-                        aria-hidden="true"
-                        data-building-shadow={section}
-                        className="pointer-events-none absolute inset-0 z-10 hidden overflow-hidden rounded-md @3xl:block"
-                    >
-                        <svg
-                            viewBox="0 0 100 20"
-                            preserveAspectRatio="none"
-                            className="absolute top-0 overflow-visible opacity-25 dark:opacity-40"
-                            style={{
-                                left: size.landingLeft + base.left,
-                                width: base.width,
-                                height: base.width * 0.2,
-                                filter: `blur(${base.width * 0.025}px)`,
-                            }}
-                        >
-                            <path d="M0 -5H100L50 14Z" fill="black" />
-                        </svg>
-                    </div>,
-                    landingRef.current
-                )}
             {section === 'top' && (
                 <SkyArt src={cloud1} speed="0.05" className="absolute -right-3 top-[14%] z-0 w-12 dark:w-6" />
             )}
-            {stack?.modules.map((module, index) => (
-                <ThemedArt
-                    key={`${module.name}-${index}`}
-                    src={SOURCES[module.name]}
-                    darkSrc={DARK_SOURCES[module.name]}
-                    alt=""
-                    data-building-module={module.name}
-                    data-base-y={MODULES[module.name].baseY / MODULES[module.name].height}
-                    width={MODULES[module.name].width}
-                    height={MODULES[module.name].height}
-                    className="absolute max-w-none drop-shadow-lg"
-                    style={{
-                        top: module.top,
-                        left: module.left,
-                        width: module.width,
-                        height: module.height,
-                        zIndex: index + 10,
-                    }}
-                />
-            ))}
-            {section === 'bottom' && stack && (
-                <ThemedArt
-                    src={hedgehog}
-                    darkSrc={darkHedgehog}
-                    className="absolute z-50 max-w-none"
-                    style={stack.hog}
-                />
+            <div className="building-layout" data-section={section}>
+                {floors.map(({ name }, index) => {
+                    const art = MODULES[name]
+                    const last = index === floors.length - 1
+                    const offset = last ? BASE_OFFSETS[section] : OFFSETS[index % OFFSETS.length]
+                    const style: BuildingStyle = {
+                        '--art-ratio': art.height / art.width,
+                        '--base-x': art.baseX / art.width,
+                        '--offset': offset,
+                        '--lift': last ? 0 : Math.abs(offset) * 0.75,
+                        ...(!last && { '--index': index, '--rise-before': riseBefore }),
+                    }
+                    riseBefore += art.rise / art.width
+                    return (
+                        <div
+                            key={index}
+                            className="building-floor"
+                            data-floor-index={last ? 'base' : index}
+                            style={style}
+                        >
+                            <ThemedArt
+                                src={SOURCES[name]}
+                                darkSrc={DARK_SOURCES[name]}
+                                data-building-module={name}
+                                data-base-y={art.baseY / art.height}
+                                width={art.width}
+                                height={art.height}
+                                className="h-full w-full max-w-none drop-shadow-lg"
+                            />
+                        </div>
+                    )
+                })}
+            </div>
+            {section === 'bottom' && (
+                <ThemedArt src={hedgehog} darkSrc={darkHedgehog} className="building-hog z-50 max-w-none" />
             )}
             {section === 'top' && (
                 <SkyArt src={cloud2} speed="0.035" className="absolute -left-6 top-[55%] z-40 w-10 dark:w-5" />

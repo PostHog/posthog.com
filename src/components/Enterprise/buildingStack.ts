@@ -12,104 +12,76 @@ export const MODULES = {
 }
 
 type ModuleName = keyof typeof MODULES
-const SEQUENCES: Record<BuildingSection, ModuleName[]> = {
-    top: ['single-story-3', 'single-story-2', 'single-story-1'],
-    middle: ['single-story-3', 'double-story-3', 'single-story-2', 'double-story-2', 'single-story-1'],
-    bottom: ['single-story-2', 'single-story-1', 'double-story-3', 'single-story-3', 'double-story-1'],
+
+const S1: ModuleName = 'single-story-1'
+const S2: ModuleName = 'single-story-2'
+const S3: ModuleName = 'single-story-3'
+const D1: ModuleName = 'double-story-1'
+const D2: ModuleName = 'double-story-2'
+const D3: ModuleName = 'double-story-3'
+
+type Floor = { name: ModuleName; minRatio: number }
+
+// Reveal successive floors as the artwork container gets taller relative to its width.
+// The landing floor stays separate so it always meets the card or hedgehog below.
+export const STACK_FLOORS: Record<BuildingSection, Floor[]> = {
+    top: [
+        { name: S3, minRatio: 0 },
+        { name: S2, minRatio: 0 },
+        { name: S3, minRatio: 1.38 },
+        { name: S1, minRatio: 1.76 },
+        { name: S2, minRatio: 2.13 },
+        { name: S3, minRatio: 2.5 },
+        { name: S1, minRatio: 2.87 },
+    ],
+    middle: [
+        { name: S3, minRatio: 0 },
+        { name: D3, minRatio: 0 },
+        { name: S2, minRatio: 0 },
+        { name: S1, minRatio: 0 },
+        { name: D2, minRatio: 3.15 },
+        { name: S3, minRatio: 3.7 },
+        { name: D3, minRatio: 4.2 },
+        { name: S2, minRatio: 4.75 },
+        { name: D2, minRatio: 5.3 },
+        { name: S1, minRatio: 5.8 },
+        { name: S3, minRatio: 6.2 },
+        { name: D3, minRatio: 6.75 },
+        { name: S2, minRatio: 7.3 },
+    ],
+    bottom: [
+        { name: S2, minRatio: 0 },
+        { name: S1, minRatio: 1.7 },
+        { name: S3, minRatio: 2.1 },
+        { name: D3, minRatio: 2.6 },
+        { name: D1, minRatio: 3.4 },
+    ],
 }
-const SEEDS = { top: 37, middle: 103, bottom: 211 }
 
-/** Stable pseudo-random offsets: no hydration mismatch or movement on re-render. */
-function offset(section: BuildingSection, index: number): number {
-    let value = Math.imul(index + 1, 2654435761) ^ SEEDS[section]
-    value ^= value >>> 16
-    return (((value >>> 0) % 1001) / 1000 - 0.5) * 0.18
-}
+// Deliberate, repeatable offsets. The terminal floor and its shadow share one offset.
+export const OFFSETS = [-0.035, 0.07, -0.08, 0.035, -0.015, 0.085, -0.06, 0.015]
+export const BASE_OFFSETS: Record<BuildingSection, number> = { top: 0.02, middle: 0.04, bottom: -0.02 }
+export const BASE_MODULES: Record<BuildingSection, ModuleName> = { top: S1, middle: D1, bottom: D2 }
 
-type StackModule = { name: ModuleName; top: number; left: number; width: number; height: number }
-type StackLayout = {
-    modules: StackModule[]
-    start: number
-    end: number
-    hog: { width: number; height: number; top: number; left: number }
-}
-
-/** Fit complete, proportional modules between two anchors. Content owns the height. */
-export function layoutBuilding(section: BuildingSection, width: number, height: number): StackLayout | null {
-    if (width <= 0 || height <= 0) return null
-    const start = section === 'top' ? 0 : section === 'middle' ? -20 : -32
-    const hogWidth = width * 0.45
-    const hogHeight = (hogWidth * 127) / 117
-    const end = section === 'bottom' ? height + 20 - hogHeight * 0.78 : height
-    const distance = end - start
-    if (distance <= 0) return null
-
-    const sequence = SEQUENCES[section]
-    const moduleWidth = width * 0.94
-    const singles = sequence.filter((name) => name.startsWith('single'))
-    const doubles = sequence.filter((name) => name.startsWith('double'))
-    const terminal: ModuleName =
-        section === 'middle' ? 'double-story-1' : section === 'bottom' ? 'double-story-2' : 'single-story-1'
-    const target = distance / moduleWidth
-    let names: ModuleName[] = [terminal]
-    let joinAdjustment = 0
-    let bestScore = Infinity
-    // Choose whole floors near the required height, then share the small remaining
-    // difference across their overlapping diamonds. All three stacks keep one width.
-    const maxCount = Math.max(2, Math.ceil(target / 0.37) + 1)
-    for (let count = 2; count <= maxCount; count++) {
-        for (let doubleCount = 0; doubleCount < count; doubleCount++) {
-            if (doubleCount && !doubles.length) continue
-            const minimumSingles = Math.min(count - 1, Math.max(2, Math.ceil((count - 1) / 3)))
-            if (count - 1 - doubleCount < minimumSingles) continue
-            let singleIndex = 0
-            let doubleIndex = 0
-            const candidate = Array.from({ length: count - 1 }, (_, index) => {
-                const useDouble =
-                    Math.floor(((index + 1) * doubleCount) / (count - 1)) >
-                    Math.floor((index * doubleCount) / (count - 1))
-                return useDouble ? doubles[doubleIndex++ % doubles.length] : singles[singleIndex++ % singles.length]
-            })
-            const rise = candidate.reduce((sum, name) => sum + MODULES[name].rise / MODULES[name].width, 0)
-            const adjustment = (target - rise - MODULES[terminal].baseY / MODULES[terminal].width) / (count - 1)
-            const score = Math.abs(adjustment) + count * 0.003
-            if (score < bestScore) {
-                bestScore = score
-                names = [...candidate, terminal]
-                joinAdjustment = adjustment * moduleWidth
-            }
-        }
-    }
-
-    let top = start
-    const modules = names.map((name, index) => {
-        const art = MODULES[name]
-        const scale = moduleWidth / art.width
-        const horizontalOffset = offset(section, index) * moduleWidth
-        const center = width / 2 + horizontalOffset
-        // Lift offset floors independently; the final floor keeps its landing anchor.
-        const lift = index === names.length - 1 ? 0 : Math.abs(horizontalOffset) * 0.75
-        const module = {
-            name,
-            top: top - lift,
-            left: center - art.baseX * scale,
-            width: moduleWidth,
-            height: art.height * scale,
-        }
-        top += art.rise * scale + joinAdjustment
-        return module
+// Generated from SVG geometry once, including during SSR. Resizing runs only CSS.
+export const FLOOR_QUERIES = Object.entries(STACK_FLOORS)
+    .flatMap(([section, floors]) => {
+        const base = MODULES[BASE_MODULES[section as BuildingSection]]
+        let rise = 0
+        return floors.map(({ name, minRatio }, index) => {
+            const art = MODULES[name]
+            rise += art.rise / art.width
+            const rules = `
+                .building-layout[data-section="${section}"] {
+                    --joins: ${index + 1};
+                    --base-rise: ${rise};
+                    --natural-height: ${rise + base.baseY / base.width};
+                }
+                .building-layout[data-section="${section}"] > [data-floor-index="${index}"] { display: block; }
+            `
+            return minRatio === 0
+                ? rules
+                : `@container enterprise-building (max-aspect-ratio: 1 / ${minRatio}) { ${rules} }`
+        })
     })
-    const last = modules[modules.length - 1]
-    const lastArt = MODULES[last.name]
-    return {
-        modules,
-        start,
-        end,
-        hog: {
-            width: hogWidth,
-            height: hogHeight,
-            top: height + 20 - hogHeight,
-            left: last.left + (lastArt.baseX / lastArt.width) * last.width - hogWidth / 2,
-        },
-    }
-}
+    .join('\n')

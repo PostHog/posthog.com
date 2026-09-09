@@ -1,4 +1,4 @@
-import React, { useRef } from 'react'
+import React from 'react'
 import { Logo } from '@posthog/brand/logo'
 import SEO from 'components/seo'
 import Editor from 'components/Editor'
@@ -11,7 +11,7 @@ import { BusinessProof, WorkWithUs, BuyerResources } from 'components/Enterprise
 import { PlatformPackageCards } from 'components/Pricing/Platform/PlatformPackageComparison'
 import CustomerLogos from 'components/Pricing/Redesign/CustomerLogos'
 import { useApp } from '../context/App'
-import { BuildingArt, EnterpriseScene } from 'components/Enterprise/BuildingArt'
+import { BuildingArt, BuildingShadow, EnterpriseScene } from 'components/Enterprise/BuildingArt'
 // Placeholder FAQ. Confirm every answer before shipping. Same accordion as the research and
 // context-warehouse pages.
 const FAQ_ITEMS = [
@@ -135,8 +135,6 @@ function Hero(): JSX.Element {
 }
 
 export default function Enterprise(): JSX.Element {
-    const packagesRef = useRef<HTMLElement>(null)
-    const emailRef = useRef<HTMLDivElement>(null)
     return (
         <>
             <SEO title="PostHog for enterprise" description="Ship at startup speeds with enterprise control." />
@@ -151,7 +149,7 @@ export default function Enterprise(): JSX.Element {
                 }}
             >
                 <EnterpriseScene>
-                    <div className="relative grid pt-8 @3xl:grid-cols-[minmax(0,1fr)_27%]">
+                    <div className="relative grid pt-8 @3xl:grid-cols-[minmax(0,1fr)_var(--building-column)]">
                         <div className="col-span-full col-start-1 row-start-1 flex flex-col justify-between">
                             <Hero />
                             <div className="relative z-10 pb-5 pt-6 @3xl:pr-[44%] @3xl:pt-[10%]">
@@ -162,15 +160,16 @@ export default function Enterprise(): JSX.Element {
                                 </p>
                             </div>
                         </div>
-                        <BuildingArt section="top" landingRef={packagesRef} />
+                        <BuildingArt section="top" />
                     </div>
-                    <section ref={packagesRef} aria-label="Platform packages" className="relative z-20">
+                    <section aria-label="Platform packages" className="relative z-20">
+                        <BuildingShadow section="top" />
                         <PlatformPackageCards />
                     </section>
                     <section aria-label="Our customers" className="relative z-10 pt-8">
                         <CustomerLogos title="Join the ranks" subtitle="Teams already shipping on PostHog" scrolling />
                     </section>
-                    <div className="relative grid @3xl:grid-cols-[minmax(0,1fr)_27%]">
+                    <div className="relative grid @3xl:grid-cols-[minmax(0,1fr)_var(--building-column)]">
                         <div className="col-span-full col-start-1 row-start-1 flex min-w-0 flex-col">
                             <BusinessProof />
                             <WorkWithUs />
@@ -178,12 +177,13 @@ export default function Enterprise(): JSX.Element {
                                 In the meantime - forward this email to your CISO
                             </h3>
                         </div>
-                        <BuildingArt section="middle" className="z-20" landingRef={emailRef} />
+                        <BuildingArt section="middle" className="z-20" />
                     </div>
-                    <div ref={emailRef} className="relative z-30">
+                    <div className="relative z-30">
+                        <BuildingShadow section="middle" />
                         <BuyerResources />
                     </div>
-                    <div className="relative z-30 grid @3xl:grid-cols-[minmax(0,1fr)_27%]">
+                    <div className="relative z-30 grid @3xl:grid-cols-[minmax(0,1fr)_var(--building-column)]">
                         <div className="relative z-10 col-span-full col-start-1 row-start-1 flex min-w-0 flex-col justify-center py-8 @3xl:pr-[36%]">
                             <section>
                                 <h2 className="m-0 max-w-xl text-balance text-2xl font-bold tracking-tight @2xl:text-3xl">
