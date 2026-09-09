@@ -219,15 +219,13 @@ The research found a gap in the error handling. We already recognized one provid
 
 **Loop or graph?** Loop. Product usage → recording → observation → report → PR → back to watching the product get used.
 
-## A few smaller ones
+## Loop 8: self-validation
 
-We also have scouts that catch docs drifting behind shipped code, maintain our key dashboards, summarize yesterday's merged PRs, and keep my GitHub review requests and failing CI in one attention list. Small things, but all things someone would otherwise have to remember to check.
+Merged isn't the same as verified in production. The harness tells scouts to [leave follow-up notes and re-check the evidence](https://github.com/PostHog/posthog/blob/9811d194f82eba77bc5264b10ace8c8c3c9d7708/products/signals/backend/scout_harness/prompt.py#L275-L284) on what they reported, so the scout that found a problem is the one that checks the fix.
 
-## The loops inside the loops
+Remember the Hogland tag failures from loop 3? They came back on the evening of September 6 and again in the early hours of September 7, and the scout added each burst to the same report. The PR merged just before 10:00 UTC. The run that started ten minutes later saw the last matching failure at 10:06 and nothing after it, summarized itself as "the Hogland burst stopped after its fix merged," and authored nothing. The follow-up job got done, and not by me.
 
-**Self-validation:** merged isn't the same as verified in production. The harness tells scouts to [leave follow-up notes and re-check the evidence](https://github.com/PostHog/posthog/blob/9811d194f82eba77bc5264b10ace8c8c3c9d7708/products/signals/backend/scout_harness/prompt.py#L275-L284). The logs example shows why: the error went quiet before the fix merged, then came back.
-
-**Self-improvement:** the harness also tells custom scouts to [suggest changes to their own instructions](https://github.com/PostHog/posthog/blob/9811d194f82eba77bc5264b10ace8c8c3c9d7708/products/signals/backend/scout_harness/prompt.py#L648-L693), with evidence for their owners to review.
+The issues scout does the same thing with numbers. On September 6 it checked on an MCP schema fix that had merged four days earlier: validation failures for `read-data-schema` fell from 2.1K on September 2 to 202 on September 6, with call volume steady. Its verdict: "the merged fix appears to be holding." When the evidence isn't in yet, it says that too. The same scout pushed another follow-up out to September 14 because post-merge data wasn't available yet.
 
 Over the last month, roughly **one in ten scout runs** included a self-validation pass. Checking old findings is a regular part of the work.
 
@@ -237,6 +235,28 @@ Over the last month, roughly **one in ten scout runs** included a self-validatio
     padding={true}
     classes="rounded"
 />
+
+**Where I sit:** mostly nowhere. This is the loop I'm happiest to be out of.
+
+**Loop or graph?** Loop. Report → fix → the scout that reported it checks the fix held.
+
+## Loop 9: self-improvement
+
+The harness also tells custom scouts to [suggest changes to their own instructions](https://github.com/PostHog/posthog/blob/9811d194f82eba77bc5264b10ace8c8c3c9d7708/products/signals/backend/scout_harness/prompt.py#L648-L693), with evidence, for their owners to review. A scout can't edit its own skill. It files a report, and a human publishes the new version or doesn't.
+
+My favorite one so far is the logs scout catching itself. On September 8 it searched for a Slack proxy error signature and got five matches. Four of them were the scout's own API requests, which had the search term in their URLs. It was finding its own footprints. The report recommended scoping that query by logger so a scout's queries could never match their own search terms again, and that shipped as v9 of the skill.
+
+The next day the same scout noticed its data map was scanning the wrong services for Skills logs. The worker had moved, and 96% of the volume was on a service the skill didn't list. Two hours later v10 was published with the new service added.
+
+They aren't always right, which is why a human is still in this loop. On August 31 the task goblin scout suggested flipping an anomaly alert's detector operator from OR to AND, with a 14-day simulation showing the change would have fired zero times. Review found one detector leg was scoring null on every point, so an AND condition could never fire at all. The scout had read a dead detector as clean tuning. The suggestion was rejected, the alert left alone, and two real product bugs filed instead.
+
+**Where I sit:** reading the suggestion and deciding whether to publish it. This is the loop where I'd least like to be replaced.
+
+**Loop or graph?** Loop. Scout runs → notices its own instructions are wrong → suggests a fix → owner reviews → next run uses the new version.
+
+## Loop 10: a few smaller ones
+
+We also have scouts that catch docs drifting behind shipped code, maintain our key dashboards, summarize yesterday's merged PRs, and keep my GitHub review requests and failing CI in one attention list. Small things, but all things someone would otherwise have to remember to check.
 
 ## So: loops or graphs?
 
