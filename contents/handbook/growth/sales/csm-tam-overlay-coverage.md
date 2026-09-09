@@ -4,21 +4,11 @@ sidebar: Handbook
 showTitle: true
 ---
 
-Some accounts have both a CSM and a TAM. The point is depth: two people sharing the load so each can focus on what they're best at, and the customer gets a better experience than one person stretched across everything.
+Some accounts have both a CSM and a TAM. Why we cover accounts that way is in [account allocation](/handbook/growth/sales/account-allocation): the [CSM is the base layer](/handbook/growth/sales/account-allocation#csms-are-the-base-layer) on every $20k+ account, and a [TAM is an overlay](/handbook/growth/sales/account-allocation#tams-are-an-overlay) added while there's a qualified expansion opportunity to work. This page picks up from there. It's about what the two of you do once you're both on.
 
-Both roles have a real relationship with the customer. Both are in the Slack channel. Both know what's happening on the account. The difference is _focus_, not ownership.
+Both roles have a real relationship with the customer. Both are in the Slack channel. Both know what's happening on the account. The difference is _focus_, not ownership. The customer should never have to figure out who to contact: they reach out to either person, and PostHog sorts it out internally.
 
-The customer should never have to figure out who to contact. They reach out to either person, and PostHog sorts it out internally.
-
-Which accounts get both, and when a TAM joins or comes off, is covered in [account allocation](/handbook/growth/sales/account-allocation). This page is about what the two of you do once you're both on.
-
-## Why the overlay exists
-
-Two people on one account is a real investment, so it should buy something one person can't. Done well, the customer gets depth on their implementation *and* depth on where PostHog goes next for them, instead of one person trading one off against the other. More of their org knows us, so the account isn't resting on a single champion. And there's always someone with context when the other one is asleep or on holiday.
-
-Done badly, two people is worse than one. The customer answers the same question twice, gets contradictory advice, or falls into the gap where each of you assumed the other had it covered. That isn't a people problem, it's just what happens by default without a few shared habits. Everything below is those habits: the small things that make the second person feel like better coverage to the customer rather than more admin to us.
-
-How much of it is worth doing depends on the account. A strategic account (our [Top 40](/handbook/growth/sales/account-allocation#top-40-account-management) are the clearest example) with several teams in play, a big org to navigate and a renewal on the horizon justifies real structure. A smaller growth account with one champion and a single use case usually doesn't, and over-engineering it just creates admin neither of you reads. Treat everything here as a starting point to adapt rather than a checklist to comply with, and scale the effort to what the account is worth.
+Everything below is a habit that stops two people being worse than one, so scale it to the account. A strategic account (our [Top 40](/handbook/growth/sales/account-allocation#top-40-account-management) are the clearest example) with several teams in play and a renewal coming justifies real structure. A smaller growth account with one champion and a single use case usually doesn't, so treat this as a starting point to adapt rather than a checklist to comply with.
 
 ## What each role focuses on
 
@@ -97,7 +87,7 @@ What matters here is the process, not the conclusion:
 
 # **Kicking off the CSM + TAM overlay**
 
-When a TAM joins an account, or a CSM picks up an account that already has one, this is roughly what needs to happen. On a strategic account it's probably worth doing all of it. On a smaller growth account, the first few may be plenty.
+When a TAM joins an account, or a CSM picks up an account that already has one, this is roughly what needs to happen. Doing it up front is what stops the first month going on each of you guessing what the other already knows. On a strategic account it's probably worth all of it. On a smaller growth account, the first few may be plenty.
 
 - [ ] Internal Slack channel created, using the naming convention `#customer-[customer_name]-internal`
 - [ ] TAM/CSM counterpart, both team leads, Ben and Simon invited. Invite the FDE too if they're doing any active work on the account
@@ -113,7 +103,7 @@ Both of you share the responsibility of making sure the other has enough context
 
 ## Somewhere to track people and tasks
 
-Two Slack canvases in the internal channel is one setup that's worked well on bigger accounts. It's an example rather than a standard, so take the shape and adapt it.
+You both need to be able to answer who someone is, and whether something got done, without asking the other person. Two Slack canvases in the internal channel is one setup that's worked well on bigger accounts. It's an example rather than a standard, so take the shape and adapt it.
 
 **`[customer_name] - People`.** A light org map of who you've encountered on the account so far. A simple table does the job: name, title, and whether the CSM or TAM has the relationship. The goal isn't to map the entire org, it's to have something easy to refer back to later.
 
@@ -220,7 +210,7 @@ Wherever the account sits, the calls worth both of you being on are the ones whe
 
 ## Cadence
 
-A monthly sync between the two of you is a reasonable baseline, and worth making more frequent if you co-own several accounts and have more to get through than a month's worth of conversation fits. Use one sync to cover every account you share rather than one per account. The internal channel carries everything in between.
+A monthly sync between the two of you is a reasonable baseline, and worth making more frequent if you co-own several accounts and have more to get through than a month fits. Use one sync to cover every account you share rather than one per account. It's the one slot where you're both looking at the same account at the same time, which is usually when overlapping plans and gaps actually surface. The internal channel carries everything in between.
 
 # **Watching account health together**
 
