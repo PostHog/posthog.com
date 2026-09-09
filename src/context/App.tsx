@@ -889,6 +889,50 @@ const appSettings: AppSettings = {
             type: 'standard',
         },
     },
+    // Event types explanation, opened from the pricing calculator. Not a route — see
+    // components/Pricing/PricingCalculator/EventTypesModal.
+    'pricing-event-types': {
+        size: {
+            min: {
+                width: 800,
+                height: 400,
+            },
+            max: {
+                width: 800,
+                height: 720,
+            },
+            fixed: true,
+            autoHeight: true,
+        },
+        position: {
+            center: true,
+        },
+        modal: {
+            type: 'standard',
+        },
+    },
+    // All products and per-unit rates, opened from the pricing calculator. Not a route — see
+    // components/Pricing/PricingCalculator/AllProductsRatesModal.
+    'pricing-all-rates': {
+        size: {
+            min: {
+                width: 800,
+                height: 400,
+            },
+            max: {
+                width: 800,
+                height: 720,
+            },
+            fixed: true,
+            autoHeight: true,
+        },
+        position: {
+            center: true,
+        },
+        modal: {
+            type: 'standard',
+        },
+    },
     '/about': {
         size: {
             min: {
@@ -1139,6 +1183,28 @@ const appSettings: AppSettings = {
             type: 'standard',
         },
     },
+    // Opened from the desktop icon via addWindow — not a route.
+    'the-posthog': {
+        toolbar: true,
+        size: {
+            min: {
+                width: 960,
+                height: 682,
+            },
+            max: {
+                width: 960,
+                height: 682,
+            },
+            fixed: true,
+            autoHeight: true,
+        },
+        position: {
+            center: true,
+        },
+        modal: {
+            type: 'standard',
+        },
+    },
     '/changelog-video': {
         size: {
             min: {
@@ -1221,24 +1287,6 @@ const appSettings: AppSettings = {
         position: {
             center: true,
         },
-    },
-    'the-posthog': {
-        size: {
-            min: {
-                width: 960,
-                height: 682,
-            },
-            max: {
-                width: 960,
-                height: 682,
-            },
-            fixed: true,
-            autoHeight: true,
-        },
-        position: {
-            center: true,
-        },
-        toolbar: true,
     },
     'ask-max': {
         size: {

@@ -17,7 +17,6 @@ import {
 import {
     FIVE_MILLION,
     TWENTY_FIVE_MILLION,
-    FIFTY_MILLION,
     MAX_FEATURE_FLAGS,
     MAX_PRODUCT_ANALYTICS,
     MAX_SESSION_REPLAY,
@@ -84,7 +83,7 @@ export const useProducts = () => {
             slider: (
                 <LogSlider
                     stepsInRange={100}
-                    marks={[MILLION, TEN_MILLION, FIFTY_MILLION, MAX_PRODUCT_ANALYTICS]}
+                    marks={[MILLION, TEN_MILLION, MAX_PRODUCT_ANALYTICS]}
                     min={MILLION}
                     max={MAX_PRODUCT_ANALYTICS}
                     onChange={(value) => setProductAnalyticsSliderValue(value, sliderCurve)}

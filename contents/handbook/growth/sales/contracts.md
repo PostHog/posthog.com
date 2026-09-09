@@ -180,7 +180,7 @@ Sometimes large customers will ask for changes to our MSA. We have a list of the
 
 We offer HIPAA Compliance on PostHog Cloud and as such health companies will require us to sign a Business Associate Agreement with them. As this means we take on increased financial risk in case of a breach we ask them as a minimum to subscribe to one of the platform packages which is a guaranteed monthly payment. A maximum of one BAA per organization will be signed. Under most circumstances, it should be the company that owns the org/pays us.
 
-1. Ask the customer to subscribe to a platform package (as well as any other paid plans they wish to use). You can verify this in Vitally by ensuring that they are in the `Teams Plan` segment.
+1. Ask the customer to subscribe to a platform package (as well as any other paid plans they wish to use).
 2. Create a new document from the <PrivateLink url="https://app.pandadoc.com/a/#/templates/4psCXzU527sNE6WEbFBg3a">PandaDoc template</PrivateLink>.
 3. All you need to do it set the `Client.Company` variable and then send it to them for review and signature.
 4. It has been pre-signed by Fraser and will automatically add today's date as the date of signature for PostHog.
