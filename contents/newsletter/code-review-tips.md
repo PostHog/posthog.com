@@ -119,13 +119,13 @@ Now, most of those are done by our StampHog agent instead. And in just one quart
 Our engineers add a stamphog label on their PR in GitHub, and it runs a few safety checks based on:
 
 - **PR state.** No merge conflicts or changes requested
-- **Blast radius.** [Deny-list](https://github.com/PostHog/posthog/blob/master/tools/pr-approval-agent/README.md#t2--never-ai-approved) keywords (auth, secrets, billing, public APIs, etc.)
+- **Blast radius.** [Deny-list](https://github.com/PostHog/posthog/blob/master/.stamphog/policy.yml) keywords (auth, secrets, billing, public APIs, etc.)
 - **Diff size.** Under 500 lines and 20 files
 - **A simple LLM check.** For basic showstoppers
 
 If the agent approves, it’ll leave a bare GitHub approval with no line comments.
 
-Otherwise, it refuses or escalates with a 1-2 sentence reason, risk level rating, and next steps. Usually that means routing to a subject matter expert based on [CODEOWNERS-soft](https://github.com/PostHog/posthog/blob/master/.github/CODEOWNERS-soft) and git-blame familiarity.
+Otherwise, it refuses or escalates with a 1-2 sentence reason, risk level rating, and next steps. Usually that means routing to a subject matter expert based on [owners.yaml](https://github.com/PostHog/posthog/blob/master/owners.yaml) and git-blame familiarity.
 
 We still use #dev-stamp-exchange when the agent can’t auto-accept or route, but it’s way less active now. Last month, the StampHog agent took care of 1.6K PRs on its own – that’s *1.6K fewer Slack interruptions* for our engineers.
 
