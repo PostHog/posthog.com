@@ -145,7 +145,7 @@ posthog.group("company", "company_id_in_your_db", "PostHog");
 
 ## Validation warnings
 
-These warnings are raised when PostHog rejects a request as it arrives, before the event enters the ingestion pipeline. Your SDK receives an HTTP `400` naming the problem, for example `event submitted without a distinct_id`. Requests are validated as a unit, so one malformed event can reject the whole batch — which is why a warning's event count can exceed the number of warnings.
+These warnings are raised when PostHog rejects a request as it arrives, before the event enters the ingestion pipeline. Your SDK receives an HTTP `400` naming the problem. Requests are validated as a unit, so one malformed event can reject the whole batch — which is why a warning's event count can exceed the number of warnings.
 
 Rejected events are dropped, and the warning is the only record of them: details carry identifiers and sizes (the SDK name and version, the endpoint, and an occurrence count) rather than event contents. To inspect a rejected payload, capture it at the sender — look for `400` responses to your capture host in your browser's network tab, enable [debug mode](/docs/libraries/js/usage#debug-mode) with `posthog.debug()`, or log the event in a [`before_send`](/docs/libraries/js/usage#amending-or-sampling-events) hook.
 
@@ -157,20 +157,13 @@ Every event needs a `distinct_id` to attribute it to a person. PostHog reads the
 
 PostHog accepts a wide range of values here: numbers and objects are converted to strings, and literal strings like `"null"`, `"undefined"`, and `"anonymous"` are valid IDs. Prefer real user IDs — placeholder values group unrelated users onto a single person, and merging them later raises [`cannot_merge_with_illegal_distinct_id`](#refused-to-merge-with-an-illegal-distinct-id).
 
-The usual cause is an empty variable at the `capture()` call site:
+posthog-js blocks the obvious mistakes for you. `identify()` refuses `null`, `undefined`, an empty string, and the literal strings `"null"` and `"undefined"`. It logs `Unique user id has not been set in posthog.identify` and sends nothing, so a plain `identify()` call is rarely the source of this warning. Common causes include:
 
-- The ID passed to `capture()` or `identify()` is `undefined` or `null` because it hasn't loaded yet. Identify once your auth state resolves.
-- A [`before_send`](/docs/libraries/js/usage#amending-or-sampling-events) hook, reverse proxy, or middleware layer removes `distinct_id` on the way out.
-- `bootstrap.distinctID` comes from another system (a server-rendered page or a native app handover) and is sometimes `null`. Pass `bootstrap` only when you have an ID: a `null` is stored as-is, so that browser keeps sending unattributable events until its storage is cleared. Omitting `distinctID` or passing an empty string is safe — posthog-js generates an anonymous ID instead.
+- **A `null` `bootstrap.distinctID`.** The ID comes from another system, such as a server-rendered page or a native app handover, and is sometimes `null`. Every event from that page load is unattributable.
+- **A layer that removes the ID in transit.** A [`before_send`](/docs/libraries/js/usage#amending-or-sampling-events) hook, a reverse proxy, or middleware can remove `distinct_id` after the SDK sets it.
+- **Requests that don't come from a PostHog SDK.** Hand-built calls to the [capture API](/docs/api/capture) have no client-side guard. A `lib` detail of `unknown` points at a sender outside your SDKs.
 
-Validate the ID before capturing:
-
-```js
-// ✅ Identify once you have a real ID
-if (user?.id) {
-  posthog.identify(user.id)
-}
-```
+Check where the ID comes from: your `bootstrap` value, or wherever you call `identify()`. Pass `bootstrap` only when you have an ID. An omitted `distinctID` or an empty string is safe — posthog-js generates an anonymous ID instead.
 
 ### Discarded event whose distinct ID exceeds the size limit
 
