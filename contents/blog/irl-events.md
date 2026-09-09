@@ -8,7 +8,7 @@ hideAnchor: true
 author:
     - daniel-zaltsman
 featuredImage: >-
-    https://res.cloudinary.com/dmukukwp6/image/upload/demo_58471b4cf2.png
+    https://res.cloudinary.com/dmukukwp6/image/upload/getting_engineers_to_demo_b46eed9fd1.png
 featuredImageType: full
 category: Inside PostHog
 tags:
