@@ -1,7 +1,7 @@
 import React from 'react'
 import Link from 'components/Link'
 import { INK, PAPER } from './heroData'
-import { ALL_SPECIES } from './speciesData'
+import SpecimenMap from './SpecimenMap'
 
 const CORAL = '#E1554E'
 const ROMAN = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X']
@@ -122,31 +122,10 @@ export default function HowToUse(): JSX.Element {
                     The species
                 </h3>
                 <figure className="htu-plate">
-                    <ul className="htu-plate-grid">
-                        {ALL_SPECIES.map((s) => (
-                            <li key={s.slug}>
-                                <Link
-                                    to={s.route}
-                                    state={{ newWindow: true }}
-                                    className="htu-specimen"
-                                    aria-label={`${s.name} — open field guide entry`}
-                                >
-                                    <span className="htu-specimen-img">
-                                        {s.heroImage ? (
-                                            <img src={s.heroImage} alt={s.name} loading="lazy" />
-                                        ) : (
-                                            <span className="htu-specimen-pending" aria-hidden="true">
-                                                ?
-                                            </span>
-                                        )}
-                                    </span>
-                                    <span className="htu-specimen-name">{s.name}</span>
-                                </Link>
-                            </li>
-                        ))}
-                    </ul>
+                    <SpecimenMap />
                     <figcaption className="htu-plate-caption">
-                        Plate XI · A census of the common product user, drawn from life
+                        Plate XI · A census of the common product user, drawn from life. Select a specimen to read its
+                        entry.
                     </figcaption>
                 </figure>
 
@@ -336,74 +315,6 @@ export default function HowToUse(): JSX.Element {
                     border: 1px solid rgba(69, 28, 1, 0.3);
                     box-shadow: inset 0 0 44px rgba(69, 28, 1, 0.1), 0 12px 30px rgba(69, 28, 1, 0.2);
                     filter: url(#fg-torn);
-                }
-                .htu-plate-grid {
-                    list-style: none;
-                    margin: 0;
-                    padding: 0;
-                    display: grid;
-                    grid-template-columns: repeat(5, 1fr);
-                    grid-auto-rows: 1fr;
-                    gap: clamp(1rem, 2.5cqw, 1.75rem);
-                    align-items: stretch;
-                }
-                @container (max-width: 640px) {
-                    .htu-plate-grid { grid-template-columns: repeat(3, 1fr); }
-                }
-                @container (max-width: 420px) {
-                    .htu-plate-grid { grid-template-columns: repeat(2, 1fr); }
-                }
-                .htu-plate-grid > li { display: flex; }
-                .htu-specimen {
-                    flex: 1;
-                    display: flex;
-                    flex-direction: column;
-                    align-items: center;
-                    justify-content: flex-start;
-                    gap: 0.65rem;
-                    text-align: center;
-                    text-decoration: none;
-                    transition: transform 150ms ease;
-                }
-                .htu-specimen:hover { transform: translateY(-3px); }
-                .htu-specimen-img {
-                    height: clamp(96px, 15cqw, 152px);
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-                }
-                .htu-specimen-img img {
-                    max-height: 100%;
-                    max-width: 100%;
-                    width: auto;
-                    height: auto;
-                    filter: drop-shadow(1px 3px 2px rgba(69, 28, 1, 0.22));
-                }
-                .htu-specimen-pending {
-                    align-self: center;
-                    font-family: 'RoundHog', sans-serif;
-                    font-weight: 800;
-                    font-size: 34px;
-                    color: rgba(69, 28, 1, 0.28);
-                }
-                .htu-specimen-name {
-                    font-family: 'RoundHog', sans-serif;
-                    font-weight: 800;
-                    text-transform: uppercase;
-                    letter-spacing: 0.4px;
-                    font-size: clamp(11px, 1.4cqw, 13px);
-                    line-height: 1.2;
-                    color: ${INK};
-                    /* Reserve two lines so single- and double-line names align */
-                    min-height: 2.4em;
-                    display: flex;
-                    align-items: flex-start;
-                    justify-content: center;
-                }
-                .htu-specimen:hover .htu-specimen-name {
-                    color: ${CORAL};
-                    text-decoration: underline;
-                    text-underline-offset: 2px;
                 }
                 .htu-plate-caption {
                     margin-top: clamp(1.25rem, 3cqw, 2rem);
