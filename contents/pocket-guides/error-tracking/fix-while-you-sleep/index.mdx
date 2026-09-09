@@ -1,107 +1,41 @@
 ---
-# Scaffolded from /docs/self-driving/scouts, /docs/self-driving/signals (the sources-vs-scouts
-# table, line 41 onward), /docs/self-driving/anatomy-of-a-pr, and /docs/self-driving/pricing.
-#
-# Second rung of Act, and it only makes sense after the signals page. That page turned on an
-# exhaustive pipeline; this one adds the judgement the pipeline does not have.
-#
-# WHAT TO WRITE
-#
-# ## What a scout adds that a source cannot
-#   The trade, stated once and not repeated from the previous page: a source is exhaustive and
-#   continuous, a scout is selective and scheduled. A scout can rank, cluster, weigh, and stay
-#   quiet on a busy day – a source processes everything and holds no opinion.
-#   Source: /docs/self-driving/signals lines 41-55.
-#
-# ## The scouts that already watch errors
-#   Do not invent. These ship: error-tracking (spikes, stuck loops, fingerprint clusters,
-#   triaged by how many users they hit), apm (new errors per service), logs (new error message
-#   patterns), csp-violations. Name them and say what each holds.
-#   Source: /docs/self-driving/scout-examples lines 30-49.
-#
-# ## Writing one for your own question
-#   The canonical error scout stops at people. Point at the errors-by-account-value scout in
-#   vol. 1 as the worked example of extending it, rather than teaching scout authoring here.
-#   Source: /pocket-guides/self-driving/errors-your-best-accounts-hit.
-#
-# ## From report to pull request
-#   An agent gets the report and its evidence as context, opens the PR, and you review it like
-#   any other. Nothing merges without you. Reports are free, pull requests are $15 each with
-#   the first three a month free. Source: /docs/self-driving/anatomy-of-a-pr, /docs/self-driving/pricing.
-#
-# Figure: the report a scout files on an error issue. AnatomyFigure with an inline report.
-title: Get it fixed while you sleep
-shortTitle: Fix while you sleep
-subtitle: A scout reads the issue and works out the cause. An agent opens the pull request.
-pocketGuideOrder: 7
-section: Act
+title: Check whether the fix held
+shortTitle: Verify the fix
+subtitle: Reopened means a fix did not hold.
+pocketGuideOrder: 8
+section: Self-drive
 ---
 
 <LeftPage>
-
-<AnatomyFigure
-    n={1}
-    caption="A scout's report on an error issue: not the loudest one, the one that concentrates in the accounts that matter."
-    priority="P2"
-    status="Ready"
-    actionability="Actionable"
-    headline="A 40-occurrence issue is hitting your three largest accounts. The 9,000-occurrence issue above it is one integration in a retry loop"
-    report={{
-        title: 'Export fails for workspaces with more than 200 members',
-        source: 'Scout · error tracking',
-        receivedAgo: '6h',
-        affected: '40 exceptions, 11 users, 3 accounts – 38% of subscription revenue',
-        body: "`ExportTimeoutError` in `workspace/export.ts` has fired 40 times in 7 days. That puts it 14th by occurrences, so it has not been looked at.\n\nAll 40 come from 11 users in 3 accounts, and those 3 accounts are your largest by plan. Every one of them has more than 200 members, and the export builds the member list in one query that times out past that size.\n\nThe issue that sits first by occurrences, 9,000 in the same week, is a single API integration retrying a deleted endpoint. Nobody is affected by it.",
-        suggestedAction: 'Page the member query in the export, and cap the page size at 100.',
-        actionNote: 'An agent opens the pull request – you review and merge.',
-    }}
-/>
 
 </LeftPage>
 
 <RightPage>
 
-# Get it fixed while you sleep
+# Check whether the fix held
 
-The previous page turned on a pipeline that misses nothing. This page adds the thing that pipeline does not have, which is an opinion about what matters.
+Resolving an <Term name="issue" /> keeps its data and reopens it if the error comes back. A verification <Term name="scout" /> watches what happens after the fix ships instead of treating the pull request as the end of the story.
 
-## What a scout adds that a source cannot
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Excepteur sint occaecat cupidatat non proident.
 
-A <Term name="scout" /> runs on a schedule rather than continuously, explores rather than following one stream, and decides what clears the bar you set. So it can rank, cluster, weigh who is affected, and stay quiet on a day when nothing important happened.
+## What the scout watches
 
-A source holds no opinion. That is its strength, and it is why the two compose: the source keeps its complete coverage, and the scout sits on top of it, bundling related items and flagging what nobody has actioned.
+It watches resolved issues across later <Term name="release">releases</Term>. A regression is an issue that was resolved and came back.
 
-## The scouts that already watch errors
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sunt in culpa qui officia deserunt mollit anim id est laborum.
 
-You do not have to write one. These ship with PostHog, and each is a skill you can read:
+## What makes it report
 
-- **[Error tracking](https://github.com/PostHog/posthog/blob/master/products/signals/skills/signals-scout-error-tracking/SKILL.md)** – error spikes, stuck loops, and <Term name="fingerprint" /> clusters, triaged by how many users they hit.
-- **[APM](https://github.com/PostHog/posthog/blob/master/products/signals/skills/signals-scout-apm/SKILL.md)** – new errors per service and operation, alongside error rate and latency regressions.
-- **[Logs](https://github.com/PostHog/posthog/blob/master/products/signals/skills/signals-scout-logs/SKILL.md)** – new error message patterns, severity shifts, and services that went silent.
-- **[CSP violations](https://github.com/PostHog/posthog/blob/master/products/signals/skills/signals-scout-csp-violations/SKILL.md)** – violation clusters, per-directive bursts, and third-party domains that should not be there.
+Reopened means a fix did not hold. That deserves more attention than new because someone already believed it was done.
 
-Turn each on or off per project. A scout writes a <Term name="report" /> only when something clears its bar, like the one in <SeeFig n={1} />.
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Excepteur sint occaecat cupidatat non proident.
 
-## Writing one for your own question
+## What lands in your inbox
 
-The error tracking scout triages by people. It stops short of asking what those people are worth to you, because that answer lives in your revenue data, not in the exception.
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Excepteur sint occaecat cupidatat non proident.
 
-Extending it is a short edit rather than a new scout, and the self-driving volume works one through end to end.
+## From report to fix
 
-<Callout to="/pocket-guides/self-driving/errors-your-best-accounts-hit" label="Errors your best accounts hit">
-The same scout, pointed at account value: it reports when an issue's share of paying accounts is out of line with those accounts' share of your traffic.
-</Callout>
-
-## From report to pull request
-
-An actionable report goes to an agent with its evidence attached. The agent reads the <Term name="stack trace" />, the sessions, and the code it points at, then opens a pull request in your repository, which you review like any other. Nothing merges without you.
-
-Reports are free. A pull request costs $15, and the first three each month are free, with a billing limit you set.
-
-<SeeAlso>
-
-See also: [Scouts](/docs/self-driving/scouts) · [Anatomy of a pull request](/docs/self-driving/anatomy-of-a-pr) · [Self-driving pricing](/docs/self-driving/pricing) · [Pocket guide to self-driving](/pocket-guides/self-driving/101)
-
-</SeeAlso>
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sunt in culpa qui officia deserunt mollit anim id est laborum.
 
 </RightPage>

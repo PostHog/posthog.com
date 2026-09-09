@@ -12,7 +12,7 @@ title: Error Tracking 101
 shortTitle: Error Tracking 101
 subtitle: What an exception carries, how it becomes an issue, and what else in PostHog can read it.
 pocketGuideOrder: 1
-section: Instrument
+section: Observe
 ---
 
 <LeftPage>
@@ -61,13 +61,33 @@ section: Instrument
     ]}
 />
 
+<AnatomyFigure
+    n={2}
+    caption="Where this ends up: one actionable report in your inbox, with the issue, sessions, and affected accounts attached."
+    priority="P1"
+    status="Ready"
+    actionability="Actionable"
+    headline="Checkout confirm fails when the cart contains a discounted item. The confirm step reads a total the discount path never set"
+    report={{
+        title: 'Checkout confirm fails when the cart contains a discounted item',
+        source: 'Scout · error tracking',
+        receivedAgo: '2h',
+        affected: '47 sessions, 12 accounts, 3 on paid plans',
+        body: "A new exception, `TypeError: Cannot read properties of undefined (reading 'total')` in `checkout/confirm.ts`, first seen at 09:14, four minutes after release 1.4.2 went out. It only fires for carts holding a discounted item.\n\nThe same sessions show a rage-click cluster on the Confirm order button, and two support conversations this morning describe not being able to complete an order. All three arrived as separate signals and were grouped into this one report.\n\nThe confirm step reads `cart.pricing.total`. The discount path builds `cart.pricing` without a `total`, so the read fails before the order is placed.",
+        suggestedAction: 'Have the discount path set the total, and make the confirm step fall back to summing line items when it is missing.',
+        actionNote: 'An agent opens the pull request - you review and merge.',
+    }}
+/>
+
 </LeftPage>
 
 <RightPage>
 
 # Error Tracking 101
 
-Error Tracking takes exceptions thrown by your application and aggregates them into issues in context of your product data. This lets you understand more that just what broke:
+Error Tracking takes exceptions thrown by your application and aggregates them into issues in context of your product data.
+
+This lets you answer questions you can't with just a stack trace:
 
 - Which customers are impacted?
 - Does it impact conversion and retention?
@@ -77,38 +97,19 @@ Error Tracking takes exceptions thrown by your application and aggregates them i
 
 With this context, Error Tracking makes your product <Term name="self-driving">self-driving</Term>. Agents will have the context to triage the issues based on impact and open PRs to fix them.
 
+## Exceptions and issues
+
+Like everything else in PostHog, each instance of an <Term name="exception" /> is captured as a `$exception` <Term name="event" />. Similar exceptions are aggregated into <Term name="issue">issues</Term> <SeeFig n={1} />. Those issues are the base unit of work: you diagnose, triage, assign, and fix them, not individual exceptions.
+
 ## Path to self-driving
 
 Error tracking takes you through discovery and fixing exceptions in three steps:
 
-- **Instrument** – capture exceptions, and make them readable and grouped.
-- **Report** – size what broke, for whom, and whether it is worth waking up for.
-- **Act** – route it to an owner, get agents to report on high-impact errors automatically or open pull requests.
+- **Observe** - First, make every issue a useful signal. Capture the right exceptions, group one failure once, and attach readable traces and the path to the error.
+- **Report** - Then, include exceptions into your insights and dashboards, triage the issues that matter, and put the right one in front of the right person.
+- **Self-drive** - Finally, let scouts watch for specific failure patterns, investigate their impact, and hand actionable reports to agents that can open pull requests.
 
-## Exceptions and issues
-
-Like everything else in PostHog, each instance of an exception is captured as a `$exception` event. Similar are aggregated into issues like this <SeeFig n={1} />.
-
-In Error Tracking, you diagnose, triage, assign, and fix _issues_ as the base unit of work, not individual exceptions.
-
-## What lands on an exception
-
-An exception carries the usual event properties – the person, the session, the URL, the browser, the feature flags they had – plus a handful of its own:
-
-| Property | What it holds |
-| --- | --- |
-| `$exception_list` | The type, the message, the stack frames, and whether your code handled it. Chained exceptions arrive as several entries |
-| `$exception_fingerprint` | The value that decides which issue this exception joins |
-| `$exception_level` | How severe it is |
-
-## Analyzing errors in context
-
-An exception is an event, so every product that reads events reads it too:
-
-- **Insights and funnels** put an exception in a chart, or beside a conversion step, so you can see who errored and who then dropped.
-- **Session replay** holds the recording it was thrown in, and marks it on the player timeline.
-- **Cohorts** turn "everyone who hit this" into a group, so you can follow what they did next.
-- **Self-driving** reads the issue, works out what caused it, and opens a pull request.
+The goal is to get actionable reports and a PR to address the exception automatically, so you can ship fixes while you sleep <SeeFig n={2} />.
 
 This pocket guide will explore all of these usecases in detail.
 

@@ -181,7 +181,7 @@ export default function BookReader({
         <div className="relative flex h-full min-h-0 w-full flex-col bg-primary">
             {/* Book tabs: in-flow above the page on narrow containers (floating tabs would sit
                 on the text), attached to the left edge at reading widths. */}
-            <div className="relative z-30 flex shrink-0 flex-row items-center gap-1 px-4 pt-3 @3xl:absolute @3xl:left-0 @3xl:top-6 @3xl:flex-col @3xl:items-start @3xl:p-0">
+            <div className="relative z-30 flex shrink-0 self-start flex-row items-center gap-1 px-4 pt-3 @3xl:absolute @3xl:left-0 @3xl:top-6 @3xl:flex-col @3xl:items-start @3xl:p-0">
                 {shelf && (
                     <Link to={shelf.url} aria-label={shelf.label} title={shelf.label} className={edgeTabClasses()}>
                         <IconBook className="size-4" />
@@ -224,7 +224,7 @@ export default function BookReader({
                     </motion.nav>
                 )}
                 {openPanel === 'type' && fontSize && onFontSize && fontSizes && (
-                    <div className="absolute left-4 top-full mt-1 rounded-md border border-primary bg-primary p-3 shadow-xl @3xl:left-9 @3xl:top-0 @3xl:mt-0">
+                    <div className="absolute left-4 top-full mt-1 w-max rounded-md border border-primary bg-primary p-3 shadow-xl @3xl:left-9 @3xl:top-0 @3xl:mt-0">
                         <div className="flex items-center justify-between gap-4">
                             <span className="text-xs font-semibold text-secondary">Font size</span>
                             <BookControls

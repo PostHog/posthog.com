@@ -1,0 +1,136 @@
+---
+title: Exceptions as events
+shortTitle: Exceptions as events
+subtitle: An exception is an event, so every product that reads events can read it too.
+pocketGuideOrder: 4
+section: Report
+---
+
+<LeftPage>
+
+<ExampleFigure n={1} caption="Example: checkout fails less often than search, but affects customers who generated twelve times as much revenue. Both counts and revenue cover the last 30 days.">
+
+| Issue | Exceptions | Customers affected | Customer revenue |
+| --- | ---: | ---: | ---: |
+| Checkout confirm fails | 620 | 240 | **$48,000** |
+| Invoice download fails | 180 | 64 | $16,000 |
+| Search request times out | 9,000 | 50 | $4,000 |
+
+</ExampleFigure>
+
+<ExampleFigure n={2} caption="Example: Acme's errors over the last seven days. Search produces the most exceptions, but checkout affects more of the account's users.">
+
+<div className="mb-3 text-[0.8em] text-secondary">Cohort: <strong className="text-primary">Acme users</strong></div>
+
+| Issue | Users affected | Exceptions |
+| --- | ---: | ---: |
+| Checkout confirm fails | **186** | 314 |
+| Invoice download fails | 27 | 41 |
+| Search request times out | 2 | 2,840 |
+
+</ExampleFigure>
+
+<LeakFigure
+    n={3}
+    caption="Example: checkout attempts hold steady, but completion falls from 80% to 50% when the error appears."
+    markerAt={0.45}
+    markerLabel="Error first seen"
+    leakLabel="300 fewer completed checkouts per day"
+    startsLabel="Started checkout: 1,000/day"
+    finishesLabel="Completed: 800/day to 500/day"
+    starts={[0.9, 0.9, 0.9, 0.9, 0.9, 0.9, 0.9, 0.9, 0.9, 0.9]}
+    finishes={[0.72, 0.72, 0.72, 0.72, 0.72, 0.54, 0.45, 0.45, 0.45, 0.45]}
+/>
+
+<DivergenceFigure
+    n={4}
+    caption="Example: after a deploy, the new checkout's affected-session rate rises to 8% while control stays at 2%. Both lines use the same scale."
+    markerAt={0.45}
+    markerLabel="Checkout deploy"
+    series={[
+        {
+            label: "Control",
+            note: "2% of sessions hit an error",
+            values: [0.2, 0.2, 0.2, 0.2, 0.2, 0.2, 0.2, 0.2, 0.2, 0.2],
+        },
+        {
+            label: "New checkout",
+            note: "2% to 8% of sessions hit an error",
+            values: [0.2, 0.2, 0.2, 0.2, 0.2, 0.5, 0.7, 0.8, 0.8, 0.8],
+            emphasis: true,
+        },
+    ]}
+/>
+
+</LeftPage>
+
+<RightPage>
+
+# Exceptions as events
+
+Like everything else in PostHog, each instance of an <Term name="exception" /> is captured as a `$exception` <Term name="event" />. That means it carries the same <Term name="person" />, <Term name="session" />, URL, browser, and <Term name="feature flag">feature flags</Term> as the rest of your product data.
+
+## Query `$exception` events
+
+An exception carries a handful of properties of its own:
+
+| Property | What it holds |
+| --- | --- |
+| `$exception_list` | The type, the message, the stack frames, and whether your code handled it. Chained exceptions arrive as several entries |
+| `$exception_fingerprint` | The value that decides which issue this exception joins |
+| `$exception_issue_id` | The issue assigned when the exception was ingested |
+| `$exception_level` | How severe it is |
+
+## Rank issues by the revenue behind them
+
+The goal is to get an insight that helps you assess the potential cost of each exception, so you can prioritize your efforts.
+
+Revenue from purchase events or a connected payment system gives you one way to do that. Connect it to the people affected by an <Term name="issue" /> to see which errors affect your most valuable customers <SeeFig n={1} />. This shows the customer revenue behind an issue, not how much revenue the error has lost.
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+
+<Prompt>
+Build an insight showing which issues affect our highest-value customers.
+</Prompt>
+
+## Find the errors one customer hits
+
+You can also focus on a single account. The goal is to see which issues its users are running into, so you can respond to the problems that matter to that customer.
+
+A <Term name="cohort" /> uses <Term name="person property">person properties</Term>, such as organization, to select an account's users. Apply it to your exception data and you can see both the issues they hit and how many people are affected <SeeFig n={2} />.
+
+Acme's search error fired 2,840 times, but only two people hit it. Checkout affected 186. Start with checkout to investigate the problem reaching more of the account, then inspect the repeated search failures separately.
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+
+<Prompt>
+Build a dashboard showing the errors Acme's users are running into.
+</Prompt>
+
+## See how errors impact conversion
+
+An error count doesn't tell you how many people failed to finish what they came to do. Understanding how exceptions relate to conversion helps you prioritize bugs that interrupt important actions.
+
+A <Term name="funnel" /> connects the start and completion events for an action. Tracking its completion rate alongside exceptions shows whether an error appeared when completion fell <SeeFig n={3} />.
+
+Completion fell from 80% to 50%, with the same number of checkout starts. Compare sessions with and without the exception, then watch affected recordings in <Term name="session replay" /> to see whether people got stuck, retried successfully, or finished another way.
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+
+<Prompt>
+Show me how this error affects checkout completion rate.
+</Prompt>
+
+## Exceptions by experiment variant
+
+An <Term name="experiment" /> can improve one metric while introducing errors elsewhere. Comparing exceptions across variants helps you decide whether a promising result comes with a reliability problem.
+
+Feature-flag data identifies which version people saw. Their exceptions show what failed. Together, they let you compare error rates across variants, so differences in traffic don't hide a problem <SeeFig n={4} />.
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+
+<Prompt>
+Show me whether our checkout experiment is causing more errors in either variant.
+</Prompt>
+
+</RightPage>

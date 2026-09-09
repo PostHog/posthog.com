@@ -10,11 +10,13 @@ import type { SelfDrivingReport } from 'components/SelfDrivingInbox/types'
 import ScoutFile from 'components/SelfDrivingInbox/ScoutFile'
 
 import Divergence, { DivergenceSeries } from './Divergence'
+import ExternalIssue from './ExternalIssue'
 import Figure from './Figure'
 import FactorSplit, { FactorSplitRow } from './FactorSplit'
 import FlagLedger, { FlagLedgerRow } from './FlagLedger'
 import LeakFunnel, { LeakFunnelProps } from './LeakFunnel'
 import InboxFigure from './InboxFigure'
+import IssueSpike from './IssueSpike'
 import EvalRuns, { EvalRun } from './EvalRuns'
 import PersonsModal, { PersonsModalProps } from './PersonsModal'
 import RedirectLoop from './RedirectLoop'
@@ -432,6 +434,24 @@ export function TriggerGroupFigure({
         // No hover hint: this figure's markers are always visible, so there is nothing to reveal.
         <Fig n={n} caption={caption} legend={legend}>
             <TriggerGroupForm {...group} />
+        </Fig>
+    )
+}
+
+/** An issue volume chart that explains why its sharp increase is worth an alert. */
+export function IssueSpikeFigure({ n = 1, caption }: { n?: number; caption: string }): JSX.Element {
+    return (
+        <Fig n={n} caption={caption}>
+            <IssueSpike />
+        </Fig>
+    )
+}
+
+/** The GitHub issue created from an Error Tracking issue. */
+export function ExternalIssueFigure({ n = 1, caption }: { n?: number; caption: string }): JSX.Element {
+    return (
+        <Fig n={n} caption={caption}>
+            <ExternalIssue />
         </Fig>
     )
 }

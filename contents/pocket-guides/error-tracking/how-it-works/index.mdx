@@ -1,18 +1,9 @@
 ---
-# Scaffolded from /docs/error-tracking/grouping-issues, /docs/error-tracking/fingerprints,
-# /docs/error-tracking/stack-traces, /docs/error-tracking/upload-source-maps,
-# /docs/error-tracking/releases, /docs/error-tracking/rate-limiting, and the _snippets for
-# suppression rules, burst protection, and before-send.
-#
-# One page, three sections – the three things that decide whether the product is usable:
-# does it group right, can you read the trace, and are you drowning in noise.
-#
-# The 18 source map pages are a reference. Link, don't repeat.
-title: How Error Tracking works
-shortTitle: How it works
+title: Make every issue a useful signal
+shortTitle: Issue quality
 subtitle: Grouping decides what you end up looking at. Source maps decide whether you can read it.
 pocketGuideOrder: 2
-section: Instrument
+section: Observe
 ---
 
 <LeftPage>
@@ -153,16 +144,11 @@ section: Instrument
 
 <RightPage>
 
-# How Error Tracking works
+# Make every issue a useful signal
 
-Three things decide whether Error Tracking produces high quality signals or noise:
-- Whether it groups exceptions into issues the way you would have
-- Whether you can read the traces it hands you
-- Whether you are storing the ones worth storing
+Three things decide whether Error Tracking produces high quality signals or noise: issue grouping, source map accuracy, and filtering.
 
-This section covers how to configure each of these topics.
-
-## Grouping
+## Group one failure once
 
 An exception joins an <Term name="issue" /> by the first of these that applies:
 
@@ -170,95 +156,32 @@ An exception joins an <Term name="issue" /> by the first of these that applies:
 2. **A grouping rule you defined in PostHog.** Runs at ingestion, no deployment or release needed.
 3. **The fingerprint PostHog generates.** What you get when you have done neither.
 
-Taking those from the bottom up.
+By default, PostHog builds a <Term name="fingerprint" /> from the exception type, its message when there is no readable <Term name="stack trace" />, and frames from your own code when the trace has any. Generated fingerprints can be fragile without a <Term name="source map" />: every deploy can split one bug into a new issue.
 
-### Automatic fingerprinting
+A grouping rule runs during ingestion, so it can match on any event property without a code change <SeeFig n={1} />. You can also pass `$exception_fingerprint` at capture time when a changing value in the message would otherwise open an issue for every ID.
 
-By default, PostHog builds a <Term name="fingerprint" /> from whatever the exception gives it:
+## Resolve stack traces
 
-1. The exception type, always.
-2. The error message, when there is no <Term name="stack trace" /> PostHog could read.
-3. The frames from your own code, when the trace has any.
-4. The first frame in the trace, when every frame belongs to a library, the framework, or the browser.
+A <Term name="stack trace" /> shows you the exact line of code that caused the exception. If you bundle, compile, or minify the code you distribute, the trace shows up as **unresolved** <SeeFig n={2} />.
 
-Generated fingerprints can be fragile. Without a <Term name="source map" /> they are built from minified bundles like `a.min.js:1:48210`, instead of a concrete file and line like `checkout.ts:42`, so every deploy splits one bug into a new issue. Changing an exception type or message between <Term name="release">releases</Term> splits it the same way.
-
-### Grouping rules
-
-A fingerprint needs a code change. A rule doesn't – it runs during ingestion, so it can match on any event property, including the unminified <Term name="stack trace" />.
-
-A rule is a set of filters and a choice of whether an exception has to match all of them or any <SeeFig n={1} />. The properties you'll reach for most are the exception type, its message, the source file, the severity, and whether your code handled it, alongside anything custom you set at capture.
-
-### Setting your own fingerprint
-
-Pass `$exception_fingerprint` when you capture and every exception carrying it lands in one issue, whatever its type or message says.
-
-The usual reason is a message that carries an ID. `Workspace 8f21c4 failed to load` is one bug, but the generated fingerprint reads the ID as part of the message and opens an issue per workspace:
-
-```js
-try {
-  await loadWorkspace(workspaceId)
-} catch (error) {
-  posthog.captureException(error, {
-    $exception_fingerprint: 'workspace-load-failed',
-    $issue_name: 'Workspace failed to load',
-    $issue_description: 'loadWorkspace threw. The id is in the message, so these group by hand.',
-    workspace_id: workspaceId,
-  })
-}
-```
-
-Reach for a grouping rule first – it does the same job, and you can test and edit it. A fingerprint ships in your code, so it only applies to exceptions captured after the deploy, and you cannot change your mind retroactively.
-
-## Readable stack traces
-
-A <Term name="stack trace" /> shows you the exact line of code that caused the exception. If you bundle, compile, or minify the bundle you distribute, there's no way to trace the code in the bundle back to your source code – so it shows up as **unresolved** <SeeFig n={2} />.
-
-If you upload a <Term name="source map" />, it ties the bundled or compiled code, and stack traces will accurately reference your source code <SeeFig n={3} />.
-
-You need to upload whenever you don't distribute your source code directly:
-- a bundled web app
-- a minified or obfuscated build
-- a compiled language.
-
-For web, the wizard wires it into your build:
+Upload a <Term name="source map" /> and the same trace points back to your source code <SeeFig n={3} />. For web, the wizard wires it into your build:
 
 ```bash
 npx @posthog/wizard@latest upload-source-maps
 ```
 
-Mobile uploads a different artifact through different tooling – Android goes through a Gradle plugin, and native code needs its debug symbols alongside – but the job is the same. Point your agent at the [upload guide](/docs/error-tracking/upload-source-maps) for your platform.
+When stack traces aren't enough, adding breadcrumbs let you leave additional traces. Breadcrumbs let you insert additional context that's captured only when an exception occurs, it's then shown in the issue's **Timeline** tab alongside everything else from the session <SeeFig n={4} />.
 
-### Breadcrumbs before the throw
+## Keep noise out
 
-Sometimes the traces themselves aren't enough to paint a full picture. Error Tracking's timeline will already show you the events that led up to the error, but sometimes you need ot leave more clues.
+What gets stored is decided before anyone looks at it:
 
-Breadcrumbs help you do that. They're like events, but cached locally and sent only if an exception occurs. This distinguishes them from regular events, which capture user actions, and avoid polluting your project.
+- **Rate limits** cap how many exceptions PostHog ingests, project-wide or per <Term name="issue" />.
+- **Burst protection** stops one browser in a loop from spending your quota before the server sees it.
+- **Suppression rules** drop every future exception that matches before it becomes an event.
+- **`before_send`** is the last hook before anything leaves the client, where you can drop or redact an exception.
 
-```js
-posthog.addExceptionStep('cache_miss', { key: `workspace:${workspaceId}` })
-posthog.addExceptionStep('token_refreshed', { age_ms: 4200 })
-posthog.addExceptionStep('read_from_replica', { region: 'eu-west-1', lag_ms: 180 })
-
-try {
-  await loadWorkspace(workspaceId)
-} catch (error) {
-  posthog.captureException(error)
-}
-```
-
-Breadcrumbs surface on the issue's **Timeline** tab <SeeFig n={4} />, in order, along with events and exceptions from the same session – so you read the run-up to the throw rather than the throw on its own.
-
-## Keeping the signal
-
-What gets stored is decided before anyone looks at it. Four controls, in the order you reach for them:
-
-- **Rate limits** cap how many exceptions PostHog ingests, project-wide or per <Term name="issue" />. A token bucket refills across the window you set, so a short burst is absorbed and a runaway loop is not. Anything dropped here is never stored, so it is never billed.
-- **Burst protection** is the same idea on the client. The web and Node SDKs capture ten exceptions of one type in ten seconds, then one every ten seconds after that, so one browser in a loop cannot spend your quota before the server sees it.
-- **Suppression rules** drop every future exception that matches, before it becomes an event. Browser extensions, `ResizeObserver` noise, third-party scripts you will never fix.
-- **`before_send`** is the last hook before anything leaves the client. It is where you drop an exception type outright, and where you redact what you do not want stored.
-
-Suppression is not the same as resolving. Resolving an issue keeps its data and reopens it if the error comes back. Suppressing drops the exceptions at ingestion, so it is not retroactive, and what it drops is not recoverable.
+Suppression is not the same as resolving. Resolving keeps the data and reopens the issue if the error comes back. Suppressing drops exceptions at ingestion, so it is not retroactive, and what it drops is not recoverable.
 
 <Prompt>
 Show me my noisiest error tracking issues from the last 7 days and tell me which ones look like retry loops or browser extension noise I should suppress or rate limit.

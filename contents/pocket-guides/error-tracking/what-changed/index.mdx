@@ -1,34 +1,9 @@
 ---
-# Scaffolded from /docs/error-tracking/releases, /docs/error-tracking/spikes, and
-# /docs/feature-flags.
-#
-# The use case: the change that shipped the bug is on the same event as the bug. A release
-# narrows it to a build; a flag variant narrows it to the code path.
-#
-# WHAT TO WRITE
-#
-# ## Line it up against a release
-#   Exceptions carry the release they were thrown in, set when you upload source maps – so the
-#   same upload that makes a trace readable also makes it attributable. Compare an issue across
-#   releases and "started at 14:02" becomes "started in 1.4.2".
-#   Source: /docs/error-tracking/releases, /docs/error-tracking/stack-traces (release context).
-#
-# ## Split it by feature flag variant
-#   The flag is an ordinary property on the exception, so an issue breaks down by variant like
-#   any other. A bug that only exists in the test variant is a flag you can turn off now, which
-#   is faster than any fix. Source: /docs/feature-flags.
-#
-# ## New, regressed, or always there
-#   Three different findings. New arrived with a release. Regressed was resolved and came back –
-#   worth more attention than new, because someone already thought it was done. Always there is
-#   the background you have stopped seeing. Source: /docs/error-tracking/managing-issues.
-#
-# Figure: exception volume against a release marker. DivergenceFigure fits.
-title: Find the change that caused it
-shortTitle: What changed
+title: Connect a deploy to an error burst
+shortTitle: Deploy regressions
 subtitle: The deploy that shipped the bug is on the same event as the bug.
-pocketGuideOrder: 4
-section: Report
+pocketGuideOrder: 7
+section: Self-drive
 ---
 
 <LeftPage>
@@ -40,7 +15,12 @@ section: Report
     markerLabel="1.4.2 deployed"
     series={[
         { label: 'Sessions', note: 'unchanged', values: [62, 64, 61, 66, 63, 65, 64, 62, 66, 63, 65, 64] },
-        { label: 'Checkout exceptions', note: 'starts in 1.4.2', emphasis: true, values: [4, 3, 5, 4, 3, 4, 5, 21, 38, 44, 47, 51] },
+        {
+            label: 'Checkout exceptions',
+            note: 'starts in 1.4.2',
+            emphasis: true,
+            values: [4, 3, 5, 4, 3, 4, 5, 21, 38, 44, 47, 51],
+        },
     ]}
 />
 
@@ -48,46 +28,24 @@ section: Report
 
 <RightPage>
 
-# Find the change that caused it
+# Connect a deploy to an error burst
 
 The deploy that shipped the bug is on the same event as the bug. A <Term name="release" /> narrows it to a build. A <Term name="feature flag" /> variant narrows it to a code path. Neither needs a second tool.
 
-## Line it up against a release
+## What the scout watches
 
-Every exception carries the release it was thrown in. The release is recorded when you upload <Term name="source map">source maps</Term>, so the one upload that makes a <Term name="stack trace" /> readable also makes it attributable.
+Every exception carries the release it was thrown in. The flags a person had are ordinary properties on the exception, so the scout can compare error volume across releases and feature flag variants.
 
-Compare an issue across releases and "started at 14:02" becomes "started in 1.4.2" <SeeFig n={1} />. With a GitHub or GitLab integration, each frame links to the file and commit that produced it.
+## What makes it report
 
-<Prompt>
-Take my top error tracking issue from the last 7 days and break its exceptions down by release. Tell me which release it first appeared in and whether it exists in the one before.
-</Prompt>
+New, regressed, and always there are three different findings. New arrived with a release. Regressed was resolved and came back. Always there is the background you have stopped seeing.
 
-## Split it by feature flag variant
+## What lands in your inbox
 
-The flags a person had are ordinary properties on the exception, so an issue breaks down by variant like it breaks down by browser.
+"Started at 14:02" becomes "started in 1.4.2" <SeeFig n={1} />. If the issue only exists in the test variant, the report gives you a flag you can turn off now.
+
+## From report to fix
 
 A bug that only exists in the test variant is a flag you can turn off now. That is faster than any fix, and it holds the line while the fix is written.
-
-<Prompt>
-Break my top error tracking issue down by feature flag variant and tell me if it concentrates in one variant.
-</Prompt>
-
-## New, regressed, or always there
-
-These are three different findings, and the issue list marks them differently.
-
-- **New** arrived with a release. The release comparison above tells you which.
-- **Regressed** was resolved and came back. PostHog reopens a resolved issue on its own when the error recurs, and that deserves more attention than new, because someone already believed it was done.
-- **Always there** is the background you have stopped seeing. It is not urgent, and it is the noise the next page teaches you to keep out of your alerts.
-
-<Prompt>
-List my error tracking issues from the last 7 days in three groups: new since the latest release, reopened after being resolved, and older than 30 days.
-</Prompt>
-
-<SeeAlso>
-
-See also: [Releases](/docs/error-tracking/releases) · [Stack traces](/docs/error-tracking/stack-traces) · [Manage and resolve issues](/docs/error-tracking/managing-issues) · [Feature flags](/docs/feature-flags)
-
-</SeeAlso>
 
 </RightPage>
