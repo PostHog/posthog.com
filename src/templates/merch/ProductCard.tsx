@@ -40,8 +40,13 @@ export function ProductCard(props: ProductCardProps): React.ReactElement {
     )
 
     return (
+        /**
+         * content-visibility keeps off-screen cards out of layout, paint and raster. Without it,
+         * a pinch-zoom expands the visual viewport, every lazy product image becomes eligible to
+         * decode at once, and iOS Safari kills the tab.
+         */
         <button
-            className={`group px-2 pt-2 pb-1 border-[1.5px] rounded ${
+            className={`group px-2 pt-2 pb-1 border-[1.5px] rounded [content-visibility:auto] [contain-intrinsic-size:auto_300px] ${
                 selected ? 'border-blue bg-blue/10' : 'border-transparent'
             } relative flex flex-col gap-2 ${className}`}
             key={product.shopifyId}
