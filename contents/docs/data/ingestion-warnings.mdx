@@ -15,7 +15,7 @@ export const warningsDark =
 
 Sometimes PostHog runs into problems during ingestion due to incorrect or suboptimal usage of PostHog. For example, if you capture an event with a generic ID like `null`, PostHog doesn't ingest it.
 
-If this happens, we do our best to still ingest the event and we log an ingestion warning.
+Where we can, we still ingest the event and log an ingestion warning. Other problems leave nothing to ingest, and the warning is the only record. Each section below says whether the event was kept.
 
 <ProductScreenshot
   imageLight={warningsLight}
@@ -24,7 +24,7 @@ If this happens, we do our best to still ingest the event and we log an ingestio
   classes="rounded"
 />
 
-**Note:** These warnings are sampled. The actual number of events affected may exceed the total displayed.
+**Note:** These warnings are sampled, so the number of events affected may exceed the total displayed. Use the count to confirm something is happening, not to measure how often.
 
 List of ingestion warnings:
 
@@ -42,6 +42,19 @@ List of ingestion warnings:
 - [$set or $set_once is ignored on exception events and should not be sent](#set-or-set_once-is-ignored-on-exception-events-and-should-not-be-sent)
 - [Invalid heatmap data](#invalid-heatmap-data)
 - [Discarded $groupidentify event with invalid $group_set](#discarded-groupidentify-event-with-invalid-group_set)
+
+Validation warnings, raised when PostHog rejects a request as it arrives:
+
+- [Discarded event with no distinct ID](#discarded-event-with-no-distinct-id)
+- [Discarded event whose distinct ID exceeds the size limit](#discarded-event-whose-distinct-id-exceeds-the-size-limit)
+- [Discarded event with no event name](#discarded-event-with-no-event-name)
+- [Discarded event whose name exceeds the length limit](#discarded-event-whose-name-exceeds-the-length-limit)
+- [Discarded event with an invalid timestamp](#discarded-event-with-an-invalid-timestamp)
+- [Discarded event with malformed properties](#discarded-event-with-malformed-properties)
+- [Discarded event with invalid capture options](#discarded-event-with-invalid-capture-options)
+- [Rejected batches](#rejected-batches)
+- [Discarded session replay batches](#discarded-session-replay-batches)
+- [Discarded AI events](#discarded-ai-events)
 
 ## Refused to merge with an illegal distinct ID
 
@@ -129,6 +142,95 @@ posthog.group("company", "company_id_in_your_db", "PostHog");
 ```
 
 `null` or `undefined` values for `$group_set` are accepted and upsert the group with empty properties.
+
+## Validation warnings
+
+These warnings are raised when PostHog rejects a request as it arrives, before the event enters the ingestion pipeline. Your SDK receives an HTTP `400` naming the problem, for example `event submitted without a distinct_id`. Requests are validated as a unit, so one malformed event can reject the whole batch — which is why a warning's event count can exceed the number of warnings.
+
+Rejected events are dropped, and the warning is the only record of them: details carry identifiers and sizes (the SDK name and version, the endpoint, and an occurrence count) rather than event contents. To inspect a rejected payload, capture it at the sender — look for `400` responses to your capture host in your browser's network tab, enable [debug mode](/docs/libraries/js/usage#debug-mode) with `posthog.debug()`, or log the event in a [`before_send`](/docs/libraries/js/usage#amending-or-sampling-events) hook.
+
+Start with the `lib` and `lib_version` details. Warnings clustered on a single older SDK version point to an upgrade. When both read `unknown`, the request carried no `$lib` property, which typically means traffic from outside a PostHog SDK — project API keys are public, so bots and scanners can generate these warnings independently of your code.
+
+### Discarded event with no distinct ID
+
+Every event needs a `distinct_id` to attribute it to a person. PostHog reads the top-level `distinct_id` first, then falls back to `properties.distinct_id`, and drops the event when neither holds a usable value — when it's missing from both, `null`, empty, or only whitespace.
+
+PostHog accepts a wide range of values here: numbers and objects are converted to strings, and literal strings like `"null"`, `"undefined"`, and `"anonymous"` are valid IDs. Prefer real user IDs — placeholder values group unrelated users onto a single person, and merging them later raises [`cannot_merge_with_illegal_distinct_id`](#refused-to-merge-with-an-illegal-distinct-id).
+
+The usual cause is an empty variable at the `capture()` call site:
+
+- The ID passed to `capture()` or `identify()` is `undefined` or `null` because it hasn't loaded yet. Identify once your auth state resolves.
+- A [`before_send`](/docs/libraries/js/usage#amending-or-sampling-events) hook, reverse proxy, or middleware layer removes `distinct_id` on the way out.
+- `bootstrap.distinctID` comes from another system (a server-rendered page or a native app handover) and is sometimes `null`. Pass `bootstrap` only when you have an ID: a `null` is stored as-is, so that browser keeps sending unattributable events until its storage is cleared. Omitting `distinctID` or passing an empty string is safe — posthog-js generates an anonymous ID instead.
+
+Validate the ID before capturing:
+
+```js
+// ✅ Identify once you have a real ID
+if (user?.id) {
+  posthog.identify(user.id)
+}
+```
+
+### Discarded event whose distinct ID exceeds the size limit
+
+The `distinct_id` was longer than 200 characters. An ID this long is usually something else — a token, a session blob, or a serialized object — so update the `capture` or `identify` call to send a real user ID.
+
+Some capture endpoints shorten the ID and ingest the event instead. See [Ingested event after shortening its distinct ID](#ingested-event-after-shortening-its-distinct-id-to-the-200-character-limit).
+
+### Discarded event with no event name
+
+The `event` field was missing or empty, so there was no name to record the event under. The usual cause is an empty variable at the `capture()` call site.
+
+### Discarded event whose name exceeds the length limit
+
+The event name was longer than 200 characters. Use short, stable identifiers like `user_signed_up`, and move any variable data (an ID, a URL, a message) into a property. This also keeps your event list easy to browse.
+
+### Discarded event with an invalid timestamp
+
+The event's `timestamp` couldn't be parsed. Send timestamps in [ISO 8601](/docs/data/timestamps) format.
+
+Some endpoints keep the event and substitute the server's time instead — see [Ignored an invalid timestamp](#ignored-an-invalid-timestamp-event-was-still-ingested). Which applies depends on the endpoint your SDK uses.
+
+### Discarded event with malformed properties
+
+The `properties` field wasn't a JSON object — commonly an array or a string. This most often means the properties were JSON-encoded twice, so check for a stray `JSON.stringify()` before the value reaches `capture()`.
+
+### Discarded event with invalid capture options
+
+The request's capture options were malformed. SDKs set these for you, so this points to a hand-built HTTP request — check it against the [capture API reference](/docs/api/capture).
+
+### Rejected batches
+
+These warnings apply to a whole request rather than a single event, so every event in the request is dropped together.
+
+| Warning | Cause |
+| --- | --- |
+| Rejected a request containing no events | The request body contained an empty batch, typically from a client that flushes on a timer with nothing queued. |
+| Rejected a batch with invalid metadata | The batch's envelope (the fields wrapping the events) was malformed. |
+| Rejected a batch containing an event with no UUID | An event in the batch was missing its UUID. |
+| Rejected a batch containing an event with an invalid UUID | An event's UUID wasn't valid. PostHog generates these for you — see [Refused to process event with invalid UUID](#refused-to-process-event-with-invalid-uuid). |
+| Rejected a batch containing duplicate event UUIDs | Two events in the batch shared a UUID, usually from a retry or queue flush re-sending events. |
+
+### Discarded session replay batches
+
+These warnings mean a chunk of a [session recording](/docs/session-replay) was dropped. The recording still exists, minus the part that chunk covered, so it may appear shorter than expected. All three usually point to an outdated SDK or a proxy that rewrites request bodies.
+
+| Warning | Cause |
+| --- | --- |
+| Discarded a session replay batch with no `$session_id` | The batch didn't identify which session it belonged to. |
+| Discarded a session replay batch with an invalid `$session_id` | The `$session_id` was present but unusable — most often not a string. |
+| Discarded a session replay batch with no `$snapshot_data` | The batch carried no recording data. |
+
+### Discarded AI events
+
+These warnings apply to [LLM analytics](/docs/llm-analytics) events.
+
+| Warning | Cause |
+| --- | --- |
+| Discarded an AI event with an unsupported event name or no `$ai_model` | The event wasn't a recognized `$ai_*` event, or the required `$ai_model` property was missing. |
+| Rejected a malformed AI or OpenTelemetry request | The request body couldn't be parsed. |
+| Accepted an OpenTelemetry export with no AI spans, so nothing was ingested | The export was valid but carried no AI spans. Check that your instrumentation is emitting them. |
 
 ## Query warnings via MCP
 
