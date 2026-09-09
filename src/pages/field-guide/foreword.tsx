@@ -8,7 +8,7 @@ export default function Page(): JSX.Element {
             title="Foreword from the naturalist"
             seoTitle="Foreword - The Field Guide to Wild Users"
             dropCap
-            image="/images/field-guide/naturalist.png"
+            image="https://res.cloudinary.com/dmukukwp6/image/upload/w_360,c_limit,q_auto,f_auto/naturalist_original_e340d704b2.png"
             signature="– Sir Bartholomew Hogworth, F.R.S. First Edition, 2026"
             paragraphs={[
                 <>

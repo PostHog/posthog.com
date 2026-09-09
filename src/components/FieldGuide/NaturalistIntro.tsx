@@ -10,7 +10,7 @@ export default function NaturalistIntro(): JSX.Element {
             <div className="ni-inner">
                 <figure className="ni-portrait">
                     <img
-                        src="/images/field-guide/naturalist.png"
+                        src="https://res.cloudinary.com/dmukukwp6/image/upload/w_560,c_limit,q_auto,f_auto/naturalist_original_e340d704b2.png"
                         alt="Sir Bartholomew Hogworth, F.R.S."
                         loading="lazy"
                     />
@@ -44,12 +44,14 @@ export default function NaturalistIntro(): JSX.Element {
                     container-type: inline-size;
                     background: ${PAPER};
                     color: ${INK};
-                    border-top: 1px solid rgba(69, 28, 1, 0.15);
-                    padding: clamp(2rem, 5cqw, 4rem) clamp(1rem, 5cqw, 3rem);
+                    padding: 0 clamp(1rem, 5cqw, 3rem) clamp(2rem, 5cqw, 4rem);
                 }
+                /* The rule sits on the inner column, so it matches every other rule in the guide */
                 .ni-inner {
                     max-width: 1000px;
                     margin: 0 auto;
+                    border-top: 1px solid rgba(69, 28, 1, 0.15);
+                    padding-top: clamp(2rem, 5cqw, 4rem);
                     display: grid;
                     grid-template-columns: minmax(0, 38%) 1fr;
                     gap: clamp(1.5rem, 5cqw, 4rem);

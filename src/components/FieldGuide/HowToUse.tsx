@@ -1,4 +1,6 @@
 import React from 'react'
+import { Tabs } from 'radix-ui'
+import CloudinaryImage from 'components/CloudinaryImage'
 import Link from 'components/Link'
 import { INK, PAPER } from './heroData'
 import SpecimenMap from './SpecimenMap'
@@ -90,8 +92,8 @@ export default function HowToUse(): JSX.Element {
                     <div className="htu-guide-text">
                         <p className="htu-p">
                             Each species in this guide follows the same structure, which has been refined over many
-                            years of fieldwork and one or two arguments at the Royal Society dinner. The cards on the
-                            right replicate the guide structure and what each section under the species means.
+                            years of fieldwork and one or two arguments at the Royal Society dinner. The tabs below open
+                            each section of an entry and explain what the reader will find there.
                         </p>
                         <p className="htu-p">
                             The species are presented in no particular order. They are not ranked by frequency,
@@ -105,18 +107,37 @@ export default function HowToUse(): JSX.Element {
                         </p>
                         <p className="htu-sig">– S.B.H.</p>
                     </div>
-                    <dl className="htu-anatomy">
+                    <CloudinaryImage
+                        src="https://res.cloudinary.com/dmukukwp6/image/upload/naturalist3_276e74ea71.png"
+                        alt="The naturalist consulting his map"
+                        width={560}
+                        className="htu-hog"
+                        imgClassName="htu-hog-img"
+                        loading="lazy"
+                    />
+                </div>
+
+                <Tabs.Root className="htu-anatomy" defaultValue={STRUCTURE[0].label}>
+                    <Tabs.List className="htu-anat-tabs" aria-label="Sections of a species entry">
                         {STRUCTURE.map((s, i) => (
-                            <div className="htu-anat-card" key={s.label}>
-                                <span className="htu-anat-num" aria-hidden="true">
+                            <Tabs.Trigger className="htu-anat-tab" key={s.label} value={s.label}>
+                                <span className="htu-anat-tab-num" aria-hidden="true">
                                     {ROMAN[i]}
                                 </span>
-                                <dt className="htu-anat-label">{s.label}</dt>
-                                <dd className="htu-anat-desc">{s.body}</dd>
-                            </div>
+                                <span className="htu-anat-tab-label">{s.label}</span>
+                            </Tabs.Trigger>
                         ))}
-                    </dl>
-                </div>
+                    </Tabs.List>
+                    {STRUCTURE.map((s, i) => (
+                        <Tabs.Content className="htu-anat-panel" key={s.label} value={s.label}>
+                            <span className="htu-anat-num" aria-hidden="true">
+                                {ROMAN[i]}
+                            </span>
+                            <h3 className="htu-anat-label">{s.label}</h3>
+                            <p className="htu-anat-desc">{s.body}</p>
+                        </Tabs.Content>
+                    ))}
+                </Tabs.Root>
 
                 <h3 id="the-species" className="htu-subtitle">
                     The species
@@ -130,17 +151,27 @@ export default function HowToUse(): JSX.Element {
                 </figure>
 
                 <div className="htu-closing">
-                    <p className="htu-closing-text">
-                        The watching does not stop when you close this guide.{' '}
-                        <Link to="/replay-vision" state={{ newWindow: true }} className="htu-closing-link">
-                            Replay Vision
-                        </Link>{' '}
-                        keeps its eye on every session while you build, and brings the ones worth your attention back to
-                        you.
-                    </p>
-                    <Link to="/field-guide/closing-note" state={{ newWindow: true }} className="htu-closing-more">
-                        Read the full closing note
-                    </Link>
+                    <div className="htu-closing-text-col">
+                        <p className="htu-closing-text">
+                            The watching does not stop when you close this guide.{' '}
+                            <Link to="/replay-vision" state={{ newWindow: true }} className="htu-closing-link">
+                                Replay Vision
+                            </Link>{' '}
+                            keeps its eye on every session while you build, and brings the ones worth your attention
+                            back to you.
+                        </p>
+                        <Link to="/field-guide/closing-note" state={{ newWindow: true }} className="htu-closing-more">
+                            Read the full closing note
+                        </Link>
+                    </div>
+                    <CloudinaryImage
+                        src="https://res.cloudinary.com/dmukukwp6/image/upload/Group_144532_e9e68b845b.png"
+                        alt="The naturalist watching from the long grass"
+                        width={1120}
+                        className="htu-closing-hog"
+                        imgClassName="htu-hog-img"
+                        loading="lazy"
+                    />
                 </div>
             </div>
 
@@ -149,10 +180,14 @@ export default function HowToUse(): JSX.Element {
                     container-type: inline-size;
                     background: ${PAPER};
                     color: ${INK};
-                    border-top: 1px solid rgba(69, 28, 1, 0.15);
-                    padding: clamp(2rem, 5cqw, 4rem) clamp(1rem, 5cqw, 3rem);
+                    padding: 0 clamp(1rem, 5cqw, 3rem) clamp(2rem, 5cqw, 4rem);
                 }
-                .htu-inner { max-width: 1280px; margin: 0 auto; }
+                .htu-inner {
+                    max-width: 1000px;
+                    margin: 0 auto;
+                    border-top: 1px solid rgba(69, 28, 1, 0.15);
+                    padding-top: clamp(2rem, 5cqw, 4rem);
+                }
                 .htu-title {
                     font-family: 'RoundHog', sans-serif;
                     font-weight: 800;
@@ -208,54 +243,156 @@ export default function HowToUse(): JSX.Element {
                 }
                 .htu-p--full { max-width: none; }
                 .htu-sig { font-style: italic; font-size: 14px; margin: 1.25rem 0 0; }
-                /* How-to layout: prose on the left, the "anatomy" cards stacked on the right */
+                /* How-to layout: prose, then the anatomy of an entry as tabbed index cards */
+                /* Prose on the left, the naturalist watching from the grass on the right */
+                /* The mirror of the naturalist section above: same column widths, same gap,
+                   same centred figure — only the sides are swapped */
                 .htu-guide {
-                    margin: 1.75rem 0 clamp(2.25rem, 5cqw, 3.5rem);
+                    margin: 1.75rem 0 clamp(1.5rem, 3.5cqw, 2.25rem);
                     display: grid;
-                    grid-template-columns: 0.85fr 1.15fr;
-                    gap: clamp(1.5rem, 4cqw, 3.5rem);
-                    align-items: start;
+                    grid-template-columns: 1fr minmax(0, 38%);
+                    gap: clamp(1.5rem, 5cqw, 4rem);
+                    align-items: center;
                 }
-                .htu-guide-text {
-                    position: sticky;
-                    top: clamp(1.5rem, 5cqw, 3rem);
-                    align-self: start;
+                .htu-guide-text .htu-sig { margin-bottom: 0; }
+                /* Centred against the prose, then biased up: the heading sits above this grid,
+                   so a true centre reads low against the block as a whole */
+                .htu-hog {
+                    width: clamp(150px, 62%, 240px);
+                    justify-self: center;
+                    margin-bottom: clamp(2rem, 7cqw, 5rem);
                 }
-                .htu-guide-text .htu-p { max-width: none; }
-                .htu-guide-text .htu-p:last-of-type { margin-bottom: 0; }
-                @container (max-width: 680px) {
-                    .htu-guide { grid-template-columns: 1fr; }
-                    .htu-guide-text { position: static; }
+                .htu-hog-img {
+                    display: block;
+                    width: 100%;
+                    height: auto;
+                    filter: drop-shadow(3px 5px 4px rgba(69, 28, 1, 0.25));
                 }
-                /* "Anatomy of an entry" — a vintage plate legend, stacked vertically */
+                @container (max-width: 720px) {
+                    .htu-guide { grid-template-columns: 1fr; gap: 1.5rem; }
+                    .htu-hog { width: clamp(150px, 55%, 220px); margin-bottom: 0; }
+                }
+
                 .htu-anatomy {
-                    margin: 0;
-                    display: grid;
-                    grid-template-columns: 1fr;
-                    gap: clamp(0.9rem, 2.5cqw, 1.4rem);
+                    margin: 0 0 clamp(2.25rem, 5cqw, 3.5rem);
+                    /* One sheet, one colour: the open tab and the page below it both paint
+                       --fg-page flat, so there is no tone to mismatch where they meet */
+                    --fg-page: #f4f0de;
+                    --fg-tab-closed: #e7dfc6;
+                    --fg-edge: rgba(69, 28, 1, 0.26);
                 }
-                .htu-anat-card {
+                /* Index tabs, cut from the same aged stock and stuck to the top of the page */
+                .htu-anat-tabs {
+                    display: flex;
+                    flex-wrap: nowrap;
+                    align-items: stretch;
+                    /* Flush, like a strip of card cut into tabs. Any gap here exposes the
+                       page's own top edge between the tabs, which reads as stray lines */
+                    gap: 0;
+                    /* Inset, so the page below reads as a separate, wider sheet. The tabs no
+                       longer overlap it: the page keeps its own border on all four sides */
+                    width: calc(100% - 2.5rem);
+                    margin: 0 auto;
+                    position: relative;
+                    /* Its own stacking context, below the sheet: the tabs tuck behind the page
+                       so its top border stays one unbroken line instead of meeting seven
+                       torn tab edges and leaving slivers between them */
+                    z-index: 0;
+                    isolation: isolate;
+                }
+                .htu-anat-tab {
                     position: relative;
                     isolation: isolate;
-                    padding: clamp(1.1rem, 2.5cqw, 1.5rem) clamp(1.2rem, 3cqw, 1.7rem);
+                    flex: 1 1 0;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    gap: 0.4rem;
+                    min-width: 0;
+                    padding: 0.55rem 0.7rem 0.8rem;
+                    border: 0;
+                    background: none;
+                    color: rgba(69, 28, 1, 0.62);
+                    cursor: pointer;
+                    text-align: center;
+                    transition: color 150ms ease, transform 150ms ease;
                 }
-                /* Aged, gently torn paper card, matching the species plate */
-                .htu-anat-card::before {
+                /* The tab itself is a torn scrap of the same stock, edges and all */
+                .htu-anat-tab::before {
+                    content: '';
+                    position: absolute;
+                    inset: 0 0 0 0;
+                    z-index: -1;
+                    /* The page's paper, shaded down so closed tabs sit behind it */
+                    background: linear-gradient(180deg, #ede5cf 0%, var(--fg-tab-closed) 100%);
+                    border: 1px solid var(--fg-edge);
+                    /* No bottom edge: the tabs run under the sheet, whose border closes them off */
+                    bottom: -4px;
+                    border-bottom: 0;
+                    box-shadow: inset 0 -8px 12px rgba(69, 28, 1, 0.07);
+                    filter: url(#fg-torn-card);
+                    transition: background 150ms ease;
+                }
+                /* Overlap the neighbour so touching tabs share one hairline, not two */
+                .htu-anat-tab:not(:first-child)::before { left: -1px; }
+                .htu-anat-tab:hover { color: ${INK}; transform: translateY(-2px); }
+                .htu-anat-tab:focus-visible { outline: 2px solid ${CORAL}; outline-offset: 2px; }
+                /* The open tab reads as part of the page below it */
+                /* The open tab paints over its neighbours, so its edges stay unbroken */
+                .htu-anat-tab[data-state='active'] { color: ${INK}; z-index: 2; }
+                .htu-anat-tab[data-state='active']::before {
+                    background: var(--fg-page);
+                    box-shadow: 0 -2px 10px rgba(69, 28, 1, 0.07);
+                }
+                .htu-anat-tab-num {
+                    font-family: 'RoundHog', sans-serif;
+                    font-weight: 800;
+                    font-size: clamp(10px, 1.2cqw, 12px);
+                    color: ${CORAL};
+                    opacity: 0.75;
+                }
+                .htu-anat-tab[data-state='active'] .htu-anat-tab-num { opacity: 1; }
+                .htu-anat-tab-label {
+                    font-family: 'RoundHog', sans-serif;
+                    font-weight: 800;
+                    text-transform: uppercase;
+                    letter-spacing: 0.4px;
+                    font-size: clamp(10px, 1.25cqw, 12.5px);
+                    line-height: 1.2;
+                }
+                /* Aged, gently torn paper page, matching the species plate */
+                .htu-anat-panel {
+                    position: relative;
+                    z-index: 1;
+                    isolation: isolate;
+                    padding: clamp(1.3rem, 3cqw, 1.9rem) clamp(1.3rem, 3.5cqw, 2rem);
+                    min-height: clamp(7.5rem, 13cqw, 9rem);
+                }
+                .htu-anat-panel:focus-visible { outline: 2px solid ${CORAL}; outline-offset: 3px; }
+                .htu-anat-panel::before {
                     content: '';
                     position: absolute;
                     inset: 0;
                     z-index: -1;
-                    background: radial-gradient(110px 70px at 16% 28%, rgba(120, 82, 30, 0.06), transparent 70%),
-                        radial-gradient(130px 90px at 85% 72%, rgba(120, 82, 30, 0.05), transparent 70%),
-                        linear-gradient(158deg, #f6f2e1 0%, #efe8cf 60%, #e7dec1 100%);
-                    border: 1px solid rgba(69, 28, 1, 0.26);
-                    box-shadow: inset 0 0 20px rgba(69, 28, 1, 0.06), 0 6px 15px rgba(69, 28, 1, 0.13);
+                    /* Flat --fg-page across the top and most of the page, shading only at the
+                       foot. An all-round inset shadow or a full-height ramp darkens the very
+                       edge the tabs meet, which is what made the open tab look pasted on */
+                    background: radial-gradient(110px 70px at 16% 28%, rgba(120, 82, 30, 0.05), transparent 70%),
+                        radial-gradient(130px 90px at 85% 72%, rgba(120, 82, 30, 0.045), transparent 70%),
+                        linear-gradient(180deg, var(--fg-page) 0%, var(--fg-page) 62%, #ebe5cf 100%);
+                    border: 1px solid var(--fg-edge);
+                    box-shadow: inset 0 -22px 22px -18px rgba(69, 28, 1, 0.09), 0 6px 15px rgba(69, 28, 1, 0.13);
                     filter: url(#fg-torn-card);
+                }
+                .htu-anat-panel[data-state='active'] { animation: htu-anat-in 220ms ease both; }
+                @keyframes htu-anat-in {
+                    from { opacity: 0; transform: translateY(4px); }
+                    to { opacity: 1; transform: none; }
                 }
                 .htu-anat-num {
                     position: absolute;
-                    top: 0.1rem;
-                    right: 0.6rem;
+                    bottom: 0.2rem;
+                    right: 0.8rem;
                     z-index: 0;
                     font-family: 'RoundHog', sans-serif;
                     font-weight: 800;
@@ -273,7 +410,7 @@ export default function HowToUse(): JSX.Element {
                     font-weight: 800;
                     text-transform: uppercase;
                     letter-spacing: 0.5px;
-                    font-size: clamp(12px, 1.7cqw, 14px);
+                    font-size: clamp(13px, 1.9cqw, 16px);
                     color: ${INK};
                 }
                 .htu-anat-desc {
@@ -283,7 +420,32 @@ export default function HowToUse(): JSX.Element {
                     font-size: clamp(13px, 1.6cqw, 15px);
                     line-height: 1.55;
                     color: ${INK};
-                    max-width: 46ch;
+                    max-width: 62ch;
+                }
+                /* Too narrow for seven across: stack them as index cards above the page */
+                @container (max-width: 680px) {
+                    .htu-anat-tabs {
+                        display: grid;
+                        grid-template-columns: repeat(2, 1fr);
+                        gap: 0.4rem;
+                        margin-bottom: 0.6rem;
+                    }
+                    .htu-anat-tab:not(:first-child)::before { left: 0; }
+                    .htu-anat-tab,
+                    .htu-anat-tab[data-state='active'] { padding: 0.55rem 0.7rem; }
+                    .htu-anat-tab::before,
+                    .htu-anat-tab[data-state='active']::before {
+                        bottom: 0;
+                        border-bottom: 1px solid var(--fg-edge);
+                    }
+                    .htu-anat-tab[data-state='active']::before { border-color: rgba(69, 28, 1, 0.5); }
+                }
+                @container (max-width: 380px) {
+                    .htu-anat-tabs { grid-template-columns: 1fr; }
+                }
+                @media (prefers-reduced-motion: reduce) {
+                    .htu-anat-tab:hover { transform: none; }
+                    .htu-anat-panel[data-state='active'] { animation: none; }
                 }
 
                 .htu-subtitle {
@@ -325,16 +487,27 @@ export default function HowToUse(): JSX.Element {
                     color: rgba(69, 28, 1, 0.6);
                 }
 
+                /* Closing note: half text, half naturalist, both standing on the same line */
                 .htu-closing {
                     margin-top: 2.5rem;
                     padding-top: 1.75rem;
                     border-top: 1px solid rgba(69, 28, 1, 0.15);
                     text-align: left;
+                    display: grid;
+                    grid-template-columns: 1fr minmax(0, 38%);
+                    gap: clamp(1.5rem, 5cqw, 4rem);
+                    align-items: center;
+                }
+                /* Wider than the other two figures because it is a 2:1 landscape: matching
+                   their width would leave it half their height and looking underweight */
+                .htu-closing-hog { width: clamp(180px, 100%, 340px); justify-self: center; }
+                @container (max-width: 720px) {
+                    .htu-closing { grid-template-columns: 1fr; gap: 1.5rem; }
+                    .htu-closing-hog { width: clamp(180px, 80%, 320px); }
                 }
                 .htu-closing-text {
                     font-size: clamp(15px, 1.9cqw, 18px);
                     line-height: 1.6;
-                    max-width: 68ch;
                     margin: 0 0 1.25rem;
                     color: ${INK};
                 }

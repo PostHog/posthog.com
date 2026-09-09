@@ -8,7 +8,7 @@ export default function Page(): JSX.Element {
             title="Closing note"
             seoTitle="Closing note - The Field Guide to Wild Users"
             signature="– S.B.H."
-            image="/images/field-guide/naturalist.png"
+            image="https://res.cloudinary.com/dmukukwp6/image/upload/w_360,c_limit,q_auto,f_auto/naturalist_original_e340d704b2.png"
             paragraphs={[
                 `The species I have set down here are the ones I have observed often enough, and with sufficient certainty, to risk naming. You will catch more in your own user base.`,
                 `There are species that have appeared in my notebooks only once or twice, behaviors I have seen which I am not yet ready to call patterns, peculiarities I do not understand. Some of them will turn out to be species in their own right. The work of naming proceeds slowly, even now that the work of watching does not.`,
