@@ -46,13 +46,9 @@ Every example below ended in a merged PR.
 
 ## Loop 1: `agent-feedback()`
 
-The [PostHog MCP](/docs/model-context-protocol) has an [`agent-feedback`](https://github.com/PostHog/posthog/blob/master/services/mcp/src/tools/feedback/submit.ts) tool. 
+The [PostHog MCP](/docs/model-context-protocol) has an [`agent-feedback`](https://github.com/PostHog/posthog/blob/master/services/mcp/src/tools/feedback/submit.ts) tool. When an agent or human hits friction using the MCP – a confusing schema, a tool that silently drops a parameter, a missing capability, or just something they don't like – they can file structured feedback, headlessly, right from the session where it happened.
 
-When an agent or human hits friction using the PostHog MCP – a confusing schema, a tool that silently drops a parameter, a missing capability, or just something they dont like – they can file structured feedback, headlessly, right from the session where it happened.
-
-That feedback becomes a single event stream: `mcp feedback submitted`. 
-
-The `signals-scout-agent-feedback` scout watches this feedback stream:
+That feedback becomes a single event stream, `mcp feedback submitted`, and the `signals-scout-agent-feedback` scout watches it:
 
 - It groups negative and blocked (`task_completed=false`) submissions into per-type friction themes – anchored on many reports converging on the same problem, not raw row counts.
 - It routes each theme to its owner: MCP, a product area, docs, or the signals team itself.
@@ -61,21 +57,9 @@ The `signals-scout-agent-feedback` scout watches this feedback stream:
 
 Then the part that makes it a loop rather than a funnel: the scout **checks back on things it thinks got fixed**. It keeps notes in its scratchpad about what was reported and what shipped, and validates that the fix held before considering a theme closed.
 
-**Where I sit:** reviewing the reports, and reviewing the PRs. The detection, triage, dedupe, and root-cause legwork all happened before I arrived. I can steer it when needed, but often it catches useful little (and sometimes bigger or more important) fixes as APIs, tools, skills, and clients change.
+Here's how fast that can go. On August 28th at 11:28 UTC, an agent working in a customer's project filed `missing_tool` feedback with `task_completed=false`. It wanted to define catalog events before any had been ingested. The MCP had `event-definition-update` but no create, so its workaround was firing one anonymous seed capture per event and then calling update. Ugly.
 
-**Loop or graph?** Loop. Agents complain → scout distills → report → PR → scout checks what happened next. It eats its own output (ewwww).
-
-<details>
-
-<summary>A real one: <strong>complaint to production in seven and a half hours</strong></summary>
-
-On August 28th at 11:28 UTC, an agent working in a customer's project filed `missing_tool` feedback with `task_completed=false`. It wanted to define catalog events before any had been ingested. The MCP had `event-definition-update` but no create, so its workaround was firing one anonymous seed capture per event and then calling update. Ugly.
-
-About five minutes later the scout emitted a report. It had found no matching report, open PR, or assigned issue. Eight minutes after that, [PR #90832](https://github.com/PostHog/posthog/pull/90832) was open. The implementation confirmed that the REST create endpoint already existed; the MCP needed a tool to call it.
-
-The first version still needed fixing. PostHog Review flagged two must-fixes. A couple of hours later Codex found the interesting one: on self-hosted builds the base serializer silently dropped `description`, `verified`, and `hidden`, so the tool would report success while losing most of the metadata it promised. Review also caught tag validation and duplicate-definition edge cases. The final PR included backend changes and tests as well as the new tool.
-
-I approved at 14:22 and hit `/trunk merge` at 17:27. It merged at 18:02, and the deployment bot recorded both production regions deployed by 18:56. So about seven and a half hours from the complaint to production. I spent my time reviewing the changes.
+About five minutes later the scout emitted a report, having found no matching report, open PR, or assigned issue. Eight minutes after that, [PR #90832](https://github.com/PostHog/posthog/pull/90832) was open. The REST create endpoint already existed; the MCP just needed a tool to call it.
 
 <ProductScreenshot
     imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/agent_feedback_95beae7245.png"
@@ -84,9 +68,15 @@ I approved at 14:22 and hit `/trunk merge` at 17:27. It merged at 18:02, and the
     classes="rounded"
 />
 
-*The actual report: a missing-tool complaint, supporting evidence, and a concrete next step.*
+*The report: a missing-tool complaint, supporting evidence, and a concrete next step.*
 
-</details>
+The first version still needed fixing. PostHog Review flagged two must-fixes, and a couple of hours later Codex found the interesting one: on self-hosted builds the base serializer silently dropped `description`, `verified`, and `hidden`, so the tool would report success while losing most of the metadata it promised. Review also caught tag validation and duplicate-definition edge cases. The final PR included backend changes and tests as well as the new tool.
+
+I approved at 14:22 and hit `/trunk merge` at 17:27. It merged at 18:02, and both production regions were deployed by 18:56. About seven and a half hours from complaint to production, and I spent my share of it reviewing.
+
+**Where I sit:** reviewing the reports, and reviewing the PRs. The detection, triage, dedupe, and root-cause legwork all happened before I arrived. I can steer it when needed, but often it catches useful little (and sometimes bigger or more important) fixes as APIs, tools, skills, and clients change.
+
+**Loop or graph?** Loop. Agents complain → scout distills → report → PR → scout checks what happened next. It eats its own output (ewwww).
 
 ## Loop 2: the team Slack channel
 
@@ -117,21 +107,9 @@ The scout picked up the thread and authored an inbox report. The pipeline opened
 
 `signals-scout-self-driving-logs` looks for problems in the self driving related slices of our runtime [logs](/logs). The useful part isn't just finding an error string. It's working out what failed, whether repeated lines are one retry loop or many separate failures, and whether someone is already fixing it.
 
-It also keeps checking existing findings. New evidence can go onto the report that's already under review, instead of starting another competing investigation.
+One run found a task that couldn't start its Hogland (an internal VM service) sandbox because one of its metadata tags was too long. The tag included a workflow ID made from a prefix and two UUIDs. Metadata that had worked with a previous provider ran into a limit with a different one. [PR #92909](https://github.com/PostHog/posthog/pull/92909) bounded the tag strings sent to Hogland and added tests for their lengths, with task and run IDs still available as separate tags.
 
-**Where I sit:** deciding whether the diagnosis and fix make sense, then getting the change merged. The scout keeps doing the tedious evidence gathering while that happens.
-
-**Loop or graph?** Loop, with a memory. The next run knows about the last report.
-
-<details>
-
-<summary>A real one: <strong>the identifier that was too long to start a sandbox</strong></summary>
-
-A task couldn't start its Hogland (an internal VM service) sandbox because one of its metadata tags was too long. The tag included a workflow ID made from a prefix and two UUIDs. Metadata that had worked with a previous provider ran into a limit with a different provider.
-
-[PR #92909](https://github.com/PostHog/posthog/pull/92909) bounded the tag strings sent to Hogland and added tests for their lengths. Task and run IDs remained available as separate tags.
-
-While the PR was under review, the scout kept adding evidence of the same failure to the existing report. It even saw a quiet period followed by more failures – a useful reminder that "nothing broke in this window" doesn't mean an unmerged fix somehow worked.
+The part I like is what happened while that PR sat in review. The scout kept checking, and each new run added evidence of the same failure to the existing report instead of starting a competing investigation. It even saw a quiet period followed by more failures – a useful reminder that "nothing broke in this window" doesn't mean an unmerged fix somehow worked.
 
 <div className="max-w-sm mx-auto">
     <ProductScreenshot
@@ -146,59 +124,29 @@ While the PR was under review, the scout kept adding evidence of the same failur
 
 I requested the merge on September 7, and it merged that morning. The code change is confirmed; proving the failure stays gone is the follow-up job.
 
-</details>
+**Where I sit:** deciding whether the diagnosis and fix make sense, then getting the change merged. The scout keeps doing the tedious evidence gathering while that happens.
+
+**Loop or graph?** Loop, with a memory. The next run knows about the last report.
 
 ## Loop 4: error tracking
 
 This one starts with [error tracking](/docs/error-tracking), rather than a scheduled scout. An exception becomes a signal, and the investigation follows it into the code to work out what actually needs changing.
 
-The interesting reports are often the ones where the error message is technically correct but tells you the wrong story.
+The interesting reports are often the ones where the error message is technically correct but tells you the wrong story. An issue-deduplication agent failed because its output was missing a required `duplicates` field. That sounds like an agent forgetting the schema. The actual problem was more interesting.
+
+The outer JSON object had been cut off. Our fallback parser searched for another opening brace and managed to extract a complete *inner* object, like `{"id":"1-3-3"}`. Valid JSON! Just not the response we asked for. The resulting schema error hid the truncation, and retries repeated work without addressing it.
+
+[PR #93477](https://github.com/PostHog/posthog/pull/93477) made the parser recognize truncated output instead of accepting a nested object from an unfinished response, and stopped the affected one-shot review stages from retrying that failure. I approved it, and it merged on September 3. The tests cover the distinction that matters: a complete response with trailing prose is fine; an inner object rescued from a truncated response isn't.
 
 **Where I sit:** reviewing the diagnosis and the regression tests. A confident explanation is nice; a test that reproduces the failure is nicer.
 
 **Loop or graph?** Loop. An agent fails → the failure gets investigated → the agent's own machinery gets fixed.
 
-<details>
-
-<summary>A real one: <strong>valid JSON, completely wrong object</strong></summary>
-
-An issue-deduplication agent failed because its output was missing a required `duplicates` field. That sounds like an agent forgetting the schema. The actual problem was more interesting.
-
-The outer JSON object had been cut off. Our fallback parser searched for another opening brace and managed to extract a complete *inner* object, like `{"id":"1-3-3"}`. Valid JSON! Just not the response we asked for.
-
-The resulting schema error hid the truncation, and retries repeated work without addressing it. [PR #93477](https://github.com/PostHog/posthog/pull/93477) made the parser recognize truncated output instead of accepting a nested object from an unfinished response. It also stopped the affected one-shot review stages from retrying that failure.
-
-I approved the PR, and it merged on September 3. The tests cover the distinction that matters: a complete response with trailing prose is fine; an inner object rescued from a truncated response isn't.
-
-</details>
-
 ## Loop 5: anomaly alert → investigation → fix
 
-[Alerts](/docs/alerts) watch the metrics we care about and can start an investigation when something looks wrong. For our team, that includes the error rate of the MCP tools self-driving uses.
+[Alerts](/docs/alerts) watch the metrics we care about and can start an investigation when something looks wrong. For our team, that includes the error rate of the MCP tools self-driving uses. The [PostHog Slack app](/docs/slack) makes it easy to pick up the investigation where the alert landed: mention `@PostHog` in the thread, ask follow-up questions, and steer the agent toward a fix.
 
-The [PostHog Slack app](/docs/slack) makes it easy to pick up the investigation where the alert landed: mention `@PostHog` in the thread, ask follow-up questions, and steer the agent toward a fix.
-
-This one needed more steering from me than some of the others. The alert found the problem, the agent helped investigate it, and I worked through the fix. Still a very useful loop.
-
-**Where I sit:** asking follow-up questions, checking the diagnosis, and getting the right fix merged.
-
-**Loop or graph?** Loop. Metric moves → alert → investigation → fix → keep watching the metric. A few of those arrows go through me.
-
-<details>
-
-<summary>A real one: <strong>the scheduler and the worker disagreed</strong></summary>
-
-On September 5, our MCP error-rate alert fired at roughly **9.9%**, against a typical baseline of **0.3–1.2%** over the previous two weeks. The investigation narrowed the spike to `scout-project-profile-get`: 88 errors in an hour, spread across about 44 projects.
-
-I replied in the Slack thread: "lets root cause this".
-
-The agent connected the failures to a deployment that gave scouts optional extra write permissions – for example, so a scout could maintain a dashboard. That was the useful lead. Working through it, we pinned down a mismatch between two separately deployed workers: the scheduler now sent a dictionary describing the permissions, but an older sandbox worker still expected the old preset format. It decoded the dictionary incorrectly and minted a token without the scopes the scout needed.
-
-[PR #95623](https://github.com/PostHog/posthog/pull/95623), which I opened with agent assistance, made scouts without extra grants use the compatible preset string again. It merged that afternoon. Scouts opting into extra grants still needed the updated worker.
-
-I also opened [PR #95621](https://github.com/PostHog/posthog/pull/95621) to fix the deployment filter that had skipped the tasks worker when shared OAuth code changed. That follow-up is still open as I write this.
-
-So, no, the alert didn't autonomously fix production while I made coffee. It caught the problem, gave me a starting investigation, and helped me get a compatibility fix merged. I'll take that.
+On September 5, our MCP error-rate alert fired at roughly **9.9%**, against a typical baseline of **0.3–1.2%** over the previous two weeks. The investigation narrowed the spike to `scout-project-profile-get`: 88 errors in an hour, spread across about 44 projects. I replied in the thread: "lets root cause this".
 
 <ProductScreenshot
     imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/slack_anomaly_alert_59fbbfb511.png"
@@ -209,33 +157,25 @@ So, no, the alert didn't autonomously fix production while I made coffee. It cau
 
 *The alert landed in Slack with a chart and an initial investigation. I picked up the thread from there.*
 
-</details>
+The agent connected the failures to a deployment that gave scouts optional extra write permissions – for example, so a scout could maintain a dashboard. That was the useful lead. Working through it, we pinned down a mismatch between two separately deployed workers: the scheduler now sent a dictionary describing the permissions, but an older sandbox worker still expected the old preset format. It decoded the dictionary incorrectly and minted a token without the scopes the scout needed.
+
+[PR #95623](https://github.com/PostHog/posthog/pull/95623), which I opened with agent assistance, made scouts without extra grants use the compatible preset string again. It merged that afternoon. I also opened [PR #95621](https://github.com/PostHog/posthog/pull/95621) to fix the deployment filter that had skipped the tasks worker when shared OAuth code changed. That follow-up is still open as I write this.
+
+So, no, the alert didn't autonomously fix production while I made coffee. This one needed more steering from me than the others: it caught the problem, gave me a starting investigation, and helped me get a compatibility fix merged. I'll take that.
+
+**Where I sit:** asking follow-up questions, checking the diagnosis, and getting the right fix merged.
+
+**Loop or graph?** Loop. Metric moves → alert → investigation → fix → keep watching the metric. A few of those arrows go through me.
 
 ## Loop 6: issues → reports → PRs
 
 This one has changed how I work more than any other.
 
-I spend more time upfront **writing the spec** – a GitHub issue with the intended behavior actually thought through. `signals-scout-self-driving-github-issues` sweeps our team's issues and judges whether they're ready: is the scope clear, is anything blocking them, and is someone already doing the work?
-
-A ready issue becomes an inbox report and can move into implementation. Something that still needs a product decision comes back for human input. The scout also checks for an existing report, because two agents solving the same issue is how you get dueling PRs.
-
-I can have more of these going at once because I don't need to watch each agent work. Writing a good issue and checking the result still take time, but that feels like a much better use of mine.
-
-**Where I sit:** writing the issue and checking the result before merge.
-
-**Loop or graph?** Loop. I give it a clear issue, review what comes back, and use the thing it built.
-
-<details>
-
-<summary>A real one: <strong>renaming a skill should not require a new identity</strong></summary>
+I spend more time upfront **writing the spec** – a GitHub issue with the intended behavior actually thought through. `signals-scout-self-driving-github-issues` sweeps our team's issues and judges whether they're ready: is the scope clear, is anything blocking them, and is someone already doing the work? A ready issue becomes an inbox report and can move into implementation. Something that still needs a product decision comes back for human input. The scout also checks for an existing report, because two agents solving the same issue is how you get dueling PRs.
 
 On September 4, I wrote [issue #94896](https://github.com/PostHog/posthog/issues/94896): we needed to rename skills without losing their history. Duplicating a skill and archiving the old one was a workaround, but it didn't preserve the same skill's versions and ownership.
 
-The issues scout picked it up that morning. [PR #95499](https://github.com/PostHog/posthog/pull/95499) added a Rename dialog in the skill's More menu and a `skill-rename` MCP tool. The existing versions, bundled files, and ownership stay attached to the skill, and the UI follows its new URL.
-
-There are deliberate boundaries: the final implementation blocks renames involving the reserved `signals-scout-` and `review-hog-` prefixes.
-
-I approved it on September 7, and it merged that morning. A feature I wanted, from an issue I wrote, with a concrete result to review at the other end.
+The issues scout picked it up that morning. [PR #95499](https://github.com/PostHog/posthog/pull/95499) added a Rename dialog in the skill's More menu and a `skill-rename` MCP tool. The existing versions, bundled files, and ownership stay attached to the skill, and the UI follows its new URL. It also set deliberate boundaries: renames involving the reserved `signals-scout-` and `review-hog-` prefixes are blocked.
 
 <ProductScreenshot
     imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/skill_rename_9db6538850.png"
@@ -246,33 +186,23 @@ I approved it on September 7, and it merged that morning. A feature I wanted, fr
 
 *The result: a Rename dialog that keeps the skill’s history and owners. Screenshot from the merged PR’s Storybook example.*
 
-</details>
+I approved it on September 7, and it merged that morning. A feature I wanted, from an issue I wrote, with a concrete result to review at the other end.
+
+I can have more of these going at once because I don't need to watch each agent work. Writing a good issue and checking the result still take time, but that feels like a much better use of mine.
+
+**Where I sit:** writing the issue and checking the result before merge.
+
+**Loop or graph?** Loop. I give it a clear issue, review what comes back, and use the thing it built.
 
 ## Loop 7: Replay Vision
 
 This one starts with a person using the product, without having to tell us what went wrong.
 
-[Replay Vision](/docs/replay-vision) watches session recordings – the actual sped-up video, alongside the session's events – and turns what it sees into structured observations. We run a monitor scanner called "Desktop onboarding friction" over recordings of [PostHog Desktop](/desktop). Its prompt is roughly: *watch for people getting visibly stuck*.
+[Replay Vision](/docs/replay-vision) watches session recordings – the actual sped-up video, alongside the session's events – and turns what it sees into structured observations. We run a monitor scanner called "Desktop onboarding friction" over recordings of [PostHog Desktop](/desktop). Its prompt is roughly: *watch for people getting visibly stuck*. An observation with a real problem in it becomes a signal, and from there it's the same pipeline as the other examples: group related findings, investigate, write a report, and propose a fix.
 
-An observation with a real problem in it becomes a signal. From there it's the same pipeline as the other examples: group related findings, investigate, write a report, and propose a fix.
+One recording showed someone hitting a provider error in PostHog Desktop and then failing to deliver a follow-up message. The report connected the visible failures and sent them for investigation.
 
-**Where I sit:** I read this report after the fix had merged. Another engineer reviewed the implementation. I'm including it because it shows a new way of finding problems that our other telemetry can miss.
-
-**Loop or graph?** Loop. Product usage → recording → observation → report → PR → back to watching the product get used.
-
-<details>
-
-<summary>A real one: <strong>the failed message in the recording</strong></summary>
-
-A recording showed someone hitting a provider error in PostHog Desktop and then failing to deliver a follow-up message. The report connected the visible failures and sent them for investigation.
-
-The research found a gap in the error handling. We already recognized one provider error, `API Error: Content block not found`, but another wording – `API Error: Content block is not a thinking block` – skipped the retry handling and exposed raw provider text.
-
-There was telemetry for related task failures, but the report identified the follow-up rejection itself as a gap: it left the run alive and didn't produce its own failure event. The recording showed the user-facing problem that the event stream alone missed.
-
-[PR #93181](https://github.com/PostHog/posthog/pull/93181) matched the content-block error family instead of adding another literal string. It made the follow-up eligible for retry handling, replaced the raw provider text with readable guidance, and kept the desktop session alive for this rejection. It merged on September 2.
-
-The PR explicitly leaves open whether a retry clears the provider rejection in production. The concrete improvement is how we preserve and handle the failed interaction. The exciting part is how we found it: someone got stuck, and the recording became a starting point for a fix.
+The research found a gap in the error handling. We already recognized one provider error, `API Error: Content block not found`, but another wording – `API Error: Content block is not a thinking block` – skipped the retry handling and exposed raw provider text. There was telemetry for related task failures, but the follow-up rejection itself left the run alive and didn't produce its own failure event. The recording showed the user-facing problem that the event stream alone missed.
 
 <ProductScreenshot
     imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/replay_vision_report_29736e3d42.png"
@@ -283,7 +213,11 @@ The PR explicitly leaves open whether a retry clears the provider rejection in p
 
 *The report as generated, with timestamped Replay Vision observations beside the diagnosis. The implementation later corrected “Context block” to “Content block.”*
 
-</details>
+[PR #93181](https://github.com/PostHog/posthog/pull/93181) matched the content-block error family instead of adding another literal string. It made the follow-up eligible for retry handling, replaced the raw provider text with readable guidance, and kept the desktop session alive for this rejection. It merged on September 2. The PR explicitly leaves open whether a retry clears the provider rejection in production, but the exciting part is how we found it: someone got stuck, and the recording became the starting point for a fix.
+
+**Where I sit:** I read this report after the fix had merged. Another engineer reviewed the implementation. I'm including it because it shows a new way of finding problems that our other telemetry can miss.
+
+**Loop or graph?** Loop. Product usage → recording → observation → report → PR → back to watching the product get used.
 
 ## A few smaller ones
 
