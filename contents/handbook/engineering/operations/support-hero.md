@@ -35,6 +35,7 @@ There are three sources of tickets:
 1. In-app bug reports/feedback/support tickets sent from the [Support panel](https://us.posthog.com/home#panel=support).
 1. Slack or MS Teams threads that have been raised via @SupportHog in [customer support channels](/handbook/growth/sales/slack-channels).
 1. Reports in the `#papercuts` Slack channel that relate to your team's area.
+1. Security findings in code your team owns, tracked in <PrivateLink url="https://security.posthog.dev">security.posthog.dev</PrivateLink>.
 
 ### Answering tickets
 
@@ -74,6 +75,14 @@ Check the `#papercuts` Slack channel during your rotation and pick up any report
 - **React with ✅** once you've shipped a fix or improvement.
 
 Papercuts are also routed to the Signals inbox, so before you start work, check whether an auto-generated PR is already waiting – it may save you most of the effort.
+
+### Security findings
+
+Vulnerabilities in code your team owns are also yours to fix, and the support hero is the person who picks them up alongside the normal support workload. Some findings are critical, so give them the same priority as a customer ticket.
+
+Findings for your team are collected in <PrivateLink url="https://security.posthog.dev">security.posthog.dev</PrivateLink>. Each team also gets a monthly post in its Slack channel that lists the vulnerabilities found in the code it owns.
+
+Work through the findings for your team during your rotation. If you cannot finish one, hand it over to the next support hero. If you are not sure how serious a finding is, or how to fix it, ask in `#team-security`.
 
 ### Responding to external PRs
 

@@ -104,6 +104,12 @@ Security vulnerabilities and other security related findings can be reported via
 
 For information about current and past security advisories and CVEs, see our [advisories & CVEs page](/handbook/company/security-advisories).
 
+## Fixing vulnerabilities in our own code
+
+Security findings in our own code are collected in <PrivateLink url="https://security.posthog.dev">security.posthog.dev</PrivateLink>. Each team also gets a monthly post in its Slack channel that lists the vulnerabilities found in the code it owns.
+
+Each team fixes the findings for the code it owns. The team's [support hero](/handbook/engineering/operations/support-hero#security-findings) picks these up alongside the normal support workload.
+
 ## Reporting phishing
 
 If you receive a phishing email/text/whatsapp, it's useful to report it to the security team so that they can make other employees aware. Take a screenshot and post it in `#phishing-attempts`. You may be asked to forward the email to [security-internal@posthog.com](mailto:security-internal@posthog.com) for further inspection.
