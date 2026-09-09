@@ -70,7 +70,7 @@ const Discounts = () => (
 interface CalculatorProps {
     /**
      * Drops the "Pricing calculator" heading, for callers that already introduce the
-     * calculator themselves (see Redesign/CalculatorReveal).
+     * calculator themselves (see Redesign/CalculatorSection).
      */
     hideHeader?: boolean
     /** Anchor id. Pass `''` when an outer element already owns `#calculator`. */
