@@ -13,6 +13,7 @@ Our Sales and Customer Success teams look after customers paying $20k a year or 
  - Technical Account Managers focused on expansion from existing customers and closing new business from product-led leads.
  - Customer Success Managers focused on the retention of customers using all of our products already.
  - Onboarding Specialists focused on ensuring newer and smaller customers are set up for success with PostHog.
+ - [Forward Deployed Engineers](/teams/forward-deployed-engineering) focused on getting embedded with customers to fill the gap between what PostHog does and what the customer needs.
 
 We've proven that [the way we do sales](/sales) works at a small scale, we are now growing the team in line with increased top-of-funnel growth for PostHog. Please check our [careers page](/careers) for our open roles. 
 
