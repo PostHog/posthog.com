@@ -106,9 +106,9 @@ For information about current and past security advisories and CVEs, see our [ad
 
 ## Fixing vulnerabilities in our own code
 
-We import security findings in our own code from the AI pentesting services we use, currently Veria Labs and Parameter. Findings are triaged automatically, and true positives are forwarded to the product team that owns the code. They are collected in <PrivateLink url="https://security.posthog.dev">security.posthog.dev</PrivateLink>, and each team gets a weekly post in its Slack channel that lists the vulnerabilities found in the code it owns.
+We import security findings in our own code from the AI pentesting services we use, currently Veria Labs and Parameter. Findings are triaged automatically, and true positives are forwarded to the product team that owns the code. They are collected in SecurityHog, at <PrivateLink url="https://security.posthog.dev">security.posthog.dev</PrivateLink>, and each team gets a weekly post in its Slack channel that lists the vulnerabilities found in the code it owns.
 
-Each team fixes the findings for the code it owns. The team's [support hero](/handbook/engineering/operations/support-hero#security-findings) picks these up alongside the normal support workload.
+Each team fixes the findings for the code it owns. The team's [support hero](/handbook/engineering/operations/support-hero#security-findings) picks these up alongside the normal support workload. Critical and high severity findings must be fixed as soon as possible.
 
 ## Reporting phishing
 
