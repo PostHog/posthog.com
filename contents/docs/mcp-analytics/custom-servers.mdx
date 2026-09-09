@@ -99,7 +99,7 @@ Because there's no wrapped server, `PostHogMCP` does **not** manage these for yo
 - **Identity caching / `$identify` dedupe** — pass `distinctId` (and optional `setProperties`) on each call.
 - **Automatic intent and missing-capability handling** — use `prepareToolList()` and `prepareToolCall()`, then pass their output to the matching capture method.
 - **Conversation IDs** — pass your own stable `sessionId`. The custom dispatcher helpers don't inject or echo `conversation_id`.
-- **Model capture** — `captureModel` and the injected `llm_model` argument are currently available only through `instrument()` on a supported TypeScript server wrapper. Don't add `$mcp_llm_model` manually.
+- **Model capture** — `captureModel` and the injected `llm_model` argument are currently available only through `instrument()` on a supported TypeScript server wrapper (and, experimentally, `capture_model:` on Ruby). Don't add `$mcp_llm_model` manually.
 
 The `2026-07-28` revision has no initialize handshake or protocol session. Don't fabricate `$mcp_initialize`. Capture each request's `protocolVersion`, and pass an authenticated user id or your own stable session id when you need correlation across requests.
 
@@ -222,3 +222,70 @@ posthog.capture_tool_call(
 ```
 
 The token is unsigned and carries only what the client volunteered at `initialize` — treat `$session_id` and `$mcp_client_*` as analytics labels, not authentication.
+
+## Ruby
+
+<CalloutBox icon="IconFlask" title="Ruby SDK is experimental" type="caution">
+
+`PostHog::MCP::Client` ships in `posthog-ruby` and is **experimental**: method signatures may change in a minor release. It needs nothing beyond `posthog-ruby` — no `mcp` gem.
+
+</CalloutBox>
+
+The Ruby SDK ships the same custom-dispatcher path as `PostHog::MCP::Client`, a subclass of the [`posthog-ruby`](/docs/libraries/ruby) client. Method names are snake_case and arguments are keywords:
+
+```ruby
+require "posthog/mcp"
+
+posthog = PostHog::MCP::Client.new(api_key: "phc_your_project_api_key", host: "https://us.i.posthog.com")
+
+# Advertise your tools with the injected `context` intent argument (and, optionally,
+# the get_more_tools virtual tool). Tools are `tools/list` entries (Hashes).
+tools = posthog.prepare_tool_list(my_tools, report_missing: true)
+
+def handle_tools_call(request, name, arguments)
+  # Pull the agent's intent off the call and strip the injected `context`:
+  prepared = posthog.prepare_tool_call(name, arguments)
+
+  # Pass these on every capture — see "Attributing the caller" above:
+  common = {
+    distinct_id: user_id,
+    session_id: mcp_session_id,
+    client_user_agent: request.get_header("HTTP_USER_AGENT"),
+    vendor_client: request.get_header("HTTP_X_ANTHROPIC_CLIENT"),
+    groups: { organization: org_id }
+  }
+
+  if prepared.is_missing_capability
+    posthog.capture_missing_capability(context: prepared.intent, **common)
+    return PostHog::MCP.get_more_tools_result
+  end
+
+  started = Process.clock_gettime(Process::CLOCK_MONOTONIC)
+  begin
+    result = run_tool(name, prepared.args)
+  rescue StandardError => e
+    posthog.capture_tool_call(
+      name,
+      parameters: prepared.args,
+      duration_ms: (Process.clock_gettime(Process::CLOCK_MONOTONIC) - started) * 1000,
+      is_error: true,
+      error: e, # → $mcp_error_message, $mcp_error_type, and the $exception sibling
+      **common
+    )
+    raise
+  end
+
+  posthog.capture_tool_call(
+    name,
+    intent: prepared.intent,
+    intent_source: prepared.intent_source,
+    parameters: prepared.args,
+    response: result,
+    duration_ms: (Process.clock_gettime(Process::CLOCK_MONOTONIC) - started) * 1000,
+    **common
+  )
+  result
+end
+```
+
+`PostHog::MCP.encode_session_id` and `PostHog::MCP.decode_session_id` implement the `Mcp-Session-Id` token for your HTTP layer, or add `PostHog::MCP::RackMiddleware` to a Rack stack to mint and decode it for you. `PostHog::MCP::Client` is a `posthog-ruby` client, so flush it yourself with `posthog.flush` or `posthog.shutdown`.

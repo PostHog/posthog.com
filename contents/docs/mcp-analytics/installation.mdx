@@ -13,8 +13,8 @@ import WizardCommand from 'components/WizardCommand'
 
 ## Requirements
 
-- Node.js 20.20+ or 22.22+ (TypeScript/JavaScript), or Python 3.10+ — see [Python](#python) below
-- An MCP server built on either TypeScript SDK major — `@modelcontextprotocol/sdk` (v1) or `@modelcontextprotocol/{core,server,client}` (v2) — or either official Python MCP SDK major (`mcp>=1.26,<3`). jlowin's standalone `fastmcp` package is also supported. See [MCP SDK v2](/docs/mcp-analytics/sdk-v2). (Running a custom dispatcher with no server object to wrap? See [Custom servers](/docs/mcp-analytics/custom-servers).)
+- Node.js 20.20+ or 22.22+ (TypeScript/JavaScript), Python 3.10+ — see [Python](#python) below — or Ruby 3.0+ — see [Ruby](#ruby) below (experimental)
+- An MCP server built on either TypeScript SDK major — `@modelcontextprotocol/sdk` (v1) or `@modelcontextprotocol/{core,server,client}` (v2) — either official Python MCP SDK major (`mcp>=1.26,<3`), or the official Ruby MCP SDK (`mcp` gem `>= 1.4`, experimental). jlowin's standalone `fastmcp` package is also supported. See [MCP SDK v2](/docs/mcp-analytics/sdk-v2). (Running a custom dispatcher with no server object to wrap? See [Custom servers](/docs/mcp-analytics/custom-servers).)
 - A PostHog [project token](/docs/getting-started/project-token) (`phc_…`)
 
 ## AI wizard
@@ -379,6 +379,108 @@ It supports both official `mcp` majors and the `2026-07-28` protocol revision. S
 Self-reported model capture is currently TypeScript-only. Python doesn't inject `llm_model` or emit `$mcp_llm_model`.
 
 </CalloutBox>
+
+## Ruby
+
+<CalloutBox icon="IconFlask" title="Ruby SDK is experimental" type="caution">
+
+`PostHog::MCP` is **experimental**. Its API, its options, and the `$mcp_*` events it captures may change in a minor `posthog-ruby` release, and the gem logs a warning when you require it. Try it and tell us what breaks, but don't build production reporting on it yet.
+
+</CalloutBox>
+
+A Ruby SDK ships inside the [`posthog-ruby`](/docs/libraries/ruby) gem, so there's nothing extra to install:
+
+```ruby
+gem "posthog-ruby"
+```
+
+`PostHog::MCP.instrument` needs the official [Ruby MCP SDK](https://github.com/modelcontextprotocol/ruby-sdk) at runtime, but you already have it — you built your server with the `mcp` gem (`>= 1.4`) — so it's treated as a peer dependency rather than bundled. (`PostHog::MCP::Client` for custom dispatchers needs nothing beyond `posthog-ruby`.)
+
+`PostHog::MCP.instrument(server, client, **options)` wraps an `MCP::Server`, whether you register tools as `MCP::Tool` classes or with `define_tool`, and works over the stdio and Streamable HTTP transports:
+
+```ruby
+require "posthog/mcp"
+
+posthog = PostHog::Client.new(
+  api_key: "phc_your_project_api_key",
+  host: "https://us.i.posthog.com" # or https://eu.i.posthog.com
+)
+server = MCP::Server.new(name: "my-server", version: "1.0.0", tools: [SearchEvents])
+
+# register more tools, prompts, and resources as usual...
+
+analytics = PostHog::MCP.instrument(server, posthog)
+```
+
+If your app already uses [`posthog-rails`](/docs/libraries/ruby) and calls `PostHog.init`, leave the client out and the SDK picks up `PostHog.client` for you:
+
+```ruby
+PostHog::MCP.instrument(server)
+```
+
+Options are keyword arguments, the snake_case equivalent of the TypeScript options:
+
+```ruby
+PostHog::MCP.instrument(
+  server, posthog,
+  context: true,                 # inject the `context` intent argument (default)
+  report_missing: true,          # advertise the get_more_tools virtual tool
+  enable_conversation_id: true,  # stitch calls across reconnects and pods
+  identify: ->(request, extra) { { distinct_id: "user_123", properties: { plan: "pro" } } }
+)
+```
+
+| Option | Type | Default | What it does |
+|---|---|---|---|
+| `context` | `Boolean \| { description: }` | `true` | Inject the `context` intent argument into every tool. |
+| `report_missing` | `Boolean` | `false` | Advertise the `get_more_tools` virtual tool. |
+| `missing_capability_tool_name` | `String` | `"get_more_tools"` | Rename the virtual tool registered by `report_missing`. |
+| `enable_conversation_id` | `Boolean` | `false` | Inject an optional `conversation_id` argument to stitch calls. |
+| `enable_exception_autocapture` | `Boolean` | `true` | Emit a `$exception` sibling on failed calls. |
+| `capture_model` | `Boolean \| { description: }` | `false` | Inject `llm_model` and capture `$mcp_llm_model`. |
+| `identify` | `(request, extra) -> Hash \| nil`, or a static Hash | — | Map a request to one of your users (`distinct_id:`, `properties:`, `groups:`). |
+| `intent_fallback` | `(request, extra) -> String \| nil` | — | Provide intent when the agent didn't pass `context`. |
+| `before_send` | `(payload) -> payload \| nil` | — | Inspect, modify, or drop each event before send. |
+| `event_properties` | `(request, extra) -> Hash` | — | Properties merged onto every event. |
+| `logger` | `->(message) { ... }` | no-op | STDIO-safe log sink. Never writes to stdout. |
+
+The injected arguments are stripped before your tool's `call` receives its keywords, so a tool declared as `def self.call(query:, server_context:)` keeps working. A tool that declares `context` in its own `input_schema` keeps it.
+
+Ruby also captures `$mcp_prompt_get`, `$mcp_prompts_list`, `$mcp_resource_read`, and `$mcp_resources_list`, which the other SDKs reserve but don't emit yet.
+
+### `$lib` on Ruby events
+
+MCP events from Ruby report `$lib: "posthog-ruby-mcp"`. Unlike the Node and Python SDKs, this is set per event: the client you pass in keeps its own `$lib` (`posthog-ruby` or `posthog-rails`) for everything else it sends, so instrumenting an MCP server inside a Rails app doesn't relabel the app's other events.
+
+### Stateless and multi-pod servers
+
+Same problem as [above](#stateless-and-multi-pod-servers). Ruby fixes it with the same self-encoded `Mcp-Session-Id` token, wired into `MCP::Server::Transports::StreamableHTTPTransport` automatically: a server running with `stateless: true` mints the token at `initialize`, clients replay it, and any pod recovers `$session_id` and the client identity from the header. There's **no `enable_json_response` caveat** — the Ruby transport always answers stateless requests with JSON.
+
+When you build the Rack app yourself, add the middleware once. The decoded token is exposed as `env["posthog_mcp.session"]`:
+
+```ruby
+use PostHog::MCP::RackMiddleware
+```
+
+Stateful HTTP servers need nothing: the transport's own session id is hashed deterministically, so a session survives restarts. [Conversation IDs](/docs/mcp-analytics/conversation-id) work too and need no middleware at all.
+
+### Flushing on exit
+
+Captured events go straight into the `posthog-ruby` client's queue, so there's nothing to drain besides the client itself. Call `posthog.flush` or `posthog.shutdown` when your process stops:
+
+```ruby
+at_exit { posthog.shutdown }
+```
+
+### Logging on stdio servers
+
+A stdio MCP server owns `$stdout` for the protocol. The integration's own messages go only to the `logger:` you pass (nowhere by default); the experimental notice and misconfiguration warnings go to stderr. Point the core SDK's logger away from stdout too:
+
+```ruby
+PostHog::Logging.logger = Logger.new($stderr)
+```
+
+No server object to wrap? Use `PostHog::MCP::Client`, a `PostHog::Client` subclass with `capture_tool_call`, `capture_initialize`, `capture_tools_list`, `capture_missing_capability`, `prepare_tool_list`, and `prepare_tool_call` — the Ruby equivalent of [Custom servers](/docs/mcp-analytics/custom-servers#ruby).
 
 ## Configuration
 
