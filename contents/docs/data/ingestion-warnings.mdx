@@ -46,13 +46,7 @@ List of ingestion warnings:
 Validation warnings, raised when PostHog rejects a request as it arrives:
 
 - [Discarded event with no distinct ID](#discarded-event-with-no-distinct-id)
-- [Discarded event whose distinct ID exceeds the size limit](#discarded-event-whose-distinct-id-exceeds-the-size-limit)
 - [Discarded event with no event name](#discarded-event-with-no-event-name)
-- [Discarded event whose name exceeds the length limit](#discarded-event-whose-name-exceeds-the-length-limit)
-- [Discarded event with an invalid timestamp](#discarded-event-with-an-invalid-timestamp)
-- [Discarded event with malformed properties](#discarded-event-with-malformed-properties)
-- [Discarded event with invalid capture options](#discarded-event-with-invalid-capture-options)
-- [Rejected batches](#rejected-batches)
 - [Discarded session replay batches](#discarded-session-replay-batches)
 - [Discarded AI events](#discarded-ai-events)
 
@@ -165,45 +159,9 @@ posthog-js blocks the obvious mistakes for you. `identify()` refuses `null`, `un
 
 Check where the ID comes from: your `bootstrap` value, or wherever you call `identify()`. Pass `bootstrap` only when you have an ID. An omitted `distinctID` or an empty string is safe — posthog-js generates an anonymous ID instead.
 
-### Discarded event whose distinct ID exceeds the size limit
-
-The `distinct_id` was longer than 200 characters. An ID this long is usually something else — a token, a session blob, or a serialized object — so update the `capture` or `identify` call to send a real user ID.
-
-Some capture endpoints shorten the ID and ingest the event instead. See [Ingested event after shortening its distinct ID](#ingested-event-after-shortening-its-distinct-id-to-the-200-character-limit).
-
 ### Discarded event with no event name
 
 The `event` field was missing or empty, so there was no name to record the event under. The usual cause is an empty variable at the `capture()` call site.
-
-### Discarded event whose name exceeds the length limit
-
-The event name was longer than 200 characters. Use short, stable identifiers like `user_signed_up`, and move any variable data (an ID, a URL, a message) into a property. This also keeps your event list easy to browse.
-
-### Discarded event with an invalid timestamp
-
-The event's `timestamp` couldn't be parsed. Send timestamps in [ISO 8601](/docs/data/timestamps) format.
-
-Some endpoints keep the event and substitute the server's time instead — see [Ignored an invalid timestamp](#ignored-an-invalid-timestamp-event-was-still-ingested). Which applies depends on the endpoint your SDK uses.
-
-### Discarded event with malformed properties
-
-The `properties` field wasn't a JSON object — commonly an array or a string. This most often means the properties were JSON-encoded twice, so check for a stray `JSON.stringify()` before the value reaches `capture()`.
-
-### Discarded event with invalid capture options
-
-The request's capture options were malformed. SDKs set these for you, so this points to a hand-built HTTP request — check it against the [capture API reference](/docs/api/capture).
-
-### Rejected batches
-
-These warnings apply to a whole request rather than a single event, so every event in the request is dropped together.
-
-| Warning | Cause |
-| --- | --- |
-| Rejected a request containing no events | The request body contained an empty batch, typically from a client that flushes on a timer with nothing queued. |
-| Rejected a batch with invalid metadata | The batch's envelope (the fields wrapping the events) was malformed. |
-| Rejected a batch containing an event with no UUID | An event in the batch was missing its UUID. |
-| Rejected a batch containing an event with an invalid UUID | An event's UUID wasn't valid. PostHog generates these for you — see [Refused to process event with invalid UUID](#refused-to-process-event-with-invalid-uuid). |
-| Rejected a batch containing duplicate event UUIDs | Two events in the batch shared a UUID, usually from a retry or queue flush re-sending events. |
 
 ### Discarded session replay batches
 
