@@ -128,25 +128,31 @@ The copy is intentionally limited to four commitments: no loss leaders, cheapest
 
 **A copy edit here changes both routes**, which is intentional — the note is a company position, not a design.
 
-### `CalculatorReveal`
+### `CalculatorSection`
 
-The calculator, collapsed behind a link. This treatment beat an always-visible calculator section in the redesign experiment. One sentence — `Most companies stay on the free tier. Calculate what you'd pay past it` — where the second half is a text link that expands the estimator in place and swaps to `Hide the calculator` once open. The argument: an estimator muddies this page's frame, turning "this is free for you" into "work out your bill," which is the wrong question for the ~97% who never pay. So it has no card, no fill, no border, and no heading, and it sits as a footnote *inside* the `more-options` section rather than as a section of its own. It owns `#calculator`, and the calculator only mounts once opened, so it costs everyone else nothing.
+The calculator as a plain section, always visible, above the philosophy note. The page owns the heading and the `#calculator` anchor; this component only neutralizes the calculator's own layout.
 
-It's deliberately *not* built on `RadixUI/Accordion`, whose `AccordionContent` hardcodes `overflow-hidden` — that would break the calculator's `sticky` sidebar and clip its tooltips. Three details are load-bearing:
+**It renders `Test/Calculator` with `hideHeader` and `id=""`.** `hideHeader` drops the calculator's own `<h2>Pricing calculator</h2>`, whose bordered, section-weight styling doesn't match this page; `id=""` stops `#calculator` existing twice in the DOM, since the page's `SectionLayout` owns that anchor.
 
-- **The panel animates `height: 0 → auto` with `initial={false}`** (framer-motion, same approach as `Home/Accordion`). `initial={false}` is what makes a `?calculator` deep link render open with no animation instead of unfurling on load. `useReducedMotion` drops the duration to zero.
-- **`overflow` returns to `visible` once the open animation finishes**, because a permanent `overflow-hidden` breaks the sticky sidebar and clips tooltips. The same `settled` flag applies `invisible` when fully collapsed, keeping the mounted calculator out of the tab order.
-- **The calculator stays mounted after the first open**, so volumes someone dialled in survive a hide/show.
-
-Expanding fires `pricing_calculator_expanded`. For engagement, prefer `pricing_calculator_interacted`, which fires on the controls themselves — it also counts people who arrive with `?calculator` and so never click the link.
+Its `SectionLayout` margins and `@5xl:px-4` still need neutralizing, and that's done locally with `[&>section]:my-0 [&>section]:px-0` rather than a third prop. A `className` prop wouldn't work: `SectionLayout` appends caller classes after its own, and `my-0` loses to `mb-12` in Tailwind's cascade no matter the order in the attribute, so it takes a child selector to win on specificity.
 
 **Nothing earlier in the page points at it.** `PricingJourney` step 2 used to link "at usage-based rates" down to `#calculator`; that link is gone and the detail is plain text like its three siblings. Worth keeping that way — the page has one signup CTA, and internal jump links compete with it.
 
-`?calculator` in the URL opens the calculator and scrolls to it, so an estimate can be shared as a link.
+`?calculator` in the URL scrolls to it, so an estimate can be shared as a link.
 
-**It renders `Test/Calculator` with `hideHeader` and `id=""`.** `hideHeader` drops the calculator's own `<h2>Pricing calculator</h2>`, whose bordered, section-weight styling doesn't match this page; `id=""` stops `#calculator` existing twice in the DOM, since the reveal wrapper owns that anchor.
+#### Telemetry, and the break at 2026-09-08
 
-Its `SectionLayout` margins and `@5xl:px-4` still need neutralizing, and that's done locally with `[&>section]:my-0 [&>section]:px-0` rather than a third prop. A `className` prop wouldn't work: `SectionLayout` appends caller classes after its own, and `my-0` loses to `mb-12` in Tailwind's cascade no matter the order in the attribute, so it takes a child selector to win on specificity.
+Two events, and the pair only makes sense together:
+
+| Event | Fires | Means |
+| --- | --- | --- |
+| `pricing_calculator_viewed` | `CalculatorSection` scrolls into view, once per page load | Saw the calculator |
+| `pricing_calculator_interacted` | `PricingCalculator/Tabbed` controls, once per mount | Touched the calculator |
+
+`pricing_calculator_viewed` is the denominator, `pricing_calculator_interacted` the numerator, so engagement is a rate rather than a raw count that tracks `/pricing` traffic.
+
+**`pricing_calculator_viewed` is not a continuation of `pricing_calculator_expanded`.** The predecessor lived on a reveal link that this section replaced, so it counted people who *asked* for the calculator. This one counts people the page scrolled past it, which is a much larger group. `pricing_calculator_interacted` changed meaning on the same date for the same reason: an always-visible widget is touched by people who would never have opened a collapsed one. **Do not compare either number across 2026-09-08.** The reveal treatment, and its event, are in the git history.
+
 
 ### `MoreOptions`
 
@@ -171,7 +177,7 @@ These replace the cut Enterprise plan column. Styled as low-key cards rather tha
 
 The notch needs room above the panel or `overflow-hidden` clips it — that's what the panel wrapper's `mt-4` buys, and it happens to match the grid gap.
 
-Same expand mechanics as `CalculatorReveal`: a Framer Motion `height: 0 ↔ auto` transition (not `RadixUI/Accordion`), content mounted only after the first open, and `invisible` once collapsed so its links leave the tab order.
+The panel uses a Framer Motion `height: 0 ↔ auto` transition (not `RadixUI/Accordion`, whose `AccordionContent` hardcodes `overflow-hidden`), mounts its content only after the first open, and goes `invisible` once collapsed so its links leave the tab order.
 
 **The CTA is still a `<Link to="/platform-packages">`** whose `onClick` calls `preventDefault`. Gatsby's `Link` skips navigating when the event is already default-prevented, so that's the whole opt-out — and because the `to` is real, cmd-click, middle-click, and the "Open in new PostHog window" context menu still open the page. It carries `aria-expanded` and `aria-controls` for the panel.
 
