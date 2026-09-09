@@ -90,23 +90,11 @@ I approved at 14:22 and hit `/trunk merge` at 17:27. It merged at 18:02, and the
 
 ## Loop 2: the team Slack channel
 
-Some of our best bug reports start as someone saying "is this happening to anyone else?" in Slack.
+Some of our best bug reports start as someone saying "is this happening to anyone else?" in Slack. It's the stuff that's annoying enough to mention but hasn't quite made it onto anyone's to-do list.
 
-`signals-scout-team-self-driving` watches our team's channel for bug reports, feature ideas, and customer feedback buried in threads. It groups the conversation by thread, skips the banter and memes, and brings useful findings into the inbox for investigation.
+`signals-scout-team-self-driving` watches our team's channel for exactly that: bug reports, feature ideas, and customer feedback buried in threads. It groups the conversation by thread, skips the banter and memes, and brings the useful findings into the inbox.
 
-This is particularly useful for the stuff that is annoying enough to mention but hasn't quite made it onto someone's to-do list. Often this is exactly the messy complex stuff that still needs someone from the team to steer a bit to get over the line.
-
-**Where I sit:** reproducing problems, reviewing the reports, and bringing in the right people to review the fix. Sometimes the investigation starts right in the Slack thread.
-
-**Loop or graph?** Loop. Team notices something → scout picks it up → investigation → PR → back to using the product.
-
-<details>
-
-<summary>A real one: <strong>you shared a task, but I can't open it</strong></summary>
-
-On August 25, Dylan shared a task in our team channel while asking about a GitHub integration problem. I clicked the link and got "Task not found." I'd been hitting this too, so I asked `@PostHog` why I couldn't open it.
-
-The Slack agent found a second bug in the middle of discussing the first. The task existed, and its run was readable, but the task page used a different visibility check. It rejected the request before the page could load. Someone sharing a perfectly real task made it look like it had been deleted.
+On August 25, Dylan shared a task in our channel while asking about a GitHub integration problem. I clicked the link and got "Task not found." I'd been hitting this too, so I asked `@PostHog` in the thread why I couldn't open it.
 
 <ProductScreenshot
     imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/slack_shared_task_d6ace51111.png"
@@ -115,13 +103,15 @@ The Slack agent found a second bug in the middle of discussing the first. The ta
     classes="rounded"
 />
 
-*The original Slack exchange: a shared link, a second bug, and the start of an investigation.*
+*A shared link, a second bug, and the start of an investigation.*
 
-The team scout picked up the conversation and authored an inbox report. The pipeline opened [PR #88912](https://github.com/PostHog/posthog/pull/88912), which made the task page use the same shared-thread visibility rule as the run. Tests checked that teammates could open shared tasks while direct-message tasks stayed private. On a later pass, the scout added corroboration to the same report and noted that the PR was already in flight.
+The Slack agent found a second bug in the middle of discussing the first. The task existed, and its run was readable, but the task page used a different visibility check and rejected the request before the page could load. Sharing a perfectly real task made it look deleted.
 
-I added Vojta and Georgiy as reviewers on September 4. Vojta approved the PR, and it merged that day. The Slack agent did the diagnosis; the scout carried the finding into tracked work. A bug we stumbled over while talking about another bug made it through to a fix.
+The scout picked up the thread and authored an inbox report. The pipeline opened [PR #88912](https://github.com/PostHog/posthog/pull/88912), which made the task page use the same shared-thread visibility rule as the run, with tests that teammates could open shared tasks while direct-message tasks stayed private. I added Vojta and Georgiy as reviewers, Vojta approved, and it merged on September 4. A bug we stumbled over while talking about another bug made it through to a fix.
 
-</details>
+**Where I sit:** reproducing problems, reviewing the reports, and bringing in the right people to review the fix. Sometimes, like here, the investigation starts right in the Slack thread.
+
+**Loop or graph?** Loop. Team notices something → scout picks it up → investigation → PR → back to using the product.
 
 ## Loop 3: logs
 
