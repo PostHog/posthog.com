@@ -8,7 +8,7 @@ Some accounts have both a CSM and a TAM. Why we cover accounts that way is in [a
 
 Both roles have a real relationship with the customer. Both are in the Slack channel. Both know what's happening on the account. The difference is _focus_, not ownership. The customer should never have to figure out who to contact: they reach out to either person, and PostHog sorts it out internally.
 
-Everything below is a habit that stops two people being worse than one, so scale it to the account. A strategic account (our [Top 40](/handbook/growth/sales/account-allocation#top-40-account-management) are the clearest example) with several teams in play and a renewal coming justifies real structure. A smaller growth account with one champion and a single use case usually doesn't, so treat this as a starting point to adapt rather than a checklist to comply with.
+Everything below is a habit for getting the most out of having two people on an account, each playing to their strengths, so scale it to the account. A strategic account (our [Top 40](/handbook/growth/sales/account-allocation#top-40-account-management) are the clearest example) with several teams in play and a renewal coming justifies real structure. A smaller growth account with one champion and a single use case usually doesn't, so treat this as a starting point to adapt rather than a checklist to comply with.
 
 ## What each role focuses on
 
