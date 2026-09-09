@@ -181,7 +181,7 @@ Once traffic reaches PostHog, it is ingested into the region you selected (EU or
 
 ### Does the managed reverse proxy forward cookies to PostHog?
 
-The managed reverse proxy does not remove the `Cookie` header. It forwards your request headers to our ingestion service.
+Do not rely on the proxy to remove the `Cookie` header. Treat every cookie that is in scope for your proxy subdomain as forwarded to our ingestion service.
 
 Ingestion authenticates on the project token in the request body, not on cookies. It does not read the `Cookie` header, and it does not add the header to your event data.
 
