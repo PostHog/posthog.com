@@ -179,6 +179,24 @@ That said, the managed reverse proxy is designed so that **no request content is
 
 Once traffic reaches PostHog, it is ingested into the region you selected (EU or US Cloud). If strict EU-only termination at the edge is a hard requirement for your compliance posture, we recommend setting up a [self-hosted proxy](/docs/advanced/proxy) on infrastructure you control instead.
 
+### Does the managed reverse proxy forward cookies to PostHog?
+
+The managed reverse proxy does not remove the `Cookie` header. It forwards your request headers to our ingestion service.
+
+Ingestion authenticates on the project token in the request body, not on cookies. It does not read the `Cookie` header, and it does not add the header to your event data.
+
+Your proxy runs on a subdomain of a domain you own. A cookie that you scope to your apex domain, such as `Domain=example.com`, is therefore in scope for that subdomain. In practice, the browser attaches these cookies to one request only:
+
+- The web SDK sends its normal requests with `fetch` or `XHR`. Both are cross-origin and carry no cookies.
+- The SDK flushes the last queued events when the page unloads. This flush uses [`navigator.sendBeacon`](https://w3c.github.io/beacon/), and the browser always sends a beacon with credentials. The SDK cannot turn this off.
+
+To keep your cookies inside your own domain, do one of these:
+
+- Scope your authentication cookies to the host that needs them, such as `Domain=app.example.com`, instead of to your apex domain.
+- Set up a [self-hosted proxy](/docs/advanced/proxy) and delete the `Cookie` header in your own proxy configuration. The [Caddy](/docs/advanced/proxy/caddy) and [Node.js](/docs/advanced/proxy/node) guides show how.
+
+The `persistence: "localStorage"` SDK option changes where PostHog keeps its own state. It does not stop the browser from sending your other cookies to the proxy subdomain.
+
 ### Is the managed reverse proxy HIPAA-compliant?
 
 No. The managed reverse proxy is not HIPAA-compliant and should not be used to process Protected Health Information (PHI). Any Business Associate Agreement (BAA) you have with PostHog does not apply to this feature.
