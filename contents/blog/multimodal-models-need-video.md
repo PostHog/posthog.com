@@ -25,9 +25,9 @@ Almost none of the session recordings we ingest [are watched](/blog/nobody-watch
 
 It's no wonder, really: a moderately busy product results in tens of thousands of recordings per day. You'd need an army of humans doing nothing but watching to get through them all.
 
-As a result, most of what the Session Replay team has shipped over the past couple of years is some form of search: filters on events and properties, relevance sorting, collections, session summaries. All of them are attempts to help our users find the needle in the haystack and maximize the value they can get with the limited amount of human attention available to them.
+As a result, most of what the Session Replay team has shipped over the past couple of years is some form of search: filters on events and properties, relevance sorting, collections, session summaries. All are attempts to help our users find the needle in the haystack and maximize the value they can get with the limited amount of human attention available to them.
 
-[Replay Vision](/replay-vision) started from the thought that we should stop rationing attention and start automating it instead. Recent multimodal AI models are good enough at watching video that you can hand them a recording and get a sensible account of what the user did and where it went wrong. Apply this to session recordings, and you get details on every one, not just the ones someone had time for.
+[Replay Vision](/replay-vision) started from the thought that we should stop rationing attention and start automating it. Recent multimodal AI models are good enough at watching video that you can hand them a recording and get a sensible account of what the user did and where it went wrong. Apply this to session recordings, and you get details on all of them, not just the ones someone had time for.
 
 This post covers the first big problem we hit building it: models couldn't actually see a replay.
 
