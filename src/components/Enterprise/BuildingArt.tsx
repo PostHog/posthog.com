@@ -168,7 +168,7 @@ export function BuildingArt({
                         '--art-ratio': art.height / art.width,
                         '--base-x': art.baseX / art.width,
                         '--offset': offset,
-                        '--lift': last ? 0 : Math.abs(offset) * 0.75,
+                        '--lift': last ? 0 : Math.abs(offset) * 0.45,
                         ...(!last && { '--index': index, '--rise-before': riseBefore }),
                     }
                     riseBefore += art.rise / art.width
