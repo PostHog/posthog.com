@@ -160,6 +160,59 @@ The pricing and free tier might be the area where PostHog and Datadog have the l
 />
 </p>
 
+### How much does PostHog cost compared to Datadog?
+
+First, the free tiers of both products differ significantly.
+
+Datadog only covers infrastructure monitoring for up to 5 hosts with 1-day metric retention. PostHog's free tier refreshes every month and covers every product:
+
+| &nbsp;                            | **Free usage per month** |
+| --------------------------------- | ------------------------ |
+| **Logs**                          | 10GB ingested            |
+| **Error tracking**                | 100k exceptions          |
+| **Product analytics**             | 1 million events         |
+| **Session replay**                | 5,000 recordings         |
+| **Surveys**                       | 1500 responses           |
+| **LLM observability**             | 100k events              |
+| **Feature flags and A/B testing** | 1 million API requests   |
+| **Data warehouse**                | 1 million synced rows    |
+
+Beyond that, both are usage based, but even this varies for Datadog depending on your commitment. Although PostHog does discounts for higher spend customers, there's no time-based commitment needed to get the best price.
+
+To show how the two compare, here's some example scenarios assuming 20 events per session, 20% of sessions recorded for replay, ~1KB per log line, and Datadog indexing 20% of ingested logs at annual-commitment rates:
+
+**A seed-stage product:** 50k sessions, 1M events, 10k replays, 50k errors, 20GB logs
+
+|                   | PostHog  | Datadog |
+| ----------------- | -------- | ------- |
+| Product analytics | $0       | $40     |
+| Session replay    | $25      | $25     |
+| Error tracking    | $0       | $25     |
+| Logs              | $3       | $9      |
+| **Total**         | **$28**  | **$99** |
+
+**A Series A product:** 250k sessions, 5M events, 50k replays, 300k errors, 150GB logs
+
+|                   | PostHog   | Datadog  |
+| ----------------- | --------- | -------- |
+| Product analytics | $153      | $200     |
+| Session replay    | $173      | $125     |
+| Error tracking    | $74       | $80      |
+| Logs              | $35       | $66      |
+| **Total**         | **$435**  | **$471** |
+
+**A scaling SaaS:** 1M sessions, 20M events, 200k replays, 1M errors, 600GB logs
+
+|                   | PostHog    | Datadog    |
+| ----------------- | ---------- | ---------- |
+| Product analytics | $643       | $800       |
+| Session replay    | $458       | $500       |
+| Error tracking    | $178       | $207       |
+| Logs              | $118       | $264       |
+| **Total**         | **$1,397** | **$1,771** |
+
+Every Datadog figure above **assumes an annual contract.** Month-to-month is around 20% more and on-demand around 50% more (but depend on the product). **PostHog** has volume discounts, not time-based commitments.
+
 ### Platform and security
 
 Both PostHog and Datadog have the platform and security features enterprise or compliance-conscious teams need.
@@ -255,62 +308,6 @@ Partly. Datadog offers daily quotas per log index that stops indexing when you h
 They don't have limits on hosts, APM, and custom metrics, only sampling. These are often the largest line items too.
 
 With PostHog, you can set hard billing limits per product. When you reach it, collection stops until the next cycle (or when you raise the limit) and you are not billed past it.
-
-</details>
-
-<details>
-<summary>How much does PostHog cost compared to Datadog?</summary>
-
-First, the free tiers of both products differ significantly.
-
-Datadog only covers infrastructure monitoring for up to 5 hosts with 1-day metric retention. PostHog's free tier refreshes every month and covers every product:
-
-| &nbsp;                            | **Free usage per month** |
-| --------------------------------- | ------------------------ |
-| **Logs**                          | 10GB ingested            |
-| **Error tracking**                | 100k exceptions          |
-| **Product analytics**             | 1 million events         |
-| **Session replay**                | 5,000 recordings         |
-| **Surveys**                       | 1500 responses           |
-| **LLM observability**             | 100k events              |
-| **Feature flags and A/B testing** | 1 million API requests   |
-| **Data warehouse**                | 1 million synced rows    |
-
-Beyond that, both are usage based, but even this varies for Datadog depending on your commitment. Although PostHog does discounts for higher spend customers, there's no time-based commitment needed to get the best price.
-
-To show how the two compare, here's some example scenarios assuming 20 events per session, 20% of sessions recorded for replay, ~1KB per log line, and Datadog indexing 20% of ingested logs at annual-commitment rates:
-
-**A seed-stage product:** 50k sessions, 1M events, 10k replays, 50k errors, 20GB logs
-
-|                   | PostHog  | Datadog |
-| ----------------- | -------- | ------- |
-| Product analytics | $0       | $40     |
-| Session replay    | $25      | $25     |
-| Error tracking    | $0       | $25     |
-| Logs              | $3       | $9      |
-| **Total**         | **$28**  | **$99** |
-
-**A Series A product:** 250k sessions, 5M events, 50k replays, 300k errors, 150GB logs
-
-|                   | PostHog   | Datadog  |
-| ----------------- | --------- | -------- |
-| Product analytics | $153      | $200     |
-| Session replay    | $173      | $125     |
-| Error tracking    | $74       | $80      |
-| Logs              | $35       | $66      |
-| **Total**         | **$435**  | **$471** |
-
-**A scaling SaaS:** 1M sessions, 20M events, 200k replays, 1M errors, 600GB logs
-
-|                   | PostHog    | Datadog    |
-| ----------------- | ---------- | ---------- |
-| Product analytics | $643       | $800       |
-| Session replay    | $458       | $500       |
-| Error tracking    | $178       | $207       |
-| Logs              | $118       | $264       |
-| **Total**         | **$1,397** | **$1,771** |
-
-Every figure above **assumes an annual contract.** Month-to-month is around 20% more and on-demand around 50% more (but depend on the product). **PostHog** has volume discounts, not time-based commitments.
 
 </details>
 
