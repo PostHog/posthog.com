@@ -418,7 +418,7 @@ If your app already uses [`posthog-rails`](/docs/libraries/ruby) and calls `Post
 PostHog::MCP.instrument(server)
 ```
 
-Options are keyword arguments, the snake_case equivalent of the TypeScript options:
+Options are keyword arguments:
 
 ```ruby
 PostHog::MCP.instrument(
@@ -446,15 +446,17 @@ PostHog::MCP.instrument(
 
 The injected arguments are stripped before your tool's `call` receives its keywords, so a tool declared as `def self.call(query:, server_context:)` keeps working. A tool that declares `context` in its own `input_schema` keeps it.
 
-Ruby also captures `$mcp_prompt_get`, `$mcp_prompts_list`, `$mcp_resource_read`, and `$mcp_resources_list`, which the other SDKs reserve but don't emit yet.
+Prompt and resource traffic is captured too, as `$mcp_prompt_get`, `$mcp_prompts_list`, `$mcp_resource_read`, and `$mcp_resources_list`.
 
 ### `$lib` on Ruby events
 
-MCP events from Ruby report `$lib: "posthog-ruby-mcp"`. Unlike the Node and Python SDKs, this is set per event: the client you pass in keeps its own `$lib` (`posthog-ruby` or `posthog-rails`) for everything else it sends, so instrumenting an MCP server inside a Rails app doesn't relabel the app's other events.
+MCP events report `$lib: "posthog-ruby-mcp"` so you can tell them apart from the rest of your traffic. This is set per event: the client you pass in keeps its own `$lib` (`posthog-ruby` or `posthog-rails`) for everything else it sends, so instrumenting an MCP server inside a Rails app doesn't relabel the app's other events.
 
 ### Stateless and multi-pod servers
 
-Same problem as [above](#stateless-and-multi-pod-servers). Ruby fixes it with the same self-encoded `Mcp-Session-Id` token, wired into `MCP::Server::Transports::StreamableHTTPTransport` automatically: a server running with `stateless: true` mints the token at `initialize`, clients replay it, and any pod recovers `$session_id` and the client identity from the header. There's **no `enable_json_response` caveat** – the Ruby transport always answers stateless requests with JSON.
+A stateless server keeps nothing between requests, often on a different pod each time. Left alone, every request becomes its own `$session_id`, and the client name and version (only sent at `initialize`) go missing from every event after the handshake.
+
+The SDK handles this with no session store and no sticky routing. When `MCP::Server::Transports::StreamableHTTPTransport` runs with `stateless: true`, the SDK mints the `Mcp-Session-Id` response header at `initialize` as a token carrying the session ID and client identity. Clients replay that header on every request, so any pod reads the same values back. Nothing changes on the client side, and there's nothing to configure.
 
 When you build the Rack app yourself, add the middleware once. The decoded token is exposed as `env["posthog_mcp.session"]`:
 
@@ -480,7 +482,7 @@ A stdio MCP server owns `$stdout` for the protocol. The integration's own messag
 PostHog::Logging.logger = Logger.new($stderr)
 ```
 
-No server object to wrap? Use `PostHog::MCP::Client`, a `PostHog::Client` subclass with `capture_tool_call`, `capture_initialize`, `capture_tools_list`, `capture_missing_capability`, `prepare_tool_list`, and `prepare_tool_call` – the Ruby equivalent of [Custom servers](/docs/mcp-analytics/custom-servers#ruby).
+Dispatching MCP requests without an `MCP::Server`? See [Custom servers](/docs/mcp-analytics/custom-servers#ruby).
 
 ## Configuration
 
