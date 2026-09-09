@@ -141,15 +141,15 @@ posthog.group("company", "company_id_in_your_db", "PostHog");
 
 These warnings are raised when PostHog rejects a request as it arrives, before the event enters the ingestion pipeline. Your SDK receives an HTTP `400` naming the problem. Requests are validated as a unit, so one malformed event can reject the whole batch — which is why a warning's event count can exceed the number of warnings.
 
-Rejected events are dropped, and the warning is the only record of them: details carry identifiers and sizes (the SDK name and version, the endpoint, and an occurrence count) rather than event contents. To inspect a rejected payload, capture it at the sender — look for `400` responses to your capture host in your browser's network tab, enable [debug mode](/docs/libraries/js/usage#debug-mode) with `posthog.debug()`, or log the event in a [`before_send`](/docs/libraries/js/usage#amending-or-sampling-events) hook.
+Rejected events are dropped, and the warning is the only record of them: details carry identifiers and sizes (the SDK name and version, the endpoint, and an occurrence count) rather than event contents. To inspect a rejected payload, capture it at the sender — look for `400` responses to your ingestion endpoint in your browser's network tab, enable [debug mode](/docs/libraries/js/usage#debug-mode) with `posthog.debug()`, or log the event in a [`before_send`](/docs/libraries/js/usage#amending-or-sampling-events) hook.
 
-Start with the `lib` and `lib_version` details. Warnings clustered on a single older SDK version point to an upgrade. When both read `unknown`, the request carried no `$lib` property, which typically means traffic from outside a PostHog SDK — project API keys are public, so bots and scanners can generate these warnings independently of your code.
+Start with the `lib` and `lib_version` details. Warnings clustered on a single older SDK version point to an upgrade. When both read `unknown`, the request carried no `$lib` property, so no PostHog SDK sent it. Your project token is public and visible in your web app's source, so anything that finds it can post malformed events to your ingestion endpoint — crawlers, security scanners, and researchers probing your site all do. Check the sender before you look for a bug in your own instrumentation.
 
 ### Discarded event with no distinct ID
 
 Every event needs a `distinct_id` to attribute it to a person. PostHog reads the top-level `distinct_id` first, then falls back to `properties.distinct_id`, and drops the event when neither holds a usable value — when it's missing from both, `null`, empty, or only whitespace.
 
-PostHog accepts a wide range of values here: numbers and objects are converted to strings, and literal strings like `"null"`, `"undefined"`, and `"anonymous"` are valid IDs. Prefer real user IDs — placeholder values group unrelated users onto a single person, and merging them later raises [`cannot_merge_with_illegal_distinct_id`](#refused-to-merge-with-an-illegal-distinct-id).
+PostHog accepts a wide range of values here: numbers and objects are converted to strings, and literal strings like `"null"`, `"undefined"`, and `"anonymous"` are valid IDs. [Prefer real user IDs](/docs/getting-started/identify-users#2-use-unique-strings-for-distinct-ids) — placeholder values group unrelated users onto a single person, and merging them later raises [`cannot_merge_with_illegal_distinct_id`](#refused-to-merge-with-an-illegal-distinct-id).
 
 posthog-js blocks the obvious mistakes for you. `identify()` refuses `null`, `undefined`, an empty string, and the literal strings `"null"` and `"undefined"`. It logs `Unique user id has not been set in posthog.identify` and sends nothing, so a plain `identify()` call is rarely the source of this warning. Common causes include:
 
@@ -161,11 +161,11 @@ Check where the ID comes from: your `bootstrap` value, or wherever you call `ide
 
 ### Discarded event with no event name
 
-The `event` field was missing or empty, so there was no name to record the event under. The usual cause is an empty variable at the `capture()` call site.
+The `event` field was missing or empty, so there was no name to record the event under. The usual cause is an empty variable at the `capture()` call site. posthog-js only rejects a name that is missing or not a string, so `capture("")` reaches PostHog and is dropped here.
 
 ### Discarded session replay batches
 
-These warnings mean a chunk of a [session recording](/docs/session-replay) was dropped. The recording still exists, minus the part that chunk covered, so it may appear shorter than expected. All three usually point to an outdated SDK or a proxy that rewrites request bodies.
+These warnings mean a chunk of a [session recording](/docs/session-replay) was dropped. The rest of the recording still exists, but the dropped chunk leaves a gap: the player has no DOM mutations for that stretch, so playback can skip, show a stale page, or end early. All three usually point to an outdated SDK or a proxy that rewrites request bodies.
 
 | Warning | Cause |
 | --- | --- |
