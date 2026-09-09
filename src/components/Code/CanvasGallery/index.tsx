@@ -7,30 +7,34 @@ import {
     IconCheck,
     IconCopy,
     IconCursorClick,
+    IconDashboard,
     IconDatabase,
     IconDecisionTree,
     IconEndpoints,
     IconEye,
     IconExpand,
     IconFlask,
+    IconFunnels,
     IconGraph,
-    IconHandMoney,
     IconLlmAnalytics,
     IconMessage,
     IconPeople,
     IconPieChart,
+    IconRetention,
     IconRewindPlay,
     IconSupport,
+    IconUserPaths,
     IconToggle,
     IconWarning,
 } from '@posthog/icons'
 import Link from 'components/Link'
+import { getTool } from '../../../data/tools'
 import CloudinaryImage from 'components/CloudinaryImage'
 import { DownloadButtons } from 'components/Code/DownloadButtons'
 import Glow from 'components/Glow'
 import { Bang } from 'components/Icons'
 import OSButton from 'components/OSButton'
-import { IconDiscord } from 'components/OSIcons/Icons'
+import { IconDiscord, IconGithub } from 'components/OSIcons/Icons'
 import Modal from 'components/RadixUI/Modal'
 import SlotMachineText from 'components/SlotMachineText'
 import { useApp } from '../../../context/App'
@@ -40,10 +44,9 @@ import {
     CANVASES,
     CATEGORIES,
     CanvasCategory,
-    CanvasTopic,
+    CanvasConnector,
     deepLinkFor,
     GalleryCanvas,
-    SHAPES,
     type CanvasTool,
 } from './canvases'
 
@@ -67,11 +70,16 @@ const folderTopPath = (tabStart: number): string => {
     } 64 ${tabEnd + 46} 64 H 970 V 64 Z`
 }
 
-const folderTones: Record<SwipeFileId, { color: string }> = {
-    investigate: { color: '#E5F1FF' },
-    monitor: { color: '#FBE2BD' },
-    present: { color: '#FFF1D5' },
-    all: { color: '#E2D6FF' },
+const folderTones: Record<SwipeFileId, { light: string; dark: string }> = {
+    investigate: { light: '#FBE2BD', dark: '#11513A' },
+    monitor: { light: '#F9C6B6', dark: '#1B3672' },
+    present: { light: '#FFF1D5', dark: '#4E2663' },
+    all: { light: '#D9E8F2', dark: '#41525F' },
+}
+
+function useFolderTone(): (file: SwipeFileId) => string {
+    const { siteSettings } = useApp()
+    return (file) => folderTones[file][siteSettings.theme === 'dark' ? 'dark' : 'light']
 }
 
 const allCanvasesFile = {
@@ -114,7 +122,7 @@ function PaintToolIcon({ tool }: { tool: PaintTool }): JSX.Element {
             className="flex aspect-square items-center justify-center border border-primary bg-primary"
             title={tool.label}
         >
-            <tool.Icon className={`size-4 text-${tool.color}`} />
+            <tool.Icon className={`size-3 text-${tool.color}`} />
         </span>
     )
 }
@@ -153,7 +161,7 @@ export function CanvasGalleryHeader(): JSX.Element {
                 </div>
 
                 <div
-                    className="relative min-h-[300px] overflow-hidden rounded-md select-none @2xl:min-h-[330px]"
+                    className="relative min-h-[260px] overflow-hidden rounded-md select-none @2xl:min-h-[285px]"
                     role="group"
                     aria-label="PostHog Paint preview"
                 >
@@ -161,7 +169,7 @@ export function CanvasGalleryHeader(): JSX.Element {
                         <div className="flex h-7 shrink-0 items-center justify-between bg-blue px-2 text-xs font-bold text-white">
                             <span className="flex items-center gap-1.5">
                                 <img src={posthogIcon} alt="" className="size-3" />
-                                untitled - PostHog Paint
+                                data + imagination.hog - PostHog Paint
                             </span>
                             <span className="flex gap-0.5">
                                 <span className="flex size-4 items-center justify-center border border-primary bg-primary text-[10px] leading-none text-primary">
@@ -182,7 +190,7 @@ export function CanvasGalleryHeader(): JSX.Element {
                             <span>Tools</span>
                         </div>
                         <div className="flex min-h-0 flex-1">
-                            <div className="grid w-14 shrink-0 grid-cols-2 content-start gap-1 border-r border-primary bg-accent p-1.5">
+                            <div className="grid w-12 shrink-0 grid-cols-2 content-start gap-1 border-r border-primary bg-accent p-1.5">
                                 {paintTools.map((tool) => (
                                     <PaintToolIcon key={tool.label} tool={tool} />
                                 ))}
@@ -192,7 +200,7 @@ export function CanvasGalleryHeader(): JSX.Element {
                                     <img
                                         src="https://res.cloudinary.com/dmukukwp6/image/upload/loop_hog_9822b11db8.png"
                                         alt=""
-                                        className="absolute left-[54%] top-[56%] w-44 -translate-x-1/2 -translate-y-1/2 rotate-3 @xl:w-56"
+                                        className="absolute left-[54%] top-[56%] w-36 -translate-x-1/2 -translate-y-1/2 rotate-3 @xl:w-44"
                                     />
                                 </div>
                             </div>
@@ -212,7 +220,7 @@ export function CanvasGalleryHeader(): JSX.Element {
                                 rel="noopener noreferrer"
                                 className="ml-auto border border-primary bg-primary px-1.5 py-0.5 text-[10px] font-semibold text-primary hover:bg-accent focus:outline-none focus-visible:ring-2 focus-visible:ring-blue"
                             >
-                                More colors...
+                                PostHog Paint for real
                             </a>
                         </div>
                     </div>
@@ -228,7 +236,7 @@ function useGalleryEvent() {
         posthog?.capture('canvas_gallery_interaction', {
             action,
             canvas: canvas.slug,
-            shape: canvas.shape,
+            category: canvas.category,
         })
 }
 
@@ -248,29 +256,57 @@ function CanvasPreview({
     return <img src={src} alt={image.alt} className={`${className} ${imgClassName}`} />
 }
 
-function TopicChip({ topic }: { topic: CanvasTopic }): JSX.Element {
-    return <span className="rounded-full bg-accent px-2 py-0.5 text-[11px] font-semibold text-secondary">{topic}</span>
+// Name and page come from `src/data/tools.ts`; only the icon and color live here.
+const canvasToolInfo: Record<CanvasTool, { Icon: React.ComponentType<{ className?: string }>; color: string }> = {
+    product_analytics: { Icon: IconGraph, color: 'blue' },
+    error_tracking: { Icon: IconWarning, color: 'orange' },
+    inbox: { Icon: IconMessage, color: 'blue' },
+    ai_observability: { Icon: IconLlmAnalytics, color: 'purple' },
+    heatmaps: { Icon: IconCursorClick, color: 'green' },
+    group_analytics: { Icon: IconPeople, color: 'teal' },
+    data_warehouse: { Icon: IconDatabase, color: 'purple' },
+    funnels: { Icon: IconFunnels, color: 'blue' },
+    retention: { Icon: IconRetention, color: 'seagreen' },
+    user_paths: { Icon: IconUserPaths, color: 'purple' },
+    dashboards: { Icon: IconDashboard, color: 'blue' },
 }
 
-const canvasToolInfo: Record<
-    CanvasTool,
-    { label: string; Icon: React.ComponentType<{ className?: string }>; color: string }
-> = {
-    productAnalytics: { label: 'Product analytics', Icon: IconGraph, color: 'blue' },
-    featureFlags: { label: 'Feature flags', Icon: IconToggle, color: 'seagreen' },
-    errorTracking: { label: 'Error tracking', Icon: IconWarning, color: 'orange' },
-    sessionReplay: { label: 'Session replay', Icon: IconRewindPlay, color: 'yellow' },
-    experiments: { label: 'Experiments', Icon: IconFlask, color: 'purple' },
-    surveys: { label: 'Surveys', Icon: IconMessage, color: 'salmon' },
-    billing: { label: 'Billing', Icon: IconHandMoney, color: 'green' },
-    logs: { label: 'Logs', Icon: IconActivity, color: 'red' },
+// Inbox has no product page of its own, so its chip points at the docs.
+const toolSlugOverrides: Partial<Record<CanvasTool, string>> = {
+    inbox: 'docs/self-driving/inbox',
 }
 
 function CanvasToolChip({ tool }: { tool: CanvasTool }): JSX.Element {
-    const { label, Icon, color } = canvasToolInfo[tool]
+    const { Icon, color } = canvasToolInfo[tool]
+    const { name, slug } = getTool(tool)
+    const to = toolSlugOverrides[tool] ?? slug
+    return (
+        <li className="shrink-0">
+            <Link
+                to={`/${to}`}
+                state={{ newWindow: true }}
+                className="flex items-center gap-1.5 whitespace-nowrap text-sm font-semibold text-primary hover:text-red dark:hover:text-yellow"
+            >
+                <Icon className={`size-4 text-${color}`} />
+                {name}
+            </Link>
+        </li>
+    )
+}
+
+const canvasConnectorInfo: Record<
+    CanvasConnector,
+    { label: string; Icon?: React.ComponentType<{ className?: string }> }
+> = {
+    github: { label: 'GitHub', Icon: IconGithub },
+    mcpServer: { label: 'MCP server', Icon: IconEndpoints },
+}
+
+function CanvasConnectorChip({ connector }: { connector: CanvasConnector }): JSX.Element {
+    const { label, Icon } = canvasConnectorInfo[connector]
     return (
         <li className="flex shrink-0 items-center gap-1.5 whitespace-nowrap text-sm font-semibold text-primary">
-            <Icon className={`size-4 text-${color}`} />
+            {Icon && <Icon className="size-4" />}
             {label}
         </li>
     )
@@ -284,6 +320,7 @@ function SwipeFileTabs({
     onSelect: (file: SwipeFileId | null) => void
 }): JSX.Element {
     const reduceMotion = useReducedMotion()
+    const folderTone = useFolderTone()
     const fileOrder = activeFile
         ? [...swipeFileOrder.filter((file) => file !== activeFile), activeFile]
         : swipeFileOrder
@@ -293,7 +330,7 @@ function SwipeFileTabs({
         <div className="relative" aria-label="Swipe files">
             {fileOrder.map((file, index) => {
                 const tabStart = swipeFileTabStart[file]
-                const tone = folderTones[file]
+                const tone = folderTone(file)
                 const active = activeFile === file
                 const category = file === 'all' ? undefined : CATEGORIES[file]
                 const expanded = active && !!category
@@ -305,7 +342,6 @@ function SwipeFileTabs({
                     ? 48 - finalFileHeight + finalFileOffset
                     : -48
                 const label = category ? category.verb : allCanvasesFile.label
-                const shape = category ? SHAPES[category.shape] : undefined
                 return (
                     <motion.div
                         key={file}
@@ -329,7 +365,7 @@ function SwipeFileTabs({
                         >
                             <span
                                 className="absolute inset-x-0 top-[48px]"
-                                style={{ backgroundColor: tone.color, bottom: bodyBottom }}
+                                style={{ backgroundColor: tone, bottom: bodyBottom }}
                                 aria-hidden="true"
                             />
                             <svg
@@ -338,25 +374,22 @@ function SwipeFileTabs({
                                 className="absolute inset-x-0 top-0 h-16 w-full"
                                 aria-hidden="true"
                             >
-                                <path d={folderTopPath(tabStart)} fill={tone.color} />
+                                <path d={folderTopPath(tabStart)} fill={tone} />
                             </svg>
                             <span
-                                className="absolute top-[30px] -translate-x-1/2 text-sm font-semibold leading-none text-brown"
+                                className="absolute top-[30px] -translate-x-1/2 text-sm font-semibold leading-none text-brown dark:text-primary"
                                 style={{ left: `${(tabStart + 141) / 10}%` }}
                             >
                                 {label}
                             </span>
-                            {expanded && category && shape && (
+                            {expanded && category && (
                                 <motion.span
                                     initial={{ opacity: 0, y: reduceMotion ? 0 : 6 }}
                                     animate={{ opacity: 1, y: 0 }}
                                     transition={{ duration: reduceMotion ? 0 : 0.18, delay: reduceMotion ? 0 : 0.08 }}
                                     className="absolute left-4 right-4 top-[82px] flex items-start gap-3 text-left @xl:left-5 @xl:right-5"
                                 >
-                                    <span className="shrink-0 rounded-full bg-primary px-2.5 py-1 text-[11px] font-semibold text-brown shadow-sm">
-                                        {shape.label} <span className="text-muted">· {shape.lifespan}</span>
-                                    </span>
-                                    <span className="max-w-xl text-sm leading-snug text-brown">
+                                    <span className="max-w-xl text-sm leading-snug text-brown dark:text-primary">
                                         {category.description}
                                     </span>
                                 </motion.span>
@@ -426,19 +459,7 @@ function CanvasCard({ canvas, onOpen }: { canvas: GalleryCanvas; onOpen: () => v
                 </span>
             </button>
             <div className="p-3 flex flex-col gap-2 flex-1">
-                <div className="flex items-start justify-between gap-2">
-                    <h3 className="text-[15px] font-semibold text-primary leading-snug m-0">{canvas.title}</h3>
-                    <div className="flex shrink-0 flex-wrap justify-end gap-1">
-                        {canvas.weird && (
-                            <span className="text-[11px] font-semibold px-2 py-0.5 rounded-full bg-yellow/20 text-primary">
-                                weird
-                            </span>
-                        )}
-                        {canvas.topics.map((topic) => (
-                            <TopicChip key={topic} topic={topic} />
-                        ))}
-                    </div>
-                </div>
+                <h3 className="text-[15px] font-semibold text-primary leading-snug m-0">{canvas.title}</h3>
                 <p className="text-sm text-secondary m-0 leading-snug">{canvas.tagline}</p>
                 <div className="flex flex-wrap gap-1.5 pt-1">
                     <CopyPromptButton canvas={canvas} />
@@ -457,11 +478,6 @@ function CanvasDetail({ canvas }: { canvas: GalleryCanvas }): JSX.Element {
             </div>
             <div className="p-4 @xl:p-5">
                 <div className="min-w-0">
-                    <div className="flex flex-wrap items-center gap-2 mb-1">
-                        {canvas.topics.map((topic) => (
-                            <TopicChip key={topic} topic={topic} />
-                        ))}
-                    </div>
                     <p className="text-sm text-primary mt-0 mb-3 leading-relaxed">{canvas.when}</p>
                     <div className="text-xs font-semibold text-secondary mb-1">The prompt</div>
                     <pre className="whitespace-pre-wrap text-[13px] leading-relaxed font-sans bg-accent border border-primary rounded p-3 m-0 text-primary">
@@ -478,16 +494,30 @@ function CanvasDetail({ canvas }: { canvas: GalleryCanvas }): JSX.Element {
                         </Link>
                         .
                     </p>
-                    <div className="mt-4 text-sm">
-                        <div className="mb-1 text-xs font-semibold text-secondary">What it reads</div>
-                        <div className="-mx-1 flex gap-2 overflow-x-auto px-1 pb-1">
-                            <ul className="m-0 flex shrink-0 list-none items-center gap-6 p-0 pr-6">
-                                {canvas.tools.map((tool) => (
-                                    <CanvasToolChip key={tool} tool={tool} />
-                                ))}
-                            </ul>
+                    {(canvas.tools.length > 0 || canvas.connectors.length > 0) && (
+                        <div className="mt-4 flex flex-col gap-4">
+                            {canvas.tools.length > 0 && (
+                                <div className="text-sm">
+                                    <div className="mb-1 text-xs font-semibold text-secondary">PostHog tools</div>
+                                    <ul className="m-0 flex list-none flex-wrap items-center gap-x-6 gap-y-2 p-0">
+                                        {canvas.tools.map((tool) => (
+                                            <CanvasToolChip key={tool} tool={tool} />
+                                        ))}
+                                    </ul>
+                                </div>
+                            )}
+                            {canvas.connectors.length > 0 && (
+                                <div className="text-sm">
+                                    <div className="mb-1 text-xs font-semibold text-secondary">Connectors</div>
+                                    <ul className="m-0 flex list-none flex-wrap items-center gap-x-6 gap-y-2 p-0">
+                                        {canvas.connectors.map((connector) => (
+                                            <CanvasConnectorChip key={connector} connector={connector} />
+                                        ))}
+                                    </ul>
+                                </div>
+                            )}
                         </div>
-                    </div>
+                    )}
                 </div>
             </div>
         </div>
@@ -577,7 +607,7 @@ function CanvasCommunityCTA(): JSX.Element {
         <section className="@container mt-8">
             <div className="grid gap-5 rounded-md border border-primary bg-primary p-4 @lg:grid-cols-[1fr_auto] @lg:items-center @lg:p-5">
                 <div>
-                    <p className="mb-1 text-xs font-semibold uppercase tracking-wide text-purple">Built with PostHog</p>
+                    <p className="mb-1 text-xs font-semibold uppercase tracking-wide text-red">Built with PostHog</p>
                     <h2 className="m-0 text-xl font-bold text-primary">Add your own canvas to the gallery</h2>
                     <p className="mb-0 mt-1 text-sm leading-relaxed text-secondary">
                         Made something useful, weird, or beautiful? Share your canvas in Discord and join the people
@@ -603,6 +633,7 @@ export default function CanvasGallery(): JSX.Element {
     const [activeFile, setActiveFile] = useState<SwipeFileId | null>('all')
     const [openSlug, setOpenSlug] = useState<string | null>(null)
     const track = useGalleryEvent()
+    const folderTone = useFolderTone()
 
     useEffect(() => {
         const params = new URLSearchParams(window.location.search)
@@ -623,30 +654,29 @@ export default function CanvasGallery(): JSX.Element {
     const open = openSlug ? CANVASES.find((c) => c.slug === openSlug) : undefined
     const visibleCanvases =
         activeFile === 'all' ? CANVASES : activeFile ? CANVASES.filter((canvas) => canvas.category === activeFile) : []
-    const galleryColor = activeFile ? folderTones[activeFile].color : undefined
+    const galleryColor = activeFile ? folderTone(activeFile) : undefined
 
     return (
         <>
             <div className="@container not-prose relative z-10 -mt-16 overflow-hidden rounded-b border-x border-b border-primary">
                 <SwipeFileTabs activeFile={activeFile} onSelect={setActiveFile} />
 
-                <div
-                    className={`relative -mt-1.5 px-4 pb-4 pt-3 @xl:px-5 ${activeFile ? '' : 'bg-accent'}`}
-                    style={{ backgroundColor: galleryColor }}
-                >
-                    <div className="grid grid-cols-1 gap-4 @xl:grid-cols-2">
-                        {visibleCanvases.map((canvas) => (
-                            <CanvasCard
-                                key={canvas.slug}
-                                canvas={canvas}
-                                onOpen={() => {
-                                    track('view_example', canvas)
-                                    setOpenSlug(canvas.slug)
-                                }}
-                            />
-                        ))}
+                {activeFile && (
+                    <div className="relative -mt-1.5 px-4 pb-4 pt-3 @xl:px-5" style={{ backgroundColor: galleryColor }}>
+                        <div className="grid grid-cols-1 gap-4 @xl:grid-cols-2">
+                            {visibleCanvases.map((canvas) => (
+                                <CanvasCard
+                                    key={canvas.slug}
+                                    canvas={canvas}
+                                    onOpen={() => {
+                                        track('view_example', canvas)
+                                        setOpenSlug(canvas.slug)
+                                    }}
+                                />
+                            ))}
+                        </div>
                     </div>
-                </div>
+                )}
             </div>
 
             <div className="not-prose">

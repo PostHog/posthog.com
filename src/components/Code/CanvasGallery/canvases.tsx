@@ -1,71 +1,39 @@
-export type CanvasShape = 'disposable' | 'durable' | 'showable'
 export type CanvasCategory = 'investigate' | 'monitor' | 'present'
-export type CanvasTopic = 'Product' | 'Marketing' | 'Engineering' | 'Billing' | 'Customer support' | 'Leadership'
+export type CanvasConnector = 'github' | 'mcpServer'
+/** Handles from `src/data/tools.ts`, so a chip can link to the tool's own page. */
 export type CanvasTool =
-    | 'productAnalytics'
-    | 'featureFlags'
-    | 'errorTracking'
-    | 'sessionReplay'
-    | 'experiments'
-    | 'surveys'
-    | 'billing'
-    | 'logs'
-
-export interface ShapeInfo {
-    label: string
-    verb: string
-    description: string
-    lifespan: string
-}
+    | 'product_analytics'
+    | 'error_tracking'
+    | 'inbox'
+    | 'ai_observability'
+    | 'heatmaps'
+    | 'group_analytics'
+    | 'data_warehouse'
+    | 'funnels'
+    | 'retention'
+    | 'user_paths'
+    | 'dashboards'
 
 export interface CategoryInfo {
     label: string
-    shape: CanvasShape
     verb: string
     description: string
-}
-
-export const SHAPES: Record<CanvasShape, ShapeInfo> = {
-    disposable: {
-        label: 'Disposable',
-        verb: 'Look once. Throw away.',
-        description:
-            'Answers one question, then dies. Nobody should bookmark it. If you open it twice, it wanted to be a dashboard.',
-        lifespan: 'minutes to a day',
-    },
-    durable: {
-        label: 'Durable',
-        verb: 'Skim every morning.',
-        description:
-            'Boring on purpose. Same layout every day so your eye learns where each number lives. Red means look, green means leave.',
-        lifespan: 'months',
-    },
-    showable: {
-        label: 'Shareable',
-        verb: 'Made to be seen.',
-        description:
-            'For the all-hands, the incident review, the customer call. This is where the fancy visualization earns its keep, and only here.',
-        lifespan: 'one meeting, then a link',
-    },
 }
 
 export const CATEGORIES: Record<CanvasCategory, CategoryInfo> = {
     investigate: {
         label: 'Investigate',
-        shape: 'disposable',
         verb: 'Query data',
         description: 'Find what happened, who it affected, and what to do next.',
     },
     monitor: {
         label: 'Monitor',
-        shape: 'durable',
         verb: 'Keep watch',
         description: 'Put a changing product signal where the team can see it.',
     },
     present: {
         label: 'Present',
-        shape: 'showable',
-        verb: 'Make the story clear',
+        verb: 'Tell a story',
         description: 'Turn live data into something people can understand together.',
     },
 }
@@ -73,19 +41,12 @@ export const CATEGORIES: Record<CanvasCategory, CategoryInfo> = {
 export interface GalleryCanvas {
     slug: string
     title: string
-    shape: CanvasShape
     category: CanvasCategory
-    topics: CanvasTopic[]
     tagline: string
-    /** When to build it and what it should tell you, in two or three sentences. */
     when: string
-    /** The prompt someone pastes into PostHog Desktop to get something similar. */
     prompt: string
-    /** PostHog data the canvas reads. */
-    reads: string[]
-    /** PostHog tools that supply the canvas data. */
     tools: CanvasTool[]
-    weird?: boolean
+    connectors: CanvasConnector[]
     image: CanvasImage
 }
 
@@ -111,10 +72,10 @@ const IMAGES = {
         dark: 'https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/canvas_cory_s_surveys_self_driving_dark_11e1a40692.png',
         alt: 'A canvas that summarizes survey responses',
     },
-    newsletter: {
-        light: 'https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/canvas_andy_v_newsletter_light_04ff7db603.png',
-        dark: 'https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/canvas_andy_v_newsletter_dark_bea6ed2447.png',
-        alt: 'A newsletter draft written and edited in a canvas',
+    funnel: {
+        light: 'https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/canvas_cleo_funnel_light_54517966c7.png',
+        dark: 'https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/canvas_cleo_funnel_dark_d12699ff56.png',
+        alt: 'A canvas that draws each funnel step as a flowing river',
     },
     deck: {
         light: 'https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/canvas_harley_slide_deck_2_992e7d6636.png',
@@ -125,140 +86,241 @@ const IMAGES = {
         dark: 'https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/canvas_demo_growth_review_dark_1_6e7beab960.png',
         alt: 'A monthly growth review canvas that compares revenue and growth',
     },
+    productDashboard: {
+        light: 'https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/canvas_demo_growth_review_light_1_2a0c5fa037.png',
+        dark: 'https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/canvas_demo_growth_review_dark_345a3d8ade.png',
+        alt: 'A product assistant dashboard with usage, activation, and retention metrics',
+    },
+    handbookActivity: {
+        light: 'https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/canvas_raquel_handbook_activity_light_ac9aa67e2b.png',
+        dark: 'https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/canvas_raquel_handbook_activity_dark_00a8f63a09.png',
+        alt: 'A canvas that tracks handbook commits and contributors',
+    },
+    retention: {
+        light: 'https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/canvas_cleo_retention_light_0c09fd2724.png',
+        dark: 'https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/canvas_cleo_retention_dark_09369feb30.png',
+        alt: 'A weekly retention canvas with a retention curve and cohort table',
+    },
+    usageBilling: {
+        light: 'https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/canvas_cleo_usage_billing_demo_light_7c84967aef.png',
+        dark: 'https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/canvas_cleo_usage_billing_demo_dark_fece25f120.png',
+        alt: 'A usage billing canvas with estimated revenue and invoiced months',
+    },
+    architecture: {
+        light: 'https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/dylan_architecture_diagram_light_d331740058.png',
+        alt: 'A canvas that diagrams how a system fits together',
+    },
+    liveUsage: {
+        light: 'https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/canvas_cleo_desktop_deep_dark_12623e86a6.png',
+        dark: 'https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/canvas_cleo_desktop_deep_dark_1_4b2a328377.png',
+        alt: 'A live usage canvas that draws each active user as a fish',
+    },
 } satisfies Record<string, CanvasImage>
 
 export const CANVASES: GalleryCanvas[] = [
     {
-        slug: 'signup-dip',
-        title: 'Find the cause of a signup dip',
-        shape: 'disposable',
-        category: 'investigate',
-        topics: ['Product', 'Marketing'],
-        tagline: 'One question. One answer. Close the tab.',
-        when: 'Someone posts a scary screenshot of a trend in Slack. Build this instead of replying "looking into it". It shows the dip, breaks it down by the dimension most likely to explain it, and writes the verdict in one sentence.',
-        prompt: `Signups dipped on Tuesday. Build a canvas that shows daily signups for the last 14 days with the dip highlighted, breaks the drop down by referrer, UTM source, and country, and highlights which segment explains most of the change. End with a one-paragraph verdict: is this a bug, a traffic change, or noise? Use the "signed_up" event. Keep it to one screen.`,
-        reads: ['signed_up event', '$referring_domain', 'utm_source', '$geoip_country_code'],
-        tools: ['productAnalytics'],
-        image: IMAGES.growth,
-    },
-    {
-        slug: 'customer-lookup',
-        title: 'Look up a customer account',
-        shape: 'disposable',
-        category: 'investigate',
-        topics: ['Customer support', 'Engineering'],
-        tagline: 'A support tool you use once per ticket.',
-        when: 'A ticket comes in and you want everything about that account on one screen before you reply. Plan, last seen, flags, recent errors, and the replay of the moment it went wrong. Used a hundred times, but each use is a fresh throwaway.',
-        prompt: `Build a customer lookup canvas. Give me a search box that accepts an email, a company name, or a distinct_id. When I search, show one screen with: the person and their group properties (plan, MRR, company), events in the last 24 hours as a bar chart, feature flags that are on for them, exceptions from error tracking in the last 7 days, and links to their 3 most recent session recordings. Make it fast to read. No charts with more than one series.`,
-        reads: ['persons & groups', 'events (24h)', 'feature flags', 'error tracking', 'session recordings'],
-        tools: ['productAnalytics', 'featureFlags', 'errorTracking', 'sessionReplay'],
+        slug: 'globe',
+        title: 'Show global product use',
+        category: 'present',
+        tagline: 'A live map for seeing where product use happens.',
+        when: 'Show active users by country, with the top country and total coverage.',
+        prompt: `Build a canvas that shows where in the world people use our product.
+
+Data: active users in the last 24 hours, grouped by country. Use the geographic property our events already carry. Count each person once.
+
+Layout: a world map filling most of the canvas, with darker green for more active users. Above it, put total active users, the number of countries with any activity, and the country with the most.
+
+Details: give every country a hover label with its name and its user count. Leave countries with no activity in the empty state color, and do not draw them as zero. Name the time window on the canvas.`,
+        tools: ['product_analytics'],
+        connectors: [],
         image: IMAGES.home,
     },
     {
-        slug: 'post-deploy-check',
-        title: 'Check a deploy for regressions',
-        shape: 'disposable',
-        category: 'investigate',
-        topics: ['Engineering'],
-        tagline: 'Lives for 20 minutes after a deploy. Then nobody opens it again.',
-        when: 'You just shipped. You want error rate, latency, and new exception groups against the last hour, plus a hold/continue verdict for the flag rollout. Build it once per deploy, or ask an agent to build it automatically when a PR merges.',
-        prompt: `I just deployed. Build a canvas that compares the 20 minutes after the deploy with the 60 minutes before it: error rate per minute (mark the deploy time), p95 latency, new exception groups that did not exist before, and the current rollout percentage of the feature flag "new-editor". Show four pass/fail checks and a single recommendation: continue the rollout or hold. Use a timer that shows minutes since deploy.`,
-        reads: ['error tracking', 'APM traces (p95)', 'feature flag rollout', 'deploy annotations'],
-        tools: ['errorTracking', 'featureFlags'],
+        slug: 'work-board',
+        title: 'Run a work board',
+        category: 'monitor',
+        tagline: 'Open work, with the important filters already set.',
+        when: 'Use one board to review your open issues and cards.',
+        prompt: `Build a board for the work my team has open right now.
+
+Data: open issues and pull requests from our connected issue tracker and planning tool. Read the repositories and projects we already have connected, and tell me which ones you used.
+
+Layout: one column per status, in the order work moves through them. Each card shows the title, the owner, the age, and a link to the original.
+
+Details: add filters for owner, team, and current sprint. Hide completed work by default. Sort each column with the oldest work at the top, because that is the work at risk. Show a count at the head of every column.`,
+        tools: [],
+        connectors: ['github', 'mcpServer'],
         image: IMAGES.board,
     },
     {
-        slug: 'morning-skim',
-        title: 'Check daily product health',
-        shape: 'durable',
+        slug: 'product-health-watchtower',
+        title: 'Run a product health watchtower',
         category: 'monitor',
-        topics: ['Product', 'Engineering'],
-        tagline: 'Six numbers, three tables, no charts. Read in under a minute.',
-        when: 'The daily check: a handful of numbers, a glance at flags and experiments, and one question, did anything move? This canvas is that check on one screen, with one line at the bottom that says what needs you today.',
-        prompt: `Build my morning canvas. I want to read it in under a minute. Top row: signups, weekly active users, activation rate, error count, p95 latency, and MRR, each as a big number with the percent change versus the same day last week. Green if it moved the way I want, red if not. Below that, three small tables: feature flags changed in the last 7 days with their rollout percentage, running experiments with their current lift and whether it is significant, and survey response counts for this week. Finish with one sentence that names the single thing I should act on. No charts. Same layout every day.`,
-        reads: ['trends insights', 'feature flags', 'experiments', 'surveys', 'error tracking'],
-        tools: ['productAnalytics', 'featureFlags', 'experiments', 'surveys', 'errorTracking'],
-        image: IMAGES.home,
+        tagline: 'A single view of product work and its health.',
+        when: 'Review active product work and the controls that protect it.',
+        prompt: `Build a board that shows whether our product work is healthy.
+
+Data: open change requests, work opened by automation, merged work, review coverage, approval coverage, and reports waiting in the Inbox. Add product adoption and the rate of change over the same period.
+
+Layout: coverage and count numbers along the top, then the trend of merged work and work opened by automation, then the list of reports waiting for a decision.
+
+Details: define coverage as the share of merged work that got a review, and say so on the canvas. Mark a number red when it gets worse over the period, and put the direction next to it. Every red number needs a link to the work behind it.`,
+        tools: ['inbox', 'product_analytics', 'dashboards'],
+        connectors: ['github'],
+        image: IMAGES.surveys,
     },
     {
-        slug: 'credit-burn',
-        title: 'Track AI credit usage',
-        shape: 'durable',
-        category: 'monitor',
-        topics: ['Billing'],
-        tagline: 'A dashboard for one number that gets scary.',
-        when: 'You have a monthly limit on AI credits and several products drawing from it. You want to know, without math, if the month ends inside the limit. The dashed line is where you should be today. The projection is the number you have to explain to someone.',
-        prompt: `Build a canvas that tracks our PostHog AI credit usage this month. Show credits used against the billing limit as a progress bar with a marker at where we should be for today's date, a projected end-of-month total based on the average daily rate, credits per day as a sparkline, and a breakdown by product (Desktop tasks, canvases, self-driving reports, PostHog AI). Turn the bar orange above 65% and red above 85%. Use the billing usage API for the numbers.`,
-        reads: ['billing usage', 'AI credit ledger', 'usage by product'],
-        tools: ['billing'],
-        image: IMAGES.growth,
-    },
-    {
-        slug: 'retention-grid',
-        title: 'Monitor weekly retention',
-        shape: 'durable',
-        category: 'monitor',
-        topics: ['Product'],
-        tagline: 'The same shape every Monday, so your eye learns it.',
-        when: 'Retention is the number that changes slowly and matters most. A triangle with one hue, light to dark, lets you see a better cohort in a second. The footer says whether anything changed. Most weeks it says no, and that is the point.',
-        prompt: `Build a weekly retention canvas. Cohorts are people who fired "signed_up" in each of the last 8 weeks. Retention is any event in the following weeks. Render it as a retention triangle with one color, light to dark by percentage, with the percentage written in each cell. Highlight the cohort that is furthest from the trend and say by how many points. Add one sentence at the bottom: what week-4 retention is now, what it was a quarter ago, and whether I need to do anything.`,
-        reads: ['retention insight', 'signed_up event', 'cohorts'],
-        tools: ['productAnalytics'],
-        image: IMAGES.growth,
-    },
-    {
-        slug: 'live-deck',
-        title: 'Present a live product review',
-        shape: 'showable',
+        slug: 'user-journey-flow',
+        title: 'See where people leave a journey',
         category: 'present',
-        topics: ['Product', 'Leadership'],
-        tagline: 'Slides where the numbers are queries, not screenshots.',
-        when: 'The quarterly review, the board update, the customer call. Every number re-queries when you open the deck, so it is still right when someone reopens it in two months. Four slides is enough. The third slide is "people in the product right now", because it works every time.',
-        prompt: `Build a four-slide deck as a canvas for our Q3 review. Slide 1: weekly active users as a single big number with percent change versus Q2. Slide 2: activation rate by acquisition channel as horizontal bars with the value labeled, plus one line of what we should do about it. Slide 3: the number of people active in the product right now, live. Slide 4: our bet for Q4 as three short sentences with a measurable pass/fail condition. Arrow keys move between slides. A thin progress bar at the top shows where we are. Every number is a live query, never a pasted value.`,
-        reads: ['trends insights', 'breakdown by channel', 'live event stream'],
-        tools: ['productAnalytics'],
+        tagline: 'A funnel you can read from across the room.',
+        when: 'Use it to see how many people reach each step, and how many leave between steps.',
+        prompt: `Build a canvas that shows where people leave a journey, so I can see which step to fix first.
+
+Data: an ordered funnel of unique people, with a 14-day conversion window. Choose the steps from our most common product events, and list the events you chose.
+
+Layout: draw the funnel as a river that flows left to right, where the width is the people who continue. The drop-off should be readable from across the room. Label each step with the people who arrived and the people lost before the next step. Put end-to-end conversion at the end.
+
+Details: let me switch between two or three saved journeys, and name the events in each. State the conversion window on the canvas. Finish with one sentence that names the step with the largest loss.`,
+        tools: ['funnels', 'product_analytics', 'user_paths'],
+        connectors: [],
+        image: IMAGES.funnel,
+    },
+    {
+        slug: 'agent-pr-deck',
+        title: 'Present automation output',
+        category: 'present',
+        tagline: 'Show what agents changed, and at what rate.',
+        when: 'Use it to share the monthly change in automated pull requests.',
+        prompt: `Build a short presentation on how much of our engineering output comes from automation.
+
+Data: pull requests from the GitHub data in our warehouse. Count a pull request as automated when its author is a bot or an agent account, and list the accounts you treated that way.
+
+Layout: one idea per slide. Open with the share of pull requests opened by automation each month, then the best day for merged pull requests, then a slide that explains the trend in two or three sentences.
+
+Details: use one series per chart, and no legend when there is only one. Write the numbers into the sentences, so a reader who skips the charts still gets the point.`,
+        tools: ['data_warehouse'],
+        connectors: ['github'],
         image: IMAGES.deck,
     },
     {
-        slug: 'globe',
-        title: 'Show live users on a globe',
-        shape: 'showable',
-        category: 'present',
-        topics: ['Marketing'],
-        tagline: 'A globe that pulses when a session starts. Built for the all-hands, not for a Tuesday.',
-        when: 'You want the room to feel the product being used. A dotted globe, a pulse per new session, a counter that ticks up. It tells you nothing you could act on. That is fine. It is not for acting, it is for showing.',
-        prompt: `Build a canvas with a slowly rotating dotted globe. Plot every session that started in the last 10 minutes at its $geoip_latitude and $geoip_longitude, and pulse the dot when a new session starts. Next to it, show active users right now, the number of countries, and the top city. Refresh every 10 seconds. Dark background, one accent color, no legend. It should look good on a projector from the back of the room.`,
-        reads: ['$geoip_latitude / $geoip_longitude', 'live session starts', '$geoip_city_name'],
-        tools: ['productAnalytics'],
-        weird: true,
-        image: IMAGES.home,
+        slug: 'monthly-growth-review',
+        title: 'Review monthly growth',
+        category: 'investigate',
+        tagline: 'Revenue and growth across the product portfolio.',
+        when: 'Use it to review product growth and revenue each month.',
+        prompt: `Build a monthly growth review that tells me where to look next.
+
+Data: revenue, active users, and growth rate for each product, this month against last month. Take revenue from the billing data in our warehouse and usage from our product events.
+
+Layout: a row of totals with the change against last month, then one row per product, sorted by the size of the change rather than by name.
+
+Details: show every change as both an absolute number and a percentage, because a large percentage on a small base is not news. Mark the three largest movements. Finish with a short written verdict: what moved, the most likely reason, and the one thing to look at first.`,
+        tools: ['product_analytics', 'data_warehouse'],
+        connectors: [],
+        image: IMAGES.growth,
     },
     {
-        slug: 'incident-report',
-        title: 'Explain a product incident',
-        shape: 'showable',
-        category: 'present',
-        topics: ['Engineering'],
-        tagline: 'A postmortem people read, because it is not a wall of text.',
-        when: 'Something broke, you fixed it, and now you owe the team a write-up. A canvas with the error curve, the blast radius, and a timeline is read by more people than a document, and the numbers are pulled from PostHog rather than typed from memory. Share the link in the incident channel and move on.',
-        prompt: `Build an incident report canvas for the incident on September 4 between 14:02 and 14:31 UTC. Show errors per minute for the surrounding two hours with the incident window shaded, three headline numbers (duration, users affected, failed export jobs), a timeline of what happened with times, and a "what we changed" list. Pull the error data from error tracking and the affected users from the "export_failed" event. Make it printable on one page.`,
-        reads: ['error tracking', 'export_failed event', 'deploy annotations', 'alerts'],
-        tools: ['productAnalytics', 'errorTracking', 'logs'],
-        image: IMAGES.board,
+        slug: 'product-usage-dashboard',
+        title: 'Monitor product usage',
+        category: 'monitor',
+        tagline: 'Usage, activation, and retention on one screen.',
+        when: 'Use it to check product growth, activation, and retention.',
+        prompt: `Build a standing dashboard for product usage that looks the same every day, so my eye learns where each number lives.
+
+Data: daily active users, active accounts, key actions, activation rate, and weekly retention. Count accounts with our group data, not per person. Choose the key action from our most frequent product events, and name it on the canvas.
+
+Layout: the five numbers in a fixed row along the top, then daily trends for active users and key actions below.
+
+Details: define activation and say so next to the number. Put a small change against the prior period beside each number, with the direction. Keep the layout identical between loads, and never reorder the numbers.`,
+        tools: ['product_analytics', 'group_analytics', 'retention', 'funnels'],
+        connectors: [],
+        image: IMAGES.productDashboard,
     },
     {
-        slug: 'fish-tank',
-        title: 'Show live sessions in a fish tank',
-        shape: 'showable',
+        slug: 'handbook-activity',
+        title: 'Track handbook contributions',
+        category: 'monitor',
+        tagline: 'Who writes the handbook, and how often.',
+        when: 'Use it to review commit volume, contributor count, and the most active writers.',
+        prompt: `Build a canvas that shows who writes our handbook and how often.
+
+Data: commits, distinct committers, pull requests, and the top committer for the last 30 days, from the GitHub data in our warehouse.
+
+Layout: those four numbers along the top, then commits per week, then a ranked list of committers with their commit counts.
+
+Details: if you cannot match commits to handbook files exactly, approximate it and write the method on the canvas, so nobody reads the number as exact. Use one bar series and no legend. Add the date the data was last refreshed.`,
+        tools: ['data_warehouse'],
+        connectors: ['github'],
+        image: IMAGES.handbookActivity,
+    },
+    {
+        slug: 'living-usage-model',
+        title: 'Watch live product use',
         category: 'present',
-        topics: ['Marketing'],
-        tagline: 'Each fish is a live session. Delightful for a day. Unreadable forever. Here anyway.',
-        when: 'The honest entry. Great on day one. By day three you cannot read it, and the boring board wins. Build it for the office TV, the launch party, or to make a point about what dashboards are for. Do not put it in your morning routine.',
-        prompt: `Build a fish tank canvas. Every person who viewed /editor in the last 5 minutes is a fish swimming across the screen. Blue for free plan, orange for paid, purple for people from our own company. Add some bubbles and a sand floor. Show the count of fish in the corner. Refresh the population every 30 seconds without restarting the animation. This is for the office TV, so no controls and no text smaller than 14px.`,
-        reads: ['$pageview on /editor', 'person property: plan', 'is_internal_user'],
-        tools: ['productAnalytics'],
-        weird: true,
-        image: IMAGES.surveys,
+        tagline: 'Live product use as an ocean you can leave on a screen.',
+        when: 'Use it to show what happens right now, with one fish for each active user.',
+        prompt: `Build an ambient view of live product use, for a screen the team can leave on all day.
+
+Data: users active in the last few minutes, events, sessions, prompts to our AI features, and friction signals from exceptions and dead clicks.
+
+Layout: an ocean that fills the canvas, with one fish for each recently active user. Put the counts in a fixed panel down one side, and a ranked list of the most common recent event types, with event and user counts, down the other.
+
+Details: clicking a fish shows what that person is doing. Keep the data fresh on its own and show how recent it is, so nobody reads a stale screen as live. Keep the motion slow enough to ignore, since this runs all day next to people who are working.`,
+        tools: ['product_analytics', 'ai_observability', 'error_tracking', 'heatmaps'],
+        connectors: [],
+        image: IMAGES.liveUsage,
+    },
+    {
+        slug: 'weekly-retention',
+        title: 'Check if people come back',
+        category: 'investigate',
+        tagline: 'One curve that says if the product sticks.',
+        when: 'Use it to review how much of each weekly cohort returns, and whether that is improving.',
+        prompt: `Build a weekly retention canvas that answers one question: do people come back?
+
+Data: weekly cohorts by the date of a person's first activity. Choose the event that counts as activity from our most frequent product events, and name it on the canvas.
+
+Layout: the retention curve for the weeks after first activity, a cohort table with one row per week of first use, and a row of numbers above both: active users, key actions, week 1 retention, and week 4 retention.
+
+Details: compare week 1 retention with the prior cohort and show the direction, so I can see whether it improves. Leave out the current week, because a partial cohort always looks worse. Finish with one sentence on whether retention is flat, improving, or falling.`,
+        tools: ['retention', 'product_analytics'],
+        connectors: [],
+        image: IMAGES.retention,
+    },
+    {
+        slug: 'architecture-diagram',
+        title: 'Diagram how a system works',
+        category: 'present',
+        tagline: 'An architecture diagram you can edit, not redraw.',
+        when: 'Use it to explain a pipeline in a talk, a design review, or an onboarding document.',
+        prompt: `Build an architecture diagram of our system that I can edit later, not redraw.
+
+Data: read our repository to get the components and their names right. Do not invent a component.
+
+Layout: one horizontal band per layer, in the order data moves through them, and put every component in the band that owns it. Name the language or service each layer runs on. Draw the path data takes between components and label each edge with what moves along it.
+
+Details: use a separate line style for a required path, an optional path, and a feedback loop, and add a key. Keep every label short enough to read at presentation size. Prefer a clear layout over a complete one, and say what you left out.`,
+        tools: [],
+        connectors: ['github'],
+        image: IMAGES.architecture,
+    },
+    {
+        slug: 'usage-billing-overview',
+        title: 'Watch usage-based revenue',
+        category: 'investigate',
+        tagline: 'What we can invoice, and what we cannot.',
+        when: 'Use it to review revenue each month, and to find accounts that use the product but cannot be billed.',
+        prompt: `Build a usage billing board that shows what we can invoice and what we cannot.
+
+Data: subscriptions, usage, and organizations from the billing data in our warehouse.
+
+Layout: estimated monthly and annual revenue, the latest invoiced amount split into subscription and usage, and the amount accrued since usage billing started. Below that, a table of invoiced revenue by billing month with paying organizations. Below that, a section for organizations that use the product but cannot be invoiced.
+
+Details: subtract the free monthly allowance before you bill usage. Leave out internal and onboarding usage. Each invoice bills the usage of the month before it, so label every row with both months and say which is which. Let me switch the scope between paid plans, trial plans, and all usage, and say which numbers the scope does not change.`,
+        tools: ['data_warehouse', 'group_analytics', 'product_analytics'],
+        connectors: [],
+        image: IMAGES.usageBilling,
     },
 ]
 
