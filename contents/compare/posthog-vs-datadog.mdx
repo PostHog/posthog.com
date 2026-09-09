@@ -18,9 +18,9 @@ seo:
     metaDescription: Datadog is built for infrastructure and security teams. PostHog is built for product engineers. Compare the two on products, observability, pricing, and platform features.
 ---
 
-Both PostHog and [Datadog](/compare/best-datadog-alternatives) are broad platforms aimed at helping developers understand the performance of their software.
+Both PostHog and [Datadog](/compare/best-datadog-alternatives) are developer platforms aimed at helping product teams understand the performance of their software.
 
-This post provides a detailed guide comparing the two across features, use cases, and team types. It aims to help you pick the best option that for you so you can go back to thinking about more pressing questions, like would you rather fight 100 hedgehog-sized dogs or 1 dog-sized hedgehog?
+This post provides a detailed guide comparing the two across features, use cases, and team types. It aims to help you pick the best APM tool for your use case, so you can go back to thinking about more pressing questions – like would you rather fight 100 hedgehog-sized dogs or 1 dog-sized hedgehog?
 
 ## How is PostHog different?
 
@@ -28,19 +28,19 @@ This post provides a detailed guide comparing the two across features, use cases
 
 Datadog has a free tier, but it's limited. Only some of their products, like infrastructure monitoring, have a free tier. Even then, there are limits like 5 hosts, with only a 1-day metric retention. APM, logs, RUM, replay, and more are excluded and only available as trials.
 
-All of PostHog's products have a free tier that refreshes every month. Beyond that, every product's pricing is transparent. You can predict how much you're going to pay, rather than go through Datadog's complicated and multiplicative pricing.
+All of PostHog's products have a free tier that refreshes every month. Beyond that, [every product's pricing is transparent](/pricing). You can predict how much you're going to pay, rather than go through Datadog's complicated and multiplicative pricing.
 
 ### Built for product engineers
 
-Datadog is organized around services and hosts. PostHog is organized around events and people.
+Datadog is organized around services and hosts. PostHog is organized around [events](/docs/data/events) and [people](/docs/data/persons).
 
-This reflects the typical usage and users of each. Datadog is built for DevOps and infra teams monitoring their infrastructure and ensuring reliability while PostHog focuses on product engineers trying to build successful products.
+This reflects the typical usage and users of each. Datadog is built for DevOps and infra teams monitoring their infrastructure and ensuring reliability while PostHog focuses on [product engineers](/blog/product-engineer-vs-software-engineer) trying to build successful products.
 
 This doesn't mean both aren't used by other types of users though. They have overlapped more and more. Datadog acquired Eppo for experiments and launched a feature flags product. PostHog launched [logs](/logs) and is filling out its APM suite.
 
 ### PostHog makes your product self-driving (the whole way)
 
-In PostHog, product data, errors, logs, and more all feed AI agents that research areas for improvements and actually write the code for you. Set it up and it makes your product self-driving.
+In PostHog, product data, errors, logs, and more all feed AI agents that research areas for improvements and actually write the code for you. Set it up and it [makes your product self-driving](/self-driving).
 
 Datadog has Bits Code which can make fixes too, but it needs a trigger like an error, flaky test, or slow query. It doesn't deduplicate across sources either. An exception, rageclick cluster, and Zendesk ticket could all be the same issue. Datadog wouldn't know it but PostHog would.
 
@@ -105,7 +105,7 @@ If you're focused on building successful products, PostHog has a more useful set
 
 ### Product analytics and session replay
 
-[Product Analytics](/product-analytics) and [Session Replay](/session-replay) are the products PostHog started out with, are most known for, and are the strongest. Even though Datadog doesn't have the same focus on them, many of the same features are available on its platform too.
+[Product Analytics](/product-analytics) and [Session Replay](/session-replay) are the tools PostHog started out with, are most known for, and are the strongest. Even though Datadog doesn't have the same focus on them, many of the same features are available on its platform too.
 
 <p>
 <ProductComparisonTable
@@ -129,7 +129,7 @@ If you're focused on building successful products, PostHog has a more useful set
 
 ### Pricing and free tier
 
-The pricing and free tier might be the area where PostHog and Datadog have the largest differences. Although both have many products with separate pricing, PostHog provides a free tier and transparency for all of them.
+The pricing and free tier might be the area where PostHog and Datadog have the largest differences. Although both have many products with separate pricing, PostHog provides a free tier and [transparency](/pricing) for all of them.
 
 <p>
 <ProductComparisonTable
@@ -185,7 +185,7 @@ Both PostHog and Datadog have the platform and security features enterprise or c
 Choose PostHog if:
 
 - Debugging starts from a user or a feature rather than a host. It provides the error, replay, and logs attached to the person who hit them.
-- You want the tool that finds the problem to also ship the fix via agents that open PRs as well as feature flags and experiments.
+- You want the tool that finds the problem to also ship the fix via [agents that open PRs](/blog/what-is-a-scout) as well as feature flags and experiments.
 - Cost predictability matters. PostHog provides transparent usage-based pricing, self-serve, hard spend caps per product.
 - You're already emitting OpenTelemetry and want to [repoint an exporter](/docs/logs/installation), not adopt another proprietary agent.
 - You want observability in the same platform as product analytics, replay, flags, experiments, and [warehouse data](/context-warehouse), querying the same data.
@@ -349,7 +349,7 @@ For a bunch of monitoring, not yet. PostHog doesn't have Kubernetes, synthetic, 
 
 Datadog isn't open source. Some bits of its platform, like the Datadog Agent are, but most aren't.
 
-PostHog is MIT-licensed, self-hostable, and even goes further to have an public roadmap and handbook.
+PostHog is MIT-licensed and has a [public handbook](/handbook) with details on how the company operates.
 
 </details>
 
