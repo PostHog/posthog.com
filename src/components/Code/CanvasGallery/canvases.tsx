@@ -1,7 +1,3 @@
-import { CustomerLookupDemo, PostDeployCheckDemo, SignupDipDemo } from './demos/DisposableDemos'
-import { CreditBurnDemo, MorningSkimDemo, RetentionGridDemo } from './demos/DurableDemos'
-import { FishTankDemo, GlobeDemo, IncidentReportDemo, LiveDeckDemo } from './demos/ShowableDemos'
-
 export type CanvasShape = 'disposable' | 'durable' | 'showable'
 export type CanvasCategory = 'investigate' | 'monitor' | 'present'
 export type CanvasTopic = 'Product' | 'Marketing' | 'Engineering' | 'Billing' | 'Customer support' | 'Leadership'
@@ -57,7 +53,7 @@ export const CATEGORIES: Record<CanvasCategory, CategoryInfo> = {
     investigate: {
         label: 'Investigate',
         shape: 'disposable',
-        verb: 'Visualize data',
+        verb: 'Query data',
         description: 'Find what happened, who it affected, and what to do next.',
     },
     monitor: {
@@ -90,8 +86,46 @@ export interface GalleryCanvas {
     /** PostHog tools that supply the canvas data. */
     tools: CanvasTool[]
     weird?: boolean
-    Demo: () => JSX.Element
+    image: CanvasImage
 }
+
+interface CanvasImage {
+    light: `https://res.cloudinary.com/${string}`
+    dark?: `https://res.cloudinary.com/${string}`
+    alt: string
+}
+
+const IMAGES = {
+    home: {
+        light: 'https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/canvas_james_world_light_b414431f5d.png',
+        dark: 'https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/canvas_james_world_dark_20a89b581f.png',
+        alt: 'A personal home canvas with metrics, tasks, and links',
+    },
+    board: {
+        light: 'https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/canvas_brittany_work_board_dark_1_cec5ced8e1.png',
+        dark: 'https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/canvas_brittany_work_board_dark_3886ceaa36.png',
+        alt: 'A work board canvas with columns for current work',
+    },
+    surveys: {
+        light: 'https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/canvas_cory_s_surveys_self_driving_dark_1_1fa4d27d45.png',
+        dark: 'https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/canvas_cory_s_surveys_self_driving_dark_11e1a40692.png',
+        alt: 'A canvas that summarizes survey responses',
+    },
+    newsletter: {
+        light: 'https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/canvas_andy_v_newsletter_light_04ff7db603.png',
+        dark: 'https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/canvas_andy_v_newsletter_dark_bea6ed2447.png',
+        alt: 'A newsletter draft written and edited in a canvas',
+    },
+    deck: {
+        light: 'https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/canvas_harley_slide_deck_2_992e7d6636.png',
+        alt: 'A slide deck built as a canvas',
+    },
+    growth: {
+        light: 'https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/canvas_demo_growth_review_light_9d87931bc6.png',
+        dark: 'https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/canvas_demo_growth_review_dark_1_6e7beab960.png',
+        alt: 'A monthly growth review canvas that compares revenue and growth',
+    },
+} satisfies Record<string, CanvasImage>
 
 export const CANVASES: GalleryCanvas[] = [
     {
@@ -105,7 +139,7 @@ export const CANVASES: GalleryCanvas[] = [
         prompt: `Signups dipped on Tuesday. Build a canvas that shows daily signups for the last 14 days with the dip highlighted, breaks the drop down by referrer, UTM source, and country, and highlights which segment explains most of the change. End with a one-paragraph verdict: is this a bug, a traffic change, or noise? Use the "signed_up" event. Keep it to one screen.`,
         reads: ['signed_up event', '$referring_domain', 'utm_source', '$geoip_country_code'],
         tools: ['productAnalytics'],
-        Demo: SignupDipDemo,
+        image: IMAGES.growth,
     },
     {
         slug: 'customer-lookup',
@@ -118,7 +152,7 @@ export const CANVASES: GalleryCanvas[] = [
         prompt: `Build a customer lookup canvas. Give me a search box that accepts an email, a company name, or a distinct_id. When I search, show one screen with: the person and their group properties (plan, MRR, company), events in the last 24 hours as a bar chart, feature flags that are on for them, exceptions from error tracking in the last 7 days, and links to their 3 most recent session recordings. Make it fast to read. No charts with more than one series.`,
         reads: ['persons & groups', 'events (24h)', 'feature flags', 'error tracking', 'session recordings'],
         tools: ['productAnalytics', 'featureFlags', 'errorTracking', 'sessionReplay'],
-        Demo: CustomerLookupDemo,
+        image: IMAGES.home,
     },
     {
         slug: 'post-deploy-check',
@@ -131,7 +165,7 @@ export const CANVASES: GalleryCanvas[] = [
         prompt: `I just deployed. Build a canvas that compares the 20 minutes after the deploy with the 60 minutes before it: error rate per minute (mark the deploy time), p95 latency, new exception groups that did not exist before, and the current rollout percentage of the feature flag "new-editor". Show four pass/fail checks and a single recommendation: continue the rollout or hold. Use a timer that shows minutes since deploy.`,
         reads: ['error tracking', 'APM traces (p95)', 'feature flag rollout', 'deploy annotations'],
         tools: ['errorTracking', 'featureFlags'],
-        Demo: PostDeployCheckDemo,
+        image: IMAGES.board,
     },
     {
         slug: 'morning-skim',
@@ -144,7 +178,7 @@ export const CANVASES: GalleryCanvas[] = [
         prompt: `Build my morning canvas. I want to read it in under a minute. Top row: signups, weekly active users, activation rate, error count, p95 latency, and MRR, each as a big number with the percent change versus the same day last week. Green if it moved the way I want, red if not. Below that, three small tables: feature flags changed in the last 7 days with their rollout percentage, running experiments with their current lift and whether it is significant, and survey response counts for this week. Finish with one sentence that names the single thing I should act on. No charts. Same layout every day.`,
         reads: ['trends insights', 'feature flags', 'experiments', 'surveys', 'error tracking'],
         tools: ['productAnalytics', 'featureFlags', 'experiments', 'surveys', 'errorTracking'],
-        Demo: MorningSkimDemo,
+        image: IMAGES.home,
     },
     {
         slug: 'credit-burn',
@@ -157,7 +191,7 @@ export const CANVASES: GalleryCanvas[] = [
         prompt: `Build a canvas that tracks our PostHog AI credit usage this month. Show credits used against the billing limit as a progress bar with a marker at where we should be for today's date, a projected end-of-month total based on the average daily rate, credits per day as a sparkline, and a breakdown by product (Desktop tasks, canvases, self-driving reports, PostHog AI). Turn the bar orange above 65% and red above 85%. Use the billing usage API for the numbers.`,
         reads: ['billing usage', 'AI credit ledger', 'usage by product'],
         tools: ['billing'],
-        Demo: CreditBurnDemo,
+        image: IMAGES.growth,
     },
     {
         slug: 'retention-grid',
@@ -170,7 +204,7 @@ export const CANVASES: GalleryCanvas[] = [
         prompt: `Build a weekly retention canvas. Cohorts are people who fired "signed_up" in each of the last 8 weeks. Retention is any event in the following weeks. Render it as a retention triangle with one color, light to dark by percentage, with the percentage written in each cell. Highlight the cohort that is furthest from the trend and say by how many points. Add one sentence at the bottom: what week-4 retention is now, what it was a quarter ago, and whether I need to do anything.`,
         reads: ['retention insight', 'signed_up event', 'cohorts'],
         tools: ['productAnalytics'],
-        Demo: RetentionGridDemo,
+        image: IMAGES.growth,
     },
     {
         slug: 'live-deck',
@@ -183,7 +217,7 @@ export const CANVASES: GalleryCanvas[] = [
         prompt: `Build a four-slide deck as a canvas for our Q3 review. Slide 1: weekly active users as a single big number with percent change versus Q2. Slide 2: activation rate by acquisition channel as horizontal bars with the value labeled, plus one line of what we should do about it. Slide 3: the number of people active in the product right now, live. Slide 4: our bet for Q4 as three short sentences with a measurable pass/fail condition. Arrow keys move between slides. A thin progress bar at the top shows where we are. Every number is a live query, never a pasted value.`,
         reads: ['trends insights', 'breakdown by channel', 'live event stream'],
         tools: ['productAnalytics'],
-        Demo: LiveDeckDemo,
+        image: IMAGES.deck,
     },
     {
         slug: 'globe',
@@ -197,7 +231,7 @@ export const CANVASES: GalleryCanvas[] = [
         reads: ['$geoip_latitude / $geoip_longitude', 'live session starts', '$geoip_city_name'],
         tools: ['productAnalytics'],
         weird: true,
-        Demo: GlobeDemo,
+        image: IMAGES.home,
     },
     {
         slug: 'incident-report',
@@ -209,8 +243,8 @@ export const CANVASES: GalleryCanvas[] = [
         when: 'Something broke, you fixed it, and now you owe the team a write-up. A canvas with the error curve, the blast radius, and a timeline is read by more people than a document, and the numbers are pulled from PostHog rather than typed from memory. Share the link in the incident channel and move on.',
         prompt: `Build an incident report canvas for the incident on September 4 between 14:02 and 14:31 UTC. Show errors per minute for the surrounding two hours with the incident window shaded, three headline numbers (duration, users affected, failed export jobs), a timeline of what happened with times, and a "what we changed" list. Pull the error data from error tracking and the affected users from the "export_failed" event. Make it printable on one page.`,
         reads: ['error tracking', 'export_failed event', 'deploy annotations', 'alerts'],
-        tools: ['errorTracking', 'logs'],
-        Demo: IncidentReportDemo,
+        tools: ['productAnalytics', 'errorTracking', 'logs'],
+        image: IMAGES.board,
     },
     {
         slug: 'fish-tank',
@@ -224,7 +258,7 @@ export const CANVASES: GalleryCanvas[] = [
         reads: ['$pageview on /editor', 'person property: plan', 'is_internal_user'],
         tools: ['productAnalytics'],
         weird: true,
-        Demo: FishTankDemo,
+        image: IMAGES.surveys,
     },
 ]
 

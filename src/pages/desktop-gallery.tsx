@@ -8,7 +8,7 @@ export default function DesktopCanvasesPage(): JSX.Element {
         <>
             <SEO
                 title="Canvas gallery – PostHog Desktop"
-                description="Live example canvases for investigating, monitoring, and presenting PostHog data. See each one running on dummy data, copy the prompt, and build your own."
+                description="Example PostHog Desktop canvases for investigating, monitoring, and presenting PostHog data. Copy a prompt and build your own."
                 image="/images/og/default.png"
             />
             <Editor
@@ -18,8 +18,10 @@ export default function DesktopCanvasesPage(): JSX.Element {
                     description: 'Example canvases for PostHog Desktop, with prompts',
                 }}
             >
-                <CanvasGalleryHeader />
-                <CanvasGallery />
+                <div>
+                    <CanvasGalleryHeader />
+                    <CanvasGallery />
+                </div>
             </Editor>
         </>
     )

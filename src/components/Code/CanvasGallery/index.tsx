@@ -33,6 +33,7 @@ import OSButton from 'components/OSButton'
 import { IconDiscord } from 'components/OSIcons/Icons'
 import Modal from 'components/RadixUI/Modal'
 import SlotMachineText from 'components/SlotMachineText'
+import { useApp } from '../../../context/App'
 import usePostHog from '../../../hooks/usePostHog'
 import posthogIcon from '../../../images/posthog-icon-white.svg'
 import {
@@ -121,7 +122,7 @@ function PaintToolIcon({ tool }: { tool: PaintTool }): JSX.Element {
 export function CanvasGalleryHeader(): JSX.Element {
     return (
         <section
-            className="@container not-prose overflow-hidden rounded border border-primary bg-primary"
+            className="@container not-prose overflow-hidden rounded-t border-x border-t border-primary bg-primary"
             aria-label="Canvas ideas"
         >
             <div className="grid gap-5 p-4 pb-16 @2xl:grid-cols-[0.92fr_1.08fr] @2xl:items-center @2xl:p-5 @2xl:pb-16">
@@ -143,8 +144,7 @@ export function CanvasGalleryHeader(): JSX.Element {
                     </h1>
                     <p className="mb-0 mt-2 text-sm leading-relaxed text-secondary">
                         Make a masterpiece out of your metrics with canvases in PostHog Desktop. Give an agent a product
-                        signal, team objective, or an open question, and get a useful tool built on your real data
-                        model.
+                        signal, team objective, or open question, and get a useful tool built on your real data model.
                     </p>
                     <div className="mt-5 flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
                         <h2 className="m-0 text-lg font-bold text-primary">Swipe files</h2>
@@ -154,7 +154,8 @@ export function CanvasGalleryHeader(): JSX.Element {
 
                 <div
                     className="relative min-h-[300px] overflow-hidden rounded-md select-none @2xl:min-h-[330px]"
-                    aria-hidden="true"
+                    role="group"
+                    aria-label="PostHog Paint preview"
                 >
                     <div className="absolute inset-0 flex flex-col overflow-hidden rounded-md border border-primary bg-primary shadow-sm">
                         <div className="flex h-7 shrink-0 items-center justify-between bg-blue px-2 text-xs font-bold text-white">
@@ -205,6 +206,14 @@ export function CanvasGalleryHeader(): JSX.Element {
                             <span className="size-5 border border-primary bg-salmon" />
                             <span className="size-5 border border-primary bg-light-purple" />
                             <span className="size-5 border border-primary bg-primary" />
+                            <a
+                                href="/paint"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="ml-auto border border-primary bg-primary px-1.5 py-0.5 text-[10px] font-semibold text-primary hover:bg-accent focus:outline-none focus-visible:ring-2 focus-visible:ring-blue"
+                            >
+                                More colors...
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -221,6 +230,22 @@ function useGalleryEvent() {
             canvas: canvas.slug,
             shape: canvas.shape,
         })
+}
+
+function CanvasPreview({
+    canvas,
+    className = '',
+    imgClassName = '',
+}: {
+    canvas: GalleryCanvas
+    className?: string
+    imgClassName?: string
+}): JSX.Element {
+    const { siteSettings } = useApp()
+    const { image } = canvas
+    const src = siteSettings.theme === 'dark' && image.dark ? image.dark : image.light
+
+    return <img src={src} alt={image.alt} className={`${className} ${imgClassName}`} />
 }
 
 function TopicChip({ topic }: { topic: CanvasTopic }): JSX.Element {
@@ -387,20 +412,17 @@ function OpenInDesktopButton({ canvas, size = 'sm' }: { canvas: GalleryCanvas; s
 }
 
 function CanvasCard({ canvas, onOpen }: { canvas: GalleryCanvas; onOpen: () => void }): JSX.Element {
-    const { Demo } = canvas
     return (
         <article className="group flex flex-col overflow-hidden rounded border border-primary bg-primary">
             <button
                 type="button"
                 onClick={onOpen}
                 className="relative block w-full h-56 text-left border-b border-primary bg-accent overflow-hidden focus:outline-none focus-visible:ring-2 focus-visible:ring-blue"
-                aria-label={`Open the live ${canvas.title} canvas`}
+                aria-label={`Open the ${canvas.title} example`}
             >
-                <div className="absolute top-0 left-0 w-[150%] h-[150%] origin-top-left scale-[0.6667] pointer-events-none select-none">
-                    <Demo />
-                </div>
+                <CanvasPreview canvas={canvas} className="size-full" imgClassName="size-full object-cover object-top" />
                 <span className="absolute bottom-2 right-2 inline-flex items-center gap-1 rounded bg-primary/90 border border-primary px-1.5 py-0.5 text-[11px] font-semibold text-primary opacity-0 group-hover:opacity-100 group-focus-within:opacity-100 transition-opacity">
-                    <IconExpand className="size-3" /> Open live
+                    <IconExpand className="size-3" /> View example
                 </span>
             </button>
             <div className="p-3 flex flex-col gap-2 flex-1">
@@ -428,11 +450,10 @@ function CanvasCard({ canvas, onOpen }: { canvas: GalleryCanvas; onOpen: () => v
 }
 
 function CanvasDetail({ canvas }: { canvas: GalleryCanvas }): JSX.Element {
-    const { Demo } = canvas
     return (
         <div className="@container max-h-[85vh] overflow-y-auto bg-primary">
             <div className="h-[340px] @2xl:h-[420px] border-b border-primary bg-accent">
-                <Demo />
+                <CanvasPreview canvas={canvas} className="size-full" imgClassName="size-full object-cover object-top" />
             </div>
             <div className="p-4 @xl:p-5">
                 <div className="min-w-0">
@@ -542,7 +563,7 @@ function DesktopShamelessCTA(): JSX.Element {
                                 ))}
                             </ul>
                             <DownloadButtons size="sm" />
-                            <p className="mb-0 mt-3 text-xs text-secondary">*Browser, editor, and dashboard tabs.</p>
+                            <p className="mb-0 mt-3 text-xs text-secondary">*Browser, editor, and mental tabs.</p>
                         </div>
                     </div>
                 </div>
@@ -605,29 +626,33 @@ export default function CanvasGallery(): JSX.Element {
     const galleryColor = activeFile ? folderTones[activeFile].color : undefined
 
     return (
-        <div className="@container not-prose relative z-10 -mt-16">
-            <SwipeFileTabs activeFile={activeFile} onSelect={setActiveFile} />
+        <>
+            <div className="@container not-prose relative z-10 -mt-16 overflow-hidden rounded-b border-x border-b border-primary">
+                <SwipeFileTabs activeFile={activeFile} onSelect={setActiveFile} />
 
-            <div
-                className={`relative -mt-1.5 px-4 pb-4 pt-3 @xl:px-5 ${activeFile ? '' : 'bg-accent'}`}
-                style={{ backgroundColor: galleryColor }}
-            >
-                <div className="grid grid-cols-1 gap-4 @xl:grid-cols-2">
-                    {visibleCanvases.map((canvas) => (
-                        <CanvasCard
-                            key={canvas.slug}
-                            canvas={canvas}
-                            onOpen={() => {
-                                track('open_live', canvas)
-                                setOpenSlug(canvas.slug)
-                            }}
-                        />
-                    ))}
+                <div
+                    className={`relative -mt-1.5 px-4 pb-4 pt-3 @xl:px-5 ${activeFile ? '' : 'bg-accent'}`}
+                    style={{ backgroundColor: galleryColor }}
+                >
+                    <div className="grid grid-cols-1 gap-4 @xl:grid-cols-2">
+                        {visibleCanvases.map((canvas) => (
+                            <CanvasCard
+                                key={canvas.slug}
+                                canvas={canvas}
+                                onOpen={() => {
+                                    track('view_example', canvas)
+                                    setOpenSlug(canvas.slug)
+                                }}
+                            />
+                        ))}
+                    </div>
                 </div>
             </div>
 
-            <CanvasCommunityCTA />
-            <DesktopShamelessCTA />
+            <div className="not-prose">
+                <CanvasCommunityCTA />
+                <DesktopShamelessCTA />
+            </div>
 
             <Modal
                 open={!!open}
@@ -637,6 +662,6 @@ export default function CanvasGallery(): JSX.Element {
             >
                 {open && <CanvasDetail canvas={open} />}
             </Modal>
-        </div>
+        </>
     )
 }
