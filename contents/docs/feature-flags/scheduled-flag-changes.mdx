@@ -47,9 +47,11 @@ Scheduled changes appear below the form, grouped into an **Active & upcoming** s
 
 ## Gradual rollouts
 
-To ramp a rollout up over time, schedule one **Add condition** change per phase, each with a higher rollout percentage: 25%, then 50%, then 100%. The earlier conditions stay on the flag, but they do not hold the ramp back. [A pass on any condition set is a pass](/docs/feature-flags/creating-feature-flags#release-conditions), so the highest percentage decides the result, and rollout buckets are shared across sets, so nobody loses access part way through.
+To ramp a rollout up over time, schedule one **Add condition** change per phase, each with a higher rollout percentage: 25%, then 50%, then 100%.
 
-This only ramps a rollout up. A lower percentage added later has no effect, and you have to delete the earlier conditions yourself once the flag reaches 100%. It also needs [early exit](/docs/feature-flags/creating-feature-flags#stop-evaluation-at-first-matching-condition-set) turned off, because that makes the first condition decide the result for everybody.
+Each change adds a condition rather than raising the percentage on the one before it, so the flag ends up holding all three. It still ramps, because PostHog [turns the flag on for anyone who passes at least one condition](/docs/feature-flags/creating-feature-flags#release-conditions). A user's rollout bucket comes from the flag key and their ID, not from the condition, so everyone in the 25% bucket is also in the 50% bucket. The audience only grows, and nobody loses access part way through.
+
+Give every phase the same property filters, or none at all, since a user only ramps across the conditions they already qualify for. This also only ramps up: a lower percentage added later has no effect, and you have to delete the earlier conditions yourself once the flag reaches 100%. Keep [early exit](/docs/feature-flags/creating-feature-flags#stop-evaluation-at-first-matching-condition-set) turned off, because it stops at the 25% condition and never reaches the wider ones.
 
 ## Edit a scheduled change
 
