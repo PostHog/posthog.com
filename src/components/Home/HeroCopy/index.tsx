@@ -30,16 +30,18 @@ const Underline = ({ children, delay = 0 }: { children: React.ReactNode; delay?:
 
 export const HeroHeadline = ({ className }: { className?: string }): JSX.Element => (
     <h1 className={cn('!text-3xl @xl:!text-4xl mt-0', className)}>
-        Make your product{' '}
-        <span className="bg-blue/10 dark:bg-blue/20 text-blue rounded-md px-1 @xl:whitespace-nowrap">self-driving</span>
+        Your product’s{' '}
+        <span className="bg-blue/10 dark:bg-blue/20 text-blue rounded-md px-1 @xl:whitespace-nowrap">
+            context layer
+        </span>
     </h1>
 )
 
 export const HeroBody = (): JSX.Element => (
     <>
         <p className="text-balance @xl:text-wrap text-[17px]">
-            PostHog already has your <Highlight>analytics and errors</Highlight>. Now it{' '}
-            <Underline delay={900}>ships&nbsp;code</Underline> to help you build a better product.
+            PostHog combines and stores your <Highlight>analytics, errors, replays, and business data</Highlight> so you
+            and your <Underline delay={900}>agents</Underline> can understand and act on it.
         </p>
         <p className="text-balance @xl:text-wrap text-secondary">Join 500,000+ teams already shipping with PostHog.</p>
     </>
