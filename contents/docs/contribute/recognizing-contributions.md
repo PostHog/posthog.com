@@ -10,7 +10,7 @@ At PostHog we aim to recognize all contributions made to our open source codebas
 
 Once your pull request is merged, ask the person who reviewed it for a merch code in a comment on the PR. If you have a PostHog account, you can also [open a support request](https://us.posthog.com/#panel=support%3Asupport%3A%3A%3Atrue) with a link to the PR and your GitHub handle. Either way, someone on the PostHog team will send you a code.
 
-We usually give $50 for a code contribution, and more for larger or multiple contributions. Amounts are at our discretion. Codes are single use and don't expire.
+The amount is at our discretion and depends on the size of your contribution. Codes are single use and don't expire.
 
 ## For the PostHog team
 
