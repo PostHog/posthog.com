@@ -1,5 +1,5 @@
 ---
-title: "10 loops we use everyday to make PostHog self-driving"
+title: "9 loops we use everyday to make PostHog self-driving"
 date: 2026-09-09
 rootPage: /blog
 sidebar: Blog
@@ -12,8 +12,8 @@ tags:
     - Explainers
     - AI
 seo:
-    metaTitle: "10 loops we use everyday to make PostHog self-driving"
-    metaDescription: "Ten loops we use to build self-driving in PostHog, from agent feedback to scouts that fix their own instructions. Real reports, merged PRs, and where humans still fit."
+    metaTitle: "9 loops we use everyday to make PostHog self-driving"
+    metaDescription: "Nine loops we use to build self-driving in PostHog, from agent feedback to scouts that fix their own instructions. Real reports, merged PRs, and where humans still fit."
 ---
 
 AI trends come and go, but there's one thing I hate to admit is worth the buzz: [**loops**](/newsletter/loops).
@@ -34,7 +34,7 @@ For now, I still like being part of the loop to decide what actually ships most 
 
 Here are 10 loops we use on the self-driving team to build self-driving itself.
 
-## 1. The `agent-feedback()` loop for the PostHog MCP
+## 1. The PostHog MCP `agent-feedback()` loop
 
 When an agent or human hits friction using the [PostHog MCP](/docs/model-context-protocol) – a confusing schema, a tool that silently drops a parameter, a missing capability, or just something they don't like – they can file structured feedback, headlessly, right from the session where it happened using the [`agent-feedback`](https://github.com/PostHog/posthog/blob/master/services/mcp/src/tools/feedback/submit.ts) tool.
 
@@ -93,71 +93,7 @@ The scout picked up the thread and authored an inbox report. The pipeline opened
 
 **TL;DR–**Team notices a bug → A scout picks it up → Investigates the issue → Creates a PR → Back to using the product.
 
-## 3. The self-driving logs loop
-
-Another one we set up uses a scheduled scout called `signals-scout-self-driving-logs` to look for problems in the self-driving related slices of our runtime [logs](/logs). It works out what failed that caused the log, whether repeated lines are one retry loop or many separate failures, and whether someone is already fixing it.
-
-One run found a task that couldn't start its Hogland (an internal VM service) sandbox because one of its metadata tags was too long. The tag included a workflow ID made from a prefix and two UUIDs. Metadata that had worked with a previous provider ran into a limit with a different one. [PR #92909](https://github.com/PostHog/posthog/pull/92909) bounded the tag strings sent to Hogland and added tests for their lengths, with task and run IDs still available as separate tags.
-
-The part I like is what happened while that PR sat in review. The scout kept checking, and each new run added evidence of the same failure to the existing report instead of starting a competing investigation. It even saw a quiet period followed by more failures – a useful reminder that "nothing broke in this window" doesn't mean an unmerged fix somehow worked.
-
-<div className="max-w-sm mx-auto">
-    <ProductScreenshot
-        imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/logs_scout_evidence_a9c8a0e887.png"
-        alt="The report's Evidence section shows three updates from the Self driving logs scout, with time windows, recurring sandbox failures, and affected pull requests."
-        padding={false}
-        classes="rounded"
-    />
-</div>
-
-*The report's Evidence section: fresh findings from later scout runs accumulate on the same report.*
-
-I requested the merge on September 7, and it merged that morning. The code change is confirmed; proving the failure stays gone is the follow-up job.
-
-**Where I sit:** Deciding whether the diagnosis and fix make sense, then getting the change merged. The scout keeps doing the tedious evidence gathering while that happens.
-
-**TL;DR–**A scheduled scout notices logs → Investigates what caused issues → Checks if anyone's fixing it already → Appends to existing reports using memory. Future scheduled scouts keep watching logs and adding to the same existing reports instead of making new ones.
-
-## 4. The error tracking loop
-
-This next loop starts with [error tracking](/docs/error-tracking) rather than a scheduled scout. An exception becomes a signal, and the investigation follows it into the code to work out what actually needs changing.
-
-The interesting reports are often the ones where the error message is technically correct but tells you the wrong story. An issue-deduplication agent failed because its output was missing a required `duplicates` field. That sounds like an agent forgetting the schema. The actual problem was more interesting.
-
-The outer JSON object had been cut off. Our fallback parser searched for another opening brace and managed to extract a complete *inner* object, like `{"id":"1-3-3"}`. Valid JSON! Just not the response we asked for. The resulting schema error hid the truncation, and retries repeated work without addressing it.
-
-[PR #93477](https://github.com/PostHog/posthog/pull/93477) made the parser recognize truncated output instead of accepting a nested object from an unfinished response, and stopped the affected one-shot review stages from retrying that failure. I approved it, and it merged on September 3. The tests cover the distinction that matters: a complete response with trailing prose is fine; an inner object rescued from a truncated response isn't.
-
-**Where I sit:** reviewing the diagnosis and the regression tests. A confident explanation is nice; a test that reproduces the failure is nicer.
-
-**Loop or graph?** Loop. An agent fails → the failure gets investigated → the agent's own machinery gets fixed.
-
-## 5. The anomaly alert → investigation → fix loop
-
-[Alerts](/docs/alerts) watch the metrics we care about and can start an investigation when something looks wrong. For our team, that includes the error rate of the MCP tools self-driving uses. The [PostHog Slack app](/docs/slack) makes it easy to pick up the investigation where the alert landed: mention `@PostHog` in the thread, ask follow-up questions, and steer the agent toward a fix.
-
-On September 5, our MCP error-rate alert fired at roughly **9.9%**, against a typical baseline of **0.3% to 1.2%** over the previous two weeks. The investigation narrowed the spike to `scout-project-profile-get`: 88 errors in an hour, spread across about 44 projects. I replied in the thread: "lets root cause this".
-
-<ProductScreenshot
-    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/slack_anomaly_alert_59fbbfb511.png"
-    alt="An MCP error-rate anomaly alert in Slack, with its chart and Andy asking PostHog to root cause the issue."
-    padding={false}
-    classes="rounded"
-/>
-
-*The alert landed in Slack with a chart and an initial investigation. I picked up the thread from there.*
-
-The agent connected the failures to a deployment that gave scouts optional extra write permissions – for example, so a scout could maintain a dashboard. That was the useful lead. Working through it, we pinned down a mismatch between two separately deployed workers: the scheduler now sent a dictionary describing the permissions, but an older sandbox worker still expected the old preset format. It decoded the dictionary incorrectly and minted a token without the scopes the scout needed.
-
-[PR #95623](https://github.com/PostHog/posthog/pull/95623), which I opened with agent assistance, made scouts without extra grants use the compatible preset string again. It merged that afternoon. I also opened [PR #95621](https://github.com/PostHog/posthog/pull/95621) to fix the deployment filter that had skipped the tasks worker when shared OAuth code changed. That follow-up is still open as I write this.
-
-So, no, the alert didn't autonomously fix production while I made coffee. This one needed more steering from me than the others: it caught the problem, gave me a starting investigation, and helped me get a compatibility fix merged. I'll take that.
-
-**Where I sit:** asking follow-up questions, checking the diagnosis, and getting the right fix merged.
-
-**Loop or graph?** Loop. Metric moves → alert → investigation → fix → keep watching the metric. A few of those arrows go through me.
-
-## 6. Issues → reports → PRs
+## 3. The issues → reports → PRs loop
 
 This one has changed how I work more than any other.
 
@@ -184,7 +120,32 @@ I can have more of these going at once because I don't need to watch each agent 
 
 **Loop or graph?** Loop. I give it a clear issue, review what comes back, and use the thing it built.
 
-## 7. Replay Vision
+## 4. The anomaly alert → investigation → fix loop
+
+[Alerts](/docs/alerts) watch the metrics we care about and can start an investigation when something looks wrong. For our team, that includes the error rate of the MCP tools self-driving uses. The [PostHog Slack app](/docs/slack) makes it easy to pick up the investigation where the alert landed: mention `@PostHog` in the thread, ask follow-up questions, and steer the agent toward a fix.
+
+On September 5, our MCP error-rate alert fired at roughly **9.9%**, against a typical baseline of **0.3% to 1.2%** over the previous two weeks. The investigation narrowed the spike to `scout-project-profile-get`: 88 errors in an hour, spread across about 44 projects. I replied in the thread: "lets root cause this".
+
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/slack_anomaly_alert_59fbbfb511.png"
+    alt="An MCP error-rate anomaly alert in Slack, with its chart and Andy asking PostHog to root cause the issue."
+    padding={false}
+    classes="rounded"
+/>
+
+*The alert landed in Slack with a chart and an initial investigation. I picked up the thread from there.*
+
+The agent connected the failures to a deployment that gave scouts optional extra write permissions – for example, so a scout could maintain a dashboard. That was the useful lead. Working through it, we pinned down a mismatch between two separately deployed workers: the scheduler now sent a dictionary describing the permissions, but an older sandbox worker still expected the old preset format. It decoded the dictionary incorrectly and minted a token without the scopes the scout needed.
+
+[PR #95623](https://github.com/PostHog/posthog/pull/95623), which I opened with agent assistance, made scouts without extra grants use the compatible preset string again. It merged that afternoon. I also opened [PR #95621](https://github.com/PostHog/posthog/pull/95621) to fix the deployment filter that had skipped the tasks worker when shared OAuth code changed. That follow-up is still open as I write this.
+
+So, no, the alert didn't autonomously fix production while I made coffee. This one needed more steering from me than the others: it caught the problem, gave me a starting investigation, and helped me get a compatibility fix merged. I'll take that.
+
+**Where I sit:** asking follow-up questions, checking the diagnosis, and getting the right fix merged.
+
+**Loop or graph?** Loop. Metric moves → alert → investigation → fix → keep watching the metric. A few of those arrows go through me.
+
+## 5. The Replay Vision observation loop
 
 This one starts with a person using the product, without having to tell us what went wrong.
 
@@ -209,7 +170,30 @@ The research found a gap in the error handling. We already recognized one provid
 
 **Loop or graph?** Loop. Product usage → recording → observation → report → PR → back to watching the product get used.
 
-## 8. self-validation
+## 6-7. The self-checking & self-validating error log loops
+
+Another one we set up uses a scheduled scout called `signals-scout-self-driving-logs` to look for problems in the self-driving related slices of our runtime [logs](/logs). It works out what failed that caused the log, whether repeated lines are one retry loop or many separate failures, and whether someone is already fixing it.
+
+One run found a task that couldn't start its Hogland (an internal VM service) sandbox because one of its metadata tags was too long. The tag included a workflow ID made from a prefix and two UUIDs. Metadata that had worked with a previous provider ran into a limit with a different one. [PR #92909](https://github.com/PostHog/posthog/pull/92909) bounded the tag strings sent to Hogland and added tests for their lengths, with task and run IDs still available as separate tags.
+
+The part I like is what happened while that PR sat in review. The scout kept checking, and each new run added evidence of the same failure to the existing report instead of starting a competing investigation. It even saw a quiet period followed by more failures – a useful reminder that "nothing broke in this window" doesn't mean an unmerged fix somehow worked.
+
+<div className="max-w-sm mx-auto">
+    <ProductScreenshot
+        imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/logs_scout_evidence_a9c8a0e887.png"
+        alt="The report's Evidence section shows three updates from the Self driving logs scout, with time windows, recurring sandbox failures, and affected pull requests."
+        padding={false}
+        classes="rounded"
+    />
+</div>
+
+*The report's Evidence section: fresh findings from later scout runs accumulate on the same report.*
+
+I requested the merge on September 7, and it merged that morning. The code change is confirmed; proving the failure stays gone is the follow-up job.
+
+**Where I sit:** Deciding whether the diagnosis and fix make sense, then getting the change merged. The scout keeps doing the tedious evidence gathering while that happens.
+
+**TL;DR–**A scheduled scout notices logs → Investigates what caused issues → Checks if anyone's fixing it already → Appends to existing reports using memory. Future scheduled scouts keep watching logs and adding to the same existing reports instead of making new ones.
 
 Merged isn't the same as verified in production. The harness tells scouts to [leave follow-up notes and re-check the evidence](https://github.com/PostHog/posthog/blob/9811d194f82eba77bc5264b10ace8c8c3c9d7708/products/signals/backend/scout_harness/prompt.py#L275-L284) on what they reported, so the scout that found a problem is the one that checks the fix.
 
@@ -230,7 +214,21 @@ Over the last month, roughly **one in ten scout runs** included a self-validatio
 
 **Loop or graph?** Loop. Report → fix → the scout that reported it checks the fix held.
 
-## 9. self-improvement
+## 8. The error tracking errors loop
+
+This next loop starts with [error tracking](/docs/error-tracking) rather than a scheduled scout. An exception becomes a signal, and the investigation follows it into the code to work out what actually needs changing.
+
+The interesting reports are often the ones where the error message is technically correct but tells you the wrong story. An issue-deduplication agent failed because its output was missing a required `duplicates` field. That sounds like an agent forgetting the schema. The actual problem was more interesting.
+
+The outer JSON object had been cut off. Our fallback parser searched for another opening brace and managed to extract a complete *inner* object, like `{"id":"1-3-3"}`. Valid JSON! Just not the response we asked for. The resulting schema error hid the truncation, and retries repeated work without addressing it.
+
+[PR #93477](https://github.com/PostHog/posthog/pull/93477) made the parser recognize truncated output instead of accepting a nested object from an unfinished response, and stopped the affected one-shot review stages from retrying that failure. I approved it, and it merged on September 3. The tests cover the distinction that matters: a complete response with trailing prose is fine; an inner object rescued from a truncated response isn't.
+
+**Where I sit:** reviewing the diagnosis and the regression tests. A confident explanation is nice; a test that reproduces the failure is nicer.
+
+**Loop or graph?** Loop. An agent fails → the failure gets investigated → the agent's own machinery gets fixed.
+
+## 9. The self-improving prompts loop
 
 The harness also tells custom scouts to [suggest changes to their own instructions](https://github.com/PostHog/posthog/blob/9811d194f82eba77bc5264b10ace8c8c3c9d7708/products/signals/backend/scout_harness/prompt.py#L648-L693), with evidence, for their owners to review. A scout can't edit its own skill. It files a report, and a human publishes the new version or doesn't.
 
@@ -243,14 +241,6 @@ They aren't always right, which is why a human is still in this loop. On August 
 **Where I sit:** reading the suggestion and deciding whether to publish it. This is the loop where I'd least like to be replaced.
 
 **Loop or graph?** Loop. Scout runs → notices its own instructions are wrong → suggests a fix → owner reviews → next run uses the new version.
-
-## 10. a few smaller ones
-
-We also have scouts that catch docs drifting behind shipped code, maintain our key dashboards, summarize yesterday's merged PRs, and keep my GitHub review requests and failing CI in one attention list. Small things, but all things someone would otherwise have to remember to check.
-
-## So: loops or graphs?
-
-Who cares, call them whatever you like. I'm getting useful fixes out of them, spending less time watching agents code, and still getting to nudge and steer when they're going off track or just need product direction.
 
 ## Try it yourself
 
