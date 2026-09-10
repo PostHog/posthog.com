@@ -40,7 +40,7 @@ The Art & Brand Planning board uses automations to keep work moving. Each behavi
 
 To establish a clear connection between the task and the working file, designers will create a frame containing a link to the task. They should then add a link to that frame within the task for easy reference.
 
-Please give **two weeks notice** for new briefs — this is the preferred minimum, and more time is always better. For reference, the team receives roughly 25-30 new art requests a month, so new briefs are rarely picked up the day they land. A **one-week turnaround is only possible for actual emergencies.** If your request is a genuine emergency, please share your request issue in [#team-graphics channel](https://posthog.slack.com/archives/C0AU440KS6P) and mention Lottie and/or Daniel.
+Please give **two weeks notice** for new briefs — this is the preferred minimum, and more time is always better. For reference, the team receives roughly 25-30 new art requests a month, so new briefs are rarely picked up the day they land. A **one-week turnaround is only possible for actual emergencies.** If your request is a genuine emergency, please share your request issue in [#team-graphics channel](https://posthog.slack.com/archives/C0AU440KS6P) and mention Lottie, Heidi and/or Daniel.
 
 If you need to chase for an update on a request, the best place to do it is a comment on the issue itself, not a Slack DM. Comments keep the context with the brief, notify the assigned artist, and the team triages from the project board.
 
