@@ -23,11 +23,7 @@ import { BROWSE_TOOLS_HANDLES } from 'constants/productNavigation'
 import qs from 'qs'
 import { getProductInputs, readProductInputs, priceProductInputs } from './calculatorURL'
 import usePostHog from 'hooks/usePostHog'
-import AgentEstimateLink, {
-    AI_PRICING_EXPERIMENT_VARIANTS,
-    AI_PRICING_FLAG,
-} from 'components/Pricing/AgentEstimateLink'
-import { RenderInClient } from 'components/RenderInClient'
+import AgentEstimateLink from 'components/Pricing/AgentEstimateLink'
 import { useApp } from '../../../context/App'
 import AllProductsRatesModal, { ALL_PRODUCTS_RATES_MODAL_KEY } from './AllProductsRatesModal'
 
@@ -928,18 +924,9 @@ export default function Tabbed() {
                         data-ai-estimate-placement="inside-calculator"
                     >
                         <CopyURLButton onClick={generateURL} />
-                        <RenderInClient
-                            render={() => {
-                                const variant = window.posthog?.getFeatureFlag?.(AI_PRICING_FLAG)
-                                return variant === AI_PRICING_EXPERIMENT_VARIANTS.inside_calculator ? (
-                                    <AgentEstimateLink
-                                        source="calculator-total"
-                                        className="text-sm font-bold text-red dark:text-yellow"
-                                    />
-                                ) : (
-                                    <></>
-                                )
-                            }}
+                        <AgentEstimateLink
+                            source="calculator-total"
+                            className="text-sm font-bold text-red dark:text-yellow"
                         />
                     </div>
                 </div>
