@@ -90,8 +90,7 @@ It also pulled the user out of the scanner wizard.
 
 A normal event stream could show a settings visit followed by an abandoned wizard, but no error fired because, technically, the product worked exactly as we built it. The recording showed the actual failure: the product told the user to click a control that removed them from the task it wanted them to finish.
 
-![A Replay Vision observation citing the moments a user left the scanner wizard for project settings](https://github.com/user-attachments/assets/04fa4886-5cca-4dc5-b5a0-d40645dfc684)
-<!-- re-upload to Cloudinary before publish -->
+![A Replay Vision observation citing the moments a user left the scanner wizard for project settings](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/gear2_735ba13688.png)
 
 Once we could see both halves, the fix was fairly obvious: keep the setting inside the wizard instead of sending the user away. PostHog AI later opened a PR with that fix.
 
@@ -103,8 +102,8 @@ This sounds conservative and *gasp* boring. Good. Most sessions should not becom
 
 "Inconclusive" is a feature. It keeps the "yes" pile small enough for a person to inspect, which matters because selectivity is not the same as accuracy. Every observation links back to its recording, so when the scanner cites a contradiction, we can jump to the cited moments and watch both halves.
 
-![Verdict mix for our ghost-bug scanner: 1 percent yes, 57 percent no, 42 percent inconclusive](https://github.com/user-attachments/assets/b93a8e45-50ad-46e0-97a6-f7e71f0b4fb9)
-<!-- re-upload to Cloudinary before publish; refresh counts -->
+![Verdict mix for our ghost-bug scanner: 1 percent yes, 57 percent no, 42 percent inconclusive](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/ghost_bugs_5ca8748eb1.png)
+<!-- counts as of 2026-08-28; refresh before publish -->
 
 A scanner saying "Idk" is way better than making something up.
 
@@ -130,8 +129,7 @@ Don't try to perfect the prompt before you run it. The first batch will tell you
 
 The model changes both quality and cost. Replay Vision prices each model in credits per observation, and one credit is $0.01. Pick the model by asking what a wrong answer would cost you.
 
-![The Replay Vision model picker, with each model priced in credits per observation](https://github.com/user-attachments/assets/5d92ba51-1511-4dc3-8a2f-08f8b623d799)
-<!-- re-upload to Cloudinary before publish -->
+![The Replay Vision model picker, with each model priced in credits per observation](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/model_picker_cdec55b81d.png)
 
 Use the cheapest model for high-volume jobs where you care about the distribution, not any single observation. Our broken-render classifier tags recordings as `nothing_broken`, `media_failed`, `clipped_layout`, or `horizontal_overflow`. One wrong label nudges a trend instead of opening a ticket.
 
