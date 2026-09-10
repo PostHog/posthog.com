@@ -6,7 +6,9 @@ showTitle: true
 
 The website is owned by <TeamMember name="Eli Kinsey" /> and <TeamMember name="Ian Matson" />. For general questions or quick updates, the best place to start is the `#posthogdotcom` Slack channel.
 
-For most pieces of work, like blog posts and copy updates, you can ship without needing a review from the website team. However, for larger pieces of work — a new product page, a significant copy overhaul, a new landing page — there's a more structured process to follow.
+Before you make a change, read [Should I open an issue or a PR?](/handbook/engineering/posthog-com/issue-or-pr). It is the full guidance on which changes you can ship yourself and which ones the website team builds. In short: content changes go in a pull request, everything else goes in an issue.
+
+For larger pieces of work — a new product page, a significant copy overhaul, a new landing page — there's a more structured process to follow.
 
 > **Why can't I vibecode?** You can, but vibecoded stuff tends to be harder for the website team to review and has a tendency to not work well with some existing systems.
 
@@ -18,7 +20,7 @@ Start with words, not designs. Write out the full copy, structure, and any speci
 
 **2. Submit it to the website team as a GitHub issue**
 
-Open an issue in the [posthog.com repo](https://github.com/PostHog/posthog.com) using the Website Request template and link your Google Doc. Include:
+Open an issue in the [posthog.com repo](https://github.com/PostHog/posthog.com) using the [website request template](https://github.com/PostHog/posthog.com/issues/new?template=website-request.md) and link your Google Doc. Include:
 
 - A brief description of what you're trying to achieve and why
 - A link to your Google Doc 
@@ -33,7 +35,7 @@ Once the issue is picked up, the website team will build the page. They'll open 
 
 Review the PR, leave comments, and iterate from there. This is the right moment to give design and layout feedback — not before, when things are still just ideas.
 
-> **Curious about your request?** The [website project board](https://github.com/orgs/PostHog/projects/195/) tracks all their tasks. 
+> **Curious about your request?** Issues get triaged onto the [website project board](https://github.com/orgs/PostHog/projects/131), which tracks all of the team's tasks. 
 
 ## Why this process
 
