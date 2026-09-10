@@ -179,6 +179,14 @@ That said, the managed reverse proxy is designed so that **no request content is
 
 Once traffic reaches PostHog, it is ingested into the region you selected (EU or US Cloud). If strict EU-only termination at the edge is a hard requirement for your compliance posture, we recommend setting up a [self-hosted proxy](/docs/advanced/proxy) on infrastructure you control instead.
 
+### Does the managed reverse proxy forward my cookies to PostHog?
+
+No. The managed reverse proxy removes the `Cookie` header from every request before it forwards the request to PostHog. PostHog doesn't need your cookies, because ingestion authenticates with the project token in the request body.
+
+This matters because your proxy runs on a subdomain of your site. Cookies your site sets on the parent domain (for example, `.myapp.com`) also apply to `yoursubdomain.myapp.com`, so the browser can attach them to requests it sends to the proxy. `posthog-js` doesn't send cookies on its regular `fetch` and `XMLHttpRequest` requests. The browser does attach cookies to `sendBeacon` requests, though, and the SDK can use `sendBeacon` to send the last events when a page unloads. The proxy removes those cookies before the request leaves Cloudflare.
+
+To stop the browser from sending a cookie to your proxy at all, set that cookie without a `Domain` attribute or give it the `__Host-` prefix. The browser then sends it only to the exact host that set it.
+
 ### Is the managed reverse proxy HIPAA-compliant?
 
 No. The managed reverse proxy is not HIPAA-compliant and should not be used to process Protected Health Information (PHI). Any Business Associate Agreement (BAA) you have with PostHog does not apply to this feature.
