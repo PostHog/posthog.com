@@ -112,7 +112,7 @@ This works on `2025-11-25` and `2026-07-28`. The value is unverified, so use it 
 
 `@posthog/mcp` preserves MCP App tool metadata, `ui://` resources, structured tool output, result metadata, HTML, and content security policy metadata on both supported revisions. On the tested high-level `McpServer` path, injected `context` and `llm_model` arguments don't reach the App handler.
 
-The App's tool call is captured with its intent, self-reported model, and protocol version. Automatic analytics for the App's `resources/list` and `resources/read` requests on the tested high-level server path haven't shipped yet. The resource payloads still pass through unchanged.
+The App's tool call is captured with its intent, self-reported model, and protocol version. The App's `resources/list`, `resources/templates/list`, and `resources/read` requests emit `$mcp_resources_list` and `$mcp_resource_read` on both server paths; the resource payloads pass through unchanged and a read's body is never captured.
 
 ## Not instrumented yet
 
@@ -123,7 +123,6 @@ These gaps apply to the TypeScript and Python SDKs alike.
 | **Tasks** (`io.modelcontextprotocol/tasks`) | A tool returning a task handle records an instant success, so task-based tools look fast and always-succeeding. |
 | **Multi round-trip** (`resultType: "input_required"`) | Each round counts as its own `$mcp_tool_call`, inflating call counts and durations. |
 | `server/discover` | Not captured — no session-start event on this revision. |
-| MCP App resource requests on the high-level server path | App resources pass through unchanged, but `resources/list` and `resources/read` don't emit analytics yet. |
 | `Mcp-Method` / `Mcp-Name` headers | Not read. |
 | `clientCapabilities` in `_meta` | Not captured. `clientInfo` and protocol version are. |
 
