@@ -7,7 +7,15 @@ import { AutoAdvanceGateContext, SlideActiveContext } from './autoAdvanceGate'
 
 const SLIDE_DURATION = 5000
 
-export default function HeroCarousel({ tabs = productUsageTabs, className }: { tabs?: Tab[]; className?: string }) {
+export default function HeroCarousel({
+    tabs = productUsageTabs,
+    staticHeight = false,
+    className,
+}: {
+    tabs?: Tab[]
+    staticHeight?: boolean
+    className?: string
+}) {
     const [activeTab, setActiveTab] = useState(tabs[0].value)
     const [isPaused, setIsPaused] = useState(false)
     const [isHovering, setIsHovering] = useState(false)
@@ -94,7 +102,11 @@ export default function HeroCarousel({ tabs = productUsageTabs, className }: { t
                             isFirst ? '@sm:rounded-tl-none' : ''
                         } ${isLast ? '@sm:rounded-tr-none' : ''} relative ${activeColor} flex @sm:transition-colors`}
                     >
-                        <div className="flex flex-col bg-light dark:bg-dark flex-1 w-full shadow-2xl rounded">
+                        <div
+                            className={`${
+                                staticHeight ? 'grid' : 'flex flex-col'
+                            } bg-light dark:bg-dark flex-1 w-full shadow-2xl rounded`}
+                        >
                             <span className="absolute top-4 right-4 z-10">
                                 <Tooltip
                                     trigger={
@@ -118,13 +130,19 @@ export default function HeroCarousel({ tabs = productUsageTabs, className }: { t
                             {tabs.map((tab) => (
                                 // `forceMount` keeps every slide mounted so a Typecaast animation keeps its
                                 // place (and timing) when you switch tabs instead of restarting; inactive
-                                // panels are hidden via CSS. `SlideActiveContext` lets each slide pause itself
+                                // panels are hidden via CSS. With staticHeight, they share a grid cell and
+                                // stay in layout so the tallest slide sets the height.
+                                // `SlideActiveContext` lets each slide pause itself
                                 // and release its auto-advance hold while it isn't the visible tab.
                                 <Tabs.Content
                                     key={tab.value}
                                     value={tab.value}
                                     forceMount
-                                    className="data-[state=active]:animate-[hero-carousel-fade-in_300ms_ease-out] data-[state=inactive]:hidden flex-1"
+                                    className={`data-[state=active]:animate-[hero-carousel-fade-in_300ms_ease-out] ${
+                                        staticHeight
+                                            ? 'col-start-1 row-start-1 min-w-0 data-[state=inactive]:invisible data-[state=inactive]:opacity-0'
+                                            : 'data-[state=inactive]:hidden flex-1'
+                                    }`}
                                 >
                                     <SlideActiveContext.Provider value={activeTab === tab.value}>
                                         {tab.content}
