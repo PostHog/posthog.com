@@ -234,7 +234,48 @@ SELECT *
 FROM ca_events
 ```
 
-### 4. Name your queries for easier debugging
+### 4. Use `PREWHERE` to filter before wide columns are read
+
+Reading a property decodes the whole `properties` value for every row the query touches. A `WHERE` condition runs after that decode, even when it sits inside the subquery that does the scan. If you can express a selective filter on a real column of the `events` table, put it in `PREWHERE` so only matching rows are decoded.
+
+```sql
+-- ❌ Decodes properties for every event in the range, then filters
+WITH cohort AS (
+    SELECT DISTINCT $group_0 AS org FROM events
+    WHERE event = 'signed up' AND timestamp >= now() - INTERVAL 7 DAY
+),
+plans AS (
+    SELECT $group_0 AS org, argMin(properties.plan, timestamp) AS plan
+    FROM events
+    WHERE timestamp >= now() - INTERVAL 7 DAY
+    GROUP BY $group_0
+)
+SELECT plan, count() FROM plans
+WHERE org IN (SELECT org FROM cohort)
+GROUP BY plan
+
+-- ✅ Decodes properties only for events from the cohort
+WITH cohort AS (
+    SELECT DISTINCT $group_0 AS org FROM events
+    WHERE event = 'signed up' AND timestamp >= now() - INTERVAL 7 DAY
+),
+plans AS (
+    SELECT $group_0 AS org, argMin(properties.plan, timestamp) AS plan
+    FROM events
+    PREWHERE $group_0 IN (SELECT org FROM cohort)
+    WHERE timestamp >= now() - INTERVAL 7 DAY
+    GROUP BY $group_0
+)
+SELECT plan, count() FROM plans GROUP BY plan
+```
+
+On a day of our own events, the second version read 6x fewer bytes and used 5x less CPU than the first. A few things to know:
+
+- `PREWHERE` only accepts real columns of `events`, such as `event`, `distinct_id`, `timestamp`, and `$group_0` through `$group_4`. `person_id` is not allowed because it is resolved through a join.
+- Moving the filter into the subquery's `WHERE` is not the same thing. ClickHouse still decodes the wide column for every row first, so bytes read stay the same and memory can go up.
+- It only helps when the filter skips most of the data. A filter that matches nearly every row costs extra: it adds a pass over the data, the `IN (...)` subquery is an extra scan, and writing `PREWHERE` yourself turns off ClickHouse's automatic `PREWHERE` for your remaining `WHERE` conditions. Compare bytes read under the results in the SQL editor, or in the [`query_log` table](/docs/data/query-log), before and after.
+
+### 5. Name your queries for easier debugging
 
 Always provide a meaningful `name` parameter for your queries. This helps you:
 
@@ -255,7 +296,7 @@ Bad names are generic and vague:
 - `test`
 - `data`
 
-### 5. Use keyset pagination instead of OFFSET
+### 6. Use keyset pagination instead of OFFSET
 
 `OFFSET` pagination is **not supported** for programmatic requests on `/query` and is currently rejected with HTTP 400 for personal API keys. If you're paginating to export data, **stop and use [batch exports](/docs/cdp/batch-exports) instead** – `/query` is not a supported export path.
 
@@ -271,6 +312,6 @@ SELECT * FROM events WHERE timestamp > '2024-01-01 12:34:56.789'
 ORDER BY timestamp LIMIT 1000;
 ```
 
-### 6. Other SQL optimizations
+### 7. Other SQL optimizations
 
-Options 1-5 make the most difference, but other generic SQL optimizations work too. See our [SQL docs](/docs/data-warehouse/sql) for commands, useful functions, and more to help you with this.
+Options 1-6 make the most difference, but other generic SQL optimizations work too. See our [SQL docs](/docs/data-warehouse/sql) for commands, useful functions, and more to help you with this.
