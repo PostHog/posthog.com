@@ -13,6 +13,9 @@ import { AnimatePresence, motion } from 'framer-motion'
 import { IconFeatures, IconImage, IconX } from '@posthog/icons'
 import { graphql, useStaticQuery } from 'gatsby'
 import groupBy from 'lodash.groupby'
+import debounce from 'lodash/debounce'
+import { useCommunityProfiles } from 'hooks/useCommunityProfiles'
+import usePostHog from 'hooks/usePostHog'
 import OSTextarea from 'components/OSForm/textarea'
 import OSButton from 'components/OSButton'
 
@@ -86,13 +89,40 @@ const buttons = [
     },
 ]
 
-const MentionProfile = ({ profile, onSelect, selectionStart, index, focused }) => {
-    const { firstName, lastName, avatar, gravatarURL } = profile.attributes
-    const name = [firstName, lastName].filter(Boolean).join(' ')
+type MentionCandidate = {
+    id: number
+    firstName: string
+    name: string
+    avatarUrl?: string
+    group: (typeof MENTION_GROUPS)[number]
+}
+
+const MENTION_GROUPS = ['In this thread', 'Staff', 'Community'] as const
+
+const MentionProfile = ({
+    profile,
+    onSelect,
+    selectionStart,
+    index,
+    focused,
+}: {
+    profile: MentionCandidate
+    onSelect?: (profile: MentionCandidate, selectionStart?: number) => void
+    selectionStart?: number
+    index: number
+    focused: number
+}) => {
+    const ref = useRef<HTMLLIElement>(null)
     const isAI = profile.id === Number(process.env.GATSBY_AI_PROFILE_ID)
 
+    useEffect(() => {
+        if (focused === index) {
+            ref.current?.scrollIntoView({ block: 'nearest' })
+        }
+    }, [focused])
+
     return (
-        <li className="border-b border-input p-1">
+        <li ref={ref} className="border-b border-input p-1">
             <OSButton
                 onClick={() => onSelect?.(profile, selectionStart)}
                 type="button"
@@ -104,12 +134,12 @@ const MentionProfile = ({ profile, onSelect, selectionStart, index, focused }) =
             >
                 <div className="flex space-x-2 items-center w-full">
                     <div className="size-6 overflow-hidden rounded-full">
-                        <Avatar className="w-full" image={avatar?.data?.attributes?.url || gravatarURL} />
+                        <Avatar className="w-full" image={profile.avatarUrl} />
                     </div>
                     <div>
                         {!isAI && <p className="m-0 text-xs font-semibold opacity-50 leading-none">{profile.id}</p>}
                         <div className="flex space-x-1 items-center">
-                            <p className="m-0 leading-none text-sm line-clamp-1">{name}</p>
+                            <p className="m-0 leading-none text-sm line-clamp-1">{profile.name}</p>
                             {isAI && <IconFeatures className="size-4 text-primary dark:text-primary-dark opacity-50" />}
                         </div>
                     </div>
@@ -118,6 +148,30 @@ const MentionProfile = ({ profile, onSelect, selectionStart, index, focused }) =
         </li>
     )
 }
+
+// Mention syntax is built from the first name, so a profile without one can never be mentioned
+const toCandidate = ({
+    id,
+    firstName,
+    lastName,
+    avatarUrl,
+    group,
+}: {
+    id: number
+    firstName?: string | null
+    lastName?: string | null
+    avatarUrl?: string | null
+    group: MentionCandidate['group']
+}): MentionCandidate | null =>
+    firstName
+        ? {
+              id,
+              firstName,
+              name: [firstName, lastName].filter(Boolean).join(' '),
+              avatarUrl: avatarUrl || undefined,
+              group,
+          }
+        : null
 
 const MentionProfiles = ({ onSelect, onClose, body, ...other }) => {
     const { staffProfiles } = useStaticQuery(graphql`
@@ -138,51 +192,79 @@ const MentionProfiles = ({ onSelect, onClose, body, ...other }) => {
     const replies = currentQuestion?.question?.replies
     const selectionStart = useMemo(() => other.selectionStart, [])
     const search = body.substring(selectionStart).split(' ')[0].replace('@', '')
-    const mentionProfiles = [
-        { attributes: { profile: { data: currentQuestion?.question?.profile?.data } } },
-        ...replies?.data,
-        ...staffProfiles.nodes
-            .filter((node) => node.squeakId === Number(process.env.GATSBY_AI_PROFILE_ID))
-            .map((node) => ({
-                attributes: {
-                    profile: {
-                        data: {
-                            id: node.squeakId,
-                            attributes: { ...node, avatar: { data: { attributes: { url: node.avatar?.url } } } },
-                        },
-                    },
-                },
-            })),
-    ]
-        .map((reply) => reply?.attributes?.profile?.data)
-        .filter((profile, index, self) => {
-            const { firstName, lastName } = profile.attributes
-            const name = [firstName, lastName].filter(Boolean).join(' ')
-            return (
-                profile &&
-                self.findIndex((p) => p?.id === profile.id) === index &&
-                name.toLowerCase().includes(search.toLowerCase())
+    const [debouncedSearch, setDebouncedSearch] = useState(search)
+    const debounceSearch = useMemo(() => debounce(setDebouncedSearch, 300), [])
+
+    useEffect(() => {
+        debounceSearch(search)
+    }, [search, debounceSearch])
+
+    useEffect(() => () => debounceSearch.cancel(), [debounceSearch])
+
+    const { profiles: searchedProfiles, isLoading } = useCommunityProfiles({
+        filters: { search: debouncedSearch, includeEmail: false },
+        pageSize: 10,
+    })
+
+    const threadCandidates = useMemo(() => {
+        return [
+            currentQuestion?.question?.profile?.data,
+            ...(replies?.data || []).map((reply) => reply?.attributes?.profile?.data),
+        ]
+            .filter(Boolean)
+            .map((profile) =>
+                toCandidate({
+                    id: profile.id,
+                    ...profile.attributes,
+                    avatarUrl: profile.attributes.avatar?.data?.attributes?.url || profile.attributes.gravatarURL,
+                    group: 'In this thread',
+                })
             )
-        })
-    const grouped = groupBy(mentionProfiles, (profile) =>
-        staffProfiles.nodes.some((node) => node.squeakId === profile.id) ? 'Staff' : 'In this thread'
-    )
-    const listRef = useRef<HTMLUListElement>(null)
+            .filter(Boolean) as MentionCandidate[]
+    }, [currentQuestion?.question?.profile?.data, replies])
+
+    const aiCandidate = useMemo(() => {
+        const node = staffProfiles.nodes.find((node) => node.squeakId === Number(process.env.GATSBY_AI_PROFILE_ID))
+        return node && toCandidate({ ...node, id: node.squeakId, avatarUrl: node.avatar?.url, group: 'Staff' })
+    }, [staffProfiles])
+
+    const mentionProfiles = useMemo(() => {
+        const matchesSearch = (candidate: MentionCandidate) =>
+            candidate.name.toLowerCase().includes(search.toLowerCase())
+        const candidates = [
+            ...threadCandidates.filter(matchesSearch),
+            ...(aiCandidate && matchesSearch(aiCandidate) ? [aiCandidate] : []),
+            ...(searchedProfiles
+                .map((profile) => toCandidate({ ...profile, group: profile.isTeamMember ? 'Staff' : 'Community' }))
+                .filter(Boolean) as MentionCandidate[]),
+        ]
+        return candidates.filter((candidate, index, self) => self.findIndex((c) => c.id === candidate.id) === index)
+    }, [threadCandidates, aiCandidate, searchedProfiles, search])
+
+    const grouped = groupBy(mentionProfiles, 'group')
+    const groups = MENTION_GROUPS.filter((group) => grouped[group]?.length)
+    const orderedProfiles = groups.flatMap((group) => grouped[group])
     const [focused, setFocused] = useState(0)
 
     useEffect(() => {
+        setFocused(0)
+    }, [orderedProfiles.length])
+
+    useEffect(() => {
         const handleKeyDown = (e: KeyboardEvent) => {
+            if (orderedProfiles.length === 0) return
             if (e.key === 'ArrowDown') {
                 e.preventDefault()
-                setFocused((prev) => (prev + 1) % mentionProfiles.length)
+                setFocused((prev) => (prev + 1) % orderedProfiles.length)
             }
             if (e.key === 'ArrowUp') {
                 e.preventDefault()
-                setFocused((prev) => (prev - 1 + mentionProfiles.length) % mentionProfiles.length)
+                setFocused((prev) => (prev - 1 + orderedProfiles.length) % orderedProfiles.length)
             }
             if (e.key === 'Tab' || e.key === 'Enter') {
                 e.preventDefault()
-                onSelect?.(mentionProfiles[focused], selectionStart)
+                const profile = orderedProfiles[focused]
+                if (profile) onSelect?.(profile, selectionStart)
             }
         }
 
@@ -191,7 +273,7 @@ const MentionProfiles = ({ onSelect, onClose, body, ...other }) => {
         return () => {
             window.removeEventListener('keydown', handleKeyDown)
         }
-    }, [focused, search])
+    }, [focused, orderedProfiles])
 
     return (
         <motion.div
@@ -208,20 +290,28 @@ const MentionProfiles = ({ onSelect, onClose, body, ...other }) => {
                 className="!p-1 rounded-full absolute top-0.5 right-0.5 z-20"
                 onClick={onClose}
             />
-            <ul
-                ref={listRef}
-                className="m-0 p-0 list-none border border-input bg-light dark:bg-dark h-full rounded-md overflow-auto"
-            >
-                {mentionProfiles.map((profile, index) => (
-                    <MentionProfile
-                        focused={focused}
-                        index={index}
-                        onSelect={onSelect}
-                        profile={profile}
-                        selectionStart={selectionStart}
-                        key={profile.id}
-                    />
-                ))}
+            <ul className="m-0 p-0 list-none border border-input bg-light dark:bg-dark h-full rounded-md overflow-auto">
+                {orderedProfiles.length === 0 ? (
+                    <li className="px-3 py-2 text-sm opacity-60">{isLoading ? 'Searching...' : 'No people found'}</li>
+                ) : (
+                    groups.map((group) => (
+                        <React.Fragment key={group}>
+                            <li className="sticky top-0 bg-light dark:bg-dark px-3 pt-2 pb-1 text-xs font-semibold uppercase opacity-60">
+                                {group}
+                            </li>
+                            {grouped[group].map((profile) => (
+                                <MentionProfile
+                                    focused={focused}
+                                    index={orderedProfiles.indexOf(profile)}
+                                    onSelect={onSelect}
+                                    profile={profile}
+                                    selectionStart={selectionStart}
+                                    key={profile.id}
+                                />
+                            ))}
+                        </React.Fragment>
+                    ))
+                )}
             </ul>
         </motion.div>
     )
@@ -248,6 +338,7 @@ export default function RichText({
     const [showPreview, setShowPreview] = useState(false)
     const [showMentionProfiles, setShowMentionProfiles] = useState(false)
     const mentionProfilesRef = useRef<HTMLDivElement>(null)
+    const posthog = usePostHog()
 
     const onDrop = useCallback(
         async (acceptedFiles) => {
@@ -375,9 +466,13 @@ export default function RichText({
         const mention =
             profile.id === Number(process.env.GATSBY_AI_PROFILE_ID)
                 ? `@max `
-                : `@${profile.attributes.firstName.trim().toLowerCase().replace(' ', '_')}/${profile.id} `
+                : `@${profile.firstName.trim().toLowerCase().replace(' ', '_')}/${profile.id} `
         setValue((prevValue) => replaceSelection(selectionStart, selectionEnd, mention, prevValue))
         setShowMentionProfiles(false)
+        posthog?.capture('community mention selected', {
+            mentioned_profile_id: profile.id,
+            mention_group: profile.group,
+        })
         textarea.current?.focus()
     }
 

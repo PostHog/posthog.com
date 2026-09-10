@@ -22,6 +22,8 @@ export type CommunityProfilesFilters = {
     search?: string
     teamMember?: 'any' | 'yes' | 'no'
     sort?: string
+    // Emails are moderator-only data, so callers that just need names opt out of them
+    includeEmail?: boolean
 }
 
 function mapProfile(profile: any): CommunityProfile {
@@ -40,7 +42,7 @@ function mapProfile(profile: any): CommunityProfile {
     }
 }
 
-function buildFilters({ minReputation, search, teamMember }: CommunityProfilesFilters) {
+function buildFilters({ minReputation, search, teamMember, includeEmail = true }: CommunityProfilesFilters) {
     const and: Record<string, any>[] = []
 
     if (minReputation != null && minReputation > 0) {
@@ -53,7 +55,7 @@ function buildFilters({ minReputation, search, teamMember }: CommunityProfilesFi
             $or: [
                 { firstName: { $containsi: trimmedSearch } },
                 { lastName: { $containsi: trimmedSearch } },
-                { user: { email: { $containsi: trimmedSearch } } },
+                ...(includeEmail ? [{ user: { email: { $containsi: trimmedSearch } } }] : []),
             ],
         })
     }
@@ -74,9 +76,7 @@ function buildQuery(filters: CommunityProfilesFilters, page: number, pageSize: n
         {
             populate: {
                 avatar: { fields: ['url'] },
-                user: {
-                    fields: ['email'],
-                },
+                ...(filters.includeEmail === false ? {} : { user: { fields: ['email'] } }),
             },
             fields: ['firstName', 'lastName', 'reputation', 'color', 'startDate', 'createdAt'],
             filters: buildFilters(filters),
@@ -153,7 +153,7 @@ export function useCommunityProfiles({
 
     useEffect(() => {
         setCurrentPage(0)
-    }, [filters.minReputation, filters.search, filters.teamMember, filters.sort, pageSize])
+    }, [filters.minReputation, filters.search, filters.teamMember, filters.sort, filters.includeEmail, pageSize])
 
     const goToPage = React.useCallback(
         (page: number) => {
