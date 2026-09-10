@@ -11,8 +11,10 @@ import {
     DivergenceFigure,
     EvalRunsFigure,
     ExampleFigure,
+    ExternalIssueFigure,
     FactorSplitFigure,
     Fig,
+    IssueSpikeFigure,
     LeakFigure,
     LedgerFigure,
     LoopFigure,
@@ -20,13 +22,15 @@ import {
     RedirectLoopFigure,
     ReportFigure,
     ScoutFigure,
+    StackTraceFigure,
+    TimelineFigure,
     ScreenshotFigure,
     SkillFigure,
     TraceFigure,
     TriggerGroupFigure,
 } from './figures'
 import { Contents, Enable, Eyebrow, Frontispiece, SeeAlso, SeeFig, Watches, proseComponents } from './bookPieces'
-import { AskAI, CTA, ScannerTemplate, ViewRecording, ViewRecordings } from './UIButton'
+import { AskAI, CTA, Prompt, ScannerTemplate, ViewRecording, ViewRecordings } from './UIButton'
 
 export { EntryProvider } from './bookContext'
 
@@ -49,10 +53,14 @@ export const bookMdxComponents = {
     DivergenceFigure,
     EvalRunsFigure,
     ExampleFigure,
+    ExternalIssueFigure,
     FactorSplitFigure,
     LedgerFigure,
     LeakFigure,
+    IssueSpikeFigure,
     ScoutFigure,
+    StackTraceFigure,
+    TimelineFigure,
     SkillFigure,
     TraceFigure,
     PersonsModalFigure,
@@ -71,6 +79,7 @@ export const bookMdxComponents = {
     ViewRecordings,
     ViewRecording,
     AskAI,
+    Prompt,
     CTA,
     ScannerTemplate,
     Term,

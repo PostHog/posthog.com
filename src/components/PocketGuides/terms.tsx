@@ -326,6 +326,36 @@ export const TERMS = {
             'Protected Health Information: health data tied to an identifiable person. HIPAA governs how it is stored, transmitted, and who may process it.',
         slug: '/docs/privacy/hipaa-compliance',
     },
+    issue: {
+        title: 'Issue',
+        description:
+            'A group of exceptions PostHog considers the same problem. Assigning, resolving, and alerting all happen on the issue, not on the individual throws inside it.',
+        slug: '/docs/error-tracking/issues-and-exceptions',
+    },
+    fingerprint: {
+        title: 'Fingerprint',
+        description:
+            'The value that decides which issue an exception joins. PostHog builds one from the exception type, message, and stack frames, and you can override it when the default groups too coarsely or too finely.',
+        slug: '/docs/error-tracking/fingerprints',
+    },
+    'stack trace': {
+        title: 'Stack trace',
+        description:
+            'The chain of calls that led to the throw, innermost frame first. It is only readable if the code it points at was not minified, or if you uploaded something that maps it back.',
+        slug: '/docs/error-tracking/stack-traces',
+    },
+    'source map': {
+        title: 'Source map',
+        description:
+            'A file mapping minified code back to the source you wrote. Without one, a stack trace names a column in a bundle rather than a line in your repository.',
+        slug: '/docs/error-tracking/upload-source-maps',
+    },
+    release: {
+        title: 'Release',
+        description:
+            'A named build that exceptions are tagged with. It is what lets you say an issue started at a given version rather than at a given hour.',
+        slug: '/docs/error-tracking/releases',
+    },
 } satisfies Record<string, TermDefinition>
 
 export type TermName = keyof typeof TERMS

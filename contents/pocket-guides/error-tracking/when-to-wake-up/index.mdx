@@ -1,0 +1,66 @@
+---
+title: Triage issues and set alerts
+shortTitle: Triage and alerts
+subtitle: Alert on every new issue and you'll stop reading them.
+pocketGuideOrder: 3
+section: Report
+---
+
+<LeftPage>
+
+<ScreenshotFigure
+    n={1}
+    product="error_tracking"
+    screenshot="assignment-rule"
+    caption="An assignment rule: a filter on the exception, the team it goes to, and a test against the last 7 days before you save it."
+/>
+
+<IssueSpikeFigure
+    n={3}
+    caption="An issue that normally happens two to four times a day jumps to 18. Spike alerts compare it against this issue's usual volume, not a fixed count."
+/>
+
+<ExternalIssueFigure
+    n={2}
+    caption="A useful GitHub handoff: the failure, its impact, the evidence behind it, a suggested fix, and a link back to the live issue in PostHog."
+/>
+
+</LeftPage>
+
+<RightPage>
+
+# Triage issues and set alerts
+
+Issues are only meaningful if the right people see them. This section shows you how to triage issues efficiently and create alerts that don't cause excessive noise.
+
+## Assign issues and send them to your issue tracker
+
+An assignment rule matches on the exception's properties and assigns the issue to a role or a teammate as it is created <SeeFig n={1} />.
+
+Rules run during ingestion, after <Term name="source map">source maps</Term> have been applied, so they see the unminified <Term name="stack trace" />. That is what lets you route by source file: exceptions under `checkout/` go to the payments team, and nobody has to read the trace to know whose it is.
+
+An issue can be sent to GitHub, GitLab, Linear, or Jira from the issue page. The tracker issue carries a link back, so whoever picks it up sees the exception, the <Term name="stack trace" />, and the people it hit, rather than your description of it <SeeFig n={2} />.
+
+<Prompt>
+Suggest error tracking assignment rules for my project based on which source files and URL paths my recent exceptions come from, grouped by the team that likely owns each.
+</Prompt>
+
+## Alert on meaningful changes
+
+Error tracking alerts can be configured to fire when an issue is created, reopened, or spikes.
+
+- Created fires on _every_ new issue, so be careful with this one. It'll likely produce a lot of noise.
+- Reopened fires when an issue you closed as fixed shows up again. Useful for tracking regressions.
+- Spikes is most useful. When an error spikes against its own volume, it's easy to miss and is usually worth investigating <SeeFig n={3} />.
+
+<Prompt>
+Set up an error tracking alert to Slack that fires when an issue is reopened or spikes, and not when a new issue is created.
+</Prompt>
+
+<SeeAlso>
+
+See also: [Send error tracking alerts](/docs/error-tracking/alerts) · [Detect spikes](/docs/error-tracking/spikes) · [Assign issues to teammates](/docs/error-tracking/assigning-issues) · [Set up integrations](/docs/error-tracking/integrations)
+
+</SeeAlso>
+
+</RightPage>

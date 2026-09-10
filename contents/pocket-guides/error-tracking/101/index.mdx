@@ -1,0 +1,130 @@
+---
+# Scaffolded from /docs/error-tracking/index, /docs/error-tracking/issues-and-exceptions,
+# /docs/error-tracking/stack-traces, and /docs/error-tracking/installation.
+#
+# Scope: what the product captures and what a reader sees on an issue. Grouping mechanics,
+# source maps, and volume controls belong to "How Error Tracking works" – this page only
+# names them.
+#
+# Section 4 is the one no standalone error tracker can print: the exception is an event, so
+# every product that reads events can read it too.
+title: Error Tracking 101
+shortTitle: Error Tracking 101
+subtitle: What an exception carries, how it becomes an issue, and what else in PostHog can read it.
+pocketGuideOrder: 1
+section: Observe
+---
+
+<LeftPage>
+
+<ScreenshotFigure
+    n={1}
+    product="error_tracking"
+    screenshot="issue-anatomy"
+    caption="One issue, whole: what it is, who it hit, the exceptions inside it, and what is already being done about it."
+    annotations={[
+        {
+            x: 24.4,
+            y: 7.4,
+            title: 'The issue, named by the exception it groups',
+            description:
+                'PostHog names it from the exception type unless you set one, and the pencil renames it. Assigning, resolving, and alerting all happen here rather than on the individual throws.',
+        },
+        {
+            x: 28.8,
+            y: 25.7,
+            title: 'When it started, and whether it still happens',
+            description:
+                'Exception volume over the range, marked first seen and last seen. A bar that stops is a fixed issue. One that restarts after a quiet week is a regression.',
+        },
+        {
+            x: 77.2,
+            y: 12.1,
+            title: 'What self-driving is already doing about it',
+            description:
+                'Agents that picked the issue up, what they are researching, and which ones have a fix ready for you to review.',
+        },
+        {
+            x: 86.2,
+            y: 39,
+            title: 'Stack trace, properties, timeline, and the recording',
+            description:
+                'Four views onto the same exception. The recording is the session it was thrown in, so you can watch what the person did to reach it.',
+        },
+        {
+            x: 80,
+            y: 54.2,
+            title: 'The stack trace, with your code beside it',
+            description:
+                'The frames that led to the throw, innermost first, with the source around the failing line. Readable only if you uploaded something that maps the bundle back to your repository.',
+        },
+    ]}
+/>
+
+<AnatomyFigure
+    n={2}
+    caption="Where this ends up: one actionable report in your inbox, with the issue, sessions, and affected accounts attached."
+    priority="P1"
+    status="Ready"
+    actionability="Actionable"
+    headline="Checkout confirm fails when the cart contains a discounted item. The confirm step reads a total the discount path never set"
+    report={{
+        title: 'Checkout confirm fails when the cart contains a discounted item',
+        source: 'Scout · error tracking',
+        receivedAgo: '2h',
+        affected: '47 sessions, 12 accounts, 3 on paid plans',
+        body: "A new exception, `TypeError: Cannot read properties of undefined (reading 'total')` in `checkout/confirm.ts`, first seen at 09:14, four minutes after release 1.4.2 went out. It only fires for carts holding a discounted item.\n\nThe same sessions show a rage-click cluster on the Confirm order button, and two support conversations this morning describe not being able to complete an order. All three arrived as separate signals and were grouped into this one report.\n\nThe confirm step reads `cart.pricing.total`. The discount path builds `cart.pricing` without a `total`, so the read fails before the order is placed.",
+        suggestedAction: 'Have the discount path set the total, and make the confirm step fall back to summing line items when it is missing.',
+        actionNote: 'An agent opens the pull request - you review and merge.',
+    }}
+/>
+
+</LeftPage>
+
+<RightPage>
+
+# Error Tracking 101
+
+Error Tracking takes exceptions thrown by your application and aggregates them into issues in context of your product data.
+
+This lets you answer questions you can't with just a stack trace:
+
+- Which customers are impacted?
+- Does it impact conversion and retention?
+- Can this error be tied to loss in revenue?
+- Were they part of any feature flag or experiment rollouts?
+- What's shown on the user's page before and after the exception is thrown?
+
+With this context, Error Tracking makes your product <Term name="self-driving">self-driving</Term>. Agents will have the context to triage the issues based on impact and open PRs to fix them.
+
+## Exceptions and issues
+
+Like everything else in PostHog, each instance of an <Term name="exception" /> is captured as a `$exception` <Term name="event" />. Similar exceptions are aggregated into <Term name="issue">issues</Term> <SeeFig n={1} />. Those issues are the base unit of work: you diagnose, triage, assign, and fix them, not individual exceptions.
+
+## Path to self-driving
+
+Error tracking takes you through discovery and fixing exceptions in three steps:
+
+- **Observe** - First, make every issue a useful signal. Capture the right exceptions, group one failure once, and attach readable traces and the path to the error.
+- **Report** - Then, include exceptions into your insights and dashboards, triage the issues that matter, and put the right one in front of the right person.
+- **Self-drive** - Finally, let scouts watch for specific failure patterns, investigate their impact, and hand actionable reports to agents that can open pull requests.
+
+The goal is to get actionable reports and a PR to address the exception automatically, so you can ship fixes while you sleep <SeeFig n={2} />.
+
+This pocket guide will explore all of these usecases in detail.
+
+## Install and turn it on
+
+None of it works until a PostHog SDK is in your app. The wizard installs and configures one for you, or you can [install it yourself](/docs/error-tracking/installation).
+
+<Setup />
+
+Capture is a project setting as well as an SDK one, so switch on [exception autocapture](https://app.posthog.com/error_tracking/configuration#selectedSetting=error-tracking-exception-autocapture) before you expect to see anything. We'll go over how exceptions become issues in [the next page](/pocket-guides/error-tracking/how-it-works).
+
+<SeeAlso>
+
+See also: [Error tracking](/docs/error-tracking) · [Start here](/docs/error-tracking/start-here) · [Issues and exceptions](/docs/error-tracking/issues-and-exceptions) · [Installation](/docs/error-tracking/installation)
+
+</SeeAlso>
+
+</RightPage>

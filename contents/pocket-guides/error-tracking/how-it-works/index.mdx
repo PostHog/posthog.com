@@ -1,0 +1,196 @@
+---
+title: Make every issue a useful signal
+shortTitle: Issue quality
+subtitle: Grouping decides what you end up looking at. Source maps decide whether you can read it.
+pocketGuideOrder: 2
+section: Observe
+---
+
+<LeftPage>
+
+<ScreenshotFigure
+    n={1}
+    product="error_tracking"
+    screenshot="grouping-rule"
+    caption="A grouping rule: what it matches on, and what it would have grouped before you save it."
+/>
+
+<StackTraceFigure
+    n={2}
+    caption="The same exception without source maps: every frame is a bundle, and none of it is yours."
+    type="TypeError"
+    message="Cannot read properties of null (reading 'useContext')"
+    frames={[
+        {
+            fn: 'exports.useContext',
+            source: '/node_modules/.vite/deps/chunk-OV4LOSH3.js@911:27',
+            unresolved: true,
+            marker: {
+                n: 1,
+                label: 'An unresolved frame',
+                gloss: 'PostHog could not map this back to source, so it names a column in a bundle. Hover the warning in the app for the same message.',
+            },
+        },
+        { fn: 'useParams', source: '/node_modules/.vite/deps/chunk-CUMSS5G5.js@5663:28', unresolved: true },
+        {
+            fn: 'useRouteComponentProps',
+            source: '/node_modules/.vite/deps/chunk-CUMSS5G5.js@6856:13',
+            unresolved: true,
+        },
+        { fn: 'renderWithHooks', source: '/node_modules/.vite/deps/react-dom_client.js@5654:24', unresolved: true },
+        {
+            fn: 'performUnitOfWork',
+            source: '/node_modules/.vite/deps/react-dom_client.js@12561:98',
+            unresolved: true,
+            marker: {
+                n: 2,
+                label: 'Nothing here is yours',
+                gloss: 'Every frame belongs to a dependency or the framework, so the fingerprint has none of your code to group on.',
+            },
+        },
+    ]}
+/>
+
+<StackTraceFigure
+    n={3}
+    caption="The same exception with them uploaded: your own frames, in bold, at the top of the trace."
+    type="TypeError"
+    message="Cannot read properties of null (reading 'useContext')"
+    frames={[
+        {
+            fn: 'useWorkspace',
+            source: 'src/workspace/useWorkspace.ts@17:9',
+            inApp: true,
+            marker: {
+                n: 1,
+                label: 'Your own code',
+                gloss: 'Set in bold, and the frame the fingerprint uses. Click it to open the source around the failing line.',
+            },
+            context: {
+                startLine: 15,
+                failingLine: 17,
+                lines: [
+                    'export function useWorkspace() {',
+                    '  const { id } = useParams()',
+                    '  const workspace = useContext(WorkspaceContext).byId[id]',
+                    '  return workspace',
+                    '}',
+                ],
+            },
+        },
+        { fn: 'WorkspaceProvider', source: 'src/workspace/WorkspaceProvider.tsx@42:18', inApp: true },
+        {
+            fn: 'useParams',
+            source: 'node_modules/react-router/index.tsx@5663:28',
+            marker: {
+                n: 2,
+                label: 'A dependency',
+                gloss: 'Still readable, but not yours. PostHog only falls back to these when the trace holds nothing from your own code.',
+            },
+        },
+        { fn: 'renderWithHooks', source: 'node_modules/react-dom/client.js@5654:24' },
+        { fn: 'performUnitOfWork', source: 'node_modules/react-dom/client.js@12561:98' },
+    ]}
+/>
+
+<TimelineFigure
+    n={4}
+    caption="The issue's Timeline tab: the steps you recorded, in order, among everything else the session did."
+    rows={[
+        {
+            time: '15:06:58',
+            category: 'pageview',
+            primary: '/workspaces/8f21c4',
+            marker: {
+                n: 1,
+                label: 'A pageview',
+                gloss: 'Captured for you. Every page the person opened during the session lands here without you writing anything.',
+            },
+        },
+        {
+            time: '15:07:02',
+            category: 'exception step',
+            primary: 'cache_miss',
+            secondary: 'key workspace:8f21c4',
+            marker: {
+                n: 2,
+                label: 'An exception step',
+                gloss: 'One addExceptionStep call. The name is yours, and so are the properties beside it – this row exists only because you wrote it.',
+            },
+        },
+        {
+            time: '15:07:09',
+            category: 'exception step',
+            primary: 'read_from_replica',
+            secondary: 'region eu-west-1 · lag_ms 180',
+        },
+        {
+            time: '15:07:11',
+            category: 'exception',
+            primary: 'Error',
+            secondary: 'Minified React error #418; visit https://reactjs.org/docs/error-deco…',
+            current: true,
+            marker: {
+                n: 3,
+                label: 'The exception',
+                gloss: 'The throw itself, and the row the steps above were buffered for. Everything before it is the run-up.',
+            },
+        },
+        { time: '15:07:19', category: 'pageview', primary: '/workspaces' },
+    ]}
+/>
+
+</LeftPage>
+
+<RightPage>
+
+# Make every issue a useful signal
+
+Three things decide whether Error Tracking produces high quality signals or noise: issue grouping, source map accuracy, and filtering.
+
+## Group one failure once
+
+An exception joins an <Term name="issue" /> by the first of these that applies:
+
+1. **A fingerprint you set at capture time.** Set at runtime, wins over everything else.
+2. **A grouping rule you defined in PostHog.** Runs at ingestion, no deployment or release needed.
+3. **The fingerprint PostHog generates.** What you get when you have done neither.
+
+By default, PostHog builds a <Term name="fingerprint" /> from the exception type, its message when there is no readable <Term name="stack trace" />, and frames from your own code when the trace has any. Generated fingerprints can be fragile without a <Term name="source map" />: every deploy can split one bug into a new issue.
+
+A grouping rule runs during ingestion, so it can match on any event property without a code change <SeeFig n={1} />. You can also pass `$exception_fingerprint` at capture time when a changing value in the message would otherwise open an issue for every ID.
+
+## Resolve stack traces
+
+A <Term name="stack trace" /> shows you the exact line of code that caused the exception. If you bundle, compile, or minify the code you distribute, the trace shows up as **unresolved** <SeeFig n={2} />.
+
+Upload a <Term name="source map" /> and the same trace points back to your source code <SeeFig n={3} />. For web, the wizard wires it into your build:
+
+```bash
+npx @posthog/wizard@latest upload-source-maps
+```
+
+When stack traces aren't enough, adding breadcrumbs let you leave additional traces. Breadcrumbs let you insert additional context that's captured only when an exception occurs, it's then shown in the issue's **Timeline** tab alongside everything else from the session <SeeFig n={4} />.
+
+## Keep noise out
+
+What gets stored is decided before anyone looks at it:
+
+- **Rate limits** cap how many exceptions PostHog ingests, project-wide or per <Term name="issue" />.
+- **Burst protection** stops one browser in a loop from spending your quota before the server sees it.
+- **Suppression rules** drop every future exception that matches before it becomes an event.
+- **`before_send`** is the last hook before anything leaves the client, where you can drop or redact an exception.
+
+Suppression is not the same as resolving. Resolving keeps the data and reopens the issue if the error comes back. Suppressing drops exceptions at ingestion, so it is not retroactive, and what it drops is not recoverable.
+
+<Prompt>
+Show me my noisiest error tracking issues from the last 7 days and tell me which ones look like retry loops or browser extension noise I should suppress or rate limit.
+</Prompt>
+
+<SeeAlso>
+
+See also: [Grouping exceptions into issues](/docs/error-tracking/grouping-issues) · [Fingerprints](/docs/error-tracking/fingerprints) · [Stack traces](/docs/error-tracking/stack-traces) · [Upload source maps](/docs/error-tracking/upload-source-maps) · [Releases](/docs/error-tracking/releases) · [Rate limiting](/docs/error-tracking/rate-limiting)
+
+</SeeAlso>
+
+</RightPage>

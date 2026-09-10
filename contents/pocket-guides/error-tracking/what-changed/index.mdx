@@ -1,0 +1,51 @@
+---
+title: Connect a deploy to an error burst
+shortTitle: Deploy regressions
+subtitle: The deploy that shipped the bug is on the same event as the bug.
+pocketGuideOrder: 7
+section: Self-drive
+---
+
+<LeftPage>
+
+<DivergenceFigure
+    n={1}
+    caption="One issue across a deploy: exceptions climb from the release marker while sessions stay flat, so it is the build, not the traffic."
+    markerAt={0.55}
+    markerLabel="1.4.2 deployed"
+    series={[
+        { label: 'Sessions', note: 'unchanged', values: [62, 64, 61, 66, 63, 65, 64, 62, 66, 63, 65, 64] },
+        {
+            label: 'Checkout exceptions',
+            note: 'starts in 1.4.2',
+            emphasis: true,
+            values: [4, 3, 5, 4, 3, 4, 5, 21, 38, 44, 47, 51],
+        },
+    ]}
+/>
+
+</LeftPage>
+
+<RightPage>
+
+# Connect a deploy to an error burst
+
+The deploy that shipped the bug is on the same event as the bug. A <Term name="release" /> narrows it to a build. A <Term name="feature flag" /> variant narrows it to a code path. Neither needs a second tool.
+
+## What the scout watches
+
+Every exception carries the release it was thrown in. The flags a person had are ordinary properties on the exception, so the scout can compare error volume across releases and feature flag variants.
+
+## What makes it report
+
+New, regressed, and always there are three different findings. New arrived with a release. Regressed was resolved and came back. Always there is the background you have stopped seeing.
+
+## What lands in your inbox
+
+"Started at 14:02" becomes "started in 1.4.2" <SeeFig n={1} />. If the issue only exists in the test variant, the report gives you a flag you can turn off now.
+
+## From report to fix
+
+A bug that only exists in the test variant is a flag you can turn off now. That is faster than any fix, and it holds the line while the fix is written.
+
+</RightPage>
