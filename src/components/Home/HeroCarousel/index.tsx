@@ -3,7 +3,7 @@ import { Tabs } from 'radix-ui'
 import { IconPauseFilled, IconPlayFilled } from '@posthog/icons'
 import Tooltip from 'components/RadixUI/Tooltip'
 import { Tab, productUsageTabs } from './tabs'
-import { AutoAdvanceGateContext, SlideActiveContext } from './autoAdvanceGate'
+import { AutoAdvanceGateContext, SlideActiveContext, SlidePausedContext } from './autoAdvanceGate'
 
 const SLIDE_DURATION = 5000
 
@@ -138,6 +138,7 @@ export default function HeroCarousel({
                                     key={tab.value}
                                     value={tab.value}
                                     forceMount
+                                    {...(activeTab !== tab.value ? { inert: '' } : {})}
                                     className={`data-[state=active]:animate-[hero-carousel-fade-in_300ms_ease-out] ${
                                         staticHeight
                                             ? 'col-start-1 row-start-1 min-w-0 data-[state=inactive]:invisible data-[state=inactive]:opacity-0'
@@ -145,7 +146,9 @@ export default function HeroCarousel({
                                     }`}
                                 >
                                     <SlideActiveContext.Provider value={activeTab === tab.value}>
-                                        {tab.content}
+                                        <SlidePausedContext.Provider value={isPaused}>
+                                            {tab.content}
+                                        </SlidePausedContext.Provider>
                                     </SlideActiveContext.Provider>
                                 </Tabs.Content>
                             ))}

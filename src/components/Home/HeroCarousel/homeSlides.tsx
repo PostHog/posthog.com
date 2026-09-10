@@ -14,6 +14,7 @@ import { usePrefersReducedMotion } from 'components/Code/usePrefersReducedMotion
 import { usePauseAutoAdvance, useSlideActive } from './autoAdvanceGate'
 import slackBrokenLink from '../../../data/typecaast/slack-broken-link.json'
 import slackSignalsLoading from '../../../data/typecaast/slack-signals-loading.json'
+import AskAnythingDemo from './AskAnythingDemo'
 
 // A Typecaast embed for use inside the hero carousel. While its animation plays it holds
 // the carousel's auto-advance (the animations run longer than the ~5s dwell), then releases
@@ -247,8 +248,6 @@ export const FixBugsSlide = () => {
 }
 
 export const AskAnythingSlide = () => {
-    const [view, setView] = useState<'slack' | 'web'>('web')
-    const allProducts = useProduct() as any[]
     const sourcePlatforms: { label: string; url: string; image: string }[] = useSourcePlatforms()
     const featuredSources = [
         ['github', '@[6rem]/sources:block'],
@@ -266,25 +265,11 @@ export const AskAnythingSlide = () => {
     ].flatMap(([slug, visibility]) =>
         sourcePlatforms.filter((source) => source.url.endsWith(`/${slug}`)).map((source) => ({ ...source, visibility }))
     )
-    const aiProduct = Array.isArray(allProducts) ? allProducts.find((p: any) => p.handle === 'posthog_ai') : undefined
-    const { siteSettings } = useApp()
-    const isDark = siteSettings.theme === 'dark'
-    const webScreenshot = aiProduct?.screenshots?.home
 
     return (
         <div className="@container rounded p-4 @md:p-6 h-full">
             <div className="grid grid-cols-1 @2xl:grid-cols-[1.4fr_1fr] gap-6 @2xl:gap-8 items-start">
-                {webScreenshot ? (
-                    <div className={`flex ${webScreenshot.classes || ''}`}>
-                        <CloudinaryImage
-                            src={(isDark && webScreenshot.srcDark ? webScreenshot.srcDark : webScreenshot.src) as any}
-                            alt={webScreenshot.alt}
-                            imgClassName={webScreenshot.imgClasses}
-                        />
-                    </div>
-                ) : (
-                    <div />
-                )}
+                <AskAnythingDemo />
 
                 <div className="flex flex-col gap-3">
                     <div className="space-y-2">
@@ -325,7 +310,9 @@ export const AskAnythingSlide = () => {
                                             alt=""
                                             width={24}
                                             height={20}
-                                            className="h-5 w-6 object-contain"
+                                            className={`h-5 w-6 object-contain ${
+                                                url.endsWith('/github') ? 'dark:invert' : ''
+                                            }`}
                                         />
                                     </Link>
                                 </li>
