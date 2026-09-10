@@ -205,7 +205,11 @@ const MentionProfiles = ({ onSelect, onClose, body, ...other }) => {
 
     useEffect(() => () => debounceSearch.cancel(), [debounceSearch])
 
-    const { profiles: searchedProfiles, isLoading } = useCommunityProfiles({
+    const {
+        profiles: searchedProfiles,
+        isLoading,
+        error,
+    } = useCommunityProfiles({
         filters: { search: debouncedSearch, includeEmail: false },
         pageSize: 10,
     })
@@ -307,7 +311,13 @@ const MentionProfiles = ({ onSelect, onClose, body, ...other }) => {
             />
             <ul className="m-0 p-0 list-none border border-input bg-light dark:bg-dark h-full rounded-md overflow-auto">
                 {orderedProfiles.length === 0 ? (
-                    <li className="px-3 py-2 text-sm opacity-60">{isLoading ? 'Searching...' : 'No people found'}</li>
+                    <li className="px-3 py-2 text-sm opacity-60">
+                        {error
+                            ? "Couldn't load people. Keep typing to try again."
+                            : isLoading
+                            ? 'Searching...'
+                            : 'No people found'}
+                    </li>
                 ) : (
                     groups.map((group) => (
                         <React.Fragment key={group}>
