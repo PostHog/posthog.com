@@ -4,7 +4,10 @@ title: Events data retention
 
 PostHog keeps your events for a period that your plan sets. This page tells you what that period is, where to read it, and what it does not do.
 
-Events data retention is separate from [session recording retention](/docs/session-replay/recording-retention), from the 30-day window on the large properties of [AI events](/docs/ai-observability/data-retention), and from the [data deletion tools](/docs/privacy/data-storage#data-deletion) that answer a deletion request.
+This page describes general data retention rules, with the following exceptions:
+- [Session recording retention](/docs/session-replay/recording-retention)
+- [AI events](/docs/ai-observability/data-retention) for AI Observability
+- [Data deletion tools](/docs/privacy/data-storage#data-deletion)
 
 ## Your retention period
 
@@ -19,8 +22,6 @@ Two read-only fields on the [projects API](/docs/api/projects) report it:
 
 - `event_retention_months` – the length of the window in months. A value of `84` is 7 years.
 - `events_retention_enforced` – whether the window applies to your project today.
-
-You cannot change these two fields, and PostHog support cannot change them for you. The window follows your plan.
 
 <CalloutBox type="fyi" title="Enforcement is a gradual rollout">
 
