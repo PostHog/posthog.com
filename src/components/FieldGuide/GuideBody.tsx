@@ -1,4 +1,5 @@
 import React from 'react'
+import Link from 'components/Link'
 import { INK, PAPER } from './heroData'
 
 const CORAL = '#E1554E'
@@ -29,9 +30,13 @@ export default function GuideBody(): JSX.Element {
                 </svg>
                 <p className="gb-intro">
                     Learning what users do once meant sitting through recordings until something happened, which was
-                    rare. That watching runs on its own now, and this guide is a catalog of what it keeps finding. Our
-                    naturalist, Sir Bartholomew Hogworth, Fellow of the Royal Society, named the ten species below,
-                    drawn from thousands of observed sessions.
+                    rare.{' '}
+                    <Link to="/replay-vision" state={{ newWindow: true }} className="gb-intro-link">
+                        Replay Vision
+                    </Link>{' '}
+                    does that watching now, and this guide is a catalog of what it keeps finding. Our naturalist, Sir
+                    Bartholomew Hogworth, Fellow of the Royal Society, named the ten species below, drawn from thousands
+                    of observed sessions.
                 </p>
                 <h2 id="the-species" className="gb-subtitle">
                     The species
@@ -92,6 +97,14 @@ export default function GuideBody(): JSX.Element {
                     text-align: center;
                     color: ${INK};
                 }
+                .gb-intro-link {
+                    color: ${INK};
+                    font-weight: 600;
+                    text-decoration: underline;
+                    text-underline-offset: 2px;
+                    text-decoration-thickness: 1px;
+                }
+                .gb-intro-link:hover { color: ${CORAL}; }
                 /* Matches the About heading, so the page's two section titles read as a pair.
                    The rule above it is the same hairline that divides the sections. */
                 .gb-subtitle {
@@ -174,7 +187,6 @@ export default function GuideBody(): JSX.Element {
                     color: rgba(69, 28, 1, 0.6);
                 }
 
-                /* Closing note: half text, half naturalist, both standing on the same line */
             `}</style>
         </section>
     )
