@@ -11,6 +11,7 @@ import { CurrentQuestionContext } from './Question'
 import Avatar from './Avatar'
 import { AnimatePresence, motion } from 'framer-motion'
 import { IconFeatures, IconImage } from '@posthog/icons'
+import { Logo } from '@posthog/brand/logo'
 import OSTextarea from 'components/OSForm/textarea'
 import OSButton from 'components/OSButton'
 import getCaretCoordinates from 'textarea-caret'
@@ -101,9 +102,10 @@ const nameMatchesQuery = (first: string | null | undefined, last: string | null 
 }
 
 const MentionProfile = ({ profile, onSelect, selectionStart, index, focused }) => {
-    const { firstName, lastName, avatar, gravatarURL } = profile.attributes
+    const { firstName, lastName, avatar, gravatarURL, startDate, isTeamMember } = profile.attributes
     const name = [firstName, lastName].filter(Boolean).join(' ')
     const isAI = profile.id === Number(process.env.GATSBY_AI_PROFILE_ID)
+    const isMod = isTeamMember || !!startDate
 
     return (
         <li className="border-b border-input p-1 last:border-b-0">
@@ -117,8 +119,13 @@ const MentionProfile = ({ profile, onSelect, selectionStart, index, focused }) =
                 active={focused === index}
             >
                 <div className="flex space-x-2 items-center w-full">
-                    <div className="size-6 overflow-hidden rounded-full">
+                    <div className="relative size-6 shrink-0 rounded-full">
                         <Avatar className="w-full" image={avatar?.data?.attributes?.url || gravatarURL} />
+                        {isMod && (
+                            <span className="absolute -right-1 -bottom-1 size-3.5 flex items-center justify-center rounded-full bg-primary border border-primary">
+                                <Logo layout="logomark" className="w-2.5" />
+                            </span>
+                        )}
                     </div>
                     <div>
                         {!isAI && <p className="m-0 text-xs font-semibold opacity-50 leading-none">{profile.id}</p>}
@@ -171,6 +178,7 @@ const MentionProfiles = ({ onSelect, body, position, ...other }) => {
                     firstName: profile.firstName,
                     lastName: profile.lastName,
                     avatar: { data: { attributes: { url: profile.avatarUrl } } },
+                    isTeamMember: profile.isTeamMember,
                 },
             })),
     ]
