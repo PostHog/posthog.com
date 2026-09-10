@@ -675,6 +675,10 @@ export const handbookSidebar = [
                 url: '/handbook/content/seo-guide',
             },
             {
+                name: 'Answer engine optimization (AEO)',
+                url: '/handbook/content/aeo-guide',
+            },
+            {
                 name: 'Style guide',
                 url: '/handbook/content/posthog-style-guide',
             },
