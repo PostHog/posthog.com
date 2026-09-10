@@ -14,11 +14,13 @@ tags:
 
 A month ago we launched [Replay Vision](/replay-vision), our AI layer over Session Replay. It watches session recordings and writes up what it finds, so nobody has to sit through them. We put it to work on PostHog right away, and in the last few weeks Replay Vision has watched 300k recordings for us. ([Nobody was going to watch](/blog/nobody-watches-session-replays) most of them anyway.)
 
-The biggest thing we learned from all that watching? Replay Vision fixes the watching part, but not the *thinking* part. It sounds simple, but it's the most important thing to remember when building scanners. And yes, we learned this the annoying way: in our first few weeks, some scanners found real issues and opportunities, while others produced perfectly plausible session summaries that nobody wanted to read. The difference became clear pretty quickly. Every scanner that produced useful results shared three things:
+The biggest thing we learned from all that watching? Replay Vision fixes the watching part, but not the *thinking* part.
 
-- a clear, focused, observable question that could only be answered by watching the recording
-- a clear slice of relevant recordings that could actually answer it
-- permission to say "no" or "inconclusive"
+It sounds simple, but it's the most important thing to remember when building scanners. And yes, we learned this the annoying way: in our first few weeks, some scanners found real issues and opportunities, while others produced perfectly plausible session summaries that nobody wanted to read. The difference became clear pretty quickly. Every scanner that produced useful results shared three things:
+
+1. A focused, observable question that could only be answered by watching the recording
+2. A clear slice of relevant recordings that could actually answer it
+3. Permission to say "no" or "inconclusive"
 
 ## Remind me, what is Replay Vision, anyway?
 
@@ -26,10 +28,10 @@ A quick introduction for those who are new here. Replay Vision is built around s
 
 Replay Vision has four scanner types, depending on the answer you want:
 
-- A monitor answers a yes-or-no question and can return "inconclusive."
-- A classifier applies a label.
-- A scorer gives the recording a numerical score.
-- A summarizer writes up what happened.
+- A **monitor** answers a yes-or-no question and can return "inconclusive."
+- A **classifier** applies a label.
+- A **scorer** gives the recording a numerical score.
+- A **summarizer** writes up what happened.
 
 ## 1. One question = one scanner
 
@@ -45,10 +47,12 @@ The question was specific: what was the person trying to do before they "escaped
 
 The scanner we built is a classifier called "[Error Tracking] Escape to AI assistant" and it works like this:
 
-- Recording query: selects sessions that contain both an Error Tracking issue view and a PostHog AI conversation. Without that query, the scanner would waste most of its time watching routine investigations where nobody needed help.
-- Prompt: asks what the person was trying to do, where the UI stopped helping, and what job they handed to PostHog AI.
-- Labels: tag the recording using our preset list or a free-form label when the scanner finds something we hadn't predicted. Examples include explaining an error spike, separating third-party noise from failures worth fixing, or deciding what to fix next.
-- Short explanation: tells us what the scanner saw and why it chose that label. For example, the person opened PostHog AI after the issue view gave them no obvious way to separate third-party noise from the spike they were investigating.
+**Component** | **What it does**
+-- | --
+**Recording query** | Selects sessions that contain both an Error Tracking issue view and a PostHog AI conversation. Without that query, the scanner would waste most of its time watching routine investigations where nobody needed help.
+**Prompt** | Asks what the person was trying to do, where the UI stopped helping, and what job they handed to PostHog AI.
+**Labels** | Tag the recording using the preset list or a free-form label when the scanner finds something unpredicted. Examples: explaining an error spike, separating third-party noise from failures worth fixing, or deciding what to fix next.
+**Short explanation** | Tells you what the scanner saw and why it chose that label. For example, the person opened PostHog AI after the issue view gave them no obvious way to separate third-party noise from the spike they were investigating.
 
 ### Context makes the question more specific
 
@@ -78,13 +82,16 @@ Most of this happens through the query. Use the event, URL, cohort, experiment e
 
 ### Make the model prove the premise
 
-We also have a ghost-bug scanner. It watches people use Replay Vision (yes, we very much love using Replay Vision to improve Replay Vision) and looks for areas where the product contradicts itself or traps someone in a task it invited them to start.
+We also have a ghost-bug scanner. It watches people use Replay Vision (yes, we love using Replay Vision to improve Replay Vision) and looks for areas where the product contradicts itself or traps someone in a task it invited them to start.
 
 The scanner only says "yes" when the recording shows both halves of the contradiction. Scanners that judge this strictly catch real problems. In one recording, a user reached the scan conditions step while creating a scanner. Beside "Filter out internal and test users," the product showed a gear icon. The gear did exactly what it promised when clicked: it opened project settings.
 
 It also pulled the user out of the scanner wizard.
 
 A normal event stream could show a settings visit followed by an abandoned wizard, but no error fired because, technically, the product worked exactly as we built it. The recording showed the actual failure: the product told the user to click a control that removed them from the task it wanted them to finish.
+
+![A Replay Vision observation citing the moments a user left the scanner wizard for project settings](https://github.com/user-attachments/assets/04fa4886-5cca-4dc5-b5a0-d40645dfc684)
+<!-- re-upload to Cloudinary before publish -->
 
 Once we could see both halves, the fix was fairly obvious: keep the setting inside the wizard instead of sending the user away. PostHog AI later opened a PR with that fix.
 
@@ -95,6 +102,9 @@ If an ordinary error accurately explains what happened, the answer is "no." If t
 This sounds conservative and *gasp* boring. Good. Most sessions should not become findings, and a scanner that is never allowed to be boring will eventually make things up.
 
 "Inconclusive" is a feature. It keeps the "yes" pile small enough for a person to inspect, which matters because selectivity is not the same as accuracy. Every observation links back to its recording, so when the scanner cites a contradiction, we can jump to the cited moments and watch both halves.
+
+![Verdict mix for our ghost-bug scanner: 1 percent yes, 57 percent no, 42 percent inconclusive](https://github.com/user-attachments/assets/b93a8e45-50ad-46e0-97a6-f7e71f0b4fb9)
+<!-- re-upload to Cloudinary before publish; refresh counts -->
 
 A scanner saying "Idk" is way better than making something up.
 
@@ -119,6 +129,9 @@ Don't try to perfect the prompt before you run it. The first batch will tell you
 ### Pick the model based on the cost of a wrong answer
 
 The model changes both quality and cost. Replay Vision prices each model in credits per observation, and one credit is $0.01. Pick the model by asking what a wrong answer would cost you.
+
+![The Replay Vision model picker, with each model priced in credits per observation](https://github.com/user-attachments/assets/5d92ba51-1511-4dc3-8a2f-08f8b623d799)
+<!-- re-upload to Cloudinary before publish -->
 
 Use the cheapest model for high-volume jobs where you care about the distribution, not any single observation. Our broken-render classifier tags recordings as `nothing_broken`, `media_failed`, `clipped_layout`, or `horizontal_overflow`. One wrong label nudges a trend instead of opening a ticket.
 
@@ -287,5 +300,3 @@ after I choose, estimate the scanner against the remaining quota, create it safe
 ```
 
 [Design scanners with PostHog AI](https://app.posthog.com/#panel=max:read%20this%20blog%20post%3A%20%5Burl%5D.%20then%20inspect%20our%20product%20code%2C%20PostHog%20event%20schema%2C%20cohorts%2C%20recordings%2C%20and%20existing%20Replay%20Vision%20scanners.%0A%0Apropose%20five%20scanners%20grounded%20in%20what%20this%20product%20actually%20does.%20each%20proposal%20must%20include%3A%0A-%20one%20visible%20question%20applied%20to%20one%20recording.%0A-%20the%20scanner%20type%20and%20why%20it%20matches%20the%20output.%0A-%20a%20narrow%20recording%20query%20using%20real%20events%2C%20urls%2C%20cohorts%2C%20and%20duration%20filters.%0A-%20the%20exact%20per-recording%20output%20shape%2C%20including%20no%20or%20inconclusive%20behavior.%0A-%20the%20model%2C%20sampling%20mode%2C%20and%20estimated%20monthly%20observations%20and%20credits.%0A-%20the%20cross-observation%20question%20for%20its%20Digest%20or%20Scout.%0A-%20the%20first%20observations%20a%20human%20should%20calibrate.%0A%0Areject%20ideas%20that%20require%20one%20scanner%20observation%20to%20compare%20sessions%2C%20infer%20hidden%20intent%2C%20or%20discover%20what%20matters%20without%20a%20product%20question.%20do%20not%20invent%20event%20names.%0A%0Arank%20the%20five%20ideas%20by%20expected%20product%20value%20and%20evidence%20quality.%20recommend%20one.%20do%20not%20create%20anything%20until%20I%20choose.%0A%0Aafter%20I%20choose%2C%20estimate%20the%20scanner%20against%20the%20remaining%20quota%2C%20create%20it%20safely%2C%20test%20it%20against%20representative%20recordings%2C%20add%20an%20appropriate%20Digest%20or%20alert%2C%20and%20return%20the%20links.)
-
-> PostHog is the leading platform for building self-driving products. With a full suite of developer tools – [AI observability](/ai-observability), [product analytics](/product-analytics), [session replay](/session-replay), [feature flags](/feature-flags), [experiments](/experiments), [error tracking](/error-tracking), [logs](/logs), and more – PostHog captures all the context agents need to diagnose problems, uncover opportunities, and ship fixes. A [data warehouse](/context-warehouse) and [CDP](/cdp) tie it all together, unifying that context into one source agents can read across. You can steer it all from [Slack](/slack), [the web app](/ai), the desktop ([PostHog Desktop](/desktop)), or your own editor via the [MCP](/mcp).
