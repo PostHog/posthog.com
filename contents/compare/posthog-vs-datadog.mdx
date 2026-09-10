@@ -32,11 +32,11 @@ All of PostHog's products have a free tier that refreshes every month. Beyond th
 
 ### Built for product engineers
 
-Datadog is organized around services and hosts. PostHog is organized around [events](/docs/data/events) and [people](/docs/data/persons).
+Datadog is organized around services and hosts. PostHog is organized around [events](/docs/data/events), [people](/docs/data/persons), and services.
 
 This reflects the typical usage and users of each. Datadog is built for DevOps and infra teams monitoring their infrastructure and ensuring reliability while PostHog focuses on [product engineers](/blog/product-engineer-vs-software-engineer) trying to build successful products.
 
-This doesn't mean both aren't used by other types of users though. They have overlapped more and more. Datadog acquired Eppo for experiments and launched a feature flags product. PostHog launched [logs](/logs) and is filling out its APM suite.
+This doesn't mean both aren't used by other types of users though. They have overlapped more and more. Datadog acquired Eppo for experiments and launched a feature flags product. PostHog launched [logs](/logs) and is filling out its APM suite with [tracing](/docs/distributed-tracing) in beta and [metrics](/docs/metrics/installation) in open alpha.
 
 ### PostHog makes your product self-driving (the whole way)
 
@@ -237,12 +237,12 @@ Both PostHog and Datadog have the platform and security features enterprise or c
 
 Choose PostHog if:
 
-- Debugging starts from a user or a feature rather than a host. It provides the error, replay, and logs attached to the person who hit them.
+- You want to debug from either direction. Start with a user or feature and investigate the backend issues, or start with logs, metrics, and traces then understand the user impact.
 - You want the tool that finds the problem to also ship the fix via [agents that open PRs](/blog/what-is-a-scout) as well as feature flags and experiments.
 - Cost predictability matters. PostHog provides transparent usage-based pricing, self-serve, hard spend caps per product.
-- You're already emitting OpenTelemetry and want to [repoint an exporter](/docs/logs/installation), not adopt another proprietary agent.
+- You're already emitting OpenTelemetry and want to [repoint an exporter](/docs/logs/installation) or want quick setup using standard OpenTelemetry instrumentation, without requiring a proprietary agent.
 - You want observability in the same platform as product analytics, replay, flags, experiments, and [warehouse data](/context-warehouse), querying the same data.
-- You don't have a dedicated infra team and need something useful on day one.
+- You don't have a dedicated infra team and need something useful on day one. Dedicated infra teams can use PostHog too though.
 
 Choose Datadog if:
 
