@@ -15,6 +15,8 @@ import { usePauseAutoAdvance, useSlideActive } from './autoAdvanceGate'
 import slackBrokenLink from '../../../data/typecaast/slack-broken-link.json'
 import slackSignalsLoading from '../../../data/typecaast/slack-signals-loading.json'
 import AskAnythingDemo from './AskAnythingDemo'
+import { useToolsProducts } from 'components/Home/ToolsTicker'
+import ToolsTickerStrip from 'components/Home/ToolsTicker/ToolsTickerStrip'
 
 // A Typecaast embed for use inside the hero carousel. While its animation plays it holds
 // the carousel's auto-advance (the animations run longer than the ~5s dwell), then releases
@@ -56,30 +58,13 @@ const CarouselTypecaast = ({ onEnded, ...props }: TypecaastPlayerProps): JSX.Ele
     )
 }
 
-export const PullRequestSlide = () => {
-    // Slack | Web toggle removed for now — multi-player is only supported in Slack.
-    // Re-add this `view` state (plus the toggle and Web branch in the JSX below) when web lands.
-    // const [view, setView] = useState<'slack' | 'web'>('slack')
+export const GiveAgentsContext = () => {
     const allProducts = useProduct() as any[]
     const product = Array.isArray(allProducts) ? allProducts.find((p: any) => p.handle === 'posthog_slack') : undefined
     const screenshot = product?.screenshots?.home
 
     return (
         <div className="@container rounded p-4 @md:p-6 h-full bg-accent/20">
-            {/* Slack | Web view toggle — hidden for now (multi-player is Slack-only). Re-add when web lands.
-            <div className="flex justify-center -mt-4 mb-4">
-                <ToggleGroup
-                    title="View"
-                    hideTitle
-                    options={[
-                        { label: <span className="whitespace-nowrap">Slack</span>, value: 'slack' },
-                        { label: <span className="whitespace-nowrap">Web</span>, value: 'web' },
-                    ]}
-                    value={view}
-                    onValueChange={(v) => v && setView(v as 'slack' | 'web')}
-                />
-            </div>
-            */}
             <div className="grid grid-cols-1 @2xl:grid-cols-[1.4fr_1fr] gap-6 @2xl:gap-8 items-start">
                 <CarouselTypecaast
                     config={slackBrokenLink}
@@ -101,23 +86,6 @@ export const PullRequestSlide = () => {
                         Explore PostHog Slack
                     </OSButton>
                 </div>
-                {/* Web view — re-add alongside the toggle when multi-player supports web:
-                <div className="flex flex-col gap-3">
-                    <div className="space-y-2">
-                        <p className="flex items-center gap-1.5 text-secondary text-sm font-semibold m-0">
-                            <IconAtSign className="size-4" /> PostHog Slackbot
-                        </p>
-                        <h2 className="text-2xl font-bold m-0">Create pull requests in Slack</h2>
-                    </div>
-                    <p className="text-secondary m-0">
-                        Tag <code>@PostHog</code> in a thread to analyze customer behavior or create a PR – all without
-                        ever leaving Slack. Triage and build with your team in your existing tools.
-                    </p>
-                    <OSButton to="/slack" state={{ newWindow: true }} variant="secondary" asLink>
-                        Explore PostHog Slackbot
-                    </OSButton>
-                </div>
-                */}
             </div>
         </div>
     )
@@ -249,22 +217,7 @@ export const FixBugsSlide = () => {
 
 export const AskAnythingSlide = () => {
     const sourcePlatforms: { label: string; url: string; image: string }[] = useSourcePlatforms()
-    const featuredSources = [
-        ['github', '@[6rem]/sources:block'],
-        ['meta-ads', '@[8rem]/sources:block'],
-        ['google-ads', '@[10rem]/sources:block'],
-        ['stripe', '@[12rem]/sources:block'],
-        ['postgres', '@[14rem]/sources:block'],
-        ['google-search-console', '@[16rem]/sources:block'],
-        ['supabase', '@[18rem]/sources:block'],
-        ['resend', '@[20rem]/sources:block'],
-        ['linear', '@[22rem]/sources:block'],
-        ['google-analytics', '@[24rem]/sources:block'],
-        ['revenuecat', '@[26rem]/sources:block'],
-        ['clerk', '@[28rem]/sources:block'],
-    ].flatMap(([slug, visibility]) =>
-        sourcePlatforms.filter((source) => source.url.endsWith(`/${slug}`)).map((source) => ({ ...source, visibility }))
-    )
+    const products = useToolsProducts()
 
     return (
         <div className="@container rounded p-4 @md:p-6 h-full">
@@ -281,54 +234,19 @@ export const AskAnythingSlide = () => {
                         have.
                     </p>
                     <p className="text-secondary m-0">
-                        Pipe in third party data from {Math.round(sourcePlatforms.length / 100) * 100}+ sources for a
-                        more complete picture.
+                        Pipe in third party data from{' '}
+                        <Link
+                            to="/docs/cdp/sources"
+                            state={{ newWindow: true }}
+                            className="underline underline-offset-2"
+                        >
+                            {Math.round(sourcePlatforms.length / 100) * 100}+ sources
+                        </Link>{' '}
+                        for a more complete picture.
                     </p>
                     <SignupCTA size="md" state={{ initialTab: 'signup' }} />
-                    <div className="@container/sources mt-2 min-w-0">
-                        <p className="text-xs text-secondary m-0">Use your data from:</p>
-                        <ul
-                            className="flex items-center gap-2 list-none p-0 my-3"
-                            aria-label="Third-party sources"
-                            style={{ counterReset: `remaining-sources ${sourcePlatforms.length}` }}
-                        >
-                            {featuredSources.map(({ label, image, url, visibility }) => (
-                                <li
-                                    key={url}
-                                    className={`hidden shrink-0 !m-0 !p-0 [counter-increment:remaining-sources_-1] ${visibility}`}
-                                >
-                                    <Link
-                                        to={url.replace('/docs/data-warehouse/sources/', '/docs/cdp/sources/')}
-                                        state={{ newWindow: true }}
-                                        wrapperClassName="flex items-center"
-                                        className="inline-flex size-6 items-center justify-center rounded-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2"
-                                        title={`Import data from ${label}`}
-                                        aria-label={`Import data from ${label}`}
-                                    >
-                                        <img
-                                            src={image}
-                                            alt=""
-                                            width={24}
-                                            height={20}
-                                            className={`h-5 w-6 object-contain ${
-                                                url.endsWith('/github') ? 'dark:invert' : ''
-                                            }`}
-                                        />
-                                    </Link>
-                                </li>
-                            ))}
-                            <li className="shrink-0 !m-0 !p-0">
-                                <Link
-                                    to="/docs/cdp/sources"
-                                    state={{ newWindow: true }}
-                                    wrapperClassName="flex items-center"
-                                    className="text-secondary underline underline-offset-2 text-xs whitespace-nowrap"
-                                    aria-label={`View all ${sourcePlatforms.length} data sources`}
-                                >
-                                    and <span className="before:content-[counter(remaining-sources)]" /> more
-                                </Link>
-                            </li>
-                        </ul>
+                    <div className="@container/tools mt-2 min-w-0">
+                        <ToolsTickerStrip products={products} compact />
                     </div>
                 </div>
             </div>

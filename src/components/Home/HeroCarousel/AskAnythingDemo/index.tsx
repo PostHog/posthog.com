@@ -11,9 +11,6 @@ import {
     IconFlask,
     IconGraph,
     IconMessage,
-    IconPauseFilled,
-    IconPlayFilled,
-    IconRefresh,
     IconRewindPlay,
     IconServer,
     IconShield,
@@ -90,7 +87,6 @@ export default function AskAnythingDemo() {
     const reducedMotion = usePrefersReducedMotion()
     const { ref, inView } = useInView({ threshold: 0.25 })
     const [pageVisible, setPageVisible] = useState(true)
-    const [paused, setPaused] = useState(false)
     const [elapsed, setElapsed] = useState(0)
 
     useEffect(() => {
@@ -106,7 +102,7 @@ export default function AskAnythingDemo() {
     }, [active])
 
     const finished = elapsed >= DURATION
-    const running = active && inView && pageVisible && !paused && !carouselPaused && !reducedMotion && !finished
+    const running = active && inView && pageVisible && !carouselPaused && !reducedMotion && !finished
     usePauseAutoAdvance(active && !finished && !reducedMotion)
 
     useEffect(() => {
@@ -221,23 +217,6 @@ export default function AskAnythingDemo() {
                     </span>
                 </div>
             </div>
-
-            {!reducedMotion && (
-                <button
-                    type="button"
-                    className="ai-demo-playback text-secondary hover:text-primary focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2"
-                    aria-label={finished ? 'Replay AI demo' : paused ? 'Play AI demo' : 'Pause AI demo'}
-                    title={finished ? 'Replay demo' : paused ? 'Play demo' : 'Pause demo'}
-                    onClick={() => {
-                        if (finished) {
-                            setElapsed(0)
-                            setPaused(false)
-                        } else setPaused((value) => !value)
-                    }}
-                >
-                    {finished ? <IconRefresh /> : paused ? <IconPlayFilled /> : <IconPauseFilled />}
-                </button>
-            )}
         </div>
     )
 }

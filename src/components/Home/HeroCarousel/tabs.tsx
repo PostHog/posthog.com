@@ -1,6 +1,6 @@
 import React from 'react'
 import { OnePlaceSlide, UnderstandUsageSlide, DebugFixSlide, TestRolloutSlide } from './slides'
-import { PullRequestSlide, FixBugsSlide, AskAnythingSlide } from './homeSlides'
+import { FixBugsSlide, AskAnythingSlide, GiveAgentsContext } from './homeSlides'
 
 export interface Tab {
     value: string
@@ -59,8 +59,8 @@ export const buildTabs: Tab[] = [
     },
     {
         value: 'slack',
-        label: 'Fix bugs from Slack',
-        content: <PullRequestSlide />,
+        label: 'Give agents product context',
+        content: <GiveAgentsContext />,
         color: 'bg-red',
         activeText: 'text-white',
         progressBar: 'bg-white shadow-[0_0_6px_2px_rgba(255,255,255,0.4)]',

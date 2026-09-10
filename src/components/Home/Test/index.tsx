@@ -172,8 +172,8 @@ function Hero(): JSX.Element {
                 </div>
             </div>
 
-            <LazyHeroCarousel className="mb-4" />
-            <ToolsTicker className="mb-8" />
+            <ToolsTicker className="mb-4" />
+            <LazyHeroCarousel className="mb-8" />
         </>
     )
 }
