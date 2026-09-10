@@ -604,6 +604,16 @@ const faqItems = [
         ),
     },
     {
+        trigger: 'Can the bot read screenshots and files?',
+        content: (
+            <p>
+                Yes. Attach images, PDFs, and text files to your message and the agent reads them as part of the
+                request. A screenshot of a broken page is often faster than a description of it. The limit is five files
+                per message, 10 MB each.
+            </p>
+        ),
+    },
+    {
         trigger: 'Do I have to tag the bot on every message?',
         content: (
             <p>
@@ -671,6 +681,7 @@ const faqItems = [
 const heroBullets = [
     'Ask questions about your product data',
     'Turn a message into a draft PR',
+    'Attach images, PDFs, and text files',
     'Ship from your phone with the Slack mobile app',
 ]
 
@@ -760,6 +771,11 @@ export default function SlackAppPage(): JSX.Element {
                     <p>
                         The PostHog Slack app is a single agent that reads your product data and writes your code. Ask
                         "why did EU signups drop?", then have it open the PR that fixes it (without leaving Slack).
+                    </p>
+                    <p>
+                        Send images, PDFs, and text files with your message – a screenshot of a broken page, a design,
+                        or an error log – and the agent reads them as part of the request. Five files per message, 10 MB
+                        each.
                     </p>
                     <div className="not-prose grid @2xl/reader-content:grid-cols-2 gap-4 mb-6 mt-6">
                         {introCards.map((card) => (
