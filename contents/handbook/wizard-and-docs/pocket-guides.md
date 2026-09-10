@@ -130,10 +130,13 @@ shortcuts, and so a guide open can be traced to the surface that sent it.
 - Inside a guide: `action_section`, `enable_section`, `front_matter`, `figure`, `prose`,
   `pinned_bar`.
 - Surfaces that open a guide: `shelf` (`/pocket-guides`), `docs_index` (the `/docs` library
-  column), `product_docs` (a product's docs page), `self_driving_page` (`/self-driving`).
+  column), `product_index` (a product's docs index page), `product_docs` (the
+  `GuidesForProduct` default, taken by any docs page that does not declare `product_index`),
+  `self_driving_page` (`/self-driving`).
 
 `placement` is a required prop on `Cover` and `VolumeCard`, so a new surface cannot ship
-without declaring itself – the build fails first.
+without declaring itself – the build fails first. `GuidesForProduct` is the one exception: its
+`placement` is optional, so a docs page that declares nothing is counted as `product_docs`.
 
 **A new volume needs no tracking work.** The CTA components carry it, so a guide is measured as
 soon as it uses one. Adding a new kind of CTA is the only case that needs a new `kind` here.
