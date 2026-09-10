@@ -32,6 +32,16 @@ You also need an IAM user or role with the following permissions:
 - `ses:ListEmailIdentities`
 - `ses:GetEmailIdentity`
 - `ses:ListSuppressedDestinations`
+- `ses:ListEmailTemplates`
+- `ses:GetEmailTemplate`
+- `ses:ListContactLists`
+- `ses:GetContactList`
+- `ses:ListDedicatedIpPools`
+- `ses:GetDedicatedIpPool`
+- `ses:GetDedicatedIps`
+- `ses:ListCustomVerificationEmailTemplates`
+- `ses:GetCustomVerificationEmailTemplate`
+- `ses:ListMultiRegionEndpoints`
 
 SES data is regional. Connect one source per AWS region you send email from.
 
@@ -63,7 +73,17 @@ When linking Amazon SES, you'll need:
         "ses:GetConfigurationSet",
         "ses:ListEmailIdentities",
         "ses:GetEmailIdentity",
-        "ses:ListSuppressedDestinations"
+        "ses:ListSuppressedDestinations",
+        "ses:ListEmailTemplates",
+        "ses:GetEmailTemplate",
+        "ses:ListContactLists",
+        "ses:GetContactList",
+        "ses:ListDedicatedIpPools",
+        "ses:GetDedicatedIpPool",
+        "ses:GetDedicatedIps",
+        "ses:ListCustomVerificationEmailTemplates",
+        "ses:GetCustomVerificationEmailTemplate",
+        "ses:ListMultiRegionEndpoints"
       ],
       "Resource": "*"
     }
@@ -96,7 +116,7 @@ The other tables are small and sync as a full refresh. The `account` table is a 
 
 - If you see "AWS rejected the access key", check that the access key ID and secret access key are correct and that the key is still active in IAM.
 - If you see a signature error, re-enter the secret access key. If you are using temporary credentials, the session token may have expired.
-- If you see "missing SES read permissions", grant the six `ses:` permissions listed above to the IAM user or role.
+- If you see "missing SES read permissions", grant the `ses:` permissions listed above to the IAM user or role.
 - If a sync fails with a region error, check that the region is a valid AWS region code like `us-east-1` and that your SES account sends from that region.
 
 <TroubleshootingLink />

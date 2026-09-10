@@ -23,7 +23,7 @@ import { applications, topFeatures } from './experiments/slides'
 export const experiments = {
     ...getTool('experiments'),
     Icon: IconFlask,
-    type: 'feature_flags',
+    type: 'experiments',
     sharesFreeTier: 'feature_flags',
     // Billed as feature flag requests – Plans/calculator resolve against this billing product.
     billingType: 'feature_flags',

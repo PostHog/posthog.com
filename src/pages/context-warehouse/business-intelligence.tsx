@@ -81,7 +81,7 @@ export default function BusinessIntelligence(): JSX.Element {
                         <Link to="https://hex.tech/" external>
                             Hex
                         </Link>{' '}
-                        directly to your PostHog DuckDB warehouse.
+                        directly to your PostHog Trino warehouse.
                     </p>
                 </div>
 

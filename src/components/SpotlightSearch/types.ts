@@ -21,6 +21,7 @@ export type ResultGroup = {
 }
 
 export type SuggestionItem =
+    | { kind: 'route'; path: string }
     | { kind: 'action'; action: SpotlightAction }
     | { kind: 'ask-ai' }
     | { kind: 'filter'; type: string }

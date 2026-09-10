@@ -63,21 +63,7 @@ export default function ReaderWrapper({ children }: { children: React.ReactNode 
     })
 
     const emitted = new Set<number>()
-    const stream: React.ReactNode[] = []
-
-    // A figure-less page authored as two prose pages – the volume's front matter – keeps its
-    // two-page character as two columns at reading widths, instead of one tall stack.
-    if (figures.size === 0 && preface.length > 0 && prose.length > 0) {
-        stream.push(
-            <div key="front-matter" className="@3xl:grid @3xl:grid-cols-2 @3xl:items-start @3xl:gap-12">
-                <div>{preface}</div>
-                <div>{prose}</div>
-            </div>
-        )
-        prose = []
-    } else {
-        stream.push(...preface)
-    }
+    const stream: React.ReactNode[] = [...preface]
 
     for (const block of prose) {
         stream.push(block)
