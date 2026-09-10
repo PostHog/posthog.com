@@ -325,7 +325,7 @@ export default function BookReader({
                     </div>
                 </div>
                 {actionBar && (
-                    <div className="shrink-0 border-t border-primary">
+                    <div className="m-4 shrink-0 rounded-md border border-primary">
                         <div className="mx-auto w-full max-w-[52rem] @3xl:max-w-[56rem]">{actionBar}</div>
                     </div>
                 )}
