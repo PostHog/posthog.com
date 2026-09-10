@@ -37,7 +37,9 @@ function readTitle(file) {
     try {
         const frontmatter = fs.readFileSync(path.join(repoRoot, file), 'utf-8').match(/^---\r?\n([\s\S]*?)\r?\n---/)
         const title = frontmatter?.[1].match(/^title:\s*(.+)$/m)?.[1].trim()
-        return title?.replace(/^['"]|['"]$/g, '').replace(/\|/g, '\\|') || null
+        // Escapes the backslash first (one combined pass), then the characters that would
+        // otherwise break the table cell or the link text.
+        return title?.replace(/^['"]|['"]$/g, '').replace(/[\\|[\]]/g, '\\$&') || null
     } catch {
         return null
     }
