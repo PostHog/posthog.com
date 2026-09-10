@@ -866,13 +866,13 @@
             "statusCode": 301
         },
         {
-            "source": "/docs/api/environments:ext(\\.md)?",
-            "destination": "/docs/api/projects:ext?",
+            "source": "/docs/api/environments.md",
+            "destination": "/docs/api.md",
             "statusCode": 301
         },
         {
-            "source": "/docs/api/environments.md",
-            "destination": "/docs/api.md",
+            "source": "/docs/api/environments:ext(\\.md)?",
+            "destination": "/docs/api/projects:ext?",
             "statusCode": 301
         },
         {
