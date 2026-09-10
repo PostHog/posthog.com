@@ -333,7 +333,7 @@ export const replayVision = {
             ],
         },
         companies: [
-            { name: 'FullStory', key: 'fullstory', link: '/blog/posthog-vs-fullstory' },
+            { name: 'FullStory', key: 'fullstory', link: '/compare/posthog-vs-fullstory' },
             { name: 'Contentsquare', key: 'contentsquare' },
             { name: 'Datadog', key: 'datadog' },
             { name: 'Mixpanel', key: 'mixpanel', link: '/blog/posthog-vs-mixpanel' },

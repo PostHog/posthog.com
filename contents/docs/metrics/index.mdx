@@ -2,7 +2,11 @@
 title: Application metrics
 ---
 
-> **Note:** Application metrics is in alpha. Setup details, including the ingestion endpoint, may change before general availability.
+<CalloutBox icon="IconFlask" title="Metrics is in private alpha" type="action">
+
+The metrics viewer is only turned on for selected teams. You can send metrics now and they are stored against your project, but you won't be able to view them in PostHog until your team is added. Setup details, including the ingestion endpoint, may change before general availability.
+
+</CalloutBox>
 
 **Application metrics** lets you send application and infrastructure metrics (request counts, latencies, queue depths, resource usage) to PostHog and analyze them alongside your [logs](/docs/logs), [traces](/docs/distributed-tracing), and product data.
 
@@ -207,26 +211,7 @@ Good starting points:
 
 ## Use your metrics
 
-Once metrics are flowing, open [Metrics](https://app.posthog.com/metrics) in PostHog.
-
-### Chart metrics in the viewer
-
-The **Viewer** tab lets you explore metrics without writing any queries:
-
-- **Pick a metric** by name to chart it over time
-- **Choose an aggregation**: sum, average, count, p95, rate, or increase. The viewer recommends one based on the metric's type: increase for counters, average for gauges, p95 for histograms
-- **Group by attributes** to break a metric down into one line per value, like per route or per status code
-- **Filter** to the series you care about, and adjust the date range
-
-### Query metrics with SQL
-
-The **SQL** tab gives you direct access to your metrics with [SQL](/docs/sql):
-
-```sql
-SELECT * FROM posthog.metrics LIMIT 10
-```
-
-Use it for anything the viewer doesn't cover, joining metrics against each other, custom math, or ad-hoc exploration of raw data points.
+Once metrics are flowing, open [Metrics](https://app.posthog.com/metrics) in PostHog. The metrics scene has three tabs — **Overview** for ingestion health, **Viewer** to chart and break down a metric, and **SQL** to query the raw data. Chart any metric over time, group and filter it by attribute, let the anomaly badge point at what changed, pivot into the logs and traces behind it, and set an [alert](/docs/metrics/explore#alerting) to get notified when a metric crosses a threshold. See [Use your metrics](/docs/metrics/explore) for the full tour.
 
 ## Troubleshooting
 

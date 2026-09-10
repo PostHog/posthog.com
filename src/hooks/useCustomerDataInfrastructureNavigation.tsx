@@ -20,10 +20,14 @@ export const customerDataInfrastructureNav = {
             url: '/context-warehouse/warehouse-native',
         },
         {
+            name: 'The context gap report',
+            url: '/the-context-gap-report',
+        },
+        {
             name: 'Data tools',
         },
         {
-            name: 'Managed DuckDB warehouse',
+            name: 'Managed Warehouse',
             url: '/context-warehouse/managed-warehouse',
         },
         {

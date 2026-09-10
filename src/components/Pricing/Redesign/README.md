@@ -2,7 +2,7 @@
 
 Components for the pricing page, served on **`/pricing`**. The page that assembles them is `pages/pricing/index.tsx`.
 
-These components shipped behind the `pricing-page-redesign` experiment, which ran three arms: the old page, the redesign with the calculator as its own section, and the redesign with the calculator minimized. The minimized redesign won, and it is now the only pricing page — the flag, the arm-picking code, the old page, and the always-visible `CalculatorSection` are all deleted. Nothing here reads a feature flag.
+These components shipped behind the `pricing-page-redesign` experiment. The redesign is now the only pricing page. The calculator is always visible as its own section (`CalculatorSection`). The `ai-pricing` experiment controls the AI estimate entry point: `control` hides it, `inside-calculator` places it beside **Share estimate**, and `outside-calculator` places it above the calculator and in the **Estimating usage** guidance. Unknown or unavailable flag values hide the AI estimate links. The shared `AgentEstimateLink` popover retains the ChatGPT, Claude, and copy-prompt actions and their existing analytics events.
 
 ## Why
 
@@ -22,7 +22,7 @@ Everything in the `Component` column is deleted, except `Test/ImageSlider` and `
 | "Give PostHog a try" | inline in `Pricing/PricingExperiment` | Redundant mid-page CTA. |
 | Y Combinator quote | `Pricing/Quote` | Single-quote social proof, replaced by `CustomerLogos`. |
 | Product comparisons | `Test/SimilarProducts` | Competitor feature grid — a different question than "what will this cost me". |
-| Add-ons | `Test/Addons` | Detail for existing customers, not people deciding. Still on `/platform-packages` and `/addons`. |
+| Add-ons | `Test/Addons` | Detail for existing customers, not people deciding. Available in the pricing calculator. |
 | Frequently purchased with | `Test/PurchasedWith` | Logo carousel of unrelated tools. |
 | Product screenshot slider | `Test/ImageSlider` | Didn't fit alongside a full-width headline, and screenshots aren't a pricing question. |
 | "Jump to" table of contents | `ReaderView` right sidebar | Suppressed with `hideRightSidebar`; buys ~290px of content width. |
@@ -38,10 +38,11 @@ Kept and reused: `Test/FreeTier`, `Test/Calculator`, `FAQs`, and `pages/pricing/
 2. `FreeTierTicker` — the free allowances, auto-scrolling in one row, with `Surfaces` as a one-line footnote under it
 3. `PricingJourney` — the two billing stages, as a journey
 4. `CustomerLogos`
-5. `MoreOptions` — three cards, plus `CalculatorReveal` as a footnote
-6. Philosophy note
-7. FAQ
-8. `Home/ShamelessCTA` — the homepage's boxed-software CTA, reused verbatim
+5. `MoreOptions` — three cards
+6. `CalculatorSection` — the pricing calculator, always visible
+7. Philosophy note
+8. FAQ
+9. `Home/ShamelessCTA` — the homepage's boxed-software CTA, reused verbatim
 
 `MoreOptions` comes before the philosophy note, not after: the note ends on a signup CTA, and following that with three "actually, maybe you need something else" cards undoes it. The note is the last word on the page before the FAQ.
 
@@ -176,7 +177,7 @@ Same expand mechanics as `CalculatorReveal`: a Framer Motion `height: 0 ↔ auto
 
 **Panel content comes from `Platform/PlatformPackageComparison`,** two components (`PlatformPackageList`, `PlatformFeatureTable`) extracted from the `/platform-packages` page so the prices and feature lists exist once. The page keeps its own intro and "get started" copy; the panel has neither, and doesn't link out to the page for them either. The panel answers the question the CTA asked and stops — the card's own CTA is the way to the page, for anyone who wants it.
 
-The page renders `CalculatorReveal` immediately after this component, still inside the same `SectionLayout` — see that section. The cards component itself doesn't know about the calculator.
+The calculator is its own section after these cards. The cards component itself doesn't know about the calculator.
 
 ### `Surfaces`
 

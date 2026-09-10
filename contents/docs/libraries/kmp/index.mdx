@@ -255,6 +255,40 @@ PostHog.capture(
 
 > **Note:** Properties with `null` values are dropped before the event is sent, so every platform receives the same event shape.
 
+## Filter events before sending
+
+`beforeSend` is available in PostHog KMP 0.3.0 and later on Android, iOS, JVM, Kotlin/JS, and Kotlin/Wasm. Use version 0.4.2 or later for the exception behavior described below.
+
+Add one or more `PostHogBeforeSend` callbacks to `PostHogConfig.beforeSend`. Return a copied event to modify its name or distinct ID, or to redact properties. Return `null` to drop the event before the SDK queues it:
+
+```kotlin
+import com.posthog.kmp.PostHog
+import com.posthog.kmp.PostHogBeforeSend
+import com.posthog.kmp.PostHogConfig
+import com.posthog.kmp.PostHogContext
+
+val config = PostHogConfig(
+    apiKey = "<ph_project_token>",
+    beforeSend = listOf(
+        PostHogBeforeSend { event ->
+            event.copy(properties = event.properties - "email")
+        },
+        PostHogBeforeSend { event ->
+            if (event.event == "internal_debug_event") null else event
+        },
+    ),
+)
+
+PostHog.setup(
+    config = config,
+    context = PostHogContext(),
+)
+```
+
+Callbacks run synchronously in list order. Each callback receives the event returned by the previous callback. Returning `null` skips the remaining callbacks. If a callback throws, the SDK drops the event and skips the remaining callbacks.
+
+Versions 0.3.0 through 0.4.1 ignore a callback exception and continue with the last valid event.
+
 ## Identifying users
 
 import IdentifyFrontendCallout from '../../_snippets/identify-frontend-callout.mdx'
@@ -629,6 +663,7 @@ Pass these to `PostHogConfig` when calling `setup`.
 | `personProfiles` | `PersonProfiles` | `IDENTIFIED_ONLY` | When person profiles are created: `IDENTIFIED_ONLY`, `ALWAYS`, or `NEVER`. |
 | `sessionRecording` | `SessionRecordingConfig?` | `null` | Enables and configures session replay (Android and iOS). |
 | `autocapture` | `Boolean` | `false` | Enables automatic event capture where the native platform supports it. |
+| `beforeSend` | `List<PostHogBeforeSend>` | `emptyList()` | Modifies or drops events before the SDK queues them. |
 | `errorTracking` | `ErrorTrackingConfig?` | `null` | Enables and configures Error Tracking. |
 
 ### Error Tracking options

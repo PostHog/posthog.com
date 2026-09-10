@@ -27,6 +27,89 @@ import PythonInstall from '../../integrate/_snippets/install-python.mdx'
 
 <PythonInstall />
 
+## Use the asyncio client
+
+The Python SDK includes an asyncio-native client in version `7.45.0` and later. Continue to use `Posthog` in synchronous apps. For an asyncio app, install the optional async dependencies:
+
+```bash
+pip install "posthog[async]>=7.45.0"
+```
+
+Import `AsyncPosthog`, the customer-facing name for `AsyncClient`. Both names provide the same async context manager and lifecycle methods. Keep one client for the lifetime of your app. For example, use a FastAPI lifespan handler:
+
+```python
+import os
+from contextlib import asynccontextmanager
+
+from fastapi import FastAPI
+from posthog import AsyncPosthog
+
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    async with AsyncPosthog(
+        os.environ["POSTHOG_PROJECT_TOKEN"],
+        host=os.environ["POSTHOG_HOST"],
+        secret_key=os.environ.get("POSTHOG_FEATURE_FLAGS_SECURE_API_KEY"),
+    ) as posthog:
+        app.state.posthog = posthog
+        yield
+
+app = FastAPI(lifespan=lifespan)
+```
+
+Exiting the context calls `shutdown()`. This flushes buffered events, waits for in-flight operations, stops the workers, and closes the HTTP transport. If you don't use the context manager, call `await posthog.shutdown()` during app shutdown. `await posthog.join()` has the same effect.
+
+### Capture events without blocking the event loop
+
+`capture()` queues an event and returns without waiting for a network request. Don't await it:
+
+```python
+posthog.capture(
+    "event_name",
+    distinct_id="user-distinct-id",
+    properties={"source": "fastapi"},
+)
+```
+
+Use `capture_immediate()` when your code must wait for that event's delivery attempt:
+
+```python
+capture_id = await posthog.capture_immediate(
+    "event_name",
+    distinct_id="user-distinct-id",
+)
+```
+
+### Evaluate feature flags
+
+Await `evaluate_flags()` once, then use its snapshot with synchronous in-memory accessors. Pass the same snapshot to `capture()` to attach the exact values used for branching without another feature flag request:
+
+```python
+flags = await posthog.evaluate_flags("user-distinct-id")
+
+if flags.is_enabled("new-checkout"):
+    # Show the new checkout
+    pass
+
+posthog.capture(
+    "checkout started",
+    distinct_id="user-distinct-id",
+    flags=flags,
+)
+```
+
+The snapshot provides synchronous `is_enabled()`, `get_flag()`, and `get_flag_payload()` accessors. The awaited `evaluate_flags()` call also accepts `groups`, `person_properties`, `group_properties`, `disable_geoip`, `flag_keys`, and `device_id` arguments.
+
+### Fetch remote config
+
+Initialize the client with a server-side [feature flags secure API key](/docs/feature-flags/remote-config#step-1-find-your-feature-flags-secure-api-key) as `secret_key`, then await the remote config request:
+
+```python
+config = await posthog.get_remote_config_payload("landing-page-config")
+```
+
+See [Remote config](/docs/feature-flags/remote-config) for setup and security details.
+
 ## Identifying users
 
 import IdentifyBackendCalloutPython from '../../_snippets/identify-backend-callout-python.mdx'
@@ -117,6 +200,8 @@ The `name` is a special property which is used in the PostHog UI for the name of
 
 ## Feature flags
 
+The examples in this section use the synchronous `Posthog` client. For `AsyncPosthog`, use the [awaited feature flag example](#evaluate-feature-flags). The returned snapshot uses the same accessors.
+
 import FeatureFlagsLibsIntro from "../_snippets/feature-flags-libs-intro.mdx"
 
 <FeatureFlagsLibsIntro />
@@ -139,7 +224,7 @@ In multi-worker or edge environments, you can implement custom caching for flag 
 
 ## Experiments (A/B tests)
 
-Since [experiments](/docs/experiments/start-here) use feature flags, the code for running an experiment is very similar to the feature flags code:
+Since [experiments](/docs/experiments/start-here) use feature flags, the code for running an experiment is very similar to the feature flags code. This example uses the synchronous `Posthog` client:
 
 ```python
 flags = posthog.evaluate_flags("user_distinct_id")
@@ -148,6 +233,8 @@ variant = flags.get_flag("experiment-feature-flag-key")
 if variant == "variant-name":
     # Do something
 ```
+
+With `AsyncPosthog`, await the evaluation: `flags = await posthog.evaluate_flags("user_distinct_id")`. The remaining snapshot access is the same.
 
 It's also possible to [run experiments without using feature flags](/docs/experiments/running-experiments-without-feature-flags).
 
@@ -319,10 +406,16 @@ import SDKMigration from "../../migrate/_snippets/sdk-migration.mdx"
 
 ## Serverless environments (Render/Lambda/...)
 
-By default, the library buffers events before sending them to the capture endpoint, for better performance. This can lead to lost events in serverless environments, if the Python process is terminated by the platform before the buffer is fully flushed. To avoid this, you can either:
+### Synchronous `Posthog`
 
-- Ensure that `posthog.shutdown()` is called after processing every request by adding a middleware to your server. This allows `posthog.capture()` to remain asynchronous for better performance. `posthog.shutdown()` is blocking.
-- Enable the `sync_mode` option when initializing the client, so that all calls to `posthog.capture()` become synchronous.
+By default, the synchronous `Posthog` client buffers events before sending them to the capture endpoint. This can lead to lost events if the platform terminates the Python process before the buffer is fully flushed. To avoid this, you can either:
+
+- Call `posthog.shutdown()` before the process ends. This blocking call attempts to deliver queued events and cleans up the client.
+- Enable `sync_mode` when initializing the client so each `posthog.capture()` call attempts delivery before it returns.
+
+### Asyncio `AsyncPosthog`
+
+Keep one `AsyncPosthog` client for the lifetime of your application. Use buffered `capture()` by default, or `await capture_immediate()` when one invocation must wait for an event's delivery attempt. Call `await posthog.shutdown()` once during application cleanup. Don't shut down the client after each request.
 
 ## Django
 

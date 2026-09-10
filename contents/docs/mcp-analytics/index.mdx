@@ -11,7 +11,7 @@ import OSButton from 'components/OSButton'
 import CustomSelfDrivingLoop from 'components/CustomSelfDrivingLoop'
 import { SurfaceCards, SurfaceCard } from 'components/Docs/SurfaceCards'
 
-MCP Analytics shows you how AI agents actually use your MCP tools: which ones get called, what the agent was trying to do, where calls fail, and which capabilities agents asked for that you don't offer yet. It works on PostHog's own hosted MCP server and on any server you instrument with the [`@posthog/mcp` SDK](/docs/mcp-analytics/installation).
+MCP Analytics shows you how AI agents actually use your MCP tools: which ones get called, what the agent was trying to do, which model the agent reports using, where calls fail, and which capabilities agents asked for that you don't offer yet. It works on PostHog's own hosted MCP server and on any server you instrument with the [MCP Analytics SDKs](/docs/mcp-analytics/installation).
 
 Every tool invocation lands as a single `$mcp_tool_call` event on your standard events table, so the same data powers the purpose-built MCP Analytics views and anything you build yourself in [product analytics](/docs/product-analytics) or [SQL](/docs/data-warehouse/sql). Those calls also feed [Self-driving](/docs/self-driving), which spots tools that need fixing and files a report – and opens a pull request when the server is one you own.
 
@@ -30,19 +30,27 @@ You explore MCP usage in the PostHog web app. The other surfaces let you query t
 <SurfaceCards columns={2}>
 
 <SurfaceCard icon="IconLaptop" color="blue" title="PostHog Web" badge="Beta" url="/docs/mcp-analytics/surfaces/web-app" cta="Explore MCP usage">
+
 Dashboards, session replay for agents, per-tool quality, and intent clustering.
+
 </SurfaceCard>
 
 <SurfaceCard icon="IconPlug" color="purple" title="PostHog MCP" url="/docs/mcp-analytics/surfaces/mcp" cta="Query over PostHog MCP">
+
 Query sessions, tool stats, failures, and intent clusters from any MCP client.
+
 </SurfaceCard>
 
 <SurfaceCard icon="IconCode" color="orange" title="PostHog Desktop" badge="Beta" url="/docs/mcp-analytics/surfaces/desktop" cta="Fix tools in PostHog Desktop">
+
 Read Self-driving reports about failing tools, and merge the fixes for servers you own.
+
 </SurfaceCard>
 
 <SurfaceCard icon="IconBrackets" color="seagreen" title="API" url="/docs/mcp-analytics/surfaces/api" cta="Use the API">
+
 Pull sessions, tool calls, intent clusters, and feedback into your own systems.
+
 </SurfaceCard>
 
 </SurfaceCards>
@@ -54,19 +62,27 @@ MCP Analytics runs on the events your MCP server sends to PostHog. The [SDK](/do
 <SurfaceCards columns={2}>
 
 <SurfaceCard icon="IconBolt" color="orange" title="Tool calls" url="/docs/mcp-analytics/events" cta="Event reference">
+
 The canonical <code>$mcp_tool_call</code> event: tool name, client, latency, errors, and session.
+
 </SurfaceCard>
 
 <SurfaceCard icon="IconList" color="blue" title="Lifecycle and discovery" url="/docs/mcp-analytics/events" cta="See all events">
-Initialize handshakes, <code>tools/list</code>, resource reads, and prompt fetches power client breakdowns.
+
+Legacy initialize handshakes, <code>tools/list</code>, and per-request protocol versions power client and spec adoption breakdowns.
+
 </SurfaceCard>
 
 <SurfaceCard icon="IconAIText" color="purple" title="Agent intent" url="/docs/mcp-analytics/intent" cta="Capture intent">
+
 What the agent said it was trying to do, clustered into themes across sessions.
+
 </SurfaceCard>
 
 <SurfaceCard icon="IconWrench" color="red" title="Missing capabilities" url="/docs/mcp-analytics/missing-capability" cta="Track missing capabilities">
+
 Gaps agents report through the <code>get_more_tools</code> virtual tool when the right tool doesn't exist.
+
 </SurfaceCard>
 
 </SurfaceCards>
@@ -78,13 +94,13 @@ Your tool calls are a signal source for [Self-driving](/docs/self-driving). A sc
 What comes after the report depends on who owns the MCP server it's about. If it's your own server, the report carries a fix loop metric and hands off to a coding agent that opens a pull request. If it's PostHog's hosted server – which is what most projects are analyzing – the report is filed for a human with no repository attached, and nothing opens a pull request.
 
 <CustomSelfDrivingLoop
-  stages={[
-    { label: 'Tool calls', icon: IconBolt, color: '#F54E00', description: 'Every agent invocation of your MCP tools' },
-    { label: 'Signals', icon: IconPlug, color: '#FFA81C', description: 'Failures, retries, and slow responses surfaced by a scout' },
-    { label: 'One report', icon: IconNotebook, color: '#29DBBB', description: 'Grouped by owning team, with the evidence behind it' },
-    { label: 'Draft PR', icon: IconPullRequest, color: '#A737D2', description: 'Only when you own the server and the fix is concrete' },
-    { label: 'You merge', icon: IconCheckCircle, color: '#47C861', description: 'Nothing ships without a human' },
-  ]}
+stages={[
+{ label: 'Tool calls', icon: IconBolt, color: '#F54E00', description: 'Every agent invocation of your MCP tools' },
+{ label: 'Signals', icon: IconPlug, color: '#FFA81C', description: 'Failures, retries, and slow responses surfaced by a scout' },
+{ label: 'One report', icon: IconNotebook, color: '#29DBBB', description: 'Grouped by owning team, with the evidence behind it' },
+{ label: 'Draft PR', icon: IconPullRequest, color: '#A737D2', description: 'Only when you own the server and the fix is concrete' },
+{ label: 'You merge', icon: IconCheckCircle, color: '#47C861', description: 'Nothing ships without a human' },
+]}
 />
 
 You can also start a fix yourself: the per-tool quality view has a **Create fix task** button that runs the same coding agent against a repository you choose. See [PostHog Desktop](/docs/mcp-analytics/surfaces/desktop) for how reports and fixes work.

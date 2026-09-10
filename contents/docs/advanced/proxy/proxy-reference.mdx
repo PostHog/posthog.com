@@ -49,6 +49,12 @@ posthog.init('<ph_project_token>', {
 
 Without `ui_host`, the toolbar and session recordings player won't work correctly.
 
+#### Configure custom request paths
+
+The JavaScript Web SDK can expose custom paths with `rewriteRequestPath`. Keep `api_host` and `ui_host` configured as shown above. The path option does not replace either host option.
+
+Your proxy routes must match every rewritten path and restore the standard PostHog path. Preserve query parameters when you forward requests. Route rewritten `/array/*` and `/static/*` paths to the regional asset host. Route rewritten API and Feature Flags paths to the regional ingestion host. See [customize reverse proxy request paths](/docs/libraries/js/config#customize-reverse-proxy-request-paths) for an SDK example.
+
 ## Troubleshooting
 
 ### 401 Unauthorized

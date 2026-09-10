@@ -72,9 +72,7 @@ base currency), `original_amount` / `original_currency` (as charged), `is_recurr
 4. **Link revenue to people via metadata.** Person/group-level revenue needs
    `posthog_person_distinct_id` metadata on the Stripe customer (or the person join). Without it, revenue is
    customer-level only.
-5. **Don't build on the Revenue dashboard** — it's being retired (~2026-06-30). Model against the
-   `revenue_analytics_*` views and the person/group revenue properties.
-6. **Exclude test accounts.** Confirm `filter_test_accounts` behaviour so QA/internal charges don't inflate
+5. **Exclude test accounts.** Confirm `filter_test_accounts` behaviour so QA/internal charges don't inflate
    revenue.
 
 ## Step 3 — build the model

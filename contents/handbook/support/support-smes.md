@@ -37,7 +37,7 @@ Beyond that, we have SMEs who own specific product groups. For each product grou
 - EU: <TeamMember name="Ben Lea" photo />, NA: <TeamMember name="Phillip Ramirez" photo />
 
 **Data**
-- EU: <TeamMember name="Luke Belton" photo />, NA: <TeamMember name="Kyle Swank" photo />
+- EU: <TeamMember name="Luke Belton" photo />, <TeamMember name="Chris Shine" photo />, NA: <TeamMember name="Kyle Swank" photo />
 
 **Replay**
 - EU: <TeamMember name="Christian Rafferty" photo />, NA: <TeamMember name="Ben Haynes" photo />
@@ -46,7 +46,7 @@ Beyond that, we have SMEs who own specific product groups. For each product grou
 - EU: <TeamMember name="Christiaan Hendriksen" photo />, NA: <TeamMember name="Steven Shults" photo />
 
 **Analytics**
-- EU: <TeamMember name="Xander Jones" photo />
+- EU: <TeamMember name="Xander Jones" photo />, <TeamMember name="Alin-emanuel Cîciu" photo />
 
 **Accounts & Billing**
 - EU: <TeamMember name="Eleftheria Trivyzaki" photo />

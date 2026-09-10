@@ -22,7 +22,7 @@ This guide shows you how to configure [AWS CloudFront](https://docs.aws.amazon.c
 
 ## Why CloudFront needs custom configuration
 
-CloudFront's default settings don't forward the headers, cookies, and query parameters PostHog needs to function. Without custom cache and origin request policies:
+CloudFront's default settings don't forward the headers and query parameters PostHog needs to function. Without custom cache and origin request policies:
 
 - Events will fail to authenticate due to missing `Authorization` headers
 - CORS requests will be blocked due to missing `Origin` headers
@@ -73,9 +73,12 @@ Configure this custom policy:
 
 - **Name:** `posthog-cache-policy` or any name you prefer
 - **Headers:** Include `Origin` and `Authorization`
+- **Cookies:** None
 - **Query strings:** All
 
 This policy tells CloudFront to include these values when caching responses. Without this, CloudFront would strip authentication headers and break event capture.
+
+Leave cookies set to **None**. PostHog does not need them, because ingestion authenticates on the project token in the request body.
 
 </Step>
 

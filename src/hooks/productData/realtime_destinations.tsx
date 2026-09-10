@@ -11,7 +11,7 @@ export const realtimeDestinations = {
     includeAddonRates: true,
     categoryName: 'Data pipelines',
     slider: {
-        marks: [10000, 50000, 250000, 1000000, 10000000],
+        marks: [10000, 1000000, 10000000],
         min: 10000,
         max: 10000000,
     },
@@ -21,7 +21,7 @@ export const realtimeDestinations = {
             key: 'batch_exports',
             label: 'Batch exports',
             sliderConfig: {
-                marks: [1000000, 5000000, 25000000, 100000000],
+                marks: [1000000, 25000000, 100000000],
                 min: 1000000,
                 max: 100000000,
             },
