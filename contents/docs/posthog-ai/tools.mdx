@@ -12,12 +12,12 @@ Here’s a list of tools PostHog AI can access and use.
 |---------|----------|-----------------|
 | Platform | `read_data` | Read saved insights, dashboards, notebooks, feature flags, experiments, surveys, error tracking issues, data warehouse schema, and more. |
 | Platform | `read_taxonomy` | Read taxonomy for events and properties. |
-| Platform | `read_data.billing_info` | Check your billing data. |
+| Platform | `read_data` | Check your billing data. Use the `billing_info` kind. |
 | Dashboards | `upsert_dashboard` | Create a dashboard, or add insights to the dashboard you're viewing. |
 | Data pipelines | `create_hog_function_filters` | Set up function filters for quick pipeline configuration. |
 | Data pipelines | `create_hog_function_inputs` | Manage function variables in Hog functions. |
 | Data pipelines | `create_hog_transformation_function` | Write and tweak Hog code of transformations. |
-| Data warehouse | `read_data.data_warehouse_schema` | Read your data warehouse schema. |
+| Data warehouse | `read_data` | Read your data warehouse schema. Use the `data_warehouse_schema` kind. |
 | Data warehouse | `fix_hogql_query` | Fix SQL queries automatically. |
 | Data warehouse | `execute_sql` | Write and run SQL queries. |
 | Docs | `search` | Search docs for answers regarding PostHog. Use the `docs` kind. |
