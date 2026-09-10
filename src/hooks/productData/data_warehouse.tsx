@@ -13,7 +13,7 @@ export const dataWarehouse = {
     color: 'purple',
     colorSecondary: 'lilac',
     seo: {
-        title: 'Managed DuckDB warehouse - PostHog',
+        title: 'Managed Warehouse - PostHog',
         description:
             'A managed data warehouse that unifies your product context with any source – so agents can query all of it and act on it to make your product self-driving.',
     },
