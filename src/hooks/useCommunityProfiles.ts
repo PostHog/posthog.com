@@ -29,6 +29,9 @@ export type CommunityProfilesFilters = {
 function mapProfile(profile: any): CommunityProfile {
     const attrs = profile.attributes || profile
     const user = attrs.user?.data?.attributes || attrs.user
+    // A start date in the future means the person has not joined yet, and the site holds them back
+    // until that date (see useTeamMembers), so they are not a team member anywhere it is shown
+    const today = new Date().toISOString().split('T')[0]
     return {
         id: profile.id,
         firstName: attrs.firstName || null,
@@ -38,7 +41,7 @@ function mapProfile(profile: any): CommunityProfile {
         reputation: attrs.reputation ?? null,
         avatarUrl: attrs.avatar?.data?.attributes?.url || attrs.avatar?.url || null,
         color: attrs.color || null,
-        isTeamMember: !!attrs.startDate,
+        isTeamMember: !!attrs.startDate && attrs.startDate <= today,
     }
 }
 
