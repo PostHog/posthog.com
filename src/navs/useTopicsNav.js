@@ -4,7 +4,7 @@ import React from 'react'
 import { useUser } from 'hooks/useUser'
 import { IconSparkles, IconClock } from '@posthog/icons'
 
-const navSorted = ['Products', 'Data', 'Product OS', 'Self-hosting', 'Off-topic', 'Other']
+const navSorted = ['Off-topic', 'Products', 'Data', 'Product OS', 'Self-hosting', 'Other']
 
 export default function useTopicsNav() {
     const { topicGroups } = useStaticQuery(graphql`
