@@ -20,7 +20,7 @@ This page is the wire-level contract for the MCP Analytics SDKs. TypeScript-only
 | `$identify`               | `identify()` returns a new identity for a session                                 | `$set` populated from the identity's `properties`                                                                                                                                                                    |
 | `$exception`              | Sibling event whenever a tool call or resource request errors (unless `enableExceptionAutocapture: false`) | `$exception_list`, `$exception_level`, plus the same `$mcp_*` context as the main event                                                                                                                              |
 
-The event enum also reserves `$mcp_prompts_list` and `$mcp_prompt_get`, but the server wrappers don't emit them yet; prompt payloads pass through unchanged.
+Resource events require `@posthog/mcp` ≥ 0.15.0 or `posthog` ≥ 7.51.0. The event enum also reserves `$mcp_prompts_list` and `$mcp_prompt_get`, but the server wrappers don't emit them yet; prompt payloads pass through unchanged.
 
 ## Core properties
 
