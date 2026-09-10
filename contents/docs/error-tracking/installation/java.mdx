@@ -33,7 +33,7 @@ dependencies {
 </dependency>
 ```
 
-<!-- TODO: set minimum version on release -->
+Error tracking on this page requires `posthog-server` 2.16.0 or later.
 
 <CalloutBox icon="IconInfo" title="Source context not yet supported" type="fyi">
 
@@ -173,84 +173,23 @@ Excludes always win over includes. Assigning your own `inAppExcludes` list **rep
 
 <Step title="Capture uncaught exceptions" badge="optional">
 
-To automatically capture exceptions that crash a thread, opt in with `captureUncaughtExceptions`. On setup, the SDK installs a JVM-wide [`Thread.defaultUncaughtExceptionHandler`](https://docs.oracle.com/javase/8/docs/api/java/lang/Thread.html#setDefaultUncaughtExceptionHandler-java.lang.Thread.UncaughtExceptionHandler-) that captures the crashing exception (marked as fatal, unhandled), flushes, and then delegates to any handler that was previously registered. The handler is removed again when you call `posthog.close()`.
+To automatically capture exceptions that crash a thread, opt in with `captureUncaughtExceptions`. On setup, the SDK installs a JVM-wide [`Thread.defaultUncaughtExceptionHandler`](https://docs.oracle.com/javase/8/docs/api/java/lang/Thread.html#setDefaultUncaughtExceptionHandler-java.lang.Thread.UncaughtExceptionHandler-) that captures the crashing exception as unhandled, then delegates to any handler that was previously registered. If there was none, it still prints the JVM's usual `Exception in thread ...` output to stderr, so crashes never disappear from your logs. The handler is removed again when you call `posthog.close()`.
+
+An exception on the main thread is captured with level `fatal`, since it is expected to end the process. An exception on any other thread only kills that thread, so it is captured with level `error` and sent through the normal queue.
 
 ```java
 PostHogConfig config = PostHogConfig
     .builder("<ph_project_token>")
     .host("<ph_client_api_host>")
     .captureUncaughtExceptions(true)
-    .flushAt(1)
     .build();
 ```
 
-<CalloutBox icon="IconWarning" title="Set a low flushAt for the crash path" type="caution">
+<CalloutBox icon="IconInfo" title="Crash delivery is best-effort" type="fyi">
 
-The handler captures the exception and then calls `flush()`, which drains the queue synchronously on the crashing thread. The capture itself is enqueued asynchronously, though, so it may not have landed in the queue by the time `flush()` runs. The background flush doesn't reliably cover this either: it only sends once `flushAt` events (default `100`) have accumulated, or on the flush interval (default every `5` seconds), neither of which is likely to fire before the process exits. If you rely on capturing the crash, set `flushAt(1)` so the enqueue itself triggers a send — at the cost of batching for every other event on that client. Delivery under an immediate hard exit is best-effort.
+For a main-thread crash, the SDK sends the event (and anything else still queued) before the JVM exits, blocking the crashing thread for at most 2 seconds. On a slow or unreachable network, or if something calls `Runtime.halt()` first, the event can still be lost.
 
 </CalloutBox>
-
-</Step>
-
-<Step title="Capture logged errors with Logback" badge="optional">
-
-If your application uses [Logback](https://logback.qos.ch/), you can automatically capture logged errors as exceptions with the PostHog appender, without adding `captureException` calls throughout your code.
-
-Add the appender module:
-
-```gradle_kotlin file=build.gradle
-dependencies {
-  implementation 'com.posthog:posthog-server-logback:0.+'
-}
-```
-
-```xml file=pom.xml
-<dependency>
-  <groupId>com.posthog</groupId>
-  <artifactId>posthog-server-logback</artifactId>
-  <version>LATEST</version>
-</dependency>
-```
-
-<!-- TODO: set minimum version on release -->
-
-Register the appender in your `logback.xml`:
-
-```xml file=logback.xml
-<configuration>
-    <appender name="POSTHOG" class="com.posthog.server.logback.PostHogAppender">
-        <minimumCaptureLevel>ERROR</minimumCaptureLevel>
-    </appender>
-
-    <root level="INFO">
-        <appender-ref ref="POSTHOG" />
-    </root>
-</configuration>
-```
-
-Then register your PostHog client with the appender once during startup, before the logging you want to capture. Registration is process-wide, so events logged before a client is registered are dropped.
-
-```java
-PostHogInterface posthog = PostHog.with(config);
-PostHogAppender.setPostHog(posthog);
-```
-
-Alternatively, let the appender create and own its own client from `logback.xml` by setting `apiKey` (and optionally `host`) instead of calling `setPostHog`:
-
-```xml file=logback.xml
-<appender name="POSTHOG" class="com.posthog.server.logback.PostHogAppender">
-    <apiKey>${POSTHOG_API_KEY}</apiKey>
-    <minimumCaptureLevel>ERROR</minimumCaptureLevel>
-</appender>
-```
-
-A few things to know about what the appender captures:
-
-- Only log events at or above `minimumCaptureLevel` (default `ERROR`) that carry a `Throwable` are captured. Message-only logs are skipped.
-- The log level is mapped onto `$exception_level` (`ERROR` → `error`, `WARN` → `warning`).
-- Events from the SDK's own loggers (`com.posthog.*`) are always skipped, so the SDK can't recursively report its own errors.
-- Because capture runs through the SDK's `captureException`, request-context distinct-id resolution and in-app frame configuration apply automatically.
-- If the same exception is both logged and reaches the uncaught-exception handler, it's captured only once.
 
 </Step>
 
@@ -300,4 +239,4 @@ posthog.flush();
 ## What's not supported yet
 
 - **Source context.** Captured frames include file names, line numbers, and function names, but the surrounding lines of source code are not shown in the UI.
-- **Framework middleware.** There is no built-in Spring (or other framework) middleware for automatic capture yet. Use the Logback appender, the uncaught-exception handler, and manual `captureException` calls, wiring request context in your framework integration.
+- **Framework middleware.** There is no built-in Spring (or other framework) middleware for automatic capture yet. Use the uncaught-exception handler and manual `captureException` calls, wiring request context in your framework integration.
