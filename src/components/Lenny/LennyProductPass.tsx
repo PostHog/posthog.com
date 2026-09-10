@@ -109,7 +109,7 @@ const jobs: {
         tools: [
             { Icon: IconMessage, name: 'Surveys', slug: 'surveys' },
             { Icon: IconSparkles, name: 'Support', slug: 'support' },
-            { Icon: IconPullRequest, name: 'AI observability, slug: 'ai-observability' },
+            { Icon: IconPullRequest, name: 'AI observability', slug: 'ai-observability' },
         ],
     },
     {
