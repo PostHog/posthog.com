@@ -1,0 +1,1493 @@
+/* ==========================================================================
+   Unter, the fake demo site rendered inside /instrumentation.
+
+   Deliberately NOT PostHog-styled: Unter is "someone else's website" (an
+   Uber-style black-and-white rideshare app for hedgehogs), so the
+   instrumentation overlay pops against it. Everything is scoped under
+   .unter-root / .unter-frame and light-locked: it must not respond to the
+   site theme, exactly like a screenshot of another company's site wouldn't.
+
+   Responsiveness uses container queries against the browser-frame body
+   (container-name: unter), never viewport media queries, because the whole
+   page lives inside a resizable OS window.
+   ========================================================================== */
+
+.unter-frame {
+    container-type: inline-size;
+    container-name: unter;
+}
+
+.unter-root {
+    color-scheme: light;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    color: #000;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    font-size: 16px;
+    line-height: 1.5;
+}
+.unter-root a {
+    color: inherit;
+    text-decoration: none;
+}
+.unter-root button {
+    font-family: inherit;
+    cursor: pointer;
+}
+.unter-root h1,
+.unter-root h2,
+.unter-root h3,
+.unter-root h4,
+.unter-root h5,
+.unter-root p {
+    margin: 0;
+}
+
+.un-site {
+    background: #fff;
+    min-height: 100%;
+}
+
+/* ============ shared ============ */
+.un-shell {
+    max-width: 1244px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+@container unter (min-width: 720px) {
+    .un-shell {
+        padding: 0 40px;
+    }
+}
+
+/* Scoped under .unter-root so these beat the `margin: 0` heading reset above on
+   specificity. As a bare `.un-h1` the bottom margin silently loses and every
+   heading sits flush against its body copy. */
+.unter-root .un-h1 {
+    font-size: 34px;
+    line-height: 1.08;
+    letter-spacing: -0.02em;
+    font-weight: 700;
+    margin: 0 0 24px;
+}
+.unter-root .un-h2 {
+    font-size: 26px;
+    line-height: 1.15;
+    letter-spacing: -0.015em;
+    font-weight: 700;
+    margin: 0 0 20px;
+}
+@container unter (min-width: 800px) {
+    .unter-root .un-h1 {
+        font-size: 52px;
+        margin-bottom: 32px;
+    }
+    .unter-root .un-h2 {
+        font-size: 36px;
+        margin-bottom: 24px;
+    }
+}
+.un-lede {
+    font-size: 16px;
+    line-height: 1.6;
+    color: #5e5e5e;
+    max-width: 52ch;
+}
+
+.un-btn-black,
+.un-btn-gray,
+.un-btn-white {
+    border: none;
+    border-radius: 8px;
+    height: 52px;
+    padding: 0 24px;
+    font-size: 15px;
+    font-weight: 500;
+}
+.un-btn-black {
+    background: #000;
+    color: #fff;
+}
+.un-btn-black:hover {
+    background: #1f1f1f;
+}
+.un-btn-gray {
+    background: #f3f3f3;
+    color: #000;
+}
+.un-btn-gray:hover {
+    background: #eeeeee;
+}
+.un-btn-white {
+    background: #fff;
+    color: #000;
+}
+
+/* ============ topnav ============ */
+.un-topnav {
+    background: #000;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    padding: 0 20px;
+    height: 64px;
+    position: sticky;
+    top: 0;
+    z-index: 40;
+}
+@container unter (min-width: 720px) {
+    .un-topnav {
+        padding: 0 40px;
+    }
+}
+.un-wordmark {
+    font-size: 26px;
+    font-weight: 500;
+    letter-spacing: -0.02em;
+    margin-right: 16px;
+    cursor: pointer;
+    background: none;
+    border: none;
+    color: #fff;
+    padding: 0;
+}
+@container unter (min-width: 900px) {
+    .un-wordmark {
+        margin-right: 36px;
+    }
+}
+.un-nlink {
+    font-size: 14px;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.75);
+    cursor: pointer;
+    padding: 0 12px;
+    line-height: 64px;
+    transition: color 0.12s;
+    background: none;
+    border: none;
+    white-space: nowrap;
+}
+.un-nlink:hover,
+.un-nlink.active {
+    color: #fff;
+}
+.un-nlink.quiet {
+    font-weight: 400;
+    display: none;
+}
+@container unter (min-width: 900px) {
+    .un-nlink.quiet {
+        display: block;
+    }
+}
+/* Below 559px the full row (wordmark + 4 links + Sign up) overflows and clips the
+   Sign up pill (an annotation target). Drop the page links; the sidebar's page
+   switcher covers navigation. */
+@container unter (max-width: 559px) {
+    .un-nlink {
+        display: none;
+    }
+}
+.un-topnav .un-spacer {
+    flex: 1;
+}
+.un-pill {
+    background: #fff;
+    color: #000;
+    font-size: 14px;
+    font-weight: 500;
+    border: none;
+    border-radius: 999px;
+    padding: 10px 20px;
+    margin-left: 12px;
+    white-space: nowrap;
+}
+.un-pill:hover {
+    background: #eee;
+}
+
+/* ============ promo banner ============ */
+.un-promo {
+    background: #f6f6f6;
+    border-radius: 12px;
+    margin-top: 16px;
+    padding: 14px 20px;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 14px;
+    font-size: 14px;
+}
+.un-promo .un-tag {
+    background: #000;
+    color: #fff;
+    font-size: 11px;
+    font-weight: 700;
+    padding: 4px 9px;
+    border-radius: 999px;
+    letter-spacing: 0.03em;
+    flex: none;
+}
+.un-promo .un-plink {
+    margin-left: auto;
+    font-weight: 500;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    white-space: nowrap;
+    cursor: pointer;
+    background: none;
+    border: none;
+    font-size: 14px;
+}
+
+/* ============ ride hero ============ */
+.un-hero {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 40px;
+    align-items: center;
+    padding: 24px 0 56px;
+}
+/* 2-up as soon as the columns fit (620px); minmax lets them share width rather
+   than overflow, so the form and map stay side by side on smaller windows too. */
+@container unter (min-width: 620px) {
+    .un-hero {
+        grid-template-columns: minmax(300px, 400px) minmax(220px, 1fr);
+        gap: 48px;
+        padding: 40px 0 64px;
+    }
+}
+.un-stops {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+.un-stops::before {
+    content: '';
+    position: absolute;
+    left: 23px;
+    top: 36px;
+    bottom: 36px;
+    width: 1.5px;
+    background: #000;
+    z-index: 1;
+}
+.un-field {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    background: #f3f3f3;
+    border-radius: 8px;
+    padding: 0 16px;
+    height: 56px;
+    border: 2px solid transparent;
+}
+.un-field:focus-within {
+    border-color: #000;
+    background: #fff;
+}
+.un-field input,
+.un-field select {
+    border: none;
+    background: transparent;
+    outline: none;
+    font-size: 15.5px;
+    width: 100%;
+    color: #000;
+    font-family: inherit;
+    appearance: none;
+}
+.un-field ::placeholder {
+    color: #9b9b9b;
+}
+/* A native select has no placeholder attribute, so grey the control while its
+   empty first option is the one selected. Falls back to normal ink if :has()
+   isn't supported, which is a cosmetic loss rather than a break. */
+.un-field select:has(option[value='']:checked) {
+    color: #9b9b9b;
+}
+.un-geo-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #000;
+    flex: none;
+    z-index: 2;
+}
+.un-geo-sq {
+    width: 8px;
+    height: 8px;
+    background: #000;
+    flex: none;
+    z-index: 2;
+}
+.un-form-ctas {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 20px;
+}
+/* map */
+.un-mapwrap {
+    position: relative;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.06);
+    background: #f4f4f2;
+}
+/* Image placeholder. Unter has no photography and no illustrations, so every
+   image slot is a labelled grey box, so nothing competes with the
+   instrumentation markers for attention. */
+.un-ph {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    background: #ebebe8;
+    color: #9b9b9b;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    line-height: 1.3;
+    padding: 12px;
+    width: 100%;
+    /* Fixed heights, not aspect-ratio: at the proportions of the illustrations
+       they replace these boxes ate half a screen each, and clamping an
+       aspect-ratio box with max-height shrinks its width to match rather than
+       letting it fill the slot. */
+    height: 200px;
+}
+.un-ph-map {
+    height: 380px;
+}
+.un-ph-spec {
+    height: 160px;
+}
+.un-featart .un-ph {
+    height: 220px;
+}
+
+/* ============ account row ============ */
+/* A <button>, so the UA's own border, font, width and centred text all need
+   overriding. It was a div with `cursor: pointer` and no handler: it looked
+   clickable, wasn't focusable, and marker 11 promises a click fires identify(). */
+.un-acct-row {
+    border: none;
+    font: inherit;
+    color: inherit;
+    text-align: left;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    background: #fff;
+    border-top: 1px solid #e2e2e2;
+    border-bottom: 1px solid #e2e2e2;
+    padding: 22px 4px;
+    margin: 8px 0 48px;
+    cursor: pointer;
+}
+.un-acct-row:hover {
+    background: #f6f6f6;
+}
+.un-acct-row .un-pic {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: #f6f6f6;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: none;
+}
+.un-acct-row .un-pic svg {
+    width: 20px;
+    height: 20px;
+}
+/* The text column in the two card buttons. They're <span>s because a <button> can't
+   contain block content; as flex items they blockify on their own, and min-width: 0
+   lets long copy wrap rather than shoving the chevron out of the card. */
+.un-acct-text,
+.un-app-text {
+    min-width: 0;
+}
+.un-acct-row .un-acct-title {
+    font-size: 16px;
+    display: block;
+}
+.un-acct-row .un-acct-sub {
+    font-size: 13px;
+    color: #5e5e5e;
+}
+.un-acct-row .un-chev {
+    margin-left: auto;
+    font-size: 20px;
+}
+
+/* ============ tiers ============ */
+.un-sec-label {
+    font-size: 28px;
+    font-weight: 700;
+    letter-spacing: -0.015em;
+    margin: 0 0 24px;
+}
+@container unter (min-width: 800px) {
+    .un-sec-label {
+        font-size: 36px;
+    }
+}
+.un-tiers {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 16px;
+    padding-bottom: 8px;
+}
+@container unter (min-width: 680px) {
+    .un-tiers {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+/* A <button>, see .un-acct-row. Marker 6 promises picking one fires
+   ride_tier_selected. */
+.un-tier {
+    border: none;
+    font: inherit;
+    color: inherit;
+    text-align: left;
+    width: 100%;
+    background: #f6f6f6;
+    border-radius: 12px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    min-height: 170px;
+    cursor: pointer;
+    position: relative;
+    transition: background 0.12s;
+}
+.un-tier:hover {
+    background: #eeeeee;
+}
+.un-tier .un-art {
+    position: absolute;
+    top: 18px;
+    right: 16px;
+    width: 44px;
+    height: 44px;
+    border-radius: 6px;
+    background: #e1e1de;
+}
+.un-tier .un-tier-name {
+    margin: 0 0 6px;
+    font-size: 18px;
+    font-weight: 700;
+    padding-right: 64px;
+}
+.un-tier .un-tier-desc {
+    margin: 0;
+    font-size: 13.5px;
+    color: #5e5e5e;
+    line-height: 1.5;
+    padding-right: 64px;
+    flex: 1;
+}
+.un-tier .un-go {
+    margin-top: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.un-tier .un-price {
+    font-size: 13px;
+    font-weight: 700;
+}
+.un-tier .un-arrow {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 15px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
+}
+
+/* ============ feature rows ============ */
+.un-featrow {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 32px;
+    align-items: center;
+    padding: 32px 0;
+}
+@container unter (min-width: 860px) {
+    .un-featrow {
+        grid-template-columns: 1fr 1fr;
+        gap: 64px;
+        padding: 56px 0;
+    }
+}
+.un-featrow .un-h2 {
+    margin-bottom: 14px;
+}
+.un-featrow .un-lede {
+    margin-bottom: 26px;
+}
+.un-featrow .un-ctas {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    align-items: center;
+}
+.un-featart {
+    border-radius: 16px;
+    overflow: hidden;
+    background: #f6f6f4;
+}
+
+/* ============ app download row ============ */
+.un-apps {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 16px;
+    padding: 32px 0 8px;
+}
+@container unter (min-width: 760px) {
+    .un-apps {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+/* A <button>, see .un-acct-row. */
+.un-app-card {
+    border: none;
+    font: inherit;
+    color: inherit;
+    text-align: left;
+    width: 100%;
+    background: #f6f6f6;
+    border-radius: 12px;
+    padding: 26px;
+    display: flex;
+    align-items: center;
+    gap: 22px;
+    cursor: pointer;
+}
+.un-app-card:hover {
+    background: #eeeeee;
+}
+.un-app-card .un-qr {
+    flex: none;
+    border-radius: 8px;
+    background: #fff;
+    padding: 8px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+.un-ph-qr {
+    width: 56px;
+    height: 56px;
+    padding: 0;
+    font-size: 11px;
+}
+.un-app-card .un-app-name {
+    /* A <span>, because it sits inside a <button>, so the block display and vertical
+       margin the old <h3> got for free have to be asked for. */
+    display: block;
+    margin: 0 0 4px;
+    font-size: 18px;
+    font-weight: 700;
+}
+.un-app-card .un-app-desc {
+    display: block;
+    margin: 0;
+    font-size: 13.5px;
+    color: #5e5e5e;
+}
+.un-app-card .un-chev {
+    margin-left: auto;
+    font-size: 20px;
+}
+
+/* ============ stats band ============ */
+.un-stats {
+    background: #000;
+    color: #fff;
+    margin-top: 56px;
+    padding: 48px 0;
+}
+@container unter (min-width: 800px) {
+    .un-stats {
+        margin-top: 64px;
+    }
+}
+.un-stats .un-shell {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 32px;
+    text-align: center;
+}
+@container unter (min-width: 640px) {
+    .un-stats .un-shell {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 24px;
+    }
+}
+.un-stats b {
+    display: block;
+    font-size: 44px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    /* Tight: the inherited 1.5 ratio put 11px of half-leading under a 44px number,
+       which read as a gap the margin can't take back. */
+    line-height: 1.1;
+    margin-bottom: 4px;
+}
+.un-stats span {
+    font-size: 14px;
+    color: #a6a6a6;
+}
+
+/* ============ quote ============ */
+.un-attnbrgh {
+    padding: 48px 0;
+    max-width: 760px;
+    margin: 0 auto;
+    text-align: center;
+}
+@container unter (min-width: 800px) {
+    .un-attnbrgh {
+        padding: 56px 0;
+    }
+}
+.un-attnbrgh blockquote {
+    font-size: 22px;
+    line-height: 1.4;
+    font-weight: 700;
+    letter-spacing: -0.015em;
+    margin: 0 0 18px;
+}
+@container unter (min-width: 800px) {
+    .un-attnbrgh blockquote {
+        font-size: 28px;
+    }
+}
+.un-attnbrgh cite {
+    font-style: normal;
+    font-size: 14px;
+    color: #5e5e5e;
+    line-height: 1.6;
+}
+.un-attnbrgh cite a {
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    color: #000;
+}
+
+/* ============ chat (Help page) ============ */
+.un-chat-card {
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 8px 28px rgba(0, 0, 0, 0.18);
+    overflow: hidden;
+}
+.un-chat-head {
+    background: #000;
+    color: #fff;
+    padding: 13px 16px;
+    font-size: 14px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 9px;
+}
+.un-chat-head .un-status {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: #06c167;
+    flex: none;
+}
+.un-chat-body {
+    padding: 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+    font-size: 13px;
+    min-height: 220px;
+    max-height: 340px;
+    overflow-y: auto;
+}
+.un-msg {
+    max-width: 88%;
+    padding: 9px 12px;
+    border-radius: 12px;
+    line-height: 1.45;
+}
+.un-msg.user {
+    align-self: flex-end;
+    background: #000;
+    color: #fff;
+    border-bottom-right-radius: 4px;
+}
+.un-msg.bot {
+    align-self: flex-start;
+    background: #f6f6f6;
+    border-bottom-left-radius: 4px;
+}
+.un-chat-input {
+    display: flex;
+    gap: 8px;
+    padding: 0 14px 14px;
+}
+.un-chat-input input {
+    flex: 1;
+    min-width: 0;
+    border: none;
+    background: #f3f3f3;
+    border-radius: 8px;
+    padding: 10px 14px;
+    font-size: 13px;
+    outline: none;
+    font-family: inherit;
+    color: #000;
+}
+.un-chat-input button {
+    border: none;
+    background: #000;
+    color: #fff;
+    border-radius: 8px;
+    /* Stretch, so the button's height always tracks the input's (line-height plus
+       padding, 44px today) instead of the fixed 38px that left it short at the
+       bottom. The width is set to the same 44px to keep it square; `aspect-ratio`
+       can't do that job, since flex resolves the width from content before the
+       stretched height is known and the button collapses to 7px. */
+    align-self: stretch;
+    width: 44px;
+    font-size: 14px;
+    flex: none;
+}
+
+/* ============ highway hero ============ */
+.un-hw-hero {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 40px;
+    align-items: center;
+    padding: 24px 0 56px;
+}
+/* Matches .un-hero: 2-up at 620px with fluid columns, so the copy and signup form
+   stay side by side on smaller windows instead of stacking early. */
+@container unter (min-width: 620px) {
+    .un-hw-hero {
+        grid-template-columns: minmax(220px, 1fr) minmax(320px, 420px);
+        gap: 48px;
+        padding: 40px 0 56px;
+    }
+}
+.un-hw-form {
+    background: #fff;
+    border-radius: 16px;
+    padding: 28px;
+    box-shadow: 0 0 0 1px #e2e2e2, 0 12px 32px rgba(0, 0, 0, 0.08);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.un-hw-form .un-form-title {
+    margin: 0;
+    font-size: 22px;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+}
+.un-hw-form .un-note {
+    font-size: 13px;
+    color: #5e5e5e;
+    margin: 2px 0 10px;
+}
+.un-hw-form .un-btn-black {
+    margin-top: 12px;
+}
+.un-hw-form .un-legal {
+    font-size: 11.5px;
+    color: #9b9b9b;
+    line-height: 1.5;
+    margin-top: 8px;
+}
+/* Fake T&C link: looks clickable, goes nowhere, like the rest of Unter's chrome. */
+.un-hw-form .un-legal a {
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.un-specwrap {
+    border-radius: 16px;
+    overflow: hidden;
+    background: #f6f6f4;
+    margin-top: 8px;
+}
+
+/* ============ impact calculator ============ */
+.un-calc {
+    background: #f6f6f6;
+    border-radius: 16px;
+    padding: 32px;
+    margin-top: 48px;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 32px;
+    align-items: center;
+}
+@container unter (min-width: 860px) {
+    .un-calc {
+        padding: 40px 44px;
+        margin-top: 56px;
+        grid-template-columns: 1fr 1.2fr;
+        gap: 56px;
+    }
+}
+.un-calc .un-h2 {
+    margin-bottom: 10px;
+}
+.un-calc .un-lede {
+    font-size: 14.5px;
+}
+.un-calc input[type='range'] {
+    width: 100%;
+    accent-color: #000;
+    margin: 18px 0 6px;
+}
+.un-calc .un-slider-label {
+    font-size: 13px;
+    color: #5e5e5e;
+    display: flex;
+    justify-content: space-between;
+}
+.un-calc-out {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
+}
+@container unter (max-width: 559px) {
+    .un-calc-out {
+        grid-template-columns: 1fr;
+    }
+}
+.un-calc-cell {
+    background: #fff;
+    border-radius: 12px;
+    padding: 20px 18px;
+}
+.un-calc-cell b {
+    display: block;
+    font-size: 30px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+}
+.un-calc-cell span {
+    font-size: 12.5px;
+    color: #5e5e5e;
+    line-height: 1.4;
+    display: block;
+    margin-top: 4px;
+}
+
+/* ============ steps ============ */
+.un-hiw {
+    padding: 56px 0 0;
+}
+.un-steps {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 24px;
+    padding: 8px 0 0;
+}
+@container unter (min-width: 620px) {
+    .un-steps {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 32px;
+    }
+}
+@container unter (min-width: 960px) {
+    .un-steps {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+.un-step {
+    padding-top: 20px;
+    border-top: 2px solid #000;
+}
+.un-step .un-n {
+    font-size: 13px;
+    font-weight: 700;
+    color: #5e5e5e;
+    margin-bottom: 10px;
+    display: block;
+}
+.un-step h3 {
+    margin: 0 0 8px;
+    font-size: 17px;
+    font-weight: 700;
+}
+.un-step p {
+    margin: 0;
+    font-size: 14px;
+    color: #5e5e5e;
+    line-height: 1.55;
+}
+
+/* ============ FAQ ============ */
+.un-faq {
+    padding: 56px 0 0;
+    max-width: 820px;
+}
+.un-faq .un-h2 {
+    margin-bottom: 20px;
+}
+.un-faq details {
+    border-bottom: 1px solid #e2e2e2;
+}
+.un-faq details:first-of-type {
+    border-top: 1px solid #e2e2e2;
+}
+.un-faq summary {
+    list-style: none;
+    cursor: pointer;
+    font-size: 16.5px;
+    font-weight: 500;
+    padding: 20px 4px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+}
+.un-faq summary::-webkit-details-marker {
+    display: none;
+}
+.un-faq summary::after {
+    content: '+';
+    font-size: 22px;
+    font-weight: 300;
+    color: #000;
+    flex: none;
+}
+.un-faq details[open] summary::after {
+    content: '–';
+}
+.un-faq .un-a {
+    padding: 0 4px 20px;
+    font-size: 14.5px;
+    color: #5e5e5e;
+    line-height: 1.6;
+    max-width: 60ch;
+}
+
+/* ============ referral band ============ */
+.un-refer {
+    background: #000;
+    color: #fff;
+    border-radius: 16px;
+    margin-top: 56px;
+    padding: 32px;
+    display: grid;
+    grid-template-columns: 1fr;
+    align-items: center;
+    gap: 24px;
+}
+@container unter (min-width: 800px) {
+    .un-refer {
+        margin-top: 64px;
+        padding: 44px 48px;
+        /* A narrow text column with the button in its own column beside it,
+           rather than one wide line of copy and the button flung to the far
+           right edge. */
+        grid-template-columns: minmax(0, 460px) auto;
+        justify-content: start;
+        gap: 48px;
+    }
+}
+.un-refer .un-h2 {
+    margin: 0 0 8px;
+}
+.un-refer p {
+    margin: 0;
+    color: #a6a6a6;
+    font-size: 15px;
+    line-height: 1.55;
+}
+.un-refer .un-btn-white {
+    justify-self: start;
+}
+
+/* ============ host quote ============ */
+.un-host-quote {
+    margin: 64px 0;
+    display: flex;
+    gap: 28px;
+    align-items: flex-start;
+    max-width: 820px;
+}
+@container unter (min-width: 800px) {
+    .un-host-quote {
+        margin: 64px 0 72px;
+    }
+}
+.un-host-quote .un-face {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: #f6f6f6;
+    flex: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    font-weight: 700;
+}
+.un-host-quote blockquote {
+    margin: 0;
+    font-size: 18px;
+    line-height: 1.45;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+}
+@container unter (min-width: 800px) {
+    .un-host-quote blockquote {
+        font-size: 22px;
+    }
+}
+.un-host-quote .un-who {
+    font-size: 14px;
+    color: #5e5e5e;
+    margin-top: 12px;
+    font-weight: 400;
+}
+
+/* ============ survey popover ============ */
+.un-survey-pop {
+    position: absolute;
+    left: 16px;
+    bottom: 16px;
+    /* Above the frame's content wrapper (z-20) so it reads as a popover over the
+       page, below the marker layers (z-30) so its own marker stays on top. */
+    z-index: 25;
+    /* Shrinks to fit rather than hiding on a narrow frame. It used to be
+       `display: none` under 680px, which left the badge that opens it clickable and
+       doing nothing, and took the badge's annotation marker with it. */
+    width: min(300px, calc(100% - 32px));
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 8px 28px rgba(0, 0, 0, 0.18);
+    padding: 18px;
+}
+.un-survey-pop .un-sq {
+    font-size: 14.5px;
+    font-weight: 700;
+    margin: 0 0 12px;
+    line-height: 1.4;
+}
+.un-survey-pop .un-opt {
+    display: block;
+    width: 100%;
+    text-align: left;
+    background: #f6f6f6;
+    border: none;
+    border-radius: 8px;
+    padding: 10px 13px;
+    font-size: 13.5px;
+    margin-bottom: 6px;
+    font-weight: 500;
+}
+.un-survey-pop .un-opt:hover {
+    background: #eeeeee;
+}
+.un-survey-pop .un-powered {
+    font-size: 10.5px;
+    color: #b3b3b3;
+    margin-top: 8px;
+    text-align: right;
+}
+
+/* ============ safety ============ */
+.un-safety-hero {
+    background: #000;
+    color: #fff;
+    padding: 40px 0 40px;
+}
+@container unter (min-width: 800px) {
+    .un-safety-hero {
+        padding: 48px 0 56px;
+    }
+}
+/* 560px, so the headline breaks after "things" rather than after "across".
+   Measured at the 52px size: "Getting small things" is 475px and "Getting small
+   things across" is 649px, so anything between those two forces the nicer break.
+   Below the 800px container the font drops to 34px and this stops applying. */
+.un-safety-hero .un-h1 {
+    max-width: 560px;
+}
+.un-safety-hero .un-lede {
+    color: #a6a6a6;
+    max-width: 560px;
+}
+.un-safe-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 40px;
+    padding: 32px 0 40px;
+}
+@container unter (min-width: 760px) {
+    .un-safe-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 40px 56px;
+        padding: 40px 0 40px;
+    }
+}
+.un-safe-card .un-sicon {
+    width: 28px;
+    height: 28px;
+    margin-bottom: 16px;
+}
+.un-safe-card h3 {
+    margin: 0 0 8px;
+    font-size: 19px;
+    font-weight: 700;
+}
+.un-safe-card p {
+    margin: 0;
+    font-size: 14.5px;
+    color: #5e5e5e;
+    line-height: 1.6;
+}
+
+.un-coverage {
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 0 0 1px #e2e2e2;
+}
+@container unter (min-width: 760px) {
+    .un-coverage {
+        grid-column: span 2;
+    }
+}
+.un-coverage-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 18px 24px;
+    border-bottom: 1px solid #e2e2e2;
+}
+.un-coverage-head h3 {
+    margin: 0;
+    font-size: 17px;
+    font-weight: 700;
+}
+.un-coverage-body {
+    min-height: 240px;
+    background: repeating-linear-gradient(0deg, transparent 0 47px, rgba(0, 0, 0, 0.04) 47px 48px),
+        repeating-linear-gradient(90deg, transparent 0 47px, rgba(0, 0, 0, 0.04) 47px 48px), #f6f6f4;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+.un-coverage-error {
+    background: #fff;
+    border-radius: 12px;
+    border-left: 4px solid #e11900;
+    padding: 16px 20px;
+    box-shadow: 0 8px 28px rgba(0, 0, 0, 0.12);
+    max-width: 460px;
+    font-size: 13.5px;
+}
+.un-coverage-error b {
+    color: #e11900;
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-size: 12.5px;
+    font-weight: 600;
+    overflow-wrap: anywhere;
+}
+.un-coverage-error .un-desc {
+    color: #5e5e5e;
+    margin: 6px 0 12px;
+    line-height: 1.55;
+}
+.un-coverage-error button {
+    background: #000;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 500;
+    padding: 9px 16px;
+}
+.un-coverage-loading {
+    font-size: 13px;
+    color: #5e5e5e;
+    display: flex;
+    align-items: center;
+    gap: 9px;
+}
+.un-coverage-loading::before {
+    content: '';
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    border: 2px solid #d9d9d6;
+    border-top-color: #000;
+    animation: snSpin 0.7s linear infinite;
+}
+@keyframes snSpin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.un-longread {
+    padding: 40px 0 48px;
+    max-width: 680px;
+}
+@container unter (min-width: 800px) {
+    .un-longread {
+        padding: 40px 0 64px;
+    }
+}
+.un-longread .un-h2 {
+    margin-top: 0;
+}
+.un-longread p {
+    font-size: 15.5px;
+    line-height: 1.7;
+    color: #333;
+    margin: 0 0 16px;
+}
+.un-longread a {
+    text-decoration: underline;
+    text-underline-offset: 3px;
+}
+
+/* ============ page-help inline survey ============ */
+.un-page-help {
+    border: 1px solid #e2e2e2;
+    border-radius: 12px;
+    padding: 22px 26px;
+    margin: 0 0 64px;
+    max-width: 680px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 18px;
+}
+@container unter (min-width: 800px) {
+    .un-page-help {
+        margin-bottom: 64px;
+    }
+}
+.un-page-help b {
+    font-size: 15px;
+}
+.un-page-help .un-yn {
+    margin-left: auto;
+    display: flex;
+    gap: 8px;
+}
+.un-page-help .un-yn button {
+    background: #f6f6f6;
+    border: none;
+    border-radius: 8px;
+    padding: 10px 22px;
+    font-size: 14px;
+    font-weight: 500;
+}
+.un-page-help .un-yn button:hover {
+    background: #eeeeee;
+}
+.un-page-help .un-thanks {
+    margin-left: auto;
+    font-size: 14px;
+    color: #5e5e5e;
+}
+
+/* ============ footer ============ */
+.un-footer {
+    background: #000;
+    color: #a6a6a6;
+    padding: 40px 0 48px;
+    font-size: 13px;
+    /* Anchors the survey badge to the footer's top edge. */
+    position: relative;
+}
+/* The survey's trigger, sitting on the seam between the page and the footer the
+   way a real feedback button does. Always in the DOM, so its marker is always
+   there to click. */
+.un-survey-badge {
+    position: absolute;
+    top: 0;
+    right: 20px;
+    transform: translateY(-50%);
+    /* Same grey as the image placeholders, which reads as a control against both
+       the white page above it and the black footer below. */
+    background: #ebebe8;
+    color: #000;
+    border: none;
+    border-radius: 999px;
+    padding: 9px 18px;
+    font-size: 13px;
+    font-weight: 500;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.18);
+}
+.un-survey-badge:hover {
+    background: #dcdcd8;
+}
+@container unter (min-width: 720px) {
+    .un-survey-badge {
+        right: 40px;
+    }
+}
+.un-footer .un-fbrand {
+    font-size: 22px;
+    font-weight: 500;
+    color: #fff;
+    margin-bottom: 18px;
+}
+.un-footer .un-fcols {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 32px;
+    margin: 0 0 48px;
+}
+@container unter (min-width: 680px) {
+    .un-footer .un-fcols {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 48px;
+    }
+}
+.un-footer .un-fcols h5 {
+    color: #fff;
+    font-size: 14px;
+    font-weight: 600;
+    margin: 0 0 16px;
+}
+.un-footer .un-fcols a,
+.un-footer .un-fcols span {
+    display: block;
+    padding: 6px 0;
+    font-size: 13px;
+    cursor: pointer;
+}
+.un-footer .un-fcols a:hover,
+.un-footer .un-fcols span:hover {
+    color: #fff;
+}
+.un-footer .un-fbottom {
+    border-top: 1px solid #2a2a2a;
+    padding-top: 32px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 32px;
+    align-items: flex-start;
+}
+.un-footer .un-real {
+    max-width: 480px;
+    line-height: 1.7;
+}
+.un-footer .un-real b {
+    color: #fff;
+    font-weight: 600;
+}
+.un-footer .un-real a {
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    color: #fff;
+}
+.un-footer .un-flinks {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+@container unter (min-width: 680px) {
+    .un-footer .un-flinks {
+        text-align: right;
+    }
+}
+.un-footer .un-flinks span:hover {
+    color: #fff;
+    cursor: pointer;
+}
+
+/* dismiss control on the popover survey */
+.un-survey-close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: none;
+    border: none;
+    font-size: 13px;
+    line-height: 1;
+    color: #9b9b9b;
+    padding: 2px;
+}
+.un-survey-close:hover {
+    color: #000;
+}
+
+/* ============ Help page ============ */
+.un-help {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 32px;
+    align-items: start;
+    padding: 24px 0 40px;
+}
+@container unter (min-width: 860px) {
+    .un-help {
+        grid-template-columns: 1fr 420px;
+        gap: 48px;
+        padding: 40px 0 48px;
+    }
+}
+.un-help-intro .un-lede {
+    margin-bottom: 24px;
+}
+.un-help-suggestions {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+.un-help-suggestions li {
+    background: #f6f6f6;
+    border-radius: 999px;
+    padding: 9px 15px;
+    font-size: 13.5px;
+    font-weight: 500;
+    color: #5e5e5e;
+}
+.un-chat-meta {
+    margin-left: auto;
+    font-size: 11.5px;
+    font-weight: 400;
+    color: rgba(255, 255, 255, 0.6);
+}
+.un-help-escalate {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 24px;
+    border-top: 1px solid #e2e2e2;
+    padding: 32px 0 48px;
+}
+.un-help-escalate .un-h2 {
+    margin-bottom: 6px;
+}
+.un-help-escalate .un-btn-black {
+    margin-left: auto;
+}

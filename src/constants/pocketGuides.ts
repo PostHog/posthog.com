@@ -29,6 +29,13 @@ export const FIRST_GUIDE_BOOK_ORDER = 2
 
 export const POCKET_GUIDE_VOLUMES: PocketGuideVolume[] = [
     {
+        id: 'posthog',
+        title: 'Getting HogPilled',
+        description: 'An outage nobody reported, and the eleven days of data that caught it.',
+        token: 'red',
+        volume: 0,
+    },
+    {
         id: 'self-driving',
         title: 'Self-driving',
         description: 'Scouts that watch your product and open a pull request when something breaks.',

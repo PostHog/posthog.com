@@ -89,9 +89,29 @@ after the prose.
 | `<Action />` | The CTA for volumes whose answer isn't a scout, from `pocketGuideCta:` frontmatter |
 | `<Contents />` | The contents list, built from the book itself |
 | `<SeeAlso>` | A print footnote at the foot of the column |
-| `<Term name="scout">` | An orange dotted-underline definition with a hover card |
+| `<Term name="scout">` | An orange dotted-underline definition; hover card on a mouse, tap card on a phone |
 
 Headings map to the book's type scale: `#` is the page title, `##` a small-caps section heading.
+
+#### `<Term>` on a phone
+
+A Radix tooltip needs hover, so on a touch device the whole apparatus would collapse to "tapping
+the word leaves the book" – the opposite of teaching in place. `Term` therefore checks
+`useCoarsePointer()` and swaps behaviour:
+
+| Input | Renders | Tap/hover does | Docs link |
+| --- | --- | --- | --- |
+| Mouse | `Tooltip` around a `Link` | Hover opens the card | The word itself |
+| Touch | `Popover` around a `button` | Tap opens the card | "Read the docs →" inside the card |
+
+Two things to know before changing this:
+
+- The hook returns `false` on the server and on the first client render, so the tooltip branch is
+  what Gatsby builds and what React hydrates. Whatever you gate on it needs a mouse-side fallback
+  that is correct on its own.
+- The popover's `contentClassName` carries two overrides that look arbitrary and are not: `!max-w-72`
+  beats Popover's own `max-w-[100vw]`, and the arrow fill reads `--bg` directly because every
+  `fill-*` token maps to a *text* colour, and because Radix wraps the arrow in a span.
 
 ### How the reader lays a page out
 
@@ -168,7 +188,7 @@ shows after the `.mdx` file itself changes (or `pnpm clean`).
 | `figures.tsx` | Fig and every `<XxxFigure>` exhibit |
 | `bookPieces.tsx` | SeeFig, Eyebrow, Watches, Enable, Contents, SeeAlso, prose styling |
 | `Action.tsx` | The non-scout CTA and its pinned bar, from `pocketGuideCta:` frontmatter |
-| `terms.tsx` | The book's vocabulary – `<Term>` and every hover-card definition |
+| `terms.tsx` | The book's vocabulary – `<Term>` and every definition behind it |
 | `bookContext.tsx` | EntryProvider + useEntry/useTemplate (page data for figures) |
 | `bookModel.tsx` | Volume id, reading order, page numbers, tabs, arrow-key turns |
 | `useSkillFile.ts` | Pairs a page with its sibling `SKILL.md`, for `<SkillFigure>` |

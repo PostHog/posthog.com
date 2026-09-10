@@ -1,8 +1,10 @@
 import React from 'react'
 
 import Link from 'components/Link'
+import { Popover } from 'components/RadixUI/Popover'
 import Tooltip from 'components/RadixUI/Tooltip'
 
+import useCoarsePointer from '../../hooks/useCoarsePointer'
 import usePostHog from '../../hooks/usePostHog'
 
 /**
@@ -353,10 +355,65 @@ function lookUp(name?: string): TermDefinition | undefined {
 export default function Term({ name, children, className = '' }: TermProps): JSX.Element {
     const definition = lookUp(name)
     const posthog = usePostHog()
+    const coarsePointer = useCoarsePointer()
 
     // Fail soft on unknown names – an author typo prints plain text instead of crashing the page.
     if (!definition) {
         return <>{children ?? name}</>
+    }
+
+    // Orange dotted is the "defined term" affordance; navigation links keep a solid text-color
+    // underline. Color is what separates the two at body size – the orange matches the book's
+    // other teaching apparatus (figure markers, the spine).
+    const wordClassName = `underline decoration-orange decoration-dotted decoration-from-font underline-offset-4 ${className}`
+
+    const card = (
+        <>
+            <p className="m-0 text-[0.8125rem] font-bold text-primary">{definition.title}</p>
+            <p className="m-0 mt-0.5 text-[0.8125rem] leading-snug text-secondary">{definition.description}</p>
+        </>
+    )
+
+    // A tooltip needs hover, so on a phone the whole apparatus would collapse to "tapping the
+    // word leaves the book". Tap opens the same card instead, and the docs link moves inside it
+    // where it takes a deliberate second tap.
+    if (coarsePointer) {
+        return (
+            <Popover
+                dataScheme="secondary"
+                side="bottom"
+                sideOffset={4}
+                // `!max-w-72` because Popover's own `max-w-[100vw]` is an arbitrary value and wins
+                // on stylesheet order otherwise. The fill repaints the arrow, which Popover
+                // hardcodes to white – right on a light card, a white notch on a dark one. It reads
+                // `--bg` directly because every `fill-*` token maps to a text color, and it needs a
+                // descendant selector because Radix wraps the arrow in a span of its own.
+                contentClassName="!p-0 !max-w-72 border border-primary [&_svg]:fill-[rgb(var(--bg))]"
+                onOpenChange={(open) => {
+                    if (open) {
+                        posthog?.capture('pocket_guide_interaction', { kind: 'term_tap', term: name })
+                    }
+                }}
+                trigger={
+                    // `inline`, not the button default of inline-block: a two-word term mid-paragraph
+                    // has to break across lines like the prose around it.
+                    <button type="button" className={`inline bg-transparent p-0 text-left ${wordClassName}`}>
+                        {children ?? name}
+                    </button>
+                }
+            >
+                <div className="select-text px-3 py-2 text-left leading-normal">
+                    {card}
+                    <Link
+                        to={definition.slug}
+                        state={{ newWindow: true }}
+                        className="mt-1.5 block text-[0.8125rem] font-semibold text-red"
+                    >
+                        Read the docs →
+                    </Link>
+                </div>
+            </Popover>
+        )
     }
 
     return (
@@ -372,18 +429,14 @@ export default function Term({ name, children, className = '' }: TermProps): JSX
                     onMouseEnter={() =>
                         posthog?.capture('pocket_guide_interaction', { kind: 'term_hover', term: name })
                     }
-                    // Orange dotted is the "defined term" affordance; navigation links keep a solid
-                    // text-color underline. Color is what separates the two at body size – the
-                    // orange matches the book's other teaching apparatus (figure markers, the spine).
-                    className={`underline decoration-orange decoration-dotted decoration-from-font underline-offset-4 ${className}`}
+                    className={wordClassName}
                 >
                     {children ?? name}
                 </Link>
             }
             contentClassName="max-w-72 select-text px-3 py-2 text-left leading-normal"
         >
-            <p className="m-0 text-[0.8125rem] font-bold text-primary">{definition.title}</p>
-            <p className="m-0 mt-0.5 text-[0.8125rem] leading-snug text-secondary">{definition.description}</p>
+            {card}
         </Tooltip>
     )
 }

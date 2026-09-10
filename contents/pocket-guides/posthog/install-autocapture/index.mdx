@@ -1,0 +1,99 @@
+---
+title: Install and autocapture
+shortTitle: Install and autocapture
+subtitle: Everything that caught the outage two months later came from the day PostHog was installed.
+pocketGuideOrder: 1
+isPrimer: true
+---
+
+<LeftPage>
+
+<UnterFigure
+    n={1}
+    page="ride"
+    inspect={false}
+    caption="Unter's website, running as users saw it."
+/>
+
+<UnterFigure
+    n={2}
+    page="ride"
+    focus="topnav"
+    tools={['core', 'web']}
+    caption="The data underneath Unter's website's touchpoints."
+/>
+
+<UnterFigure
+    n={3}
+    page="ride"
+    focus="promo-link"
+    tools={['web']}
+    caption="How Unter used Web Analytics."
+/>
+
+<UnterFigure
+    n={4}
+    page="ride"
+    focus="footer-legal"
+    tools={['core']}
+    caption="Turning capture off, and back on."
+/>
+
+</LeftPage>
+
+<RightPage>
+
+# Install and autocapture
+
+On January 12th, someone at Unter pasted eleven lines of JavaScript into a template and deployed it. Nobody thought much about it. Two months later, those eleven lines would give an agent enough information to find a broken page at 4AM.
+
+First, there was the site itself <SeeFig n={1} />.
+
+The important change happened underneath it. The script in the page's `<head>` connected the site to PostHog. From then on, the site could send data without anyone adding tracking code to every page and button <SeeFig n={2} />.
+
+## The first event arrives
+
+The first useful thing about the installation was that it did not need much code.
+
+After installation, pageviews and page leaves started arriving. Clicks could be captured too. The same snippet also supplied valuable information around a visit: 
+
+- Where someone came from
+- Which campaign brought them in
+- What device they were using
+- Where they were in the world
+
+None of this required Unter to predict what would be useful beforehand. They just installed the library, and the data started accumulating.
+
+## Capturing clicks
+
+Most of what Unter collected in January, was collected by <Term name="autocapture">Autocapture</Term>.
+
+A visitor clicked "Read the announcement", and autocapture recorded the interaction. Unter didn't need to create a tracking call first. Autocapture is useful because it gives you a record of interactions before you know which ones will matter.
+
+## The traffic is already there
+
+The same installation also gave Unter a view of where visitors came from.
+
+The links in the funding announcement carried UTM parameters. When someone arrived through one of them, those parameters came in with the visit and could be used by [Web Analytics](/docs/web-analytics) to attribute the traffic <SeeFig n={3} />.
+
+The link carried the campaign information right into PostHog, no separate redirect service or tracking call was needed.
+
+## A mismatch in data
+
+There is also a limit to letting the page tell you what happened.
+
+In April, Unter renamed an <Term name="event">event</Term>. The records from before the rename did not change with it, so comparisons across the change stopped lining up cleanly.
+
+That is one reason autocapture and deliberately named events serve different purposes. Autocapture is good at recording what happened on the page. When you need a stable description of a product action, you usually need to define that action yourself.
+
+## Visitors can stop the recording
+
+There was one more part of the installation to get right: what happens when someone does not want to be captured <SeeFig n={4} />.
+
+The SDK has calls for turning capture off and turning it back on. Unter put the choice behind the privacy link in the footer, and the setting persists across reloads.
+
+By the time the site was deployed that afternoon, PostHog could capture the page, collect useful context around a visit, record interactions without someone defining every one of them, and respect a visitor's choice not to be recorded.
+
+Nobody knew yet which of those details would matter two months later.
+
+</RightPage>

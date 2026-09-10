@@ -1,0 +1,48 @@
+---
+title: The fix, and life after
+shortTitle: The fix
+subtitle: Quillfeather read the pull request over coffee and merged it at half past nine. The more important test came in the week after.
+pocketGuideOrder: 9
+---
+
+<LeftPage>
+
+<UnterFigure
+    n={1}
+    page="safety"
+    focus="coverage-map"
+    inspect={false}
+    caption="The page as its users saw it, with nothing marked on it."
+/>
+
+<LoopFigure n={2} caption="The same four stages, with the eleven days written onto them." />
+
+</LeftPage>
+
+<RightPage>
+
+# The fix, then the check
+
+The story comes back to 4:12 in the morning.
+
+32 minutes after the report landed, an agent had traced the 403 to a tile request that stopped carrying an auth header after a January refactor – <SeeFig n={1} />. It confirmed the cause in Unter's codebase and wrote a fix.
+
+It also added a regression test, opened a pull request with the root cause in the description, linked the report, and left CI to run.
+
+## Quillfeather read it first
+
+Nothing reaches production by itself, and this did not either. Quillfeather read the diff at half past nine, agreed with the diagnosis, and merged it before she finished her coffee.
+
+Later, she said the unsettling part was not the patch. It was realising that, without the report, she probably would not have found the problem.
+
+## The week after
+
+A successful merge is not proof that the problem is gone.
+
+On the 21st, a validation scout returned to the funnel step the fix was meant to restore and checked the numbers against the February baseline. They were back to within a point of it.
+
+That check produced events of its own. Those events then became part of the data available to the next round of signals – <SeeFig n={2} />.
+
+That is the useful part of the loop: _the data gets better as the system runs_. Unter had more useful data in March than it had in January, which meant the signals raised in April could be more precise.
+
+</RightPage>

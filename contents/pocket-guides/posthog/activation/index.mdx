@@ -1,0 +1,48 @@
+---
+title: What counts as activation
+shortTitle: Activation
+subtitle: Two meetings, in February, to decide what counted as a customer. The answer is why the outage was visible at all.
+pocketGuideOrder: 4
+---
+
+<LeftPage>
+
+<UnterFigure
+    n={1}
+    page="highway"
+    focus="hw-form"
+    tools={['product']}
+    caption="The touchpoint, and the data underneath it."
+/>
+
+<UnterFigure
+    n={2}
+    page="highway"
+    focus="btn-start-cutting"
+    tools={['logs', 'error']}
+    caption="One tool at a time, on the element it belongs to."
+/>
+
+</LeftPage>
+
+<RightPage>
+
+# What counts as activation
+
+By February, Unter needed one number to take into their Bizness Board Meeting. They were hunting for the magic number: the one that meant the product was actually being used.
+
+Signups seemed like the obvious answer, but they were wrong – <SeeFig n={1} />.
+
+A person can sign up, look around, and never cut a hole. For Unter, that person had not really used the product.
+
+## A hole cut is the event
+
+So activation became a hole cut, tracked from sign up to logs – <SeeFig n={2} />.
+
+With tangible proof that a signup meant activation, Unter went to their Bizness Board Meeting with a real number of people who had used Unter. And when the outage arrived in March, this number helped them understand the impact.
+
+## The number was already there
+
+Producing the activation number didn't require more instrumentation. The events Unter had been collecting since January already described the path from booking to a finished hole. A funnel simply put those events in order and added meaning to them.
+
+</RightPage>
