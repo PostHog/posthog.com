@@ -11,7 +11,7 @@ interface VolumeCardProps {
     /** Guides printed on the cover. Callers count them, because the sources differ per surface. */
     count: number
     /** Which surface this card sits on. Forwarded to `Cover` so every open is attributable. */
-    placement: 'shelf' | 'self_driving_page' | 'product_docs'
+    placement: 'shelf' | 'self_driving_page' | 'product_docs' | 'product_index'
     /** The pitch. Defaults to the volume's own one-liner. */
     description?: React.ReactNode
     /** Where the button goes. Defaults to the volume itself. */
