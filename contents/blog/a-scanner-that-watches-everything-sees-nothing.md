@@ -103,7 +103,6 @@ This sounds conservative and *gasp* boring. Good. Most sessions should not becom
 "Inconclusive" is a feature. It keeps the "yes" pile small enough for a person to inspect, which matters because selectivity is not the same as accuracy. Every observation links back to its recording, so when the scanner cites a contradiction, we can jump to the cited moments and watch both halves.
 
 ![Verdict mix for our ghost-bug scanner: 1 percent yes, 57 percent no, 42 percent inconclusive](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/ghost_bugs_5ca8748eb1.png)
-<!-- counts as of 2026-08-28; refresh before publish -->
 
 A scanner saying "Idk" is way better than making something up.
 
