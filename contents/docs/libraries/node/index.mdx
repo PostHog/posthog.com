@@ -410,7 +410,7 @@ Both `withSpan` and `startSpan` take the same options:
 | `attributes` | Attributes to set at span start |
 | `parent` | A span handle, or an inbound W3C `traceparent` string to continue a trace another service started |
 | `tracestate` | The W3C `tracestate` accompanying a `traceparent` string. Ignored when `parent` is a span handle, which inherits its parent's |
-| `startTime` | Backdate the span's start, as a millisecond epoch or a `Date`. A start more than 24 hours old is warned about, because the server clamps it to receive time |
+| `startTime` | Backdate the span's start, as a millisecond epoch or a `Date`. The server clamps a start more than 24 hours old to receive time; with `debug` on, the SDK warns when you pass one |
 
 ### Tracing across services
 
@@ -498,12 +498,11 @@ The length bound reaches inside a value, including strings nested in arrays and 
 | `beforeSpanSend` | – | Edit or drop each finished span before export. Return `null` to drop it |
 | `maxAttributesPerSpan` | `128` | Maximum attributes you set on one span |
 | `maxEventsPerSpan` | `128` | Maximum events on one span |
-| `maxAttributesPerEvent` | `128` | Maximum attributes on one span event, including the `exception.*` attributes the SDK records for you |
 | `maxAttributeValueLength` | `8192` | Maximum characters in a string attribute value |
 
 ### Shutdown and short-lived processes
 
-Both `flush()` and `shutdown()` export spans that have already ended. Spans still open at that point are discarded, so end your spans before either call — `withSpan` does this for you.
+Both `flush()` and `shutdown()` export spans that have already ended. A span still open at `flush()` is exported once it ends; a span still open at `shutdown()` is discarded, so end your spans before shutting down — `withSpan` does this for you.
 
 In a serverless handler, call `flush()`: the container is reused across invocations, so `shutdown()` would throw away the connection pool and the flag cache. Events and spans are flushed concurrently, so it costs one round trip, not two.
 
@@ -516,7 +515,14 @@ export const handler = async () => {
 
 <CalloutBox icon="IconInfo" title="Edge runtimes">
 
-On edge runtimes, spans nest across `await` only when you pass `parent` explicitly. The Node runtime tracks the active span with `AsyncLocalStorage`; the edge build cannot, so a span created after an `await` starts a new trace unless it is given a parent.
+On edge runtimes, spans nest across `await` only when you pass `parent` explicitly. The Node runtime tracks the active span with `AsyncLocalStorage`; the edge build cannot, so after an `await`, `getActiveSpan()` returns `null` and a new span starts a new trace. Pass the span your callback receives instead:
+
+```ts
+await posthog.withSpan('handler', async (span) => {
+  const user = await loadUser()
+  await posthog.withSpan('render', { parent: span }, () => render(user))
+})
+```
 
 </CalloutBox>
 
