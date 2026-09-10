@@ -1,5 +1,5 @@
 ---
-title: "6 or 7 loops we use in self driving every day"
+title: "10 loops we use everyday to make PostHog self-driving"
 date: 2026-09-09
 rootPage: /blog
 sidebar: Blog
@@ -12,17 +12,11 @@ tags:
     - Explainers
     - AI
 seo:
-    metaTitle: "6 or 7 loops we use in self driving every day"
+    metaTitle: "10 loops we use everyday to make PostHog self-driving"
     metaDescription: "Ten loops we use to build self-driving in PostHog, from agent feedback to scouts that fix their own instructions. Real reports, merged PRs, and where humans still fit."
 ---
 
-Are loops still a thing? Or is it graphs now? I thought graphs were a meme, was it not?
-
-I've given up keeping up. Every few months I ignore all of it and ask what I'm actually getting use out of. 
-
-Two things always make the list: **tools** and **skills** (if you're sleeping on the [PostHog skills store](/docs/skills#why-use-posthog-as-your-skills-store), you're missing out – almost everything I do each day runs through it). 
-
-The third, and the one bit of the buzz I hate to admit keeps delivering, is **loops**.
+AI trends come and go, but there's one thing I hate to admit is worth the buzz: [**loops**](/newsletter/loops).
 
 <ProductScreenshot
     imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/steipete_loops_tweet_e71ee20547.png"
@@ -30,34 +24,30 @@ The third, and the one bit of the buzz I hate to admit keeps delivering, is **lo
     alt="Peter Steinberger's post on X: &quot;Here's your monthly reminder that you shouldn't be prompting coding agents anymore. You should be designing loops that prompt your agents.&quot;"
 />
 
-A good loop, for me, does three jobs:
+A good loop does three jobs for me:
 
-1. **Finds things worth looking at.** It surfaces or watches something I care about so I don't have to.
-2. **Takes the boring parts off my plate.** The triage, the dedupe, the "is this the same issue as last week?", and more and more, large chunks of the actual implementation work (I'm not going to lie to you here).
-3. **Keeps me involved.** I can read exactly what it did and why, and step in anywhere to steer. Most of the time I still want to be *in* the loop rather than replaced by it. I'm on the fence about how long that lasts, but for now the loop finds and fixes, and I still like deciding what actually ships most of the time.
+1. **Finds things worth looking at.** It surfaces things I care about so I don't have to constantly watch stuff.
+2. **Takes boring tasks off my plate.** The triage, the dedupe, the "is this the same issue as last week?", and – I'm not going to lie to you here – increasingly large chunks of the actual implementation work.
+3. **Keeps me in the loop (sorry).** I can read exactly what it did and why, and step in anywhere to steer. Most of the time I still want to be *in* the loop rather than replaced by it. 
 
-Here are 6 or 7 loops we use on the self-driving team to help build self-driving itself (It's actually ten but I wanted to annoy my daughter with a 67 meme).
+For now, I still like being part of the loop to decide what actually ships most of the time. But I work on [self-driving](/docs/self-driving/self-improving-loop) at PostHog, and our goal is to build tools that let the loops do more for you, without you.
 
-Most of them are [scouts](/docs/self-driving/scouts) ([explainer blog](/blog/what-is-a-scout)) – small scheduled agents whose logic lives in a Markdown skill. A few start from [signals](/docs/self-driving/signals) like error tracking, analytics, and Replay Vision.
+Here are 10 loops we use on the self-driving team to build self-driving itself.
 
-All of them plug into the same [self-driving pipeline](/docs/self-driving/self-improving-loop) that turns findings into [inbox](/docs/self-driving/inbox) reports and, when makes sense, PRs.
+## 1. The `agent-feedback()` loop for the PostHog MCP
 
-Every example below ended in a merged PR.
+When an agent or human hits friction using the [PostHog MCP](/docs/model-context-protocol) – a confusing schema, a tool that silently drops a parameter, a missing capability, or just something they don't like – they can file structured feedback, headlessly, right from the session where it happened using the [`agent-feedback`](https://github.com/PostHog/posthog/blob/master/services/mcp/src/tools/feedback/submit.ts) tool.
 
-## Loop 1: `agent-feedback()`
-
-The [PostHog MCP](/docs/model-context-protocol) has an [`agent-feedback`](https://github.com/PostHog/posthog/blob/master/services/mcp/src/tools/feedback/submit.ts) tool. When an agent or human hits friction using the MCP – a confusing schema, a tool that silently drops a parameter, a missing capability, or just something they don't like – they can file structured feedback, headlessly, right from the session where it happened.
-
-That feedback becomes a single event stream, `mcp feedback submitted`, and the `signals-scout-agent-feedback` scout watches it:
+That feedback becomes a single event stream, `mcp feedback submitted`. Instead of a human manually reviewing these feedback snippets, we added a `signals-scout-agent-feedback` scout. Here's what it does:
 
 - It groups negative and blocked (`task_completed=false`) submissions into per-type friction themes – anchored on many reports converging on the same problem, not raw row counts.
 - It routes each theme to its owner: MCP, a product area, docs, or the signals team itself.
 - It corroborates MCP themes against actual `mcp_tool_call` error rates before speaking up.
 - Above a confidence bar, it authors a report into the inbox. A PostHog task can then pick that report up and open the PR or escalate to the right team for human input.
 
-Then the part that makes it a loop rather than a funnel: the scout **checks back on things it thinks got fixed**. It keeps notes in its scratchpad about what was reported and what shipped, and validates that the fix held before considering a theme closed.
+To turn it into a loop, the scout **checks back on things that it thinks got fixed**. It does this by keeping notes in its scratchpad about what was reported, what shipped, and validates that the fix held before considering a theme closed.
 
-Here's how fast that can go. On August 28th at 11:28 UTC, an agent working in a customer's project filed `missing_tool` feedback with `task_completed=false`. It wanted to define catalog events before any had been ingested. The MCP had `event-definition-update` but no create, so its workaround was firing one anonymous seed capture per event and then calling update. Ugly.
+And it works _fast_. For example, on August 28th at 11:28 UTC, an agent working in a customer's project filed `missing_tool` feedback with `task_completed=false`. It wanted to define catalog events before any had been ingested. The MCP had `event-definition-update` but no create, so its workaround was firing one anonymous seed capture per event and then calling update. Ugly.
 
 About five minutes later the scout emitted a report, having found no matching report, open PR, or assigned issue. Eight minutes after that, [PR #90832](https://github.com/PostHog/posthog/pull/90832) was open. The REST create endpoint already existed; the MCP just needed a tool to call it.
 
@@ -74,17 +64,17 @@ The first version still needed fixing. PostHog Review flagged two must-fixes, an
 
 I approved at 14:22 and hit `/trunk merge` at 17:27. It merged at 18:02, and both production regions were deployed by 18:56. About seven and a half hours from complaint to production, and I spent my share of it reviewing.
 
-**Where I sit:** reviewing the reports, and reviewing the PRs. The detection, triage, dedupe, and root-cause legwork all happened before I arrived. I can steer it when needed, but often it catches useful little (and sometimes bigger or more important) fixes as APIs, tools, skills, and clients change.
+**Where I sit:** Reviewing the reports, and reviewing the PRs. The detection, triage, dedupe, and root-cause legwork all happened before I arrived. I can steer it when needed, but often it catches useful little (and sometimes bigger or more important) fixes as APIs, tools, skills, and clients change.
 
-**Loop or graph?** Loop. Agents complain → scout distills → report → PR → scout checks what happened next. It eats its own output (ewwww).
+**TL;DR–**Agents complain about something in our MCP → A scout distills the feedback → Turns it into a report → Creates and merges a PR to fix it → Another scout checks if the PR actually fixed it. Basically, it eats its own output (ewwww).
 
-## Loop 2: the team Slack channel
+## 2. Our #team-self-driving bug reports loop
 
-Some of our best bug reports start as someone saying "is this happening to anyone else?" in Slack. It's the stuff that's annoying enough to mention but hasn't quite made it onto anyone's to-do list.
+Some of our best bug reports start with someone saying "Is this happening to anyone else?" in Slack. It's for stuff that's annoying enough to mention, but hasn't quite made it onto anyone's to-do list.
 
-`signals-scout-team-self-driving` watches our team's channel for exactly that: bug reports, feature ideas, and customer feedback buried in threads. It groups the conversation by thread, skips the banter and memes, and brings the useful findings into the inbox.
+We set up `signals-scout-team-self-driving` to watch our team's channel for exactly that: bug reports, feature ideas, and customer feedback buried in threads. It groups the conversation by thread, skips the banter and memes, and brings the useful findings into the inbox.
 
-On August 25, Dylan shared a task in our channel while asking about a GitHub integration problem. I clicked the link and got "Task not found." I'd been hitting this too, so I asked `@PostHog` in the thread why I couldn't open it.
+For example, on August 25, Dylan shared a task in our channel while asking about a GitHub integration problem. I clicked the link and got "Task not found." I'd been hitting this too, so I asked `@PostHog` in the thread why I couldn't open it.
 
 <ProductScreenshot
     imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/slack_shared_task_d6ace51111.png"
@@ -99,13 +89,13 @@ The Slack agent found a second bug in the middle of discussing the first. The ta
 
 The scout picked up the thread and authored an inbox report. The pipeline opened [PR #88912](https://github.com/PostHog/posthog/pull/88912), which made the task page use the same shared-thread visibility rule as the run, with tests that teammates could open shared tasks while direct-message tasks stayed private. I added Vojta and Georgiy as reviewers, Vojta approved, and it merged on September 4. A bug we stumbled over while talking about another bug made it through to a fix.
 
-**Where I sit:** reproducing problems, reviewing the reports, and bringing in the right people to review the fix. Sometimes, like here, the investigation starts right in the Slack thread.
+**Where I sit:** Reproducing problems, reviewing the reports, and bringing in the right people to review the fix. Sometimes, like here, the investigation starts right in the Slack thread.
 
-**Loop or graph?** Loop. Team notices something → scout picks it up → investigation → PR → back to using the product.
+**TL;DR–**Team notices a bug → A scout picks it up → Investigates the issue → Creates a PR → Back to using the product.
 
-## Loop 3: logs
+## 3. The self-driving logs loop
 
-`signals-scout-self-driving-logs` looks for problems in the self driving related slices of our runtime [logs](/logs). The useful part isn't just finding an error string. It's working out what failed, whether repeated lines are one retry loop or many separate failures, and whether someone is already fixing it.
+Another one we set up uses a scheduled scout called `signals-scout-self-driving-logs` to look for problems in the self-driving related slices of our runtime [logs](/logs). It works out what failed that caused the log, whether repeated lines are one retry loop or many separate failures, and whether someone is already fixing it.
 
 One run found a task that couldn't start its Hogland (an internal VM service) sandbox because one of its metadata tags was too long. The tag included a workflow ID made from a prefix and two UUIDs. Metadata that had worked with a previous provider ran into a limit with a different one. [PR #92909](https://github.com/PostHog/posthog/pull/92909) bounded the tag strings sent to Hogland and added tests for their lengths, with task and run IDs still available as separate tags.
 
@@ -124,13 +114,13 @@ The part I like is what happened while that PR sat in review. The scout kept che
 
 I requested the merge on September 7, and it merged that morning. The code change is confirmed; proving the failure stays gone is the follow-up job.
 
-**Where I sit:** deciding whether the diagnosis and fix make sense, then getting the change merged. The scout keeps doing the tedious evidence gathering while that happens.
+**Where I sit:** Deciding whether the diagnosis and fix make sense, then getting the change merged. The scout keeps doing the tedious evidence gathering while that happens.
 
-**Loop or graph?** Loop, with a memory. The next run knows about the last report.
+**TL;DR–**A scheduled scout notices logs → Investigates what caused issues → Checks if anyone's fixing it already → Appends to existing reports using memory. Future scheduled scouts keep watching logs and adding to the same existing reports instead of making new ones.
 
-## Loop 4: error tracking
+## 4. The error tracking loop
 
-This one starts with [error tracking](/docs/error-tracking), rather than a scheduled scout. An exception becomes a signal, and the investigation follows it into the code to work out what actually needs changing.
+This next loop starts with [error tracking](/docs/error-tracking) rather than a scheduled scout. An exception becomes a signal, and the investigation follows it into the code to work out what actually needs changing.
 
 The interesting reports are often the ones where the error message is technically correct but tells you the wrong story. An issue-deduplication agent failed because its output was missing a required `duplicates` field. That sounds like an agent forgetting the schema. The actual problem was more interesting.
 
@@ -142,7 +132,7 @@ The outer JSON object had been cut off. Our fallback parser searched for another
 
 **Loop or graph?** Loop. An agent fails → the failure gets investigated → the agent's own machinery gets fixed.
 
-## Loop 5: anomaly alert → investigation → fix
+## 5. The anomaly alert → investigation → fix loop
 
 [Alerts](/docs/alerts) watch the metrics we care about and can start an investigation when something looks wrong. For our team, that includes the error rate of the MCP tools self-driving uses. The [PostHog Slack app](/docs/slack) makes it easy to pick up the investigation where the alert landed: mention `@PostHog` in the thread, ask follow-up questions, and steer the agent toward a fix.
 
@@ -167,7 +157,7 @@ So, no, the alert didn't autonomously fix production while I made coffee. This o
 
 **Loop or graph?** Loop. Metric moves → alert → investigation → fix → keep watching the metric. A few of those arrows go through me.
 
-## Loop 6: issues → reports → PRs
+## 6. Issues → reports → PRs
 
 This one has changed how I work more than any other.
 
@@ -194,7 +184,7 @@ I can have more of these going at once because I don't need to watch each agent 
 
 **Loop or graph?** Loop. I give it a clear issue, review what comes back, and use the thing it built.
 
-## Loop 7: Replay Vision
+## 7. Replay Vision
 
 This one starts with a person using the product, without having to tell us what went wrong.
 
@@ -219,7 +209,7 @@ The research found a gap in the error handling. We already recognized one provid
 
 **Loop or graph?** Loop. Product usage → recording → observation → report → PR → back to watching the product get used.
 
-## Loop 8: self-validation
+## 8. self-validation
 
 Merged isn't the same as verified in production. The harness tells scouts to [leave follow-up notes and re-check the evidence](https://github.com/PostHog/posthog/blob/9811d194f82eba77bc5264b10ace8c8c3c9d7708/products/signals/backend/scout_harness/prompt.py#L275-L284) on what they reported, so the scout that found a problem is the one that checks the fix.
 
@@ -240,7 +230,7 @@ Over the last month, roughly **one in ten scout runs** included a self-validatio
 
 **Loop or graph?** Loop. Report → fix → the scout that reported it checks the fix held.
 
-## Loop 9: self-improvement
+## 9. self-improvement
 
 The harness also tells custom scouts to [suggest changes to their own instructions](https://github.com/PostHog/posthog/blob/9811d194f82eba77bc5264b10ace8c8c3c9d7708/products/signals/backend/scout_harness/prompt.py#L648-L693), with evidence, for their owners to review. A scout can't edit its own skill. It files a report, and a human publishes the new version or doesn't.
 
@@ -254,7 +244,7 @@ They aren't always right, which is why a human is still in this loop. On August 
 
 **Loop or graph?** Loop. Scout runs → notices its own instructions are wrong → suggests a fix → owner reviews → next run uses the new version.
 
-## Loop 10: a few smaller ones
+## 10. a few smaller ones
 
 We also have scouts that catch docs drifting behind shipped code, maintain our key dashboards, summarize yesterday's merged PRs, and keep my GitHub review requests and failing CI in one attention list. Small things, but all things someone would otherwise have to remember to check.
 
