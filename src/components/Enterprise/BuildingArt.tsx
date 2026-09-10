@@ -102,7 +102,7 @@ export function EnterpriseScene({ children }: { children: React.ReactNode }): JS
     }, [])
 
     return (
-        <div className="@container not-prose text-pretty text-primary">
+        <div className="@container not-prose overflow-x-clip text-pretty text-primary">
             <style>{FLOOR_QUERIES}</style>
             <div
                 ref={ref}
