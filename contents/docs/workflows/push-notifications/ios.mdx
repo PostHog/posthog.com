@@ -28,7 +28,11 @@ With these enabled you only need to register for remote notifications; the SDK p
 
 <CalloutBox icon="IconWarning" title="Your app must set a notification delegate" type="caution">
 
-iOS reports a notification tap through `UNUserNotificationCenter.current().delegate`. If your app never sets one, the system reports the tap to nobody, there's nothing for the SDK to observe, and `$push_notification_opened` is never captured — whatever the app state.
+iOS reports a notification tap through `UNUserNotificationCenter.current().delegate`. If your app never sets one, the SDK has nothing to observe and `$push_notification_opened` is never captured, whatever the app state.
+
+</CalloutBox>
+
+Set the delegate when your app launches:
 
 ```swift
 import UserNotifications
@@ -45,8 +49,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
 ```
 
 The SDK logs a warning a few seconds after `setup()` when the delegate is still missing, if you enable `config.debug`.
-
-</CalloutBox>
 
 Automatic registration and open capture require `config.enableSwizzling` to be `true` (the default). If you disable swizzling or manage your own delegates, use the manual APIs below.
 

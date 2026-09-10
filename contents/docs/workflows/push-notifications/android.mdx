@@ -62,9 +62,9 @@ override fun onNewIntent(intent: Intent) {
 }
 ```
 
-Your launcher activity needs `android:launchMode="singleTop"`, or the system resumes the task instead of delivering the tap here. Requires Android SDK 3.62.0 or newer. `PostHogAndroid.capturePushNotificationOpened` is deduplicated against the automatic path by message id, so it can't double-count with it — unlike `PostHog.capturePushNotificationOpened` below, which isn't.
+Your launcher activity needs `android:launchMode="singleTop"`, or the system resumes the task instead of delivering the tap here. Requires Android SDK 3.62.0 or newer. `PostHogAndroid.capturePushNotificationOpened` is deduplicated against the automatic path by message ID, so it can't double-count. `PostHog.capturePushNotificationOpened` below isn't deduplicated.
 
-Notifications you display yourself from a foreground data message, and push delivered outside FCM, aren't detected at all — capture those with the fully manual API:
+Notifications you display yourself from a foreground data message, and push delivered outside FCM, aren't detected at all. Capture those with the fully manual API:
 
 ```kotlin
 PostHog.capturePushNotificationOpened(
