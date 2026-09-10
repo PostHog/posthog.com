@@ -13,7 +13,7 @@
  *    rkey (the post's filename / last slug segment), so the tag and the record always agree.
  *
  * Behaviour:
- *  - Enabled when AWS_CODEPIPELINE === 'true' (production build) OR STANDARD_SITE_SYNC === 'true'.
+ *  - Enabled when STANDARD_SITE_SYNC === 'true'.
  *  - Requires BSKY_APP_PASSWORD (a posthog.com Bluesky app password) for real writes.
  *  - STANDARD_SITE_DRY_RUN === 'true' computes records + writes the manifest but makes no PDS calls.
  *  - Changed-only: only writes records that are new or whose content changed.
@@ -247,7 +247,7 @@ function writeManifest(records: Array<{ rkey: string; record: StandardSiteDocume
 }
 
 export async function syncStandardSiteDocuments(graphql: any): Promise<void> {
-    const enabled = process.env.AWS_CODEPIPELINE === 'true' || process.env.STANDARD_SITE_SYNC === 'true'
+    const enabled = process.env.STANDARD_SITE_SYNC === 'true'
     if (!enabled) return
 
     const dryRun = process.env.STANDARD_SITE_DRY_RUN === 'true'

@@ -74,6 +74,9 @@ export const handle: Handle = async ({ event, resolve }) => {
 
     const headers = new Headers(event.request.headers)
     headers.set('host', hostname)
+    // Remove cookies and auth headers before forwarding to PostHog
+    headers.delete('cookie')
+    headers.delete('authorization')
     headers.set('accept-encoding', '')
 
     // Forward client IP for geolocation
@@ -117,6 +120,9 @@ export const handle: Handle = async ({ event, resolve }) => {
 
     const headers = new Headers(event.request.headers)
     headers.set('host', hostname)
+    // Remove cookies and auth headers before forwarding to PostHog
+    headers.delete('cookie')
+    headers.delete('authorization')
     headers.set('accept-encoding', '')
 
     // Forward client IP for geolocation

@@ -235,6 +235,7 @@ Replit
 Revolut
 RevX
 [Rr]ipe
+Rokt
 RudderStack
 [Rr]unway
 Salesforce

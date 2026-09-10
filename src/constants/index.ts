@@ -1,5 +1,7 @@
 // Paths that have raw markdown available for copying/downloading. `/pocket-guides` is here so a
 // scout's SKILL.md is fetchable as agent context – see components/SelfDrivingInbox/README.md.
+// `/pricing` covers `/pricing/agent-estimates`; `/pricing.md` itself is built from billing data
+// by `generatePricingMd`, not scraped, because no MDX node has the slug `/pricing`.
 export const MARKDOWN_CONTENT_PATHS = [
     '/docs',
     '/handbook',
@@ -7,9 +9,22 @@ export const MARKDOWN_CONTENT_PATHS = [
     '/newsletter',
     '/changelog',
     '/pocket-guides',
+    '/pricing',
 ] as const
-export const isMarkdownContentPath = (path: string) =>
-    MARKDOWN_CONTENT_PATHS.some((p) => path === p || path.startsWith(`${p}/`))
+
+// Section index pages have no scraped `.md`. generateRawMarkdownPages only sees nodes
+// matching `/^/(docs|handbook|...)/` (onPostBuild.ts) — note the trailing slash, which
+// requires a segment after the section name — so `/docs` and friends are never processed.
+// `/changelog` and `/pricing` are the exceptions: generateChangelogMd and generatePricingMd
+// write those two by hand.
+const SECTION_ROOTS_WITH_MARKDOWN: readonly string[] = ['/changelog', '/pricing']
+
+export const isMarkdownContentPath = (path: string): boolean => {
+    const normalized = path.replace(/\/$/, '')
+    return MARKDOWN_CONTENT_PATHS.some((p) =>
+        normalized === p ? SECTION_ROOTS_WITH_MARKDOWN.includes(p) : normalized.startsWith(`${p}/`)
+    )
+}
 
 // Default avatar fallback (Max the hedgehog)
 export const AVATAR_FALLBACK_URL =
@@ -17,7 +32,7 @@ export const AVATAR_FALLBACK_URL =
 
 export const PRODUCT_COUNT = 10
 export const APP_COUNT = 34 // total of /products - ai agents.md and cdp readme.md
-export const CUSTOMER_COUNT = 190254
+export const CUSTOMER_COUNT = 500000
 
 // screensaver
 export const INACTIVITY_TIMEOUTS = {

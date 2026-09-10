@@ -9,6 +9,7 @@ import { SectionHeading } from '../helpers'
 import Link from 'components/Link'
 import { useApp } from '../../../../context/App'
 import SmallTeam from 'components/SmallTeam'
+import { volumeById } from '../../../../constants/pocketGuides'
 
 type CommunityStatsNode = {
     topicId: number | null
@@ -55,6 +56,11 @@ const CommunityQuestions = ({ id, productData }: SectionComponentProps) => {
 
     const { openNewChat } = useApp()
 
+    // Only products that declare a volume get this; everyone else's Answers list is unchanged.
+    // An announced-but-unwritten volume has no page, so it stays out rather than linking to a 404.
+    const volume = volumeById((productData as any)?.pocketGuideVolume)
+    const pocketGuide = volume?.comingSoon ? undefined : volume
+
     return (
         <section id={id} className="scroll-mt-20">
             <SectionHeading>Questions?</SectionHeading>
@@ -75,6 +81,16 @@ const CommunityQuestions = ({ id, productData }: SectionComponentProps) => {
                                 We have an entire <SmallTeam slug="docs-wizard" /> dedicated to docs gardening.
                             </p>
                         </li>
+                        {pocketGuide && (
+                            <li className="list-decimal">
+                                <Link to={`/pocket-guides/${pocketGuide.id}`} className="underline font-bold">
+                                    Read the pocket guide
+                                </Link>
+                                <p className="text-secondary text-base">
+                                    PostHog use cases, in your pocket. Each chapter ends with a quick start.
+                                </p>
+                            </li>
+                        )}
                         <li className="list-decimal">
                             <Link to={forumUrl} className="underline font-bold">
                                 Search the community forums

@@ -32,6 +32,7 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     'activity-log': {
         feature: 'Activity log',
         owner: ['platform-features'],
+        label: 'feature/activity-logs',
     },
     'activity-view': {
         feature: 'Activity view',
@@ -84,6 +85,7 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     authentication: {
         feature: 'Authentication',
         owner: ['platform-features'],
+        label: 'feature/auth',
     },
     autocapture: {
         feature: 'Autocapture',
@@ -184,6 +186,7 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     'data-warehouse': {
         feature: 'Managed warehouse',
         owner: ['managed-warehouse'],
+        label: 'feature/data-warehouse',
     },
     'embedding-worker': {
         feature: 'Embedding worker',

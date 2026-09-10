@@ -3,42 +3,32 @@ title: Download PostHog Desktop
 ---
 
 import { DownloadButton } from '../../../src/pages/desktop'
-import List from 'components/List'
+import { DesktopDownloadList } from 'components/Code/DesktopDownloadList'
 
-PostHog Desktop will be available for download in Summer 2026.
+Download PostHog Desktop, sign in with your PostHog account, and choose a repository.
 
-<div className="max-w-lg @container bg-blue/10 border border-blue rounded-md pb-8 pt-0 px-8 shadow-xl">
+<div className="max-w-lg @container bg-blue/10 border border-blue rounded-md p-6 shadow-xl not-prose">
   <DownloadButton />
 </div>
 
-## Downloads
+## All platforms
 
-<List
-    className="grid gap-4 grid-cols-1 @md:grid-cols-2 not-prose"
-    items={[
-        {
-            label: "macOS",
-            url: "#",
-            icon: "IconApple",
-            badge: "Coming soon",
-            description: "Official app",
-        },
-        {
-            label: "Windows",
-            url: "#",
-            icon: "IconLaptop",
-            badge: "Coming soon",
-            description: "Community maintained",
-        },
-    ]}
-/>
+<DesktopDownloadList />
 
-## Open source
+Releases include macOS builds for Apple Silicon and Intel, a Windows installer, and Linux AppImage, `.deb`, and `.rpm` packages.
 
-PostHog Desktop is open source under the MIT license. The full source code lives in the [PostHog/code GitHub repo](https://github.com/PostHog/code). More about the license and contribution guidelines in the [PostHog Desktop open source](/docs/posthog-desktop/open-source) page.
+## Eligibility
 
-## Platform availability
+Anyone can download the app. PostHog Desktop usage consumes AI credits from your PostHog organization. See [pricing](/docs/posthog-desktop/pricing) for current rates and the monthly free tier.
 
-The macOS app is maintained by the PostHog Desktop team. The Windows app is community maintained and reviewed by the PostHog Desktop team.
+Organizations on the PostHog **startup plan** cannot use AI credits for PostHog Desktop yet. The app shows an eligibility notice instead of allowing tasks to start. You can still download the app and sign in.
 
-For bugs, search [open GitHub issues](https://github.com/PostHog/code/issues) first. If nothing matches, [open a new issue](https://github.com/PostHog/code/issues/new) with your OS, app version, and steps to reproduce.
+## Updates
+
+On macOS and Windows, PostHog Desktop checks for updates at startup. Automatic downloads are on by default, and updates install the next time you quit. Turn off automatic downloads or select **Check now** in **Settings** > **General** when you want to control the timing.
+
+Linux does not update automatically. Download a new package from the releases page when you want to update.
+
+PostHog Desktop can require an update when an older build is no longer safe or reliable. Other updates install in the background or appear as dismissible notices.
+
+See what changed in each build on the [release notes](https://github.com/PostHog/posthog/releases?q=desktop&expanded=true).

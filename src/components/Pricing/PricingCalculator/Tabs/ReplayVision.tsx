@@ -1,5 +1,9 @@
 import React, { useEffect, useMemo, useState } from 'react'
-import PricingEstimator, { MODELS, estimateReplayVisionPricing } from 'components/ReplayVision/PricingEstimator'
+import PricingEstimator, {
+    MODELS,
+    MAX_OBSERVATIONS,
+    estimateReplayVisionPricing,
+} from 'components/ReplayVision/PricingEstimator'
 
 /*
  * Replay Vision's tab in the /pricing calculator. Registered in `productTabs`
@@ -7,9 +11,8 @@ import PricingEstimator, { MODELS, estimateReplayVisionPricing } from 'component
  * model-selector estimator as /replay-vision/pricing, but driven by the billing
  * API's credit tiers and synced into the shared calculator state.
  *
- * Denominations: the UI works in observations; shared state (`product.volume`,
- * the tab-list subtotal, the generated calculator URL) stays in credits – the
- * billing unit – so `setVolume` restores and `calculatePrice` agree with us.
+ * The product override retains the model and observations for sharing and tab switches.
+ * Volume remains the derived credit amount used for billing.
  */
 export default function ReplayVisionTab({
     activeProduct,
@@ -23,11 +26,12 @@ export default function ReplayVisionTab({
     // subtotal cannot disagree. Empty deps: the tab remounts per tab switch
     // (`key={activeProduct.type}` in TabContent).
     const creditTiers = useMemo(() => activeProduct?.billingData?.plans.find((plan: any) => plan.tiers)?.tiers, [])
-    const [modelKey, setModelKey] = useState(MODELS[0].key)
-    // Seed from the shared credit volume so the estimate survives tab switches
-    // (the productData default of 2,500 credits reads as 500 observations on Standard).
-    const [observations, setObservations] = useState(() =>
-        Math.round((Number(activeProduct.volume) || 0) / MODELS[0].creditsPerObservation)
+    const [modelKey, setModelKey] = useState(activeProduct.model ?? MODELS[0].key)
+    // Restore saved inputs, or derive the initial observations from the product's default credits.
+    const [observations, setObservations] = useState(
+        () =>
+            activeProduct.observations ??
+            Math.round((Number(activeProduct.volume) || 0) / MODELS[0].creditsPerObservation)
     )
 
     const estimate = estimateReplayVisionPricing({ observations, modelKey, creditTiers })
@@ -36,19 +40,14 @@ export default function ReplayVisionTab({
     // so listing it would loop the effect.
     useEffect(() => {
         if (!estimate) return
-        setProduct('replay_vision', { cost: estimate.cost, volume: estimate.credits, costByTier: estimate.costByTier })
+        setProduct('replay_vision', {
+            cost: estimate.cost,
+            volume: estimate.credits,
+            costByTier: estimate.costByTier,
+            model: modelKey,
+            observations,
+        })
     }, [estimate?.cost, estimate?.credits, estimate?.model.key])
-
-    // Adopt a volume written from outside the tab – Tabbed's mount effect restores
-    // `?replay_vision[volume]=N` (credits) via setVolume after this component mounts.
-    // Converges: once observations match, the next run sees equal credits and bails.
-    useEffect(() => {
-        if (!estimate) return
-        const external = Number(activeProduct.volume)
-        if (Number.isFinite(external) && external > 0 && external !== estimate.credits) {
-            setObservations(Math.round(external / estimate.model.creditsPerObservation))
-        }
-    }, [activeProduct.volume])
 
     if (!estimate) return null
 
@@ -63,7 +62,7 @@ export default function ReplayVisionTab({
                 modelKey={modelKey}
                 observations={observations}
                 onModelKeyChange={setModelKey}
-                onObservationsChange={setObservations}
+                onObservationsChange={(value) => setObservations(Math.min(value, MAX_OBSERVATIONS))}
             />
         </div>
     )

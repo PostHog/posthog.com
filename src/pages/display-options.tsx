@@ -14,6 +14,7 @@ import Tooltip from 'components/RadixUI/Tooltip'
 import { Screensaver } from '../components/Screensaver'
 import useTheme, { type ThemeOption } from '../hooks/useTheme'
 import KeyboardShortcut from 'components/KeyboardShortcut'
+import { useHedgehogMode } from 'components/HedgehogMode'
 
 const XL_CURSOR_SVG = `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 74 28"><g clip-path="url(#a)"><path fill="#000" stroke="#fff" stroke-width="5" d="m44.77 50.196.024.01.025.008c.48.177 1.014.286 1.58.286.665 0 1.28-.147 1.837-.392l.012-.006.013-.006 8.8-3.997.002-.001a4.5 4.5 0 0 0 2.225-5.968v-.001l-10.73-23.395 16.828-1.446.008-.001a4.504 4.504 0 0 0 2.678-7.78L20.073-37.289a4.51 4.51 0 0 0-4.858-.843l-.011.005A4.499 4.499 0 0 0 12.5-34v66a4.503 4.503 0 0 0 2.715 4.133l.01.003a4.505 4.505 0 0 0 4.86-.859L32.01 24.072l10.259 23.717.005.012.005.011a4.527 4.527 0 0 0 2.492 2.384Z"/></g><defs><clipPath id="a"><path fill="#fff" d="M0 0h74v28H0z"/></clipPath></defs></svg>`
 
@@ -198,8 +199,11 @@ const WallpaperSelect = ({ value, onValueChange, title }: WallpaperSelectProps) 
 export default function DisplayOptions() {
     const { siteSettings, updateSiteSettings } = useApp()
     const [previewScreensaver, setPreviewScreensaver] = useState(false)
+    // Hedgehog mode lives in its own localStorage-backed store, not in siteSettings.
+    const [hedgehogModeEnabled, setHedgehogModeEnabled] = useHedgehogMode()
 
     const handleColorModeChange = (value: string) => {
+        if (!value) return
         if (typeof window !== 'undefined' && (window as any).__setPreferredTheme) {
             const newTheme = window.__setPreferredTheme(value)
             updateSiteSettings({
@@ -308,6 +312,27 @@ export default function DisplayOptions() {
                                 updateSiteSettings({ ...siteSettings, reduceTransparency: value === 'true' })
                             }}
                             value={siteSettings.reduceTransparency ? 'true' : 'false'}
+                        />
+                    </div>
+                </div>
+                <div className="bg-primary grid grid-cols-2 gap-2">
+                    <div className="flex items-center gap-1 mb-1">
+                        <span className="text-sm">Hedgehog mode</span>
+                        <Tooltip trigger={<IconInfo className="size-4 inline-block relative -top-px" />} delay={0}>
+                            <p className="max-w-sm my-0 leading-snug">
+                                Hedgehogs walk around the screen, sit on windows, and follow your cursor.
+                            </p>
+                        </Tooltip>
+                    </div>
+                    <div>
+                        <ToggleGroup
+                            title=""
+                            options={[
+                                { label: 'Disabled', value: 'false' },
+                                { label: 'Enabled', value: 'true' },
+                            ]}
+                            onValueChange={(value) => setHedgehogModeEnabled(value === 'true')}
+                            value={hedgehogModeEnabled ? 'true' : 'false'}
                         />
                     </div>
                 </div>

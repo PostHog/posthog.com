@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react'
 import Link from 'components/Link'
 import { useAppActions, useAppSettings, useAppUIState } from '../../context/App'
-import { GlassIcon, PricingIcon, DemoIcon } from 'components/OSIcons'
+import { GlassIcon, PricingIcon, DemoIcon, ThePostHogIcon } from 'components/OSIcons'
 import {
     HOME_SILHOUETTE,
     SELF_DRIVING_SILHOUETTE,
@@ -28,6 +28,9 @@ import HedgeHogModeEmbed from 'components/HedgehogMode'
 import ReactConfetti from 'react-confetti'
 import { useToast } from '../../context/Toast'
 import { navigate } from 'gatsby'
+import useDesktopBadges from '../../hooks/useDesktopBadges'
+import usePostHog from 'hooks/usePostHog'
+import ThePostHogPlayer, { VIDEO_ID as THE_POSTHOG_VIDEO_ID } from './ThePostHog'
 
 interface Product {
     name: string
@@ -134,6 +137,31 @@ export const apps: AppItem[] = [
     },
 ]
 
+function useRightApps(): AppItem[] {
+    const { addWindow } = useAppActions()
+    const posthog = usePostHog()
+    return React.useMemo(() => {
+        const thePostHog: AppItem = {
+            label: 'The PostHog',
+            Icon: <ThePostHogIcon />,
+            onClick: () => {
+                posthog?.capture('opened_the_posthog_video', {
+                    video_id: THE_POSTHOG_VIDEO_ID,
+                    video_source: 'wistia',
+                    source: 'desktop_icon',
+                })
+                addWindow(
+                    (
+                        <ThePostHogPlayer newWindow location={{ pathname: 'the-posthog' }} key="the-posthog" />
+                    ) as Parameters<typeof addWindow>[0]
+                )
+            },
+            source: 'desktop',
+        }
+        return [...apps, thePostHog]
+    }, [addWindow, posthog])
+}
+
 // Fixed offset for icon layout — avoids CLS from context taskbarHeight (59 → measured) on SSR hydrate.
 // #taskbar is 42px inside AppContainer's p-2 (8px) top padding.
 const APP_CONTAINER_TOP_PADDING = 8
@@ -142,6 +170,7 @@ const DESKTOP_TOP_OFFSET = APP_CONTAINER_TOP_PADDING + TASKBAR_HEIGHT
 
 function Desktop() {
     const productLinks = useProductLinks()
+    const rightColumn = useRightApps()
     const { setScreensaverPreviewActive, setConfetti, updateSiteSettings } = useAppActions()
     const { siteSettings, compact } = useAppSettings()
     const { screensaverPreviewActive, confetti } = useAppUIState()
@@ -189,8 +218,14 @@ function Desktop() {
                   }
                 : app
         )
-    const leftApps = applyGlow(productLinks)
-    const rightApps = applyGlow(apps)
+    // Notification badges come from app state (see useDesktopBadges), so they are
+    // merged in here rather than baked into the static `apps` array above.
+    const badges = useDesktopBadges()
+    const applyBadges = (items: AppItem[]) =>
+        items.map((app) => (app.url && badges[app.url] ? { ...app, badge: badges[app.url] } : app))
+
+    const leftApps = applyBadges(applyGlow(productLinks))
+    const rightApps = applyBadges(applyGlow(rightColumn))
 
     // Mobile: one continuous wrapping grid (avoids a gap when left apps don't fill a row).
     // sm+: classic left/right desktop columns that wrap into extra columns when short on height.

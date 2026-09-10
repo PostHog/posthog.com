@@ -21,7 +21,7 @@ We did a bunch of interviews with users and had a lot of discussions with the co
 
 The result is a release with new features and a ton of bug fixes, aimed at making PostHog better, faster, and more secure for our users. 
 
-If you're self-hosting and want to upgrade for a better experience with nicer features, remember to [update your PostHog instance](/docs/runbook/upgrading-posthog).
+If you're self-hosting and want to upgrade for a better experience with nicer features, remember to [update your PostHog instance](/docs/self-host).
 
 ## Release Notes
 
@@ -75,7 +75,7 @@ Prior to this version, we denoted the importance of this in our Docs, but did no
 
 Many of our deployments generate and set this key by default, so that you will not need to worry about it. This is the case with our [Heroku One-Click deployment](/docs/self-host/deploy/heroku), for example. However, other methods may not automatically do this (we're working on it!). As such, if you run into any issues when updating PostHog, make sure you have a unique `SECRET_KEY` set. 
 
-You can find more information about this on our ['Securing PostHog' page](/docs/self-host/configure/securing-posthog#secret-key) and should always feel welcome to ask any questions on our [our community page](/posts).
+You can find more information about this on our ['Securing PostHog' page](/docs/self-host/configure/securing-posthog#secret-key) and should always feel welcome to ask any questions on [our community page](/posts).
 
 
 ## Bug Fixes and Performance Improvements

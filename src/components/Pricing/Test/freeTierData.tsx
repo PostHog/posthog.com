@@ -126,4 +126,17 @@ export const freeTierProducts: FreeTierProduct[] = [
         icon: Icons.IconEye,
         iconColor: 'text-yellow',
     },
+    {
+        name: 'PostHog Desktop',
+        badge: 'Beta',
+        allocation: '2000 credits (worth $20)',
+        note: (
+            <>
+                Its own balance, separate from PostHog AI's. Model tokens are passed through at the provider's price
+                with no markup; cloud tasks also spend credits on the sandbox they run on.
+            </>
+        ),
+        icon: Icons.IconLaptop,
+        iconColor: 'text-brown dark:text-brown-dark',
+    },
 ]

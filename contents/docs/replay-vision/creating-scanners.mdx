@@ -3,6 +3,7 @@ title: Creating scanners
 ---
 
 import { ProductScreenshot } from "components/ProductScreenshot";
+import WizardCommand from 'components/WizardCommand'
 
 A scanner is made up of six things you author:
 
@@ -35,6 +36,16 @@ The shipping templates are:
 | **Create from scratch** | –          | Blank scanner – pick a type yourself                                     |
 
 Picking a template just pre-fills the form. You can change anything before saving.
+
+## Let the wizard write them
+
+Templates are generic by design. If you'd rather start from scanners that already know your product, run the wizard in your project directory:
+
+<WizardCommand command="replay-vision" />
+
+It reads your codebase and creates three scanners: a breakage monitor scoped to the URLs of your key flow, a frustration monitor gated on rage clicks, and a low-sampled summarizer that uses your product's own vocabulary. The prompts name the things that actually break in your app rather than generic web copy.
+
+These are ordinary scanners, so everything below still applies. Edit the prompt, retune the filters, or delete them.
 
 ## Writing the prompt
 

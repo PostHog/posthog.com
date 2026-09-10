@@ -21,6 +21,7 @@ import { logs } from './productData/logs'
 import { realtimeDestinations } from './productData/realtime_destinations'
 import { endpoints } from './productData/endpoints'
 import { inbox } from './productData/inbox'
+import { posthogDesktop } from './productData/posthog_desktop'
 import { replayVision } from './productData/replay_vision'
 
 const initialProducts = [
@@ -39,6 +40,7 @@ const initialProducts = [
     logs,
     workflows,
     inbox,
+    posthogDesktop,
     endpoints,
     replayVision,
 ]

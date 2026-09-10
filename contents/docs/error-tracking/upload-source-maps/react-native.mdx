@@ -291,7 +291,7 @@ If you aren't using the Expo config plugin, wire up the uploads manually.
 
 #### iOS
 
-In Xcode, add a **Run Script** build phase to your main app target and place it **last** (so it runs after the dSYM bundle is produced). The `upload-symbols.sh` script ships inside the `PostHog` pod, which is pulled in transitively by `@posthog/react-native-plugin`.
+In Xcode, add a **Run Script** build phase to your main app target and place it **last** so it runs after the dSYM bundle is produced. The `upload-symbols.sh` script ships with the transitive `posthog-ios` dependency. Use the script path that matches your [iOS dependency path](/docs/libraries/react-native#choose-an-ios-dependency-path-for-the-native-plugin).
 
 <MultiLanguage>
 

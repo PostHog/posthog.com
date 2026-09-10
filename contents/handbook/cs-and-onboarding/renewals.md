@@ -81,3 +81,5 @@ If you are struggling to move things along either because the customer isn't eng
    3. Let them know the date of the first monthly payment and expected amount they will be billed.
 5. If you still haven't heard anything from finance, send the information from step 4 to all active users and owners/admins in the account.
 6. If you get to this point and you still haven't secured the renewal, Closed - Lost the renewal opportunity and follow our [failed payment process](/handbook/growth/sales/billing#failedlate-payments) if their first monthly invoice isn't paid, or we don't have a valid card on file.
+
+In any situation where an account moves from annual to monthly, we need to make sure the information in step 4 is made clear to them well ahead of their credit running out. A direct conversation should be had, confirming the change in price, the expected charges, and that there is a valid card on file.

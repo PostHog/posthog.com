@@ -9,90 +9,72 @@ We have one of the coolest [changelogs](/changelog) on the internet. It's also o
 
 As a company that ships weirdly fast, it's important to share what we're working on with as many people as possible, as often as possible. The changelog is a great way to do that.
 
-## Internal Slack channel
-
-We run an internal Slack channel that surfaces what we ship. We recommend that everyone at PostHog joins it.
-
-| Channel | Use it for | Cadence | Owner |
-|---------|------------|---------|-------|
-| [`#changelog`](https://posthog.slack.com/archives/C099B0YCULT) | What's just shipped | Updates constantly as PRs merge | <SmallTeam slug="wizard-and-docs" /> |
-
-The channel is powered by agentic workflows that scan merged PRs and feature flag changes in the `posthog/posthog` repo, classify them, and summarize them into it, posting each impactful change as it lands.
-
-You can also opt a PR into the workflow manually:
-
-- **PR template checkbox** — the `posthog/posthog` PR template has a *Publish to changelog?* checkbox under **Automatic notifications**. Tick it when you want to override the automated classification.
-- **`@posthog` Slack app** — you can also include or exclude PRs from these workflows via the `@posthog` Slack app, which is handy after the fact (e.g. once a change is in production).
-
-<ProductVideo 
-  videoLight="https://res.cloudinary.com/dmukukwp6/video/upload/changelog_handbook_1_8038f2d9d4.mp4"
-  autoPlay={false} 
-  muted={false} 
-  loop={false}
-  background={false}
-  alt="The /changelog page on the website"
-  classes="rounded"
-/>
-
-<Caption>
-The /changelog page on the website
-</Caption>
-
-## Changelog content and ownership
-
-Technically speaking, the changelog is a stream of content that's published across multiple channels. 
-
-From start to finish, a changelog entry is:
-
-1. Posted in the `#changelog` Slack channel
-2. Published on the [website](/changelog) by <SmallTeam slug="wizard-and-docs" />
-3. Produced into a [video](/changelog) by <SmallTeam slug="youtube" />
-4. And then sent in an [email](/handbook/marketing/email-comms) by <SmallTeam slug="marketing" />
-
-The **engineer** is responsible for making sure their feature appears in the `#changelog` Slack channel and writing the initial draft (details below). 
-
-This page mainly covers the first two steps. 
-
-<CalloutBox type="fyi" title="Website team">
-
-The changelog code and data (stored in our Strapi CMS) is mainatined by the <SmallTeam slug="website" />. To learn more about how the features work, check out their [roadmap](/handbook/engineering/posthog-com/roadmap) and [changelog](/handbook/engineering/posthog-com/changelog) handbook pages.
-
-</CalloutBox>
+Most of it runs itself now too. A bot finds the work worth announcing, engineering teams review it in Slack, and it lands on the website.
 
 ## What gets included
 
-New features! But changelog entries can also include beta launches, UX improvements, or performance improvements.
+New features, mostly! But changelog entries can also include beta launches, UX improvements, or performance improvements.
 
-For engineers, here's the rule of thumb: if you think an update (small or big) is worth sharing with users, it's probably worth posting about in the changelog. 
+For engineers, here's the rule of thumb: _if you'd want a user to know about it, it belongs in the changelog_.
 
 <ProductScreenshot imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/pasted_image_2026_01_29_T05_07_13_116_Z_0bca53d20f.png" alt="Changelog entry" padding={false}/>
 
 <Caption>
-A published changelog entry 
+A published changelog entry
 </Caption>
 
-## How the publishing process works
+## The changelog bot
 
-We have an end-to-end process for moving shipped features into the website changelog.
+To stay on top of shipping speed, we released a changelog bot in Slack. It turns PostHog PRs into published changelog entries, with a human approving each one in Slack.
 
-1. An engineer merges a `feat` PR into the monorepo or rolls out a feature flag. 
-2. Relay workflows are triggered, which classify and summarize the PR or flag.
-3. The feature is automatically posted in the `#changelog` Slack channel if classified as "impactful" by the workflow.
-4. The PR author or engineer is tagged in the Slack thread.
-5. The **engineer** writes the initial changelog draft (2-3 sentences and screenshots) and replies to the thread.
-6. At the end of every week, the <SmallTeam slug="wizard-and-docs" /> team reviews the `#changelog` channel, compiles the entries, edits them, and then publishes to the [/changelog](/changelog) page.
+Here's how it works:
 
-Anyone can manually post in the `#changelog` Slack channel if something is worth sharing but isn't captured by the automated workflow.
+1. **Daily intake.** A Cloudflare Worker scans merged PRs across 26 repos and records every one as a candidate.
+2. **Weekly curation.** An AI agent inside the same Cloudflare Worker looks at each team's _entire week at once_ and ranks their shipped PRs. It surfaces at most 10 items per team, rolls near-duplicates into groups, and sets aside anything not worth announcing on the changelog. It writes editorial copy for the surfaced items.
+3. **Digest.** Every Thursday, a Python app posts one message per team into that team's Slack channel, with one card per surfaced entry.
+4. **Review.** Teams use the cards to review changelog entries before publishing.
+5. **Publish.** When someone selects **Publish** in Slack, the same Python app opens an issue in `PostHog/changelog-drafts` with the fields as YAML frontmatter plus a `publish` label. That repo's GitHub Action holds the Strapi token and does the actual POST to posthog.com.
 
-<ProductScreenshot imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/pasted_image_2026_01_29_T15_12_55_657_Z_2194ad70a1.png" alt="Changelog Slack channel" />
+The Slack workflow looks like this:
 
-<Caption>
-The #changelog Slack channel
-</Caption>
+<ProductVideo
+  videoLight="https://res.cloudinary.com/dmukukwp6/video/upload/Clean_Shot_2026_08_24_at_11_11_17_d851cc5932.mp4"
+  alt="Changelog bot workflow in Slack"
+  classes="rounded"
+/>
 
-## How to publish changelog yourself
+### Publish what doesn't make it into the digest
 
-People are encouraged to self-serve and publish changelog entries. Here's how. 
+The changelog bot does a good job at picking PRs for weekly digests, but sometimes it misses something it should have surfaced. No problem! 
+
+On a weekly digest in Slack, there's a **🗃 See what didn't make it** button that shows everything the curator set aside for your team. It's split into two groups:
+
+- **Near-misses** — real user-facing work that fell just below the cut. This is the pile you're usually looking for.
+- **Internal** — no user-visible change. These are shown anyway, so you can correct the bot if it got one wrong.
+
+Selecting **Add to digest** on any of them kicks off the curation step. The AI curator will write a draft for you and post a new card into the same digest thread. Sometimes you may just have to wait a few seconds for it to finish.
+
+## Changelog content and ownership
+
+Technically speaking, the changelog is a stream of content that's published across multiple channels.
+
+From start to finish, a changelog entry is:
+
+1. Posted in each team's channel, via the weekly digest
+2. Published on the [website](/changelog) by <SmallTeam slug="wizard-and-docs" />
+3. And then sent in an [email](/handbook/marketing/email-comms) by <SmallTeam slug="marketing" />
+
+The **engineer** is responsible for reviewing their team's digest cards and making sure their feature actually makes it through. The curator writes the first draft, but you're the one who knows whether it's right.
+
+<CalloutBox type="fyi" title="Website team">
+
+The changelog code and data (stored in our Strapi CMS) is maintained by the <SmallTeam slug="website" />. To learn more about how the features work, check out their [roadmap](/handbook/engineering/posthog-com/roadmap) and [changelog](/handbook/engineering/posthog-com/changelog) handbook pages.
+
+</CalloutBox>
+
+## How to publish manually
+
+People are encouraged to self-serve and publish changelog entries. If you'd rather skip the bot entirely, here's how.
 
 <CalloutBox type="fyi" title="Authentication">
 
@@ -102,15 +84,15 @@ You must be logged into your posthog.com account. Only website moderators (a.k.a
 
 ### Option 1: The main changelog
 
-Go to the [/changelog](/changelog) page and click the **+** button in the top right corner. 
+Go to the [/changelog](/changelog) page and click the **+** button in the top right corner.
 
-<ProductVideo 
+<ProductVideo
   videoLight="https://res.cloudinary.com/dmukukwp6/video/upload/changelog_form_c7f3d3a351.mp4"
   alt="Changelog form"
   classes="rounded"
 />
 
-Fill out the changelog form and click **Create** to publish. 
+Fill out the changelog form and click **Create** to publish.
 
 The changelog entry will appear on the website on the ***next website build***, which is usually when a PR is merged into the master branch.
 
@@ -131,7 +113,7 @@ The changelog entry will appear on the website on the ***next website build***, 
 
 ### Option 2: The product changelogs
 
-Each product has a dedicated changelog page in their docs that filters entries from the main changelog. You can also publish directly from these pages using the **+ Add changelog** button. 
+Each product has a dedicated changelog page in their docs that filters entries from the main changelog. You can also publish directly from these pages using the **+ Add changelog** button.
 
 <ProductScreenshot imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/pasted_image_2026_01_29_T15_09_15_804_Z_1e014d1b8e.png" alt="Add changelog button" padding={false}/>
 
@@ -161,9 +143,6 @@ Step 3 is the one people forget, so CI fails if a page is missing it. The same a
 
 ## Links and resources
 
-- <PrivateLink url="https://run.relay.app/workflows/cme1t0eno0gih0okphosc9pw0/edit">Relay workflow for PRs</PrivateLink>
-- <PrivateLink url="https://run.relay.app/workflows/cmg9oagij16o70nm34b5z7eur/edit">Relay workflow for feature flag rollouts</PrivateLink>
-- <PrivateLink url="https://us.posthog.com/project/2/functions/0199a5e9-75cf-0000-25b0-439a08af8e31">PostHog webhook for feature flag rollouts</PrivateLink>
-- <PrivateLink url="https://api.slack.com/apps/A0A63H6UPRT">Slack bot for posting in #changelog</PrivateLink>
-- <PrivateLink url="https://posthog.slack.com/archives/C099B0YCULT">#changelog Slack channel</PrivateLink>
-- <PrivateLink url="https://drive.google.com/drive/folders/1l5qWyMkm2EhwO1WXUL2UVgILqz3N6NPq?usp=drive_link">Google Doc for editing changelog entries</PrivateLink>
+- <PrivateLink url="https://api.slack.com/apps/A0BFXKWF9JA">Changelog bot Slack app</PrivateLink>
+- <PrivateLink url="https://github.com/PostHog/changelog-bot">changelog-bot repo</PrivateLink>
+- <PrivateLink url="https://github.com/PostHog/changelog-drafts">changelog-drafts repo</PrivateLink>

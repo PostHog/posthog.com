@@ -17,7 +17,7 @@ import { IconXNotTwitter } from 'components/OSIcons'
 import { DifferentHighlights } from 'components/About/v2/DifferentHighlights'
 import OSButton from 'components/OSButton'
 const ProductCount = () => <span>{PRODUCT_COUNT}+</span>
-const CustomerCount = () => <span>{CUSTOMER_COUNT}+</span>
+const CustomerCount = () => <span>{CUSTOMER_COUNT.toLocaleString()}+</span>
 
 const HappyHog = () => (
     <img

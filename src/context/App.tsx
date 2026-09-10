@@ -707,6 +707,38 @@ const appSettings: AppSettings = {
             center: true,
         },
     },
+    '/blog': {
+        size: {
+            min: {
+                width: 700,
+                height: 500,
+            },
+            max: {
+                width: 1200,
+                height: 1500,
+            },
+            fixed: false,
+        },
+        position: {
+            center: true,
+        },
+    },
+    '/compare': {
+        size: {
+            min: {
+                width: 700,
+                height: 500,
+            },
+            max: {
+                width: 1200,
+                height: 1500,
+            },
+            fixed: false,
+        },
+        position: {
+            center: true,
+        },
+    },
     '/research': {
         size: {
             min: {
@@ -846,6 +878,50 @@ const appSettings: AppSettings = {
             max: {
                 width: 535,
                 height: 680,
+            },
+            fixed: true,
+            autoHeight: true,
+        },
+        position: {
+            center: true,
+        },
+        modal: {
+            type: 'standard',
+        },
+    },
+    // Event types explanation, opened from the pricing calculator. Not a route — see
+    // components/Pricing/PricingCalculator/EventTypesModal.
+    'pricing-event-types': {
+        size: {
+            min: {
+                width: 800,
+                height: 400,
+            },
+            max: {
+                width: 800,
+                height: 720,
+            },
+            fixed: true,
+            autoHeight: true,
+        },
+        position: {
+            center: true,
+        },
+        modal: {
+            type: 'standard',
+        },
+    },
+    // All products and per-unit rates, opened from the pricing calculator. Not a route — see
+    // components/Pricing/PricingCalculator/AllProductsRatesModal.
+    'pricing-all-rates': {
+        size: {
+            min: {
+                width: 800,
+                height: 400,
+            },
+            max: {
+                width: 800,
+                height: 720,
             },
             fixed: true,
             autoHeight: true,
@@ -1087,6 +1163,28 @@ const appSettings: AppSettings = {
         },
     },
     '/demo': {
+        toolbar: true,
+        size: {
+            min: {
+                width: 960,
+                height: 682,
+            },
+            max: {
+                width: 960,
+                height: 682,
+            },
+            fixed: true,
+            autoHeight: true,
+        },
+        position: {
+            center: true,
+        },
+        modal: {
+            type: 'standard',
+        },
+    },
+    // Opened from the desktop icon via addWindow — not a route.
+    'the-posthog': {
         toolbar: true,
         size: {
             min: {
@@ -1598,9 +1696,6 @@ const appSettings: AppSettings = {
             },
             fixed: true,
         },
-    },
-    '/docs': {
-        toolbar: true,
     },
     '/merch': {
         toolbar: true,

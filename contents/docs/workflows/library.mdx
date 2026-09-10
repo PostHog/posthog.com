@@ -110,7 +110,7 @@ If you type Liquid syntax directly and the Liquid doesn't compile correctly, the
 
 ### Disabling link click tracking
 
-PostHog automatically rewrites every link in an email to route through a click-tracking redirect, which powers the `$workflows_email_link_clicked` [engagement event](/docs/workflows/engagement-events).
+Links in an email are rewritten for click tracking, which powers the `$workflows_email_link_clicked` [engagement event](/docs/workflows/engagement-events).
 
 If you need a link to reach its destination exactly as written, add an HTML block and mark the anchor with either `clicktracking="off"` or `data-ph-no-track`:
 
@@ -118,7 +118,7 @@ If you need a link to reach its destination exactly as written, add an HTML bloc
 <a href="https://example.com/your-link" data-ph-no-track>Open link</a>
 ```
 
-The attribute must be on the `<a>` tag itself, not a child element. Links marked this way won't produce click events.
+The attribute must be on the `<a>` tag itself, not a child element. Links marked this way keep their original URL and won't produce click events. Use this for app deep links and mobile universal links, which stop resolving to the app once they're rewritten.
 
 ### Testing templates
 

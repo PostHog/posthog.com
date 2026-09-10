@@ -458,6 +458,7 @@ text-black
 text-blue
 text-blue
 text-brown
+text-brown-dark
 text-burnt-orange
 text-burnt-orange-dark
 text-creamsicle

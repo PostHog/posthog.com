@@ -1,8 +1,10 @@
 ---
-title: Data retention
+title: AI event data retention
 ---
 
 PostHog retains the largest properties on `$ai_` events for 30 days. LLM conversations can be large, so storing these properties long-term is expensive. To keep costs down, PostHog deletes them after 30 days and keeps the rest of the event.
+
+This 30-day window applies to the large properties of `$ai_` events only. For the period that PostHog keeps all other events, see [events data retention](/docs/data/events-retention).
 
 ## How retention works
 

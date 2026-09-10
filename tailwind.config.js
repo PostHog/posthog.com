@@ -309,6 +309,7 @@ module.exports = {
                 4.5: '1.125rem',
                 5.5: '1.375rem',
                 6.5: '1.625rem',
+                8.5: '2.125rem',
             },
             maxWidth: {
                 '2xs': '16rem',

@@ -148,6 +148,30 @@ jobs:
               id: timestamp-final
               run: echo "time=$(date -u +'%b %d, %Y %I:%M%p')" >> $GITHUB_OUTPUT
 
+            # Direct links to the pages this PR touched, so reviewers do not have to
+            # navigate to them from the preview root.
+            - name: List changed files
+              if: success()
+              uses: actions/github-script@f28e40c7f34bde8b3046d885e986cb6290c5673b # v7.1.0
+              with:
+                  script: |
+                      const files = await github.paginate(github.rest.pulls.listFiles, {
+                        owner: context.repo.owner,
+                        repo: context.repo.repo,
+                        pull_number: context.payload.pull_request.number,
+                        per_page: 100,
+                      });
+                      require('fs').writeFileSync('changed-files.txt', files.map((f) => f.filename).join('\n'));
+
+            - name: Build preview comment
+              if: success()
+              env:
+                  DEPLOYMENT_URL: ${{ steps.deploy.outputs.deployment-url }}
+                  UPDATED_AT: ${{ steps.timestamp-final.outputs.time }}
+                  CHANGED_FILES_PATH: changed-files.txt
+                  COMMENT_PATH: preview-comment.md
+              run: node scripts/preview/build-preview-comment.mjs
+
             - name: Comment on success
               if: success()
               uses: peter-evans/create-or-update-comment@71345be0265236311c031f5c7866368bd1eff043 # v4.0.0
@@ -155,13 +179,7 @@ jobs:
                   issue-number: ${{ github.event.pull_request.number }}
                   comment-id: ${{ steps.comment.outputs.comment-id }}
                   edit-mode: replace
-                  body: |
-                      <!-- cloudflare-pages-preview -->
-                      ### Deploy preview
-
-                      | Status | Details | Updated (UTC) |
-                      |--------|---------|---------|
-                      | 🟢 **Ready** | [View preview](${{ steps.deploy.outputs.deployment-url }}) | ${{ steps.timestamp-final.outputs.time }} |
+                  body-path: preview-comment.md
 
             - name: Notify reviewer on successful builds (Inkeep PRs only)
               if: success() && contains(github.event.pull_request.user.login, 'inkeep')

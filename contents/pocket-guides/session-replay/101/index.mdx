@@ -1,0 +1,72 @@
+---
+title: Session Replay 101
+shortTitle: Session Replay 101
+subtitle: What a replay actually is, where the recording comes from, and what watches them besides you.
+pocketGuideOrder: 1
+section: Instrument
+---
+
+<LeftPage>
+
+<ScreenshotFigure
+    n={1}
+    product="session_replay"
+    screenshot="player-overview"
+    alt="A session playing back, with the sessions list on the left and the captured events on the right"
+    caption="A replay playing back, with the events PostHog captured beside it."
+/>
+
+<AnatomyFigure
+    n={2}
+    caption="Where this ends up: a report in your inbox, with the recordings that back it inside."
+    priority="P2"
+    status="Ready"
+    actionability="Actionable"
+    headline="Accounts that left onboarding midway can't get past step two. The workspace they created last time blocks them, and the name it holds is their own"
+    report={{
+        title: "Accounts that left onboarding midway can no longer finish it",
+        source: 'Scout · dead-end pages',
+        receivedAgo: '5h',
+        affected: '~180 accounts stuck, ~40 more each day',
+        body: "Sessions reaching `/onboarding/step-1` now end there 41% of the time, up from 9% across the trailing two weeks. Signup volume is unchanged and nothing threw.\n\nOnboarding creates the workspace at step two and writes `onboarding_complete` at step four. Anyone who left between the two has a workspace but an incomplete account, so the guard sends them back to step one – where step two now returns a 409, because the name is taken by the workspace they made last time. The form shows it as a validation error under the name field.\n\nThe recordings are people trying variations of their own company name against the same wall, four attempts before the tab closes.",
+        suggestedAction: 'Have step two adopt the existing workspace, and resume at the first unfinished step.',
+        actionNote: 'An agent opens the pull request – you review and merge.',
+    }}
+/>
+
+</LeftPage>
+
+<RightPage>
+
+# Session Replay 101
+
+Session Replay records what real users do in your product and plays it back like a DVR <SeeFig n={1} />, with a synced dev tool panel showing console logs, network requests, and errors at the exact moment they happened. This is one of the tools that makes your product <Term name="self-driving">self-driving</Term>.
+
+A replay is not a video. The SDK records what changed on the page and the player rebuilds it, alongside the events, errors, and person PostHog already had. We'll take the player apart properly in [Watching replays yourself](/pocket-guides/session-replay/watching-replays).
+
+## Path to self-driving
+
+Session Replay enables self-driving by providing you and your agents the context they need to make informed decisions. Session Replays let you do this in different levels:
+
+- **Instrument** – First, you need high quality Session replays. You'll want to install Session Replay, filter out noise, configure privacy protection, and set up a reverse proxy.
+- **Observe** – Then, watch a few replays yourself and build collections to share with your team. It's a lot of fun!
+- **Self-drive** – Finally, when you find yourself drowning in replays, get a robot to watch replays for you and even open PRs for improvements and fixes!
+
+The goals is to get actionable reports based on your session replays automatically in your inbox, like this one <SeeFig n={2} />.
+
+This pocket guide will walk you through each level of autonomy you can achieve with Session Replay.
+
+## Install and turn it on
+
+None of it works until a PostHog SDK is in your app. The wizard installs and configures one for you, or you can [install it yourself](/docs/session-replay/installation).
+
+<Setup />
+
+Recording is a project setting as well as an SDK one, so switch it on in [project settings](https://app.posthog.com/settings/project-replay) before you expect to see anything. We'll go over configuration decisions in [the next page](/pocket-guides/session-replay/configure-replays).
+<SeeAlso>
+
+See also: [Session Replay](/docs/session-replay) · [Get started](/docs/session-replay/start-here) · [Installation](/docs/session-replay/installation) · [Mobile replay](/docs/session-replay/mobile) · [Replay Vision](/docs/replay-vision)
+
+</SeeAlso>
+
+</RightPage>

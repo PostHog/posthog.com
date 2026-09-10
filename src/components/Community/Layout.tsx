@@ -13,7 +13,7 @@ interface IProps {
 }
 
 export const SectionTitle = ({ children }: { children: React.ReactNode }) => {
-    return <h2 className="m-0 mb-6">{children}</h2>
+    return <h1 className="m-0 mb-6">{children}</h1>
 }
 
 const Community = ({ children, title, tableOfContents, menu, contentWidth }: IProps) => {

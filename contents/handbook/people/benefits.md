@@ -34,7 +34,7 @@ People like our merch. If you want more, <PrivateLink url="https://github.com/Po
 
 As always, we expect you to use this with restraint and with your own good judgement. The merch store should not become your sole source of clothing for your wardrobe, nor where you go any time a friend has a birthday. But sure, go ahead and buy your mom (or yourself) a hat or a hoodie!
 
-Please note that any free merch received outside of your birthday kit, work anniversary kit, or new hire kit is considered a taxable benefit in most jurisdictions and may be subject to tax. If you have questions about how this applies to you, we recommend checking with your local tax advisor.
+Please note that any free merch received outside of your birthday kit, work anniversary kit, or new hire kit is considered a taxable benefit in most jurisdictions and may be subject to tax. If you have questions about how this applies to you, we recommend checking with your local tax advisor. We will send the details of any free merch you have claimed to payroll once a year (usually in December) and any tax due will be deducted from that payroll (please note this is jurisdiction dependent, and also depends on your employment type at PostHog).
 
 ## Support open-source projects
 
@@ -42,7 +42,7 @@ Everyone gets a monthly [open-source sponsorship](/handbook/people/spending-mone
 
 ## We'll be your first investor
 
-We'll be your first investor and biggest cheerleader, if you spend two years at PostHog and leave to start a new company. We're looking for entrepreneurs and a strong [Why not now?](/handbook/company/values#why-not-now)!
+We'll be your first investor and biggest cheerleader, if you spend two years at PostHog and leave to start a new company. We're looking for entrepreneurs and a strong [Why not now?](/handbook/values#why-not-now)!
 
 ## Learning and development
 

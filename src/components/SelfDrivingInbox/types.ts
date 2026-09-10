@@ -38,6 +38,13 @@ export interface ScoutSpec {
     raw?: string
     /** Display-only, e.g. "Daily" – the app owns the real schedule. Lives in index.mdx. */
     schedule?: string
+    /**
+     * A template key PostHog already ships, e.g. `costly-users`. Set it and the CTA opens that
+     * template in the app instead of encoding this SKILL.md into the link – the app's own copy
+     * carries tags and a schedule, which the `#createScout=` payload deliberately doesn't.
+     * Lives in index.mdx.
+     */
+    appTemplate?: string
 }
 
 /** Fallback rail label for a template that hasn't declared a category yet. */

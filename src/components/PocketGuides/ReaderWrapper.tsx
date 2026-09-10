@@ -63,21 +63,7 @@ export default function ReaderWrapper({ children }: { children: React.ReactNode 
     })
 
     const emitted = new Set<number>()
-    const stream: React.ReactNode[] = []
-
-    // A figure-less page authored as two prose pages – the volume's front matter – keeps its
-    // two-page character as two columns at reading widths, instead of one tall stack.
-    if (figures.size === 0 && preface.length > 0 && prose.length > 0) {
-        stream.push(
-            <div key="front-matter" className="@3xl:grid @3xl:grid-cols-2 @3xl:items-start @3xl:gap-12">
-                <div>{preface}</div>
-                <div>{prose}</div>
-            </div>
-        )
-        prose = []
-    } else {
-        stream.push(...preface)
-    }
+    const stream: React.ReactNode[] = [...preface]
 
     for (const block of prose) {
         stream.push(block)
@@ -98,8 +84,10 @@ export default function ReaderWrapper({ children }: { children: React.ReactNode 
     }
 
     return (
-        // No hover on touch: markers and the hover hint are hidden in the single-page read.
-        <div className="px-5 py-6 [counter-reset:book-section] @xl:px-12 @xl:py-10 [&_.anatomy-hint]:hidden [&_.anatomy-marker]:hidden @2xl:[&_.anatomy-hint]:inline-flex @2xl:[&_.anatomy-marker]:inline-flex">
+        // No hover on touch: below @2xl the hover hint disappears, markers stay visible, and
+        // each figure prints its glosses as a numbered key instead. At @2xl+ the markers go
+        // back to hover-reveal (group-hover and focus outrank the opacity-0 by specificity).
+        <div className="px-5 py-6 [counter-reset:book-section] @xl:px-12 @xl:py-10 [&_.anatomy-hint]:hidden @2xl:[&_.anatomy-hint]:inline-flex @2xl:[&_.anatomy-marker]:opacity-0">
             {React.Children.toArray(stream)}
         </div>
     )

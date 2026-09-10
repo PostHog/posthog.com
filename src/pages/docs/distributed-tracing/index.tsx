@@ -17,7 +17,7 @@ export const Content = () => {
                         project token.
                     </p>
                     <p>
-                        Distributed tracing is currently in alpha. Setup details may change before general availability.
+                        Distributed tracing is currently in beta. Setup details may change before general availability.
                     </p>
                 </div>
             </section>

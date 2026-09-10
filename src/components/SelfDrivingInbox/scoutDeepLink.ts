@@ -9,6 +9,9 @@ import { ScoutSpec } from './types'
 
 const INBOX_CONFIG_URL = 'https://app.posthog.com/inbox/config'
 
+/** Where PostHog's own AI observability scout templates live, one card each. */
+const AI_OBSERVABILITY_SELF_DRIVING_URL = 'https://app.posthog.com/ai-observability/self-driving'
+
 /** URL-safe base64 of a UTF-8 string, padding stripped. */
 function base64UrlEncode(value: string): string {
     const bytes = new TextEncoder().encode(value)
@@ -36,6 +39,12 @@ export function scoutInstructions(raw?: string): string {
 
 /** Falls back to the bare inbox URL – landing on the troop beats a broken payload. */
 export function buildScoutDeepLink(scout?: ScoutSpec): string {
+    // A guide for a template PostHog already ships points at that template rather than encoding
+    // its own copy: only the app's version carries the tags and schedule the guide describes.
+    if (scout?.appTemplate) {
+        return `${AI_OBSERVABILITY_SELF_DRIVING_URL}#template=${encodeURIComponent(scout.appTemplate)}`
+    }
+
     if (!scout?.name || !scout?.description) {
         return INBOX_CONFIG_URL
     }

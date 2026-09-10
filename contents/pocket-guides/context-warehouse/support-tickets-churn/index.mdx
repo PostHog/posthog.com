@@ -37,14 +37,6 @@ The Skill looks for patterns like <SeeFig n={1} />: "Billing confusion" generate
 than the other topics but cost more in churned revenue than the next two combined. The ranking
 that matters is lost revenue, independent of ticket volume.
 
-## Doing this by hand
-
-1. **Connect [Zendesk](/docs/cdp/sources/zendesk) or [Intercom](/docs/cdp/sources/intercom), and
-   [Stripe](/docs/cdp/sources/stripe)**, via [Data pipeline > Sources](/docs/data-warehouse/sources).
-2. **Pull your churned accounts list** from Stripe, and look each one up in your support tool's
-   own reporting (Zendesk Explore, or Intercom's reports) for their ticket topics.
-3. **Tally revenue by topic**: either in a spreadsheet, with the [SQL editor](/docs/data-warehouse/sql), or by asking PostHog AI to find the answer.
-
 ## Get an agent to do the work
 
 Copy the Skill below and add it to your agent. The agent needs three sources working together: ticket rows with a customer identifier and a
@@ -59,6 +51,14 @@ tickets involved, that's
 [Pre-cancellation behavior](/pocket-guides/context-warehouse/pre-cancellation-behavior) instead.
 
 <SkillFigure n={2} caption="The Skill itself, the file an agent follows to answer this question." />
+
+## Doing this by hand
+
+1. **Connect [Zendesk](/docs/cdp/sources/zendesk) or [Intercom](/docs/cdp/sources/intercom), and
+   [Stripe](/docs/cdp/sources/stripe)**, via [Data pipeline > Sources](/docs/data-warehouse/sources).
+2. **Pull your churned accounts list** from Stripe, and look each one up in your support tool's
+   own reporting (Zendesk Explore, or Intercom's reports) for their ticket topics.
+3. **Tally revenue by topic**: either in a spreadsheet, with the [SQL editor](/docs/data-warehouse/sql), or by asking PostHog AI to find the answer.
 
 <SeeAlso>
 
