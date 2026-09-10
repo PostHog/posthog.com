@@ -292,13 +292,15 @@ If the project's concurrency quota is exhausted, we put the query in queue and w
 Some customers haven't been migrated to the above limit and are on an old limit of 120 queries/hour.
 </CalloutBox>
 
-### Free plan data limit
+### Hourly read budget
 
-Organizations without a paid plan can read up to 50 TB of data per calendar month across all API queries. Past that, queries return a `402` response with the code `api_queries_quota_exceeded` and a message that shows your usage and when the allowance resets (the start of the next month, UTC).
+Queries made with a personal API key draw from an hourly read budget per project, and every query debits the bytes it read. The budget refills at 20 GB per hour for projects on the free plan and 200 GB per hour for projects in an organization with a paid plan, and unused budget accumulates for up to 24 hours (480 GB and 4.8 TB).
 
-Cached results still work while you are over the limit. Queries made in the PostHog app are not affected.
+Once it is exhausted, queries return a `429` response with the code `api_queries_budget_exceeded` and a `Retry-After` header. Every `/query` response made with a personal API key includes `X-PostHog-Query-Bytes-Read` and `X-PostHog-Query-Budget-Remaining-Bytes`; for asynchronous queries, the same headers arrive on the poll response once the query completes.
 
-To remove the limit, [subscribe to a paid plan](/pricing). PostHog is pay-as-you-go with no monthly minimum, and access is restored within moments of subscribing. Trials also lift the limit while active.
+Cached results still work while the budget is exhausted. Queries made in the PostHog app are not affected.
+
+For the larger budget, [subscribe to a paid plan](/pricing). PostHog is pay-as-you-go with no monthly minimum, and trials count as paid while active. To read less per query, see [writing performant queries](#writing-performant-queries) above.
 
 ## Further reading
 
