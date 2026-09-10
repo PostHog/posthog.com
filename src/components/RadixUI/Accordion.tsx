@@ -121,7 +121,7 @@ export const Accordion = ({
         <RadixAccordion.Root
             className={className}
             type={type as any}
-            collapsible={type === 'single' ? true : undefined}
+            collapsible
             defaultValue={calculatedDefaultValue as any}
             onValueChange={onValueChange as any}
             data-scheme={dataScheme}
