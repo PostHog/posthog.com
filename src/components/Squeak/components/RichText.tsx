@@ -11,11 +11,10 @@ import { CurrentQuestionContext } from './Question'
 import Avatar from './Avatar'
 import { AnimatePresence, motion } from 'framer-motion'
 import { IconFeatures, IconImage } from '@posthog/icons'
-import { graphql, useStaticQuery } from 'gatsby'
-import groupBy from 'lodash.groupby'
 import OSTextarea from 'components/OSForm/textarea'
 import OSButton from 'components/OSButton'
 import getCaretCoordinates from 'textarea-caret'
+import { useCommunityProfiles } from 'hooks/useCommunityProfiles'
 
 const buttons = [
     {
@@ -87,6 +86,20 @@ const buttons = [
     },
 ]
 
+const compactName = (...parts: (string | null | undefined)[]) => parts.filter(Boolean).join('').toLowerCase()
+
+const nameMatchesQuery = (first: string | null | undefined, last: string | null | undefined, query: string) => {
+    if (!query) {
+        return true
+    }
+    const q = query.toLowerCase()
+    return (
+        (first || '').toLowerCase().startsWith(q) ||
+        (last || '').toLowerCase().startsWith(q) ||
+        compactName(first, last).startsWith(q)
+    )
+}
+
 const MentionProfile = ({ profile, onSelect, selectionStart, index, focused }) => {
     const { firstName, lastName, avatar, gravatarURL } = profile.attributes
     const name = [firstName, lastName].filter(Boolean).join(' ')
@@ -121,53 +134,46 @@ const MentionProfile = ({ profile, onSelect, selectionStart, index, focused }) =
 }
 
 const MentionProfiles = ({ onSelect, body, position, ...other }) => {
-    const { staffProfiles } = useStaticQuery(graphql`
-        {
-            staffProfiles: allSqueakProfile(sort: { fields: firstName }) {
-                nodes {
-                    avatar {
-                        url
-                    }
-                    firstName
-                    lastName
-                    squeakId
-                }
-            }
-        }
-    `)
     const currentQuestion = useContext(CurrentQuestionContext) ?? {}
     const replies = currentQuestion?.question?.replies
     const selectionStart = useMemo(() => other.selectionStart, [])
     const search = body.substring(selectionStart).split(' ')[0].replace('@', '')
+    const threadProfiles = [
+        currentQuestion?.question?.profile?.data,
+        ...(replies?.data || []).map((reply) => reply?.attributes?.profile?.data),
+    ].filter((profile, index, self) => {
+        if (!profile?.id || !profile.attributes) {
+            return false
+        }
+        return (
+            self.findIndex((p) => p?.id === profile.id) === index &&
+            nameMatchesQuery(profile.attributes.firstName, profile.attributes.lastName, search)
+        )
+    })
+    const { profiles: searchProfiles } = useCommunityProfiles({
+        filters: { search, compactName: true, sort: 'firstName:asc' },
+        pageSize: 15,
+        enabled: search.length > 0,
+    })
+    const threadIds = new Set(threadProfiles.map((profile) => profile.id))
     const mentionProfiles = [
-        { attributes: { profile: { data: currentQuestion?.question?.profile?.data } } },
-        ...replies?.data,
-        ...staffProfiles.nodes
-            .filter((node) => node.squeakId === Number(process.env.GATSBY_AI_PROFILE_ID))
-            .map((node) => ({
+        ...threadProfiles,
+        ...searchProfiles
+            .filter(
+                (profile) =>
+                    !threadIds.has(profile.id) &&
+                    (profile.firstName || profile.lastName) &&
+                    nameMatchesQuery(profile.firstName, profile.lastName, search)
+            )
+            .map((profile) => ({
+                id: profile.id,
                 attributes: {
-                    profile: {
-                        data: {
-                            id: node.squeakId,
-                            attributes: { ...node, avatar: { data: { attributes: { url: node.avatar?.url } } } },
-                        },
-                    },
+                    firstName: profile.firstName,
+                    lastName: profile.lastName,
+                    avatar: { data: { attributes: { url: profile.avatarUrl } } },
                 },
             })),
     ]
-        .map((reply) => reply?.attributes?.profile?.data)
-        .filter((profile, index, self) => {
-            const { firstName, lastName } = profile.attributes
-            const name = [firstName, lastName].filter(Boolean).join(' ')
-            return (
-                profile &&
-                self.findIndex((p) => p?.id === profile.id) === index &&
-                name.toLowerCase().includes(search.toLowerCase())
-            )
-        })
-    const grouped = groupBy(mentionProfiles, (profile) =>
-        staffProfiles.nodes.some((node) => node.squeakId === profile.id) ? 'Staff' : 'In this thread'
-    )
     const listRef = useRef<HTMLUListElement>(null)
     const [focused, setFocused] = useState(0)
 
@@ -193,6 +199,10 @@ const MentionProfiles = ({ onSelect, body, position, ...other }) => {
             window.removeEventListener('keydown', handleKeyDown)
         }
     }, [focused, search])
+
+    if (mentionProfiles.length === 0) {
+        return null
+    }
 
     return (
         <motion.div
