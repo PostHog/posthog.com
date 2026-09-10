@@ -1,0 +1,46 @@
+version: 1
+config:
+    api: https://us.posthog.com
+    team: '2'
+    repo: 96b4669c-4c07-4a47-b040-1c008520c312
+snapshots:
+    blog--desktop:
+        hash: v1.k54649d6d.8b24abb138c8c13b4a3662710b0e834ad56d35193f1f54751c52c80c3440370c.lOjYSbk-EoxNwIqVfoin8P4TDZCQ_kajvjHi3o-OVv4
+    blog--mobile:
+        hash: v1.k54649d6d.611dd3ecd9f46ecbfacdf8f12be90390a054c67d04c8247f0a66b21d6a6dced5.g5Gl9JIzmpW_m44d3yee8xmWMZphd22UPKZ297KUeDA
+    comparison--desktop:
+        hash: v1.k54649d6d.80c1509c51ce80126d556c5524fbc76e9a8069186b850cf962616f3c374064cd.2ttsQL-SnBRCqPEwPYEh2pZ0MJxWHuKN2PyqO_LYUFc
+    comparison--mobile:
+        hash: v1.k54649d6d.1ba2cb7b2e1e1ac7d29516835230a23a3a4a34b89b075aad2e65b13793de14d0.qa8wLZiG3OgbY162Ya8S6jIX121aCNHAf5y9TMhtmd8
+    customers--desktop:
+        hash: v1.k54649d6d.dabd49daccf6764485278487b8fca6bdbe9b36e980aa1fb07a839c8a86abc0f1.fOEhdNXh3MUHDDNFuf0XyBjbxRaDjqZiIKrSUvtANFw
+    customers--mobile:
+        hash: v1.k54649d6d.6681469cf3175e94c6a822524508148b5ac3e919c2425271f42a9b2d5c088a2c.G_jZWoD6q8iEssn9iJ-Wfkab6DbPvlJpwsBECqZh5CQ
+    docs--desktop:
+        hash: v1.k54649d6d.fe3089b14d5dc25502a543cb842cce993003f4414f15ab4d673b06cdbac8648b.T0SV3lqWNnmg7zQ8H5J_vNZq9xVxfng3_3QDcTNnBpQ
+    docs--mobile:
+        hash: v1.k54649d6d.1a5c9e4594cab7aebd0aa4cdd40d236ed64c230ae60fcd372fd5d26de8839a4a.Q3XN5zhJ9yTl0kV-Rh-3nb9TNj8M2uT5flvCayg798E
+    handbook--desktop:
+        hash: v1.k54649d6d.9bd681ac6e887dedcedad8135dcd0b57ecc1fe161fdc92093e6dc89a2ad31808.ZPjpiiYYcFK14WHN5nv22Xd9rU_ufbG0HES_A7N1jio
+    handbook--mobile:
+        hash: v1.k54649d6d.9d47dc3bdcd660a38768387af3ffffc95e3e0ea47d7f901dae3057557ea608f0.jmcqVCzCaUszaHu7P4_QL9iH0k6CmDZRnH0-le8jcXw
+    home--desktop:
+        hash: v1.k54649d6d.80d3340f3aa335eab9eaaddddacbca43f4dbbc88f8067309f471be1e1b646983.6vRdOuFOC5UDcH5K9Z6JYTPfmKWeERuOYiso2LPUqJg
+    home--mobile:
+        hash: v1.k54649d6d.d5cd1600df0fe66fcde06da43ec0aa0654c8cf9419b829380edab0f230a6d72e.OFTREadrNmcRkJaeaQH5Jmg4Cly6ODiCkBRzBElN5VE
+    pricing--desktop:
+        hash: v1.k54649d6d.d00e1a4d288e8d6302fd46d3b8c6676fc0c85bba9d9e1f2c4382590c2977c8d0.CyMf7OGTtdbLUNcTwro4K1_07s7S0IbVz_HWZ1LOxJY
+    pricing--mobile:
+        hash: v1.k54649d6d.12650e1a05e6de2855aac3c32411ebb0fc31779679a8a979425d659620354ec8.AOXgOkNFXHJyBBqy1_Z8s5smotPVsTSANOrprSjZC6I
+    product-analytics--desktop:
+        hash: v1.k54649d6d.c69848067e1def7774380ac0db184c87e06e9e0b4458de56d247bd102d50b6ce.Ax5CnJK1RL5fyJ4mdj0XdqUaCk9kNRaCmRqepQERQR4
+    product-analytics--mobile:
+        hash: v1.k54649d6d.968f0ded2b08a1ce763b780b728397f0443a57d6760c0536dc470f75751347cd.3Th85j309AGE06-xOBgux_XSzsrbYA6nid-Ngo7Evjs
+    session-replay--desktop:
+        hash: v1.k54649d6d.46f21e8913c03b35ed6f246c91b95f09bc2cd282083e34c0465e6fa2ddc8d66a.YoJzZwqbRfOer4QXb5gOdSaXqsQNfi5vJ3AtVdJAsnQ
+    session-replay--mobile:
+        hash: v1.k54649d6d.d2c971b001752eb83c613fb61a26e34445ca7fc2a20102e2190de44c4447ce4b.AVd-dLfA_kJAHmr9HZ-ZKF7y--cjC3hzyJHubQ8ST2I
+    surveys--desktop:
+        hash: v1.k54649d6d.ef6d735c6abd2e58bf66178907bea1785e91e0f9a0bd3f5a2ed3443d6a8f4da8.q-T24nBnZTvYYy2R34CI04K6-YFx65dleebzK0mC7nI
+    surveys--mobile:
+        hash: v1.k54649d6d.08a9842a3b6b983179f7233d684bcd2605c59ba5e53755e2aa93b0faef22f470.m1dYzbPxJJrBs9Qk7753db-_tHeoxlUPbXkUtaDoQhg
