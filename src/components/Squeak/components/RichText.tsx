@@ -238,9 +238,12 @@ const MentionProfiles = ({ onSelect, onClose, body, ...other }) => {
         const candidates = [
             ...threadCandidates.filter(matchesSearch),
             ...(aiCandidate && matchesSearch(aiCandidate) ? [aiCandidate] : []),
-            ...(searchedProfiles
-                .map((profile) => toCandidate({ ...profile, group: profile.isTeamMember ? 'Staff' : 'Community' }))
-                .filter(Boolean) as MentionCandidate[]),
+            // Searched profiles answer the debounced text, so they need re-checking against the typed text
+            ...(
+                searchedProfiles
+                    .map((profile) => toCandidate({ ...profile, group: profile.isTeamMember ? 'Staff' : 'Community' }))
+                    .filter(Boolean) as MentionCandidate[]
+            ).filter(matchesSearch),
         ]
         return candidates.filter((candidate, index, self) => self.findIndex((c) => c.id === candidate.id) === index)
     }, [threadCandidates, aiCandidate, searchedProfiles, search])
@@ -250,9 +253,13 @@ const MentionProfiles = ({ onSelect, onClose, body, ...other }) => {
     const orderedProfiles = groups.flatMap((group) => grouped[group])
     const [focused, setFocused] = useState(0)
 
+    // The rows can change while the count stays the same, from a keystroke or from late results, so
+    // the highlight follows the rows themselves
+    const orderedIds = orderedProfiles.map(({ id }) => id).join()
+
     useEffect(() => {
         setFocused(0)
-    }, [orderedProfiles.length])
+    }, [orderedIds])
 
     useEffect(() => {
         const handleKeyDown = (e: KeyboardEvent) => {
