@@ -6594,6 +6594,12 @@ export const docsMenu = {
                     color: 'yellow',
                 },
                 {
+                    name: 'Materialization troubleshooting',
+                    url: '/docs/data-warehouse/views/materialize-troubleshooting',
+                    icon: 'IconQuestion',
+                    color: 'orange',
+                },
+                {
                     name: 'SQL commands',
                     url: '/docs/data-warehouse/sql',
                     icon: 'IconCode',
