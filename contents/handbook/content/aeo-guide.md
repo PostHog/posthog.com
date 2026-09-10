@@ -16,7 +16,7 @@ It's roughly what SEO is for search results, with a few important differences.
 
 **The mechanics differ too.** Google sends a crawler, builds an index, and ranks pages. An answer engine does that AND generates prose from what it found, which means it can mention us without linking us, link us without mentioning us, or describe us slightly wrong.
 
-So the work we do for AEO is trying to wrangle all those possibilities toward the best case: our content gets crawled, we're mentioned accurately, we get a link back to a relevant page, and that person signs up.
+So the work we do for AEO is trying to wrangle all those possibilities toward the best case scenario: our content gets crawled, we're mentioned accurately, we get a link back to a relevant page, and that person signs up.
 
 ## Why we care about AEO
 
