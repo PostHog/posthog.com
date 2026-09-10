@@ -4,21 +4,21 @@ export const EnableSessionReplayLight = "https://res.cloudinary.com/dmukukwp6/im
 
 PostHog can capture network requests that occur during the browser session, so you can see if your application is sending the expected requests and response, and check the effect of slow network requests or errors on the user experience.
 
-You can enable network recording from your [project settings](https://app.posthog.com/project/settings):
+You can turn on network capture in your [session replay settings](https://app.posthog.com/settings/project-replay#replay-network). Use the **Capture network requests** switch in the **Network capture** section:
 
 <ProductScreenshot
     imageLight={EnableSessionReplayLight} 
     imageDark={EnableSessionReplayDark}
-    alt="Enable network recording in your PostHog" 
+    alt="Turn on network capture in your session replay settings" 
     classes="rounded"
 />
 
-When enabled PostHog always captures:
+When network capture is on, PostHog always captures:
 
-* the network request URL, 
-* [performance information](https://developer.mozilla.org/en-US/docs/Web/API/PerformanceEntry) about the request,
+* the network request URL
+* [performance information](https://developer.mozilla.org/en-US/docs/Web/API/PerformanceEntry) about the request
 
-When request capture is enabled you can also enabled payload and body capture, this includes:
+To capture more than the timings, use the **Header capture** and **Body capture** switches in the **Network headers & payloads** section. These switches add:
 
 * the request method
 * the response code
