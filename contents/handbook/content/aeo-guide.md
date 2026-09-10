@@ -94,7 +94,7 @@ We keep tabs on all four stages, while acknowledging the limitations alongside a
 - How easy our pages are to extract and quote (by using clear headings, front-loaded answers, self-contained sections, etc)
 - How much of a certain topic we cover (depth is an AEO lever; sites with more pages on a topic tend to get cited more on it)
 - Technical hygiene: canonicals, duplicate URLs, redirects
-- Whether our positioning and pricing are clear, accurate and consistent across pages
+- Whether our positioning and pricing are clear, accurate, and consistent across pages
 
 **We don't control:**
 
