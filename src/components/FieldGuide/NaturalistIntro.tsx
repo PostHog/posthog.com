@@ -1,4 +1,5 @@
 import React from 'react'
+import CloudinaryImage from 'components/CloudinaryImage'
 import Link from 'components/Link'
 import { INK, PAPER } from './heroData'
 
@@ -6,7 +7,7 @@ const CORAL = '#E1554E'
 
 export default function NaturalistIntro(): JSX.Element {
     return (
-        <section className="ni">
+        <section className="ni" id="about">
             <div className="ni-inner">
                 <figure className="ni-portrait">
                     <img
@@ -20,23 +21,51 @@ export default function NaturalistIntro(): JSX.Element {
                     </figcaption>
                 </figure>
 
-                <div className="ni-text">
-                    <p className="ni-eyebrow">From the naturalist</p>
-                    <p className="ni-lead">
-                        Watching users used to mean sitting at a single session recording, waiting. Most of the time,
-                        nothing happened.{' '}
-                        <Link to="/replay-vision" state={{ newWindow: true }} className="ni-inline-link">
-                            Replay Vision
-                        </Link>{' '}
-                        changed that. It reviews every session on its own and surfaces the ones worth opening: a
-                        rage-click at checkout, a fourteenth reload of a dead page. What follows is a catalog of the
-                        species it keeps finding. This guide contains the ones we found, and serves to inspire you to
-                        look for them in your own product, or discover entirely new worlds.
-                    </p>
-                    <Link to="/field-guide/foreword" state={{ newWindow: true }} className="ni-link">
-                        Read the full foreword →
+                <h2 className="ni-eyebrow">A note from the naturalist</h2>
+                <p className="ni-p">
+                    There is a particular kind of patience required to watch users. In my early years of fieldwork,
+                    before any of this was possible, I would sit at the edge of a single{' '}
+                    <Link to="/session-replay" state={{ newWindow: true }} className="ni-inline-link">
+                        session recording
+                    </Link>{' '}
+                    and wait. Most yielded nothing. A handful would reveal something so quietly remarkable that it
+                    justified the previous forty hours of nothing in particular. By tradition, the rate of user species
+                    discovery is slow.
+                </p>
+                <p className="ni-p">
+                    Until the nice people of PostHog made{' '}
+                    <Link to="/replay-vision" state={{ newWindow: true }} className="ni-inline-link">
+                        Replay Vision
                     </Link>
-                </div>
+                    . Replay Vision watches every session on a schedule that does not require my presence. It
+                    prioritizes the problems worth surfacing, and it brings the findings to whoever is meant to receive
+                    them. The species are still out there in the field, behaving as they always have. They are simply
+                    being cataloged without me. I no longer wade through the field; I only read the field notes that
+                    come back and make decisions about the next step.
+                </p>
+                <p className="ni-p">
+                    This is, in essence, the same shift that has overtaken the motorcar, now applied to software. The
+                    product{' '}
+                    <Link to="/blog/self-driving-product" state={{ newWindow: true }} className="ni-inline-link">
+                        self-drives
+                    </Link>
+                    , while the human reads the road ahead and decides what direction to take.
+                </p>
+                <p className="ni-p">
+                    The species cataloged here are the ones we have observed often enough to name. There are more,
+                    almost certainly living in your product right now. Replay Vision is still watching. The field guide
+                    that follows is, in effect, a list of things you no longer have to look for yourself. Your job is to
+                    decide what to do about the Rage-Clicker.
+                </p>
+                <p className="ni-sig">– Sir Bartholomew Hogworth, F.R.S. First Edition, 2026</p>
+                <CloudinaryImage
+                    src="https://res.cloudinary.com/dmukukwp6/image/upload/Group_144532_e9e68b845b.png"
+                    alt="The naturalist watching from the long grass"
+                    width={1120}
+                    className="ni-grass"
+                    imgClassName="ni-grass-img"
+                    loading="lazy"
+                />
             </div>
 
             <style>{`
@@ -52,20 +81,33 @@ export default function NaturalistIntro(): JSX.Element {
                     margin: 0 auto;
                     border-top: 1px solid rgba(69, 28, 1, 0.15);
                     padding-top: clamp(2rem, 5cqw, 4rem);
-                    display: grid;
-                    grid-template-columns: minmax(0, 38%) 1fr;
-                    gap: clamp(1.5rem, 5cqw, 4rem);
-                    align-items: center;
                 }
+                /* Closes the page: clears the floated portrait, then sits centred beneath */
+                .ni-grass {
+                    display: block;
+                    clear: both;
+                    width: clamp(280px, 72%, 620px);
+                    margin: clamp(1.5rem, 4cqw, 3rem) auto 0;
+                }
+                .ni-grass-img { display: block; width: 100%; height: auto; }
+                .ni-inner::after {
+                    content: '';
+                    display: block;
+                    clear: both;
+                }
+                /* Floated, not a column: he stands against the opening paragraphs and the
+                   rest of the foreword closes under him at full width */
                 .ni-portrait {
-                    margin: 0;
+                    float: left;
+                    width: clamp(200px, 34%, 330px);
+                    margin: 0.35rem clamp(1.5rem, 4cqw, 2.75rem) 1.25rem 0;
                     display: flex;
                     flex-direction: column;
                     align-items: center;
                     gap: 0.85rem;
                 }
                 .ni-portrait img {
-                    width: clamp(150px, 62%, 240px);
+                    width: 100%;
                     height: auto;
                     filter: drop-shadow(3px 5px 4px rgba(69, 28, 1, 0.25));
                 }
@@ -92,30 +134,24 @@ export default function NaturalistIntro(): JSX.Element {
                     font-family: 'RoundHog', sans-serif;
                     font-weight: 800;
                     text-transform: uppercase;
-                    letter-spacing: 1px;
-                    font-size: 12px;
+                    letter-spacing: 0.8px;
+                    font-size: clamp(20px, 3.2cqw, 28px);
+                    line-height: 1.1;
                     color: ${CORAL};
-                    margin: 0 0 0.85rem;
+                    margin: 0 0 1rem;
                 }
-                .ni-lead {
-                    font-size: clamp(15px, 1.9cqw, 19px);
-                    line-height: 1.6;
-                    margin: 0 0 1.35rem;
+                .ni-p {
+                    font-size: clamp(14px, 1.7cqw, 16px);
+                    line-height: 1.65;
+                    margin: 0 0 1.15rem;
                     color: ${INK};
                 }
-                .ni-link {
-                    display: inline-block;
-                    font-family: 'RoundHog', sans-serif;
-                    font-weight: 800;
-                    text-transform: uppercase;
-                    letter-spacing: 0.6px;
-                    font-size: 12px;
+                .ni-sig {
+                    font-style: italic;
+                    font-size: clamp(13px, 1.5cqw, 15px);
+                    margin: 1.35rem 0 0;
                     color: ${INK};
-                    text-decoration: none;
-                    border-bottom: 2px solid ${CORAL};
-                    padding-bottom: 2px;
                 }
-                .ni-link:hover { color: ${CORAL}; }
                 .ni-inline-link {
                     color: ${INK};
                     font-weight: 600;
@@ -125,7 +161,11 @@ export default function NaturalistIntro(): JSX.Element {
                 }
                 .ni-inline-link:hover { color: ${CORAL}; }
                 @container (max-width: 640px) {
-                    .ni-inner { grid-template-columns: 1fr; justify-items: center; text-align: center; }
+                    .ni-portrait {
+                        float: none;
+                        width: clamp(170px, 58%, 250px);
+                        margin: 0 auto 1.5rem;
+                    }
                 }
             `}</style>
         </section>

@@ -3,17 +3,50 @@ import SEO from 'components/seo'
 import ReaderView from 'components/ReaderView'
 import Hero from 'components/FieldGuide/Hero'
 import NaturalistIntro from 'components/FieldGuide/NaturalistIntro'
-import HowToUse from 'components/FieldGuide/HowToUse'
+import GuideBody from 'components/FieldGuide/GuideBody'
 import TableOfContents from 'components/FieldGuide/TableOfContents'
 
 export default function FieldGuide(): JSX.Element {
-    // Scroll to an in-page section when linked via /field-guide#<id> (from the TOC).
+    // Scroll to an in-page section when linked via /field-guide#<id> (from the TOC, or
+    // from a species entry's "Back to the map"). The plate and the hogs load late and
+    // push the target down, so one scroll lands short: keep re-aligning until the
+    // anchor settles at the top, and give way the moment the reader scrolls themselves.
     React.useEffect(() => {
         if (typeof window === 'undefined' || !window.location.hash) return
         const id = window.location.hash.slice(1)
-        const scroll = () => document.getElementById(id)?.scrollIntoView({ behavior: 'smooth', block: 'start' })
-        const t = setTimeout(scroll, 350)
-        return () => clearTimeout(t)
+        let timer: ReturnType<typeof setTimeout>
+        let waited = 0
+        let ticks = 0
+        let settled = 0
+        const stop = () => {
+            clearTimeout(timer)
+            window.removeEventListener('wheel', stop)
+            window.removeEventListener('touchmove', stop)
+        }
+        const align = () => {
+            const el = document.getElementById(id)
+            // The section may not have mounted yet, so wait for it rather than racing a
+            // fixed delay — a one-shot scroll lands at the top of the page instead.
+            if (!el) {
+                if (++waited < 250) timer = setTimeout(align, 120)
+                else stop()
+                return
+            }
+            if (Math.abs(el.getBoundingClientRect().top) > 4) {
+                el.scrollIntoView({ block: 'start' })
+                settled = 0
+            } else {
+                settled++
+            }
+            // Then hold it there until the art below stops shifting it. On a settled page
+            // this exits in under half a second.
+            if (settled < 3 && ++ticks < 60) timer = setTimeout(align, 120)
+            else stop()
+        }
+        window.addEventListener('wheel', stop, { passive: true })
+        window.addEventListener('touchmove', stop, { passive: true })
+        timer = setTimeout(align, 100)
+        return stop
     }, [])
 
     return (
@@ -33,8 +66,8 @@ export default function FieldGuide(): JSX.Element {
                 contentMaxWidthClass="max-w-none"
             >
                 <Hero />
+                <GuideBody />
                 <NaturalistIntro />
-                <HowToUse />
             </ReaderView>
         </>
     )

@@ -8,15 +8,12 @@ const CORAL = '#E1554E'
 // sidebars use, so hover, spacing, icons, and the active state all match the site.
 const NAV = [
     { name: 'The Field Guide', url: '/field-guide' }, // guide home
-    { name: 'Foreword', url: '/field-guide/foreword' },
-    { name: 'How to use this guide', url: '/field-guide#how-to-use' },
     {
         name: 'The species',
         url: '/field-guide#the-species',
-        defaultOpen: true,
         children: ALL_SPECIES.map((s) => ({ name: s.name, url: s.route })),
     },
-    { name: 'Closing note', url: '/field-guide/closing-note' },
+    { name: 'A note from the naturalist', url: '/field-guide#about' },
 ]
 
 export default function TableOfContents(): JSX.Element {

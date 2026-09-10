@@ -45,6 +45,7 @@ export default function Hero(): JSX.Element {
                     text-decoration-thickness: 1px;
                 }
                 .fg-subtitle-link:hover { color: #E1554E; }
+
             `}</style>
         </div>
     )

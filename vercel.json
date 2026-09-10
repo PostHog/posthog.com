@@ -221,6 +221,16 @@
     ],
     "redirects": [
         {
+            "source": "/field-guide/foreword",
+            "destination": "/field-guide#about",
+            "statusCode": 301
+        },
+        {
+            "source": "/field-guide/closing-note",
+            "destination": "/field-guide",
+            "statusCode": 301
+        },
+        {
             "source": "/docs/session-replay/image-bot:ext(\\.md)?",
             "destination": "/docs/ai-research/image-fetcher-bot:ext?",
             "statusCode": 301

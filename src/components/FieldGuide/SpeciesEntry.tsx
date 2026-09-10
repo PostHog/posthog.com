@@ -102,6 +102,9 @@ export default function SpeciesEntry({ species }: { species: Species }): JSX.Ele
                         <Plate label="Plate II" src={species.plateII} alt={`${species.name} — Plate II`} />
                     </div>
                     <div className="se-text">
+                        <Link to="/field-guide#the-species" className="se-back">
+                            ← Back to the map
+                        </Link>
                         <h1 className="se-name">{species.name}</h1>
                         <p className="se-latin">{species.latin}</p>
                         {species.sections.map((s) => (
@@ -180,6 +183,19 @@ export default function SpeciesEntry({ species }: { species: Species }): JSX.Ele
                         color: rgba(69, 28, 1, 0.55);
                     }
                     .se-text { max-width: 62ch; }
+                    .se-back {
+                        display: inline-block;
+                        margin-bottom: 0.85rem;
+                        font-family: 'RoundHog', sans-serif;
+                        font-weight: 800;
+                        text-transform: uppercase;
+                        letter-spacing: 0.6px;
+                        font-size: 11px;
+                        color: ${INK};
+                        opacity: 0.65;
+                        text-decoration: none;
+                    }
+                    .se-back:hover { opacity: 1; color: ${CORAL}; }
                     .se-name {
                         font-family: 'RoundHog', sans-serif;
                         font-weight: 800;
