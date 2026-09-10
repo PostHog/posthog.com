@@ -91,7 +91,7 @@ const buttons = [
 
 type MentionCandidate = {
     id: number
-    firstName: string
+    mentionSlug: string
     name: string
     avatarUrl?: string
     group: (typeof MENTION_GROUPS)[number]
@@ -149,7 +149,9 @@ const MentionProfile = ({
     )
 }
 
-// Mention syntax is built from the first name, so a profile without one can never be mentioned
+// Markdown.tsx only links a mention that reads @<slug>/<id>, where the slug is [a-zA-Z0-9_-]+, so
+// the first name has to be slugified and a profile whose name leaves nothing behind can never be
+// mentioned
 const toCandidate = ({
     id,
     firstName,
@@ -162,16 +164,18 @@ const toCandidate = ({
     lastName?: string | null
     avatarUrl?: string | null
     group: MentionCandidate['group']
-}): MentionCandidate | null =>
-    firstName
+}): MentionCandidate | null => {
+    const mentionSlug = firstName ? slugify(firstName, { lower: true, strict: true, replacement: '_' }) : ''
+    return mentionSlug
         ? {
               id,
-              firstName,
+              mentionSlug,
               name: [firstName, lastName].filter(Boolean).join(' '),
               avatarUrl: avatarUrl || undefined,
               group,
           }
         : null
+}
 
 const MentionProfiles = ({ onSelect, onClose, body, ...other }) => {
     const { staffProfiles } = useStaticQuery(graphql`
@@ -468,9 +472,7 @@ export default function RichText({
     const handleProfileSelect = (profile, selectionStart) => {
         const { selectionEnd } = getTextSelection()
         const mention =
-            profile.id === Number(process.env.GATSBY_AI_PROFILE_ID)
-                ? `@max `
-                : `@${profile.firstName.trim().toLowerCase().replace(' ', '_')}/${profile.id} `
+            profile.id === Number(process.env.GATSBY_AI_PROFILE_ID) ? `@max ` : `@${profile.mentionSlug}/${profile.id} `
         setValue((prevValue) => replaceSelection(selectionStart, selectionEnd, mention, prevValue))
         setShowMentionProfiles(false)
         posthog?.capture('community mention selected', {
