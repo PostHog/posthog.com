@@ -10,11 +10,12 @@ import { isURL } from 'lib/utils'
 import { CurrentQuestionContext } from './Question'
 import Avatar from './Avatar'
 import { AnimatePresence, motion } from 'framer-motion'
-import { IconFeatures, IconImage, IconX } from '@posthog/icons'
+import { IconFeatures, IconImage } from '@posthog/icons'
 import { graphql, useStaticQuery } from 'gatsby'
 import groupBy from 'lodash.groupby'
 import OSTextarea from 'components/OSForm/textarea'
 import OSButton from 'components/OSButton'
+import getCaretCoordinates from 'textarea-caret'
 
 const buttons = [
     {
@@ -92,7 +93,7 @@ const MentionProfile = ({ profile, onSelect, selectionStart, index, focused }) =
     const isAI = profile.id === Number(process.env.GATSBY_AI_PROFILE_ID)
 
     return (
-        <li className="border-b border-input p-1">
+        <li className="border-b border-input p-1 last:border-b-0">
             <OSButton
                 onClick={() => onSelect?.(profile, selectionStart)}
                 type="button"
@@ -119,7 +120,7 @@ const MentionProfile = ({ profile, onSelect, selectionStart, index, focused }) =
     )
 }
 
-const MentionProfiles = ({ onSelect, onClose, body, ...other }) => {
+const MentionProfiles = ({ onSelect, body, position, ...other }) => {
     const { staffProfiles } = useStaticQuery(graphql`
         {
             staffProfiles: allSqueakProfile(sort: { fields: firstName }) {
@@ -195,22 +196,15 @@ const MentionProfiles = ({ onSelect, onClose, body, ...other }) => {
 
     return (
         <motion.div
-            initial={{ opacity: 0, translateX: '100%' }}
-            animate={{ opacity: 1, translateX: 0, transition: { type: 'tween', duration: 0.1 } }}
-            exit={{ opacity: 0, translateX: '100%' }}
-            className="w-[200px] h-full absolute right-0 top-0 z-50 pt-2.5 pr-2.5"
+            initial={{ opacity: 0, y: 4 }}
+            animate={{ opacity: 1, y: 0, transition: { type: 'tween', duration: 0.1 } }}
+            exit={{ opacity: 0, y: 4 }}
+            className="w-[200px] absolute z-50"
+            style={position}
         >
-            <OSButton
-                type="button"
-                variant="default"
-                size="xs"
-                icon={<IconX className="w-3" />}
-                className="!p-1 rounded-full absolute top-0.5 right-0.5 z-20"
-                onClick={onClose}
-            />
             <ul
                 ref={listRef}
-                className="m-0 p-0 list-none border border-input bg-light dark:bg-dark h-full rounded-md overflow-auto"
+                className="m-0 p-0 list-none border border-input bg-light dark:bg-dark max-h-60 rounded-md overflow-auto"
             >
                 {mentionProfiles.map((profile, index) => (
                     <MentionProfile
@@ -247,7 +241,9 @@ export default function RichText({
     const [imageLoading, setImageLoading] = useState(false)
     const [showPreview, setShowPreview] = useState(false)
     const [showMentionProfiles, setShowMentionProfiles] = useState(false)
+    const [mentionPos, setMentionPos] = useState<{ top: number; left: number } | null>(null)
     const mentionProfilesRef = useRef<HTMLDivElement>(null)
+    const mentionContainerRef = useRef<HTMLDivElement>(null)
 
     const onDrop = useCallback(
         async (acceptedFiles) => {
@@ -346,6 +342,17 @@ export default function RichText({
             onSubmit()
         }
         if (e.key === '@' && e.shiftKey) {
+            const el = textarea.current
+            const container = mentionContainerRef.current
+            if (el && container) {
+                const caret = getCaretCoordinates(el, el.selectionStart)
+                const elRect = el.getBoundingClientRect()
+                const containerRect = container.getBoundingClientRect()
+                setMentionPos({
+                    top: caret.top + caret.height + elRect.top - containerRect.top,
+                    left: caret.left + elRect.left - containerRect.left,
+                })
+            }
             setShowMentionProfiles(true)
         }
     }
@@ -491,7 +498,7 @@ export default function RichText({
                         </Markdown>
                     </div>
                 ) : (
-                    <div className="relative border border-primary border-t-0 rounded-b">
+                    <div ref={mentionContainerRef} className="relative border border-primary border-t-0 rounded-b">
                         {mentions && (
                             <AnimatePresence>
                                 {showMentionProfiles && (
@@ -499,10 +506,7 @@ export default function RichText({
                                         <MentionProfiles
                                             body={value}
                                             selectionStart={textarea.current?.selectionStart}
-                                            onClose={() => {
-                                                setShowMentionProfiles(false)
-                                                textarea.current?.focus()
-                                            }}
+                                            position={mentionPos}
                                             onSelect={handleProfileSelect}
                                         />
                                     </div>
