@@ -10,4 +10,10 @@ availability:
 
 import OptimalQueries from '../_snippets/optimal-queries.mdx'
 
+<CalloutBox icon="IconWarning" type="caution" title="Hourly read limit on API queries">
+
+Since September 9, 2026, queries made with a personal API key draw from an hourly read budget per project. The budget refills at 20 GB per hour for projects on the free plan and 200 GB per hour for projects in an organization with a paid plan, and unused budget accumulates for up to 24 hours (480 GB and 4.8 TB). A query is never cut off partway: the one that exhausts the budget completes, and further API queries return a `429` with a `Retry-After` header until enough budget refills, at most an hour later. Each response carries `X-PostHog-Query-Bytes-Read` and `X-PostHog-Query-Budget-Remaining-Bytes` so you can see what a query cost. Queries run in the PostHog app are not affected. The advice below reduces the bytes a query reads.
+
+</CalloutBox>
+
 <OptimalQueries />
