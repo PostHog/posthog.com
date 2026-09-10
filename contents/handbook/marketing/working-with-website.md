@@ -4,7 +4,7 @@ sidebar: Handbook
 showTitle: true
 ---
 
-The website is owned by <TeamMember name="Cory Watilo" /> and <TeamMember name="Eli Kinsey" />. For general questions or quick updates, the best place to start is the `#posthogdotcom` Slack channel.
+The website is owned by <TeamMember name="Eli Kinsey" /> and <TeamMember name="Ian Matson" />. For general questions or quick updates, the best place to start is the `#posthogdotcom` Slack channel.
 
 For most pieces of work, like blog posts and copy updates, you can ship without needing a review from the website team. However, for larger pieces of work — a new product page, a significant copy overhaul, a new landing page — there's a more structured process to follow.
 
