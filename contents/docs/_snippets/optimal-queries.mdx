@@ -239,7 +239,7 @@ FROM ca_events
 Reading a property decodes the whole `properties` value for every row the query touches. A `WHERE` condition runs after that decode, even when it sits inside the subquery that does the scan. If you can express a selective filter on a real column of the `events` table, put it in `PREWHERE` so only matching rows are decoded.
 
 ```sql
--- ❌ Decodes properties for every event in the range, then filters
+-- Slow: decodes properties for every event in the range, then filters
 WITH cohort AS (
     SELECT DISTINCT $group_0 AS org FROM events
     WHERE event = 'signed up' AND timestamp >= now() - INTERVAL 7 DAY
@@ -254,7 +254,7 @@ SELECT plan, count() FROM plans
 WHERE org IN (SELECT org FROM cohort)
 GROUP BY plan
 
--- ✅ Decodes properties only for events from the cohort
+-- Fast: decodes properties only for events from the cohort
 WITH cohort AS (
     SELECT DISTINCT $group_0 AS org FROM events
     WHERE event = 'signed up' AND timestamp >= now() - INTERVAL 7 DAY
@@ -269,7 +269,31 @@ plans AS (
 SELECT plan, count() FROM plans GROUP BY plan
 ```
 
-### 5. Name your queries for easier debugging
+### 5. Look up people in the `persons` table, not through `events`
+
+Every event carries its person's properties, so it is tempting to fetch one person by filtering `events`. Without a time range, that scans the person's entire event history to return a single row, and a backend that does it per request can read petabytes a day.
+
+```sql
+-- Slow: scans every event the person ever sent
+SELECT any(person.properties) AS properties
+FROM events
+WHERE person.id = '<person_id>'
+
+-- Fast: reads one row from persons
+SELECT properties
+FROM persons
+WHERE id = '<person_id>'
+```
+
+If you have a distinct ID instead of a person ID, resolve it through `person_distinct_ids` and keep the filter on `persons.id`:
+
+```sql
+SELECT properties
+FROM persons
+WHERE id IN (SELECT person_id FROM person_distinct_ids WHERE distinct_id = '<distinct_id>')
+```
+
+### 6. Name your queries for easier debugging
 
 Always provide a meaningful `name` parameter for your queries. This helps you:
 
@@ -290,7 +314,7 @@ Bad names are generic and vague:
 - `test`
 - `data`
 
-### 6. Use keyset pagination instead of OFFSET
+### 7. Use keyset pagination instead of OFFSET
 
 `OFFSET` pagination is **not supported** for programmatic requests on `/query` and is currently rejected with HTTP 400 for personal API keys. If you're paginating to export data, **stop and use [batch exports](/docs/cdp/batch-exports) instead** – `/query` is not a supported export path.
 
@@ -306,6 +330,6 @@ SELECT * FROM events WHERE timestamp > '2024-01-01 12:34:56.789'
 ORDER BY timestamp LIMIT 1000;
 ```
 
-### 7. Other SQL optimizations
+### 8. Other SQL optimizations
 
-Options 1-6 make the most difference, but other generic SQL optimizations work too. See our [SQL docs](/docs/data-warehouse/sql) for commands, useful functions, and more to help you with this.
+Options 1-7 make the most difference, but other generic SQL optimizations work too. See our [SQL docs](/docs/data-warehouse/sql) for commands, useful functions, and more to help you with this.
