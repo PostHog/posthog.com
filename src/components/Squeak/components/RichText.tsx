@@ -101,11 +101,13 @@ const nameMatchesQuery = (first: string | null | undefined, last: string | null 
     )
 }
 
+const isModProfile = (profile) => profile.attributes?.isTeamMember || !!profile.attributes?.startDate
+
 const MentionProfile = ({ profile, onSelect, selectionStart, index, focused }) => {
-    const { firstName, lastName, avatar, gravatarURL, startDate, isTeamMember } = profile.attributes
+    const { firstName, lastName, avatar, gravatarURL } = profile.attributes
     const name = [firstName, lastName].filter(Boolean).join(' ')
     const isAI = profile.id === Number(process.env.GATSBY_AI_PROFILE_ID)
-    const isMod = isTeamMember || !!startDate
+    const isMod = isModProfile(profile)
 
     return (
         <li className="border-b border-input p-1 last:border-b-0">
@@ -181,7 +183,7 @@ const MentionProfiles = ({ onSelect, body, position, ...other }) => {
                     isTeamMember: profile.isTeamMember,
                 },
             })),
-    ]
+    ].sort((a, b) => Number(isModProfile(b)) - Number(isModProfile(a)))
     const listRef = useRef<HTMLUListElement>(null)
     const [focused, setFocused] = useState(0)
 
