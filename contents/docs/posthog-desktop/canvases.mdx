@@ -2,9 +2,9 @@
 title: Canvases
 ---
 
-A canvas is an interactive app that an agent builds around your PostHog data. Use one when a question or a workflow needs more than an insight or a dashboard.
+A canvas is an interactive app that an agent builds around your PostHog data. They can be disposable (one time use), durable (something you come back to), or as a dynamic visualization tool for when a question or a workflow needs more than a static dashboard. 
 
-You describe the outcome. The agent writes the interface and the queries, then publishes the canvas to a [space](/docs/posthog-desktop/spaces). The canvas runs inside PostHog against live project data, so your team opens the same working app instead of a screenshot or an export.
+You describe the outcome. The agent writes the interface and the queries, then publishes the canvas to a [space](/docs/posthog-desktop/spaces). The canvas runs inside PostHog against live project data, so your team opens the same working app instead of a screenshot or an export. Canvases can combine saved insights with new queries, add filters and date controls, remember shared state, capture events, and offer approved actions.
 
 <ProductScreenshot
 imageLight="/images/docs/posthog-desktop/canvas.png"
@@ -14,18 +14,16 @@ alt="Interactive canvas for exploring compute pricing"
 
 ## When to use a canvas
 
-Use a canvas when the answer is easier to look at than to read, or when a team must act on it together. For example:
+Dashboards and notebooks in PostHog Web still do their jobs, and the PostHog MCP is still the fastest way to pull data into an agent chat. A canvas is for when the view needs its own layout, controls, or workflow, when the answer is visualize to see than to read, or a team needs to act on it together.
 
-- Put adoption, errors, support volume, and open pull requests for one release in a single view
-- Give a support team one page that explains an account before they reply
-- Replace a report that you rebuild by hand every week
-- Add filters, controls, or logic that an insight cannot express
-- Combine data with an action, so an owner can mark a problem as reviewed
-- Write a document, a deck, or a checklist that reads live data
+Ask the agent for a canvas when you want to do things like:
 
-A canvas does not replace insights and dashboards. Save an insight when you need one chart, and build a dashboard when a set of charts is enough. Use a canvas when the view needs its own layout, controls, or workflow.
+- Build a doc, deck, or checklist that pulls in live data
+- Add filters, controls, or logic an insight can't express
+- Combine context from multiple tools and external sources into one view
+- Pair data with an action, like letting an owner mark a problem as reviewed
 
-### What a canvas cannot do
+### What a canvas can't do
 
 A canvas is a sandboxed browser app, not a hosted service. These limits apply to every canvas.
 
@@ -33,16 +31,15 @@ A canvas is a sandboxed browser app, not a hosted service. These limits apply to
 |---|---|
 | Sandboxed page | The canvas runs in a sandbox inside PostHog. It reaches an external address only when it declares that address first, and the edit preview blocks all direct requests. |
 | No backend | The canvas has no server of its own. It cannot store data outside PostHog, and it cannot authenticate viewers itself. |
-| Project data only | The canvas reads the PostHog project selected in Desktop. To use data from another system, connect that system as a [data warehouse source](/docs/data-warehouse) first. |
+| Project data only | The canvas reads the PostHog project selected in Desktop. To use data from another system, connect that system as a [data warehouse source](/docs/data-warehouse) or MCP cserver in Desktop settings. |
 | One app per canvas | A canvas is a single app with no separate pages or addresses. The agent uses sections in one view instead of many pages. |
 
-For a tool that needs a backend, its own database, or public access, build and deploy the tool yourself.
 
 ## Build a canvas
 
-Open a space, select **Canvases**, then describe what you need. You can also ask for a canvas in any agent session, or from a [self-driving report](/docs/posthog-desktop/self-driving). The agent builds the first version against the PostHog project selected in Desktop and files the canvas in the space you work in.
+Open a space in PostHog Desktop, start a new session, then describe what you need. You can also ask for a canvas in any active agent session, or from a [self-driving report](/docs/posthog-desktop/self-driving).
 
-A useful first prompt names:
+A useful first prompt includes:
 
 - The question or the workflow the canvas supports
 - Who uses it
@@ -50,19 +47,11 @@ A useful first prompt names:
 - The filters and the controls people need
 - Any action a viewer can take
 
-Start with the smallest useful version:
-
 ```text
 Build a canvas that shows weekly signups, activation rate, and the top five
 referrers for the last 90 days. Use our saved insights where they exist, and
-add a date picker at the top.
-```
-
-Confirm that the first version answers the main question, then ask for one more data source or control:
-
-```text
-Add a breakdown by plan below the activation chart, and compare each number
-with the previous period.
+add a date picker at the top. Add a breakdown by plan below the activation chart, 
+and compare each number with the previous period.
 ```
 
 ## What you can build
@@ -129,8 +118,6 @@ for growth by product, and one for churn risk. Pull every number from our
 saved insights, and add speaker notes under each slide.
 ```
 
-Here are some canvases that people at PostHog built:
-
 <div className="@container">
 
 <div className="grid grid-cols-1 gap-x-4 @lg:grid-cols-2">
@@ -159,13 +146,13 @@ classes="rounded"
 <ProductScreenshot
 imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/canvas_andy_v_newsletter_light_04ff7db603.png"
 imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/canvas_andy_v_newsletter_dark_bea6ed2447.png"
-alt="A newsletter draft written and edited inside a canvas"
+alt="An analysis of our newsletter rebrand from Proudct for Engineers to Build Mode"
 classes="rounded"
 />
 
 <ProductScreenshot
 imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/canvas_harley_slide_deck_2_992e7d6636.png"
-alt="A slide deck built as a canvas"
+alt="A slide deck with live data"
 classes="rounded"
 />
 
@@ -182,21 +169,7 @@ classes="rounded"
 
 ## Improve a canvas
 
-Comment on the whole canvas, or select a part of it before you leave feedback. The agent uses the canvas, its source, and your comment as context for the next version. Teammates in a shared space can comment too, and they can mention the agent in the thread.
-
-Describe the behavior you want, not the implementation:
-
-```text
-Keep the summary visible when I change the date range. Add a comparison with
-the previous period, and explain the largest change.
-```
-
-To correct a number instead of the layout, point at the number and name the source you trust:
-
-```text
-The activation number does not match our saved insight. Use the saved insight
-"Weekly activation" for that card, and link to it from the card.
-```
+Click **Edit** on a canvas to open the original agent session and continue prompting changes. You can also edit a canvas any another agent chat simply by referring to the canvas name or link. Teammates in a shared space can comment on specific elements of a canvas by double clicking an element, which can then be used to prompt the agent in the thread.
 
 Each build creates a version. Compare versions to review what changed, and restore an earlier version when a revision does not work.
 
@@ -208,13 +181,8 @@ Select **Copy link** to get an HTTPS link. The link opens the canvas in PostHog 
 
 ## Data and actions
 
-A canvas uses the PostHog project selected in Desktop. It can read the same project data as the agent, including saved insights and supported PostHog products.
+Canvases use the PostHog project selected in Desktop. They can query the same project data available to the agent, including saved insights and supported PostHog products.
 
 Each canvas declares the data and the actions that it needs, and PostHog limits the canvas to that list. Review the request when an agent builds or updates a canvas, especially when the canvas can capture events or change data.
-
-- **Reads** come from your saved insights first, and from queries against the selected project when no insight exists. Every figure links to its insight or shows the query that produced it, so you can check it in PostHog.
-- **Memory** belongs to the canvas. A private value is visible only to you. A shared value is one value for the whole team, so a checklist keeps the same state for everyone who opens it.
-- **Actions** run with the permissions of the person who uses them, and only after that person selects a control. An action is a real write in PostHog.
-- **Events** that a canvas captures arrive in the selected project, so you can measure how your team uses the canvas.
 
 See [PostHog integration](/docs/posthog-desktop/posthog-integration) for project selection and data access. See [Spaces](/docs/posthog-desktop/spaces) for shared context and collaboration.
