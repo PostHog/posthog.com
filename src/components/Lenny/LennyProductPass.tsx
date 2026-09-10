@@ -104,22 +104,22 @@ const jobs: {
     {
         bg: 'bg-creamsicle',
         rotate: 'rotate-1',
-        title: 'A product that watches itself',
-        copy: 'PostHog spots what broke and what to fix before you go looking.',
+        title: 'Support your users',
+        copy: 'Reply to tickets, run surveys, and track cost and quality of your AI features.',
         tools: [
-            { Icon: IconWarning, name: 'Error tracking', slug: 'error-tracking' },
-            { Icon: IconSparkles, name: 'PostHog AI', slug: 'ai' },
-            { Icon: IconPullRequest, name: 'Self-driving', slug: 'self-driving' },
+            { Icon: IconMessage, name: 'Surveys', slug: 'surveys' },
+            { Icon: IconSparkles, name: 'Support', slug: 'support' },
+            { Icon: IconPullRequest, name: 'AI observability, slug: 'ai-observability' },
         ],
     },
     {
         bg: 'bg-pale-blue',
         rotate: '-rotate-2',
-        title: 'One place for (not just) product data',
-        copy: 'Your product data and everything else, finally in the same query.',
+        title: 'Do more with your data',
+        copy: 'Sync revenue, CRM, and support data and analyze it all together.',
         tools: [
+            { Icon: IconSparkles, name: 'PostHog AI', slug: 'ai' },
             { Icon: IconDatabase, name: 'Data warehouse', slug: 'data-warehouse' },
-            { Icon: IconServer, name: 'Endpoints', slug: 'endpoints' },
             { Icon: IconStack, name: 'CDP', slug: 'cdp' },
         ],
     },
@@ -326,11 +326,11 @@ const faqItems = [
         ),
     },
     {
-        trigger: 'Do I need a PostHog account first?',
+        trigger: 'Do I need a PostHog account?',
         content: (
             <p>
-                No. The claim link handles it either way — log in and you'll land straight on the claim page, or create
-                an account and you'll be redirected there once you're verified. Onboarding picks up right after.
+                Yes. Log in and you'll land straight on the claim page, or create an account and you'll be redirected there once you're verified. 
+                Onboarding picks up right after.
             </p>
         ),
     },
@@ -338,8 +338,17 @@ const faqItems = [
         trigger: 'Who is eligible?',
         content: (
             <p>
-                Active annual subscribers to Lenny's Newsletter who are new to PostHog — meaning no paid invoices before
-                December 1, 2025 — with an active paid PostHog subscription.
+                Active annual subscribers to Lenny's Newsletter who are either new or existing users of PostHog with and paid subscription that have had no paid invoices before
+                December 1, 2025.
+            </p>
+        ),
+    },
+     {
+        trigger: 'What counts as a "new customer"?',
+        content: (
+            <p>
+                No paid PostHog invoices before December 1, 2025. Time spent on the free tier doesn't count against you
+                — plenty of people run on free for a long while before they ever pay us.
             </p>
         ),
     },
@@ -349,15 +358,6 @@ const faqItems = [
             <p>
                 The special plans and features run for 12 months from the day you redeem, then we switch you back to the
                 default paid plans. Nothing you built goes away.
-            </p>
-        ),
-    },
-    {
-        trigger: 'What counts as a "new customer"?',
-        content: (
-            <p>
-                No paid PostHog invoices before December 1, 2025. Time spent on the free tier doesn't count against you
-                — plenty of people run on free for a long while before they ever pay us.
             </p>
         ),
     },
@@ -466,7 +466,7 @@ export default function LennyProductPass(): JSX.Element {
                     <div className="m-4 @3xl:m-8 max-w-6xl">
                         <h2 className="mb-2">Every tool a product leader needs, in one place</h2>
                         <p className="mb-6 max-w-3xl">
-                            Having all your product data in one place means you can make more informed decisions.
+                            See how it all connects, then decide what's next.
                         </p>
                         <div className="not-prose grid grid-cols-1 @xl:grid-cols-2 @4xl:grid-cols-4 gap-4 @3xl:gap-6">
                             {jobs.map(({ bg, rotate, title, copy, tools }) => (
