@@ -115,7 +115,7 @@ const jobs: {
     {
         bg: 'bg-pale-blue',
         rotate: '-rotate-2',
-        title: 'One place for product data',
+        title: 'One place for (not just) product data',
         copy: 'Your product data and everything else, finally in the same query.',
         tools: [
             { Icon: IconDatabase, name: 'Data warehouse', slug: 'data-warehouse' },
@@ -169,7 +169,15 @@ const claimSteps: { title: string; copy: React.ReactNode }[] = [
     },
     {
         title: 'Sign in or sign up',
-        copy: 'The claim link sorts this out for you, new account or not.',
+        copy: (
+            <>
+                The claim link sorts this out for you, new account or not.
+                <Link to={claimUrl} externalNoIcon className="font-semibold underline">
+                    Take me there
+                </Link>
+                .
+            </>
+        ),
     },
     {
         title: 'Redeem and build',
@@ -231,10 +239,9 @@ function NewsletterSection(): JSX.Element {
 
     return (
         <div className="m-4 @3xl:m-8 max-w-6xl border-t border-primary pt-8">
-            <h2 className="mb-2">While you're here, we write one too</h2>
+            <h2 className="mb-2">If you're subscribed to Lenny, welcome to Build Mode</h2>
             <p className="mb-6 max-w-3xl">
-                Product for Engineers goes out to 75,000+ founders and builders. Same reason you read Lenny: specifics
-                over platitudes.
+                With 80,000+ readers, we focus on weekly posts with tools, tactics, and taste for product builders
             </p>
             <div className="relative mb-6 not-prose">
                 <div
@@ -297,6 +304,7 @@ function NewsletterSection(): JSX.Element {
                 size="md"
                 icon={<IconArrowRight />}
                 iconPosition="right"
+                className="text-red dark:text-yellow"
             >
                 Subscribe free
             </OSButton>
@@ -438,14 +446,14 @@ export default function LennyProductPass(): JSX.Element {
                                 <p className="mb-4 max-w-2xl">
                                     Annual subscribers to Lenny's Newsletter get{' '}
                                     <strong>PostHog Scale free for 12 months</strong> and{' '}
-                                    <strong>double the free tier</strong> on every product. A $16,500 value, and the
+                                    <strong>double the free tier</strong> on every product. This is a $16,500 value, and the
                                     first deal like it we've ever done.
                                 </p>
                                 <OSButton asLink to={claimUrl} variant="primary" size="md" external>
                                     Claim your offer
                                 </OSButton>
                                 <p className="italic text-sm mt-2 mb-0 text-secondary">
-                                    Your code comes from{' '}
+                                    Your unique code comes from{' '}
                                     <Link to={productPassUrl} externalNoIcon className="font-semibold">
                                         Lenny's Product Pass
                                     </Link>
@@ -458,7 +466,7 @@ export default function LennyProductPass(): JSX.Element {
                     <div className="m-4 @3xl:m-8 max-w-6xl">
                         <h2 className="mb-2">Every tool a product leader needs, in one place</h2>
                         <p className="mb-6 max-w-3xl">
-                            No stitching six vendors together, and no arguing about whose numbers are right.
+                            Having all your product data in one place means you can make more informed decisions.
                         </p>
                         <div className="not-prose grid grid-cols-1 @xl:grid-cols-2 @4xl:grid-cols-4 gap-4 @3xl:gap-6">
                             {jobs.map(({ bg, rotate, title, copy, tools }) => (
@@ -490,11 +498,10 @@ export default function LennyProductPass(): JSX.Element {
                             We're here to help make your product <Highlight>self-driving</Highlight>
                         </h2>
                         <p className="mb-3 max-w-3xl">
-                            Literally every piece of software that a product engineer needs. This includes agents and
-                            tools for building products, talking to customers, and making sense of all your customer
-                            data.
+                            PostHog instruments your codebase, then combines that context 
+                            with product data like analytics events, errors, and recordings 
+                            to understand problems and propose fixes.
                         </p>
-                        <p className="mb-6 max-w-3xl">PostHog is a single platform for people who build things.</p>
                         <div className="not-prose grid @2xl:grid-cols-2 gap-4">
                             {selfDrivingCapabilities.map(({ Icon, color, title, copy }) => (
                                 <div key={title} className="border border-primary rounded-md p-4 bg-primary">
@@ -510,10 +517,10 @@ export default function LennyProductPass(): JSX.Element {
                             <Link
                                 to="/self-driving"
                                 state={{ newWindow: true }}
-                                className="inline-flex items-center gap-1.5 font-semibold text-red dark:text-yellow"
+                                className="inline-flex items-center gap-1.5 font-semibold text-red dark:text-yellow text-sm"
                             >
                                 See how self-driving works
-                                <IconArrowRight className="size-4" />
+                                <IconArrowRight className="size-3" />
                             </Link>
                         </p>
                     </div>
@@ -531,7 +538,7 @@ export default function LennyProductPass(): JSX.Element {
                                     How to claim it, <Highlight>around the campfire</Highlight>
                                 </h2>
                                 <p className="mb-6 max-w-3xl">
-                                    Three steps, and the middle one is quick if you already have an account.
+                                    Three steps, and then you're off to the races with your Lenny pass for PostHog.
                                 </p>
                                 <div className="not-prose grid grid-cols-1 @2xl:grid-cols-3 gap-4">
                                     {claimSteps.map(({ title, copy }, index) => (
@@ -544,9 +551,14 @@ export default function LennyProductPass(): JSX.Element {
                                         </div>
                                     ))}
                                 </div>
-                                <p className="mt-6 mb-2 font-bold text-primary">Who can redeem it</p>
+                                <p className="mt-6 mb-2 font-bold text-primary">Who is eligible to redeem this Product Pass from Lenny</p>
                                 <ul className="max-w-3xl mt-0 mb-0">
-                                    <li>You're an active annual subscriber to Lenny's Newsletter</li>
+                                     <li>
+                                        You're an active annual subscriber to{' '}
+                                        <Link to="https://www.lennysnewsletter.com/p/start-here" externalNoIcon className="font-semibold underline">
+                                            Lenny's Newsletter
+                                        </Link>
+                                    </li>
                                     <li>You're new to PostHog — no paid invoices before December 1, 2025</li>
                                     <li>You have an active paid PostHog subscription</li>
                                 </ul>
@@ -557,7 +569,7 @@ export default function LennyProductPass(): JSX.Element {
                     {/* Our newsletter – a scrollable post carousel, matching the blog section on /research. */}
                     <NewsletterSection />
 
-                    <div className="m-4 @3xl:m-8 max-w-6xl border-t border-primary pt-8">
+                    <div className="m-4 @3xl:m-8 max-w-6xl border-t border-primary pt-4">
                         <h2 className="mb-4">FAQs</h2>
                         <Accordion data-scheme="primary" className="" defaultValue="" items={faqItems} />
                     </div>
