@@ -1,0 +1,21 @@
+# PostHog MCP analytics
+
+> Instrument an existing MCP server, verify real tool-call events, and analyze how agents use its tools.
+
+## Installation
+
+- [Install with a coding agent](https://posthog.com/docs/mcp-analytics/install-with-agent.md): Task instructions, project configuration, and first-call verification.
+- [Installation reference](https://posthog.com/docs/mcp-analytics/installation.md): Wizard and manual installation for TypeScript, JavaScript, and Python servers; runtime flushing requirements.
+- [Custom servers](https://posthog.com/docs/mcp-analytics/custom-servers.md): Capture calls from a custom dispatcher without a standard server object.
+
+## Verification and capture
+
+- [Getting started](https://posthog.com/docs/mcp-analytics/start-here.md): Inspect the first events in the selected project.
+- [Events and properties](https://posthog.com/docs/mcp-analytics/events.md): The $mcp_tool_call event and its properties.
+- [Privacy](https://posthog.com/docs/mcp-analytics/privacy.md): Control captured data.
+- [Conversation IDs](https://posthog.com/docs/mcp-analytics/conversation-id.md): Group calls across stateless requests.
+
+## Product
+
+- [MCP analytics overview](https://posthog.com/docs/mcp-analytics.md): Product capabilities and analysis surfaces.
+- [PostHog MCP connector](https://posthog.com/docs/model-context-protocol.md): Connect an agent to PostHog to query data. Installing this connector is a separate task from instrumenting a server.

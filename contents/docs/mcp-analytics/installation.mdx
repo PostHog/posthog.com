@@ -17,13 +17,23 @@ import WizardCommand from 'components/WizardCommand'
 - An MCP server built on either TypeScript SDK major — `@modelcontextprotocol/sdk` (v1) or `@modelcontextprotocol/{core,server,client}` (v2) — or either official Python MCP SDK major (`mcp>=1.26,<3`). jlowin's standalone `fastmcp` package is also supported. See [MCP SDK v2](/docs/mcp-analytics/sdk-v2). (Running a custom dispatcher with no server object to wrap? See [Custom servers](/docs/mcp-analytics/custom-servers).)
 - A PostHog [project token](/docs/getting-started/project-token) (`phc_…`)
 
-## AI wizard
+## Install with Wizard
 
-The fastest way to get set up is our wizard, which installs the package, adds your `posthog-node` client, and wires up the `instrument()` call for you (it also works for [LLM coding agents](/blog/envoy-wizard-llm-agent) like Cursor and Bolt):
+Run Wizard from the repository containing your MCP server.
+The setup agent detects your framework and adds the analytics instrumentation:
 
 <WizardCommand command="mcp-analytics" />
 
-Prefer to set things up manually, or want to understand each piece? Follow the steps below.
+If the agent cannot find an MCP server, check that you opened the server repository and point it to the server entry point.
+After setup, invoke an existing tool and check for its `$mcp_tool_call` event in your PostHog project.
+
+## Install with your coding agent
+
+You can use your existing coding agent to [install and verify MCP analytics](/docs/mcp-analytics/install-with-agent).
+Give it the [Markdown installation guide](/docs/mcp-analytics/installation.md), your project ID, and your PostHog region.
+The [MCP analytics documentation index](/docs/mcp-analytics/llms.txt) links to the agent-readable references.
+
+For manual installation, follow the steps below.
 
 ## Install
 
