@@ -866,8 +866,8 @@
             "statusCode": 301
         },
         {
-            "source": "/docs/api/environments",
-            "destination": "/docs/api/projects",
+            "source": "/docs/api/environments:ext(\\.md)?",
+            "destination": "/docs/api/projects:ext?",
             "statusCode": 301
         },
         {
