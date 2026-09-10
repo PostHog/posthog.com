@@ -252,7 +252,11 @@ const MentionProfiles = ({ onSelect, onClose, body, ...other }) => {
 
     useEffect(() => {
         const handleKeyDown = (e: KeyboardEvent) => {
-            if (orderedProfiles.length === 0) return
+            if (orderedProfiles.length === 0) {
+                // Tab moves focus out of the editor, so the picker (and this window listener) has to go with it
+                if (e.key === 'Tab') onClose?.()
+                return
+            }
             if (e.key === 'ArrowDown') {
                 e.preventDefault()
                 setFocused((prev) => (prev + 1) % orderedProfiles.length)
