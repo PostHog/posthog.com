@@ -12,6 +12,7 @@ import Input from 'components/OSForm/input'
 import OSButton from 'components/OSButton'
 import usePostHog from 'hooks/usePostHog'
 import Glow, { type GlowColor } from 'components/Glow'
+import { removeWistiaPlayer } from 'lib/wistia'
 
 interface WistiaCustomPlayerProps {
     mediaId: string
@@ -95,20 +96,18 @@ const WistiaCustomPlayer = React.forwardRef<any, WistiaCustomPlayerProps>(
                 return
             }
 
-            let cleanup: (() => void) | undefined
+            let cancelled = false
+            let embedDiv: HTMLDivElement | null = null
 
             const initializePlayer = () => {
+                if (cancelled) return
+
                 // Create embedded player div
-                const embedDiv = document.createElement('div')
+                embedDiv = document.createElement('div')
                 embedDiv.className = `wistia_embed wistia_async_${mediaId} videoFoam=true`
                 embedDiv.style.width = '100%'
                 embedDiv.style.height = '100%'
-
-                // Clear container and add embed
-                if (containerRef.current) {
-                    containerRef.current.innerHTML = ''
-                    containerRef.current.appendChild(embedDiv)
-                }
+                containerRef.current?.appendChild(embedDiv)
 
                 // Initialize with Wistia queue
                 window._wq = window._wq || []
@@ -133,6 +132,16 @@ const WistiaCustomPlayer = React.forwardRef<any, WistiaCustomPlayerProps>(
                         preload: 'auto', // Preload video metadata
                     },
                     onReady: (video: any) => {
+                        // A _wq entry stays registered against its media id, so an entry from an
+                        // earlier mount also receives a later mount's player. Act on our embed only.
+                        if (video.container !== embedDiv) return
+
+                        // Wistia can hand the player back after the component unmounts.
+                        if (cancelled) {
+                            removeWistiaPlayer(video)
+                            return
+                        }
+
                         playerRef.current = video
 
                         // Expose player instance to parent via ref
@@ -508,12 +517,6 @@ const WistiaCustomPlayer = React.forwardRef<any, WistiaCustomPlayerProps>(
                         }
                     },
                 })
-
-                cleanup = () => {
-                    // Don't cleanup the player - let it persist
-                    // This prevents re-initialization on tab focus changes
-                    console.log('Cleanup called but player will persist')
-                }
             }
 
             // Load Wistia script if not already loaded
@@ -528,7 +531,13 @@ const WistiaCustomPlayer = React.forwardRef<any, WistiaCustomPlayerProps>(
             }
 
             return () => {
-                if (cleanup) cleanup()
+                cancelled = true
+                removeWistiaPlayer(playerRef.current)
+                playerRef.current = null
+                setIsReady(false)
+
+                // Covers an embed that never became a player.
+                embedDiv?.remove()
             }
         }, [mediaId]) // Only re-init if mediaId changes
 
