@@ -82,7 +82,7 @@ We keep tabs on all four stages, while acknowledging the limitations alongside a
 | Clicked | Website traffic | PostHog |
 | Converted | Self-reported attribution + referrer tagging, deduplicated | PostHog |
 
-\*Agent preference is a newer way to measure this. Instead of asking a chatbot to recommend tools and counting who gets named, it runs simulated coding sessions: an agent gets a realistic task like "add session replay to this Next.js app" and we watch what it actually installs. We'll start reporting on this soon.
+Agent preference is a newer way to measure this. Instead of asking a chatbot to recommend tools and counting who gets named, it runs simulated coding sessions: an agent gets a realistic task like "add session replay to this Next.js app" and we watch what it actually installs. We'll start reporting on this soon.
 
 **What good looks like:** all four stages hold their baseline or grow, and when one moves, we can tell which pages caused it and act on it quickly.
 
@@ -91,7 +91,7 @@ We keep tabs on all four stages, while acknowledging the limitations alongside a
 **We control:**
 
 - Whether our content is crawlable at all (robots.txt, CDN rules, 404s)
-- How easy our pages are to extract and quote (by using clear headings, front-loaded answers, self-contained sections, etc)
+- How easy our pages are to extract and quote (by using clear headings, front-loaded answers, self-contained sections, etc.)
 - How much of a certain topic we cover (depth is an AEO lever; sites with more pages on a topic tend to get cited more on it)
 - Technical hygiene: canonicals, duplicate URLs, redirects
 - Whether our positioning and pricing are clear, accurate, and consistent across pages
