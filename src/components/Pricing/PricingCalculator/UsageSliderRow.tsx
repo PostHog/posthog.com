@@ -9,6 +9,13 @@ import {
 } from '../PricingSlider/Slider'
 import { formatCompact, parseCompact } from '../utils'
 
+const snapToMark = (value: number, marks: number[]) => {
+    const rounded = Math.round(value)
+    if (rounded <= 0) return 0
+    const compact = formatCompact(rounded)
+    return marks.find((mark) => formatCompact(mark) === compact) ?? rounded
+}
+
 export const UsageSliderHeader = ({ unit }: { unit: string }) => (
     <div className="flex items-center gap-4 pb-1">
         <span className="w-48 shrink-0 text-xs uppercase text-secondary font-semibold">Usage</span>
@@ -48,14 +55,17 @@ export default function UsageSliderRow({
     const [draft, setDraft] = useState<string | null>(null)
     const displayValue = draft ?? `${inputPrefix ?? ''}${formatCompact(value)}`
 
+    const emit = (next: number) => onChange(snapToMark(next, marks))
+
     const handleLogChange = (next: number) => {
         const rounded = Math.round(sliderCurve(next))
-        onChange(rounded <= effectiveScaleMin ? 0 : rounded)
+        emit(rounded <= effectiveScaleMin ? 0 : rounded)
     }
 
     const commitDraft = () => {
         if (draft === null) return
-        onChange(parseCompact(draft))
+        const next = parseCompact(draft)
+        if (next !== value) emit(next)
         setDraft(null)
     }
 
@@ -76,7 +86,7 @@ export default function UsageSliderRow({
                             marks={marks}
                             min={0}
                             max={max}
-                            onChange={(next) => onChange(reverseNonLinearCurve(next))}
+                            onChange={(next) => emit(reverseNonLinearCurve(next))}
                             value={nonLinearCurve(value || 0)}
                         />
                     ) : (
@@ -94,16 +104,17 @@ export default function UsageSliderRow({
             </div>
             <input
                 type="text"
+                aria-label={label}
                 className={`${
                     inputPrefix ? 'w-16' : 'w-14'
                 } bg-transparent text-center font-bold text-sm border border-light dark:border-dark rounded-md py-1 px-1.5 focus:ring-0 focus:border-red dark:focus:border-yellow focus:bg-white dark:focus:bg-accent-dark ml-auto`}
                 value={displayValue}
-                onFocus={() => setDraft(displayValue)}
+                onFocus={() => setDraft(`${inputPrefix ?? ''}${value}`)}
                 onChange={(e) => setDraft(e.target.value)}
                 onBlur={commitDraft}
                 onKeyDown={(e) => {
                     if (e.key === 'Enter') {
-                        ;(e.target as HTMLInputElement).blur()
+                        e.currentTarget.blur()
                     }
                 }}
             />

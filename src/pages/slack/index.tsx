@@ -604,6 +604,16 @@ const faqItems = [
         ),
     },
     {
+        trigger: 'Can the bot read screenshots and files?',
+        content: (
+            <p>
+                Yes. Attach images, PDFs, and text files to your message and the agent reads them as part of the
+                request. The limit is five files
+                per message, 10 MB each.
+            </p>
+        ),
+    },
+    {
         trigger: 'Do I have to tag the bot on every message?',
         content: (
             <p>
@@ -671,6 +681,7 @@ const faqItems = [
 const heroBullets = [
     'Ask questions about your product data',
     'Turn a message into a draft PR',
+    'Attach images, PDFs, and text files',
     'Ship from your phone with the Slack mobile app',
 ]
 

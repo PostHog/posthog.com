@@ -16,17 +16,14 @@ import ProductAnalyticsTab, {
     getTotalEnhancedPersonsVolume,
 } from './Tabs/ProductAnalytics'
 import ReplayVisionTab from './Tabs/ReplayVision'
-import PostHogDesktopTab from './Tabs/PostHogDesktop'
+import PostHogDesktopTab, { useDesktopPricing } from './Tabs/PostHogDesktop'
 import StandaloneAddonsTab from './Tabs/StandaloneAddonsTab'
 import { EXCLUDED_ADDON_TYPES } from '../../../constants/addons'
 import { BROWSE_TOOLS_HANDLES } from 'constants/productNavigation'
 import qs from 'qs'
+import { getProductInputs, readProductInputs, priceProductInputs } from './calculatorURL'
 import usePostHog from 'hooks/usePostHog'
-import AgentEstimateLink, {
-    AI_PRICING_EXPERIMENT_VARIANTS,
-    AI_PRICING_FLAG,
-} from 'components/Pricing/AgentEstimateLink'
-import { RenderInClient } from 'components/RenderInClient'
+import AgentEstimateLink from 'components/Pricing/AgentEstimateLink'
 import { useApp } from '../../../context/App'
 import AllProductsRatesModal, { ALL_PRODUCTS_RATES_MODAL_KEY } from './AllProductsRatesModal'
 
@@ -285,18 +282,42 @@ const EmptyEstimate = ({ products, onAdd }) => {
     )
 }
 
-const CopyURLButton = ({ onClick }) => {
-    const [copied, setCopied] = useState(false)
-    const copyURL = () => {
-        onClick()
-        setCopied(true)
-        setTimeout(() => setCopied(false), 2000)
+const CopyURLButton = ({ onClick }: { onClick: () => string }) => {
+    const [status, setStatus] = useState('')
+    const [fallbackURL, setFallbackURL] = useState('')
+    const timeout = useRef<ReturnType<typeof setTimeout>>()
+    useEffect(() => () => clearTimeout(timeout.current), [])
+    const copyURL = async () => {
+        const url = onClick()
+        clearTimeout(timeout.current)
+        try {
+            await navigator.clipboard.writeText(url)
+            setFallbackURL('')
+            setStatus('Link copied')
+            timeout.current = setTimeout(() => setStatus(''), 2000)
+        } catch {
+            setFallbackURL(url)
+            setStatus('Copy the link below to share your estimate.')
+        }
     }
-
     return (
-        <button className="text-sm font-bold text-red dark:text-yellow" onClick={copyURL}>
-            {copied ? 'Copied!' : 'Generate calculator URL'}
-        </button>
+        <div className="min-w-0 max-w-full">
+            <button type="button" className="text-sm font-bold text-red dark:text-yellow" onClick={copyURL}>
+                Share estimate
+            </button>
+            <span role="status" className="text-sm ml-2">
+                {status}
+            </span>
+            {fallbackURL && (
+                <input
+                    aria-label="Calculator share URL"
+                    readOnly
+                    value={fallbackURL}
+                    onFocus={(event) => event.currentTarget.select()}
+                    className="block w-full mt-2 p-2 text-sm bg-primary text-primary border border-primary rounded"
+                />
+            )}
+        </div>
     )
 }
 
@@ -306,7 +327,7 @@ export default function Tabbed() {
             nodes: [{ products: billingProducts }],
         },
     } = useStaticQuery(allProductsData)
-    const [analyticsData, setAnalyticsData] = useState(getDefaultAnalyticsData)
+    const [analyticsData, setAnalyticsData] = useState<Record<string, any>>(getDefaultAnalyticsData)
     const platform = billingProducts.find((product) => product.type === 'platform_and_support')
     const [activeType, setActiveType] = useState<string | null>(DEFAULT_PRODUCT_TYPES[0])
     const [selectedTypes, setSelectedTypes] = useState<string[]>(DEFAULT_PRODUCT_TYPES)
@@ -314,6 +335,8 @@ export default function Tabbed() {
     const [productSearch, setProductSearch] = useState('')
     const addProductRef = useRef(null)
     const { products: initialProducts, setVolume, setProduct } = useProducts()
+    const [urlRestored, setUrlRestored] = useState(false)
+    const { computeRate } = useDesktopPricing(selectedTypes.includes('posthog_code'))
     const { addWindow } = useApp()
     // Listed in the same order as the taskbar's "Browse tools" menu, so the tools appear where
     // people have already learned to look for them. Metered products missing from that curated
@@ -329,7 +352,12 @@ export default function Tabbed() {
                 (product) => !!product.unit && !product.hideFromPricingTableAndCalculator && !product.hideFromCalculator
             )
             .sort((a, b) => navOrder(a) - navOrder(b))
-    }, [initialProducts])
+            .map((product): any =>
+                product.type === 'posthog_code'
+                    ? { ...product, ...priceProductInputs(product, getProductInputs(product), computeRate) }
+                    : product
+            )
+    }, [initialProducts, computeRate])
     const selectedProducts = selectedTypes
         .map((type) => products.find((product) => product.type === type))
         .filter(Boolean)
@@ -389,53 +417,88 @@ export default function Tabbed() {
 
     const generateURL = () => {
         const params = {
-            ...(activeProduct && { calculator: activeProduct.type }),
+            calculator: activeType ?? '',
+            products: selectedTypes.join(','),
+            ...Object.fromEntries(
+                selectedProducts.map((product) => [product.type, getProductInputs(product, analyticsData)])
+            ),
+            addons: Object.fromEntries(productAddons.map((addon) => [addon.type, addon.checked])),
+            platform: Object.fromEntries(
+                platformAddons
+                    .filter((addon) => !addon.legacy_product && addon.type !== 'enterprise')
+                    .map((addon) => [addon.type, addon.checked])
+            ),
         }
-        selectedProducts.forEach((product) => {
-            if (product.volume) {
-                params[product.type] = { volume: product.volume }
-                if (product.type === 'product_analytics') {
-                    const types = {}
-                    Object.keys(analyticsData).forEach((type) => {
-                        const volume = analyticsData[type].volume
-                        if (volume) {
-                            types[type] = { volume: analyticsData[type].volume }
-                        }
-                    })
-                    params['product_analytics'].types = types
-                }
-            }
-        })
-        const URL = `${window.location.origin}${window.location.pathname}?${qs.stringify(params, {
+        return `${window.location.origin}${window.location.pathname}?${qs.stringify(params, {
             encodeValuesOnly: true,
         })}`
-        navigator.clipboard.writeText(URL)
     }
 
     useEffect(() => {
-        const urlParams = new URLSearchParams(window.location.search)
-        const params = qs.parse(urlParams.toString())
-        const { calculator, ...volumeParams } = params
-
-        const volumeTypes = Object.keys(volumeParams).filter((type) =>
-            products.some((product) => product.type === type)
+        const params = qs.parse(window.location.search, { ignoreQueryPrefix: true })
+        const selected =
+            typeof params.products === 'string'
+                ? Array.from(
+                      new Set<string>(
+                          params.products.split(',').filter((type) => products.some((product) => product.type === type))
+                      )
+                  )
+                : selectedTypes
+        setSelectedTypes(selected)
+        setActiveType(
+            params.calculator === PLATFORM_PACKAGES_TYPE
+                ? PLATFORM_PACKAGES_TYPE
+                : selected.includes(params.calculator as string)
+                ? (params.calculator as string)
+                : selected[0] ?? null
         )
-        const typesFromUrl = [calculator, ...volumeTypes].filter((type) =>
-            products.some((product) => product.type === type)
-        )
-        if (typesFromUrl.length > 0) {
-            setSelectedTypes((current) => [...current, ...typesFromUrl.filter((type) => !current.includes(type))])
-            if (calculator && products.some((product) => product.type === calculator)) {
-                setActiveType(calculator)
+        let restoredAnalytics = analyticsData
+        const restoredProducts = products.map((product) => {
+            const inputs = readProductInputs(params[product.type], getProductInputs(product, analyticsData))
+            if (product.type === 'product_analytics') {
+                restoredAnalytics = Object.fromEntries(
+                    Object.entries(analyticsData).map(([key, value]) => [
+                        key,
+                        { ...value, volume: inputs.types[key].volume },
+                    ])
+                )
+                setAnalyticsData(restoredAnalytics)
             }
-        }
-
-        volumeTypes.forEach((type) => {
-            setVolume(type, volumeParams[type].volume)
+            const override = priceProductInputs(product, inputs, computeRate)
+            setProduct(product.handle, override)
+            return { ...product, ...override }
         })
-
+        setProductAddons((addons) =>
+            addons.map((addon) => {
+                const checked = params.addons?.[addon.type] === 'true'
+                const product = restoredProducts.find((product) =>
+                    product.billingData?.addons?.some((item: any) => item.type === addon.type)
+                )
+                const billingAddon = product?.billingData?.addons?.find((item: any) => item.type === addon.type)
+                const volume =
+                    addon.type === 'group_analytics'
+                        ? getTotalEnhancedPersonsVolume(restoredAnalytics)
+                        : product?.volume
+                return {
+                    ...addon,
+                    checked,
+                    totalCost: checked
+                        ? calculatePrice(volume, billingAddon?.plans.find((plan: any) => plan.tiers)?.tiers).total
+                        : 0,
+                }
+            })
+        )
+        setPlatformAddons((addons) =>
+            addons.map((addon) => ({
+                ...addon,
+                checked:
+                    !addon.legacy_product && addon.type !== 'enterprise' && params.platform?.[addon.type] === 'true',
+            }))
+        )
+        // Mount tabs after restoration so their local defaults cannot overwrite URL inputs.
+        setUrlRestored(true)
         const el = document.getElementById('calculator')
-        if (el && products.some((product) => volumeTypes.includes(product.type))) {
+        if (el && products.some((product) => params[product.type])) {
             const y = el.getBoundingClientRect().top + window.scrollY - (window.innerWidth > 767 ? 108 : 57)
             window.scrollTo({ top: y, behavior: 'smooth' })
         }
@@ -496,6 +559,13 @@ export default function Tabbed() {
         const product = products.find((item) => item.type === type)
         if (product) {
             setVolume(product.handle, 0)
+            setProduct(product.handle, {
+                addons: undefined,
+                model: undefined,
+                observations: undefined,
+                hours: undefined,
+                modelSpend: undefined,
+            })
             const addonTypes = new Set((product.billingData?.addons || []).map((addon) => addon.type))
             setProductAddons((addons) =>
                 addons.map((addon) => (addonTypes.has(addon.type) ? { ...addon, checked: false, totalCost: 0 } : addon))
@@ -807,16 +877,18 @@ export default function Tabbed() {
                                 </div>
                             </div>
 
-                            <TabContent
-                                key={activeProduct.type}
-                                addons={productAddons}
-                                setAddons={setProductAddons}
-                                activeProduct={activeProduct}
-                                setVolume={setVolume}
-                                setProduct={setProduct}
-                                analyticsData={analyticsData}
-                                setAnalyticsData={setAnalyticsData}
-                            />
+                            {urlRestored && (
+                                <TabContent
+                                    key={activeProduct.type}
+                                    addons={productAddons}
+                                    setAddons={setProductAddons}
+                                    activeProduct={activeProduct}
+                                    setVolume={setVolume}
+                                    setProduct={setProduct}
+                                    analyticsData={analyticsData}
+                                    setAnalyticsData={setAnalyticsData}
+                                />
+                            )}
                         </div>
                     )}
 
@@ -847,19 +919,14 @@ export default function Tabbed() {
                     </div>
                     {/* Two ways to leave with an estimate: a link to this one, or a prompt that builds
                         one from what the visitor already pays for elsewhere. Same row, same weight. */}
-                    <div className="flex flex-wrap items-center justify-between gap-2 mt-2 pr-2 md:pr-0">
-                        <RenderInClient
-                            render={() => {
-                                const variant = window.posthog?.getFeatureFlag?.(AI_PRICING_FLAG)
-                                return variant && variant !== AI_PRICING_EXPERIMENT_VARIANTS.control ? (
-                                    <AgentEstimateLink
-                                        source="calculator-total"
-                                        className="text-sm font-bold text-red dark:text-yellow"
-                                    />
-                                ) : (
-                                    <></>
-                                )
-                            }}
+                    <div
+                        className="flex flex-wrap items-center justify-between gap-2 mt-2"
+                        data-ai-estimate-placement="inside-calculator"
+                    >
+                        <CopyURLButton onClick={generateURL} />
+                        <AgentEstimateLink
+                            source="calculator-total"
+                            className="text-sm font-bold text-red dark:text-yellow"
                         />
                     </div>
                 </div>

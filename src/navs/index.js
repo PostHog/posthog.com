@@ -675,6 +675,10 @@ export const handbookSidebar = [
                 url: '/handbook/content/seo-guide',
             },
             {
+                name: 'Answer engine optimization (AEO)',
+                url: '/handbook/content/aeo-guide',
+            },
+            {
                 name: 'Style guide',
                 url: '/handbook/content/posthog-style-guide',
             },
@@ -3251,6 +3255,10 @@ export const docsMenu = {
                         {
                             name: 'Data management',
                             url: '/docs/data',
+                        },
+                        {
+                            name: 'Events data retention',
+                            url: '/docs/data/events-retention',
                         },
                         {
                             name: 'Properties',
@@ -6586,6 +6594,12 @@ export const docsMenu = {
                     color: 'yellow',
                 },
                 {
+                    name: 'Materialization troubleshooting',
+                    url: '/docs/data-warehouse/views/materialize-troubleshooting',
+                    icon: 'IconQuestion',
+                    color: 'orange',
+                },
+                {
                     name: 'SQL commands',
                     url: '/docs/data-warehouse/sql',
                     icon: 'IconCode',
@@ -8365,7 +8379,7 @@ export const docsMenu = {
                     featured: true,
                 },
                 {
-                    name: 'Install OpenTelemetry tracing',
+                    name: 'Install tracing',
                     url: '/docs/distributed-tracing/installation',
                     icon: 'IconCode',
                     color: 'blue',

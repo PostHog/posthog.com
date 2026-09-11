@@ -1882,10 +1882,6 @@
             "destination": "/handbook/company/management"
         },
         {
-            "source": "/lenny",
-            "destination": "/?utm_source=influencer&utm_medium=newsletter&utm_campaign=lenny"
-        },
-        {
             "source": "/zizyo",
             "destination": "/?utm_source=influencer&utm_medium=youtube&utm_campaign=zizyo"
         },
@@ -2732,6 +2728,10 @@
         {
             "source": "/tutorials/evaluation-runtimes-and-environments",
             "destination": "/tutorials/evaluation-runtimes-and-contexts"
+        },
+        {
+            "source": "/page-data/tutorials/evaluation-runtimes-and-environments/page-data.json",
+            "destination": "/page-data/tutorials/evaluation-runtimes-and-contexts/page-data.json"
         },
         {
             "source": "/docs/integrate:ext(\\.md)?",
@@ -5097,6 +5097,10 @@
         {
             "source": "/tutorials/node-external-cache",
             "destination": "/docs/feature-flags/local-evaluation/distributed-environments?tab=Node.js"
+        },
+        {
+            "source": "/page-data/tutorials/node-external-cache/page-data.json",
+            "destination": "/page-data/docs/feature-flags/local-evaluation/distributed-environments/page-data.json"
         },
         {
             "source": "/blog/gdpr-google-analytics-privacy-shield",
