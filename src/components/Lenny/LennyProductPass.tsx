@@ -15,9 +15,9 @@ import {
     IconBolt,
     IconPullRequest,
     IconArrowRight,
-    IconWarning,
     IconPieChart,
-    IconServer,
+    IconTelescope,
+    IconNotification,
     IconChevronLeft,
     IconChevronRight,
     IconX,
@@ -118,6 +118,18 @@ const selfDrivingCapabilities: { Icon: IconComponent; color: string; title: stri
         copy: 'The wizard instruments your app and names your events, so you skip the tagging spreadsheet.',
     },
     {
+        Icon: IconTelescope,
+        color: 'text-orange',
+        title: 'Send out scouts',
+        copy: "Scouts run on a schedule, build durable memory of what they've seen, and file what they find. Add ours, or write your own.",
+    },
+    {
+        Icon: IconNotification,
+        color: 'text-teal',
+        title: 'Read one ranked inbox',
+        copy: 'Your Inbox groups related findings into researched reports, ranked by priority, so you triage instead of digging.',
+    },
+    {
         Icon: IconPullRequest,
         color: 'text-green',
         title: 'Open the pull request',
@@ -143,7 +155,7 @@ const claimSteps: { title: string; copy: React.ReactNode }[] = [
         title: 'Sign in or sign up',
         copy: (
             <>
-                The claim link sorts this out for you, new account or not.
+                The claim link sorts this out for you, new account or not.{' '}
                 <Link to={claimUrl} externalNoIcon className="font-semibold underline">
                     Take me there
                 </Link>
@@ -309,8 +321,9 @@ const faqItems = [
         trigger: 'Who is eligible?',
         content: (
             <p>
-                Active annual subscribers to Lenny's Newsletter who are either new or existing users of PostHog with and
-                paid subscription that have had no paid invoices before December 1, 2025.
+                Active annual subscribers to Lenny's Newsletter with an active paid PostHog subscription and no paid
+                PostHog invoices before December 1, 2025. Existing PostHog users count too, as long as you hadn't
+                started paying us before that date.
             </p>
         ),
     },
@@ -333,14 +346,12 @@ const faqItems = [
         ),
     },
     {
-        trigger: "I'm already paying for PostHog. Can I still use it?",
+        trigger: 'I already use PostHog. Can I still claim it?',
         content: (
             <p>
-                Not this one — like every Product Pass deal, it's for new customers. See{' '}
-                <Link to="/pricing" state={{ newWindow: true }} className="underline font-semibold">
-                    our pricing
-                </Link>{' '}
-                for what's available on your current plan.
+                It depends on whether you've ever paid us. If you have no paid invoices before December 1, 2025, you're
+                eligible — even if you've been on the free tier for years. If you were already paying us before that
+                date, this one isn't for you.
             </p>
         ),
     },
@@ -353,11 +364,11 @@ const faqStructuredData = [
     },
     {
         question: 'Do I need a PostHog account before claiming the Lenny offer?',
-        answer: "No. The claim link handles every case — log in and you land on the claim page, or create an account and you're redirected there after verification, then continue into onboarding.",
+        answer: "Yes, and the claim link handles it either way — log in and you land on the claim page, or create an account and you're redirected there after verification, then continue into onboarding.",
     },
     {
         question: "Who is eligible for the PostHog offer in Lenny's Product Pass?",
-        answer: "Active annual subscribers to Lenny's Newsletter who are new PostHog customers, with no paid invoices before December 1, 2025, and an active paid PostHog subscription.",
+        answer: "Active annual subscribers to Lenny's Newsletter with an active paid PostHog subscription and no paid PostHog invoices before December 1, 2025. Existing PostHog users qualify too, as long as they hadn't started paying before that date.",
     },
     {
         question: 'What happens after the 12 months of free PostHog Scale?',
@@ -374,7 +385,7 @@ export default function LennyProductPass(): JSX.Element {
         <>
             <SEO
                 title="PostHog for Lenny's Newsletter | Free Scale + 2x limits for a year"
-                description="Exclusive for Lenny's Newsletter annual subscribers: get PostHog Scale free and double the free tier on every product for 12 months. A $16,500 value for new PostHog customers."
+                description="Exclusive for Lenny's Newsletter annual subscribers: get PostHog Scale free and double the free tier on every product for 12 months. A $16,500 value, if you haven't paid PostHog before December 1, 2025."
                 image="/images/og/lenny.png"
                 structuredData={buildProductStructuredData({
                     name: "PostHog for Lenny's Newsletter",
@@ -481,7 +492,14 @@ export default function LennyProductPass(): JSX.Element {
                                 </div>
                             ))}
                         </div>
-                        <p className="mt-6 mb-0">
+                        <p className="mt-4 mb-3 max-w-3xl text-base">
+                            All of it reaches you in{' '}
+                            <Link to="/slack" state={{ newWindow: true }} className="font-semibold underline">
+                                Slack
+                            </Link>{' '}
+                            as well, so you can read a report and ship the fix without opening a tab.
+                        </p>
+                        <p className="mt-0 mb-0">
                             <Link
                                 to="/self-driving"
                                 state={{ newWindow: true }}
@@ -519,6 +537,12 @@ export default function LennyProductPass(): JSX.Element {
                                         </div>
                                     ))}
                                 </div>
+                                <p className="mt-6 mb-2 font-bold text-primary">What Scale adds</p>
+                                <ul className="max-w-3xl mt-0 mb-0">
+                                    <li>Unlimited projects, and white labeling</li>
+                                    <li>SSO enforcement, SAML, and a HIPAA BAA</li>
+                                    <li>Priority support, and more to scale your organization</li>
+                                </ul>
                                 <p className="mt-6 mb-2 font-bold text-primary">
                                     Who is eligible to redeem this Product Pass from Lenny
                                 </p>
@@ -533,7 +557,10 @@ export default function LennyProductPass(): JSX.Element {
                                             Lenny's Newsletter
                                         </Link>
                                     </li>
-                                    <li>You're new to PostHog — no paid invoices before December 1, 2025</li>
+                                    <li>
+                                        You have no paid PostHog invoices before December 1, 2025 — years on the free
+                                        tier don't count against you
+                                    </li>
                                     <li>You have an active paid PostHog subscription</li>
                                 </ul>
                             </div>
@@ -553,10 +580,10 @@ export default function LennyProductPass(): JSX.Element {
                         <div className="paper-desk border border-primary rounded-lg overflow-hidden relative">
                             <div className="relative z-10 flex flex-col-reverse @2xl:flex-row @2xl:items-center gap-6 @2xl:gap-8 p-6 @2xl:p-8 @4xl:p-10">
                                 <div className="flex-1">
-                                    <h2 className="text-3xl @lg:text-4xl @2xl:text-5xl @4xl:text-6xl font-bold tracking-tight leading-[1.05] text-balance mb-4 @2xl:mb-5 mt-0">
-                                        A year of PostHog,{' '}
+                                    <h2 className="text-2xl @lg:text-3xl @2xl:text-4xl font-bold tracking-tight leading-[1.1] text-balance mb-4 @2xl:mb-5 mt-0">
+                                        Go build something.{' '}
                                         <span className="bg-green/25 text-green-dark dark:text-lime-green rounded-sm px-1.5 box-decoration-clone">
-                                            on Lenny.
+                                            The first year's on Lenny.
                                         </span>
                                     </h2>
                                     <p className="text-[15px] @lg:text-base max-w-xl mb-5">
