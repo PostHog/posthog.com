@@ -86,6 +86,11 @@ interface WindowProviderProps {
     hasDeveloperMode: boolean
     setHasDeveloperMode: (hasDeveloperMode: boolean) => void
     animating?: boolean
+    close: () => void
+    toggleExpanded: () => void
+    canToggleExpanded: boolean
+    isExpanded: boolean
+    setIntegratedChrome: (integrated: boolean) => void
 }
 
 interface WindowContextType {
@@ -108,6 +113,11 @@ interface WindowContextType {
     hasDeveloperMode: boolean
     setHasDeveloperMode: (hasDeveloperMode: boolean) => void
     animating?: boolean
+    close: () => void
+    toggleExpanded: () => void
+    canToggleExpanded: boolean
+    isExpanded: boolean
+    setIntegratedChrome: (integrated: boolean) => void
 }
 
 export const Context = createContext<WindowContextType>({
@@ -145,6 +155,17 @@ export const Context = createContext<WindowContextType>({
         // No-op default implementation
     },
     animating: false,
+    close: () => {
+        // No-op default implementation
+    },
+    toggleExpanded: () => {
+        // No-op default implementation
+    },
+    canToggleExpanded: false,
+    isExpanded: false,
+    setIntegratedChrome: () => {
+        // No-op default implementation
+    },
 })
 
 export const Provider = ({
@@ -168,6 +189,11 @@ export const Provider = ({
     hasDeveloperMode,
     setHasDeveloperMode,
     animating,
+    close,
+    toggleExpanded,
+    canToggleExpanded,
+    isExpanded,
+    setIntegratedChrome,
 }: WindowProviderProps) => {
     // Memoize so unrelated AppWindow state changes (e.g. `closing`, dragging, snap
     // indicators) don't create a new value identity and re-render every useWindow()
@@ -193,6 +219,11 @@ export const Provider = ({
             hasDeveloperMode,
             setHasDeveloperMode,
             animating,
+            close,
+            toggleExpanded,
+            canToggleExpanded,
+            isExpanded,
+            setIntegratedChrome,
         }),
         [
             appWindow,
@@ -214,6 +245,11 @@ export const Provider = ({
             hasDeveloperMode,
             setHasDeveloperMode,
             animating,
+            close,
+            toggleExpanded,
+            canToggleExpanded,
+            isExpanded,
+            setIntegratedChrome,
         ]
     )
 
