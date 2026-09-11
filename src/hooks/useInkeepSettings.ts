@@ -1,12 +1,14 @@
 import type { InkeepAIChatSettings, InkeepBaseSettings } from '@inkeep/cxkit-react'
 import { useValues } from 'kea'
 import { layoutLogic } from 'logic/layoutLogic'
-import { useEffect, useState } from 'react'
+import { useEffect, useState, type Dispatch, type SetStateAction } from 'react'
 type InkeepSharedSettings = {
     baseSettings: InkeepBaseSettings
     aiChatSettings: InkeepAIChatSettings
-    setBaseSettings: (baseSettings: InkeepBaseSettings) => void
-    setAiChatSettings: (aiChatSettings: InkeepAIChatSettings) => void
+    // These are the raw `useState` dispatchers, so consumers can pass a functional
+    // updater and merge into the latest settings instead of clobbering them.
+    setBaseSettings: Dispatch<SetStateAction<InkeepBaseSettings>>
+    setAiChatSettings: Dispatch<SetStateAction<InkeepAIChatSettings>>
 }
 
 export const defaultQuickQuestions = [
@@ -436,12 +438,14 @@ const useInkeepSettings = (): InkeepSharedSettings => {
     const [aiChatSettings, setAiChatSettings] = useState(defaultAiChatSettings)
 
     useEffect(() => {
-        setBaseSettings({
-            ...baseSettings,
+        // Merge into the latest settings so a write here does not drop a field
+        // that `useChat` set on the same object (for example `onEvent`).
+        setBaseSettings((prev) => ({
+            ...prev,
             colorMode: {
                 forcedColorMode: websiteTheme === 'dark' ? 'dark' : 'light',
             },
-        })
+        }))
     }, [websiteTheme])
 
     return { baseSettings, aiChatSettings, setBaseSettings, setAiChatSettings }
