@@ -19,6 +19,8 @@ Beyond the specific skills listed in the job description, we generally look for:
     *   They may have been the founder of a startup, or built an impressive side project. They may have also worked on a project at work where they were the only developer.
 *   Communication skills
     *   More so than other companies, all of our communication is written and public for the world to see. Good written communication is key.
+*   AI-pilled
+    *   They have built things agents actually use. More and more of what we ship is used by agents, not people, and building for them is genuinely different. We want someone who has done it and has the scars: an API an agent can drive, an MCP server, evals, or docs written for a machine. Side projects count.
 *   User-centric
     *   Our engineering team work very closely with our users - they do customer support, demos, and help with implementation. All potential engineers need to be excited by the prospect of getting to work directly with users.
 
