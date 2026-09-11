@@ -97,7 +97,6 @@ export const Select = React.forwardRef<HTMLButtonElement, SelectProps>(
     ) => {
         // Use client-only rendering to prevent hydration mismatches
         const [isClient, setIsClient] = React.useState(false)
-        const appContainer: HTMLElement | null = null
 
         React.useEffect(() => {
             setIsClient(true)
@@ -166,8 +165,6 @@ export const Select = React.forwardRef<HTMLButtonElement, SelectProps>(
                     </RadixSelect.Trigger>
                     <RadixSelect.Portal>
                         <RadixSelect.Content
-                            position={appContainer ? 'popper' : undefined}
-                            collisionBoundary={appContainer}
                             className="overflow-hidden rounded bg-white dark:bg-accent-dark shadow-xl z-[50]"
                             data-scheme={dataScheme}
                         >
