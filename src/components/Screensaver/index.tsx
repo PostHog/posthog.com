@@ -1,7 +1,8 @@
 import React, { useEffect, useState, useRef, useCallback, lazy, Suspense } from 'react'
+import { useHasMounted } from 'hooks/useHasMounted'
 
 // react-lottie bundles lottie-web (~600 KiB); load it on demand instead of on every page.
-const Lottie = typeof window !== 'undefined' ? lazy(() => import('react-lottie')) : () => null
+const Lottie = lazy(() => import('react-lottie'))
 
 interface ScreensaverProps {
     isActive: boolean
@@ -13,6 +14,8 @@ export const Screensaver: React.FC<ScreensaverProps> = ({ isActive, onDismiss })
     const [velocity, setVelocity] = useState({ x: 0.2, y: 0.15 }) // Slower, uniform speed
     const animationFrameRef = useRef<number>()
     const logoSizeRef = useRef({ width: 200, height: 200 })
+    // Only mount the lazy Lottie after hydration so the server and first client render match (avoids React #421).
+    const hasMounted = useHasMounted()
 
     // Load the lottie animation
     const defaultOptions = {
@@ -95,14 +98,16 @@ export const Screensaver: React.FC<ScreensaverProps> = ({ isActive, onDismiss })
                     height: `${logoSizeRef.current.height}px`,
                 }}
             >
-                <Suspense fallback={null}>
-                    <Lottie
-                        options={defaultOptions}
-                        height={logoSizeRef.current.height}
-                        width={logoSizeRef.current.width}
-                        eventListeners={[]}
-                    />
-                </Suspense>
+                {hasMounted && (
+                    <Suspense fallback={null}>
+                        <Lottie
+                            options={defaultOptions}
+                            height={logoSizeRef.current.height}
+                            width={logoSizeRef.current.width}
+                            eventListeners={[]}
+                        />
+                    </Suspense>
+                )}
             </div>
 
             <div className="absolute bottom-8 w-full @md:w-auto @md:left-1/2 transform @md:-translate-x-1/2 text-white/50 text-sm text-center">
