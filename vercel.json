@@ -866,6 +866,21 @@
             "statusCode": 301
         },
         {
+            "source": "/docs/api/environments.md",
+            "destination": "/docs/api.md",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/api/environments:ext(\\.md)?",
+            "destination": "/docs/api/projects:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/api/environments-:n(\\d+)",
+            "destination": "/docs/api/projects",
+            "statusCode": 301
+        },
+        {
             "source": "/docs/api/product-tours/:path*",
             "destination": "/docs/api",
             "statusCode": 301
