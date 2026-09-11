@@ -101,7 +101,7 @@ A **tracked prompt** is a question we run against the major models on a regular 
 
 The limitation: search behavior isn't prompt behavior. People phrase things very differently to an LLM than to a search bar – longer, more conversational, with more context about their situation. Our set is a proxy for something we can't observe directly, and we keep refining it as more first-party data comes in.
 
-**What we leave out:** anything where we already know the answer before we run it. That covers prompts with no evidence anyone asks them, and prompts rigged in our favor – showing up for "the best product analytics tool with a fun mascot and a weird name" isn't information.
+**What we leave out:** anything where we already know the answer before we run it (prompts rigged in our favour like "the best product analytics tool with a fun mascot and a weird name"), and prompts with no evidence anyone asks them.
 
 We've pruned our prompt set aggressively for this reason. A smaller set focused on our ICP tells us more than a large set padded with unreliable and/or unrealistic prompts.
 
