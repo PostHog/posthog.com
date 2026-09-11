@@ -2,9 +2,11 @@
 title: Canvases
 ---
 
-A canvas is an interactive app that an agent builds around your PostHog data. They can be disposable (one time use), durable (something you come back to), or as a dynamic visualization tool for when a question or a workflow needs more than a static dashboard. 
+A canvas is an interactive app that an agent builds around your PostHog data. A canvas can be disposable (one time use) or durable (something you come back to). Use one when a question or a workflow needs more than a static dashboard.
 
-You describe the outcome. The agent writes the interface and the queries, then publishes the canvas to a [space](/docs/posthog-desktop/spaces). The canvas runs inside PostHog against live project data, so your team opens the same working app instead of a screenshot or an export. Canvases can combine saved insights with new queries, add filters and date controls, remember shared state, capture events, and offer approved actions.
+You describe the outcome. The agent writes the interface and the queries, then publishes the canvas to a [space](/docs/posthog-desktop/spaces). The canvas runs inside PostHog against live project data, so your team opens the same working app instead of a screenshot or an export.
+
+Canvases can combine saved insights with new queries, add filters and date controls, remember shared state, capture events, and offer approved actions.
 
 <ProductScreenshot
 imageLight="/images/docs/posthog-desktop/canvas.png"
@@ -14,7 +16,7 @@ alt="Interactive canvas for exploring compute pricing"
 
 ## When to use a canvas
 
-Dashboards and notebooks in PostHog Web still do their jobs, and the PostHog MCP is still the fastest way to pull data into an agent chat. A canvas is for when the view needs its own layout, controls, or workflow, when the answer is visualize to see than to read, or a team needs to act on it together.
+Dashboards and notebooks in PostHog Web still do their jobs, and the PostHog MCP is still the fastest way to pull data into an agent chat. A canvas is for when the view needs its own layout, controls, or workflow, when the answer is easier to see than to read, or when a team needs to act on it together.
 
 Ask the agent for a canvas when you want to do things like:
 
@@ -23,15 +25,15 @@ Ask the agent for a canvas when you want to do things like:
 - Combine context from multiple tools and external sources into one view
 - Pair data with an action, like letting an owner mark a problem as reviewed
 
-### What a canvas can't do
+## Limitations
 
 A canvas is a sandboxed browser app, not a hosted service. These limits apply to every canvas.
 
 | Limit | What it means |
 |---|---|
 | Sandboxed page | The canvas runs in a sandbox inside PostHog. It reaches an external address only when it declares that address first, and the edit preview blocks all direct requests. |
-| No backend | The canvas has no server of its own. It cannot store data outside PostHog, and it cannot authenticate viewers itself. |
-| Project data only | The canvas reads the PostHog project selected in Desktop. To use data from another system, connect that system as a [data warehouse source](/docs/data-warehouse) or MCP cserver in Desktop settings. |
+| No backend | The canvas has no server of its own. Its saved state lives in PostHog. It can send requests only to addresses it declares, and it cannot authenticate viewers itself. |
+| Project data only | The canvas reads the PostHog project selected in Desktop. To use data from another system, connect that system as a [data warehouse source](/docs/data-warehouse) in PostHog, or as an [MCP server](/docs/posthog-desktop/mcp-servers) in Desktop settings. |
 | One app per canvas | A canvas is a single app with no separate pages or addresses. The agent uses sections in one view instead of many pages. |
 
 
@@ -146,7 +148,7 @@ classes="rounded"
 <ProductScreenshot
 imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/canvas_andy_v_newsletter_light_04ff7db603.png"
 imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/canvas_andy_v_newsletter_dark_bea6ed2447.png"
-alt="An analysis of our newsletter rebrand from Proudct for Engineers to Build Mode"
+alt="An analysis of our newsletter rebrand from Product for Engineers to Build Mode"
 classes="rounded"
 />
 
@@ -169,9 +171,9 @@ classes="rounded"
 
 ## Improve a canvas
 
-Click **Edit** on a canvas to open the original agent session and continue prompting changes. You can also edit a canvas any another agent chat simply by referring to the canvas name or link. Teammates in a shared space can comment on specific elements of a canvas by double clicking an element, which can then be used to prompt the agent in the thread.
+Select **Edit** on a canvas to open the chat panel and prompt changes from the original session. You can also edit a canvas from any other agent chat. Refer to the canvas by name or link. Teammates in a shared space can comment on part of a canvas. Double click an element on the canvas, then select **Add comment**. The comment stays in the canvas thread, where you can use it to prompt the agent.
 
-Each build creates a version. Compare versions to review what changed, and restore an earlier version when a revision does not work.
+Each publish creates a version. Open an earlier version from the version list, and select **Revert to this version** when a revision does not work.
 
 ## Share a canvas
 
