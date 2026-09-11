@@ -53,12 +53,8 @@ export const SPECIES: Species[] = [
                 body: `Disabled submit button with no error state. JavaScript error in the form-validation library. Stripe webhook hanging. Sometimes a 2-second response time you have stopped noticing.`,
             },
             {
-                label: 'Conservation status',
-                body: `Vulnerable. Without intervention, will not return.`,
-            },
-            {
                 label: 'If you spot one',
-                body: `Rage clicks are the textbook frustration signal, so score them. A Scorer scanner can rate each session 0 to 10 for visible frustration. Filter it to your checkout and payment sessions, put a threshold alert on the average score, and route it to whoever owns that flow. When the average climbs, something on the path to purchase has broken, and the reasoning behind the worst-scoring sessions will show you where.`,
+                body: `Rage clicks usually mean the button gave no response, not that the backend broke. The click registers, but nothing spins, nothing disables, and no error appears, so the user tries again. Throttle your network and hit Submit on your own checkout. If a second passes with nothing on screen, you have found what the Rage-Clicker found. A Scorer scanner rates every session 0 to 10 for frustration, so filter it to checkout, alert on the average, and send it to whoever owns the flow.`,
             },
         ],
     },
@@ -93,12 +89,8 @@ export const SPECIES: Species[] = [
                 body: `A backend timeout your team has stopped noticing. An over-eager loading spinner that resolves visually before the data arrives.`,
             },
             {
-                label: 'Conservation status',
-                body: `Exhausted. Might abandon the page any time now.`,
-            },
-            {
                 label: 'If you spot one',
-                body: `Ask a Monitor scanner whether the user reloaded the same URL three or more times in quick succession. When the verdict is yes, start exploring why. You'll find the exact reload, nearly always a slow endpoint, or a status page lagging behind reality. The Pilgrim will never complain, so you won't get any bugs reported to you directly.`,
+                body: `A user who reloads the same page four times thinks it is stuck rather than broken, and they are usually right. Behind it sits a slow endpoint, or a spinner that finishes before the data lands. They will not file a ticket, so nobody on your team hears about it. A Monitor scanner flags any session that reloaded one URL three or more times, and the reload timestamp points straight at the endpoint.`,
             },
         ],
     },
@@ -133,14 +125,8 @@ export const SPECIES: Species[] = [
                 body: `No single failure to blame. The product worked. The user has the attention span of a fruit fly on espresso, and your product is one of seven things asking for it.`,
             },
             {
-                label: 'Conservation status',
-                body: `Common. Possibly thriving. Hard to catch and measure.`,
-            },
-            {
                 label: 'If you spot one',
-                body: `You can't see the hop itself. Replay Vision cuts the idle moments out of each recording, and switching to another tab is an idle moment, so the wandering never shows up. What the scanner can catch is the aftermath: a task the user started and left unfinished.
-
-Run a Monitor scanner for exactly that and save the flagged users as a cohort. Then use the cohort to bring them back, whether that's an in-app nudge or a re-engagement email reminding them to finish what they started. A distracted user is not a lost one; they mostly need a reason to return to the tab.`,
+                body: `Tab-switching is not a defect in your product, so do not try to fix the switching. The signal worth having is the task they started and left. Replay Vision trims idle time out of each recording and a tab switch is idle time, so the hop never appears on camera. The abandoned task does. Run a Monitor scanner for it, save those users as a cohort, and give them a reason to come back with an in-app nudge or an email.`,
             },
         ],
     },
@@ -175,12 +161,8 @@ Run a Monitor scanner for exactly that and save the flagged users as a cohort. T
                 body: `Required fields are perceived as intrusive. Unexpected friction at the conversion moment. A field-validation error that resets all prior entries. The discovery, mid-form, that a credit card will be required.`,
             },
             {
-                label: 'Conservation status',
-                body: `Endangered, if you count signups or payments. Thriving, if you don't.`,
-            },
-            {
                 label: 'If you spot one',
-                body: `A verdict won't help here; you want the field name. A Classifier scanner asked "Which form field was the user on when they gave up?" tags each abandoned session with the exact culprit, so turn on freeform tags, since you cannot predict every field name in advance. Sort the tags by frequency and you have a ranked list of the fields breaking your funnel, worst offender first. Usually it is the one nobody wanted to add.`,
+                body: `Form abandonment comes down to one field far more often than to the length of the form, and it tends to be the field nobody on the team wanted to add: a required phone number, a CAPTCHA, or a dropdown with no option that fits. Fill in your own signup and notice where you would hesitate. A Classifier scanner asked which field the user was on when they quit tags each abandoned session with the culprit, and sorting those tags by frequency ranks your worst offenders.`,
             },
         ],
     },
@@ -215,12 +197,8 @@ Run a Monitor scanner for exactly that and save the flagged users as a cohort. T
                 body: `Pricing that requires too much arithmetic. A feature comparison that does not answer the question they actually have. A "Contact us" button where they expected a price. A free tier whose limits are described in units the visitor does not understand.`,
             },
             {
-                label: 'Conservation status',
-                body: `Cautious. Easily startled by aggressive sales follow-up.`,
-            },
-            {
                 label: 'If you spot one',
-                body: `First narrow to sessions that touched /pricing, then run a Classifier scanner asking "Which plan, tier, or feature did this visitor keep returning to?" The tags tell you what your buyers are weighing. Save the users behind a given tag as a cohort and hand it to sales, and the follow-up arrives already knowing which tier the Loiterer was stuck on. That beats a cold "just checking in."`,
+                body: `Somebody who visits your pricing page four times without signing up did not get an answer to one specific question, and it is nearly always what this will cost at their size. Try working out your own bill from your pricing page in under a minute. A Classifier scanner asking which tier or feature the visitor kept returning to turns that into a cohort, and sales can open with the tier the Loiterer was stuck on instead of a cold check-in.`,
             },
         ],
     },
@@ -255,14 +233,8 @@ Run a Monitor scanner for exactly that and save the flagged users as a cohort. T
                 body: `A tutorial that is too long. Tooltips that obscure the interface they're describing. A "Welcome" modal that is the only path into setup.`,
             },
             {
-                label: 'Conservation status',
-                body: `Common to abundant. Adapts faster than your onboarding does.`,
-            },
-            {
                 label: 'If you spot one',
-                body: `A Monitor scanner catches the moment the user dismisses onboarding in under five seconds without engaging a single step. Save the yes-users as a cohort and set it beside your activation numbers.
-
-If the Skippers activate anyway, your onboarding is optional and you can safely shorten it. If they don't, you have found both the people to win back and the feature to do it with, since it is the one the tutorial was trying to show them.`,
+                body: `A high skip rate on onboarding tells you nothing by itself. What matters is whether the Skippers activate anyway, and plenty of them do. A Monitor scanner catches sessions that dismissed onboarding in under five seconds, so save them as a cohort and set it beside your activation numbers. If they activate, your onboarding is optional and you can cut it down. If they do not, you have found the people to win back and the feature to win them back with, since it is the one the tutorial was trying to show them.`,
             },
         ],
     },
@@ -301,12 +273,8 @@ export const PENDING_SPECIES: Species[] = [
                 body: `A modal placed at the worst moment in a flow. A re-onboarding message that fires on every login. A "We've updated our privacy policy" notice that distracts them from the task they wanted to complete.`,
             },
             {
-                label: 'Conservation status',
-                body: `Abundant. Reflexive. Cannot be reasoned with.`,
-            },
-            {
                 label: 'If you spot one',
-                body: `A Classifier scanner with freeform tags, asked "Which modal, popup, or overlay did this user dismiss without reading?", returns a ranked list of the interruptions your users bounce off. Read it as a list of things you made them close. The one at the top is the one to cut first.`,
+                body: `A modal closed inside a second was never read, so the message is gone either way. The cost that lands is on the task it interrupted. Count the overlays a new user meets before their first real action in your product, because three is common. A Classifier scanner with freeform tags returns a ranked list of what people dismiss without reading. Read it as a list of things you made them close, and cut the one at the top.`,
             },
         ],
     },
@@ -341,14 +309,8 @@ export const PENDING_SPECIES: Species[] = [
                 body: `Major UI redesigns shipped without changelog visibility. Deprecated features removed without redirects. An empty state where their previous data used to be.`,
             },
             {
-                label: 'Conservation status',
-                body: `Recurrent but unpredictable. Easily lost.`,
-            },
-            {
                 label: 'If you spot one',
-                body: `This one rewards a Summarizer scanner over a verdict or a tag. Filter to sessions from users returning after a long absence, and for each one it writes what they set out to do and where they got stuck, since intent and friction points are part of what a summary returns.
-
-Schedule a weekday digest of those summaries to Slack. Every Monday you get a short brief on what your long-dormant customers came looking for and could no longer find.`,
+                body: `After ninety days away, the product moved and the user's memory did not. Settings got renamed, navigation got reorganized, and the feature they used most now lives somewhere else. Try finding your way around your own product using last year's menu names. A Summarizer scanner reading sessions from long-absent users writes down what each one came to do and where they got stuck, and a weekly digest to Slack gives you a standing list of what your dormant customers can no longer find.`,
             },
         ],
     },
@@ -383,12 +345,8 @@ Schedule a weekday digest of those summaries to Slack. Every Monday you get a sh
                 body: `Outdated marketing copy. Renamed feature URLs without redirects. Email links pointing to environments that no longer exist.`,
             },
             {
-                label: 'Conservation status',
-                body: `Vulnerable. Mostly silent. Easily neglected.`,
-            },
-            {
                 label: 'If you spot one',
-                body: `You can count the 404s themselves in analytics; what that misses is where the Wanderer meant to go. A Classifier scanner asking "What was the user trying to reach when they landed on the 404?" tags each dead end with its intended destination. The ranked tags are your most-broken paths, and a surprising share trace back to your own old emails and outdated docs, which is the good news, since those you control.`,
+                body: `Your analytics can count 404s. What they cannot tell you is where the person meant to go, which is the only part you can act on. A good share of broken paths lead back to your own old emails and outdated docs, and those you control. Search your site and your campaigns for links to routes you deprecated. A Classifier scanner asking what the user was trying to reach tags each dead end with its intended destination, and the ranked tags are your most broken paths.`,
             },
         ],
     },
@@ -423,14 +381,8 @@ Schedule a weekday digest of those summaries to Slack. Every Monday you get a sh
                 body: `Console errors visible to the public. API keys logged in client-side network requests. A 401 returning from an endpoint you forgot was live.`,
             },
             {
-                label: 'Conservation status',
-                body: `Rare but consequential.`,
-            },
-            {
                 label: 'If you spot one',
-                body: `Like the Tab-Hopper, this one hides from the recording. The developer tools live outside the page, so the video never shows them opening. The session's raw events reach the model too, though, exceptions included, so the errors the Console-Opener came to read are on the record even when the console is not.
-
-Run a Monitor scanner for sessions that threw a visible error and then kept probing instead of leaving. A yes is usually one of two people. Either a technical evaluator taking you seriously, or a bug that reached the public before you did.`,
+                body: `Someone opening devtools on a marketing page is either evaluating you seriously or has found something you would rather they had not. Open your own landing page console and read it the way a stranger would, watching for leaked keys and 401s from endpoints you forgot were live. Devtools sit outside the page, so the recording never shows them opening. The session's raw events still reach the model, exceptions included. Run a Monitor scanner for sessions that threw a visible error and kept probing instead of leaving.`,
             },
         ],
     },
