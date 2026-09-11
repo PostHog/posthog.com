@@ -1,12 +1,12 @@
 # CanvasGallery
 
-Renders `/desktop-gallery`: a gallery of example PostHog Desktop canvases. The filing-desk header shows how an idea and product signals become a canvas. Selecting a swipe file moves it to the front of the stack, where its color continues behind its canvas cards. All canvases opens by default. Each entry uses an image from the canvas docs, shows the prompt that builds something similar, and hands the prompt to PostHog Desktop with a `posthog-code://new` deep link.
+Renders `/desktop-gallery`: a gallery of example PostHog Desktop canvases. The filing-desk header shows how an idea and product signals become a canvas. The swipe files keep their connected stack and staggered tabs. Each bordered swipe file is an accordion. It expands its own canvas cards in place, without changing the folder order. Only one folder can stay open at a time, and clicking it again closes it. All canvases opens by default. Each entry uses an image from the canvas docs, shows the prompt that builds something similar, and hands the prompt to PostHog Desktop with a `posthog-code://new` deep link.
 
 ## Files
 
 | File | Purpose |
 | --- | --- |
-| `index.tsx` | The filing-desk header, swipe-file tabs, card grid, community callout, Desktop call to action, and detail `Modal`. |
+| `index.tsx` | The filing-desk header, swipe-file accordions, card grid, community callout, Desktop call to action, and detail `Modal`. |
 | `canvases.tsx` | All content. `CATEGORIES` describes the three jobs a canvas does, and `CANVASES` contains the gallery entries, images, data tools, and connectors. |
 
 ## Add a canvas
@@ -26,6 +26,10 @@ A prompt is the product of this page, so write it as instructions you would want
 ## Tool chips
 
 `CanvasTool` holds handles from `src/data/tools.ts`. The chip takes its name and page from `getTool(handle)` and links to `/${slug}`, so a canvas can name the capability it leans on (`funnels`, `retention`) and not only the product. Only the icon and color live in `canvasToolInfo`. `toolSlugOverrides` covers handles with no product page. Check the page resolves before you add a handle: some slugs in `tools.ts` have no page (`trends`).
+
+## Folder interaction
+
+The gallery uses the shared Radix accordion item, trigger, and content components. Triggers support Enter, Space, arrow keys, Home, and End. Each trigger reports its expanded state and controls its own content region. The pointer target follows the same SVG outline as the visible folder, so the transparent area beside a tab does not intercept clicks on the folder behind it. A shadow follows the folder silhouette. Reduced motion disables the content animation. The hero and folders share the original bordered page container, with a theme-aware header background and constrained editor width.
 
 ## Folder colors
 

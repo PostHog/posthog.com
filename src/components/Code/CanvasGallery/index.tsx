@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { navigate } from 'gatsby'
-import { motion, useReducedMotion } from 'framer-motion'
+import { Accordion as RadixAccordion } from 'radix-ui'
+import { AccordionItem, AccordionTrigger, AccordionContent } from 'components/RadixUI/Accordion'
 import {
     IconActivity,
     IconArrowUpRight,
@@ -53,7 +54,7 @@ import {
 const categoryOrder: CanvasCategory[] = ['investigate', 'monitor', 'present']
 type SwipeFileId = CanvasCategory | 'all'
 
-const swipeFileOrder: SwipeFileId[] = ['all', ...categoryOrder]
+const swipeFileOrder: SwipeFileId[] = [...categoryOrder, 'all']
 const swipeFileTabStart: Record<SwipeFileId, number> = {
     investigate: 58,
     monitor: 436,
@@ -63,11 +64,11 @@ const swipeFileTabStart: Record<SwipeFileId, number> = {
 
 const folderTopPath = (tabStart: number): string => {
     const tabEnd = tabStart + 232
-    return `M 0 64 H ${tabStart} C ${tabStart + 12} 64 ${tabStart + 18} 59 ${tabStart + 22} 50 C ${tabStart + 26} 34 ${
+    return `M .5 64 H ${tabStart} C ${tabStart + 12} 64 ${tabStart + 18} 59 ${tabStart + 22} 50 C ${tabStart + 26} 34 ${
         tabStart + 34
     } 20 ${tabStart + 50} 20 H ${tabEnd} C ${tabEnd + 12} 20 ${tabEnd + 20} 34 ${tabEnd + 24} 50 C ${tabEnd + 28} 59 ${
         tabEnd + 34
-    } 64 ${tabEnd + 46} 64 H 970 V 64 Z`
+    } 64 ${tabEnd + 46} 64 H 999.5`
 }
 
 const folderTones: Record<SwipeFileId, { light: string; dark: string }> = {
@@ -312,93 +313,95 @@ function CanvasConnectorChip({ connector }: { connector: CanvasConnector }): JSX
     )
 }
 
-function SwipeFileTabs({
-    activeFile,
-    onSelect,
-}: {
-    activeFile: SwipeFileId | null
-    onSelect: (file: SwipeFileId | null) => void
-}): JSX.Element {
-    const reduceMotion = useReducedMotion()
+function SwipeFiles({ onOpen }: { onOpen: (canvas: GalleryCanvas) => void }): JSX.Element {
     const folderTone = useFolderTone()
-    const fileOrder = activeFile
-        ? [...swipeFileOrder.filter((file) => file !== activeFile), activeFile]
-        : swipeFileOrder
-    const finalFileHeight = activeFile && activeFile !== 'all' ? 112 : 80
-    const finalFileOffset = activeFile && activeFile !== 'all' ? 6 : 0
+
     return (
-        <div className="relative" aria-label="Swipe files">
-            {fileOrder.map((file, index) => {
+        <RadixAccordion.Root
+            type="single"
+            collapsible
+            defaultValue="all"
+            aria-label="Swipe files"
+            className="relative motion-reduce:[&_[role=region]]:animate-none"
+        >
+            {swipeFileOrder.map((file, index) => {
                 const tabStart = swipeFileTabStart[file]
-                const tone = folderTone(file)
-                const active = activeFile === file
+                const finalFile = index === swipeFileOrder.length - 1
+                const fill = folderTone(file)
                 const category = file === 'all' ? undefined : CATEGORIES[file]
-                const expanded = active && !!category
-                const finalFile = index === fileOrder.length - 1
-                const heightClass = expanded ? (finalFile ? 'h-28' : 'h-[150px]') : finalFile ? 'h-20' : 'h-24'
-                const bodyBottom = finalFile
-                    ? 0
-                    : index === fileOrder.length - 2
-                    ? 48 - finalFileHeight + finalFileOffset
-                    : -48
-                const label = category ? category.verb : allCanvasesFile.label
+                const canvases = file === 'all' ? CANVASES : CANVASES.filter((canvas) => canvas.category === file)
+
                 return (
-                    <motion.div
+                    <AccordionItem
                         key={file}
-                        initial={false}
-                        layout="position"
-                        transition={{ duration: reduceMotion ? 0 : 0.24, ease: [0.16, 1, 0.3, 1] }}
-                        className="relative"
-                        style={{
-                            zIndex: index + 1,
-                            marginTop: index === 0 ? 0 : -48,
-                        }}
+                        value={file}
+                        className="pointer-events-none relative !border-0"
+                        style={{ zIndex: index + 1, marginTop: index === 0 ? 0 : -48 }}
                     >
-                        <button
-                            type="button"
-                            aria-pressed={active}
-                            aria-expanded={expanded}
-                            onClick={() => onSelect(active ? null : file)}
-                            className={`relative block w-full text-left transition-[height,transform] duration-200 ease-out focus:outline-none focus-visible:ring-2 focus-visible:ring-blue motion-reduce:transition-none ${
-                                expanded ? '-translate-y-1.5' : ''
-                            } ${heightClass}`}
+                        <div
+                            className="pointer-events-none absolute inset-0"
+                            style={{ filter: 'drop-shadow(0 -1px 2px rgb(0 0 0 / 0.1))' }}
+                            aria-hidden="true"
                         >
-                            <span
-                                className="absolute inset-x-0 top-[48px]"
-                                style={{ backgroundColor: tone, bottom: bodyBottom }}
+                            <div
+                                className="pointer-events-none absolute inset-x-0 top-16 border-x border-primary"
+                                style={{ backgroundColor: fill, bottom: finalFile ? 0 : -48 }}
                                 aria-hidden="true"
                             />
                             <svg
                                 viewBox="0 0 1000 64"
                                 preserveAspectRatio="none"
-                                className="absolute inset-x-0 top-0 h-16 w-full"
+                                className="pointer-events-none absolute inset-x-0 top-0 h-16 w-full overflow-visible"
                                 aria-hidden="true"
                             >
-                                <path d={folderTopPath(tabStart)} fill={tone} />
+                                <path
+                                    d={folderTopPath(tabStart)}
+                                    fill={fill}
+                                    stroke="rgb(var(--border))"
+                                    vectorEffect="non-scaling-stroke"
+                                />
+                            </svg>
+                        </div>
+                        <AccordionTrigger
+                            className={`pointer-events-none relative w-full !p-0 [&>svg]:!hidden focus-visible:ring-2 focus-visible:ring-blue focus-visible:ring-inset ${
+                                finalFile ? 'h-20' : 'h-24'
+                            }`}
+                        >
+                            {/* Only the painted folder surface receives pointer input, including the overlap below. */}
+                            <svg
+                                viewBox="0 0 1000 144"
+                                preserveAspectRatio="none"
+                                className="absolute inset-x-0 top-0 h-36 w-full overflow-visible"
+                                aria-hidden="true"
+                            >
+                                <path
+                                    d={`${folderTopPath(tabStart)} V 144 H .5 Z`}
+                                    fill="transparent"
+                                    className="pointer-events-auto"
+                                />
                             </svg>
                             <span
-                                className="absolute top-[30px] -translate-x-1/2 text-sm font-semibold leading-none text-brown dark:text-primary"
+                                className="absolute top-[30px] w-[25%] -translate-x-1/2 text-center text-xs font-semibold leading-none text-brown dark:text-primary @md:text-sm"
                                 style={{ left: `${(tabStart + 141) / 10}%` }}
                             >
-                                {label}
+                                {category ? category.verb : allCanvasesFile.label}
                             </span>
-                            {expanded && category && (
-                                <motion.span
-                                    initial={{ opacity: 0, y: reduceMotion ? 0 : 6 }}
-                                    animate={{ opacity: 1, y: 0 }}
-                                    transition={{ duration: reduceMotion ? 0 : 0.18, delay: reduceMotion ? 0 : 0.08 }}
-                                    className="absolute left-4 right-4 top-[82px] flex items-start gap-3 text-left @xl:left-5 @xl:right-5"
-                                >
-                                    <span className="max-w-xl text-sm leading-snug text-brown dark:text-primary">
-                                        {category.description}
-                                    </span>
-                                </motion.span>
-                            )}
-                        </button>
-                    </motion.div>
+                        </AccordionTrigger>
+                        <AccordionContent
+                            className={`relative px-4 @xl:px-5 ${finalFile ? '!pb-5' : '!pb-16'}`}
+                            style={{ animationDuration: '200ms', pointerEvents: 'auto' }}
+                        >
+                            {category && <p className="mb-4 text-sm text-primary">{category.description}</p>}
+                            <div className="grid grid-cols-1 gap-4 @xl:grid-cols-2">
+                                {canvases.map((canvas) => (
+                                    <CanvasCard key={canvas.slug} canvas={canvas} onOpen={() => onOpen(canvas)} />
+                                ))}
+                            </div>
+                        </AccordionContent>
+                    </AccordionItem>
                 )
             })}
-        </div>
+        </RadixAccordion.Root>
     )
 }
 
@@ -630,10 +633,8 @@ function CanvasCommunityCTA(): JSX.Element {
 }
 
 export default function CanvasGallery(): JSX.Element {
-    const [activeFile, setActiveFile] = useState<SwipeFileId | null>('all')
     const [openSlug, setOpenSlug] = useState<string | null>(null)
     const track = useGalleryEvent()
-    const folderTone = useFolderTone()
 
     useEffect(() => {
         const params = new URLSearchParams(window.location.search)
@@ -652,31 +653,16 @@ export default function CanvasGallery(): JSX.Element {
     }, [openSlug])
 
     const open = openSlug ? CANVASES.find((c) => c.slug === openSlug) : undefined
-    const visibleCanvases =
-        activeFile === 'all' ? CANVASES : activeFile ? CANVASES.filter((canvas) => canvas.category === activeFile) : []
-    const galleryColor = activeFile ? folderTone(activeFile) : undefined
 
     return (
         <>
             <div className="@container not-prose relative z-10 -mt-16 overflow-hidden rounded-b border-x border-b border-primary">
-                <SwipeFileTabs activeFile={activeFile} onSelect={setActiveFile} />
-
-                {activeFile && (
-                    <div className="relative -mt-1.5 px-4 pb-4 pt-3 @xl:px-5" style={{ backgroundColor: galleryColor }}>
-                        <div className="grid grid-cols-1 gap-4 @xl:grid-cols-2">
-                            {visibleCanvases.map((canvas) => (
-                                <CanvasCard
-                                    key={canvas.slug}
-                                    canvas={canvas}
-                                    onOpen={() => {
-                                        track('view_example', canvas)
-                                        setOpenSlug(canvas.slug)
-                                    }}
-                                />
-                            ))}
-                        </div>
-                    </div>
-                )}
+                <SwipeFiles
+                    onOpen={(canvas) => {
+                        track('view_example', canvas)
+                        setOpenSlug(canvas.slug)
+                    }}
+                />
             </div>
 
             <div className="not-prose">
