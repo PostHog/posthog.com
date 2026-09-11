@@ -76,7 +76,7 @@ export const GiveAgentsContext = () => {
                         hideSecondaryAction
                         className="!shadow-none !mb-0"
                     />
-                    <p className="text-sm text-secondary m-0">
+                    <p className="text-sm text-secondary m-0 inline-flex gap-1">
                         Or use{' '}
                         <Link
                             to="/desktop"
