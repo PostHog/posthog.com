@@ -140,6 +140,11 @@ interface ReaderViewProps {
     productSelect?: React.ReactNode
     hideMenu?: boolean
     className?: string
+    /**
+     * Rendered in the article column, outside the scroll fade mask. Use for
+     * floating chrome that must stay fully opaque at the window edge.
+     */
+    overlay?: React.ReactNode
 }
 
 interface BackgroundImageOption {
@@ -454,6 +459,7 @@ export default function ReaderView({
     productSelect,
     hideMenu = false,
     className = '',
+    overlay,
 }: ReaderViewProps) {
     return (
         <ReaderViewProvider defaultNavVisible={defaultNavVisible}>
@@ -490,6 +496,7 @@ export default function ReaderView({
                 productSelect={productSelect}
                 hideMenu={hideMenu}
                 className={className}
+                overlay={overlay}
             >
                 {children}
             </ReaderViewContent>
@@ -1414,6 +1421,7 @@ function ReaderViewContent({
     productSelect,
     hideMenu = false,
     className = '',
+    overlay,
 }: ReaderViewProps) {
     const { compact } = useApp()
     const { appWindow, activeInternalMenu } = useWindow()
@@ -1659,6 +1667,7 @@ function ReaderViewContent({
                             : undefined
                     }
                 >
+                    {overlay}
                     {showMobileNav && (
                         <button
                             type="button"

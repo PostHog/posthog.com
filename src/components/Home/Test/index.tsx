@@ -25,7 +25,7 @@ import ToolsTicker from 'components/Home/ToolsTicker'
 // GetStarted, the carousel) is the only PostHog.com-side glue and is not present on 9000.
 import PlatformInstall, { wizardInstallSchema } from 'components/PlatformInstall'
 import HeroCTA from 'components/Home/HeroCTA'
-import { HeroBody, HeroHeadline } from 'components/Home/HeroCopy'
+import { HeroBody, HeroCopyProvider, HeroCopySwitcher, HeroHeadline } from 'components/Home/HeroCopy'
 import Customers from '../Customers'
 
 /** Loads HeroCarousel + Typecaast slides only in the browser so SSR/Helmet aren't affected. */
@@ -189,17 +189,19 @@ export default function HomeTest() {
     }, [])
 
     return (
-        <ReaderView proseSize="lg" hideLeftSidebar showQuestions={false}>
-            <div className="space-y-12">
-                <Hero />
-                <Customers />
-                <DataStackSection />
-                <PricingSection />
-                <WhyPostHogSection />
-                <BedtimeReadingSection />
-                <ShamelessCTASection />
-                <HitCounter />
-            </div>
-        </ReaderView>
+        <HeroCopyProvider>
+            <ReaderView proseSize="lg" hideLeftSidebar showQuestions={false} overlay={<HeroCopySwitcher />}>
+                <div className="space-y-12">
+                    <Hero />
+                    <Customers />
+                    <DataStackSection />
+                    <PricingSection />
+                    <WhyPostHogSection />
+                    <BedtimeReadingSection />
+                    <ShamelessCTASection />
+                    <HitCounter />
+                </div>
+            </ReaderView>
+        </HeroCopyProvider>
     )
 }
