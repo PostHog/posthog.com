@@ -772,11 +772,6 @@ export default function SlackAppPage(): JSX.Element {
                         The PostHog Slack app is a single agent that reads your product data and writes your code. Ask
                         "why did EU signups drop?", then have it open the PR that fixes it (without leaving Slack).
                     </p>
-                    <p>
-                        Send images, PDFs, and text files with your message – a screenshot of a broken page, a design,
-                        or an error log – and the agent reads them as part of the request. Five files per message, 10 MB
-                        each.
-                    </p>
                     <div className="not-prose grid @2xl/reader-content:grid-cols-2 gap-4 mb-6 mt-6">
                         {introCards.map((card) => (
                             <IntroCard key={card.title} {...card} />
