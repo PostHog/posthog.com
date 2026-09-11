@@ -107,7 +107,7 @@ We've pruned our prompt set aggressively for this reason. A smaller set focused 
 
 We do track branded prompts like "what is PostHog" as they're useful for checking how accurately we're positioned in the eyes of LLMs, but they're excluded from the visibility calculation.
 
-**Want to poke at this yourself?** We're working on making all of it easier to see. In the meantime, let us know if you'd like access to Gauge, and there's a bot in `#marketing-reporting` you can tag `@AskGauge` to ask questions about our visibility data directly.
+**Want to poke at this yourself?** We're working on making all of it easier to see. In the meantime, let us know if you'd like access to Gauge, and there's a bot in `#marketing-reporting` you can tag `@Gauge` to ask questions about our visibility data directly.
 
 ## What we control and what we don't
 
