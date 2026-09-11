@@ -2,6 +2,7 @@ import React, { createContext, useContext, useState, useCallback, useEffect } fr
 import { useWindow } from '../../../context/Window'
 import { MenuItem } from '../../../context/App'
 import { useApp } from '../../../context/App'
+import { safeLocalStorageGet, safeLocalStorageRemove, safeLocalStorageSet } from 'lib/utils'
 
 interface ReaderViewContextType {
     isNavVisible: boolean
@@ -27,7 +28,7 @@ let persistedPinnedMemory: boolean | null = null
 const readPersistedPinned = (): boolean | null => {
     if (typeof window === 'undefined') return null
     if (persistedPinnedMemory !== null) return persistedPinnedMemory
-    const raw = localStorage.getItem(SIDEBAR_PINNED_KEY)
+    const raw = safeLocalStorageGet(SIDEBAR_PINNED_KEY)
     if (raw === 'true') persistedPinnedMemory = true
     if (raw === 'false') persistedPinnedMemory = false
     if (persistedPinnedMemory !== null) return persistedPinnedMemory
@@ -67,7 +68,7 @@ export function ReaderViewProvider({
             setIsNavVisible(persisted)
             setNavUserToggled(true)
         }
-        const savedBackground = localStorage.getItem('background-image')
+        const savedBackground = safeLocalStorageGet('background-image')
         if (savedBackground) setBackgroundImage(savedBackground)
         setPersistedStateLoaded(true)
     }, [])
@@ -78,7 +79,7 @@ export function ReaderViewProvider({
             const next = !prev
             persistedPinnedMemory = next
             if (typeof window !== 'undefined') {
-                localStorage.setItem(SIDEBAR_PINNED_KEY, String(next))
+                safeLocalStorageSet(SIDEBAR_PINNED_KEY, String(next))
             }
             return next
         })
@@ -98,22 +99,22 @@ export function ReaderViewProvider({
         setBackgroundImage(image)
         if (typeof window !== 'undefined') {
             if (image) {
-                localStorage.setItem('background-image', image)
+                safeLocalStorageSet('background-image', image)
             } else {
-                localStorage.removeItem('background-image')
+                safeLocalStorageRemove('background-image')
             }
         }
     }, [])
 
     useEffect(() => {
-        const storedFullWidthContent = localStorage.getItem('fullWidthContent')
+        const storedFullWidthContent = safeLocalStorageGet('fullWidthContent')
         if (storedFullWidthContent) {
             setFullWidthContent(storedFullWidthContent === 'true')
         }
     }, [])
 
     useEffect(() => {
-        localStorage.setItem('fullWidthContent', fullWidthContent.toString())
+        safeLocalStorageSet('fullWidthContent', fullWidthContent.toString())
     }, [fullWidthContent])
 
     // Monitor container size and update ToC visibility
