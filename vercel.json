@@ -5411,7 +5411,11 @@
         },
         {
             "source": "/docs/data-warehouse/sources/temporal:ext(\\.md)?",
-            "destination": "/docs/data-warehouse/sources/temporalio:ext?"
+            "destination": "/docs/cdp/sources/temporalio:ext?"
+        },
+        {
+            "source": "/docs/data-warehouse/sources/temporalio:ext(\\.md)?",
+            "destination": "/docs/cdp/sources/temporalio:ext?"
         },
         {
             "source": "/docs/cdp/sources/temporal:ext(\\.md)?",
