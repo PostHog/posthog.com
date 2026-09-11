@@ -5882,6 +5882,10 @@
             "destination": "/docs/prompt-management:ext?"
         },
         {
+            "source": "/docs/ai-observability/prompt-management:ext(\\.md)?",
+            "destination": "/docs/prompt-management:ext?"
+        },
+        {
             "source": "/docs/llm-analytics/evaluations:ext(\\.md)?",
             "destination": "/docs/ai-evals:ext?"
         },
