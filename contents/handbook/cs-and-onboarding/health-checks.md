@@ -10,6 +10,8 @@ in a less than optimal way.  This could result in people spending more than they
 need to, or having inaccurate reporting data available to them.  Ultimately if 
 left unchecked these things will lead to avoidable churn.
 
+> When a health check turns up something that lowers a customer's bill, tag the account `cost optimizing` in PostHog Customer Analytics and share it with the team. [Cost optimization](/handbook/cs-and-onboarding/cost-optimization) covers how we handle these.
+
 ## Are they paying for things they don't need?
 
 ### Group analytics
