@@ -16,9 +16,15 @@ The TaskBar menu system provides a desktop-style navigation experience that adap
 On mobile, the main navigation items are moved from the top-level menu bar into the logo menu dropdown. This consolidates navigation into a single menu button to save space.
 
 ```
-Desktop: [Logo Menu] [Products] [Pricing] [Docs] [Library] [Company]
+Desktop: [Logo Menu] [Products] [Pricing] [Docs] [Community] [Company] [More]
 Mobile:  [Logo Menu ▼] (contains all navigation items)
 ```
+
+## Navbar Tools experiment
+
+`navbar-tools` is a multivariate experiment. Control keeps Tools nested under Products as "Browse tools". Test inserts a top-level Tools menu after Products (same curated tools, as regular menu items), and leaves Browse tools in the Products menu.
+
+The taskbar wraps the nav in `RenderInClient`. Until flags resolve, it shows the control nav. After flags load, `getFeatureFlag('navbar-tools') === 'test'` inserts Tools. Create the experiment in the website PostHog project with variants `control` and `test` before launch.
 
 ## Mobile Menu Configuration
 
@@ -139,6 +145,7 @@ Submenus are automatically converted to simple links on mobile:
 ## File Structure
 
 - `menuData.tsx` – Menu data and mobile processing logic
+- `navbarToolsExperiment.ts` – `navbar-tools` flag key (`NAVBAR_TOOLS_FLAG`)
 - `index.tsx` – TaskBar component that renders the menu
 - `../RadixUI/MenuBar.tsx` – Base menu component with mobile support
 

@@ -8,7 +8,7 @@ import EnableScout from 'components/SelfDrivingInbox/EnableScout'
 import { productSource } from 'components/SelfDrivingInbox/sources'
 
 import { useEntry, useTemplate } from './bookContext'
-import { BookPageEntry, learnChapterPath, normalizeUrl, volumeIdFromUrl } from './bookModel'
+import { learnChapterPath, normalizeUrl, volumeIdFromUrl } from './bookModel'
 import { volumeArt } from './volumeArt'
 
 /** Inline cue to a figure, color only – bold read larger than the surrounding text. */
@@ -74,79 +74,6 @@ export function Enable(): JSX.Element | null {
         return null
     }
     return <EnableScout scout={template.scout} requires={template.requires} templateTitle={template.templateTitle} />
-}
-
-/** One page's row: a link, a dotted leader, and its folio number. */
-function ContentsRow({ page, basePath }: { page: BookPageEntry; basePath?: string }): JSX.Element {
-    // Inside the Learn tab the contents keep the reader in the tab; the standalone reader's
-    // pages are their own routes.
-    const to = basePath ? learnChapterPath(basePath, page) : page.url
-    return (
-        <li className="flex items-baseline gap-2">
-            <Link to={to} wrapperClassName="min-w-0" className="text-[1em] text-primary hover:underline">
-                {page.title}
-            </Link>
-            {/* The dotted leader, so the row reads as a ToC line. */}
-            <span aria-hidden="true" className="min-w-6 flex-1 border-b border-dotted border-primary opacity-50" />
-            <span className="shrink-0 text-[0.9em] tabular-nums text-secondary">
-                {String(page.page).padStart(2, '0')}
-            </span>
-        </li>
-    )
-}
-
-/**
- * The contents list, built from the book itself. Groups into named sections when pages declare
- * a `section` in frontmatter (consecutive by reading order); a book where no page does prints
- * the same single flat list as before.
- */
-export function Contents(): JSX.Element | null {
-    const book = useEntry()
-    if (!book) {
-        return null
-    }
-    const pages = book.pages.filter((page) => !page.isFrontMatter)
-
-    if (pages.every((page) => !page.section)) {
-        return (
-            <ul className="m-0 list-none space-y-3 p-0">
-                {pages.map((page) => (
-                    <ContentsRow key={page.url} page={page} basePath={book.basePath} />
-                ))}
-            </ul>
-        )
-    }
-
-    // Group consecutive pages sharing a section – reading order already sorted them.
-    const groups: { section?: string; pages: BookPageEntry[] }[] = []
-    for (const page of pages) {
-        const current = groups[groups.length - 1]
-        if (current && current.section === page.section) {
-            current.pages.push(page)
-        } else {
-            groups.push({ section: page.section, pages: [page] })
-        }
-    }
-
-    return (
-        <div className="space-y-6">
-            {groups.map((group, i) => (
-                // eslint-disable-next-line react/no-array-index-key
-                <div key={group.section ?? i}>
-                    {group.section && (
-                        <p className="m-0 mb-2 text-[0.8em] font-bold uppercase tracking-wide text-secondary">
-                            {group.section}
-                        </p>
-                    )}
-                    <ul className="m-0 list-none space-y-3 p-0">
-                        {group.pages.map((page) => (
-                            <ContentsRow key={page.url} page={page} basePath={book.basePath} />
-                        ))}
-                    </ul>
-                </div>
-            ))}
-        </div>
-    )
 }
 
 /** A print footnote: short rule, small type, at the foot of the text column. */

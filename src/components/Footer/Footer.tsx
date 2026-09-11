@@ -61,7 +61,7 @@ const linklist: IProps[] = [
             },
             {
                 title: 'PostHog vs...',
-                url: '/blog/tags/comparisons',
+                url: '/compare',
             },
             {
                 title: 'For startups',

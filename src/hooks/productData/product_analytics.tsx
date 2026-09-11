@@ -15,7 +15,7 @@ import {
     IconRocket,
     IconSparkles,
 } from '@posthog/icons'
-import { FIFTY_MILLION, MAX_PRODUCT_ANALYTICS, MILLION, TEN_MILLION } from 'components/Pricing/pricingLogic'
+import { MAX_PRODUCT_ANALYTICS, MILLION, TEN_MILLION } from 'components/Pricing/pricingLogic'
 import { features } from './product_analytics/features'
 import { applications, topFeatures } from './product_analytics/slides'
 import { getTool } from '../../data/tools'
@@ -24,6 +24,7 @@ export const productAnalytics = {
     ...getTool('product_analytics'),
     Icon: IconGraph,
     type: 'product_analytics',
+    categoryName: 'Analytics',
     teamSlug: 'product-analytics',
     forumTopicId: 349,
     color: 'blue',
@@ -187,7 +188,7 @@ export const productAnalytics = {
     },
     slider: {
         // LogSlider uses Math.log – min/marks must be > 0 or labels stack at -Infinity.
-        marks: [MILLION, TEN_MILLION, FIFTY_MILLION, MAX_PRODUCT_ANALYTICS],
+        marks: [MILLION, TEN_MILLION, MAX_PRODUCT_ANALYTICS],
         min: MILLION,
         max: MAX_PRODUCT_ANALYTICS,
     },
@@ -347,17 +348,17 @@ export const productAnalytics = {
             {
                 name: 'Heap',
                 key: 'heap',
-                link: '/blog/posthog-vs-heap',
+                link: '/compare/posthog-vs-heap',
             },
             {
                 name: 'Pendo',
                 key: 'pendo',
-                link: '/blog/posthog-vs-pendo',
+                link: '/compare/posthog-vs-pendo',
             },
             {
                 name: 'Statsig',
                 key: 'statsig',
-                link: '/blog/posthog-vs-statsig',
+                link: '/compare/posthog-vs-statsig',
             },
             {
                 name: 'PostHog',
