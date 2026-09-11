@@ -26,7 +26,9 @@ export const SignIn: React.FC<SignInProps> = ({ buttonText = 'Login', onSubmit, 
         if (!user) {
             setMessage && setMessage('There was an error signing in. Please try again.')
         } else if ('error' in user) {
-            setMessage?.(errorMessages[user?.error] || user?.error)
+            setMessage?.(
+                errorMessages[user?.error] || user?.error || 'There was an error signing in. Please try again.'
+            )
         } else {
             await onSubmit?.(user)
         }
