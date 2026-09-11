@@ -92,9 +92,9 @@ interface CarouselSlideProps {
  *   `image.frameless: true` for full-bleed images.
  *
  * - `float`: at narrow container sizes the image stacks above the prose; at
- *   `@2xl/reader-content`+ it floats right and the prose flows around it. Glow halo
- *   is opt-in via `image.glow: true | GlowColor`. Set `image.frameless: true` to
- *   skip the default border around the floated image.
+ *   `@2xl`+ (measured against the slide's own container) it floats right and the
+ *   prose flows around it. Glow halo is opt-in via `image.glow: true | GlowColor`.
+ *   Set `image.frameless: true` to skip the default border around the floated image.
  *
  * All defaults are overridable via `slide.className`, `image.containerClassName`,
  * and `image.imgClassName`.
@@ -172,7 +172,7 @@ export default function CarouselSlide({ slide, productData }: CarouselSlideProps
                 <div
                     className={`${
                         image.maxWidth ?? 'w-full @2xl:w-[46%] @3xl:w-[48%] @4xl:w-1/2'
-                    } @2xl:float-right transition-all leading-[0] mb-4 @2xl:mb-0 @2xl:ml-4 @3xl:ml-8 @4xl/reader-content:ml-10${
+                    } @2xl:float-right transition-all leading-[0] mb-4 @2xl:mb-0 @2xl:ml-4 @3xl:ml-8 @4xl:ml-10${
                         image.containerClassName ? ` ${image.containerClassName}` : ''
                     }`}
                 >
