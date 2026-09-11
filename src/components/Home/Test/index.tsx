@@ -151,8 +151,8 @@ function Hero(): JSX.Element {
                 </div>
             </div>
 
-            <ToolsTicker className="mb-4" />
-            <HeroCarousel tabs={buildTabs} staticHeight className="mb-8" />
+            <HeroCarousel tabs={buildTabs} staticHeight className="mb-4" />
+            <ToolsTicker className="mb-8" />
         </>
     )
 }
