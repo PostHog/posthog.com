@@ -219,6 +219,7 @@ You can ask for access to team/company tools by submitted a request in Slack. Fi
 - We travel in economy by default and do not pay for business class
   - If you're unsure of your travel plans and believe you may have to cancel, it may be worth spending a bit extra to book flex tickets that allow a full refund to your Brex
   - It may be worth occasionally upgrading to Premium Economy if you're travelling a lot for work and the cost is not unreasonably high, particularly if you're working the next day
+- When booking flights over $1,000, choose the option to have the refund back to your Brex instead of travel credits.
 - Consider signing up for programs like Global Entry if you are regularly traveling to countries that offer it, using your Brex; this saves you time, particularly when traveling to the US.
 - When traveling internationally, use your Brex to expense a reasonable eSIM. PostHog does not cover roaming charges for your phone.
 - When using your Brex internationally, use the local currency since Brex generally offers a better exchange rate.
