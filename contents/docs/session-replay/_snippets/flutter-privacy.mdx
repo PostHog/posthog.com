@@ -25,6 +25,10 @@ These settings apply on iOS, Android, and — with [canvas masking](#masking-on-
 ...
 ```
 
+### Pausing recording on sensitive screens
+
+Masking hides what's drawn on screen, but not where the user touches it: the recording still includes the position of each tap. On a PIN, passcode, or card-number keypad, those positions alone can reveal the value entered, so masking the keypad isn't enough. Stop session recording while such a screen is shown and start it again once the screen is dismissed. See the Flutter tab of [programmatic start and stop controls](/docs/session-replay/how-to-control-which-sessions-you-record#programmatic-start-and-stop-controls) for the methods and a widget example.
+
 ### Masking on Flutter Web
 
 > Requires PostHog Flutter SDK version >= [5.34.0](https://github.com/PostHog/posthog-flutter/releases) and posthog-js version >= [1.408.0](https://github.com/PostHog/posthog-js/releases) in your `web/index.html`.

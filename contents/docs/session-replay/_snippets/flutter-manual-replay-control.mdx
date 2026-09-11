@@ -9,8 +9,44 @@ You can manually control when to start and stop session recordings using the fol
   - Set **resumeCurrent** to `false` to start a new session recording.
 - `stopSessionRecording()`
   - Stops/pauses the current session recording.
+- `isSessionReplayActive()`
+  - Returns a `Future<bool>` telling you whether a recording is currently active on this device. Resolves to `false` when session replay is off, hasn't started yet, or isn't supported on the current platform.
 
 > **Note:** Calling these methods will have no effect if session recordings are disabled in your PostHog [Project Settings](https://app.posthog.com/project/settings). Manual starts still respect project ingestion controls, including sampling and event triggers.
+
+#### Pause recording on a sensitive screen
+
+Masking hides what's drawn on screen, but the recording still includes where each touch lands. On a PIN, passcode, or card-number keypad, the tap positions alone can reveal the value entered, so stop recording while the screen is shown and resume it once the screen is dismissed:
+
+```dart
+class PinEntryScreen extends StatefulWidget {
+  const PinEntryScreen({super.key});
+
+  @override
+  State<PinEntryScreen> createState() => _PinEntryScreenState();
+}
+
+class _PinEntryScreenState extends State<PinEntryScreen> {
+  @override
+  void initState() {
+    super.initState();
+    Posthog().stopSessionRecording();
+  }
+
+  @override
+  void dispose() {
+    Posthog().startSessionRecording();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return const PinKeypad();
+  }
+}
+```
+
+`startSessionRecording()` resumes the current session by default, so the replay continues as one recording with the keypad left out. If your app doesn't record every session, store the result of `isSessionReplayActive()` when the screen opens and only call `startSessionRecording()` in `dispose` if it was `true`.
 
 #### Record or ignore specific screens
 
