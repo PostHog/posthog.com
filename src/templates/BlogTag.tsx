@@ -40,7 +40,7 @@ const BlogTag = ({
                     posts={posts.slice(0, 4)}
                     action={<PostToggle checked={allPostsFilter === 'popular'} onChange={handleToggleChange} />}
                 />
-                <NewsletterForm />
+                <NewsletterForm placement="blog-tag" />
                 <Posts posts={posts.slice(4, 12)} />
                 {posts.length > 12 && (
                     <>

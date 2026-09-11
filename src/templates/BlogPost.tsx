@@ -320,7 +320,7 @@ export default function BlogPost({ data, pageContext, location, mobile = false }
         a: A,
         TutorialsSlider,
         TutorialsList,
-        NewsletterForm,
+        NewsletterForm: (props) => <NewsletterForm {...props} placement="blog-post" />,
         BuiltBy,
         TeamMember,
         ImageSlider,

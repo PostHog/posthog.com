@@ -29,7 +29,7 @@ const Tutorials = ({
                     posts={allPostsFilter === 'popular' ? allPostsPopular : allPostsRecent}
                     action={<Link to="/tutorials/all">View all</Link>}
                 />
-                <NewsletterForm />
+                <NewsletterForm placement="tutorials-home" />
                 {categories.group.map(({ category, edges }) => {
                     const slug = slugify(category, { lower: true })
                     const url = `/tutorials/categories/${slug}`

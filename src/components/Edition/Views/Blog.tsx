@@ -15,7 +15,7 @@ export default function Blog({ title = 'Blog' }) {
             <SEO title={`${title} - PostHog`} />
             <LandingPageNotice title={title} />
             <FeaturedPost {...featuredPost?.attributes} />
-            <NewsletterForm placement="blog-index" />
+            <NewsletterForm placement="blog-index" variant="blog-index" />
             <PostsGrid posts={rest} />
         </div>
     )

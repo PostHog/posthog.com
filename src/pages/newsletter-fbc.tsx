@@ -88,11 +88,14 @@ function NewsletterSubscribeForm({
     setEmail,
     submitted,
     setSubmitted,
+    placement,
 }: {
     email: string
     setEmail: (email: string) => void
     submitted: boolean
     setSubmitted: (submitted: boolean) => void
+    /** Which of the two forms on the page this is. Sent with `newsletter_subscribed`. */
+    placement: string
 }) {
     const { user } = useUser()
     const posthog = usePostHog()
@@ -103,7 +106,7 @@ function NewsletterSubscribeForm({
         const fbclid = urlParams.get('fbclid')
         const utmSource = urlParams.get('utm_source')
 
-        posthog?.capture('newsletter_subscribed', { email })
+        posthog?.capture('newsletter_subscribed', { email, placement })
         posthog?.capture('user_signed_up_to_newsletter_from_ad', {
             ad_source: utmSource || 'undefined',
             email: email,
@@ -205,6 +208,7 @@ function NewsletterFBC(): JSX.Element {
                         setEmail={setEmail}
                         submitted={submitted}
                         setSubmitted={setSubmitted}
+                        placement="newsletter-fbc-top"
                     />
                     <div className="w-full max-w-5xl">
                         <h3 className="text-xl font-bold my-4 text-center">Top posts</h3>
@@ -230,6 +234,7 @@ function NewsletterFBC(): JSX.Element {
                                 setEmail={setEmail}
                                 submitted={submitted}
                                 setSubmitted={setSubmitted}
+                                placement="newsletter-fbc-bottom"
                             />
                         </div>
                     </div>

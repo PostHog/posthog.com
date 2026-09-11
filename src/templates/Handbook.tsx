@@ -32,7 +32,7 @@ import { CallToAction } from 'components/CallToAction'
 import WarehouseWizardHint from 'components/WarehouseWizardHint'
 import AIObservabilityWizardHint from 'components/AIObservabilityWizardHint'
 import Tooltip from 'components/Tooltip'
-import NewsletterForm from 'components/NewsletterForm'
+import { NewsletterForm } from 'components/NewsletterForm'
 import { MDXRenderer } from 'gatsby-plugin-mdx'
 import { MDXProvider } from '@mdx-js/react'
 import { useState } from 'react'
@@ -441,7 +441,7 @@ export default function Handbook({ data: { post, postHogSource }, pageContext: {
                 </OverflowXSection>
             </p>
         ),
-        NewsletterForm,
+        NewsletterForm: (props) => <NewsletterForm {...props} placement="handbook" />,
         ...shortcodes,
     }
 
