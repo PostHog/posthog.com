@@ -97,6 +97,19 @@ Common use cases:
 - **Re-engagement**: Test if marketing campaigns bring back dormant users
 - **Churn reduction**: Measure if changes reduce the time until users return
 
+<CalloutBox icon="IconInfo" title="Measuring repeat behavior with same-event retention" type="fyi">
+
+You can use the same event for both the start and completion event to measure repeat behavior – for example, "did the user come back to make another purchase?"
+
+When the start and completion events are the same, PostHog automatically excludes the start occurrence from counting as its own completion. Only a distinct later occurrence counts. This means:
+
+- A user who purchases on day 1 and purchases again on day 3 is retained.
+- A user who only purchases on day 1 is **not** retained.
+
+This differs from conversion-style retention where the start and completion events are different (e.g., signup → purchase).
+
+</CalloutBox>
+
 ## Outlier handling
 
 You can limit the impact of extreme values by clamping metric data at specified percentile thresholds using configurable lower and upper bounds. Values below the lower bound are replaced with the lower bound value, and values above the upper bound are replaced with the upper bound value. No data is excluded, and all users remain in the calculation. This is available for mean, funnel, and ratio metrics.
