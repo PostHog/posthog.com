@@ -42,4 +42,4 @@ export const fetchTopicGroups = async () => {
     return topicGroups.json().then((topicGroups) => topicGroups.data)
 }
 
-export const topicGroupsSorted = ['Off-topic', 'Products', 'Product OS', 'Data', 'Self-hosting', 'Other']
+export const topicGroupsSorted = ['Builder-lounge', 'Products', 'Product OS', 'Data', 'Self-hosting', 'Other']
