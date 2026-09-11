@@ -2,6 +2,7 @@ import { IconFastForward, IconPauseFilled, IconPlayFilled } from '@posthog/icons
 import { IconFullScreen, IconPlayhead, IconVolumeFull, IconVolumeHalf, IconVolumeMuted } from 'components/OSIcons/Icons'
 import { Select } from 'components/RadixUI/Select'
 import ZoomHover from 'components/ZoomHover'
+import { removeWistiaPlayer } from 'lib/wistia'
 import React, { useEffect, useRef, useState } from 'react'
 // Add types for YouTube and Wistia APIs to avoid TS errors
 declare global {
@@ -120,17 +121,19 @@ export default function MediaPlayer({
             // Wistia player initialization
             if (typeof window === 'undefined' || !containerRef.current) return
 
+            let cancelled = false
+            let embedDiv: HTMLDivElement | null = null
+            let player: any = null
+
             const initializeWistiaPlayer = () => {
-                const embedDiv = document.createElement('div')
+                if (cancelled) return
+
+                embedDiv = document.createElement('div')
                 embedDiv.className = `wistia_embed wistia_async_${videoId} videoFoam=true`
                 embedDiv.id = `video-player-iframe-${videoId}`
                 embedDiv.style.width = '100%'
                 embedDiv.style.height = '100%'
-
-                if (containerRef.current) {
-                    containerRef.current.innerHTML = ''
-                    containerRef.current.appendChild(embedDiv)
-                }
+                containerRef.current?.appendChild(embedDiv)
 
                 window._wq = window._wq || []
                 window._wq.push({
@@ -151,6 +154,18 @@ export default function MediaPlayer({
                         ...(borderRadius ? {} : { playerBorderRadius: 0, roundedPlayer: 0 }),
                     },
                     onReady: (video: any) => {
+                        // A _wq entry stays registered against its media id, so an entry from an
+                        // earlier mount also receives a later mount's player. Act on our embed only.
+                        if (video.container !== embedDiv) return
+
+                        // Wistia can hand the player back after the component unmounts.
+                        if (cancelled) {
+                            removeWistiaPlayer(video)
+                            return
+                        }
+
+                        player = video
+
                         if (!borderRadius) {
                             video.setPlayerBorderRadius?.(0)
                             video.setRoundedPlayer?.(0)
@@ -196,6 +211,22 @@ export default function MediaPlayer({
                 document.head.appendChild(script)
             } else {
                 initializeWistiaPlayer()
+            }
+
+            return () => {
+                cancelled = true
+                removeWistiaPlayer(player)
+
+                // Wistia retains the pushed _wq entry, and its onReady closure shares this
+                // scope. Drop the player so the entry does not pin it for the page's lifetime.
+                // embedDiv stays: the callback still needs it to recognize its own embed.
+                player = null
+
+                // The progress interval polls player.time(). Drop the handle so it stops.
+                setPlayerState((prev) => ({ ...prev, player: null }))
+
+                // Covers an embed that never became a player.
+                embedDiv?.remove()
             }
         }
     }, [videoId, source, startTime, borderRadius])
