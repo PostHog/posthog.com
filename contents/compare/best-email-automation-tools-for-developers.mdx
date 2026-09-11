@@ -1,6 +1,6 @@
 ---
 title: The best email automation tools for developers, compared
-date: 2026-09-08
+date: 2026-09-11
 rootPage: /compare
 sidebar: Compare
 showTitle: true
@@ -28,7 +28,7 @@ Either way, if you're a developer, this list is for you – ranked by how the to
 
 There's no wrong answer here, the right pick comes down to what you care about most:
 
--   **If you want emails triggered by product events, cohorts, flags, experiments, and more:** [PostHog](/workflows)
+-   **If you want emails triggered by product events, cohorts, and more:** [PostHog](/workflows)
 -   **If you need to connect email to a huge catalog of SaaS apps:** Zapier
 -   **If you want a visual builder for complex branching automations:** Make
 -   **If you need self-hosting and code when prebuilt nodes fall short:** n8n
@@ -53,12 +53,11 @@ A few workflows we actually run at PostHog:
 -   **Post-merge feedback email.** When a developer merges the pull request our setup wizard opened, a workflow emails them to ask how the wizard went.
 -   **Broken CI → an agent.** When CI goes red on the main branch, a workflow starts an AI agent task that reads our CI-debugging playbook and replies in the alert thread with a verdict, the failing job, and the next step for a human (it's not allowed to re-run CI or push code) – then a later step flips a physical alert light in the office on, and a companion workflow turns it off when CI is green again.
 -   **Infra alert triage.** A new firing alert kicks off a focused AI investigation and posts the findings back into the thread that raised it.
--   **AI code review.** A pull request labeled for a given team triggers a standing review agent that comments on the PR.
 
 **What makes PostHog Workflows good for developers:**
 
 -   **Triggers:** Product events, webhooks, batches (audience = person properties, cohorts, or distinct IDs), and tracking pixels.
--   **Channels:** Any dispatch step – email, Slack, push (iOS/Android), webhook, or any CDP destination; a webhook step can call out to anything else you run, so email is just one of them
+-   **Channels:** Any dispatch step – email, SMS, push (iOS/Android), webhook, or any CDP destination; a webhook step can call out to anything else you run, so email is just one of them
 -   **Hosting:** PostHog Cloud 
 -   **Pricing:** 10,000 emails/month free, then $0.003/email with volume discounts
 -   **License:** PostHog core is open source (MIT); Workflows itself is a managed cloud product
@@ -96,7 +95,7 @@ A few workflows we actually run at PostHog:
 **What makes Make good for developers:**
 
 -   **Triggers:** Native app events, scheduled runs, HTTP requests, and webhooks
--   **Channels:** Email and messaging through app connectors, but no email delivery of its own
+-   **Channels:** Email and messaging through app connectors
 -   **Hosting:** Cloud only
 -   **Pricing:** Per module execution (a credit); free plan includes 1,000 credits/month; paid from ~$9/month billed annually for 10,000 credits
 -   **License:** Proprietary, no self-hosted edition
@@ -123,14 +122,14 @@ A few workflows we actually run at PostHog:
 
 ### What's the best email automation tool for lifecycle marketing?
 
-**Customer.io** is the pick for dedicated lifecycle campaigns built around audience segments and real-time behavior, with A/B testing and analytics across email, push, SMS, and in-app.
+**Customer.io** is the pick for dedicated lifecycle campaigns built around audience segments and real-time behavior, with A/B testing and analytics across email, push, and SMS.
 
 **What makes Customer.io good for developers:**
 
 -   **Triggers:** Real-time behavioral events and segment membership
 -   **Channels:** Email, push, SMS, and in-app messages
 -   **Hosting:** Cloud only
--   **Pricing:** Subscription (third-party reviews list a Starter tier around $100/month, but pricing details conflict – confirm with Customer.io)
+-   **Pricing:** Subscription start at $100/month per 5k profiles
 -   **License:** Proprietary SaaS, no self-hosted option
 
 **Not ideal if:** you mainly want lightweight app-to-app automation, self-hosting, or a low-cost way to test a few simple workflows – and it needs engineering work to connect product data and keep event pipelines current.
@@ -167,7 +166,7 @@ It's also part of a **self-driving product**: because the trigger and the destin
 <details>
 <summary>Can you use PostHog Workflows for things other than email?</summary>
 
-Yes – email is just one step type. The trigger can be a webhook, a product event, or a Slack message, and the destination can be an email, a Slack post, an HTTP call, or an AI agent task. Teams use it for weekly error-digest emails, post-merge feedback, CI-failure triage that hands off to an agent, and alert investigations that report back into the originating thread.
+Yes – email is just one step type. The trigger can be a webhook, a product event, or a Slack message, and the destination can be an email, an HTTP call, or an AI agent task. Teams use it for weekly error-digest emails, post-merge feedback, CI-failure triage that hands off to an agent, and alert investigations that report back into the originating thread.
 
 </details>
 
