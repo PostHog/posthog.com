@@ -947,6 +947,12 @@ export const DocsItemsEnd = [
         // Matches the Templates entry in src/navs/index.js.
         icon: <Icons.IconMagic className="size-4 text-purple" />,
     },
+    {
+        type: 'item' as const,
+        label: 'Canvas gallery',
+        link: '/desktop-gallery',
+        icon: <Icons.IconPalette className="size-4 text-salmon" />,
+    },
 ]
 
 import type { AppIconName } from 'components/OSIcons/AppIcon'
