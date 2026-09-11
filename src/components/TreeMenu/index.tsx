@@ -625,6 +625,14 @@ function TreeMenuItem({
 }) {
     const [open, setOpen] = useState(() => Boolean(item.children) && isOpen(item, activeItem))
     const hasChildren = item.children && item.children.length > 0
+    // A row with both a `url` and children (e.g. "Model Context Protocol") must
+    // not navigate and expand from one click — that flashes the section open,
+    // then redirects. Expand only when a child repeats the parent `url` (an
+    // "Overview" child), so the parent page stays reachable from that child.
+    // Rows whose children don't carry the parent url keep navigating, or the
+    // parent page would lose its only link in the menu.
+    const collapseOnly =
+        expandOnly || Boolean(hasChildren && item.url && item.children?.some((child) => child.url === item.url))
     const location = useLocation()
     const pathname = replacePath(location?.pathname)
 
@@ -650,8 +658,10 @@ function TreeMenuItem({
                             : 'hover:!bg-dark/10 dark:hover:!bg-light/10'
                     }`}
                     active={activeItem === item}
-                    {...(expandOnly ? {} : { to: item.url || item.children?.[0]?.url, asLink: true })}
-                    onClick={() => onClick(item)}
+                    {...(collapseOnly ? {} : { to: item.url || item.children?.[0]?.url, asLink: true })}
+                    // A collapse-only row only toggles — it must not steal the active highlight
+                    // from the page the user is on, so skip the activeItem update for it.
+                    onClick={() => !collapseOnly && onClick(item)}
                     size="md"
                     hover="background"
                 >
