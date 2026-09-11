@@ -45,11 +45,11 @@ It's a no-code, drag-and-drop builder that runs on the [events](/docs/data/event
 
 Add delays and audience splits, and because it all lives next to your analytics, you can check what recipients did before and after the send without reconciling two datasets.
 
-And you're not stuck in the UI: build and edit workflows in code through the [PostHog API](/docs/api) or the [MCP server](/mcp), so a workflow can live in version control and ship alongside the rest of your changes.
+And you're not stuck in the UI: build and edit workflows in code through the [PostHog CLI](/docs/cli) or the [MCP server](/mcp), so a workflow can live in version control and ship alongside the rest of your changes.
 
 A few workflows we actually run at PostHog:
 
--   **Weekly error digest email.** A webhook sends one digest per organization, and the workflow renders it with Liquid: total exceptions with a bar chart, crash-free session rate, and top and new issues with sparklines – plus a nudge with the exact wizard command when stack traces aren't symbolicated.
+-   **Weekly error digest email.** A webhook sends one digest per recipient, and the workflow renders it with Liquid: total exceptions with a bar chart, crash-free session rate, and top and new issues with sparklines – plus a nudge with the exact wizard command when stack traces aren't symbolicated.
 -   **Post-merge feedback email.** When a developer merges the pull request our setup wizard opened, a workflow emails them to ask how the wizard went.
 -   **Broken CI → an agent.** When CI goes red on the main branch, a workflow starts an AI agent task that reads our CI-debugging playbook and replies in the alert thread with a verdict, the failing job, and the next step for a human (it's not allowed to re-run CI or push code) – then a later step flips a physical alert light in the office on, and a companion workflow turns it off when CI is green again.
 -   **Infra alert triage.** A new firing alert kicks off a focused AI investigation and posts the findings back into the thread that raised it.
@@ -98,10 +98,10 @@ A few workflows we actually run at PostHog:
 -   **Triggers:** Native app events, scheduled runs, HTTP requests, and webhooks
 -   **Channels:** Email and messaging through app connectors, but no email delivery of its own
 -   **Hosting:** Cloud only
--   **Pricing:** Per module execution (a credit); free plan includes 1,000 credits/month; paid from ~$9/month for 10,000 credits
+-   **Pricing:** Per module execution (a credit); free plan includes 1,000 credits/month; paid from ~$9/month billed annually for 10,000 credits
 -   **License:** Proprietary, no self-hosted edition
 
-**Not ideal if:** you need self-hosting, native product-analytics triggers, or predictable pricing for high-volume event processing – credit use grows with every executed module.
+**Not ideal if:** you need self-hosting, native product-analytics triggers, or you need cost to track message volume rather than workflow shape – credits are consumed per bundle processed, so one record across many modules costs more than a simple linear run.
 
 **Alternatives to consider:** **PostHog Workflows** for automation tied to product behavior; **n8n** when self-hosting takes priority.
 
@@ -114,7 +114,7 @@ A few workflows we actually run at PostHog:
 -   **Triggers:** Webhooks, schedules, and app events
 -   **Channels:** Integration nodes and HTTP requests to email providers, chat apps, databases, and other APIs
 -   **Hosting:** n8n Cloud or self-hosted Community Edition (commonly via Docker)
--   **Pricing:** Cloud from ~$20/month; Community Edition has no software charge (you pay for hosting)
+-   **Pricing:** Cloud from ~20€/month; Community Edition has no software charge (you pay for hosting)
 -   **License:** Fair-code, source-available – inspect and self-host it, but you can't resell it as a competing hosted service
 
 **Not ideal if:** you want polished lifecycle campaign management, built-in audience analytics, or a managed tool that needs no infrastructure work.
@@ -127,7 +127,7 @@ A few workflows we actually run at PostHog:
 
 **What makes Customer.io good for developers:**
 
--   **Triggers:** Real-time behavioral events and segment membership (from imported data)
+-   **Triggers:** Real-time behavioral events and segment membership
 -   **Channels:** Email, push, SMS, and in-app messages
 -   **Hosting:** Cloud only
 -   **Pricing:** Subscription (third-party reviews list a Starter tier around $100/month, but pricing details conflict – confirm with Customer.io)
@@ -135,7 +135,7 @@ A few workflows we actually run at PostHog:
 
 **Not ideal if:** you mainly want lightweight app-to-app automation, self-hosting, or a low-cost way to test a few simple workflows – and it needs engineering work to connect product data and keep event pipelines current.
 
-**Alternatives to consider:** **n8n** when self-hosting matters; **Zapier** for integration breadth; **Brevo** for marketing and transactional sending in one service.
+**Alternatives to consider:** **n8n** when self-hosting matters, **Zapier** for integration breadth, or **Brevo** for marketing and transactional sending in one service.
 
 ### What's the best email automation tool for multi-channel marketing and transactional sending?
 
@@ -143,10 +143,10 @@ A few workflows we actually run at PostHog:
 
 **What makes Brevo good for developers:**
 
--   **Triggers:** Contact updates, email activity, website activity, form submissions, and tags
--   **Channels:** Email, SMS, WhatsApp, chat, Facebook Ads, and transactional email via API, SMTP, or webhooks
+-   **Triggers:** Scheduled runs, email activity, website activity, and form submissions
+-   **Channels:** Email, SMS, WhatsApp (professional tier), chat, Facebook Ads, and transactional email via API, SMTP, or webhooks
 -   **Hosting:** Cloud only
--   **Pricing:** By send volume and contact limits; free plan ~300 emails/day; Starter ~$9/month, Standard ~$18, Professional ~$499; SMS and WhatsApp use separate credits
+-   **Pricing:** By send volume; free plan ~300 emails/day and 2k contact limit for automations; Starter ~$9/month, Standard ~$18, Professional ~$499; SMS and WhatsApp use separate credits
 -   **License:** Proprietary SaaS, no self-hosted option
 
 **Not ideal if:** you need enterprise campaign management, self-hosting, or workflows triggered directly by product experiments and feature flags.
