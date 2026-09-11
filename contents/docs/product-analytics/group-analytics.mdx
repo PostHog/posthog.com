@@ -235,6 +235,68 @@ PostHog::capture([
 
 </MultiLanguage>
 
+#### Multiple groups per person
+
+The limit above applies to events, not people. PostHog doesn't store group membership on the person, so one person can be associated with any number of individual groups of the same type, like a consultant who works with two companies. Set the group to the one the user is working in, and set it again when they switch:
+
+<MultiLanguage>
+
+```js-web
+// The user is working in one company
+posthog.group('company', 'company_id_in_your_db');
+posthog.capture('document_created')
+
+// The same user switches to another company
+posthog.group('company', 'another_company_id_in_your_db');
+posthog.capture('document_created')
+```
+
+```python
+posthog.capture(
+    'document_created',
+    distinct_id='user_distinct_id',
+    groups={'company': 'company_id_in_your_db'}
+)
+
+posthog.capture(
+    'document_created',
+    distinct_id='user_distinct_id',
+    groups={'company': 'another_company_id_in_your_db'}
+)
+```
+
+```node
+posthog.capture({
+    event: 'document_created',
+    distinctId: 'user_distinct_id',
+    groups: { company: 'company_id_in_your_db' }
+})
+
+posthog.capture({
+    event: 'document_created',
+    distinctId: 'user_distinct_id',
+    groups: { company: 'another_company_id_in_your_db' }
+})
+```
+
+```php
+PostHog::capture([
+    'distinctId' => 'user_distinct_id',
+    'event' => 'document_created',
+    '$groups' => ['company' => 'company_id_in_your_db']
+]);
+
+PostHog::capture([
+    'distinctId' => 'user_distinct_id',
+    'event' => 'document_created',
+    '$groups' => ['company' => 'another_company_id_in_your_db']
+]);
+```
+
+</MultiLanguage>
+
+Earlier events keep the group they were captured with, so switching doesn't change past data. Both individual groups appear in [related people and groups](#view-related-people-and-groups).
+
 #### Capture events for individual groups without a user
 
 If you want to capture events for an individual group without linking them to a specific user, use a single static string as the distinct ID:
@@ -299,6 +361,21 @@ To view individual groups and their properties, go to the [people tab](https://a
     classes="rounded"
     alt="View groups"
 />
+
+### View related people and groups
+
+To see the people and individual groups that share events with a person or group:
+
+- On a person, open the **Related groups** tab.
+- On an individual group, open the **Related people & groups** tab.
+
+A user who was active in more than one individual group of the same type gets a row for each one, with no primary or current group. They also appear under each of those groups.
+
+<CalloutBox icon="IconInfo" title="These tabs cover the last 90 days" type="fyi">
+
+PostHog works out related people and groups from the last 90 days of events. An individual group that a person hasn't been active in for longer drops off the list. The earlier events are unchanged and still appear in insights.
+
+</CalloutBox>
 
 ### Analyze insights by group type
 
@@ -421,6 +498,8 @@ Group analytics has a few limitations to be aware of:
 - Maximum of 5 group types per project
 - You can delete group types, but not individual groups
 - Multiple individual groups of the same group type can't be assigned to a single event
+- Group associations are stored on events, not people, so you can't build a [cohort](/docs/data/cohorts) from a group
+- Related people and groups only cover the last 90 days of events
 - Group types aren't supported for lifecycle insights or user paths
 - Only individual groups with known properties appear in the [people tab](https://app.posthog.com/persons)
 
