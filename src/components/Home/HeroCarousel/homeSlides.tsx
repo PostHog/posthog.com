@@ -1,330 +1,168 @@
-import React, { useEffect, useState } from 'react'
-import { IconArrowRight, IconAtSign, IconCheck, IconCoffee, IconSparkles } from '@posthog/icons'
-import { IconSlack } from 'components/OSIcons'
-import OSButton from 'components/OSButton'
+import React from 'react'
+import { IconArrowUpRight, IconLaptop, IconPlug, IconRewindPlay, IconSupport, IconWarning } from '@posthog/icons'
+import { IconOpenAI } from 'components/OSIcons'
+import Link from 'components/Link'
 import { SignupCTA } from 'components/SignupCTA'
-import CloudinaryImage from 'components/CloudinaryImage'
-import useProduct from 'hooks/useProduct'
-import { useApp } from '../../../context/App'
-import { ToggleGroup } from 'components/RadixUI/ToggleGroup'
-import TypecaastPlayer, { type TypecaastPlayerProps } from 'components/TypecaastPlayer'
-import { usePrefersReducedMotion } from 'components/Code/usePrefersReducedMotion'
-import { usePauseAutoAdvance, useSlideActive } from './autoAdvanceGate'
-import slackBrokenLink from '../../../data/typecaast/slack-broken-link.json'
-import cursorBrokenLink from '../../../data/typecaast/cursor-broken-link.json'
-import slackSignalsLoading from '../../../data/typecaast/slack-signals-loading.json'
-import slackAskPostHog from '../../../data/typecaast/slack-ask-posthog.json'
+import useSourcePlatforms from 'hooks/useSourcePlatforms'
+import AskAnythingDemo from './AskAnythingDemo'
+import { useToolsProducts } from 'components/Home/ToolsTicker'
+import ToolsTickerStrip from 'components/Home/ToolsTicker/ToolsTickerStrip'
+import PlatformInstall, { mcpInstallSchema, type InstallSchema } from 'components/PlatformInstall'
+import ProductContextDemo from './ProductContextDemo'
+import InboxDemo from './InboxDemo'
 
-// A Typecaast embed for use inside the hero carousel. While its animation plays it holds
-// the carousel's auto-advance (the animations run longer than the ~5s dwell), then releases
-// on `onEnded` so a slide isn't cut off mid-animation. Bypassed under reduced motion
-// (Typecaast renders the final state immediately), with a safety timeout so a missed
-// `onEnded` can never leave the carousel frozen.
-const MAX_CAROUSEL_HOLD_MS = 30000
+const signalSources = [
+    {
+        Icon: IconWarning,
+        color: 'text-yellow',
+        name: 'Error tracking',
+        description: 'Exceptions and stack traces grouped into issues',
+        href: '/error-tracking',
+    },
+    {
+        Icon: IconRewindPlay,
+        color: 'text-orange',
+        name: 'Session replay',
+        description: 'Dead clicks, quick backs, long stalls',
+        href: '/session-replay',
+    },
+    {
+        Icon: IconSupport,
+        color: 'text-blue',
+        name: 'Support',
+        description: 'Tickets and conversations from your users',
+        href: '/support',
+    },
+    {
+        Icon: IconPlug,
+        color: 'text-purple',
+        name: 'External tools',
+        description: 'Zendesk, Linear, GitHub issues',
+        href: '/docs/self-driving/signals',
+    },
+]
 
-// Shared height for every Typecaast embed in the hero carousel — one value so all slides
-// match and the carousel doesn't jump in height between tabs.
-const CAROUSEL_EMBED_HEIGHT = 'h-[400px]'
-const INBOX_IMAGE = 'https://res.cloudinary.com/dmukukwp6/image/upload/inbox_prs_cloud_f44f8ba69b.png'
-
-const CarouselTypecaast = ({ onEnded, ...props }: TypecaastPlayerProps): JSX.Element => {
-    const [ended, setEnded] = useState(false)
-    const reducedMotion = usePrefersReducedMotion()
-    // Slides stay mounted across tab switches (the carousel force-mounts every tab), so pause
-    // while this isn't the visible tab: Typecaast's controlled pause resumes in place instead
-    // of restarting, and only the active slide holds auto-advance / runs the safety timeout.
-    const isActive = useSlideActive()
-
-    usePauseAutoAdvance(isActive && !ended && !reducedMotion)
-
-    useEffect(() => {
-        if (ended || reducedMotion || !isActive) return
-        const timer = setTimeout(() => setEnded(true), MAX_CAROUSEL_HOLD_MS)
-        return () => clearTimeout(timer)
-    }, [ended, reducedMotion, isActive])
-
-    return (
-        <TypecaastPlayer
-            {...props}
-            paused={!isActive}
-            onEnded={() => {
-                setEnded(true)
-                onEnded?.()
-            }}
-        />
-    )
+const compactMcpSchema: InstallSchema = {
+    ...mcpInstallSchema,
+    supports: undefined,
+    secondaryAction: { label: 'Docs', to: '/docs/model-context-protocol', state: { newWindow: true } },
+    platforms: [
+        ...mcpInstallSchema.platforms.filter(({ id }) => id === 'claude'),
+        {
+            id: 'chatgpt',
+            label: 'ChatGPT',
+            group: 'platforms',
+            icon: <IconOpenAI className="size-4" />,
+            href: 'https://chatgpt.com/plugins/plugin_asdk_app_699caef2d680819188727b0ddbb349dd',
+        },
+        ...mcpInstallSchema.platforms.filter(({ id }) => ['codex', 'cursor', 'vscode'].includes(id)),
+    ],
 }
 
-export const PullRequestSlide = () => {
-    // Slack | Web toggle removed for now — multi-player is only supported in Slack.
-    // Re-add this `view` state (plus the toggle and Web branch in the JSX below) when web lands.
-    // const [view, setView] = useState<'slack' | 'web'>('slack')
-    const allProducts = useProduct() as any[]
-    const product = Array.isArray(allProducts) ? allProducts.find((p: any) => p.handle === 'posthog_slack') : undefined
-    const screenshot = product?.screenshots?.home
-
+export const GiveAgentsContext = () => {
     return (
         <div className="@container rounded p-4 @md:p-6 h-full bg-accent/20">
-            {/* Slack | Web view toggle — hidden for now (multi-player is Slack-only). Re-add when web lands.
-            <div className="flex justify-center -mt-4 mb-4">
-                <ToggleGroup
-                    title="View"
-                    hideTitle
-                    options={[
-                        { label: <span className="whitespace-nowrap">Slack</span>, value: 'slack' },
-                        { label: <span className="whitespace-nowrap">Web</span>, value: 'web' },
-                    ]}
-                    value={view}
-                    onValueChange={(v) => v && setView(v as 'slack' | 'web')}
-                />
-            </div>
-            */}
             <div className="grid grid-cols-1 @2xl:grid-cols-[1.4fr_1fr] gap-6 @2xl:gap-8 items-start">
-                <CarouselTypecaast
-                    config={slackBrokenLink}
-                    height={CAROUSEL_EMBED_HEIGHT}
-                    className="border border-primary"
-                />
+                <ProductContextDemo />
                 <div className="flex flex-col gap-3">
-                    <div className="space-y-2">
-                        <p className="flex items-center gap-1.5 text-secondary text-sm font-semibold m-0">
-                            PostHog in <IconSlack className="size-4" /> Slack
-                        </p>
-                        <h2 className="text-2xl font-bold m-0">Work on pull requests together</h2>
-                    </div>
+                    <h2 className="text-2xl font-bold m-0">Give agents product context</h2>
                     <p className="text-secondary m-0">
-                        Tag <code>@PostHog</code> in a thread to analyze customer behavior or create a PR – all without
-                        ever leaving Slack. Triage and build with your team in the tools you already use.
+                        Query product data from your editor instead of context-switching to a browser. Do everything
+                        from one-off analytics to launching new features - no new UI needed.
                     </p>
-                    <OSButton to="/slack" state={{ newWindow: true }} variant="secondary" size="md" asLink>
-                        Explore PostHog Slack
-                    </OSButton>
-                </div>
-                {/* Web view — re-add alongside the toggle when multi-player supports web:
-                <div className="flex flex-col gap-3">
-                    <div className="space-y-2">
-                        <p className="flex items-center gap-1.5 text-secondary text-sm font-semibold m-0">
-                            <IconAtSign className="size-4" /> PostHog Slackbot
-                        </p>
-                        <h2 className="text-2xl font-bold m-0">Create pull requests in Slack</h2>
-                    </div>
-                    <p className="text-secondary m-0">
-                        Tag <code>@PostHog</code> in a thread to analyze customer behavior or create a PR – all without
-                        ever leaving Slack. Triage and build with your team in your existing tools.
+                    <PlatformInstall
+                        schema={compactMcpSchema}
+                        linkOnly
+                        hideSecondaryAction
+                        className="!shadow-none !mb-0"
+                    />
+                    <p className="text-sm text-secondary m-0 inline-flex gap-1">
+                        Or use{' '}
+                        <Link
+                            to="/desktop"
+                            state={{ newWindow: true }}
+                            className="inline-flex items-center gap-1 underline underline-offset-2"
+                        >
+                            <IconLaptop className="size-4" /> PostHog Desktop <IconArrowUpRight className="size-3" />
+                        </Link>
                     </p>
-                    <OSButton to="/slack" state={{ newWindow: true }} variant="secondary" asLink>
-                        Explore PostHog Slackbot
-                    </OSButton>
                 </div>
-                */}
             </div>
         </div>
     )
 }
 
-export const FixBugsSlide = () => {
-    const [view, setView] = useState<'web' | 'code' | 'slack'>('web')
-    const allProducts = useProduct() as any[]
-    const codeProduct = Array.isArray(allProducts)
-        ? allProducts.find((p: any) => p.handle === 'posthog_code')
-        : undefined
-    const { siteSettings } = useApp()
-    const isDark = siteSettings.theme === 'dark'
-    const codeScreenshot = codeProduct?.screenshots?.home
-
+export const ShipWithPostHogSlide = () => {
     return (
         <div className="@container rounded p-4 @md:p-6 h-full">
-            <div className="flex justify-center -mt-4 mb-4">
-                <ToggleGroup
-                    title="View"
-                    hideTitle
-                    options={[
-                        { label: <span className="whitespace-nowrap">Web</span>, value: 'web' },
-                        { label: <span className="whitespace-nowrap">Desktop</span>, value: 'code' },
-                        { label: <span className="whitespace-nowrap">Slack</span>, value: 'slack' },
-                    ]}
-                    value={view}
-                    onValueChange={(v) => v && setView(v as 'web' | 'code' | 'slack')}
-                />
-            </div>
             <div className="grid grid-cols-1 @2xl:grid-cols-[1.4fr_1fr] gap-6 @2xl:gap-8 items-start">
-                {view === 'web' ? (
-                    <div className={`flex overflow-hidden rounded border border-primary ${CAROUSEL_EMBED_HEIGHT}`}>
-                        <CloudinaryImage
-                            src={INBOX_IMAGE}
-                            alt="The PostHog Inbox showing prioritized reports and pull requests"
-                            className="h-full w-full"
-                            imgClassName="h-full w-full object-cover object-top"
-                        />
-                    </div>
-                ) : view === 'slack' ? (
-                    <CarouselTypecaast
-                        config={slackSignalsLoading}
-                        height={CAROUSEL_EMBED_HEIGHT}
-                        className="border border-primary"
-                    />
-                ) : codeScreenshot ? (
-                    <div className={`flex ${codeScreenshot.classes || ''}`}>
-                        <CloudinaryImage
-                            src={
-                                (isDark && codeScreenshot.srcDark ? codeScreenshot.srcDark : codeScreenshot.src) as any
-                            }
-                            alt={codeScreenshot.alt}
-                            imgClassName={codeScreenshot.imgClasses}
-                        />
-                    </div>
-                ) : (
-                    <div />
-                )}
-                {view === 'web' ? (
-                    <div className="flex flex-col gap-3">
-                        <div className="space-y-2">
-                            <p className="flex items-center gap-1.5 text-secondary text-sm font-semibold m-0">
-                                <IconSparkles className="size-4" /> PostHog Inbox
-                            </p>
-                            <h2 className="text-2xl font-bold m-0">Improvements, ready for review</h2>
-                        </div>
-                        <p className="text-secondary m-0">
-                            Your Inbox clusters related findings into researched reports, ranked by priority. Review
-                            proposed improvements and pull requests, then decide what ships.
-                        </p>
-                        <OSButton
-                            to="/docs/self-driving/inbox"
-                            state={{ newWindow: true }}
-                            variant="secondary"
-                            size="md"
-                            asLink
-                        >
-                            Explore Inbox
-                        </OSButton>
-                    </div>
-                ) : view === 'slack' ? (
-                    <div className="flex flex-col gap-3">
-                        <div className="space-y-2">
-                            <p className="flex items-center gap-1.5 text-secondary text-sm font-semibold m-0">
-                                PostHog in <IconSlack className="size-4" /> Slack
-                            </p>
-                            <h2 className="text-2xl font-bold m-0">Automatic bug fixes &amp; optimizations</h2>
-                        </div>
-                        <p className="text-secondary m-0">
-                            PostHog Signals runs analysis on errors, logs, and summarized session recordings to detect
-                            and fix bugs without any human prompting.
-                        </p>
-                        <OSButton to="/slack" state={{ newWindow: true }} variant="secondary" size="md" asLink>
-                            Explore PostHog Slack
-                        </OSButton>
-                    </div>
-                ) : (
-                    <div className="flex flex-col gap-3">
-                        <div className="space-y-2">
-                            <p className="flex items-center gap-1.5 text-secondary text-sm font-semibold m-0">
-                                <IconCoffee className="size-4" /> PostHog Desktop (beta)
-                            </p>
-                            <h2 className="text-2xl font-bold m-0">Fix bugs automatically</h2>
-                        </div>
-                        <p className="text-secondary m-0">
-                            <strong>PostHog Desktop</strong>, our AI code editor:
-                        </p>
-                        <ul className="list-none p-0 m-0 space-y-1.5">
-                            <li className="flex items-center gap-2 text-secondary">
-                                <IconCheck className="size-5 text-green shrink-0" /> Identifies product usage patterns
+                <InboxDemo />
+                <div className="flex flex-col gap-3">
+                    <h2 className="text-2xl font-bold m-0">Ship with PostHog</h2>
+                    <p className="text-secondary m-0">
+                        Your Inbox clusters related findings into researched reports, ranked by priority. Review
+                        proposed improvements and pull requests, then decide what ships.
+                    </p>
+                    <SignupCTA size="md" state={{ initialTab: 'signup' }} />
+                    <p className="text-sm text-secondary mb-0 mt-2">Self-driving pulls signals from:</p>
+                    <ul className="not-prose grid grid-cols-2 gap-x-4 gap-y-3 list-none p-0 m-0">
+                        {signalSources.map(({ Icon, color, name, description, href }) => (
+                            <li key={name}>
+                                <Link
+                                    to={href}
+                                    state={{ newWindow: true }}
+                                    className="inline-flex items-center gap-1.5 text-sm font-semibold text-primary underline underline-offset-2"
+                                >
+                                    <Icon
+                                        aria-hidden="true"
+                                        className={`size-5 shrink-0 fill-current [&_g]:[clip-path:none] ${color}`}
+                                    />
+                                    {name}
+                                </Link>
+                                <p className="text-xs leading-snug text-secondary m-0 mt-1">{description}</p>
                             </li>
-                            <li className="flex items-center gap-2 text-secondary">
-                                <IconCheck className="size-5 text-green shrink-0" /> Triages bugs and errors
-                            </li>
-                            <li className="flex items-center gap-2 text-secondary">
-                                <IconCheck className="size-5 text-green shrink-0" /> Creates pull requests automatically
-                            </li>
-                        </ul>
-                        <OSButton to="/desktop" state={{ newWindow: true }} size="md" variant="secondary" asLink>
-                            Explore PostHog Desktop
-                        </OSButton>
-                    </div>
-                )}
+                        ))}
+                    </ul>
+                </div>
             </div>
         </div>
     )
 }
 
 export const AskAnythingSlide = () => {
-    const [view, setView] = useState<'slack' | 'web'>('web')
-    const allProducts = useProduct() as any[]
-    const aiProduct = Array.isArray(allProducts) ? allProducts.find((p: any) => p.handle === 'posthog_ai') : undefined
-    const { siteSettings } = useApp()
-    const isDark = siteSettings.theme === 'dark'
-    const webScreenshot = aiProduct?.screenshots?.home
+    const sourcePlatforms: { label: string; url: string; image: string }[] = useSourcePlatforms()
+    const products = useToolsProducts()
 
     return (
         <div className="@container rounded p-4 @md:p-6 h-full">
-            <div className="flex justify-center -mt-4 mb-4">
-                <ToggleGroup
-                    title="View"
-                    hideTitle
-                    options={[
-                        { label: <span className="whitespace-nowrap">Web</span>, value: 'web' },
-                        { label: <span className="whitespace-nowrap">Slack</span>, value: 'slack' },
-                    ]}
-                    value={view}
-                    onValueChange={(v) => v && setView(v as 'slack' | 'web')}
-                />
-            </div>
             <div className="grid grid-cols-1 @2xl:grid-cols-[1.4fr_1fr] gap-6 @2xl:gap-8 items-start">
-                {view === 'slack' ? (
-                    <CarouselTypecaast
-                        config={slackAskPostHog}
-                        height={CAROUSEL_EMBED_HEIGHT}
-                        className="border border-primary"
-                    />
-                ) : webScreenshot ? (
-                    <div className={`flex ${webScreenshot.classes || ''}`}>
-                        <CloudinaryImage
-                            src={(isDark && webScreenshot.srcDark ? webScreenshot.srcDark : webScreenshot.src) as any}
-                            alt={webScreenshot.alt}
-                            imgClassName={webScreenshot.imgClasses}
-                        />
+                <AskAnythingDemo />
+
+                <div className="flex flex-col gap-3">
+                    <div className="space-y-2">
+                        <h2 className="text-2xl font-bold m-0">Ask PostHog anything</h2>
                     </div>
-                ) : (
-                    <div />
-                )}
-                {view === 'slack' ? (
-                    <div className="flex flex-col gap-3">
-                        <div className="space-y-2">
-                            <p className="flex items-center gap-1.5 text-secondary text-sm font-semibold m-0">
-                                PostHog in <IconSlack className="size-4" /> Slack
-                            </p>
-                            <h2 className="text-2xl font-bold m-0">Ask PostHog anything</h2>
-                        </div>
-                        <p className="text-secondary m-0">
-                            PostHog has 250+ data and analysis tools that are stitched together on-the-fly to answer any
-                            customer usage or data question you have.
-                        </p>
-                        <p className="text-secondary m-0">
-                            Pipe in third party data to analyze alongside customer usage data for a more complete
-                            picture of product usage.
-                        </p>
-                        <OSButton to="/slack" state={{ newWindow: true }} size="md" variant="secondary" asLink>
-                            Explore PostHog Slack
-                        </OSButton>
+                    <p className="text-secondary m-0">
+                        PostHog is the single place to ingest, store, and query your product and company data.
+                        Analytics, replays, errors, and logs, stitched together on-the-fly to answer any question you
+                        have.
+                    </p>
+                    <p className="text-secondary m-0">
+                        Pipe in third party data from{' '}
+                        <Link
+                            to="/docs/cdp/sources"
+                            state={{ newWindow: true }}
+                            className="underline underline-offset-2"
+                        >
+                            {Math.round(sourcePlatforms.length / 100) * 100}+ sources
+                        </Link>{' '}
+                        for a more complete picture.
+                    </p>
+                    <SignupCTA size="md" state={{ initialTab: 'signup' }} />
+                    <div className="@container/tools mt-2 min-w-0">
+                        <ToolsTickerStrip products={products} compact />
                     </div>
-                ) : (
-                    <div className="flex flex-col gap-3">
-                        <div className="space-y-2">
-                            <p className="flex items-center gap-1.5 text-secondary text-sm font-semibold m-0">
-                                <IconSparkles className="size-4" /> PostHog AI
-                            </p>
-                            <h2 className="text-2xl font-bold m-0">Ask PostHog anything</h2>
-                        </div>
-                        <p className="text-secondary m-0">
-                            PostHog has 250+ data and analysis tools that are stitched together on-the-fly to answer any
-                            customer usage or data question you have.
-                        </p>
-                        <p className="text-secondary m-0">
-                            Pipe in third party data to analyze alongside customer usage data for a more complete
-                            picture of product usage.
-                        </p>
-                        <SignupCTA size="md" state={{ initialTab: 'signup' }} />
-                    </div>
-                )}
+                </div>
             </div>
         </div>
     )
