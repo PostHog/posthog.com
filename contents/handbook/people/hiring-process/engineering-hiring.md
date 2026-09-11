@@ -46,7 +46,7 @@ You should use <PrivateLink url="[https://github.com/Posthog-Interviews/superday
 
 #### Culture & motivation chat
 
-One of our co-founders or execs – [Tim](/tim) or [James](/james), depending on scheduling – will meet with the candidate for a short 15 min chat to dive deeper into culture and motivation. 
+A member of our [Blitzscale](/teams/blitzscale) team – Raquel, Ben, or Paul, depending on scheduling – will meet with the candidate for a 20-25 min chat to dive deeper into culture and motivation. 
 
 #### Engineering SuperDay
 
@@ -62,7 +62,7 @@ An engineering SuperDay usually looks like this (_there is a degree of flexibili
    * This will include:- the talent team, cofounders, exec, hiring lead, & the SuperDay buddy      
 *   Time to focus on the task
 *   An interview with the SuperDay buddy
-*   A chat with [James](/james), [Tim](/tim), or an exec, whoever they didn't meet with in the previous stage
+*   A chat with [James](/james), [Tim](/tim), or an exec
 *   Wrapping up – at the end of the work day, they'll send us what they've built, along with a summary
 
 Usually the Superday buddy will review the output, but they can ask other engineers for input when needed, and we'll get back to the candidate with our final decision ASAP (always within a few days).
