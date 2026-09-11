@@ -34,7 +34,7 @@ export const SPECIES: Species[] = [
         sections: [
             {
                 label: 'Appearance',
-                body: `Distinguished by rapid, repetitive paw motion on a single point. Plumage darkens visibly toward the tail end of the encounter. Often accompanied by an audible exhale (inaudible to the scanner, but inferable from typing cadence).`,
+                body: `Distinguished by rapid, repetitive tapping of the beak on a single point. Plumage darkens visibly toward the tail end of the encounter. Often accompanied by an audible exhale, inaudible to the scanner but inferable from typing cadence.`,
             },
             {
                 label: 'Habitat',
@@ -178,11 +178,11 @@ export const SPECIES: Species[] = [
         sections: [
             {
                 label: 'Appearance',
-                body: `Distinctive perched posture. Often spotted from behind, head slightly tilted, scrolling slowly between plan tiers. Eyes fixed, looking for numbers. May have a calculator tab open in the periphery.`,
+                body: `A low, settled posture, belly to the ground. Often spotted from behind, head slightly tilted, scrolling slowly between plan tiers. Eyes fixed, looking for numbers. May have a calculator tab open in the periphery.`,
             },
             {
                 label: 'Habitat',
-                body: `Pricing page. Has been seen returning to the same pricing page across multiple devices and several months without ever signing up. Migrates between competitors' pricing pages in the same season.`,
+                body: `Pricing page. Has been seen returning to the same pricing page across multiple devices and several months without ever signing up. Grazes the competitors' pricing pages in the same season.`,
             },
             {
                 label: 'Field notes',
@@ -214,7 +214,7 @@ export const SPECIES: Species[] = [
         sections: [
             {
                 label: 'Appearance',
-                body: `Visible only briefly. If you blink too slowly, you will not notice them, as their paws are moving too fast. Recognizable by the speed and decisiveness with which they dismiss any tutorial or tooltip placed in their path. Distinguishing feature: their eyes only detect a "Skip" button.`,
+                body: `Visible only briefly. If you blink too slowly you will not notice them, as the fins are moving too fast. Recognizable by the speed and decisiveness with which they dismiss any tutorial or tooltip placed in their path. Both eyes sit on the same side of the head, and both are trained on the Skip button.`,
             },
             {
                 label: 'Habitat',
@@ -290,7 +290,7 @@ export const PENDING_SPECIES: Species[] = [
         sections: [
             {
                 label: 'Appearance',
-                body: `Plumage slightly dusty from a long absence, expression carefully neutral. The Phantom Returner moves through your product like someone visiting a house they used to live in, recognizing the rooms but unsure where the furniture has been moved.`,
+                body: `Wing scales dulled and dusty from a long absence, expression carefully neutral. The Phantom Returner moves through your product like someone visiting a house they used to live in, recognizing the rooms but unsure where the furniture has been moved.`,
             },
             {
                 label: 'Habitat',
@@ -326,7 +326,7 @@ export const PENDING_SPECIES: Species[] = [
         sections: [
             {
                 label: 'Appearance',
-                body: `Slightly disoriented. Plumage normal, posture defeated. Often arrives at your 404 page via a Google result for a feature you deprecated two years ago.`,
+                body: `Slightly disoriented. Coat unremarkable, posture defeated. Often arrives at your 404 page via a Google result for a feature you deprecated two years ago.`,
             },
             {
                 label: 'Habitat',
@@ -362,7 +362,7 @@ export const PENDING_SPECIES: Species[] = [
         sections: [
             {
                 label: 'Appearance',
-                body: `Indistinguishable from a normal user at first glance, until the moment the keyboard shortcut is pressed. From that point on, plumage darkens noticeably and the eyes acquire focus.`,
+                body: `Indistinguishable from a normal user at first glance, until the moment the keyboard shortcut is pressed. From that point on the skin mottles and darkens, and the eyes acquire focus.`,
             },
             {
                 label: 'Habitat',
