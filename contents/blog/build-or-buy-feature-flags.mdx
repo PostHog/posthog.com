@@ -1,0 +1,93 @@
+---
+title: 'To build or buy feature flags: Non-obvious things to know'
+date: 2026-09-10
+rootPage: /blog
+sidebar: Blog
+showTitle: true
+hideAnchor: true
+author:
+    - ian-vanagas
+featuredImage: >-
+    https://res.cloudinary.com/dmukukwp6/image/upload/ai_powered_features_13eba8675a.jpg
+featuredImageType: full
+category: General
+tags:
+    - Feature flags
+---
+
+The rapid improvement of AI agents causes every team to consider whether they should build their own version of tools they pay for. 
+
+Feature flags have long been a prime target for this thinking, even before AI got good. This is because, at their most basic, flags are a function. You call them with a key and they return a value. How hard could this be?
+
+The complication comes from all the things that must happen to return that value reliably, accurately, and fast. Teams considering building versus buying quickly run into a bunch of obvious things to consider:
+
+- It costs time and money to create, host, and maintain. 
+- Lots of feature flag software already exists, is free, and can fit into your compliance requirements if needed.
+- Having fewer flags, users, SDKs, and use cases makes it easier to manage.
+- There are a bunch of features flags need, like admin UIs. 
+
+As a company that offers feature flags and interacts with people who use them, we've learned the decision goes well beyond this. To help you, here are some non-obvious (and more interesting) things to consider when deciding between building or buying. 
+
+## Flags are not an isolated service
+
+Reducing flags to a function that returns a value abstracts away all of the services they interact with to make that calculation.
+
+Even the most basic feature flags implementation, a database table, can cause issues for the services it is connected to. Any problems with calls to that table (malformed payloads, volume spikes) can have knock-on effects to other services relying on that database. We know because we have tried to isolate databases like this (like our Postgres `persons` database) as much as possible.
+
+As an implementation gets more complicated, you'll want to do targeted rollouts. A feature flag service might require building out an equally robust identification system. This might include collecting and storing data on browsers, devices, locations, plans, cohorts, usage, and more. At scale, this is likely a significant amount of data you need to ingest about individual users, their usage, the changes to their properties, updates to their groups, and more. All of this feeds into flags to make targeting accurate and an isolated service won't have it.
+
+There's also the fact that data not only flows from other services to flags, but vice versa. For example, experiments. Exposure logging is easy to get wrong. You need to send `$feature_flag_called` on every evaluation with `$feature_flag` and `$feature_flag_response`, and include `$feature/<flag-key>` with the assigned variant on every metric event. That's a lot of events and surface area to get wrong. 
+
+## Flags on your critical path
+
+Flags often sit on your critical path. An issue with them can mean users get the wrong experience or no experience at all. In some cases, they've even [lost companies millions](https://posthog.com/newsletter/feature-flag-mistakes). 
+
+They need to scale, be reliable, and be fast. This is the classic shape of a service where vibe coding a solution is risky. Often, you only know the blind spots and issues with your service when issues arise in production. 
+
+We know this because every flags platform has had problems, including us. But all of them have learned from the issues they've had and improved. We have a team of engineers working every day on making flags better, faster, and more reliable. You might not.
+
+## The architecture needs to be future-proofed
+
+Flags start simple. A toggle in a database can switch features on and off, but more features will inevitably be added. You won't be the only person using it. 
+
+A structure that works early might be wrong later. For example, adding basic user targeting to your database toggles requires writing an entire new service as evaluation isn't read-only anymore. Add percentage targeting and you need deterministic bucketing, which you might only realize after a user complains a feature disappears.
+
+Are you ready to handle many languages? Even ones you're less familiar with? Airbnb built a [Kubernetes sidecar](https://airbnb.tech/infrastructure/sitar-agent-building-a-reliable-dynamic-configuration-sidecar-at-scale/) specifically to avoid reimplementing config in multiple languages. Restructures to handle new features often require rewrites and risky migrations. 
+
+Even big companies struggle with the future-proofing and maintainability aspect of flags. Dropbox built their own feature flag service called [Stormcrow](https://dropbox.tech/infrastructure/introducing-stormcrow) in 2017. It had Hive-based populations wired to their analytics warehouse, a selector inferring graph, JSON config delivery, batched delivery for mobile/desktop clients, real-time monitoring, a static analyzer for tracking flags in code, audit history, and overrides. Still, in 2026, they moved to a flags platform. 
+
+## Agent ergonomics
+
+Agents are becoming the primary users of feature flags. ~60% of PostHog flags are created outside the UI. 33% by the MCP specifically.
+
+Developers on your team will want to use agents to create and edit them. This is an important surface to maintain and it means you need:
+
+- MCP with tools
+- CLI
+- Agent access controls
+- Audit log
+- Debugging tools
+
+This is another surface where a new class of issues arises. We've had cases where agents mess with flags they weren't supposed to, which caused the customer to reevaluate read vs write access for agents. They could only figure out what happened because of the audit log. 
+
+Also, just having tools available to agents does not mean they are right. Our MCP flag tool error rate was at ~5% last month because of malformed calls and hallucinated IDs. Thanks to MCP analytics, we were able to fix this and bring these down. A team without visibility into this would be wasting time and tokens every time it happened. 
+
+## Adoption, developer experience, and docs
+
+At big companies, adoption can be a legitimate problem. Companies like Dropbox and [monday.com](https://engineering.monday.com/when-infrastructure-becomes-a-product/) have had cases where internal dev tools are fragmented and they end up with many of varying quality doing the same things. 
+
+> We didn't have one tool, but several: some for the monolith, others for microservices, with no clear guidelines on which to use, when, or why. There was no happy path, just a fragmented set of solutions and a lot of undocumented knowledge. 
+
+Like any other tool, developers will need to be convinced to use yours. What's stopping other teams from building their own feature flag tool for their simple issue? 
+
+A key part of doing this is documentation and developer experience. A company like PostHog can afford to invest a lot here because we have many people using Feature Flags. Our feature flags and docs teams are constantly making updates to our docs, agent tools, and best practices to help users. This might not happen for a self-built tool. 
+
+## You don't have anyone to blame
+
+A more pragmatic reason to use a feature flag service is that you can blame them when something goes wrong. You can complain that a feature is missing or that something doesn't work like you expect. 
+
+We can take it because you are a customer of ours. A coworker running the feature flag service in their off time might not be so happy to be blamed for issues.
+
+Running a piece of infrastructure on a critical path is stressful. It's not something that should be handled without care. Buying it provides a single owner for making it successful that a self-built service might not provide. 
+
+Thousands of companies choose PostHog for feature flags. We've earned their trust, and realistically, it's that reputation against a vibe-coded solution. 
