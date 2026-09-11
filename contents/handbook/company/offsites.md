@@ -111,7 +111,7 @@ PostHog runs two Hedge Houses in the UK - a small one in Cambridge and a larger 
 Message <TeamMember name="Kendal Ijeh" photo /> to check availability or make a booking at the Cambridge Hedge House.
 
 ### London
-Our light-filled, studious office is a reliable homebase between Farringdon and Barbican. It’s entirely ours, open 24/7 and the perfect place to stay if you're visiting from abroad.  Use the [Hedge House London](https://posthog.slack.com/archives/D0AAA9M06R2) slack tool to see the full address, book a room and/or desk, plus see who else will be there during the week you visit. This means you can easily self-serve, but ask <TeamMember name="Kendal Ijeh" photo /> with any questions.
+Our light-filled, studious office is a reliable homebase between Farringdon and Barbican. It’s entirely ours, open 24/7 and the perfect place to stay if you're visiting from abroad.  Use the [Hedge House London](https://posthog.slack.com/archives/D0AAA9M06R2) slack tool to see the full address, book a room and/or desk, plus see who else will be there during the week you visit. Ensure to read the House Manual too - you can find this in the app or pinned to the [London Slack channel](https://posthog.slack.com/archives/C028MN3UUP5) The app means you can easily self-serve, but ask <TeamMember name="Kendal Ijeh" photo /> with any questions. We don’t allow weekend stays or Personal trips at Hedge House, the house is for co-working only, not for general stays.
 
 ## London hotel recommendations
 
