@@ -13,7 +13,8 @@ Engineers make up around 60% of our team, and we are almost always hiring for En
 
 Beyond the specific skills listed in the job description, we generally look for: 
 
-*   Experience with relevant technologies (Python or similar, React or similar, something to do with big data is a bonus)
+*   Able to pick up a new stack quickly
+    *   This matters more to us than experience with the exact technologies we use. Our [tech stack](/handbook/engineering/stack) is public, so candidates can see what they will work with. Experience with something to do with big data is a bonus.
     *   We don't care how many years of professional experience someone has, but depending on our current team structure we may be looking for more or less experienced people for a role - if that's the case, we will be explicit in the job spec.
 *   Has built something from scratch, ideally with minimal outside help
     *   They may have been the founder of a startup, or built an impressive side project. They may have also worked on a project at work where they were the only developer.
@@ -62,7 +63,7 @@ An engineering SuperDay usually looks like this (_there is a degree of flexibili
    * This will include:- the talent team, cofounders, exec, hiring lead, & the SuperDay buddy      
 *   Time to focus on the task
 *   An interview with the SuperDay buddy
-*   A chat with [James](/james), [Tim](/tim), or an exec
+*   A chat with an exec
 *   Wrapping up – at the end of the work day, they'll send us what they've built, along with a summary
 
 Usually the Superday buddy will review the output, but they can ask other engineers for input when needed, and we'll get back to the candidate with our final decision ASAP (always within a few days).
