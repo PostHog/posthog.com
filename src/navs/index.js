@@ -3257,6 +3257,10 @@ export const docsMenu = {
                             url: '/docs/data',
                         },
                         {
+                            name: 'Events data retention',
+                            url: '/docs/data/events-retention',
+                        },
+                        {
                             name: 'Properties',
                             url: '/docs/data/event-spec/ecommerce-events',
                             children: [
@@ -6590,6 +6594,12 @@ export const docsMenu = {
                     color: 'yellow',
                 },
                 {
+                    name: 'Materialization troubleshooting',
+                    url: '/docs/data-warehouse/views/materialize-troubleshooting',
+                    icon: 'IconQuestion',
+                    color: 'orange',
+                },
+                {
                     name: 'SQL commands',
                     url: '/docs/data-warehouse/sql',
                     icon: 'IconCode',
@@ -8369,7 +8379,7 @@ export const docsMenu = {
                     featured: true,
                 },
                 {
-                    name: 'Install OpenTelemetry tracing',
+                    name: 'Install tracing',
                     url: '/docs/distributed-tracing/installation',
                     icon: 'IconCode',
                     color: 'blue',

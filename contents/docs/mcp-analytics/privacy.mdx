@@ -15,6 +15,7 @@ The SDK does not capture:
 - Tool source code, function references, or closures.
 - The full content of `image` or `audio` content blocks (replaced with a text stub).
 - The content of `resource` blocks with a `blob` payload.
+- Resource bodies. A `resources/read` result is never captured; `$mcp_resource_read` carries only the URI, timing, and error state. Listings (`resources/list`, `resources/templates/list`) are captured, since names, URIs, and MIME types are discovery metadata rather than content.
 
 `$mcp_tool_call` payloads include `$mcp_parameters` (the request arguments) and `$mcp_response` (the tool's result), after the pipeline below.
 
@@ -35,6 +36,7 @@ The SDK runs a deterministic sanitizer:
 - **Long base64-looking strings (≥10KB)** → replaced with `"[binary data redacted...]"`.
 - **Keys matching the sensitive-key pattern** — `authorization`, `cookie`, `password`, `token`, `secret`, `api_key`, `private_key`, and similar — have their values replaced with `"[redacted]"`.
 - **PostHog API key patterns** (`ph[a-z]_…`) in any string value → replaced with `"[redacted]"`.
+- **Credentials inside URLs**, in any string value (`$mcp_resource_name`, `$mcp_parameters`, `$mcp_response`, exception messages) → the `user:password@` part and the values of credential-named query and fragment fields are replaced with `[redacted]`. A field name counts as credential-named when any `-`/`_`/`.`/`/`/`;`-separated segment of it is `auth`, `token`, `secret`, `password`, `key`, `signature`, `sig`, `jwt`, `session`, and similar, plus the exact names signed URLs use (`X-Amz-Signature`, `AWSAccessKeyId`, `GoogleAccessId`, `Policy`, `code`). This over-redacts a benign `sort_key` by design. URLs nested one level inside a retained value, authority-less URIs such as `resource:guide?token=…`, hash-routed fragments, and adjacent addresses run together without whitespace are all covered, and wherever a credential's boundary is ambiguous the sanitizer redacts more rather than less. A URL with nothing to redact is returned byte-for-byte; URLs over 8 KB or 128 fields are replaced whole.
 - **Credential-looking words** — detected by entropy and known key formats (`sk-…`, PEM markers) — replaced word by word, in `$mcp_parameters`, `$mcp_response`, the captured intent, and exception messages. A message like `auth failed for sk-…` keeps its diagnostic text and loses only the key.
 
 This stage is not configurable, and it is a safety net rather than a general-purpose credential scrubber: it catches known key formats and obviously sensitive keys, not every secret your tools might echo. Free text your server writes — exception messages especially — is passed through as-is once those patterns are gone. If you have stricter requirements, encode them in `beforeSend`.

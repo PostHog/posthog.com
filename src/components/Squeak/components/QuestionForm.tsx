@@ -65,11 +65,10 @@ export const Select = ({
 
     useEffect(() => {
         fetchTopicGroups().then((topicGroups) => {
-            const filteredGroups = topicGroups.filter((group) => group?.attributes?.label !== 'Off-topic')
-            setTopicGroups(filteredGroups)
+            setTopicGroups(topicGroups)
 
             // Flatten topic groups into options array with section headers
-            const flatOptions = filteredGroups
+            const flatOptions = topicGroups
                 .sort(
                     (a, b) =>
                         topicGroupsSorted.indexOf(a?.attributes?.label) -
