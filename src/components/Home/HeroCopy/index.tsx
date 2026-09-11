@@ -30,9 +30,9 @@ const Underline = ({ children, delay = 0 }: { children: React.ReactNode; delay?:
 
 export const HeroHeadline = ({ className }: { className?: string }): JSX.Element => (
     <h1 className={cn('!text-3xl @xl:!text-4xl mt-0', className)}>
-        Your product’s{' '}
+        Give your agents{' '}
         <span className="bg-blue/10 dark:bg-blue/20 text-blue rounded-md px-1 @xl:whitespace-nowrap">
-            context layer
+            product context
         </span>
     </h1>
 )
