@@ -9,11 +9,14 @@ import {
     IconToggle,
     IconFlask,
     IconMessage,
+    IconDecisionTree,
+    IconSupport,
     IconDatabase,
     IconStack,
     IconSparkles,
     IconBolt,
     IconPullRequest,
+    IconLlmAnalytics,
     IconArrowRight,
     IconPieChart,
     IconTelescope,
@@ -70,7 +73,7 @@ const jobs: {
         tools: [
             { Icon: IconToggle, name: 'Feature flags', slug: 'feature-flags' },
             { Icon: IconFlask, name: 'Experiments', slug: 'experiments' },
-            { Icon: IconMessage, name: 'Surveys', slug: 'surveys' },
+            { Icon: IconDecisionTree, name: 'Workflows', slug: 'workflows' },
         ],
     },
     {
@@ -80,8 +83,8 @@ const jobs: {
         copy: 'Reply to tickets, run surveys, and track cost and quality of your AI features.',
         tools: [
             { Icon: IconMessage, name: 'Surveys', slug: 'surveys' },
-            { Icon: IconSparkles, name: 'Support', slug: 'support' },
-            { Icon: IconPullRequest, name: 'AI observability', slug: 'ai-observability' },
+            { Icon: IconSupport, name: 'Support', slug: 'support' },
+            { Icon: IconLlmAnalytics, name: 'AI observability', slug: 'ai-observability' },
         ],
     },
     {
@@ -120,14 +123,14 @@ const selfDrivingCapabilities: { Icon: IconComponent; color: string; title: stri
     {
         Icon: IconTelescope,
         color: 'text-orange',
-        title: 'Send out scouts',
-        copy: "Scouts run on a schedule, build durable memory of what they've seen, and file what they find. Add ours, or write your own.",
+        title: 'Go deep on one surface',
+        copy: "Scouts are specialist agents. They run on a schedule and build durable memory of what they've seen.",
     },
     {
         Icon: IconNotification,
         color: 'text-teal',
-        title: 'Read one ranked inbox',
-        copy: 'Your Inbox groups related findings into researched reports, ranked by priority, so you triage instead of digging.',
+        title: 'Get one prioritized list',
+        copy: 'Your Inbox clusters related findings into researched reports, ranked by priority.',
     },
     {
         Icon: IconPullRequest,
@@ -493,11 +496,10 @@ export default function LennyProductPass(): JSX.Element {
                             ))}
                         </div>
                         <p className="mt-4 mb-3 max-w-3xl text-base">
-                            All of it reaches you in{' '}
                             <Link to="/slack" state={{ newWindow: true }} className="font-semibold underline">
-                                Slack
+                                @PostHog in Slack
                             </Link>{' '}
-                            as well, so you can read a report and ship the fix without opening a tab.
+                            brings reports, data answers, and agent work into the channels each team already watches.
                         </p>
                         <p className="mt-0 mb-0">
                             <Link
