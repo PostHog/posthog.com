@@ -1,0 +1,152 @@
+---
+title: Google Cloud Monitoring metrics installation
+platformLogo: googleCloud
+showStepsToc: true
+---
+
+import { Steps, Step } from "components/Docs/Steps";
+import MetricsNextSteps from "./_snippets/metrics-next-steps.mdx";
+
+> **Note:** Metrics is in private alpha and the viewer is only turned on for selected teams, so you may not be able to view metrics you send yet. Setup details, including the ingestion endpoint, may change before general availability.
+
+Google Cloud Monitoring can't push metrics anywhere by itself, so the PostHog metrics agent pulls from it: set a GCP project and a list of metric types, and the agent polls the Cloud Monitoring API and forwards everything to PostHog. One `docker run` or one `helm install`, no application changes.
+
+This is the path for metrics only Google has – Cloud SQL, GKE, Cloud Run, load balancers, Pub/Sub, and the other managed services. For anything that exposes a `/metrics` endpoint, use [Docker](/docs/metrics/installation/docker) or [Kubernetes](/docs/metrics/installation/kubernetes) scraping instead; for code you control, the [SDK or OTLP paths](/docs/metrics/installation) need no agent at all. The same agent can scrape and pull at once.
+
+<Steps>
+
+<Step title="Prerequisites" badge="required">
+
+You need:
+
+- A GCP project with metrics in Cloud Monitoring
+- A GCP service account with the **Monitoring Viewer** role (`roles/monitoring.viewer`, which allows `monitoring.timeSeries.list`) in that project
+- Docker, or a GKE cluster with `helm` v3
+- Your PostHog project token
+
+</Step>
+
+<Step title="Get your project token" badge="required">
+
+You'll need your PostHog project token to authenticate metrics requests. This is the same token you use for capturing events with the PostHog SDK.
+
+> **Important:** Use your **project token**, which starts with `phc_`. Do **not** use a personal API key (which starts with `phx_`).
+
+You can find your project token in [Project Settings](https://app.posthog.com/settings).
+
+</Step>
+
+<Step title="Pick your metric types" badge="required">
+
+Tell the agent which metric types to pull. An explicit list:
+
+```
+compute.googleapis.com/instance/cpu/utilization
+cloudsql.googleapis.com/database/cpu/utilization
+```
+
+Or pull a whole family with a [metric descriptor filter](https://cloud.google.com/monitoring/api/v3/filters):
+
+```
+metric.type = starts_with("compute.googleapis.com/instance/cpu/")
+```
+
+Each entry costs one Cloud Monitoring API call per pull, so a filter that covers a prefix is cheaper than a long list of names. Browse available types in [Google's metrics list](https://cloud.google.com/monitoring/api/metrics).
+
+</Step>
+
+<Step title="Run the agent" badge="required">
+
+### Docker
+
+Create a JSON key for the service account, make it world-readable inside the container (the agent runs as a non-root user, so `chmod 644 sa.json`), then:
+
+```bash
+docker run -d --name posthog-metrics-agent \
+  -e POSTHOG_API_KEY=<ph_project_token> \
+  -e GCP_PROJECT_ID=<gcp_project_id> \
+  -e GCP_METRICS=compute.googleapis.com/instance/cpu/utilization,cloudsql.googleapis.com/database/cpu/utilization \
+  -v "$PWD/sa.json:/etc/gcp/sa.json:ro" \
+  -e GOOGLE_APPLICATION_CREDENTIALS=/etc/gcp/sa.json \
+  posthog/metrics-agent:latest
+```
+
+For EU Cloud, add `-e POSTHOG_HOST=https://eu.i.posthog.com`.
+
+To use filters instead of a name list, swap in `GCP_METRIC_FILTERS` – filters are **semicolon**-separated, not comma-separated, because filter expressions can contain commas:
+
+```bash
+-e GCP_METRIC_FILTERS='metric.type = starts_with("compute.googleapis.com/")'
+```
+
+### Kubernetes (Helm)
+
+On GKE, use [Workload Identity](https://cloud.google.com/kubernetes-engine/docs/how-to/workload-identity) instead of a key file. Create the GCP service account, allow the agent's Kubernetes service account to impersonate it:
+
+```bash
+gcloud iam service-accounts add-iam-policy-binding agent@<gcp_project_id>.iam.gserviceaccount.com \
+  --role roles/iam.workloadIdentityUser \
+  --member "serviceAccount:<gcp_project_id>.svc.id.goog[<namespace>/posthog-metrics-agent]"
+```
+
+then install with the annotation:
+
+```yaml
+# values.yaml
+scrape:
+    annotationDiscovery: false
+gcp:
+    projectId: <gcp_project_id>
+    metrics:
+        - compute.googleapis.com/instance/cpu/utilization
+serviceAccount:
+    annotations:
+        iam.gke.io/gcp-service-account: agent@<gcp_project_id>.iam.gserviceaccount.com
+```
+
+```bash
+helm install posthog-metrics-agent oci://ghcr.io/posthog/charts/posthog-metrics-agent \
+  --set posthog.apiKey=<ph_project_token> \
+  -f values.yaml
+```
+
+If you can't use Workload Identity, put the JSON key in a Kubernetes Secret and set `gcp.credentialsSecret.name` to its name; the chart mounts it for you. Scraping and pulling work together too: leave `scrape.annotationDiscovery` on and the agent does both.
+
+</Step>
+
+<Step title="Verify metrics are flowing" badge="recommended">
+
+1. Check the agent started cleanly – `docker logs posthog-metrics-agent` or `kubectl logs -l app.kubernetes.io/name=posthog-metrics-agent` should show `Everything is ready. Begin running and processing data.` Credential and quota errors from Google appear in the same log.
+2. Open [**Metrics**](https://app.posthog.com/metrics) in PostHog and filter to `service_name = google-cloud-monitoring`. Points appear within one pull interval (default 60 seconds).
+
+Set `GCP_SERVICE_NAME` (or `gcp.serviceName` in Helm) to change the `service_name` your pulled metrics arrive under – for example `gcp-production`.
+
+<CallToAction type="primary" to="https://app.posthog.com/metrics">
+  View your metrics in PostHog
+</CallToAction>
+
+</Step>
+
+<MetricsNextSteps />
+
+</Steps>
+
+## Configuration reference
+
+| Variable                         | Default                    | Description                                                              |
+| -------------------------------- | -------------------------- | ------------------------------------------------------------------------ |
+| `GCP_PROJECT_ID`                 | –                          | GCP project to pull from. Setting it enables the source                  |
+| `GCP_METRICS`                    | –                          | Comma-separated metric types to pull (this or filters, at least one)     |
+| `GCP_METRIC_FILTERS`             | –                          | **Semicolon**-separated metric descriptor filters                        |
+| `GCP_COLLECTION_INTERVAL`        | `60s`                      | How often to poll. Values under `60s` are rejected by the collector      |
+| `GCP_SERVICE_NAME`               | `google-cloud-monitoring`  | `service_name` on every pulled metric                                    |
+| `GOOGLE_APPLICATION_CREDENTIALS` | –                          | Path to a service account JSON key. Omit when using Workload Identity    |
+
+The Helm values mirror these under `gcp.`: `projectId`, `metrics`, `metricFilters`, `collectionInterval`, `serviceName`, `credentialsSecret.name`, `credentialsSecret.key`. For full control over the pull, mount a raw `metrics_list` at `/etc/posthog/gcp_metrics_list.yaml` (see the [agent README](https://github.com/PostHog/posthog/tree/master/products/metrics/agent)).
+
+## Notes and limits
+
+- **One puller only.** Cloud Monitoring can't be sharded: every agent instance would pull the same series and double-count. Don't combine with `SHARD_COUNT` / Helm `shards` – the agent refuses to start. Run a separate single instance for Cloud Monitoring alongside a sharded scrape fleet.
+- **Quota and cost.** Each metric type or filter costs one `timeSeries.list` API call per interval. At the default 60 seconds that's 1,440 calls per entry per day, within the free Cloud Monitoring API allocation for typical lists – raise `GCP_COLLECTION_INTERVAL` for large lists.
+- **Freshness.** Cloud Monitoring itself adds latency before a point is queryable (often one to three minutes for some services), so the newest data in PostHog lags real time by that plus one pull interval.
+- **Alpha upstream.** The agent uses the OpenTelemetry Collector's `googlecloudmonitoring` receiver, which is alpha: metric naming and attributes can change when the collector version is bumped, and a restart can leave a gap of up to one pull interval.
