@@ -5,6 +5,20 @@ import React from 'react'
 import ReactCountryFlag from 'react-country-flag'
 import { Link } from 'gatsby'
 
+type ProfileNameFields = {
+    firstName: string
+    lastName?: string
+    teams?: { data?: { id?: string | number }[] | null } | null
+}
+
+// Duplicate profiles can share a name; prefer the one attached to a team
+export function findProfileByName<T extends ProfileNameFields>(nodes: T[], name: string): T | undefined {
+    const matches = nodes.filter(
+        ({ firstName, lastName }) => `${firstName} ${lastName}`.toLowerCase() === name.toLowerCase()
+    )
+    return matches.find(({ teams }) => (teams?.data?.length ?? 0) > 0) ?? matches[0]
+}
+
 export const TeamMemberLink = ({
     firstName,
     lastName,
@@ -176,15 +190,17 @@ export default function TeamMember({
                     location
                     country
                     color
+                    teams {
+                        data {
+                            id
+                        }
+                    }
                 }
             }
         }
     `)
 
-    const person = nodes.find(
-        ({ firstName, lastName }: { firstName: string; lastName: string }) =>
-            `${firstName} ${lastName}`.toLowerCase() === name.toLowerCase()
-    )
+    const person = findProfileByName(nodes, name)
 
     return person ? (
         <>

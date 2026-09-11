@@ -1,4 +1,4 @@
-import { TeamMemberLink } from 'components/TeamMember'
+import { findProfileByName, TeamMemberLink } from 'components/TeamMember'
 import { graphql, useStaticQuery } from 'gatsby'
 import React from 'react'
 
@@ -19,6 +19,11 @@ export default function BuiltBy({ people }) {
                     firstName
                     lastName
                     squeakId
+                    teams {
+                        data {
+                            id
+                        }
+                    }
                 }
             }
         }
@@ -29,9 +34,7 @@ export default function BuiltBy({ people }) {
             <span className="text-[13px] md:text-sm opacity-70 flex md:mb-1">Built by:</span>
             <ul className="list-none !m-0 p-0 [&_li:nth-child(2)_img]:bg-blue [&_li:nth-child(3)_img]:bg-yellow [&_li:nth-child(4)_img]:bg-teal space-y-1.5">
                 {people.map((name) => {
-                    const person = nodes.find(
-                        ({ firstName, lastName }) => `${firstName} ${lastName}`.toLowerCase() === name.toLowerCase()
-                    )
+                    const person = findProfileByName(nodes, name)
                     if (!person) return null
                     return (
                         <li key={name}>
