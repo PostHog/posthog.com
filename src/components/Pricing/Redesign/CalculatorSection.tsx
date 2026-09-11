@@ -2,11 +2,6 @@ import React, { useEffect } from 'react'
 import { useLocation } from '@reach/router'
 import { Calculator } from 'components/Pricing/Test/Calculator'
 import { scrollToElement } from 'components/ScrollToElement'
-import { RenderInClient } from 'components/RenderInClient'
-import AgentEstimateLink, {
-    AI_PRICING_EXPERIMENT_VARIANTS,
-    AI_PRICING_FLAG,
-} from 'components/Pricing/AgentEstimateLink'
 
 /**
  * The pricing calculator as a plain, always-visible section.
@@ -32,20 +27,6 @@ export default function CalculatorSection(): JSX.Element {
         // `my-0` loses to its `mb-12` in Tailwind's cascade regardless of class order, so it
         // takes a child selector to win on specificity.
         <div className="not-prose [&>section]:my-0 [&>section]:px-0">
-            <RenderInClient
-                render={() =>
-                    window.posthog?.getFeatureFlag?.(AI_PRICING_FLAG) ===
-                    AI_PRICING_EXPERIMENT_VARIANTS.outside_calculator ? (
-                        <p className="text-[15px] text-secondary mb-6" data-ai-estimate-placement="outside-calculator">
-                            Coming from another tool?{' '}
-                            <AgentEstimateLink source={AI_PRICING_EXPERIMENT_VARIANTS.outside_calculator} /> using your
-                            real usage there.
-                        </p>
-                    ) : (
-                        <></>
-                    )
-                }
-            />
             <Calculator hideHeader id="" />
         </div>
     )

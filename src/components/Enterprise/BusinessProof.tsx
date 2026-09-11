@@ -221,7 +221,7 @@ export function BusinessProof(): JSX.Element {
             >
                 <div className="relative z-10 min-w-0 @3xl:pr-[30%]">
                     <Tabs.List aria-label="Why enterprises choose PostHog" className="flex gap-1 pt-1">
-                        {PILLARS.map((pillar) => (
+                        {PILLARS.map((pillar, index) => (
                             <Tabs.Trigger
                                 key={pillar.key}
                                 value={pillar.key}
@@ -231,7 +231,10 @@ export function BusinessProof(): JSX.Element {
                                         : 'border-primary bg-accent text-secondary hover:text-primary'
                                 }`}
                             >
-                                {pillar.title}
+                                <span aria-hidden="true" className="@lg:hidden">
+                                    #{index + 1}
+                                </span>
+                                <span className="sr-only @lg:not-sr-only">{pillar.title}</span>
                             </Tabs.Trigger>
                         ))}
                     </Tabs.List>
