@@ -12,6 +12,8 @@
 
 5. For the trigger, select the default **All Pages - Page View** trigger and then click **Save**.
 
+    > **Single-page apps:** the **All Pages** trigger runs your tag one time, on the first page load. This is sufficient for most sites, because PostHog captures the later pageviews itself. The snippet above sets `defaults` to a recent date, which makes [`capture_pageview`](/docs/libraries/js/config) use `history_change`. PostHog then listens to the browser history API and captures a pageview each time the path changes. If you use an older snippet, or if you set `defaults: 'unset'`, add `capture_pageview: 'history_change'` to `posthog.init()` yourself. Without it, you get only one pageview per visit. If your pages are different only in the query string, or only in the hash, the path stays the same and you get no pageview. For those routes, set `capture_pageview` to an object that selects the parts of the URL that make a new page, for example `capture_pageview: { path: true, search: true }`. Hash routes also need `disable_capture_url_hashes: false` when your `defaults` date is `2026-06-25` or later.
+
 6. Back on the main dashboard, click **Submit** to update your website with the new PostHog tag.
 
 7. You're done! PostHog is now added to your site and autocapturing data like pageviews and clicks.
