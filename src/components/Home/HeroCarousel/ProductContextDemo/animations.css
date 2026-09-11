@@ -1,0 +1,26 @@
+.context-pulse {
+    animation: context-flow 3.6s linear infinite;
+}
+.context-product-position {
+    animation: scattered-float 4s ease-in-out infinite;
+}
+.context-product-position:focus-within,
+.product-context-demo[data-running='false'] * {
+    animation-play-state: paused;
+}
+@keyframes context-flow {
+    from {
+        stroke-dashoffset: 108;
+    }
+    to {
+        stroke-dashoffset: 0;
+    }
+}
+@media (prefers-reduced-motion: reduce) {
+    .product-context-demo * {
+        animation: none !important;
+    }
+    .context-pulse {
+        display: none;
+    }
+}

@@ -4,7 +4,7 @@ import { IconGithub } from 'components/OSIcons'
 import { useInView } from 'react-intersection-observer'
 import { usePrefersReducedMotion } from 'components/Code/usePrefersReducedMotion'
 import { usePauseAutoAdvance, useSlideActive, useSlidePaused } from '../autoAdvanceGate'
-import './styles.css'
+import './animations.css'
 
 // Illustrative reports, in arrival order. These are not live issues or pull requests.
 const ITEMS = [
@@ -80,7 +80,7 @@ export default function InboxDemo() {
     return (
         <figure
             ref={ref}
-            className="inbox-demo not-prose relative w-full m-0 overflow-hidden rounded border border-primary bg-accent/20 text-primary"
+            className="inbox-demo @container aspect-[1000/774] [--row-height:22cqw] [--row-step:24cqw] [--badge-height:4.6cqw] [&_.inbox-demo-scope]:!text-[2.1cqw] not-prose relative w-full m-0 overflow-hidden rounded border border-primary bg-accent/20 text-primary"
             data-active={active}
             data-running={running}
             data-finished={finished}
@@ -90,21 +90,17 @@ export default function InboxDemo() {
                 request from GitHub, a conversion tracking scout with a draft pull request, a checkout issue from
                 session replay, and a high-priority sign-in error with a pull request ready to review.
             </figcaption>
-            <div aria-hidden="true">
-                <header className="inbox-demo-header border-b border-primary">
-                    <h3>Self-driving inbox</h3>
-                    <p>Issues and opportunities found in your product, ready to review.</p>
-                </header>
-                <div className="inbox-demo-list">
-                    <div className="inbox-demo-empty text-secondary">
-                        <IconArchive />
+            <div className="absolute inset-0" aria-hidden="true">
+                <div className="inbox-demo-list absolute inset-x-[3cqw] inset-y-[2.5cqw]">
+                    <div className="inbox-demo-empty absolute inset-0 flex flex-col items-center justify-center gap-[1.5cqw] text-center text-[2.6cqw] opacity-0 text-secondary">
+                        <IconArchive className="size-[7cqw] mb-[1cqw]" />
                         <strong>Your inbox is clear</strong>
                         <span>New findings will appear here.</span>
                     </div>
                     {ITEMS.map(({ priority, scope, title, summary, source, Icon, color, repo, pr }, index) => (
                         <article
                             key={scope}
-                            className="inbox-demo-item bg-primary dark:bg-accent/30 border border-primary rounded"
+                            className="inbox-demo-item absolute inset-x-0 top-0 flex h-[var(--row-height)] p-[2.5cqw] data-[has-pr=false]:border-dashed bg-primary dark:bg-accent/30 border border-primary rounded"
                             data-has-pr={Boolean(pr)}
                             style={
                                 {
@@ -117,10 +113,10 @@ export default function InboxDemo() {
                                 if (index === 0 && event.animationName === 'inbox-arrival') setFinished(true)
                             }}
                         >
-                            <div className="inbox-demo-content">
-                                <div className="inbox-demo-title-row">
+                            <div className="inbox-demo-content flex flex-col flex-1 min-w-0">
+                                <div className="inbox-demo-title-row flex items-center gap-[1cqw]">
                                     <span
-                                        className={`inbox-demo-priority border rounded ${
+                                        className={`inbox-demo-priority flex items-center justify-center shrink-0 size-[var(--badge-height)] text-[2.2cqw] font-semibold border rounded ${
                                             priority === 'P2'
                                                 ? 'text-salmon border-salmon/40 bg-salmon/10'
                                                 : 'text-red dark:text-yellow border-orange/40 bg-orange/10'
@@ -128,13 +124,15 @@ export default function InboxDemo() {
                                     >
                                         {priority}
                                     </span>
-                                    <h4>
-                                        <code className="border border-primary rounded">{scope}</code>
+                                    <h4 className="flex items-center gap-[1cqw] flex-1 m-0 min-w-0 !text-[2.7cqw] font-bold !leading-[1.3]">
+                                        <code className="inbox-demo-scope inline-flex items-center shrink-0 h-[var(--badge-height)] px-[0.6cqw] py-0 font-medium whitespace-nowrap bg-transparent border border-primary rounded">
+                                            {scope}
+                                        </code>
                                         <span>{title}</span>
                                     </h4>
                                     {pr && (
                                         <span
-                                            className={`inbox-demo-pr border rounded-full ${
+                                            className={`inbox-demo-pr inline-flex items-center gap-[0.5cqw] shrink-0 h-[var(--badge-height)] px-[0.8cqw] py-0 text-[2.1cqw] whitespace-nowrap [&_svg]:size-[2.2cqw] border rounded-full ${
                                                 pr.ready
                                                     ? 'text-green-dark dark:text-green-2 border-green/40 bg-green/10'
                                                     : 'text-secondary border-primary bg-accent/30'
@@ -145,13 +143,15 @@ export default function InboxDemo() {
                                         </span>
                                     )}
                                 </div>
-                                <p className="inbox-demo-summary text-secondary">{summary}</p>
-                                <footer className="inbox-demo-meta text-secondary">
+                                <p className="inbox-demo-summary line-clamp-2 my-[1cqw] mr-0 ml-[calc(var(--badge-height)+1cqw)] text-[2.35cqw] leading-[1.35] text-secondary">
+                                    {summary}
+                                </p>
+                                <footer className="inbox-demo-meta flex items-center gap-[1.5cqw] mt-auto ml-[calc(var(--badge-height)+1cqw)] text-[2.1cqw] leading-[1.3] whitespace-nowrap text-secondary">
                                     {repo && <span className="inbox-demo-repo font-mono">{repo}</span>}
-                                    <span className="inbox-demo-source">
+                                    <span className="inbox-demo-source inline-flex items-center gap-[0.8cqw] min-w-0 overflow-hidden text-ellipsis [&_svg]:size-[2.4cqw] [&_svg]:shrink-0">
                                         <Icon className={color} /> {source}
                                     </span>
-                                    <span className="inbox-demo-time">Just now</span>
+                                    <span className="inbox-demo-time ml-auto">Just now</span>
                                 </footer>
                             </div>
                         </article>

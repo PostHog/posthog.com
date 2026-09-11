@@ -6,7 +6,7 @@ import Tooltip from 'components/RadixUI/Tooltip'
 import { mcpInstallSchema } from 'components/PlatformInstall'
 import { usePrefersReducedMotion } from 'components/Code/usePrefersReducedMotion'
 import { useSlideActive, useSlidePaused } from '../autoAdvanceGate'
-import './styles.css'
+import './animations.css'
 
 // Positions share the SVG's 1000 × 774 coordinate system.
 const NODES = [
@@ -40,7 +40,7 @@ export default function ProductContextDemo() {
     return (
         <figure
             ref={ref}
-            className="product-context-demo paper-desk not-prose relative w-full m-0 border border-primary rounded"
+            className="product-context-demo @container aspect-[1000/774] paper-desk not-prose relative w-full m-0 border border-primary rounded"
             data-running={running}
         >
             <figcaption className="sr-only">
@@ -48,17 +48,22 @@ export default function ProductContextDemo() {
                 your agents.
             </figcaption>
             <div>
-                <svg className="context-connections" viewBox="0 0 1000 774" fill="none" aria-hidden="true">
+                <svg
+                    className="context-connections absolute inset-0 h-full w-full"
+                    viewBox="0 0 1000 774"
+                    fill="none"
+                    aria-hidden="true"
+                >
                     {nodes.map(({ handle, x, y, product }, index) => {
                         const startX = x + (x < 500 ? 155 : -155)
                         const path = `M ${startX} ${y} C 500 ${y}, ${startX} 387, 500 387`
                         return (
                             <g key={handle} className={`text-${product.color}`}>
-                                <path d={path} className="context-connection" />
+                                <path d={path} className="context-connection stroke-[rgb(var(--border))] stroke-2" />
                                 <path
                                     d={path}
                                     pathLength="100"
-                                    className="context-pulse"
+                                    className="context-pulse stroke-current stroke-[4] [stroke-linecap:round] [stroke-dasharray:8_100]"
                                     style={{ animationDelay: `${index * -0.6}s` }}
                                 />
                             </g>
@@ -69,7 +74,7 @@ export default function ProductContextDemo() {
                 {nodes.map(({ handle, x, y, product }, index) => (
                     <div
                         key={handle}
-                        className="context-product-position"
+                        className="context-product-position absolute w-[31%] -translate-x-1/2 -translate-y-1/2"
                         style={{
                             left: `${x / 10}%`,
                             top: `${(y / 774) * 100}%`,
@@ -81,12 +86,12 @@ export default function ProductContextDemo() {
                             to={`/${product.slug}`}
                             state={{ newWindow: true }}
                             wrapperClassName="block"
-                            className="context-product text-primary focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2"
+                            className="context-product flex items-center justify-center gap-[1.2cqw] py-[1cqw] text-[2.8cqw] font-medium whitespace-nowrap leading-tight text-center text-primary focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2"
                         >
                             {product.Icon && (
                                 <product.Icon
                                     aria-hidden="true"
-                                    className={`context-product-icon text-${product.color}`}
+                                    className={`context-product-icon size-[3.4cqw] shrink-0 text-${product.color}`}
                                 />
                             )}
                             <span className="underline underline-offset-2">{product.name}</span>
@@ -94,9 +99,9 @@ export default function ProductContextDemo() {
                     </div>
                 ))}
 
-                <div className="context-hub bg-primary border border-primary">
-                    <strong>Your agents</strong>
-                    <div className="context-clients">
+                <div className="context-hub absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[31%] px-[1.5cqw] py-[3cqw] rounded-md flex flex-col items-center gap-[1cqw] text-center bg-primary border border-primary">
+                    <strong className="text-[3.6cqw] leading-[1.2]">Your agents</strong>
+                    <div className="context-clients flex items-center justify-center gap-[1.8cqw] mt-[1.4cqw] [&_svg]:block [&_svg]:size-[3.4cqw]">
                         {CLIENTS.map((client) => (
                             <Tooltip
                                 key={client.id}
@@ -109,7 +114,7 @@ export default function ProductContextDemo() {
                                         externalNoIcon
                                         aria-label={client.label}
                                         wrapperClassName="flex"
-                                        className="context-client rounded-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2"
+                                        className="context-client block size-[3.4cqw] rounded-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2"
                                     >
                                         <span aria-hidden="true">{client.icon}</span>
                                     </Link>

@@ -1,0 +1,50 @@
+.ai-demo-welcome,
+.ai-demo-conversation {
+    transition: opacity 350ms ease-out, transform 350ms ease-out;
+}
+.ask-anything-demo [data-visible='false'] {
+    opacity: 0;
+    transform: translateY(1cqw);
+    pointer-events: none;
+}
+.ai-demo-composer {
+    transition: border-color 200ms ease-out;
+}
+.ai-demo-composer[data-submitting='true'] .ai-demo-send {
+    transform: translateY(0.4cqw);
+    box-shadow: none;
+}
+.ai-demo-caret {
+    animation: ai-demo-blink 800ms step-end infinite;
+}
+.ai-demo-spinner {
+    animation: ai-demo-spin 900ms linear infinite;
+}
+.ai-demo-tool {
+    transition: opacity 300ms ease-out, transform 300ms ease-out;
+}
+.ai-demo-finding {
+    transition: opacity 400ms ease-out, transform 400ms ease-out;
+}
+.ask-anything-demo[data-running='false'] .ai-demo-spinner,
+.ask-anything-demo[data-running='false'] .ai-demo-caret {
+    animation-play-state: paused;
+}
+@media (prefers-reduced-motion: reduce) {
+    .ask-anything-demo *,
+    .ask-anything-demo *::before,
+    .ask-anything-demo *::after {
+        animation: none !important;
+        transition: none !important;
+    }
+}
+@keyframes ai-demo-blink {
+    50% {
+        opacity: 0;
+    }
+}
+@keyframes ai-demo-spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
