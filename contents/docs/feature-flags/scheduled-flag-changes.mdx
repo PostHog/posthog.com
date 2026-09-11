@@ -30,7 +30,7 @@ This means if your project is set to `America/New_York` and you schedule a chang
 2. Select the **Schedule** tab.
 3. Under **Change type**:
    - Select **Change status** to enable or disable your flag at a scheduled time.
-   - Select **Add condition** to append rollout conditions to your flag at a scheduled time.
+   - Select **Add condition** to append rollout conditions to your flag at a scheduled time. See [gradual rollouts](#gradual-rollouts) to ramp a percentage up over time.
    - Select **Update variants** to update the variant keys, descriptions, payloads, or rollouts.
 4. Select the **Date and time** of your scheduled change using the date picker.
 5. Optionally, use the **Repeats** dropdown to set a recurrence interval. You can choose from **Daily**, **Weekly**, **Monthly**, **Yearly**, or **Custom (cron)** for flexible scheduling with a cron expression. When the change type is **Change status**, the dropdown also includes **Paired schedules** presets (see [below](#paired-schedule-presets)). When a repeat option is selected, an **Ends** date picker appears to set an optional end date for the recurring schedule.
@@ -44,6 +44,14 @@ Scheduled changes appear below the form, grouped into an **Active & upcoming** s
   alt="Scheduled flag changes"
   classes="rounded"
 />
+
+## Gradual rollouts
+
+To ramp a rollout up over time, schedule one **Add condition** change per phase, each with a higher rollout percentage: 25%, then 50%, then 100%.
+
+Each change adds a condition rather than raising the percentage on the one before it, so the flag ends up holding all three. It still ramps, because PostHog [turns the flag on for anyone who passes at least one condition](/docs/feature-flags/creating-feature-flags#release-conditions). A user's rollout bucket comes from the flag key and their ID, not from the condition, so everyone in the 25% bucket is also in the 50% bucket. The percentages never add up: a 25% condition and a 50% condition together reach 50% of matching users, not 75%. The audience only grows, and nobody loses access part way through.
+
+Give every phase the same property filters, or none at all, since a user only ramps across the conditions they already qualify for. This also only ramps up: a lower percentage added later has no effect, and you have to delete the earlier conditions yourself once the flag reaches 100%. Keep [early exit](/docs/feature-flags/creating-feature-flags#stop-evaluation-at-first-matching-condition-set) turned off, because it stops at the 25% condition and never reaches the wider ones.
 
 ## Edit a scheduled change
 
