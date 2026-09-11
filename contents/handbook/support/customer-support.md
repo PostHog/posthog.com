@@ -99,6 +99,12 @@ We very rarely receive messages from people wishing to make a legal claim agains
 
 Support =/= community - we consider them to be separate things.
 
+### Community questions and Discord
+
+Community is not support, but it is one of our best sources of product feedback. [Community questions](/questions) and Discord show what users ask and say about each product area, in real time.
+
+Questions are routed to team Slack channels by topic, so each team can see the posts about its own products. Support heroes are welcome to [read their team's community posts](/handbook/engineering/support-hero#community-questions-and-discord) when they have time, but it is not a requirement. PostHog AI and other community members answer most questions.
+
 ### Tutorials
 
 We want to help teams of all sizes learn how to ask the right product analytics questions to grow their product. To help, we create content in the form of [tutorials](/tutorials), [blog posts](/blog), and [videos](https://www.youtube.com/channel/UCn4mJ4kK5KVSvozJre645LA).
