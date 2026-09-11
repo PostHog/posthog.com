@@ -24,12 +24,10 @@ import {
 } from '@posthog/icons'
 import OSButton from 'components/OSButton'
 import { Logo } from '@posthog/brand/logo'
-import CampfireHog from '../../images/lenny-campfire-hog.png'
-import Hogzilla from '../../images/lenny-hogzilla.png'
-import LennyFire from '../../images/lenny-fire.png'
-import GrassAngled from '../../images/grass-tuft-angled.png'
-import GrassFolded from '../../images/grass-tuft-folded.png'
-import GrassFan from '../../images/grass-tuft-fan.png'
+
+const CAMPFIRE_HOG = 'https://res.cloudinary.com/dmukukwp6/image/upload/lenny_campfire_hog_853bb11d39.png'
+const HOGZILLA = 'https://res.cloudinary.com/dmukukwp6/image/upload/lenny_hogzilla_fbfda8c4db.png'
+const LENNY_FIRE = 'https://res.cloudinary.com/dmukukwp6/image/upload/lenny_fire_62d09256e1.png'
 
 type IconComponent = React.ComponentType<{ className?: string }>
 
@@ -42,32 +40,6 @@ const productPassUrl = 'https://lennysproductpass.com'
 // highlight tidy when the phrase wraps across lines on narrow containers.
 const Highlight = ({ children }: { children: React.ReactNode }) => (
     <span className="bg-highlight p-0.5 font-bold text-red dark:text-yellow box-decoration-clone">{children}</span>
-)
-
-// Grass tufts framing the closing CTA art, same approach as the /pricing hero.
-const Tuft = ({ src, flip, className }: { src: string; flip?: boolean; className: string }) => (
-    <img src={src} alt="" aria-hidden className={`absolute h-auto ${flip ? 'scale-x-[-1] ' : ''}${className}`} />
-)
-
-const FRONT_TUFTS = [
-    { src: GrassFan, className: '-left-20 @3xl:-left-24 -bottom-5 @3xl:-bottom-6 w-24 @3xl:w-32 -rotate-3' },
-    {
-        src: GrassAngled,
-        className: '-right-6 @3xl:-right-9 -bottom-5 @3xl:-bottom-6 w-16 @4xl:w-20 opacity-85 rotate-2',
-    },
-]
-
-const BEHIND_TUFTS = [
-    { src: GrassFolded, flip: true, className: '-left-[7%] bottom-[19%] w-10 opacity-60 rotate-2' },
-    { src: GrassAngled, flip: true, className: '-right-[8%] bottom-[23%] w-9 opacity-50 rotate-1' },
-]
-
-const TuftLayer = ({ tufts, className }: { tufts: typeof FRONT_TUFTS; className: string }) => (
-    <div className={`absolute inset-0 pointer-events-none select-none ${className}`} aria-hidden>
-        {tufts.map((tuft, index) => (
-            <Tuft key={index} {...tuft} />
-        ))}
-    </div>
 )
 
 // The four jobs product people hire us for, mirroring the tab set on /products.
@@ -302,7 +274,6 @@ function NewsletterSection(): JSX.Element {
                 to="https://newsletter.posthog.com"
                 external
                 size="md"
-                icon={<IconArrowRight />}
                 iconPosition="right"
                 className="text-red dark:text-yellow"
             >
@@ -329,8 +300,8 @@ const faqItems = [
         trigger: 'Do I need a PostHog account?',
         content: (
             <p>
-                Yes. Log in and you'll land straight on the claim page, or create an account and you'll be redirected there once you're verified. 
-                Onboarding picks up right after.
+                Yes. Log in and you'll land straight on the claim page, or create an account and you'll be redirected
+                there once you're verified. Onboarding picks up right after.
             </p>
         ),
     },
@@ -338,12 +309,12 @@ const faqItems = [
         trigger: 'Who is eligible?',
         content: (
             <p>
-                Active annual subscribers to Lenny's Newsletter who are either new or existing users of PostHog with and paid subscription that have had no paid invoices before
-                December 1, 2025.
+                Active annual subscribers to Lenny's Newsletter who are either new or existing users of PostHog with and
+                paid subscription that have had no paid invoices before December 1, 2025.
             </p>
         ),
     },
-     {
+    {
         trigger: 'What counts as a "new customer"?',
         content: (
             <p>
@@ -426,7 +397,7 @@ export default function LennyProductPass(): JSX.Element {
                     <div className="relative w-full overflow-hidden border-b border-primary bg-gradient-to-br from-yellow/10 via-orange/15 to-burnt-orange/20">
                         <div className="relative max-w-6xl px-4 @3xl:px-8 py-10 @3xl:py-14">
                             <img
-                                src={CampfireHog}
+                                src={CAMPFIRE_HOG}
                                 alt="A PostHog hedgehog toasting marshmallows at Lenny's campfire"
                                 className="hidden @2xl:block absolute right-4 bottom-0 w-64 max-w-[30%]"
                             />
@@ -446,8 +417,8 @@ export default function LennyProductPass(): JSX.Element {
                                 <p className="mb-4 max-w-2xl">
                                     Annual subscribers to Lenny's Newsletter get{' '}
                                     <strong>PostHog Scale free for 12 months</strong> and{' '}
-                                    <strong>double the free tier</strong> on every product. This is a $16,500 value, and the
-                                    first deal like it we've ever done.
+                                    <strong>double the free tier</strong> on every product. This is a $16,500 value, and
+                                    the first deal like it we've ever done.
                                 </p>
                                 <OSButton asLink to={claimUrl} variant="primary" size="md" external>
                                     Claim your offer
@@ -465,9 +436,7 @@ export default function LennyProductPass(): JSX.Element {
                     {/* What you'd actually use it for – four jobs, as sticky notes. */}
                     <div className="m-4 @3xl:m-8 max-w-6xl">
                         <h2 className="mb-2">Every tool a product leader needs, in one place</h2>
-                        <p className="mb-6 max-w-3xl">
-                            See how it all connects, then decide what's next.
-                        </p>
+                        <p className="mb-6 max-w-3xl">See how it all connects, then decide what's next.</p>
                         <div className="not-prose grid grid-cols-1 @xl:grid-cols-2 @4xl:grid-cols-4 gap-4 @3xl:gap-6">
                             {jobs.map(({ bg, rotate, title, copy, tools }) => (
                                 <div key={title} className={`${bg} ${rotate} p-4 text-black`}>
@@ -498,9 +467,8 @@ export default function LennyProductPass(): JSX.Element {
                             We're here to help make your product <Highlight>self-driving</Highlight>
                         </h2>
                         <p className="mb-3 max-w-3xl">
-                            PostHog instruments your codebase, then combines that context 
-                            with product data like analytics events, errors, and recordings 
-                            to understand problems and propose fixes.
+                            PostHog instruments your codebase, then combines that context with product data like
+                            analytics events, errors, and recordings to understand problems and propose fixes.
                         </p>
                         <div className="not-prose grid @2xl:grid-cols-2 gap-4">
                             {selfDrivingCapabilities.map(({ Icon, color, title, copy }) => (
@@ -529,7 +497,7 @@ export default function LennyProductPass(): JSX.Element {
                     <div className="m-4 @3xl:m-8 max-w-6xl">
                         <div className="relative overflow-hidden rounded-md border border-primary bg-gradient-to-br from-yellow/10 via-orange/10 to-burnt-orange/15 p-6 @3xl:p-8">
                             <img
-                                src={LennyFire}
+                                src={LENNY_FIRE}
                                 alt=""
                                 className="hidden @2xl:block absolute -right-6 -bottom-8 w-44 opacity-20 pointer-events-none"
                             />
@@ -551,11 +519,17 @@ export default function LennyProductPass(): JSX.Element {
                                         </div>
                                     ))}
                                 </div>
-                                <p className="mt-6 mb-2 font-bold text-primary">Who is eligible to redeem this Product Pass from Lenny</p>
+                                <p className="mt-6 mb-2 font-bold text-primary">
+                                    Who is eligible to redeem this Product Pass from Lenny
+                                </p>
                                 <ul className="max-w-3xl mt-0 mb-0">
-                                     <li>
+                                    <li>
                                         You're an active annual subscriber to{' '}
-                                        <Link to="https://www.lennysnewsletter.com/p/start-here" externalNoIcon className="font-semibold underline">
+                                        <Link
+                                            to="https://www.lennysnewsletter.com/p/start-here"
+                                            externalNoIcon
+                                            className="font-semibold underline"
+                                        >
                                             Lenny's Newsletter
                                         </Link>
                                     </li>
@@ -606,14 +580,12 @@ export default function LennyProductPass(): JSX.Element {
                                         </span>
                                     </div>
                                 </div>
-                                <div className="shrink-0 self-center w-56 @2xl:w-64 @4xl:w-80 relative">
-                                    <TuftLayer tufts={BEHIND_TUFTS} className="z-0" />
+                                <div className="shrink-0 self-center w-56 @2xl:w-64 @4xl:w-80">
                                     <img
-                                        src={Hogzilla}
+                                        src={HOGZILLA}
                                         alt="Hogzilla tearing through town in a convertible"
-                                        className="w-full h-auto relative z-10"
+                                        className="w-full h-auto"
                                     />
-                                    <TuftLayer tufts={FRONT_TUFTS} className="z-20" />
                                 </div>
                             </div>
                         </div>
