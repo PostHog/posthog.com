@@ -1,14 +1,8 @@
 import React from 'react'
-import { RenderInClient } from 'components/RenderInClient'
-import usePostHog from '../../../hooks/usePostHog'
-import { DEFAULT_HERO_CTA_VARIANT, resolveHeroCtaVariant } from './variants'
+import { HERO_CTA_VARIANTS } from './variants'
 
-export const HERO_CTA_FLAG = 'homepage-cta'
-
-function VariantSlot(): JSX.Element {
-    const posthog = usePostHog()
-    const { Component, alignsWithHeadline } =
-        resolveHeroCtaVariant(posthog?.getFeatureFlag?.(HERO_CTA_FLAG)) ?? DEFAULT_HERO_CTA_VARIANT
+export default function HeroCTA(): JSX.Element {
+    const { Component, alignsWithHeadline } = HERO_CTA_VARIANTS.find(({ id }) => id === 'card-no-command')!
 
     return (
         <div
@@ -18,11 +12,6 @@ function VariantSlot(): JSX.Element {
             <Component />
         </div>
     )
-}
-
-/** The CTA slot. Renders nothing until flags resolve, so the hero never shows the wrong variant. */
-export default function HeroCTA(): JSX.Element {
-    return <RenderInClient render={() => <VariantSlot />} />
 }
 
 export { HERO_CTA_VARIANTS, DEFAULT_HERO_CTA_VARIANT, resolveHeroCtaVariant } from './variants'
