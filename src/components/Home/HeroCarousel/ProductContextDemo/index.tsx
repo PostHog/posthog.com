@@ -86,12 +86,12 @@ export default function ProductContextDemo() {
                             to={`/${product.slug}`}
                             state={{ newWindow: true }}
                             wrapperClassName="block"
-                            className="context-product flex items-center justify-center gap-[1.2cqw] py-[1cqw] text-[2.8cqw] font-medium whitespace-nowrap leading-tight text-center text-primary focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2"
+                            className="context-product flex items-center justify-center gap-[1.2cqw] py-[1cqw] text-[2.8cqw] font-medium whitespace-nowrap leading-tight text-center text-primary focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 [&_g]:[clip-path:none]"
                         >
                             {product.Icon && (
                                 <product.Icon
                                     aria-hidden="true"
-                                    className={`context-product-icon size-[3.4cqw] shrink-0 text-${product.color}`}
+                                    className={`context-product-icon size-[3.4cqw] shrink-0 fill-current text-${product.color}`}
                                 />
                             )}
                             <span className="underline underline-offset-2">{product.name}</span>
