@@ -86,6 +86,29 @@ Agent preference is a newer way to measure this. Instead of asking a chatbot to 
 
 **What good looks like:** all four stages hold their baseline or grow, and when one moves, we can tell which pages caused it and act on it quickly.
 
+## Which prompts we track, and why
+
+Since prompt selection largely determines the result, it's worth being transparent about how we pick ours.
+
+A **tracked prompt** is a question we run against the major models on a regular schedule, recording whether we get mentioned, whether we get cited, and who else shows up. The set is what our citation and mention rates are calculated against, so if the set is junk, so are the numbers.
+
+**How we choose them:**
+
+- **Google search volume as a proxy.** If a lot of people search something, it's reasonable to assume people ask LLMs something similar. Imperfect, but it's the only "volume" data that exists.
+- **First-party data from real users.** Our onboarding form asks what people were actually doing when they found us, including the prompts they remember using. This is the closest thing to ground truth we have, and it's small but growing.
+- **Bottom-of-funnel intent.** We weight toward prompts where someone is choosing a tool ("best session replay tools", "X vs Y") over prompts where they're learning a concept. The second kind is worth writing for, but it converts differently and shouldn't be mixed into the same number.
+- **Organized by product and topic**, so we can see where we're weak rather than just getting one blended figure.
+
+The limitation: search behavior isn't prompt behavior. People phrase things very differently to an LLM than to a search bar – longer, more conversational, with more context about their situation. Our set is a proxy for something we can't observe directly, and we keep refining it as more first-party data comes in.
+
+**What we leave out:** anything where we already know the answer before we run it. That covers prompts with no evidence anyone asks them, and prompts rigged in our favor – showing up for "the best product analytics tool with a fun mascot and a weird name" isn't information.
+
+We've pruned our prompt set aggressively for this reason. A smaller set focused on our ICP tells us more than a large set padded with unreliable and/or unrealistic prompts.
+
+We do track branded prompts like "what is PostHog" as they're useful for checking how accurately we're positioned in the eyes of LLMs, but they're excluded from the visibility calculation.
+
+**Want to poke at this yourself?** We're working on making all of it easier to see. In the meantime, let us know if you'd like access to Gauge, and there's a bot in `#marketing-reporting` you can tag `@AskGauge` to ask questions about our visibility data directly.
+
 ## What we control and what we don't
 
 **We control:**
