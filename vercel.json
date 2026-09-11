@@ -118,6 +118,14 @@
     ],
     "redirects": [
         {
+            "source": "/kbd",
+            "destination": "/"
+        },
+        {
+            "source": "/credits",
+            "destination": "/"
+        },
+        {
             "source": "/blog/posthog-vs-fathom",
             "destination": "/compare/posthog-vs-fathom"
         },
