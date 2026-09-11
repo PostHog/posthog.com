@@ -26,6 +26,7 @@ import {
     IconX,
 } from '@posthog/icons'
 import OSButton from 'components/OSButton'
+import CustomerLogos from 'components/Pricing/Redesign/CustomerLogos'
 import { Logo } from '@posthog/brand/logo'
 
 const CAMPFIRE_HOG = 'https://res.cloudinary.com/dmukukwp6/image/upload/lenny_campfire_hog_853bb11d39.png'
@@ -292,7 +293,7 @@ function NewsletterSection(): JSX.Element {
                 iconPosition="right"
                 className="text-red dark:text-yellow"
             >
-                Subscribe free
+                Subscribe on Substack
             </OSButton>
         </div>
     )
@@ -538,11 +539,13 @@ export default function LennyProductPass(): JSX.Element {
                                         </div>
                                     ))}
                                 </div>
-                                <p className="mt-6 mb-2 font-bold text-primary">What Scale adds</p>
+                                <p className="mt-6 mb-2 font-bold text-primary">
+                                    What is included in a PostHog Scale plan
+                                </p>
                                 <ul className="max-w-3xl mt-0 mb-0">
-                                    <li>Unlimited projects, and white labeling</li>
+                                    <li>Unlimited projects, and access to each product</li>
                                     <li>SSO enforcement, SAML, and a HIPAA BAA</li>
-                                    <li>Priority support, and more to scale your organization</li>
+                                    <li>Priority support, and features for collaboration with team members</li>
                                 </ul>
                                 <p className="mt-6 mb-2 font-bold text-primary">
                                     Who is eligible to redeem this Product Pass from Lenny
@@ -570,6 +573,11 @@ export default function LennyProductPass(): JSX.Element {
 
                     {/* Our newsletter – a scrollable post carousel, matching the blog section on /research. */}
                     <NewsletterSection />
+
+                    {/* Social proof – the same rail the pricing page uses, straight from the shared component. */}
+                    <div className="m-4 @3xl:m-8 max-w-6xl">
+                        <CustomerLogos />
+                    </div>
 
                     <div className="m-4 @3xl:m-8 max-w-6xl border-t border-primary pt-4">
                         <h2 className="mb-4">FAQs</h2>
