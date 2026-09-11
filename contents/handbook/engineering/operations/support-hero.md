@@ -152,23 +152,21 @@ The key principle: We want to be responsive to our open-source community when we
 
 ### Community questions and Discord
 
-Users on the free plan get community support only. Because of this, many questions and opinions about your product area appear on [Community questions](/questions) and in [Discord](/community), and not in PostHog Support.
+Users on the free plan get community support only. Because of this, many questions and opinions about your product area appear on [Community questions](/questions) and in Discord, and not in PostHog Support.
 
 This is not a ticket queue, and it is not a duty. Nobody has to reply. Look at it as a source of product feedback: it shows you what users ask, what confuses them, and what they say about your product area, in real time.
 
-If you have time between tickets, read your team's community posts. Try to spend less than 30 minutes a week. Most teams get one or two questions a week, sometimes none. Billing and configuration topics get more, and we are moving more troubleshooting questions to PostHog AI.
+If you have time between tickets, read your team's community posts. The goal is to spend less than 30 minutes a week. Most teams get one or two questions a week, sometimes none.
 
-#### Where your team's questions go
+#### Where to find posts relevant to your team
 
-Each question topic is subscribed to one or more teams. When a user asks a question, the question goes to the Slack channel of each subscribed team.
+Each post topic is subscribed to one or more teams. When a user makes a post, the post goes to the Slack channel of each subscribed team.
 
 To see which topics are mapped to your team, go to [community alerts](/community/alerts). Use that page also to find topics that have no team, and teams that have no Slack channel. A team with no Slack channel gets nothing, even when it is subscribed to a topic.
 
 #### What is a good reply?
 
-PostHog AI answers almost every question in about a minute, and community members answer many more. **A reply from PostHog AI or from another community member is frequently the correct answer for the user.** When this is true, you do not have to write an answer. To confirm that the answer is correct is sufficient, and it is a help to the user.
-
-Write an answer yourself when the given answer is wrong, or when the community and PostHog AI do not know the answer and the user cannot continue.
+**A reply from PostHog AI or from another community member is frequently the correct answer for the user.** When this is true, no need to reply—you can upvote the existing reply. If you want to chime in with something, check these [guidelines for answering questions](/handbook/community/questions).
 
 Paid tickets always have a higher priority than community questions.
 
