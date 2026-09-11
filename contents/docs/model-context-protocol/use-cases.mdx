@@ -279,6 +279,31 @@ Set one-off or recurring reminders that fire as in-app notifications. Optionally
   outcome="Deletes the reminder so it stops firing."
 />
 
+### Analyze data in a notebook
+
+Turn a research question into a shareable [notebook](/docs/notebooks) with executable SQL and Python cells that run as your agent writes them. See the [notebooks guide](/docs/notebooks#editing-notebooks-over-mcp) for the tools involved. Executable cells are currently in beta.
+
+<PromptExample
+  prompt="Create a notebook called 'Weekly signups by source' with a SQL cell that pulls the last 8 weeks of signups from events, broken down by utm_source."
+  outcome="Creates a markdown notebook, adds a SQL cell that runs immediately, and returns a link with the result table already embedded."
+/>
+<PromptExample
+  prompt="In my open notebook, add a Python cell that reads the sql_df dataframe and plots signups per week per source with matplotlib."
+  outcome="Adds a Python cell that reads the upstream SQL result by dataframe name and renders a matplotlib chart stored alongside the code."
+/>
+<PromptExample
+  prompt="Update the SQL cell in my signups notebook to filter out internal test users, then re-run it."
+  outcome="Edits the cell's code, re-runs it, and flags any downstream cells that are now stale so they can be re-run in order."
+/>
+<PromptExample
+  prompt="What dataframes does my open notebook have loaded right now?"
+  outcome="Returns the kernel's active dataframes with columns, types, and row counts, so the agent knows what a next cell can reference."
+/>
+<PromptExample
+  prompt="Delete the second Python cell in my notebook, I don't need the outlier analysis anymore."
+  outcome="Removes the cell and reports any downstream cells whose dataframe reference is now orphaned."
+/>
+
 ## Multi-step recipes
 
 Single prompts get you a long way, but the real value of MCP comes from chaining MCP tool calls into end-to-end workflows. Drop these sequences into your agent one step at a time – each prompt builds on the context the previous one returned.
@@ -356,6 +381,31 @@ Conversion is down – use MCP to figure out where users are dropping off, why, 
   step={4}
   prompt="Create an alert that pages me if the pricing-to-purchase conversion drops more than 10% week-over-week."
   outcome="Sets up a guardrail so the next dip doesn't sit undiscovered."
+/>
+
+### Investigate a metric drop in a notebook
+
+Your weekly active users number dipped. Build the investigation in a [notebook](/docs/notebooks) so the queries, the Python analysis, and the narrative land in one shareable document.
+
+<PromptExample
+  step={1}
+  prompt="Create a notebook called 'WAU drop, week of 2026-02-16'."
+  outcome="Creates an empty markdown notebook and returns the link."
+/>
+<PromptExample
+  step={2}
+  prompt="Add a SQL cell that pulls weekly active users per week for the last 12 weeks, and another that breaks it out by country for the same window."
+  outcome="Adds two SQL cells, each with a named dataframe, both run and rendered as tables."
+/>
+<PromptExample
+  step={3}
+  prompt="Add a Python cell that reads the country dataframe and identifies the country with the biggest week-over-week drop."
+  outcome="Reads the SQL result, computes the drop, and prints the country with the number."
+/>
+<PromptExample
+  step={4}
+  prompt="Add a session replay playlist filtered to that country for the last 7 days, and a markdown cell summarizing what we found so far."
+  outcome="Adds a replay playlist cell scoped to the country and window, and a summary block, giving you replays to skim without leaving the notebook."
 />
 
 ## Keep exploring
