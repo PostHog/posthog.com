@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
-import { IconCheck, IconCoffee, IconSparkles } from '@posthog/icons'
-import { IconSlack } from 'components/OSIcons'
+import { IconArrowUpRight, IconCheck, IconCoffee, IconLaptop, IconSparkles } from '@posthog/icons'
+import { IconOpenAI, IconSlack } from 'components/OSIcons'
 import OSButton from 'components/OSButton'
 import Link from 'components/Link'
 import { SignupCTA } from 'components/SignupCTA'
@@ -12,11 +12,12 @@ import { ToggleGroup } from 'components/RadixUI/ToggleGroup'
 import TypecaastPlayer, { type TypecaastPlayerProps } from 'components/TypecaastPlayer'
 import { usePrefersReducedMotion } from 'components/Code/usePrefersReducedMotion'
 import { usePauseAutoAdvance, useSlideActive } from './autoAdvanceGate'
-import slackBrokenLink from '../../../data/typecaast/slack-broken-link.json'
 import slackSignalsLoading from '../../../data/typecaast/slack-signals-loading.json'
 import AskAnythingDemo from './AskAnythingDemo'
 import { useToolsProducts } from 'components/Home/ToolsTicker'
 import ToolsTickerStrip from 'components/Home/ToolsTicker/ToolsTickerStrip'
+import PlatformInstall, { mcpInstallSchema, type InstallSchema } from 'components/PlatformInstall'
+import ProductContextDemo from './ProductContextDemo'
 
 // A Typecaast embed for use inside the hero carousel. While its animation plays it holds
 // the carousel's auto-advance (the animations run longer than the ~5s dwell), then releases
@@ -58,33 +59,50 @@ const CarouselTypecaast = ({ onEnded, ...props }: TypecaastPlayerProps): JSX.Ele
     )
 }
 
-export const GiveAgentsContext = () => {
-    const allProducts = useProduct() as any[]
-    const product = Array.isArray(allProducts) ? allProducts.find((p: any) => p.handle === 'posthog_slack') : undefined
-    const screenshot = product?.screenshots?.home
+const compactMcpSchema: InstallSchema = {
+    ...mcpInstallSchema,
+    supports: undefined,
+    secondaryAction: { label: 'Docs', to: '/docs/model-context-protocol', state: { newWindow: true } },
+    platforms: [
+        ...mcpInstallSchema.platforms.filter(({ id }) => id === 'claude'),
+        {
+            id: 'chatgpt',
+            label: 'ChatGPT',
+            group: 'platforms',
+            icon: <IconOpenAI className="size-4" />,
+            href: 'https://chatgpt.com/plugins/plugin_asdk_app_699caef2d680819188727b0ddbb349dd',
+        },
+        ...mcpInstallSchema.platforms.filter(({ id }) => ['codex', 'cursor', 'vscode'].includes(id)),
+    ],
+}
 
+export const GiveAgentsContext = () => {
     return (
         <div className="@container rounded p-4 @md:p-6 h-full bg-accent/20">
             <div className="grid grid-cols-1 @2xl:grid-cols-[1.4fr_1fr] gap-6 @2xl:gap-8 items-start">
-                <CarouselTypecaast
-                    config={slackBrokenLink}
-                    height={CAROUSEL_EMBED_HEIGHT}
-                    className="border border-primary"
-                />
+                <ProductContextDemo />
                 <div className="flex flex-col gap-3">
-                    <div className="space-y-2">
-                        <p className="flex items-center gap-1.5 text-secondary text-sm font-semibold m-0">
-                            PostHog in <IconSlack className="size-4" /> Slack
-                        </p>
-                        <h2 className="text-2xl font-bold m-0">Work on pull requests together</h2>
-                    </div>
+                    <h2 className="text-2xl font-bold m-0">PostHog, but anywhere</h2>
                     <p className="text-secondary m-0">
-                        Tag <code>@PostHog</code> in a thread to analyze customer behavior or create a PR – all without
-                        ever leaving Slack. Triage and build with your team in the tools you already use.
+                        Query product data from your editor instead of context-switching to a browser. Do everything
+                        from one-off analytics to launching new features - no new UI needed.
                     </p>
-                    <OSButton to="/slack" state={{ newWindow: true }} variant="secondary" size="md" asLink>
-                        Explore PostHog Slack
-                    </OSButton>
+                    <PlatformInstall
+                        schema={compactMcpSchema}
+                        linkOnly
+                        hideSecondaryAction
+                        className="!shadow-none !mb-0"
+                    />
+                    <p className="text-sm text-secondary m-0">
+                        Or use{' '}
+                        <Link
+                            to="/desktop"
+                            state={{ newWindow: true }}
+                            className="inline-flex items-center gap-1 underline underline-offset-2"
+                        >
+                            <IconLaptop className="size-4" /> PostHog Desktop <IconArrowUpRight className="size-3" />
+                        </Link>
+                    </p>
                 </div>
             </div>
         </div>
