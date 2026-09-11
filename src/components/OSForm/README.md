@@ -96,7 +96,7 @@ import { OSSelect } from 'components/OSForm'
 | `label`             | `string`                                 | required                | The label text displayed for the select                                    |
 | `options`           | `SelectOption[]`                         | required                | Array of select options                                                    |
 | `value`             | `any`                                    | -                       | The currently selected value                                               |
-| `onChange`          | `(value: any) => void`                   | required                | Callback when selection changes                                            |
+| `onChange`          | `(value: any) => void`                   | -                       | Callback when selection changes                                            |
 | `placeholder`       | `string`                                 | `"Select an option..."` | Placeholder text when no option is selected                                |
 | `direction`         | `"row" \| "column"`                      | `"row"`                 | Layout direction - row shows label beside select, column shows label above |
 | `size`              | `"sm" \| "md" \| "lg"`                   | `"md"`                  | Size of the select and text                                                |

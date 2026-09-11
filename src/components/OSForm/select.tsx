@@ -17,7 +17,7 @@ interface SelectProps {
     label: string
     options: SelectOption[]
     value?: any
-    onChange: (value: any) => void
+    onChange?: (value: any) => void
     placeholder?: string
     direction?: 'row' | 'column'
     size?: 'sm' | 'md' | 'lg'
@@ -215,7 +215,7 @@ const OSSelect = ({
     // Handle option selection
     const handleOptionSelect = (option: SelectOption) => {
         if (!option.disabled && !option.isHeader) {
-            onChange(option.value)
+            onChange?.(option.value)
             setIsOpen(false)
             setSearchTerm('')
         }
