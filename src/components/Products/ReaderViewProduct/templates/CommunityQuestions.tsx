@@ -47,7 +47,10 @@ const CommunityQuestions = ({ id, productData }: SectionComponentProps) => {
         (node: CommunityStatsNode) => node.topicId === forumTopicId
     )
 
-    const forumUrl = `/questions/topic/${slug}`
+    // Products can point their community links at another topic's slug (e.g. Replay
+    // Vision shares Session Replay's forum topic); fall back to their own slug.
+    const forumTopicSlug = (productData as any)?.forumTopicSlug ?? slug
+    const forumUrl = `/questions/topic/${forumTopicSlug}`
     const approxCount = (n: number) => {
         if (n >= 1000) return `With over ${(Math.floor(n / 1000) * 1000).toLocaleString()}`
         if (n >= 100) return `With over ${(Math.floor(n / 100) * 100).toLocaleString()}`
