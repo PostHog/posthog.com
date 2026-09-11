@@ -58,6 +58,7 @@ interface ChatContext {
 
 export interface ChatParams {
     path: string
+    sessionKey?: number
     context?: ChatContext[]
     quickQuestions?: string[]
     chatId?: string
@@ -2431,7 +2432,7 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
     // than as a managed window. Opening a chat just stores its params and flips the
     // `chatOpen` flag; a fresh set of params remounts the overlay's `ChatProvider`.
     const openNewChat = (params: ChatParams) => {
-        setChatParams(params)
+        setChatParams((previous) => ({ ...params, sessionKey: (previous?.sessionKey ?? 0) + 1 }))
         setChatOpen(true)
     }
 
