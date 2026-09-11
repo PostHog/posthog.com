@@ -1882,10 +1882,6 @@
             "destination": "/handbook/company/management"
         },
         {
-            "source": "/lenny",
-            "destination": "/?utm_source=influencer&utm_medium=newsletter&utm_campaign=lenny"
-        },
-        {
             "source": "/zizyo",
             "destination": "/?utm_source=influencer&utm_medium=youtube&utm_campaign=zizyo"
         },
