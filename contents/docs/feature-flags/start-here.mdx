@@ -8,8 +8,25 @@ import FeatureFlagsInstallationPlatforms from './installation/_snippets/installa
 import { QuestLog, QuestLogItem } from 'components/Docs/QuestLog'
 import { IconFlask } from '@posthog/icons'
 import OSButton from 'components/OSButton'
+import WizardCommand from 'components/WizardCommand'
 
 <QuestLog firstSpeechBubble="Let's ship some flags!" lastSpeechBubble="Time to start flagging features!">
+
+<QuestLogItem
+    title="Install with the AI wizard"
+    subtitle="Next.js App Router"
+    icon="IconSparkles"
+>
+
+  On Next.js App Router 15.3+, `wizard feature-flags` adds server `evaluateFlags()`, client bootstrap, and an optional 0% kill switch. It extends an existing PostHog install. Other stacks: skip this step and install an SDK below.
+
+  <WizardCommand command="feature-flags" />
+
+  <OSButton variant="primary" asLink to="/docs/feature-flags/installation/ai-wizard">
+    AI wizard walkthrough
+  </OSButton>
+
+</QuestLogItem>
 
 <QuestLogItem
     title="Create your first flag"
