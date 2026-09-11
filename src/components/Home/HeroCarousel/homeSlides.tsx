@@ -113,7 +113,10 @@ export const ShipWithPostHogSlide = () => {
                                     state={{ newWindow: true }}
                                     className="inline-flex items-center gap-1.5 text-sm font-semibold text-primary underline underline-offset-2"
                                 >
-                                    <Icon aria-hidden="true" className={`size-5 shrink-0 ${color}`} />
+                                    <Icon
+                                        aria-hidden="true"
+                                        className={`size-5 shrink-0 fill-current [&_g]:[clip-path:none] ${color}`}
+                                    />
                                     {name}
                                 </Link>
                                 <p className="text-xs leading-snug text-secondary m-0 mt-1">{description}</p>

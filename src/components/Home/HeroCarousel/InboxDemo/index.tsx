@@ -148,8 +148,8 @@ export default function InboxDemo() {
                                 </p>
                                 <footer className="inbox-demo-meta flex items-center gap-[1.5cqw] mt-auto ml-[calc(var(--badge-height)+1cqw)] text-[2.1cqw] leading-[1.3] whitespace-nowrap text-secondary">
                                     {repo && <span className="inbox-demo-repo font-mono">{repo}</span>}
-                                    <span className="inbox-demo-source inline-flex items-center gap-[0.8cqw] min-w-0 overflow-hidden text-ellipsis [&_svg]:size-[2.4cqw] [&_svg]:shrink-0">
-                                        <Icon className={color} /> {source}
+                                    <span className="inbox-demo-source inline-flex items-center gap-[0.8cqw] min-w-0 overflow-hidden text-ellipsis [&_svg]:size-[2.4cqw] [&_svg]:shrink-0 [&_g]:[clip-path:none]">
+                                        <Icon className={`${color} fill-current`} /> {source}
                                     </span>
                                     <span className="inbox-demo-time ml-auto">Just now</span>
                                 </footer>

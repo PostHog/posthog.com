@@ -179,7 +179,7 @@ export default function AskAnythingDemo() {
                             key={label}
                             className="border border-primary inline-flex items-center gap-[0.8cqw] whitespace-nowrap leading-none font-semibold bg-primary p-[0.85cqw] rounded-[1.1cqw] text-[2.5cqw] shadow-[0_0.45cqw_0_rgb(var(--input-border))]"
                         >
-                            <Icon />
+                            <Icon className="fill-current [&_g]:[clip-path:none]" />
                             {label}
                         </span>
                     ))}
