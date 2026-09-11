@@ -71,22 +71,22 @@ export default function ProductContextDemo() {
                     })}
                 </svg>
 
-                {nodes.map(({ handle, x, y, product }, index) => (
+                {nodes.map(({ handle, x, y, product }) => (
                     <div
                         key={handle}
                         className="context-product-position absolute w-[31%] -translate-x-1/2 -translate-y-1/2"
                         style={{
                             left: `${x / 10}%`,
                             top: `${(y / 774) * 100}%`,
-                            animationDuration: `${4 + (index % 5) * 0.9}s`,
-                            animationDelay: `${index * -1.1}s`,
                         }}
                     >
                         <Link
                             to={`/${product.slug}`}
                             state={{ newWindow: true }}
                             wrapperClassName="block"
-                            className="context-product flex items-center justify-center gap-[1.2cqw] py-[1cqw] text-[2.8cqw] font-medium whitespace-nowrap leading-tight text-center text-primary focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 [&_g]:[clip-path:none]"
+                            className={`context-product flex items-center gap-[1.2cqw] py-[1cqw] text-[2.8cqw] font-medium whitespace-nowrap leading-tight text-primary focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 [&_g]:[clip-path:none] ${
+                                x < 500 ? 'justify-end pr-[1.2cqw]' : 'justify-start pl-[1.2cqw]'
+                            }`}
                         >
                             {product.Icon && (
                                 <product.Icon

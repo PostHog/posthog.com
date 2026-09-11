@@ -1,10 +1,6 @@
 .context-pulse {
     animation: context-flow 3.6s linear infinite;
 }
-.context-product-position {
-    animation: scattered-float 4s ease-in-out infinite;
-}
-.context-product-position:focus-within,
 .product-context-demo[data-running='false'] * {
     animation-play-state: paused;
 }
