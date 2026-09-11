@@ -3390,6 +3390,10 @@ export const docsMenu = {
                             url: '/docs/api/batch-exports',
                         },
                         {
+                            name: 'Billing usage and spend',
+                            url: '/docs/api/billing',
+                        },
+                        {
                             name: 'Cohorts',
                             url: '/docs/api/cohorts',
                         },
