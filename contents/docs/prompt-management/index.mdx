@@ -189,7 +189,7 @@ Remove a label with a `DELETE` request to the same URL. You can also manage labe
 
 Moving a label takes effect on the PostHog API within seconds. SDK consumers pick it up when their client-side cache expires, so a moved label is fully live within the SDK cache TTL (5 minutes by default, configurable per fetch).
 
-If your PostHog instance predates prompt labels (self-hosted), the API ignores the `label` parameter and returns the latest version; the SDKs log a warning when this happens.
+If your PostHog instance predates prompt labels (self-hosted), the API ignores the `label` parameter and returns the latest version. The SDKs log a warning when this happens on a single fetch, and a bulk fetch with `get_all` / `getAll` fails with an error.
 
 ## Configuration
 
@@ -387,6 +387,32 @@ const config = result.config ?? {}
 // ... your OpenAI/Anthropic call here
 ```
 
+### Fetching all prompts at a label
+
+If your app uses many prompts released through a label, fetch them all in one request instead of one request per prompt. Each fetched prompt is stored in the cache, so later `get()` calls with that label are served from cache until the TTL expires:
+
+<MultiLanguage>
+
+```python
+# One request loads every prompt the 'production' label points to
+prod_prompts = prompts.get_all(label='production')
+
+# Served from cache, no extra request
+result = prompts.get('support-system-prompt', with_metadata=True, label='production')
+```
+
+```typescript
+// One request loads every prompt the 'production' label points to
+const prodPrompts = await prompts.getAll({ label: 'production' })
+
+// Served from cache, no extra request
+const result = await prompts.get('support-system-prompt', { label: 'production' })
+```
+
+</MultiLanguage>
+
+The result maps each prompt name to the version the label points to. Prompts that don't carry the label are not included. On a self-hosted PostHog instance that predates label support on the list endpoint, the call fails with an error instead of returning latest versions.
+
 ## Caching
 
 Prompts are cached on the SDK side to minimize latency and API calls:
@@ -396,6 +422,7 @@ Prompts are cached on the SDK side to minimize latency and API calls:
 - **Stale-while-revalidate**: If a fetch fails, the cached value is used (even if expired)
 - **Fallback support**: Provide a fallback value that's used when both fetch and cache fail
 - **Separate entries per fetch type**: Latest, pinned-version, and labeled fetches of the same prompt are cached independently. Label moves reach your app when the labeled entry's TTL expires
+- **Bulk warm-up**: `get_all` (Python) and `getAll` (JavaScript) load every prompt at a label in one request and fill the cache for later labeled fetches
 
 ## Linking prompts to traces
 
