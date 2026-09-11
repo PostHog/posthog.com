@@ -2,6 +2,7 @@ import { useContext } from 'react'
 import React, { createContext, useEffect, useState } from 'react'
 import qs from 'qs'
 import { ProfileData, SQUEAK_HOST, Wallet } from 'lib/strapi'
+import { getStorageItem, removeStorageItem, setStorageItem } from 'lib/storage'
 import usePostHog from './usePostHog'
 import Link from 'components/Link'
 import { useToast } from '../context/Toast'
@@ -176,7 +177,7 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
     const posthog = usePostHog()
 
     const validateUser = async () => {
-        const jwt = localStorage.getItem('jwt')
+        const jwt = getStorageItem('jwt')
         if (jwt && (await fetchUser(jwt))) {
             setJwt(jwt)
         } else {
@@ -190,7 +191,7 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
     }, [])
 
     const getJwt = async () => {
-        return jwt || localStorage.getItem('jwt')
+        return jwt || getStorageItem('jwt')
     }
 
     // Shared post-authentication steps once a JWT has been obtained (via password
@@ -203,7 +204,7 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
             throw new Error('Failed to fetch user data')
         }
 
-        localStorage.setItem('jwt', token)
+        setStorageItem('jwt', token)
         setJwt(token)
 
         // Fire-and-forget: the achievements check does not gate sign-in.
@@ -443,8 +444,8 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
     }
 
     const clearUser = async (): Promise<void> => {
-        localStorage.removeItem('jwt')
-        localStorage.removeItem('user')
+        removeStorageItem('jwt')
+        removeStorageItem('user')
 
         setUser(null)
         setJwt(null)
@@ -503,7 +504,7 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
 
             const user = await fetchUser(userData.jwt)
 
-            localStorage.setItem('jwt', userData.jwt)
+            setStorageItem('jwt', userData.jwt)
             setJwt(userData.jwt)
 
             posthog?.capture('squeak signup success', {
