@@ -41,14 +41,14 @@ const sdk = new NodeSDK({
   resource: resourceFromAttributes({
     'service.name': 'my-node-service',
   }),
-  logRecordProcessor: new BatchLogRecordProcessor(
-    new OTLPLogExporter({
+  logRecordProcessor: new BatchLogRecordProcessor({
+    exporter: new OTLPLogExporter({
       url: '<ph_client_api_host>/i/v1/logs',
       headers: {
         'Authorization': 'Bearer <ph_project_token>'
       }
     })
-  )
+  })
 });
 
 sdk.start();
@@ -58,11 +58,11 @@ Alternatively, you can pass the API key as a query parameter:
 
 ```javascript
 const sdk = new NodeSDK({
-  logRecordProcessor: new BatchLogRecordProcessor(
-    new OTLPLogExporter({
+  logRecordProcessor: new BatchLogRecordProcessor({
+    exporter: new OTLPLogExporter({
       url: '<ph_client_api_host>/i/v1/logs?token=<ph_project_token>'
     })
-  )
+  })
 });
 ```
 
