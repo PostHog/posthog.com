@@ -201,6 +201,11 @@ export default function Timeline({
         const currentMonth = now.month() + 1
         const currentWeek = Math.min(4, Math.ceil(now.date() / 7))
 
+        // Track the last rendered year/month so labels anchor to the first week that
+        // survives, not to week 1 (which is often empty and therefore dropped).
+        let lastYear: number | null = null
+        let lastMonth: number | null = null
+
         for (let year = startYear; year <= Math.min(endYear, currentYear); year++) {
             const lastMonthForYear = year === currentYear ? currentMonth : 12
             for (let month = 1; month <= lastMonthForYear; month++) {
@@ -208,19 +213,20 @@ export default function Timeline({
                 const weeksInMonth = isCurrentMonth ? currentWeek : 4
 
                 for (let week = 1; week <= weeksInMonth; week++) {
-                    // Skip current week if empty
-                    if (isCurrentMonth && week === currentWeek) {
-                        const weekCount = data?.[year]?.[month]?.[week]?.count || 0
-                        if (weekCount === 0) continue
-                    }
+                    // Drop empty weeks so the strip matches the changelog cards, which
+                    // no longer render "No updates" columns.
+                    const weekCount = data?.[year]?.[month]?.[week]?.count || 0
+                    if (weekCount === 0) continue
 
                     weeks.push({
                         year,
                         month,
                         week,
-                        isFirstOfMonth: week === 1,
-                        isFirstOfYear: month === 1 && week === 1,
+                        isFirstOfMonth: year !== lastYear || month !== lastMonth,
+                        isFirstOfYear: year !== lastYear,
                     })
+                    lastYear = year
+                    lastMonth = month
                 }
             }
         }

@@ -459,7 +459,6 @@ interface RoadmapCardsProps {
     startYear: number
     endYear: number
     activeRoadmap: RoadmapNode | null
-    hideEmpty: boolean
     initialActiveRoadmap: RoadmapNode | null
     videos: ChangelogVideo[]
 }
@@ -484,7 +483,6 @@ const RoadmapCards = ({
     onRoadmapClick,
     containerWidth,
     activeRoadmap,
-    hideEmpty,
     initialActiveRoadmap,
     videos,
 }: RoadmapCardsProps) => {
@@ -543,10 +541,12 @@ const RoadmapCards = ({
                     })
                 }
 
-                // Add each week as a separate entry
+                // Only render weeks that have entries. Empty weeks would show as "No updates"
+                // columns, which pile up across the sparse 2020-2023 back catalog. The Timeline
+                // scrubber applies the same rule so both stay aligned.
                 weeksToShow.forEach((weekNumber) => {
                     const weekRoadmaps = weekBuckets[weekNumber] || []
-                    if (!hideEmpty || weekRoadmaps.length > 0) {
+                    if (weekRoadmaps.length > 0) {
                         weekData.push({
                             year: y,
                             month: m,
@@ -559,7 +559,7 @@ const RoadmapCards = ({
         }
 
         return weekData
-    }, [roadmaps, startYear, endYear, hideEmpty])
+    }, [roadmaps, startYear, endYear])
 
     const videosByWeek = useMemo(() => {
         const map = new Map<string, ChangelogVideo[]>()
@@ -772,60 +772,54 @@ const RoadmapCards = ({
                                             </div>
                                         )}
                                         <ul className="p-0 m-0 list-none">
-                                            {weekData.roadmaps.length === 0 ? (
-                                                <li className="p-4 text-center text-sm text-secondary opacity-70">
-                                                    No updates
-                                                </li>
-                                            ) : (
-                                                weekData.roadmaps.map((roadmap) => {
-                                                    const active = activeRoadmap?.id === roadmap.id
-                                                    const teamName = roadmap.teams?.data?.[0]?.attributes?.name
-                                                    const crestUrl =
-                                                        roadmap.teams?.data?.[0]?.attributes?.miniCrest?.data
-                                                            ?.attributes?.url
+                                            {weekData.roadmaps.map((roadmap) => {
+                                                const active = activeRoadmap?.id === roadmap.id
+                                                const teamName = roadmap.teams?.data?.[0]?.attributes?.name
+                                                const crestUrl =
+                                                    roadmap.teams?.data?.[0]?.attributes?.miniCrest?.data?.attributes
+                                                        ?.url
 
-                                                    return (
-                                                        <li
-                                                            key={roadmap.id}
-                                                            className="p-0 m-0 border-b last:border-b-0 border-primary"
+                                                return (
+                                                    <li
+                                                        key={roadmap.id}
+                                                        className="p-0 m-0 border-b last:border-b-0 border-primary"
+                                                    >
+                                                        <button
+                                                            data-scheme="secondary"
+                                                            className={`group w-full text-left py-2.5 px-4 flex justify-between gap-2 ${
+                                                                active ? 'bg-primary' : 'hover:bg-primary'
+                                                            }`}
+                                                            onClick={() => handleRoadmapClick(roadmap)}
                                                         >
-                                                            <button
-                                                                data-scheme="secondary"
-                                                                className={`group w-full text-left py-2.5 px-4 flex justify-between gap-2 ${
-                                                                    active ? 'bg-primary' : 'hover:bg-primary'
-                                                                }`}
-                                                                onClick={() => handleRoadmapClick(roadmap)}
-                                                            >
-                                                                <div className="min-w-0">
-                                                                    <h5
-                                                                        className={`m-0 text-[15px] leading-tight mb-0.5 ${
-                                                                            active ? '' : 'group-hover:underline'
-                                                                        }`}
-                                                                    >
-                                                                        {roadmap.title}
-                                                                    </h5>
-                                                                    {teamName && (
-                                                                        <p className="!m-0 text-[13px] text-secondary">
-                                                                            {teamName} Team
-                                                                        </p>
-                                                                    )}
-                                                                </div>
-                                                                {crestUrl && (
-                                                                    <div className="shrink-0 leading-[0]">
-                                                                        <CloudinaryImage
-                                                                            className="w-10"
-                                                                            width={80}
-                                                                            src={
-                                                                                crestUrl as `https://res.cloudinary.com/${string}`
-                                                                            }
-                                                                        />
-                                                                    </div>
+                                                            <div className="min-w-0">
+                                                                <h5
+                                                                    className={`m-0 text-[15px] leading-tight mb-0.5 ${
+                                                                        active ? '' : 'group-hover:underline'
+                                                                    }`}
+                                                                >
+                                                                    {roadmap.title}
+                                                                </h5>
+                                                                {teamName && (
+                                                                    <p className="!m-0 text-[13px] text-secondary">
+                                                                        {teamName} Team
+                                                                    </p>
                                                                 )}
-                                                            </button>
-                                                        </li>
-                                                    )
-                                                })
-                                            )}
+                                                            </div>
+                                                            {crestUrl && (
+                                                                <div className="shrink-0 leading-[0]">
+                                                                    <CloudinaryImage
+                                                                        className="w-10"
+                                                                        width={80}
+                                                                        src={
+                                                                            crestUrl as `https://res.cloudinary.com/${string}`
+                                                                        }
+                                                                    />
+                                                                </div>
+                                                            )}
+                                                        </button>
+                                                    </li>
+                                                )
+                                            })}
                                         </ul>
                                     </ScrollArea>
                                 </div>
@@ -1105,7 +1099,6 @@ export default function Changelog({
                                     onRoadmapClick={handleRoadmapClick}
                                     containerWidth={containerWidth}
                                     activeRoadmap={activeRoadmap}
-                                    hideEmpty={hideEmpty}
                                     initialActiveRoadmap={initialActiveRoadmap}
                                     videos={playlistVideos}
                                 />
