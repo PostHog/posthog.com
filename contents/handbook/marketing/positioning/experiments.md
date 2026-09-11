@@ -10,7 +10,7 @@ showTitle: true
 
 PostHog Experiments run on top of Feature Flags, so every experiment is a controlled rollout by default. Multiple metric types – funnels, trends, retention, ratio metrics – let you measure what actually matters, not just what's easy to track. Watch session replays of each variant's users. Measure side effects across your entire product. 
 
-For self-driving development, this means enabling PostHog Desktop to create experiments and re-query the results automatically - making experiments the evaluation layer for agents.
+For self-driving development, this means self-driving can create experiments and re-query the results automatically, making experiments the evaluation layer for the loop.
 
 Most experiment platforms run tests. PostHog runs tests *and* closes the loop from signal to fix to evaluation.
 
@@ -20,7 +20,7 @@ In traditional product development, an A/B test is the last step before shipping
 
 That’s the PostHog-shaped belief: autonomous coding only becomes trustworthy when the agent can measure whether its own work improved the product.
 
-**Experiments are how the autonomy loop knows whether it's working.** Without experiments, agents can ship changes indefinitely without knowing if anything improved. Experiments are the feedback signal that makes self-driving product development trustworthy – not just fast.
+**Experiments are how the autonomy loop knows whether it's working.** After a PR from the [Inbox](/handbook/marketing/positioning/inbox) ships, an experiment measures whether the metric actually moved, and that result feeds the next pass of the loop. Without experiments, agents can ship changes indefinitely without knowing if anything improved. Experiments are the feedback signal that makes self-driving product development trustworthy, not just fast.
 
 ## Who this is for
 
@@ -42,10 +42,10 @@ That’s the PostHog-shaped belief: autonomous coding only becomes trustworthy w
 
 **Problem:** An agent that ships code without measuring impact isn't self-driving – it's just automated code generation. The autonomy loop requires a closed feedback cycle: change made → outcome measured → agent learns. Experiments are part of that.
 
-**Solution:** PostHog Desktop can scaffold experiments end-to-end. The same metric that triggered the fix signal is used as the experiment goal. Post-merge, PostHog Desktop re-queries the result and evaluates whether the change worked – without human intervention.
+**Solution:** Self-driving can scaffold experiments end-to-end. The same metric that triggered the fix signal is used as the experiment goal. Post-merge, self-driving re-queries the result and evaluates whether the change worked, without human intervention.
 
 **Supporting features:**
-- PostHog Desktop skills for full experiment lifecycle management
+- Self-driving handles the full experiment lifecycle
 - MCP exposes experiment results to agent runtimes for automated evaluation
 - Experiment results queryable alongside all PostHog data via HogQL
 - Automatic re-evaluation after defined exposure periods
@@ -83,7 +83,7 @@ That’s the PostHog-shaped belief: autonomous coding only becomes trustworthy w
 **Where PostHog wins:**
 - Usage-based pricing vs Optimizely's enterprise contracts
 - Native session replay per variant – Optimizely has no equivalent
-- PostHog Desktop evaluation loop – Optimizely has no agent integration
+- Self-driving evaluation loop (Optimizely has no agent integration)
 - Better fit for product engineering experiments vs marketing CRO
 
 ## Objections
