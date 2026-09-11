@@ -14,6 +14,7 @@ import { useApp } from '../../context/App'
 import { useWindow } from '../../context/Window'
 import ScrollArea from 'components/RadixUI/ScrollArea'
 import { IconSpinner } from '@posthog/icons'
+import { postApplication } from './postApplication'
 
 const allowedFileTypes = ['application/pdf']
 
@@ -268,10 +269,7 @@ const Form = ({
 
             form.append('jobPostingId', id)
 
-            const res = await fetch('/api/apply', {
-                method: 'POST',
-                body: form,
-            })
+            const res = await postApplication(form)
 
             if (!res.ok) {
                 if (res.status === 413) {
