@@ -29,8 +29,9 @@ export default function GuideBody(): JSX.Element {
                     </filter>
                 </svg>
                 <p className="gb-intro">
-                    Learning what users do once meant sitting through recordings until something happened, which was
-                    rare.{' '}
+                    Learning what users do once meant sitting through hours of session recordings. Until that one
+                    recording came, where a single user did something worth noting. Then, back to hours of watching and
+                    yawning.{' '}
                     <Link to="/replay-vision" state={{ newWindow: true }} className="gb-intro-link">
                         Replay Vision
                     </Link>{' '}
@@ -91,10 +92,10 @@ export default function GuideBody(): JSX.Element {
                 }
 
                 .gb-intro {
-                    font-size: clamp(14px, 1.7cqw, 16px);
+                    font-size: clamp(15px, 1.9cqw, 18px);
                     line-height: 1.65;
                     margin: 0 0 1.5rem;
-                    text-align: center;
+                    text-align: justify;
                     color: ${INK};
                 }
                 .gb-intro-link {
