@@ -76,7 +76,7 @@ All four methods:
 - Set `channel_source` to `slack` on the ticket
 - Resolve the Slack user's name, email, and avatar
 - Convert Slack message formatting to PostHog's rich text format
-- Download and re-host any image attachments (up to 4 MB per image)
+- Download and re-host image attachments (up to 4 MB per image). If a file can't be downloaded, it appears as a link to open in Slack.
 - Post a confirmation reply in the Slack thread with the ticket number and a link to view it in PostHog
 
 ## Two-way sync
@@ -85,7 +85,7 @@ All four methods:
 
 - New messages in the support channel create tickets
 - Thread replies sync as ticket messages
-- Images from Slack are downloaded and stored in PostHog
+- Images and files from Slack are downloaded and stored in PostHog. If a file can't be re-hosted, it appears as a link to the original in Slack.
 
 ### PostHog to Slack
 
@@ -94,6 +94,14 @@ All four methods:
 - Images attached in PostHog replies are uploaded to the Slack thread
 
 **Private notes** (internal notes) are never sent to Slack.
+
+<CalloutBox icon="IconWarning" title="Existing installations may need to reconnect" type="warning">
+
+If you see a warning banner in **Support** > **Settings** about file syncing, reconnect SupportHog to your Slack workspace. This grants the permissions needed for image and file attachments to sync between Slack and PostHog.
+
+Without reconnecting, files sent in Slack won't appear on tickets, and images sent from PostHog arrive as links instead of attachments.
+
+</CalloutBox>
 
 ## Viewing Slack tickets
 
