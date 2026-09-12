@@ -97,7 +97,7 @@ Posthog().capturePushNotificationOpened(
 );
 ```
 
-Don't wire this to `FirebaseMessaging.onMessageOpenedApp` or `getInitialMessage()`. The SDK already captures those taps. On Android, from the Flutter SDK 5.41.1, a repeat of a notification PostHog sent is skipped when the same notification was captured in the last 5 minutes, and the same rule applies on iOS once your build resolves posthog-ios 3.75.0 or newer. Notifications PostHog didn't send are never deduplicated, so a handler you wire up yourself still counts those opens twice.
+Don't wire this to `FirebaseMessaging.onMessageOpenedApp` or `getInitialMessage()`. The SDK already captures those taps. On Android and iOS, from the Flutter SDK 5.41.1, a repeat of a notification PostHog sent is skipped when the same notification was captured in the last 5 minutes. Notifications PostHog didn't send are never deduplicated, so a handler you wire up yourself still counts those opens twice.
 
 The `$push_notification_opened` event includes `$notification_title` and `$notification_body` (plus `$notification_subtitle` on iOS), and `$notification_action` for action-button taps. Notification content is only captured for notifications sent by PostHog. Opens of other notifications are still captured, but without title or body.
 
