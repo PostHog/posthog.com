@@ -74,7 +74,7 @@ PostHog.capturePushNotificationOpened(
 )
 ```
 
-The `$push_notification_opened` event includes `$notification_title` and `$notification_body`, plus `$notification_action` for action-button taps. Notification content is only captured for notifications sent by PostHog. Opens of other notifications are still captured, but without title or body.
+The `$push_notification_opened` event includes `$notification_title` and `$notification_body`, plus `$notification_action` for action-button taps. Android taps captured automatically carry no title or body – Firebase strips the notification content from the intent it hands the app, so there is nothing to read. Title and body are only set when you pass them to `PostHog.capturePushNotificationOpened` yourself.
 
 ## Identity verification
 

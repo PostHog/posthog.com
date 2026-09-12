@@ -100,7 +100,7 @@ PostHogSDK.shared.capturePushNotificationOpened(title: "...", body: "...", paylo
 
 From iOS SDK 3.75.0, both calls are deduplicated against automatic capture: a repeat of a notification PostHog sent, captured in the last 5 minutes, is skipped, so one tap counts once whichever path reports it. Notifications PostHog didn't send are never deduplicated.
 
-The `$push_notification_opened` event includes `$notification_title`, `$notification_subtitle`, and `$notification_body`, plus `$notification_action` for action-button taps. Notification content is only captured for notifications sent by PostHog. Opens of other notifications are still captured, but without title, subtitle, or body.
+The `$push_notification_opened` event includes `$notification_title`, `$notification_subtitle`, and `$notification_body`, plus `$notification_action` for action-button taps. On iOS, notification content is only captured for notifications sent by PostHog. Opens of other notifications are still captured, but without title, subtitle, or body.
 
 ## Identity verification
 
