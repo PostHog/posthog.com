@@ -29,6 +29,8 @@ Every tap on a remote notification is captured on both platforms, whether the no
 
 Locally-scheduled notifications are ignored. Capture those manually (below). On Android a tap is recognized by the `google.message_id` extra that Firebase puts on the intent, so push delivered outside FCM isn't seen.
 
+On Android a tap that reaches the app before `Posthog().setup()` runs is held and captured once setup completes, so coverage doesn't depend on your FCM package refreshing the activity's intent. Requires the Flutter SDK 5.41.1 or newer.
+
 <CalloutBox icon="IconWarning" title="iOS needs a notification delegate" type="caution">
 
 iOS only reports a notification tap to your app through `UNUserNotificationCenter.current().delegate`. A stock Flutter app doesn't set one, and neither does `flutter_local_notifications`. Without it, `$push_notification_opened` is never captured on iOS, in any app state.
@@ -95,7 +97,7 @@ Posthog().capturePushNotificationOpened(
 );
 ```
 
-Don't wire this to `FirebaseMessaging.onMessageOpenedApp` or `getInitialMessage()`. The SDK already captures those taps, and the manual call isn't deduplicated against them, so the open is counted twice.
+Don't wire this to `FirebaseMessaging.onMessageOpenedApp` or `getInitialMessage()`. The SDK already captures those taps. On Android, from the Flutter SDK 5.41.1, a repeat of a notification PostHog sent is skipped when the same notification was captured in the last 5 minutes, and the same rule applies on iOS once your build resolves posthog-ios 3.75.0 or newer. Notifications PostHog didn't send are never deduplicated, so a handler you wire up yourself still counts those opens twice.
 
 The `$push_notification_opened` event includes `$notification_title` and `$notification_body` (plus `$notification_subtitle` on iOS), and `$notification_action` for action-button taps. Notification content is only captured for notifications sent by PostHog. Opens of other notifications are still captured, but without title or body.
 
