@@ -110,7 +110,7 @@ type EditorActionButton = {
 }
 
 const ScrollWrapper = ({ scrollable, children }: { scrollable: boolean; children: React.ReactNode }) =>
-    scrollable ? <ScrollArea>{children}</ScrollArea> : <>{children}</>
+    scrollable ? <ScrollArea isScrollRoot>{children}</ScrollArea> : <>{children}</>
 
 const contentWidthOptions: ToggleOption[] = [
     {
