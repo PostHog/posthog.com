@@ -487,8 +487,8 @@ const ApplicationSuccess = ({
                             {isInExcludedCountry ? (
                                 <>
                                     <strong>
-                                        You applied from a country we can't employ people in, so we most likely can't
-                                        take your application further.
+                                        It looks like you applied from a country we can't employ people in, so we most
+                                        likely can't take your application further.
                                     </strong>{' '}
                                     Read about where we hire, and why, in our{' '}
                                     <Link
@@ -677,7 +677,7 @@ export default function Apply({ id, info }: { id: string; info: any }) {
             <h3>Thanks for your interest in joining PostHog!</h3>
             <p>
                 {isInExcludedCountry
-                    ? "We will review your application, but we can't employ people in your country, so we most likely can't take it further."
+                    ? "We will review your application, but it looks like you're in a country we can't employ people in, so we most likely can't take it further."
                     : 'We will review your application as soon as possible and get back to you.'}
             </p>
         </>
