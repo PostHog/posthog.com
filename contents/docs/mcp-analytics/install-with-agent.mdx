@@ -1,0 +1,54 @@
+---
+title: Install MCP analytics with your coding agent
+---
+
+Use your coding agent to add [MCP analytics](/docs/mcp-analytics) to an existing MCP server and verify its first tool call.
+Open the repository containing your server before starting.
+
+## Give your agent the installation task
+
+Replace the project ID and PostHog URL in this prompt, then paste it into your coding agent:
+
+```text
+Install PostHog MCP analytics in the MCP server in this repository.
+Read https://posthog.com/docs/mcp-analytics/installation.md and follow the instructions for this server's language, framework, and SDK version.
+
+Target project [PROJECT_ID] at [POSTHOG_URL]. Confirm the matching ingestion host and project token. Keep credentials in the repository's environment configuration and ask me for missing configuration.
+
+Locate the existing server entry point before editing. If no server is found, explain which directories you checked and ask me for the correct directory. Instrument this server; do not create a new server or install the PostHog MCP connector.
+
+Make the smallest necessary change, including flushing events correctly for this runtime. Run the relevant checks. Help me invoke an existing safe, read-only tool, then verify that its $mcp_tool_call arrives in the target project from the server you instrumented.
+
+Report the files changed and any remaining restart or deployment steps. If you cannot access PostHog to observe the event, give me verification steps and mark verification as pending.
+```
+
+Use `https://us.posthog.com` or `https://eu.posthog.com` for your region, or your self-hosted PostHog URL.
+Find the project ID in the URL when you open your project.
+Find your [project token](/docs/getting-started/project-token) in project settings.
+
+## Follow the matching installation instructions
+
+The agent should identify the server framework and installed SDK version before choosing an integration:
+
+- [TypeScript and JavaScript servers](/docs/mcp-analytics/installation.md), including `Server`, `McpServer`, and `mcp-handler`
+- [Python servers](/docs/mcp-analytics/installation.md#python)
+- [Custom dispatchers](/docs/mcp-analytics/custom-servers.md) without a standard server object
+
+Keep optional configuration out of the initial installation unless your application requires it.
+For capture controls, read [privacy and data capture](/docs/mcp-analytics/privacy.md).
+For event names and properties, read the [event reference](/docs/mcp-analytics/events.md).
+
+## Verify a tool call
+
+Restart or deploy the instrumented server as needed, then call an existing safe tool through your MCP client.
+Open the project you configured and inspect the call in MCP analytics or filter the activity feed for `$mcp_tool_call`.
+Check the tool name, server identity, and timestamp against the call you made.
+
+A successful package install or completed agent run does not confirm event delivery.
+An initialization event alone is also insufficient, and stateless clients may not send one.
+If the tool call does not appear, check the project token, ingestion host, active server entry point, and event flushing.
+
+The agent can verify events through an authenticated PostHog connection if you already have one.
+Otherwise, inspect the event in the UI and confirm the result yourself.
+
+For a compact list of references, use the [MCP analytics documentation index](/docs/mcp-analytics/llms.txt).

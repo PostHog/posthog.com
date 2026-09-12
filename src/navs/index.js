@@ -7413,6 +7413,12 @@ export const docsMenu = {
                     featured: true,
                 },
                 {
+                    name: 'Install with your agent',
+                    url: '/docs/mcp-analytics/install-with-agent',
+                    icon: 'IconBook',
+                    color: 'blue',
+                },
+                {
                     name: 'MCP SDK v2',
                     url: '/docs/mcp-analytics/sdk-v2',
                     icon: 'IconCode',
