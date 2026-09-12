@@ -579,7 +579,9 @@ const ApplicationSuccess = ({
                     <div className={`mx-6 md:mx-12 pb-2  ${!isInUnitedStates ? '' : 'border-t border-primary pt-6'}`}>
                         <h4 className="mb-0">More cool tech jobs</h4>
                         <p className="text-sm mb-4">
-                            While you're waiting to hear back, you might also be interested in exploring our{' '}
+                            {isInExcludedCountry
+                                ? 'You might also be interested in exploring our'
+                                : "While you're waiting to hear back, you might also be interested in exploring our"}{' '}
                             <Link
                                 to="/cool-tech-jobs"
                                 state={{ newWindow: true }}
