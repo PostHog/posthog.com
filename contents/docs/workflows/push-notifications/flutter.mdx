@@ -25,7 +25,7 @@ await Posthog().setup(config);
 
 On iOS the native SDK hooks the app delegate's remote-notification registration callback, so it picks up the APNs token once your app registers for remote notifications. On Android it fetches the FCM token at startup when `firebase-messaging` is on the classpath. The token is registered under the current distinct ID, so it follows the user across `identify()`.
 
-Cold-start capture on both platforms, and warm-start capture on Android, arrive with the Flutter SDK release that raises the matching native floor: **posthog-ios 3.72.0** for the iOS half, **posthog-android 3.62.0** for the Android half. The two halves can ship in separate releases, so if only one platform is capturing, check which floors your plugin version declares. Once a platform's floor is in place, every tap on a remote notification is captured there, whether the notification cold-launched the app or it was already running.
+Every tap on a remote notification is captured on both platforms, whether the notification cold-launched the app or it was already running. Requires the Flutter SDK 5.40.0 or newer, which is where both halves landed, and iOS 14 or newer on the iOS side – below that the native SDK installs no push hooks at all.
 
 Locally-scheduled notifications are ignored. Capture those manually (below). On Android a tap is recognized by the `google.message_id` extra that Firebase puts on the intent, so push delivered outside FCM isn't seen.
 
@@ -85,7 +85,7 @@ Registration and unregistration are durable. If the device is offline or the req
 
 ## Capturing opens
 
-Taps on remote notifications are captured for you, once your plugin version carries the native floor for that platform (see above). Automatic capture can't see locally-scheduled notifications, notifications you display yourself from a foreground message, or push delivered outside FCM on Android. Call the manual API only for those:
+Taps on remote notifications are captured for you on the Flutter SDK 5.40.0 and newer. Automatic capture can't see locally-scheduled notifications, notifications you display yourself from a foreground message, or push delivered outside FCM on Android. Call the manual API only for those:
 
 ```dart
 Posthog().capturePushNotificationOpened(
