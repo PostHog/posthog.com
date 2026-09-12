@@ -117,7 +117,7 @@ posthog.capturePushNotificationOpened({
 })
 ```
 
-Don't wire this to `messaging().onNotificationOpenedApp` or `getInitialNotification()`. The SDK already captures those taps. On Android, from `@posthog/react-native-plugin` 2.8.2, a repeat of a notification PostHog sent is skipped when the same notification was captured in the last 5 minutes, but on iOS, and for notifications PostHog didn't send, the open is counted twice. If you added an `onNotificationOpenedApp` handler for Android on an earlier plugin version, remove it when you upgrade.
+Don't wire this to `messaging().onNotificationOpenedApp` or `getInitialNotification()`. The SDK already captures those taps. On Android and iOS, from `@posthog/react-native-plugin` 2.8.2, a repeat of a notification PostHog sent is skipped when the same notification was captured in the last 5 minutes. Notifications PostHog didn't send are never deduplicated, so a handler you wire up yourself still counts those opens twice. If you added an `onNotificationOpenedApp` handler for Android on an earlier plugin version, remove it when you upgrade.
 
 The `$push_notification_opened` event includes `$notification_title` and `$notification_body` (plus `$notification_subtitle` on iOS), and `$notification_action` for action-button taps. Notification content is only captured for notifications sent by PostHog. Opens of other notifications are still captured, but without title or body.
 
