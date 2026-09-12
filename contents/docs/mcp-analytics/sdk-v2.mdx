@@ -87,6 +87,25 @@ def identify(request, extra):
 
 [Sessions on `2026-07-28`](#sessions-on-2026-07-28) work as described below. `enable_conversation_id=True` provides a shared `$session_id` on that revision, and both PostHog SDKs derive the same session id from the same conversation handle.
 
+## Ruby
+
+The official Ruby MCP SDK has a single major that serves both revisions: the `initialize` handshake for `2025-11-25` and earlier, and the per-request `_meta` envelope for `2026-07-28`. The experimental [Ruby SDK](/docs/mcp-analytics/installation#ruby) handles both with the same call:
+
+```ruby
+server = MCP::Server.new(name: "my-server", version: "1.0.0", tools: [SearchEvents])
+PostHog::MCP.instrument(server, posthog)
+```
+
+On `2026-07-28` requests it reads the client name, version, and protocol version off the envelope for every event and never answers with an `Mcp-Session-Id`, so [conversation IDs](/docs/mcp-analytics/conversation-id) or [`identify`](/docs/mcp-analytics/identifying-users) are what correlate calls there.
+
+Callbacks (`identify`, `intent_fallback`, `event_properties`) receive `extra["headers"]`, a lowercase-keyed Hash on HTTP transports and an empty Hash on stdio, so header reads look the same on either revision:
+
+```ruby
+identify = lambda do |_request, extra|
+  resolve_user(extra["headers"]["authorization"])
+end
+```
+
 ## Sessions on `2026-07-28`
 
 That revision removed the `initialize` handshake and the `Mcp-Session-Id` header, so the [stateless session token](/docs/mcp-analytics/installation#stateless-and-multi-pod-servers) doesn't apply to it — and left alone, **every request becomes its own `$session_id`**:
