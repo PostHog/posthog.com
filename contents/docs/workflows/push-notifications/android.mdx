@@ -62,7 +62,7 @@ override fun onNewIntent(intent: Intent) {
 }
 ```
 
-Your launcher activity needs `android:launchMode="singleTop"`, or the system resumes the task instead of delivering the tap here. Requires Android SDK 3.62.0 or newer. `PostHogAndroid.capturePushNotificationOpened` is deduplicated against the automatic path by message ID, so it can't double-count. `PostHog.capturePushNotificationOpened` below isn't deduplicated.
+Your launcher activity needs `android:launchMode="singleTop"`, or the system resumes the task instead of delivering the tap here. Requires Android SDK 3.62.0 or newer. `PostHogAndroid.capturePushNotificationOpened` is deduplicated against the automatic path by message ID, so it can't double-count. From Android SDK 3.65.0, `PostHog.capturePushNotificationOpened` below is deduplicated too: a repeat of a notification PostHog sent, captured in the last 5 minutes, is skipped, so one tap counts once whichever path reports it. Notifications PostHog didn't send are never deduplicated.
 
 Notifications you display yourself from a foreground data message, and push delivered outside FCM, aren't detected at all. Capture those with the fully manual API:
 
@@ -74,7 +74,7 @@ PostHog.capturePushNotificationOpened(
 )
 ```
 
-The `$push_notification_opened` event includes `$notification_title` and `$notification_body`, plus `$notification_action` for action-button taps. Notification content is only captured for notifications sent by PostHog. Opens of other notifications are still captured, but without title or body.
+The `$push_notification_opened` event includes `$notification_title` and `$notification_body`, plus `$notification_action` for action-button taps. Android taps captured automatically carry no title or body – Firebase strips the notification content from the intent it hands the app, so there is nothing to read. Title and body are only set when you pass them to `PostHog.capturePushNotificationOpened` yourself.
 
 ## Identity verification
 

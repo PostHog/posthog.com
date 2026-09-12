@@ -11,6 +11,7 @@ Available in the iOS SDK version 3.69.0 and newer.
 
 - Enable the **Push Notifications** capability for your app and register for remote notifications (`registerForRemoteNotifications()`), which requires requesting notification permission from the user.
 - A connected **FCM** or **APNs** channel in PostHog whose Firebase project / APNs topic (bundle id) matches your app.
+- **iOS 14 or newer** for the automatic hooks. On iOS 13 the SDK installs neither the registration nor the open-capture hook, and captures nothing.
 
 ## Automatic registration and open tracking (default)
 
@@ -97,7 +98,9 @@ There's also a fully manual variant if you don't have a `UNNotificationResponse`
 PostHogSDK.shared.capturePushNotificationOpened(title: "...", body: "...", payload: [:], action: "...")
 ```
 
-The `$push_notification_opened` event includes `$notification_title`, `$notification_subtitle`, and `$notification_body`, plus `$notification_action` for action-button taps. Notification content is only captured for notifications sent by PostHog. Opens of other notifications are still captured, but without title, subtitle, or body.
+From iOS SDK 3.75.0, both calls are deduplicated against automatic capture: a repeat of a notification PostHog sent, captured in the last 5 minutes, is skipped, so one tap counts once whichever path reports it. Notifications PostHog didn't send are never deduplicated.
+
+The `$push_notification_opened` event includes `$notification_title`, `$notification_subtitle`, and `$notification_body`, plus `$notification_action` for action-button taps. On iOS, notification content is only captured for notifications sent by PostHog. Opens of other notifications are still captured, but without title, subtitle, or body.
 
 ## Identity verification
 
@@ -116,5 +119,5 @@ config.pushIdentityProvider = { distinctId, appId, completion in
 | --- | --- |
 | Token never registers | Confirm you call `registerForRemoteNotifications()` and the user granted notification permission. If you set `config.enableSwizzling = false`, automatic registration and open capture are off. Use the manual APIs. |
 | Push doesn't arrive | Confirm the channel's APNs environment (Production/Sandbox) matches your build, and the bundle id matches. |
-| Opens are never captured | Confirm your app sets `UNUserNotificationCenter.current().delegate`, and that `config.enableSwizzling` is `true`. In a cross-platform host that configures PostHog from Dart or JavaScript, call `PostHogSDK.prewarmPushNotificationOpenCapture()` (iOS SDK 3.72.0 and newer) from `application(_:didFinishLaunchingWithOptions:)` so a cold-start tap isn't lost before `setup()` runs. The PostHog Flutter plugin already does this for you. |
+| Opens are never captured | Confirm your app sets `UNUserNotificationCenter.current().delegate`, that `config.enableSwizzling` is `true`, and that the device runs iOS 14 or newer. In a cross-platform host that configures PostHog from Dart or JavaScript, call `PostHogSDK.prewarmPushNotificationOpenCapture()` (iOS SDK 3.72.0 and newer) from `application(_:didFinishLaunchingWithOptions:)` so a cold-start tap isn't lost before `setup()` runs. The PostHog Flutter and React Native plugins already do this for you. |
 | Registration rejected on a Required channel | Your `pushIdentityProvider` isn't returning a valid token in time. See [Identity verification](/docs/workflows/push-notifications#identity-verification). |

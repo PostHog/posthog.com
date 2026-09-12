@@ -31,7 +31,17 @@ Both behaviors are on by default. An app that already has push configured and th
 
 On iOS the native SDK hooks the app delegate's remote-notification registration callback, so it picks up the APNs token once your app registers for remote notifications. On Android it fetches the FCM token at startup when Firebase Messaging is on the classpath (`@react-native-firebase/messaging` sets this up). The token is registered under the current distinct ID, so it follows the user across `identify()`.
 
-Open coverage differs per platform. On iOS every tap on a remote notification is captured whatever the app state, provided your app sets `UNUserNotificationCenter.current().delegate`. Without one, iOS reports the tap to nobody. Locally-scheduled notifications are ignored. On Android only cold-start taps are captured. Capture the rest manually (below).
+Open coverage differs per platform.
+
+On iOS every tap on a remote notification is captured, whether the notification cold-launched the app or it was already running. Cold-launch capture requires `@posthog/react-native-plugin` 2.8.2 or newer, which installs the native hook at launch instead of waiting for the SDK to set up from JavaScript – by then iOS has already reported the tap. Automatic capture requires iOS 14 or newer; below that the native SDK installs no push hooks at all. Locally-scheduled notifications are ignored.
+
+On Android every tap on a notification from the system tray is captured, whether the notification cold-launched the app or it was already running, with no code in your activity. Warm-start capture requires `@posthog/react-native-plugin` 2.6.0 or newer; older versions only capture cold-start taps. A tap is recognized by the `google.message_id` extra that Firebase puts on the intent, so push delivered outside FCM isn't seen. One state needs [an override in your `MainActivity`](#android-taps-after-the-process-is-killed): when the app's process was killed but its task stayed in the recent apps list, React Native drops the tap's intent before any library in the process can see it.
+
+<CalloutBox icon="IconWarning" title="iOS needs a notification delegate" type="caution">
+
+iOS only reports a notification tap to your app through `UNUserNotificationCenter.current().delegate`. If nothing in your app sets one, the SDK has nothing to observe and `$push_notification_opened` is never captured on iOS, in any app state.
+
+</CalloutBox>
 
 The Android startup fetch doesn't see later token refreshes, so forward those yourself to keep the registered token current:
 
@@ -43,6 +53,33 @@ if (Platform.OS === 'android') {
     messaging().onTokenRefresh((token) => posthog.registerPushNotificationToken(token))
 }
 ```
+
+### Android taps after the process is killed
+
+When Android kills your app's process but leaves its task in the recent apps list, React Native drops the tap's intent and never updates `getIntent()`, so the tap is invisible to every library in the process – PostHog, `@react-native-firebase/messaging` and your deep links alike. Overriding `onNewIntent` in your `MainActivity` fixes all three.
+
+If you use the `posthog-react-native/expo` config plugin, `expo prebuild` writes that override for you from `posthog-react-native` 4.72.0. Opt out with `patchMainActivityNewIntent`:
+
+```json
+{
+  "expo": {
+    "plugins": [
+      ["posthog-react-native/expo", { "patchMainActivityNewIntent": false }]
+    ]
+  }
+}
+```
+
+A bare React Native app that never runs `expo prebuild` adds the override itself, in `MainActivity.kt`. `setIntent(intent)` has to come before the `super` call, or React Native has already swallowed the intent:
+
+```kotlin
+override fun onNewIntent(intent: Intent) {
+    setIntent(intent)
+    super.onNewIntent(intent)
+}
+```
+
+If your `MainActivity` already overrides `onNewIntent`, the config plugin leaves it alone and warns instead – add `setIntent(intent)` as the first statement of your own override.
 
 ## Manual registration
 
@@ -70,32 +107,39 @@ Registration and unregistration are durable. If the device is offline or the req
 
 ## Capturing opens
 
-For the opens automatic capture misses (locally-scheduled notifications on either platform, plus warm-start taps and foreground messages on Android), call the manual API:
+Taps on remote notifications are captured for you (see above). Automatic capture can't see locally-scheduled notifications on either platform, notifications you display yourself from a foreground message, or push delivered outside FCM on Android. Call the manual API only for those:
 
 ```react-native
-import messaging from '@react-native-firebase/messaging'
-import { Platform } from 'react-native'
-
-if (Platform.OS === 'android') {
-    messaging().onNotificationOpenedApp((message) => {
-        posthog.capturePushNotificationOpened({
-            title: message.notification?.title,
-            body: message.notification?.body,
-            payload: message.data,
-        })
-    })
-}
+posthog.capturePushNotificationOpened({
+    title: 'Your order shipped',
+    body: 'Track it in the app',
+    payload: { order_id: '1234' },
+})
 ```
 
-Only call it for opens automatic capture can't see itself, or the tap is counted twice.
+Don't wire this to `messaging().onNotificationOpenedApp` or `getInitialNotification()`. The SDK already captures those taps. On Android and iOS, from `@posthog/react-native-plugin` 2.8.2, a repeat of a notification PostHog sent is skipped when the same notification was captured in the last 5 minutes. Notifications PostHog didn't send are never deduplicated, so a handler you wire up yourself still counts those opens twice. If you added an `onNotificationOpenedApp` handler for Android on an earlier plugin version, remove it when you upgrade.
 
-The `$push_notification_opened` event includes `$notification_title` and `$notification_body` (plus `$notification_subtitle` on iOS), and `$notification_action` for action-button taps. Notification content is only captured for notifications sent by PostHog. Opens of other notifications are still captured, but without title or body.
+The `$push_notification_opened` event includes `$notification_title` and `$notification_body` (plus `$notification_subtitle` on iOS), and `$notification_action` for action-button taps. On iOS, notification content is only captured for notifications sent by PostHog. On Android, taps captured automatically carry no title or body, because Firebase strips the content from the intent; those properties are only set when you pass them to `posthog.capturePushNotificationOpened` yourself.
 
 The event is built and sent by the native SDK, so your JS `before_send` never sees it. Redact anything sensitive before passing it to `capturePushNotificationOpened`.
 
 ## Opting out
 
 Set `capturePushNotificationSubscriptions: false` or `capturePushNotificationOpened: false` in the initialization options.
+
+On iOS from `@posthog/react-native-plugin` 2.8.2, `capturePushNotificationOpened: false` stops the event but not the hook that catches a tap cold-launching the app: the plugin installs that at launch, before any of your JavaScript runs, and only releases it when `setup()` sees the flag. To skip installing it at all, set `com.posthog.posthog.CAPTURE_PUSH_NOTIFICATION_OPENED` to `false` in `Info.plist`, or in `ios.infoPlist` on Expo:
+
+```json
+{
+  "expo": {
+    "ios": {
+      "infoPlist": {
+        "com.posthog.posthog.CAPTURE_PUSH_NOTIFICATION_OPENED": false
+      }
+    }
+  }
+}
+```
 
 ## Identity verification
 
@@ -122,4 +166,5 @@ If your push channel requires [identity verification](/docs/workflows/push-notif
 | --- | --- |
 | Token never registers | Confirm `@posthog/react-native-plugin` is installed, push is set up in your app, and the user granted notification permission. On Android, confirm Firebase Messaging is on the classpath (`@react-native-firebase/messaging` sets this up). |
 | Push doesn't arrive | Confirm the channel's Firebase project (Android) or APNs environment and bundle id (iOS) match your app. |
+| `$push_notification_opened` never fires | On iOS, confirm something in your app sets `UNUserNotificationCenter.current().delegate`, that the device runs iOS 14 or newer, and, for a tap that cold-launches the app, that you're on `@posthog/react-native-plugin` 2.8.2 or newer. On Android, confirm the notification is sent through FCM (detection keys on the `google.message_id` intent extra), that you're on `@posthog/react-native-plugin` 2.6.0 or newer for taps that arrive while the app is already running, and that your `MainActivity` [overrides `onNewIntent`](#android-taps-after-the-process-is-killed) for taps after the process was killed. |
 | Registration rejected on a Required channel | Your `pushIdentityProvider` isn't returning a valid token in time. See [Identity verification](/docs/workflows/push-notifications#identity-verification). |
