@@ -28,7 +28,7 @@ const detectSystemScrollbars = (): boolean => {
         host.attachShadow({ mode: 'open' }).appendChild(probe)
         visible = probe.offsetWidth - probe.clientWidth > 0
     } catch {
-        // The fallback stands.
+        // Scrollbar style is cosmetic, so a failed measurement is not worth a crash.
     } finally {
         host.remove()
     }
