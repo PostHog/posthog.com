@@ -106,7 +106,7 @@ Beyond PostHog's company [mission and strategy](/handbook/why-does-posthog-exist
 
 - **Paid ads:** We run a lot of paid ads on Google and others. It is fuel for everything else we are doing. We want to be good at this, but do it in a way unique to PostHog. We're not throwing everything at the wall and seeing what sticks. We have a minimum brand bar we need to hit.
 
-- **Graphics:** We're not the most visually focused team, but creating visuals and animations is a great way to communicate complex ideas. They also make for excellent content. Create a basic version and get the design pros (Cory, Lottie) to help.
+- **Graphics:** We're not the most visually focused team, but creating visuals and animations is a great way to communicate complex ideas. They also make for excellent content. Create a basic version and get the design pros on the <SmallTeam slug="graphics" /> to help.
 
 - **Developer influencers:** We [sponsor creators](/handbook/marketing/influencers) like Theo and Fireship to drive awareness and signups to PostHog. Many of the influencers we sponsor don't work out, but the ones that work drive great results. 
 

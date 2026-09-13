@@ -44,7 +44,7 @@ const query = (id: string | number, isModerator: boolean, isForumModerator: bool
                     select: ['id'],
                 },
                 profile: {
-                    select: ['id', 'firstName', 'lastName', 'color', 'reputation'],
+                    select: ['id', 'firstName', 'lastName', 'color', 'reputation', 'startDate'],
                     populate: {
                         avatar: {
                             select: ['id', 'url'],

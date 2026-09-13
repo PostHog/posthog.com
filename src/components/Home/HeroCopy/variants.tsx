@@ -31,37 +31,17 @@ const Paragraph = ({ children }: { children: React.ReactNode }) => (
     <p className="text-balance @xl:text-wrap text-[17px]">{children}</p>
 )
 
-const BodyControl = () => (
-    <>
-        <Paragraph>PostHog already knows your customers, which features they use, and the issues they have.</Paragraph>
-        <Paragraph>
-            Now, PostHog automatically <Highlight>diagnoses problems</Highlight>,{' '}
-            <Highlight delay={500}>fixes bugs</Highlight>, and{' '}
-            <Highlight delay={900}>generates pull requests</Highlight>
-            {' – all '}
-            <Underline delay={1800}>without you having to prompt it.</Underline>
-        </Paragraph>
-    </>
-)
-
-const BodyInstruments = () => (
-    <Paragraph>
-        PostHog <Highlight>instruments your codebase</Highlight>, then combines that context with product data like
-        analytics, errors, and recordings to <Underline delay={900}>understand problems and propose fixes.</Underline>
-    </Paragraph>
-)
-
-const BodyReviewAndMerge = () => (
-    <Paragraph>
-        PostHog agents <Highlight>generate reports</Highlight> from your analytics, errors, and recordings for you to
-        act on. All you have to do is <Underline delay={900}>review and hit merge.</Underline> If you want to.
-    </Paragraph>
-)
-
-const BodyShipsCode = () => (
+const BodyControl = (): JSX.Element => (
     <Paragraph>
         PostHog already has your <Highlight>analytics and errors</Highlight>. Now it{' '}
-        <Underline delay={900}>ships code</Underline> to help you build a better product.
+        <Underline delay={900}>ships&nbsp;code</Underline> to help you build a better product.
+    </Paragraph>
+)
+
+const BodyTest = (): JSX.Element => (
+    <Paragraph>
+        PostHog combines and stores your <Highlight>analytics, errors, replays, and business data</Highlight> so you and
+        your <Underline delay={900}>agents</Underline> can understand and act on it.
     </Paragraph>
 )
 
@@ -75,23 +55,13 @@ export type HeroCopyVariant = {
 export const HERO_COPY_VARIANTS: HeroCopyVariant[] = [
     {
         id: 'control',
-        headline: { lead: 'Shift your product into', emphasis: 'self-driving mode' },
+        headline: { lead: 'Make your product', emphasis: 'self-driving' },
         Body: BodyControl,
     },
     {
-        id: 'variant-1',
-        headline: { lead: 'Make your product', emphasis: 'self-driving' },
-        Body: BodyInstruments,
-    },
-    {
-        id: 'variant-2',
-        headline: { lead: 'Shift your product into', emphasis: 'self-driving mode' },
-        Body: BodyReviewAndMerge,
-    },
-    {
-        id: 'variant-3',
-        headline: { lead: 'Make your product', emphasis: 'self-driving' },
-        Body: BodyShipsCode,
+        id: 'test',
+        headline: { lead: 'Give your agents', emphasis: 'product context' },
+        Body: BodyTest,
     },
 ]
 

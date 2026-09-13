@@ -22,7 +22,7 @@ Not everything needs sign-off. Here's a rough guide:
 | Blog post, changelog, tweet                                  | No – but self-check against this guide                    |
 | Product UI copy, tooltips, empty states                      | No – but read out loud before shipping                    |
 
-When in doubt, ask in the `#design-review` Slack channel. Lottie and Cory are, for now, the only people who can approve work or otherwise. 
+When in doubt, ask in the `#design-review` Slack channel. Lottie is, for now, the only person who can approve work or otherwise. 
 
 ## Who owns what
 

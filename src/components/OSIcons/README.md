@@ -52,6 +52,10 @@ Filter/clip IDs are scoped with `useId()`, so many icons can render on the same 
 
 Paths live in `glyphs.ts`. Author glyphs in the 36-unit design canvas (the default `viewBox`); just copy the **fill** `d` from the export — `GlassIcon` derives the strokes and shadows itself. A glyph exported cropped to a different frame (e.g. self-driving's `"0 0 33 31"`, download's `"0 0 32 32"`) also exports a `viewBox` constant to pass alongside it; exporting at the full 36×36 frame keeps sizes perfectly consistent. Glyphs with cut-out holes (skills slash, download arrow) render with `fillRule="evenodd"`. `PLACEHOLDER_SILHOUETTE` is a neutral rounded-square tile used as a stand-in until a real path is added.
 
+## ThePostHogIcon
+
+Baked landscape poster thumb for the desktop “The PostHog” video. Same `size-9` slot + hover pop as `DemoIcon`; click opens a `MediaPlayer` window via `addWindow` (no route).
+
 ## PricingIcon
 
 A currency-aware `GlassIcon` showing an angled rear banknote behind a straight front banknote. Each note uses the original export's outer sheet and inset cash-face geometry, restoring the layered corner details without its independent filters. It selects a dollar, pound, or euro cut-out from the `pricing-currency` feature flag, defaulting to dollar; each glyph is enlarged 20% for clarity. Only the exposed portion of the rear note is rendered, so the currency symbol remains transparent through the whole icon. All four silhouette layers share the standard glass fill, bevels, unified shadow, frost, and hover treatment.
