@@ -449,6 +449,11 @@
             "statusCode": 301
         },
         {
+            "source": "/docs/session-replay/network-performance:ext(\\.md)?",
+            "destination": "/docs/session-replay/network-recording:ext?",
+            "statusCode": 301
+        },
+        {
             "source": "/docs/session-replay/pricing",
             "destination": "/session-replay/pricing",
             "statusCode": 301
