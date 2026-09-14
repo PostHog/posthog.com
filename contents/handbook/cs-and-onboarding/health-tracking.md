@@ -186,7 +186,7 @@ It records the relationship *you personally* have with the account. It does not 
 | Rating | What it means |
 |--------|---------------|
 | 1 - No relationship | The account is yours on paper only. It is fully self-serve, and you have no two-way contact with anyone there. |
-| 2 - Warm handover | The relationship came to you from another CSM or a teammate. You have an introduction, but no direct trust yet. |
+| 2 - Introduced | Warmly introduced from another team member but no direct trust yet OR limited response to engagement attempts but no real relationship built |
 | 3 - Reactive | They contact you when they need something, and there is no contact between times. |
 | 4 - Working relationship | You have regular two-way contact with a named person who replies to you and takes meetings. |
 | 5 - Trusted advisor | You are multi-threaded in the account. They bring you problems early and include you in their plans. |
