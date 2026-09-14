@@ -2458,24 +2458,8 @@
             "destination": "/handbook/small-teams/_team_template"
         },
         {
-            "source": "/marketplace",
-            "destination": "/partners"
-        },
-        {
-            "source": "/marketplace/clickhouse",
-            "destination": "/partners/clickhouse"
-        },
-        {
-            "source": "/marketplace/opsverse",
-            "destination": "/partners/opsverse"
-        },
-        {
-            "source": "/marketplace/restack",
-            "destination": "/partners/restack"
-        },
-        {
-            "source": "/marketplace/altinity",
-            "destination": "/partners/altinity"
+            "source": "/(marketplace|partners)/:path*",
+            "destination": "/partnerships"
         },
         {
             "source": "/handbook/people/team-structure/experimentation",
