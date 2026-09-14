@@ -1,0 +1,114 @@
+---
+title: Run AI tasks from a workflow
+---
+
+The **Create AI task** step starts an AI agent from a [workflow](/docs/workflows). The agent runs in the background with the tools you give it: a GitHub repository, connectors, skills, and your PostHog project. The workflow waits for the agent to finish, then continues with its result.
+
+Use it when an event, webhook, or schedule should kick off work, not only a message. The agent can investigate a support ticket and tag it, open a pull request from a webhook, or refresh a cohort every night.
+
+<CalloutBox icon="IconInfo" title="Watching rather than doing?" type="fyi">
+
+If you want an agent to watch a metric or a stream and report what it finds on a schedule, use a [scout](/docs/self-driving/scouts). An AI task in a workflow acts on the person or event that triggered it, and hands its result to the next step.
+
+</CalloutBox>
+
+## Add the step
+
+1. Open a workflow in the [workflow builder](/docs/workflows/workflow-builder) and add a step.
+2. Choose **Create AI task**.
+3. Write the **Instructions**. You can reference the triggering event and person in them: `A user with email {person.properties.email} hit {event.properties.error_message}`.
+4. Pick what the agent can use. All of these are optional:
+
+| Field | What it does |
+|-------|--------------|
+| **Task title** | Name shown in the task list. Leave empty to name the task from the instructions. |
+| **Model** | Model and reasoning effort. Leave empty for the default. |
+| **Repository** | GitHub repository the agent works in. |
+| **Connectors** | MCP servers the agent can call. Only servers shared with everyone in the project appear. |
+| **Skills** | Skills from your skills store. The agent reads the full skill when it needs it. |
+| **PostHog access** | **Read only** (default) lets the agent query your project. **Full access** lets it change things, such as cohorts or person properties. |
+| **Maximum parallel tasks** | New runs are skipped while this many tasks from the workflow are still running. Default 5. |
+| **Reply in the Slack thread** | On a Slack-triggered workflow, the agent posts its updates as replies in the thread that started the workflow, and replies in that thread go back to the agent. |
+
+Each task shows up in **Tasks**, where you can follow the agent's progress and read its output.
+
+## What happens while the agent works
+
+The workflow run pauses at the step until the task finishes, for up to about 3 hours. When the task completes, the next step can use its result:
+
+| Result path | What it holds |
+|-------------|---------------|
+| `status` | `completed` |
+| `final_message` | The agent's final message, cut to fit the step result |
+| `pr_urls` | Pull requests the agent opened, when it had a repository |
+| `output.<name>` | Fields you asked for, see [structured output](#get-structured-output) |
+
+If the task fails or is canceled, or the wait runs out, the step fails. The step's **On error** setting decides what happens next. With **Continue**, the next step sees `status` (`failed` or `cancelled`) and `error_message`, so a condition step can route the failure to a Slack message or an email.
+
+## Get structured output
+
+The agent can hand specific fields to later steps instead of one block of text.
+
+1. On the **Create AI task** step, add an [output variable](/docs/workflows/workflow-builder#output-variables).
+2. Set the result path to `output.<name>`, for example `output.verdict` into a variable called `verdict`.
+3. Ask for the field in the instructions: "Set `verdict` to `spam` or `legitimate`."
+
+The variable's type (string, number, or boolean) tells the agent what to return. You can ask for up to 20 fields, and each text field holds up to 1,500 characters. If the agent finishes without filling a field, the step still completes, the variable stays empty, and the run log shows a warning.
+
+## Limits
+
+A workflow can create 100 tasks in a rolling 24 hours, and a project 500 across all its workflows. A project admin can raise either in **Settings → Workflows → AI task limits**, up to 500 per workflow and 2,500 per project. Set a limit to zero to pause new tasks at that scope.
+
+When a limit blocks a task, the step fails with the reason, and the workflow follows the step's **On error** setting.
+
+## Use cases
+
+Each example is one workflow: a trigger, the AI task step, and what the agent hands back.
+
+### Triage a new support ticket
+
+**Trigger:** New ticket created ([support events](/docs/support/workflows#trigger-events))
+
+**Instructions:** Read ticket `{event.properties.ticket_id}`. Decide whether it is spam. Look up the customer's recent errors and sessions in PostHog. Classify the ticket by team and priority, and write a short summary of what you found.
+
+**Then:** Map `output.team` and `output.priority` to variables. An **Update ticket** step assigns the ticket from `team` and sets `priority`. A **Slack** step posts the summary in the team's channel.
+
+### Reply to an alert in its Slack thread
+
+**Trigger:** Slack message received, filtered to your alerts channel and top-level messages only
+
+**Instructions:** You are the first responder for this alert. Read the runbook for the alerting service in the runbooks repository, check the service's metrics and logs in PostHog, and reply with whether the alert is real, how severe it is, and the most likely cause. Reply with your best assessment quickly rather than waiting for certainty.
+
+**Options:** Set **Repository** to your runbooks repository. Leave **Reply in the Slack thread** on so the assessment lands in the thread and on-call can ask follow-up questions there.
+
+### Open a pull request from a webhook
+
+**Trigger:** Webhook, called by a meeting notes tool, a form, or your own service
+
+**Instructions:** Fetch the meeting with id `{event.properties.note_id}` through the connector. Summarize the notes and transcript. Add the summary as a new file under `meetings/` in the repository, then open a pull request.
+
+**Options:** Set **Repository** to the target repo and add the tool's MCP server under **Connectors**. Map `pr_urls` to a variable and post it with a **Slack** step.
+
+### Enrich a record when it is tagged
+
+**Trigger:** An event that marks a record as needing attention, for example a custom `account_tag_added` event with `tag` equal to `needs_coverage`
+
+**Instructions:** Work out which region this account belongs to from the countries of its active users in the last 30 days. Set `region` to one of `emea`, `amer`, or `apac`.
+
+**Options:** Set **PostHog access** to **Full access** if the agent should apply the tag or property itself. Otherwise map `output.region` to a variable and let an **Update person properties** step write it. Mask the trigger for an hour per account so two tags landing together start one task.
+
+### Review each trial account every week
+
+**Trigger:** Batch audience, the `Trials ending this week` cohort, on a weekly schedule. The workflow runs once per person in the audience.
+
+**Instructions:** Review what `{person.properties.email}` did in the product over the last 30 days: which features they used, where they got stuck, and any errors they hit. Set `plan_fit` to `good`, `unclear`, or `poor`, and write two sentences a salesperson can open the call with.
+
+**Options:** Map `output.plan_fit` and `final_message` to variables. A condition step routes `poor` fits to a **Slack** step for the sales channel, and an **Update person properties** step stores the note. Keep the audience under the [daily limit](#limits).
+
+## Tips for better instructions
+
+- **Pass the event in.** `{event.properties.ticket_id}` or `{person.properties.email}` gives the agent the record to work on. Without it, the agent works from your text alone.
+- **Say what done looks like.** "Reply in the thread with severity and likely cause" beats "investigate the alert."
+- **Name the fields you want back.** If a later step branches on the result, ask for it as an output field, not as prose.
+- **Fence off side effects.** "Do not send email or start another workflow" keeps a full-access agent inside its job.
+- **Put shared instructions in a skill.** A skill can be updated once and every workflow that uses it picks up the change.
