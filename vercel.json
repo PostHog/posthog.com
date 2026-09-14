@@ -2458,31 +2458,7 @@
             "destination": "/handbook/small-teams/_team_template"
         },
         {
-            "source": "/marketplace",
-            "destination": "/partnerships"
-        },
-        {
-            "source": "/marketplace/clickhouse",
-            "destination": "/partnerships"
-        },
-        {
-            "source": "/marketplace/opsverse",
-            "destination": "/partnerships"
-        },
-        {
-            "source": "/marketplace/restack",
-            "destination": "/partnerships"
-        },
-        {
-            "source": "/marketplace/altinity",
-            "destination": "/partnerships"
-        },
-        {
-            "source": "/partners",
-            "destination": "/partnerships"
-        },
-        {
-            "source": "/partners/:path*",
+            "source": "/(marketplace|partners)/:path*",
             "destination": "/partnerships"
         },
         {
