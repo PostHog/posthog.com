@@ -13,7 +13,6 @@ import {
     IconDecisionTree,
     IconEndpoints,
     IconEye,
-    IconExpand,
     IconFlask,
     IconFunnels,
     IconGraph,
@@ -35,7 +34,7 @@ import { DownloadButtons } from 'components/Code/DownloadButtons'
 import Glow from 'components/Glow'
 import { Bang } from 'components/Icons'
 import OSButton from 'components/OSButton'
-import { IconDiscord, IconGithub } from 'components/OSIcons/Icons'
+import { IconDiscord, IconGithub, IconPostHog } from 'components/OSIcons/Icons'
 import Modal from 'components/RadixUI/Modal'
 import SlotMachineText from 'components/SlotMachineText'
 import { useApp } from '../../../context/App'
@@ -52,39 +51,31 @@ import {
 } from './canvases'
 
 const categoryOrder: CanvasCategory[] = ['investigate', 'monitor', 'present']
-type SwipeFileId = CanvasCategory | 'all'
 
-const swipeFileOrder: SwipeFileId[] = [...categoryOrder, 'all']
-const swipeFileTabStart: Record<SwipeFileId, number> = {
+const swipeFileTabStart: Record<CanvasCategory, number> = {
     investigate: 58,
     monitor: 436,
     present: 218,
-    all: 670,
 }
 
 const folderTopPath = (tabStart: number): string => {
     const tabEnd = tabStart + 232
-    return `M .5 64 H ${tabStart} C ${tabStart + 12} 64 ${tabStart + 18} 59 ${tabStart + 22} 50 C ${tabStart + 26} 34 ${
-        tabStart + 34
-    } 20 ${tabStart + 50} 20 H ${tabEnd} C ${tabEnd + 12} 20 ${tabEnd + 20} 34 ${tabEnd + 24} 50 C ${tabEnd + 28} 59 ${
-        tabEnd + 34
-    } 64 ${tabEnd + 46} 64 H 999.5`
+    return `M .5 80 Q .5 64 16.5 64 H ${tabStart} C ${tabStart + 12} 64 ${tabStart + 18} 59 ${tabStart + 22} 50 C ${
+        tabStart + 26
+    } 34 ${tabStart + 34} 20 ${tabStart + 50} 20 H ${tabEnd} C ${tabEnd + 12} 20 ${tabEnd + 20} 34 ${
+        tabEnd + 24
+    } 50 C ${tabEnd + 28} 59 ${tabEnd + 34} 64 ${tabEnd + 46} 64 H 983.5 Q 999.5 64 999.5 80`
 }
 
-const folderTones: Record<SwipeFileId, { light: string; dark: string }> = {
-    investigate: { light: '#FBE2BD', dark: '#11513A' },
-    monitor: { light: '#F9C6B6', dark: '#1B3672' },
-    present: { light: '#FFF1D5', dark: '#4E2663' },
-    all: { light: '#D9E8F2', dark: '#41525F' },
+const folderTones: Record<CanvasCategory, { light: string; dark: string }> = {
+    investigate: { light: '#FBE2BD', dark: '#394740' },
+    monitor: { light: '#F9C6B6', dark: '#3B4452' },
+    present: { light: '#FFF1D5', dark: '#49404B' },
 }
 
-function useFolderTone(): (file: SwipeFileId) => string {
+function useFolderTone(): (file: CanvasCategory) => string {
     const { siteSettings } = useApp()
     return (file) => folderTones[file][siteSettings.theme === 'dark' ? 'dark' : 'light']
-}
-
-const allCanvasesFile = {
-    label: 'All canvases',
 }
 
 const paintCanvasStyle = {
@@ -130,11 +121,8 @@ function PaintToolIcon({ tool }: { tool: PaintTool }): JSX.Element {
 
 export function CanvasGalleryHeader(): JSX.Element {
     return (
-        <section
-            className="@container not-prose overflow-hidden rounded-t border-x border-t border-primary bg-primary"
-            aria-label="Canvas ideas"
-        >
-            <div className="grid gap-5 p-4 pb-16 @2xl:grid-cols-[0.92fr_1.08fr] @2xl:items-center @2xl:p-5 @2xl:pb-16">
+        <section className="@container not-prose" aria-label="Canvas ideas">
+            <div className="grid gap-5 pb-4 @2xl:grid-cols-[0.92fr_1.08fr] @2xl:items-center">
                 <div className="relative z-10">
                     <SlotMachineText
                         className="mb-2 text-xs font-semibold uppercase tracking-wide text-secondary"
@@ -315,27 +303,31 @@ function CanvasConnectorChip({ connector }: { connector: CanvasConnector }): JSX
 
 function SwipeFiles({ onOpen }: { onOpen: (canvas: GalleryCanvas) => void }): JSX.Element {
     const folderTone = useFolderTone()
+    const { siteSettings } = useApp()
 
     return (
         <RadixAccordion.Root
-            type="single"
-            collapsible
-            defaultValue="all"
+            type="multiple"
+            defaultValue={['investigate']}
             aria-label="Swipe files"
             className="relative motion-reduce:[&_[role=region]]:animate-none"
         >
-            {swipeFileOrder.map((file, index) => {
+            {categoryOrder.map((file, index) => {
+                const finalFile = index === categoryOrder.length - 1
                 const tabStart = swipeFileTabStart[file]
-                const finalFile = index === swipeFileOrder.length - 1
                 const fill = folderTone(file)
-                const category = file === 'all' ? undefined : CATEGORIES[file]
-                const canvases = file === 'all' ? CANVASES : CANVASES.filter((canvas) => canvas.category === file)
+                const border =
+                    siteSettings.theme === 'dark'
+                        ? `color-mix(in srgb, ${fill} 60%, rgb(var(--text-primary)))`
+                        : `color-mix(in srgb, ${fill} 65%, rgb(var(--text-primary)))`
+                const category = CATEGORIES[file]
+                const canvases = CANVASES.filter((canvas) => canvas.category === file)
 
                 return (
                     <AccordionItem
                         key={file}
                         value={file}
-                        className="pointer-events-none relative !border-0"
+                        className="@container pointer-events-none relative !border-0"
                         style={{ zIndex: index + 1, marginTop: index === 0 ? 0 : -48 }}
                     >
                         <div
@@ -344,30 +336,26 @@ function SwipeFiles({ onOpen }: { onOpen: (canvas: GalleryCanvas) => void }): JS
                             aria-hidden="true"
                         >
                             <div
-                                className="pointer-events-none absolute inset-x-0 top-16 border-x border-primary"
-                                style={{ backgroundColor: fill, bottom: finalFile ? 0 : -48 }}
+                                className="pointer-events-none absolute inset-x-0 top-20 rounded-b-xl border-x border-b border-primary"
+                                style={{ backgroundColor: fill, borderColor: border, bottom: finalFile ? 0 : -48 }}
                                 aria-hidden="true"
                             />
                             <svg
-                                viewBox="0 0 1000 64"
+                                viewBox="0 0 1000 80"
                                 preserveAspectRatio="none"
-                                className="pointer-events-none absolute inset-x-0 top-0 h-16 w-full overflow-visible"
+                                className="pointer-events-none absolute inset-x-0 top-0 h-20 w-full overflow-visible"
                                 aria-hidden="true"
                             >
                                 <path
                                     d={folderTopPath(tabStart)}
                                     fill={fill}
-                                    stroke="rgb(var(--border))"
+                                    stroke={border}
                                     vectorEffect="non-scaling-stroke"
                                 />
                             </svg>
                         </div>
-                        <AccordionTrigger
-                            className={`pointer-events-none relative w-full !p-0 [&>svg]:!hidden focus-visible:ring-2 focus-visible:ring-blue focus-visible:ring-inset ${
-                                finalFile ? 'h-20' : 'h-24'
-                            }`}
-                        >
-                            {/* Only the painted folder surface receives pointer input, including the overlap below. */}
+                        <AccordionTrigger className="pointer-events-none relative h-24 w-full !p-0 [&>svg]:!hidden focus-visible:ring-2 focus-visible:ring-blue focus-visible:ring-inset">
+                            {/* Only the painted folder surface receives pointer input. */}
                             <svg
                                 viewBox="0 0 1000 144"
                                 preserveAspectRatio="none"
@@ -384,24 +372,90 @@ function SwipeFiles({ onOpen }: { onOpen: (canvas: GalleryCanvas) => void }): JS
                                 className="absolute top-[30px] w-[25%] -translate-x-1/2 text-center text-xs font-semibold leading-none text-brown dark:text-primary @md:text-sm"
                                 style={{ left: `${(tabStart + 141) / 10}%` }}
                             >
-                                {category ? category.verb : allCanvasesFile.label}
+                                {category.verb}
                             </span>
                         </AccordionTrigger>
                         <AccordionContent
                             className={`relative px-4 @xl:px-5 ${finalFile ? '!pb-5' : '!pb-16'}`}
                             style={{ animationDuration: '200ms', pointerEvents: 'auto' }}
                         >
-                            {category && <p className="mb-4 text-sm text-primary">{category.description}</p>}
-                            <div className="grid grid-cols-1 gap-4 @xl:grid-cols-2">
-                                {canvases.map((canvas) => (
-                                    <CanvasCard key={canvas.slug} canvas={canvas} onOpen={() => onOpen(canvas)} />
-                                ))}
-                            </div>
+                            <CanvasFiles canvases={canvases} folderColor={fill} onOpen={onOpen} />
                         </AccordionContent>
+                        {finalFile && (
+                            <div
+                                className="relative flex flex-wrap items-center justify-between gap-x-4 gap-y-2 px-4 pb-4 pt-3 font-mono text-xs font-semibold tracking-wider @xl:px-5"
+                                style={{
+                                    color: `color-mix(in srgb, ${fill} 72%, rgb(var(--text-primary)))`,
+                                    textShadow: `0 1px 0 color-mix(in srgb, ${fill} 65%, rgb(var(--bg)))`,
+                                }}
+                            >
+                                <span>CNVS | #3</span>
+                                <span className="ml-auto flex items-center gap-3">
+                                    <IconPostHog className="h-6 w-10 shrink-0 fill-current" aria-hidden="true" />
+                                    <span className="text-right">CONFIDENTIAL: DO NOT LEAK</span>
+                                </span>
+                            </div>
+                        )}
                     </AccordionItem>
                 )
             })}
         </RadixAccordion.Root>
+    )
+}
+
+function CanvasFiles({
+    canvases,
+    folderColor,
+    onOpen,
+}: {
+    canvases: GalleryCanvas[]
+    folderColor: string
+    onOpen: (canvas: GalleryCanvas) => void
+}): JSX.Element {
+    return (
+        <div className="grid grid-cols-2 items-start gap-x-3 gap-y-4 @xl:grid-cols-3 @3xl:grid-cols-4">
+            {canvases.map((canvas) => (
+                <button
+                    key={canvas.slug}
+                    type="button"
+                    onClick={() => onOpen(canvas)}
+                    aria-label={`Open the ${canvas.title} example`}
+                    className="group flex min-w-0 flex-col items-center gap-2 rounded p-2 text-center hover:bg-transparent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue"
+                >
+                    <span
+                        className="relative block aspect-[5/4] w-full max-w-[160px] drop-shadow-sm"
+                        aria-hidden="true"
+                    >
+                        <span
+                            className="absolute inset-0 overflow-hidden rounded-sm border border-primary"
+                            style={{
+                                backgroundColor: `color-mix(in srgb, ${folderColor} 30%, rgb(var(--bg)))`,
+                                clipPath: 'polygon(0 0, calc(100% - 16px) 0, 100% 16px, 100% 100%, 0 100%)',
+                            }}
+                        >
+                            <svg className="absolute right-0 top-0 size-4" viewBox="0 0 16 16" aria-hidden="true">
+                                <path
+                                    d="M .5 .5 V 15.5 H 15.5 Z"
+                                    fill={`color-mix(in srgb, ${folderColor} 55%, rgb(var(--bg)))`}
+                                    stroke="rgb(var(--border))"
+                                />
+                            </svg>
+                            <span className="absolute inset-x-2 bottom-2 top-5 overflow-hidden border border-primary bg-primary">
+                                <CanvasPreview
+                                    canvas={canvas}
+                                    className="size-full"
+                                    imgClassName="size-full object-cover object-top"
+                                />
+                            </span>
+                        </span>
+                    </span>
+                    <span className="w-full break-words text-[13px] font-medium leading-snug group-hover:underline">
+                        {canvas.title}
+                        <span className="text-secondary">.canvas</span>
+                    </span>
+                </button>
+            ))}
+        </div>
     )
 }
 
@@ -444,32 +498,6 @@ function OpenInDesktopButton({ canvas, size = 'sm' }: { canvas: GalleryCanvas; s
         >
             Open in Desktop
         </OSButton>
-    )
-}
-
-function CanvasCard({ canvas, onOpen }: { canvas: GalleryCanvas; onOpen: () => void }): JSX.Element {
-    return (
-        <article className="group flex flex-col overflow-hidden rounded border border-primary bg-primary">
-            <button
-                type="button"
-                onClick={onOpen}
-                className="relative block w-full h-56 text-left border-b border-primary bg-accent overflow-hidden focus:outline-none focus-visible:ring-2 focus-visible:ring-blue"
-                aria-label={`Open the ${canvas.title} example`}
-            >
-                <CanvasPreview canvas={canvas} className="size-full" imgClassName="size-full object-cover object-top" />
-                <span className="absolute bottom-2 right-2 inline-flex items-center gap-1 rounded bg-primary/90 border border-primary px-1.5 py-0.5 text-[11px] font-semibold text-primary opacity-0 group-hover:opacity-100 group-focus-within:opacity-100 transition-opacity">
-                    <IconExpand className="size-3" /> View example
-                </span>
-            </button>
-            <div className="p-3 flex flex-col gap-2 flex-1">
-                <h3 className="text-[15px] font-semibold text-primary leading-snug m-0">{canvas.title}</h3>
-                <p className="text-sm text-secondary m-0 leading-snug">{canvas.tagline}</p>
-                <div className="flex flex-wrap gap-1.5 pt-1">
-                    <CopyPromptButton canvas={canvas} />
-                    <OpenInDesktopButton canvas={canvas} />
-                </div>
-            </div>
-        </article>
     )
 }
 
@@ -608,9 +636,16 @@ function DesktopShamelessCTA(): JSX.Element {
 function CanvasCommunityCTA(): JSX.Element {
     return (
         <section className="@container mt-8">
-            <div className="grid gap-5 rounded-md border border-primary bg-primary p-4 @lg:grid-cols-[1fr_auto] @lg:items-center @lg:p-5">
+            <div className="grid grid-cols-[auto_1fr] items-center gap-x-4 gap-y-3 rounded-md border border-primary bg-primary p-4 @lg:p-5 @3xl:grid-cols-[auto_1fr_auto] @3xl:gap-5">
+                <CloudinaryImage
+                    src="https://res.cloudinary.com/dmukukwp6/image/upload/v1787433846/shadow_1_2bfce9a469.png"
+                    alt=""
+                    width={192}
+                    className="row-span-2 @3xl:row-span-1"
+                    imgClassName="h-auto w-16 @md:w-20 @3xl:w-24"
+                />
                 <div>
-                    <p className="mb-1 text-xs font-semibold uppercase tracking-wide text-red">Built with PostHog</p>
+                    <p className="mb-1 text-xs font-semibold uppercase tracking-wide text-red">Build with PostHog</p>
                     <h2 className="m-0 text-xl font-bold text-primary">Add your own canvas to the gallery</h2>
                     <p className="mb-0 mt-1 text-sm leading-relaxed text-secondary">
                         Made something useful, weird, or beautiful? Share your canvas in Discord and join the people
@@ -622,10 +657,12 @@ function CanvasCommunityCTA(): JSX.Element {
                     external
                     to="https://discord.gg/posthog"
                     variant="secondary"
-                    size="md"
+                    size="lg"
                     icon={<IconDiscord className="size-5" />}
+                    iconClassName="shrink-0"
+                    className="col-start-2 justify-self-start [&>span]:gap-2 [&>span>svg]:!ml-0 @3xl:col-start-auto"
                 >
-                    Share in Discord
+                    <span>Share in Discord</span>
                 </OSButton>
             </div>
         </section>
@@ -653,16 +690,15 @@ export default function CanvasGallery(): JSX.Element {
     }, [openSlug])
 
     const open = openSlug ? CANVASES.find((c) => c.slug === openSlug) : undefined
+    const openCanvas = (canvas: GalleryCanvas) => {
+        track('view_example', canvas)
+        setOpenSlug(canvas.slug)
+    }
 
     return (
         <>
-            <div className="@container not-prose relative z-10 -mt-16 overflow-hidden rounded-b border-x border-b border-primary">
-                <SwipeFiles
-                    onOpen={(canvas) => {
-                        track('view_example', canvas)
-                        setOpenSlug(canvas.slug)
-                    }}
-                />
+            <div className="@container not-prose">
+                <SwipeFiles onOpen={openCanvas} />
             </div>
 
             <div className="not-prose">
