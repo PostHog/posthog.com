@@ -12,6 +12,7 @@ import {
     IconLinkedIn,
     IconGithub,
     IconInstagram,
+    IconCoolNumbers,
     IconDictator,
     IconSparksJoy,
 } from 'components/OSIcons'
@@ -576,8 +577,19 @@ export function useMenuData(): MenuType[] {
 
 import type { AppIconName } from 'components/OSIcons/AppIcon'
 
+type SparksJoyItem = {
+    label: string
+    link: string
+    iconName: AppIconName | null
+    customIcon: React.ReactNode
+    // Set for anything that lives off posthog.com. Link only auto-detects an
+    // external URL when the host is not a posthog.com one, and some of these
+    // are on subdomains.
+    external?: boolean
+}
+
 // Export Fun stuff items for use in sparks-joy page and menu
-export const SparksJoyItems = {
+export const SparksJoyItems: Record<'games' | 'notGames', SparksJoyItem[]> = {
     games: [
         {
             label: 'Hedgehog mode',
@@ -623,6 +635,13 @@ export const SparksJoyItems = {
                     />
                 </svg>
             ),
+        },
+        {
+            label: 'The Cool Numbers Club',
+            link: 'https://coolnumbersclub.posthog.com',
+            iconName: null,
+            customIcon: <IconCoolNumbers />,
+            external: true,
         },
         {
             label: 'Photobooth',
