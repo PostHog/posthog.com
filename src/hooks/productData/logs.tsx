@@ -35,7 +35,7 @@ export const logs = {
     includeAddonRates: true,
     // From contents/docs/logs/pricing.mdx
     pricingDescription:
-        'Logs is billed by the number of GB ingested. The price per GB changes based on your usage. Retention is 14 days by default; extend newly ingested logs to 30 days with an add-on.',
+        'Logs is billed by the number of GB ingested. The price per GB changes based on your usage. Retention is 14 days by default; set custom retention per service or per source at $0.05/GB per month retained.',
     seo: {
         title: 'Logs – Centralized log management with PostHog',
         description:
@@ -170,11 +170,14 @@ export const logs = {
     addonSliders: [
         {
             key: 'logs_retention_30d',
-            label: '30-day retention',
+            label: 'Custom retention',
             // Billing meters all ingested GB (any retention) on the base logs product, then bills
-            // 30-day GB again at the add-on rate as a storage premium.
+            // retained GB again at the add-on rate for each month of retention. The slider estimates one month.
             countsTowardParentVolume: true,
-            note: 'These GB also count toward logs ingestion above – this price is just the added cost of storing them longer.',
+            // Shown on /logs/pricing
+            pricingDescription:
+                'Keep logs longer than the 14-day default. Custom retention is billed per GB for each month you keep your logs, and you can set it per service or per source in your logs and traces settings.',
+            note: 'Billed per month of retention. These GB also count toward logs ingestion above – this price is the added cost for each month you keep them.',
             sliderConfig: {
                 marks: [0, 10, 100, 1000, 5000],
                 min: 0,
