@@ -184,144 +184,26 @@ const processMenuItemWithGrouping = (item: DocsMenuItem): any => {
     return null
 }
 
-type DocsSubGroup = {
-    label: string
-    items: string[]
-    icon?: keyof typeof Icons
-    color?: string
-}
-
-type DocsGroup = {
-    label: string
-    items: (string | DocsSubGroup)[]
-    overflow?: string
-    collapse?: boolean
-    catchAll?: boolean
-    icon?: keyof typeof Icons
-    color?: string
-}
-
-const DOCS_GROUPS: DocsGroup[] = [
-    { label: 'Get started', items: ['Install PostHog', 'SDKs & frameworks', 'Self-driving'] },
-    { label: 'Products', items: ['PostHog Web', 'PostHog Desktop', 'PostHog Slack', 'PostHog MCP', 'PostHog CLI'] },
-    {
-        label: 'Tools',
-        items: [
-            {
-                label: 'Analytics',
-                icon: 'IconGraph',
-                color: 'blue',
-                items: [
-                    'Product Analytics',
-                    'Web Analytics',
-                    'Customer Analytics',
-                    'Revenue Analytics',
-                    'MCP Analytics',
-                ],
-            },
-            'Session Replay',
-            'AI Observability',
-            'Error Tracking',
-        ],
-        overflow: 'More tools',
-        icon: 'IconApps',
-        color: 'blue',
-    },
-    { label: 'Context', items: ['Data Warehouse', 'Data pipelines', 'Semantic layer'] },
-    {
-        label: 'Reference',
-        collapse: true,
-        icon: 'IconBook',
-        color: 'lilac',
-        items: [
-            'API',
-            'New to PostHog',
-            'AI engineering',
-            'Toolbar & features',
-            'Self-host & deploy',
-            'Billing',
-            'Privacy & GDPR',
-            'How PostHog works',
-            'Glossary',
-        ],
-    },
-]
+// The docs menu shows these four entries, plus the Overview entry in DocsItemsStart.
+// These five entries get most of the documentation clicks that start in this menu.
+// A label must match an entry in src/navs; the link and the icon come from there.
+const DOCS_ITEMS = ['Install PostHog', 'Self-driving', 'Product Analytics', 'SDKs & frameworks']
 
 export const getDocsMenuItems = (): MenuItemType[] => {
     const items = groupBySectionDividers((docsMenu as DocsMenu).children)
-        // Remove any item (submenu or section divider) with label 'Docs'
-        .filter((item) => !(item.type === 'submenu' && item.label === 'Docs'))
-        // Drop nav-derived separators; grouping below supplies its own
+        // Keep only the entries that a label can find
         .filter((item) => item.type !== 'separator' && item.label)
 
-    const byLabel = new Map<string, MenuItemType>(items.map((item) => [item.label as string, item]))
-    const explicitlyGrouped = new Set(
-        DOCS_GROUPS.flatMap((group) => group.items).flatMap((entry) =>
-            typeof entry === 'string' ? entry : entry.items
-        )
-    )
-    const byLabelAsc = (a: MenuItemType, b: MenuItemType) =>
-        (a.label as string).localeCompare(b.label as string, undefined, { sensitivity: 'base' })
+    const byLabel = new Map<string, any>(items.map((item) => [item.label as string, item]))
 
-    const iconFor = (source: { icon?: keyof typeof Icons; color?: string }) => {
-        const IconComponent = source.icon && Icons[source.icon]
-        return IconComponent ? <IconComponent className={`text-${source.color || 'gray'} size-4`} /> : undefined
-    }
-
-    const resolve = (entry: string | DocsSubGroup): MenuItemType | undefined => {
-        if (typeof entry === 'string') return byLabel.get(entry)
-        const children = entry.items.map((label) => byLabel.get(label)).filter(Boolean) as MenuItemType[]
-        if (children.length === 0) return undefined
-        return { type: 'submenu' as const, label: entry.label, icon: iconFor(entry), items: children }
-    }
-
-    const grouped: MenuItemType[] = []
-
-    const unclaimed = () => items.filter((item) => !explicitlyGrouped.has(item.label as string)).sort(byLabelAsc)
-
-    DOCS_GROUPS.forEach((group) => {
-        const named = group.catchAll ? unclaimed() : (group.items.map(resolve).filter(Boolean) as MenuItemType[])
-
-        if (group.collapse) {
-            if (named.length === 0) return
-            if (grouped.length > 0) grouped.push({ type: 'separator' as const })
-            grouped.push({ type: 'submenu' as const, label: group.label, icon: iconFor(group), items: named })
-            return
-        }
-
-        const groupItems = [...named]
-
-        if (group.overflow) {
-            const rest = unclaimed()
-            if (rest.length > 0) {
-                groupItems.push({
-                    type: 'submenu' as const,
-                    label: group.overflow,
-                    icon: iconFor(group),
-                    items: rest,
-                })
-            }
-        }
-
-        if (groupItems.length === 0) return
-
-        if (grouped.length > 0) grouped.push({ type: 'separator' as const })
-        grouped.push({ type: 'label' as const, label: group.label })
-        grouped.push(...groupItems)
-    })
-
-    // Icons stay on the top level only; nested levels are noisy and inconsistently sourced.
-    const stripIcons = (menuItems: MenuItemType[]): MenuItemType[] =>
-        menuItems.map(({ icon, ...item }) => (item.items ? { ...item, items: stripIcons(item.items) } : item))
-
-    return grouped.map((item) => (item.items ? { ...item, items: stripIcons(item.items) } : item))
+    // Each entry is a flat item that goes to the section page. The menu has no nested
+    // panel, because a nested panel makes the visitor choose two times.
+    return DOCS_ITEMS.map((label) => byLabel.get(label))
+        .filter((item) => item?.link)
+        .map((item) => ({ type: 'item' as const, label: item.label, link: item.link, icon: item.icon }))
 }
 
-const mergedDocsMenu = (allProducts: any[]) => {
-    const docsItems = getDocsMenuItems()
-    const itemsWithMobileDestinations = addDocsMenuMobileDestinations(docsItems, allProducts)
-    return [...DocsItemsStart, ...itemsWithMobileDestinations, ...DocsItemsEnd]
-}
+const mergedDocsMenu = () => [...DocsItemsStart, ...getDocsMenuItems()]
 
 // Build Products menu items
 const buildProductsMenuItems = (allProducts: any[]) => {
@@ -414,7 +296,7 @@ export function useMenuData(showNavbarTools = false): MenuType[] {
             trigger: 'Docs',
             // The docs tree is too deep to browse inside a hamburger; mobile goes to the homepage instead
             mobileLink: '/docs',
-            items: mergedDocsMenu(allProducts),
+            items: mergedDocsMenu(),
         },
         {
             trigger: 'Community',
@@ -922,30 +804,6 @@ export const DocsItemsStart = [
     },
     {
         type: 'separator' as const,
-    },
-]
-
-export const DocsItemsEnd = [
-    { type: 'separator' as const },
-    {
-        type: 'item' as const,
-        label: 'Tutorials',
-        link: '/tutorials',
-        icon: <Icons.IconGraduationCap className="size-4 text-purple" />,
-    },
-    {
-        type: 'item' as const,
-        label: 'Pocket guides',
-        link: '/pocket-guides',
-        // Orange matches volume one's token in src/constants/pocketGuides.ts.
-        icon: <Icons.IconCompass className="size-4 text-orange" />,
-    },
-    {
-        type: 'item' as const,
-        label: 'Templates',
-        link: '/templates',
-        // Matches the Templates entry in src/navs/index.js.
-        icon: <Icons.IconMagic className="size-4 text-purple" />,
     },
 ]
 

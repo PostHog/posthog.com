@@ -188,7 +188,7 @@ const processMenuItemWithGrouping = (item: DocsMenuItem): any => {
 const mergedDocsMenu = (allProducts: any[]) => {
     const docsItems = getDocsMenuItems()
     const itemsWithMobileDestinations = addDocsMenuMobileDestinations(docsItems, allProducts)
-    return [...DocsItemsStart, ...itemsWithMobileDestinations, ...DocsItemsEnd]
+    return [...DocsItemsStart, ...itemsWithMobileDestinations]
 }
 
 // Process handbookSidebar into menu item structure
@@ -909,28 +909,6 @@ export const DocsItemsStart = [
     },
     {
         type: 'separator' as const,
-    },
-]
-
-export const DocsItemsEnd = [
-    { type: 'separator' as const },
-    {
-        type: 'item' as const,
-        label: 'Tutorials',
-        link: '/tutorials',
-        icon: <Icons.IconBook className="size-4 text-purple" />,
-    },
-    {
-        type: 'item' as const,
-        label: 'Dashboard templates',
-        link: '/templates',
-        icon: <Icons.IconDashboard className="size-4 text-blue" />,
-    },
-    {
-        type: 'item' as const,
-        label: 'Tracks',
-        link: '/tracks',
-        icon: <Icons.IconGraduationCap className="size-4 text-black" />,
     },
 ]
 
