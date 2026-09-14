@@ -98,9 +98,10 @@ We use [PandaDoc](https://app.pandadoc.com/a/#/) to handle document generation, 
 
     - **Contract.Term** - The term in months of the contract (12 months by default)
 
-8. If they are paying monthly change:
-    - Payment Terms to `12 equal monthly payments from Contract start date`.
-    - Payment Method to `Credit Card`.
+8. If they are buying credits upfront but must pay by credit card, change:
+    - Payment Terms to `Net 1 from Signature Date`.
+    - Payment Method to `Bank Transfer or Credit Card`.
+
 9. If an MSA is being used rather than the standard terms you will need to replace the following text:
 
     > PostHog Cloud License Terms appearing at: https://www.posthog.com/terms and Privacy Policy appearing at: https://posthog.com/privacy (collectively the “**Agreement**”)
@@ -113,7 +114,7 @@ We use [PandaDoc](https://app.pandadoc.com/a/#/) to handle document generation, 
 
    > PostHog Cloud License Terms entered into by and between the Parties on or about [INSERT DATE OF EXECUTION OF MSA] and Privacy Policy appearing at: https://posthog.com/privacy (collectively the “**Agreement**”).
 
-10. You should link the order form to the opportunity record in Salesforce using the `Contract Link` field in the "Opportunity Closure Details" so that we have a reference to the completed paperwork from our CRM.
+11. You should link the order form to the opportunity record in Salesforce using the `Contract Link` field in the "Opportunity Closure Details" so that we have a reference to the completed paperwork from our CRM.
 
 ### Routing an order form for review and signature
 
