@@ -76,7 +76,7 @@ I approved at 14:22 and hit `/trunk merge` at 17:27. It merged at 18:02, and bot
 
 **Where I sit:** Reviewing the reports, and reviewing the PRs. The detection, triage, dedupe, and root-cause legwork all happened before I arrived. I can steer it when needed, but often it catches useful little (and sometimes bigger or more important) fixes as APIs, tools, skills, and clients change.
 
-**TL;DR–**Agents complain about something in our MCP → A scout distills the feedback → Turns it into a report → Creates and merges a PR to fix it → Another scout checks if the PR actually fixed it. Basically, it eats its own output (ewwww).
+**TL;DR** – Agents complain about something in our MCP → A scout distills the feedback → Turns it into a report → Creates and merges a PR to fix it → Another scout checks if the PR actually fixed it. Basically, it eats its own output (ewwww).
 
 ## 2. Our #team-self-driving bug reports loop
 
@@ -101,7 +101,7 @@ The scout picked up the thread and authored an inbox report. The pipeline opened
 
 **Where I sit:** Reproducing problems, reviewing the reports, and bringing in the right people to review the fix. Sometimes, like here, the investigation starts right in the Slack thread.
 
-**TL;DR–**Team notices a bug → A scout picks it up → Investigates the issue → Creates a PR → Back to using the product.
+**TL;DR** – Team notices a bug → A scout picks it up → Investigates the issue → Creates a PR → Back to using the product.
 
 ## 3. The issues → reports → PRs loop
 
@@ -203,11 +203,11 @@ I requested the merge on September 7, and it merged that morning. The code chang
 
 **Where I sit:** Deciding whether the diagnosis and fix make sense, then getting the change merged. The scout keeps doing the tedious evidence gathering while that happens.
 
-**TL;DR–**A scheduled scout notices logs → Investigates what caused issues → Checks if anyone's fixing it already → Appends to existing reports using memory. Future scheduled scouts keep watching logs and adding to the same existing reports instead of making new ones.
+**TL;DR** – A scheduled scout notices logs → Investigates what caused issues → Checks if anyone's fixing it already → Appends to existing reports using memory. Future scheduled scouts keep watching logs and adding to the same existing reports instead of making new ones.
 
 Merged isn't the same as verified in production. The harness tells scouts to [leave follow-up notes and re-check the evidence](https://github.com/PostHog/posthog/blob/9811d194f82eba77bc5264b10ace8c8c3c9d7708/products/signals/backend/scout_harness/prompt.py#L275-L284) on what they reported, so the scout that found a problem is the one that checks the fix.
 
-Remember the Hogland tag failures from loop 3? They came back on the evening of September 6 and again in the early hours of September 7, and the scout added each burst to the same report. The PR merged just before 10:00 UTC. The run that started ten minutes later saw the last matching failure at 10:06 and nothing after it, summarized itself as "the Hogland burst stopped after its fix merged," and authored nothing. The follow-up job got done, and not by me.
+Remember the Hogland tag failures from a few paragraphs up? They came back on the evening of September 6 and again in the early hours of September 7, and the scout added each burst to the same report. The PR merged just before 10:00 UTC. The run that started ten minutes later saw the last matching failure at 10:06 and nothing after it, summarized itself as "the Hogland burst stopped after its fix merged," and authored nothing. The follow-up job got done, and not by me.
 
 The issues scout does the same thing with numbers. On September 6 it checked on an MCP schema fix that had merged four days earlier: validation failures for `read-data-schema` fell from 2.1K on September 2 to 202 on September 6, with call volume steady. Its verdict: "the merged fix appears to be holding." When the evidence isn't in yet, it says that too. The same scout pushed another follow-up out to September 14 because post-merge data wasn't available yet.
 
