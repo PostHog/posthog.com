@@ -66,25 +66,27 @@ Cost optimizations are much easier to handle before the customer finds them:
 
 - **Run a [health check](/handbook/cs-and-onboarding/health-checks)** on accounts you've just inherited, and on anyone who hasn't had a technical review in a year. Most of the patterns above come straight out of that checklist.
 - **Read event composition, not just totals.** Use the usage tab on the account in PostHog Customer Analytics and their Metabase usage dashboard. A large `$identify`, `$groupidentify`, or autocapture share is the tell.
-- 
 - **Watch #spike-detector.** A spike with no launch behind it is usually a bug or a loop, not growth. These are the most urgent optimizations, and they may [qualify for credits](/handbook/growth/sales/refunds#eligibility-criteria).
 - **Listen for cost on calls and in Slack.** A customer who mentions their bill once will mention it again to their finance team.
 
 When you find one, work through the fix with them rather than handing them a list of what's wrong. The optimization is the easy part – being the person who found it is what keeps the account.
 
 
-## How to handle customer communications about cost optimization
+## How to present recommendations
 
-Cost optimizations are in most cases a list of recommendations. Each recommendation carries a potential saving. Sometimes we see something that looks like a big optimization but in reality isn't, due to a customer preference, or specific need. It's a good practice to make a recommendation with 2-3 savings opportunity. 
+Two or three recommendations, each with a saving attached. A longer list reads like an audit and gets deprioritized as a whole. How you frame them is your call – this is one example, not a template.
 
-A saving is always: Existing cost ($ value and % of total cost) / Potential saving (% decrease estimate) / Effort / Impact / Recommended priority 
+> **Your $14k/month:** product analytics $11k, session replay $3k.
+>
+> **1. Autocapture on your marketing site – $4.2k/month, 30% of your bill.** Autocapture is 78% of your volume, mostly marketing pages, and you have no autocapture actions defined – nothing reads those events. Turning it off there removes most of that $4.2k. One line in your snippet config. You'd lose retroactive click data on those pages. Start here.
+>
+> **2. `identify()` on every page load – $2.8k/month, 20%.** Called per page rather than once per session, which makes anonymous events identified at up to 4x the cost. Moving it to login should halve this. Small change, but it touches auth, so it needs an engineer. No analytical downside.
+>
+> **3. Session replay sampling – $3k/month, 21%.** Half your recordings are under 10 seconds. Sampling at 50% with a minimum duration takes roughly $1k off. Config only. But you won't have the replay when a user reports a bug – if support leans on replay, skip this.
+>
+> 1 and 2 get you to about $9k/month without changing how you use PostHog.
 
-Recommendations are impactful only if explained. Not only does it make the decision easier, but also shows it's not just clickbait to get people's attention. Don't make anything up, customers know their business better than we do.
-
-- Existing cost and potential is quite straight forward. Always quantify the saving, by highlighting at least the cost that can be optimized and the best is to show the potential saving. It doesn't have to be super accurate but it should give high level figures for the customer to prioritize.
-- Effort can be high or low (e.g. turn off autocapture is low effort, remove custom events used in many dashboards and destinations is very high effort)
-- Impact is different from potential saving. It explains the tradeoffs associated with the saving (e.g. lose person profiles)
-- Recommended priority is your read on the situation. This is not a scientific framework so add your understanding of the customers business here. A strained engineering team or internal complexity to get things changed need to be taken into account when making recommendations
+Quantify roughly, keep the saving separate from the tradeoff, and say what the change actually takes – their engineering capacity decides what happens next. Don't invent numbers, and don't assume the biggest saving is the right one. Customers know their business better than we do.
 
 
 ## Common cost optimizations
