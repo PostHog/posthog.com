@@ -104,7 +104,7 @@ const buildToolsMenu = (allProducts: any[]): MenuType => ({
     items: buildProductMenuItems([...BROWSE_TOOLS_HANDLES], allProducts),
 })
 
-export function useMenuData(showNavbarTools = false): MenuType[] {
+export function useMenuData(): MenuType[] {
     const allProducts = useProduct() as any[]
     const { isMobile } = useAppSettings()
 
@@ -114,7 +114,7 @@ export function useMenuData(showNavbarTools = false): MenuType[] {
             trigger: 'Products',
             items: buildProductsMenuItems(allProducts),
         },
-        ...(showNavbarTools ? [buildToolsMenu(allProducts)] : []),
+        buildToolsMenu(allProducts),
         {
             trigger: 'Pricing',
             link: '/pricing',
