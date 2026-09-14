@@ -1,6 +1,6 @@
 # CanvasGallery
 
-Renders `/desktop-gallery`: a gallery of example PostHog Desktop canvases. The filing-desk header shows how an idea and product signals become a canvas. The swipe files have an overlapping stack, staggered tabs, and aligned outer edges. Each bordered swipe file is an accordion. It expands its own canvas files in place, without changing the folder order. Any number of folders can stay open at once, and each folder closes independently. Category folders start directly with their canvas thumbnail files. Query data opens by default. Each canvas appears in one of the three folders. Each entry uses an image from the canvas docs, shows the prompt that builds something similar, and hands the prompt to PostHog Desktop with a `posthog-code://new` deep link.
+Renders `/desktop/canvases`: a gallery of example PostHog Desktop canvases. The filing-desk header shows how an idea and product signals become a canvas. The swipe files have an overlapping stack, staggered tabs, and aligned outer edges. Each bordered swipe file is an accordion. It expands its own canvas files in place, without changing the folder order. Any number of folders can stay open at once, and each folder closes independently. Category folders start directly with their canvas thumbnail files. Query data opens by default. Each canvas appears in one of the three folders. Each entry uses an image from the canvas docs, shows the prompt that builds something similar, and hands the prompt to PostHog Desktop with a `posthog-code://new` deep link.
 
 ## Files
 
@@ -39,13 +39,13 @@ The gallery uses the shared Radix accordion item, trigger, and content component
 
 ## Folder colors
 
-`folderTones` holds a light and a dark value per swipe file, because the colors go on inline styles and an SVG `fill`, where a `dark:` class cannot reach. `useFolderTone()` picks one from `siteSettings.theme`. Light is warm paper. Dark uses muted sage, slate blue, and mauve, with low saturation. Folder outlines mix the folder color with 35% primary text color in light mode and 40% in dark mode so the tab and body edges remain clear. Keep each folder distinct from the others and from the page background, and keep the label readable on top.
+`folderTones` holds a light and a dark value per swipe file, because the colors go on inline styles and an SVG `fill`, where a `dark:` class cannot reach. `useFolderTone()` picks one from `siteSettings.theme`. Light uses eucalyptus green, denim blue, and ochre yellow from top to bottom, mixed from the project teal-2-dark, pale-blue-dark, and light-yellow-dark colors with the theme background. These mid-strength tints separate the folders from the page while keeping the labels readable. Dark uses muted sage, slate blue, and mauve, with low saturation. Folder outlines mix the folder color with 35% primary text color in light mode and 40% in dark mode so the tab and body edges remain clear. Keep each folder distinct from the others and from the page background, and keep the label readable on top.
 
 ## Community callout
 
-The Discord callout uses the existing Discorder achievement sticker as decorative art. The shared OSButton has local spacing overrides to leave room between its Discord icon, label, and external arrow. Container queries move the button below the copy in narrow windows.
+The Discord callout has a right-aligned shared OSButton with local spacing overrides to leave room between its Discord icon, label, and external arrow. Container queries move the button below the copy in narrow windows.
 
-The final folder has a padded footer with “CNVS | #3” on the left and a monochrome PostHog SVG directly to the left of a subtle, embossed-style “CONFIDENTIAL: DO NOT LEAK” stamp on the right. All footer elements inherit the same color. The footer stays visible when the folder is closed and wraps in narrow windows.
+The final folder has a padded footer with a monochrome PostHog SVG directly to the left of a subtle, embossed-style “CONFIDENTIAL: DO NOT LEAK” stamp. The pair is aligned to the right and inherits the same color. The footer stays visible when the folder is closed.
 
 ## Chart rules
 

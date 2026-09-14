@@ -68,9 +68,9 @@ const folderTopPath = (tabStart: number): string => {
 }
 
 const folderTones: Record<CanvasCategory, { light: string; dark: string }> = {
-    investigate: { light: '#FBE2BD', dark: '#394740' },
-    monitor: { light: '#F9C6B6', dark: '#3B4452' },
-    present: { light: '#FFF1D5', dark: '#49404B' },
+    investigate: { light: 'color-mix(in srgb, #34796F 40%, rgb(var(--bg)))', dark: '#394740' },
+    monitor: { light: 'color-mix(in srgb, #648DC2 55%, rgb(var(--bg)))', dark: '#3B4452' },
+    present: { light: 'color-mix(in srgb, #C7982B 40%, rgb(var(--bg)))', dark: '#49404B' },
 }
 
 function useFolderTone(): (file: CanvasCategory) => string {
@@ -383,17 +383,14 @@ function SwipeFiles({ onOpen }: { onOpen: (canvas: GalleryCanvas) => void }): JS
                         </AccordionContent>
                         {finalFile && (
                             <div
-                                className="relative flex flex-wrap items-center justify-between gap-x-4 gap-y-2 px-4 pb-4 pt-3 font-mono text-xs font-semibold tracking-wider @xl:px-5"
+                                className="relative flex items-center justify-end gap-3 px-4 pb-4 pt-3 font-mono text-xs font-semibold tracking-wider @xl:px-5"
                                 style={{
                                     color: `color-mix(in srgb, ${fill} 72%, rgb(var(--text-primary)))`,
                                     textShadow: `0 1px 0 color-mix(in srgb, ${fill} 65%, rgb(var(--bg)))`,
                                 }}
                             >
-                                <span>CNVS | #3</span>
-                                <span className="ml-auto flex items-center gap-3">
-                                    <IconPostHog className="h-6 w-10 shrink-0 fill-current" aria-hidden="true" />
-                                    <span className="text-right">CONFIDENTIAL: DO NOT LEAK</span>
-                                </span>
+                                <IconPostHog className="h-6 w-10 shrink-0 fill-current" aria-hidden="true" />
+                                <span className="text-right">CONFIDENTIAL: DO NOT LEAK</span>
                             </div>
                         )}
                     </AccordionItem>
@@ -636,14 +633,7 @@ function DesktopShamelessCTA(): JSX.Element {
 function CanvasCommunityCTA(): JSX.Element {
     return (
         <section className="@container mt-8">
-            <div className="grid grid-cols-[auto_1fr] items-center gap-x-4 gap-y-3 rounded-md border border-primary bg-primary p-4 @lg:p-5 @3xl:grid-cols-[auto_1fr_auto] @3xl:gap-5">
-                <CloudinaryImage
-                    src="https://res.cloudinary.com/dmukukwp6/image/upload/v1787433846/shadow_1_2bfce9a469.png"
-                    alt=""
-                    width={192}
-                    className="row-span-2 @3xl:row-span-1"
-                    imgClassName="h-auto w-16 @md:w-20 @3xl:w-24"
-                />
+            <div className="grid items-center gap-5 rounded-md border border-primary bg-primary p-4 @lg:grid-cols-[1fr_auto] @lg:p-5">
                 <div>
                     <p className="mb-1 text-xs font-semibold uppercase tracking-wide text-red">Build with PostHog</p>
                     <h2 className="m-0 text-xl font-bold text-primary">Add your own canvas to the gallery</h2>
@@ -660,7 +650,7 @@ function CanvasCommunityCTA(): JSX.Element {
                     size="lg"
                     icon={<IconDiscord className="size-5" />}
                     iconClassName="shrink-0"
-                    className="col-start-2 justify-self-start [&>span]:gap-2 [&>span>svg]:!ml-0 @3xl:col-start-auto"
+                    className="justify-self-end [&>span]:gap-2 [&>span>svg]:!ml-0"
                 >
                     <span>Share in Discord</span>
                 </OSButton>
