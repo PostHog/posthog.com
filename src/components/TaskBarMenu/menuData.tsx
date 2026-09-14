@@ -1,6 +1,6 @@
 import { MenuType, MenuItemType } from 'components/RadixUI/MenuBar'
 import React from 'react'
-import { companyMenu, docsMenu } from '../../navs'
+import { companyMenu } from '../../navs'
 import * as Icons from '@posthog/icons'
 import { Logo } from '@posthog/brand/logo'
 import SearchableProductMenu from './SearchableProductMenu'
@@ -28,298 +28,11 @@ interface DocsMenuItem {
     children?: DocsMenuItem[]
 }
 
-interface DocsMenu {
-    children: DocsMenuItem[]
-}
-
 const getMenuIcon = (items: DocsMenuItem[], link: string, fallbackIcon: keyof typeof Icons, fallbackColor: string) => {
     const sourceItem = items.find((item) => item.url === link)
     const IconComponent = Icons[(sourceItem?.icon || fallbackIcon) as keyof typeof Icons]
 
     return IconComponent ? <IconComponent className={`size-4 text-${sourceItem?.color || fallbackColor}`} /> : undefined
-}
-
-// Add mobile destinations for docs menu items based on the product data
-const addDocsMenuMobileDestinations = (items: any[], allProducts: any[]): any[] => {
-    return items.map((item) => {
-        // For docs product items, add mobile destination based on slug from product data
-        if (item.type === 'submenu' && item.label && !item.mobileDestination) {
-            // Find matching product by name to get its slug
-            const product = allProducts.find((p) => p.name === item.label)
-            if (product && product.slug) {
-                return {
-                    ...item,
-                    mobileDestination: `/docs/${product.slug}`,
-                    items: item.items, // Keep items for desktop
-                }
-            }
-        }
-
-        // Recursively process nested items
-        if (item.items && Array.isArray(item.items)) {
-            return {
-                ...item,
-                items: addDocsMenuMobileDestinations(item.items, allProducts),
-            }
-        }
-
-        return item
-    })
-}
-
-// Recursively group items under section dividers at any level
-const groupBySectionDividers = (items: DocsMenuItem[]): any[] => {
-    const processedItems: any[] = []
-    let currentSection: DocsMenuItem | null = null
-    let currentSectionItems: any[] = []
-
-    for (const item of items) {
-        // Handle divider type: add separator for menu, skip otherwise
-        if ((item as any).type === 'divider') {
-            if (currentSection) {
-                currentSectionItems.push({ type: 'separator' as const })
-            } else {
-                processedItems.push({ type: 'separator' as const })
-            }
-            continue
-        }
-        if (!item.name) continue
-
-        // If this is a section header (only has name)
-        if (!item.url && !item.children && !item.icon && !item.color) {
-            // If we have a previous section, add it to processed items
-            if (currentSection) {
-                processedItems.push({
-                    type: 'submenu' as const,
-                    label: currentSection.name,
-                    items: currentSectionItems,
-                })
-            }
-            // Start a new section
-            currentSection = item
-            currentSectionItems = []
-        } else {
-            // Process the item recursively
-            const processedItem = processMenuItemWithGrouping(item)
-            if (processedItem) {
-                if (currentSection) {
-                    currentSectionItems.push(processedItem)
-                } else {
-                    processedItems.push(processedItem)
-                }
-            }
-        }
-    }
-
-    // Add the last section if it exists
-    if (currentSection && currentSectionItems.length > 0) {
-        processedItems.push({
-            type: 'submenu' as const,
-            label: currentSection.name,
-            items: currentSectionItems,
-        })
-    }
-
-    return processedItems
-}
-
-const processMenuItemWithGrouping = (item: DocsMenuItem): any => {
-    // Handle divider type: add separator for menu, skip otherwise
-    if ((item as any).type === 'divider') {
-        return { type: 'separator' as const }
-    }
-    if (!item.name) return null
-
-    // Special case: If this is the Product OS menu, filter out 'Docs' and 'Overview' from its children
-    let children = item.children
-    if (item.name === 'Product OS' && Array.isArray(children)) {
-        children = children.filter((child) => child.name !== 'Docs' && child.name !== 'Overview')
-    }
-
-    // If the item has children, process them recursively with grouping
-    if (children) {
-        const baseItem: any = {
-            type: 'submenu' as const,
-            label: item.name,
-        }
-        if (item.url) {
-            baseItem.link = item.url
-        }
-        // Always set icon and color for submenus if present
-        if (item.icon) {
-            const IconComponent = Icons[item.icon as keyof typeof Icons]
-            if (IconComponent) {
-                baseItem.icon = <IconComponent className={`text-${item.color || 'gray'} size-4`} />
-            }
-        }
-        let grouped = groupBySectionDividers(children)
-        // FLATTEN: If the first child is a submenu with the same label, bring its children up one level
-        if (grouped.length > 0 && grouped[0].type === 'submenu' && grouped[0].label === item.name) {
-            grouped = [...grouped[0].items, ...grouped.slice(1)]
-        } else if (grouped.length === 1 && grouped[0].type === 'submenu' && Array.isArray(grouped[0].items)) {
-            grouped = grouped[0].items
-        }
-        baseItem.items = grouped
-        return baseItem
-    }
-
-    // If the item has a URL, it's a regular menu item
-    if (item.url) {
-        const baseItem: any = {
-            type: 'item' as const,
-            label: item.name,
-            link: item.url,
-        }
-        if (item.icon) {
-            const IconComponent = Icons[item.icon as keyof typeof Icons]
-            if (IconComponent) {
-                baseItem.icon = <IconComponent className={`text-${item.color || 'gray'} size-4`} />
-            }
-        }
-        return baseItem
-    }
-
-    // If the item only has a name, it's a section divider (handled in grouping)
-    return null
-}
-
-type DocsSubGroup = {
-    label: string
-    items: string[]
-    icon?: keyof typeof Icons
-    color?: string
-}
-
-type DocsGroup = {
-    label: string
-    items: (string | DocsSubGroup)[]
-    overflow?: string
-    collapse?: boolean
-    catchAll?: boolean
-    icon?: keyof typeof Icons
-    color?: string
-}
-
-const DOCS_GROUPS: DocsGroup[] = [
-    { label: 'Get started', items: ['Install PostHog', 'SDKs & frameworks', 'Self-driving'] },
-    { label: 'Products', items: ['PostHog Web', 'PostHog Desktop', 'PostHog Slack', 'PostHog MCP', 'PostHog CLI'] },
-    {
-        label: 'Tools',
-        items: [
-            {
-                label: 'Analytics',
-                icon: 'IconGraph',
-                color: 'blue',
-                items: [
-                    'Product Analytics',
-                    'Web Analytics',
-                    'Customer Analytics',
-                    'Revenue Analytics',
-                    'MCP Analytics',
-                ],
-            },
-            'Session Replay',
-            'AI Observability',
-            'Error Tracking',
-        ],
-        overflow: 'More tools',
-        icon: 'IconApps',
-        color: 'blue',
-    },
-    { label: 'Context', items: ['Data Warehouse', 'Data pipelines', 'Semantic layer'] },
-    {
-        label: 'Reference',
-        collapse: true,
-        icon: 'IconBook',
-        color: 'lilac',
-        items: [
-            'API',
-            'New to PostHog',
-            'AI engineering',
-            'Toolbar & features',
-            'Self-host & deploy',
-            'Billing',
-            'Privacy & GDPR',
-            'How PostHog works',
-            'Glossary',
-        ],
-    },
-]
-
-export const getDocsMenuItems = (): MenuItemType[] => {
-    const items = groupBySectionDividers((docsMenu as DocsMenu).children)
-        // Remove any item (submenu or section divider) with label 'Docs'
-        .filter((item) => !(item.type === 'submenu' && item.label === 'Docs'))
-        // Drop nav-derived separators; grouping below supplies its own
-        .filter((item) => item.type !== 'separator' && item.label)
-
-    const byLabel = new Map<string, MenuItemType>(items.map((item) => [item.label as string, item]))
-    const explicitlyGrouped = new Set(
-        DOCS_GROUPS.flatMap((group) => group.items).flatMap((entry) =>
-            typeof entry === 'string' ? entry : entry.items
-        )
-    )
-    const byLabelAsc = (a: MenuItemType, b: MenuItemType) =>
-        (a.label as string).localeCompare(b.label as string, undefined, { sensitivity: 'base' })
-
-    const iconFor = (source: { icon?: keyof typeof Icons; color?: string }) => {
-        const IconComponent = source.icon && Icons[source.icon]
-        return IconComponent ? <IconComponent className={`text-${source.color || 'gray'} size-4`} /> : undefined
-    }
-
-    const resolve = (entry: string | DocsSubGroup): MenuItemType | undefined => {
-        if (typeof entry === 'string') return byLabel.get(entry)
-        const children = entry.items.map((label) => byLabel.get(label)).filter(Boolean) as MenuItemType[]
-        if (children.length === 0) return undefined
-        return { type: 'submenu' as const, label: entry.label, icon: iconFor(entry), items: children }
-    }
-
-    const grouped: MenuItemType[] = []
-
-    const unclaimed = () => items.filter((item) => !explicitlyGrouped.has(item.label as string)).sort(byLabelAsc)
-
-    DOCS_GROUPS.forEach((group) => {
-        const named = group.catchAll ? unclaimed() : (group.items.map(resolve).filter(Boolean) as MenuItemType[])
-
-        if (group.collapse) {
-            if (named.length === 0) return
-            if (grouped.length > 0) grouped.push({ type: 'separator' as const })
-            grouped.push({ type: 'submenu' as const, label: group.label, icon: iconFor(group), items: named })
-            return
-        }
-
-        const groupItems = [...named]
-
-        if (group.overflow) {
-            const rest = unclaimed()
-            if (rest.length > 0) {
-                groupItems.push({
-                    type: 'submenu' as const,
-                    label: group.overflow,
-                    icon: iconFor(group),
-                    items: rest,
-                })
-            }
-        }
-
-        if (groupItems.length === 0) return
-
-        if (grouped.length > 0) grouped.push({ type: 'separator' as const })
-        grouped.push({ type: 'label' as const, label: group.label })
-        grouped.push(...groupItems)
-    })
-
-    // Icons stay on the top level only; nested levels are noisy and inconsistently sourced.
-    const stripIcons = (menuItems: MenuItemType[]): MenuItemType[] =>
-        menuItems.map(({ icon, ...item }) => (item.items ? { ...item, items: stripIcons(item.items) } : item))
-
-    return grouped.map((item) => (item.items ? { ...item, items: stripIcons(item.items) } : item))
-}
-
-const mergedDocsMenu = (allProducts: any[]) => {
-    const docsItems = getDocsMenuItems()
-    const itemsWithMobileDestinations = addDocsMenuMobileDestinations(docsItems, allProducts)
-    return [...DocsItemsStart, ...itemsWithMobileDestinations, ...DocsItemsEnd]
 }
 
 // Build Products menu items
@@ -410,9 +123,9 @@ export function useMenuData(showNavbarTools = false): MenuType[] {
         },
         {
             trigger: 'Docs',
-            // The docs tree is too deep to browse inside a hamburger; mobile goes to the homepage instead
-            mobileLink: '/docs',
-            items: mergedDocsMenu(allProducts),
+            link: '/docs',
+            items: [],
+            hideChevron: true,
         },
         {
             trigger: 'Community',
@@ -758,11 +471,7 @@ export function useMenuData(showNavbarTools = false): MenuType[] {
                 const filteredItems: MenuItemType[] = []
                 const menuItemsCopy = [...menu.items]
 
-                // Apply mobile destinations for docs menu if this is the Docs menu
-                const itemsToProcess =
-                    typeof menu.trigger === 'string' && menu.trigger === 'Docs'
-                        ? addDocsMenuMobileDestinations(menuItemsCopy, allProducts)
-                        : menuItemsCopy
+                const itemsToProcess = menuItemsCopy
 
                 for (let i = 0; i < itemsToProcess.length; i++) {
                     const item = itemsToProcess[i]
@@ -864,42 +573,6 @@ export function useMenuData(showNavbarTools = false): MenuType[] {
         ...(!isMobile ? mainNavItems : []),
     ]
 }
-
-export const DocsItemsStart = [
-    {
-        type: 'item' as const,
-        label: 'Overview',
-        link: '/docs',
-        icon: <Icons.IconHome className="size-4 text-purple" />,
-    },
-    {
-        type: 'separator' as const,
-    },
-]
-
-export const DocsItemsEnd = [
-    { type: 'separator' as const },
-    {
-        type: 'item' as const,
-        label: 'Tutorials',
-        link: '/tutorials',
-        icon: <Icons.IconGraduationCap className="size-4 text-purple" />,
-    },
-    {
-        type: 'item' as const,
-        label: 'Pocket guides',
-        link: '/pocket-guides',
-        // Orange matches volume one's token in src/constants/pocketGuides.ts.
-        icon: <Icons.IconCompass className="size-4 text-orange" />,
-    },
-    {
-        type: 'item' as const,
-        label: 'Templates',
-        link: '/templates',
-        // Matches the Templates entry in src/navs/index.js.
-        icon: <Icons.IconMagic className="size-4 text-purple" />,
-    },
-]
 
 import type { AppIconName } from 'components/OSIcons/AppIcon'
 
