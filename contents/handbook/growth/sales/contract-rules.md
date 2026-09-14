@@ -221,13 +221,13 @@ For customers purchasing credits upfront, we only take bank transfers because:
 - For large payment amounts, the fees we incur are higher for credit card payments.
 - Our Sales Ops automations are set up to handle bank transfer payments.
 
-You should confirm ahead of the customer signing the order form that they are happy and set up to pay by bank transfer.  If they are absolutely unable to accommodate bank transfer we can accept credit card payments under the following conditions:
+You should confirm ahead of the customer signing the order form that they are happy and set up to pay by bank transfer. If they are absolutely unable to accommodate bank transfer we can accept credit card payments under the following conditions:
 
 - We have a card on file which we can immediately charge for the full invoice amount.
 - They pay immediately on signature, not on the contract start date (i.e. no Net 30).
 - The order form says so. The default order form template keeps our standard Net 30 bank transfer terms, so you must change them on the document you generate from it (never on the template itself) to `Payment Terms: Net 1 from Signature Date` and `Payment Method: Bank Transfer or Credit Card`. If the order form still says Net 30, the customer can hold us to Net 30, whatever we agreed in conversation.
 
-If your customer must pay via credit card, you absolutely _need_ to let Mine (Simon as backup) know ahead of the order form being signed as there is a lot of manual work needed up front to make this work.
+If your customer must pay via credit card, you absolutely _need_ to let RevOps team know ahead of the order form being signed as there is a lot of manual work needed up front to make this work.
 
 > We absolutely do not allow payment by check. This is made clear on order forms. 
 
