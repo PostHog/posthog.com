@@ -1,6 +1,7 @@
-import React, { createContext, useContext, useState, useEffect, useCallback, useMemo } from 'react'
+import React, { createContext, useContext, useState, useEffect, useCallback, useMemo, useRef } from 'react'
 import { navigate } from 'gatsby'
 import useInkeepSettings, { defaultQuickQuestions } from './useInkeepSettings'
+import usePostHog from './usePostHog'
 import { ChatFrame } from 'components/Chat'
 import { useApp } from '../context/App'
 
@@ -41,6 +42,7 @@ export function ChatProvider({
     codeSnippet?: { code: string; language: string; sourceUrl: string }
 }): JSX.Element {
     const { baseSettings, aiChatSettings, setBaseSettings, setAiChatSettings } = useInkeepSettings()
+    const posthog = usePostHog()
     const [hasUnread, setHasUnread] = useState(false)
     const [loading, setLoading] = useState(true)
     const [hasFirstResponse, setHasFirstResponse] = useState(false)
@@ -50,6 +52,11 @@ export function ChatProvider({
     const [EmbeddedChat, setEmbeddedChat] = useState<any>()
     const [firstResponse, setFirstResponse] = useState<string | null>(null)
     const conversationStartedDate = useMemo(() => date || new Date().toISOString(), [])
+    const removeLinkListenerRef = useRef<(() => void) | null>(null)
+    // Inkeep can resolve a streamed answer after this provider unmounts, invoking the
+    // captured `onEvent` on a dead provider. This flag lets those late callbacks bail
+    // out so a closed chat cannot touch the DOM or analytics of the next one.
+    const isMountedRef = useRef(true)
 
     const logConversation = async (event: any) => {
         const conversationId = event?.properties?.conversation?.id
@@ -80,39 +87,54 @@ export function ChatProvider({
                 setFirstResponse(
                     event.properties.conversation.messages.filter((m: any) => m.role === 'user')[0].content
                 )
+                posthog?.capture('chat question submitted', { conversation_id: event?.properties?.conversation?.id })
             }
             if (event?.eventName === 'assistant_message_received') {
                 if (!hasFirstResponse) {
                     setHasFirstResponse(true)
                 }
             }
-            if (event?.eventName === 'assistant_answer_displayed') {
-                const shadowRoot = document.querySelector('#embedded-chat-target>div')?.shadowRoot
-                if (shadowRoot) {
-                    const links = Array.from(shadowRoot.querySelectorAll('a'))
-                    for (const link of links) {
-                        link.addEventListener('click', (e: Event) => {
-                            e.preventDefault()
-                            e.stopPropagation()
-                            const href = link.getAttribute('href')
-                            if (!href) return
-                            try {
-                                const url = new URL(href, window.location.origin)
-                                if (url.origin === 'https://posthog.com' || href.startsWith('/')) {
-                                    navigate(url.pathname, { state: { newWindow: true } })
-                                } else {
-                                    window.open(href, '_blank', 'noopener,noreferrer')
-                                }
-                            } catch {
+            // Skip when unmounted: a late answer from a closed chat must not record a
+            // phantom `chat answer displayed`, nor install a listener on the globally
+            // queried container, which now belongs to whichever chat is open next.
+            if (event?.eventName === 'assistant_answer_displayed' && isMountedRef.current) {
+                posthog?.capture('chat answer displayed', { conversation_id: event?.properties?.conversation?.id })
+                const target = document.getElementById('embedded-chat-target')
+                // Attach one delegated listener on the stable container, not on the
+                // Inkeep shadow root. React replaces that shadow host whenever the
+                // viewport crosses the mobile breakpoint (`Container` swaps between
+                // `ScrollArea` and `React.Fragment`), which would leave the old
+                // handler on a detached root and, because of the ref guard below,
+                // block re-attachment. `composedPath()` still reaches anchors inside
+                // the shadow tree from a listener on the light-DOM container.
+                if (target && !removeLinkListenerRef.current) {
+                    const handleLinkClick = (e: Event) => {
+                        const link = e
+                            .composedPath()
+                            .find((el): el is HTMLAnchorElement => el instanceof HTMLElement && el.tagName === 'A')
+                        if (!link) return
+                        const href = link.getAttribute('href')
+                        if (!href) return
+                        e.preventDefault()
+                        e.stopPropagation()
+                        try {
+                            const url = new URL(href, window.location.origin)
+                            if (url.origin === 'https://posthog.com' || href.startsWith('/')) {
+                                navigate(url.pathname, { state: { newWindow: true } })
+                            } else {
                                 window.open(href, '_blank', 'noopener,noreferrer')
                             }
-                        })
+                        } catch {
+                            window.open(href, '_blank', 'noopener,noreferrer')
+                        }
                     }
+                    target.addEventListener('click', handleLinkClick, true)
+                    removeLinkListenerRef.current = () => target.removeEventListener('click', handleLinkClick, true)
                 }
             }
             logConversation(event)
         },
-        [hasFirstResponse]
+        [hasFirstResponse, firstResponse, posthog]
     )
 
     const addContext = (newContext: { type: 'page'; value: { path: string; label: string } }) => {
@@ -136,9 +158,14 @@ export function ChatProvider({
     }
 
     useEffect(() => {
+        isMountedRef.current = true
         renderChat()
         const conversations = JSON.parse(localStorage.getItem('conversations') || '[]')
         setConversationHistory(conversations)
+        return () => {
+            isMountedRef.current = false
+            removeLinkListenerRef.current?.()
+        }
     }, [])
 
     useEffect(() => {
@@ -166,36 +193,40 @@ export function ChatProvider({
     }, [hasFirstResponse])
 
     useEffect(() => {
-        setBaseSettings({
-            ...baseSettings,
+        // Reinstall when the callback identity changes so `onEvent` keeps a fresh
+        // view of `firstResponse` and `hasFirstResponse` instead of the mount-time one.
+        setBaseSettings((prev) => ({
+            ...prev,
             onEvent: logEventCallback,
-        })
-    }, [])
+        }))
+    }, [logEventCallback])
 
     useEffect(() => {
         const contextPrompts = context.map((c) =>
             c.type === 'page' ? `The user is currently viewing the page ${c.value.label} at ${c.value.path}` : ``
         )
         // codePrompt is now handled in Chat/index.tsx and passed through Inkeep.tsx
-        setAiChatSettings({
-            ...aiChatSettings,
+        // Each write merges into the latest settings, so these three effects no
+        // longer clobber each other's fields on mount.
+        setAiChatSettings((prev) => ({
+            ...prev,
             prompts: contextPrompts,
-        })
+        }))
     }, [context])
 
     useEffect(() => {
-        setAiChatSettings({
-            ...aiChatSettings,
+        setAiChatSettings((prev) => ({
+            ...prev,
             exampleQuestions: quickQuestions,
-        })
+        }))
     }, [quickQuestions])
 
     useEffect(() => {
         if (chatId) {
-            setAiChatSettings({
-                ...aiChatSettings,
+            setAiChatSettings((prev) => ({
+                ...prev,
                 chatId,
-            })
+            }))
         }
     }, [chatId])
 
