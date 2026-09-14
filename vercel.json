@@ -118,6 +118,16 @@
     ],
     "redirects": [
         {
+            "source": "/field-guide/foreword",
+            "destination": "/field-guide#about",
+            "statusCode": 301
+        },
+        {
+            "source": "/field-guide/closing-note",
+            "destination": "/field-guide",
+            "statusCode": 301
+        },
+        {
             "source": "/blog/posthog-vs-fathom",
             "destination": "/compare/posthog-vs-fathom"
         },
