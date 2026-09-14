@@ -6321,6 +6321,12 @@ export const docsMenu = {
                     featured: true,
                 },
                 {
+                    name: 'Survey performance',
+                    url: '/docs/surveys/performance',
+                    icon: 'IconTrends',
+                    color: 'blue',
+                },
+                {
                     name: 'Response destinations',
                     url: '/docs/surveys/destinations',
                     icon: 'IconLive',
