@@ -98,15 +98,11 @@ We use [PandaDoc](https://app.pandadoc.com/a/#/) to handle document generation, 
 
     - **Contract.Term** - The term in months of the contract (12 months by default)
 
-8. If they are paying monthly change:
-    - Payment Terms to `12 equal monthly payments from Contract start date`.
-    - Payment Method to `Credit Card`.
-9. If they are buying credits upfront but must pay by credit card, change:
+8. If they are buying credits upfront but must pay by credit card, change:
     - Payment Terms to `Net 1 from Signature Date`.
     - Payment Method to `Bank Transfer or Credit Card`.
 
-    This is a one-off exception which Mine (Simon as backup) must agree before the order form goes out — see [payment method](/handbook/growth/sales/contract-rules#payment-method). Make the change on the document you generate, not on the template. The template must keep the default Net 30 bank transfer terms.
-10. If an MSA is being used rather than the standard terms you will need to replace the following text:
+9. If an MSA is being used rather than the standard terms you will need to replace the following text:
 
     > PostHog Cloud License Terms appearing at: https://www.posthog.com/terms and Privacy Policy appearing at: https://posthog.com/privacy (collectively the “**Agreement**”)
 
