@@ -2459,23 +2459,31 @@
         },
         {
             "source": "/marketplace",
-            "destination": "/partners"
+            "destination": "/partnerships"
         },
         {
             "source": "/marketplace/clickhouse",
-            "destination": "/partners/clickhouse"
+            "destination": "/partnerships"
         },
         {
             "source": "/marketplace/opsverse",
-            "destination": "/partners/opsverse"
+            "destination": "/partnerships"
         },
         {
             "source": "/marketplace/restack",
-            "destination": "/partners/restack"
+            "destination": "/partnerships"
         },
         {
             "source": "/marketplace/altinity",
-            "destination": "/partners/altinity"
+            "destination": "/partnerships"
+        },
+        {
+            "source": "/partners",
+            "destination": "/partnerships"
+        },
+        {
+            "source": "/partners/:path*",
+            "destination": "/partnerships"
         },
         {
             "source": "/handbook/people/team-structure/experimentation",
