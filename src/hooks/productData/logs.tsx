@@ -172,8 +172,10 @@ export const logs = {
             key: 'logs_retention_30d',
             label: 'Custom retention',
             // Billing meters all ingested GB (any retention) on the base logs product, then bills
-            // retained GB again at the add-on rate for each month of retention. The slider estimates one month.
+            // retained GB again at the add-on rate for each month of retention.
             countsTowardParentVolume: true,
+            // Months of retention input on /logs/pricing. The /pricing calculator still estimates one month.
+            multiplier: { unit: 'month', initial: 1 },
             // Shown on /logs/pricing
             pricingDescription:
                 'Keep logs longer than the 14-day default. Custom retention is billed per GB for each month you keep your logs, and you can set it per service or per source in your logs and traces settings.',
