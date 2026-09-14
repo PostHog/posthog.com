@@ -2994,6 +2994,10 @@ export const docsMenu = {
                             url: '/docs/libraries/docusaurus',
                         },
                         {
+                            name: 'Fastify',
+                            url: '/docs/libraries/fastify',
+                        },
+                        {
                             name: 'Flask',
                             url: '/docs/libraries/flask',
                         },
