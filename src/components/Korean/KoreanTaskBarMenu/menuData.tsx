@@ -2,7 +2,6 @@ import { MenuType, MenuItemType } from 'components/RadixUI/MenuBar'
 import React from 'react'
 import { docsMenu, handbookSidebar } from '../../../navs'
 import * as Icons from '@posthog/icons'
-import { useSmallTeamsMenuItems } from './SmallTeamsMenuItems'
 import { Logo } from '@posthog/brand/logo'
 import { APP_COUNT } from 'constants/index'
 import SearchableProductMenu from './SearchableProductMenu'
@@ -311,7 +310,6 @@ const buildProductOSMenuItems = (allProducts: any[]) => {
 }
 
 export function useMenuData(): MenuType[] {
-    const smallTeamsMenuItems = useSmallTeamsMenuItems()
     const allProducts = useProduct() as any[]
     const { isMobile } = useApp()
 
@@ -547,9 +545,9 @@ export function useMenuData(): MenuType[] {
                     link: '/people',
                 },
                 {
-                    type: 'submenu',
+                    type: 'item',
                     label: 'Small teams',
-                    items: smallTeamsMenuItems,
+                    link: '/teams',
                 },
                 {
                     type: 'item',
@@ -565,53 +563,52 @@ export function useMenuData(): MenuType[] {
                     type: 'separator',
                 },
                 {
-                    type: 'submenu',
-                    label: 'Like and subscribe',
+                    type: 'item',
+                    label: 'X',
+                    link: 'https://x.com/posthog',
+                    icon: <IconXNotTwitter className="size-4 text-black dark:text-white" />,
+                    external: true,
                     mobileDestination: false, // Omit from mobile menu
-                    items: [
-                        {
-                            type: 'item',
-                            label: 'X',
-                            link: 'https://x.com/posthog',
-                            icon: <IconXNotTwitter className="size-4 text-black dark:text-white" />,
-                            external: true,
-                        },
-                        {
-                            type: 'item',
-                            label: 'LinkedIn',
-                            link: 'https://www.linkedin.com/company/posthog',
-                            icon: <IconLinkedIn className="size-4" />,
-                            external: true,
-                        },
-                        {
-                            type: 'item',
-                            label: 'Substack',
-                            link: 'https://newsletter.posthog.com',
-                            icon: <IconSubstack className="size-4" />,
-                            external: true,
-                        },
-                        {
-                            type: 'item',
-                            label: 'YouTube',
-                            link: 'https://www.youtube.com/@posthog',
-                            icon: <IconYouTube className="size-4" />,
-                            external: true,
-                        },
-                        {
-                            type: 'item',
-                            label: 'Instagram',
-                            link: 'https://www.instagram.com/teamposthog',
-                            icon: <IconInstagram className="size-4" />,
-                            external: true,
-                        },
-                        {
-                            type: 'item',
-                            label: 'GitHub',
-                            link: 'https://github.com/posthog',
-                            icon: <IconGithub className="size-4" />,
-                            external: true,
-                        },
-                    ],
+                },
+                {
+                    type: 'item',
+                    label: 'LinkedIn',
+                    link: 'https://www.linkedin.com/company/posthog',
+                    icon: <IconLinkedIn className="size-4" />,
+                    external: true,
+                    mobileDestination: false, // Omit from mobile menu
+                },
+                {
+                    type: 'item',
+                    label: 'Substack',
+                    link: 'https://newsletter.posthog.com',
+                    icon: <IconSubstack className="size-4" />,
+                    external: true,
+                    mobileDestination: false, // Omit from mobile menu
+                },
+                {
+                    type: 'item',
+                    label: 'YouTube',
+                    link: 'https://www.youtube.com/@posthog',
+                    icon: <IconYouTube className="size-4" />,
+                    external: true,
+                    mobileDestination: false, // Omit from mobile menu
+                },
+                {
+                    type: 'item',
+                    label: 'Instagram',
+                    link: 'https://www.instagram.com/teamposthog',
+                    icon: <IconInstagram className="size-4" />,
+                    external: true,
+                    mobileDestination: false, // Omit from mobile menu
+                },
+                {
+                    type: 'item',
+                    label: 'GitHub',
+                    link: 'https://github.com/posthog',
+                    icon: <IconGithub className="size-4" />,
+                    external: true,
+                    mobileDestination: false, // Omit from mobile menu
                 },
             ],
         },
@@ -625,41 +622,10 @@ export function useMenuData(): MenuType[] {
                     icon: <Icons.IconDeskHog className="size-4 text-seagreen" />,
                 },
                 {
-                    type: 'submenu',
+                    type: 'item',
                     label: 'Things that spark joy',
+                    link: '/sparks-joy',
                     icon: <IconSparksJoy className="size-4" />,
-                    items: [
-                        {
-                            type: 'item',
-                            label: 'Browse all',
-                            link: '/sparks-joy',
-                        },
-                        {
-                            type: 'separator',
-                        },
-                        {
-                            type: 'item',
-                            label: 'Games',
-                            disabled: true,
-                        },
-                        // Games section
-                        ...SparksJoyItems.games.map((item) => ({
-                            type: 'item' as const,
-                            label: item.label,
-                            link: item.link,
-                        })),
-                        {
-                            type: 'item',
-                            label: 'Sorta like games',
-                            disabled: true,
-                        },
-                        // Not games section
-                        ...SparksJoyItems.notGames.map((item) => ({
-                            type: 'item' as const,
-                            label: item.label,
-                            link: item.link,
-                        })),
-                    ],
                 },
                 // {
                 //     type: 'item',
@@ -667,48 +633,6 @@ export function useMenuData(): MenuType[] {
                 //     link: '/videos',
                 //     icon: <Icons.IconFolderOpenFilled className="size-4 text-orange" />,
                 // },
-                {
-                    type: 'submenu',
-                    label: 'Sexy legal documents',
-                    icon: <Icons.IconTie className="size-4 text-brown dark:text-creamsicle-dark" />,
-                    items: [
-                        {
-                            type: 'item',
-                            label: 'Terms',
-                            link: '/terms',
-                        },
-                        {
-                            type: 'item',
-                            label: 'Privacy',
-                            link: '/privacy',
-                        },
-                        {
-                            type: 'item',
-                            label: "DPA generator (it's fun!)",
-                            link: '/dpa',
-                        },
-                        {
-                            type: 'item',
-                            label: 'BAA generator (less fun)',
-                            link: '/baa',
-                        },
-                        {
-                            type: 'item',
-                            label: 'SOC ✌️',
-                            link: '/handbook/company/security#soc-2',
-                        },
-                        {
-                            type: 'item',
-                            label: 'HIPAA',
-                            link: '/docs/privacy/hipaa-compliance',
-                        },
-                        {
-                            type: 'item',
-                            label: 'Subprocessors',
-                            link: '/subprocessors',
-                        },
-                    ],
-                },
                 {
                     type: 'item',
                     label: 'Services',
@@ -741,6 +665,51 @@ export function useMenuData(): MenuType[] {
                     link: 'https://status.posthog.com',
                     external: true,
                     icon: <Icons.IconPulse className="size-4 text-red" />,
+                },
+                {
+                    type: 'separator',
+                },
+                {
+                    type: 'item',
+                    label: 'Terms',
+                    link: '/terms',
+                    icon: <Icons.IconDocument className="size-4 text-brown dark:text-creamsicle-dark" />,
+                },
+                {
+                    type: 'item',
+                    label: 'Privacy',
+                    link: '/privacy',
+                    icon: <Icons.IconShieldLock className="size-4 text-blue" />,
+                },
+                {
+                    type: 'item',
+                    label: "DPA generator (it's fun!)",
+                    link: '/dpa',
+                    icon: <Icons.IconMagicWand className="size-4 text-purple" />,
+                },
+                {
+                    type: 'item',
+                    label: 'BAA generator (less fun)',
+                    link: '/baa',
+                    icon: <Icons.IconPencil className="size-4 text-seagreen" />,
+                },
+                {
+                    type: 'item',
+                    label: 'SOC 2',
+                    link: '/handbook/company/security#soc-2',
+                    icon: <Icons.IconShield className="size-4 text-green" />,
+                },
+                {
+                    type: 'item',
+                    label: 'HIPAA',
+                    link: '/docs/privacy/hipaa-compliance',
+                    icon: <Icons.IconCheckCircle className="size-4 text-orange" />,
+                },
+                {
+                    type: 'item',
+                    label: 'Subprocessors',
+                    link: '/subprocessors',
+                    icon: <Icons.IconServer className="size-4 text-lilac" />,
                 },
             ],
         },
