@@ -8,15 +8,17 @@ showTitle: true
 
 ## Elevator pitch
 
-Replay Vision is batch AI analysis of your session replays. Point a scanner at any filtered set of recordings, ask a question in plain language, and get a structured answer back, on a schedule, across thousands of sessions, without watching one. Findings land as queryable events sitting next to your analytics, funnels, flags, and experiments.
+Replay Vision is batch AI analysis of your session replays. Point a scanner at any filtered set of recordings, ask a question in plain language, and get a structured answer back, on demand or continuously, across tens of thousands of sessions or more, without watching one. Findings become queryable events sitting next to your analytics, funnels, flags, and experiments.
 
 There are several YC startups that do this to a much smaller extent as a separate tool, making them quite limited. They also don't have the full data platform and other engineering tools PostHog has. Replay Vision lets you write the criteria, run your scanners continuously, and use the output anywhere in PostHog.
 
-2,500 credits free every month, which is 500 standard observations, no credit card. After that, it's usage-based at $0.01 per credit with volume discounts, roughly $0.03 to $0.15 per observation depending on the model, with no tier upgrade or add-on to buy.
+2,500 credits free every month, which is 500 standard observations (or 1,250 lite ones), no credit card. After that, it's usage-based at $0.01 per credit with volume discounts, roughly $0.02 to $0.15 per observation depending on the model, with no tier upgrade or add-on to buy.
 
-## The unique belief (in terms of replay vision)
+## The unique belief (in terms of Replay Vision)
 
-The things that explain why your product works or fails for people aren't always events. They can also be behaviors: hesitation, struggle, dead-end exploration, the moment someone gives up without ever clicking anything you track. They live in your session replays, and the only way to see them has been to watch one recording at a time. Nobody can watch them all.
+The things that explain why your product works or fails for people aren't always events. They can also be behaviors: hesitation, struggle, dead-end exploration, the moment someone gives up without ever clicking anything you track. They live in your session replays, and the only way to see them has been to watch one recording at a time. 
+
+The problem is that once you grow past a certain point, it's impossible to watch them all.
 
 So your most important signal about the user experience is also the one you might have been throwing away. Replay Vision reads your sessions for you. The insight that used to take an afternoon of manual review now runs continuously: Replay Vision reads every session as it comes in, based on the scanners you've set up, and the scouts pull what matters into your Inbox.
 
@@ -29,8 +31,9 @@ This is the vision layer of the self-driving engine the scouts rely on to read w
 - **PMs and founders** who want summaries and journey interpretation.
 - **Support and ops teams** who want anomaly and friction flagging: "show me the sessions that went wrong."
 - **Technical teams** who want scan results piped into agents and workflows via API.
+- **UX researchers** who want increased rigor in how they understand and monitor user behavior
 
-Any of these can be the champion. The common thread is someone drowning in recordings.
+Any of these can be the champion. The common thread is someone drowning in recordings, or anyone who sees the value in recordings but doesn't engage with them actively due to volume. 
 
 ## Messaging
 
@@ -38,7 +41,7 @@ Any of these can be the champion. The common thread is someone drowning in recor
 
 **Problem:** "Manually watching thousands of recordings is not practical." Teams batch ~50 recordings every Tuesday and want weekly summarized insights, but the review never scales to the volume they're capturing.
 
-**Solution:** Scanners read the recordings for you and deliver a standing read on your sessions, on a cadence. Nothing goes unreviewed.
+**Solution:** Scanners read the recordings for you and deliver a standing read on your sessions, on a cadence you determine. 
 
 **Supporting features:**
 - Five scanner templates ship out of the box: Dead ends (Monitor), Session summary (Summarizer), User intent (Classifier), Frustration score (Scorer), Session outcome (Classifier)
@@ -68,7 +71,7 @@ Any of these can be the champion. The common thread is someone drowning in recor
 **Solution:** Analyze your sessions where they already live, under one bill, and one platform. Connect the findings to the rest of your product data.
 
 **Supporting features:**
-- Observations land as queryable events, sitting next to your analytics, funnels, flags, errors, and experiments
+- Observations become queryable events, sitting next to your analytics, funnels, flags, errors, and experiments
 - Chart scanner output over time, and feed it into cohorts and experiments
 - Because it's all one system, a replay finding connects to the funnel, the error, and the release that caused it, and the fix comes back to you in the same place
 - Refined output via API, no raw export needed
@@ -140,7 +143,7 @@ Any of these can be the champion. The common thread is someone drowning in recor
 - Two bills, one of them for storage you're already paying us for.
 - Session data leaves your platform and lands with a vendor you haven't diligenced.
 - Their output can't come back as events, so nothing charts, nothing feeds an experiment, nothing reaches your Inbox.
-- $0.03 to $0.15 per observation with 500 free every month is hard to beat by adding a vendor.
+- $0.02 to $0.15 per observation with 500 free every month is hard to beat by adding a vendor.
 
 ## Objections
 
