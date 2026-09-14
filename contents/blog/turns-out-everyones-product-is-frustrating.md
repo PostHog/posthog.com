@@ -96,7 +96,7 @@ Onboarding/signup drop-off (the largest cluster by far):
 - "Find where users get stuck in onboarding" / "find sessions where users get stuck during onboarding" (this near-identical phrase recurs across many unrelated orgs, it's clearly the most natural way people phrase this)
 - "Find sessions where users get stuck during onboarding and do not create an account or login"
 - "Categorize the specific stage or feature where users stall or drop off during onboarding"
-- "Find people that try to sign up but cant"
+- "Find people that try to sign up but can't"
 - "find users who began registration flow dropped off"
 
 Checkout/payment failure:
@@ -108,7 +108,7 @@ Checkout/payment failure:
 Broad "why aren't we converting," asked almost like a business question, not a UI spec:
 
 - "I want to understand why are we not converting to paid users"
-- "i am trying to understand where a customter getting stuck and why is sales not happenning"
+- "i am trying to understand where a customter getting stuck and why is sales not happening"
 - "I want to track our Donation Page layout and get as much data as possible to get insights to improve the conversion of that page"
 
 Landing-page / content-engagement framing tied to conversion:
