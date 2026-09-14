@@ -327,21 +327,15 @@ const buildProductsMenuItems = (allProducts: any[]) => {
     const items: any[] = [
         {
             type: 'item',
-            label: 'PostHog Desktop',
-            link: '/desktop',
-            icon: <Icons.IconCoffee className="size-4 text-brown dark:text-brown-dark" />,
-        },
-        {
-            type: 'item',
             label: 'PostHog Web',
             link: '/products',
             icon: <Icons.IconBolt className="size-4 text-red" />,
         },
         {
             type: 'item',
-            label: 'PostHog Slack',
-            link: '/slack',
-            icon: <Icons.IconAtSign className="size-4 text-sky-blue" />,
+            label: 'PostHog Desktop',
+            link: '/desktop',
+            icon: <Icons.IconCoffee className="size-4 text-brown dark:text-brown-dark" />,
         },
         {
             type: 'item',
@@ -354,6 +348,12 @@ const buildProductsMenuItems = (allProducts: any[]) => {
             label: 'PostHog CLI',
             link: '/docs/cli',
             icon: <Icons.IconTerminal className="size-4 text-green" />,
+        },
+        {
+            type: 'item',
+            label: 'PostHog Slack',
+            link: '/slack',
+            icon: <Icons.IconAtSign className="size-4 text-sky-blue" />,
         },
         {
             type: 'item',
@@ -658,15 +658,7 @@ export function useMenuData(showNavbarTools = false): MenuType[] {
                         navigate('/display-options', { state: { newWindow: true } })
                     },
                     icon: <Icons.IconBrightness className="size-4 text-yellow" />,
-                    shortcut: [','],
                     mobileDestination: false, // Already exposed as a system item in the mobile logo menu
-                },
-                {
-                    type: 'item',
-                    label: 'Keyboard shortcuts',
-                    link: '/kbd',
-                    icon: <Icons.IconKeyboard className="size-4 text-primary" />,
-                    shortcut: ['.'],
                 },
                 {
                     type: 'item',
@@ -734,18 +726,11 @@ export function useMenuData(showNavbarTools = false): MenuType[] {
         },
         {
             type: 'item' as const,
-            label: 'About this website',
-            link: '/credits',
-            icon: <Icons.IconInfo className="size-4 text-blue" />,
-        },
-        {
-            type: 'item' as const,
             label: 'Display options',
             onClick: () => {
                 navigate('/display-options', { state: { newWindow: true } })
             },
             icon: <Icons.IconBrightness className="size-4 text-yellow" />,
-            shortcut: [','],
         },
     ]
 

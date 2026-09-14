@@ -654,13 +654,6 @@ export function useMenuData(): MenuType[] {
                 },
                 {
                     type: 'item',
-                    label: 'Keyboard shortcuts',
-                    link: '/kbd',
-                    icon: <Icons.IconKeyboard className="size-4 text-primary" />,
-                    shortcut: ['.'],
-                },
-                {
-                    type: 'item',
                     label: 'System status',
                     link: 'https://status.posthog.com',
                     external: true,
@@ -721,11 +714,6 @@ export function useMenuData(): MenuType[] {
             type: 'item' as const,
             label: 'About PostHog',
             link: '/about',
-        },
-        {
-            type: 'item' as const,
-            label: 'About this website',
-            link: '/credits',
         },
         {
             type: 'item' as const,
