@@ -56,6 +56,8 @@ Beyond optimization, we offer discounts based on three levers:
 - To include the 5% discount on the order form, we require written confirmation by the customer's designated signatory of the customer's intent to sign an order form by a specific, mutually agreed upon date - _this needs to come from the person who will actually sign the order form_
 - This is about creating predictability for both sides, not artificial deadlines
 - This is a one-time discount, which will be offered once during a monthly-to-annual conversion or net new agreement cycle
+- Not available while the customer can claim a further partner-program credit grant (for example, a renewed YC deal grant) during the proposed contract term. This discount buys a firm conversion date, and a customer with another free grant on the way has no single conversion moment for us to secure. Once the customer is no longer eligible to claim the grant again, they count as ordinary net new and the discount is available.
+- Doesn't stack with the [startup plan roll-off offer](#startup-plan-discounts) — a converting customer gets one conversion incentive, not both.
 
 **For renewals:** +5% additional discount
 - Early renewal commitment. Available in the last 6 months of the contract term and 60+ days before it expires. For a standard 12-month term that means months 7-10, up to 60 days out. 
@@ -127,6 +129,8 @@ You might see some customers with a 30% discount on their monthly Stripe subscri
 ### Startup plan discounts
 
 For customers on our [startup plan](/startups), we offer two months free credit when signing a prepaid deal. This encourages startups to use their credits to understand usage, and then commit to a longer term plan with PostHog. This offer is available until the first billing date after the credits expire. If a customer has used up their credits before the expiration date, they still have until the original expiration date to decide and claim the offer. The amount of free credits is determined by how much they purchase on a prepaid plan. By default, we work with customers on prepaid plans that will cover their usage for the next 12 months.
+
+The offer bridges a single expiry cliff: the startup credits expire once, and the free months reward committing to a prepaid plan before they do. It's therefore not available while the customer can claim a further partner-program credit grant (for example, a renewed YC deal grant) during the proposed contract term — with another grant on the way there is no cliff to bridge, and the incentive buys nothing. Once the customer is no longer eligible to claim a grant again, they qualify like any other roll-off. This offer also doesn't stack with the +5% forecast discount for conversions above — a converting customer gets one conversion incentive, not both.
 
 > Important clarification: operationally this is implemented as free credits applied before the contract start date, not as extra credits inside the contract term unless a specific dollar amount for the free credits is explicitly included under Special Terms.
 
@@ -240,7 +244,7 @@ Some rules:
 -   They need to share a copy of their current contract/pricing/bank statement as proof.
 -   They sign up to an annual contract worth $20k+/year, paid up front.
 -   Their usage in the overlap period needs to be proportionate to the contract they've signed with PostHog, ie. if they sign a $50k PostHog contract and have 6 months to run, they get $25k of PostHog credit for free.
--   The competitor they're using has to be 'real', ie. not some random side project. As a general rule, anyone we have written a [comparison article](/blog/tags/comparisons) about counts.
+-   The competitor they're using has to be 'real', ie. not some random side project. As a general rule, anyone we have written a [comparison article](/compare) about counts.
 -   Any buyout is subject to team lead approval before it goes on an order form.
 -   We have final discretion on deciding who gets the deal.
 -   We can still provide a standard free trial period of 2-4 weeks before they sign the contract, as they will likely need to figure out whether PostHog is right for them before committing.
@@ -266,7 +270,7 @@ This is also structure 3 in [how to structure free credits in special terms](#ho
 
 ## New business renewal credits
 
-If a customer is currently _not_ a paying user of PostHog, but is a user of one of [our competitors](/blog/tags/comparisons), about to renew, and is shopping for a better deal, we are willing to significantly undercut the quoted renewal price. This is because those customers are not that likely to move over to us anyway, and quoting them a lower price works out in our favour either way:
+If a customer is currently _not_ a paying user of PostHog, but is a user of one of [our competitors](/compare), about to renew, and is shopping for a better deal, we are willing to significantly undercut the quoted renewal price. This is because those customers are not that likely to move over to us anyway, and quoting them a lower price works out in our favour either way:
 
 1. If the competitor matches our much lower offer, and the customer accepts, we've reduced their revenue by a significant amount
 2. If the customer accepts, we've gained net new revenue we otherwise would have missed out on, and we have the opportunity to sell more.

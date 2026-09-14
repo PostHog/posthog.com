@@ -20,7 +20,7 @@ By integrating PostHog into your app, you’ll be able to track and diagnose err
 - [Automated error tracking](/error-tracking) for front and back end, coupled with other capabilities like product analytics and session replay lets you understand where the biggest issues are in your app, see them happening in real time and then diagnose and fix them.
 - [Target new features](/feature-flags) at a segment of your user base, see them experiencing them in real time and get feedback via surveys on what’s working and what’s not.
 - [Test out new features](/experiments) by splitting old and new experiences between users - PostHog’s statistical model will help you understand which variant of a feature to choose and then safely roll that out to all of your users.
-- [Understand and debug](/llm-analytics) how your users consume AI in your product and monitor performance and cost when using different models.
+- [Understand and debug](/ai-observability) how your users consume AI in your product and monitor performance and cost when using different models.
 - [Respond to churn](/surveys) by triggering a survey when a subscription is canceled to understand what went wrong for them and how you can improve your product.
 
 ## Product Managers
@@ -84,6 +84,6 @@ Using PostHog's [CDP](/cdp) lets you aggregate data from multiple technologies a
 
 The product marketing team has created sales enablement materials, covering some product information and general objection handling for specific products. These exist as Google Docs as they are living documents, but are listed below. 
 
-- [Managed data warehouse (DuckDB)](https://docs.google.com/document/d/19P0SajrkCf7IS0jJEh08y5kqKANEGPq5S6ZqTpyFKts/edit?usp=sharing)
+- [Managed data warehouse (Trino)](https://docs.google.com/document/d/19P0SajrkCf7IS0jJEh08y5kqKANEGPq5S6ZqTpyFKts/edit?usp=sharing)
 
 If there are additional products you'd like to see this sort of material for, let the team know in the **#team-marketing** Slack channel.  

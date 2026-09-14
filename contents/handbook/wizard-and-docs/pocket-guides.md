@@ -107,7 +107,9 @@ Reader interactions emit the `pocket_guide_interaction` event (marker glosses, t
 contents, font size, scout-file expansion), and every CTA emits it too. The `kind` property
 names the action:
 
-- `cover_click` – a volume opened from the shelf, with the `volume` id.
+- `cover_click` – a volume opened, with the `volume` id. Fires from every surface that shows a
+  cover or a spine, so `placement` is what tells them apart.
+- `shelf_link_click` – the "All guides" link out to the shelf, rather than a single volume.
 - `add_scout_click` – both "Add this scout" CTAs, with the `scout` name. That click is the
   conversion for a self-driving guide.
 - `cta_link_click` and `ai_prompt_click` – the `<Action />` button, with the `guide` url.
@@ -122,9 +124,16 @@ names the action:
 - `setup_command_copy` – the wizard command copied from a volume's front matter, a CTA
   prerequisite, or the "Not set up yet?" block.
 
-Every CTA also sends a `placement` (`shelf`, `enable_section`, `action_section`,
-`front_matter`, `figure`, `prose`, or `pinned_bar`), so the pinned bar can be compared against
-the block it shortcuts.
+Every CTA also sends a `placement`, so the pinned bar can be compared against the block it
+shortcuts, and so a guide open can be traced to the surface that sent it.
+
+- Inside a guide: `action_section`, `enable_section`, `front_matter`, `figure`, `prose`,
+  `pinned_bar`.
+- Surfaces that open a guide: `shelf` (`/pocket-guides`), `docs_index` (the `/docs` library
+  column), `product_docs` (a product's docs page), `self_driving_page` (`/self-driving`).
+
+`placement` is a required prop on `Cover` and `VolumeCard`, so a new surface cannot ship
+without declaring itself – the build fails first.
 
 **A new volume needs no tracking work.** The CTA components carry it, so a guide is measured as
 soon as it uses one. Adding a new kind of CTA is the only case that needs a new `kind` here.

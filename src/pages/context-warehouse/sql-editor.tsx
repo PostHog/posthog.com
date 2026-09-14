@@ -47,8 +47,8 @@ const sqlEditorFeatures: SQLEditorFeature[] = [
         comingSoon: true,
     },
     {
-        title: 'DuckDB syntax support',
-        description: 'Full support for DuckDB SQL syntax and functions when connected to a managed DuckDB warehouse',
+        title: 'Trino syntax support',
+        description: 'Full support for Trino SQL syntax and functions when connected to a managed Trino warehouse',
         comingSoon: true,
     },
     {

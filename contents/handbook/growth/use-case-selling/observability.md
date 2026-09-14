@@ -28,10 +28,9 @@ Separating this from Release Engineering is important because the buyer is often
 - **[Logs](/docs/logs)** — Centralized log collection and search over OpenTelemetry (OTLP). Full-text search, severity and service filters, [pattern mining](/docs/logs/patterns) that collapses millions of lines into templates, [log alerts](/docs/logs/alerts), and [links from a log line to the session replay](/docs/logs/link-session-replay) it came from. Billed per GB ingested with 10GB/month free and 14-day retention (a 30-day retention add-on is available). ([Pricing](/docs/logs/pricing) · [Best practices](/docs/logs/best-practices))
 - **[Distributed tracing](/docs/distributed-tracing)** *alpha* — Follow a request across services over OpenTelemetry (OTLP). Trace waterfalls, span search by service/status/duration/attribute, latency percentiles and error rates per operation, and correlated logs inside the span inspector. No proprietary SDK: point your existing OTel exporter at PostHog. Free during alpha. ([Start here](/docs/distributed-tracing/start-here) · [Why you need it](/docs/distributed-tracing/basics))
 - **[Metrics](/docs/metrics)** *alpha* — Application and infrastructure metrics (counters, gauges, histograms) over the same OTLP pipeline, or recorded directly with `posthog.metrics` if the PostHog SDK is already installed. The third OTel pillar alongside logs and traces.
-- **[Health checks](/docs/health-checks)** *beta* — PostHog inspecting the customer's own PostHog setup: missing SDKs, traffic bypassing the reverse proxy, broken materialized views, ingestion warnings. Issues raise and resolve themselves, and can be fed to self-driving to be fixed automatically.
 - **[Web vitals](/docs/web-analytics/web-vitals)** — Core Web Vitals (LCP, INP, CLS, FCP) captured automatically by the JS SDK. The frontend-performance half of the story, which the OTel pillars don't cover.
 
-**A naming note:** "APM" is our internal team name, not a product. Customer-facing, the pillars are **Logs**, **Distributed tracing**, and **Metrics**, sitting alongside Error Tracking, Health checks, and Web vitals. Don't tell a customer "APM is coming" — tell them which pillar ships today and at what maturity.
+**A naming note:** "APM" is our internal team name, not a product. Customer-facing, the pillars are **Logs**, **Distributed tracing**, and **Metrics**, sitting alongside Error Tracking and Web vitals. Don't tell a customer "APM is coming" — tell them which pillar ships today and at what maturity.
 
 ## Adoption path and expansion path
 
@@ -57,9 +56,7 @@ Usually **Error Tracking**. Team wants to catch exceptions and regressions. Comm
 
 **Logs → Distributed tracing → Metrics (the OpenTelemetry path):** Once a team is exporting logs over OTLP, traces and metrics are a config change, not a new integration. The same collector, the same project token, three different endpoints. This is the cheapest expansion in the whole playbook to *describe* — but be honest that traces and metrics are alpha, and check they're not depending on the gaps listed under pain points.
 
-**Health checks as the zero-effort entry:** Health checks need no new instrumentation at all — they inspect the PostHog setup the customer already has. For an account that's stalled, this is a way to demonstrate proactive value without asking for an integration.
-
-**Observability → self-driving:** This is the strongest expansion in the playbook. Error tracking, logs, health checks, and session replay are all [signal sources](/docs/self-driving/inbox/sources) for [self-driving](/docs/self-driving), and there are scouts watching traces, logs, error tracking, web vitals, and observability gaps. An SRE team that has already instrumented for observability has, without meaning to, done all the setup work self-driving needs. See [how to pitch self-driving](/handbook/growth/sales/how-to-pitch-self-driving).
+**Observability → self-driving:** This is the strongest expansion in the playbook. Error tracking, logs, and session replay are all [signal sources](/docs/self-driving/inbox/sources) for [self-driving](/docs/self-driving), and there are scouts watching traces, logs, error tracking, web vitals, and observability gaps. An SRE team that has already instrumented for observability has, without meaning to, done all the setup work self-driving needs. See [how to pitch self-driving](/handbook/growth/sales/how-to-pitch-self-driving).
 
 ## Business impact of solving the problem
 
@@ -163,7 +160,7 @@ Usually **Error Tracking**. Team wants to catch exceptions and regressions. Comm
 - **Consolidation for existing PostHog users.** If they're already using PostHog for analytics or flags, adding Error Tracking means one fewer vendor. Same data platform, one less tool to manage.
 - **Logs completes the picture.** Errors, user sessions, and backend logs in one place. No switching between Sentry, Papertrail, and Amplitude to understand an incident.
 - **OpenTelemetry-native, no proprietary SDK.** Logs, traces, and metrics all ingest over standard OTLP. There's nothing to rip out if they leave, which matters to a platform team that's been locked into an agent-based vendor. One OTel setup covers all three pillars.
-- **A signal doesn't stop at the alert.** Every other tool on this list tells you something broke and hands you the triage. Errors, logs, traces, and health checks are all [self-driving](/docs/self-driving) signal sources, so a regression can arrive as an investigated report with a pull request attached. Datadog's Bits AI and Sentry's Seer are the only competitors moving in this direction at all.
+- **A signal doesn't stop at the alert.** Every other tool on this list tells you something broke and hands you the triage. Errors, logs, and traces are all [self-driving](/docs/self-driving) signal sources, so a regression can arrive as an investigated report with a pull request attached. Datadog's Bits AI and Sentry's Seer are the only competitors moving in this direction at all.
 
 ### Competitor quick reference
 
@@ -210,7 +207,6 @@ Usually **Error Tracking**. Team wants to catch exceptions and regressions. Comm
 - [ ] Build an "Error Health" dashboard: error trends, top errors by affected users, error rate by release
 - [ ] Review the top 5 errors with the team, using session replay context to prioritize fixes
 - [ ] Enable [Logs](/docs/logs/start-here) for backend context, and link a log line back to its session replay
-- [ ] Turn on [health checks](/docs/health-checks) — zero instrumentation, catches setup problems degrading their data
 - [ ] If they already run OpenTelemetry, point a trace exporter at PostHog ([alpha](/docs/distributed-tracing/start-here), free during alpha)
 - [ ] Connect error tracking and logs as [self-driving signal sources](/docs/self-driving/inbox/sources) so regressions arrive investigated
 - [ ] Create a Product Analytics query that correlates errors with funnel drop-off or business metrics
@@ -222,7 +218,7 @@ Usually **Error Tracking**. Team wants to catch exceptions and regressions. Comm
 | Error Tracking only | Session Replay | They see stack traces but can't reproduce the user experience | "You can see the error. Want to see exactly what the user was doing when it happened?" |
 | Error Tracking + Session Replay | Logs | They have frontend error context but need backend logs | "You can see the user's session. But what was happening on the server at the same time?" |
 | Logs over OpenTelemetry | Distributed tracing + Metrics *alpha* | The hard part (an OTel pipeline) is already done; the other two pillars are a config change | "You're already exporting OTel to us. Traces and metrics are the same collector and a different endpoint — and they're free while they're in alpha." |
-| Error Tracking, Logs, or health checks active | self-driving | Every one of these is already a signal source; the account has done the setup without meaning to | "You've got the signals. Want an agent to investigate them and open the PR, instead of you triaging every alert?" |
+| Error Tracking or Logs active | self-driving | Both of these are already a signal source; the account has done the setup without meaning to | "You've got the signals. Want an agent to investigate them and open the PR, instead of you triaging every alert?" |
 | Error Tracking + analytics correlation | Product Intelligence (for the product team) | They're connecting errors to user impact. The product team would benefit from the same analytics. | "You're measuring error impact on users. Has your product team seen what they can do with funnels and retention in the same platform?" |
 | Error Tracking (engineering in PostHog) | Release Engineering (same engineering team) | Engineering is in PostHog for errors. Feature flags for safe releases is a natural add. | "You're tracking errors after releases. What if you could gate features behind flags and roll back without a deploy?" |
 | Error Tracking for AI features | AI/LLM Observability | Traditional error tracking misses AI quality regressions | "You're catching exceptions, but are you catching when your model starts giving worse answers? That's a different kind of 'error.'" |
@@ -233,7 +229,6 @@ Usually **Error Tracking**. Team wants to catch exceptions and regressions. Comm
 - **Logs docs:** [Start here](/docs/logs/start-here) · [Pricing](/docs/logs/pricing) · [Alerts](/docs/logs/alerts) · [Link to session replay](/docs/logs/link-session-replay)
 - **Distributed tracing docs:** [Start here](/docs/distributed-tracing/start-here) · [Why you need it](/docs/distributed-tracing/basics) · [Installation](/docs/distributed-tracing/installation)
 - **Metrics docs:** [Metrics](/docs/metrics)
-- **Health checks docs:** [Health checks](/docs/health-checks)
 - **self-driving:** [How to pitch self-driving](/handbook/growth/sales/how-to-pitch-self-driving) · [Signal sources](/docs/self-driving/inbox/sources)
 - **Session Replay docs:** [Session Replay](/docs/session-replay)
 - **Product Analytics docs:** [Product Analytics](/docs/product-analytics)

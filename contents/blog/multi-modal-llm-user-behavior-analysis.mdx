@@ -104,7 +104,7 @@ At first glance, transcribing all the user session videos seems like a no-braine
 However, let's try basic math, using numbers from now (end of 2025).
 
 -   One frame of video at a good-enough resolution costs 258 Gemini Flash tokens.
--   If `1 frame per second * 60 seconds in a minute * 60 minutes in a hour * 258 tokens = 929k tokens`.
+-   If `1 frame per second * 60 seconds in a minute * 60 minutes in an hour * 258 tokens = 929k tokens`.
 -   Meaning, analyzing just one large-ish session already costs a million tokens.
 
 We can even use lighter models and lower resolutions, but at some point, the quality drop is too much. Also, these models are this cheap because they aren't exactly clever. We can ask it to transcribe what's on the screen, but it won't be able to make meaningful conclusions on the whole journey. So, either we need to use a much more expensive model from the start, or we need another model to analyze transcription afterward.

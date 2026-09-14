@@ -25,7 +25,7 @@ Also known as split testing or [multivariate testing](/product-engineers/what-is
 
 There are dozens of A/B testing tools available, but what they offer varies widely. Many lean toward marketing use cases (i.e. testing website landing pages) and aren't useful for product feature testing, or only support specific platforms like Shopify or WordPress.
 
-In this guide, we're looking at the best free and open-source A/B testing tools. Open-source tools are mainly built for developers, so we recommend marketers read our guide to the best [alternatives to VWO](/blog/best-vwo-alternatives).
+In this guide, we're looking at the best free and open-source A/B testing tools. Open-source tools are mainly built for developers, so we recommend marketers read our guide to the best [alternatives to VWO](/compare/best-vwo-alternatives).
 
 ## What features do you need in an open-source A/B testing tool?
 
@@ -86,7 +86,7 @@ While PostHog is open source, its A/B testing features aren't included in the op
 >
 > For teams looking for all the tools they need to experiment and improve their products, PostHog is a great choice. This is especially true for startups and scaleups thanks to its generous free tier.
 
-**Further reading:** New to A/B testing? Read [a software engineer's guide to A/B testing](/blog/ab-testing-guide-for-engineers) and our guide to [common A/B testing mistakes](/blog/ab-testing-mistakes). Looking for mobile testing tools? See our guide to the [best mobile app A/B testing tools](/blog/best-mobile-app-ab-testing-tools).
+**Further reading:** New to A/B testing? Read [a software engineer's guide to A/B testing](/blog/ab-testing-guide-for-engineers) and our guide to [common A/B testing mistakes](/blog/ab-testing-mistakes). Looking for mobile testing tools? See our guide to the [best mobile app A/B testing tools](/compare/best-mobile-app-ab-testing-tools).
 
 <WizardCTA />
 
@@ -94,11 +94,11 @@ While PostHog is open source, its A/B testing features aren't included in the op
 
 ![GrowthBook - best open source ab testing tools](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/open-source-testing-tools/growthbook.png)
 
-[GrowthBook](/blog/posthog-vs-growthbook) is an [open-source platform for feature flags](/blog/best-open-source-feature-flag-tools) and A/B tests that helps teams to deploy code efficiently and analyze experiments. Built by engineers who wanted better insights on new releases, it is a modular solution that promotes feature flagging as an essential step in the development process. This means it can be used as a full-stack platform, a plugin feature flagging tool, or an analysis engine.
+[GrowthBook](/compare/posthog-vs-growthbook) is an [open-source platform for feature flags](/compare/best-open-source-feature-flag-tools) and A/B tests that helps teams to deploy code efficiently and analyze experiments. Built by engineers who wanted better insights on new releases, it is a modular solution that promotes feature flagging as an essential step in the development process. This means it can be used as a full-stack platform, a plugin feature flagging tool, or an analysis engine.
 
 ### Who is GrowthBook for?
 
-[GrowthBook](/blog/best-growthbook-alternatives) is built for data, engineering, and product teams who need the power of a customizable platform without having to build it in house.
+[GrowthBook](/compare/best-growthbook-alternatives) is built for data, engineering, and product teams who need the power of a customizable platform without having to build it in house.
 
 ### Features and benefits
 
@@ -137,7 +137,7 @@ Unleash is for autonomous development teams who want a lightweight way to test, 
 - Extensive APIs
 - 25+ official SDKs covering all major languages and frameworks
 - Privacy-first architecture (no user PII leaves your infrastructure)
-- Integrations with Jira, [Datadog](/blog/best-datadog-alternatives), Microsoft Teams, and Slack
+- Integrations with Jira, [Datadog](/compare/best-datadog-alternatives), Microsoft Teams, and Slack
 - Self-hosted and managed service available
 
 ### How much does Unleash cost?
@@ -177,7 +177,7 @@ Mojito is completely free and open source, and you don’t need an account to ge
 
 ![Flagsmith - best open source ab testing tools](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/open-source-testing-tools/img4_Flagsmith.png)
 
-[Flagsmith](/blog/best-flagsmith-alternatives) is an open-source feature flag and remote configuration service that lets you manage features across mobile, web and server-side applications. You can use Flagsmith’s multivariate flags as a bucketing engine to place users into testing buckets and control the specific user experience that is being tested. Flagsmith doesn’t provide analytics for multivariate tests, however, so you’ll need to use a third-party provider to receive the stream of event data derived from the behavior of the user.
+[Flagsmith](/compare/best-flagsmith-alternatives) is an open-source feature flag and remote configuration service that lets you manage features across mobile, web and server-side applications. You can use Flagsmith’s multivariate flags as a bucketing engine to place users into testing buckets and control the specific user experience that is being tested. Flagsmith doesn’t provide analytics for multivariate tests, however, so you’ll need to use a third-party provider to receive the stream of event data derived from the behavior of the user.
 
 ### Who is Flagsmith for?
 
@@ -240,7 +240,7 @@ It depends on what you need.
 
 **PostHog** is the best option for product teams that want experimentation alongside product analytics, session replay, and feature flags in one platform – its free tier includes 1 million feature flag requests per month. 
 
-**GrowthBook** is the best choice for teams that already have a data warehouse and want a dedicated, warehouse-native experimentation tool – it's completely free to self-host with no limits. If you're looking for more options beyond open source, check out our guide to the [best mobile app A/B testing tools](/blog/best-mobile-app-ab-testing-tools).
+**GrowthBook** is the best choice for teams that already have a data warehouse and want a dedicated, warehouse-native experimentation tool – it's completely free to self-host with no limits. If you're looking for more options beyond open source, check out our guide to the [best mobile app A/B testing tools](/compare/best-mobile-app-ab-testing-tools).
 
 </details>
 
@@ -263,7 +263,7 @@ Yes, with caveats. GrowthBook's self-hosted open-source version (MIT license) is
 <details>
   <summary>Can you do A/B testing without code?</summary>
 
-Some tools on this list offer visual editors that let you set up web experiments without writing code. **GrowthBook** includes a visual A/B test editor on its Pro plan. For fully no-code A/B testing, you'll likely want a marketing-focused tool like [VWO](/blog/best-vwo-alternatives) or [Optimizely](/blog/best-optimizely-alternatives) instead, though these are neither free nor open source.
+Some tools on this list offer visual editors that let you set up web experiments without writing code. **GrowthBook** includes a visual A/B test editor on its Pro plan. For fully no-code A/B testing, you'll likely want a marketing-focused tool like [VWO](/compare/best-vwo-alternatives) or [Optimizely](/compare/best-optimizely-alternatives) instead, though these are neither free nor open source.
 
 You can also use a [combination of an AI agent and MCP to help you do this](/blog/ai-is-killing-no-code-experiments).
 
@@ -298,10 +298,10 @@ Yes – that's one of the main advantages of open-source A/B testing tools. **Gr
 
 ## Further reading
 
-- [The best mobile app A/B testing tools](/blog/best-mobile-app-ab-testing-tools)
+- [The best mobile app A/B testing tools](/compare/best-mobile-app-ab-testing-tools)
 - [A software engineer's guide to A/B testing](/blog/ab-testing-guide-for-engineers)
 - [Common A/B testing mistakes](/blog/ab-testing-mistakes)
-- [The best open-source feature flag tools](/blog/best-open-source-feature-flag-tools)
-- [PostHog vs. GrowthBook](/blog/posthog-vs-growthbook)
+- [The best open-source feature flag tools](/compare/best-open-source-feature-flag-tools)
+- [PostHog vs. GrowthBook](/compare/posthog-vs-growthbook)
 
 <NewsletterForm />

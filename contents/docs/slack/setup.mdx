@@ -25,7 +25,15 @@ Head to the [**Slack integration page**](https://app.posthog.com/integrations/sl
   alt="The Slack integration section in project settings, with the Add to Slack button"
 />
 
-To talk to the bot in a channel, @-mention it – Slack will prompt you to invite it – or invite it explicitly with `/invite @PostHog`. The first time it sees a mention, it matches your Slack email to your PostHog account, so make sure you're signed in to the same org on both sides.
+To talk to the bot in a channel, @-mention it – Slack will prompt you to invite it – or invite it explicitly with `/invite @PostHog`. When it joins a channel it posts a short greeting with example prompts. When new teammates join your Slack workspace, they get a welcome DM from the bot introducing itself and what it can do. You can also skip channels entirely and [DM the bot directly](/docs/slack#dm-the-bot).
+
+The first time the bot sees a mention, it matches your Slack email to your PostHog account, so make sure you're signed in to the same org on both sides.
+
+<CalloutBox icon="IconInfo" title="Slack email doesn't match your PostHog email?" type="fyi">
+
+Link the accounts instead. When email matching fails, the bot replies with a **Link my PostHog account** button – click it and sign in with Slack to connect the two. You can also link (or unlink) anytime from the App Home tab under **Linked accounts**, or from [Settings → Personal integrations](https://app.posthog.com/settings/user-personal-integrations) in PostHog. A linked account always wins over email matching.
+
+</CalloutBox>
 
 <CalloutBox icon="IconInfo" title="Slack Connect channels require one-time approval" type="fyi">
 
@@ -87,6 +95,8 @@ Pick a project once and the bot remembers it for you across channels and threads
 | `@PostHog project`                | Show which PostHog project your mentions route to in this workspace, and list the alternatives |
 | `@PostHog project <id>`           | Set the PostHog project your mentions route to in this workspace                               |
 | `@PostHog project workspace <id>` | Set the workspace-wide default project (Slack admins/owners only)                              |
+
+The same commands are available as the `/posthog` slash command (e.g. `/posthog project <id>`). Unlike an @-mention, a slash command is visible only to you, so you can change your routing without posting a message everyone in the channel sees. In a DM you drop the mention entirely: `project <id>`. You can also manage your personal default and the workspace default from the App Home tab under **Project routing**.
 
 The bot resolves a target with this precedence: thread context (continuing an existing task) → your personal default → workspace-wide default (set with `@PostHog project workspace <id>` by a Slack admin) → the only connected project → picker. Personal defaults always win over the workspace fallback, so each teammate can route their own mentions independently.
 

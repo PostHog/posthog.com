@@ -672,7 +672,7 @@ export default function AppWindow({ item, chrome = true }: { item: AppWindowType
                 {item.appSettings?.size?.fixed && (
                     <div
                         onClick={handleClose}
-                        className={`fixed inset-0 z-50 bg-black/50 ${
+                        className={`fixed inset-0 z-50 bg-black/50 print:hidden ${
                             closing ? 'animate-overlay-fade-out' : !skipsOpenAnimation ? 'animate-overlay-fade-in' : ''
                         }`}
                     />
@@ -700,6 +700,7 @@ export default function AppWindow({ item, chrome = true }: { item: AppWindowType
                     data-expanded={item.expanded || undefined}
                     data-windowed={item.windowed || undefined}
                     data-snapped={item.snapped || undefined}
+                    data-focused={focusedWindow === item || undefined}
                     data-scheme="tertiary"
                     className={`@container relative overflow-hidden ${
                         item.appSettings?.size?.fixed
@@ -746,7 +747,7 @@ export default function AppWindow({ item, chrome = true }: { item: AppWindowType
                             : undefined
                     }
                 >
-                    <div className={`${hasToolbar ? 'bg-primary flex items-center py-0.5 px-1' : ''}`}>
+                    <div className={`print:hidden ${hasToolbar ? 'bg-primary flex items-center py-0.5 px-1' : ''}`}>
                         {hasToolbar && (
                             <>
                                 {!hideTitle && (
@@ -811,6 +812,7 @@ export default function AppWindow({ item, chrome = true }: { item: AppWindowType
                     </div>
                     <div
                         ref={contentRef}
+                        data-app="AppWindowContent"
                         className={`size-full flex-grow ${
                             chrome
                                 ? `${

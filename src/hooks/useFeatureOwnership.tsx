@@ -554,7 +554,7 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     },
     surveys: {
         feature: 'Surveys',
-        owner: ['surveys'],
+        owner: ['conversations'],
     },
     'table-exports': {
         feature: 'Table exports',

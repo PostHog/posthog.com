@@ -16,7 +16,7 @@ import AlphaRelease from "../_snippets/alpha-release.mdx"
 
 <AlphaRelease />
 
-The Decagon connector syncs conversations between your users and your [Decagon](https://decagon.ai/) AI agents into the PostHog Data warehouse, including every message, customer satisfaction (CSAT) ratings, tags, and metadata. Use it to analyze support quality alongside your product data.
+The Decagon connector syncs your [Decagon](https://decagon.ai/) AI agent data into the PostHog Data warehouse. It covers the conversations between your users and your agents – every message, customer satisfaction (CSAT) rating, tag, and piece of metadata – plus the Agent Assist actions your human agents take, the knowledge base articles the AI answers with and how often each one is used, your tag taxonomy, admin logs, team members, and Watchtower QA jobs. Use it to analyze support quality alongside your product data.
 
 ## Prerequisites
 
@@ -34,7 +34,9 @@ When linking Decagon, you'll need:
 
 <SyncModes />
 
-The conversations table syncs as a full refresh. Decagon's export returns conversations oldest first, and a conversation reappears in the export whenever it receives new messages, so each sync picks up the latest version of every conversation.
+`conversations` and `admin_logs` sync incrementally. A conversation reappears in Decagon's export whenever it receives new messages, so each sync picks up the latest version of every conversation it has seen change. `agent_assist_actions` is an append-only event stream, one row per action.
+
+The remaining tables sync as a full refresh. `articles`, `tags`, `team_members`, and `watchtower_jobs` are small dimension tables that resolve the ids other tables reference. `article_usage` is a point-in-time snapshot that PostHog replaces on every sync, so it holds current usage counts rather than a history of them.
 
 ## Configuration
 

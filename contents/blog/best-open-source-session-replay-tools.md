@@ -29,16 +29,16 @@ Replays (aka session recordings) are a great way to understand:
 - Hesitation at different stages of your funnel.
 - How your users are interacting with individual elements of your product.
 
-[Hotjar](/blog/posthog-vs-hotjar) (now part of Contentsquare) and [Fullstory](/blog/posthog-vs-fullstory) are popular session replay products, but they're expensive, inflexible, and primarily designed with marketing teams. 
+[Hotjar](/compare/posthog-vs-hotjar) (now part of Contentsquare) and [Fullstory](/compare/posthog-vs-fullstory) are popular session replay products, but they're expensive, inflexible, and primarily designed with marketing teams. 
 
-In this guide, we're looking at [Hotjar alternatives](/blog/best-hotjar-alternatives) that are either free or open source, particularly session replay tools. 
+In this guide, we're looking at [Hotjar alternatives](/compare/best-hotjar-alternatives) that are either free or open source, particularly session replay tools. 
 
 ## 1. PostHog
 ![PostHog](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/screenshots/session-replay.png)
 
 [PostHog](/) (that's us 👋) is an all-in-one developer platform that includes [session replay](/session-replay), [product analytics](/product-analytics), [heatmaps](/heatmaps), [feature flags](/feature-flags), [A/B testing](/experiments), [error tracking](/error-tracking), [surveys](/surveys), and more. 
 
-This means it's not just an open source session replay tool, but a full replacement for tools like [Hotjar](/blog/best-hotjar-alternatives), [FullStory](/blog/best-fullstory-alternatives), [LaunchDarkly](/blog/best-launchdarkly-alternatives), and [Sentry](/blog/best-sentry-alternativs).
+This means it's not just an open source session replay tool, but a full replacement for tools like [Hotjar](/compare/best-hotjar-alternatives), [FullStory](/compare/best-fullstory-alternatives), [LaunchDarkly](/compare/best-launchdarkly-alternatives), and [Sentry](/blog/best-sentry-alternativs).
 
 PostHog's [session replay](/docs/session-replay) includes console logs, network activity, a DOM explorer, and performance metrics so you can identify the root cause of bugs without leaving the replay. You can filter recordings by user, event, feature flag, or any combination of properties, save playlists of related sessions, and export recordings offline for safe keeping. 
 
@@ -48,7 +48,7 @@ PostHog's [session replay](/docs/session-replay) includes console logs, network 
 
 PostHog is ideal for startups, [product-minded developers](/product-engineer/what-is-a-product-engineer), and product teams. Unlike Hotjar and Fullstory, it's designed for technical users. Its broad range of features means PostHog can replace several tools.
 
-It also supports replay for mobile apps running that use Android, iOS, React Native, and Flutter SDKs, making it a good option if you're also looking for a tool that offers [Hotjar features for mobile apps](/blog/hotjar-for-mobile-ios-android-react-native-flutter).
+It also supports replay for mobile apps running that use Android, iOS, React Native, and Flutter SDKs, making it a good option if you're also looking for a tool that offers [Hotjar features for mobile apps](/compare/hotjar-for-mobile-ios-android-react-native-flutter).
 
 ### Key features
 
@@ -200,13 +200,13 @@ Self-hosted lifetime licenses start at **$200 one-time** (Startup – up to 3 we
 ## 6. Matomo
 ![Matomo - open source GA alternative](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/open-source-hotjar-alternatives/Matomo-session-recording.png)
 
-[Matomo](/blog/posthog-vs-matomo) is an open web analytics platform. Touted as an alternative to Google Analytics, Matomo is largely focused on understanding marketing website analytics. Session recording is available as an add-on via the on-premise marketplace.
+[Matomo](/compare/posthog-vs-matomo) is an open web analytics platform. Touted as an alternative to Google Analytics, Matomo is largely focused on understanding marketing website analytics. Session recording is available as an add-on via the on-premise marketplace.
 
 ### Who is Matomo for?
 
 [Matomo](blog/best-matomo-alternatives) is mainly built with marketing and content teams in mind, offering insights into website content engagement for optimization of user journeys. Features like session recording are part of a wider set of tools that are useful for product teams as well, but they aren't included in Matomo's open source release.
 
-To learn more, read our [PostHog vs Matomo comparison](/blog/posthog-vs-matomo).
+To learn more, read our [PostHog vs Matomo comparison](/compare/posthog-vs-matomo).
 
 ### Key features
  
@@ -305,16 +305,16 @@ Most open source session replay tools can be self-hosted, but not all self-hoste
 <details>
 <summary>Is Highlight.io still available?</summary>
 
-Highlight.io was acquired by [LaunchDarkly](/blog/posthog-vs-launchdarkly) in March 2025. Existing accounts are being migrated to LaunchDarkly's observability platform; it is no longer recommended as a standalone tool for new deployments.
+Highlight.io was acquired by [LaunchDarkly](/compare/posthog-vs-launchdarkly) in March 2025. Existing accounts are being migrated to LaunchDarkly's observability platform; it is no longer recommended as a standalone tool for new deployments.
  
 </details>
  
 <details>
 <summary>What happened to Hotjar?</summary>
 
-[Hotjar](/blog/posthog-vs-hotjar) merged into Contentsquare. New customers sign up through Contentsquare, and existing Hotjar customers are being migrated to the Contentsquare platform. 
+[Hotjar](/compare/posthog-vs-hotjar) merged into Contentsquare. New customers sign up through Contentsquare, and existing Hotjar customers are being migrated to the Contentsquare platform. 
 
-The core Hotjar tools (session replay, heatmaps, surveys) still exist within Contentsquare's offering. See our guide to [Hotjar alternatives](/blog/best-hotjar-alternatives) for more.
+The core Hotjar tools (session replay, heatmaps, surveys) still exist within Contentsquare's offering. See our guide to [Hotjar alternatives](/compare/best-hotjar-alternatives) for more.
  
 </details>
  
@@ -325,11 +325,11 @@ The top session replay tools in 2026 include:
  
 - **[PostHog](/session-replay)** – Best all-in-one for engineering teams with analytics, feature flags, and error tracking
 - **[Microsoft Clarity](/blog/best-microsoft-clarity-alternatives)** – Best completely free option with unlimited recordings
-- **[Smartlook](/blog/smartlook-alternatives)** – Best for mobile-first apps with crash reports
-- **[LogRocket](/blog/posthog-vs-logrocket)** – Best for frontend debugging with performance monitoring
-- **[FullStory](/blog/best-fullstory-alternatives)** – Best for frustration signal detection and UX analytics
+- **[Smartlook](/compare/smartlook-alternatives)** – Best for mobile-first apps with crash reports
+- **[LogRocket](/compare/posthog-vs-logrocket)** – Best for frontend debugging with performance monitoring
+- **[FullStory](/compare/best-fullstory-alternatives)** – Best for frustration signal detection and UX analytics
  
-See our full guide to the [best session replay tools](/blog/best-session-replay-tools) for more options.
+See our full guide to the [best session replay tools](/compare/best-session-replay-tools) for more options.
  
 </details>
 

@@ -15,6 +15,10 @@ The credit term only extends beyond 12 months (e.g. to 24 months for a two-year 
 -   **Paying all upfront for the full term:** the customer gets the full credit amount added in bulk at the start, with an expiry set to the full length of the term (e.g. a two-year expiry for a two-year deal paid upfront).
 -   **Paying per year (or in tranches):** the extended term does not apply. Credits are granted in tranches allocated on each renewal date, each with a 12-month term. For example, a two-year deal split evenly grants half the credits in the first year and half on the renewal date at the start of the second.
 
+### Customers with organizations in more than one region
+
+If the customer needs an organization in more than one region (for example the US cloud and the EU cloud), agree on the billing configuration before the order form goes out. Read [customer billing configurations](/handbook/growth/billing/customer-billing-configurations) for the two options and their limits. If you keep the credits separate, write the credit split for each organization on the order form. For either option, get the organization ID for each region before contract setup.
+
 ### What about monthly customers?
 
 Anyone on a monthly plan simply agrees to our [terms](/terms) and [privacy policy](/privacy) when they sign up.
@@ -176,7 +180,7 @@ Sometimes large customers will ask for changes to our MSA. We have a list of the
 
 We offer HIPAA Compliance on PostHog Cloud and as such health companies will require us to sign a Business Associate Agreement with them. As this means we take on increased financial risk in case of a breach we ask them as a minimum to subscribe to one of the platform packages which is a guaranteed monthly payment. A maximum of one BAA per organization will be signed. Under most circumstances, it should be the company that owns the org/pays us.
 
-1. Ask the customer to subscribe to a platform package (as well as any other paid plans they wish to use). You can verify this in Vitally by ensuring that they are in the `Teams Plan` segment.
+1. Ask the customer to subscribe to a platform package (as well as any other paid plans they wish to use).
 2. Create a new document from the <PrivateLink url="https://app.pandadoc.com/a/#/templates/4psCXzU527sNE6WEbFBg3a">PandaDoc template</PrivateLink>.
 3. All you need to do it set the `Client.Company` variable and then send it to them for review and signature.
 4. It has been pre-signed by Fraser and will automatically add today's date as the date of signature for PostHog.

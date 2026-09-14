@@ -363,7 +363,7 @@ export const workflows = {
         ],
     },
     slider: {
-        marks: [10000, 50000, 100000, 1000000, 10000000],
+        marks: [10000, 1000000, 10000000],
         min: 10000,
         max: 10000000,
     },
@@ -373,7 +373,7 @@ export const workflows = {
             key: 'workflows_destinations',
             label: 'Destinations',
             sliderConfig: {
-                marks: [10000, 50000, 100000, 1000000, 10000000],
+                marks: [10000, 1000000, 10000000],
                 min: 10000,
                 max: 10000000,
             },

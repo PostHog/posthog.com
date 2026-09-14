@@ -12,7 +12,7 @@ tags:
 ---
  
 
-[Autocapture](/docs/data/autocapture) is a powerful way to capture usage data without having to implement any tracking yourself. [SQL](/docs/product-analytics/sql) unlocks more of that data for analysis. In this tutorial, we go over examples of how you can use SQL to analyze autocapture events.
+[Autocapture](/docs/data/autocapture) is a powerful way to capture usage data without having to implement any tracking yourself. [SQL](/docs/data-warehouse/sql) unlocks more of that data for analysis. In this tutorial, we go over examples of how you can use SQL to analyze autocapture events.
 
 > **Don't want to write SQL?** You can use autocapture element properties like tag name, text, `href` target, and/or CSS selector to filter autocapture events in trends, funnels, and more. See our [autocapture docs](/docs/data/autocapture) for more.
 
