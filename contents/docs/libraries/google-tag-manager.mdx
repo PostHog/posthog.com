@@ -37,11 +37,11 @@ You can find the full list of methods in our [JavaScript Web docs](/docs/librari
 
 ## Tag templates
 
-PostHog maintains two Google Tag Manager templates:
+PostHog maintains two Google Tag Manager templates. Both are in the Community Template Gallery. In your container, go to **Templates > Tag Templates > Search Gallery**, then search for PostHog.
 
-- [posthog-gtm-template](https://github.com/PostHog/posthog-gtm-template) for web containers. It loads the JavaScript Web SDK and adds tag types for capture, identify, alias, reset, and opt in or opt out.
-- [posthog-gtm-template-server](https://github.com/PostHog/posthog-gtm-template-server) for server containers. It sends events from a server container to the [PostHog capture API](/docs/api/capture).
+- The web template loads the JavaScript Web SDK and adds tag types for capture, identify, alias, reset, and opt in or opt out. Source: [posthog-gtm-template](https://github.com/PostHog/posthog-gtm-template).
+- The server template sends events from a server container to the [capture API](/docs/api/capture). Source: [posthog-gtm-template-server](https://github.com/PostHog/posthog-gtm-template-server).
 
-Both templates are early. They are not in the Community Template Gallery yet, so you must add them by hand. Download the `template.tpl` file from the repository, then import it into your container as a custom template. Report problems on the template repository.
+Use the web template to configure PostHog from Google Tag Manager without a custom HTML tag. The custom HTML method above also continues to work.
 
-The custom HTML method above is the recommended way to install PostHog with Google Tag Manager.
+The web template loads the SDK from PostHog Cloud only. If you use a [reverse proxy](/docs/advanced/proxy) or you self-host, load the SDK with a custom HTML tag, then set the region of the template to **Custom host**.
