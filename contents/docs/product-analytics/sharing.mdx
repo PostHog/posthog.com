@@ -17,7 +17,7 @@ export const embedInsightDark =
 
 For any dashboard or insight, you can share a public link and/or embed it using an iframe. This is useful if you want to share your data with customers or partners, but don't want to share your entire account.
 
-> **Note:** When you share an insight or dashboard, anyone with the link can view it. To better control this data, consider setting up [embedded analytics](/tutorials/embedded-analytics).
+> **Note:** When you share an insight or dashboard, anyone with the link can view it. To limit who can view it, [add a password](#password-protecting-a-shared-link) or consider setting up [embedded analytics](/tutorials/embedded-analytics).
 
 If a query references tables denied by [warehouse access control](/docs/settings/warehouse-access-control), you can't enable public sharing or update already-shared content.
 
@@ -148,3 +148,29 @@ The dashboard fires a `posthog:dimensions` event when it loads and you can use t
 Shared and embedded dashboards auto-refresh every 30 minutes while the page is open. Auto-refresh pauses when the browser tab is inactive and resumes when the tab becomes visible again.
 
 If the dashboard data is more than 30 minutes old when you first open a shared link, the dashboard automatically triggers a one-time full refresh to ensure you see up-to-date data. This also applies when you return to an inactive browser tab – the dashboard checks for staleness and refreshes if needed.
+
+## Password protecting a shared link
+
+You can require a password to view a shared insight or dashboard. This works for public links and embeds. Password protection is part of [access control](/docs/settings/access-control), available on the [Boost, Scale, and Enterprise plans](/platform-packages).
+
+To add a password:
+
+1. Open the sharing modal and turn on sharing.
+2. Turn on **Password protect**.
+3. Click **Add**.
+4. Enter a password, or leave the field empty to generate a random one. You can also add a note, such as who the password is for.
+5. Click **Create password**, then copy the password.
+
+PostHog shows the password only once, so store it somewhere safe before you close the modal. The link stays locked until you add at least one password.
+
+You can add more than one password to the same link. For example, give each partner their own password so you can remove one without affecting the others. The sharing modal lists each password with its note, who created it, and when.
+
+### Viewing a password-protected link
+
+When someone opens the link, they see a page that asks for the password. After they enter a correct password, they can view the insight or dashboard in that browser for 24 hours. After that, they need to enter the password again.
+
+### Removing access
+
+- **Remove one password:** Click the trash icon next to it. Anyone who used that password loses access immediately.
+- **Remove password protection:** Turn off **Password protect**. Anyone with the link can view it again.
+- **Stop sharing:** Turn off sharing. Nobody can view the link, with or without a password.
