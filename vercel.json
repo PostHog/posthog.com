@@ -482,6 +482,11 @@
             "statusCode": 301
         },
         {
+            "source": "/docs/data/activity-log:ext(\\.md)?",
+            "destination": "/docs/settings/activity-logs:ext?",
+            "statusCode": 301
+        },
+        {
             "source": "/docs/data/data-residency:ext(\\.md)?",
             "destination": "/docs/privacy/data-storage:ext?",
             "statusCode": 301
