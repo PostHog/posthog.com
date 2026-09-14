@@ -199,7 +199,7 @@ Trends support simple mathematical formulas, which makes it easy to create custo
 
 <iframe allowfullscreen width="100%" height="450" frameborder="0" src="https://app.posthog.com/embedded/VDVn0WRlvJdBomoFyy2Xg0Di2T1pEg"></iframe>
 
-Session replay is incredibly powerful. Knowing how many people reach your pricing, and where they came from, is useful. Seeing what they _do_ when they get there is truly actionable. Session replay is tightly integrated in PostHog, so you can quickly go from viewing a funnel insight to watching users who went through it. You get 5,000 recordings for free each month, and there are numerous ways to [limit how many you capture](https://posthog.com/tutorials/limit-session-recordings) if you want to be selective.
+Session replay is incredibly powerful. Knowing how many people reach your pricing, and where they came from, is useful. Seeing what they _do_ when they get there is truly actionable. Session replay is tightly integrated in PostHog, so you can quickly go from viewing a funnel insight to watching users who went through it. You get 5,000 web recordings and 2,500 mobile recordings for free each month, and there are numerous ways to [limit how many you capture](https://posthog.com/tutorials/limit-session-recordings) if you want to be selective.
 
 ### 4. Use the `Pageview` event to track unique users
 
@@ -239,7 +239,7 @@ This makes it an easy way to track new and returning visitors to your website, a
 
 - Direct [SQL querying](/docs/data-warehouse/sql) and customization.
 
-- Free for 1 million events and 5,000 session recordings per month, see [pricing for more](/pricing).
+- Free for 1 million events, 5,000 web session recordings, and 2,500 mobile session recordings per month, see [pricing for more](/pricing).
 
 ## Further reading
 
