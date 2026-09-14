@@ -46,7 +46,7 @@ To configure the channel, you need to provide the following details:
 
 This is the address that recipients will see in their inbox.
 
-Each sender address is a separate channel. You can add more senders later from the **Channels** tab, or in **Settings** > **Environment** > **Integrations**, which lists every email sender in the project. Only a sender that you add here shows in the **From** dropdown of an email step in the [workflow builder](/docs/workflows/workflow-builder).
+Each sender address is a separate channel, and only a sender that exists in the project shows in the **From** dropdown of an email step in the [workflow builder](/docs/workflows/workflow-builder). To add another sender later, use the **Channels** tab again. The **Settings** > **Integrations** page shows the senders that exist and lets you remove them, but you cannot add a sender there.
 
 To maximize deliverability and avoid spam folders, you must verify your domain.
 
@@ -167,7 +167,7 @@ Once your channel is created, you can use it in a workflow to deliver messages t
 
 | Issue | Solution |
 | --- | --- |
-| No address in the **From** dropdown? | The step can only use a sender that exists in the project. Add one on the [**Channels** tab](https://app.posthog.com/workflows/channels), or in **Settings** > **Environment** > **Integrations**, then select it in the step. |
+| No address in the **From** dropdown? | The step can only use a sender that exists in the project. Add one on the [**Channels** tab](https://app.posthog.com/workflows/channels), then select it in the step. |
 | Emails not sending? | Check that your domain is verified and you've added the DNS records correctly. |
 | Spam folder issues? | Ensure SPF/DKIM are valid, and consider setting up DMARC. |
 | Variables not populating? | Confirm the property exists on the person profile (e.g. `person.name`). |
