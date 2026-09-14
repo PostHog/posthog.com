@@ -5,6 +5,7 @@ import {
     IconConfetti,
     IconCursorClick,
     IconEye,
+    IconInfo,
     IconList,
     IconLlmAnalytics,
     IconMagic,
@@ -65,6 +66,13 @@ export const aiObservability = {
             props: { hideProductLabel: true },
         },
         {
+            slug: 'eli5',
+            name: 'What does it do?',
+            hideFromNav: true,
+            group: 'divided',
+            icon: <IconInfo className="size-4" />,
+        },
+        {
             slug: 'use-cases',
             name: 'Who is it for?',
             hideFromNav: true,
@@ -120,6 +128,7 @@ export const aiObservability = {
     ],
     overview: {
         title: 'Observe and fix AI in production',
+        eli5: 'AI Observability captures the full context of each trace and connects it to other PostHog products (like Session Replay). Evals score your live traffic and anomaly alerts tell you when things are not normal, so regressions in tool calling, response quality, or latency automatically turn into signals.',
         textColor: 'text-white',
         layout: 'overlay',
     },
@@ -152,6 +161,11 @@ export const aiObservability = {
         footerClasses: 'max-w-[220px]',
     },
     hogs: {
+        default: {
+            src: 'https://res.cloudinary.com/dmukukwp6/image/upload/pasted_image_2026_07_30_T02_00_13_105_Z_20a891ad6d.png',
+            alt: 'A hedgehog inspecting a trace with a magnifying glass',
+            showAtMediumWidth: true,
+        },
         // `mobileHog` renders on the Overview hero screenshot.
         mobileHog: {
             src: 'https://res.cloudinary.com/dmukukwp6/image/upload/pasted_image_2026_07_30_T02_00_13_105_Z_20a891ad6d.png',

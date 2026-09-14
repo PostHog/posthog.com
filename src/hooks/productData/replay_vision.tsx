@@ -2,7 +2,6 @@ import React from 'react'
 import { getWizardFrameworkRows } from 'constants/installation-taxonomy'
 import {
     IconEye,
-    IconSparkles,
     IconPeople,
     IconCursorClick,
     IconList,
@@ -217,6 +216,12 @@ export const replayVision = {
             icon: <IconEye className="size-4" />,
             props: { hideProductLabel: true },
         },
+        {
+            slug: 'eli5',
+            name: 'What does it do?',
+            hideFromNav: true,
+            icon: <IconInfo className="size-4" />,
+        },
         { slug: 'use-cases', name: 'Who is it for?', icon: <IconPeople className="size-4" /> },
         {
             slug: 'how-to-use',
@@ -285,6 +290,7 @@ export const replayVision = {
     ],
     overview: {
         title: 'Your product, watching itself',
+        eli5: 'Replay Vision watches your session recordings for you. Describe what to look for once, and a scanner reads every matching session, video and events, and turns what it sees into structured observations you can query, chart, and alert on.',
         textColor: 'text-black', // tw
     },
     screenshots: {
@@ -301,6 +307,13 @@ export const replayVision = {
             ['Support & UX Research', 'Classify what users were actually trying to do, at scale'],
             ['Founders', 'Skim a one-line summary of every session instead of spending hours watching them'],
         ],
+    },
+    hogs: {
+        default: {
+            src: 'https://res.cloudinary.com/dmukukwp6/image/upload/replay_hog_20fc000c14.png',
+            alt: 'A hedgehog directing a session replay',
+            showAtMediumWidth: true,
+        },
     },
     // Same install surface as Session Replay – pulls from the same source.
     installation: sessionReplay.installation,

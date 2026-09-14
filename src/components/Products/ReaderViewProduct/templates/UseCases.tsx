@@ -20,6 +20,7 @@ const UseCases = ({ id, productData }: SectionComponentProps) => {
     // The table caps out well short of the column, so the product hog fills the
     // gap on the right. Desktop only – on mobile there is no gap to fill.
     const hog = productData?.hogs?.default
+    const showHogAtMediumWidth = hog?.showAtMediumWidth
 
     if (!rows.length) return null
 
@@ -37,7 +38,13 @@ const UseCases = ({ id, productData }: SectionComponentProps) => {
                 width instead: a squeezed table wraps every cell to three lines,
                 which makes it tall, which in turn leaves the hog floating in
                 dead space. Both problems are the same problem. */}
-            <div className="grid grid-cols-1 gap-6 @5xl/reader-content:grid-cols-[minmax(0,1fr)_18rem] @5xl/reader-content:gap-8 items-stretch">
+            <div
+                className={
+                    showHogAtMediumWidth
+                        ? 'grid grid-cols-1 gap-6 items-stretch @2xl/reader-content:grid-cols-[minmax(0,1fr)_13rem] @2xl/reader-content:gap-6'
+                        : 'grid grid-cols-1 gap-6 items-stretch @5xl/reader-content:grid-cols-[minmax(0,1fr)_18rem] @5xl/reader-content:gap-8'
+                }
+            >
                 <div className="min-w-0">
                     <OSTable columns={columns} rows={tableRows} size="sm" rowAlignment="top" width="full" />
                 </div>
@@ -51,7 +58,11 @@ const UseCases = ({ id, productData }: SectionComponentProps) => {
                     <CloudinaryImage
                         src={hog.src}
                         alt={hog.alt || `${productData?.name} hedgehog`}
-                        className="hidden @5xl/reader-content:block relative"
+                        className={
+                            showHogAtMediumWidth
+                                ? 'hidden @2xl/reader-content:block relative'
+                                : 'hidden @5xl/reader-content:block relative'
+                        }
                         imgClassName="absolute inset-0 size-full object-contain"
                     />
                 )}
