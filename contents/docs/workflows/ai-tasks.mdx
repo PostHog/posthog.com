@@ -4,13 +4,7 @@ title: Run AI tasks from a workflow
 
 The **Create AI task** step starts an AI agent from a [workflow](/docs/workflows). The agent runs in the background with the tools you give it: a GitHub repository, connectors, skills, and your PostHog project. The workflow waits for the agent to finish, then continues with its result.
 
-Use it when an event, webhook, or schedule should kick off work, not only a message. The agent can investigate a support ticket and tag it, open a pull request from a webhook, or refresh a cohort every night.
-
-<CalloutBox icon="IconInfo" title="Watching rather than doing?" type="fyi">
-
-If you want an agent to watch a metric or a stream and report what it finds on a schedule, use a [scout](/docs/self-driving/scouts). An AI task in a workflow acts on the person or event that triggered it, and hands its result to the next step.
-
-</CalloutBox>
+Use it when an event, webhook, or schedule should kick off work, not only a message. The agent can investigate a support ticket and tag it, open a pull request from a webhook, or review every trial account once a week.
 
 ## Add the step
 
