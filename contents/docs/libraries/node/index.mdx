@@ -315,6 +315,77 @@ Properties and `distinctId` passed directly to `capture` take precedence over re
 
 If you're using [PostHog JS](/docs/libraries/js) on the frontend, configure [`tracing_headers`](/docs/libraries/js/config#tracing-headers) for your Express backend hostname so browser requests include `X-POSTHOG-SESSION-ID` and `X-POSTHOG-DISTINCT-ID`, which the Express middleware reads automatically.
 
+## Add request context and error capture to Fastify
+
+Use Fastify hooks with [`withContext`](#contexts) and `captureException` to capture request errors. Process-level `enableExceptionAutocapture` does not capture errors that Fastify handles.
+
+This example uses Fastify 5 and `posthog-node` 5.52.1. Register the hooks and error handler in the same Fastify scope as your routes, before those routes.
+
+```js file=server.mjs
+import Fastify from "fastify"
+import { PostHog } from "posthog-node"
+
+const app = Fastify()
+const posthog = new PostHog("<ph_project_token>", {
+    host: "<ph_client_api_host>",
+})
+
+// If you use authentication, register its onRequest hook before this hook.
+app.addHook("onRequest", (request, _reply, done) => {
+    posthog.withContext(
+        {
+            distinctId: request.user?.id,
+            properties: { $request_method: request.method, request_id: request.id },
+        },
+        done,
+        { fresh: true }
+    )
+})
+
+app.setErrorHandler((error, request, reply) => {
+    // Match Fastify's status precedence before applying the capture policy.
+    let statusCode = reply.statusCode >= 400 ? reply.statusCode : 500
+    if (error.status >= 400) {
+        statusCode = error.status
+    } else if (error.statusCode >= 400) {
+        statusCode = error.statusCode
+    }
+
+    // Optional application policy: capture server errors only.
+    if (statusCode >= 500) {
+        posthog.captureException(error, undefined, {
+            $response_status_code: statusCode,
+            $request_path: request.routeOptions.url,
+        })
+    }
+
+    // Keep Fastify's error serialization.
+    reply.code(statusCode).send(error)
+})
+
+app.addHook("onClose", async () => {
+    await posthog.shutdown()
+})
+
+app.get("/example", async () => {
+    throw new Error("Example request failed")
+})
+
+await app.listen({ port: 3000, host: "127.0.0.1" })
+```
+
+Keep `onRequest` callback-based, not `async`. Calling `done` inside `withContext` continues the request in that context. `{ fresh: true }` prevents inheritance from an outer context.
+
+`request.user` is application-owned, not a built-in Fastify identity. Populate it with a verified user and a string `id` in an earlier authentication hook. Without authentication, this example captures personless exceptions. If authentication runs later, pass the verified ID directly to `captureException` instead of `undefined`.
+
+Do not use `x-posthog-distinct-id` as proof of identity. Tracing headers are client-controlled analytics values, and this example does not read them. To link Session Replay, you can explicitly add a validated `sessionId` to the context. Never use it for authorization.
+
+The HTTP status filter is optional application logic, not an SDK default. Remove the `if` condition to capture handled 4xx errors too. Unknown-route 404 responses do not pass through `setErrorHandler`. If you already have an error handler, add the capture call there instead of replacing your response behavior. Avoid capturing the same error again in another hook.
+
+The example records the route pattern, not the raw URL, to avoid collecting query strings or path parameter values. Review error messages and other properties for sensitive data before capture. Fastify's default error response includes the error message, so use your application's response policy to hide internal details.
+
+During graceful termination, call and await `app.close()` from your application's shutdown handler. Fastify then runs `onClose`, which waits for PostHog to drain buffered events. Do not call `shutdown()` per request or exit the process before it finishes. Abrupt termination can lose queued events.
+
 ## Distributed tracing
 
 > Requires `posthog-node` version >= 5.52.0.
