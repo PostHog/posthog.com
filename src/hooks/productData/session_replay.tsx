@@ -48,7 +48,12 @@ export const sessionReplay = {
      * feed the carousel templates their slide arrays).
      */
     productMenu: [
-        { slug: 'overview', name: 'Overview', icon: <IconEye className="size-4" /> },
+        {
+            slug: 'overview',
+            name: 'Overview',
+            icon: <IconEye className="size-4" />,
+            props: { hideProductLabel: true },
+        },
         {
             slug: 'eli5',
             name: 'What does it do?',
@@ -68,26 +73,28 @@ export const sessionReplay = {
             name: 'How do I use it?',
             group: 'divided',
             icon: <IconCursorClick className="size-4" />,
-            props: { slides: applications },
+            props: { slides: applications, hideIntro: true, useSectionHeading: true },
         },
         {
             slug: 'top-features',
             name: 'Top features',
             group: 'divided',
             icon: <IconSparkles className="size-4" />,
-            props: { slides: topFeatures },
+            props: { slides: topFeatures, useSectionHeading: true },
         },
         {
             slug: 'ask-anything',
             name: 'AI prompts',
             group: 'divided',
             icon: <IconChat className="size-4" />,
+            props: { useSectionHeading: true },
         },
         {
             slug: 'installation',
             name: 'Install',
             group: 'divided',
             icon: <IconCode className="size-4" />,
+            props: { useSectionHeading: true },
         },
         {
             slug: 'feature-comparison',
@@ -112,8 +119,6 @@ export const sessionReplay = {
     ],
     overview: {
         title: 'See how people use your product',
-        description:
-            'Session Replay is one of the tools that makes your product self-driving: play back sessions to see exactly why something happened so the fix is obvious. The context agents use to debug UI issues and nuanced user behavior in your product, website, or mobile app.',
         eli5: "Session Replay records what happens in a user's session – clicks, scrolls, form inputs, page views, network requests, console logs – and plays it back like video. It's like watching a user's screen over their shoulder – it gives the nuance context you only get when you're actually watching them experience your product.",
         textColor: 'text-black', // tw
     },
@@ -312,7 +317,6 @@ export const sessionReplay = {
         },
     ],
     useCases: {
-        intro: 'Session Replay is used across teams depending on your role.',
         rows: [
             ['Product Engineers', "Debug production issues that can't be reproduced locally"],
             ['Support', 'Pinpoint the source of issues with visual verification and console logs'],

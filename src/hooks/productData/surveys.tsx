@@ -47,7 +47,12 @@ export const surveys = {
      * feed the carousel templates their slide arrays).
      */
     productMenu: [
-        { slug: 'overview', name: 'Overview', icon: <IconEye className="size-4" /> },
+        {
+            slug: 'overview',
+            name: 'Overview',
+            icon: <IconEye className="size-4" />,
+            props: { hideProductLabel: true },
+        },
         {
             slug: 'eli5',
             name: 'What does it do?',
@@ -67,26 +72,28 @@ export const surveys = {
             name: 'How do I use it?',
             group: 'divided',
             icon: <IconCursorClick className="size-4" />,
-            props: { slides: applications },
+            props: { slides: applications, hideIntro: true, useSectionHeading: true },
         },
         {
             slug: 'top-features',
             name: 'Top features',
             group: 'divided',
             icon: <IconSparkles className="size-4" />,
-            props: { slides: topFeatures },
+            props: { slides: topFeatures, useSectionHeading: true },
         },
         {
             slug: 'ask-anything',
             name: 'AI prompts',
             group: 'divided',
             icon: <IconChat className="size-4" />,
+            props: { useSectionHeading: true },
         },
         {
             slug: 'installation',
             name: 'Install',
             group: 'divided',
             icon: <IconCode className="size-4" />,
+            props: { useSectionHeading: true },
         },
         {
             slug: 'feature-comparison',
@@ -111,8 +118,6 @@ export const surveys = {
     ],
     overview: {
         title: 'Ask anything with no-code surveys',
-        description:
-            'Surveys is one of the tools that makes your product self-driving: the user feedback agents use to see what works. Built to natively work with product analytics, session replay, feature flags, and experiments.',
         eli5: 'Surveys let you ask users anything right inside your product – freeform text, multiple choice, NPS, ratings, emoji reactions – as a no-code popup or via the API. Target by URL, person properties, events, or Feature Flags so you ask the right people at the right moment. Responses connect to Product Analytics and Session Replay, so you can see who answered and what they were doing.',
         textColor: 'text-white', // tw
     },
@@ -173,7 +178,6 @@ export const surveys = {
         },
     },
     useCases: {
-        intro: 'Surveys is used across teams depending on your role.',
         rows: [
             ['Product Managers', 'Run NPS, PMF, and CSAT surveys, or book user interviews from in-app templates'],
             ['Product Engineers', 'Gather beta feedback tied to feature flags after a rollout'],

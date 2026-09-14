@@ -45,7 +45,12 @@ export const featureFlags = {
      * feed the carousel templates their slide arrays).
      */
     productMenu: [
-        { slug: 'overview', name: 'Overview', icon: <IconEye className="size-4" /> },
+        {
+            slug: 'overview',
+            name: 'Overview',
+            icon: <IconEye className="size-4" />,
+            props: { hideProductLabel: true },
+        },
         {
             slug: 'eli5',
             name: 'What does it do?',
@@ -65,26 +70,28 @@ export const featureFlags = {
             name: 'How do I use it?',
             group: 'divided',
             icon: <IconCursorClick className="size-4" />,
-            props: { slides: applications },
+            props: { slides: applications, hideIntro: true, useSectionHeading: true },
         },
         {
             slug: 'top-features',
             name: 'Top features',
             group: 'divided',
             icon: <IconSparkles className="size-4" />,
-            props: { slides: topFeatures },
+            props: { slides: topFeatures, useSectionHeading: true },
         },
         {
             slug: 'ask-anything',
             name: 'AI prompts',
             group: 'divided',
             icon: <IconChat className="size-4" />,
+            props: { useSectionHeading: true },
         },
         {
             slug: 'installation',
             name: 'Install',
             group: 'divided',
             icon: <IconCode className="size-4" />,
+            props: { useSectionHeading: true },
         },
         {
             slug: 'feature-comparison',
@@ -109,8 +116,6 @@ export const featureFlags = {
     ],
     overview: {
         title: 'Safely roll out features to specific users or groups',
-        description:
-            'Feature Flags is one of the tools that makes your product self-driving: the control layer agents use to roll a change out and roll it back. Built to work natively with product analytics, session replay, experiments, and surveys.',
         eli5: 'Feature Flags let you turn features on or off for specific users, groups, or percentages of traffic without redeploying code. Create a flag, check it in your app, then control who sees what from PostHog – phased rollouts, kill switches, multivariate variants, JSON payloads, and beta opt-ins. When something breaks, flip it off. When it works, roll it out wider and measure the impact in analytics and session replay.',
         textColor: 'text-white', // tw
     },
@@ -189,7 +194,6 @@ export const featureFlags = {
         },
     },
     useCases: {
-        intro: 'Feature Flags is used across teams depending on your role.',
         rows: [
             [
                 'Product Engineers',

@@ -1,18 +1,30 @@
-import React from 'react'
-import Editor from 'components/Editor'
+import React, { useRef } from 'react'
+import ReaderView from 'components/ReaderView'
 import SEO from 'components/seo'
 import useProduct from 'hooks/useProduct'
 import CloudinaryImage from 'components/CloudinaryImage'
 import OSButton from 'components/OSButton'
+import { buildProductMenuTabs, ProductSwitcher, type ProductNavItem } from 'components/Products/ReaderViewProduct'
+
+const productMenu: ProductNavItem[] = [
+    { slug: 'overview', name: 'Overview' },
+    { slug: 'heatmap-types', name: 'Three types of heatmaps' },
+    { slug: 'key-features', name: 'Key features' },
+    { slug: 'getting-started', name: 'Getting started' },
+    { slug: 'view-heatmaps', name: 'View heatmaps two ways' },
+]
 
 export default function Heatmaps() {
     const heatmapsProduct = useProduct({ handle: 'heatmaps' }) as any
+    const sectionsRef = useRef<HTMLDivElement>(null)
 
     if (!heatmapsProduct) {
         return <div>Product not found</div>
     }
 
     const { name, overview, features, Icon, color, screenshots, seo } = heatmapsProduct
+    const productData = { ...heatmapsProduct, productMenu }
+    const menuTabs = buildProductMenuTabs({ productData, contentRef: sectionsRef, activeSurface: 'product' })
 
     return (
         <>
@@ -21,9 +33,16 @@ export default function Heatmaps() {
                 description={seo?.description}
                 image="/images/og/default.png"
             />
-            <Editor>
-                <div className="space-y-8">
-                    <div>
+            <ReaderView
+                title={name}
+                hideTitle
+                proseSize="lg"
+                showQuestions={false}
+                menuTabs={menuTabs}
+                productSelect={<ProductSwitcher activeHandle={heatmapsProduct.handle} />}
+            >
+                <div ref={sectionsRef} className="space-y-8">
+                    <section id="overview" className="scroll-mt-20">
                         <div className="flex gap-2 items-center">
                             {Icon && (
                                 <div className={`size-8 my-4 text-${color}`}>
@@ -38,7 +57,7 @@ export default function Heatmaps() {
                             clicks, mouse movements, scrolling behavior, and discover where users get frustrated with
                             rageclicks.
                         </p>
-                    </div>
+                    </section>
 
                     {/* Main heatmap screenshot */}
                     <CloudinaryImage
@@ -47,7 +66,7 @@ export default function Heatmaps() {
                         className="w-full rounded-md shadow-lg"
                     />
 
-                    <div>
+                    <section id="heatmap-types" className="scroll-mt-20">
                         <h2>Three types of heatmaps</h2>
                         <div className="space-y-6">
                             <div>
@@ -89,9 +108,9 @@ export default function Heatmaps() {
                                 />
                             </div>
                         </div>
-                    </div>
+                    </section>
 
-                    <div>
+                    <section id="key-features" className="scroll-mt-20">
                         <h2>Key features</h2>
                         <div className="space-y-6">
                             <div>
@@ -166,9 +185,9 @@ export default function Heatmaps() {
                         <p className="text-sm opacity-70 mb-0">
                             Note: Clickmaps require autocapture to be enabled, and scrollmaps require pageleave events.
                         </p>
-                    </div>
+                    </section>
 
-                    <div>
+                    <section id="getting-started" className="scroll-mt-20">
                         <h2>Getting started</h2>
                         <p className="mb-6">Follow these steps to start using heatmaps in PostHog:</p>
                         <h3>Enable heatmap data capture</h3>
@@ -181,9 +200,9 @@ export default function Heatmaps() {
                             alt="Heatmap settings configuration"
                             className="w-full rounded-md shadow-lg mt-4"
                         />
-                    </div>
+                    </section>
 
-                    <div>
+                    <section id="view-heatmaps" className="scroll-mt-20">
                         <h2>View heatmaps two ways</h2>
                         <div className="space-y-6">
                             <div className="">
@@ -207,7 +226,7 @@ export default function Heatmaps() {
                                 />
                             </div>
                         </div>
-                    </div>
+                    </section>
 
                     {screenshots && screenshots.additional && (
                         <div className="space-y-4">
@@ -223,7 +242,7 @@ export default function Heatmaps() {
                         </div>
                     )}
 
-                    <div className="grid md:grid-cols-2 gap-4">
+                    <div className="grid @2xl/reader-content:grid-cols-2 gap-4">
                         <OSButton
                             asLink
                             variant="primary"
@@ -246,7 +265,7 @@ export default function Heatmaps() {
                         </OSButton>
                     </div>
                 </div>
-            </Editor>
+            </ReaderView>
         </>
     )
 }

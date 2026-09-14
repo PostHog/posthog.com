@@ -1,14 +1,23 @@
 import { graphql, useStaticQuery } from 'gatsby'
-import React from 'react'
-import Editor from 'components/Editor'
+import React, { useRef } from 'react'
+import ReaderView from 'components/ReaderView'
 import SEO from 'components/seo'
 import useProduct from 'hooks/useProduct'
 import { PricingTiers } from 'components/Pricing/Plans'
 import { allProductsData } from 'components/Pricing/Pricing'
+import { buildProductMenuTabs, ProductSwitcher, type ProductNavItem } from 'components/Products/ReaderViewProduct'
+
+const productMenu: ProductNavItem[] = [
+    { slug: 'overview', name: 'Overview' },
+    { slug: 'use-cases', name: 'Example use cases' },
+    { slug: 'pricing', name: 'Pricing' },
+    { slug: 'getting-started', name: 'Get started' },
+]
 
 export default function GroupAnalytics() {
     // Get product data from useProduct hook
     const groupAnalyticsProduct = useProduct({ handle: 'group_analytics' }) as any
+    const sectionsRef = useRef<HTMLDivElement>(null)
 
     // Get billing data from GraphQL
     const {
@@ -32,6 +41,8 @@ export default function GroupAnalytics() {
     }
 
     const { overview, features, Icon, color } = groupAnalyticsProduct
+    const productData = { ...groupAnalyticsProduct, productMenu }
+    const menuTabs = buildProductMenuTabs({ productData, contentRef: sectionsRef, activeSurface: 'product' })
     const plan = groupAnalyticsAddon?.plans?.[groupAnalyticsAddon.plans.length - 1]
     const freeAllocation = plan?.tiers?.find((tier: any) => tier.unit_amount_usd === '0')?.up_to
 
@@ -42,16 +53,16 @@ export default function GroupAnalytics() {
                 description={overview?.description || 'Analyze multi-seat accounts and other groups'}
                 image="/images/og/default.png"
             />
-            <Editor
-                maxWidth="65ch"
-                proseSize="base"
-                bookmark={{
-                    title: overview?.title || 'Group Analytics',
-                    description: overview?.description || '',
-                }}
+            <ReaderView
+                title={overview?.title || 'Group Analytics'}
+                hideTitle
+                proseSize="lg"
+                showQuestions={false}
+                menuTabs={menuTabs}
+                productSelect={<ProductSwitcher activeHandle={groupAnalyticsProduct.handle} />}
             >
-                <div className="space-y-8">
-                    <div>
+                <div ref={sectionsRef} className="space-y-8">
+                    <section id="overview" className="scroll-mt-20">
                         {Icon && (
                             <div className={`size-8 my-4 text-${color}`}>
                                 <Icon />
@@ -63,10 +74,10 @@ export default function GroupAnalytics() {
                             accounts and other groups.
                         </div>
                         <p className="">{overview?.description}</p>
-                    </div>
+                    </section>
 
                     {features && features.length > 0 && (
-                        <div>
+                        <section id="use-cases" className="scroll-mt-20">
                             <h2>Example use cases</h2>
                             <div className="space-y-6">
                                 {features.map((feature: any, index: number) => (
@@ -81,10 +92,10 @@ export default function GroupAnalytics() {
                                     </div>
                                 ))}
                             </div>
-                        </div>
+                        </section>
                     )}
 
-                    <div>
+                    <section id="pricing" className="scroll-mt-20">
                         <h2>Pricing</h2>
                         {groupAnalyticsAddon && (
                             <>
@@ -131,14 +142,17 @@ export default function GroupAnalytics() {
                                         </div>
                                     </div>
                                 )}
-
-                                <h2>Get started</h2>
-                                <p>Subscribe to add-ons after signing up.</p>
                             </>
                         )}
-                    </div>
+                    </section>
+                    {groupAnalyticsAddon && (
+                        <section id="getting-started" className="scroll-mt-20">
+                            <h2>Get started</h2>
+                            <p>Subscribe to add-ons after signing up.</p>
+                        </section>
+                    )}
                 </div>
-            </Editor>
+            </ReaderView>
         </>
     )
 }

@@ -45,7 +45,12 @@ export const workflows = {
      * feed the carousel templates their slide arrays).
      */
     productMenu: [
-        { slug: 'overview', name: 'Overview', icon: <IconEye className="size-4" /> },
+        {
+            slug: 'overview',
+            name: 'Overview',
+            icon: <IconEye className="size-4" />,
+            props: { hideProductLabel: true },
+        },
         {
             slug: 'eli5',
             name: 'What does it do?',
@@ -65,26 +70,28 @@ export const workflows = {
             name: 'How do I use it?',
             group: 'divided',
             icon: <IconCursorClick className="size-4" />,
-            props: { slides: applications },
+            props: { slides: applications, hideIntro: true, useSectionHeading: true },
         },
         {
             slug: 'top-features',
             name: 'Top features',
             group: 'divided',
             icon: <IconSparkles className="size-4" />,
-            props: { slides: topFeatures },
+            props: { slides: topFeatures, useSectionHeading: true },
         },
         {
             slug: 'ask-anything',
             name: 'AI prompts',
             group: 'divided',
             icon: <IconChat className="size-4" />,
+            props: { useSectionHeading: true },
         },
         {
             slug: 'installation',
             name: 'Install',
             group: 'divided',
             icon: <IconCode className="size-4" />,
+            props: { useSectionHeading: true },
         },
         {
             slug: 'feature-comparison',
@@ -109,8 +116,6 @@ export const workflows = {
     ],
     overview: {
         title: 'Automate workflows with product data',
-        description:
-            'Workflows is one of the tools that makes your product self-driving: the actions agents take to close the loop. Trigger Slack messages, emails, or events based on live user behavior.',
         // Reshaped from contents/docs/workflows/index.mdx + start-here.mdx
         eli5: (
             <>
@@ -118,12 +123,6 @@ export const workflows = {
                     Workflows is PostHog's no-code, drag-and-drop tool for automating processes and sending messages to
                     your users. You decide when a workflow is triggered, who it reaches, and what happens at each step –
                     triggers, delays, audience splits, message sends, and PostHog actions.
-                </p>
-                <p>
-                    Because workflows run on the same events and person properties you already send to PostHog, you can
-                    act on real product behavior instead of a separate marketing dataset. Any real-time destination in
-                    PostHog can be dropped into a workflow as a dispatch step, so one tool covers both messaging and
-                    automation.
                 </p>
             </>
         ),
@@ -169,7 +168,6 @@ export const workflows = {
     },
     // Roles reshaped from contents/teams/workflows/index.mdx ICP + pairsWith use cases.
     useCases: {
-        intro: 'Workflows is used across teams depending on your role.',
         rows: [
             [
                 'Product Leads / Technical PMs',
