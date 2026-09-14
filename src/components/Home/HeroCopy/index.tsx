@@ -5,7 +5,7 @@ import { cn } from '../../../utils'
 import { DEFAULT_HERO_COPY_VARIANT, resolveHeroCopyVariant } from './variants'
 import type { HeroCopyVariant } from './variants'
 
-export const HERO_COPY_FLAG = 'homepage-hero-copy'
+export const HERO_COPY_FLAG = 'homepage-hero-copy-v2'
 
 function assignedVariant(posthog: ReturnType<typeof usePostHog>): HeroCopyVariant {
     return resolveHeroCopyVariant(posthog?.getFeatureFlag?.(HERO_COPY_FLAG)) ?? DEFAULT_HERO_COPY_VARIANT
@@ -40,8 +40,9 @@ function BodySlot(): JSX.Element {
  * in two slots rather than one. Both read the same flag, so a visitor always gets a matched pair.
  *
  * Unlike the CTA slot, these render the control copy as the placeholder instead of nothing: the
- * hero holds the page's only `h1`, and it has to be in the server-rendered HTML for SEO. The cost
- * is that a visitor in a test variant sees control copy until flags resolve, then sees it swap.
+ * hero holds the page's only `h1`, and it has to be in the server-rendered HTML for SEO. The
+ * placeholder is invisible so a visitor in the test variant does not see the control copy flash
+ * before the assigned variant paints.
  */
 export const HeroHeadline = ({ className }: { className?: string }): JSX.Element => (
     <RenderInClient

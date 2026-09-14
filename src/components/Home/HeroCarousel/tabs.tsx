@@ -1,6 +1,6 @@
 import React from 'react'
 import { OnePlaceSlide, UnderstandUsageSlide, DebugFixSlide, TestRolloutSlide } from './slides'
-import { PullRequestSlide, FixBugsSlide, AskAnythingSlide } from './homeSlides'
+import { ShipWithPostHogSlide, AskAnythingSlide, GiveAgentsContext } from './homeSlides'
 
 export interface Tab {
     value: string
@@ -59,16 +59,16 @@ export const buildTabs: Tab[] = [
     },
     {
         value: 'slack',
-        label: 'Fix bugs from Slack',
-        content: <PullRequestSlide />,
+        label: 'Give agents product context',
+        content: <GiveAgentsContext />,
         color: 'bg-red',
         activeText: 'text-white',
         progressBar: 'bg-white shadow-[0_0_6px_2px_rgba(255,255,255,0.4)]',
     },
     {
         value: 'fix-bugs',
-        label: 'Automatic improvements',
-        content: <FixBugsSlide />,
+        label: 'Ship with PostHog',
+        content: <ShipWithPostHogSlide />,
         color: 'bg-blue',
         activeText: 'text-white',
         progressBar: 'bg-white shadow-[0_0_6px_2px_rgba(0,0,0,0.2)]',

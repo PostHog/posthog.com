@@ -14,7 +14,7 @@ import {
     IconRocket,
     IconSparkles,
 } from '@posthog/icons'
-import { FIFTY_MILLION, MAX_PRODUCT_ANALYTICS, MILLION, TEN_MILLION } from 'components/Pricing/pricingLogic'
+import { MAX_PRODUCT_ANALYTICS, MILLION, TEN_MILLION } from 'components/Pricing/pricingLogic'
 import Link from 'components/Link'
 import MCPInstall from 'components/Products/MCPInstall'
 import { getTool } from '../../data/tools'
@@ -179,7 +179,7 @@ export const webAnalytics = {
     },
     // Same event volume slider as product analytics (web analytics is billed with it).
     slider: {
-        marks: [MILLION, TEN_MILLION, FIFTY_MILLION, MAX_PRODUCT_ANALYTICS],
+        marks: [MILLION, TEN_MILLION, MAX_PRODUCT_ANALYTICS],
         min: MILLION,
         max: MAX_PRODUCT_ANALYTICS,
     },

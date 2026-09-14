@@ -581,7 +581,7 @@ Jump to a specific category:
 - Which features are the most problematic for these users?
 - How do error rates change after app updates for these users?
 
-**How to track it:** Create a [SQL](/docs/product-analytics/sql) insight with the following query:
+**How to track it:** Create a [SQL](/docs/data-warehouse/sql) insight with the following query:
 
 ```sql
 WITH user_pageviews AS (
