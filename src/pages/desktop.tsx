@@ -50,6 +50,7 @@ import {
     StickerMayor,
     StickerPullRequest,
     StickerAi,
+    StickerCloud,
     StickerRobot,
 } from 'components/Stickers/Stickers'
 import CloudinaryImage from 'components/CloudinaryImage'
@@ -1834,6 +1835,98 @@ const SupportedLLMs = () => {
     )
 }
 
+const cloudEnvironmentItems = [
+    {
+        Icon: IconStack,
+        label: 'Environments',
+        desc: 'The profile a cloud session runs under: which repos it works on, which hosts it can reach, and the image it starts from. Keep one to yourself or share it with the team.',
+    },
+    {
+        Icon: IconBrowser,
+        label: 'Access',
+        desc: 'Pick the trusted domain list, the whole internet, or your own allowlist. The API keys and tokens you add are encrypted, and never shown back to you.',
+    },
+    {
+        Icon: IconTerminal,
+        label: 'Base images',
+        desc: 'Build an image once with your tools and dependencies installed, then start any environment from it. Sessions stop reinstalling the world on every run.',
+    },
+]
+
+// Cloud agents: the "close the lid, they keep going" pitch. Sits between the model list and the
+// MCP marketplace so it doesn't butt up against the self-driving box further down the page.
+const CloudAgentsCallout = () => {
+    return (
+        <section className="relative mb-12 @xl:mb-16 px-4 @xl:px-8">
+            <div className="relative overflow-hidden rounded-md border border-blue bg-gradient-to-br from-blue/20 via-blue/5 to-purple/10 shadow-xl">
+                <div className="relative z-10 grid gap-6 p-6 @2xl:grid-cols-2 @2xl:items-center @2xl:gap-10 @2xl:p-8">
+                    <div>
+                        <div className="mb-4 flex items-center gap-2">
+                            <StickerCloud className="size-8 -rotate-3" />
+                            <h2 className="m-0 text-2xl font-bold">Start seven agents, then shut your laptop</h2>
+                        </div>
+                        <p className="text-base">
+                            Pick Cloud in the task composer and the task runs in a PostHog-managed sandbox instead of on
+                            your machine. Quit the app, sleep the laptop, change networks: the agents keep building, and
+                            the branches are waiting when you get back. Tasks move between cloud and local mid-flight,
+                            with the conversation and any uncommitted changes.
+                        </p>
+                        <ul className="m-0 mb-6 list-none space-y-3 p-0">
+                            {cloudEnvironmentItems.map(({ Icon, label, desc }) => (
+                                <li key={label}>
+                                    <div className="flex items-center gap-1.5">
+                                        <Icon className="size-5 shrink-0 text-blue" />
+                                        <span className="text-base font-bold text-primary">{label}</span>
+                                    </div>
+                                    <p className="m-0 mt-1 text-sm leading-snug text-secondary">{desc}</p>
+                                </li>
+                            ))}
+                        </ul>
+                        <OSButton
+                            asLink
+                            to="/docs/posthog-desktop/environments"
+                            state={{ newWindow: true }}
+                            variant="primary"
+                            size="md"
+                        >
+                            Set up an environment
+                        </OSButton>
+                    </div>
+
+                    <div className="relative">
+                        {/* Decorative clouds around the artwork, clear of the copy */}
+                        <CloudinaryImage
+                            src="https://res.cloudinary.com/dmukukwp6/image/upload/cloud_1_6ec7ea72d6.svg"
+                            alt=""
+                            aria-hidden
+                            className="pointer-events-none absolute left-0 top-6 z-0 w-16 opacity-50 @xl:w-24"
+                            imgClassName="w-full"
+                        />
+                        <CloudinaryImage
+                            src="https://res.cloudinary.com/dmukukwp6/image/upload/cloud_2_553c4f548d.svg"
+                            alt=""
+                            aria-hidden
+                            className="pointer-events-none absolute bottom-10 right-0 z-0 w-12 opacity-40 @xl:w-16"
+                            imgClassName="w-full"
+                        />
+                        <div className="relative z-10 mx-auto w-full max-w-xs @2xl:max-w-sm">
+                            <CloudinaryImage
+                                src="https://res.cloudinary.com/dmukukwp6/image/upload/cloud_hog_katy_237c11a9fe.png"
+                                alt="A hedgehog in a pink wig lounging on a cloud with a candy swirl"
+                                className="w-full"
+                                imgClassName="w-full"
+                            />
+                        </div>
+                        <p className="m-0 mt-3 text-center text-sm text-secondary">
+                            Seven agents building, zero laptops open. Baby, you're a firewall.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    )
+}
+
 const MCPMarketplace = () => {
     return (
         <section className="relative mb-12 @xl:mb-16 px-4 @xl:px-8">
@@ -2433,6 +2526,8 @@ export default function CodePage() {
                         <SkillsCallout />
 
                         <SupportedLLMs />
+
+                        <CloudAgentsCallout />
 
                         <MCPMarketplace />
 
