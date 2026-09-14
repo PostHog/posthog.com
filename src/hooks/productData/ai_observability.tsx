@@ -12,10 +12,7 @@ import {
     IconPieChart,
     IconRocket,
     IconSparkles,
-    IconWarning,
 } from '@posthog/icons'
-import OldWaySection from 'components/AIObservability/OldWaySection'
-import PostHogWaySection from 'components/AIObservability/PostHogWaySection'
 import { getTool } from '../../data/tools'
 import { features } from './ai_observability/features'
 import { applications, topFeatures, wizardSupports } from './ai_observability/slides'
@@ -61,20 +58,11 @@ export const aiObservability = {
      * feed the carousel templates their slide arrays).
      */
     productMenu: [
-        { slug: 'overview', name: 'Overview', icon: <IconEye className="size-4" /> },
         {
-            slug: 'old-way',
-            name: 'The old way',
-            component: OldWaySection,
-            group: 'divided',
-            icon: <IconWarning className="size-4" />,
-        },
-        {
-            slug: 'posthog-way',
-            name: 'The PostHog way',
-            component: PostHogWaySection,
-            group: 'divided',
-            icon: <IconSparkles className="size-4" />,
+            slug: 'overview',
+            name: 'Overview',
+            icon: <IconEye className="size-4" />,
+            props: { hideProductLabel: true },
         },
         {
             slug: 'use-cases',
@@ -88,20 +76,21 @@ export const aiObservability = {
             name: 'How do I use it?',
             group: 'divided',
             icon: <IconCursorClick className="size-4" />,
-            props: { slides: applications },
+            props: { slides: applications, hideIntro: true, useSectionHeading: true },
         },
         {
             slug: 'top-features',
             name: 'Top features',
             group: 'divided',
             icon: <IconSparkles className="size-4" />,
-            props: { slides: topFeatures },
+            props: { slides: topFeatures, useSectionHeading: true },
         },
         {
             slug: 'ask-anything',
             name: 'AI prompts',
             group: 'divided',
             icon: <IconChat className="size-4" />,
+            props: { useSectionHeading: true },
         },
         { slug: 'pairs-with', name: 'Pairs with...', hideFromNav: true, icon: <IconConfetti className="size-4" /> },
         {
@@ -131,10 +120,6 @@ export const aiObservability = {
     ],
     overview: {
         title: 'Observe and fix AI in production',
-        description:
-            'Trace agent loops, evaluate live traffic, and get alerted when cost, latency, or quality slips. Self-driving uses this context to automatically make improvements and fix issues.',
-        // eli5 retired in favor of the old-way/PostHog-way sections – same story,
-        // told as the two flow diagrams.
         textColor: 'text-white',
         layout: 'overlay',
     },
@@ -167,12 +152,6 @@ export const aiObservability = {
         footerClasses: 'max-w-[220px]',
     },
     hogs: {
-        // The detective hog is the product's identity – every hog slot on the
-        // page uses it (per review).
-        default: {
-            src: 'https://res.cloudinary.com/dmukukwp6/image/upload/pasted_image_2026_07_30_T02_00_13_105_Z_20a891ad6d.png',
-            alt: 'A hedgehog inspecting a trace with a magnifying glass',
-        },
         // `mobileHog` renders on the Overview hero screenshot.
         mobileHog: {
             src: 'https://res.cloudinary.com/dmukukwp6/image/upload/pasted_image_2026_07_30_T02_00_13_105_Z_20a891ad6d.png',
@@ -198,7 +177,6 @@ export const aiObservability = {
         },
     },
     useCases: {
-        intro: 'Different teams pull different answers from the same LLM data.',
         rows: [
             ['AI Engineers', 'Debug traces span by span and set up evals to catch quality regressions'],
             ['Product Engineers', 'Tie failed generations and latency spikes back to the users who hit them'],

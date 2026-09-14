@@ -35,7 +35,12 @@ export const support = {
      * to a section template via `templateRegistry[item.template ?? item.slug]`.
      */
     productMenu: [
-        { slug: 'overview', name: 'Overview', icon: <IconEye className="size-4" /> },
+        {
+            slug: 'overview',
+            name: 'Overview',
+            icon: <IconEye className="size-4" />,
+            props: { hideProductLabel: true },
+        },
         {
             slug: 'eli5',
             name: 'What does it do?',
@@ -55,20 +60,21 @@ export const support = {
             name: 'How do I use it?',
             group: 'divided',
             icon: <IconCursorClick className="size-4" />,
-            props: { slides: applications },
+            props: { slides: applications, hideIntro: true, useSectionHeading: true },
         },
         {
             slug: 'top-features',
             name: 'Top features',
             group: 'divided',
             icon: <IconSparkles className="size-4" />,
-            props: { slides: topFeatures },
+            props: { slides: topFeatures, useSectionHeading: true },
         },
         {
             slug: 'ask-anything',
             name: 'AI prompts',
             group: 'divided',
             icon: <IconChat className="size-4" />,
+            props: { useSectionHeading: true },
         },
         { slug: 'pairs-with', name: 'Pairs with...', hideFromNav: true, icon: <IconConfetti className="size-4" /> },
         {
@@ -88,23 +94,16 @@ export const support = {
     ],
     overview: {
         title: 'One place for every user conversation',
-        description:
-            'Support is one of the tools that makes your product self-driving: a helpdesk where you can solve tickets that arrive with full user context. Agents can turn these tickets into PRs, proposing fixes and improvements for your review.',
         eli5: 'Support is a helpdesk for solving customer tickets, which arrive from an in-app chat widget, email, Slack, or GitHub. Tickets arrive with full context from other PostHog tools, like session replays, recent events, and errors. Recurring problems get picked up by agents as signal, so PostHog can draft pull requests to ship improvements.',
         textColor: 'text-black', // tw
     },
     hogs: {
-        default: {
+        mobileHog: {
             src: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog_ai_hogs_d4c45b4550.png',
             alt: 'A support team of hedgehogs at their desks',
         },
-        mobileHog: {
-            src: 'https://res.cloudinary.com/dmukukwp6/image/upload/hog_phone_638d7d1ae4.png',
-            alt: 'A hedgehog answering a ticket on the phone',
-        },
     },
     useCases: {
-        intro: 'Support is used across teams depending on your role.',
         rows: [
             [
                 'Product engineers',

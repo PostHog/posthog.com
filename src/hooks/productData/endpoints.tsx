@@ -48,7 +48,12 @@ export const endpoints = {
      * `props` is passed straight to the resolved section component.
      */
     productMenu: [
-        { slug: 'overview', name: 'Overview', icon: <IconEye className="size-4" /> },
+        {
+            slug: 'overview',
+            name: 'Overview',
+            icon: <IconEye className="size-4" />,
+            props: { hideProductLabel: true },
+        },
         {
             slug: 'eli5',
             name: 'What does it do?',
@@ -68,20 +73,21 @@ export const endpoints = {
             name: 'How do I use it?',
             group: 'divided',
             icon: <IconCursorClick className="size-4" />,
-            props: { slides: applications },
+            props: { slides: applications, hideIntro: true, useSectionHeading: true },
         },
         {
             slug: 'top-features',
             name: 'Top features',
             group: 'divided',
             icon: <IconSparkles className="size-4" />,
-            props: { slides: topFeatures },
+            props: { slides: topFeatures, useSectionHeading: true },
         },
         {
             slug: 'ask-anything',
             name: 'AI prompts',
             group: 'divided',
             icon: <IconChat className="size-4" />,
+            props: { useSectionHeading: true },
         },
         // No `installation` section: Endpoints isn't an SDK install product.
         // Getting started is create-an-endpoint → call the URL (see docs start-here).
@@ -110,8 +116,6 @@ export const endpoints = {
     ],
     overview: {
         title: 'Custom API endpoints powered by your PostHog data',
-        description:
-            "Use them to build embedded analytics, data feeds, and more – no backend required. Endpoints are how your product's context flows out to the agents and tools that make it self-driving.",
         eli5: 'Endpoints turns any saved insight or SQL query into a stable, authenticated HTTP URL. You define the query once in PostHog – filters, breakdowns, variables, and all – and your app, agent, or internal tool fetches the results over HTTP. No custom analytics backend, no CSV exports on Monday, no Query API spaghetti. Versioning, caching, materialization, and an OpenAPI spec come with it.',
         textColor: 'text-black',
         layout: 'overlay',
@@ -156,7 +160,6 @@ export const endpoints = {
         footerClasses: 'max-w-[550px]',
     },
     useCases: {
-        intro: 'Endpoints is used across teams depending on your role.',
         rows: [
             [
                 'Product Engineers',

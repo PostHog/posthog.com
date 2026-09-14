@@ -59,7 +59,12 @@ export const webAnalytics = {
      * feed the carousel templates their slide arrays).
      */
     productMenu: [
-        { slug: 'overview', name: 'Overview', icon: <IconEye className="size-4" /> },
+        {
+            slug: 'overview',
+            name: 'Overview',
+            icon: <IconEye className="size-4" />,
+            props: { hideProductLabel: true },
+        },
         {
             slug: 'eli5',
             name: 'What does it do?',
@@ -79,26 +84,28 @@ export const webAnalytics = {
             name: 'How do I use it?',
             group: 'divided',
             icon: <IconCursorClick className="size-4" />,
-            props: { slides: applications },
+            props: { slides: applications, hideIntro: true, useSectionHeading: true },
         },
         {
             slug: 'top-features',
             name: 'Top features',
             group: 'divided',
             icon: <IconSparkles className="size-4" />,
-            props: { slides: topFeatures },
+            props: { slides: topFeatures, useSectionHeading: true },
         },
         {
             slug: 'ask-anything',
             name: 'AI prompts',
             group: 'divided',
             icon: <IconChat className="size-4" />,
+            props: { useSectionHeading: true },
         },
         {
             slug: 'installation',
             name: 'Install',
             group: 'divided',
             icon: <IconCode className="size-4" />,
+            props: { useSectionHeading: true },
         },
         {
             slug: 'feature-comparison',
@@ -124,8 +131,6 @@ export const webAnalytics = {
     ],
     overview: {
         title: 'Privacy-focused web analytics',
-        description:
-            'Web analytics is one of the tools that makes your product self-driving: the lightweight measurement layer that feeds agents traffic context. Built to natively work with session replay, feature flags, experiments, and surveys.',
         eli5: 'Web Analytics is a pre-built dashboard for website traffic – visitors, pageviews, sessions, bounce rate, referrers, UTMs, and Core Web Vitals – without the GA4 maze. Drop in a snippet (or use a no-code install), get real-time data, and optionally skip cookies entirely. Same events power product analytics and session replay when you want to go deeper.',
         textColor: 'text-[#063619]', // tw
     },
@@ -200,7 +205,6 @@ export const webAnalytics = {
         },
     },
     useCases: {
-        intro: 'Web Analytics is used across teams depending on your role.',
         rows: [
             ['Growth Marketers', 'See which channels, UTMs, and landing pages drive visits and conversions'],
             ['Founders', 'Check traffic health on a pre-built dashboard without waiting on a data team'],
