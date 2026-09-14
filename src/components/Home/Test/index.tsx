@@ -26,9 +26,11 @@ import ToolsTicker from 'components/Home/ToolsTicker'
 import PlatformInstall, { wizardInstallSchema } from 'components/PlatformInstall'
 import HeroCTA from 'components/Home/HeroCTA'
 import { HeroBody, HeroHeadline } from 'components/Home/HeroCopy'
+import { cn } from '../../../utils'
 import HeroCarousel from 'components/Home/HeroCarousel'
 import { buildTabs } from 'components/Home/HeroCarousel/tabs'
 import Customers from '../Customers'
+import { RenderInClient } from 'components/RenderInClient'
 
 const SecondaryActions = ({
     justify = 'center',
@@ -157,6 +159,85 @@ function Hero(): JSX.Element {
     )
 }
 
+const HomeContent = () => (
+    <div className="space-y-12">
+        <Hero />
+        <Customers />
+        <DataStackSection />
+        <PricingSection />
+        <WhyPostHogSection />
+        <BedtimeReadingSection />
+        <ShamelessCTASection />
+        <HitCounter />
+    </div>
+)
+
+const Bone = ({ className }: { className?: string }) => (
+    <div className={cn('bg-accent animate-pulse rounded-md', className)} />
+)
+
+function HomeLoading(): JSX.Element {
+    return (
+        <>
+            <div className="@container space-y-12" aria-busy="true" aria-live="polite">
+                <div className="text-center @xl:text-left min-w-0">
+                    <div className="flex gap-1 flex-wrap justify-center @xl:justify-start !text-2xl mb-12 pt-2">
+                        <Logo className="max-w-[157px] dark:hidden" width="auto" />
+                        <Logo className="hidden max-w-[157px] dark:block" variant="mono" color="white" width="auto" />
+                    </div>
+
+                    <div className="group grid @xl:grid-cols-2 @xl:gap-x-8 min-w-0">
+                        <div className="@xl:row-start-1 @xl:col-start-1 @xl:col-span-2 @xl:group-has-[[data-cta-aligned]]:col-span-1 space-y-3 mb-4">
+                            <Bone className="h-9 @xl:h-10 w-[min(100%,28rem)] mx-auto @xl:mx-0" />
+                            <Bone className="h-9 @xl:h-10 w-[min(80%,18rem)] mx-auto @xl:mx-0" />
+                        </div>
+
+                        <div className="min-w-0 @xl:row-start-2 @xl:col-start-1 space-y-2">
+                            <Bone className="h-4 w-full" />
+                            <Bone className="h-4 w-[92%]" />
+                            <Bone className="h-4 w-[70%]" />
+                        </div>
+
+                        <div
+                            data-cta-aligned=""
+                            className="mt-6 flex flex-col items-center min-w-0 w-full @xl:mt-0 @xl:row-start-1 @xl:row-span-2 @xl:col-start-2 @xl:justify-start"
+                        >
+                            <div className="w-full max-w-md min-w-0 border border-primary rounded-md bg-primary shadow-2xl animate-pulse">
+                                <div className="p-4 space-y-3">
+                                    <Bone className="h-6 w-40" />
+                                    <Bone className="h-4 w-3/4" />
+                                    <Bone className="h-4 w-2/3" />
+                                    <Bone className="h-4 w-4/5" />
+                                    <div className="flex gap-2 pt-1">
+                                        <Bone className="h-10 flex-1" />
+                                        <Bone className="h-10 flex-1" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div className="mb-4">
+                    <div className="flex gap-2">
+                        <Bone className="h-10 flex-1 rounded-none rounded-t-md" />
+                        <Bone className="h-10 flex-1 rounded-none rounded-t-md" />
+                        <Bone className="h-10 flex-1 rounded-none rounded-t-md" />
+                    </div>
+                    <div className="min-h-[300px] @[820px]:min-h-[400px] p-2 rounded-b-md bg-accent animate-pulse">
+                        <div className="bg-primary w-full min-h-[284px] @[820px]:min-h-[384px] shadow-2xl rounded" />
+                    </div>
+                </div>
+
+                <Bone className="h-8 w-full mb-8" />
+            </div>
+            <div className="invisible">
+                <HomeContent />
+            </div>
+        </>
+    )
+}
+
 export default function HomeTest() {
     const { appWindow } = useWindow()
     const { setWindowTitle } = useApp()
@@ -169,16 +250,7 @@ export default function HomeTest() {
 
     return (
         <ReaderView proseSize="lg" hideLeftSidebar showQuestions={false}>
-            <div className="space-y-12">
-                <Hero />
-                <Customers />
-                <DataStackSection />
-                <PricingSection />
-                <WhyPostHogSection />
-                <BedtimeReadingSection />
-                <ShamelessCTASection />
-                <HitCounter />
-            </div>
+            <RenderInClient render={HomeContent} placeholder={<HomeLoading />} />
         </ReaderView>
     )
 }
