@@ -93,7 +93,7 @@ const Overview = ({ id, productData, hideProductLabel = false }: OverviewProps) 
                         {overview?.description && <p className="leading-relaxed">{overview.description}</p>}
                     </div>
                     <div>
-                        <CTAs wizardCommand={productData?.wizardCommand} />
+                        <CTAs wizardCommand={productData?.wizardCommand} links={productData?.ctaLinks} />
                     </div>
                 </div>
             </header>

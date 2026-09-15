@@ -118,6 +118,19 @@
     ],
     "redirects": [
         {
+            "source": "/docs/replay-vision/actions:ext(\\.md)?",
+            "destination": "/docs/replay-vision/scouts:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/kbd",
+            "destination": "/"
+        },
+        {
+            "source": "/credits",
+            "destination": "/"
+        },
+        {
             "source": "/blog/posthog-vs-fathom",
             "destination": "/compare/posthog-vs-fathom"
         },
@@ -471,6 +484,11 @@
         {
             "source": "/docs/data/cookieless-tracking.md",
             "destination": "/tutorials/cookieless-tracking",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/data/activity-log:ext(\\.md)?",
+            "destination": "/docs/settings/activity-logs:ext?",
             "statusCode": 301
         },
         {
@@ -6280,7 +6298,7 @@
         },
         {
             "source": "/docs/replay-vision/webhooks",
-            "destination": "/docs/replay-vision/actions#webhooks",
+            "destination": "/docs/replay-vision/scouts#webhooks",
             "statusCode": 301
         },
         {
