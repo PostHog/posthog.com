@@ -315,7 +315,6 @@ export const replayVision = {
         default: {
             src: 'https://res.cloudinary.com/dmukukwp6/image/upload/replay_hog_20fc000c14.png',
             alt: 'A hedgehog directing a session replay',
-            showAtMediumWidth: true,
         },
     },
     // Same install surface as Session Replay – pulls from the same source.

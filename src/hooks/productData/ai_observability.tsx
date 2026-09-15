@@ -162,7 +162,6 @@ export const aiObservability = {
         default: {
             src: 'https://res.cloudinary.com/dmukukwp6/image/upload/pasted_image_2026_07_30_T02_00_13_105_Z_20a891ad6d.png',
             alt: 'A hedgehog inspecting a trace with a magnifying glass',
-            showAtMediumWidth: true,
         },
         // `mobileHog` renders on the Overview hero screenshot.
         mobileHog: {
