@@ -168,6 +168,34 @@ For example:
 
 Because the classification reads the raw user agent, this works for any event that carries one – including server-side and `$http_log` traffic – using the standard insight builder.
 
+## Custom bot rules
+
+The built-in list only covers bots that identify themselves. If a scraper matters to you but is missing from it – an internal load test, a partner integration, or a bot only recognizable by a combination of properties – add your own rules in **Settings** > **Customization** > **Custom bots**. Changing rules requires project admin access.
+
+A rule has a name, a category, and one or more conditions. Each condition reads a single event property and matches it one of four ways:
+
+| Matcher          | Behavior                                                                         |
+| ---------------- | -------------------------------------------------------------------------------- |
+| `contains`       | Case-insensitive substring match                                                 |
+| `equals`         | Case-sensitive match against the whole value                                     |
+| `matches regex`  | An [RE2-compatible](https://github.com/google/re2/wiki/Syntax) regular expression |
+| `is in range`    | An IP network range like `192.0.2.0/24`. Only works with the IP address property |
+
+Conditions can read the raw user agent, IP address, library, host, path name, current URL, browser, OS, browser language, screen width, screen height, country code, referrer, or referring domain.
+
+A rule with several conditions combines them with **all** (every condition must match) or **any** (one match is enough). That's how you catch a bot no single property gives away. For example, a headless browser that always reports an 800x600 screen:
+
+- Name the rule `Headless 800x600` and set its category to **Headless browser**
+- Add a condition: **Screen width** `equals` `800`
+- Add a second condition: **Screen height** `equals` `600`
+- Keep the combiner on **all**
+
+Events matching every condition now classify as bots everywhere the functions and virtual properties above are available. Your rules run before the built-in list, so a rule that matches a known bot renames or recategorizes it. When two of your rules match the same event, the one higher in the list wins – drag rules to reorder them.
+
+The **Test a value** section under the editor checks sample values against your rules as you type, so you can confirm a rule matches before saving.
+
+A few limits keep query cost bounded: up to 50 rules per project, up to 10 conditions per rule, and up to 100 conditions across all rules. Rules can also be managed programmatically through the `web_analytics_bot_rules` [API endpoints](/docs/api).
+
 ## How classification works
 
 Classification uses two signals:
