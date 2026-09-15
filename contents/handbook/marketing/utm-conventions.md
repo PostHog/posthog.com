@@ -75,4 +75,4 @@ Three words in `utm_campaign` change the channel type, so avoid them unless they
 
 ## Reviewing a campaign
 
-A day after launch, open the [web analytics](https://us.posthog.com/project/2/web) channel report, filter it to the campaign name, and check that the sessions arrive in the channel you expect. A wrong value is cheap to correct on day one. It is impossible to correct later, because PostHog calculates the channel from the values already stored on the session.
+A day after launch, open the [web analytics](https://us.posthog.com/project/2/web) channel report, filter it to the campaign name, and check that the sessions arrive in the channel you expect. A wrong value is cheap to correct on day one. You cannot change the values already stored on a session. A [custom channel type](/docs/data/channel-type#custom-channel-types) rule that matches the wrong values still repairs the report for the sessions already recorded, because PostHog calculates the channel each time somebody opens the report. Keep such a rule narrow, because it applies to every session that carries those values.
