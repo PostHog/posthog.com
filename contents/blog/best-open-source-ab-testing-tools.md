@@ -78,7 +78,7 @@ PostHog is ideal for product teams and engineers, particularly those who don't w
 
 ### How much does PostHog cost?
 
-Experiments are billed under feature flag requests, which are [free up to 1 million requests](/pricing) per month alongside 1 million analytics events, 5,000 web session recordings, and 2,500 mobile session recordings. After the free monthly allowance, you'll pay $0.0001/request, and requests cost progressively less the more you use. You can set billing limits to ensure you don't get surprise bills. 
+Experiments are billed under feature flag requests, which are [free up to 1 million requests](/pricing) per month alongside 1 million analytics events, 5,000 web and 2,500 mobile session recordings. After the free monthly allowance, you'll pay $0.0001/request, and requests cost progressively less the more you use. You can set billing limits to ensure you don't get surprise bills. 
 
 While PostHog is open source, its A/B testing features aren't included in the open source release – you'll need the free cloud tier to access them.
 
