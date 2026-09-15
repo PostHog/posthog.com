@@ -21,16 +21,16 @@ You're only billed for actionable reports that become a pull request. Reports th
 
 ## How PostHog assesses actionability
 
-Before a [report](/docs/self-driving/reports) can become a pull request, an agent investigates it. It digs into your codebase and your PostHog data to confirm the problem is real and to work out whether there's a concrete change it could make. Based on what it finds, every report lands in one of two states:
+Before a [report](/docs/self-driving/reports) can become a pull request, an agent investigates it. It digs into your codebase and your PostHog data to confirm the problem is real and to work out whether there's a concrete change it could make. Based on what it finds, every report that reaches your inbox is in one of two states:
 
 - **PR (= actionable):** There's a clear code change an agent can make right now.
 - **Report (= needs input):** A finding worth your attention that requires input, such as business context or a trade-off between several valid approaches.
 
-If the agent finds no path to a code change, the finding does not become a report. PostHog holds it back from your inbox.
+If the agent finds no path to a code change, PostHog suppresses the report, so it does not reach your inbox.
 
 ## What's free
 
-- Non-actionable findings that do not reach your inbox
+- Non-actionable reports that do not reach your inbox
 - Your first 3 pull requests each month
 
 ## Track your self-driving usage
