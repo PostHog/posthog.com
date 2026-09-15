@@ -411,9 +411,6 @@ const StaticChangelogList = ({ roadmaps }: { roadmaps: RoadmapNode[] }) => {
     return (
         <ScrollArea className="h-full">
             <div className="max-w-3xl mx-auto px-4 pb-8">
-                <p className="text-sm text-secondary">
-                    Also available as <a href="/changelog.md">Markdown</a> and <a href="/changelog.rss">RSS</a>.
-                </p>
                 {byMonth.map(([month, items]) => {
                     const fullDetail = fullDetailCutoff ? !dayjs.utc(month).isBefore(fullDetailCutoff) : true
                     return (
@@ -1070,26 +1067,38 @@ export default function Changelog({
                                 onCategoryChange={(value) => filterNavigate('category', value)}
                                 categoryFilterValue={categoryFilter}
                             />
-                            {isModerator && (
-                                <div className="space-x-1">
-                                    <Tooltip
-                                        trigger={<OSButton size="md" icon={<IconPlus />} onClick={handleAddFeature} />}
-                                        delay={0}
-                                    >
-                                        <IconShieldLock className="size-6 inline-block relative -top-px text-secondary" />{' '}
-                                        Add roadmap item
-                                    </Tooltip>
-                                    <Tooltip
-                                        trigger={
-                                            <OSButton size="md" icon={<IconDownload />} onClick={handleDownloadCSV} />
-                                        }
-                                        delay={0}
-                                    >
-                                        <IconShieldLock className="size-6 inline-block relative -top-px text-secondary" />{' '}
-                                        Download as CSV
-                                    </Tooltip>
-                                </div>
-                            )}
+                            <div className="flex items-center gap-2">
+                                <p className="text-sm text-secondary m-0">
+                                    Also available as <a href="/changelog.rss">RSS</a> and{' '}
+                                    <a href="/changelog.md">Markdown</a>.
+                                </p>
+                                {isModerator && (
+                                    <div className="space-x-1">
+                                        <Tooltip
+                                            trigger={
+                                                <OSButton size="md" icon={<IconPlus />} onClick={handleAddFeature} />
+                                            }
+                                            delay={0}
+                                        >
+                                            <IconShieldLock className="size-6 inline-block relative -top-px text-secondary" />{' '}
+                                            Add roadmap item
+                                        </Tooltip>
+                                        <Tooltip
+                                            trigger={
+                                                <OSButton
+                                                    size="md"
+                                                    icon={<IconDownload />}
+                                                    onClick={handleDownloadCSV}
+                                                />
+                                            }
+                                            delay={0}
+                                        >
+                                            <IconShieldLock className="size-6 inline-block relative -top-px text-secondary" />{' '}
+                                            Download as CSV
+                                        </Tooltip>
+                                    </div>
+                                )}
+                            </div>
                         </div>
 
                         <div className={`min-h-0 flex-grow pt-2 ${hideEmpty ? 'mb-4' : ''}`}>
