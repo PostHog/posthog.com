@@ -17,6 +17,8 @@ Every definition below is at the **organization** level (PostHog's `organization
 - **PostHog staff inside customer orgs**: exclude events where the person's `email` contains `@posthog.com`.
 - **Impersonated sessions**: exclude events with `was_impersonated = true`. Impersonation carries the *customer's* identity, so the email filter doesn't catch it.
 
+**Ready-made actions:** the event-based definitions (Intent, Engaged, Teammate invited, Teammate joined) exist as [actions](https://us.posthog.com/project/2/data-management/actions?search=%5BRevOps%20def%5D) in project 2, named `[RevOps def] …` and tagged `revops-def`. Each action carries the same events and property filters as its table below, so use it in insights and funnels with "unique organizations" math, or in SQL with `matchesAction('[RevOps def] Org engaged')`. The actions do **not** apply the standard exclusions – add those in the insight. Setup and Paying have no action because they read billing tables, not events.
+
 **Organization vs. customer/billing account:** the billing tables (`prod_postgres_billing_usagereport`, `prod_postgres_billing_customer`) also have a `customer_id` a billing system identifier separate from `organization_id`. Today these are the same level: `organization_id` and billing `customer_id` are 1:1 and `prod_postgres_billing_customer` has a single `organization_id` per customer row so there's no way to attach multiple orgs to one billing customer in the current schema.
 
 ## Intent
@@ -44,6 +46,7 @@ Both the start and the finish of the same flow qualify (`onboarding started` and
 
 Some events that look similar but do not qualify: the `<field> team setting updated` events (e.g. `heatmaps_opt_in team setting updated`). Onboarding saves default settings in bulk, so these fire for nearly every new org – they look like deliberate toggles but usually aren't. Use the toggle events above instead.
 
+Action: [`[RevOps def] Org intent`](https://us.posthog.com/project/2/data-management/actions/363709).
 
 ## Setup
 
@@ -62,6 +65,8 @@ One known blind spot: customer automation can outlive its usefulness. A forgotte
 The threshold is deliberately a single event. The quality bar lives in *which* events qualify, not how many times they fire – a count threshold would also quietly set a lower bar for chatty surfaces (one dashboard session emits dozens of events; one Slack question emits two). For health questions, add a window and a tier on top instead: **recurring engagement** = qualifying events on 2+ distinct days in the window, and **team engagement** = 2+ distinct engaged users. 
 
 Related: one action often produces several qualifying events. An agent creating a dashboard over MCP fires both `$mcp_tool_call` and `dashboard created` (with `source = 'mcp'`); opening a dashboard in the app fires `viewed dashboard` plus a `query executed` per tile. Harmless for the definition but another reason never to read summed event counts as "number of actions".
+
+Action: [`[RevOps def] Org engaged`](https://us.posthog.com/project/2/data-management/actions/363712) – consuming and creating events together, with the `source` allowlist and the two historical `source IS NULL` windows below built in.
 
 ### The `source` allowlist
 
@@ -132,11 +137,13 @@ Before adding an event, check all four:
 3. **It's captured where the action happens** (the request or UI layer), never inside a query runner or data pipeline.
 4. **It's convincing on its own.** These definitions are a list of alternatives, so one bad event wrongly marks orgs no matter how good the rest are.
 
-Server-side events also need the `source` allowlist. 
+Server-side events also need the `source` allowlist. When the page changes, update the matching `[RevOps def]` action in the same change so the two stay identical.
 
 ## Teammate invited
 
 An org has invited a teammate if it has any of the following events: `team member invited`, `user invited`, `bulk invite executed`.
+
+Action: [`[RevOps def] Teammate invited`](https://us.posthog.com/project/2/data-management/actions/363710).
 
 ## Teammate joined
 
@@ -145,6 +152,8 @@ An org has a second teammate once any of these fire:
 - `user joined organization` – an existing PostHog account accepting an invite into the org
 
 Both are server-side and carry the organization group. Invited is the weak signal (an email was sent); joined is the strong one (a second human is in the org). One gap: an existing user who auto-joins through a verified SSO domain fires no event.
+
+Action: [`[RevOps def] Teammate joined`](https://us.posthog.com/project/2/data-management/actions/363711).
 
 ## Paying / revenue
 
