@@ -22,7 +22,13 @@ const query = (params: any, offset: number) => {
 export const usePosts = ({ params }: { params?: any }) => {
     const { data, size, setSize, isLoading, error, mutate, isValidating } = useSWRInfinite(
         (offset) => `${process.env.GATSBY_SQUEAK_API_HOST}/api/posts?${query(params, offset)}`,
-        (url: string) => fetch(url).then((r) => r.json())
+        async (url: string) => {
+            const res = await fetch(url)
+            if (!res.ok) {
+                throw new Error(`Posts request failed with status ${res.status}`)
+            }
+            return res.json()
+        }
     )
     const posts = React.useMemo(() => {
         return data?.reduce((acc, cur) => [...(acc || []), ...(cur.data || [])], []) ?? []
@@ -34,6 +40,7 @@ export const usePosts = ({ params }: { params?: any }) => {
     return {
         posts,
         isLoading,
+        error,
         isValidating,
         fetchMore: () => setSize(size + 1),
         mutate,

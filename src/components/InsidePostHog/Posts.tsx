@@ -12,7 +12,8 @@ const FeaturedPostSkeleton = () => {
     return <div className="w-full h-96 animate-pulse bg-accent rounded-md" />
 }
 
-const FeaturedPost = ({ attributes: { featuredImage, title, excerpt, post_category, slug } }) => {
+const FeaturedPost = ({ attributes }) => {
+    const { featuredImage, title, excerpt, post_category, slug } = attributes || {}
     return (
         <Link className="prose font-normal" to={slug}>
             <img className="w-full mb-0" src={featuredImage?.url} />
@@ -25,7 +26,8 @@ const FeaturedPost = ({ attributes: { featuredImage, title, excerpt, post_catego
     )
 }
 
-const PostPreview = ({ attributes: { featuredImage, title, excerpt, post_category, slug } }) => {
+const PostPreview = ({ attributes }) => {
+    const { featuredImage, title, excerpt, post_category, slug } = attributes || {}
     return (
         <Link
             to={slug}
@@ -46,7 +48,7 @@ const PostPreview = ({ attributes: { featuredImage, title, excerpt, post_categor
 }
 
 export default function Posts() {
-    const { posts, isLoading } = usePosts({
+    const { posts, isLoading, error } = usePosts({
         params: {
             filters: {
                 $and: [
@@ -110,16 +112,26 @@ export default function Posts() {
         },
     })
 
+    const [featuredPost, ...morePosts] = posts || []
+
     return (
         <div className="@container space-y-8 @lg:space-y-4 [&>span]:block">
-            {isLoading ? <FeaturedPostSkeleton /> : <FeaturedPost {...posts?.[0]} />}
-
             {isLoading ? (
-                <PostPreviewSkeleton />
+                <>
+                    <FeaturedPostSkeleton />
+                    <PostPreviewSkeleton />
+                </>
+            ) : featuredPost ? (
+                <>
+                    <FeaturedPost {...featuredPost} />
+                    {morePosts.slice(0, 2).map((post, index) => {
+                        return <PostPreview key={index} {...post} />
+                    })}
+                </>
             ) : (
-                posts?.slice(1, 3).map((post, index) => {
-                    return <PostPreview key={index} {...post} />
-                })
+                <p className="text-secondary m-0">
+                    {error ? "Posts didn't load. Try again later." : 'No posts to show right now.'}
+                </p>
             )}
 
             <div>
