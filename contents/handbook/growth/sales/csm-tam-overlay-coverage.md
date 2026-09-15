@@ -8,7 +8,7 @@ Some accounts have both a CSM and a TAM. Why we cover accounts that way is in [a
 
 Both roles have a real relationship with the customer. Both are in the Slack channel. Both know what's happening on the account. The difference is _focus_, not ownership. The customer should never have to figure out who to contact: they reach out to either person, and PostHog sorts it out internally.
 
-Everything below is a habit for getting the most out of having two people on an account, each playing to their strengths, so scale it to the account. A strategic account (our [Top 40](/handbook/growth/sales/account-allocation#top-40-account-management) are the clearest example) with several teams in play and a renewal coming justifies real structure. A smaller growth account with one champion and a single use case usually doesn't, so treat this as a starting point to adapt rather than a checklist to comply with.
+Everything below is a habit for getting the most out of having two people on an account, each playing to their strengths, so scale it to the account. A strategic account (our [Top 40](/handbook/growth/sales/account-allocation#top-40-account-management) are the clearest example) with several teams in play and a renewal coming justifies more structure. A smaller growth account with one champion and a single use case usually doesn't, so treat this as a starting point to adapt rather than a checklist to comply with.
 
 ## What each role focuses on
 
@@ -71,9 +71,7 @@ Everything below is a habit for getting the most out of having two people on an 
 
 # **Where to expect overlap**
 
-Some of the work genuinely belongs to both of you, and that's the point rather than a flaw in the split. Two people who never touch the same ground aren't an overlay, they're two accounts that happen to share a customer.
-
-What causes trouble is never the overlap itself. It's the overlap neither of you named out loud. These are the places it reliably shows up.
+There will be overlap and you will step on each other's toes, but that's by design. The end goal isn't to have a perfect division of work between the two roles, but to play to your strengths and work towards the goals set for each account. Here are some areas where you should expect overlap:
 
 ## Renewals
 
@@ -87,23 +85,22 @@ A competitor turning up ahead of a renewal on a CSM-only account is one of the c
 
 The [health score](/handbook/cs-and-onboarding/health-tracking) is a customer success instrument, so the CSM owns reading it and keeping it current. That doesn't make it the CSM's problem alone.
 
-Resist the urge to divide the score up by role. It's weighted to answer one question, "is this account at risk", and splitting it by owner gets you two people watching numbers that can't answer their own question. Product engagement makes up most of the score and is a lagging signal by design, so what you spot there is usually confirmation rather than warning. Total product count, probably the most useful headroom signal a TAM has, is a rounding error inside the weighting. And an account-level score averages away a single team going quiet, which bites hardest on strategic accounts where several teams use PostHog for different things.
+Dividing the score up by role is tempting, but it tends not to get you much. It's weighted to answer one question, "is this account at risk". Product engagement makes up most of the score and is a lagging signal by design, so what you spot there is usually confirmation rather than warning. Total product count, probably the most useful headroom signal a TAM has, is a rounding error inside the weighting. And an account-level score averages away a single team going quiet, which is most likely on strategic accounts where several teams use PostHog for different things.
 
-What works better:
+A few things that tend to work better:
 
 - **Same numbers, different questions.** The CSM asks what's degrading and why. The TAM asks where the headroom is and which teams aren't represented in the usage yet.
-- **Read it together on your regular sync.** Pull the account up and each say what you think it means. Ten minutes of that beats any amount of dividing the metrics up between you.
-- **Whoever sees a component hit "Poor" posts it in the channel**, whatever it relates to. No component belongs to one person.
-
-If a full [health check](/handbook/cs-and-onboarding/health-checks) is due, agree in the channel who's running it and who's reviewing the output before it goes to the customer.
+- **Read it together on your regular sync.** Pull the account up and each say what you think it means. Ten minutes of that beats dividing the metrics up between you.
+- **Say something when a component hits "Poor"**, whoever spots it and whatever it relates to.
+- **Keep an eye on `#spike-detector`** for your accounts. It flags usage moving sharply in either direction, and both directions are worth a look: a jump might be a new team onboarding or a misconfiguration, a drop might be a team going quiet. Ask your team lead to tag you as owner on your accounts so you see the ones that concern you.
 
 ## When cost efficiency and growth pull against each other
 
-The CSM's job includes helping a customer spend less. The TAM's job includes growing the account. Sooner or later those point in opposite directions on the same account, and pretending they don't is how one of you gets blindsided.
+The CSM's job includes helping a customer spend less. The TAM's job includes growing the account. Sooner or later those point in opposite directions on the same account.
 
-The customer's efficiency wins. A customer paying for waste has a reason to leave, and a right-sized customer is a far better expansion candidate than a resentful one.
+The customer's efficiency should win out. A customer paying for waste has a reason to leave, and a right-sized customer is a better expansion candidate than a resentful one.
 
-What matters here is the process, not the conclusion:
+How you get there matters as much as where you land:
 
 - **Surface before you recommend.** If you're about to advise something that changes what the customer spends, say so in the internal channel first. Your counterpart may have a conversation in flight that you can't see.
 - **Log the work as you do it**, in the internal channel and then in the account plan. Usage moves for all sorts of reasons, and a record of what you changed and when is the difference between a known optimization and an unexplained drop.
@@ -111,11 +108,11 @@ What matters here is the process, not the conclusion:
 
 ## When you disagree
 
-Most of the time the lists above settle it: whoever's focus area it sits in makes the call. Where it's genuinely shared ground, default to whoever is closest to the live conversation with the customer, and have them post what they've decided and why.
+Most of the time the lists above settle it, and whoever's focus area it sits in makes the call. Where it's shared ground, a reasonable default is whoever is closest to the live conversation with the customer, with a note in the channel on what they've decided and why.
 
-Two things are worth holding to. Work it out in the channel rather than in DMs, so the reasoning is there for whoever picks the account up later. And once one of you has committed to something with the customer, the other backs it and you sort out the disagreement internally. A customer who can see daylight between the two of you will use it.
+A couple of things worth keeping to. Work it out in the channel rather than in DMs, so the reasoning is there for whoever picks the account up later. And once one of you has committed to something with the customer, it's usually better for the other to back it and sort the disagreement out internally, since a customer who can see daylight between the two of you will use it.
 
-If you're genuinely stuck, bring your team leads in early. Neither of you needs to win an argument about an account you both care about.
+If you're stuck, bring your team leads in early. Remember, both of you will be coming from a place of truly caring about the customer and wanting to see them succeed, so it's rarely a disagreement about where you're trying to get to.
 
 # **Kicking off the CSM + TAM overlay**
 
@@ -127,7 +124,7 @@ When a TAM joins an account, or a CSM picks up an account that already has one, 
 - [ ] Whoever is joining posts their own read of the account, plus an action item they're picking up
 - [ ] Regular internal sync booked with your counterpart, if you don't already have one for another account
 - [ ] TAM creates an account plan note in Customer Analytics once they have a read on priorities for the account
-- [ ] Two links easy to get at in the channel: a light org map and a running task list ([more on these below](#tracking-people-and-tasks))
+- [ ] Two shared artifacts accessible to everyone: a light org map of users you're actively pursuing or working with, and a running task list. These can live anywhere as long as there's an easy link available in the channel: Slack canvas, Customer Analytics note, Google Doc, etc.
 - [ ] Any important dates (renewal, 6 month discount expiry, projected credit depletion) shared in the internal channel
 
 The internal channel effectively replaces DMs between TAMs and CSMs related to the account. Your public collaboration there will be a huge service to future teammates who might inherit it.
@@ -180,35 +177,35 @@ If you're aware of any low-hanging fruit that would land well with the customer,
 
 # **Staying in sync**
 
-However you split it, the failure mode is the same: everything ends up in the channel and nothing survives the week. Here's one split that avoids that.
+A handful of things are worth giving a home, so neither of you has to scroll back through the channel to work out where the account got to.
 
 | What | Where | Why there |
 | --- | --- | --- |
-| Per-call agenda and follow-up | Thread in the internal channel | Tied to a date, notifies you both, and the prep sits next to the outcome |
-| Who's who on the customer side | The org map linked in the channel | One current version, and there's no value in the history |
+| Per-call agenda | Thread in the internal channel | Tied to a date, and it notifies you both |
+| Who's who on the customer side | The org map linked in the channel | One place to look, kept current as people come and go |
 | Open follow-ups and who owns them | The running task list linked in the channel | You both need the current list at a glance, not scattered through a channel |
 | Anything a future owner would need | Account plan note in Customer Analytics | Searchable, and it outlives the channel |
 
-The part worth keeping whatever setup you land on: **if losing it would hurt whoever inherits this account, it shouldn't live only in a working doc.**
+## Agenda & call threads
 
-## Call threads
+For a call worth preparing for, start a thread in the internal channel a few days ahead and draft the agenda together: who covers what, who leads which section, and roughly how long each part should get. Aligning on that beforehand, rather than working it out live, tends to make for a far more impactful call with the customer.
 
-For a call that matters, a thread in the internal channel a few days ahead is worth the two minutes. Whoever booked it is the obvious person to start it, since they're holding the invite, but if there's no thread the day before then either of you can. A routine check-in probably doesn't need one at all.
+Whoever booked the call is the obvious person to start the thread, since they're holding the invite, but either of you can. A routine check-in probably doesn't need one at all.
 
-Use the thread to draft the agenda together and split it: who covers what, who leads which section, and what each of you wants out of the call.
+## Following up afterwards
 
-Whoever set the call up and led it owns the follow-up, and it goes in the same thread so the prep and the outcome stay together. Cover what happened, the next steps that came out of it, and your read on who should pick up what between the two of you. Propose the split rather than leaving it open. It's much easier for your counterpart to correct a suggestion than to work out the division themselves from a list of notes. Once you've agreed the split, the follow-up items move onto the task list.
+After a call, or an async touchpoint that moved something along, update the two artifacts: add anyone new to the org map, and add a dated section to the task list with the follow-ups against each of your names.
 
-Two people on a call with no agreed split is how a customer ends up answering the same question twice.
+A message in the internal channel to debrief is worth it too, if you'd prefer: what happened, what's next, and your read on who picks up what. Proposing the split is easier for your counterpart to react to than a list of notes they have to divide up themselves.
 
 ## Tracking people and tasks
 
 You both need to be able to answer who someone is, and whether something got done, without asking the other person. So each internal customer channel wants two links that are easy to get at, pinned or in the channel bookmarks:
 
-- **A light org map.** Who you've met on the account, what they do, and which of you has the relationship. Rewritten as it changes, since only the current picture matters.
-- **A running task list.** Added to rather than rewritten, so you can see what was done as easily as what's still outstanding.
+- **A light org map.** Who you've met on the account or who you're pursuing, what they do, and which of you has the relationship.
+- **A running task list.** Added to rather than rewritten, so you can see what was done as easily as what's still outstanding. Dated sections work well: a one-line heading for what happened that day, then the follow-ups underneath it.
 
-What those two things actually are is up to the pair. A Slack canvas, a note in Customer Analytics, a running Google Doc, whatever the two of you will keep current. The examples below use canvases in the internal channel because they sit where the conversation already happens, but the shape matters more than the tool. On a smaller account, a single pinned message often does both jobs with less to maintain.
+What those two things are is up to the pair. A Slack canvas, a note in Customer Analytics, a running Google Doc, whatever the two of you will keep current. The examples below use canvases in the internal channel because they sit where the conversation already happens, but the shape matters more than the tool. On a smaller account, a single pinned message often does both jobs with less to maintain.
 
 <details>
 <summary>Example: an org map as a canvas</summary>
@@ -228,15 +225,15 @@ The goal isn't to map the entire org, it's to have something easy to refer back 
 <details>
 <summary>Example: a running task list as a canvas</summary>
 
-A canvas called `[customer_name] - Tasks`. After every conversation with the customer, add a new section at the top with the date and the topics covered in the heading, then a checklist of the follow-up items with the CSM or TAM against each:
+A canvas called `[customer_name] - Tasks`. After every conversation with the customer, add a new dated section at the top with a one-line heading for what happened, then a checklist of the follow-up items with the CSM or TAM against each:
 
-**12 Sep, renewal prep and the Experiments issues**
+**Sep 12, 2026 - Call with champion re: renewal prep and Experiments issues**
 
 - [x] Send the event volume breakdown ahead of the call (CSM)
 - [ ] Follow up with Sam's team on the warehouse question (TAM)
 - [ ] Get the flag naming convention written up (CSM)
 
-**28 Aug, implementation review**
+**Aug 28, 2026 - Implementation review with the platform team**
 
 - [x] Walk through the replay sampling config (CSM)
 - [x] Intro the TAM to the data lead (CSM)
@@ -244,11 +241,11 @@ A canvas called `[customer_name] - Tasks`. After every conversation with the cus
 Older sections stay where they are. That's what makes the list useful three months later, when one of you is trying to remember whether anyone ever answered the warehouse question.
 </details>
 
-Whichever you use, it only works if it's maintained, and that doesn't take long. Recording who has the relationship is the useful part of the org map: it means one of you is the person who notices when that contact goes quiet, and is their first port of call. It's worth checking that no champion has been left without a name against them, because an unowned champion is how accounts go dark without anyone noticing.
+Whichever you use, it only works if it's maintained, and that doesn't take long. Recording who has the relationship is the useful part of the org map: it means one of you is the person who notices when that contact goes quiet, and is their first port of call.
 
 On tasks, keep the newest at the top and put a name on every item. If something has sat unchecked across three conversations, it's either not happening or it's blocked, and both are worth saying out loud in the channel.
 
-Neither doc is searchable the way Customer Analytics is, so roll the developments that matter into the account plan note as you go. That keeps the working docs short enough to actually read, and gives whoever inherits the account something they can find.
+Neither doc is searchable the way Customer Analytics is, so roll the developments that matter into the account plan note as you go. That keeps the working docs short enough to read, and gives whoever inherits the account something they can find.
 
 ## Sharing DMs
 
@@ -260,13 +257,13 @@ Drop a short summary into the internal channel whenever a DM changes the plan, s
 
 On strategic accounts, default to both of you on most customer calls. We don't run many calls in the first place, the context you each pick up is usually worth more than the hour, and these are the accounts where being surprised by something your counterpart said costs the most.
 
-On smaller growth accounts that's overkill. One of you running a routine check-in is fine as long as the follow-up lands in the internal channel, and it's a better use of the other person's day.
+On smaller growth accounts, both of you joining every call is likely overkill. One of you running a routine check-in is fine as long as the follow-up lands in the internal channel, and it's a better use of the other person's day.
 
 Wherever the account sits, the calls worth both of you being on are the ones where the relationship or the commercial picture is changing: renewals, business reviews, a competitor showing up, anything going sideways. And if you're both on, split the agenda beforehand.
 
-## Cadence
+## Sync cadence
 
-A monthly sync between the two of you is a reasonable baseline, and worth making more frequent if you co-own several accounts and have more to get through than a month fits. Use one sync to cover every account you share rather than one per account. It's the one slot where you're both looking at the same account at the same time, which is usually when overlapping plans and gaps actually surface. The internal channel carries everything in between.
+Meet once a month, and feel free to meet more often in between if you need to. Either way, make sure what comes out of it makes its way back to the internal customer channel for visibility, since most of it has a bearing on account planning.
 
 # **How to divide & conquer without blocking each other**
 
@@ -305,7 +302,7 @@ How can you both be the driver if there are two people in the same car? Put anot
 
 While this process isn't perfect, here are a few good habits that protect your autonomy and effectiveness:
 1. **Post often in the internal channel:** what you're thinking about, who you have a call scheduled with, open questions you have, an opportunity you're chasing down... anything. Write as generously and freely as you would on a private scratchpad - it's the closest thing we have to a shared brain.
-2. **Document as much as you can in Customer Analytics:** all of the relevant details, developments, learnings, plans, etc. from your internal threads should have their equivalent version as a note on the account in Customer Analytics.
+2. **Document as much as you can in Customer Analytics, the artifacts and the internal customer channel:** all of the relevant details, developments, learnings, plans, etc. from your internal threads should have their equivalent version as a note on the account in Customer Analytics.
 3. **Use each other to sense check:** consider having a monthly call where you catch up on all things related to your shared accounts - just talking through what you're thinking about can help reveal parallel work streams. 
 4. **Debrief after customer calls:** this is where you'll feel the superpowers that come with a CSM + TAM overlay - give each other feedback, get clear on next steps, and review how the call went. 
 5. **Tag team follow ups:** one of you plugs something in the customer channel; the other is aware of this and stands by to chime in with a follow-up to get a response. Works like a charm for unresponsive customers. 
@@ -314,5 +311,5 @@ While this process isn't perfect, here are a few good habits that protect your a
 
 - [Account allocation](/handbook/growth/sales/account-allocation) covers [adding a TAM](/handbook/growth/sales/account-allocation#adding-a-tam-to-an-account), [removing a TAM](/handbook/growth/sales/account-allocation#removing-a-tam-from-an-account), and [keeping the context with the CSM](/handbook/growth/sales/account-allocation#keeping-the-context-with-the-csm) when the overlay ends
 - [Customer journey](/handbook/growth/sales/customer-journey#ownership-rules) for the coverage matrix by phase, and co-owned churn saves
-- [Customer health tracking](/handbook/cs-and-onboarding/health-tracking) for what the score is actually made of
+- [Customer health tracking](/handbook/cs-and-onboarding/health-tracking) for what the score is made of
 - [Quarterly account planning](/handbook/growth/sales/risk-mitigation-and-churn-prevention#quarterly-account-planning) for the account plan note format
