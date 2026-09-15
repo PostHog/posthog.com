@@ -73,6 +73,10 @@ Everything below is a habit for getting the most out of having two people on an 
 
 There will be overlap and you will step on each other's toes, but that's by design. The end goal isn't to have a perfect division of work between the two roles, but to play to your strengths and work towards the goals set for each account. Here are some areas where you should expect overlap:
 
+## Day-to-day questions
+
+Whoever sees it first answers. If one of you has already replied and the other has something more useful to add, chime in anyway. Two helpful answers isn't a problem, and it beats the second person holding back because someone else got there first.
+
 ## Renewals
 
 Renewals sit with both of you, which is exactly why it's worth being specific about who does what.
@@ -83,7 +87,7 @@ A competitor turning up ahead of a renewal on a CSM-only account is one of the c
 
 ## Watching account health together
 
-The [health score](/handbook/cs-and-onboarding/health-tracking) is a customer success instrument, so the CSM owns reading it and keeping it current.
+The [health score](/handbook/cs-and-onboarding/health-tracking) is a customer success instrument, so the CSM owns reading it and keeping it current. That doesn't make it the CSM's problem alone.
 
 Having both the TAM & the CSM monitor an account's health might feel like duplication of work, but it needs to be monitored by both with different questions in mind.
 
@@ -115,7 +119,7 @@ Most of the time the lists above settle it, and whoever's focus area it sits in 
 A couple of things worth keeping to:
 
 - **Work it out in the channel rather than in DMs**, so the reasoning is there for whoever picks the account up later.
-- **Once one of you has committed to something with the customer**, it's usually better for the other to back it and sort the disagreement out internally, since a customer who can see daylight between the two of you will use it.
+- **Once one of you has committed to something with the customer**, it's usually better for the other to back it and sort the disagreement out internally, since a customer is more likely to pursue something that both of you agree on.
 
 If you're stuck, bring your team leads in early. Remember, both of you will be coming from a place of truly caring about the customer and wanting to see them succeed, so it's rarely a disagreement about where you're trying to get to.
 
@@ -123,7 +127,7 @@ If you're stuck, bring your team leads in early. Remember, both of you will be c
 
 When a TAM joins an account, or a CSM picks up an account that already has one, this is roughly what needs to happen. Doing it up front is what stops the first month going on each of you guessing what the other already knows. On a strategic account it's probably worth all of it. On a smaller growth account, the first few may be plenty.
 
-- [ ] Internal Slack channel created, using the naming convention `#customer-[customer_name]-internal`. Invite your TAM/CSM counterpart, both team leads, Ben and Simon. Invite the FDE too if they're doing any active work on the account
+- [ ] Internal Slack channel created, using the naming convention `#customer-[customer_name]-internal`. Invite your TAM/CSM counterpart, both team leads, Ben and Simon. Invite the FDE too if they're doing any active work on the account, and the PostHog Slack bot (`@PostHog`) so you can both explore the account's data without leaving the channel
 - [ ] Your TAM/CSM counterpart added to the external Slack channel (`#posthog-[customer_name]`)
 - [ ] Whoever has the pre-existing relationship writes a note in Customer Analytics with a context dump on the history and current state of the account
 - [ ] Whoever is joining posts their own read of the account, plus an action item they're picking up
@@ -194,6 +198,8 @@ In order for both of you to be on the same wavelength & to make sure there's con
 ## Agenda & call threads
 
 If both of you are going to be joining a call together, start a thread in the internal channel a few days ahead and draft the agenda together: who covers what, who leads which section, and roughly how long each part should get. Aligning on that beforehand, rather than working it out live, tends to make for a far more impactful call with the customer.
+
+When you split the agenda up, make sure you both get some time to speak rather than one of you being a fly on the wall. Even where there isn't much for the second person to cover, hearing from both of you breaks up the monotony of a single voice.
 
 Whoever booked the call is the obvious person to start the thread, since they're holding the invite, but either of you can.
 
