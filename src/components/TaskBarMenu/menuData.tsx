@@ -1,4 +1,4 @@
-import { MenuType, MenuItemType } from 'components/RadixUI/MenuBar'
+import { MenuType } from 'components/RadixUI/MenuBar'
 import React from 'react'
 import { companyMenu } from '../../navs'
 import * as Icons from '@posthog/icons'
@@ -17,7 +17,6 @@ import {
     IconSparksJoy,
 } from 'components/OSIcons'
 import { useAppSettings } from '../../context/App'
-import { IconChevronDown } from '@posthog/icons'
 import { navigate } from 'gatsby'
 import { BROWSE_TOOLS_HANDLES, buildProductMenuItems } from 'constants/productNavigation'
 
@@ -426,123 +425,18 @@ export function useMenuData(): MenuType[] {
                     link: '/subprocessors',
                     icon: <Icons.IconServer className="size-4 text-orange" />,
                 },
+                {
+                    type: 'separator',
+                },
+                {
+                    type: 'item',
+                    label: 'Enterprise',
+                    link: '/enterprise',
+                    icon: <Icons.IconBuilding className="size-4 text-purple" />,
+                },
             ],
         },
     ]
-
-    // Define base logo menu items (system items)
-    const baseLogoMenuItems = [
-        {
-            type: 'item' as const,
-            label: 'About PostHog',
-            link: '/about',
-            icon: getMenuIcon(companyMenu.children, '/about', 'IconLogomark', 'gray'),
-        },
-        {
-            type: 'item' as const,
-            label: 'Display options',
-            onClick: () => {
-                navigate('/display-options', { state: { newWindow: true } })
-            },
-            icon: <Icons.IconBrightness className="size-4 text-yellow" />,
-        },
-    ]
-
-    const homeLogoMenuItem = {
-        type: 'item' as const,
-        label: 'Home',
-        link: '/',
-        icon: <Icons.IconHome className="size-4 text-purple" />,
-    }
-
-    // Process main nav items for mobile menu
-    const processMobileNavItems = (): MenuItemType[] => {
-        const mobileItems: MenuItemType[] = []
-
-        mainNavItems.forEach((menu) => {
-            const link = menu.link || menu.mobileLink
-            if (link) {
-                mobileItems.push({
-                    type: 'item' as const,
-                    label: typeof menu.trigger === 'string' ? menu.trigger : 'Menu',
-                    link,
-                })
-            } else {
-                // Process items and filter out those with mobileDestination === false
-                const filteredItems: MenuItemType[] = []
-                const menuItemsCopy = [...menu.items]
-
-                const itemsToProcess = menuItemsCopy
-
-                for (let i = 0; i < itemsToProcess.length; i++) {
-                    const item = itemsToProcess[i]
-
-                    // Skip items marked for mobile omission
-                    if (item.mobileDestination === false) {
-                        // Remove preceding separator if it would be orphaned
-                        if (
-                            filteredItems.length > 0 &&
-                            filteredItems[filteredItems.length - 1].type === 'separator' &&
-                            (i === itemsToProcess.length - 1 || itemsToProcess[i + 1].type === 'separator')
-                        ) {
-                            filteredItems.pop()
-                        }
-                        continue
-                    }
-
-                    // Convert submenus with mobileDestination to simple items
-                    if (item.type === 'submenu' && item.mobileDestination) {
-                        filteredItems.push({
-                            ...item,
-                            type: 'item' as const,
-                            link: item.mobileDestination,
-                            items: undefined,
-                        })
-                    }
-                    // Convert submenus with links to simple items
-                    else if (item.type === 'submenu' && item.link) {
-                        filteredItems.push({
-                            ...item,
-                            type: 'item' as const,
-                            items: undefined,
-                        })
-                    } else {
-                        filteredItems.push(item)
-                    }
-                }
-
-                const processedItems = filteredItems
-
-                // Only add menu if it has items after filtering
-                if (processedItems.length > 0) {
-                    mobileItems.push({
-                        type: 'submenu' as const,
-                        label: typeof menu.trigger === 'string' ? menu.trigger : 'More',
-                        items: processedItems,
-                    })
-                }
-            }
-        })
-
-        return mobileItems
-    }
-
-    // On mobile, include main navigation items in the logo menu
-    const logoMenuItems = isMobile
-        ? [
-              homeLogoMenuItem,
-              { type: 'separator' as const },
-              // Main navigation items processed for mobile
-              ...processMobileNavItems(),
-              { type: 'separator' as const },
-              // System items
-              ...baseLogoMenuItems,
-          ]
-        : [
-              homeLogoMenuItem,
-              // Desktop: only show system items
-              ...baseLogoMenuItems,
-          ]
 
     return [
         {
@@ -562,15 +456,13 @@ export function useMenuData(): MenuType[] {
                             className="text-primary hidden 2xs:flex md:hidden w-auto h-5"
                             width="auto"
                         />
-                        <IconChevronDown className="size-6 inline-block md:hidden text-muted" />
                     </div>
                 </>
             ),
-            items: logoMenuItems,
-            mobileLink: undefined,
+            items: [],
+            link: '/',
             hideChevron: true,
         },
-        // On desktop, show main navigation items
         ...(!isMobile ? mainNavItems : []),
     ]
 }
