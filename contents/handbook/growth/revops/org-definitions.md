@@ -6,7 +6,7 @@ showTitle: true
 
 Intent, setup, and engagement are customer level concepts that Sales, Marketing & Website, Customer Success, and Growth all rely on. If you think a definition should change (which events qualify, which table is the source of truth, etc.), see "Adding an event to these definitions" section below and suggest here before you edit a dashboard tile so we can all work off of same source of truth.
 
-[Growth's self-serve dashboard](https://us.posthog.com/project/2/dashboard/1849743) tracks these definitions against specific time windows and cohorts (e.g. "% of intent orgs that completed setup within 14 days of signup"). 
+[Growth's self-serve dashboard](https://us.posthog.com/project/2/dashboard/2028479) tracks these definitions against specific time windows and cohorts (e.g. "% of intent orgs that completed setup within 14 days of signup"). 
 
 ## Level of aggregation
 
