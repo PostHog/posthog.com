@@ -36,6 +36,8 @@ With groups, you can:
 
 **Groups** are the individual entities within each type. For example, if your group type is "company," each group would be a specific company like "Acme Corp" or "Tech Solutions Inc." You can have unlimited groups within each group type.
 
+**People and groups** are connected by events, not by a membership list. Because of this, one person can be connected to more than one group of the same type. See [how people relate to groups](#how-people-relate-to-groups).
+
 ### How it works
 
 1. Define group types - like "company" or "channel"
@@ -235,9 +237,28 @@ PostHog::capture([
 
 </MultiLanguage>
 
-#### Multiple groups per person
+#### How people relate to groups
 
-The limit above applies to events, not people. PostHog doesn't store group membership on the person, so one person can be associated with any number of individual groups of the same type, like a consultant who works with two companies. Set the group to the one the user is working in, and set it again when they switch:
+PostHog doesn't store group membership on the person or on the individual group. The connection lives on the event: each event records the individual groups it belongs to, and PostHog builds the relationship from those events.
+
+```mermaid
+flowchart LR
+    P["<strong>Person</strong><br/>jane@example.com"]
+    E1["<strong>Event</strong><br/>document_created"]
+    E2["<strong>Event</strong><br/>document_created"]
+    G1["<strong>Group</strong><br/>company: Acme Corp"]
+    G2["<strong>Group</strong><br/>company: Tech Solutions Inc."]
+
+    P --> E1 --> G1
+    P --> E2 --> G2
+```
+
+Two results follow from this:
+
+- An event links to a maximum of one individual group per group type, as the section above shows.
+- A person links to as many individual groups as their events point to, including more than one group of the same type. A consultant who works with two companies is an example. Neither company is the primary or current one, because there is no membership list to hold that.
+
+To record this, set the group the user works in, then set it again when the user changes:
 
 <MultiLanguage>
 
