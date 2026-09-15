@@ -282,29 +282,14 @@ A recording with **no** full snapshot anywhere shows a full error screen because
 
 If you consistently see late snapshot warnings, make sure your `posthog-js` version is up to date and check that nothing is interfering with network requests to PostHog (see [ad/tracking blockers](#adtracking-blockers) and [content security policy](#content-security-policy) above).
 
-## Recording looks frozen, skips sections, or won't play because of heavy DOM changes
+## Element looks frozen because of rapid DOM changes
 
-Session replay records changes to the page DOM. Some pages change the DOM very fast – for example an animation that updates an element's styles every frame, or a view that adds thousands of nodes at once. This client-side DOM churn can produce more DOM mutations than PostHog can safely capture or play back, so PostHog limits it in three places.
+Session replay records changes to the page DOM. The recorder limits how often it records attribute changes, such as `style` or `class` updates, on any single element. When an element's attributes change faster than that limit, for example during an SVG animation that updates styles every frame, the recorder drops the element's extra attribute changes until the rate slows down. Added nodes, removed nodes, and text changes are still recorded.
 
-The fix is the same in every case: exclude the element with the rapidly changing content from capture with the `ph-no-capture` class, so the recorder skips it and the DOM changes inside it. Masking doesn't help here – it redacts the content but still records the element and its mutations. See [excluding elements from capture](/docs/session-replay/privacy#other-elements).
+In playback, a throttled element can look frozen or out of date. To fix this:
 
-### Throttled attribute changes during capture
-
-The recorder limits how often it records attribute changes, such as `style` or `class` updates, on any single element. When an element's attributes change faster than that limit, for example during an SVG animation, the recorder drops the element's extra attribute changes until the rate slows down. Added nodes, removed nodes, and text changes are still recorded.
-
-In playback, a throttled element can look frozen or out of date. If this happens, avoid per-frame style or attribute animation on large elements and SVGs, or exclude the element from capture.
-
-### Playback skips sections with too many DOM changes
-
-When a web recording adds 15,000 or more nodes within one second, the player skips DOM changes from that point until the next full snapshot and shows a **Playback skips those sections** banner. This keeps the player responsive. If no full snapshot follows, the player skips DOM changes for the rest of the recording.
-
-To keep future recordings playable, exclude the elements that add many nodes at once from capture.
-
-### Recording is too large to play
-
-A web recording larger than 30 MB, with an average event size over 100 KB, can freeze the browser tab, so the player doesn't load it. Instead, the player shows **We're unable to play this recording**. You can't load or play this recording from the player.
-
-To keep future recordings playable, exclude the elements with rapidly changing content from capture.
+- Avoid per-frame style or attribute animation on large elements and SVGs where you can.
+- Exclude the element from capture with the `ph-no-capture` class, so the recorder skips it and the DOM changes inside it. Masking doesn't help here – it redacts the content but still records the element and its mutations. See [excluding elements from capture](/docs/session-replay/privacy#other-elements).
 
 ## Person not found
 
