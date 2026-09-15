@@ -24,6 +24,7 @@ Check your project URL in the [PostHog app](https://app.posthog.com) to confirm 
 - Support 64MB request bodies, session recordings can be large.
 - Forward `X-Forwarded-For` to preserve client IPs for geolocation.
 - Avoid obvious paths like `/analytics`, `/posthog`, or `/ph`. Use `/e` or `/ingest` instead.
+- Exclude the proxy path from the firewall rules you wrote for your own application. Managed rulesets can score PostHog traffic as an attack. See [your firewall blocks requests to your own site](#your-firewall-blocks-requests-to-your-own-site).
 
 ### SDK configuration
 
@@ -119,6 +120,30 @@ Check body size limits in your:
 - Serverless function (if applicable)
 
 PostHog needs up to 64MB per message for session recordings.
+
+### Your firewall blocks requests to your own site
+
+A proxy serves PostHog under your own origin. Your web application firewall (WAF) then inspects PostHog traffic with the rules you wrote for your own application, and generic managed rulesets can score it as an attack.
+
+This problem has two shapes:
+
+- **Only the proxy path is blocked.** You see `403` responses on requests such as `/yourpath/static/recorder.js` or `/yourpath/e/`. Your firewall scores the proxied requests themselves. Add an exception for the proxy path, or stop proxying the SDK assets and load them from PostHog directly.
+- **Your whole site is blocked after the first proxied event.** The first request to the proxy path returns `200`, then later requests to unrelated pages fail. A firewall log shows a reason such as an inbound anomaly score. A cookie under your origin is the usual cause, because the browser sends it with every subsequent request.
+
+To find out if a cookie is the cause, delete the cookies for your domain and start the SDK with `localStorage` persistence:
+
+```js
+posthog.init('<ph_project_token>', {
+  api_host: '/yourpath',
+  persistence: 'localStorage'
+})
+```
+
+This removes PostHog's own cookie, `ph_<project_token>_posthog`, whose value is URL-encoded JSON. Some managed rulesets score JSON in a cookie.
+
+If the blocks continue, open your browser devtools and look at the cookies for your domain in the **Application** tab. PostHog's ingestion endpoints set no cookie, so any other new cookie comes from your proxy or from a CDN between your proxy and PostHog. A proxy returns the upstream response headers unchanged, `Set-Cookie` included.
+
+To delete a cookie from the proxied response, you need a proxy that builds the response itself. A [Cloudflare worker](/docs/advanced/proxy/cloudflare) can copy the upstream response and delete the header before it returns it. nginx has `proxy_hide_header Set-Cookie`. Rewrite rules cannot do this.
 
 ### Toolbar or recordings player not working
 
