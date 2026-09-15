@@ -24,7 +24,9 @@ const logsHogAlt = 'A hedgehog inspecting logs with a magnifying glass'
 export const logs = {
     ...getTool('logs'),
     Icon: IconActivity,
-    productVariantName: 'Logs ingestion (14-day retention)',
+    // Shown on the /pricing calculator only, so the rest of the site still says "Logs"
+    categoryName: 'Logs & Tracing',
+    productVariantName: 'Logs/Tracing ingestion (14-day retention)',
     type: 'logs',
     teamSlug: 'apm',
     // No community topic for Logs yet (checked Squeak topics API – none with slug "logs").
