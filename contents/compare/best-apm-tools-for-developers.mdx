@@ -54,7 +54,7 @@ PostHog enables you to build a [self-driving product](/self-driving), where sche
 
 **Not ideal if:** your primary job is infrastructure monitoring across a large host and container estate, as things such as deep agent coverage and automated infra root-cause across thousands of hosts might be better suited for a dedicated, infrastructure-first monitoring suite
 
-**Alternatives to consider:** **Datadog** or **New Relic** for a broad commercial suite with full distributed tracing; **Sentry** if you want code-level error tracking without the wider platform.
+**Alternatives to consider:** **Datadog** or **New Relic** if you need the deepest infrastructure coverage and the biggest integration catalog; **Sentry** if all you want is code-level error tracking inside your dev loop.
 
 <WizardCTA
  title="Traces, logs, metrics, and errors in one project"
@@ -71,12 +71,12 @@ PostHog enables you to build a [self-driving product](/self-driving), where sche
 | **Signals** | Distributed traces, service and infrastructure metrics, logs, errors, profiling, and real-user monitoring |
 | **Instrumentation** | Datadog Agent for hosts and containers, plus libraries per service; big catalog of integrations |
 | **Deployment** | SaaS only |
-| **Pricing** | Modular usage-based billing (hosts, containers, indexed logs, trace volume, per enabled module) |
+| **Pricing** | Per product, mostly per host: Infrastructure from ~$15/host/mo, APM from ~$31/host/mo, Log Management from ~$0.10/GB ingested – modules bill separately and stack up |
 | **License** | Proprietary |
 
 **Not ideal if:** you mainly need error tracking or basic performance data – modular pricing gets hard to predict as telemetry grows, and product analytics stays separate.
 
-**Alternatives to consider:** **New Relic** for another full-stack suite; **Dynatrace** for heavier automation in complex estates; **PostHog** for a unified view of user behavior and system performance.
+**Alternatives to consider:** **New Relic** for the same full-stack coverage on a simpler ingest-plus-seats bill; **Dynatrace** for heavier automation in complex estates; **PostHog** if you'd rather see performance beside the users and features it affects, without paying for a second analytics tool.
 
 ### What's the best APM tool for AI-assisted root-cause analysis?
 
@@ -87,12 +87,12 @@ PostHog enables you to build a [self-driving product](/self-driving), where sche
 | **Signals** | Service metrics and distributed traces tied to logs, errors, browser performance, and infrastructure; AI-correlated incidents |
 | **Instrumentation** | Language agents, infrastructure integrations, or OpenTelemetry collectors |
 | **Deployment** | SaaS, with support for open standards like OpenTelemetry |
-| **Pricing** | Usage-based (data ingest + users); 100 GB/month ingest and one full platform user are free, then per-GB after |
+| **Pricing** | Free: 100 GB/mo ingest + 1 full platform user. Then ~$0.40/GB ingested and per-seat for full users (~$99–$349/mo) |
 | **License** | Proprietary |
 
 **Not ideal if:** you mainly need error tracking for one app, prefer a self-hosted open-source stack, or want performance data wired directly to product analytics and session replay.
 
-**Alternatives to consider:** **Datadog** for another broad suite; **Dynatrace** for automated analysis at scale; **PostHog** to connect errors and performance signals to user behavior.
+**Alternatives to consider:** **Datadog** for another broad suite; **Dynatrace** for automated root-cause at enterprise scale; **PostHog** if the questions you debug start with "which users?" more often than "which service?"
 
 ### What's the best self-hosted APM stack?
 
@@ -103,12 +103,12 @@ PostHog enables you to build a [self-driving product](/self-driving), where sche
 | **Signals** | Metrics (Prometheus/Mimir), logs (Loki), and traces (Tempo), unified in dashboards and alerts |
 | **Instrumentation** | OpenTelemetry, Prometheus exporters, or compatible agents; you deploy and maintain each component |
 | **Deployment** | Self-hosted (Loki) or Grafana Cloud |
-| **Pricing** | Self-hosted is free, Grafana Cloud bills by usage and tier |
+| **Pricing** | Self-hosted is free, Grafana Cloud has an always-free tier (10k metric series, 50 GB logs/traces, 14-day retention); Pro is $19/mo + usage (~$6.50 per 1k metric series, per-GB for logs and traces) |
 | **License** | AGPLv3 (Grafana, Loki, Tempo, and Mimir); enterprise features and hosting are commercial |
 
 **Not ideal if:** you want a ready-made APM experience with automatic service discovery and guided root-cause analysis, or a direct link between telemetry and other data analysis such as session replay and product analytics.
 
-**Alternatives to consider:** **SigNoz** for a more integrated OpenTelemetry-native APM;
+**Alternatives to consider:** **SigNoz** for the same OpenTelemetry signals in one integrated app instead of a stack you assemble;
 
 ### What's the best APM tool for code-level error diagnosis?
 
@@ -119,12 +119,12 @@ PostHog enables you to build a [self-driving product](/self-driving), where sche
 | **Signals** | Errors, traces, transaction latency, profiling, and session replay |
 | **Instrumentation** | Developer-focused SDKs per framework, with auto-instrumentation for common ones |
 | **Deployment** | SaaS or self-hosted |
-| **Pricing** | Limited free plan, then paid by event volume and seats |
+| **Pricing** | Free Developer tier (1 user, 5K errors/mo); Team $26/mo and Business $80/mo, each with base quotas (50K errors, 5M spans, 50 replays) plus pay-as-you-go overages |
 | **License** | Functional Source License (FSL) – source-available, converting to Apache 2.0 over time |
 
 **Not ideal if:** you need one platform for infrastructure monitoring, log management, and deep tracing across many microservices – those get less emphasis than application errors.
 
-**Alternatives to consider:** **SigNoz** for an OpenTelemetry-native self-hosted route; **PostHog** for an integrated view of errors, logs, product analytics, [and a lot more](/products); **Datadog** or **New Relic** for full-stack APM.
+**Alternatives to consider:** **SigNoz** for an OpenTelemetry-native, self-hosted route; **Datadog** or **New Relic** for full-stack observability beyond errors; **PostHog** for an integrated view of errors, logs, product analytics, [and a lot more](/products).
 
 ### What's the best APM tool for large, complex environments?
 
@@ -135,12 +135,12 @@ PostHog enables you to build a [self-driving product](/self-driving), where sche
 | **Signals** | Application traces, infrastructure metrics, logs, errors, user sessions, and service dependencies |
 | **Instrumentation** | OneAgent with automatic service discovery, plus OpenTelemetry and cloud integrations |
 | **Deployment** | SaaS and managed options |
-| **Pricing** | Proprietary, consumption-based across platform capabilities |
+| **Pricing** | Full-stack at ~$0.01/GiB-hour of monitored memory, infrastructure-only at ~$0.04/host-hour, log ingest ~$0.20/GiB with an annual commitment |
 | **License** | Proprietary |
 
 **Not ideal if:** you want a lightweight error tracker, a self-hosted open-source stack, or direct links between performance problems and product analytics – it's heavier than smaller teams need.
 
-**Alternatives to consider:** **Datadog** for broad commercial observability; **New Relic** for full-stack APM; **SigNoz** for an OpenTelemetry-native open-source option.
+**Alternatives to consider:** **Datadog** for broad commercial observability; **New Relic** for full-stack APM on simpler pricing; **SigNoz** for an OpenTelemetry-native open-source option.
 
 ### What's the best OpenTelemetry-native APM?
 
@@ -151,12 +151,12 @@ PostHog enables you to build a [self-driving product](/self-driving), where sche
 | **Signals** | OpenTelemetry traces, metrics, and logs, plus service maps, exceptions, dashboards, and alerts |
 | **Instrumentation** | OpenTelemetry SDKs and collectors; existing OTel instrumentation reduces migration work |
 | **Deployment** | Self-hosted or SigNoz Cloud |
-| **Pricing** | Self-hosted is free; SigNoz Cloud is usage-based |
+| **Pricing** | Self-hosted is free; SigNoz Cloud is usage-based – $0.30/GB for logs and traces, $0.10 per million metric samples, from $49/mo |
 | **License** | Open source (MIT) |
 
 **Not ideal if:** you want a fully managed enterprise suite with a broad integration catalog, or product analytics and session replay beside your performance data.
 
-**Alternatives to consider:** **Grafana** for a modular open-source stack; **Datadog** or **New Relic** for managed enterprise APM; **PostHog** to connect errors and performance signals to user behavior.
+**Alternatives to consider:** **Grafana** for a modular open-source stack; **Datadog** or **New Relic** for managed enterprise APM; **PostHog** if you want the same OpenTelemetry signals tied to sessions, users, and product analytics.
 
 ## Other frequently asked questions
 
