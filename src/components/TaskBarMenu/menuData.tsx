@@ -36,7 +36,7 @@ const getMenuIcon = (items: DocsMenuItem[], link: string, fallbackIcon: keyof ty
 }
 
 // Tools promoted to the top level of the Products menu, in display order.
-// Everything else in BROWSE_TOOLS_HANDLES falls through to the "More" submenu.
+// Everything else in BROWSE_TOOLS_HANDLES falls through to the "More" group.
 const PRIMARY_TOOL_HANDLES: string[] = [
     'product_analytics',
     'ai_observability',
@@ -55,10 +55,10 @@ const buildProductsMenuItems = (allProducts: any[]) => {
     const items: any[] = [
         ...buildProductMenuItems(PRIMARY_TOOL_HANDLES, allProducts),
         {
-            type: 'submenu' as const,
+            type: 'expandable' as const,
             label: 'More',
+            expandedLabel: 'Less',
             items: buildProductMenuItems(moreToolHandles, allProducts),
-            icon: <Icons.IconEllipsis className="size-4 text-gray" />,
         },
         {
             type: 'separator',
