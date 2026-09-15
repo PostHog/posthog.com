@@ -6297,8 +6297,8 @@
             "statusCode": 301
         },
         {
-            "source": "/docs/replay-vision/actions",
-            "destination": "/docs/replay-vision/scouts",
+            "source": "/docs/replay-vision/actions:ext(\\.md)?",
+            "destination": "/docs/replay-vision/scouts:ext?",
             "statusCode": 301
         },
         {
