@@ -191,7 +191,7 @@ function MCPUseCases(): JSX.Element {
     return (
         <section id="use-cases" className="scroll-mt-20 not-prose">
             <SectionHeading
-                lede={`Your agent selects from ${toolCountLabel} across ${categoryCount} product areas, then reads or updates your PostHog project for you.`}
+                lede={`Your agent selects from ${toolCountLabel} across ${categoryCount} categories, then reads or updates your PostHog project for you.`}
             >
                 What can you do with it?
             </SectionHeading>
