@@ -19,11 +19,11 @@ import { useApp } from '../../context/App'
 import { useWindow } from '../../context/Window'
 import SEO from 'components/seo'
 import Link from 'components/Link'
-import WizardCommand from 'components/WizardCommand'
 import TeamMember from 'components/TeamMember'
 import ScrollArea from 'components/RadixUI/ScrollArea'
 import ReaderView from 'components/ReaderView'
 import { InlineCode, SectionHeading } from 'components/Products/ReaderViewProduct/helpers'
+import MCPInstallCTA from 'components/MCPInstallCTA'
 import PlatformInstall, { mcpInstallSchema } from 'components/PlatformInstall'
 import type { InstallSchema } from 'components/PlatformInstall'
 import mcpToolsData from '../../data/mcp-tools.json'
@@ -68,7 +68,7 @@ function MCPHeader(): JSX.Element {
                         <br />
                         So we built one without one.
                     </p>
-                    <WizardCommand command="mcp add" slim />
+                    <MCPInstallCTA className="max-w-md mx-auto @3xl/reader-content:mx-0 text-left" />
                     <div className="mt-4 flex flex-wrap gap-x-4 gap-y-1 justify-center @3xl/reader-content:justify-start text-[13px] font-medium opacity-70">
                         <span className="inline-flex items-center gap-1">
                             <IconCheck className="size-3.5" />
@@ -740,7 +740,7 @@ function MCPCTA(): JSX.Element {
                         One command. Thirty seconds. Works in Cursor, Claude, Codex, PostHog Desktop, and friends.
                     </p>
                     <div className="mb-4">
-                        <WizardCommand command="mcp add" slim />
+                        <MCPInstallCTA className="max-w-md" />
                     </div>
                     <div className="flex flex-wrap items-center gap-x-4 gap-y-2 text-[13px]">
                         <Link
