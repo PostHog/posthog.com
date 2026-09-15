@@ -18,6 +18,7 @@ import {
     IconPieChart,
     IconGraph,
 } from '@posthog/icons'
+import type { CTALinkKey } from 'components/CTAs'
 import OldWaySection from 'components/ReplayVision/OldWaySection'
 import PostHogWaySection from 'components/ReplayVision/PostHogWaySection'
 import HowToUseSection from 'components/ReplayVision/HowToUseSection'
@@ -201,6 +202,10 @@ export const replayVision = {
     // any scanners.
     wizardCommand: 'replay-vision',
     wizardSupports,
+    // Secondary links under the hero buttons. Discord takes the slot that
+    // "Talk to a human" has on the other product pages: on this page that link
+    // gets very few clicks, and almost none of them reach the form.
+    ctaLinks: ['mcp', 'demo', 'discord'] as CTALinkKey[],
     category: 'product_engineering',
     shortDescription: 'Let AI watch your session recordings for you',
     seo: {
