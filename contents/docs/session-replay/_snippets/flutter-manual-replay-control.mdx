@@ -27,15 +27,21 @@ class PinEntryScreen extends StatefulWidget {
 }
 
 class _PinEntryScreenState extends State<PinEntryScreen> {
+  bool _wasRecording = false;
+
   @override
   void initState() {
     super.initState();
+    // Asked before the stop is sent, so it reports the state on entry.
+    Posthog().isSessionReplayActive().then((active) => _wasRecording = active);
     Posthog().stopSessionRecording();
   }
 
   @override
   void dispose() {
-    Posthog().startSessionRecording();
+    if (_wasRecording) {
+      Posthog().startSessionRecording();
+    }
     super.dispose();
   }
 
@@ -46,7 +52,9 @@ class _PinEntryScreenState extends State<PinEntryScreen> {
 }
 ```
 
-`startSessionRecording()` resumes the current session by default, so the replay continues as one recording with the keypad left out. If your app doesn't record every session, store the result of `isSessionReplayActive()` when the screen opens and only call `startSessionRecording()` in `dispose` if it was `true`.
+`startSessionRecording()` resumes the current session by default, so the replay continues as one recording with the keypad left out. The `isSessionReplayActive()` check matters: on iOS, `startSessionRecording()` installs the replay integration if it isn't there yet, so an app that wasn't recording would start when the screen closes. Only resuming when the screen found recording active keeps that from happening.
+
+If you want taps left out of every recording rather than one screen's, set `sessionReplayConfig.captureTouches = false` before `setup()` instead (SDK >= 5.41.0); see [privacy controls](/docs/session-replay/privacy).
 
 #### Record or ignore specific screens
 
