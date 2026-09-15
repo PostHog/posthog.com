@@ -99,11 +99,13 @@ A scanner saying "Idk" is way better than making something up.
 
 Create the scanner, then use the [bulk scan action](/docs/replay-vision/running-scanners#from-the-recordings-list) to run it against a small batch of recent recordings. Read the observations beside their source recordings and look for overclaims, missed proof, weak labels, or instructions that seemed obvious until the model interpreted them literally.
 
-<!-- EXAMPLE NEEDED: one first batch that exposed a prompt problem. what did the scanner get wrong, and what did you change? -->
+Here's one from the scanners we run on posthog.com. We built a summarizer to catch visitors who gave up on the site and reached for search, the AI chat, or the "talk to a human" form. Before enabling it, we ran it on a batch of recent sessions and read every observation. Nine of the first fifteen had escaped to the human form, according to the model. In the recordings, nine people opened the form, typed nothing, and closed it. The model had invented their question from the pages around it, because the prompt asked what the visitor was looking for. One added rule fixed it: a form opened and closed with nothing typed is not an escape, and the scanner says so. <!-- 9 of 15 as of the sept 11 2026 calibration pass -->
+
+The same pass taught us to watch the clips, not just read the text. A text-only review of our dead-end monitor called its "can't close this modal" findings solid. Watching the recordings said otherwise, so that scanner went back to calibration.
 
 Use the Calibration tab as a review queue. Rate each result, and add a sentence when the scanner got the premise wrong. PostHog AI can recommend and test changes against that feedback, but it will not apply them until you choose.
 
-Don't try to perfect the prompt before you run it. The first batch will tell you how the prompt actually performs.
+Don't try to perfect the prompt before you run it. The first batch will tell you how the scanner actually performs.
 
 ## 5. Pick the model by the cost of a wrong answer
 
