@@ -118,6 +118,11 @@
     ],
     "redirects": [
         {
+            "source": "/docs/replay-vision/actions:ext(\\.md)?",
+            "destination": "/docs/replay-vision/scouts:ext?",
+            "statusCode": 301
+        },
+        {
             "source": "/kbd",
             "destination": "/"
         },
