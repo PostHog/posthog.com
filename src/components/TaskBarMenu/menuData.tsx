@@ -426,6 +426,15 @@ export function useMenuData(): MenuType[] {
                     link: '/subprocessors',
                     icon: <Icons.IconServer className="size-4 text-orange" />,
                 },
+                {
+                    type: 'separator',
+                },
+                {
+                    type: 'item',
+                    label: 'Enterprise',
+                    link: '/enterprise',
+                    icon: <Icons.IconBuilding className="size-4 text-blue" />,
+                },
             ],
         },
     ]
