@@ -67,6 +67,14 @@ Each example is one workflow: a trigger, the AI task step, and what the agent ha
 
 **Then:** Map `output.team` and `output.priority` to variables. An **Update ticket** step assigns the ticket from `team` and sets `priority`. A **Slack** step posts the summary in the team's channel.
 
+### Reply to an alert in its Slack thread
+
+**Trigger:** Slack message received, filtered to your alerts channel and top-level messages only
+
+**Instructions:** You are the first responder for this alert. Read the runbook for the alerting service in the runbooks repository, check the service's metrics and logs in PostHog, and reply with whether the alert is real, how severe it is, and the most likely cause. Reply with your best assessment quickly rather than waiting for certainty.
+
+**Options:** Set **Repository** to your runbooks repository. Leave **Reply in the Slack thread** on so the assessment lands in the thread and on-call can ask follow-up questions there.
+
 ### Open a pull request from a webhook
 
 **Trigger:** Webhook, called by a meeting notes tool, a form, or your own service
@@ -94,7 +102,7 @@ Each example is one workflow: a trigger, the AI task step, and what the agent ha
 ## Tips for better instructions
 
 - **Pass the event in.** `{event.properties.ticket_id}` or `{person.properties.email}` gives the agent the record to work on. Without it, the agent works from your text alone.
-- **Say what done looks like.** "Open a pull request with the summary" beats "handle the meeting notes."
+- **Say what done looks like.** "Reply in the thread with severity and likely cause" beats "investigate the alert."
 - **Name the fields you want back.** If a later step branches on the result, ask for it as an output field, not as prose.
 - **Fence off side effects.** "Do not send email or start another workflow" keeps a full-access agent inside its job.
 - **Put shared instructions in a skill.** A skill can be updated once and every workflow that uses it picks up the change.
