@@ -8,6 +8,7 @@ import { AllSources } from '../_snippets/data-sources'
 import { QuestLog, QuestLogItem } from 'components/Docs/QuestLog'
 import { IconGraph, IconPiggyBank, IconFlask } from '@posthog/icons'
 import OSButton from 'components/OSButton'
+import GuidesForProduct from 'components/PocketGuides/GuidesForProduct'
 
 
 <QuestLog firstSpeechBubble="Let's get started!" lastSpeechBubble="Time to build your data warehouse!">
@@ -134,6 +135,20 @@ import OSButton from 'components/OSButton'
     classes="rounded"
     alt="Screenshot of the form to assign a data warehouse table to an experiment metric"
   />
+
+</QuestLogItem>
+
+<QuestLogItem
+  title="Learn it by use case"
+  subtitle="Recommended"
+  icon="IconCompass"
+>
+
+The reference tells you what everything does. The pocket guide walks you through real problems, end to end.
+
+<div>
+  <GuidesForProduct product="data-warehouse" />
+</div>
 
 </QuestLogItem>
 
