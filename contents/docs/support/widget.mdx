@@ -130,15 +130,6 @@ With identity verification enabled, users see all their tickets on any browser o
 
 Copy the key from the **Secret API key** section of [**Support** > **Settings**](https://app.posthog.com/support/settings). If the section is empty, use the button next to it to generate a key.
 
-Several PostHog keys start with `phs_`, so the prefix does not tell you which key you have.
-
-| Key | Where you find it | Signs identity hashes? |
-|-----|-------------------|------------------------|
-| **Secret API key** (`phs_`) | Support > Settings > Secret API key | Yes |
-| **Feature flags secure API key** (`phs_`) | Feature flag settings, [local evaluation](/docs/feature-flags/local-evaluation) | Yes, it is the same key under an older name |
-| **Project secret API key** (`phs_`) | [Project secret API keys](/docs/api/project-secret-api-keys) in project settings | No |
-| **Personal API key** (`phx_`) | [Personal API keys](/docs/api/personal-api-keys) in user settings | No |
-| **Project token** (`phc_`) | Project settings, the token you pass to `posthog.init()` | No |
 
 If you sign the hash with a key that does not work, the widget API answers `403 Forbidden` and gives no detail about the cause. The response is the same for a wrong key, a bad signature, and a project with no key, so that the API tells anonymous callers nothing about your setup. If `GET /widget/tickets` or `POST /widget/message` answers `403`, check your key first.
 
