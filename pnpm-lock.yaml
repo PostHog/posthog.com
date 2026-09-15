@@ -6008,7 +6008,7 @@ packages:
     resolution: {integrity: sha512-cYrHab4d6wuVvDW5tdsfI6/o6vcLMDe6w2Citd1oS51Xxu2ycLCnVo4fqwujfKWijrZMInTJIKcXxteoy21nVA==}
 
   '@webgpu/types@0.1.72':
-    resolution: {integrity: sha512-0cF7RFM2edNoiIS1ODJp0/Gzv4/xSXhwoR0YCza+OWpJWtn4wmo9DvK91aLlH+uUnwIriP7ZiC3WitmyhuzBw==}
+    resolution: {integrity: sha512-0cF7RFM2edNoiIS1ODJp0/Gzv4/xSXhwoR0YCza+OWpJWtn4wmo9DvK91aLlH9+uUnwIriP7ZiC3WitmyhuzBw==}
 
   '@wistia/type-guards@0.9.1':
     resolution: {integrity: sha512-hBR0/rRUbJAQ7w70Aya+weC+R0AKbo20GIa7QcxvyqrzmwNjy7kslwqB0SFAWupvwJ7SyTmGgyyFcNKLs/vICA==}
