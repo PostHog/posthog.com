@@ -315,6 +315,8 @@ When an opportunity with Annual Plan type is Closed Won, a Salesforce [flow](htt
 -   **ARR up for renewal** - Copied over from the original amount; so that we can track expansion/churn
 -   **Close date** - 4 weeks in the future (may need adjusting if the opportunity record isn't closed on the contract start date)
 
+Keep the renewal opportunity dates in line with the dates we actually invoice against. If the contract dates and the dates in Stripe disagree, the account owner must add a comment on the opportunity that records both dates and the confirmed one, and then correct the opportunity dates. See [when the contract dates and the billing dates don't match](/handbook/cs-and-onboarding/renewals#when-the-contract-dates-and-the-billing-dates-dont-match).
+
 The renewal pipeline stages are:
 
 1. Qualification (10%) - They have just became a PostHog customer and we're helping them getting set up.

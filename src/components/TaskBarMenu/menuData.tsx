@@ -3,7 +3,6 @@ import React from 'react'
 import { companyMenu } from '../../navs'
 import * as Icons from '@posthog/icons'
 import { Logo } from '@posthog/brand/logo'
-import SearchableProductMenu from './SearchableProductMenu'
 import useProduct from '../../hooks/useProduct'
 import {
     IconXNotTwitter,
@@ -36,20 +35,33 @@ const getMenuIcon = (items: DocsMenuItem[], link: string, fallbackIcon: keyof ty
     return IconComponent ? <IconComponent className={`size-4 text-${sourceItem?.color || fallbackColor}`} /> : undefined
 }
 
+// Tools promoted to the top level of the Products menu, in display order.
+// Everything else in BROWSE_TOOLS_HANDLES falls through to the "More" group.
+const PRIMARY_TOOL_HANDLES: string[] = [
+    'product_analytics',
+    'ai_observability',
+    'session_replay',
+    'replay_vision',
+    'feature_flags',
+    'experiments',
+    'error_tracking',
+    'logs',
+]
+
 // Build Products menu items
 const buildProductsMenuItems = (allProducts: any[]) => {
+    const moreToolHandles = BROWSE_TOOLS_HANDLES.filter((handle) => !PRIMARY_TOOL_HANDLES.includes(handle))
+
     const items: any[] = [
+        ...buildProductMenuItems(PRIMARY_TOOL_HANDLES, allProducts),
         {
-            type: 'item',
-            label: 'PostHog Web',
-            link: '/products',
-            icon: <Icons.IconBolt className="size-4 text-red" />,
+            type: 'expandable' as const,
+            label: 'More',
+            expandedLabel: 'Less',
+            items: buildProductMenuItems(moreToolHandles, allProducts),
         },
         {
-            type: 'item',
-            label: 'PostHog Desktop',
-            link: '/desktop',
-            icon: <Icons.IconCoffee className="size-4 text-brown dark:text-brown-dark" />,
+            type: 'separator',
         },
         {
             type: 'item',
@@ -59,9 +71,9 @@ const buildProductsMenuItems = (allProducts: any[]) => {
         },
         {
             type: 'item',
-            label: 'PostHog CLI',
-            link: '/docs/cli',
-            icon: <Icons.IconTerminal className="size-4 text-green" />,
+            label: 'PostHog Desktop',
+            link: '/desktop',
+            icon: <Icons.IconCoffee className="size-4 text-brown dark:text-brown-dark" />,
         },
         {
             type: 'item',
@@ -70,13 +82,13 @@ const buildProductsMenuItems = (allProducts: any[]) => {
             icon: <Icons.IconAtSign className="size-4 text-sky-blue" />,
         },
         {
+            type: 'separator',
+        },
+        {
             type: 'item',
             label: 'Context Warehouse',
             link: '/context-warehouse',
             icon: <Icons.IconDatabase className="size-4 text-blue" />,
-        },
-        {
-            type: 'separator',
         },
         {
             type: 'item',
@@ -84,26 +96,10 @@ const buildProductsMenuItems = (allProducts: any[]) => {
             link: '/research',
             icon: <Icons.IconBrain className="size-4 text-purple" />,
         },
-        {
-            type: 'separator',
-        },
-        {
-            type: 'submenu' as const,
-            label: 'Browse tools',
-            link: '/products',
-            items: <SearchableProductMenu products={allProducts} />,
-            icon: <Icons.IconApps className="size-4 text-red" />,
-            mobileDestination: '/products', // Desktop shows the searchable submenu; mobile links to the tools list
-        },
     ]
 
     return items
 }
-
-const buildToolsMenu = (allProducts: any[]): MenuType => ({
-    trigger: 'Tools',
-    items: buildProductMenuItems([...BROWSE_TOOLS_HANDLES], allProducts),
-})
 
 export function useMenuData(): MenuType[] {
     const allProducts = useProduct() as any[]
@@ -115,7 +111,6 @@ export function useMenuData(): MenuType[] {
             trigger: 'Products',
             items: buildProductsMenuItems(allProducts),
         },
-        buildToolsMenu(allProducts),
         {
             trigger: 'Pricing',
             link: '/pricing',
@@ -426,6 +421,15 @@ export function useMenuData(): MenuType[] {
                     link: '/subprocessors',
                     icon: <Icons.IconServer className="size-4 text-orange" />,
                 },
+                {
+                    type: 'separator',
+                },
+                {
+                    type: 'item',
+                    label: 'Enterprise',
+                    link: '/enterprise',
+                    icon: <Icons.IconBuilding className="size-4 text-blue" />,
+                },
             ],
         },
     ]
@@ -527,7 +531,8 @@ export function useMenuData(): MenuType[] {
         return mobileItems
     }
 
-    // On mobile, include main navigation items in the logo menu
+    // On mobile, the logo menu is the full navigation. On desktop, the logo is a
+    // direct link to the homepage, because every item is also in the menus next to it.
     const logoMenuItems = isMobile
         ? [
               homeLogoMenuItem,
@@ -538,11 +543,7 @@ export function useMenuData(): MenuType[] {
               // System items
               ...baseLogoMenuItems,
           ]
-        : [
-              homeLogoMenuItem,
-              // Desktop: only show system items
-              ...baseLogoMenuItems,
-          ]
+        : []
 
     return [
         {
@@ -567,6 +568,7 @@ export function useMenuData(): MenuType[] {
                 </>
             ),
             items: logoMenuItems,
+            link: isMobile ? undefined : '/',
             mobileLink: undefined,
             hideChevron: true,
         },

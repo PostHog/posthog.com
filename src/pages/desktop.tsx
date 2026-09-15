@@ -50,6 +50,7 @@ import {
     StickerMayor,
     StickerPullRequest,
     StickerAi,
+    StickerCloud,
     StickerRobot,
 } from 'components/Stickers/Stickers'
 import CloudinaryImage from 'components/CloudinaryImage'
@@ -1834,6 +1835,98 @@ const SupportedLLMs = () => {
     )
 }
 
+const cloudEnvironmentItems = [
+    {
+        Icon: IconStack,
+        label: 'Environments',
+        desc: "Repos, hosts, and base image in one profile. Yours, or the whole team's.",
+    },
+    {
+        Icon: IconBrowser,
+        label: 'Access',
+        desc: 'Trusted domains, the whole internet, or your own list. Keys stay encrypted.',
+    },
+    { Icon: IconTerminal, label: 'Base images', desc: 'Bake your tools in once. No run starts with a fresh install.' },
+]
+
+// Cloud agents: the "close the lid, they keep going" pitch. Sits between the model list and the
+// MCP marketplace so it doesn't butt up against the self-driving box further down the page.
+const CloudAgentsCallout = () => {
+    return (
+        <section className="relative mb-12 @xl:mb-16 px-4 @xl:px-8">
+            <div className="relative overflow-hidden rounded-md border border-blue bg-gradient-to-br from-blue/20 via-blue/5 to-purple/10 p-6 shadow-xl @xl:p-8">
+                <div className="grid gap-6 @2xl:grid-cols-[1fr_auto] @2xl:gap-10">
+                    <div>
+                        <div className="mb-3 flex items-center gap-2">
+                            <StickerCloud className="size-8 -rotate-3" />
+                            <h2 className="m-0 text-2xl font-bold">Seven cloud agents, one closed laptop</h2>
+                        </div>
+                        <p className="m-0 text-secondary">
+                            Run tasks in a PostHog-managed sandbox instead of on your machine. Quit the app, sleep the
+                            laptop, change networks: the agents keep building, and the branches are waiting when you get
+                            back.
+                        </p>
+                        <p className="m-0 mt-3 text-secondary">
+                            An environment is the profile a sandbox boots with. Set one up and every cloud task starts
+                            on the repos you picked, with the keys and the tools already there.
+                        </p>
+                    </div>
+
+                    <div className="relative mx-auto w-40 shrink-0 @sm:w-52 @2xl:w-56">
+                        {/* Decorative clouds behind the artwork */}
+                        <CloudinaryImage
+                            src="https://res.cloudinary.com/dmukukwp6/image/upload/cloud_1_6ec7ea72d6.svg"
+                            alt=""
+                            aria-hidden
+                            className="pointer-events-none absolute -left-6 top-2 z-0 w-12 opacity-50"
+                            imgClassName="w-full"
+                        />
+                        <CloudinaryImage
+                            src="https://res.cloudinary.com/dmukukwp6/image/upload/cloud_2_553c4f548d.svg"
+                            alt=""
+                            aria-hidden
+                            className="pointer-events-none absolute -right-3 bottom-14 z-0 w-10 opacity-40"
+                            imgClassName="w-full"
+                        />
+                        <div className="relative z-10">
+                            <CloudinaryImage
+                                src="https://res.cloudinary.com/dmukukwp6/image/upload/cloud_hog_katy_237c11a9fe.png"
+                                alt="A hedgehog in a pink wig lounging on a cloud with a candy swirl"
+                                className="w-full"
+                                imgClassName="w-full"
+                            />
+                            <p className="m-0 mt-1 text-center text-sm text-secondary">Baby, you're a firewall.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div className="mt-5 grid grid-cols-1 gap-4 @sm:grid-cols-3">
+                    {cloudEnvironmentItems.map(({ Icon, label, desc }) => (
+                        <div key={label}>
+                            <div className="flex items-center gap-1.5">
+                                <Icon className="size-5 shrink-0 text-blue" />
+                                <span className="text-base font-bold text-primary">{label}</span>
+                            </div>
+                            <p className="m-0 mt-1 text-sm leading-snug text-secondary">{desc}</p>
+                        </div>
+                    ))}
+                </div>
+
+                <OSButton
+                    asLink
+                    to="/docs/posthog-desktop/environments"
+                    state={{ newWindow: true }}
+                    variant="primary"
+                    size="md"
+                    className="mt-5"
+                >
+                    Set up an environment
+                </OSButton>
+            </div>
+        </section>
+    )
+}
+
 const MCPMarketplace = () => {
     return (
         <section className="relative mb-12 @xl:mb-16 px-4 @xl:px-8">
@@ -2433,6 +2526,8 @@ export default function CodePage() {
                         <SkillsCallout />
 
                         <SupportedLLMs />
+
+                        <CloudAgentsCallout />
 
                         <MCPMarketplace />
 
