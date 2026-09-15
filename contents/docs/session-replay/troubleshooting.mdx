@@ -282,28 +282,29 @@ A recording with **no** full snapshot anywhere shows a full error screen because
 
 If you consistently see late snapshot warnings, make sure your `posthog-js` version is up to date and check that nothing is interfering with network requests to PostHog (see [ad/tracking blockers](#adtracking-blockers) and [content security policy](#content-security-policy) above).
 
-## Recording is skipped or won't auto-play because of heavy DOM changes
+## Recording looks frozen, skips sections, or won't play because of heavy DOM changes
 
-Session replay records changes to the page DOM. Some pages rewrite the DOM very fast – for example a large virtualized list or an animation that redraws many nodes each frame. This client-side DOM churn can produce more DOM mutations than PostHog can safely capture or play back. PostHog limits this in two places, so a recording of such a page can look incomplete or refuse to auto-play.
+Session replay records changes to the page DOM. Some pages change the DOM very fast – for example an animation that updates an element's styles every frame, or a view that adds thousands of nodes at once. This client-side DOM churn can produce more DOM mutations than PostHog can safely capture or play back, so PostHog limits it in three places.
 
-### The DOM mutation ceiling during capture
+The fix is the same in every case: exclude the element with the rapidly changing content from capture with the `ph-no-capture` class, so the recorder skips it and the DOM changes inside it. Masking doesn't help here – it redacts the content but still records the element and its mutations. See [excluding elements from capture](/docs/session-replay/privacy#other-elements).
 
-The recorder applies a mutation ceiling while it captures. When a page passes the ceiling, the recorder throttles the extra DOM mutations to protect the browser from freezing. The rest of the session still records, but the throttled part can look incomplete, because some DOM changes were never captured.
+### Throttled attribute changes during capture
 
-If a recording looks incomplete during a burst of DOM activity:
+The recorder limits how often it records attribute changes, such as `style` or `class` updates, on any single element. When an element's attributes change faster than that limit, for example during an SVG animation, the recorder drops the element's extra attribute changes until the rate slows down. Added nodes, removed nodes, and text changes are still recorded.
 
-- Lower the DOM churn on the affected view where you can. A virtualized list that reuses nodes produces fewer mutations than one that rebuilds the whole list on each change.
-- Exclude the noisy element from capture with the `ph-no-capture` class, so the recorder skips it and the DOM changes inside it. Masking does not help here – it redacts the content but still records the element and its mutations. See [excluding elements from capture](/docs/session-replay/privacy#other-elements).
+In playback, a throttled element can look frozen or out of date. If this happens, avoid per-frame style or attribute animation on large elements and SVGs, or exclude the element from capture.
 
-### Skipped auto-loading of risky recordings
+### Playback skips sections with too many DOM changes
 
-A very large recording can freeze or crash the browser tab if it loads without warning. To prevent this, the player does not auto-load a recording it detects as risky to render. The recording is not lost – the player waits for you to load it instead of loading it on its own.
+When a web recording adds 15,000 or more nodes within one second, the player skips DOM changes from that point until the next full snapshot and shows a **Playback skips those sections** banner. This keeps the player responsive. If no full snapshot follows, the player skips DOM changes for the rest of the recording.
 
-When this happens:
+To keep future recordings playable, exclude the elements that add many nodes at once from capture.
 
-- Load the recording manually from the player when you are ready for it.
-- Expect slower seeking in a very large recording. Seek in smaller steps.
-- Reduce the DOM churn that made the recording large, using the same steps as for the mutation ceiling above.
+### Recording is too large to play
+
+A web recording larger than 30 MB, with an average event size over 100 KB, can freeze the browser tab, so the player doesn't load it. Instead, the player shows **We're unable to play this recording**. You can't load or play this recording from the player.
+
+To keep future recordings playable, exclude the elements with rapidly changing content from capture.
 
 ## Person not found
 
