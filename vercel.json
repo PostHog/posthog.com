@@ -889,14 +889,8 @@
             "statusCode": 301
         },
         {
-            "source": "/products",
-            "destination": "/",
-            "statusCode": 301
-        },
-        {
             "source": "/product-toolkit",
-            "destination": "/",
-            "statusCode": 301
+            "destination": "/products"
         },
         {
             "source": "/handbook/growth/marketing",

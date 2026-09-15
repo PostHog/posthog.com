@@ -11,7 +11,7 @@ export interface Tab {
     progressBar: string
 }
 
-// Product-feature carousel — HeroCarousel's default tab set, used by the homepage Control variant.
+// Product-feature carousel — lives on the /products page.
 export const productUsageTabs: Tab[] = [
     {
         value: 'understand-usage',

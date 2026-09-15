@@ -35,6 +35,7 @@ const CANONICAL_ROUTES = {
     '/customers': ['Customer stories', 'Case studies'],
     '/templates': ['Dashboard templates', 'PostHog templates'],
     '/questions': ['Community questions', 'Community answers', 'Features', 'Deployment', 'Data'],
+    '/products': ['Tools', 'PostHog products', 'All PostHog tools'],
     '/demo': ['PostHog demo', 'Watch a demo'],
     '/talk-to-a-human': ['Contact sales', 'Sales demo'],
     '/about': ['About PostHog', 'Why PostHog', 'PostHog company'],
@@ -48,6 +49,8 @@ const CANONICAL_ROUTES = {
 }
 
 const PAGE_TYPE_RULES = [
+    // `/products` is the Tool directory, not the canonical page for the WIP User Interviews entry.
+    { type: 'tools', pattern: /^\/products$/ },
     { type: 'docs', pattern: /^\/(?:docs|manual|pricing)(?:\/|$)/ },
     { type: 'handbook', pattern: /^\/(?:handbook|product-engineer)(?:\/|$)/ },
     {
