@@ -4405,8 +4405,8 @@
             "destination": "/blog/using-posthog"
         },
         {
-            "source": "/blog/categories/general",
-            "destination": "/blog/general"
+            "source": "/blog/general",
+            "destination": "/blog/categories/general"
         },
         {
             "source": "/product-analytics/customers",
