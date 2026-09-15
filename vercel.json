@@ -118,6 +118,19 @@
     ],
     "redirects": [
         {
+            "source": "/docs/replay-vision/actions:ext(\\.md)?",
+            "destination": "/docs/replay-vision/scouts:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/kbd",
+            "destination": "/"
+        },
+        {
+            "source": "/credits",
+            "destination": "/"
+        },
+        {
             "source": "/blog/posthog-vs-fathom",
             "destination": "/compare/posthog-vs-fathom"
         },
@@ -471,6 +484,11 @@
         {
             "source": "/docs/data/cookieless-tracking.md",
             "destination": "/tutorials/cookieless-tracking",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/data/activity-log:ext(\\.md)?",
+            "destination": "/docs/settings/activity-logs:ext?",
             "statusCode": 301
         },
         {
@@ -2458,24 +2476,8 @@
             "destination": "/handbook/small-teams/_team_template"
         },
         {
-            "source": "/marketplace",
-            "destination": "/partners"
-        },
-        {
-            "source": "/marketplace/clickhouse",
-            "destination": "/partners/clickhouse"
-        },
-        {
-            "source": "/marketplace/opsverse",
-            "destination": "/partners/opsverse"
-        },
-        {
-            "source": "/marketplace/restack",
-            "destination": "/partners/restack"
-        },
-        {
-            "source": "/marketplace/altinity",
-            "destination": "/partners/altinity"
+            "source": "/(marketplace|partners)/:path*",
+            "destination": "/partnerships"
         },
         {
             "source": "/handbook/people/team-structure/experimentation",
@@ -6296,7 +6298,7 @@
         },
         {
             "source": "/docs/replay-vision/webhooks",
-            "destination": "/docs/replay-vision/actions#webhooks",
+            "destination": "/docs/replay-vision/scouts#webhooks",
             "statusCode": 301
         },
         {

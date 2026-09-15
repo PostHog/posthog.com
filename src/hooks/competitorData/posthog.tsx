@@ -157,7 +157,7 @@ export const posthog = {
                     native_open_telemetry_ingest: true,
                     vendor_agnostic_sdks: true,
                     high_cardinality_indexing: true,
-                    retention: '14 days (30-day add-on)',
+                    retention: '14 days (custom retention add-on)',
                 },
             },
             search: {

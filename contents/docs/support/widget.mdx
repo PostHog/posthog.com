@@ -120,15 +120,24 @@ You typically call both: `identify()` for analytics tracking, and `setIdentity()
 
 ### How it works
 
-1. Your server computes an HMAC-SHA256 hash of the user's `distinct_id` using your team's `secret_api_token`
+1. Your server computes an HMAC-SHA256 hash of the user's `distinct_id` using your **Secret API key** from Support settings
 2. You pass this hash along with the `distinct_id` to the widget
 3. The widget API verifies the signature and uses the `distinct_id` for ticket lookup instead of the browser session
 
 With identity verification enabled, users see all their tickets on any browser or device.
 
+### Find your secret API key
+
+Copy the key from the **Secret API key** section of [**Support** > **Settings**](https://app.posthog.com/support/settings). If the section is empty, use the button next to it to generate a key.
+
+
+If you sign the hash with a key that does not work, the widget API answers `403 Forbidden` and gives no detail about the cause. The response is the same for a wrong key, a bad signature, and a project with no key, so that the API tells anonymous callers nothing about your setup. If `GET /widget/tickets` or `POST /widget/message` answers `403`, check your key first.
+
+When you rotate the key, PostHog keeps the previous key as a backup, and hashes signed with the backup keep working. Delete the backup key after all your servers use the new key.
+
 ### Server-side implementation
 
-Generate the identity hash on your backend. Never expose your `secret_api_token` in client-side code.
+Generate the identity hash on your backend. Never expose the secret API key in client-side code.
 
 <MultiLanguage>
 
@@ -136,9 +145,9 @@ Generate the identity hash on your backend. Never expose your `secret_api_token`
 import hmac
 import hashlib
 
-def compute_identity_hash(distinct_id: str, secret_api_token: str) -> str:
+def compute_identity_hash(distinct_id: str, secret_api_key: str) -> str:
     return hmac.new(
-        secret_api_token.encode(),
+        secret_api_key.encode(),
         distinct_id.encode(),
         hashlib.sha256,
     ).hexdigest()
@@ -147,9 +156,9 @@ def compute_identity_hash(distinct_id: str, secret_api_token: str) -> str:
 ```node
 const crypto = require('crypto');
 
-function computeIdentityHash(distinctId, secretApiToken) {
+function computeIdentityHash(distinctId, secretApiKey) {
   return crypto
-    .createHmac('sha256', secretApiToken)
+    .createHmac('sha256', secretApiKey)
     .update(distinctId)
     .digest('hex');
 }
@@ -158,8 +167,8 @@ function computeIdentityHash(distinctId, secretApiToken) {
 ```ruby
 require 'openssl'
 
-def compute_identity_hash(distinct_id, secret_api_token)
-  OpenSSL::HMAC.hexdigest('sha256', secret_api_token, distinct_id)
+def compute_identity_hash(distinct_id, secret_api_key)
+  OpenSSL::HMAC.hexdigest('sha256', secret_api_key, distinct_id)
 end
 ```
 
@@ -170,16 +179,16 @@ import (
     "encoding/hex"
 )
 
-func ComputeIdentityHash(distinctID, secretAPIToken string) string {
-    h := hmac.New(sha256.New, []byte(secretAPIToken))
+func ComputeIdentityHash(distinctID, secretAPIKey string) string {
+    h := hmac.New(sha256.New, []byte(secretAPIKey))
     h.Write([]byte(distinctID))
     return hex.EncodeToString(h.Sum(nil))
 }
 ```
 
 ```php
-function computeIdentityHash(string $distinctId, string $secretApiToken): string {
-    return hash_hmac('sha256', $distinctId, $secretApiToken);
+function computeIdentityHash(string $distinctId, string $secretApiKey): string {
+    return hash_hmac('sha256', $distinctId, $secretApiKey);
 }
 ```
 
@@ -221,9 +230,9 @@ When a user logs out, clear their identity so the widget falls back to session-b
 posthog.clearIdentity()
 ```
 
-<CalloutBox icon="IconWarning" title="Keep your secret API token secure" type="caution">
+<CalloutBox icon="IconWarning" title="Keep your secret API key secure" type="caution">
 
-Your `secret_api_token` must never be exposed in client-side code. Always compute the identity hash on your server and pass only the hash to the frontend.
+Your secret API key must never be exposed in client-side code. Always compute the identity hash on your server and pass only the hash to the frontend.
 
 </CalloutBox>
 
@@ -235,7 +244,7 @@ Your `secret_api_token` must never be exposed in client-side code. Always comput
 | **Anonymous visitors** | Use the default widget session (no setup required) |
 | **Mixed audience** | Use identity verification when users are logged in, fall back to widget session for anonymous users |
 
-If your team doesn't have a `secret_api_token` configured, identity verification is ignored and the widget falls back to session-based access control.
+If your project has no secret API key, requests that carry identity fields get `403 Forbidden`. Generate a key in Support settings. Requests without identity fields keep using the browser session.
 
 ## Notifications
 

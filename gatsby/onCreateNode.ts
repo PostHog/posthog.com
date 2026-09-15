@@ -1,4 +1,4 @@
-import { replacePath, stripFrontmatter } from './utils'
+import { getPublicID, replacePath, stripFrontmatter } from './utils'
 import { createFilePath, createRemoteFileNode } from 'gatsby-source-filesystem'
 
 import GitUrlParse from 'git-url-parse'
@@ -133,11 +133,6 @@ export const onPreInit: GatsbyNode['onPreInit'] = async function ({ actions }) {
 
     // Persist for reuse by later builds (saved to the Actions cache by the master warmup job).
     fs.writeFileSync(CLOUDINARY_CACHE_FILE, JSON.stringify(cloudinaryCache))
-}
-
-function getPublicID(image: string) {
-    const imagePath = image.split('/upload/')[1]
-    return imagePath.substring(0, imagePath.lastIndexOf('.'))
 }
 
 // onCreateNode runs once per source node (thousands of Mdx/MarkdownRemark nodes). The

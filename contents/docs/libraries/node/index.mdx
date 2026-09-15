@@ -315,6 +315,10 @@ Properties and `distinctId` passed directly to `capture` take precedence over re
 
 If you're using [PostHog JS](/docs/libraries/js) on the frontend, configure [`tracing_headers`](/docs/libraries/js/config#tracing-headers) for your Express backend hostname so browser requests include `X-POSTHOG-SESSION-ID` and `X-POSTHOG-DISTINCT-ID`, which the Express middleware reads automatically.
 
+## Add request context and error capture to Fastify
+
+See the [Fastify guide](/docs/libraries/fastify) for installation, request context, event capture, error handling, and shutdown.
+
 ## Distributed tracing
 
 > Requires `posthog-node` version >= 5.52.0.
