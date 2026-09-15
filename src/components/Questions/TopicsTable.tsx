@@ -6,6 +6,7 @@ import {
     IconBox,
     IconBrackets,
     IconCode,
+    IconCompass,
     IconCursor,
     IconDashboard,
     IconDatabase,
@@ -40,6 +41,7 @@ import {
     IconMagicWand,
     IconLlmAnalytics,
     IconSparkles,
+    IconSpotlight,
     IconEndpoints,
 } from '@posthog/icons'
 
@@ -87,7 +89,9 @@ export const topicIcons = {
     'product analytics': IconGraph,
     sdks: IconBox,
     security: IconPrivacy,
+    '#self-driving': IconCompass,
     'session replay': IconRewindPlay,
+    '#show-and-tell': IconSpotlight,
     'sparks joy': SparksJoy, // to be replaced or removed
     trends: IconTrends,
     toolbar: IconToolbar,
