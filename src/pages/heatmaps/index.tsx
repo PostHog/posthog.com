@@ -238,7 +238,7 @@ export default function Heatmaps() {
                 productSelect={<ProductSwitcher activeHandle={heatmapsProduct.handle} />}
             >
                 <div ref={sectionsRef} className="flex flex-col gap-12">
-                    <Overview id="overview" productData={productData} allProducts={[]} hideProductLabel />
+                    <Overview id="overview" productData={productData} allProducts={[]} />
                     <div className="not-prose flex flex-col divide-y divide-primary [&>*]:py-8 [&>*:first-child]:pt-0 [&>*:last-child]:pb-0">
                         <Eli5 id="eli5" productData={productData} allProducts={[]} />
                         <UseCases id="use-cases" productData={productData} allProducts={[]} />

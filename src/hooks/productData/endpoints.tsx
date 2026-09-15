@@ -52,7 +52,6 @@ export const endpoints = {
             slug: 'overview',
             name: 'Overview',
             icon: <IconEye className="size-4" />,
-            props: { hideProductLabel: true },
         },
         {
             slug: 'eli5',

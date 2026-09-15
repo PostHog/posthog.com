@@ -5,12 +5,8 @@ import Glow from 'components/Glow'
 import { CTAs } from 'components/CTAs'
 import { DebugContainerQuery } from 'components/DebugContainerQuery'
 
-interface OverviewProps extends SectionComponentProps {
-    hideProductLabel?: boolean
-}
-
-const Overview = ({ id, productData, hideProductLabel = false }: OverviewProps) => {
-    const { name, Icon, overview, screenshots, status, hogs } = productData ?? {}
+const Overview = ({ id, productData }: SectionComponentProps) => {
+    const { name, overview, screenshots, hogs } = productData ?? {}
     // Sized by height, not width: the art ranges from wide to tall portraits, and
     // a fixed width makes the tall ones swamp the screenshot. It dips at `@3xl`
     // because that is where the screenshot's own `max-w-*` cap shrinks it.
@@ -75,19 +71,6 @@ const Overview = ({ id, productData, hideProductLabel = false }: OverviewProps) 
                 )}
 
                 <div className="space-y-4">
-                    {!hideProductLabel && (
-                        <div className="flex items-center gap-2">
-                            <Glow color="white" size="md" intensity="strong" className="">
-                                {Icon && <Icon className={`size-6 text-${productData?.color}`} />}
-                            </Glow>
-                            <span className="text-lg font-bold">{name}</span>
-                            {status === 'beta' && (
-                                <span className="font-bold uppercase border-2 border-current px-1 rounded text-xs">
-                                    Beta
-                                </span>
-                            )}
-                        </div>
-                    )}
                     <div>
                         <h1 className="!text-4xl font-bold !leading-tight">{overview?.title || name}</h1>
                         {overview?.description && <p className="leading-relaxed">{overview.description}</p>}
