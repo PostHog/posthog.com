@@ -731,13 +731,13 @@ function MCPCTA(): JSX.Element {
                 </div>
                 <div className="order-1 @3xl/reader-content:order-2">
                     <p className="text-xl @sm:text-2xl font-bold m-0 mb-1">
-                        Install the{' '}
+                        Get started in{' '}
                         <span className="bg-blue/10 dark:bg-blue/20 text-blue rounded-md px-1 whitespace-nowrap">
-                            MCP
+                            thirty seconds
                         </span>
                     </p>
                     <p className="text-secondary m-0 mb-4 text-[13px]">
-                        One command. Thirty seconds. Works in Cursor, Claude, Codex, PostHog Desktop, and friends.
+                        One command. Works in Cursor, Claude, Codex, PostHog Desktop, and friends.
                     </p>
                     <div className="mb-4">
                         <MCPInstallCTA className="max-w-md" />
