@@ -8,7 +8,7 @@ Every link we buy or place must carry UTM parameters from the lists on this page
 
 PostHog does not store the acquisition channel on a session. It calculates the [channel type](/docs/data/channel-type) from the referring domain, the advertising IDs, and the UTM parameters on the first page the person lands on. The calculation runs each time somebody opens a report, and it matches `utm_source` and `utm_medium` against a fixed [list of known values](https://github.com/PostHog/posthog/blob/master/posthog/models/channel_type/channel_definitions.json).
 
-A value outside that list therefore moves paid traffic into an organic channel or into Direct. The paid channel report then under-reports the spend, and there is no error to warn us.
+A value outside that list therefore puts the session in the wrong channel, and there is no error to warn us. A paid link with no paid medium leaves the paid report altogether and becomes organic or Direct, which under-reports the spend. A `paid-` medium with an unlisted source stays in the paid report, but it lands in Paid Unknown instead of its real channel.
 
 ## Four rules
 

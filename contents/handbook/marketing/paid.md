@@ -34,7 +34,7 @@ In addition to Hey, we also have a monthly call with Google Partners who provide
 
 ### Campaign tagging
 
-Tag every paid link with the `utm_source` and `utm_medium` values in our [UTM conventions](/handbook/marketing/utm-conventions). PostHog calculates the acquisition channel from these values, so a value outside the approved list reports paid spend as organic traffic.
+Tag every paid link with the `utm_source` and `utm_medium` values in our [UTM conventions](/handbook/marketing/utm-conventions). PostHog calculates the acquisition channel from these values, so a value outside the approved list puts the spend in the wrong channel, or drops it out of the paid report altogether.
 
 ### Tracking conversion & conversion optimization
 
