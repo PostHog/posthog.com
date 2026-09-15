@@ -108,11 +108,11 @@ We use [PandaDoc](https://app.pandadoc.com/a/#/) to handle document generation, 
 
     with either
 
-    > PostHog Cloud License Terms entered into by and between the Parties on or about the date hereof and Privacy Policy appearing at: https://posthog.com/privacy (collectively the “**Agreement**”).
+    > PostHog Master Services Agreement (Cloud License) entered into by and between the Parties on or about the date hereof and Privacy Policy appearing at: https://posthog.com/privacy (collectively the “**Agreement**”).
 
     or, if the Customer insists on including the exact date of the MSA to remove ambiguity,
 
-   > PostHog Cloud License Terms entered into by and between the Parties on or about [INSERT DATE OF EXECUTION OF MSA] and Privacy Policy appearing at: https://posthog.com/privacy (collectively the “**Agreement**”).
+   > PostHog Master Services Agreement (Cloud License) entered into by and between the Parties on or about [INSERT DATE OF EXECUTION OF MSA] and Privacy Policy appearing at: https://posthog.com/privacy (collectively the “**Agreement**”).
 
 11. You should link the order form to the opportunity record in Salesforce using the `Contract Link` field in the "Opportunity Closure Details" so that we have a reference to the completed paperwork from our CRM.
 
