@@ -1,0 +1,123 @@
+---
+title: 'To build or buy feature flags: Non-obvious things to know'
+date: 2026-09-15
+rootPage: /blog
+sidebar: Blog
+showTitle: true
+hideAnchor: true
+author:
+    - ian-vanagas
+featuredImage: >-
+    https://res.cloudinary.com/dmukukwp6/image/upload/ai_powered_features_13eba8675a.jpg
+featuredImageType: full
+category: General
+tags:
+    - Feature flags
+---
+
+AI agents are causing teams to consider whether they should build their own version of tools they pay for. 
+
+[Feature flags](/feature-flags) have long been a prime target for this "build or buy" question, even before AI got good. This is because, at their most basic, flags are a function. You call them with a key and they return a value. How hard could this be?
+
+The complication comes from everything that must happen to return that value reliably, accurately, and fast. Teams deciding on building versus buying quickly run into a bunch of obvious things to consider:
+
+- It costs time and money to create, host, and maintain. 
+- [Lots of feature flag software already exists](/blog/best-feature-flag-software-for-developers), is free, and can fit into your compliance requirements if needed.
+- Having fewer flags, users, SDKs, and use cases makes it easier to manage.
+- Making flags usable requires more than just the core functionality; you need features like admin UIs too.
+
+As a company that offers [feature flags](/feature-flags) and has thousands of [customers](/customers) who use them, we know the decision goes well beyond these points. To help you, here are some non-obvious things to consider when deciding between building or buying feature flags.
+
+## The real work is in integrations
+
+A feature flag implementation starts simple: a database table with a key and a value. As soon as you want to do more, you need to integrate with other services, and this quickly becomes the bulk of the work.
+
+Some examples:
+
+- **User identification.** You need to know who a user is to target them with a flag. This might be as simple as a user ID, but it can also include properties like plan, location, device, and more.
+
+- **Experimentation.** Flags can be used to [run experiments](/experiments), but this requires usage analytics, exposure logging, and statistical analysis to determine the impact of different flag values.
+
+- **Realtime cohorts.** Calculating cohorts often has nothing to do with flags themselves. Membership can change in a completely different part of the codebase. Race conditions can cause members to be added or removed at the wrong time. Recomputing constantly can be expensive.
+
+- **Data warehouses.** For many companies, the source of truth is the [data warehouse](/docs/data-warehouse), but almost never is this warehouse optimized for the queries flags need to make.
+
+Getting these wrong can not only mean flags don't work, but also cause issues for the services they integrate with. Imagine a flag service using a database table that is also used by other services. A bad query can leak sensitive data. A malformed request can lock up the table and cause issues elsewhere. 
+
+Although the implementation in your codebase looks like a single function call, the data to calculate the return value can come from multiple services. The queries and calculations to get the right value can be complex too. Getting all this right requires a focus teams building flags might not have. 
+
+## Flags on your critical path
+
+Just like science advances one funeral at a time, feature flag reliability advances one outage at a time.
+
+Flags often sit on your critical path. An issue with them can mean users get the wrong experience or no experience at all. In some cases, they've even [lost companies millions](/newsletter/feature-flag-mistakes).
+
+There are plenty of unknown unknowns when it comes to building a feature flag service. Problems and blind spots that only become apparent when the service is in production such as:
+
+- [Hitting efficiency limits of our main Django service](/blog/even-faster-more-reliable-flags).
+- [Niche Rust issues causing latency spikes](/blog/untangling-rayon-and-tokio).
+- [Using way more RAM than we needed to](/blog/local-flag-evals-rust).
+
+Every flags platform has had problems, including us. All of them have learned from the issues and improved. Our p99 is now below 25ms and we have [100% uptime in the last 90 days](/status) (between June 17th and September 14th, 2026). 
+
+This is something you are forgoing when you build your own service. You will make mistakes, and it will be your responsibility to fix them, not a vendor's.
+
+## The architecture needs to be future-proofed
+
+Flags start simple. A toggle in a database can switch features on and off, but more features will inevitably be added. You won't be the only person using it, and these other personas will have different needs.
+
+A structure that works early might be wrong later. For example, adding basic user targeting to your database toggles requires writing an entire new service as evaluation isn't read-only anymore. Add percentage targeting and you need deterministic bucketing, which you might only realize after a user complains a feature disappears.
+
+Are you ready to handle many languages? Even ones you're less familiar with? Airbnb built a [Kubernetes sidecar](https://airbnb.tech/infrastructure/sitar-agent-building-a-reliable-dynamic-configuration-sidecar-at-scale/) specifically to avoid reimplementing config in multiple languages. Restructures to handle new features often require rewrites and risky migrations. 
+
+Even big companies struggle with the future-proofing and maintainability aspect of flags. Dropbox built their own feature flag service called [Stormcrow](https://dropbox.tech/infrastructure/introducing-stormcrow) in 2017. It had Hive-based populations wired to their analytics warehouse, a selector inferring graph, JSON config delivery, batched delivery for mobile/desktop clients, real-time monitoring, a static analyzer for tracking flags in code, audit history, and overrides. Still, in 2026, they moved to a flags platform. 
+
+## Agent ergonomics
+
+Agents are becoming the primary users of feature flags. ~60% of PostHog flags are created outside the UI. 33% by the [MCP](/docs/model-context-protocol) specifically.
+
+Developers on your team will want to use agents to create and edit them. This is an important surface to maintain and it means you need:
+
+- MCP with tools
+- CLI
+- Agent access controls
+- Audit log
+- Debugging tools
+
+This is another surface where issues arise. We've had cases where agents mess with flags they weren't supposed to, causing the customer to reevaluate read vs write access for agents. They could only figure out what happened because of the audit log. 
+
+Also, just having tools available to agents does not mean they are right. Our MCP flag tool error rate was at ~5% last month because of malformed calls and hallucinated IDs. Thanks to [MCP Analytics](/mcp-analytics), we were able to fix this and bring these down, but a team without  MCP performance visibility would waste time and tokens every time it happened. 
+
+## Adoption, developer experience, and docs
+
+At big companies, adoption can be a legitimate problem. Companies like Dropbox and [monday.com](https://engineering.monday.com/when-infrastructure-becomes-a-product/) have written about their internal dev tools fragmentation and how it leads to many tools of varying quality doing the same things. 
+
+> We didn't have one tool, but several: some for the monolith, others for microservices, with no clear guidelines on which to use, when, or why. There was no happy path, just a fragmented set of solutions and a lot of undocumented knowledge. - _Yoni Alaluf, Tech Lead at monday.com_
+
+Like any other tool, developers will need to be convinced to use yours. What's stopping them from building their own feature flag tool for their simple use case? 
+
+A key part of doing this is documentation and developer experience. A company like PostHog can afford to invest here because we have many people using [Feature Flags](/feature-flags). Our teams are constantly making updates to our [docs](/docs/feature-flags), agent tools, and [best practices](/docs/feature-flags/best-practices) to help users. This might not happen for a self-built tool. 
+
+## You don't have anyone to complain to
+
+This might seem like a bit of a troll reason and it's probably not one you want to tell your boss, but it's worth thinking about.
+
+As an engineer, you have a lot of things to worry about. Wouldn't it be nice if you didn't need to worry about the reliability of a critical piece of infrastructure? If anything goes slightly wrong or a feature is missing, you can complain to the vendor instead of people complaining to you.
+
+We can take it because you are a customer of ours. A coworker running the feature flag service in their off time might not be so happy to get these complaints.
+
+Running a piece of infrastructure on a critical path is stressful. It's not something that should be handled without care. Buying it provides a single responsible party that a self-built service might not provide.
+
+## When are you better off building?
+
+Although we made a lot of points about why buying is better, building can still make sense in some cases. Here are a few examples:
+
+1. **When it's a company differentiator.** You sell feature flags, experiments, or related products as a service.
+
+2. **You have an in-house team to maintain it.** Even if you aren't selling flags, you need a team to treat it like a product. They will need to be responsible for building new features, fixing bugs, and making improvements. 
+
+3. **You can't stop worrying about a third party.** If you have strong reasons to distrust a vendor, whether that is because of reliability, compliance, or other reasons, building your own flags might be the only thing that brings you peace of mind.
+
+If you don't meet these criteria, consider PostHog. Thousands of companies like [Arena](/customers/arena), [ResearchGate](/customers/researchgate), and [carVertical](/customers/carvertical) choose PostHog for feature flags. It provides all the benefits of buying detailed above and your first 1M requests every month are free.
+
+<WizardCommand />
