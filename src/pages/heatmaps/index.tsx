@@ -171,11 +171,11 @@ const HeatmapsInstallation = ({ id }: SectionComponentProps) => (
             className="w-full max-w-2xl mx-auto mb-6"
             imgClassName="w-full h-auto rounded border border-primary shadow-lg"
         />
-        <div className="grid grid-cols-1 @2xl/reader-content:grid-cols-2 gap-4">
-            <OSButton asLink variant="primary" size="md" to="/signup" width="full">
+        <div className="flex flex-wrap gap-3">
+            <OSButton asLink variant="primary" size="md" to="/signup">
                 Get started – free
             </OSButton>
-            <OSButton asLink variant="secondary" size="md" to="/docs/toolbar/heatmaps" width="full">
+            <OSButton asLink variant="secondary" size="md" to="/docs/toolbar/heatmaps">
                 Read the documentation
             </OSButton>
         </div>

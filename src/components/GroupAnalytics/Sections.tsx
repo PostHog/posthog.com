@@ -73,11 +73,11 @@ export const GroupAnalyticsInstallation = ({ id }: SectionComponentProps) => (
             Enable Group Analytics from your billing page, create a group type, then identify and link groups from your
             SDK. The documentation includes examples for every supported library.
         </p>
-        <div className="grid grid-cols-1 @2xl/reader-content:grid-cols-2 gap-4">
-            <OSButton asLink variant="primary" size="md" to="/signup" width="full">
+        <div className="flex flex-wrap gap-3">
+            <OSButton asLink variant="primary" size="md" to="/signup">
                 Get started – free
             </OSButton>
-            <OSButton asLink variant="secondary" size="md" to="/docs/product-analytics/group-analytics" width="full">
+            <OSButton asLink variant="secondary" size="md" to="/docs/product-analytics/group-analytics">
                 Read the documentation
             </OSButton>
         </div>
@@ -165,11 +165,11 @@ export const GroupAnalyticsPricingCTA = ({ id }: SectionComponentProps) => (
     <section id={id} className="scroll-mt-20 not-prose mb-20">
         <SectionHeading>Get started</SectionHeading>
         <p className="text-base leading-relaxed text-secondary mt-0 mb-5">Subscribe to add-ons after signing up.</p>
-        <div className="grid grid-cols-1 @2xl/reader-content:grid-cols-2 gap-4">
-            <OSButton asLink variant="primary" size="md" to="/signup" width="full">
+        <div className="flex flex-wrap gap-3">
+            <OSButton asLink variant="primary" size="md" to="/signup">
                 Get started – free
             </OSButton>
-            <OSButton asLink variant="secondary" size="md" to="/pricing" width="full">
+            <OSButton asLink variant="secondary" size="md" to="/pricing">
                 Open pricing calculator
             </OSButton>
         </div>
