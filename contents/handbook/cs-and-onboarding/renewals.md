@@ -40,11 +40,11 @@ Tell the customer which of these is happening while the order form is still out,
 
 ### When the contract dates and the billing dates don't match
 
-The credit expiry date comes from the customer's metadata in Stripe (`annual_plan_starts_at`, `annual_plan_ends_at`, and `credit_expires_at`), not from the date on the order form. The two can disagree — for example when the subscription was set up on a different billing period, or when a term was re-papered after the original start date. Credits follow the metadata, so a mismatch moves your real renewal deadline.
+The credit expiry date comes from the customer's metadata in Stripe (`annual_plan_starts_at`, `annual_plan_ends_at`, and `credit_expires_at`), not from the date on the order form. The two should not disagree. If for some reason the contract didn't have the right start date, we should note the mismatch with an explanation in opportunity record.
 
 Check the order form dates against <PrivateLink url="https://billing.posthog.com/admin/">billing admin</PrivateLink> or Stripe when you start a renewal. If they don't match, you own the cleanup as the account owner:
 
-1. Ask the billing team in #team-billing which date is correct, and ask them to correct the metadata if the order form is right.
+1. Ask the revops team in #team-revops which date is correct, and ask them to correct the metadata if the order form is right.
 2. Add a comment on the opportunity that records both dates, the confirmed date, and the reason they differ. The next person on the account must not have to repeat the investigation.
 3. Update the renewal opportunity dates to the confirmed dates, including the close date and the contract start date.
 
