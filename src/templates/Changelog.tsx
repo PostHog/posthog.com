@@ -490,7 +490,9 @@ const RoadmapCards = ({
 }: RoadmapCardsProps) => {
     const { addWindow } = useApp()
     const width = 340
-    const containerRef = useRef<HTMLDivElement>(null)
+    // State, not a ref: the virtualizer renders no items until it measures a scroll element, so
+    // the component must re-render when the viewport mounts.
+    const [viewport, setViewport] = useState<HTMLDivElement | null>(null)
 
     const getWeekOfMonth = (date: string) => {
         return Math.min(4, Math.ceil(dayjs.utc(date).date() / 7))
@@ -583,10 +585,7 @@ const RoadmapCards = ({
     const virtualizer = useVirtualizer({
         horizontal: true,
         count: weeks.length,
-        getScrollElement: () => {
-            const viewport = containerRef.current?.closest('[data-radix-scroll-area-viewport]') as HTMLElement | null
-            return viewport
-        },
+        getScrollElement: () => viewport,
         estimateSize: () => width,
         overscan: 5,
         gap: 15,
@@ -606,16 +605,14 @@ const RoadmapCards = ({
     }, [width])
 
     useEffect(() => {
-        const viewport = containerRef.current?.closest('[data-radix-scroll-area-viewport]') as HTMLElement | null
         if (!viewport) return
 
         const percentageOfScrollInView = (containerWidth / viewport.scrollWidth) * 100
         setPercentageOfScrollInView(percentageOfScrollInView)
         virtualizer.measure()
-    }, [containerWidth])
+    }, [containerWidth, viewport])
 
     useEffect(() => {
-        const viewport = containerRef.current?.closest('[data-radix-scroll-area-viewport]') as HTMLElement | null
         if (!viewport) return
         viewport.scrollTo({
             left: (windowPercentageFromLeft / 100) * viewport.scrollWidth,
@@ -623,7 +620,6 @@ const RoadmapCards = ({
     }, [windowPercentageFromLeft])
 
     useEffect(() => {
-        const viewport = containerRef.current?.closest('[data-radix-scroll-area-viewport]') as HTMLElement | null
         if (!viewport) return
 
         const handleScroll = () => {
@@ -634,11 +630,10 @@ const RoadmapCards = ({
         return () => {
             viewport.removeEventListener('scroll', handleScroll)
         }
-    }, [])
+    }, [viewport])
 
     // Scroll to latest week with roadmaps on mount
     useEffect(() => {
-        const viewport = containerRef.current?.closest('[data-radix-scroll-area-viewport]') as HTMLElement | null
         if (!viewport) return
 
         const lastNonEmptyWeekIndex = weeks.reduce((lastIndex, week, index) => {
@@ -647,15 +642,10 @@ const RoadmapCards = ({
 
         if (lastNonEmptyWeekIndex === -1) return
 
+        // The offset comes from the week index alone, so this must not wait for virtual items.
         const scrollToLastWeek = () => {
-            const virtualItems = virtualizer.getVirtualItems()
-            if (virtualItems.length === 0) return
-
-            const targetIndex = Math.max(0, lastNonEmptyWeekIndex)
-            const scrollLeft = targetIndex * (width + 15)
-
             viewport.scrollTo({
-                left: scrollLeft,
+                left: lastNonEmptyWeekIndex * (width + 15),
             })
         }
 
@@ -672,7 +662,7 @@ const RoadmapCards = ({
 
         const timer = setTimeout(handleInitialScroll, 100)
         return () => clearTimeout(timer)
-    }, [weeks, width])
+    }, [weeks, width, viewport])
 
     const handlePlayVideo = (video: ChangelogVideo) => {
         const size = {
@@ -704,10 +694,9 @@ const RoadmapCards = ({
     }
 
     return (
-        <ScrollArea className="size-full [&>div>div]:size-full [&>div>div]:!flex">
+        <ScrollArea className="size-full [&>div>div]:size-full [&>div>div]:!flex" viewportRef={setViewport}>
             <div className="h-full px-4">
                 <div
-                    ref={containerRef}
                     style={{
                         width: `${virtualizer.getTotalSize()}px`,
                     }}
