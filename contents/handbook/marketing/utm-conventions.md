@@ -15,7 +15,7 @@ A value outside that list therefore moves paid traffic into an organic channel o
 1. **Tag every paid link.** A paid link with no UTM parameters becomes Direct or Referral.
 2. **`utm_source` is the platform that showed the ad**, not the partner or the creator. PostHog matches the source against its list of platforms. A creator name, an agency name, or an internal codename is not on that list.
 3. **`utm_medium` says how we paid.** Use the value in the tables below, and use one value per channel. PostHog treats traffic as paid when `utm_medium` is `cpc`, `cpm`, `cpv`, `cpa`, `ppc`, or `retargeting`, or when it starts with `paid`.
-4. **The partner, the creative, and the placement go in `utm_campaign` and `utm_content`.** These two parameters do not change the channel, so they are the safe place for detail.
+4. **The partner, the creative, and the placement go in `utm_content`.** PostHog does not read `utm_content`, so it is the safe place for free text. `utm_campaign` is different: three words in it change the channel, so use the campaign-name format below.
 
 A Dub link such as `go.posthog.com/sponsored`, or a `posthog.com` redirect, must end at a destination URL that carries these parameters.
 
