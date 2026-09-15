@@ -536,7 +536,8 @@ export function useMenuData(): MenuType[] {
         return mobileItems
     }
 
-    // On mobile, include main navigation items in the logo menu
+    // On mobile, the logo menu is the full navigation. On desktop, the logo is a
+    // direct link to the homepage, because every item is also in the menus next to it.
     const logoMenuItems = isMobile
         ? [
               homeLogoMenuItem,
@@ -547,11 +548,7 @@ export function useMenuData(): MenuType[] {
               // System items
               ...baseLogoMenuItems,
           ]
-        : [
-              homeLogoMenuItem,
-              // Desktop: only show system items
-              ...baseLogoMenuItems,
-          ]
+        : []
 
     return [
         {
@@ -576,6 +573,7 @@ export function useMenuData(): MenuType[] {
                 </>
             ),
             items: logoMenuItems,
+            link: isMobile ? undefined : '/',
             mobileLink: undefined,
             hideChevron: true,
         },
