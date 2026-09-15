@@ -4,7 +4,7 @@ date: 2026-08-27
 author:
   - cory-slater
 featuredImage: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/Frame_144170_14616c41e1.png
+  https://res.cloudinary.com/dmukukwp6/image/upload/Frame_144170_14616c41e1.png
 featuredImageType: full
 tags:
   - Using PostHog
