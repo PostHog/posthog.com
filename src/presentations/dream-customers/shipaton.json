@@ -1,0 +1,98 @@
+{
+    "scouts": {
+        "name": "Scouts – Shipaton meetup",
+        "config": {
+            "thumbnails": true,
+            "notes": false,
+            "form": false
+        },
+        "slides": {
+            "overview": {
+                "template": "stacked",
+                "name": "Scouts",
+                "title": "What is a scout?",
+                "description": "\"A scout is a small agent (don't overthink that word) that looks at, wrangles, and makes sense of any data available in PostHog.\"",
+                "descriptionWidth": "@2xl:w-2/5",
+                "notes": "<p>Opening line straight from Andy's post. Real examples: bundle size, CSP/web vitals, 404s, code complexity. <strong>~30s</strong></p>"
+            },
+            "migration": {
+                "template": "stacked",
+                "name": "Not just analytics",
+                "title": "Not just analytics",
+                "image": "/images/presentations/shipaton/migration-car.png",
+                "imageAlt": "Hedgehog salesman slapping the roof of a PostHog car covered in products: this bad boy can fit so many products in it",
+                "description": "<p><em>\"PostHog tools tell you what users are doing. Self-driving acts on that data by opening pull requests that improve your product.\"</em></p>",
+                "notes": "<p>One sentence from the pocket guide carries the whole before/after: tools tell you, self-driving acts. Scouts are the watching piece – the next 4 minutes. The car joke tells itself. <strong>~20s</strong></p>"
+            },
+            "skill-harness": {
+                "template": "stacked",
+                "name": "Skill + harness",
+                "title": "\"A scout is, at its core, a skill\"",
+                "description": "<p><em>\"The business logic that used to be a sprawl of if/else branches and helper functions now starts life as a few hundred lines of English anyone can read, write, and improve.\"</em></p><p><em>\"What used to be if response_rate &lt; 0.3 and sample_size &gt; 30: is now a sentence like 'a flagship NPS survey needs ≥30 responses/week and a ≥10% score drop before it's worth acting on.'\"</em></p><p><em>\"Everything else – the loop, the sandbox, the scheduler, the memory – is deliberately thin plumbing around that skill.\"</em></p>",
+                "descriptionWidth": "@2xl:w-2/3",
+                "notes": "<p>The tools are just the PostHog MCP – the same one Claude Code and Cursor use. Only three scout-only tools: emit signal, scratchpad, past runs. <strong>~50s</strong></p>"
+            },
+            "scout-fleet": {
+                "template": "stacked",
+                "name": "The fleet",
+                "title": "Scouts are skills: the real fleet",
+                "image": "/images/presentations/shipaton/scout-fleet.png",
+                "imageAlt": "Scout list in the PostHog Skills app",
+                "description": "<p><em>\"You start at the easy end and only reach for the heavier machinery when a particular scout actually needs it.\"</em></p>",
+                "notes": "<p>Point out the code-complexity scout created live at another meetup. <strong>~20s</strong></p>"
+            },
+            "pipeline": {
+                "template": "stacked",
+                "name": "Pipeline",
+                "title": "Scout → signal → report → action",
+                "image": "https://res.cloudinary.com/dmukukwp6/image/upload/hoggie_mail_48daf2f4b4.png",
+                "imageAlt": "PostHog mail hedgehog",
+                "description": "<ul><li><em>\"A scout runs on a schedule, looks at some slice of your PostHog data, and decides whether anything is worth surfacing.\"</em></li><li><em>\"If it is, the scout emits a signal – a semi-structured finding with evidence, and a suggested action.\"</em></li><li><em>\"Signals get picked up by the self-driving pipeline, grouped, and turned into reports that land in your PostHog Inbox.\"</em></li><li><em>\"Reports get actioned – by you, or automatically by a PostHog Code task that picks up the report and ships a fix or improvement.\"</em></li></ul><p><em>\"Once the PR merges, the change generates new signals, so your product keeps improving itself over time.\"</em></p>",
+                "notes": "<p>The four steps, verbatim from the post. Restraint is the hard part – disqualifiers, dedupe keys, P0–P4 severity. <strong>~35s</strong></p>"
+            },
+            "web-analytics": {
+                "template": "stacked",
+                "name": "Web analytics",
+                "title": "The same pattern in web analytics",
+                "description": "<ul><li><strong>signals-scout-web-analytics:</strong> <em>\"acquisition channels diverging, attribution breakage, 404 spikes\"</em></li><li>Our performance scout compares cache coverage, uncached p95, and failure rate against the fleet's own 7-day baseline</li><li>It caught a cache-coverage dip, filed a report in the Inbox – then updated the same report when the metric recovered</li></ul><p><em>\"Quiet is the common case. A scout that reports every day is one you'll mute before you get real value out of it.\"</em></p>",
+                "descriptionWidth": "@2xl:w-2/3",
+                "notes": "<p>The query-performance skill defines what \"slow\" means; the MCP provides the tools to measure. Next slide shows the real report. <strong>~50s</strong></p>"
+            },
+            "scout-report": {
+                "template": "stacked",
+                "name": "The report",
+                "title": "Caught the dip, tracked the recovery",
+                "image": "/images/presentations/shipaton/scout-cache-coverage.png",
+                "imageAlt": "Web analytics performance scout report in Slack",
+                "description": "<p><em>\"The hard part of a scout isn't finding things. It's not finding things.\"</em> – or, as the pocket guide puts it: <em>\"it writes a report, or it writes nothing.\"</em></p>",
+                "notes": "<p>The update closes the loop – no new dashboard, nobody had to remember to check. The last reply in the thread gets the laugh and sets up the next slide. <strong>~20s</strong></p>"
+            },
+            "reply-report": {
+                "template": "stacked",
+                "name": "The conversation",
+                "title": "A report is a conversation",
+                "image": "/images/presentations/shipaton/scout-web-vitals.png",
+                "imageAlt": "Web vitals scout report in Slack with a human replying in the thread",
+                "description": "<p>Reply in the thread, mention the agent, and ask for the next step.</p>",
+                "notes": "<p>In the print: the web vitals scout reports and I reply in the thread asking it to act. A report is not an email you archive – it is a conversation with whoever found the problem. <strong>~25s</strong></p>"
+            },
+            "getting-started": {
+                "template": "stacked",
+                "name": "Start today",
+                "title": "Start at the easy end",
+                "image": "https://res.cloudinary.com/dmukukwp6/image/upload/happy_hog_ebc59e4658.png",
+                "imageAlt": "Happy PostHog hedgehog",
+                "description": "<ul><li><strong>Read:</strong> <a href=\"/pocket-guides/self-driving/101\">pocket guide: Self-driving 101</a> · posthog.com/blog/what-is-a-scout · posthog.com/blog/sql-parser</li><li><strong>Turn on:</strong> Self-driving / Inbox (open beta) – <em>\"PostHog ships with around 20 canonical scouts out of the box\"</em>, and every pocket-guide use case has <em>\"a one-click way to add it to your own product\"</em></li><li><strong>Run one anywhere:</strong> <em>\"you can run one manually in any agent surface where the PostHog MCP is available – PostHog Code, Claude Code, Codex, Cursor, whatever.\"</em></li></ul>",
+                "notes": "<p>Closing: a few sentences of English describing what is normal in your product – that is already a scout. <strong>~30s</strong></p>"
+            },
+            "appendix-precompute": {
+                "template": "stacked",
+                "name": "Appendix",
+                "title": "Appendix: ask in Slack, the agent measures via MCP",
+                "image": "/images/presentations/shipaton/mcp-precompute.png",
+                "imageAlt": "Slack thread with the agent answering a precompute hit-ratio question with a chart",
+                "notes": "<p>Backup slide for Q&A: the same tools scouts use answer questions on demand.</p>"
+            }
+        }
+    }
+}

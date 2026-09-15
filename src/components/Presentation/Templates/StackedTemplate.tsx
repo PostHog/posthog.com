@@ -52,18 +52,26 @@ export default function StackedTemplate({
     return (
         <div className={`h-full flex flex-col relative bg-${bgColor} text-black`}>
             {image ? (
-                <div className="relative flex-1 w-full px-4">
+                <div className="relative flex-1 min-h-0 w-full px-4 pt-4 flex items-center justify-center">
                     {imageDark ? (
                         <>
-                            <img src={image} alt={imageAlt || ''} className="dark:hidden max-w-full h-auto mx-auto" />
+                            <img
+                                src={image}
+                                alt={imageAlt || ''}
+                                className="dark:hidden max-w-full max-h-full w-auto h-auto object-contain mx-auto"
+                            />
                             <img
                                 src={imageDark}
                                 alt={imageAlt || ''}
-                                className="hidden dark:block max-w-full h-auto mx-auto"
+                                className="hidden dark:block max-w-full max-h-full w-auto h-auto object-contain mx-auto"
                             />
                         </>
                     ) : (
-                        <img src={image} alt={imageAlt || ''} className="max-w-full h-auto mx-auto" />
+                        <img
+                            src={image}
+                            alt={imageAlt || ''}
+                            className="max-w-full max-h-full w-auto h-auto object-contain mx-auto"
+                        />
                     )}
                 </div>
             ) : (
@@ -96,7 +104,7 @@ export default function StackedTemplate({
                     )}
                 </div>
 
-                {slideKey === 'overview' && (
+                {slideKey === 'overview' ? (
                     <>
                         <h1
                             className={`text-5xl @2xl:text-4xl mb-4 @2xl:mb-4 font-bold leading-tight @2xl:text-balance ${
@@ -113,6 +121,16 @@ export default function StackedTemplate({
                                 className={`prose text-2xl @2xl:text-xl @2xl:text-balance ${
                                     image ? '' : descriptionWidth
                                 }`}
+                            />
+                        )}
+                    </>
+                ) : (
+                    <>
+                        {title && <h2 className="text-3xl @2xl:text-4xl mb-4 font-bold leading-tight">{title}</h2>}
+                        {description && (
+                            <ParseHtml
+                                content={description.replace('{companyName}', companyName || 'your product')}
+                                className={`prose text-2xl @2xl:text-xl ${image ? '' : descriptionWidth || ''}`}
                             />
                         )}
                     </>
