@@ -1060,7 +1060,7 @@ export default function Changelog({
                     className="bg-primary text-primary relative h-full flex border-t border-primary"
                 >
                     <div ref={resizeObserverRef} className="flex flex-col flex-1 min-w-0 h-full">
-                        <div className="min-h-0 flex-shrink-0 flex justify-between items-center px-4 mt-2">
+                        <div className="min-h-0 flex-shrink-0 flex justify-between items-center px-4 mt-2 flex-wrap gap-2">
                             <Filters
                                 onTeamChange={(value) => filterNavigate('team', value)}
                                 teamFilterValue={teamFilter}
