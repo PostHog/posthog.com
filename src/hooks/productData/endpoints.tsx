@@ -73,21 +73,20 @@ export const endpoints = {
             name: 'How do I use it?',
             group: 'divided',
             icon: <IconCursorClick className="size-4" />,
-            props: { slides: applications, hideIntro: true, useSectionHeading: true },
+            props: { slides: applications },
         },
         {
             slug: 'top-features',
             name: 'Top features',
             group: 'divided',
             icon: <IconSparkles className="size-4" />,
-            props: { slides: topFeatures, useSectionHeading: true },
+            props: { slides: topFeatures },
         },
         {
             slug: 'ask-anything',
             name: 'AI prompts',
             group: 'divided',
             icon: <IconChat className="size-4" />,
-            props: { useSectionHeading: true },
         },
         // No `installation` section: Endpoints isn't an SDK install product.
         // Getting started is create-an-endpoint → call the URL (see docs start-here).

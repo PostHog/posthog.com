@@ -24,11 +24,7 @@ interface McpTool {
     description: string
 }
 
-interface AskAnythingProps extends SectionComponentProps {
-    useSectionHeading?: boolean
-}
-
-const AskAnything = ({ id, productData, useSectionHeading = false }: AskAnythingProps) => {
+const AskAnything = ({ id, productData }: SectionComponentProps) => {
     const ai = productData?.ai
     const groups: PromptGroup[] = ai?.groups ?? []
     const mcpFeatures: string[] = ai?.mcpFeatures ?? []
@@ -99,7 +95,7 @@ const AskAnything = ({ id, productData, useSectionHeading = false }: AskAnything
 
     return (
         <section id={id} className="scroll-mt-20 not-prose">
-            <h2 className={useSectionHeading ? SECTION_H2 : 'mb-3'}>AI prompts</h2>
+            <h2 className={SECTION_H2}>AI prompts</h2>
             {ai?.intro && (
                 <p className="text-base text-secondary mb-4">
                     {ai.intro} Works in{' '}

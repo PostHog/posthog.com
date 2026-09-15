@@ -238,7 +238,7 @@ export const replayVision = {
             slug: 'top-features',
             name: 'Top features',
             icon: <IconList className="size-4" />,
-            props: { slides: topFeatures, useSectionHeading: true },
+            props: { slides: topFeatures },
         },
         {
             slug: 'ai-prompts',
@@ -258,7 +258,6 @@ export const replayVision = {
             slug: 'installation',
             name: 'Install',
             icon: <IconCode className="size-4" />,
-            props: { useSectionHeading: true },
         },
         { slug: 'getting-started', name: 'Get started', icon: <IconRocket className="size-4" /> },
     ],
