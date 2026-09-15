@@ -3,8 +3,9 @@ title: What we learned from our first 300k Replay Vision scans
 date: 2026-08-27
 author:
   - cory-slater
-# featuredImage: TODO
-# featuredImageType: full
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/Frame_144170_14616c41e1.png
+featuredImageType: full
 tags:
   - Using PostHog
   - User research
