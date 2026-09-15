@@ -9,11 +9,11 @@ showTitle: true
 We use [Salesforce](https://posthog.lightning.force.com/lightning/page/home) as our customer relationship management ('CRM') platform. If you need access, you can ask <TeamMember name="Mine Kansu" photo /> for an invite.
 
 As a first step, make sure you connect your Gmail account under your Salesforce settings. Go to Settings → Connected Accounts → Gmail and connect it. This ensures all your customer emails sync automatically with Salesforce. 
-Next, make sure your Gmail account is connected in <PrivateLink url="https://posthog.vitally-eu.io/settings/profile/gmail">Vitally</PrivateLink>. This is essential so that we capture the full customer context and avoid duplicate or conflicting outreach.
+Next, connect your Google account in Customer Analytics. Open **Configure** in Customer Analytics and connect it there - your emails won't show up in the tool until you do. This is essential so that we capture the full customer context and avoid duplicate or conflicting outreach.
 
 As a general principle, we try to make sure as much customer communication as possible is captured in Salesforce rather than in individual email inboxes so that we make sure our users are getting a great experience (and not confusing or duplicate messages from different team members!). You should use the channel that suits the user, not us. Just make sure you keep Salesforce up to date with your interactions. We’ve found Slack messages usually get better response rates than email.
 
-For existing customers, you'll sometimes send emails directly from <PrivateLink url="https://posthog.vitally-eu.io/">Vitally</PrivateLink>. To ensure these also make it to Salesforce, first look up your _Email to Salesforce Address_ from the [personal settings page](https://posthog.lightning.force.com/lightning/settings/personal/EmailToSalesforceUserSetup/home) in Salesforce, and then add it to your <PrivateLink url="https://posthog.vitally-eu.io/settings/profile/gmail">Vitally gmail settings</PrivateLink>.
+For existing customers, send emails from your own email client. The Gmail connection you set up in Salesforce above syncs these automatically, so no extra routing is needed.
 
 All Slack messages sync up with the corresponding account in Salesforce. We use [SupportHog](/handbook/growth/sales/slack-channels) for this sync, so make sure SupportHog is [added to the customer Slack channel](/handbook/growth/sales/slack-channels) and the channel's name is recorded on the relevant Salesforce account record for the sync to work smoothly.
 
