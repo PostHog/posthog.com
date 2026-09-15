@@ -89,7 +89,7 @@ def identify(request, extra):
 
 ## Ruby
 
-The official Ruby MCP SDK has a single major that serves both revisions: the `initialize` handshake for `2025-11-25` and earlier, and the per-request `_meta` envelope for `2026-07-28`. The experimental [Ruby SDK](/docs/mcp-analytics/installation#ruby) handles both with the same call:
+The official Ruby MCP SDK has a single major that serves both revisions: the `initialize` handshake for `2025-11-25` and earlier, and the per-request `_meta` envelope for `2026-07-28`. The experimental, [unsupported](/docs/mcp-analytics/installation#ruby) Ruby SDK handles both with the same call:
 
 ```ruby
 server = MCP::Server.new(name: "my-server", version: "1.0.0", tools: [SearchEvents])

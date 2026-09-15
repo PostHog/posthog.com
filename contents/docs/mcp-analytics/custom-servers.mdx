@@ -225,9 +225,9 @@ The token is unsigned and carries only what the client volunteered at `initializ
 
 ## Ruby
 
-<CalloutBox icon="IconFlask" title="Ruby SDK is experimental" type="caution">
+<CalloutBox icon="IconFlask" title="Ruby SDK is experimental and unsupported" type="caution">
 
-`PostHog::MCP::Client` ships in `posthog-ruby` and is **experimental**: method signatures may change in a minor release.
+`PostHog::MCP::Client` ships in `posthog-ruby` and is **experimental and not officially supported**: we don't provide support for it, and its method signatures may change in a minor release. See the [Ruby section of the installation docs](/docs/mcp-analytics/installation#ruby).
 
 </CalloutBox>
 
@@ -341,7 +341,25 @@ Every capture method accepts the same attribution keywords. Pass them on every c
 | `client_user_agent:`, `vendor_client:` | `$mcp_client_user_agent`, `$mcp_vendor_client` | The `User-Agent` and `X-Anthropic-Client` request headers. |
 | `protocol_version:` | `$mcp_protocol_version` | `params.protocolVersion` on `initialize`, or the `MCP-Protocol-Version` header. |
 
-For `session_id:`, the simplest option is `use PostHog::MCP::RackMiddleware` in your Rack stack. At `initialize` it mints an `Mcp-Session-Id` token, clients replay it on every request, and the decoded token is available as `env["posthog_mcp.session"]`, so `session_id: env["posthog_mcp.session"]&.session_id`. If you already issue your own session header, pass `PostHog::MCP.derive_session_id_from_mcp_session(your_id)` so the same connection always maps to the same `$session_id`.
+For `session_id:`, the simplest option is `use PostHog::MCP::RackMiddleware` in your Rack stack. The middleware reads no request or response body – you already parse the JSON-RPC body yourself – so when you answer an accepted `initialize`, call the mint hook it leaves in `env["posthog_mcp.mint"]`:
+
+```ruby
+session = env["posthog_mcp.mint"]&.call(
+  client_name: params["clientInfo"]["name"],
+  client_version: params["clientInfo"]["version"],
+  protocol_version: params["protocolVersion"]
+)
+
+posthog.capture_initialize(
+  client_name: params["clientInfo"]["name"],
+  client_version: params["clientInfo"]["version"],
+  protocol_version: params["protocolVersion"],
+  session_id: session&.session_id,
+  distinct_id: user_id
+)
+```
+
+The middleware attaches the minted token to the `Mcp-Session-Id` response header, clients replay it on every request, and on those requests the decoded token is waiting in `env["posthog_mcp.session"]` – so everywhere else you just pass `session_id: env["posthog_mcp.session"]&.session_id`. The hook is absent (`nil`) when the client already replayed a token, and returns `nil` for a `2026-07-28` client, which must not be answered with an `Mcp-Session-Id`. If you issue your own session header instead, pass `PostHog::MCP.derive_session_id_from_mcp_session(your_id)` so the same connection always maps to the same `$session_id`.
 
 ### Step 5: Flush
 

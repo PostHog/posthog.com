@@ -13,8 +13,8 @@ import WizardCommand from 'components/WizardCommand'
 
 ## Requirements
 
-- Node.js 20.20+ or 22.22+ (TypeScript/JavaScript), Python 3.10+ – see [Python](#python) below – or Ruby 3.0+ – see [Ruby](#ruby) below (experimental)
-- An MCP server built on either TypeScript SDK major – `@modelcontextprotocol/sdk` (v1) or `@modelcontextprotocol/{core,server,client}` (v2) – either official Python MCP SDK major (`mcp>=1.26,<3`), or the official Ruby MCP SDK (`mcp` gem `>= 1.4`, experimental). jlowin's standalone `fastmcp` package is also supported. See [MCP SDK v2](/docs/mcp-analytics/sdk-v2). (Running a custom dispatcher with no server object to wrap? See [Custom servers](/docs/mcp-analytics/custom-servers).)
+- Node.js 20.20+ or 22.22+ (TypeScript/JavaScript), Python 3.10+ – see [Python](#python) below – or Ruby 3.0+ – see [Ruby](#ruby) below (experimental and unsupported)
+- An MCP server built on either TypeScript SDK major – `@modelcontextprotocol/sdk` (v1) or `@modelcontextprotocol/{core,server,client}` (v2) – either official Python MCP SDK major (`mcp>=1.26,<3`), or the official Ruby MCP SDK (`mcp` gem `>= 1.4`, experimental and unsupported). jlowin's standalone `fastmcp` package is also supported. See [MCP SDK v2](/docs/mcp-analytics/sdk-v2). (Running a custom dispatcher with no server object to wrap? See [Custom servers](/docs/mcp-analytics/custom-servers).)
 - A PostHog [project token](/docs/getting-started/project-token) (`phc_…`)
 
 ## AI wizard
@@ -382,9 +382,11 @@ Self-reported model capture is currently TypeScript-only. Python doesn't inject 
 
 ## Ruby
 
-<CalloutBox icon="IconFlask" title="Ruby SDK is experimental" type="caution">
+<CalloutBox icon="IconFlask" title="Ruby SDK is experimental and unsupported" type="caution">
 
-`PostHog::MCP` is **experimental**. Its API, its options, and the `$mcp_*` events it captures may change in a minor `posthog-ruby` release, and the gem logs a warning when you require it. Try it and tell us what breaks, but don't build production reporting on it yet.
+`PostHog::MCP` is **experimental and not officially supported**. We don't provide support for it, and the MCP analytics team doesn't maintain it. Its API, its options, and the `$mcp_*` events it captures may change in a minor `posthog-ruby` release, and the gem logs a warning when you require it.
+
+Try it, and report bugs or send patches to [posthog-ruby](https://github.com/PostHog/posthog-ruby/issues) – but don't build production reporting on it yet. For a supported SDK, use [TypeScript](#typescript) or [Python](#python).
 
 </CalloutBox>
 
@@ -458,11 +460,13 @@ A stateless server keeps nothing between requests, often on a different pod each
 
 The SDK handles this with no session store and no sticky routing. When `MCP::Server::Transports::StreamableHTTPTransport` runs with `stateless: true`, the SDK mints the `Mcp-Session-Id` response header at `initialize` as a token carrying the session ID and client identity. Clients replay that header on every request, so any pod reads the same values back. Nothing changes on the client side, and there's nothing to configure.
 
-When you build the Rack app yourself, add the middleware once. The decoded token is exposed as `env["posthog_mcp.session"]`:
+When you build the Rack app yourself, add the middleware once:
 
 ```ruby
 use PostHog::MCP::RackMiddleware
 ```
+
+It reads neither the request nor the response body: it publishes the request's headers to the instrumented server below it and carries back the token that server minted once the handshake succeeded. The decoded token is exposed to your app as `env["posthog_mcp.session"]`. (Dispatching MCP requests by hand, with no `MCP::Server` to wrap? Then you mint it yourself – see [Custom servers](/docs/mcp-analytics/custom-servers#step-4-attribute-the-caller).)
 
 Stateful HTTP servers need nothing: the transport's own session ID is hashed deterministically, so a session survives restarts. [Conversation IDs](/docs/mcp-analytics/conversation-id) work too and need no middleware at all.
 
