@@ -1,0 +1,110 @@
+---
+title: Alerts
+---
+
+import { ProductScreenshot } from "components/ProductScreenshot";
+
+export const alertsTabLight =
+  "https://raw.githubusercontent.com/PostHog/pr-assets/d0bce20682dcdebe5254f3cfb17b4c4d934844ff/2026/09/a88315a7-1625-4852-b59e-9ba2a778424a.png";
+export const alertFormLight =
+  "https://raw.githubusercontent.com/PostHog/pr-assets/d0bce20682dcdebe5254f3cfb17b4c4d934844ff/2026/09/5d6230f0-7a00-4a13-b9ac-6ae6ba92995b.png";
+
+Where a [scout](/docs/replay-vision/scouts) tells you what happened on a cadence you set, an alert stays quiet until something you care about happens. You define a condition against the scanner's output, and PostHog notifies you only when it's met. Alerts are configured on a scanner's **Alerts** tab.
+
+There are two kinds:
+
+- **Every matching observation** – notifies within about a minute of each observation that matches. Notifications are bundled: a burst of matches sends one message covering all of them, not one message each.
+- **Metric threshold** – watches a metric over a rolling window, checked about hourly, and fires when it crosses your threshold.
+
+<ProductScreenshot
+  imageLight={alertsTabLight}
+  alt="The Alerts tab on a scanner, listing alerts with their conditions, states, and last check"
+  classes="rounded"
+/>
+
+## Creating an alert
+
+On a scanner's **Alerts** tab, click **New alert** and walk through the steps:
+
+- **Configure** – name the alert and pick its type: every matching observation, or a metric threshold.
+- **Set trigger** – which observations count, and when the alert fires. The selection mirrors the [scanner type](/docs/replay-vision/scanner-types): a monitor selects verdicts (`Yes`, `No`, or `Inconclusive`), a classifier selects tags, a scorer selects a score range. Leave everything empty to match every observation. (Summarizers have no categorical output to select on, so an alert on one matches every observation – a [scout](/docs/replay-vision/scouts) is usually the better fit.) For a metric threshold you also set the metric (number of matching observations, or for a scorer the average score), the direction (at or above, at or below), the threshold, and the rolling window (24 hours to 30 days).
+- **Notify** – a connected Slack channel, a [webhook](#webhooks), or both. Each destination receives every notification the alert sends.
+- **Review** – check the summary and create the alert.
+
+<ProductScreenshot
+  imageLight={alertFormLight}
+  alt="The set trigger step of the new alert flow, showing the metric, direction, threshold, and rolling window"
+  classes="rounded"
+/>
+
+Under **Advanced options**:
+
+- **Noise reduction** (metric threshold) – require N of the last M checks to breach before the alert fires, so a single spiky check doesn't page you.
+- **Notification cooldown** (metric threshold) – the minimum minutes between repeated notifications.
+- **Quiet hours** (both kinds) – hours during which the alert doesn't notify.
+
+## Firing and resolving
+
+A metric threshold alert has two states. When the condition starts being met it **fires**; when a later check finds the condition no longer met it **resolves**. Both are separate notifications, so you can wire "dead-end rate is spiking" and "dead-end rate is back to normal" into the same channel. An every-match alert has no resolved state – it just sends the new matches.
+
+Two more notifications cover the alert's own health:
+
+- **Errored** – a check couldn't evaluate. The alert keeps trying.
+- **Auto-disabled** – too many consecutive check failures. The alert shows as broken on the Alerts tab, with a **Reset** button that re-enables it and runs a check shortly after.
+
+## Webhooks
+
+When an alert delivers to a webhook, PostHog sends an HTTP `POST` with a JSON body to the URL you set. Delivery runs through [destinations in Data pipelines](/docs/cdp/destinations), where you can see every attempt.
+
+#### Request
+
+- **Method:** `POST`
+- **Headers:**
+  - `Content-Type: application/json`
+  - `X-PostHog-Webhook-Version: 1` – the payload version. New fields may be added to the body without changing this, so ignore unknown fields rather than rejecting the payload. A breaking change would ship under a new version.
+
+#### Payload
+
+The body is a JSON envelope. `type` tells you what happened; `data` carries the detail and links.
+
+```json
+{
+  "id": "0192f3a4-...",
+  "type": "replay_vision_alert.firing",
+  "timestamp": "2026-09-15T12:00:00+00:00",
+  "data": {
+    "alert_id": "0192f3a4-...",
+    "alert_name": "Coupon friction spike",
+    "scanner_id": "0192f3a4-...",
+    "scanner_name": "Confused checkout",
+    "metric": "count",
+    "metric_value": "14",
+    "threshold": "10",
+    "direction": "above",
+    "window_days": "1",
+    "observations_url": "https://us.posthog.com/project/1/replay-vision/...?tab=observations",
+    "alert_url": "https://us.posthog.com/project/1/replay-vision/...?tab=alerts"
+  }
+}
+```
+
+The `type` field tells you which event fired:
+
+- `replay_vision_alert.match` – new matching observations for an every-match alert. `data` carries `matched_count`, a `summary` of the matches, the `observation_ids`, and the links.
+- `replay_vision_alert.firing` – a metric threshold alert's condition started being met. `data` carries the metric, its value, the threshold, direction, and window, as above.
+- `replay_vision_alert.resolved` – an alert that was firing has cleared. Same `data` shape as `firing`.
+- `replay_vision_alert.auto_disabled` – the alert was disabled after consecutive check failures. `data` carries `consecutive_failures` and `last_error_message`.
+- `replay_vision_alert.errored` – a check couldn't evaluate. `data` carries `error_message` and `consecutive_failures`.
+
+Every payload's `data` includes `alert_id`, `alert_name`, `scanner_id`, `scanner_name`, and `alert_url`.
+
+## Alerts vs. insight alerts
+
+Because every observation is also a [`$recording_observed` event](/docs/replay-vision/observations#querying-observations-as-events), you have a second, more general way to get notified: build an [insight](/docs/product-analytics/insights) on those events and put a standard [alert](/docs/alerts) on it.
+
+Reach for a **scanner alert** when the condition is about the scanner's own output – a verdict, a tag, a score range – and you want links straight to the matching observations. Reach for an **insight alert** when you want to threshold a metric derived from observations (a rate, a percentile, a comparison against other events) using the full power of PostHog's [SQL](/docs/data-warehouse/sql).
+
+## Further reading
+
+- [Scouts](/docs/replay-vision/scouts)
+- [Observations](/docs/replay-vision/observations)

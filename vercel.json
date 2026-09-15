@@ -6293,7 +6293,12 @@
         },
         {
             "source": "/docs/replay-vision/webhooks",
-            "destination": "/docs/replay-vision/actions#webhooks",
+            "destination": "/docs/replay-vision/scouts#webhooks",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/replay-vision/actions",
+            "destination": "/docs/replay-vision/scouts",
             "statusCode": 301
         },
         {

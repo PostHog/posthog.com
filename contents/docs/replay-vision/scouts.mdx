@@ -1,0 +1,122 @@
+---
+title: Scouts
+---
+
+import { ProductScreenshot } from "components/ProductScreenshot";
+
+export const scoutsTabLight =
+  "https://raw.githubusercontent.com/PostHog/pr-assets/d0bce20682dcdebe5254f3cfb17b4c4d934844ff/2026/09/c789e80d-ebeb-4d21-9a93-b7d9b83a5a12.png";
+export const scoutFormLight =
+  "https://raw.githubusercontent.com/PostHog/pr-assets/d0bce20682dcdebe5254f3cfb17b4c4d934844ff/2026/09/748fac10-24c3-45fe-8f95-a789c9c7a9d7.png";
+
+[Observations](/docs/replay-vision/observations) tell you what a scanner found. A **scout** reads them for you: a scheduled agent that reads the scanner's new observations on every run and writes up anything worth a look, so you don't have to keep opening the scanner to check.
+
+Scanner scouts are [self-driving scouts](/docs/self-driving/scouts) pre-wired to one scanner. You get everything a scout does – durable memory between runs, deduping against what it already reported, evidence-linked reports in your [inbox](/docs/self-driving/inbox) – pointed at the scanner's output.
+
+> **Scouts replace digests.** Scanners used to offer scheduled digests, configured on a **Digests and alerts** tab. Scouts are their replacement: the daily digest is now a scout template, and you can go well beyond it – trend watching, new-issue detection, or fully custom instructions. Alerts moved to their own [Alerts](/docs/replay-vision/alerts) tab.
+
+## Creating a scout
+
+On a scanner's **Scouts** tab, pick a template:
+
+- **Daily digest** – a daily summary of what the scanner found and the sessions worth watching, whether or not anything changed.
+- **Trend watch** – watches the scanner's output for shifts against its own baseline. The template is written for the scanner's [type](/docs/replay-vision/scanner-types): the yes-rate for a monitor, the mean score for a scorer, the tag mix for a classifier, recurring themes for a summarizer.
+- **New issue watch** – reports problems the scanner has never seen before, dated to what changed around their onset.
+- **Start from scratch** – a working skeleton with the mechanics filled in. You write what to watch for and what counts as notable.
+
+<ProductScreenshot
+  imageLight={scoutsTabLight}
+  alt="The Scouts tab on a scanner, showing the four templates and the scanner's scouts with their schedules"
+  classes="rounded"
+/>
+
+Each template seeds a review form – nothing runs until you create it:
+
+- **Name** – how the scout appears on the scanner and in your inbox.
+- **Instructions** – the scout's full prompt, editable before and after creation. Templates arrive ready to use; the scratch template ships `<ALL CAPS>` placeholders you have to replace before you can save.
+- **Schedule** – every day, weekdays, or weekly (Mondays), plus the run time, in the project timezone. Templates default to every day at 9:00.
+- **Delivery** (optional) – a connected Slack channel, a [webhook](#webhooks), or both. See [delivery](#delivery).
+
+<ProductScreenshot
+  imageLight={scoutFormLight}
+  alt="The new scout form, with tabs for instructions, schedule, and delivery"
+  classes="rounded"
+/>
+
+Scouts run on the self-driving platform, so they need self-driving enabled for your project – the tab warns you if it isn't, and scheduled runs won't happen until it is. See [self-driving setup](/docs/self-driving/setup). Scout runs are billed as self-driving usage; see [self-driving pricing](/docs/self-driving/pricing).
+
+## The report
+
+Every run files exactly one report: a Markdown digest with a TL;DR, themed sections ordered by how much of the window they cover, and links that open the recording at the exact moment behind each claim. When a number's trajectory carries the point, the scout attaches a chart instead of describing it.
+
+A report lands in three places:
+
+- The scanner's **Overview** tab, which leads with the latest scout report.
+- Your [inbox](/docs/self-driving/inbox), alongside reports from every other scout.
+- Any [delivery](#delivery) destination you configured.
+
+On the **Scouts** tab, expand a scout to see the reports it has filed. **Run now** triggers an off-schedule run, which is handy while you're tuning the instructions. The switch on each scout pauses it without deleting it; deleting a scout stops its runs permanently but keeps the reports it already filed in your inbox.
+
+Because a scout remembers its previous runs, it doesn't restate an unchanged issue day after day – a recurring problem comes back only when it worsens, recovers, or gains new evidence.
+
+## Delivery
+
+Delivery is optional: every report still lands on the scanner page and in your inbox, so nothing is lost if a channel is misconfigured or an endpoint is down.
+
+- **Slack** – pick a connected Slack channel. The report is posted once per run.
+- **Webhook** – see below.
+
+Every report is also captured in your project as a `$scout_report_emitted` event carrying the report's title, summary, priority, and a link – so you can build [insights](/docs/product-analytics/insights) on it, or route it anywhere else with a [destination in Data pipelines](/docs/cdp/destinations).
+
+### Webhooks
+
+Set a webhook URL on the scout's **Delivery** tab and PostHog sends an HTTP `POST` with a JSON body each time the scout files a report. The URL must be `https://` and must not embed credentials.
+
+Delivery runs through a [destination in Data pipelines](/docs/cdp/destinations) named `Replay Vision · <scout name>`, where you can see every attempt and its result.
+
+#### Request
+
+- **Method:** `POST`
+- **Headers:**
+  - `Content-Type: application/json`
+  - `X-PostHog-Webhook-Version: 1` – the payload version. New fields may be added to the body without changing this, so ignore unknown fields rather than rejecting the payload. A breaking change would ship under a new version.
+
+#### Payload
+
+```json
+{
+  "source": "replay_vision_scout",
+  "scout": "signals-scout-checkout-daily-digest",
+  "run_id": "0192f3a4-...",
+  "filed_at": "2026-09-15T09:03:00+00:00",
+  "digest": {
+    "report_id": "0192f3a4-...",
+    "title": "Daily digest: 2026-09-15",
+    "summary": "**TL;DR:** Checkout friction held steady; coupon box confusion dominated.",
+    "priority": "P3",
+    "url": "https://us.posthog.com/project/1/inbox/..."
+  }
+}
+```
+
+| Field | Type | Description |
+| --- | --- | --- |
+| `source` | string | Always `replay_vision_scout`. Route on this. |
+| `scout` | string | The scout's internal name, unique in the project. |
+| `run_id` | string | ID of the run that filed the report. Use it to dedupe retries. |
+| `filed_at` | string | ISO 8601 time the report was filed. |
+| `digest.report_id` | string | ID of the report in your inbox. |
+| `digest.title` | string | The report's title. |
+| `digest.summary` | string | The report's summary, as Markdown. |
+| `digest.priority` | string | The priority the scout assigned, e.g. `P2` or `P3`. |
+| `digest.url` | string | Link to the report in PostHog. |
+
+## Scouts vs. alerts
+
+A scout exercises judgment on a schedule: it reads the window, decides what matters, and writes a narrative with evidence. An [alert](/docs/replay-vision/alerts) is deterministic and fast: a condition you define, checked continuously, notifying you within minutes when it's met. Reach for a scout when you want the story; reach for an alert when you want to know *now*.
+
+## Further reading
+
+- [Alerts](/docs/replay-vision/alerts)
+- [Self-driving scouts](/docs/self-driving/scouts)
+- [Observations](/docs/replay-vision/observations)
