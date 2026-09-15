@@ -68,7 +68,7 @@ Three words in `utm_campaign` change the channel type, so avoid them unless they
 | Do not use | Use instead | Why |
 | --- | --- | --- |
 | `utm_medium=ppc` or `cpa` for search | `cpc` | Three spellings split one platform across three rows in the medium report. |
-| `utm_medium=cpm` for social | `paid-social` | `cpm` is a display medium, so the session becomes Display. |
+| `utm_medium=cpm` for social | `paid-social` | `cpm` splits one platform across two rows in the medium report, and it becomes Display when PostHog does not know the source. |
 | `utm_source=meta` | `facebook` or `instagram` | `meta` is not a known social source, so the session becomes Paid Unknown. |
 | `utm_source=influencer` | the platform the video sits on | The creator is not a platform, so paid influencer traffic becomes Organic Video. |
 | A paid link with no `utm_medium` | a paid medium from the table | The session becomes Direct, Referral, or Organic Search. |
