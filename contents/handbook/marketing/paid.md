@@ -32,6 +32,10 @@ We work with [Hey](https://www.heydigital.co/) to manage these channels - they s
 
 In addition to Hey, we also have a monthly call with Google Partners who provide feedback on performance and competitive analysis on a per product basis as requested.
 
+### Campaign tagging
+
+Tag every paid link with the `utm_source` and `utm_medium` values in our [UTM conventions](/handbook/marketing/utm-conventions). PostHog calculates the acquisition channel from these values, so a value outside the approved list puts the spend in the wrong channel, or drops it out of the paid report altogether.
+
 ### Tracking conversion & conversion optimization
 
 Using 3rd party trackers or pixels like Google Tag Manager is against our brand and values, so we use a combination of PostHog, BigQuery, Clay, Clearbit, & Census.
