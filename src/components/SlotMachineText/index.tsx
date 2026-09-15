@@ -6,6 +6,8 @@ export interface SlotMachineTextProps {
     words: string[]
     /** Static content rendered before the scroller (e.g. an icon + label). */
     prefix?: React.ReactNode
+    /** Static content rendered after the scroller, for a mid-sentence word (e.g. "Ship {word} with PostHog"). */
+    suffix?: React.ReactNode
     /** ms each word rests before scrolling to the next. */
     interval?: number
     /** ms the final word is held before the reel loops back to the start. */
@@ -28,6 +30,7 @@ export interface SlotMachineTextProps {
 export function SlotMachineText({
     words,
     prefix,
+    suffix,
     interval = 1200,
     holdDuration = 2400,
     transitionDuration = 550,
@@ -47,11 +50,14 @@ export function SlotMachineText({
     const reel = [...words, words[0] ?? '']
 
     // Measure one word's rendered height so the reel translates exactly one line per step,
-    // and keep it accurate across responsive font-size changes.
+    // and keep it accurate across responsive font-size changes. Measured with
+    // getBoundingClientRect so the step keeps its subpixel fraction – offsetHeight rounds to
+    // whole pixels, and that error multiplies by the word index, eventually sliding the
+    // neighbouring word into view at the edge of the mask.
     useEffect(() => {
         const measure = () => {
             const first = listRef.current?.children[0] as HTMLElement | undefined
-            if (first) setStep(first.offsetHeight)
+            if (first) setStep(first.getBoundingClientRect().height)
         }
         measure()
         if (typeof ResizeObserver === 'undefined' || !listRef.current) return
@@ -86,6 +92,7 @@ export function SlotMachineText({
             <span className={`inline-flex items-center gap-2 ${className}`}>
                 {prefix}
                 <span className={wordClassName}>{lastWord}</span>
+                {suffix}
             </span>
         )
     }
@@ -117,6 +124,7 @@ export function SlotMachineText({
             </span>
             {/* Static word for assistive tech (the animated reel above is aria-hidden). */}
             <span className="sr-only">{lastWord}</span>
+            {suffix}
         </span>
     )
 }

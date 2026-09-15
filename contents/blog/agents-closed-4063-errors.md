@@ -14,6 +14,7 @@ tags:
   - Error tracking
   - Engineering
   - Research
+  - Self-driving
 ---
 
 Last month, our customers deployed AI agents to PostHog projects to try and solve 6,124 errors in their products. They resolved 4,063 issues. They suppressed 1,751 more. They routed 310 to the right team. Almost none of those agents opened the PostHog UI to do it.

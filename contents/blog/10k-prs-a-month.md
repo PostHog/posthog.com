@@ -14,6 +14,7 @@ category: Engineering
 tags:
   - AI
   - Engineering
+  - Self-driving
 ---
 
 Shipping cadence is accelerating at PostHog. In the last 6 months, we've gone from shipping 1,441 PRs in January to 4,725 PRs in June while increasing engineering headcount by only 10%.

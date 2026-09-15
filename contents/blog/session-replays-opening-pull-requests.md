@@ -13,6 +13,7 @@ tags:
   - AI
   - Session replay
   - Engineering
+  - Self-driving
 ---
 
 Errors are the easiest data to act on in our [product improvement pipeline](/blog/what-if-your-product-built-itself). They arrive with a stack trace that's groupable and says exactly what broke and where. This makes it easy for agents to research each one, and if it's actionable, open a PR to fix it. 
