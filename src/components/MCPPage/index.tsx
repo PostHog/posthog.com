@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react'
-import { HedgehogBasketballCoach, HedgehogCowboyLasso } from '@posthog/brand/hoggies'
+import { HedgehogCowboyLasso } from '@posthog/brand/hoggies'
 import {
     IconAI,
     IconArrowUpRight,
@@ -24,8 +24,6 @@ import ScrollArea from 'components/RadixUI/ScrollArea'
 import ReaderView from 'components/ReaderView'
 import { InlineCode, SectionHeading } from 'components/Products/ReaderViewProduct/helpers'
 import MCPInstallCTA from 'components/MCPInstallCTA'
-import PlatformInstall, { mcpInstallSchema } from 'components/PlatformInstall'
-import type { InstallSchema } from 'components/PlatformInstall'
 import mcpToolsData from '../../data/mcp-tools.json'
 
 // The tool schema is fetched from the main repo at build time, so the exact totals move
@@ -34,22 +32,6 @@ const { categories: toolCategories } = mcpToolsData as { categories: { tools: un
 const toolCount = toolCategories?.reduce((total, category) => total + category.tools.length, 0) ?? 0
 const categoryCount = toolCategories?.length ?? 0
 const toolCountLabel = toolCount >= 100 ? `${Math.floor(toolCount / 100) * 100}+ tools` : 'Hundreds of tools'
-
-const mcpPageInstallSchema: InstallSchema = {
-    ...mcpInstallSchema,
-    title: 'Get started',
-    titleInfoAction: {
-        label: 'Learn more about the PostHog MCP',
-        to: '/docs/model-context-protocol',
-        state: { newWindow: true },
-    },
-    secondaryAction: {
-        label: 'Sign up via web',
-        to: 'https://app.posthog.com/signup',
-        state: { newWindow: true, initialTab: 'signup' },
-        icon: <IconArrowUpRight className="size-4 text-secondary" />,
-    },
-}
 
 function MCPHeader(): JSX.Element {
     return (
@@ -68,21 +50,10 @@ function MCPHeader(): JSX.Element {
                         <br />
                         So we built one without one.
                     </p>
-                    <MCPInstallCTA className="max-w-md mx-auto @3xl/reader-content:mx-0 text-left" />
-                    <div className="mt-4 flex flex-wrap gap-x-4 gap-y-1 justify-center @3xl/reader-content:justify-start text-[13px] font-medium opacity-70">
-                        <span className="inline-flex items-center gap-1">
-                            <IconCheck className="size-3.5" />
-                            {toolCountLabel}
-                        </span>
-                        <span className="inline-flex items-center gap-1">
-                            <IconCheck className="size-3.5" />
-                            Free hosted server
-                        </span>
-                        <span className="inline-flex items-center gap-1">
-                            <IconCheck className="size-3.5" />
-                            Open source
-                        </span>
-                    </div>
+                    <MCPInstallCTA
+                        className="max-w-md mx-auto @3xl/reader-content:mx-0 text-left"
+                        showDesktopLink={false}
+                    />
                 </div>
                 <div className="shrink-0 flex justify-center">
                     <HedgehogCowboyLasso
@@ -569,17 +540,6 @@ function FutureNoUI(): JSX.Element {
                     UI is overwhelming, and most people only use a fraction of what's actually there.
                 </p>
                 <p>
-                    Even our own marketing team can&apos;t{' '}
-                    <Link
-                        to="/newsletter/hidden-danger-of-shipping-fast"
-                        state={{ newWindow: true }}
-                        className="underline"
-                    >
-                        keep up with how fast we ship
-                    </Link>
-                    .
-                </p>
-                <p>
                     We could have run a campaign telling you the UI is fine. We could have A/B tested a new sidebar
                     every week. We did neither, because we don&apos;t think the future has a UI at all.
                 </p>
@@ -625,8 +585,7 @@ function MCPInstallation(): JSX.Element {
                 Where does the MCP run?
             </SectionHeading>
             <div className="bg-primary rounded shadow-2xl p-4 @2xl/reader-content:p-8 @4xl/reader-content:p-10">
-                <PlatformInstall schema={mcpPageInstallSchema} className="w-full !mb-0" />
-                <div className="grid grid-cols-1 @2xl/reader-content:grid-cols-2 gap-3 mt-4">
+                <div className="grid grid-cols-1 @2xl/reader-content:grid-cols-2 gap-3">
                     <div className="border border-primary rounded p-4">
                         <h3 className="text-base font-bold text-primary mt-0 mb-1">Hosted endpoint</h3>
                         <p className="text-sm text-secondary leading-relaxed m-0">
@@ -722,49 +681,8 @@ function MCPResources(): JSX.Element {
 function MCPCTA(): JSX.Element {
     return (
         <section id="get-started" className="scroll-mt-20 not-prose mb-20">
-            <div className="grid grid-cols-1 @3xl/reader-content:grid-cols-[10rem,1fr] gap-5 @3xl/reader-content:gap-6 items-center bg-accent dark:bg-accent-dark border border-primary rounded p-4 @3xl/reader-content:ml-5">
-                <div className="relative order-2 @3xl/reader-content:order-1 flex justify-center shrink-0 @3xl/reader-content:self-stretch">
-                    <HedgehogBasketballCoach
-                        title="PostHog basketball coach hedgehog"
-                        className="w-36 h-auto translate-y-2 scale-x-[-1] @3xl/reader-content:absolute @3xl/reader-content:w-52 @3xl/reader-content:-left-10 @3xl/reader-content:-bottom-10"
-                    />
-                </div>
-                <div className="order-1 @3xl/reader-content:order-2">
-                    <p className="text-xl @sm:text-2xl font-bold m-0 mb-1">
-                        Get started in{' '}
-                        <span className="bg-blue/10 dark:bg-blue/20 text-blue rounded-md px-1 whitespace-nowrap">
-                            thirty seconds
-                        </span>
-                    </p>
-                    <p className="text-secondary m-0 mb-4 text-[13px]">
-                        One command. Works in Cursor, Claude, Codex, PostHog Desktop, and friends.
-                    </p>
-                    <div className="mb-4">
-                        <MCPInstallCTA className="max-w-md" />
-                    </div>
-                    <div className="flex flex-wrap items-center gap-x-4 gap-y-2 text-[13px]">
-                        <Link
-                            to="/docs/model-context-protocol"
-                            className="font-semibold underline hover:opacity-75 !text-inherit"
-                        >
-                            Read the docs
-                        </Link>
-                        <Link
-                            to="https://github.com/PostHog/posthog/tree/master/services/mcp"
-                            external
-                            className="!text-inherit !no-underline"
-                        >
-                            View on GitHub
-                        </Link>
-                        <Link
-                            to="/blog/machine-copy-paste-mcp-intro"
-                            className="font-semibold underline hover:opacity-75 !text-inherit"
-                        >
-                            Why we built it
-                        </Link>
-                    </div>
-                </div>
-            </div>
+            <SectionHeading>Get started &ndash; free</SectionHeading>
+            <MCPInstallCTA className="max-w-md" showDesktopLink={false} />
         </section>
     )
 }

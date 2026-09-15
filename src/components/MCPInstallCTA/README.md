@@ -12,12 +12,13 @@ the bottom of the MCP page, so it lives here instead of in the carousel slide fi
 import MCPInstallCTA from 'components/MCPInstallCTA'
 
 <MCPInstallCTA />
-<MCPInstallCTA className="max-w-md" />
+<MCPInstallCTA className="max-w-md" showDesktopLink={false} />
 ```
 
 | Prop | Type | Default | Description |
 |---|---|---|---|
 | `className` | `string` | `''` | Classes for the wrapper. Use it to set the width. |
+| `showDesktopLink` | `boolean` | `true` | The "Or use PostHog Desktop" link below the card. The MCP page hides it, because the page already names its clients. |
 
 ## What it renders
 

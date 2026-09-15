@@ -22,20 +22,28 @@ const compactMcpSchema: InstallSchema = {
     ],
 }
 
-export default function MCPInstallCTA({ className = '' }: { className?: string }): JSX.Element {
+interface MCPInstallCTAProps {
+    className?: string
+    /** The link to PostHog Desktop below the card. The MCP page hides it. */
+    showDesktopLink?: boolean
+}
+
+export default function MCPInstallCTA({ className = '', showDesktopLink = true }: MCPInstallCTAProps): JSX.Element {
     return (
         <div className={`flex flex-col gap-2 ${className}`}>
             <PlatformInstall schema={compactMcpSchema} linkOnly hideSecondaryAction className="!shadow-none !mb-0" />
-            <p className="text-sm text-secondary m-0 inline-flex gap-1">
-                Or use{' '}
-                <Link
-                    to="/desktop"
-                    state={{ newWindow: true }}
-                    className="inline-flex items-center gap-1 underline underline-offset-2"
-                >
-                    <IconLaptop className="size-4" /> PostHog Desktop <IconArrowUpRight className="size-3" />
-                </Link>
-            </p>
+            {showDesktopLink && (
+                <p className="text-sm text-secondary m-0 inline-flex gap-1">
+                    Or use{' '}
+                    <Link
+                        to="/desktop"
+                        state={{ newWindow: true }}
+                        className="inline-flex items-center gap-1 underline underline-offset-2"
+                    >
+                        <IconLaptop className="size-4" /> PostHog Desktop <IconArrowUpRight className="size-3" />
+                    </Link>
+                </p>
+            )}
         </div>
     )
 }
