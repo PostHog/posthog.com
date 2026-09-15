@@ -58,7 +58,7 @@ if (Platform.OS === 'android') {
 
 When Android kills your app's process but leaves its task in the recent apps list, React Native drops the tap's intent and never updates `getIntent()`, so the tap is invisible to every library in the process – PostHog, `@react-native-firebase/messaging` and your deep links alike. Overriding `onNewIntent` in your `MainActivity` fixes all three.
 
-If you use the `posthog-react-native/expo` config plugin, `expo prebuild` writes that override for you from `posthog-react-native` TODO_4929_VERSION. Opt out with `patchMainActivityNewIntent`:
+If you use the `posthog-react-native/expo` config plugin, `expo prebuild` writes that override for you from `posthog-react-native` 4.74.0. Opt out with `patchMainActivityNewIntent`:
 
 ```json
 {
@@ -117,7 +117,7 @@ posthog.capturePushNotificationOpened({
 })
 ```
 
-Don't wire this to `messaging().onNotificationOpenedApp` or `getInitialNotification()`. The SDK already captures those taps. On Android and iOS, from `@posthog/react-native-plugin` 2.9.2, a repeat of a notification PostHog sent is skipped when the same notification was captured in the last 5 minutes. Notifications PostHog didn't send are never deduplicated, so a handler you wire up yourself still counts those opens twice. If you added an `onNotificationOpenedApp` handler for Android on an earlier plugin version, remove it when you upgrade.
+Don't wire this to `messaging().onNotificationOpenedApp` or `getInitialNotification()`. The SDK already captures those taps. On Android and iOS, from `@posthog/react-native-plugin` 2.9.1, a repeat of a notification PostHog sent is skipped when the same notification was captured in the last 5 minutes. Notifications PostHog didn't send are never deduplicated, so a handler you wire up yourself still counts those opens twice. If you added an `onNotificationOpenedApp` handler for Android on an earlier plugin version, remove it when you upgrade.
 
 The `$push_notification_opened` event includes `$notification_title` and `$notification_body` (plus `$notification_subtitle` on iOS), and `$notification_action` for action-button taps. On iOS, notification content is only captured for notifications sent by PostHog. On Android, taps captured automatically carry no title or body, because Firebase strips the content from the intent; those properties are only set when you pass them to `posthog.capturePushNotificationOpened` yourself.
 
