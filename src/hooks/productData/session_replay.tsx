@@ -48,7 +48,11 @@ export const sessionReplay = {
      * feed the carousel templates their slide arrays).
      */
     productMenu: [
-        { slug: 'overview', name: 'Overview', icon: <IconEye className="size-4" /> },
+        {
+            slug: 'overview',
+            name: 'Overview',
+            icon: <IconEye className="size-4" />,
+        },
         {
             slug: 'eli5',
             name: 'What does it do?',
@@ -112,8 +116,6 @@ export const sessionReplay = {
     ],
     overview: {
         title: 'See how people use your product',
-        description:
-            'Session Replay is one of the tools that makes your product self-driving: play back sessions to see exactly why something happened so the fix is obvious. The context agents use to debug UI issues and nuanced user behavior in your product, website, or mobile app.',
         eli5: "Session Replay records what happens in a user's session – clicks, scrolls, form inputs, page views, network requests, console logs – and plays it back like video. It's like watching a user's screen over their shoulder – it gives the nuance context you only get when you're actually watching them experience your product.",
         textColor: 'text-black', // tw
     },
@@ -312,7 +314,6 @@ export const sessionReplay = {
         },
     ],
     useCases: {
-        intro: 'Session Replay is used across teams depending on your role.',
         rows: [
             ['Product Engineers', "Debug production issues that can't be reproduced locally"],
             ['Support', 'Pinpoint the source of issues with visual verification and console logs'],
