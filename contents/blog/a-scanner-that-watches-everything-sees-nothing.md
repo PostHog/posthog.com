@@ -1,5 +1,5 @@
 ---
-title: What we learned from our first 300k Replay Vision scans
+title: What we learned from our first 400k Replay Vision scans
 date: 2026-08-27
 author:
   - cory-slater
@@ -13,7 +13,7 @@ tags:
   - session replay
 ---
 
-In August we launched [Replay Vision](/replay-vision), our AI layer over Session Replay. It watches session recordings and writes up what it finds, so nobody has to sit through them. We put it to work on PostHog right away, and since then Replay Vision has watched 300k recordings for us. <!-- 300k as of 2026-09-10, re-pull before publish --> ([Nobody was going to watch](/blog/nobody-watches-session-replays) most of them anyway.)
+In August we launched [Replay Vision](/replay-vision), our AI layer over Session Replay. It watches session recordings and writes up what it finds, so nobody has to sit through them. We put it to work on PostHog right away, and Replay Vision has watched 400k recordings for us. <!-- 397,118 scans of 284,031 distinct recordings, $recording_observed in project 2, all-time through 2026-09-15. re-pull before publish --> ([Nobody was going to watch](/blog/nobody-watches-session-replays) most of them anyway.)
 
 The biggest thing we learned from all that watching? Replay Vision fixes the watching part, but not the *thinking* part.
 
