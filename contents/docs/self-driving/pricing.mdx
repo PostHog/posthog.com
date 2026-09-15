@@ -17,7 +17,7 @@ PostHog self-driving is priced on an outcome basis, which means you only pay for
 
 You pay a flat **$15 per pull request**: an actionable [report](/docs/self-driving/reports) with a code change attached, surfaced in your [inbox](/docs/self-driving/inbox).
 
-You're only billed for actionable reports that become a pull request. Reports that aren't actionable, or that need your input instead of a code change, are always free.
+You're only billed for actionable reports that become a pull request. Reports that need your input instead of a code change are always free.
 
 ## How PostHog assesses actionability
 
@@ -26,9 +26,11 @@ Before a [report](/docs/self-driving/reports) can become a pull request, an agen
 - **PR (= actionable):** There's a clear code change an agent can make right now.
 - **Report (= needs input):** A finding worth your attention that requires input, such as business context or a trade-off between several valid approaches.
 
+If the agent finds no path to a code change, the finding does not become a report. PostHog holds it back from your inbox.
+
 ## What's free
 
-- Non-actionable reports surfaced in your inbox (a problem without a fix)
+- Non-actionable findings that do not reach your inbox
 - Your first 3 pull requests each month
 
 ## Track your self-driving usage
