@@ -34,7 +34,7 @@ Prevent feature flags from accidentally affecting the wrong application or conte
 
 Reduce unnecessary flag evaluations and associated costs by:
 - Only evaluating relevant flags per application context
-- Reducing network payload sizes
+- Reducing `/flags` response sizes
 - Minimizing server-side processing
 
 ### 3. Better organization
@@ -158,7 +158,7 @@ When your SDK asks PostHog to evaluate a flag:
 
 Server SDKs that evaluate flags locally poll `/flags/definitions` for flag definitions instead of calling `/flags`. That endpoint accepts no evaluation context parameter. It returns every flag, and each flag carries its own evaluation contexts in the response. The SDK applies the matching rules above to the definitions it polled.
 
-Filtering therefore happens inside the SDK, so it only works on an SDK version that implements it. Check [SDK support](#sdk-support) before relying on it. This matters most with an option like the Node.js `strictLocalEvaluation`, because no remote request is made to fall back on.
+Filtering therefore happens inside the SDK, so it only works on an SDK version that implements it. Check [SDK support](#sdk-support) before relying on it. On an older version, any flag your SDK can evaluate locally is evaluated without filtering, whether or not you use an option like the Node.js `strictLocalEvaluation`.
 
 Local evaluation downloads the full flag set either way. Evaluation contexts change which flags your SDK evaluates, and they do not reduce the size of the definitions payload.
 
@@ -269,7 +269,7 @@ If you're still seeing all flags despite using evaluation contexts:
 2. Check that flags have evaluation contexts configured in the **Evaluation Contexts** section (not just tags)
 3. Verify your SDK is sending the `evaluation_contexts` parameter on its `/flags` requests
 4. Check that flags you expect to be filtered actually have contexts set. A flag with no evaluation contexts always evaluates, whatever contexts your SDK declares.
-5. If you evaluate flags locally, confirm your SDK version filters locally. Node.js does this from 5.51.4+. On earlier versions, evaluation contexts apply only to remote `/flags` requests, so every polled flag still evaluates. See [local evaluation](#local-evaluation).
+5. If you evaluate flags locally, confirm your SDK version filters locally. Node.js does this from 5.51.4+, and .NET doesn't filter locally yet. On earlier versions, evaluation contexts apply only to remote `/flags` requests, so every polled flag still evaluates. See [local evaluation](#local-evaluation).
 
 ### Performance not improved
 
