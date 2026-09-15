@@ -206,9 +206,6 @@ export const replayVision = {
     // Discord, to see how much of the row it takes before we decide whether it
     // replaces one of the other three.
     ctaLinks: ['mcp', 'demo', 'talk-to-a-human', 'discord'] as CTALinkKey[],
-    // Adds Discord to the "Answers" list in the shared Questions? section. Only
-    // this product opts in for now.
-    showDiscordInQuestions: true,
     category: 'product_engineering',
     shortDescription: 'Let AI watch your session recordings for you',
     seo: {

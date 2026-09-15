@@ -106,18 +106,6 @@ const CommunityQuestions = ({ id, productData }: SectionComponentProps) => {
                                 a good chance your answer is already answered!
                             </p>
                         </li>
-                        {/* Opt-in per product via `showDiscordInQuestions` on the product data. */}
-                        {(productData as any)?.showDiscordInQuestions && (
-                            <li className="list-decimal">
-                                <Link to="https://discord.gg/posthog" externalNoIcon className="underline font-bold">
-                                    Chat in Discord <IconArrowUpRight className="inline-block size-4 opacity-75" />
-                                </Link>
-                                <p className="text-secondary text-base">
-                                    The team and other {productData.name} users are in there. Best for a question you
-                                    want to ask out loud, and for showing what you built.
-                                </p>
-                            </li>
-                        )}
                         <li className="list-decimal">
                             <Link
                                 to={`#`}
