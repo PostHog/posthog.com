@@ -49,6 +49,8 @@ For native apps that grab a dynamically assigned local port at runtime (per [RFC
 
 PostHog caches your metadata document according to the `Cache-Control: max-age` header you return. If you add a new redirect URI after your client has already been used, the previously cached document stays in effect until its TTL elapses. Return a shorter `max-age` to have changes picked up sooner.
 
+You don't need to register your client before use, but you can. The provisioning API's [client registration endpoint](/docs/integrate/provisioning#register-your-app) fetches and validates your document and stores the client in that region. Use it to check a document before your first authorization request, or to register your client in a second region. A client that doesn't provision accounts gets an HTTP 400 with a failed `provisioning_enabled` check. That's expected: the error refers only to provisioning access, and the client record is still created.
+
 See the [OAuth Client ID Metadata Document draft](https://datatracker.ietf.org/doc/draft-parecki-oauth-client-id-metadata-document/) for the full specification.
 
 ## Server metadata discovery
