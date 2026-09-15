@@ -26,6 +26,14 @@ import ReaderView from 'components/ReaderView'
 import { InlineCode, SectionHeading } from 'components/Products/ReaderViewProduct/helpers'
 import PlatformInstall, { mcpInstallSchema } from 'components/PlatformInstall'
 import type { InstallSchema } from 'components/PlatformInstall'
+import mcpToolsData from '../../data/mcp-tools.json'
+
+// The tool schema is fetched from the main repo at build time, so the exact totals move
+// between builds. Round down to the nearest hundred to keep the claim true either way.
+const { categories: toolCategories } = mcpToolsData as { categories: { tools: unknown[] }[] | null }
+const toolCount = toolCategories?.reduce((total, category) => total + category.tools.length, 0) ?? 0
+const categoryCount = toolCategories?.length ?? 0
+const toolCountLabel = toolCount >= 100 ? `${Math.floor(toolCount / 100) * 100}+ tools` : 'Hundreds of tools'
 
 const mcpPageInstallSchema: InstallSchema = {
     ...mcpInstallSchema,
@@ -45,7 +53,7 @@ const mcpPageInstallSchema: InstallSchema = {
 
 function MCPHeader(): JSX.Element {
     return (
-        <section id="overview" className="scroll-mt-20 not-prose flex flex-col gap-12 max-w-9xl mx-auto w-full">
+        <section id="overview" className="scroll-mt-20 not-prose flex flex-col gap-12 max-w-5xl mx-auto w-full">
             <header className="relative flex flex-col-reverse @3xl/reader-content:flex-row items-center gap-4 @3xl/reader-content:gap-8">
                 <div className="flex-1 text-center @3xl/reader-content:text-left">
                     <h1 className="text-4xl @3xl/reader-content:text-5xl font-bold !leading-[1.12] !mb-3 !mt-0 tracking-tight">
@@ -64,7 +72,7 @@ function MCPHeader(): JSX.Element {
                     <div className="mt-4 flex flex-wrap gap-x-4 gap-y-1 justify-center @3xl/reader-content:justify-start text-[13px] font-medium opacity-70">
                         <span className="inline-flex items-center gap-1">
                             <IconCheck className="size-3.5" />
-                            50+ tools
+                            {toolCountLabel}
                         </span>
                         <span className="inline-flex items-center gap-1">
                             <IconCheck className="size-3.5" />
@@ -98,7 +106,7 @@ function Subfeatures(): JSX.Element {
     const items: SubfeatureItem[] = [
         {
             title: 'Works where you work',
-            description: 'Use it in PostHog Desktop, Claude, Cursor, Codex, VS Code, Zed, or any MCP client.',
+            description: 'Use it in PostHog Desktop, Claude, Cursor, Codex, VS Code, Windsurf, Zed, or any MCP client.',
             icon: <IconCode />,
             color: 'blue',
         },
@@ -141,9 +149,9 @@ function WhatIsMCP(): JSX.Element {
             <SectionHeading>What is the PostHog MCP?</SectionHeading>
             <div className="max-w-3xl text-lg leading-relaxed">
                 <p className="m-0">
-                    The PostHog MCP is a free, hosted server that lets your AI agent use PostHog. Ask a question in
-                    plain English. Your agent chooses the right tool, runs it against your PostHog data, and returns the
-                    answer where you are already working.
+                    The PostHog MCP is a free, hosted server that lets your AI agent use PostHog. Ask in plain English.
+                    Your agent ships a feature flag from a prompt, digs into a stack trace without leaving your editor,
+                    runs a HogQL query, or triages a support ticket – and answers where you already work.
                 </p>
             </div>
             <Subfeatures />
@@ -182,7 +190,9 @@ function MCPChecklist(): JSX.Element {
 function MCPUseCases(): JSX.Element {
     return (
         <section id="use-cases" className="scroll-mt-20 not-prose">
-            <SectionHeading lede="Your agent selects from more than 50 tools, then reads or updates your PostHog project for you.">
+            <SectionHeading
+                lede={`Your agent selects from ${toolCountLabel} across ${categoryCount} product areas, then reads or updates your PostHog project for you.`}
+            >
                 What can you do with it?
             </SectionHeading>
             <MCPChecklist />
@@ -631,6 +641,20 @@ function MCPInstallation(): JSX.Element {
                             data region.
                         </p>
                     </div>
+                    <div className="border border-primary rounded p-4">
+                        <h3 className="text-base font-bold text-primary mt-0 mb-1">Light on context</h3>
+                        <p className="text-sm text-secondary leading-relaxed m-0">
+                            Most clients get a single <InlineCode>exec</InlineCode> tool and look up the others on
+                            demand, so a large tool list does not fill the context window.
+                        </p>
+                    </div>
+                    <div className="border border-primary rounded p-4">
+                        <h3 className="text-base font-bold text-primary mt-0 mb-1">Read-only if you want it</h3>
+                        <p className="text-sm text-secondary leading-relaxed m-0">
+                            Add <InlineCode>?readonly=true</InlineCode> to remove every write tool. You can also filter
+                            the tool list or pin the agent to one project.
+                        </p>
+                    </div>
                 </div>
                 <p className="text-sm text-secondary leading-relaxed mt-4 mb-0">
                     Connecting and calling MCP tools is free. Some tools use LLMs internally and can add PostHog AI
@@ -638,7 +662,14 @@ function MCPInstallation(): JSX.Element {
                     <Link to="/docs/posthog-ai/allow-access" className="font-semibold underline">
                         AI data processing
                     </Link>{' '}
-                    to be enabled.
+                    to be enabled. Enterprise plans can control access through their identity provider with{' '}
+                    <Link
+                        to="/docs/model-context-protocol/enterprise-managed-authorization"
+                        className="font-semibold underline"
+                    >
+                        enterprise-managed authorization
+                    </Link>
+                    .
                 </p>
             </div>
         </section>
@@ -653,7 +684,7 @@ const resources = [
     },
     {
         title: 'MCP tools reference',
-        description: 'See every available tool, grouped by product area.',
+        description: 'See every tool the server exposes, grouped by product area.',
         to: '/docs/model-context-protocol/tools',
     },
     {
@@ -764,7 +795,7 @@ export default function MCPPage(): JSX.Element {
                 proseSize="lg"
                 showQuestions={false}
             >
-                <div className="flex flex-col gap-12 max-w-9xl mx-auto w-full">
+                <div className="flex flex-col gap-12 max-w-5xl mx-auto w-full">
                     <MCPHeader />
                     <div className="not-prose flex flex-col divide-y divide-primary [&>*]:py-8 [&>*:first-child]:pt-0 [&>*:last-child]:pb-0">
                         <WhatIsMCP />
