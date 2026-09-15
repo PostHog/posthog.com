@@ -278,6 +278,8 @@ If the customer isn't super clear on how to articulate the success criteria then
 
 > Don't be over-reliant on support during the evaluation.  As the AE, you should be highly focused on customers during their evaluation to maximize your chance of success.  We deliberately hire people we know customers will love working with, so now is your time to shine.
 
+> **Evaluating a high-volume customer?** When a prospect expects to send a very large number of events (e.g. they're migrating from a homegrown pipeline at 1bn+ events per day), loop in the infrastructure team early via `#team-infrastructure` so we can plan the trial together. Before they start sending data, understand two things: how spiky their event volume is across the day, and exactly how they intend to implement. At this scale the implementation has to be right – a poorly configured one can degrade the experience for the customer (and getting it right is a great way to demonstrate that PostHog can comfortably handle their scale). Planning the implementation together up front is also a natural moment to scope the trial: agree what success looks like, what volume they actually need to send to prove it (almost always far less than their full production volume), and how long the trial runs. For implementations this involved, consider proposing some [paid FDE/implementation time](/handbook/growth/sales/professional-services) so we get the setup right and both sides have skin in the game.
+
 1. Guide them on how to set up tracking depending on their app paying attention to common points of friction such as:
    * [Anonymous vs Identified](/docs/data/anonymous-vs-identified-events) events.
    * Tracking pageviews in [single page apps](/tutorials/single-page-app-pageviews).
