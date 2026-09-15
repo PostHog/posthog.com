@@ -18,6 +18,7 @@ import { ToggleGroup, ToggleOption } from 'components/RadixUI/ToggleGroup'
 import Tooltip from 'components/RadixUI/Tooltip'
 import Link from 'components/Link'
 import { navigate } from 'gatsby'
+import usePostHog from '../../hooks/usePostHog'
 import { MDXRenderer } from 'gatsby-plugin-mdx'
 import { MDXProvider } from '@mdx-js/react'
 import ElementScrollLink, { ScrollSpyProvider } from 'components/ElementScrollLink'
@@ -848,10 +849,12 @@ interface SidebarTabButtonProps {
     showLabel: boolean
     /** Pinned mode renders the tab with icon stacked above label (horizontal row). */
     stacked: boolean
+    /** Smaller type when the stacked row is crowded (more than 3 tabs). */
+    compact: boolean
     onClick: () => void
 }
 
-const SidebarTabButton = ({ tab, active, showLabel, stacked, onClick }: SidebarTabButtonProps) => {
+const SidebarTabButton = ({ tab, active, showLabel, stacked, compact, onClick }: SidebarTabButtonProps) => {
     // Manual FLIP for the icon: capture position on every commit, then on the
     // next commit — IF the structural layout changed (`layoutKey`) — animate
     // the icon from its old position to its new one. Click-only re-renders
@@ -892,7 +895,7 @@ const SidebarTabButton = ({ tab, active, showLabel, stacked, onClick }: SidebarT
             onClick={onClick}
             role="tab"
             aria-selected={active}
-            className={`relative rounded text-sm leading-tight flex ${
+            className={`relative rounded ${compact ? 'text-xs' : 'text-sm'} leading-tight flex ${
                 stacked
                     ? 'flex-1 flex-col items-center text-center gap-1 px-2 py-1.5'
                     : // Icon-only AND with-label both use justify-start so
@@ -982,6 +985,7 @@ const LeftSidebar = ({
 }: LeftSidebarProps) => {
     const { searchQuery } = useSearch()
     const { hasMounted } = useReaderView()
+    const posthog = usePostHog()
     const hasActiveSearch = !!searchQuery && searchQuery.length >= 2
 
     // Persist/restore the menu scroll position across navigations (ReaderView
@@ -1243,7 +1247,9 @@ const LeftSidebar = ({
                                     }
                                 }}
                                 className={`mx-2 flex gap-px flex-shrink-0 ${
-                                    appliedPinned ? 'flex-row' : 'flex-col items-stretch py-2 border-y border-secondary'
+                                    appliedPinned
+                                        ? 'flex-row justify-between'
+                                        : 'flex-col items-stretch py-2 border-y border-secondary'
                                 }`}
                                 role="tablist"
                                 aria-label="Sidebar mode"
@@ -1255,7 +1261,14 @@ const LeftSidebar = ({
                                         active={t.value === activeTab}
                                         showLabel={expanded}
                                         stacked={appliedPinned}
+                                        compact={appliedPinned && menuTabs?.length > 3}
                                         onClick={() => {
+                                            // Proximate metric: downstream outcomes move too slowly to read.
+                                            posthog?.capture('reader_tab_click', {
+                                                tab: t.value,
+                                                from_tab: activeTab,
+                                                tab_count: menuTabs!.length,
+                                            })
                                             if (t.href && t.value !== activeTab) {
                                                 navigate(t.href)
                                             } else {

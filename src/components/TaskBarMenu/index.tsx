@@ -16,6 +16,7 @@ import {
     IconPeople,
     IconPinFilled,
     IconBadge,
+    IconShare,
 } from '@posthog/icons'
 import { useAppActions, useAppSettings } from '../../context/App'
 
@@ -30,6 +31,8 @@ import CloudinaryImage from 'components/CloudinaryImage'
 import MediaUploadModal from 'components/MediaUploadModal'
 import KeyboardShortcut from 'components/KeyboardShortcut'
 import { MOTION_LAYER, TASKBAR_BG } from '../../constants/frostedSurfaces'
+
+const NAV_MENU_CLASS = '[&_button]:px-2 [&_button:not(:first-child)]:hidden md:[&_button:not(:first-child)]:flex'
 
 function TaskBarMenu() {
     const {
@@ -247,6 +250,13 @@ function TaskBarMenu() {
                                     link: '/image-annotator',
                                     icon: <IconPinFilled className="opacity-50 group-hover/item:opacity-75 size-4" />,
                                 },
+                                {
+                                    type: 'item' as const,
+                                    label: 'QR mogging',
+                                    link: 'https://qr-mogging.hosthog.dev',
+                                    external: true,
+                                    icon: <IconShare className="opacity-50 group-hover/item:opacity-75 size-4" />,
+                                },
                             ]
                           : []),
                       {
@@ -327,10 +337,7 @@ function TaskBarMenu() {
                         }}
                     />
                     <div className="mx-auto transition-all duration-300 flex justify-between items-center w-full max-w-full">
-                        <MenuBar
-                            menus={menuData}
-                            className="[&_button]:px-2 [&_button:not(:first-child)]:hidden md:[&_button:not(:first-child)]:flex"
-                        />
+                        <MenuBar menus={menuData} className={NAV_MENU_CLASS} />
                         <aside data-scheme="secondary" className="flex items-center gap-0.5 py-1">
                             {/* <MenuBar
                         menus={[

@@ -1,0 +1,181 @@
+---
+title: 'In-depth: PostHog vs Fathom'
+date: 2024-11-13
+author:
+    - bijan-boustani
+rootPage: /compare
+featuredImage: >-
+    https://res.cloudinary.com/dmukukwp6/image/upload/posthog_vs_fathom_analytics_e327b58767.jpg
+featuredImageType: full
+category: General
+tags:
+    - Comparisons
+seo:
+    metaTitle: PostHog vs Fathom in-depth tool comparison
+    metaDescription: Looking for the best Google Analytics alternative? Compare PostHog vs Fathom on web analytics, product analytics, pricing, and more to find the right fit.
+sidebar: Compare
+---
+
+PostHog and Fathom Analytics are both alternatives to Google Analytics. In fact, both explicitly call this out on their websites with marketing copy like "Switch to a better Google Analytics alternative."
+
+Both products have web analytics dashboards with an emphasis on simplicity and privacy. They're ideal choices for customers that want to analyze and understand web traffic but find Google Analytics to be too complicated.
+
+## How is PostHog different?
+
+### 1. PostHog offers web analytics, and a lot more
+
+[Web analytics](/web-analytics) is a core feature of PostHog, but we offer many more tools to help you analyze, test, and observe your site and your product.
+
+These include [product analytics](/product-analytics), [session replay](/session-replay), [surveys](/surveys), [experiments](/experiments), [feature flags](/feature-flags), a [data warehouse](/data-warehouse), and more.
+
+### 2. PostHog has a generous free tier
+
+PostHog's ["pay-as-you-go" plan](/pricing) includes all of our features for free with an allowance of 1M events per month. For Fathom, pricing starts at $15 per month for 100K data points, increases to $60 per month for 1M data points, and more from there.
+
+Beyond PostHog's free tier, we try to be as cheap as possible and [transparent](/docs/billing/estimating-usage-costs). Want to know how much we'll charge? See our [pricing calculator](/pricing#calculator). PostHog also does not require a credit card to sign up and try the free tier.
+
+## Web analytics
+
+Both Fathom and PostHog are [Google Analytics alternatives](/compare/ga4-alternatives), so they're ideal for tracking and analyzing your website.
+
+<ProductComparisonTable competitors={['posthog', 'fathom']} rows={['web_analytics.features']} />
+
+In terms of design, both PostHog and Fathom's [web analytics dashboards](/docs/web-analytics/dashboard) look similar, which we can see in the screenshots below:
+
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/web_analytics_dashboard_light_bc76a94566.png"
+    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/web_analytics_dashboard_dark_42ac39a5f7.png"
+    classes="rounded"
+    alt="PostHog web analytics dashboard"
+/>
+
+The big difference is that PostHog includes sessions, where Fathom only includes visitors:
+
+![Fathom Analytics dashboard](https://res.cloudinary.com/dmukukwp6/image/upload/fathom_analytics_dashboard_195049b289.png)
+
+## Product analytics
+
+Teams rely on [product analytics](/product-analytics) when they need more customization in both capturing and analyzing data. Although not a focus of Fathom, it does offer some basic product analytics features like custom event tracking, but doesn't include any of the custom visualizations of PostHog.
+
+<ProductComparisonTable
+    competitors={['posthog', 'fathom']}
+    rows={[
+        'product_analytics.features.custom_events',
+        'product_analytics.features.custom_properties',
+        'product_analytics.features.autocapture',
+        'product_analytics.trends',
+        'product_analytics.funnels',
+        'product_analytics.retention',
+        'product_analytics.features.cohorts',
+        'product_analytics.features.user_profiles',
+        'product_analytics.group_analytics',
+        'product_analytics.user_paths',
+        'product_analytics.insights.features.sql_editor',
+    ]}
+/>
+
+## Platform
+
+Beyond web analytics is where PostHog really shines. We provide all of the tools developers need to build a successful product (and they all work together).
+
+<ProductComparisonTable
+    competitors={['posthog', 'fathom']}
+    rows={[
+        'platform.deployment.eu_hosting',
+        'platform.developer.api',
+        'platform.developer.collaboration',
+        'platform.deployment.open_source',
+        'heatmaps.features.heatmaps',
+        'session_replay',
+        'experiments',
+        'surveys',
+        'feature_flags',
+        'platform.developer.server_side_sdks',
+        'platform.developer.mobile_sdks',
+    ]}
+/>
+
+## Integrations
+
+<ProductComparisonTable
+    competitors={['posthog', 'fathom']}
+    rows={[
+        'platform.integrations.csv_exports',
+        'platform.integrations.email_reports',
+        'platform.integrations.exports',
+        'platform.integrations.warehouse_import',
+        'platform.integrations.slack',
+        'platform.integrations.stripe',
+        'platform.integrations.hubspot',
+        'platform.integrations.zapier',
+        'platform.integrations.zendesk',
+        'platform.integrations.sentry',
+        'platform.integrations.wordpress',
+    ]}
+/>
+
+## Security, compliance, privacy
+
+Fathom prides itself on being privacy-friendly, but PostHog stands toe-to-toe with it in terms of features. On top of that, PostHog includes many of the features enterprises need for compliance.
+
+<ProductComparisonTable
+    competitors={['posthog', 'fathom']}
+    rows={[
+        'platform.security.data_retention',
+        'platform.security.bot_blocking',
+        'platform.deployment.reverse_proxy',
+        'platform.security.hipaa_ready',
+        'platform.security.gdpr_ready',
+        'platform.security.soc2_certified',
+        'platform.security.two_factor_auth',
+        'platform.security.saml_sso',
+    ]}
+/>
+
+## Frequently asked questions
+
+### PostHog says it makes your product "self-driving" – what does that mean?
+
+It means PostHog digs through your product data, finds what's worth fixing, and has agents do the work.
+
+It starts with context. A full suite of developer tools – [AI Observability](/ai-observability), [Product Analytics](/product-analytics), [Session Replay](/session-replay), [Feature Flags](/feature-flags), [Experiments](/experiments), [Error Tracking](/error-tracking), [Logs](/logs), and more – captures everything happening in your product, and a [Context Warehouse](/blog/what-is-a-context-warehouse) unifies it into one source agents can read across.
+
+From there, [Scouts](/blog/what-is-a-scout) read across all of it and sort what's worth knowing from what's just noise. What clears the bar becomes a report in your inbox: an agent picks it up, roots out the cause, and opens a PR. You review and merge.
+
+You can steer it from [Slack](/slack), the [web app](/ai), the [desktop app](/desktop), or your own editor via [the MCP](/mcp) or [CLI](/docs/cli).
+
+### How much do PostHog and Fathom cost?
+
+Fathom is a monthly subscription based on usage. Plans start at $15 per month for 100k data points. 1M data points is $60 per month. Price maxes out at $470 per month for 25M data points, beyond which you need to contact them.
+
+PostHog is [entirely usage-based](/pricing). Its free tier includes:
+
+| Feature                       |  Free usage per month  |    Additional cost    |
+| ----------------------------- | :--------------------: | :-------------------: |
+| Product analytics             |    1 million events    |  From $0.00005/event  |
+| Session replay                |    5,000 recordings    | From $0.005/recording |
+| Surveys                       |     1500 responses     |  From $0.10/response  |
+| Feature flags and A/B testing | 1 million API requests | From $0.0001/request  |
+| Data warehouse                | 1 million synced rows  |  From $0.000015/row   |
+
+Basically, we aim to give you the tools you want for as cheap as possible. We split out the products, and features like [group analytics](/docs/product-analytics/group-analytics) and [pipelines](/docs/cdp) within products, to do this.
+
+### Does PostHog offer a free trial?
+
+Fathom offers a free trial, but PostHog doesn't, what gives?
+
+Instead of a free trial, PostHog offers a free forever tier as long as you stay under the free limits. You don't even need a credit card, but adding one unlocks all the features (we have billing limits you can use too).
+
+### Can I migrate from Google Analytics to PostHog?
+
+Yes, see our [Google Analytics to PostHog migration guide](/docs/migrate/google-analytics) for more details.
+
+## Further Reading
+
+-   [The best Fathom alternatives & competitors, compared](/compare/best-fathom-alternatives)
+-   [The 9 best GA4 alternatives for apps and websites](/compare/ga4-alternatives)
+-   [The 9 best GDPR-compliant analytics tools](/compare/best-fathom-alternatives)
+
+Still deciding? Check out our [roundup of the best web analytics tools](/compare/best-web-analytics-tools) for more options.
+
+<ArrayCTA />

@@ -1,5 +1,5 @@
 import React from 'react'
-import { IconFilter, IconSparkles } from '@posthog/icons'
+import { IconArrowRight, IconFilter, IconSparkles } from '@posthog/icons'
 import KeyboardShortcut from 'components/KeyboardShortcut'
 import type { SpotlightAction } from './actions'
 import { configForType } from './categories'
@@ -12,6 +12,7 @@ type SuggestionListProps = {
     selectedIndex: number
     itemRefs: React.MutableRefObject<(HTMLLIElement | null)[]>
     onSelectIndex: (index: number) => void
+    onGoToRoute: (path: string) => void
     onRunAction: (action: SpotlightAction) => void
     onAskAI: () => void
     onApplyFilter: (type: string) => void
@@ -31,6 +32,7 @@ export default function SuggestionList({
     selectedIndex,
     itemRefs,
     onSelectIndex,
+    onGoToRoute,
     onRunAction,
     onAskAI,
     onApplyFilter,
@@ -45,6 +47,22 @@ export default function SuggestionList({
                     ref: (element: HTMLLIElement | null) => (itemRefs.current[index] = element),
                     selected: selectedIndex === index,
                     onActive: () => onSelectIndex(index),
+                }
+
+                if (item.kind === 'route') {
+                    return (
+                        <SpotlightRow
+                            key="route"
+                            {...rowProps}
+                            icon={<IconArrowRight />}
+                            onSelect={() => onGoToRoute(item.path)}
+                            trailing={<SuggestionHint action="go" />}
+                        >
+                            <p className="m-0 min-w-0 truncate text-[15px] text-primary">
+                                Go to <span className="font-semibold">{item.path}</span>
+                            </p>
+                        </SpotlightRow>
+                    )
                 }
 
                 if (item.kind === 'action') {

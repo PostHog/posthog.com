@@ -50,6 +50,7 @@ import {
     StickerMayor,
     StickerPullRequest,
     StickerAi,
+    StickerCloud,
     StickerRobot,
 } from 'components/Stickers/Stickers'
 import CloudinaryImage from 'components/CloudinaryImage'
@@ -1172,11 +1173,11 @@ const Highlight = ({ children }: { children: React.ReactNode }) => (
     <span className="bg-highlight px-0.5 font-bold text-red dark:text-yellow">{children}</span>
 )
 
-// What connects into a channel to make it a hub of work – floated in an arc around the
-// channel window, à la the "understand product usage" arc on the homepage carousel.
+// What connects into a space to make it a hub of work – floated in an arc around the
+// space window, à la the "understand product usage" arc on the homepage carousel.
 // Each entry carries [x%, y%] positions at two @container breakpoints (see ArcProducts
 // in HeroCarousel/slides.tsx for the coordinate system). Below @2xl these fall back to a grid.
-const channelArtifacts: {
+const spaceArtifacts: {
     Icon: React.ComponentType<{ className?: string }>
     color: string
     name: string
@@ -1201,17 +1202,7 @@ const channelArtifacts: {
 
 // A floating artifact chip – a small bordered pill so it reads over the tinted slide bg.
 // When `href` is set, the chip is a link (used for the Inbox → docs).
-const ChannelArtifactChip = ({
-    Icon,
-    color,
-    name,
-    href,
-}: {
-    Icon: any
-    color: string
-    name: string
-    href?: string
-}) => {
+const SpaceArtifactChip = ({ Icon, color, name, href }: { Icon: any; color: string; name: string; href?: string }) => {
     const inner = (
         <>
             <Icon className={`size-4 shrink-0 ${color}`} />
@@ -1229,9 +1220,9 @@ const ChannelArtifactChip = ({
     )
 }
 
-// The chat rows inside the channel hub – a Slack-style thread that makes clear who kicked off
+// The chat rows inside the space hub – a Slack-style thread that makes clear who kicked off
 // which agent. `agent` rows get the PostHog bot avatar + Agent badge; people get initials.
-const channelHistory: {
+const spaceHistory: {
     agent?: boolean
     avatar?: string
     avatarTone?: string
@@ -1241,7 +1232,7 @@ const channelHistory: {
     action: string
     task?: { label: string; status: string; tone: string }
 }[] = [
-    { avatar: 'AL', avatarTone: 'bg-blue text-white', name: 'Adam', time: '1w', action: 'joined the channel' },
+    { avatar: 'AL', avatarTone: 'bg-blue text-white', name: 'Adam', time: '1w', action: 'joined the space' },
     {
         agent: true,
         name: 'PostHog',
@@ -1351,13 +1342,13 @@ const HomeSlide = () => {
     )
 }
 
-// Orange @mention, matching the channel screenshot.
+// Orange @mention, matching the space screenshot.
 const Mention = ({ children }: { children: React.ReactNode }) => (
     <span className="font-semibold text-red dark:text-yellow">{children}</span>
 )
 
-// The prompt composer at the bottom of the channel – "what do you want to ship?".
-const ChannelComposer = () => (
+// The prompt composer at the bottom of the space – "what do you want to ship?".
+const SpaceComposer = () => (
     <div className="rounded-md border border-primary bg-light px-3 pb-2 pt-2.5 shadow-sm dark:bg-[#222328]">
         <p className="m-0 text-sm text-secondary">
             What do you want to ship? <span className="text-muted">/ for skills</span>
@@ -1371,17 +1362,17 @@ const ChannelComposer = () => (
     </div>
 )
 
-// The channel window at the center of the hub: a Slack-style thread with clear attribution.
-const ChannelHub = () => (
+// The space window at the center of the hub: a Slack-style thread with clear attribution.
+const SpaceHub = () => (
     <div className="mx-auto w-full max-w-[400px] overflow-hidden rounded-lg border border-primary bg-light text-left shadow-xl dark:bg-[#1d1e22]">
         <div className="border-b border-primary px-4 py-3">
             <h4 className="m-0 text-base font-bold text-primary">access-control</h4>
             <p className="m-0 mt-0.5 text-xs leading-snug text-secondary">
-                <Mention>@Peter</Mention> created this channel. It remembers everything.
+                <Mention>@Peter</Mention> created this space. It remembers everything.
             </p>
         </div>
         <div className="flex flex-col gap-3 px-4 py-3">
-            {channelHistory.map(({ agent, avatar, avatarTone, name, time, mention, action, task }, i) => (
+            {spaceHistory.map(({ agent, avatar, avatarTone, name, time, mention, action, task }, i) => (
                 <div key={i} className="flex gap-2.5">
                     {agent ? (
                         <span className="flex size-7 shrink-0 items-center justify-center rounded-md border border-primary bg-accent/40">
@@ -1424,15 +1415,15 @@ const ChannelHub = () => (
                     </div>
                 </div>
             ))}
-            <ChannelComposer />
+            <SpaceComposer />
         </div>
     </div>
 )
 
-// The connected artifacts floating in an arc around the channel hub.
-const ChannelArtifacts = () => {
+// The connected artifacts floating in an arc around the space hub.
+const SpaceArtifacts = () => {
     const renderSlots = (breakpoint: '@2xl' | '@3xl') =>
-        channelArtifacts.map(({ name, Icon, color, href, ...pos }, i) => {
+        spaceArtifacts.map(({ name, Icon, color, href, ...pos }, i) => {
             const [x, y] = pos[breakpoint]
             const duration = 4 + (i % 4) * 0.9
             const delay = -(i * 1.3)
@@ -1448,7 +1439,7 @@ const ChannelArtifacts = () => {
                         animationDelay: `${delay}s`,
                     }}
                 >
-                    <ChannelArtifactChip Icon={Icon} color={color} name={name} href={href} />
+                    <SpaceArtifactChip Icon={Icon} color={color} name={name} href={href} />
                 </div>
             )
         })
@@ -1457,8 +1448,8 @@ const ChannelArtifacts = () => {
         <>
             {/* Below @2xl (not enough gutter for the arc): simple grid above the hub */}
             <div className="z-10 mb-4 flex flex-wrap justify-center gap-2 @2xl:hidden">
-                {channelArtifacts.map(({ name, Icon, color, href }) => (
-                    <ChannelArtifactChip key={name} Icon={Icon} color={color} name={name} href={href} />
+                {spaceArtifacts.map(({ name, Icon, color, href }) => (
+                    <SpaceArtifactChip key={name} Icon={Icon} color={color} name={name} href={href} />
                 ))}
             </div>
             <div className="absolute inset-0 z-10 hidden @2xl:block @3xl:hidden">{renderSlots('@2xl')}</div>
@@ -1467,9 +1458,9 @@ const ChannelArtifacts = () => {
     )
 }
 
-// Channels slide – mirrors the homepage "understand product usage" arc: connected artifacts
-// (context.md, memory, inbox, to-do) float around the channel window at the center.
-const ChannelsSlide = () => (
+// Spaces slide – mirrors the homepage "understand product usage" arc: connected artifacts
+// (context.md, memory, inbox, to-do) float around the space window at the center.
+const SpacesSlide = () => (
     <div className="@container relative flex h-full flex-col rounded bg-[#F3F4F0] p-4 dark:bg-[#131316] @xl:p-6">
         <div className="mb-2 flex items-center gap-2">
             <h3 className="m-0 text-2xl font-bold">Multiplayer (like work actually is)</h3>
@@ -1477,7 +1468,7 @@ const ChannelsSlide = () => (
         </div>
         <div className="grid grid-cols-1 gap-x-8 gap-y-2 @lg:grid-cols-2">
             <p className="m-0 text-[15px] text-secondary">
-                A channel is a group of tasks related to a specific topic or project. Each one keeps its own working
+                A space is a group of tasks related to a specific topic or project. Each one keeps its own working
                 memory, so kicking off a task doesn't require you to re-brief a goldfish.
             </p>
             <p className="m-0 text-[15px] text-secondary">
@@ -1487,9 +1478,9 @@ const ChannelsSlide = () => (
             </p>
         </div>
         <div className="relative mt-4 flex flex-1 flex-col justify-center @2xl:mt-2 @2xl:min-h-[300px]">
-            <ChannelArtifacts />
+            <SpaceArtifacts />
             <div className="relative mx-auto w-full">
-                <ChannelHub />
+                <SpaceHub />
             </div>
         </div>
     </div>
@@ -1554,11 +1545,11 @@ const canvasExampleGroups = [
 const alphaTabs: TabbedCarouselTab[] = [
     {
         value: 'contexts',
-        label: 'Channels',
+        label: 'Spaces',
         color: 'bg-teal',
         activeText: 'text-black',
         progressBar: 'bg-black/70 shadow-[0_0_6px_2px_rgba(255,255,255,0.4)]',
-        content: <ChannelsSlide />,
+        content: <SpacesSlide />,
     },
     {
         value: 'canvases',
@@ -1840,6 +1831,98 @@ const SupportedLLMs = () => {
                     75% { transform: scale(1.16) rotate(2deg); }
                 }
             `}</style>
+        </section>
+    )
+}
+
+const cloudEnvironmentItems = [
+    {
+        Icon: IconStack,
+        label: 'Environments',
+        desc: "Repos, hosts, and base image in one profile. Yours, or the whole team's.",
+    },
+    {
+        Icon: IconBrowser,
+        label: 'Access',
+        desc: 'Trusted domains, the whole internet, or your own list. Keys stay encrypted.',
+    },
+    { Icon: IconTerminal, label: 'Base images', desc: 'Bake your tools in once. No run starts with a fresh install.' },
+]
+
+// Cloud agents: the "close the lid, they keep going" pitch. Sits between the model list and the
+// MCP marketplace so it doesn't butt up against the self-driving box further down the page.
+const CloudAgentsCallout = () => {
+    return (
+        <section className="relative mb-12 @xl:mb-16 px-4 @xl:px-8">
+            <div className="relative overflow-hidden rounded-md border border-blue bg-gradient-to-br from-blue/20 via-blue/5 to-purple/10 p-6 shadow-xl @xl:p-8">
+                <div className="grid gap-6 @2xl:grid-cols-[1fr_auto] @2xl:gap-10">
+                    <div>
+                        <div className="mb-3 flex items-center gap-2">
+                            <StickerCloud className="size-8 -rotate-3" />
+                            <h2 className="m-0 text-2xl font-bold">Seven cloud agents, one closed laptop</h2>
+                        </div>
+                        <p className="m-0 text-secondary">
+                            Run tasks in a PostHog-managed sandbox instead of on your machine. Quit the app, sleep the
+                            laptop, change networks: the agents keep building, and the branches are waiting when you get
+                            back.
+                        </p>
+                        <p className="m-0 mt-3 text-secondary">
+                            An environment is the profile a sandbox boots with. Set one up and every cloud task starts
+                            on the repos you picked, with the keys and the tools already there.
+                        </p>
+                    </div>
+
+                    <div className="relative mx-auto w-40 shrink-0 @sm:w-52 @2xl:w-56">
+                        {/* Decorative clouds behind the artwork */}
+                        <CloudinaryImage
+                            src="https://res.cloudinary.com/dmukukwp6/image/upload/cloud_1_6ec7ea72d6.svg"
+                            alt=""
+                            aria-hidden
+                            className="pointer-events-none absolute -left-6 top-2 z-0 w-12 opacity-50"
+                            imgClassName="w-full"
+                        />
+                        <CloudinaryImage
+                            src="https://res.cloudinary.com/dmukukwp6/image/upload/cloud_2_553c4f548d.svg"
+                            alt=""
+                            aria-hidden
+                            className="pointer-events-none absolute -right-3 bottom-14 z-0 w-10 opacity-40"
+                            imgClassName="w-full"
+                        />
+                        <div className="relative z-10">
+                            <CloudinaryImage
+                                src="https://res.cloudinary.com/dmukukwp6/image/upload/cloud_hog_katy_237c11a9fe.png"
+                                alt="A hedgehog in a pink wig lounging on a cloud with a candy swirl"
+                                className="w-full"
+                                imgClassName="w-full"
+                            />
+                            <p className="m-0 mt-1 text-center text-sm text-secondary">Baby, you're a firewall.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div className="mt-5 grid grid-cols-1 gap-4 @sm:grid-cols-3">
+                    {cloudEnvironmentItems.map(({ Icon, label, desc }) => (
+                        <div key={label}>
+                            <div className="flex items-center gap-1.5">
+                                <Icon className="size-5 shrink-0 text-blue" />
+                                <span className="text-base font-bold text-primary">{label}</span>
+                            </div>
+                            <p className="m-0 mt-1 text-sm leading-snug text-secondary">{desc}</p>
+                        </div>
+                    ))}
+                </div>
+
+                <OSButton
+                    asLink
+                    to="/docs/posthog-desktop/environments"
+                    state={{ newWindow: true }}
+                    variant="primary"
+                    size="md"
+                    className="mt-5"
+                >
+                    Set up an environment
+                </OSButton>
+            </div>
         </section>
     )
 }
@@ -2443,6 +2526,8 @@ export default function CodePage() {
                         <SkillsCallout />
 
                         <SupportedLLMs />
+
+                        <CloudAgentsCallout />
 
                         <MCPMarketplace />
 

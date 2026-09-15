@@ -1,12 +1,10 @@
 import { MenuType, MenuItemType } from 'components/RadixUI/MenuBar'
 import React from 'react'
-import { docsMenu, handbookSidebar } from '../../../navs'
+import { handbookSidebar } from '../../../navs'
 import * as Icons from '@posthog/icons'
-import { useSmallTeamsMenuItems } from './SmallTeamsMenuItems'
 import { Logo } from '@posthog/brand/logo'
 import { APP_COUNT } from 'constants/index'
 import SearchableProductMenu from './SearchableProductMenu'
-import { getDocsMenuItems } from '../../TaskBarMenu/menuData'
 import {
     categoryOrder,
     categoryDisplayNames,
@@ -30,166 +28,6 @@ import {
 import { useApp } from '../../../context/App'
 import { IconChevronDown } from '@posthog/icons'
 import { navigate } from 'gatsby'
-
-interface DocsMenuItem {
-    name: string
-    url?: string
-    icon?: string
-    color?: string
-    children?: DocsMenuItem[]
-}
-
-interface DocsMenu {
-    children: DocsMenuItem[]
-}
-
-// Add mobile destinations for docs menu items based on the product data
-const addDocsMenuMobileDestinations = (items: any[], allProducts: any[]): any[] => {
-    return items.map((item) => {
-        // For docs product items, add mobile destination based on slug from product data
-        if (item.type === 'submenu' && item.label && !item.mobileDestination) {
-            // Find matching product by name to get its slug
-            const product = allProducts.find((p) => p.name === item.label)
-            if (product && product.slug) {
-                return {
-                    ...item,
-                    mobileDestination: `/docs/${product.slug}`,
-                    items: item.items, // Keep items for desktop
-                }
-            }
-        }
-
-        // Recursively process nested items
-        if (item.items && Array.isArray(item.items)) {
-            return {
-                ...item,
-                items: addDocsMenuMobileDestinations(item.items, allProducts),
-            }
-        }
-
-        return item
-    })
-}
-
-// Recursively group items under section dividers at any level
-const groupBySectionDividers = (items: DocsMenuItem[]): any[] => {
-    const processedItems: any[] = []
-    let currentSection: DocsMenuItem | null = null
-    let currentSectionItems: any[] = []
-
-    for (const item of items) {
-        // Handle divider type: add separator for menu, skip otherwise
-        if ((item as any).type === 'divider') {
-            if (currentSection) {
-                currentSectionItems.push({ type: 'separator' as const })
-            } else {
-                processedItems.push({ type: 'separator' as const })
-            }
-            continue
-        }
-        if (!item.name) continue
-
-        // If this is a section header (only has name)
-        if (!item.url && !item.children && !item.icon && !item.color) {
-            // If we have a previous section, add it to processed items
-            if (currentSection) {
-                processedItems.push({
-                    type: 'submenu' as const,
-                    label: currentSection.name,
-                    items: currentSectionItems,
-                })
-            }
-            // Start a new section
-            currentSection = item
-            currentSectionItems = []
-        } else {
-            // Process the item recursively
-            const processedItem = processMenuItemWithGrouping(item)
-            if (processedItem) {
-                if (currentSection) {
-                    currentSectionItems.push(processedItem)
-                } else {
-                    processedItems.push(processedItem)
-                }
-            }
-        }
-    }
-
-    // Add the last section if it exists
-    if (currentSection && currentSectionItems.length > 0) {
-        processedItems.push({
-            type: 'submenu' as const,
-            label: currentSection.name,
-            items: currentSectionItems,
-        })
-    }
-
-    return processedItems
-}
-
-const processMenuItemWithGrouping = (item: DocsMenuItem): any => {
-    // Handle divider type: add separator for menu, skip otherwise
-    if ((item as any).type === 'divider') {
-        return { type: 'separator' as const }
-    }
-    if (!item.name) return null
-
-    // Special case: If this is the Product OS menu, filter out 'Docs' and 'Overview' from its children
-    let children = item.children
-    if (item.name === 'Product OS' && Array.isArray(children)) {
-        children = children.filter((child) => child.name !== 'Docs' && child.name !== 'Overview')
-    }
-
-    // If the item has children, process them recursively with grouping
-    if (children) {
-        const baseItem: any = {
-            type: 'submenu' as const,
-            label: item.name,
-        }
-        if (item.url) {
-            baseItem.link = item.url
-        }
-        // Always set icon and color for submenus if present
-        if (item.icon) {
-            const IconComponent = Icons[item.icon as keyof typeof Icons]
-            if (IconComponent) {
-                baseItem.icon = <IconComponent className={`text-${item.color || 'gray'} size-4`} />
-            }
-        }
-        let grouped = groupBySectionDividers(children)
-        // FLATTEN: If the first child is a submenu with the same label, bring its children up one level
-        if (grouped.length > 0 && grouped[0].type === 'submenu' && grouped[0].label === item.name) {
-            grouped = [...grouped[0].items, ...grouped.slice(1)]
-        }
-        baseItem.items = grouped
-        return baseItem
-    }
-
-    // If the item has a URL, it's a regular menu item
-    if (item.url) {
-        const baseItem: any = {
-            type: 'item' as const,
-            label: item.name,
-            link: item.url,
-        }
-        if (item.icon) {
-            const IconComponent = Icons[item.icon as keyof typeof Icons]
-            if (IconComponent) {
-                baseItem.icon = <IconComponent className={`text-${item.color || 'gray'} size-4`} />
-            }
-        }
-        return baseItem
-    }
-
-    // If the item only has a name, it's a section divider (handled in grouping)
-    return null
-}
-
-const mergedDocsMenu = (allProducts: any[]) => {
-    const docsItems = getDocsMenuItems()
-    const itemsWithMobileDestinations = addDocsMenuMobileDestinations(docsItems, allProducts)
-    return [...DocsItemsStart, ...itemsWithMobileDestinations, ...DocsItemsEnd]
-}
 
 // Process handbookSidebar into menu item structure
 const processHandbookSidebar = (items: any[], isRoot = true): any[] => {
@@ -311,7 +149,6 @@ const buildProductOSMenuItems = (allProducts: any[]) => {
 }
 
 export function useMenuData(): MenuType[] {
-    const smallTeamsMenuItems = useSmallTeamsMenuItems()
     const allProducts = useProduct() as any[]
     const { isMobile } = useApp()
 
@@ -414,9 +251,9 @@ export function useMenuData(): MenuType[] {
         },
         {
             trigger: 'Docs',
-            // The docs tree is too deep to browse inside a hamburger; mobile goes to the homepage instead
-            mobileLink: '/docs',
-            items: mergedDocsMenu(allProducts),
+            link: '/docs',
+            items: [],
+            hideChevron: true,
         },
         {
             trigger: 'Community',
@@ -547,9 +384,9 @@ export function useMenuData(): MenuType[] {
                     link: '/people',
                 },
                 {
-                    type: 'submenu',
+                    type: 'item',
                     label: 'Small teams',
-                    items: smallTeamsMenuItems,
+                    link: '/teams',
                 },
                 {
                     type: 'item',
@@ -565,53 +402,52 @@ export function useMenuData(): MenuType[] {
                     type: 'separator',
                 },
                 {
-                    type: 'submenu',
-                    label: 'Like and subscribe',
+                    type: 'item',
+                    label: 'X',
+                    link: 'https://x.com/posthog',
+                    icon: <IconXNotTwitter className="size-4 text-black dark:text-white" />,
+                    external: true,
                     mobileDestination: false, // Omit from mobile menu
-                    items: [
-                        {
-                            type: 'item',
-                            label: 'X',
-                            link: 'https://x.com/posthog',
-                            icon: <IconXNotTwitter className="size-4 text-black dark:text-white" />,
-                            external: true,
-                        },
-                        {
-                            type: 'item',
-                            label: 'LinkedIn',
-                            link: 'https://www.linkedin.com/company/posthog',
-                            icon: <IconLinkedIn className="size-4" />,
-                            external: true,
-                        },
-                        {
-                            type: 'item',
-                            label: 'Substack',
-                            link: 'https://newsletter.posthog.com',
-                            icon: <IconSubstack className="size-4" />,
-                            external: true,
-                        },
-                        {
-                            type: 'item',
-                            label: 'YouTube',
-                            link: 'https://www.youtube.com/@posthog',
-                            icon: <IconYouTube className="size-4" />,
-                            external: true,
-                        },
-                        {
-                            type: 'item',
-                            label: 'Instagram',
-                            link: 'https://www.instagram.com/teamposthog',
-                            icon: <IconInstagram className="size-4" />,
-                            external: true,
-                        },
-                        {
-                            type: 'item',
-                            label: 'GitHub',
-                            link: 'https://github.com/posthog',
-                            icon: <IconGithub className="size-4" />,
-                            external: true,
-                        },
-                    ],
+                },
+                {
+                    type: 'item',
+                    label: 'LinkedIn',
+                    link: 'https://www.linkedin.com/company/posthog',
+                    icon: <IconLinkedIn className="size-4" />,
+                    external: true,
+                    mobileDestination: false, // Omit from mobile menu
+                },
+                {
+                    type: 'item',
+                    label: 'Substack',
+                    link: 'https://newsletter.posthog.com',
+                    icon: <IconSubstack className="size-4" />,
+                    external: true,
+                    mobileDestination: false, // Omit from mobile menu
+                },
+                {
+                    type: 'item',
+                    label: 'YouTube',
+                    link: 'https://www.youtube.com/@posthog',
+                    icon: <IconYouTube className="size-4" />,
+                    external: true,
+                    mobileDestination: false, // Omit from mobile menu
+                },
+                {
+                    type: 'item',
+                    label: 'Instagram',
+                    link: 'https://www.instagram.com/teamposthog',
+                    icon: <IconInstagram className="size-4" />,
+                    external: true,
+                    mobileDestination: false, // Omit from mobile menu
+                },
+                {
+                    type: 'item',
+                    label: 'GitHub',
+                    link: 'https://github.com/posthog',
+                    icon: <IconGithub className="size-4" />,
+                    external: true,
+                    mobileDestination: false, // Omit from mobile menu
                 },
             ],
         },
@@ -625,41 +461,10 @@ export function useMenuData(): MenuType[] {
                     icon: <Icons.IconDeskHog className="size-4 text-seagreen" />,
                 },
                 {
-                    type: 'submenu',
+                    type: 'item',
                     label: 'Things that spark joy',
+                    link: '/sparks-joy',
                     icon: <IconSparksJoy className="size-4" />,
-                    items: [
-                        {
-                            type: 'item',
-                            label: 'Browse all',
-                            link: '/sparks-joy',
-                        },
-                        {
-                            type: 'separator',
-                        },
-                        {
-                            type: 'item',
-                            label: 'Games',
-                            disabled: true,
-                        },
-                        // Games section
-                        ...SparksJoyItems.games.map((item) => ({
-                            type: 'item' as const,
-                            label: item.label,
-                            link: item.link,
-                        })),
-                        {
-                            type: 'item',
-                            label: 'Sorta like games',
-                            disabled: true,
-                        },
-                        // Not games section
-                        ...SparksJoyItems.notGames.map((item) => ({
-                            type: 'item' as const,
-                            label: item.label,
-                            link: item.link,
-                        })),
-                    ],
                 },
                 // {
                 //     type: 'item',
@@ -667,48 +472,6 @@ export function useMenuData(): MenuType[] {
                 //     link: '/videos',
                 //     icon: <Icons.IconFolderOpenFilled className="size-4 text-orange" />,
                 // },
-                {
-                    type: 'submenu',
-                    label: 'Sexy legal documents',
-                    icon: <Icons.IconTie className="size-4 text-brown dark:text-creamsicle-dark" />,
-                    items: [
-                        {
-                            type: 'item',
-                            label: 'Terms',
-                            link: '/terms',
-                        },
-                        {
-                            type: 'item',
-                            label: 'Privacy',
-                            link: '/privacy',
-                        },
-                        {
-                            type: 'item',
-                            label: "DPA generator (it's fun!)",
-                            link: '/dpa',
-                        },
-                        {
-                            type: 'item',
-                            label: 'BAA generator (less fun)',
-                            link: '/baa',
-                        },
-                        {
-                            type: 'item',
-                            label: 'SOC ✌️',
-                            link: '/handbook/company/security#soc-2',
-                        },
-                        {
-                            type: 'item',
-                            label: 'HIPAA',
-                            link: '/docs/privacy/hipaa-compliance',
-                        },
-                        {
-                            type: 'item',
-                            label: 'Subprocessors',
-                            link: '/subprocessors',
-                        },
-                    ],
-                },
                 {
                     type: 'item',
                     label: 'Services',
@@ -730,17 +493,55 @@ export function useMenuData(): MenuType[] {
                 },
                 {
                     type: 'item',
-                    label: 'Keyboard shortcuts',
-                    link: '/kbd',
-                    icon: <Icons.IconKeyboard className="size-4 text-primary" />,
-                    shortcut: ['.'],
-                },
-                {
-                    type: 'item',
                     label: 'System status',
                     link: 'https://status.posthog.com',
                     external: true,
                     icon: <Icons.IconPulse className="size-4 text-red" />,
+                },
+                {
+                    type: 'separator',
+                },
+                {
+                    type: 'item',
+                    label: 'Terms',
+                    link: '/terms',
+                    icon: <Icons.IconDocument className="size-4 text-blue" />,
+                },
+                {
+                    type: 'item',
+                    label: 'Privacy',
+                    link: '/privacy',
+                    icon: <Icons.IconLock className="size-4 text-seagreen" />,
+                },
+                {
+                    type: 'item',
+                    label: "DPA generator (it's fun!)",
+                    link: '/dpa',
+                    icon: <Icons.IconMagicWand className="size-4 text-purple" />,
+                },
+                {
+                    type: 'item',
+                    label: 'BAA generator (less fun)',
+                    link: '/baa',
+                    icon: <Icons.IconNotebook className="size-4 text-lilac" />,
+                },
+                {
+                    type: 'item',
+                    label: 'SOC 2',
+                    link: '/handbook/company/security#soc-2',
+                    icon: <Icons.IconShieldLock className="size-4 text-teal" />,
+                },
+                {
+                    type: 'item',
+                    label: 'HIPAA',
+                    link: '/docs/privacy/hipaa-compliance',
+                    icon: <Icons.IconStethoscope className="size-4 text-red" />,
+                },
+                {
+                    type: 'item',
+                    label: 'Subprocessors',
+                    link: '/subprocessors',
+                    icon: <Icons.IconServer className="size-4 text-orange" />,
                 },
             ],
         },
@@ -752,11 +553,6 @@ export function useMenuData(): MenuType[] {
             type: 'item' as const,
             label: 'About PostHog',
             link: '/about',
-        },
-        {
-            type: 'item' as const,
-            label: 'About this website',
-            link: '/credits',
         },
         {
             type: 'item' as const,
@@ -785,11 +581,7 @@ export function useMenuData(): MenuType[] {
                 const filteredItems: MenuItemType[] = []
                 const menuItemsCopy = [...menu.items]
 
-                // Apply mobile destinations for docs menu if this is the Docs menu
-                const itemsToProcess =
-                    typeof menu.trigger === 'string' && menu.trigger === 'Docs'
-                        ? addDocsMenuMobileDestinations(menuItemsCopy, allProducts)
-                        : menuItemsCopy
+                const itemsToProcess = menuItemsCopy
 
                 for (let i = 0; i < itemsToProcess.length; i++) {
                     const item = itemsToProcess[i]
@@ -899,40 +691,6 @@ export function useMenuData(): MenuType[] {
         ...(!isMobile ? mainNavItems : []),
     ]
 }
-
-export const DocsItemsStart = [
-    {
-        type: 'item' as const,
-        label: 'Overview',
-        link: '/docs',
-        icon: <Icons.IconBook className="size-4 text-purple" />,
-    },
-    {
-        type: 'separator' as const,
-    },
-]
-
-export const DocsItemsEnd = [
-    { type: 'separator' as const },
-    {
-        type: 'item' as const,
-        label: 'Tutorials',
-        link: '/tutorials',
-        icon: <Icons.IconBook className="size-4 text-purple" />,
-    },
-    {
-        type: 'item' as const,
-        label: 'Dashboard templates',
-        link: '/templates',
-        icon: <Icons.IconDashboard className="size-4 text-blue" />,
-    },
-    {
-        type: 'item' as const,
-        label: 'Tracks',
-        link: '/tracks',
-        icon: <Icons.IconGraduationCap className="size-4 text-black" />,
-    },
-]
 
 import type { AppIconName } from 'components/OSIcons/AppIcon'
 

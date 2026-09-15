@@ -37,7 +37,7 @@ import PHPSendEvents from '../../integrate/send-events/_snippets/send-events-php
 
 ## Person profiles and properties
 
-The PHP SDK captures identified events by default. These create [person profiles](/docs/data/persons). To set [person properties](/docs/data/user-properties), call `identify` with the user's distinct ID and properties:
+The PHP SDK captures identified events by default. These create [person profiles](/docs/data/persons). To set [person properties](/docs/product-analytics/person-properties), call `identify` with the user's distinct ID and properties:
 
 ```php
 PostHog::identify([
@@ -66,7 +66,7 @@ PostHog::capture([
 ]);
 ```
 
-For more details on the difference between `$set` and `$set_once`, see our [person properties docs](/docs/data/user-properties#what-is-the-difference-between-set-and-set_once).
+For more details on the difference between `$set` and `$set_once`, see our [person properties docs](/docs/product-analytics/person-properties#what-is-the-difference-between-set-and-set_once).
 
 To capture [anonymous events](/docs/data/anonymous-vs-identified-events) without person profiles, set the event's `$process_person_profile` property to `false`:
 

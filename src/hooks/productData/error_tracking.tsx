@@ -313,7 +313,7 @@ export const errorTracking = {
             {
                 name: 'LogRocket',
                 key: 'logrocket',
-                link: '/blog/posthog-vs-logrocket',
+                link: '/compare/posthog-vs-logrocket',
             },
             {
                 name: 'PostHog',

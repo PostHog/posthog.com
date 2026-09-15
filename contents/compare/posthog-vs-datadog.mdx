@@ -1,0 +1,353 @@
+---
+title: 'In-depth: PostHog vs Datadog'
+date: 2026-09-07
+author:
+    - ian-vanagas
+rootPage: /compare
+sidebar: Compare
+showTitle: true
+hideAnchor: true
+featuredImage: >-
+ https://res.cloudinary.com/dmukukwp6/image/upload/comparisons_blog_post_template_2_4ffbb8fec0.png
+featuredImageType: full
+category: General
+tags:
+    - Comparisons
+seo:
+    metaTitle: PostHog vs Datadog in-depth tool comparison
+    metaDescription: Datadog is built for infrastructure and security teams. PostHog is built for product engineers. Compare the two on products, observability, pricing, and platform features.
+---
+
+Both PostHog and [Datadog](/compare/best-datadog-alternatives) are developer platforms aimed at helping product teams understand the performance of their software.
+
+This post provides a detailed guide comparing the two across features, use cases, and team types. It aims to help you pick the best APM tool for your use case, so you can go back to thinking about more pressing questions – like would you rather fight 100 hedgehog-sized dogs or 1 dog-sized hedgehog?
+
+## How is PostHog different?
+
+### We're free, usage-based, and transparent
+
+Datadog has a free tier, but it's limited. Only some of their products, like infrastructure monitoring, have a free tier. Even then, there are limits like 5 hosts, with only a 1-day metric retention. APM, logs, RUM, replay, and more are excluded and only available as trials.
+
+All of PostHog's products have a free tier that refreshes every month. Beyond that, [every product's pricing is transparent](/pricing). You can predict how much you're going to pay, rather than go through Datadog's complicated and multiplicative pricing.
+
+### Built for product engineers
+
+Datadog is organized around services and hosts. PostHog is organized around [events](/docs/data/events), [people](/docs/data/persons), and services.
+
+This reflects the typical usage and users of each. Datadog is built for DevOps and infra teams monitoring their infrastructure and ensuring reliability while PostHog focuses on [product engineers](/blog/product-engineer-vs-software-engineer) trying to build successful products.
+
+This doesn't mean both aren't used by other types of users though. They have overlapped more and more. Datadog acquired Eppo for experiments and launched a feature flags product. PostHog launched [logs](/logs) and is filling out its APM suite with [tracing](/docs/distributed-tracing) in beta and [metrics](/docs/metrics/installation) in open alpha.
+
+### PostHog makes your product self-driving (the whole way)
+
+In PostHog, product data, errors, logs, and more all feed AI agents that research areas for improvements and actually write the code for you. Set it up and it [makes your product self-driving](/self-driving).
+
+Datadog has Bits Code which can make fixes too, but it needs a trigger like an error, flaky test, or slow query. It doesn't deduplicate across sources either. An exception, rageclick cluster, and Zendesk ticket could all be the same issue. Datadog wouldn't know it but PostHog would.
+
+Finally, PostHog self-driving also checks changes after they ship. It closes the loop. Did they actually fix the issue? If it didn't, agents investigate and try again.
+
+<WizardCTA />
+
+## Comparing PostHog and Datadog
+
+### Core products
+
+If you're focused on building successful products, PostHog has a more useful set of products to choose from such as [Surveys](/surveys), [Web Analytics](/web-analytics), and [Replay Vision](/replay-vision). On the infrastructure and security side, Datadog has a much stronger set of products as it includes Kubernetes, synthetic, or security monitoring.
+
+<p>
+<ProductComparisonTable
+    competitors={['posthog', 'datadog']}
+    rows={[
+        'error_tracking',
+        'logs',
+        'session_replay',
+        'product_analytics',
+        'ai_observability',
+        'feature_flags',
+        'experiments',
+        'surveys',
+        'web_analytics',
+        'replay_vision',
+        'data_warehouse',
+        'cdp',
+        'logs.observability.features.infra_monitoring',
+        'logs.observability.features.synthetic_monitoring',
+        'logs.observability.features.on_call_incident_management',
+        'logs.security_and_compliance.features.security_monitoring',
+    ]}
+/>
+</p>
+
+### Logs, traces, metrics
+
+[Logs](/logs), [Traces](/traces), and an APM stack are newer PostHog features, but they're rapidly gaining feature parity with Datadog.
+
+<p>
+<ProductComparisonTable
+    competitors={['posthog', 'datadog']}
+    rows={[
+        'logs.observability.features.traces',
+        'logs.observability.features.metrics',
+        'logs.observability.features.infra_monitoring',
+        'logs.core_logging_and_ingestion.features.native_open_telemetry_ingest',
+        'logs.search.features.no_proprietary_query_language',
+        'logs.core_logging_and_ingestion.features.high_cardinality_indexing',
+        'logs.observability.features.alerting',
+        'logs.debugging_integrations.features.product_analytics_context',
+        'logs.pricing.features.ingest_only_pricing',
+        'logs.pricing.features.no_query_compute_fees',
+        'logs.core_logging_and_ingestion.features.retention',
+        'logs.observability.features.service_map',
+        'logs.observability.features.code_level_profiling',
+    ]}
+/>
+</p>
+
+### Product analytics and session replay
+
+[Product Analytics](/product-analytics) and [Session Replay](/session-replay) are the tools PostHog started out with, are most known for, and are the strongest. Even though Datadog doesn't have the same focus on them, many of the same features are available on its platform too.
+
+<p>
+<ProductComparisonTable
+    competitors={['posthog', 'datadog']}
+    rows={[
+        'product_analytics.features.autocapture',
+        'product_analytics.features.ai_analysis',
+        'product_analytics.funnels',
+        'product_analytics.features.user_profiles',
+        'product_analytics.group_analytics',
+        'product_analytics.insights.features.sql_editor',
+        'session_replay.platform_support.features.mobile_app_recordings',
+        'session_replay.analysis.features.network_monitor',
+        'session_replay.features.ai_summaries',
+        'replay_vision',
+        'session_replay.pricing.free_tier',
+        'session_replay.export.features.retention_policy',
+    ]}
+/>
+</p>
+
+### Pricing and free tier
+
+The pricing and free tier might be the area where PostHog and Datadog have the largest differences. Although both have many products with separate pricing, PostHog provides a free tier and [transparency](/pricing) for all of them.
+
+<p>
+<ProductComparisonTable
+    competitors={['posthog', 'datadog']}
+    rows={[
+        'platform.pricing.free_tier',
+        'platform.pricing.self_serve',
+        'platform.pricing.free_team_members',
+        'platform.pricing.usage_based_pricing',
+        {
+            // Not a shared platform key: what the free tier retains varies too much between tools.
+            label: 'Free tier retention',
+            description: 'How long data is kept on the free plan, and which products it covers',
+            values: ['Logs 14 days, replays 1 month', 'Metrics 1 day'],
+        },
+        'platform.pricing.billing_units',
+        {
+            label: 'Hard spend caps',
+            description: 'Stop collection at a limit you set instead of being billed past it',
+            values: [true, 'Log indexes only'],
+        },
+        {
+            label: 'On-demand premium',
+            description: 'Extra cost for paying as you go instead of committing annually',
+            values: ['None', '0-80%, typically 20% (hosts)'],
+        },
+    ]}
+/>
+</p>
+
+### How much does PostHog cost compared to Datadog?
+
+First, the free tiers of both products differ significantly.
+
+Datadog only covers infrastructure monitoring for up to 5 hosts with 1-day metric retention. PostHog's free tier refreshes every month and covers every product:
+
+| &nbsp;                            | **Free usage per month** |
+| --------------------------------- | ------------------------ |
+| **Logs**                          | 10GB ingested            |
+| **Error tracking**                | 100k exceptions          |
+| **Product analytics**             | 1 million events         |
+| **Session replay**                | 5,000 recordings         |
+| **Surveys**                       | 1500 responses           |
+| **LLM observability**             | 100k events              |
+| **Feature flags and A/B testing** | 1 million API requests   |
+| **Data warehouse**                | 1 million synced rows    |
+
+Beyond that, both are usage based, but even this varies for Datadog depending on your commitment. Although PostHog does discounts for higher spend customers, there's no time-based commitment needed to get the best price.
+
+To show how the two compare, here's some example scenarios assuming 20 events per session, 20% of sessions recorded for replay, ~1KB per log line, and Datadog indexing 20% of ingested logs at annual-commitment rates:
+
+**A seed-stage product:** 50k sessions, 1M events, 10k replays, 50k errors, 20GB logs
+
+|                   | PostHog  | Datadog |
+| ----------------- | -------- | ------- |
+| Product analytics | $0       | $40     |
+| Session replay    | $25      | $25     |
+| Error tracking    | $0       | $25     |
+| Logs              | $3       | $9      |
+| **Total**         | **$28**  | **$99** |
+
+**A Series A product:** 250k sessions, 5M events, 50k replays, 300k errors, 150GB logs
+
+|                   | PostHog   | Datadog  |
+| ----------------- | --------- | -------- |
+| Product analytics | $153      | $200     |
+| Session replay    | $173      | $125     |
+| Error tracking    | $74       | $80      |
+| Logs              | $35       | $66      |
+| **Total**         | **$435**  | **$471** |
+
+**A scaling SaaS:** 1M sessions, 20M events, 200k replays, 1M errors, 600GB logs
+
+|                   | PostHog    | Datadog    |
+| ----------------- | ---------- | ---------- |
+| Product analytics | $643       | $800       |
+| Session replay    | $458       | $500       |
+| Error tracking    | $178       | $207       |
+| Logs              | $118       | $264       |
+| **Total**         | **$1,397** | **$1,771** |
+
+Every Datadog figure above **assumes an annual contract.** Month-to-month is around 20% more and on-demand around 50% more (but depend on the product). **PostHog** has volume discounts, not time-based commitments.
+
+### Platform and security
+
+Both PostHog and Datadog have the platform and security features enterprise or compliance-conscious teams need.
+
+<p>
+<ProductComparisonTable
+    competitors={['posthog', 'datadog']}
+    rows={[
+        'platform.deployment.open_source',
+        'platform.deployment.eu_hosting',
+        'platform.deployment.self_host',
+        'platform.developer.mcp_scope',
+        'platform.developer.agent_surfaces',
+        'platform.security.hipaa_ready',
+        'platform.security.soc2_certified',
+        'platform.security.role_based_access_control',
+    ]}
+/>
+</p>
+
+## When to choose PostHog vs Datadog
+
+Choose PostHog if:
+
+- You want to debug from either direction. Start with a user or feature and investigate the backend issues, or start with logs, metrics, and traces then understand the user impact.
+- You want the tool that finds the problem to also ship the fix via [agents that open PRs](/blog/what-is-a-scout) as well as feature flags and experiments.
+- Cost predictability matters. PostHog provides transparent usage-based pricing, self-serve, hard spend caps per product.
+- You're already emitting OpenTelemetry and want to [repoint an exporter](/docs/logs/installation) or want quick setup using standard OpenTelemetry instrumentation, without requiring a proprietary agent.
+- You want observability in the same platform as product analytics, replay, flags, experiments, and [warehouse data](/context-warehouse), querying the same data.
+- You don't have a dedicated infra team and need something useful on day one. Dedicated infra teams can use PostHog too though.
+
+Choose Datadog if:
+
+- You're monitoring infrastructure like hosts, containers, Kubernetes, cloud services.
+- On-call, incident management, synthetics, or SLO tracking need to be a workflow, not an alert.
+- Security is in scope like needing Cloud SIEM, Cloud Security, threat detection.
+- You need continuous profiling, Cloud Network Monitoring (beyond frontend), or database monitoring.
+
+## Recommendation by team type
+
+**For Infrastructure, DevOps, and SRE teams**
+- **Datadog** – Monitoring hosts, containers, Kubernetes, and cloud services are what it built for and still its largest business.
+
+**For teams that own on-call and incident response**
+- **Datadog** – On-call scheduling, incident management, synthetics, and SLO tracking are workflows, not just alerts.
+
+**For security teams**
+- **Datadog** – Cloud SIEM, Cloud Security, code security and threat detection are all large products.
+
+**For product and growth teams**
+- **PostHog** – Funnels, retention, cohorts, person profiles, experiments, and replays are all core features of PostHog made to help these teams understand product usage and grow it faster.
+
+**For startups**
+- **PostHog** – A single platform that scales from landing pages to product analytics to logs without rebuilding your stack as you grow. The generous free tier means you won't outgrow it quickly. Startups can also qualify for free credits.
+
+**For teams that need predictable costs**
+- **PostHog** – Transparent pricing along with simple usage-based pricing for every product, and hard per-product limits make PostHog a much better option for teams concerned with cost predictability.
+
+<WizardCTA />
+
+## Frequently asked questions
+
+<details>
+<summary>PostHog says it makes your product "self-driving" – what does that mean?</summary>
+
+It means PostHog digs through your product data, finds what's worth fixing, and has agents do the work. It starts with context. A full suite of developer tools – [AI Observability](/ai-observability), [Product Analytics](/product-analytics), [Session Replay](/session-replay), [Feature Flags](/feature-flags), [Experiments](/experiments), [Error Tracking](/error-tracking), [Logs](/logs), and more – captures everything happening in your product, and a [Context Warehouse](/blog/what-is-a-context-warehouse) unifies it into one source agents can read across. From there, [Scouts](/blog/what-is-a-scout) read across all of it and sort what's worth knowing from what's just noise. What clears the bar becomes a report in your inbox: an agent picks it up, roots out the cause, and opens a PR. You review and merge. You can steer it from [Slack](/slack), the [web app](/ai), the [desktop app](/desktop), or your own editor via [the MCP](/mcp) or [CLI](/docs/cli).
+
+</details>
+
+<details>
+<summary>What do people actually use Datadog for?</summary>
+
+Three products mostly: infrastructure monitoring, log management, and APM. Real user monitoring, synthetics, session replay, product analytics, and CI visibility exist, but are not the main characters.
+
+</details>
+
+<details>
+<summary>Why is Datadog so expensive?</summary>
+
+Less because any single product is so expensive, and more because the combination of them can add up.
+
+It starts with **per-host billing**. Infrastructure Pro is $15 per host per month annually or $18 on-demand. APM adds $36 standalone or $48 with infra. Hosts are billed on the month's maximum (lower 99%) rather than its average, so a scale-up that lasts more than a few hours sets your price for the whole month.
+
+Meters stack too. Logs are charged twice: $0.10 per ingested GB and then $1.70 per million events to index them at 15 day retention. Per 1000 session, RUM costs $0.15 to measure, another $3 to filter and retain, and $2.5 record replays.
+
+</details>
+
+<details>
+<summary>Can I cap my Datadog spend?</summary>
+
+Partly. Datadog offers daily quotas per log index that stops indexing when you hit them, plus exclusion-filter sampling and usage monitors.
+
+They don't have limits on hosts, APM, and custom metrics, only sampling. These are often the largest line items too.
+
+With PostHog, you can set hard billing limits per product. When you reach it, collection stops until the next cycle (or when you raise the limit) and you are not billed past it.
+
+</details>
+
+<details>
+<summary>Do I need to rewrite instrumentation to move off Datadog?</summary>
+
+No. PostHog ingests logs, traces, and metrics over standard OpenTelemetry. If you're already emitting OTel, simply change the endpoint. There's no PostHog-specific SDK to adopt.
+
+Historical metrics and logs as well as dashboards and monitors don't convert (but can be synced with PostHog's warehouse source), but both tools can be run side-by-side to help with this transition.
+
+</details>
+
+<details>
+<summary>Can I use PostHog and Datadog together?</summary>
+
+Yes, and teams do. They cover infrastructure with Datadog and product with PostHog.
+
+Two things make this easier:
+
+1. **[A Datadog-compatible logs endpoint](/docs/logs/installation/datadog).** Point your existing Datadog Agent at `<ph_client_api_host>/i/v1/logs/datadog/<ph_project_token>` and your logs land in PostHog. You don't have to remove the agent to start.
+2. [A Datadog source for the data warehouse](/docs/cdp/sources/datadog) (currently in alpha), which syncs monitors, dashboards, incidents, and SLOs into PostHog so you can query them alongside your product data.
+
+</details>
+
+<details>
+<summary>Can PostHog replace Datadog?</summary>
+
+For many of Datadog's core products, yes. Error tracking, logs, session replay, and product analytics are all fully featured in PostHog while tracing and metrics are closing the gap. 
+
+For a bunch of monitoring, not yet. PostHog doesn't have Kubernetes, synthetic, database, or security monitoring. It doesn't have on-call or incident management either.
+
+</details>
+
+<details>
+<summary>Is Datadog open source? Is PostHog?</summary>
+
+Datadog isn't open source. Some bits of its platform, like the Datadog Agent are, but most aren't.
+
+PostHog is MIT-licensed and has a [public handbook](/handbook) with details on how the company operates.
+
+</details>
+
+<NewsletterForm />

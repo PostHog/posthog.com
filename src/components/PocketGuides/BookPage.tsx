@@ -76,6 +76,8 @@ export default function BookPage({ slug, body }: BookPageProps): JSX.Element | n
             headerBarOptions={[]}
             // fullScreen: the book fits the window and its page owns its scroll.
             fullScreen
+            // Like the docs reader, show the standard app-window surface behind the page.
+            transparent
             // The window itself is the page – no desk. The viewport selector re-pins the height fullScreen drops.
             className="[&_.app-scroll-viewport>div>div]:h-full"
         >
