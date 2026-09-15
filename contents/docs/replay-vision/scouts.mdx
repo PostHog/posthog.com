@@ -49,8 +49,8 @@ Pick a frequency and a run time. The time is read in your project's timezone.
 
 Optional, and set up alongside the rest of the scout rather than afterwards:
 
-- **Slack** - post each report to a channel in a connected Slack workspace.
-- **Webhook** - `POST` each report to an HTTPS URL of yours. Delivery runs through a destination in [data pipelines](/docs/cdp/destinations), where you can see each attempt.
+- **Slack** – post each report to a channel in a connected Slack workspace.
+- **Webhook** – `POST` each report to an HTTPS URL of yours. Delivery runs through a destination in [Data Pipelines](/docs/cdp/destinations), where you can see each attempt.
 
 <ProductScreenshot
   imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/scout_form_delivery_e93b362681.png"
@@ -97,7 +97,7 @@ Set a webhook URL on the scout's **Delivery** tab and PostHog sends an HTTP `POS
 | `digest.priority` | string | The priority the scout assigned, `P0` to `P4`. |
 | `digest.url` | string | Link to the report in PostHog. |
 
-Delivery runs through a destination in data pipelines named `Replay Vision · <scout name>`, where you can see every attempt and its result.
+Delivery runs through a destination in Data Pipelines named `Replay Vision · <scout name>`, where you can see every attempt and its result.
 
 ## Reports
 
