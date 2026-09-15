@@ -191,7 +191,7 @@ If requests to your proxy path return 404:
 
 A rewrite serves PostHog under your own origin, so your web application firewall (WAF) inspects PostHog traffic with the rules you wrote for your own application. You see `403` responses on the proxy path, or blocks across your whole site after the first proxied event.
 
-Rewrites return PostHog's response headers unchanged, and `next.config.js` cannot delete a response header. If a cookie in the proxied response is the cause, you must move to a proxy that builds the response itself, such as a [Cloudflare worker](/docs/advanced/proxy/cloudflare).
+Rewrites return PostHog's response headers unchanged, and `next.config.js` cannot delete a response header. If a cookie in the proxied response is the cause, you must move to a proxy that builds the response itself, such as a [Cloudflare worker that deletes the header](/docs/advanced/proxy/proxy-reference#your-firewall-blocks-requests-to-your-own-site).
 
 As a quick test, delete the cookies for your domain and start the SDK with `persistence: 'localStorage'`. This removes PostHog's own cookie. If the blocks stop, that cookie was the cause.
 

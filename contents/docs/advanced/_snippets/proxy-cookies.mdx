@@ -11,7 +11,7 @@ requestHeaders.delete('cookie')
 requestHeaders.delete('authorization')
 ```
 
-This needs a proxy that runs code, such as [Next.js proxy](/docs/advanced/proxy/nextjs-middleware) or a [Cloudflare worker](/docs/advanced/proxy/cloudflare). Rewrite rules cannot change headers, in either direction.
+This needs a proxy that runs code, such as [Next.js proxy](/docs/advanced/proxy/nextjs-middleware) or a [Cloudflare worker](/docs/advanced/proxy/cloudflare). Rewrite rules can't modify request headers or remove response headers.
 
 Alternatively, configure PostHog to use `localStorage` instead of cookies:
 

@@ -127,7 +127,7 @@ A proxy serves PostHog under your own origin. Your web application firewall (WAF
 
 This problem has two shapes:
 
-- **Only the proxy path is blocked.** You see `403` responses on requests such as `/yourpath/static/recorder.js` or `/yourpath/e/`. Your firewall scores the proxied requests themselves. Add an exception for the proxy path, or stop proxying the SDK assets and load them from PostHog directly.
+- **Only the proxy path is blocked.** You see `403` responses on requests such as `/yourpath/static/recorder.js` or `/yourpath/e/`. Your firewall scores the proxied requests themselves. Add an exception for the proxy path, or stop proxying the SDK assets: remove the `/static` rule and set [`asset_host`](/docs/libraries/js/snippet-versioning#custom-asset-hosts-and-reverse-proxies) to `https://us-assets.i.posthog.com` or `https://eu-assets.i.posthog.com`. `asset_host` only covers `/static/*`, so `/array/<token>/config.js` still goes through your proxy.
 - **Your whole site is blocked after the first proxied event.** The first request to the proxy path returns `200`, then later requests to unrelated pages fail. A firewall log shows a reason such as an inbound anomaly score. A cookie under your origin is the usual cause, because the browser sends it with every subsequent request.
 
 To find out if a cookie is the cause, delete the cookies for your domain and start the SDK with `localStorage` persistence:
@@ -143,7 +143,16 @@ This removes PostHog's own cookie, `ph_<project_token>_posthog`, whose value is 
 
 If the blocks continue, open your browser devtools and look at the cookies for your domain in the **Application** tab. PostHog's ingestion endpoints set no cookie, so any other new cookie comes from your proxy or from a CDN between your proxy and PostHog. A proxy returns the upstream response headers unchanged, `Set-Cookie` included.
 
-To delete a cookie from the proxied response, you need a proxy that builds the response itself. A [Cloudflare worker](/docs/advanced/proxy/cloudflare) can copy the upstream response and delete the header before it returns it. nginx has `proxy_hide_header Set-Cookie`. Rewrite rules cannot do this.
+To delete a cookie from the proxied response, you need a proxy that builds the response itself. nginx has `proxy_hide_header Set-Cookie`. Rewrite rules cannot do this.
+
+The [Cloudflare worker](/docs/advanced/proxy/cloudflare) in our guide returns the upstream response unchanged. Responses from `fetch()` and the cache have immutable headers, so copy the response before you delete the header, in both `forwardRequest` and `retrieveAsset`:
+
+```js
+const response = await fetch(originRequest)
+const proxied = new Response(response.body, response)
+proxied.headers.delete('set-cookie')
+return proxied
+```
 
 ### Toolbar or recordings player not working
 
