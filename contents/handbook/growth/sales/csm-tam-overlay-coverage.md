@@ -44,15 +44,8 @@ Everything below is a habit for getting the most out of having two people on an 
 - Retention. TAMs are not off the hook here. Understanding health and usage is a prerequisite for cross-selling, not work that gets delegated.
 - Renewal process
 
-### Renewals
-
-Renewals sit with both of you, which is exactly why it's worth being specific about who does what.
-
-For accounts with a TAM overlay, the TAM leads the commercial conversation (quote creation, accounting for growth/expansion/upsells, order form creation, etc.). The CSM owns the value case behind it: what the customer actually used, what they got out of it, and what their usage looks like going forward.
-
-A competitor turning up ahead of a renewal on a CSM-only account is one of the clearest reasons to add a TAM in the first place. [Competitive renewal](/handbook/growth/sales/account-allocation#competitive-renewal) has the detail, and the timing is the part that matters: start the renewal conversation around 3 months out, because layering a TAM in 30 days before a renewal is too late to change a competitive evaluation.
-
-### What good looks like
+<details>
+<summary>What good looks like</summary>
 
 - Customer reaches out to either person and gets a fast, informed response. They never think about who to contact.
 - Both go deeper on their focus area than either could alone
@@ -61,8 +54,10 @@ A competitor turning up ahead of a renewal on a CSM-only account is one of the c
 - Both are visible in Slack, not just when they need something
 - Both are aligned on the current state of the customer, risks, opportunities and what their counterpart is working on.
 - TAM and CSM alignment on the account happens in public, not DMs
+</details>
 
-### What bad looks like
+<details>
+<summary>What bad looks like</summary>
 
 - Customer gets told "that's not my area, let me get [other person]"
 - Customer only hears from the TAM when PostHog wants to sell something
@@ -72,6 +67,35 @@ A competitor turning up ahead of a renewal on a CSM-only account is one of the c
 - Neither person responds because each assumed the other would
 - TAM checks out on health because "the CSM handles that now"
 - Customer has to explain the same thing twice
+</details>
+
+# **Where to expect overlap**
+
+Some of the work genuinely belongs to both of you, and that's the point rather than a flaw in the split. Two people who never touch the same ground aren't an overlay, they're two accounts that happen to share a customer.
+
+What causes trouble is never the overlap itself. It's the overlap neither of you named out loud. These are the places it reliably shows up.
+
+## Renewals
+
+Renewals sit with both of you, which is exactly why it's worth being specific about who does what.
+
+For accounts with a TAM overlay, the TAM leads the commercial conversation (quote creation, accounting for growth/expansion/upsells, order form creation, etc.). The CSM owns the value case behind it: what the customer actually used, what they got out of it, and what their usage looks like going forward.
+
+A competitor turning up ahead of a renewal on a CSM-only account is one of the clearest reasons to add a TAM in the first place. [Competitive renewal](/handbook/growth/sales/account-allocation#competitive-renewal) has the detail, and the timing is the part that matters: start the renewal conversation around 3 months out, because layering a TAM in 30 days before a renewal is too late to change a competitive evaluation.
+
+## Watching account health together
+
+The [health score](/handbook/cs-and-onboarding/health-tracking) is a customer success instrument, so the CSM owns reading it and keeping it current. That doesn't make it the CSM's problem alone.
+
+Resist the urge to divide the score up by role. It's weighted to answer one question, "is this account at risk", and splitting it by owner gets you two people watching numbers that can't answer their own question. Product engagement makes up most of the score and is a lagging signal by design, so what you spot there is usually confirmation rather than warning. Total product count, probably the most useful headroom signal a TAM has, is a rounding error inside the weighting. And an account-level score averages away a single team going quiet, which bites hardest on strategic accounts where several teams use PostHog for different things.
+
+What works better:
+
+- **Same numbers, different questions.** The CSM asks what's degrading and why. The TAM asks where the headroom is and which teams aren't represented in the usage yet.
+- **Read it together on your regular sync.** Pull the account up and each say what you think it means. Ten minutes of that beats any amount of dividing the metrics up between you.
+- **Whoever sees a component hit "Poor" posts it in the channel**, whatever it relates to. No component belongs to one person.
+
+If a full [health check](/handbook/cs-and-onboarding/health-checks) is due, agree in the channel who's running it and who's reviewing the output before it goes to the customer.
 
 ## When cost efficiency and growth pull against each other
 
@@ -85,37 +109,30 @@ What matters here is the process, not the conclusion:
 - **Log the work as you do it**, in the internal channel and then in the account plan. Usage moves for all sorts of reasons, and a record of what you changed and when is the difference between a known optimization and an unexplained drop.
 - **Neither of you wants to hear about it from the customer first.**
 
+## When you disagree
+
+Most of the time the lists above settle it: whoever's focus area it sits in makes the call. Where it's genuinely shared ground, default to whoever is closest to the live conversation with the customer, and have them post what they've decided and why.
+
+Two things are worth holding to. Work it out in the channel rather than in DMs, so the reasoning is there for whoever picks the account up later. And once one of you has committed to something with the customer, the other backs it and you sort out the disagreement internally. A customer who can see daylight between the two of you will use it.
+
+If you're genuinely stuck, bring your team leads in early. Neither of you needs to win an argument about an account you both care about.
+
 # **Kicking off the CSM + TAM overlay**
 
 When a TAM joins an account, or a CSM picks up an account that already has one, this is roughly what needs to happen. Doing it up front is what stops the first month going on each of you guessing what the other already knows. On a strategic account it's probably worth all of it. On a smaller growth account, the first few may be plenty.
 
-- [ ] Internal Slack channel created, using the naming convention `#customer-[customer_name]-internal`
-- [ ] TAM/CSM counterpart, both team leads, Ben and Simon invited. Invite the FDE too if they're doing any active work on the account
+- [ ] Internal Slack channel created, using the naming convention `#customer-[customer_name]-internal`. Invite your TAM/CSM counterpart, both team leads, Ben and Simon. Invite the FDE too if they're doing any active work on the account
 - [ ] Your TAM/CSM counterpart added to the external Slack channel (`#posthog-[customer_name]`)
 - [ ] Whoever has the pre-existing relationship writes a note in Customer Analytics with a context dump on the history and current state of the account
 - [ ] Whoever is joining posts their own read of the account, plus an action item they're picking up
 - [ ] Regular internal sync booked with your counterpart, if you don't already have one for another account
 - [ ] TAM creates an account plan note in Customer Analytics once they have a read on priorities for the account
-- [ ] Somewhere agreed to keep track of who's who and what's outstanding (one approach below)
+- [ ] Two links easy to get at in the channel: a light org map and a running task list ([more on these below](#tracking-people-and-tasks))
 - [ ] Any important dates (renewal, 6 month discount expiry, projected credit depletion) shared in the internal channel
 
+The internal channel effectively replaces DMs between TAMs and CSMs related to the account. Your public collaboration there will be a huge service to future teammates who might inherit it.
+
 Both of you share the responsibility of making sure the other has enough context to be effective on the account.
-
-## Somewhere to track people and tasks
-
-You both need to be able to answer who someone is, and whether something got done, without asking the other person. Two Slack canvases in the internal channel is one setup that's worked well on bigger accounts. It's an example rather than a standard, so take the shape and adapt it.
-
-**`[customer_name] - People`.** A light org map of who you've encountered on the account so far. A simple table does the job: name, title, and whether the CSM or TAM has the relationship. The goal isn't to map the entire org, it's to have something easy to refer back to later.
-
-**`[customer_name] - Tasks`.** A running to-do list. Especially on larger accounts with large orgs, to-dos get complex very quickly, and this gives you both visibility into what needs doing and who owns what. One format that works: after every conversation with a customer, add a new section at the top with the date and the topics covered in the heading, then a checklist of the follow-up items with the CSM or TAM assigned to each.
-
-On a smaller account, a single pinned message often does everything two canvases would, with less to maintain.
-
-## Create an internal Slack channel
-
-Create a channel using the naming convention `#customer-[customer_name]-internal`. Invite your counterpart, respective Team Leads, Ben and Simon to the channel. If there's an FDE doing active work on the account, invite them too.
-
-This channel effectively replaces DMs between TAMs and CSMs related to the account. Your public collaboration here will be a huge service to future teammates who might inherit the account.
 
 ## Get current on the account
 
@@ -151,7 +168,7 @@ Your counterpart is already gathering context from what's written, so you don't 
 - Important relationships or stakeholders
 - Implementations in progress or recently completed
 
-Add your counterpart to the customer's external Slack channel (`#posthog-[customer_name]`). Use your judgement for when to introduce them to the wider customer team, and relay that guidance so you stay aligned on timing.
+Add your counterpart to the customer's external Slack channel (`#posthog-[customer_name]`). Use your judgment for when to introduce them to the wider customer team, and relay that guidance so you stay aligned on timing.
 
 When you do introduce them, frame it positively - the customer's PostHog team is growing, not that they're being handed off (here’s a solid [example](https://posthog.slack.com/archives/C090RCG671C/p1777565614828089)).
 
@@ -161,18 +178,18 @@ If you're aware of any low-hanging fruit that would land well with the customer,
 
 > **The underlying principle:** The goal is to outdo one another in service. Getting current on the account and elevating relevant context makes you both better experts, which directly improves the quality of your customer-facing work.
 
-# **Where things live**
+# **Staying in sync**
 
-However you split it, the failure mode is the same: everything ends up in the channel and nothing survives the week. Here's one split that avoids that, assuming the two canvases above.
+However you split it, the failure mode is the same: everything ends up in the channel and nothing survives the week. Here's one split that avoids that.
 
 | What | Where | Why there |
 | --- | --- | --- |
 | Per-call agenda and follow-up | Thread in the internal channel | Tied to a date, notifies you both, and the prep sits next to the outcome |
-| Who's who on the customer side | `[customer_name] - People` canvas | Continuously rewritten, and there's no value in the history |
-| Open follow-ups and who owns them | `[customer_name] - Tasks` canvas | You both need the current list at a glance, not scattered through a channel |
+| Who's who on the customer side | The org map linked in the channel | One current version, and there's no value in the history |
+| Open follow-ups and who owns them | The running task list linked in the channel | You both need the current list at a glance, not scattered through a channel |
 | Anything a future owner would need | Account plan note in Customer Analytics | Searchable, and it outlives the channel |
 
-The part worth keeping whatever setup you land on: **if losing it would hurt whoever inherits this account, it shouldn't live only in a canvas.**
+The part worth keeping whatever setup you land on: **if losing it would hurt whoever inherits this account, it shouldn't live only in a working doc.**
 
 ## Call threads
 
@@ -180,25 +197,64 @@ For a call that matters, a thread in the internal channel a few days ahead is wo
 
 Use the thread to draft the agenda together and split it: who covers what, who leads which section, and what each of you wants out of the call.
 
-Whoever set the call up and led it owns the follow-up, and it goes in the same thread so the prep and the outcome stay together. Cover what happened, the next steps that came out of it, and your read on who should pick up what between the two of you. Propose the split rather than leaving it open. It's much easier for your counterpart to correct a suggestion than to work out the division themselves from a list of notes. Once you've agreed the split, the follow-up items move onto wherever you're tracking tasks.
+Whoever set the call up and led it owns the follow-up, and it goes in the same thread so the prep and the outcome stay together. Cover what happened, the next steps that came out of it, and your read on who should pick up what between the two of you. Propose the split rather than leaving it open. It's much easier for your counterpart to correct a suggestion than to work out the division themselves from a list of notes. Once you've agreed the split, the follow-up items move onto the task list.
 
 Two people on a call with no agreed split is how a customer ends up answering the same question twice.
 
-## Keeping it current
+## Tracking people and tasks
 
-Whatever you're using only works if it's maintained, and that doesn't take long.
+You both need to be able to answer who someone is, and whether something got done, without asking the other person. So each internal customer channel wants two links that are easy to get at, pinned or in the channel bookmarks:
 
-Add people as you meet them rather than in a big sweep. Recording who has the relationship is the useful part: it means one of you is the person who notices when that contact goes quiet, and is their first port of call. It's worth checking that no champion has been left without a name against them, because an unowned champion is how accounts go dark without anyone noticing.
+- **A light org map.** Who you've met on the account, what they do, and which of you has the relationship. Rewritten as it changes, since only the current picture matters.
+- **A running task list.** Added to rather than rewritten, so you can see what was done as easily as what's still outstanding.
 
-On tasks, keep the newest at the top so the current state of play is the first thing either of you reads, and put a name on every item. If something has sat unchecked across three conversations, it's either not happening or it's blocked, and both are worth saying out loud in the channel.
+What those two things actually are is up to the pair. A Slack canvas, a note in Customer Analytics, a running Google Doc, whatever the two of you will keep current. The examples below use canvases in the internal channel because they sit where the conversation already happens, but the shape matters more than the tool. On a smaller account, a single pinned message often does both jobs with less to maintain.
 
-Canvases aren't searchable, so roll the developments that matter into the account plan note in Customer Analytics as you go. That keeps the working docs short enough to actually read, and gives whoever inherits the account something they can find.
+<details>
+<summary>Example: an org map as a canvas</summary>
+
+A canvas called `[customer_name] - People`, with a table in it:
+
+| Name | Title | Who has the relationship |
+| --- | --- | --- |
+| Ana | VP Engineering, exec sponsor | TAM |
+| Dev | Staff engineer, owns the implementation | CSM |
+| Mo | PM, heaviest Experiments user | CSM |
+| Sam | Data lead, team we haven't landed yet | TAM |
+
+The goal isn't to map the entire org, it's to have something easy to refer back to later. Add people as you meet them rather than in a big sweep.
+</details>
+
+<details>
+<summary>Example: a running task list as a canvas</summary>
+
+A canvas called `[customer_name] - Tasks`. After every conversation with the customer, add a new section at the top with the date and the topics covered in the heading, then a checklist of the follow-up items with the CSM or TAM against each:
+
+**12 Sep, renewal prep and the Experiments issues**
+
+- [x] Send the event volume breakdown ahead of the call (CSM)
+- [ ] Follow up with Sam's team on the warehouse question (TAM)
+- [ ] Get the flag naming convention written up (CSM)
+
+**28 Aug, implementation review**
+
+- [x] Walk through the replay sampling config (CSM)
+- [x] Intro the TAM to the data lead (CSM)
+
+Older sections stay where they are. That's what makes the list useful three months later, when one of you is trying to remember whether anyone ever answered the warehouse question.
+</details>
+
+Whichever you use, it only works if it's maintained, and that doesn't take long. Recording who has the relationship is the useful part of the org map: it means one of you is the person who notices when that contact goes quiet, and is their first port of call. It's worth checking that no champion has been left without a name against them, because an unowned champion is how accounts go dark without anyone noticing.
+
+On tasks, keep the newest at the top and put a name on every item. If something has sat unchecked across three conversations, it's either not happening or it's blocked, and both are worth saying out loud in the channel.
+
+Neither doc is searchable the way Customer Analytics is, so roll the developments that matter into the account plan note as you go. That keeps the working docs short enough to actually read, and gives whoever inherits the account something they can find.
 
 ## Sharing DMs
 
 DMs with customer contacts happen, and that's fine. What's worth avoiding is the account picture living only in one person's DMs.
 
-Drop a short summary into the internal channel whenever a DM changes the plan, surfaces a risk, or commits PostHog to something. A summary, not a transcript. Your counterpart needs the shift in the account, not the pleasantries. If it creates a follow-up, it belongs wherever your tasks live.
+Drop a short summary into the internal channel whenever a DM changes the plan, surfaces a risk, or commits PostHog to something. A summary, not a transcript. Your counterpart needs the shift in the account, not the pleasantries. If it creates a follow-up, it belongs on the task list.
 
 ## Who joins which call
 
@@ -211,20 +267,6 @@ Wherever the account sits, the calls worth both of you being on are the ones whe
 ## Cadence
 
 A monthly sync between the two of you is a reasonable baseline, and worth making more frequent if you co-own several accounts and have more to get through than a month fits. Use one sync to cover every account you share rather than one per account. It's the one slot where you're both looking at the same account at the same time, which is usually when overlapping plans and gaps actually surface. The internal channel carries everything in between.
-
-# **Watching account health together**
-
-The [health score](/handbook/cs-and-onboarding/health-tracking) is a customer success instrument, so the CSM owns reading it and keeping it current. That doesn't make it the CSM's problem alone.
-
-Resist the urge to divide the score up by role. It's weighted to answer one question, "is this account at risk", and splitting it by owner gets you two people watching numbers that can't answer their own question. Product engagement makes up most of the score and is a lagging signal by design, so what you spot there is usually confirmation rather than warning. Total product count, probably the most useful headroom signal a TAM has, is a rounding error inside the weighting. And an account-level score averages away a single team going quiet, which bites hardest on strategic accounts where several teams use PostHog for different things.
-
-What works better:
-
-- **Same numbers, different questions.** The CSM asks what's degrading and why. The TAM asks where the headroom is and which teams aren't represented in the usage yet.
-- **Read it together on your regular sync.** Pull the account up and each say what you think it means. Ten minutes of that beats any amount of dividing the metrics up between you.
-- **Whoever sees a component hit "Poor" posts it in the channel**, whatever it relates to. No component belongs to one person.
-
-If a full [health check](/handbook/cs-and-onboarding/health-checks) is due, agree in the channel who's running it and who's reviewing the output before it goes to the customer.
 
 # **How to divide & conquer without blocking each other**
 
@@ -241,12 +283,15 @@ A non-exhaustive list of questions to explore together to align on starting poin
 
 Work with your counterpart to prioritize account needs, then explicitly assign each other the dedicated paths to run with. Think of it as delegating tasks that you'd otherwise do yourself if it was only you on the account. Play to your strengths and advantages on the account and give each other work streams where you have the highest likelihood of success. For example, if a TAM has a warm relationship with the champion for a new product expansion, they should continue focusing on that versus handing it off while it's a work in progress. 
 
-**Example scenario where you can both create value in separate product areas at the same time, whilst playing to your unique strengths as a TAM and CSM:**
+<details>
+<summary>An example of both of you creating value in separate product areas at the same time, while playing to your unique strengths as a TAM and CSM</summary>
+
 - Customer is a heavy Experiments user, and they run into a lot of issues because of their sophisticated setup. But they're concentrated on that product, so we're also thinking about expansion opportunities to derisk the account. 
 - The CSM could focus on deepening the value the customer gets from Experiments by scheduling 1:1 feedback calls with power users to better understand their pain points and work on fixes.
 - The TAM can focus on a net new cross-sell opportunity into AIO with a different set of stakeholders and deepen the value from other products that have been adopted. 
 - In this scenario, your parallel efforts unlock goodwill from the customer, bandwidth for the TAM to grow the account, and space for the CSM to go deep on debugging and instrumentation on their existing product adoption. 
 - The net effect: customer feels supported on multiple fronts.
+</details>
 
 By no means is this a hard rule (CSMs focused on instrumentation, TAMs focused on expansion). There will be times where you overlap and switch, and other times where you're more siloed due to the nature of the account. Bigger accounts tend to need the split made explicit because there's more in flight; on a smaller one it's often obvious enough to leave alone. 
 
@@ -256,7 +301,7 @@ The risk we're avoiding is duplicative or irrelevant work. Your time is incredib
 
 ## Concrete ways to work well together
 
-How can you both be the driver if there are two people in the same car? Put another way, if you're sharing an account with someone, how do you avoid blocking each other whilst working together? 
+How can you both be the driver if there are two people in the same car? Put another way, if you're sharing an account with someone, how do you avoid blocking each other while working together? 
 
 While this process isn't perfect, here are a few good habits that protect your autonomy and effectiveness:
 1. **Post often in the internal channel:** what you're thinking about, who you have a call scheduled with, open questions you have, an opportunity you're chasing down... anything. Write as generously and freely as you would on a private scratchpad - it's the closest thing we have to a shared brain.
