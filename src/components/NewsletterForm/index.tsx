@@ -11,10 +11,12 @@ import { DebugContainerQuery } from 'components/DebugContainerQuery'
 
 interface NewsletterFormProps {
     className?: string
-    placement?: string
+    /** Where the form renders. Sent with `newsletter_subscribed` so signups are attributable. */
+    placement: string
+    variant?: 'blog-index' | 'community'
 }
 
-export const NewsletterForm = ({ className = '', placement }: NewsletterFormProps): JSX.Element => {
+export const NewsletterForm = ({ className = '', placement, variant }: NewsletterFormProps): JSX.Element => {
     const { user } = useUser()
     const posthog = usePostHog()
     const [email, setEmail] = useState('')
@@ -22,18 +24,12 @@ export const NewsletterForm = ({ className = '', placement }: NewsletterFormProp
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        posthog?.capture('newsletter_subscribed', { email })
+        posthog?.capture('newsletter_subscribed', { email, placement })
         setSubmitted(true)
     }
 
-    const placementClasses =
-        placement === 'middle'
-            ? 'border-y !mt-10 !mb-6 xs:!my-6 !py-4'
-            : placement === 'blog-index'
-            ? 'border-0 pt-8'
-            : placement === 'community'
-            ? 'border-0'
-            : 'border-y !mt-6 !mb-0 !py-4'
+    const variantClasses =
+        variant === 'blog-index' ? 'border-0 pt-8' : variant === 'community' ? 'border-0' : 'border-y !mt-6 !mb-0 !py-4'
 
     useEffect(() => {
         if (user?.email) {
@@ -45,7 +41,7 @@ export const NewsletterForm = ({ className = '', placement }: NewsletterFormProp
         <div className="@container">
             <div
                 className={`
-                flex flex-col @md:flex-row @md:justify-center items-center gap-4 @md:gap-8 border-primary ${placementClasses} ${className}`}
+                flex flex-col @md:flex-row @md:justify-center items-center gap-4 @md:gap-8 border-primary ${variantClasses} ${className}`}
             >
                 <div className="text-center">
                     <CloudinaryImage

@@ -35,7 +35,7 @@ const BlogCategory = ({
                     }
                     posts={allPostsRecent.slice(0, 4)}
                 />
-                <NewsletterForm />
+                <NewsletterForm placement="blog-all" />
                 <Posts posts={allPostsRecent.slice(4, 12)} />
                 {allPostsRecent.length > 12 && (
                     <>

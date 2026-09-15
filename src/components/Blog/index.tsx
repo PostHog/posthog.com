@@ -176,7 +176,7 @@ const Blog = ({
                         </Link>
                     }
                 />
-                <NewsletterForm />
+                <NewsletterForm placement="blog-home" />
 
                 <div className="pb-2 mb-5 flex justify-between items-center">
                     <h4 className="opacity-50 text-base m-0">Browse by topic</h4>
