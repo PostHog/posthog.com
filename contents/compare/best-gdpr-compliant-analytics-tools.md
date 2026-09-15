@@ -87,7 +87,7 @@ While PostHog uses cookies by default, it can be [configured not to use cookies]
 
 #### How much does PostHog cost?
 
-PostHog Cloud is [free to use up to 1 million events per month](/pricing) and 5,000 recordings. Paid plans include support for multiple projects, and advanced features like [A/B and multivariate testing](/manual/experimentation), [correlation analysis](/manual/correlation), [cohorts](/manual/cohorts) and [group analytics](/manual/group-analytics).
+PostHog Cloud is [free to use up to 1 million events per month](/pricing), plus 5,000 web and 2,500 mobile recordings. Paid plans include support for multiple projects, and advanced features like [A/B and multivariate testing](/manual/experimentation), [correlation analysis](/manual/correlation), [cohorts](/manual/cohorts) and [group analytics](/manual/group-analytics).
 
 <WizardCTA />
 
@@ -418,7 +418,7 @@ Yes. **PostHog**, **Plausible**, **Fathom**, **Matomo**, and **TelemetryDeck** a
 <details>
 <summary>What's the best free GDPR-compliant analytics tool?</summary>
 
-**PostHog** offers the most generous free tier for product analytics: 1 million events and 5,000 session replays per month with EU hosting. For simple website analytics, **Umami** offers 100k events free, and **GoAccess** is completely free and open source (though it requires self-hosting).
+**PostHog** offers the most generous free tier for product analytics: 1 million events, 5,000 web and 2,500 mobile session replays per month with EU hosting. For simple website analytics, **Umami** offers 100k events free, and **GoAccess** is completely free and open source (though it requires self-hosting).
 
 </details>
 
