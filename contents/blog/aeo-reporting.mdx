@@ -1,0 +1,147 @@
+---
+title: "Why (most) AEO reporting is a lie"
+date: 2026-09-14
+author:
+    - natalia-amorim
+featuredImage: >-
+    https://res.cloudinary.com/dmukukwp6/image/upload/placeholder_cd689010ee.png
+featuredImageType: full
+category: General
+tags:
+  - Marketing
+---
+
+In [a previous article](/blog/aeo-advice), I said "there has never been an easier time to be a charlatan when it comes to AEO performance".
+
+If you are here expecting a retraction of that statement, I have bad news for you. I still believe it wholeheartedly, maybe more than ever.
+
+Answer engine optimization (AEO) is a fickle discipline with questionable reporting methodologies, and  turns out to be remarkably easy to manipulate. This doesn't make it unimportant; at PostHog, LLM-referred traffic continues to be our fastest-growing channel, and I'm not about to argue myself out of a job (not in this economy).
+
+The problem is that the confidence people express about it is, more often than not, entirely unearned.
+
+Hot take? Maybe, but between you and me, some of the AEO performance claims going around have gotten a little ridiculous lately, and I think we should talk about it.
+
+## Why AEO metrics are just educated guesses in a trench coat
+
+Every AEO number you have ever seen rests on the unverifiable assumption that the prompts being measured are the prompts people actually type.
+
+There is no prompt volume data available to us mortals. None. No LLM provider publishes what people ask it, and nothing exists that plays the role that 'search volume' plays in SEO.
+
+And yes, I know about clickstream data; while I can concede it's the best bad option available, that's still different from being good.
+
+But us marketers are resourceful creatures, so we do what we can with what's available to us: we proxy. We ground prompts in search volume, on the reasonable-enough theory that people ask LLMs roughly what they'd Google. We ask our own users what they typed. We do competitive research, social listening, the whole nine yards.
+
+And while these may be steps in the right direction, they are still educated guesses stacked on educated guesses, not a scientifically sound methodology with a path to accuracy.
+
+(maybe add a "blind leading the blind meme" here but also we've cancelled memes so maybe not)
+
+The industry is operating inside a gigantic blind spot, and I've been seeing a lot of tools and so-called experts talking about it as if it's been solved. Newsflash, it has not. Which is why "who's winning on AEO" posts give me chills, and not in a good way.
+
+I get a crippling, almost debilitating wave of second-hand embarrassment every time one of these crosses my feed, which gets exacerbated when someone forwards them to me with a "DID YOU SEE THIS?"
+
+Unfortunately I did, and this is time I will never get back.
+
+Before anyone comes for me: I am NOT saying brands claiming they have good AEO performance are necessarily lying or being dodgy about it. I know plenty of companies who are doing a spectacular job at capturing demand in the space, and they should be able to prove it with signup data, referral traffic, self-reported attribution, etc... you know, actual outcomes.
+
+What makes me cringe is when the entire proof of someone's success relies solely on a visibility score, calculated from a prompt set you chose… against competitors you selected… for only certain models, on certain days, at a sample size you didn't disclose.
+
+The infuriating bit is that these posts are technically true. Anyone can produce a chart showing they're "winning" with numbers that are not necessarily fake (just lacking the necessary context).
+
+Don't believe me? Let me show you how it's done.
+
+## How to manufacture a perfect AEO score in ten easy steps
+
+*A guide for the aspiring thought leader.*
+
+[add image here maybe?]
+
+**1. Choose your prompts last, not first.**
+
+Track a huge set of prompts across multiple steps of the funnel — some generic, some specific, some branded, some not. Run it. See where you happen to win. Delete or ignore the rest.
+
+Now you have a prompt set where you dominate.
+
+**2. Pick competitors who are bad at the thing you're good at.**
+
+Nobody audits your comparison set. Pick the two competitors who are weakest in your strongest category and simply… don't include the ones that beat you.
+
+If asked, say you chose "the most relevant players for these prompts." Nobody will follow up.
+
+**3. Cherry-pick your window.**
+
+This one is free money, because these metrics can be super volatile. Some of ours have swung more than ten percentage points in a single quarter.
+
+When a line looks like a heart rate monitor, there is always a start date that makes it go up. Pick that one. Call it "the last 30 days" so it sounds like a neutral default.
+
+**4. Report only on the model you're best on.**
+
+You have four or five to choose from and you'll perform differently across all of them. At PostHog, for example, we tend to do well on Claude and Gemini but have struggled on Perplexity and ChatGPT.
+
+Pick the winner. Justify it with "we focused on this one given its market share and ICP relevance."
+
+**5. Switch metrics until one flatters you.**
+
+Mentions up but citations down? Report mention rate and call it "visibility."
+
+Citations up but mentions flat? Report citation rate and call it "authority."
+
+Both down? Report share of voice against a competitor set you get to choose (refer back to step 2).
+
+There are enough metrics in this space that at least one of them is destined to be having a good week.
+
+**6. Don't disclose sample size or run count.**
+
+The same prompt can return different answers on different runs. This is free variance, and it's yours.
+
+Run it a few times. Keep the good one. Nobody in your comments section is going to ask "how many samples per prompt?" and if they do, you can always just block them.
+
+**7. Include branded prompts.**
+
+"Who is better: [your company] vs [your competitor]" — and report on visibility, not on sentiment. You will win 100% of those, forever.
+
+Blend a handful into the average and watch your overall score climb.
+
+**8. Compare your number to someone else's number.**
+
+Take your citation rate, measured with your tool, on your prompts. Put it next to a figure a competitor published using a different tool, a different prompt set, and a different definition of what a citation even is.
+
+Present as a bar chart. These are not comparable quantities. It will look great.
+
+**9. Present correlation as causation.**
+
+*"We shipped 40 new pages and our visibility rose 60%."*
+
+Did it, though? You don't know. But "we shipped 40 pages and then a number went up" is a sentence you can write without technically lying, and "50x growth" reads even better when you leave out that the baseline was 0.2%.
+
+**10. Report the top of the funnel and stop there.**
+
+Citations are the easiest number to move and the furthest from revenue. Being cited doesn't mean anyone clicked, clicking doesn't mean anyone signed up, and signing up doesn't mean anyone stuck around. 
+
+But "our citations grew 60%" sounds like a Certifiable Business Result™, and hopefully nobody will ask you what happened next.
+
+## Can we all just be normal about this?
+
+You have almost certainly seen a LinkedIn post or Twitter thread that followed one of these steps, or even possibly several, in the last months. I'm not naming anyone, because the point isn't that specific people are villains or intentionally gaming the system.
+
+The point is that AEO currently has no mechanism to tell a rigorous claim from a manufactured one, and we should call it like it is.
+
+To be clear, I am not saying we should be less ambitious or less enthusiastic about AEO, or god forbid that we report on it less. I may be biased but this is among the most interesting things happening in marketing and tech right now, and being on the cutting edge of figuring it out alongside your peers is an exciting position to be in.
+
+I just think we would all benefit from a little less pretending.
+
+And I am aware that's less sexy; the numbers you can actually prove can be ugly and underwhelming. Referral traffic is lossy, because half that bucket leaks out through referrer stripping. Self-reported signups are also gutted by attribution issues, and by everyone who can't be bothered to answer a form, which is a lot of people. It's not as fun to talk about, but it is fairer, and considerably less silly, than pretending a visibility score represents something that it doesn't.
+
+Reporting tooling is improving fast too; on our side, agent-level measurement (prompts running on simulated coding sessions instead of chat) is a meaningfully better proxy for how developers behave, and it barely existed a year ago. MCPs have made it simpler to pull from five sources and reconcile them in one place. It's super cool, and I do believe we'll get real prompt volume data and comparable trustworthy data eventually.
+
+But we're not there yet. We're early. Early is fine. Early is even fun if you're a masochist like me.
+
+What early isn't, is an excuse.
+
+The cost of being early is not knowing much yet; the cost of pretending otherwise is making claims that are, and I say this with love, bullshit.
+
+--- 
+A note from the author: In case any of this reads like the incoherent ramblings of a bitter woman whose numbers are down: I'll have you know our pipeline is healthy, thank you very much.
+
+LLM-referred traffic has been consistently in the tens of thousands of pageviews a month for the past year, up from a couple hundred at the start of 2024. And when we ask people how they found us, AI is the single most common answer (more than Google, YouTube, Reddit and social combined) accounting for thousands of signups a quarter.
+
+Anyway, this isn't about that.
