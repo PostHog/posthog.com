@@ -8,7 +8,7 @@ Some accounts have both a CSM and a TAM. Why we cover accounts that way is in [a
 
 Both roles have a real relationship with the customer. Both are in the Slack channel. Both know what's happening on the account. The difference is _focus_, not ownership. The customer should never have to figure out who to contact: they reach out to either person, and PostHog sorts it out internally.
 
-Everything below is a habit for getting the most out of having two people on an account, each playing to their strengths, so scale it to the account. A strategic account (our [Top 40](/handbook/growth/sales/account-allocation#top-40-account-management) are the clearest example) with several teams in play and a renewal coming justifies more structure. A smaller growth account with one champion and a single use case usually doesn't, so treat this as a starting point to adapt rather than a checklist to comply with.
+Everything below is a habit for getting the most out of having two people on an account, each playing to their strengths, so scale it to the account. A strategic account (our [Top 40](/handbook/growth/sales/account-allocation#top-40-account-management) are the clearest example) with several teams in play and a renewal coming justifies more structure. A smaller growth account with not as many users usually doesn't, so treat this as a starting point to adapt rather than a checklist to comply with.
 
 ## What each role focuses on
 
@@ -83,20 +83,22 @@ A competitor turning up ahead of a renewal on a CSM-only account is one of the c
 
 ## Watching account health together
 
-The [health score](/handbook/cs-and-onboarding/health-tracking) is a customer success instrument, so the CSM owns reading it and keeping it current. That doesn't make it the CSM's problem alone.
+The [health score](/handbook/cs-and-onboarding/health-tracking) is a customer success instrument, so the CSM owns reading it and keeping it current.
 
-Dividing the score up by role is tempting, but it tends not to get you much. It's weighted to answer one question, "is this account at risk". Product engagement makes up most of the score and is a lagging signal by design, so what you spot there is usually confirmation rather than warning. Total product count, probably the most useful headroom signal a TAM has, is a rounding error inside the weighting. And an account-level score averages away a single team going quiet, which is most likely on strategic accounts where several teams use PostHog for different things.
+Having both the TAM & the CSM monitor an account's health might feel like duplication of work, but it needs to be monitored by both with different questions in mind.
 
-A few things that tend to work better:
+Relying on the health score alone isn't enough either. It's weighted to answer one question, "is this account at risk". Product engagement makes up most of the score and is a lagging signal by design, so what you spot there is usually confirmation rather than warning. Total product count, a more useful headroom signal that a TAM has, doesn't hold much weighting. What it does not account for is a team going quiet, which is most likely on strategic accounts where several teams use PostHog for different things.
 
-- **Same numbers, different questions.** The CSM asks what's degrading and why. The TAM asks where the headroom is and which teams aren't represented in the usage yet.
+Some tips to keep in mind on how to approach this:
+
+- **Same numbers, different questions.** The CSM asks what's degrading and why. The TAM asks where the [headroom](/handbook/growth/sales/evaluating-growth-potential) is and which teams aren't represented in the usage yet.
 - **Read it together on your regular sync.** Pull the account up and each say what you think it means. Ten minutes of that beats dividing the metrics up between you.
 - **Say something when a component hits "Poor"**, whoever spots it and whatever it relates to.
 - **Keep an eye on `#spike-detector`** for your accounts. It flags usage moving sharply in either direction, and both directions are worth a look: a jump might be a new team onboarding or a misconfiguration, a drop might be a team going quiet. Ask your team lead to tag you as owner on your accounts so you see the ones that concern you.
 
 ## When cost efficiency and growth pull against each other
 
-The CSM's job includes helping a customer spend less. The TAM's job includes growing the account. Sooner or later those point in opposite directions on the same account.
+The CSM's job includes helping a customer spend less. The TAM's job includes growing the account. Sometimes, these point in opposite directions on the same account.
 
 The customer's efficiency should win out. A customer paying for waste has a reason to leave, and a right-sized customer is a better expansion candidate than a resentful one.
 
@@ -110,7 +112,10 @@ How you get there matters as much as where you land:
 
 Most of the time the lists above settle it, and whoever's focus area it sits in makes the call. Where it's shared ground, a reasonable default is whoever is closest to the live conversation with the customer, with a note in the channel on what they've decided and why.
 
-A couple of things worth keeping to. Work it out in the channel rather than in DMs, so the reasoning is there for whoever picks the account up later. And once one of you has committed to something with the customer, it's usually better for the other to back it and sort the disagreement out internally, since a customer who can see daylight between the two of you will use it.
+A couple of things worth keeping to:
+
+- **Work it out in the channel rather than in DMs**, so the reasoning is there for whoever picks the account up later.
+- **Once one of you has committed to something with the customer**, it's usually better for the other to back it and sort the disagreement out internally, since a customer who can see daylight between the two of you will use it.
 
 If you're stuck, bring your team leads in early. Remember, both of you will be coming from a place of truly caring about the customer and wanting to see them succeed, so it's rarely a disagreement about where you're trying to get to.
 
@@ -151,7 +156,7 @@ As a TAM, come at it through [use-case selling](/handbook/growth/use-case-sellin
 
 Cross-reference your findings against recent Slack threads and notes in Customer Analytics. You want a reasonably current assessment of the account and its needs that your counterpart can sense-check.
 
-Go as far as recommending an initial action item for yourself based on your research - that's a highly effective way to take mental load off your counterpart. Once you have an initial grasp on the account, send a message in your internal Slack channel with your questions, ideas, and recommended action items if applicable ([example](https://posthog.slack.com/archives/C0B0UD92EG1/p1777424141416129)).
+Go as far as recommending an initial action item for yourself based on your research - that's a highly effective way to take mental load off your counterpart. Once you have an initial grasp on the account, send a message in your internal Slack channel with your questions, ideas, and recommended action items if applicable (<PrivateLink url="https://posthog.slack.com/archives/C0B0UD92EG1/p1777424141416129">example</PrivateLink>).
 
 **Your goal**: create value for the account as soon as possible, with the right context, while protecting your counterpart's bandwidth. This is an art, not a science. You're co-piloting a ship on a shared mission, but each of you are still responsible for your own controls.
 
@@ -167,7 +172,7 @@ Your counterpart is already gathering context from what's written, so you don't 
 
 Add your counterpart to the customer's external Slack channel (`#posthog-[customer_name]`). Use your judgment for when to introduce them to the wider customer team, and relay that guidance so you stay aligned on timing.
 
-When you do introduce them, frame it positively - the customer's PostHog team is growing, not that they're being handed off (here’s a solid [example](https://posthog.slack.com/archives/C090RCG671C/p1777565614828089)).
+When you do introduce them, frame it positively - the customer's PostHog team is growing, not that they're being handed off (here’s a solid <PrivateLink url="https://posthog.slack.com/archives/C090RCG671C/p1777565614828089">example</PrivateLink>).
 
 Run the intro past your counterpart before you send it. They'll often spot something that makes it warmer: relevant history with a similar customer, a specialty that lines up with what this one is struggling with, or previous experience worth name-checking. A customer who is excited to meet the new person starts the relationship somewhere much better than one who is politely acknowledging a new name.
 
@@ -177,7 +182,7 @@ If you're aware of any low-hanging fruit that would land well with the customer,
 
 # **Staying in sync**
 
-A handful of things are worth giving a home, so neither of you has to scroll back through the channel to work out where the account got to.
+In order for both of you to be on the same wavelength & to make sure there's continuity in case there's a change of personnel on who owns an account, it's important that some pieces are properly pursued:
 
 | What | Where | Why there |
 | --- | --- | --- |
@@ -188,9 +193,9 @@ A handful of things are worth giving a home, so neither of you has to scroll bac
 
 ## Agenda & call threads
 
-For a call worth preparing for, start a thread in the internal channel a few days ahead and draft the agenda together: who covers what, who leads which section, and roughly how long each part should get. Aligning on that beforehand, rather than working it out live, tends to make for a far more impactful call with the customer.
+If both of you are going to be joining a call together, start a thread in the internal channel a few days ahead and draft the agenda together: who covers what, who leads which section, and roughly how long each part should get. Aligning on that beforehand, rather than working it out live, tends to make for a far more impactful call with the customer.
 
-Whoever booked the call is the obvious person to start the thread, since they're holding the invite, but either of you can. A routine check-in probably doesn't need one at all.
+Whoever booked the call is the obvious person to start the thread, since they're holding the invite, but either of you can.
 
 ## Following up afterwards
 
@@ -313,3 +318,4 @@ While this process isn't perfect, here are a few good habits that protect your a
 - [Customer journey](/handbook/growth/sales/customer-journey#ownership-rules) for the coverage matrix by phase, and co-owned churn saves
 - [Customer health tracking](/handbook/cs-and-onboarding/health-tracking) for what the score is made of
 - [Quarterly account planning](/handbook/growth/sales/risk-mitigation-and-churn-prevention#quarterly-account-planning) for the account plan note format
+- [Evaluating growth potential](/handbook/growth/sales/evaluating-growth-potential) for judging whether the headroom on an account is worth working
