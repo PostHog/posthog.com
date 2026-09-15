@@ -37,6 +37,8 @@ interface ScrollAreaProps {
     fadeX?: boolean
     style?: React.CSSProperties
     fullWidth?: boolean
+    /** Marks this viewport as the page's scroll root, so posthog-js measures scroll depth against it. */
+    isScrollRoot?: boolean
     viewportClasses?: string
     /** Ref to the scrolling viewport node — e.g. to persist/restore scroll position. */
     viewportRef?: React.Ref<HTMLDivElement>
@@ -50,6 +52,7 @@ const ScrollArea = ({
     fadeX = false,
     style,
     fullWidth = false,
+    isScrollRoot = false,
     viewportClasses = '',
     viewportRef,
 }: ScrollAreaProps) => {
@@ -65,11 +68,14 @@ const ScrollArea = ({
         }
     }, [scrollbars])
 
+    const scrollRootRef = React.useRef<HTMLDivElement | null>(null)
+
     // The horizontal fade needs its own ref on the viewport while still
     // honouring any `viewportRef` the caller passed.
     const setViewportRef = React.useCallback(
         (node: HTMLDivElement | null) => {
             fadeRef.current = node
+            scrollRootRef.current = node
             if (typeof viewportRef === 'function') {
                 viewportRef(node)
             } else if (viewportRef) {
@@ -79,6 +85,31 @@ const ScrollArea = ({
         },
         [viewportRef]
     )
+
+    // posthog-js measures scroll depth against the first element matching its
+    // `scroll_root_selector` and does no scrollability check of its own. A page renders
+    // either windowed (this viewport scrolls) or full page (the document scrolls), so only
+    // claim the marker while this viewport is the element that actually scrolls.
+    React.useEffect(() => {
+        const node = scrollRootRef.current
+        if (!isScrollRoot || !node) return
+
+        const sync = () => {
+            if (node.scrollHeight > node.clientHeight) {
+                node.setAttribute('data-scroll-root', '')
+            } else {
+                node.removeAttribute('data-scroll-root')
+            }
+        }
+
+        sync()
+        const observer = new ResizeObserver(sync)
+        observer.observe(node)
+        if (node.firstElementChild) {
+            observer.observe(node.firstElementChild)
+        }
+        return () => observer.disconnect()
+    }, [isScrollRoot, children])
 
     return (
         <RadixScrollArea.Root
