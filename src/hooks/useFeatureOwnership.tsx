@@ -106,7 +106,7 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     },
     'cache-warming': {
         feature: 'Cache warming',
-        owner: ['product-analytics'],
+        owner: ['analytics-platform'],
     },
     cli: {
         feature: 'CLI',
