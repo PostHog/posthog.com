@@ -24,7 +24,7 @@ It sounds simple, but it's the most important thing to remember when building sc
 
 ## Remind me, what is Replay Vision, anyway?
 
-A quick introduction for those who are new here. Replay Vision is built around scanners, and a scanner is a job you set up to watch recordings. Each scanner has a query that chooses which recordings to watch and a prompt that tells it how to judge each one. When a scanner watches a recording, it produces an observation.
+A quick introduction for those who are new here. Replay Vision is built around scanners, and a scanner is a job you set up to watch recordings. Each scanner has a **query** that chooses which recordings to watch, and a **prompt** that tells it how to judge each one. When a scanner watches a recording, it produces an **observation**.
 
 Replay Vision has four scanner types, depending on the answer you want:
 
@@ -33,7 +33,7 @@ Replay Vision has four scanner types, depending on the answer you want:
 - A **scorer** gives the recording a numerical score.
 - A **summarizer** writes up what happened.
 
-## 1. One question = one scanner
+## 1. Each scanner should answer one specific question
 
 ### Broad scanners produce more words, not better answers
 
