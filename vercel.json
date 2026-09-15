@@ -4401,7 +4401,11 @@
         },
         {
             "source": "/blog/categories/general",
-            "destination": "/blog/general"
+            "destination": "/blog"
+        },
+        {
+            "source": "/blog/general",
+            "destination": "/blog"
         },
         {
             "source": "/product-analytics/customers",

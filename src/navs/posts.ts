@@ -158,7 +158,7 @@ export const postsMenu: IMenu[] = [
             },
             {
                 name: 'General',
-                url: '/blog/general',
+                url: '/blog',
                 icon: 'IconNewspaper',
                 color: 'green',
             },
