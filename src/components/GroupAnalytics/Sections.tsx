@@ -3,14 +3,13 @@ import { useStaticQuery } from 'gatsby'
 import OSButton from 'components/OSButton'
 import { PricingTiers } from 'components/Pricing/Plans'
 import { allProductsData } from 'components/Pricing/Pricing'
-import { LabeledList } from 'components/Products/ReaderViewProduct'
-import { SectionHeading } from 'components/Products/ReaderViewProduct/helpers'
+import { CARD_H3, SectionHeading } from 'components/Products/ReaderViewProduct/helpers'
 import type { SectionComponentProps } from 'components/Products/ReaderViewProduct'
 
 export const GroupAnalyticsHowToUse = ({ id }: SectionComponentProps) => (
     <section id={id} className="scroll-mt-20 not-prose">
         <SectionHeading>How do I use it?</SectionHeading>
-        <ol className="grid grid-cols-1 @2xl/reader-content:grid-cols-2 gap-4 m-0 p-0 list-none">
+        <ol className="grid grid-cols-1 @md/reader-content:grid-cols-2 @3xl/reader-content:grid-cols-4 gap-3 m-0 p-0 list-none">
             {[
                 [
                     'Define a group type',
@@ -26,43 +25,18 @@ export const GroupAnalyticsHowToUse = ({ id }: SectionComponentProps) => (
                     'Build trends, funnels, retention insights, flags, and experiments around groups.',
                 ],
             ].map(([title, description], index) => (
-                <li key={title} className="border border-primary rounded p-5 bg-primary">
-                    <span className="text-xs font-semibold uppercase tracking-wider text-secondary">
-                        Step {index + 1}
+                <li key={title} className="border border-primary rounded-md bg-primary p-4">
+                    <span
+                        className="flex size-8 items-center justify-center rounded-full bg-accent font-bold text-primary"
+                        aria-hidden
+                    >
+                        {index + 1}
                     </span>
-                    <h3 className="text-lg font-bold text-primary mt-2 mb-1">{title}</h3>
+                    <h3 className={`${CARD_H3} mt-3`}>{title}</h3>
                     <p className="text-sm leading-relaxed text-secondary m-0">{description}</p>
                 </li>
             ))}
         </ol>
-    </section>
-)
-
-export const GroupAnalyticsTopFeatures = ({ id }: SectionComponentProps) => (
-    <section id={id} className="scroll-mt-20 not-prose">
-        <SectionHeading>Top features</SectionHeading>
-        <LabeledList
-            columns={[1, 2]}
-            items={[
-                {
-                    label: 'Product analytics',
-                    description: 'Aggregate trends, funnels, retention, and stickiness by company, project, or team.',
-                },
-                {
-                    label: 'Feature flags',
-                    description: 'Target a whole group so everyone in the same organization sees the same variant.',
-                },
-                {
-                    label: 'Experiments',
-                    description:
-                        'Evaluate experiment results using group-level aggregations instead of individual users.',
-                },
-                {
-                    label: 'Data warehouse',
-                    description: 'Join group data to warehouse tables and calculate usage across company segments.',
-                },
-            ]}
-        />
     </section>
 )
 

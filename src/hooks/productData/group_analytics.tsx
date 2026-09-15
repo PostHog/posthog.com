@@ -1,10 +1,10 @@
 import React from 'react'
 import {
     IconCode,
+    IconConfetti,
     IconCursorClick,
     IconEye,
     IconInfo,
-    IconList,
     IconMagic,
     IconPeople,
     IconPiggyBank,
@@ -15,7 +15,6 @@ import {
     GroupAnalyticsInstallation,
     GroupAnalyticsPricing,
     GroupAnalyticsPricingCTA,
-    GroupAnalyticsTopFeatures,
 } from 'components/GroupAnalytics/Sections'
 import { getTool } from '../../data/tools'
 
@@ -56,13 +55,7 @@ export const groupAnalytics = {
             component: GroupAnalyticsHowToUse,
             icon: <IconCursorClick className="size-4" />,
         },
-        {
-            slug: 'top-features',
-            name: 'Top features',
-            group: 'divided',
-            component: GroupAnalyticsTopFeatures,
-            icon: <IconList className="size-4" />,
-        },
+        { slug: 'pairs-with', name: 'Pairs with...', hideFromNav: true, icon: <IconConfetti className="size-4" /> },
         {
             slug: 'installation',
             name: 'Install',
@@ -98,6 +91,24 @@ export const groupAnalytics = {
             ['Marketplaces & social apps', 'Understand behavior around listings, posts, sellers, or other entities'],
         ],
     },
+    pairsWith: [
+        {
+            slug: 'product-analytics',
+            description: 'Aggregate trends, funnels, retention, and stickiness by company, project, or team.',
+        },
+        {
+            slug: 'feature-flags',
+            description: 'Target a whole group so everyone in the same organization sees the same variant.',
+        },
+        {
+            slug: 'experiments',
+            description: 'Evaluate experiment results using group-level aggregations instead of individual users.',
+        },
+        {
+            slug: 'context-warehouse/managed-warehouse',
+            description: 'Join group data to warehouse tables and calculate usage across company segments.',
+        },
+    ],
     features: [
         {
             title: 'B2B SaaS app',
