@@ -48,6 +48,7 @@ import MarkdownActions from 'components/MarkdownActions'
 import CustomerMetadata from './CustomerMetadata'
 import { getVideoClasses } from '../../constants'
 import AboutPostHog from 'components/AboutPostHog'
+import { safeLocalStorageSet } from 'lib/utils'
 
 dayjs.extend(relativeTime)
 
@@ -327,7 +328,7 @@ const AppOptionsButton = ({ isMdx }: { isMdx: boolean }) => {
     const handleContentWidthChange = (value: string) => {
         const isFullWidth = value === 'full'
         setFullWidthContent(isFullWidth)
-        localStorage.setItem('full-width-content', isFullWidth.toString())
+        safeLocalStorageSet('full-width-content', isFullWidth.toString())
     }
 
     return (
