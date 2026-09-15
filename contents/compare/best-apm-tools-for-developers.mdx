@@ -16,7 +16,7 @@ tags:
 seo:
     {
         metaTitle: 'The best APM tools for developers, compared',
-        metaDescription: 'The best APM tools for developers: PostHog for developers and product tems, Datadog and Dynatrace for enterprise observability, Grafana for self-hosting, and more.',
+        metaDescription: 'The best APM tools for developers: PostHog for developers and product teams, Datadog and Dynatrace for enterprise observability, Grafana for self-hosting, and more.',
     }
 ---
 
@@ -47,12 +47,12 @@ PostHog enables you to build a [self-driving product](/self-driving), where sche
 | | |
 | --- | --- |
 | **Signals** | Distributed traces (beta), logs, and application metrics (private alpha), plus error tracking and Core Web Vitals |
-| **Instrumentation** | OTLP endpoints for traces, logs, and metrics; `posthog-node` can create spans without an OTel SDK (experimental, server-side only; spans carry the person and session); a Prometheus scrape agent covers Docker/Kubernetes metrics |
+| **Instrumentation** | OTLP endpoints for traces, logs, and metrics; `posthog-node` can create spans with no OpenTelemetry SDK (server-side only; spans carry the person and session) |
 | **Deployment** | PostHog Cloud |
 | **Pricing** | Usage-based per product with free tiers; [PostHog Logs](/logs) includes a 10 GB/month free tier |
 | **License** | Open source (MIT) |
 
-**Not ideal if:** your primary job is infrastructure monitoring across a large host and container estate, as things such as deep agent coverage and automated infra root-cause across thousands of hosts might be better suited for a dedicated, infrastructure-first monitoring suite
+**Not ideal if:** your primary job is infrastructure monitoring across a large host and container estate, as things such as deep agent coverage and automated infra root-cause across thousands of hosts might be better suited for a dedicated, infrastructure-first monitoring suite.
 
 **Alternatives to consider:** **Datadog** or **New Relic** if you need the deepest infrastructure coverage and the biggest integration catalog; **Sentry** if all you want is code-level error tracking inside your dev loop.
 
@@ -87,7 +87,7 @@ PostHog enables you to build a [self-driving product](/self-driving), where sche
 | **Signals** | Service metrics and distributed traces tied to logs, errors, browser performance, and infrastructure; AI-correlated incidents |
 | **Instrumentation** | Language agents, infrastructure integrations, or OpenTelemetry collectors |
 | **Deployment** | SaaS, with support for open standards like OpenTelemetry |
-| **Pricing** | Free: 100 GB/mo ingest + 1 full platform user. Then ~$0.40/GB ingested and per-seat for full users (~$99–$349/mo) |
+| **Pricing** | Free: 100 GB/mo ingest + 1 full platform user. Then ~$0.40/GB ingested plus full-platform seats – Standard is $10 for the first user and $99 each after (max 5 users); Pro is $349/user on an annual commitment |
 | **License** | Proprietary |
 
 **Not ideal if:** you mainly need error tracking for one app, prefer a self-hosted open-source stack, or want performance data wired directly to product analytics and session replay.
@@ -102,27 +102,27 @@ PostHog enables you to build a [self-driving product](/self-driving), where sche
 | --- | --- |
 | **Signals** | Metrics (Prometheus/Mimir), logs (Loki), and traces (Tempo), unified in dashboards and alerts |
 | **Instrumentation** | OpenTelemetry, Prometheus exporters, or compatible agents; you deploy and maintain each component |
-| **Deployment** | Self-hosted (Loki) or Grafana Cloud |
+| **Deployment** | Self-hosted or Grafana Cloud |
 | **Pricing** | Self-hosted is free, Grafana Cloud has an always-free tier (10k metric series, 50 GB logs/traces, 14-day retention); Pro is $19/mo + usage (~$6.50 per 1k metric series, per-GB for logs and traces) |
 | **License** | AGPLv3 (Grafana, Loki, Tempo, and Mimir); enterprise features and hosting are commercial |
 
 **Not ideal if:** you want a ready-made APM experience with automatic service discovery and guided root-cause analysis, or a direct link between telemetry and other data analysis such as session replay and product analytics.
 
-**Alternatives to consider:** **SigNoz** for the same OpenTelemetry signals in one integrated app instead of a stack you assemble;
+**Alternatives to consider:** **SigNoz** for the same OpenTelemetry signals in one integrated app instead of a stack you assemble.
 
 ### What's the best APM tool for code-level error diagnosis?
 
-**Sentry** works best when application errors and slow transactions need to reach developers with enough code context to start debugging. Its SDKs capture exceptions, stack traces, releases, and affected users, and connect a failure back to the commit that caused it.
+**[Sentry](/blog/posthog-vs-sentry)** works best when application errors and slow transactions need to reach developers with enough code context to start debugging. Its SDKs capture exceptions, stack traces, releases, and affected users, and connect a failure back to the commit that caused it.
 
 | | |
 | --- | --- |
-| **Signals** | Errors, traces, transaction latency, profiling, and session replay |
+| **Signals** | Errors, traces, transaction latency, logs, application metrics, profiling, and session replay |
 | **Instrumentation** | Developer-focused SDKs per framework, with auto-instrumentation for common ones |
 | **Deployment** | SaaS or self-hosted |
 | **Pricing** | Free Developer tier (1 user, 5K errors/mo); Team $26/mo and Business $80/mo, each with base quotas (50K errors, 5M spans, 50 replays) plus pay-as-you-go overages |
 | **License** | Functional Source License (FSL) – source-available, converting to Apache 2.0 over time |
 
-**Not ideal if:** you need one platform for infrastructure monitoring, log management, and deep tracing across many microservices – those get less emphasis than application errors.
+**Not ideal if:** you need one platform for infrastructure monitoring and deep distributed tracing across a large microservices estate – Sentry now has logs and application metrics too, but its center of gravity is still application errors and code-level performance rather than infra-first observability.
 
 **Alternatives to consider:** **SigNoz** for an OpenTelemetry-native, self-hosted route; **Datadog** or **New Relic** for full-stack observability beyond errors; **PostHog** for an integrated view of errors, logs, product analytics, [and a lot more](/products).
 
@@ -151,7 +151,7 @@ PostHog enables you to build a [self-driving product](/self-driving), where sche
 | **Signals** | OpenTelemetry traces, metrics, and logs, plus service maps, exceptions, dashboards, and alerts |
 | **Instrumentation** | OpenTelemetry SDKs and collectors; existing OTel instrumentation reduces migration work |
 | **Deployment** | Self-hosted or SigNoz Cloud |
-| **Pricing** | Self-hosted is free; SigNoz Cloud is usage-based – $0.30/GB for logs and traces, $0.10 per million metric samples, from $49/mo |
+| **Pricing** | Self-hosted is free; SigNoz Cloud is usage-based – $0.30/GB for logs and traces, $0.10 per million metric samples; the $49/mo minimum (currently a promo off the $199 list price) includes $49 of usage |
 | **License** | Open source (MIT) |
 
 **Not ideal if:** you want a fully managed enterprise suite with a broad integration catalog, or product analytics and session replay beside your performance data.
