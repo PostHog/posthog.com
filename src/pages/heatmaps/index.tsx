@@ -1,5 +1,14 @@
 import React, { useRef } from 'react'
-import { IconCode, IconCursorClick, IconEye, IconInfo, IconList, IconMagic } from '@posthog/icons'
+import {
+    IconCode,
+    IconCursorClick,
+    IconEye,
+    IconInfo,
+    IconLaptop,
+    IconList,
+    IconMagic,
+    IconToolbar,
+} from '@posthog/icons'
 import ReaderView from 'components/ReaderView'
 import SEO from 'components/seo'
 import useProduct from 'hooks/useProduct'
@@ -48,35 +57,46 @@ const IN_APP_IMAGE = 'https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f
 const SETTINGS_CONFIGURATION_IMAGE =
     'https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/heatmaps_settings_59f5d1258b.png'
 
+const howToUseMethods = [
+    {
+        title: 'On your live site',
+        Icon: IconToolbar,
+        description:
+            'Open the PostHog toolbar and select the heatmap icon to see activity overlaid directly on the page.',
+        src: TOOLBAR_HEATMAP,
+        alt: 'Heatmaps displayed through the PostHog toolbar',
+    },
+    {
+        title: 'Inside PostHog',
+        Icon: IconLaptop,
+        description:
+            'Open Heatmaps, enter the page URL, then use filters or wildcard URL matching to combine similar pages.',
+        src: IN_APP_IMAGE,
+        alt: 'Heatmaps in the PostHog app',
+    },
+]
+
 const HeatmapsHowToUse = ({ id }: SectionComponentProps) => (
     <section id={id} className="scroll-mt-20 not-prose">
         <SectionHeading>How do I use it?</SectionHeading>
-        <div className="grid grid-cols-1 @3xl/reader-content:grid-cols-2 gap-6">
-            <article className="border border-primary rounded p-5 bg-primary">
-                <h3 className="text-lg font-bold text-primary mt-0 mb-2">On your live site</h3>
-                <p className="text-sm leading-relaxed text-secondary mt-0 mb-4">
-                    Open the PostHog toolbar and select the heatmap icon to see activity overlaid directly on the page.
-                </p>
-                <CloudinaryImage
-                    src={TOOLBAR_HEATMAP}
-                    alt="Heatmaps displayed through the PostHog toolbar"
-                    className="w-full max-w-lg mx-auto"
-                    imgClassName="w-full h-auto rounded border border-primary"
-                />
-            </article>
-            <article className="border border-primary rounded p-5 bg-primary">
-                <h3 className="text-lg font-bold text-primary mt-0 mb-2">Inside PostHog</h3>
-                <p className="text-sm leading-relaxed text-secondary mt-0 mb-4">
-                    Open Heatmaps, enter the page URL, then use filters or wildcard URL matching to combine similar
-                    pages.
-                </p>
-                <CloudinaryImage
-                    src={IN_APP_IMAGE}
-                    alt="Heatmaps in the PostHog app"
-                    className="w-full max-w-lg mx-auto"
-                    imgClassName="w-full h-auto rounded border border-primary"
-                />
-            </article>
+        <div className="grid grid-cols-1 @3xl/reader-content:grid-cols-2 gap-8">
+            {howToUseMethods.map(({ title, Icon, description, src, alt }) => (
+                <article key={title} className="flex flex-col gap-4">
+                    <div>
+                        <h3 className="flex items-center gap-2 text-lg font-bold text-primary mt-0 mb-2">
+                            <Icon className="size-5 text-secondary shrink-0" />
+                            {title}
+                        </h3>
+                        <p className="text-base leading-relaxed text-secondary m-0">{description}</p>
+                    </div>
+                    <CloudinaryImage
+                        src={src}
+                        alt={alt}
+                        className="w-full max-w-xl"
+                        imgClassName="w-full max-w-xl h-auto rounded border border-primary"
+                    />
+                </article>
+            ))}
         </div>
     </section>
 )
