@@ -68,6 +68,65 @@ A successful response (HTTP 200) includes:
 - `execution_id` - Unique identifier for this execution, useful for tracing results to their [log entries](#execution-logs)
 - Additional metadata fields for materialization status, endpoint version, etc
 
+## Error responses
+
+When execution fails due to query cost or capacity limits, the API returns a structured error with a machine-readable `code` field you can use for programmatic error handling.
+
+### Query performance errors (400)
+
+Returned when a query hits a ClickHouse guardrail — execution time, memory, query size, or estimated duration. These are deterministic: the same query won't succeed on a blind retry. Narrow the query's scope (for example, a smaller date range) or [materialize the endpoint](/docs/endpoints/materialization) to run on dedicated compute.
+
+| Code                       | Meaning                                 |
+| -------------------------- | --------------------------------------- |
+| `query_timeout`            | Query exceeded the execution time limit |
+| `query_memory_limit`       | Query exceeded the memory limit         |
+| `query_too_large`          | Query text is too large to execute      |
+| `query_estimated_too_slow` | Query is estimated to run too long      |
+
+Example response:
+
+```json
+{
+  "type": "server_error",
+  "code": "query_timeout",
+  "detail": "This query exceeded the execution time limit. Narrow its scope (e.g. a smaller date range) or materialize the endpoint for dedicated compute.",
+  "attr": null
+}
+```
+
+### Capacity errors (503)
+
+Returned when the shared ClickHouse query pool is momentarily at capacity. This is transient — retrying shortly may succeed. For consistently heavy endpoints, [materialize the endpoint](/docs/endpoints/materialization) to run on dedicated compute that isn't affected by shared query load.
+
+The error `code` is `query_capacity`.
+
+### Handling error codes
+
+Branch on the `code` field, not `type`, to handle specific error conditions in your client:
+
+```python
+import requests
+
+response = requests.post(
+    "<ph_app_host>/api/projects/{project_id}/endpoints/{endpoint_name}/run",
+    headers={"Authorization": "Bearer <ph_personal_api_key>"},
+)
+
+if response.status_code == 400:
+    error = response.json()
+    if error["code"] in ("query_timeout", "query_memory_limit", "query_estimated_too_slow"):
+        # Query is too expensive — narrow the date range or materialize
+        pass
+    elif error["code"] == "query_too_large":
+        # Query text is too large — simplify the query
+        pass
+elif response.status_code == 503:
+    error = response.json()
+    if error["code"] == "query_capacity":
+        # Transient capacity issue — retry after a short delay
+        pass
+```
+
 ## Debugging
 
 Pass `debug: true` in the request body to include additional debugging information in the response:
