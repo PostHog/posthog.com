@@ -324,5 +324,14 @@ Details: subtract the free monthly allowance before you bill usage. Leave out in
     },
 ]
 
-export const deepLinkFor = (canvas: GalleryCanvas): string =>
-    `posthog-code://new?prompt=${encodeURIComponent(canvas.prompt)}`
+// Gallery prompts are long and have blank lines, so they go through the base64 `plan`
+// link. PostHog Desktop documents it for prompts that are awkward to URL-encode, and it
+// opens the same composer as `new`.
+const toBase64Url = (text: string): string =>
+    btoa(String.fromCharCode(...new TextEncoder().encode(text)))
+        .replace(/\+/g, '-')
+        .replace(/\//g, '_')
+        .replace(/=+$/, '')
+
+/** Takes the prompt string, so the deep link cannot drift from the prompt on screen. */
+export const deepLinkFor = (prompt: string): string => `posthog-code://plan?plan=${toBase64Url(prompt)}`

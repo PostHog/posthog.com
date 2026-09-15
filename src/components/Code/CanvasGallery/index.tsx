@@ -456,11 +456,18 @@ function CanvasFiles({
     )
 }
 
-function CopyPromptButton({ canvas, size = 'sm' }: { canvas: GalleryCanvas; size?: 'sm' | 'md' }): JSX.Element {
+interface PromptActionProps {
+    /** Only used for analytics; read the prompt from `prompt`. */
+    canvas: GalleryCanvas
+    prompt: string
+    size?: 'sm' | 'md'
+}
+
+function CopyPromptButton({ canvas, prompt, size = 'sm' }: PromptActionProps): JSX.Element {
     const [copied, setCopied] = useState(false)
     const track = useGalleryEvent()
     const copy = async () => {
-        await navigator.clipboard.writeText(canvas.prompt)
+        await navigator.clipboard.writeText(prompt)
         track('copy_prompt', canvas)
         setCopied(true)
         window.setTimeout(() => setCopied(false), 2000)
@@ -478,7 +485,7 @@ function CopyPromptButton({ canvas, size = 'sm' }: { canvas: GalleryCanvas; size
     )
 }
 
-function OpenInDesktopButton({ canvas, size = 'sm' }: { canvas: GalleryCanvas; size?: 'sm' | 'md' }): JSX.Element {
+function OpenInDesktopButton({ canvas, prompt, size = 'sm' }: PromptActionProps): JSX.Element {
     const track = useGalleryEvent()
     return (
         <OSButton
@@ -489,7 +496,7 @@ function OpenInDesktopButton({ canvas, size = 'sm' }: { canvas: GalleryCanvas; s
             onClick={() => {
                 track('open_in_desktop', canvas)
                 // Same hand-off as /code/open: the browser asks to launch the app.
-                window.location.href = deepLinkFor(canvas)
+                window.location.href = deepLinkFor(prompt)
             }}
             tooltip="Opens PostHog Desktop with this prompt pre-filled"
         >
@@ -499,6 +506,9 @@ function OpenInDesktopButton({ canvas, size = 'sm' }: { canvas: GalleryCanvas; s
 }
 
 function CanvasDetail({ canvas }: { canvas: GalleryCanvas }): JSX.Element {
+    // The text below, the copy button, and the deep link all read this one string.
+    const { prompt } = canvas
+
     return (
         <div className="@container max-h-[85vh] overflow-y-auto bg-primary">
             <div className="h-[340px] @2xl:h-[420px] border-b border-primary bg-accent">
@@ -509,11 +519,11 @@ function CanvasDetail({ canvas }: { canvas: GalleryCanvas }): JSX.Element {
                     <p className="text-sm text-primary mt-0 mb-3 leading-relaxed">{canvas.when}</p>
                     <div className="text-xs font-semibold text-secondary mb-1">The prompt</div>
                     <pre className="whitespace-pre-wrap text-[13px] leading-relaxed font-sans bg-accent border border-primary rounded p-3 m-0 text-primary">
-                        {canvas.prompt}
+                        {prompt}
                     </pre>
                     <div className="flex flex-wrap gap-2 mt-3">
-                        <CopyPromptButton canvas={canvas} size="md" />
-                        <OpenInDesktopButton canvas={canvas} size="md" />
+                        <CopyPromptButton canvas={canvas} prompt={prompt} size="md" />
+                        <OpenInDesktopButton canvas={canvas} prompt={prompt} size="md" />
                     </div>
                     <p className="text-[11px] text-muted mt-2 mb-0">
                         No app yet?{' '}

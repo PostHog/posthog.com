@@ -56,7 +56,9 @@ The final folder has a padded footer with a monochrome PostHog SVG directly to t
 
 ## Deep links
 
-`deepLinkFor(canvas)` builds `posthog-code://new?prompt=…`. PostHog Desktop opens the prompt in the composer.
+`deepLinkFor(prompt)` builds `posthog-code://plan?plan=…`, a base64 link PostHog Desktop documents for long prompts. It opens the prompt in the composer, the same as `posthog-code://new`.
+
+`CanvasDetail` reads `canvas.prompt` once and gives that one string to the prompt text, the copy button, and the deep link. Keep it that way: a button that reads the canvas again can show one prompt and send another.
 
 ## Analytics
 
