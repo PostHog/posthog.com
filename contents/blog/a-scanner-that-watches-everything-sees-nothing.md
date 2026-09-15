@@ -12,7 +12,7 @@ tags:
   - session replay
 ---
 
-A month ago we launched [Replay Vision](/replay-vision), our AI layer over Session Replay. It watches session recordings and writes up what it finds, so nobody has to sit through them. We put it to work on PostHog right away, and in the last few weeks Replay Vision has watched 300k recordings for us. ([Nobody was going to watch](/blog/nobody-watches-session-replays) most of them anyway.)
+In August we launched [Replay Vision](/replay-vision), our AI layer over Session Replay. It watches session recordings and writes up what it finds, so nobody has to sit through them. We put it to work on PostHog right away, and since then Replay Vision has watched 300k recordings for us. <!-- 300k as of 2026-09-10, re-pull before publish --> ([Nobody was going to watch](/blog/nobody-watches-session-replays) most of them anyway.)
 
 The biggest thing we learned from all that watching? Replay Vision fixes the watching part, but not the *thinking* part.
 
@@ -33,17 +33,17 @@ Replay Vision has four scanner types, depending on the answer you want:
 - A **scorer** gives the recording a numerical score.
 - A **summarizer** writes up what happened.
 
-## 1. Each scanner should answer one specific question
+Alongside the answer, an observation carries a **short explanation** that cites the moments in the recording that support it. (A summarizer folds this into the summary itself.) The explanation is how you check the scanner's work.
 
-### Broad scanners produce more words, not better answers
+A scanner only sees one recording at a time, so it cannot compare a session with recordings it has never seen. That job belongs to a [Digest](/docs/replay-vision/actions), which summarizes recent observations from one scanner, or a [Scout](/blog/what-is-a-scout), an agent that compares observations with the rest of your product data and reports the patterns it finds.
+
+## 1. Each scanner should answer one specific question
 
 When people build their first Replay Vision scanner, they tend to try the same thing: one scanner that "watches everything" and "catches everything interesting" (ask us how we know). It sounds reasonable, but it asks the model to decide both what happened and what matters to you and your product. It can do the first part just fine... but the second is still your job.
 
 Here's a real example. We noticed people trying to investigate errors in Error Tracking, getting frustrated, and eventually going, "F*** it, I'll have PostHog AI try this instead." We set up a scanner to find those moments and show us where the product stopped helping.
 
 The question was specific: what was the person trying to do before they "escaped" to AI, and what should we improve?
-
-### What the query and prompt actually do
 
 The scanner we built is a classifier called "[Error Tracking] Escape to AI assistant" and it works like this:
 
@@ -54,35 +54,25 @@ The scanner we built is a classifier called "[Error Tracking] Escape to AI assis
 **Labels** | Tag the recording using the preset list or a free-form label when the scanner finds something unpredicted. Examples: explaining an error spike, separating third-party noise from failures worth fixing, or deciding what to fix next.
 **Short explanation** | Tells you what the scanner saw and why it chose that label. For example, the person opened PostHog AI after the issue view gave them no obvious way to separate third-party noise from the spike they were investigating.
 
-### Context makes the question more specific
-
 A scanner works better when its prompt uses the product's real names, states, and workflows. [PostHog AI](/ai) can inspect the context already in PostHog and add it to the prompt, while a coding agent can use the [PostHog MCP server](/docs/replay-vision/mcp) to pull product and workflow context directly from the codebase.
-
-### Observe before you digest
-
-A scanner only sees one recording at a time, so it cannot compare that session with recordings it has never seen. A [Digest](/docs/replay-vision/actions) can summarize recent observations from one scanner. A [Scout](/blog/what-is-a-scout) is an agent that can compare those observations with the rest of your product data and report the patterns it finds.
 
 ## 2. Aim your scanner at the right recordings
 
 The query is how you aim your scanner. If you get it wrong, the output will likely make you go "meh," right before you spend four hours watching recordings yourself. The best prompt in the world is mostly worthless if it sees the wrong recordings.
 
-Another scanner we use watches people use Session Replay and looks for ways we could improve the product. Its query ignores brief visits, which waste credits and add clutter, and only selects sessions where someone had deep engagement with the product. In this case, we trigger a scan when someone filters the recording list, inspects events, saves a recording, or exports one.
+Another scanner we use watches people use Session Replay and looks for ways we could improve the product. We call these opportunity miners. Bug scanners are the obvious first move, and we run plenty of them, but the same setup works for upside. This one's query ignores brief visits, which waste credits and add clutter, and only selects sessions where someone had deep engagement with the product. In this case, we trigger a scan when someone filters the recording list, inspects events, saves a recording, or exports one.
 
 The prompt asks one question: did this session reveal a concrete opportunity to make Session Replay more capable? A "yes" needs visible evidence, an unmet job or repeated workaround, and a small product change we could test. It also prompts the scanner to consider alternative explanations, since not every detour is a feature request in disguise.
 
-### Use the rest of PostHog to aim the scanner
-
-Most of this happens through the query. Use the event, URL, cohort, experiment exposure, survey response, or minimum duration that gives the session meaning. Some of our favorite remixes include:
+The rest of PostHog can aim the scanner, too. Use the event, URL, cohort, experiment exposure, survey response, or minimum duration that gives the session meaning. Some of our favorite remixes include:
 
 - Experiments: a scanner classifies each post-exposure recording to help understand how behavior differs between arms
 - Funnels: a scanner helps tease out what makes someone convert vs drop off
 - Surveys: a scanner checks behavior right before a survey response is submitted
 
-## 3. Demand visible proof
+## 3. Make the scanner prove every "yes"
 
-### Make the model prove the premise
-
-We also have a ghost-bug scanner. It watches people use Replay Vision (yes, we love using Replay Vision to improve Replay Vision) and looks for areas where the product contradicts itself or traps someone in a task it invited them to start.
+We also have a ghost-bug scanner. It watches people use Replay Vision (yes, we love using Replay Vision to improve Replay Vision). It's a monitor, so it asks one yes-or-no question of each recording: did the product contradict itself, or trap someone in a task it invited them to start?
 
 The scanner only says "yes" when the recording shows both halves of the contradiction. Scanners that judge this strictly catch real problems. In one recording, a user reached the scan conditions step while creating a scanner. Beside "Filter out internal and test users," the product showed a gear icon. The gear did exactly what it promised when clicked: it opened project settings.
 
@@ -94,8 +84,6 @@ A normal event stream could show a settings visit followed by an abandoned wizar
 
 Once we could see both halves, the fix was fairly obvious: keep the setting inside the wizard instead of sending the user away. PostHog AI later opened a PR with that fix.
 
-### "Inconclusive" is a feature
-
 If an ordinary error accurately explains what happened, the answer is "no." If the recording misses either half, the answer is "inconclusive." The recording has to prove the claim, not merely make it sound plausible.
 
 This sounds conservative and *gasp* boring. Good. Most sessions should not become findings, and a scanner that is never allowed to be boring will eventually make things up.
@@ -106,25 +94,17 @@ This sounds conservative and *gasp* boring. Good. Most sessions should not becom
 
 A scanner saying "Idk" is way better than making something up.
 
-## Other tips and tricks
-
-Three other things we've learned along the way:
-
-### Scanners can look for upside, too
-
-Bug scanners are still the obvious first move, and we run plenty of them (dead clicks, broken renders, and setup loops are easier to catch when something watches the footage), but scanners can, and should, look for upside too. The Session Replay scanner above is one example.
-
-We call them opportunity miners, and they show us the work people tried to do, where the product made it harder, and which ideas deserve a closer look. Product judgment remains a human problem, which is fortunate for those of us employed to provide it.
-
-### Test the scanner right away
+## 4. Run it on a small batch before you trust it
 
 Create the scanner, then use the [bulk scan action](/docs/replay-vision/running-scanners#from-the-recordings-list) to run it against a small batch of recent recordings. Read the observations beside their source recordings and look for overclaims, missed proof, weak labels, or instructions that seemed obvious until the model interpreted them literally.
+
+<!-- EXAMPLE NEEDED: one first batch that exposed a prompt problem. what did the scanner get wrong, and what did you change? -->
 
 Use the Calibration tab as a review queue. Rate each result, and add a sentence when the scanner got the premise wrong. PostHog AI can recommend and test changes against that feedback, but it will not apply them until you choose.
 
 Don't try to perfect the prompt before you run it. The first batch will tell you how the prompt actually performs.
 
-### Pick the model based on the cost of a wrong answer
+## 5. Pick the model by the cost of a wrong answer
 
 The model changes both quality and cost. Replay Vision prices each model in credits per observation, and one credit is $0.01. Pick the model by asking what a wrong answer would cost you.
 
@@ -138,7 +118,7 @@ Save the priciest model for jobs where someone may act on a single observation, 
 
 ---
 
-If you take one thing from this piece, remember: your job is to pick and refine the questions you want Replay Vision to answer. It will do the watching.
+If you take one thing from this piece, remember: your job is to pick and refine the questions you want Replay Vision to answer. It will do the watching. Product judgment remains a human problem, which is fortunate for those of us employed to provide it.
 
 ## Prompts for you to steal
 
