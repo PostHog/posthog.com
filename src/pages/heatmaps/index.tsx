@@ -1,5 +1,6 @@
 import React, { useRef } from 'react'
 import {
+    IconBolt,
     IconCode,
     IconCursorClick,
     IconEye,
@@ -7,6 +8,7 @@ import {
     IconLaptop,
     IconList,
     IconMagic,
+    IconMouseScrollDown,
     IconToolbar,
 } from '@posthog/icons'
 import ReaderView from 'components/ReaderView'
@@ -21,9 +23,11 @@ import {
     type ProductNavItem,
 } from 'components/Products/ReaderViewProduct'
 import type { SectionComponentProps } from 'components/Products/ReaderViewProduct'
+import type { CarouselSlide } from 'components/Products/ReaderViewProduct/types'
 import { SectionHeading } from 'components/Products/ReaderViewProduct/helpers'
 import Eli5 from 'components/Products/ReaderViewProduct/templates/Eli5'
 import Overview from 'components/Products/ReaderViewProduct/templates/Overview'
+import TopFeatures from 'components/Products/ReaderViewProduct/templates/TopFeatures'
 import UseCases from 'components/Products/ReaderViewProduct/templates/UseCases'
 
 const productMenu: ProductNavItem[] = [
@@ -101,82 +105,102 @@ const HeatmapsHowToUse = ({ id }: SectionComponentProps) => (
     </section>
 )
 
-const HeatmapsTopFeatures = ({ id }: SectionComponentProps) => (
-    <section id={id} className="scroll-mt-20 not-prose">
-        <SectionHeading>Top features</SectionHeading>
-
-        <div className="grid grid-cols-1 @3xl/reader-content:grid-cols-3 gap-5 mb-10">
-            {[
-                {
-                    title: 'Heatmaps',
-                    description:
-                        'See mouse movements, clicks, dead clicks, and rageclicks – including attempts to click non-interactive elements.',
-                    src: SETTINGS_IMAGE,
-                    alt: 'Heatmap settings',
-                },
-                {
-                    title: 'Scrollmaps',
-                    description: 'Use pageview and pageleave events to see how far people scroll and where they stop.',
-                    src: SCROLLMAP_IMAGE,
-                    alt: 'A PostHog scrollmap',
-                },
-                {
-                    title: 'Clickmaps',
-                    description: 'Use autocapture to show exact click and rageclick counts on clickable elements.',
-                    src: CLICKMAP_IMAGE,
-                    alt: 'A PostHog clickmap',
-                },
-            ].map(({ title, description, src, alt }) => (
-                <article key={title} className="border border-primary rounded p-4 bg-primary flex flex-col">
-                    <h3 className="text-lg font-bold text-primary mt-0 mb-1">{title}</h3>
-                    <p className="text-sm leading-relaxed text-secondary mt-0 mb-4">{description}</p>
-                    <CloudinaryImage
-                        src={src}
-                        alt={alt}
-                        className="w-full max-w-sm mx-auto mt-auto"
-                        imgClassName="w-full h-auto rounded border border-primary"
+const topFeatures: CarouselSlide[] = [
+    {
+        slug: 'heatmaps',
+        label: 'Heatmaps',
+        icon: <IconCursorClick className="size-5" />,
+        color: 'bg-light dark:bg-dark',
+        activeText: 'text-primary',
+        progressBar: 'bg-green',
+        layout: 'float',
+        heading: 'See every click, hover, and miss',
+        description: (
+            <>
+                <p>
+                    See mouse movements, clicks, dead clicks, and rageclicks – including attempts to click
+                    non-interactive elements.
+                </p>
+                <div className="@container">
+                    <LabeledList
+                        items={[
+                            {
+                                label: 'Flexible configuration',
+                                description:
+                                    'Switch between total events and unique users, adjust viewport tolerance, change colors, and handle fixed elements.',
+                            },
+                            {
+                                label: 'Wildcard URL matching',
+                                description: (
+                                    <>
+                                        Combine similar pages with patterns such as <code>/products/*</code>.
+                                    </>
+                                ),
+                            },
+                            {
+                                label: 'No extra billing',
+                                description:
+                                    'Heatmap data is captured alongside regular analytics events and does not contribute to your bill.',
+                            },
+                        ]}
                     />
-                </article>
-            ))}
-        </div>
-
-        <LabeledList
-            items={[
-                {
-                    label: 'Flexible configuration',
-                    description:
-                        'Switch between total events and unique users, adjust viewport tolerance, change colors, and handle fixed elements.',
-                },
-                {
-                    label: 'Wildcard URL matching',
-                    description: (
-                        <>
-                            Combine similar pages with patterns such as <code>/products/*</code>.
-                        </>
-                    ),
-                },
-                {
-                    label: 'Create actions from clicks',
-                    description: 'Select an element in a clickmap and turn it into a trackable action without code.',
-                },
-                {
-                    label: 'No extra billing',
-                    description:
-                        'Heatmap data is captured alongside regular analytics events and does not contribute to your bill.',
-                },
-            ]}
-        />
-
-        <div className="mt-8 max-w-2xl mx-auto">
-            <video className="w-full h-auto rounded border border-primary shadow-lg" autoPlay loop muted playsInline>
-                <source
-                    src="https://res.cloudinary.com/dmukukwp6/video/upload/v1710055416/posthog.com/contents/images/products/product-analytics/heatmaps-create-action.mp4"
-                    type="video/mp4"
-                />
-            </video>
-        </div>
-    </section>
-)
+                </div>
+            </>
+        ),
+        image: { src: SETTINGS_IMAGE, alt: 'Heatmap settings', glow: true },
+    },
+    {
+        slug: 'scrollmaps',
+        label: 'Scrollmaps',
+        icon: <IconMouseScrollDown className="size-5" />,
+        color: 'bg-light dark:bg-dark',
+        activeText: 'text-primary',
+        progressBar: 'bg-blue',
+        layout: 'float',
+        heading: 'See how far people scroll',
+        description: 'Use pageview and pageleave events to see how far people scroll and where they stop.',
+        image: { src: SCROLLMAP_IMAGE, alt: 'A PostHog scrollmap', glow: true },
+    },
+    {
+        slug: 'clickmaps',
+        label: 'Clickmaps',
+        icon: <IconList className="size-5" />,
+        color: 'bg-light dark:bg-dark',
+        activeText: 'text-primary',
+        progressBar: 'bg-orange',
+        layout: 'float',
+        heading: 'Count clicks on every element',
+        description: 'Use autocapture to show exact click and rageclick counts on clickable elements.',
+        image: { src: CLICKMAP_IMAGE, alt: 'A PostHog clickmap', glow: true },
+    },
+    {
+        slug: 'create-actions',
+        label: 'Create actions',
+        icon: <IconBolt className="size-5" />,
+        color: 'bg-light dark:bg-dark',
+        activeText: 'text-primary',
+        progressBar: 'bg-yellow',
+        layout: 'stack',
+        heading: 'Turn a click into a tracked action',
+        description: (
+            <>
+                <p>Select an element in a clickmap and turn it into a trackable action without code.</p>
+                <video
+                    className="w-full h-auto rounded border border-primary shadow-lg mt-4"
+                    autoPlay
+                    loop
+                    muted
+                    playsInline
+                >
+                    <source
+                        src="https://res.cloudinary.com/dmukukwp6/video/upload/v1710055416/posthog.com/contents/images/products/product-analytics/heatmaps-create-action.mp4"
+                        type="video/mp4"
+                    />
+                </video>
+            </>
+        ),
+    },
+]
 
 const HeatmapsInstallation = ({ id }: SectionComponentProps) => (
     <section id={id} className="scroll-mt-20 not-prose mb-20">
@@ -185,12 +209,14 @@ const HeatmapsInstallation = ({ id }: SectionComponentProps) => (
             Enable heatmap data capture in your project settings or set <code>enable_heatmaps</code> in the JavaScript
             SDK. Clickmaps require autocapture and scrollmaps require pageleave events.
         </p>
-        <CloudinaryImage
-            src={SETTINGS_CONFIGURATION_IMAGE}
-            alt="Heatmap data capture settings"
-            className="w-full max-w-2xl mx-auto mb-6"
-            imgClassName="w-full h-auto rounded border border-primary shadow-lg"
-        />
+        <div className="max-w-2xl mb-8">
+            <CloudinaryImage
+                src={SETTINGS_CONFIGURATION_IMAGE}
+                alt="Heatmap data capture settings"
+                className="w-full"
+                imgClassName="w-full h-auto rounded border border-primary shadow-lg"
+            />
+        </div>
         <div className="flex flex-wrap gap-3">
             <OSButton asLink variant="primary" size="md" to="/signup">
                 Get started – free
@@ -263,7 +289,12 @@ export default function Heatmaps() {
                         <Eli5 id="eli5" productData={productData} allProducts={[]} />
                         <UseCases id="use-cases" productData={productData} allProducts={[]} />
                         <HeatmapsHowToUse id="how-to-use" productData={productData} allProducts={[]} />
-                        <HeatmapsTopFeatures id="top-features" productData={productData} allProducts={[]} />
+                        <TopFeatures
+                            id="top-features"
+                            productData={productData}
+                            allProducts={[]}
+                            slides={topFeatures}
+                        />
                         <HeatmapsInstallation id="installation" productData={productData} allProducts={[]} />
                     </div>
                 </div>
