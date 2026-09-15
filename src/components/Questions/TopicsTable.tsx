@@ -5,6 +5,7 @@ import {
     IconApps,
     IconBox,
     IconBrackets,
+    IconChatHelp,
     IconCode,
     IconCompass,
     IconCursor,
@@ -22,6 +23,7 @@ import {
     IconPlug,
     IconPrivacy,
     IconPulse,
+    IconRevert,
     IconRewindPlay,
     IconReceipt,
     IconRocket,
@@ -42,6 +44,7 @@ import {
     IconLlmAnalytics,
     IconSparkles,
     IconSpotlight,
+    IconTelescope,
     IconEndpoints,
 } from '@posthog/icons'
 
@@ -81,9 +84,11 @@ export const topicIcons = {
     'posthog ai': IconSparkles,
     'migrating to posthog': DataManagement, // to be replaced or removed
     migration: IconUpload,
+    '#mistakes-were-made': IconRevert,
     more: IconEllipsis,
     paths: PathAnalysis, // to be replaced or removed
     'people & properties': IconBrackets,
+    '#poll-the-hogs': IconChatHelp,
     'pricing & billing': IconReceipt,
     monitoring: IconPulse,
     'product analytics': IconGraph,
@@ -93,6 +98,7 @@ export const topicIcons = {
     'session replay': IconRewindPlay,
     '#show-and-tell': IconSpotlight,
     'sparks joy': SparksJoy, // to be replaced or removed
+    '#thinking-out-loud': IconTelescope,
     trends: IconTrends,
     toolbar: IconToolbar,
     uncategorized: IconEllipsis,
