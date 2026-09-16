@@ -18,6 +18,8 @@ Every event request must contain an `api_key`, `distinct_id`, and `event` field 
 
 `distinct_id` is limited to 200 characters. Longer values are shortened to the first 200 characters and the event is still ingested, with an [ingestion warning](/docs/data/ingestion-warnings#ingested-event-after-shortening-its-distinct-id-to-the-200-character-limit).
 
+Put `distinct_id` at the top level of the event. PostHog also reads it from `properties.distinct_id` when the top level does not have it, and the top level wins if both are set. This applies to every event in this reference, including `$groupidentify`, `$identify`, and `$create_alias`. Use the top level unless your client can only send properties.
+
 > **Note:** By default, events captured via the API are [identified events](/docs/data/anonymous-vs-identified-events). See the section on [how to capture anonymous events](#anonymous-event-capture) for more.
 
 <MultiLanguage>
