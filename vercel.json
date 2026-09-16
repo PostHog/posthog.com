@@ -3294,7 +3294,7 @@
         },
         {
             "source": "/apps/semver-flattener",
-            "destination": "/cdp/semver-flattener"
+            "destination": "/docs/cdp/transformations/semver-flattener"
         },
         {
             "source": "/apps/sendgrid-connector",
@@ -3598,7 +3598,7 @@
         },
         {
             "source": "/docs/apps/url-query:ext(\\.md)?",
-            "destination": "/docs/cdp/transformations/posthog-app-url-parameters-to-event-properties:ext?"
+            "destination": "/docs/cdp/transformations/url-parameters-to-properties:ext?"
         },
         {
             "source": "/docs/apps/user-agent-populator:ext(\\.md)?",
@@ -5617,7 +5617,7 @@
         },
         {
             "source": "/cdp/url-query",
-            "destination": "/docs/cdp/transformations/posthog-app-url-parameters-to-event-properties"
+            "destination": "/docs/cdp/transformations/url-parameters-to-properties"
         },
         {
             "source": "/cdp/user-agent-populator",
@@ -5885,7 +5885,7 @@
         },
         {
             "source": "/docs/cdp/url-query:ext(\\.md)?",
-            "destination": "/docs/cdp/transformations/posthog-app-url-parameters-to-event-properties:ext?"
+            "destination": "/docs/cdp/transformations/url-parameters-to-properties:ext?"
         },
         {
             "source": "/teams/cs-onboarding",
