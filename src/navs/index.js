@@ -1296,6 +1296,10 @@ export const handbookSidebar = [
                 url: '/handbook/growth/revops/metric-conventions',
             },
             {
+                name: 'Org definitions',
+                url: '/handbook/growth/revops/org-definitions',
+            },
+            {
                 name: 'Revenue adjustments',
                 url: '/handbook/growth/revops/revenue-adjustments',
             },
