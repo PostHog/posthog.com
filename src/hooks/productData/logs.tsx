@@ -51,7 +51,11 @@ export const logs = {
      * feed the carousel templates their slide arrays).
      */
     productMenu: [
-        { slug: 'overview', name: 'Overview', icon: <IconEye className="size-4" /> },
+        {
+            slug: 'overview',
+            name: 'Overview',
+            icon: <IconEye className="size-4" />,
+        },
         {
             slug: 'eli5',
             name: 'What does it do?',
@@ -116,8 +120,6 @@ export const logs = {
     ],
     overview: {
         title: 'Logs that already know your users',
-        description:
-            'Events, requests, state changes, and session replays in one place – one of the tools that makes your product self-driving by giving agents the backend signal to find a bug and ship the fix, tied to the user who hit it.',
         eli5: 'Logs stores the records your services emit at runtime – requests handled, errors hit, decisions made – so you can search by service, severity, and attribute instead of grepping text files. Point any OpenTelemetry (OTLP) client at PostHog (no proprietary SDK), group similar lines into patterns to see what changed, and open any record to have PostHog AI explain it.',
         textColor: 'text-white',
         layout: 'overlay',
@@ -202,7 +204,6 @@ export const logs = {
     // Roles/scenarios reshaped from contents/docs/logs/basics.mdx ("When logs save you")
     // and link-person / link-session-replay docs.
     useCases: {
-        intro: 'Logs is used across teams depending on your role.',
         rows: [
             [
                 'Product Engineers',
