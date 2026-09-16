@@ -116,6 +116,14 @@ New issues from connected project management and issue tracking tools. The inbox
 - Shortcut
 - pganalyze
 
+#### Comment back on GitHub issues
+
+If you use GitHub Issues as a source, you can let PostHog reply on the issue. In the inbox **settings**, under **PR generation**, turn on **Comment back on GitHub issues**. When an issue contributes to a report and that report becomes ready, PostHog adds a comment to the issue with a link to the report. If an issue joins the report later, it gets a comment too.
+
+This setting is off by default, because the comment is public. Everybody who watches the issue can see that PostHog started work. The comment contains only the link. It does not contain the title of the report or the research, and the report itself stays behind your project's access controls.
+
+PostHog does not comment on a closed issue, a locked issue, or a pull request.
+
 ### Support / helpdesk
 
 Customer support tickets and conversations. The inbox turns actionable bug reports and feature requests into researched implementation work.
