@@ -70,7 +70,7 @@ What themes can we distill from the above HOGS list? What are categories of thin
 
 This is an example - feel free to adapt as you need. **Each objective must have a single named owner, and so must each thing you'll ship.** Write the name next to the item. Other people can help, but only one person is accountable. Do not leave a goal with no name or with a team name - shared goals usually result in less getting shipped.
 
-Objective 1: PostHog in the EU
+Objective 1: PostHog in the EU (Owner Name)
 Motivation: Unblock 1,000s of customers [link to data] who need to keep data in the EU but are not capable of self hosting.
 What we'll ship:
   - This thing (Name)
