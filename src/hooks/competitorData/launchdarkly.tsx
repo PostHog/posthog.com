@@ -3,7 +3,7 @@ export const launchdarkly = {
     key: 'launchdarkly',
     assets: {
         icon: '/images/competitors/launchdarkly.svg',
-        comparisonArticle: '/blog/posthog-vs-launchdarkly',
+        comparisonArticle: '/compare/posthog-vs-launchdarkly',
     },
     products: {
         feature_flags: {

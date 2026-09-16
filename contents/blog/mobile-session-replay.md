@@ -158,6 +158,6 @@ This enables us to help more developers have the tools they need to build succes
 
 ## Further reading
 
-- [What's the best Hotjar for mobile apps?](/blog/hotjar-for-mobile-ios-android-react-native-flutter)
+- [What's the best Hotjar for mobile apps?](/compare/hotjar-for-mobile-ios-android-react-native-flutter)
 - [We decided to make session replay cheaper](/blog/session-replay-pricing)
 - How to set up [Android](/tutorials/android-session-replay), [iOS](/tutorials/ios-session-replay), and [React Native](/docs/session-replay/react-native) session replay

@@ -46,6 +46,14 @@ export const platformFeatures = {
                 name: 'Self-serve',
                 description: 'No need to talk to sales',
             },
+            free_team_members: {
+                name: 'Free team members',
+                description: 'Add teammates without paying per seat',
+            },
+            billing_units: {
+                name: 'Billing units',
+                description: 'What usage is metered and billed against',
+            },
         },
     },
     support: {
@@ -244,6 +252,14 @@ export const platformFeatures = {
             api: {
                 name: 'API',
                 description: 'Capture events, get stats, and make changes via API',
+            },
+            mcp_scope: {
+                name: 'MCP scope',
+                description: 'How much of the platform agents can reach through the MCP server',
+            },
+            agent_surfaces: {
+                name: 'Agent surfaces',
+                description: 'Where you can steer agents from',
             },
             sql: {
                 name: 'SQL',

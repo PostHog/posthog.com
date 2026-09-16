@@ -65,7 +65,7 @@ A profile that matched but has no headcount, no funding, no tags, and no web tra
 We validated the score as a *definition*, not a predictor: companies that are obviously who we build for should score high, and obvious non-fits should score low.
 
 - **Customer sanity check**: median scores rise monotonically with customer value tiers. This is expected directionally, though we deliberately didn't tune weights against revenue, since this isn't an MRR predictor.
-- **Full-cohort run**: across two weeks of work-email signups (about 9.7k), 69% received a score, about 25% were `insufficient_data`, 5% weren't found, and 1% were disqualified. In production the `insufficient_data` share runs higher (about 40% of evaluated signups in August 2026). Threshold choice is therefore a downstream-capacity decision, not an accuracy one.
+- **Full-cohort run**: across two weeks of work-email signups (about 9.7k), 69% received a score, 5% weren't found, and 1% were disqualified. In production, `insufficient_data` is about 35% (measured 2026-09-01, 18,396 evaluated orgs: scored 62%, insufficient_data 35%); a daily re-enrichment sweep (live since August 28, 500 US orgs/day) moves roughly a third of swept `insufficient_data` orgs to `scored`, so this share keeps falling. Mine's validation cohort — pulled 1–2 weeks after signup, once Harmonic profiles had filled in — measured about 25% `insufficient_data`. Threshold choice is therefore a downstream-capacity decision, not an accuracy one.
 
 ## Known limitations
 

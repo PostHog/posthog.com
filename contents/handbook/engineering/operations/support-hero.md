@@ -30,11 +30,12 @@ Each engineering team has its own list of tickets in PostHog support. Your view 
 
 Your job is simple: ship features and fixes, resolve ticket after ticket from your team's list, and respond to open-source PRs assigned to your team.
 
-There are three sources of tickets:
+There are four sources of tickets:
 
 1. In-app bug reports/feedback/support tickets sent from the [Support panel](https://us.posthog.com/home#panel=support).
 1. Slack or MS Teams threads that have been raised via @SupportHog in [customer support channels](/handbook/growth/sales/slack-channels).
 1. Reports in the `#papercuts` Slack channel that relate to your team's area.
+1. Security findings in code your team owns, tracked in <PrivateLink url="https://security.posthog.dev">security.posthog.dev</PrivateLink>.
 
 ### Answering tickets
 
@@ -74,6 +75,14 @@ Check the `#papercuts` Slack channel during your rotation and pick up any report
 - **React with ✅** once you've shipped a fix or improvement.
 
 Papercuts are also routed to the Signals inbox, so before you start work, check whether an auto-generated PR is already waiting – it may save you most of the effort.
+
+### Security findings
+
+Vulnerabilities in code your team owns are also yours to fix, and the support hero is the person who picks them up alongside the normal support workload. Give critical and high severity findings the same priority as a customer ticket, and fix them as soon as you can.
+
+Findings come from the AI pentesting services we use, currently Veria Labs and Parameter. They are triaged automatically, and the true positives go to the product team that owns the code. Your team's findings are collected in <PrivateLink url="https://security.posthog.dev">SecurityHog</PrivateLink>, and your team also gets a weekly post in its Slack channel that lists them.
+
+Work through the findings for your team during your rotation. If you cannot finish one, hand it over to the next support hero. If you are not sure how serious a finding is, or how to fix it, ask in `#team-security`.
 
 ### Responding to external PRs
 
@@ -140,6 +149,26 @@ If you find yourself overwhelmed, remember:
 - Teams aren't expected to handle unlimited PRs
 
 The key principle: We want to be responsive to our open-source community when we can, but not at the cost of our primary support responsibilities or team sustainability.
+
+### Community questions and Discord
+
+Users on the free plan get community support only. Because of this, many questions and opinions about your product area appear on [Community questions](/questions) and in Discord, and not in PostHog Support.
+
+This is not a ticket queue, and it is not a duty. Nobody has to reply. Look at it as a source of product feedback: it shows you what users ask, what confuses them, and what they say about your product area, in real time.
+
+If you have time between tickets, read your team's community posts. The goal is to spend less than 30 minutes a week. Most teams get one or two questions a week, sometimes none.
+
+#### Where to find posts relevant to your team
+
+Each post topic is subscribed to one or more teams. When a user makes a post, the post goes to the Slack channel of each subscribed team.
+
+To see which topics are mapped to your team, go to [community alerts](/community/alerts). Use that page also to find topics that have no team, and teams that have no Slack channel. A team with no Slack channel gets nothing, even when it is subscribed to a topic.
+
+#### What is a good reply?
+
+**A reply from PostHog AI or from another community member is frequently the correct answer for the user.** When this is true, no need to reply—you can upvote the existing reply. If you want to chime in with something, check these [guidelines for answering questions](/handbook/community/questions).
+
+Paid tickets always have a higher priority than community questions.
 
 ## What about SDK support?
 
