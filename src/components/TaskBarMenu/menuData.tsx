@@ -11,6 +11,7 @@ import {
     IconLinkedIn,
     IconGithub,
     IconInstagram,
+    IconDiscord,
     IconCoolNumbers,
     IconDictator,
     IconSparksJoy,
@@ -155,6 +156,13 @@ export function useMenuData(): MenuType[] {
                     label: 'Forums',
                     link: '/questions',
                     icon: <Icons.IconMessage className="size-4 text-green" />,
+                },
+                {
+                    type: 'item' as const,
+                    label: 'Discord',
+                    link: 'https://discord.gg/posthog',
+                    icon: <IconDiscord className="size-4 text-[#5865F2]" />,
+                    external: true,
                 },
                 { type: 'separator' },
                 {
@@ -321,6 +329,14 @@ export function useMenuData(): MenuType[] {
                     label: 'GitHub',
                     link: 'https://github.com/posthog',
                     icon: <IconGithub className="size-4" />,
+                    external: true,
+                    mobileDestination: false, // Omit from mobile menu
+                },
+                {
+                    type: 'item',
+                    label: 'Discord',
+                    link: 'https://discord.gg/posthog',
+                    icon: <IconDiscord className="size-4 text-[#5865F2]" />,
                     external: true,
                     mobileDestination: false, // Omit from mobile menu
                 },
