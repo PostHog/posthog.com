@@ -4,6 +4,8 @@ import { PaperPlaneArrow, ThumbsDownOutline, ThumbsUpOutline } from 'components/
 import { motion } from 'framer-motion'
 import usePostHog from '../../hooks/usePostHog'
 import Link from 'components/Link'
+import Modal from 'components/RadixUI/Modal'
+import OSButton from 'components/OSButton'
 import TextareaAutosize from 'react-textarea-autosize'
 
 const button = cntl`
@@ -119,6 +121,60 @@ const ResponseButtons: React.FC<{ submitResponse: (helpful: boolean) => void }> 
     )
 }
 
+const SelfDrivingNote: React.FC<{ filePath: string }> = ({ filePath }) => {
+    const [open, setOpen] = useState(false)
+
+    return (
+        <>
+            <p className="mt-2 text-[13px] font-medium text-secondary ">
+                P.S. You can
+                <button type="button" onClick={() => setOpen(true)} className="text-red underline">
+                    &nbsp;submit a pull request&nbsp;
+                </button>
+                to this page if you can help improve this page!
+            </p>
+            <Modal open={open} onOpenChange={setOpen} title="Submit a pull request" maxWidth={520}>
+                <div className="bg-primary p-4 space-y-3">
+                    <p className="m-0 text-[15px] font-semibold">PostHog is self-driving</p>
+                    <p className="m-0 text-sm text-secondary">
+                        We turn product data into signals. Our agents act on those signals, then they open a pull
+                        request for a human to review and merge. posthog.com runs in the same loop.
+                    </p>
+                    <p className="m-0 text-sm text-secondary">
+                        Open a GitHub issue and it goes into that loop. An agent reads the issue, investigates it, and
+                        opens a pull request if it finds a fix. Watch the issue to see what happens.
+                    </p>
+                    <div className="flex flex-wrap items-center gap-3 pt-1">
+                        <OSButton
+                            variant="primary"
+                            size="md"
+                            asLink
+                            external
+                            to="https://github.com/PostHog/posthog/issues/new/choose"
+                        >
+                            Create a GitHub issue
+                        </OSButton>
+                        <OSButton
+                            variant="secondary"
+                            size="md"
+                            asLink
+                            external
+                            to={`https://github.com/PostHog/posthog.com/edit/master/contents/${filePath}`}
+                        >
+                            Edit this page yourself
+                        </OSButton>
+                    </div>
+                    <p className="m-0 text-sm text-secondary">
+                        <Link to="/docs/self-driving" className="text-red underline">
+                            How self-driving works
+                        </Link>
+                    </p>
+                </div>
+            </Modal>
+        </>
+    )
+}
+
 const ResponseFeedback: React.FC<{
     title: string
     placeholder: string
@@ -149,15 +205,7 @@ const ResponseFeedback: React.FC<{
                         <PaperPlaneArrow className="w-6 h-6" />
                     </button>
                 </div>
-                {filePath && (
-                    <p className="mt-2 text-[13px] font-medium text-secondary ">
-                        P.S. You can
-                        <Link to={`https://github.com/PostHog/posthog.com/edit/master/contents/${filePath}`}>
-                            <span className="text-red">&nbsp;submit a pull request&nbsp;</span>
-                        </Link>
-                        to this page if you can help improve this page!
-                    </p>
-                )}
+                {filePath && <SelfDrivingNote filePath={filePath} />}
             </form>
         </motion.div>
     )
