@@ -614,7 +614,18 @@ export default function Tabbed() {
                     </div>
                     <ul className="list-none m-0 p-0 flex flex-row md:flex-col gap-px overflow-x-auto @md:w-auto -mx-4 px-4 @md:px-0 @md:mx-0">
                         {selectedProducts.map(
-                            ({ name, type, Icon, cost, color, colorDark, billingData, categoryName, pricingBadge }) => {
+                            ({
+                                name,
+                                type,
+                                Icon,
+                                cost,
+                                color,
+                                colorDark,
+                                billingData,
+                                categoryName,
+                                pricingBadge,
+                                billedWith,
+                            }) => {
                                 const active = activeProduct?.type === type
                                 const addonsPrice = getAddonsCostForProduct(productAddons, billingData)
                                 return (
@@ -645,7 +656,7 @@ export default function Tabbed() {
                                                     )}
                                                 </span>
                                             </div>
-                                            {name == 'Experiments' ? (
+                                            {billedWith ? (
                                                 <span className="opacity-25">--</span>
                                             ) : (
                                                 <div className="opacity-70 pl-5 md:pl-0">
@@ -856,7 +867,7 @@ export default function Tabbed() {
                                             Remove
                                         </button>
                                     </div>
-                                    {activeProduct.name !== 'Experiments' &&
+                                    {!activeProduct.billedWith &&
                                         (activeProduct.freeAllocationText ||
                                             activeProduct.freeLimit ||
                                             activeProduct.slider?.min) && (
