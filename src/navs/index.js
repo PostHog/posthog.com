@@ -3261,6 +3261,10 @@ export const docsMenu = {
                             url: '/docs/data/cohorts',
                         },
                         {
+                            name: 'Realtime cohorts',
+                            url: '/docs/data/realtime-cohorts',
+                        },
+                        {
                             name: 'Sessions',
                             url: '/docs/data/sessions',
                         },

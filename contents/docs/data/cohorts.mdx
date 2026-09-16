@@ -310,6 +310,8 @@ Dynamic cohorts are updated once every 24 hours.
 
 You cannot use dynamic cohorts that include behavioral or lifecycle criteria as a feature flag target. To target these users for a feature flag, A/B test, or survey, you can either duplicate the dynamic cohort as a static cohort or create a new static cohort directly from criteria using the **Criteria · One-time snapshot** option. Dynamic cohorts with only person property criteria can be used directly.
 
+This is changing. [Realtime cohorts](/docs/data/realtime-cohorts) let feature flags target cohorts built from simple event criteria, such as "completed `signed up` in the last 30 days". They're in early beta and rolling out gradually, so they aren't available in most projects yet.
+
 ### Can you use groups in cohorts?
 
 Not yet, but we are working on [rewriting cohort calculations in SQL](/teams/product-analytics#goals) which will unlock your ability to do this.

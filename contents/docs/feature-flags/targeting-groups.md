@@ -71,7 +71,7 @@ If instead, you want to target users who visited a page repeatedly, you can crea
 2. Duplicate as a static cohort.
 3. Use the static cohort as a condition for your feature flag
 
-> **Why can’t I use a behavioral cohort directly?** Calculating a behavioral (based on events) cohorts is slow. Feature flags care about speed. Adding behavioral cohorts to flag evaluation would significantly slow them down. Read [a full explanation in our docs](/docs/feature-flags/common-questions#why-cant-i-use-a-cohort-with-behavioral-filters-in-my-feature-flag).
+> **Why can’t I use a behavioral cohort directly?** Calculating a behavioral (based on events) cohorts is slow. Feature flags care about speed. Adding behavioral cohorts to flag evaluation would significantly slow them down. Read [a full explanation in our docs](/docs/feature-flags/common-questions#why-cant-i-use-a-cohort-with-behavioral-filters-in-my-feature-flag). [Realtime cohorts](/docs/data/realtime-cohorts) lift this limit for cohorts built from simple event criteria, but they're in early beta and aren't available in most projects yet.
 
 ![Cohort creation video](https://res.cloudinary.com/dmukukwp6/video/upload/v1710055416/posthog.com/contents/images/tutorials/group-page-machine-flags/cohort.mp4)
 
