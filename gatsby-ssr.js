@@ -33,14 +33,7 @@ export const wrapPageElement = ({ element, props: { location } }) => {
     )
 }
 
-export const onRenderBody = function ({ setHeadComponents, setPreBodyComponents }) {
-    setHeadComponents([
-        // The SVG carries both color schemes and switches between them itself. It is declared
-        // last because browsers that can use it take the last icon they understand, and the PNG
-        // is only here for the ones that cannot. Both come from scripts/generate-brand-assets.mjs.
-        <link key="favicon-png" rel="icon" type="image/png" sizes="64x64" href="/favicon.png" />,
-        <link key="favicon-svg" rel="icon" type="image/svg+xml" href="/favicon.svg" />,
-    ])
+export const onRenderBody = function ({ setPreBodyComponents }) {
     setPreBodyComponents([
         React.createElement('script', {
             key: 'dark-mode',
