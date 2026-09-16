@@ -42,11 +42,15 @@ A cohort qualifies when every one of its criteria is one of these:
 
 You can narrow the event criteria by event property, such as completed `purchase` where `plan` equals "pro".
 
+Three criteria negate: "Did not complete event", "Do not have the property", and "Not in cohort". Each one has to sit next to at least one criterion that isn't negated, joined with "all" rather than "any". A cohort that breaks this rule still saves, but PostHog never builds its membership record, so a flag that targets it matches nobody.
+
+A cohort whose only criterion is a reference to another cohort never becomes usable in a flag. Give it at least one person property or event criterion as well.
+
 ### What stops a cohort qualifying
 
 A single criterion from this list makes the whole cohort fall back to the standard calculation, and a feature flag can't use it:
 
-- Sequences. Both "Completed a sequence of events or actions" and "Did not complete a sequence of events or actions".
+- Sequences. Both "Completed a sequence of events" and "Did not complete a sequence of events".
 - Lifecycle criteria. All four options under the "Lifecycle" heading in the cohort builder: completed an event for the first time, completed an event regularly, stopped doing an event, and started doing an event again.
 - [Actions](/docs/data/actions). Event criteria have to name an event. Pointing the same criterion at an action isn't supported yet.
 - The "First seen" person criterion, which reads when PostHog first saw the person rather than a [person property](/docs/product-analytics/person-properties).
@@ -58,13 +62,13 @@ A single criterion from this list makes the whole cohort fall back to the standa
 ## Using a realtime cohort in a feature flag
 
 1. Create the cohort, or edit its criteria, as you normally would.
-2. Wait while PostHog works through the cohort's history. This usually takes 15 to 20 minutes, and longer for cohorts that look a long way back or match a lot of events.
+2. Wait while PostHog works through the cohort's history. The errors below call this the backfill. It takes 20 minutes at the earliest, and longer for cohorts that look a long way back or match a lot of events.
 3. Add the cohort to a feature flag [release condition](/docs/feature-flags/creating-feature-flags#release-conditions).
 
 If the flag won't save, the error tells you which step you're on:
 
-- "Cohort 'X' is still being backfilled and cannot be used in feature flags yet" means step 2 hasn't finished. Wait and save again.
-- "Cohort 'X' has an event-based condition ... and cannot be used in feature flags" means the cohort doesn't qualify. Compare its criteria against the list above.
+- "Cohort 'X' is still being backfilled and cannot be used in feature flags yet" means step 2 hasn't finished. Wait and save again. If it doesn't clear, [tell us](https://app.posthog.com#panel=support%3Afeedback%3A%3Alow%3Atrue).
+- "Cohort 'X' has an event-based condition ... and cannot be used in feature flags" means either the cohort doesn't qualify, or realtime cohorts aren't switched on for the project. Compare its criteria against the list above first.
 
 ## Editing a cohort a flag uses
 
@@ -76,11 +80,11 @@ This is on purpose. New criteria make the existing record wrong, and PostHog has
 2. Edit and save the cohort.
 3. Wait for PostHog to work through the history again, then add the cohort back to the flags.
 
-Renaming a cohort or changing its description is always allowed.
+The same error blocks a rename from the cohort page, because saving there sends the criteria too. To rename a cohort a flag is using, PATCH only the `name` field through the [cohorts API](/docs/api/cohorts).
 
 ## How up to date is it?
 
-- People join and leave as their events arrive. Expect the change to reach feature flags within about a minute.
+- People join and leave as their events arrive. Expect the change to reach feature flags in a minute or two.
 - Time ranges expire on their own. Someone who matched "completed `signed up` in the last 30 days" drops out once their last matching event is older than 30 days, even if they send nothing new.
 - The person count and person list on the cohort page are not realtime. They come from the standard calculation.
 
@@ -88,7 +92,7 @@ Renaming a cohort or changing its description is always allowed.
 
 ### How do I tell whether a cohort is realtime?
 
-Fetch it from the [cohorts API](/docs/api/cohorts) and read `cohort_type`. Qualifying cohorts have `"cohort_type": "realtime"`. This doesn't tell you whether PostHog has finished working through the history, so saving the flag is still the test for that.
+Fetch it from the [cohorts API](/docs/api/cohorts) and read `cohort_type`. Qualifying cohorts have `"cohort_type": "realtime"`. The field reads the criteria and nothing else. It doesn't tell you whether realtime cohorts are switched on for the project, or whether PostHog has finished working through the history, so saving the flag is still the test for both.
 
 ### Do I still need the static cohort workaround?
 
