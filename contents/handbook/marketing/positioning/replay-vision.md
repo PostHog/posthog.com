@@ -20,7 +20,7 @@ The things that explain why your product works or fails for people aren't always
 
 The problem is that once you grow past a certain point, it's impossible to watch them all.
 
-So your most important signal about the user experience is also the one you might have been throwing away. Replay Vision reads your sessions for you. The insight that used to take an afternoon of manual review now runs continuously: Replay Vision reads every session as it comes in, based on the scanners you've set up, and the scouts pull what matters into your Inbox.
+So your most important signal about the user experience is also the one you might have been throwing away. Replay Vision reads your sessions for you. The insight that used to take an afternoon of manual review now runs continuously: Replay Vision reads every session as it comes in, based on the scanners you've set up, and the [scouts](/docs/self-driving/scouts) pull what matters into your Inbox.
 
 This is the vision layer of the self-driving engine the scouts rely on to read what happened in a session, the sense that turns raw recordings into signal the system can act on.
 
@@ -39,12 +39,12 @@ Any of these can be the champion. The common thread is someone drowning in recor
 
 ### Message 1: Your product watches its own session recordings
 
-**Problem:** "Manually watching thousands of recordings is not practical." Teams batch ~50 recordings every Tuesday and want weekly summarized insights, but the review never scales to the volume they're capturing.
+**Problem:** Watching replays doesn't scale. Past a certain volume, review turns into spot-checking: someone sets aside an hour, watches a dozen recordings, and forms an impression from whatever they happened to click on. Everything else goes unwatched.
 
 **Solution:** Scanners read the recordings for you and deliver a standing read on your sessions, on a cadence you determine. 
 
 **Supporting features:**
-- Five scanner templates ship out of the box: Dead ends (Monitor), Session summary (Summarizer), User intent (Classifier), Frustration score (Scorer), Session outcome (Classifier)
+- Built-in [scanner templates](/docs/replay-vision/creating-scanners#start-from-a-template) cover the common shapes, so a customer can start without writing a prompt
 - Scanners summarize and label any set of recordings automatically, across hundreds at once
 - Bulk-scan on demand, or set scanners to run on a schedule
 - Findings land as queryable events and get routed to your Inbox, so what matters surfaces to you instead of piling up as a backlog to review
@@ -52,7 +52,7 @@ Any of these can be the champion. The common thread is someone drowning in recor
 
 ### Message 2: Your sessions can answer questions now. Just ask.
 
-**Problem:** "I was manually watching recordings to understand *why* users struggle." Teams want the golden sessions, the ones with errors or key insights, but hunting for them means watching everything else too.
+**Problem:** Your metrics tell you the funnel drops at checkout. They don't tell you why. The answer is in the recordings, but the handful that explain it are buried among thousands that don't, and the only way to find them is to watch everything else first.
 
 **Solution:** Ask PostHog AI (or any of your preferred agents) in plain language and get the behavior behind the metric: why they hesitated, struggled, or gave up. Failure modes that were never event-shaped become visible.
 
@@ -66,7 +66,7 @@ Any of these can be the champion. The common thread is someone drowning in recor
 
 ### Message 3: Session insights, right next to all your product data
 
-**Problem:** Customers pull replays out via API into a separate AI tool just to analyze them, paying twice and shipping their session data elsewhere.
+**Problem:** Your analytics live in one tool, and the AI that reads your recordings is a second subscription on top of it – often with your session data exported to a third party to get there. That's two bills for one job, and the bigger cost is that the findings are stranded: "users hesitate at checkout" sits in a different tool from the funnel, the flag, and the error that explain it.
 
 **Solution:** Analyze your sessions where they already live, under one bill, and one platform. Connect the findings to the rest of your product data.
 
@@ -163,10 +163,10 @@ Any of these can be the champion. The common thread is someone drowning in recor
 
 **Follow-up:** How many sessions a month, and is the worry the total or one runaway scanner?
 
-**Answer:** Start with the unit, since that's the opaque part: a credit is $0.01, and an observation costs 2, 5, or 15 depending on the model. The spend widget projects forward, showing what you'll land on by period end and the date you'll hit your limit. You find out in week one, not on the invoice. "View usage by scanner" names the one responsible, so you fix it instead of throttling everything. Before creating a scanner, ask the MCP to estimate its volume; after, set a spend limit and scope it with sampling and filters.
+**Answer:** Start with the unit, since that's the opaque part: a credit is $0.01, and an observation costs 2, 5, or 15 depending on the model. The spend widget projects forward, showing what you'll land on by period end and the date you'll hit your limit. You find out in week one, not on the invoice. "View usage by scanner" names the one responsible, so you fix it instead of throttling everything. Before creating a scanner, ask the MCP to estimate its volume. After, cap it with a per-scanner monthly budget – $100 for this one, $50 for that one – on top of the organization-wide limit, and scope it further with sampling and filters. A runaway scanner stops at its own ceiling instead of eating the whole budget.
 
 ![Spend widget](https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2026_08_28_at_16_17_44_2x_d2d76fcca3.png)
 
 ### "Can we use our own model, or our own API key?"
 
-**Answer:** Not today. Scanners run on a fixed lineup chosen for output quality, and you pick among them per scanner at 2, 5, or 15 credits. Bring-your-own-key has been asked for by beta customers and is under discussion, with no date. If the ask is really cost, the lightweight model plus sampling usually closes the gap. If it's about where data goes, that's the compliance answer above.
+**Answer:** Not today. Scanners run on a fixed lineup chosen for output quality, and you pick among them per scanner at 2, 5, or 15 credits. The lineup is narrow because the pipeline is built around it – recordings are rasterized into video before a model ever sees them, which [this engineering post](/blog/multimodal-models-need-video) walks through. Bring-your-own-key has been asked for by beta customers and is under discussion, with no date. If the ask is really cost, the lightweight model plus sampling usually closes the gap. If it's about where data goes, that's the compliance answer above.
