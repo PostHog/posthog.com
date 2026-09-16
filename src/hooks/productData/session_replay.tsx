@@ -26,6 +26,8 @@ export const sessionReplay = {
     type: 'session_replay',
     teamSlug: 'replay',
     forumTopicId: 377,
+    // Volume id in src/constants/pocketGuides.ts – gives the docs a Learn tab.
+    pocketGuideVolume: 'session-replay',
     color: 'yellow',
     colorSecondary: '[#B56C00]',
     wizardSupport: true,
@@ -46,7 +48,11 @@ export const sessionReplay = {
      * feed the carousel templates their slide arrays).
      */
     productMenu: [
-        { slug: 'overview', name: 'Overview', icon: <IconEye className="size-4" /> },
+        {
+            slug: 'overview',
+            name: 'Overview',
+            icon: <IconEye className="size-4" />,
+        },
         {
             slug: 'eli5',
             name: 'What does it do?',
@@ -110,8 +116,6 @@ export const sessionReplay = {
     ],
     overview: {
         title: 'See how people use your product',
-        description:
-            'Session Replay is one of the tools that makes your product self-driving: play back sessions to see exactly why something happened so the fix is obvious. The context agents use to debug UI issues and nuanced user behavior in your product, website, or mobile app.',
         eli5: "Session Replay records what happens in a user's session – clicks, scrolls, form inputs, page views, network requests, console logs – and plays it back like video. It's like watching a user's screen over their shoulder – it gives the nuance context you only get when you're actually watching them experience your product.",
         textColor: 'text-black', // tw
     },
@@ -310,7 +314,6 @@ export const sessionReplay = {
         },
     ],
     useCases: {
-        intro: 'Session Replay is used across teams depending on your role.',
         rows: [
             ['Product Engineers', "Debug production issues that can't be reproduced locally"],
             ['Support', 'Pinpoint the source of issues with visual verification and console logs'],
@@ -437,22 +440,22 @@ export const sessionReplay = {
             {
                 name: 'FullStory',
                 key: 'fullstory',
-                link: '/blog/posthog-vs-fullstory',
+                link: '/compare/posthog-vs-fullstory',
             },
             {
                 name: 'Hotjar',
                 key: 'hotjar',
-                link: '/blog/posthog-vs-hotjar',
+                link: '/compare/posthog-vs-hotjar',
             },
             // {
             //     name: 'Matomo',
             //     key: 'matomo',
-            //     link: '/blog/posthog-vs-matomo',
+            //     link: '/compare/posthog-vs-matomo',
             // },
             {
                 name: 'LogRocket',
                 key: 'logrocket',
-                link: '/blog/posthog-vs-logrocket',
+                link: '/compare/posthog-vs-logrocket',
             },
             {
                 name: 'Clarity',
@@ -461,7 +464,7 @@ export const sessionReplay = {
             {
                 name: 'Statsig',
                 key: 'statsig',
-                link: '/blog/posthog-vs-statsig',
+                link: '/compare/posthog-vs-statsig',
             },
             {
                 name: 'PostHog',

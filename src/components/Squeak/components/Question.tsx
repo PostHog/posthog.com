@@ -469,8 +469,8 @@ export function Question(props: QuestionProps) {
         })
         setEscalateState('sent')
         addToast({
-            title: 'Escalated to support',
-            description: 'Support has been notified.',
+            title: 'Escalated',
+            description: 'Moderators have been notified.',
             duration: 3000,
         })
     }
@@ -479,6 +479,9 @@ export function Question(props: QuestionProps) {
     const slugs = questionData?.attributes?.slugs
     const isQuestionAuthor = questionData?.attributes.profile?.data?.id === user?.profile?.id
     const publishedAt = questionData?.attributes?.publishedAt
+    const isBuilderLounge = questionData.attributes.topics?.data?.some((topic) =>
+        topic.attributes.label?.startsWith('#')
+    )
 
     return (
         <CurrentQuestionContext.Provider
@@ -632,6 +635,7 @@ export function Question(props: QuestionProps) {
                         </div>
                         <Replies expanded={expanded} setExpanded={setExpanded} isInForum={isInForum} />
                         {maxQuestions.map((question, index) => {
+                            if (!question.manual && isBuilderLounge) return null
                             return (
                                 <AskMax
                                     key={`ask-max-${index}`}
@@ -712,7 +716,7 @@ export function Question(props: QuestionProps) {
                                                     onClick={handleEscalateToSupport}
                                                     disabled={escalateState === 'sent'}
                                                 >
-                                                    {escalateState === 'sent' ? 'Escalated ✓' : 'Escalate to support'}
+                                                    {escalateState === 'sent' ? 'Escalated ✓' : 'Escalate'}
                                                 </OSButton>
                                             </p>
                                         </div>
@@ -726,7 +730,7 @@ export function Question(props: QuestionProps) {
                                             onClick={handleEscalateToSupport}
                                             disabled={escalateState === 'sent'}
                                         >
-                                            {escalateState === 'sent' ? 'Escalated ✓' : 'Escalate to support'}
+                                            {escalateState === 'sent' ? 'Escalated ✓' : 'Escalate'}
                                         </OSButton>
                                     </div>
                                 )}

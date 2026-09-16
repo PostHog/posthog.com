@@ -41,7 +41,8 @@ function CopyRSSButton({ placement }: { placement: string }): JSX.Element {
 }
 
 /** The PostHog logomark (light/dark pair) with "Blog" beside it. */
-function BlogWordmark(): JSX.Element {
+function BlogWordmark({ asHeading = false }: { asHeading?: boolean }): JSX.Element {
+    const labelClass = 'text-3xl font-bold leading-none m-0'
     return (
         <div className="flex items-center gap-3">
             <Logo layout="logomark" className="h-8 w-[59px] dark:hidden" width="auto" title="PostHog" />
@@ -53,7 +54,7 @@ function BlogWordmark(): JSX.Element {
                 width="auto"
                 title="PostHog"
             />
-            <span className="text-3xl font-bold leading-none">Blog</span>
+            {asHeading ? <h1 className={labelClass}>Blog</h1> : <span className={labelClass}>Blog</span>}
         </div>
     )
 }
@@ -63,10 +64,18 @@ function BlogWordmark(): JSX.Element {
  * and again as the footer (wordmark + CTA). `placement` tags the copy event so
  * header and footer convert separately.
  */
-function BlogHeader({ placement, includeCTA = true }: { placement?: string; includeCTA?: boolean }): JSX.Element {
+function BlogHeader({
+    placement,
+    includeCTA = true,
+    asHeading = false,
+}: {
+    placement?: string
+    includeCTA?: boolean
+    asHeading?: boolean
+}): JSX.Element {
     return (
         <div className="flex flex-row items-center justify-between gap-4 py-2 flex-wrap">
-            <BlogWordmark />
+            <BlogWordmark asHeading={asHeading} />
             {includeCTA && placement ? <CopyRSSButton placement={placement} /> : null}
         </div>
     )
@@ -90,7 +99,7 @@ export default function BlogPage({ data }: { data: { posts: { nodes: PostSummary
                 hideMarkdownActions
             >
                 <div className="@container not-prose text-pretty text-primary">
-                    <BlogHeader placement="blog-header" includeCTA={false} />
+                    <BlogHeader placement="blog-header" includeCTA={false} asHeading />
                     <div className="relative mx-auto w-full max-w-6xl px-4 pb-12 @2xl:pb-20 @xl:px-8">
                         <div className="mt-2 @lg:mt-10 flex @2xl:flex-row flex-col items-center gap-8 @2xl:gap-16">
                             {/* <BlogHero className="mt-2 @2xl:mt-0" /> */}

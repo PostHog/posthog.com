@@ -98,22 +98,23 @@ We use [PandaDoc](https://app.pandadoc.com/a/#/) to handle document generation, 
 
     - **Contract.Term** - The term in months of the contract (12 months by default)
 
-8. If they are paying monthly change:
-    - Payment Terms to `12 equal monthly payments from Contract start date`.
-    - Payment Method to `Credit Card`.
+8. If they are buying credits upfront but must pay by credit card, change:
+    - Payment Terms to `Net 1 from Signature Date`.
+    - Payment Method to `Bank Transfer or Credit Card`.
+
 9. If an MSA is being used rather than the standard terms you will need to replace the following text:
 
     > PostHog Cloud License Terms appearing at: https://www.posthog.com/terms and Privacy Policy appearing at: https://posthog.com/privacy (collectively the “**Agreement**”)
 
     with either
 
-    > PostHog Cloud License Terms entered into by and between the Parties on or about the date hereof and Privacy Policy appearing at: https://posthog.com/privacy (collectively the “**Agreement**”).
+    > PostHog Master Services Agreement (Cloud License) entered into by and between the Parties on or about the date hereof and Privacy Policy appearing at: https://posthog.com/privacy (collectively the “**Agreement**”).
 
     or, if the Customer insists on including the exact date of the MSA to remove ambiguity,
 
-   > PostHog Cloud License Terms entered into by and between the Parties on or about [INSERT DATE OF EXECUTION OF MSA] and Privacy Policy appearing at: https://posthog.com/privacy (collectively the “**Agreement**”).
+   > PostHog Master Services Agreement (Cloud License) entered into by and between the Parties on or about [INSERT DATE OF EXECUTION OF MSA] and Privacy Policy appearing at: https://posthog.com/privacy (collectively the “**Agreement**”).
 
-10. You should link the order form to the opportunity record in Salesforce using the `Contract Link` field in the "Opportunity Closure Details" so that we have a reference to the completed paperwork from our CRM.
+11. You should link the order form to the opportunity record in Salesforce using the `Contract Link` field in the "Opportunity Closure Details" so that we have a reference to the completed paperwork from our CRM.
 
 ### Routing an order form for review and signature
 
@@ -151,7 +152,7 @@ Monthly invoices are generated automatically at the end of each billing period. 
 
 Credits added before billing period ends are applied automatically and the customer never has to pay the PAYG charge out of pocket. No further action needed here. 
 
-If they won't have enough credits to cover an invoice, and won't sign before the invoice issue date, you can ask the billing team to pause collection for a few days. Once the contract is signed and the credits are added, billing can release the invoice and the prepurchase credits will cover it. Flag this as early as possible. Billing can only pause an invoice that hasn't been issued yet.
+If they won't have enough credits to cover an invoice and won't sign before the invoice issue date, ask the billing team to pause collection. Flag it as early as possible, because billing can only pause an invoice that hasn't been issued yet. A pause lasts 48 hours, and each invoice only gets one pause. Once the contract is signed and the credits are added, billing releases the invoice and the prepurchase credits cover it.
 
 #### Contract timing rules
 
@@ -180,7 +181,7 @@ Sometimes large customers will ask for changes to our MSA. We have a list of the
 
 We offer HIPAA Compliance on PostHog Cloud and as such health companies will require us to sign a Business Associate Agreement with them. As this means we take on increased financial risk in case of a breach we ask them as a minimum to subscribe to one of the platform packages which is a guaranteed monthly payment. A maximum of one BAA per organization will be signed. Under most circumstances, it should be the company that owns the org/pays us.
 
-1. Ask the customer to subscribe to a platform package (as well as any other paid plans they wish to use). You can verify this in Vitally by ensuring that they are in the `Teams Plan` segment.
+1. Ask the customer to subscribe to a platform package (as well as any other paid plans they wish to use).
 2. Create a new document from the <PrivateLink url="https://app.pandadoc.com/a/#/templates/4psCXzU527sNE6WEbFBg3a">PandaDoc template</PrivateLink>.
 3. All you need to do it set the `Client.Company` variable and then send it to them for review and signature.
 4. It has been pre-signed by Fraser and will automatically add today's date as the date of signature for PostHog.

@@ -3,7 +3,7 @@ export const logrocket = {
     key: 'logrocket',
     assets: {
         icon: '/images/competitors/logrocketzd.svg',
-        comparisonArticle: '/blog/posthog-vs-logrocket',
+        comparisonArticle: '/compare/posthog-vs-logrocket',
     },
     products: {
         product_analytics: {

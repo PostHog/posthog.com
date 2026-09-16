@@ -15,7 +15,7 @@ export const warningsDark =
 
 Sometimes PostHog runs into problems during ingestion due to incorrect or suboptimal usage of PostHog. For example, if you capture an event with a generic ID like `null`, PostHog doesn't ingest it.
 
-If this happens, we do our best to still ingest the event and we log an ingestion warning.
+Where we can, we still ingest the event and log an ingestion warning. Other problems leave nothing to ingest, and the warning is the only record. Each section below says whether the event was kept.
 
 <ProductScreenshot
   imageLight={warningsLight}
@@ -24,7 +24,7 @@ If this happens, we do our best to still ingest the event and we log an ingestio
   classes="rounded"
 />
 
-**Note:** These warnings are sampled. The actual number of events affected may exceed the total displayed.
+**Note:** These warnings are sampled, so the number of events affected may exceed the total displayed. Use the count to confirm something is happening, not to measure how often.
 
 List of ingestion warnings:
 
@@ -42,6 +42,13 @@ List of ingestion warnings:
 - [$set or $set_once is ignored on exception events and should not be sent](#set-or-set_once-is-ignored-on-exception-events-and-should-not-be-sent)
 - [Invalid heatmap data](#invalid-heatmap-data)
 - [Discarded $groupidentify event with invalid $group_set](#discarded-groupidentify-event-with-invalid-group_set)
+
+Validation warnings, raised when PostHog rejects a request as it arrives:
+
+- [Discarded event with no distinct ID](#discarded-event-with-no-distinct-id)
+- [Discarded event with no event name](#discarded-event-with-no-event-name)
+- [Discarded session replay batches](#discarded-session-replay-batches)
+- [Discarded AI events](#discarded-ai-events)
 
 ## Refused to merge with an illegal distinct ID
 
@@ -113,7 +120,7 @@ This indicates the `$heatmap_data` property was malformed, which is usually a si
 
 ## Discarded $groupidentify event with invalid $group_set
 
-PostHog discards `$groupidentify` events when the `$group_set` property is not a valid JSON object. The `$group_set` property must be a plain object containing the group properties you want to set — strings, numbers, booleans, and arrays are rejected.
+PostHog discards `$groupidentify` events when the `$group_set` property is not a valid JSON object. The `$group_set` property must be a plain object containing the group properties you want to set – strings, numbers, booleans, and arrays are rejected.
 
 To fix this, ensure `$group_set` is always a plain object when calling `posthog.group()` or sending `$groupidentify` events:
 
@@ -129,6 +136,52 @@ posthog.group("company", "company_id_in_your_db", "PostHog");
 ```
 
 `null` or `undefined` values for `$group_set` are accepted and upsert the group with empty properties.
+
+## Validation warnings
+
+These warnings are raised when PostHog rejects a request as it arrives, before the event enters the ingestion pipeline. Your SDK receives an HTTP `400` naming the problem. Requests are validated as a unit, so one malformed event can reject the whole batch – which is why a warning's event count can exceed the number of warnings.
+
+Rejected events are dropped, and the warning is the only record of them: details carry identifiers and sizes (the SDK name and version, the endpoint, and an occurrence count) rather than event contents. To inspect a rejected payload, capture it at the sender – look for `400` responses to your ingestion endpoint in your browser's network tab, enable [debug mode](/docs/libraries/js/usage#debug-mode) with `posthog.debug()`, or log the event in a [`before_send`](/docs/libraries/js/usage#amending-or-sampling-events) hook.
+
+Start with the `lib` and `lib_version` details. Warnings clustered on a single older SDK version point to an upgrade. When both read `unknown`, the request carried no `$lib` property, so no PostHog SDK sent it. Your project token is public and visible in your web app's source, so anything that finds it can post malformed events to your ingestion endpoint – crawlers, security scanners, and researchers probing your site, for example. Check the sender before you look for a bug in your own instrumentation.
+
+### Discarded event with no distinct ID
+
+Every event needs a `distinct_id` to attribute it to a person. PostHog reads the top-level `distinct_id` first, then falls back to `properties.distinct_id`, and drops the event when neither holds a usable value – when it's missing from both, `null`, empty, or only whitespace.
+
+PostHog accepts a wide range of values here: numbers and objects are converted to strings, and literal strings like `"null"`, `"undefined"`, and `"anonymous"` are valid IDs. [Prefer real user IDs](/docs/getting-started/identify-users#2-use-unique-strings-for-distinct-ids) – placeholder values group unrelated users onto a single person, and merging them later raises [`cannot_merge_with_illegal_distinct_id`](#refused-to-merge-with-an-illegal-distinct-id).
+
+Most PostHog SDKs block the obvious mistakes for you - for example in the posthog-js SDK, `identify()` refuses `null`, `undefined`, an empty string, and the literal strings `"null"` and `"undefined"`. It logs `Unique user id has not been set in posthog.identify` and sends nothing, so a plain `identify()` call is rarely the source of this warning. Common causes include:
+
+- **A `null` `bootstrap.distinctID`.** The ID comes from another system, such as a server-rendered page or a native app handover, and is sometimes `null`. Every event from that page load is unattributable.
+- **A layer that removes the ID in transit.** A [`before_send`](/docs/libraries/js/usage#amending-or-sampling-events) hook, a reverse proxy, or middleware can remove `distinct_id` after the SDK sets it.
+- **Requests that don't come from a PostHog SDK.** Hand-built calls to the [capture API](/docs/api/capture) have no client-side guard. A `lib` detail of `unknown` points at a sender outside PostHog SDKs.
+
+Check where the ID comes from: your `bootstrap` value, or wherever you call `identify()`. Pass `bootstrap` only when you have an ID. An omitted `distinctID` or an empty string is safe – posthog-js generates an anonymous ID instead.
+
+### Discarded event with no event name
+
+The `event` field was missing or empty, so there was no name to record the event under.
+
+### Discarded session replay batches
+
+These warnings mean a chunk of a [session recording](/docs/session-replay) was dropped. The rest of the recording still exists, but that stretch is missing from it. If the dropped chunk carried the recording's only full snapshot, the player has no starting DOM to replay against and can't play the recording at all.
+
+| Warning | Cause |
+| --- | --- |
+| Discarded a session replay batch with no `$session_id` | The batch didn't identify which session it belonged to. |
+| Discarded a session replay batch with an invalid `$session_id` | The `$session_id` was present but unusable – most often not a string. |
+| Discarded a session replay batch with no `$snapshot_data` | The batch carried no recording data. |
+
+### Discarded AI events
+
+These warnings apply to [LLM analytics](/docs/llm-analytics) events.
+
+| Warning | Cause |
+| --- | --- |
+| Discarded an AI event with an unsupported event name or no `$ai_model` | The event wasn't a recognized `$ai_*` event, or the required `$ai_model` property was missing. |
+| Rejected a malformed AI or OpenTelemetry request | The request body couldn't be parsed. |
+| Accepted an OpenTelemetry export with no AI spans, so nothing was ingested | The export was valid but carried no AI spans. Check that your instrumentation is emitting them. |
 
 ## Query warnings via MCP
 

@@ -27,7 +27,7 @@ export const customerDataInfrastructureNav = {
             name: 'Data tools',
         },
         {
-            name: 'Managed DuckDB warehouse',
+            name: 'Managed Warehouse',
             url: '/context-warehouse/managed-warehouse',
         },
         {

@@ -39,6 +39,7 @@ const ProductRateBlock = ({
     sliderConfig,
     initialVolume,
     unit,
+    multiplier,
     onCostChange,
 }: {
     name: string
@@ -47,9 +48,12 @@ const ProductRateBlock = ({
     sliderConfig: { min: number; max: number; marks: number[] }
     initialVolume: number
     unit: string
+    // Adds a second input that multiplies the cost, e.g. months of retention
+    multiplier?: { unit: string; initial: number }
     onCostChange: (cost: number) => void
 }) => {
     const [volume, setVolume] = useState(initialVolume)
+    const [multiplierValue, setMultiplierValue] = useState(multiplier?.initial ?? 1)
     const dp = useMemo(() => getMaxDecimalPlaces(billingTiers), [billingTiers])
 
     const { total: cost, costByTier } = useMemo(
@@ -61,10 +65,14 @@ const ProductRateBlock = ({
     )
 
     const hasFractionalSubtotal = costByTier?.some((t) => t.tierCost % 1 !== 0) ?? false
+    // calculatePrice rounds its total, so multiply the unrounded tier costs
+    const totalCost = multiplier
+        ? Math.round(costByTier.reduce((sum, tier) => sum + tier.tierCost, 0) * multiplierValue)
+        : cost
 
     useEffect(() => {
-        onCostChange(cost)
-    }, [cost])
+        onCostChange(totalCost)
+    }, [totalCost])
 
     const getActiveTierIndex = () => {
         for (let i = 0; i < billingTiers.length; i++) {
@@ -184,8 +192,8 @@ const ProductRateBlock = ({
 
                     {/* Slider + input + per-block total (sits below the matrix so the running subtotal trails the breakdown) */}
                     <div className="pl-4 pr-1">
-                        <div className="flex items-center justify-between mb-2">
-                            <div className="flex items-center gap-1.5">
+                        <div className="flex items-center justify-between gap-2 mb-2">
+                            <div className="flex flex-wrap items-center gap-1.5">
                                 <NumericFormat
                                     inputClassName="bg-primary text-center text-lg font-bold border border-primary hover:border-button dark:border-dark rounded-sm py-1 px-1 min-w-[30px] max-w-[150px]"
                                     value={volume}
@@ -196,8 +204,30 @@ const ProductRateBlock = ({
                                     customInput={AutosizeInput}
                                 />
                                 <span className="text-sm text-primary/60">{unit}s/mo</span>
+                                {multiplier && (
+                                    <>
+                                        <span className="text-sm text-primary/60 px-1">×</span>
+                                        <NumericFormat
+                                            inputClassName="bg-primary text-center text-lg font-bold border border-primary hover:border-button dark:border-dark rounded-sm py-1 px-1 min-w-[30px] max-w-[150px]"
+                                            value={multiplierValue}
+                                            decimalScale={0}
+                                            allowNegative={false}
+                                            onValueChange={({ floatValue }) => {
+                                                if (floatValue !== undefined)
+                                                    setMultiplierValue(Math.max(1, floatValue))
+                                            }}
+                                            customInput={AutosizeInput}
+                                        />
+                                        <span className="text-sm text-primary/60">
+                                            {multiplier.unit}
+                                            {multiplierValue === 1 ? '' : 's'}
+                                        </span>
+                                    </>
+                                )}
                             </div>
-                            <span className="text-base font-bold text-primary tabular-nums">{formatUSD(cost)}</span>
+                            <span className="text-base font-bold text-primary tabular-nums">
+                                {formatUSD(totalCost)}
+                            </span>
                         </div>
                         <LogSlider
                             stepsInRange={100}
@@ -289,6 +319,7 @@ const PricingCalculator = ({ id, productData }: SectionComponentProps) => {
                             sliderConfig={addon.sliderConfig}
                             initialVolume={addon.volume || addon.sliderConfig?.min || 0}
                             unit={addon.unit || unit}
+                            multiplier={addon.multiplier}
                             onCostChange={handleAddonCostChange(i)}
                         />
                     </div>

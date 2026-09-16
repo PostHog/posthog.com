@@ -213,15 +213,15 @@ const toolkit: {
 }[] = [
     { Icon: IconGraph, color: 'text-blue', product: 'Product analytics', prefix: 'like ', linkText: 'Amplitude', href: '/blog/posthog-vs-amplitude' }, // prettier-ignore
     { Icon: IconPieChart, color: 'text-green-2', product: 'Web analytics', prefix: 'like ', linkText: 'Google Analytics', href: '/blog/posthog-vs-ga4' }, // prettier-ignore
-    { Icon: IconRewindPlay, color: 'text-yellow', product: 'Session replay', prefix: 'like ', linkText: 'FullStory', href: '/blog/posthog-vs-fullstory' }, // prettier-ignore
-    { Icon: IconToggle, color: 'text-seagreen', product: 'Feature flags', prefix: 'like ', linkText: 'LaunchDarkly', href: '/blog/posthog-vs-launchdarkly' }, // prettier-ignore
-    { Icon: IconFlask, color: 'text-purple', product: 'Experiments', prefix: 'like ', linkText: 'Optimizely', href: '/blog/posthog-vs-optimizely' }, // prettier-ignore
+    { Icon: IconRewindPlay, color: 'text-yellow', product: 'Session replay', prefix: 'like ', linkText: 'FullStory', href: '/compare/posthog-vs-fullstory' }, // prettier-ignore
+    { Icon: IconToggle, color: 'text-seagreen', product: 'Feature flags', prefix: 'like ', linkText: 'LaunchDarkly', href: '/compare/posthog-vs-launchdarkly' }, // prettier-ignore
+    { Icon: IconFlask, color: 'text-purple', product: 'Experiments', prefix: 'like ', linkText: 'Optimizely', href: '/compare/posthog-vs-optimizely' }, // prettier-ignore
     { Icon: IconWarning, color: 'text-orange', product: 'Error tracking', prefix: 'like ', linkText: 'Sentry', href: '/blog/posthog-vs-sentry' }, // prettier-ignore
-    { Icon: IconLlmAnalytics, color: 'text-purple', product: 'AI observability', prefix: 'like ', linkText: 'Langfuse', href: '/blog/best-langfuse-alternatives' }, // prettier-ignore
+    { Icon: IconLlmAnalytics, color: 'text-purple', product: 'AI observability', prefix: 'like ', linkText: 'Langfuse', href: '/compare/best-langfuse-alternatives' }, // prettier-ignore
     { Icon: IconDatabase, color: 'text-purple', product: 'Context warehouse', prefix: '', linkText: "What's that?", href: '/context-warehouse' }, // prettier-ignore
-    { Icon: IconMessage, color: 'text-salmon', product: 'Surveys', prefix: 'like ', linkText: 'Sprig', href: '/blog/best-sprig-alternatives' }, // prettier-ignore
-    { Icon: IconCursorClick, color: 'text-red', product: 'Heatmaps', prefix: 'like ', linkText: 'Hotjar', href: '/blog/posthog-vs-hotjar' }, // prettier-ignore
-    { Icon: IconPlug, color: 'text-sky-blue', product: 'CDP', prefix: 'like ', linkText: 'Segment', href: '/blog/best-customer-data-platforms-for-developers' }, // prettier-ignore
+    { Icon: IconMessage, color: 'text-salmon', product: 'Surveys', prefix: 'like ', linkText: 'Sprig', href: '/compare/best-sprig-alternatives' }, // prettier-ignore
+    { Icon: IconCursorClick, color: 'text-red', product: 'Heatmaps', prefix: 'like ', linkText: 'Hotjar', href: '/compare/posthog-vs-hotjar' }, // prettier-ignore
+    { Icon: IconPlug, color: 'text-sky-blue', product: 'CDP', prefix: 'like ', linkText: 'Segment', href: '/compare/best-customer-data-platforms-for-developers' }, // prettier-ignore
     { Icon: IconStack, color: 'text-red dark:text-yellow', product: 'And loads more', prefix: '', linkText: 'Install them all with one command', href: '/wizard' }, // prettier-ignore
 ]
 

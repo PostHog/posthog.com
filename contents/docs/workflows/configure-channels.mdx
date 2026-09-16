@@ -44,7 +44,7 @@ To configure the channel, you need to provide the following details:
 - Enter your **from name** (e.g. `PostHog Team`).
 - Enter your **from email** (e.g. `team@yourdomain.com`).
 
-This is the address that recipients will see in their inbox.
+This is the address that recipients will see in their inbox. Each one is a separate channel, and only a sender that exists shows in the **From** dropdown of an email step in the [workflow builder](/docs/workflows/workflow-builder). To add another sender later, use the [**Channels** tab](https://app.posthog.com/workflows/channels) again.
 
 To maximize deliverability and avoid spam folders, you must verify your domain.
 
@@ -53,6 +53,8 @@ To maximize deliverability and avoid spam folders, you must verify your domain.
 3. Verification may take a few minutes to propagate.
 
 Once verified, you'll see a green check mark in your settings.
+
+Verification applies to the domain, not to the address. If the domain is already verified for another sender in the same project, you do not need to add the DNS records again for a new address on that domain.
 
 <ProductScreenshot
     imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1000,c_limit,q_auto,f_auto/verified_email_light_c2f3b925c5.png"
@@ -163,6 +165,7 @@ Once your channel is created, you can use it in a workflow to deliver messages t
 
 | Issue | Solution |
 | --- | --- |
+| No address in the **From** dropdown? | The step can only use a sender that exists in the project. Add one on the [**Channels** tab](https://app.posthog.com/workflows/channels), then select it in the step. |
 | Emails not sending? | Check that your domain is verified and you've added the DNS records correctly. |
 | Spam folder issues? | Ensure SPF/DKIM are valid, and consider setting up DMARC. |
 | Variables not populating? | Confirm the property exists on the person profile (e.g. `person.name`). |

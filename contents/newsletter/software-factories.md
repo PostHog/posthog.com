@@ -62,7 +62,7 @@ Only a few companies like [StrongDM](https://factory.strongdm.ai/) have publicly
 
 ## Why is everyone talking about them now?
 
-As humans shifted from writing code to orchestrating agents that write code for them, code review has become the new bottleneck.
+As humans shifted from writing code to [orchestrating agents that write code for them](/newsletter/if-ai-writes-all-the-code-whats-left#4-evaluating-the-work-of-your-agents), code review has become the new bottleneck.
 
 At the same time, models keep getting better, so people are building loops, systems, and tools where agents review and/or merge PRs instead of humans – a.k.a., software factories.
 

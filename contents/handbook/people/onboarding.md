@@ -248,30 +248,32 @@ Below are a list of Slack channels you may find helpful:
 ### Work-related channels
 
 -   `#ask-max` - Max has access to all of our documentation and our handbook, and is a great place to start with many questions
--   `#ask-posthog-anything` - ask the team when you cannot find an answer in the handbook, the docs, or `#ask-max`
--   `#tell-posthog-anything` - company-wide announcements about our people, products, policies, and projects
--   `#general`
--   `#changelog` - keep up with all the cool things we're shipping across the team
+-   [#ask-posthog-anything](https://posthog.slack.com/archives/C02E3BKC78F) - ask the team when you cannot find an answer in the handbook, the docs, or `#ask-max`
+-   [#tell-posthog-anything](https://posthog.slack.com/archives/C0351B1DMUY) - company-wide announcements about our people, products, policies, and projects
+-   [#at-posthog-anything](https://posthog.slack.com/archives/C07TQR0V16U) - tag ```@posthog``` to draft PRs, pull usage info, or surface content from the handbook
+-   [#general](https://posthog.slack.com/archives/CSPHFDZH8) - see new starters, work anniversaries, birthdays and all-hands recordings
+-   [#changelog](https://posthog.slack.com/archives/C099B0YCULT) - keep up with all the cool things we're shipping across the team
 -   `#today-i-learned` - where we share what we learn
 -   `#demo-posthog-anything` - show the team something you built, or see what others are building
 -   `#phishing-attempts` - report suspicious emails, texts, and messages here
--   `#content-docs-ideas` - for suggesting ideas for the newsletter, tutorials, and docs to be written by the content and docs team
--   `#newsletters`
--   `#brand-mentions`
--   `#industry-news`
--   `#team-blitzscale`
+-   [#content-and-video-ideas](https://posthog.slack.com/archives/C015CRUQR7Y) - for suggesting ideas for the newsletter, tutorials, and docs to be written by the content and docs team
+-   [#newsletters](https://posthog.slack.com/archives/C01RJ7T212S)
+-   [#brand-mentions](https://posthog.slack.com/archives/C03C60FT1J7)
+-   [#do-more-weird](https://posthog.slack.com/archives/C04JN5NNMPF)
+-   [#industry-news](https://posthog.slack.com/archives/C01NWR6F58F)
+-   [#team-blitzscale](https://posthog.slack.com/archives/C06LMMS3YP4)
 
 ### Engineering channels
 
 If you are an engineer, join these in addition to the work-related channels above:
 
--   `#dev` - general engineering discussion
+-   [#dev](https://posthog.slack.com/archives/C0113360FFV) - general engineering discussion
 -   `#dev-ai` - how we use AI tools and coding agents in our own work
 -   `#dev-stamp-exchange` - ask for a quick review when nobody on your team is free. See [how we review](/handbook/engineering/how-we-review)
 -   `#github-rfcs` - all of our [RFCs](/handbook/company/communication#requests-for-comment-rfcs) are posted here
 -   `#flakey-tests` - reports of tests that fail intermittently in CI
 -   `#incidents` - incident declarations and post-mortem summaries. Set this channel to notify you about every message
--   `#alerts` - company-wide alerts. Teams also have their own `#alerts-[team-name]` channels
+-   [#alerts](https://posthog.slack.com/archives/C0185UNBSJZ) - company-wide alerts. Teams also have their own `#alerts-[team-name]` channels
 -   `#support-infrastructure` - deployment problems, infrastructure questions, and requests for cloud access
 -   `#aws-access` - use the `/awsaccess` command here to get temporary AWS permissions. See [cloud providers](/handbook/engineering/cloud-providers)
 -   `#papercuts` - small product annoyances that anyone at PostHog can report. Your team's [support hero](/handbook/engineering/support-hero) picks up the ones in your area
@@ -282,33 +284,55 @@ Every small team also has a `#team-[team-name]` channel and a `#support-[team-na
 
 We encourage you to join and create channels focused around different types of hobbies and interests. We explicitly don't allow channels based on categories that we legally (and rightly!) can't discriminate against in the hiring process, such as gender, sex, political affiliation, religion, and age. 
 
--   `#food`
--   `#kids`
--   `#no-context-posthog`
--   `#random`
--   `#whereintheworld`
--   `#devel-random`
--   `#books-and-films`
--   `#climbing`
--   `#coffee-snobs`
--   `#dad-jokes`
--   `#do-more-weird`
--   `#fitness`
--   `#hoglife`
+#### Daily chit-chat
+
+-   [#casual-ask-posthog-anything](https://posthog.slack.com/archives/C0B5F648MDE)
+-   [#design-inspiration](https://posthog.slack.com/archives/C01KEAGD601)
+-   [#devel-random](https://posthog.slack.com/archives/C02EJABQ39R)
+-   [#hoglife](https://posthog.slack.com/archives/C033D5NTA22)
+-   [#memespo](https://posthog.slack.com/archives/C0AD19VV7MH)
+-   [#no-context-posthog](https://posthog.slack.com/archives/C0790T52ZHT)
+-   [#random](https://posthog.slack.com/archives/CT2BU33N1)
+-   [#whereintheworld](https://posthog.slack.com/archives/C01D3U32PUN)
+
+#### Hobbies and interests
+
+-   [#aviation](https://posthog.slack.com/archives/C076ZQFM42U)
+-   [#books-and-films](https://posthog.slack.com/archives/C01HEH7FXRN)
+-   [#cars-and-driving](https://posthog.slack.com/archives/C068GE7G8BB)
+-   [#climbing](https://posthog.slack.com/archives/C08QQ4HGV8R)
+-   [#coffee-snobs](https://posthog.slack.com/archives/C0732DWLUA0)
+-   [#cycling](https://posthog.slack.com/archives/C01P1NBUZDY)
+-   [#dad-jokes](https://posthog.slack.com/archives/C03RJRD1GKE)
+-   [#food](https://posthog.slack.com/archives/C02EYG134RW)
+-   [#fitness](https://posthog.slack.com/archives/C03PH4UTD9V)
+-   [#gaming](https://posthog.slack.com/archives/C01HBHP6BRA)
+-   [#golf](https://posthog.slack.com/archives/C09LN9LAR3M)
+-   [#homelab](https://posthog.slack.com/archives/C03PJA57E3V)
+-   [#kids](https://posthog.slack.com/archives/C076X3C284D)
+-   [#listening-to](https://posthog.slack.com/archives/C01EJ20SK42)
 -   `#merch`
--   `#rockets`
+-   [#pets](https://posthog.slack.com/archives/C02G88X9R2R)
+-   [#rockets](https://posthog.slack.com/archives/C01LREJ3NPL)
+-   [#running](https://posthog.slack.com/archives/C08HBBYT9DW)
 -   `#shitposters-unite`
 -   `#skiing`
--   `#stonks`
--   `#cycling`
--   `#listening-to`
--   `#design-inspiration`
+-   [#stonks](https://posthog.slack.com/archives/C01L9FZBRPD)
+-   [#wedding-planners](https://posthog.slack.com/archives/C082AS81RD0)
 
 ### Location specific channels
 
--   `#london`
--   `#germany`
--   `#sf-bay-area`
--   `#barcelona`
--   `#nyc`
-    etc.
+Join wherever you're based, plus anywhere you travel often - posting in these channels is the easiest way to find teammates for a coffee, a coworking day, or dinner while you're in town.
+
+-   **Austria:** [#vienna](https://posthog.slack.com/archives/C09GE5B5AQ2)
+-   **Canada:** [#canada](https://posthog.slack.com/archives/C09GRQL9FUN)
+-   **France:** [#france](https://posthog.slack.com/archives/C04DDUWSH29)
+-   **Germany:** [#germany](https://posthog.slack.com/archives/C06GGF6AAHG)
+-   **Hungary:** [#budapest](https://posthog.slack.com/archives/C09K36PQY73)
+-   **Ireland:** [#ireland](https://posthog.slack.com/archives/C09LM32PB25)
+-   **Latin America:** [#latam](https://posthog.slack.com/archives/C085FD96WAK)
+-   **Netherlands:** [#amsterdam](https://posthog.slack.com/archives/C096RNZF75H)
+-   **Portugal:** [#lisbon](https://posthog.slack.com/archives/C097A897XP1)
+-   **Spain:** [#spain](https://posthog.slack.com/archives/C090ADXGJGH), [#barcelona](https://posthog.slack.com/archives/C09E9Q37YCA)
+-   **United Kingdom:** [#london](https://posthog.slack.com/archives/C028MN3UUP5), [#uk-north](https://posthog.slack.com/archives/C0BSCKLMY12)
+-   **United States:** [#united-states](https://posthog.slack.com/archives/C02J5E678LF),  [#austin-area](https://posthog.slack.com/archives/C0AF8M87ZRC), [#nyc](https://posthog.slack.com/archives/C036JMK2065), [#seattle-area](https://posthog.slack.com/archives/C080RPNHHL1), [#sf-bay-area](https://posthog.slack.com/archives/C034FCE7RCG)

@@ -14,7 +14,7 @@ import {
     IconRocket,
     IconSparkles,
 } from '@posthog/icons'
-import { FIFTY_MILLION, MAX_PRODUCT_ANALYTICS, MILLION, TEN_MILLION } from 'components/Pricing/pricingLogic'
+import { MAX_PRODUCT_ANALYTICS, MILLION, TEN_MILLION } from 'components/Pricing/pricingLogic'
 import Link from 'components/Link'
 import MCPInstall from 'components/Products/MCPInstall'
 import { getTool } from '../../data/tools'
@@ -59,7 +59,11 @@ export const webAnalytics = {
      * feed the carousel templates their slide arrays).
      */
     productMenu: [
-        { slug: 'overview', name: 'Overview', icon: <IconEye className="size-4" /> },
+        {
+            slug: 'overview',
+            name: 'Overview',
+            icon: <IconEye className="size-4" />,
+        },
         {
             slug: 'eli5',
             name: 'What does it do?',
@@ -124,8 +128,6 @@ export const webAnalytics = {
     ],
     overview: {
         title: 'Privacy-focused web analytics',
-        description:
-            'Web analytics is one of the tools that makes your product self-driving: the lightweight measurement layer that feeds agents traffic context. Built to natively work with session replay, feature flags, experiments, and surveys.',
         eli5: 'Web Analytics is a pre-built dashboard for website traffic – visitors, pageviews, sessions, bounce rate, referrers, UTMs, and Core Web Vitals – without the GA4 maze. Drop in a snippet (or use a no-code install), get real-time data, and optionally skip cookies entirely. Same events power product analytics and session replay when you want to go deeper.',
         textColor: 'text-[#063619]', // tw
     },
@@ -179,7 +181,7 @@ export const webAnalytics = {
     },
     // Same event volume slider as product analytics (web analytics is billed with it).
     slider: {
-        marks: [MILLION, TEN_MILLION, FIFTY_MILLION, MAX_PRODUCT_ANALYTICS],
+        marks: [MILLION, TEN_MILLION, MAX_PRODUCT_ANALYTICS],
         min: MILLION,
         max: MAX_PRODUCT_ANALYTICS,
     },
@@ -200,7 +202,6 @@ export const webAnalytics = {
         },
     },
     useCases: {
-        intro: 'Web Analytics is used across teams depending on your role.',
         rows: [
             ['Growth Marketers', 'See which channels, UTMs, and landing pages drive visits and conversions'],
             ['Founders', 'Check traffic health on a pre-built dashboard without waiting on a data team'],
@@ -338,7 +339,7 @@ export const webAnalytics = {
             {
                 name: 'Matomo',
                 key: 'matomo',
-                link: '/blog/posthog-vs-matomo',
+                link: '/compare/posthog-vs-matomo',
             },
             {
                 name: 'PostHog',
