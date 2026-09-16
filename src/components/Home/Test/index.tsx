@@ -26,30 +26,9 @@ import ToolsTicker from 'components/Home/ToolsTicker'
 import PlatformInstall, { wizardInstallSchema } from 'components/PlatformInstall'
 import HeroCTA from 'components/Home/HeroCTA'
 import { HeroBody, HeroHeadline } from 'components/Home/HeroCopy'
+import HeroCarousel from 'components/Home/HeroCarousel'
+import { buildTabs } from 'components/Home/HeroCarousel/tabs'
 import Customers from '../Customers'
-
-/** Loads HeroCarousel + Typecaast slides only in the browser so SSR/Helmet aren't affected. */
-function LazyHeroCarousel({ className }: { className?: string }) {
-    const [Content, setContent] = useState<React.ComponentType<{ className?: string }> | null>(null)
-
-    useEffect(() => {
-        Promise.all([import('components/Home/HeroCarousel'), import('components/Home/HeroCarousel/tabs')]).then(
-            ([{ default: HeroCarousel }, { buildTabs }]) => {
-                function HeroCarouselContent(props: { className?: string }) {
-                    return <HeroCarousel tabs={buildTabs} {...props} />
-                }
-
-                setContent(() => HeroCarouselContent)
-            }
-        )
-    }, [])
-
-    if (!Content) {
-        return <div className={`@container ${className} min-h-[300px] @[820px]:min-h-[400px]`} aria-hidden />
-    }
-
-    return <Content className={className} />
-}
 
 const SecondaryActions = ({
     justify = 'center',
@@ -172,7 +151,7 @@ function Hero(): JSX.Element {
                 </div>
             </div>
 
-            <LazyHeroCarousel className="mb-4" />
+            <HeroCarousel tabs={buildTabs} staticHeight className="mb-4" />
             <ToolsTicker className="mb-8" />
         </>
     )
