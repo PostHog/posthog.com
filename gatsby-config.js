@@ -208,6 +208,10 @@ module.exports = {
                 theme_color: '#E5E7E0',
                 display: 'minimal-ui',
                 icon: 'src/images/posthog-icon-white.svg', // This path is relative to the root of the site.
+                // The plated icon above stays the installed-app icon, where a background belongs.
+                // The favicon is declared in gatsby-ssr.js instead, so it can follow the reader's
+                // color scheme; leave this on and the plugin links the plated one over it.
+                include_favicon: false,
             },
         },
         `gatsby-plugin-postcss`,

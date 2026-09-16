@@ -10,6 +10,9 @@ import { Logo } from '@posthog/brand/logo'
 // package.json lifecycle hooks run this automatically for the standard build commands.
 const outputDirectory = fileURLToPath(new URL('../static/brand/', import.meta.url))
 
+// The favicon is served from the site root instead, where favicons are looked for.
+const faviconPath = (filename) => fileURLToPath(new URL(`../static/${filename}`, import.meta.url))
+
 const scaleDimensions = ([width, height], scale) => [width * scale, height * scale]
 const padDimensions = ([width, height], padding) => [width + padding * 2, height + padding * 2]
 
@@ -130,5 +133,39 @@ await writeSvg(
     'posthog-logomark-square.svg',
     renderPaddedLogo(squareLogomarkProps, getNativeDimensions(squareLogomarkProps), [60, 60])
 )
+
+// The favicon lives in the browser's chrome rather than ours, so it follows the reader's OS
+// scheme and not the site's theme toggle. Chrome ignores the `media` attribute on
+// `<link rel="icon">`, so both treatments ship inside the one file and the SVG picks between
+// them. Print keeps its flat colors in either scheme; only the head, drawn near-black, turns
+// white, because as drawn it disappears against a dark tab strip.
+const faviconProps = { layout: 'logomark', variant: 'print' }
+const faviconSize = [64, 64]
+const headFill = 'fill="#111"'
+const headOnDark = '#FAFAFA'
+
+const addSchemeSwitch = (svg) => {
+    const heads = svg.split(headFill).length - 1
+    if (heads !== 1) {
+        throw new Error(`Expected exactly one ${headFill} in the print logomark, found ${heads}`)
+    }
+
+    return svg
+        .replace(headFill, `class="head" ${headFill}`)
+        .replace(
+            /^<svg\b[^>]*>/,
+            (root) => `${root}<style>@media (prefers-color-scheme: dark) { .head { fill: ${headOnDark} } }</style>`
+        )
+}
+
+const faviconSvg = addSchemeSwitch(renderPaddedLogo(faviconProps, getNativeDimensions(faviconProps), faviconSize))
+
+await fs.writeFile(faviconPath('favicon.svg'), `${faviconSvg}\n`)
+// A fallback for browsers that cannot use an SVG favicon. It cannot follow the scheme, so it
+// gets the light treatment: the same mark, without the switch.
+await sharp(Buffer.from(faviconSvg), { density: 288 })
+    .resize(...faviconSize, { fit: 'fill' })
+    .png({ compressionLevel: 9 })
+    .toFile(faviconPath('favicon.png'))
 
 console.log(`Generated ${assets.length} public logo variants in ${path.relative(process.cwd(), outputDirectory)}`)
