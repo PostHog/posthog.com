@@ -1,13 +1,28 @@
 ## Q4 2026 goals
 
-### UI/UX (reports)
+### Make Self-Driving easy to start and useful for ongoing work - Chris and Dylan
 
--   Build an effective UI that sparks joy
--   Make chat the primary way to use Self-Driving across our surfaces and PostHog AI
--   Enable report implementation and interaction through PostHog Desktop
--   Make Self-Driving more personal through assignment and understanding what each person cares about
--   Scale to enterprises
--   Improve report quality across signals and scouts
+#### Increase activation - Chris
+
+-   Let new users start from PostHog web without requiring the CLI wizard.
+-   Improve onboarding and empty states so users understand the value and know how to get their first useful report.
+-   Decouple report access from GitHub. Require a repository connection only for work that needs code access.
+-   Measure activation when an agent starts work on a report, whether through PostHog or another product.
+
+#### Help committed users turn reports into completed work - Dylan
+
+-   Build an effective, enjoyable UI for understanding reports and managing tasks. Make the next action clear.
+-   Improve report quality across signals and scouts: useful findings, reliable evidence, and clear recommendations, not just better presentation.
+-   Make chat the primary way to investigate and act on reports across PostHog interfaces and PostHog AI. Pair it with task views that make ongoing work easy to manage.
+-   Enable users to move from a report to implementation and review in PostHog Desktop.
+-   Make assignment and personalization useful: show what each person owns, what needs their attention, and what matters to them.
+-   Support enterprise use as report volumes and team sizes grow. Keep ownership, work status, and review responsibilities clear.
+
+#### Make the report layer independent of our UI - shared
+
+-   Provide reliable MCP access to discover reports, inspect evidence, assign work, and update report status.
+-   Let users connect their own agents or build their own UI without losing core report capabilities.
+-   Keep report state consistent across PostHog and external tools. Measure activation at this shared layer, not through UI visits or merged pull requests.
 
 ### Make the inbox agent-first
 
