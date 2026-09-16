@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { RenderInClient } from 'components/RenderInClient'
 import usePostHog from '../../../hooks/usePostHog'
 import { cn } from '../../../utils'
@@ -7,8 +7,33 @@ import type { HeroCopyVariant } from './variants'
 
 export const HERO_COPY_FLAG = 'homepage-hero-copy-v2'
 
-function assignedVariant(posthog: ReturnType<typeof usePostHog>): HeroCopyVariant {
-    return resolveHeroCopyVariant(posthog?.getFeatureFlag?.(HERO_COPY_FLAG)) ?? DEFAULT_HERO_COPY_VARIANT
+/**
+ * Takes the assigned variant from the variant map that `onFeatureFlags` passes, and not from
+ * `getFeatureFlag`, so a slot never reads the flag while the flag has no value. A read that
+ * early makes posthog-js record a `$feature_flag_called` event with an empty response, and the
+ * experiment then counts a visitor who has both an empty response and a real variant as
+ * `$multiple`. `getFeatureFlag` still runs, but only after a real value exists, because that
+ * call is what records the exposure.
+ *
+ * The first real value wins for the rest of the visit, so a later flag refresh cannot move a
+ * visitor from one variant to the other.
+ */
+function useAssignedVariant(): HeroCopyVariant {
+    const posthog = usePostHog()
+    const [variant, setVariant] = useState<HeroCopyVariant>()
+
+    useEffect(() => {
+        if (!posthog?.onFeatureFlags || variant) return
+        return posthog.onFeatureFlags((_flags: string[], variants?: Record<string, string | boolean>) => {
+            const value = variants?.[HERO_COPY_FLAG]
+            const assigned = typeof value === 'string' ? resolveHeroCopyVariant(value) : null
+            if (!assigned) return
+            posthog.getFeatureFlag?.(HERO_COPY_FLAG)
+            setVariant(assigned)
+        })
+    }, [posthog, variant])
+
+    return variant ?? DEFAULT_HERO_COPY_VARIANT
 }
 
 const HeadlineMarkup = ({ headline, className }: { headline: HeroCopyVariant['headline']; className?: string }) => (
@@ -28,11 +53,13 @@ const BodyMarkup = ({ Body }: { Body: HeroCopyVariant['Body'] }) => (
 )
 
 function HeadlineSlot({ className }: { className?: string }): JSX.Element {
-    return <HeadlineMarkup headline={assignedVariant(usePostHog()).headline} className={className} />
+    const { headline } = useAssignedVariant()
+    return <HeadlineMarkup headline={headline} className={className} />
 }
 
 function BodySlot(): JSX.Element {
-    return <BodyMarkup Body={assignedVariant(usePostHog()).Body} />
+    const { Body } = useAssignedVariant()
+    return <BodyMarkup Body={Body} />
 }
 
 /**
