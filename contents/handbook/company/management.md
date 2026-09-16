@@ -147,6 +147,24 @@ Management is a skill of its own, and it's not any more important than any other
 
 Additionally, managers who are excelling with their teams may have limited interaction with their own manager. This is because, as discussed [above](#part-time-managers), management is intentionally spread thin. If you feel like your manager is mostly ignoring you, this isn't necessarily a bad thing and usually means you and your team are doing a fine job!
 
+## What to expect from your Blitzscale team member if they are your manager
+
+The Blitzscale team's mission is to enable all other PostHog small teams to be successful. If you report into a Blitzscale team member here is what you can expect from them:- 
+
+- They will make sure you know what our mission is and how you and your team contribute to that
+- They will make sure you know what our strategy is and how you and your team contribute to that
+- they will be responsible for resource allocation amongst their teams - this also involves hiring and firing decisions, although they will rely on you to gather insights into these areas
+- They will reinforce good cultural behaviour & our values
+- They will help you prioritize when time or resources are limited aka unblock you 
+- They will re-orient you in the right direction if needed
+
+Here is a list of things you should not expect from them
+- micromanaging
+- lots of 1-1s
+- a detailed plan of how to do your job or be a manager
+- regularly work through problems live.... it's "you're the driver" not "blitzscale team member is the driver" it's not as catchy 
+
+
 ## Recommended reading
 
 These have been recommended by multiple managers on the team:
