@@ -91,15 +91,21 @@ const SlackPosts = () => {
             })
     }, [])
 
+    // A question loses its topics when the topic is unpublished, so skip those posts.
+    const postsWithTopic = uniqBy(
+        slackPosts.filter((post) => post?.attributes?.question?.data?.attributes?.topics?.data?.[0]),
+        'attributes.question.data.attributes.topics.data[0].id'
+    )
+
     return loading ? (
         <div className="py-4">
             <Skeleton />
         </div>
-    ) : slackPosts?.length > 0 ? (
+    ) : postsWithTopic.length > 0 ? (
         <div className="py-4">
             <h3 className="text-base mb-2">From the PostHog Slack</h3>
             <ul className="list-none m-0 p-0 space-y-4">
-                {uniqBy(slackPosts, 'attributes.question.data.attributes.topics.data[0].id').map(
+                {postsWithTopic.map(
                     ({
                         id,
                         attributes: {
