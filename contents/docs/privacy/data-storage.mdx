@@ -27,10 +27,10 @@ If you require GDPR compliance, there are [specific guidelines](/docs/privacy/gd
 
 PostHog supports [realtime transformations](/docs/cdp/transformations) of data **before it's stored in PostHog**. These transformations are applied to all events captured in realtime, so you can use them to:
 
-- [Hashing PII data](https://posthog.com/docs/cdp/transformations/template-hash-properties) before it's stored in PostHog
-- Disabling default [GeoIP enrichment transformations](https://posthog.com/docs/cdp/transformations/template-geoip)
+- [Hashing PII data](https://posthog.com/docs/cdp/transformations/hash-properties) before it's stored in PostHog
+- Disabling default [GeoIP enrichment transformations](https://posthog.com/docs/cdp/transformations/geoip)
 - [Dropping events](https://posthog.com/docs/cdp/transformations/drop-events) based on a filter
-- [IP anonymization](https://posthog.com/docs/cdp/transformations/template-ip-anonymization)
+- [IP anonymization](https://posthog.com/docs/cdp/transformations/ip-anonymization)
 
 When in doubt, you can always create your own [custom transformation](https://app.posthog.com/pipeline/new/transformation/hog-template-blank-transformation). Custom transformations use the [Hog language](/docs/hog) to transform data.
 
@@ -41,7 +41,7 @@ You can configure your project to discard client IP addresses from stored events
 When this setting is enabled:
 
 - Client IP addresses are **not stored** with your events
-- Transformations like [GeoIP enrichment](https://posthog.com/docs/cdp/transformations/template-geoip) and [bot detection](https://posthog.com/docs/cdp/transformations/template-bot-detection) can **still use the IP** before it is discarded
+- Transformations like [GeoIP enrichment](https://posthog.com/docs/cdp/transformations/geoip) and [bot detection](https://posthog.com/docs/cdp/transformations/bot-detection) can **still use the IP** before it is discarded
 
 This allows you to enrich your events with location data or filter out bot traffic while ensuring raw IP addresses are not retained in your data.
 
