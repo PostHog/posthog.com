@@ -4,7 +4,7 @@ title: Event and property reference
 
 import CalloutBox from "components/Docs/CalloutBox";
 
-This page is the wire-level contract for the MCP Analytics SDKs. TypeScript-only properties are marked below. All property keys are prefixed with `$mcp_*` so they never collide with PostHog autocapture, Web analytics, or other product events.
+This page is the wire-level contract for the MCP Analytics SDKs, and for any server that captures these events itself. PostHog gates on the event name and on `$mcp_source`, never on which library sent the data, so a server in a language with no MCP Analytics SDK populates the same views. See [Any other language](/docs/mcp-analytics/custom-servers#any-other-language). TypeScript-only properties are marked below. All property keys are prefixed with `$mcp_*` so they never collide with PostHog autocapture, Web analytics, or other product events.
 
 ## Events
 

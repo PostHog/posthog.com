@@ -14,8 +14,9 @@ For those servers, use **`PostHogMCP`** instead. It's a subclass of the [`postho
 |---|---|
 | Built on `@modelcontextprotocol/sdk`'s `Server` / `McpServer` | [`instrument(server, posthog, options?)`](/docs/mcp-analytics/installation) |
 | A custom HTTP/Hono/edge dispatcher with no server object to wrap | `new PostHogMCP(apiKey, options?)` |
+| A server in a language with no MCP Analytics SDK | [Capture the events yourself](#any-other-language) |
 
-The examples below are TypeScript. Python has the same helper with the same methods in snake_case — skip to [Python](#python).
+The examples below are TypeScript. Python has the same helper with the same methods in snake_case, so skip to [Python](#python). Neither language yours? See [Any other language](#any-other-language).
 
 ## Set up
 
@@ -222,3 +223,100 @@ posthog.capture_tool_call(
 ```
 
 The token is unsigned and carries only what the client volunteered at `initialize` — treat `$session_id` and `$mcp_client_*` as analytics labels, not authentication.
+
+## Any other language
+
+MCP Analytics reads events, not SDKs. Every query behind the product filters on the event name and on `$mcp_source`. None of them looks at which library sent the data. A server written in Elixir, Go, Ruby, Rust, or anything else populates the same dashboards as a TypeScript one, as long as it captures the canonical `$mcp_*` events.
+
+Use this path when your language has no MCP Analytics SDK. If you write TypeScript or Python, use `PostHogMCP` above instead. It builds the same events, and it does the sanitization, truncation, and `$exception` fan-out for you.
+
+You need a way to send a PostHog event with arbitrary properties. A [PostHog library](/docs/libraries) for your language is the easy route. A plain HTTPS POST to the [capture API](/docs/api/capture) works too.
+
+### The minimum event
+
+One event puts your server on the dashboards: `$mcp_tool_call`, carrying `$mcp_source`. A call without that marker is invisible to every MCP Analytics view.
+
+| Property | Type | Why you need it |
+|---|---|---|
+| `$mcp_source` | string | Must be the exact string `"posthog_mcp_analytics"`. Every query filters on it. |
+| `$mcp_tool_name` | string | The tool the agent called. Groups the per-tool views. |
+| `$mcp_server_name` | string | Your server's name. The server list skips events that leave it empty. |
+| `$mcp_is_error` | boolean | Drives every error rate. Send `false` on success, not nothing. |
+| `$mcp_duration_ms` | number | Wall-clock milliseconds. Drives the latency percentiles. |
+| `$session_id` | string | Groups one client's calls into a session. Use a stable id per connection or per user. |
+
+Add the rest as you go. Each one turns on a view rather than a column:
+
+| Property | What it unlocks |
+|---|---|
+| `$mcp_tool_description` | The description the agent read, so you can see whether a rewrite changed behavior. |
+| `$mcp_parameters`, `$mcp_response` | Per-call inspection and response-size analysis. Redact these yourself. |
+| `$mcp_error_type`, `$mcp_error_message` | Failure buckets with a cause, instead of a count of empty rows. |
+| `$mcp_intent`, `$mcp_intent_source` | [Agent intent](/docs/mcp-analytics/intent) and intent clustering. |
+| `$mcp_client_name`, `$mcp_client_user_agent`, `$mcp_vendor_client` | The [harness breakdown](/docs/mcp-analytics/events#how-the-harness-label-is-resolved). Without them every call reads "Other". |
+| `$mcp_protocol_version` | Spec-revision adoption, and error rate broken down by revision. |
+
+The [event reference](/docs/mcp-analytics/events) documents every property and the other events you can send: `$mcp_tools_list` for advertised-but-never-called tools, `$mcp_initialize` for a `2025-11-25` handshake, and `$mcp_missing_capability` for gaps the agent reports.
+
+### Example: Elixir
+
+[`posthog`](/docs/libraries/elixir) captures any event with any properties, so a hand-rolled dispatcher needs no new dependency:
+
+```elixir
+defmodule MyServer.MCPAnalytics do
+  @server_name "my-elixir-server"
+  @server_version "1.0.0"
+
+  def tool_call(tool_name, prepared, result, duration_ms, req) do
+    PostHog.capture("$mcp_tool_call", %{
+      distinct_id: req.user_id,
+      "$session_id": req.session_id,
+      "$mcp_source": "posthog_mcp_analytics",
+      "$mcp_server_name": @server_name,
+      "$mcp_server_version": @server_version,
+      "$mcp_tool_name": tool_name,
+      "$mcp_parameters": redact(prepared.args),
+      "$mcp_response": redact(result),
+      "$mcp_duration_ms": duration_ms,
+      "$mcp_is_error": false,
+      "$mcp_intent": prepared.intent,
+      "$mcp_intent_source": "context_parameter",
+      "$mcp_protocol_version": req.protocol_version,
+      "$mcp_client_name": req.client_name,
+      "$mcp_client_user_agent": req.user_agent
+    })
+  end
+
+  def tool_error(tool_name, duration_ms, req, exception) do
+    PostHog.capture("$mcp_tool_call", %{
+      distinct_id: req.user_id,
+      "$session_id": req.session_id,
+      "$mcp_source": "posthog_mcp_analytics",
+      "$mcp_server_name": @server_name,
+      "$mcp_tool_name": tool_name,
+      "$mcp_duration_ms": duration_ms,
+      "$mcp_is_error": true,
+      "$mcp_error_type": "timeout",
+      "$mcp_error_message": Exception.message(exception)
+    })
+  end
+end
+```
+
+`PostHog.capture/2` reads `distinct_id` out of the properties map, so anonymous traffic can leave it out.
+
+### What you take on
+
+The wrapping SDKs do work that a raw capture call does not:
+
+- **Redaction and truncation.** `$mcp_parameters` and `$mcp_response` carry whatever your tools received and returned, including credentials an agent pasted into an argument. Strip them before you capture, and cap the size. Read [Privacy](/docs/mcp-analytics/privacy) for what the SDKs remove.
+- **Intent capture.** Add a required `context` string argument to each tool schema you advertise, remove it from the arguments before the tool runs, and send it as `$mcp_intent` with `$mcp_intent_source` set to `"context_parameter"`.
+- **Sessions.** Nothing derives `$session_id` for you. Use the transport session on `2025-11-25`, or the authenticated user id on a stateless server.
+- **Error tracking.** The `$exception` sibling event is not automatic. Report the failure through your language's [error tracking](/docs/error-tracking) integration if you want the stack trace grouped as an issue.
+- **Model capture.** Leave `$mcp_llm_model` alone. It is only trustworthy when an SDK owns the injected `llm_model` argument.
+
+<CalloutBox icon="IconInfo" title="Tell us what you build" type="fyi">
+
+Events are the contract, and it is stable, so a hand-rolled server keeps working. If you would rather have a real SDK for your language, open an issue on the [PostHog library](/docs/libraries) you use and describe the server you run.
+
+</CalloutBox>
