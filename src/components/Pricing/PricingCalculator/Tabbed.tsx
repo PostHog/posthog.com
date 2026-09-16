@@ -156,10 +156,10 @@ export const TabContent = ({
                     setAddons,
                     addons,
                 }) ||
-                    (activeProduct.name == 'Experiments' ? (
+                    (activeProduct.billedWith ? (
                         <div className="bg-accent border border-primary rounded-md px-4 py-3 mb-2 text-sm">
-                            Experiments is currently bundled with Feature flags and share a free tier and volume
-                            pricing.
+                            {activeProduct.name} is currently bundled with {activeProduct.billedWith} and shares a free
+                            tier and volume pricing.
                         </div>
                     ) : activeProduct.addonSliders ? (
                         <StandaloneAddonsTab
