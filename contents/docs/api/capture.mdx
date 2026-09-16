@@ -553,6 +553,25 @@ print(response)
 
 </MultiLanguage>
 
+## Response
+
+A request that PostHog accepts returns `200` with a JSON body:
+
+```json
+{
+  "status": "Ok",
+  "events_accepted": 10
+}
+```
+
+- `status` is `"Ok"` when PostHog accepted the request.
+- `events_accepted` is how many events the request passed to ingestion. Compare it with the number of events you sent. A request that PostHog stopped before ingestion, for example one over a billing limit, returns `0`.
+- `quota_limited` is present only when a product is over its quota. It lists the limited products.
+
+Use `events_accepted` to confirm that a batch arrived complete. It counts the events that reached ingestion. It does not promise that every one of them is queryable, because a later stage can still drop an event. Those drops appear as [ingestion warnings](/docs/data/ingestion-warnings), not in this response.
+
+A request sent with the `beacon=1` query parameter returns `204` with no body.
+
 ## Invalid events
 
 We perform basic validation on the payload and project token (`token`), returning a failure response if an error is encountered.
