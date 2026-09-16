@@ -153,6 +153,7 @@ The Blitzscale team's mission is to enable all other PostHog small teams to be s
 
 - They will make sure you know what our mission is and how you and your team contribute to that
 - They will make sure you know what our strategy is and how you and your team contribute to that
+- They will share context with you from outside of your team
 - they will be responsible for balancing people and work amongst their teams - this also involves hiring and firing decisions, although they will rely on you to gather insights into these areas
 - They will reinforce good cultural behaviour & our values
 - They will help you prioritize when time or resources are limited aka unblock you 
