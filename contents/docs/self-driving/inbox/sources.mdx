@@ -120,6 +120,8 @@ New issues from connected project management and issue tracking tools. The inbox
 
 If you use GitHub Issues as a source, you can let PostHog reply on the issue. In the inbox **settings**, under **PR generation**, turn on **Comment back on GitHub issues**. When an issue contributes to a report and that report becomes ready, PostHog adds a comment to the issue with a link to the report. If an issue joins the report later, it gets a comment too.
 
+PostHog comments through the project's GitHub App connection, not through the data source. [Connect GitHub](/docs/libraries/github), and make sure the App can access each repository that has issues. A source that authenticates with a personal access token is not enough. Without the App connection, PostHog adds no comment and shows no error.
+
 This setting is off by default, because the comment is public. Everybody who watches the issue can see that PostHog started work. The comment tells readers that PostHog researched the issue, and asks them to check before they start a fix. It also gives a link to the report. The comment does not contain the title of the report or the research, and the report itself stays behind your project's access controls.
 
 PostHog does not comment on a closed issue, a locked issue, or a pull request.
