@@ -14,27 +14,27 @@ posthog = Posthog(
 events = [
   {
     "event": "batched_event_name",
-    "properties": {
-      "distinct_id": "user_id",
-      "timestamp": datetime.fromisoformat("2024-04-02T12:00:00")
-    }
+    "distinct_id": "user_id",
+    "timestamp": datetime.fromisoformat("2024-04-02T12:00:00+00:00"),
+    "properties": {"account_type": "pro"}
   },
   {
     "event": "batched_event_name",
-    "properties": {
-      "distinct_id": "used_id",
-      "timestamp": datetime.fromisoformat("2024-04-02T12:00:00")
-    }
+    "distinct_id": "user_id",
+    "timestamp": datetime.fromisoformat("2024-04-03T09:30:00+00:00"),
+    "properties": {"account_type": "pro"}
   }
 ]
 
 for event in events:
   posthog.capture(
-    distinct_id=event["properties"]["distinct_id"],
-    event=event["event"],
+    event["event"],
+    distinct_id=event["distinct_id"],
     properties=event["properties"],
-    timestamp=event["properties"]["timestamp"],
+    timestamp=event["timestamp"],
   )
+
+posthog.shutdown()
 ```
 
 
@@ -55,17 +55,25 @@ client.capture({
     event: "batched_event_name",
     distinctId: "user_id",
     properties: {},
-    timestamp: "2024-04-03T12:00:00Z"
+    timestamp: new Date("2024-04-03T12:00:00Z")
 })
 
 client.capture({
     event: "batched_event_name",
     distinctId: "user_id",
     properties: {},
-    timestamp: "2024-04-03T13:00:00Z"
+    timestamp: new Date("2024-04-03T13:00:00Z")
 })
 
 await client.shutdown() 
 ```
 
 </MultiLanguage>
+
+Three details decide whether a migration lands correctly:
+
+- **Pass `timestamp` as an argument, not as a property.** A `timestamp` key inside `properties` does not set the event time. It is stored as an ordinary event property, and the event keeps the time PostHog received it.
+- **Give the timestamp a time zone.** Both SDKs convert to UTC. A Python `datetime` with no `tzinfo` makes the SDK guess the zone. In Node, `timestamp` is a `Date`, so wrap the ISO 8601 string in `new Date(...)`.
+- **Shut the client down when the script ends.** Both SDKs queue events and send them from a background worker. Python registers an exit hook, but the hook only makes a short best-effort attempt, so queued events can be lost. Call `posthog.shutdown()` in Python, or `await client.shutdown()` in Node, and let it block.
+
+Neither SDK returns a result from the server. `capture()` queues the event and returns straight away, so a successful call means the event is queued, not that PostHog accepted it. To confirm that a migration landed, query the events after the import finishes.
