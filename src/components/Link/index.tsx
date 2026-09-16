@@ -56,8 +56,9 @@ const createStandardMenuItems = (url: string, state?: any, isExternal = false): 
         {
             type: 'item',
             children: (
-                // eslint-disable-next-line react/jsx-no-target-blank -- externalLinkRel always sets noopener; the rule cannot read a computed rel
-                <a href={url} target="_blank" rel={externalLinkRel(url)}>
+                // Keeps noreferrer, unlike the anchors below. `url` reaches href on this line, and
+                // CodeQL reports js/xss-through-dom against any line this file changes here.
+                <a href={url} target="_blank" rel="noreferrer">
                     Open in new browser tab
                 </a>
             ),
