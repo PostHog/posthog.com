@@ -16,7 +16,7 @@ import AlphaRelease from "../_snippets/alpha-release.mdx"
 
 <AlphaRelease />
 
-The AppSignal connector syncs the monitoring data of one AppSignal app into the PostHog Data Warehouse: exception and performance incidents, error and performance samples, deploy markers, log lines, metrics, and distributed traces. You can then join application health to how people use your product, and see the release or the slow action that a drop in usage follows.
+The AppSignal connector syncs the monitoring data of one AppSignal app into the PostHog Data Warehouse: incidents, error and performance samples, deploy markers and deploy stats, log lines, metrics, distributed traces, and per-action performance aggregates. You can then join application health to how people use your product, and see the release or the slow action that a drop in usage follows.
 
 ## Prerequisites
 
@@ -41,19 +41,15 @@ The app ID is part of the connection. If you change it, you must enter the token
 
 <SyncModes />
 
-These tables sync incrementally:
+The **Supported tables** section below shows the sync method for each table. In short:
 
-- `error_samples`, `performance_samples`, `log_lines`, `performance_traces`, and `trace_spans` are append-only. A sample, a log line, and a span never change after AppSignal records them.
-- `deploy_markers` and `metric_timeseries` merge rows on each sync instead of appending them. AppSignal keeps updating a marker until the next deploy, and the connector can re-read a metric bucket, so each row must merge onto its key.
+- Tables of records that never change after AppSignal writes them (samples, log lines, traces, spans) are append-only.
+- Tables of records that AppSignal keeps updating (deploy markers, metric buckets, deploy stats) merge on their key.
+- Incident tables are aggregates whose count, state, and last occurrence keep changing, and the GraphQL API that serves them cannot filter by time, so they are full refresh only. The small lookup tables (`apps`, `metric_names`) are full refresh too.
 
-The other tables are full refresh only:
+AppSignal does not report how much history your plan keeps, so the first sync of each metrics, tracing, and deploy-stats table starts from a fixed lookback (7 to 90 days, depending on the table) instead of asking for all of it. The other tables walk your full history, which AppSignal limits to your plan's retention period.
 
-- `exception_incidents` and `performance_incidents` are aggregates whose occurrence count, state, and last occurrence keep changing. The GraphQL API that serves them cannot filter by time, so the connector re-reads the list.
-- `apps` and `metric_names` are small lookup tables.
-
-The first sync of `metric_timeseries` reaches back 30 days, and the first sync of `performance_traces` and `trace_spans` reaches back 7 days. AppSignal does not report how much history your plan keeps, so the connector uses these bounds instead of asking for all of it. The remaining tables walk your full history, which AppSignal limits to your plan's retention period.
-
-Spans cost one AppSignal request per trace, so `trace_spans` syncs at most 5,000 traces per run. If your app records more than that, run the sync again and it continues from where it stopped.
+Tables that cost one AppSignal request per item (`trace_spans`, `slow_event_actions`, `deploy_stats`) are capped per run. If your app has more items than the cap, run the sync again and it continues from where it stopped.
 
 ## Configuration
 
@@ -70,7 +66,7 @@ Spans cost one AppSignal request per trace, so `trace_spans` syncs at most 5,000
 - If you see a **401** error, the token is invalid or was revoked. Copy a new token from your [personal settings](https://appsignal.com/users/edit), then reconnect.
 - If you see a **403** error, the AppSignal user who owns the token cannot read this app. Check the token and the app ID, then reconnect.
 - If you see a **404** error, or **AppSignal app not found**, the app ID is wrong. Copy the identifier from your app's AppSignal URL.
-- If `log_lines` stays empty, the app has no log sources. Check that your app sends logs to AppSignal log management.
+- If `log_lines` stays empty, the app has no log sources. Check that your app sends its logs to AppSignal.
 - If a metric is missing from `metric_timeseries`, check that `metric_names` lists it. The connector syncs gauge, counter, and measurement metrics, and skips a metric of any other type.
 - If `trace_spans` lags behind `performance_traces`, the sync reached the per-run trace limit. Increase the sync frequency until the table catches up.
 
