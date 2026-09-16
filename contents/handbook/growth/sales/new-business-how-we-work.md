@@ -102,7 +102,7 @@ These standards are likely to change as the TAE role evolves. Any changes will b
 
 - Quota is based on the number of sales qualified opportunities you generate - basically when an account is moved into the initial Opportunity stage in SFDC.
 - In your first 3 months, you'll be paid 100% OTE fixed. You can find more info on how quotas work in your ramp period [in the new hire FAQ](/handbook/growth/sales/new-hire-onboarding#new-hire-frequently-asked-questions)
-- After your ramp period, the 30% commission portion of your OTE will be based on 3 sales-qualified opportunities per month per representative, or 9 sales-qualified opportunities per quarter per representative. 
+- After your ramp period, the 30% commission portion of your OTE will be based on 9 sales-qualified opportunities per quarter per representative, which breaks down to 3 sales-qualified opportunities per month per representative. 
 - Your quota is set for the year and then divided by 4 - this means you don't have to cram meetings into the end of a quarter.
 - Commission is _uncapped_ and paid out on a sliding scale based on the % of your quota you hit. Hit 100% quota, get 100% of commission. 0% for 0%. And 200% for 200%.
 - Commission is paid out quarterly.
