@@ -16,27 +16,6 @@ For non-urgent requests we should capture them in Customer analytics using the p
 
 We track feature requests in PostHog itself, on the Feature requests tab of <PrivateLink url="https://us.posthog.com/project/2/customer_analytics/feature-requests">Customer analytics</PrivateLink>. This replaces the custom object we used to keep in Vitally, so don't add new requests there.
 
-Each request holds:
-
-- A **title** and a Markdown **description** - the customer-facing statement of the ask.
-- One or more **accounts** - every customer who has asked for it.
-- One or more **product areas** - how a request gets routed to a team, for example Session replay, Experiments, or Data warehouse & sources.
-- A **status** - `Requested`, `Planned`, `Completed`, `Won't fix`, or `Duplicate`.
-- An optional **priority** - High, Medium, or Low.
-- **Evidence** for each account.
-
-## Evidence
-
-Evidence is the biggest change from how we worked in Vitally. Context attaches to each account instead of to one shared text field, so you can still tell who asked for what, and when.
-
-Each evidence item takes an internal summary, a customer quote, the name of the source (Slack, a support ticket, a call), a link to that source, the date the customer asked, and optional screenshots. Add the contact information of the person asking for it, if it's not a Slack thread.
-
-## Adding a customer to an existing request
-
-1. Search the list first. There are hundreds of open requests, and a duplicate splits the evidence for a single ask.
-2. Open the request and add the account to it.
-3. Add an evidence item for that account with the quote, the source, and the link.
-
 ## Creating a new request
 
 If you've checked the list and can't see an existing request then you should create a new one. You can do this in two ways:
@@ -44,7 +23,38 @@ If you've checked the list and can't see an existing request then you should cre
 1. From the Feature requests tab, using the button to create a new request.
 2. From an account, where you can also see the requests that account is already linked to.
 
-The title and the description are customer-facing, so write them for a product team that has none of your context. Leave the status at `Requested` unless a team is already working on it, and only set a priority when you have a reason to.
+The **New feature request** form has these fields:
+
+- **Title** - what the customer needs, in one line. This is the only required field, and it's customer-facing, so write it for a product team that has none of your context.
+- **Description** (optional) - the request in the customer's language. It takes Markdown. Add the workaround they're using today and why it isn't enough, if you know.
+- **Account** - search by account name or external key. A request starts with one account, and you add the others as they ask for the same thing.
+- **Product areas** - one or more. This is how a request gets routed to a team, so it replaces filtering by team in the old view. Pick more than one when an ask spans products, for example Session replay and Error tracking.
+- **Evidence** (optional) - the context for this account's ask. Fill it in, even though it's optional. A request with no evidence is much harder for a product team to act on.
+
+There's no status or priority field on the form. New requests start as `Requested`, and you set the status and the priority on the request itself once a team picks it up.
+
+## Evidence
+
+Evidence is the biggest change from how we worked in Vitally. Context attaches to each account instead of to one shared text field, so you can still tell who asked for what, and when.
+
+Each evidence item has:
+
+- **Summary** - what this account needs, in your words. Keep it internal-facing.
+- **Customer quote** - the customer's own words. Paste them rather than paraphrasing, because a direct quote carries the most weight with a product team.
+- **Source** - where the request came from, for example a customer conversation or a support ticket.
+- **Request date** - when the customer asked. This is what tells a team whether an ask is fresh or has been sitting for two quarters.
+- **Source URL** - a link to the Slack thread, ticket, or call. Add the contact information of the person asking for it, if it's not a Slack thread.
+- **Images** - screenshots, when the ask is easier to show than to describe.
+
+## Adding a customer to an existing request
+
+1. Search the list first. There are hundreds of open requests, and a duplicate splits the evidence for a single ask.
+2. Open the request and add the account to it.
+3. Add an evidence item for that account with the summary, quote, source, and date.
+
+## Statuses and duplicates
+
+A request has a status of `Requested`, `Planned`, `Completed`, `Won't fix`, or `Duplicate`, and an optional priority of High, Medium, or Low.
 
 If a request turns out to be a duplicate, set its status to `Duplicate` and move the evidence onto the request you're keeping, rather than deleting it. You can archive a request you no longer want in the list and restore it later, and both edits and status changes keep a history.
 
