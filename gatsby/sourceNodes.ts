@@ -1064,7 +1064,7 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
                         id: createNodeId(`posthog-pipeline-${pipeline.id}`),
                         internal: {
                             type: 'PostHogPipeline',
-                            contentDigest: createContentDigest({ pipeline }),
+                            contentDigest: createContentDigest({ pipeline, slug }),
                         },
                         pipelineId: pipeline.id,
                         slug,
