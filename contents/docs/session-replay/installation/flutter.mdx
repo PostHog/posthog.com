@@ -4,12 +4,39 @@ platformLogo: flutter
 showStepsToc: true
 ---
 
-<!--
-This page imports shared onboarding content from the main PostHog repo.
-Source: https://github.com/PostHog/posthog/blob/master/docs/onboarding/session-replay/flutter.tsx
-See the docs runbook for more info: https://posthog.com/handbook/wizard-and-docs/onboarding-docs
--->
-
 import { SRFlutterInstallationWrapper } from './_snippets/sr-installation-wrapper.tsx'
 
 <SRFlutterInstallationWrapper />
+
+## Control recording programmatically
+
+Once session replay is set up, you can start, stop, and check the status of recordings at runtime — useful for recording only specific flows or respecting user consent.
+
+### Start recording
+
+```dart
+// Resume the current session (default)
+await Posthog().startSessionRecording();
+
+// Start a new session from scratch
+await Posthog().stopSessionRecording(); // stop first
+await Posthog().startSessionRecording(resumeCurrent: false);
+```
+
+Set `resumeCurrent` to `true` (the default) to continue recording the existing session. Set it to `false` to begin a fresh session — call `stopSessionRecording()` first if you want a clean break.
+
+### Stop recording
+
+```dart
+await Posthog().stopSessionRecording();
+```
+
+Has no effect if PostHog is not enabled or no recording is in progress.
+
+### Check if recording is active
+
+```dart
+final isActive = await Posthog().isSessionReplayActive();
+```
+
+Returns `false` when session replay is inactive or not supported on the current platform.
