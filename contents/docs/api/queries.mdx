@@ -231,7 +231,153 @@ The `kind` property in the `query` parameter can be one of the following values.
 - `RetentionQuery`: User retention analysis
 - `PathsQuery`: User journey path analysis
 
-Beyond `HogQLQuery`, these are mostly used to power PostHog internally and are not useful for you, but you can see the [frontend query schema](https://github.com/PostHog/posthog/blob/master/frontend/src/queries/schema/schema-general.ts) for a complete list and more details.
+`HogQLQuery` is the most flexible type, and it is the right choice for most use cases. The other types run the same calculations that PostHog insights use. Two of them are hard to reproduce in SQL, so they are documented below: [`FunnelsQuery`](#funnel-queries) and [`RetentionQuery`](#retention-queries).
+
+For the complete list of types, and for every optional field, see the [frontend query schema](https://github.com/PostHog/posthog/blob/master/frontend/src/queries/schema/schema-general.ts).
+
+### Funnel queries
+
+A `FunnelsQuery` returns the number of users who completed each step of an ordered sequence.
+
+The `series` array is required. Each entry is one step, in order. Use `EventsNode` with an `event` name, or `ActionsNode` with a numeric action `id`.
+
+```bash
+curl \
+  -H 'Content-Type: application/json' \
+  -H "Authorization: Bearer $POSTHOG_PERSONAL_API_KEY" \
+  <ph_app_host>/api/projects/:project_id/query/ \
+  -d '{
+        "query": {
+          "kind": "FunnelsQuery",
+          "dateRange": { "date_from": "-7d" },
+          "series": [
+            { "kind": "EventsNode", "event": "signed_up" },
+            { "kind": "EventsNode", "event": "project_created" },
+            { "kind": "EventsNode", "event": "subscription_started" }
+          ],
+          "funnelsFilter": {
+            "funnelWindowInterval": 14,
+            "funnelWindowIntervalUnit": "day"
+          }
+        },
+        "name": "signup to subscription funnel"
+      }'
+```
+
+The optional `funnelsFilter` object controls how the funnel is calculated:
+
+- `funnelVizType`: `steps` (default), `time_to_convert`, or `trends`. This changes the shape of `results`.
+- `funnelOrderType`: `ordered` (default), `strict`, or `unordered`.
+- `funnelWindowInterval`: how long a user has to complete the funnel. Defaults to `14`.
+- `funnelWindowIntervalUnit`: `second`, `minute`, `hour`, `day` (default), `week`, or `month`.
+- `breakdownAttributionType`: `first_touch` (default), `last_touch`, `all_events`, or `step`.
+
+You can also set `dateRange`, `properties`, `filterTestAccounts`, and `breakdownFilter`, which work the same way as in other insight queries.
+
+#### Funnel response
+
+For the default `steps` visualization, `results` is an array with one object per step, in the same order as `series`:
+
+```json
+{
+  "results": [
+    {
+      "action_id": "signed_up",
+      "name": "signed_up",
+      "custom_name": null,
+      "order": 0,
+      "type": "events",
+      "count": 1000,
+      "people": [],
+      "average_conversion_time": null,
+      "median_conversion_time": null
+    },
+    {
+      "action_id": "project_created",
+      "name": "project_created",
+      "custom_name": null,
+      "order": 1,
+      "type": "events",
+      "count": 640,
+      "people": [],
+      "average_conversion_time": 3600.5,
+      "median_conversion_time": 1800.0
+    }
+  ]
+}
+```
+
+- `count` is the number of users who reached that step.
+- `average_conversion_time` and `median_conversion_time` are in seconds, and measure the time from the previous step. They are `null` on the first step.
+- `people` is always empty on this endpoint. The response gives counts, not user lists.
+
+**Conversion rates and drop-off are not in the response. Calculate them from `count`:**
+
+- Conversion from the previous step: `results[i].count / results[i - 1].count`
+- Conversion from the first step: `results[i].count / results[0].count`
+- Drop-off at a step: `results[i - 1].count - results[i].count`
+
+If you set a `breakdownFilter`, `results` becomes an array of arrays. There is one inner array per breakdown value, and each step gains a `breakdown` and a `breakdown_value` field.
+
+### Retention queries
+
+A `RetentionQuery` returns how many users from each cohort came back in later intervals.
+
+The `retentionFilter` object is required:
+
+```bash
+curl \
+  -H 'Content-Type: application/json' \
+  -H "Authorization: Bearer $POSTHOG_PERSONAL_API_KEY" \
+  <ph_app_host>/api/projects/:project_id/query/ \
+  -d '{
+        "query": {
+          "kind": "RetentionQuery",
+          "dateRange": { "date_from": "-4w" },
+          "retentionFilter": {
+            "targetEntity": { "id": "signed_up", "type": "events" },
+            "returningEntity": { "id": "project_created", "type": "events" },
+            "retentionType": "retention_first_time",
+            "period": "Week",
+            "totalIntervals": 5
+          }
+        },
+        "name": "weekly signup retention"
+      }'
+```
+
+- `targetEntity`: the event or action that puts a user into a cohort. Use `{ "id": "<event name>", "type": "events" }`, or `{ "id": <action id>, "type": "actions" }`.
+- `returningEntity`: the event or action that counts as a return. It uses the same shape.
+- `retentionType`: `retention_recurring` counts a user for every interval in which they return. `retention_first_time` starts the cohort at the user's first matching occurrence. `retention_first_ever_occurrence` starts it at the user's first ever occurrence of the event.
+- `period`: `Hour`, `Day` (default), `Week`, or `Month`.
+- `totalIntervals`: how many intervals to return, including interval 0. Defaults to `8`.
+
+#### Retention response
+
+`results` holds one object per cohort:
+
+```json
+{
+  "results": [
+    {
+      "date": "2026-08-17T00:00:00Z",
+      "label": "Week 0",
+      "breakdown_value": null,
+      "values": [
+        { "count": 210, "label": "Week 0" },
+        { "count": 96, "label": "Week 1" },
+        { "count": 71, "label": "Week 2" }
+      ]
+    }
+  ]
+}
+```
+
+- `date` is the start of the cohort's interval, and `label` names it.
+- `values[n].count` is the number of users from that cohort who returned in interval `n`.
+- `values[0].count` is the cohort size.
+
+**Retention percentages are not in the response. Calculate them from `count`:** `values[n].count / values[0].count * 100`.
 
 ## Response structure
 

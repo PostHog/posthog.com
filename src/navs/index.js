@@ -1168,6 +1168,10 @@ export const handbookSidebar = [
                         url: '/handbook/marketing/positioning/session-replay',
                     },
                     {
+                        name: 'Replay vision',
+                        url: '/handbook/marketing/positioning/replay-vision',
+                    },
+                    {
                         name: 'Feature flags',
                         url: '/handbook/marketing/positioning/feature-flags',
                     },
@@ -1294,6 +1298,10 @@ export const handbookSidebar = [
             {
                 name: 'Metric conventions',
                 url: '/handbook/growth/revops/metric-conventions',
+            },
+            {
+                name: 'Org definitions',
+                url: '/handbook/growth/revops/org-definitions',
             },
             {
                 name: 'Revenue adjustments',
@@ -2992,6 +3000,10 @@ export const docsMenu = {
                         {
                             name: 'Docusaurus',
                             url: '/docs/libraries/docusaurus',
+                        },
+                        {
+                            name: 'Fastify',
+                            url: '/docs/libraries/fastify',
                         },
                         {
                             name: 'Flask',
@@ -5104,8 +5116,14 @@ export const docsMenu = {
                     color: 'yellow',
                 },
                 {
-                    name: 'Digests and alerts',
-                    url: '/docs/replay-vision/actions',
+                    name: 'Scouts',
+                    url: '/docs/replay-vision/scouts',
+                    icon: 'IconBinoculars',
+                    color: 'yellow',
+                },
+                {
+                    name: 'Alerts',
+                    url: '/docs/replay-vision/alerts',
                     icon: 'IconBell',
                     color: 'yellow',
                 },

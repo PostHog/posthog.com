@@ -1009,6 +1009,7 @@ const LeftSidebar = ({
         return () => vp.removeEventListener('scroll', onScroll)
     }, [sidebarScrollKey])
     const hasTabs = !!menuTabs && menuTabs.length > 0
+    const showTabStrip = !!menuTabs && menuTabs.length > 1
     const initialTab = hasTabs ? menuTabs!.find((t) => t.default)?.value || menuTabs![0].value : ''
     const [activeTab, setActiveTab] = useState(initialTab)
     const activeMenu = hasTabs ? menuTabs!.find((t) => t.value === activeTab)?.menu : null
@@ -1233,7 +1234,7 @@ const LeftSidebar = ({
                         - Otherwise (collapsed OR hover-expanded): vertical
                           icon-only column. We deliberately don't reflow on
                           hover — tabs only rotate axes when the user pins. */}
-                        {hasTabs && !hasActiveSearch && (
+                        {showTabStrip && !hasActiveSearch && (
                             // Single container across all states (pinned, hover,
                             // collapsed) so SidebarTabButton instances stay
                             // mounted — required for the icon FLIP animation to
