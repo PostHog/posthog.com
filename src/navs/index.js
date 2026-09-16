@@ -3263,6 +3263,10 @@ export const docsMenu = {
                         {
                             name: 'Realtime cohorts',
                             url: '/docs/data/realtime-cohorts',
+                            badge: {
+                                title: 'Beta',
+                                className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
+                            },
                         },
                         {
                             name: 'Sessions',

@@ -12,7 +12,7 @@ Realtime cohorts are rolling out gradually and aren't switched on in most projec
 
 ## What is a realtime cohort?
 
-A [dynamic cohort](/docs/data/cohorts#dynamic-cohorts) is a list of people that PostHog rebuilds for you on a schedule. A **realtime cohort** is a dynamic cohort that PostHog also keeps up to date as events arrive, instead of only at the next rebuild.
+A [dynamic cohort](/docs/data/cohorts#dynamic-cohorts) is a list of people that PostHog rebuilds for you on a schedule. A **realtime cohort** is a dynamic cohort that PostHog also keeps up to date as events arrive, instead of waiting for the next rebuild.
 
 It solves one problem. You can target a [feature flag](/docs/feature-flags) at a cohort built from events.
 
@@ -25,6 +25,8 @@ A realtime cohort answers the question in advance. PostHog keeps a record of who
 Realtime cohorts change feature flag targeting. [Experiments](/docs/experiments) and [surveys](/docs/surveys) pick their audience through feature flags, so they can target realtime cohorts too.
 
 Everything else is unchanged. Insights, dashboards, and the person list and count on the cohort page still come from the standard cohort calculation, on its [normal schedule](/docs/data/cohorts#how-often-are-dynamic-cohorts-updated).
+
+Realtime cohorts are evaluated on PostHog's servers. A server-side SDK can't evaluate a flag that targets one [locally](/docs/feature-flags/local-evaluation#dynamic-cohort-restrictions). Checks of that flag fall back to a `/flags` request, and return no value if you have told the SDK to evaluate only locally.
 
 ## Which cohorts qualify
 
@@ -42,7 +44,7 @@ A cohort qualifies when every one of its criteria is one of these:
 
 You can narrow the event criteria by event property, such as completed `purchase` where `plan` equals "pro".
 
-Three criteria negate: "Did not complete event", "Do not have the property", and "Not in cohort". Each one has to sit next to at least one criterion that isn't negated, joined with "all" rather than "any". A cohort that breaks this rule still saves, but PostHog never builds its membership record, so a flag that targets it matches nobody.
+Three criteria negate: "Did not complete event", "Do not have the property", and "Not in cohort". Each one needs a criterion that isn't negated to bound it, either in the same group or in another group joined with "all". The cohort builder refuses to save a cohort that leaves a negation unbounded, or that puts one under "any", with the error "'Did not complete event' is a negative cohort criteria. Negation criteria can only be used when matching all criteria (AND), and must be accompanied by at least one positive matching criteria." Create the same cohort through the API and the save goes through, `cohort_type` still reads `"realtime"`, but PostHog never builds its membership record, so a flag that targets it matches nobody.
 
 A cohort whose only criterion is a reference to another cohort never becomes usable in a flag. Give it at least one person property or event criterion as well.
 
@@ -51,7 +53,7 @@ A cohort whose only criterion is a reference to another cohort never becomes usa
 A single criterion from this list makes the whole cohort fall back to the standard calculation, and a feature flag can't use it:
 
 - Sequences. Both "Completed a sequence of events" and "Did not complete a sequence of events".
-- Lifecycle criteria. All four options under the "Lifecycle" heading in the cohort builder: completed an event for the first time, completed an event regularly, stopped doing an event, and started doing an event again.
+- Lifecycle criteria. Every option under the "Lifecycle" heading in the cohort builder: completed an event for the first time, completed an event regularly, stopped doing an event, and started doing an event again.
 - [Actions](/docs/data/actions). Event criteria have to name an event. Pointing the same criterion at an action isn't supported yet.
 - The "First seen" person criterion, which reads when PostHog first saw the person rather than a [person property](/docs/product-analytics/person-properties).
 - "Filter out internal and test users" turned on for the cohort.
@@ -62,7 +64,7 @@ A single criterion from this list makes the whole cohort fall back to the standa
 ## Using a realtime cohort in a feature flag
 
 1. Create the cohort, or edit its criteria, as you normally would.
-2. Wait while PostHog works through the cohort's history. The errors below call this the backfill. It takes 20 minutes at the earliest, and longer for cohorts that look a long way back or match a lot of events.
+2. Wait while PostHog works through the cohort's history. The errors below call this the backfill. However small the cohort, it takes about 20 minutes at the earliest, and longer for cohorts that look a long way back or match a lot of events.
 3. Add the cohort to a feature flag [release condition](/docs/feature-flags/creating-feature-flags#release-conditions).
 
 If the flag won't save, the error tells you which step you're on:
