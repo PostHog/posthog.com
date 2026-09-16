@@ -23,12 +23,16 @@ function useAssignedVariant(): HeroCopyVariant {
     const [variant, setVariant] = useState<HeroCopyVariant>()
 
     useEffect(() => {
-        if (!posthog?.onFeatureFlags || variant) return
+        // The snippet stub carries `onFeatureFlags` but not `getFeatureFlag`, and a callback that the
+        // stub queues keeps the stub after `array.js` replaces it. Such a callback would paint the
+        // assigned copy and record no exposure, so wait for the real SDK. `RenderInClient` renders
+        // again when it gets flags, and this effect then subscribes on the real SDK.
+        if (!posthog?.onFeatureFlags || typeof posthog.getFeatureFlag !== 'function' || variant) return
         return posthog.onFeatureFlags((_flags: string[], variants?: Record<string, string | boolean>) => {
             const value = variants?.[HERO_COPY_FLAG]
             const assigned = typeof value === 'string' ? resolveHeroCopyVariant(value) : null
             if (!assigned) return
-            posthog.getFeatureFlag?.(HERO_COPY_FLAG)
+            posthog.getFeatureFlag(HERO_COPY_FLAG)
             setVariant(assigned)
         })
     }, [posthog, variant])
