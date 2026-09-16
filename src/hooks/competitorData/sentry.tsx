@@ -6,6 +6,42 @@ export const sentry = {
         comparisonArticle: '/blog/posthog-vs-sentry',
     },
     products: {
+        traces: {
+            available: true,
+            tracing: {
+                features: {
+                    distributed_trace_waterfall: true,
+                    service_dependency_map: false,
+                    code_level_profiling: true,
+                    sampling_retention_controls: 'Head sampling only',
+                },
+            },
+            standards_and_setup: {
+                features: {
+                    native_open_telemetry_ingest: 'Beta',
+                    no_proprietary_sdk_required: 'Partial',
+                    instrumentation: 'SDK',
+                },
+            },
+            one_platform: {
+                features: {
+                    signals_alongside_traces: true,
+                },
+            },
+            ai_and_self_driving: {
+                features: {
+                    ai_opens_code_fix_pr: 'Beta',
+                    fix_and_open_pr_from_slack: 'Beta',
+                },
+            },
+            pricing: {
+                features: {
+                    pricing_model: 'Per span',
+                    free_tier: true,
+                    open_source: 'Source-available (FSL)',
+                },
+            },
+        },
         error_tracking: {
             available: true,
             pricing: {

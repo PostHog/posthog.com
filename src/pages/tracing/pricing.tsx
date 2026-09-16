@@ -6,7 +6,7 @@ export default function TracesPricing(): JSX.Element {
         <ProductReaderView
             productHandle="traces"
             surface="pricing"
-            seoOverrides={{ title: 'Traces pricing – PostHog' }}
+            seoOverrides={{ title: 'Tracing pricing – PostHog' }}
         />
     )
 }
