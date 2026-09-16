@@ -286,24 +286,18 @@ defmodule MyServer.MCPAnalytics do
       "$mcp_client_user_agent": req.user_agent
     })
   end
-
-  def tool_error(tool_name, duration_ms, req, exception) do
-    PostHog.capture("$mcp_tool_call", %{
-      distinct_id: req.user_id,
-      "$session_id": req.session_id,
-      "$mcp_source": "posthog_mcp_analytics",
-      "$mcp_server_name": @server_name,
-      "$mcp_tool_name": tool_name,
-      "$mcp_duration_ms": duration_ms,
-      "$mcp_is_error": true,
-      "$mcp_error_type": "timeout",
-      "$mcp_error_message": Exception.message(exception)
-    })
-  end
 end
 ```
 
 `PostHog.capture/2` reads `distinct_id` out of the properties map, so anonymous traffic can leave it out.
+
+A failed call is the same event with three keys changed. `$mcp_error_type` is your own low-cardinality label, so the failures view groups by cause:
+
+```elixir
+"$mcp_is_error": true,
+"$mcp_error_type": "timeout",
+"$mcp_error_message": Exception.message(exception)
+```
 
 ### What you take on
 
@@ -317,6 +311,6 @@ The wrapping SDKs do work that a raw capture call does not:
 
 <CalloutBox icon="IconInfo" title="Tell us what you build" type="fyi">
 
-Events are the contract, and it is stable, so a hand-rolled server keeps working. If you would rather have a real SDK for your language, open an issue on the [PostHog library](/docs/libraries) you use and describe the server you run.
+The events are the contract and they do not churn, so a hand-rolled server keeps working. If you would rather have a real SDK, open an issue on the [PostHog library](/docs/libraries) you use and describe the server you run.
 
 </CalloutBox>
