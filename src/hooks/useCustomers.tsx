@@ -204,7 +204,7 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
     },
     airbus: {
         name: 'Airbus',
-        toolsUsed: [], // TODO: Add toolsUsed
+        toolsUsed: ['product_analytics', 'web_analytics', 'surveys', 'error_tracking', 'logs'],
         // industries: [], // TODO: Add industries
         // users: [], // TODO: Add users
         notes: 'They make airplanes',
@@ -243,7 +243,6 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
         toolsUsed: [
             'web_analytics',
             'product_analytics',
-            'marketing_analytics',
             'feature_flags',
             'experiments',
             'error_tracking',
@@ -388,7 +387,7 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
     },
     convex: {
         name: 'Convex',
-        toolsUsed: [],
+        toolsUsed: ['product_analytics', 'web_analytics', 'session_replay', 'feature_flags'],
         industries: ['SaaS'],
         users: [],
         notes: 'Backend web app platform',
@@ -552,7 +551,7 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
     },
     fireworksai: {
         name: 'Fireworks AI',
-        toolsUsed: [],
+        toolsUsed: ['product_analytics', 'web_analytics', 'session_replay', 'data_warehouse'],
         industries: ['AI'],
         notes: 'AI inference platform',
         logo: FireworksAILogo,
@@ -727,7 +726,7 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
     },
     hasura: {
         name: 'Hasura',
-        toolsUsed: ['funnels', 'session_replay'],
+        toolsUsed: ['product_analytics', 'session_replay'],
         industries: ['Devtool'],
         users: ['Engineering', 'User Experience', 'Marketing'],
         notes: 'Open source GraphQL engine',
@@ -760,7 +759,7 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
     },
     heygen: {
         name: 'Heygen',
-        toolsUsed: [], // TODO: Add toolsUsed
+        toolsUsed: ['product_analytics', 'session_replay', 'feature_flags', 'experiments', 'surveys'],
         // industries: [], // TODO: Add industries
         // users: [], // TODO: Add users
         notes: 'AI video generator',
@@ -826,7 +825,7 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
     },
     'mention-me': {
         name: 'Mention Me',
-        toolsUsed: ['funnels', 'session_replay'],
+        toolsUsed: ['product_analytics', 'session_replay'],
         industries: ['Marketing platform'],
         users: ['Product', 'Engineering', 'User Experience'],
         notes: 'Marketing referral campaigns',
@@ -859,7 +858,7 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
     },
     mintlify: {
         name: 'Mintlify',
-        toolsUsed: ['session_replay', 'api'],
+        toolsUsed: ['product_analytics', 'session_replay'],
         industries: ['SaaS', 'Devtool'],
         users: ['Leadership', 'Engineering', 'Product'],
         notes: 'Product and technical docs',
@@ -881,7 +880,7 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
     },
     mistralai: {
         name: 'Mistral AI',
-        toolsUsed: [], // TODO: Add toolsUsed
+        toolsUsed: ['feature_flags'],
         // industries: [], // TODO: Add industries
         // users: [], // TODO: Add users
         notes: 'Open source LLMs',
@@ -891,7 +890,7 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
     },
     nationaldesignstudio: {
         name: 'National Design Studio',
-        toolsUsed: [], // TODO: Add toolsUsed
+        toolsUsed: ['product_analytics'],
         // industries: [], // TODO: Add industries
         // users: [], // TODO: Add users
         notes: 'Design studio of the US Government',
@@ -1003,7 +1002,7 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
     },
     pry: {
         name: 'Pry',
-        toolsUsed: ['product_analytics', 'funnels', 'session_replay', 'heatmaps'],
+        toolsUsed: ['product_analytics', 'session_replay'],
         industries: ['Financial planning software'],
         users: ['Leadership', 'Product', 'Engineering'],
         notes: 'Financial planning for SMBs, acquired by Brex',
@@ -1101,7 +1100,7 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
             'session_replay',
             'surveys',
             'ai_observability',
-            'warehouse_sources',
+            'data_warehouse',
         ],
         industries: ['Ad Tech', 'Hospitality', 'Digital Signage'],
         users: ['Engineering'],
@@ -1127,7 +1126,7 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
     },
     raycast: {
         name: 'Raycast',
-        toolsUsed: [], // TODO: Add toolsUsed
+        toolsUsed: ['product_analytics', 'feature_flags', 'data_warehouse', 'posthog_ai'],
         // industries: [], // TODO: Add industries
         // users: [], // TODO: Add users
         notes: 'The MacOS Spotlight that Apple should have built',
@@ -1163,7 +1162,7 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
     },
     railway: {
         name: 'Railway',
-        toolsUsed: [],
+        toolsUsed: ['product_analytics', 'session_replay', 'cdp', 'data_warehouse'],
         industries: ['Devtool'],
         notes: 'Cloud infrastructure platform',
         logo: RailwayLogo,
@@ -1246,7 +1245,7 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
     },
     speakeasy: {
         name: 'Speakeasy',
-        toolsUsed: ['feature_flags', 'product_analytics', 'dashboards'],
+        toolsUsed: ['feature_flags', 'product_analytics'],
         industries: ['Devtool'],
         users: ['Product', 'Engineering', 'Growth', 'Developer Relations'],
         notes: 'API generator',
@@ -1317,7 +1316,7 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
     },
     suped: {
         name: 'Suped',
-        toolsUsed: ['workflows', 'product_analytics', 'session_replay'],
+        toolsUsed: ['workflows_emails', 'product_analytics', 'session_replay'],
         industries: ['SaaS'],
         users: ['Leadership', 'Product', 'Engineering'],
         notes: 'Email authentication and deliverability platform',
@@ -1343,7 +1342,7 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
     },
     startengine: {
         name: 'StartEngine',
-        toolsUsed: [], // TODO: Add toolsUsed
+        toolsUsed: ['product_analytics', 'session_replay', 'feature_flags', 'error_tracking', 'ai_observability'],
         // industries: [], // TODO: Add industries
         // users: [], // TODO: Add users
         notes: 'Crowdfunding for startups',
@@ -1353,7 +1352,7 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
     },
     trust: {
         name: 'Trust',
-        toolsUsed: [], // TODO: Add toolsUsed
+        toolsUsed: ['product_analytics', 'feature_flags'],
         // industries: [], // TODO: Add industries
         // users: [], // TODO: Add users
         notes: 'Crypto wallet',
@@ -1431,7 +1430,7 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
     },
     wittyworks: {
         name: 'Witty Works',
-        toolsUsed: ['dashboards'],
+        toolsUsed: ['product_analytics'],
         industries: ['SaaS', 'Browser extension'],
         users: ['Marketing', 'Engineering'],
         notes: 'AI writing assistant',
