@@ -246,6 +246,8 @@ const rank = (f: any): number => {
 const featureDetail = (f: any): string | null =>
     f.limit ? `${f.limit} ${pluralizeUnit(f.limit, f.unit)}`.trim() : f.note || null
 
+const enterpriseCopy = (text: string): string => text.replace(/\bSAML\b/g, 'OIDC and SAML')
+
 /**
  * One card per package: name, price, description, and the top benefits that package adds over
  * the one before it (the rest are one link away). Used on /enterprise; the packages page keeps
@@ -285,7 +287,7 @@ export function PlatformPackageCards(): JSX.Element {
                                     )
                                 )}
                             </div>
-                            <p className="mb-0 mt-2 text-sm text-secondary">{addon.description}</p>
+                            <p className="mb-0 mt-2 text-sm text-secondary">{enterpriseCopy(addon.description)}</p>
                             {previous && (
                                 <p className="mb-0 mt-4 text-sm font-semibold text-primary">
                                     Everything in {previous.name}, plus
@@ -298,7 +300,7 @@ export function PlatformPackageCards(): JSX.Element {
                                         <li key={f.key} className="flex gap-2">
                                             <IconCheck className="mt-0.5 size-4 shrink-0 text-green" />
                                             <span>
-                                                {f.name}
+                                                {enterpriseCopy(f.name)}
                                                 {detail && <span className="text-secondary"> · {detail}</span>}
                                             </span>
                                         </li>
