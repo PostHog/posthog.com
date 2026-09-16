@@ -314,6 +314,12 @@ export const JobListings = ({ embedded = false }: { embedded?: boolean }) => {
     }
 
     const [selectedJob, setSelectedJob] = useState(allJobs[0])
+
+    // Keep the URL on the selected role, so the address bar is always a shareable link to that job post
+    const selectJob = (job: any) => {
+        setSelectedJob(job)
+        window.history.replaceState(null, '', `${job.fields.slug}${queryString}`)
+    }
     const [processedHtml, setProcessedHtml] = useState('')
     const [websiteDescription, setWebsiteDescription] = useState('')
     const teamsField = selectedJob.parent.customFields.find((field: { title: string }) => field.title === 'Teams')
@@ -470,7 +476,7 @@ export const JobListings = ({ embedded = false }: { embedded?: boolean }) => {
                                 const job = (searchQuery.trim() ? filteredJobs : allJobs).find(
                                     (job: any) => job.fields.title === selectedJobTitle
                                 )
-                                setSelectedJob(job)
+                                selectJob(job)
                             }}
                         >
                             {searchQuery.trim() ? (
@@ -542,7 +548,7 @@ export const JobListings = ({ embedded = false }: { embedded?: boolean }) => {
                                                                 width="full"
                                                                 zoomHover="md"
                                                                 active={selectedJob.fields.title === job.fields.title}
-                                                                onClick={() => setSelectedJob(job)}
+                                                                onClick={() => selectJob(job)}
                                                             >
                                                                 <div className="flex flex-col w-full items-start">
                                                                     <span
@@ -608,7 +614,7 @@ export const JobListings = ({ embedded = false }: { embedded?: boolean }) => {
                                                                         ? ''
                                                                         : ''
                                                                 }`}
-                                                                onClick={() => setSelectedJob(job)}
+                                                                onClick={() => selectJob(job)}
                                                             >
                                                                 <div className="flex flex-col w-full items-start">
                                                                     <span
