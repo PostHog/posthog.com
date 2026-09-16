@@ -344,8 +344,10 @@ export default function Tabbed() {
     // `sort` is stable, so the `Infinity` bucket stays in `useProducts` order.
     const products = useMemo(() => {
         const navOrder = (product) => {
+            // A product billed with another (`sharesFreeTier`) sorts next to it.
             const index = BROWSE_TOOLS_HANDLES.indexOf(product.handle)
-            return index === -1 ? Infinity : index
+            const parentIndex = BROWSE_TOOLS_HANDLES.indexOf(product.sharesFreeTier)
+            return index !== -1 ? index : parentIndex !== -1 ? parentIndex : Infinity
         }
         return initialProducts
             .filter(
