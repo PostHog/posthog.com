@@ -60,7 +60,7 @@ Use AI to accelerate better solutions, not to retrace solved problems.
 
 LLMs are great for exploration, batch processing, transformation, search, and places where a fuzzy answer is useful. Human judgment matters when the answer is ambiguous, consequential, or depends on taste and direction.
 
-If we keep solving the same problem, we should eventually stop making a model figure it out from scratch. If the same input should give us the same answer, turn what we've learned into a query, validator, calculation, test, or another tool agents can call.
+If we keep solving the same problem, we should eventually stop making a model figure it out from scratch. If the same input should give us the same answer, turn what we've learned into a query, validator, calculation, test, skill or another tool agents can call.
 
 Ask:
 
