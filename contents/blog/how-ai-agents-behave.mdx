@@ -1,14 +1,14 @@
 ---
-title: "How AI agents behave: lessons from 30M MCP tool calls"
-date: 2026-08-21
+title: "How AI agents behave: lessons from 63M MCP tool calls"
+date: 2026-09-17
 author:
   - natalia-amorim
 category: General
 tags:
   - Studies
 seo:
-  metaTitle: "How AI agents behave: lessons from 30M MCP tool calls"
-  metaDescription: "We logged 30 million tool calls to our MCP server. Which agents call, what they ask for, which ones error least, and what it means if you're building one."
+  metaTitle: "How AI agents behave: lessons from 63M MCP tool calls"
+  metaDescription: "We logged 63 million tool calls to our MCP server. Which agents call, what they ask for, which ones error least, and what it means if you're building one."
 ---
 
 *(in my best David Attenborough voice):* And here, in its natural habitat, we observe a new species of user emerging. It has no face and needs no mouse, it does not doomscroll or rage-click. Instead, the AI agent approaches quietly through an [MCP server](/docs/model-context-protocol), reaching into the product to forage for data on behalf of its human. 
@@ -17,37 +17,37 @@ We're not describing a particularly mature ecosystem, but rather one that's bein
 
 And so, like any responsible naturalists, we began observing it (by which we mean digging through our data to see what these agents are up to).
 
-In the 90 days to August 19, agents made **30 million tool calls** to [PostHog's MCP](/mcp), coming from **100,000 people**.[^1]
+In the 90 days to September 16, agents made **63 million tool calls** to [PostHog's MCP](/mcp), coming from **130,000 people**.[^1]
 
 ## Who's calling and where are they calling from? 
 
 ![Who's calling](https://res.cloudinary.com/dmukukwp6/image/upload/mcp_01_whos_calling_16fe2121f7.png)
 
-Over the last 14 days, OpenAI's **Codex** is the dominant caller, making up **51% of every call.**
+Over the last 14 days, OpenAI's **Codex** is the dominant caller, making up **62% of every call.**
 
-Claude Code is a distant second at **21%**. Then it falls off a cliff: Cursor, Cowork, and Claude's Agent SDK cluster around 4% each, and everyone else fights over what's left.
+Claude Code is a distant second at **13%**. Then it falls off a cliff: Claude's Agent SDK, Cursor, and Cowork cluster between 3% and 4% each, and everyone else fights over what's left.
 
 About **6%** of calls come from clients we can't place at all: homegrown scripts, unnamed bots, and agents that don't introduce themselves (rude).
 
 ![Where are they calling from](https://res.cloudinary.com/dmukukwp6/image/upload/mcp_02_not_a_chat_window_0d3560922a.png)
 
-The agent poking at your product almost certainly isn't in a chat window; it's in someone's code editor or terminal, running commands. **Barely one call in twenty comes from a chat window.**
+The agent poking at your product almost certainly isn't in a chat window; it's in someone's code editor or terminal, running commands. **Barely one call in thirty comes from a chat window.**
 
 ## What do agents actually want?
 
-Turns out, not much (at least not in terms of variety). Thirty million calls, and it mostly comes down to two moves: **running a SQL query** (8.4 million calls – 28% of everything) and **reading the schema** to find out what's queryable in the first place (another 8%).
+Turns out, not much (at least not in terms of variety). Sixty-three million calls, and it mostly comes down to two moves: **running a SQL query** (15.6 million calls – 25% of everything) and **reading the schema** to find out what's queryable in the first place (another 7%).
 
-Between them, those two are more than a third of all traffic. 
+Between them, those two are just under a third of all traffic. 
 
 ![What agents actually ask for](https://res.cloudinary.com/dmukukwp6/image/upload/mcp_04_what_agents_ask_for_fb318e2b4a.png)
 
-Reading the schema tells an agent what's in your data (which events you capture, what properties they carry). But another **10%** of calls is the step before that: working out what the tools themselves are; pulling the catalogue, searching it, checking how a particular tool wants to be called. 
+Reading the schema tells an agent what's in your data (which events you capture, what properties they carry). But another **4.5%** of calls is the step before that: pulling up a skill, or searching the docs to work out how a particular tool wants to be called. 
 
-So **one in ten is an agent looking for something rather than doing something.**
+So **about one call in twenty is an agent looking something up rather than doing something.**
 
 A lot of our tools barely register, which is a little tragic, because [PostHog's MCP](/mcp) has hundreds of different functionalities available. 
 
-Give an agent one a single prompt and it could spin up an A/B test, wait for the results, and ship the winning variant. It could open an error, read the stack trace, jump to the exact replay of the user who hit it, and patch the code. It could point an AI at a week of sessions and ask questioms about it. The list goes on.
+Give an agent a single prompt and it could spin up an A/B test, wait for the results, and ship the winning variant. It could open an error, read the stack trace, jump to the exact replay of the user who hit it, and patch the code. It could point an AI at a week of sessions and ask questions about it. The list goes on.
 
 ![Iceberg](https://res.cloudinary.com/dmukukwp6/image/upload/mcp_03_iceberg_a636b1dd90.png)
 
@@ -61,15 +61,15 @@ Otherwise the best thing you built stays underwater, and nobody knows it's there
 
 Before anyone fights me: this measures how carefully each client forms its requests to our MCP, not how smart the agent is. A chattier, more exploratory agent will "error" more simply because it pokes at more things. 
 
-That said, **Codex is the standout**: it only trips about **once every 70 calls**. **Claude Code** sits at **5.7%** (about 1 in 18) and **Cowork** at **6.4%** (roughly 1 in 16).
+That said, **Codex is the standout**: it only trips about **once every 90 calls**. **Claude Code** sits at **5.7%** (about 1 in 17) and **Cowork** at **5.3%** (roughly 1 in 19).
 
 ![Error rates](https://res.cloudinary.com/dmukukwp6/image/upload/mcp_05_most_reliable_callers_ce2824ffb9.png)
 
 The more interesting question, though, isn't who errors, but what they get wrong. 
 
-Agents almost never fail at finding data: reading the schema errors just **1.9%** of the time, about 1 in 53. It's the querying that trips them up. The actual SQL call fails **4.9%** of the time, more than two and a half times as often.
+Agents almost never fail at finding data: reading the schema errors just **1.5%** of the time, about 1 in 66. It's the querying that trips them up. The actual SQL call fails **4.4%** of the time, nearly three times as often.
 
-That said, agents are remarkably good at recovering from their own mistakes; when an agent hits an error and the session keeps going, 71% of the time its very next move is to call the exact same tool again, and **77% of those retries work.**
+That said, agents mostly just try the door again: when an agent hits an error and the session keeps going, 52% of the time its very next move is to call the exact same tool again, and **67% of those retries work.**
 
 ![Failure and retry patterns](https://res.cloudinary.com/dmukukwp6/image/upload/mcp_10_how_agents_handle_failure_e1e4576d8f.png)
 
@@ -100,4 +100,4 @@ And it doesn't just watch. Your tool calls can serve as a signal source for [Sel
 
 ---
 
-[^1]: About a third of this is us. [PostHog desktop](/desktop), [CLI](/docs/cli), [Slack app](/slack), and [Signals scouts](/docs/self-driving/signals) all reach the same MCP server as everybody else, and they are heavy users; 31% of every call, from about 10,000 people. The other 69% comes from roughly 97,000 people using their own agents. All figures are from PostHog's own MCP server (the `$mcp_tool_call` event), so read them as "what we see on one busy server," not a census of all MCP everywhere. Headline counts cover the 90 days to August 19, 2026. Client breakdowns use the last 14 days and PostHog's resolved harness label rather than the raw client name the SDK reports – that raw property only rides the session's `initialize` handshake, so grouping on it directly buckets most calls as unknown. Reliable client identification only landed in August 2026, which is why the client window is shorter than the headline window. Per-tool error rates use the last 30 days. Error rate reflects how a client forms requests, not the agent's underlying quality. We deliberately used only tool names, categories, client names, and counts, not the free-text "intent" agents send, so nothing here contains user data.
+[^1]: Almost half of this is us. [PostHog desktop](/desktop), [CLI](/docs/cli), [Slack app](/slack), and [Signals scouts](/docs/self-driving/signals) all reach the same MCP server as everybody else, and they are heavy users; 45% of every call, from about 16,000 people. The other 55% comes from roughly 126,000 people using their own agents. All figures are from PostHog's own MCP server (the `$mcp_tool_call` event), so read them as "what we see on one busy server," not a census of all MCP everywhere. Headline counts cover the 90 days to September 16, 2026. Client breakdowns use the last 14 days and PostHog's resolved harness label rather than the raw client name the SDK reports – that raw property only rides the session's `initialize` handshake, so grouping on it directly buckets most calls as unknown. Reliable client identification only landed in August 2026, which is why the client window is shorter than the headline window. Per-tool error rates and retry behavior use the last 30 days. Error rate reflects how a client forms requests, not the agent's underlying quality. We deliberately used only tool names, categories, client names, and counts, not the free-text "intent" agents send, so nothing here contains user data.
