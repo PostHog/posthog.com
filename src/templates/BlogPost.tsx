@@ -406,6 +406,7 @@ export default function BlogPost({ data, pageContext, location, mobile = false }
             />
 
             <ReaderView
+                showQuestions
                 showAbout
                 leftSidebar={
                     <div data-sidebar-label>
