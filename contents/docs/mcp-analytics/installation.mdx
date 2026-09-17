@@ -39,6 +39,8 @@ You bring your own [`posthog-node`](/docs/libraries/node) client (the same patte
 
 `instrument(server, posthog, options?)` is the only function you need to call. The `posthog` client is a required positional argument; `options` is optional. It returns an analytics handle (used for [custom events](/docs/mcp-analytics/custom-events)). It's idempotent per server — calling it twice on the same server logs a warning and returns early.
 
+Starting with `@posthog/mcp` 0.17.0 and Python `posthog` 7.56.0, model capture and conversation IDs are enabled by default, alongside intent and exception capture. [Missing-capability reporting](/docs/mcp-analytics/missing-capability) and agent feedback remain opt-in.
+
 ### Low-level `Server`
 
 If you registered your tools against the raw protocol `Server` from `@modelcontextprotocol/sdk/server/index.js`:
@@ -56,9 +58,7 @@ const posthog = new PostHog(process.env.POSTHOG_PROJECT_TOKEN, {
 
 // register your tools as usual...
 
-const analytics = instrument(server, posthog, {
-  captureModel: true,
-})
+const analytics = instrument(server, posthog)
 ```
 
 ### High-level `McpServer`
@@ -78,9 +78,7 @@ const posthog = new PostHog(process.env.POSTHOG_PROJECT_TOKEN, {
   host: "https://us.i.posthog.com",
 })
 
-const analytics = instrument(server, posthog, {
-  captureModel: true,
-})
+const analytics = instrument(server, posthog)
 
 server.tool("search_events", { /* ... */ }, async (args) => {
   // your handler runs untouched
@@ -98,10 +96,7 @@ const posthog = new PostHog(process.env.POSTHOG_PROJECT_TOKEN, {
   host: "https://us.i.posthog.com",
 })
 
-const analytics = instrument(server, posthog, {
-  captureModel: true,
-  enableConversationId: true,
-})
+const analytics = instrument(server, posthog)
 
 server.registerTool("search_events", { /* ... */ }, async (args) => {
   // your handler runs untouched
@@ -128,10 +123,7 @@ const posthog = new PostHog(process.env.POSTHOG_PROJECT_TOKEN, {
 
 const handler = createMcpHandler(
   (server) => {
-    instrument(server, posthog, {
-      captureModel: true,
-      enableConversationId: true,
-    })
+    instrument(server, posthog)
     server.registerTool("roll_dice", { /* ... */ }, async ({ sides }) => { /* ... */ })
   },
   {},
@@ -158,21 +150,26 @@ instrument(server, posthog, {
 })
 ```
 
-For finer, per-conversation grouping you can also enable
-[`enableConversationId`](/docs/mcp-analytics/conversation-id): the SDK adds a `conversation_id`
-argument, generates one when the client doesn't send it, and asks the agent to echo it on later calls,
-correlating them via `$mcp_conversation_id`. It's **best-effort** — it works by appending a short
-instruction to the tool result, which a cooperative agent echoes but some clients ignore or treat as
-untrusted server content (the same wariness they apply to prompt injection). Use it when you control the
-client or that trade-off is acceptable; otherwise stick with `identify`.
+For finer, per-conversation grouping, [`enableConversationId`](/docs/mcp-analytics/conversation-id)
+is enabled by default. The SDK adds a `conversation_id` argument and returns a handle in eligible
+tool results. The tool schema asks the agent to reuse it on later calls. Correlation is best-effort:
+some clients ignore the handle or treat tool output as untrusted content.
+
+If this behavior doesn't suit your client, set `enableConversationId: false` and use `identify` for user-level grouping.
 
 #### Capture the calling model
 
-On TypeScript servers, `captureModel: true` adds a required `llm_model` argument to every tool and captures the answer as `$mcp_llm_model`. The SDK removes this argument before your handler runs.
+Model capture is enabled by default in both SDKs. The SDK reads recognized client metadata first, then falls back to the agent's `llm_model` argument. It captures `$mcp_llm_model` with `$mcp_llm_model_source` set to `"client_metadata"` or `"self_reported"`.
 
-The value comes from the agent, not from a verified MCP protocol field. Use it to compare tool quality, latency, and errors by model. Don't use it for billing, authorization, or other security decisions. The SDK omits an `unknown` answer.
+For compatible tool schemas, the TypeScript SDK advertises `llm_model` as required. Python does the same on official high-level adapters and custom dispatchers, but advertises it as optional on raw low-level servers and standalone FastMCP. Dispatch never enforces the injected field.
 
-This option requires `@posthog/mcp` 0.12.0 or later. It works on both protocol revisions and preserves MCP App metadata, structured output, and result metadata. See [MCP SDK v2](/docs/mcp-analytics/sdk-v2#mcp-apps) for current MCP Apps coverage.
+The SDK removes arguments it can confirm it injected before your handler runs. A fresh low-level instance that hasn't served `tools/list` can read `llm_model`, but leaves arguments untouched. This can capture an application-owned `llm_model` value until the instance learns the tool's schema. High-level adapters use the registered schema to preserve application-owned arguments.
+
+Both sources are unverified client input. Use them to compare tool quality, latency, and errors by model, not for billing or security decisions. Missing, blank, or `unknown` values are omitted. Reasoning effort isn't captured.
+
+To disable model capture and conversation IDs, pass `{ captureModel: false, enableConversationId: false }` in TypeScript or `MCPAnalyticsOptions(capture_model=False, enable_conversation_id=False)` in Python. Existing explicit opt-outs remain in effect after upgrading.
+
+Model capture works on both protocol revisions. See [Python](#python) for the standalone FastMCP limitation and [MCP SDK v2](/docs/mcp-analytics/sdk-v2#mcp-apps) for current MCP Apps coverage.
 
 #### Flushing
 
@@ -208,7 +205,7 @@ export class AppModule {}
 
 `instrumentMutator(posthog)` is shorthand for `(server) => { instrument(server, posthog); return server }`. It returns the *server*, not the analytics handle, so it slots straight into `serverMutator`. The tools mcp-nest registers after the mutator runs are still captured.
 
-For a stateless mcp-nest server, enable conversation IDs with `instrumentMutator(posthog, { enableConversationId: true })`. Don't enable `captureModel` on a fresh low-level server instance per request. That path can advertise `llm_model`, but it can't confirm ownership before the call, so it omits the model property. A persistent server instance can enable it after serving `tools/list`.
+With `@posthog/mcp` 0.17.0 or later, `instrumentMutator(posthog)` enables model capture and conversation IDs, including on fresh low-level server instances created per request. Conversation correlation still requires the agent to echo the handle.
 
 If you need the analytics handle for [custom events](/docs/mcp-analytics/custom-events), call `instrument()` directly inside the mutator and return the server yourself:
 
@@ -315,7 +312,7 @@ from posthog.mcp.types import MCPAnalyticsOptions, UserIdentity
 instrument(server, posthog, MCPAnalyticsOptions(
     context=True,                 # inject the `context` intent argument (default)
     report_missing=True,          # register the get_more_tools virtual tool
-    enable_conversation_id=True,  # stitch calls across reconnects
+    enable_conversation_id=True,  # stitch calls across reconnects (default)
     identify=lambda request, extra: UserIdentity(distinct_id="user_123"),
 ))
 ```
@@ -327,7 +324,8 @@ instrument(server, posthog, MCPAnalyticsOptions(
 | `context` | `bool \| MCPAnalyticsContextOptions` | `True` | Inject the `context` intent argument into every tool. |
 | `report_missing` | `bool` | `False` | Register the `get_more_tools` virtual tool. |
 | `missing_capability_tool_name` | `str` | `"get_more_tools"` | Rename the virtual tool registered by `report_missing`. |
-| `enable_conversation_id` | `bool` | `False` | Inject an optional `conversation_id` argument to stitch calls. |
+| `enable_conversation_id` | `bool` | `True` | Inject an optional `conversation_id` argument to stitch calls when the agent echoes the handle. |
+| `capture_model` | `bool \| MCPAnalyticsModelOptions` | `True` | Capture the model from recognized client metadata or an SDK-injected `llm_model` argument. |
 | `enable_exception_autocapture` | `bool` | `True` | Emit a `$exception` sibling on failed tool calls. |
 | `identify` | `(request, extra) -> UserIdentity \| None` (sync or async) | — | Map a request to one of your users. |
 | `intent_fallback` | `(request, extra) -> str \| None` | — | Provide intent when the agent didn't pass `context`. |
@@ -376,7 +374,7 @@ The Python SDK is in beta (pre-1.0); the API may still change before `v1`, and s
 
 It supports both official `mcp` majors and the `2026-07-28` protocol revision. See [MCP SDK v2](/docs/mcp-analytics/sdk-v2) for what that revision changes.
 
-Self-reported model capture is currently TypeScript-only. Python doesn't inject `llm_model` or emit `$mcp_llm_model`.
+Python supports [model capture](#capture-the-calling-model), enabled by default starting with `posthog` 7.56.0. On standalone FastMCP with MCP SDK 1.x, middleware that can change tool listing or dispatch disables `llm_model` injection. This includes pass-through middleware that overrides those hooks. Model capture from recognized client metadata remains enabled.
 
 </CalloutBox>
 
@@ -389,9 +387,9 @@ The `posthog` client is passed as the required second positional argument — no
 | `logger` | `(message: string) => void` | no-op | STDIO-safe log sink for SDK-internal warnings. MCP STDIO transports cannot use `console.*`, so the default discards. Wire your own to surface warnings during development. |
 | `enableExceptionAutocapture` | `boolean` | `true` | When `false`, a failed tool call does not emit the `$exception` sibling event. |
 | `context` | `boolean \| { description: string }` | `true` | Inject a required `context` argument into every tool schema. See [Capturing agent intent](/docs/mcp-analytics/intent). |
-| `captureModel` | `boolean \| { description: string }` | `false` | Inject a required `llm_model` argument and capture the agent's self-reported model. Requires `@posthog/mcp` 0.12.0 or later. |
+| `captureModel` | `boolean \| { description: string }` | `true` | Capture the model from recognized client metadata or an SDK-injected `llm_model` argument. Enabled by default since `@posthog/mcp` 0.17.0. |
 | `intentFallback` | `(request, extra) => string \| Promise<string \| null \| undefined>` | — | Called when the agent didn't pass a `context` argument. See [Capturing agent intent](/docs/mcp-analytics/intent). |
-| `enableConversationId` | `boolean` | `false` | Inject an optional `conversation_id` argument into every tool. See [Conversation IDs](/docs/mcp-analytics/conversation-id). |
+| `enableConversationId` | `boolean` | `true` | Inject an optional `conversation_id` argument into compatible tool schemas. See [Conversation IDs](/docs/mcp-analytics/conversation-id). |
 | `reportMissing` | `boolean` | `false` | Register the `get_more_tools` virtual tool. See [Missing capability](/docs/mcp-analytics/missing-capability). |
 | `identify` | `async (request, extra) => UserIdentity \| null \| UserIdentity` | — | Map an MCP request to one of your users. See [Identifying users](/docs/mcp-analytics/identifying-users). |
 | `beforeSend` | `(event) => event \| null \| undefined \| Promise<...>` | — | Runs on each fully-built PostHog payload right before send. Return the (possibly mutated) event to send it, or a nullish value to drop it. See [Privacy](/docs/mcp-analytics/privacy). |
@@ -427,6 +425,6 @@ As soon as the wrapper is in place, instrumented MCP requests emit PostHog event
 - `$mcp_initialize` per `2025-11-25` client handshake
 - `$exception` whenever a tool throws or returns `isError: true`
 
-Resource and prompt requests pass through unchanged but don't emit automatic analytics yet.
+TypeScript also captures resource discovery and reads. Resource bodies pass through unchanged and aren't captured. See the [event reference](/docs/mcp-analytics/events) for SDK coverage. Prompt requests don't emit automatic analytics yet.
 
-On `2025-11-25`, events normally share a `$session_id` derived from the MCP protocol session, including supported stateless deployments where the SDK carries the session across pods. On `2026-07-28`, each request gets a new session unless [`enableConversationId`](/docs/mcp-analytics/conversation-id) is enabled. See the [event reference](/docs/mcp-analytics/events) for the full catalog.
+On `2025-11-25`, calls keep their MCP protocol session until the agent echoes a valid conversation handle. On `2026-07-28`, there is no protocol session. [Conversation IDs](/docs/mcp-analytics/conversation-id) are enabled by default, but calls only stay correlated when the agent echoes the handle. See the [event reference](/docs/mcp-analytics/events) for the full catalog.

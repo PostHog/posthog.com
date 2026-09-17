@@ -99,7 +99,9 @@ Because there's no wrapped server, `PostHogMCP` does **not** manage these for yo
 - **Identity caching / `$identify` dedupe** — pass `distinctId` (and optional `setProperties`) on each call.
 - **Automatic intent and missing-capability handling** — use `prepareToolList()` and `prepareToolCall()`, then pass their output to the matching capture method.
 - **Conversation IDs** — pass your own stable `sessionId`. The custom dispatcher helpers don't inject or echo `conversation_id`.
-- **Model capture** — `captureModel` and the injected `llm_model` argument are currently available only through `instrument()` on a supported TypeScript server wrapper. Don't add `$mcp_llm_model` manually.
+- **Model capture** — preparation helpers support it in both SDKs, enabled by default in TypeScript 0.17.0 and Python 7.56.0. Use `prepareToolList()` to advertise the argument, then `prepareToolCall()` to extract it. Pass its `llmModel` and `llmModelSource` to `captureToolCall()`.
+
+For model capture on a fresh dispatcher, pass the application's original tool as `originalTool` in the preparation options. Pass `requestMeta` there to capture recognized client metadata. Python uses the equivalent snake_case fields and keyword arguments.
 
 The `2026-07-28` revision has no initialize handshake or protocol session. Don't fabricate `$mcp_initialize`. Capture each request's `protocolVersion`, and pass an authenticated user id or your own stable session id when you need correlation across requests.
 
@@ -144,7 +146,12 @@ def handle_tools_call(request, name, arguments):
     )
 
     if prepared.is_missing_capability:
-        posthog.capture_missing_capability(context=prepared.intent, **common)
+        posthog.capture_missing_capability(
+            context=prepared.intent,
+            llm_model=prepared.llm_model,
+            llm_model_source=prepared.llm_model_source,
+            **common,
+        )
         return get_more_tools_result()
 
     start = time.monotonic()
@@ -153,6 +160,8 @@ def handle_tools_call(request, name, arguments):
     except Exception as exc:
         posthog.capture_tool_call(
             name,
+            llm_model=prepared.llm_model,
+            llm_model_source=prepared.llm_model_source,
             parameters=prepared.args,
             duration_ms=(time.monotonic() - start) * 1000,
             is_error=True,
@@ -163,6 +172,8 @@ def handle_tools_call(request, name, arguments):
 
     posthog.capture_tool_call(
         name,
+        llm_model=prepared.llm_model,
+        llm_model_source=prepared.llm_model_source,
         intent=prepared.intent,
         intent_source=prepared.intent_source,
         parameters=prepared.args,

@@ -19,9 +19,11 @@ The SDK does not capture:
 
 `$mcp_tool_call` payloads include `$mcp_parameters` (the request arguments) and `$mcp_response` (the tool's result), after the pipeline below.
 
-When the TypeScript wrapper can confirm that it owns an injected analytics argument, it removes the argument before the tool handler runs. On supported high-level server paths, `context`, `conversation_id`, and `llm_model` don't appear in `$mcp_parameters`. Their accepted values are captured separately as `$mcp_intent`, `$mcp_conversation_id`, and `$mcp_llm_model`.
+When the SDK can confirm that it owns an injected analytics argument, it removes the argument before the tool handler runs. On supported high-level server paths, `context`, `conversation_id`, and `llm_model` don't appear in `$mcp_parameters`. Their accepted values are captured separately as `$mcp_intent`, `$mcp_conversation_id`, and `$mcp_llm_model`.
 
-`$mcp_llm_model` is self-reported by the agent when `captureModel` is enabled. It isn't verified by the MCP protocol. Don't use it for billing, authorization, or other security decisions.
+`$mcp_llm_model` comes from recognized client metadata or the agent's self-report. `$mcp_llm_model_source` distinguishes the two. Neither source is verified by the MCP protocol. Don't use either for billing, authorization, or other security decisions.
+
+Model capture and conversation IDs are enabled by default in `@posthog/mcp` 0.17.0 and Python `posthog` 7.56.0. To disable them, pass `{ captureModel: false, enableConversationId: false }` or `MCPAnalyticsOptions(capture_model=False, enable_conversation_id=False)`, respectively. Conversation IDs add a visible JSON text block to eligible tool results.
 
 ## The redaction pipeline
 

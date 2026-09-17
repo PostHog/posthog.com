@@ -6,27 +6,29 @@ import CalloutBox from 'components/Docs/CalloutBox'
 
 A PostHog `$session_id` normally follows the MCP protocol session. The handshake-free `2026-07-28` revision has no protocol session, so each request gets a new session unless you add another correlation signal.
 
-`$mcp_conversation_id` is an opt-in property that lets you stitch those calls together at the conversation level. The SDK also derives `$session_id` from it, so PostHog session queries group the same calls.
+`$mcp_conversation_id` lets you stitch those calls together at the conversation level. The SDK also derives `$session_id` from an accepted conversation handle, so PostHog session queries group the same calls.
 
-<CalloutBox icon="IconWarning" title="Opt-in, with caveats" type="caution">
+<CalloutBox icon="IconWarning" title="Enabled by default, with caveats" type="caution">
 
-Conversation IDs are off by default and rely on the agent cooperating. Read the caveats below before enabling — there's a visible side effect on tool responses, and the value is agent-controlled.
+Conversation IDs are enabled by default starting with `@posthog/mcp` 0.17.0 and Python `posthog` 7.56.0. Correlation still requires the agent to echo the handle. Eligible tool responses include a visible JSON text block, and the value is agent-controlled.
 
 </CalloutBox>
 
 ## Enabling
 
+No options are needed with these releases:
+
 ```ts
-instrument(server, posthog, {
-  enableConversationId: true,
-})
+instrument(server, posthog)
 ```
+
+On earlier releases, explicitly set `enableConversationId: true` in TypeScript or `MCPAnalyticsOptions(enable_conversation_id=True)` in Python.
 
 With this on, the SDK does three things:
 
-1. **Injects an optional `conversation_id` argument** into every tool's JSON Schema, with a description telling the agent to reuse the value the server returns.
-2. **Mints a UUID** when the agent calls a tool without `conversation_id`, and returns it on the tool's response as a `{"conversation_id":"…"}` text block — data, not an instruction.
-3. **Captures the supplied or minted value** on every event as `$mcp_conversation_id` and derives a stable `$session_id` from it.
+1. **Injects an optional `conversation_id` argument** into compatible tool schemas, with a description telling the agent to reuse the value the server returns.
+2. **Creates a handle** when needed and returns it on eligible tool responses as a `{"conversation_id":"…"}` text block.
+3. **Captures the handle** as `$mcp_conversation_id`. When the agent echoes a valid handle, the SDK derives a stable `$session_id` from it. Until then, existing protocol sessions remain in use.
 
 The SDK reuses an echoed UUIDv7 that matches the handles it mints. It replaces missing or arbitrary values with a new handle to avoid merging unrelated conversations.
 
@@ -74,6 +76,8 @@ A client working from a **stale cached tool listing** won't know to send the par
 
 It's returned as a `{"conversation_id":"…"}` text block, so consumers that surface raw tool-call content to end users will show that JSON. It's deliberately data rather than an instruction — an imperative sentence in tool output is indistinguishable from prompt injection, and hardened clients block it.
 
+The SDK preserves structured output and result metadata. Clients that only consume structured output may never see the text block, so they may not echo the handle.
+
 </CalloutBox>
 
 <CalloutBox icon="IconWarning" title="Agent-controlled values" type="caution">
@@ -90,9 +94,9 @@ PostHog's session-level joins use `$session_id`. When conversation IDs are enabl
 
 ## When to skip this
 
-If your MCP server runs over a long-lived `2025-11-25` connection that already aligns with what you'd call a conversation, `$session_id` is already doing the right thing. Leave `enableConversationId` off.
+If your MCP server runs over a long-lived `2025-11-25` connection that already matches your conversation boundaries, you can disable conversation IDs. Set `enableConversationId: false` in TypeScript or `MCPAnalyticsOptions(enable_conversation_id=False)` in Python to omit the injected argument and response block.
 
-Turn it on when:
+Keep it enabled when:
 
 - The same logical conversation crosses connections (HTTP/SSE clients that reconnect).
 - Your server handles the `2026-07-28` revision and you want more than one request in each PostHog session.

@@ -25,15 +25,12 @@ import { instrument } from "@posthog/mcp"
 const server = new McpServer({ name: "my-mcp-server", version: "1.0.0" })
 const posthog = new PostHog(process.env.POSTHOG_PROJECT_TOKEN)
 
-instrument(server, posthog, {
-  captureModel: true,
-  enableConversationId: true,
-})
+instrument(server, posthog)
 
 server.registerTool("search_events", { /* ... */ }, async (args) => { /* ... */ })
 ```
 
-The low-level `Server` works the same way. If you previously called `instrument(server.server)` to get past the old compatibility check, you can go back to `instrument(server)`.
+Model capture and conversation IDs are enabled by default in `@posthog/mcp` 0.17.0 or later. The low-level `Server` works the same way. If you previously passed `server.server` to get past the old compatibility check, pass `server` with the same PostHog client instead.
 
 ## If your callbacks read headers, change them
 
@@ -63,14 +60,9 @@ The [Python SDK](/docs/mcp-analytics/installation#python) supports both official
 ```python
 from mcp.server.mcpserver import MCPServer
 from posthog.mcp import instrument
-from posthog.mcp.types import MCPAnalyticsOptions
 
 server = MCPServer("my-server")
-instrument(
-    server,
-    posthog,
-    MCPAnalyticsOptions(enable_conversation_id=True),
-)
+instrument(server, posthog)
 ```
 
 The low-level `Server` works on both majors. jlowin's standalone `fastmcp` package pins `mcp<2`, so it stays on the 1.x adapter path.
@@ -85,13 +77,13 @@ def identify(request, extra):
     return resolve_user(headers.get("authorization"))
 ```
 
-[Sessions on `2026-07-28`](#sessions-on-2026-07-28) work as described below. `enable_conversation_id=True` provides a shared `$session_id` on that revision, and both PostHog SDKs derive the same session id from the same conversation handle.
+[Sessions on `2026-07-28`](#sessions-on-2026-07-28) work as described below. Python `posthog` 7.56.0 enables model capture and conversation IDs by default. Both PostHog SDKs derive the same session id from the same echoed conversation handle.
 
 ## Sessions on `2026-07-28`
 
-That revision removed the `initialize` handshake and the `Mcp-Session-Id` header, so the [stateless session token](/docs/mcp-analytics/installation#stateless-and-multi-pod-servers) doesn't apply to it — and left alone, **every request becomes its own `$session_id`**:
+That revision removed the `initialize` handshake and the `Mcp-Session-Id` header, so the [stateless session token](/docs/mcp-analytics/installation#stateless-and-multi-pod-servers) doesn't apply. Use a conversation handle to correlate requests:
 
-- **[`enableConversationId: true`](/docs/mcp-analytics/conversation-id)** — the only way to get a shared `$session_id` on this revision. The SDK injects a `conversation_id` parameter, mints one when the agent doesn't send it, and derives `$session_id` from it, so a conversation's calls land in one session. Off by default; turn it on if you want sessions.
+- **[Conversation IDs](/docs/mcp-analytics/conversation-id)** — enabled by default in `@posthog/mcp` 0.17.0 and Python `posthog` 7.56.0. The SDK injects a `conversation_id` parameter and returns a handle in eligible tool results. Calls share a `$session_id` when the agent echoes that handle. Clients that ignore it can still produce a separate session per request.
 - **[`identify`](/docs/mcp-analytics/identifying-users)** — attributes calls to a person via `distinct_id`. Worth wiring up either way, but note it groups by **user**, not by session, and doesn't give you a `$session_id`.
 
 Note that revision is a property of each **request**, not of your server: a v2 server serves `2025-11-25` traffic too, and most clients still negotiate it.
@@ -104,9 +96,9 @@ On that revision the client sends its name and version only at `initialize`. If 
 
 ## Capture model identity on both revisions
 
-The MCP wire doesn't include the model behind a client on either revision. On TypeScript servers, `captureModel: true` injects a required `llm_model` tool argument so the agent can report it. The SDK strips the argument before your handler runs and captures `$mcp_llm_model_source = "self_reported"` with the answer.
+Both SDKs capture model identity on `2025-11-25` and `2026-07-28`. Recognized client metadata takes priority over the agent's self-reported `llm_model` argument. `$mcp_llm_model_source` records `"client_metadata"` or `"self_reported"`.
 
-This works on `2025-11-25` and `2026-07-28`. The value is unverified, so use it to compare model-level quality and errors, not for billing or security. Model capture hasn't shipped in Python yet.
+Both sources are unverified. See [model capture](/docs/mcp-analytics/installation#capture-the-calling-model) for defaults, opt-outs, and the Python standalone FastMCP limitation.
 
 ## MCP Apps
 
