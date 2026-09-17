@@ -25,7 +25,7 @@ In the 90 days to September 16, agents made **63 million tool calls** to [PostHo
 
 ## Who's calling and where are they calling from? 
 
-First, a confession: almost half of that traffic is us. [PostHog Desktop](/desktop), the [CLI](/docs/cli), the [Slack app](/slack), and our [Signals scouts](/docs/self-driving/signals) all reach the same MCP server as everyone else, and the scouts in particular never sleep. So for this section we've set our own agents aside and looked only at the **55%** that comes from people using their own tools.[^2]
+First, a caveat: almost half of that traffic is us. [PostHog Desktop](/desktop), the [CLI](/docs/cli), the [Slack app](/slack), and our [Signals scouts](/docs/self-driving/signals) all reach the same MCP server as everyone else, and the scouts in particular never sleep. So for this section we've set our own agents aside and looked only at the **55%** that comes from people using their own tools.[^2]
 
 ![Who's calling](https://res.cloudinary.com/dmukukwp6/image/upload/01_whos_calling_9aa843d366.png)
 
@@ -51,7 +51,13 @@ Between them, those two are just under a third of all traffic.
 
 ![What agents actually ask for](https://res.cloudinary.com/dmukukwp6/image/upload/03_what_agents_ask_for_87f55ae2e8.png)
 
-It's worth knowing there are three doors an agent can take to ask our MCP a data question. It can write raw SQL. It can call one of our typed **query wrappers** – trends, funnels, retention – and skip the SQL entirely (3% of calls). Or it can go through **product analytics** proper: creating, reading, and updating saved insights (another 3%). Agents overwhelmingly pick the first door. SQL gets about four times the traffic of the other two put together.
+It's worth knowing there are three doors an agent can take to ask our MCP a data question:
+
+1. It can write raw SQL. 
+2. It can call one of our typed **query wrappers** – trends, funnels, retention – and skip the SQL entirely (3% of calls).
+3. It can go through **product analytics** proper: creating, reading, and updating saved insights (another 3%). 
+
+Agents overwhelmingly pick the first door. SQL gets about four times the traffic of the other two put together.
 
 ![Three ways to ask a data question](https://res.cloudinary.com/dmukukwp6/image/upload/03b_three_doors_0ce623459e.png)
 
@@ -61,7 +67,7 @@ So **about one call in twenty is an agent looking something up rather than doing
 
 A lot of our tools barely register, which is a little tragic, because [PostHog's MCP](/mcp) has hundreds of different functionalities available. 
 
-Give an agent a single prompt and it could spin up an A/B test today and ship the winning variant next week. It could open an error, read the stack trace, jump to the exact replay of the user who hit it, and patch the code. It could point an AI at a week of sessions and ask questions about it. The list goes on.
+Give an agent a single prompt and it could [spin up an A/B test](/experiments) today and ship the winning variant next week. It could open an error, [read the stack trace](/error-tracking), jump to the [exact replay](/session-replay) of the user who hit it, and patch the code. It could [point an AI at a week of sessions and ask questions about it](/replay-vision). The list goes on.
 
 ![Iceberg](https://res.cloudinary.com/dmukukwp6/image/upload/03_iceberg_8480d54100.png)
 
@@ -73,11 +79,15 @@ Otherwise the best thing you built stays underwater, and nobody knows it's there
 
 ## Who's actually building things?
 
-In the last 30 days, **agents created 252,000 insights through the MCP. People created 99,000 in the web app.** Add PostHog AI on top and more than half of every insight made last month came from an AI of some kind.
+In the last 30 days, **agents created 252,000 insights through the MCP. People created 99,000 in the web app.** 
+
+Add [PostHog AI](/ai) on top and more than half of every insight made last month came from an AI of some kind.
 
 ![Who creates what](https://res.cloudinary.com/dmukukwp6/image/upload/07_who_creates_what_2454de4a69.png)
 
-It's the same story for dashboards, actions, and experiments: the MCP is the single biggest creation surface for all of them. Feature flags are the last product where humans still lead, and only by a few points.
+It's the same story for dashboards, actions, and experiments: the MCP is the single biggest creation surface for all of them. 
+
+[Feature flags](/feature-flags) are the last product where humans still lead, and only by a few points.
 
 ## Which agent is the most reliable?
 
@@ -91,7 +101,7 @@ That said, **Codex is the standout**: among third-party callers it trips about *
 
 The one thing we can't tell you yet is which *model* is most reliable. Agents can self-report their model to our MCP, but nothing verifies it, so we're not charting it until something does.
 
-Here's the bit that made us sit up, though. Our own agents also run on Codex, against the same server, and they error just **1%** of the time – half the rate of everyone else on the same model. The likeliest explanation is boring and useful: our prompts and tool descriptions were tuned against this exact MCP. If you're building an agent, that's the lever.
+Here's a bit that made us sit up, though. Our own agents also run on Codex, against the same server, and they error just **1%** of the time – half the rate of everyone else on the same model. The likeliest explanation is boring and useful: our prompts and tool descriptions were tuned against this exact MCP.
 
 ![Same model, half the errors](https://res.cloudinary.com/dmukukwp6/image/upload/04c_same_model_ae0b9c67b0.png)
 
@@ -113,7 +123,9 @@ A typical call is cheap: the median response is **440 tokens**. But the tail is 
 
 ![Context cost](https://res.cloudinary.com/dmukukwp6/image/upload/08_context_cost_d74ff4be13.png)
 
-And the tail isn't where you'd expect it. `execute-sql` is 23% of calls and 19% of tokens, which seems fair. But three dashboard tools (get, update, and reorder tiles) are **half a percent of calls and 18% of all tokens returned**. A single `dashboard-reorder-tiles` call returns a median of 14,600 tokens, and at p95, **144,000**. That's an entire context window just to move a tile.
+And the tail isn't where you'd expect it. `execute-sql` is 23% of calls and 19% of tokens, which seems fair. But three dashboard tools (get, update, and reorder tiles) are **half a percent of calls and 18% of all tokens returned**. 
+
+A single `dashboard-reorder-tiles` call returns a median of 14,600 tokens, and at p95, **144,000**. That's an entire context window just to move a tile.
 
 ## How to keep tabs on your robot users
 
