@@ -5054,7 +5054,7 @@
         },
         {
             "source": "/teams/data-warehouse",
-            "destination": "/teams/data-stack"
+            "destination": "/teams/managed-warehouse"
         },
         {
             "source": "/handbook/small-teams/infrastructure",
@@ -5224,7 +5224,7 @@
         },
         {
             "source": "/teams/pipeline",
-            "destination": "/teams/cdp"
+            "destination": "/teams/workflows"
         },
         {
             "source": "/teams/feature-success",
@@ -5753,7 +5753,7 @@
         },
         {
             "source": "/teams/video",
-            "destination": "/teams/content"
+            "destination": "/teams/youtube"
         },
         {
             "source": "/customers/headshot-pro",
@@ -6389,6 +6389,46 @@
             "source": "/company",
             "destination": "/about",
             "statusCode": 301
+        },
+        {
+            "source": "/teams/cdp",
+            "destination": "/teams/workflows"
+        },
+        {
+            "source": "/teams/cdp/:path*",
+            "destination": "/teams/workflows/:path*"
+        },
+        {
+            "source": "/teams/content",
+            "destination": "/teams/marketing"
+        },
+        {
+            "source": "/teams/content/:path*",
+            "destination": "/teams/marketing/:path*"
+        },
+        {
+            "source": "/teams/data-stack",
+            "destination": "/teams/managed-warehouse"
+        },
+        {
+            "source": "/teams/data-stack/:path*",
+            "destination": "/teams/managed-warehouse/:path*"
+        },
+        {
+            "source": "/teams/signals/:path*",
+            "destination": "/teams/self-driving/:path*"
+        },
+        {
+            "source": "/teams/ops",
+            "destination": "/teams/people"
+        },
+        {
+            "source": "/teams/revenue-analytics",
+            "destination": "/teams"
+        },
+        {
+            "source": "/teams/actually-ai",
+            "destination": "/teams"
         },
         {
             "source": "/contact-us",
