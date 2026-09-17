@@ -20,13 +20,14 @@ interface ReportRowProps {
  * There are no Archive or Review buttons – the redesign dropped both, and the whole card
  * is the click target, so nothing inside it is a button.
  *
- * The row's height is fixed, from the `--row-h` custom property the list sets. Every line
- * inside it is single-line and truncates, so the height is the same at every container
- * width. `shrink-0` matters as much as the height: the list is a capped column flex
- * container, so without it the rows shrink to share the cap between them instead of
- * overflowing it, and the list renders every row squashed rather than scrolling. That's what lets the list cap itself at exactly three and a half rows in CSS,
- * with no measuring – see `InboxReplica`. Truncating rather than wrapping also matches the
- * app, whose rows are single-line too.
+ * The row's height is fixed, from the `--row-h` custom property the tab panel sets. Every
+ * line inside it is single-line and truncates, so the height is the same at every
+ * container width. `shrink-0` matters as much as the height: the list is a capped column
+ * flex container, so without it the rows shrink to share the cap between them instead of
+ * overflowing it, and the list renders every row squashed rather than scrolling. That's
+ * what lets the list show exactly three and a half rows in CSS, with no measuring – see
+ * `InboxReplica`. Truncating rather than wrapping also matches the app, whose rows are
+ * single-line too.
  */
 export default function ReportRow({ item, isUnread, onOpen }: ReportRowProps): JSX.Element {
     const origin = originMeta(item)

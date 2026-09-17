@@ -65,13 +65,13 @@ interface SourceMeta {
 // Icon + tint per source product, mirroring the app's sourceProductIcons.
 export const SOURCE_META: Record<SourceKey, SourceMeta> = {
     error_tracking: {
-        label: 'Error tracking',
+        label: 'Error Tracking',
         Icon: IconWarning,
         color: 'text-red',
         found: 'An exception spiked, and every occurrence carried a stack trace.',
     },
     session_replay: {
-        label: 'Session replay',
+        label: 'Session Replay',
         Icon: IconRewindPlay,
         color: 'text-orange',
         found: 'Recordings showed people hitting the problem.',
@@ -107,19 +107,19 @@ export const SOURCE_META: Record<SourceKey, SourceMeta> = {
         found: 'A span got slower than its usual pattern.',
     },
     ai_observability: {
-        label: 'AI observability',
+        label: 'AI Observability',
         Icon: IconSparkles,
         color: 'text-purple',
         found: 'An evaluation or a model call started failing.',
     },
     analytics: {
-        label: 'Product analytics',
+        label: 'Product Analytics',
         Icon: IconGraph,
         color: 'text-blue',
         found: 'The numbers moved against their own baseline.',
     },
     feature_flags: {
-        label: 'Feature flags',
+        label: 'Feature Flags',
         // IconToggle and seagreen are what the rest of the site uses for this product.
         Icon: IconToggle,
         color: 'text-seagreen',
@@ -388,8 +388,8 @@ export const INBOX_ITEMS: InboxItem[] = [
         prUrl: 'https://github.com/PostHog/posthog-js/pull/4151',
         prNumber: 4151,
         // Product-level narration rather than this one PR, so the scope would be noise.
-        walkthroughLabel: 'Error tracking',
-        intro: "Error tracking turns exceptions into grouped, ranked issues. It's the loop's most direct route from signal to fix.",
+        walkthroughLabel: 'Error Tracking',
+        intro: "Error Tracking turns exceptions into grouped, ranked issues. It's the loop's most direct route from signal to fix.",
         steps: [
             {
                 stage: 'signal',
@@ -1000,8 +1000,8 @@ export const INBOX_ITEMS: InboxItem[] = [
          * confirming it – see `contributingSources` below – so the origin stays honest and
          * the button gets overridden instead. Without this it would read "Conversations · aio".
          */
-        walkthroughLabel: 'AI observability',
-        intro: 'AI observability watches your LLM features the way error tracking watches your code: every generation is a trace, and evals grade them.',
+        walkthroughLabel: 'AI Observability',
+        intro: 'AI Observability watches your LLM features the way Error Tracking watches your code: every generation is a trace, and evals grade them.',
         steps: [
             {
                 stage: 'signal',
@@ -1137,10 +1137,10 @@ export const INBOX_ITEMS: InboxItem[] = [
         origin: { kind: 'signal', product: 'session_replay' },
         prUrl: 'https://github.com/PostHog/posthog/pull/76517',
         prNumber: 76517,
-        intro: 'Session replay is where self-driving sees what users did, including the problems that never threw an exception.',
+        intro: 'Session Replay is where self-driving sees what users did, including the problems that never threw an exception.',
         // This walkthrough is the general session-replay story, so its selector button reads
         // "Session replay" even though the underlying report was discovered by Replay Vision.
-        walkthroughLabel: 'Session replay',
+        walkthroughLabel: 'Session Replay',
         /*
          * The built-out walkthrough, and the only one with real screenshots rather than
          * placeholder boxes. Its copy is about how a replay-sourced report moves through the
@@ -1307,8 +1307,8 @@ export const INBOX_ITEMS: InboxItem[] = [
          */
         origin: { kind: 'signal', product: 'analytics' },
         // Drops the scope: this narrates the product, not the one PR.
-        walkthroughLabel: 'Product analytics',
-        intro: 'Product analytics puts your funnels and trends into the loop, checked against baseline like any other production system.',
+        walkthroughLabel: 'Product Analytics',
+        intro: 'Product Analytics puts your funnels and trends into the loop, checked against baseline like any other production system.',
         steps: [
             {
                 stage: 'signal',
@@ -1565,9 +1565,9 @@ export const REPORT_ITEMS: InboxItem[] = [
         priority: 'P3',
         signalCount: 3,
         timeAgo: 'Updated Aug 3',
-        origin: { kind: 'scout', scout: 'Feature flags' },
-        walkthroughLabel: 'Feature flags',
-        intro: 'Feature flags accumulate faster than anyone cleans them up. The loop does the cleaning.',
+        origin: { kind: 'scout', scout: 'Feature Flags' },
+        walkthroughLabel: 'Feature Flags',
+        intro: 'Feature Flags accumulate faster than anyone cleans them up. The loop does the cleaning.',
         steps: [
             {
                 stage: 'signal',

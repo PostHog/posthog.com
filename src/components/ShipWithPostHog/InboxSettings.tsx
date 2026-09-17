@@ -50,7 +50,7 @@ interface SourceRow {
 
 const POSTHOG_SOURCES: SourceRow[] = [
     {
-        name: 'Error tracking',
+        name: 'Error Tracking',
         description: 'New errors, regressions, and spikes in your app',
         Icon: IconWarning,
         color: 'text-red',
@@ -65,7 +65,7 @@ const POSTHOG_SOURCES: SourceRow[] = [
         on: true,
     },
     {
-        name: 'Replay vision',
+        name: 'Replay Vision',
         description: 'UX problems your scanners find while watching recordings',
         Icon: IconEye,
         color: 'text-yellow',
@@ -73,14 +73,14 @@ const POSTHOG_SOURCES: SourceRow[] = [
         on: true,
     },
     {
-        name: 'AI observability',
+        name: 'AI Observability',
         description: 'Changes in the quality and behavior of your AI features',
         Icon: IconSparkles,
         color: 'text-purple',
         on: true,
     },
     {
-        name: 'Product analytics',
+        name: 'Product Analytics',
         description: 'Unexpected shifts in your product metrics',
         Icon: IconGraph,
         color: 'text-blue',
@@ -88,7 +88,7 @@ const POSTHOG_SOURCES: SourceRow[] = [
         on: true,
     },
     {
-        name: 'Health checks',
+        name: 'Health Checks',
         description: 'Missing events, proxy gaps, and outdated SDKs',
         Icon: IconPulse,
         color: 'text-red',

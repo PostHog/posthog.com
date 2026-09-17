@@ -22,7 +22,7 @@ const selectorLabel = (item: InboxItem): string =>
     item.walkthroughLabel ?? `${originMeta(item).primary} · ${item.scope}`
 
 /**
- * "How signals get to your Inbox" – the section below the inbox. Each merged pull
+ * "How signals turn into PRs" – the section below the inbox. Each merged pull
  * request gets its own Signal → Report → PR walkthrough, and a
  * selector switches between them. Read-only: reviewing happens up in the inbox itself.
  */
@@ -35,7 +35,7 @@ export default function SignalsToInbox(): JSX.Element | null {
     return (
         <section className="@container">
             <div className="mx-auto mb-6 max-w-3xl text-center">
-                <h2 className="text-2xl font-bold @md:text-3xl">How signals get to your Inbox</h2>
+                <h2 className="text-2xl font-bold @md:text-3xl">How signals turn into PRs</h2>
                 <p className="mt-3 text-secondary @2xl:text-lg">
                     Built-in signal sources catch these as they happen. Scouts go looking on a schedule. Either way the
                     same three steps follow. Pick one to see how it played out.

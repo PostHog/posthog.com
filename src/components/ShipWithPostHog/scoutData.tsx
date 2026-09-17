@@ -207,7 +207,7 @@ export const SCOUTS: Scout[] = [
     },
     {
         id: 'apm',
-        name: 'Apm',
+        name: 'APM',
         kind: 'Canonical',
         state: 'Working',
         cadence: 'every 3h',

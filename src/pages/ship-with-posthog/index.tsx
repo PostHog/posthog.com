@@ -12,9 +12,9 @@ import SignalsToInbox from 'components/ShipWithPostHog/SignalsToInbox'
 import SelfDrivingStories, { type SelfDrivingPost } from 'components/ShipWithPostHog/SelfDrivingStories'
 import SlotMachineText from 'components/SlotMachineText'
 
-// Words cycled through the "Ship {word} with PostHog" headline. "code" rests last (held
-// longest) so the line settles on the page's punchline, matching the /desktop scroller.
-const SHIP_WORDS = ['features', 'fixes', 'experiments', 'flags', 'surveys', 'code']
+// Words cycled through the "Ship {word} with PostHog" headline. "products" rests last
+// (held longest) so the line settles on the broadest of them, matching the /desktop scroller.
+const SHIP_WORDS = ['features', 'fixes', 'code', 'products']
 
 // The URL for this page. Kept in one place so renaming it is a folder move plus a
 // redirect in vercel.json – nothing else references the slug.
@@ -230,7 +230,8 @@ export default function ShipWithPostHog({ data }: ShipWithPostHogProps): JSX.Ele
                 description="Self-driving PostHog watches your product, investigates what it catches, and opens the pull request. These are real reports from our own inbox. Open one to read the evidence behind it and the diff that shipped."
                 image="/images/og/default.png"
             />
-            <div data-scheme="secondary" className="@container h-full w-full bg-primary text-primary">
+            {/* No background of its own: the window's own surface shows through, as a blog post's does. */}
+            <div data-scheme="primary" className="@container h-full w-full text-primary">
                 <ScrollArea className="h-full">
                     <div className="mx-auto max-w-5xl px-4 py-8 @md:py-12">
                         {/* Hero – the inbox is the centerpiece. Two columns so the headline stays left

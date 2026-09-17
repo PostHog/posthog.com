@@ -36,24 +36,29 @@ const SUBTITLE: Record<TabKey, string> = {
 }
 
 /*
- * The list shows three whole rows plus half of the fourth, then scrolls.
+ * Every tab shares one panel height, so switching tabs can't resize the card.
  *
- * Pure arithmetic in CSS, not a measurement. `ReportRow` is a fixed `--row-h` tall with
- * every line inside it single-line, so three and a half rows is exactly
+ * The height is the Reports tab's own arithmetic: its filter bar, then three whole rows
+ * plus half of the fourth, then its bottom padding. `ReportRow` is a fixed `--row-h` tall
+ * with every line inside it single-line, so the list part is exactly
  * `3.5 × row + 3 × gap` at any container width:
- *   base  3.5 × 5.5rem  + 3 × 0.625rem = 21.125rem
- *   @md   3.5 × 6.25rem + 3 × 0.625rem = 23.75rem
+ *   base  56px bar + (3.5 × 5.5rem  + 3 × 0.625rem) + 20px pad = 25.875rem
+ *   @md   56px bar + (3.5 × 6.25rem + 3 × 0.625rem) + 20px pad = 28.5rem
+ * The half row is the affordance that says the list scrolls. Scouts and Settings are
+ * taller than this and scroll inside the same panel.
  *
  * An earlier version measured the rendered rows with a `ResizeObserver` and re-derived the
  * cap. It went stale whenever the observer missed a reflow, which is the failure this
  * replaces. The classes below are spelled out literally because Tailwind's JIT can't see
- * a class name built from a template string, and the height reads `var(--row-h)` because
- * the bare custom-property shorthand is Tailwind 4 only – this project is on 3.4.
+ * a class name built from a template string, and the rows read `var(--row-h)` because the
+ * bare custom-property shorthand is Tailwind 4 only – this project is on 3.4.
  *
- * `overflow-x-hidden` is load-bearing: a horizontal scrollbar on this element would eat
- * ten pixels of its height and turn the half row into a 0.45 row.
+ * `overflow-x-hidden` is load-bearing: a horizontal scrollbar on a scroller would eat ten
+ * pixels of its height and turn the half row into a 0.45 row.
  *
- * Change the row height and both caps change with it – keep the four numbers in step.
+ * Change the row height and both panel heights change with it – keep the four numbers in
+ * step. A filter bar that wraps at a narrow width takes its extra line from the list
+ * rather than from the panel, which is the trade that keeps the card a constant height.
  */
 
 export default function InboxReplica(): JSX.Element {
@@ -116,7 +121,12 @@ export default function InboxReplica(): JSX.Element {
                             <IconNotification className="size-5 text-primary" />
                             <h2 className="m-0 text-xl font-bold text-primary">Self-driving inbox</h2>
                         </div>
-                        <p className="m-0 mt-1 text-sm text-secondary">{SUBTITLE[tab]}</p>
+                        {/*
+                         * Two lines are reserved below @2xl, where the longer subtitles wrap and the
+                         * shorter ones don't. Without it the header moves by a line on a tab switch,
+                         * which is the same wobble the panel height below exists to stop.
+                         */}
+                        <p className="m-0 mt-1 min-h-[2.5rem] text-sm text-secondary @2xl:min-h-0">{SUBTITLE[tab]}</p>
                     </div>
 
                     {/* Tab bar */}
@@ -143,78 +153,81 @@ export default function InboxReplica(): JSX.Element {
                         </div>
                     </div>
 
-                    {tab === 'scouts' ? (
-                        <ScoutList onOpen={setOpenScoutId} />
-                    ) : tab === 'settings' ? (
-                        <InboxSettings />
-                    ) : (
-                        <>
-                            {/* Filter bar: filters left, scope and triage right, as the app has them */}
-                            <div className="flex flex-wrap items-center gap-2 px-4 py-3 @md:px-6">
-                                <InboxFilterBar filters={filters} onChange={setFilters} />
+                    {/* Tab panel – one height for all three tabs, so switching can't resize the card */}
+                    <div className="flex h-[25.875rem] flex-col [--row-h:5.5rem] @md:h-[28.5rem] @md:[--row-h:6.25rem]">
+                        {tab === 'scouts' || tab === 'settings' ? (
+                            <div className="min-h-0 flex-1 overflow-y-auto overflow-x-hidden">
+                                {tab === 'scouts' ? <ScoutList onOpen={setOpenScoutId} /> : <InboxSettings />}
+                            </div>
+                        ) : (
+                            <>
+                                {/* Filter bar: filters left, scope and triage right, as the app has them */}
+                                <div className="flex flex-wrap items-center gap-2 px-4 py-3 @md:px-6">
+                                    <InboxFilterBar filters={filters} onChange={setFilters} />
 
-                                <div className="ml-auto flex items-center gap-2">
-                                    <Hint
-                                        trigger={
-                                            <span className="hidden h-8 shrink-0 items-center gap-1.5 rounded border border-primary bg-primary px-2.5 text-sm text-secondary @lg:inline-flex">
-                                                Triage mode
-                                                <kbd className="rounded border border-primary px-1 font-mono text-[10px]">
-                                                    T
-                                                </kbd>
-                                            </span>
-                                        }
-                                    >
-                                        Step through reports one at a time, deciding on each before the next.
-                                    </Hint>
-                                    <Hint
-                                        trigger={
-                                            <span className="hidden h-8 shrink-0 items-center gap-1.5 rounded border border-primary bg-primary px-2.5 text-sm text-secondary @md:inline-flex">
-                                                Entire project
-                                                <IconChevronDown className="size-3" />
-                                            </span>
-                                        }
-                                    >
-                                        Switch between reports assigned to you and everything found across the whole
-                                        project.
-                                    </Hint>
+                                    <div className="ml-auto flex items-center gap-2">
+                                        <Hint
+                                            trigger={
+                                                <span className="hidden h-8 shrink-0 items-center gap-1.5 rounded border border-primary bg-primary px-2.5 text-sm text-secondary @lg:inline-flex">
+                                                    Triage mode
+                                                    <kbd className="rounded border border-primary px-1 font-mono text-[10px]">
+                                                        T
+                                                    </kbd>
+                                                </span>
+                                            }
+                                        >
+                                            Step through reports one at a time, deciding on each before the next.
+                                        </Hint>
+                                        <Hint
+                                            trigger={
+                                                <span className="hidden h-8 shrink-0 items-center gap-1.5 rounded border border-primary bg-primary px-2.5 text-sm text-secondary @md:inline-flex">
+                                                    Entire project
+                                                    <IconChevronDown className="size-3" />
+                                                </span>
+                                            }
+                                        >
+                                            Switch between reports assigned to you and everything found across the whole
+                                            project.
+                                        </Hint>
+                                    </div>
                                 </div>
-                            </div>
 
-                            {/* List – capped at three and a half rows, then scrolls */}
-                            <div className="mx-auto max-w-4xl px-4 pb-5 @md:px-6">
-                                {visibleItems.length ? (
-                                    <div className="flex max-h-[21.125rem] flex-col gap-2.5 overflow-y-auto overflow-x-hidden pr-1 [--row-h:5.5rem] @md:max-h-[23.75rem] @md:[--row-h:6.25rem]">
-                                        {visibleItems.map((item) => (
-                                            <ReportRow
-                                                key={item.id}
-                                                item={item}
-                                                isUnread={!openedIds.has(item.id)}
-                                                onOpen={() => openItem(item.id)}
-                                            />
-                                        ))}
-                                    </div>
-                                ) : (
-                                    <div className="rounded-md border border-primary bg-primary px-4 py-8 text-center">
-                                        <p className="m-0 text-sm font-semibold text-primary">
-                                            No reports match these filters
-                                        </p>
-                                        <p className="m-0 mt-1 text-sm text-secondary">
-                                            These are real reports, so not every combination has a result.
-                                        </p>
-                                        <div className="mt-3 flex justify-center">
-                                            <OSButton
-                                                size="sm"
-                                                variant="secondary"
-                                                onClick={() => setFilters(DEFAULT_FILTERS)}
-                                            >
-                                                Reset filters
-                                            </OSButton>
+                                {/* List – fills the panel, showing three and a half rows, then scrolls */}
+                                <div className="mx-auto flex min-h-0 w-full max-w-4xl flex-1 flex-col px-4 pb-5 @md:px-6">
+                                    {visibleItems.length ? (
+                                        <div className="flex min-h-0 flex-1 flex-col gap-2.5 overflow-y-auto overflow-x-hidden pr-1">
+                                            {visibleItems.map((item) => (
+                                                <ReportRow
+                                                    key={item.id}
+                                                    item={item}
+                                                    isUnread={!openedIds.has(item.id)}
+                                                    onOpen={() => openItem(item.id)}
+                                                />
+                                            ))}
                                         </div>
-                                    </div>
-                                )}
-                            </div>
-                        </>
-                    )}
+                                    ) : (
+                                        <div className="rounded-md border border-primary bg-primary px-4 py-8 text-center">
+                                            <p className="m-0 text-sm font-semibold text-primary">
+                                                No reports match these filters
+                                            </p>
+                                            <p className="m-0 mt-1 text-sm text-secondary">
+                                                These are real reports, so not every combination has a result.
+                                            </p>
+                                            <div className="mt-3 flex justify-center">
+                                                <OSButton
+                                                    size="sm"
+                                                    variant="secondary"
+                                                    onClick={() => setFilters(DEFAULT_FILTERS)}
+                                                >
+                                                    Reset filters
+                                                </OSButton>
+                                            </div>
+                                        </div>
+                                    )}
+                                </div>
+                            </>
+                        )}
+                    </div>
                 </>
             )}
         </div>
