@@ -433,7 +433,7 @@ Some tests cannot use a rewrite. For example, the two variants can be separate s
 
 A browser can request a URL before a person views the page. A Next.js [`Link`](https://nextjs.org/docs/app/api-reference/components/link) component prefetches the pages it points to. An in-app browser, like the one in a chat or social app, requests a URL to build a link preview. Each of these requests runs the middleware. The middleware then sends an exposure event for a person who never saw the page. These false exposures hide the effect of your change, because they add people to the experiment who cannot convert.
 
-To prevent this, capture the exposure in the browser after the page becomes visible. Remove the exposure request from the middleware. The bootstrap data gives PostHog the distinct ID and the variant, so `getFeatureFlag` returns the variant at once and sends the `$feature_flag_called` event:
+To prevent this, capture the exposure in the browser after the page becomes visible. Remove the exposure request from the middleware. The bootstrap data gives PostHog the distinct ID and the variant, so `getFeatureFlag` returns the variant at once and sends the `$feature_flag_called` event. If the flags are not ready, the `onFeatureFlags` subscription captures the exposure when they load. A repeated call does not inflate your results, because PostHog counts one exposure per person per variant:
 
 ```js
 // app/test/page.js
@@ -449,11 +449,16 @@ export default function Test() {
       if (document.visibilityState !== 'visible') return
       // This call sends the exposure event
       posthog.getFeatureFlag('main-redirect')
+    }
+
+    // This runs at once if the flags are ready, and again when they load
+    const unsubscribe = posthog.onFeatureFlags(captureExposure)
+    document.addEventListener('visibilitychange', captureExposure)
+
+    return () => {
+      unsubscribe()
       document.removeEventListener('visibilitychange', captureExposure)
     }
-    document.addEventListener('visibilitychange', captureExposure)
-    captureExposure()
-    return () => document.removeEventListener('visibilitychange', captureExposure)
   }, [posthog])
 
   // ... rest of the page
