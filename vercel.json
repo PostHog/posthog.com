@@ -751,12 +751,12 @@
             "destination": "/teams/builder-relations/:path*"
         },
         {
-            "source": "/teams/query-performance",
-            "destination": "/teams/analytics-platform"
+            "source": "/teams/analytics-platform",
+            "destination": "/teams/query-performance"
         },
         {
-            "source": "/teams/query-performance/:path*",
-            "destination": "/teams/analytics-platform/:path*"
+            "source": "/teams/analytics-platform/:path*",
+            "destination": "/teams/query-performance/:path*"
         },
         {
             "source": "/docs/sdk-doctor/keeping-sdks-current:ext(\\.md)?",
