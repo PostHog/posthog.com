@@ -8,7 +8,7 @@ There are three ways to get metrics into PostHog:
 
 - **PostHog SDKs**: if a PostHog SDK is already in your app, record metrics with the `posthog.metrics` API. No new packages, no extra authentication.
 - **OpenTelemetry (OTLP)**: if you use OpenTelemetry anywhere else, point your OTLP metrics exporter at PostHog. No PostHog packages required.
-- **Metrics agent**: if your services already expose Prometheus `/metrics` endpoints, run the PostHog metrics agent with [Docker](/docs/metrics/installation/docker) or the [Kubernetes Helm chart](/docs/metrics/installation/kubernetes) to scrape and forward them, with no code changes.
+- **Metrics agent**: if your services already expose Prometheus `/metrics` endpoints, run the PostHog metrics agent with [Docker](/docs/metrics/installation/docker) or the [Kubernetes Helm chart](/docs/metrics/installation/kubernetes) to scrape and forward them, with no code changes. The same agent can also [pull from Google Cloud Monitoring](/docs/metrics/installation/google-cloud) for managed-service metrics like Cloud SQL and load balancers.
 
 Already capturing metrics with Prometheus, StatsD, or Datadog? You don't need to replace anything: add the PostHog call next to your existing instrumentation, using the same metric name and attributes, and migrate at your own pace.
 
@@ -22,5 +22,6 @@ Already capturing metrics with Prometheus, StatsD, or Datadog? You don't need to
 | [Other languages](/docs/metrics/installation/other)       | Any OpenTelemetry-compatible OTLP metrics exporter                |
 | [Docker](/docs/metrics/installation/docker)               | Metrics agent container that scrapes Prometheus `/metrics` targets |
 | [Kubernetes](/docs/metrics/installation/kubernetes)       | Helm chart that scrapes `prometheus.io/scrape` annotated pods     |
+| [Google Cloud](/docs/metrics/installation/google-cloud)   | Metrics agent that pulls Google Cloud Monitoring metrics          |
 
 > **Note:** Metrics uses the OpenTelemetry Protocol (OTLP) standard. If your language isn't listed, check the [OpenTelemetry documentation](https://opentelemetry.io/docs/) for compatible libraries and see [other languages](/docs/metrics/installation/other).
