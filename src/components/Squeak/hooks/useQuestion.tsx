@@ -249,6 +249,19 @@ export const useQuestion = (id: number | string, options?: UseQuestionOptions) =
         const profileID = user?.profile?.id
         if (!profileID) return
 
+        // A second click on the same button takes the vote back, so the event says which of the two it was.
+        const votedReply = questionData?.attributes.replies?.data?.find((r) => r.id === replyId)
+        const undo = (
+            type === 'up' ? votedReply?.attributes.upvoteProfiles?.data : votedReply?.attributes.downvoteProfiles?.data
+        )?.some((p) => p.id === profileID)
+
+        posthog?.capture('squeak vote reply start', {
+            questionId: questionID,
+            replyId,
+            type,
+            undo: !!undo,
+        })
+
         if (questionData) {
             const profileRef = { id: profileID }
             const replies = questionData.attributes.replies?.data || []
@@ -292,15 +305,35 @@ export const useQuestion = (id: number | string, options?: UseQuestionOptions) =
 
         try {
             const jwt = await getJwt()
-            await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/replies/${replyId}/${type}`, {
+            const voteRes = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/replies/${replyId}/${type}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
                     Authorization: `Bearer ${jwt}`,
                 },
             })
+
+            if (!voteRes.ok) {
+                throw new Error('Failed to vote on reply')
+            }
+
             await mutate()
-        } catch {
+
+            posthog?.capture('squeak vote reply', {
+                questionId: questionID,
+                replyId,
+                type,
+                undo: !!undo,
+            })
+        } catch (error) {
+            posthog?.capture('squeak error', {
+                source: 'useQuestion.voteReply',
+                questionId: questionID,
+                replyId,
+                type,
+                error: JSON.stringify(error),
+            })
+
             await mutate()
         }
     }

@@ -24,7 +24,9 @@ const logsHogAlt = 'A hedgehog inspecting logs with a magnifying glass'
 export const logs = {
     ...getTool('logs'),
     Icon: IconActivity,
-    productVariantName: 'Logs ingestion (14-day retention)',
+    // Shown on the /pricing calculator only, so the rest of the site still says "Logs"
+    categoryName: 'Logs & Tracing',
+    productVariantName: 'Logs/Tracing ingestion (14-day retention)',
     type: 'logs',
     teamSlug: 'apm',
     // No community topic for Logs yet (checked Squeak topics API – none with slug "logs").
@@ -35,7 +37,7 @@ export const logs = {
     includeAddonRates: true,
     // From contents/docs/logs/pricing.mdx
     pricingDescription:
-        'Logs is billed by the number of GB ingested. The price per GB changes based on your usage. Retention is 14 days by default; extend newly ingested logs to 30 days with an add-on.',
+        'Logs is billed by the number of GB ingested. The price per GB changes based on your usage. Retention is 14 days by default; set custom retention per service or per source at $0.05/GB per month retained.',
     seo: {
         title: 'Logs – Centralized log management with PostHog',
         description:
@@ -49,7 +51,11 @@ export const logs = {
      * feed the carousel templates their slide arrays).
      */
     productMenu: [
-        { slug: 'overview', name: 'Overview', icon: <IconEye className="size-4" /> },
+        {
+            slug: 'overview',
+            name: 'Overview',
+            icon: <IconEye className="size-4" />,
+        },
         {
             slug: 'eli5',
             name: 'What does it do?',
@@ -114,8 +120,6 @@ export const logs = {
     ],
     overview: {
         title: 'Logs that already know your users',
-        description:
-            'Events, requests, state changes, and session replays in one place – one of the tools that makes your product self-driving by giving agents the backend signal to find a bug and ship the fix, tied to the user who hit it.',
         eli5: 'Logs stores the records your services emit at runtime – requests handled, errors hit, decisions made – so you can search by service, severity, and attribute instead of grepping text files. Point any OpenTelemetry (OTLP) client at PostHog (no proprietary SDK), group similar lines into patterns to see what changed, and open any record to have PostHog AI explain it.',
         textColor: 'text-white',
         layout: 'overlay',
@@ -170,11 +174,16 @@ export const logs = {
     addonSliders: [
         {
             key: 'logs_retention_30d',
-            label: '30-day retention',
+            label: 'Custom retention',
             // Billing meters all ingested GB (any retention) on the base logs product, then bills
-            // 30-day GB again at the add-on rate as a storage premium.
+            // retained GB again at the add-on rate for each month of retention.
             countsTowardParentVolume: true,
-            note: 'These GB also count toward logs ingestion above – this price is just the added cost of storing them longer.',
+            // Months of retention input on /logs/pricing. The /pricing calculator still estimates one month.
+            multiplier: { unit: 'month', initial: 1 },
+            // Shown on /logs/pricing
+            pricingDescription:
+                'Keep logs longer than the 14-day default. Custom retention is billed per GB for each month you keep your logs, and you can set it per service or per source in your logs and traces settings.',
+            note: 'Billed per month of retention. These GB also count toward logs ingestion above – this price is the added cost for each month you keep them.',
             sliderConfig: {
                 marks: [0, 10, 100, 1000, 5000],
                 min: 0,
@@ -195,7 +204,6 @@ export const logs = {
     // Roles/scenarios reshaped from contents/docs/logs/basics.mdx ("When logs save you")
     // and link-person / link-session-replay docs.
     useCases: {
-        intro: 'Logs is used across teams depending on your role.',
         rows: [
             [
                 'Product Engineers',
