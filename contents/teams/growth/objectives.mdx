@@ -1,6 +1,45 @@
-## Q3 2026 objectives
+## Q4 2026 objectives
 
 These are the primary goals the team is prioritizing this quarter.
+
+<details>
+<summary>Solve onboarding and implementation for agents – <TeamMember name="Matt Brooker" photo /> <TeamMember name="Rafael Audibert" photo /></summary>
+
+- **Rationale:** As an agent, it is hard to sign up, to implement PostHog correctly, and to know what to do with it.
+- **Things we could do:** Dumbify the wizard and make it agent-driven. Expose our skills through a CLI and make agents aware of it. Simplify account provisioning for agents.
+- **Note:** Rafael owns this goal while Matt is on parental leave.
+
+</details>
+
+<details>
+<summary>Solve the PostHog experience for humans – <TeamMember name="Fernando Gomes" photo /></summary>
+
+- **Rationale:** As a human, it is hard to know how to get set up and what you can do with PostHog.
+- **Things we could do:** Frame PostHog around the experience of setting it up for your product, instead of setting up each PostHog tool one by one. Redesign onboarding for the new positioning. Find out if the onboarding email flow is correct for the current stage of PostHog. Make it easier to offload onboarding and implementation to an agent. Use the wizard in the cloud for point implementations, such as adding a new product. Think through onboarding to a new product more carefully.
+
+</details>
+
+<details>
+<summary>Solve inter-product growth for agents – <TeamMember name="Rafael Audibert" photo /></summary>
+
+- **Rationale:** After a codebase uses one product, how do we make sure agents suggest and implement the other PostHog products that go with it?
+- **Things we could do:** This goal is more abstract than the others, so we must try many things to see what sticks. Suggest new products and tools in tool call responses. Guide the user to new products with incremental skill surfacing. Write more docs.
+
+</details>
+
+### Side-quest
+
+<details>
+<summary>Solve intra-product growth for humans</summary>
+
+- **Rationale:** After a user starts to use a product, how do we spread knowledge about that product so that the user uses it more?
+- **Things we could do:** Each product team should own this for its own product, but not all of them do it well. Build a platform that makes it easy for them.
+
+</details>
+
+## Q3 2026 recap
+
+These were the primary goals the team prioritized this quarter.
 
 <details>
 <summary>Redesign the authentication and onboarding flows – <TeamMember name="Fernando Gomes" photo /></summary>
@@ -30,55 +69,6 @@ These are the primary goals the team is prioritizing this quarter.
 - Marketing should also be able to base their decisions off of this data
 
 </details>
-
-## Q2 2026 recap
-
-**North star:** 20% of sign ups should happen outside posthog.com/signup
-
-These were the primary goals the team prioritized this quarter.
-
-<details>
-<summary>Make agentic sign ups first-citizen of PostHog – <TeamMember name="Matt Brooker" photo /> <TeamMember name="Fernando Gomes" photo /></summary>
-
-- **Rationale:** Agents are increasingly the ones picking and setting up tools. If our sign-up assumes a human clicking through a dashboard, we miss the fastest-growing top of funnel.
-- **Things we could do:** Agentic onboarding by default — headless onboarding, Wizard, Stripe projects, AI-first flows. Wizard should be able to create orgs + projects on its own with no UI clicks. Expand the pattern beyond Stripe (done) to Vercel, Lovable, Supabase, and Replit.
-- **We'll know we're successful when:** An agent can bring a PostHog org and project online through any of our partner surfaces without a human in the loop.
-
-</details>
-
-<details>
-<summary>Allow anyone to integrate/provision an org + project in PostHog – <TeamMember name="Rafael Audibert" photo /> <TeamMember name="Matt Brooker" photo /></summary>
-
-- **Rationale:** Every partner, every embedded platform, and every agentic flow needs a programmatic way to spin up a PostHog org or project. One-off integrations don't scale — a generic path does.
-- **Things we could do:** Lean on the soon-to-come Partnerships Wrangler. Market it as either PostHog Marketplace or PostHog as a platform. Review what Agentic Provisioning needs to become generic (just an API). Write docs and settle on how to do it. Stand up the right application process — probably Support Hero-driven.
-- **We'll know we're successful when:** A partner or agent can provision an org + project through a single public path, with no custom work from us.
-
-</details>
-
-<details>
-<summary>Activation rate across all onboarding experiences should be 60%+ – <TeamMember name="Matt Brooker" photo /> <TeamMember name="Fernando Gomes" photo /> <TeamMember name="Rafael Audibert" photo /></summary>
-
-- **Rationale:** A single numerical bar pulls every onboarding experience towards the same outcome. Different channels — warm, lukewarm, cold, frozen — need different treatment, and a unified target forces us to treat them as one system.
-- **Things we could do:** Settle the activation metric alongside PMs — we're currently on "soft activation" per-product; global activation is still TBD. Implement channel-specific onboarding: website (warm), Wizard (lukewarm), agentic provisioning (cold), Lovable/Replit auto-adding Analytics (frozen). Explicitly de-scope PostHog Code activation for now — Signals + PostHog Code team will handle that.
-- **We'll know we're successful when:** Measured activation rate across every onboarding surface is 60% or higher.
-
-</details>
-
-<details>
-<summary>Shape the external interface for Signals – <TeamMember name="Matt Brooker" photo /> <TeamMember name="Fernando Gomes" photo /> <TeamMember name="Rafael Audibert" photo /></summary>
-
-- **Rationale:** Signals is still early and its external surface isn't settled. Getting the shape right now — before partners depend on it — avoids painful contract breaks later. Partner vibecoding app builders are the most credible early validators.
-- **Things we could do:** Write a spec for the external interface and validate with partner vibecoding app builders. We believe these partners want Signals, but Signals may not be ready to expose yet — first check feasibility. Once that's done, stop and reflect: how do we make this the next big thing after MCP?
-- **We'll know we're successful when:** We have a validated spec and a clear read on whether Signals can be the next big thing after MCP.
-
-</details>
-
-### Stretch goals
-
-- Launching VSCode extension – <TeamMember name="Fernando Gomes" photo />
-- Launching MCP Analytics alongside Lucas/Surveys team – <TeamMember name="Rafael Audibert" photo />
-- With the wizard getting context from posthog, foster cross-selling - TBD
-- Something fun? – <TeamMember name="Matt Brooker" photo />
 
 ## Next quarters
 
