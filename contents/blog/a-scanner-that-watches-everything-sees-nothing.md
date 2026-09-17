@@ -42,6 +42,8 @@ A scanner only sees one recording at a time, so it cannot compare a session with
 
 ## Replay Vision best practices
 
+If you remember nothing else, remember this: your job is to pick and refine the questions you want Replay Vision to answer. It will do the watching. Product judgment remains a human problem, which is fortunate for those of us employed to provide it. Here's how to do that.
+
 ### 1. Each scanner should answer one specific question
 
 When people build their first Replay Vision scanner, they tend to try the same thing: one scanner that "watches everything" and "catches everything interesting" (ask us how we know). It sounds reasonable, but it asks the model to decide both what happened and what matters to you and your product. It can do the first part just fine, but the second is still your job.
@@ -124,10 +126,6 @@ Use the cheapest model for high-volume jobs where you care about the distributio
 Step up a tier when the job combines a fixed rubric with some judgment. An experiment classifier fits well here. It can label each post-exposure recording as `smooth`, `hesitation`, `confusion`, `error_or_dead_end`, or `inconclusive`, then a Scout or a different agent can compare the pattern across variants.
 
 Save the priciest model for jobs where someone may act on a single observation, because a plausible wrong answer wastes their time. If the observations are close but not quite right, tighten the prompt before you move up. A sharper instruction is often cheaper than a bigger model.
-
----
-
-If you take one thing from this piece, remember: your job is to pick and refine the questions you want Replay Vision to answer. It will do the watching. Product judgment remains a human problem, which is fortunate for those of us employed to provide it.
 
 ## Prompts for you to steal
 
