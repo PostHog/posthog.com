@@ -6394,6 +6394,11 @@
             "source": "/contact-us",
             "destination": "/talk-to-a-human",
             "statusCode": 301
+        },
+        {
+            "source": "/docs/references/posthog-js/types/AutocaptureConfig:ext(\\.md)?",
+            "destination": "/docs/libraries/js/config:ext?#configuring-autocapture",
+            "statusCode": 301
         }
     ]
 }
