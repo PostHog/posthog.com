@@ -15,7 +15,7 @@ PostHog's [MCP server](/docs/model-context-protocol) exposes MCP Analytics as a 
 ## Before you start
 
 1. **Set up MCP Analytics** – [install the SDK in your MCP server](/docs/mcp-analytics/installation) so tool calls are captured.
-2. **Connect the MCP server** – follow the [MCP server setup](/docs/model-context-protocol) to connect PostHog to your client. MCP Analytics tools need the `mcp_analytics:read` scope, and the ones that write data (feedback, missing capabilities, recomputing clusters) need `mcp_analytics:write`.
+2. **Connect the MCP server** – follow the [MCP server setup](/docs/model-context-protocol) to connect PostHog to your client. MCP Analytics reads need `mcp_analytics:read`; tool-quality queries also need `query:read`. Generating session summaries, reporting missing capabilities, and recomputing clusters need `mcp_analytics:write`.
 
 ## What you can do here
 
@@ -40,10 +40,10 @@ PostHog's [MCP server](/docs/model-context-protocol) exposes MCP Analytics as a 
 - Sample intents behind its calls
 - Harness and client breakdown
 
-**Send feedback**
+**Report missing capabilities**
 
-- Submit feedback about a tool
 - Report a missing capability your agent needed but couldn't find
+- Submit other tool feedback through the [API](/docs/mcp-analytics/surfaces/api)
 
 ## Example prompts
 
