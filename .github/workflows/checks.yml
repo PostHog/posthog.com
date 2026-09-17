@@ -87,6 +87,10 @@ jobs:
                     echo "changed=true" >> "$GITHUB_OUTPUT"
                   fi
 
+            # Runs on plain node: the job installs no dependencies.
+            - name: Check docs landing pages serve .md
+              run: node --test scripts/docs-md-routes.test.mjs
+
             # Commits through the GitHub API so it carries GitHub's signature, which
             # the org-wide signed-commits ruleset requires. A plain `git push` is
             # rejected.

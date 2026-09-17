@@ -5696,6 +5696,18 @@
             "destination": "/docs/revenue-analytics:ext?"
         },
         {
+            "source": "/docs/revenue-analytics.md",
+            "destination": "/docs/revenue-analytics/start-here.md"
+        },
+        {
+            "source": "/docs/customer-analytics.md",
+            "destination": "/docs/customer-analytics/start-here.md"
+        },
+        {
+            "source": "/docs/distributed-tracing.md",
+            "destination": "/docs/distributed-tracing/start-here.md"
+        },
+        {
             "source": "/revenue-analytics",
             "destination": "/docs/revenue-analytics"
         },
