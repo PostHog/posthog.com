@@ -231,7 +231,12 @@ If you're a support hero, there are a few things to make sure are in place so th
 - You have a Slack channel named `#team-<team-name>`, in exactly the same format as your team name on the teams page.
 - You have a Slack channel named `#support-<team-name>`, in exactly the same format as your team name on the teams page.
 - The PostHog Slack app is in your `#support-<team-name>` channel (invite it with `/invite @PostHog`) — without it, ticket notifications can't be posted there.
-- Support hero notifications are configured. Call `/support-hero <incident_io_schedule_id> [optional_hero_nickname]` in your team's Slack channel to activate or reconfigure at any time. Call `/support-hero` with no arguments to find out who's currently handling tickets.
+- Configure a Slack user group for the team's `Support Hero: <team>` schedule in [incident.io](https://app.incident.io/posthog/on-call/schedules). This group always contains the person who is currently on call, so you can mention the current Support Hero from any Slack channel.
+  1. Open the schedule, then click **Connect Slack group**.
+  1. Select **Create new**.
+  1. Remove the `on-call-` prefix from the generated Slack group handle. For example, use `support-hero-query-performance`, not `on-call-support-hero-query-performance`.
+  1. Save the group. If the **Save** button is disabled, incident.io shows who has permission to make this change. Ask one of those people to complete the setup.
+- Mention the group as `@support-hero-<team-name>` when you need the current Support Hero. Do not use the `/support-hero` Slack command to configure notifications.
 
 A couple more things to make sure of (these may happen magically in future):
 
