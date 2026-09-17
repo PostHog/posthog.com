@@ -5,25 +5,34 @@ import dayjs from 'dayjs'
 import type { TransactionMetadata } from './types'
 import Link from 'components/Link'
 
+const MessageIcon = () => <IconMessage className="size-5 text-blue" />
+
 const transactionTypeIcons: Record<string, React.ReactNode> = {
     gift: <IconPresent className="size-5 text-purple" />,
     redemption: <IconReceipt className="size-5 text-red" />,
     achievement: <IconBadge className="size-5 text-yellow" />,
-    reply: <IconMessage className="size-5 text-blue" />,
+    reply: <MessageIcon />,
+    question: <MessageIcon />,
 }
+
+const QuestionSubjectLink = ({ metadata }: { metadata?: TransactionMetadata }) => (
+    <Link to={`/questions/${metadata?.question?.permalink || ''}`} className="text-red dark:text-yellow font-semibold">
+        {metadata?.question?.subject}
+    </Link>
+)
 
 const getDescription = (type: string, metadata?: TransactionMetadata) => {
     switch (type) {
         case 'reply':
             return (
                 <>
-                    Replied to{' '}
-                    <Link
-                        to={`/questions/${metadata?.question?.permalink || ''}`}
-                        className="text-red dark:text-yellow font-semibold"
-                    >
-                        {metadata?.question?.subject}
-                    </Link>
+                    Replied to <QuestionSubjectLink metadata={metadata} />
+                </>
+            )
+        case 'question':
+            return (
+                <>
+                    Posted <QuestionSubjectLink metadata={metadata} />
                 </>
             )
         default:
@@ -49,7 +58,7 @@ export default function TransactionTitle({
     const typeKey = type.toLowerCase().replace(/_/g, '')
     const fallbackIcon = transactionTypeIcons[typeKey]
     const isRedemption = typeKey === 'redemption'
-    const description = getDescription(type, metadata)
+    const description = getDescription(typeKey, metadata)
     const code = metadata?.redemption?.code
     const formattedType = type.toLowerCase().replace(/_/g, ' ')
 

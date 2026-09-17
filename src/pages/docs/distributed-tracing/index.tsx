@@ -12,9 +12,11 @@ export const Content = () => {
                 <h2 className="mb-4">Overview</h2>
                 <div>
                     <p>
-                        PostHog Distributed Tracing works with the OpenTelemetry Protocol (OTLP). You don't need any
-                        vendor-specific SDKs. Use standard OpenTelemetry libraries to send spans to PostHog using your
-                        project token.
+                        PostHog Distributed Tracing works with the OpenTelemetry Protocol (OTLP). Use standard
+                        OpenTelemetry libraries to send spans to PostHog using your project token. On Node.js,{' '}
+                        <code>posthog-node</code> can also create and export spans itself, with no OpenTelemetry
+                        dependency – see the{' '}
+                        <Link to="/docs/distributed-tracing/installation/nodejs">Node.js guide</Link>.
                     </p>
                     <p>
                         Distributed tracing is currently in beta. Setup details may change before general availability.
@@ -28,7 +30,8 @@ export const Content = () => {
                     <ul>
                         <li>
                             <b>OpenTelemetry-compatible</b> - Use standard OpenTelemetry SDKs, no PostHog packages
-                            required. Works with any compatible client.
+                            required. Works with any compatible client, or with <code>posthog-node</code>'s own span
+                            API.
                         </li>
                         <li>
                             <b>Part of the observability suite</b> - Traces use the same OpenTelemetry ingestion as{' '}

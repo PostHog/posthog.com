@@ -107,6 +107,26 @@ const surfaces = [
         description: 'Run tasks, review code, and use any model from your desktop.',
     },
 ]
+const sdkSections = [
+    {
+        name: 'SDKs',
+        url: '/docs/libraries',
+        icon: 'IconBox',
+        color: 'blue',
+    },
+    {
+        name: 'Frameworks',
+        url: '/docs/frameworks',
+        icon: 'IconBrackets',
+        color: 'purple',
+    },
+    {
+        name: 'Services',
+        url: '/docs/services',
+        icon: 'IconPlug',
+        color: 'green',
+    },
+]
 
 export const DocsIndex = () => {
     const posthog = usePostHog()
@@ -189,6 +209,21 @@ export const DocsIndex = () => {
 
                         <Panel eyebrow="Tools" description="What PostHog does – reference docs for every tool.">
                             <AppsList />
+                            <h3 className="m-0 mb-3 text-sm font-bold uppercase tracking-wide text-primary">
+                                Libraries &amp; integrations
+                            </h3>
+                            <div className="grid grid-cols-1 gap-2.5 @xs:grid-cols-3">
+                                {sdkSections.map((section) => (
+                                    <IconLink
+                                        key={section.url}
+                                        to={section.url}
+                                        color={section.color}
+                                        icon={section.icon}
+                                    >
+                                        {section.name}
+                                    </IconLink>
+                                ))}
+                            </div>
                         </Panel>
                     </div>
 
