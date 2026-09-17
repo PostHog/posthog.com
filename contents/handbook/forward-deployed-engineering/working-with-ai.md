@@ -4,7 +4,7 @@ sidebar: Handbook
 showTitle: true
 ---
 
-What you ship is your responsibility, whether AI generated all, most, or none of it.
+You're responsible for what you ship, whether AI generated all, most, or none of it — no exceptions
 
 We'd be at a disadvantage if we didn't use AI, but using it badly could put us at even more of a disadvantage.
 
