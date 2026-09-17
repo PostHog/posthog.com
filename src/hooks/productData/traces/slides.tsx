@@ -1,5 +1,6 @@
 import React from 'react'
 import {
+    IconAI,
     IconBell,
     IconBrowser,
     IconFunnels,
@@ -295,6 +296,7 @@ export const topFeatures: CarouselSlide[] = [
     {
         slug: 'waterfall',
         label: 'Trace waterfall',
+        icon: <IconGanttChart className="size-5" />,
         ...TAB_STYLE,
         layout: 'stack',
         heading: 'Every span of a request, in one waterfall',
@@ -427,10 +429,15 @@ OTEL_SERVICE_NAME="my-app"`}
                 </div>
             </>
         ),
+        image: {
+            src: 'https://res.cloudinary.com/dmukukwp6/image/upload/spans_light_updated_451a69c627.jpg',
+            alt: 'A span inspector open on the Logs tab, showing the log lines recorded during that span beside the trace waterfall',
+        },
     },
     {
         slug: 'catnip',
         label: 'Catnip for agents',
+        icon: <IconAI className="size-5" />,
         ...TAB_STYLE,
         layout: 'stack',
         heading: 'Catnip for agents',
