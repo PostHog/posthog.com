@@ -76,7 +76,7 @@ As a prerequisite, you need to sync the language code of the user with PostHog. 
 
 ### Sending push notifications
 
-Workflows can send native mobile push notifications directly. Add a **Push notification** step to a workflow, the same way you add an email step.
+Workflows can send native mobile push notifications directly. Add a **Push notification** step to a workflow, the same way you add an email step. Push is in open beta.
 
 Two things have to be in place first:
 
