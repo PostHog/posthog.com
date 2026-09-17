@@ -86,8 +86,7 @@ export default function Hero({ className = '', placement }: { className?: string
                 <span className="box-decoration-clone rounded-xs bg-highlight px-2 text-red">product builders.</span>
             </h1>
             <p className="m-0 max-w-2xl text-lg text-secondary">
-                Advice on building great products, lessons (and mistakes) from building PostHog, and deep dives into the
-                strategies of top startups.
+                Join 80,000+ builders from companies like Vercel, HuggingFace, GitLab, and leading startups.
             </p>
             <SubscribeForm placement={placement} />
         </div>

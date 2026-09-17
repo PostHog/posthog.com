@@ -1,13 +1,17 @@
 import { useContext } from 'react'
 import React, { createContext, useEffect, useState } from 'react'
 import qs from 'qs'
-import { ProfileData, SQUEAK_HOST } from 'lib/strapi'
+import { ProfileData, SQUEAK_HOST, Wallet } from 'lib/strapi'
 import usePostHog from './usePostHog'
 import Link from 'components/Link'
 import { useToast } from '../context/Toast'
 
 // Sentinel value used by posthog-js for cookieless tracking mode
 const COOKIELESS_SENTINEL_VALUE = '$posthog_cookieless'
+
+// Deadline for the OAuth resolve call. Without it a slow or hung request keeps
+// the sign-in page on an unbounded spinner with no way out.
+const RESOLVE_TIMEOUT_MS = 15000
 
 // Shared POST + JSON-parse + Strapi error extraction for the /api/auth/posthog/*
 // endpoints. Returns the parsed body plus a normalized `error` string; callers
@@ -43,18 +47,10 @@ export type User = {
         id: number
     } & ProfileData
     role: {
-        type: 'authenticated' | 'public' | 'moderator'
+        type: 'authenticated' | 'public' | 'moderator' | 'community-moderator'
     }
-    wallet: {
-        balance: number
-        transactions: {
-            id: number
-            amount: number
-            date: Date
-            type: 'achievement' | 'gift'
-            metadata: any
-        }[]
-    }
+    // Absent until the user first earns points — Strapi only creates the component on write
+    wallet?: Wallet
     imageGenerationRateLimit?: {
         remaining: number
         limit: number
@@ -63,9 +59,11 @@ export type User = {
         monthlyCount: number
     }
     picasso?: boolean
+    webmaster?: boolean
     // Surfaced by the Strapi `me` override (the raw posthogUserId is private).
     // True when a PostHog OAuth identity is linked to this account.
     hasPosthogLogin?: boolean
+    distinctId?: string | null
 }
 
 export type DisambiguationResult = {
@@ -78,6 +76,7 @@ type UserContextValue = {
     isLoading: boolean
     user: User | null
     isModerator: boolean
+    isForumModerator: boolean
     setUser: React.Dispatch<React.SetStateAction<User | null>>
     fetchUser: (token?: string | null) => Promise<User | null>
     getJwt: () => Promise<string | null>
@@ -133,6 +132,7 @@ export const UserContext = createContext<UserContextValue>({
     isLoading: true,
     user: null,
     isModerator: false,
+    isForumModerator: false,
     setUser: () => {
         // noop
     },
@@ -195,7 +195,7 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
 
     // Shared post-authentication steps once a JWT has been obtained (via password
     // login or an OAuth provider): hydrate the user and persist the token, then
-    // fire off the distinct-id link + achievements check WITHOUT awaiting them.
+    // fire off the achievements check WITHOUT awaiting it.
     const finalizeLogin = async (token: string): Promise<User> => {
         const user = await fetchUser(token)
 
@@ -206,42 +206,20 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
         localStorage.setItem('jwt', token)
         setJwt(token)
 
-        // Fire-and-forget: neither the distinct-id link nor the achievements check
-        // gates sign-in, and awaiting them adds serial round-trips to the
-        // "Signing you in…" spinner. Kick them off and return immediately; the
-        // returned `user` is unaffected (it was fetched above, before these run).
+        // Fire-and-forget: the achievements check does not gate sign-in.
         // `.catch` keeps a failed request from surfacing as an unhandled rejection.
-        try {
-            const distinctId = posthog?.get_distinct_id?.()
-
-            if (distinctId && distinctId !== COOKIELESS_SENTINEL_VALUE) {
-                fetch(`${SQUEAK_HOST}/api/users/${user.id}`, {
-                    method: 'PUT',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        Authorization: `Bearer ${token}`,
-                    },
-                    body: JSON.stringify({
-                        distinctId,
-                    }),
-                }).catch((error) => console.error(error))
-            }
-
-            fetch(`${SQUEAK_HOST}/api/achievements/check`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    Authorization: `Bearer ${token}`,
+        fetch(`${SQUEAK_HOST}/api/achievements/check`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${token}`,
+            },
+            body: JSON.stringify({
+                data: {
+                    date: new Date(),
                 },
-                body: JSON.stringify({
-                    data: {
-                        date: new Date(),
-                    },
-                }),
-            }).catch((error) => console.error(error))
-        } catch (error) {
-            console.error(error)
-        }
+            }),
+        }).catch((error) => console.error(error))
 
         return user
     }
@@ -313,19 +291,41 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
         try {
             posthog?.capture('squeak oauth login start', { provider })
 
-            const res = await fetch(
-                `${SQUEAK_HOST}/api/auth/posthog/resolve?access_token=${encodeURIComponent(accessToken)}`
-            )
+            const controller = new AbortController()
+            const timeout = setTimeout(() => controller.abort(), RESOLVE_TIMEOUT_MS)
+            let res: Response
+            try {
+                res = await fetch(
+                    `${SQUEAK_HOST}/api/auth/posthog/resolve?access_token=${encodeURIComponent(accessToken)}`,
+                    { signal: controller.signal }
+                )
+            } finally {
+                clearTimeout(timeout)
+            }
 
             const data = await res.json()
 
             if (!res.ok) {
-                throw new Error(data?.error?.message || data?.message)
+                const message = data?.error?.message || data?.message || `Sign-in failed (HTTP ${res.status}).`
+                // Capture the status and message so the failure is diagnosable.
+                posthog?.capture('squeak error', {
+                    source: 'useUser.loginWithProvider',
+                    provider,
+                    status: res.status,
+                    error: message,
+                })
+                console.error(message)
+                return { error: message }
             }
 
             // Non-employee with no durable link and no email match: the redirect
             // page renders the disambiguation screen (create vs. log in to link).
             if (data.status === 'needs_disambiguation') {
+                // Emit an event so this fork is not read as a silent failure.
+                posthog?.capture('squeak oauth login needs disambiguation', {
+                    provider,
+                    emailInUse: data.emailInUse,
+                })
                 return {
                     status: 'needs_disambiguation',
                     pendingToken: data.pendingToken,
@@ -342,13 +342,20 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
 
             return user
         } catch (error) {
+            const timedOut = error instanceof DOMException && error.name === 'AbortError'
+
             posthog?.capture('squeak error', {
                 source: 'useUser.loginWithProvider',
                 provider,
-                error: JSON.stringify(error),
+                timed_out: timedOut,
+                error: error instanceof Error ? error.message : String(error),
             })
 
             console.error(error)
+
+            if (timedOut) {
+                return { error: 'Signing in took too long. Please try again.' }
+            }
 
             if (error instanceof Error) {
                 return { error: error.message }
@@ -605,6 +612,18 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
         const meData: User = await meRes.json()
 
         setUser(meData)
+
+        const distinctId = posthog?.get_distinct_id?.()
+        if (token && !meData.distinctId && distinctId && distinctId !== COOKIELESS_SENTINEL_VALUE) {
+            fetch(`${SQUEAK_HOST}/api/users-permissions/distinct-id`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    Authorization: `Bearer ${token}`,
+                },
+                body: JSON.stringify({ distinctId }),
+            }).catch((error) => console.error(error))
+        }
 
         const notifications = await fetch(`${SQUEAK_HOST}/api/profile/notifications`, {
             headers: {
@@ -909,6 +928,7 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
         user,
         setUser,
         isModerator: user?.role?.type === 'moderator',
+        isForumModerator: user?.role?.type === 'moderator' || user?.role?.type === 'community-moderator',
         isLoading,
         getJwt,
         login,

@@ -100,13 +100,13 @@ Speak to <TeamMember name="Joe Martin" />, <TeamMember name="Cleo Lant" />, or <
 <details>
 <summary>A customer has an issue with merch</summary>
 
-Please share in the #merch channel. <TeamMember name="Kendal Hall" /> owns fulfillment issues. <TeamMember name="Lottie Coxon" /> owns merch design and creation. <TeamMember name="Cory Watilo" /> and <TeamMember name="Eli Kinsey" /> own the storefront.
+Please share in the #merch channel. <TeamMember name="Kendal Hall" /> owns fulfillment issues. <TeamMember name="Lottie Coxon" /> owns merch design and creation. <TeamMember name="Eli Kinsey" /> and <TeamMember name="Ian Matson" /> own the storefront.
 </details>
 
 <details>
 <summary>I have a question / problem / suggestion for the website</summary>
 
-The website is owned by <TeamMember name="Cory Watilo" /> and <TeamMember name="Eli Kinsey" />. Generally, the best place to ask is the `#posthogdotcom` Slack channel.
+The website is owned by <TeamMember name="Eli Kinsey" /> and <TeamMember name="Ian Matson" />. Generally, the best place to ask is the `#posthogdotcom` Slack channel.
 
 For larger pieces of work — a new product page, a significant copy overhaul — read [Working with the website team](/handbook/marketing/working-with-website) for the process to follow.
 </details>

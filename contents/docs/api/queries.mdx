@@ -16,8 +16,8 @@ API queries enable you to query your data in PostHog. This is useful for:
 
 The `/query` endpoint is intended for ad-hoc analytics and embedded use cases. It is **not a supported export mechanism**.
 
-- **Bulk or recurring exports of `events`, `persons`, or `query_log` are not supported** over `/query`. Use [batch exports](/docs/cdp/batch-exports) for ETL, data warehouse syncs, and any integration that pulls more than a few thousand rows on a schedule.
-- **Third-party connectors must use [batch exports](/docs/cdp/batch-exports)**, not `/query`. Connectors built on `/query` are not supported and will be rate-limited or rejected.
+- **Bulk or recurring exports of `events`, `persons`, or `query_log` are not supported** over `/query`. Use [batch exports](/docs/cdp/batch-exports) for ETL, data warehouse syncs, and any integration that pulls more than a few thousand rows on a schedule. For one-off bulk exports, use [file download exports](/docs/cdp/file-download-exports).
+- **Third-party connectors must use [batch exports](/docs/cdp/batch-exports) or [file download exports](/docs/cdp/file-download-exports)**, not `/query`. Connectors built on `/query` are not supported and will be rate-limited or rejected.
 - **`OFFSET` pagination is not supported for programmatic requests** (personal API keys, OAuth tokens, and similar). It currently returns HTTP 400 for personal API keys, and we may reject it for other authentication methods at any time. Use keyset pagination on `timestamp` instead (see [below](#5-use-timestamp-based-pagination-instead-of-offset)).
 - We **reserve the right to rate-limit, restrict, or reject** queries that look like exports, including without prior notice. Pipelines built on `/query` may break at any time.
 - Use [real-time destinations](/docs/cdp/destinations) for sending data to Slack, webhooks, etc.
@@ -40,7 +40,7 @@ To create a query, you make a `POST` request to the `/api/projects/:project_id/q
 
 By default, API queries return up to 100 rows. If you specify your own `LIMIT`, you can return up to 50k rows per query.
 
-For paginating beyond a single query, you **must** use [keyset pagination on `timestamp`](#5-use-timestamp-based-pagination-instead-of-offset). `OFFSET` is not supported for programmatic requests and is currently rejected with HTTP 400 for personal API keys. For exporting larger volumes, use [batch exports](/docs/cdp/batch-exports) – `/query` is not a supported export path.
+For paginating beyond a single query, you **must** use [keyset pagination on `timestamp`](#5-use-timestamp-based-pagination-instead-of-offset). `OFFSET` is not supported for programmatic requests and is currently rejected with HTTP 400 for personal API keys. For exporting larger volumes, use [batch exports](/docs/cdp/batch-exports) or [file download exports](/docs/cdp/file-download-exports) – `/query` is not a supported export path.
 
 </CalloutBox>
 
@@ -231,7 +231,153 @@ The `kind` property in the `query` parameter can be one of the following values.
 - `RetentionQuery`: User retention analysis
 - `PathsQuery`: User journey path analysis
 
-Beyond `HogQLQuery`, these are mostly used to power PostHog internally and are not useful for you, but you can see the [frontend query schema](https://github.com/PostHog/posthog/blob/master/frontend/src/queries/schema/schema-general.ts) for a complete list and more details.
+`HogQLQuery` is the most flexible type, and it is the right choice for most use cases. The other types run the same calculations that PostHog insights use. Two of them are hard to reproduce in SQL, so they are documented below: [`FunnelsQuery`](#funnel-queries) and [`RetentionQuery`](#retention-queries).
+
+For the complete list of types, and for every optional field, see the [frontend query schema](https://github.com/PostHog/posthog/blob/master/frontend/src/queries/schema/schema-general.ts).
+
+### Funnel queries
+
+A `FunnelsQuery` returns the number of users who completed each step of an ordered sequence.
+
+The `series` array is required. Each entry is one step, in order. Use `EventsNode` with an `event` name, or `ActionsNode` with a numeric action `id`.
+
+```bash
+curl \
+  -H 'Content-Type: application/json' \
+  -H "Authorization: Bearer $POSTHOG_PERSONAL_API_KEY" \
+  <ph_app_host>/api/projects/:project_id/query/ \
+  -d '{
+        "query": {
+          "kind": "FunnelsQuery",
+          "dateRange": { "date_from": "-7d" },
+          "series": [
+            { "kind": "EventsNode", "event": "signed_up" },
+            { "kind": "EventsNode", "event": "project_created" },
+            { "kind": "EventsNode", "event": "subscription_started" }
+          ],
+          "funnelsFilter": {
+            "funnelWindowInterval": 14,
+            "funnelWindowIntervalUnit": "day"
+          }
+        },
+        "name": "signup to subscription funnel"
+      }'
+```
+
+The optional `funnelsFilter` object controls how the funnel is calculated:
+
+- `funnelVizType`: `steps` (default), `time_to_convert`, or `trends`. This changes the shape of `results`.
+- `funnelOrderType`: `ordered` (default), `strict`, or `unordered`.
+- `funnelWindowInterval`: how long a user has to complete the funnel. Defaults to `14`.
+- `funnelWindowIntervalUnit`: `second`, `minute`, `hour`, `day` (default), `week`, or `month`.
+- `breakdownAttributionType`: `first_touch` (default), `last_touch`, `all_events`, or `step`.
+
+You can also set `dateRange`, `properties`, `filterTestAccounts`, and `breakdownFilter`, which work the same way as in other insight queries.
+
+#### Funnel response
+
+For the default `steps` visualization, `results` is an array with one object per step, in the same order as `series`:
+
+```json
+{
+  "results": [
+    {
+      "action_id": "signed_up",
+      "name": "signed_up",
+      "custom_name": null,
+      "order": 0,
+      "type": "events",
+      "count": 1000,
+      "people": [],
+      "average_conversion_time": null,
+      "median_conversion_time": null
+    },
+    {
+      "action_id": "project_created",
+      "name": "project_created",
+      "custom_name": null,
+      "order": 1,
+      "type": "events",
+      "count": 640,
+      "people": [],
+      "average_conversion_time": 3600.5,
+      "median_conversion_time": 1800.0
+    }
+  ]
+}
+```
+
+- `count` is the number of users who reached that step.
+- `average_conversion_time` and `median_conversion_time` are in seconds, and measure the time from the previous step. They are `null` on the first step.
+- `people` is always empty on this endpoint. The response gives counts, not user lists.
+
+**Conversion rates and drop-off are not in the response. Calculate them from `count`:**
+
+- Conversion from the previous step: `results[i].count / results[i - 1].count`
+- Conversion from the first step: `results[i].count / results[0].count`
+- Drop-off at a step: `results[i - 1].count - results[i].count`
+
+If you set a `breakdownFilter`, `results` becomes an array of arrays. There is one inner array per breakdown value, and each step gains a `breakdown` and a `breakdown_value` field.
+
+### Retention queries
+
+A `RetentionQuery` returns how many users from each cohort came back in later intervals.
+
+The `retentionFilter` object is required:
+
+```bash
+curl \
+  -H 'Content-Type: application/json' \
+  -H "Authorization: Bearer $POSTHOG_PERSONAL_API_KEY" \
+  <ph_app_host>/api/projects/:project_id/query/ \
+  -d '{
+        "query": {
+          "kind": "RetentionQuery",
+          "dateRange": { "date_from": "-4w" },
+          "retentionFilter": {
+            "targetEntity": { "id": "signed_up", "type": "events" },
+            "returningEntity": { "id": "project_created", "type": "events" },
+            "retentionType": "retention_first_time",
+            "period": "Week",
+            "totalIntervals": 5
+          }
+        },
+        "name": "weekly signup retention"
+      }'
+```
+
+- `targetEntity`: the event or action that puts a user into a cohort. Use `{ "id": "<event name>", "type": "events" }`, or `{ "id": <action id>, "type": "actions" }`.
+- `returningEntity`: the event or action that counts as a return. It uses the same shape.
+- `retentionType`: `retention_recurring` counts a user for every interval in which they return. `retention_first_time` starts the cohort at the user's first matching occurrence. `retention_first_ever_occurrence` starts it at the user's first ever occurrence of the event.
+- `period`: `Hour`, `Day` (default), `Week`, or `Month`.
+- `totalIntervals`: how many intervals to return, including interval 0. Defaults to `8`.
+
+#### Retention response
+
+`results` holds one object per cohort:
+
+```json
+{
+  "results": [
+    {
+      "date": "2026-08-17T00:00:00Z",
+      "label": "Week 0",
+      "breakdown_value": null,
+      "values": [
+        { "count": 210, "label": "Week 0" },
+        { "count": 96, "label": "Week 1" },
+        { "count": 71, "label": "Week 2" }
+      ]
+    }
+  ]
+}
+```
+
+- `date` is the start of the cohort's interval, and `label` names it.
+- `values[n].count` is the number of users from that cohort who returned in interval `n`.
+- `values[0].count` is the cohort size.
+
+**Retention percentages are not in the response. Calculate them from `count`:** `values[n].count / values[0].count * 100`.
 
 ## Response structure
 
@@ -284,7 +430,7 @@ API queries are limited at the project-level to:
   - applies to query execution time, not HTTP request duration
 
 
-At this time, we are not offering higher limits than these, but you may wish to try our [endpoints product](/docs/endpoints), which offers query customization and higher limits. Alternatively, you may be able to use our [batch exports product](/docs/cdp/batch-exports) to pull the data that you need from our events or persons tables on a faster cadence.
+At this time, we are not offering higher limits than these, but you may wish to try our [endpoints product](/docs/endpoints), which offers query customization and higher limits. Alternatively, you may be able to use our [batch exports product](/docs/cdp/batch-exports) to pull the data that you need from our events or persons tables on a faster cadence, or a [file download export](/docs/cdp/file-download-exports) for a one-off export.
 
 If the project's concurrency quota is exhausted, we put the query in queue and wait. The query may wait up to 30 seconds in a queue before executing, being canceled, or timing out.
 
@@ -292,8 +438,19 @@ If the project's concurrency quota is exhausted, we put the query in queue and w
 Some customers haven't been migrated to the above limit and are on an old limit of 120 queries/hour.
 </CalloutBox>
 
+### Hourly read budget
+
+Queries made with a personal API key draw from an hourly read budget per project, and every query debits the bytes it read. The budget refills at 20 GB per hour for projects on the free plan and 200 GB per hour for projects in an organization with a paid plan, and unused budget accumulates for up to 24 hours (480 GB and 4.8 TB).
+
+Once it is exhausted, queries return a `429` response with the code `api_queries_budget_exceeded` and a `Retry-After` header. Every `/query` response made with a personal API key includes `X-PostHog-Query-Bytes-Read` and `X-PostHog-Query-Budget-Remaining-Bytes`; for asynchronous queries, the same headers arrive on the poll response once the query completes.
+
+Cached results still work while the budget is exhausted. Queries made in the PostHog app are not affected.
+
+For the larger budget, [subscribe to a paid plan](/pricing). PostHog is pay-as-you-go with no monthly minimum, and trials count as paid while active. To read less per query, see [writing performant queries](#writing-performant-queries) above.
+
 ## Further reading
 
+- [File download exports for one-off bulk exports](/docs/cdp/file-download-exports)
 - [Project setup for embedded analytics](/docs/data/embedded-analytics-projects)
 - [How to set up embedded analytics with PostHog, Next.js, and Recharts](/tutorials/embedded-analytics)
 - [How to use Recharts to visualize analytics data (with examples)](/tutorials/recharts)

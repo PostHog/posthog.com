@@ -40,6 +40,12 @@ For example, if you sync your billing data to Postgres using a cron job daily an
   classes="rounded"
 />
 
+### Views that depend on other views
+
+If a materialized view reads from another materialized view, PostHog refreshes them in dependency order, so a view never reads a half-written table.
+
+This also means an upstream view refreshes at least as often as anything downstream of it. Setting a view to refresh every 15 minutes pulls everything it reads from onto that cadence too.
+
 ## Incremental materialization
 
 Every run of a materialized view rebuilds the whole table by default. With incremental materialization, each run reads only the rows that are new since the last run. It then updates the table in place.
@@ -118,6 +124,12 @@ The editor also shows warnings that do not block the save:
 - An incremental run never deletes rows. If a row disappears from your source, the stored row stays until you rebuild.
 - A row that arrives later than the lookback window is missed. Widen **Re-read recent data**, or rebuild to pick it up.
 - Incremental views work in the SQL editor only. [Endpoints](/docs/endpoints) always refresh in full.
+
+## Watching runs
+
+The **Materialization** panel lists every run of the view with its status, row count, and any error. Use it to confirm a view is refreshing on schedule and to read the error when one isn't.
+
+If runs are failing or the data looks out of date, see [materialization troubleshooting](/docs/data-warehouse/views/materialize-troubleshooting).
 
 ## Tips for materializing views
 

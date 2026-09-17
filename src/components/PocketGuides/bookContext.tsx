@@ -8,6 +8,11 @@ import { BookPageEntry } from './bookModel'
 export interface BookEntry {
     entry: BookPageEntry
     pages: BookPageEntry[]
+    /**
+     * The Learn tab's route root, when the book is embedded there. Unset in the standalone
+     * reader, where a page's own url is already its route.
+     */
+    basePath?: string
 }
 
 const EntryContext = createContext<BookEntry | null>(null)

@@ -1,7 +1,7 @@
 import React from 'react'
 import { motion, useReducedMotion } from 'framer-motion'
 
-import { AnatomyMarker } from './ReportAnatomy'
+import { FigureMarker } from './FigureMarker'
 
 /**
  * The app's evaluation runs table in miniature, annotated. Kept honest against posthog/posthog
@@ -42,7 +42,7 @@ export default function EvalRuns({ runs }: { runs: EvalRun[] }): JSX.Element {
                             repeats the whole sentence on every row. The button stays its own control. */}
                         <th className={HEAD} aria-label="Target">
                             Target{' '}
-                            <AnatomyMarker
+                            <FigureMarker
                                 n={1}
                                 label="Target"
                                 gloss="The generation that was scored. Click through to the trace it belongs to."
@@ -50,7 +50,7 @@ export default function EvalRuns({ runs }: { runs: EvalRun[] }): JSX.Element {
                         </th>
                         <th className={HEAD} aria-label="Result">
                             Result{' '}
-                            <AnatomyMarker
+                            <FigureMarker
                                 n={2}
                                 label="Result"
                                 gloss="Pass or fail. N/A and Skipped are their own outcomes – a generation the eval couldn't judge isn't a failure."
@@ -58,7 +58,7 @@ export default function EvalRuns({ runs }: { runs: EvalRun[] }): JSX.Element {
                         </th>
                         <th className={`${HEAD} pr-0`} aria-label="Reasoning">
                             Reasoning{' '}
-                            <AnatomyMarker
+                            <FigureMarker
                                 n={3}
                                 label="Reasoning"
                                 gloss="Why the judge decided that, in its own words. This is what makes a pass-rate drop readable."

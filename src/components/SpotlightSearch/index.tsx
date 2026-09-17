@@ -93,6 +93,7 @@ function SpotlightSearchContent({
 
     const actions = useSpotlightActions()
     const matchedActions = matchActions(query, actions)
+    const route = /^\/(?!\/)(?![\s\S]*[\s\\])/.test(query) ? query : null
 
     const suggestedFilter = useMemo(() => (activeFilter ? null : matchCategory(query)), [query, activeFilter])
 
@@ -133,8 +134,9 @@ function SpotlightSearchContent({
     const suggestAskAI = queryWordCount >= 4 || (queryWordCount > 0 && !loading && !hasResults)
 
     // Flat list in rendered order (suggestion rows first), for keyboard
-    // navigation: actions → ask AI → filter → results
+    // navigation: direct route → actions → ask AI → filter → results
     const navItems: NavItem[] = [
+        ...(route ? [{ kind: 'route' as const, path: route }] : []),
         ...matchedActions.map((action) => ({ kind: 'action' as const, action })),
         ...(suggestAskAI ? [{ kind: 'ask-ai' as const }] : []),
         ...(suggestedFilter ? [{ kind: 'filter' as const, type: suggestedFilter }] : []),
@@ -163,6 +165,11 @@ function SpotlightSearchContent({
         })
         close()
         navigate(result.url, { state: { newWindow: true } })
+    }
+
+    const openRoute = (path: string) => {
+        close()
+        navigate(path, { state: { newWindow: true } })
     }
 
     const applyFilter = (type: string, { keepQuery = false }: { keepQuery?: boolean } = {}) => {
@@ -217,7 +224,9 @@ function SpotlightSearchContent({
     }
 
     const selectItem = (item: NavItem) => {
-        if (item.kind === 'action') {
+        if (item.kind === 'route') {
+            openRoute(item.path)
+        } else if (item.kind === 'action') {
             runAction(item.action)
         } else if (item.kind === 'ask-ai') {
             askAI()
@@ -452,6 +461,7 @@ function SpotlightSearchContent({
                                                                     selectedIndex={selectedIndex}
                                                                     itemRefs={itemRefs}
                                                                     onSelectIndex={setSelectedIndex}
+                                                                    onGoToRoute={openRoute}
                                                                     onRunAction={runAction}
                                                                     onAskAI={askAI}
                                                                     onApplyFilter={applyFilter}

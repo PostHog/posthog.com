@@ -167,7 +167,7 @@ Use `if/else` blocks in your workflow to branch logic.
 event.properties.channel_source = "slack"
 event.properties.status = "new"
 event.properties.priority = "high"
-event.properties.customer_email contains "@enterprise.com"
+event.properties.customer_email ends with "@enterprise.com"
 event.properties.new_status = "resolved"
 event.properties.message_content contains "urgent"
 ```
@@ -290,14 +290,14 @@ Tag tickets from specific customer domains for prioritization.
 
 **Flow:**
 
-1. **If** `event.properties.customer_email` contains `@bigcorp.com`
+1. **If** `event.properties.customer_email` ends with `@bigcorp.com`
    - **Update ticket:**
 
 ```
 tags = ["enterprise", "priority"]
 ```
 
-2. **Else if** `event.properties.customer_email` contains `@startup.io`
+2. **Else if** `event.properties.customer_email` ends with `@startup.io`
    - **Update ticket:**
 
 ```
@@ -355,7 +355,7 @@ sla_unit = "hour"
 assignee = Engineering role
 ```
 
-3. **Else if** `event.properties.customer_email` contains `@enterprise.com`
+3. **Else if** `event.properties.customer_email` ends with `@enterprise.com`
    - **Update ticket:**
 
 ```

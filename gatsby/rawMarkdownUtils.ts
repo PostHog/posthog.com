@@ -88,6 +88,17 @@ export const generateRawMarkdownPages = async (
     }))
 }
 
+// Publish the OpenAPI document itself, alongside the per-operation markdown below.
+// The markdown is for LLMs reading prose; this is the machine-readable artifact that
+// API clients, codegen and function-calling tools expect to find at a stable URL.
+export const generateOpenApiSpec = (spec: any) => {
+    console.log('Writing openapi.json...')
+
+    const filePath = path.join(process.cwd(), 'public', 'openapi.json')
+    fs.writeFileSync(filePath, JSON.stringify(spec), 'utf8')
+    console.log(`✅ Wrote openapi.json (${Object.keys(spec.paths || {}).length} paths)`)
+}
+
 // Function to generate individual API endpoint markdown files from the OpenAPI spec
 export const generateApiSpecMarkdown = (spec: any) => {
     console.log('Generating API endpoint markdown files...')

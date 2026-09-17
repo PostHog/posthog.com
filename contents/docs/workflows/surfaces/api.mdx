@@ -19,6 +19,7 @@ Workflows are stored as **hog flows**, and every one of them is available over t
 - **Keep the suppression list current.** `/api/projects/:project_id/messaging_suppressions/` lists, adds, and removes [suppressed addresses](/docs/workflows/opt-outs#the-suppression-list). Full details in the [messaging suppressions API reference](/docs/api/messaging-suppressions).
 - **Check blast radius before you publish.** The API can report how many people a workflow's audience filters would match, so you don't accidentally message everyone.
 - **Inspect runs.** Batch job status endpoints report on workflows triggered against a batch audience.
+- **Cancel runs.** `/api/projects/:project_id/hog_flows/:id/invocations/cancel` cancels a workflow's in-flight runs, by ID or all at once. `/api/projects/:project_id/hog_flows/:id/batch_jobs/:batch_job_id/cancel` stops a batch run: enrollment halts and its in-flight runs are canceled. Both are asynchronous and report when another pass is needed.
 
 A workflow's graph is validated on write. If a trigger, action, or template reference is invalid, the API rejects it with a message naming the offending action rather than saving a broken workflow.
 

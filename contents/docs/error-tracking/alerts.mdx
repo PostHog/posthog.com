@@ -9,10 +9,10 @@ To stay on top of issues, you can set up alerts. These enable you to post to Sla
 To alert when an issue is created or reopened, go to [error tracking's configuration page](https://app.posthog.com/error_tracking/configuration#selectedSetting=error-tracking-alerting) and click **Alerting**. This shows you a list of existing alerts. Clicking **New notification** brings you to a page to create a new one.
 
 <ProductScreenshot
-    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/pasted_image_2026_06_24_T14_03_05_339_Z_fce7707d31.png"
-    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/pasted_image_2026_06_24_T14_02_44_265_Z_400e53c07a.png"
-    alt="Error tracking alerting"
-    classes="rounded"
+imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/pasted_image_2026_06_24_T14_03_05_339_Z_fce7707d31.png"
+imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/pasted_image_2026_06_24_T14_02_44_265_Z_400e53c07a.png"
+alt="Error tracking alerting"
+classes="rounded"
 />
 
 Choosing an option brings you to a page to configure the alert. This may require setting up the Slack integration or pasting in a webhook URL. Once done, you can test the alert by clicking **Test function** and then finalize by clicking **Create & enable**.
@@ -23,13 +23,13 @@ This will then send alerts to your chosen destination when an issue is created o
 
 ## Issue properties and assignments
 
-You can filter an alert based on the properties of an issue. This is useful for notifying a specific team when they have been auto assigned an issue using [auto assignment rules](/docs/error-tracking/managing-issues#auto-assignment-rules).
+You can filter an alert based on the properties of an issue. This is useful for notifying a specific team when they have been automatically assigned an issue using [assignment rules](/docs/error-tracking/assigning-issues#automatic-issue-assignment).
 
 <ProductScreenshot
-    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/assignee_filter_light_e575af6512.png"
-    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/assignee_filter_dark_9a8907af03.png"
-    alt="Error tracking alert assignee filtering"
-    classes="rounded"
+imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/assignee_filter_light_e575af6512.png"
+imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/assignee_filter_dark_9a8907af03.png"
+alt="Error tracking alert assignee filtering"
+classes="rounded"
 />
 
 ## Spike alerts
@@ -51,25 +51,25 @@ To create a real time destination, go to the [data pipelines tab](https://app.po
 On the destination creation screen, make sure to add an event matcher for the `$exception` event, filter for the properties you want, and set the trigger options.
 
 <ProductScreenshot
-  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/http_error_alert_light_9898376c56.png"
-  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/http_error_alert_dark_7705f0e575.png"
-  alt="Real time destination"
-  classes="rounded"
+imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/http_error_alert_light_9898376c56.png"
+imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/http_error_alert_dark_7705f0e575.png"
+alt="Real time destination"
+classes="rounded"
 />
 
 Check out our [real time destinations docs](/docs/cdp/destinations) for more information.
 
 ### Trend alerts
 
-You can also visualize your `$exception` events using [trends](/docs/product-analytics/trends/overview). Once you create a trend insight, click the **Alerts** button at the top of the insight and then **New alert**. 
+You can also visualize your `$exception` events using [trends](/docs/product-analytics/trends/overview). Once you create a trend insight, click the **Alerts** button at the top of the insight and then **New alert**.
 
 Here you can set alerts for event volume value, increase, or decrease.
 
 <ProductScreenshot
-  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_04_08_at_14_26_43_2x_4ef6402556.png"
-  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_04_08_at_14_25_35_2x_f36353143b.png"
-  alt="Insight alert"
-  classes="rounded"
+imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_04_08_at_14_26_43_2x_4ef6402556.png"
+imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_04_08_at_14_25_35_2x_f36353143b.png"
+alt="Insight alert"
+classes="rounded"
 />
 
 This sends an email notification to the user you choose. Check out our [alerts docs](/docs/alerts) for more information.
@@ -78,6 +78,6 @@ import { CalloutBox } from 'components/Docs/CalloutBox'
 
 <CalloutBox icon="IconInfo" title="Can't find your alert?" type="fyi">
 
-  If you'd like a destination to be added that we don't yet support, [let us know in-app](https://app.posthog.com/#panel=support%3Afeedback%3Aerror_tracking%3A%3Afalse).
+If you'd like a destination to be added that we don't yet support, [let us know in-app](https://app.posthog.com/#panel=support%3Afeedback%3Aerror_tracking%3A%3Afalse).
 
 </CalloutBox>

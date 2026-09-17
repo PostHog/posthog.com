@@ -33,10 +33,22 @@ Work back from the end of the customer's final billing period (if they are going
 
 Regardless, have a checkpoint the week before the final billing period closes. If signature is going to slip, either:
 
-1. **Ask billing to pause collection.** If the invoice hasn't been issued yet, billing can hold it for a few days so the credits land first. Flag it as early as you can, because [they can't pause an invoice that has already been issued](/handbook/growth/sales/contracts#flag-insufficient-credits-before-the-invoice-is-issued).
+1. **Ask billing to pause collection.** If the invoice hasn't been issued yet, billing can hold it for 48 hours so the credits land first. The pause is [48 hours with no extension, and they can't pause an invoice that has already been issued](/handbook/growth/sales/contracts#flag-insufficient-credits-before-the-invoice-is-issued), so flag it as early as you can. If signature is going to take longer than 48 hours, use option 2 instead.
 2. **Re-paper with the next period's start date.** If the period is going to close before signature, don't hold the original start date. Move the `Contract.EffectiveDate` to the beginning of the next billing period and tell the customer the new credits apply from that date. The period we already invoiced stays payable separately.
 
 Tell the customer which of these is happening while the order form is still out, not after they get an invoice they weren't expecting. If a customer does end up with a balance on an already-issued invoice because the renewal slipped, that's a [refund, not a credit](/handbook/growth/sales/refunds#refund-or-credit). Credits only apply to upcoming invoices.
+
+### When the contract dates and the billing dates don't match
+
+The credit expiry date comes from the customer's metadata in Stripe (`annual_plan_starts_at`, `annual_plan_ends_at`, and `credit_expires_at`), not from the date on the order form. The two should not disagree. If for some reason the contract didn't have the right start date, we should note the mismatch with an explanation in opportunity record.
+
+Check the order form dates against <PrivateLink url="https://billing.posthog.com/admin/">billing admin</PrivateLink> or Stripe when you start a renewal. If they don't match, you own the cleanup as the account owner:
+
+1. Ask the revops team in #team-revops which date is correct, and ask them to correct the metadata if the order form is right.
+2. Add a comment on the opportunity that records both dates, the confirmed date, and the reason they differ. The next person on the account must not have to repeat the investigation.
+3. Update the renewal opportunity dates to the confirmed dates, including the close date and the contract start date.
+
+Do this as soon as you find the mismatch. The renewal dates drive the `Upcoming renewal` segment, the Vitally task, and the Slack pings, so a stale date makes the renewal start late.
 
 ## Unique renewal cases
 
@@ -81,3 +93,5 @@ If you are struggling to move things along either because the customer isn't eng
    3. Let them know the date of the first monthly payment and expected amount they will be billed.
 5. If you still haven't heard anything from finance, send the information from step 4 to all active users and owners/admins in the account.
 6. If you get to this point and you still haven't secured the renewal, Closed - Lost the renewal opportunity and follow our [failed payment process](/handbook/growth/sales/billing#failedlate-payments) if their first monthly invoice isn't paid, or we don't have a valid card on file.
+
+In any situation where an account moves from annual to monthly, we need to make sure the information in step 4 is made clear to them well ahead of their credit running out. A direct conversation should be had, confirming the change in price, the expected charges, and that there is a valid card on file.

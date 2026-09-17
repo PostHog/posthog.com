@@ -25,32 +25,10 @@ import ToolsTicker from 'components/Home/ToolsTicker'
 // GetStarted, the carousel) is the only PostHog.com-side glue and is not present on 9000.
 import PlatformInstall, { wizardInstallSchema } from 'components/PlatformInstall'
 import HeroCTA from 'components/Home/HeroCTA'
+import { HeroBody, HeroHeadline } from 'components/Home/HeroCopy'
+import HeroCarousel from 'components/Home/HeroCarousel'
+import { buildTabs } from 'components/Home/HeroCarousel/tabs'
 import Customers from '../Customers'
-import { RoughAnnotation } from 'components/Code/RoughAnnotation'
-import { cn } from '../../../utils'
-
-/** Loads HeroCarousel + Typecaast slides only in the browser so SSR/Helmet aren't affected. */
-function LazyHeroCarousel({ className }: { className?: string }) {
-    const [Content, setContent] = useState<React.ComponentType<{ className?: string }> | null>(null)
-
-    useEffect(() => {
-        Promise.all([import('components/Home/HeroCarousel'), import('components/Home/HeroCarousel/tabs')]).then(
-            ([{ default: HeroCarousel }, { buildTabs }]) => {
-                function HeroCarouselContent(props: { className?: string }) {
-                    return <HeroCarousel tabs={buildTabs} {...props} />
-                }
-
-                setContent(() => HeroCarouselContent)
-            }
-        )
-    }, [])
-
-    if (!Content) {
-        return <div className={`@container ${className} min-h-[300px] @[820px]:min-h-[400px]`} aria-hidden />
-    }
-
-    return <Content className={className} />
-}
 
 const SecondaryActions = ({
     justify = 'center',
@@ -151,15 +129,6 @@ export const CTAs = () => {
     )
 }
 
-const Headline = ({ className }: { className?: string }) => (
-    <h1 className={cn('!text-3xl @xl:!text-4xl mt-0', className)}>
-        Shift your product into{' '}
-        <span className="bg-blue/10 dark:bg-blue/20 text-blue rounded-md px-1 @xl:whitespace-nowrap">
-            self-driving mode
-        </span>
-    </h1>
-)
-
 function Hero(): JSX.Element {
     return (
         <>
@@ -170,70 +139,19 @@ function Hero(): JSX.Element {
                 </div>
 
                 <div className="group grid @xl:grid-cols-2 @xl:gap-x-8 min-w-0">
-                    <Headline className="@xl:row-start-1 @xl:col-start-1 @xl:col-span-2 @xl:group-has-[[data-cta-aligned]]:col-span-1" />
+                    <div>
+                        <HeroHeadline />
 
-                    <div className="min-w-0 @xl:row-start-2 @xl:col-start-1">
-                        <p className="text-balance @xl:text-wrap text-[17px]">
-                            PostHog already knows your customers, which features they use, and the issues they have.
-                        </p>
-                        <p className="text-balance @xl:text-wrap text-[17px]">
-                            Now, PostHog automatically{' '}
-                            <RoughAnnotation
-                                type="highlight"
-                                color="rgba(247, 165, 1, 0.15)"
-                                strokeWidth={1}
-                                padding={2}
-                                delay={0}
-                                multiline
-                            >
-                                diagnoses problems
-                            </RoughAnnotation>
-                            ,{' '}
-                            <RoughAnnotation
-                                type="highlight"
-                                color="rgba(247, 165, 1, 0.15)"
-                                strokeWidth={1}
-                                padding={2}
-                                delay={500}
-                                multiline
-                            >
-                                fixes bugs
-                            </RoughAnnotation>
-                            , and{' '}
-                            <RoughAnnotation
-                                type="highlight"
-                                color="rgba(247, 165, 1, 0.15)"
-                                strokeWidth={1}
-                                padding={2}
-                                delay={900}
-                                multiline
-                            >
-                                generates pull requests
-                            </RoughAnnotation>
-                            {' – all '}
-                            <RoughAnnotation
-                                type="underline"
-                                color="currentColor"
-                                strokeWidth={1}
-                                delay={1800}
-                                multiline
-                                className="text-secondary"
-                            >
-                                without you having to prompt it.
-                            </RoughAnnotation>
-                        </p>
-                        <p className="text-balance @xl:text-wrap text-secondary">
-                            Join 500,000+ teams already shipping with PostHog.
-                        </p>
+                        <HeroBody />
                     </div>
 
-                    <div className="mt-6 flex flex-col items-center min-w-0 w-full @xl:row-start-2 @xl:col-start-2 @xl:mt-0 @xl:justify-center @xl:group-has-[[data-cta-aligned]]:row-start-1 @xl:group-has-[[data-cta-aligned]]:row-span-2 @xl:group-has-[[data-cta-aligned]]:justify-start">
+                    <div className="@xl:mt-0 mt-6 flex-shrink-0 flex justify-center w-full @xl:w-auto">
                         <HeroCTA />
                     </div>
                 </div>
             </div>
 
-            <LazyHeroCarousel className="mb-4" />
+            <HeroCarousel tabs={buildTabs} staticHeight className="mb-4" />
             <ToolsTicker className="mb-8" />
         </>
     )

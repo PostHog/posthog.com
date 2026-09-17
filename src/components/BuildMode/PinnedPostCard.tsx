@@ -1,8 +1,8 @@
 import React from 'react'
 import Link from 'components/Link'
-import PostImage from './PostImage'
-import { BuildModePost } from './types'
-import { getByline, getSubtitle, rand } from './utils'
+import PostImage from 'components/PostsIndex/PostImage'
+import { PostSummary } from 'components/PostsIndex/types'
+import { getByline, getSubtitle, rand } from 'components/PostsIndex/utils'
 
 const PIN_SRC = 'https://res.cloudinary.com/dmukukwp6/image/upload/red_pushpin_d9bbaf9e0c.svg'
 
@@ -14,7 +14,7 @@ const CARD_ANGLES = [-1.5, 1.1, -0.7, 1.6, -1.2, 0.8, -1.7, 1.3]
  * `--tilt-{index}` variable set on the scroll container by `usePinnedCardSwing`,
  * added to this card's fixed resting angle.
  */
-export default function PinnedPostCard({ post, index }: { post: BuildModePost; index: number }): JSX.Element {
+export default function PinnedPostCard({ post, index }: { post: PostSummary; index: number }): JSX.Element {
     const angle = CARD_ANGLES[index % CARD_ANGLES.length]
     const pinAngle = (rand(index, 7) - 0.5) * 16 // -8°..8°, pivoting on the needle tip
 
