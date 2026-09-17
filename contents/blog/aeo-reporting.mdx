@@ -15,7 +15,7 @@ In [a previous article](/blog/aeo-advice), I said "there has never been an easie
 
 If you are here expecting a retraction of that statement, I have bad news for you. As a matter of fact, I stand by it more than ever.
 
-Let me explain: [Answer engine optimization (AEO) is a fickle discipline](/blog/aeo-advice) riddled with questionable reporting methodologies, and it happens to be both remarkably easy to manipulate and hard to verify; that, combined with the novelty of it all, has turned it into the hottest party trick in marketing right now.
+Let me explain: [Answer engine optimization (AEO) is a fickle discipline](/blog/aeo-advice) riddled with questionable reporting methodologies, and it happens to be both remarkably easy to manipulate and hard to verify; that's a dangerous combination, and it makes for the hottest party trick in marketing right now.
 
 The problem is that the confidence people express about AEO performance is, more often than not, entirely unearned.
 
@@ -27,13 +27,17 @@ Every AEO number you have ever seen, from visibility scores to citation rate to 
 
 This doesn't make AEO unimportant; at PostHog, it continues to be our fastest-growing channel driving thousands of sign-ups every month, and I'm not about to argue myself out of a job (not in this economy).
 
-But there is no real prompt volume data available to us mortals. None. No LLM provider publishes what people ask it, and nothing exists that plays the role that 'search volume' plays in SEO. And yes, I know about clickstream data; while I can concede it's the best bad option available, that's still different from being good.
+But there is no real prompt volume data available to us mortals. None. No LLM provider publishes what people ask it, and nothing exists that plays the role that 'search volume' plays in SEO. 
+
+And yes, I know about clickstream data; while I can concede it's the best bad option available, that's still different from being good.
 
 Thankfully us marketers are resourceful creatures, so we do what we can with what's available to us: we proxy. We ground prompts in traditional search volume, leaning on the reasonable-enough theory that people ask LLMs roughly what they'd Google. We ask our own users what they typed. We do competitive research, social listening, the whole nine yards.
 
 And while these may be steps in the right direction, they are still educated guesses stacked on educated guesses, not a scientifically sound methodology with a path to accuracy.
 
-The industry is operating inside a gigantic blind spot, and I've been seeing a lot of tools and so-called experts talking about it as if it's been solved. Newsflash, it has not. Which is why some of these "who's winning on AEO" posts give me chills, and not in a good way.
+The industry is operating inside a gigantic blind spot, and I've been seeing a lot of tools and so-called experts talking about it as if it's been solved. 
+
+Newsflash, it has not. Which is why some of these "who's winning on AEO" posts give me chills, and not in a good way.
 
 ### "[Brand] is demolishing at AEO 🚀"
 
@@ -43,7 +47,7 @@ Before anyone comes for me: I am NOT saying brands claiming they have good AEO p
 
 What makes me cringe is when the **entire** proof of someone's AEO success relies solely on a visibility score, calculated from a prompt set you chose… against competitors you selected… for only certain models, on certain days, at a sample size you didn't disclose.
 
-The infuriating bit is that these posts are technically true. Anyone can produce a chart showing they're "winning" with numbers that are not necessarily fake (just lacking the necessary context).
+The infuriating bit is that these posts are technically true; anyone can produce a chart showing they're "winning" with numbers that are not necessarily fake (just lacking the necessary context).
 
 Don't believe me? Let me show you how it's done.
 
@@ -59,7 +63,9 @@ Do not report attributed signups, referral traffic, or revenue.
 
 Report on brand visibility or citation rate instead: numbers that sound like outcomes, sit at the very top of the funnel, and can't be verified by anyone outside your account. 
 
-Being mentioned doesn't mean anyone clicked, clicking doesn't mean anyone signed up, and signing up doesn't mean anyone stuck around. But "our citations grew 60%" sounds like a Certifiable Business Result™ to bring to your next QBR, and hopefully nobody will ask what happened next.
+Being mentioned doesn't mean anyone clicked, clicking doesn't mean anyone signed up, and signing up doesn't mean anyone stuck around. 
+
+But "our citations grew 60%" sounds like a Certifiable Business Result™ to bring to your next QBR, and hopefully nobody will ask what this actually means or happened next.
 
 Every step below follows from this one.
 
@@ -82,12 +88,12 @@ If asked, say you chose "the most relevant players for these prompts." Nobody wi
 **4. Cherry-pick the timeframe, the model, and the sample.**
  
 This is free money, because these metrics are volatile; some of ours have swung more than ten percentage points in a single quarter. There is almost always a slice that looks good.
- 
-*Timeframe:* when a line looks like a heart rate monitor, there is always a start date that makes it go up. Pick that one, and call it "the last 30 days" so it sounds like a neutral choice.
- 
-*Model:* you have four or five to choose from and you'll perform differently across all of them. At PostHog we tend to do well on Claude and Gemini, and struggle on Perplexity and ChatGPT. Report the winners, and justify it with "we focused on these given their market share and ICP relevance."
- 
-*Sample:* the same prompt returns different answers on different runs. Run it a few times, keep the good one, and never disclose the run count. Nobody in your comments is going to ask "how many samples per prompt?" and if they do, you can always just block them.
+
+- **Timeframe:** when a line looks like a heart rate monitor, there is always a start date that makes it go up. Pick that one, and call it "the last 30 days" so it sounds like a neutral choice.
+
+- **Model:** you have four or five to choose from and you'll perform differently across all of them. At PostHog we tend to do well on Claude and Gemini, and struggle on Perplexity and ChatGPT. Report the winners, and justify it with "we focused on these given their market share and ICP relevance."
+
+- **Sample:** the same prompt returns different answers on different runs. Run it a few times, keep the good one, and never disclose the run count. Nobody in your comments is going to ask "how many samples per prompt?" and if they do, you can always just block them.
 
 **5. Flip flop between metrics that flatter you.**
 
@@ -121,9 +127,11 @@ To be clear, I am not saying we should be less ambitious or less enthusiastic ab
 
 I just think we would all benefit from a little less pretending.
 
-And I am aware that's less sexy; the numbers you can actually prove can be ugly and underwhelming. Referral traffic is lossy, because half that bucket leaks out through referrer stripping. Self-reported signups are also gutted by attribution issues, and by everyone who can't be bothered to answer a form, which is a lot of people. It's not as fun to talk about, but it is fairer, and considerably less silly than pretending a visibility score represents something that it doesn't.
+And I am aware that's less sexy; the numbers you can actually prove can be ugly and underwhelming. Referral traffic is lossy, because half that bucket leaks out through referrer stripping. Self-reported signups are also gutted by attribution issues, and by everyone who can't be bothered to answer a form, which is a lot of people. 
 
-Reporting tooling is improving fast too; agent-level measurement (prompts running on simulated coding sessions instead of chat) is a meaningfully better proxy for how developers behave for example, and it barely existed a year ago (shoutout Gauge). MCPs have made it exponentially simpler to pull from five sources and reconcile them in one place. It's super cool, and I do believe we'll get real prompt volume data and comparable trustworthy data eventually.
+It's not as fun to talk about, but it is fairer, and considerably less silly than pretending a visibility score represents something that it doesn't.
+
+Reporting tooling is improving fast too; on our side, agent-level measurement (prompts running on simulated coding sessions instead of chat) is a meaningfully better proxy for how developers behave for example, and it barely existed a year ago (shoutout Gauge). MCPs have made it exponentially simpler to pull from five sources and reconcile them in one place. It's super cool, and I do believe we'll get real prompt volume and comparable trustworthy data eventually.
 
 But we're not there yet. We're early. Early is fine. Early is even fun if you're a masochist like me.
 
