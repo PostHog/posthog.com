@@ -152,7 +152,7 @@ Monthly invoices are generated automatically at the end of each billing period. 
 
 Credits added before billing period ends are applied automatically and the customer never has to pay the PAYG charge out of pocket. No further action needed here. 
 
-If they won't have enough credits to cover an invoice, and won't sign before the invoice issue date, you can ask the billing team to pause collection for a few days. Once the contract is signed and the credits are added, billing can release the invoice and the prepurchase credits will cover it. Flag this as early as possible. Billing can only pause an invoice that hasn't been issued yet.
+If they won't have enough credits to cover an invoice and won't sign before the invoice issue date, ask the billing team to pause collection. Flag it as early as possible, because billing can only pause an invoice that hasn't been issued yet. A pause lasts 48 hours, and each invoice only gets one pause. Once the contract is signed and the credits are added, billing releases the invoice and the prepurchase credits cover it.
 
 #### Contract timing rules
 
