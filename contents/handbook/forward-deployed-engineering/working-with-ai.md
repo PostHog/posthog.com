@@ -34,7 +34,7 @@ If your contribution stops at applying an existing standard as written, you're o
 
 Ask:
 
-- Would I put my name on this if the customer read it today?
+- Would I be happy put my name on this if the customer read it today?
 - Did I check what my agents produced, or only that they finished?
 - Is this right for this problem, or just what a tool, standard, or previous project told me to do?
 
