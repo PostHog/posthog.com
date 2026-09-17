@@ -1,22 +1,23 @@
 import React from 'react'
 import {
     IconAI,
+    IconArrowUpRight,
     IconBell,
     IconBrowser,
-    IconFunnels,
     IconGanttChart,
     IconLaptop,
     IconRewindPlay,
     IconSearch,
     IconServer,
     IconStack,
-    IconWarning,
 } from '@posthog/icons'
+import { IconOpenAI } from 'components/OSIcons'
 import CloudinaryImage from 'components/CloudinaryImage'
+import ProductContextDemo, { type ContextNode } from 'components/Home/HeroCarousel/ProductContextDemo'
+import PlatformInstall, { mcpInstallSchema, type InstallSchema } from 'components/PlatformInstall'
 import CodeBlock from 'components/Home/CodeBlock'
 import Glow from 'components/Glow'
 import Link from 'components/Link'
-import PlatformInstall from 'components/PlatformInstall'
 import { InlineCode, LabeledList } from 'components/Products/ReaderViewProduct/helpers'
 import type { CarouselSlide } from 'components/Products/ReaderViewProduct/types'
 
@@ -266,31 +267,33 @@ export const applications: CarouselSlide[] = [
     },
 ]
 
-// The signals an agent can read over MCP. The trace is highlighted: it is the one
-// that connects the whole request and points at the cause.
-const catnipSignals = [
-    {
-        icon: IconWarning,
-        title: 'Error tracking',
-        description: 'A request broke.',
-    },
-    {
-        icon: IconRewindPlay,
-        title: 'Session replay',
-        description: 'A user waited, then left.',
-    },
-    {
-        icon: IconFunnels,
-        title: 'Funnel drop-off',
-        description: 'Checkout conversion fell.',
-    },
-    {
-        icon: IconGanttChart,
-        title: 'A trace',
-        description: '“Checkout took 3.2s, and 2.8s of it was waiting on an N+1 query in the inventory service.”',
-        highlight: true,
-    },
+/** The debugging signals an agent can reach over MCP. Tracing sits centered under the
+ *  hub: it is the one that connects the whole request. */
+const AGENT_CONTEXT_NODES: ContextNode[] = [
+    { handle: 'product_analytics', x: 230, y: 140 },
+    { handle: 'session_replay', x: 770, y: 140 },
+    { handle: 'error_tracking', x: 160, y: 387 },
+    { handle: 'logs', x: 840, y: 387 },
+    { handle: 'traces', x: 500, y: 634 },
 ]
+
+/** Same compact MCP card the home page uses, minus the supports row. */
+const compactMcpSchema: InstallSchema = {
+    ...mcpInstallSchema,
+    supports: undefined,
+    secondaryAction: { label: 'Docs', to: '/docs/model-context-protocol', state: { newWindow: true } },
+    platforms: [
+        ...mcpInstallSchema.platforms.filter(({ id }) => id === 'claude'),
+        {
+            id: 'chatgpt',
+            label: 'ChatGPT',
+            group: 'platforms',
+            icon: <IconOpenAI className="size-4" />,
+            href: 'https://chatgpt.com/plugins/plugin_asdk_app_699caef2d680819188727b0ddbb349dd',
+        },
+        ...mcpInstallSchema.platforms.filter(({ id }) => ['codex', 'cursor', 'vscode'].includes(id)),
+    ],
+}
 
 export const topFeatures: CarouselSlide[] = [
     {
@@ -435,35 +438,42 @@ OTEL_SERVICE_NAME="my-app"`}
         },
     },
     {
-        slug: 'catnip',
-        label: 'Catnip for agents',
+        slug: 'agent-context',
+        label: 'Easy debugging with agents',
         icon: <IconAI className="size-5" />,
         ...TAB_STYLE,
         layout: 'stack',
-        heading: 'Catnip for agents',
+        heading: 'Easy debugging with agents',
         description: (
             <>
-                <p>
-                    Whatever agent you use, Claude Code, Cursor, Codex, or PostHog AI, it can read your project over
-                    MCP. Use all the signals to see if something broke, and tracing will connect the whole request and
-                    point to the cause.
-                </p>
-                <ul className="grid @xl:grid-cols-2 gap-4 p-0 m-0 list-none">
-                    {catnipSignals.map(({ icon: Icon, title, description, highlight }) => (
-                        <li
-                            key={title}
-                            className={`flex items-start gap-4 rounded border p-4 ${
-                                highlight ? 'border-secondary bg-accent' : 'border-primary'
-                            }`}
-                        >
-                            <Icon className={`size-8 shrink-0 ${highlight ? 'text-blue' : 'text-secondary'}`} />
-                            <div>
-                                <strong className="block text-primary mb-1 text-lg">{title}</strong>
-                                <span>{description}</span>
-                            </div>
-                        </li>
-                    ))}
-                </ul>
+                <div className="@container">
+                    <div className="grid grid-cols-1 @2xl:grid-cols-[1.4fr_1fr] gap-6 @2xl:gap-8 items-start">
+                        <ProductContextDemo nodes={AGENT_CONTEXT_NODES} />
+                        <div className="flex flex-col gap-3">
+                            <p className="m-0">
+                                Your agent reads the same project you do over MCP: spans, logs, errors, replays, and
+                                analytics. Every span in a request shares a trace ID, so tracing is what joins them.
+                            </p>
+                            <PlatformInstall
+                                schema={compactMcpSchema}
+                                linkOnly
+                                hideSecondaryAction
+                                className="!shadow-none !mb-0"
+                            />
+                            <p className="text-sm text-secondary m-0 inline-flex gap-1">
+                                Or use{' '}
+                                <Link
+                                    to="/desktop"
+                                    state={{ newWindow: true }}
+                                    className="inline-flex items-center gap-1 underline underline-offset-2"
+                                >
+                                    <IconLaptop className="size-4" /> PostHog Desktop{' '}
+                                    <IconArrowUpRight className="size-3" />
+                                </Link>
+                            </p>
+                        </div>
+                    </div>
+                </div>
             </>
         ),
     },
