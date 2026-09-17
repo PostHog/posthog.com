@@ -301,22 +301,12 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     },
     'mcp-server': {
         feature: 'MCP server',
-        owner: ['self-driving'],
-        notes: (
-            <>
-                <TeamMember name="Georgiy Tarasov" /> is the point owner.
-            </>
-        ),
+        owner: ['context-and-mcp'],
         label: 'feature/mcp',
     },
     'mcp-store': {
         feature: 'MCP store',
-        owner: ['self-driving'],
-        notes: (
-            <>
-                <TeamMember name="Chris Volzer" /> is the point owner.
-            </>
-        ),
+        owner: ['context-and-mcp'],
         label: false,
     },
     notebooks: {
