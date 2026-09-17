@@ -13,19 +13,21 @@ tags:
   - session replay
 ---
 
-In August we launched [Replay Vision](/replay-vision), our AI layer over Session Replay. It watches session recordings and writes up what it finds, so nobody has to sit through them. We put it to work on PostHog right away, and since then Replay Vision has watched 400k recordings for us. <!-- 397,118 scans of 284,031 distinct recordings, $recording_observed in project 2, all-time through 2026-09-15. re-pull before publish --> ([Nobody was going to watch](/blog/nobody-watches-session-replays) most of them anyway.)
+In August we launched [Replay Vision](/replay-vision), our AI layer over Session Replay. It watches session recordings and writes up what it finds, so nobody has to sit through them. We put it to work on PostHog right away. Since then, Replay Vision has watched 400k recordings for us.[^1] Nobody was going to watch(/blog/nobody-watches-session-replays) most of them anyway.
 
-The biggest thing we learned from all that watching? Replay Vision fixes the watching part, but not the *thinking* part.
+The biggest thing we learned? Replay Vision fixes the watching part, but not the *thinking* part.
 
-It sounds simple, but it's the most important thing to remember when building scanners. And yes, we learned this the annoying way: in our first few weeks, some scanners found real issues and opportunities, while others produced perfectly plausible session summaries that nobody wanted to read. The difference became clear pretty quickly. Every scanner that produced useful results shared three things:
+We learned this the annoying way: in our first few weeks, some scanners found real issues and opportunities, while others produced perfectly plausible session summaries that nobody wanted to read. Every scanner that produced useful results shared three things:
 
 1. A focused, observable question that could only be answered by watching the recording
 2. A clear slice of relevant recordings that could actually answer it
 3. Permission to say "no" or "inconclusive"
 
-## Remind me, what is Replay Vision, anyway?
+## How Replay Vision works
 
-A quick introduction for those who are new here. Replay Vision is built around scanners, and a scanner is a job you set up to watch recordings. Each scanner has a **query** that chooses which recordings to watch, and a **prompt** that tells it how to judge each one. When a scanner watches a recording, it produces an **observation**.
+A quick introduction for those who are new here. Replay Vision is built around scanners. A scanner is a job you set up to watch recordings. 
+
+Each scanner has a **query** that chooses which recordings to watch, and a **prompt** that tells it how to judge each one. When a scanner watches a recording, it produces an **observation**.
 
 Replay Vision has four scanner types, depending on the answer you want:
 
@@ -38,9 +40,11 @@ Alongside the answer, an observation carries a **short explanation** that cites 
 
 A scanner only sees one recording at a time, so it cannot compare a session with recordings it has never seen. That job belongs to a [Digest](/docs/replay-vision/actions), which summarizes recent observations from one scanner, or a [Scout](/blog/what-is-a-scout), an agent that compares observations with the rest of your product data and reports the patterns it finds.
 
-## 1. Each scanner should answer one specific question
+## Replay Vision best practices
 
-When people build their first Replay Vision scanner, they tend to try the same thing: one scanner that "watches everything" and "catches everything interesting" (ask us how we know). It sounds reasonable, but it asks the model to decide both what happened and what matters to you and your product. It can do the first part just fine... but the second is still your job.
+### 1. Each scanner should answer one specific question
+
+When people build their first Replay Vision scanner, they tend to try the same thing: one scanner that "watches everything" and "catches everything interesting" (ask us how we know). It sounds reasonable, but it asks the model to decide both what happened and what matters to you and your product. It can do the first part just fine, but the second is still your job.
 
 Here's a real example. We noticed people trying to investigate errors in Error Tracking, getting frustrated, and eventually going, "F*** it, I'll have PostHog AI try this instead." We set up a scanner to find those moments and show us where the product stopped helping.
 
@@ -57,7 +61,7 @@ The scanner we built is a classifier called "[Error Tracking] Escape to AI assis
 
 A scanner works better when its prompt uses the product's real names, states, and workflows. [PostHog AI](/ai) can inspect the context already in PostHog and add it to the prompt, while a coding agent can use the [PostHog MCP server](/docs/replay-vision/mcp) to pull product and workflow context directly from the codebase.
 
-## 2. Aim your scanner at the right recordings
+### 2. Aim your scanner at the right recordings
 
 The query is how you aim your scanner. If you get it wrong, the output will likely make you go "meh," right before you spend four hours watching recordings yourself. The best prompt in the world is mostly worthless if it sees the wrong recordings.
 
@@ -71,7 +75,7 @@ The rest of PostHog can aim the scanner, too. Use the event, URL, cohort, experi
 - Funnels: a scanner helps tease out what makes someone convert vs drop off
 - Surveys: a scanner checks behavior right before a survey response is submitted
 
-## 3. Make the scanner prove every "yes"
+### 3. Make the scanner prove every "yes"
 
 We also have a ghost-bug scanner. It watches people use Replay Vision (yes, we love using Replay Vision to improve Replay Vision). It's a monitor, so it asks one yes-or-no question of each recording: did the product contradict itself, or trap someone in a task it invited them to start?
 
@@ -95,11 +99,13 @@ This sounds conservative and *gasp* boring. Good. Most sessions should not becom
 
 A scanner saying "Idk" is way better than making something up.
 
-## 4. Run it on a small batch before you trust it
+### 4. Run it on a small batch before you trust it
 
 Create the scanner, then use the [bulk scan action](/docs/replay-vision/running-scanners#from-the-recordings-list) to run it against a small batch of recent recordings. Read the observations beside their source recordings and look for overclaims, missed proof, weak labels, or instructions that seemed obvious until the model interpreted them literally.
 
-Here's one from the scanners we run on posthog.com. We built a summarizer to catch visitors who gave up on the site and reached for search, the AI chat, or the "talk to a human" form. Before enabling it, we ran it on a batch of recent sessions and read every observation. Nine of the first fifteen had escaped to the human form, according to the model. In the recordings, nine people opened the form, typed nothing, and closed it. The model had invented their question from the pages around it, because the prompt asked what the visitor was looking for. One added rule fixed it: a form opened and closed with nothing typed is not an escape, and the scanner says so. <!-- 9 of 15 as of the sept 11 2026 calibration pass -->
+Here's one from the scanners we run on posthog.com. We built a summarizer to catch visitors who gave up on the site and reached for search, the AI chat, or the "talk to a human" form. Before enabling it, we ran it on a batch of recent sessions and read every observation. 9 of the first 15 had escaped to the human form, according to the model. 
+
+In the recordings, 9 people opened the form, typed nothing, and closed it. The model had invented their question from the pages around it, because the prompt asked what the visitor was looking for. One added rule fixed it: a form opened and closed with nothing typed is not an escape, and the scanner says so. [^2]
 
 The same pass taught us to watch the clips, not just read the text. A text-only review of our dead-end monitor called its "can't close this modal" findings solid. Watching the recordings said otherwise, so that scanner went back to calibration.
 
@@ -107,7 +113,7 @@ Use the Calibration tab as a review queue. Rate each result, and add a sentence 
 
 Don't try to perfect the prompt before you run it. The first batch will tell you how the scanner actually performs.
 
-## 5. Pick the model by the cost of a wrong answer
+### 5. Pick the model by the cost of a wrong answer
 
 The model changes both quality and cost. Replay Vision prices each model in credits per observation, and one credit is $0.01. Pick the model by asking what a wrong answer would cost you.
 
@@ -125,7 +131,7 @@ If you take one thing from this piece, remember: your job is to pick and refine 
 
 ## Prompts for you to steal
 
-These prompts are for PostHog AI or a coding agent connected to PostHog through the MCP server. The agent should inspect your project and create the scanner.
+Use these prompts to create Replay Vision scanners using PostHog AI or a coding agent connected to the PostHog MCP. The agent should inspect your project and create the scanner.
 
 ### Map the use cases people bring to a product
 
@@ -280,3 +286,6 @@ after I choose, estimate the scanner against the remaining quota, create it safe
 ```
 
 [Design scanners with PostHog AI](https://app.posthog.com/#panel=max:read%20this%20blog%20post%3A%20https%3A%2F%2Fposthog.com%2Fblog%2Fa-scanner-that-watches-everything-sees-nothing.%20then%20inspect%20our%20product%20code%2C%20PostHog%20event%20schema%2C%20cohorts%2C%20recordings%2C%20and%20existing%20Replay%20Vision%20scanners.%0A%0Apropose%20five%20scanners%20grounded%20in%20what%20this%20product%20actually%20does.%20each%20proposal%20must%20include%3A%0A-%20one%20visible%20question%20applied%20to%20one%20recording.%0A-%20the%20scanner%20type%20and%20why%20it%20matches%20the%20output.%0A-%20a%20narrow%20recording%20query%20using%20real%20events%2C%20urls%2C%20cohorts%2C%20and%20duration%20filters.%0A-%20the%20exact%20per-recording%20output%20shape%2C%20including%20no%20or%20inconclusive%20behavior.%0A-%20the%20model%2C%20sampling%20mode%2C%20and%20estimated%20monthly%20observations%20and%20credits.%0A-%20the%20cross-observation%20question%20for%20its%20Digest%20or%20Scout.%0A-%20the%20first%20observations%20a%20human%20should%20calibrate.%0A%0Areject%20ideas%20that%20require%20one%20scanner%20observation%20to%20compare%20sessions%2C%20infer%20hidden%20intent%2C%20or%20discover%20what%20matters%20without%20a%20product%20question.%20do%20not%20invent%20event%20names.%0A%0Arank%20the%20five%20ideas%20by%20expected%20product%20value%20and%20evidence%20quality.%20recommend%20one.%20do%20not%20create%20anything%20until%20I%20choose.%0A%0Aafter%20I%20choose%2C%20estimate%20the%20scanner%20against%20the%20remaining%20quota%2C%20create%20it%20safely%2C%20test%20it%20against%20representative%20recordings%2C%20add%20an%20appropriate%20Digest%20or%20alert%2C%20and%20return%20the%20links.)
+
+[^1]: 397,118 scans of 284,031 distinct recordings, $recording_observed in project 2, all-time through 2026-09-15. re-pull before publish
+[^2]: 9 of 15 as of the Sept 11, 2026 calibration pass
