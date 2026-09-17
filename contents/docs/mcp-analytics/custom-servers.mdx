@@ -99,7 +99,7 @@ Because there's no wrapped server, `PostHogMCP` does **not** manage these for yo
 - **Identity caching / `$identify` dedupe** — pass `distinctId` (and optional `setProperties`) on each call.
 - **Automatic intent and missing-capability handling** — use `prepareToolList()` and `prepareToolCall()`, then pass their output to the matching capture method.
 - **Conversation IDs** — pass your own stable `sessionId`. The custom dispatcher helpers don't inject or echo `conversation_id`.
-- **Model capture** — preparation helpers support it in both SDKs, enabled by default in TypeScript 0.17.0 and Python 7.56.0. Use `prepareToolList()` to advertise the argument, then `prepareToolCall()` to extract it. Pass its `llmModel` and `llmModelSource` to `captureToolCall()`.
+- **Model capture** — enabled by default in both SDKs' preparation helpers. Use `prepareToolList()` to advertise the argument, then `prepareToolCall()` to extract it. Pass its `llmModel` and `llmModelSource` to `captureToolCall()`.
 
 For model capture on a fresh dispatcher, pass the application's original tool as `originalTool` in the preparation options. Pass `requestMeta` there to capture recognized client metadata. Python uses the equivalent snake_case fields and keyword arguments.
 
@@ -197,7 +197,7 @@ posthog.flush()  # PostHogMCP is a posthog client — flush/shutdown it yourself
 
 ### Failed calls
 
-Pass `error=exc` with `is_error=True` and the SDK reads `$mcp_error_message` and `$mcp_error_type` off the exception, so the failures view shows *why* a call failed instead of an empty row. The message is sanitized and capped at 2048 characters. Add `error_type="timeout"` (or any low-cardinality label) to override the thrown class name with your own category. Requires `posthog>=7.41`; upgrade to `7.45.3` or later, which also unwraps the generic `ToolError` that `mcp>=2.1` raises in place of your exception.
+Pass `error=exc` with `is_error=True` and the SDK reads `$mcp_error_message` and `$mcp_error_type` off the exception, so the failures view shows *why* a call failed instead of an empty row. The message is sanitized and capped at 2048 characters. Add `error_type="timeout"` (or any low-cardinality label) to override the thrown class name with your own category. The SDK also unwraps the generic `ToolError` raised by MCP SDK 2.x.
 
 ### Attributing the caller
 
@@ -206,7 +206,7 @@ Pass `error=exc` with `is_error=True` and the SDK reads `$mcp_error_message` and
 - `client_user_agent` → `$mcp_client_user_agent` — the parenthetical carries the build (`claude-code/2.1.0 (cli)` vs `(sdk-ts)`).
 - `vendor_client` → `$mcp_vendor_client` — from vendor headers like `x-anthropic-client`, the only thing that separates Anthropic's pooled surfaces (Claude.ai, Cowork, Claude Design) from each other. It separates the products, not surfaces within one: claude.ai web, desktop, and mobile connectors all arrive through Anthropic's server-side fetcher with the same header value, so they share the single "Claude.ai" label.
 
-Both are captured raw and classified at query time, so labels improve without an SDK release. Requires `posthog>=7.42`. stdio and in-memory transports carry no headers, so leave them unset there.
+Both are captured raw and classified at query time, so labels improve without an SDK release. stdio and in-memory transports carry no headers, so leave them unset there.
 
 ### Stateless / multi-pod dispatchers
 

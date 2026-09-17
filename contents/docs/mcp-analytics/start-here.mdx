@@ -58,7 +58,7 @@ const posthog = new PostHog(process.env.POSTHOG_PROJECT_TOKEN, {
 instrument(server, posthog)
 ```
 
-With `@posthog/mcp` 0.17.0 or later, intent, model capture, conversation IDs, and exception capture are enabled by default. Missing-capability reporting and agent feedback remain opt-in. [Python `posthog` 7.56.0](/docs/mcp-analytics/installation#python) uses the same defaults.
+Intent, model capture, conversation IDs, and exception capture are on by default. Missing-capability reporting and agent feedback are opt-in. [Python](/docs/mcp-analytics/installation#python) uses the same defaults.
 
 <OSButton variant="primary" asLink to="/docs/mcp-analytics/installation">
 
@@ -99,11 +99,9 @@ subtitle="Recommended"
 icon="IconAIText"
 >
 
-Both SDKs enable [model capture](/docs/mcp-analytics/installation#capture-the-calling-model) by default. The SDK reads recognized client metadata first, then falls back to an `llm_model` argument injected into compatible tool schemas. It removes the argument before your tool runs when it can confirm it owns that field.
+[Model capture](/docs/mcp-analytics/installation#capture-the-calling-model) is on by default in both SDKs. Check `$mcp_tool_call` events for `$mcp_llm_model`. The source, `$mcp_llm_model_source`, is `"client_metadata"` or `"self_reported"`.
 
-The MCP protocol doesn't send a verified model identifier. Treat this value as an analytics signal for comparing quality, latency, and errors across models. Don't use it for billing, authorization, or other security decisions. If the agent reports `unknown`, the SDK omits the property.
-
-After the agent calls a tool, inspect the `$mcp_tool_call` event for `$mcp_llm_model`. `$mcp_llm_model_source` is `"client_metadata"` or `"self_reported"`. Some clients supply an exact model name, some supply a model family, and some supply no usable value.
+Use this unverified client input to compare quality, latency, and errors across models, not for billing or security decisions. Some clients report an exact model, others a model family. Missing, blank, and `unknown` values are omitted.
 
 </QuestLogItem>
 

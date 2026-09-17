@@ -11,8 +11,6 @@ The MCP TypeScript SDK has two majors. `@posthog/mcp` supports both and detects 
 | `@modelcontextprotocol/sdk` | **v1** | `2025-11-25` and earlier |
 | `@modelcontextprotocol/core`, `/server`, `/client` | **v2** | `2025-11-25` and `2026-07-28` |
 
-Use `@posthog/mcp` 0.11.2 or later on v2. Earlier versions captured nothing, silently.
-
 ## Setup
 
 Same call as v1. The only difference is where `McpServer` comes from, and that v2 registers tools with `registerTool()` instead of the removed `server.tool()`:
@@ -30,7 +28,7 @@ instrument(server, posthog)
 server.registerTool("search_events", { /* ... */ }, async (args) => { /* ... */ })
 ```
 
-Model capture and conversation IDs are enabled by default in `@posthog/mcp` 0.17.0 or later. The low-level `Server` works the same way. If you previously passed `server.server` to get past the old compatibility check, pass `server` with the same PostHog client instead.
+Model capture and conversation IDs are enabled by default. The low-level `Server` uses the same `instrument(server, posthog)` call.
 
 ## If your callbacks read headers, change them
 
@@ -55,7 +53,7 @@ instrument(server, posthog, {
 
 ## Python
 
-The [Python SDK](/docs/mcp-analytics/installation#python) supports both official `mcp` majors (`mcp>=1.26,<3`) and detects them at runtime. MCP SDK 2.x support requires `posthog` 7.40.0 or later. On 2.x, `FastMCP` was renamed — the `instrument()` call stays the same:
+The [Python SDK](/docs/mcp-analytics/installation#python) supports both official `mcp` majors (`mcp>=1.26,<3`) and detects them at runtime. On 2.x, `FastMCP` was renamed — the `instrument()` call stays the same:
 
 ```python
 from mcp.server.mcpserver import MCPServer
@@ -77,13 +75,13 @@ def identify(request, extra):
     return resolve_user(headers.get("authorization"))
 ```
 
-[Sessions on `2026-07-28`](#sessions-on-2026-07-28) work as described below. Python `posthog` 7.56.0 enables model capture and conversation IDs by default. Both PostHog SDKs derive the same session id from the same echoed conversation handle.
+Python uses the same defaults. Both SDKs derive the same session ID from the same echoed conversation handle.
 
 ## Sessions on `2026-07-28`
 
 That revision removed the `initialize` handshake and the `Mcp-Session-Id` header, so the [stateless session token](/docs/mcp-analytics/installation#stateless-and-multi-pod-servers) doesn't apply. Use a conversation handle to correlate requests:
 
-- **[Conversation IDs](/docs/mcp-analytics/conversation-id)** — enabled by default in `@posthog/mcp` 0.17.0 and Python `posthog` 7.56.0. The SDK injects a `conversation_id` parameter and returns a handle in eligible tool results. Calls share a `$session_id` when the agent echoes that handle. Clients that ignore it can still produce a separate session per request.
+- **[Conversation IDs](/docs/mcp-analytics/conversation-id)** — enabled by default in both SDKs. The SDK injects a `conversation_id` parameter and returns a handle in eligible tool results. Calls share a `$session_id` when the agent echoes that handle. Clients that ignore it can still produce a separate session per request.
 - **[`identify`](/docs/mcp-analytics/identifying-users)** — attributes calls to a person via `distinct_id`. Worth wiring up either way, but note it groups by **user**, not by session, and doesn't give you a `$session_id`.
 
 Note that revision is a property of each **request**, not of your server: a v2 server serves `2025-11-25` traffic too, and most clients still negotiate it.

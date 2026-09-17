@@ -8,23 +8,29 @@ A PostHog `$session_id` normally follows the MCP protocol session. The handshake
 
 `$mcp_conversation_id` lets you stitch those calls together at the conversation level. The SDK also derives `$session_id` from an accepted conversation handle, so PostHog session queries group the same calls.
 
-<CalloutBox icon="IconWarning" title="Enabled by default, with caveats" type="caution">
+<CalloutBox icon="IconInfo" title="Enabled by default" type="fyi">
 
-Conversation IDs are enabled by default starting with `@posthog/mcp` 0.17.0 and Python `posthog` 7.56.0. Correlation still requires the agent to echo the handle. Eligible tool responses include a visible JSON text block, and the value is agent-controlled.
+Conversation IDs are enabled by default. Calls stay correlated when the agent echoes the handle returned in tool results.
 
 </CalloutBox>
 
 ## Enabling
 
-No options are needed with these releases:
+No extra configuration is needed in either SDK:
+
+<MultiLanguage selector="tabs">
 
 ```ts
 instrument(server, posthog)
 ```
 
-On earlier releases, explicitly set `enableConversationId: true` in TypeScript or `MCPAnalyticsOptions(enable_conversation_id=True)` in Python.
+```python
+instrument(server, posthog)
+```
 
-With this on, the SDK does three things:
+</MultiLanguage>
+
+The SDK does three things:
 
 1. **Injects an optional `conversation_id` argument** into compatible tool schemas, with a description telling the agent to reuse the value the server returns.
 2. **Creates a handle** when needed and returns it on eligible tool responses as a `{"conversation_id":"…"}` text block.

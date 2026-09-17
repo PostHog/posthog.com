@@ -23,7 +23,7 @@ When the SDK can confirm that it owns an injected analytics argument, it removes
 
 `$mcp_llm_model` comes from recognized client metadata or the agent's self-report. `$mcp_llm_model_source` distinguishes the two. Neither source is verified by the MCP protocol. Don't use either for billing, authorization, or other security decisions.
 
-Model capture and conversation IDs are enabled by default in `@posthog/mcp` 0.17.0 and Python `posthog` 7.56.0. To disable them, pass `{ captureModel: false, enableConversationId: false }` or `MCPAnalyticsOptions(capture_model=False, enable_conversation_id=False)`, respectively. Conversation IDs add a visible JSON text block to eligible tool results.
+Model capture and conversation IDs are enabled by default. Conversation IDs add a visible JSON text block to eligible tool results. See [how to disable them](/docs/mcp-analytics/installation#capture-the-calling-model).
 
 ## The redaction pipeline
 

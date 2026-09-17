@@ -39,7 +39,7 @@ You bring your own [`posthog-node`](/docs/libraries/node) client (the same patte
 
 `instrument(server, posthog, options?)` is the only function you need to call. The `posthog` client is a required positional argument; `options` is optional. It returns an analytics handle (used for [custom events](/docs/mcp-analytics/custom-events)). It's idempotent per server — calling it twice on the same server logs a warning and returns early.
 
-Starting with `@posthog/mcp` 0.17.0 and Python `posthog` 7.56.0, model capture and conversation IDs are enabled by default, alongside intent and exception capture. [Missing-capability reporting](/docs/mcp-analytics/missing-capability) and agent feedback remain opt-in.
+Both SDKs capture intent, models, and exceptions and enable conversation IDs by default. [Missing-capability reporting](/docs/mcp-analytics/missing-capability) and agent feedback are opt-in.
 
 ### Low-level `Server`
 
@@ -157,20 +157,6 @@ some clients ignore the handle or treat tool output as untrusted content.
 
 If this behavior doesn't suit your client, set `enableConversationId: false` and use `identify` for user-level grouping.
 
-#### Capture the calling model
-
-Model capture is enabled by default in both SDKs. The SDK reads recognized client metadata first, then falls back to the agent's `llm_model` argument. It captures `$mcp_llm_model` with `$mcp_llm_model_source` set to `"client_metadata"` or `"self_reported"`.
-
-For compatible tool schemas, the TypeScript SDK advertises `llm_model` as required. Python does the same on official high-level adapters and custom dispatchers, but advertises it as optional on raw low-level servers and standalone FastMCP. Dispatch never enforces the injected field.
-
-The SDK removes arguments it can confirm it injected before your handler runs. A fresh low-level instance that hasn't served `tools/list` can read `llm_model`, but leaves arguments untouched. This can capture an application-owned `llm_model` value until the instance learns the tool's schema. High-level adapters use the registered schema to preserve application-owned arguments.
-
-Both sources are unverified client input. Use them to compare tool quality, latency, and errors by model, not for billing or security decisions. Missing, blank, or `unknown` values are omitted. Reasoning effort isn't captured.
-
-To disable model capture and conversation IDs, pass `{ captureModel: false, enableConversationId: false }` in TypeScript or `MCPAnalyticsOptions(capture_model=False, enable_conversation_id=False)` in Python. Existing explicit opt-outs remain in effect after upgrading.
-
-Model capture works on both protocol revisions. See [Python](#python) for the standalone FastMCP limitation and [MCP SDK v2](/docs/mcp-analytics/sdk-v2#mcp-apps) for current MCP Apps coverage.
-
 #### Flushing
 
 `posthog-node` batches events, and a serverless function can freeze before they send. Flush at the end
@@ -205,7 +191,7 @@ export class AppModule {}
 
 `instrumentMutator(posthog)` is shorthand for `(server) => { instrument(server, posthog); return server }`. It returns the *server*, not the analytics handle, so it slots straight into `serverMutator`. The tools mcp-nest registers after the mutator runs are still captured.
 
-With `@posthog/mcp` 0.17.0 or later, `instrumentMutator(posthog)` enables model capture and conversation IDs, including on fresh low-level server instances created per request. Conversation correlation still requires the agent to echo the handle.
+`instrumentMutator(posthog)` uses the same defaults, including on fresh server instances. Conversation correlation requires the agent to echo the handle.
 
 If you need the analytics handle for [custom events](/docs/mcp-analytics/custom-events), call `instrument()` directly inside the mutator and return the server yourself:
 
@@ -274,7 +260,7 @@ A Python SDK ships inside the [`posthog`](/docs/libraries/python) package (the s
 pip install posthog
 ```
 
-`instrument()` needs the MCP SDK at runtime, but you already have it — you built your server with `mcp` or `fastmcp`, so it's treated as a peer dependency rather than bundled. Both official `mcp` majors are supported (`mcp>=1.26,<3`) and detected at runtime. MCP SDK 2.x support requires `posthog` 7.40.0 or later. jlowin's standalone `fastmcp` package is also supported. (`PostHogMCP` for custom dispatchers needs nothing beyond `posthog`.)
+`instrument()` needs the MCP SDK at runtime, but you already have it — you built your server with `mcp` or `fastmcp`, so it's treated as a peer dependency rather than bundled. Both official `mcp` majors are supported (`mcp>=1.26,<3`) and detected at runtime. jlowin's standalone `fastmcp` package is also supported. (`PostHogMCP` for custom dispatchers needs nothing beyond `posthog`.)
 
 `instrument(server, posthog_client, options?)` works with every common Python MCP server:
 
@@ -370,11 +356,9 @@ If you hand-rolled your own dispatcher, there's nothing for `instrument()` to pa
 
 <CalloutBox icon="IconInfo" title="Python SDK is beta" type="fyi">
 
-The Python SDK is in beta (pre-1.0); the API may still change before `v1`, and some TypeScript-only features may land first. It emits the identical `$mcp_*` events documented on the [events](/docs/mcp-analytics/events) page.
+Python MCP Analytics is in beta, so its API may change. See the [event reference](/docs/mcp-analytics/events) for SDK coverage.
 
 It supports both official `mcp` majors and the `2026-07-28` protocol revision. See [MCP SDK v2](/docs/mcp-analytics/sdk-v2) for what that revision changes.
-
-Python supports [model capture](#capture-the-calling-model), enabled by default starting with `posthog` 7.56.0. On standalone FastMCP with MCP SDK 1.x, middleware that can change tool listing or dispatch disables `llm_model` injection. This includes pass-through middleware that overrides those hooks. Model capture from recognized client metadata remains enabled.
 
 </CalloutBox>
 
@@ -387,13 +371,55 @@ The `posthog` client is passed as the required second positional argument — no
 | `logger` | `(message: string) => void` | no-op | STDIO-safe log sink for SDK-internal warnings. MCP STDIO transports cannot use `console.*`, so the default discards. Wire your own to surface warnings during development. |
 | `enableExceptionAutocapture` | `boolean` | `true` | When `false`, a failed tool call does not emit the `$exception` sibling event. |
 | `context` | `boolean \| { description: string }` | `true` | Inject a required `context` argument into every tool schema. See [Capturing agent intent](/docs/mcp-analytics/intent). |
-| `captureModel` | `boolean \| { description: string }` | `true` | Capture the model from recognized client metadata or an SDK-injected `llm_model` argument. Enabled by default since `@posthog/mcp` 0.17.0. |
+| `captureModel` | `boolean \| { description: string }` | `true` | Capture the model from recognized client metadata or an SDK-injected `llm_model` argument. |
 | `intentFallback` | `(request, extra) => string \| Promise<string \| null \| undefined>` | — | Called when the agent didn't pass a `context` argument. See [Capturing agent intent](/docs/mcp-analytics/intent). |
 | `enableConversationId` | `boolean` | `true` | Inject an optional `conversation_id` argument into compatible tool schemas. See [Conversation IDs](/docs/mcp-analytics/conversation-id). |
 | `reportMissing` | `boolean` | `false` | Register the `get_more_tools` virtual tool. See [Missing capability](/docs/mcp-analytics/missing-capability). |
 | `identify` | `async (request, extra) => UserIdentity \| null \| UserIdentity` | — | Map an MCP request to one of your users. See [Identifying users](/docs/mcp-analytics/identifying-users). |
 | `beforeSend` | `(event) => event \| null \| undefined \| Promise<...>` | — | Runs on each fully-built PostHog payload right before send. Return the (possibly mutated) event to send it, or a nullish value to drop it. See [Privacy](/docs/mcp-analytics/privacy). |
 | `eventProperties` | `async (request, extra) => Record<string, unknown>` | — | Properties merged onto every event. See [Custom events and metadata](/docs/mcp-analytics/custom-events). |
+
+## Capture the calling model
+
+Model capture is enabled by default in both SDKs. The SDK reads recognized client metadata first, then falls back to the agent's `llm_model` argument. Events include `$mcp_llm_model` and `$mcp_llm_model_source` (`"client_metadata"` or `"self_reported"`).
+
+Use this unverified client input to compare tool quality, latency, and errors by model. Don't use it for billing or security decisions. Missing, blank, and `unknown` values are omitted. Reasoning effort isn't captured.
+
+To disable model capture, conversation IDs, or both, set the corresponding options to `false`:
+
+<MultiLanguage selector="tabs">
+
+```ts
+instrument(server, posthog, {
+  captureModel: false,
+  enableConversationId: false,
+})
+```
+
+```python
+from posthog.mcp.types import MCPAnalyticsOptions
+
+instrument(server, posthog, MCPAnalyticsOptions(
+    capture_model=False,
+    enable_conversation_id=False,
+))
+```
+
+</MultiLanguage>
+
+<details>
+
+<summary>Schema and framework compatibility</summary>
+
+For compatible tool schemas, TypeScript advertises `llm_model` as required. Python does the same on official high-level adapters and custom dispatchers, but makes it optional on raw low-level servers and standalone FastMCP. Dispatch never enforces the injected field.
+
+The SDK removes arguments it can confirm it injected before your handler runs. A fresh low-level instance that hasn't served `tools/list` can read `llm_model`, but leaves arguments untouched. It can capture an application-owned `llm_model` until it learns the tool's schema. High-level adapters use the registered schema to preserve application-owned arguments.
+
+On Python's standalone FastMCP with MCP SDK 1.x, middleware that overrides tool-listing or dispatch hooks disables `llm_model` injection, even if the middleware only passes requests through. Capture from recognized client metadata still works.
+
+Model capture works on both protocol revisions. See [MCP SDK v2](/docs/mcp-analytics/sdk-v2#mcp-apps) for MCP Apps coverage.
+
+</details>
 
 ## Graceful shutdown
 
