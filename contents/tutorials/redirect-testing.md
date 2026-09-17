@@ -427,6 +427,8 @@ if (request.nextUrl.pathname === '/offer') {
 
 Some tests cannot use a rewrite. For example, the two variants can be separate sites. In that case, redirect both variants, so that each variant pays the cost of the extra request.
 
+> **Note:** The `bootstrapData` cookie is set for one host, so it does not reach a different domain. Subdomains still share one distinct ID, because `cross_subdomain_cookie` is `true` by default. For variants on different domains, set up [cross-domain tracking](/tutorials/cross-domain-tracking). Without it, the destination site creates a new distinct ID, so the exposure does not match the variant you assigned.
+
 ### Prefetching can create false exposures
 
 A browser can request a URL before a person views the page. A Next.js [`Link`](https://nextjs.org/docs/app/api-reference/components/link) component prefetches the pages it points to. An in-app browser, like the one in a chat or social app, requests a URL to build a link preview. Each of these requests runs the middleware. The middleware then sends an exposure event for a person who never saw the page. These false exposures hide the effect of your change, because they add people to the experiment who cannot convert.
