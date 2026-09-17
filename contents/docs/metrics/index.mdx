@@ -2,9 +2,11 @@
 title: Application metrics
 ---
 
-<CalloutBox icon="IconFlask" title="Metrics is in private alpha" type="action">
+import { ProductScreenshot } from "components/ProductScreenshot"
 
-The metrics viewer is only turned on for selected teams. You can send metrics now and they are stored against your project, but you won't be able to view them in PostHog until your team is added. Setup details, including the ingestion endpoint, may change before general availability.
+<CalloutBox icon="IconFlask" title="Metrics is in open alpha" type="action">
+
+Any team can turn on metrics: open [Metrics](https://app.posthog.com/metrics) in PostHog and select **Enable metrics** in the onboarding view. See [turn on metrics](#turn-on-metrics) below for the full flow. Setup details, including the ingestion endpoint, may change before general availability.
 
 </CalloutBox>
 
@@ -12,7 +14,32 @@ The metrics viewer is only turned on for selected teams. You can send metrics no
 
 We call these *application metrics* to distinguish them from the other kinds of metrics PostHog helps you track — [experiment metrics](/docs/experiments/metrics), [revenue metrics](/docs/revenue-analytics/revenue-metrics), and [usage metrics](/docs/customer-analytics/usage-metrics) measure your product and business, whereas application metrics measure the systems running it.
 
-There are three ways to send metrics:
+## Turn on metrics
+
+Metrics is in **open alpha**. Any team can turn it on for their project — no invitation or support request needed:
+
+1. Open [Metrics](https://app.posthog.com/metrics) in PostHog.
+2. On a new project, the onboarding view shows a preview of the metrics viewer and a getting-started checklist. Select **Enable metrics**.
+3. Metrics turns on for your whole project, and the **Overview**, **Viewer**, and **SQL** tabs become available.
+
+{/* TODO: screenshots below are placeholders — capture the real onboarding view on a new
+    project (the metrics preview) and the Enable metrics button, upload them to Cloudinary
+    (dmukukwp6), and replace these URLs before merging. */}
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/metrics_new_project_preview_light.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/metrics_new_project_preview_dark.png"
+  alt="Metrics onboarding view on a new project, with a preview of the metrics viewer"
+  classes="rounded"
+/>
+
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/metrics_enable_metrics_light.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/metrics_enable_metrics_dark.png"
+  alt="The Enable metrics button in the metrics onboarding view"
+  classes="rounded"
+/>
+
+Once enabled, there are three ways to send metrics:
 
 1. **Already have PostHog installed?** Record metrics directly with the [`posthog.metrics` API](#already-have-posthog-installed-use-posthogmetrics) built into the PostHog SDK, with no extra packages.
 2. **Using OpenTelemetry?** Point any standard OpenTelemetry library or Collector at [PostHog's OTLP endpoint](#set-up-metrics-with-opentelemetry), with no PostHog-specific packages.
