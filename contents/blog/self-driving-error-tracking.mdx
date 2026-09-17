@@ -32,11 +32,9 @@ The [Self-driving inbox](https://app.posthog.com/inbox) is where PostHog collect
 
 These are the pre-defined signals, but we can also set up [scouts](/docs/self-driving/scouts) that monitor different things on a schedule, including application performance, ad spend, brand mentions, query performance, etc.
 
-We talked a lot about the concept of self-driving, but now that we've been running it for a while, it's time to talk about the actual stuff the product has fixed on its own (well, not entirely; we did hit merge many times).
+We talked a lot about the concept of self-driving, but now it's time to check the stats and how it works in practice. One thing immediately came up: **Error Tracking is the top self-driving signal so far.**
 
-## Error Tracking as a self-driving signal
-
-First, let's see how Error Tracking performs as an inbox signal:
+If you don't take our word for it, here are the stats:
 
 - **Error Tracking is 29% of everything in the inbox and 42% of everything that gets merged.** It's the largest signal by report volume and by merged fixes.
 
@@ -48,21 +46,23 @@ First, let's see how Error Tracking performs as an inbox signal:
 
 *Source: PostHog Data Warehouse, 16 June to 14 September 2026, all projects.*
 
-Seeing it's the strongest signal in our inbox, let's break down an actual error it caught and how it got fixed.
+Let's stop bragging and break down an actual error it caught and how it got fixed.
 
 ## The error self-driving caught
 
-Between 7 April and 25 August, PostHog AI gave thirteen people a worse answer than it should have. The AI lost insight data and answered them from a fallback, meaning it rendered the event it measured and the filters, but didn't render a single actual number from the event. Nothing looked broken, so we didn't get any support tickets.
+From April to late August, PostHog AI kept giving a handful of users a worse answer than it should have on one kind of question. When it pulled a trends insight where only some of the series carried an aggregated value, the formatter hit a `KeyError`. The error was caught, so nothing broke on screen. The AI just lost the data and answered from a fallback, with the event it measured and the filters but not one number from the result.
 
-Say you're looking at signups broken down by plan and you ask which plan is growing fastest. Normally PostHog AI gets a table of the real figures and answers: Enterprise, up 31%. Here it got the chart's title and settings and no numbers at all, so it answered on topic and told you nothing.
+Say you're looking at signups broken down by plan and you ask which plan is growing fastest. Normally PostHog AI gets a table of the real figures and answers: Enterprise, up 31%. Here it got the chart's title and settings and nothing else, so it answered on topic and told you nothing. Nobody filed a support ticket, which makes sense. The answer looked like an answer.
 
-On Sunday 30 August, a fourteenth person hit this same error, and we got a report in our [Self-driving inbox](https://app.posthog.com/inbox).
+It ran from 7 April to 25 August. Then on Sunday 30 August we got a report in our [Self-driving inbox](https://app.posthog.com/inbox).
 
-### Why this time, and not the thirteen times before?
+### Why that Sunday, after five months?
 
-Error Tracking can raise a signal three ways: a new issue gets filed, an existing one starts spiking, or a closed one reopens. This bug was far too quiet to spike, at about three occurrences a month, and nobody had closed it, so reopening was out too. The only door left was a new issue. The previous thirteen all landed on one issue opened back in April, quietly incrementing. On 30 August, the same exception happened to get filed under a fresh fingerprint, and a new issue is one of the three things Error Tracking raises a signal for.
+Error Tracking raises a signal three ways: a new issue gets filed, an existing one starts spiking, or a closed one reopens. From April onwards every occurrence of this landed on the same open issue, which nobody had closed, so it sat there incrementing a counter.
 
-Which means this wasn't caught because it got bad enough, but rather because it got re-filed. Had the fourteenth landed on the old issue like the other thirteen, it would still be broken.
+What changed on 30 August was the fingerprint. Error Tracking groups exceptions by the exception itself plus the shape of the stack above it. Four days earlier we shipped charts in scheduled AI reports, which meant the code that runs and formats a query had to hand back the raw response as well as the formatted text, so we split it in two and left the old function as a wrapper. None of that touched the bug, and the frames underneath it are identical. But the frame doing the reporting had a different name, so the next occurrence didn't match the old fingerprint, Error Tracking filed a new issue, and a new issue is a signal.
+
+So a refactor with nothing to do with this bug is what surfaced it. What isn't luck is that it was there to find. The exception was handled, which is why nothing looked broken and nobody filed a ticket, and if you only report unhandled crashes a bug like this doesn't show up in your tooling at all.
 
 <ProductScreenshot
     imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/Clean_Shot_2026_09_17_at_13_36_25_2x_472e2df77a.png"
@@ -115,9 +115,18 @@ It also flagged the report as safe to start without a human, so two seconds late
 
 That was just one of the bugs we fixed in our own repo. Here's what everyone else is fixing. Sorting them by what the fix actually did, these are the categories that come up most.
 
-### Teaching Error Tracking what to ignore
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/agents_Xerror_tracking_7a7a98910a.png"
+    alt="Bar chart, What teams fix with Error Tracking x Self-driving: noise / ignore rules 25%, null guards 16%, missing retries 11%, hydration / deploys 10%, auth / sessions 9%, permissions 5%, checkout / billing 3%."
+    padding={false}
+    classes="rounded"
+/>
 
-Browser-extension noise, cross-origin "Script error.", dev-server errors reaching production tracking, canceled-request AbortErrors. These are a good fit for self-driving because the fix is a filter rule rather than product code, so the blast radius is near zero, and the stack trace alone is usually enough to tell that every frame belongs to something you don't control.
+*Source: PostHog Data Warehouse, 16 June to 14 September 2026, customer projects only.*
+
+### Reducing noise
+
+Noise comes from all sides: browser-extension noise, cross-origin "Script error.", dev-server errors reaching production tracking, canceled-request AbortErrors. Self-driving handles these well. The fix is a filter rule, not product code, so the risk is near zero, and the stack trace alone usually shows that every frame belongs to code you don't own.
 
 ### Null guards on pages that crash for a handful of users
 
@@ -142,15 +151,6 @@ A 403 filed as an exception almost always means the frontend had no path for "yo
 ### Checkout and billing dead ends
 
 An already-paid email landing on a dead error state, a plans page that threw for users with no organization, valid subscriptions falsely blocked. The smallest category we're seeing right now, but also the one worth pulling to the front of the queue by hand, because a checkout error costs money every time it fires in a way that a broken settings page doesn't.
-
-<ProductScreenshot
-    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/agents_Xerror_tracking_7a7a98910a.png"
-    alt="Bar chart, What teams fix with Error Tracking x Self-driving: noise / ignore rules 25%, null guards 16%, missing retries 11%, hydration / deploys 10%, auth / sessions 9%, permissions 5%, checkout / billing 3%."
-    padding={false}
-    classes="rounded"
-/>
-
-*Source: PostHog Data Warehouse, 16 June to 14 September 2026, customer projects only.*
 
 ## Self-driving is yet to be discovered
 
