@@ -129,7 +129,7 @@ Ask:
 - Who is consuming this?
 - What do they actually need from me?
 - Should this even be writing?
-- Do they need the context, or just the conclusion and next step?
+- Do they need the context, or just the conclusion and next steps?
 - What should stay available for inspection without becoming required reading?
 
 ## The work moves
