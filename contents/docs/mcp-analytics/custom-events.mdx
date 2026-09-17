@@ -2,9 +2,9 @@
 title: Custom events and metadata
 ---
 
-Sometimes the events the SDK emits out of the box aren't enough. You might want to attach metadata to every event, or emit a fully custom event for something that isn't a tool call. The SDK gives you two hooks for that, in order of increasing invasiveness.
+Use `eventProperties` to add metadata to captured events. Use `analytics.capture()` for events that are not MCP requests.
 
-## `eventProperties` — metadata on every event
+## `eventProperties` – metadata on every event
 
 Pass an `eventProperties` callback to attach extra properties to automatically captured MCP events. The callback runs per request, so values can depend on the current call (request id, transport, headers, env, region, deploy SHA, etc).
 
@@ -20,7 +20,7 @@ const analytics = instrument(server, posthog, {
 })
 ```
 
-`getRequestHeaders` reads headers on both MCP SDK majors — see [MCP SDK v2](/docs/mcp-analytics/sdk-v2#if-your-callbacks-read-headers-change-them).
+`getRequestHeaders` reads headers on both MCP SDK majors – see [MCP SDK v2](/docs/mcp-analytics/sdk-v2#if-your-callbacks-read-headers-change-them).
 
 The returned object is spread flat onto the event's properties alongside the built-in `$mcp_*` keys:
 
@@ -36,19 +36,19 @@ The returned object is spread flat onto the event's properties alongside the bui
 }
 ```
 
-For a "stamp on everything" use case (the closest analogue to `posthog.register(...)` in other SDKs), just return constants from the callback. The callback is per-event rather than session-persistent, so the values can also vary per request if you need them to.
+Return constants from `eventProperties` to add the same values to captured MCP events. This is similar to `posthog.register(...)` in other SDKs. The callback runs for each event, so values can vary by request.
 
-For group analytics, return `groups` from your [`identify`](/docs/mcp-analytics/identifying-users) callback rather than hand-writing the `$groups` key — the SDK stamps `$groups` onto every event for the session for you.
+For group analytics, return `groups` from [`identify`](/docs/mcp-analytics/identifying-users). The SDK adds `$groups` to events for the session.
 
-Returned values must be JSON-serializable. Errors thrown from your callback are swallowed and surfaced to your `logger` — they never interrupt tool execution.
+Returned values must be JSON-serializable. The SDK catches callback errors and sends them to your `logger`. These errors do not interrupt tool execution.
 
-## `analytics.capture()` — emit an arbitrary event
+## `analytics.capture()` – emit an arbitrary event
 
 Use `analytics.capture()` for events that aren't MCP requests, such as UI feedback or workflow milestones. It uses the SDK's sanitization, current server session and identity, and `beforeSend` hook. It returns a promise you can `await`.
 
 Custom capture has no request context and doesn't run `eventProperties`. Pass custom metadata in `properties`.
 
-You name the event. It's sent verbatim — it's your event, so it is **not** `$`-prefixed.
+You name the event. It's sent verbatim – it's your event, so it is **not** `$`-prefixed.
 
 ```ts
 const analytics = instrument(server, posthog)
@@ -59,7 +59,7 @@ await analytics.capture({
 })
 ```
 
-What lands in PostHog:
+PostHog receives:
 
 - One event under the verbatim `event` name you passed, with your `properties` merged in.
 - The current server session and cached identity apply. These may differ from the session of a concurrent tool request.

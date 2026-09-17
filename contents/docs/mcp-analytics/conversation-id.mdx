@@ -6,7 +6,7 @@ import CalloutBox from 'components/Docs/CalloutBox'
 
 A PostHog `$session_id` normally follows the MCP protocol session. The handshake-free `2026-07-28` revision has no protocol session, so each request gets a new session unless you add another correlation signal.
 
-`$mcp_conversation_id` lets you stitch those calls together at the conversation level. The SDK also derives `$session_id` from an accepted conversation handle, so PostHog session queries group the same calls.
+`$mcp_conversation_id` groups those calls by conversation. The SDK also derives `$session_id` from an accepted conversation handle, so PostHog session queries group the same calls.
 
 <CalloutBox icon="IconInfo" title="Enabled by default" type="fyi">
 
@@ -36,9 +36,11 @@ The SDK does three things:
 2. **Creates a handle** when needed and returns it on eligible tool responses as a `{"conversation_id":"…"}` text block.
 3. **Captures the handle** as `$mcp_conversation_id`. When the agent echoes a valid handle, the SDK derives a stable `$session_id` from it. Until then, existing protocol sessions remain in use.
 
-The SDK reuses an echoed UUIDv7 that matches the handles it mints. It replaces missing or arbitrary values with a new handle to avoid merging unrelated conversations.
+The SDK reuses an echoed UUIDv7 that matches the handles it creates. It replaces missing or arbitrary values with a new handle to avoid merging unrelated conversations.
 
-## How it lands in events
+<a id="how-it-lands-in-events" />
+
+## Event properties
 
 ```
 {
@@ -72,15 +74,15 @@ LIMIT 50
 
 <CalloutBox icon="IconWarning" title="Some tools can't take the injection" type="caution">
 
-The `conversation_id` parameter can't be added to a schema built from `oneOf` / `allOf` / `anyOf` / `$ref`, or to a tool with no input schema. Those tools log a warning and get no handle, so their calls won't correlate. [`identify`](/docs/mcp-analytics/identifying-users) covers them.
+The SDK cannot add `conversation_id` to schemas that use `oneOf`, `allOf`, `anyOf`, or `$ref`. It also skips tools without an input schema. It logs a warning and returns no handle for these tools. Use [`identify`](/docs/mcp-analytics/identifying-users) to group their calls by user.
 
-A client working from a **stale cached tool listing** won't know to send the parameter either — `ttlMs` caching on `tools/list` makes that more likely over time.
+A client with a stale cached tool listing does not know about the new parameter. The `ttlMs` setting on `tools/list` can extend this period.
 
 </CalloutBox>
 
 <CalloutBox icon="IconInfo" title="The handle is visible in tool output" type="fyi">
 
-It's returned as a `{"conversation_id":"…"}` text block, so consumers that surface raw tool-call content to end users will show that JSON. It's deliberately data rather than an instruction — an imperative sentence in tool output is indistinguishable from prompt injection, and hardened clients block it.
+The SDK returns the handle as a `{"conversation_id":"…"}` text block. Clients that display raw tool results also display this JSON. The block contains data rather than an instruction because hardened clients can treat instructions in tool results as prompt injection.
 
 The SDK preserves structured output and result metadata. Clients that only consume structured output may never see the text block, so they may not echo the handle.
 
@@ -88,7 +90,7 @@ The SDK preserves structured output and result metadata. Clients that only consu
 
 <CalloutBox icon="IconWarning" title="Agent-controlled values" type="caution">
 
-The SDK only reuses UUIDv7 values that match the shape of handles it can mint. It replaces other values with a new handle. A client can still reuse a valid-looking handle across users, so don't use `$mcp_conversation_id` as a security boundary.
+The SDK only reuses UUIDv7 values that match the shape of handles it can create. It replaces other values with a new handle. A client can still reuse a valid-looking handle across users, so don't use `$mcp_conversation_id` as a security boundary.
 
 </CalloutBox>
 
