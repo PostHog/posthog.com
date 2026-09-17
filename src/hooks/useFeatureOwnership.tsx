@@ -39,6 +39,16 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
         owner: ['product-analytics'],
         label: 'feature/events',
     },
+    'agent-proxy': {
+        feature: 'Agent proxy',
+        owner: ['agent-infrastructure'],
+        label: 'feature/agent-proxy',
+    },
+    'agent-runtime': {
+        feature: 'Agent runtime',
+        owner: ['agent-infrastructure'],
+        label: 'feature/agent-runtime',
+    },
     'agentic-provisioning': {
         feature: 'Agentic provisioning',
         owner: ['growth'],
@@ -46,8 +56,8 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     },
     'ai-gateway': {
         feature: 'AI gateway',
-        owner: ['ai-gateway'],
-        label: false,
+        owner: ['agent-infrastructure'],
+        label: 'feature/ai-gateway',
     },
     'ai-playground': {
         feature: 'AI playground',
@@ -236,6 +246,11 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     heatmaps: {
         feature: 'Heatmaps',
         owner: ['web-analytics'],
+    },
+    'hog-harness': {
+        feature: 'Hog harness',
+        owner: ['agent-infrastructure'],
+        label: 'feature/hog-harness',
     },
     hogql: {
         feature: 'HogQL',
@@ -559,6 +574,11 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     'table-exports': {
         feature: 'Table exports',
         owner: ['product-analytics'],
+    },
+    tasks: {
+        feature: 'Tasks',
+        owner: ['agent-infrastructure'],
+        label: 'feature/tasks',
     },
     terraform: {
         feature: 'Terraform integration',
