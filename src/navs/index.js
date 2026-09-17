@@ -1062,6 +1062,10 @@ export const handbookSidebar = [
                 url: '/handbook/marketing/paid',
             },
             {
+                name: 'UTM conventions',
+                url: '/handbook/marketing/utm-conventions',
+            },
+            {
                 name: 'Events (IRL)',
                 url: '/handbook/marketing/events',
                 children: [

@@ -95,7 +95,7 @@ For launches, we generally need:
 
 ## What should the placement actually look like?
 
-- Make a judgement call on whether to use a unique link set up with Dub (like `https://go.posthog.com/sponsored`) to point to specific UTMs unique to each video or an influencer-specific link using `posthog.com` redirects (like `posthog.com/theo`) to the same UTMs across videos. These links should have `utm_source` and `utm_campaign` set to the influencer and campaign name.
+- Make a judgement call on whether to use a unique link set up with Dub (like `https://go.posthog.com/sponsored`) to point to specific UTMs unique to each video or an influencer-specific link using `posthog.com` redirects (like `posthog.com/theo`) to the same UTMs across videos. Set the parameters on these links with our [UTM conventions](/handbook/marketing/utm-conventions): `utm_source` is the platform the placement sits on, and the influencer name goes in `utm_content`. Keep `utm_campaign` for the campaign, not the creator. An influencer name in `utm_source` reports the placement as organic traffic.
 
 - Make sure they tell their audience to "mention them on sign up" or "say that they heard about PostHog from them" so we can track the attribution.
 
