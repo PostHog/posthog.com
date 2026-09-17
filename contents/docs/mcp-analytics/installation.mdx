@@ -17,6 +17,8 @@ import WizardCommand from 'components/WizardCommand'
 - An MCP server built on either TypeScript SDK major — `@modelcontextprotocol/sdk` (v1) or `@modelcontextprotocol/{core,server,client}` (v2) — or either official Python MCP SDK major (`mcp>=1.26,<3`). jlowin's standalone `fastmcp` package is also supported. See [MCP SDK v2](/docs/mcp-analytics/sdk-v2). (Running a custom dispatcher with no server object to wrap? See [Custom servers](/docs/mcp-analytics/custom-servers).)
 - A PostHog [project token](/docs/getting-started/project-token) (`phc_…`)
 
+Neither runtime is a hard requirement. MCP Analytics reads the events your server sends, not the library that sent them, so a server in any language can populate the whole product. See [Any other language](/docs/mcp-analytics/custom-servers#any-other-language).
+
 ## AI wizard
 
 The fastest way to get set up is our wizard, which installs the package, adds your `posthog-node` client, and wires up the `instrument()` call for you (it also works for [LLM coding agents](/blog/envoy-wizard-llm-agent) like Cursor and Bolt):
