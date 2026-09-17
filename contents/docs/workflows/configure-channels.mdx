@@ -89,9 +89,9 @@ Once configured, you'll be able to use the channel in a workflow to send SMS mes
 
 Push lets you send native mobile push notifications to users who have your app installed and have registered a device token through the PostHog mobile SDK. Connect the provider(s) your app uses: **Firebase Cloud Messaging (FCM)** for Android (and iOS via Firebase), and/or **Apple Push Notification service (APNs)** for iOS.
 
-<CalloutBox icon="IconInfo" title="Push notifications are in beta" type="fyi">
+<CalloutBox icon="IconInfo" title="Push sends count toward destinations" type="fyi">
 
-Push is the newest workflows channel and is in beta. It's rolling out gradually, so it isn't available in every project yet. It's free to use during the beta. To request access or send feedback, [reach out in-app](https://app.posthog.com/#panel=support%3Afeedback%3A%3Alow%3Atrue).
+Push is available in every project. Each send counts toward your workflows destinations usage and quota, the same as a webhook or other destination step. To send feedback, [reach out in-app](https://app.posthog.com/#panel=support%3Afeedback%3A%3Alow%3Atrue).
 </CalloutBox>
 
 <CalloutBox icon="IconInfo" title="Device tokens come from the mobile SDK" type="fyi">
