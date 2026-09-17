@@ -6394,6 +6394,14 @@
             "source": "/contact-us",
             "destination": "/talk-to-a-human",
             "statusCode": 301
+        },
+        {
+            "source": "/docs/settings/sso",
+            "destination": "/docs/authentication/sso"
+        },
+        {
+            "source": "/docs/settings/id-jag",
+            "destination": "/docs/settings/authentication/id-jag"
         }
     ]
 }
