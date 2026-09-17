@@ -6,7 +6,7 @@ showTitle: true
 
 Paid ads sit with the <SmallTeam slug="demand-gen" />. They have two jobs: capture demand that already exists and introduce PostHog to people our brand and content do not reach on their own.
 
-We broadly split our budget 50/50 between conversion and awareness. While we want to capture existing demand with conversion campaigns, we also must run awareness ads that focus on tool education to create demand in the future.
+We broadly split our budget 50/50 between conversion and awareness.
 
 Ads are expensive, so we typically only advertise individual tools once they are generally available, have pricing, and have a feature set broadly on par with the main competitors.
 
@@ -18,16 +18,14 @@ Every meaningful campaign should move through the same loop:
 
 - **Propose:** Define the audience, problem, hypothesis, objective, budget cap, creative, landing page, success metric, and what we will not be able to measure.
 - **Launch:** Use consistent campaign names and unique UTMs, QA the PostHog events and CDP destinations, confirm the budget cap, and set a decision date before spending.
-- **Evaluate:** Use a [Scout](/docs/self-driving/scouts) and the Windsor.ai and PostHog MCPs to check delivery and tracking after five days, leading indicators after ten days, audience and creative quality after two weeks, and conversions in three to four weeks, depending on the objective.
+- **Evaluate:** Check delivery and tracking after five days, leading indicators after ten days, audience and creative quality after two weeks, and conversions in three to four weeks, depending on the objective.
 - **Learn:** Scale, change, or stop the campaign, write a brief postmortem, and share creative and landing page findings in [#group-marketing-content-brand](https://posthog.slack.com/archives/C0ALU3889A6).
 
-We're not committed to spending budget if a campaign does not perform or if we see early indicators that it is unlikely to perform.
-
-We run experiments on a rolling basis to improve performance, but we work hard to avoid testing paralysis. If something works, we go for it; if it does not, we try something new. We do not fix what is not broken, but no campaign should go more than 30 days without a touch from the paid ads team.
+We run experiments on a rolling basis to improve performance, but we work hard to avoid testing paralysis. If something works, we go for it; if it does not, we try something new. We do not fix what is not broken, but no campaign should go more than 30 days without a touch from the paid ads team, and we do not spend budget just because it is available.
 
 ## How and when we use LLMs for paid ads
 
-Demand gen is a small team, so using AI to extend our capacity is critical, but we limit it to optimization with a human in the loop. We use a [Scout](/docs/self-driving/scouts) to keep tabs on current campaign and creative performance via messages in Slack.
+Demand gen is a small team, so using AI to extend our capacity is critical, but we limit it to optimization with a human in the loop. We use a [Scout](/docs/self-driving/scouts) to keep tabs on current campaign and creative performance via messages in Slack, and the Windsor.ai and PostHog MCPs to investigate the data.
 
 All campaign ideation, creative work, strategy, media plans, and monthly Growth Reviews are designed and written by humans.
 
@@ -47,11 +45,9 @@ We use Engaged Visits and platform delivery metrics for early decisions, then co
 
 ## How we measure campaigns
 
-Ad platforms deliver the ads and help us diagnose delivery via CTRs and impressions. PostHog does not use pixels from third-party ad platforms because they do not align with our brand values. As such, we're somewhat limited in how effectively we can use each ad platform's algorithm. We're not entirely without conversion optimization, however, as the [PostHog CDP](/cdp) sends conversions back to each platform in the form of Click IDs and hashed user emails for use in tCPA/tROAS campaigns and to share data on the success of our awareness campaigns.
+Ad platforms deliver the ads and help us diagnose delivery via CTRs and impressions. Because we do not use their third-party pixels, we're somewhat limited in how effectively we can use their algorithms. The [PostHog CDP](/cdp) still sends conversions back to each platform in the form of Click IDs and hashed user emails for use in tCPA/tROAS campaigns and to share data on the success of our awareness campaigns.
 
 PostHog's [Context Warehouse](/context-warehouse) is the data backend. The <PrivateLink url="https://us.posthog.com/project/2/dashboard/2104209">paid marketing dashboard</PrivateLink> is the live view, the <PrivateLink url="https://docs.google.com/spreadsheets/d/1ArZG48QUZ81y1RMCJ0PrA50DnAqoIyvo2cWmc4l-cYU">media plan</PrivateLink> is where we keep budget and pacing, and the monthly <PrivateLink url="https://docs.google.com/document/d/1H20mB0gWrISKZMOBlJ12avlyNC5yGRD3e97BVuABtys/edit?tab=t.p28mbb7wkucv#heading=h.97gmbiax4fyn">Growth Review</PrivateLink> is where we make and record decisions.
-
-Cost efficiency depends on the campaign objective. For awareness, we compare spend with impressions, completed video views, unique paid visitors, and Engaged Visits. For conversion, we compare spend with non-freemail signups, Healthy Orgs, and eventually revenue.
 
 ### Conversion campaigns
 
@@ -72,7 +68,7 @@ An <PrivateLink url="https://us.posthog.com/project/2/insights/c3lAMFxb">Engaged
 
 ### What we cannot measure perfectly
 
-We do not use third-party pixels or cookies, nor can we track people across devices. This means:
+We cannot track people across devices. This means:
 
 - An ad seen on a phone or connected TV will not receive credit when someone later signs up on a computer
 - First-visit attribution tends to favor branded search
@@ -100,7 +96,7 @@ Where a channel allows it, we focus on the US, Canada, UK, Germany, and France. 
 
 ## Privacy and conversion optimization
 
-As mentioned above, using third-party trackers or pixels like Google Tag Manager is against our brand and values. We use PostHog and the PostHog CDP instead.
+We use PostHog and the PostHog CDP instead of third-party trackers or pixels like Google Tag Manager.
 
 We follow these principles:
 
@@ -117,7 +113,7 @@ We follow these principles:
 
 We change up campaigns frequently, but generally advertise the PostHog Brand, self-driving, and individual tools. All current copy can be found in the <PrivateLink url="https://docs.google.com/spreadsheets/d/1uO8dxflZfHbBLN1OlHdNZrl7WuiklhYO3DQ0U4naGxM">search ad copy sheet</PrivateLink>, and it is updated regularly.
 
-We test both unhinged and enterprise coded ads. More and more, we find that enterprise coded ads perform just as well as, or slightly better than, our unhinged versions, but we feel experimenting with unhinged copy and ads is important for the brand. All copy is written by <TeamMember name="Jonah Svihus" /> and reviewed by <TeamMember name="Charles Cook" />.
+We test both unhinged and enterprise coded ads. More and more, we find that enterprise coded ads perform just as well as, or slightly better than, our unhinged versions, but we feel experimenting with unhinged copy and ads is important for the brand.
 
 For static creative, request artwork from the <SmallTeam slug="graphics" /> using the [art request process](/handbook/brand/art-requests), or, if it is generated by [Hey Digital](https://www.heydigital.co/), submit it in [#design-review](https://posthog.slack.com/archives/C09ARM6LBLZ) to be checked by <TeamMember name="Lottie Coxon" />. For video, start with [#team-video](https://posthog.slack.com/archives/C01R387F6H5). For UGC, we get most of our content from [#influence-wrangling](https://posthog.slack.com/archives/C0B7MH0M02Y) via <TeamMember name="Adlet Smykov" />. We run ads from 6 to 60 seconds and from 9:16 to 16:9 because Shorts, Reels, YouTube, and connected TV have different completion rates and placement requirements.
 
@@ -129,7 +125,7 @@ We work with [Hey Digital](https://www.heydigital.co/) to set up campaigns, ligh
 
 We also have monthly calls with partner teams at Google, Reddit, and LinkedIn. Their advice can help diagnose platform performance, but PostHog data decides whether a campaign is working for us.
 
-As mentioned above, and for quick reference here, within the demand gen team:
+Within the demand gen team:
 
 - <TeamMember name="Brian Young" /> owns the relationship with Hey Digital, ad platform partner teams, budget, channel strategy, analytics, and reporting
 - <TeamMember name="Jonah Svihus" /> writes copy and develops creative across platforms, including video scripts
@@ -137,6 +133,6 @@ As mentioned above, and for quick reference here, within the demand gen team:
 
 ## Growth review
 
-<TeamMember name="Brian Young" /> runs a monthly Growth Review with <TeamMember name="Cory Slater" />, <TeamMember name="Adlet Smykov" />, and <TeamMember name="Charles Cook" />. It is shared in <a href="https://posthog.slack.com/archives/C0ALU3889A6">#group-marketing-content-brand</a> and <a href="https://posthog.slack.com/archives/C06LMMS3YP4">#team-blitzscale</a>. It covers paid ads, the broader acquisition funnel, and influencer spend. The review is designed to help us reflect on the previous month's performance and plan for the next, based on leading indicators. It also gives us time to judge longer-term performance using our lagging results.
+<TeamMember name="Brian Young" /> runs a monthly Growth Review with <TeamMember name="Cory Slater" />, <TeamMember name="Adlet Smykov" />, and <TeamMember name="Charles Cook" />. It is shared in <a href="https://posthog.slack.com/archives/C0ALU3889A6">#group-marketing-content-brand</a> and <a href="https://posthog.slack.com/archives/C06LMMS3YP4">#team-blitzscale</a>. We use it to reflect on the previous month's performance and plan the next one using leading indicators, while also checking longer-term performance through lagging results. It covers paid ads, the broader acquisition funnel, and influencer spend.
 
 See the <PrivateLink url="https://docs.google.com/spreadsheets/d/1ne0JMRKb_okluvrDiNV1H6h7EybRjMF2pg8JjrX6ZFU/edit?usp=sharing">Growth Review source sheet</PrivateLink> and <PrivateLink url="https://docs.google.com/document/d/1H20mB0gWrISKZMOBlJ12avlyNC5yGRD3e97BVuABtys/edit?tab=t.p28mbb7wkucv#heading=h.97gmbiax4fyn">monthly commentary</PrivateLink>.
