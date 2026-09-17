@@ -106,7 +106,7 @@ You own the `posthog-node` client's lifecycle. Call `posthog.shutdown()` (or `po
 
 ## Python
 
-The pipeline is identical in Python — same sanitizer, same truncation caps, same `$exception` fan-out — and `before_send` is the same final say. Exception messages are sanitized and capped at 2048 characters from `posthog>=7.41`.
+The pipeline is identical in Python — same sanitizer, same truncation caps, same `$exception` fan-out — and `before_send` is the same final say. Exception messages are sanitized and capped at 2048 characters.
 
 On the `instrument()` path it's an `MCPAnalyticsOptions` field. On the `PostHogMCP` path it's the standard `posthog` client kwarg, which MCP events run through like any other capture:
 
@@ -125,9 +125,9 @@ instrument(server, posthog, MCPAnalyticsOptions(before_send=before_send))
 posthog = PostHogMCP("phc_your_project_api_key", before_send=before_send)
 ```
 
-The callback receives the built payload — `event`, `distinct_id`, `properties`, `timestamp` — may be sync or async, and runs once per emitted event, including the `$exception` sibling. Return the event to send it, or `None` to drop it. A raised exception drops it too and is routed to the logger.
+The callback receives the built payload (`event`, `distinct_id`, `properties`, `timestamp`) and runs once per emitted event, including the `$exception` sibling. `MCPAnalyticsOptions.before_send` can be sync or async. The standard `PostHogMCP` client callback must be synchronous. Return the event to send it, or `None` to drop it. A raised exception drops it too and is routed to the logger.
 
-For zero payload retention, strip the payload keys and keep the timing and attribution metadata:
+To remove tool arguments, responses, and error messages, strip these properties. Intent, model metadata, and exception details remain unless you remove or disable them separately:
 
 ```python
 def before_send(event):

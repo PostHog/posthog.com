@@ -6,7 +6,7 @@ Sometimes the events the SDK emits out of the box aren't enough. You might want 
 
 ## `eventProperties` — metadata on every event
 
-Pass an `eventProperties` callback to attach extra properties to every event the SDK emits. The callback runs per request, so values can depend on the current call (request id, transport, headers, env, region, deploy SHA, etc).
+Pass an `eventProperties` callback to attach extra properties to automatically captured MCP events. The callback runs per request, so values can depend on the current call (request id, transport, headers, env, region, deploy SHA, etc).
 
 ```ts
 import { instrument, getRequestHeaders } from "@posthog/mcp"
@@ -31,8 +31,7 @@ The returned object is spread flat onto the event's properties alongside the bui
     "$mcp_tool_name": "search_events",
     "$app_version": "a1b2c3d",
     "$mcp_region": "iad",
-    "request_id": "req_…",
-    "…"
+    "request_id": "req_…"
   }
 }
 ```
@@ -45,7 +44,9 @@ Returned values must be JSON-serializable. Errors thrown from your callback are 
 
 ## `analytics.capture()` — emit an arbitrary event
 
-When the built-in events don't cover what you need — for example, recording a feedback signal from your own UI, or capturing a domain event that isn't an MCP request — use the `capture()` method on the handle returned by `instrument()`. It writes onto the same queue as everything else, so it inherits the SDK's sanitization, identity, `beforeSend`, and `eventProperties` logic. `capture()` returns a promise you can `await`.
+Use `analytics.capture()` for events that aren't MCP requests, such as UI feedback or workflow milestones. It uses the SDK's sanitization, current server session and identity, and `beforeSend` hook. It returns a promise you can `await`.
+
+Custom capture has no request context and doesn't run `eventProperties`. Pass custom metadata in `properties`.
 
 You name the event. It's sent verbatim — it's your event, so it is **not** `$`-prefixed.
 
@@ -61,7 +62,7 @@ await analytics.capture({
 What lands in PostHog:
 
 - One event under the verbatim `event` name you passed, with your `properties` merged in.
-- The session id, identity, and any `eventProperties` callback still apply.
+- The current server session and cached identity apply. These may differ from the session of a concurrent tool request.
 
 `capture()` is a method on the handle that `instrument()` returns, so you call it on the instrumented server's analytics handle directly.
 
@@ -71,4 +72,4 @@ What lands in PostHog:
 |---|---|
 | Attach the same properties to every auto-captured event | `eventProperties` |
 | Emit a one-off event that isn't an MCP request | `analytics.capture()` |
-| Attach data to a *specific* tool call (just that one) | Not directly supported — the callbacks run on every event. The SDK doesn't currently expose a per-call hook. |
+| Attach data only to matching requests | Check the request in `eventProperties` and return properties only for matches. |

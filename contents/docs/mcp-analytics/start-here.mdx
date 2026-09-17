@@ -111,7 +111,7 @@ subtitle="Recommended"
 icon="IconAIText"
 >
 
-The single most useful signal in MCP Analytics is **intent**: the user goal that led the agent to call this tool. The SDK injects a required `context` argument into every tool's schema and captures it as `$mcp_intent`. Your tool implementation never sees it.
+The single most useful signal in MCP Analytics is **intent**: the user goal that led the agent to call this tool. The SDK adds a `context` argument to compatible tool schemas and captures it as `$mcp_intent`. It removes the argument before your handler runs when it can confirm it injected the field.
 
 ```ts
 instrument(server, posthog, {

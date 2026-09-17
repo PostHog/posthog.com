@@ -296,9 +296,7 @@ from posthog.mcp import instrument
 from posthog.mcp.types import MCPAnalyticsOptions, UserIdentity
 
 instrument(server, posthog, MCPAnalyticsOptions(
-    context=True,                 # inject the `context` intent argument (default)
     report_missing=True,          # register the get_more_tools virtual tool
-    enable_conversation_id=True,  # stitch calls across reconnects (default)
     identify=lambda request, extra: UserIdentity(distinct_id="user_123"),
 ))
 ```
@@ -451,6 +449,6 @@ As soon as the wrapper is in place, instrumented MCP requests emit PostHog event
 - `$mcp_initialize` per `2025-11-25` client handshake
 - `$exception` whenever a tool throws or returns `isError: true`
 
-TypeScript also captures resource discovery and reads. Resource bodies pass through unchanged and aren't captured. See the [event reference](/docs/mcp-analytics/events) for SDK coverage. Prompt requests don't emit automatic analytics yet.
+Both SDKs also capture resource discovery and reads. Resource bodies pass through unchanged and aren't captured. See the [event reference](/docs/mcp-analytics/events) for SDK coverage. Prompt requests don't emit automatic analytics yet.
 
 On `2025-11-25`, calls keep their MCP protocol session until the agent echoes a valid conversation handle. On `2026-07-28`, there is no protocol session. [Conversation IDs](/docs/mcp-analytics/conversation-id) are enabled by default, but calls only stay correlated when the agent echoes the handle. See the [event reference](/docs/mcp-analytics/events) for the full catalog.

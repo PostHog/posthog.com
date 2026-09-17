@@ -4,7 +4,7 @@ title: Capturing agent intent
 
 import CalloutBox from 'components/Docs/CalloutBox'
 
-Knowing *what* a tool was called is one thing. Knowing *why* the agent called it is what makes MCP Analytics useful for product decisions.
+Knowing *which* tool was called is one thing. Knowing *why* the agent called it is what makes MCP Analytics useful for product decisions.
 
 The SDK captures intent as a single property — `$mcp_intent` — that can come from one of two sources:
 
@@ -15,7 +15,9 @@ Explicit context always wins. If the agent passes a non-empty `context`, the fal
 
 ## The `context` argument
 
-When `context: true` (the default), the SDK adds a required `context` string to every tool's JSON Schema. It strips that argument before your handler runs, so your tool implementation never sees it.
+Intent capture is on by default. The SDK adds a `context` string to compatible tool schemas and removes it before your handler runs when it can confirm it injected the field. An application-owned `context` argument is preserved.
+
+TypeScript advertises the injected field as required. Python makes it optional on raw low-level servers and standalone FastMCP. Calls can omit the injected field without failing validation.
 
 What the agent sees in the schema:
 
@@ -61,11 +63,11 @@ instrument(server, posthog, {
 
 ### Disabling the injected argument
 
-Set `context: false` if you don't want the SDK to touch your tool schemas at all. You'll lose the agent-supplied intent, and you'll need to rely on `intentFallback` (or accept events without `$mcp_intent`).
+Set `context: false` to disable the injected intent argument. Use `intentFallback` if you still want to capture intent. Model capture and conversation IDs have separate options; [disable those too](/docs/mcp-analytics/installation#capture-the-calling-model) to stop their schema changes.
 
 ## The `intentFallback` callback
 
-The `context` argument is *advertised* as required in JSON Schema but isn't enforced at the SDK validation layer. A client that ignores the schema hint (raw cURL, in-house agents, schema-blind crawlers) will still succeed — the call lands in PostHog with `$mcp_intent` empty.
+A client can omit the SDK-injected `context` argument. Without a fallback, the event has no `$mcp_intent`.
 
 `intentFallback` is the escape hatch. The SDK calls it whenever no `context` argument is present, takes whatever non-empty string you return, and stamps it as `$mcp_intent` with `$mcp_intent_source = "inferred"`.
 
@@ -144,7 +146,7 @@ The virtual `get_more_tools` tool (enabled by `reportMissing: true`) always repo
 
 <CalloutBox icon="IconInfo" title="The schema `required` field isn't enforced" type="fyi">
 
-`context` is advertised as required in JSON Schema, but the SDK does not re-validate against Zod. A client that ignores the schema hint can send `arguments: {}` and the call still succeeds — landing in PostHog with `$mcp_intent` empty. That's exactly why `intentFallback` exists.
+Omitting the SDK-injected `context` argument doesn't fail validation. Your tool's own required arguments still apply. Use `intentFallback` to capture intent when the agent omits context.
 
 </CalloutBox>
 
