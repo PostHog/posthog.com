@@ -742,7 +742,7 @@ export default function Tabbed() {
                                                         </span>
                                                         <span className="text-secondary shrink-0">
                                                             {billedWith
-                                                                ? `Billed with ${billedWith.toLowerCase()}`
+                                                                ? `via ${billedWith}`
                                                                 : startsAt && unit
                                                                 ? `$${startsAt}/${unit}`
                                                                 : null}
