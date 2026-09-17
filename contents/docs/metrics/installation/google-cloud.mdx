@@ -59,14 +59,15 @@ Each entry costs one Cloud Monitoring API call per pull, so a filter that covers
 
 ### Docker
 
-Create a JSON key for the service account, make it world-readable inside the container (the agent runs as a non-root user, so `chmod 644 sa.json`), then:
+Create a JSON key for the service account. The agent runs as a non-root user (uid 10001), so keep a dedicated copy of the key readable only by that uid – do **not** `chmod 644` the original key, which would make the private key readable by every local user:
 
 ```bash
+install -m 0600 -o 10001 sa.json /run/posthog-gcp/sa.json
 docker run -d --name posthog-metrics-agent \
   -e POSTHOG_API_KEY=<ph_project_token> \
   -e GCP_PROJECT_ID=<gcp_project_id> \
   -e GCP_METRICS=compute.googleapis.com/instance/cpu/utilization,cloudsql.googleapis.com/database/cpu/utilization \
-  -v "$PWD/sa.json:/etc/gcp/sa.json:ro" \
+  -v /run/posthog-gcp/sa.json:/etc/gcp/sa.json:ro \
   -e GOOGLE_APPLICATION_CREDENTIALS=/etc/gcp/sa.json \
   posthog/metrics-agent:latest
 ```
