@@ -10,7 +10,7 @@ tags:
   - Using PostHog
   - User research
   - Replay Vision
-  - session replay
+  - Session replay
 ---
 
 In August we launched [Replay Vision](/replay-vision), our AI layer over Session Replay. It watches session recordings and writes up what it finds, so nobody has to sit through them. We put it to work on PostHog right away. Since then, Replay Vision has watched 400k recordings for us.[^1] Nobody was going to watch(/blog/nobody-watches-session-replays) most of them anyway.
