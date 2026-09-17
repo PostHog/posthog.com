@@ -8,7 +8,7 @@ You're responsible for what you ship, whether AI generated all, most, or none of
 
 We'd be at a disadvantage if we didn't use AI, but using it badly could put us at even more of a disadvantage.
 
-Customers trust us enough to delegate their work to us, so we should only delegate work to systems worthy of our customers' trust. Using AI well means engineering that delegation. We need to become _delegation engineers_.
+Customers place their trust in us when they delegate their work to us. So we should only delegate that work to systems that deserve our customers' trust. Using AI well means treating delegation itself as an engineering discipline. We need to become _delegation engineers_.
 
 Our work with AI aims to create better outcomes for customers by finding new ways to use technology, increasing how much we can safely and effectively delegate, and deciding what should always stay human.
 
