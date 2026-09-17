@@ -675,6 +675,10 @@ export const handbookSidebar = [
                 url: '/handbook/content/seo-guide',
             },
             {
+                name: 'Answer engine optimization (AEO)',
+                url: '/handbook/content/aeo-guide',
+            },
+            {
                 name: 'Style guide',
                 url: '/handbook/content/posthog-style-guide',
             },
@@ -1164,6 +1168,10 @@ export const handbookSidebar = [
                         url: '/handbook/marketing/positioning/session-replay',
                     },
                     {
+                        name: 'Replay vision',
+                        url: '/handbook/marketing/positioning/replay-vision',
+                    },
+                    {
                         name: 'Feature flags',
                         url: '/handbook/marketing/positioning/feature-flags',
                     },
@@ -1290,6 +1298,10 @@ export const handbookSidebar = [
             {
                 name: 'Metric conventions',
                 url: '/handbook/growth/revops/metric-conventions',
+            },
+            {
+                name: 'Org definitions',
+                url: '/handbook/growth/revops/org-definitions',
             },
             {
                 name: 'Revenue adjustments',
@@ -2990,6 +3002,10 @@ export const docsMenu = {
                             url: '/docs/libraries/docusaurus',
                         },
                         {
+                            name: 'Fastify',
+                            url: '/docs/libraries/fastify',
+                        },
+                        {
                             name: 'Flask',
                             url: '/docs/libraries/flask',
                         },
@@ -3245,12 +3261,24 @@ export const docsMenu = {
                             url: '/docs/data/cohorts',
                         },
                         {
+                            name: 'Realtime cohorts',
+                            url: '/docs/data/realtime-cohorts',
+                            badge: {
+                                title: 'Beta',
+                                className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
+                            },
+                        },
+                        {
                             name: 'Sessions',
                             url: '/docs/data/sessions',
                         },
                         {
                             name: 'Data management',
                             url: '/docs/data',
+                        },
+                        {
+                            name: 'Events data retention',
+                            url: '/docs/data/events-retention',
                         },
                         {
                             name: 'Properties',
@@ -5096,8 +5124,14 @@ export const docsMenu = {
                     color: 'yellow',
                 },
                 {
-                    name: 'Digests and alerts',
-                    url: '/docs/replay-vision/actions',
+                    name: 'Scouts',
+                    url: '/docs/replay-vision/scouts',
+                    icon: 'IconBinoculars',
+                    color: 'yellow',
+                },
+                {
+                    name: 'Alerts',
+                    url: '/docs/replay-vision/alerts',
                     icon: 'IconBell',
                     color: 'yellow',
                 },
@@ -6587,6 +6621,12 @@ export const docsMenu = {
                     color: 'yellow',
                 },
                 {
+                    name: 'Materialization troubleshooting',
+                    url: '/docs/data-warehouse/views/materialize-troubleshooting',
+                    icon: 'IconQuestion',
+                    color: 'orange',
+                },
+                {
                     name: 'SQL commands',
                     url: '/docs/data-warehouse/sql',
                     icon: 'IconCode',
@@ -6826,6 +6866,11 @@ export const docsMenu = {
                         {
                             name: 'Google',
                             url: '/docs/ai-observability/installation/google',
+                            icon: 'IconGemini',
+                        },
+                        {
+                            name: 'Google ADK',
+                            url: '/docs/ai-observability/installation/google-adk',
                             icon: 'IconGemini',
                         },
                         {
@@ -8199,6 +8244,12 @@ export const docsMenu = {
                     color: 'green',
                 },
                 {
+                    name: 'Log-based metrics',
+                    url: '/docs/logs/metrics',
+                    icon: 'IconTrends',
+                    color: 'purple',
+                },
+                {
                     name: 'PII scrubbing',
                     url: '/docs/logs/pii-scrubbing',
                     icon: 'IconShield',
@@ -8309,6 +8360,12 @@ export const docsMenu = {
                     ],
                 },
                 {
+                    name: 'Use your metrics',
+                    url: '/docs/metrics/explore',
+                    icon: 'IconTrends',
+                    color: 'blue',
+                },
+                {
                     name: 'Why you need metrics',
                     url: '/docs/metrics/basics',
                     icon: 'IconBook',
@@ -8349,7 +8406,7 @@ export const docsMenu = {
                     featured: true,
                 },
                 {
-                    name: 'Install OpenTelemetry tracing',
+                    name: 'Install tracing',
                     url: '/docs/distributed-tracing/installation',
                     icon: 'IconCode',
                     color: 'blue',
@@ -8613,12 +8670,6 @@ export const pricingMenu = {
         //     color: 'purple',
         //     url: '/events',
         // },
-        {
-            name: 'Add-ons',
-            icon: 'IconPuzzle',
-            color: 'seagreen',
-            url: '/addons',
-        },
         {
             name: 'Platform packages',
             icon: 'IconServer',

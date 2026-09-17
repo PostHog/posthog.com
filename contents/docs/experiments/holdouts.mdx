@@ -2,7 +2,9 @@
 title: Holdouts
 ---
 
-Holdouts are randomly assigned lists of users who will be excluded from experiments. You can exclude these users from specific experiments or even all of your experiments.
+Holdouts exclude a percentage of users from experiments. You can exclude these users from specific experiments or even all of your experiments.
+
+Holdout membership is not a stored list of users. It is computed every time a feature flag is evaluated: PostHog hashes the user's ID and places them in the holdout if the hash falls below the holdout percentage. The same user always gets the same result, and new users are bucketed the same way on their first visit, so the holdout always covers the configured percentage of your current traffic.
 
 Holdout testing is useful for understanding long term effects of product changes, typically over a few months. For example, a new onboarding flow might show great initial conversion rates, but a holdout group could reveal whether those users remain active in 3 months from now.
 
@@ -32,16 +34,11 @@ Once created, you can assign a holdout to a draft experiment in the **Manage dis
   alt="Screenshot of the Manage distribution modal with the holdout selector"
 />
 
-## How to view holdout results
+## How to analyze holdout impact
 
-When assigned to an experiment, your holdout will be treated as another variant in experiment analysis. You'll be able to see the conversion rate, delta %, credible interval, and win probability alongside other experiment variants.
+Holdout users are not included in experiment results, since they were never exposed to the experiment.
 
-<ProductScreenshot
-  imageLight = "https://res.cloudinary.com/dmukukwp6/image/upload/holdout_results_light_v2_9670e2a73b.png"
-  imageDark = "https://res.cloudinary.com/dmukukwp6/image/upload/holdout_results_dark_v2_1128fa41c3.png"
-  classes="rounded"
-  alt="Screenshot of the experiment with the results displayed"
-/>
+To measure the impact of the holdout, compare holdout users against other users in [insights](/docs/product-analytics/insights). Holdout users receive the feature flag variant `holdout-{holdout_id}` (see below), so you can filter or break down any metric by that flag value.
 
 ## How holdouts affect feature flags
 

@@ -255,7 +255,7 @@ subtitle="Required"
 icon="IconLock"
 >
 
-The SDK runs every event through automatic sanitization (image/audio/binary stubs, sensitive-key masking like `authorization`, `cookie`, `password`, PostHog key patterns) and truncation to fit ingestion limits. For full control, add a `beforeSend` hook that runs on each built PostHog payload right before it's sent – mutate and return the event to send it, or return a nullish value to drop it.
+The SDK runs every event through automatic sanitization (image/audio/binary stubs, sensitive-key masking like `authorization`, `cookie`, `password`, PostHog key patterns, credentials inside URLs) and truncation to fit ingestion limits. For full control, add a `beforeSend` hook that runs on each built PostHog payload right before it's sent – mutate and return the event to send it, or return a nullish value to drop it.
 
 ```ts
 instrument(server, posthog, {

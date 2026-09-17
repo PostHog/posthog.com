@@ -58,6 +58,7 @@ interface ChatContext {
 
 export interface ChatParams {
     path: string
+    sessionKey?: number
     context?: ChatContext[]
     quickQuestions?: string[]
     chatId?: string
@@ -723,6 +724,22 @@ const appSettings: AppSettings = {
             center: true,
         },
     },
+    '/compare': {
+        size: {
+            min: {
+                width: 700,
+                height: 500,
+            },
+            max: {
+                width: 1200,
+                height: 1500,
+            },
+            fixed: false,
+        },
+        position: {
+            center: true,
+        },
+    },
     '/research': {
         size: {
             min: {
@@ -862,6 +879,50 @@ const appSettings: AppSettings = {
             max: {
                 width: 535,
                 height: 680,
+            },
+            fixed: true,
+            autoHeight: true,
+        },
+        position: {
+            center: true,
+        },
+        modal: {
+            type: 'standard',
+        },
+    },
+    // Event types explanation, opened from the pricing calculator. Not a route — see
+    // components/Pricing/PricingCalculator/EventTypesModal.
+    'pricing-event-types': {
+        size: {
+            min: {
+                width: 800,
+                height: 400,
+            },
+            max: {
+                width: 800,
+                height: 720,
+            },
+            fixed: true,
+            autoHeight: true,
+        },
+        position: {
+            center: true,
+        },
+        modal: {
+            type: 'standard',
+        },
+    },
+    // All products and per-unit rates, opened from the pricing calculator. Not a route — see
+    // components/Pricing/PricingCalculator/AllProductsRatesModal.
+    'pricing-all-rates': {
+        size: {
+            min: {
+                width: 800,
+                height: 400,
+            },
+            max: {
+                width: 800,
+                height: 720,
             },
             fixed: true,
             autoHeight: true,
@@ -1042,41 +1103,6 @@ const appSettings: AppSettings = {
                 height: 575,
             },
             fixed: true,
-        },
-        position: {
-            center: true,
-        },
-    },
-    '/credits': {
-        closeOnEscape: true,
-        size: {
-            min: {
-                width: 300,
-                height: 700,
-            },
-            max: {
-                width: 300,
-                height: 700,
-            },
-            fixed: true,
-        },
-        position: {
-            center: true,
-        },
-    },
-    '/kbd': {
-        closeOnEscape: true,
-        size: {
-            min: {
-                width: 600,
-                height: 625,
-            },
-            max: {
-                width: 600,
-                height: 625,
-            },
-            fixed: true,
-            autoHeight: true,
         },
         position: {
             center: true,
@@ -2349,7 +2375,7 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
     // than as a managed window. Opening a chat just stores its params and flips the
     // `chatOpen` flag; a fresh set of params remounts the overlay's `ChatProvider`.
     const openNewChat = (params: ChatParams) => {
-        setChatParams(params)
+        setChatParams((previous) => ({ ...params, sessionKey: (previous?.sessionKey ?? 0) + 1 }))
         setChatOpen(true)
     }
 
@@ -2546,11 +2572,6 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
                 e.preventDefault()
                 // Open display options
                 navigate('/display-options', { state: { newWindow: true } })
-            }
-            if (e.key === '.' && !e.shiftKey && !e.ctrlKey && !e.metaKey && !e.altKey) {
-                e.preventDefault()
-                // Open keyboard shortcuts pane
-                navigate('/kbd', { state: { newWindow: true } })
             }
 
             // Theme toggle with m key
