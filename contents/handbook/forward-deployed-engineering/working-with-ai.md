@@ -14,7 +14,7 @@ Our work with AI aims to create better outcomes for customers by finding new way
 
 ## Principles for working with AI
 
-These principles come from real work. If real work shows a better way, take it.
+We wrote these principles from actually doing the work – if doing the work teaches you something better, go with that
 
 - [You're still the driver](#youre-still-the-driver): Prior context can inform your judgment, but it can't answer for your decisions or what you ship.
 - [Understand before you delegate](#understand-before-you-delegate): Delegate only problems you understand to systems you trust.
