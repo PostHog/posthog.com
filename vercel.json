@@ -118,6 +118,19 @@
     ],
     "redirects": [
         {
+            "source": "/docs/replay-vision/actions:ext(\\.md)?",
+            "destination": "/docs/replay-vision/scouts:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/kbd",
+            "destination": "/"
+        },
+        {
+            "source": "/credits",
+            "destination": "/"
+        },
+        {
             "source": "/blog/posthog-vs-fathom",
             "destination": "/compare/posthog-vs-fathom"
         },
@@ -471,6 +484,11 @@
         {
             "source": "/docs/data/cookieless-tracking.md",
             "destination": "/tutorials/cookieless-tracking",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/data/activity-log:ext(\\.md)?",
+            "destination": "/docs/settings/activity-logs:ext?",
             "statusCode": 301
         },
         {
@@ -1882,10 +1900,6 @@
             "destination": "/handbook/company/management"
         },
         {
-            "source": "/lenny",
-            "destination": "/?utm_source=influencer&utm_medium=newsletter&utm_campaign=lenny"
-        },
-        {
             "source": "/zizyo",
             "destination": "/?utm_source=influencer&utm_medium=youtube&utm_campaign=zizyo"
         },
@@ -2462,24 +2476,8 @@
             "destination": "/handbook/small-teams/_team_template"
         },
         {
-            "source": "/marketplace",
-            "destination": "/partners"
-        },
-        {
-            "source": "/marketplace/clickhouse",
-            "destination": "/partners/clickhouse"
-        },
-        {
-            "source": "/marketplace/opsverse",
-            "destination": "/partners/opsverse"
-        },
-        {
-            "source": "/marketplace/restack",
-            "destination": "/partners/restack"
-        },
-        {
-            "source": "/marketplace/altinity",
-            "destination": "/partners/altinity"
+            "source": "/(marketplace|partners)/:path*",
+            "destination": "/partnerships"
         },
         {
             "source": "/handbook/people/team-structure/experimentation",
@@ -2732,6 +2730,10 @@
         {
             "source": "/tutorials/evaluation-runtimes-and-environments",
             "destination": "/tutorials/evaluation-runtimes-and-contexts"
+        },
+        {
+            "source": "/page-data/tutorials/evaluation-runtimes-and-environments/page-data.json",
+            "destination": "/page-data/tutorials/evaluation-runtimes-and-contexts/page-data.json"
         },
         {
             "source": "/docs/integrate:ext(\\.md)?",
@@ -4403,8 +4405,8 @@
             "destination": "/blog/using-posthog"
         },
         {
-            "source": "/blog/categories/general",
-            "destination": "/blog/general"
+            "source": "/blog/general",
+            "destination": "/blog/categories/general"
         },
         {
             "source": "/product-analytics/customers",
@@ -5097,6 +5099,10 @@
         {
             "source": "/tutorials/node-external-cache",
             "destination": "/docs/feature-flags/local-evaluation/distributed-environments?tab=Node.js"
+        },
+        {
+            "source": "/page-data/tutorials/node-external-cache/page-data.json",
+            "destination": "/page-data/docs/feature-flags/local-evaluation/distributed-environments/page-data.json"
         },
         {
             "source": "/blog/gdpr-google-analytics-privacy-shield",
@@ -6292,7 +6298,7 @@
         },
         {
             "source": "/docs/replay-vision/webhooks",
-            "destination": "/docs/replay-vision/actions#webhooks",
+            "destination": "/docs/replay-vision/scouts#webhooks",
             "statusCode": 301
         },
         {

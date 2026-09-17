@@ -63,6 +63,18 @@ The FDE team works in fortnightly [Sprints](/handbook/company/sprints) that run 
 
 On the closing Friday of a Sprint, a GitHub Action automatically closes the current Sprint's issue and creates a new issue for the next Sprint. FDE team members are expected to populate it before Sprint kick-off, which takes place at the Monday stand-up. 
 
+## Working as a team
+
+We're still new as a team and figuring out things as we go.  To ensure everybody is pulling in the right direction and not duplicating work we:
+
+- Make work visible once it may affect the team, customers or shared systems.  We follow overall PostHog convention of Pull Requests being preferable to issues and Slack discussions.
+- Build on existing work.  Before starting a new solution, check for relevant work already in progress and either reuse, improve, or explicitly explain why a separate approach is needed.
+- Use peer feedback to shape the approach.  Raise alternatives early so we can consider and agree on the best path forward.
+- Create maintainable team assets - avoid creating tools or workflows that only one person can operate.
+- Track customer outcomes, not just work outputs.
+
+In general, at PostHog we bias for sharing imperfect work early, so that peers can help shape the direction of that work, rather than waiting for something to be perfectly ready before making it visible to the team.
+
 ## Systems and automation
 
 One of the goals for the FDE team is to accelerate and improve our delivery by focusing on building automation, over one-off work. This helps us capture deep customer knowledge and allows for faster iterations. To that end, we have built systems and workflows to help us better achieve that goal.

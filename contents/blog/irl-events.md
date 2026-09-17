@@ -106,4 +106,4 @@ We also take the geography into consideration with demo opportunities. In places
 
 So if you're trying to get your engineers out IRL, the fix probably isn't a better speaker program and training. It's giving them ownership over what they've built so that they already have something they actually want to show, and then getting out of their way when they do. 
 
-_As a disclaimer, no one is required to do _any_ of this at PostHog, and at least 20% of the company has let the events team know that they have no interest in demoing at events or public speaking. It's not for everyone, nor should it be expected. Because of this, it's always fine when speaking asks are declined – no questions asked._
+_As a disclaimer, no one is required to do **any** of this at PostHog, and at least 20% of the company has let the events team know that they have no interest in demoing at events or public speaking. It's not for everyone, nor should it be expected. Because of this, it's always fine when speaking asks are declined – no questions asked._

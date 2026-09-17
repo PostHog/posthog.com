@@ -61,7 +61,7 @@ It also supports replay for mobile apps running that use Android, iOS, React Nat
 
 ### How much does PostHog cost?
 
-PostHog is free up to 1 million captured events, 5,000 web recordings, and 2,500 mobile recordings per month, and you can set billing limits to avoid surprise bills. 
+PostHog is free up to 1 million captured events, 5,000 web and 2,500 mobile recordings per month, and you can set billing limits to avoid surprise bills. 
 
 > #### Bottom line
 >
@@ -289,7 +289,7 @@ Most open source session replay tools can be self-hosted, but not all self-hoste
 <details>
 <summary>Which open source session replay tool has the best free tier?</summary>
 
-**PostHog** has the most [generous free cloud tier](/pricing): 5,000 web session replays, 2,500 mobile replays, and 1 million analytics events per month. 
+**PostHog** has the most [generous free cloud tier](/pricing): 5,000 web and 2,500 mobile session replays, and 1 million analytics events per month. 
 
 **OpenReplay** and **Sentry** offer free self-hosted versions with no usage limits if you're willing to manage your own infrastructure. 
  
