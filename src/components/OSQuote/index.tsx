@@ -35,15 +35,17 @@ export const OSQuote: React.FC<OSQuoteProps> = ({ customer, author, product, quo
     return (
         <div className="max-w-xl bg-light dark:bg-dark border border-primary rounded p-4 mb-4">
             <div className="flex items-center space-x-3">
-                <div className="rounded-full border border-primary bg-light dark:bg-dark">
-                    <div className="bg-accent rounded-full overflow-hidden block aspect-square m-px size-12">
-                        <CloudinaryImage
-                            src={authorData.image.thumb as `https://res.cloudinary.com/${string}`}
-                            alt={authorData.name}
-                            imgClassName="size-12 object-cover object-center"
-                        />
+                {authorData.image?.thumb && (
+                    <div className="rounded-full border border-primary bg-light dark:bg-dark">
+                        <div className="bg-accent rounded-full overflow-hidden block aspect-square m-px size-12">
+                            <CloudinaryImage
+                                src={authorData.image.thumb as `https://res.cloudinary.com/${string}`}
+                                alt={authorData.name}
+                                imgClassName="size-12 object-cover object-center"
+                            />
+                        </div>
                     </div>
-                </div>
+                )}
                 <div>
                     <div className="text-lg font-semibold leading-tight">{authorData.name}</div>
                     <div className="text-secondary text-sm">

@@ -72,7 +72,7 @@ These aren’t rules, just things that have worked well in the past. They provid
 
 - **Be opinionated:** Sitting on the fence isn't interesting. It's ok for people to disagree with you, so avoid too much hedging.
 
-- **Use graphics and charts:** These are great ways for explaining complex ideas and make for great social content. Create bad version and ask Cory to help you make it better.
+- **Use graphics and charts:** These are great ways for explaining complex ideas and make for great social content. Create bad version and ask the <SmallTeam slug="graphics" /> to help you make it better.
 
 - **Be fun and lighthearted:** We're writing about building software, not internet safety. Throw in jokes and memes occasionally. Again, footnotes and captions can be useful here.
 

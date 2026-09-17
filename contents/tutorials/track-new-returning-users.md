@@ -21,7 +21,7 @@ There are multiple ways to calculate new users in PostHog depending on your situ
 
 ### Completed event for the first time cohort
 
-The first and easiest is creating a cohort where the users completed an event (such as pageviews, [identify](/docs/data/identify), or a custom event) for the first time. To set this up, go to the cohort tab, click new cohort, enter a title and description, then choose "completed an event for the first time" with your event and recency. 
+The first and easiest is creating a cohort where the users completed an event (such as pageviews, [identify](/docs/product-analytics/identify), or a custom event) for the first time. To set this up, go to the cohort tab, click new cohort, enter a title and description, then choose "completed an event for the first time" with your event and recency. 
 
 ![New users](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/track-new-returning-users/new.png)
 

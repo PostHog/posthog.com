@@ -39,6 +39,8 @@ Draft workflows can also be archived, even if they contain invalid configuration
 
 You can edit a workflow after it's enabled, and your changes reach people who are already moving through it. See [Editing a live workflow](/docs/workflows/editing-live-workflows) for exactly what happens to in-flight runs when you change a live workflow.
 
+Disabling an enabled workflow stops new runs from starting, but doesn't cancel runs already in flight. To stop those, cancel them from the **Invocations** tab. See [stopping runs](/docs/workflows/editing-live-workflows#stopping-runs).
+
 ## Triggers
 
 Every workflow starts with a trigger. Triggers define what kicks off the workflow.
@@ -117,6 +119,10 @@ Configure the recurrence with the schedule picker:
 | Ends      | Never, on a specific date, or after a set number of occurrences                                                                       |
 
 You can also type the recurrence in plain English (e.g. "every week on Monday and Wednesday"), and the picker shows a preview of the next occurrences so you can confirm the schedule before enabling the workflow.
+
+#### Stopping a batch run
+
+You can stop a batch run while it's waiting, queued, or active: click **Stop** on the run in the **Invocations** tab. No more of the audience enters the workflow, and runs the batch already started are canceled. Messages already sent are not recalled. See [stop a batch run](/docs/workflows/editing-live-workflows#stop-a-batch-run) for details.
 
 ### Tracking pixel triggers
 

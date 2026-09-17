@@ -1,0 +1,191 @@
+---
+title: File download exports
+sidebar: Docs
+showTitle: true
+availability:
+  free: full
+  selfServe: full
+  enterprise: full
+---
+
+import { CalloutBox } from 'components/Docs/CalloutBox'
+
+File download exports let you export PostHog data on demand and download the results as Parquet or JSON Lines files. You start an export with an API call, poll until it completes, and download the files – no destination setup, no schedule.
+
+<CalloutBox icon="IconInfo" type="fyi" title="API-only (for now)">
+
+File download exports are currently only available through the API. A UI is coming soon.
+
+</CalloutBox>
+
+## When to use file download exports
+
+Use **file download exports** when you want a one-off copy of your data as files: running some ad-hoc analysis, sharing a dataset with a colleague, or doing a one-time load into another tool.
+
+Use **[batch exports](/docs/cdp/batch-exports)** when you want recurring, scheduled delivery of data to a destination you control, like S3, BigQuery, or Snowflake. This is the right choice for ETL and warehouse syncs.
+
+Use the **[`/query` API](/docs/api/queries)** when you want small, interactive result sets in an API response, like powering embedded analytics. It is not designed to be an export tool.
+
+## What you can export
+
+A file download export can export any of the standard [batch export models](/docs/cdp/batch-exports#models):
+
+- `events`: all events received within a time interval
+- `persons`: all persons that were updated within a time interval
+- `sessions`: all sessions that occurred within a time interval
+
+Exports of these models require a time interval (`data_interval_start` and `data_interval_end`) of at most one week. For longer ranges, run multiple exports.
+
+File download exports write the same files as an S3 batch export, so the schemas are identical. See the [S3 model schemas](/docs/cdp/batch-exports/s3#models) for the fields in each model, and for how the types differ between Parquet and JSON Lines.
+
+You can also export the results of an arbitrary [SQL](/docs/sql) query using the `hogql` model. This is in [closed beta](#sql-queries) (see below).
+
+## Creating an export
+
+Start an export with a `POST` request to the `file_download_batch_exports` endpoint. You need a [personal API key](/docs/api/personal-api-keys) with the `batch_export:write` scope (and `batch_export:read` to poll and download).
+
+For example, to export all `$pageview` events from a single day as zstd-compressed Parquet:
+
+```bash
+curl -X POST \
+  -H 'Content-Type: application/json' \
+  -H "Authorization: Bearer $POSTHOG_PERSONAL_API_KEY" \
+  <ph_app_host>/api/projects/:project_id/file_download_batch_exports/ \
+  -d '{
+        "model": "events",
+        "include": ["$pageview"],
+        "data_interval_start": "2026-08-18T00:00:00Z",
+        "data_interval_end": "2026-08-19T00:00:00Z",
+        "file": {
+          "format": "Parquet",
+          "compression": "zstd"
+        }
+      }'
+```
+
+A successful request returns `202 Accepted` with the ID of the export run:
+
+```json
+{ "id": "01991f2e-5f8e-7c1a-b3d4-8a2f9c0e1d2b" }
+```
+
+The request body accepts:
+
+| Field | Description |
+| --- | --- |
+| `model` | One of `events`, `persons`, `sessions`, or `hogql` (currently in closed beta). |
+| `data_interval_start`, `data_interval_end` | ISO 8601 datetimes bounding the export. Required for `events`, `persons`, and `sessions`. The range must be at most one week, and the end cannot be in the future. Not supported for `hogql`. |
+| `include`, `exclude` | Optional lists of event names to include or exclude. Only supported for the `events` model. |
+| `hogql_query` | The SQL query to export. Required for (and only supported by) the `hogql` model. |
+| `file.format` | `Parquet` (default) or `JSONLines`. |
+| `file.compression` | Optional. `zstd`, `lz4`, `snappy`, `gzip`, or `brotli` for `Parquet`. Only `gzip` and `brotli` for `JSONLines`. |
+| `file.max_size_mb` | Optional. Splits the output into multiple files of at most this size, instead of one potentially large file. |
+
+Each project can have up to 20 file download exports running at the same time. Requests beyond that return `429 Too Many Requests`. If you hit this limit, wait for a running export to finish, or [cancel](#canceling-an-export) one you no longer need.
+
+## SQL queries
+
+<CalloutBox icon="IconInfo" type="fyi" title="This model is in closed beta">
+
+SQL query exports are enabled per team. To get access, message us via the [in-app support form](https://us.posthog.com/#panel=support%3Asupport%3Abatch_exports%3Alow%3Atrue). We're actively looking for feedback on this feature, and we'd love to hear about the use cases and queries you want to run.
+
+</CalloutBox>
+
+The `hogql` model exports the results of any [SQL](/docs/sql) query, so you aren't limited to the standard models – filter, join, and aggregate whatever you need:
+
+```bash
+curl -X POST \
+  -H 'Content-Type: application/json' \
+  -H "Authorization: Bearer $POSTHOG_PERSONAL_API_KEY" \
+  <ph_app_host>/api/projects/:project_id/file_download_batch_exports/ \
+  -d '{
+        "model": "hogql",
+        "hogql_query": "SELECT event, timestamp, properties.$current_url AS url FROM events WHERE timestamp > now() - INTERVAL 1 HOUR",
+        "file": {
+          "format": "Parquet"
+        }
+      }'
+```
+
+A few things to know about SQL query exports:
+
+- **Every column needs a name.** Each column in the `SELECT` clause must be a plain field or have an alias, like `count() AS event_count`.
+- **No placeholders.** Placeholder syntax like `{filters}` is not supported yet, so write the query out in full.
+- **No time interval.** The query runs as of the time the export starts, so `data_interval_start` and `data_interval_end` are not accepted. Bound the data in the query itself instead.
+- **Late-arriving events can be missed.** Events can reach PostHog well after their `timestamp`, so a query bounded by `timestamp` may miss events that had not arrived when the export ran. (The standard `events` model reads from an internal table built to avoid this, which SQL queries do not have access to currently.) If completeness matters, leave a margin behind the present or re-run the export later.
+
+### Bound your queries
+
+Since user-supplied queries are more unpredictable in nature, they run under stricter resource limits than the standard models. They are subject to limits on execution time, memory usage, and the volume of data read. A query that exceeds any of them fails with an error.
+
+Always narrow your query with a `WHERE` clause. This keeps you inside the resource limits, and it keeps you from being billed for more rows than you expected. For example, when you query the `events` table, bound the `timestamp` column:
+
+```sql
+SELECT event, timestamp, properties.$current_url AS url
+FROM events
+WHERE timestamp >= '2026-08-18' AND timestamp < '2026-08-19'
+```
+
+If you keep hitting resource limits even with a bounded query, [get in touch](https://us.posthog.com/#panel=support%3Asupport%3Abatch_exports%3Alow%3Atrue) – we want to hear about it.
+
+## Polling an export
+
+Export runs are asynchronous. Poll the run with a `GET` request:
+
+```bash
+curl \
+  -H "Authorization: Bearer $POSTHOG_PERSONAL_API_KEY" \
+  <ph_app_host>/api/projects/:project_id/file_download_batch_exports/:run_id/
+```
+
+The response contains the run's `status`:
+
+| Status | Meaning |
+| --- | --- |
+| `Starting`, `Running` | The export is in progress. Wait and poll again. |
+| `Completed` | The export finished. The response includes a `files` array with the ID of each exported file. |
+| `Cancelled` | The export was canceled. |
+| `Failed`, `FailedBilling` | The export did not finish. The response includes an `error` field with details. |
+
+A completed run looks like this:
+
+```json
+{
+  "status": "Completed",
+  "files": ["01991f30-a2c4-7d5e-9f01-3b4c5d6e7f80"]
+}
+```
+
+Exports usually complete within a few minutes, but large exports can take longer – narrowing the date range or filtering events will help speed things up. To list all of a project's export runs, send a `GET` request to the collection endpoint without a run ID.
+
+## Downloading the files
+
+Once the run is `Completed`, download each file in the `files` array:
+
+```bash
+curl -L -o export.parquet \
+  -H "Authorization: Bearer $POSTHOG_PERSONAL_API_KEY" \
+  <ph_app_host>/api/projects/:project_id/file_download_batch_exports/:run_id/download/:file_id/
+```
+
+The endpoint responds with a `302` redirect to a temporary signed URL, so make sure your HTTP client follows redirects (`-L` in curl). The signed URL carries its own authentication, so do not send your API key with it. The URL expires after an hour. If it expires, call the download endpoint again for a fresh one. Treat the signed URL as a secret: anyone who has it can download the file while it is valid.
+
+Exported files are kept for one week. After that they are deleted, the download endpoint returns an error, and you need to run the export again.
+
+In place of the file ID, you can use a zero-based index (`.../download/0/`). If the export produced a single file, you can omit the file identifier entirely (`.../download/`). If you set `file.max_size_mb`, remember to download every file in the `files` array, not just the first.
+
+## Canceling an export
+
+Cancel a run that is still `Starting` or `Running` with a `POST` request:
+
+```bash
+curl -X POST \
+  -H "Authorization: Bearer $POSTHOG_PERSONAL_API_KEY" \
+  <ph_app_host>/api/projects/:project_id/file_download_batch_exports/:run_id/cancel/
+```
+
+A canceled run cannot be resumed. Start a new export instead.
+
+## Billing
+
+File download exports are billed the same way as batch exports: based on the number of rows exported. See [our pricing page](/pricing) for details.

@@ -37,18 +37,6 @@ The Skill looks for patterns like <SeeFig n={1} />: Acme Co is running at 94% of
 plan's limit, month after month, a sustained pattern rather than a one-off spike. Globex is
 smaller in absolute terms but just as close to its own ceiling.
 
-## Doing this by hand
-
-1. **Connect [Stripe](/docs/cdp/sources/stripe)** via
-   [Data pipeline > Sources](/docs/data-warehouse/sources) for each account's current plan.
-2. **Write down your own plan limits**: Stripe rarely stores these, so you'll need your pricing
-   page or internal docs.
-3. **Build a usage [Trends](/docs/product-analytics/trends/overview) insight**, broken down by
-   account or group, for the metric your limits apply to.
-4. **Cross-reference** in a spreadsheet, open the
-   [SQL editor](/docs/data-warehouse/sql), or ask PostHog AI to join usage against plan in one query and skip the
-   spreadsheet.
-
 ## Get an agent to do the work
 
 Copy the Skill below and add it to your agent. The agent works out each account's current plan from Stripe, the numeric limit that plan implies
@@ -63,6 +51,18 @@ engagement instead, that's
 [ARR vs engagement](/pocket-guides/context-warehouse/value-vs-engagement).
 
 <SkillFigure n={2} caption="The Skill itself, copy and paste this into your agent to answer the question." />
+
+## Doing this by hand
+
+1. **Connect [Stripe](/docs/cdp/sources/stripe)** via
+   [Data pipeline > Sources](/docs/data-warehouse/sources) for each account's current plan.
+2. **Write down your own plan limits**: Stripe rarely stores these, so you'll need your pricing
+   page or internal docs.
+3. **Build a usage [Trends](/docs/product-analytics/trends/overview) insight**, broken down by
+   account or group, for the metric your limits apply to.
+4. **Cross-reference** in a spreadsheet, open the
+   [SQL editor](/docs/data-warehouse/sql), or ask PostHog AI to join usage against plan in one query and skip the
+   spreadsheet.
 
 <SeeAlso>
 

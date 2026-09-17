@@ -4,7 +4,7 @@ sidebar: Handbook
 showTitle: true
 ---
 
-When someone signs up to PostHog, we enrich them (figure out the company, its size, the person's role, and so on), score them against our ICP, and push that data into our sales systems. This page explains how that pipeline works and, more importantly, what to do when it stops.
+When someone signs up to PostHog, we enrich them (figure out the company, its size, the person's role, and so on), score them against [our ICP](/handbook/growth/revops/icp-fit-score), and push that data into our sales systems. This page explains how that pipeline works and, more importantly, what to do when it stops.
 
 ## How it works
 

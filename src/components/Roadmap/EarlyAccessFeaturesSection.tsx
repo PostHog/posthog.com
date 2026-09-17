@@ -41,6 +41,10 @@ const POPULAR_TOP_N = 10
 // and pinned to the top of the Concept lane. See /research for the tracks behind them.
 const RESEARCH_TEAM_SLUG = 'ai-research'
 
+// Deep link for the idea form: /roadmap?idea=new. The in-app support panel points here.
+const IDEA_PARAM = 'idea'
+const IDEA_PARAM_VALUE = 'new'
+
 const PITCH_SURVEY_ID = '019f8008-6dfe-0000-696a-515c59643b03'
 const PITCH_QUESTION_ID = 'd257defb-d875-42fd-8cb6-80845c2bb26f'
 const PITCH_EMAIL_QUESTION_ID = '794db2f2-7ed4-4cf2-a8a3-d27df1b85530'
@@ -169,12 +173,23 @@ const StageChip = ({ stage, size = 'sm' }: { stage: BoardStage; size?: ChipSize 
     )
 }
 
-const roadmapUrl = (search: string, feature?: string): string => {
+/** What the board has open, reflected in the URL. A feature drawer and the idea form are mutually exclusive. */
+interface RoadmapTarget {
+    feature?: string
+    idea?: boolean
+}
+
+const roadmapUrl = (search: string, target: RoadmapTarget = {}): string => {
     const params = new URLSearchParams(search)
-    if (feature) {
-        params.set('feature', feature)
+    if (target.feature) {
+        params.set('feature', target.feature)
     } else {
         params.delete('feature')
+    }
+    if (target.idea) {
+        params.set(IDEA_PARAM, IDEA_PARAM_VALUE)
+    } else {
+        params.delete(IDEA_PARAM)
     }
     const query = params.toString()
     return `/roadmap${query ? `?${query}` : ''}`
@@ -184,7 +199,7 @@ const CopyLinkButton = ({ flagKey }: { flagKey: string }): JSX.Element => {
     const [copied, setCopied] = useState(false)
 
     const copy = () => {
-        const url = `${window.location.origin}${roadmapUrl('', flagKey)}`
+        const url = `${window.location.origin}${roadmapUrl('', { feature: flagKey })}`
         navigator.clipboard?.writeText(url).then(() => {
             setCopied(true)
             window.setTimeout(() => setCopied(false), 2000)
@@ -795,6 +810,14 @@ export default function EarlyAccessFeaturesSection(): JSX.Element | null {
             setTeamFilter(requestedTeam)
         }
     }, [requestedTeam])
+    // Any value opens the form, so a hand-typed /roadmap?idea works as well as the canonical ?idea=new.
+    const requestedIdea = useMemo(() => new URLSearchParams(location.search).has(IDEA_PARAM), [location.search])
+    useEffect(() => {
+        if (requestedIdea) {
+            setPitchOpen(true)
+            setSelectedFlagKey(undefined)
+        }
+    }, [requestedIdea])
     const requestedFeature = requestedFlagKey
         ? allFeatures.find((feature) => feature.flagKey === requestedFlagKey)
         : undefined
@@ -819,15 +842,15 @@ export default function EarlyAccessFeaturesSection(): JSX.Element | null {
             return
         }
         if (allFeatures.some((feature) => feature.flagKey === legacyFlagKey)) {
-            navigate(roadmapUrl(location.search, legacyFlagKey), { replace: true })
+            navigate(roadmapUrl(location.search, { feature: legacyFlagKey }), { replace: true })
         }
     }, [allFeatures, loading, location.hash, location.search, requestedFlagKey])
 
     useEffect(() => {
         if (!loading && requestedFlagKey && !requestedFeature) {
-            navigate(roadmapUrl(location.search), { replace: true })
+            navigate(roadmapUrl(location.search, { idea: requestedIdea }), { replace: true })
         }
-    }, [loading, location.search, requestedFeature, requestedFlagKey])
+    }, [loading, location.search, requestedFeature, requestedFlagKey, requestedIdea])
 
     useEffect(() => {
         if (!overlayContainer || !drawerOpen) {
@@ -911,12 +934,12 @@ export default function EarlyAccessFeaturesSection(): JSX.Element | null {
     const openFeature = (feature: EarlyAccessFeature) => {
         setSelectedFlagKey(feature.flagKey)
         setPitchOpen(false)
-        navigate(roadmapUrl(location.search, feature.flagKey), { replace: true })
+        navigate(roadmapUrl(location.search, { feature: feature.flagKey }), { replace: true })
     }
     const openPitch = () => {
         setPitchOpen(true)
         setSelectedFlagKey(undefined)
-        navigate(roadmapUrl(location.search), { replace: true })
+        navigate(roadmapUrl(location.search, { idea: true }), { replace: true })
     }
     const closeDrawer = () => {
         setPitchOpen(false)

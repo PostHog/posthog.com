@@ -15,7 +15,7 @@ import {
     IconRocket,
     IconSparkles,
 } from '@posthog/icons'
-import { FIFTY_MILLION, MAX_PRODUCT_ANALYTICS, MILLION, TEN_MILLION } from 'components/Pricing/pricingLogic'
+import { MAX_PRODUCT_ANALYTICS, MILLION, TEN_MILLION } from 'components/Pricing/pricingLogic'
 import { features } from './product_analytics/features'
 import { applications, topFeatures } from './product_analytics/slides'
 import { getTool } from '../../data/tools'
@@ -24,6 +24,7 @@ export const productAnalytics = {
     ...getTool('product_analytics'),
     Icon: IconGraph,
     type: 'product_analytics',
+    categoryName: 'Analytics',
     teamSlug: 'product-analytics',
     forumTopicId: 349,
     color: 'blue',
@@ -46,7 +47,11 @@ export const productAnalytics = {
      * feed the carousel templates their slide arrays).
      */
     productMenu: [
-        { slug: 'overview', name: 'Overview', icon: <IconEye className="size-4" /> },
+        {
+            slug: 'overview',
+            name: 'Overview',
+            icon: <IconEye className="size-4" />,
+        },
         {
             slug: 'eli5',
             name: 'What does it do?',
@@ -110,8 +115,6 @@ export const productAnalytics = {
     ],
     overview: {
         title: 'Product analytics with autocapture',
-        description:
-            'Product Analytics is one of the tools that makes your product self-driving: the measurement agents use to see what works. Built to natively work with session replay, feature flags, experiments, and surveys.',
         eli5: "Product Analytics turns what people do in your product into answers you can act on. Autocapture tracks pageviews, clicks, and form submissions without extra code. From there you build trends, funnels, retention curves, paths, and SQL queries – then jump straight into the session recordings behind any data point when you need the 'why'.",
         textColor: 'text-white', // tw
     },
@@ -187,14 +190,13 @@ export const productAnalytics = {
     },
     slider: {
         // LogSlider uses Math.log – min/marks must be > 0 or labels stack at -Infinity.
-        marks: [MILLION, TEN_MILLION, FIFTY_MILLION, MAX_PRODUCT_ANALYTICS],
+        marks: [MILLION, TEN_MILLION, MAX_PRODUCT_ANALYTICS],
         min: MILLION,
         max: MAX_PRODUCT_ANALYTICS,
     },
     volume: MILLION,
     worksWith: ['session_replay', 'feature_flags', 'surveys'],
     useCases: {
-        intro: 'Product Analytics is used across teams depending on your role.',
         rows: [
             [
                 'Product Engineers',
@@ -347,17 +349,17 @@ export const productAnalytics = {
             {
                 name: 'Heap',
                 key: 'heap',
-                link: '/blog/posthog-vs-heap',
+                link: '/compare/posthog-vs-heap',
             },
             {
                 name: 'Pendo',
                 key: 'pendo',
-                link: '/blog/posthog-vs-pendo',
+                link: '/compare/posthog-vs-pendo',
             },
             {
                 name: 'Statsig',
                 key: 'statsig',
-                link: '/blog/posthog-vs-statsig',
+                link: '/compare/posthog-vs-statsig',
             },
             {
                 name: 'PostHog',

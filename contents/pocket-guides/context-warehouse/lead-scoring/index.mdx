@@ -37,16 +37,6 @@ The Skill looks for patterns like <SeeFig n={1} />: Priya was seen 6 hours ago a
 listed as a trial, not yet a marketing-qualified lead: exactly the kind of engaged, uncontacted
 account this list exists to surface before someone else notices.
 
-## Doing this by hand
-
-1. **Connect [HubSpot](/docs/cdp/sources/hubspot) or [Salesforce](/docs/cdp/sources/salesforce)**
-   via [Data pipeline > Sources](/docs/data-warehouse/sources).
-2. **Define your key [events](/docs/data/events)** under Data management > Events: define what
-   signals real intent for you.
-3. **For a ranked list**, check each lead's activity in the [Persons](/docs/data/persons) 
-   explorer, or use the [SQL editor](/docs/data-warehouse/sql), or ask PostHog AI to score every lead
-   in one query.
-
 ## Get an agent to do the work
 
 Copy the Skill below and add it to your agent. The agent defines, with you, the handful of events that signal real intent. Then it scores each
@@ -59,6 +49,16 @@ trial-to-paid conversion in aggregate instead, that's
 [Onboarding conversion](/pocket-guides/context-warehouse/onboarding-conversion).
 
 <SkillFigure n={2} caption="The Skill itself, copy and paste this into your agent to answer the question." />
+
+## Doing this by hand
+
+1. **Connect [HubSpot](/docs/cdp/sources/hubspot) or [Salesforce](/docs/cdp/sources/salesforce)**
+   via [Data pipeline > Sources](/docs/data-warehouse/sources).
+2. **Define your key [events](/docs/data/events)** under Data management > Events: define what
+   signals real intent for you.
+3. **For a ranked list**, check each lead's activity in the [Persons](/docs/data/persons) 
+   explorer, or use the [SQL editor](/docs/data-warehouse/sql), or ask PostHog AI to score every lead
+   in one query.
 
 <SeeAlso>
 

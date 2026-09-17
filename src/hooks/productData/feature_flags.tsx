@@ -45,7 +45,11 @@ export const featureFlags = {
      * feed the carousel templates their slide arrays).
      */
     productMenu: [
-        { slug: 'overview', name: 'Overview', icon: <IconEye className="size-4" /> },
+        {
+            slug: 'overview',
+            name: 'Overview',
+            icon: <IconEye className="size-4" />,
+        },
         {
             slug: 'eli5',
             name: 'What does it do?',
@@ -109,8 +113,6 @@ export const featureFlags = {
     ],
     overview: {
         title: 'Safely roll out features to specific users or groups',
-        description:
-            'Feature Flags is one of the tools that makes your product self-driving: the control layer agents use to roll a change out and roll it back. Built to work natively with product analytics, session replay, experiments, and surveys.',
         eli5: 'Feature Flags let you turn features on or off for specific users, groups, or percentages of traffic without redeploying code. Create a flag, check it in your app, then control who sees what from PostHog – phased rollouts, kill switches, multivariate variants, JSON payloads, and beta opt-ins. When something breaks, flip it off. When it works, roll it out wider and measure the impact in analytics and session replay.',
         textColor: 'text-white', // tw
     },
@@ -189,7 +191,6 @@ export const featureFlags = {
         },
     },
     useCases: {
-        intro: 'Feature Flags is used across teams depending on your role.',
         rows: [
             [
                 'Product Engineers',
@@ -323,12 +324,12 @@ export const featureFlags = {
             {
                 name: 'Optimizely',
                 key: 'optimizely',
-                link: '/blog/posthog-vs-optimizely',
+                link: '/compare/posthog-vs-optimizely',
             },
             {
                 name: 'LaunchDarkly',
                 key: 'launchdarkly',
-                link: '/blog/posthog-vs-launchdarkly',
+                link: '/compare/posthog-vs-launchdarkly',
             },
             {
                 name: 'Flagsmith',
@@ -337,12 +338,12 @@ export const featureFlags = {
             {
                 name: 'GrowthBook',
                 key: 'growthbook',
-                link: '/blog/posthog-vs-growthbook',
+                link: '/compare/posthog-vs-growthbook',
             },
             {
                 name: 'Statsig',
                 key: 'statsig',
-                link: '/blog/posthog-vs-statsig',
+                link: '/compare/posthog-vs-statsig',
             },
             {
                 name: 'PostHog',

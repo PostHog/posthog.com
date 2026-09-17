@@ -1,14 +1,43 @@
 import React, { useState } from 'react'
-import { IconPresent, IconReceipt, IconBadge, IconCheck, IconCopy } from '@posthog/icons'
+import { IconPresent, IconReceipt, IconBadge, IconCheck, IconCopy, IconMessage } from '@posthog/icons'
 import CloudinaryImage from 'components/CloudinaryImage'
 import dayjs from 'dayjs'
 import type { TransactionMetadata } from './types'
 import Link from 'components/Link'
 
+const MessageIcon = () => <IconMessage className="size-5 text-blue" />
+
 const transactionTypeIcons: Record<string, React.ReactNode> = {
     gift: <IconPresent className="size-5 text-purple" />,
     redemption: <IconReceipt className="size-5 text-red" />,
     achievement: <IconBadge className="size-5 text-yellow" />,
+    reply: <MessageIcon />,
+    question: <MessageIcon />,
+}
+
+const QuestionSubjectLink = ({ metadata }: { metadata?: TransactionMetadata }) => (
+    <Link to={`/questions/${metadata?.question?.permalink || ''}`} className="text-red dark:text-yellow font-semibold">
+        {metadata?.question?.subject}
+    </Link>
+)
+
+const getDescription = (type: string, metadata?: TransactionMetadata) => {
+    switch (type) {
+        case 'reply':
+            return (
+                <>
+                    Replied to <QuestionSubjectLink metadata={metadata} />
+                </>
+            )
+        case 'question':
+            return (
+                <>
+                    Posted <QuestionSubjectLink metadata={metadata} />
+                </>
+            )
+        default:
+            return metadata?.description || metadata?.redemption?.title || metadata?.achievement?.title
+    }
 }
 
 export default function TransactionTitle({
@@ -19,7 +48,7 @@ export default function TransactionTitle({
 }: {
     type: string
     metadata?: TransactionMetadata
-    date?: Date
+    date?: string | Date
     link?: {
         url: string
         label: string
@@ -29,8 +58,9 @@ export default function TransactionTitle({
     const typeKey = type.toLowerCase().replace(/_/g, '')
     const fallbackIcon = transactionTypeIcons[typeKey]
     const isRedemption = typeKey === 'redemption'
-    const description = metadata?.description || metadata?.redemption?.title || metadata?.achievement?.title
+    const description = getDescription(typeKey, metadata)
     const code = metadata?.redemption?.code
+    const formattedType = type.toLowerCase().replace(/_/g, ' ')
 
     const [showCode, setShowCode] = useState(false)
     const [copied, setCopied] = useState(false)
@@ -54,10 +84,8 @@ export default function TransactionTitle({
                 ) : null}
             </span>
             <div className="min-w-0 flex-1">
-                <div className="flex items-baseline gap-1 leading-none">
-                    <p className="text-sm capitalize m-0 font-semibold truncate">
-                        {type.replace(/_/g, ' ').toLowerCase()}
-                    </p>
+                <div className="flex items-center gap-1 leading-none">
+                    <p className="text-sm capitalize m-0 font-semibold truncate">{formattedType}</p>
                     {link ? (
                         <Link
                             to={link.url}

@@ -1,7 +1,7 @@
 import React, { useRef } from 'react'
 import { IconChevronLeft, IconChevronRight } from '@posthog/icons'
 import PinnedPostCard from './PinnedPostCard'
-import { BuildModePost } from './types'
+import { PostSummary } from 'components/PostsIndex/types'
 import { usePinnedCardSwing } from './usePinnedCardSwing'
 import { useScrollEdges } from './useScrollEdges'
 
@@ -45,7 +45,7 @@ const ArrowButton = ({
  * Horizontally scrollable row of pinned cards. While scrolling, the cards
  * swing on their pins against the direction of motion.
  */
-export default function RecentPosts({ posts }: { posts: BuildModePost[] }): JSX.Element {
+export default function RecentPosts({ posts }: { posts: PostSummary[] }): JSX.Element {
     const scrollRef = useRef<HTMLDivElement>(null)
     const { canScroll, scrollByPage } = useScrollEdges(scrollRef)
     usePinnedCardSwing(scrollRef, posts.length)

@@ -54,6 +54,11 @@ contents/pocket-guides/<volume>/<slug>/
 - **`SKILL.md` is a real file, not a string** – same frontmatter as the canonical scouts in the
   monorepo, so one can be pasted in or lifted out without reformatting. The page renders it
   byte-for-byte, and the "Add this scout" deep link prefills PostHog from it.
+- **When PostHog already ships the scout as a template, set `appTemplate:` and write no
+  `SKILL.md`.** The CTA opens that template in the app, which carries the tags and schedule the
+  encoded deep link doesn't, and the scout file is fetched from the monorepo at build time so the
+  page can't describe a scout the button doesn't create – details in
+  `src/components/SelfDrivingInbox/README.md`.
 
 ## The two MDX traps
 
@@ -99,5 +104,36 @@ used before – renders unstyled until the book's component map supports it.
 ## Measuring
 
 Reader interactions emit the `pocket_guide_interaction` event (marker glosses, term hovers,
-contents, font size, scout-file expansion) and both "Add this scout" CTAs emit it with
-`kind: add_scout_click` – that click is the conversion.
+contents, font size, scout-file expansion), and every CTA emits it too. The `kind` property
+names the action:
+
+- `cover_click` – a volume opened, with the `volume` id. Fires from every surface that shows a
+  cover or a spine, so `placement` is what tells them apart.
+- `shelf_link_click` – the "All guides" link out to the shelf, rather than a single volume.
+- `add_scout_click` – both "Add this scout" CTAs, with the `scout` name. That click is the
+  conversion for a self-driving guide.
+- `cta_link_click` and `ai_prompt_click` – the `<Action />` button, with the `guide` url.
+- `ai_prompt_copy` – the PostHog AI prompt copied from its code block. For a prompt guide this
+  is the conversion, not the button beside it – a reader who copies the prompt has taken the
+  action whether or not they use the deep link.
+- `skill_file_copy` – a scout or `SKILL.md` file copied from its figure, with the file's name.
+  Volumes that ship a skill rather than a scout have no button at all, so this is their
+  conversion.
+- `guide_link_click` – a link in a guide's prose, with its `href`. Some chapters answer with a
+  link (the skill on GitHub, a docs page), which makes that link the chapter's CTA.
+- `setup_command_copy` – the wizard command copied from a volume's front matter, a CTA
+  prerequisite, or the "Not set up yet?" block.
+
+Every CTA also sends a `placement`, so the pinned bar can be compared against the block it
+shortcuts, and so a guide open can be traced to the surface that sent it.
+
+- Inside a guide: `action_section`, `enable_section`, `front_matter`, `figure`, `prose`,
+  `pinned_bar`.
+- Surfaces that open a guide: `shelf` (`/pocket-guides`), `docs_index` (the `/docs` library
+  column), `product_docs` (a product's docs page), `self_driving_page` (`/self-driving`).
+
+`placement` is a required prop on `Cover` and `VolumeCard`, so a new surface cannot ship
+without declaring itself – the build fails first.
+
+**A new volume needs no tracking work.** The CTA components carry it, so a guide is measured as
+soon as it uses one. Adding a new kind of CTA is the only case that needs a new `kind` here.

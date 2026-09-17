@@ -21,6 +21,7 @@ from it and cross-highlight each other on hover.
 | ------------- | ------------------------ | ------------ | ---------------------------------------------------------------------- |
 | `annotations` | `Annotation[]`           | _(required)_ | The callouts to render.                                                |
 | `type`        | `'dots' \| 'numbered'`   | `'numbered'` | Marker style (see below).                                              |
+| `markerClassName` | `string`             | `'bg-red text-white'` | Color classes for the markers and key chips (background + text). |
 | `children`    | `ReactNode`              | _(required)_ | Must contain an `<ImageAnnotations.Image>` (and optionally a `.Key`).  |
 
 ```ts
@@ -69,6 +70,7 @@ screenshot. Renders the provider, image, and key for you.
 | `set`         | `string`       | Name of an annotation set stored at `screenshots[screenshot].annotations[set]`.    |
 | `annotations` | `Annotation[]` | Inline annotations — overrides `set`.                                              |
 | `type`        | `'dots' \| 'numbered'` | Overrides the set's type (defaults to the set's type, then `numbered`).    |
+| `markerClassName` | `string`   | Overrides the marker color (background + text classes). Defaults to the product-page red. |
 | `showKey`     | `boolean`      | Force the key on/off (defaults to on for `numbered`).                              |
 | `layout`      | `'stacked' \| 'split'` | `stacked` (default) puts the image above the key. `split` is a responsive 2-column layout: `children` + key on the left, image on the right. |
 | `children`    | `ReactNode`    | Left-column content (the description/prose) in the `split` layout.                |

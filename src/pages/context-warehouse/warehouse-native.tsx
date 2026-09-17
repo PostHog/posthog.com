@@ -116,12 +116,12 @@ export default function WarehouseNative(): JSX.Element {
 
                 <h2>What does this mean for the future?</h2>
                 <p>
-                    PostHog is building a managed warehouse based on DuckDB in addition to the current ClickHouse-based
+                    PostHog is building a managed warehouse based on Trino in addition to the current ClickHouse-based
                     warehouse. The focus is on expanding what integrates with our integrated warehouse, making it easier
                     to use PostHog as your primary data platform without needing to stitch together multiple tools. If
                     you&apos;re interested in finding out more, we suggest{' '}
                     <Link to="/context-warehouse/managed-warehouse">
-                        joining the waitlist for the managed DuckDB warehouse
+                        joining the waitlist for the managed Trino warehouse
                     </Link>
                     .
                 </p>

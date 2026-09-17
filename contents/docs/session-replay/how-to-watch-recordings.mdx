@@ -70,6 +70,19 @@ To watch recordings, you can visit the [Replay](https://app.posthog.com/replay) 
   classes="rounded"
 />
 
+## Recordings across multiple tabs and windows
+
+PostHog records all tabs and windows of your site into one recording. A user opens a link in a second tab, and PostHog adds that tab to the same recording. PostHog starts a second recording only when a [new session](/docs/data/sessions#how-does-posthog-define-a-session) begins.
+
+PostHog assigns one `$session_id` to the session, and a separate `$window_id` to each tab. Every tab sends its events under the same `$session_id`. The player reads the `$window_id` to show you which tab each moment came from.
+
+The player shows one tab at a time. It follows the tab that the user is active in. Two controls let you change this:
+
+- **The window selector** in the player controls. Select **Follow the user** to move between tabs with them. Select **Follow window** and a window number to stay in one tab. PostHog disables this control when the session used one tab.
+- **The window badges** in the activity panel. Each event carries a numbered badge. Hover over a badge to see which tab the event came from. PostHog hides the badges when the session used one tab.
+
+Cross-tab recording needs the same browser, the same device, and the same browser profile. A user who moves from Chrome to Firefox starts a new session. PostHog then creates a second recording. Read [tabs are recorded as separate sessions](/docs/session-replay/troubleshooting#tabs-are-recorded-as-separate-sessions) if your tabs do not join into one recording.
+
 ## When watching a filter result or collection:
 
 1. Open the filter panel to find more recordings

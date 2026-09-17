@@ -6,7 +6,7 @@ showTitle: true
 
 You can edit a workflow while it's enabled and people are moving through it. PostHog uses a **follow-live** model: every step of every run reads the current published configuration, so your edits reach people who are already mid-workflow, not just people who enter afterwards.
 
-This page explains exactly what happens to people already in a workflow when you change it, so you can edit live workflows with confidence.
+This page explains exactly what happens to people already in a workflow when you change it, so you can edit live workflows with confidence. It also covers how to [stop runs](#stopping-runs) entirely.
 
 ## The general model
 
@@ -65,6 +65,46 @@ The tables below break behavior down by where a person is relative to the step y
 - **A step that reads a variable set by a newly added upstream step sees it empty** for people who were already past that point when you published.
 
 </CalloutBox>
+
+## Stopping runs
+
+Editing a workflow changes what happens next for people in it. To stop their runs instead, cancel them from the workflow's **Invocations** tab.
+
+Canceling stops a run before its next step. A run parked in a delay or wait stops within moments. A run that is mid-step finishes that step first, then stops. Steps that already ran, like sent emails, are not undone or recalled.
+
+### Cancel one run
+
+On the **Invocations** tab, every in-flight run (status **Running**) has a **Cancel** button.
+
+### Cancel all in-flight runs
+
+**Cancel in-flight runs** at the top of the **Invocations** tab stops every in-flight run of the workflow at once.
+
+One pass covers a large but bounded number of runs. If the workflow still has runs in flight after a pass, PostHog tells you, and you can run it again to catch the rest.
+
+### Stop a batch run
+
+Canceling in-flight runs doesn't stop a [batch trigger](/docs/workflows/workflow-builder#batch-triggers) that is still enrolling its audience: new runs keep starting until the audience is exhausted. To stop the batch itself, click **Stop** on the batch run in the **Invocations** tab. The button is available while the batch is waiting, queued, or active.
+
+Stopping a batch run halts enrollment, so no more of the audience enters the workflow, and cancels every run the batch already started. Messages already sent are not recalled, and batch runs that already finished are unaffected.
+
+### The canceled status
+
+Canceled is a terminal status with its own filter on the **Invocations** tab. A canceled run:
+
+- doesn't count as succeeded in the workflow's metrics, and is tracked as a separate canceled series
+- keeps its logs, so you can still see how far it got and why it stopped
+- can be rerun later with **Rerun**, like any other finished run
+
+### Disabling a workflow doesn't cancel runs
+
+Disabling an enabled workflow (or archiving it) stops new runs from starting, but runs already in flight aren't canceled right away:
+
+- Runs waiting in a delay or wait step stay parked where they are.
+- If you re-enable the workflow before a parked run wakes, the run continues as normal.
+- If a run comes up for its next step while the workflow is still disabled, it's canceled at that point, and its log records that the workflow was no longer active.
+
+To stop in-flight runs right away, use **Cancel in-flight runs** instead of waiting for their timers to fire.
 
 ## Related
 

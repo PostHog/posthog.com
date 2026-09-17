@@ -15,7 +15,7 @@ export const dataPipelines = {
             color: 'seagreen',
         },
         {
-            name: 'Get started',
+            name: 'Setup',
         },
         {
             name: 'Start here',
@@ -337,6 +337,13 @@ export const dataPipelines = {
                     url: '/docs/cdp/batch-exports/azureblob',
                 },
             ],
+        },
+        {
+            name: 'File download exports',
+            url: '/docs/cdp/file-download-exports',
+            icon: 'IconDownload',
+            color: 'seagreen',
+            featured: true,
         },
         {
             name: 'Transformations',
@@ -666,6 +673,10 @@ export const handbookSidebar = [
             {
                 name: 'SEO best practices',
                 url: '/handbook/content/seo-guide',
+            },
+            {
+                name: 'Answer engine optimization (AEO)',
+                url: '/handbook/content/aeo-guide',
             },
             {
                 name: 'Style guide',
@@ -1013,6 +1024,10 @@ export const handbookSidebar = [
                 url: '/handbook/engineering/feature-pricing',
             },
             {
+                name: 'Shipping a pricing change',
+                url: '/handbook/growth/shipping-a-pricing-change',
+            },
+            {
                 name: 'Revenue and forecasting',
                 url: '/handbook/engineering/revenue-and-forecasting',
             },
@@ -1153,6 +1168,10 @@ export const handbookSidebar = [
                         url: '/handbook/marketing/positioning/session-replay',
                     },
                     {
+                        name: 'Replay vision',
+                        url: '/handbook/marketing/positioning/replay-vision',
+                    },
+                    {
                         name: 'Feature flags',
                         url: '/handbook/marketing/positioning/feature-flags',
                     },
@@ -1281,6 +1300,10 @@ export const handbookSidebar = [
                 url: '/handbook/growth/revops/metric-conventions',
             },
             {
+                name: 'Org definitions',
+                url: '/handbook/growth/revops/org-definitions',
+            },
+            {
                 name: 'Revenue adjustments',
                 url: '/handbook/growth/revops/revenue-adjustments',
             },
@@ -1295,6 +1318,10 @@ export const handbookSidebar = [
             {
                 name: 'Signup enrichment pipeline',
                 url: '/handbook/growth/revops/enrichment-pipeline',
+            },
+            {
+                name: 'ICP fit score',
+                url: '/handbook/growth/revops/icp-fit-score',
             },
             {
                 name: 'SalesOps',
@@ -1496,6 +1523,10 @@ export const handbookSidebar = [
                     {
                         name: 'Overview',
                         url: '/handbook/forward-deployed-engineering/overview',
+                    },
+                    {
+                        name: 'Who we work with',
+                        url: '/handbook/forward-deployed-engineering/who-we-work-with',
                     },
                     {
                         name: 'How to get an FDE involved',
@@ -1868,6 +1899,10 @@ export const handbookSidebar = [
                 url: '/handbook/engineering/posthog-com/overview',
             },
             {
+                name: 'Should I open an issue or a PR?',
+                url: '/handbook/engineering/posthog-com/issue-or-pr',
+            },
+            {
                 name: 'Developing the website',
                 url: '/handbook/engineering/posthog-com/developing-the-website',
             },
@@ -1944,12 +1979,24 @@ export const handbookSidebar = [
                         url: '/handbook/community',
                     },
                     {
+                        name: 'Community channels',
+                        url: '/handbook/community/channels',
+                    },
+                    {
                         name: 'Answering community questions',
                         url: '/handbook/community/questions',
                     },
                     {
+                        name: 'Community moderator tools',
+                        url: '/handbook/community/moderator-tools',
+                    },
+                    {
                         name: 'Profiles',
                         url: '/handbook/community/profiles',
+                    },
+                    {
+                        name: 'Points & rewards',
+                        url: '/handbook/community/points',
                     },
                 ],
             },
@@ -2291,7 +2338,7 @@ export const companyMenu = {
 // PostHog Desktop docs nav — nested inside Self-driving
 const posthogDesktopNav = [
     {
-        name: 'Getting started',
+        name: 'Setup',
     },
     {
         name: 'Quick Tour',
@@ -2311,10 +2358,16 @@ const posthogDesktopNav = [
         name: 'Core workflow',
     },
     {
-        name: 'Spaces and canvases',
+        name: 'Spaces',
         url: '/docs/posthog-desktop/spaces',
         icon: 'IconDashboard',
         color: 'salmon',
+    },
+    {
+        name: 'Canvases',
+        url: '/docs/posthog-desktop/canvases',
+        icon: 'IconGraph',
+        color: 'purple',
     },
     {
         name: 'Tasks',
@@ -2551,14 +2604,14 @@ export const docsMenu = {
                     },
                 },
                 {
-                    name: 'Get started',
+                    name: 'Setup',
                 },
                 {
                     name: 'Set up self-driving',
                     url: '/docs/self-driving/setup',
                 },
                 {
-                    name: 'Products',
+                    name: 'Apps',
                 },
                 {
                     name: 'Slack',
@@ -2949,6 +3002,10 @@ export const docsMenu = {
                             url: '/docs/libraries/docusaurus',
                         },
                         {
+                            name: 'Fastify',
+                            url: '/docs/libraries/fastify',
+                        },
+                        {
                             name: 'Flask',
                             url: '/docs/libraries/flask',
                         },
@@ -3052,8 +3109,16 @@ export const docsMenu = {
                             url: '/docs/libraries/bubble',
                         },
                         {
+                            name: 'Discord',
+                            url: '/docs/libraries/discord',
+                        },
+                        {
                             name: 'Framer',
                             url: '/docs/libraries/framer',
+                        },
+                        {
+                            name: 'GitHub',
+                            url: '/docs/libraries/github',
                         },
                         {
                             name: 'Google Tag Manager',
@@ -3196,12 +3261,24 @@ export const docsMenu = {
                             url: '/docs/data/cohorts',
                         },
                         {
+                            name: 'Realtime cohorts',
+                            url: '/docs/data/realtime-cohorts',
+                            badge: {
+                                title: 'Beta',
+                                className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
+                            },
+                        },
+                        {
                             name: 'Sessions',
                             url: '/docs/data/sessions',
                         },
                         {
                             name: 'Data management',
                             url: '/docs/data',
+                        },
+                        {
+                            name: 'Events data retention',
+                            url: '/docs/data/events-retention',
                         },
                         {
                             name: 'Properties',
@@ -4191,7 +4268,7 @@ export const docsMenu = {
                     color: 'seagreen',
                 },
                 {
-                    name: 'Get started',
+                    name: 'Setup',
                 },
                 {
                     name: 'Start here',
@@ -4515,7 +4592,7 @@ export const docsMenu = {
                     featured: true,
                 },
                 {
-                    name: 'Get started',
+                    name: 'Setup',
                 },
                 {
                     name: 'Start here',
@@ -4645,6 +4722,12 @@ export const docsMenu = {
                     color: 'purple',
                 },
                 {
+                    name: 'Sending HTTP log events',
+                    url: '/docs/web-analytics/sending-http-logs',
+                    icon: 'IconServer',
+                    color: 'purple',
+                },
+                {
                     name: 'Channels and campaigns',
                 },
                 {
@@ -4733,7 +4816,7 @@ export const docsMenu = {
                     color: 'seagreen',
                 },
                 {
-                    name: 'Get started',
+                    name: 'Setup',
                 },
                 {
                     name: 'Start here',
@@ -5041,8 +5124,14 @@ export const docsMenu = {
                     color: 'yellow',
                 },
                 {
-                    name: 'Digests and alerts',
-                    url: '/docs/replay-vision/actions',
+                    name: 'Scouts',
+                    url: '/docs/replay-vision/scouts',
+                    icon: 'IconBinoculars',
+                    color: 'yellow',
+                },
+                {
+                    name: 'Alerts',
+                    url: '/docs/replay-vision/alerts',
                     icon: 'IconBell',
                     color: 'yellow',
                 },
@@ -5089,7 +5178,7 @@ export const docsMenu = {
                     color: 'seagreen',
                 },
                 {
-                    name: 'Get started',
+                    name: 'Setup',
                 },
                 {
                     name: 'Start here',
@@ -5364,7 +5453,7 @@ export const docsMenu = {
                     color: 'seagreen',
                 },
                 {
-                    name: 'Get started',
+                    name: 'Setup',
                 },
                 {
                     name: 'Start here',
@@ -5722,7 +5811,7 @@ export const docsMenu = {
                     color: 'seagreen',
                 },
                 {
-                    name: 'Get started',
+                    name: 'Setup',
                 },
                 {
                     name: 'Start here',
@@ -6142,7 +6231,7 @@ export const docsMenu = {
                     color: 'seagreen',
                 },
                 {
-                    name: 'Get started',
+                    name: 'Setup',
                 },
                 {
                     name: 'Start here',
@@ -6306,7 +6395,7 @@ export const docsMenu = {
                     color: 'teal',
                 },
                 {
-                    name: 'Getting started',
+                    name: 'Setup',
                 },
                 {
                     name: 'Start here',
@@ -6425,7 +6514,7 @@ export const docsMenu = {
                     color: 'seagreen',
                 },
                 {
-                    name: 'Get started',
+                    name: 'Setup',
                 },
                 {
                     name: 'Start here',
@@ -6529,6 +6618,12 @@ export const docsMenu = {
                     url: '/docs/data-warehouse/views/materialize',
                     icon: 'IconCalculator',
                     color: 'yellow',
+                },
+                {
+                    name: 'Materialization troubleshooting',
+                    url: '/docs/data-warehouse/views/materialize-troubleshooting',
+                    icon: 'IconQuestion',
+                    color: 'orange',
                 },
                 {
                     name: 'SQL commands',
@@ -6654,7 +6749,7 @@ export const docsMenu = {
                     },
                 },
                 {
-                    name: 'Getting started',
+                    name: 'Setup',
                 },
                 {
                     name: 'Start here',
@@ -6725,7 +6820,7 @@ export const docsMenu = {
                     color: 'seagreen',
                 },
                 {
-                    name: 'Get started',
+                    name: 'Setup',
                 },
                 {
                     name: 'Start here',
@@ -6770,6 +6865,11 @@ export const docsMenu = {
                         {
                             name: 'Google',
                             url: '/docs/ai-observability/installation/google',
+                            icon: 'IconGemini',
+                        },
+                        {
+                            name: 'Google ADK',
+                            url: '/docs/ai-observability/installation/google-adk',
                             icon: 'IconGemini',
                         },
                         {
@@ -7207,6 +7307,14 @@ export const docsMenu = {
                     name: 'Resources',
                 },
                 {
+                    name: 'Pocket guides',
+                    url: '/pocket-guides/ai-observability',
+                    badge: {
+                        title: 'New',
+                        className: 'uppercase !bg-purple/10 !text-purple !dark:text-white !dark:bg-purple/50',
+                    },
+                },
+                {
                     name: 'Calculating LLM costs',
                     url: '/docs/ai-observability/calculating-costs',
                     icon: 'IconBalance',
@@ -7314,7 +7422,7 @@ export const docsMenu = {
                     color: 'seagreen',
                 },
                 {
-                    name: 'Get started',
+                    name: 'Setup',
                 },
                 {
                     name: 'Start here',
@@ -7461,7 +7569,7 @@ export const docsMenu = {
                     },
                 },
                 {
-                    name: 'Getting started',
+                    name: 'Setup',
                 },
                 {
                     name: 'Start here',
@@ -7596,7 +7704,7 @@ export const docsMenu = {
                     },
                 },
                 {
-                    name: 'Getting started',
+                    name: 'Setup',
                 },
                 {
                     name: 'Start here',
@@ -7719,7 +7827,7 @@ export const docsMenu = {
                     color: 'seagreen',
                 },
                 {
-                    name: 'Get started',
+                    name: 'Setup',
                 },
                 {
                     name: 'Start here',
@@ -7874,7 +7982,7 @@ export const docsMenu = {
                     color: 'seagreen',
                 },
                 {
-                    name: 'Get started',
+                    name: 'Setup',
                 },
                 {
                     name: 'Start here',
@@ -8048,7 +8156,7 @@ export const docsMenu = {
                     color: 'blue',
                 },
                 {
-                    name: 'Get started',
+                    name: 'Setup',
                 },
                 {
                     name: 'Start here',
@@ -8135,6 +8243,12 @@ export const docsMenu = {
                     color: 'green',
                 },
                 {
+                    name: 'Log-based metrics',
+                    url: '/docs/logs/metrics',
+                    icon: 'IconTrends',
+                    color: 'purple',
+                },
+                {
                     name: 'PII scrubbing',
                     url: '/docs/logs/pii-scrubbing',
                     icon: 'IconShield',
@@ -8194,17 +8308,23 @@ export const docsMenu = {
                     icon: 'IconHome',
                     color: 'seagreen',
                 },
+                {
+                    name: 'Community skills',
+                    url: '/docs/skills/community',
+                    icon: 'IconPeople',
+                    color: 'blue',
+                },
             ],
         },
         {
-            name: 'Metrics',
+            name: 'Application metrics',
             icon: 'IconTrends',
             color: 'green',
             url: '/docs/metrics',
             description: 'Send OpenTelemetry metrics to PostHog and analyze them.',
             children: [
                 {
-                    name: 'Metrics',
+                    name: 'Application metrics',
                 },
                 {
                     name: 'Overview',
@@ -8213,7 +8333,7 @@ export const docsMenu = {
                     color: 'seagreen',
                 },
                 {
-                    name: 'Getting started',
+                    name: 'Setup',
                 },
                 {
                     name: 'Start here',
@@ -8234,7 +8354,15 @@ export const docsMenu = {
                         { name: 'Node.js', url: '/docs/metrics/installation/nodejs' },
                         { name: 'Python', url: '/docs/metrics/installation/python' },
                         { name: 'Other languages', url: '/docs/metrics/installation/other' },
+                        { name: 'Docker', url: '/docs/metrics/installation/docker' },
+                        { name: 'Kubernetes', url: '/docs/metrics/installation/kubernetes' },
                     ],
+                },
+                {
+                    name: 'Use your metrics',
+                    url: '/docs/metrics/explore',
+                    icon: 'IconTrends',
+                    color: 'blue',
                 },
                 {
                     name: 'Why you need metrics',
@@ -8267,7 +8395,7 @@ export const docsMenu = {
                     color: 'seagreen',
                 },
                 {
-                    name: 'Getting started',
+                    name: 'Setup',
                 },
                 {
                     name: 'Start here',
@@ -8277,7 +8405,7 @@ export const docsMenu = {
                     featured: true,
                 },
                 {
-                    name: 'Install OpenTelemetry tracing',
+                    name: 'Install tracing',
                     url: '/docs/distributed-tracing/installation',
                     icon: 'IconCode',
                     color: 'blue',
@@ -8319,7 +8447,7 @@ export const docsMenu = {
                     color: 'seagreen',
                 },
                 {
-                    name: 'Get started',
+                    name: 'Setup',
                 },
                 {
                     name: 'Start here',
@@ -8541,12 +8669,6 @@ export const pricingMenu = {
         //     color: 'purple',
         //     url: '/events',
         // },
-        {
-            name: 'Add-ons',
-            icon: 'IconPuzzle',
-            color: 'seagreen',
-            url: '/addons',
-        },
         {
             name: 'Platform packages',
             icon: 'IconServer',

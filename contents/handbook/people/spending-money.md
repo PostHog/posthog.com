@@ -180,7 +180,7 @@ Talk to [Tara](https://posthog.com/community/profiles/34526) who handles Macbook
       - US only: use your Brex since we earn cashback
       - Do not get AppleCare since it doesn't have great value for money
     - You can request a new laptop in `#team-people-and-ops` if it is over 4 years old, (for engineering machines) has less than 48GB of RAM, or is significantly impacting your productivity. We do ask that you do some diligence to make sure it's not a setup issue though - i.e. other applications aren't hogging the memory, etc.
-   - Phones and iPads - if you require a phone (Apple or Android) or an iPad for your role, please reach out to [Tara](https://posthog.com/community/profiles/34526) in `#team-people-and-ops`.
+   - Phones and iPads are only provided if they're integral to your role (e.g. mobile team or content purposes). Reach out to [Tara](https://posthog.com/community/profiles/34526) in `#team-people-and-ops` and she'll get one ordered for you. 
 
 #### Other equipment
 - Keyboard/mouse/laptop stand: Check Amazon and Apple for discounts. Refurbished items usually work just fine. [Nextstand](https://www.amazon.co.uk/NEXSTAND-K2-Adjustable-Foldable-Portable/dp/B01HHYQBB8) make great value laptop stands that are portable. You can use your personal budget for this.

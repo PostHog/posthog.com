@@ -1,7 +1,6 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react'
 import { DotLottiePlayer } from '@dotlottie/react-player'
 import { useChat } from 'hooks/useChat'
-import ScrollArea from 'components/RadixUI/ScrollArea'
 import { useApp } from '../../context/App'
 
 interface InkeepEmbeddedChatProps {
@@ -14,9 +13,7 @@ export default function InkeepEmbeddedChat({ codePrompt }: InkeepEmbeddedChatPro
     const [initialQuestionAsked, setInitialQuestionAsked] = useState(false)
     const [chatRefReady, setChatRefReady] = useState(false)
     const { EmbeddedChat, aiChatSettings, baseSettings, initialQuestion } = useChat()
-    const { isMobile, windows, closeWindow } = useApp()
-
-    const Container = isMobile ? ScrollArea : React.Fragment
+    const { windows, closeWindow } = useApp()
 
     const setChatFunctionsRef = useCallback((instance: any) => {
         chatFunctionsRef.current = instance
@@ -51,9 +48,7 @@ export default function InkeepEmbeddedChat({ codePrompt }: InkeepEmbeddedChatPro
         <>
             {EmbeddedChat ? (
                 <div id="embedded-chat-target" className="h-full">
-                    <Container>
-                        <EmbeddedChat aiChatSettings={enhancedAiChatSettings} baseSettings={baseSettings} />
-                    </Container>
+                    <EmbeddedChat aiChatSettings={enhancedAiChatSettings} baseSettings={baseSettings} />
                 </div>
             ) : (
                 <div className="flex-grow size-full flex items-center justify-center">

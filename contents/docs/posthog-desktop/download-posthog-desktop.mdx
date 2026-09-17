@@ -2,19 +2,20 @@
 title: Download PostHog Desktop
 ---
 
-import { DownloadCTA, DownloadList } from 'components/Code/DownloadContent'
+import { DownloadButton } from '../../../src/pages/desktop'
+import { DesktopDownloadList } from 'components/Code/DesktopDownloadList'
 
 Download PostHog Desktop, sign in with your PostHog account, and choose a repository.
 
 <div className="max-w-lg @container bg-blue/10 border border-blue rounded-md p-6 shadow-xl not-prose">
-  <DownloadCTA />
+  <DownloadButton />
 </div>
 
 ## All platforms
 
-<DownloadList />
+<DesktopDownloadList />
 
-Releases include macOS builds for Apple Silicon and Intel, a Windows installer, and Linux AppImage, `.deb`, and `.rpm` packages. Each option opens the current PostHog Desktop releases so you can choose the latest matching asset.
+Releases include macOS builds for Apple Silicon and Intel, a Windows installer, and Linux AppImage, `.deb`, and `.rpm` packages.
 
 ## Eligibility
 

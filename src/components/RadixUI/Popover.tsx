@@ -84,7 +84,7 @@ export const Popover = React.forwardRef<HTMLDivElement, PopoverProps>(
                                 <ScrollArea className="h-full">{children}</ScrollArea>
                             </div>
                         </div>
-                        <RadixPopover.Arrow className="fill-white" />
+                        <RadixPopover.Arrow className="fill-[rgb(var(--bg))]" />
                     </RadixPopover.Content>
                 </RadixPopover.Portal>
             </RadixPopover.Root>

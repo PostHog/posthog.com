@@ -1,6 +1,6 @@
 # Browser screenshots
 
-Every visual change needs before/after screenshots in four states: light and dark, narrow window and wide window. This guide explains how to capture them, and how to put them in the PR.
+Every visual change needs before/after screenshots in four states: light and dark, narrow window and wide window. Anything that moves needs a before/after GIF as well. This guide explains how to capture them, and how to put them in the PR.
 
 Read [the reviewer's guide](reviewers-guide.md) for the grid the images go into.
 
@@ -8,7 +8,7 @@ Read [the reviewer's guide](reviewers-guide.md) for the grid the images go into.
 
 | Tool | Use it for | Weakness |
 |---|---|---|
-| Claude Chrome extension | Hover states, nested menus, anything a real browser must paint | The window will not always resize, so you cannot control the viewport width |
+| Claude Chrome extension | Hover states, nested menus, GIFs of motion, anything a real browser must paint | The window will not always resize, so you cannot control the viewport width |
 | Headless puppeteer (`puppeteer` is a devDependency) | Exact viewport widths, scripted before/after runs, reading console errors | Old bundled Chromium. It does not paint nested menus |
 
 Neither tool covers every case. Expect to use both: puppeteer for the narrow and wide grid, the extension for menus and hover states.
@@ -86,57 +86,104 @@ Give each step time. A click that lands before the app hydrates does nothing, an
 
 `resize_window` reports success but may leave the viewport unchanged, because page zoom decouples the window width from `innerWidth`. Check `innerWidth` in the page before you trust a narrow capture from this tool. When it does not move, take the narrow captures with puppeteer instead.
 
+## Changes that move
+
+A still cannot show a transition, and a reviewer should not have to run the branch to see one. If your change alters anything that moves – an animation, a transition, a hover reveal, a drag, a scroll behavior, a loading state – attach a GIF of it.
+
+**A GIF is extra, not instead.** The four-state before/after grid is still required. The GIF shows the motion; the stills show the result at rest.
+
+Reach for a GIF when the change alters:
+
+- an animation or transition (duration, easing, direction, what animates)
+- a hover or focus reveal
+- a drag, resize, or snap interaction
+- a scroll-linked effect
+- a loading, skeleton, or empty-to-filled state
+
+A single still is enough for layout, color, spacing, and copy.
+
+### Capturing one
+
+The Chrome extension records directly – its `gif_creator` captures frames while you drive the page. Take a few extra frames at each end, or the loop reads as a jump cut.
+
+Otherwise record the screen and convert. With `ffmpeg`, generating a palette first is what keeps UI grays from banding:
+
+```bash
+ffmpeg -i recording.mov \
+  -vf "fps=12,scale=800:-1:flags=lanczos,split[a][b];[a]palettegen[p];[b][p]paletteuse" \
+  -loop 0 motion.gif
+```
+
+Keep them small. The upload limit is 10 MB and a full-width capture reaches it quickly:
+
+- 2–5 seconds. Trim to the moment that changed.
+- Crop to the affected area, not the whole desktop.
+- 800px wide is plenty. 12 fps is plenty for UI motion.
+- Show the motion once, maybe twice. A long loop is harder to read, not easier.
+
+Capture the before state the same way, with the same `git stash` trick as the stills. A motion change needs a before GIF too – "it feels smoother now" is not reviewable.
+
 ## Console errors
 
 The PR must state that the console shows no **new** errors. Do not compare against a memorized list of known warnings – that list goes stale. Capture the console on both sides of the `git stash` and compare the two sets. Anything on both sides is pre-existing. Report only what your change added.
 
 ## Putting the images in the PR
 
-**If you have your own skill or tooling for uploading an image to a PR, use that instead.** This section is the fallback for when you have nothing.
-
-`gh` has no command for this, but the endpoint its web UI uses is reachable with `curl`:
+Use `gh pr-assets`. It takes a local file and prints markdown you can paste straight into the PR body.
 
 ```bash
-FILE=before-nav-light-wide.png
-MIME=image/png                                  # image/jpeg for a .jpg
-REPO=PostHog/posthog.com
-TOKEN=$(gh auth token)
-
-curl -s "https://uploads.github.com/user-attachments/assets?name=$FILE&content_type=$MIME&repository_id=$(gh api "repos/$REPO" --jq .id)" \
-  -X POST -H "Authorization: Bearer $TOKEN" \
-  -H "Accept: application/json" --data-binary "@$FILE"
+gh extension install PostHog/gh-pr-assets --pin v1.0.0   # once
+gh pr-assets image --alt "nav after, dark, wide" after-nav-dark-wide.png
 ```
 
-It returns the attachment URL:
+The first run prints a warning and uploads nothing. Read it, then re-run the same command with `--yes` to confirm:
 
-```json
-{ "url": "https://github.com/user-attachments/assets/8203f673-85b5-4d46-9fa8-f5e1e160e8f5" }
-```
+> Uploads land in a **public** repo, [PostHog/pr-assets](https://github.com/PostHog/pr-assets), and are **permanent**. URLs are pinned to a commit sha, so they keep serving even after the file is deleted. Never upload customer data, secrets, or internal information.
 
-Put that URL in an `<img>` tag in the PR body:
+For a screenshot of this public marketing site that is a non-issue. For anything else, think first. If you are an agent, `--yes` means a person approved these exact files – it is not a flag to bake into a script.
 
-```markdown
-<img src="https://github.com/user-attachments/assets/8203f673-85b5-4d46-9fa8-f5e1e160e8f5" width="380">
-```
-
-These are the same attachment URLs the web UI creates when a human drags an image into a comment. GitHub rewrites them at render time into a signed `private-user-images.githubusercontent.com` URL and wraps them in a link.
-
-Three things to know:
-
-- **The asset 404s until the PR body references it.** Upload, embed, and only then check the URL. A 404 straight after upload is normal and does not mean the upload failed.
-- **Do not follow the redirect with the auth header attached.** `curl -L` forwards `Authorization` to S3, which rejects the signature with a 403. Once the asset is public, plain `curl -L` with no header works.
-- **Upload everything first, then edit the body once.** Keep the body in a file and apply it with `gh pr edit <pr> --body-file <file>`, so you can regenerate it without hand-patching.
-
-To confirm an image really renders, compare the served byte count against the local file:
+Only the markdown goes to stdout, so you can build the body up as you go:
 
 ```bash
-curl -sL -o /dev/null -w '%{http_code} %{size_download}\n' "<attachment-url>"
+gh pr-assets image --yes before-nav-light-wide.png after-nav-light-wide.png >> body.md
+```
+
+Several files in one command land in one commit, and the markdown comes back in the order you passed them. Alt text defaults to each file's stem, so name the files well and you can skip `--alt` entirely.
+
+Upload everything first, then apply the body once with `gh pr edit <pr> --body-file body.md`. That way you can regenerate the body without hand-patching it.
+
+### GIFs
+
+A GIF is an image. Upload it the same way, and it animates inline in the PR:
+
+```bash
+gh pr-assets image --alt "sidebar transition, after" after-sidebar.gif
+```
+
+### Video
+
+`gh pr-assets video` accepts mp4 and webm, but **GitHub renders no player for an uploaded video** – you get a plain link the reviewer has to click. Prefer a GIF for anything short enough to loop.
+
+Use video only for a long walkthrough where a link is acceptable. If you need a real inline player, a human has to drag the file into the comment box by hand; there is no command for that.
+
+### Two things that will not work
+
+- **SVG.** `raw.githubusercontent.com` serves it as `text/plain`, so GitHub refuses to inline it. Export a PNG.
+- **Committing the file to this repo.** Screenshots are evidence for a review, not source. They bloat the repo permanently and never get cleaned up.
+
+### Confirming an image renders
+
+Compare the served byte count against the local file:
+
+```bash
+curl -sL -o /dev/null -w '%{http_code} %{size_download}\n' "<url>"
 ```
 
 ## Checklist
 
 - [ ] Before and after, for every affected area
 - [ ] Light and dark, narrow and wide – four states per area
+- [ ] A before/after GIF for anything that animates, hovers, drags, or scrolls
 - [ ] Console compared before and after, not against a remembered list
-- [ ] Images uploaded and embedded, not described in words
+- [ ] Images uploaded with `gh pr-assets` and embedded, not described in words or committed to the repo
 - [ ] Any state you could not capture named in the "Not tested" line, with the reason

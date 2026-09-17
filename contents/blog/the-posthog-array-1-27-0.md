@@ -37,7 +37,7 @@ As a small thank you for your time, we're giving away some awesome [PostHog merc
 
 ## PostHog 1.27.0 Release Notes
 
-> If you're self-hosting and want to upgrade for a better experience and new features, remember to [update your PostHog instance](/docs/runbook/upgrading-posthog).
+> If you're self-hosting and want to upgrade for a better experience and new features, remember to [update your PostHog instance](/docs/self-host).
 
 **In this release:**
 

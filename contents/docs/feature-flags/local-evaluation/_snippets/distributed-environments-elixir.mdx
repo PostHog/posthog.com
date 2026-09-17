@@ -1,0 +1,40 @@
+## The interface
+
+The Elixir SDK accepts a `{module, state}` tuple. The module must implement `PostHog.FeatureFlags.FlagDefinitionCacheProvider`:
+
+```elixir
+defmodule MyApp.PostHogDefinitionCache do
+  @behaviour PostHog.FeatureFlags.FlagDefinitionCacheProvider
+
+  @impl true
+  def should_fetch_flag_definitions(state), do: state.fetch_owner?.()
+
+  @impl true
+  def get_flag_definitions(state), do: state.read.()
+
+  @impl true
+  def on_flag_definitions_received(state, definitions), do: state.write.(definitions)
+
+  @impl true
+  def shutdown(_state), do: :ok
+end
+```
+
+`get_flag_definitions/1` must return `nil` when the cache is empty or a map that contains `flags`, `group_type_mapping`, and `cohorts`. The map can use string or atom keys. Store the complete map passed to `on_flag_definitions_received/2` so other instances can read it without changing its shape.
+
+Use `should_fetch_flag_definitions/1` to coordinate which instance fetches definitions from PostHog. Return `true` from the instance that owns the distributed lock and `false` from instances that should read the shared cache.
+
+## Configure the provider
+
+Pass the provider module and its state in `flag_definition_cache_provider`:
+
+```elixir file=config/runtime.exs
+config :posthog,
+  api_host: "<ph_client_api_host>",
+  api_key: "<ph_project_token>",
+  secret_key: System.fetch_env!("POSTHOG_FEATURE_FLAGS_SECURE_API_KEY"),
+  flag_definition_cache_provider: {MyApp.PostHogDefinitionCache, provider_state},
+  flag_definition_cache_provider_timeout_ms: 5_000
+```
+
+The SDK limits each provider callback to `flag_definition_cache_provider_timeout_ms`, which defaults to 5,000 milliseconds. If the initial cache read fails or returns `nil`, the SDK fetches definitions from PostHog. After definitions load, a cache read failure keeps the current in-memory definitions. Provider write and shutdown failures don't stop flag evaluation.

@@ -69,7 +69,7 @@ Here is a overview that shows which of our PMs currently works with which team:
 <fieldset>
 <legend className="bg-transparent"><TeamMember name="Mike Warren" photo /></legend>
 
--   <SmallTeam slug="analytics-platform" />
+-   <SmallTeam slug="query-performance" />
 -   <SmallTeam slug="mcp-analytics" />
 -   <SmallTeam slug="product-analytics" />
 -   <SmallTeam slug="web-analytics" />

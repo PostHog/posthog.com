@@ -38,18 +38,6 @@ The Skill looks for patterns like <SeeFig n={1} />: `exported_data` isn't the mo
 but the accounts that use it are worth nearly eight times as much per account as the ones using the most popular feature
 `viewed_onboarding_tips`.
 
-## Doing this by hand
-
-1. **Connect [Stripe](/docs/cdp/sources/stripe).** In PostHog, go to
-   [Data pipeline > Sources](/docs/data-warehouse/sources) and connect Stripe if it isn't already
-   connected; you'll need a restricted API key with read access to Billing.
-2. **Find your feature [events](/docs/data/events).** Check Data management > Events for the
-   events that represent feature use.
-3. **Write the join.** Open the [SQL editor](/docs/data-warehouse/sql) and join `events` to
-   `stripe_invoice` or `stripe_customer` on email. The schema tab on the left shows your
-   project's real column names. You can also ask PostHog AI to do this part for you.
-4. **Save it as an insight** so you don't have to re-run the query by hand next time.
-
 ## Get an agent to do the work
 
 Copy the Skill below and add it to your agent. The Skill enables your agent to find your feature-usage events, confirming with you which ones count as
@@ -63,6 +51,18 @@ a specific rollout's revenue impact, see
 [Feature revenue impact](/pocket-guides/context-warehouse/feature-revenue-impact) instead.
 
 <SkillFigure n={2} caption="The Skill itself, copy and paste this into your agent to answer the question." />
+
+## Doing this by hand
+
+1. **Connect [Stripe](/docs/cdp/sources/stripe).** In PostHog, go to
+   [Data pipeline > Sources](/docs/data-warehouse/sources) and connect Stripe if it isn't already
+   connected; you'll need a restricted API key with read access to Billing.
+2. **Find your feature [events](/docs/data/events).** Check Data management > Events for the
+   events that represent feature use.
+3. **Write the join.** Open the [SQL editor](/docs/data-warehouse/sql) and join `events` to
+   `stripe_invoice` or `stripe_customer` on email. The schema tab on the left shows your
+   project's real column names. You can also ask PostHog AI to do this part for you.
+4. **Save it as an insight** so you don't have to re-run the query by hand next time.
 
 <SeeAlso>
 

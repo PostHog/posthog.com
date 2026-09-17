@@ -48,6 +48,33 @@ posthog-kmp = { group = "com.posthog", name = "posthog-kmp", version.ref = "post
 
 You can find the latest version on [Maven Central](https://central.sonatype.com/artifact/com.posthog/posthog-kmp).
 
+### Link the iOS Swift package
+
+> **Note:** This setup applies to `posthog-kmp` 0.5.0 and later and requires Kotlin 2.4.0 or later.
+
+On iOS, the SDK uses Kotlin's [Swift Package Manager (SwiftPM) integration](https://kotlinlang.org/docs/multiplatform/multiplatform-spm-import.html) to link the native `posthog-ios` package and copy its resources, including privacy manifests, into your app.
+
+If your app supports iOS 13 or 14, set the minimum deployment target in the Gradle module that builds your iOS framework:
+
+```kotlin file=shared/build.gradle.kts
+kotlin {
+    swiftPMDependencies {
+        iosMinimumDeploymentTarget.set("13.0")
+    }
+}
+```
+
+After adding the dependency, run the linkage task once from your project root:
+
+```bash
+XCODEPROJ_PATH="$PWD/iosApp/iosApp.xcodeproj" \
+./gradlew :shared:integrateLinkagePackage
+```
+
+Replace `iosApp/iosApp.xcodeproj` with the path to your Xcode project and `:shared` with the Gradle module that builds your iOS framework.
+
+The task generates a `KotlinMultiplatformLinkedPackage` directory and adds it to the Xcode project. Commit the generated package and Xcode project changes. The package is updated automatically when SwiftPM dependencies change. If the first build after a dependency change stops with `Synthetic project state updated`, run the same build again. You don't need to add `posthog-ios` to Xcode separately.
+
 ### Configure the SDK
 
 Initialize PostHog once, early in your app's lifecycle, by calling `PostHog.setup()` with a `PostHogConfig` and a platform `PostHogContext`:
@@ -228,13 +255,47 @@ PostHog.capture(
 
 > **Note:** Properties with `null` values are dropped before the event is sent, so every platform receives the same event shape.
 
+## Filter events before sending
+
+`beforeSend` is available in PostHog KMP 0.3.0 and later on Android, iOS, JVM, Kotlin/JS, and Kotlin/Wasm. Use version 0.4.2 or later for the exception behavior described below.
+
+Add one or more `PostHogBeforeSend` callbacks to `PostHogConfig.beforeSend`. Return a copied event to modify its name or distinct ID, or to redact properties. Return `null` to drop the event before the SDK queues it:
+
+```kotlin
+import com.posthog.kmp.PostHog
+import com.posthog.kmp.PostHogBeforeSend
+import com.posthog.kmp.PostHogConfig
+import com.posthog.kmp.PostHogContext
+
+val config = PostHogConfig(
+    apiKey = "<ph_project_token>",
+    beforeSend = listOf(
+        PostHogBeforeSend { event ->
+            event.copy(properties = event.properties - "email")
+        },
+        PostHogBeforeSend { event ->
+            if (event.event == "internal_debug_event") null else event
+        },
+    ),
+)
+
+PostHog.setup(
+    config = config,
+    context = PostHogContext(),
+)
+```
+
+Callbacks run synchronously in list order. Each callback receives the event returned by the previous callback. Returning `null` skips the remaining callbacks. If a callback throws, the SDK drops the event and skips the remaining callbacks.
+
+Versions 0.3.0 through 0.4.1 ignore a callback exception and continue with the last valid event.
+
 ## Identifying users
 
 import IdentifyFrontendCallout from '../../_snippets/identify-frontend-callout.mdx'
 
 <IdentifyFrontendCallout />
 
-Use `identify` to associate events with a specific user and, optionally, set [person properties](/docs/data/user-properties):
+Use `identify` to associate events with a specific user and, optionally, set [person properties](/docs/product-analytics/person-properties):
 
 ```kotlin
 PostHog.identify(
@@ -280,7 +341,7 @@ Sometimes you want to assign multiple distinct IDs to a single user. This is hel
 PostHog.alias("distinct_id")
 ```
 
-We strongly recommend reading our docs on [alias](/docs/data/identify#alias-assigning-multiple-distinct-ids-to-the-same-user) to best understand how to correctly use this method.
+We strongly recommend reading our docs on [alias](/docs/product-analytics/identify#alias-assigning-multiple-distinct-ids-to-the-same-user) to best understand how to correctly use this method.
 
 ## Setting person properties
 
@@ -602,6 +663,7 @@ Pass these to `PostHogConfig` when calling `setup`.
 | `personProfiles` | `PersonProfiles` | `IDENTIFIED_ONLY` | When person profiles are created: `IDENTIFIED_ONLY`, `ALWAYS`, or `NEVER`. |
 | `sessionRecording` | `SessionRecordingConfig?` | `null` | Enables and configures session replay (Android and iOS). |
 | `autocapture` | `Boolean` | `false` | Enables automatic event capture where the native platform supports it. |
+| `beforeSend` | `List<PostHogBeforeSend>` | `emptyList()` | Modifies or drops events before the SDK queues them. |
 | `errorTracking` | `ErrorTrackingConfig?` | `null` | Enables and configures Error Tracking. |
 
 ### Error Tracking options
@@ -636,7 +698,7 @@ Pass a `SessionRecordingConfig` to `PostHogConfig.sessionRecording`. Defaults ma
 | Platform | Status | Backed by |
 | --- | --- | --- |
 | Android | ✅ | [PostHog Android](/docs/libraries/android) (native) |
-| iOS | ✅ | [PostHog iOS](/docs/libraries/ios) (native, via a Swift bridge) |
+| iOS | ✅ | [PostHog iOS](/docs/libraries/ios) (native, via SwiftPM) |
 | Web | ✅ | [PostHog.js](/docs/libraries/js) |
 | JVM (desktop) | ✅ | `com.posthog:posthog`, the [JVM core library](/docs/libraries/java) the Android SDK is built on |
 

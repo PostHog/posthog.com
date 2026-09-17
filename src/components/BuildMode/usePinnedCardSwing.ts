@@ -1,6 +1,6 @@
 import { RefObject, useEffect } from 'react'
 import { usePrefersReducedMotion } from 'components/Code/usePrefersReducedMotion'
-import { rand } from './utils'
+import { rand } from 'components/PostsIndex/utils'
 
 /** How far a card is allowed to swing off its resting angle, in degrees. */
 const MAX_TILT = 14

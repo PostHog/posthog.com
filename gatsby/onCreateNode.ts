@@ -1,4 +1,4 @@
-import { replacePath, stripFrontmatter } from './utils'
+import { getPublicID, replacePath, stripFrontmatter } from './utils'
 import { createFilePath, createRemoteFileNode } from 'gatsby-source-filesystem'
 
 import GitUrlParse from 'git-url-parse'
@@ -135,11 +135,6 @@ export const onPreInit: GatsbyNode['onPreInit'] = async function ({ actions }) {
     fs.writeFileSync(CLOUDINARY_CACHE_FILE, JSON.stringify(cloudinaryCache))
 }
 
-function getPublicID(image: string) {
-    const imagePath = image.split('/upload/')[1]
-    return imagePath.substring(0, imagePath.lastIndexOf('.'))
-}
-
 // onCreateNode runs once per source node (thousands of Mdx/MarkdownRemark nodes). The
 // pageviews cache is written once in onPreBootstrap and never changes mid-build, so fetch
 // it at most once here instead of re-reading it from the on-disk cache for every node.
@@ -265,6 +260,13 @@ export const onCreateNode: GatsbyNode['onCreateNode'] = async ({
                 slug = `${config.pathPrefix}${slug}`
             }
         }
+
+        const sourceText = typeof node.rawBody === 'string' ? node.rawBody : ''
+        createNodeField({
+            node,
+            name: `wordCount`,
+            value: stripFrontmatter(sourceText).split(/\s+/).length,
+        })
 
         createNodeField({
             node,
