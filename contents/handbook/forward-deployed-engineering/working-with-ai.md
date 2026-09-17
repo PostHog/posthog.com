@@ -26,7 +26,7 @@ We wrote these principles from actually doing the work – if doing the work tea
 
 ### [You're still the driver](/handbook/values#youre-the-driver)
 
-Prior context can inform your judgment, but it can't answer for your decisions or what you ship.
+Prior context can inform your judgment, but it can't be accountable for your decisions or what you ship.
 
 When real work exposes a gap, use your judgment and improve the system.
 
