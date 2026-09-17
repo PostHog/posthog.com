@@ -418,8 +418,10 @@ To remove this difference, serve both variants from one URL with a [rewrite](htt
 // middleware.js
 // Add '/offer' to the matcher config to run the middleware on the public path
 if (request.nextUrl.pathname === '/offer') {
-  const variantPath = flagResponse === 'test' ? '/test' : '/control'
-  const newResponse = NextResponse.rewrite(new URL(variantPath, request.url))
+  // Clone the URL so the rewrite keeps the query string
+  const url = request.nextUrl.clone()
+  url.pathname = flagResponse === 'test' ? '/test' : '/control'
+  const newResponse = NextResponse.rewrite(url)
   newResponse.cookies.set('bootstrapData', JSON.stringify(bootstrapData))
   return newResponse
 }
