@@ -58,6 +58,7 @@ The structure outlined on this page should be treated as a guideline & should be
 - Both are visible in Slack, not just when they need something
 - Both are aligned on the current state of the customer, risks, opportunities and what their counterpart is working on
 - TAM and CSM alignment on the account happens in public, not DMs
+
 </details>
 
 <details>
@@ -71,6 +72,7 @@ The structure outlined on this page should be treated as a guideline & should be
 - Neither person responds because each assumed the other would
 - TAM checks out on health because "the CSM handles that now"
 - Customer has to explain the same thing twice
+
 </details>
 
 # **Where to expect overlap**
@@ -295,6 +297,7 @@ Prioritize together, then explicitly assign each other paths to run with. Think 
 - The TAM can focus on a net new cross-sell opportunity into AIO with a different set of stakeholders and deepen the value from other products that have been adopted.
 - In this scenario, your parallel efforts unlock goodwill from the customer, bandwidth for the TAM to grow the account, and space for the CSM to go deep on debugging and instrumentation on their existing product adoption.
 - The net effect: customer feels supported on multiple fronts.
+
 </details>
 
 None of this is a hard rule (CSMs on instrumentation, TAMs on expansion). You'll overlap and switch at times, and be more siloed at others. Bigger accounts need the split made explicit because there's more in flight while on a smaller one, it's often obvious enough to leave alone.
