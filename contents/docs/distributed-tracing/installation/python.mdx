@@ -7,9 +7,125 @@ showStepsToc: true
 import { Steps, Step } from 'components/Docs/Steps'
 import TracingNextSteps from './_snippets/tracing-next-steps.mdx'
 
+There are two ways to send spans from Python.
+
+|                                | `posthog`                                                   | OpenTelemetry                                                        |
+| ------------------------------ | ----------------------------------------------------------- | -------------------------------------------------------------------- |
+| **Packages**                   | The SDK you already use for analytics                        | `opentelemetry-sdk` and an OTLP exporter                              |
+| **Instrumentation**            | Manual – you wrap the operations you care about              | Manual, plus auto-instrumentation for Django, Flask, FastAPI, databases, and more |
+| **Person and session join**    | Automatic inside a PostHog context that identifies them      | Set the attributes yourself                                           |
+
+Pick OpenTelemetry if you already run it, if you use `asyncio` with `AsyncPosthog`, or if you want spans from your web framework and database driver without writing them yourself. Pick `posthog` if PostHog is your only tracing backend and you'd rather instrument a handful of operations by hand than add an exporter pipeline.
+
+Both routes send OTLP spans to the same endpoint, so you can start with one and switch later without losing your traces.
+
+## With `posthog`
+
+> **Minimum version:** `posthog` 7.57.0 or later.
+
 <Steps>
 
-<Step title="Install OpenTelemetry packages" badge="required">
+<Step title="Install posthog" badge="required" titleSize="h3">
+
+```bash
+pip install "posthog>=7.57.0"
+```
+
+</Step>
+
+<Step title="Enable tracing" badge="required" titleSize="h3">
+
+Tracing is off until you set the `traces` option. There's no OpenTelemetry dependency to add.
+
+```python
+from posthog import Posthog
+
+posthog = Posthog(
+    "<ph_project_token>",
+    host="<ph_client_api_host>",
+    traces={
+        "service_name": "checkout-api",
+        "environment": "production",
+    },
+)
+```
+
+| Option                | Description                                                          |
+| --------------------- | -------------------------------------------------------------------- |
+| `service_name`        | Identifies the service in the Tracing UI. Maps to `service.name`      |
+| `service_version`     | Release version. Maps to `service.version`                            |
+| `environment`         | Deployment environment, e.g. `production`. Maps to `deployment.environment` |
+| `resource_attributes` | Additional OpenTelemetry resource attributes                          |
+
+Use your **project token** (the same one you use for capturing events), not a [personal API key](/docs/api#authentication). Tracing works with the synchronous `Posthog` client and the module-level API, not `AsyncPosthog`.
+
+See the [Python SDK docs](/docs/libraries/python#configuration) for batching, queue, and span-limit options, and [`before_span_send`](/docs/libraries/python#scrubbing-and-dropping-spans) for scrubbing attributes or dropping spans before they're exported.
+
+</Step>
+
+<Step title="Create spans" badge="required" titleSize="h3">
+
+`start_span` used in a `with` block makes the span active for the block and ends it when the block exits. Spans started inside the block nest underneath it automatically.
+
+```python
+with posthog.start_span("POST /checkout", kind="server") as span:
+    span.set_attribute("plan", user.plan)
+
+    with posthog.start_span("create-order"):
+        order = create_order(cart)
+    with posthog.start_span("charge-card"):
+        stripe.charge(order)
+```
+
+If an exception escapes the block, the span records it, its status is set to `error`, and the exception propagates unchanged.
+
+Span names should be low-cardinality operation names – `GET /users/:id`, not `GET /users/123`. Variable values belong in attributes.
+
+For work that can't wrap a block, call `start_span` without `with` and call `end()` yourself. See the [Python SDK docs](/docs/libraries/python#distributed-tracing) for the full span API and for continuing a trace across services with W3C `traceparent` headers.
+
+</Step>
+
+<Step title="Link spans to people and sessions" badge="recommended" titleSize="h3">
+
+Spans created inside a PostHog [context](/docs/libraries/python#contexts) that has a distinct ID or session ID carry `posthogDistinctId` and `sessionId` attributes, which is what makes a trace reachable from a person or a Session Replay recording.
+
+```python
+from posthog import new_context, identify_context, set_context_session
+
+with new_context():
+    identify_context(user.id)
+    set_context_session(session_id)
+
+    with posthog.start_span("POST /checkout"):
+        process_order()
+```
+
+If you use Django, the [contexts middleware](/docs/libraries/django#django-contexts-middleware) sets this up for every request, and reads the `X-POSTHOG-DISTINCT-ID` and `X-POSTHOG-SESSION-ID` headers that [`tracing_headers`](/docs/libraries/js/config#tracing-headers) sends from the browser.
+
+</Step>
+
+<Step title="Flush before the process exits" badge="recommended" titleSize="h3">
+
+Queued spans are exported on an interval, even with `sync_mode` on, so a short-lived process can exit before they're sent. Both `flush()` and `shutdown()` export spans that have already ended.
+
+```python
+def handler(event, context):
+    with posthog.start_span("handler"):
+        do_work()
+    posthog.flush()
+```
+
+In a serverless handler, call `flush()` before returning. Call `shutdown()` when the process is genuinely exiting.
+
+</Step>
+
+</Steps>
+
+## With OpenTelemetry
+
+<Steps>
+
+<Step title="Install OpenTelemetry packages" badge="required" titleSize="h3">
 
 For the complete SDK reference, see the [OpenTelemetry Python docs](https://opentelemetry.io/docs/languages/python/).
 
@@ -21,7 +137,7 @@ pip install opentelemetry-sdk opentelemetry-exporter-otlp-proto-http
 
 </Step>
 
-<Step title="Get your project token" badge="required">
+<Step title="Get your project token" badge="required" titleSize="h3">
 
 You'll need your PostHog project token to authenticate trace requests. This is the same token you use for capturing events with the PostHog SDK.
 
@@ -31,7 +147,7 @@ You can find your project token in [Project settings](https://app.posthog.com/se
 
 </Step>
 
-<Step title="Configure the SDK" badge="required">
+<Step title="Configure the SDK" badge="required" titleSize="h3">
 
 Set up the OpenTelemetry SDK to export spans to PostHog over OTLP HTTP.
 
@@ -68,7 +184,7 @@ OTEL_SERVICE_NAME="my-service"
 
 </Step>
 
-<Step title="Create spans" badge="required">
+<Step title="Create spans" badge="required" titleSize="h3">
 
 Wrap the operations you want to measure in spans, and attach attributes for context.
 
@@ -83,11 +199,17 @@ def checkout(order_id, amount):
         return "confirmed"
 ```
 
+To join these spans to a person or a Session Replay recording, set `posthogDistinctId` and `sessionId` attributes yourself, from the `X-POSTHOG-DISTINCT-ID` and `X-POSTHOG-SESSION-ID` headers that [`tracing_headers`](/docs/libraries/js/config#tracing-headers) sends from the browser.
+
 </Step>
 
-<Step title="Test your setup" badge="recommended">
+</Steps>
 
-Once everything is configured, confirm spans are reaching PostHog:
+<Steps>
+
+<Step checkpoint title="Test your setup" subtitle="Confirm spans are reaching PostHog">
+
+Whichever route you took:
 
 1. Run your application and trigger the instrumented code
 2. Open the PostHog Tracing interface
