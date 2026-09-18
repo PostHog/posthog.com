@@ -84,7 +84,7 @@ Scheduled runs follow these rules:
 - Pausing a schedule doesn't cancel a check that is already executing.
 - Manual runs keep their normal behavior and don't take the place of scheduled occurrences.
 
-PostHog rechecks the schedule, subject, feature access, enabled checks, and execution permissions when a scheduled run starts. Automated checks use the permissions of the person who last changed the check definition, with the creator as a fallback. If PostHog can't use either account, the check records an error and runs no SQL.
+PostHog rechecks the schedule, subject, feature access, enabled checks, and execution permissions when a scheduled run starts. Automated `custom_sql` and `relationships` checks use the permissions of the person who last changed the check definition, with the creator as a fallback, because these checks can read beyond their subject. If PostHog can't use either account, the check records an error and runs no SQL. Other check types read only their subject and run with service authorization.
 
 ## Keep schedule settings when checks change
 
