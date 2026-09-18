@@ -13,11 +13,14 @@ interface PopoverProps {
     contentClassName?: string
     sideOffset?: number
     side?: 'top' | 'right' | 'bottom' | 'left'
+    /** Edge to line up with the trigger. Menus usually want `start`. */
     align?: 'start' | 'center' | 'end'
     /** Keeps the arrow clear of the content's rounded corners when align is 'start'/'end' */
     arrowPadding?: number
     open?: boolean
     onOpenChange?: (open: boolean) => void
+    /** Set false for dropdown menus, which conventionally have no pointer. */
+    arrow?: boolean
 }
 
 export const Popover = React.forwardRef<HTMLDivElement, PopoverProps>(
@@ -36,6 +39,7 @@ export const Popover = React.forwardRef<HTMLDivElement, PopoverProps>(
             arrowPadding = 8,
             open,
             onOpenChange,
+            arrow = true,
         },
         ref
     ) => {
