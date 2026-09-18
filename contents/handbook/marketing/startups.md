@@ -94,12 +94,12 @@ Subscribers to [Every](https://every.to/) get:
    If they meet the basic criteria, we automatically apply the correct amount of Stripe credit.
 
 3. **Welcome + merch**
-   Shortly after, they receive an [automated email](https://fly.customer.io/workspaces/127208/journeys/composer/actions/2185)) from <TeamMember name="Joe Martin" photo />, in which we
+   Shortly after, they receive an [automated email](https://fly.customer.io/workspaces/127208/journeys/composer/actions/2185)) from <TeamMember name="Joe Black" photo />, in which we
    - Confirm their acceptance, welcome them and explain perks
    - Provide unique code(s) to claim founder kit(s) from [the merch store](/merch) (orders are fulfilled by Micromerch, merch questions can go in the `#merch` Slack channel)
 
 4. **Milestones**
-   When teams reach 50%, 75%, or 100% of their credit usage — or when credits expire — they receive milestone emails. These come from Customer.io and are managed by <TeamMember name="Joe Martin" photo />.
+   When teams reach 50%, 75%, or 100% of their credit usage — or when credits expire — they receive milestone emails. These come from Customer.io and are managed by <TeamMember name="Joe Black" photo />.
 
 5. **Post-credit**
    Once credit is fully used or expired, teams are moved to a standard paid plan automatically.
