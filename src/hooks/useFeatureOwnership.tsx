@@ -56,12 +56,7 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     },
     'ai-plugin': {
         feature: 'AI plugin (Claude Code, Codex, Cursor, Gemini CLI)',
-        owner: ['self-driving'],
-        notes: (
-            <>
-                <TeamMember name="Georgiy Tarasov" /> is the point owner.
-            </>
-        ),
+        owner: ['context-and-mcp'],
         label: false,
     },
     alerts: {
@@ -110,13 +105,8 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     },
     cli: {
         feature: 'CLI',
-        owner: ['error-tracking', 'self-driving'],
-        notes: (
-            <>
-                <TeamMember name="Chris Volzer" /> is the point owner for agentic use cases. Error tracking owns the
-                symbolication/upload pipeline and symbol/sourcemap upload internals.
-            </>
-        ),
+        owner: ['error-tracking', 'context-and-mcp'],
+        notes: <>Error tracking owns the symbolication/upload pipeline and symbol/sourcemap upload internals.</>,
     },
     'client-libraries': {
         feature: 'Client libraries',
@@ -286,22 +276,12 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     },
     'mcp-server': {
         feature: 'MCP server',
-        owner: ['self-driving'],
-        notes: (
-            <>
-                <TeamMember name="Georgiy Tarasov" /> is the point owner.
-            </>
-        ),
+        owner: ['context-and-mcp'],
         label: 'feature/mcp',
     },
     'mcp-store': {
         feature: 'MCP store',
-        owner: ['self-driving'],
-        notes: (
-            <>
-                <TeamMember name="Chris Volzer" /> is the point owner.
-            </>
-        ),
+        owner: ['context-and-mcp'],
         label: false,
     },
     notebooks: {
@@ -373,12 +353,7 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     },
     'posthog-ai': {
         feature: 'PostHog AI platform',
-        owner: ['self-driving'],
-        notes: (
-            <>
-                <TeamMember name="Georgiy Tarasov" /> is the point owner.
-            </>
-        ),
+        owner: ['posthog-desktop'],
         label: 'feature/posthog-ai',
     },
     'posthog-code': {
@@ -461,6 +436,11 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
         ),
         label: ['feature/libraries', 'feature/mobile'],
     },
+    scouts: {
+        feature: 'Scouts',
+        owner: ['self-driving'],
+        label: false,
+    },
     search: {
         feature: 'Search',
         owner: ['platform-ux'],
@@ -506,14 +486,14 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
         owner: ['growth'],
         label: 'feature/signup',
     },
+    'skills-store': {
+        feature: 'Skills store',
+        owner: ['context-and-mcp'],
+        label: false,
+    },
     'slack-app': {
         feature: 'Slack app',
-        owner: ['self-driving'],
-        notes: (
-            <>
-                <TeamMember name="Vojta Bartoš" /> is the point owner.
-            </>
-        ),
+        owner: ['posthog-desktop'],
         label: 'feature/slack-app',
     },
     settings: {
