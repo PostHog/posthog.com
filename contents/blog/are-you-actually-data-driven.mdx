@@ -1,0 +1,105 @@
+---
+title: Are you data driven, or are you just busy?
+date: 2026-09-17
+author:
+  - natalia-amorim
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/Group_144677_1_0cc192e485.png
+featuredImageType: full
+category: General
+tags:
+  - Culture
+seo:
+  metaTitle: 'Why most corporate reporting is performative'
+  metaDescription: "Most corporate reporting is a productivity placebo. Here's why we skip the MBRs and QBRs at PostHog, and what we do instead."
+---
+
+Most corporate reporting is performative. And I should know, because I used to be very good at it.
+
+Before PostHog, my career was forged in some of the most aggressively corporate environments money can build: a global beer empire, a multinational marketing agency, and a fast-growing, VC-backed scaleup in the travel industry.
+
+I loved these jobs; I learned an enormous amount and worked with people I'd run back into a burning building for.
+
+But a few weeks into joining PostHog, I started experiencing something I've decided to call *PostHog clarity* (we'll see if this survives the editing process).
+
+Here's the best way I can describe it: the realization that a bunch of things I'd accepted as Simply How Work Works™ are, in fact, optional.
+
+Traditional reporting was first in line.
+
+## Busy is not the same as data-driven
+
+There's an easy trap to fall for in the corporate world where "being data-driven" becomes a synonym for "looking very busy building MBRs, QBRs, YTD reviews,[^1] multi-page deep dives, and reports."
+
+It's a productivity placebo.
+
+In the pre-AI dark ages, that meant spending days hand-building Excel sheets, wrangling automations, reconciling data sources, agonizing over which of two functionally identical shades of brand purple to use in the slides, and negotiating with SQL that refreshed wrong for reasons known only to God.
+
+All of this to wow an audience that would glance at my reports for roughly 20 seconds.
+
+At best, they'd get discussed at a review meeting where half the participants were visibly dissociating and the other half were mentally rehearsing the thing they wanted to say the second I stopped talking. Where someone asks a question that was answered, in a large friendly font, on slide four (which they did not read, because nobody read slide four, because nobody reads any of the slides).
+
+At some point an executive would swoop in to deliver a merciful "love this, really powerful stuff 👍" followed by "can you send the deck."
+
+The deck is sent. The deck then descends into a shared drive, into a folder nested inside a folder, never to be opened by human eyes again.
+
+Pats on the back. Rinse and repeat.
+
+## Why is it a trap
+
+The insidious part is that these cycles *feel* productive. They look good on paper.
+
+But strip away the theatricality of it all and look at what's actually left: how much of that time spent building hyper-detailed reports and dissecting the same number in 5 different ways could have gone into the real work?
+
+How much of what got "reported" and "discussed" changed a single decision down the line – which is, you know, the entire point of actually "being data-driven"? I believe the answer is very little.
+
+So who actually benefits from all this? Mostly, your own ego... trust me, I'd know.
+
+Early on at PostHog, I wrote this sprawling, multi-page Notebook – an extremely detailed deep dive into our content and editorial metrics. It took me days, and I was so proud of the storytelling. So when I got feedback to drop the bells and whistles on future iterations, my first instinct was to be a little offended. Didn't they see how much work went into this? How much blood, sweat, and tears I poured into those bloody whistles?
+
+That, it turned out, was precisely the problem. I see that now.
+
+This style of reporting hands you the warm, convincing glow of having accomplished something – the pride of a beautiful artifact with a dopamine hit of "omg look how much work I did and how pretty my deck looks". But every hour I spent dissecting an insight in a million angles no one asked for was an hour I didn't spend focusing on the metrics that actually matter to ME, or doing something that could actually move the needle for my team and for the company.
+
+And if reporting is the retrospective performance (look what happened, here is the story of why) then the business case is its prequel. Instead of dressing up what already happened, you dress up what *might* happen.
+
+You "project ROI". You build forecasting models with assumptions stacked on assumptions stacked on a number you have, on some level, simply made up, because somebody somewhere up the chain needed a figure in a box before they'd let you try a thing that would take roughly a week to just… try.
+
+If you're in a position of leadership, ask yourself: if you need a spreadsheet, a 20-page document, a one-hour call, and a goat sacrificed on a mountaintop before your team can do the thing you hired them to do… why did you hire them in the first place?
+
+### Okay, but I'm not actually anti-reporting (put the pitchforks down)
+
+I can feel someone drafting an angry reply, so let me head it off: I am not saying reporting doesn't matter. It matters. Knowing what's actually happening in your business is a huge part of the job. I'd argue most companies should understand their numbers *more* than they do, not less.
+
+What I'm saying is that the way most orgs go about it is inefficient, and that the ratio of hours-spent to things-actually-learned is, in hindsight, not worth it.
+
+And while I can still appreciate a big, juicy report for what it's worth, I've also developed a deeply protective relationship with my time (and other people's too).
+
+## How we do this differently at PostHog
+
+So what does that actually look like in practice?
+
+- **Our reporting, for the most time, lives in Slack.** There's a channel called `#marketing-reporting` where automated PostHog [reports](/docs/product-analytics/subscriptions) drop daily digests, plus a bigger monthly report on the metrics that actually matter. People react and comment right there, async, whenever they get to it, which means everyone's on top of the data all the time, no handholding required.
+
+Meetings are reserved for things genuinely worth hashing out in real time.
+
+- **The data is self-serve for everyone.** Between the @PostHog [Slack bot](/slack), [PostHog AI](/ai), and our [MCP setup](/docs/model-context-protocol), anyone in the org can interrogate the data directly: ask the question, let the agent pull from every source at once, get the answer, follow up, even open a PR right then and there.
+
+I'm no longer the high priest standing between the org and its own numbers, which is, frankly, a much nicer way to live.
+
+- **We can just do things.** At our most recent offsite, Charles (one of our execs) asked everyone what one thing they'd fight to keep about PostHog's culture. For me, it's this: being the driver. Knowing my judgment is trusted without being wrapped in useless paperwork.
+
+That trust isn't free, of course; it comes bolted directly to ownership. I own the wins as much as I own the failures, and if I ship something and it face-plants, that's on me.
+
+But in exchange I get the thing I've craved my entire career: I get to just do the damn thing. Try it, watch what happens, learn, adjust, go again.
+
+### Try it yourself
+
+If any of this hits a nerve, test it: go find your last three reports (or QBRs or slide decks or whatever artifact) and name the decisions that were made because of each.
+
+If you can't, you already know what those hours were for.
+
+So: make your reporting fast, make it grounded, and make it honest enough that it occasionally has the nerve to tell you you're wrong. Leave the grunt work, like writing boring complex SQL queries, [to the robots](/ai). 
+
+Save the storytelling for the things that truly earn it.
+
+[^1]: If you've been lucky enough to avoid the corporate acronym mines, those are Monthly Business Reviews, their more self-important quarterly cousin, and Year-To-Date reports, respectively, and collectively they make up the liturgical calendar of corporate life.
