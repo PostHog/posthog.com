@@ -4190,19 +4190,19 @@ export const docsMenu = {
                         },
                         {
                             name: 'Authentication',
-                            url: '/docs/settings/authentication/sso',
+                            url: '/docs/settings/sso',
                             children: [
                                 {
                                     name: 'SSO',
-                                    url: '/docs/settings/authentication/sso',
+                                    url: '/docs/settings/sso',
                                 },
                                 {
                                     name: 'SAML',
-                                    url: '/docs/settings/authentication/saml',
+                                    url: '/docs/settings/sso#saml',
                                 },
                                 {
                                     name: 'SCIM',
-                                    url: '/docs/settings/authentication/scim',
+                                    url: '/docs/settings/sso#scim',
                                 },
                                 {
                                     name: 'OIDC',
@@ -4210,7 +4210,7 @@ export const docsMenu = {
                                 },
                                 {
                                     name: 'ID-JAG (XAA)',
-                                    url: '/docs/settings/authentication/id-jag',
+                                    url: '/docs/settings/id-jag',
                                 },
                             ],
                         },
