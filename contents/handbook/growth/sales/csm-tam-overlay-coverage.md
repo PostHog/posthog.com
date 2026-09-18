@@ -60,7 +60,7 @@ The structure outlined on this page should be treated as a guideline & should be
 - TAM and CSM alignment on the account happens in public, not DMs
 
 </details>
-
+<br />
 <details>
 <summary>What bad looks like</summary>
 
@@ -74,6 +74,7 @@ The structure outlined on this page should be treated as a guideline & should be
 - Customer has to explain the same thing twice
 
 </details>
+<br />
 
 # **Where to expect overlap**
 
@@ -231,7 +232,7 @@ A canvas called `[customer_name] - People`, with a table in it:
 
 You're not mapping the whole org, just keeping something easy to refer back to. Add people as you meet them.
 </details>
-
+<br />
 <details>
 <summary>Example: a running task list as a canvas</summary>
 
