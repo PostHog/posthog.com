@@ -199,7 +199,7 @@ This request deletes all events of the person(s) captured before the deletion re
 
 #### Bulk delete response
 
-The [bulk_delete endpoint](/docs/api/persons#post-api-projects-project_id-persons-bulk_delete) returns a `202` once the request is accepted. Person records are not removed during the request. They are queued and deleted in the background, usually within a few minutes, so a successful call reports the matched persons in `persons_queued_for_deletion` and `persons_deleted` stays `0`. Treat `persons_queued_for_deletion` as the success signal, not `persons_deleted`.
+The [bulk_delete endpoint](/docs/api/persons#post-api-projects-project_id-persons-bulk_delete) returns a `202` once the request is accepted. Person records are not removed during the request. They are queued and deleted in the background, usually within a few minutes, so a successful call reports the matched persons in `persons_queued_for_deletion` and `persons_deleted` stays `0`. Treat `persons_queued_for_deletion` as the success signal, not `persons_deleted`. The endpoint reports failures in `deletion_errors` rather than with an error status, so check that list: a `202` with entries means those persons were not deleted and you should retry them.
 
 | Field                            | Type    | Description                                                                                                                                                     |
 | -------------------------------- | ------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- |
