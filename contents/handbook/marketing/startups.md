@@ -153,7 +153,7 @@ Contacts:
 -   Incident.io: Zain Mobarik
 -   Speakeasy: Nolan Di Mare Sullivan
 
-We previously offered DigitalOcean credits ($25k) and a Mintlify partnership, but these were retired in Q2 2025.
+We previously offered DigitalOcean credits ($25k), but this was retired in Q2 2025.
 
 ## Program extensions
 
