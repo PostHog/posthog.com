@@ -74,7 +74,6 @@ The structure outlined on this page should be treated as a guideline & should be
 - Customer has to explain the same thing twice
 
 </details>
-<br />
 
 ## **Where to expect overlap**
 
