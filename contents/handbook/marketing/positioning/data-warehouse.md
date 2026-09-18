@@ -10,7 +10,7 @@ showTitle: true
 
 ## Elevator pitch
 
-The context warehouse brings your product events and business data – Stripe, HubSpot, Salesforce, Zendesk, and 40+ more – into one place, queryable together with SQL (and with PostHog AI to help you write it). Because it's part of PostHog, every piece of data is immediately available to your tools – analytics, experiments, feature flags – and to your agents.
+The context warehouse brings your product events and business data – Stripe, HubSpot, Salesforce, Zendesk, and 40+ more – into one place, queryable together with SQL (and with PostHog AI to help you write it). Because it's part of PostHog, every piece of data is immediately available to your products – analytics, experiments, feature flags – and to your agents.
 
 Snowflake stores data. The context warehouse stores data *and* acts on it.
 

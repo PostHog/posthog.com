@@ -2611,7 +2611,7 @@ export const docsMenu = {
                     url: '/docs/self-driving/setup',
                 },
                 {
-                    name: 'Products',
+                    name: 'Apps',
                 },
                 {
                     name: 'Slack',
@@ -8356,6 +8356,7 @@ export const docsMenu = {
                         { name: 'Other languages', url: '/docs/metrics/installation/other' },
                         { name: 'Docker', url: '/docs/metrics/installation/docker' },
                         { name: 'Kubernetes', url: '/docs/metrics/installation/kubernetes' },
+                        { name: 'Google Cloud', url: '/docs/metrics/installation/google-cloud' },
                     ],
                 },
                 {

@@ -104,7 +104,7 @@ export default function SkillsMobileColumnView({
         ? selectedDepartment?.name ?? 'Skills'
         : selectedProduct?.name ?? 'Skills'
 
-    const secondaryBackTitle = browseMode === 'role' ? 'Roles' : 'Tools'
+    const secondaryBackTitle = browseMode === 'role' ? 'Roles' : 'Products'
 
     if (mobilePanel === 'detail') {
         return (

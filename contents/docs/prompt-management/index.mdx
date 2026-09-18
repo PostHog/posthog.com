@@ -189,7 +189,49 @@ Remove a label with a `DELETE` request to the same URL. You can also manage labe
 
 Moving a label takes effect on the PostHog API within seconds. SDK consumers pick it up when their client-side cache expires, so a moved label is fully live within the SDK cache TTL (5 minutes by default, configurable per fetch).
 
-If your PostHog instance predates prompt labels (self-hosted), the API ignores the `label` parameter and returns the latest version. The SDKs log a warning when this happens on a single fetch, and a bulk fetch with `get_all` / `getAll` fails with an error.
+If your PostHog instance predates prompt labels (self-hosted), the API ignores the `label` parameter and returns the latest version. The SDKs log a warning when this happens on a single fetch, and a bulk fetch by label with `get_all` / `getAll` fails with an error.
+
+## Prompt references (partials)
+
+Share common content across prompts instead of repeating it. Define a block once as its own prompt, then reference it from other prompts. When your app fetches a prompt, PostHog replaces each reference with the referenced prompt's content and returns one assembled prompt, so your code doesn't change.
+
+This is useful for content every prompt needs, like guardrails, tone guidelines, or output format instructions: edit the shared prompt once and every prompt that references it picks up the change.
+
+> Prompt references are rolling out gradually. If fetches return reference tags as plain text, the feature isn't enabled for your organization yet.
+
+### Referencing another prompt
+
+A reference is a tag in the prompt text:
+
+```text
+You are a support assistant.
+
+@@@prompt:name=guardrails|label=production@@@
+
+Answer the question from {{user_name}}.
+```
+
+Every reference names the prompt to include and how to resolve it:
+
+- `@@@prompt:name=guardrails|label=production@@@` follows the label. Moving the `production` label on `guardrails` updates every prompt that references it on the next fetch, without publishing new versions of those prompts.
+- `@@@prompt:name=guardrails|version=3@@@` pins version 3 forever.
+
+In the editor, click **Insert reference** to pick a prompt and a label or version instead of typing the tag. References display as clickable chips under the content, and **Show resolved** shows the assembled content exactly as a fetch returns it.
+
+### How references resolve
+
+Resolution happens on the PostHog API at fetch time:
+
+- The SDK receives one assembled prompt with each tag replaced by the referenced content. No SDK changes are needed.
+- The response includes `resolved_references`: the exact versions that were spliced in. The same information is recorded on the `$llm_prompt_fetched` event, so you can trace which shared content each call actually used.
+- Pass `resolve=false` to get the raw text with the tags, for example for exporting.
+- If a referenced prompt can't be resolved, the fetch fails with an error naming it rather than returning a prompt with missing content.
+
+### Rules and limits
+
+- A referenced prompt must exist, with the named label or version, when you publish. References go one level deep: a prompt that contains references can't itself be referenced.
+- A prompt can reference up to 20 other prompts, and the assembled content counts toward the 1 MB prompt size limit.
+- A prompt that others reference can't be archived, and a label that references follow can't be deleted or moved to a version that would break resolution. The error lists the referencing prompts.
 
 ## Configuration
 
@@ -387,9 +429,9 @@ const config = result.config ?? {}
 // ... your OpenAI/Anthropic call here
 ```
 
-### Fetching all prompts at a label
+### Fetching all prompts in one request
 
-If your app uses many prompts released through a label, fetch them all in one request instead of one request per prompt. Each fetched prompt is stored in the cache, so later `get()` calls with that label are served from cache until the TTL expires:
+If your app uses many prompts, fetch them all in one request instead of one request per prompt. Each fetched prompt is stored in the cache, so later `get()` calls are served from cache until the TTL expires:
 
 <MultiLanguage>
 
@@ -399,6 +441,12 @@ prod_prompts = prompts.get_all(label='production')
 
 # Served from cache, no extra request
 result = prompts.get('support-system-prompt', with_metadata=True, label='production')
+
+# Without a label, one request loads the latest version of every prompt
+all_prompts = prompts.get_all()
+
+# Served from cache, no extra request
+latest = prompts.get('support-system-prompt', with_metadata=True)
 ```
 
 ```typescript
@@ -407,11 +455,19 @@ const prodPrompts = await prompts.getAll({ label: 'production' })
 
 // Served from cache, no extra request
 const result = await prompts.get('support-system-prompt', { label: 'production' })
+
+// Without a label, one request loads the latest version of every prompt
+const allPrompts = await prompts.getAll()
+
+// Served from cache, no extra request
+const latest = await prompts.get('support-system-prompt')
 ```
 
 </MultiLanguage>
 
-The result maps each prompt name to the version the label points to. Prompts that don't carry the label are not included. On a self-hosted PostHog instance that predates label support on the list endpoint, the call fails with an error instead of returning latest versions.
+With a label, the result maps each prompt name to the version the label points to, and prompts that don't carry the label are not included. On a self-hosted PostHog instance that predates label support on the list endpoint, a labeled call fails with an error instead of returning latest versions.
+
+Without a label, every prompt is included at its latest version, the same version a plain `get(name)` returns. This includes prompts whose latest version has never been released through a label.
 
 ## Caching
 
@@ -422,7 +478,7 @@ Prompts are cached on the SDK side to minimize latency and API calls:
 - **Stale-while-revalidate**: If a fetch fails, the cached value is used (even if expired)
 - **Fallback support**: Provide a fallback value that's used when both fetch and cache fail
 - **Separate entries per fetch type**: Latest, pinned-version, and labeled fetches of the same prompt are cached independently. Label moves reach your app when the labeled entry's TTL expires
-- **Bulk warm-up**: `get_all` (Python) and `getAll` (JavaScript) load every prompt at a label in one request and fill the cache for later labeled fetches
+- **Bulk warm-up**: `get_all` (Python) and `getAll` (JavaScript) load every prompt in one request, at a label or at the latest version, and fill the cache for later fetches
 
 ## Linking prompts to traces
 
