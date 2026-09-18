@@ -4,19 +4,16 @@
 
 #### Increase activation - Chris
 
--   Define our ideal customer profile (ICP) for Self-Driving.
--   Let new users start from PostHog web. Run the CLI wizard in a cloud sandbox instead of on the user's machine.
+-   Let new users start from PostHog web. Simplify the onboarding via making it UI-first; run the CLI wizard in a cloud sandbox instead of on the user's machine.
 -   Improve onboarding and empty states so users understand the value and know how to get their first useful report.
 -   Help users discover and adopt more capabilities after their first useful report.
+-   Help users activate later in the user journey when they have data.
 -   Experiment with report access without GitHub. In this experiment, require a repository connection only for work that needs code access.
--   Define metrics for report activation and repeat use. Use an agent starting work on a report as the proposed activation signal, whether through PostHog or another product. Define the eligible organizations, measurement window, and baseline before setting targets.
 
 #### Help committed users turn reports into completed work - Dylan
 
 -   Build an effective, enjoyable UI for understanding reports and managing tasks. Make the next action clear.
 -   Help users find the reports that need attention first, based on urgency, relevance, and work status.
--   Improve report quality across signals and scouts: useful findings, reliable evidence, and clear recommendations, not just better presentation.
--   Make chat the primary way to investigate and act on reports across PostHog interfaces and PostHog AI. Pair it with task views that make ongoing work easy to manage.
 -   Enable users to move from a report to implementation and review in PostHog Desktop.
 -   Make assignment and personalization useful: show what each person owns, what needs their attention, and what matters to them.
 -   Support enterprise use as report volumes and team sizes grow. Keep ownership, work status, and review responsibilities clear.
@@ -25,39 +22,62 @@
 
 -   Provide reliable MCP access to discover reports, inspect evidence, assign work, and update report status.
 -   Let users connect their own agents or build their own UI without losing core report capabilities.
+-   Support PostHog AI for investigating and acting on reports. Provide task views that make ongoing work easy to manage.
 -   Keep report state consistent across PostHog and external tools.
 
-### Pricing
+### Keep report quality high as we scale – Alex, Andy
 
--   Ship pricing
--   Cost controls (Alex)
--   Stay margin-positive
+-   Improve report quality across signals and scouts.
+-   Tailor reports across signals and scouts to our target ICPs and personas.
 
-### Toolbox (Self-Driving harness)
+### Make Self-Driving pricing clear and sustainable
 
--   Orchestration
--   Automations
--   Close the loop with instrumentation and monitoring
--   Self-improving (watcher-scout-on-top-of-scout-to-grade-it-and-improve-the-reports-quality)
+-   Ship new pricing – Olly.
+-   Ship credit-based pricing for Scouts (???).
+-   Figure out better cost controls for customers around different Self-Driving steps (signals, scouts, research, implementation, review, monitoring) – Olly.
+-   Find opportunities for optimizing the margin (flex tier, better suited models, negotiated discounts) – shared.
+-   Switch ReviewHog to usage-based pricing – Alex.
 
-### Customization
+### Close the loop: monitor changes and verify their impact – Mikayla.
 
--   Steerability: act on feedback
--   Ambient customization: notice what users care about and adjust
--   Active customization: give users control through settings, prompts, and skills
+-   Define expected impact and success/failure criteria for implemented changes.
+-   Monitor those changes with PostHog data, report evidence, and trigger follow-up research when criteria aren’t met.
+-   Make reports instrument PostHog in PRs by PostHog/external agents.
+-   Link reports, PRs, and verified outcomes, including PRs created outside PostHog.
 
-### Building features
+### Make Self-Driving customizable for our customers
 
--   Ship features
+-   Let users customize their pipeline with automations in PostHog.
+-   Let users enable ReviewHog for Self-Driving PRs – Alex.
+-   Let users configure personalize scouts (???, check with Andy)
+-   Make Self-Driving act on feedback: use corrections, context layer, report discussions, and dismissal reasons to improve future research, reports, and implementation, so users don’t have to repeat the same instructions (ambient customization and steerability).
+-   Give users control through settings, prompts, and skills (active customization).
+
+### Make Self-Driving self-organize and orchestrate itself
+
+-   Let Self-Driving orchestrate scouts and signal sources.
+-   Let Scouts self-improve themselves (without the need to manually run 10h+ experiments for model/effort change, manually create scouts-to-look-over-scout, and so on) – Alex.
+
+### Experiment with building features
+
+-   Ship an experimental approach for Self-Driving to move beyond bug fixes and deliver new features.
+
+### Product (not finished)
+
+-   Define our ideal customer profile (ICP) for Self-Driving.
+-   Define metrics for report activation and repeat use.
+
 
 ### Side quests (not prioritized)
 
 -   Further ranking improvements: explore more advanced or learned ranking if report ordering prevents users from finding useful work. Basic prioritization remains part of the core report experience.
--   Last mile: ReviewHog and code review
+-   Making implementation better.
+-   Last mile: Getting ReviewHog to the next level (visual reviews, etc)
 -   Autoresearch
 
 ## Anti-goals
 
+-   Negative margin.
 -   Spending overly long amounts of time debating naming or pricing strategies
 -   Trying to seek consensus on decisions - we have to lean on folks owning stuff as we're a big team
 -   Shipping to any interface where we don't control rollout
