@@ -362,7 +362,7 @@ export default function Desktop(): JSX.Element {
                     {
                         type: 'item',
                         children: (
-                            <Link to="/about" state={{ newWindow: true }} contextMenu={false}>
+                            <Link to="/about" state={{ newWindow: true }}>
                                 {translateKo('About PostHog')}
                             </Link>
                         ),
@@ -370,7 +370,7 @@ export default function Desktop(): JSX.Element {
                     {
                         type: 'item',
                         children: (
-                            <Link to="/display-options" state={{ newWindow: true }} contextMenu={false}>
+                            <Link to="/display-options" state={{ newWindow: true }}>
                                 {translateKo('Display options')}
                             </Link>
                         ),

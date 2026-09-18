@@ -252,7 +252,7 @@ function Desktop() {
                     {
                         type: 'item',
                         children: (
-                            <Link to="/about" state={{ newWindow: true }} contextMenu={false}>
+                            <Link to="/about" state={{ newWindow: true }}>
                                 About PostHog
                             </Link>
                         ),
@@ -260,7 +260,7 @@ function Desktop() {
                     {
                         type: 'item',
                         children: (
-                            <Link to="/display-options" state={{ newWindow: true }} contextMenu={false}>
+                            <Link to="/display-options" state={{ newWindow: true }}>
                                 Display options
                             </Link>
                         ),
