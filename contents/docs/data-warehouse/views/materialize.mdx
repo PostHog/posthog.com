@@ -3,9 +3,9 @@ title: Creating materialized views
 sidebar: Docs
 showTitle: true
 availability:
-  free: full
-  selfServe: full
-  enterprise: full
+free: full
+selfServe: full
+enterprise: full
 ---
 
 import { CalloutBox } from 'components/Docs/CalloutBox'
@@ -19,10 +19,10 @@ There are two ways to materialize a view:
 2. **After creation:** For an existing view, go to the [SQL editor](https://app.posthog.com/sql), select the **Materialization** tab below the query, click **Save and materialize**, and give it a name without spaces.
 
 <ProductScreenshot
-  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/Clean_Shot_2025_08_26_at_13_48_10_2x_88dc4ae252.png"
-  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/Clean_Shot_2025_08_26_at_13_48_31_2x_16e9dbe683.png"
-  alt="Materialize view"
-  classes="rounded"
+imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/Clean_Shot_2025_08_26_at_13_48_10_2x_88dc4ae252.png"
+imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/Clean_Shot_2025_08_26_at_13_48_31_2x_16e9dbe683.png"
+alt="Materialize view"
+classes="rounded"
 />
 
 Once materialized, you can query the view like any other table.
@@ -34,10 +34,10 @@ After you create a view, you can also schedule it to be updated at a specific in
 For example, if you sync your billing data to Postgres using a cron job daily and link Postgres as a source in PostHog, you could set up a materialized view with that billing data to resync daily as well.
 
 <ProductScreenshot
-  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1000,c_limit,q_auto,f_auto/Clean_Shot_2025_08_26_at_13_52_13_2x_b0087e4228.png"
-  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/w_1000,c_limit,q_auto,f_auto/Clean_Shot_2025_08_26_at_13_52_28_2x_3b0febbf29.png"
-  alt="Materialize view"
-  classes="rounded"
+imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1000,c_limit,q_auto,f_auto/Clean_Shot_2025_08_26_at_13_52_13_2x_b0087e4228.png"
+imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/w_1000,c_limit,q_auto,f_auto/Clean_Shot_2025_08_26_at_13_52_28_2x_3b0febbf29.png"
+alt="Materialize view"
+classes="rounded"
 />
 
 ### Views that depend on other views
