@@ -44,3 +44,19 @@ Both components use [`RenderInClient`](../../RenderInClient), because flags reso
 The placeholder is the control copy, not `null`. The hero holds the page's only `h1`, and it must be
 in the server-rendered HTML for SEO. The placeholder is invisible, so a visitor in the test variant
 does not see the control copy flash before the assigned variant paints.
+
+## Exposure
+
+Each slot takes its variant from the variant map that `onFeatureFlags` passes, and not from
+`getFeatureFlag`. The distinction matters for the experiment results:
+
+- `getFeatureFlag` records the exposure. If it runs while the flag has no value, for example when
+  an ad-blocker stops the flag request or when the browser holds a flag cache that predates the
+  flag, posthog-js records a `$feature_flag_called` event with an empty response. The experiment
+  then counts a visitor who has both an empty response and a real variant as `$multiple`, and drops
+  that visitor from the results.
+- The variant map carries the same value but records nothing, so a slot can wait for a real value
+  and call `getFeatureFlag` once it has one.
+
+The first real value wins for the rest of the visit. A later flag refresh cannot move a visitor from
+one variant to the other, so one visitor contributes one variant to the results.
