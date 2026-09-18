@@ -85,6 +85,26 @@
     font-display: swap;
 }
 
+/* Hangul for /ko. RoundHog and Squeak have no Korean glyphs, so Hangul rendering otherwise
+   depends on the fonts the device has. The unicode-range keeps these files off pages with no Hangul. */
+@font-face {
+    font-family: 'IBM Plex Sans KR';
+    src: url('~@fontsource/ibm-plex-sans-kr/files/ibm-plex-sans-kr-korean-400-normal.woff2') format('woff2');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+    unicode-range: U+3131-318E, U+AC00-D7A3;
+}
+
+@font-face {
+    font-family: 'IBM Plex Sans KR';
+    src: url('~@fontsource/ibm-plex-sans-kr/files/ibm-plex-sans-kr-korean-700-normal.woff2') format('woff2');
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+    unicode-range: U+3131-318E, U+AC00-D7A3;
+}
+
 /* This is a copy of the Charter fonts which Bitstream contributed to the X consortium. This is the original notice included with the fonts: */
 
 /* (c) Copyright 1989-1992, Bitstream Inc., Cambridge, MA. You are hereby granted permission under all Bitstream propriety rights to use, copy, modify, sublicense, sell, and redistribute the 4 Bitstream Charter (r) Type 1 outline fonts and the 4 Courier Type 1 outline fonts for any purpose and without restriction; provided, that this notice is left intact on all copies of such fonts and that Bitstream's trademark is acknowledged as shown below on all unmodified copies of the 4 Charter Type 1 fonts. BITSTREAM CHARTER is a registered trademark of Bitstream Inc. */
