@@ -27,38 +27,6 @@ List a survey's responses, pull per-survey stats, or fetch project-wide stats ac
 
 For a headless implementation, use the `api` survey type and fetch the active surveys for a user with `posthog.getSurveys()` or `posthog.getActiveMatchingSurveys()`, then render your own UI and capture the response events. See [implementing custom surveys](/docs/surveys/implementing-custom-surveys).
 
-### Subscribe to active matching surveys
-
-Use `posthog.onActiveMatchingSurveysChanged()` when your UI must stay in sync after the initial survey lookup. The callback receives the current matching surveys and runs again when a supported eligibility change produces a different result.
-
-```js-web
-const unsubscribe = posthog.onActiveMatchingSurveysChanged((surveys, context) => {
-    if (context?.isLoaded === false) {
-        console.error('Could not load surveys:', context.error)
-        return
-    }
-
-    renderSurveys(surveys)
-})
-
-// Call this when the component or view is removed.
-unsubscribe()
-```
-
-The subscription sends its initial result when it is available. It suppresses unchanged results and stays active after recoverable load errors. A successful empty result has `context.isLoaded === true`; a load failure has `context.isLoaded === false` and an `error` value.
-
-The subscription re-evaluates matching surveys after supported updates, including:
-
-- Event or action activation, cancellation, and consumption, such as `survey dismissed` and `survey sent`.
-- Survey definition refreshes.
-- Feature flag updates.
-- Captured `$pageview` events that can change URL-based conditions.
-- Survey state changes from SDK operations such as reset or marking a survey as seen.
-
-For single-page apps, set `capture_pageview: 'history_change'` to let route changes produce pageviews automatically. If your application does not capture pageviews automatically, capture `$pageview` after navigation when URL-based survey conditions must be re-evaluated.
-
-The subscription does not watch arbitrary DOM mutations or the passage of time. Selector, device, and wait-period conditions are re-evaluated when one of the supported updates above occurs.
-
 ## Authentication
 
 Use a [personal API key](/docs/api#authentication) with the scopes above, passed as a bearer token:
