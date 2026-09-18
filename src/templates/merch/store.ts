@@ -1,11 +1,12 @@
+import { useEffect } from 'react'
 import { create } from 'zustand'
 import { persist, subscribeWithSelector } from 'zustand/middleware'
-import { getCartQuery } from '../../lib/shopify'
-import type { Cart, CartItem, ShopifyProductVariant } from './types'
+import type { CartItem, ShopifyProductVariant } from './types'
 
 type CartItems = CartItem[] | []
 
 interface CartStore {
+    hasHydrated: boolean
     cartId: string | null
     setCartId: (id: string) => void
     isOpen: boolean
@@ -26,6 +27,7 @@ interface CartStore {
 export const useCartStore = create<CartStore>()(
     persist(
         subscribeWithSelector((set, get) => ({
+            hasHydrated: false,
             cartId: null,
             setCartId: (id: string) => set({ cartId: id }),
             isOpen: false,
@@ -64,9 +66,43 @@ export const useCartStore = create<CartStore>()(
         })),
         {
             name: 'merch-cart',
+            // Local storage is read on the first client effect, not during render. See useCartStoreHydration.
+            skipHydration: true,
+            // the cart contents outlive a reload, but the panel and the hydration flag do not
+            partialize: (state) => ({
+                cartId: state.cartId,
+                cartItems: state.cartItems,
+                count: state.count,
+                subtotal: state.subtotal,
+                discountCode: state.discountCode,
+                checkoutUrl: state.checkoutUrl,
+            }),
+            onRehydrateStorage: () => () => useCartStore.setState({ hasHydrated: true }),
         }
     )
 )
+
+/**
+ * Read the cart from local storage after React hydrates the page.
+ *
+ * The server cannot read local storage, so it renders an empty cart. If the client
+ * read the cart during its first render instead, the two trees would not match,
+ * React would discard the server tree and render the whole page again, and every
+ * piece of component state would go back to its default value.
+ *
+ * Call this hook in each component that shows persisted cart state.
+ */
+export function useCartStoreHydration(): boolean {
+    const hasHydrated = useCartStore((state) => state.hasHydrated)
+
+    useEffect(() => {
+        if (!useCartStore.persist.hasHydrated()) {
+            useCartStore.persist.rehydrate()
+        }
+    }, [])
+
+    return hasHydrated
+}
 
 function updateCart(variant: ShopifyProductVariant, quantity: number, cartItems: CartItem[]): CartItem[] {
     const cartItem = { ...variant, count: quantity || 1 }
@@ -102,22 +138,3 @@ const unsubCartItemsChange = useCartStore.subscribe(
         useCartStore.setState({ subtotal, count: cartCount, cartId: null })
     }
 )
-
-/**
- * On a full reload, grab the initial cart
- */
-const initialFire = useCartStore.subscribe(
-    (state) => state.cartId,
-    async (cartId) => {
-        if (cartId) {
-            const cart = (await getCartQuery(cartId)) as Cart
-            if (!cart) {
-                useCartStore.getState().removeAll()
-            }
-        }
-    },
-    {
-        fireImmediately: true,
-    }
-)
-initialFire()

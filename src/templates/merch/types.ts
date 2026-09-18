@@ -292,8 +292,10 @@ export type CartResponse = {
 }
 
 export type CartCreateReponse = {
-    cartCreate: Cart
-    userErrors?: CreateCartResponseError
+    cartCreate: {
+        cart: Cart | null
+        userErrors?: CreateCartResponseError['userErrors']
+    }
 }
 
 /**

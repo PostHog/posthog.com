@@ -1,4 +1,4 @@
-import type { CartCreateReponse, CartResponse, CreateCartVariables } from 'templates/merch/types'
+import type { Cart, CartCreateReponse, CartResponse, CreateCartVariables } from 'templates/merch/types'
 
 type ShopifyHeaders = {
     Accept: string
@@ -86,6 +86,11 @@ export const CREATE_CART = `
                     }
                 }
             }
+            userErrors {
+                code
+                field
+                message
+            }
         }
     }
 `
@@ -150,65 +155,55 @@ export const GET_CART = `
   }
   `
 
-export const createCartQuery = (variables: CreateCartVariables): Promise<CartCreateReponse | void> =>
-    fetch(shopifyStorefrontUrl, {
+type StorefrontResponse<TData> = {
+    data?: TData
+    errors?: { message: string }[]
+}
+
+/**
+ * Post a document to the Storefront API. Rejects if the request fails or if the
+ * API reports an error, so the caller can tell the shopper what went wrong.
+ */
+async function postToStorefront<TData>(query: string, variables?: Record<string, unknown>): Promise<TData> {
+    const response = await fetch(shopifyStorefrontUrl, {
         method: 'POST',
         headers: shopifyHeaders,
-        body: JSON.stringify({
-            query: CREATE_CART,
-            variables,
-        }),
+        body: JSON.stringify({ query, variables }),
     })
-        .then((res) => {
-            if (!res.ok) {
-                throw new Error(`HTTP error! Status: ${res.status}`)
-            }
-            return res.json()
-        })
-        .then((res) => {
-            const cartCreate = res.data as CartCreateReponse
-            if (cartCreate.userErrors) {
-                const error = new Error(res.userErrors[0].message)
-                error.name = 'Shopify ApiError'
 
-                throw error
-            }
+    if (!response.ok) {
+        throw new Error(`Shopify request failed with status ${response.status}`)
+    }
 
-            return cartCreate.cartCreate.cart
-        })
-        .catch((e) => {
-            if (e.name === 'ApiError') {
-                // API error
-            } else {
-                // Fetch request or Some other error
-            }
-        })
+    const { data, errors } = (await response.json()) as StorefrontResponse<TData>
 
-export const getCartQuery = async (id) =>
-    await fetch(shopifyStorefrontUrl, {
-        method: 'POST',
-        headers: shopifyHeaders,
-        body: JSON.stringify({
-            query: GET_CART,
-            variables: { id },
-        }),
-    })
-        .then((res) => {
-            if (!res.ok) {
-                throw new Error(`HTTP error! Status: ${res.status}`)
-            }
-            return res.json()
-        })
-        .then((res) => {
-            const cart = res.data as CartResponse
-            if (cart?.userErrors) {
-                const error = new Error(res.userErrors[0].message)
-                error.name = 'Shopify ApiError'
+    if (errors?.length) {
+        throw new Error(errors[0].message)
+    }
 
-                throw error
-            }
-            return cart.cart
-        })
-        .catch((e) => {
-            throw new Error(e)
-        })
+    if (!data) {
+        throw new Error('Shopify returned no data')
+    }
+
+    return data
+}
+
+export const createCartQuery = async (variables: CreateCartVariables): Promise<Cart> => {
+    const { cartCreate } = await postToStorefront<CartCreateReponse>(CREATE_CART, variables)
+
+    if (cartCreate.userErrors?.length) {
+        throw new Error(cartCreate.userErrors[0].message)
+    }
+
+    if (!cartCreate.cart) {
+        throw new Error('Shopify returned no cart')
+    }
+
+    return cartCreate.cart
+}
+
+export const getCartQuery = async (id: string): Promise<Cart | null> => {
+    const { cart } = await postToStorefront<CartResponse>(GET_CART, { id })
+
+    return cart
+}

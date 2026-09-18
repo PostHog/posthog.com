@@ -26,7 +26,7 @@ import { useUser } from 'hooks/useUser'
 import { useApp } from '../../context/App'
 import { useToast } from '../../context/Toast'
 import Link from 'components/Link'
-import { useCartStore } from '../../templates/merch/store'
+import { useCartStore, useCartStoreHydration } from '../../templates/merch/store'
 import { exportToPdf as exportPresentationToPdf } from '../../lib/exportToPdf'
 import Loading from 'components/Loading'
 import { Popover } from 'components/RadixUI/Popover'
@@ -116,6 +116,9 @@ export default function HeaderBar({
     const [animateCartCount, setAnimateCartCount] = useState(false)
     const [isExportingPdf, setIsExportingPdf] = useState(false)
     const count = useCartStore((state) => state.count)
+    // the count stays null until the cart is read from local storage, which keeps the header bar
+    // identical to the server HTML while React hydrates the page
+    useCartStoreHydration()
 
     // Animate cart count when it changes
     useEffect(() => {
