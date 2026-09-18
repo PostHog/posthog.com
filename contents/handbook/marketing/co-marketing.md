@@ -55,7 +55,6 @@ If a customer is a logo we’d proudly show on the site, represents [who we buil
 
 Examples:
 - [PostHog + Supabase](/customers/supabase)
-- [PostHog + Mintlify](/customers/mintlify)
 - [PostHog + Lovable](/customers/lovable)
 
 Social media co-marketing for case studies naturally follows since most companies are excited to have their story featured. It's usually worth raising an [art request](/handbook/brand/art-requests) for these opportunities.
@@ -94,7 +93,6 @@ We maintain a <PrivateLink url="https://docs.google.com/spreadsheets/d/1LSk0J6TW
 [Events](/handbook/marketing/events) are a great place to co-market and vary from intimate gatherings to large scale meetups. These are higher effort and don’t usually sit under product marketing alone. Tag [Daniel](/community/profiles/34023) early – he’s the best judge of what events and co-sponsorships will actually land.
 
 Examples:
-- [We buy AI YC](https://luma.com/ztg6sjun) pitch event with Mintlify (and others)
 - [MCP Builder breakfast](https://luma.com/f9vnfsii) with Fiberplane
 - [Building with (and for) AI](https://luma.com/hxn3j38l) event with Vercel and Profound
 
