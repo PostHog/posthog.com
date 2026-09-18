@@ -21,7 +21,7 @@ Seriously, though, there are too many ways to count, but bad hiring is one obvio
 
 Here's what's new on PostHog.com:
 
-- [Myths (and truths) I've learned from 10 years of startup hiring](https://posthog.com/blog/early-stage-startup-hiring-strategy) by Charles Cook
+- [Myths (and truths) I've learned from 10 years of startup hiring](/founders/early-stage-startup-hiring-strategy) by Charles Cook
  
 - [Should startups hire product engineers, product managers, or both?](https://posthog.com/blog/product-engineer-vs-product-manager) by Ian Vanagas
  
@@ -31,7 +31,7 @@ Words by Andy Vandervell, who just trains AIs to write now.
 
 ## Why do startups fail? (or why "product-market fit" doesn't guarantee success)
 
-In November, Adam Smith, the founder of AI-assisted programming startup Kite, [announced they were closing](https://www.kite.com/blog/product/kite-is-saying-farewell/) despite having reached [product-market fit](/blog/product-market-fit-game) and 500k monthly-active developers.
+In November, Adam Smith, the founder of AI-assisted programming startup Kite, [announced they were closing](https://www.kite.com/blog/product/kite-is-saying-farewell/) despite having reached [product-market fit](/founders/product-market-fit-game) and 500k monthly-active developers.
 
 ![kite](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/hogmail/kit-farewell.png)
 

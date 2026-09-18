@@ -42,6 +42,7 @@ If this is a new contract for an existing customer, you will need to add their e
 **Do not proceed to the next steps until invoice is finalized.** Any credits added to an account gets automatically applied to outstanding invoices. If you add credits before payment is completed, the credits will settle any existing debts, and customer will not be able to make a payment.
 
 > For customers using Bill.com for payment, when they submit the invoice to the Bill platform it strips out the Stripe virtual account details.  You'll need to ask them to follow the instructions in this [help article](https://help.bill.com/direct/s/article/360000009246) to set the correct bank details for us in the Bill.com platform. The account details is provided in the invoice sent over. They'll need to make sure they use the original contact information and not your email if you're set as signer on the contract so we can process payments in the right account.  In case they don't do this, we have a default customer account on [Stripe](https://dashboard.stripe.com/customers/cus_Rqm805zKTuxdqU) which the money will go to.  If this happens, mark their invoice as paid manually and then generate a new one against our default customer account to use the funds.
+> **How do I know if a customer is using Bill.com for payment?** You should try and get ahead of this by asking your customer whether they use Bill.com or ask to be connected to their finance team if unsure. Bill.com invoice notifications are sent to sales@posthog.com from account-services@inform.bill.com. The [sales Google group](https://groups.google.com/a/posthog.com/g/sales) archives them, so you can search the archive directly for subject lines like "Acme Inc sent you a payment" or "A payment from Acme Inc should arrive shortly". Note any that match accounts in your book.
 
 ###### Step 4: Apply credits
 - Make sure that the payment is fully processed to avoid any automatic deductions.
@@ -103,7 +104,21 @@ At this point they will be notified about this automatically via the billing ser
 
 #### Repeated failed payments
 
-After three consecutive missed payment periods, the customer must provide advance payment covering three months of service based on their typical usage before account access is restored. If the customer disagrees or fails to make the advance payment, the account may be reverted to the Free Tier. 
+A customer has *repeated* failed payments when payments have failed across three or more consecutive billing periods, or when a second late payment occurs within six months of a previous one that reached Step 3 (suspended access).
+
+At this point, catching up on the overdue balance isn't enough. We need payment predictability before restoring access, otherwise we're back here next month.
+
+**Step 1: collect the overdue balance.** Access stays suspended until the outstanding invoice is paid. Send the payment link and the invoice PDF from the Stripe invoice page.
+
+**Step 2: require a contract pre-commitment before restoring access.** Move the customer off pay-as-you-go onto a contract with payment upfront. The account's sales contact can size the commitment with the customer to base it on their trailing usage and what's realistic for them.
+
+Make it explicit in your outreach that if we can't agree a pre-commitment, the account will be downgraded to the Free tier and subject to that tier's usage limits.
+
+**Step 3: set a drop dead date.** Once the overdue invoice is paid, give the customer a specific calendar date roughly 4 weeks out to get the contract signed or move to Free. Put the date in writing. If it passes with no commitment, downgrade.
+
+> Restoring access before the contract is signed is a judgement call for the account owner, but set and communicate the drop-dead date at the same time.
+
+RevOps will follow the routine [upfront payment setup](#upfront-payment-setup) so the invoice is sent, credits are applied and the subscription is scheduled correctly.
 
 ### India-based customers
 - GST: India-based customers are required to provide their GSTIN when signing up. The customer is liable to manage all GST under the Reverse Charge Mechanism.
@@ -196,7 +211,7 @@ You can manually change the plan for a customer by updating the `plans_map` in t
 
 ### Paid features for employee side projects
 
-Employees can get access to paid features (like Boost) on personal or side projects. Ask in #team-billing with your organization ID and someone can set this up. There are two approaches for platform add-ons:
+Employees can get access to paid features (like Boost) on personal or side projects. Ask in #team-billing with your organization ID and someone can set this up. There are two approaches for platform packages:
 
 1. **Special billing-only plan**: Add a plan like `boost-addon-20250602` to the customer's `plans_map` in the billing admin. These plans exist only in the billing system and grant features without a Stripe subscription.
 

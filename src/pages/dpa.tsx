@@ -172,22 +172,19 @@ function DpaGenerator() {
                         <Link to={APP_LEGAL_URL} external className="font-semibold underline">
                             app.posthog.com/legal
                         </Link>{' '}
-                        inside your PostHog organization. That's where you generate, sign, and download a real, valid
-                        DPA — countersigned by us.
+                        inside your PostHog organization. That's where you generate a real, valid DPA — countersigned by
+                        us.
+                    </p>
+                    <p className="text-sm">
+                        It's self-serve and takes a couple of minutes. Nobody at PostHog has to approve it — you add
+                        your company details, we generate the agreement with our signature already on it, and PandaDoc
+                        emails it to you to sign. It's effective the moment you do. Any plan, including the free one.
                     </p>
                     <p className="text-sm">
                         The version below is the exact same agreement, just rendered here for your reading pleasure (and
                         choice of font). It's not binding on its own — only the one you generate and countersign through
                         the app counts.
                     </p>
-                    <p className="text-sm">
-                        Need changes to this DPA?{' '}
-                        <Link to="/talk-to-a-human" state={{ newWindow: true }} className="font-semibold underline">
-                            Contact us
-                        </Link>{' '}
-                        first.
-                    </p>
-
                     <Link
                         to={APP_LEGAL_URL}
                         external
@@ -263,6 +260,21 @@ function DpaGenerator() {
                                 <br />
                                 <div className="block text-sm opacity-75">Sing along while staying compliant</div>
                             </li>
+                            <li className="pl-7 relative">
+                                <input
+                                    type="radio"
+                                    id="genz"
+                                    name="mode"
+                                    value="genz"
+                                    className="absolute left-1 top-1"
+                                    onChange={handleModeChange}
+                                />
+                                <label className="font-semibold" htmlFor="genz">
+                                    Gen Z slang edition
+                                </label>
+                                <br />
+                                <div className="block text-sm opacity-75">Compliance, but make it bestie energy</div>
+                            </li>
                         </ul>
                     </div>
                 </div>
@@ -282,9 +294,10 @@ function DpaGenerator() {
                         </Link>
                     </div>
 
-                    <div className="bg-yellow/25 py-3 px-4 text-sm -mx-4 @3xl:-mx-8 mt-0 border-b border-light dark:text-black">
+                    <div className="bg-yellow/25 py-3 px-4 text-sm text-center -mx-4 @3xl:-mx-8 mt-0 border-b border-light dark:text-black">
                         <strong>Heads up:</strong> This is a preview. To get a countersigned, valid DPA, generate it
-                        inside your PostHog organization at{' '}
+                        inside your PostHog organization. It's self-serve, and we've already signed it before it reaches
+                        you, so all that's left is your signature. Go to{' '}
                         <a
                             href={APP_LEGAL_URL}
                             target="_blank"
@@ -672,6 +685,94 @@ function DpaGenerator() {
                         </div>
                     </div>
 
+                    <div className={`${mode === 'genz' ? 'block' : 'hidden'} [&>p]:text-[15px] pb-4`}>
+                        <div className="bg-yellow/25 py-4 px-8 text-sm text-center -mx-8 border-t border-light">
+                            <strong>Notice:</strong> Vibes-only translation, bestie. Not legally binding on its own —
+                            you still need the real one from{' '}
+                            <a
+                                href={APP_LEGAL_URL}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="underline font-semibold"
+                            >
+                                app.posthog.com/legal
+                            </a>{' '}
+                            for it to slap in court.
+                        </div>
+
+                        <div className="@container mx-auto max-w-3xl">
+                            <h2 className="pt-8 pb-0 mt-0">The DPA, but make it Gen Z 💅</h2>
+
+                            <p>
+                                okay bestie, let's get into it. this is the part where you and PostHog pinky-promise
+                                about your users' data. no cap, it's giving compliance era.
+                            </p>
+
+                            <h3>The vibe check (who's who)</h3>
+                            <p>
+                                <strong>You</strong> = the controller. main character energy, you call the shots on
+                                whose data gets processed and why.
+                                <br />
+                                <strong>Us (PostHog)</strong> = the processor. your ride-or-die bestie who handles the
+                                data exactly how you said, periodt.
+                            </p>
+
+                            <h3>The tea (what we're actually agreeing to)</h3>
+                            <p>
+                                You're trusting us with personal data, and we're not gonna do anything sus with it. We
+                                only process it for the reasons you tell us to, full stop. No side quests, no sneaky
+                                rebranding it as "ours." That'd be lowkey illegal and highkey not our vibe.
+                            </p>
+
+                            <h3>Security (because we're not mid)</h3>
+                            <p>
+                                We keep your data locked down: encryption in transit and at rest, access controls,
+                                regular security reviews, the whole rizz. SOC 2 and HIPAA — we understood the
+                                assignment.
+                            </p>
+
+                            <h3>If something goes sideways (the drama)</h3>
+                            <p>
+                                If there's a breach we'll let you know without delay. We're not gonna ghost you. You'll
+                                hear from us faster than a group chat finds out about a breakup, and we'll give you
+                                everything you need to handle your own notification duties.
+                            </p>
+
+                            <h3>Sub-processors (the supporting cast)</h3>
+                            <p>
+                                We work with a small lineup of other companies (cloud hosting, the usual suspects) to
+                                help run the platform. They're vetted, they're on the same vibe re: data protection, and
+                                we'll keep you posted if anyone new joins the cast.
+                            </p>
+
+                            <h3>International transfers (passport era)</h3>
+                            <p>
+                                If your data needs to cross borders, we use the proper Standard Contractual Clauses bc
+                                we're not trying to catch a regulator's smoke. EU to US? Bet. UK addendum? Slay. Swiss
+                                FDPA? We got that covered too.
+                            </p>
+
+                            <h3>Your rights, bestie</h3>
+                            <p>
+                                You can audit us, you can ask us to delete or return data, and you can ask us to help
+                                you answer data subject requests. Just hit us up — we'll cooperate because we have
+                                literally nothing to hide. It's giving open book.
+                            </p>
+
+                            <h3>When this ends (it's giving sunset)</h3>
+                            <p>
+                                When you stop using PostHog, we'll delete or return your data per your instructions. No
+                                keeping screenshots, no clinging to receipts. We move on like grown adults.
+                            </p>
+
+                            <p className="font-bold">Cool? Cool. Sign below and we're locked in 💯</p>
+
+                            <div className="pb-16">
+                                <SignatureFields />
+                            </div>
+                        </div>
+                    </div>
+
                     <div
                         className={`${mode === 'pretty' || mode === 'lawyer' ? 'block' : 'hidden'} ${
                             mode === 'pretty' && ''
@@ -684,7 +785,7 @@ function DpaGenerator() {
                                 mode === 'lawyer' && 'hidden'
                             }`}
                         >
-                            <img width={157} src="/brand/posthog-logo.svg" />
+                            <img src="/brand/posthog-logo.svg" alt="PostHog" />
                         </div>
                         <h2 className="!text-2xl">Data Processing Agreement — PostHog Inc.</h2>
                         <p>
@@ -1121,7 +1222,7 @@ function DpaGenerator() {
                             <p>
                                 10.3. <strong>Data Privacy Framework.</strong> Processor confirms that it participates
                                 in the EU-US Data Privacy Framework, the UK Extension to this Framework and the
-                                Swiss-U.S. Data Privacy Framework (together, the "<strong>DPF</strong>"). The Supplier
+                                Swiss-U.S. Data Privacy Framework (together, the "<strong>DPF</strong>"). The Processor
                                 undertakes to maintain its self-certification to the DPF; to notify Company without
                                 undue delay if Processor determines that it will cease to self-certify to the DPF; and
                                 to notify Company immediately if Processor's participation in the DPF is otherwise

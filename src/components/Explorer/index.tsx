@@ -10,8 +10,6 @@ import { Accordion } from '../RadixUI/Accordion'
 import { useWindow } from '../../context/Window'
 import { getProseClasses } from '../../constants'
 import AddressBar from 'components/OSChrome/AddressBar'
-import { useApp } from '../../context/App'
-
 interface AccordionItem {
     title: string
     content: React.ReactNode
@@ -26,6 +24,8 @@ interface ExplorerProps {
     rightSidebarContent?: React.ReactNode | AccordionItem[]
     children?: React.ReactNode
     fullScreen?: boolean
+    /** Let the standard app-window background show through the content. */
+    transparent?: boolean
     showTitle?: boolean
     padding?: boolean
     headerBarOptions?: string[]
@@ -40,6 +40,7 @@ interface ExplorerProps {
     onSearch?: (query: string) => void
     viewportClasses?: string
     showAddressBar?: boolean
+    className?: string
 }
 
 const SidebarContent = ({ content }: { content: React.ReactNode | AccordionItem[] }): JSX.Element | null => {
@@ -80,6 +81,7 @@ export default function Explorer({
     rightSidebarContent,
     children,
     fullScreen = false,
+    transparent = false,
     showTitle = true,
     padding = true,
     headerBarOptions,
@@ -94,8 +96,8 @@ export default function Explorer({
     onSearch,
     viewportClasses = '',
     showAddressBar = true,
+    className = '',
 }: ExplorerProps) {
-    const { websiteMode } = useApp()
     const { appWindow } = useWindow()
     const currentPath = appWindow?.path?.replace(/^\//, '') || '' // Remove leading slash, default to empty string
     const searchContainerRef = useRef<HTMLDivElement>(null)
@@ -140,32 +142,28 @@ export default function Explorer({
     }, [windowWidth, viewportClasses])
 
     return (
-        <div className="@container w-full h-full flex flex-col min-h-1">
-            {(!fullScreen || !websiteMode) && (
-                <>
-                    <HeaderBar
-                        {...getHeaderBarProps()}
-                        searchContentRef={searchContainerRef}
-                        rightActionButtons={rightActionButtons}
-                        onSearch={onSearch}
-                        className={!showAddressBar ? 'border-b border-primary' : ''}
+        <div className={`@container w-full h-full flex flex-col min-h-1 ${className}`}>
+            <>
+                <HeaderBar
+                    {...getHeaderBarProps()}
+                    searchContentRef={searchContainerRef}
+                    rightActionButtons={rightActionButtons}
+                    onSearch={onSearch}
+                    className={!showAddressBar ? 'border-b border-primary' : ''}
+                />
+                {showAddressBar && (
+                    <AddressBar
+                        selectOptions={selectOptions}
+                        currentPath={currentPath}
+                        handleValueChange={handleValueChange}
+                        selectedCategory={selectedCategory}
                     />
-                    {showAddressBar && (
-                        <AddressBar
-                            selectOptions={selectOptions}
-                            currentPath={currentPath}
-                            handleValueChange={handleValueChange}
-                            selectedCategory={selectedCategory}
-                        />
-                    )}
-                </>
-            )}
+                )}
+            </>
             <ContentWrapper>
                 <div
                     data-scheme="secondary"
-                    className={`flex flex-col @3xl:flex-row-reverse flex-grow min-h-0 ${fullScreen ? ' ' : 'h-full'} ${
-                        websiteMode && 'max-w-7xl'
-                    }`}
+                    className={`flex flex-col @3xl:flex-row-reverse flex-grow min-h-0 ${fullScreen ? ' ' : 'h-full'}`}
                 >
                     {/* Static right sidebar content (original) */}
                     {rightSidebarContent && (
@@ -209,7 +207,7 @@ export default function Explorer({
                     <main
                         data-app="Explorer"
                         data-scheme="primary"
-                        className="@container flex-1 bg-primary relative h-full"
+                        className={`@container flex-1 relative h-full ${transparent ? '' : 'bg-primary'}`}
                     >
                         {fullScreen ? (
                             children
@@ -239,9 +237,7 @@ export default function Explorer({
                     {leftSidebarContent && (
                         <aside
                             data-scheme="secondary"
-                            className={`@3xl:w-64 bg-primary border-t @3xl:border-t-0 @3xl:border-r border-primary prose prose-sm dark:prose-invert ${
-                                websiteMode ? '@3xl:h-[calc(100vh-48px)]' : 'h-full'
-                            }`}
+                            className="@3xl:w-64 bg-primary border-t @3xl:border-t-0 @3xl:border-r border-primary prose prose-sm dark:prose-invert h-full"
                         >
                             <ScrollArea className="p-2">
                                 <div className="space-y-3">

@@ -1,0 +1,57 @@
+---
+title: OpenCode AI Observability installation
+platformLabel: OpenCode
+platformIconName: IconCode
+showStepsToc: true
+tableOfContents: [
+    {
+        url: 'prerequisites',
+        value: 'Prerequisites',
+        depth: 1,
+    },
+    {
+        url: 'install-the-plugin',
+        value: 'Install the plugin',
+        depth: 1,
+    },
+    {
+        url: 'configure-posthog',
+        value: 'Configure PostHog',
+        depth: 1,
+    },
+    {
+        url: 'run-a-session',
+        value: 'Run a session',
+        depth: 1,
+    },
+    {
+        url: 'configuration-options',
+        value: 'Configuration options',
+        depth: 1,
+    },
+    {
+        url: 'verify-traces-and-generations',
+        value: 'Verify traces and generations',
+        depth: 1,
+    },
+    {
+        url: 'next-steps',
+        value: 'Next steps',
+        depth: 1,
+    },
+]
+---
+
+<!--
+This page imports shared onboarding content from the main PostHog repo.
+Source: https://github.com/PostHog/posthog/blob/master/docs/onboarding/ai-observability/opencode.tsx
+See the docs runbook for more info: https://posthog.com/handbook/wizard-and-docs/onboarding-docs
+-->
+
+import { OpenCodeInstallation } from 'onboarding/ai-observability/opencode.tsx'
+import { OnboardingContentWrapper } from 'components/Docs/OnboardingContentWrapper'
+import { addNextStepsStep } from './_snippets/shared-helpers.tsx'
+
+<OnboardingContentWrapper>
+    <OpenCodeInstallation modifySteps={addNextStepsStep} />
+</OnboardingContentWrapper>

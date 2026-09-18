@@ -29,7 +29,7 @@ Our latest goals can be found on the <SmallTeam slug="content" /> page. You can 
 
 ## Who is our audience?
 
-It should be the same as [who we are building for](/handbook/who-we-are-building-for). Specifically:
+It should be the same as [who we are building for](/handbook/who-we-build-for). Specifically:
 
 - **Product engineers:** Software engineers who want to improve their product skills, understand users, and build successful new products.
 
@@ -41,15 +41,15 @@ It should be the same as [who we are building for](/handbook/who-we-are-building
 
 ## What kind of content do we produce?
 
-1. **Opinionated advice:** Articles where we offer a strong point of view on a topic that impacts our audience. Examples include [The Product-Market Fit Game](/founders/product-market-fit-game), [Burning money on paid ads for a dev tool](/founders/dev-marketing-paid-ads), and [How to design your company for speed](https://newsletter.posthog.com/p/how-to-design-your-company-for-speed) 
+1. **Opinionated advice:** Articles where we offer a strong point of view on a topic that impacts our audience. Examples include [The Product-Market Fit Game](/founders/product-market-fit-game), [Burning money on paid ads for a dev tool](/founders/dev-marketing-paid-ads), and [How to design your company for speed](https://newsletter.posthog.com/p/how-to-design-your-company-for-speed).
 
-2. **High intent SEO comparisons:** Articles for people actively considering PostHog, or searching for a product like ours. Examples include comparisons between [PostHog and competing products](/blog/tags/comparisons), guides on the [best alternatives to popular tools](/blog/best-heap-alternatives), and guides to [most popular tools in our segments](/blog/best-open-source-ab-testing-tools).
+2. **High intent SEO comparisons:** Articles for people actively considering PostHog, or searching for a product like ours. Examples include comparisons between [PostHog and competing products](/compare), guides on the [best alternatives to popular tools](/compare/best-heap-alternatives), and guides to [most popular tools in our segments](/blog/best-open-source-ab-testing-tools).
 
 3. **Helpful evergreen guides:** Articles on topics of interest to our users and potential users. They generally target popular search terms. Examples include [How to measure product-market fit](/founders/measure-product-market-fit), [The AARRR pirate funnel explained](/product-engineers/aarrr-pirate-funnel), and [8 annoying A/B testing mistakes every engineer should know](/product-engineers/ab-testing-mistakes).
 
 4. **Engineering tutorials:** Guides on how to do specific things in PostHog. These can be for existing PostHog users, or aimed at potential users who are trying to solve a specific problem. Some, like [How to set up Python A/B testing](/tutorials/python-ab-testing) are SEO focused. Others focus on specific PostHog user pain points.
 
-5. **Newsletters:** Our [newsletter](/handbook/content/newsletter), [Product for Engineers](https://newsletter.posthog.com), is both a distribution channel and its own content category. Issues often curate or summarize our existing content, or that of others, into an easy-to-digest, snackable format.
+5. **Newsletters:** Our [newsletter](/handbook/content/newsletter), [build mode](https://newsletter.posthog.com), is both a distribution channel and its own content category. Issues often curate or summarize our existing content, or that of others, into an easy-to-digest, snackable format.
 
 ## How we work
 
@@ -80,13 +80,11 @@ Follow our [SEO best practices guide](/handbook/content/seo-guide) for more on s
 
 ### 2. LinkedIn
 
-Share a post using either your own account or the company account, but note that the company account will have dramatically less reach than your personal one. To post using the company account, use [Buffer](https://buffer.com/) (ask <TeamMember name="Andy Vandervell" /> to add you to it if you don't have access).
+Share a post using either your own account or the company account, but note that the company account will have dramatically less reach than your personal one. If you feel something needs to go out on from company account, tag <TeamMember name="Liam Graham" /> in `#team-editorial`.
 
 See our [LinkedIn posting advice](/handbook/content/linkedin) for more.
 
 ### 3. Twitter / X
-
-Again, use Buffer to post from the company account.
 
 Tips for writing a good post:
 
@@ -98,7 +96,7 @@ Tips for writing a good post:
 
 ### 4. Share internally
 
-Internal teams, especially sales, CS, and the relevant product team, can often make use of the content you write if they know about it. They can share it with customers and use the ideas and examples in their conversations. 
+Internal teams, especially sales, CS, and the relevant product team, can often make use of the content you write if they know about it. They can share it with customers and use the ideas and examples in their conversations.
 
 It's worth sharing in their Slack channels directly as they don't see everything we publish. Asking them to smash the like button, subscribe, and share with their friends and family is a good tactic too.
 

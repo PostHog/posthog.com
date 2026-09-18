@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from 'react'
-import Explorer from 'components/Explorer'
+import React from 'react'
 import MediaPlayer from 'components/MediaPlayer'
 
 import SEO from 'components/seo'

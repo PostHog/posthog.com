@@ -17,7 +17,7 @@ const TeamMemberLink = (person) => {
 
     const teamName = teams?.data?.[0]?.attributes?.name
     const isTeamLead = leadTeams.data.length > 0
-    const teamURL = `/teams/${slugify(teamName, { lower: true })}`
+    const teamURL = teamName ? `/teams/${slugify(teamName, { lower: true })}` : undefined
 
     return (
         <div className="relative inline-block border-t @3xl:border-t-0 @3xl:border-r border-primary px-4 @3xl:pr-12 pt-8 lg:pt-0">
@@ -49,12 +49,14 @@ const TeamMemberLink = (person) => {
 
             <div className="text-sm">
                 <div>{person.companyRole && `${person.companyRole}`}</div>
-                <div className="text-[13px]">
-                    <span className="opacity-75">{isTeamLead ? 'Team lead, ' : ''}</span>
-                    <Link to={teamURL} state={{ newWindow: true }} className="font-semibold underline">
-                        {teamName} Team
-                    </Link>
-                </div>
+                {teamName && (
+                    <div className="text-[13px]">
+                        <span className="opacity-75">{isTeamLead ? 'Team lead, ' : ''}</span>
+                        <Link to={teamURL} state={{ newWindow: true }} className="font-semibold underline">
+                            {teamName} Team
+                        </Link>
+                    </div>
+                )}
             </div>
 
             <div className="mt-2 flex space-x-1 justify-center">

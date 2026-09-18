@@ -1,0 +1,88 @@
+PostHog is available for Roblox through [Wally](https://wally.run) (the Roblox package manager), or as a model file you import in Studio. The SDK is server-authoritative: the server owns all batching and HTTP, and each player is a PostHog user keyed by their Roblox `UserId`.
+
+### Requirements
+
+- HTTP requests enabled for your experience: **Game Settings > Security > Allow HTTP Requests**. Only the Roblox server can make outbound HTTP requests, and only when this is on.
+- A PostHog project API key (starts with `phc_`).
+
+### Via Wally (recommended)
+
+Add the dependency to your `wally.toml`:
+
+```toml
+[dependencies]
+PostHog = "posthog/posthog-roblox@0.1.0"
+```
+
+Run `wally install`, then map the installed package into `ReplicatedStorage` in your [Rojo](https://rojo.space) project file so it replicates to clients:
+
+```json
+"ReplicatedStorage": {
+  "$className": "ReplicatedStorage",
+  "PostHog": { "$path": "Packages/PostHog" }
+}
+```
+
+### Via model file
+
+Download the latest `posthog-roblox.rbxm` from the [releases page](https://github.com/PostHog/posthog-roblox/releases). In Studio, right-click `ReplicatedStorage`, choose **Insert from File**, and select the file. Make sure the inserted instance is named `PostHog`.
+
+Either way, you should end up with `ReplicatedStorage > PostHog`, which both server and client code require.
+
+### Initialize on the server
+
+Initialize PostHog once from a server `Script` (for example in `ServerScriptService`):
+
+```lua
+local ReplicatedStorage = game:GetService("ReplicatedStorage")
+local PostHog = require(ReplicatedStorage:WaitForChild("PostHog"))
+
+PostHog:Init({
+    apiKey = "<ph_project_token>",
+    host = "<ph_client_api_host>", -- usually https://us.i.posthog.com or https://eu.i.posthog.com
+})
+```
+
+> **Note:** `Init` must run on the server. Calling it from a `LocalScript` is ignored. Requiring the same module from a `LocalScript` gives you a thin client relay instead (see [Capturing events](#capturing-events)).
+
+### Configuration options
+
+Pass any of these to `PostHog:Init`. Only `apiKey` is required; everything else has a sensible default.
+
+```lua
+PostHog:Init({
+    -- Required
+    apiKey = "<ph_project_token>",
+
+    -- Connection
+    host = "https://us.i.posthog.com",
+
+    -- Event queue
+    flushAt = 20,                  -- Flush once this many events are queued (default: 20)
+    flushIntervalSeconds = 30,     -- Flush at least this often (default: 30)
+    maxQueueSize = 1000,           -- Drop the oldest events past this size (default: 1000)
+    maxBatchSize = 50,             -- Maximum events per HTTP request (default: 50)
+
+    -- Feature flags
+    preloadFeatureFlags = true,    -- Fetch a player's flags when they join (default: true)
+    sendFeatureFlagEvents = true,  -- Emit $feature_flag_called when a flag is read (default: true)
+    sendDefaultPersonPropertiesForFlags = true,
+
+    -- Autocapture and error tracking
+    captureLifecycleEvents = true, -- player_joined/left/idle, server_started/shutdown (default: true)
+    captureErrors = true,          -- Capture unhandled errors as $exception events (default: true)
+    errorDebounceSeconds = 1,      -- Minimum gap between auto-captured server errors (default: 1)
+
+    -- Identity
+    personProfiles = "identified_only", -- "identified_only" | "always" | "never"
+    serverDistinctId = "server",        -- distinct_id used for server-scoped (nil subject) events
+
+    -- Client relay
+    enableClientRelay = true,        -- Create the RemoteEvent that lets clients relay events (default: true)
+    clientRateLimitPerSecond = 20,   -- Per-player rate limit for relayed messages (default: 20)
+    maxClientPropertyCount = 100,    -- Maximum properties accepted from one client message (default: 100)
+
+    -- Diagnostics
+    logLevel = "warn",               -- "debug" | "info" | "warn" | "error" | "none"
+})
+```

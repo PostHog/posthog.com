@@ -12,7 +12,6 @@ featuredImage: >-
 featuredImageType: full
 category: Product growth
 tags:
-  - Launch week
   - Guides
   - Product updates
 ---

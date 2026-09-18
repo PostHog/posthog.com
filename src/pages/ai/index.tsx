@@ -9,9 +9,9 @@ import ScrollArea from 'components/RadixUI/ScrollArea'
 import CustomRoadmapSlide from 'components/AI/CustomRoadmapSlide'
 import CustomPersonasSlide from 'components/AI/CustomPersonasSlide'
 import CustomCapabilitiesSlide from 'components/AI/CustomCapabilitiesSlide'
+import AIEverywhereSlide from 'components/AI/AIEverywhereSlide'
 import { useWindow } from '../../context/Window'
 import TerminalView from 'components/AI/TerminalView'
-import usePostHog from 'hooks/usePostHog'
 import Demos from 'components/Home/Test/Demos'
 const PRODUCT_HANDLE = 'posthog_ai'
 
@@ -42,7 +42,6 @@ const CustomDemoSlide = () => {
 }
 
 export default function PostHogAI(): JSX.Element {
-    const posthog = usePostHog()
     const { view, setHasDeveloperMode, setView } = useWindow()
     const contentData = useContentData()
     const data = useStaticQuery(graphql`
@@ -105,7 +104,7 @@ export default function PostHogAI(): JSX.Element {
         }
     `)
 
-    // Configure slides with custom ProductOS Benefits slide
+    // Configure slides with custom "Context warehouse benefits" slide
     const slides = createSlideConfig({
         exclude: [
             'customers',
@@ -143,6 +142,11 @@ export default function PostHogAI(): JSX.Element {
                 name: 'Advanced modes',
                 component: CustomCapabilitiesSlide,
             },
+            {
+                slug: 'everywhere',
+                name: 'PostHog AI everywhere',
+                component: AIEverywhereSlide,
+            },
             // {
             //     slug: 'manifesto',
             //     name: 'AI manifesto',
@@ -152,6 +156,7 @@ export default function PostHogAI(): JSX.Element {
         order: [
             'overview',
             'features',
+            'everywhere',
             'demos',
             'try-it',
             'capabilities',
@@ -178,8 +183,7 @@ export default function PostHogAI(): JSX.Element {
 
     useEffect(() => {
         setHasDeveloperMode(true)
-        const mode = posthog?.getFeatureFlag?.('mode-selection-test')
-        setView(mode === 'developer' ? 'developer' : 'marketing')
+        setView('marketing')
     }, [])
 
     return view === 'developer' ? (

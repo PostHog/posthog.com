@@ -1,13 +1,37 @@
 import { useContext } from 'react'
 import React, { createContext, useEffect, useState } from 'react'
 import qs from 'qs'
-import { ProfileData } from 'lib/strapi'
+import { ProfileData, SQUEAK_HOST, Wallet } from 'lib/strapi'
 import usePostHog from './usePostHog'
 import Link from 'components/Link'
 import { useToast } from '../context/Toast'
 
 // Sentinel value used by posthog-js for cookieless tracking mode
 const COOKIELESS_SENTINEL_VALUE = '$posthog_cookieless'
+
+// Deadline for the OAuth resolve call. Without it a slow or hung request keeps
+// the sign-in page on an unbounded spinner with no way out.
+const RESOLVE_TIMEOUT_MS = 15000
+
+// Shared POST + JSON-parse + Strapi error extraction for the /api/auth/posthog/*
+// endpoints. Returns the parsed body plus a normalized `error` string; callers
+// handle the success shape (jwt vs ok). Throws only on network/JSON failure.
+const postPosthogAuth = async (
+    path: string,
+    body: Record<string, unknown>,
+    token?: string | null
+): Promise<{ ok: boolean; data: any; error?: string }> => {
+    const res = await fetch(`${SQUEAK_HOST}/api/auth/posthog/${path}`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            ...(token ? { Authorization: `Bearer ${token}` } : {}),
+        },
+        body: JSON.stringify(body),
+    })
+    const data = await res.json()
+    return { ok: res.ok, data, error: data?.error?.message || data?.message }
+}
 
 export type User = {
     id: number
@@ -17,24 +41,16 @@ export type User = {
     blocked: boolean
     confirmed: boolean
     createdAt: string
-    provider: 'local' | 'github' | 'google'
+    provider: 'local' | 'github' | 'google' | 'posthog'
     username: string
     profile: {
         id: number
     } & ProfileData
     role: {
-        type: 'authenticated' | 'public' | 'moderator'
+        type: 'authenticated' | 'public' | 'moderator' | 'community-moderator'
     }
-    wallet: {
-        balance: number
-        transactions: {
-            id: number
-            amount: number
-            date: Date
-            type: 'achievement' | 'gift'
-            metadata: any
-        }[]
-    }
+    // Absent until the user first earns points — Strapi only creates the component on write
+    wallet?: Wallet
     imageGenerationRateLimit?: {
         remaining: number
         limit: number
@@ -43,16 +59,40 @@ export type User = {
         monthlyCount: number
     }
     picasso?: boolean
+    webmaster?: boolean
+    // Surfaced by the Strapi `me` override (the raw posthogUserId is private).
+    // True when a PostHog OAuth identity is linked to this account.
+    hasPosthogLogin?: boolean
+    distinctId?: string | null
+}
+
+export type DisambiguationResult = {
+    status: 'needs_disambiguation'
+    pendingToken: string
+    emailInUse: boolean
 }
 
 type UserContextValue = {
     isLoading: boolean
     user: User | null
     isModerator: boolean
+    isForumModerator: boolean
     setUser: React.Dispatch<React.SetStateAction<User | null>>
     fetchUser: (token?: string | null) => Promise<User | null>
     getJwt: () => Promise<string | null>
     login: (args: { email: string; password: string }) => Promise<User | null | { error: string }>
+    loginWithProvider: (args: {
+        provider: 'posthog'
+        accessToken: string
+    }) => Promise<User | null | { error: string } | DisambiguationResult>
+    createWithProvider: (args: { pendingToken: string }) => Promise<User | null | { error: string }>
+    linkExisting: (args: {
+        pendingToken: string
+        identifier: string
+        password: string
+    }) => Promise<User | null | { error: string }>
+    linkCurrent: (args: { accessToken: string }) => Promise<{ ok: true } | { error: string }>
+    unlinkProvider: () => Promise<{ ok: true } | { error: string }>
     logout: () => Promise<void>
     signUp: (args: {
         email: string
@@ -92,12 +132,18 @@ export const UserContext = createContext<UserContextValue>({
     isLoading: true,
     user: null,
     isModerator: false,
+    isForumModerator: false,
     setUser: () => {
         // noop
     },
     fetchUser: async () => null,
     getJwt: async () => null,
     login: async () => null,
+    loginWithProvider: async () => null,
+    createWithProvider: async () => null,
+    linkExisting: async () => null,
+    linkCurrent: async () => ({ error: '' }),
+    unlinkProvider: async () => ({ error: '' }),
     logout: async () => {
         // noop
     },
@@ -147,6 +193,37 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
         return jwt || localStorage.getItem('jwt')
     }
 
+    // Shared post-authentication steps once a JWT has been obtained (via password
+    // login or an OAuth provider): hydrate the user and persist the token, then
+    // fire off the achievements check WITHOUT awaiting it.
+    const finalizeLogin = async (token: string): Promise<User> => {
+        const user = await fetchUser(token)
+
+        if (!user) {
+            throw new Error('Failed to fetch user data')
+        }
+
+        localStorage.setItem('jwt', token)
+        setJwt(token)
+
+        // Fire-and-forget: the achievements check does not gate sign-in.
+        // `.catch` keeps a failed request from surfacing as an unhandled rejection.
+        fetch(`${SQUEAK_HOST}/api/achievements/check`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${token}`,
+            },
+            body: JSON.stringify({
+                data: {
+                    date: new Date(),
+                },
+            }),
+        }).catch((error) => console.error(error))
+
+        return user
+    }
+
     const login = async ({
         email,
         password,
@@ -159,7 +236,7 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
         try {
             posthog?.capture('squeak login start')
 
-            const userRes = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/auth/local`, {
+            const userRes = await fetch(`${SQUEAK_HOST}/api/auth/local`, {
                 headers: {
                     'Content-Type': 'application/json',
                 },
@@ -176,50 +253,11 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
                 throw new Error(userData?.error?.message)
             }
 
-            const user = await fetchUser(userData.jwt)
-
-            if (!user) {
-                throw new Error('Failed to fetch user data')
-            }
+            const user = await finalizeLogin(userData.jwt)
 
             posthog?.capture('squeak login success', {
                 email,
             })
-
-            localStorage.setItem('jwt', userData.jwt)
-            setJwt(userData.jwt)
-
-            try {
-                const distinctId = posthog?.get_distinct_id?.()
-
-                if (distinctId && distinctId !== COOKIELESS_SENTINEL_VALUE) {
-                    await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/users/${user.id}`, {
-                        method: 'PUT',
-                        headers: {
-                            'Content-Type': 'application/json',
-                            Authorization: `Bearer ${userData.jwt}`,
-                        },
-                        body: JSON.stringify({
-                            distinctId,
-                        }),
-                    })
-                }
-
-                fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/achievements/check`, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        Authorization: `Bearer ${userData.jwt}`,
-                    },
-                    body: JSON.stringify({
-                        data: {
-                            date: new Date(),
-                        },
-                    }),
-                })
-            } catch (error) {
-                console.error(error)
-            }
 
             return user
         } catch (error) {
@@ -238,6 +276,169 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
             return null
         } finally {
             setIsLoading(false)
+        }
+    }
+
+    const loginWithProvider = async ({
+        provider,
+        accessToken,
+    }: {
+        provider: 'posthog'
+        accessToken: string
+    }): Promise<User | null | { error: string } | DisambiguationResult> => {
+        setIsLoading(true)
+
+        try {
+            posthog?.capture('squeak oauth login start', { provider })
+
+            const controller = new AbortController()
+            const timeout = setTimeout(() => controller.abort(), RESOLVE_TIMEOUT_MS)
+            let res: Response
+            try {
+                res = await fetch(
+                    `${SQUEAK_HOST}/api/auth/posthog/resolve?access_token=${encodeURIComponent(accessToken)}`,
+                    { signal: controller.signal }
+                )
+            } finally {
+                clearTimeout(timeout)
+            }
+
+            const data = await res.json()
+
+            if (!res.ok) {
+                const message = data?.error?.message || data?.message || `Sign-in failed (HTTP ${res.status}).`
+                // Capture the status and message so the failure is diagnosable.
+                posthog?.capture('squeak error', {
+                    source: 'useUser.loginWithProvider',
+                    provider,
+                    status: res.status,
+                    error: message,
+                })
+                console.error(message)
+                return { error: message }
+            }
+
+            // Non-employee with no durable link and no email match: the redirect
+            // page renders the disambiguation screen (create vs. log in to link).
+            if (data.status === 'needs_disambiguation') {
+                // Emit an event so this fork is not read as a silent failure.
+                posthog?.capture('squeak oauth login needs disambiguation', {
+                    provider,
+                    emailInUse: data.emailInUse,
+                })
+                return {
+                    status: 'needs_disambiguation',
+                    pendingToken: data.pendingToken,
+                    emailInUse: data.emailInUse,
+                }
+            }
+
+            const user = await finalizeLogin(data.jwt)
+
+            posthog?.capture('squeak oauth login success', {
+                provider,
+                email: user.email,
+            })
+
+            return user
+        } catch (error) {
+            const timedOut = error instanceof DOMException && error.name === 'AbortError'
+
+            posthog?.capture('squeak error', {
+                source: 'useUser.loginWithProvider',
+                provider,
+                timed_out: timedOut,
+                error: error instanceof Error ? error.message : String(error),
+            })
+
+            console.error(error)
+
+            if (timedOut) {
+                return { error: 'Signing in took too long. Please try again.' }
+            }
+
+            if (error instanceof Error) {
+                return { error: error.message }
+            }
+
+            return null
+        } finally {
+            setIsLoading(false)
+        }
+    }
+
+    // Disambiguation: create a brand-new community account from the verified
+    // PostHog identity carried in the pending token.
+    const createWithProvider = async ({
+        pendingToken,
+    }: {
+        pendingToken: string
+    }): Promise<User | null | { error: string }> => {
+        try {
+            const { ok, data, error } = await postPosthogAuth('create', { pendingToken })
+            if (!ok) {
+                return { error: error || 'Could not create account.' }
+            }
+            // await so a failure inside finalizeLogin (e.g. /me errors) is caught
+            // here rather than becoming an unhandled rejection in the caller.
+            return await finalizeLogin(data.jwt)
+        } catch (error) {
+            console.error(error)
+            return { error: 'Your account was created, but loading it failed. Please refresh and sign in.' }
+        }
+    }
+
+    // Disambiguation: prove ownership of an existing account via password, then
+    // additively link the PostHog identity (keeps password login — dual auth).
+    const linkExisting = async ({
+        pendingToken,
+        identifier,
+        password,
+    }: {
+        pendingToken: string
+        identifier: string
+        password: string
+    }): Promise<User | null | { error: string }> => {
+        try {
+            const { ok, data, error } = await postPosthogAuth('link', { pendingToken, identifier, password })
+            if (!ok) {
+                return { error: error || 'Could not link account.' }
+            }
+            return await finalizeLogin(data.jwt)
+        } catch (error) {
+            console.error(error)
+            return { error: 'Your account was linked, but loading it failed. Please refresh and sign in.' }
+        }
+    }
+
+    // Proactive link from account settings (user is already logged in).
+    const linkCurrent = async ({ accessToken }: { accessToken: string }): Promise<{ ok: true } | { error: string }> => {
+        try {
+            const token = await getJwt()
+            const { ok, error } = await postPosthogAuth('link-current', { accessToken }, token)
+            if (!ok) {
+                return { error: error || 'Could not connect PostHog.' }
+            }
+            await fetchUser(token)
+            return { ok: true }
+        } catch (error) {
+            console.error(error)
+            return { error: 'Could not connect PostHog. Please try again.' }
+        }
+    }
+
+    const unlinkProvider = async (): Promise<{ ok: true } | { error: string }> => {
+        try {
+            const token = await getJwt()
+            const { ok, error } = await postPosthogAuth('unlink', {}, token)
+            if (!ok) {
+                return { error: error || 'Could not disconnect PostHog.' }
+            }
+            await fetchUser(token)
+            return { ok: true }
+        } catch (error) {
+            console.error(error)
+            return { error: 'Could not disconnect PostHog. Please try again.' }
         }
     }
 
@@ -280,7 +481,7 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
         try {
             posthog?.capture('squeak signup start')
 
-            const res = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/auth/local/register`, {
+            const res = await fetch(`${SQUEAK_HOST}/api/auth/local/register`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -346,22 +547,14 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
                                 },
                             },
                             avatar: true,
-                            questionSubscriptions: {
-                                filters: {
-                                    $or: [
-                                        {
-                                            archived: {
-                                                $null: true,
-                                            },
-                                        },
-                                        {
-                                            archived: {
-                                                $eq: false,
-                                            },
-                                        },
-                                    ],
-                                },
-                            },
+                            // NOTE: questionSubscriptions, teams, and notifications are
+                            // intentionally NOT populated here. This query runs on every app boot
+                            // (validateUser), and these are the heaviest relations. Nothing reads
+                            // them off the login user object: questionSubscriptions is loaded on
+                            // demand by useSubscribedQuestions (its own /me fetch), teams is never
+                            // read off `user.profile`, and notifications come from the separate
+                            // GET /api/profile/notifications call below. Don't re-add them without
+                            // a consumer that actually reads them off `user` at boot.
                             topicSubscriptions: {
                                 fields: ['slug', 'label'],
                             },
@@ -371,26 +564,14 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
                             roadmapLikes: {
                                 fields: ['id'],
                             },
-                            teams: {
-                                fields: ['id'],
-                            },
-                            notifications: {
-                                populate: {
-                                    question: {
-                                        populate: {
-                                            replies: true,
-                                        },
-                                    },
-                                },
-                            },
                             bookmarks: true,
                             achievements: {
+                                // Only `achievement.id` is read (achieved-status check); the
+                                // rendered achievement icons/images come from a Gatsby static
+                                // query, so we don't populate achievement.image/icon here.
                                 populate: {
                                     achievement: {
-                                        populate: {
-                                            image: true,
-                                            icon: true,
-                                        },
+                                        fields: ['id'],
                                     },
                                 },
                             },
@@ -415,7 +596,7 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
             token = await getJwt()
         }
 
-        const meRes = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/users/me?${meQuery}`, {
+        const meRes = await fetch(`${SQUEAK_HOST}/api/users/me?${meQuery}`, {
             headers: {
                 Authorization: `Bearer ${token}`,
             },
@@ -432,7 +613,19 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
 
         setUser(meData)
 
-        const notifications = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/profile/notifications`, {
+        const distinctId = posthog?.get_distinct_id?.()
+        if (token && !meData.distinctId && distinctId && distinctId !== COOKIELESS_SENTINEL_VALUE) {
+            fetch(`${SQUEAK_HOST}/api/users-permissions/distinct-id`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    Authorization: `Bearer ${token}`,
+                },
+                body: JSON.stringify({ distinctId }),
+            }).catch((error) => console.error(error))
+        }
+
+        const notifications = await fetch(`${SQUEAK_HOST}/api/profile/notifications`, {
             headers: {
                 Authorization: `Bearer ${token}`,
             },
@@ -488,7 +681,7 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
             },
         })
 
-        const profileRes = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/profiles?${query}`)
+        const profileRes = await fetch(`${SQUEAK_HOST}/api/profiles?${query}`)
 
         if (!profileRes.ok) {
             throw new Error(`Failed to fetch profile`)
@@ -523,7 +716,7 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
 
         const jwt = await getJwt()
 
-        const subscriptionRes = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/profiles/${profileID}`, {
+        const subscriptionRes = await fetch(`${SQUEAK_HOST}/api/profiles/${profileID}`, {
             method: 'PUT',
             body: JSON.stringify(body),
             headers: {
@@ -551,7 +744,7 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
                       },
             },
         }
-        const likeRes = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/profiles/${profileID}`, {
+        const likeRes = await fetch(`${SQUEAK_HOST}/api/profiles/${profileID}`, {
             method: 'PUT',
             body: JSON.stringify(body),
             headers: {
@@ -596,7 +789,7 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
                       },
             },
         }
-        const likeRes = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/profiles/${profileID}`, {
+        const likeRes = await fetch(`${SQUEAK_HOST}/api/profiles/${profileID}`, {
             method: 'PUT',
             body: JSON.stringify(body),
             headers: {
@@ -621,7 +814,7 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
 
     const updateNotifications = async (notifications: any) => {
         setNotifications(notifications)
-        await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/profiles/${user?.profile.id}`, {
+        await fetch(`${SQUEAK_HOST}/api/profiles/${user?.profile.id}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
@@ -639,7 +832,7 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
         const profileID = user?.profile?.id
         if (!profileID) return
         const jwt = await getJwt()
-        await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/replies/${id}/${vote}`, {
+        await fetch(`${SQUEAK_HOST}/api/replies/${id}/${vote}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
@@ -652,7 +845,7 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
         const profileID = user?.profile?.id
         if (!profileID) return
         const jwt = await getJwt()
-        await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/profiles/${profileID}`, {
+        await fetch(`${SQUEAK_HOST}/api/profiles/${profileID}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
@@ -690,7 +883,7 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
         const profileID = user?.profile?.id
         if (!profileID) return
         const jwt = await getJwt()
-        await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/profiles/${profileID}`, {
+        await fetch(`${SQUEAK_HOST}/api/profiles/${profileID}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
@@ -716,7 +909,7 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
         const profileID = user?.profile?.id
         if (!profileID) return
         const jwt = await getJwt()
-        await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/report-spam`, {
+        await fetch(`${SQUEAK_HOST}/api/report-spam`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -735,9 +928,15 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
         user,
         setUser,
         isModerator: user?.role?.type === 'moderator',
+        isForumModerator: user?.role?.type === 'moderator' || user?.role?.type === 'community-moderator',
         isLoading,
         getJwt,
         login,
+        loginWithProvider,
+        createWithProvider,
+        linkExisting,
+        linkCurrent,
+        unlinkProvider,
         logout,
         signUp,
         fetchUser,

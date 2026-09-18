@@ -1,8 +1,4 @@
-import React, { useLayoutEffect, useRef } from 'react'
-import * as am5 from '@amcharts/amcharts5'
-import * as am5map from '@amcharts/amcharts5/map'
-import am5geodata_worldLow from '@amcharts/amcharts5-geodata/worldLow'
-import am5themes_Animated from '@amcharts/amcharts5/themes/Animated'
+import React, { useLayoutEffect, useEffect, useRef, useState } from 'react'
 type ExclusionReason = 'sanctions' | 'high-cost' | 'contractors' | 'timezone'
 
 interface CountryRestriction {
@@ -126,9 +122,34 @@ export default function CountriesWeHireIn({
     children?: JSX.Element
 }): JSX.Element {
     const chartRef = useRef<HTMLDivElement>(null)
+    // amCharts5 is ~1 MiB; load it on demand so it stays out of the always-loaded bundle.
+    const [amcharts, setAmcharts] = useState<any>(null)
+
+    useEffect(() => {
+        let cancelled = false
+        Promise.all([
+            import('@amcharts/amcharts5'),
+            import('@amcharts/amcharts5/map'),
+            import('@amcharts/amcharts5-geodata/worldLow'),
+            import('@amcharts/amcharts5/themes/Animated'),
+        ]).then(([am5, am5map, worldLow, animated]) => {
+            if (!cancelled) {
+                setAmcharts({
+                    am5,
+                    am5map,
+                    am5geodata_worldLow: (worldLow as any).default,
+                    am5themes_Animated: (animated as any).default,
+                })
+            }
+        })
+        return () => {
+            cancelled = true
+        }
+    }, [])
 
     useLayoutEffect(() => {
-        if (!chartRef.current) return
+        if (!chartRef.current || !amcharts) return
+        const { am5, am5map, am5geodata_worldLow, am5themes_Animated } = amcharts
 
         am5.addLicense('AM5M-1930-8548-3690-4255')
 
@@ -229,7 +250,7 @@ export default function CountriesWeHireIn({
 
         // Set fill color and pattern based on exclusion reason
         polygonSeries.mapPolygons.template.adapters.add('fill', (_fill, target) => {
-            const dataItem = target.dataItem as am5.DataItem<any>
+            const dataItem = target.dataItem as any
             const id = (dataItem?.dataContext as any)?.id
 
             const restriction = restrictionMap.get(id)
@@ -241,7 +262,7 @@ export default function CountriesWeHireIn({
 
         // Set tooltip based on exclusion reason
         polygonSeries.mapPolygons.template.adapters.add('tooltipHTML', (_html, target) => {
-            const dataItem = target.dataItem as am5.DataItem<any>
+            const dataItem = target.dataItem as any
             const id = (dataItem?.dataContext as any)?.id
             const name = (dataItem?.dataContext as any)?.name
 
@@ -266,7 +287,7 @@ export default function CountriesWeHireIn({
         return () => {
             root.dispose()
         }
-    }, [excludedCountries])
+    }, [excludedCountries, amcharts])
 
     return (
         <div>

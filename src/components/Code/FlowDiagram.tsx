@@ -2,12 +2,21 @@ import React, { useRef, useState, useEffect } from 'react'
 import { IconActivity, IconLightBulb, IconMessage, IconSparkles, IconPullRequest } from '@posthog/icons'
 import { usePrefersReducedMotion } from './usePrefersReducedMotion'
 
-const steps = [
-    { label: '1. Analyze\nusage', icon: IconActivity, actor: 'Human' as const },
-    { label: '2. Decide what\nto build', icon: IconLightBulb, actor: 'Human' as const },
-    { label: '3. Prompt &\ncontext', icon: IconMessage, actor: 'Human' as const },
-    { label: '4. Build', icon: IconSparkles, actor: 'Machine' as const },
-    { label: '5. Ship', icon: IconPullRequest, actor: 'Human' as const },
+export interface FlowStep {
+    /** Step label. `\n` is preserved as a soft break in the grid layout and flattened to a space in the list layout. */
+    label: string
+    /** Optional secondary text shown after the label in the list layout (muted). */
+    description?: string
+    icon: React.ComponentType<{ className?: string }>
+    actor: 'Human' | 'Machine'
+}
+
+const defaultSteps: FlowStep[] = [
+    { label: '1. Analyze\nusage', icon: IconActivity, actor: 'Human' },
+    { label: '2. Decide what\nto build', icon: IconLightBulb, actor: 'Human' },
+    { label: '3. Prompt &\ncontext', icon: IconMessage, actor: 'Human' },
+    { label: '4. Build', icon: IconSparkles, actor: 'Machine' },
+    { label: '5. Ship', icon: IconPullRequest, actor: 'Human' },
 ]
 
 const actorColors: Record<string, string> = {
@@ -17,9 +26,20 @@ const actorColors: Record<string, string> = {
 
 interface FlowDiagramProps {
     className?: string
+    /** Ordered steps rendered in the card. Defaults to the "Coding with AI" flow. */
+    steps?: FlowStep[]
+    /** Left-aligned header label (uppercased via CSS). */
+    headerLeft?: string
+    /** Right-aligned header label (uppercased via CSS). */
+    headerRight?: string
 }
 
-export function FlowDiagram({ className = '' }: FlowDiagramProps) {
+export function FlowDiagram({
+    className = '',
+    steps = defaultSteps,
+    headerLeft = 'Coding with AI',
+    headerRight = '(cir. 2022-2025)',
+}: FlowDiagramProps) {
     const ref = useRef<HTMLDivElement>(null)
     const [isVisible, setIsVisible] = useState(false)
     const prefersReducedMotion = usePrefersReducedMotion()
@@ -47,8 +67,8 @@ export function FlowDiagram({ className = '' }: FlowDiagramProps) {
     return (
         <div ref={ref} className={`@container border border-primary rounded-sm overflow-hidden ${className}`}>
             <div className="py-1.5 flex items-center justify-between border-b border-secondary mx-4 @xl:mx-5">
-                <span className="text-[13px] uppercase text-primary font-mono">Coding with AI</span>
-                <span className="text-[13px] uppercase text-primary font-mono">(cir. 2022-2025)</span>
+                <span className="text-[13px] uppercase text-primary font-mono">{headerLeft}</span>
+                <span className="text-[13px] uppercase text-primary font-mono">{headerRight}</span>
             </div>
             {/* Mobile: stacked list */}
             <div className="flex flex-col gap-2 p-4 ">
@@ -63,10 +83,17 @@ export function FlowDiagram({ className = '' }: FlowDiagramProps) {
                         }}
                     >
                         <step.icon className="size-5 text-primary shrink-0" />
-                        <span className="text-sm text-primary whitespace-pre-line leading-tight">
-                            {step.label.replace('\n', ' ')}
+                        <span className="text-sm leading-tight min-w-0">
+                            <span className="text-primary font-medium whitespace-pre-line">
+                                {step.label.replaceAll('\n', ' ')}
+                            </span>
+                            {step.description && <span className="text-secondary"> {step.description}</span>}
                         </span>
-                        <span className={`text-[13px] font-medium uppercase ml-auto ${actorColors[step.actor]}`}>
+                        <span
+                            className={`text-[13px] font-medium uppercase ml-auto pl-2 shrink-0 ${
+                                actorColors[step.actor]
+                            }`}
+                        >
                             {step.actor}
                         </span>
                     </div>

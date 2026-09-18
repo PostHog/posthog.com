@@ -1,5 +1,5 @@
 import { IMenu } from 'components/PostLayout/types'
-import React, { createContext, useContext } from 'react'
+import React, { createContext, useContext, useMemo } from 'react'
 import { AppSetting, MenuItem } from './App'
 import { MenuItemType } from 'components/RadixUI/MenuBar'
 
@@ -60,6 +60,9 @@ export interface AppWindow {
     modal?: {
         type: 'standard' | 'side' | 'floating'
     }
+    expanded: boolean
+    snapped: 'left' | 'right' | false
+    windowed?: boolean
 }
 
 interface WindowProviderProps {
@@ -82,6 +85,7 @@ interface WindowProviderProps {
     setView: (view: 'marketing' | 'developer') => void
     hasDeveloperMode: boolean
     setHasDeveloperMode: (hasDeveloperMode: boolean) => void
+    animating?: boolean
 }
 
 interface WindowContextType {
@@ -103,6 +107,7 @@ interface WindowContextType {
     setView: (view: 'marketing' | 'developer') => void
     hasDeveloperMode: boolean
     setHasDeveloperMode: (hasDeveloperMode: boolean) => void
+    animating?: boolean
 }
 
 export const Context = createContext<WindowContextType>({
@@ -139,6 +144,7 @@ export const Context = createContext<WindowContextType>({
     setHasDeveloperMode: () => {
         // No-op default implementation
     },
+    animating: false,
 })
 
 export const Provider = ({
@@ -161,33 +167,57 @@ export const Provider = ({
     setView,
     hasDeveloperMode,
     setHasDeveloperMode,
+    animating,
 }: WindowProviderProps) => {
-    return (
-        <Context.Provider
-            value={{
-                appWindow,
-                menu,
-                setMenu,
-                goBack,
-                goForward,
-                canGoBack,
-                canGoForward,
-                dragControls,
-                pageOptions,
-                setPageOptions,
-                setActiveInternalMenu,
-                internalMenu,
-                activeInternalMenu,
-                parent,
-                view,
-                setView,
-                hasDeveloperMode,
-                setHasDeveloperMode,
-            }}
-        >
-            {children}
-        </Context.Provider>
+    // Memoize so unrelated AppWindow state changes (e.g. `closing`, dragging, snap
+    // indicators) don't create a new value identity and re-render every useWindow()
+    // consumer in the page before the close animation can paint.
+    const value = useMemo(
+        () => ({
+            appWindow,
+            menu,
+            setMenu,
+            goBack,
+            goForward,
+            canGoBack,
+            canGoForward,
+            dragControls,
+            pageOptions,
+            setPageOptions,
+            setActiveInternalMenu,
+            internalMenu,
+            activeInternalMenu,
+            parent,
+            view,
+            setView,
+            hasDeveloperMode,
+            setHasDeveloperMode,
+            animating,
+        }),
+        [
+            appWindow,
+            menu,
+            setMenu,
+            goBack,
+            goForward,
+            canGoBack,
+            canGoForward,
+            dragControls,
+            pageOptions,
+            setPageOptions,
+            setActiveInternalMenu,
+            internalMenu,
+            activeInternalMenu,
+            parent,
+            view,
+            setView,
+            hasDeveloperMode,
+            setHasDeveloperMode,
+            animating,
+        ]
     )
+
+    return <Context.Provider value={value}>{children}</Context.Provider>
 }
 
 export const useWindow = (): WindowContextType => {

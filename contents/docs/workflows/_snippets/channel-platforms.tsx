@@ -21,7 +21,7 @@ const ChannelPlatforms = () => {
         },
         {
             label: 'Push',
-            badge: 'Coming soon',
+            url: 'https://posthog.com/docs/workflows/configure-channels?tab=Push',
             image: 'https://res.cloudinary.com/dmukukwp6/image/upload/push_8ac7759b08.svg',
         },
     ]

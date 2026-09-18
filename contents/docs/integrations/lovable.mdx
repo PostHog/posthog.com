@@ -31,7 +31,7 @@ Initialize at module top-level in the main App file (NOT inside useEffect):
 import posthog from 'posthog-js'
 import { PostHogProvider } from '@posthog/react'
 
-posthog.init(POSTHOG_TOKEN, {
+posthog.init(POSTHOG_PROJECT_TOKEN, {
   api_host: HOST,
   person_profiles: 'identified_only',
   capture_pageview: false,
@@ -92,7 +92,7 @@ The agent will modify the existing flag and confirm the new rollout percentage.
 
 The agent will set up an experiment with control/test variants and configure a funnel metric measuring pricing page to checkout conversion.
 
-See [all available MCP tools](/docs/model-context-protocol#available-tools) for the complete list.
+See [all available MCP tools](/docs/model-context-protocol/tools#available-mcp-tools) for the complete list.
 
 ## Troubleshooting
 
@@ -110,7 +110,7 @@ Try disconnecting and reconnecting the PostHog MCP server. Make sure you're logg
 
 ## Next steps
 
-- [MCP tools reference](/docs/model-context-protocol#available-tools) - All available MCP tools
+- [MCP tools reference](/docs/model-context-protocol/tools#available-mcp-tools) - All available MCP tools
 - [Error tracking docs](/docs/error-tracking) - Learn more about error tracking features
 - [Feature flags](/docs/feature-flags) - Set up feature flags in your code
 

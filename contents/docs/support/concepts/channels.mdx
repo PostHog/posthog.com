@@ -1,0 +1,27 @@
+---
+title: Channels
+sidebar: Docs
+showTitle: true
+---
+
+A channel is a way a customer conversation reaches Support. Whatever channel a message arrives on, it becomes a [ticket](/docs/support/inbox) in the same inbox, so your team works from one place.
+
+Channels are your support context. In [Self-driving](/docs/self-driving) terms, the conversations they bring in are a signal source: recurring issues across your tickets become reports and actionable reports become pull requests.
+
+## The four channels
+
+| Channel | How tickets arrive | Guide |
+| --- | --- | --- |
+| **Widget** | An in-app chat button. Auto-attaches the session, replay, URL, and identity | [Set up the widget](/docs/support/widget) |
+| **Email** | Forward `support@` mail in. Replies thread back to the customer's inbox | [Connect email](/docs/support/email) |
+| **Slack** | SupportHog turns messages, mentions, or a `:ticket:` reaction into tickets | [Connect Slack](/docs/support/slack) |
+| **GitHub** | Issues in monitored repos become tickets. Replies post back as comments | [Connect GitHub](/docs/support/github) |
+
+Every channel syncs both ways. A reply you send in PostHog reaches the customer on the channel they used, and their responses sync back to the ticket.
+
+## Slack and GitHub each play two roles
+
+Two of these channels share a name with something else in PostHog, which is worth untangling.
+
+- **Slack** is a channel when SupportHog turns messages into tickets. It's also a *surface* when you mention `@PostHog` to review Self-driving work. The channel is where tickets come *from*; the surface is where you *work*. See [Use Support in Slack](/docs/support/surfaces/slack).
+- **GitHub** is a channel when issues become support tickets. GitHub Issues is *also* a [Self-driving signal source](/docs/self-driving/inbox/sources), where issues feed the loop directly. Same integration, two jobs.

@@ -1,0 +1,48 @@
+---
+title: Use any model and any harness
+---
+
+
+PostHog Desktop lets you choose a harness and a model per task. The harness options are **Pi**, PostHog's own agent harness, plus **Claude Code** and **Codex**. Pick one in the composer before you send a prompt.
+
+## Pi
+
+Choose Pi when you want PostHog's harness and the freedom to customize how the agent works. It can use:
+
+- [Skills](/docs/posthog-desktop/skills) from your machine, repository, and team
+- [MCP servers](/docs/posthog-desktop/mcp-servers), including PostHog's server
+- Specialized agents for focused research and planning
+- Extensions that add tools, commands, and interface elements
+
+Local Pi tasks use the custom resources on your machine. [Cloud runs](/docs/posthog-desktop/cloud-runs) do not, so use a local task when an extension or local server is essential. See the [Pi documentation](https://pi.dev/docs/latest/extensions) to build an extension.
+
+## Other harnesses
+
+Claude Code and Codex both run local tasks and [cloud runs](/docs/posthog-desktop/cloud-runs). Choose either harness in the composer. A cloud run can use a different harness than the task started with.
+
+## Choose a model
+
+Open the model picker in the task composer before you send a prompt or while a task is running. The picker changes as providers add models, so it is the current source of truth.
+
+PostHog Desktop offers models from Anthropic, OpenAI, and other providers. The model picker shows what is currently available.
+
+See [pricing](/docs/posthog-desktop/pricing) for current rates and included usage.
+
+## Set reasoning effort
+
+Models with extended thinking expose an effort level. Higher effort takes longer and can improve results on harder work.
+
+| Level | Use it for |
+|---|---|
+| **Low** | Mechanical edits with a known solution |
+| **Medium** | Everyday tasks |
+| **High** | Multi-file changes and unfamiliar code |
+| **Extra high**, **Max**, **Ultracode** | Difficult debugging and design work on supported models |
+
+The picker shows only the levels supported by the selected model.
+
+The picker shows **Fast mode** when the selected model supports it. Fast mode reduces reasoning time for small, well-specified edits.
+
+## Authentication
+
+PostHog Desktop authenticates each harness and model through your PostHog account. You do not need to manage API keys. Usage is billed to your organization.

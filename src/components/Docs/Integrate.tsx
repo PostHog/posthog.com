@@ -39,7 +39,7 @@ type LibraryFeatures = {
     sessionRecording: boolean
     userIdentification: boolean
     surveys: boolean
-    llmAnalytics: boolean
+    aiObservability: boolean
     errorTracking: boolean
 }
 
@@ -98,13 +98,16 @@ const query = graphql`
                             "/docs/libraries/go"
                             "/docs/libraries/ios"
                             "/docs/libraries/java"
+                            "/docs/libraries/kmp"
                             "/docs/libraries/node"
                             "/docs/libraries/php"
                             "/docs/libraries/python"
                             "/docs/libraries/react"
                             "/docs/libraries/react-native"
+                            "/docs/libraries/roblox"
                             "/docs/libraries/ruby"
                             "/docs/libraries/rust"
+                            "/docs/libraries/unity"
                         ]
                     }
                 }
@@ -123,11 +126,13 @@ const query = graphql`
                             "/docs/libraries/angular"
                             "/docs/libraries/astro"
                             "/docs/libraries/bubble"
+                            "/docs/libraries/discord"
                             "/docs/libraries/django"
                             "/docs/libraries/docusaurus"
                             "/docs/libraries/flask"
                             "/docs/libraries/framer"
                             "/docs/libraries/gatsby"
+                            "/docs/libraries/github"
                             "/docs/libraries/google-tag-manager"
                             "/docs/libraries/laravel"
                             "/docs/libraries/next-js"
@@ -188,7 +193,7 @@ const query = graphql`
                 featureFlags
                 groupAnalytics
                 surveys
-                llmAnalytics
+                aiObservability
                 errorTracking
             }
         }

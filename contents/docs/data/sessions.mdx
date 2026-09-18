@@ -30,6 +30,8 @@ Our [JavaScript Web library](/docs/libraries/js) and mobile SDKs (Android, iOS, 
 
 A session can span multiple tabs and windows, but only on the same browser and device. For example, if a user goes from one Chrome tab to another, it counts as a single session. If they go from Chrome to Firefox, a new session is created. You can also create a new session by calling `posthog.reset()` (which also starts a new session replay).
 
+Within one session, PostHog adds a `$window_id` property to each event. This property identifies the tab or window that sent the event. Session replay uses it to stitch every tab into one recording, and to show you which tab each moment came from. Read [recordings across multiple tabs and windows](/docs/session-replay/how-to-watch-recordings#recordings-across-multiple-tabs-and-windows).
+
 Activity is defined as any event sent from the client including autocapture events and replay activity like mouse movement. The inactivity period can be configured using the `session_idle_timeout_seconds` [configuration option](/docs/libraries/js/config).
 
 > **Note:** If you are [migrating data](/docs/migrate) or [using a CDP](/docs/advanced/cdp), you may need to manually set the `$session_id` property if you want to query sessions or connect them to session replays.
@@ -62,7 +64,7 @@ Session properties are data about the session that is autocaptured by PostHog an
 | `$session_duration`    | Total duration of the session                                               |
 | `$is_bounce`           | Indicates if the session was a bounce (single pageview session)             |
 
-You can query all of these from the `sessions` table using [SQL insights](/docs/product-analytics/sql).
+You can query all of these from the `sessions` table using [SQL insights](/docs/data-warehouse/sql).
 
 ## Session entry properties on events
 
@@ -163,13 +165,15 @@ If the events are logically part of the same session, e.g. a user starts a purch
 
 ### Automatically sending session IDs
 
-If you enable tracing headers within the JavaScript SDK, the session ID will be sent on every request. You can enable tracing headers by adding the `__add_tracing_headers` option to your `posthog.init` call:
+If you enable tracing headers within the JavaScript SDK, distinct ID and sessionID will be sent on every request. You can enable tracing headers by adding the `tracing_headers` option to your `posthog.init` call:
 
 ```ts
 posthog.init('<ph_project_token>', {
-    __add_tracing_headers: ['your-backend-domain.com'] // +
+    tracing_headers: ['your-backend-domain.com'] // +
 })
 ```
+
+Use hostnames only, without the protocol or path. For example, use `api.example.com` instead of `https://api.example.com/v1`.
 
 If you are using the Python SDK with Django, you can add [the middleware integration](/docs/libraries/django#django-contexts-middleware) which correctly extracts the session ID and adds it to every captured event.
 

@@ -1,0 +1,34 @@
+---
+title: Download PostHog Desktop
+---
+
+import { DownloadButton } from '../../../src/pages/desktop'
+import { DesktopDownloadList } from 'components/Code/DesktopDownloadList'
+
+Download PostHog Desktop, sign in with your PostHog account, and choose a repository.
+
+<div className="max-w-lg @container bg-blue/10 border border-blue rounded-md p-6 shadow-xl not-prose">
+  <DownloadButton />
+</div>
+
+## All platforms
+
+<DesktopDownloadList />
+
+Releases include macOS builds for Apple Silicon and Intel, a Windows installer, and Linux AppImage, `.deb`, and `.rpm` packages.
+
+## Eligibility
+
+Anyone can download the app. PostHog Desktop usage consumes AI credits from your PostHog organization. See [pricing](/docs/posthog-desktop/pricing) for current rates and the monthly free tier.
+
+Organizations on the PostHog **startup plan** cannot use AI credits for PostHog Desktop yet. The app shows an eligibility notice instead of allowing tasks to start. You can still download the app and sign in.
+
+## Updates
+
+On macOS and Windows, PostHog Desktop checks for updates at startup. Automatic downloads are on by default, and updates install the next time you quit. Turn off automatic downloads or select **Check now** in **Settings** > **General** when you want to control the timing.
+
+Linux does not update automatically. Download a new package from the releases page when you want to update.
+
+PostHog Desktop can require an update when an older build is no longer safe or reliable. Other updates install in the background or appear as dismissible notices.
+
+See what changed in each build on the [release notes](https://github.com/PostHog/posthog/releases?q=desktop&expanded=true).

@@ -1,0 +1,6 @@
+For Phoenix and Plug apps, add the [`PostHog.Integrations.Plug`](/docs/libraries/elixir#request-context) integration to read the frontend's tracing headers and attach them to events captured during the request.
+
+```elixir
+plug PostHog.Integrations.Plug
+plug MyAppWeb.Router
+```

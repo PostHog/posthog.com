@@ -14,11 +14,11 @@ crosspost:
   - Blog
 ---
 
-Welcome to our new newsletter, Product for Engineers. We launched it because (1) there’s a real dearth of resources for engineers (and technical founders) who want to level-up their product skills; and (2) we believe embracing product engineering (i.e. engineers who do product) is a vital ingredient for successful startups.
+Welcome to our new newsletter, build mode. We launched it because (1) there’s a real dearth of resources for engineers (and technical founders) who want to level-up their product skills; and (2) we believe embracing product engineering (i.e. engineers who do product) is a vital ingredient for successful startups.
 
 **This week’s theme is:** Talking to users
 
-> This post was first published in our Substack newsletter, [Product for Engineers](https://newsletter.posthog.com/). It's all about helping engineers and founders build better products by learning product skills. We send it (roughly) every two weeks. [Subscribe here](https://newsletter.posthog.com/subscribe).
+> This post was first published in our Substack newsletter, [build mode](https://newsletter.posthog.com/). It's all about helping engineers and founders build better products by learning product skills. We send it (roughly) every two weeks. [Subscribe here](https://newsletter.posthog.com/subscribe).
 
 ## 💬 10x engineers talk to users
 

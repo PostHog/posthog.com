@@ -25,6 +25,27 @@ import JSIdentifyCrossPlatform from "../_snippets/identify-cross-platform.mdx"
 
 <JSIdentifyWhenToCall/>
 
+#### Identify users when the web SDK loads
+
+If your app already knows the signed-in user when you initialize the JavaScript web SDK, the [`loaded` callback](/docs/libraries/js/config) is a convenient place to call `identify`. This identifies the user as soon as the SDK has loaded:
+
+```js-web
+posthog.init('<ph_project_token>', {
+    api_host: '<ph_client_api_host>',
+    defaults: '<ph_posthog_js_defaults>',
+    loaded: (posthog) => {
+        if (currentUser?.id) {
+            posthog.identify(currentUser.id, {
+                email: currentUser.email,
+                name: currentUser.name,
+            })
+        }
+    },
+})
+```
+
+In this example, `currentUser` represents user data already available from your authentication system. If your app loads the user asynchronously, call `posthog.identify()` as soon as that data becomes available instead.
+
 ### 2. Use unique strings for distinct IDs
 
 <JSIdentifyUseUniqueIds/>

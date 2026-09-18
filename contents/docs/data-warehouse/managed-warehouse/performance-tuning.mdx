@@ -1,0 +1,82 @@
+---
+title: Performance
+sidebar: Docs
+showTitle: true
+---
+
+import { CalloutBox } from 'components/Docs/CalloutBox'
+
+<CalloutBox icon="IconFlask" title="The managed warehouse is in beta" type="action">
+
+Need access first? [Join the waitlist](/context-warehouse/managed-warehouse), then [set up your warehouse](/docs/data-warehouse/managed-warehouse/setup).
+
+</CalloutBox>
+
+Each active connection gets a dedicated DuckDB worker. The default worker fits most queries, but you can request more CPU or memory for large scans, joins, aggregations, sorts, and window functions.
+
+The cluster also automatically caches object-storage byte ranges on node-local NVMe storage, so workers on the same node can reuse recently read data instead of fetching it again. This is separate from DuckDB's per-worker in-memory cache.
+
+## Choose a worker size
+
+Pass these settings when you open the connection:
+
+| Setting | Default | Range | What it controls |
+|---|---:|---:|---|
+| `duckgres.worker_cpu` | 15 | 1–46 | Worker CPU cores; DuckDB defaults to 2.5 threads per core, rounded up |
+| `duckgres.worker_memory` | 120 GiB | 4–360 GiB | Worker memory for joins, sorts, caching, and other intermediate data |
+| `duckgres.worker_ttl` | 1 minute | 0–24 hours | How long the worker stays warm after the connection closes |
+
+You can set CPU and memory independently. The default shape uses 8 GiB per CPU core, which is a useful starting point when setting both. A longer TTL reduces cold starts for recurring jobs, but keeps the worker allocated for longer. Values outside the ranges are clamped.
+
+For example, this starts a 30-core, 240 GiB worker and keeps it warm for 30 minutes after disconnecting:
+
+```bash
+PGOPTIONS="-c duckgres.worker_cpu=30 -c duckgres.worker_memory=240Gi -c duckgres.worker_ttl=30m" \
+  psql "host=my-warehouse.dw.us.postwh.com dbname=ducklake user=root sslmode=require"
+```
+
+Most Postgres clients expose the same `options` connection parameter. These settings only apply when the connection opens. Running SQL `SET` commands later doesn't resize its worker.
+
+## DuckDB defaults
+
+PostHog sizes DuckDB from the selected worker and provides managed scratch storage. These are the effective defaults:
+
+| DuckDB setting | Effective default | How it works |
+|---|---|---|
+| `threads` | 2.5× worker CPU, rounded up | Sets the maximum parallelism available to the query; the default 15-CPU worker gets 38 threads |
+| `memory_limit` | 90 GB (83.8 GiB) on the default worker | Limits DuckDB's buffer manager; PostHog derives it from the selected worker memory while reserving headroom for results, metadata, and the worker process |
+| `temp_directory` | Worker-local temporary storage | Lets supported joins, sorts, aggregations, and window functions spill to disk when they exceed memory |
+| `max_temp_directory_size` | 90% of available temporary disk | Caps how much spill data DuckDB can write |
+| `disable_parquet_prefetching` | `false` (prefetching on) | Groups nearby Parquet reads to reduce object-storage requests; disabling it can reduce over-reading on selective scans but increase requests |
+| `prefetch_all_parquet_files` | `false` (remote files only) | Restricts prefetching to remote files; managed warehouse Parquet is remote, so this doesn't turn prefetching off |
+| `enable_external_file_cache` | `true` | Caches external-file byte ranges in memory under `memory_limit`, so repeated scans can avoid object-storage reads |
+| `parquet_metadata_cache` | `false` | Doesn't retain parsed Parquet footer and schema metadata; enabling it can help repeated scans of the same files |
+| `preserve_insertion_order` | `true` | Preserves insertion order where possible; setting it to `false` can reduce memory use for large imports and exports when result order doesn't matter |
+
+Prefetch and cache settings trade object-storage requests, memory, and latency. Benchmark representative cold and repeated scans before changing them.
+
+For more information about these and other settings, see [DuckDB's configuration reference](https://duckdb.org/docs/stable/configuration/overview).
+
+### Example: Tuning threads
+
+The default 15-core worker starts DuckDB with 38 threads. A simple query that reads many remote Parquet ranges but does little computation may run faster with a higher value, such as `SET threads = 60`. Each DuckDB thread can make one HTTP request at a time, so more threads can overlap more network reads.
+
+This kind of tuning will become less important after DuckDB releases [asynchronous I/O](https://duckdb.org/2026/07/31/asynchronous-io), which will handle network concurrency internally instead of relying on extra execution threads.
+
+Inspect the effective settings on your connection with:
+
+```sql
+SELECT name, value, description
+FROM duckdb_settings()
+WHERE name IN (
+    'threads',
+    'memory_limit',
+    'temp_directory',
+    'max_temp_directory_size',
+    'disable_parquet_prefetching',
+    'prefetch_all_parquet_files',
+    'enable_external_file_cache',
+    'parquet_metadata_cache',
+    'preserve_insertion_order'
+);
+```

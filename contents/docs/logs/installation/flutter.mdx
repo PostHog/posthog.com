@@ -1,0 +1,178 @@
+---
+title: Flutter Logs installation
+sidebarTitle: Flutter
+platformLogo: flutter
+showStepsToc: true
+---
+
+import { Steps, Step } from 'components/Docs/Steps'
+import FlutterInstall from '../../integrate/_snippets/install-flutter.mdx'
+import LogsNextSteps from './_snippets/logs-next-steps.mdx'
+
+The PostHog Flutter SDK has built-in support for capturing structured Logs from your Flutter app across mobile and web. The SDK handles the OTLP encoding, batching, and flushing — and on mobile, on-disk persistence across app restarts and app-lifecycle integration (web buffers in memory via `posthog-js`). You just call `Posthog().captureLog(...)` or `Posthog().logger.{trace,debug,info,warn,error,fatal}(...)`.
+
+> **Manual capture only.** Logs are emitted by your code. The SDK does not autocapture system log streams (`print`, `debugPrint`, or `dart:developer`'s `log`).
+
+> **Minimum version:** `posthog_flutter` `5.27.0` or later (the release that adds Logs support). On mobile it pulls in `posthog-android` `3.48.0` or later automatically.
+
+<Steps>
+
+<Step title="Install posthog_flutter" badge="required">
+
+If you haven't installed `posthog_flutter` yet, follow the steps below. For full details, see the [Flutter SDK guide](/docs/libraries/flutter).
+
+<FlutterInstall />
+
+</Step>
+
+<Step title="Configure logs in your PostHogConfig" badge="required">
+
+Configure Logs through `config.logsConfig` before calling `Posthog().setup(...)`. All fields are optional; unset fields fall back to the native defaults, which are tuned for mobile (cellular bandwidth, battery, app lifecycle).
+
+```dart
+final config = PostHogConfig('<ph_project_token>');
+config.host = '<ph_client_api_host>';
+config.logsConfig.serviceName = 'my-app';        // OTLP service.name – shown in the Logs UI
+config.logsConfig.environment = 'production';    // OTLP deployment.environment
+config.logsConfig.serviceVersion = '1.2.3';      // OTLP service.version
+await Posthog().setup(config);
+```
+
+These resource attributes are captured at `setup(...)` and apply to every batch.
+
+> **Web behavior.** On Flutter Web, the SDK attaches to an already-initialized [`posthog-js`](/docs/libraries/js) instance, so `config.logsConfig` is **not** applied on web. Configure your log options in the `posthog.init({...})` call in your `web/index.html` instead. `captureLog` and `logger` still work on web (they are forwarded to `posthog-js`), and `beforeSend` still runs (in Dart) on web. Web also requires a recent `posthog-js` build that exposes `captureLog`.
+
+For example, set the same service identity on the `posthog-js` snippet in `web/index.html`:
+
+```html
+<script>
+  posthog.init('<ph_project_token>', {
+    api_host: '<ph_client_api_host>',
+    logs: {
+      serviceName: 'my-app',
+      environment: 'production',
+      serviceVersion: '1.2.3',
+    },
+  })
+</script>
+```
+
+See the [JavaScript Logs installation guide](/docs/logs/installation/javascript) for the full `posthog-js` logs config.
+
+</Step>
+
+<Step title="Capture logs" badge="required">
+
+Use `Posthog().logger` for the per-level convenience API, or `Posthog().captureLog` for full control over level, attributes, and trace context.
+
+```dart
+import 'package:posthog_flutter/posthog_flutter.dart';
+
+// Per-level convenience methods
+Posthog().logger.info('checkout completed', {'order_id': 'ord_789', 'amount_cents': 4999});
+Posthog().logger.warn('payment retry', {'attempt': 2});
+Posthog().logger.error('payment failed', {'code': 'E001'});
+
+// Lower-level API for custom severity / trace context
+Posthog().captureLog(
+  body: 'checkout failed',
+  level: PostHogLogSeverity.error,
+  attributes: {'order_id': 'ord_789', 'step': 'auth'},
+  traceId: '4bf92f3577b34da6a3ce929d0e0e4736',  // optional W3C trace context (32 hex chars)
+  spanId: '00f067aa0ba902b7',                   // optional W3C span (16 hex chars)
+  traceFlags: 1,
+);
+```
+
+The per-level facade methods are `trace`, `debug`, `info`, `warn`, `error`, and `fatal`, each taking a `String body` and an optional `Map<String, Object>` of attributes. Available severity levels for `captureLog` are `PostHogLogSeverity.trace`, `.debug`, `.info`, `.warn`, `.error`, and `.fatal`.
+
+The optional W3C trace fields (`traceId`, `spanId`, `traceFlags`) are available on `captureLog` only, not on the `logger` facade.
+
+Records are buffered, batched, persisted to disk, and flushed automatically – every 30 seconds, when the buffer hits the threshold, when the app moves to the background, or on `Posthog().flush()`. `flush()` drains events, Session Replay, and Logs together.
+
+Each record is automatically tagged with the current distinct ID, session ID, active feature flags, and (on mobile) the current screen and app foreground/background state at the moment of capture. On web, `url.full` is tagged instead of screen name and app state.
+
+</Step>
+
+<Step title="Test your setup" badge="recommended">
+
+1. Capture a test log from your app:
+   ```dart
+   Posthog().logger.info('hello from Flutter');
+   Posthog().flush();
+   ```
+2. Open the [PostHog Logs UI](https://app.posthog.com/logs).
+3. Filter by `service.name = 'my-app'` (or whatever value you set above).
+
+You should see your record arrive within a few seconds.
+
+<CallToAction type="primary" to="https://app.posthog.com/logs">
+View your Logs in PostHog
+</CallToAction>
+
+</Step>
+
+<Step title="Tune buffering, rate cap, and resource attributes" badge="optional">
+
+The `logsConfig` has knobs for high-volume apps:
+
+```dart
+final config = PostHogConfig('<ph_project_token>');
+config.logsConfig.serviceName = 'my-app';
+config.logsConfig.flushInterval = Duration(seconds: 5);      // default 30s
+config.logsConfig.maxBufferSize = 200;                       // default 1000
+config.logsConfig.maxBatchSize = 50;                         // default 50
+config.logsConfig.flushAt = 20;                              // default 20
+config.logsConfig.rateCapMaxLogs = 5000;                     // default 500
+config.logsConfig.rateCapWindow = Duration(seconds: 60);     // default 10s
+config.logsConfig.resourceAttributes = {'host.name': 'device-01'};
+await Posthog().setup(config);
+```
+
+Full configuration reference:
+
+| Field | Default | What it does |
+| --- | --- | --- |
+| `serviceName` | app bundle id (iOS) / app namespace (Android) | OTLP `service.name` resource attribute |
+| `serviceVersion` | app version | OTLP `service.version` resource attribute |
+| `environment` | none | OTLP `deployment.environment` resource attribute |
+| `resourceAttributes` | `{}` | Extra OTLP resource attributes |
+| `flushInterval` | `30s` | Periodic flush interval |
+| `flushAt` | `20` | Buffer threshold that triggers an automatic flush |
+| `maxBatchSize` | `50` | Max records per outbound POST |
+| `maxBufferSize` | `1000` | Max records held on disk before FIFO eviction |
+| `rateCapMaxLogs` | `500` | Max records per `rateCapWindow`. Set to `0` to disable. |
+| `rateCapWindow` | `10s` | Rate-cap window length |
+
+Defaults are tuned for cellular-aware mobile apps. Raise `rateCapMaxLogs` and `maxBufferSize` for high-volume scenarios.
+
+> On web, these fields are not applied – configure them in your `posthog.init({...})` call in `web/index.html` instead.
+
+</Step>
+
+<Step title="Filter or redact with beforeSend" badge="optional">
+
+Use `config.logsConfig.beforeSend` for redaction, sampling, or filtering by level. It is a `List<BeforeSendLogCallback>`, where each callback is a `FutureOr<PostHogLogRecord?> Function(PostHogLogRecord)`. Callbacks run **in Dart on all platforms (including web)**, evaluated left-to-right. Each callback receives a mutable `PostHogLogRecord` (with mutable `body`, `level`, and `attributes`) and returns either the (possibly mutated) record or `null` to drop it. Callbacks can be synchronous or asynchronous.
+
+```dart
+config.logsConfig.beforeSend = [
+  (record) {
+    // Drop debug logs in production
+    if (record.level == PostHogLogSeverity.debug) return null;
+
+    // Redact a sensitive attribute
+    record.attributes?.remove('password');
+    return record;
+  },
+  // Compose a chain – callbacks run left-to-right
+  (record) => record.body.contains('secret') ? null : record,
+];
+```
+
+Returning `null` from any callback short-circuits and drops the record. Setting `record.body` to an empty or whitespace-only string also drops the record. A callback that throws is logged and the record is dropped (fail-closed).
+
+</Step>
+
+<LogsNextSteps />
+
+</Steps>

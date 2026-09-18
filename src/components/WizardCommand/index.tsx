@@ -1,80 +1,82 @@
-import React, { useState } from 'react'
-import { IconCopy, IconChevronRight, IconCheck, IconArrowUpRight } from '@posthog/icons'
-import useCloud from 'hooks/useCloud'
-import { useToast } from '../../context/Toast'
-import Link from 'components/Link'
-import ZoomHover from 'components/ZoomHover'
+import React from 'react'
+import PlatformInstall from 'components/PlatformInstall'
+import { RenderInClient } from 'components/RenderInClient'
+import usePostHog from 'hooks/usePostHog'
 
-export default function WizardCommand({
-    className = '',
-    command = '',
-    latest = true,
-    slim = false,
-    onCopy,
-}: {
+/**
+ * A subcommand that replaces `command` while a PostHog feature flag is on, so a page can
+ * recommend a new wizard command before it is released to everyone.
+ */
+export type FlagCommand = {
+    /** The PostHog feature flag key, evaluated in the browser. */
+    flag: string
+    /** The subcommand to show while the flag is on, e.g. `error-tracking`. */
+    command: string
+}
+
+type WizardCommandProps = {
     className?: string
     command?: string
-    latest?: boolean
+    selfDriving?: boolean
     slim?: boolean
+    variant?: 'default' | 'bordered'
     onCopy?: () => void
-}): JSX.Element {
-    const cloud = useCloud()
-    const { addToast } = useToast()
-    const [copyKey, setCopyKey] = useState(0)
-    const code = `npx @posthog/wizard${latest ? '@latest' : ''}${cloud ? ` --region ${cloud}` : ''}${
-        command ? ` ${command}` : ''
-    }`
+    /**
+     * Swap `command` for another subcommand while a feature flag is on. The server render and the
+     * first client render show `command`; the swap happens once flags load, or not at all when they
+     * do not load (an ad blocker), so the page always has a working command.
+     */
+    flagCommand?: FlagCommand
+}
 
-    const handleCopy = () => {
-        navigator.clipboard.writeText(code)
-        setCopyKey((k) => k + 1)
-        onCopy?.()
-        addToast({
-            description: (
-                <span className="inline-flex items-center gap-1.5">
-                    <IconCheck className="size-4 text-green" />
-                    Copied to clipboard
-                </span>
-            ),
-            duration: 2000,
-        })
+/**
+ * Thin backward-compatible alias for the inline PlatformInstall command.
+ *
+ * WizardCommand was the original install-command component; PlatformInstall is now the single source
+ * of truth for both rendering and command-building. This wrapper is kept so the existing
+ * `<WizardCommand>` call sites (many in MDX prose, plus the global shortcode) render the consolidated
+ * component with zero changes — it maps the old prop names onto `<PlatformInstall variant="inline" />`,
+ * and resolves the optional `flagCommand` rollout.
+ */
+export default function WizardCommand({ flagCommand, ...props }: WizardCommandProps): JSX.Element {
+    if (!flagCommand) {
+        return <InlineWizardCommand {...props} />
     }
-
     return (
-        <div className="inline-flex flex-col not-prose">
-            <ZoomHover size="lg">
-                <button
-                    onClick={handleCopy}
-                    className={`group inline-flex items-center gap-2 bg-white text-black font-mono text-sm px-2 py-1.5 rounded-md cursor-pointer ${
-                        !slim ? 'relative z-10' : ''
-                    } ${className}`}
-                >
-                    <IconChevronRight className="size-4 opacity-50" />
-                    <span className="relative mr-1">
-                        <code className="!bg-transparent !p-0 !border-0 text-gradient-wizard select-none">{code}</code>
-                        {copyKey > 0 && (
-                            <code
-                                key={copyKey}
-                                className="!bg-transparent !p-0 !border-0 absolute inset-0 text-[#36C46F] pointer-events-none text-gradient-wizard-flash"
-                                aria-hidden="true"
-                            >
-                                {code}
-                            </code>
-                        )}
-                    </span>
-                    <IconCopy className="size-4 opacity-60 group-hover:opacity-80" />
-                </button>
-            </ZoomHover>
-            {!slim && (
-                <Link
-                    to="/wizard"
-                    state={{ newWindow: true }}
-                    className="group relative -top-2 flex gap-px justify-center items-center pt-3 pr-2 pl-5 pb-1 text-xs text-secondary hover:text-primary mx-1.5 border-b border-x border-primary bg-accent/50 hover:bg-hover/100 rounded-b-md text-center"
-                >
-                    Learn more
-                    <IconArrowUpRight className="invisible group-hover:visible inline-block size-3 opacity-75 relative" />
-                </Link>
-            )}
-        </div>
+        <RenderInClient
+            placeholder={<InlineWizardCommand {...props} />}
+            render={() => <FlaggedWizardCommand flagCommand={flagCommand} {...props} />}
+        />
+    )
+}
+
+function FlaggedWizardCommand({
+    flagCommand,
+    command,
+    ...props
+}: Omit<WizardCommandProps, 'flagCommand'> & { flagCommand: FlagCommand }): JSX.Element {
+    const posthog = usePostHog()
+    const enabled = posthog?.isFeatureEnabled?.(flagCommand.flag)
+    return <InlineWizardCommand {...props} command={enabled ? flagCommand.command : command} />
+}
+
+function InlineWizardCommand({
+    className = '',
+    command = '',
+    selfDriving = false,
+    slim = false,
+    variant = 'default',
+    onCopy,
+}: Omit<WizardCommandProps, 'flagCommand'>): JSX.Element {
+    return (
+        <PlatformInstall
+            variant="inline"
+            command={command}
+            selfDriving={selfDriving}
+            slim={slim}
+            bordered={variant === 'bordered'}
+            className={className}
+            onCopy={onCopy}
+        />
     )
 }

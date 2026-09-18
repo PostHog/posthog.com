@@ -31,7 +31,7 @@ Sadly, most of the AI coding advice out there isn't written for this scenario. I
 
 ![Treating your big codebase like a small codebase](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/Usefulness_of_AI_graphic_da661341d8.png)
 
-Although it's less sexy than vibe coding, being thoughtful about using AI is *more important* in a larger codebase for the following reasons:
+Although it's less sexy than [vibe coding](/compare/best-analytics-stack-for-vibe-coded-apps), being thoughtful about using AI is *more important* in a larger codebase for the following reasons:
 
 - Less of your app fits into the AI tool's context windows, which means you need to be more careful about what goes into it. This is true of both coding and [building AI-powered features](/newsletter/building-ai-features).
 
@@ -63,7 +63,7 @@ Unfortunately, these are rarely set up for you. You need to do this yourself. To
 
 - `.cursor/rules`. Have different rule files for different languages (like [Python](https://github.com/PostHog/posthog/blob/master/.cursor/rules/django-python.mdc), [Typescript](https://github.com/PostHog/posthog/blob/master/.cursor/rules/react-typescript.mdc), and [Rust](https://github.com/PostHog/posthog/blob/master/.cursor/rules/rust.mdc)). Include principles, project structure, dependencies, best practices, naming conventions, logging, testing, and security details.
 
-- `claude.md` and other specification files. A lot of what to include here overlaps with `.cursor/rules` but having clear spec of what you want to do matters a lot more as well as commands Claude can use for tests, linting, and building. [See ours here](https://github.com/PostHog/posthog/blob/e945beb317fc9d1a2830be758534881a9e81be29/CLAUDE.md?plain=1#L4).
+- `claude.md` and other [specification files]](/newsletter/fix-your-agents). A lot of what to include here overlaps with `.cursor/rules` but having clear spec of what you want to do matters a lot more as well as commands Claude can use for tests, linting, and building. [See ours here](https://github.com/PostHog/posthog/blob/e945beb317fc9d1a2830be758534881a9e81be29/CLAUDE.md?plain=1#L4).
 
 - [Subagents for Claude](https://github.com/PostHog/posthog/tree/master/.claude/agents) to help with specific tasks like [code reviews](https://github.com/PostHog/posthog/blob/master/.claude/agents/code-reviewer.md), [systematic debugging](https://github.com/PostHog/posthog/blob/master/.claude/agents/systematic-debugger.md), [test writing](https://github.com/PostHog/posthog/blob/master/.claude/agents/test-writer.md), and [prompt engineering](https://github.com/PostHog/posthog/blob/master/.claude/agents/prompt-engineer.md). For example, some of our team use a combination of Claude and [Mergiraf](https://mergiraf.org/) to resolve gnarly merge conflicts.
 
@@ -90,7 +90,7 @@ Like AI, the rise in importance of these tools isn't expected to slow down eithe
 
 ## 3. Trying to use AI on something you know it's not good at
 
-> Claude Code writing Rust is a `while` loop that accelerates climate change - [Nick Best](/community/profiles/33511), Team Ingestion Product Engineer
+> Claude Code writing Rust is [a `while` loop](/newsletter/loops) that accelerates climate change - [Nick Best](/community/profiles/33511), Team Ingestion Product Engineer
 
 Using AI most effectively requires piling up a collection of examples of situations where AI is and isn't useful. You can waste a lot of time and energy repeatedly asking it to do something you know it can't do.
 
@@ -134,7 +134,7 @@ Beyond founder mode, what are some specific ways we aim to improve our workflows
 
 - Trying different models with the same tools to figure out which models are good at what. For example, a lot of our engineers find switching to Opus extremely beneficial (over Sonnet) and have been experimenting with Qwen in Cursor.
 
-- Building and dogfooding our own AI engineering tools like [PostHog AI](/docs/posthog-ai), the [PostHog MCP](/docs/model-context-protocol), and [LLM analytics](/docs/llm-analytics). This also means we talk to a lot of teams on the cutting edge of AI engineering like [Lovable](/customers/lovable) and [ElevenLabs](/customers/elevenlabs).
+- Building and dogfooding our own AI engineering tools like [PostHog AI](/docs/posthog-ai), the [PostHog MCP](/docs/model-context-protocol), and [AI Observability](/docs/ai-observability). This also means we talk to a lot of teams on the cutting edge of AI engineering like [Lovable](/customers/lovable) and [ElevenLabs](/customers/elevenlabs).
 
 - Nearly every [hackathon](/newsletter/hackathons) has had AI-related projects being built in it. This gives more of the team opportunities to explore new tools and understand what AI is good/not good at.
 

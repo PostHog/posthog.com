@@ -29,7 +29,7 @@ export const dynatrace = {
                 },
             },
         },
-        llm_analytics: {
+        ai_observability: {
             available: true,
         },
     },

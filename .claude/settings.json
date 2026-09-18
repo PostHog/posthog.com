@@ -1,0 +1,10 @@
+{
+    "permissions": {
+        "allow": [
+            "Skill(dev-server)",
+            "Skill(dev-server:*)",
+            "Bash(lsof -nP -iTCP:8001 -sTCP:LISTEN)",
+            "Bash(ps -o pid,ppid,lstart,command -p 82924)"
+        ]
+    }
+}

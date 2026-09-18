@@ -337,7 +337,7 @@ export default function Hero() {
                                 animate={{ height: 'auto' }}
                                 className="max-w-screen-lg mx-auto px-5 mt-8 flex justify-center"
                             >
-                                <WizardCommand latest={false} slim />
+                                <WizardCommand slim />
                             </motion.div>
                         )}
                     </div>

@@ -1,0 +1,108 @@
+---
+title: Linking RubyGems.org as a source
+sidebar: Docs
+showTitle: true
+availability:
+  free: full
+  selfServe: full
+  enterprise: full
+sourceId: Rubygems
+---
+
+import { CalloutBox } from "components/Docs/CalloutBox";
+import InboundIpAddresses from "../_snippets/inbound-ip-addresses.mdx";
+
+The RubyGems.org connector syncs gem metadata and version history into PostHog. Use it to track download statistics, monitor releases, and join gem data with your product analytics.
+
+<CalloutBox icon="IconFlask" title="Alpha feature" type="action">
+
+The RubyGems.org source is currently in **alpha**. We'd love to [hear your feedback](https://app.posthog.com/home#panel=support%3Afeedback%3A%3Alow%3Atrue).
+
+</CalloutBox>
+
+## Requirements
+
+RubyGems.org's read APIs are public, so **no credentials or API keys are required**. You only need the names of the gems you want to track.
+
+## Setup
+
+1. Go to the [Data pipeline page](https://app.posthog.com/data-management/sources) and select the **Sources** tab.
+2. Click **+ New source** and select **RubyGems.org**.
+3. In the **Gems** field, enter the gem names you want to track – one per line or comma-separated. For example:
+
+   ```
+   rails
+   rspec
+   devise
+   ```
+
+   You can add up to 500 gems per source.
+
+4. Click **Next**, select the tables you want to sync, choose the sync frequency, and click **Import**.
+
+The data warehouse then starts syncing your RubyGems.org data. You can see details and progress in the [data pipeline sources tab](https://app.posthog.com/data-management/sources).
+
+## Configuration
+
+<SourceParameters />
+
+## Supported tables
+
+<SourceTables />
+
+## Sync method
+
+All tables sync as **full refresh**. RubyGems.org's API has no server-side timestamp filter, so incremental sync is not supported. Each sync fetches the current metadata and full version history for every configured gem.
+
+| Table      | Sync method  |
+| ---------- | ------------ |
+| `gems`     | Full refresh |
+| `versions` | Full refresh |
+
+## Available tables
+
+### gems
+
+Current metadata and cumulative download count for each configured gem, from `GET /api/v1/gems/{name}.json`.
+
+**Primary key:** `name`
+
+| Column               | Description                                                            |
+| -------------------- | ---------------------------------------------------------------------- |
+| `name`               | Gem name as registered on RubyGems.org                                 |
+| `downloads`          | Total cumulative downloads across all versions and platforms           |
+| `version`            | Latest published version number                                        |
+| `version_created_at` | Timestamp the latest version was published                             |
+| `version_downloads`  | Cumulative downloads of the latest version                             |
+| `platform`           | Platform of the latest version (e.g. `ruby`, `java`)                   |
+| `authors`            | Comma-separated list of gem authors                                    |
+| `info`               | Gem description/summary text                                           |
+| `licenses`           | List of licenses declared by the gem                                   |
+| `metadata`           | Free-form metadata map from the gemspec (changelog, source URIs, etc.) |
+| `project_uri`        | Canonical RubyGems.org page for the gem                                |
+| `gem_uri`            | Direct download URL for the latest version's `.gem` file               |
+| `homepage_uri`       | Project homepage URL, if declared                                      |
+| `source_code_uri`    | Source code repository URL, if declared                                |
+| `changelog_uri`      | Changelog URL, if declared                                             |
+| `dependencies`       | Runtime and development dependencies of the latest version             |
+
+### versions
+
+Every published version of each configured gem, including per-version download counts, from `GET /api/v1/versions/{name}.json`.
+
+**Primary key:** `gem_name`, `number`, `platform` (composite)
+
+| Column            | Description                                                         |
+| ----------------- | ------------------------------------------------------------------- |
+| `gem_name`        | Gem the version belongs to (injected by the connector)              |
+| `number`          | Version number (e.g. `1.2.3`)                                       |
+| `platform`        | Build platform this version was published for (e.g. `ruby`, `java`) |
+| `created_at`      | Timestamp the version was published                                 |
+| `downloads_count` | Cumulative downloads of this specific version                       |
+| `authors`         | Comma-separated list of authors at this version                     |
+| `licenses`        | List of licenses declared at this version                           |
+| `summary`         | Short one-line summary of the gem at this version                   |
+| `prerelease`      | Whether this version is a prerelease                                |
+| `sha`             | SHA-256 checksum of this version's `.gem` file                      |
+
+<InboundIpAddresses />

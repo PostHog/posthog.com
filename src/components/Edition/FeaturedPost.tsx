@@ -19,25 +19,47 @@ const Skeleton = () => {
     )
 }
 
-export default function FeaturedPost({ title, date, authors, featuredImage, slug, excerpt, publishedAt }) {
-    const { isLoading } = useContext(PostsContext)
+export default function FeaturedPost({
+    title,
+    date,
+    authors,
+    featuredImage,
+    slug,
+    excerpt,
+    publishedAt,
+    isLoading: isLoadingProp,
+    containerStack = false,
+    titleClassName,
+}) {
+    const ctx = useContext(PostsContext)
+    // Callers outside the Edition provider tree (e.g. the founders landing) pass `isLoading` in.
+    const isLoading = isLoadingProp ?? ctx?.isLoading
     const postDate = dayjs(date || publishedAt).format('MMM D, YYYY')
     const imageURL = featuredImage?.image?.data?.attributes?.url || featuredImage?.url
 
-    return (
-        <section className="grid md:grid-cols-2 gap-6 md:gap-8 items-center rounded-md border border-input p-5 md:mx-4 bg-accent">
+    // containerStack stacks on the container instead of the viewport, and only splits into
+    // columns at @3xl, so a resizable window column never leaves a gap beside the image.
+    const sectionClasses = containerStack
+        ? 'grid @3xl:grid-cols-2 gap-6 @3xl:gap-8 items-center rounded-md border border-input p-5 bg-accent'
+        : 'grid md:grid-cols-2 gap-6 md:gap-8 items-center rounded-md border border-input p-5 md:mx-4 bg-accent'
+    const imageWrapperClasses = containerStack
+        ? 'w-full aspect-video rounded-md overflow-hidden'
+        : 'w-full aspect-[600/315] rounded-md overflow-hidden'
+
+    const section = (
+        <section className={sectionClasses}>
             {isLoading ? (
                 <Skeleton />
             ) : (
                 <>
-                    <div className="w-full aspect-[600/315] rounded-md overflow-hidden">
+                    <div className={imageWrapperClasses}>
                         <Link to={slug}>
                             <img className="w-full h-full object-cover" src={imageURL || '/images/og/default.png'} />
                         </Link>
                     </div>
                     <div>
                         <p className="m-0 text-[15px] opacity-75">{postDate}</p>
-                        <h2 className="mt-2 mb-3 text-3xl lg:text-4xl">
+                        <h2 className={`mt-2 mb-3 ${titleClassName || 'text-3xl lg:text-4xl'}`}>
                             <Link
                                 to={slug}
                                 className="text-primary dark:text-primary-dark hover:text-primary dark:hover:text-primary-dark"
@@ -72,4 +94,6 @@ export default function FeaturedPost({ title, date, authors, featuredImage, slug
             )}
         </section>
     )
+
+    return containerStack ? <div className="@container">{section}</div> : section
 }

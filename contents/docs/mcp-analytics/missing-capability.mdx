@@ -1,0 +1,94 @@
+---
+title: Tracking missing capabilities
+---
+
+import CalloutBox from 'components/Docs/CalloutBox'
+
+Missing-capability reports show what agents need but your server does not support. Without these reports, an agent may stop or try a tool name that does not exist.
+
+Enable `reportMissing` to capture these reports.
+
+## Enabling
+
+```ts
+instrument(server, posthog, {
+  reportMissing: true,
+})
+```
+
+The SDK registers a virtual tool named `get_more_tools`. It advertises this tool through `tools/list`. The description asks the agent to call it when the available tools cannot satisfy a request.
+
+## What gets captured
+
+When the agent invokes `get_more_tools`, the SDK:
+
+1. Emits its own dedicated `$mcp_missing_capability` event – **not** a `$mcp_tool_call`.
+2. Stamps `$mcp_intent` with the agent's reasoning describing what the user was trying to do.
+3. Returns a benign response to the agent so it can continue its turn.
+
+Query the reports to see requests your server cannot satisfy:
+
+```sql
+SELECT
+  properties.$mcp_intent AS unmet_request,
+  properties.$mcp_client_name AS client,
+  count() AS times_asked
+FROM events
+WHERE event = '$mcp_missing_capability'
+  AND timestamp > now() - INTERVAL 30 DAY
+GROUP BY unmet_request, client
+ORDER BY times_asked DESC
+LIMIT 50
+```
+
+## Complementary signal: advertised but uncalled
+
+`reportMissing` tells you what's *missing*. The `$mcp_tools_list` event tells you what's *advertised but ignored* – tools the agent saw but never invoked.
+
+```sql
+WITH listed AS (
+  SELECT DISTINCT arrayJoin(properties.$mcp_listed_tool_names) AS tool_name
+  FROM events
+  WHERE event = '$mcp_tools_list'
+    AND timestamp > now() - INTERVAL 30 DAY
+),
+called AS (
+  SELECT DISTINCT properties.$mcp_tool_name AS tool_name
+  FROM events
+  WHERE event = '$mcp_tool_call'
+    AND timestamp > now() - INTERVAL 30 DAY
+)
+SELECT tool_name AS zombie_tool
+FROM listed
+WHERE tool_name NOT IN (SELECT tool_name FROM called)
+ORDER BY tool_name
+```
+
+Together, the two queries answer "what tools should I build?" and "what tools should I cut?".
+
+<ProductScreenshot
+imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/mcp_missing_capability_light_f9864cae92.png"
+imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/mcp_missing_capability_dark_aac81d58c5.png"
+alt="PostHog insight showing $mcp_missing_capability events broken down by MCP client name"
+classes="rounded"
+/>
+
+## Caveats
+
+<CalloutBox icon="IconInfo" title="Agents have to actually call it" type="fyi">
+
+The agent must call `get_more_tools` to produce a report. Clients that ignore tool descriptions may not call it, even when capabilities are missing.
+
+</CalloutBox>
+
+<CalloutBox icon="IconInfo" title="It's its own event, not a tool call" type="fyi">
+
+`get_more_tools` emits a dedicated `$mcp_missing_capability` event rather than a `$mcp_tool_call`, so it never pollutes your tool-call volume, error-rate, or intent-source queries. Query it directly via `event = '$mcp_missing_capability'`.
+
+</CalloutBox>
+
+<CalloutBox icon="IconInfo" title="Only enable when you'll act on the signal" type="fyi">
+
+Enable this feature when you plan to review missing-capability reports and use them to prioritize work.
+
+</CalloutBox>

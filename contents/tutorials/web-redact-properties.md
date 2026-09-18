@@ -16,7 +16,7 @@ Sometimes, this means certain information should **never** make it to PostHog se
 
 ## Redacting information with the Web SDK
 
-You can selectively remove properties from events before they're sent by initializing PostHog with a [`before_send`](/docs/libraries/js/features#redacting-information-in-events) hook. PostHog will pass the event object to the `before_send` function, where you can redact any information.
+You can selectively remove properties from events before they're sent by initializing PostHog with a [`before_send`](/docs/libraries/js/usage#redacting-information-in-events) hook. PostHog will pass the event object to the `before_send` function, where you can redact any information.
 
 For example, you can create a `beforeSend.js` file and define your redaction logic there like this:
 
@@ -87,6 +87,6 @@ You can also disable capturing for specific UI elements for [product analytics](
 - [Product analytics privacy controls](/docs/product-analytics/privacy)
 - [Product analytics autocapture controls](/docs/product-analytics/autocapture#configuring-autocapture)
 - [Session replay privacy controls](/docs/session-replay/privacy)
-- [LLM analytics](/docs/llm-analytics/privacy-mode)
+- [AI Observability](/docs/ai-observability/privacy-mode)
 - [Privacy compliance](/docs/privacy)
 - [Property Filter app](/tutorials/property-filter)

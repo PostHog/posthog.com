@@ -12,12 +12,12 @@ jobs:
             contents: write
 
         steps:
-            - uses: actions/checkout@v6
+            - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
               with:
                   ref: ${{ github.head_ref }}
 
             - name: Set up Python 3.8
-              uses: actions/setup-python@v6
+              uses: actions/setup-python@a309ff8b426b58ec0e2a45f0f869d46889d02405 # v6.2.0
               with:
                   python-version: 3.8
 
@@ -32,17 +32,71 @@ jobs:
             #       python -m pip install requests
 
             - name: Configure Git
-              run: |
-                  git fetch origin master:master
-                  git config user.name PostHog Bot
-                  git config user.email hey@posthog.com
+              run: git fetch origin master:master
 
             - name: Fix typos
+              id: typos
               run: |
                   codespell ./contents -w -S "./contents/images/*,./contents/docs/_media/*" -q 8 -I ./.codespellignore
-                  git add .
-                  [ "$(git status -s)" = "" ] && exit 0 || git commit -m "Fix typos"
+                  if [ -z "$(git status -s)" ]; then
+                    echo "changed=false" >> "$GITHUB_OUTPUT"
+                  else
+                    echo "changed=true" >> "$GITHUB_OUTPUT"
+                  fi
 
+            # Commits through the GitHub API so it carries GitHub's signature, which
+            # the org-wide signed-commits ruleset requires. A plain `git push` is
+            # rejected.
             - name: Push changes
+              if: steps.typos.outputs.changed == 'true'
+              uses: planetscale/ghcommit-action@a6b150b81dca5dd027baa898604418eec9e11465 # v0.2.22
+              with:
+                  commit_message: Fix typos
+                  repo: ${{ github.repository }}
+                  branch: ${{ github.head_ref }}
+              env:
+                  GITHUB_TOKEN: ${{ github.token }}
+
+    md_redirects:
+        name: Docs .md redirects
+        runs-on: ubuntu-latest
+        if: github.event.pull_request.head.repo.full_name == github.repository
+        permissions:
+            contents: write
+
+        steps:
+            - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+              with:
+                  ref: ${{ github.head_ref }}
+
+            - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
+              with:
+                  node-version: lts/*
+
+            # Docs .md files are separate from the HTML pages and vercel.json
+            # matches redirects literally, so a plain /docs/a/b redirect doesn't
+            # cover /docs/a/b.md. This rewrites new docs redirects to accept an
+            # optional .md, so adding one stays a one-line change.
+            - name: Make docs redirects cover .md
+              id: redirects
               run: |
-                  git push
+                  node scripts/generate-md-redirects.js
+                  if git diff --quiet vercel.json; then
+                    echo "changed=false" >> "$GITHUB_OUTPUT"
+                  else
+                    echo "changed=true" >> "$GITHUB_OUTPUT"
+                  fi
+
+            # Commits through the GitHub API so it carries GitHub's signature, which
+            # the org-wide signed-commits ruleset requires. A plain `git push` is
+            # rejected.
+            - name: Push changes
+              if: steps.redirects.outputs.changed == 'true'
+              uses: planetscale/ghcommit-action@a6b150b81dca5dd027baa898604418eec9e11465 # v0.2.22
+              with:
+                  commit_message: Make docs redirects cover .md
+                  repo: ${{ github.repository }}
+                  branch: ${{ github.head_ref }}
+                  file_pattern: vercel.json
+              env:
+                  GITHUB_TOKEN: ${{ github.token }}

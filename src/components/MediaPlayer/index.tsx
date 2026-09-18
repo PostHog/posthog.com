@@ -3,8 +3,6 @@ import { IconFullScreen, IconPlayhead, IconVolumeFull, IconVolumeHalf, IconVolum
 import { Select } from 'components/RadixUI/Select'
 import ZoomHover from 'components/ZoomHover'
 import React, { useEffect, useRef, useState } from 'react'
-import { useApp } from '../../context/App'
-
 // Add types for YouTube and Wistia APIs to avoid TS errors
 declare global {
     interface Window {
@@ -19,10 +17,15 @@ interface MediaPlayerProps {
     videoId: string
     source?: 'youtube' | 'wistia'
     startTime?: number
+    borderRadius?: boolean
 }
 
-export default function MediaPlayer({ videoId, source = 'youtube', startTime = 0 }: MediaPlayerProps) {
-    const { websiteMode } = useApp()
+export default function MediaPlayer({
+    videoId,
+    source = 'youtube',
+    startTime = 0,
+    borderRadius = true,
+}: MediaPlayerProps) {
     const [playerState, setPlayerState] = useState({
         isPlaying: true,
         player: null as any,
@@ -145,8 +148,14 @@ export default function MediaPlayer({ videoId, source = 'youtube', startTime = 0
                         smallPlayButton: false,
                         bigPlayButton: false,
                         playerColor: '000000',
+                        ...(borderRadius ? {} : { playerBorderRadius: 0, roundedPlayer: 0 }),
                     },
                     onReady: (video: any) => {
+                        if (!borderRadius) {
+                            video.setPlayerBorderRadius?.(0)
+                            video.setRoundedPlayer?.(0)
+                        }
+
                         setPlayerState((prev: any) => ({
                             ...prev,
                             player: video,
@@ -189,7 +198,7 @@ export default function MediaPlayer({ videoId, source = 'youtube', startTime = 0
                 initializeWistiaPlayer()
             }
         }
-    }, [videoId, source, startTime])
+    }, [videoId, source, startTime, borderRadius])
 
     const handlePlayPause = () => {
         if (playerState.player) {
@@ -277,6 +286,15 @@ export default function MediaPlayer({ videoId, source = 'youtube', startTime = 0
     }
 
     const toggleFullscreen = () => {
+        if (source === 'wistia' && playerState.player?.requestFullscreen) {
+            if (playerState.player.inFullscreen?.()) {
+                playerState.player.cancelFullscreen()
+            } else {
+                playerState.player.requestFullscreen()
+            }
+            return
+        }
+
         const iframe = document.getElementById(`video-player-iframe-${videoId}`) as any
         if (iframe?.requestFullscreen) {
             iframe.requestFullscreen()
@@ -338,7 +356,7 @@ export default function MediaPlayer({ videoId, source = 'youtube', startTime = 0
                 <main
                     data-app="MediaPlayer"
                     data-scheme="primary"
-                    className={`@container flex-1 bg-primary relative h-full ${websiteMode && 'max-w-7xl mx-auto'}`}
+                    className="@container flex-1 bg-primary relative h-full"
                 >
                     <section className="bg-accent px-2 pb-2">
                         {/* Main video area */}
@@ -346,7 +364,10 @@ export default function MediaPlayer({ videoId, source = 'youtube', startTime = 0
                             {source === 'youtube' ? (
                                 <div id={`video-player-iframe-${videoId}`} className="rounded w-full aspect-video" />
                             ) : (
-                                <div ref={containerRef} className="rounded w-full aspect-video" />
+                                <div
+                                    ref={containerRef}
+                                    className={`w-full aspect-video ${borderRadius ? 'rounded' : 'rounded-none'}`}
+                                />
                             )}
                         </div>
 
@@ -377,23 +398,25 @@ export default function MediaPlayer({ videoId, source = 'youtube', startTime = 0
                                     step={0.1}
                                 />
                                 <div
-                                    className="absolute top-1/2 -translate-y-1/2 pointer-events-none"
+                                    className="absolute top-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none"
                                     style={{
-                                        left: `calc(${
-                                            ((isScrubbing ? scrubTime : playerState.currentTime) /
-                                                playerState.duration) *
-                                            100
-                                        }% + 5.5px)`,
+                                        left: `${
+                                            playerState.duration
+                                                ? ((isScrubbing ? scrubTime : playerState.currentTime) /
+                                                      playerState.duration) *
+                                                  100
+                                                : 0
+                                        }%`,
                                     }}
                                 >
-                                    <IconPlayhead className="w-[11px] h-[15px]" />
+                                    <IconPlayhead className="w-[11px] h-[15px] shrink-0" />
                                 </div>
                             </div>
                         </div>
 
                         {/* Control bar */}
-                        <div className="grid grid-cols-12 px-4 py-2 bg-accent border-t border-primary gap-2">
-                            <div className="col-span-3 flex flex-row gap-2 items-center">
+                        <div className="flex items-center px-2 @md:px-4 py-2 bg-accent border-t border-primary gap-1 @md:gap-2">
+                            <div className="flex flex-row gap-1 @md:gap-2 items-center shrink-0">
                                 <button
                                     onClick={toggleMute}
                                     className="text-sm font-semibold text-right dark:text-white"
@@ -412,13 +435,13 @@ export default function MediaPlayer({ videoId, source = 'youtube', startTime = 0
                                     max="100"
                                     value={playerState.volume}
                                     onChange={handleVolumeChange}
-                                    className="w-24 volume-slider"
+                                    className="hidden @md:block w-24 volume-slider"
                                     style={{
                                         accentColor: 'currentColor',
                                     }}
                                 />
                             </div>
-                            <div className="col-span-6 flex flex-row gap-2 items-center justify-center">
+                            <div className="flex-1 min-w-0 flex flex-row gap-1 @md:gap-2 items-center justify-center">
                                 <ZoomHover size="md">
                                     <button
                                         onClick={() => handleSeek(-10)}
@@ -448,23 +471,25 @@ export default function MediaPlayer({ videoId, source = 'youtube', startTime = 0
                                     </button>
                                 </ZoomHover>
                             </div>
-                            <div className="col-span-3 flex flex-row gap-2 justify-end items-center">
-                                <Select
-                                    value={playerState.playbackRate.toString()}
-                                    onValueChange={(value) => handlePlaybackRateChange(parseFloat(value))}
-                                    groups={[
-                                        {
-                                            label: 'Playback Speed',
-                                            items: [
-                                                { value: '0.5', label: '0.5x' },
-                                                { value: '1', label: '1x' },
-                                                { value: '1.5', label: '1.5x' },
-                                                { value: '2', label: '2x' },
-                                            ],
-                                        },
-                                    ]}
-                                    className="text-sm font-semibold text-right dark:text-white"
-                                />
+                            <div className="flex flex-row gap-1 @md:gap-2 justify-end items-center shrink-0">
+                                <div className="hidden @md:block">
+                                    <Select
+                                        value={playerState.playbackRate.toString()}
+                                        onValueChange={(value) => handlePlaybackRateChange(parseFloat(value))}
+                                        groups={[
+                                            {
+                                                label: 'Playback Speed',
+                                                items: [
+                                                    { value: '0.5', label: '0.5x' },
+                                                    { value: '1', label: '1x' },
+                                                    { value: '1.5', label: '1.5x' },
+                                                    { value: '2', label: '2x' },
+                                                ],
+                                            },
+                                        ]}
+                                        className="text-sm font-semibold text-right dark:text-white"
+                                    />
+                                </div>
                                 <button
                                     onClick={toggleFullscreen}
                                     className="text-sm font-semibold text-right dark:text-white"

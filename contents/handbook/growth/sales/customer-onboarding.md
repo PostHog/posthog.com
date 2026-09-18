@@ -40,8 +40,8 @@ We'll need them to be able to demo their product to us, as well as attend two or
 
 Ideally we will also have them in Slack Connect channel so that we can provide responsive support and expose them to the wider PostHog team.
 
-Some customers may wish to use MS Teams rather than Slack - we can sync our Slack with Teams via Pylon to do this. First you will need an MS Teams licence - ask Simon for one. Then, follow the instructions on [the link here](https://docs.usepylon.com/bridges/microsoft-teams/setup) to get set up.
-Before adding the customer into the channel, remember to test it on both sides to ensure the integration is working correctly.
+Some customers may wish to use MS Teams rather than Slack - SupportHog works in Teams too. See [Using MS Teams](/handbook/growth/sales/slack-channels#using-ms-teams) on the shared channels page for how to get set up.
+Before adding the customer into the channel, remember to test it to ensure ticket creation is working correctly.
 
 ## Day 0 - Session: Kick off
 
@@ -125,7 +125,7 @@ If they do become a customer (yay!) then we should agree a regular check in call
 
 ## 1-hr onboarding call
 
-Customers with a platform add-on (and up) are entitled to a one hour kickoff/implementation call. This could include a high-level discussion of how PostHog fits into their stack, troubleshooting issues they've hit so far, or walking them through as they code it up, for simple setups. In practice we only need to worry about this for product-led / customers who haven't talked to sales before. [TO DO] Include a team calendly link in the welcome emails for Teams purchases or set up a separate campaign to email from a CSM. 
+Customers with a platform package (and up) are entitled to a one hour kickoff/implementation call. This could include a high-level discussion of how PostHog fits into their stack, troubleshooting issues they've hit so far, or walking them through as they code it up, for simple setups. In practice we only need to worry about this for product-led / customers who haven't talked to sales before. [TO DO] Include a team calendly link in the welcome emails for Teams purchases or set up a separate campaign to email from a CSM. 
 
 ## Ongoing Training
 

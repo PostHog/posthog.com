@@ -1,0 +1,113 @@
+---
+title: Editing a live workflow
+sidebar: Docs
+showTitle: true
+---
+
+You can edit a workflow while it's enabled and people are moving through it. PostHog uses a **follow-live** model: every step of every run reads the current published configuration, so your edits reach people who are already mid-workflow, not just people who enter afterwards.
+
+This page explains exactly what happens to people already in a workflow when you change it, so you can edit live workflows with confidence. It also covers how to [stop runs](#stopping-runs) entirely.
+
+## The general model
+
+A few principles explain almost every case:
+
+- **Runs follow the published config.** There's no per-run snapshot of the old workflow. When someone's run reaches its next step, that step runs against whatever is published at that moment, so a fix you publish reaches people already in the workflow.
+- **Only a person's position is carried across an edit.** A run remembers which step it's on (or waiting in), not a copy of the workflow it started with.
+- **The past doesn't re-run.** Steps you add _behind_ where someone already is never execute for them. They only ever move forward.
+- **In-progress sends complete as prepared.** If a message has already been rendered and queued when you edit it, that copy still sends. The next person to reach that step gets the new version.
+- **Journeys are traceable, not versioned.** No single saved config describes what one person experienced. Instead, each run's [logs and results](/docs/workflows/troubleshooting) show exactly what that person got and when.
+
+You can stage changes to an enabled workflow as a draft and publish them when you're ready. Nothing below happens until you publish. Each publish appears in the workflow's **History** tab, so you can see what changed and when.
+
+Edits propagate to running workers within about 30 seconds, so there's a brief window after you publish where a step may still run against the previous configuration.
+
+## What happens for each type of edit
+
+The tables below break behavior down by where a person is relative to the step you changed:
+
+- **Before the step:** hasn't reached it yet
+- **Waiting at the step:** currently parked in a delay, time window, or wait condition
+- **Past the step:** already moved on
+
+### Timing edits
+
+| Edit                          | People before the step                    | People waiting at the step                                                                 | People past the step |
+| ----------------------------- | ----------------------------------------- | ------------------------------------------------------------------------------------------ | -------------------- |
+| **Shorten a delay**           | Wait the new, shorter delay when they arrive | Switch to the shorter delay within minutes of publishing. Anyone already past it advances (see the caveat below) | Unaffected           |
+| **Lengthen a delay**          | Wait the new, longer delay when they arrive  | Re-park for the remaining time when their timer next fires                                  | Unaffected           |
+| **Change a time window**      | Use the new window when they arrive          | Re-evaluated against the new window within minutes of publishing                            | Unaffected           |
+| **Change a wait-until condition** | Use the new condition when they arrive   | Re-checked against the new condition within minutes of publishing. Runs that now match advance; the rest keep waiting | Unaffected           |
+
+### Content and structure edits
+
+| Edit                                     | People before the step               | People waiting at the step                                              | People past the step                                    |
+| ---------------------------------------- | ------------------------------------ | ----------------------------------------------------------------------- | ------------------------------------------------------- |
+| **Edit message or action content**       | Get the new content when they arrive | Get the new content when they arrive                                    | Already-sent messages are never resent or updated. A message already rendered and queued sends with the old content |
+| **Add a step**                           | Execute the new step when they reach it | Execute it if it's ahead of where they're waiting; a step added _behind_ them never runs | A step added behind them never runs                     |
+| **Remove a step** (nobody waiting in it) | Skip straight past it                | Unaffected (they're waiting elsewhere)                                  | Unaffected                                              |
+| **Reroute an edge**                      | Follow the new path when they arrive | Follow the new path on their next move; messages already sent are never repeated | Unaffected                                              |
+| **Delete a step people are waiting in**  | Skip straight past it                | Move to the deleted step's next step within minutes of publishing, or exit the workflow if it no longer has a next step for them (see below) | Unaffected                                              |
+
+### Variable edits
+
+| Edit                | Effect                                                                                                                             |
+| ------------------- | -------------------------------------------------------------------------------------------------------------------------------- |
+| **Add a variable**  | Available to steps that set and read it going forward. A run that never passed the step that sets it will see it empty            |
+| **Rename or delete a variable** | A step that references a variable a run never had renders it **empty**. This is logged as a warning on the run so you can spot it |
+
+## Caveats worth knowing
+
+<CalloutBox type="caution" title="Read before editing timing on a live workflow">
+
+- **Shortened delays take effect within minutes, not instantly.** If someone is 6 days into a 7-day delay and you shorten it to 3 days, they advance shortly after you publish. When many people are overdue at once, their wakes happen over a few minutes rather than at the same moment.
+- **Deleting a step someone is waiting in moves them forward or exits them.** If the workflow has a next step where the deleted one was, they move there and continue. If not, they leave with the exit reason `exited_workflow_changed`. This counts as a completed exit, not an error.
+- **A step that reads a variable set by a newly added upstream step sees it empty** for people who were already past that point when you published.
+
+</CalloutBox>
+
+## Stopping runs
+
+Editing a workflow changes what happens next for people in it. To stop their runs instead, cancel them from the workflow's **Invocations** tab.
+
+Canceling stops a run before its next step. A run parked in a delay or wait stops within moments. A run that is mid-step finishes that step first, then stops. Steps that already ran, like sent emails, are not undone or recalled.
+
+### Cancel one run
+
+On the **Invocations** tab, every in-flight run (status **Running**) has a **Cancel** button.
+
+### Cancel all in-flight runs
+
+**Cancel in-flight runs** at the top of the **Invocations** tab stops every in-flight run of the workflow at once.
+
+One pass covers a large but bounded number of runs. If the workflow still has runs in flight after a pass, PostHog tells you, and you can run it again to catch the rest.
+
+### Stop a batch run
+
+Canceling in-flight runs doesn't stop a [batch trigger](/docs/workflows/workflow-builder#batch-triggers) that is still enrolling its audience: new runs keep starting until the audience is exhausted. To stop the batch itself, click **Stop** on the batch run in the **Invocations** tab. The button is available while the batch is waiting, queued, or active.
+
+Stopping a batch run halts enrollment, so no more of the audience enters the workflow, and cancels every run the batch already started. Messages already sent are not recalled, and batch runs that already finished are unaffected.
+
+### The canceled status
+
+Canceled is a terminal status with its own filter on the **Invocations** tab. A canceled run:
+
+- doesn't count as succeeded in the workflow's metrics, and is tracked as a separate canceled series
+- keeps its logs, so you can still see how far it got and why it stopped
+- can be rerun later with **Rerun**, like any other finished run
+
+### Disabling a workflow doesn't cancel runs
+
+Disabling an enabled workflow (or archiving it) stops new runs from starting, but runs already in flight aren't canceled right away:
+
+- Runs waiting in a delay or wait step stay parked where they are.
+- If you re-enable the workflow before a parked run wakes, the run continues as normal.
+- If a run comes up for its next step while the workflow is still disabled, it's canceled at that point, and its log records that the workflow was no longer active.
+
+To stop in-flight runs right away, use **Cancel in-flight runs** instead of waiting for their timers to fire.
+
+## Related
+
+- [Workflow builder](/docs/workflows/workflow-builder#draft-and-enabled-workflows): draft vs. enabled states and validation
+- [Best practices](/docs/workflows/best-practices): planning, versioning, and testing changes safely
+- [Troubleshooting](/docs/workflows/troubleshooting): debugging individual runs and their logs

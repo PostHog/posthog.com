@@ -16,17 +16,10 @@ export const FIFTY_MILLION = 50000000
 export const HUNDRED_MILLION = 100000000
 export const TWO_FIFTY_MILLION = 250000000
 export const BILLION = 1000000000
-export const MAX_PRODUCT_ANALYTICS = TWO_FIFTY_MILLION
+export const MAX_PRODUCT_ANALYTICS = FIFTY_MILLION
 export const MAX_SESSION_REPLAY = ONE_FIFTY_THOUSAND
 export const MAX_FEATURE_FLAGS = TEN_MILLION
 export const MAX_SURVEYS = HUNDRED_THOUSAND
-
-export const product_type_to_max_events = {
-    product_analytics: MAX_PRODUCT_ANALYTICS,
-    session_replay: MAX_SESSION_REPLAY,
-    feature_flags: MAX_FEATURE_FLAGS,
-    surveys: MAX_SURVEYS,
-}
 
 export const pricingLogic = kea<pricingLogicType>({
     actions: {

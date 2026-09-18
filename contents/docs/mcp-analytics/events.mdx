@@ -1,0 +1,131 @@
+---
+title: Event and property reference
+---
+
+import CalloutBox from "components/Docs/CalloutBox";
+
+This page is the wire-level contract for the MCP Analytics SDKs. TypeScript-only properties are marked below. All property keys are prefixed with `$mcp_*` so they never collide with PostHog autocapture, Web analytics, or other product events.
+
+## Events
+
+| Event name                | When it fires                                                                     | Notable extras                                                                                                                                                                                                       |
+| ------------------------- | --------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `$mcp_tool_call`          | Every `tools/call` request                                                        | `$mcp_tool_name`, `$mcp_tool_description`, `$mcp_parameters`, `$mcp_response`, `$mcp_duration_ms`, `$mcp_is_error`, `$mcp_error_type`/`$mcp_error_message` (on errors), optionally `$mcp_intent`/`$mcp_intent_source` and `$mcp_llm_model`/`$mcp_llm_model_source` |
+| `$mcp_tools_list`         | Every `tools/list` response                                                       | `$mcp_listed_tool_names` (string[] of advertised tool names), `$mcp_response` (the response envelope as sent, including `nextCursor` and the 2026-07-28 `ttlMs`/`cacheScope` directives)                             |
+| `$mcp_resources_list`     | Every `resources/list` and `resources/templates/list` request                     | `$mcp_response` (the listing as sent: names, URIs, URI templates, MIME types, `nextCursor`), `$mcp_duration_ms`, `$mcp_is_error`. `$mcp_parameters.request.method` tells the two listings apart.                          |
+| `$mcp_resource_read`      | Every `resources/read` request                                                    | `$mcp_resource_name` (the URI, with credentials redacted), `$mcp_parameters`, `$mcp_duration_ms`, `$mcp_is_error`, `$mcp_error_type`/`$mcp_error_message` (on errors). The resource body is never captured.                |
+| `$mcp_initialize`         | Every `2025-11-25` client/server handshake                                        | `$mcp_client_name`, `$mcp_client_version`, `$mcp_server_name`, `$mcp_server_version`, `$mcp_protocol_version`                                                                                                        |
+| _(your event name)_       | A call to `analytics.capture({ event, properties })`                              | Sent under the verbatim `event` name you pass (a customer event, not `$`-prefixed), with your `properties` merged in. See [Custom events](/docs/mcp-analytics/custom-events).                                        |
+| `$mcp_missing_capability` | The `get_more_tools` virtual tool is invoked (`reportMissing: true`)              | The agent's reasoning is captured as `$mcp_intent`. See [Tracking missing capabilities](/docs/mcp-analytics/missing-capability).                                                                                     |
+| `$identify`               | `identify()` returns a new identity for a session                                 | `$set` populated from the identity's `properties`                                                                                                                                                                    |
+| `$exception`              | Sibling event whenever a tool call or resource request errors (unless `enableExceptionAutocapture: false`) | `$exception_list`, `$exception_level`, plus the same `$mcp_*` context as the main event                                                                                                                              |
+
+Both SDKs capture resource events. The event enum reserves `$mcp_prompts_list` and `$mcp_prompt_get`, but the wrappers do not emit these events yet. Prompt payloads pass through unchanged.
+
+## Core properties
+
+Present on most `mcp_*` events.
+
+| Wire key                 | Type                                | Source                                                                                                                                                                                                |
+| ------------------------ | ----------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `$session_id` | string | The MCP session ID (`ses_<32-hex>`). See [session resolution](#session-resolution) below. |
+| `$mcp_source`            | string                              | Always `"posthog_mcp_analytics"`. Use this to filter out non-MCP events when querying mixed projects.                                                                                                 |
+| `$mcp_resource_name`     | string                              | Tool or prompt name, or on resource events the resource URI with its credentials redacted (see [Privacy](/docs/mcp-analytics/privacy))                                                                                                                                                                        |
+| `$mcp_tool_name`         | string                              | Same as `$mcp_resource_name`, but only on `$mcp_tool_call`                                                                                                                                            |
+| `$mcp_tool_description`  | string                              | The tool's `description` at the moment of the call. Cached from `tools/list` and (for `McpServer`) seeded from `_registeredTools`. Only on `$mcp_tool_call` and the paired `$exception` event.        |
+| `$mcp_tool_category`     | string                              | Your own grouping label for the tool, when you set one. Only on `$mcp_tool_call` and the paired `$exception` event.                                                                                    |
+| `$mcp_listed_tool_names` | string[]                            | Names of tools advertised in a `tools/list` response. Only on `$mcp_tools_list`. Useful for joining against `$mcp_tool_call` via `$session_id` to find tools advertised but never called.             |
+| `$mcp_duration_ms`       | number (ms)                         | Wall-clock duration of the tool call or resource request                                                                                                                                                                  |
+| `$mcp_is_error`          | boolean                             | True if the handler threw or returned `isError: true`                                                                                                                                                    |
+| `$mcp_error_type` | string | Failure category, present only when `$mcp_is_error` is true. Defaults to the thrown error type. Override it with a label such as `validation`, `permission`, `timeout`, or `rate_limited`. Use it to group failures without joining `$exception` events. |
+| `$mcp_error_message`     | string                              | The failed call's error message, truncated and passed through the same redaction as `$mcp_parameters` and `$mcp_response`. Only set when `$mcp_is_error` is true.          |
+| `$mcp_server_name`       | string                              | `server._serverInfo.name`                                                                                                                                                                             |
+| `$mcp_server_version`    | string                              | `server._serverInfo.version`                                                                                                                                                                          |
+| `$mcp_client_name`       | string                              | The calling client as it reports itself. Resolved per request, field by field, through the MCP SDK v2 request envelope, then `params._meta`, then the server's own `getClientVersion()`.                |
+| `$mcp_client_version`    | string                              | Same resolution as `$mcp_client_name`.                                                                                                                                                                |
+| `$mcp_client_user_agent` | string | The client's raw `User-Agent`. It can distinguish clients that share a `clientInfo.name`, such as Claude Code CLI and Agent SDK. Available only on HTTP transports. |
+| `$mcp_vendor_client`     | string                              | The calling client's vendor client header, captured raw. HTTP transports only. PostHog resolves this and the user agent into friendly product labels at query time, so labels keep improving without an SDK upgrade. |
+| `$mcp_protocol_version` | string | The request's MCP revision, such as `2025-11-25`. Resolution order: v2 request envelope, `params._meta`, `MCP-Protocol-Version` header, then server accessors. On `2026-07-28`, each request declares its revision, so one session can contain multiple revisions. Use it to compare adoption, errors, and latency by revision. |
+| `$mcp_intent`            | string                              | From the `context` argument the agent passed, or from your `intentFallback` callback. See [Capturing agent intent](/docs/mcp-analytics/intent).                                                       |
+| `$mcp_intent_source`     | `"context_parameter" \| "inferred"` | Tells you which path produced the intent. Absent when no intent was captured.                                                                                                                         |
+| `$mcp_llm_model` | string | The model from recognized client metadata or an SDK-injected `llm_model` argument. Enabled by default in both SDKs. Missing, blank, and `unknown` values are omitted. Both sources are unverified. |
+| `$mcp_llm_model_source` | `"client_metadata" \| "self_reported"` | How the model identifier was obtained. Recognized client metadata takes priority over self-report. |
+| `$mcp_parameters` | object | Sanitized request arguments. SDK-owned analytics arguments are removed before dispatch. Arguments declared by the application remain application data. See [Privacy & redaction](/docs/mcp-analytics/privacy). |
+| `$mcp_response`          | object                              | Sanitized tool result, or the listing on `$mcp_tools_list` and `$mcp_resources_list`. Never a resource body.                                                                                                                                                                                 |
+| `$mcp_conversation_id`   | string                              | Present when `enableConversationId` is on. See [Conversation IDs](/docs/mcp-analytics/conversation-id).                                                                                               |
+
+### Session resolution
+
+The SDK checks these sources in order and uses the first match:
+
+1. An accepted agent-provided `conversation_id`, when [conversation IDs](/docs/mcp-analytics/conversation-id) are enabled.
+2. A session ID carried by the request on `2025-11-25`.
+3. The server instance's session ID, which rotates after 30 minutes of inactivity.
+
+`2026-07-28` has no protocol sessions, so only sources 1 and 3 apply. Conversation handles support correlation across reconnects, restarts, and server instances. The SDK derives the session ID deterministically, without a salt. Separate pods therefore derive the same session ID from the same handle.
+
+### How the harness label is resolved
+
+A **harness** is the client label on the dashboard, such as "Claude Code", "Cursor", or "ChatGPT". PostHog derives it at query time from these properties, in priority order:
+
+1. **`$mcp_vendor_client`** – the vendor header (e.g. `x-anthropic-client`), the only signal separating Anthropic's pooled surfaces (Claude.ai, Cowork, Claude Design) from each other, since they all report the same `clientInfo.name`.
+2. **`$mcp_client_user_agent`** – identifies the Claude Code interface: `(cli)`, `(sdk-ts)`, `(claude-vscode)`, or `(claude-desktop)`. It is also the fallback when no client name is available.
+3. **`$mcp_client_name`** – the `clientInfo.name` the client reported.
+
+Requests through a vendor's gateway identify the gateway, not necessarily the original client. Claude.ai web, desktop, and mobile connectors use the same Anthropic fetcher. They share the `Claude-User` user agent and vendor header value. These requests resolve to "Claude.ai" because the request does not distinguish the three clients.
+
+A call without these properties is unattributed. An unrecognized client appears as "Other".
+
+If you see mostly "Other", check whether these properties contain values. On HTTP transports, the SDK captures headers automatically. [Custom dispatchers](/docs/mcp-analytics/custom-servers#attributing-the-caller) must pass them explicitly. Stdio and in-memory transports have no headers, so only the client name is available.
+
+## Exception properties
+
+Present on `$exception` events emitted alongside any failed tool call. The SDK reuses `@posthog/core`'s error-tracking parser, so these are the same `$exception_list` properties every other PostHog SDK emits – they slot straight into [Error tracking](/docs/error-tracking). Set `enableExceptionAutocapture: false` (default `true`) to stop a failed tool call from emitting the `$exception` sibling.
+
+| Wire key           | Source                                                                                                                                                                                                                                    |
+| ------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `$exception_list`  | Array of structured exceptions. Each has `type`, `value` (the message), `mechanism`, and a `stacktrace` with parsed `frames` (`filename`, `function`, `lineno`, `colno`, `in_app`). An `Error.cause` chain appears as additional entries. |
+| `$exception_level` | Severity, always `"error"`.                                                                                                                                                                                                               |
+
+Plus `$session_id`, `$mcp_conversation_id`, `$mcp_resource_name`, `$mcp_tool_name`, `$mcp_tool_description` and `$mcp_tool_category` (tool calls only), `$mcp_server_*`, `$mcp_client_*` (including `$mcp_client_user_agent` and `$mcp_vendor_client`), `$mcp_protocol_version`, and the model properties when captured.
+
+<CalloutBox icon="IconInfo" title="Symbolicating minified MCP servers" type="fyi">
+
+Upload source maps with the [PostHog CLI](/docs/error-tracking/upload-source-maps) to symbolicate stack frames from bundled or minified servers. This follows the standard backend SDK process. The MCP SDK does not yet apply optional Node frame modifiers for source-context lines or project-relative paths.
+
+</CalloutBox>
+
+## Person properties (`$set`)
+
+Set on `$identify` events when `identify()` returns a user.
+
+| Key   | Source                                                                                                                                 |
+| ----- | -------------------------------------------------------------------------------------------------------------------------------------- |
+| (any) | Keys of the identity's `properties` are written to `$set` (e.g. return `properties: { name, email }` to set a person's name and email) |
+
+The SDK sends `$set` to update the person profile. PostHog does not retain `$set` on the stored event. Query the resulting values as [person properties](/docs/product-analytics/person-properties) rather than filtering events by `$set`.
+
+## Groups (`$groups`)
+
+If `identify()` returns a `groups` field (a `Record<string, string>` of groupType -> groupKey), the SDK stamps it onto every event as `$groups`. You never hand-write `$groups` yourself. See [Identifying users](/docs/mcp-analytics/identifying-users).
+
+## Person profiles for anonymous sessions
+
+Events for sessions with no resolved identity are sent with `$process_person_profile: false`, so anonymous MCP sessions do not each create a person profile. Once `identify()` resolves an identity for the session, person processing stays on and the events attribute to that user.
+
+## Constants exported from the package
+
+For product code that queries against the SDK's contract, the package exports:
+
+- `POSTHOG_MCP_ANALYTICS_SOURCE` – the constant `"posthog_mcp_analytics"` (matches `$mcp_source`)
+- `PostHogMCPAnalyticsEvent` – enum of canonical event names
+- `PostHogMCPAnalyticsProperty` – enum of canonical property names
+
+Use them instead of hard-coding strings so renames stay typesafe:
+
+```ts
+import { PostHogMCPAnalyticsEvent, PostHogMCPAnalyticsProperty } from "@posthog/mcp";
+
+const event = PostHogMCPAnalyticsEvent.ToolCall; // "$mcp_tool_call"
+const key = PostHogMCPAnalyticsProperty.ToolName; // "$mcp_tool_name"
+```

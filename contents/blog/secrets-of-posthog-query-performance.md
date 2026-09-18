@@ -13,7 +13,6 @@ author:
 category: Engineering
 tags:
   - Product updates
-  - Launch week
 ---
 
 We want PostHog to become the first choice for product analytics at any scale. To do that, users should have a smooth experience exploring their product data - including not waiting minutes for queries to load.
@@ -136,7 +135,7 @@ WHERE project_id = 2
     AND timestamp < '2022-04-01'
 ```
 
-When executing this query, ClickHouse can leverage data being sorted and the sparse index to skip reading most of data from disk. In this case, events from other projects and organizations and events from months other than March.
+When executing this query, ClickHouse can leverage data being sorted and the sparse index to skip reading most of the data from disk. In this case, events from other projects and organizations and events from months other than March.
 
 However, almost all of our most time-sensitive queries in PostHog also filter by event type. After measuring and confirming this, we updated the `ORDER BY` clause to the following one:
 
@@ -170,7 +169,7 @@ Some features coming in PostHog 1.34.0 (releasing on Thursday) which affect perf
 
 ## What’s next?
 
-Performance work is never complete and PostHog has a lot of work ahead of us to make answering questions about your product fast, no matter your scale.
+Performance work is [never complete](/blog/autoresearch-found-a-3-year-old-clickhouse-bug) and PostHog has a lot of work ahead of us to make answering questions about your product fast, no matter your scale.
 
 Some projects currently in the pipeline are:
 

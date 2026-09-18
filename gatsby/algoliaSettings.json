@@ -1,0 +1,15 @@
+{
+    "searchableAttributes": [
+        "unordered(canonicalTerms)",
+        "unordered(title)",
+        "unordered(headings.value)",
+        "unordered(rawBody)",
+        "unordered(slug)",
+        "unordered(excerpt)"
+    ],
+    "customRanking": ["asc(path_ranking)", "desc(fields.pageViews)"],
+    "attributesForFaceting": ["type"],
+    "unretrievableAttributes": ["fields.pageViews", "headings", "rawBody"],
+    "minProximity": 2,
+    "removeWordsIfNoResults": "lastWords"
+}

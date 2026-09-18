@@ -1,0 +1,151 @@
+---
+title: Warehouse properties
+sidebarTitle: Warehouse properties
+sidebar: Docs
+showTitle: true
+availability:
+  free: full
+  selfServe: full
+  enterprise: full
+---
+
+import { CalloutBox } from 'components/Docs/CalloutBox'
+
+Warehouse properties copy columns from a synced [data warehouse](/docs/data-warehouse) table onto your [person properties](/docs/product-analytics/person-properties) and [group properties](/docs/product-analytics/group-analytics). Each row is matched to a person or a group by a key column. The mapped columns then stay up to date on every sync.
+
+Use it when the truth about a customer lives in another system. Plan tier, seat count, MRR, contract renewal date, and lifecycle stage usually live in Stripe, Salesforce, HubSpot, or your own Postgres, not in your product events.
+
+Once a column is mapped, it behaves like any other person or group property. You can filter insights with it, build [cohorts](/docs/data/cohorts) from it, target [feature flags](/docs/feature-flags) and [experiments](/docs/experiments) with it, and use it in [surveys](/docs/surveys).
+
+<CalloutBox icon="IconWarning" title="Beta feature" type="action">
+
+Warehouse properties are currently in beta. Contact support if you don't see **Warehouse properties** in the **Data** menu.
+
+</CalloutBox>
+
+## Warehouse properties or a join?
+
+PostHog gives you two ways to use warehouse data about a person. They are not interchangeable.
+
+| | Warehouse properties | [Person join](/docs/data-warehouse/join#person-joins) |
+|---|---|---|
+| How it works | The value is written onto the person profile | The tables are joined when a query runs |
+| Where you can use it | Anywhere a person property works | Insights, filters, and breakdowns |
+| Feature flags and experiments | Yes | No |
+| Cost of a value | One property update per changed row | No writes |
+| Freshness | Updated on each warehouse sync | Always current at query time |
+
+Choose warehouse properties when something outside of a query has to read the value. Feature flags and experiments evaluate against stored person properties, so a join is invisible to them.
+
+Choose a join when you only need the data in insights and SQL. A join adds no writes and never goes stale.
+
+## Before you start
+
+You need three things:
+
+1. A [linked source](/docs/data-warehouse/sources) that syncs the table you want to read.
+2. A column in that table holding each row's distinct ID, for person properties. For group properties, you need the column holding each row's group key.
+3. People or groups that already exist in PostHog.
+
+The last point is the one that catches people out. A sync only updates a person who is already in PostHog. It never creates one. If your warehouse holds 50,000 customers and only 12,000 of them have used your product, the other 38,000 rows are skipped.
+
+Group properties also need [group analytics](/docs/product-analytics/group-analytics) and at least one group type. The **Groups** tab is hidden until you have both.
+
+## Set up a warehouse property
+
+1. Go to **Data** > **Warehouse properties**.
+2. Select the **Persons** or the **Groups** tab.
+3. Click **Add person property**, or **Add group property**.
+4. Give the mapping a name, and a description if it helps the next person to read it.
+5. For groups, select the **Group type** it attaches to.
+6. Select the **Warehouse table** to read from. You can search the whole synced catalog.
+7. Select the **Distinct ID column**, or the **Group key column** for groups. This is how a row finds the person or group to update.
+8. Map each warehouse column to the property name to write it to. Add one row per column. Each mapped column takes its own optional description.
+9. Save.
+
+PostHog starts a backfill as soon as you save, so the first values arrive without another sync.
+
+You need project admin access, plus edit access on the warehouse source behind the table. Mapping a table drives its billable sync, so viewing the source is not enough.
+
+### What you can change later
+
+The table and the column mappings are fixed once you save. To change either, delete the mapping and create it again.
+
+The key column and the on/off toggle stay editable.
+
+Properties that arrive this way carry a **Warehouse** provenance tag in property lists, so you can tell them apart from the ones your SDK sets.
+
+### Naming the property
+
+The property name is what you see in filters, so write it the way you want to read it later. A warehouse column called `sub_plan_tier` can map to a property called `plan`.
+
+The value itself is copied as it stands. PostHog does not convert units or reformat it, so a column holding cents arrives as cents.
+
+You can only map a table a source syncs. A [view](/docs/data-warehouse/views) or a saved query is not selectable, so a value that needs SQL to derive has to be computed upstream, in the system you sync from.
+
+Map a column once. Two sources that write the same property name fight each other, and the last sync wins.
+
+## How syncing works
+
+A warehouse property sync rides on the table's own warehouse sync. It does not run on its own schedule. When the import for the table finishes, the sync runs for every enabled mapping on that table, in this order:
+
+1. It reads the rows the import staged. An incremental import stages only the rows it added or changed, so a quiet table reads zero rows.
+2. It builds a bundle of the mapped values for each row, keyed by the distinct ID or group key.
+3. It compares each bundle against the values it last sent, and drops the ones that did not change.
+4. It drops the rows whose key matches no existing person or group.
+5. It sends one property update per surviving row.
+
+Step 3 means a full refresh does not resend everything. It only sends what actually differs from the last send.
+
+Step 4 is where rows go missing. The run history reports that count separately, under **Skipped (no person)**.
+
+A person update arrives as a `$set` event. A group update arrives as a `$groupidentify` event. PostHog sends them at a controlled rate, so a large backfill lands over time rather than all at once.
+
+### Sync now and backfill
+
+Two buttons sit on each row of the table:
+
+- **Sync now** runs the table's warehouse import, then the property sync behind it. Use it when the warehouse has new rows you want now.
+- **Backfill** reads the whole table instead of the last import's changed rows. Use it after you add a column to a mapping, so people who have not changed since then get the new property.
+
+Only one run happens at a time per table. Both buttons are disabled while a run is in flight.
+
+### Reading the run history
+
+Expand a row to see its runs. The counts follow the steps above:
+
+| Column | What it means |
+|---|---|
+| **Status** | Whether the run finished. A completed run that updated nobody is normal |
+| **Trigger** | What started the run: the sync schedule, **Sync now**, or **Backfill** |
+| **Rows read** | Rows the import staged for this run |
+| **Updated** | People or groups updated, out of the rows whose values changed, with the share of those rows |
+| **Skipped (no person)** | Changed rows whose key matched no existing person. Reads **Skipped (no group)** on the Groups tab |
+
+A row of zeros is not a failure on its own. The status carries a short note that says which zero you are looking at: `no new rows` means the import brought nothing, and `no changes` means every row already holds the values last sent.
+
+## Turning a mapping off
+
+Toggle a mapping off to stop updating its properties without deleting it. Values already synced stay on the people and groups. They stop changing.
+
+Deleting the mapping does the same and removes the configuration. Neither action removes the property values from person profiles.
+
+## Costs
+
+Each updated person or group sends one event, so it counts toward your event volume. The comparison in step 3 exists to keep that number down. A column that rarely changes costs almost nothing after the first sync.
+
+A wide mapping costs more than a narrow one. One changed column resends every property the mapping covers for that person, because the comparison covers the whole bundle rather than each property on its own. Split volatile columns into their own mapping if you map a mix of stable and fast-changing data.
+
+The warehouse sync itself is billed by rows synced. See [data warehouse pricing](/pricing?product=data-warehouse).
+
+## Troubleshooting
+
+**A property never appears on anyone.** Check the **Skipped (no person)** count in the run history. A high number means the key column does not hold the same value as the person's distinct ID. Compare a row in the warehouse table against the person in PostHog.
+
+**A property appears on some people only.** The people who are missing it probably do not exist in PostHog yet, or have not changed in the warehouse since you added the mapping. Run a backfill.
+
+**Every run reads zero rows.** The import itself brought nothing. Open the table's sync history in the data warehouse to see the import's own runs and errors.
+
+**A run failed.** The status tag carries the error. A property sync that rode a failing import fails with it, so check the table's sync history first.
+
+**The mapping turned itself off.** Five failed runs in a row disable a mapping, so a broken table does not retry forever. Fix the underlying sync, then toggle it back on. The failure count resets after a run succeeds.

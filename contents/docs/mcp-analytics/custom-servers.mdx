@@ -1,0 +1,239 @@
+---
+title: Instrumenting a custom server
+---
+
+import CalloutBox from 'components/Docs/CalloutBox'
+
+[`instrument()`](/docs/mcp-analytics/installation) wraps the request handlers of a `@modelcontextprotocol/sdk` `Server` or `McpServer`. A custom dispatcher has no server object to wrap. Examples include [Hono](https://hono.dev/), Express, Cloudflare Workers, and Vercel edge functions that implement the MCP protocol directly.
+
+For those servers, use **`PostHogMCP`** instead. It's a subclass of the [`posthog-node`](/docs/libraries/node) client, so it's a drop-in replacement for your existing PostHog client. It adds preparation helpers for tool schemas and calls, plus capture methods for tool calls, tool listings, initialization, and missing capabilities. You resolve request metadata and call the matching methods yourself. They build the same canonical `$mcp_*` events as `instrument()` and use the same sanitization, truncation, and additional `$exception` events.
+
+## When to use which
+
+| Your server | Use |
+|---|---|
+| Built on `@modelcontextprotocol/sdk`'s `Server` / `McpServer` | [`instrument(server, posthog, options?)`](/docs/mcp-analytics/installation) |
+| A custom HTTP/Hono/edge dispatcher with no server object to wrap | `new PostHogMCP(apiKey, options?)` |
+
+The examples below are TypeScript. Python has the same helper with the same methods in snake_case – skip to [Python](#python).
+
+## Set up
+
+`PostHogMCP` takes the exact same constructor arguments as `posthog-node`'s `PostHog`, so swap the class and you keep one client for your whole app:
+
+```ts
+import { PostHogMCP } from "@posthog/mcp"
+
+const posthog = new PostHogMCP(process.env.POSTHOG_PROJECT_TOKEN, {
+  host: "https://us.i.posthog.com", // or https://eu.i.posthog.com
+  // standard posthog-node options apply, e.g. beforeSend, enableExceptionAutocapture
+})
+```
+
+`PostHogMCP` provides the standard `PostHog` client options and methods. Its `beforeSend` hook also applies to MCP events. Set `enableExceptionAutocapture: false` to stop additional `$exception` events for failed calls.
+
+The `instrument()` hooks (`identify`, `context`, `intentFallback`, `eventProperties`) do not run on this path. Pass identity and properties on each capture call.
+
+## Capture events
+
+Call the matching method from inside your dispatcher, after you've resolved who the user is and run the tool. The methods are fire-and-forget, just like `posthog.capture()`:
+
+```ts
+// On a tools/call, after the tool runs:
+posthog.captureToolCall({
+  toolName: "search_events",
+  parameters: request.params.arguments,
+  response: result,
+  durationMs: Date.now() - start,
+  isError: false,
+  distinctId: user.id,                       // → distinct_id (enables person processing)
+  sessionId: mcpSessionId,                    // → $session_id (omitted if you don't pass one)
+  protocolVersion: requestProtocolVersion,    // → $mcp_protocol_version
+  groups: { organization: user.orgId },       // → $groups
+  properties: { $mcp_client_name: "claude-code" }, // any extra props, spread verbatim
+})
+
+// Only on a 2025-11-25 initialize handshake:
+posthog.captureInitialize({
+  clientName: "claude-code",
+  clientVersion: "1.2.3",
+  protocolVersion: "2025-11-25",
+  distinctId: user.id,
+})
+
+// Custom events use the inherited posthog-node capture():
+posthog.capture({
+  distinctId: user.id,
+  event: "feedback_submitted",
+  properties: { rating: 5 },
+})
+```
+
+### Fields shared by every method
+
+| Field | Maps to | Notes |
+|---|---|---|
+| `distinctId` | `distinct_id` | Supplying it enables person processing so `$set` updates a person profile. Omit it for anonymous traffic – events are sent with `$process_person_profile: false`. |
+| `sessionId` | `$session_id` | Omitted from the event entirely when you don't pass one (so stateless captures don't bucket into a non-existent [Session Replay](/docs/session-replay) session). |
+| `protocolVersion` | `$mcp_protocol_version` | Pass the revision from each request. The `2026-07-28` revision doesn't have an initialize request that can carry this state forward. |
+| `clientUserAgent` | `$mcp_client_user_agent` | Pass the raw `User-Agent` header on HTTP transports. |
+| `vendorClient` | `$mcp_vendor_client` | Pass the raw vendor client header, such as `x-anthropic-client`, when present. |
+| `groups` | `$groups` | `{ groupType: groupKey }`, stamped on the event so you never hand-write the `$groups` key. |
+| `setProperties` | `$set` | Person properties (`{ name, email, plan }`), same as the `properties` you'd pass to `identify`. Updates the person profile. PostHog does not store `$set` on the event. Query these values as [person properties](/docs/product-analytics/person-properties). |
+| `properties` | spread verbatim | Extra event properties, sitting alongside the `$mcp_*` keys. Values must be JSON-serializable. |
+| `timestamp` | event time | Defaults to the time of the capture call. |
+
+### Tool-call specific fields
+
+`toolName` -> `$mcp_tool_name`, `toolDescription` -> `$mcp_tool_description`, `parameters` -> `$mcp_parameters`, `response` -> `$mcp_response`, `durationMs` -> `$mcp_duration_ms`, `isError` -> `$mcp_is_error`. When `isError` is true, the SDK emits an additional `$exception` unless `enableExceptionAutocapture` is false. It uses the error you supply. If no error is available, it creates a generic exception from the tool name.
+
+<CalloutBox icon="IconInfo" title="Analytics never breaks your request" type="fyi">
+
+`captureToolCall` and `captureInitialize` queue events without waiting for delivery, like `posthog.capture()`. They do not throw, so analytics failures do not interrupt your tool. Flush at the end of each serverless or edge invocation to send queued events.
+
+</CalloutBox>
+
+## What you don't get compared with `instrument()`
+
+Because there's no wrapped server, `PostHogMCP` does **not** manage these for you – you pass the equivalent data per call:
+
+- **Sessions** – no MCP-session-derived `$session_id` or inactivity rollover. Pass your own `sessionId`.
+- **Identity caching / `$identify` dedupe** – pass `distinctId` (and optional `setProperties`) on each call.
+- **Automatic intent and missing-capability handling** – use `prepareToolList()` and `prepareToolCall()`, then pass their output to the matching capture method.
+- **Conversation IDs** – pass your own stable `sessionId`. The custom dispatcher helpers don't inject or echo `conversation_id`.
+- **Model capture** – enabled by default in both SDKs' preparation helpers. Use `prepareToolList()` to advertise the argument, then `prepareToolCall()` to extract it. Pass its `llmModel` and `llmModelSource` to `captureToolCall()`.
+
+For model capture on a fresh dispatcher, pass the application's original tool as `originalTool` in the preparation options. Pass `requestMeta` there to capture recognized client metadata. Python uses the equivalent snake_case fields and keyword arguments.
+
+The `2026-07-28` revision has no initialize handshake or protocol session. Don't fabricate `$mcp_initialize`. Capture each request's `protocolVersion`. For correlation across requests, pass an authenticated user ID or your own stable session ID.
+
+Everything from the [event reference](/docs/mcp-analytics/events) onward – event names, property shapes, sanitization, error tracking – is identical.
+
+## Graceful shutdown
+
+`PostHogMCP` is a `posthog-node` client, so flush it yourself. In serverless or edge environments, flush at the end of each invocation rather than relying on `SIGTERM`:
+
+```ts
+// at the end of the request/invocation
+await posthog.flush()
+// or keep the runtime alive until the flush completes
+ctx.waitUntil(posthog.flush())
+```
+
+## Python
+
+The Python SDK ships the same custom-dispatcher path as `PostHogMCP`, a subclass of the [`posthog`](/docs/libraries/python) client. Method names are snake_case and arguments are keyword args rather than an options object:
+
+```python
+import time
+from posthog.mcp import PostHogMCP, get_more_tools_result
+
+posthog = PostHogMCP("phc_your_project_api_key", host="https://us.i.posthog.com")
+
+# Advertise your tools with the injected `context` intent argument (and, optionally,
+# the get_more_tools virtual tool):
+tools = posthog.prepare_tool_list(my_tools, report_missing=True)
+
+def handle_tools_call(request, name, arguments):
+    # Pull the agent's intent off the call and strip the injected `context`:
+    prepared = posthog.prepare_tool_call(name, arguments)
+
+    # Pass these on every capture — see "Attributing the caller" below:
+    common = dict(
+        distinct_id=user_id,
+        session_id=mcp_session_id,
+        client_user_agent=request.headers.get("user-agent"),
+        vendor_client=request.headers.get("x-anthropic-client"),
+        groups={"organization": org_id},
+    )
+
+    if prepared.is_missing_capability:
+        posthog.capture_missing_capability(
+            context=prepared.intent,
+            llm_model=prepared.llm_model,
+            llm_model_source=prepared.llm_model_source,
+            **common,
+        )
+        return get_more_tools_result()
+
+    start = time.monotonic()
+    try:
+        result = run_tool(name, prepared.args)
+    except Exception as exc:
+        posthog.capture_tool_call(
+            name,
+            llm_model=prepared.llm_model,
+            llm_model_source=prepared.llm_model_source,
+            parameters=prepared.args,
+            duration_ms=(time.monotonic() - start) * 1000,
+            is_error=True,
+            error=exc,  # → $mcp_error_message, $mcp_error_type, and the $exception sibling
+            **common,
+        )
+        raise
+
+    posthog.capture_tool_call(
+        name,
+        llm_model=prepared.llm_model,
+        llm_model_source=prepared.llm_model_source,
+        intent=prepared.intent,
+        intent_source=prepared.intent_source,
+        parameters=prepared.args,
+        response=result,
+        duration_ms=(time.monotonic() - start) * 1000,
+        **common,
+    )
+    return result
+```
+
+Capture the handshake and the tool listing the same way:
+
+```python
+posthog.capture_initialize(client_name="claude-code", client_version="1.2.3", **common)
+posthog.capture_tools_list(tool_names=[t["name"] for t in tools], **common)
+
+posthog.flush()  # PostHogMCP is a posthog client — flush/shutdown it yourself
+```
+
+`PostHogMCP(api_key, missing_capability_tool_name="get_more_tools", mcp_exception_autocapture=True, **posthog_kwargs)` accepts the standard `posthog` client kwargs – `host`, and [`before_send`](/docs/mcp-analytics/privacy#python) if you need to drop or rewrite payloads. Set `mcp_exception_autocapture=False` to stop a failed tool call from emitting a `$exception` sibling. As in TypeScript, the wrapping-path hooks (`identify`, `context`, `intent_fallback`, `event_properties`) don't apply here – pass identity and properties on each `capture_*` call.
+
+### Failed calls
+
+Pass `error=exc` with `is_error=True` to capture `$mcp_error_message` and `$mcp_error_type` from the exception. The SDK sanitizes the message and limits it to 2048 characters. Set `error_type="timeout"`, or another category, to replace the exception class name. The SDK also unwraps the generic `ToolError` from MCP SDK 2.x.
+
+### Attributing the caller
+
+`clientInfo.name` reports `claude-code` for the CLI, Agent SDK, VS Code extension, and desktop app. That name alone cannot distinguish these clients, so the harness breakdown can show mostly "Other". Custom dispatchers must pass the transport headers below. `instrument()` reads them automatically:
+
+- `client_user_agent` -> `$mcp_client_user_agent` – the parenthetical carries the build (`claude-code/2.1.0 (cli)` vs `(sdk-ts)`).
+- `vendor_client` -> `$mcp_vendor_client` – from vendor headers like `x-anthropic-client`, the only thing that separates Anthropic's pooled surfaces (Claude.ai, Cowork, Claude Design) from each other. It separates products but cannot distinguish clients within one product. Claude.ai web, desktop, and mobile connectors use the same fetcher and header value. They all receive the "Claude.ai" label.
+
+Both are captured raw and classified at query time, so labels improve without an SDK release. stdio and in-memory transports carry no headers, so leave them unset there.
+
+### Stateless / multi-pod dispatchers
+
+A stateless deployment creates a new server per request, often across pods. Without correlation, `$session_id` differs between requests. Client name and version arrive only at `initialize`, so later requests lose these values.
+
+Add the session middleware to your ASGI app once. At `initialize`, it puts a token in the `Mcp-Session-Id` response header. It decodes the token when clients resend it. Each pod recovers the same values without shared storage:
+
+```python
+from posthog.mcp import PostHogMcpStatelessSessionMiddleware, get_mcp_session
+
+app.add_middleware(PostHogMcpStatelessSessionMiddleware)
+
+# ...then in your request handler, feed the recovered session into each capture.
+# The token carries the client identity too — pass it as $mcp_client_* properties
+# (capture_tool_call takes session_id directly, client name/version via properties):
+sess = get_mcp_session(request)  # None until the client replays the token
+posthog.capture_tool_call(
+    name,
+    session_id=sess.session_id if sess else None,
+    intent=prepared.intent,
+    properties={
+        "$mcp_client_name": sess.client_name if sess else None,
+        "$mcp_client_version": sess.client_version if sess else None,
+    },
+)
+```
+
+The token is unsigned and contains only client-provided values from `initialize`. Use `$session_id` and `$mcp_client_*` as analytics labels, not authentication.

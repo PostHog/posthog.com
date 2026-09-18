@@ -34,7 +34,7 @@ For customers that sign up themselves, and begin using the product, we provide a
 1. [Pre-recorded demo](/demo)
 1. [Community page](/posts)
 
-Additionally, all users can contact us for support/bugs/feedback using the `?` icon in the top right of the PostHog app. This is routed to the appropriate team in Zendesk.
+Additionally, all users can contact us for support/bugs/feedback using the support panel in the PostHog app (bottom-left **More** menu → **Support**). This is routed to the appropriate team in PostHog Support.
 
 
 ## Ensuring customers see value quickly
@@ -90,7 +90,7 @@ Again, no need - we already have usage-based pricing which is _heavily_ discount
 
 _How do I work with a customer who wants to sign an MSA?_
 
-This occasionally happens when we are dealing with very large companies, who may prefer to sign an MSA due to their internal procurement processes or to have the security of a locked-in contract from a pricing perspective. We have a contract version of our standard terms and conditions that we can use for this - ask Charles. 
+This occasionally happens when we are dealing with very large companies, who may prefer to sign an MSA due to their internal procurement processes or to have the security of a locked-in contract from a pricing perspective. We have a contract version of our standard terms and conditions that we can use for this - ask Ben. 
 
 We'd only really look to do this with people spending $20k+ per year - we don't do it below this value because of the legal effort required.
 

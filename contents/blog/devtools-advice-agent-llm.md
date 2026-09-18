@@ -8,7 +8,7 @@ featuredImage: >-
 featuredImageType: full
 tags:
     - Engineering
-    - LLM
+    - AI
 ---
 
 The way software gets made is changing. Developers are using LLM tools to build quick-and-dirty prototypes to test assumptions and validate demand.

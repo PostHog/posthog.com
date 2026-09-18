@@ -15,7 +15,7 @@ If it does seem promising, a product marketer will take the lead and loop in eve
 
 What this article doesn’t cover:
 - [Influencers](/handbook/marketing/influencers) and newsletters
-- Rev-share [partners](/handbook/brand/partners) and individual consultants
+- Rev-share [partners](/handbook/marketing/partners) and individual consultants
 - [Sponsorships](/handbook/marketing/open-source-sponsorship)
 
 ## Integrations and CDP destinations
@@ -55,7 +55,6 @@ If a customer is a logo we’d proudly show on the site, represents [who we buil
 
 Examples:
 - [PostHog + Supabase](/customers/supabase)
-- [PostHog + Mintlify](/customers/mintlify)
 - [PostHog + Lovable](/customers/lovable)
 
 Social media co-marketing for case studies naturally follows since most companies are excited to have their story featured. It's usually worth raising an [art request](/handbook/brand/art-requests) for these opportunities.
@@ -63,14 +62,13 @@ Social media co-marketing for case studies naturally follows since most companie
 We also will typically thank customers who participate in case studies and collab content by sending them a merch voucher. We're nice like that.
 
 ## Startup and ecosystem partnerships
-We already run a strong [startup program](/handbook/brand/startups). Accepted companies get $50K in PostHog credits plus access to partner benefits. This is one of the best types of co-marketing because it’s a simple value exchange: we help their users, they help ours. 
+We already run a strong [startup program](/handbook/marketing/startups). Accepted companies get $50K in PostHog credits plus access to partner benefits. This is one of the best types of co-marketing because it’s a simple value exchange: we help their users, they help ours. 
 
 However, we are very selective about which teams we partner with here because these partnerships usually offer outsized benefits to them. As a rule, we want to have no more than three such partners at once - and it's one-in, one-out. 
 
 Examples:
 - Easier incidents with [Incident.io](https://incident.io) ($1,500 off a teams plan)
 - Better SDKs with [Speakeasy](https://www.speakeasy.com/) (50% off for 6 months)
-- Better search with [Chroma](https://www.trychroma.com/) ($5,000 of credit for their search and retrieval service)
 
 If we're signing anything with legal commitments, that needs to go via <PrivateLink url="https://posthog.slack.com/archives/C08MYQX74KH">#legal</PrivateLink>. If it's an informal exchange of perks, you can usually just coordinate directly with the partner company.
 
@@ -95,7 +93,6 @@ We maintain a <PrivateLink url="https://docs.google.com/spreadsheets/d/1LSk0J6TW
 [Events](/handbook/marketing/events) are a great place to co-market and vary from intimate gatherings to large scale meetups. These are higher effort and don’t usually sit under product marketing alone. Tag [Daniel](/community/profiles/34023) early – he’s the best judge of what events and co-sponsorships will actually land.
 
 Examples:
-- [We buy AI YC](https://luma.com/ztg6sjun) pitch event with Chroma, Mintlify (and others)
 - [MCP Builder breakfast](https://luma.com/f9vnfsii) with Fiberplane
 - [Building with (and for) AI](https://luma.com/hxn3j38l) event with Vercel and Profound
 

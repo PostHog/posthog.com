@@ -46,15 +46,15 @@ They could see it coming: a rush of users at a Gen AI data scale would mean a ba
 
 This quick pivot was only possible because Diego had stayed close to the data. “Especially in generative AI," says Diego, "any increase in user activity can greatly impact the whole system. It means paying attention and moving quickly."
 
- ## 3. LLM analytics are the new frontier
+ ## 3. AI Observability is the new frontier
 
-It's not the usual round-up of [pirate metrics](/product-engineers/aarrr-pirate-funnel) alone when we're building in AI. In the realm of LLM analytics, there are entirely new stats to track.
+It's not the usual round-up of [pirate metrics](/product-engineers/aarrr-pirate-funnel) alone when we're building in AI. In the realm of AI Observability, there are entirely new stats to track.
 
 How much is each LLM call costing you? Is the user getting the result they want from the agent? Are there errors happening that might be entirely off-screen? 
 
 Or, the one piece of information Diego is curious about: “What happened in the LLM that influenced a customer? If products once spread via word of mouth — we will start seeing them spread through word of... next token prediction?"
 
-It's quite possible that a founder might not know to ask these questions, let alone where to look to answer them, and it's why staying alert matters. Towards this, PostHog has just launched a new product in this category, introducing [LLM analytics](/docs/llm-analytics) to help you follow more closely what's happening with your LLM calls. 
+It's quite possible that a founder might not know to ask these questions, let alone where to look to answer them, and it's why staying alert matters. Towards this, PostHog has just launched a new product in this category, introducing [AI Observability](/docs/ai-observability) to help you follow more closely what's happening with your LLM calls.
 
 It's an exciting area that has us paying attention alongside Diego and other AI-focused founders. 
 

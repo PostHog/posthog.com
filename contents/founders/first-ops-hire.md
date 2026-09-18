@@ -16,7 +16,7 @@ crosspost:
 
 Most founders I talk to approach their first ops hire in a totally sensible but wrong way. Their typical approach is to look at the long list of admin debt they have accumulated, cry a bit, and then look for someone who has done those tasks before, plus a bit extra. However, the reality is that _attributes_ >>> technical expertise when it comes to your _first_ ops hire.
 
-This person will have a disproportionate impact on your company culture. They'll do work that affects everyone on the team personally, and hopefully ensure the founders can focus on [finding product-market fit](/blog/product-market-fit-game) and making the company a success. 
+This person will have a disproportionate impact on your company culture. They'll do work that affects everyone on the team personally, and hopefully ensure the founders can focus on [finding product-market fit](/founders/product-market-fit-game) and making the company a success. 
 
 With that in mind, these are the top three attributes they need...
 
@@ -68,9 +68,10 @@ Finally, your first ops hire needs to recuse themselves from general office goss
 
 ## Further reading
 
-- [What we learned about hiring from our first five employees](https://posthog.com/blog/posthog-first-five)
-- [The ops toolkit for early-stage startups](https://posthog.com/blog/startup-ops-toolkit)
-- [Startups, stop treating engineers like a different species](https://posthog.com/blog/stop-treating-engineers-differently)
+- [What we learned about hiring from our first five employees](/blog/posthog-first-five)
+- [The ops toolkit for early-stage startups](/blog/startup-ops-toolkit)
+- [Startups, stop treating engineers like a different species](/blog/stop-treating-engineers-differently)
 - [How we run our hiring process](/handbook/people/hiring-process) at PostHog
+- [Being AI-native matters more than experience](/blog/ai-native-hiring)
 
 <NewsletterForm />

@@ -1,6 +1,6 @@
-# Code Components
+# Code components
 
-Animation primitives and content components for the `/code` (PostHog Code) marketing page.
+Animation primitives and content components for the `/code` (PostHog Desktop) marketing page.
 
 ## Animation primitives
 
@@ -23,6 +23,14 @@ Elastic scale + rotation animation for inline icons. Pops in when scrolled into 
 Hook that returns `true` when the user has `prefers-reduced-motion: reduce` enabled. All animation components use this to skip animations gracefully.
 
 ## Content components
+
+### `platforms`
+Shared platform data and device detection for the launch download UI. Download URLs use `https://desktop.posthog.com/download/*`, which resolves the latest matching artifact.
+
+### `DownloadButtons`
+Feature-flagged launch UI with a detected-platform download, an all-platforms dropdown, and a docs link. Mobile devices get the docs link instead of a download.
+
+**Props:** `className`, `align`, `size`
 
 ### `SignalsCallout`
 Grid display of signal types (In-app activity, Logs, Errors, etc.) with icons. Responsive: 3-col at `@2xl`, 2-col below.

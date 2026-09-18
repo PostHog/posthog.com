@@ -1,0 +1,43 @@
+---
+title: Surveys API
+sidebar: Docs
+showTitle: true
+---
+
+Use the API when you want surveys managed by your own tooling rather than by hand – creating a survey per experiment from a script, syncing responses into a warehouse, or building a fully custom survey UI on top of PostHog.
+
+Reading surveys requires the `survey:read` scope; creating, updating, launching, stopping, and deleting them requires `survey:write`.
+
+## Before you start
+
+1. **Set up Surveys** – [install a PostHog SDK](/docs/surveys/installation) so they can be shown to users.
+2. **Get API access** – [create a personal API key](/docs/api/personal-api-keys) with the scopes you need. See [authentication](#authentication) below.
+
+## What you can do here
+
+**Manage surveys**
+
+Create, read, update, and delete surveys, including their questions, appearance, schedule, display conditions, and targeting. Launching and stopping a survey is a matter of setting its start and end dates.
+
+**Read responses and stats**
+
+List a survey's responses, pull per-survey stats, or fetch project-wide stats across every survey. Responses are also captured as `survey sent`, `survey shown`, and `survey dismissed` events, so you can query them directly through the [query API](/docs/api/query) alongside the rest of your data.
+
+**Serve surveys yourself**
+
+For a headless implementation, use the `api` survey type and fetch the active surveys for a user with `posthog.getSurveys()` or `posthog.getActiveMatchingSurveys()`, then render your own UI and capture the response events. See [implementing custom surveys](/docs/surveys/implementing-custom-surveys).
+
+## Authentication
+
+Use a [personal API key](/docs/api#authentication) with the scopes above, passed as a bearer token:
+
+```bash
+curl -H "Authorization: Bearer $POSTHOG_PERSONAL_API_KEY" \
+  https://us.posthog.com/api/projects/:project_id/surveys/
+```
+
+## Related
+
+- See the full endpoint reference in the [Surveys API docs](/docs/api/surveys).
+- Build the same things conversationally over [MCP](/docs/surveys/surfaces/mcp).
+- Roll your own UI with [implementing custom surveys](/docs/surveys/implementing-custom-surveys).

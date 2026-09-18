@@ -19,6 +19,7 @@ import {
     // Mobile SDK installations
     IOSInstallation,
     AndroidInstallation,
+    KMPErrorTrackingInstallation,
     FlutterInstallation,
     ReactNativeInstallation,
 } from 'onboarding/error-tracking'
@@ -152,6 +153,22 @@ export const ErrorTrackingAndroidInstallationWrapper = () => (
     </OnboardingContentWrapper>
 )
 
+export const ErrorTrackingKMPInstallationWrapper = () => (
+    <OnboardingContentWrapper snippets={{}}>
+        <KMPErrorTrackingInstallation
+            modifySteps={(steps) =>
+                addNextStepsStep(steps, undefined, {
+                    mappingsUrl: '/docs/error-tracking/upload-debug-symbols/kmp',
+                    mappingsLabel: 'Upload debug symbols',
+                    mappingsDescription:
+                        "If you ship minified or native code on a supported KMP target, upload that target's debug symbols so PostHog can generate accurate stack traces.",
+                    mappingsBadge: 'optional',
+                })
+            }
+        />
+    </OnboardingContentWrapper>
+)
+
 export const ErrorTrackingFlutterInstallationWrapper = () => (
     <OnboardingContentWrapper snippets={{}}>
         <FlutterInstallation modifySteps={(steps) => addNextStepsStep(steps, 'flutter')} />
@@ -160,6 +177,15 @@ export const ErrorTrackingFlutterInstallationWrapper = () => (
 
 export const ErrorTrackingReactNativeInstallationWrapper = () => (
     <OnboardingContentWrapper snippets={{}}>
-        <ReactNativeInstallation modifySteps={(steps) => addNextStepsStep(steps, 'react-native')} />
+        <ReactNativeInstallation
+            modifySteps={(steps) =>
+                addNextStepsStep(steps, 'react-native', {
+                    mappingsUrl: '/docs/error-tracking/upload-source-maps/react-native',
+                    mappingsLabel: 'Upload source maps & native symbols',
+                    mappingsDescription:
+                        "Great, you're capturing exceptions! The next step is to upload source maps (for JavaScript stack traces) and native symbols (for native iOS/Android crash symbolication) so PostHog can generate accurate stack traces.",
+                })
+            }
+        />
     </OnboardingContentWrapper>
 )

@@ -48,7 +48,7 @@ Once your transformation is up and running, the **metrics** and **logs** tabs wi
 
 ## History
 
-For projects with the **[teams add-on](https://posthog.com/addons#teams)**, each transformation has a history tab that shows you a complete audit trail of changes. You can see who modified the transformation, what changes were made, and when they occurred.
+For projects on a **[platform package](/platform-packages)**, each transformation has a history tab that shows you a complete audit trail of changes. You can see who modified the transformation, what changes were made, and when they occurred.
 
 ![Transformation history](https://res.cloudinary.com/dmukukwp6/image/upload/history_e0873f6741.png)
 

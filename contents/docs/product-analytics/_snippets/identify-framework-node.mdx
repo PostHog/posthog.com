@@ -1,0 +1,17 @@
+For Express, NestJS, and Next.js/Nuxt server routes, associate a distinct ID with everything captured inside a `withContext` callback.
+
+```node
+posthog.withContext(
+  { distinctId: 'user-123' },
+  () => {
+    // Associated with "user-123"
+    posthog.capture({ event: 'order_processed' })
+
+    // Overrides to "another-user"
+    posthog.capture({
+      distinctId: 'another-user',
+      event: 'order_processed'
+    })
+  }
+)
+```

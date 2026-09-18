@@ -1,0 +1,39 @@
+---
+title: Use Workflows over PostHog MCP
+sidebar: Docs
+showTitle: true
+---
+
+The PostHog [MCP server](/docs/model-context-protocol) brings Workflows into Claude Code, Cursor, and other AI tools. It covers the full lifecycle – create a draft, edit its graph, test it, publish it, and read its stats and logs – so you can build and ship a workflow without leaving your editor.
+
+## Before you start
+
+1. **Set up Workflows** – Workflows are no-code, so there's nothing to install. [Install a PostHog SDK](/docs/workflows/installation) if you want event-based triggers.
+2. **Connect the MCP server** – [install it in your AI tool](#set-up) and give it access to your project.
+
+## What you can do here
+
+Through MCP tools, your agent can:
+
+- **Create and edit workflows.** `workflows-create` makes a draft, `workflows-patch-graph` and `workflows-update` change it, and `workflows-discard-draft` throws the draft away.
+- **Test and publish.** `workflows-test-run` runs a workflow without sending to real recipients, and `workflows-publish` makes the draft live.
+- **Read and list.** `workflows-list` and `workflows-get` pull workflows into your session, and `workflows-update-schedule` changes when a scheduled workflow runs.
+- **Debug a run.** `workflows-list-invocations`, `workflows-get-invocation`, `workflows-logs`, and `workflows-list-batch-jobs` show what actually happened on a given run.
+- **Check performance.** `workflows-stats` reports on one workflow and `workflows-global-stats` across all of them.
+- **Move between revisions.** `workflows-list-revisions`, `workflows-get-revision`, and `workflows-restore-revision` let you inspect history and roll back.
+
+For the full list of tools and how to scope a session to a subset, see the [MCP tools reference](/docs/model-context-protocol/tools).
+
+## Drafts are the safety net
+
+A workflow created over MCP is a draft. It does not run and nobody receives a message until it's published, so an agent can build the whole thing and hand it to you for review. Test it with `workflows-test-run` first, then publish – from MCP or from the [web app](/docs/workflows/surfaces/web-app).
+
+## Set up
+
+Connect the PostHog MCP server to your AI tool of choice, then grant it access to your project. The [MCP overview](/docs/model-context-protocol) covers install and authentication for each client.
+
+## Related
+
+- [MCP overview](/docs/model-context-protocol) – install and authentication
+- [Workflows in the web app](/docs/workflows/surfaces/web-app) – the visual builder
+- [Content library and message templates](/docs/workflows/library#create-templates-with-mcp) – creating templates over MCP

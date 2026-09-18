@@ -27,7 +27,7 @@ Once the storage account has been created, follow [this guide to create a blob c
 
 ## Step 3: Upload data and link to PostHog
 
-[Upload your data to the newly created container](https://learn.microsoft.com/en-us/azure/storage/blobs/storage-quickstart-blobs-portal#upload-a-block-blob), Parquet files are the recommended format, but the connector also works with JSON and CSVs too. 
+[Upload your data to the newly created container](https://learn.microsoft.com/en-us/azure/storage/blobs/storage-quickstart-blobs-portal#upload-a-block-blob), Parquet files are the recommended format, but the connector also works with JSON and CSVs too.
 
 Find the newly created file via the storage browser menu item. Once found, open the details and copy URL property. We need it to link the file in PostHog.
 
@@ -37,6 +37,9 @@ Find the newly created file via the storage browser menu item. Once found, open 
 2. Click **New source** and select Azure from the self managed section
 3. Enter a name for your dataset and paste the copied URL into the "Files URL pattern" box
 4. Select the correct format for your data
+   - When using CSV format, you can configure **CSV quote handling** to control how quotes are processed:
+     - **RFC 4180 double quotes** – for CSVs that use standard double-quote escaping (e.g., `"Hello ""World"""` becomes `Hello "World"`)
+     - **Literal quotes** – for CSVs where quote characters are treated as literal values (default)
 5. Enter the storage account name (this is name of the storage account you created in step 1)
 6. Find and paste your storage account key - you can use [this Azure doc](https://learn.microsoft.com/en-us/azure/storage/common/storage-account-keys-manage?tabs=azure-portal#view-account-access-keys) to view your access keys
 
@@ -47,3 +50,7 @@ That's it! You should be able to query the data from the PostHog SQL editor.
 ## Configuration
 
 <SourceParameters />
+
+## Supported tables
+
+<SourceTables />

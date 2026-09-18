@@ -46,7 +46,7 @@ PostHog is a global company. Our team and our customers are distributed around t
 
 ### Use sentence case for titles
 
-Write "Documentation style guide", not "Documentation Style Guide" and "PostHog has product analytics and session replay apps", not "PostHog has Product Analytics and Session Replay apps".
+Write "Documentation style guide", not "Documentation Style Guide" and "PostHog has product analytics and session replay tools", not "PostHog has Product Analytics and Session Replay tools".
 
 But...
 
@@ -198,7 +198,7 @@ When [embedding YouTube videos](/handbook/engineering/posthog-com/markdown#embed
 
 #### Wistia
 
-<TeamMember name="Cory Watilo" photo /> or <TeamMember name="Jordo Dibb" photo /> can upload videos to Wistia. It's best to also have a thumbnail image which can be uploaded to Wistia as well. Videos can be embedded on the site using our <a href="/handbook/engineering/posthog-com/markdown#embedding-wistia-videos">Wistia component</a>.
+<TeamMember name="Jordo Dibb" photo /> can upload videos to Wistia. It's best to also have a thumbnail image which can be uploaded to Wistia as well. Videos can be embedded on the site using our <a href="/handbook/engineering/posthog-com/markdown#embedding-wistia-videos">Wistia component</a>.
 
 ### Best practices for images and videos
 
@@ -210,4 +210,4 @@ When [embedding YouTube videos](/handbook/engineering/posthog-com/markdown#embed
 
 ## Technical and docs writing
 
-See our [docs style guide](/handbook/docs-and-wizard/docs-style-guide).
+See our [docs style guide](/handbook/wizard-and-docs/docs-style-guide).

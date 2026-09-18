@@ -9,36 +9,36 @@ availability:
 sourceId: Salesforce
 ---
 
-The Salesforce connector syncs your Salesforce data to PostHog. The following objects are supported:
+import SourceSetupIntro from "../_snippets/source-setup-intro.mdx"
+import SyncModes from "../_snippets/sync-modes.mdx"
+import TroubleshootingLink from "../_snippets/dw-troubleshooting-link.mdx"
 
-| Object | Description |
-|---|---|
-| Account | Companies and organizations |
-| Campaign | Marketing campaigns |
-| Contact | Individual contacts |
-| Event | Calendar events |
-| Lead | Sales leads |
-| Opportunity | Sales opportunities |
-| OpportunityHistory | Historical changes to opportunities |
-| Order | Orders |
-| Pricebook2 | Price books |
-| PricebookEntry | Price book entries |
-| Product2 | Products |
-| Task | Tasks and to-dos |
-| User | Salesforce users |
-| UserRole | User roles |
+The Salesforce connector syncs your CRM data – accounts, contacts, leads, opportunities, and more – into PostHog, so you can analyze your sales data alongside your product data.
 
-To link Salesforce:
+## Prerequisites
 
-1. Go to the [Data pipeline page](https://app.posthog.com/data-management/sources) and the sources tab in PostHog
-2. Click **Link Source** and select Salesforce
-3. Log in to your Salesforce account and authorize PostHog to access your data
-4. Select the objects you want to sync from the table above
-5. *Optional:* Add a prefix to your table names
-6. Click **Next**
+You need a Salesforce account that you can authorize PostHog to access. The connection uses OAuth, so you don't need to manually create an API key – you'll sign in to Salesforce and grant access during setup.
 
-The data warehouse then starts syncing your Salesforce data. You can see details and progress in the [data pipeline sources tab](https://app.posthog.com/data-management/sources).
+## Adding a data source
+
+<SourceSetupIntro />
+
+When linking Salesforce, select an existing Salesforce account to link to PostHog or create a new connection:
+
+- **Salesforce account** – Select the Salesforce account you want to link, then log in to Salesforce and authorize PostHog to access your data. This handles authentication via OAuth.
+
+## Sync modes
+
+<SyncModes />
 
 ## Configuration
 
 <SourceParameters />
+
+## Supported tables
+
+<SourceTables />
+
+## Troubleshooting
+
+<TroubleshootingLink />

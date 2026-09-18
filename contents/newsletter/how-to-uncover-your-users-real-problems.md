@@ -22,7 +22,7 @@ In this issue, we share what we've learned about asking user's questions, and wh
 
 **This week's theme is:** Discovering your way to a successful product
 
-> This post was first published in our Substack newsletter, [Product for Engineers](https://newsletter.posthog.com/). It's all about helping engineers and founders build better products by learning product skills. We send it (roughly) every two weeks. [Subscribe here](https://newsletter.posthog.com/subscribe).
+> This post was first published in our Substack newsletter, [build mode](https://newsletter.posthog.com/). It's all about helping engineers and founders build better products by learning product skills. We send it (roughly) every two weeks. [Subscribe here](https://newsletter.posthog.com/subscribe).
 
 ## 1. Start with “who” not “what” 🙋
 
@@ -36,7 +36,7 @@ Emmett Shear, former CEO of Twitch 👾, [recommends tailoring your approach](ht
 
 If you think you're asking the right questions but getting poor answers, reconsider who you're talking to.
 
-> **Read [The Product-Market Fit Game](/blog/product-market-fit-game), our guide to finding product-market fit, for more**
+> **Read [The Product-Market Fit Game](/founders/product-market-fit-game), our guide to finding product-market fit, for more**
 
 ## 2. Find the right time and place ⏳
 

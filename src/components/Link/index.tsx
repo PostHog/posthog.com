@@ -5,8 +5,26 @@ import React, { useMemo } from 'react'
 import usePostHog from '../../hooks/usePostHog'
 import { IconArrowUpRight } from '@posthog/icons'
 import ContextMenu, { ContextMenuItemProps } from 'components/RadixUI/ContextMenu'
-import { useApp } from '../../context/App'
+import { useAppSettings } from '../../context/App'
 import { useWindow } from '../../context/Window'
+
+const POSTHOG_APP_HOSTNAMES = new Set(['app.posthog.com', 'us.posthog.com', 'eu.posthog.com'])
+
+// The app tells a visitor who arrived from the website apart from one who opened it directly by
+// reading document.referrer, so links to it keep `noopener` but drop `noreferrer`. Matched on the
+// hostname, not a substring, so a third-party URL that merely contains one cannot claim the referrer.
+const isPostHogAppHref = (url?: string): boolean => {
+    if (!url) {
+        return false
+    }
+    try {
+        return POSTHOG_APP_HOSTNAMES.has(new URL(url, 'https://posthog.com').hostname)
+    } catch {
+        return false
+    }
+}
+
+const externalLinkRel = (url?: string): string => (isPostHogAppHref(url) ? 'noopener' : 'noopener noreferrer')
 
 // Helper function to create standard context menu items
 const createStandardMenuItems = (url: string, state?: any, isExternal = false): ContextMenuItemProps[] => {
@@ -17,16 +35,18 @@ const createStandardMenuItems = (url: string, state?: any, isExternal = false): 
             type: 'item',
             disabled: isExternal,
             children: isExternal ? (
-                <span>Open in new PostHog window</span>
+                <span>Open in side by side view</span>
             ) : (
-                <Link to={url} state={{ ...state, newWindow: true }} contextMenu={false}>
-                    Open in new PostHog window
+                <Link to={url} state={{ ...state, newWindow: true, sideBySide: 'right' }} contextMenu={false}>
+                    Open in side by side view
                 </Link>
             ),
         },
         {
             type: 'item',
             children: (
+                // Keeps noreferrer, unlike the anchors below. `url` reaches href on this line, and
+                // CodeQL reports js/xss-through-dom against any line this file changes here.
                 <a href={url} target="_blank" rel="noreferrer">
                     Open in new browser tab
                 </a>
@@ -111,13 +131,14 @@ export default function Link({
     ...other
 }: Props): JSX.Element {
     const { appWindow } = useWindow()
-    const { posthogInstance, compact } = useApp()
+    const { posthogInstance, compact } = useAppSettings()
     const posthog = usePostHog()
     const locationHref = appWindow?.element?.props?.location?.href
     const initialUrl = to || href
     const url = resolveRelativeLink(initialUrl, locationHref)
+    const linkState = state?.newWindow && state?.preventScroll === undefined ? { ...state, preventScroll: true } : state
     const internal = !disablePrefetch && url && /^\/(?!\/)/.test(url)
-    const isPostHogAppUrl = url && /(eu|us|app)\.posthog\.com/.test(url)
+    const isPostHogAppUrl = isPostHogAppHref(url)
     const preview =
         other.preview ||
         glossary?.find((glossaryItem) => {
@@ -143,7 +164,7 @@ export default function Link({
         onClick && onClick(e)
         if (compact && url && !internal) {
             e.preventDefault()
-            if (/(eu|us|app)\.posthog\.com/.test(url)) {
+            if (isPostHogAppUrl) {
                 // nosemgrep: javascript.browser.security.wildcard-postmessage-configuration.wildcard-postmessage-configuration - intentional for docs embedding, parent origin unknown, non-sensitive navigation URL
                 window.parent.postMessage(
                     {
@@ -191,21 +212,23 @@ export default function Link({
                                 slug={url}
                                 description={preview.description}
                                 video={preview.video}
+                                ctaLabel={preview.ctaLabel}
                             />
                         )}
                     >
-                        <GatsbyLink {...other} to={url} className={className} state={state} onClick={handleClick}>
+                        <GatsbyLink {...other} to={url} className={className} state={linkState} onClick={handleClick}>
                             {children || null}
                         </GatsbyLink>
                     </Tooltip>
                 ) : (
-                    <GatsbyLink {...other} to={url} className={className} state={state} onClick={handleClick}>
+                    <GatsbyLink {...other} to={url} className={className} state={linkState} onClick={handleClick}>
                         {children}
                     </GatsbyLink>
                 )
             ) : (
+                // eslint-disable-next-line react/jsx-no-target-blank -- externalLinkRel always sets noopener; the rule cannot read a computed rel
                 <a
-                    rel="noopener noreferrer"
+                    rel={externalLinkRel(url)}
                     onClick={handleClick}
                     {...other}
                     href={url}
@@ -244,21 +267,23 @@ export default function Link({
                                 slug={url}
                                 description={preview.description}
                                 video={preview.video}
+                                ctaLabel={preview.ctaLabel}
                             />
                         )}
                     >
-                        <GatsbyLink {...other} to={url} className={className} state={state} onClick={handleClick}>
+                        <GatsbyLink {...other} to={url} className={className} state={linkState} onClick={handleClick}>
                             {children || null}
                         </GatsbyLink>
                     </Tooltip>
                 ) : (
-                    <GatsbyLink {...other} to={url} className={className} state={state} onClick={handleClick}>
+                    <GatsbyLink {...other} to={url} className={className} state={linkState} onClick={handleClick}>
                         {children}
                     </GatsbyLink>
                 )
             ) : (
+                // eslint-disable-next-line react/jsx-no-target-blank -- externalLinkRel always sets noopener; the rule cannot read a computed rel
                 <a
-                    rel="noopener noreferrer"
+                    rel={externalLinkRel(url)}
                     onClick={handleClick}
                     {...other}
                     href={url}

@@ -5,9 +5,6 @@ showTitle: true
 ---
 
 import PaymentPlatforms from '../_snippets/payment-platforms'
-import RevAnalyticsBetaWarning from '../_snippets/rev-analytics-beta-warning.mdx'
-
-<RevAnalyticsBetaWarning />
 
 The simplest way to get started with revenue analytics is to connect to a payment platform.
 
@@ -26,7 +23,7 @@ Start by connecting your payment platform(s) to PostHog as a data source:
 
 ## How is the data stored?
 
-When you connect your payment platform(s) to PostHog, the data is transformed into standardized [managed views](/docs/revenue-analytics/managed-views). Revenue analytics uses this data to build your [revenue analytics dashboard](/docs/revenue-analytics/dashboard).
+When you connect your payment platform(s) to PostHog, the data is transformed into standardized [managed views](/docs/revenue-analytics/managed-views). PostHog uses this data to compute your [revenue metrics](/docs/revenue-analytics/revenue-metrics).
 
 The data is stored in the [data warehouse](/docs/data-warehouse) and is available for you to run custom queries and visualize like any other data in PostHog.
 

@@ -1,0 +1,69 @@
+---
+title: Image fetcher bot
+---
+
+PostHog runs a bot that downloads images referenced by session recordings. This page explains what it does, how to identify it, and how to block it.
+
+The bot is called `PostHogImageFetcherBot`.
+
+## What it does
+
+When someone records a session on your site, the recording refers to images by URL rather than storing a copy of them. To use those recordings for AI training, PostHog needs the image itself.
+
+The bot downloads those images, one time each, and passes them through the same redaction pipeline as the rest of the recording. Faces, text, and barcodes are removed before anything is stored.
+
+## When it runs
+
+The bot only downloads images from sites where a PostHog customer records sessions, and only for organizations whose data can be used to train PostHog's AI models. [Training our own AI models](/blog/training-ai-models) explains what that covers and how an organization changes it.
+
+If nobody records PostHog sessions on your site, the bot has no reason to visit it.
+
+## How to identify it
+
+Look for this user agent:
+
+```
+PostHogImageFetcherBot/1.0 (+https://posthog.com/docs/ai-research/image-fetcher-bot)
+```
+
+The user agent is the way to identify the bot. We don't publish a list of IP addresses, because the addresses can change and a list you can't rely on is worse than no list. If you need a stable range to add to an allowlist, [contact us](/talk-to-a-human) and tell us what you need it for.
+
+## How it behaves
+
+- It sends no cookies, no credentials, and no `Referer` header. It sees your site the way an anonymous visitor does.
+- It doesn't crawl your site, follow links, or index anything. It requests the images a recording refers to, and the files it needs to read to decide whether it may fetch them.
+- It downloads each image once, so a popular image is fetched once rather than once per recording.
+
+The full specification is public. It covers the rate limits, what the bot does when your server is slow or returns an error, and every signal that stops a fetch: [the image fetch lane README](https://github.com/PostHog/posthog/blob/master/nodejs/src/ingestion/pipelines/sessionreplay/ml-mirror-image-fetch/README.md).
+
+## How to block it
+
+To block it in `robots.txt`:
+
+```
+User-agent: PostHogImageFetcherBot
+Disallow: /
+```
+
+The bot checks `robots.txt` before every fetch, so this takes effect on its next visit.
+
+To slow it down instead of blocking it, set `Crawl-delay` in the same group. The bot uses whichever is longer, your value or its own interval.
+
+The bot also stops if any one of these refuses it:
+
+- `X-Robots-Tag: noai` or `noimageai` in the image response
+- `Content-Signal: ai-train=no` in `robots.txt`
+- `Content-Usage: train-ai=n` in the image response or in `robots.txt`
+- `tdm-reservation: 1` in the image response, or a rule covering the image in `/.well-known/tdmrep.json`
+
+One is enough. You don't need to set more than one.
+
+You can also block the user agent at your CDN or web server. If you do, the bot treats the block as final and stops requesting from your site.
+
+An opt-out applies to what the bot does next. It doesn't remove images the bot already downloaded, and an image that has already been used to train a model can't be taken back out of that model.
+
+Blocking the bot doesn't affect session recording. Your PostHog customers keep recording sessions as before, and their recordings still show images to anyone watching a replay. The only difference is that PostHog can't use those images for AI training.
+
+## Questions
+
+If something here doesn't match what you're seeing in your logs, [contact us](/talk-to-a-human). Include the user agent and a timestamp so we can find the requests.

@@ -1,0 +1,51 @@
+---
+title: PostHog Slack app commands and limitations
+sidebarTitle: Commands
+---
+
+The full set of commands `@PostHog` accepts, in the same order it lists them when you run `@PostHog help`:
+
+| Command | What it does |
+| ------------------------------------------- | ------------------------------------------------------------------- |
+| `@PostHog <task description>` | Create a task for the agent to work on |
+| `@PostHog rules list` | Show all routing rules |
+| `@PostHog rules add "description" org/repo` | Add a routing rule |
+| `@PostHog rules add "description"` | Add a routing rule (pick repo from list) |
+| `@PostHog rules remove <number(s)>` | Remove routing rules by number (e.g. `remove 1` or `remove 1,2`) |
+| `@PostHog project` | Show which PostHog project your mentions route to in this workspace |
+| `@PostHog project <id>` | Set the PostHog project your mentions route to in this workspace |
+| `@PostHog project workspace <id>` | Set the workspace-wide default project (Slack admins/owners only) |
+| `@PostHog help` | Show the command list |
+
+For repo selection, the bot checks routing rules first. If nothing matches and you have multiple repos, it opens the in-thread picker. If you only have one repo connected, the task runs against it directly. The `project` commands only matter if your Slack workspace is connected to multiple PostHog projects.
+
+See [Pick a project](/docs/slack/setup#pick-a-project).
+
+## The `/posthog` slash command
+
+Every command above is also available as a `/posthog` slash command – `/posthog help`, `/posthog rules list`, `/posthog project <id>`, and so on. Bare `/posthog` shows the command list. Slash commands are for configuration only: to start a task, mention `@PostHog` or [DM the bot](/docs/slack#dm-the-bot). One difference: `/posthog rules add` needs the repo inline (`/posthog rules add "description" org/repo`) since there's no thread to open a picker in.
+
+In a DM with the bot, drop the mention instead: `project <id>`, `rules list`, etc.
+
+## Routing rules
+
+Routing rules let you map a mention's content to a specific repo so the agent doesn't have to ask. A rule has a free-text description that's matched against the mention and an `org/repo` target it routes to:
+
+```
+@PostHog rules add "frontend bug" posthog/posthog
+@PostHog rules add "billing changes" posthog/billing
+```
+
+When several rules match, the first one in `rules list` wins. Use `@PostHog rules remove 1,2` to drop rules you no longer want ; numbers correspond to the positions printed by `rules list`.
+
+## Limitations
+
+Before you lean on the Slack app, here's a list of things to know:
+
+- **Ephemeral sandbox.** Each task runs in a fresh sandbox that lives roughly six hours. Long iterations need re-prompting once it recycles.
+- **Personal GitHub auth is per user.** Every teammate who wants to ship a PR has to connect their own GitHub once. First-time setup has known rough edges.
+- **Attachment limits.** The agent reads images, PDFs, and plain-text attachments (logs, markdown, CSV, JSON, YAML) – up to five per message, 10 MB each. Other file types are skipped with a note.
+- **Runtime is fixed per task.** You can switch models mid-run, but only within the same runtime family (Claude or Codex). Moving to the other family requires starting a new thread.
+- **500-repo cap on the picker.** If your team's GitHub install exposes more than 500 repos, the list is truncated. Add a routing rule for repos that fall off the end.
+- **Workflow timeouts.** The 10-minute timeout covers accepting a mention and starting the agent, not the task itself. A running task can keep working well past that, until its sandbox recycles. The repo picker times out after 15 minutes.
+- **Behavior is still moving.** Prompt construction and review-bot trust heuristics are being actively iterated. Expect shifts between beta builds.

@@ -11,12 +11,13 @@ export interface HTMLProps {
 
 export default function HTML(props: HTMLProps): JSX.Element {
     return (
-        <html {...props.htmlAttributes}>
+        // `lang` is a default: pages that set their own (e.g. /ko) override it via htmlAttributes.
+        <html lang="en" {...props.htmlAttributes}>
             <head>
                 <meta charSet="utf-8" />
                 <meta httpEquiv="x-ua-compatible" content="ie=edge" />
                 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-
+                <meta name="naver-site-verification" content="a58db4b98c2bf9e4b52a4aa0c20fcf1fcdab2793" />
                 <link
                     rel="preload"
                     as="font"
@@ -37,7 +38,12 @@ export default function HTML(props: HTMLProps): JSX.Element {
 
                 {props.headComponents}
             </head>
-            <body {...props.bodyAttributes} className="light" data-wallpaper="keyboard-garden">
+            <body
+                {...props.bodyAttributes}
+                className="light"
+                data-wallpaper="keyboard-garden"
+                data-reduce-transparency="false"
+            >
                 {props.preBodyComponents}
                 {/* nosemgrep: typescript.react.security.audit.react-dangerouslysetinnerhtml.react-dangerouslysetinnerhtml - Gatsby body content from build, not user input */}
                 <div key={`body`} id="___gatsby" dangerouslySetInnerHTML={{ __html: props.body }} />

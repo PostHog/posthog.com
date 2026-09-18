@@ -4,8 +4,19 @@ export const customer_io = {
         workflows: {
             available: true,
             features: {
+                // Drag-and-drop visual workflow builder
+                // https://docs.customer.io/messaging/send/workflows/builder/
+                visual_builder: true,
+                // AI Agent: create automations/campaigns from natural language
+                // https://docs.customer.io/ai/agent/
+                ai_assistant: true,
+                // Native open/click/conversion metrics on automations
+                // https://docs.customer.io/messaging/metrics/automation-metrics/
+                campaign_tracking: true,
                 real_time_triggers: true,
-                email_editor: false,
+                // Design Studio + classic drag-and-drop email editors
+                // https://docs.customer.io/messaging/channels/email/editors/choose/
+                email_editor: true,
                 cohort_targeting: true,
                 native_event_triggers: false,
                 user_identity: true,
@@ -16,6 +27,16 @@ export const customer_io = {
                 experiment_triggers: false,
                 webhook_actions: true,
                 run_based_pricing: false,
+            },
+            channels: {
+                features: {
+                    // https://docs.customer.io/journeys/channels/
+                    email: true,
+                    sms: true,
+                    push: true,
+                    webhooks: true,
+                    whatsapp: true,
+                },
             },
         },
     },

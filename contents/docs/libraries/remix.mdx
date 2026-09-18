@@ -27,7 +27,11 @@ npm install --save posthog-js @posthog/react
 
 Start by setting `posthog-js` and `@posthog/react` as external packages in your `vite.config.ts` file.
 
-```ts
+```
+
+import CspAllowancesCallout from "../_snippets/csp-allowances-callout.mdx"
+
+<CspAllowancesCallout />ts
 // vite.config.ts
 // ... imports and rest of config
 
@@ -114,8 +118,11 @@ When you run your app now, PostHog will automatically capture events and pagevie
 ## Identifying users
 
 import IdentifyFrontendCallout from '../_snippets/identify-frontend-callout.mdx'
+import TracingHeaders from '../_snippets/tracing-headers.mdx'
 
 <IdentifyFrontendCallout />
+
+<TracingHeaders />
 
 <DetailSetUpReverseProxy />
 
@@ -125,7 +132,7 @@ import IdentifyFrontendCallout from '../_snippets/identify-frontend-callout.mdx'
 
 ## Next steps
 
-For any technical questions for how to integrate specific PostHog features into Remix (such as analytics, feature flags, A/B testing, surveys, etc.), have a look at our [JavaScript Web SDK docs](/docs/libraries/js/features) and [React](/docs/libraries/react) docs.
+For any technical questions for how to integrate specific PostHog features into Remix (such as analytics, feature flags, A/B testing, surveys, etc.), have a look at our [JavaScript Web SDK docs](/docs/libraries/js/usage) and [React](/docs/libraries/react) docs.
 
 Alternatively, the following tutorials can help you get started:
 

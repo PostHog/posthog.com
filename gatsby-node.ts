@@ -46,7 +46,7 @@ export const onCreatePage: GatsbyNode['onCreatePage'] = async ({ page, actions }
         })
     }
 
-    if (page.path.match(/^\/community\/profiles/)) {
+    if (page.path.match(/^\/community\/profiles/) && !page.path.match(/^\/community\/profiles\/me/)) {
         page.matchPath = '/community/profiles/*'
         createPage(page)
     }
@@ -56,6 +56,12 @@ export const onCreatePage: GatsbyNode['onCreatePage'] = async ({ page, actions }
     }
     if (page.path.match(/^\/next\-steps/)) {
         page.matchPath = '/next-steps/*'
+        createPage(page)
+    }
+    // Only the [slug] page needs the wildcard. A static page under /teams (/teams/new, /teams/team-ben)
+    // that also claims '/teams/*' loses the tie to [slug] at runtime, and the browser shows that team as missing.
+    if (page.path.match(/^\/teams\//) && page.component.match(/teams[\\/]\[slug\]\.tsx$/)) {
+        page.matchPath = '/teams/*'
         createPage(page)
     }
     // Add client-side routing for custom presentations
@@ -110,7 +116,7 @@ export const onCreateWebpackConfig: GatsbyNode['onCreateWebpackConfig'] = ({ sta
                     'docs',
                     'onboarding'
                 ),
-                'scenes/onboarding/OnboardingDocsContentWrapper': path.resolve(
+                'scenes/onboarding/shared/OnboardingDocsContentWrapper': path.resolve(
                     __dirname,
                     'src',
                     'components',
@@ -120,6 +126,13 @@ export const onCreateWebpackConfig: GatsbyNode['onCreateWebpackConfig'] = ({ sta
             },
         },
     })
+
+    if (stage === 'build-javascript' && process.env.EMIT_WEBPACK_STATS === 'true') {
+        const { EmitWebpackGraphPlugin } = require('./gatsby/emitWebpackGraphPlugin')
+        actions.setWebpackConfig({
+            plugins: [new EmitWebpackGraphPlugin(path.resolve(__dirname, 'bundle-report', 'webpack-graph.json'))],
+        })
+    }
 }
 
 exports.createPages = async ({ actions }) => {

@@ -1,0 +1,114 @@
+## Installation
+
+External flag definition caches are available in `posthog-server` 2.7.0 and later.
+
+Import the cache provider types from the SDK:
+
+```java
+import com.posthog.server.PostHogBlockingFlagDefinitionCacheProvider;
+import com.posthog.server.PostHogFlagDefinitionCacheProvider;
+```
+
+## The interface
+
+The JVM SDK exposes an async-capable `PostHogFlagDefinitionCacheProvider` interface. If your cache client is synchronous, extend `PostHogBlockingFlagDefinitionCacheProvider` instead.
+
+```java
+import java.util.Map;
+import java.util.concurrent.CompletionStage;
+
+public interface PostHogFlagDefinitionCacheProvider {
+    // Retrieve cached flag definitions
+    CompletionStage<Map<String, Object>> getFlagDefinitions();
+
+    // Determine if this instance should fetch new definitions
+    CompletionStage<Boolean> shouldFetchFlagDefinitions();
+
+    // Store definitions after a successful fetch
+    CompletionStage<Void> onFlagDefinitionsReceived(Map<String, ? extends Object> data);
+
+    // Clean up resources on shutdown
+    CompletionStage<Void> shutdown();
+}
+```
+
+For blocking clients, implement the blocking base class:
+
+```java
+import com.posthog.server.PostHogBlockingFlagDefinitionCacheProvider;
+import java.util.Map;
+
+public class YourCacheProvider extends PostHogBlockingFlagDefinitionCacheProvider {
+    @Override
+    public Map<String, Object> getFlagDefinitionsBlocking() {
+        // Return cached definitions, or null if the cache is empty
+        return sharedCache.get("posthog:flag-definitions");
+    }
+
+    @Override
+    public boolean shouldFetchFlagDefinitionsBlocking() {
+        // Return true if this instance owns the distributed fetch lock
+        return lock.acquireOrRefresh("posthog:flag-definitions:lock");
+    }
+
+    @Override
+    public void onFlagDefinitionsReceivedBlocking(Map<String, ? extends Object> data) {
+        // Store the map as JSON in Redis, a database, or another shared cache
+        sharedCache.set("posthog:flag-definitions", data);
+    }
+
+    @Override
+    public void shutdownBlocking() {
+        // Release locks and close cache clients
+        lock.releaseIfOwned("posthog:flag-definitions:lock");
+    }
+}
+```
+
+When the SDK fetches flag definitions from the API, it passes a JSON-compatible `Map<String, Object>` to `onFlagDefinitionsReceived()` for you to store. Return the same shape from `getFlagDefinitions()`:
+
+```json
+{
+    "flags": [],
+    "group_type_mapping": {},
+    "cohorts": {}
+}
+```
+
+- `flags`: Feature flag definitions
+- `group_type_mapping`: Group type index to name mapping
+- `cohorts`: Cohort definitions for local evaluation
+
+### Method details
+
+| Method | Purpose | Return value |
+| :----- | :------ | :----------- |
+| `getFlagDefinitions()` / `getFlagDefinitionsBlocking()` | Retrieve cached definitions. Called when the poller refreshes and `shouldFetchFlagDefinitions()` returns `false`. | Cached data, or `null` if cache is empty |
+| `shouldFetchFlagDefinitions()` / `shouldFetchFlagDefinitionsBlocking()` | Decide if this instance should fetch. Use for distributed coordination (e.g., locks). | `true` to fetch from PostHog and store the result, `false` to read from cache |
+| `onFlagDefinitionsReceived(data)` / `onFlagDefinitionsReceivedBlocking(data)` | Store definitions after a successful API fetch. | void |
+| `shutdown()` / `shutdownBlocking()` | Release locks, close connections, and clean up resources. | void |
+
+> **Note:** Provider methods may throw errors or complete exceptionally. The SDK catches and logs provider errors: failed `shouldFetchFlagDefinitions()` calls fall back to fetching from PostHog, failed cache reads fall back to the API when no definitions are loaded, and failed writes or shutdowns do not stop flag evaluation. Async provider calls are waited on by the SDK and time out after 10 seconds.
+
+## Using your cache provider
+
+Pass your cache provider when initializing PostHog:
+
+```java
+import com.posthog.server.PostHog;
+import com.posthog.server.PostHogConfig;
+import com.posthog.server.PostHogFlagDefinitionCacheProvider;
+import com.posthog.server.PostHogInterface;
+
+PostHogFlagDefinitionCacheProvider cache = new YourCacheProvider();
+
+PostHogConfig config = PostHogConfig
+    .builder("<ph_project_token>")
+    .host("<ph_client_api_host>")
+    .personalApiKey("<ph_personal_api_key>")
+    .localEvaluation(true)
+    .flagDefinitionCacheProvider(cache)
+    .build();
+
+PostHogInterface posthog = PostHog.with(config);
+```

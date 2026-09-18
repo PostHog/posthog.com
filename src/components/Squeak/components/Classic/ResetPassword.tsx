@@ -6,6 +6,7 @@ import { useWindow } from '../../../../context/Window'
 import { useUser } from '../../../../hooks/useUser'
 import Wizard from 'components/Wizard'
 import { navigate } from 'gatsby'
+import { SQUEAK_HOST } from 'lib/strapi'
 
 import SecurityHog from '../../../../images/security-hog.png'
 import { IconSpinner } from '@posthog/icons'
@@ -82,7 +83,7 @@ const ResetPasswordForm: React.FC = () => {
                     passwordConfirmation: values.password,
                 }
 
-                const response = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/auth/reset-password`, {
+                const response = await fetch(`${SQUEAK_HOST}/api/auth/reset-password`, {
                     method: 'POST',
                     body: JSON.stringify(body),
                     headers: {
@@ -146,7 +147,7 @@ const ResetPasswordForm: React.FC = () => {
                     </div>
                 }
             >
-                <div className="bg-accent flex gap-6 px-8 py-6 flex-1">
+                <div className="bg-accent flex gap-6 px-8 py-6 flex-1 pt-10">
                     <div className="max-w-20">
                         <img src={SecurityHog} className="w-20" />
                     </div>

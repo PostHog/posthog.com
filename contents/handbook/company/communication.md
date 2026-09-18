@@ -156,6 +156,12 @@ Also keep in mind that, as an open source platform, PostHog has contributors who
 
 > [Slackbot](https://slack.com/features/slackbot) is a handy AI agent that can search across the PostHog workspace in Slack to help answer your questions. If you're looking for information or trying to find a past conversation, Slackbot is a great place to start.
 
+**Keeping up with what we ship**
+
+We recommend everyone at PostHog joins [`#changelog`](https://posthog.slack.com/archives/C099B0YCULT) to stay current on what's shipped. It's owned by the [Wizard & Docs team](/teams/wizard-and-docs) and updates constantly as PRs merge.
+
+The channel is powered by agentic workflows that scan merged PRs and feature flag changes and summarize them into it. PR authors can opt in or out manually via the *Publish to changelog?* checkbox on the `posthog/posthog` PR template, or via the `@posthog` Slack app. See [how to publish changelog](/handbook/wizard-and-docs/how-to-publish-changelog) for more detail.
+
 **Slack etiquette**
 
 Slack is used differently in different organizations. Here are some guidelines for how we use Slack at PostHog:
@@ -189,9 +195,9 @@ We mainly use Google Docs to capture internal information like meeting notes or 
 
 Please avoid using presentations for internal use. They are a poor substitute for a discussion on an issue. They lack the depth, and don't add enough context to enable asynchronous work.
 
-When giving a talk which requires a presentation, use [Pitch](https://pitch.com) to build your slides. (It offers more control over design than Google Slides.) They also have a [desktop app](https://pitch.com/download). We don't (yet) have templates configured, but you can draw from existing slides in other presentations - just copy/paste into your own presentation and modify accordingly. If you'd like assistance with slide design (or using Pitch), talk to Cory.
+When giving a talk which requires a presentation, use [Pitch](https://pitch.com) to build your slides. (It offers more control over design than Google Slides.) They also have a [desktop app](https://pitch.com/download). We don't (yet) have templates configured, but you can draw from existing slides in other presentations - just copy/paste into your own presentation and modify accordingly. If you'd like assistance with slide design (or using Pitch), ask in the `#team-graphics` Slack channel.
 
-James (H) and Cory are admins on the Pitch account. Because Pitch charges per seat, we remove users who only need periodic access but can easily re-add when needed.
+James (H) is an admin on the Pitch account. Because Pitch charges per seat, we remove users who only need periodic access but can easily re-add when needed.
 
 ### Email
 
@@ -243,6 +249,12 @@ Writing an RFC may be helpful when any of the following is true:
 An RFC is likely to be unhelpful as a first step in other circumstances. Specifically, when you want to ship or suggest a change to something that significantly affects teams outside your own. In this instance, we've seen that RFCS can lead to 10 to 25+ comments, which feels antagonistic (teams having to explain all the context around their strategy down to why this decision is something they perhaps disagree with), and creates a lot of work. A single call in this instance is likely much faster than lots of frustrated people in 1/1s talking about it _and_ the energy/time needed to respond to everything in a long thread.
 
 _However_ please write notes on such a call - to ensure everyone _is_ on the same page. This could then be copy pasted into an RFC for transparency's sake / future reference.
+
+### How should I use AI when writing RFCs?
+
+RFCs are the place where we do concentrated, original thinking. This thinking should not be outsourced to AI. Even when given context, AI writes content that is average and unoriginal, difficult to read (adjective-stuffing, anyone?), and places emphasis on the wrong things. RFCs should be largely hand-written, especially sections that define the problem, potential solutions, and question/answer.
+
+AI is still useful in the RFC process, however. Feel free to use AI for research and final draft polish (but please don't have it rewrite the whole thing for you). Analysis and research done by AI can be included in the RFC at the bottom as appendixes. 
 
 ### Top tips for RFCs
 

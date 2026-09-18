@@ -1,0 +1,38 @@
+---
+title: Use the data warehouse in PostHog Desktop
+sidebar: Docs
+showTitle: true
+---
+
+import { CalloutBox } from 'components/Docs/CalloutBox'
+
+<CalloutBox icon="IconFlask" title="Open beta" type="action">
+
+[PostHog Desktop](/docs/posthog-desktop) is in beta. [Download it](/docs/posthog-desktop/download-posthog-desktop) to try it out.
+
+</CalloutBox>
+
+[PostHog Desktop](/docs/posthog-desktop) is where you work through the warehouse problems PostHog raises on its own – a materialized view that stopped refreshing, or a source whose sync keeps failing. It's a triage surface, not a place to browse your data.
+
+## Before you start
+
+1. **Set up the Data Warehouse** – [link a source](/docs/data-warehouse/start-here) so there are tables to query.
+2. **Install PostHog Desktop** – [download the app](/docs/posthog-desktop/download-posthog-desktop) and connect it to your project.
+
+## What you can do here
+
+- **Pick up warehouse signals** – PostHog watches the import side for the moments a source stops keeping its promise: a connection in error, a table schema that failed or is stuck mid-sync, silent staleness behind a green status, a dead webhook channel, and materialized views that fail to refresh. Each one becomes a [signal](/docs/self-driving/signals) carrying the source or view name and the underlying error, so a stale dashboard lands in your queue instead of going unnoticed. When imports are healthy, it looks for optimization candidates instead – expensive query shapes worth materializing, and materialized views nobody reads.
+- **Diagnose the failure** – the agent can read the health issue, inspect your warehouse schema, and run the view's query or its upstream tables directly, to work out whether a column was renamed, an upstream source is itself broken, or the query is now too heavy to finish.
+- **Audit view and source health** – PostHog ships [skills](/docs/posthog-desktop/skills) for one-shot warehouse triage: finding failing or unused materialized views, auditing source health, diagnosing failed syncs, tuning incremental sync config, and setting up new sources.
+
+## What you can't do here
+
+You can't edit a view's SQL from PostHog Desktop. A view's definition is stored in PostHog, not in your repository, so the agent diagnoses the failure and proposes the corrected query, and you apply it in the [web app](/docs/data-warehouse/surfaces/web-app). The check clears once a materialization succeeds.
+
+## Related
+
+- [Self-driving](/docs/self-driving) for the full loop
+- [Use the data warehouse over MCP](/docs/data-warehouse/surfaces/mcp) for the same tools in other clients
+- [Use the data warehouse over the API](/docs/data-warehouse/surfaces/api) to check source and model health from your own monitoring
+- [Materialized views](/docs/data-warehouse/views/materialize)
+- [Troubleshooting](/docs/data-warehouse/troubleshooting)

@@ -10,11 +10,12 @@ import { isURL } from 'lib/utils'
 import { CurrentQuestionContext } from './Question'
 import Avatar from './Avatar'
 import { AnimatePresence, motion } from 'framer-motion'
-import { IconFeatures, IconImage, IconX } from '@posthog/icons'
-import { graphql, useStaticQuery } from 'gatsby'
-import groupBy from 'lodash.groupby'
+import { IconFeatures, IconImage } from '@posthog/icons'
+import { Logo } from '@posthog/brand/logo'
 import OSTextarea from 'components/OSForm/textarea'
 import OSButton from 'components/OSButton'
+import getCaretCoordinates from 'textarea-caret'
+import { useCommunityProfiles } from 'hooks/useCommunityProfiles'
 
 const buttons = [
     {
@@ -86,13 +87,30 @@ const buttons = [
     },
 ]
 
+const compactName = (...parts: (string | null | undefined)[]) => parts.filter(Boolean).join('').toLowerCase()
+
+const nameMatchesQuery = (first: string | null | undefined, last: string | null | undefined, query: string) => {
+    if (!query) {
+        return true
+    }
+    const q = query.toLowerCase()
+    return (
+        (first || '').toLowerCase().startsWith(q) ||
+        (last || '').toLowerCase().startsWith(q) ||
+        compactName(first, last).startsWith(q)
+    )
+}
+
+const isModProfile = (profile) => profile.attributes?.isTeamMember || !!profile.attributes?.startDate
+
 const MentionProfile = ({ profile, onSelect, selectionStart, index, focused }) => {
     const { firstName, lastName, avatar, gravatarURL } = profile.attributes
     const name = [firstName, lastName].filter(Boolean).join(' ')
     const isAI = profile.id === Number(process.env.GATSBY_AI_PROFILE_ID)
+    const isMod = isModProfile(profile)
 
     return (
-        <li className="border-b border-input p-1">
+        <li className="border-b border-input p-1 last:border-b-0">
             <OSButton
                 onClick={() => onSelect?.(profile, selectionStart)}
                 type="button"
@@ -103,8 +121,13 @@ const MentionProfile = ({ profile, onSelect, selectionStart, index, focused }) =
                 active={focused === index}
             >
                 <div className="flex space-x-2 items-center w-full">
-                    <div className="size-6 overflow-hidden rounded-full">
+                    <div className="relative size-6 shrink-0 rounded-full">
                         <Avatar className="w-full" image={avatar?.data?.attributes?.url || gravatarURL} />
+                        {isMod && (
+                            <span className="absolute -right-1 -bottom-1 size-3.5 flex items-center justify-center rounded-full bg-primary border border-primary">
+                                <Logo layout="logomark" className="w-2.5" />
+                            </span>
+                        )}
                     </div>
                     <div>
                         {!isAI && <p className="m-0 text-xs font-semibold opacity-50 leading-none">{profile.id}</p>}
@@ -119,54 +142,48 @@ const MentionProfile = ({ profile, onSelect, selectionStart, index, focused }) =
     )
 }
 
-const MentionProfiles = ({ onSelect, onClose, body, ...other }) => {
-    const { staffProfiles } = useStaticQuery(graphql`
-        {
-            staffProfiles: allSqueakProfile(sort: { fields: firstName }) {
-                nodes {
-                    avatar {
-                        url
-                    }
-                    firstName
-                    lastName
-                    squeakId
-                }
-            }
-        }
-    `)
+const MentionProfiles = ({ onSelect, body, position, ...other }) => {
     const currentQuestion = useContext(CurrentQuestionContext) ?? {}
     const replies = currentQuestion?.question?.replies
     const selectionStart = useMemo(() => other.selectionStart, [])
     const search = body.substring(selectionStart).split(' ')[0].replace('@', '')
+    const threadProfiles = [
+        currentQuestion?.question?.profile?.data,
+        ...(replies?.data || []).map((reply) => reply?.attributes?.profile?.data),
+    ].filter((profile, index, self) => {
+        if (!profile?.id || !profile.attributes) {
+            return false
+        }
+        return (
+            self.findIndex((p) => p?.id === profile.id) === index &&
+            nameMatchesQuery(profile.attributes.firstName, profile.attributes.lastName, search)
+        )
+    })
+    const { profiles: searchProfiles } = useCommunityProfiles({
+        filters: { search, compactName: true, sort: 'firstName:asc' },
+        pageSize: 15,
+        enabled: search.length > 0,
+    })
+    const threadIds = new Set(threadProfiles.map((profile) => profile.id))
     const mentionProfiles = [
-        { attributes: { profile: { data: currentQuestion?.question?.profile?.data } } },
-        ...replies?.data,
-        ...staffProfiles.nodes
-            .filter((node) => node.squeakId === Number(process.env.GATSBY_AI_PROFILE_ID))
-            .map((node) => ({
+        ...threadProfiles,
+        ...searchProfiles
+            .filter(
+                (profile) =>
+                    !threadIds.has(profile.id) &&
+                    (profile.firstName || profile.lastName) &&
+                    nameMatchesQuery(profile.firstName, profile.lastName, search)
+            )
+            .map((profile) => ({
+                id: profile.id,
                 attributes: {
-                    profile: {
-                        data: {
-                            id: node.squeakId,
-                            attributes: { ...node, avatar: { data: { attributes: { url: node.avatar?.url } } } },
-                        },
-                    },
+                    firstName: profile.firstName,
+                    lastName: profile.lastName,
+                    avatar: { data: { attributes: { url: profile.avatarUrl } } },
+                    isTeamMember: profile.isTeamMember,
                 },
             })),
-    ]
-        .map((reply) => reply?.attributes?.profile?.data)
-        .filter((profile, index, self) => {
-            const { firstName, lastName } = profile.attributes
-            const name = [firstName, lastName].filter(Boolean).join(' ')
-            return (
-                profile &&
-                self.findIndex((p) => p?.id === profile.id) === index &&
-                name.toLowerCase().includes(search.toLowerCase())
-            )
-        })
-    const grouped = groupBy(mentionProfiles, (profile) =>
-        staffProfiles.nodes.some((node) => node.squeakId === profile.id) ? 'Staff' : 'In this thread'
-    )
+    ].sort((a, b) => Number(isModProfile(b)) - Number(isModProfile(a)))
     const listRef = useRef<HTMLUListElement>(null)
     const [focused, setFocused] = useState(0)
 
@@ -193,24 +210,21 @@ const MentionProfiles = ({ onSelect, onClose, body, ...other }) => {
         }
     }, [focused, search])
 
+    if (mentionProfiles.length === 0) {
+        return null
+    }
+
     return (
         <motion.div
-            initial={{ opacity: 0, translateX: '100%' }}
-            animate={{ opacity: 1, translateX: 0, transition: { type: 'tween', duration: 0.1 } }}
-            exit={{ opacity: 0, translateX: '100%' }}
-            className="w-[200px] h-full absolute right-0 top-0 z-50 pt-2.5 pr-2.5"
+            initial={{ opacity: 0, y: 4 }}
+            animate={{ opacity: 1, y: 0, transition: { type: 'tween', duration: 0.1 } }}
+            exit={{ opacity: 0, y: 4 }}
+            className="w-[200px] absolute z-50"
+            style={position}
         >
-            <OSButton
-                type="button"
-                variant="default"
-                size="xs"
-                icon={<IconX className="w-3" />}
-                className="!p-1 rounded-full absolute top-0.5 right-0.5 z-20"
-                onClick={onClose}
-            />
             <ul
                 ref={listRef}
-                className="m-0 p-0 list-none border border-input bg-light dark:bg-dark h-full rounded-md overflow-auto"
+                className="m-0 p-0 list-none border border-input bg-light dark:bg-dark max-h-60 rounded-md overflow-auto"
             >
                 {mentionProfiles.map((profile, index) => (
                     <MentionProfile
@@ -247,7 +261,9 @@ export default function RichText({
     const [imageLoading, setImageLoading] = useState(false)
     const [showPreview, setShowPreview] = useState(false)
     const [showMentionProfiles, setShowMentionProfiles] = useState(false)
+    const [mentionPos, setMentionPos] = useState<{ top: number; left: number } | null>(null)
     const mentionProfilesRef = useRef<HTMLDivElement>(null)
+    const mentionContainerRef = useRef<HTMLDivElement>(null)
 
     const onDrop = useCallback(
         async (acceptedFiles) => {
@@ -346,6 +362,17 @@ export default function RichText({
             onSubmit()
         }
         if (e.key === '@' && e.shiftKey) {
+            const el = textarea.current
+            const container = mentionContainerRef.current
+            if (el && container) {
+                const caret = getCaretCoordinates(el, el.selectionStart)
+                const elRect = el.getBoundingClientRect()
+                const containerRect = container.getBoundingClientRect()
+                setMentionPos({
+                    top: caret.top + caret.height + elRect.top - containerRect.top,
+                    left: caret.left + elRect.left - containerRect.left,
+                })
+            }
             setShowMentionProfiles(true)
         }
     }
@@ -491,7 +518,7 @@ export default function RichText({
                         </Markdown>
                     </div>
                 ) : (
-                    <div className="relative border border-primary border-t-0 rounded-b">
+                    <div ref={mentionContainerRef} className="relative border border-primary border-t-0 rounded-b">
                         {mentions && (
                             <AnimatePresence>
                                 {showMentionProfiles && (
@@ -499,10 +526,7 @@ export default function RichText({
                                         <MentionProfiles
                                             body={value}
                                             selectionStart={textarea.current?.selectionStart}
-                                            onClose={() => {
-                                                setShowMentionProfiles(false)
-                                                textarea.current?.focus()
-                                            }}
+                                            position={mentionPos}
                                             onSelect={handleProfileSelect}
                                         />
                                     </div>

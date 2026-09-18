@@ -24,8 +24,6 @@ Just one thing: **you need to build a community.**
 
 Open-source requires a decently-sized, highly engaged community for any business model to work. People have to believe in your solution enough to contribute code, comments, or cash to it. If money is a priority for your business, open-source might not be the path for you.
 
-At PostHog, we’ve been fortunate enough to build an engaged community of contributors over the years, and we celebrate our top contributors with each new release. You can check out our [contributor page](https://posthog.com/contributors), see our [GitHub repo](http://github.com/PostHog/), and join our [Slack community](https://posthog.com/slack) of users.
-
 Let’s now look at how we’ve managed to turn a buck with PostHog over the past few months — plus 3 other business models to explore for your own product.	
 
 ## Option #1: Support
@@ -46,7 +44,7 @@ The downside of the hosted model is that it’s not very defensible. You’ll li
 
 <iframe src="https://giphy.com/embed/j4ksBQ70a3ECh2VObN" width="480" height="270" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>
 
-The hosting business model is also much harder to pull off without a solid, popular product. [MongoDB](https://www.mongodb.com/) and [Sentry](/blog/posthog-vs-sentry) are two examples of products that lets you self-host or host with a 3rd party provider.
+The hosting business model is also much harder to pull off without a solid, popular product. [MongoDB](https://www.mongodb.com/) and [Sentry](/blog/posthog-vs-sentry) are two examples of products that let you self-host or host with a 3rd party provider.
 
 ## Option #3: Open core
 This option requires you to build and maintain two editions of your product: the open-source edition (under an MIT or Apache-type license), and a ‘source-available’ edition with features designed for larger businesses. Your customers can deploy the source-available edition on their own infrastructure, but they need to pay you to use those added features. This is the approach that PostHog uses; you can access our [community edition](http://github.com/PostHog/) on GitHub.

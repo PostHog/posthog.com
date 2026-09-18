@@ -1,0 +1,124 @@
+---
+title: Web analytics
+sidebar: Docs
+showTitle: true
+contentMaxWidthClass: max-w-5xl
+---
+
+import { IconLaptop, IconPlug, IconCode, IconBrackets, IconCursorClick, IconMegaphone, IconGraph, IconShield, IconBolt, IconNotebook, IconPerson, IconCheckCircle } from '@posthog/icons'
+import OSButton from 'components/OSButton'
+import CustomSelfDrivingLoop from 'components/CustomSelfDrivingLoop'
+
+Web analytics gives you a simple dashboard of the numbers every website team looks at – visitors, pageviews, [sessions](/docs/data/sessions), bounce rate, top pages, and where your traffic came from. It's built for people who really liked GA3, without the setup tax.
+
+Because it runs on the same events as the rest of PostHog, a traffic number is never a dead end. Click through from a landing page to the [session replays](/docs/session-replay) behind it, tie ad spend to conversions in [marketing analytics](/docs/web-analytics/marketing-analytics), and let [Self-driving](/docs/self-driving) watch each channel against its own baseline so an SEO drop or broken UTM tagging surfaces before it shows up in a monthly report.
+
+<OSButton variant="primary" asLink to="/docs/web-analytics/start-here">Get started</OSButton>
+
+## Where you can use it
+
+You read and explore your traffic in the PostHog web app. The other surfaces let you pull the same numbers into your editor, your own reports, and the fixes Self-driving opens.
+
+<div className="not-prose grid grid-cols-1 @md:grid-cols-2 @3xl:grid-cols-3 gap-x-6 gap-y-6 my-6">
+
+  <div className="flex items-start gap-3 rounded border border-primary p-5 bg-primary">
+    <IconLaptop className="size-6 shrink-0 text-blue mt-0.5" />
+    <div>
+      <p className="m-0 font-bold text-primary">PostHog Web</p>
+      <p className="m-0 mt-0.5 text-sm text-secondary">The dashboard, live traffic, conversion goals, and marketing analytics, with replays one click away.</p>
+      <a href="/docs/web-analytics/surfaces/web-app" className="inline-flex items-center gap-1 mt-1.5 text-sm font-semibold">Explore your traffic →</a>
+    </div>
+  </div>
+
+  <div className="flex items-start gap-3 rounded border border-primary p-5 bg-primary">
+    <IconPlug className="size-6 shrink-0 text-purple mt-0.5" />
+    <div>
+      <p className="m-0 font-bold text-primary">PostHog MCP</p>
+      <p className="m-0 mt-0.5 text-sm text-secondary">Check traffic, diagnose marketing setup, and read heatmaps from any MCP client or AI editor.</p>
+      <a href="/docs/web-analytics/surfaces/mcp" className="inline-flex items-center gap-1 mt-1.5 text-sm font-semibold">Query traffic →</a>
+    </div>
+  </div>
+
+  <div className="flex items-start gap-3 rounded border border-primary p-5 bg-primary">
+    <IconCode className="size-6 shrink-0 text-orange mt-0.5" />
+    <div>
+      <p className="m-0 font-bold text-primary flex items-center gap-1.5">PostHog Desktop <span className="text-2xs font-bold uppercase tracking-wide px-1.5 py-0.5 rounded bg-yellow/20 text-orange">Beta</span></p>
+      <p className="m-0 mt-0.5 text-sm text-secondary">Read the Self-driving reports built from traffic divergences, and decide what to do about them.</p>
+      <a href="/docs/web-analytics/surfaces/desktop" className="inline-flex items-center gap-1 mt-1.5 text-sm font-semibold">Review findings →</a>
+    </div>
+  </div>
+
+  <div className="flex items-start gap-3 rounded border border-primary p-5 bg-primary">
+    <IconBrackets className="size-6 shrink-0 text-seagreen mt-0.5" />
+    <div>
+      <p className="m-0 font-bold text-primary">API</p>
+      <p className="m-0 mt-0.5 text-sm text-secondary">Send traffic in, and pull visitors, sessions, and heatmap data into your own reports.</p>
+      <a href="/docs/web-analytics/surfaces/api" className="inline-flex items-center gap-1 mt-1.5 text-sm font-semibold">Use the API →</a>
+    </div>
+  </div>
+
+</div>
+
+PostHog also sends traffic *out* on a schedule: a weekly digest of visitors, pageviews, sessions, bounce rate, top pages, and traffic sources arrives by email and as an in-app notification, so the numbers reach you without anyone opening the dashboard.
+
+## Where its data comes from
+
+Web analytics runs on the traffic your site already sends to PostHog. Pageviews and sessions come from the SDK, channels and campaigns are derived from each session's entry referrer and UTM tags, and marketing analytics adds cost data pulled from your ad platforms.
+
+<div className="not-prose grid grid-cols-1 @md:grid-cols-2 gap-x-6 gap-y-6 my-6">
+
+  <div className="flex items-start gap-3 rounded border border-primary p-5 bg-primary">
+    <IconCursorClick className="size-6 shrink-0 text-blue mt-0.5" />
+    <div>
+      <p className="m-0 font-bold text-primary">Sessions and pageviews</p>
+      <p className="m-0 mt-0.5 text-sm text-secondary">Every <code>$pageview</code> the SDK captures, grouped into sessions with entry paths, duration, and bounce.</p>
+      <a href="/docs/data/sessions" className="inline-flex items-center gap-1 mt-1.5 text-sm font-semibold">How sessions work →</a>
+    </div>
+  </div>
+
+  <div className="flex items-start gap-3 rounded border border-primary p-5 bg-primary">
+    <IconMegaphone className="size-6 shrink-0 text-purple mt-0.5" />
+    <div>
+      <p className="m-0 font-bold text-primary">Channels and campaigns</p>
+      <p className="m-0 mt-0.5 text-sm text-secondary">Channel type derived at ingestion from each session's entry referrer, UTM tags, and ad click IDs.</p>
+      <a href="/docs/data/channel-type" className="inline-flex items-center gap-1 mt-1.5 text-sm font-semibold">See channel types →</a>
+    </div>
+  </div>
+
+  <div className="flex items-start gap-3 rounded border border-primary p-5 bg-primary">
+    <IconGraph className="size-6 shrink-0 text-seagreen mt-0.5" />
+    <div>
+      <p className="m-0 font-bold text-primary">Ad platform sources</p>
+      <p className="m-0 mt-0.5 text-sm text-secondary">Cost, clicks, and impressions synced from Google, Meta, LinkedIn, TikTok, Reddit, and Bing ads.</p>
+      <a href="/docs/web-analytics/marketing-analytics" className="inline-flex items-center gap-1 mt-1.5 text-sm font-semibold">Connect ad platforms →</a>
+    </div>
+  </div>
+
+  <div className="flex items-start gap-3 rounded border border-primary p-5 bg-primary">
+    <IconShield className="size-6 shrink-0 text-red mt-0.5" />
+    <div>
+      <p className="m-0 font-bold text-primary">Bot and AI traffic</p>
+      <p className="m-0 mt-0.5 text-sm text-secondary">Crawlers, AI agents, and automation classified at query time so you can measure or exclude them.</p>
+      <a href="/docs/web-analytics/bot-detection" className="inline-flex items-center gap-1 mt-1.5 text-sm font-semibold">Classify bot traffic →</a>
+    </div>
+  </div>
+
+</div>
+
+## How web analytics works with Self-driving
+
+Your traffic is a [signal source](/docs/self-driving/inbox/sources) for [Self-driving](/docs/self-driving). A scout compares each channel, entry path, and referrer against its own seasonality-matched baseline – not against a flat total – so a single segment stepping out of line becomes a report even when the site-wide number looks fine.
+
+A traffic problem is rarely something a coding agent can fix. An SEO drop, a paused ad account, or a campaign missing its UTM tags lives in your site, your campaign tooling, or your marketing stack, not in a repository PostHog can open a pull request against. So these scouts stop at the report and route it to a human reviewer.
+
+<CustomSelfDrivingLoop
+  stages={[
+    { label: 'Sessions', icon: IconCursorClick, color: '#F54E00', description: 'Every visit, already channel-typed and entry-attributed' },
+    { label: 'Signals', icon: IconBolt, color: '#FFA81C', description: 'A channel, page, or referrer diverging from its own baseline' },
+    { label: 'One report', icon: IconNotebook, color: '#29DBBB', description: 'A dated, segment-named finding with the evidence attached' },
+    { label: 'A reviewer', icon: IconPerson, color: '#A737D2', description: 'Routed to whoever owns that channel, page, or campaign' },
+    { label: 'You decide', icon: IconCheckCircle, color: '#47C861', description: 'What to change, and whether to change anything' },
+  ]}
+/>
+
+The two scouts that watch this data are acquisition and site health – channel divergence, attribution breakage, bounce and 404 steps – and [web vitals](/docs/web-analytics/web-vitals) regressions per page. Other signal sources, like [error tracking](/docs/error-tracking), do open pull requests. See [PostHog Desktop](/docs/web-analytics/surfaces/desktop) for what a report looks like, and the [Self-driving docs](/docs/self-driving) for the full picture.

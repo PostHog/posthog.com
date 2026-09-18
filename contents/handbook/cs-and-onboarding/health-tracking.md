@@ -4,9 +4,11 @@ sidebar: Handbook
 showTitle: true
 ---
 
-We use Vitally as a customer success platform.  You can log in via Google SSO to view customer data but will need [Mine](/community/profiles/29862) or [Simon](/community/profiles/28895) to grant you admin access to let you manage your accounts. It integrates with our other systems such as PostHog, Salesforce and Zendesk to give you a complete view of what's going on with your customers.
+We use Vitally as a customer success platform.  You can log in via Google SSO to view customer data but will need [Mine](/community/profiles/29862) or [Simon](/community/profiles/28895) to grant you admin access to let you manage your accounts. It integrates with our other systems such as PostHog, PostHog Support, and Salesforce to give you a complete view of what's going on with your customers.
 
 ## Health scoring
+
+This section covers the computed score. For the rating you set by hand on your own accounts, see [CSM relationship](/handbook/cs-and-onboarding/health-tracking#csm-relationship).
 
 ### Overview
 
@@ -174,3 +176,28 @@ Applied if the Forecasted MRR Change is more than 10%, indicating an increase in
 #### Organization owner recently added
 
 Applied if the Owner role has been added to a user in the last 14 days. This is a good opportunity to reach out to a potential champion if you've not met them before. 
+
+## CSM relationship
+
+The health score above is computed for you. CSM relationship is a rating you set by hand on your own accounts, in <PrivateLink url="https://us.posthog.com/project/2/customer_analytics/accounts">Customer analytics</PrivateLink>.
+
+It records the relationship *you personally* have with the account. It does not measure how the account is doing from a usage/spend/metrics standpoint. A large, healthy, fully self-serve account can sit at the bottom of the scale, and that is a correct reading in a product-led book, "assigned to you" and "known to you" are different things. 
+
+| Rating | What it means |
+|--------|---------------|
+| 1 - No relationship | The account is yours on paper only. It is fully self-serve, and you have no two-way contact with anyone there. |
+| 2 - Introduced | Warmly introduced from another team member but no direct trust yet OR limited response to engagement attempts but no real relationship built |
+| 3 - Reactive | They contact you when they need something, and there is no contact between times. |
+| 4 - Working relationship | You have regular two-way contact with a named person who replies to you and takes meetings. |
+| 5 - Trusted advisor | You are multi-threaded in the account. They bring you problems early and include you in their plans. |
+
+To set the rating, add the **CSM relationship** column to your account view, then click the cell.
+
+### How to use it
+
+- Only the CSM on the account sets the rating. Do not rate an account for somebody else.
+- Change it when the relationship changes. There is no review schedule.
+- On handover, rate your own relationship. Start again at 2 instead of keeping the rating the previous CSM gave. If you keep their rating, the field tells you about the history of the book and not about the relationship the account has today.
+- Be honest. A book of all fives is less useful than an accurate one, and a one is not a failure — it tells us which accounts might need more focus from the CSM team and beyond.
+
+Each label starts with a digit, so the scale sorts in the accounts table and totals in HogQL and PostHog AI. Use `toInt32OrNull(substring(value, 1, 1))` to get the number.

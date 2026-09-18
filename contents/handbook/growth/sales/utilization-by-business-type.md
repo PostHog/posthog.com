@@ -489,7 +489,7 @@ B2B SaaS companies often grapple with a core set of challenges that directly imp
 
 **Revenue Teams**
 - **Pain points:** Low subscription revenue, poor ad performance, difficulty monetizing content
-- **PostHog solutions:** Revenue analytics, subscription optimization, ad performance tracking, monetization strategy insights
+- **PostHog solutions:** Subscription optimization, ad performance tracking, monetization strategy insights
 
 ### Key metrics & PostHog
 

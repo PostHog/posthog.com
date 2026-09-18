@@ -74,7 +74,7 @@ PostHog::groupIdentify([
 PostHogSDK.shared.group(
     type: "company", 
     key: "company_id_in_your_db",
-    properties: [
+    groupProperties: [
         "name": "PostHog",
         "subscription": "subscription",
         "date_joined": "2020-01-23"
@@ -84,7 +84,7 @@ PostHogSDK.shared.group(
 // Option 2: Set properties using capture
 // This method doesn't have the side-effect of associating the session's events to the group
 PostHogSDK.shared.capture(
-    event: "$groupidentify",
+    "$groupidentify",
     properties: [
         "$group_type": "company",
         "$group_key": "company_id_in_your_db",

@@ -1,0 +1,151 @@
+---
+title: Alerts
+---
+
+import { ProductScreenshot } from "components/ProductScreenshot";
+
+An **alert** watches a scanner's [observations](/docs/replay-vision/observations) and notifies you when something you care about happens. Alerts live on the scanner's **Alerts** tab and run on PostHog's shared [alerts](/docs/alerts) platform, so they behave like the alerts you already use elsewhere in PostHog.
+
+If you want a written summary of what a scanner has been finding rather than a notification about a single condition, use a [scout](/docs/replay-vision/scouts) instead.
+
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/alerts_tab_86e5256ac2.png"
+  alt="The Alerts tab on a scanner, listing three alerts with their conditions, states, and last check"
+  classes="rounded"
+/>
+
+## Creating an alert
+
+**New alert** on the **Alerts** tab opens a four-step form: name the alert and pick its type, set what it triggers on, choose where notifications go, then review and save.
+
+## Alert types
+
+Pick the type in the first step:
+
+- **Every matching observation** notifies you about each observation that matches your condition, within about a minute. Matches that arrive together are bundled into one message, so a burst sends one notification instead of many.
+- **Metric threshold** measures your matching observations over a rolling window and notifies you when the number crosses a limit you set. PostHog checks it about once an hour.
+
+## Which observations count
+
+An alert first picks out the observations it cares about. The fields depend on the [scanner type](/docs/replay-vision/scanner-types):
+
+| Scanner type | What you can filter on |
+| --- | --- |
+| **Monitor** | Verdict: `Yes`, `No`, or `Inconclusive`. |
+| **Classifier** | Tags. An observation matches if it carries any of them. |
+| **Scorer** | A minimum score, a maximum score, or both. |
+| **Summarizer** | Nothing to filter on, so an alert covers every observation. |
+
+Leave everything empty to match every observation the scanner produces. Only succeeded observations count. Failed and ineligible ones are never matched.
+
+## When it fires
+
+For a **metric threshold** alert, you set:
+
+- **Measure** – the number of matching observations, or their average score (scorers only).
+- **Direction and threshold** – fires at or above, or at or below, the number you give.
+- **Window** – 24 hours, 3 days, 7 days, 14 days, or 30 days.
+
+An alert notifies you once when it starts firing, and again when it resolves, so a persistent problem doesn't message you every hour.
+
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/alert_step2_trigger_c665ef99c1.png"
+  alt="The Set trigger step of the new alert form, with the observation filter, measure, threshold, and window"
+  classes="rounded"
+/>
+
+Three advanced options tune the noise:
+
+- **Noise reduction** requires N of the last M checks to breach before the alert fires.
+- **Notification cooldown** sets a minimum number of minutes between repeated notifications.
+- **Quiet hours** hold notifications outside the hours you pick, in your project's timezone.
+
+Quiet hours are also available on **every matching observation** alerts. The other two don't apply to them.
+
+## Delivery
+
+The **Notify** step is where destinations go, and you can add more later by editing the alert. Each destination receives every notification that alert sends:
+
+- **Slack** – a channel in a connected Slack workspace.
+- **Webhook** – an HTTPS URL of yours.
+
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/alert_step3_notify_2bfec915c8.png"
+  alt="The Notify step of the new alert form, adding a webhook destination"
+  classes="rounded"
+/>
+
+Notifications are also recorded on the alert itself. Open an alert to see its evaluation history, so nothing is lost if a channel is misconfigured.
+
+### Webhook payloads
+
+PostHog sends an HTTP `POST` with a JSON body.
+
+- **Headers:**
+  - `Content-Type: application/json`
+  - `X-PostHog-Webhook-Version: 1` is the payload version. New fields may be added to the body without changing it, so ignore unknown fields rather than rejecting the payload. A breaking change would ship under a new version.
+
+The `type` field tells you what happened. Route on it:
+
+| `type` | Meaning |
+| --- | --- |
+| `replay_vision_alert.match` | New observations matched an "every matching observation" alert. |
+| `replay_vision_alert.firing` | A metric alert crossed its threshold. |
+| `replay_vision_alert.resolved` | A firing metric alert came back within its threshold. |
+| `replay_vision_alert.errored` | A check couldn't run. The body carries `error_message`. |
+| `replay_vision_alert.auto_disabled` | Checks failed repeatedly and PostHog switched the alert off. |
+
+A firing payload looks like this:
+
+```json
+{
+  "id": "0192f3a4-...",
+  "type": "replay_vision_alert.firing",
+  "timestamp": "2026-09-15T12:00:00+00:00",
+  "data": {
+    "alert_id": "0192f3a4-...",
+    "alert_name": "Checkout dead ends",
+    "scanner_id": "0192f3a4-...",
+    "scanner_name": "Dead-end pages",
+    "metric": "count",
+    "metric_value": "31",
+    "threshold": "20",
+    "direction": "above",
+    "window_days": "1",
+    "observations_url": "https://us.posthog.com/project/1/replay-vision/.../?tab=observations",
+    "alert_url": "https://us.posthog.com/project/1/replay-vision/.../?tab=alerts"
+  }
+}
+```
+
+A `replay_vision_alert.match` payload carries `matched_count` and `observation_ids` in place of the metric fields.
+
+## Alert states
+
+The **Alerts** tab shows where each alert stands:
+
+| State | Meaning |
+| --- | --- |
+| **Active** | An "every matching observation" alert, watching. These have no firing state. |
+| **Not firing** | The metric is within its threshold. |
+| **Firing** | The metric has crossed its threshold and you've been notified. |
+| **Snoozed** | In a notification cooldown or quiet hours. |
+| **Errored** | A recent check failed. PostHog keeps trying. |
+| **Broken** | Checks failed repeatedly, so the alert was switched off. |
+| **Disabled** | You turned it off. |
+
+Use **Reset** on an errored or broken alert to clear its state and run a fresh check shortly after.
+
+Alerts don't spend [credits](/docs/replay-vision/quota-and-limits). They read observations the scanner has already produced.
+
+## Alerts vs. insight alerts
+
+Every observation is also a [`$recording_observed` event](/docs/replay-vision/observations#querying-observations-as-events), which gives you a second way to get notified: build an [insight](/docs/product-analytics/insights) on those events and put a standard [alert](/docs/alerts) on it.
+
+Reach for a **scanner alert** when you want the finding itself, with links straight to the matching sessions. Reach for an **insight alert** when you want a threshold on a metric derived from observations, combined with other data in PostHog's [SQL](/docs/data-warehouse/sql).
+
+## Further reading
+
+- [Observations](/docs/replay-vision/observations)
+- [Scouts](/docs/replay-vision/scouts)
+- [Quota and limits](/docs/replay-vision/quota-and-limits)

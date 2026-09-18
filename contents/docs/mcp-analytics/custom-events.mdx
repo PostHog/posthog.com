@@ -1,0 +1,75 @@
+---
+title: Custom events and metadata
+---
+
+Use `eventProperties` to add metadata to captured events. Use `analytics.capture()` for events that are not MCP requests.
+
+## `eventProperties` – metadata on every event
+
+Pass an `eventProperties` callback to attach extra properties to automatically captured MCP events. The callback receives request context, such as headers, transport, and the request ID.
+
+```ts
+import { instrument, getRequestHeaders } from "@posthog/mcp"
+
+const analytics = instrument(server, posthog, {
+  eventProperties: async (request, extra) => ({
+    $app_version: process.env.GIT_SHA ?? "unknown",
+    $mcp_region: process.env.FLY_REGION ?? "unknown",
+    request_id: getRequestHeaders(extra)?.["x-request-id"],
+  }),
+})
+```
+
+`getRequestHeaders` reads headers on both MCP SDK majors – see [MCP SDK v2](/docs/mcp-analytics/sdk-v2#if-your-callbacks-read-headers-change-them).
+
+The returned object is spread flat onto the event's properties alongside the built-in `$mcp_*` keys:
+
+```json
+{
+  "event": "$mcp_tool_call",
+  "properties": {
+    "$mcp_tool_name": "search_events",
+    "$app_version": "a1b2c3d",
+    "$mcp_region": "iad",
+    "request_id": "req_…"
+  }
+}
+```
+
+Return constants from `eventProperties` to add the same values to captured MCP events. This is similar to `posthog.register(...)` in other SDKs. Return values from the request context when metadata must vary between calls.
+
+For group analytics, return `groups` from [`identify`](/docs/mcp-analytics/identifying-users). The SDK adds `$groups` to events for the session.
+
+Returned values must be JSON-serializable. The SDK catches callback errors and sends them to your `logger`. These errors do not interrupt tool execution.
+
+## `analytics.capture()` – emit an arbitrary event
+
+Use `analytics.capture()` for events that aren't MCP requests, such as UI feedback or workflow milestones. It uses the SDK's sanitization, current server session and identity, and `beforeSend` hook. It returns a promise you can `await`.
+
+Custom capture has no request context and doesn't run `eventProperties`. Pass custom metadata in `properties`.
+
+You name the event. It's sent verbatim – it's your event, so it is **not** `$`-prefixed.
+
+```ts
+const analytics = instrument(server, posthog)
+
+await analytics.capture({
+  event: "feedback_submitted",
+  properties: { rating: 5 },
+})
+```
+
+PostHog receives:
+
+- One event under the verbatim `event` name you passed, with your `properties` merged in.
+- The current server session and cached identity apply. These may differ from the session of a concurrent tool request.
+
+`capture()` is a method on the handle that `instrument()` returns, so you call it on the instrumented server's analytics handle directly.
+
+## Which one to use
+
+| You want to... | Use |
+|---|---|
+| Attach the same properties to every auto-captured event | `eventProperties` |
+| Emit a one-off event that isn't an MCP request | `analytics.capture()` |
+| Attach data only to matching requests | Check the request in `eventProperties` and return properties only for matches. |

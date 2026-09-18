@@ -8,7 +8,7 @@ The SDK Support Hero rotation is managed by the <SmallTeam slug="client-librarie
 
 Your primary responsibility is to make sure SDK questions get some love — across all SDKs, including mobile. During the rotation, please keep an eye on:
 
-- [Escalated SDK tickets in Zendesk](https://posthoghelp.zendesk.com/agent/filters/33118780890267)
+- Escalated SDK tickets in [PostHog Support](https://us.posthog.com/project/2/support/tickets) — your team's view is bookmarked in `#support-client-libraries`
 - New issues in the SDK repositories:
   - [posthog-js (Web, Web Lite, React, React Native, Next, Node, AI)](https://github.com/PostHog/posthog-js/)
   - [posthog-python](https://github.com/PostHog/posthog-python)
@@ -19,9 +19,9 @@ Your primary responsibility is to make sure SDK questions get some love — acro
 
 ## How should I prioritize my time?
 
-Firstly, try to stay on top of new escalated Zendesk tickets and GitHub issues, and make sure that issues related to a specific team are routed to them. If there is a relevant team (e.g. the issue is related to session replay in posthog-js), you can assign the Zendesk ticket to that team, and use the team's label in GitHub. If there is no relevant team for a GitHub issue, please label with `SDK Support Hero`. Feel free to try to fix things yourself before tagging the team.
+Firstly, try to stay on top of new escalated tickets in PostHog Support and GitHub issues, and make sure that issues related to a specific team are routed to them. If there is a relevant team (e.g. the issue is related to session replay in posthog-js), you can [assign the ticket to that team](/handbook/support/posthog-support#escalating-a-ticket), and use the team's label in GitHub. If there is no relevant team for a GitHub issue, please label with `SDK Support Hero`. Feel free to try to fix things yourself before tagging the team.
 
-Next, please work on SDK tickets in Zendesk, and GitHub issues labelled `SDK Support Hero` (and unlabelled, but please label these!). You can use your own judgement to decide which issues to work on but please consider effort / reward / urgency / your skill set. For example, `posthog-js` usually has the most issues, but if you're a Python expert, you might want to focus on `posthog-python`.
+Next, please work on SDK tickets in PostHog Support, and GitHub issues labeled `SDK Support Hero` (and unlabeled, but please label these!). You can use your own judgement to decide which issues to work on but please consider effort / reward / urgency / your skill set. For example, `posthog-js` usually has the most issues, but if you're a Python expert, you might want to focus on `posthog-python`.
 
 For mobile SDK issues, prioritize accordingly — rolling out fixes on mobile apps may take weeks or even months, so faster turnaround on these is important. Make sure, however, to validate changes carefully, avoid breaking changes and think through edge cases before shipping, since our ability to correct mistakes after release is significantly constrained.
 

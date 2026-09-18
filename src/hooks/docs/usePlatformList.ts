@@ -28,6 +28,9 @@
  * MDX frontmatter format:
  * - platformLogo: Key from `src/constants/logos.ts` (e.g., "stripe", "react", "nodejs")
  * - platformIconName: Icon like "IconCode" (fallback if no logo)
+ * - platformLabel: Optional explicit card label. Overrides the suffix-stripped
+ *   title — use when the auto-derived label is wrong (e.g. provider name
+ *   contains the suffix, like "Fireworks AI" + "AI Observability installation").
  *
  * Usage:
  * const platforms = usePlatformList('docs/error-tracking/installation', 'error tracking installation')
@@ -113,6 +116,7 @@ export default function usePlatformList(
                     slug
                     frontmatter {
                         title
+                        platformLabel
                         platformLogo
                         platformIconName
                         platformSourceType
@@ -133,9 +137,12 @@ export default function usePlatformList(
             return true
         })
         .map((node: any) => {
-            let label = node.frontmatter.title
+            // Prefer an explicit `platformLabel` when set — the strip-suffix
+            // fallback breaks when provider names overlap the suffix (e.g.
+            // "Fireworks AI Observability installation" stripping to "Fireworks").
+            let label = node.frontmatter.platformLabel || node.frontmatter.title
 
-            if (titleSuffix) {
+            if (!node.frontmatter.platformLabel && titleSuffix) {
                 // Extract versioning content in title (ex: "(v3.6 and below)")
                 const parenMatch = label.match(/\(([^)]+)\)/)
                 const versionInfo = parenMatch ? ` ${parenMatch[0]}` : ''

@@ -1,0 +1,102 @@
+---
+title: Identifying users
+---
+
+By default, the SDK attributes MCP events to a generated session ID (`ses_…`). On `2025-11-25`, this normally follows the protocol session. On `2026-07-28`, [conversation IDs](/docs/mcp-analytics/conversation-id) are on by default. Calls share a session only when the agent echoes the handle. The SDK does not know the person behind the session.
+
+Use `identify` to associate calls with a person.
+
+## How attribution works
+
+For each event, the SDK picks `distinct_id` in this order:
+
+1. The id returned by your `identify(request, extra)` callback (if it returned a `UserIdentity`).
+2. The MCP session id (`ses_…`).
+3. The literal string `"anonymous"`.
+
+Before `identify` returns a user, events use the session ID. Later events use the user ID. See [Identity merges](#identity-merges) for how PostHog associates earlier anonymous events.
+
+<a id="anonymous-sessions-dont-mint-person-profiles" />
+
+## Anonymous sessions and person profiles
+
+Events for sessions with **no** resolved identity are sent with `$process_person_profile: false`. This keeps anonymous MCP sessions from each creating a person profile (which would inflate your person count and billing). Once `identify` resolves an identity for a session, person processing stays on and the events create/update that user's profile as normal.
+
+<a id="wiring-identify" />
+
+## Configure `identify`
+
+`identify` is a sync or async callback that returns a `UserIdentity` or `null`. It runs on each request. The SDK caches identities per session to avoid duplicate `$identify` events. It still calls the callback on every request.
+
+```ts
+import { instrument, getRequestHeaders } from "@posthog/mcp"
+
+instrument(server, posthog, {
+  identify: async (request, extra) => {
+    const token = getRequestHeaders(extra)?.["authorization"]
+    if (!token) return null
+
+    const user = await resolveUserFromToken(token)
+    if (!user) return null
+
+    return {
+      distinctId: user.id,              // becomes distinct_id
+      properties: {                     // written to $set
+        name: user.name,
+        email: user.email,
+        plan: user.plan,
+        signupDate: user.signupDate,
+      },
+      groups: {                         // becomes $groups on every event
+        organization: user.orgId,
+      },
+    }
+  },
+})
+```
+
+Read headers with `getRequestHeaders`. The two MCP SDK majors store them in different locations. Reading `extra` directly can return `undefined` and cause anonymous attribution. See [MCP SDK v2](/docs/mcp-analytics/sdk-v2#if-your-callbacks-read-headers-change-them).
+
+This is the same shape as posthog-node's [`identify({ distinctId, properties })`](/docs/libraries/node) – just returned from a per-request callback instead of called imperatively. The fields map to PostHog as follows:
+
+- `distinctId` -> the event's `distinct_id`.
+- `properties` -> written verbatim to `$set` (so to set a person's name or email, put them here, e.g. `properties: { name, email }`). `$set` updates the person profile but isn't retained on the stored event, so query these as [person properties](/docs/product-analytics/person-properties).
+- `groups` (optional `Record<string, string>` of groupType -> groupKey) is stamped onto **every** event as `$groups`. You never hand-write `$groups` yourself.
+
+When this returns a non-null identity, the SDK:
+
+1. Switches the event's `distinct_id` to `distinctId` for that session.
+2. Emits a `$identify` event the first time the identity is observed (or whenever it changes for that session), with `$set` populated from `properties`.
+3. Stamps `$groups` onto subsequent events from the returned `groups` map.
+4. Caches the identity in a small per-server LRU keyed by session id, so unchanged identities are silently deduped.
+
+## Identity merges
+
+An MCP session can emit events before authentication completes. For example, `$mcp_initialize` may occur before you identify the user. These events use the session ID.
+
+When the SDK emits `$identify`, it sets `$anon_distinct_id` to the prior session ID so PostHog can merge the anonymous events. Subsequent events use `distinctId`.
+
+For stateless servers that recover a session from a token, the SDK suppresses the first `$identify` after `initialize` to avoid duplicates across instances. If identity only becomes available later, those earlier anonymous events may remain unmerged. Resolve identity during `initialize` when possible.
+
+The [Node SDK](/docs/libraries/node) uses the same identity merge model. Your project's person profile settings also apply.
+
+## When *not* to call identify
+
+- **Internal tools without per-user auth.** If your MCP server doesn't authenticate end users (e.g. a single-tenant internal server behind a VPN), leave `identify` unset. Session-scoped attribution is fine.
+- **Bots and crawlers.** Returning a junk identity for unauthenticated traffic dilutes your person count. Return `null` for traffic you can't identify – those events stay session-scoped.
+
+## Querying by identified user
+
+Once identification is wired up, anything that filters on `person.properties.*` or groups by `distinct_id` works as expected:
+
+```sql
+SELECT
+  person.properties.plan AS plan,
+  properties.$mcp_tool_name AS tool,
+  count() AS calls
+FROM events
+WHERE event = '$mcp_tool_call'
+  AND timestamp > now() - INTERVAL 30 DAY
+GROUP BY plan, tool
+ORDER BY calls DESC
+```

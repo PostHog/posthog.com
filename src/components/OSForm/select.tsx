@@ -35,8 +35,11 @@ interface SelectProps {
     dataScheme?: 'primary' | 'secondary' | 'tertiary'
     className?: string
     containerClassName?: string
+    /** Extra classes appended to each option's button (lets callers tune option-row sizing/typography). */
+    optionClassName?: string
     touched?: boolean
     error?: string
+    chrome?: boolean
 }
 
 const OSSelect = ({
@@ -61,8 +64,10 @@ const OSSelect = ({
     dataScheme,
     className = '',
     containerClassName = '',
+    optionClassName = '',
     touched = false,
     error,
+    chrome = true,
 }: SelectProps) => {
     const [isOpen, setIsOpen] = useState(false)
     const [searchTerm, setSearchTerm] = useState('')
@@ -335,9 +340,11 @@ const OSSelect = ({
                     onClick={() => !disabled && setIsOpen(!isOpen)}
                     onKeyDown={handleKeyDown}
                     disabled={disabled}
-                    className={`group bg-primary border rounded ring-0 focus:ring-1 flex items-center justify-between ${
-                        touched && error ? 'border-red dark:border-yellow' : 'border-primary'
-                    } ${sizeClasses[size]} ${widthClasses[width]} ${
+                    className={`group ring-0 focus:ring-1 flex items-center justify-between ${
+                        chrome ? 'bg-primary border rounded' : ''
+                    } ${touched && error ? 'border-red dark:border-yellow' : 'border-primary'} ${
+                        chrome ? sizeClasses[size] : 'text-[15px]'
+                    } ${widthClasses[width]} ${
                         disabled ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'
                     } ${className}`}
                     aria-haspopup="listbox"
@@ -407,7 +414,7 @@ const OSSelect = ({
                                                     option.disabled ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'
                                                 } ${option.value === value ? 'font-bold' : ''} ${
                                                     index === highlightedIndex ? 'bg-accent' : ''
-                                                }`}
+                                                } ${optionClassName}`}
                                                 role="option"
                                                 aria-selected={option.value === value}
                                                 onMouseEnter={() => setHighlightedIndex(index)}

@@ -17,7 +17,7 @@ tags:
 Want to know more about what we're up to? [Subscribe to our new newsletter](https://newsletter.posthog.com/subscribe), which we send once every two weeks!
 
 ## 1.41.0 update guide for self-hosted users
-Due to changes in this update, it is important check `alias` usage before [upgrading PostHog](/docs/runbook/upgrading-posthog) to 1.41.0 on a self-hosted instance. Further [information is available in the docs](/docs/integrate/identifying-users#considerations), but for example, assuming `email` is used as the identified user id, then: 
+Due to changes in this update, it is important check `alias` usage before [upgrading PostHog](/docs/self-host) to 1.41.0 on a self-hosted instance. Further [information is available in the docs](/docs/integrate/identifying-users#considerations), but for example, assuming `email` is used as the identified user id, then: 
 
 ```
 identify(email)                     # in the frontend
@@ -90,7 +90,7 @@ We've added a new page to the Data Management section which lists warnings relat
 
 Curious how well your apps are doing? Previously, you may have had to pour over the AWS logs, but now you can head to the new app metrics page to find out how many events an app has processed, how many retries were attempted and what errors may have occurred. Very handy. Want to take a look? Head to the apps page in your instance and click the chart symbol for any installed app.  
 
-App metrics are only available for users on Scale or Enterprise add-ons. 
+App metrics are only available for users on the Scale or Enterprise package. 
 
 > **Note:** Self-hosted users managing kafka separately should create a new topic `clickhouse_app_metrics` manually.
 

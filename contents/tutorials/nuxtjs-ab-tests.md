@@ -7,6 +7,8 @@ tags:
   - experimentation
   - feature flags
 ---
+import NuxtApiKeysSecurity from "../docs/integrate/_snippets/nuxt-api-keys-security.mdx"
+
 A/B tests are crucial for optimizing your Nuxt.js app. PostHog's experimentation tool simplifies this process. This tutorial will show you how to set up and run an A/B test in Nuxt using PostHog.
 
 We'll cover creating a basic Nuxt app, integrating PostHog, and setting up the A/B test.
@@ -48,7 +50,14 @@ Next we add PostHog (if you don't have a PostHog instance, you can [sign up for 
 npm install posthog-js
 ```
 
-Then, add your PostHog token and host to your `nuxt.config.ts` file. You can find your project token in your [PostHog project settings](https://app.posthog.com/settings/project)
+Then, store your PostHog token and host in environment variables. Add them to a `.env` file in your project's base directory. You can find your project token in your [PostHog project settings](https://app.posthog.com/settings/project)
+
+```shell file=.env
+NUXT_PUBLIC_POSTHOG_PROJECT_TOKEN=<ph_project_token>
+NUXT_PUBLIC_POSTHOG_HOST=<ph_client_api_host>
+```
+
+Then reference them in your `nuxt.config.ts` file:
 
 ```ts file=nuxt.config.ts
 export default defineNuxtConfig({
@@ -56,13 +65,15 @@ export default defineNuxtConfig({
   
   runtimeConfig: {
     public: {
-      posthogToken: '<ph_project_token>',
-      posthogHost: '<ph_client_api_host>',
+      posthogToken: process.env.NUXT_PUBLIC_POSTHOG_PROJECT_TOKEN || '<ph_project_token>',
+      posthogHost: process.env.NUXT_PUBLIC_POSTHOG_HOST || '<ph_client_api_host>',
       posthogDefaults: '<ph_posthog_js_defaults>',
     }
   }
 })
 ```
+
+<NuxtApiKeysSecurity />
 
 Create a new [plugin](https://nuxt.com/docs/guide/directory-structure/plugins) by first creating a new folder called `plugins` and then a new file `posthog.client.js` with the following code:
 

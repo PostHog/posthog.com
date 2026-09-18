@@ -4,7 +4,6 @@ import * as RadioGroup from '@radix-ui/react-radio-group'
 import * as Icons from '@posthog/icons'
 import { IMenu } from 'components/PostLayout/types'
 import { Link, navigate } from 'gatsby'
-import { useApp } from '../../context/App'
 import { useWindow } from '../../context/Window'
 
 // --- Data Structure ---
@@ -95,7 +94,6 @@ const FileColumn: React.FC<FileColumnProps> = ({ items, selectedId, onSelect }) 
 
 export const FileMenu: React.FC<{ initialPath?: IMenu[]; menu: IMenu[] }> = ({ initialPath = [], menu }) => {
     const { appWindow } = useWindow()
-    const { compact, isMobile } = useApp()
     const { getItemChildren } = useFileData(menu)
     const [path, setPath] = useState<(IMenu | null)[]>([null, ...initialPath]) // Start with null for root
 

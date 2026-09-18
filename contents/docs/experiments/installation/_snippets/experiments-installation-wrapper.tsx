@@ -15,6 +15,7 @@ import {
     IOSInstallation,
     AndroidInstallation,
     FlutterInstallation,
+    KMPInstallation,
     ReactNativeInstallation,
     // Backend SDK installations
     NodeJSInstallation,
@@ -122,6 +123,12 @@ export const ExperimentsAndroidInstallationWrapper = () => (
 export const ExperimentsFlutterInstallationWrapper = () => (
     <OnboardingContentWrapper snippets={SNIPPETS}>
         <FlutterInstallation modifySteps={addNextStepsStep} />
+    </OnboardingContentWrapper>
+)
+
+export const ExperimentsKMPInstallationWrapper = () => (
+    <OnboardingContentWrapper snippets={SNIPPETS}>
+        <KMPInstallation modifySteps={addNextStepsStep} />
     </OnboardingContentWrapper>
 )
 

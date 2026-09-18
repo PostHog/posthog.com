@@ -1,26 +1,28 @@
 ---
-title: JavaScript API reference
+title: Support JavaScript API reference
 sidebar: Docs
 showTitle: true
 ---
 
-The JavaScript API at `posthog.conversations` gives you full programmatic control over support conversations. Use it to build custom support interfaces or integrate support into your existing UI.
+The `posthog.conversations` JavaScript API gives you full programmatic control over PostHog Support. Use it to build a custom support interface or integrate support into your existing UI.
 
-## Checking availability
+`posthog.conversations` is the namespace for Support's SDK methods. "Conversations" is the code-level name for support tickets and their messages, so you'll see it in method names, captured events, and settings – the product itself is Support.
 
-Before using the API, check if conversations are available:
+## Check availability
+
+Before calling other methods, check that the API is available:
 
 ```javascript
 if (posthog.conversations.isAvailable()) {
-  // Conversations API is ready to use
+  // The API is ready to use
 }
 ```
 
 `isAvailable()` returns `true` when:
-- Conversations are enabled in your project settings
+- Support is enabled in your project settings
 - The conversations module has loaded successfully
 
-## Sending messages
+## Send a message
 
 ```javascript
 // Send a message (creates ticket if none exists)
@@ -59,7 +61,7 @@ interface SendMessageResponse {
 }
 ```
 
-## Fetching messages
+## Fetch messages
 
 ```javascript
 // Get messages for the current active ticket
@@ -95,7 +97,7 @@ interface Message {
 }
 ```
 
-## Marking messages as read
+## Mark messages as read
 
 ```javascript
 // Mark messages as read for current ticket
@@ -113,7 +115,7 @@ interface MarkAsReadResponse {
 }
 ```
 
-## Fetching tickets
+## Fetch tickets
 
 ```javascript
 // Get all tickets
@@ -128,13 +130,10 @@ const response = await posthog.conversations.getTickets({
 ```
 
 **Parameters:**
-```typescript
-interface GetTicketsOptions {
-  status?: string   // Filter by status: 'new' | 'open' | 'pending' | 'on_hold' | 'resolved'
-  limit?: number    // Number of tickets to return (default: 20)
-  offset?: number   // Pagination offset (default: 0)
-}
-```
+- `options` (optional) – Object with any of:
+  - `status` (string) – Filter by status: `new`, `open`, `pending`, `on_hold`, or `resolved`
+  - `limit` (number) – Number of tickets to return (default: 20)
+  - `offset` (number) – Pagination offset (default: 0)
 
 **Response:**
 ```typescript
@@ -154,7 +153,7 @@ interface Ticket {
 }
 ```
 
-## Getting current context
+## Get the current context
 
 ```javascript
 // Get the current active ticket ID (null if no conversation started)
@@ -191,7 +190,7 @@ When sending messages, user traits are resolved in this order:
 2. PostHog person properties (`$name`, `$email`, `name`, `email`)
 3. Previously saved traits from the identification form
 
-## Building a custom chat UI
+## Build a custom chat UI
 
 You can build a completely custom chat UI using the API while disabling the default widget:
 
@@ -349,7 +348,7 @@ try {
 }
 ```
 
-## API reference summary
+## Method summary
 
 | Method | Description | Returns |
 |--------|-------------|---------|

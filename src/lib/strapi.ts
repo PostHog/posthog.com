@@ -1,3 +1,10 @@
+// Host for client-side Squeak/Strapi calls (auth + the authenticated session).
+// Override via GATSBY_SQUEAK_AUTH_HOST — e.g. a local Strapi instance — for testing;
+// defaults to the normal API host so prod and other devs are unaffected. Note:
+// build-time sourcing (gatsby-source-squeak) uses GATSBY_SQUEAK_API_HOST directly and
+// is intentionally NOT affected by this, so it stays on the full-data cloud backend.
+export const SQUEAK_HOST = process.env.GATSBY_SQUEAK_AUTH_HOST || process.env.GATSBY_SQUEAK_API_HOST
+
 // Strapi helper types
 export type StrapiResult<T> = StrapiData<T> &
     StrapiMeta & {
@@ -42,9 +49,6 @@ export type QuestionData = {
     activeAt: string
     pinnedTopics: StrapiData<TopicData[]>
     slugs: { is: number; slug: string }[]
-    escalated: boolean
-    zendeskTicketID: number
-    autoLinkedToZendesk: boolean
 }
 
 export type AvatarData = {
@@ -57,6 +61,7 @@ export type ProfileData = {
     biography: string | null
     company: string | null
     companyRole: string | null
+    discord: string | null
     github: string | null
     linkedin: string | null
     location: string | null
@@ -92,9 +97,42 @@ export type ProfileData = {
     reputation?: number
 }
 
+export interface TransactionMetadata {
+    description?: string
+    redemption?: {
+        title?: string
+        code?: string
+    }
+    achievement?: {
+        iconURL?: string
+        title?: string
+    }
+    reply?: {
+        title?: string
+    }
+    question?: { id: number; subject: string; permalink: string }
+    capped?: boolean
+}
+
+export type Transaction = {
+    id: number
+    amount: number
+    date: string
+    type: 'gift' | 'achievement' | 'redemption' | 'reply' | 'question'
+    metadata?: TransactionMetadata
+}
+
+export type Wallet = {
+    id?: number
+    balance: number
+    transactions?: Transaction[]
+}
+
 export type UserData = {
     email: string
     distinctId: string | null
+    // Only present when explicitly populated, which Strapi gates to the moderator role
+    wallet?: Wallet | null
 }
 
 export type ProfileQuestionsData = {

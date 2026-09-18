@@ -1,6 +1,31 @@
 import React from 'react'
 import * as Icons from '@posthog/icons'
 
+/**
+ * Curated product/tool handles shown in the taskbar "Browse tools" menu and
+ * the product-page sidebar switcher, in display order.
+ *
+ * Labels and icons come from product data via `useProduct()` — this list only
+ * controls membership and order.
+ */
+export const BROWSE_TOOLS_HANDLES = [
+    'product_analytics',
+    'web_analytics',
+    'ai_observability',
+    'session_replay',
+    'replay_vision',
+    'feature_flags',
+    'experiments',
+    'error_tracking',
+    'logs',
+    'endpoints',
+    'workflows_emails',
+    'surveys',
+    'support',
+    'heatmaps',
+    'group_analytics',
+] as const
+
 // Popular products to highlight in the menu
 export const popularProducts = [
     'posthog_ai',
@@ -16,7 +41,7 @@ export const newestProducts = [
     'logs',
     'endpoints',
     'posthog_ai',
-    'llm_analytics',
+    'ai_observability',
     'workflows_emails',
     'posthog_code',
     'support',
@@ -75,25 +100,41 @@ export const productOrder: Record<string, string[]> = {
         'bi',
         'data_out',
     ],
-    product_engineering: ['session_replay', 'experiments', 'feature_flags', 'logs', 'error_tracking', 'early_access'],
+    product_engineering: [
+        'session_replay',
+        'replay_vision',
+        'experiments',
+        'feature_flags',
+        'logs',
+        'error_tracking',
+        'early_access',
+    ],
     analytics: [
         'web_analytics',
         'product_analytics',
-        'revenue_analytics',
-        'llm_analytics',
+        'ai_observability',
+        'mcp_analytics',
         'custom_dashboards',
         'group_analytics',
         'custom_dashboards',
     ],
     dataviz: ['trends', 'funnels', 'user_paths', 'correlation_analysis', 'retention', 'stickiness', 'lifecycle'],
-    automation: ['posthog_ai', 'workflows', 'webhooks'],
-    communication: ['surveys', 'messaging', 'user-interviews', 'workflows_emails'],
+    automation: ['posthog_ai', 'posthog_slack', 'posthog_code', 'workflows', 'webhooks'],
+    communication: ['surveys', 'support', 'messaging', 'user-interviews', 'workflows_emails'],
     product_os: ['api', 'webhooks', 'notebooks', 'activity', 'toolbar', 'profiles', 'platform_packages', 'services'],
 }
 
 // Non-product pages that appear in the product navigation
 // These need manual icon and link configuration
-export const nonProductPages = {}
+export const nonProductPages = {
+    // MCP Analytics has no marketing page – the nav entry points straight at the docs.
+    mcpAnalytics: {
+        slug: 'mcp-analytics',
+        url: '/docs/mcp-analytics',
+        icon: 'IconPlug',
+        color: 'blue',
+    },
+}
 
 // Helper function to get products for a category in the correct order
 export function getProductsForCategory(category: string, allProducts: any[]): any[] {

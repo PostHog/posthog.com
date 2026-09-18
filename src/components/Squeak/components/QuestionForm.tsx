@@ -65,11 +65,10 @@ export const Select = ({
 
     useEffect(() => {
         fetchTopicGroups().then((topicGroups) => {
-            const filteredGroups = topicGroups.filter((group) => group?.attributes?.label !== 'Off-topic')
-            setTopicGroups(filteredGroups)
+            setTopicGroups(topicGroups)
 
             // Flatten topic groups into options array with section headers
-            const flatOptions = filteredGroups
+            const flatOptions = topicGroups
                 .sort(
                     (a, b) =>
                         topicGroupsSorted.indexOf(a?.attributes?.label) -
@@ -236,8 +235,15 @@ function QuestionFormMain({
 
                             {disclaimer && (
                                 <p className="text-xs text-center mt-4 ml-[50px] [text-wrap:_balance] opacity-60 mb-0 text-primary">
-                                    If you need to share personal info relating to a bug or issue with your account, we
-                                    suggest filing a support ticket in the app.
+                                    Troubleshooting an issue or not sure how something works? Try{' '}
+                                    <Link
+                                        to="https://app.posthog.com#panel=support"
+                                        externalNoIcon
+                                        className="font-semibold underline"
+                                    >
+                                        asking PostHog AI or creating a ticket
+                                    </Link>{' '}
+                                    instead.
                                 </p>
                             )}
                         </Form>
@@ -283,6 +289,7 @@ export const QuestionForm = ({
     ...other
 }: QuestionFormProps) => {
     const { user, getJwt, logout } = useUser()
+    const posthog = usePostHog()
     const [formValues, setFormValues] = useState<QuestionFormValues | null>(null)
     const [view, setView] = useState<string | null>(initialView || null)
     const [loading, setLoading] = useState(false)
@@ -349,6 +356,18 @@ export const QuestionForm = ({
                 data,
             }),
         }).then((res) => res.json())
+
+        // Fires only for new questions (replies use a separate `reply()` path), and only
+        // after the API confirms creation — a reliable count of new questions asked.
+        if (questionData?.id) {
+            posthog?.capture('squeak question created', {
+                questionId: questionData.id,
+                topicId: topicID,
+                slug,
+                subject,
+            })
+        }
+
         return questionData
     }
 

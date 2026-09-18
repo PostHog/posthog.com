@@ -18,13 +18,13 @@ export const projectAccessControlLight =
 export const projectAccessControlDark =
   "https://res.cloudinary.com/dmukukwp6/image/upload/access_control_project_dark_d05334884e.png";
 export const resourceAccessControlLight =
-  "https://res.cloudinary.com/dmukukwp6/image/upload/access_control_resource_light_7ccb0f5311.png";
+  "https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/resource_access_control_light_638d035213.png";
 export const resourceAccessControlDark =
-  "https://res.cloudinary.com/dmukukwp6/image/upload/access_control_resource_dark_aa8806bb1d.png";
+  "https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/resource_access_control_dark_fd4a9382dd.png";
 export const objectAccessControlLight =
-  "https://res.cloudinary.com/dmukukwp6/image/upload/access_control_object_light_864b64cfa3.png";
+  "https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/object_access_control_light_5c740b9e38.png";
 export const objectAccessControlDark =
-  "https://res.cloudinary.com/dmukukwp6/image/upload/access_control_object_dark_17f1adda40.png";
+  "https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/object_access_control_dark_03278b80ea.png";
 
 PostHog's access control system allows you to manage permissions at three levels: organization, project, and resource. This hierarchical approach provides granular control over who can view and edit different parts of PostHog.
 
@@ -39,7 +39,7 @@ The three access levels are: Member, Admin, and Owner. An organization must have
 | Permission                                                                   | Member (base level)                           | Admin                                         | Owner                                         |
 | ---------------------------------------------------------------------------- | --------------------------------------------- | --------------------------------------------- | --------------------------------------------- |
 | Viewing and querying project data                                            | <span className="text-green text-lg">✔</span> | <span className="text-green text-lg">✔</span> | <span className="text-green text-lg">✔</span> |
-| Accessing billing management                                                 | <span className="text-red text-lg">✖</span>   | <span className="text-green text-lg">✔</span> | <span className="text-green text-lg">✔</span> |
+| Accessing billing management\*\*                                             | <span className="text-red text-lg">✖</span>   | <span className="text-green text-lg">✔</span> | <span className="text-green text-lg">✔</span> |
 | Managing reverse proxies                                                     | <span className="text-red text-lg">✖</span>   | <span className="text-green text-lg">✔</span> | <span className="text-green text-lg">✔</span> |
 | Creating and deleting projects                                               | <span className="text-red text-lg">✖</span>   | <span className="text-green text-lg">✔</span> | <span className="text-green text-lg">✔</span> |
 | Managing project access controls (see more below)                            | <span className="text-red text-lg">✖</span>   | <span className="text-green text-lg">✔</span> | <span className="text-green text-lg">✔</span> |
@@ -53,6 +53,8 @@ The three access levels are: Member, Admin, and Owner. An organization must have
 | Deleting an organization                                                     | <span className="text-red text-lg">✖</span>   | <span className="text-red text-lg">✖</span>   | <span className="text-green text-lg">✔</span> |
 
 \*This permission is configurable and can be disabled for members by organization admins and owners.
+
+\*\*We can give members read-only access to the **Usage** and **Spend** tabs, without the rest of billing. [Contact support](/questions) to set this up for your organization.
 
 Access levels can be viewed and changed in the [Members section](https://app.posthog.com/settings/organization-members) of organization settings.
 
@@ -94,20 +96,43 @@ Currently, resource access controls are available for:
 
 - Actions
 - Activity logs
-- Customer Analytics
+- AI observability
+- AI trace clusters
 - Dashboards
+- Data catalog
+- Data warehouse sources
+- Data warehouse tables and views
+- Early access features
+- Endpoints
+- Error tracking
+- Evaluations
 - Experiments
+- Exports
 - Feature flags
+- Heatmaps
 - Insights
-- Managed data warehouse sources
+- LLM playground
+- Logs
 - Notebooks
+- Replay vision
 - Revenue analytics
 - Session recordings
+- Sharing
+- Skills
+- Support
 - Surveys
+- Toolbar
 - Web analytics
+- Workflows
 - (more resource types coming soon – looking for others? Let us know!)
 
-Note: We do not yet support limiting access to querying data, viewing replays, or accessing person / group profiles. Support for these features is planned for the near future.
+Resource access controls limit who can open product surfaces in the UI or execute the corresponding MCP tools.
+
+<CalloutBox icon="IconWarning" title="Native tables aren't restricted yet" type="caution">
+
+Queries to the core PostHog tables (`events`, `sessions`, `persons`, `groups`) through the SQL editor or MCP still work. To prevent queries from returning sensitive event or person properties (for example, `email`), configure [property access control](/docs/settings/property-access-control).
+
+</CalloutBox>
 
 Resource access controls have four possible access levels:
 
@@ -135,6 +160,8 @@ You cannot set resource-level access controls for organization admins, as they a
   classes="rounded"
 />
 
+Each project can have up to 1,000 objects per resource type with individual access controls. For example, you can set custom access controls on up to 1,000 dashboards, 1,000 insights, and so on. If you need a higher limit, contact support.
+
 #### b. All resource objects of a given type in a project (resource access controls)
 
 These settings allow you to control who can view and edit all resources of a given type within a project. These controls are set at the project level.
@@ -151,6 +178,16 @@ You cannot set resource-level access controls for organization admins, as they a
   alt="Resource access control"
   classes="rounded"
 />
+
+## Warehouse access control
+
+When you connect external sources to PostHog through the [Data Warehouse](/docs/data-warehouse), you can configure who can query the data synced into PostHog. Apply access controls to all sources or to a specific one, table, or view. See [warehouse access control](/docs/settings/warehouse-access-control) for details.
+
+## Property access control
+
+Event or person data may contain sensitive properties (for example, email addresses). To prevent someone from exporting your entire user base, configure [property access control](/docs/settings/property-access-control).
+
+When a property is restricted, explicit reads return `NULL`, and results that include all properties omit it. This applies in both the SQL editor and MCP.
 
 ## How object access control precedence works
 
@@ -211,6 +248,22 @@ Here are some practical examples of how to configure access controls for differe
 3. Give the analyst "Viewer" access to all Dashboards (resource-level)
 4. The analyst can create and edit insights but only view dashboards
 
+#### Hide PII from vendors
+
+**Scenario**: You want to share your event data with vendors while restricting access to a property containing PII (e.g. `email`).
+
+**Setup**:
+
+1. Create a role for the vendor (e.g. "Vendor", "External collaborator")
+2. Create a property definition for the property if one does not already exist, otherwise edit the existing definition
+3. Navigate to the "Roles" tab under the "Access control" section of the property definition page
+4. Find your vendor role and select "Add override"
+5. Select "No access"
+6. Save the property definition
+7. Any member with the vendor role will not be able to access the PII property
+
+To restrict additional properties, repeat steps 2–6 for each one.
+
 ## Feature availability
 
 ### Free / Pay-as-you-go
@@ -219,7 +272,7 @@ These plans do not currently offer any access control features. All projects are
 
 ### Boost or Scale
 
-The Boost and Scale add-ons include access controls for teams with stricter security requirements.
+The Boost and Scale packages include access controls for teams with stricter security requirements.
 
 **What you can do:**
 

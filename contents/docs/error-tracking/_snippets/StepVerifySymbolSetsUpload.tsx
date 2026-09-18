@@ -3,7 +3,7 @@ import { Step } from '../../../../src/components/Docs/Steps'
 import { CallToAction } from '../../../../src/components/CallToAction'
 
 interface StepVerifySymbolSetsUploadProps {
-    symbolType?: 'source maps' | 'mappings' | 'dSYMs'
+    symbolType?: 'source maps' | 'mappings' | 'dSYMs' | 'debug symbols'
 }
 
 export const StepVerifySymbolSetsUpload: React.FC<StepVerifySymbolSetsUploadProps> = ({

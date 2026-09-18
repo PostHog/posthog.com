@@ -6,7 +6,7 @@ import { BoardMeetings, Compensation, Feedback, Finances } from 'components/Care
 import boardMeetingsImg from './images/board-meetings.svg'
 import financesImg from './images/finances.svg'
 import feedbackImg from './images/feedback.svg'
-import Logo from 'components/Logo'
+import { Logo } from '@posthog/brand/logo'
 import { StaticImage } from 'gatsby-plugin-image'
 import { CallToAction } from 'components/CallToAction'
 import CloudinaryImage from 'components/CloudinaryImage'
@@ -112,7 +112,7 @@ export const Transparency = () => {
             <div className="flex justify-center max-w-5xl mx-auto">
                 <div className="bg-white aspect-video dark:bg-accent-dark rounded-md p-4 xs:px-6 xl:py-6 xl:px-8 mx-4 xl:mx-8 border border-primary relative w-full">
                     <div className="absolute left-0 top-0 w-full h-full bg-black/40 z-10 rounded-md"></div>
-                    <Logo className="h-6 xs:h-8 sm:h-12 -ml-3 xs:ml-0 mb-4 sm:mb-8 @2xl:mb-10" />
+                    <Logo className="h-6 xs:h-8 sm:h-12 -ml-3 xs:ml-0 mb-4 sm:mb-8 @2xl:mb-10" width="auto" />
                     <div className="text-2xl xs:text-[1.5rem] sm:text-[2rem] @2xl:text-[3rem] lg:text-[4rem] font-extrabold font-['Helvetica','Arial'] mb-1 xs:mb-2 @2xl:mb-4 lg:mb-8">
                         Management report
                     </div>

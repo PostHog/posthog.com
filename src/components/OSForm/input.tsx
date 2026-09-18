@@ -116,8 +116,11 @@ const Input = ({
                 <input
                     className={`bg-primary border border-primary rounded ring-0 focus:ring-1 ${
                         touched && error ? 'border-red dark:border-yellow' : 'border-primary'
-                    } ${sizeClasses[size]} ${widthClasses[width]} ${
-                        showClearButton && value ? 'pr-10' : ''
+                    } ${sizeClasses[size]} ${widthClasses[width]} ${showClearButton && value ? 'pr-10' : ''} ${
+                        // Hide the native search cancel control when we render our own clear button.
+                        showClearButton
+                            ? '[&::-webkit-search-cancel-button]:appearance-none [&::-webkit-search-decoration]:appearance-none'
+                            : ''
                     } ${className}`}
                     type={type}
                     id={inputId}

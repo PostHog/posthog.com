@@ -1,7 +1,7 @@
 export const langfuse = {
     name: 'Langfuse',
     products: {
-        llm_analytics: {
+        ai_observability: {
             available: true,
             features: {
                 generation_tracking: true,
@@ -11,13 +11,110 @@ export const langfuse = {
                 token_tracking: true,
                 prompt_playground: true,
                 prompt_evaluations: true,
-                alerting: false,
+                alerting: true,
+                anomaly_detection: false,
                 system_prompts: true,
                 error_tracking: true,
                 clustering: true,
                 trace_summarization: true,
                 llm_translation: false,
+                // No built-in sentiment template – custom LLM-as-a-judge prompt only.
+                sentiment_classification: 'Partial',
+                privacy_mode: true,
+                agent_tracing: true,
+                prompt_management: true,
+                evaluation_datasets: true,
+                human_annotation: true,
+                // User feedback via the scores API.
+                user_feedback: true,
+                agent_reports: false,
+                feature_flags: false,
+                ai_gateway_proxy: false,
             },
+            tracing: {
+                features: {
+                    hierarchical_traces: true,
+                    custom_spans: true,
+                    tool_call_tracking: true,
+                    rag_retrieval_tracking: true,
+                    session_grouping: true,
+                    opentelemetry_support: true,
+                    async_ingestion: true,
+                    multi_model_support: true,
+                    session_replay_link: false,
+                    user_profile_context: 'Partial',
+                    // ClickHouse-backed custom queries and dashboards, not alongside product events.
+                    sql_queries_on_traces: 'Partial',
+                    trace_explorer_ui: true,
+                },
+            },
+            prompt_management: {
+                features: {
+                    prompt_versioning: true,
+                    template_variables: true,
+                    prompt_deployment_api: true,
+                    version_comparison: true,
+                    prompt_config: true,
+                    prompt_labels: true,
+                    prompt_playground: true,
+                    composable_prompts: true,
+                    mcp_server_for_prompts: true,
+                    // Dedicated A/B testing flow via prompt labels; the app code does the split.
+                    ab_test_prompt_versions: true,
+                },
+            },
+            evaluations: {
+                features: {
+                    llm_as_a_judge: true,
+                    code_evaluators: true,
+                    annotation_queues: true,
+                    datasets: true,
+                    experiment_runs: true,
+                    ab_experiments_on_product_metrics: false,
+                },
+            },
+            costs: {
+                features: {
+                    token_counting: true,
+                    cost_calculation: true,
+                    cost_by_model: true,
+                    cost_trends: true,
+                    cost_by_custom_tags: true,
+                },
+            },
+        },
+        session_replay: {
+            available: false,
+        },
+        product_analytics: {
+            available: false,
+        },
+        web_analytics: {
+            available: false,
+        },
+        feature_flags: {
+            available: false,
+        },
+        experiments: {
+            available: false,
+        },
+        error_tracking: {
+            available: false,
+        },
+        surveys: {
+            available: false,
+        },
+        data_warehouse: {
+            available: false,
+        },
+        cdp: {
+            available: false,
+        },
+    },
+    platform: {
+        deployment: {
+            eu_hosting: true,
+            open_source: true,
         },
     },
 }

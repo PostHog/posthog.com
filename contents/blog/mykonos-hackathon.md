@@ -23,7 +23,7 @@ This year, we headed to Mykonos – not to rave, but to code. And to enjoy a coc
 
 Our all-company offsites are a mix of socializing, group activities, strategic sessions, Post-its, workshops, more Post-its, and, the star of the show, the annual PostHog [hackathon](/newsletter/hackathons). 
 
-Everyone in the company has to pitch a couple of ideas, then we all vote on our favorites, assemble teams, and have a little over a day to go from pitch to demo. 
+Everyone in the company has to pitch a couple of ideas, then we all vote on our favorites, assemble teams, and have a little over a day to go from pitch to demo — and [the tricks that make those demos memorable](/newsletter/how-to-demo#storytelling-tactics) are worth knowing before you get up there.
 
 ![PostHog's 2024 offsite in Mykonos](https://res.cloudinary.com/dmukukwp6/image/upload/hackathon1_e2aa8bd928.jpg)
 
@@ -122,7 +122,7 @@ But that's not all, if you're using Zendesk then you could, in the future, add t
 
 ## The referral scheme
 
-<BuiltBy people={["Ben White", "Raquel Smith", "Joe Martin"]} />
+<BuiltBy people={["Ben White", "Raquel Smith", "Joe Black"]} />
 
 Everyone loves a pyramid scheme, right?! 
 
@@ -180,7 +180,7 @@ As part of the project, we also revamped our system for categorizing and trackin
 
 <BuiltBy people={["Sandy Spicer", "Tim Glaser"]} />
 
-PostHog crunches a lot of data, especially on very complext queries. To help users better understand the hard work we’re doing when they make a query, we built a loading bar that includes live data on how much data we're crunching (database rows and data volume) and CPU usage we're deploying to generate an answer for you.
+PostHog crunches a lot of data, especially on very complex queries. To help users better understand the hard work we’re doing when they make a query, we built a loading bar that includes live data on how much data we're crunching (database rows and data volume) and CPU usage we're deploying to generate an answer for you.
 
 ![Data crunching](https://res.cloudinary.com/dmukukwp6/image/upload/datacrunch1_7ab73f5ab4.jpg)
 

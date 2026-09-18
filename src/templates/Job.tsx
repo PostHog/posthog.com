@@ -22,6 +22,7 @@ import { TeamsSidebar } from 'components/Job/TeamsSidebar'
 import ScrollArea from 'components/RadixUI/ScrollArea'
 import Mark from 'mark.js'
 import { OSInput } from 'components/OSForm'
+import { formatTeamName } from 'lib/utils'
 
 const Detail = ({ icon, title, value }: { icon: React.ReactNode; title: string; value: string }) => {
     return (
@@ -172,24 +173,6 @@ const LeftSidebarContent = React.memo(
 
         return (
             <ScrollArea className="h-full">
-                {/* Search input */}
-                <div className="mb-4">
-                    <OSInput
-                        type="text"
-                        label="Search roles"
-                        showLabel={false}
-                        placeholder="Search roles..."
-                        value={searchQuery}
-                        onChange={handleSearchChange}
-                        onKeyDown={handleSearchKeyDown}
-                        onClear={handleClearSearch}
-                        showClearButton={true}
-                        size="sm"
-                        width="full"
-                        name="job-search"
-                    />
-                </div>
-
                 {/* Job list */}
                 <div ref={jobListRef}>
                     {searchQuery.trim() ? (
@@ -227,7 +210,7 @@ const LeftSidebarContent = React.memo(
                                                                         : []
                                                                     return teams.length > 1
                                                                         ? 'Multiple teams'
-                                                                        : teams.length === 1 && `${teams[0]} Team`
+                                                                        : teams.length === 1 && formatTeamName(teams[0])
                                                                 })()}
                                                             </span>
                                                         )}
@@ -278,7 +261,7 @@ const LeftSidebarContent = React.memo(
                                                                         : []
                                                                     return teams.length > 1
                                                                         ? 'Multiple teams'
-                                                                        : teams.length === 1 && `${teams[0]} Team`
+                                                                        : teams.length === 1 && formatTeamName(teams[0])
                                                                 })()}
                                                             </span>
                                                         )}
@@ -576,12 +559,7 @@ export default function Job({
                                 <div>
                                     {parsedContent.map((item) => (
                                         <div key={item.value} id={item.value}>
-                                            <Accordion
-                                                skin={false}
-                                                items={[item]}
-                                                type="single"
-                                                defaultValue={item.value}
-                                            />
+                                            <Accordion items={[item]} type="single" defaultValue={item.value} />
                                         </div>
                                     ))}
                                 </div>
@@ -625,7 +603,6 @@ export default function Job({
                             {sfBenchmark[salaryRole] && (
                                 <div id="salary">
                                     <Accordion
-                                        skin={false}
                                         items={[
                                             {
                                                 value: 'salary',
@@ -658,7 +635,6 @@ export default function Job({
                             )}
                             <div id="benefits">
                                 <Accordion
-                                    skin={false}
                                     items={[
                                         {
                                             value: 'benefits',
@@ -673,7 +649,7 @@ export default function Job({
                                                                     className="flex space-x-3 items-center font-medium leading-tight text-[15px]"
                                                                 >
                                                                     <img
-                                                                        className="max-w-[30px]"
+                                                                        className="max-w-[30px] brightness-[0.45] dark:brightness-150"
                                                                         alt={title}
                                                                         src={image}
                                                                     />
@@ -699,7 +675,6 @@ export default function Job({
                             {gitHubIssues.length > 0 && (
                                 <div id="typical-tasks">
                                     <Accordion
-                                        skin={false}
                                         items={[
                                             {
                                                 value: 'typical-tasks',
@@ -762,7 +737,6 @@ export default function Job({
                             {!multipleTeams && showObjectives && objectives && (
                                 <div id="mission-objectives">
                                     <Accordion
-                                        skin={false}
                                         items={[
                                             {
                                                 value: 'mission-objectives',
@@ -794,7 +768,6 @@ export default function Job({
                             )}
                             <div id="interview-process">
                                 <Accordion
-                                    skin={false}
                                     items={[
                                         {
                                             value: 'interview-process',
@@ -815,7 +788,6 @@ export default function Job({
                             </div>
                             <div id="apply">
                                 <Accordion
-                                    skin={false}
                                     items={[
                                         {
                                             value: 'apply',

@@ -1,25 +1,73 @@
-### Q2 2026 Objectives
-This quarter we're making experiments work great with AI agents, removing feature flag friction, and improving the results experience.
-
-#### AI
-
-##### API layer <TeamMember name="Marcel Poelker" photo />
-Get the API layer ready for AI agents. All experiment operations should be covered, well tested and work the same way whether the caller is our frontend or an agent.
-
-##### Skills <TeamMember name="Marcel Poelker" photo />
-Create experiment skills so PostHog AI knows how to use our MCP tools effectively.
-
-##### MCP <TeamMember name="Rodrigo Iloro" photo />
-External callers like PostHog Code or any other agent can connect via MCP and run experiment operations reliably.
-
-##### Signals <TeamMember name="Juraj Majerik" photo />
-Ship our first signal - notifying users when an experiment reaches significance.
+### Q3 2026 Objectives
 
 #### Feature flags <TeamMember name="Anders Asheim Hennum" photo />
-Make it possible to run multiple Experiments per Feature Flag. Rollout configurations will be more flexible and it will be easier to understand how Feature Flags and Experiments are related.
+Make it possible to run multiple experiments per feature flag. Rollout configurations will be more flexible and it will be easier to understand how feature flags and experiments are related. Implement the plan from the [RFC](https://github.com/PostHog/requests-for-comments-internal/blob/multiple-experiments-per-flag/engineering/2026-05-04-feature-flag-and-experiment-integration.md).
 
-#### Query performance <TeamMember name="Juraj Majerik" photo />
-Extend precomputation to the main subquery for all metric types. Make precomputation observable - see where it kicked in, how it ran and compare results against direct-scan queries.
+#### Dedicated exposure event <TeamMember name="Anders Asheim Hennum" photo />
+Add an `experiment_exposure` event. This will:
+1. Speed up queries by not relying on the `$feature_flag_called` event.
+2. Make it clearer what exposure is and how it works, by no longer conflating a feature flag call with exposure.
 
-#### Loading experience <TeamMember name="Rodrigo Iloro" photo />
-Loading is painful for our high-volume users. Consolidate query fetching, only re-query when the user asks and set better expectations around loading states.
+#### Improve results loading
+##### Optimize precomputation and query performance <TeamMember name="Juraj Majerik" photo />
+- Fix timeouts that still happen on precomputed queries - tweak the lazy computation to split work into smaller chunks.
+- Handle late-arriving events and person merges, which currently cause inaccuracies.
+- Test the remaining query optimizations against real production queries.
+- Give users better visibility into what happened to a query.
+
+##### Loading experience <TeamMember name="Rodrigo Iloro" photo />
+Improve the experience of loading and working with experiment results:
+- Exposing the experiment recalculation async workflow to agents via MCP.
+- Continuing to iterating on the experiments metric loading experience.
+
+#### Use qualitative data in experiments <TeamMember name="Marcel Poelker" photo />
+- Use [Replay Vision](https://posthog.slack.com/archives/C03PB072FMJ/p1781794491138089) data to enrich experiment analysis.
+- Improve the product integration between experiments and replays.
+- Promote related products such as Surveys in chat sessions.
+
+#### Embed experiments in the self-driving loop <TeamMember name="Marcel Poelker" photo />
+Ship self-driving PRs as experiments to validate that they actually work (inbox → PR → roll out to a subset of users first). Recommend whether to accept or reject based on the signal.
+
+#### Create well-configured experiments without involving the user <TeamMember name="Marcel Poelker" photo />
+Ultimately we want to embed experiments in the self-driving loop, which means triggering experimentation ideas and experiment creation. Triggering ideas can have various shapes (out of thin air like scanning the codebase or by having a concrete hook like PR creation). Either way, for best user experience, the creation process should "get it right" without asking the user. This goal focuses on the 2nd step, the "getting it right" creation of experiments.
+
+#### No-code experiments 2.0 <TeamMember name="Rodrigo Iloro" photo />
+Deprecate the current no-code experiments and replace them with a fundamentally better approach:
+- Research the deprecation. Understand the impact of retiring the old toolbar and SDK web experiments features, and validate the best end state for customers, including a simple migration path so no one loses existing experiments.
+- Add the ability to set up experiments visually and have them translated into code by opening a PR in the customer’s repo.
+  - Deprecate the toolbar and SDK web experiments in favor of in-place, AI-integrated tooling within PostHog Code.
+- Add the ability to set up experiments visually and have them translated into code (by opening a PR).
+  - Deprecate the PostHog toolbar and SDK web experiments features in favor of in-place, AI-integrated tooling within PostHog Code.
+- Give users no-code experiments they can trust and own.
+  - They don’t need to write any code, but changes still live in their version-controlled codebase instead of being injected at runtime, so every experiment is easy to review, diff, and roll back.
+
+#### Prompt experiments <TeamMember name="Juraj Majerik" photo />
+We have good traction here, so we should double down and improve the product:
+- Make it possible to experiment on any model configuration (model, version, effort, etc.).
+- Add the ability to experiment on skills.
+- Make prompt and skills management great by shipping the most requested features:
+  1. Manage and tweak the system prompt in PostHog (automatically too, via self-improvement loops).
+  2. The same for agent parameters (model name, available tools, temperature, max tokens, etc.).
+
+#### Product pricing <TeamMember name="Ruby Childs" photo />
+Understand the costs of experiments, advanced feature usage and the best position for pricing.
+
+#### Skills <TeamMember name="Ruby Childs" photo />
+Skills are our onboarding surface for the redefined, less-technical ICP — the MCP-facing layer that gets an experiment right the first time (~30% of experiment users already interact via MCP).
+
+- Onboarding: help users get set up and run experiments correctly, aimed at the less-technical ICP and self-driving onboarding.
+- Diagnosing: a skill/scout that inspects setup and flags errors.
+    - Over MCP (config): flag and variants are sane, metric events are known, and custom exposure events are valid.
+    - In a coding agent / PostHog Code (source): the flag is evaluated where the variant is shown, and the boolean-flag → experiment migration is done right.
+- Educational ("Learn Experiments"): teach the concepts a non-statistical user needs to trust a result such as exposure, MDE, significance, sequential testing and common interpretation traps.
+- Summarize & interpret results: a plain-language, one-page verdict on a finished experiment.
+
+#### Side quests
+
+##### Blog post on query performance <TeamMember name="Juraj Majerik" photo />
+Write a blog post about query performance, once we're in a more stable place.
+
+##### Product positioning <TeamMember name="Ruby Childs" photo />
+Improve how we position experiments:
+- Understand advanced features - new vs. advanced users.
+- Improve the positioning on our website.

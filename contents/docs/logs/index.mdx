@@ -1,0 +1,120 @@
+---
+title: Logs
+sidebar: Docs
+showTitle: true
+contentMaxWidthClass: max-w-5xl
+---
+
+import { IconLaptop, IconMagic, IconCode, IconBrackets, IconServer, IconFilter, IconRewindPlay, IconBolt, IconNotebook, IconPerson, IconCheckCircle, IconWarning } from '@posthog/icons'
+import OSButton from 'components/OSButton'
+import CustomSelfDrivingLoop from 'components/CustomSelfDrivingLoop'
+
+Logs is an OpenTelemetry-native log store, so there are no PostHog-specific SDKs to adopt – point any OTLP client at PostHog and your log records start arriving. Search them by service, severity, and attribute, group similar lines into [patterns](/docs/logs/patterns) to see what changed, and open any record to have [PostHog AI](/docs/logs/explain-logs-ai) explain it.
+
+Because your logs live next to the rest of your data, a log line is one click from the [session replay](/docs/session-replay), [person](/docs/data/persons), and [error](/docs/error-tracking) it belongs to. Log alerts also feed [Self-driving](/docs/self-driving), so a recurring failure becomes a report you can act on instead of a page you ignore.
+
+<OSButton variant="primary" asLink to="/docs/logs/start-here">Get started</OSButton>
+
+## Where you can use it
+
+You search and investigate logs in the [web app](/docs/logs/surfaces/web-app). The other surfaces are for pulling log context into the tools you already work in.
+
+<div className="not-prose grid grid-cols-1 @md:grid-cols-2 @3xl:grid-cols-3 gap-x-6 gap-y-6 my-6">
+
+  <div className="flex items-start gap-3 rounded border border-primary p-5 bg-primary">
+    <IconLaptop className="size-6 shrink-0 text-blue mt-0.5" />
+    <div>
+      <p className="m-0 font-bold text-primary">PostHog Web</p>
+      <p className="m-0 mt-0.5 text-sm text-secondary">Search and filter logs, mine patterns, save views, and set up alerts.</p>
+      <a href="/docs/logs/surfaces/web-app" className="inline-flex items-center gap-1 mt-1.5 text-sm font-semibold">Search your logs →</a>
+    </div>
+  </div>
+
+  <div className="flex items-start gap-3 rounded border border-primary p-5 bg-primary">
+    <IconMagic className="size-6 shrink-0 text-purple mt-0.5" />
+    <div>
+      <p className="m-0 font-bold text-primary">PostHog MCP</p>
+      <p className="m-0 mt-0.5 text-sm text-secondary">Let your coding agent query logs, mine patterns, and manage alerts from your editor.</p>
+      <a href="/docs/logs/surfaces/mcp" className="inline-flex items-center gap-1 mt-1.5 text-sm font-semibold">Debug logs →</a>
+    </div>
+  </div>
+
+  <div className="flex items-start gap-3 rounded border border-primary p-5 bg-primary">
+    <IconCode className="size-6 shrink-0 text-green mt-0.5" />
+    <div>
+      <p className="m-0 font-bold text-primary flex items-center gap-1.5">PostHog Desktop <span className="text-2xs font-bold uppercase tracking-wide px-1.5 py-0.5 rounded bg-yellow/20 text-orange">Beta</span></p>
+      <p className="m-0 mt-0.5 text-sm text-secondary">Review the Self-driving reports your firing alerts and shifting log patterns generate.</p>
+      <a href="/docs/logs/surfaces/desktop" className="inline-flex items-center gap-1 mt-1.5 text-sm font-semibold">Review reports →</a>
+    </div>
+  </div>
+
+  <div className="flex items-start gap-3 rounded border border-primary p-5 bg-primary">
+    <IconBrackets className="size-6 shrink-0 text-seagreen mt-0.5" />
+    <div>
+      <p className="m-0 font-bold text-primary">API</p>
+      <p className="m-0 mt-0.5 text-sm text-secondary">Query logs and manage alerts, saved views, and sampling rules programmatically.</p>
+      <a href="/docs/logs/surfaces/api" className="inline-flex items-center gap-1 mt-1.5 text-sm font-semibold">Use the API →</a>
+    </div>
+  </div>
+
+</div>
+
+## Where its data comes from
+
+Everything in Logs is derived from the log records you send over [OTLP](/docs/logs/installation). How useful they are depends on what you attach to them.
+
+<div className="not-prose grid grid-cols-1 @md:grid-cols-2 gap-x-6 gap-y-5 my-6">
+
+  <div className="flex items-start gap-3 rounded border border-primary p-5 bg-primary">
+    <IconServer className="size-6 shrink-0 text-blue mt-0.5" />
+    <div>
+      <p className="m-0 font-bold text-primary">Services</p>
+      <p className="m-0 mt-0.5 text-sm text-secondary">Every record carries a <code>service.name</code>, which is how logs are grouped, faceted, and alerted on.</p>
+      <a href="/docs/logs/installation" className="inline-flex items-center gap-1 mt-1.5 text-sm font-semibold">Send your first logs →</a>
+    </div>
+  </div>
+
+  <div className="flex items-start gap-3 rounded border border-primary p-5 bg-primary">
+    <IconFilter className="size-6 shrink-0 text-teal mt-0.5" />
+    <div>
+      <p className="m-0 font-bold text-primary">Attributes</p>
+      <p className="m-0 mt-0.5 text-sm text-secondary">Log and resource attributes become the facets you filter on – and the fields PII scrubbing protects.</p>
+      <a href="/docs/logs/best-practices" className="inline-flex items-center gap-1 mt-1.5 text-sm font-semibold">Structure your logs →</a>
+    </div>
+  </div>
+
+  <div className="flex items-start gap-3 rounded border border-primary p-5 bg-primary">
+    <IconRewindPlay className="size-6 shrink-0 text-red mt-0.5" />
+    <div>
+      <p className="m-0 font-bold text-primary">Session replay and persons</p>
+      <p className="m-0 mt-0.5 text-sm text-secondary">Add a session ID and distinct ID and each log line links to the replay and person behind it.</p>
+      <a href="/docs/logs/link-session-replay" className="inline-flex items-center gap-1 mt-1.5 text-sm font-semibold">Link your logs →</a>
+    </div>
+  </div>
+
+  <div className="flex items-start gap-3 rounded border border-primary p-5 bg-primary">
+    <IconWarning className="size-6 shrink-0 text-orange mt-0.5" />
+    <div>
+      <p className="m-0 font-bold text-primary">Patterns</p>
+      <p className="m-0 mt-0.5 text-sm text-secondary">PostHog masks the variable parts of your messages and clusters them into templates you can diff over time.</p>
+      <a href="/docs/logs/patterns" className="inline-flex items-center gap-1 mt-1.5 text-sm font-semibold">See log patterns →</a>
+    </div>
+  </div>
+
+</div>
+
+## How Logs works with Self-driving
+
+When a [log alert](/docs/logs/alerts) fires, it emits a signal into [Self-driving](/docs/self-driving). Recurring failures get grouped into a report with the logs behind them. PostHog also sweeps your logs for shifts nobody wrote an alert for – new message patterns, volume bursts, severity shifts, and services that go quiet – and writes those up as reports too.
+
+<CustomSelfDrivingLoop
+  stages={[
+    { label: 'Log records', icon: IconServer, color: '#F54E00', description: 'Everything your services emit over OTLP' },
+    { label: 'Alerts fire', icon: IconBolt, color: '#FFA81C', description: 'A threshold is crossed and a signal is emitted' },
+    { label: 'One report', icon: IconNotebook, color: '#29DBBB', description: 'Grouped with related errors and replays' },
+    { label: 'A reviewer', icon: IconPerson, color: '#A737D2', description: 'The report is routed to a person, not an agent' },
+    { label: 'You decide', icon: IconCheckCircle, color: '#47C861', description: 'Read the evidence and choose what to do' },
+  ]}
+/>
+
+The logs scout stops at the report. A log shift is usually an investigation rather than a one-line code change, so it doesn't open a pull request on its own – unlike [error tracking](/docs/error-tracking), where a stack trace often points at a specific file. You investigate in the [web app](/docs/logs/surfaces/web-app) and read the reports in the [Self-driving inbox](/docs/self-driving/inbox) or [PostHog Desktop](/docs/logs/surfaces/desktop). See the [Self-driving docs](/docs/self-driving) for the full picture.

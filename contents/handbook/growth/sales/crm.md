@@ -15,7 +15,7 @@ As a general principle, we try to make sure as much customer communication as po
 
 For existing customers, you'll sometimes send emails directly from <PrivateLink url="https://posthog.vitally-eu.io/">Vitally</PrivateLink>. To ensure these also make it to Salesforce, first look up your _Email to Salesforce Address_ from the [personal settings page](https://posthog.lightning.force.com/lightning/settings/personal/EmailToSalesforceUserSetup/home) in Salesforce, and then add it to your <PrivateLink url="https://posthog.vitally-eu.io/settings/profile/gmail">Vitally gmail settings</PrivateLink>.
 
-All Slack messages sync up with the corresponding account in Salesforce. We use [Pylon](https://app.usepylon.com) for this sync, so make sure Pylon is added to the customer Slack channel integrations and the channel is [linked to the Salesforce account](https://app.usepylon.com/integrations/salesforce?tab=account-mapping) properly for the sync to work smoothly.
+All Slack messages sync up with the corresponding account in Salesforce. We use [SupportHog](/handbook/growth/sales/slack-channels) for this sync, so make sure SupportHog is [added to the customer Slack channel](/handbook/growth/sales/slack-channels) and the channel's name is recorded on the relevant Salesforce account record for the sync to work smoothly.
 
 You are most likely to use the following regularly:
 
@@ -37,31 +37,27 @@ People currently come into Salesforce through one of the following ways:
 
 ### New PostHog signups
 
-When a `user signed up` (Cloud signup) event is ingested into PostHog
-we use the [Salesforce App](https://github.com/PostHog/Salesforce-plugin) to sync contact data into Salesforce. We also populate
-the following Salesforce properties if they are set in the PostHog event:
+When a `user signed up` (Cloud signup) event is ingested into PostHog, a <PrivateLink url="https://us.posthog.com/project/2/pipeline/destinations">data pipeline destination</PrivateLink> ("Salesforce create contact for signups") creates a contact record in Salesforce with `Record Source` set to `product-signup`. It maps the following Salesforce properties if they are set on the PostHog event or person:
 
--   selected_deployment_type - usually `cloud` or `hosted_clickhouse`
--   product_signup_ts - the time they signed up/purchased a license
+-   role_at_organization - the role they self-selected when signing up (used in lead scoring)
 -   is_organization_first_user - whether they have created a new organization or joined an existing one
--   role_at_organization - the role they self-selected when signing up (used in Lead scoring)
+-   The PostHog organization ID and name
+-   Marketing opt-in, the signup URLs, and the PostHog distinct ID
 
 ### Completed contact form
 
 We have a [contact us form](/talk-to-a-human) on posthog.com where we ask users can get in touch with us. The sales@ alias gets an email notification and a notification is also sent to [#sales-leads](https://posthog.slack.com/archives/C054BJSHG82) in Slack when one of these forms is submitted.
 
-These submissions are processed through the Default app and routed into Salesforce as tasks. Tasks are then automatically assigned to the right team member based on account ownership and territory (see below).
+Each submission sends a server-side PostHog event and a webhook into our lead routing pipeline (Default). The [lead-gateway](https://github.com/PostHog/lead-gateway) then creates or updates the Salesforce contact, links it to the account, and creates a Lead Task. Tasks are then automatically assigned to the right team member based on account ownership and territory (see below).
 
 If the submission is clearly a support or billing request, you don’t need to reach out manually:
 - On the task, select the disqualification reason **Billing Support Request** or **Support Request**.
 - This automatically creates a Zendesk ticket for the correct team.
 - No manual outreach is needed; automation handles it.
 
-### Zendesk Integration
+### Leads from support tickets
 
-If you add "sf-lead" tag to a ticket in Zendesk, a new lead will be automatically created in Salesforce. This helps streamline the process of converting support questions or tickets into potential sales opportunities directly from Zendesk.
-
-If you see "Zendesk" as the lead source, please review the ticket under the Zendesk widget in Salesforce which allows you to view the full context within salesforce. It will also appear in sales_form_message field for quick review of last request before the Zendesk ticket is converted to a lead.
+If the support team spots a sales opportunity in a support ticket, they post it in #group-cs-sales-support for sales/CS to pick up (see [handling sales leads](/handbook/support/customer-support#handling-sales-leads)). If you pick one up, add it to Salesforce as described in [manual entry](#manual-entry).
 
 ### Forwarding sales opportunities
 
@@ -143,7 +139,7 @@ When you disqualify a task, choose the picklist reason that best matches the sit
 - **No Response – Prospect** — They showed qualifying signals but went dark; create a **follow-up task** with a date (revisit in roughly 3–6 months).
 - **Below Sales Assist Threshold – Pass** — TAE judged under ~$20K potential with no signals worth revisiting.
 - **Below Sales Assist Threshold – Prospect** — Same economic band but signals worth another pass (ICP, growth, usage); create a **follow-up task** (e.g. BDR or named list). If nothing happens within ~90 days, revisit whether this split is useful.
-- **Using Competitor / Unsolicited RFP** — Locked in or chose a competitor; set a reminder to check in in about **9 months** (see [new sales playbook](/handbook/growth/sales/new-sales)).
+- **Using Competitor / Unsolicited RFP** — Locked in or chose a competitor; set a reminder to check in about **9 months** (see [new sales playbook](/handbook/growth/sales/new-sales)).
 - **Other** — Requires a free-text comment when selected; if a large share of disqualifications land here, propose a new reason.
 
 ### Manual entry
@@ -156,6 +152,20 @@ If you meet a potential customer elsewhere (e.g., events, introductions, referra
 ### Support and billing routing
 
 For support or billing questions submitted via the sales channel, disqualify with **Support Request** or **Billing Support Request** as in [Completed contact form](#completed-contact-form) (Zendesk ticket automation). If you still see legacy lead records from older flows, the same reasons apply; ticket creation may use [this Zapier path](https://zapier.com/editor/274433115/published) for some automations.
+
+#### Billing vs. finance: who owns what
+
+Billing and finance questions look similar but go to different teams. Route by what the customer is actually asking for:
+
+- **Invoices → billing team** Questions about what an invoice says or what information goes on it — line items, amounts, dates, the entity we bill under, or adding a PO number to an invoice. The <SmallTeam slug="billing" /> owns the invoice itself.
+
+- **Collections → finance team** Anything about getting paid or where an invoice needs to go — requests to upload an invoice to a customer's payment portal (e.g. Zip, Coupa, Ariba), supplier-onboarding or vendor-setup forms, requests for extra documentation or information from us, and chasing overdue payments.
+
+A quick test: if the question can be answered by reading or correcting the invoice, it's **billing**. If it asks us to send the invoice somewhere specific, complete a form, or provide extra information, it's **finance**.
+
+Tax is owned by finance, who handle tax determination and compliance via Anrok. Billing only gets involved when a specific tax amount has to appear as an explicit line item on an invoice. For anything about tax rates, treatment, or whether tax applies, ask finance.
+
+This comes up most with managed customers, where POs and payment notices sit at the intersection of sales, billing, and finance. These often arrive via the sales channel (the contact form or sales@) even though they belong to billing or finance — disqualify and re-route them using the split above rather than working them as leads.
 
 ### Below Threshold – Auto (Customer.io)
 
@@ -228,12 +238,16 @@ You can also create an opportunity directly from scratch, but make sure to conne
 -   Fill in Opportunity Details:
 -   Opportunity Name
 -   Close Date: Choose the estimated date when the opportunity is expected to close.
--   Term (Months): Default is 12, update for multi year deals.
--   Total Credit Amount: Total value of the contract before discounts.
--   Discount (%): Percent discount applied to the total.
+-   Term (Months): Default is 12, update for multi year deals. For contract buyouts, this already includes the buyout period (e.g. 12 standard + 6 month buyout = 18 month term), see [contract buyouts and one-time credits](#contract-buyouts-and-one-time-credits) below.
+-   Total Credit Amount: Standard, discountable credit the customer is paying for. Does not include one-time/free credit, buyout or startup rolloff credits are tracked separately (see below).
+-   Discount (%): Contracted discount rate applied to Total Credit Amount, this is what goes on the order form. Excludes any one-time credit.
 -   ARR Discounted: Automatically calculated annualized revenue after discount.
 -   Contract Start Date: Date the contract begins.
 -   Contract End Date: Automatically calculated based on Start Date + Term.
+-   One-Time Credit Amount: For deals with a buyout, startup rolloff, or other one-off free credit listed under Special Terms on contract. See [contract buyouts and one-time credits](#contract-buyouts-and-one-time-credits) below.
+-   One-Time Credit Type: Buyout, Startup Rolloff, or Other. Only used when One-Time Credit Amount is populated.
+-   Buyout Period Months: Only for Buyout type, how many months of Term (Months) the buyout credit covers. Leave at 0 otherwise.
+-   Effective Discount Rate: Automatically calculated (amount paid ÷ total credit including the one-time credit)
 -   Stage: Select the current stage of the opportunity in the sales process.
 -   Type: If you know whether they're interested in paying on a monthly or an annual basis (if blank this will be Monthly by default)
 -   Connect to an Account: In the "Account Name" field, search for and select the account associated with the opportunity. If the account does not exist, create a new account first.
@@ -277,6 +291,8 @@ Exit criteria:
 6. Closed Won (100%) - They have signed the contract and are officially a PostHog customer.
 7. Closed Lost (0%) - At some point in the pipeline they decided not to use us. The Loss Reason field is required for any opportunity to be marked as Closed lost.
 
+> **Duplicate opportunities should be deleted, not marked as Closed Lost.** A duplicate isn't a real loss, so marking it Closed Lost pollutes our loss data and skews win/loss reporting. Delete the duplicate record instead. Only use Closed Lost when a genuine opportunity didn't work out.
+
 Bolded exit criteria indicate the minimum standard for the opportunity to advance stages (for typically smaller, more transational deals). More detail is available on the stages and the exit criteria for each state <PrivateLink url='https://docs.google.com/spreadsheets/d/1BpLMHZ52iE1Ni0-Hf0Y68RSq0ohNNnJv7Jd90lgSI6s/edit?usp=sharing'>in this spreadsheet</PrivateLink>
 
 ### Forecast categories
@@ -299,6 +315,8 @@ When an opportunity with Annual Plan type is Closed Won, a Salesforce [flow](htt
 -   **ARR up for renewal** - Copied over from the original amount; so that we can track expansion/churn
 -   **Close date** - 4 weeks in the future (may need adjusting if the opportunity record isn't closed on the contract start date)
 
+Keep the renewal opportunity dates in line with the dates we actually invoice against. If the contract dates and the dates in Stripe disagree, the account owner must add a comment on the opportunity that records both dates and the confirmed one, and then correct the opportunity dates. See [when the contract dates and the billing dates don't match](/handbook/cs-and-onboarding/renewals#when-the-contract-dates-and-the-billing-dates-dont-match).
+
 The renewal pipeline stages are:
 
 1. Qualification (10%) - They have just became a PostHog customer and we're helping them getting set up.
@@ -315,6 +333,8 @@ The "Opportunity Notes" section is to track key actions and next steps to manage
 -   Next Steps: Add actions or tasks required to move the opportunity forward. Be clear and concise to ensure anyone reviewing the opportunity understands what needs to happen next.
   -   For the New Business Sales Team, the Next Step should have three specific elements:  1) a timestamp  -- when was this change made, 2) the owner at the customer for the next step -- who do we expect to take the action? 3) a binary outcome - (what will we/you get) related to the stage, with the next step date reflecting when the outcome is expected.
 -   Next Step Date: Enter the date by which the next step should be completed. This helps in maintaining timelines and keeping follow-ups on track.
+
+> Make sure you accurately track known competitors in the relevant field, as we may trigger a TAE/TAM/CSM overlay to improve our chances of closing the deal.
 
 ### Opportunity closure details
 

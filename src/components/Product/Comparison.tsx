@@ -1,7 +1,7 @@
 import { IconCheck, IconX } from '@posthog/icons'
 import { CallToAction } from 'components/CallToAction'
 import Link from 'components/Link'
-import Logo from 'components/Logo'
+import { Logo } from '@posthog/brand/logo'
 import React, { useState } from 'react'
 const companies = {
     Amplitude: {
@@ -14,31 +14,31 @@ const companies = {
         comparisonURL: '/blog/posthog-vs-mixpanel',
     },
     Heap: {
-        comparisonURL: '/blog/posthog-vs-heap',
+        comparisonURL: '/compare/posthog-vs-heap',
     },
     FullStory: {
-        comparisonURL: '/blog/posthog-vs-fullstory',
+        comparisonURL: '/compare/posthog-vs-fullstory',
     },
     GA4: {
         comparisonURL: '/blog/posthog-vs-ga4',
     },
     Hotjar: {
-        comparisonURL: '/blog/posthog-vs-hotjar',
+        comparisonURL: '/compare/posthog-vs-hotjar',
     },
     Optimizely: {
-        comparisonURL: '/blog/posthog-vs-optimizely',
+        comparisonURL: '/compare/posthog-vs-optimizely',
     },
     LaunchDarkly: {
-        comparisonURL: '/blog/posthog-vs-launchdarkly',
+        comparisonURL: '/compare/posthog-vs-launchdarkly',
     },
     Pendo: {
-        comparisonURL: '/blog/posthog-vs-pendo',
+        comparisonURL: '/compare/posthog-vs-pendo',
     },
     Matomo: {
-        comparisonURL: '/blog/posthog-vs-matomo',
+        comparisonURL: '/compare/posthog-vs-matomo',
     },
     LogRocket: {
-        comparisonURL: '/blog/posthog-vs-logrocket',
+        comparisonURL: '/compare/posthog-vs-logrocket',
     },
     Sentry: {
         comparisonURL: '/blog/posthog-vs-sentry',
@@ -50,7 +50,7 @@ const companies = {
         comparisonURL: '',
     },
     GrowthBook: {
-        comparisonURL: '/blog/posthog-vs-growthbook',
+        comparisonURL: '/compare/posthog-vs-growthbook',
     },
     Sprig: {
         comparisonURL: '',
@@ -100,7 +100,7 @@ export default function Comparison({ comparison, columnCount, truncate, classNam
                         const { comparisonURL } = companies[company]
                         return company.toLowerCase() === 'posthog' ? (
                             <div className="bg-white dark:bg-accent-dark !border-t-2 !border-x-2  !border-l-blue !border-r-blue !border-t-blue rounded-sm rounded-bl-none rounded-br-none leading-tight p-2 flex justify-center items-center md:col-span-1 col-span-2">
-                                <Logo className="w-32" />
+                                <Logo className="w-32" width="auto" />
                             </div>
                         ) : (
                             <div key={company} className="bg-accent leading-tight p-2 mt-2 text-center">

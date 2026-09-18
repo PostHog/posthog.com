@@ -1,14 +1,96 @@
 import { GatsbyNode } from 'gatsby'
-import fetch from 'node-fetch'
+
 import path from 'path'
 import slugify from 'slugify'
 import menu from '../src/navs/index'
 import type { GatsbyContentResponse, MetaobjectsCollection } from '../src/templates/merch/types'
 import { flattenMenu, replacePath } from './utils'
+import { isLatestVersion, typeHasPage } from '../src/components/SdkReferences/utils'
 const Slugger = require('github-slugger')
 const markdownLinkExtractor = require('markdown-link-extractor')
 
 const isMinimalBuild = process.env.GATSBY_MINIMAL === 'true'
+
+// GraphQL selection shared by the full and minimal builds so the fields
+// createSdkReferencePages() reads stay in sync across both query sites. Interpolated into the
+// runtime graphql() template literals below (not a statically extracted page query).
+const SDK_REFERENCE_QUERY_FIELDS = `
+    allSdkReferences {
+        nodes {
+            info {
+                description
+                id
+                specUrl
+                slugPrefix
+                title
+                version
+            }
+            referenceId
+            hogRef
+            id
+            categories
+            classes {
+                description
+                functions {
+                    category
+                    description
+                    details
+                    examples {
+                        code
+                        name
+                        id
+                    }
+                    id
+                    params {
+                        description
+                        isOptional
+                        name
+                        type
+                    }
+                    path
+                    releaseTag
+                    showDocs
+                    returnType {
+                        id
+                        name
+                    }
+                    title
+                }
+                id
+                title
+            }
+            version
+        }
+    }
+    allSdkTypes: allSdkReferences {
+        nodes {
+            id
+            version
+            referenceId
+            info {
+                description
+                id
+                slugPrefix
+                specUrl
+                title
+                version
+            }
+            hogRef
+            categories
+            types {
+                example
+                id
+                name
+                path
+                properties {
+                    description
+                    name
+                    type
+                }
+            }
+        }
+    }
+`
 
 export const createPages: GatsbyNode['createPages'] = async ({ actions: { createPage }, graphql }) => {
     if (isMinimalBuild) {
@@ -41,8 +123,6 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
 
     const DataPipeline = path.resolve(`src/templates/DataPipeline.tsx`)
     const DataWarehouseSource = path.resolve(`src/templates/DataWarehouseSource.tsx`)
-    const SdkReferenceTemplate = path.resolve(`src/templates/sdk/SdkReference.tsx`)
-    const SdkTypeTemplate = path.resolve(`src/templates/sdk/SdkType.tsx`)
 
     const result = (await graphql(`
         {
@@ -182,7 +262,7 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
                     }
                 }
             }
-            templates: allMdx(filter: { fields: { slug: { regex: "/^/templates/" } } }) {
+            templates: allMdx(filter: { fields: { slug: { regex: "/^/(templates|pocket-guides)//" } } }) {
                 nodes {
                     id
                     fields {
@@ -233,6 +313,28 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
                     }
                 }
             }
+            comparePosts: allMdx(
+                filter: {
+                    isFuture: { eq: false }
+                    frontmatter: { date: { ne: null } }
+                    fields: { slug: { regex: "/^/compare/" } }
+                }
+            ) {
+                nodes {
+                    id
+                    headings {
+                        depth
+                        value
+                    }
+                    fields {
+                        slug
+                    }
+                    frontmatter {
+                        category
+                        tags
+                    }
+                }
+            }
             libraryArticles: allMdx(
                 filter: {
                     isFuture: { eq: false }
@@ -253,6 +355,23 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
                     frontmatter {
                         category
                         tags
+                    }
+                }
+            }
+            localizedNewsletter: allMdx(
+                filter: { frontmatter: { date: { ne: null } }, fields: { slug: { regex: "/^/ko/newsletter/" } } }
+            ) {
+                nodes {
+                    id
+                    headings {
+                        depth
+                        value
+                    }
+                    fields {
+                        slug
+                    }
+                    frontmatter {
+                        translationOf
                     }
                 }
             }
@@ -414,81 +533,7 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
                     }
                 }
             }
-            allSdkReferences {
-                nodes {
-                    info {
-                        description
-                        id
-                        specUrl
-                        slugPrefix
-                        title
-                        version
-                    }
-                    referenceId
-                    hogRef
-                    id
-                    categories
-                    classes {
-                        description
-                        functions {
-                            category
-                            description
-                            details
-                            examples {
-                                code
-                                name
-                                id
-                            }
-                            id
-                            params {
-                                description
-                                isOptional
-                                name
-                                type
-                            }
-                            path
-                            releaseTag
-                            showDocs
-                            returnType {
-                                id
-                                name
-                            }
-                            title
-                        }
-                        id
-                        title
-                    }
-                    version
-                }
-            }
-            allSdkTypes: allSdkReferences {
-                nodes {
-                    id
-                    version
-                    referenceId
-                    info {
-                        description
-                        id
-                        slugPrefix
-                        specUrl
-                        title
-                        version
-                    }
-                    hogRef
-                    categories
-                    types {
-                        example
-                        id
-                        name
-                        path
-                        properties {
-                            description
-                            name
-                            type
-                        }
-                    }
-                }
-            }
+            ${SDK_REFERENCE_QUERY_FIELDS}
         }
     `)) as GatsbyContentResponse
 
@@ -512,6 +557,44 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
     }
 
     const menuFlattened = flattenMenu(menu)
+    const localizedNewsletterNodes = result.data.localizedNewsletter.nodes
+    const englishNewsletterSlugs = new Set<string>(
+        result.data.libraryArticles.nodes
+            .map((node: any) => replacePath(node.fields.slug))
+            .filter((slug: string) => slug.startsWith('/newsletter/'))
+    )
+    localizedNewsletterNodes.forEach((node) => {
+        const translationOf = node.frontmatter?.translationOf
+        if (!translationOf) return
+        const normalized = replacePath(translationOf)
+        if (!englishNewsletterSlugs.has(normalized)) {
+            console.warn(
+                `[i18n] Korean translation ${node.fields.slug} references missing English slug: ${translationOf}`
+            )
+        }
+    })
+    const indexableNewsletterTranslations = localizedNewsletterNodes.filter(
+        (node) =>
+            node.frontmatter?.translationOf && englishNewsletterSlugs.has(replacePath(node.frontmatter.translationOf))
+    )
+    const koreanByEnglishSlug = indexableNewsletterTranslations.reduce<Record<string, string>>((acc, node) => {
+        acc[replacePath(node.frontmatter.translationOf)] = replacePath(node.fields.slug)
+        return acc
+    }, {})
+
+    const getNewsletterLanguageAlternates = (slug: string, translationOf?: string) => {
+        const currentSlug = replacePath(slug)
+        const englishSlug = translationOf ? replacePath(translationOf) : currentSlug
+        const koreanSlug = translationOf ? currentSlug : koreanByEnglishSlug[englishSlug]
+
+        if (!koreanSlug) return undefined
+
+        return [
+            { hrefLang: 'en', href: englishSlug },
+            { hrefLang: 'ko', href: koreanSlug },
+            { hrefLang: 'x-default', href: englishSlug },
+        ]
+    }
 
     const findNext = (menu, currentURL) => {
         for (let i = 0; i < menu.length; i++) {
@@ -600,6 +683,12 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
 
     result.data.allMdx.nodes.forEach((node) => {
         if (node.parent?.sourceInstanceName === 'posthog-main-repo') return
+        const plainSlug = node.fields?.slug || node.slug
+        if (plainSlug?.startsWith('/ko/newsletter/') || plainSlug?.startsWith('ko/newsletter/')) return
+        // `_`-prefixed template directories are starters to copy from, not pages. They carry a
+        // title (a starter has to model a real template), so the `title: { nin: [""] }` filter
+        // above doesn't exclude them the way it excludes sibling SKILL.md files.
+        if (/(^|\/)_/.test(plainSlug ?? '') && /(templates|pocket-guides)/.test(plainSlug ?? '')) return
         createPage({
             path: replacePath(node.slug),
             component: PlainTemplate,
@@ -704,7 +793,13 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
     result.data.postCategories.nodes.forEach(
         ({ attributes: { folder: categoryFolder, label: categoryLabel, post_tags } }) => {
             const isHub = categoryFolder === 'founders' || categoryFolder === 'product-engineers'
-            if (!isHub) {
+            // Folders with hand-written index pages in src/pages/ are excluded here
+            if (
+                !isHub &&
+                categoryFolder !== 'newsletter' &&
+                categoryFolder !== 'blog' &&
+                categoryFolder !== 'compare'
+            ) {
                 createPage({
                     path: `/${categoryFolder}`,
                     component: PostListingTemplate,
@@ -788,7 +883,7 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
         })
     })
 
-    result.data.libraryArticles.nodes.forEach((node) => {
+    result.data.comparePosts.nodes.forEach((node) => {
         const { slug } = node.fields
         const tableOfContents = node.headings && formatToc(node.headings)
         createPage({
@@ -800,6 +895,47 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
                 slug,
                 post: true,
                 article: true,
+            },
+        })
+    })
+
+    result.data.libraryArticles.nodes.forEach((node) => {
+        const { slug } = node.fields
+        const tableOfContents = node.headings && formatToc(node.headings)
+        const isEnglishNewsletter = replacePath(slug).startsWith('/newsletter/')
+        createPage({
+            path: replacePath(slug),
+            component: BlogPostTemplate,
+            context: {
+                id: node.id,
+                tableOfContents,
+                slug,
+                post: true,
+                article: true,
+                languageAlternates: isEnglishNewsletter ? getNewsletterLanguageAlternates(slug) : undefined,
+            },
+        })
+    })
+
+    result.data.localizedNewsletter.nodes.forEach((node) => {
+        const { slug } = node.fields
+        const { translationOf } = node.frontmatter || {}
+        const isIndexableTranslation = translationOf && englishNewsletterSlugs.has(replacePath(translationOf))
+        const tableOfContents = node.headings && formatToc(node.headings)
+
+        createPage({
+            path: replacePath(slug),
+            component: BlogPostTemplate,
+            context: {
+                id: node.id,
+                tableOfContents,
+                slug,
+                post: true,
+                article: true,
+                localizedRoot: 'newsletter',
+                languageAlternates: isIndexableTranslation
+                    ? getNewsletterLanguageAlternates(slug, translationOf)
+                    : undefined,
             },
         })
     })
@@ -886,6 +1022,11 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
 
     result.data.templates.nodes.forEach((node) => {
         const { slug } = node.fields
+        // A pocket guide's sibling SKILL.md and `_`-prefixed starter directories are files to
+        // copy, not pages – the query filters on slug prefix alone, so skip them here.
+        if (slug.endsWith('/SKILL') || /\/_/.test(slug)) {
+            return
+        }
         createPage({
             path: slug,
             component: DashboardTemplate,
@@ -1006,76 +1147,90 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
         })
     })
 
-    // Grab types available for each SDK and version
-    const sdkTypesByReference = result.data.allSdkTypes.nodes.reduce((acc, node) => {
-        const { referenceId, version, ...types } = node
+    // Build every SDK reference page (latest + versioned) from the sourced nodes.
+    createSdkReferencePages({
+        createPage,
+        referenceNodes: result.data.allSdkReferences.nodes,
+        typeNodes: result.data.allSdkTypes.nodes,
+    })
+}
 
-        if (!acc[referenceId]) {
-            acc[referenceId] = {}
-        }
+// Create SDK reference pages and their type sub-pages from already-sourced `SdkReferences`
+// nodes. Shared by the full build and the minimal (preview) build. `latestOnly` restricts
+// output to the `latest` rows, keeping the minimal preview deploy small (Cloudflare Pages caps
+// deployments at 20k files) while still rendering /docs/references/* for review.
+function createSdkReferencePages({
+    createPage,
+    referenceNodes,
+    typeNodes,
+    latestOnly = false,
+}: {
+    createPage: Parameters<GatsbyNode['createPages']>[0]['actions']['createPage']
+    referenceNodes: any[]
+    typeNodes: any[]
+    latestOnly?: boolean
+}) {
+    const SdkReferenceTemplate = path.resolve(`src/templates/sdk/SdkReference.tsx`)
+    const SdkTypeTemplate = path.resolve(`src/templates/sdk/SdkType.tsx`)
 
-        acc[referenceId][version] = types.types.map(({ name }) => name)
+    // The `latest` row is served unversioned; every other row keeps its `<sdk>-<version>` id.
+    const slugPrefixFor = (node: { version: string; referenceId: string; id: string }) =>
+        isLatestVersion(node.version) ? node.referenceId : node.id
 
+    // Each row crosslinks against its own types, so a versioned page describes that version.
+    const typesByRow = typeNodes.reduce((acc, node) => {
+        acc[node.id] = (node.types ?? [])
+            .filter(typeHasPage)
+            .map(({ name }: { name: string }) => name)
+            // A type with no usable name can't be linked to, so keep it out of the allowlist.
+            .filter((name: string) => name && name !== 'null')
         return acc
-    }, {} as Record<string, Record<string, any>>)
+    }, {} as Record<string, string[]>)
 
-    result.data.allSdkReferences.nodes.forEach((node) => {
-        if (node.version.includes('latest')) {
-            createPage({
-                path: `/docs/references/${node.referenceId}`,
-                component: SdkReferenceTemplate,
-                context: {
-                    name: node.info.title,
-                    description: node.info.description,
-                    fullReference: node,
-                    regex: `/docs/references/${node.referenceId}`,
-                    types: sdkTypesByReference?.[node.referenceId]?.[node.version] ?? [],
-                },
-            })
-        } else {
-            createPage({
-                path: `/docs/references/${node.id}`,
-                component: SdkReferenceTemplate,
-                context: {
-                    name: node.info.title,
-                    description: node.info.description,
-                    fullReference: node,
-                    regex: `/docs/references/${node.id}`,
-                    // Null checks, only affects type crosslinking, won't break build
-                    types: sdkTypesByReference?.[node.referenceId]?.[node.version] ?? [],
-                },
-            })
+    // Latest-only builds leave the version picker pointing at pages that don't exist — see the
+    // note above `sdkVersions` in src/templates/sdk/SdkReference.tsx.
+    referenceNodes.forEach((node) => {
+        if (latestOnly && !isLatestVersion(node.version)) {
+            return
         }
+        const slugPrefix = slugPrefixFor(node)
+        const pagePath = `/docs/references/${slugPrefix}`
+
+        createPage({
+            path: pagePath,
+            component: SdkReferenceTemplate,
+            context: {
+                name: node.info.title,
+                description: node.info.description,
+                fullReference: node,
+                regex: pagePath,
+                // Must match the type page paths created below.
+                slugPrefix,
+                // Null checks, only affects type crosslinking, won't break build
+                types: typesByRow[node.id] ?? [],
+            },
+        })
     })
 
-    result.data.allSdkTypes.nodes.forEach((node) => {
-        node.types?.forEach((type) => {
-            if (type.id && (type.properties || type.example)) {
-                if (node.version.includes('latest')) {
-                    createPage({
-                        path: `/docs/references/${node.referenceId}/types/${type.id}`,
-                        component: SdkTypeTemplate,
-                        context: {
-                            typeData: type,
-                            version: node.version,
-                            id: node.id,
-                            types: sdkTypesByReference?.[node.referenceId]?.[node.version] ?? [],
-                            slugPrefix: node.referenceId,
-                        },
-                    })
-                } else {
-                    createPage({
-                        path: `/docs/references/${node.id}/types/${type.id}`,
-                        component: SdkTypeTemplate,
-                        context: {
-                            typeData: type,
-                            version: node.version,
-                            id: node.id,
-                            types: sdkTypesByReference?.[node.referenceId]?.[node.version] ?? [],
-                            slugPrefix: node.id,
-                        },
-                    })
-                }
+    typeNodes.forEach((node) => {
+        if (latestOnly && !isLatestVersion(node.version)) {
+            return
+        }
+        const slugPrefix = slugPrefixFor(node)
+
+        node.types?.forEach((type: any) => {
+            if (typeHasPage(type)) {
+                createPage({
+                    path: `/docs/references/${slugPrefix}/types/${type.id}`,
+                    component: SdkTypeTemplate,
+                    context: {
+                        typeData: type,
+                        version: node.version,
+                        referenceId: node.referenceId,
+                        slugPrefix,
+                        types: typesByRow[node.id] ?? [],
+                    },
+                })
             }
         })
     })
@@ -1090,6 +1245,7 @@ async function createMinimalPages({
 }) {
     const HandbookTemplate = path.resolve(`src/templates/Handbook.tsx`)
     const BlogPostTemplate = path.resolve(`src/templates/BlogPost.tsx`)
+    const DashboardTemplate = path.resolve(`src/templates/Template.tsx`)
     const Slugger = require('github-slugger')
 
     const result = await graphql(`
@@ -1140,7 +1296,7 @@ async function createMinimalPages({
                     frontmatter: { date: { ne: null } }
                     fields: {
                         slug: {
-                            regex: "/^/(blog|library|founders|product-engineers|features|newsletter|spotlight|customers|tutorials)/"
+                            regex: "/^/(blog|compare|library|founders|product-engineers|features|newsletter|spotlight|customers|tutorials)/"
                         }
                     }
                 }
@@ -1151,6 +1307,29 @@ async function createMinimalPages({
                         depth
                         value
                     }
+                    fields {
+                        slug
+                    }
+                }
+            }
+            localizedNewsletter: allMdx(
+                filter: { frontmatter: { date: { ne: null } }, fields: { slug: { regex: "/^/ko/newsletter/" } } }
+            ) {
+                nodes {
+                    id
+                    headings {
+                        depth
+                        value
+                    }
+                    fields {
+                        slug
+                    }
+                }
+            }
+            ${SDK_REFERENCE_QUERY_FIELDS}
+            pocketGuides: allMdx(filter: { fields: { slug: { regex: "/^/pocket-guides//" } } }) {
+                nodes {
+                    id
                     fields {
                         slug
                     }
@@ -1239,7 +1418,25 @@ async function createMinimalPages({
         handbook: { nodes: any[] }
         productEngineerHandbook: { nodes: any[] }
         posts: { nodes: any[] }
+        localizedNewsletter: { nodes: any[] }
+        allSdkReferences: { nodes: any[] }
+        allSdkTypes: { nodes: any[] }
+        pocketGuides: { nodes: any[] }
     }
+
+    // Pocket guides render in preview builds too - reviewers need to click through the book.
+    // Same skip rule as the full build: SKILL.md siblings and _starter directories aren't pages.
+    data.pocketGuides.nodes.forEach((node) => {
+        const slug = node.fields?.slug
+        if (!slug || slug.endsWith('/SKILL') || /\/_/.test(slug)) return
+        createPage({
+            path: slug,
+            component: DashboardTemplate,
+            context: {
+                id: node.id,
+            },
+        })
+    })
 
     createHandbookPreviewPosts(data.docs.nodes, 'docs', { name: 'Docs', url: '/docs' })
 
@@ -1249,4 +1446,30 @@ async function createMinimalPages({
         url: '/product-engineer',
     })
     createBlogPreviewPosts(data.posts.nodes)
+    data.localizedNewsletter.nodes.forEach((node) => {
+        const slug = node.fields?.slug
+        if (!slug) return
+        const tableOfContents = node.headings && formatToc(node.headings)
+        createPage({
+            path: replacePath(slug),
+            component: BlogPostTemplate,
+            context: {
+                id: node.id,
+                tableOfContents,
+                slug,
+                post: true,
+                article: true,
+                localizedRoot: 'newsletter',
+            },
+        })
+    })
+
+    // Render SDK reference pages (latest only) so /docs/references/* is reviewable in previews
+    // without the full site's file count exceeding Cloudflare Pages' 20k-file deploy limit.
+    createSdkReferencePages({
+        createPage,
+        referenceNodes: data.allSdkReferences.nodes,
+        typeNodes: data.allSdkTypes.nodes,
+        latestOnly: true,
+    })
 }

@@ -1,9 +1,11 @@
 import { RainbowText } from 'components/RainbowText'
+import AboutPostHog from './components/AboutPostHog'
 import CountriesWeHireIn from './components/AMCharts/CountriesWeHireIn'
 import { ArrayCTA } from './components/ArrayCTA'
 import AskMax from './components/AskMax'
 import { BasicHedgehogImage } from './components/BasicHedgehogImage'
 import { BorderWrapper } from './components/BorderWrapper'
+import { BrandLogos } from './components/BrandLogos'
 import { CallToAction } from './components/CallToAction'
 import { Caption } from './components/Caption'
 import { ComparisonTable } from './components/ComparisonTable'
@@ -21,6 +23,7 @@ import { FormulaScreenshot } from './components/FormulaScreenshot'
 import { GDPRForm } from './components/GDPRForm'
 import ImageSlider from './components/ImageSlider'
 import Link from './components/Link'
+import LoopGame from './components/LoopGame'
 import OSButton from './components/OSButton'
 import { OSQuote } from './components/OSQuote'
 import { OverflowXSection } from './components/OverflowXSection'
@@ -35,12 +38,15 @@ import TeamMember from './components/TeamMember'
 import WistiaEmbed from './components/WistiaEmbed'
 import WizardCommand from './components/WizardCommand'
 import WizardCTA from './components/WizardCTA'
+import PlatformInstall from './components/PlatformInstall'
 
 // Global MDX components
 export const shortcodes = {
+    AboutPostHog,
     ArrayCTA,
     BasicHedgehogImage,
     BorderWrapper,
+    BrandLogos,
     CallToAction,
     CalloutBox,
     Caption,
@@ -59,6 +65,7 @@ export const shortcodes = {
     Quote,
     OSButton,
     Link,
+    LoopGame,
     PrivateLink,
     ProductChangelog,
     ProductScreenshot,
@@ -76,4 +83,5 @@ export const shortcodes = {
     WistiaEmbed,
     WizardCommand,
     WizardCTA,
+    PlatformInstall,
 }

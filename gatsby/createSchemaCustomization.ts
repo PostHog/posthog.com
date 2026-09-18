@@ -13,6 +13,7 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
     }
     type MdxFields {
       slug: String
+      wordCount: Int
       contributors: [Contributors]
       appConfig: [AppConfig]
       commits: [Commit]
@@ -73,11 +74,75 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
     type AuthorsJson implements Node {
       profile: SqueakProfile @link(by: "squeakId", from: "profile_id")
     }
+    type FrontmatterReport {
+      title: String
+      source: String
+      receivedAgo: String
+      body: String
+      suggestedAction: String
+      actionNote: String
+      affected: String
+    }
+    type FrontmatterWatches {
+      name: String
+      detail: String
+    }
+    type FrontmatterRequires {
+      label: String
+      level: String
+    }
+    # A pocket-guide chapter's one action. Scout chapters carry a scout instead – this is how a
+    # volume whose answer isn't a scout still ends on something to do.
+    type FrontmatterPocketGuideCtaRequires {
+      label: String
+    }
+    type FrontmatterPocketGuideCta {
+      kind: String
+      label: String
+      prompt: String
+      href: String
+      note: String
+      requires: FrontmatterPocketGuideCtaRequires
+    }
     type Frontmatter {
       authorData: [AuthorsJson] @link(by: "handle", from: "author")
       badge: String
+      report: FrontmatterReport
+      premise: String
+      tldr: String
+      # Short name for tight surfaces like the pocket guide's index tabs. Falls back to title.
+      shortTitle: String
+      # Position in a pocket guide's reading order. 0 is the front matter; the rest are numbered
+      # pages in sequence. Declared so a book page can exist without a report block.
+      pocketGuideOrder: Int
+      # An orientation page (self-driving's 101, a volume's "foundations" page) – in the book's
+      # reading order, but not one of the "N guides" the cover prints.
+      isPrimer: Boolean
+      # Groups a book's contents into named sections (e.g. "Ask a quick question" vs
+      # "Long-term modeling"). Pages without one print in a single flat list, as before.
+      section: String
+      watches: [FrontmatterWatches]
+      requires: [FrontmatterRequires]
+      # Prefixed like pocketGuideOrder: this shared Frontmatter type covers every MDX file on the site,
+      # so a plain "cta" key would be one blog post away from a shape conflict.
+      pocketGuideCta: FrontmatterPocketGuideCta
+      # The product surface a scout template belongs to, e.g. "Error tracking". Drives the
+      # inbox's category rail; the list of categories is derived from the templates that
+      # declare one, never hardcoded, so adding a template is a content-only change.
+      category: String
+      schedule: String
+      # A scout template PostHog already ships, e.g. "costly-users". Points the guide's CTA at
+      # that template in the app instead of encoding this guide's SKILL.md into the link.
+      appTemplate: String
       seo: FrontmatterSEO
+      # A scout template's SKILL.md sibling carries the canonical monorepo frontmatter, so these
+      # are declared here rather than left to inference – see components/SelfDrivingInbox.
+      name: String
+      allowed_tools: [String]
+      featureFlag: String
       hideFromIndex: Boolean
+      lang: String
+      translationOf: String
       price: String
       platformLogo: String
       platformIconName: String
@@ -133,6 +198,21 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
       verified: Boolean,
       maintainer: String,
       imageUrl: String,
+    }
+    type EarlyAccessFeatureAssignee {
+      type: String,
+      name: String,
+    }
+    type EarlyAccessFeature implements Node {
+      name: String,
+      description: String,
+      stage: String,
+      documentationUrl: String,
+      flagKey: String,
+      featureId: String,
+      waitlistCount: Int,
+      payload: JSON,
+      assignee: EarlyAccessFeatureAssignee,
     }
     type Plugin implements Node {
       name: String,
@@ -223,6 +303,24 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
       title: String
       number: Int
     }
+    type ResearchMergedPr implements Node {
+      title: String
+      url: String
+      repo: String
+      author: String
+      mergedAt: String
+    }
+    type SelfDrivingPullRequest implements Node {
+      prNumber: Int
+      title: String
+      summary: String
+      type: String
+      scope: String
+      url: String
+      state: String
+      openedAt: Date @dateformat
+      mergedAt: Date @dateformat
+    }
     type PostTagAttributes {
         label: String
         folder: String
@@ -240,6 +338,15 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
     }
     type PostCategory implements Node {
       attributes: PostCategoryAttributes
+    }
+    type CommunityStats implements Node {
+      topicId: Int
+      topicSlug: String
+      topicLabel: String
+      questions: Int
+      resolved: Int
+      replies: Int
+      helpful: Int
     }
     type ProductSectionsSectionsFeatures {
       title: String
@@ -282,9 +389,22 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
       html_url: String
       type: String
     }
+    type ProductDataProductsPlansTiers {
+      current_amount_usd: String
+      current_usage: Float
+      flat_amount_usd: String
+      unit_amount_usd: String
+      up_to: Float
+    }
     type ProductDataProductsPlans {
       contact_support: Boolean
       unit_amount_usd: Float
+      tiers: [ProductDataProductsPlansTiers]
+    }
+    type ProductDataProductsAddonsPlans {
+      contact_support: Boolean
+      unit_amount_usd: String
+      tiers: [ProductDataProductsPlansTiers]
     }
     type SlackEmoji implements Node {
       name: String
@@ -334,6 +454,20 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
       required: Boolean
       description: String
     }
+    type AgentSkill implements Node @dontInfer {
+      product: String
+      name: String
+      description: String
+      sourcePath: String
+      mcpTools: [String]
+    }
+    type McpTool implements Node @dontInfer {
+      name: String
+      title: String
+      summary: String
+      category: String
+      feature: String
+    }
     type PostHogSource implements Node @dontInfer {
       mdx: Mdx @link(by: "frontmatter.sourceId", from: "sourceId")
       sourceId: String
@@ -346,6 +480,7 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
       featured: Boolean
       caption: String
       sourceFields: [PostHogSourceField]
+      tables: [PostHogSourceTable]
       permissionsCaption: String
       featureFlag: String
     }
@@ -356,6 +491,14 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
       required: Boolean
       placeholder: String
       caption: String
+    }
+    type PostHogSourceTable {
+      name: String
+      label: String
+      description: String
+      sync_methods: [String]
+      incremental_fields: [String]
+      primary_keys: [String]
     }
     type SdkReferences implements Node {
       info: SdkReferencesInfo
@@ -540,6 +683,27 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
         created_at: Date
         created_by: PostHogWorkflowTemplateCreatedBy
         fields: PostHogWorkflowTemplateFields
+    }
+    type ProductUsageStats implements Node {
+        product: String
+        unique_users: Int
+        unique_orgs: Int
+    }
+    # searchContentId is how Algolia indexing (gatsby/algoliaConfig.js) joins a page to the MDX it
+    # renders. Content templates must pass \`id\` in createPage context, or the page is invisible to search.
+    type SitePage implements Node {
+        searchContentId: String @proxy(from: "context.id")
+    }
+    type Tool implements Node @dontInfer {
+        handle: String!
+        name: String!
+        description: String
+        searchDescription: String
+        searchTitle: String
+        slug: String
+        category: String
+        status: String
+        aliases: [String!]
     }
   `)
     createTypes([

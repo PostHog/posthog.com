@@ -23,11 +23,22 @@ PostHog CS leverages several integrated tools to monitor account health and iden
 * <PrivateLink url="https://us.posthog.com/project/2/pipeline/overview">**PostHog pipelines**</PrivateLink>**:** Alerts for usage milestones, new product adoption, and behavioral changes. These are sent to Vitally, Salesforce, or Slack via PostHog CDP for alerts and data updates.   
 * [**BuildBetter**](https://app.buildbetter.app/)**:** Analyzes customer calls for feature requests, pain points, and sentiment.   
   * Notes from calls are automatically synced to Salesforce and Vitally  
-  * feature requests and painpoints are automatically added to Vitally and sent to \#feature-request-feed channel  
+  * feature requests and painpoints are automatically added to Vitally and sent to \#feature-request-feed channel
+* [**Gong**](https://app.gong.io/)**:** Records and transcribes customer calls.
+  * Gong Streams push call recordings, transcripts, and summaries for a specific account into that account's internal Slack channel
 * [**Zapier**](https://zapier.com/app/home)**:** Used for numerous automations such as:  
   * Renewal reminders  
   * Stale Slack channel notifications  
   * Billing updates, failed payments
+
+### **How to surface calls for shared accounts**
+On larger accounts, a TAM and a CSM share ownership. Both need visibility of every customer call, not just the ones they attended.
+For each shared customer, we keep a dedicated internal Slack channel named `customer-name-internal`. This sits alongside the customer-facing Slack Connect channel, but stays internal only.
+To surface calls there, set up a Gong Stream:
+* In Gong, open **Your Library** and find **Streams** (ask Simon for access)
+* Configure a stream for the account
+* Point it at that account's `customer-name-internal` channel
+Once live, the stream posts each call to the channel after it ends. Everyone working the account is notified once the call is done, with the transcript and summary to hand.
 
 ### **Key automated workflows**
 

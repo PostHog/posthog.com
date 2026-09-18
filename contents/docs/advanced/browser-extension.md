@@ -56,7 +56,7 @@ You can also use `import 'posthog-js/dist/array.no-external.js'` as the core imp
 
 Session recording is the most common cause of extension store rejections due to potential obfuscation concerns. The recording library `rrweb` that is bundled with PostHog by default contains parts of its code encoded in base64.
 
-To avoid issues, explicitly load `posthog-js/dist/posthog-recorder` instead of `posthog-js/dist/recorder` as explained in [this Github comment](https://github.com/PostHog/posthog-js/issues/1464#issuecomment-2792093981).
+To avoid issues, explicitly load `posthog-js/dist/posthog-recorder` instead of `posthog-js/dist/recorder` as explained in [this GitHub comment](https://github.com/PostHog/posthog-js/issues/1464#issuecomment-2792093981).
 
 ### 3. Disable external dependency loading
 
@@ -253,7 +253,7 @@ If you'd like to instrument your own custom events, use the `posthog.capture()` 
 posthog.capture('custom_event_name', {})
 ```
 
-See our [JavaScript web SDK docs](/docs/integrate/client/js) for more details.
+See our [JavaScript web SDK docs](/docs/libraries/js) for more details.
 
 ## Using error tracking
 

@@ -4,7 +4,13 @@ description: Suggest internal links for a blog post, newsletter, or other conten
 
 # Suggest Internal Links
 
+> **Model:** Run this with Opus or higher. Matching a candidate sentence's topic to a new post's section (and judging whether an anchor phrase reads naturally) requires more nuanced language understanding than this skill's mechanical steps suggest — weaker models tend to force keyword matches that don't actually fit. If you're on Sonnet or below, tell the user to switch models before running this skill.
+
 Analyze a piece of content and suggest specific internal links based on PostHog's internal linking resource. The user will provide a file path: $ARGUMENTS
+
+## Core constraint: link existing text only
+
+**Never suggest adding, rewriting, or expanding content** — not in the post being analyzed, and not in the posts being linked to. Every suggestion must wrap a link around text that *already exists* in the file. You are only ever adding `[...]()` markup around words that are already on the page. If a good link target exists but there's no existing text to attach it to, do not invent a sentence, clause, or "further reading" line to host it — skip it instead.
 
 ## Step 1: Get the content
 
@@ -18,7 +24,7 @@ This CSV has columns: `Product`, `Anchor text examples`, `Relative URL`, `Type`,
 
 The `Type` column categorizes links as: Product page, Docs, Blog, Tutorial, Prod. Engineers, Founders, Newsletter, or Competitor comparison.
 
-## Step 3: Analyze and suggest links
+## Step 3: Suggest forward links (new post → other posts)
 
 Scan the content for opportunities to add internal links. For each suggestion, provide:
 
@@ -27,7 +33,7 @@ Scan the content for opportunities to add internal links. For each suggestion, p
 3. **Why** — brief reason this link fits here (based on the "Use when writing about..." context)
 4. **Priority**: High (unlinked mention of a PostHog product/feature), Medium (related concept that would benefit from a link), Low (nice-to-have deeper reading)
 
-### Rules
+### Forward link rules
 
 - **Don't suggest links for text that's already linked.** Parse the markdown and skip any text inside `[...]()` or `<a>` tags.
 - **Prefer product pages** for first/prominent mentions of a PostHog feature (e.g., link "feature flags" to `/feature-flags` not `/docs/feature-flags`). Use docs links for technical/setup references.
@@ -38,9 +44,41 @@ Scan the content for opportunities to add internal links. For each suggestion, p
 - **Aim for 5-15 suggestions** depending on post length. Short posts (< 500 words) might only need 3-5. Long posts (2000+ words) could use 10-15.
 - **Flag if the post has fewer than 3 internal links** — this is below the minimum recommended in the style guide.
 
-## Step 4: Output
+## Step 4: Suggest backlinks (existing posts → new post)
 
-Print the suggestions directly to the console, grouped by priority (High → Medium → Low). Format each suggestion as:
+Find existing posts in `contents/` that would naturally link to the new content. Three is a reasonable target, **not a quota** — a backlink that has to be argued for is one the author will delete. Two strong backlinks beat five padded ones, so drop any candidate that only half-fits.
+
+For each:
+
+1. Read the candidate file to find an **existing** sentence whose topic closely matches a specific section of the new post — one that already contains words you can wrap a link around. If no such sentence exists, skip that candidate rather than writing one.
+2. Suggest wrapping the link around existing text in that sentence — do not reword the sentence beyond what's needed to insert the `[...]()` markup. Link to a specific section anchor (e.g., `/founders/my-post#section-name`) when the sentence points at one particular part of the new post; link to the root URL when it points at the post's overall argument. Don't force an anchor on for its own sake.
+3. Write anchor text that fits naturally into the surrounding sentence. **Do not use the article title as anchor text.** The link should feel like it belongs in the prose, not like a citation. Good examples:
+   - "making those traits [queryable across every team](/founders/growth-metrics-for-startups#2-make-customer-traits-queryable-across-all-functions)"
+   - "[Consistent growth in ICP customers](/founders/growth-metrics-for-startups#4-be-opinionated-but-defensible-with-your-numbers) who pay..."
+   - "tracking growth for [non-standard SaaS models](/founders/growth-metrics-for-startups#3-focus-on-consistency-over-accuracy)"
+
+### Backlink rules
+
+- **Find the most relevant existing posts** by searching for content that discusses the same concepts as the new post's sections. Use `grep` or `Bash` if needed.
+- **Link the thing, not the claim.** This is the mistake authors most often have to undo. Within a sentence, pick the concrete noun phrase — the mechanism, artifact, or practice being named — not the rhetorical payload the sentence is building toward. Wrapping the punchline turns the author's own emphasis into navigation and reads as though the link is making the argument for them.
+
+  | Sentence | Don't link | Link |
+  | --- | --- | --- |
+  | "This means we can have a world where humans review code less. … We're continuing to work on tools and agentic flows we can use in CI…" | "a world where humans review code less" | "tools and agentic flows we can use in CI" |
+  | "If you need to be involved in every code review, you will always be the bottleneck. Instead, put yourself outside of the loop by building a pipeline that…" | "you will always be the bottleneck" | "building a pipeline" |
+
+- **Keep the anchor tight.** Wrap the shortest phrase that still names the concept. Don't swallow a whole clause or a full list — if the sentence reads "your moat is the source code, usage data, customer data, and product skills you feed it", link a span within the list, not the entire predicate. A long anchor underlines half the sentence and buries the emphasis.
+- **Leave punctuation outside the link.** Anchors ending in a comma, period, or colon (`[customer data,](...)`) look like a selection error rather than a choice. Trim to the last word of the phrase.
+- **Match section to section where a section is the referent.** Derive the anchor from the heading text (lowercase, spaces → hyphens, punctuation removed). But a root-URL link is correct when the sentence gestures at the post as a whole — see step 2.
+- **The backlink must fit within an existing sentence.** Wrap the link around words already present in the candidate post. Never propose a new sentence, clause, or "further reading" line to carry the link — if there's no existing text to attach it to, skip the candidate.
+- **Don't use the new article's title as anchor text.** Describe the concept, not the article.
+- **Read the linked sentence back before proposing it.** If removing the link markup would change nothing about how the sentence reads, it's a good backlink. If the sentence now leans on the link to finish its point, move it.
+
+## Step 5: Output
+
+Print the suggestions directly to the console.
+
+### Forward links, grouped by priority (High → Medium → Low):
 
 ```
 ### High priority
@@ -53,4 +91,16 @@ Print the suggestions directly to the console, grouped by priority (High → Med
 ...
 ```
 
-At the end, include a summary line: "Found X link opportunities (Y high, Z medium, W low). Post currently has N internal links."
+### Backlinks (existing posts → this post):
+
+For each suggested backlink, show:
+
+```
+### Backlinks
+
+- **existing-post.md, line X** — existing sentence: "quoted existing text"
+  → linked version: "...same sentence with [natural anchor text](/new-post#section-anchor) wrapped around existing words..."
+  Why: one-line reason this existing post's topic connects to that section
+```
+
+At the end, include a summary line: "Found X forward link opportunities (Y high, Z medium, W low) and Z backlink opportunities. Post currently has N internal links."

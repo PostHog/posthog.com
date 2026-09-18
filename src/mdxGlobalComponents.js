@@ -1,11 +1,13 @@
 // AUTO GENERATED FILE
 
+import AboutPostHog from './components/AboutPostHog'
 import CountriesWeHireIn from './components/AMCharts/CountriesWeHireIn'
 import { ArrayCTA } from './components/ArrayCTA'
 import AskAIInput from './components/AskAIInput'
 import AskMax from './components/AskMax'
 import { BasicHedgehogImage } from './components/BasicHedgehogImage'
 import { BorderWrapper } from './components/BorderWrapper'
+import { BrandLogos } from './components/BrandLogos'
 import { CallToAction } from './components/CallToAction'
 import { Caption } from './components/Caption'
 import { HearAboutUsCarousel } from './components/CardStackCarousel/HearAboutUsCarousel'
@@ -18,6 +20,7 @@ import Snippet from '../contents/docs/integrate/snippet.mdx'
 import { CompensationCalculator } from './components/CompensationCalculator'
 import { ContentViewer } from './components/ContentViewer'
 import { Step, Steps } from './components/Docs/Steps'
+import EmbeddedSurvey from './components/Docs/EmbeddedSurvey'
 import { Drawer } from './components/Drawer'
 import { lib } from './components/Edition/lib'
 import { Emoji } from './components/Emoji'
@@ -25,12 +28,14 @@ import { FeatureAvailability } from './components/FeatureAvailability'
 import FeatureOwnershipTable from './components/FeatureOwnershipTable'
 import { FormulaScreenshot } from './components/FormulaScreenshot'
 import { GDPRForm } from './components/GDPRForm'
+import { AdvisoryAnchor } from './components/Heading'
 import { HiddenSection } from './components/HiddenSection'
 import { HubSpotForm } from './components/HubSpotForm'
 import ImageSlider from './components/ImageSlider'
 import { KeyboardShortcut } from './components/KeyboardShortcut'
 import { Label } from './components/Label'
 import Link from './components/Link'
+import LoopGame from './components/LoopGame'
 import { List } from './components/List'
 import { LPCTA } from './components/LPCTA'
 import { MaxCTA } from './components/MaxCTA'
@@ -66,7 +71,6 @@ import TaskOwnershipTable from './components/TaskOwnershipTable'
 import TeamMember from './components/TeamMember'
 import { TracksCTA } from './components/TracksCTA'
 import { Tweet } from './components/Tweet'
-import { ZendeskTicket } from './components/ZendeskTicket'
 import { CalloutBox } from './components/Docs/CalloutBox'
 import SolvedQuestions from './components/Docs/SolvedQuestions'
 import WistiaEmbed from './components/WistiaEmbed'
@@ -74,9 +78,11 @@ import WizardCommand from './components/WizardCommand'
 import WizardCTA from './components/WizardCTA'
 
 export const shortcodes = {
+    AboutPostHog,
     ArrayCTA,
     BasicHedgehogImage,
     BorderWrapper,
+    BrandLogos,
     CallToAction,
     CalloutBox,
     Caption,
@@ -96,6 +102,7 @@ export const shortcodes = {
     FeatureAvailability,
     FormulaScreenshot,
     GDPRForm,
+    AdvisoryAnchor,
     HiddenSection,
     HubSpotForm,
     KeyboardShortcut,
@@ -107,6 +114,7 @@ export const shortcodes = {
     OSQuote,
     OSButton,
     Link,
+    LoopGame,
     PrivateLink,
     ProductOS,
     ProductScreenshot,
@@ -131,7 +139,6 @@ export const shortcodes = {
     StarRepoButton,
     TracksCTA,
     Tweet,
-    ZendeskTicket,
     MaxCTA,
     SmallTeam,
     TeamMember,
@@ -147,4 +154,5 @@ export const shortcodes = {
     WistiaEmbed,
     WizardCommand,
     WizardCTA,
+    EmbeddedSurvey,
 }

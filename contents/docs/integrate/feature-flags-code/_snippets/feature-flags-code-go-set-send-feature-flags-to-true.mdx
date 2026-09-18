@@ -8,7 +8,7 @@ Setting `SendFeatureFlags` to `true` will include feature flag information with 
 client.Enqueue(posthog.Capture{
   DistinctId: "distinct_id_of_your_user",
   Event:      "event_name",
-  SendFeatureFlags: true,
+  SendFeatureFlags: posthog.SendFeatureFlags(true),
 })
 ```
 
@@ -20,12 +20,12 @@ As of version 1.6.1, `SendFeatureFlags` can also accept a `SendFeatureFlagsOptio
 client.Enqueue(posthog.Capture{
   DistinctId: "distinct_id_of_your_user",
   Event:      "event_name",
-  SendFeatureFlags: posthog.SendFeatureFlagsOptions{
+  SendFeatureFlags: &posthog.SendFeatureFlagsOptions{
     OnlyEvaluateLocally: true,
-    PersonProperties: map[string]interface{}{
+    PersonProperties: posthog.Properties{
       "plan": "premium",
     },
-    GroupProperties: map[string]map[string]interface{}{
+    GroupProperties: map[string]posthog.Properties{
       "org": {
         "tier": "enterprise",
       },
@@ -36,7 +36,7 @@ client.Enqueue(posthog.Capture{
 
 #### Performance considerations
 
-- **With local evaluation**: When [local evaluation](/docs/feature-flags/local-evaluation) is configured, setting `SendFeatureFlags: true` will **not** make additional server requests. Instead, it uses the locally cached feature flags, and it provides an interface for including person and/or group properties needed to evaluate the flags in the context of the event, if required.
+- **With local evaluation**: When [local evaluation](/docs/feature-flags/local-evaluation) is configured, setting `SendFeatureFlags: posthog.SendFeatureFlags(true)` will **not** make additional server requests. Instead, it uses the locally cached feature flags, and it provides an interface for including person and/or group properties needed to evaluate the flags in the context of the event, if required.
 
 - **Without local evaluation**: PostHog will make an additional request to fetch feature flag information before capturing the event, which adds delay.
 
@@ -44,4 +44,4 @@ client.Enqueue(posthog.Capture{
 
 Prior to version 1.6.1, feature flags were automatically sent with events when using local evaluation, even when `SendFeatureFlags` was not explicitly set. This behavior has been **removed** in v1.6.1 to be more predictable and explicit.
 
-If you were relying on this automatic behavior, you must now explicitly set `SendFeatureFlags: true` to continue sending feature flags with your events.
+If you were relying on this automatic behavior, you must now explicitly set `SendFeatureFlags: posthog.SendFeatureFlags(true)` to continue sending feature flags with your events.

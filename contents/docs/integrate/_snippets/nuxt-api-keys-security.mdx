@@ -1,0 +1,11 @@
+import CalloutBox from 'components/Docs/CalloutBox'
+
+<CalloutBox icon="IconWarning" title="Keep your personal API key out of the client bundle" type="caution">
+
+Anything shipped to the browser – the token you pass to `posthog.init()`, anything under Nuxt's `runtimeConfig.public`, or the `@posthog/nuxt` module's `posthogConfig` – ends up in your client-side JavaScript and is visible to anyone who visits your site. This is fine for your **project token** (`<ph_project_token>`), which is designed to be public.
+
+Your **[personal API key](/docs/api#authentication)** is different. It can grant full access to your PostHog account, so it must never reach the browser. If you need it – for example, for [source map uploads](/docs/error-tracking/upload-source-maps/nuxt) or [server-side local evaluation](/docs/feature-flags/local-evaluation) – read it from a server-only environment variable (or top-level `runtimeConfig`, never `runtimeConfig.public`) and only use it in server code.
+
+Either way, prefer reading keys from environment variables rather than hard-coding them in `nuxt.config`, so you can keep them out of source control and use different values per environment.
+
+</CalloutBox>

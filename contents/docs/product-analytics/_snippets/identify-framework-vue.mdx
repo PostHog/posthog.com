@@ -1,0 +1,11 @@
+With the [Composition API](/docs/libraries/vue-js) you import `posthog` directly (with the Vue 2 plugin it's available as `this.$posthog`):
+
+```typescript
+// src/App.vue
+<script setup>
+import posthog from 'posthog-js'
+const handleClick = () => {
+  posthog.capture('button_clicked')
+}
+</script>
+```

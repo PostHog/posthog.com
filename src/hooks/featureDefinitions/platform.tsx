@@ -46,6 +46,14 @@ export const platformFeatures = {
                 name: 'Self-serve',
                 description: 'No need to talk to sales',
             },
+            free_team_members: {
+                name: 'Free team members',
+                description: 'Add teammates without paying per seat',
+            },
+            billing_units: {
+                name: 'Billing units',
+                description: 'What usage is metered and billed against',
+            },
         },
     },
     support: {
@@ -185,7 +193,8 @@ export const platformFeatures = {
             },
             imports: {
                 name: 'Warehouse import',
-                description: 'Import data from external warehouses and sources like Stripe, HubSpot, and S3 for unified analysis',
+                description:
+                    'Import data from external warehouses and sources like Stripe, HubSpot, and S3 for unified analysis',
             },
         },
     },
@@ -243,6 +252,14 @@ export const platformFeatures = {
             api: {
                 name: 'API',
                 description: 'Capture events, get stats, and make changes via API',
+            },
+            mcp_scope: {
+                name: 'MCP scope',
+                description: 'How much of the platform agents can reach through the MCP server',
+            },
+            agent_surfaces: {
+                name: 'Agent surfaces',
+                description: 'Where you can steer agents from',
             },
             sql: {
                 name: 'SQL',
@@ -326,7 +343,7 @@ export const platformFeatures = {
                 description: 'Collect, analyze, and correlate security logs to detect threats',
             },
             soc2_certified: {
-                name: 'SOC 2 Type II',
+                name: 'SOC 2 Type 2',
                 description: 'SOC 2 security certification',
             },
             two_factor_auth: {

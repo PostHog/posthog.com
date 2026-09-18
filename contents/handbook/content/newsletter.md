@@ -4,7 +4,7 @@ sidebar: Handbook
 showTitle: true
 ---
 
-Our newsletter is called Product for Engineers. It's owned by Andy. 
+Our newsletter is called build mode. It's owned by Ian. 
 
 Sent and managed via [Substack](https://newsletter.posthog.com/), we put together an issue planning content for each installment of the newsletter. One person writes it and Andy edits and publishes it.
 
@@ -72,7 +72,7 @@ These aren’t rules, just things that have worked well in the past. They provid
 
 - **Be opinionated:** Sitting on the fence isn't interesting. It's ok for people to disagree with you, so avoid too much hedging.
 
-- **Use graphics and charts:** These are great ways for explaining complex ideas and make for great social content. Create bad version and ask Cory to help you make it better.
+- **Use graphics and charts:** These are great ways for explaining complex ideas and make for great social content. Create bad version and ask the <SmallTeam slug="graphics" /> to help you make it better.
 
 - **Be fun and lighthearted:** We're writing about building software, not internet safety. Throw in jokes and memes occasionally. Again, footnotes and captions can be useful here.
 

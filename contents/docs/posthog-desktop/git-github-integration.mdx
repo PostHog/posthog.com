@@ -1,0 +1,46 @@
+---
+title: PostHog Desktop Git and GitHub integration
+---
+
+PostHog Desktop includes Git and GitHub actions for reviewing changes, committing them, pushing a branch, and opening a pull request without handing control back to the agent.
+
+This page is about the local Git menu. For connecting the PostHog GitHub App to your project and account (what cloud tasks and Self-driving use), see the [GitHub integration](/docs/libraries/github) page.
+
+## Set up GitHub
+
+PostHog Desktop uses the [GitHub CLI](https://cli.github.com) (`gh`) for pull request actions. Install it and sign in:
+
+```bash
+gh auth login
+```
+
+Git operations such as commit, push, and branch switching still work without `gh`. GitHub pull request actions do not.
+
+## Commit and push changes
+
+Open the Git menu at the bottom of a task. Its primary action changes with the state of your branch, such as **Commit**, **Push**, or **Create PR**.
+
+Use it to:
+
+- Create or switch branches
+- Stage, discard, and commit changes
+- Push a branch or sync it with its remote
+- Open the [diff panel](/docs/posthog-desktop/code-review)
+
+The **Push** action does not force-push. Resolve a diverged remote branch before retrying it.
+
+## Open a pull request
+
+Select **Create PR** when the change is ready. PostHog Desktop commits any staged changes, pushes the branch, and opens the pull request through `gh`.
+
+Leave the commit message, pull request title, or description empty when you want PostHog Desktop to generate it. Generated text uses the diff, existing branch commits, repository conventions, and `.github/PULL_REQUEST_TEMPLATE.md` when present. You can edit everything before submitting and choose whether to open a draft.
+
+After a pull request is linked, its status and actions appear in the task header. Use the [code review panel](/docs/posthog-desktop/code-review) to read the diff, reply to comments, or ask the agent to make a fix.
+
+Cloud tasks show the same pull request controls and a **Continue locally** action for moving the work to your computer.
+
+## Troubleshooting
+
+- Run `gh auth status` if a GitHub action fails.
+- Check that the branch has a remote before pushing.
+- Keep pull request templates in a [location supported by GitHub](https://docs.github.com/en/communities/using-templates-to-encourage-useful-issues-and-pull-requests/creating-a-pull-request-template-for-your-repository).

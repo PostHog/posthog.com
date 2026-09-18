@@ -29,12 +29,7 @@ interface PostHogOnPostHogSlideProps {
 const VideoPlayerWindow = ({ productData, startTime = 0 }: any) => {
     return (
         <div className="h-full w-full bg-black">
-            <WistiaCustomPlayer
-                theme="dark"
-                mediaId={productData.videos?.overview?.wistia}
-                autoPlay={true}
-                startTime={startTime}
-            />
+            <WistiaCustomPlayer mediaId={productData.videos?.overview?.wistia} autoPlay={true} startTime={startTime} />
         </div>
     )
 }
@@ -66,10 +61,7 @@ export default function PostHogOnPostHogSlide({ productData }: PostHogOnPostHogS
 
             // For thumbnail mode, check container width
             if (isThumbnail) {
-                const containerWidth =
-                    typeof window !== 'undefined' && siteSettings.experience === 'boring'
-                        ? window.innerWidth
-                        : appWindow?.size?.width
+                const containerWidth = appWindow?.size?.width
 
                 // Below @2xl (672px) should show portrait thumbnails
                 setIsPortraitMode(containerWidth ? containerWidth < 672 : false)
@@ -259,7 +251,6 @@ export default function PostHogOnPostHogSlide({ productData }: PostHogOnPostHogS
                     {/* Video player on the left */}
                     <div className={`flex-1 flex flex-col ${isMaximized ? 'fixed inset-0 z-50 p-16 pt-20' : ''}`}>
                         <WistiaCustomPlayer
-                            theme="dark"
                             mediaId={productData.videos?.overview?.wistia}
                             onMaximize={handleMaximize}
                             onPopOut={handlePopOut}

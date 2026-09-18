@@ -1,0 +1,73 @@
+---
+title: Which onboarding steps turn trials into paying customers?
+shortTitle: Onboarding conversion
+subtitle: Compare onboarding actions completed by payers vs non-payers to find what predicts conversion.
+pocketGuideOrder: 2
+section: Ask a quick question
+---
+
+<LeftPage>
+
+<ExampleFigure
+    n={1}
+    caption="Example data: onboarding actions ranked by how strongly they separate payers from non-payers."
+>
+
+| Onboarding step          | Payers who did it | Non-payers who did it | Share who paid |
+| ------------------------- | ------------------ | ----------------------- | ---------------- |
+| `created_second_project`  | 52%                 | 9%                       | 0.61              |
+| `invited_teammate`        | 78%                 | 22%                      | 0.41              |
+| `connected_data_source`   | 91%                 | 64%                      | 0.24              |
+| `viewed_pricing`          | 88%                 | 81%                      | 0.15              |
+
+</ExampleFigure>
+
+</LeftPage>
+
+<RightPage>
+
+# Which onboarding steps turn trials into paying customers?
+
+Every onboarding flow has steps that matter and steps that don't. The trick is knowing which is
+which. This skill builds the onboarding funnel, flags who reached a first Stripe payment, and
+compares people who pay against people who don't, step-by-step.
+
+## Example data and how to read it
+
+The Skill looks for patterns like <SeeFig n={1} />: only 9% of non-payers ever create a second
+project, versus 52% of payers, the biggest gap in the funnel. Inviting a teammate looks
+important on its own, but the gap between payers and non-payers is smaller. This tells you to focus on closing the gap for people who don't create a second project.
+
+## Get an agent to do the work
+
+Copy the Skill below and add it to your agent. The agent finds your signup-to-activation events and each user's first successful Stripe
+payment, joined on email. From there it either builds a funnel broken down by paid vs unpaid, or
+computes the completion-rate lift of each step among payers versus non-payers, whichever fits
+what you asked.
+
+The agent looks at the onboarding *path* in aggregate. For scoring which individual leads sales should
+call right now instead, that's [Lead scoring](/pocket-guides/context-warehouse/lead-scoring).
+
+<SkillFigure n={2} caption="The Skill itself, copy and paste this into your agent to answer the question." />
+
+## Doing this by hand
+
+1. **Build the [funnel](/docs/product-analytics/funnels) natively.** Go to Product analytics >
+   Funnels and add your onboarding steps in order. This part needs no join; PostHog does it out
+   of the box.
+2. **Connect [Stripe](/docs/cdp/sources/stripe)** via
+   [Data pipeline > Sources](/docs/data-warehouse/sources) to get first-payment dates.
+3. **Create a "paid" [cohort](/docs/data/cohorts).** Under Cohorts > New cohort, match users with
+   a Stripe invoice `status = paid` (a warehouse condition), then use it as the funnel's
+   breakdown.
+4. **Compare completion rates**, open the [SQL editor](/docs/data-warehouse/sql), or ask PostHog AI if you
+   want the lift computed for you in one query instead of reading two funnels side by side.
+
+<SeeAlso>
+
+See also: [Lead scoring](/pocket-guides/context-warehouse/lead-scoring) ·
+[Pre-cancellation behavior](/pocket-guides/context-warehouse/pre-cancellation-behavior)
+
+</SeeAlso>
+
+</RightPage>

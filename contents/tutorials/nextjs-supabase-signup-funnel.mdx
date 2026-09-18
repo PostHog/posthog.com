@@ -6,7 +6,7 @@ author:
   - leggetter
 tags:
   - funnels
-  - user paths
+  - product analytics
   - session replay
   - events
 date: 2021-10-21
@@ -16,7 +16,7 @@ _Estimated reading time: 20 minutes_ ☕☕☕
 
 With the number of software frameworks and services available to help with developer productivity and feature building, it's never been a better time to be a software developer. One of most important things you'll have to build, whether building a SaaS, developer tool, or consumer app, is a sign up flow that begins on a landing page and ideally results in a successful sign up. The purpose of this sign up flow is to get as many real users through to being successfully signed up on your app or platform. So, it's important that you can measure whether your sign up flow is converting and where any potential sign ups are dropping out of that funnel.
 
-In this tutorial, we'll create a simple sign up flow in a Next.js app, starting with a [Supabase](/tutorials/supabase-query) example for authentication. We'll then look at how you can instrument that sign up flow using the [PostHog JavaScript SDK](/docs/integrate/client/js) and create a sign up [funnel visualization](/docs/user-guides/funnels) within PostHog to analyze the success - or failure - of the sign up flow.
+In this tutorial, we'll create a simple sign up flow in a Next.js app, starting with a [Supabase](/tutorials/supabase-query) example for authentication. We'll then look at how you can instrument that sign up flow using the [PostHog JavaScript SDK](/docs/libraries/js) and create a sign up [funnel visualization](/docs/user-guides/funnels) within PostHog to analyze the success - or failure - of the sign up flow.
 
 ## Before you begin
 
@@ -253,11 +253,11 @@ A user can now sign up with our app but there are a number of potential drop-off
 Add two new environment variables to `.env.local` that will be used with the PostHog JavaScript SDK:
 
 ```
-NEXT_PUBLIC_POSTHOG_TOKEN=<ph_project_token>
+NEXT_PUBLIC_POSTHOG_PROJECT_TOKEN=<ph_project_token>
 NEXT_PUBLIC_POSTHOG_HOST=your_posthog_host
 ```
 
-The value for `NEXT_PUBLIC_POSTHOG_TOKEN` can be found via **Project** in the left-hand menu of your PostHog app, underneath the **Project token** heading.
+The value for `NEXT_PUBLIC_POSTHOG_PROJECT_TOKEN` can be found via **Project** in the left-hand menu of your PostHog app, underneath the **Project token** heading.
 
 The value for `NEXT_PUBLIC_POSTHOG_HOST` is the public URL for ingesting events into your PostHog instance. If you're using US cloud, this is `https://us.i.posthog.com`.
 
@@ -279,7 +279,7 @@ import { PostHogProvider } from '@posthog/react'
 
 // Check that PostHog is client-side
 if (typeof window !== 'undefined') {
-    posthog.init(process.env.NEXT_PUBLIC_POSTHOG_TOKEN, {
+    posthog.init(process.env.NEXT_PUBLIC_POSTHOG_PROJECT_TOKEN, {
         api_host: process.env.NEXT_PUBLIC_POSTHOG_HOST || 'https://us.i.posthog.com',
         // Enable debug mode in development
         loaded: (posthog) => {

@@ -124,7 +124,7 @@ Articulating the problem is only half the battle. You need to articulate your so
 
 If you do this well, you might not need to do anything else. Many startups have built huge waitlists before their product even launches, validating demand.
 
-A classic example is Dropbox, whose [viral demo video](https://www.alexanderjarvis.com/dropbox-doing-things-that-dont-scale/) led to thousands of signups before they built anything.
+A classic example is Dropbox, whose [viral demo video](https://www.alexanderjarvis.com/dropbox-doing-things-that-dont-scale/) led to thousands of signups before they built anything — a reminder that [how you tell the story matters as much as what you built](/newsletter/how-to-demo#storytelling-tactics).
 
 ### Problem #2: You lack credibility
 

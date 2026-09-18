@@ -5,7 +5,9 @@ import {
     IconApps,
     IconBox,
     IconBrackets,
+    IconChatHelp,
     IconCode,
+    IconCompass,
     IconCursor,
     IconDashboard,
     IconDatabase,
@@ -21,6 +23,7 @@ import {
     IconPlug,
     IconPrivacy,
     IconPulse,
+    IconRevert,
     IconRewindPlay,
     IconReceipt,
     IconRocket,
@@ -39,8 +42,9 @@ import {
     IconWarning,
     IconMagicWand,
     IconLlmAnalytics,
-    IconPiggyBank,
     IconSparkles,
+    IconSpotlight,
+    IconTelescope,
     IconEndpoints,
 } from '@posthog/icons'
 
@@ -75,20 +79,26 @@ export const topicIcons = {
     'identify users': DataManagement, // to be replaced or removed
     '#introductions': IconHandwave,
     kubernetes: DataWarehouse, // to be replaced or removed
+    'ai observability': IconLlmAnalytics,
     'llm analytics': IconLlmAnalytics,
     'posthog ai': IconSparkles,
     'migrating to posthog': DataManagement, // to be replaced or removed
     migration: IconUpload,
+    '#mistakes-were-made': IconRevert,
     more: IconEllipsis,
     paths: PathAnalysis, // to be replaced or removed
     'people & properties': IconBrackets,
+    '#poll-the-hogs': IconChatHelp,
     'pricing & billing': IconReceipt,
     monitoring: IconPulse,
     'product analytics': IconGraph,
     sdks: IconBox,
     security: IconPrivacy,
+    '#self-driving': IconCompass,
     'session replay': IconRewindPlay,
+    '#show-and-tell': IconSpotlight,
     'sparks joy': SparksJoy, // to be replaced or removed
+    '#thinking-out-loud': IconTelescope,
     trends: IconTrends,
     toolbar: IconToolbar,
     uncategorized: IconEllipsis,
@@ -98,7 +108,6 @@ export const topicIcons = {
     survey: IconMessage,
     '#where-in-the-world': IconGlobe,
     'web analytics': IconPieChart,
-    'revenue analytics': IconPiggyBank,
     workflows: IconDecisionTree,
 }
 

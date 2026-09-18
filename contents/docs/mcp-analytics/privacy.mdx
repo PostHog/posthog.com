@@ -1,0 +1,173 @@
+---
+title: Privacy and redaction
+---
+
+import CalloutBox from 'components/Docs/CalloutBox'
+
+MCP tool calls can contain API tokens, personal data, and model output. The SDK sanitizes and truncates events before sending them. Use this page to understand automatic redaction and configure additional filtering.
+
+## What never leaves your process
+
+The SDK does not capture:
+
+- Your PostHog API key or any environment variables.
+- The transport itself (TCP/WebSocket frames, MCP framing internals).
+- Tool source code, function references, or closures.
+- The full content of `image` or `audio` content blocks (replaced with a text stub).
+- The content of `resource` blocks with a `blob` payload.
+- Resource bodies. The SDK never captures `resources/read` results. It captures only the URI, timing, and error state. Resource listings contain discovery metadata, such as names, URIs, and MIME types, so the SDK captures them.
+
+`$mcp_tool_call` payloads include `$mcp_parameters` (the request arguments) and `$mcp_response` (the tool's result), after the pipeline below.
+
+When the SDK can confirm that it owns an injected analytics argument, it removes the argument before the tool handler runs. On supported high-level server paths, `context`, `conversation_id`, and `llm_model` don't appear in `$mcp_parameters`. Their accepted values are captured separately as `$mcp_intent`, `$mcp_conversation_id`, and `$mcp_llm_model`.
+
+`$mcp_llm_model` comes from recognized client metadata or the agent's self-report. `$mcp_llm_model_source` distinguishes the two. Neither source is verified by the MCP protocol. Don't use either for billing, authorization, or other security decisions.
+
+Model capture and conversation IDs are enabled by default. Conversation IDs add a visible JSON text block to eligible tool results. See [how to disable them](/docs/mcp-analytics/installation#capture-the-calling-model).
+
+## The redaction pipeline
+
+Every event runs through these stages before being sent to PostHog:
+
+### 1. Automatic sanitization
+
+The SDK runs a deterministic sanitizer:
+
+- **Image/audio content blocks** -> replaced with `[image redacted: <mime>]` or `[audio redacted: <mime>]`.
+- **Resource blocks with a `.blob`** -> replaced with `[resource redacted: <mime>]`.
+- **Long base64-looking strings (>=10KB)** -> replaced with `"[binary data redacted...]"`.
+- **Keys matching the sensitive-key pattern** – `authorization`, `cookie`, `password`, `token`, `secret`, `api_key`, `private_key`, and similar – have their values replaced with `"[redacted]"`.
+- **PostHog API key patterns** (`ph[a-z]_…`) in any string value -> replaced with `"[redacted]"`.
+- **Credentials inside URLs** – replaced with `[redacted]`. This applies to string values in resource names, parameters, responses, and exception messages. See the URL rules below.
+- **Credential-looking words** – detected through entropy and known formats, such as `sk-…` and PEM markers. The SDK replaces these words in parameters, responses, intent, and exception messages. It preserves surrounding diagnostic text.
+
+Automatic sanitization is not configurable. It detects known key formats and sensitive property names, but it cannot detect every secret. Other text, including exception messages, remains unchanged. Use `beforeSend` for additional filtering.
+
+#### URL credentials
+
+The sanitizer replaces `user:password@` and values of query or fragment fields that identify credentials. It checks field-name segments separated by `-`, `_`, `.`, `/`, or `;`.
+
+Recognized names include `auth`, `token`, `secret`, `password`, `key`, `signature`, `sig`, `jwt`, and `session`. Signed URL names include `X-Amz-Signature`, `AWSAccessKeyId`, `GoogleAccessId`, `Policy`, and `code`. This intentionally also redacts some benign fields, such as `sort_key`.
+
+The sanitizer also handles these URL forms:
+
+- URLs nested one level inside a retained value
+- URIs without an authority, such as `resource:guide?token=…`
+- Fragments used for routing
+- Adjacent addresses with no separating whitespace
+
+When a credential boundary is ambiguous, the sanitizer removes more text. It preserves URLs that need no redaction byte-for-byte. It replaces URLs longer than 8 KB or with more than 128 fields entirely.
+
+### 2. Truncation
+
+After sanitization, the payload is truncated to fit within PostHog ingestion limits:
+
+- Per-field caps applied to large strings.
+- Recursive normalization: max depth 10, max breadth 100, max string 32 KB.
+- A 100 KB total event budget, with progressive falloff if the budget is exceeded.
+
+If a payload would exceed the budget, the SDK truncates rather than drops. The truncation markers are visible in the captured `$mcp_parameters` / `$mcp_response`.
+
+### 3. `beforeSend` (optional)
+
+`beforeSend` runs on each fully-built PostHog payload – `{ event, distinct_id, properties }` – right before it's sent, once per emitted event (including the `$exception` sibling). It mirrors the [`beforeSend` hook in `posthog-node`](/docs/libraries/node) and may be sync or async.
+
+- Return the (possibly mutated) event to send it.
+- Return a nullish value (`null`/`undefined`) to **drop** that event.
+- A thrown error also drops that event.
+
+```ts
+instrument(server, posthog, {
+  beforeSend: (event) => {
+    if (event.event === "$exception") return null // drop
+    return event
+  },
+})
+```
+
+The hook runs after sanitization and truncation. Changes made in this hook are final before the SDK sends the event.
+
+## Exception autocapture
+
+By default the SDK emits an `$exception` sibling event whenever a tool call fails (throws or returns `isError: true`). Set `enableExceptionAutocapture: false` to suppress that sibling – the `$mcp_tool_call` still records `$mcp_is_error`, but no `$exception` event is sent.
+
+```ts
+instrument(server, posthog, {
+  enableExceptionAutocapture: false,
+})
+```
+
+## Anonymous sessions and person profiles
+
+Events for sessions with no resolved identity are sent with `$process_person_profile: false`, so anonymous MCP sessions do not each create a person profile. When `identify()` resolves an identity for a session, person processing stays on and events attribute to that user. See [Identifying users](/docs/mcp-analytics/identifying-users).
+
+## Disabling capture entirely
+
+Return `null` or `undefined` from `beforeSend` to discard every event. To remove only tool arguments and results, delete these properties:
+
+Intent, error messages, exception details, and custom properties remain unless you remove or disable them separately.
+
+```ts
+beforeSend: (event) => {
+  delete event.properties.$mcp_parameters
+  delete event.properties.$mcp_response
+  return event
+},
+```
+
+<CalloutBox icon="IconInfo" title="Drain the queue before exit" type="fyi">
+
+You manage the `posthog-node` client lifecycle. Call `posthog.shutdown()` or `posthog.flush()` from your shutdown handler, or at the end of each serverless invocation. This sends queued events before the process stops. See the [shutdown example](/docs/mcp-analytics/installation#graceful-shutdown).
+
+</CalloutBox>
+
+## Python
+
+Python uses the same sanitizer, truncation limits, and additional `$exception` events. `before_send` controls the final payload. The SDK sanitizes exception messages and limits them to 2048 characters.
+
+On the `instrument()` path it's an `MCPAnalyticsOptions` field. On the `PostHogMCP` path it's the standard `posthog` client kwarg, which MCP events run through like any other capture:
+
+```python
+from posthog.mcp import instrument, PostHogMCP
+from posthog.mcp.types import MCPAnalyticsOptions
+
+def before_send(event):
+    if event["event"] == "$exception":
+        return None  # drop
+    return event
+
+instrument(server, posthog, MCPAnalyticsOptions(before_send=before_send))
+
+# custom dispatchers:
+posthog = PostHogMCP("phc_your_project_api_key", before_send=before_send)
+```
+
+The callback receives the built payload (`event`, `distinct_id`, `properties`, `timestamp`) and runs once per emitted event, including the `$exception` sibling. `MCPAnalyticsOptions.before_send` can be sync or async. The standard `PostHogMCP` client callback must be synchronous. Return the event to send it, or `None` to drop it. A raised exception drops it too and is routed to the logger.
+
+To remove tool arguments, responses, and error messages, strip these properties. Intent, model metadata, and exception details remain unless you remove or disable them separately:
+
+```python
+def before_send(event):
+    event["properties"].pop("$mcp_parameters", None)
+    event["properties"].pop("$mcp_response", None)
+    event["properties"].pop("$mcp_error_message", None)
+    return event
+```
+
+Set `enable_exception_autocapture=False` (`MCPAnalyticsOptions`) or `mcp_exception_autocapture=False` (`PostHogMCP`) to suppress the `$exception` sibling entirely.
+
+## Buffering and back-pressure
+
+The in-memory queue is owned by the `posthog-node` client you pass in. If it overflows or fails to flush, events are dropped with a warning surfaced to your `logger`.
+
+## Logging
+
+MCP servers often use stdio. Calls to `console.*` can corrupt the protocol stream. The SDK's default logger writes nothing. Configure a logger during development to see callback errors and warnings:
+
+```ts
+instrument(server, posthog, {
+  logger: (message) => fs.appendFileSync("/tmp/mcp.log", message + "\n"),
+})
+```
+
+The SDK catches errors from `beforeSend`, `identify`, `intentFallback`, and `eventProperties`. It sends these errors to the logger without interrupting tool execution. If `beforeSend` throws, the SDK also discards that event.

@@ -13,7 +13,7 @@ features:
   featureFlags: true
   groupAnalytics: true
   surveys: true
-  llmAnalytics: false
+  aiObservability: false
   errorTracking: true
   logs: true
 ---
@@ -65,6 +65,10 @@ The PostHog iOS SDK uses method swizzling to intercept and modify method calls a
 Method swizzling is particularly important for accurate session metrics tracking. When disabled, the SDK cannot capture optimal session metrics.
 
 You can learn more about configuring method swizzling in the [configuration page](/docs/libraries/ios/configuration#method-swizzling).
+
+## Push notifications
+
+The iOS SDK can register a device for [Workflows](/docs/workflows) push notifications and capture when a user opens one. For setup, including automatic and manual registration, capturing opens, and identity verification, see [Push notifications](/docs/workflows/push-notifications).
 
 ## Next steps
 

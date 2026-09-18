@@ -1,0 +1,124 @@
+---
+title: OIDC
+sidebar: Docs
+showTitle: true
+availability:
+    free: none
+    selfServe: none
+    enterprise: full
+    features:
+        oidc:
+            free: false
+            selfServe: false
+            boost: false
+            scale: true
+            enterprise: true
+---
+
+<FeatureAvailability availability={_frontmatter.availability.features.oidc} />
+
+OpenID Connect (OIDC) enables users to access multiple systems with a single set of credentials. This is helpful for growing organizations that require centralized user management in an Identity Provider (IdP).
+
+## Prerequisites
+
+1. If you are using PostHog cloud, your organization must be subscribed to a platform package that offers OIDC. If you are self-hosting PostHog, your instance must have an enterprise license that supports OIDC.
+
+2. You need to [verify domains](/docs/settings/authentication/sso#authentication-domains) for any email address that you want to allow users to login with. For example, if you want to allow users with an `@example.com` email address to login, like `john@example.com`, you need to add and verify `example.com` as an authentication domain.
+
+3. If you are self-hosting PostHog, make sure you have properly set up your `SITE_URL` [environment variable](/docs/self-host/configure/environment-variables) configuration.
+
+4. If you are self-hosting PostHog, your PostHog instance must be accessible from the public internet over TLS.
+
+## Configuring OIDC
+
+1. Navigate to your organization's [authentication settings](https://app.posthog.com/settings/organization-authentication#setting=oidc-configuration) page in PostHog.
+
+2. Scroll down to the **OIDC** section, and select **Configure**.
+
+3. In your IdP, create a new OIDC app for PostHog.
+
+    a. Copy the "*Redirect URL*" displayed in PostHog into your OIDC app's configuration in your IdP.
+
+    b. Copy the "*Issuer URL*", "*Client ID*", "*Client Secret*" fields from your OIDC app's configuration in your IdP into the configuration fields in PostHog. If you do not see "*Issuer URL*" in your IdP, it will be the domain you use to login to the IdP, prefixed by `https://`.
+
+    c. Verify that your IdP shares the `email` and `email_verified` OpenID claims with PostHog. Without these claims, PostHog cannot associated your users with their email address.
+
+4. Select **Save**.
+
+
+### Example: Okta
+
+1. In Okta admin, go to **Applications** and select **Create App Integration**.
+   <ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/2026_09_17_okta_oidc_step_1_9a8193d241.png"
+    alt="Okta admin UI showing a Create App Integration button"
+    classes="rounded"
+   />
+
+2. Select the **OIDC - OpenID Connect** option for sign-in method. For application type, select **Web Application**.
+   <ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/2026_09_17_okta_oidc_step_2_ba4ee97c1f.png"
+    alt="Okta admin UI showing a modal to configure an app integration"
+    classes="rounded"
+   />
+
+3. Select **Next** and name the configuration *PostHog*.
+   <ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/2026_09_17_okta_oidc_step_3_8db0646163.png"
+    alt="Okta admin UI showing a Create App Integration button"
+    classes="rounded"
+   />
+
+4. Navigate to your PostHog organization's [authentication settings](https://app.posthog.com/settings/organization-authentication#setting=oidc-configuration), scroll down to **OIDC**, then select **Configure**.
+   <ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/2026_09_17_okta_oidc_step_4_light_4a7b75e712.png"
+    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/2026_09_17_okta_oidc_step_4_dark_faea597d68.png"
+    alt="Okta admin UI showing a Create App Integration button"
+    classes="rounded"
+   />
+
+5. Copy the *Redirect URL* from PostHog into the Okta app's *Sign-in redirect URIs* field.
+   <ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/2026_09_17_okta_oidc_step_4_4429ffadb8.png"
+    alt="Okta admin UI showing OIDC app integration configuration"
+    classes="rounded"
+   />
+
+6. In Okta, choose which users to assign to the application, then select **Save**.
+   <ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/2026_09_17_okta_oidc_step_6_pt_2_f2219f971b.png"
+    alt="Okta admin UI showing OIDC app integration configuration"
+    classes="rounded"
+   />
+
+7. Copy the **Client ID** and **Client Secret** from Okta into the configuration fields in PostHog.
+   <ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/2026_09_17_okta_oidc_step_6_07034d5cf5.png"
+    alt="Okta admin UI showing OIDC client credential details"
+    classes="rounded"
+   />
+
+8. Enter your Okta instance's domain as the **Issuer URL** in PostHog.
+   <ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/2026_09_17_okta_oidc_step_7_light_2751d6d6ef.png"
+    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/2026_09_17_okta_oidc_step_7_dark_601e0a82ac.png"
+    alt="Okta admin UI showing OIDC client credential details"
+    classes="rounded"
+   />
+
+9. Select **Save configuration** in PostHog.
+
+The next time you enter your email address during login, you will see an option to login using OIDC.
+
+
+## Warnings
+
+When using OIDC to authenticate users in PostHog, there are a few considerations to keep in mind:
+
+1. **Only use OIDC with identity providers you trust and that verify the user's email address.** During login we use the email address provided by the identity provider. An untrusted identity provider could spoof a user's email address to impersonate your users.
+
+2. Enabling or enforcing **OIDC will not disable Personal API Key usage**. Users can authenticate with the PostHog API using their API keys without first authenticating via OIDC. You can use [ID-JAG (XAA)](/docs/settings/authentication/id-jag) to programmatically restrict API access using policies defined in your identity provider.
+
+3. Our OIDC integration only handles authentication and user provisioning. It does not handle user removal. You can use [SCIM](/docs/settings/authentication/scim) to automatically deprovision users.
+
+4. When you enable or enforce OIDC, any existing user passwords are saved. If you disable OIDC SSO in the future, your users will be able to login using their pre-existing password credentials.

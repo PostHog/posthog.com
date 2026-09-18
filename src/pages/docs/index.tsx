@@ -1,389 +1,258 @@
-import CloudinaryImage from 'components/CloudinaryImage'
-import React, { useEffect } from 'react'
+import React from 'react'
 import { SEO } from 'components/seo'
 import Link from 'components/Link'
-import { IconSearch } from '@posthog/icons'
-import { docsMenu } from '../../navs'
 import * as Icons from '@posthog/icons'
-import AskMax from 'components/AskMax'
-import ZoomHover from 'components/ZoomHover'
-import { Accordion } from 'components/RadixUI/Accordion'
-import ScrollArea from 'components/RadixUI/ScrollArea'
-import { SearchUI } from 'components/SearchUI'
-import SmallTeam from 'components/SmallTeam'
+import ReaderView from 'components/ReaderView'
+import OSButton from 'components/OSButton'
+import { AppsList } from 'components/Docs/AppsList'
+import Book, { BookShelf } from 'components/PocketGuides/Book'
+import usePocketGuideCounts from '../../hooks/usePocketGuideCounts'
+import { POCKET_GUIDE_VOLUMES } from '../../constants/pocketGuides'
+import usePostHog from '../../hooks/usePostHog'
 import { useApp } from '../../context/App'
 
-// Process docsMenu to extract structure
-const processDocsMenu = () => {
-    const productOSSection = docsMenu.children.find((item) => item.name === 'Product OS')
-    const productSections = docsMenu.children.filter((item) => item.name !== 'Product OS')
+/** A surface on the page ground, after `FeaturePanel` on `/desktop`. Colour lives in the icons only. */
+const Panel = ({
+    eyebrow,
+    description,
+    children,
+}: {
+    eyebrow: string
+    description?: string
+    children: React.ReactNode
+}): JSX.Element => (
+    <section className="@container flex h-full flex-col rounded border border-primary bg-primary p-4 @xl:p-5">
+        <h2 className={`m-0 text-sm font-bold uppercase tracking-wide text-primary ${description ? 'mb-1' : 'mb-3'}`}>
+            {eyebrow}
+        </h2>
+        {description && <p className="m-0 mb-3 text-sm leading-snug text-secondary">{description}</p>}
+        {children}
+    </section>
+)
 
-    const featuredIntegrationItems = [
-        'Install and configure',
-        'SDKs',
-        'Frameworks',
-        'API',
-        'Advanced',
-        'Tools',
-        'AI engineering',
-        'Getting HogPilled',
-    ]
-
-    const featuredAIPlatformItems = [
-        'PostHog AI',
-        'PostHog Code',
-        'Model Context Protocol (MCP)',
-        'AI wizard',
-        'AI engineering',
-    ]
-
-    const developerAppsSection = { name: 'Developer apps', children: [] }
-    const integrationSection = { name: 'Integration', children: [] }
-    // hardcode a few AI sections for now, until dedicated product docs are created
-    const AIPlatformSection = {
-        name: 'AI platform',
-        children: [
-            {
-                name: 'MCP',
-                url: '/docs/model-context-protocol',
-                icon: 'IconMagic',
-                color: 'blue',
-            },
-            {
-                name: 'AI wizard',
-                url: '/docs/ai-engineering/ai-wizard',
-                icon: 'IconMagicWand',
-                color: 'purple',
-            },
-        ],
-    }
-
-    productSections?.forEach((product) => {
-        if (featuredAIPlatformItems.includes(product.name)) {
-            AIPlatformSection.children.unshift(product)
-        } else {
-            developerAppsSection.children.push(product)
-        }
-    })
-
-    productOSSection?.children?.forEach((child) => {
-        if (featuredAIPlatformItems.includes(child.name)) {
-            AIPlatformSection.children.push(child)
-        } else if (featuredIntegrationItems.includes(child.name)) {
-            integrationSection.children.push(child)
-        }
-    })
-
-    return [integrationSection, AIPlatformSection, developerAppsSection]
-}
-
-const renderSectionContent = (children: any[]) => {
+/** An icon link, the size and weight the product pages use for their icon rows. */
+const IconLink = ({
+    to,
+    color,
+    icon,
+    children,
+}: {
+    to: string
+    color: string
+    icon: string
+    children: React.ReactNode
+}) => {
+    const Icon = (Icons[icon as keyof typeof Icons] as any) || Icons.IconBook
     return (
-        <div
-            data-scheme="primary"
-            className="pl-4 grid grid-cols-[repeat(auto-fit,minmax(7rem,1fr))] gap-2 @4xl:gap-4 relative items-start"
-        >
-            {children
-                .filter((child) => child.url && child.name)
-                .map((child, index) => {
-                    const Icon = child.icon ? (Icons[child.icon as keyof typeof Icons] as any) : Icons.IconBook
-                    return (
-                        <ZoomHover key={index} className="items-center text-center [&>span]:w-full">
-                            <Link
-                                to={child.url}
-                                className="bg-accent border border-transparent hover:border-primary px-2 py-4 rounded flex flex-col h-full justify-start items-center gap-2 w-full font-medium"
-                            >
-                                <div>
-                                    <Icon className={`size-6 text-${child.color || 'primary'}`} />
-                                </div>
-                                <div className="text-sm leading-tight">{child.name}</div>
-                            </Link>
-                        </ZoomHover>
-                    )
-                })}
-        </div>
+        <Link to={to} className="flex items-start gap-2 text-sm font-medium text-primary hover:underline">
+            <Icon className={`mt-0.5 size-4 shrink-0 text-${color}`} />
+            <span className="leading-snug">{children}</span>
+        </Link>
     )
 }
 
+// Quick-start entry cards for the docs hub
+const pathCards = [
+    {
+        name: 'Install PostHog',
+        description: 'Send your first event in minutes.',
+        url: '/docs/getting-started/install',
+        icon: 'IconRocket',
+        color: 'salmon',
+    },
+    {
+        name: 'Understand self-driving',
+        description: 'How your product learns to drive itself.',
+        url: '/docs/self-driving',
+        icon: 'IconStack',
+        color: 'red',
+    },
+]
+
+// The surfaces you can use PostHog from
+const surfaces = [
+    {
+        name: 'Web',
+        url: '/docs/self-driving/web',
+        icon: 'IconLaptop',
+        color: 'blue',
+        description: 'The PostHog you know and love, in your browser.',
+    },
+    {
+        name: 'Slack',
+        url: '/docs/slack',
+        icon: 'IconMessage',
+        color: 'salmon',
+        description: 'Ask questions and ship work from a shared channel.',
+    },
+    {
+        name: 'MCP',
+        url: '/docs/model-context-protocol',
+        icon: 'IconMagic',
+        color: 'purple',
+        description: 'Bring PostHog into Claude Code, Cursor, and more.',
+    },
+    {
+        name: 'CLI',
+        url: '/docs/cli',
+        icon: 'IconTerminal',
+        color: 'green',
+        description: 'Query your data and ship work from your terminal.',
+    },
+    {
+        name: 'Desktop',
+        url: '/docs/posthog-desktop',
+        icon: 'IconCoffee',
+        color: 'burnt-orange',
+        description: 'Run tasks, review code, and use any model from your desktop.',
+    },
+]
+const sdkSections = [
+    {
+        name: 'SDKs',
+        url: '/docs/libraries',
+        icon: 'IconBox',
+        color: 'blue',
+    },
+    {
+        name: 'Frameworks',
+        url: '/docs/frameworks',
+        icon: 'IconBrackets',
+        color: 'purple',
+    },
+    {
+        name: 'Services',
+        url: '/docs/services',
+        icon: 'IconPlug',
+        color: 'green',
+    },
+]
+
 export const DocsIndex = () => {
-    const topLevelSections = processDocsMenu()
-    const [isMac, setIsMac] = React.useState<boolean | undefined>(undefined)
-    useEffect(() => {
-        setIsMac(typeof window !== 'undefined' && window.navigator.userAgent.toLowerCase().includes('macintosh'))
-    }, [])
+    const posthog = usePostHog()
+    const { openSearch } = useApp()
+    const guideCounts = usePocketGuideCounts()
+    // Reading order: Vol. 1 at the top of the shelf, the way a series is shelved.
+    const volumes = [...POCKET_GUIDE_VOLUMES].sort((a, b) => a.volume - b.volume)
 
-    // Create accordion items
-    const accordionItems = topLevelSections.map((section: any) => ({
-        value: section.name?.toLowerCase()?.replace(/\s+/g, '-') || 'section',
-        trigger: (
-            <span data-scheme="secondary" className="bg-primary pr-2 relative z-10">
-                {section.name}
-            </span>
-        ),
-        content: renderSectionContent(section.children || []),
-    }))
-
-    const imagePositioning =
-        'absolute @3xl:top-1/2 @3xl:left-1/2  opacity-100 @sm:opacity-80 @md:opacity-100 transition-all duration-300 @2xl:scale-75 @3xl:scale-90 @4xl:scale-100 @5xl:scale-110'
-
-    const { websiteMode } = useApp()
-
+    // ReaderView is the shell every other docs page uses – see `src/templates/Handbook.tsx`.
     return (
-        <div data-scheme="secondary" className={`${!websiteMode && 'bg-primary'} h-full text-primary`}>
-            <SEO title="Documentation - PostHog" />
-            <ScrollArea className={`${websiteMode ? '@container' : ''}`}>
-                <section
-                    id="hero"
-                    className={`@container not-prose relative aspect-[3/1] overflow-hidden border-b border-primary bg-red-carpet bg-[length:150px_150px] ${
-                        websiteMode
-                            ? '@2xl:aspect-none h-36 @6xl:h-48 w-full'
-                            : '@2xl:aspect-[4/1] @6xl:aspect-[5/1] mb-4'
-                    }`}
-                >
-                    {/* Background container for positioned graphics */}
-                    {/* Example of positioned graphics - replace with your actual graphics */}
-                    {/* Left section graphics */}
-                    <div className="absolute inset-0 flex flex-col justify-center items-center">
-                        <div className="relative">
-                            <CloudinaryImage
-                                src="https://res.cloudinary.com/dmukukwp6/image/upload/top_middle_04506a5dc1.png"
-                                alt=""
-                                width={588}
-                                height={434}
-                                className={`${imagePositioning} 
-                            translate-x-[calc(-50%-65%)] 
-                            translate-y-[calc(-50%-60%)] 
-                            @2xl:translate-x-[calc(-50%-65%)] 
-                            @2xl:translate-y-[calc(-50%-50%)] 
-                            @3xl:translate-x-[calc(-50%-70%)] 
-                            @3xl:translate-y-[calc(-50%-50%)] 
-                            @4xl:translate-x-[calc(-50%-70%)] 
-                            @4xl:translate-y-[calc(-50%-60%)] 
-                            @5xl:translate-x-[calc(-50%-70%)] 
-                            @5xl:translate-y-[calc(-50%-70%)] 
-                            @6xl:translate-x-[calc(-50%-80%)] 
-                            @6xl:translate-y-[calc(-50%-70%)] 
-                            @7xl:translate-x-[calc(-50%-90%)] 
-                            @7xl:translate-y-[calc(-50%-65%)] 
-                            w-[294px] h-auto`}
-                            />
-                            <CloudinaryImage
-                                src="https://res.cloudinary.com/dmukukwp6/image/upload/top_right_c86eb1a286.png"
-                                alt=""
-                                width={551}
-                                height={517}
-                                className={`${imagePositioning} 
-                            translate-x-[calc(-50%+25%)] 
-                            translate-y-[calc(-50%-65%)] 
-                            @lg:translate-x-[calc(-50%+55%)] 
-                            @lg:translate-y-[calc(-50%-65%)] 
-                            @2xl:translate-x-[calc(-50%+55%)] 
-                            @2xl:translate-y-[calc(-50%-50%)] 
-                            @3xl:translate-x-[calc(-50%+55%)] 
-                            @3xl:translate-y-[calc(-50%-60%)] 
-                            @4xl:translate-x-[calc(-50%+55%)] 
-                            @4xl:translate-y-[calc(-50%-65%)] 
-                            @5xl:translate-x-[calc(-50%+55%)] 
-                            @5xl:translate-y-[calc(-50%-75%)] 
-                            @6xl:translate-x-[calc(-50%+65%)] 
-                            @6xl:translate-y-[calc(-50%-70%)] 
-                            w-[275px] h-auto`}
-                            />
-                            <CloudinaryImage
-                                src="https://res.cloudinary.com/dmukukwp6/image/upload/right_6de2023571.png"
-                                alt=""
-                                width={585}
-                                height={488}
-                                className={`${imagePositioning} 
-                            translate-x-[calc(-50%+110%)] 
-                            translate-y-[calc(-50%-25%)] 
-                            @lg:translate-x-[calc(-50%+120%)] 
-                            @lg:translate-y-[calc(-50%-10%)] 
-                            @2xl:translate-x-[calc(-50%+110%)] 
-                            @2xl:translate-y-[calc(-50%-10%)] 
-                            @3xl:translate-x-[calc(-50%+120%)] 
-                            @3xl:translate-y-[calc(-50%-20%)] 
-                            @4xl:translate-x-[calc(-50%+145%)] 
-                            @4xl:translate-y-[calc(-50%-25%)] 
-                            @5xl:translate-x-[calc(-50%+150%)] 
-                            @5xl:translate-y-[calc(-50%-30%)] 
-                            @6xl:translate-x-[calc(-50%+160%)] 
-                            @6xl:translate-y-[calc(-50%-30%)] 
-                            @7xl:translate-x-[calc(-50%+170%)] 
-                            @7xl:translate-y-[calc(-50%-30%)] 
-                            w-[292.5px] h-[244px] `}
-                            />
-
-                            <CloudinaryImage
-                                src="https://res.cloudinary.com/dmukukwp6/image/upload/bottom_right_fb4051ba15.png"
-                                alt=""
-                                width={389}
-                                height={333}
-                                className={`${imagePositioning} 
-                            translate-x-[calc(-50%+70%)] 
-                            translate-y-[calc(-50%+70%)] 
-                            @lg:translate-x-[calc(-50%+80%)] 
-                            @lg:translate-y-[calc(-50%+75%)] 
-                            @xl:translate-x-[calc(-50%+120%)] 
-                            @xl:translate-y-[calc(-50%+85%)] 
-                            @2xl:translate-x-[calc(-50%+110%)] 
-                            @2xl:translate-y-[calc(-50%+65%)] 
-                            @3xl:translate-x-[calc(-50%+120%)] 
-                            @3xl:translate-y-[calc(-50%+65%)] 
-                            @4xl:translate-x-[calc(-50%+145%)] 
-                            @4xl:translate-y-[calc(-50%+75%)] 
-                            @5xl:translate-x-[calc(-50%+160%)] 
-                            @5xl:translate-y-[calc(-50%+85%)] 
-                            @6xl:translate-x-[calc(-50%+170%)] 
-                            @6xl:translate-y-[calc(-50%+85%)] 
-                            @7xl:translate-x-[calc(-50%+180%)] 
-                            @7xl:translate-y-[calc(-50%+85%)] 
-                            w-[194.5px] h-auto `}
-                            />
-
-                            <CloudinaryImage
-                                src="https://res.cloudinary.com/dmukukwp6/image/upload/top_right_c86eb1a286.png"
-                                alt=""
-                                width={551}
-                                height={517}
-                                className={`${imagePositioning} 
-                            translate-x-[calc(-50%-5%)] 
-                            translate-y-[calc(-50%+120%)] 
-                            @xl:translate-x-[calc(-50%-5%)] 
-                            @xl:translate-y-[calc(-50%+70%)] 
-                            @2xl:translate-x-[calc(-50%+5%)] 
-                            @2xl:translate-y-[calc(-50%+55%)] 
-                            @3xl:translate-x-[calc(-50%+5%)] 
-                            @3xl:translate-y-[calc(-50%+60%)] 
-                            @4xl:translate-x-[calc(-50%+5%)] 
-                            @4xl:translate-y-[calc(-50%+70%)] 
-                            @5xl:translate-x-[calc(-50%+15%)] 
-                            @5xl:translate-y-[calc(-50%+75%)] 
-                            w-[275px] h-auto`}
-                            />
-
-                            <CloudinaryImage
-                                src="https://res.cloudinary.com/dmukukwp6/image/upload/bottom_left_19eb019249.png"
-                                alt=""
-                                width={366}
-                                height={338}
-                                className={`${imagePositioning} 
-                            translate-x-[calc(-50%-50%)] 
-                            translate-y-[calc(-50%+70%)] 
-                            @xl:translate-x-[calc(-50%-120%)] 
-                            @xl:translate-y-[calc(-50%+70%)] 
-                            @2xl:translate-x-[calc(-50%-100%)] 
-                            @2xl:translate-y-[calc(-50%+60%)] 
-                            @3xl:translate-x-[calc(-50%-115%)] 
-                            @3xl:translate-y-[calc(-50%+65%)] 
-                            @4xl:translate-x-[calc(-50%-125%)] 
-                            @4xl:translate-y-[calc(-50%+70%)] 
-                            @5xl:translate-x-[calc(-50%-125%)] 
-                            @5xl:translate-y-[calc(-50%+80%)] 
-                            @6xl:translate-x-[calc(-50%-135%)] 
-                            @6xl:translate-y-[calc(-50%+80%)] 
-                            w-[183px] h-auto `}
-                            />
-
-                            <CloudinaryImage
-                                src="https://res.cloudinary.com/dmukukwp6/image/upload/left_00fbb9dca8.png"
-                                alt=""
-                                width={560}
-                                height={483}
-                                className={`${imagePositioning} 
-                            translate-x-[calc(-50%-125%)] 
-                            translate-y-[calc(-50%+20%)] @xl:translate-x-[calc(-50%-140%)] @xl:translate-y-[calc(-50%+0%)] 
-                            @2xl:translate-x-[calc(-50%-120%)] 
-                            @2xl:translate-y-[calc(-50%+0%)] 
-                            @3xl:translate-x-[calc(-50%-140%)] 
-                            @3xl:translate-y-[calc(-50%+0%)] 
-                            @4xl:translate-x-[calc(-50%-150%)] 
-                            @4xl:translate-y-[calc(-50%+0%)] 
-                            @5xl:translate-x-[calc(-50%-150%)] 
-                            @5xl:translate-y-[calc(-50%+0%)] 
-                            @6xl:translate-x-[calc(-50%-160%)] 
-                            @6xl:translate-y-[calc(-50%+0%)] 
-                            @7xl:translate-x-[calc(-50%-180%)] 
-                            @7xl:translate-y-[calc(-50%+5%)] 
-                            w-[280px] h-auto `}
-                            />
-                        </div>
-
-                        {/* Text overlay - keeping this as is */}
-                        <div className="absolute inset-0 flex flex-col justify-center items-center text-white">
-                            <h1 className="text-2xl lg:text-3xl font-bold mb-1 @3xl:mb-2">Documentation</h1>
+        <ReaderView
+            title="PostHog Docs"
+            hideTitle
+            hideLeftSidebar
+            hideRightSidebar
+            hideMarkdownActions
+            showQuestions={false}
+        >
+            <SEO title="PostHog Docs" />
+            {/* not-prose: ReaderView wraps children in prose, which would restyle every link here. */}
+            <div className="@container/docs not-prose pb-12">
+                {/* No divider: the panels below already read as a separate band. */}
+                <header>
+                    <div className="pb-6">
+                        <h1 className="m-0 text-3xl font-bold !leading-tight @xl/docs:text-4xl">PostHog Docs</h1>
+                        <div className="mt-3 flex flex-col items-start gap-3 @lg/docs:flex-row @lg/docs:items-center @lg/docs:justify-between">
+                            <p className="m-0 max-w-2xl flex-1 text-[15px] leading-relaxed text-secondary @xl/docs:text-base">
+                                References for every app and product, and use case guides to help you succeed.
+                            </p>
+                            <div className="w-full @lg/docs:w-auto @lg/docs:shrink-0">
+                                <OSButton
+                                    type="button"
+                                    variant="secondary"
+                                    size="md"
+                                    width="full"
+                                    icon={<Icons.IconSearch />}
+                                    aria-label="Search docs"
+                                    onClick={() => openSearch('docs')}
+                                >
+                                    Search the docs
+                                </OSButton>
+                            </div>
                         </div>
                     </div>
-                </section>
-                <div className={`flex @4xl:flex-row flex-col gap-4 @4xl:gap-8 h-full py-2 @xl:py-4 px-2 @xl:px-4`}>
-                    <section className="flex-1">
-                        <SearchUI
-                            initialFilter="docs"
-                            hideFilters
-                            isRefinedClassName="bg-white"
-                            className={`mb-4 ${
-                                websiteMode ? 'border border-primary rounded overflow-hidden [&_input]:bg-white' : ''
-                            }`}
-                            autoFocus={false}
-                        />
-                        <div className="@md:-ml-3">
-                            {accordionItems.map((item, index) => (
-                                <Accordion
-                                    key={index}
-                                    skin={false}
-                                    triggerClassName="flex-row-reverse [&>svg]:!-rotate-90 [&[data-state=open]>svg]:!rotate-0 [&>span]:relative [&>span]:after:absolute [&>span]:after:right-0 [&>span]:after:top-1/2 [&>span]:after:h-px [&>span]:after:w-full [&>span]:after:bg-border [&>span]:after:content-['']"
-                                    defaultValue={item.value}
-                                    items={[item]}
-                                />
-                            ))}
+                </header>
+
+                <div className="flex flex-col gap-4 @3xl/docs:flex-row @3xl/docs:gap-6">
+                    <div className="flex flex-1 flex-col gap-4 @3xl/docs:w-2/3">
+                        {/* The tab pattern flattened: grouping stays, nothing hides behind a click. */}
+                        <div className="grid grid-cols-1 gap-4 @lg/docs:grid-cols-2">
+                            <Panel eyebrow="Get started" description="Install PostHog and send your first event.">
+                                <div className="flex flex-col gap-2.5">
+                                    {pathCards.map((card) => (
+                                        <IconLink key={card.name} to={card.url} color={card.color} icon={card.icon}>
+                                            {card.name}
+                                            <span className="block text-sm font-normal text-secondary">
+                                                {card.description}
+                                            </span>
+                                        </IconLink>
+                                    ))}
+                                </div>
+                            </Panel>
+
+                            {/* Not products, so `AppsList` misses them – this is their only entry point. */}
+                            <Panel eyebrow="Apps" description="Where you use PostHog from.">
+                                <div className="grid grid-cols-1 gap-2.5 @xs:grid-cols-2 @lg/docs:grid-cols-1">
+                                    {surfaces.map((surface) => (
+                                        <IconLink
+                                            key={surface.name}
+                                            to={surface.url}
+                                            color={surface.color}
+                                            icon={surface.icon}
+                                        >
+                                            {surface.name}
+                                        </IconLink>
+                                    ))}
+                                </div>
+                            </Panel>
                         </div>
-                    </section>
 
-                    <aside className="@4xl:max-w-xs text-sm">
-                        <h6 className="text-lg">About our docs</h6>
-                        <p>There are a few ways to explore our docs:</p>
-                        <p>
-                            <strong className="text-base">On our website</strong> (You are here)
-                        </p>
-                        <p>
-                            <AskMax linkOnly className="underline font-medium">
-                                Ask PostHog AI
-                            </AskMax>
-                            , our trusty AI chatbot. Start a chat on any docs page and PostHog AI will have the relevant
-                            context.
-                        </p>
-                        <p>
-                            Search with the <IconSearch className="size-4 inline-block" /> icon at the top right.
-                        </p>
-                        <p>
-                            You can also ask a question at the end of each docs article. They get cross-posted to our{' '}
-                            <Link to="/questions" className="underline font-medium" state={{ newWindow: true }}>
-                                community forums
+                        <Panel eyebrow="Products" description="What PostHog does – reference docs for every product.">
+                            <AppsList />
+                            <h3 className="m-0 mb-3 text-sm font-bold uppercase tracking-wide text-primary">
+                                Libraries &amp; integrations
+                            </h3>
+                            <div className="grid grid-cols-1 gap-2.5 @xs:grid-cols-3">
+                                {sdkSections.map((section) => (
+                                    <IconLink
+                                        key={section.url}
+                                        to={section.url}
+                                        color={section.color}
+                                        icon={section.icon}
+                                    >
+                                        {section.name}
+                                    </IconLink>
+                                ))}
+                            </div>
+                        </Panel>
+                    </div>
+
+                    {/* The library: the same volumes as /pocket-guides, as spines. */}
+                    <aside className="@3xl/docs:w-1/3 shrink-0">
+                        <Panel eyebrow="Guides" description="Guides for the human reader on the go.">
+                            <BookShelf>
+                                {volumes.map((volume) => (
+                                    <Book key={volume.id} volume={volume} count={guideCounts[volume.id] ?? 0} />
+                                ))}
+                            </BookShelf>
+                            <Link
+                                to="/pocket-guides"
+                                state={{ newWindow: true }}
+                                className="mt-4 inline-block text-sm font-semibold text-primary hover:underline"
+                                onClick={() =>
+                                    posthog?.capture('pocket_guide_interaction', {
+                                        kind: 'shelf_link_click',
+                                        placement: 'docs_index',
+                                    })
+                                }
+                            >
+                                All guides &rarr;
                             </Link>
-                            .
-                        </p>
-                        <p>
-                            <strong className="text-base">In the product</strong>
-                        </p>
-                        <p>Look for tooltips that link to docs - they open right inside the product.</p>
-                        <p>Ask PostHog AI in the product.</p>
-
-                        <hr className="my-4" />
-
-                        <h6 className="text-lg">Feedback</h6>
-
-                        <p>
-                            Our docs are perpetually a work in progress. The
-                            <SmallTeam slug="content" /> is responsible for what you see here.
-                        </p>
-                        <p>
-                            At the end of each page, you can provide feedback about what was (or wasn't) helpful. We
-                            read all feedback.
-                        </p>
+                        </Panel>
                     </aside>
                 </div>
-            </ScrollArea>
-        </div>
+            </div>
+        </ReaderView>
     )
 }
 

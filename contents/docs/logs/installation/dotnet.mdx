@@ -1,0 +1,155 @@
+---
+title: .NET Logs installation
+platformLogo: dotnet
+showStepsToc: true
+---
+
+import { Steps, Step } from 'components/Docs/Steps'
+import LogsNextSteps from './_snippets/logs-next-steps.mdx'
+
+<Steps>
+
+<Step title="Install OpenTelemetry packages" badge="required">
+
+For the complete SDK reference, see the [OpenTelemetry .NET docs](https://opentelemetry.io/docs/languages/dotnet/).
+
+```bash
+dotnet add package OpenTelemetry
+dotnet add package OpenTelemetry.Exporter.OpenTelemetryProtocol
+dotnet add package OpenTelemetry.Extensions.Hosting
+```
+
+`OpenTelemetry.Extensions.Hosting` wires OpenTelemetry into the host builder. For a plain console app that builds its own `LoggerFactory`, you can leave it out.
+
+</Step>
+
+<Step title="Get your project token" badge="required">
+
+You'll need your PostHog project token to authenticate log requests. This is the same key you use for capturing events and exceptions with the PostHog SDK.
+
+> **Important:** Use your **project token** which starts with `phc_`. Do **not** use a personal API key (which starts with `phx_`).
+
+You can find your project token in [Project settings](https://app.posthog.com/settings).
+
+</Step>
+
+<Step title="Configure the SDK" badge="required">
+
+Point the OpenTelemetry logging provider at PostHog. This attaches to the standard `ILogger` pipeline, so anything already logging through `ILogger` is exported without changing your call sites.
+
+```csharp
+using OpenTelemetry;
+using OpenTelemetry.Exporter;
+using OpenTelemetry.Logs;
+using OpenTelemetry.Resources;
+
+var builder = WebApplication.CreateBuilder(args);
+
+builder.Logging.AddOpenTelemetry(logging =>
+{
+    logging.SetResourceBuilder(ResourceBuilder.CreateDefault().AddService("my-service"));
+
+    // send the rendered message as the log body, and export scope values as attributes
+    logging.IncludeFormattedMessage = true;
+    logging.IncludeScopes = true;
+
+    logging.AddOtlpExporter(options =>
+    {
+        options.Endpoint = new Uri("<ph_client_api_host>/i/v1/logs");
+        options.Protocol = OtlpExportProtocol.HttpProtobuf;
+        options.Headers = "Authorization=Bearer <ph_project_token>";
+    });
+});
+```
+
+> **Note:** With `HttpProtobuf`, the `Endpoint` is used as-is, so include the full `/i/v1/logs` path. Don't use the base `OTEL_EXPORTER_OTLP_ENDPOINT` variable, which appends its own `/v1/logs`.
+
+Alternatively, configure the exporter with environment variables and call `AddOtlpExporter()` with no arguments:
+
+```bash
+OTEL_EXPORTER_OTLP_LOGS_ENDPOINT="<ph_client_api_host>/i/v1/logs"
+OTEL_EXPORTER_OTLP_LOGS_HEADERS="Authorization=Bearer <ph_project_token>"
+OTEL_EXPORTER_OTLP_LOGS_PROTOCOL="http/protobuf"
+OTEL_SERVICE_NAME="my-service"
+```
+
+You can also pass the project token as a query parameter instead of a header, though it will then appear in proxy and CDN access logs:
+
+```csharp
+options.Endpoint = new Uri("<ph_client_api_host>/i/v1/logs?token=<ph_project_token>");
+```
+
+For a console app or any process without a host builder, create the logger factory directly and keep it alive for the lifetime of the process — disposing it flushes pending logs:
+
+```csharp
+using var loggerFactory = LoggerFactory.Create(builder =>
+{
+    builder.AddOpenTelemetry(logging =>
+    {
+        logging.IncludeFormattedMessage = true;
+        logging.AddOtlpExporter(options =>
+        {
+            options.Endpoint = new Uri("<ph_client_api_host>/i/v1/logs");
+            options.Protocol = OtlpExportProtocol.HttpProtobuf;
+            options.Headers = "Authorization=Bearer <ph_project_token>";
+        });
+    });
+});
+
+var logger = loggerFactory.CreateLogger<Program>();
+```
+
+</Step>
+
+<Step title="Use ILogger" badge="required">
+
+Log through `ILogger` as usual. Message template placeholders become searchable attributes, so pass structured values as parameters rather than interpolating them into the string:
+
+```csharp
+public class CheckoutService(ILogger<CheckoutService> logger)
+{
+    public void Complete(string userId, string orderId)
+    {
+        logger.LogInformation("User action {UserId} {Action}", userId, "login");
+        logger.LogWarning("Deprecated API used {Endpoint}", "/old-api");
+        logger.LogError("Database connection failed {Error}", "Connection timeout");
+    }
+}
+```
+
+> **Important:** `logger.LogInformation($"User {userId} logged in")` produces a different message body on every call and no attributes. Use the template form above instead.
+
+To link logs to a person and their session replay, add the identifiers as a scope. These keys are matched exactly, so `posthog_distinct_id` and other snake_case variants won't link:
+
+```csharp
+using (logger.BeginScope(new Dictionary<string, object>
+{
+    ["posthogDistinctId"] = userId,
+    ["sessionId"] = sessionId,
+}))
+{
+    logger.LogInformation("Checkout completed {OrderId}", orderId);
+}
+```
+
+Scope values are only exported when `IncludeScopes = true` is set, as in the configuration above.
+
+</Step>
+
+<Step title="Test your setup" badge="recommended">
+
+Once everything is configured, test that logs are flowing into PostHog:
+
+1. Send a test log from your application
+2. Check the PostHog Logs interface for your log entries
+3. Verify the logs appear in your project
+
+<CallToAction type="primary" to="https://app.posthog.com/logs">
+View your logs in PostHog
+</CallToAction>
+
+</Step>
+
+<LogsNextSteps />
+
+</Steps>

@@ -103,8 +103,6 @@ At the time of writing, [we are 37 people](/people), only 11 of whom are in Go T
 
 ![company composition](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/hubs/how-we-designed-our-company-for-speed/posthog-team.png)
 
-We don't do outbound sales, our <SmallTeam slug="marketing" /> is very small, we only have one product manager, and our <SmallTeam slug="blitzscale" /> is only 3 people. These things are all by design.
-
 We're product-led because our ideal users, engineers, want to try something rather than sit on a call.
 
 ## 6. No meeting Tuesdays and Thursdays
@@ -133,7 +131,7 @@ Raising money does let you build more stuff, but whether you should is very ques
 
 ## 9. Trust and feedback over process
 
-This is one of [our values](/handbook/company/values). It's simply up to the person building in most situations. Building and scaling something people want is a nuanced problem, so we let people use their judgement. When they get it wrong, we are direct and give feedback.
+This is one of [our values](/handbook/values). It's simply up to the person building in most situations. Building and scaling something people want is a nuanced problem, so we let people use their judgement. When they get it wrong, we are direct and give feedback.
 
 To quote one of our team: "process is scar tissue" – it often overcorrects, but because [humans are risk-adverse](https://www.adamjuliangoldstein.com/blog/anxiety-algorithm/) it feels natural to implement it when a company starts growing. Humans overcorrect by default. That's why large corporations are (in more cases than not) irrationally-obstructive to getting work done.
 

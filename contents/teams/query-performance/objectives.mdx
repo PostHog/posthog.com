@@ -1,26 +1,44 @@
-### Q2 2026 objectives
+### Q3 2026 objectives
 
-#### Query performance Improvements <TeamMember name="Robbie Coomber" photo />
+#### Improve AI query writing <TeamMember name="Andy Zhao" photo />
 
-Query performance across the app needs to improve to support our largest customers.
+- Measure how performant and correct AI queries are
+- Improve the AI context when writing HogQL
 
-- Finish backfilling sessions v3 on the new cluster
-- Fix the gaps in our query tagging
-- Ensure that new teams are created with an internal/test user cohort and help big customers migrate onto this
-- Explore person ID sharding and help other teams use preaggregation
-- Improve custom query performance with DMAT columns / and EAV table <TeamMember name="Sandy Spicer" photo />
-- Improve the query codebase <TeamMember name="Sandy Spicer" photo />
+#### Monitor query regressions across internal teams <TeamMember name="Andy Zhao" photo /> <TeamMember name="Vasco de Krijger" photo />
 
-#### Event schema <TeamMember name="Sandy Spicer" photo />
+- Set up automation that monitors PRs into the PostHog repo, flagging any suboptimal queries
+- Set up automatic auto research
 
-Continue improving this feature
+#### Improve the developer experience of query changes <TeamMember name="Sandy Spicer" photo />
 
-- Add support for blocking events that don't match the schema
+- PR gate on having an experiment log on the test cluster
+- Think about how we can be more confident in HogQL transformations
 
-#### Event schema <TeamMember name="Andy Zhao" photo />
+#### Protect against small customers using a significant % of our ClickHouse compute <TeamMember name="Mike Warren" photo /> <TeamMember name="Andy Zhao" photo />
 
-The taxonomy filter contributes to posthog feeling slow, and we can also help out posthog-ai by keeping the taxonomy recent, accurate, and fast
+- What should the limits be? Part of packages? <TeamMember name="Mike Warren" photo />
+- Rate limiting based on cost of queries rather than number of queries, scaled for bigger customers <TeamMember name="Andy Zhao" photo />
 
-- Expand properties-rs to capture property values as well as property names
-- Ensure that posthog-ai has access to a good quality taxonomy
+#### Make PostHog proactive for analytics users <TeamMember name="Vasco de Krijger" photo />
 
+- Help users to figure out what is relevant to them at a glance / help users to figure out what to best build next
+- Forecast alerts
+- Further enhance prompt subscriptions
+- Allow pre-prompted code agents / tasks to fire as a result of an alert trigger
+- Further build out the brainstormed ideas from the Product Analytics team regarding proactive scouts
+
+#### Cross product integration <TeamMember name="Matt Pua" photo />
+
+- Automatically create a dashboard with the relevant metrics about your feature when developing with PostHog Desktop (or sell this as a GH action, which uses the MCP under the hood with widgets?)
+- Increase number of widgets available to cover most product areas
+- Help increase number of products activated per org
+
+#### Signal + PHC integration: first class citizens | subs + alerts <TeamMember name="Matt Pua" photo />
+
+- Integrate alerts + subscription as signal sources
+
+#### Shared team objective: Support the ClickHouse team in their endeavors
+
+- Delete the legacy ClickHouse non-HogQL Endpoints, or redirect to HogQL <TeamMember name="Sandy Spicer" photo />
+- Help ship the JSON column <TeamMember name="Sandy Spicer" photo />

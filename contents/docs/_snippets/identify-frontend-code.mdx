@@ -34,9 +34,10 @@ posthog.identify('distinct_id', { // Replace "distinct_id" with your user's uniq
 await Posthog().identify(
   userId: 'distinct_id', // Replace "distinct_id" with your user's unique identifier
   userProperties: {
-    email: "max@hedgehogmail.com", // optional: set additional person properties
-    name: "Max Hedgehog"
-});
+    'email': 'max@hedgehogmail.com', // optional: set additional person properties
+    'name': 'Max Hedgehog',
+  },
+);
 ```
 
 </MultiLanguage>

@@ -1,0 +1,121 @@
+---
+title: MCP SDK v2
+---
+
+import CalloutBox from 'components/Docs/CalloutBox'
+
+The MCP TypeScript SDK has two majors. `@posthog/mcp` detects and supports both at runtime. Neither MCP SDK major is bundled with the package. The [Python SDK](#python) also supports both majors.
+
+| Your imports | Major | Protocol revisions it serves |
+| --- | --- | --- |
+| `@modelcontextprotocol/sdk` | **v1** | `2025-11-25` and earlier |
+| `@modelcontextprotocol/core`, `/server`, `/client` | **v2** | `2025-11-25` and `2026-07-28` |
+
+## Setup
+
+Use the same `instrument()` call as v1. Import `McpServer` from the v2 package. Use `registerTool()` because v2 removes `server.tool()`:
+
+```ts
+import { McpServer } from "@modelcontextprotocol/server"
+import { PostHog } from "posthog-node"
+import { instrument } from "@posthog/mcp"
+
+const server = new McpServer({ name: "my-mcp-server", version: "1.0.0" })
+const posthog = new PostHog(process.env.POSTHOG_PROJECT_TOKEN)
+
+instrument(server, posthog)
+
+server.registerTool("search_events", { /* ... */ }, async (args) => { /* ... */ })
+```
+
+Model capture and conversation IDs are enabled by default. The low-level `Server` uses the same `instrument(server, posthog)` call.
+
+## If your callbacks read headers, change them
+
+<CalloutBox icon="IconWarning" title="This fails silently" type="caution">
+
+v1 stores headers at `extra.requestInfo.headers`. v2 stores a WHATWG `Request` at `extra.http.req`. Read its headers with `.get()`. Using the v1 location on v2 returns `undefined`. This can make `identify()` return `null` and send anonymous events without an error.
+
+</CalloutBox>
+
+Use the exported helper in `identify`, `intentFallback`, and `eventProperties`. It handles both majors and returns an object with lowercase keys. `beforeSend` receives the built event without request context:
+
+```ts
+import { instrument, getRequestHeaders } from "@posthog/mcp"
+
+instrument(server, posthog, {
+  identify: async (request, extra) => {
+    const token = getRequestHeaders(extra)?.["authorization"]
+    return token ? { distinctId: await resolveUserId(token) } : null
+  },
+})
+```
+
+## Python
+
+The [Python SDK](/docs/mcp-analytics/installation#python) supports both official `mcp` majors (`mcp>=1.26,<3`) and detects them at runtime. On 2.x, `FastMCP` was renamed – the `instrument()` call stays the same:
+
+```python
+from mcp.server.mcpserver import MCPServer
+from posthog.mcp import instrument
+
+server = MCPServer("my-server")
+instrument(server, posthog)
+```
+
+The low-level `Server` works on both majors. jlowin's standalone `fastmcp` package pins `mcp<2`, so it stays on the 1.x adapter path.
+
+Python also provides different request context shapes on each major. Use the exported helper in `identify`, `intent_fallback`, and `event_properties`. It returns a dictionary with lowercase keys on HTTP transports. It returns `None` on stdio and never raises:
+
+```python
+from posthog.mcp import get_request_headers
+
+def identify(request, extra):
+    headers = get_request_headers(extra) or {}
+    return resolve_user(headers.get("authorization"))
+```
+
+Python uses the same defaults. Both SDKs derive the same session ID from the same echoed conversation handle.
+
+## Sessions on `2026-07-28`
+
+That revision removed the `initialize` handshake and the `Mcp-Session-Id` header, so the [stateless session token](/docs/mcp-analytics/installation#stateless-and-multi-pod-servers) doesn't apply. Use a conversation handle to correlate requests:
+
+- **[Conversation IDs](/docs/mcp-analytics/conversation-id)** – enabled by default in both SDKs. The SDK injects a `conversation_id` parameter and returns a handle in eligible tool results. Calls share a `$session_id` when the agent echoes that handle. Clients that ignore it can still produce a separate session per request.
+- **[`identify`](/docs/mcp-analytics/identifying-users)** – attributes calls to a person via `distinct_id`. Use it for user-level grouping. It does not provide a `$session_id`.
+
+The protocol revision belongs to each request. A v2 server also serves `2025-11-25` traffic, which most clients still negotiate.
+
+<CalloutBox icon="IconInfo" title="Missing client name on 2025-11-25 traffic?" type="fyi">
+
+On `2025-11-25`, the client sends its name and version only at `initialize`. For servers that create an instance per request, the SDK uses a session token. The transport must write response headers after the handler runs to send this token.
+
+`@rekog/mcp-nest` supports this with `enableJsonResponse: true`. The legacy path in `createMcpHandler` does not. On that path, expect `$mcp_client_name` and `$mcp_client_version` to be absent. `$mcp_protocol_version` remains available.
+
+</CalloutBox>
+
+## Capture model identity on both revisions
+
+Both SDKs capture model identity on `2025-11-25` and `2026-07-28`. Recognized client metadata takes priority over the agent's self-reported `llm_model` argument. `$mcp_llm_model_source` records `"client_metadata"` or `"self_reported"`.
+
+Both sources are unverified. See [model capture](/docs/mcp-analytics/installation#capture-the-calling-model) for defaults, opt-outs, and the Python standalone FastMCP limitation.
+
+## MCP Apps
+
+`@posthog/mcp` preserves MCP App tool metadata, `ui://` resources, structured tool output, result metadata, HTML, and content security policy metadata on both supported revisions. On the tested high-level `McpServer` path, injected `context` and `llm_model` arguments don't reach the App handler.
+
+The SDK captures App tool calls with intent, self-reported model, and protocol version. Resource listing and read requests emit `$mcp_resources_list` and `$mcp_resource_read` on both server paths. Resource payloads pass through unchanged. The SDK never captures a resource read body.
+
+## Not instrumented yet
+
+These gaps apply to the TypeScript and Python SDKs alike.
+
+| `2026-07-28` feature | What you get today |
+| --- | --- |
+| **Tasks** (`io.modelcontextprotocol/tasks`) | A tool returning a task handle records an instant success, so task-based tools look fast and always-succeeding. |
+| **Multi round-trip** (`resultType: "input_required"`) | Each round counts as its own `$mcp_tool_call`, inflating call counts and durations. |
+| `server/discover` | Not captured – no session-start event on this revision. |
+| `Mcp-Method` / `Mcp-Name` headers | Not read. |
+| `clientCapabilities` in `_meta` | Not captured. `clientInfo` and protocol version are. |
+
+Task-based tools and multi-round-trip tools can produce misleading counts and durations. Check these limitations before using their dashboard metrics.

@@ -39,3 +39,9 @@ Non-profits can contact our [sales team](/talk-to-a-human) after signing up to d
 We send billing emails to all owners and administrators in the organization. These are important emails, so we currently don't allow these notification settings to be configured.
 
 If you'd like a specific email address to receive these communications, we recommend inviting that email to your organization and assigning them an administrator role.
+
+## Can someone see usage and spend without being an admin?
+
+By default, billing is only available to organization admins and owners. See our [access control docs](/docs/settings/access-control) for the full list of permissions.
+
+If you want members to see the **Usage** and **Spend** tabs without giving them the rest of billing, [contact support](/questions) and we can enable it for your organization. They get read-only access to usage and spend data for the projects they can already see. They can't change your plan, payment details, or billing limits.

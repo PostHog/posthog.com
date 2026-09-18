@@ -10,7 +10,7 @@ For coverage of other, [non-security incidents](/handbook/engineering/operations
 
 ## Our approach to security advisories
 
-At PostHog, we take security seriously. Not as a checkbox, but with hardware security keys and healthy paranoia. We have a robust security program that includes:
+At PostHog, we take security seriously. We don't treat it as a checkbox, but rather as a core part of our decision making. We have a robust security program that includes:
 
 - Regular security audits, architecture reviews, and penetration testing
 - Automated code and infrastructure as code (IaC) linting
@@ -48,8 +48,129 @@ Currently, there are no active security advisories or CVEs. All is well.
 
 ## Past advisories
 
-<details>
-  <summary>August 15, 2025 / PSA-2025-00001</summary>
+<details id="PSA-2026-00002">
+  <summary>August 21, 2026 / PSA-2026-00002 <AdvisoryAnchor id="PSA-2026-00002" /></summary>
+
+  <p><strong>Date:</strong> August 21, 2026<br />
+  <strong>Advisory:</strong> PSA-2026-00002<br />
+  <strong>Severity:</strong> High<br />
+  <strong>Status:</strong> Fixed</p>
+
+  <p><strong>6 customers were affected and we contacted them directly. If you run a self-hosted <code>nginx</code> (or <code>nginx</code>-family) reverse proxy in front of PostHog, update its configuration as described under Resolution.</strong></p>
+
+  <p>A security researcher found that some customer-hosted reverse proxies were sending PostHog traffic to IP addresses that PostHog no longer used. As some proxies didn't verify the upstream server TLS certificate, whoever hosted an HTTPs server on released IP addresses could read the traffic. The researcher was able to hold a few of those IPs, recorded the traffic that arrived, and reported it to us. We identified 6 affected customers from the recorded data and contacted them. To prevent such cases, we hardened our load balancers with a fixed IP address range, and we updated our reverse proxy documentation to have more secure configurations.</p>
+
+  <h4>Description</h4>
+  <p>Some customers send events to PostHog through a reverse proxy that runs on their own domain. A common setup is an <code>nginx</code> (or <code>nginx</code>-family) server with a <code>proxy_pass</code> directive that points to <code>us.i.posthog.com</code> or <code>eu.i.posthog.com</code>.</p>
+  <p>Events ingestion hosts (<code>us.i.posthog.com</code> and <code>eu.i.posthog.com</code>) resolve to AWS Application Load Balancers (ALBs), which use public IPv4 addresses from a pool that AWS shares between all its customers. As ALB nodes rotate over time, AWS returns its IP address to the shared pool, and another AWS customer can receive it (using an EC2 for example).</p>
+  <p>Two default behaviors of <code>nginx</code> turned this normal rotation into a security problem:</p>
+  <ol>
+    <li>When <code>proxy_pass</code> contains a hostname, <code>nginx</code> resolves that hostname once, at startup and it keeps using the same IP address until it restarts or reloads. A proxy that ran for a long time could send traffic to an IP address that PostHog had released.</li>
+    <li><code>nginx</code> does not verify the upstream TLS certificate by default (<code>proxy_ssl_verify off</code>).</li>
+  </ol>
+  <p>An attacker can launch EC2 instances in the same AWS region until they receive a former ALB address, serve HTTPS on port 443 with a self-signed certificate, and log every request that arrives. If stale proxies keep sending events to that server, the attacker can read the traffic.</p>
+  <p>The researcher did this a few times between July 11 and August 4, 2026, with released EU ALBs addresses, for about one hour each time. They forwarded each request to PostHog and returned our real response, so neither the customer nor PostHog saw anything unusual.</p>
+
+
+  <h4>Affected users</h4>
+  <ul>
+    <li>We identified <strong>6 affected customers</strong> from the traffic the researcher recorded and shared with us. All 6 are on <strong>EU Cloud</strong>. We contacted them directly.</li>
+    <li>Only customers who run a self-hosted reverse proxy that both caches DNS and does not verify the upstream TLS certificate are exposed. This is the default for <code>nginx</code>, ingress-nginx, and tools built on them, including our Railway template.</li>
+    <li>Customers who send traffic to PostHog directly from our SDKs are not affected. Browsers and our SDKs re-resolve DNS and verify TLS certificates.</li>
+    <li>Customers using our <a href="/docs/advanced/proxy#set-up-managed-reverse-proxy">managed reverse proxy</a> were not affected by this.</li>
+  </ul>
+
+  <h4>Resolution</h4>
+  <ul>
+    <li>We moved the load balancers behind event ingestion hosts to a fixed IP address pool. Addresses we release return to our pool, not to the shared AWS pool, so no other AWS customer can receive them. This removes the attack vector for every proxy, including ones that are never updated.</li>
+    <li><strong>Your proxy will stop working if it cached an old address.</strong> As load balancer addresses have changed, a proxy that resolved our hostname at startup will get connection errors until you reload or restart it. This is the safe failure mode. Reload or restart your proxy if you see errors, and apply the configuration below so that it does not happen again.</li>
+    <li>We updated our <a href="/docs/advanced/proxy/nginx">nginx</a> and <a href="/docs/advanced/proxy/kubernetes-ingress-controller">Kubernetes</a> reverse proxy guides and our <a href="/docs/advanced/proxy/railway">Railway</a> template. The new default configuration verifies the upstream TLS certificate and re-resolves our hostname on a short schedule.</li>
+    <li><strong>If you run an <code>nginx</code>-family reverse proxy, update it now.</strong> At minimum:
+      <ul>
+        <li>Enable upstream certificate verification (<code>proxy_ssl_verify on</code>, <code>proxy_ssl_server_name on</code>, and a <code>proxy_ssl_trusted_certificate</code>).</li>
+        <li>Use a <code>resolver</code> with a short <code>valid</code> time, and put the upstream hostname in a variable so <code>nginx</code> re-resolves it instead of caching it at startup.</li>
+      </ul>
+      See the updated guides for a complete configuration.
+    </li>
+  </ul>
+
+  <h4>What we learned</h4>
+  <ul>
+    <li>Configuration snippets that we provide customers must have secure defaults, and we should better understand security aspects that are involved - along with reviewing them regularly. This research had put multiple pieces together, but we should have figured that out before someone pointed it out to us.</li>
+    <li>We should avoid using AWS shared IP pool for highly-important workloads such as event ingestion. TLS verification will prevent most attack vectors on released IPs, but we should have accounted for traffic that would not verify it.</li>
+    <li>The report waited too long in bug bounty triage before it reached our team. We'll improve this.</li>
+  </ul>
+
+  <h4>Timeline</h4>
+  <ul>
+    <li><strong>First capture by the researcher, and report submitted to our bug bounty program:</strong> July 11, 2026</li>
+    <li><strong>Further captures by the researcher:</strong> July 17, July 22 and August 4, 2026</li>
+    <li><strong>Report forwarded to PostHog:</strong> August 18, 2026</li>
+    <li><strong>Root cause confirmed and fix agreed:</strong> August 18, 2026</li>
+    <li><strong>Reverse proxy documentation published:</strong> August 18, 2026</li>
+    <li><strong>EU load balancers moved to a PostHog-owned IP pool:</strong> August 19, 2026</li>
+    <li><strong>US load balancers moved to a PostHog-owned IP pool:</strong> August 20, 2026</li>
+    <li><strong>Affected customers contacted:</strong> August 20, 2026</li>
+    <li><strong>Disclosed:</strong> August 21, 2026</li>
+  </ul>
+
+</details>
+
+<details id="PSA-2026-00001">
+  <summary>June 2, 2026 / PSA-2026-00001 <AdvisoryAnchor id="PSA-2026-00001" /></summary>
+
+  <p><strong>Date:</strong> June 2, 2026<br />
+  <strong>Advisory:</strong> PSA-2026-00001<br />
+  <strong>Severity:</strong> Critical<br />
+  <strong>Status:</strong> Resolved</p>
+
+  <p><strong>No customer data was accessed and no action is required.</strong> Our investigation using AWS CloudTrail and Wiz, together with the researchers' confirmation, found that no customer data was viewed, accessed, or modified, and no customer accounts were affected. The incident exposed our internal production credentials, not customer data, to security researchers and we have rotated those credentials as a precaution.</p>
+
+  <h4>Description</h4>
+  <p>A security researcher exploited a known vulnerability (<a href="https://www.cve.org/CVERecord?id=CVE-2026-7899">CVE-2026-7899</a>) in an outdated version of Chromium that we ran via Playwright to generate heatmaps. This Chromium instance ran without a sandbox, which was a legacy configuration we had planned to change but had not yet enabled. The combination of the outdated version and the missing sandbox allowed the researcher to gain a shell on the Kubernetes pod and read credentials stored in the pod's environment variables.</p>
+  <p>We were alerted when one of the researchers stored the extracted secrets in a private GitHub gist, triggering GitHub's secret-scanning notifications to the affected providers, including AWS. Based on the researchers' confirmation and our own investigation via AWS CloudTrail and Wiz, no customer data was accessed and the vulnerability was not exploited by anyone other than the researchers. The researchers confirmed that their last access to our environment occurred before we began rotating credentials.</p>
+
+  <h4>Affected users</h4>
+  <ul>
+    <li><strong>No customer data was affected.</strong> No customer data was accessed, viewed, or modified, and no customer accounts were compromised. This was confirmed by our investigation using AWS CloudTrail and Wiz, and by the researchers.</li>
+    <li><strong>No customer action is required.</strong> We rotated the most critical credentials immediately, and are completing rotation of the remainder as a precaution.</li>
+    <li>This affected our <strong>US Cloud</strong> environment only. EU Cloud was not affected.</li>
+    <li>The exposure was platform-wide in scope (credentials available to the affected workload), not limited to a specific product.</li>
+  </ul>
+
+  <h4>Resolution</h4>
+  <ul>
+    <li>We immediately began rotating production credentials, starting with the most critical (including AWS).</li>
+    <li>We updated Playwright and Chromium to the latest version.</li>
+    <li>We have begun moving heatmap generation and other uses of Chromium to an external service so that we no longer run Chromium in our own containers.</li>
+    <li>We are exploring additional container hardening, including removing the shell from these containers entirely.</li>
+  </ul>
+
+  <h4>What we learned</h4>
+  <ul>
+    <li>A sandbox would have contained the exploit to the browser process rather than letting it reach the pod and its secrets. We should have closed that known gap sooner.</li>
+    <li>Our initial status update was slower than it should have been because the incident began on a Friday evening, when fewer responders were immediately available. We also lacked a playbook for this specific incident type.</li>
+    <li>Reducing the number of static, long-lived secrets limits the impact of any future exposure. We already use short-lived, automatically-rotated credentials (such as OIDC and IRSA) wherever we can, but many third-party services still only support static API keys. We'd like to see the industry move further toward short-lived credentials.</li>
+    <li>Rotating our secrets is slower and more manual than it should be. We need better documentation of where each secret originates and who is able to rotate it.</li>
+    <li>We need better tooling to propagate rotated secrets into running workloads and trigger a redeploy independently of a normal release, so rotation isn't gated on the deploy process.</li>
+    <li>Automated secret-scanning notifications from our cloud providers were an effective backstop that alerted us quickly.</li>
+  </ul>
+
+  <h4>Timeline</h4>
+  <ul>
+    <li><strong>Secret-scanning alert received:</strong> May 29, 2026, 23:55 UTC</li>
+    <li><strong>Incident declared:</strong> May 30, 2026, 00:08 UTC</li>
+    <li><strong>Outreach to researcher:</strong> May 30, 2026, 00:16 UTC</li>
+    <li><strong>Began rotating credentials:</strong> May 30, 2026, 00:24 UTC</li>
+    <li><strong>Initial status page update published:</strong> May 30, 2026, 01:04 UTC</li>
+    <li><strong>Researcher confirmed exploit path:</strong> May 30, 2026, 01:37 UTC</li>
+    <li><strong>Initial fix deployed (Chromium/Playwright update):</strong> May 30, 2026, 02:40 UTC</li>
+  </ul>
+
+</details>
+
+<details id="PSA-2025-00001">
+  <summary>August 15, 2025 / PSA-2025-00001 <AdvisoryAnchor id="PSA-2025-00001" /></summary>
 
   <p><strong>Date:</strong> August 15, 2025<br />
   <strong>Advisory:</strong> PSA-2025-00001<br />
@@ -91,7 +212,12 @@ Currently, there are no active security advisories or CVEs. All is well.
 
 ### Advisory template
 
+Use the advisory code as the `<details>` `id` (and the matching `<AdvisoryAnchor>` `id`) so it can be linked directly. Linking to the anchor (e.g. `/handbook/company/security-advisories#PSA-2025-XXXXX`) auto-expands the advisory.
+
 ```
+<details id="PSA-2025-XXXXX">
+  <summary>August 15, 2025 / PSA-2025-XXXXX <AdvisoryAnchor id="PSA-2025-XXXXX" /></summary>
+
   <p><strong>Date:</strong> August 15, 2025<br />
   <strong>Advisory:</strong> PSA-2025-XXXXX<br />
   <strong>Severity:</strong> Low / Medium / Critical<br />
@@ -120,6 +246,8 @@ Currently, there are no active security advisories or CVEs. All is well.
     <li><strong>Fixed:</strong> January 10, 2024, 00:00 UTC</li>
     <li><strong>Disclosed:</strong> January 10, 2024, 00:00 UTC</li>
   </ul>
+
+</details>
 ```
 
 
