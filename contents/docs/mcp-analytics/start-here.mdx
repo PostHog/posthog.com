@@ -76,7 +76,9 @@ icon="IconGraph"
 
 Run your MCP server and connect an agent to it (Claude Desktop, Cursor, Codex, or your own). Within seconds of the first tool call, PostHog receives `$mcp_tool_call` and `$mcp_tools_list` events. Clients using the `2025-11-25` revision also produce `$mcp_initialize`. The handshake-free `2026-07-28` revision doesn't have an initialize event.
 
-Open the [activity feed](https://us.posthog.com/project/2/activity) and filter for `event = $mcp_tool_call`. You should see one row per agent tool invocation, each with `$mcp_tool_name`, `$mcp_parameters`, `$mcp_response`, `$mcp_duration_ms`, and `$mcp_is_error`.
+Select the PostHog project you configured, open its activity feed, and filter for `event = $mcp_tool_call`.
+Confirm that the event came from the tool and server you just called.
+You should see one row per agent tool invocation, each with `$mcp_tool_name`, `$mcp_parameters`, `$mcp_response`, `$mcp_duration_ms`, and `$mcp_is_error`.
 
 <ProductScreenshot
 imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/mcp_activity_feed_light_197cb57f3c.png"
