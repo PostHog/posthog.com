@@ -9,6 +9,7 @@
 -   Help users discover and adopt more capabilities after their first useful report.
 -   Help users activate later in the user journey when they have data.
 -   Experiment with report access without GitHub. In this experiment, require a repository connection only for work that needs code access.
+-   Scouts on by default: every project has the canonical scouts and project-specific suggestions waiting, so turning one on is the whole journey – Andy.
 
 #### Help committed users turn reports into completed work - Dylan
 
@@ -29,11 +30,12 @@
 
 -   Improve report quality across signals and scouts.
 -   Tailor reports across signals and scouts to our target ICPs and personas.
+-   Measure scout report quality as a number: online judge scouts that score a sample of reports, plus an offline eval suite. Compare a model, prompt, or skill change without a manual multi-hour experiment – Andy, Alex.
 
 ### Make Self-Driving pricing clear and sustainable
 
 -   Ship new pricing – Olly.
--   Ship credit-based pricing for Scouts (???).
+-   Ship credit-based pricing for scout runs, so run caps go away and users decide how many scouts to run and how often. Decide the sellable unit (run, report, or PR) first, and experiment with bring-your-own-key as the release valve – Andy, Olly.
 -   Figure out better cost controls for customers around different Self-Driving steps (signals, scouts, research, implementation, review, monitoring) – Olly.
 -   Find opportunities for optimizing the margin (flex tier, better suited models, negotiated discounts) – shared.
 -   Switch ReviewHog to usage-based pricing – Alex.
@@ -49,13 +51,14 @@
 
 -   Let users customize their pipeline with automations in PostHog.
 -   Let users enable ReviewHog for Self-Driving PRs – Alex.
--   Let users configure personalize scouts (???, check with Andy)
+-   Personal scouts: a scout owned by one person, watching their own work, delivering only to them (Slack DM first), with its own noise budget – Andy.
 -   Make Self-Driving act on feedback: use corrections, context layer, report discussions, and dismissal reasons to improve future research, reports, and implementation, so users don’t have to repeat the same instructions (ambient customization and steerability).
 -   Give users control through settings, prompts, and skills (active customization).
 
 ### Make Self-Driving self-organize and orchestrate itself
 
 -   Let Self-Driving orchestrate scouts and signal sources.
+-   Scouts that act, opt-in per scout: a proposed action on the report with accept/reject, then actions inside PostHog (maintain dashboards, alerts, insights), then external actions through connected MCP servers, gated by per-scout write scopes and tool allow/deny lists – Andy.
 -   Let Scouts self-improve themselves (without the need to manually run 10h+ experiments for model/effort change, manually create scouts-to-look-over-scout, and so on) – Alex.
 
 ### Experiment with building features
@@ -74,6 +77,8 @@
 -   Making implementation better.
 -   Last mile: Getting ReviewHog to the next level (visual reviews, etc)
 -   Autoresearch
+-   Scouts as a system: a scout schedules its own follow-up run, one-off scouts, and event-triggered scouts that share one trigger primitive with workflows.
+-   Scouts as a platform: other products build on scouts (Replay Vision digests are the first case), scout templates, and publishing scouts to the skills marketplace.
 
 ## Anti-goals
 
