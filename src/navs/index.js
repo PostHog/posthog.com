@@ -4189,12 +4189,30 @@ export const docsMenu = {
                             url: '/docs/settings/approvals',
                         },
                         {
-                            name: 'SSO, SAML, & SCIM',
-                            url: '/docs/settings/sso',
-                        },
-                        {
-                            name: 'ID-JAG (XAA)',
-                            url: '/docs/settings/id-jag',
+                            name: 'Authentication',
+                            url: '/docs/settings/authentication/sso',
+                            children: [
+                                {
+                                    name: 'SSO',
+                                    url: '/docs/settings/authentication/sso',
+                                },
+                                {
+                                    name: 'SAML',
+                                    url: '/docs/settings/authentication/saml',
+                                },
+                                {
+                                    name: 'SCIM',
+                                    url: '/docs/settings/authentication/scim',
+                                },
+                                {
+                                    name: 'OIDC',
+                                    url: '/docs/settings/authentication/oidc',
+                                },
+                                {
+                                    name: 'ID-JAG (XAA)',
+                                    url: '/docs/settings/authentication/id-jag',
+                                },
+                            ],
                         },
                         {
                             name: 'Agent discovery (auth.md)',

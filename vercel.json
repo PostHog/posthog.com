@@ -2898,7 +2898,7 @@
         },
         {
             "source": "/manual/sso",
-            "destination": "/docs/settings/sso"
+            "destination": "/docs/settings/authentication/sso"
         },
         {
             "source": "/manual/support",
@@ -5011,7 +5011,7 @@
         },
         {
             "source": "/docs/data/sso:ext(\\.md)?",
-            "destination": "/docs/settings/sso:ext?"
+            "destination": "/docs/settings/authentication/sso:ext?"
         },
         {
             "source": "/docs/ab-testing:ext(\\.md)?",
@@ -6399,6 +6399,14 @@
             "source": "/contact-us",
             "destination": "/talk-to-a-human",
             "statusCode": 301
+        },
+        {
+            "source": "/docs/settings/sso:ext(\\.md)?",
+            "destination": "/docs/settings/authentication/sso:ext?"
+        },
+        {
+            "source": "/docs/settings/id-jag:ext(\\.md)?",
+            "destination": "/docs/settings/authentication/id-jag:ext?"
         }
     ]
 }
