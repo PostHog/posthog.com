@@ -45,7 +45,7 @@ The structure outlined on this page should be treated as a guideline & should be
 
 - General customer questions (whoever sees it first)
 - Implementation reviews
-- Retention (TAMs are not off the hook here - understanding health is a prerequisite for cross-selling and not something to be delegate do the CSM)
+- Retention (TAMs are not off the hook here - understanding health is a prerequisite for cross-selling and not something to be delegated to the CSM)
 - Renewal process
 
 <details>
@@ -126,7 +126,7 @@ If you're stuck, bring your team leads in early. Both of you care about the cust
 
 ## **Kicking off the overlay**
 
-When a TAM joins an account, or a CSM gets added to one that already has a TAM, use this list as a guide on how to kick things off strongly. Especially for larger/strategic accounts, try to adhere to it as much as possible, but the the first three need to be followed regardless of account size:
+When a TAM joins an account, or a CSM gets added to one that already has a TAM, use this list as a guide on how to kick things off strongly. Especially for larger/strategic accounts, try to adhere to it as much as possible, but the first three need to be followed regardless of account size:
 
 - [ ] Internal Slack channel created (`#customer-[customer_name]-internal`). Invite your counterpart and both the team leads. Add the FDE if they're doing active work on the account, and the PostHog Slack bot (`@PostHog`) so you can both dig into account data without leaving the channel
 - [ ] Your counterpart added to the external Slack channel (`#posthog-[customer_name]`) with a proper introduction
@@ -141,7 +141,7 @@ The internal channel replaces DMs about the account, and you're both responsible
 
 ### **Get current on the account**
 
-### If you're new and your counterpart has the relationship
+#### If you're new and your counterpart has the relationship
 
 Gather as much context as you can before jumping in with questions. Share what you find, and let the gaps guide what you ask.
 
@@ -163,7 +163,7 @@ Ideally, you come up with a recommendation for a first action item to share with
 
 **Your goal**: create value fast while learning as much as you can about your customers' business & usage, so you can start building rapport immediately with them.
 
-### If you're the one with the relationship
+#### If you're the one with the relationship
 
 Share whatever's top of mind in the internal channel as a starting point. If there's context a quick call would convey better than the paper trail, do that.
 
