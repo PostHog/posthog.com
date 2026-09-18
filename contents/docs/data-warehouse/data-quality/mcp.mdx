@@ -1,0 +1,164 @@
+---
+title: Data quality MCP and SQL reference
+sidebar: Docs
+showTitle: true
+---
+
+import { CalloutBox } from 'components/Docs/CalloutBox'
+
+<CalloutBox icon="IconFlask" title="Data quality is in alpha" type="action">
+
+Data quality isn't available to every project. [Contact support](https://app.posthog.com/home#supportModal) to request access or share feedback.
+
+</CalloutBox>
+
+Use the [PostHog MCP server](/docs/model-context-protocol) to discover subjects, create and manage checks, start runs, read results, and change schedules. Use the data quality information-schema tables to list existing coverage and analyze recent outcomes with SQL.
+
+## Permissions and scopes
+
+Every data quality operation requires query access. You also need access to the subject and every other subject that the check reads.
+
+- Read operations require viewer access to the subject.
+- Creating, updating, deleting, or running a check requires editor access to its subject.
+- Updating a schedule requires editor access to the scheduled subject.
+- A `relationships` check also requires access to its target.
+- A `custom_sql` check requires access to every table or view selected by the query.
+- Metric checks require Data Catalog access. Table, view, and PostHog-table checks require warehouse object access.
+
+For a personal API key, include `query:read` and the matching subject scope. Use `warehouse_objects:read` or `warehouse_objects:write` for warehouse subjects, and `data_catalog:read` or `data_catalog:write` for metrics.
+
+PostHog filters subject discovery, definitions, results, health, and notifications with the same access rules. A subject that you can't read doesn't appear as a partial or redacted row.
+
+## Unified MCP tools
+
+The data quality MCP surface has eight enabled tools. These tools work across tables, views, metrics, and PostHog tables, so you don't need a subject-specific tool name.
+
+| Tool | Use it to |
+| --- | --- |
+| `data-quality-subjects` | List subjects you can read, their IDs, columns, time columns, and whether you can edit them. |
+| `data-quality-check-types` | List supported check types and their configuration schemas. Pass `subject_type` to narrow the result. |
+| `data-quality-check-create` | Create a check or return an existing check with the same subject and assertion. |
+| `data-quality-check-update` | Change a check's definition or presentation without changing its subject or history. |
+| `data-quality-check-run` | Start one check and return its suite run. |
+| `data-quality-check-results` | Read the check's recent executions, counts, errors, and compiled diagnostic queries. |
+| `data-quality-check-schedule` | Update the schedule for a metric or PostHog table. |
+| `data-quality-check-delete` | Soft-delete a check while keeping its run history queryable. |
+
+## Create and run a check
+
+Start with subject discovery instead of guessing an ID:
+
+1. Call `data-quality-subjects`.
+2. Find the subject and copy its `subject_type` and `id`.
+3. Call `data-quality-check-types` with the subject type.
+4. Query `system.information_schema.data_quality_checks` to avoid creating overlapping coverage.
+5. Call `data-quality-check-create`.
+
+For example, create an error-severity check on `orders.customer_id`:
+
+```json
+{
+  "subject_type": "table",
+  "subject_uuid": "<orders subject id>",
+  "check_type": "not_null",
+  "column_name": "customer_id",
+  "config": {},
+  "name": "orders_customer_id_not_null",
+  "description": "Every order must belong to a customer",
+  "severity": "error"
+}
+```
+
+The create tool is idempotent for the same subject and assertion. A near-duplicate with different configuration creates separate coverage, so inspect existing checks first.
+
+Call `data-quality-check-run` with the returned check `id`. The tool returns a suite run before the individual check finishes. Poll `data-quality-check-results` with the check ID until the result is `passed`, `failed`, `errored`, or `skipped`.
+
+## Update or delete a check
+
+Call `data-quality-check-update` with the check ID to change its name, description, type, column, configuration, severity, enabled state, or tags. The subject is fixed. An update keeps the check ID, latest status, and run history.
+
+Call `data-quality-check-delete` to soft-delete a check. The definition no longer runs, but its past rows remain in `system.information_schema.data_quality_check_runs`. A deleted check releases its name and assertion so you can create them again as a new check.
+
+## Manage schedules
+
+Call `data-quality-check-schedule` with `subject_type`, `subject_uuid`, and at least one setting to change:
+
+```json
+{
+  "subject_type": "posthog_table",
+  "subject_uuid": "<events subject id>",
+  "interval": "6hour",
+  "enabled": true
+}
+```
+
+The schedule tool supports `metric` and `posthog_table` subjects. It rejects `table` and `view` because their checks run after data changes. The supported intervals are `1hour`, `6hour`, `12hour`, `24hour`, and `7day`.
+
+A subject gets its schedule when you add its first check. Check the current settings on the subject before updating them. If an update returns an uncertain result, reload the subject's schedule before you try again.
+
+## Query check definitions
+
+Use `system.information_schema.data_quality_checks` to find active definitions:
+
+```sql
+SELECT
+    id,
+    name,
+    subject_type,
+    subject_name,
+    column_name,
+    check_type,
+    config,
+    severity,
+    enabled,
+    last_status,
+    last_run_at
+FROM system.information_schema.data_quality_checks
+ORDER BY subject_name, name
+```
+
+Filter by `subject_name`, `subject_type`, `check_type`, or `enabled` when you need a smaller result. `subject_status = 'orphaned'` means the subject no longer resolves.
+
+## Query recent runs
+
+Use `system.information_schema.data_quality_check_runs` to inspect recent failed and errored runs:
+
+```sql
+SELECT
+    check_id,
+    suite_run_id,
+    subject_name,
+    check_type,
+    status,
+    failed_row_count,
+    observed_value,
+    error,
+    duration_ms,
+    created_at
+FROM system.information_schema.data_quality_check_runs
+WHERE status IN ('failed', 'errored')
+ORDER BY created_at DESC
+LIMIT 100
+```
+
+This table is bounded to the newest 500 readable runs. A deleted check's history remains, with `check_id` set to null. Use `data-quality-check-results` when you need the compiled query from a specific check run.
+
+## Query subject health
+
+Use `system.information_schema.data_quality_health` to find subjects that need attention:
+
+```sql
+SELECT
+    subject_type,
+    subject_name,
+    health,
+    checks_total,
+    checks_failing,
+    checks_erroring,
+    last_run_at
+FROM system.information_schema.data_quality_health
+WHERE health IN ('failing', 'erroring', 'warn')
+ORDER BY last_run_at DESC
+```
+
+The health table includes enabled checks only. Subjects with no checks don't appear. An empty information-schema result can also mean you don't have permission to read the matching subjects.
