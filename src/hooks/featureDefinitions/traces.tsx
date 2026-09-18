@@ -36,9 +36,13 @@ export const tracesFeatures = {
                 name: 'Code-level profiling (flame graphs)',
                 description: 'Profile CPU and memory down to the function that spent the time',
             },
-            sampling_retention_controls: {
-                name: 'Sampling & retention controls',
-                description: 'Decide which traces to keep and for how long',
+            sampling_controls: {
+                name: 'Sampling controls',
+                description: 'Decide which traces get ingested',
+            },
+            retention_controls: {
+                name: 'Retention controls',
+                description: 'Decide how long traces are stored',
             },
         },
     },

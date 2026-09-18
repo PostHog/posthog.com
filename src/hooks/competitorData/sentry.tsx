@@ -13,7 +13,8 @@ export const sentry = {
                     distributed_trace_waterfall: true,
                     service_dependency_map: false,
                     code_level_profiling: true,
-                    sampling_retention_controls: 'Head sampling only',
+                    sampling_controls: 'Head sampling only',
+                    retention_controls: 'Fixed by plan',
                 },
             },
             standards_and_setup: {

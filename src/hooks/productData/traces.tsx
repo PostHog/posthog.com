@@ -100,8 +100,8 @@ export const traces = {
         { slug: 'pricing-cta', name: 'Get started', hideFromNav: true },
     ],
     overview: {
-        title: 'Straight to the line that broke',
-        eli5: 'A trace is the record of one request as it moves through your system: every service it calls, every query it runs, and how long each step took. Point any OpenTelemetry (OTLP) exporter at PostHog (no proprietary SDK) and each request arrives as a tree of spans you can open as a waterfall. Because traces land in the same project as your errors, logs, replays, and analytics, an agent can read the trace to find the span that broke and fix the line behind it.',
+        title: 'Find the span that broke, then fix it',
+        eli5: 'A trace times one request through every service it touches. Open the waterfall and there’s the slow query six services deep, or the async job a stack trace gives up on. Traces come in over the same OpenTelemetry setup as Logs, so one install covers both. Traces get you to where a request went wrong, and the logs from that span tell you why.',
     },
     screenshots: {
         home: {
@@ -171,7 +171,6 @@ export const traces = {
         excluded_sections: ['platform', 'pricing'],
     },
     useCases: {
-        intro: 'Tracing is used across teams depending on your role.',
         rows: [
             [
                 'Backend Engineers',
@@ -228,7 +227,6 @@ export const traces = {
     ],
     ai: {
         description: 'find the slow span and ship the fix',
-        intro: 'Ask PostHog AI to pull traces, line slow requests up against fast ones, and explain where the time went.',
         mcpFeatures: ['tracing'],
         skills: [
             'Finds the traces you need from a plain description: a service, an endpoint, or a latency threshold',

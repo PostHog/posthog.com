@@ -13,7 +13,8 @@ export const posthog = {
                     distributed_trace_waterfall: true,
                     service_dependency_map: false,
                     code_level_profiling: false,
-                    sampling_retention_controls: 'Via OTel SDK',
+                    sampling_controls: 'Via OTel SDK',
+                    retention_controls: true,
                 },
             },
             standards_and_setup: {

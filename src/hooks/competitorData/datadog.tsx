@@ -12,7 +12,8 @@ export const datadog = {
                     distributed_trace_waterfall: true,
                     service_dependency_map: true,
                     code_level_profiling: true,
-                    sampling_retention_controls: true,
+                    sampling_controls: true,
+                    retention_controls: true,
                 },
             },
             standards_and_setup: {

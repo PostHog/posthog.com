@@ -434,6 +434,7 @@ OTEL_SERVICE_NAME="my-app"`}
         ),
         image: {
             src: 'https://res.cloudinary.com/dmukukwp6/image/upload/spans_light_updated_451a69c627.jpg',
+            srcDark: 'https://res.cloudinary.com/dmukukwp6/image/upload/span_with_logs_list_dark_b8ea8c7348.jpg',
             alt: 'A span inspector open on the Logs tab, showing the log lines recorded during that span beside the trace waterfall',
         },
     },
