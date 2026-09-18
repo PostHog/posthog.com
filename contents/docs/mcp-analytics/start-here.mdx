@@ -19,46 +19,82 @@ import WizardCommand from 'components/WizardCommand'
 <QuestLog firstSpeechBubble="Let's instrument your MCP server!" lastSpeechBubble="Time to ship MCP Analytics!">
 
 <QuestLogItem
-title="Add @posthog/mcp to your MCP server"
+title="Add MCP Analytics to your server"
 subtitle="Required"
 icon="IconPlug"
 >
+
+<a id="add-posthogmcp-to-your-mcp-server" />
 
 MCP Analytics shows how agents use your server. Add one wrapper call to capture:
 
 - 🛠️ Every tool call (parameters, response, duration, errors)
 - 🎯 Agent intent – the *why* behind each call, not just the *what*
-- 🤖 The model the agent reports it is using
-- 🧭 Every `tools/list` so you can compare advertised vs called
+- 🤖 The model from client metadata or the agent's self-report
+- 🧭 Tool and resource discovery, plus resource reads without their bodies
 - 🪪 The MCP client name and version
-- 🧵 Sessions across legacy connections and modern requests when conversation IDs are enabled
+- 🧵 Sessions across calls when the client supplies correlation data
 - 🚧 Capabilities the agent wished existed (with `reportMissing`)
 
-The SDK supports TypeScript MCP servers on [either major](/docs/mcp-analytics/sdk-v2). The wizard installs the package and configures `instrument()`. It also supports [LLM coding agents](/blog/envoy-wizard-llm-agent), such as Cursor and Bolt:
+Use an existing [supported MCP server](/docs/mcp-analytics/installation#requirements) and a PostHog [project token](/docs/getting-started/project-token). Install the analytics package for your language:
 
-<WizardCommand command="mcp-analytics" />
+<MultiLanguage selector="tabs">
 
-For manual setup, install the package from npm. Call `instrument()` once at startup with your `posthog-node` client as the second argument:
-
-```bash
+```bash file=TypeScript
 npm install @posthog/mcp posthog-node
 ```
 
+```bash file=Python
+pip install posthog
+```
+
+</MultiLanguage>
+
+Set `POSTHOG_PROJECT_TOKEN` in your environment. Call `instrument()` once with your existing `server`, before it accepts requests:
+
+<MultiLanguage selector="tabs">
+
 ```ts
-import { Server } from "@modelcontextprotocol/sdk/server/index.js"
 import { PostHog } from "posthog-node"
 import { instrument } from "@posthog/mcp"
-
-const server = new Server({ name: "my-mcp-server", version: "1.0.0" })
 
 const posthog = new PostHog(process.env.POSTHOG_PROJECT_TOKEN, {
   host: "https://us.i.posthog.com",
 })
 
-instrument(server, posthog)
+const analytics = instrument(server, posthog)
 ```
 
-Intent, model capture, conversation IDs, and exception capture are on by default. Missing-capability reporting and agent feedback are opt-in. [Python](/docs/mcp-analytics/installation#python) uses the same defaults.
+```python
+import os
+from posthog import Posthog
+from posthog.mcp import instrument
+
+posthog = Posthog(
+    os.environ["POSTHOG_PROJECT_TOKEN"],
+    host="https://us.i.posthog.com",
+)
+
+analytics = instrument(server, posthog)
+```
+
+</MultiLanguage>
+
+For an EU project, use `https://eu.i.posthog.com` as the host. Keep your existing tool registration and server startup code.
+
+Intent, model capture, conversation IDs, and exception capture are on by default in both SDKs. Missing-capability reporting and agent feedback are opt-in.
+
+Flush queued events before shutdown. Follow the [TypeScript](/docs/mcp-analytics/installation#graceful-shutdown) or [Python](/docs/mcp-analytics/installation#flushing-on-exit) instructions for your server.
+
+<details>
+
+<summary>Set up TypeScript with the wizard</summary>
+
+The wizard installs the package and configures `instrument()`. It also supports [LLM coding agents](/blog/envoy-wizard-llm-agent), such as Cursor and Bolt:
+
+<WizardCommand command="mcp-analytics" />
+
+</details>
 
 <OSButton variant="primary" asLink to="/docs/mcp-analytics/installation">
 
@@ -90,6 +126,35 @@ classes="rounded"
 See every event the SDK emits
 
 </OSButton>
+
+</QuestLogItem>
+
+<QuestLogItem
+title="Ship safely"
+subtitle="Required"
+icon="IconLock"
+>
+
+The SDK sanitizes each event and truncates it to fit ingestion limits. It removes media payloads and masks known credential patterns, sensitive keys, and credentials inside URLs.
+
+Add `beforeSend` to your existing `instrument()` call to inspect the final payload before the SDK sends it. Return the event to send it. Return `null` or `undefined` to discard it:
+
+```ts
+instrument(server, posthog, {
+  beforeSend: (event) => {
+    if (event.event === "$exception") return null // drop exceptions
+    return event
+  },
+})
+```
+
+<OSButton variant="primary" asLink to="/docs/mcp-analytics/privacy">
+
+Privacy & redaction
+
+</OSButton>
+
+For Python, use the [equivalent `before_send` callback](/docs/mcp-analytics/privacy#python).
 
 </QuestLogItem>
 
@@ -236,43 +301,6 @@ ORDER BY times_asked DESC
 <OSButton variant="primary" asLink to="/docs/mcp-analytics/missing-capability">
 
 Track missing capabilities
-
-</OSButton>
-
-</QuestLogItem>
-
-<QuestLogItem
-title="Ship safely"
-subtitle="Required"
-icon="IconLock"
->
-
-The SDK sanitizes each event and truncates it to fit ingestion limits. It removes media payloads and masks known credential patterns, sensitive keys, and credentials inside URLs.
-
-Add `beforeSend` to inspect the final payload before the SDK sends it. Return the event to send it. Return `null` or `undefined` to discard it:
-
-```ts
-instrument(server, posthog, {
-  beforeSend: (event) => {
-    if (event.event === "$exception") return null // drop exceptions
-    return event
-  },
-})
-```
-
-<OSButton variant="primary" asLink to="/docs/mcp-analytics/privacy">
-
-Privacy & redaction
-
-</OSButton>
-
----
-
-Your server can now send MCP Analytics events. The beta limitations above still apply.
-
-<OSButton variant="primary" asLink to="/docs/mcp-analytics/installation">
-
-Install MCP Analytics
 
 </OSButton>
 
