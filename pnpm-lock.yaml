@@ -195,7 +195,7 @@ importers:
         specifier: ^4.20.0
         version: 4.25.0
       gatsby-link:
-        specifier: ^4.25.0
+        specifier: 4.25.0
         version: 4.25.0(@gatsbyjs/reach-router@1.3.9(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       gatsby-plugin-algolia:
         specifier: ^0.26.0
@@ -218,9 +218,6 @@ importers:
       gatsby-plugin-mdx:
         specifier: ^3.20.0
         version: 3.20.0(@mdx-js/mdx@1.6.22)(@mdx-js/react@1.6.22(react@18.3.1))(gatsby@4.25.9(@types/webpack@4.41.40)(babel-eslint@10.1.0(eslint@7.32.0))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(type-fest@4.41.0)(typescript@4.9.5)(webpack-hot-middleware@2.26.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
-      gatsby-plugin-no-sourcemaps:
-        specifier: 4.25.0
-        version: 4.25.0(gatsby@4.25.9(@types/webpack@4.41.40)(babel-eslint@10.1.0(eslint@7.32.0))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(type-fest@4.41.0)(typescript@4.9.5)(webpack-hot-middleware@2.26.1))
       gatsby-plugin-postcss:
         specifier: ^5.20.0
         version: 5.25.0(gatsby@4.25.9(@types/webpack@4.41.40)(babel-eslint@10.1.0(eslint@7.32.0))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(type-fest@4.41.0)(typescript@4.9.5)(webpack-hot-middleware@2.26.1))(postcss@8.5.6)(webpack@5.101.3)
@@ -9815,12 +9812,6 @@ packages:
       gatsby: ^4.0.0-next
       react: ^16.9.0 || ^17.0.0 || ^18.0.0
       react-dom: ^16.9.0 || ^17.0.0 || ^18.0.0
-
-  gatsby-plugin-no-sourcemaps@4.25.0:
-    resolution: {integrity: sha512-gurzjbY7TPrGim69x+P0D11f6t5VMqK460KEtDB5LYitDVCnNJ2KDfy3J0cg6eGWWq646vGVEMaFQ5HdioMdJg==}
-    engines: {node: '>=14.15.0'}
-    peerDependencies:
-      gatsby: ^4.0.0-next
 
   gatsby-plugin-page-creator@4.25.0:
     resolution: {integrity: sha512-plHek7xHSV9l1bLPa1JAnxzBqP7j2ihCPRwpBk/wIJAR8cG65wjAT+Nu8DKpW0+2/MYill84ns1r2m8g0L/7bg==}
@@ -30360,11 +30351,6 @@ snapshots:
       unist-util-visit: 1.4.1
     transitivePeerDependencies:
       - supports-color
-
-  gatsby-plugin-no-sourcemaps@4.25.0(gatsby@4.25.9(@types/webpack@4.41.40)(babel-eslint@10.1.0(eslint@7.32.0))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(type-fest@4.41.0)(typescript@4.9.5)(webpack-hot-middleware@2.26.1)):
-    dependencies:
-      '@babel/runtime': 7.28.4
-      gatsby: 4.25.9(@types/webpack@4.41.40)(babel-eslint@10.1.0(eslint@7.32.0))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(type-fest@4.41.0)(typescript@4.9.5)(webpack-hot-middleware@2.26.1)
 
   gatsby-plugin-page-creator@4.25.0(gatsby@4.25.9(@types/webpack@4.41.40)(babel-eslint@10.1.0(eslint@7.32.0))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(type-fest@4.41.0)(typescript@4.9.5)(webpack-hot-middleware@2.26.1))(graphql@15.10.1):
     dependencies:
