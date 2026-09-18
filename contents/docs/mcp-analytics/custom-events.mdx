@@ -6,7 +6,7 @@ Use `eventProperties` to add metadata to captured events. Use `analytics.capture
 
 ## `eventProperties` – metadata on every event
 
-Pass an `eventProperties` callback to attach extra properties to automatically captured MCP events. The callback runs per request, so values can depend on the current call (request id, transport, headers, env, region, deploy SHA, etc).
+Pass an `eventProperties` callback to attach extra properties to automatically captured MCP events. The callback receives request context, such as headers, transport, and the request ID.
 
 ```ts
 import { instrument, getRequestHeaders } from "@posthog/mcp"
@@ -36,7 +36,7 @@ The returned object is spread flat onto the event's properties alongside the bui
 }
 ```
 
-Return constants from `eventProperties` to add the same values to captured MCP events. This is similar to `posthog.register(...)` in other SDKs. The callback runs for each event, so values can vary by request.
+Return constants from `eventProperties` to add the same values to captured MCP events. This is similar to `posthog.register(...)` in other SDKs. Return values from the request context when metadata must vary between calls.
 
 For group analytics, return `groups` from [`identify`](/docs/mcp-analytics/identifying-users). The SDK adds `$groups` to events for the session.
 

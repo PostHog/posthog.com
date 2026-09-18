@@ -296,7 +296,7 @@ instrument(server, posthog, MCPAnalyticsOptions(
 
 | Option | Type | Default | What it does |
 |---|---|---|---|
-| `context` | `bool \| MCPAnalyticsContextOptions` | `True` | Inject the `context` intent argument into every tool. |
+| `context` | `bool \| MCPAnalyticsContextOptions` | `True` | Inject the `context` intent argument into compatible tool schemas. |
 | `report_missing` | `bool` | `False` | Register the `get_more_tools` virtual tool. |
 | `missing_capability_tool_name` | `str` | `"get_more_tools"` | Rename the virtual tool registered by `report_missing`. |
 | `enable_conversation_id` | `bool` | `True` | Inject an optional `conversation_id` argument to group calls when the agent echoes the handle. |
@@ -361,7 +361,7 @@ The `posthog` client is passed as the required second positional argument – no
 |---|---|---|---|
 | `logger` | `(message: string) => void` | no-op | STDIO-safe log sink for SDK-internal warnings. MCP STDIO transports cannot use `console.*`, so the default discards. Configure a logger to see warnings during development. |
 | `enableExceptionAutocapture` | `boolean` | `true` | When `false`, a failed tool call does not emit the `$exception` sibling event. |
-| `context` | `boolean \| { description: string }` | `true` | Inject a required `context` argument into every tool schema. See [Capturing agent intent](/docs/mcp-analytics/intent). |
+| `context` | `boolean \| { description: string }` | `true` | Inject a required `context` argument into compatible tool schemas. See [Capturing agent intent](/docs/mcp-analytics/intent). |
 | `captureModel` | `boolean \| { description: string }` | `true` | Capture the model from recognized client metadata or an SDK-injected `llm_model` argument. |
 | `intentFallback` | `(request, extra) => string \| Promise<string \| null \| undefined>` | – | Called when the agent didn't pass a `context` argument. See [Capturing agent intent](/docs/mcp-analytics/intent). |
 | `enableConversationId` | `boolean` | `true` | Inject an optional `conversation_id` argument into compatible tool schemas. See [Conversation IDs](/docs/mcp-analytics/conversation-id). |
@@ -373,6 +373,8 @@ The `posthog` client is passed as the required second positional argument – no
 ## Capture the calling model
 
 Model capture is enabled by default in both SDKs. The SDK reads recognized client metadata first, then falls back to the agent's `llm_model` argument. Events include `$mcp_llm_model` and `$mcp_llm_model_source` (`"client_metadata"` or `"self_reported"`).
+
+The recognized metadata field is Codex's `params._meta["x-codex-turn-metadata"].model`. Other clients can provide the `llm_model` argument.
 
 Use this unverified client input to compare tool quality, latency, and errors by model. Don't use it for billing or security decisions. Missing, blank, and `unknown` values are omitted. Reasoning effort isn't captured.
 

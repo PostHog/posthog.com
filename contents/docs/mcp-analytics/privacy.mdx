@@ -103,7 +103,9 @@ Events for sessions with no resolved identity are sent with `$process_person_pro
 
 ## Disabling capture entirely
 
-To turn capture off without removing the wrapper, return a nullish value from `beforeSend` to drop every event. If you only want session/timing metadata and *no* payload, drop or strip the payload fields in `beforeSend` instead:
+Return `null` or `undefined` from `beforeSend` to discard every event. To remove only tool arguments and results, delete these properties:
+
+Intent, error messages, exception details, and custom properties remain unless you remove or disable them separately.
 
 ```ts
 beforeSend: (event) => {

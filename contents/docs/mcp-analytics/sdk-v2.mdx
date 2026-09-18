@@ -38,7 +38,7 @@ v1 stores headers at `extra.requestInfo.headers`. v2 stores a WHATWG `Request` a
 
 </CalloutBox>
 
-Use the exported helper in `identify`, `intentFallback`, `eventProperties` and `beforeSend`. It handles both majors and returns a plain lowercase-keyed object:
+Use the exported helper in `identify`, `intentFallback`, and `eventProperties`. It handles both majors and returns an object with lowercase keys. `beforeSend` receives the built event without request context:
 
 ```ts
 import { instrument, getRequestHeaders } from "@posthog/mcp"
