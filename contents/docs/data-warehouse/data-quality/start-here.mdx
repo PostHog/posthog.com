@@ -1,0 +1,89 @@
+---
+title: Get started with data quality
+sidebar: Docs
+showTitle: true
+---
+
+import { CalloutBox } from 'components/Docs/CalloutBox'
+
+<CalloutBox icon="IconFlask" title="Data quality is in alpha" type="action">
+
+Data quality isn't available to every project. [Contact support](https://app.posthog.com/home#supportModal) to request access or share feedback.
+
+</CalloutBox>
+
+This guide creates an error-severity `not_null` check on `orders.customer_id`, runs it, and investigates the result. You need editor access to the subject.
+
+## Open the check editor
+
+You can start from the project-wide page or from the subject you want to check:
+
+- **Project-wide** – Open **Data warehouse**, select the **Data quality** tab, and click **New check**. Select any connected table, saved view, SQL metric, or PostHog table from the **Table, view, or metric** field.
+- **Warehouse or source table** – Open the source in **Data warehouse**, select the table, open its **Data quality** tab, and click **New check**. A connected source table becomes a warehouse table after its first sync, so both names lead to the same check surface.
+- **Saved view** – Open the view or model, select **Tests** or **Data quality**, and click **New check**.
+- **Metric** – Open a metric in the Data Catalog, select **Tests**, and click **New check**. Metrics with a saved HogQL definition support Custom SQL checks.
+- **PostHog table** – Open the project-wide **Data quality** page, click **New check**, and select `events`, `persons`, or `groups`. The picker labels these subjects **PostHog**.
+
+The subject is already selected when you open the editor from a table, view, or metric.
+
+## Configure the check
+
+1. Set **Check type** to **Not null**.
+2. Set **Column** to `customer_id`.
+3. Set **Name** to `orders_customer_id_not_null`. The name is optional, but it makes the check easier to identify in SQL and API calls.
+4. Add a **Description** that explains what a failure means, such as `Every order must belong to a customer`.
+5. Set **Severity** to **Error** because a null customer ID makes downstream customer joins incomplete.
+6. Click **Save check**.
+
+For checks on `events`, `persons`, or `groups`, you can also set **Only check recent rows**. An empty value scans the whole table. `events` uses `timestamp`; `persons` and `groups` use `created_at`, which records when PostHog first saw the row.
+
+See [check types and configuration](/docs/data-warehouse/data-quality/check-types) for every field and check type.
+
+## Run the check
+
+After saving, click **Run now** in the confirmation message. You can also open the check's actions menu and select **Run now**.
+
+Use **Run all checks** to run every enabled check on the current subject. On the project-wide page, **Run all checks** runs every enabled check that you can access.
+
+The run finishes with one of these results:
+
+- **Passed** – The check found no failing rows.
+- **Failed** – The assertion ran and found bad data.
+- **Errored** – PostHog couldn't compile or execute the query.
+- **Skipped** – PostHog couldn't run the check, for example because its subject no longer exists.
+
+## Investigate the first result
+
+Expand the check to see its recent runs, failure count, duration, and error details.
+
+If the check failed, open its actions menu and select **Open failing rows in SQL editor**. PostHog opens the diagnostic query from the latest run. Running it queries the current data, so the rows can differ from the original failure count if the data changed after the check ran.
+
+If the check errored, read the error before changing the assertion. Common causes include a renamed column, an unreadable referenced table, or a query timeout. For large PostHog tables, add a lookback window or add a time filter to a Custom SQL check.
+
+## Create the same check with MCP
+
+Connect the [PostHog MCP server](/docs/model-context-protocol), then use the unified data quality tools:
+
+1. Call `data-quality-subjects` and find the `orders` subject. Copy its `subject_type` and `id`.
+2. Call `data-quality-check-types` with that `subject_type` to confirm the required configuration.
+3. Call `data-quality-check-create` with:
+
+```json
+{
+  "subject_type": "table",
+  "subject_uuid": "<orders subject id>",
+  "check_type": "not_null",
+  "column_name": "customer_id",
+  "config": {},
+  "name": "orders_customer_id_not_null",
+  "description": "Every order must belong to a customer",
+  "severity": "error"
+}
+```
+
+4. Copy the returned check `id`, call `data-quality-check-run` with it, and save the returned suite `id`.
+5. Poll `data-quality-check-results` for that check until a result whose `suite_run` equals the saved suite ID is `passed`, `failed`, `errored`, or `skipped`.
+
+A run request returns a suite run before the individual result finishes. Inspect the matched result. If it is `failed`, take its `compiled_query` and run it with the SQL execution tool to inspect the current failing rows. If it is `errored`, read the `error` field instead.
+
+The create request accepts `subject_type` values `table`, `view`, `metric`, and `posthog_table`. After creation, the check's own `id` is enough to update, run, read results for, or delete it.

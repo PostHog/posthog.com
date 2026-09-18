@@ -1,0 +1,121 @@
+---
+title: Data quality results and troubleshooting
+sidebar: Docs
+showTitle: true
+---
+
+import { CalloutBox } from 'components/Docs/CalloutBox'
+
+<CalloutBox icon="IconFlask" title="Data quality is in alpha" type="action">
+
+Data quality isn't available to every project. [Contact support](https://app.posthog.com/home#supportModal) to request access or share feedback.
+
+</CalloutBox>
+
+Start troubleshooting with the individual check result, then use the subject health and suite status to understand its effect on the wider run.
+
+## Understand check results
+
+Each check execution ends with one status:
+
+| Status | Meaning |
+| --- | --- |
+| `passed` | The assertion succeeded. Most checks found zero failing rows. |
+| `failed` | The assertion ran and found a violation. This is a data result, not a query error. |
+| `errored` | PostHog couldn't compile or execute the check. The result doesn't prove that the data is valid or invalid. |
+| `skipped` | PostHog couldn't run the check, usually because its subject was deleted or no longer resolves. |
+
+The run records `failed_row_count` for row-based assertions and `observed_value` for values such as row count or freshness. A `row_count` run leaves `failed_row_count` empty because no individual row is wrong.
+
+## Understand subject health
+
+PostHog rolls the latest result of every enabled check into one subject health value. The UI label **Not run yet** corresponds to `unknown` in `system.information_schema.data_quality_health`.
+
+| Health | Meaning |
+| --- | --- |
+| `failing` | At least one error-severity check is `failed`. |
+| `erroring` | No error-severity check is failing, but at least one check is `errored`. |
+| `warn` | Only warning-severity checks are `failed`. |
+| `healthy` | At least one check passed, with no failing or errored check taking priority. |
+| `unknown` | No enabled check has produced a usable result. |
+
+The worst outcome wins in the order shown above. A failing error-severity check takes priority over an errored check.
+
+## Understand suite status
+
+A suite groups the checks selected by one manual run, source sync, materialization, DAG execution, or scheduled occurrence.
+
+| Suite status | Meaning |
+| --- | --- |
+| `running` | The suite is still preparing or executing checks. |
+| `completed` | PostHog finished the suite and recorded its check counters. Individual checks can still be `failed`, `errored`, or `skipped`. |
+| `failed` | The suite workflow itself failed before it could complete normally. |
+| `empty` | The trigger found no enabled, runnable checks. This isn't a data failure. |
+
+Don't treat `completed` as equivalent to all checks passing. Read the suite's passed, failed, errored, and skipped counters, then inspect the individual runs.
+
+## Investigate failing rows
+
+Expand a check to view its recent history, failure count, duration, and error details. For a failed check, select **Open failing rows in SQL editor** or copy `compiled_query` from `data-quality-check-results` and run it with the SQL execution tool.
+
+PostHog stores the count and compiled query. It doesn't store a snapshot of the failing warehouse rows. When you rerun the diagnostic query, it reads current data. The returned rows can differ from the original count if a sync, materialization, or data repair happened after the check.
+
+For `row_count`, use `observed_value` and the configured bounds. There is no failing-row query that can identify one incorrect row.
+
+## Understand notifications
+
+PostHog sends a check-failure notification when an error-severity check starts a failing streak. It doesn't send the same notification after every run in that streak.
+
+PostHog doesn't send a data-failure notification for:
+
+- Warning-severity failures
+- Errored checks
+- Skipped checks
+- Repeated failures in a streak that was already reported
+
+A blocked materialization sends a separate notification for that materialization job. Recipients must have query access and access to the subject and other tables that the failing checks read.
+
+## Fix permission errors
+
+You need query access to view data quality definitions and results. You also need viewer access to read a subject and editor access to create, edit, delete, or run its checks.
+
+`relationships` and `custom_sql` checks can read beyond their declared subject. PostHog checks access to those referenced subjects when you create, edit, run, or schedule the check. Automated runs use the person who last changed the definition, with the creator as a fallback, for these checks.
+
+Every automated check on `events`, `persons`, or `groups` uses the same author and creator fallback, including generic check types. PostHog needs that person's permissions because PostHog-table properties and warehouse joins resolve per person. The run records `errored` and executes no SQL when PostHog has no authorized person to use.
+
+If a check or subject is missing from MCP or SQL results:
+
+1. Confirm that data quality alpha access is enabled for the organization.
+2. Confirm that you have query access.
+3. Confirm that you can read the subject and every table the definition reads.
+4. For API access, confirm that the personal API key has the matching subject scopes.
+
+## Fix query errors and timeouts
+
+Open the run's `error` field before you change the assertion. Common causes include invalid HogQL, a renamed column, a missing table, changed permissions, an unsupported metric definition, or a query timeout.
+
+For large `events`, `persons`, or `groups` checks, add `lookback_hours` to a generic check. `events` filters on `timestamp`; `persons` and `groups` filter on `created_at`. For `custom_sql`, add an explicit time predicate to the query because the automatic lookback option isn't supported.
+
+Use the smallest window that still tests the data your decision depends on. For a `relationships` check, review both `lookback_hours` and `to_lookback_hours`. A target window that is too short can report a valid older reference as missing.
+
+An errored check doesn't count as a failing assertion. If the materialization gate is on, query errors and audit failures don't guarantee a block.
+
+## Fix a missing or orphaned subject
+
+A deleted subject can produce a `skipped` run and leave its check orphaned before cleanup runs. The cleanup workflow removes checks, check runs, and single-subject suites for dead subjects. It only spares records created within the previous hour, so older history can disappear on the next cleanup run.
+
+You can't move the existing check to a different subject. Create a new check on the replacement subject. Cleanup removes the orphaned check automatically. If the old name is still reserved, use another name or wait for cleanup. If a source was renamed rather than deleted, confirm that its current subject ID and columns match the check definition.
+
+## Recover from a blocked materialization
+
+A blocked refresh means at least one enabled error-severity check returned `failed` against the staged, unpublished data. The previous published version continues serving, and a DAG skips downstream nodes.
+
+1. Open the materialized view's **Tests** tab.
+2. Inspect each failed error-severity check and rerun its diagnostic query.
+3. Fix the source data or edit the assertion.
+4. Start the materialization again.
+5. Rerun the DAG after the view publishes so skipped downstream nodes can run.
+
+Don't disable the project-wide gate to hide an errored audit. An errored query already fails open. Fix the query or permission problem so the next refresh has a real verdict.
+
+See [block materialization on failing checks](/docs/data-warehouse/data-quality/block-materialization) for the full gate behavior.
