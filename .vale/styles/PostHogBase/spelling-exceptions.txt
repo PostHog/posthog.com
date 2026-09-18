@@ -7,6 +7,7 @@
 adblock
 adblocked
 agentic
+anrok
 async
 auditability
 autocapture
@@ -244,6 +245,7 @@ tooltips
 toolchain
 toolkit
 truthy
+uncollectible
 unminify
 unminified
 uptime

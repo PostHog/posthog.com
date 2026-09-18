@@ -116,12 +116,12 @@ If you want more precision when a single event type is inflated, use the 'Event 
 
 ### Invoice status and what you can do
 
-You don't void invoices or create credit notes by hand. Every refund and correction to an unpaid invoice goes through one place — the Billing Admin refund flow — and it creates the underlying Stripe credit note for you. What you can do just depends on the invoice's status:
+You don't void invoices or create credit notes by hand. Every correction to an invoice goes through one place, the Billing Admin refund flow, and it creates the underlying Stripe credit note for you. What that actually does depends on the invoice's status:
 
--   **`paid`, `open`, and `uncollectible` invoices can be refunded; `draft` and `void` ones can't.** A refund on a `paid` invoice goes back to the payment method and/or customer balance. On an `open` or `uncollectible` invoice, it reduces the amount still owed.
--   **Hit a "pending payment" error?** The invoice has a payment in flight. Wait for it to resolve and try again, or mark the invoice `uncollectible` in Stripe first — the refund flow won't do that for you.
--   **Small unpaid invoices resolve themselves.** Once Stripe exhausts its retries on a small invoice (below the amount where CS gets involved, and for customers without a high trust score), billing marks it `uncollectible` and cancels the subscription automatically. RevOps can cancel sooner if needed.
--   **Two or more `uncollectible` invoices block a customer from re-subscribing.** The block lifts automatically once they have none left, so clearing those invoices is what frees them to subscribe again.
+-   **Credit notes work on `paid`, `open`, and `uncollectible` invoices. `draft` and `void` ones are rejected.** Only a `paid` invoice returns money, going back to the payment method and/or the customer's balance. An `open` or `uncollectible` invoice has nothing to return yet, so the credit note reduces what is still owed instead.
+-   **Hit a "pending payment" error?** Stripe has a payment attempt in flight on that invoice. It usually settles within 24 to 48 hours, so either wait and retry, or mark the invoice `uncollectible` in Stripe and retry straight away. The refund flow won't mark it for you.
+-   **An unpaid invoice can become `uncollectible` on its own.** After Stripe's fourth failed payment attempt, billing marks the invoice `uncollectible` and cancels the subscription, but only for invoices under $1,500 from customers without a high trust score. Anything above that, or any trusted customer, goes to CS instead. RevOps can also cancel sooner at their discretion, typically when a customer has gone quiet and inactive.
+-   **Two or more `uncollectible` invoices block a customer from re-subscribing.** The unblock is automatic, but it only runs when a payment succeeds on the account and no `uncollectible` invoices are left. Clearing those invoices with credit notes does not trigger that check, so if you unblock someone this way, confirm with RevOps that the block actually lifted.
 
 ## How to issue refunds or credits
 
@@ -137,7 +137,9 @@ You don't void invoices or create credit notes by hand. Every refund and correct
 8. Click 'Save and view'
 9. After saving, you'll land on the customer view in Billing Admin — confirm the credit now appears on the customer's balance there. You don't need to check Stripe.
 
-**A note on tax:** Tax is added automatically by Anrok through Stripe. It applies to US customers only, isn't managed in billing, and doesn't count toward billing limits — so for customers outside the US there's no tax line and a credit lands cleanly. Tax is also calculated on the full invoice amount *before* credits are applied. That trips people up: if a US customer has hit a billing limit and you credit them exactly that amount expecting a $0 bill, they'll still owe the tax on the pre-credit total. To land a true zero bill, check the applied tax in Stripe and gross the credit up to cover it.
+**A note on tax:** Tax is added automatically by Anrok through Stripe. It isn't managed in billing and doesn't count toward billing limits. Whether it applies at all depends on the jurisdiction, and our services aren't taxable everywhere, so don't assume there is or isn't a tax line.
+
+Tax is calculated on the amount owed *after* promotional credits are applied, but *before* the invoice is finalized. So credits issued ahead of finalization bring the tax down with them, while a credit note against an already finalized invoice does not. That last case is the one that trips people up: credit a customer exactly the amount they went over expecting a $0 bill, and they'll still owe tax on the finalized total. To land a true zero bill, check the applied tax in Stripe for that customer and gross the credit up to cover it. If you're not sure whether tax applies, wait for the invoice to be generated and then issue the credit through the Billing Admin refund flow.
 
 ### Issuing a refund
 Refunds are now initiated through Billing Admin and finalized in Stripe via a credit note. 
