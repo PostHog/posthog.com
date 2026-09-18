@@ -29,7 +29,7 @@ Create a check with these fields:
 | `config` | Depends on type | The type-specific object shown below |
 | `severity` | No | `error` or `warn`; defaults to `error` |
 | `enabled` | No | `true` or `false`; defaults to `true` |
-| `name` | No | Letters, numbers, and underscores, starting with a letter |
+| `name` | No | At most 128 characters; letters, numbers, and underscores; starts with a letter; unique among active checks across the project, including different subjects |
 | `description` | No | Why the check exists and what a failure means |
 | `tags` | No | A list of string labels |
 | `created_source` | No | `user` or `ai_generated`; defaults to `user` |

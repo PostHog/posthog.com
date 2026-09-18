@@ -81,9 +81,9 @@ Connect the [PostHog MCP server](/docs/model-context-protocol), then use the uni
 }
 ```
 
-4. Copy the returned check `id` and call `data-quality-check-run` with it.
-5. Poll `data-quality-check-results` for that check until the run finishes.
+4. Copy the returned check `id`, call `data-quality-check-run` with it, and save the returned suite `id`.
+5. Poll `data-quality-check-results` for that check until a result whose `suite_run` equals the saved suite ID is `passed`, `failed`, `errored`, or `skipped`.
 
-A run request returns a suite run before the individual result finishes. If the result is `failed`, take its `compiled_query` and run it with the SQL execution tool to inspect the current failing rows. If it is `errored`, read the `error` field instead.
+A run request returns a suite run before the individual result finishes. Inspect the matched result. If it is `failed`, take its `compiled_query` and run it with the SQL execution tool to inspect the current failing rows. If it is `errored`, read the `error` field instead.
 
 The create request accepts `subject_type` values `table`, `view`, `metric`, and `posthog_table`. After creation, the check's own `id` is enough to update, run, read results for, or delete it.

@@ -104,7 +104,7 @@ An errored check doesn't count as a failing assertion. If the materialization ga
 
 A deleted subject can produce a `skipped` run and leave its check orphaned before cleanup runs. The cleanup workflow removes checks, check runs, and single-subject suites for dead subjects. It only spares records created within the previous hour, so older history can disappear on the next cleanup run.
 
-You can't move the existing check to a different subject. Delete the orphaned check and create a new check on the replacement subject. If a source was renamed rather than deleted, confirm that its current subject ID and columns match the check definition.
+You can't move the existing check to a different subject. Create a new check on the replacement subject. Cleanup removes the orphaned check automatically. If the old name is still reserved, use another name or wait for cleanup. If a source was renamed rather than deleted, confirm that its current subject ID and columns match the check definition.
 
 ## Recover from a blocked materialization
 

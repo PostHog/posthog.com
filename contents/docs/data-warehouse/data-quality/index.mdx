@@ -58,7 +58,7 @@ Set each check's severity based on what a failure means:
 
 PostHog rolls the newest results into subject health:
 
-- **Healthy** – Enabled checks have run and passed.
+- **Healthy** – At least one enabled check passed, and none failed or errored.
 - **Warning** – Only warning-severity checks are failing.
 - **Failing** – At least one error-severity check is failing.
 - **Erroring** – A check couldn't compile or execute. This doesn't prove that the data is good or bad.

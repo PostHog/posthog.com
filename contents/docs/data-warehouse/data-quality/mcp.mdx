@@ -71,7 +71,7 @@ For example, create an error-severity check on `orders.customer_id`:
 
 The create tool is idempotent for the same subject and assertion. A near-duplicate with different configuration creates separate coverage, so inspect existing checks first.
 
-Call `data-quality-check-run` with the returned check `id`. The tool returns a suite run before the individual check finishes. Poll `data-quality-check-results` with the check ID until the result is `passed`, `failed`, `errored`, or `skipped`.
+Call `data-quality-check-run` with the returned check `id`, and save the suite `id` that it returns. The tool returns this suite run before the individual check finishes. Poll the historical results from `data-quality-check-results` with the check ID until a result whose `suite_run` equals the saved suite ID is `passed`, `failed`, `errored`, or `skipped`. Inspect that matched result.
 
 ## Update or delete a check
 
