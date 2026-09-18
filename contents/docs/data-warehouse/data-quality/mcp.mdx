@@ -77,7 +77,7 @@ Call `data-quality-check-run` with the returned check `id`. The tool returns a s
 
 Call `data-quality-check-update` with the check ID to change its name, description, type, column, configuration, severity, enabled state, or tags. The subject is fixed. An update keeps the check ID, latest status, and run history.
 
-Call `data-quality-check-delete` to soft-delete a check. The definition no longer runs, but its past rows remain in `system.information_schema.data_quality_check_runs`. A deleted check releases its name and assertion so you can create them again as a new check.
+Call `data-quality-check-delete` to soft-delete a check. The definition no longer runs, but its retained past rows remain in `system.information_schema.data_quality_check_runs`. A deleted check releases its name and assertion so you can create them again as a new check.
 
 ## Manage schedules
 
@@ -94,7 +94,7 @@ Call `data-quality-check-schedule` with `subject_type`, `subject_uuid`, and at l
 
 The schedule tool supports `metric` and `posthog_table` subjects. It rejects `table` and `view` because their checks run after data changes. The supported intervals are `1hour`, `6hour`, `12hour`, `24hour`, and `7day`.
 
-A subject gets its schedule when you add its first check. Check the current settings on the subject before updating them. If an update returns an uncertain result, reload the subject's schedule before you try again.
+A subject gets its schedule when you add its first check. The unified MCP tool can update a schedule, but it can't read the current settings. To inspect them, open **Data warehouse** > **Data quality** and expand the metric or PostHog table. A metric's **Tests** tab shows the same controls. If an update returns an uncertain result, reload that page before you make another MCP call.
 
 ## Query check definitions
 
@@ -141,7 +141,7 @@ ORDER BY created_at DESC
 LIMIT 100
 ```
 
-This table is bounded to the newest 500 readable runs. A deleted check's history remains, with `check_id` set to null. Use `data-quality-check-results` when you need the compiled query from a specific check run.
+This table is bounded to the newest 500 readable runs. A soft-deleted check's retained run rows keep their `check_id`. The value becomes null only if the check definition is later hard-deleted. Use `data-quality-check-results` when you need the compiled query from a specific check run.
 
 ## Query subject health
 

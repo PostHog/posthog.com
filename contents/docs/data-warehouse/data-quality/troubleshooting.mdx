@@ -79,7 +79,9 @@ A blocked materialization sends a separate notification for that materialization
 
 You need query access to view data quality definitions and results. You also need viewer access to read a subject and editor access to create, edit, delete, or run its checks.
 
-`relationships` and `custom_sql` checks can read beyond their declared subject. PostHog checks access to those referenced subjects when you create, edit, run, or schedule the check. Automated runs use the person who last changed the definition, with the creator as a fallback, for these checks. The run records `errored` and executes no SQL when PostHog has no authorized person to use.
+`relationships` and `custom_sql` checks can read beyond their declared subject. PostHog checks access to those referenced subjects when you create, edit, run, or schedule the check. Automated runs use the person who last changed the definition, with the creator as a fallback, for these checks.
+
+Every automated check on `events`, `persons`, or `groups` uses the same author and creator fallback, including generic check types. PostHog needs that person's permissions because PostHog-table properties and warehouse joins resolve per person. The run records `errored` and executes no SQL when PostHog has no authorized person to use.
 
 If a check or subject is missing from MCP or SQL results:
 
@@ -100,7 +102,7 @@ An errored check doesn't count as a failing assertion. If the materialization ga
 
 ## Fix a missing or orphaned subject
 
-A deleted subject produces a `skipped` run and leaves its check orphaned. Run history stays available because each run stores the subject identity and name from execution time.
+A deleted subject can produce a `skipped` run and leave its check orphaned before cleanup runs. The cleanup workflow removes checks, check runs, and single-subject suites for dead subjects. It only spares records created within the previous hour, so older history can disappear on the next cleanup run.
 
 You can't move the existing check to a different subject. Delete the orphaned check and create a new check on the replacement subject. If a source was renamed rather than deleted, confirm that its current subject ID and columns match the check definition.
 
