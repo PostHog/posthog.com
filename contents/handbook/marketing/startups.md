@@ -24,7 +24,7 @@ Any company that is <2 years old and has raised less than $5M in funding is elig
 
 -   $50,000 in PostHog credits (valid for 12 months)
 -   One unique welcome pack for founders
--   Partner benefits with Speakeasy, Incident.io, and Chroma
+-   Partner benefits with Speakeasy and Incident.io
 -   A monthly newsletter for founders
 
 > ❗Credits **cannot** be used toward a BAA under the Boost plan.
@@ -47,7 +47,7 @@ This program is similar to our startup program but has some key differences for 
    -   If they previously registered for the old deal and it expired, they need to re-register
 -   Up to 4 unique founder merch packs (different from the startup program)
 -   Access to HogPatch for the duration of their time in the batch
--   Partner benefits with Speakeasy, Incident.io and Chroma
+-   Partner benefits with Speakeasy and Incident.io
 
 You can find the copy for the latest deal on Bookface in this [doc](https://docs.google.com/document/d/1dmsMxrfWSVhKZY4bQp5QIRiXS2iCvLGJah5EKWOvoeI/edit?tab=t.0#heading=h.o7fhsqrlnheo). To post updates, you need to ask James or Tim to do it.
 
@@ -143,7 +143,6 @@ We currently partner with:
 
 -   **Incident.io** – $1,500 off a teams plan
 -   **Speakeasy** – 50% off for 6 months
--   **Chroma** – $5,000 of credit
 
 Discount codes are sent in the welcome email after signup.
 
@@ -153,9 +152,8 @@ Contacts:
 
 -   Incident.io: Zain Mobarik
 -   Speakeasy: Nolan Di Mare Sullivan
--   Chroma: Philip Thomas
 
-We previously offered DigitalOcean credits ($25k) and a Mintlify partnership, but these were retired in Q2 2025.
+We previously offered DigitalOcean credits ($25k), but this was retired in Q2 2025.
 
 ## Program extensions
 
