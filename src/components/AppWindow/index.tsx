@@ -761,8 +761,8 @@ export default function AppWindow({ item, chrome = true }: { item: AppWindowType
                         <div
                             data-scheme="tertiary"
                             onDoubleClick={handleDoubleClick}
-                            className={`inline-flex gap-1 items-center py-0.5 pl-1.5 pr-0.5 skin-classic:bg-primary opacity-40 hover:opacity-75 transition-opacity duration-100 ${
-                                hasToolbar ? 'flex-1 justify-end' : 'absolute z-20 right-1 top-1'
+                            className={`inline-flex gap-1 items-center py-0.5 pl-1.5 pr-0.5 [&_button]:opacity-40 hover:[&_button]:opacity-75 [&_button]:transition-opacity [&_button]:duration-100 ${
+                                hasToolbar ? 'flex-1 justify-end' : 'absolute z-20 right-1 top-1 rounded-md bg-primary'
                             }`}
                         >
                             {!item.fixedSize && (
