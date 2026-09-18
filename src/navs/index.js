@@ -2663,6 +2663,10 @@ export const docsMenu = {
                             name: 'Examples',
                             url: '/docs/self-driving/scout-examples',
                         },
+                        {
+                            name: "What's in a scout",
+                            url: '/docs/self-driving/whats-in-a-scout',
+                        },
                     ],
                 },
                 {
