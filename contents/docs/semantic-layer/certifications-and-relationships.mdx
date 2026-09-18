@@ -4,26 +4,26 @@ sidebar: Docs
 showTitle: true
 ---
 
-import AlphaCallout from './_snippets/alpha-callout'
-import { CalloutBox } from 'components/Docs/CalloutBox'
+import BetaCallout from "./_snippets/beta-callout";
+import { CalloutBox } from "components/Docs/CalloutBox";
 
-[Metrics](/docs/semantic-layer/metrics) govern your *answers*. Certifications and relationships govern the *tables the answers come from*: which sources to trust, which to avoid, and how tables join – so agents stop guessing.
+[Metrics](/docs/semantic-layer/metrics) govern your _answers_. Certifications and relationships govern the _tables the answers come from_: which sources to trust, which to avoid, and how tables join – so agents stop guessing.
 
-<AlphaCallout />
+<BetaCallout />
 
 ## Table certifications
 
 A certification is a human-vouched trust mark on a warehouse table or view:
 
-| Status | Meaning |
-|--------|---------|
-| `proposed` | An agent (or human) suggested a trust mark; not yet vouched. |
-| `certified` | Prefer this source. A human has vouched for it. |
-| `deprecated` | Avoid this source. A human has warned against it. |
+| Status       | Meaning                                                      |
+| ------------ | ------------------------------------------------------------ |
+| `proposed`   | An agent (or human) suggested a trust mark; not yet vouched. |
+| `certified`  | Prefer this source. A human has vouched for it.              |
+| `deprecated` | Avoid this source. A human has warned against it.            |
 
 The classic case: your warehouse has both a synced `stripe_charges` table and a hand-rolled `payments_backup` someone loaded last year. Certify `stripe_charges` with a note like "canonical payments source, synced daily" and deprecate `payments_backup` with "superseded by stripe_charges, stale since March". The notes matter – agents read them when choosing between sources.
 
-The flow mirrors the rest of the semantic layer: anyone proposes with [`data-catalog-certification-propose`](/docs/semantic-layer/mcp-tools#certification-tools) (targets can be addressed by id or by name – an ambiguous name returns candidates to pick from), and a human resolves it with `data-catalog-certification-certify` or `data-catalog-certification-deprecate`, both of which require typing "confirm". Revoking a certification deletes it outright, with the change activity-logged.
+The flow mirrors the rest of the semantic layer: anyone proposes with [`data-catalog-certification-propose`](/docs/semantic-layer/mcp-tools#certification-tools) (targets can be addressed by ID or by name – an ambiguous name returns candidates to pick from), and a human resolves it with `data-catalog-certification-certify-prepare` / `-execute` or `data-catalog-certification-deprecate-prepare` / `-execute`, both of which require typing "confirm". Revoking a certification deletes it outright, with the change activity-logged.
 
 Certifications surface wherever schemas do: `system.information_schema.tables` rows carry each table's trust mark in the `certification` column, so anything exploring your schema sees them inline:
 
@@ -39,13 +39,15 @@ A relationship proposal is a reviewed join fact between two warehouse tables. In
 
 A proposal records the two tables, the join keys, a confidence score, reasoning, and sampling evidence: the agent shows its work, like "98% of `orders.customer_id` values match `stripe_customers.id` in a sample". Proposals are deduped regardless of direction, so `orders → stripe_customers` and `stripe_customers → orders` count as the same pair.
 
-| Status | Meaning |
-|--------|---------|
-| `proposed` | Suggested with evidence; awaiting review. |
+| Status     | Meaning                                                                                                        |
+| ---------- | -------------------------------------------------------------------------------------------------------------- |
+| `proposed` | Suggested with evidence; awaiting review.                                                                      |
 | `accepted` | Promoted to a real [data warehouse join](/docs/data-warehouse/join), after re-validating and probing the keys. |
-| `rejected` | Vetoed. Permanent – the pair is never re-proposed. |
+| `rejected` | Vetoed. Permanent – the pair is never re-proposed.                                                             |
 
-Acceptance and rejection both go through a human with a typed "confirm" ([`data-catalog-relationship-accept`](/docs/semantic-layer/mcp-tools#relationship-tools) and `data-catalog-relationship-reject`).
+You can also create, edit, and delete joins manually from the Relationships tab without going through the proposal flow. Click **New join** to open the join editor, or use the more menu on any active join row to edit or delete it. Manually created joins go straight to the active joins list – they don't require proposal review since the human is already making the decision.
+
+Acceptance and rejection both go through a human with a typed "confirm" ([`data-catalog-relationship-accept-prepare` / `-execute`](/docs/semantic-layer/mcp-tools#relationship-tools) and `data-catalog-relationship-reject-prepare` / `-execute`).
 
 <CalloutBox icon="IconWarning" title="Rejection is permanent" type="caution">
 

@@ -14,25 +14,32 @@ In addition, every engineer regardless is part of the global follow-the-sun on-c
 
 ## Escalation schedules
 
+Your team's schedules, the escalation paths that page them, and your team's entry in the incident.io Team catalog are all [defined in Terraform](#managing-on-call-in-terraform) – one block per team, in one file. Setting a team up, or changing who's on call and when, means editing that block rather than the incident.io dashboard.
+
+Cover for PTO and swaps is the exception: [overrides](#make-sure-your-availability-is-up-to-date) still happen in the dashboard, because Terraform owns the rotations and not what's layered on top of them.
+
 ### Team schedules
 
-Every team has 2 schedules in [incident.io](https://app.incident.io/posthog/on-call/schedules)
+A team has up to three schedules in [incident.io](https://app.incident.io/posthog/on-call/schedules), and it gets the ones its Terraform block asks for:
+
 * `On call: {team}`
-    - This is the working-hours rotation. Each engineer should have their working hours in place here Mon-Fri with a sensible working day
-    - For example 8:00-17:00 for EU based engineers is likely preferable as there will be US engineers who can take 17:00 onwards
-    - Each member is responsible for ensuring this is up-to-date with PTO. You can create an override for your schedule simply assigned to "No one".
-* `Support: {team}`
-    - This is a weekly or bi-weekly rotation (teams can decide) that covers both who is assigned to the [support hero rotation](/handbook/engineering/operations/support-hero) as well as the out of-hours-escalation for the extreme case
+    - Working-hours cover, and where alerts routed to the team go. Everyone gets their own rotation, you just set the start of your normal working day, weekdays only
+    - Stagger start times to cover as much of the day as your team can – 08:00 for an EU-based engineer leaves 17:00 onwards for a US-based one
+    - Gaps are fine. Nobody is woken up here: a critical alert that finds nobody on call goes to [global on-call](#global-on-call-schedule) instead
+* `Page team (emergency): {team}`
+    - The "everything is broken" rotation, paged only when [someone escalates by hand](#manual-escalation-schedules)
+* `Support Hero: {team}`
+    - The [support hero rotation](/handbook/engineering/operations/support-hero). Everyone takes turns one at a time, handing over every week or two. Nothing pages it
 
 ### Manual escalation schedules
 
-In addition to the regular on-call schedules, teams that own production-critical services have a manual escalation schedule in incident.io:
-* `Escalation: {team}`
-    - This is the "everything is broken" escalation path for critical out-of-hours emergencies
-    - Only teams that own production-critical services are required to have this schedule - other teams don't need one
-    - **Everyone relevant on the team should be on this schedule** - it's not a rotation like regular on-call
-    - There should be no gaps in coverage since this is the last resort when normal escalation paths fail
-    - This schedule is triggered manually by whoever is handling an incident when they need additional help
+Teams that own production-critical services also have a `Page team (emergency): {team}` schedule, triggered by hand by whoever is handling an incident and needs more help. Other teams don't need one. The schedule and the escalation path that pages it share this name – there's exactly one of each per team.
+
+Unlike `On call: {team}`, this rotation has to cover the clock, every day of the week. You describe it as groups – blocks of the clock with the people covering each one, an EU group and a US group, or however your team is actually spread. Everyone in a group is on call for the whole of its window rather than taking turns, and the page cycles between them one at a time.
+
+Group windows have to tile the full 24 hours between them. If they don't, the Terraform plan fails and names the first uncovered minute – somebody escalating by hand at 3am should never find nobody there.
+
+> 💡 Don't rearrange this schedule around your own availability, and don't request cover on it. It's best-effort cover rather than a rotation with turns to trade – everyone in a group is on call for the whole window. If you're genuinely unavailable, [add an override on yourself](#make-sure-your-availability-is-up-to-date) and the rest of your group is still there.
 
 #### When to use manual escalation
 
@@ -43,8 +50,8 @@ Manual escalation should be used when:
 
 #### How to trigger manual escalation
 
-1. From within an incident in incident.io, use the escalation options to page the relevant `Escalation: {team}` schedule
-2. This will notify all members on that escalation schedule simultaneously
+1. From within an incident in incident.io, use the escalation options to page the relevant `Page team (emergency): {team}`
+2. This pages whoever is on that team's emergency rotation right now, then everyone on it – one person at a time, 10 minutes per level
 3. Any available team member can then respond and assist with the incident
 
 > 💡 Manual escalation is a safety net, not a shortcut. Always try the normal escalation paths first before manually escalating to an entire team.
@@ -58,6 +65,8 @@ Manual escalation should be used when:
 PostHog Cloud doesn't shut down at night (_whose_ night anyway?) nor on Sunday. As a 24/7 service, our goal is to be 100% operational 100% of the time. The global on-call is the last line of defense and is escalated to:
 * if nobody at the `On call: {team}` level is available
 * if the alert is critical but has no team assignment (for whatever reason)
+
+It's also the one schedule not defined in Terraform – it changes too often, and by too many hands, for that to be safe.
 
 This schedule has 3 week day layers:
 - **Europe** (06:00 to 14:00 UTC) - (8 hours)
@@ -73,6 +82,53 @@ And 2 weekend layers:
 If you're in a product team, it's tempting to think that service alerts don't apply to you, or that when you're on call you can just hand everything off to the infrastructure team. That's not the case, because it's important that every engineer has a basic understanding of how our software is deployed, where the weak points in our systems are, and what the failure modes look like. This understanding should be all that's needed to follow the runbooks, and if you follow the causes of alerts, ultimately you'll be less likely to ship code that takes PostHog down.
 
 Besides knowledge, being on call requires availability – including weekends. If teams had their own separate rotations, there would be more people on call in total, and each would have to stand by 24/7 as our teams aren't big enough to follow the sun. This would be more stressful because of availability constraints, while being less productive because of the rare alerts being spread across multiple people.
+
+## Escalation paths
+
+A schedule says who's on call. An escalation path says who gets paged, in what order, and how long they have to respond. A team gets the paths that follow from the schedules it has:
+
+* `On call: {team}` – where an alert routed to the team goes, previously named `PostHog: {team}`
+* `Page team (emergency): {team}` – where you land when you [escalate to a team by hand](#manual-escalation-schedules)
+
+Two more are org-wide rather than owned by a team: `Default escalation`, for an escalation that's nobody's in particular, which pages global on-call for 30 minutes and then the last-resort rotation alongside it; and the `Slack only: ...` paths, which post to a Slack channel and page nobody.
+
+Paths are named so that listing them alphabetically – which is what the escalation picker does – puts them in the order you'd reach for them.
+
+### The standard on-call path
+
+Every `On call: {team}` path is the same shape, so paging behavior doesn't vary by team:
+
+1. Post to the team's own alert channel, whatever the priority
+2. If the alert is critical, page the team's `On call: {team}` rotation – 10 minutes to ack
+3. Still unacked? Post to #alerts, then page global on-call alongside the team – 15 minutes to ack
+4. Repeat
+
+Non-critical alerts stop at step 1 – the team sees them in Slack, nobody gets woken up. Levels page one person at a time, moving on every two minutes until somebody acks, rather than paging a whole rotation at once.
+
+## Managing on-call in Terraform
+
+Teams, schedules, rotations, and escalation paths all live in the [`incidentio-oncall` module](https://github.com/PostHog/posthog-cloud-infra/tree/main/terraform/modules/incidentio-oncall) in `posthog-cloud-infra`. Everything one team needs is a single block in a single file: [`terraform/environments/incidentio/oncall/terragrunt.hcl`](https://github.com/PostHog/posthog-cloud-infra/blob/main/terraform/environments/incidentio/oncall/terragrunt.hcl).
+
+You supply people and hours – rotation mechanics aren't configurable. Read the existing team blocks in that file for the structure, and the module's README and `teams` variable for what each field means and the rules they have to follow. Those are the source of truth, so this page doesn't restate them.
+
+Open a PR against [`posthog-cloud-infra`](https://github.com/PostHog/posthog-cloud-infra) and CI runs the plan. Read it before merging – it names every rotation and paging level that moves. Don't make these changes in the incident.io dashboard, because the next apply puts them back.
+
+Rather than hand-writing the HCL, point your editor's agent at it:
+
+```
+In posthog-cloud-infra, add my team to the incident.io on-call setup.
+
+Read terraform/modules/incidentio-oncall/ first – the README and the `teams`
+variable, which document every field and the rules they follow – then add a
+block for my team to `teams` in
+terraform/environments/incidentio/oncall/terragrunt.hcl, following the existing
+team blocks for structure.
+
+Here's who's on call and when, in local time: <people, their working hours, and
+who covers escalation out of hours>.
+
+Then run `terragrunt hcl validate` and `terraform fmt`, and show me the plan.
+```
 
 ## Before going on call
 
@@ -119,10 +175,11 @@ Exact menu paths vary by manufacturer (Pixel, Samsung, OnePlus, etc.), but the s
 
 ## Make sure your availability is up-to-date
 
-If you are unavailable for any of your schedules you need to act!
+If you are unavailable for any of your schedules you need to act! Overrides are the one part of a schedule that isn't in Terraform, so do these in the dashboard – an apply won't undo them.
 
-1. For your `On call: {team}` schedule simply click on your name in your layer, click `create an override` and then remove yourself from the list so it shows `No one`
-1. For your `Support: {team}` schedule or `On call: {global}` schedules click `Request cover` at the top right. This will notify selected team members automatically to find someone to cover you (you should probably do a shout out in #ask-posthog-anything as well). You can trade whole weeks, but also just specific days. Remember not to alter the rotation's core order, as that's an easy way to accidentally shift the schedule for everyone.
+1. For your `On call: {team}` schedule simply click on your name in your rotation, click `create an override` and then remove yourself from the list so it shows `No one`
+1. For your `Support Hero: {team}` or `On call: Global` schedules click `Request cover` at the top right. This will notify selected team members automatically to find someone to cover you (you should probably do a shout out in #ask-posthog-anything as well). You can trade whole weeks, but also just specific days. Remember not to alter the rotation's core order, as that's an easy way to accidentally shift the schedule for everyone.
+1. For your [`Page team (emergency): {team}`](#manual-escalation-schedules) schedule, don't request cover and don't reshuffle the groups – nobody needs to take your turn, because there aren't any. Add an override on yourself for the window you're away, the same way as above, so it's clear you're unavailable. Everyone else in your group is still on call.
 
 ## Make sure you have all the access you might need
 
@@ -147,9 +204,7 @@ As well as the above access you should ensure you have access and feel comfortab
 
 ![alert-example](https://res.cloudinary.com/dmukukwp6/image/upload/w_500,c_limit,q_auto,f_auto/Screenshot_2025_10_27_at_08_42_11_f7508c7432.png)
 
-Critical alerts will trigger per-team escalation policies which go like this:
-1. If available, a member of the team associated with the alert is paged first
-1. If nobody is available or nobody responds within the configured time then the `On call: global` schedule is paged
+Critical alerts trigger the team's [`On call: {team}` escalation path](#the-standard-on-call-path), which pages a member of the team associated with the alert first, then global on-call alongside the team if nobody responds in time.
 
 > **If at any point you get paged - always respond!** Even if you are unavailable you should respond as such (either via the app or the personal Slack notification). That way the escalation can continue to the next available person.
 

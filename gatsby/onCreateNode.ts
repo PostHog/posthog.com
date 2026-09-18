@@ -1,4 +1,4 @@
-import { replacePath, stripFrontmatter } from './utils'
+import { getPublicID, replacePath, stripFrontmatter } from './utils'
 import { createFilePath, createRemoteFileNode } from 'gatsby-source-filesystem'
 
 import GitUrlParse from 'git-url-parse'
@@ -24,32 +24,6 @@ const isValidUrl = (url: string): boolean => {
     } catch (err) {
         return false
     }
-}
-
-exports.onPreInit = async function (_, options) {
-    const { strapiURL, strapiKey } = options
-    if (!strapiURL || !strapiKey) return
-    const createStrapiPageNodes = async (limit = 100, page = 1) => {
-        const strapiPages = await fetch(
-            `${strapiURL}/api/markdowns?pagination[pageSize]=${limit}&pagination[page]=${page}`,
-            {
-                headers: {
-                    Authorization: `Bearer ${strapiKey}`,
-                },
-            }
-        ).then((res) => res.json())
-        const { data, meta } = strapiPages
-        if (data) {
-            data.forEach(({ id, attributes }) => {
-                files[attributes.path] = { contributors: attributes.contributors, lastUpdated: attributes.lastUpdated }
-            })
-        }
-        if (meta?.pagination?.pageCount > page) {
-            return await createStrapiPageNodes(limit, page + 1)
-        }
-    }
-
-    await createStrapiPageNodes()
 }
 
 const cloudinaryCache = {}
@@ -161,9 +135,15 @@ export const onPreInit: GatsbyNode['onPreInit'] = async function ({ actions }) {
     fs.writeFileSync(CLOUDINARY_CACHE_FILE, JSON.stringify(cloudinaryCache))
 }
 
-function getPublicID(image: string) {
-    const imagePath = image.split('/upload/')[1]
-    return imagePath.substring(0, imagePath.lastIndexOf('.'))
+// onCreateNode runs once per source node (thousands of Mdx/MarkdownRemark nodes). The
+// pageviews cache is written once in onPreBootstrap and never changes mid-build, so fetch
+// it at most once here instead of re-reading it from the on-disk cache for every node.
+let pageViewsPromise: Promise<Record<string, number> | undefined> | null = null
+function getPageViews(cache): Promise<Record<string, number> | undefined> {
+    if (!pageViewsPromise) {
+        pageViewsPromise = cache.get(PAGEVIEW_CACHE_KEY)
+    }
+    return pageViewsPromise
 }
 
 export const onCreateNode: GatsbyNode['onCreateNode'] = async ({
@@ -281,6 +261,13 @@ export const onCreateNode: GatsbyNode['onCreateNode'] = async ({
             }
         }
 
+        const sourceText = typeof node.rawBody === 'string' ? node.rawBody : ''
+        createNodeField({
+            node,
+            name: `wordCount`,
+            value: stripFrontmatter(sourceText).split(/\s+/).length,
+        })
+
         createNodeField({
             node,
             name: `slug`,
@@ -288,7 +275,7 @@ export const onCreateNode: GatsbyNode['onCreateNode'] = async ({
         })
 
         if (slug) {
-            const pageViews = await cache.get(PAGEVIEW_CACHE_KEY)
+            const pageViews = await getPageViews(cache)
 
             if (pageViews && slug.slice(0, -1) in pageViews) {
                 createNodeField({

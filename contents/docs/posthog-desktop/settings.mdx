@@ -2,47 +2,106 @@
 title: PostHog Desktop settings
 ---
 
-PostHog Desktop surfaces a lot of configuration that you'd normally manage through a CLI or config files. This page calls out the highlights, not every toggle.
+Use Settings to customize PostHog Desktop and choose defaults for new agent sessions. Search Settings to find a specific option.
+
+## General
+
+Set your PostHog account, theme, and defaults for new tasks. This includes the [autonomy mode](/docs/posthog-desktop/tasks#autonomy-modes), effort level, composer behavior, and diff view. You can also keep your machine awake while agents run and manage [updates](/docs/posthog-desktop/download-posthog-desktop#updates).
 
 ## Notifications
 
-Choose how PostHog Desktop gets your attention when an agent finishes or needs input: push notifications, dock badge, dock bounce, or a completion sound effect. There are 11 sounds to pick from and a volume slider with an inline test button.
+Choose push notifications, dock behavior, completion sounds, and spoken narration.
 
-## Custom instructions
+## Personalization
 
-A freeform text field injected into every agent session. Use it for things like "always write tests" or "prefer functional patterns."
+Use **Custom instructions** to add instructions to every agent session. For example, write "always write tests" or "prefer functional patterns." PostHog Desktop can sync instructions from `AGENTS.md` or `CLAUDE.md` in your repository.
 
-## MCP servers
+This section also contains hedgehog mode and sound effects.
 
-A built-in marketplace for discovering, installing, and managing MCP servers. Per-tool approval policies let you approve, block, or require confirmation for individual tools.
+## AI-generated content
+
+PostHog Desktop can generate:
+
+- **Branch names** – Derived from your task title, so the name on disk reflects the work it contains
+- **Commit messages** – A concise imperative subject line that respects your repository's commit conventions
+- **Pull request titles and descriptions** – A summary of the actual diff, added to `PULL_REQUEST_TEMPLATE.md` when your repository has one
+
+For agent tasks, PostHog Desktop also uses the conversation to carry the reason for a change into the commit and pull request. You can edit, regenerate, or replace any generated content.
+
+## Plan & usage
+
+Review AI credit spend by day and model, and set a billing limit. See [pricing](/docs/posthog-desktop/pricing) for prices.
+
+## Skills and MCP servers
+
+Manage [skills](/docs/posthog-desktop/skills) and [MCP servers](/docs/posthog-desktop/mcp-servers). MCP server settings let you allow, block, or require confirmation for tools.
 
 ## Environments
 
-Local environments define setup scripts that run when a new worktree is created, so the agent lands in a project that's already installed and ready. They're stored as TOML and committable, so your team shares the same config.
+Local environments define setup scripts for new checkouts. They use TOML and can be committed to the repository.
 
-Cloud environments control network access rules and environment variables for remote sandbox sessions.
+Cloud environments set network rules and environment variables for remote sandbox sessions. See [environments](/docs/posthog-desktop/environments).
 
-## Worktrees
+## Workspaces and worktrees
 
-Configure auto-suspension to reclaim disk space from stale worktrees. Set a max active count and an inactivity threshold. Suspended worktrees restore on demand.
+Manage repositories added to PostHog Desktop. Configure [checkout auto-suspension](/docs/posthog-desktop/worktrees) with a maximum active count and inactivity threshold. PostHog Desktop restores suspended checkouts when you open them.
+
+## Harness
+
+Review Claude Code and Codex configuration paths. The Permissions view shows which Claude Code operations are allowed or denied.
+
+**Allow bypass permissions mode** adds bypass mode to the composer's mode menu. It does not turn bypass on. Sessions keep asking for approval until you select bypass for one. A session in bypass mode runs shell commands, file edits, and web requests without asking, so use it only in an environment you can restore.
+
+## Workspace tools
+
+Every task includes tools for checking and adjusting the agent's work without switching apps.
+
+### Terminal
+
+The terminal opens in the task's working directory. Local tasks use your repository, while worktree tasks use their isolated working directory. Run tests, migrations, `git log`, or a development server from a real shell. File changes appear to the agent like any other edit.
+
+### Editor
+
+Open files from the [diff panel](/docs/posthog-desktop/code-review) or repository tree and edit them in place. Markdown files have a preview. Hover a PostHog SDK call, such as `capture()` or a flag check, to see its event volume or rollout.
+
+Select a range and leave a comment to send the selected code and your instruction to the agent. Use **Open in editor** when you prefer your external editor.
+
+### Browser tabs
+
+Open a web page beside a task to check a preview, dashboard, or doc without leaving PostHog Desktop. Tabs belong to the window where you open them. A [space](/docs/posthog-desktop/spaces) section such as `CONTEXT.md` can open as a tab too.
+
+### Watch agents from other windows
+
+Mission Control shows running agents over your other windows, so you can watch progress while working elsewhere. Turn it on in **Settings** > **General**.
+
+### Spoken narration
+
+With narration enabled, the agent speaks short status updates while it works. Turn it on in **Settings** > **Notifications**.
+
+### Shortcuts and sidebar
+
+Configure keyboard shortcuts and choose which items appear in the sidebar.
+
+## Integrations
+
+- **GitHub**: Project and personal connections to the PostHog GitHub App. See [GitHub integration](/docs/libraries/github?tab=Desktop), and [Git + GitHub](/docs/posthog-desktop/git-github-integration) for the local Git menu
+- **Slack**: Workspaces for [starting tasks from Slack](/docs/slack), inbox notifications, and comment notifications. See [Slack integration](/docs/libraries/slack?tab=Desktop)
+- **Discord**: Optional Rich Presence status. See [Discord integration](/docs/libraries/discord?tab=Desktop)
 
 ## Self-driving
 
-The **Self-driving** tab configures the same [self-driving](/docs/self-driving) setup you manage in the PostHog web app – it's one shared configuration, not a separate copy for the desktop app. From here you can:
+Configure [self-driving](/docs/self-driving) work without leaving PostHog Desktop:
 
-- Connect GitHub and toggle which [signal sources](/docs/self-driving/inbox/sources) feed your [inbox](/docs/self-driving/inbox). These are the same sources you'd configure in the web UI.
-- Set a priority threshold (P0 through P4) that controls when the agent auto-starts tasks assigned to you.
-- Choose where report notifications go. The Slack section has two cards:
-  - **Notify the whole team** – posts every actionable report to one team-wide channel, whether or not a reviewer is suggested. An enable toggle controls this; toggling it off clears the channel.
-  - **Notify me directly** – when you're a suggested reviewer, get pinged in your own channel. Reviewers who set their own channel are notified there instead of the team channel.
+- Choose which [signal sources](/docs/self-driving/inbox/sources) feed your [inbox](/docs/self-driving/inbox)
+- Set the daily report limit
+- Set the priority at which the agent starts assigned tasks automatically
+- Choose a base branch for automatically opened pull requests in each repository
+- Send actionable reports to a team Slack channel or notify suggested reviewers directly
 
-You can configure the same signal sources from the **Agents** tab in PostHog Desktop (the same nav level as Command Center and your tasks) or from the [web app](/docs/self-driving/web). It's all one setup, so a change in any of these places applies everywhere.
+This is the same configuration used by the PostHog web app and the **Agents** tab. A change in one place applies everywhere.
 
-## Task defaults
+See [Use Self-driving in PostHog Desktop](/docs/posthog-desktop/self-driving) for the report review and agent handoff workflow.
 
-New tasks start in Plan mode by default. You can change this to remember the last-used mode instead. There's also a keep-awake toggle that prevents macOS from sleeping while an agent is running.
+## Advanced
 
-## Fun stuff
-
-- **Hedgehog mode** releases a PostHog hedgehog that walks around your screen
-- **Sound effects** range from professional to completely unhinged
+Use Advanced settings for troubleshooting, storage resets, developer mode, and low-level cloud or command options.

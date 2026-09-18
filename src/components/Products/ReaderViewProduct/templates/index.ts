@@ -19,7 +19,6 @@ import PricingCalculator from './PricingCalculator'
 import Plans from './Plans'
 import PricingFooterCTA from './PricingFooterCTA'
 import BilledWithPricing from './BilledWithPricing'
-import Changelog from './Changelog'
 import CommunityQuestions from './CommunityQuestions'
 
 /**
@@ -48,7 +47,6 @@ export const templateRegistry: Record<string, React.ComponentType<SectionCompone
     plans: Plans,
     'pricing-cta': PricingFooterCTA,
     'billed-with': BilledWithPricing,
-    changelog: Changelog,
     community: CommunityQuestions,
 }
 
@@ -72,6 +70,5 @@ export {
     Plans,
     PricingFooterCTA,
     BilledWithPricing,
-    Changelog,
     CommunityQuestions,
 }

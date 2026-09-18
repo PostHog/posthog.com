@@ -12,6 +12,11 @@ PostHog Desktop is in beta, so some behaviors may still change.
 
 [PostHog Desktop](/docs/posthog-desktop) is the surface for driving parallel agents that improve your product. For Logs, it's where you review the [Self-driving](/docs/self-driving) work that your firing alerts generate, plus the shifts PostHog spots in your logs on its own. You don't browse raw log lines here – that's the [web app](/docs/logs/surfaces/web-app).
 
+## Before you start
+
+1. **Set up Logs** – [send them to PostHog with an OpenTelemetry client](/docs/logs/installation) so there's something to read.
+2. **Install PostHog Desktop** – [download the app](/docs/posthog-desktop/download-posthog-desktop) and connect it to your project.
+
 ## What you can do here
 
 When a [log alert](/docs/logs/alerts) starts firing, or breaks and auto-disables, it emits a signal into Self-driving. Related signals get grouped into a [report](/docs/self-driving/reports) with the logs behind them, and when there's a code fix, a drafted pull request.

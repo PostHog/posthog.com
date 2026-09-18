@@ -59,6 +59,11 @@ const UploadSymbolSetsPlatforms = () => {
             image: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/integrate/ios.svg',
         },
         {
+            label: 'Kotlin Multiplatform',
+            url: '/docs/error-tracking/upload-debug-symbols/kmp',
+            image: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/integrate/kmp.svg',
+        },
+        {
             label: 'Rust',
             url: '/docs/error-tracking/upload-source-maps/rust',
             image: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/integrate/rust.svg',

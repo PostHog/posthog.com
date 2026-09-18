@@ -20,6 +20,11 @@ curl -X POST \
   "<ph_app_host>/api/environments/{project_id}/endpoints/{endpoint_name}/run"
 ```
 
+## Before you start
+
+1. **Create an endpoint** – [define your data and publish it](/docs/endpoints/start-here) so there's an endpoint to call.
+2. **Get API access** – [create a personal API key](/docs/api/personal-api-keys) with the scopes you need. See [authentication](#authentication) below.
+
 ## What you can do here
 
 - **Parameterize the query** – pass [variables](/docs/endpoints/variables) so one endpoint serves many customers, date ranges, or breakdowns.
@@ -29,7 +34,7 @@ curl -X POST \
 
 ## Authentication
 
-Requests use either a [project secret API key](/docs/api/project-secret-api-keys) or a [personal API key](/docs/api/personal-api-keys), both scoped to `endpoint:read`. Project secret keys are the right choice for backend services since they aren't tied to a user account.
+Requests use either a [project secret API key](/docs/api/project-secret-api-keys) or a [personal API key](/docs/api/personal-api-keys), both scoped to `endpoint:read`. Project secret keys are the right choice for backend services since they aren't tied to a user account, but they're in beta and rolling out gradually – if they aren't available in your organization yet, use a personal API key.
 
 Never ship either key in client-side code. For [customer-facing analytics](/docs/endpoints/customer-facing-analytics), proxy the request through your own backend and pass the customer identifier as a variable.
 

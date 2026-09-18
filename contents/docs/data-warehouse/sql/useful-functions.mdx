@@ -88,7 +88,14 @@ where event = '$autocapture'
 You can access nested data in JSON and objects directly.
 
 ```sql
-select properties.$set.$geoip_country_name
+select properties.cart.total
+from events
+```
+
+Person properties live on the `person` table rather than nested inside event properties, so read them directly:
+
+```sql
+select person.properties.$geoip_country_name
 from events
 ```
 
@@ -96,9 +103,9 @@ You can parse JSON with `JSONExtractRaw()` to return a value.
 
 ```sql
 SELECT
-  JSONExtractRaw(properties.$set) as set_properties
+  JSONExtractRaw(properties.cart) as cart
 FROM events
-WHERE properties.$set IS NOT NULL
+WHERE properties.cart IS NOT NULL
 ```
 
 Specialized `JSONExtract` functions exist for different data types including:

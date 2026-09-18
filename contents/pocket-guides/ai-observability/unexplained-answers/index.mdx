@@ -1,0 +1,107 @@
+---
+title: Debug a wrong answer with traces
+shortTitle: Wrong answers
+subtitle: The answer was wrong, nothing errored, and the reason is sitting in the trace.
+pocketGuideOrder: 6
+pocketGuideCta:
+  kind: prompt
+  label: Find these with PostHog AI
+  note: It pulls the traces and reads them back to you. It doesn't build anything.
+  requires:
+    label: Needs AI Observability instrumented.
+  prompt: >-
+    Show me the LLM traces from the last 24 hours where $ai_is_error is true or an evaluation
+    failed. For each one, give me the trace id, the person, the model, the input, the output, and
+    the reasoning from any failed evaluation. Then tell me what the worst five have in common –
+    same model, same prompt version, same tool, same kind of question – and which single cause
+    would explain the most of them. If my project has no real $ai_generation traffic yet, just
+    say so and tell me
+    how to instrument AI observability using the wizard or manual install.
+---
+
+<LeftPage>
+
+<TraceFigure
+    n={1}
+    caption="Retrieval handed the model the old header."
+    rows={[
+        { kind: 'trace', label: 'answer_docs_question', meta: 'person 8815 · 6.1s · $0.014' },
+        { kind: 'span', label: 'retrieve_docs', meta: '0.4s · 3 docs · top hit: auth-v1', depth: 1 },
+        { kind: 'generation', label: 'answer_question', meta: '2,900 in · 180 out · no error', depth: 1 },
+    ]}
+/>
+
+</LeftPage>
+
+<RightPage>
+
+# Debug a wrong answer with traces
+
+Your docs assistant tells a user to authenticate with a header your API dropped two versions ago. Everything looks normal and the call succeeded.
+
+So why did it say that? "The model hallucinated" is a guess that might send you off to rewrite a prompt that doesn't need changing.
+
+This use case outlines how to diagnose and fix a wrong answer that doesn't error.
+
+## Four ways to be wrong
+
+A wrong answer has four common causes:
+
+| Cause | What you'd see | What you'd fix |
+| --- | --- | --- |
+| Retrieval found the wrong thing | The retrieval step returned a stale or irrelevant document | Your index, or the query you build |
+| The context was incomplete | Nothing in the trace holds the fact the answer needed | What you fetch, and when |
+| A tool returned junk | The tool call errored or came back empty, and the answer carried on | The tool, or how you handle its failure |
+| The model ignored what it was given | Everything upstream is correct and the answer still isn't | The prompt, or the model |
+
+## How the trace tells them apart
+
+A <Term name="trace" /> holds the whole interaction in order: what the user asked, every retrieval and tool call along the way, and what the model produced. 
+
+Each step is its own event:
+- A <Term name="span" /> for the work around the model
+- A <Term name="generation" /> for the call itself
+
+You can read the trace top to bottom to see what the model knew at each point.
+
+In <SeeFig n={1} />, the top hit from retrieval is `auth-v1`. The model was handed the old authentication page and answered from it faithfully. That's the first cause, and you can only see it because the span sits above the generation in the same trace.
+
+## What else is attached
+
+Because AIO events are like other PostHog events, a trace holds the rest of the story too:
+- The person who triggered it, and everything else they did that day.
+- Their <Term name="session replay" />, so you can watch what they did with the answer.
+- Any <Term name="exception" /> the request threw, on the same trace.
+
+So "a user says the bot was wrong" becomes the request, the document it was given, and the moment they gave up.
+
+## Check whether it's a pattern
+
+A single trace is an anecdote. Before you ship a fix, find out whether it's systemic:
+- Filter for the same failure over the last week
+- Check the <Term name="errors tab" /> if it threw one
+- See whether the same eval fails on the same shape of question
+
+If it is a pattern, it's worth automating. An AI observability <Term name="scout" /> watches these signals on a schedule and files an investigated report, so the next one arrives already read.
+
+## Find traces with PostHog AI
+
+This prompt pulls the traces most likely to be worth reading to the surface:
+
+- The ones from the last 24 hours that errored or failed an evaluation
+- Each with its person, model, input, output, and the eval's reasoning
+- Then what the worst five have in common, and which single cause explains the most of them
+
+<Action />
+
+<Callout to="/pocket-guides/self-driving/ai-error-patterns" label="Add the error patterns scout">
+This is the pattern check from earlier, run for you. A scout reads real traces on a schedule and reports a failure mode only once it shows up across independent requests.
+</Callout>
+
+<SeeAlso>
+
+See also: [Traces](/docs/ai-observability/traces) · [Link to Session Replay](/docs/ai-observability/link-session-replay) · [Errors](/docs/ai-observability/errors)
+
+</SeeAlso>
+
+</RightPage>

@@ -9,6 +9,7 @@ import {
     IconImage,
     IconLaptop,
     IconMagicWand,
+    IconMouseScrollDown,
     IconNight,
     IconRocket,
     IconShare,
@@ -164,6 +165,18 @@ export const useSpotlightActions = (): SpotlightAction[] => {
                     )
                 }
             },
+        },
+        {
+            id: 'scrollbars',
+            label: siteSettings.scrollbars === 'show' ? 'Auto-hide scrollbars' : 'Always show scrollbars',
+            icon: <IconMouseScrollDown />,
+            keywords: ['scrollbar', 'scrollbars', 'scroll', 'scrolling', 'hide', 'show', 'accessibility'],
+            keepOpen: true,
+            perform: () =>
+                updateSiteSettings({
+                    ...siteSettings,
+                    scrollbars: siteSettings.scrollbars === 'show' ? 'auto' : 'show',
+                }),
         },
         {
             id: 'performance-boost',

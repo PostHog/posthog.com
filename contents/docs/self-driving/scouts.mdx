@@ -17,12 +17,19 @@ A scout is a scheduled agent that explores your PostHog data and raises a hand w
 
 ## How a scout works
 
-A scout runs on a schedule. Each run, it looks at one slice of your data, decides whether anything is worth surfacing, and if so files what it found. A scout has two ways to do that:
+A scout runs on a schedule. Each run, it looks at one slice of your data, decides whether anything is worth surfacing, and if so files what it found. A scout has three ways to do that:
 
-- **File a report directly.** When a scout finishes its research with a complete, well-formed finding, it authors a [report](/docs/self-driving/reports) straight into your [inbox](/docs/self-driving/inbox) – a title, a summary, the evidence behind it, and a call on how actionable it is. Most of the built-in scouts work this way, and a scout-authored report shows the scout's name in the inbox so you know where it came from.
-- **Emit a signal.** When a finding is a weaker or partial observation – the kind that only becomes meaningful next to other findings – the scout emits a [signal](/docs/self-driving/signals) instead and lets the pipeline deduplicate it and group it with related signals into a report.
+| Method | When it applies |
+|---|---|
+| **File a report directly** | When a scout finishes its research with a complete, well-formed finding, it authors a [report](/docs/self-driving/reports) straight into your [inbox](/docs/self-driving/inbox) – a title, a summary, the evidence behind it, and a call on how actionable it is. Most of the built-in scouts work this way, and a scout-authored report shows the scout's name in the inbox so you know where it came from. |
+| **Emit a signal** | When a finding is a weaker or partial observation – the kind that only becomes meaningful next to other findings – the scout emits a [signal](/docs/self-driving/signals) instead and lets the pipeline deduplicate it and group it with related signals into a report. |
+| **Record structured data** | When the job is scoring, classifying, or extracting rather than surfacing, a scout can record schema-checked structured records as events instead of filing anything to your inbox. See [turn a scout's judgment into a metric](#turn-a-scouts-judgment-into-a-metric). |
 
-Either way, the bar is the same: a structured finding with the evidence behind it and a suggested action. The difference is whether the scout has already done enough research to stand behind the finding as a single inbox item, or whether the pipeline should consolidate it with others first.
+For the first two, the bar is the same: a structured finding with the evidence behind it and a suggested action. The difference is whether the scout has already done enough research to stand behind the finding as a single inbox item, or whether the pipeline should consolidate it with others first. Measurements are different: they aren't findings at all, just data, and they skip the inbox entirely.
+
+Those three are about *what* a scout files, not where the output ends up. Reports and signals land in your [inbox](/docs/self-driving/inbox) by default, and any scout can also send what it files to a Slack channel or a direct message – see [sending a scout's output to Slack](#sending-a-scouts-output-to-slack).
+
+A scout is **selective by design**. Holding something back is a decision it makes on purpose, not a gap – most runs close out having found nothing worth your attention, and that's the scout working. If you need every item in a stream handled with no judgement call in between, that's what a [signal source](/docs/self-driving/inbox/sources) is for, and the two are often best run together.
 
 A scout reads your data through the same [PostHog MCP](/docs/model-context-protocol) you can connect to Claude Code or Cursor, so it can see anything in PostHog out of the box – events, [data warehouse](/docs/data-warehouse) tables, insights, dashboards – with nothing to wire up per scout. Because any source you land in PostHog becomes queryable, a scout isn't limited to product analytics: a Slack channel, a billing system, or a support inbox synced to your warehouse is fair game too.
 
@@ -30,12 +37,31 @@ A scout also keeps a durable memory between runs. Each run, it reads back what e
 
 Because scouts run on a schedule, the loop keeps noticing problems and opportunities on its own, instead of waiting for someone to file a ticket.
 
+## Configuring a scout
+
+Go to [**Self-driving > Scouts**](https://app.posthog.com/inbox/scouts), open the scout you want to change, and click **Settings**. Changes take effect on the scout's next run.
+
+| Setting | What it does |
+|---|---|
+| **Write signals to the inbox** | On by default. Turn it off for a [dry run](#dry-runs). |
+| **Schedule** | A rolling cadence, or a set time each day. See [setting a scout's schedule](#setting-a-scouts-schedule). |
+| **Network access** | What the scout can reach while it runs. **Trusted domains**, the default, covers PostHog, GitHub, and common package registries. **Full access** lets it reach any site, for a scout that has to read a vendor's status page or external docs. |
+| **Opt out of auto-pause** | Keeps PostHog from pausing this scout when nobody acts on its reports, and from flagging it when it surfaces nothing. |
+| **Tags** | Group scouts so you can filter the fleet list by them. |
+| **Slack destination** | Send this scout's output to a Slack channel or a direct message. See [sending a scout's output to Slack](#sending-a-scouts-output-to-slack). |
+| **MCP servers** | Which of your team's shared MCP servers this scout can use, on top of the PostHog MCP it always has. |
+| **Repositories** | Repositories from your connected GitHub account that the scout's sandbox clones before each run, so a scout that reasons about code can read the tree and run its checks. Read-only, up to 10 per scout. |
+| **Write access** | What the scout may change in your project, beyond its own reports and memory. Off by default. See [letting a scout maintain things](#letting-a-scout-maintain-things). |
+| **Delete scout** | Only on scouts your team authored, and permanent. To pause a scout without losing it, turn it off instead. |
+
 ## Setting a scout's schedule
 
 Every scout runs on its own schedule, which you set per scout without touching its instructions. There are two ways to express one:
 
-- **An interval** – how long to wait between runs, from every 30 minutes to every 30 days. This is the default, and a new scout starts at every 24 hours. Use it when you care about frequency rather than timing.
-- **A cron expression** – a standard five-field expression that anchors runs to wall-clock slots, like `30 9 * * *` for every day at 09:30, `0 9,17 * * *` for twice a day, or `0 9 * * 1-5` on weekdays only. Occurrences have to be at least 30 minutes apart, the same floor as the interval.
+| Format | Description |
+|---|---|
+| **An interval** | How long to wait between runs, from every 30 minutes to every 30 days. This is the default, and a new scout starts at every 24 hours. Use it when you care about frequency rather than timing. |
+| **A cron expression** | A standard five-field expression that anchors runs to wall-clock slots, like `30 9 * * *` for every day at 09:30, `0 9,17 * * *` for twice a day, or `0 9 * * 1-5` on weekdays only. Occurrences have to be at least 30 minutes apart, the same floor as the interval. |
 
 Cron expressions are evaluated in your project's timezone, so a scout scheduled for 09:00 stays at 09:00 through daylight saving changes. Setting a cron expression takes precedence over the interval.
 
@@ -45,7 +71,7 @@ Since every run costs a share of your project's daily run budget, the schedule i
 
 ## Running a scout on demand
 
-Scouts run themselves on their schedule, but you can also trigger a run on demand – useful to test a scout right after authoring it, or to refresh its findings without waiting for the next scheduled run. A scout that's still disabled can be run this way too, so you can see what it would surface before turning it on.
+Scouts run themselves on their schedule, but you can also trigger a run on demand – useful to test a scout right after authoring it, or to refresh its findings without waiting for the next scheduled run. Open the scout from [**Self-driving > Scouts**](https://app.posthog.com/inbox/scouts) and click **Run now**. A scout that's still disabled can be run this way too, so you can see what it would surface before turning it on.
 
 On-demand runs count against the same daily run budget as scheduled runs, so repeatedly re-running the same scout can use up your project's daily allowance.
 
@@ -55,15 +81,27 @@ A scout writes its findings to your inbox by default, which is usually what you 
 
 A dry run consumes a run from your daily budget like any other, so it's a safety net rather than an iteration loop.
 
+<CalloutBox icon="IconInfo" title="When PostHog flags or pauses a scout" type="fyi">
+
+PostHog checks whether a scout's output is being used. A scout that stays quiet is flagged for review but keeps running, because a quiet watchdog may be doing its job. If a scout has established reports that nobody acts on, PostHog warns you first and pauses it after a week unless someone engages with its reports.
+
+An inactivity pause never retries on its own – it stays in place until you enable the scout again, which also exempts it from later inactivity checks. That's separate from the failure safeguard: a scout that fails five runs in a row pauses so a broken configuration doesn't keep consuming runs, then retries once a day until a successful retry resumes it.
+
+</CalloutBox>
+
 ## Steering a scout with a note
 
 Sometimes you don't want to change a scout – you want to tell it something. **Scout notes** are short steering messages you leave for the fleet, which every run reads as context alongside its own memory:
 
-- **Feedback on its output** – "the staging traffic spike you keep flagging is known noise, stop reporting it."
-- **A pointer** – "dig into the EU signup funnel this week, we think something regressed."
-- **Context it couldn't know** – "we shipped a new checkout on Tuesday, treat conversion shifts after that as expected."
+| Type | Example |
+|---|---|
+| **Feedback on its output** | "the staging traffic spike you keep flagging is known noise, stop reporting it." |
+| **A pointer** | "dig into the EU signup funnel this week, we think something regressed." |
+| **Context it couldn't know** | "we shipped a new checkout on Tuesday, treat conversion shifts after that as expected." |
 
 A note can address one scout by name or the whole fleet, and you can give it an expiry date so time-boxed steering ("watch this closely this week") retires itself.
+
+A note can also target a report-pipeline stage with a reserved `pipeline:*` audience. Use `pipeline:report-research` for guidance about how reports are researched, judged, and routed. The note reaches that stage and no scout. It is the only pipeline audience available today. Other `pipeline:*` values are rejected.
 
 Notes are advisory. They direct a scout's attention, but they don't lower its evidence bar or force it to file anything – a note saying "report X" still gets an honest investigation. Each run says which notes it acted on and how, and folds anything durable into its memory.
 
@@ -79,9 +117,40 @@ The practical upshot: triaging your inbox honestly is how scouts get quieter. Yo
 
 ## Sending a scout's output to Slack
 
-Each scout can post what it finds to a Slack channel of your choosing, set per scout. That lets you route scouts to the teams that care – the revenue scout to `#growth`, the APM scout to `#on-call` – instead of sending everything to one firehose channel.
+Each scout can send what it finds to a Slack channel or as a direct message to selected Slack members. This is per scout and separate from the project-wide **#posthog-inbox** notifications.
 
-This is per scout and separate from the project-wide **#posthog-inbox** notification you set up when [connecting Slack](/docs/self-driving/setup). Connect your Slack workspace once, then pick a channel on any scout you want routed.
+To set it up, [connect your Slack workspace](/docs/self-driving/setup) once. Then open the scout's [settings](#configuring-a-scout), go to **Slack destination**, pick the workspace, and choose **Channel** or **Direct message**:
+
+- **Channel** – pick the channel to post in. Only the first page of channels is listed, so type to search for a specific one. PostHog has to be in the channel, so invite it with `/invite @PostHog` first.
+- **Direct message** – pick up to five members of the connected workspace. Each person gets their own message from the PostHog app.
+
+With a channel selected, you can also turn on **Post reports as a thread**. PostHog then posts a short lead message in the channel and splits the rest of the report by its headings into replies, so the channel stays readable and a long summary isn't cut off. To stop sending a scout's output to Slack, click the trash button next to the channel or member picker.
+
+## Letting a scout maintain things
+
+Every scout can read your project and write to the inbox. Some jobs need more than that. Dashboards go stale as instrumentation changes, alerts keep firing on a metric that moved, warehouse views stop materializing, and a Replay Vision scanner prompt names UI that has since been renamed. A scout that only describes those problems leaves the fix to you. A scout with **write access** can make the fix itself, in the same run it finds the problem.
+
+Open the scout's [settings](#configuring-a-scout) and expand **Write access**. Each switch grants one kind of object:
+
+| Group | Objects | What the scout can do |
+|---|---|---|
+| Analytics | Dashboards, insights, annotations | Create, update, and delete dashboards and their tiles, saved insights, and annotations |
+| Monitoring | Alerts | Create, update, and delete insight alerts, and post them to a connected Slack channel |
+| Scouts and skills | Skills | Create, update, and archive shared skills and their files |
+| Data | Warehouse views, warehouse tables | Create, update, run, and materialize views, refresh table schemas, and manage data quality checks |
+| Replay vision | Scanners | Create and update scanners, rate observations, and apply prompt suggestions |
+
+Notebooks, reports, and the scout's own memory are always writable and don't need a grant.
+
+A few things to know before you turn a switch on:
+
+- **Write access covers the whole project.** A scout that can write dashboards can change or delete any dashboard in the project, not only the ones it created. Annotations include organization-wide ones that other projects see, and skills include the ones your other scouts run from. Grant only what the scout's job needs.
+- **Most deletes can be undone.** Deleted alerts and deleted data quality checks cannot.
+- **A dry run never holds the grant.** Switch a scout to [dry run](#dry-runs) and its writes stop, so you can preview a maintaining scout without it changing anything.
+- **Changes apply from the scout's next run**, and each grant is recorded in your project's activity log. So is every change the scout makes: look for edits by the scout's owner marked as made via MCP inside the run's time window.
+- **Only the scout's author or a project admin can grant write access.** The scout runs as its author, so it can never do more than that person could.
+
+A well-built maintaining scout keeps a curated list of what it looks after, applies small, verified fixes itself (re-running a stale view, retuning an alert it has back-tested, repairing a dead dashboard tile), caps how many changes it makes per run, and hands anything that drops data or changes meaning to a person with the exact change spelled out. Ask your agent to build one with the [authoring skill](https://github.com/PostHog/posthog/blob/master/products/signals/skills/authoring-scouts/SKILL.md), which carries the pattern.
 
 ## Every report is also an event
 
@@ -101,6 +170,37 @@ LIMIT 20
 
 Scout report events are captured against a synthetic per-scout ID with person processing off, so they never create person profiles or mix into your user analytics.
 
+## Turn a scout's judgment into a metric
+
+Not every watching job ends in a report. Sometimes what you want is a number, measured the same way on a schedule: how good, how risky, what kind. A scout can produce that too.
+
+Give a scout a **structured output schema**: a JSON Schema describing one record, set on the scout alongside its schedule. Each run, the scout judges a sample of whatever it watches and records one record per judged item – a classification, a score, a verdict with a reason. Every record is validated against the schema before it's written, so the series stays clean.
+
+Records land in your project as `$scout_structured_output` events, with each field of the record flattened to an `output_<field>` property, a `subject` property naming the item that was judged, and a `skill_name` property naming the scout that recorded it. Because they're ordinary events, the metric works everywhere in PostHog with nothing to wire up: chart the share of items judged `critical` in an insight, break down by any field, set an [alert](/docs/alerts) on a shift, or query the raw records with [SQL](/docs/sql). Filter on `skill_name` whenever more than one scout records measurements, so each scout's series stays its own.
+
+```sql
+SELECT toDate(timestamp) AS day,
+       countIf(properties.output_verdict = 'good') / count() AS good_rate
+FROM events
+WHERE event = '$scout_structured_output'
+  AND properties.skill_name = 'signals-scout-your-scout'
+GROUP BY day
+ORDER BY day DESC
+```
+
+Reach for this when the thing you want to measure is real but too subjective for a query to compute: whether a support reply resolved the question, whether a generated summary sticks to its sources, whether a session looks like a genuine evaluation or a bot. The scout's judgment is the measuring instrument, and the schedule turns it into a time series.
+
+Judging is the headline use, but the channel itself is general: a record is any structured object matching the schema, so a scout can turn anything it reads into events. Extract typed fields from free text, like the product areas and requested features in a support channel. Snapshot state nothing else captures, like a vendor's API health or your own fleet's configuration, so its history becomes chartable. Or land a number from a system that has no SDK. If a scout can see it, the schema can shape it, and it arrives as events.
+
+A few things to know:
+
+- The schema owns the record's shape. The scout's instructions decide what to sample, how to judge it, and how many records a run produces.
+- Small enumerations chart better than 1-to-5 scores, and a free-text reason field on each record keeps individual judgments auditable.
+- A scout in [dry run](#dry-runs) records nothing. Measurements follow the same switch as reports.
+- Measurements and reports combine well: record every judgment, and file a report only when a rate moves enough to need a human.
+
+Like scout report events, these are captured with person processing off, so they never create person profiles or mix into your user analytics.
+
 ## Built-in and custom scouts
 
 PostHog ships with a set of scouts that watch common patterns out of the box. You can turn each on or off per project, and teams can add their own scouts for the patterns specific to their product. See [scout examples](/docs/self-driving/scout-examples) for the scouts PostHog ships with and ideas for your own.
@@ -119,7 +219,9 @@ Built-in scouts don't do this. Their instructions are maintained by PostHog and 
 
 Scouts aren't the only thing that emits [signals](/docs/self-driving/signals). PostHog also has **signal sources**: built-in pipelines that watch one specific stream continuously, like error tracking, session replay, Zendesk, GitHub Issues, and Linear.
 
-The difference is how they look. A signal source watches a single stream in real time; a scout runs on a schedule and explores your product data more holistically. You turn them on independently, and both feed the same pipeline, where their signals are deduplicated and grouped into reports. The more data you capture, the more both have to work with.
+The difference is how they look, and what you get for it. A signal source watches a single stream continuously and processes every qualifying item in it – deterministic and exhaustive, with no bar to clear. A scout runs on a schedule, explores more holistically, and decides what's worth surfacing – judgement and steerability, at the cost of being selective rather than exhaustive.
+
+Neither is the upgrade from the other and most projects run both. You turn them on independently, and both feed the same pipeline, where their signals are deduplicated and grouped into reports. The more data you capture, the more both have to work with. For a side-by-side breakdown and when to reach for which, see [sources or scouts?](/docs/self-driving/signals#sources-or-scouts).
 
 ## Next step
 

@@ -16,7 +16,7 @@ Our support engineers, in the <SmallTeam slug="support" />, triage tickets for [
 
 ## When is my turn?
 
-Most engineering teams run an incident.io schedule, check out the [escalation schedules](/handbook/engineering/operations/on-call-rotation#escalation-schedules).
+Most engineering teams run a `Support Hero: {team}` rotation in incident.io, [defined in Terraform](/handbook/engineering/operations/on-call-rotation#managing-on-call-in-terraform) alongside the team's other [escalation schedules](/handbook/engineering/operations/on-call-rotation#escalation-schedules).
 
 The schedules consist of contiguous blocks, but that definitely doesn't mean working 24/7 – you should just work your normal hours.
 
@@ -30,11 +30,12 @@ Each engineering team has its own list of tickets in PostHog support. Your view 
 
 Your job is simple: ship features and fixes, resolve ticket after ticket from your team's list, and respond to open-source PRs assigned to your team.
 
-There are three sources of tickets:
+There are four sources of tickets:
 
 1. In-app bug reports/feedback/support tickets sent from the [Support panel](https://us.posthog.com/home#panel=support).
 1. Slack or MS Teams threads that have been raised via @SupportHog in [customer support channels](/handbook/growth/sales/slack-channels).
 1. Reports in the `#papercuts` Slack channel that relate to your team's area.
+1. Security findings in code your team owns, tracked in <PrivateLink url="https://security.posthog.dev">security.posthog.dev</PrivateLink>.
 
 ### Answering tickets
 
@@ -74,6 +75,14 @@ Check the `#papercuts` Slack channel during your rotation and pick up any report
 - **React with ✅** once you've shipped a fix or improvement.
 
 Papercuts are also routed to the Signals inbox, so before you start work, check whether an auto-generated PR is already waiting – it may save you most of the effort.
+
+### Security findings
+
+Vulnerabilities in code your team owns are also yours to fix, and the support hero is the person who picks them up alongside the normal support workload. Give critical and high severity findings the same priority as a customer ticket, and fix them as soon as you can.
+
+Findings come from the AI pentesting services we use, currently Veria Labs and Parameter. They are triaged automatically, and the true positives go to the product team that owns the code. Your team's findings are collected in <PrivateLink url="https://security.posthog.dev">SecurityHog</PrivateLink>, and your team also gets a weekly post in its Slack channel that lists them.
+
+Work through the findings for your team during your rotation. If you cannot finish one, hand it over to the next support hero. If you are not sure how serious a finding is, or how to fix it, ask in `#team-security`.
 
 ### Responding to external PRs
 
@@ -141,6 +150,26 @@ If you find yourself overwhelmed, remember:
 
 The key principle: We want to be responsive to our open-source community when we can, but not at the cost of our primary support responsibilities or team sustainability.
 
+### Community questions and Discord
+
+Users on the free plan get community support only. Because of this, many questions and opinions about your product area appear on [Community questions](/questions) and in Discord, and not in PostHog Support.
+
+This is not a ticket queue, and it is not a duty. Nobody has to reply. Look at it as a source of product feedback: it shows you what users ask, what confuses them, and what they say about your product area, in real time.
+
+If you have time between tickets, read your team's community posts. The goal is to spend less than 30 minutes a week. Most teams get one or two questions a week, sometimes none.
+
+#### Where to find posts relevant to your team
+
+Each post topic is subscribed to one or more teams. When a user makes a post, the post goes to the Slack channel of each subscribed team.
+
+To see which topics are mapped to your team, go to [community alerts](/community/alerts). Use that page also to find topics that have no team, and teams that have no Slack channel. A team with no Slack channel gets nothing, even when it is subscribed to a topic.
+
+#### What is a good reply?
+
+**A reply from PostHog AI or from another community member is frequently the correct answer for the user.** When this is true, no need to reply—you can upvote the existing reply. If you want to chime in with something, check these [guidelines for answering questions](/handbook/community/questions).
+
+Paid tickets always have a higher priority than community questions.
+
 ## What about SDK support?
 
 The SDK Support Hero rotation is owned by the <SmallTeam slug="client-libraries" />. See the dedicated [SDK support rotation](/handbook/engineering/sdks/support-rotation) page for details on how the rotation works, including how to prioritize time and handle mobile SDK issues.
@@ -202,7 +231,11 @@ If you're a support hero, there are a few things to make sure are in place so th
 - You have a Slack channel named `#team-<team-name>`, in exactly the same format as your team name on the teams page.
 - You have a Slack channel named `#support-<team-name>`, in exactly the same format as your team name on the teams page.
 - The PostHog Slack app is in your `#support-<team-name>` channel (invite it with `/invite @PostHog`) — without it, ticket notifications can't be posted there.
-- Support hero notifications are configured. Call `/support-hero <incident_io_schedule_id> [optional_hero_nickname]` in your team's Slack channel to activate or reconfigure at any time. Call `/support-hero` with no arguments to find out who's currently handling tickets.
+- Configure a Slack user group for the team's `Support Hero: <team>` schedule in [incident.io](https://app.incident.io/posthog/on-call/schedules). This group always contains the person who is currently on call, so you can mention the current Support Hero from any Slack channel.
+  1. Open the schedule, then click **Connect Slack group**.
+  1. Select **Create new**.
+  1. Remove the `On call` prefix (including the trailing space) from the generated group name and the `on-call-` prefix from its handle. This keeps it consistent with the other on-call groups. For example, use `Support Hero: Query Performance` and `support-hero-query-performance`, not `On call Support Hero: Query Performance` and `on-call-support-hero-query-performance`.
+  1. Save the group. If the **Save** button is disabled, incident.io shows who has permission to make this change. Ask one of those people to complete the setup.
 
 A couple more things to make sure of (these may happen magically in future):
 

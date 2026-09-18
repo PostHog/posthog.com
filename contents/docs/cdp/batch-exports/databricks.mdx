@@ -154,29 +154,30 @@ This section describes the models that can be exported to Databricks.
 
 This is the default model for Databricks batch exports. The schema of the model as created in Databricks is:
 
-| Field                          | Type        | Description                                                    |
-|--------------------------------|-------------|----------------------------------------------------------------|
-| uuid                           | `STRING`    | The unique ID of the event within PostHog                      |
-| event                          | `STRING`    | The name of the event that was sent                            |
-| properties                     | `VARIANT` or `STRING` | A JSON object with all the properties sent along with an event |
-| distinct_id                    | `STRING`    | The `distinct_id` of the user who sent the event               |
-| team_id                        | `BIGINT`    | The `team_id` for the event                                    |
-| timestamp                      | `TIMESTAMP` | The timestamp associated with an event                         |
-| databricks_ingested_timestamp  | `TIMESTAMP` | An additional metadata column, indicating when the event was ingested into Databricks          |
+| Field                         | Type                  | Description                                                                         |
+| ----------------------------- | --------------------- | ----------------------------------------------------------------------------------- |
+| uuid                          | `STRING`              | The unique ID of the event within PostHog                                           |
+| event                         | `STRING`              | The name of the event that was sent                                                 |
+| properties                    | `VARIANT` or `STRING` | All the properties sent along with an event                                         |
+| person_properties             | `VARIANT` or `STRING` | All the person properties at the time the event was ingested                        |
+| distinct_id                   | `STRING`              | The `distinct_id` of the user who sent the event                                    |
+| team_id                       | `BIGINT`              | The `team_id` for the event                                                         |
+| timestamp                     | `TIMESTAMP`           | The timestamp associated with an event                                              |
+| databricks_ingested_timestamp | `TIMESTAMP`           | An additional metadata column, indicating when the event was ingested into Databricks |
 
 ### Persons model
 
 The schema of the model as created in Databricks is:
 
-| Field                      | Type        | Description                                                                                                    |
-|----------------------------|-------------|----------------------------------------------------------------------------------------------------------------|
-| team_id                    | `BIGINT`    | The id of the project (team) the person belongs to                                                             |
-| distinct_id                | `STRING`    | A `distinct_id` associated with the person                                                                     |
-| person_id                  | `STRING`    | The id of the person associated to this (`team_id`, `distinct_id`) pair                                        |
-| properties                 | `VARIANT` or `STRING` | A JSON object with all the latest properties of the person                                           |
-| person_version             | `BIGINT`    | Internal version of the person properties, used by batch export in merge operation                             |
-| person_distinct_id_version | `BIGINT`    | Internal version of the person to `distinct_id` mapping, used by batch export in merge operation               |
-| created_at                 | `TIMESTAMP` | The timestamp when the person was created                                                                      |
+| Field                      | Type                  | Description                                                                                      |
+| -------------------------- | --------------------- | ------------------------------------------------------------------------------------------------ |
+| team_id                    | `BIGINT`              | The id of the project (team) the person belongs to                                               |
+| distinct_id                | `STRING`              | A `distinct_id` associated with the person                                                       |
+| person_id                  | `STRING`              | The id of the person associated to this (`team_id`, `distinct_id`) pair                          |
+| properties                 | `VARIANT` or `STRING` | A JSON object with all the latest properties of the person                                       |
+| person_version             | `BIGINT`              | Internal version of the person properties, used by batch export in merge operation               |
+| person_distinct_id_version | `BIGINT`              | Internal version of the person to `distinct_id` mapping, used by batch export in merge operation |
+| created_at                 | `TIMESTAMP`           | The timestamp when the person was created                                                        |
 
 The Databricks table will contain one row per `(team_id, distinct_id)` pair, and each pair is mapped to their corresponding `person_id` and latest `properties`.
 

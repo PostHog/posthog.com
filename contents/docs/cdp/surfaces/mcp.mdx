@@ -6,6 +6,11 @@ showTitle: true
 
 The [PostHog MCP server](/docs/model-context-protocol) gives AI agents and MCP clients direct access to your pipelines. Because pipeline functions are just code plus configuration, this is one of the places MCP pays off most – an agent can write a transformation, test it against a real event, read the failure, and fix it, all without you opening the web app.
 
+## Before you start
+
+1. **Set up a pipeline** – [create a source, destination, or transformation](/docs/cdp/start-here) so there's something to manage.
+2. **Connect the MCP server** – [install it in your AI tool](#install-the-mcp-server) and give it access to your project.
+
 ## What you can do here
 
 **Build and edit functions.** Create a destination, transformation, source webhook, or web script from scratch or from a template, then update it in place. Agents can generate the Hog code, the input schema, and the event filters together.
@@ -18,7 +23,9 @@ The [PostHog MCP server](/docs/model-context-protocol) gives AI agents and MCP c
 
 **Control ordering and state.** Reorder transformation execution, and enable or disable a function without deleting it.
 
-**Manage batch exports.** List, create, update, and delete batch exports, and request file downloads for exported data.
+**Manage batch exports.** List, create, update, and delete batch exports.
+
+**Export data as files.** Start a [file download export](/docs/cdp/file-download-exports), check whether it has finished, and cancel one that is still running. Downloading the finished files happens over the API.
 
 ## Example prompts
 
@@ -28,6 +35,7 @@ The [PostHog MCP server](/docs/model-context-protocol) gives AI agents and MCP c
 - `Show me the logs for my HubSpot destination from the last hour.`
 - `Move my PII redaction transformation to run before everything else.`
 - `Disable the destination that's erroring the most.`
+- `Export last week's pageview events as Parquet and tell me when the files are ready.`
 
 ## Install the MCP server
 

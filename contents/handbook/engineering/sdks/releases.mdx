@@ -4,7 +4,7 @@ sidebar: Handbook
 showTitle: true
 ---
 
-This guide documents our semi-automated release process for PostHog SDKs. Each SDK repository uses a GitHub App with restricted permissions to handle releases securely, requiring team approval before any release is published. SDK repositories also require all commits [to be signed](/handbook/engineering/security#commit-signing) by their author.
+This guide documents our semi-automated release process for PostHog SDKs. Each SDK repository uses a GitHub App with restricted permissions to handle releases securely, requiring team approval before any release is published. Commits must be [signed](/handbook/engineering/security#commit-signing), as in every PostHog repository.
 
 <CalloutBox type="fyi">
 
@@ -112,13 +112,14 @@ The GitHub App needs to bypass certain protections to push release commits direc
 2. Navigate to **Rules** → **Rulesets**
 3. Open the ruleset that requires PRs (may have various names)
    1. If this ruleset doesn't exist, create one requiring PRs and reviews from codeowners which should be `@PostHog/client-libraries-approvers` for all files
-   2. Under **Rules**, make sure **Require signed commits** is enabled
 4. Under **Bypass list**, click **Add bypass**
 5. Select your GitHub App (`Releaser (<sdk_name>)`)
 6. Click the three-dot menu and choose **Exempt**
 7. Save the ruleset
 
 ![Repository PR bypass](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/pasted_image_2025_12_29_T17_30_39_537_Z_a60a06feae.png)
+
+> **Don't add a Require signed commits rule at the repo level.** The [org-wide ruleset](/handbook/engineering/security#commit-signing) already requires signed commits in every repo, and a duplicate repo rule only adds another bypass list to maintain. Note that this bypass exempts the app from the *pull request* requirement, not from signing: the org signing ruleset has no bypass actors, and the release workflows create their commits through the GitHub API, so they are signed like any other.
 
 > **Check for classic branch protection too.** The steps above exempt the app in a ruleset, but a repository can also have classic branch protection under **Settings** → **Branches** → **Branch protection rules**, which GitHub enforces alongside rulesets and which has its own separate bypass list. If a classic rule requires pull requests, the release still fails with `protected branch 'main' check failed: Changes must be made through a pull request` even after the ruleset exemption. Remove the classic rule, since the ruleset already covers it, or add the app to its bypass settings as well. Older repos are most likely to have this; newer ones tend to be rulesets-only.
 

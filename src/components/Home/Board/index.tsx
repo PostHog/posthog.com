@@ -549,20 +549,19 @@ const products: Product[] = [
         Icon: IconLlmPromptManagement,
         color: 'yellow',
         types: ['AI'],
-        status: 'Roadmap',
-        roadmapID: 2168,
+        status: 'Production',
     },
     {
         name: 'Support',
         Icon: IconChatHelp,
         color: 'blue',
-        description: 'Built-in customer support with chat widget and unified inbox.',
+        description: 'Built-in customer support with chat widget and unified helpdesk.',
         types: ['Support'],
         status: 'Production',
         badge: 'BETA',
         pricing: {
             cta: {
-                url: '/docs/support',
+                url: '/support',
                 text: 'Learn more',
             },
         },

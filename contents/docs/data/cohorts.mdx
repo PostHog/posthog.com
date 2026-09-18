@@ -49,6 +49,8 @@ Your cohorts are available in the [People](https://us.posthog.com/persons) page 
 
 > **Note:** Cohorts rely on [person properties](/docs/product-analytics/person-properties), so you need to capture identified events to create them.
 
+To build cohorts on data from another system, such as a plan tier or a renewal date, map that table onto person properties with [warehouse properties](/docs/data-warehouse/warehouse-properties) first.
+
 ## Where can you use cohorts?
 
 You can use cohorts in many different ways, such as:
@@ -74,7 +76,7 @@ You can use cohorts to answer questions like:
 
 Cohorts are sometimes confused with [groups](/docs/product-analytics/group-analytics), but they each serve different purposes:
 
-- **Cohorts** represent a specific set of users – e.g., a list of users whose email contains a certain string (like a company's domain).
+- **Cohorts** represent a specific set of users – e.g., a list of users whose email ends with a certain string (like a company's domain).
 
 - **Groups** aggregate events based on entities, such as organizations or companies, but do not necessarily connect to a user. They enable you to analyze trends, insights, and dashboards at an entity-level (like a company or organization), as opposed to a user-level.
 
@@ -244,6 +246,8 @@ This is useful for use cases like survey targeting, where you want a fixed snaps
 
 ### Dynamic cohorts
 
+Some dynamic cohorts also qualify as [realtime cohorts](/docs/data/realtime-cohorts), currently in beta, which PostHog keeps up to date as events arrive so feature flags can target them.
+
 Dynamic cohorts can be based on existing cohorts, and support the following criteria:
 
 #### Behavioral
@@ -265,7 +269,9 @@ Has or doesn't have a person property with the following operators:
 | **Operator**                                 | **Example**                                                     |
 | -------------------------------------------- | --------------------------------------------------------------- |
 | `equals` or `does not equal`                 | `Pineapple on pizza` property `does not equal` "true"           |
-| `contains` or `does not contain`             | `email` property `does not contain` "gmail", "yahoo", "hotmail" |
+| `contains` or `does not contain`             | `Job title` property `contains` "engineer"                      |
+| `starts with` or `does not start with`       | `$initial_current_url` property `starts with` "https://app."    |
+| `ends with` or `does not end with`           | `email` property `does not end with` "@gmail.com", "@yahoo.com", "@hotmail.com" |
 | `matches regex` or `does not match regex`    | `Country code` property `matches regex` "us\|uk\|aus"           |
 | `greater than` or `greater than or equal to` | `Age` property `greater than` "21"                              |
 | `less than` or `less than or equal to`       | `Age` property `less than or equal to` "21"                     |
@@ -294,7 +300,7 @@ This is useful for auditing changes to cohort criteria over time or identifying 
 
 > **Note:** The **History** tab only appears on saved cohorts.
 
-For more details on activity tracking across PostHog, see the [activity logs](/docs/data/activity-log) documentation.
+For more details on activity tracking across PostHog, see the [activity logs](/docs/settings/activity-logs) documentation.
 
 ## FAQ
 
@@ -305,6 +311,8 @@ Dynamic cohorts are updated once every 24 hours.
 ### Can you use a dynamic cohort as a feature flag target?
 
 You cannot use dynamic cohorts that include behavioral or lifecycle criteria as a feature flag target. To target these users for a feature flag, A/B test, or survey, you can either duplicate the dynamic cohort as a static cohort or create a new static cohort directly from criteria using the **Criteria · One-time snapshot** option. Dynamic cohorts with only person property criteria can be used directly.
+
+This is changing. [Realtime cohorts](/docs/data/realtime-cohorts) let feature flags target cohorts built from simple event criteria, such as "completed `signed up` in the last 30 days". They're in early beta and rolling out gradually, so they aren't available in most projects yet.
 
 ### Can you use groups in cohorts?
 

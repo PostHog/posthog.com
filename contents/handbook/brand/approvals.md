@@ -22,7 +22,7 @@ Not everything needs sign-off. Here's a rough guide:
 | Blog post, changelog, tweet                                  | No – but self-check against this guide                    |
 | Product UI copy, tooltips, empty states                      | No – but read out loud before shipping                    |
 
-When in doubt, ask in the `#design-review` Slack channel. Lottie and Cory are, for now, the only people who can approve work or otherwise. 
+When in doubt, ask in the `#design-review` Slack channel. Lottie is, for now, the only person who can approve work or otherwise. 
 
 ## Who owns what
 
@@ -31,7 +31,7 @@ When in doubt, ask in the `#design-review` Slack channel. Lottie and Cory are, f
 - <SmallTeam slug="editorial" /> – Blog, email copy, messaging guidelines, social presence.
 - <SmallTeam slug="marketing" /> – Email copy, external partnerships, influencers.
 - <SmallTeam slug="youtube" /> – Video production, editing.
-- <SmallTeam slug="irl-events" /> – In-person events, PostHog speaking engagements, meetups.
+- <SmallTeam slug="builder-relations" /> – In-person events, PostHog speaking engagements, meetups, the forum, and Discord.
 - <SmallTeam slug="wizard-and-docs" /> – Docs, obviously. 
 - **Everyone** – Handbook updates. 
 

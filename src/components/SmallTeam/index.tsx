@@ -10,9 +10,25 @@ export interface SmallTeamProps {
     noMiniCrest?: boolean
     inline?: boolean
     className?: string
+    /**
+     * `'pill'` (default) renders the inline mini-crest pill with the full crest
+     * in a hover tooltip. `'crest'` renders the full crest at size, next to the
+     * team name and tagline — for when the team is the point, not an aside.
+     */
+    variant?: 'pill' | 'crest'
+    /** Sizing for the large crest in `variant="crest"`. */
+    crestClassName?: string
 }
 
-export default function SmallTeam({ slug, children, inline = false, noMiniCrest = false, className = '' }: SmallTeamProps): JSX.Element | null {
+export default function SmallTeam({
+    slug,
+    children,
+    inline = false,
+    noMiniCrest = false,
+    className = '',
+    variant = 'pill',
+    crestClassName = '',
+}: SmallTeamProps): JSX.Element | null {
     const {
         allSqueakTeam: { nodes },
     } = useStaticQuery(graphql`
@@ -48,13 +64,52 @@ export default function SmallTeam({ slug, children, inline = false, noMiniCrest 
     const miniCrestImage = getImage(team.miniCrest)
     const fullCrestUrl = team.crest?.data?.attributes?.url
 
+    if (variant === 'crest') {
+        return (
+            <Link
+                to={`/teams/${team.slug}`}
+                state={{ newWindow: true }}
+                className={`group not-prose flex items-center gap-4 no-underline text-primary ${className}`}
+            >
+                {fullCrestUrl ? (
+                    <img
+                        src={fullCrestUrl}
+                        alt={`${team.name} team crest`}
+                        loading="lazy"
+                        className={`shrink-0 object-contain transition-transform group-hover:scale-105 ${
+                            crestClassName || 'size-20 @lg/reader-content:size-24'
+                        }`}
+                    />
+                ) : (
+                    miniCrestImage && (
+                        <GatsbyImage
+                            image={miniCrestImage}
+                            alt={`${team.name} mini crest`}
+                            className="size-8 shrink-0"
+                        />
+                    )
+                )}
+                <span className="min-w-0">
+                    <strong className="block text-[15px] text-primary group-hover:underline">{team.name} Team</strong>
+                    {team.tagline && (
+                        <em className="block text-sm text-secondary text-balance mt-0.5">{team.tagline}</em>
+                    )}
+                </span>
+            </Link>
+        )
+    }
+
     // The invisible block is necessary to make sure we have the proper width
     // with the `relative inline-block` parent when we include a mini crest
     const triggerContent = (
         <span className="relative inline-block">
             <Link to={`/teams/${team.slug}`} className={`group text-primary ${className}`} state={{ newWindow: true }}>
                 {!noMiniCrest && miniCrestImage && (
-                    <span className={`invisible max-h-4 inline-flex items-center gap-1.5 ${!inline && 'p-0.5 pr-1.5 border border-primary rounded-full'}`}>
+                    <span
+                        className={`invisible max-h-4 inline-flex items-center gap-1.5 ${
+                            !inline && 'p-0.5 pr-1.5 border border-primary rounded-full'
+                        }`}
+                    >
                         <span className="h-6 shrink-0 rounded-full overflow-hidden">
                             <GatsbyImage
                                 image={miniCrestImage}
@@ -68,13 +123,16 @@ export default function SmallTeam({ slug, children, inline = false, noMiniCrest 
                     </span>
                 )}
                 <span
-                    className={`inline-flex items-center ${!noMiniCrest && miniCrestImage
-                        ? [
-                            'absolute top-0 left-0 whitespace-nowrap gap-1.5',
-                            !inline ? 'p-0.5 pr-1.5 border border-primary rounded-full' : '',
-                        ].filter(Boolean).join(' ')
-                        : ''
-                        }`}
+                    className={`inline-flex items-center ${
+                        !noMiniCrest && miniCrestImage
+                            ? [
+                                  'absolute top-0 left-0 whitespace-nowrap gap-1.5',
+                                  !inline ? 'p-0.5 pr-1.5 border border-primary rounded-full' : '',
+                              ]
+                                  .filter(Boolean)
+                                  .join(' ')
+                            : ''
+                    }`}
                 >
                     {!noMiniCrest && miniCrestImage && (
                         <GatsbyImage
@@ -83,7 +141,11 @@ export default function SmallTeam({ slug, children, inline = false, noMiniCrest 
                             className="size-5 shrink-0"
                         />
                     )}
-                    <span className={`!text-sm ${inline ? 'underline' : 'group-hover:underline'} font-semibold inline-block truncate`}>
+                    <span
+                        className={`!text-sm ${
+                            inline ? 'underline' : 'group-hover:underline'
+                        } font-semibold inline-block truncate`}
+                    >
                         {children ? children : <>{team.name} Team</>}
                     </span>
                 </span>

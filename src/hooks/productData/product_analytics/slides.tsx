@@ -303,4 +303,29 @@ export const topFeatures: CarouselSlide[] = [
             </>
         ),
     },
+    {
+        slug: 'mcp-analytics',
+        label: 'MCP Analytics',
+        icon: <IconPlug className="size-5" />,
+        color: 'bg-light dark:bg-dark',
+        activeText: 'text-primary',
+        progressBar: 'bg-blue',
+        layout: 'float',
+        heading: f.mcp_analytics.headline,
+        description: (
+            <>
+                <p>{f.mcp_analytics.description}</p>
+                <div className="@container">
+                    <LabeledList
+                        items={f.mcp_analytics.features.map((item) => ({
+                            label: item.title,
+                            description: item.description,
+                        }))}
+                    />
+                    {f.mcp_analytics.children}
+                </div>
+            </>
+        ),
+        image: { ref: 'mcp-analytics', glow: true },
+    },
 ]

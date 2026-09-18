@@ -374,7 +374,7 @@ export const ProfessionalServices = () => {
                 </p>
                 <ul>
                     <li>
-                        <Link to="/data-stack/sources" state={{ newWindow: true }}>
+                        <Link to="/context-warehouse/sources" state={{ newWindow: true }}>
                             <strong>Data sources</strong>
                         </Link>{' '}
                         — pull from Stripe, Hubspot, Zendesk, Postgres, and more

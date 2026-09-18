@@ -22,6 +22,7 @@ export const elastic = {
                     live_tail_real_time_logs: false,
                     native_open_telemetry_ingest: true,
                     vendor_agnostic_sdks: true,
+                    high_cardinality_indexing: 'Partial',
                 },
             },
             search: {
@@ -74,11 +75,12 @@ export const elastic = {
         deployment: {
             self_host: true,
             open_source: 'AGPL / source available',
+            managed_cloud: 'Elastic Cloud',
         },
         pricing: {
             self_serve: true,
             free_tier: false,
-            transparent_pricing: false,
+            transparent_pricing: true,
         },
         tools: {
             ai_assistant: true,

@@ -1,0 +1,110 @@
+name: Auto Label PRs
+
+# Applies board-routing labels so team boards and PR list filters can include or
+# exclude PRs by type (project filters can't match on author or file paths):
+#
+#   docs      PR is from inkeep[bot] or has a `docs:`/`docs(scope):` title, so the
+#             website team's board can exclude them. Add-only, never removed.
+#   blog      PR adds a new post under contents/blog/, so the Content board
+#             (https://github.com/orgs/PostHog/projects/215) can auto-add it via
+#             its `label:blog` filter. Add-only, never removed.
+#   content   Every file in the PR is under contents/. Lets reviewers filter
+#             content-only PRs out of code-review queues (e.g. `-label:content`).
+#   handbook  Every file in the PR is under contents/handbook/.
+#   website   Every file in the PR is website code (src/, gatsby/, api/, plugins/,
+#             static/, or a root gatsby-* config file).
+#
+# content/handbook/website are "only touches" rules, so they're recomputed on
+# every push: a PR that starts handbook-only and later gains a src/ file loses
+# the label. That also means a manually applied content/handbook/website label
+# on a PR that doesn't qualify will be removed — those three labels are owned by
+# this workflow. docs and blog are add-only and safe to apply manually.
+#
+# To label other content types (tutorial, newsletter, ...), add a rule below —
+# but only once a board actually filters on the label.
+#
+# `synchronize` is included because file sets change with later commits; `edited`
+# because the docs rule reads the PR title.
+#
+# `pull_request_target` gives a write token for fork/bot PRs. Safe: no checkout of
+# PR code, minimal permissions, PR title/author only read in a workflow expression
+# (never in a shell), and filenames are only ever matched against grep patterns —
+# never executed or interpolated into a command.
+# nosemgrep: github-actions-pull-request-target
+on:
+    pull_request_target:
+        types: [opened, reopened, ready_for_review, synchronize, edited]
+
+permissions:
+    contents: read
+    pull-requests: write
+    issues: write
+
+# Rapid pushes/edits queue redundant runs. Labeling is idempotent, so drop any
+# in-flight run for the same PR.
+concurrency:
+    group: auto-label-${{ github.event.pull_request.number }}
+    cancel-in-progress: true
+
+jobs:
+    auto-label:
+        runs-on: ubuntu-latest
+        timeout-minutes: 5
+        steps:
+            - name: Compute and apply labels
+              env:
+                  GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+                  PR_NUMBER: ${{ github.event.pull_request.number }}
+                  REPO: ${{ github.repository }}
+                  # Title/author evaluated here, in the expression context, so
+                  # PR-controlled strings never reach the shell.
+                  IS_DOCS: ${{ github.event.pull_request.user.login == 'inkeep[bot]' || startsWith(github.event.pull_request.title, 'docs:') || startsWith(github.event.pull_request.title, 'docs(') }}
+              run: |
+                  # --paginate: a handful of PRs touch more than 100 files
+                  pr_files=$(gh api --paginate "repos/$REPO/pulls/$PR_NUMBER/files" \
+                    --jq '.[] | .status + " " + .filename')
+
+                  if [ -z "$pr_files" ]; then
+                    echo "PR has no files; nothing to do."
+                    exit 0
+                  fi
+
+                  files=$(sed 's/^[a-z]* //' <<< "$pr_files")
+                  added=$(sed -n 's/^added //p' <<< "$pr_files")
+
+                  total=$(wc -l <<< "$files")
+                  in_contents=$(grep -cE '^contents/' <<< "$files" || true)
+                  in_handbook=$(grep -cE '^contents/handbook/' <<< "$files" || true)
+                  in_website=$(grep -cE '^(src|gatsby|api|plugins|static)/|^gatsby-(config|node|browser|ssr)\.' <<< "$files" || true)
+
+                  add=()
+                  remove=()
+
+                  # Add-only rules
+                  if [ "$IS_DOCS" = "true" ]; then
+                    add+=(docs)
+                  fi
+                  if grep -qE '^contents/blog/.+\.mdx?$' <<< "$added"; then
+                    add+=(blog)
+                  fi
+
+                  # "Only touches" rules: label iff every file in the PR matches
+                  manage() {
+                    if [ "$2" -eq "$total" ]; then add+=("$1"); else remove+=("$1"); fi
+                  }
+                  manage content "$in_contents"
+                  manage handbook "$in_handbook"
+                  manage website "$in_website"
+
+                  echo "Files: $total | add: ${add[*]:-none} | remove: ${remove[*]:-none}"
+
+                  # Labels passed to gh come only from the fixed sets above.
+                  # Removing a label the PR doesn't have is a no-op.
+                  cmd=(gh pr edit "$PR_NUMBER" --repo "$REPO")
+                  if [ "${#add[@]}" -gt 0 ]; then
+                    cmd+=(--add-label "$(IFS=,; echo "${add[*]}")")
+                  fi
+                  if [ "${#remove[@]}" -gt 0 ]; then
+                    cmd+=(--remove-label "$(IFS=,; echo "${remove[*]}")")
+                  fi
+                  "${cmd[@]}"

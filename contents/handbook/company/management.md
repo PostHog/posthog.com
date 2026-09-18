@@ -102,6 +102,8 @@ As PostHog grows, it's increasingly important that all team leads help us keep t
 2. Dig in where the answer is 'no' - what would it take for this to be a 'yes'? Is this just temporary, or is there a deeper issue to resolve?
 3. Make sure the manager is sharing all of this feedback with their team to help them improve.
 
+The keeper test is only sent for team members who have passed their [probation period](/handbook/people/compensation#probation-period). New starters are covered by the [30, 60, and 80-day check-ins](/handbook/people/onboarding#306090-day-check-ins) instead, so if you do not get a keeper test form for someone who joined recently, that is expected.
+
 That form will be shared with the relevant team Blitzscale member, so they can help where necessary.
 
 Feedback also flows the other way. Direct reports are periodically asked to give feedback on their manager through an automated form, rating them against what we expect managers to focus on and explaining why. This keeps the bar for managers high too, and gives them honest signal on how they're doing.

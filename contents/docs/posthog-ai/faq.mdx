@@ -2,10 +2,6 @@
 title: PostHog AI FAQ
 ---
 
-## Have a question? Ask PostHog AI
-
-<AskAIInput placeholder="Type your question and hit enter..." />
-
 ## What access does PostHog AI have to my data?
 
 While working with PostHog AI, you will certainly share some information with it. Data analysis is a core feature. When doing research, PostHog AI can read the following data in your project:
@@ -28,6 +24,20 @@ Our list of data subprocessors includes:
 
 - Anthropic, OpenAI, and Alphabet – responsible for the core of PostHog AI's functionality, have access to user messages and all data types.
 - Azure – responsible for semantic search across PostHog, has access to actions and cohorts (including their filters)
+
+## Do the AI providers train on my data? Does PostHog?
+
+Third-party providers, no. DPA §2.1.3 prohibits subprocessors from using your data to fine-tune, train, or develop their models, and that covers chat content as well as event data. PostHog does train its own models on anonymized data. That's a separate setting, "[Enable AI training on anonymized data](https://app.posthog.com/settings/organization-details#organization-ai-training-opt-out)", and you can disable it.
+
+## Where does AI inference happen? Does EU Cloud data leave the EU?
+
+Our AI subprocessors' primary location can be found next to the applicable subprocessor on [posthog.com/subprocessors](/subprocessors). Those subprocessors have their own subprocessors, which may sit outside the USA. The *Service Provider for AI Features* entries on our Trust Center link to each of those lists.
+
+More broadly, for EU Cloud: we have subprocessors outside the EU, and PostHog staff may access data from outside the EU, including for support. Any transfer mechanism in the DPA may apply, whether that's an adequacy decision, the Data Privacy Framework (DPF), or EU Standard Contractual Clauses (SCCs).
+
+## Is there zero data retention with the AI providers?
+
+We can't yet promise zero data retention (ZDR) on our AI features, because the underlying model providers don't consistently offer it. Retention windows are those providers' defaults.
 
 ## How can I disable PostHog AI?
 

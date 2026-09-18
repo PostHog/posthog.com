@@ -66,7 +66,7 @@ Setting `config.sessionReplay = true` in your PostHog configuration will start s
 
 ### Manually control session recordings
 
-You can programmatically start and stop session recordings. See [how to control which sessions you record](/docs/session-replay/how-to-control-which-sessions-you-record#programmatically-start-and-stop-recordings) for details.
+You can programmatically start and stop session recordings. See [how to control which sessions you record](/docs/session-replay/how-to-control-which-sessions-you-record#programmatic-start-and-stop-controls) for details.
 
 ### Configuration options
 
@@ -108,7 +108,7 @@ config.sessionReplayConfig.sampleRate = 1.0;
 ## Troubleshooting
 
 - Update your SDK and iOS Pods.
-- Make sure to set the minimum platform version to iOS 13.0 in your Podfile.
+- Make sure to set the minimum platform version to iOS 13.0 in your `Podfile`, or, for Swift Package Manager projects, in the `Runner` target's **Minimum Deployments** in Xcode.
 - Make sure you have disabled automatic SDK initialization.
 - Run a clean build if you experience issues.
 - For blank recordings for mobile session replay, be sure to set up the [Widget and observer](/docs/session-replay/installation/flutter#widget-and-observer-setup).

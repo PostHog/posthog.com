@@ -14,7 +14,7 @@ This page explains how teams collaborate on AI features at PostHog. For a high-l
 
 ### The PostHog Desktop team
 
-<SmallTeam slug="posthog-code" /> builds PostHog Desktop, an agent-powered product workspace. Everything you and your team need to build and manage your self-driving product. The product is organized around channels that create a multiplayer experience around working with agents, then augment the agent sessions with PostHog's data and channel context that learns over time
+<SmallTeam slug="posthog-desktop" /> builds PostHog Desktop, an agent-powered product workspace. Everything you and your team need to build and manage your self-driving product. The product is organized around channels that create a multiplayer experience around working with agents, then augment the agent sessions with PostHog's data and channel context that learns over time
 
 The PostHog Desktop team owns the desktop app and the task execution pipeline.
 

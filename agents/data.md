@@ -6,14 +6,21 @@ PostHog is a multi-product company. Data is stored in structured files in centra
 
 ## Product data
 
-1. **Primary source:** `src/hooks/useProduct.ts`
+1. **Tool identity:** `src/data/tools.ts`
+   - Build-safe source for shared identity and descriptions
+   - Search-only titles, descriptions, and aliases are explicitly named
+   - Used by Gatsby as well as the runtime product hooks
+   - Include only distinct Tools; duplicate or UI-only product cards stay in runtime data
+   - Keep icons, billing, relationships, and presentation content in the existing runtime data
+
+2. **Primary runtime source:** `src/hooks/useProduct.ts`
    - Check here first for product information
    - Contains beta products, unreleased products, and "apps" (Webhooks, Notebooks, etc.)
-   - Used for displaying icons and metadata
+   - Combines Tool metadata with icons, relationships, and presentation content
 
-2. **Extended data:** `src/hooks/useProducts.tsx`
-   - Extends `useProduct.ts` when slug/handle isn't found
-   - Always reference `useProduct.ts` in code—it handles the extending internally
+3. **Billed product data:** `src/hooks/useProducts.tsx`
+   - Enriches the paid product subset with billing data
+   - Is consumed by `useProduct.ts`; use `useProduct.ts` for general product lookup
 
 ## Customer data
 

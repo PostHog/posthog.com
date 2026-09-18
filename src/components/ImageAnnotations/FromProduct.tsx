@@ -15,6 +15,8 @@ export interface ProductImageAnnotationsProps {
     annotations?: Annotation[]
     /** Overrides the set's type (defaults to the set's type, then "numbered"). */
     type?: AnnotationType
+    /** Override the marker color (background + text classes). Defaults to the product-page red. */
+    markerClassName?: string
     /** Force the key on/off. Defaults to showing it for the "numbered" type. */
     showKey?: boolean
     keyTitle?: string
@@ -45,6 +47,7 @@ export default function ProductImageAnnotations({
     set,
     annotations,
     type,
+    markerClassName,
     showKey,
     keyTitle,
     alt,
@@ -76,7 +79,7 @@ export default function ProductImageAnnotations({
 
     if (layout === 'split') {
         return (
-            <ImageAnnotations annotations={resolvedAnnotations} type={resolvedType}>
+            <ImageAnnotations annotations={resolvedAnnotations} type={resolvedType} markerClassName={markerClassName}>
                 {/* Source order (children → image → key) so it stacks as description → image → key on mobile.
                     At @2xl/reader-content it becomes 2 columns: description top-left, key bottom-left, image right. */}
                 <div
@@ -102,7 +105,7 @@ export default function ProductImageAnnotations({
     }
 
     return (
-        <ImageAnnotations annotations={resolvedAnnotations} type={resolvedType}>
+        <ImageAnnotations annotations={resolvedAnnotations} type={resolvedType} markerClassName={markerClassName}>
             {title && <h2 className="!mt-0">{title}</h2>}
             <div className={className ?? 'space-y-4'}>
                 {image}

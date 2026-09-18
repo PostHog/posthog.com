@@ -37,20 +37,18 @@ People currently come into Salesforce through one of the following ways:
 
 ### New PostHog signups
 
-When a `user signed up` (Cloud signup) event is ingested into PostHog
-we use the [Salesforce App](https://github.com/PostHog/Salesforce-plugin) to sync contact data into Salesforce. We also populate
-the following Salesforce properties if they are set in the PostHog event:
+When a `user signed up` (Cloud signup) event is ingested into PostHog, a <PrivateLink url="https://us.posthog.com/project/2/pipeline/destinations">data pipeline destination</PrivateLink> ("Salesforce create contact for signups") creates a contact record in Salesforce with `Record Source` set to `product-signup`. It maps the following Salesforce properties if they are set on the PostHog event or person:
 
--   selected_deployment_type - usually `cloud` or `hosted_clickhouse`
--   product_signup_ts - the time they signed up/purchased a license
+-   role_at_organization - the role they self-selected when signing up (used in lead scoring)
 -   is_organization_first_user - whether they have created a new organization or joined an existing one
--   role_at_organization - the role they self-selected when signing up (used in Lead scoring)
+-   The PostHog organization ID and name
+-   Marketing opt-in, the signup URLs, and the PostHog distinct ID
 
 ### Completed contact form
 
 We have a [contact us form](/talk-to-a-human) on posthog.com where we ask users can get in touch with us. The sales@ alias gets an email notification and a notification is also sent to [#sales-leads](https://posthog.slack.com/archives/C054BJSHG82) in Slack when one of these forms is submitted.
 
-These submissions are processed through the Default app and routed into Salesforce as tasks. Tasks are then automatically assigned to the right team member based on account ownership and territory (see below).
+Each submission sends a server-side PostHog event and a webhook into our lead routing pipeline (Default). The [lead-gateway](https://github.com/PostHog/lead-gateway) then creates or updates the Salesforce contact, links it to the account, and creates a Lead Task. Tasks are then automatically assigned to the right team member based on account ownership and territory (see below).
 
 If the submission is clearly a support or billing request, you don’t need to reach out manually:
 - On the task, select the disqualification reason **Billing Support Request** or **Support Request**.
@@ -240,12 +238,16 @@ You can also create an opportunity directly from scratch, but make sure to conne
 -   Fill in Opportunity Details:
 -   Opportunity Name
 -   Close Date: Choose the estimated date when the opportunity is expected to close.
--   Term (Months): Default is 12, update for multi year deals.
--   Total Credit Amount: Total value of the contract before discounts.
--   Discount (%): Percent discount applied to the total.
+-   Term (Months): Default is 12, update for multi year deals. For contract buyouts, this already includes the buyout period (e.g. 12 standard + 6 month buyout = 18 month term), see [contract buyouts and one-time credits](#contract-buyouts-and-one-time-credits) below.
+-   Total Credit Amount: Standard, discountable credit the customer is paying for. Does not include one-time/free credit, buyout or startup rolloff credits are tracked separately (see below).
+-   Discount (%): Contracted discount rate applied to Total Credit Amount, this is what goes on the order form. Excludes any one-time credit.
 -   ARR Discounted: Automatically calculated annualized revenue after discount.
 -   Contract Start Date: Date the contract begins.
 -   Contract End Date: Automatically calculated based on Start Date + Term.
+-   One-Time Credit Amount: For deals with a buyout, startup rolloff, or other one-off free credit listed under Special Terms on contract. See [contract buyouts and one-time credits](#contract-buyouts-and-one-time-credits) below.
+-   One-Time Credit Type: Buyout, Startup Rolloff, or Other. Only used when One-Time Credit Amount is populated.
+-   Buyout Period Months: Only for Buyout type, how many months of Term (Months) the buyout credit covers. Leave at 0 otherwise.
+-   Effective Discount Rate: Automatically calculated (amount paid ÷ total credit including the one-time credit)
 -   Stage: Select the current stage of the opportunity in the sales process.
 -   Type: If you know whether they're interested in paying on a monthly or an annual basis (if blank this will be Monthly by default)
 -   Connect to an Account: In the "Account Name" field, search for and select the account associated with the opportunity. If the account does not exist, create a new account first.
@@ -313,6 +315,8 @@ When an opportunity with Annual Plan type is Closed Won, a Salesforce [flow](htt
 -   **ARR up for renewal** - Copied over from the original amount; so that we can track expansion/churn
 -   **Close date** - 4 weeks in the future (may need adjusting if the opportunity record isn't closed on the contract start date)
 
+Keep the renewal opportunity dates in line with the dates we actually invoice against. If the contract dates and the dates in Stripe disagree, the account owner must add a comment on the opportunity that records both dates and the confirmed one, and then correct the opportunity dates. See [when the contract dates and the billing dates don't match](/handbook/cs-and-onboarding/renewals#when-the-contract-dates-and-the-billing-dates-dont-match).
+
 The renewal pipeline stages are:
 
 1. Qualification (10%) - They have just became a PostHog customer and we're helping them getting set up.
@@ -329,6 +333,8 @@ The "Opportunity Notes" section is to track key actions and next steps to manage
 -   Next Steps: Add actions or tasks required to move the opportunity forward. Be clear and concise to ensure anyone reviewing the opportunity understands what needs to happen next.
   -   For the New Business Sales Team, the Next Step should have three specific elements:  1) a timestamp  -- when was this change made, 2) the owner at the customer for the next step -- who do we expect to take the action? 3) a binary outcome - (what will we/you get) related to the stage, with the next step date reflecting when the outcome is expected.
 -   Next Step Date: Enter the date by which the next step should be completed. This helps in maintaining timelines and keeping follow-ups on track.
+
+> Make sure you accurately track known competitors in the relevant field, as we may trigger a TAE/TAM/CSM overlay to improve our chances of closing the deal.
 
 ### Opportunity closure details
 

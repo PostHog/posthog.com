@@ -73,9 +73,9 @@ Important service updates are the _only_ type of email we may send to unsubscrib
 
 > `Service updates` emails are often part of an [engineering incident](/handbook/engineering/operations/incidents). We handle comms for those too. 
 
-Whenever we need to send an email broadcast like this we begin by creating an issue in [the Meta repo](https://github.com/PostHog/meta/), unless it involves discussion of personal information - in which case it is discussed in [Company Internal](https://github.com/PostHog/company-internal). This enables us to summarize information and seek approval from teams while also keeping our work open source, and without requiring everyone to log in to Customer.io. Issues are closed when an email is sent. 
+Whenever we need to send an email broadcast like this we begin by creating an issue using the [messaging template](https://github.com/PostHog/marketing/issues/new?template=messaging-template.md) in the marketing repo, unless it involves discussion of personal information - in which case it is discussed in [Company Internal](https://github.com/PostHog/company-internal). This enables us to summarize information and seek approval from teams while also keeping our work open source, and without requiring everyone to log in to Customer.io. Issues are closed when an email is sent. 
 
-If you'd like to work with Marketing on an email activity, please begin by opening an issue in the `meta` [repo](https://github.com/PostHog/meta/issues).
+If you'd like to work with Marketing on an email activity, please begin by opening an issue with the [messaging template](https://github.com/PostHog/marketing/issues/new?template=messaging-template.md).
 
 ## Email campaigns
 We maintain many email campaigns to help users get the most out of the product. The most developed and documented of these are our four onboarding campaigns.  
@@ -86,7 +86,7 @@ Generally, when we talk about onboarding emails we refer specifically to the flo
 #### PostHog Cloud onboarding emails
 The latest revision is [Onboarding 8](https://github.com/PostHog/requests-for-comments/issues/414). You can [read about old revisions on the blog](/blog/how-we-built-email-onboarding). 
 
-The onboarding flow regularly changes as we test new ideas. Any changes to it are, as with all other email campaigns, documented in [the Meta repo](https://github.com/PostHog/meta/). 
+The onboarding flow regularly changes as we test new ideas. Any changes to it are, as with all other email campaigns, documented in [the marketing repo](https://github.com/PostHog/marketing/issues?q=is%3Aissue+label%3Amessaging). 
 
 We aim for all content in this flow to be relevant and helpful to users, without being salesy. All emails come directly from Joe and he triages replies on a daily basis, answering or redirecting as needed. The campaign is triggered when a user signs up for the first time and has a goal of users achieving `billing product activated` within 7 days of opening any email in the flow. 
 

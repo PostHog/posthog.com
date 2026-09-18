@@ -72,7 +72,7 @@ Here's what we built:
 
 - **Fully single-tenant DuckDB instances:** Every organization gets their own. It's not shared with anyone else.
 - **A lifecycle service:** Instances sleep when idle and wake up when a query arrives. 
-- **A Postgres Wire protocol endpoint:** Most modern data stack tooling speaks Postgres, so does our warehouse. You connect with `psql`, point your BI tool at it, wire up PostHog Code or Claude via MCP, and it just works. We translate the Postgres catalog so your tools can introspect the schema, and queries run as DuckDB SQL.
+- **A Postgres Wire protocol endpoint:** Most modern data stack tooling speaks Postgres, so does our warehouse. You connect with `psql`, point your BI tool at it, wire up PostHog Desktop or Claude via MCP, and it just works. We translate the Postgres catalog so your tools can introspect the schema, and queries run as DuckDB SQL.
 - **DuckHog:** DuckHog is a DuckDB extension that lets you point local compute at your warehouse data. Pull a subset locally, work with it using DuckDB, pandas, polars, or whatever you prefer, then write results back. For agents iterating quickly on data, this is a better pattern than sending every query to the cluster. It's possible because of DuckDB's extension model; add capabilities without forking the codebase or painful UDF deployments. The SQLite of the OLAP world, it just works.
 - **DuckLake as our catalog:** Underneath this is DuckLake, which separates storage from compute. Your data lives in S3 independent of whatever's querying it, so we're not locked into DuckDB forever.
 
@@ -92,6 +92,6 @@ Your failed queries, error patterns, conversion drops, and user behaviour as wel
 
 A unified warehouse gives your agents access to your full business context to do things that weren't possible before. Not just "this funnel dropped", but "this funnel dropped, here's the revenue impact, here are the cohorts affected, here's what those users have in common, here's an action plan and a PR already open to fix the issue." That's the signal quality that makes agentic workflows useful.
 
-Try it for yourself — [join the waitlist](https://posthog.com/data-stack/managed-warehouse) to get notified when we release the Managed Warehouse beta.
+Try it for yourself — [join the waitlist](https://posthog.com/context-warehouse/managed-warehouse) to get notified when we release the Managed Warehouse beta.
 
 <DuckDBWaitlistSurvey />

@@ -14,7 +14,7 @@ The real power of the data warehouse is the ability to combine data from multipl
 
 You can join external data on existing PostHog schemas and other external data tables. These joins are saved and interpreted anytime they're accessed on the origin table.
 
-To define a join, go to the [SQL editor](https://app.posthog.com/sql), click the three dots next to your source table, and click **Add join**. Here you define the source table key, joining table, and joining table key as well as how the fields are accessed.
+To define a join, go to the [SQL editor](https://app.posthog.com/sql), click the three dots next to your source table, and click **Add join**. Alternatively, go to the [Data Catalog](https://app.posthog.com/data-catalog) **Relationships** tab and click **New join**. In either case, you define the source table key, joining table, and joining table key as well as how the fields are accessed.
 
 For example, if you import your Stripe data, you can define a join between the PostHog's `events` table's `distinct_id` key and the `stripe_customer` table's `email` key. You can then access the `stripe_customer` table through the `events` table like `SELECT stripe_customer.id FROM events`.
 
@@ -27,9 +27,9 @@ For example, if you import your Stripe data, you can define a join between the P
 
 Once joined, source properties can be used in filters, breakdowns, and [SQL expressions](/docs/sql/expressions).
 
-To edit or delete a table join, click the three dots next to your source table, click **View table schema**, click the three dots next to your joined table, and select **Edit** or **Delete**.
+To edit or delete a table join, click the three dots next to your source table in the SQL editor, click **View table schema**, then click the three dots next to your joined table and select **Edit** or **Delete**. You can also edit or delete joins from the [Data Catalog](https://app.posthog.com/data-catalog) **Relationships** tab by clicking the more menu on any active join row.
 
-Joins can also come from the [semantic layer](/docs/semantic-layer) (alpha): when a human accepts an AI-proposed [table relationship](/docs/semantic-layer/certifications-and-relationships#relationship-proposals), it's promoted to a regular table join.
+Joins can also come from the [semantic layer](/docs/semantic-layer) (beta): when a human accepts an AI-proposed [table relationship](/docs/semantic-layer/certifications-and-relationships#relationship-proposals), it's promoted to a regular table join.
 
 ## Person joins
 
@@ -46,15 +46,15 @@ Person joins are a special type of table joins. They are joins on the `persons` 
 
 > **Note:** Be sure that your joined keys actually match. For example `persons.id` returns a UUID, even if you use an email as a `distinct_id` when capturing events. You might need to add a person property like `email`.
 
-### Syncing warehouse data to person properties
+### Syncing warehouse data to person and group properties
 
-In addition to person joins (which enrich data at query time), you can sync warehouse table columns directly to person properties. This creates first-class person properties that persist on the person profile and are available everywhere in PostHog, including [feature flags](/docs/feature-flags), [cohorts](/docs/data/cohorts), [experiments](/docs/experiments), and insights.
+A person join resolves when a query runs. That covers insights and SQL, but feature flags, experiments, and surveys evaluate against stored person properties, so a join is invisible to them.
 
-To set this up, go to [Customer Analytics → Configuration → Custom properties](https://app.posthog.com/customer_analytics/configuration) and create a new custom property with the target set to **Person**. Pick a synced warehouse table, specify the distinct ID column, and map warehouse columns to person property names.
+To use warehouse data there, write it onto the profile instead. Go to **Data** > **Warehouse properties**, pick a synced table and the column holding each row's distinct ID, then map warehouse columns to person property names. The same works for [group properties](/docs/product-analytics/group-analytics), matched by a group key column.
 
-Use **person joins** when you only need external data in insights and SQL queries. Use **property syncing** when you want the data stored on the person and usable across all PostHog features.
+Use a **person join** when you only need external data in insights and SQL queries. Use **warehouse properties** when something outside a query has to read the value.
 
-For more details, see [person properties](/docs/product-analytics/person-properties).
+For more details, see [warehouse properties](/docs/data-warehouse/warehouse-properties).
 
 ## Query joins
 

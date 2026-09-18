@@ -67,4 +67,16 @@ You can find details about how issue grouping works in the [issues and exception
 
 Fingerprints can be manually set during exception capture. This is a very useful way to group exceptions that are not related to each other. You can find examples of how to do this in the [custom issue grouping](/docs/error-tracking/grouping-issues#option-2-client-side-fingerprint) section.
 
+When you set a custom fingerprint, you can also name the resulting issue with the `$issue_name` and `$issue_description` properties:
+
+```js
+posthog.captureException(error, {
+  $exception_fingerprint: "MyCustomGroup",
+  $issue_name: "Checkout failures",
+  $issue_description: "Payment provider timeouts during checkout",
+})
+```
+
+PostHog uses these two properties only on the event that creates the issue, and truncates each to 255 characters. Later events on the same fingerprint keep the existing name and description. When you do not set them, PostHog uses the exception type as the name and the exception message as the description.
+
 You can also learn more about grouping issues using rules in the [grouping issues](/docs/error-tracking/grouping-issues) guide.

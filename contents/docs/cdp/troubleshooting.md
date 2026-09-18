@@ -4,10 +4,6 @@ title: Customer Data Platform troubleshooting
 
 This page covers troubleshooting for CDP. For setup, see the [installation guides](/docs/cdp/sources).
 
-## Have a question? Ask PostHog AI
-
-<AskAIInput placeholder="Type your question and hit enter..." />
-
 ## My transformation or destination isn't working, what do I do?
 
 1. Wait 60 seconds, then check that the transformation or destination is enabled with the correct configuration options in the [data pipeline tab](https://app.posthog.com/data-management/destinations). You can find the correct configuration options in the [transformation or destination's documentation](/docs/cdp) by searching for it in the destinations, transformations, or filtering sections of the docs.
@@ -36,7 +32,7 @@ There are a few ways to capture a user doing an event for the first time. We cov
 
 - Create a [cohort](/docs/data/cohorts) matching users who have done an event for the first time recently.
 - Use a custom event to set a [person](/docs/getting-started/person-properties) or [event property](/docs/data/events). For example, you can set a `first_seen` property with the `$set_once` option.
-- Use [SQL](/docs/product-analytics/sql) to query for the `min(timestamp)` of an event.
+- Use [SQL](/docs/data-warehouse/sql) to query for the `min(timestamp)` of an event.
 
 ## How do I migrate events or rows into PostHog?
 

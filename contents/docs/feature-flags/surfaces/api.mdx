@@ -8,6 +8,11 @@ There are two APIs for feature flags, and they answer different questions. The [
 
 Use the API when you want flags in a place PostHog doesn't ship an SDK for, or when flag management should be part of a pipeline rather than a person clicking through the app.
 
+## Before you start
+
+1. **Set up Feature Flags** – [install a PostHog SDK](/docs/feature-flags/installation) so your app can evaluate flags.
+2. **Get API access** – [create a personal API key](/docs/api/personal-api-keys) with the scopes you need.
+
 ## What you can do here
 
 **Evaluate flags** with [`/flags`](/docs/api/flags), using your public project API key and a `distinct_id`. It returns each flag's value for that user, plus any payloads. See the [API installation guide](/docs/feature-flags/installation/api) for the request shape.

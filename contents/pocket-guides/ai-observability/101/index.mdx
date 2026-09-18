@@ -1,0 +1,86 @@
+---
+title: AI Observability 101
+shortTitle: AI Observability 101
+subtitle: What PostHog captures on every LLM call, and how to read it.
+pocketGuideOrder: 1
+isPrimer: true
+---
+
+<LeftPage>
+
+<TraceFigure
+    n={1}
+    caption="One trace: everything a single user request did."
+    rows={[
+        { kind: 'trace', label: 'summarize_thread', meta: 'person 4821 · 8.4s · $0.031' },
+        { kind: 'span', label: 'retrieve_context', meta: '0.6s · 14 documents', depth: 1 },
+        { kind: 'generation', label: 'claude-sonnet-4-5', meta: '1,240 in · 380 out · $0.011', depth: 1 },
+        { kind: 'span', label: 'search_tickets', meta: '1.9s · tool call', depth: 1 },
+        { kind: 'generation', label: 'claude-sonnet-4-5', meta: '3,100 in · 210 out · $0.020', depth: 1 },
+    ]}
+/>
+
+</LeftPage>
+
+<RightPage>
+
+# AI Observability 101
+
+Every LLM call in your product is valuable performance and user insight. You can use PostHog AI Observability (AIO) to see what your model is doing in the wild, how much it costs, and whether the outputs it returns are what users want.
+
+LLM calls arrive as PostHog events so you can put them in funnels, break them down by plan, or jump to the [Session Replay](/docs/session-replay) recording of the user who made them.
+
+## The three events
+
+There are three AIO event types: `$ai_trace`, `$ai_span`, and `$ai_generation`:
+- A <Term name="trace" /> is the whole interaction, stitched together by `$ai_trace_id`, so a multi-step agent run reads as one story instead of a pile of unrelated requests.
+- A <Term name="span" /> is a step around it that isn't a model call, like a retrieval or a tool.
+- A <Term name="generation" /> is one call to a model.
+
+One level up sits the <Term name="ai session">AI session</Term>. Set `$ai_session_id` when you capture and related traces group into one conversation instead of scattered requests. It's a property rather than a fourth event type, and it's separate from the PostHog session behind a replay.
+
+Below, <SeeFig n={1} /> shows all three in one request. It's best to read from bottom to top.
+
+## What lands on a generation
+
+Every `$ai_generation` event arrives with the following properties. You can attach your own custom properties in addition to these:
+
+| Property | What it holds | Example |
+| --- | --- | --- |
+| `$ai_model`, `$ai_provider` | Which model answered, and who served it | `gpt-4o-mini`, `openai` |
+| `$ai_input_tokens`, `$ai_output_tokens` | Token counts, split so you can see which side grew | `100`, `200` |
+| `$ai_total_cost_usd` | Cost for that call, including cache reads | `0.031` |
+| `$ai_latency`, `$ai_time_to_first_token` | How long the call took, and how long before anything appeared | `4.2s`, `0.8s` |
+| `$ai_is_error` | Whether the call failed | `false` |
+
+## What else the data answers
+
+Because AIO events are PostHog events, they sit alongside the rest of your product data. So instead of asking about your AI feature in isolation, you can ask about your whole product in context:
+
+- **Does the AI feature retain users?** Put `$ai_generation` in a funnel or retention chart.
+- **Who is it expensive for?** Break cost down by plan or company, using person properties you already send.
+- **What did this person see?** Jump to their <Term name="session replay" />, or the <Term name="exception" /> their request threw.
+- **Did the new prompt help?** Ship it behind a feature flag and read it as an experiment.
+
+Each of these is a question you go and ask. You can also have them answered for you: a <Term name="scout" /> is an agent that watches on a schedule and files an investigated report when something moves, rather than an alert that fires and leaves you to dig. It can watch cost, latency, eval pass rates, or anything else you capture. That's [the self-driving pocket guide](/pocket-guides/self-driving) in a nutshell.
+
+## Apply a use case example
+
+Each use case in this pocket guide is a real problem, measured against your own data. Every guide covers:
+
+- The problem, and the shape it makes in your data
+- The events and properties that answer it
+- What the numbers mean once you have them
+- A prompt you can run in PostHog AI to build it
+
+None of it works until your LLM calls arrive in PostHog. The wizard instruments them for you, or you can [install it yourself](/docs/ai-observability/installation).
+
+<Setup />
+
+<SeeAlso>
+
+See also: [AI Observability docs](/docs/ai-observability) · [Installation](/docs/ai-observability/installation)
+
+</SeeAlso>
+
+</RightPage>

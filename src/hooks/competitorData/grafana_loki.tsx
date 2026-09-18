@@ -25,11 +25,12 @@ export const grafana_loki = {
                     live_tail_real_time_logs: true,
                     native_open_telemetry_ingest: true,
                     vendor_agnostic_sdks: true,
+                    high_cardinality_indexing: false,
                 },
             },
             search: {
                 features: {
-                    full_text_search: false,
+                    full_text_search: 'Partial',
                     no_proprietary_query_language: 'LogQL',
                 },
             },
@@ -49,9 +50,9 @@ export const grafana_loki = {
             },
             observability: {
                 features: {
-                    metrics: 'Via stack',
-                    traces: 'Via stack',
-                    alerting: 'Via stack',
+                    metrics: 'Via LogQL',
+                    traces: 'Requires Tempo',
+                    alerting: true,
                     infra_monitoring: 'Via stack',
                 },
             },
@@ -74,11 +75,12 @@ export const grafana_loki = {
         deployment: {
             self_host: true,
             open_source: true,
+            managed_cloud: 'Grafana Cloud',
         },
         pricing: {
             self_serve: true,
             free_tier: true,
-            transparent_pricing: true,
+            transparent_pricing: false,
         },
         tools: {
             ai_assistant: true,

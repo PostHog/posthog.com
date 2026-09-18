@@ -12,7 +12,6 @@ import CustomCapabilitiesSlide from 'components/AI/CustomCapabilitiesSlide'
 import AIEverywhereSlide from 'components/AI/AIEverywhereSlide'
 import { useWindow } from '../../context/Window'
 import TerminalView from 'components/AI/TerminalView'
-import usePostHog from 'hooks/usePostHog'
 import Demos from 'components/Home/Test/Demos'
 const PRODUCT_HANDLE = 'posthog_ai'
 
@@ -43,7 +42,6 @@ const CustomDemoSlide = () => {
 }
 
 export default function PostHogAI(): JSX.Element {
-    const posthog = usePostHog()
     const { view, setHasDeveloperMode, setView } = useWindow()
     const contentData = useContentData()
     const data = useStaticQuery(graphql`
@@ -185,8 +183,7 @@ export default function PostHogAI(): JSX.Element {
 
     useEffect(() => {
         setHasDeveloperMode(true)
-        const mode = posthog?.getFeatureFlag?.('mode-selection-test')
-        setView(mode === 'developer' ? 'developer' : 'marketing')
+        setView('marketing')
     }, [])
 
     return view === 'developer' ? (

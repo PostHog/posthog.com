@@ -30,9 +30,11 @@ Path cleaning rules are configured globally in your [project settings](https://a
 Each rule has two parts:
 
 - **Regex** – a regular expression that matches the URL patterns you want to combine.
-- **Alias** – the replacement string for the matched portion of the URL.
+- **Alias** – the replacement for the matched portion of the URL. This is usually a fixed placeholder like `/user/:id`, but it can also [reuse part of the matched URL](#reusing-part-of-the-matched-url).
 
 When a URL matches the regex, the matched portion is replaced with the alias. The rest of the URL remains unchanged.
+
+Rules run against whichever URL property is being cleaned. That's a path like `/user/123/profile` for the web analytics tiles, but a full URL like `https://example.com/user/123/profile` for a [Paths insight](/docs/product-analytics/paths) or a breakdown by `$current_url` – so a pattern anchored with `^/` matches the first and not the second. Test a rule against a sample URL in project settings before you save it, or write one that [handles both](#matching-both-paths-and-full-urls).
 
 ## Examples
 
@@ -64,6 +66,79 @@ To combine merchant-specific dashboards:
 - **Alias:** `/merchant/dashboard`
 
 This turns `https://example.com/merchant/12345/dashboard` and `https://example.com/merchant/6789/dashboard` into `https://example.com/merchant/dashboard`.
+
+## Reusing part of the matched URL
+
+Because only the matched portion is replaced, a fixed alias already handles a segment that varies. The `/user/:id` rule above cleans both `/user/123/profile` and `/user/456/settings`, because `/profile` and `/settings` sit outside the match and are left alone.
+
+You need a capture group when the part you want to keep sits *inside* the match – when the regex has to reach past it to get to whatever you're removing. Wrap that part in parentheses and reference it from the alias with `\1`.
+
+### Group deep pages by their section
+
+To collapse everything below the second path segment into one row per section:
+
+- **Regex:** `^(/[^/]+/[^/]+)/.*$`
+- **Alias:** `\1`
+
+| Original path                     | Cleaned path              |
+| --------------------------------- | ------------------------- |
+| `/docs/product-analytics/trends`  | `/docs/product-analytics` |
+| `/docs/product-analytics/funnels` | `/docs/product-analytics` |
+| `/docs/web-analytics/dashboard`   | `/docs/web-analytics`     |
+
+The regex has to run to the end of the path to match the part it's dropping, which means it also matches the two segments you want to keep. `\1` puts them back. A fixed alias can't do this, because the text to keep is different on every row. Paths shorter than three segments don't match at all, so `/docs` is left as it is.
+
+### Keep the path, drop a trailing fragment
+
+To strip an in-page fragment, but only from paths that are exactly three segments deep:
+
+- **Regex:** `^(/[^/#]+/[^/#]+/[^/#]+)/#.*$`
+- **Alias:** `\1`
+
+| Original path                    | Cleaned path            |
+| -------------------------------- | ----------------------- |
+| `/reports/2024/summary/#revenue` | `/reports/2024/summary` |
+| `/reports/2024/summary/#costs`   | `/reports/2024/summary` |
+| `/reports/2023/detail/#revenue`  | `/reports/2023/detail`  |
+
+Here the capture group does double duty: it keeps the path, and spelling out the three segments is what limits the rule to that shape. A rule that matched only `/#...` would strip fragments from every path on the site.
+
+### Matching both paths and full URLs
+
+Both rules above are anchored with `^/`, so they only match a path. Don't fix that by dropping the anchor – an unanchored pattern happily matches the hostname as if it were a path segment. The section rule without its `^` turns `https://example.com/docs/product-analytics/trends` into `https://example.com/docs`, because `example.com` gets counted as the first segment.
+
+Make the scheme and host an optional group instead, and put it back with `\1`:
+
+- **Regex:** `^(https?://[^/]+)?(/[^/]+/[^/]+)/.*$`
+- **Alias:** `\1\2`
+
+| Original URL                                        | Cleaned URL                                  |
+| --------------------------------------------------- | -------------------------------------------- |
+| `/docs/product-analytics/trends`                    | `/docs/product-analytics`                    |
+| `https://example.com/docs/product-analytics/trends` | `https://example.com/docs/product-analytics` |
+
+When the value has no scheme and host, group 1 matches nothing and `\1` substitutes an empty string, so one rule covers both.
+
+### Alias syntax
+
+| Syntax       | Meaning                                                          |
+| ------------ | ---------------------------------------------------------------- |
+| `\1` to `\9` | The first to ninth capture group, counted by opening parenthesis |
+| `\0`         | The whole matched string                                         |
+| `\\`         | A literal backslash                                              |
+
+Everything else in the alias is treated as literal text. A few things to watch for:
+
+- **`$1` does nothing.** Aliases use `\1`, not the `$1` syntax you may know from JavaScript. `$` is always literal, so an alias of `/user/$1` cleans paths to the literal string `/user/$1`.
+- **There's no `\10`.** Only `\1` to `\9` are capture groups. `\10` reads as group 1 followed by a literal `0`, so with a regex capturing `123`, an alias of `/user/\10` gives `/user/1230`.
+- **The group has to exist.** PostHog rejects a rule when you save it if the alias references a group that its regex doesn't define, such as `\2` in a regex with only one group.
+- **Double the backslash in JSON.** In your project settings, type `\1`. If you set rules through the API, JSON needs the backslash escaped: `"alias": "/:locale\\1"`.
+
+### When to use capture groups
+
+A capture group costs more per row than a fixed alias, because the regex engine has to track where each group starts and ends instead of only whether the pattern matched. It still pays off when it collapses several near-identical rules into one, since every rule runs against every row.
+
+Anchor your regex where you can – `^` when you're matching a path, `$` when the pattern runs to the end of the URL. Path cleaning replaces every match in the value, not just the first, so an unanchored pattern keeps scanning after it has found what you were looking for, and can match again somewhere you didn't intend.
 
 ## Where path cleaning applies
 

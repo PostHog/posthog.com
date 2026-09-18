@@ -8,13 +8,14 @@ import { useAppSettings } from '../../context/App'
 
 // Types
 export type MenuItemType = {
-    type: 'item' | 'submenu' | 'separator' | 'label'
+    type: 'item' | 'submenu' | 'expandable' | 'separator' | 'label'
     label?: string
     link?: string
     shortcut?: string | string[] // Support both string and array of keys
     disabled?: boolean
     icon?: React.ReactNode
     items?: MenuItemType[] // For submenus
+    expandedLabel?: string // For expandable items: label to show while expanded
     onClick?: () => void
     node?: React.ReactNode // Allow embedding a React node
     external?: boolean // Whether the link should open in a new window with external styling
@@ -26,6 +27,7 @@ export type MenuType = {
     trigger: React.ReactNode
     bold?: boolean
     items: MenuItemType[]
+    link?: string // Direct link for the menu trigger instead of opening a menu
     mobileLink?: string // Direct link for the menu trigger on mobile
     hideChevron?: boolean // Hide the chevron down icon for this menu in website mode
 }
@@ -147,14 +149,65 @@ const processMobileMenuItems = (items: MenuItemType[]): MenuItemType[] => {
 }
 
 // Components
-const MenuItem: React.FC<{
+type MenuItemProps = {
     portalContainer: HTMLElement | null
     appContainer: HTMLElement | null
     item: MenuItemType
     forceIconIndent?: boolean
     menuIndex: number
     onCloseMenu?: () => void
-}> = ({ item, forceIconIndent, menuIndex, portalContainer, appContainer, onCloseMenu }) => {
+}
+
+// Reveals its children in place instead of opening a side submenu. The trigger
+// keeps the menu open on select so the list can grow under the cursor.
+const ExpandableMenuItem: React.FC<MenuItemProps> = ({ item, ...rest }) => {
+    const [isExpanded, setIsExpanded] = React.useState(false)
+    const items = (item.items || []) as MenuItemType[]
+    const anyChildHasIcon = items.some((subItem) => !!subItem.icon)
+
+    return (
+        <>
+            {isExpanded &&
+                items.map((subItem, subIndex) => (
+                    <MenuItem
+                        key={`${subItem.link}-${subIndex}`}
+                        {...rest}
+                        item={subItem}
+                        forceIconIndent={anyChildHasIcon}
+                    />
+                ))}
+            <RadixMenubar.Item
+                className={`${ItemClasses} cursor-pointer`}
+                disabled={item.disabled}
+                onSelect={(event) => {
+                    event.preventDefault()
+                    setIsExpanded((expanded) => !expanded)
+                }}
+            >
+                <span className="px-2.5 flex w-full justify-between items-center gap-2">
+                    <span className="flex-1 flex items-center gap-2">
+                        {item.icon}
+                        <span className="text-secondary">
+                            {isExpanded ? item.expandedLabel ?? item.label : item.label}
+                        </span>
+                    </span>
+                    <div className={`${ShortcutClasses} text-secondary`}>
+                        <IconChevronDown className={`size-4 transition-transform ${isExpanded ? 'rotate-180' : ''}`} />
+                    </div>
+                </span>
+            </RadixMenubar.Item>
+        </>
+    )
+}
+
+const MenuItem: React.FC<MenuItemProps> = ({
+    item,
+    forceIconIndent,
+    menuIndex,
+    portalContainer,
+    appContainer,
+    onCloseMenu,
+}) => {
     if (item.type === 'separator') {
         return <RadixMenubar.Separator className={SeparatorClasses} />
     }
@@ -168,6 +221,19 @@ const MenuItem: React.FC<{
             <RadixMenubar.Item className={ItemClasses} disabled={item.disabled} onClick={item.onClick}>
                 {item.node}
             </RadixMenubar.Item>
+        )
+    }
+
+    if (item.type === 'expandable' && Array.isArray(item.items)) {
+        return (
+            <ExpandableMenuItem
+                item={item}
+                forceIconIndent={forceIconIndent}
+                menuIndex={menuIndex}
+                portalContainer={portalContainer}
+                appContainer={appContainer}
+                onCloseMenu={onCloseMenu}
+            />
         )
     }
 
@@ -244,7 +310,7 @@ const MenuItem: React.FC<{
                             alignOffset={-5}
                             data-scheme="primary"
                         >
-                            {item.items}
+                            {React.cloneElement(item.items as unknown as React.ReactElement, { onCloseMenu })}
                         </RadixMenubar.SubContent>
                     </RadixMenubar.Portal>
                 </RadixMenubar.Sub>
@@ -363,19 +429,19 @@ const MenuBar: React.FC<MenuBarProps> = ({ menus, className, triggerAsChild, cus
             onValueChange={(value) => setOpenMenuIndex(value ? Number(value) : null)}
         >
             {processedMenus.map((menu, menuIndex) => {
-                // On mobile, if menu has mobileLink, make it a direct link
-                if (isMobile && menu.mobileLink) {
+                const triggerLink = menu.link || (isMobile && menu.mobileLink) || null
+                if (triggerLink) {
                     return (
                         <Link
                             key={menuIndex}
-                            to={menu.mobileLink}
+                            to={triggerLink}
                             state={{ newWindow: true }}
+                            contextMenu={false}
                             className={`${TriggerClasses} ${menu.bold ? 'font-bold' : 'font-medium'} ${
                                 customTriggerClasses || ''
                             }`}
                         >
                             {menu.trigger}
-                            {!menu.hideChevron && <IconChevronDown className="size-5 opacity-60 -mr-2 hidden" />}
                         </Link>
                     )
                 }

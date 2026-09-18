@@ -13,7 +13,6 @@ const CUSTOMER_ORDER = [
     'mistralai',
     'supabase',
     'elevenlabs',
-    'lovable',
     'raycast',
     'airbus',
     'arena',

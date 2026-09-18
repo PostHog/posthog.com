@@ -44,7 +44,7 @@ export const portkey = {
     },
     platform: {
         deployment: {
-            open_source: "Partial",
+            open_source: 'Partial',
             eu_hosting: true,
         },
     },

@@ -1,36 +1,32 @@
 import React from 'react'
 import {
-    IconToggle,
-    IconEye,
-    IconSparkles,
-    IconList,
-    IconConfetti,
-    IconRocket,
-    IconPieChart,
-    IconCheckCircle,
-    IconInfo,
-    IconCursorClick,
-    IconMagic,
     IconChat,
+    IconCheckCircle,
     IconCode,
+    IconConfetti,
+    IconCursorClick,
+    IconEye,
+    IconInfo,
+    IconList,
+    IconMagic,
     IconMessage,
-    IconNewspaper,
+    IconPieChart,
+    IconRocket,
+    IconSparkles,
+    IconToggle,
 } from '@posthog/icons'
 import { features } from './feature_flags/features'
 import { applications, topFeatures } from './feature_flags/slides'
+import { getTool } from '../../data/tools'
 
 export const featureFlags = {
+    ...getTool('feature_flags'),
     Icon: IconToggle,
-    name: 'Feature Flags',
-    description: 'Control feature access with precision',
-    handle: 'feature_flags',
     type: 'feature_flags',
-    slug: 'feature-flags',
     teamSlug: 'feature-flags',
     forumTopicId: 360,
     color: 'seagreen',
     colorSecondary: 'seagreen',
-    category: 'product_engineering',
     wizardSupport: 'In development',
     shortDescription: 'Control feature access with precision',
     pricingDescription:
@@ -49,7 +45,11 @@ export const featureFlags = {
      * feed the carousel templates their slide arrays).
      */
     productMenu: [
-        { slug: 'overview', name: 'Overview', icon: <IconEye className="size-4" /> },
+        {
+            slug: 'overview',
+            name: 'Overview',
+            icon: <IconEye className="size-4" />,
+        },
         {
             slug: 'eli5',
             name: 'What does it do?',
@@ -84,21 +84,20 @@ export const featureFlags = {
             group: 'divided',
             icon: <IconChat className="size-4" />,
         },
-        { slug: 'pairs-with', name: 'Pairs with...', hideFromNav: true, icon: <IconConfetti className="size-4" /> },
-        { slug: 'changelog', name: 'Changelog', group: 'divided', icon: <IconNewspaper className="size-4" /> },
-        { slug: 'community', name: 'Questions?', group: 'divided', icon: <IconMessage className="size-4" /> },
-        {
-            slug: 'feature-comparison',
-            name: 'Feature comparison',
-            group: 'divided',
-            icon: <IconList className="size-4" />,
-        },
         {
             slug: 'installation',
             name: 'Install',
             group: 'divided',
             icon: <IconCode className="size-4" />,
         },
+        {
+            slug: 'feature-comparison',
+            name: 'Feature comparison',
+            group: 'divided',
+            icon: <IconList className="size-4" />,
+        },
+        { slug: 'community', name: 'Questions?', group: 'divided', icon: <IconMessage className="size-4" /> },
+        { slug: 'pairs-with', name: 'Pairs with...', hideFromNav: true, icon: <IconConfetti className="size-4" /> },
         { slug: 'getting-started', name: 'Get started', group: 'divided', icon: <IconRocket className="size-4" /> },
     ],
     /**
@@ -114,8 +113,6 @@ export const featureFlags = {
     ],
     overview: {
         title: 'Safely roll out features to specific users or groups',
-        description:
-            'Feature Flags is one of the tools that makes your product self-driving: the control layer agents use to roll a change out and roll it back. Built to work natively with product analytics, session replay, experiments, and surveys.',
         eli5: 'Feature Flags let you turn features on or off for specific users, groups, or percentages of traffic without redeploying code. Create a flag, check it in your app, then control who sees what from PostHog – phased rollouts, kill switches, multivariate variants, JSON payloads, and beta opt-ins. When something breaks, flip it off. When it works, roll it out wider and measure the impact in analytics and session replay.',
         textColor: 'text-white', // tw
     },
@@ -150,8 +147,9 @@ export const featureFlags = {
         },
     },
     hog: {
-        src: 'https://res.cloudinary.com/dmukukwp6/image/upload/v1/posthog.com/src/components/Product/hogs/feature-flags-hog.png',
-        alt: 'A hedgehog toggling a feature flag',
+        src: 'https://res.cloudinary.com/dmukukwp6/image/upload/hogmillionaire_6a6c2c958d.png',
+        alt: 'A hedgehog holding an enormous banknote',
+        footerClasses: 'max-w-[240px]',
         classes: 'absolute bottom-0 right-0 max-w-md',
     },
     hogs: {
@@ -193,7 +191,6 @@ export const featureFlags = {
         },
     },
     useCases: {
-        intro: 'Feature Flags is used across teams depending on your role.',
         rows: [
             [
                 'Product Engineers',
@@ -327,12 +324,12 @@ export const featureFlags = {
             {
                 name: 'Optimizely',
                 key: 'optimizely',
-                link: '/blog/posthog-vs-optimizely',
+                link: '/compare/posthog-vs-optimizely',
             },
             {
                 name: 'LaunchDarkly',
                 key: 'launchdarkly',
-                link: '/blog/posthog-vs-launchdarkly',
+                link: '/compare/posthog-vs-launchdarkly',
             },
             {
                 name: 'Flagsmith',
@@ -341,12 +338,12 @@ export const featureFlags = {
             {
                 name: 'GrowthBook',
                 key: 'growthbook',
-                link: '/blog/posthog-vs-growthbook',
+                link: '/compare/posthog-vs-growthbook',
             },
             {
                 name: 'Statsig',
                 key: 'statsig',
-                link: '/blog/posthog-vs-statsig',
+                link: '/compare/posthog-vs-statsig',
             },
             {
                 name: 'PostHog',
@@ -396,8 +393,8 @@ export const featureFlags = {
         ai: 'The PostHog MCP server lets your AI coding agent create and manage Feature Flags directly from your code editor. Create flags, configure targeting rules, and check rollout status – without switching to the PostHog app.',
     },
     ai: {
-        image: 'https://res.cloudinary.com/dmukukwp6/image/upload/FEATURE_FLAGS_hog_95e008723c.png',
-        imageAlt: 'PostHog AI and feature flags',
+        image: 'https://res.cloudinary.com/dmukukwp6/image/upload/business_hog_adb9cf3c35.png',
+        imageAlt: 'A hedgehog in a suit deciding who gets the flag',
         description: 'roll a change out, watch the impact, and roll it back',
         intro: 'Ask PostHog AI to create flags, explain targeting, and clean up stale ones.',
         mcpFeatures: ['flags'],

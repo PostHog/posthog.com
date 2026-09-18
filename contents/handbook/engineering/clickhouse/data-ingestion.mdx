@@ -39,12 +39,12 @@ It also has minimal overhead in terms of memory used and allows us to always tem
 Kafka engine tables act as Kafka consumers in a given [consumer group](https://docs.confluent.io/platform/current/clients/consumer.html#concepts).
 Selecting from that table advances the consumer offsets.
 
-A Kafka table on its own does nothing beyond allowing querying data from Kafka - it needs to be paired with other tables for ingestion
+A Kafka table on its own does nothing beyond allowing querying data from Kafka – it needs to be paired with other tables for ingestion
 to work.
 
 > **Important note:** Given Kafka engine tables operate like consumers, querying data from them moves the offsets for the consumer group forward. Doing this while ingesting data may cause data loss, and has been disallowed by default on the latest ClickHouse versions.
 
-Example kafka engine table:
+Example Kafka engine table:
 
 ```sql runInPostHog=false
 CREATE TABLE kafka_ingestion_warnings
@@ -67,12 +67,12 @@ of `kafka_skip_broken_messages`, breaking ingestion.
 ## Materialized views
 
 [Materialized views](https://clickhouse.com/docs/en/sql-reference/statements/create/view/#materialized-view) in ClickHouse
-can be thought of as triggers - they react to new blocks being INSERTed into source tables and allow transforming and piping
+can be thought of as triggers – they react to new blocks being INSERTed into source tables and allow transforming and piping
 that data to other tables.
 
 Materialized views come with a lot of gotchas. A great resource for learning more about them is [this presentation](https://den-crane.github.io/Everything_you_should_know_about_materialized_views_commented.pdf).
 
-## Example schema - reading and writing ingestion events
+## Example schema – reading and writing ingestion events
 
 Consider the following sharded table schema together with `kafka_ingestion_warnings`:
 
@@ -130,42 +130,45 @@ In this schema:
 This is the same schema visualized in a ClickHouse cluster with 2 shards and 1 replica each:
 
 ```mermaid
-flowchart LR
-    classDef table fill:#f6e486,stroke:#ffc45d;
+flowchart TB
+    classDef table fill:#FAEEDA,stroke:#854F0B,color:#412402;
+    classDef kafka fill:#EEEDFE,stroke:#534AB7,color:#26215C;
 
-    subgraph CH ["ClickHouse Cluster<br/>"]
-        subgraph Blank [ ]
-            style Blank fill:none,stroke-dasharray: 0 1
+    Kafka["<b>Kafka</b><br/>clickhouse_events_proto topic"]:::kafka
 
-            subgraph CH1["ClickHouse Shard 1, Replica 1"]
-                kafka_ingestion_warnings1["kafka_ingestion_warnings table<br/>(Kafka table engine)"]:::table
-                ingestion_warnings_mv1["ingestion_warnings_mv table<br/>(Materialized view)"]:::table
-                ingestion_warnings1["ingestion_warnings table</br/>(Distributed table engine)"]:::table
-                sharded_ingestion_warnings1["sharded_ingestion_warnings table<br/>(ReplicatedMergeTree table engine)"]:::table
-            end
-
-            subgraph CH2["ClickHouse Shard 2, Replica 1"]
-                kafka_ingestion_warnings2["kafka_ingestion_warnings table<br/>(Kafka table engine)"]:::table
-                ingestion_warnings_mv2["ingestion_warnings_mv table<br/>(Materialized view)"]:::table
-                ingestion_warnings2["ingestion_warnings table</br/>(Distributed table engine)"]:::table
-                sharded_ingestion_warnings2["sharded_ingestion_warnings table<br/>(ReplicatedMergeTree table engine)"]:::table
-            end
+    subgraph CH ["ClickHouse cluster"]
+        subgraph CH1 ["Shard 1, replica 1"]
+            kafka_ingestion_warnings1["<b>kafka_ingestion_warnings</b><br/>Kafka table engine"]:::table
+            ingestion_warnings_mv1["<b>ingestion_warnings_mv</b><br/>Materialized view"]:::table
+            ingestion_warnings1["<b>ingestion_warnings</b><br/>Distributed table engine"]:::table
+            sharded_ingestion_warnings1["<b>sharded_ingestion_warnings</b><br/>ReplicatedMergeTree engine"]:::table
+        end
+        subgraph CH2 ["Shard 2, replica 1"]
+            kafka_ingestion_warnings2["<b>kafka_ingestion_warnings</b><br/>Kafka table engine"]:::table
+            ingestion_warnings_mv2["<b>ingestion_warnings_mv</b><br/>Materialized view"]:::table
+            ingestion_warnings2["<b>ingestion_warnings</b><br/>Distributed table engine"]:::table
+            sharded_ingestion_warnings2["<b>sharded_ingestion_warnings</b><br/>ReplicatedMergeTree engine"]:::table
         end
     end
 
-    Kafka["clickhouse_events_proto topic in Kafka"]
+    style CH fill:#F1EFE8,stroke:#B4B2A9,color:#2C2C2A
+    style CH1 fill:#FCFBF8,stroke:#D3D1C7,color:#5F5E5A
+    style CH2 fill:#FCFBF8,stroke:#D3D1C7,color:#5F5E5A
 
+    Kafka -..- kafka_ingestion_warnings1
+    Kafka -..- kafka_ingestion_warnings2
 
-    ingestion_warnings_mv1 --reads from--> kafka_ingestion_warnings1
-    ingestion_warnings_mv2 --reads from--> kafka_ingestion_warnings2
-    ingestion_warnings_mv1 --pushes data to--> ingestion_warnings1
-    ingestion_warnings_mv2 --pushes data to--> ingestion_warnings2
-    ingestion_warnings1 -.pushes data to.-> sharded_ingestion_warnings1
-    ingestion_warnings1 -.pushes data to.-> sharded_ingestion_warnings2
-    ingestion_warnings2 -.pushes data to.-> sharded_ingestion_warnings1
-    ingestion_warnings2 -.pushes data to.-> sharded_ingestion_warnings2
-    kafka_ingestion_warnings1 -..- Kafka
-    kafka_ingestion_warnings2 -..- Kafka
+    kafka_ingestion_warnings1 --> ingestion_warnings_mv1
+    kafka_ingestion_warnings2 --> ingestion_warnings_mv2
+    ingestion_warnings_mv1 --> ingestion_warnings1
+    ingestion_warnings_mv2 --> ingestion_warnings2
+
+    ingestion_warnings1 -.-> sharded_ingestion_warnings1
+    ingestion_warnings1 -.-> sharded_ingestion_warnings2
+    ingestion_warnings2 -.-> sharded_ingestion_warnings1
+    ingestion_warnings2 -.-> sharded_ingestion_warnings2
+
+    linkStyle 6,7,8,9 stroke:#BA7517
 ```
 
 ## Further reading

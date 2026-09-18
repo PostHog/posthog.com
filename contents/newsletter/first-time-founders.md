@@ -4,7 +4,7 @@ date: 2024-04-19
 author:
   - andy-vandervell
 featuredImage: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/v1713521535/posthog.com/contents/blog/evolution-of-founders.jpg
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/blog/evolution-of-founders.jpg
 featuredImageType: full
 tags:
   - Founders

@@ -1,0 +1,69 @@
+---
+title: Use Self-driving in PostHog Desktop
+sidebarTitle: Self-driving
+sidebar: Docs
+showTitle: true
+---
+
+PostHog Self-driving watches your product data, investigates problems, and collects the results as reports. PostHog Desktop gives you one place to review those reports, ask follow-up questions, and start fixes.
+
+Self-driving uses the same reports and configuration in PostHog Desktop and the PostHog web app. Changes you make in either app apply to the same project.
+
+<ProductScreenshot
+imageLight="/images/docs/posthog-desktop/self-driving-report.png"
+classes="rounded"
+alt="A Self-driving report with its summary, evidence, chat, and GitHub actions"
+/>
+
+## Open Self-driving
+
+Select **Self-driving** in the navigation rail. Reports appear in one list. Filter the list by state to show what you want, such as `Needs decision`, `Review and merge`, `Resolved`, or `Dismissed`. Reports stay ordered by priority within the list.
+
+Use **For you** to see reports where you are a suggested reviewer. Switch to **Entire project** or choose a teammate to inspect another working set.
+
+Search reports by title. You can also filter by signal source, pull request status, and priority, or change the sort order.
+
+## Review a report
+
+Open a report to read its summary and the evidence behind it. Depending on the report, this can include:
+
+- The agent's verdict and recommended next step
+- The findings and signal sources that contributed to the report
+- Charts that show the affected behavior
+- Suggested reviewers and repository context
+- Research, task, and pull request activity
+
+## Report controls
+
+Use **Defer** to remove the report from your current working set until more evidence arrives. Use **Resolve** when the work is done. A resolved report stays resolved. If the same problem returns later, Self-driving files a new report instead of reopening this one. Use **Dismiss** when you do not want Self-driving to continue with the report. Add a reason when you dismiss a report to help improve future reports. Dismissed reports stay available in the `Dismissed` view.
+
+When a report has a pull request, select **Open PR in GitHub** to review it in GitHub. PostHog Desktop does not merge changes automatically.
+
+## Continue in chat
+
+Use the report's chat to investigate the report and work with the implementation agent. The conversation includes the report and its evidence as context.
+
+You can use a suggested action or tell the agent what you need. Depending on the report, the agent can investigate further, start or continue a fix, or visualize the report on a canvas.
+
+You can ask what caused the problem, who is affected, or how the proposed fix works. Select text in the report and choose **Ask about this** to quote that passage into the conversation.
+
+The same chat follows the report's implementation task when one exists. Use it to request a change or continue the fix. Open the full task when you need its complete timeline, files, or code review tools.
+
+## Configure Self-driving
+
+Select **Configure agents** from the Self-driving page, or open **Settings** and select **Self-driving**. From there, you can:
+
+- Choose which [signal sources](/docs/self-driving/inbox/sources) create reports
+- Set the daily report limit
+- Set the minimum priority for automatically started tasks
+- Choose the base branch for automatically opened pull requests in each repository
+- Configure Slack notifications for new reports and suggested reviewers
+
+Connect your project and personal GitHub accounts before asking Self-driving to work in a repository. See [PostHog Desktop settings](/docs/posthog-desktop/settings#self-driving) for the related GitHub and Slack controls.
+
+## Learn more
+
+- [How Self-driving works](/docs/self-driving)
+- [How reports are created](/docs/self-driving/reports)
+- [How research tasks investigate reports](/docs/self-driving/inbox/research)
+- [How implementation tasks open pull requests](/docs/self-driving/inbox/implementation)

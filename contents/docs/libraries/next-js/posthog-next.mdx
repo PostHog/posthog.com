@@ -169,6 +169,16 @@ Setting `proxy: true` routes PostHog API calls through your domain at `/ingest`,
     </Tab.Panels>
 </Tab.Group>
 
+### Capture route templates
+
+Pass `captureRouteTemplate` to `PostHogPageView` to add the normalized Next.js route template to each `$pageview` event as `$route`. For example, a visit to `/posts/123` keeps its concrete `$current_url` and `$pathname` values, and adds `$route: '/posts/[id]'`.
+
+Dynamic segments use `[param]`. Catch-all segments and populated optional catch-all segments use the normalized `[...param]` form. For an empty optional catch-all, the Pages Router normalizes `[[...param]]` to `[...param]`, while the App Router uses the concrete base pathname.
+
+The Pages Router reads the route template from `router.pathname`. The App Router uses `useParams()` to infer the template from the current pathname, so this inference is best effort. If a parameter value matches more than one path segment, PostHog captures the pageview without `$route` because the match is ambiguous.
+
+App Router route-template capture requires Next.js 13.3 or later. On earlier versions, PostHog captures the pageview without `$route`. This requirement does not apply to the Pages Router.
+
 </Step>
 
 <Step checkpoint title="Verify events are captured" subtitle="Confirm that you can see events in your PostHog project">
@@ -220,7 +230,7 @@ export function NewBanner() {
 }
 ```
 
-You can also read [the full `posthog-js` documentation](/docs/libraries/js/features) for all the usable functions.
+You can also read [the full `posthog-js` documentation](/docs/libraries/js/usage) for all the usable functions.
 
 </Step>
 

@@ -11,10 +11,6 @@ export const ReuseFeatureFlagDark = "https://res.cloudinary.com/dmukukwp6/image/
 
 This page covers troubleshooting for Experiments. For setup, see the [installation guides](/docs/experiments/installation).
 
-## Have a question? Ask PostHog AI
-
-<AskAIInput placeholder="Type your question and hit enter..." />
-
 ## How do I use an existing feature flag in an experiment?
 
 We generally don't recommend this, since experiment feature flags need to be in a specific format (see below) or otherwise they won't work.
@@ -45,6 +41,24 @@ Experiments require feature flags to meet specific requirements. You may see val
 - **"Feature flag must have at least 2 variants (control and at least one test variant)"**: Experiments need at least two variants: a `control` and at least one test variant. Single-variant flags cannot be used for experiments.
 
 - **"Feature flag must have a variant with key 'control'"**: One of your variants must have the key `control`. This is used as the baseline for comparison.
+
+## Why am I getting an error that my metric's event has not been ingested?
+
+When you save an experiment's primary or secondary metrics, PostHog checks that every event the metric references has been ingested by your project at least once. If it hasn't, saving fails with an error like:
+
+> Event(s) `purchase_completed` not found. No events with these names have been ingested by this project.
+
+This is a guardrail against typos and against metrics that point at events you haven't shipped yet, since those metrics would silently return no data for the whole experiment.
+
+You'll rarely see this in the UI, because the metric event picker only lets you choose events PostHog has already seen. It usually shows up when you create or update an experiment through the API, the [MCP server](/docs/model-context-protocol), or another programmatic client.
+
+To fix it:
+
+- **Check the event name for typos.** Confirm the exact name under [data management](https://app.posthog.com/data-management/events).
+- **Send the event first.** If the event is new, capture it once from your app so PostHog creates its definition, then add the metric.
+- **Bypass the check deliberately.** If you're setting up a metric ahead of the event shipping, pass `allow_unknown_events: true` when creating or updating the experiment. The metric saves, but shows no data until the event starts arriving.
+
+This check applies to metrics defined directly on an experiment. [Shared metrics](/docs/experiments/metrics#shared-metrics) are not validated this way, so a shared metric can reference an event that has never been ingested.
 
 ## How can I run experiments with my custom feature flag setup?
 

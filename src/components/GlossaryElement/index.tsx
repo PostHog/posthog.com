@@ -11,6 +11,8 @@ export interface TooltipContentProps {
     slug: string
     description: string
     video?: string
+    /** CTA label. The default suits in-flow reading; override when the link leaves the surface. */
+    ctaLabel?: string
     setOpen: React.Dispatch<React.SetStateAction<boolean>>
 }
 
@@ -32,7 +34,14 @@ export const formatNode = (node: MdxNode) => ({
     video: node?.frontmatter?.featuredVideo,
 })
 
-export const TooltipContent = ({ slug, description, title, video, setOpen }: TooltipContentProps) => {
+export const TooltipContent = ({
+    slug,
+    description,
+    title,
+    video,
+    ctaLabel = 'Continue reading',
+    setOpen,
+}: TooltipContentProps) => {
     const [view, setView] = useState('article')
 
     if (!title || !slug || !description) {
@@ -65,7 +74,7 @@ export const TooltipContent = ({ slug, description, title, video, setOpen }: Too
                     <p className="text-base m-0 mt-4">{description}</p>
                     {slug && (
                         <CallToAction size="sm" className="mt-6" width="full" to={slug}>
-                            Continue reading
+                            {ctaLabel}
                         </CallToAction>
                     )}
                 </>

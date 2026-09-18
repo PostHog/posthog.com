@@ -11,7 +11,7 @@ tags:
 
 If you're building a B2B2C product, *your users* might want analytics about *their users*. You can provide this with embedded analytics (AKA customer-facing analytics), events you capture and then display for them.
 
-This tutorial shows you how to set up embedded analytics by creating a basic Next.js app with PostHog, querying analytics data via PostHog's [queries API](/docs/api/queries), and then displaying it with Recharts.
+This tutorial shows you how to set up embedded analytics by creating a basic Next.js app with PostHog, querying analytics data via PostHog's [queries API](/docs/api/queries), and then displaying it with Recharts. It uses one PostHog project and filters data by customer. To decide whether this setup is right for your use case, read [Project setup for embedded analytics](/docs/data/embedded-analytics-projects).
 
 > **Note:** In this tutorial, we include a `name` parameter with each query. This makes it easier to identify and debug queries in the [query log](/docs/data/query-log), which is especially useful when building customer-facing analytics.
 
@@ -361,7 +361,7 @@ When we run `npm run dev` again and go to `http://localhost:3000/analytics`, we�
 
 ![Frontend analytics](https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_03_28_at_09_40_51_0956b2295f.png)
 
-Toggling between the two team’s button clicks gives you an idea of how you can segment embedded analytics for multiple teams or users. 
+Toggling between the two team’s button clicks gives you an idea of how you can segment embedded analytics for multiple teams or users.
 
 The next problem we need to solve: making the pageview data look better. We’ll set up better visuals in the next step with Recharts.
 
@@ -486,6 +486,7 @@ The response is the same as before but the query is faster, which helps provide 
 
 ## Further reading
 
+- [Project setup for embedded analytics](/docs/data/embedded-analytics-projects)
 - [How to use Recharts to visualize analytics data (with examples)](/tutorials/recharts)
 - [How to use React Charts to visualize analytics data (with examples)](/tutorials/react-charts)
 - [The basics of SQL for analytics](/product-engineers/sql-for-analytics)

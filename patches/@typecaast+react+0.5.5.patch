@@ -1,0 +1,54 @@
+diff --git a/node_modules/@typecaast/react/dist/index.cjs b/node_modules/@typecaast/react/dist/index.cjs
+index 787cf02..3f36ae2 100644
+--- a/node_modules/@typecaast/react/dist/index.cjs
++++ b/node_modules/@typecaast/react/dist/index.cjs
+@@ -435,12 +435,20 @@ var Player = react.forwardRef(function Player2({
+   const player = tc.player;
+   const fonts = useSkinFonts(skin);
+   react.useEffect(() => {
+-    if (reduced) tc.seek(tc.duration);
++    // PATCHED (posthog.com): `tc` is a fresh object literal on every render
++    // (useTypecaast does not memoize its return), so this effect re-runs constantly.
++    // play() on an already-finished non-looping player synchronously re-ended it and
++    // emitted tick/pause/end -> setState -> re-render -> effect -> play() again: a
++    // CPU-bound loop pinning the main thread at ~99% once the animation completed.
++    // Skipping only those no-op calls fixes the loop while leaving this effect's
++    // dependencies, timing, and every other play()/pause() call untouched.
++    if (reduced && player.currentMs !== player.durationMs) tc.seek(tc.duration);
+   }, [reduced, tc]);
+   react.useEffect(() => {
+     if (paused === void 0 || reduced) return;
++    const finished = !player.loop && player.currentMs >= player.durationMs;
+     if (paused) tc.pause();
+-    else tc.play();
++    else if (!finished) tc.play();
+   }, [paused, reduced, tc]);
+   react.useEffect(() => {
+     const offs = [];
+diff --git a/node_modules/@typecaast/react/dist/index.js b/node_modules/@typecaast/react/dist/index.js
+index 54d7040..73cb744 100644
+--- a/node_modules/@typecaast/react/dist/index.js
++++ b/node_modules/@typecaast/react/dist/index.js
+@@ -434,12 +434,20 @@ var Player = forwardRef(function Player2({
+   const player = tc.player;
+   const fonts = useSkinFonts(skin);
+   useEffect(() => {
+-    if (reduced) tc.seek(tc.duration);
++    // PATCHED (posthog.com): `tc` is a fresh object literal on every render
++    // (useTypecaast does not memoize its return), so this effect re-runs constantly.
++    // play() on an already-finished non-looping player synchronously re-ended it and
++    // emitted tick/pause/end -> setState -> re-render -> effect -> play() again: a
++    // CPU-bound loop pinning the main thread at ~99% once the animation completed.
++    // Skipping only those no-op calls fixes the loop while leaving this effect's
++    // dependencies, timing, and every other play()/pause() call untouched.
++    if (reduced && player.currentMs !== player.durationMs) tc.seek(tc.duration);
+   }, [reduced, tc]);
+   useEffect(() => {
+     if (paused === void 0 || reduced) return;
++    const finished = !player.loop && player.currentMs >= player.durationMs;
+     if (paused) tc.pause();
+-    else tc.play();
++    else if (!finished) tc.play();
+   }, [paused, reduced, tc]);
+   useEffect(() => {
+     const offs = [];

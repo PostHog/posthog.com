@@ -218,7 +218,7 @@ export const OnePlaceSlide = () => {
                     </div>
                     <div className="@lg:text-center mt-auto leading-tight">
                         <Link
-                            to="/data-stack/integrations-library?type=destination"
+                            to="/context-warehouse/integrations-library?type=destination"
                             state={{ newWindow: true }}
                             className="text-sm font-semibold"
                         >
@@ -241,7 +241,7 @@ export const OnePlaceSlide = () => {
                         )}
                     </div>
                     <div className="@lg:text-center mt-auto leading-tight">
-                        <Link to="/data-stack" state={{ newWindow: true }} className="text-sm font-semibold">
+                        <Link to="/context-warehouse" state={{ newWindow: true }} className="text-sm font-semibold">
                             Data stack README
                         </Link>
                     </div>

@@ -1,0 +1,60 @@
+---
+title: Use experiments over PostHog MCP
+sidebar: Docs
+showTitle: true
+---
+
+The [PostHog MCP server](/docs/model-context-protocol) exposes experiments as function calling tools, so an AI agent can create an experiment, launch it, read its results, and end it without you switching to the PostHog app. It works in any MCP client – Cursor, Codex, Claude Code, Windsurf, VS Code, and others.
+
+This is the surface to use when the experiment lives next to the code you're writing. You can scaffold the test in the same session you build the feature, then come back later and ask whether it won.
+
+## Before you start
+
+1. **Set up Experiments** – [install a PostHog SDK](/docs/experiments/installation) so your app can serve variants.
+2. **Connect the MCP server** – [install it in your AI tool](#install-the-mcp-server) and give it access to your project.
+
+## What you can do here
+
+**Plan and create experiments**
+
+Estimate a sample size and running time before anything exists, then create the experiment along with its backing [feature flag](/docs/feature-flags). You can also duplicate an existing experiment or copy one into another project.
+
+**Read results**
+
+Pull an experiment's configuration, its current statistical results, a timeseries of those results over time, and the full audit trail of who changed what.
+
+**Manage the lifecycle**
+
+Launch, pause, resume, end, and reset experiments, ship a winning variant, archive or unarchive finished ones, and freeze or unfreeze exposures when you want to [stop enrollment but keep measuring](/docs/experiments/tracking-long-term-metrics).
+
+**Manage holdouts and shared metrics**
+
+Create, list, update, and delete [holdout](/docs/experiments/holdouts) groups and shared [metrics](/docs/experiments/metrics) so they can be reused across experiments.
+
+## Example prompts
+
+Try these with your MCP-enabled agent:
+
+- `Create an A/B test for the new checkout flow with a 70/30 split. Use purchase_completed as the goal metric.`
+- `How long would I need to run this experiment to detect a 5% lift?`
+- `What are the results of my new-pricing-page experiment?`
+- `List all running experiments in this project.`
+- `Ship the winning variant of the dark-mode test.`
+- `Freeze exposures on the pricing experiment but keep collecting metrics.`
+- `Who changed the targeting on the onboarding experiment, and when?`
+
+## Install the MCP server
+
+The recommended way to install is with the [AI wizard](/docs/ai-engineering/ai-wizard):
+
+```bash
+npx @posthog/wizard mcp add
+```
+
+The wizard supports Claude, Cursor, Windsurf, VS Code, and more. You can also [configure it manually](/docs/model-context-protocol#get-started-in-30-seconds).
+
+## Related
+
+- Design and analyze the same experiments in the [web app](/docs/experiments/surfaces/web-app).
+- Manage them programmatically with the [API](/docs/experiments/surfaces/api).
+- See the full [MCP server docs](/docs/model-context-protocol) for setup and available tools.

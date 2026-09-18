@@ -46,6 +46,8 @@ export type PlatformOption = {
 export type Platform = PlatformOption & {
     icon: React.ReactNode
     group: 'editors' | 'platforms'
+    /** Destination used instead of expandable instructions when linkOnly is enabled. */
+    href?: string
 }
 
 export type InstallSchema = {
@@ -410,6 +412,7 @@ const v0Methods: InstallMethod[] = [
 const installPlatforms: Platform[] = [
     {
         id: 'claude',
+        href: 'https://claude.ai/directory/connectors/posthog',
         label: 'Claude',
         group: 'editors',
         icon: <IconClaudeCode className={iconClass} />,
@@ -428,6 +431,7 @@ const installPlatforms: Platform[] = [
     },
     {
         id: 'cursor',
+        href: '/docs/model-context-protocol/cursor',
         label: 'Cursor',
         group: 'editors',
         icon: <LogomarkCursor className={iconClass} />,
@@ -435,6 +439,7 @@ const installPlatforms: Platform[] = [
     },
     {
         id: 'vscode',
+        href: '/docs/model-context-protocol/vscode',
         label: 'VS Code',
         group: 'editors',
         icon: <LogomarkVSCode className={iconClass} />,
@@ -442,6 +447,7 @@ const installPlatforms: Platform[] = [
     },
     {
         id: 'windsurf',
+        href: '/docs/model-context-protocol/windsurf',
         label: 'Windsurf',
         group: 'editors',
         icon: <LogomarkWindsurf className={iconClass} />,
@@ -449,6 +455,7 @@ const installPlatforms: Platform[] = [
     },
     {
         id: 'codex',
+        href: '/docs/model-context-protocol/codex',
         label: 'Codex',
         group: 'editors',
         icon: <LogomarkCodex className={iconClass} />,
@@ -456,6 +463,7 @@ const installPlatforms: Platform[] = [
     },
     {
         id: 'zed',
+        href: '/docs/model-context-protocol/zed',
         label: 'Zed',
         group: 'editors',
         icon: <LogomarkZed className={iconClass} />,
@@ -463,6 +471,7 @@ const installPlatforms: Platform[] = [
     },
     {
         id: 'lovable',
+        href: '/docs/model-context-protocol',
         label: 'Lovable',
         group: 'platforms',
         icon: <LogomarkLovable className={iconClass} />,
@@ -470,6 +479,7 @@ const installPlatforms: Platform[] = [
     },
     {
         id: 'replit',
+        href: '/docs/model-context-protocol',
         label: 'Replit',
         group: 'platforms',
         icon: <LogomarkReplit className={iconClass} />,
@@ -477,6 +487,7 @@ const installPlatforms: Platform[] = [
     },
     {
         id: 'v0',
+        href: '/docs/model-context-protocol',
         label: 'v0',
         group: 'platforms',
         icon: <LogomarkV0 className={iconClass} />,

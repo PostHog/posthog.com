@@ -27,10 +27,10 @@ const SearchableProductMenu: React.FC<SearchableProductMenuProps> = ({ products 
     // Slugs to hide from the searchable menu
     const hiddenSlugs = [
         'ai',
-        'data-stack/sources',
-        'data-stack/reverse-etl-export',
-        'data-stack/data-modeling',
-        'data-stack',
+        'context-warehouse/sources',
+        'context-warehouse/reverse-etl-export',
+        'context-warehouse/data-modeling',
+        'context-warehouse',
     ]
 
     // Custom labels for specific products

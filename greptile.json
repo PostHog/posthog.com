@@ -1,8 +1,57 @@
 {
     "commentTypes": ["logic", "syntax", "style", "info"],
     "instructions": "Ensure everything in PostHog style guides located in the contents/handbook/wizard-and-docs/docs-style-guide.mdx and contents/handbook/content/posthog-style-guide.md files are enforced. These rules are especially important: words are spelled using American English, titles are in sentence case, feature names (e.g. feature flags or product analytics) are in sentence case too, use relative URLs for internal links, and http://app.posthog.com instead of http://us.posthog.com or http://eu.posthog.com for links to the app. Thank you for your service.",
-    "ignorePatterns": "api/**\ngatsby/**\nplugins/**\nscripts/**\nsrc/**\n*.json\n*.js\n*.ts\n*.jsx\n.tsx\n.yaml",
+    "customContext": {
+        "rules": [
+            {
+                "scope": ["src/**"],
+                "rule": "Check whether an existing component, hook, or utility elsewhere in the repo already solves the problem. Flag logic copied from elsewhere in the codebase that should be consolidated into a shared solution in this PR."
+            },
+            {
+                "scope": ["src/**"],
+                "rule": "Critique abstraction and API design: is the component the right shape, are prop and parameter names intuitive, and is state owned at the right level? Prefer the smallest change that solves the PR's stated problem—flag single-use abstractions, speculative configurability, and overcomplicated solutions. If the design has multiple interpretations or unclear tradeoffs, call them out."
+            },
+            {
+                "scope": ["src/**"],
+                "rule": "Flag duct-tape fixes that patch a symptom (special-case conditionals, hard-coded values, copy-pasted overrides) instead of the underlying issue, and describe the underlying fix."
+            },
+            {
+                "scope": ["src/**"],
+                "rule": "Use Tailwind @container queries, never media queries. Every page renders in a resizable window, so viewport-based breakpoints are wrong."
+            },
+            {
+                "scope": ["src/**"],
+                "rule": "Never use stock Tailwind colors. Only project color tokens are allowed."
+            },
+            {
+                "scope": ["src/**"],
+                "rule": "Import Radix primitives via the wrappers in src/components/RadixUI, not directly from the radix-ui package. Custom OS-style components use the OS prefix (OSButton, OSTable)."
+            },
+            {
+                "scope": ["src/**"],
+                "rule": "Check src/hooks/useProduct.ts and src/hooks/useProducts.tsx before hard-coding product names, metadata, or pricing. Flag literal prices, tier thresholds, and product lifecycle claims (alpha, beta, free tier) written directly into copy or components — these go stale; they should come from the product data hooks."
+            },
+            {
+                "scope": ["src/**"],
+                "rule": "If a page is moved or renamed, a redirect must be added in vercel.json."
+            },
+            {
+                "scope": ["src/**"],
+                "rule": "Subscriptions registered inside useEffect (posthog.onFeatureFlags, addEventListener, setInterval, observers) must have their cleanup returned from the effect, or they leak across the many window mounts/unmounts in this desktop-style UI."
+            },
+            {
+                "scope": ["src/**"],
+                "rule": "Flag `as any` casts and untyped return shapes, especially in pure-logic modules like the pricing calculator. Suggest the fully typed literal instead."
+            },
+            {
+                "scope": ["src/**"],
+                "rule": "Surgical changes only: every changed line should trace to the PR's goal. Flag drive-by refactors, unrelated formatting/comment churn, and adjacent 'improvements' that aren't required. Cleanup should only remove orphans created by this PR."
+            }
+        ]
+    },
+    "ignorePatterns": "api/**\ngatsby/**\nplugins/**\nscripts/**\n.storybook/**\n/*.json\n/*.js\n/*.ts\n/*.jsx\ncontents/**/*.json\ncontents/**/*.js\ncontents/**/*.ts\ncontents/**/*.jsx\nstatic/**/*.json\nstatic/**/*.js\nstatic/**/*.ts\nstatic/**/*.jsx",
     "triggerOnUpdates": false,
     "shouldUpdateDescription": false,
-    "disabledLabels": ["no-greptile"]
+    "disabledLabels": ["no-greptile"],
+    "excludeAuthors": ["posthog[bot]"]
 }

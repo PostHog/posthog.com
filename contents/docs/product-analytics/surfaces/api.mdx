@@ -8,6 +8,11 @@ Use the API to run analytics queries and manage saved insights from your own sys
 
 There are two things worth knowing about. The **query endpoint** runs any analytics query and hands back results, and the **insights endpoints** create, read, update, and delete the insights people see in the web app.
 
+## Before you start
+
+1. **Set up Product Analytics** – [install a PostHog SDK](/docs/product-analytics/installation) so events are captured.
+2. **Get API access** – [create a personal API key](/docs/api/personal-api-keys) with the scopes you need. See [authentication](#authentication) below.
+
 ## Run a query
 
 `POST /api/projects/:project_id/query/` takes a query node – trends, funnels, retention, paths, stickiness, lifecycle, or raw [SQL](/docs/data-warehouse/sql) – and returns the results. This is the same endpoint the web app uses, so anything you can build as an insight you can run over the API.

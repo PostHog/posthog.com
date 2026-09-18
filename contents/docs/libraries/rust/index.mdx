@@ -30,6 +30,18 @@ import RustSendEvents from '../../integrate/send-events/_snippets/send-events-ru
 
 <RustSendEvents />
 
+## Flushing on shutdown
+
+`capture` is fire-and-forget – it queues the event and returns, and a background worker delivers it. Events still queued when the process exits are lost.
+
+Call `flush` and then `shutdown` before your process ends, where your server future resolves – after `run().await` in an actix or axum `main`. If your app has no shutdown path today, that line is still the place – add the calls rather than skipping the flush.
+
+```rust
+server.run().await?;
+client.flush().await;
+client.shutdown().await;
+```
+
 ## Person profiles and properties
 
 The Rust SDK captures identified events when you pass a `distinct_id` to `Event::new`. These create [person profiles](/docs/data/persons). To set [person properties](/docs/product-analytics/person-properties), include `$set` and `$set_once` properties when capturing an event.

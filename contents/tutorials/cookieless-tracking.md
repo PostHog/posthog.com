@@ -16,7 +16,7 @@ tags:
 
 Normally, PostHog stores some information about the user in their browser using a cookie. This approach is typical for analytics tools and enables user tracking across sessions, caching feature flag data, and more.
 
-There are some situations where you don't want to use cookies and do cookieless tracking instead. For example, when you have concerns about user privacy or to comply with regulation such as [GDPR](/docs/integrate/gdpr) or [HIPAA](/docs/privacy/hipaa-compliance) (or you just hate cookie banners).
+There are some situations where you don't want to use cookies and do cookieless tracking instead. For example, when you have concerns about user privacy or to comply with regulation such as [GDPR](/docs/privacy/gdpr-compliance) or [HIPAA](/docs/privacy/hipaa-compliance) (or you just hate cookie banners).
 
 This tutorial shows how to configure PostHog's [JavaScript Web SDK](/docs/libraries/js) to do cookieless audience measurement.
 
@@ -31,7 +31,8 @@ This tutorial shows how to configure PostHog's [JavaScript Web SDK](/docs/librar
 If you never want to show a cookie banner, you can set the cookieless mode to `"always"`. In this mode:
 
 - PostHog never stores data in cookies or local/session storage.
-- You cannot call `identify()`, as a distinct ID would be considered Personal Data under GDPR and other similar privacy regulations.
+- You should avoid calling `identify()`. The call still works and sends an `$identify` event, but a persistent distinct ID is considered Personal Data under GDPR and other similar privacy regulations, which undoes the privacy benefit of this mode. To prevent identification entirely, set [`person_profiles: 'never'`](/docs/data/anonymous-vs-identified-events), which turns `identify()` calls into no-ops.
+- You cannot use `alias()`, as alias events are dropped during ingestion in cookieless mode.
 - PostHog will measure the number of users on your site using a privacy-preserving hash, calculated on PostHog's servers.
 
 To set this mode, add the following config option to your PostHog initialization:
@@ -104,7 +105,7 @@ This means that whilst the IP address and User Agent are Personal Data, the hash
 
 Nothing comes for free unfortunately. Limiting what PostHog can store in cookies has implications like:
 
-- **Higher user count:** Users that do not give cookie consent appear as different people each day. A new daily salt means that the hash is different. This means high unique user counts beyond one day (like weekly or monthly unique users). Additionally, not being able to `identify()` users means that it is impossible to link together multiple devices or browsers from the same user.
+- **Higher user count:** Users that do not give cookie consent appear as different people each day. A new daily salt means that the hash is different. This means high unique user counts beyond one day (like weekly or monthly unique users). Additionally, if you don't `identify()` users, it is impossible to link together multiple devices or browsers from the same user.
 
 - **Hash collisions:** Because the hash is based on a limited set of inputs, it is possible that two different users will generate the same hash. This means that two different users could be counted as one user. The most likely scenario would be two users with the same IP address (e.g. in a corporate network) and the same user agent (e.g. using the same browser version on the same OS).
 

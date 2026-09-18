@@ -16,7 +16,7 @@ At times we can really struggle to pull ourselves away from tickets and focus on
 
 Each support team member is given an allocation of *2 support zero weeks in each quarter* (i.e. 10 working days). These are weeks that each team member can book.
 
-Team members are encouraged to consider taking the same zero weeks as someone else working on the same quarterly goal (so it can be done hackathon-style, you can consider using your meetup budget, etc)
+Team members are encouraged to consider taking the same zero weeks as someone else working on the same quarterly goal (so it can be done hackathon-style, you can consider using your monthly [`User Limit`](/handbook/people/spending-money#how-it-works) to meet up, etc)
 
 ### Before the quarter starts
 - [ ] During quarterly goal planning we scope out goals that we think are achievable in our zero time each quarter.

@@ -91,11 +91,15 @@ instrument(server, posthog, {
 `extra` carries MCP transport details — useful when the agent's user-agent or auth context hints at intent:
 
 ```ts
+import { getRequestHeaders } from "@posthog/mcp"
+
 intentFallback: (request, extra) => {
-  const ua = extra?.requestInfo?.headers?.["user-agent"]
+  const ua = getRequestHeaders(extra)?.["user-agent"]
   return `${ua ?? "unknown client"} invoked ${request.params?.name}`
 }
 ```
+
+`getRequestHeaders` reads headers on both MCP SDK majors — see [MCP SDK v2](/docs/mcp-analytics/sdk-v2#if-your-callbacks-read-headers-change-them).
 
 ### LLM-derived intent
 

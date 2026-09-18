@@ -50,7 +50,7 @@ sequenceDiagram
     Note over AS: Validate ID-JAG signature,<br/>audience, resource, scopes
     AS-->>Client: PostHog access token
 
-    loop Tool calls
+    loop MCP tool calls
         Client->>MCP: Call MCP tool with access token
         MCP-->>Client: Result
     end
@@ -115,7 +115,7 @@ Configure your IdP to include these scopes when it issues ID-JAGs, at minimum:
 
 - `user:read` — required for all MCP connections
 - `organization:read` and `project:read` — required for the MCP server to bootstrap (list your orgs and projects)
-- Any additional scopes for the tools you want to use (for example, `feature_flag:write` to manage flags)
+- Any additional scopes for the MCP tools you want to use (for example, `feature_flag:write` to manage flags)
 
 PostHog issues the access token with the **intersection** of the scopes your IdP granted and the scopes the client requested. Tokens missing the bootstrap scopes are rejected at the MCP server with an `insufficient_scope` error.
 

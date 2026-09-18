@@ -2,34 +2,24 @@
 title: PostHog Desktop cloud runs
 ---
 
-A **cloud run** is a [task](/docs/posthog-desktop/tasks) which runs in a sandbox environment instead of on your computer. You can close the app, switch networks, or shut your computer, and the agent keeps going. Reconnect when you're ready to check on progress or hand the task back to your computer.
+A **cloud run** is a [task](/docs/posthog-desktop/tasks) that runs in an isolated PostHog-managed workspace instead of on your computer. Close the app or shut down your computer, and the agent keeps working.
 
-## How a cloud run works
+Cloud runs consume AI credits for model usage and for the CPU and memory used while the task runs. See [pricing](/docs/posthog-desktop/pricing) for current model and cloud compute rates.
 
-When you start a cloud run, PostHog Desktop:
+## Start a cloud run
 
-1. Provisions a fresh, isolated workspace for the task.
-2. Applies the [cloud environment](/docs/posthog-desktop/environments#cloud-environments) you've picked, which sets the network access rules and injects the secrets and environment variables the workspace needs.
-3. Checks out your repo at the branch you started from.
-4. Starts the agent on your prompt.
+Choose **Cloud** in the task composer, select a [cloud environment](/docs/posthog-desktop/environments#cloud-environments), and send your prompt. The environment supplies the secrets, environment variables, and network access the task needs.
 
-Once the agent is done, you can pick the work back up locally for review (see [Handing off between cloud and local](#handing-off-between-cloud-and-local) below) or open a PR straight from the run.
+Return later to review the result, open a pull request, or move the task to your computer.
 
-## Configuring cloud for your workflow
+## Move between cloud and local
 
-Cloud runs use a [cloud environment](/docs/posthog-desktop/environments#cloud-environments) to control:
+A task can move between your computer and the cloud in either direction. PostHog Desktop carries over:
 
-- **Secrets and environment variables** injected into the cloud workspace
-- **Network access**, either an allowlist of trusted services, full internet access, or a custom set of domains
+- Committed and uncommitted code changes, including untracked files
+- The task's branch
+- The agent conversation
 
-## Handing off between cloud and local
+The agent continues with the same work and conversation after the handoff.
 
-A task can move between local and cloud in either direction. When you hand off, PostHog Desktop transfers:
-
-- All your code changes. Committed, uncommitted, unpushed, untracked, everything in the working folder gets carried over.
-- The branch you're on.
-- The full agent conversation, so it remembers what you've already discussed.
-
-The other side picks up exactly where you left off, and you can hand off again at any point.
-
-Handoff to local requires a clean working tree on the destination side. If you have uncommitted changes there, commit or stash them first.
+Moving a cloud task to your computer requires a clean working tree in the destination repository. Commit or stash local changes first.

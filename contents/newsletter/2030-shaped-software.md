@@ -29,7 +29,7 @@ This is a vague aspiration and "[agent-first software](/newsletter/agent-first-p
 
 The current era of software is designed for humans to do all the work, but in 2030, agents will be the ones **doing**. Agents have shown that they can do the obvious stuff themselves. What does this leave humans to do?
 
-1. **Judging and deciding.** Humans will approve, prioritize, choose direction, and resolve ambiguity.
+1. **Judging and deciding.** Humans will approve, prioritize, [choose direction](/newsletter/if-ai-writes-all-the-code-whats-left#2-setting-direction), and resolve ambiguity.
 
 2. **Understanding and trusting.** Humans will evaluate whether it worked, if it's safe, and what's changed.
 
@@ -49,7 +49,7 @@ Missing capabilities are a failure mode. Say you ask an agent to set up an [A/B 
 
 This doesn't mean that tools are all you need. It won't be enough to just let Claude use your product on its own. Relying entirely on a model provider is too much risk. Building your own harness lets you guarantee quality, protect your brand, and make continuous improvements. Even [OpenAI notes](https://openai.com/index/harness-engineering/) that agents struggle not because they are incapable, but because they lack "the tools, abstractions, and internal structure required to make progress toward high-level goals."
 
-Context is what makes your agent special. The model is the same for everyone, your moat is the source code, usage data, customer data, and product skills you feed it. This means [context engineering](/newsletter/context-engineering), creating pipelines and flows to get fresh, valuable context to the agents when they need it.
+Context is what makes your agent special. The model is the same for everyone, your moat is the source code, usage data, customer data, and product skills you feed it. This means [context engineering](/newsletter/context-engineering), creating [pipelines and flows to get fresh, valuable context to the agents](/newsletter/software-factories#what-software-factories-are-missing) when they need it.
 
 ## Chat is the front door, generative UI inside
 
@@ -89,7 +89,7 @@ The question to ask is: is a human looking at this for trust and judgement, or t
 
 ## Be everywhere
 
-Agents don't work like apps. They run on their own, often for a long time. Nobody should have to sit in a browser tab watching them. 2030 [products](/products) come to their users, no matter if that means [desktop](/code), [Slack](/slack), mobile, email, API, or voice.
+Agents don't work like apps. They run on their own, often for a long time. Nobody should have to sit in a browser tab watching them. 2030 [products](/products) come to their users, no matter if that means [Desktop](/desktop), [Slack](/slack), mobile, email, API, or voice.
 
 These are a shared control plane between humans and agents. Thin clients over a shared backend, so the experience is the same anywhere and the handoff between surfaces is seamless.
 
@@ -109,7 +109,7 @@ Retrofitting maximizes reach, that's where our users already are, but we inherit
 
 Starting fresh means a clean break with years of cumulative UI built on assumptions that might not be valid or relevant. The people who opt in are early adopters who want to co-create the future with us. They don't complain about what's missing, they tell us what they need. The cost of this is convincing existing users to switch (eventually) and splitting focus with our existing products while we do.
 
-We're cheating a bit and going semi-fresh, using our existing data and infra on a new surface. We're expanding our existing [PostHog Code app](/code) to fit our 2030 vision first before migrating other surfaces. It's already where the best agents live, it draws exactly the early adopters we want, and it's simple enough to be a genuine blank slate.
+We're cheating a bit and going semi-fresh, using our existing data and infra on a new surface. We're expanding our existing [PostHog Desktop app](/desktop) to fit our 2030 vision first before migrating other surfaces. It's already where the best agents live, it draws exactly the early adopters we want, and it's simple enough to be a genuine blank slate.
 
 Without this change, we risk building 2026-shaped software with AI bolted on. We answer "how do we add AI to this" rather than "what is the agent-first version of this?" We can't predict 2030, but don't need to be right about the details to build in the right direction. The companies that matter in 2030 will be the ones who started building for it well before they had to.
 

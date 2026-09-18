@@ -92,7 +92,7 @@ Some guidelines on how to do this are below, but if in doubt team leads should a
 
 **Typically, you must give at least 2-3 weeks notice of a product launch and you should reach out directly to marketing team leads if this is not possible.**
 
--   [ ] [Create a new launch plan issue](https://github.com/PostHog/meta/issues/new?template=launch-plan-.md)
+-   [ ] [Create a new launch plan issue](https://github.com/PostHog/marketing/issues/new?template=launch-plan.md)
 -   [ ] Continue to communicate timelines / updates in the Slack channel created
 
 ## Leading quarterly goal setting
@@ -172,7 +172,7 @@ No more than 6 people, but that's the only rule. It could be any group of people
 
 Eventually, yes. Other companies have a UX team that build components for everyone to use. Since we currently use [Ant Design](https://ant.design/), we don't need this just yet.
 
-### Can I still [step on toes](/handbook/company/values)?
+### Can I still [step on toes](/handbook/values)?
 
 Yes. In fact, it's actively encouraged. 
 

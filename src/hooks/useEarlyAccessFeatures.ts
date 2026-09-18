@@ -4,6 +4,11 @@ import usePostHog from './usePostHog'
 
 export type EarlyAccessFeatureStage = 'concept' | 'alpha' | 'beta' | 'general-availability'
 
+export interface EarlyAccessFeatureAssignee {
+    type: 'user' | 'role'
+    name: string
+}
+
 export interface EarlyAccessFeature {
     name: string
     description: string
@@ -24,6 +29,13 @@ export interface EarlyAccessFeature {
      * passes it through at runtime — see PostHog/posthog-js#2642.)
      */
     payload?: Record<string, any>
+    /**
+     * Person or role the feature is assigned to in PostHog — display name only, served by
+     * the public EAF endpoint. The roadmap resolves it to a small team (see
+     * useRoadmapEarlyAccessFeatures). Like `payload`, posthog-js doesn't type it yet but
+     * passes it through at runtime.
+     */
+    assignee?: EarlyAccessFeatureAssignee | null
 }
 
 /**
@@ -102,6 +114,10 @@ export function useEarlyAccessFeatures(options: UseEarlyAccessFeaturesOptions = 
                     featureId
                     waitlistCount
                     payload
+                    assignee {
+                        type
+                        name
+                    }
                 }
             }
         }

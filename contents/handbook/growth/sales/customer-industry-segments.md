@@ -156,7 +156,7 @@ Lead with AI Observability. It's the one product built for how these customers m
 - **Feature Flags and Experiments** – gate new models behind flags, run A/B tests on prompt changes, hold out high-value users from risky rollouts.
 - **Surveys** – trigger feedback prompts after a generation, collect CSAT on AI features, run PMF surveys against power users.
 - **Session Replay** – filter to recordings of users hitting prompt failures or specific `$ai_generation` errors.
-  - **Replay Vision** (closed beta) – run scanners over those recordings to auto-flag dead ends and prompt failures, then query the results back as PostHog events.
+  - **Replay Vision** – run scanners over those recordings to auto-flag dead ends and prompt failures, then query the results back as PostHog events.
 - **Error Tracking** – group exceptions by plan, model, or role to see which segment hits a bug.
 - **Data Warehouse** – sync events for joins against billing or model cost tables, then pipe insights back.
 - **Self-driving** – point the self-driving loop at these signals: agents investigate the reports, open pull requests for fixes, and measure whether they worked.

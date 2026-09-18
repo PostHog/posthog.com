@@ -1,7 +1,6 @@
 import React from 'react'
 import OSTable from 'components/OSTable'
 import { Logo } from '@posthog/brand/logo'
-import { useApp } from '../../../context/App'
 
 // Small building blocks for the comparison cells
 const Check = () => <span className="text-green text-lg font-bold">✓</span>
@@ -17,9 +16,6 @@ const CompetitorName = ({ children }: { children: React.ReactNode }) => (
 )
 
 export default function TracesComparisonTable(): JSX.Element {
-    const { siteSettings } = useApp()
-    const isDark = siteSettings?.theme === 'dark'
-
     const columns = [
         { name: '', align: 'left' as const, width: 'minmax(180px, 1.6fr)' },
         {
@@ -39,11 +35,10 @@ export default function TracesComparisonTable(): JSX.Element {
         },
         {
             name: (
-                <Logo
-                    className="h-5 mx-auto w-auto max-w-full"
-                    variant={isDark ? 'mono' : 'gradient'}
-                    color={isDark ? 'white' : undefined}
-                />
+                <>
+                    <Logo className="h-5 mx-auto w-auto max-w-full dark:hidden" />
+                    <Logo className="hidden h-5 mx-auto w-auto max-w-full dark:block" variant="mono" color="white" />
+                </>
             ),
             align: 'center' as const,
             width: '1fr',

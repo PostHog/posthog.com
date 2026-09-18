@@ -15,11 +15,17 @@ More and more customers are using our MCP as part of their daily workflows. We h
 **We'll know we're successful when**: 
 Concierge mode is shipped to production
 
-### Make customer feature requests queryable in real time <TeamMember name="Andre de Vries" photo />
-Today feature requests are collated by hand at quarter-end (Simon → engineering), and nobody can ask "what are customers asking for right now?" in between. I'll build a PostHog Signals scout that scans my customer conversations (shared Slack channels + call notes) for feature requests, groups them by theme, and emits them into the Signals inbox, so GTM and CS can pull live customer demand into renewal and roadmap conversations instead of waiting for a quarterly doc. Deliberately scoped to one source and kept low-maintenance to avoid over-building the earlier RFC, and I'll check with the customer analytics team first to avoid overlap.
+### Catch account problems before the customer reports them <TeamMember name="Andre de Vries" photo />
+I set out to scan my customer Slack channels for feature requests, then realized scouts can be applied to way more use cases and finding out what customers are actually doing is a lot more valuable. So I focused on building a scout that generates ready-to-digest reports that are waiting in my inbox in the morning. This Signals scout sweeps all 32 of my accounts daily (Replay Vision, usage reports, billing events) and files a report whenever an account is blocked. I supplemented it with commercial data so it can prioritize issues. Deliberately scoped to my own book and to signals with a commercial consequence, to keep it low-maintenance.
 
 **We'll know we're successful when**:
-The scout runs on a schedule and surfaces grouped feature-request themes into Signals, and at least one renewal or roadmap conversation this quarter pulls from it instead of the quarter-end collation.
+The scout files a report every morning I can act on without digging, and I reach at least one account about a problem before they raise it with me.
+
+### Match what ships to the accounts who'd care <TeamMember name="Ella Cullen" photo />
+PostHog ships faster than any CSM can track. The hard part isn't reading the changelog. It's knowing which update matters for which account. I'll build a system that brings in all our product updates and matches what's shipping to the relevant customers, through the lens of "what does a busy CSM actually want to know?" It'll draw on each customer's PostHog activity + Granola + Slack to stay relevant. The goal is precision, not coverage. Not every account should qualify for an update every week.
+
+**We'll know we're successful when**:
+I've used it on my own accounts to generate 5 useful, deployed product-update insights, each good enough it went into a real outreach.
 
 ### Skill discoverability <TeamMember name="Dana Zou" photo />
 We're all building skills, but it feels like whether you know about a skill all depends on whether you saw it on Slack. The result is ~10 versions of the same workflow, and we're spending time rebuilding very similar skills. I'll work on this from three angles:

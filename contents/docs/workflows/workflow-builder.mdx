@@ -39,6 +39,8 @@ Draft workflows can also be archived, even if they contain invalid configuration
 
 You can edit a workflow after it's enabled, and your changes reach people who are already moving through it. See [Editing a live workflow](/docs/workflows/editing-live-workflows) for exactly what happens to in-flight runs when you change a live workflow.
 
+Disabling an enabled workflow stops new runs from starting, but doesn't cancel runs already in flight. To stop those, cancel them from the **Invocations** tab. See [stopping runs](/docs/workflows/editing-live-workflows#stopping-runs).
+
 ## Triggers
 
 Every workflow starts with a trigger. Triggers define what kicks off the workflow.
@@ -88,7 +90,7 @@ A batch trigger combines two things:
 
 #### Audience filters
 
-You define the audience using person properties, cohorts, or distinct IDs. Multiple conditions are combined with **OR** logic, so a person matches if they meet any of them.
+You define the audience using person properties, cohorts, or distinct IDs. Multiple conditions are combined with **AND** logic, so a person matches only if they meet all of them.
 
 The trigger shows a real-time estimate of how many persons will be affected (e.g. "approximately 1,200 of 50,000 persons") before you enable the workflow. If the audience is too large, you'll see a warning prompting you to add filters to narrow it down.
 
@@ -117,6 +119,10 @@ Configure the recurrence with the schedule picker:
 | Ends      | Never, on a specific date, or after a set number of occurrences                                                                       |
 
 You can also type the recurrence in plain English (e.g. "every week on Monday and Wednesday"), and the picker shows a preview of the next occurrences so you can confirm the schedule before enabling the workflow.
+
+#### Stopping a batch run
+
+You can stop a batch run while it's waiting, queued, or active: click **Stop** on the run in the **Invocations** tab. No more of the audience enters the workflow, and runs the batch already started are canceled. Messages already sent are not recalled. See [stop a batch run](/docs/workflows/editing-live-workflows#stop-a-batch-run) for details.
 
 ### Tracking pixel triggers
 
@@ -162,12 +168,13 @@ Each conversion emits a billable `$workflows_conversion` event. This counts towa
 
 ## Dispatches
 
-Dispatches are the messages you send, mail, slack, SMS, webhook, or any PostHog real time destinations. There are 4 main types of dispatches:
+Dispatches are the messages you send, mail, slack, SMS, push, webhook, or any PostHog real time destinations. There are 5 main types of dispatches:
 
 | Dispatch type    | Description                                                                                                                |
 | ---------------- | -------------------------------------------------------------------------------------------------------------------------- |
 | Email            | Send an email natively through PostHog. Configured in the [channels](/docs/workflows/configure-channels) section.          |
 | Slack            | Send a message to a slack channel. Configured in the [channels](/docs/workflows/configure-channels) section.               |
+| Push             | Send a native mobile push notification (iOS/Android). Configured in the [channels](/docs/workflows/configure-channels) section. |
 | Webhook          | Call external systems. Configured in the [channels](/docs/workflows/configure-channels) section.                           |
 | CDP destinations | Use any [realtime destination](/docs/cdp/destinations) as an dispatch step to deliver messages to users or other services. |
 

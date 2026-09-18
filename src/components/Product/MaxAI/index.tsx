@@ -22,7 +22,6 @@ import { Subfeature } from 'components/Products/Subfeature'
 import { docsMenu } from '../../../navs'
 import { Marquee } from 'components/Products/Marquee'
 import TeamMembers from '../TeamMembers'
-import Questions from '../Questions'
 import CTA from 'components/Home/CTA'
 import { PairsWith } from 'components/Products/PairsWith'
 import { PairsWithItem } from 'components/Products/PairsWith/item'
@@ -928,22 +927,6 @@ export const ProductMax = () => {
                             building this product.
                         </p>
                         <TeamMembers teamName={team} setActiveProfile={setActiveProfile} />
-                    </section>
-
-                    <section id="questions" className="my-20 px-5 hidden">
-                        <h3 className="text-3xl lg:text-4xl text-center mb-2">Questions?</h3>
-
-                        <p className="text-center mb-4">
-                            See more questions (or ask your own!) in our community forums.
-                        </p>
-
-                        <div className="text-center mb-8">
-                            <CallToAction href={`/questions/${product.slug}`} type="secondary" size="sm">
-                                <span>View {product.lowercase} questions</span>
-                            </CallToAction>
-                        </div>
-
-                        <Questions topicIds={[391]} />
                     </section>
 
                     <section className="py-12">

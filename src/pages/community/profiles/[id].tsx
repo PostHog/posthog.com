@@ -50,7 +50,7 @@ import { useToast } from '../../../context/Toast'
 import HeaderBar from 'components/OSChrome/HeaderBar'
 import LevelBadge from 'components/Squeak/components/LevelBadge'
 import OSButton from 'components/OSButton'
-import { IconNoEntry, IconStrapi } from 'components/OSIcons'
+import { IconDiscord, IconNoEntry, IconStrapi } from 'components/OSIcons'
 import Points from 'components/Points'
 import ConnectedAccounts from 'components/Squeak/components/ConnectedAccounts'
 import { useWindow } from '../../../context/Window'
@@ -162,6 +162,7 @@ const Links = ({
                         error={errors.github}
                         label="GitHub"
                         name="github"
+                        placeholder="https://github.com/{username}"
                         value={formValues.github}
                         onChange={(e) => setFieldValue('github', e.target.value)}
                     />
@@ -188,6 +189,7 @@ const Links = ({
                         error={errors.twitter}
                         label="X"
                         name="twitter"
+                        placeholder="https://x.com/{username}"
                         value={formValues.twitter}
                         onChange={(e) => setFieldValue('twitter', e.target.value)}
                     />
@@ -214,6 +216,7 @@ const Links = ({
                         error={errors.linkedin}
                         label="LinkedIn"
                         name="linkedin"
+                        placeholder="https://linkedin.com/in/{username}"
                         value={formValues.linkedin}
                         onChange={(e) => setFieldValue('linkedin', e.target.value)}
                     />
@@ -260,6 +263,39 @@ const Links = ({
                     </li>
                 )
             )}
+            {isEditing ? (
+                <li>
+                    <Input
+                        error={errors.discord}
+                        label="Discord"
+                        name="discord"
+                        placeholder="https://discord.com/users/{id}"
+                        value={formValues.discord}
+                        onChange={(e) => setFieldValue('discord', e.target.value)}
+                        tooltip={
+                            <p className="max-w-72 text-sm m-0 leading-normal">
+                                To get your ID, enable <strong>Developer Mode</strong> in Discord's advanced settings,
+                                then right-click your name and choose <strong>Copy User ID</strong>.
+                            </p>
+                        }
+                    />
+                </li>
+            ) : (
+                profile.discord && (
+                    <li>
+                        <Tooltip
+                            delay={0}
+                            trigger={
+                                <Link to={profile.discord} externalNoIcon>
+                                    <IconDiscord className="w-6 h-6 opacity-80 hover:opacity-100 transition-opacity" />
+                                </Link>
+                            }
+                        >
+                            {stripUrlPrefix(profile.discord)}
+                        </Tooltip>
+                    </li>
+                )
+            )}
         </ul>
     )
 }
@@ -272,6 +308,7 @@ const Input = ({
     error,
     dataScheme,
     tooltip,
+    placeholder,
 }: {
     label: string
     name: string
@@ -280,6 +317,7 @@ const Input = ({
     error?: string
     tooltip?: string | React.ReactNode
     dataScheme?: 'primary' | 'secondary' | 'tertiary'
+    placeholder?: string
 }) => {
     return (
         <OSInput
@@ -287,7 +325,7 @@ const Input = ({
             name={name}
             value={value}
             onChange={onChange}
-            placeholder={label}
+            placeholder={placeholder ?? label}
             direction="column"
             error={error}
             touched={!!error}
@@ -414,7 +452,64 @@ const AvatarBlock = ({
     )
 }
 
-const Details = ({ profile, isEditing, setFieldValue, values, errors, isTeamMember, isModerator }) => {
+const getUserRoleId = (profile: any) =>
+    profile?.user?.data?.attributes?.role?.data?.id ?? profile?.user?.data?.attributes?.role?.id
+
+const RoleField = ({
+    roleId,
+    isEditing,
+    setFieldValue,
+}: {
+    roleId?: string | number
+    isEditing: boolean
+    setFieldValue: (field: string, value: any) => void
+}) => {
+    const { getJwt } = useUser()
+    const { data: roles } = useSWR(`${process.env.GATSBY_SQUEAK_API_HOST}/api/users-permissions/roles`, async (url) => {
+        const jwt = await getJwt()
+        const res = await fetch(url, { headers: { Authorization: `Bearer ${jwt}` } })
+        const json = await res.json()
+        return json.roles || []
+    })
+
+    const label = roles?.find((role: { id: number }) => role.id === roleId)?.name
+    return (
+        <p className="flex justify-between m-0 gap-2 items-center">
+            <span className="font-semibold inline-flex items-center gap-1 leading-none">
+                Role
+                <Tooltip
+                    delay={0}
+                    className="inline-flex items-center text-secondary"
+                    trigger={<IconShieldLock className="size-4" />}
+                >
+                    Only visible to moderators
+                </Tooltip>
+            </span>
+            {isEditing ? (
+                <Select
+                    value={roleId}
+                    onValueChange={(next) => setFieldValue('userRole', next)}
+                    groups={[
+                        {
+                            label: 'Role',
+                            items: (roles || [])
+                                .filter((role: { type: string }) => role.type !== 'public')
+                                .sort((a: { name: string }, b: { name: string }) => a.name.localeCompare(b.name))
+                                .map((role: { id: number; name: string }) => ({
+                                    label: role.name,
+                                    value: role.id,
+                                })),
+                        },
+                    ]}
+                />
+            ) : (
+                <span>{label || '—'}</span>
+            )}
+        </p>
+    )
+}
+
+const Details = ({ profile, isEditing, setFieldValue, values, errors, isTeamMember, isModerator, isEditingRole }) => {
     const [showPronounsInput, setShowPronounsInput] = useState(!!values.pronouns)
     const email = profile?.user?.data?.attributes?.email
 
@@ -424,6 +519,9 @@ const Details = ({ profile, isEditing, setFieldValue, values, errors, isTeamMemb
     }, [values.pronouns])
     return (
         <div className="text-sm space-y-3">
+            {isModerator && (
+                <RoleField roleId={values.userRole} isEditing={isEditingRole} setFieldValue={setFieldValue} />
+            )}
             {isModerator && email && (
                 <p className="flex justify-between m-0 gap-2 items-center">
                     <span className="font-semibold inline-flex items-center gap-1 leading-none">
@@ -962,6 +1060,7 @@ const BodyEditor = ({ values, setFieldValue, bodyKey, initialValue, maxLength })
 const ProfileTabs = ({ profile, firstName, id, isEditing, values, errors, setFieldValue }) => {
     const { appWindow } = useWindow()
     const { user, isModerator } = useUser()
+    const isCurrentUser = user?.profile?.id === id
     const [sort, setSort] = useState(sortOptions[0].label)
     const [hasPosts, setHasPosts] = useState(false)
     const posts = usePosts({
@@ -1064,7 +1163,7 @@ const ProfileTabs = ({ profile, firstName, id, isEditing, values, errors, setFie
                   },
               ]
             : []),
-        ...(user?.profile?.id === id
+        ...(isCurrentUser
             ? [
                   {
                       value: 'likes',
@@ -1080,6 +1179,19 @@ const ProfileTabs = ({ profile, firstName, id, isEditing, values, errors, setFie
                       value: 'points',
                       label: 'Points',
                       content: <Points />,
+                  },
+              ]
+            : []),
+        // Read-only view of someone else's balance. Mutually exclusive with the block above,
+        // so `?tab=points` deep links work for both audiences.
+        ...(isModerator && !isCurrentUser
+            ? [
+                  {
+                      value: 'points',
+                      label: 'Points',
+                      content: (
+                          <Points readOnly wallet={profile?.user?.data?.attributes?.wallet} firstName={firstName} />
+                      ),
                   },
               ]
             : []),
@@ -1104,6 +1216,7 @@ const ValidationSchema = Yup.object().shape({
     github: Yup.string().url('Invalid URL').nullable(),
     linkedin: Yup.string().url('Invalid URL').nullable(),
     twitter: Yup.string().url('Invalid URL').nullable(),
+    discord: Yup.string().url('Invalid URL').nullable(),
     biography: Yup.string().max(3000, 'Please limit your bio to 3,000 characters, you wordsmith!').nullable(),
     country: Yup.string().nullable(),
     location: Yup.string().nullable(),
@@ -1123,6 +1236,10 @@ export default function ProfilePage({ params }: PageProps) {
 
     const isCurrentUser = user?.profile?.id === id
     const isModerator = user?.role?.type === 'moderator'
+    const canFullyEdit = isCurrentUser || (isModerator && user?.webmaster)
+    const canEditRole = isModerator && !isCurrentUser
+    const isEditingProfile = isEditing && canFullyEdit
+    const isEditingRole = isEditing && canEditRole
 
     const profileQuery = qs.stringify(
         {
@@ -1165,9 +1282,20 @@ export default function ProfilePage({ params }: PageProps) {
                     },
                 },
                 tShirt: true,
+                // Strapi gates the `user` relation to the moderator role, which is what keeps
+                // email and the points wallet from leaking to regular members.
                 ...(isModerator
                     ? {
-                          user: true,
+                          user: {
+                              populate: {
+                                  wallet: {
+                                      populate: {
+                                          transactions: true,
+                                      },
+                                  },
+                                  role: true,
+                              },
+                          },
                       }
                     : null),
             },
@@ -1289,6 +1417,7 @@ export default function ProfilePage({ params }: PageProps) {
     const { firstName, lastName } = profile || {}
 
     const name = [firstName, lastName].filter(Boolean).join(' ')
+    const isAI = id === Number(process.env.GATSBY_AI_PROFILE_ID)
     const isTeamMember = profile?.teams?.data?.length > 0
     const team = profile?.teams?.data[0]
 
@@ -1300,13 +1429,14 @@ export default function ProfilePage({ params }: PageProps) {
         : {}
 
     const { submitForm, isSubmitting, setFieldValue, values, resetForm, errors } = useFormik({
-        validationSchema: ValidationSchema,
+        validationSchema: canFullyEdit ? ValidationSchema : undefined,
         enableReinitialize: true,
         initialValues: {
             website: profile?.website,
             twitter: profile?.twitter,
             linkedin: profile?.linkedin,
             github: profile?.github,
+            discord: profile?.discord,
             avatar: getAvatarURL(profile),
             firstName: profile?.firstName,
             lastName: profile?.lastName,
@@ -1323,13 +1453,49 @@ export default function ProfilePage({ params }: PageProps) {
             companyRole: profile?.companyRole,
             amaEnabled: profile?.amaEnabled,
             tShirt: profile?.tShirt || { fit: null, size: null, additionalInfo: null },
+            userRole: getUserRoleId(profile),
         },
-        onSubmit: async ({ avatar, images, ...values }) => {
+        onSubmit: async ({ avatar, images, userRole, ...values }) => {
             try {
                 posthog?.capture('squeak profile update start', {
                     profileId: id,
                     ...values,
                 })
+
+                const currentRole = getUserRoleId(profile)
+                const roleChanged = canEditRole && userRole && userRole !== currentRole
+                if (roleChanged) {
+                    const jwt = await getJwt()
+                    const userId = profile?.user?.data?.id
+                    if (!userId) {
+                        addToast({ description: 'Failed to update role', error: true, duration: 3000 })
+                        return
+                    }
+                    const response = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/users/${userId}`, {
+                        method: 'PUT',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            Authorization: `Bearer ${jwt}`,
+                        },
+                        body: JSON.stringify({ role: userRole }),
+                    })
+                    if (!response.ok) {
+                        addToast({ description: 'Failed to update role', error: true, duration: 3000 })
+                        return
+                    }
+                    await mutate()
+                    addToast({
+                        description: (
+                            <>
+                                <IconCheck className="text-green size-4 inline-block mr-1" />
+                                Role saved successfully
+                            </>
+                        ),
+                        duration: 3000,
+                    })
+                }
+
+                if (!canFullyEdit) return
 
                 const JWT = await getJwt()
                 let image = avatar
@@ -1509,33 +1675,34 @@ export default function ProfilePage({ params }: PageProps) {
                         <div className="@2xl:max-w-xs w-full flex-shrink-0 pb-4">
                             <AvatarBlock
                                 profile={profile}
-                                isEditing={isEditing}
+                                isEditing={isEditingProfile}
                                 name={name}
                                 setFieldValue={setFieldValue}
                                 values={values}
                                 errors={errors}
                             />
 
-                            {(isEditing ||
+                            {(isEditingProfile ||
                                 profile.reputation != null ||
                                 profile.pineappleOnPizza !== null ||
                                 profile.pronouns ||
                                 profile.location ||
-                                (isModerator && profile?.user?.data?.attributes?.email)) && (
+                                isModerator) && (
                                 <Block title="Details">
                                     <Details
                                         profile={profile}
-                                        isEditing={isEditing}
+                                        isEditing={isEditingProfile}
                                         setFieldValue={setFieldValue}
                                         values={values}
                                         errors={errors}
                                         isTeamMember={isTeamMember}
                                         isModerator={isModerator}
+                                        isEditingRole={isEditingRole}
                                     />
                                 </Block>
                             )}
 
-                            {(isEditing ||
+                            {(isEditingProfile ||
                                 profile.github ||
                                 profile.twitter ||
                                 profile.linkedin ||
@@ -1546,7 +1713,7 @@ export default function ProfilePage({ params }: PageProps) {
                                         setFieldValue={setFieldValue}
                                         formValues={values}
                                         profile={profile}
-                                        isEditing={isEditing}
+                                        isEditing={isEditingProfile}
                                     />
                                 </Block>
                             )}
@@ -1560,18 +1727,18 @@ export default function ProfilePage({ params }: PageProps) {
                                     />
                                 </Block>
                             )}
-                            {isEditing && <BackgroundImageField setFieldValue={setFieldValue} values={values} />}
-                            {isEditing && isCurrentUser && (
+                            {isEditingProfile && <BackgroundImageField setFieldValue={setFieldValue} values={values} />}
+                            {isEditingProfile && isCurrentUser && (
                                 <Block title="Connected accounts">
                                     <ConnectedAccounts hideHeading stacked />
                                 </Block>
                             )}
-                            {isModerator && isEditing && (
+                            {isModerator && isEditingProfile && (
                                 <Block title="Special employee things">
                                     <ModeratorFields setFieldValue={setFieldValue} values={values} errors={errors} />
                                 </Block>
                             )}
-                            {(isCurrentUser || (isModerator && user?.webmaster)) && (
+                            {(isCurrentUser || isModerator) && (
                                 <div className="flex gap-2 mt-4">
                                     {isEditing ? (
                                         <>
@@ -1613,52 +1780,53 @@ export default function ProfilePage({ params }: PageProps) {
                                 profile={profile}
                                 firstName={firstName}
                                 id={id}
-                                isEditing={isEditing}
+                                isEditing={isEditingProfile}
                                 values={values}
                                 errors={errors}
                                 setFieldValue={setFieldValue}
                             />
-                            {profile?.teams?.data?.length === 1 ? (
-                                // Single team - use Block (OSFieldset)
-                                <div className="mt-6">
-                                    <Block
-                                        title={`${profile.teams.data[0].attributes.name} Team`}
-                                        url={`/teams/${profile.teams.data[0].attributes.slug}`}
-                                        className="pt-6"
-                                    >
-                                        <div className="grid grid-cols-2 gap-3 @lg:grid-cols-3 @3xl:grid-cols-4 pt-8">
-                                            <TeamMembersList self={data} team={profile.teams.data[0]} />
-                                        </div>
-                                    </Block>
-                                </div>
-                            ) : profile?.teams?.data?.length > 1 ? (
-                                // Multiple teams - use OSTabs
-                                <div className="mt-6" data-scheme="secondary">
-                                    <OSTabs
-                                        tabs={profile.teams.data.map((team) => ({
-                                            value: team.attributes.slug,
-                                            label: <>{team.attributes.name} Team</>,
-                                            content: (
-                                                <div className="grid grid-cols-2 gap-3 @lg:grid-cols-3 @3xl:grid-cols-4">
-                                                    <div className="col-span-full border-b border-primary pb-2 mb-10">
-                                                        <Link
-                                                            to={`/teams/${team.attributes.slug}`}
-                                                            state={{ newWindow: true }}
-                                                            className="group font-bold flex items-center gap-1 hover:underline"
-                                                        >
-                                                            {team.attributes.name} Team
-                                                            <IconArrowUpRight className="size-3 text-muted group-hover:text-secondary" />
-                                                        </Link>
+                            {!isAI &&
+                                (profile?.teams?.data?.length === 1 ? (
+                                    // Single team - use Block (OSFieldset)
+                                    <div className="mt-6">
+                                        <Block
+                                            title={`${profile.teams.data[0].attributes.name} Team`}
+                                            url={`/teams/${profile.teams.data[0].attributes.slug}`}
+                                            className="pt-6"
+                                        >
+                                            <div className="grid grid-cols-2 gap-3 @lg:grid-cols-3 @3xl:grid-cols-4 pt-8">
+                                                <TeamMembersList self={data} team={profile.teams.data[0]} />
+                                            </div>
+                                        </Block>
+                                    </div>
+                                ) : profile?.teams?.data?.length > 1 ? (
+                                    // Multiple teams - use OSTabs
+                                    <div className="mt-6" data-scheme="secondary">
+                                        <OSTabs
+                                            tabs={profile.teams.data.map((team) => ({
+                                                value: team.attributes.slug,
+                                                label: <>{team.attributes.name} Team</>,
+                                                content: (
+                                                    <div className="grid grid-cols-2 gap-3 @lg:grid-cols-3 @3xl:grid-cols-4">
+                                                        <div className="col-span-full border-b border-primary pb-2 mb-10">
+                                                            <Link
+                                                                to={`/teams/${team.attributes.slug}`}
+                                                                state={{ newWindow: true }}
+                                                                className="group font-bold flex items-center gap-1 hover:underline"
+                                                            >
+                                                                {team.attributes.name} Team
+                                                                <IconArrowUpRight className="size-3 text-muted group-hover:text-secondary" />
+                                                            </Link>
+                                                        </div>
+                                                        <TeamMembersList self={data} team={team} />
                                                     </div>
-                                                    <TeamMembersList self={data} team={team} />
-                                                </div>
-                                            ),
-                                        }))}
-                                        defaultValue={profile.teams.data[0].attributes.slug}
-                                        triggerDataScheme="primary"
-                                    />
-                                </div>
-                            ) : null}
+                                                ),
+                                            }))}
+                                            defaultValue={profile.teams.data[0].attributes.slug}
+                                            triggerDataScheme="primary"
+                                        />
+                                    </div>
+                                ) : null)}
 
                             {profile.amaEnabled && (
                                 <div className="mt-6">

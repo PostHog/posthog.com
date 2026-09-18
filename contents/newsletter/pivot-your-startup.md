@@ -4,7 +4,7 @@ date: 2024-03-25
 author:
   - james-temperton
 featuredImage: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/v1710126230/posthog.com/contents/images/blog/story-about-pivots.png
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/story-about-pivots.png
 featuredImageType: full
 tags:
   - Product-market fit

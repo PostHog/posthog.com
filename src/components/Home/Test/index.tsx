@@ -24,37 +24,27 @@ import ToolsTicker from 'components/Home/ToolsTicker'
 // 9000; tweak the install UI via the schema prop instead. This homepage integration (Tagline,
 // GetStarted, the carousel) is the only PostHog.com-side glue and is not present on 9000.
 import PlatformInstall, { wizardInstallSchema } from 'components/PlatformInstall'
+import HeroCTA from 'components/Home/HeroCTA'
+import { HeroBody, HeroHeadline } from 'components/Home/HeroCopy'
+import HeroCarousel from 'components/Home/HeroCarousel'
+import { buildTabs } from 'components/Home/HeroCarousel/tabs'
 import Customers from '../Customers'
-import { RoughAnnotation } from 'components/Code/RoughAnnotation'
 
-/** Loads HeroCarousel + Typecaast slides only in the browser so SSR/Helmet aren't affected. */
-function LazyHeroCarousel({ className }: { className?: string }) {
-    const [Content, setContent] = useState<React.ComponentType<{ className?: string }> | null>(null)
-
-    useEffect(() => {
-        Promise.all([import('components/Home/HeroCarousel'), import('components/Home/HeroCarousel/tabs')]).then(
-            ([{ default: HeroCarousel }, { buildTabs }]) => {
-                function HeroCarouselContent(props: { className?: string }) {
-                    return <HeroCarousel tabs={buildTabs} {...props} />
-                }
-
-                setContent(() => HeroCarouselContent)
-            }
-        )
-    }, [])
-
-    if (!Content) {
-        return <div className={`@container ${className} min-h-[300px] @[820px]:min-h-[400px]`} aria-hidden />
-    }
-
-    return <Content className={className} />
-}
-
-const SecondaryActions = ({ justify = 'center' }: { className?: string; justify?: 'center' | 'start' }) => (
+const SecondaryActions = ({
+    justify = 'center',
+    demoTo = '/demo',
+    demoNewWindow = true,
+}: {
+    className?: string
+    justify?: 'center' | 'start'
+    demoTo?: string
+    /** In-page anchors should scroll the current window rather than opening a new one. */
+    demoNewWindow?: boolean
+}) => (
     <p
-        className={`!text-sm flex flex-wrap items-center gap-2 ${
+        className={`!text-sm mt-4 mb-0 flex w-full max-w-md flex-wrap items-center gap-2 ${
             justify === 'start' ? 'justify-start' : 'justify-center'
-        } @xl:min-w-96 @xl:max-w-md`}
+        }`}
     >
         <Link
             to="/docs/model-context-protocol"
@@ -65,7 +55,11 @@ const SecondaryActions = ({ justify = 'center' }: { className?: string; justify?
             <span className="underline font-semibold">MCP</span>
         </Link>
         <span className="text-secondary">•</span>
-        <Link to="/demo" state={{ newWindow: true }} className="text-secondary hover:text-primary">
+        <Link
+            to={demoTo}
+            state={demoNewWindow ? { newWindow: true } : undefined}
+            className="text-secondary hover:text-primary"
+        >
             <IconPlayFilled className="size-4 mr-1 inline-block relative -top-px" />
             <span className="underline font-semibold">Watch a demo</span>
         </Link>
@@ -82,13 +76,17 @@ const SecondaryActions = ({ justify = 'center' }: { className?: string; justify?
 export const GetStarted = ({
     selfDriving,
     showSecondaryActions = true,
+    demoTo,
+    demoNewWindow,
 }: {
     selfDriving?: boolean
     showSecondaryActions?: boolean
+    demoTo?: string
+    demoNewWindow?: boolean
 }) => (
     <div className="mt-6 flex flex-col items-center @xl:items-start">
         <PlatformInstall schema={wizardInstallSchema} selfDriving={selfDriving} />
-        {showSecondaryActions ? <SecondaryActions /> : null}
+        {showSecondaryActions ? <SecondaryActions demoTo={demoTo} demoNewWindow={demoNewWindow} /> : null}
     </div>
 )
 
@@ -132,91 +130,28 @@ export const CTAs = () => {
 }
 
 function Hero(): JSX.Element {
-    const { siteSettings } = useApp()
-    const isDark = siteSettings.theme === 'dark'
     return (
         <>
-            <div className="text-center @xl:text-left mb-24 min-w-0">
-                <h1 className="[&_p]:m-0 flex gap-1 flex-wrap justify-center @xl:justify-start !text-2xl mb-8 pt-2">
-                    <Logo
-                        className="max-w-[157px]"
-                        variant={isDark ? 'mono' : 'gradient'}
-                        color={isDark ? 'white' : undefined}
-                        width="auto"
-                    />
-                </h1>
+            <div className="text-center @xl:text-left min-w-0">
+                <div className="[&_p]:m-0 flex gap-1 flex-wrap justify-center @xl:justify-start !text-2xl mb-12 pt-2">
+                    <Logo className="max-w-[157px] dark:hidden" width="auto" />
+                    <Logo className="hidden max-w-[157px] dark:block" variant="mono" color="white" width="auto" />
+                </div>
 
-                <h1 className="!text-3xl @xl:!text-4xl pt-4">
-                    Shift your product into{' '}
-                    <span className="bg-blue/10 dark:bg-blue/20 text-blue rounded-md px-1 @xl:whitespace-nowrap">
-                        self-driving mode
-                    </span>
-                </h1>
+                <div className="group grid @xl:grid-cols-2 @xl:gap-x-8 min-w-0">
+                    <div>
+                        <HeroHeadline />
 
-                <div className="grid @xl:grid-cols-2 @xl:gap-8 min-w-0">
-                    <div className="min-w-0">
-                        <p className="text-balance @xl:text-wrap text-[17px]">
-                            PostHog already knows your customers, which features they use, and the issues they have.
-                        </p>
-                        <p className="text-balance @xl:text-wrap text-[17px]">
-                            Now, PostHog automatically{' '}
-                            <RoughAnnotation
-                                type="highlight"
-                                color="rgba(247, 165, 1, 0.15)"
-                                strokeWidth={1}
-                                padding={2}
-                                delay={0}
-                                multiline
-                            >
-                                diagnoses problems
-                            </RoughAnnotation>
-                            ,{' '}
-                            <RoughAnnotation
-                                type="highlight"
-                                color="rgba(247, 165, 1, 0.15)"
-                                strokeWidth={1}
-                                padding={2}
-                                delay={500}
-                                multiline
-                            >
-                                fixes bugs
-                            </RoughAnnotation>
-                            , and{' '}
-                            <RoughAnnotation
-                                type="highlight"
-                                color="rgba(247, 165, 1, 0.15)"
-                                strokeWidth={1}
-                                padding={2}
-                                delay={900}
-                                multiline
-                            >
-                                generates pull requests
-                            </RoughAnnotation>
-                            {' – all '}
-                            <RoughAnnotation
-                                type="underline"
-                                color="currentColor"
-                                strokeWidth={1}
-                                delay={1800}
-                                multiline
-                                className="text-secondary"
-                            >
-                                without you having to prompt it.
-                            </RoughAnnotation>
-                        </p>
-                        <p className="text-balance @xl:text-wrap text-secondary">
-                            Join 500,000+ teams already shipping with PostHog.
-                        </p>
+                        <HeroBody />
                     </div>
 
-                    <div className="mt-6 flex flex-col items-center min-w-0 w-full">
-                        <PlatformInstall schema={wizardInstallSchema} selfDriving />
-                        <SecondaryActions />
+                    <div className="@xl:mt-0 mt-6 flex-shrink-0 flex justify-center w-full @xl:w-auto">
+                        <HeroCTA />
                     </div>
                 </div>
             </div>
 
-            <LazyHeroCarousel className="mb-4" />
+            <HeroCarousel tabs={buildTabs} staticHeight className="mb-4" />
             <ToolsTicker className="mb-8" />
         </>
     )

@@ -5,6 +5,38 @@ export const posthog = {
         icon: '/images/logo.svg',
     },
     products: {
+        replay_vision: {
+            available: true,
+            features: {
+                point_scanner: true,
+                configurable_types: 'Monitor, classifier, scorer, summarizer',
+                custom_prompt: true,
+                yes_no_monitors: true,
+                classify_tag: true,
+                friction_score_trained: false,
+                friction_score_custom: true,
+                theme_summary: true,
+                nl_search: true,
+                scheduled_runs: true,
+                sampling_controls: true,
+                deep_link_citations: true,
+                mobile_replay_ai: true,
+                findings_events: true,
+                insights_dashboards: true,
+                feed_experiments: true,
+                proactive_alerts: true,
+                mcp_access: true,
+                rest_api: true,
+                self_driving: true,
+                share_recordings: true,
+                embed_recordings: true,
+                export_recordings: true,
+                flag_interlinking: true,
+                product_analytics_platform: true,
+                pii_redaction: true,
+                ai_pricing: 'Usage-based',
+            },
+        },
         heatmaps: {
             available: true,
             features: {
@@ -41,7 +73,8 @@ export const posthog = {
             monitoring: {
                 features: {
                     cron_monitoring: false,
-                    distributed_tracing: 'Alpha',
+                    // Beta since July 2026 (/blog/traces-beta).
+                    distributed_tracing: 'Beta',
                     release_tracking: true,
                     performance_monitoring: true,
                 },
@@ -76,7 +109,7 @@ export const posthog = {
                 notes_on_replays: true,
                 playlists: true,
                 privacy_masking: true,
-                retention_policy: 'Up to 3 months',
+                retention_policy: 'Up to 5 years',
                 sentiment_scores: false,
                 screenshot_mode: true,
                 scrollmaps: true,
@@ -123,11 +156,13 @@ export const posthog = {
                     live_tail_real_time_logs: true,
                     native_open_telemetry_ingest: true,
                     vendor_agnostic_sdks: true,
+                    high_cardinality_indexing: true,
+                    retention: '14 days (custom retention add-on)',
                 },
             },
             search: {
                 features: {
-                    full_text_search: false,
+                    full_text_search: 'Attribute search',
                     no_proprietary_query_language: true,
                 },
             },
@@ -135,6 +170,7 @@ export const posthog = {
                 features: {
                     siem: false,
                     enterprise_scale_compliance: false,
+                    security_monitoring: false,
                 },
             },
             investigation_workflow: {
@@ -153,10 +189,16 @@ export const posthog = {
             },
             observability: {
                 features: {
-                    metrics: false,
-                    traces: 'Alpha',
+                    // OTLP metrics ingest + the posthog.metrics SDK API (/docs/metrics).
+                    metrics: 'Alpha',
+                    // Beta since July 2026 (/blog/traces-beta).
+                    traces: 'Beta',
                     infra_monitoring: false,
-                    alerting: false,
+                    alerting: true,
+                    synthetic_monitoring: false,
+                    on_call_incident_management: false,
+                    service_map: false,
+                    code_level_profiling: false,
                 },
             },
             pricing: {
@@ -376,7 +418,7 @@ export const posthog = {
                     aa_testing: true,
                     ab_testing: true,
                     abn_testing: true,
-                    data_warehouse_experiments: 'Beta',
+                    data_warehouse_experiments: true,
                     fake_door_testing: true,
                     holdout_testing: true,
                     multi_armed_bandit: false,
@@ -392,6 +434,7 @@ export const posthog = {
                     geographic_targeting: true,
                     group_level_experiments: true,
                     holdouts: true,
+                    target_by_percentage: true,
                 },
             },
             implementation: {
@@ -525,6 +568,8 @@ export const posthog = {
             available: true,
             features: {
                 alerting: true,
+                // Anomaly detectors learn baselines; firing alerts get agent investigations.
+                anomaly_detection: true,
                 cost_tracking: true,
                 generation_tracking: true,
                 latency_tracking: true,
@@ -537,14 +582,19 @@ export const posthog = {
                 system_prompts: true,
                 trace_summarization: true,
                 llm_translation: true,
-                sentiment_classification: 'Beta',
+                sentiment_classification: true,
                 privacy_mode: true,
-                agent_tracing: 'Basic',
-                prompt_management: 'Beta',
-                evaluation_datasets: false,
-                human_annotation: false,
-                session_replay: true,
-                product_analytics: true,
+                // Tools tab auto-extracts tool calls across providers; spans + trace timeline.
+                agent_tracing: true,
+                prompt_management: true,
+                // /docs/ai-evals/datasets
+                evaluation_datasets: true,
+                // Trace Reviews: queues, scorers, per-trace reviews (/docs/ai-observability/trace-reviews).
+                human_annotation: true,
+                // Beta per /docs/ai-observability/collect-user-feedback.
+                user_feedback: 'Beta',
+                // Self-driving: eval reports, anomaly investigations, scouts -> inbox -> PR (open beta).
+                agent_reports: 'Beta',
                 ai_gateway_proxy: false,
             },
             tracing: {
@@ -560,29 +610,33 @@ export const posthog = {
                     session_replay_link: true,
                     user_profile_context: true,
                     sql_queries_on_traces: true,
-                    trace_explorer_ui: 'Basic',
+                    trace_explorer_ui: true,
                 },
             },
             prompt_management: {
                 features: {
-                    prompt_versioning: 'Beta',
-                    template_variables: 'Beta',
-                    prompt_deployment_api: 'Beta',
-                    version_comparison: 'Beta',
-                    prompt_labels: false,
+                    prompt_versioning: true,
+                    template_variables: true,
+                    prompt_deployment_api: true,
+                    version_comparison: true,
+                    prompt_config: true,
+                    prompt_labels: true,
                     prompt_playground: true,
                     composable_prompts: false,
-                    mcp_server_for_prompts: 'Beta',
-                    ab_test_prompt_versions: 'Beta',
+                    mcp_server_for_prompts: true,
+                    ab_test_prompt_versions: true,
                 },
             },
             evaluations: {
                 features: {
                     llm_as_a_judge: true,
                     code_evaluators: true,
-                    annotation_queues: false,
-                    datasets: false,
-                    experiment_runs: false,
+                    // Trace Reviews queues (/docs/ai-observability/trace-reviews).
+                    annotation_queues: true,
+                    // /docs/ai-evals/datasets: curated input/output pairs...
+                    datasets: true,
+                    // ...replayed against prompt or model changes.
+                    experiment_runs: true,
                     ab_experiments_on_product_metrics: true,
                 },
             },
@@ -592,9 +646,7 @@ export const posthog = {
                     cost_calculation: true,
                     cost_by_model: true,
                     cost_trends: true,
-                    cost_by_user: true,
-                    cost_by_feature: true,
-                    cost_by_cohort: true,
+                    cost_by_custom_tags: true,
                 },
             },
         },
@@ -602,7 +654,10 @@ export const posthog = {
             available: true,
             features: {
                 visual_builder: true,
-                ai_assistant: false,
+                // PostHog AI + MCP: create/edit workflows and email templates via natural language
+                // https://posthog.com/docs/workflows/surfaces/mcp
+                // https://posthog.com/docs/workflows/create-emails-ai
+                ai_assistant: true,
                 campaign_tracking: true,
                 real_time_triggers: true,
                 email_editor: true,
@@ -701,6 +756,29 @@ export const posthog = {
                 no_separate_ingestion: true,
             },
         },
+        support: {
+            available: true,
+            features: {
+                unified_helpdesk: true,
+                in_app_widget: true,
+                email_channel: true,
+                slack_channel: true,
+                github_issues: true,
+                javascript_api: true,
+                saved_views: true,
+                private_notes: true,
+                workflow_automation: true,
+                sla_tracking: true,
+                historical_import: 'Zendesk (beta)',
+                ai_reply_agent: 'Coming soon',
+                session_replay_attached: true,
+                events_attached: true,
+                errors_attached: true,
+                previous_tickets: true,
+                analytics_correlation: true,
+                auto_fix_prs: 'Via Self-driving',
+            },
+        },
     },
     platform: {
         deployment: {
@@ -736,6 +814,8 @@ export const posthog = {
             transparent_pricing: true,
             free_tier: true,
             self_serve: true,
+            free_team_members: true,
+            billing_units: 'Events, GB, recordings, requests',
         },
         integrations: {
             airbyte: true,
@@ -752,7 +832,7 @@ export const posthog = {
             gcs: true,
             google_ads: true,
             google_analytics: false,
-            google_search_console: false,
+            google_search_console: true,
             hubspot: true,
             imports: true,
             intercom: true,
@@ -776,6 +856,8 @@ export const posthog = {
         },
         developer: {
             api: true,
+            mcp_scope: 'Every product, read and write',
+            agent_surfaces: 'App, Slack, desktop, CLI, MCP, editor',
             client_side_sdks: true,
             collaboration: 'Invite teammates to collaborate on all features',
             cross_domain_tracking: true,
@@ -807,7 +889,7 @@ export const posthog = {
             saml_sso: 'Scale',
             siem: false,
             soc2_certified: true,
-            security_certification: 'SOC 2 Type II',
+            security_certification: 'SOC 2 Type 2',
             two_factor_auth: true,
             user_privacy_options: true,
         },

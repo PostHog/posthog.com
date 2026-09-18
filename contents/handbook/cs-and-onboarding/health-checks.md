@@ -90,7 +90,7 @@ ORDER BY groupidentify_event_count DESC
 
 `Posthog.reset()` will generate a new anonymous distinct ID.  If this is called before a user is identified then two anonymous unlinked user may be created.  There is no easy way to proactively diagnose this however if a customer says that their tracking between web and app is off, this is a common culprit.
 
-We have guidance on when to call `posthog.reset()` in the [JavaScript library features guide](/docs/libraries/js/features#resetting-a-user).
+We have guidance on when to call `posthog.reset()` in the [JavaScript Web SDK usage guide](/docs/libraries/js/usage#resetting-a-user).
 
 ### Reverse Proxies 
 

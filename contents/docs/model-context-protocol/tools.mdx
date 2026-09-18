@@ -1,25 +1,26 @@
 ---
 title: PostHog MCP tools reference
-sidebarTitle: Tools
+sidebarTitle: MCP tools
 sidebar: Docs
 showTitle: true
 ---
 
 import MCPTools from "../../../src/components/Docs/MCPTools";
+import MCPExecCommands from "../../../src/components/Docs/MCPExecCommands";
 
-The PostHog MCP server exposes function-calling tools across every PostHog product – from feature flags and experiments to error tracking, logs, surveys, and SQL. Your agent picks the right tool based on the goals and context already in the conversation.
+The PostHog MCP server exposes function-calling MCP tools across every PostHog product – from feature flags and experiments to error tracking, logs, surveys, and SQL. Your agent picks the right MCP tool based on the goals and context already in the conversation.
 
-Tool names are stable and can be used with the [`tools` query parameter](/docs/model-context-protocol/faq#filtering-available-tools) to scope a session to a specific subset.
+MCP tool names are stable and can be used with the [`tools` query parameter](/docs/model-context-protocol/faq#filtering-available-mcp-tools) to scope a session to a specific subset.
 
-> **Tip:** Browse the [example prompts](/docs/model-context-protocol/use-cases) to see what each tool is good for in practice.
+> **Tip:** Browse the [example prompts](/docs/model-context-protocol/use-cases) to see what each MCP tool is good for in practice.
 
-## Available tools
+## Available MCP tools
 
-Click any category to expand the full list of tools it contains.
+Click any category to expand the full list of MCP tools it contains.
 
 <MCPTools />
 
-> **Note:** Some tools are in alpha behind a feature flag and don't appear here yet – like the [semantic layer tools](/docs/semantic-layer/mcp-tools) for governed metrics, table certifications, and relationships.
+<MCPExecCommands />
 
 ## Keep exploring
 

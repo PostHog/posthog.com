@@ -13,7 +13,7 @@ import SourceSetupIntro from "../_snippets/source-setup-intro.mdx"
 import SyncModes from "../_snippets/sync-modes.mdx"
 import TroubleshootingLink from "../_snippets/dw-troubleshooting-link.mdx"
 
-The Zendesk connector syncs your customer support data – tickets, users, organizations, groups, brands, and SLA policies – into PostHog, so you can analyze support activity alongside your product data.
+The Zendesk connector syncs your customer support data – tickets, ticket events, ticket metric events, ticket fields, users, organizations, groups, brands, and SLA policies – into PostHog, so you can analyze support activity alongside your product data.
 
 ## Prerequisites
 

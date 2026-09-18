@@ -54,7 +54,11 @@ const AccordionContent = React.forwardRef<HTMLDivElement, AccordionContentProps>
             {...props}
             ref={forwardedRef}
         >
-            <div className={`text-base pb-3 [&>p:first-child]:mt-0 [&>p:last-child]:mb-0 ${className ?? ''}`}>
+            <div
+                className={`text-base text-primary pb-3 [&>p:first-child]:mt-0 [&>p:last-child]:mb-0 ${
+                    className ?? ''
+                }`}
+            >
                 {children}
             </div>
         </RadixAccordion.Content>

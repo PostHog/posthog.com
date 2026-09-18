@@ -17,7 +17,7 @@ The Klaviyo connector syncs your marketing data – campaigns, profiles, events,
 
 ## Prerequisites
 
-You need a Klaviyo account and a private API key. Create one in your [Klaviyo account settings](https://www.klaviyo.com/settings/account/api-keys) by clicking **Create Private API Key**, giving it a name, and selecting a **Read-Only Key**. Grant read permissions for the following: Accounts, Campaigns, Events, Flows, Lists, Metrics, and Profiles.
+You need a Klaviyo account and a private API key. Create one in your [Klaviyo account settings](https://www.klaviyo.com/settings/account/api-keys) by clicking **Create Private API Key**, giving it a name, and selecting a **Read-Only Key**. Grant read permissions for the data you want to sync: Accounts, Campaigns, Catalogs, Coupon codes, Coupons, Custom objects, Events, Flows, Forms, Images, Lists, Metrics, Profiles, Push tokens, Reviews, Segments, Tags, Templates, Web feeds, and Webhooks. Tables you haven't granted access to are skipped.
 
 ## Adding a data source
 
@@ -55,6 +55,10 @@ JOIN klaviyo_list_profiles lp ON lp.profile_id = p.id
 WHERE lp.list_id = 'your_list_id'
   AND arrayExists(x -> x = 'email', JSONExtractArrayRaw(p.properties, '$consent'))
 ```
+
+## Webhooks
+
+The `webhooks` table is only available to Klaviyo accounts with the [Advanced KDP add-on](https://help.klaviyo.com/hc/en-us/articles/17655007276059). Without it, Klaviyo returns a `403 permission_denied` error saying "You must have Advanced KDP enabled to use this endpoint," even when your API key has the Webhooks read scope. This table is disabled by default. Only enable it if your Klaviyo account includes Advanced KDP.
 
 ## Configuration
 

@@ -2,10 +2,7 @@
 title: Prompt management
 ---
 
-import PromptsAlpha from "./_snippets/prompts-alpha.mdx"
 import { ProductScreenshot } from "components/ProductScreenshot"
-
-<PromptsAlpha />
 
 Prompt management lets you create and update LLM prompts directly in PostHog. When you use prompts through the SDK, they're fetched at runtime with caching and fallback support—so you can iterate on prompts without deploying code.
 
@@ -16,6 +13,7 @@ Prompt management lets you create and update LLM prompts directly in PostHog. Wh
 - **Track prompt usage** – Link prompts to generations to see which prompts drive which outputs
 - **Versioning** – Every change creates an immutable version you can view, compare, or restore
 - **Labels** – Point a label like `production` at a version and fetch by label, so saving a prompt and releasing it are separate steps
+- **Configuration** – Store model parameters or any settings next to the prompt and change them without a deploy
 - **[A/B testing](/docs/prompt-management/prompt-experiments)** – Compare prompt versions on cost, latency, and eval pass rate using PostHog Experiments
 
 ## Creating prompts
@@ -191,7 +189,121 @@ Remove a label with a `DELETE` request to the same URL. You can also manage labe
 
 Moving a label takes effect on the PostHog API within seconds. SDK consumers pick it up when their client-side cache expires, so a moved label is fully live within the SDK cache TTL (5 minutes by default, configurable per fetch).
 
-If your PostHog instance predates prompt labels (self-hosted), the API ignores the `label` parameter and returns the latest version; the SDKs log a warning when this happens.
+If your PostHog instance predates prompt labels (self-hosted), the API ignores the `label` parameter and returns the latest version. The SDKs log a warning when this happens on a single fetch, and a bulk fetch by label with `get_all` / `getAll` fails with an error.
+
+## Prompt references (partials)
+
+Share common content across prompts instead of repeating it. Define a block once as its own prompt, then reference it from other prompts. When your app fetches a prompt, PostHog replaces each reference with the referenced prompt's content and returns one assembled prompt, so your code doesn't change.
+
+This is useful for content every prompt needs, like guardrails, tone guidelines, or output format instructions: edit the shared prompt once and every prompt that references it picks up the change.
+
+> Prompt references are rolling out gradually. If fetches return reference tags as plain text, the feature isn't enabled for your organization yet.
+
+### Referencing another prompt
+
+A reference is a tag in the prompt text:
+
+```text
+You are a support assistant.
+
+@@@prompt:name=guardrails|label=production@@@
+
+Answer the question from {{user_name}}.
+```
+
+Every reference names the prompt to include and how to resolve it:
+
+- `@@@prompt:name=guardrails|label=production@@@` follows the label. Moving the `production` label on `guardrails` updates every prompt that references it on the next fetch, without publishing new versions of those prompts.
+- `@@@prompt:name=guardrails|version=3@@@` pins version 3 forever.
+
+In the editor, click **Insert reference** to pick a prompt and a label or version instead of typing the tag. References display as clickable chips under the content, and **Show resolved** shows the assembled content exactly as a fetch returns it.
+
+### How references resolve
+
+Resolution happens on the PostHog API at fetch time:
+
+- The SDK receives one assembled prompt with each tag replaced by the referenced content. No SDK changes are needed.
+- The response includes `resolved_references`: the exact versions that were spliced in. The same information is recorded on the `$llm_prompt_fetched` event, so you can trace which shared content each call actually used.
+- Pass `resolve=false` to get the raw text with the tags, for example for exporting.
+- If a referenced prompt can't be resolved, the fetch fails with an error naming it rather than returning a prompt with missing content.
+
+### Rules and limits
+
+- A referenced prompt must exist, with the named label or version, when you publish. References go one level deep: a prompt that contains references can't itself be referenced.
+- A prompt can reference up to 20 other prompts, and the assembled content counts toward the 1 MB prompt size limit.
+- A prompt that others reference can't be archived, and a label that references follow can't be deleted or moved to a version that would break resolution. The error lists the referencing prompts.
+
+## Configuration
+
+A prompt version can store a `config`: a JSON object with model parameters or any other settings your app reads at runtime. PostHog doesn't interpret it. Whatever you store is returned as-is when you fetch the prompt, so it can hold a model name, sampling parameters, tool definitions, a response schema, or anything else your app needs.
+
+Config is versioned together with the prompt content. Publishing a config change creates a new version, moving a label releases it, and rolling a label back rolls the config back too. You can publish a version that changes only the config, so tuning a parameter doesn't require touching the prompt text.
+
+Don't store secrets in the config. It's returned to anyone who can read the prompt.
+
+### In the app
+
+When editing a prompt, click **Add configuration** and enter a JSON object, for example:
+
+```json
+{
+  "model": "your-model-name",
+  "temperature": 0.7
+}
+```
+
+The config must be a JSON object. Click **Remove** next to the **Configuration** label to clear it. Either way, nothing changes until you publish, and the review dialog shows a diff of the config change first. When a version has a config, it's shown below the prompt content, and comparing versions also diffs the config.
+
+### With the API
+
+The create and publish endpoints accept a `config` field:
+
+```bash
+curl -X PATCH "https://us.posthog.com/api/environments/:project_id/llm_prompts/name/:prompt_name/" \
+    -H "Authorization: Bearer $POSTHOG_PERSONAL_API_KEY" \
+    -H "Content-Type: application/json" \
+    -d '{"config": {"model": "your-model-name", "temperature": 0.7}, "base_version": 3}'
+```
+
+Three things to know about publishing:
+
+- If you leave `config` out, the new version keeps the previous version's config. Text-only edits never drop it.
+- Send `"config": null` to remove it.
+- You can send `config` on its own, without `prompt` or `edits`. The prompt content carries forward unchanged.
+
+The MCP `prompt-create` and `prompt-update` tools accept `config` the same way.
+
+### In your code
+
+Fetched prompts expose the config, so your app can spread it into the LLM call:
+
+<MultiLanguage>
+
+```python
+result = prompts.get('support-system-prompt', with_metadata=True, label='production', fallback='You are a helpful assistant.')
+
+config = result.config or {}
+response = client.chat.completions.create(
+    model=config.get('model', 'your-default-model'),
+    temperature=config.get('temperature', 0),
+    messages=[{"role": "system", "content": result.prompt}],
+)
+```
+
+```typescript
+const result = await prompts.get('support-system-prompt', { label: 'production', fallback: 'You are a helpful assistant.' })
+
+const config = result.config ?? {}
+const response = await openai.chat.completions.create({
+    model: (config.model as string) ?? 'your-default-model',
+    temperature: (config.temperature as number) ?? 0,
+    messages: [{ role: 'system', content: result.prompt }],
+})
+```
+
+</MultiLanguage>
+
+`config` is `None` (Python) or `null` (JavaScript) when the version has no config, and it's missing entirely on fallback results, so read it defensively with defaults as above. The config is cached together with the prompt, including the stale-cache fallback.
 
 ## Using prompts in code
 
@@ -256,6 +368,9 @@ system_prompt = prompts.compile(result.prompt, {
     'user_name': 'Alice'
 })
 
+# Model parameters or other settings stored with the version (None when there are none)
+config = result.config or {}
+
 # Use in your LLM call
 # ... your OpenAI/Anthropic call here
 ```
@@ -307,9 +422,52 @@ const systemPrompt = prompts.compile(result.prompt, {
   userName: 'Alice'
 })
 
+// Model parameters or other settings stored with the version (null when there are none)
+const config = result.config ?? {}
+
 // Use in your LLM call
 // ... your OpenAI/Anthropic call here
 ```
+
+### Fetching all prompts in one request
+
+If your app uses many prompts, fetch them all in one request instead of one request per prompt. Each fetched prompt is stored in the cache, so later `get()` calls are served from cache until the TTL expires:
+
+<MultiLanguage>
+
+```python
+# One request loads every prompt the 'production' label points to
+prod_prompts = prompts.get_all(label='production')
+
+# Served from cache, no extra request
+result = prompts.get('support-system-prompt', with_metadata=True, label='production')
+
+# Without a label, one request loads the latest version of every prompt
+all_prompts = prompts.get_all()
+
+# Served from cache, no extra request
+latest = prompts.get('support-system-prompt', with_metadata=True)
+```
+
+```typescript
+// One request loads every prompt the 'production' label points to
+const prodPrompts = await prompts.getAll({ label: 'production' })
+
+// Served from cache, no extra request
+const result = await prompts.get('support-system-prompt', { label: 'production' })
+
+// Without a label, one request loads the latest version of every prompt
+const allPrompts = await prompts.getAll()
+
+// Served from cache, no extra request
+const latest = await prompts.get('support-system-prompt')
+```
+
+</MultiLanguage>
+
+With a label, the result maps each prompt name to the version the label points to, and prompts that don't carry the label are not included. On a self-hosted PostHog instance that predates label support on the list endpoint, a labeled call fails with an error instead of returning latest versions.
+
+Without a label, every prompt is included at its latest version, the same version a plain `get(name)` returns. This includes prompts whose latest version has never been released through a label.
 
 ## Caching
 
@@ -320,6 +478,7 @@ Prompts are cached on the SDK side to minimize latency and API calls:
 - **Stale-while-revalidate**: If a fetch fails, the cached value is used (even if expired)
 - **Fallback support**: Provide a fallback value that's used when both fetch and cache fail
 - **Separate entries per fetch type**: Latest, pinned-version, and labeled fetches of the same prompt are cached independently. Label moves reach your app when the labeled entry's TTL expires
+- **Bulk warm-up**: `get_all` (Python) and `getAll` (JavaScript) load every prompt in one request, at a label or at the latest version, and fill the cache for later fetches
 
 ## Linking prompts to traces
 
@@ -360,4 +519,5 @@ Once linked, you can:
 ## Limits
 
 - **Maximum prompt size** - 1MB per prompt
+- **Maximum config size** - 1MB per version
 - **Maximum versions per prompt** - 2,000

@@ -338,4 +338,59 @@ export const features = {
         ],
         children: <MCPInstall />,
     },
+    mcp_analytics: {
+        title: 'MCP Analytics',
+        headline: 'See how agents use your MCP tools',
+        description:
+            'Wrap your MCP server in a single instrument() call and every agent invocation lands as an event on your standard events table – so trends, funnels, dashboards, and SQL all work on agent traffic too. Our MCP server is instrumented the same way!',
+        icon: <IconPlug />,
+        color: 'blue',
+        features: [
+            {
+                title: 'Every tool call',
+                description:
+                    'One event per invocation, with the parameters, response, duration, and error state – then build insights on top.',
+            },
+            {
+                title: 'Agent intent',
+                description:
+                    'What the agent said it was trying to do, clustered into themes across sessions, so you can tell a useful request from a confused one.',
+            },
+            {
+                title: 'Advertised vs called',
+                description:
+                    'Every tools/list is captured too, so you can find the tools you advertise but agents never touch.',
+            },
+            {
+                title: 'Missing capabilities',
+                description:
+                    "Gaps agents report when the right tool doesn't exist – a roadmap written by your users' agents.",
+            },
+            {
+                title: 'Fixes, not just charts',
+                description: (
+                    <>
+                        Tool calls feed{' '}
+                        <Link to="/docs/self-driving" state={{ newWindow: true }}>
+                            Self-driving
+                        </Link>
+                        , which reports failing or slow tools and drafts a pull request when you own the server.
+                    </>
+                ),
+            },
+        ],
+        children: (
+            <p className="mb-0">
+                MCP Analytics is in beta.{' '}
+                <Link to="/docs/mcp-analytics" state={{ newWindow: true }}>
+                    Read the docs
+                </Link>{' '}
+                or{' '}
+                <Link to="/docs/mcp-analytics/start-here" state={{ newWindow: true }}>
+                    instrument your server
+                </Link>
+                .
+            </p>
+        ),
+    },
 }

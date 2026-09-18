@@ -25,7 +25,7 @@ Use these templates unless explicitly instructed otherwise:
 - Set default (or min/max) dimensions via `src/context/App.tsx` in `appSettings`. Use defaults set for the homepage (`/`) for new pages so they're not arbitrarily wide.
 
 **`<Reader />`** for a collection of pages with shared navigation
-- Example: `/data-stack` which populates `LeftSidebarContent` with `<TreeMenu />` (`src/components/TreeMenu/index.tsx`)
+- Example: `/context-warehouse` which populates `LeftSidebarContent` with `<TreeMenu />` (`src/components/TreeMenu/index.tsx`)
 
 **Checklist:**
 - Link new pages from a relevant menu in `<TaskBarMenu />` (`src/components/TaskBarMenu/index.tsx`) via `src/components/TaskBarMenu/menuData.tsx`

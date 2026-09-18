@@ -27,16 +27,27 @@ const slugify = (text: string): string => {
 const FEATURE_DATA: Record<string, BaseFeature> = {
     actions: {
         feature: 'Actions',
-        owner: ['analytics-platform'],
+        owner: ['product-analytics'],
     },
     'activity-log': {
         feature: 'Activity log',
         owner: ['platform-features'],
+        label: 'feature/activity-logs',
     },
     'activity-view': {
         feature: 'Activity view',
         owner: ['product-analytics'],
         label: 'feature/events',
+    },
+    'agent-proxy': {
+        feature: 'Agent proxy',
+        owner: ['agent-infrastructure'],
+        label: 'feature/agent-proxy',
+    },
+    'agent-runtime': {
+        feature: 'Agent runtime',
+        owner: ['agent-infrastructure'],
+        label: 'feature/agent-runtime',
     },
     'agentic-provisioning': {
         feature: 'Agentic provisioning',
@@ -45,17 +56,27 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     },
     'ai-gateway': {
         feature: 'AI gateway',
-        owner: ['ai-gateway'],
-        label: false,
+        owner: ['agent-infrastructure'],
+        label: 'feature/ai-gateway',
     },
     'ai-playground': {
         feature: 'AI playground',
         owner: ['ai-gateway'],
         label: false,
     },
+    'ai-plugin': {
+        feature: 'AI plugin (Claude Code, Codex, Cursor, Gemini CLI)',
+        owner: ['self-driving'],
+        notes: (
+            <>
+                <TeamMember name="Georgiy Tarasov" /> is the point owner.
+            </>
+        ),
+        label: false,
+    },
     alerts: {
         feature: 'Alerts',
-        owner: ['analytics-platform'],
+        owner: ['product-analytics'],
     },
     annotations: {
         feature: 'Annotations',
@@ -74,6 +95,7 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     authentication: {
         feature: 'Authentication',
         owner: ['platform-features'],
+        label: 'feature/auth',
     },
     autocapture: {
         feature: 'Autocapture',
@@ -94,11 +116,17 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     },
     'cache-warming': {
         feature: 'Cache warming',
-        owner: ['analytics-platform'],
+        owner: ['query-performance'],
     },
     cli: {
         feature: 'CLI',
-        owner: ['error-tracking'],
+        owner: ['error-tracking', 'self-driving'],
+        notes: (
+            <>
+                <TeamMember name="Chris Volzer" /> is the point owner for agentic use cases. Error tracking owns the
+                symbolication/upload pipeline and symbol/sourcemap upload internals.
+            </>
+        ),
     },
     'client-libraries': {
         feature: 'Client libraries',
@@ -117,7 +145,7 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     },
     comments: {
         feature: 'Comments/Discussions',
-        owner: ['platform-features'],
+        owner: ['conversations'],
         label: 'feature/comments',
     },
     'csp-tracking': {
@@ -136,11 +164,11 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     },
     dashboards: {
         feature: 'Dashboards',
-        owner: ['product-analytics', 'analytics-platform'],
+        owner: ['product-analytics'],
     },
     'dashboard-templates': {
         feature: 'Dashboard templates',
-        owner: ['analytics-platform'],
+        owner: ['product-analytics'],
     },
     'data-colors-themes': {
         feature: 'Data colors & themes',
@@ -149,7 +177,7 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     },
     'data-management': {
         feature: 'Data management',
-        owner: ['analytics-platform'],
+        owner: ['product-analytics'],
         notes: <>Owns Actions, Event definitons, Property definitions</>,
     },
     'data-table': {
@@ -168,10 +196,16 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     'data-warehouse': {
         feature: 'Managed warehouse',
         owner: ['managed-warehouse'],
+        label: 'feature/data-warehouse',
     },
     'embedding-worker': {
         feature: 'Embedding worker',
         owner: ['self-driving'],
+        notes: (
+            <>
+                <TeamMember name="Oliver Browne" /> is the point owner.
+            </>
+        ),
         label: false,
     },
     'early-access-features': {
@@ -213,6 +247,11 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
         feature: 'Heatmaps',
         owner: ['web-analytics'],
     },
+    'hog-harness': {
+        feature: 'Hog harness',
+        owner: ['agent-infrastructure'],
+        label: 'feature/hog-harness',
+    },
     hogql: {
         feature: 'HogQL',
         owner: ['data-stack'],
@@ -242,6 +281,11 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
         owner: ['clickhouse'],
         label: false,
     },
+    loops: {
+        feature: 'Loops',
+        owner: ['posthog-desktop'],
+        label: false,
+    },
     'managed-migrations': {
         feature: 'Managed migrations',
         owner: ['ingestion'],
@@ -257,8 +301,13 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     },
     'mcp-server': {
         feature: 'MCP server',
-        owner: ['self-driving'],
+        owner: ['context-and-mcp'],
         label: 'feature/mcp',
+    },
+    'mcp-store': {
+        feature: 'MCP store',
+        owner: ['context-and-mcp'],
+        label: false,
     },
     notebooks: {
         feature: 'Notebooks',
@@ -330,6 +379,11 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     'posthog-ai': {
         feature: 'PostHog AI platform',
         owner: ['self-driving'],
+        notes: (
+            <>
+                <TeamMember name="Georgiy Tarasov" /> is the point owner.
+            </>
+        ),
         label: 'feature/posthog-ai',
     },
     'posthog-code': {
@@ -364,7 +418,7 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     },
     'query-performance': {
         feature: 'Query performance',
-        owner: ['analytics-platform'],
+        owner: ['query-performance'],
         label: 'feature/insights',
     },
     'quota-limiting': {
@@ -448,7 +502,7 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
         label: 'feature/session-summaries',
     },
     signals: {
-        feature: 'Signals',
+        feature: 'Inbox',
         owner: ['self-driving'],
         label: 'feature/signals',
     },
@@ -460,6 +514,11 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     'slack-app': {
         feature: 'Slack app',
         owner: ['self-driving'],
+        notes: (
+            <>
+                <TeamMember name="Vojta Bartoš" /> is the point owner.
+            </>
+        ),
         label: 'feature/slack-app',
     },
     settings: {
@@ -492,7 +551,7 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     },
     subscriptions: {
         feature: 'Subscriptions',
-        owner: ['analytics-platform'],
+        owner: ['product-analytics'],
     },
     support: {
         feature: 'Support',
@@ -500,15 +559,20 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     },
     surveys: {
         feature: 'Surveys',
-        owner: ['surveys'],
+        owner: ['conversations'],
     },
     'table-exports': {
         feature: 'Table exports',
-        owner: ['analytics-platform'],
+        owner: ['product-analytics'],
+    },
+    tasks: {
+        feature: 'Tasks',
+        owner: ['agent-infrastructure'],
+        label: 'feature/tasks',
     },
     terraform: {
         feature: 'Terraform integration',
-        owner: ['analytics-platform'],
+        owner: ['product-analytics'],
         label: 'feature/terraform',
     },
     'taxonomic-filters': {

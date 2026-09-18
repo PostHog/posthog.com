@@ -626,7 +626,7 @@ The `system.information_schema` namespace provides four queryable virtual tables
 
 This is useful for exploring the schema interactively in the [SQL editor](/docs/data-warehouse/query), and it's also used by [PostHog AI](/docs/posthog-ai) and other AI agents to understand the database structure when writing queries.
 
-> **Note:** The `information_schema` tables respect access control. You only see tables and columns your project has access to.
+> **Note:** The `information_schema` tables respect [warehouse access control](/docs/settings/warehouse-access-control). You only see tables and columns you have access to.
 
 ### `system.information_schema.tables`
 

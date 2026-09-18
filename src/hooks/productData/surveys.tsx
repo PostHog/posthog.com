@@ -1,24 +1,25 @@
 import React from 'react'
+import { getTool } from '../../data/tools'
 import {
-    IconMessage,
-    IconEye,
-    IconSparkles,
-    IconList,
-    IconConfetti,
-    IconRocket,
-    IconPieChart,
-    IconCheckCircle,
-    IconInfo,
-    IconCursorClick,
-    IconMagic,
     IconChat,
+    IconCheckCircle,
     IconCode,
-    IconNewspaper,
+    IconConfetti,
+    IconCursorClick,
+    IconEye,
+    IconInfo,
+    IconList,
+    IconMagic,
+    IconMessage,
+    IconPieChart,
+    IconRocket,
+    IconSparkles,
 } from '@posthog/icons'
 import { features } from './surveys/features'
 import { applications, topFeatures } from './surveys/slides'
 
 export const surveys = {
+    ...getTool('surveys'),
     Icon: IconMessage,
     name: 'Surveys',
     description: 'Ask users anything with no-code surveys',
@@ -29,7 +30,6 @@ export const surveys = {
     forumTopicId: 347,
     color: 'salmon',
     colorSecondary: 'red',
-    category: 'communication',
     shortDescription: 'Ask users anything with no-code surveys',
     pricingDescription:
         'Your first 1500 survey responses are free every month, then pay for what you use. No limits on surveys created or questions asked.',
@@ -47,7 +47,11 @@ export const surveys = {
      * feed the carousel templates their slide arrays).
      */
     productMenu: [
-        { slug: 'overview', name: 'Overview', icon: <IconEye className="size-4" /> },
+        {
+            slug: 'overview',
+            name: 'Overview',
+            icon: <IconEye className="size-4" />,
+        },
         {
             slug: 'eli5',
             name: 'What does it do?',
@@ -82,21 +86,20 @@ export const surveys = {
             group: 'divided',
             icon: <IconChat className="size-4" />,
         },
-        { slug: 'pairs-with', name: 'Pairs with...', hideFromNav: true, icon: <IconConfetti className="size-4" /> },
-        { slug: 'changelog', name: 'Changelog', group: 'divided', icon: <IconNewspaper className="size-4" /> },
-        { slug: 'community', name: 'Questions?', group: 'divided', icon: <IconMessage className="size-4" /> },
-        {
-            slug: 'feature-comparison',
-            name: 'Feature comparison',
-            group: 'divided',
-            icon: <IconList className="size-4" />,
-        },
         {
             slug: 'installation',
             name: 'Install',
             group: 'divided',
             icon: <IconCode className="size-4" />,
         },
+        {
+            slug: 'feature-comparison',
+            name: 'Feature comparison',
+            group: 'divided',
+            icon: <IconList className="size-4" />,
+        },
+        { slug: 'community', name: 'Questions?', group: 'divided', icon: <IconMessage className="size-4" /> },
+        { slug: 'pairs-with', name: 'Pairs with...', hideFromNav: true, icon: <IconConfetti className="size-4" /> },
         { slug: 'getting-started', name: 'Get started', group: 'divided', icon: <IconRocket className="size-4" /> },
     ],
     /**
@@ -112,8 +115,6 @@ export const surveys = {
     ],
     overview: {
         title: 'Ask anything with no-code surveys',
-        description:
-            'Surveys is one of the tools that makes your product self-driving: the user feedback agents use to see what works. Built to natively work with product analytics, session replay, feature flags, and experiments.',
         eli5: 'Surveys let you ask users anything right inside your product – freeform text, multiple choice, NPS, ratings, emoji reactions – as a no-code popup or via the API. Target by URL, person properties, events, or Feature Flags so you ask the right people at the right moment. Responses connect to Product Analytics and Session Replay, so you can see who answered and what they were doing.',
         textColor: 'text-white', // tw
     },
@@ -137,20 +138,19 @@ export const surveys = {
         },
     },
     hog: {
-        src: 'https://res.cloudinary.com/dmukukwp6/image/upload/surveys_hog_99cd6e8e8b.png',
-        alt: 'A hedgehog looking at survey results',
+        src: 'https://res.cloudinary.com/dmukukwp6/image/upload/hoggie_mail_48daf2f4b4.png',
+        alt: 'A hedgehog posting a survey response',
         classes: 'absolute bottom-0 right-0 max-w-md',
         footerClasses: 'max-w-[240px]',
     },
     hogs: {
         default: {
-            src: 'https://res.cloudinary.com/dmukukwp6/image/upload/surveys_hog_99cd6e8e8b.png',
-            alt: 'A hedgehog looking at survey results',
-        },
-        mobileHog: {
             src: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Home/Slider/images/surveys-hog.png',
             alt: 'A hedgehog taking a survey with a rating scale',
-            className: 'w-44 @lg/reader-content:w-56 @2xl/reader-content:w-72',
+        },
+        mobileHog: {
+            src: 'https://res.cloudinary.com/dmukukwp6/image/upload/surveys_hog_99cd6e8e8b.png',
+            alt: 'A hedgehog looking at survey results',
         },
     },
     slider: {
@@ -175,7 +175,6 @@ export const surveys = {
         },
     },
     useCases: {
-        intro: 'Surveys is used across teams depending on your role.',
         rows: [
             ['Product Managers', 'Run NPS, PMF, and CSAT surveys, or book user interviews from in-app templates'],
             ['Product Engineers', 'Gather beta feedback tied to feature flags after a rollout'],
@@ -276,12 +275,12 @@ export const surveys = {
             {
                 name: 'Pendo',
                 key: 'pendo',
-                link: '/blog/posthog-vs-pendo',
+                link: '/compare/posthog-vs-pendo',
             },
             {
                 name: 'Hotjar',
                 key: 'hotjar',
-                link: '/blog/posthog-vs-hotjar',
+                link: '/compare/posthog-vs-hotjar',
             },
             {
                 name: 'Sprig',

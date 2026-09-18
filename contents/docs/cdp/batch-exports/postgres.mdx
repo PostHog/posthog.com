@@ -39,19 +39,20 @@ GRANT USAGE ON SCHEMA posthog_exports TO posthog;
 
 This is the default model for Postgres batch exports. The schema of the model as created in Postgres is:
 
-| Field       | Type                       | Description                                                               |
-| ----------- | -------------------------- | ------------------------------------------------------------------------- |
-| uuid        | `VARCHAR(200)`             | The unique ID of the event within PostHog                                 |
-| event       | `VARCHAR(200)`             | The name of the event that was sent                                       |
-| properties  | `JSONB`                    | A JSON object with all the properties sent along with an event            |
-| elements    | `JSONB`                    | This field is present for backwards compatibility but has been deprecated |
-| set         | `JSONB`                    | A JSON object with any person properties sent with the `$set` field       |
-| set_once    | `JSONB`                    | A JSON object with any person properties sent with the `$set_once` field  |
-| distinct_id | `VARCHAR(200)`             | The `distinct_id` of the user who sent the event                          |
-| team_id     | `INTEGER`                  | The `team_id` for the event                                               |
-| ip          | `VARCHAR(200)`             | The IP address that was sent with the event                               |
-| site_url    | `VARCHAR(200)`             | This field is present for backwards compatibility but has been deprecated |
-| timestamp   | `TIMESTAMP WITH TIME ZONE` | The timestamp associated with an event                                    |
+| Field             | Type                       | Description                                                               |
+| ----------------- | -------------------------- | ------------------------------------------------------------------------- |
+| uuid              | `VARCHAR(200)`             | The unique ID of the event within PostHog                                 |
+| event             | `VARCHAR(200)`             | The name of the event that was sent                                       |
+| properties        | `JSONB`                    | All the properties sent along with an event                               |
+| elements          | `JSONB`                    | This field is present for backwards compatibility but has been deprecated |
+| set               | `JSONB`                    | Deprecated. Person update payloads aren't retained on stored events       |
+| set_once          | `JSONB`                    | Deprecated. Person update payloads aren't retained on stored events       |
+| person_properties | `JSONB`                    | All the person properties at the time the event was ingested              |
+| distinct_id       | `VARCHAR(200)`             | The `distinct_id` of the user who sent the event                          |
+| team_id           | `INTEGER`                  | The `team_id` for the event                                               |
+| ip                | `VARCHAR(200)`             | The IP address that was sent with the event                               |
+| site_url          | `VARCHAR(200)`             | This field is present for backwards compatibility but has been deprecated |
+| timestamp         | `TIMESTAMP WITH TIME ZONE` | The timestamp associated with an event                                    |
 
 ### Persons model
 

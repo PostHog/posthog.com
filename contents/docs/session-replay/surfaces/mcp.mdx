@@ -8,11 +8,15 @@ The [PostHog MCP server](/docs/model-context-protocol) exposes session replay to
 
 This works in any MCP client, including Cursor, Claude Code, Codex, Windsurf, and VS Code.
 
+## Before you start
+
+1. **Set up Session Replay** – [install and enable recording](/docs/session-replay/installation) so there are sessions to watch.
+2. **Connect the MCP server** – [install it in your AI tool](#install-the-mcp-server) and give it access to your project.
+
 ## What you can do here
 
 - **Search recordings** – find sessions by events, person properties, replay behaviors like rage clicks and dead clicks, and time range.
 - **Read a specific recording** – pull a session's metadata by ID, including duration, interaction counts, console log counts, and a person summary. Any `$session_id` on an event can be used as the ID.
-- **Read AI summaries** – list and fetch existing session summaries so the agent gets the story without watching the playback.
 - **Manage playlists** – create collections or saved filter playlists, update them, and add or remove recordings.
 - **Update and delete recordings** – mark recordings as viewed, or delete them one at a time or in batches of up to 100 for privacy and compliance work. Deletion is permanent, so your agent should confirm with you first.
 

@@ -9,14 +9,18 @@ Sometimes the events the SDK emits out of the box aren't enough. You might want 
 Pass an `eventProperties` callback to attach extra properties to every event the SDK emits. The callback runs per request, so values can depend on the current call (request id, transport, headers, env, region, deploy SHA, etc).
 
 ```ts
+import { instrument, getRequestHeaders } from "@posthog/mcp"
+
 const analytics = instrument(server, posthog, {
   eventProperties: async (request, extra) => ({
     $app_version: process.env.GIT_SHA ?? "unknown",
     $mcp_region: process.env.FLY_REGION ?? "unknown",
-    request_id: extra?.requestInfo?.headers?.["x-request-id"],
+    request_id: getRequestHeaders(extra)?.["x-request-id"],
   }),
 })
 ```
+
+`getRequestHeaders` reads headers on both MCP SDK majors — see [MCP SDK v2](/docs/mcp-analytics/sdk-v2#if-your-callbacks-read-headers-change-them).
 
 The returned object is spread flat onto the event's properties alongside the built-in `$mcp_*` keys:
 

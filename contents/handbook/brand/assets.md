@@ -5,7 +5,7 @@ showTitle: true
 hideAnchor: false
 ---
 
-> **Want to use our hedgehogs for your community event or article?** We have [a huge library of them you can use](https://www.figma.com/design/I0VKEEjbkKUDSVzFus2Lpu/Hoggies?node-id=2226-55&t=1sj1GezTKuCfaybF-1). Can't see what you need? [Let us know](mailto:joe@posthog.com)! Please don't use AI art though. We're quite particular about our illustrations and AI just doesn't get it right.
+> **Want to use our hedgehogs for your community event or article?** We have [a huge library of them you can use](https://www.figma.com/design/EqKxlSFoOCkRXCnHi4C3eE/PostHog-Brand-Book?node-id=553-1533&t=pCzspik0QSSbaemg-1). Can't see what you need? [Let us know](mailto:joe@posthog.com)! Please don't use AI art though. We're quite particular about our illustrations and AI just doesn't get it right.
 
 ## Logo and brand usage for third-parties
 
@@ -149,7 +149,7 @@ He should be outlined with a strong, black monoline with consistent thickness. H
 
 ## Hedgehog library
 
-For team members we keep all our currently approved hedgehogs <PrivateLink url="https://www.figma.com/file/I0VKEEjbkKUDSVzFus2Lpu/Hoggies?type=design&node-id=0-1&mode=design&t=H3ElmuzbLMFp4qP7-0">in this Figma file</PrivateLink>. This enables us to look through the library of approved hogs, and to export them at required sizes without relying on the design team.
+For team members we keep all our currently approved hedgehogs [in this Figma file](https://www.figma.com/design/EqKxlSFoOCkRXCnHi4C3eE/PostHog-Brand-Book?node-id=553-1533&t=pCzspik0QSSbaemg-1). This enables us to look through the library of approved hogs, and to export them at required sizes without relying on the design team.
 
 Here's how:
 

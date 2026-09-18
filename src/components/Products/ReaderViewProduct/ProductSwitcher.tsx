@@ -2,7 +2,8 @@ import React, { useMemo } from 'react'
 import { navigate } from 'gatsby'
 import OSSelect from 'components/OSForm/select'
 import { useSidebarExpanded } from 'components/ReaderView'
-import useProducts from 'hooks/useProducts'
+import useProduct from 'hooks/useProduct'
+import { BROWSE_TOOLS_HANDLES } from 'constants/productNavigation'
 
 interface ProductSwitcherProps {
     /** Handle of the currently active product (matches `product.handle`). */
@@ -13,35 +14,35 @@ interface ProductSwitcherProps {
 
 /**
  * Searchable product picker rendered at the top of `ReaderView`'s LeftSidebar.
- * Sources the product list from `useProducts()` only (the billed/top-level
- * products) – not the extended WIP/sub-product dump from `useProduct()`.
- * Always navigates to the product root (`/<slug>`), not the current surface
- * (e.g. pricing), since not every product has those pages yet.
+ * Uses the same curated handle list/order as the taskbar "Browse tools" menu
+ * (`BROWSE_TOOLS_HANDLES`). Always navigates to the product root (`/<slug>`),
+ * not the current surface (e.g. pricing), since not every product has those
+ * pages yet.
  *
  * Pass via `<ReaderView productSelect={<ProductSwitcher activeHandle="…" />}>`.
  */
 const ProductSwitcher = ({ activeHandle, excludeHandles = [] }: ProductSwitcherProps) => {
-    const { products } = useProducts()
+    const allProducts = useProduct() as any[]
     const expanded = useSidebarExpanded()
 
     const options = useMemo(
         () =>
-            products
-                .filter((p: any) => p.handle && p.slug && !excludeHandles.includes(p.handle))
+            BROWSE_TOOLS_HANDLES.map((handle) => allProducts.find((p: any) => p.handle === handle))
+                .filter((p: any) => p?.handle && p?.slug && !excludeHandles.includes(p.handle))
                 .map((p: any) => ({
                     label: p.name,
                     value: p.handle,
                     color: p.color,
                     icon: p.Icon ? <p.Icon className={`size-5 text-${p.color}`} /> : undefined,
                 })),
-        [products, excludeHandles]
+        [allProducts, excludeHandles]
     )
 
-    const activeProduct = products.find((p: any) => p.handle === activeHandle)
+    const activeProduct = allProducts.find((p: any) => p.handle === activeHandle)
 
     const handleChange = (handle: string) => {
         if (handle === activeHandle) return
-        const target = products.find((p: any) => p.handle === handle)
+        const target = allProducts.find((p: any) => p.handle === handle)
         if (!target?.slug) return
         navigate(`/${target.slug}`)
     }

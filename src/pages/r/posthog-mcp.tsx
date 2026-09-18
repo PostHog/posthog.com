@@ -381,7 +381,7 @@ export default function PostHogMCPLanding(): JSX.Element {
                                 <CallToAction
                                     type="primary"
                                     size="md"
-                                    to="/docs/experiments/create-experiments-mcp"
+                                    to="/docs/experiments/surfaces/mcp"
                                     state={{ newWindow: true }}
                                 >
                                     Optimize with MCP

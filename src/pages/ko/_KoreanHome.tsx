@@ -331,7 +331,7 @@ const jsxComponentDescriptors: JsxComponentDescriptor[] = [
         name: 'ButtonDataStack',
         kind: 'flow',
         props: [],
-        Editor: () => <Button url="/data-stack">README: PostHog 데이터 스택.md</Button>,
+        Editor: () => <Button url="/context-warehouse">README: PostHog 데이터 스택.md</Button>,
     },
     { name: 'ButtonPricing', kind: 'flow', props: [], Editor: () => <Button url="/pricing">가격 정보 보기</Button> },
     { name: 'ButtonAI', kind: 'flow', props: [], Editor: () => <Button url="/ai">PostHog AI 알아보기</Button> },
@@ -385,7 +385,7 @@ const getJsxComponentDescriptors = (t: TranslateFn): JsxComponentDescriptor[] =>
         name: 'ButtonDataStack',
         kind: 'flow',
         props: [],
-        Editor: () => <Button url="/data-stack">{t('README: PostHog data stack.md')}</Button>,
+        Editor: () => <Button url="/context-warehouse">{t('README: PostHog data stack.md')}</Button>,
     },
     {
         name: 'ButtonPricing',
