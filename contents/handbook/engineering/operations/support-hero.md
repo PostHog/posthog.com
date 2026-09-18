@@ -234,7 +234,7 @@ If you're a support hero, there are a few things to make sure are in place so th
 - Configure a Slack user group for the team's `Support Hero: <team>` schedule in [incident.io](https://app.incident.io/posthog/on-call/schedules). This group always contains the person who is currently on call, so you can mention the current Support Hero from any Slack channel.
   1. Open the schedule, then click **Connect Slack group**.
   1. Select **Create new**.
-  1. Remove the `On call ` prefix from the generated group name and the `on-call-` prefix from its handle. This keeps it consistent with the other on-call groups. For example, use `Support Hero: Query Performance` and `support-hero-query-performance`, not `On call Support Hero: Query Performance` and `on-call-support-hero-query-performance`.
+  1. Remove the `On call` prefix (including the trailing space) from the generated group name and the `on-call-` prefix from its handle. This keeps it consistent with the other on-call groups. For example, use `Support Hero: Query Performance` and `support-hero-query-performance`, not `On call Support Hero: Query Performance` and `on-call-support-hero-query-performance`.
   1. Save the group. If the **Save** button is disabled, incident.io shows who has permission to make this change. Ask one of those people to complete the setup.
 
 A couple more things to make sure of (these may happen magically in future):
