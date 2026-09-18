@@ -1,0 +1,93 @@
+---
+title: Data quality triggers and schedules
+sidebar: Docs
+showTitle: true
+---
+
+import { CalloutBox } from 'components/Docs/CalloutBox'
+
+<CalloutBox icon="IconFlask" title="Data quality is in alpha" type="action">
+
+Data quality isn't available to every project. [Contact support](https://app.posthog.com/home#supportModal) to request access or share feedback.
+
+</CalloutBox>
+
+PostHog selects a trigger based on how each subject receives new data. Connected tables and views run checks after data changes. Metrics and PostHog tables run checks on recurring schedules. You can run enabled checks manually on every subject type.
+
+## Run checks manually
+
+Use the check's actions menu and select **Run now** to run one check. Use **Run all checks** on a subject to run all of its enabled checks.
+
+The project-wide Data quality page also has **Run all checks**. It runs every enabled check that you can access across the project.
+
+Manual runs use the permissions of the person who starts them. They don't change the subject's schedule or its last scheduled run.
+
+## Run checks after a source sync
+
+Checks on a connected warehouse table run after that table completes a source sync. A check on one table doesn't wait for or run with other tables from the same source.
+
+PostHog tables don't have source syncs. Checks on `events`, `persons`, and `groups` use schedules instead.
+
+## Run checks with views and data modeling DAGs
+
+A materialized view runs its checks as part of its refresh. This tests the version produced by that materialization run.
+
+A saved view in a data modeling directed acyclic graph (DAG) runs its checks when the DAG executes that view. PostHog runs the DAG in dependency order, then starts the applicable check suites for the views that ran.
+
+A view outside a DAG has no automatic execution trigger. Run its checks manually.
+
+Disabling a check removes it from source-sync, materialization, DAG, schedule, and manual suite selections.
+
+## Schedule metric and PostHog-table checks
+
+Metrics and PostHog tables don't have a source-sync or materialization event. Each of these subjects gets one schedule for all of its enabled checks.
+
+Saving the first check on a metric or PostHog table creates an enabled daily schedule and starts an initial run. Open the subject on the project-wide Data quality page, expand it, and use:
+
+- **Run automatically** to pause or resume the schedule.
+- The interval selector to choose **Every hour**, **Every 6 hours**, **Every 12 hours**, **Daily**, or **Weekly**.
+
+The corresponding API values are:
+
+| UI interval | API value |
+| --- | --- |
+| Every hour | `1hour` |
+| Every 6 hours | `6hour` |
+| Every 12 hours | `12hour` |
+| Daily | `24hour` |
+| Weekly | `7day` |
+
+The metric's **Tests** tab shows the same schedule controls. Pausing a schedule sets its next run time to empty, but manual runs remain available.
+
+You can also call `data-quality-check-schedule` with the subject's `subject_type`, `subject_uuid`, and either `interval`, `enabled`, or both:
+
+```json
+{
+  "subject_type": "posthog_table",
+  "subject_uuid": "<events subject id>",
+  "interval": "6hour",
+  "enabled": true
+}
+```
+
+The schedule tool supports `metric` and `posthog_table`. Requests for `table` or `view` are rejected because those subjects use data-change triggers.
+
+## Understand schedule timing
+
+PostHog spreads subjects across each interval instead of starting every schedule at the same moment. The schedule shows its next execution time.
+
+Scheduled runs follow these rules:
+
+- If the previous scheduled workflow is still running, PostHog skips the overlapping occurrence.
+- If the scheduling service misses an occurrence, it catches up only when it can start within 15 minutes of the original time.
+- A failed run doesn't pause later scheduled runs.
+- Pausing a schedule doesn't cancel a check that is already executing.
+- Manual runs keep their normal behavior and don't take the place of scheduled occurrences.
+
+PostHog rechecks the schedule, subject, feature access, enabled checks, and execution permissions when a scheduled run starts. Automated checks use the permissions of the person who last changed the check definition, with the creator as a fallback. If PostHog can't use either account, the check records an error and runs no SQL.
+
+## Keep schedule settings when checks change
+
+Disabling or deleting every check on a scheduled subject keeps that subject's interval and pause setting. Scheduled occurrences then execute no check queries. If you add or re-enable a check later, the existing schedule settings still apply.
+
+If schedule settings can't be loaded or an update has an uncertain result, reload them before making another change. The original update might have succeeded.

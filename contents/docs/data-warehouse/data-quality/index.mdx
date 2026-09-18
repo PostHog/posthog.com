@@ -1,0 +1,71 @@
+---
+title: Data quality
+sidebar: Docs
+showTitle: true
+---
+
+import { CalloutBox } from 'components/Docs/CalloutBox'
+
+<CalloutBox icon="IconFlask" title="Data quality is in alpha" type="action">
+
+Data quality isn't available to every project. [Contact support](https://app.posthog.com/home#supportModal) to request access or share feedback.
+
+</CalloutBox>
+
+A query can run successfully and still return the wrong answer. A source can stop updating, a join key can become null, duplicate rows can change a total, or a status column can gain a value that downstream logic doesn't handle. SQL reports none of these as query errors.
+
+Data quality checks turn those assumptions into assertions that PostHog can run repeatedly. Each check belongs to a **subject**:
+
+- A connected warehouse table
+- A saved view or materialized view
+- A [semantic layer metric](/docs/semantic-layer/metrics)
+- One of the PostHog tables `events`, `persons`, or `groups`
+
+For example, checks can assert that:
+
+- `orders.customer_id` is never null.
+- `orders.order_id` is unique.
+- Every non-null `orders.customer_id` exists in `customers.id`.
+- `orders.status` contains only `paid`, `pending`, or `refunded`.
+- A source has received data within the last 60 minutes.
+- A governed revenue metric never returns a negative value.
+
+Most checks compile to a HogQL query that selects the rows that break the assertion. The check passes when that query returns no rows. PostHog stores the result and failure count, not a snapshot of the failing rows.
+
+## How data quality fits with governance
+
+The [semantic layer](/docs/semantic-layer) governs what data means. It records canonical metric definitions, trusted tables, owners, and accepted relationships. Data quality verifies that the data still satisfies the assumptions behind those definitions.
+
+You need both. An approved `monthly_recurring_revenue` metric can use the agreed definition and still return an incorrect number if its source stopped syncing or a join started dropping rows. A passing check also doesn't make a metric canonical or certify a table. It only confirms the assertion that the check ran.
+
+## How checks run
+
+Checks run in several ways:
+
+- Run one check, every check on a subject, or every check in the project manually.
+- Run connected-table checks after that table completes a source sync.
+- Run view checks when their materialization or data modeling DAG executes.
+- Run metric and PostHog-table checks on a recurring schedule.
+
+Only enabled checks run. See [triggers and schedules](/docs/data-warehouse/data-quality/triggers) for the exact behavior.
+
+## Severity and subject health
+
+Set each check's severity based on what a failure means:
+
+- **Error** – The data shouldn't be trusted. A failure marks the subject as failing and sends a notification.
+- **Warning** – The result is worth reviewing, but it doesn't mean consumers must stop using the data.
+
+PostHog rolls the newest results into subject health:
+
+- **Healthy** – Enabled checks have run and passed.
+- **Warning** – Only warning-severity checks are failing.
+- **Failing** – At least one error-severity check is failing.
+- **Erroring** – A check couldn't compile or execute. This doesn't prove that the data is good or bad.
+- **Not run yet** – No enabled check has produced a result.
+
+## Next steps
+
+- [Create your first check](/docs/data-warehouse/data-quality/start-here)
+- [Choose a check type](/docs/data-warehouse/data-quality/check-types)
+- [Configure triggers and schedules](/docs/data-warehouse/data-quality/triggers)
