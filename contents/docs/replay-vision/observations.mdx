@@ -30,6 +30,8 @@ Succeeded, pending, and running observations spend [credits](/docs/replay-vision
 
 Every successful observation is captured as a `$recording_observed` event in your project, so you can build [insights](/docs/product-analytics/insights), [dashboards](/docs/product-analytics/dashboards), and [alerts](/docs/alerts) on top of Replay Vision output using PostHog's [SQL](/docs/data-warehouse/sql).
 
+If your project uses a [transformation](/docs/cdp/transformations) that keeps only an allowlist of events, add `$recording_observed` to that allowlist. If you do not, PostHog discards these events at ingestion, and the queries below return nothing – the observations themselves are unaffected.
+
 ### Event properties
 
 | Property                         | Description                                                                                                                                         |

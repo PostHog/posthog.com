@@ -35,6 +35,12 @@ Ineligibles don't cost you quota, but a high ineligibility rate usually means th
 
 Once you've added the filter, the ineligibility rate should drop. The Observations tab is the source of truth – check it after the next sweep.
 
+## Observations succeed but `$recording_observed` events are missing
+
+If the Observations tab shows successful observations, but a query for `$recording_observed` returns no rows, an ingestion [transformation](/docs/cdp/transformations) is the most likely cause. A transformation that keeps only an allowlist of events discards `$recording_observed` unless you add it to the allowlist.
+
+**What to do:** open the transformation in [data pipelines](https://app.posthog.com/data-management/transformations), add `$recording_observed` to the list of allowed events, and save. Events from before the change are not recovered, so only new observations become queryable.
+
 ## Events or recordings aren't coming in
 
 Replay Vision runs entirely downstream of ingestion: scanners can only scan recordings PostHog actually received, and the model's event context comes from the events captured in those sessions. If either stops flowing, Vision goes quiet without erroring:
