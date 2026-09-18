@@ -2,7 +2,6 @@ import React from 'react'
 import SEO from 'components/seo'
 import Link from 'components/Link'
 import ReaderView from 'components/ReaderView'
-import TableOfContents from './TableOfContents'
 import { INK } from './heroData'
 import { Species, SpeciesSection } from './speciesData'
 
@@ -88,7 +87,7 @@ export default function SpeciesEntry({ species }: { species: Species }): JSX.Ele
                 image={`/images/og/default.png`}
             />
             <ReaderView
-                leftSidebar={<TableOfContents />}
+                hideLeftSidebar
                 hideRightSidebar
                 hideTitle
                 showQuestions={false}

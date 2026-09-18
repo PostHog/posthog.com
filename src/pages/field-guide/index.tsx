@@ -57,7 +57,7 @@ export default function FieldGuide(): JSX.Element {
                 image={`/images/og/default.png`}
             />
             <ReaderView
-                leftSidebar={<TableOfContents />}
+                hideLeftSidebar
                 hideRightSidebar
                 hideTitle
                 showQuestions={false}
