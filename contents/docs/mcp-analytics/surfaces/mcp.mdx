@@ -10,25 +10,25 @@ MCP Analytics tools are in beta.
 
 </CalloutBox>
 
-PostHog's [MCP server](/docs/model-context-protocol) exposes MCP Analytics as a set of tools, so you can investigate how agents use your server from Claude Code, Cursor, or any other MCP client – without switching to the web app. It's the fastest way to ask "which of my tools is failing, and why?" while you're already in your editor.
+PostHog's [MCP server](/docs/model-context-protocol) provides tools to query MCP Analytics. Use Claude Code, Cursor, or another MCP client to investigate tool usage and failures without opening the web app.
 
 ## Before you start
 
-1. **Set up MCP Analytics** – [install the SDK in your MCP server](/docs/mcp-analytics/installation) so tool calls are captured.
-2. **Connect the MCP server** – follow the [MCP server setup](/docs/model-context-protocol) to connect PostHog to your client. MCP Analytics tools need the `mcp_analytics:read` scope, and the ones that write data (feedback, missing capabilities, recomputing clusters) need `mcp_analytics:write`.
+1. **Install MCP Analytics** – [install the SDK in your MCP server](/docs/mcp-analytics/installation) so tool calls are captured.
+2. **Connect the MCP server** – follow the [MCP server setup](/docs/model-context-protocol) to connect PostHog to your client. MCP Analytics reads need `mcp_analytics:read`. Tool-quality queries also need `query:read`. Generating session summaries, reporting missing capabilities, and recomputing clusters need `mcp_analytics:write`.
 
 ## What you can do here
 
 **Explore sessions**
 
-- List MCP sessions and filter them down
+- Filter the list of MCP sessions
 - Open a single session and read its tool calls in order
 - Generate an intent summary for a session
 
 **Understand intent**
 
 - Retrieve intent clusters and their tool distribution
-- Recompute clusters after new data lands
+- Recompute clusters after you capture new data
 
 **Dig into tool quality**
 
@@ -40,10 +40,10 @@ PostHog's [MCP server](/docs/model-context-protocol) exposes MCP Analytics as a 
 - Sample intents behind its calls
 - Harness and client breakdown
 
-**Send feedback**
+**Report missing capabilities**
 
-- Submit feedback about a tool
 - Report a missing capability your agent needed but couldn't find
+- Submit other tool feedback through the [API](/docs/mcp-analytics/surfaces/api)
 
 ## Example prompts
 
