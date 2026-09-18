@@ -10,7 +10,7 @@ We broadly split our budget 50/50 between conversion and awareness.
 
 Ads are expensive, so we typically only advertise individual tools once they are generally available, have pricing, and have a feature set broadly on par with the main competitors.
 
-Unlike most demand gen teams, we do not optimize for demo bookings. PostHog is self-serve, so our ads should help someone understand the product and start using it without talking to sales. We're very much a PLG company and are proud of it. However, we may add some ABM ad efforts in future quarters.
+Unlike most demand gen teams, we do not optimize for demo bookings. PostHog is self-serve, so our ads should help someone understand the product and start using it without talking to sales. We're very much a PLG company and are proud of it. However, we may add some ABM ad efforts in the future.
 
 ## How we run paid campaigns
 
@@ -21,7 +21,7 @@ Every meaningful campaign should move through the same loop:
 - **Evaluate:** Check delivery and tracking after five days, leading indicators after ten days, audience and creative quality after two weeks, and conversions in three to four weeks, depending on the objective.
 - **Learn:** Scale, change, or stop the campaign, write a brief postmortem, and share creative and landing page findings in [#group-marketing-content-brand](https://posthog.slack.com/archives/C0ALU3889A6).
 
-We run experiments on a rolling basis to improve performance, but we work hard to avoid testing paralysis. If something works, we go for it; if it does not, we try something new. We do not fix what is not broken, but no campaign should go more than 30 days without a touch from the paid ads team, and we do not spend budget just because it is available.
+We run experiments on a rolling basis to improve performance, but we work hard to avoid testing paralysis. If something works, we go for it; if it does not, we try something new. We do not fix what is not broken, but no campaign should go more than 30 days without a touch from the demand gen team, and we do not spend budget just because it is available.
 
 ## How and when we use LLMs for paid ads
 
@@ -31,7 +31,7 @@ All campaign ideation, creative work, strategy, media plans, and monthly Growth 
 
 ## How we allocate budget
 
-We use the 50/50 conversion and awareness split to make sure that we're educating as much as we're driving lower-funnel conversion, then adjust within each half:
+We use a 50/50 conversion and awareness split to make sure that we're educating as much as we're driving lower-funnel conversion, then adjust within each half:
 
 - **Conversion:** Cap Brand before it hits diminishing returns, and work to increase the success of our tool campaigns to get within striking range of our brand ads.
 - **Awareness:** Use a mix of video, UGC, static, and content ads, with smaller budgets for new channels and creative tests.
@@ -55,7 +55,7 @@ We use the following sequence to judge conversion campaigns:
 
 - <PrivateLink url="https://us.posthog.com/project/2/insights/EyekVfx2"><strong>Non-freemail signups</strong></PrivateLink> tell us whether a campaign is attracting people using work emails. They function as a canary for newer tool ad campaigns and validate changes to ad copy and landing pages.
 - <PrivateLink url="https://us.posthog.com/project/2/data-management/events/billing%20subscription%20activated"><strong>Billing activation</strong></PrivateLink> is a useful leading indicator, but activating billing does not guarantee that an organization will pay an invoice.
-- <PrivateLink url="https://us.posthog.com/project/2/insights/Z0ZA1hLR"><strong>Healthy Orgs</strong></PrivateLink> are the quality indicator. A Healthy Org is verified, sends billable data, adds a second teammate, and activates billing within 14 days.
+- <PrivateLink url="https://us.posthog.com/project/2/insights/Z0ZA1hLR"><strong>Healthy Orgs</strong></PrivateLink> are the quality indicator.
 - **Revenue** is a lagging result and needs roughly three months to mature, so we use it to validate long-term effectiveness, not to judge or pivot ad campaigns month to month.
 
 See the <PrivateLink url="https://us.posthog.com/project/2/insights/EyekVfx2">Google Ads report for non-freemail signups by product over the last 12 weeks</PrivateLink>.
@@ -111,13 +111,13 @@ We follow these principles:
 
 ## Creative and landing pages
 
-We change up campaigns frequently, but generally advertise the PostHog Brand, self-driving, and individual tools. All current copy can be found in the <PrivateLink url="https://docs.google.com/spreadsheets/d/1uO8dxflZfHbBLN1OlHdNZrl7WuiklhYO3DQ0U4naGxM">search ad copy sheet</PrivateLink>, and it is updated regularly.
+We change up campaigns frequently, but generally advertise the PostHog brand, self-driving, and individual products. All current copy can be found in the <PrivateLink url="https://docs.google.com/spreadsheets/d/1uO8dxflZfHbBLN1OlHdNZrl7WuiklhYO3DQ0U4naGxM">search ad copy sheet</PrivateLink>, and it is updated regularly.
 
 We test both unhinged and enterprise coded ads. More and more, we find that enterprise coded ads perform just as well as, or slightly better than, our unhinged versions, but we feel experimenting with unhinged copy and ads is important for the brand.
 
 For static creative, request artwork from the <SmallTeam slug="graphics" /> using the [art request process](/handbook/brand/art-requests), or, if it is generated by [Hey Digital](https://www.heydigital.co/), submit it in [#design-review](https://posthog.slack.com/archives/C09ARM6LBLZ) to be checked by <TeamMember name="Lottie Coxon" />. For video, start with [#team-video](https://posthog.slack.com/archives/C01R387F6H5). For UGC, we get most of our content from [#influence-wrangling](https://posthog.slack.com/archives/C0B7MH0M02Y) via <TeamMember name="Adlet Smykov" />. We run ads from 6 to 60 seconds and from 9:16 to 16:9 because Shorts, Reels, YouTube, and connected TV have different completion rates and placement requirements.
 
-We can, and historically have, spun up landing pages for tests. Simplified versions of our docs outperformed product pages, but <SmallTeam slug="website" /> has now designed the product pages to use a similar format. When a landing page teaches us something useful, we pass the result to the website team rather than maintaining a permanent fleet of ad-only pages that may become out of sync with tools as we ship new and better features.
+We sometimes spin up landing pages for tests. Simplified versions of our docs outperformed previous product pages, but <SmallTeam slug="website" /> has now designed the existing product pages to use a similar format. When a landing page teaches us something useful, we pass the result to the website team rather than maintaining a permanent fleet of ad-only pages that may become out of sync with products as we ship new and better features.
 
 ## Partners and roles
 
@@ -133,6 +133,6 @@ Within the demand gen team:
 
 ## Growth review
 
-<TeamMember name="Brian Young" /> runs a monthly Growth Review with <TeamMember name="Cory Slater" />, <TeamMember name="Adlet Smykov" />, and <TeamMember name="Charles Cook" />. It is shared in <a href="https://posthog.slack.com/archives/C0ALU3889A6">#group-marketing-content-brand</a> and <a href="https://posthog.slack.com/archives/C06LMMS3YP4">#team-blitzscale</a>. We use it to reflect on the previous month's performance and plan the next one using leading indicators, while also checking longer-term performance through lagging results. It covers paid ads, the broader acquisition funnel, and influencer spend.
+<TeamMember name="Brian Young" /> runs a monthly Growth Review with <TeamMember name="Cory Slater" />, and <TeamMember name="Charles Cook" />. It is shared in <a href="https://posthog.slack.com/archives/C0ALU3889A6">#group-marketing-content-brand</a> and <a href="https://posthog.slack.com/archives/C06LMMS3YP4">#team-blitzscale</a>. We use it to reflect on the previous month's performance and plan the next one using leading indicators, while also checking longer-term performance through lagging results. It covers our broader marketing funnel, including organic, paid ads, and influencer spend.
 
 See the <PrivateLink url="https://docs.google.com/spreadsheets/d/1ne0JMRKb_okluvrDiNV1H6h7EybRjMF2pg8JjrX6ZFU/edit?usp=sharing">Growth Review source sheet</PrivateLink> and <PrivateLink url="https://docs.google.com/document/d/1H20mB0gWrISKZMOBlJ12avlyNC5yGRD3e97BVuABtys/edit?tab=t.p28mbb7wkucv#heading=h.97gmbiax4fyn">monthly commentary</PrivateLink>.
