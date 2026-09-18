@@ -6401,6 +6401,11 @@
             "statusCode": 301
         },
         {
+            "source": "/traces",
+            "destination": "/tracing",
+            "statusCode": 301
+        },
+        {
             "source": "/docs/settings/sso:ext(\\.md)?",
             "destination": "/docs/settings/authentication/sso:ext?"
         },
