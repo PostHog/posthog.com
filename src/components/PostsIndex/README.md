@@ -1,9 +1,10 @@
 # PostsIndex
 
 The shared building blocks of a posts index page — a featured newest post plus a searchable,
-sortable, tag-filterable gallery. Used by `/newsletter` (`src/pages/newsletter.tsx`) and `/blog`
-(`src/pages/blog.tsx`). Everything here is data-driven: components take a `PostSummary[]` and carry
-no page-specific branding beyond defaults the pages can override.
+sortable, tag-filterable gallery. Used by `/newsletter` (`src/pages/newsletter.tsx`), `/blog`
+(`src/pages/blog.tsx`), and `/compare` (`src/pages/compare.tsx`). Everything here is data-driven:
+components take a `PostSummary[]` and carry no page-specific branding beyond defaults the pages
+can override.
 
 These components live under `src/components/` rather than beside the pages because **every file
 under `src/pages/` becomes a route in Gatsby** — a colocated `FeaturedPost.tsx` would ship as
@@ -17,7 +18,7 @@ The newsletter-specific pieces (hero, subscribe form, wordmark and its easter eg
 | File | Purpose |
 | --- | --- |
 | `types.ts` | `PostSummary` — an MDX post node as shaped by the pages' queries. |
-| `accents.ts` | `Accent` (`'red'` for `/newsletter`, `'blue'` for `/blog`) and the class strings each accent resolves to. Full literals so Tailwind's scanner sees them. Components default to `'red'`. |
+| `accents.ts` | `Accent` (`'red'` for `/newsletter`, `'blue'` for `/blog`, `'purple'` for `/compare`) and the class strings each accent resolves to. Full literals so Tailwind's scanner sees them. Components default to `'red'`. |
 | `utils.ts` | `rand` (SSR-stable pseudo-random, used by BuildMode's unused pinboard), `getSubtitle` (first sentence of the meta description/excerpt — a boundary is `.`/`!`/`?` followed by the end or by whitespace and a non-lowercase character, so `?` openers end the dek and `e.g.` doesn't), `getAuthorName`, `getByline`. |
 | `FeaturedPost.tsx` | The newest post: an annotation pointing down at it (`annotation`, default "Hot off the press"; colored by `accent`), image with `Tape` corners on the left, title, dek, and byline on the right. |
 | `Tape.tsx` | Inline SVG strip of masking tape with torn ends. |

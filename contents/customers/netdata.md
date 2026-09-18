@@ -8,13 +8,13 @@ date: 2022-08-23
 
 Netdata is an open source monitoring and troubleshooting platform used by engineers at many of the biggest technology companies in the world, including Microsoft, Amazon and Nvidia. In 2020, Netdata’s teams began looking for a way to track and analyze user behavior, considering many different tools in the process.  
 
-“At my last company, we paid hundreds of thousands of dollars for tools like [Google Analytics](https://isgoogleanalyticsillegal.com/) 360,” said Andrew Maguire, Netdata’s Analytics and Machine Learning Lead. “But when I joined Netdata I wanted to look at new tools. I looked at [Mixpanel](/blog/best-mixpanel-alternatives), [Amplitude](/docs/migrate/migrate-from-amplitude)... but they’re all old and stodgy and I didn’t want to go near them because they’re built for enterprises, not start-ups like Netdata.”
+“At my last company, we paid hundreds of thousands of dollars for tools like [Google Analytics](https://isgoogleanalyticsillegal.com/) 360,” said Andrew Maguire, Netdata’s Analytics and Machine Learning Lead. “But when I joined Netdata I wanted to look at new tools. I looked at [Mixpanel](/compare/best-mixpanel-alternatives), [Amplitude](/docs/migrate/migrate-from-amplitude)... but they’re all old and stodgy and I didn’t want to go near them because they’re built for enterprises, not start-ups like Netdata.”
 
 “I looked at modern, open source solutions. When I found PostHog I loved how easy it was to get going and the developer-centric, event-based approach. And then there’s autocapture — turning that on makes sure you get a lot of the magic, right out of the box.”
 
 ## Finding product-market fit with analytics and empathy
 
-[Autocapture](/blog/is-autocapture-still-bad) enabled Netdata to start collecting data immediately, so the team could focus on moving towards product market fit, rather than complex instrumentation. Using autocapture alongside some custom events has enabled the team to identify trends and iterate quickly. 
+[Autocapture](/docs/product-analytics/autocapture) enabled Netdata to start collecting data immediately, so the team could focus on moving towards product market fit, rather than complex instrumentation. Using autocapture alongside some custom events has enabled the team to identify trends and iterate quickly. 
 
 “Whenever we launch a feature, we create a dashboard in PostHog,” said Andrew. “I have one for our anomaly detection feature, for example, which shows the funnel of how many people use it, how many get good results... this is our flagship machine-learning feature, and PostHog helps us make it better and understand how to achieve product market fit.”
 

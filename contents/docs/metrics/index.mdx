@@ -2,13 +2,25 @@
 title: Application metrics
 ---
 
-> **Note:** Application metrics is in alpha. Setup details, including the ingestion endpoint, may change before general availability.
+<CalloutBox icon="IconFlask" title="Metrics is in open alpha" type="action">
+
+Any team can turn on metrics: open [Metrics](https://app.posthog.com/metrics) in PostHog and select **Enable metrics** in the onboarding view. See [turn on metrics](#turn-on-metrics) below for the full flow. Setup details, including the ingestion endpoint, may change before general availability.
+
+</CalloutBox>
 
 **Application metrics** lets you send application and infrastructure metrics (request counts, latencies, queue depths, resource usage) to PostHog and analyze them alongside your [logs](/docs/logs), [traces](/docs/distributed-tracing), and product data.
 
 We call these *application metrics* to distinguish them from the other kinds of metrics PostHog helps you track — [experiment metrics](/docs/experiments/metrics), [revenue metrics](/docs/revenue-analytics/revenue-metrics), and [usage metrics](/docs/customer-analytics/usage-metrics) measure your product and business, whereas application metrics measure the systems running it.
 
-There are three ways to send metrics:
+## Turn on metrics
+
+Metrics is in **open alpha**. Any team can turn it on for their project — no invitation or support request needed:
+
+1. Open [Metrics](https://app.posthog.com/metrics) in PostHog.
+2. On a new project, the onboarding view shows a preview of the metrics viewer and a getting-started checklist. Select **Enable metrics**.
+3. Metrics turns on for your whole project, and the **Overview**, **Viewer**, and **SQL** tabs become available.
+
+Once enabled, there are three ways to send metrics:
 
 1. **Already have PostHog installed?** Record metrics directly with the [`posthog.metrics` API](#already-have-posthog-installed-use-posthogmetrics) built into the PostHog SDK, with no extra packages.
 2. **Using OpenTelemetry?** Point any standard OpenTelemetry library or Collector at [PostHog's OTLP endpoint](#set-up-metrics-with-opentelemetry), with no PostHog-specific packages.
@@ -207,26 +219,7 @@ Good starting points:
 
 ## Use your metrics
 
-Once metrics are flowing, open [Metrics](https://app.posthog.com/metrics) in PostHog.
-
-### Chart metrics in the viewer
-
-The **Viewer** tab lets you explore metrics without writing any queries:
-
-- **Pick a metric** by name to chart it over time
-- **Choose an aggregation**: sum, average, count, p95, rate, or increase. The viewer recommends one based on the metric's type: increase for counters, average for gauges, p95 for histograms
-- **Group by attributes** to break a metric down into one line per value, like per route or per status code
-- **Filter** to the series you care about, and adjust the date range
-
-### Query metrics with SQL
-
-The **SQL** tab gives you direct access to your metrics with [SQL](/docs/sql):
-
-```sql
-SELECT * FROM posthog.metrics LIMIT 10
-```
-
-Use it for anything the viewer doesn't cover, joining metrics against each other, custom math, or ad-hoc exploration of raw data points.
+Once metrics are flowing, open [Metrics](https://app.posthog.com/metrics) in PostHog. The metrics scene has three tabs — **Overview** for ingestion health, **Viewer** to chart and break down a metric, and **SQL** to query the raw data. Chart any metric over time, group and filter it by attribute, let the anomaly badge point at what changed, pivot into the logs and traces behind it, and set an [alert](/docs/metrics/explore#alerting) to get notified when a metric crosses a threshold. See [Use your metrics](/docs/metrics/explore) for the full tour.
 
 ## Troubleshooting
 

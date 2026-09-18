@@ -630,7 +630,7 @@ export default function ApiEndpoint({ data }: { data: ApiEndpointData }): JSX.El
                 <div ref={contentContainerRef} className="p-4">
                     <SEO title={`${title} API Reference - PostHog`} />
 
-                    <h2 className="!mt-0">{title}</h2>
+                    <h1 className="!mt-0">{title}</h1>
                     <blockquote className="p-6 mb-4 rounded bg-accent">
                         <p>
                             For instructions on how to authenticate to use this endpoint, see{' '}

@@ -37,6 +37,13 @@ When both a TAM and a CSM are on the account, they co-own the save. Both are res
 
 An account going at risk is also not a reason to add a TAM. Churn saves are generally not a legitimate TAM opportunity. Risk on a CSM-only account stays with the CSM unless a genuine expansion opportunity qualifies through the normal path.
 
+
+### Competitive renewal
+
+Accounts owned only by a CSM can benefit from TAM overlay where we know a competitor is being evaluated ahead of renewal time.  CSMs should be having renewal conversations early (3 months out from the renewal date) so that we can get a TAM involved and compete hard to win the renewal.
+
+> Trying to layer in a TAM to a competitive situation 30 days from a renewal isn't enough time to meaningfully impact the competitive evaluation.
+
 ### Below $20k
 
 Accounts below $20k don't get a CSM or TAM. The [coverage map](/handbook/growth/sales/customer-journey#coverage-map) covers who (or what) handles them, including Growth TAM coverage and automation.

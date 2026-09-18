@@ -13,7 +13,8 @@ import Toggle from 'components/Toggle'
 import ImageDrop, { type Image as UploadImage } from 'components/ImageDrop'
 import uploadImage from 'components/Squeak/util/uploadImage'
 import { toBlob, toPng } from 'html-to-image'
-import EventGraphic, { type EventGraphicSpeaker } from 'components/EventGraphic'
+import EventGraphic, { type EventGraphicFormat, type EventGraphicSpeaker } from 'components/EventGraphic'
+import { EVENT_GRAPHIC_STYLE_COUNT, eventGraphicStyleIndex } from 'constants/eventGraphicPalette'
 import { useToast } from '../../context/Toast'
 import { Event } from '../../pages/events'
 import CreatableMultiSelect from 'components/CreatableMultiSelect'
@@ -230,8 +231,33 @@ const validationSchema = Yup.object().shape({
     presentation: Yup.string().url('Enter a valid URL').optional(),
 })
 
-const graphicFileName = (eventName?: string): string =>
-    `${(eventName || 'posthog-event').toLowerCase().replace(/[^a-z0-9]+/g, '-')}.png`
+const graphicFileName = (eventName?: string, format: EventGraphicFormat = 'square'): string =>
+    `${(eventName || 'posthog-event').toLowerCase().replace(/[^a-z0-9]+/g, '-')}${
+        format === 'landscape' ? '-landscape' : ''
+    }.png`
+
+// The auto-uploaded graphic lives in the event's `photos`, so an edit must recognize it to replace it.
+// The upload keeps the file name we gave it, which is derived from the event name — match on either the
+// saved name or the name in the form, because the organizer can rename the event in the same save.
+const isGeneratedGraphic = (photoName?: string, ...eventNames: (string | undefined)[]): boolean =>
+    !!photoName &&
+    eventNames
+        .filter(Boolean)
+        .some((name) => photoName === graphicFileName(name) || photoName === graphicFileName(name, 'landscape'))
+
+// Export sizes: a square social graphic, and the standard Open Graph ratio for link previews.
+const GRAPHIC_EXPORT_SIZES: Record<EventGraphicFormat, { width: number; height: number }> = {
+    square: { width: 1080, height: 1080 },
+    landscape: { width: 1200, height: 630 },
+}
+
+// The landscape title auto-fits, but its wide/short canvas can leave the type looking small, so the
+// organizer can nudge it up or down in fixed steps. Each step is 15% off the format's default; the range
+// is clamped so a press can't run past a sensible size (the graphic itself still width-clamps every word).
+// It's steps rather than a slider deliberately — no drag thumb to style across browsers, nothing to break.
+const TITLE_SCALE_STEP = 0.15
+const TITLE_SCALE_MIN_STEP = -2
+const TITLE_SCALE_MAX_STEP = 2
 
 const transformEventToFormValues = (event: Event, speakerOptions?: SelectOption[]): EventFormValues => {
     const parsed = dayjs(event?.date)
@@ -274,8 +300,15 @@ export default function EventForm({ onSuccess, event }: { onSuccess?: () => void
     const { getJwt } = useUser()
     const { addToast } = useToast()
     const [submitting, setSubmitting] = React.useState<boolean>(false)
-    const [downloadingGraphic, setDownloadingGraphic] = React.useState<boolean>(false)
+    const [downloadingGraphic, setDownloadingGraphic] = React.useState<EventGraphicFormat | null>(null)
+    // Null means "follow the event name"; shuffling pins an explicit hue + light/dark combo.
+    const [graphicStyleOverride, setGraphicStyleOverride] = React.useState<number | null>(null)
+    // Landscape-only title-size nudge. 0 = the format default; each step is ±15%. Since the landscape
+    // graphic is download-only (only the square is auto-uploaded), this only ever needs to drive the live
+    // preview and the downloaded PNG — no persisted field.
+    const [landscapeTitleStep, setLandscapeTitleStep] = React.useState<number>(0)
     const graphicRef = React.useRef<HTMLDivElement>(null)
+    const landscapeGraphicRef = React.useRef<HTMLDivElement>(null)
     const data = useStaticQuery(graphql`
         query {
             allEvent {
@@ -362,11 +395,19 @@ export default function EventForm({ onSuccess, event }: { onSuccess?: () => void
                             return await uploadImage(img.file, jwt)
                         })
                 )
+                // Photos the event already had that are the graphic we generated last time. They are dropped
+                // here and regenerated below, so a shuffled color (or an edited date, venue, speaker) reaches
+                // the site instead of leaving the first-ever render in place.
+                const staleGraphicIds = (event?.photos || [])
+                    .filter((photo) => isGeneratedGraphic(photo.name, event?.name, values.name))
+                    .map((photo) => photo.id)
                 let photoIds = [
                     ...uploadedPhotos.map((photo) => photo.id),
-                    ...values.photosLocal.filter((image) => 'id' in image && image.id).map((image) => image.id),
+                    ...values.photosLocal
+                        .filter((image) => 'id' in image && image.id && !staleGraphicIds.includes(image.id))
+                        .map((image) => image.id),
                 ]
-                // No photos provided — upload the generated graphic so the event has art everywhere
+                // No photo of their own — upload the generated graphic so the event has art everywhere
                 if (photoIds.length === 0 && graphicRef.current) {
                     try {
                         const blob = await toBlob(graphicRef.current, {
@@ -384,8 +425,9 @@ export default function EventForm({ onSuccess, event }: { onSuccess?: () => void
                             }
                         }
                     } catch (error) {
-                        // Don't block event creation if the graphic can't be generated
+                        // Don't block the save if the graphic can't be generated — keep the previous one
                         console.error('Error uploading event graphic:', error)
+                        photoIds = staleGraphicIds
                     }
                 }
                 const dateTime = dayjs(`${values.date} ${values.startTime || '00:00'}`).toISOString()
@@ -736,17 +778,45 @@ export default function EventForm({ onSuccess, event }: { onSuccess?: () => void
         }
     }, [formik.values.speakers, data.allSqueakProfile.nodes])
 
-    const handleDownloadGraphic = async () => {
-        if (!graphicRef.current) return
-        setDownloadingGraphic(true)
+    // Falls back to a stable hash so the same event always starts on the same style. Saved events use the
+    // same seed as the site (`id-name`), so an unshuffled preview matches what the list and detail views show.
+    const graphicStyleIndex =
+        graphicStyleOverride ?? eventGraphicStyleIndex(event ? `${event.id}-${event.name}` : formik.values.name)
+
+    // Step by a random non-zero offset so every press lands on a different hue/variant combination.
+    const shuffleGraphicStyle = () =>
+        setGraphicStyleOverride(
+            (graphicStyleIndex + 1 + Math.floor(Math.random() * (EVENT_GRAPHIC_STYLE_COUNT - 1))) %
+                EVENT_GRAPHIC_STYLE_COUNT
+        )
+
+    const graphicProps = {
+        title: formik.values.name || 'Your event name',
+        date: formik.values.date,
+        startTime: formik.values.startTime,
+        venue: formik.values.venueName,
+        location: formik.values.locationLabel,
+        online: formik.values.online,
+        speaker: firstSpeakerProfile,
+        partners: formik.values.partners.filter((partner) => partner.name),
+        styleIndex: graphicStyleIndex,
+    }
+
+    const landscapeTitleScale = 1 + landscapeTitleStep * TITLE_SCALE_STEP
+
+    const handleDownloadGraphic = async (format: EventGraphicFormat) => {
+        const node = format === 'landscape' ? landscapeGraphicRef.current : graphicRef.current
+        if (!node) return
+        setDownloadingGraphic(format)
         try {
-            const dataUrl = await toPng(graphicRef.current, {
-                canvasWidth: 1080,
-                canvasHeight: 1080,
+            const { width, height } = GRAPHIC_EXPORT_SIZES[format]
+            const dataUrl = await toPng(node, {
+                canvasWidth: width,
+                canvasHeight: height,
                 pixelRatio: 1,
             })
             const link = document.createElement('a')
-            link.download = graphicFileName(formik.values.name)
+            link.download = graphicFileName(formik.values.name, format)
             link.href = dataUrl
             link.click()
             link.remove()
@@ -754,7 +824,7 @@ export default function EventForm({ onSuccess, event }: { onSuccess?: () => void
             console.error('Error generating event graphic:', error)
             addToast({ description: 'Failed to generate the event graphic' })
         } finally {
-            setDownloadingGraphic(false)
+            setDownloadingGraphic(null)
         }
     }
 
@@ -762,6 +832,7 @@ export default function EventForm({ onSuccess, event }: { onSuccess?: () => void
     // this reverts to the saved event rather than emptying the form.
     const clearForm = () => {
         formik.resetForm()
+        setLandscapeTitleStep(0)
         setCityQuery('')
         setCitySuggestions([])
         setCityOpen(false)
@@ -1087,34 +1158,85 @@ export default function EventForm({ onSuccess, event }: { onSuccess?: () => void
                 <div>
                     <label className="text-[15px] block mb-1">Default event graphic</label>
                     <p className="text-sm text-secondary mb-2">
-                        This graphic is generated from the details above. If you don't upload a photo, it's saved
-                        automatically and used as the event's photo everywhere on the site. The background comes from
-                        the first speaker's favorite color on their community profile.
+                        These graphics are generated from the details above. If you don't upload a photo, the square one
+                        is saved automatically and used as the event's photo everywhere on the site. Shuffle to try a
+                        different color and light/dark treatment — whatever is showing when you save is what gets used.
+                        The landscape (link preview) graphic has its own title-size control below.
                     </p>
-                    <EventGraphic
-                        ref={graphicRef}
-                        title={formik.values.name || 'Your event name'}
-                        date={formik.values.date}
-                        location={formik.values.locationLabel}
-                        online={formik.values.online}
-                        speaker={firstSpeakerProfile}
-                        partners={formik.values.partners.filter((partner) => partner.name)}
-                        className="rounded border border-primary"
-                    />
-                    <div className="mt-2">
+                    <div className="grid gap-3 sm:grid-cols-2">
+                        <EventGraphic
+                            ref={graphicRef}
+                            {...graphicProps}
+                            format="square"
+                            className="rounded border border-primary"
+                        />
+                        <EventGraphic
+                            ref={landscapeGraphicRef}
+                            {...graphicProps}
+                            format="landscape"
+                            titleScale={landscapeTitleScale}
+                            className="rounded border border-primary self-start"
+                        />
+                    </div>
+                    <div className="mt-2 flex flex-wrap gap-2">
+                        <OSButton size="sm" variant="secondary" type="button" onClick={shuffleGraphicStyle}>
+                            Shuffle style
+                        </OSButton>
                         <OSButton
                             size="sm"
                             variant="secondary"
                             type="button"
-                            disabled={downloadingGraphic}
-                            onClick={handleDownloadGraphic}
+                            disabled={downloadingGraphic !== null}
+                            onClick={() => handleDownloadGraphic('square')}
                         >
-                            {downloadingGraphic ? (
+                            {downloadingGraphic === 'square' ? (
                                 <IconSpinner className="animate-spin size-4" />
                             ) : (
-                                'Download graphic (1080×1080)'
+                                'Download square (1080×1080)'
                             )}
                         </OSButton>
+                        <OSButton
+                            size="sm"
+                            variant="secondary"
+                            type="button"
+                            disabled={downloadingGraphic !== null}
+                            onClick={() => handleDownloadGraphic('landscape')}
+                        >
+                            {downloadingGraphic === 'landscape' ? (
+                                <IconSpinner className="animate-spin size-4" />
+                            ) : (
+                                'Download landscape (1200×630)'
+                            )}
+                        </OSButton>
+                        <div className="flex items-center gap-1 sm:ml-auto">
+                            <span className="text-sm text-secondary mr-1">Landscape title size</span>
+                            <OSButton
+                                size="sm"
+                                variant="secondary"
+                                type="button"
+                                aria-label="Make the landscape title smaller"
+                                tooltip="Smaller landscape title"
+                                disabled={landscapeTitleStep <= TITLE_SCALE_MIN_STEP}
+                                onClick={() =>
+                                    setLandscapeTitleStep((step) => Math.max(TITLE_SCALE_MIN_STEP, step - 1))
+                                }
+                            >
+                                A-
+                            </OSButton>
+                            <OSButton
+                                size="sm"
+                                variant="secondary"
+                                type="button"
+                                aria-label="Make the landscape title bigger"
+                                tooltip="Bigger landscape title"
+                                disabled={landscapeTitleStep >= TITLE_SCALE_MAX_STEP}
+                                onClick={() =>
+                                    setLandscapeTitleStep((step) => Math.min(TITLE_SCALE_MAX_STEP, step + 1))
+                                }
+                            >
+                                A+
+                            </OSButton>
+                        </div>
                     </div>
                 </div>
                 <OSTextarea

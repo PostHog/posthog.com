@@ -135,7 +135,7 @@ WHERE project_id = 2
     AND timestamp < '2022-04-01'
 ```
 
-When executing this query, ClickHouse can leverage data being sorted and the sparse index to skip reading most of data from disk. In this case, events from other projects and organizations and events from months other than March.
+When executing this query, ClickHouse can leverage data being sorted and the sparse index to skip reading most of the data from disk. In this case, events from other projects and organizations and events from months other than March.
 
 However, almost all of our most time-sensitive queries in PostHog also filter by event type. After measuring and confirming this, we updated the `ORDER BY` clause to the following one:
 

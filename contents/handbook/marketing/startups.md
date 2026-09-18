@@ -10,7 +10,7 @@ We run two special programs for early-stage teams, plus external partnerships wi
 
 | Feature                     | Startups                                              | Y Combinator                                          |
 | --------------------------- | ----------------------------------------------------- | ----------------------------------------------------- |
-| Eligibility                 | <2 years old, <$5M raised, not acquired, company email domain | Must be in YC, <$25m raised, company email domain     |
+| Eligibility                 | <2 years old, <$5M raised, not acquired, company email domain | Must be in YC (proven with a [YC verification link](https://www.ycombinator.com/verify)), <$25m raised, company email domain |
 | Credit                      | $50,000 for 12 months                                 | $50k per year, whilst eligible                        |
 | Can use credit for add-ons? | ⚠️ Yes, but cannot use credit for BAA in Boost package | ✅ Yes, and can use credit for BAA in Boost package    |
 | Can use credit for AI tools? | ❌ No, from September 14, 2026 (PostHog Desktop, PostHog Slack app, Replay Vision, PostHog AI, Inbox) | ❌ No, from September 14, 2026 (PostHog Desktop, PostHog Slack app, Replay Vision, PostHog AI, Inbox) |
@@ -24,7 +24,7 @@ Any company that is <2 years old and has raised less than $5M in funding is elig
 
 -   $50,000 in PostHog credits (valid for 12 months)
 -   One unique welcome pack for founders
--   Partner benefits with Speakeasy, Incident.io, and Chroma
+-   Partner benefits with Speakeasy and Incident.io
 -   A monthly newsletter for founders
 
 > ❗Credits **cannot** be used toward a BAA under the Boost plan.
@@ -43,21 +43,24 @@ We track all PostHog for Startups applications in [this Zapier table](http://tab
 
 This program is similar to our startup program but has some key differences for YC teams. Teams can be in any YC batch, with any amount of funding raised, and can claim the following:
 
--   $50,000 per year - they only need to register once and it will renew automatically while they're eligible (<$25m raised)
+-   $50,000 per year – they only need to register once and it will renew automatically while they're eligible (<$25m raised)
    -   If they previously registered for the old deal and it expired, they need to re-register
 -   Up to 4 unique founder merch packs (different from the startup program)
 -   Access to HogPatch for the duration of their time in the batch
--   Partner benefits with Speakeasy, Incident.io and Chroma
+-   Partner benefits with Speakeasy and Incident.io
 
 You can find the copy for the latest deal on Bookface in this [doc](https://docs.google.com/document/d/1dmsMxrfWSVhKZY4bQp5QIRiXS2iCvLGJah5EKWOvoeI/edit?tab=t.0#heading=h.o7fhsqrlnheo). To post updates, you need to ask James or Tim to do it.
 
-> This deal is not available to YC alumni, who started another company - if they're eligible, they can apply for PostHog for Startups instead
+> This deal is not available to YC alumni, who started another company – if they're eligible, they can apply for PostHog for Startups instead
 
 > This deal is also not available if the YC company has been acquired by a non-YC parent. If an acquisition happens mid-term, existing credits can be honored until expiry but will not auto-renew. The acquiring company can apply for PostHog for Startups if eligible.
 
 > ✅ Credits **can** be used to claim a BAA under the Boost plan.
 
-YC teams must apply via [our secret YC page](https://app.posthog.com/startups/yc), from a PostHog account that uses the company's email domain, and we ask for a screenshot from Bookface to prove their eligibility.
+YC teams must apply via [our secret YC page](https://app.posthog.com/startups/yc), from a PostHog account that uses the company's email domain. To prove their eligibility, we ask for:
+
+-   A [YC founder verification link](https://www.ycombinator.com/verify), which founders can create at [ycombinator.com/verify/manage](https://www.ycombinator.com/verify/manage) with their company details and batch visible. It must be valid and can't have been used by another organization before.
+-   A screenshot from Bookface showing they've marked themselves as using the PostHog deal.
 
 We track all PostHog for YC applications in [this Zapier table](https://tables.zapier.com/app/tables/t/01JRCYMWYAJNP3K0B6GTYKKBQB).
 
@@ -91,12 +94,12 @@ Subscribers to [Every](https://every.to/) get:
    If they meet the basic criteria, we automatically apply the correct amount of Stripe credit.
 
 3. **Welcome + merch**
-   Shortly after, they receive an [automated email](https://fly.customer.io/workspaces/127208/journeys/composer/actions/2185)) from <TeamMember name="Joe Martin" photo />, in which we
+   Shortly after, they receive an [automated email](https://fly.customer.io/workspaces/127208/journeys/composer/actions/2185)) from <TeamMember name="Joe Black" photo />, in which we
    - Confirm their acceptance, welcome them and explain perks
    - Provide unique code(s) to claim founder kit(s) from [the merch store](/merch) (orders are fulfilled by Micromerch, merch questions can go in the `#merch` Slack channel)
 
 4. **Milestones**
-   When teams reach 50%, 75%, or 100% of their credit usage — or when credits expire — they receive milestone emails. These come from Customer.io and are managed by <TeamMember name="Joe Martin" photo />.
+   When teams reach 50%, 75%, or 100% of their credit usage — or when credits expire — they receive milestone emails. These come from Customer.io and are managed by <TeamMember name="Joe Black" photo />.
 
 5. **Post-credit**
    Once credit is fully used or expired, teams are moved to a standard paid plan automatically.
@@ -138,25 +141,23 @@ Credits are valid are not transferable, and don’t carry over or convert to cas
 
 We currently partner with:
 
--   **Incident.io** — $1,500 off a teams plan
--   **Speakeasy** — 50% off for 6 months
--   **Chroma** - $5,000 of credit
+-   **Incident.io** – $1,500 off a teams plan
+-   **Speakeasy** – 50% off for 6 months
 
 Discount codes are sent in the welcome email after signup.
 
-If users run into issues with redemption, we can help liaise — though all offers are ultimately at partner discretion.
+If users run into issues with redemption, we can help liaise – though all offers are ultimately at partner discretion.
 
 Contacts:
 
 -   Incident.io: Zain Mobarik
 -   Speakeasy: Nolan Di Mare Sullivan
--   Chroma: Philip Thomas
 
-We previously offered DigitalOcean credits ($25k) and a Mintlify partnership, but these were retired in Q2 2025.
+We previously offered DigitalOcean credits ($25k), but this was retired in Q2 2025.
 
 ## Program extensions
 
-We don’t usually extend credits — the 12-month window is intended to be firm and fair. However, we’re open to requests in exceptional cases.
+We don’t usually extend credits – the 12-month window is intended to be firm and fair. However, we’re open to requests in exceptional cases.
 
 Founders must clearly explain why they couldn’t use the credit in time and provide evidence of recent progress or changes. Requests are reviewed manually by the Customer Success team.
 
