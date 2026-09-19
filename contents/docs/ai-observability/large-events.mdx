@@ -104,6 +104,8 @@ Not on Python or Node? Build events with [manual capture](/docs/ai-observability
 POST <ph_client_api_host>/i/v0/ai/batch/
 ```
 
+The dedicated endpoint only accepts events whose name starts with `$ai_`. Any other event in the batch is discarded with an [ingestion warning](/docs/data/ingestion-warnings#discarded-ai-events), and the rest of the batch is ingested. Send other events to the regular endpoint.
+
 ## Sending over OpenTelemetry
 
 If you send AI traces with [OpenTelemetry](/docs/ai-observability/installation/opentelemetry), your spans arrive over OTLP at a dedicated path:

@@ -23,6 +23,18 @@ Events sent to PostHog are called **generations**. A generation represents a sin
 
 Generations are represented using the event name `$ai_generation`. Each generation captures the model, provider, input, output, token counts, latency, and cost.
 
+## The `$ai_` prefix
+
+Every event name that starts with `$ai_` is an AI Observability event. This includes the names the SDKs send, like `$ai_generation`, `$ai_span`, `$ai_trace`, and `$ai_embedding`, and any other `$ai_` name you send yourself.
+
+PostHog processes every `$ai_` event as an AI Observability event rather than a product analytics event:
+
+- It doesn't create or update a person profile. `$set` and `$set_once` on the event are ignored.
+- The full event, including large properties like `$ai_input` and `$ai_output`, is stored in the `ai_events` table for 30 days. A copy without those properties goes to the `events` table. See [data retention](/docs/ai-observability/data-retention).
+- It's billed as an AI Observability event, not as a product analytics event.
+
+Don't use the `$ai_` prefix for events that need person profiles or product analytics pricing.
+
 ## Generation properties
 
 ### Tokens and costs
