@@ -577,6 +577,48 @@ export function useMenuData(): MenuType[] {
     ]
 }
 
+export const DocsItemsStart = [
+    {
+        type: 'item' as const,
+        label: 'Overview',
+        link: '/docs',
+        icon: <Icons.IconHome className="size-4 text-purple" />,
+    },
+    {
+        type: 'separator' as const,
+    },
+]
+
+export const DocsItemsEnd = [
+    { type: 'separator' as const },
+    {
+        type: 'item' as const,
+        label: 'Tutorials',
+        link: '/tutorials',
+        icon: <Icons.IconGraduationCap className="size-4 text-purple" />,
+    },
+    {
+        type: 'item' as const,
+        label: 'Pocket guides',
+        link: '/pocket-guides',
+        // Orange matches volume one's token in src/constants/pocketGuides.ts.
+        icon: <Icons.IconCompass className="size-4 text-orange" />,
+    },
+    {
+        type: 'item' as const,
+        label: 'Templates',
+        link: '/templates',
+        // Matches the Templates entry in src/navs/index.js.
+        icon: <Icons.IconMagic className="size-4 text-purple" />,
+    },
+    {
+        type: 'item' as const,
+        label: 'Canvas gallery',
+        link: '/desktop/canvases',
+        icon: <Icons.IconPalette className="size-4 text-salmon" />,
+    },
+]
+
 import type { AppIconName } from 'components/OSIcons/AppIcon'
 
 type SparksJoyItem = {
