@@ -562,7 +562,7 @@ const ApplicationSuccess = ({ isInUnitedStates }: { isInUnitedStates?: boolean }
                     </div>
 
                     <div className="mx-6 md:mx-12 py-2 ">
-                        <NewsletterForm className="!py-0 !pt-6" />
+                        <NewsletterForm placement="careers-apply" className="!py-0 !pt-6" />
                     </div>
 
                     <div className="mx-6 md:mx-12 py-2 ">
