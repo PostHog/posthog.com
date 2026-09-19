@@ -184,45 +184,7 @@ Revocation clears the link on the next metadata refresh, so a leaked or stale to
 
 ### Declare OAuth scopes for your app (optional)
 
-You can declare which OAuth scopes your partner app needs by adding a `scopes` field inside the `com.posthog` namespace. This sets a scope ceiling – tokens issued to your app are limited to these scopes.
-
-```json
-{
-  "client_id": "https://yourapp.com/.well-known/posthog-client.json",
-  "client_name": "Your App Name",
-  "redirect_uris": ["https://yourapp.com/callbacks/posthog"],
-  "token_endpoint_auth_method": "none",
-  "grant_types": ["authorization_code"],
-  "response_types": ["code"],
-  "com.posthog": {
-    "provisioning": true,
-    "verification_token": "phvt_...",
-    "scopes": ["insight:read", "project:read", "person:read"]
-  }
-}
-```
-
-Only scopes a user can grant on the consent screen are accepted – see [available scopes](#available-scopes) for the full list. Any scope PostHog reserves for internal use, or doesn't recognize, is dropped. If every scope you declare is dropped (none are grantable), registration is rejected rather than falling back to an empty ceiling, so make sure at least one declared scope is on the available list.
-
-If `com.posthog.scopes` is omitted, your app can request any scope a user can grant. When present, the declared scopes are applied on both initial registration and every subsequent metadata refresh. A scope ceiling is a cap, not a grant – each scope still requires user consent at the authorization step.
-
-CIMD app scopes are managed via the metadata document and are read-only in the PostHog admin UI.
-
-#### Scopes a user can decline
-
-Everything in `scopes` is required, and the user sees it locked on the consent screen. If part of what you ask for is for a feature they may not want, put those scopes in `optional_scopes` instead. Those appear as declinable, and the user can approve the rest without them.
-
-```json
-"com.posthog": {
-  "provisioning": true,
-  "scopes": ["insight:read", "project:read"],
-  "optional_scopes": ["session_recording:read"]
-}
-```
-
-Your ceiling is both lists together, so a token can carry anything in either one, and never anything outside them. Check the scopes on the token you get back before using a feature that depends on a declinable scope, because the user may have said no to it.
-
-`optional_scopes` needs a non-empty `scopes` alongside it: an app offering extras has to declare the base they sit on top of. Both lists are filtered the same way, so an unrecognized or internal scope is dropped from either. Unlike `scopes`, an `optional_scopes` list that ends up empty is fine, and just means you offer no declinable extras.
+Provisioning apps use the same required and optional scope declarations as other CIMD clients. See [declare your OAuth scopes](/docs/api/oauth#declare-your-scopes) to set your app's scope ceiling and mark scopes that people can decline.
 
 ## API reference
 
