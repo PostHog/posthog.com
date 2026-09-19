@@ -3442,10 +3442,6 @@ export const docsMenu = {
                             url: '/docs/api/endpoints',
                         },
                         {
-                            name: 'Environments',
-                            url: '/docs/api/environments',
-                        },
-                        {
                             name: 'Error tracking',
                             url: '/docs/api/error-tracking',
                         },
