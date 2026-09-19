@@ -20,6 +20,7 @@
         "build-move": "gatsby build && bash ./src/scripts/move-index.sh",
         "prebuild": "pnpm generate-brand-assets",
         "build": "gatsby build",
+        "postbuild": "node scripts/upload-sourcemaps.mjs",
         "prebuild:minimal": "pnpm generate-brand-assets",
         "build:minimal": "GATSBY_MINIMAL=true gatsby build",
         "start": "./bin/start",
@@ -243,6 +244,7 @@
     "devDependencies": {
         "@babel/core": "^7.15.5",
         "@pmmmwh/react-refresh-webpack-plugin": "^0.5.5",
+        "@posthog/cli": "^0.18.0",
         "@storybook/addon-actions": "^6.3.9",
         "@storybook/addon-essentials": "^6.3.9",
         "@storybook/addon-links": "^6.3.9",
