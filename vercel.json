@@ -819,6 +819,11 @@
             "destination": "/blog/karpathy-autoresearch-query-engine-bug"
         },
         {
+            "source": "/blog/is-autocapture-still-bad",
+            "destination": "/docs/product-analytics/autocapture",
+            "statusCode": 301
+        },
+        {
             "source": "/handbook/marketing/how-we-position-and-sell",
             "destination": "/handbook/marketing/positioning",
             "statusCode": 301
@@ -3650,7 +3655,7 @@
         },
         {
             "source": "/blog/how-to-product-market-fit",
-            "destination": "/blog/product-market-fit-game"
+            "destination": "/founders/product-market-fit-game"
         },
         {
             "source": "/docs/cdp/zapier-connector:ext(\\.md)?",

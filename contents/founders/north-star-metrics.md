@@ -121,7 +121,7 @@ Needless to say, a developer platform like PostHog is essential for tracking any
 
 ## Further reading
 
-- [How to achieve B2B product market fit](/blog/product-market-fit-game): How to approach finding market fit for a B2B product
+- [How to achieve B2B product market fit](/founders/product-market-fit-game): How to approach finding market fit for a B2B product
 
 - [Introduction to SaaS product metrics](/blog/b2b-saas-product-metrics): A guide to common B2B product metrics and how to measure them
 

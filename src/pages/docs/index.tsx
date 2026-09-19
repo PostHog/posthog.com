@@ -154,7 +154,7 @@ export const DocsIndex = () => {
                         <h1 className="m-0 text-3xl font-bold !leading-tight @xl/docs:text-4xl">PostHog Docs</h1>
                         <div className="mt-3 flex flex-col items-start gap-3 @lg/docs:flex-row @lg/docs:items-center @lg/docs:justify-between">
                             <p className="m-0 max-w-2xl flex-1 text-[15px] leading-relaxed text-secondary @xl/docs:text-base">
-                                References for every product and tool, and use case guides to help you succeed.
+                                References for every app and product, and use case guides to help you succeed.
                             </p>
                             <div className="w-full @lg/docs:w-auto @lg/docs:shrink-0">
                                 <OSButton
@@ -191,7 +191,7 @@ export const DocsIndex = () => {
                             </Panel>
 
                             {/* Not products, so `AppsList` misses them – this is their only entry point. */}
-                            <Panel eyebrow="Products" description="Where you use PostHog from.">
+                            <Panel eyebrow="Apps" description="Where you use PostHog from.">
                                 <div className="grid grid-cols-1 gap-2.5 @xs:grid-cols-2 @lg/docs:grid-cols-1">
                                     {surfaces.map((surface) => (
                                         <IconLink
@@ -207,7 +207,7 @@ export const DocsIndex = () => {
                             </Panel>
                         </div>
 
-                        <Panel eyebrow="Tools" description="What PostHog does – reference docs for every tool.">
+                        <Panel eyebrow="Products" description="What PostHog does – reference docs for every product.">
                             <AppsList />
                             <h3 className="m-0 mb-3 text-sm font-bold uppercase tracking-wide text-primary">
                                 Libraries &amp; integrations
