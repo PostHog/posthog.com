@@ -14,7 +14,7 @@ interface CoverProps {
     /** Guides inside it (the 101 isn't counted), printed the way a series prints its contents. */
     count: number
     /** Which surface this cover sits on. Required so every open is attributable. */
-    placement: 'shelf' | 'self_driving_page' | 'product_docs'
+    placement: 'shelf' | 'self_driving_page' | 'product_docs' | 'product_index'
 }
 
 /** The series frame: colored spine, series name above the subject, specimen on empty ground. */

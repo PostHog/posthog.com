@@ -203,12 +203,16 @@ rather than as an object. Both are `motion-safe:`.
 when the docs index stacks into one column the library gets the full window width, and without it
 the volumes stretch into wall-wide slivers.
 
-`GuidesForProduct` is the tool-docs entry point: `<GuidesForProduct product="ai-observability" />`,
-imported into whichever page owns that product's syllabus – `start-here.mdx` for AI Observability,
-`index.mdx` for Self-driving. It matches the slug against `docsProduct` on a volume via `volumeForProduct`
-and **returns `null` when nothing matches** – most products have no volume, so dropping it on a page
-is always safe. Adding a product to the mechanism is one line: set `docsProduct` on its volume in
-`src/constants/pocketGuides.ts`.
+`GuidesForProduct` is the tool-docs entry point: `<GuidesForProduct product="ai-observability" />`.
+It matches the slug against `docsProduct` on a volume via `volumeForProduct` and **returns `null` when
+nothing matches** – most products have no volume, so dropping it on a page is always safe. Adding a
+product to the mechanism is one line: set `docsProduct` on its volume in `src/constants/pocketGuides.ts`.
+
+**A product carries it on both of its docs entry points.** `index.mdx` is where most readers land, and
+`start-here.mdx` is where the ones who want a syllabus go, so a volume that only sits on one of them
+misses most of its readers. The index copy passes `placement="product_index"` and start-here takes the
+`product_docs` default, which keeps the two apart in `pocket_guide_interaction`. Self-driving has no
+start-here page, so its index page is the only one.
 
 Both it and the "Learn it by use case" block on `/self-driving` (`src/pages/self-driving/index.tsx`)
 render `VolumeCard`, so the card is defined once. `VolumeCard` takes the pitch, the link, and the
