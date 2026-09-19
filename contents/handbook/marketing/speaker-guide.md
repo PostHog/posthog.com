@@ -80,7 +80,8 @@ If you’re pre-recording your demo, [\#team-youtube](https://posthog.slack.com/
 A few principles for building out slides:
 
 * Before the slides, start on paper or in a notes app and build out your talk outline  
-* PostHog talks use our [standard slide template](https://www.figma.com/slides/buiAgxPjrzpuZyvilFJadI/PH-slide-deck-template?node-id=1-20157&t=ZtCfzbtzRzwfVTry-0) in Figma. [Here’s a guide](https://share.zight.com/kpu21RG9) on how to use it.   
+* PostHog talks use our [standard slide template](https://www.figma.com/slides/buiAgxPjrzpuZyvilFJadI/PH-slide-deck-template?node-id=1-20157&t=ZtCfzbtzRzwfVTry-0) in Figma. [Here’s a guide](https://drive.google.com/file/d/1hZ556swZrKE7guOZipFh-N3kWD_MsVYU/view?usp=sharing) on how to use it.   
+* Adding a QR code to a slide? Make it with our own [QR code generator](https://qr-mogging.hosthog.dev/).   
 * Code on slides: use a large font (24pt minimum), a dark background, and only show the lines that matter. If you're pasting a full file, you've already lost.  
 * One idea per slide. If you're writing full sentences, you're writing speaker notes, not a slide. If applicable, allow memes to replace text.   
 * If a slide doesn't support the one true thing you identified in step 3, cut it.  
