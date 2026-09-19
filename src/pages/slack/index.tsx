@@ -608,8 +608,7 @@ const faqItems = [
         content: (
             <p>
                 Yes. Attach images, PDFs, and text files to your message and the agent reads them as part of the
-                request. The limit is five files
-                per message, 10 MB each.
+                request. The limit is five files per message, 10 MB each.
             </p>
         ),
     },
