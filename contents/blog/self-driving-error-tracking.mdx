@@ -1,0 +1,164 @@
+---
+title: "Self-driving in the wild: PostHog caught its own error and fixed it itself"
+date: 2026-09-17
+rootPage: /blog
+sidebar: Blog
+showTitle: true
+hideAnchor: true
+featuredImage: >-
+    https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/self_driving_hogzilla_80e6113a61.png
+featuredImageType: full
+author:
+    - sara-miteva
+category: Inside PostHog
+tags:
+    - Product updates
+    - AI
+    - Self-driving
+seo:
+    metaTitle: "Self-driving in the wild: PostHog caught its own error and fixed it itself"
+    metaDescription: "A bug in PostHog AI ran quietly for four months. Error Tracking raised it, an agent researched it, another agent opened the PR, and we hit merge. Here's the full timeline, plus what self-driving fixes for everyone else."
+---
+
+PostHog recently switched to [self-driving](/self-driving), meaning our product analyzes its own data, and creates a report, and if needed, a PR for us to act on it. In most cases, all we have to do is merge.
+
+The [Self-driving inbox](https://app.posthog.com/inbox) is where PostHog collects reports from all the signals it monitors to produce fixes, including:
+
+- [Error Tracking](/error-tracking)
+- [Replay Vision](/replay-vision) & [Session Replay](/session-replay)
+- [AI Observability](/ai-observability)
+- [Support](/support)
+- [Product Analytics](/product-analytics)
+
+These are the pre-defined signals, but we can also set up [scouts](/docs/self-driving/scouts) that monitor different things on a schedule, including application performance, ad spend, brand mentions, query performance, etc.
+
+We talked a lot about the concept of self-driving, but now it's time to check the stats and how it works in practice. One thing immediately came up: **Error Tracking is the top self-driving signal so far.**
+
+If you don't take our word for it, here are the stats:
+
+- **Error Tracking is 29% of everything in the inbox and 42% of everything that gets merged.** It's the largest signal by report volume and by merged fixes.
+
+- **Median time from an error first firing to a written report in the inbox: under a minute.** A PR follows a median of 15 minutes after that. Every other source takes about 67 minutes to reach a PR.
+
+- **Median time from report to merged PR: 23 hours.** PostHog's own repos are slower than our customers', though: 23 minutes to a PR and 61 hours to a merge, against 14 minutes and 22 hours for customer projects.
+
+- In those three months (June – September), self-driving opened 19,836 Error Tracking PRs, and **8,539 of them have merged so far.**
+
+*Source: PostHog Data Warehouse, 16 June to 14 September 2026, all projects.*
+
+Let's stop bragging and break down an actual error it caught and how it got fixed.
+
+## The error self-driving caught
+
+From April to late August, PostHog AI kept giving a handful of users a worse answer than it should have on one kind of question. When it pulled a trends insight where only some of the series carried an aggregated value, the formatter hit a `KeyError`. The error was caught, so nothing broke on screen. The AI just lost the data and answered from a fallback, with the event it measured and the filters but not one number from the result.
+
+Say you're looking at signups broken down by plan and you ask which plan is growing fastest. Normally PostHog AI gets a table of the real figures and answers: Enterprise, up 31%. Here it got the chart's title and settings and nothing else, so it answered on topic and told you nothing. Nobody filed a support ticket, which makes sense. The answer looked like an answer.
+
+It ran from 7 April to 25 August. Then on Sunday 30 August we got a report in our [Self-driving inbox](https://app.posthog.com/inbox).
+
+### Why that Sunday, after five months?
+
+Error Tracking raises a signal three ways: a new issue gets filed, an existing one starts spiking, or a closed one reopens. From April onwards every occurrence of this landed on the same open issue, which nobody had closed, so it sat there incrementing a counter.
+
+What changed on 30 August was the fingerprint. Error Tracking groups exceptions by the exception itself plus the shape of the stack above it. Four days earlier we shipped charts in scheduled AI reports, which meant the code that runs and formats a query had to hand back the raw response as well as the formatted text, so we split it in two and left the old function as a wrapper. None of that touched the bug, and the frames underneath it are identical. But the frame doing the reporting had a different name, so the next occurrence didn't match the old fingerprint, Error Tracking filed a new issue, and a new issue is a signal.
+
+So a refactor with nothing to do with this bug is what surfaced it. What isn't luck is that it was there to find. The exception was handled, which is why nothing looked broken and nobody filed a ticket, and if you only report unhandled crashes a bug like this doesn't show up in your tooling at all.
+
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/Clean_Shot_2026_09_17_at_13_36_25_2x_472e2df77a.png"
+    alt="The inbox report for the KeyError, showing the exception, the affected users, and the agent's research written back onto the report."
+    padding={false}
+    classes="rounded"
+/>
+
+## 48 minutes from a report to a PR
+
+Ninety seconds after the error was caught, there was a report in our Self-driving inbox. At that point it was barely anything: a title, the exception, a link to the issue.
+
+A safety check ran first and passed. Then a research agent picked it up, and this is where a report turns into something worth acting on. Over about fifteen minutes, it answered six questions and wrote every answer back onto the report:
+
+- **Is this real, and who else hit it?** It searched Error Tracking for the same exception, found the older fingerprint and its thirteen users, and pulled the raw events to confirm the error was being caught rather than surfaced.
+
+- **Is anyone already fixing it?** It checked open PRs and remote branches for work touching that file. Nothing.
+
+- **Have we already decided this is noise?** It searched its own memory for a previous note dismissing this error. Nothing there either.
+
+- **Which repo?** [posthog/posthog](https://github.com/posthog/posthog), worked out from the stack trace and checked against the repo's actual structure.
+
+- **How much does it matter?** P2, meaning it's not top priority to wake someone up for it, but it should be fixed this sprint.
+
+- **Who should review it?** It identified two relevant team members that could have the most context about this error.
+
+It also flagged the report as safe to start without a human, so two seconds later a second agent picked it up and opened a PR 48 minutes after that.
+
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/Clean_Shot_2026_09_17_at_13_35_56_2x_c47d92b360.png"
+    alt="PR #91413 on GitHub, opened by the agent, with the problem, the change, and the agent context in the description."
+    padding={false}
+    classes="rounded"
+/>
+
+## Timeline
+
+| Time (Pacific) | What happened |
+| --- | --- |
+| **Sun 30 Aug, 13:03** | `KeyError: 'aggregated_value'`. Error is caught. |
+| **13:05** | Report in the inbox. |
+| **13:53** | [PR #91413](https://github.com/PostHog/posthog/pull/91413) opened, fully autonomous. |
+| **13:56** | Automated policy review passes. |
+| **14:35** | ReviewHog, our internal code review tool, finds one thing to fix. |
+| **15:02** | The agent pushes a second commit answering it. |
+| **Mon 31 Aug, 01:11** | <TeamMember name="Georgiy Tarasov" /> approves. |
+| **02:57** | Merge queue merges it. |
+
+## How teams use Error Tracking to put their products on autopilot
+
+That was just one of the bugs we fixed in our own repo. Here's what everyone else is fixing. Sorting them by what the fix actually did, these are the categories that come up most.
+
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/agents_Xerror_tracking_7a7a98910a.png"
+    alt="Bar chart, What teams fix with Error Tracking x Self-driving: noise / ignore rules 25%, null guards 16%, missing retries 11%, hydration / deploys 10%, auth / sessions 9%, permissions 5%, checkout / billing 3%."
+    padding={false}
+    classes="rounded"
+/>
+
+*Source: PostHog Data Warehouse, 16 June to 14 September 2026, customer projects only.*
+
+### Reducing noise
+
+Noise comes from all sides: browser-extension noise, cross-origin "Script error.", dev-server errors reaching production tracking, canceled-request AbortErrors. Self-driving handles these well. The fix is a filter rule, not product code, so the risk is near zero, and the stack trace alone usually shows that every frame belongs to code you don't own.
+
+### Null guards on pages that crash for a handful of users
+
+This could be a dropdown with no menu target, a select passed null, an empty API response the page didn't expect. This is the highest-confidence category for an agent, because the stack trace names the exact line and the fix is almost always a guard with a precedent already in the codebase. It also has a hard prerequisite: ship your source maps. Without them the trace is minified, and neither the agent nor you can find the line.
+
+### Retrying things that should have retried
+
+Examples include object storage deletes, payment provider timeouts, and rate limiter calls that should fail open. These almost never generate support tickets, because the user just refreshes and it works the second time, which means Error Tracking is the only place they exist at all.
+
+### Errors that only show up right after a deploy
+
+Here, reports include React hydration mismatches from clock reads and other non-deterministic values, stale-chunk errors after a deploy, SSR date formatting that disagreed with the client. These are unusually tractable because they spike immediately after a release and then decay, so the timing itself is diagnostic. Tag your releases so an error can be tied to the deploy that caused it; without that, the agent is guessing at which change is responsible.
+
+### Auth and session edge cases
+
+Expired tokens that should have refreshed and retried, a sign-in redirect nesting into a crash loop, canceled Google sign-ins treated as failures. These matter more than their volume suggests, because they don't degrade an experience, they end it. The user is bounced out and gone, with no way to tell you what happened.
+
+### Permission errors surfacing as crashes
+
+A 403 filed as an exception almost always means the frontend had no path for "you're not allowed to see this." That makes it two different bugs wearing the same error: sometimes the permission is genuinely wrong, sometimes the permission is right and the page should have degraded gracefully. Reading the code is what separates them, which is why this one needs more than a stack trace.
+
+### Checkout and billing dead ends
+
+An already-paid email landing on a dead error state, a plans page that threw for users with no organization, valid subscriptions falsely blocked. The smallest category we're seeing right now, but also the one worth pulling to the front of the queue by hand, because a checkout error costs money every time it fires in a way that a broken settings page doesn't.
+
+## Self-driving is yet to be discovered
+
+Self-driving is new to us too, and we're still exploring all its potential. Oftentimes, it's not that dreamy, but it's getting there. Most of what we ship still comes from people, but it does catch bugs nobody was ever going to report, like the one we broke down in this article.
+
+<WizardCTA
+    command="self-driving"
+    title="Turn on self-driving in one command"
+    subtitle="The wizard wires your repo up so PostHog can open the PRs for you."
+    learnMoreTo="/docs/self-driving"
+/>
