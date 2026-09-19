@@ -82,12 +82,18 @@ posthog.init("${process.env.GATSBY_POSTHOG_API_KEY}", {
     error_tracking: {
         __capturePostHogExceptions: true,
     },
-    // Drop exceptions coming from local dev servers so developers' local
-    // exceptions (e.g. Gatsby dev-server ChunkLoadErrors on hot recompiles)
-    // don't pollute production error tracking. Real users are never on localhost.
+    // Drop exceptions that no real visitor can hit, so they don't pollute
+    // production error tracking. Local dev servers (localhost/127.0.0.1) throw
+    // Gatsby ChunkLoadErrors on hot recompiles. A page saved to disk and opened
+    // over file:// boots Gatsby, finds no page-data for the local file path, and
+    // throws; its hostname is empty, so check the protocol too.
     before_send: function (event) {
         var hostname = window.location.hostname
-        if (event && event.event === '$exception' && (hostname === 'localhost' || hostname === '127.0.0.1')) {
+        if (
+            event &&
+            event.event === '$exception' &&
+            (hostname === 'localhost' || hostname === '127.0.0.1' || window.location.protocol === 'file:')
+        ) {
             return null
         }
         return event
