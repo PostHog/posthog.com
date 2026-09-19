@@ -179,7 +179,7 @@ Rendered as `<li><strong>{title}</strong> {description}</li>`. The bullet list i
 - **Stack image frame**: `bg-tan dark:bg-dark` background + `p-4` padding + `border-t border-primary` top border. Each part is independently controllable: `frameless: true` removes bg and border; `framePadding` replaces padding; `containerClassName` adds anything else.
 - **Stack image defaults (img)**: `h-auto border border-secondary rounded-md`. Skipped when `frameless: true` (becomes just `h-auto`). Override via `imgClassName`.
 - **Stack image max-width**: `@2xl/reader-content:max-w-3xl` (left-aligned within its container). Good for landscape screenshots.
-- **Float image position**: floats right at `@2xl/reader-content` with margin offsets that escalate at `@2xl` / `@3xl` / `@4xl/reader-content`. Stacks above prose at narrower sizes.
+- **Float image position**: floats right at `@2xl` with margin offsets that escalate at `@2xl` / `@3xl` / `@4xl` (all measured against the slide's own container, matching the width breakpoints below). Stacks above prose at narrower sizes.
 - **Float image width**: `w-full @2xl:w-[46%] @3xl:w-[48%] @4xl:w-1/2` (percentage of the slide once floated, so the text column doesn't get crushed mid-resize).
 - **Theme-aware image**: when `siteSettings.theme === 'dark'` and `image.srcDark` exists, `srcDark` is used. Otherwise falls through to `src`.
 - **Image alt fallback**: `image.alt` ⟶ `productData.name`.
