@@ -1,0 +1,56 @@
+---
+title: Report and digest best practices
+sidebar: Handbook
+showTitle: true
+---
+
+This is how we recommend producing AI-generated reports and digests across products, drawn from what we've learned on [Replay Vision](/docs/replay-vision), [AI Observability](/docs/ai-observability), and [Self-driving](/docs/self-driving). This applies to anything an agent writes for a human to read on a schedule, like a [scout](/docs/self-driving/scouts) or a [subscription](/docs/product-analytics/subscriptions).
+
+<CalloutBox type="fyi" icon="IconInfo" title="These are generalizations">
+
+This is what has worked well in the past. Build your reports in the way that fits your situation best.
+
+</CalloutBox>
+
+## Best practices
+
+### Keep it skim-able
+- Lead with a TL;DR or a one-line summary
+- Use headers to break up sections
+- Bullets over paragraphs
+- When there's nothing to report, give a quick all-clear instead of forcing information
+
+### Don't repeat yourself
+- Don't restate the same issue day after day
+- Scouts keep a durable memory between runs and dedupe against it, so a report should only mention truly new information
+- If a scout keeps re-raising known noise, dismiss the report with a note saying why instead of updating the prompt. The scout uses the note as memory for later runs
+
+### Structure for depth
+- Keep the main message short and put the detail under headings
+- To reduce channel bloat, start with a high-level message and respond in a thread. Scouts handle this natively with _Post reports as a thread_ in the settings.
+- Attach extra context, especially for an agent, as a linked artifact, like a notebook or report, instead of packing it into the message
+
+### Show your work
+- Link to where the report is configured, so the reader can change the schedule or turn it off without asking
+- Point to the specific entities behind a finding. Cite the insight, issue, or recording ID inline so the reader pivots straight to the source. On scout reports, every evidence entry carries a citable source ID for this reason
+- Say what was analyzed in plain terms: "27 recordings since Aug 21, 2026, 9AM EST"
+
+### Fit the reader's routine
+- Allow for timezone-aware datetime configuration. This lets people fit reports into their daily, weekly, or monthly routine however they like
+- Give control over what's included, not just on or off. For a scout, that means a short instructions body people can edit, and scout notes for one-off steering
+
+### Invite the follow-up
+It can help to add relevant CTAs, for example to:
+- Invite feedback so the scout can learn
+- Let the user continue the conversation with PostHog's Slack bot
+
+## Embedding insights and charts
+
+A report can carry a live chart next to the finding it backs up. Where a finding is about a specific metric that moved, attach the chart that shows it so the reader sees the shape of the problem without rebuilding the query.
+
+**Keeping charts useful**
+- Only add a chart when the finding is visual: a trend, a spike, rising cost
+- One chart per point
+- No charts on a quiet day
+
+This page is for humans. To have an agent review an existing report against these practices and propose fixes, use the [reviewing-reports skill](https://github.com/PostHog/posthog/blob/master/products/signals/skills/reviewing-reports/SKILL.md). For the agent-facing authoring guide, see the [scout patterns cookbook](https://github.com/PostHog/posthog/blob/master/products/signals/skills/authoring-scouts/references/scout-patterns.md).
