@@ -33,6 +33,7 @@ The MCP server exposes the skills store through a dedicated family of tools:
 | `skill-file-get`    | Fetch a single bundled file by path (on demand)                                   |
 | `skill-create`      | Store a new skill, optionally with bundled files                                  |
 | `skill-update`      | Publish a new version – provide full `body`, incremental `edits`, or `file_edits` |
+| `skill-rename`      | Rename a skill – keeps its version history, bundled files, and owners             |
 | `skill-file-create` | Add one bundled file to a skill (publishes a new version)                         |
 | `skill-file-delete` | Remove one bundled file from a skill                                              |
 | `skill-file-rename` | Rename one bundled file (move without rewriting content)                          |
@@ -204,9 +205,9 @@ description: Access and run shared team skills stored in PostHog.
   skills, or references "skills store" or "skill store".
 allowed-tools: mcp__posthog__skill-list, mcp__posthog__skill-get,
   mcp__posthog__skill-file-get, mcp__posthog__skill-create,
-  mcp__posthog__skill-update, mcp__posthog__skill-file-create,
-  mcp__posthog__skill-file-delete, mcp__posthog__skill-file-rename,
-  mcp__posthog__skill-duplicate
+  mcp__posthog__skill-update, mcp__posthog__skill-rename,
+  mcp__posthog__skill-file-create, mcp__posthog__skill-file-delete,
+  mcp__posthog__skill-file-rename, mcp__posthog__skill-duplicate
 ---
 
 # PostHog Skills Store
@@ -316,6 +317,22 @@ Each edit must have:
 Edits are applied sequentially. If `old` matches zero times or more than once, the update fails with an error indicating which edit failed.
 
 You can use either `body` (full replacement) or `edits` (incremental), but not both in the same request.
+
+### Rename a skill
+
+Use `skill-rename` to change the name of a skill. The skill keeps its version history, bundled files, and owners – only the name changes:
+
+```json
+// skill-rename
+{
+  "skill_name": "hog-release-notes",
+  "new_name": "posthog-release-notes"
+}
+```
+
+A rename takes only the two names – it does not accept `base_version`. The name is the slug agents call with `skill-get`, and the directory name in a zip export, so a rename changes both at the same time. Update any bridge skill, `allowed_tools` list, or other skill that refers to the old name.
+
+Two rules apply to the new name: it must be unique in the project, and the `signals-scout-` and `review-hog-` prefixes are reserved for PostHog-managed skills that key their own settings on the skill name.
 
 ### Edit a single bundled file
 
