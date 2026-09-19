@@ -12,20 +12,29 @@ let systemScrollbarsVisible: boolean | null = null
 
 const detectSystemScrollbars = (): boolean => {
     if (systemScrollbarsVisible !== null) return systemScrollbarsVisible
-    if (typeof document === 'undefined') return false
+    if (typeof document === 'undefined' || !document.body) return false
 
+    // This runs in a commit-phase effect and the site has no error boundary, so a throw here blanks
+    // the page. Fall back to overlay scrollbars if any step fails, and cache that so it never retries.
+    let visible = false
     const host = document.createElement('div')
     host.style.cssText = 'position:absolute;top:-9999px;left:-9999px;width:100px;height:100px'
-    document.body.appendChild(host)
 
-    const probe = document.createElement('div')
-    // scrollbar-width/-color inherit across the shadow boundary, so reset them here too.
-    probe.style.cssText = 'width:100px;height:100px;overflow:scroll;scrollbar-width:auto;scrollbar-color:auto'
-    host.attachShadow({ mode: 'open' }).appendChild(probe)
+    try {
+        document.body.appendChild(host)
+        const probe = document.createElement('div')
+        // scrollbar-width/-color inherit across the shadow boundary, so reset them here too.
+        probe.style.cssText = 'width:100px;height:100px;overflow:scroll;scrollbar-width:auto;scrollbar-color:auto'
+        host.attachShadow({ mode: 'open' }).appendChild(probe)
+        visible = probe.offsetWidth - probe.clientWidth > 0
+    } catch {
+        // Scrollbar style is cosmetic, so a failed measurement is not worth a crash.
+    } finally {
+        host.remove()
+    }
 
-    systemScrollbarsVisible = probe.offsetWidth - probe.clientWidth > 0
-    host.remove()
-    return systemScrollbarsVisible
+    systemScrollbarsVisible = visible
+    return visible
 }
 
 interface ScrollAreaProps {
