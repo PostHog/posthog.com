@@ -5,7 +5,7 @@ sidebar: Docs
 showTitle: true
 ---
 
-import { CallToAction } from 'components/CallToAction'
+import { CallToAction } from "components/CallToAction";
 
 <CalloutBox icon="IconFlask" title="Open beta" type="action">
 
@@ -33,6 +33,8 @@ The agent pushes the branch to your remote and opens a pull request:
 ## Reviewing and merging
 
 Your job is to review the code the same way you would any other pull request, then click **Merge** when you're happy with it. If something needs tweaking, you can chat with the implementation agent directly and it'll make the changes you ask for.
+
+You can also leave inline review comments directly on the diff inside PostHog. Click a line number to start a new thread, reply to existing threads, and add reactions – all synced to the pull request on GitHub. This requires connecting your personal GitHub account in [**Settings** > **Personal integrations**](https://app.posthog.com/settings/user-personal-integrations). Comments are posted under your own GitHub identity, so the PR thread stays in one place whether you review in PostHog or on GitHub.
 
 Nothing ships without you. The inbox is where you stay in control of what self-driving does.
 
