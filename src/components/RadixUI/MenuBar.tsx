@@ -33,7 +33,7 @@ export type MenuType = {
 }
 
 const RootClasses = 'flex gap-px py-0.5 h-full'
-const TriggerClasses = `group flex select-none items-center justify-between gap-0.5 rounded px-1.5 py-0.5 text-[13px] leading-none text-primary outline-none data-[highlighted]:bg-accent hover:bg-accent-2 data-[state=open]:bg-accent`
+const TriggerClasses = `group flex select-none items-center justify-between gap-0.5 rounded px-1.5 py-0.5 text-[13px] leading-none text-primary outline-none data-[highlighted]:bg-accent hover:bg-accent-2 data-[state=open]:bg-accent data-[pending]:bg-accent data-[pending]:animate-pulse data-[hydrated=false]:cursor-progress`
 const ItemClasses =
     'hover:bg-accent group relative flex h-[25px] select-none justify-between items-center rounded text-[13px] leading-none text-primary bg-primary outline-none data-[disabled]:pointer-events-none data-[disabled]:text-muted [&>span]:inline-flex [&>span]:w-full'
 const LabelClasses =
@@ -375,6 +375,26 @@ const MenuItem: React.FC<MenuItemProps> = ({
     )
 }
 
+// A click that lands before React hydrates is lost, because the trigger is inert
+// until then. An early script (see static/scripts/theme-init.js) records that
+// click, and we open the menu it asked for as soon as the menu bar goes live.
+// Older clicks are dropped: a menu that opens long after the fact only surprises.
+const PENDING_CLICK_MAX_AGE = 10000
+
+type PendingMenuBarClick = { trigger: HTMLElement; time: number }
+
+const claimPendingClick = (root: HTMLElement | null): number | null => {
+    const win = window as Window & { __pendingMenuBarClick?: PendingMenuBarClick | null; __menuBarHydrated?: boolean }
+    win.__menuBarHydrated = true
+    const pending = win.__pendingMenuBarClick
+    if (!pending || !root?.contains(pending.trigger)) return null
+    win.__pendingMenuBarClick = null
+    pending.trigger.removeAttribute('data-pending')
+    if (Date.now() - pending.time > PENDING_CLICK_MAX_AGE) return null
+    const index = Number(pending.trigger.getAttribute('data-menubar-trigger'))
+    return Number.isNaN(index) ? null : index
+}
+
 export interface MenuBarProps {
     menus: MenuType[]
     className?: string
@@ -386,9 +406,18 @@ const MenuBar: React.FC<MenuBarProps> = ({ menus, className, triggerAsChild, cus
     const { isMobile } = useAppSettings()
 
     const [openMenuIndex, setOpenMenuIndex] = React.useState<number | null>(null)
+    const [isHydrated, setIsHydrated] = React.useState(false)
     const rootRef = React.useRef<HTMLDivElement | null>(null)
     const [portalContainer, setPortalContainer] = React.useState<HTMLElement | null>(null)
     const appContainer: HTMLElement | null = null
+
+    React.useEffect(() => {
+        setIsHydrated(true)
+        const pendingIndex = claimPendingClick(rootRef.current)
+        if (pendingIndex !== null) {
+            setOpenMenuIndex(pendingIndex)
+        }
+    }, [])
 
     React.useEffect(() => {
         if (!rootRef.current) {
@@ -450,6 +479,8 @@ const MenuBar: React.FC<MenuBarProps> = ({ menus, className, triggerAsChild, cus
                     <RadixMenubar.Menu key={menuIndex} value={String(menuIndex)} data-scheme="primary">
                         <RadixMenubar.Trigger
                             asChild={triggerAsChild}
+                            data-menubar-trigger={menuIndex}
+                            data-hydrated={isHydrated}
                             className={`${triggerAsChild ? '' : TriggerClasses} ${
                                 menu.bold ? 'font-bold' : 'font-medium'
                             } ${customTriggerClasses}`}
