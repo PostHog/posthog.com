@@ -60,7 +60,11 @@ keyId    a273d0d3-4d9e-458c-a173-0db8619ca7d7
 
 The Platform API scopes every request to one ad account, so PostHog needs your ad account ID. This is **not** your organization ID, because one organization can hold several ad accounts.
 
-Apple only serves this value from the API. Follow [Apple's OAuth guide](https://developer.apple.com/documentation/apple-ads-platform-api/implementing-oauth-for-the-apple-ads-platform-api) to sign a client secret with `private-key.pem` and exchange it for an access token, then call the [Get User ACL](https://developer.apple.com/documentation/apple-ads-platform-api/get-user-acls) endpoint:
+Apple does not show the ad account ID in its web UI, so it comes either from the PostHog connect form or from Apple's ACL endpoint.
+
+The quickest path is to let PostHog look it up. In the connect form, leave **Ad account ID** blank and connect. PostHog stops and shows the ad account IDs your credentials can read. This stop is the expected result of the first connect, not a credential failure. Enter one of the IDs in **Ad account ID** and connect again.
+
+If you would rather look it up yourself, follow [Apple's OAuth guide](https://developer.apple.com/documentation/apple-ads-platform-api/implementing-oauth-for-the-apple-ads-platform-api) to sign a client secret with `private-key.pem` and exchange it for an access token, then call the [Get User ACL](https://developer.apple.com/documentation/apple-ads-platform-api/get-user-acls) endpoint:
 
 ```bash
 curl -H "Authorization: Bearer $ACCESS_TOKEN" https://api.ads.apple.com/v1/acls
