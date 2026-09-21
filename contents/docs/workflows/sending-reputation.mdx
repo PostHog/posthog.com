@@ -84,3 +84,41 @@ Yes. The allowance counts every email a workflow sends, regardless of message ca
 ### Does the allowance apply to SMS, push, or webhooks?
 
 No. Only email touches the shared sending reputation, so only email steps and batch sends with an email step are capped.
+
+### How do I keep my bounce and complaint rates low?
+
+A bounce means the address does not exist or refuses mail. A complaint means a real person got your email and marked it as spam. Both come down to who you send to and what you send.
+
+**Send only to people who asked.** Every address on your list should come from a signup, a purchase, or an explicit opt-in in your product. Do not import a purchased, scraped, or "partner" list. Those lists are the fastest way to a demotion, because they hold dead addresses that bounce and strangers who report spam.
+
+**Trust the suppression list.** PostHog adds an address to the [suppression list](/docs/workflows/opt-outs#the-suppression-list) after it hard-bounces. Leave it there. Removing an entry to retry a bounced address only bounces again and counts twice.
+
+**Make unsubscribing easy.** Put `{{unsubscribe_url}}` in every marketing email, in the footer where people expect it. A visible unsubscribe link is the difference between someone leaving your list and someone clicking "Report spam". Both remove them, but only one hurts your reputation. The [email merge tags](/docs/workflows/library#email-merge-tags) explain the one-click variant, which mailbox providers use for their own unsubscribe button.
+
+**Send from a domain you set up properly.** Verify the domain on the [Channels tab](/docs/workflows/configure-channels) so SPF and DKIM pass, and add a DMARC record. Use a real sender name people recognize, and the same from-address every time. A changing sender or a generic "noreply" address gets more complaints.
+
+**Match the subject to the content.** A subject line that promises one thing and delivers another is the most common reason a real customer reports an email. Skip all caps, bare exclamation marks, and "RE:" on emails that are not replies. Write the way you would to one person.
+
+**Send steadily, not in bursts.** A weekly digest to an active list builds reputation. A one-off blast to a list that has not heard from you in six months burns it, because the addresses have gone stale and the recipients have forgotten who you are. If you must re-engage a dormant list, send to the most recently active users first and watch the rates on the Reputation tab before you continue.
+
+**Prune addresses that never engage.** Someone who has not opened or clicked anything in a year is unlikely to start, and mailbox providers read a long run of ignored mail as a signal against you. Use a [cohort](/docs/data/cohorts) of engaged users as the audience instead of "everyone".
+
+Here is what this looks like in practice.
+
+<CalloutBox icon="IconWarning" title="Likely to bounce or get reported" type="caution">
+
+Subject: `🔥🔥 LAST CHANCE!!! Your account will be DELETED`
+
+Sent from `noreply@mail-blast-3.example.com` to every address ever entered into a signup form, including the ones that bounced last quarter. No unsubscribe link, one image with all the text inside it, and a link shortener in front of every URL.
+
+</CalloutBox>
+
+<CalloutBox icon="IconInfo" title="Likely to land in the inbox" type="fyi">
+
+Subject: `Your weekly usage summary for Example App`
+
+Sent from `Jamie at Example App <jamie@example.com>` to users who signed up and have logged in within the last 90 days. Plain text with one clear link to the dashboard, a short line explaining why they got the email, and `{{unsubscribe_url}}` in the footer.
+
+</CalloutBox>
+
+Before a large send, use a [test send](/docs/workflows/library#testing-templates) to your own address and to a personal account on a big mailbox provider. If it lands in spam for you, it will for your users too. After the send, check the Reputation tab the next day. Complaint feedback lags by hours, so the rates for a send are only complete after that.
