@@ -1217,7 +1217,7 @@ export const handbookSidebar = [
             },
             {
                 name: 'Finance',
-                url: '/teams/finance',
+                url: '/handbook/people/finance',
             },
             {
                 name: 'Talent',
