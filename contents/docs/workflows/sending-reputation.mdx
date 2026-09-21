@@ -61,7 +61,6 @@ A project moves up one tier per review. Sending a large volume once does not ski
 A project moves down one tier when any of the following happens over the last 7 days.
 
 - Its bounce rate or spam complaint rate goes over the thresholds above.
-- PostHog auto-pauses one of its workflows for reputation problems.
 - The sending provider reports a high reputation impact for the project.
 
 After such a demotion, PostHog waits 7 days before it demotes the project again for the same kind of reason. One incident costs one tier, not the whole ladder. The project can move up again once its 30-day rates are clean and it meets the other promotion conditions.
