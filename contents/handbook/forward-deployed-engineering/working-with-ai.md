@@ -68,7 +68,7 @@ At FDE, our work [compounds](/handbook/forward-deployed-engineering/how-we-work#
 
 Trusted records unlock new work. In a recent experiment, we used validated schemas and tagged blocks in our records to generate deterministic reports for stakeholders: no tokens, no hallucinations.
 
-So make trust cheap to check. If someone has to retrace your investigation to trust a claim, you're making them do your work. When you make a claim, link data to queries, code to exact lines, and behavior to tests.
+So make your work visible and cheap to check. Someone should be able to use, review, or challenge it without retracing your investigation. When you make a claim, link data to queries, code to exact lines, and behavior to tests. That's how AI-generated output becomes something we can trust and learn from.
 
 ### Know your audience
 
