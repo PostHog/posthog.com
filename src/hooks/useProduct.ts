@@ -643,6 +643,11 @@ export default function useProduct({ handle }: { handle?: string } = {}) {
             Icon: IconMagicWand,
             color: 'purple',
             colorSecondary: 'lilac',
+            seo: {
+                title: 'Business intelligence - PostHog',
+                description:
+                    'Query your data warehouse with SQL, visualize external data sources, and build dashboards that combine product and business data.',
+            },
             overview: {
                 title: 'Business intelligence for data-driven teams',
                 description:

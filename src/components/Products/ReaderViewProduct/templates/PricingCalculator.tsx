@@ -248,7 +248,12 @@ const ProductRateBlock = ({
 }
 
 const PricingCalculator = ({ id, productData }: SectionComponentProps) => {
-    const billingHandle = productData?.sharesFreeTier || productData?.handle
+    // `useProduct` resolves `sharesFreeTier` from a handle string into the full
+    // product object, so read the handle back off it. Accept both shapes – callers
+    // that pass raw productData still hand us the string.
+    const sharesFreeTier = productData?.sharesFreeTier
+    const billingHandle =
+        (typeof sharesFreeTier === 'string' ? sharesFreeTier : sharesFreeTier?.handle) || productData?.handle
     const productHook = useProduct({ handle: billingHandle })
     const billing = productHook?.billingData
 
@@ -291,7 +296,16 @@ const PricingCalculator = ({ id, productData }: SectionComponentProps) => {
             {/* Main product */}
             {mainTiers.length > 0 && (
                 <ProductRateBlock
-                    name={activeProduct.label || activeProduct.name || productData.label || productData.name}
+                    name={
+                        // `categoryName` is the shared-product name ("Logs & Tracing"), the same
+                        // rule PricingAccordion uses. It matters when a product shares another's
+                        // meter – /tracing/pricing bills on the logs product and should say so.
+                        activeProduct.categoryName ||
+                        activeProduct.label ||
+                        activeProduct.name ||
+                        productData.label ||
+                        productData.name
+                    }
                     description={activeProduct.pricingDescription || productData?.pricingDescription}
                     billingTiers={mainTiers}
                     sliderConfig={

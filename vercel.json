@@ -2898,7 +2898,7 @@
         },
         {
             "source": "/manual/sso",
-            "destination": "/docs/settings/sso"
+            "destination": "/docs/settings/authentication/sso"
         },
         {
             "source": "/manual/support",
@@ -4214,6 +4214,10 @@
             "destination": "/founders/writing-for-developers"
         },
         {
+            "source": "/newsletter/if-ai-writes-all-the-code-whats-left",
+            "destination": "/newsletter/when-ai-writes-all-code"
+        },
+        {
             "source": "/blog/build-features-users-love",
             "destination": "/newsletter/build-features-users-love"
         },
@@ -5011,7 +5015,7 @@
         },
         {
             "source": "/docs/data/sso:ext(\\.md)?",
-            "destination": "/docs/settings/sso:ext?"
+            "destination": "/docs/settings/authentication/sso:ext?"
         },
         {
             "source": "/docs/ab-testing:ext(\\.md)?",
@@ -6399,6 +6403,19 @@
             "source": "/contact-us",
             "destination": "/talk-to-a-human",
             "statusCode": 301
+        },
+        {
+            "source": "/traces",
+            "destination": "/tracing",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/settings/sso:ext(\\.md)?",
+            "destination": "/docs/settings/authentication/sso:ext?"
+        },
+        {
+            "source": "/docs/settings/id-jag:ext(\\.md)?",
+            "destination": "/docs/settings/authentication/id-jag:ext?"
         }
     ]
 }
