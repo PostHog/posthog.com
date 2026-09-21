@@ -88,6 +88,8 @@ README sessions are an opportunity for you to help others understand more about 
 
 It's OK to ask short, clarifying questions when someone has finished, but sessions shouldn't become Q&As. 
 
+If you've written a [README on your community profile](/handbook/community/profiles#team-member-readmes), it's a good starting point for your session, and a good place to write down what you share so the rest of the team can find it later.
+
 ## Team surveys
 
 We run team surveys every 6 months using the _Pulse Surveys by Deel_ Slack app. These are set up to run automatically, including reminder messages in Slack, so you don't need to chase people manually. Charles and Coua have admin access to the surveys in Slack. 
