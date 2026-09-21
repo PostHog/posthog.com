@@ -17,11 +17,15 @@ export default function UserPaths() {
         return <div>Product not found</div>
     }
 
-    const { name, overview, features, Icon, color, screenshots } = userPathsProduct
+    const { name, overview, features, Icon, color, screenshots, seo } = userPathsProduct
 
     return (
         <>
-            <SEO title={overview?.title} description={overview?.description} image="/images/og/default.png" />
+            <SEO
+                title={seo?.title || `${name} - PostHog`}
+                description={seo?.description || overview?.description}
+                image="/images/og/default.png"
+            />
             <ReaderView leftSidebar={<LeftSidebarContent />} title={name} hideTitle>
                 <div className="space-y-8">
                     <div>
