@@ -13,6 +13,8 @@ import {
     generatePricingMd,
     generatePlatformMd,
     generateProductPagesMarkdown,
+    generateTeamsFiles,
+    generateHandbookJsonTwins,
 } from './rawMarkdownUtils'
 import { MARKDOWN_CONTENT_PATHS } from '../src/constants'
 import { SdkReferenceData } from '../src/templates/sdk/SdkReference.js'
@@ -142,6 +144,26 @@ const generateMarkdownArtifacts = async (graphql: any) => {
     // Generate the self-driving platform overview + per-product markdown for LLMs/agents
     generatePlatformMd()
     generateProductPagesMarkdown()
+
+    // Generate /teams.md + /teams.json. The query and filter must stay equal to src/pages/teams/index.tsx
+    // so the machine-readable list equals what the page shows.
+    const teamsQuery = (await graphql(`
+        query {
+            allSqueakTeam(filter: { name: { ne: "Hedgehogs" }, crest: { publicId: { ne: null } } }) {
+                nodes {
+                    name
+                    slug
+                    tagline
+                }
+            }
+        }
+    `)) as { data: { allSqueakTeam: { nodes: Array<{ name: string; slug: string; tagline?: string | null }> } } }
+    generateTeamsFiles(teamsQuery.data.allSqueakTeam.nodes)
+
+    // JSON twins of feature ownership, support SME groups, and severity levels.
+    // Not in a try/catch: a page edit that empties the SME groups or the severity levels must fail the build.
+    // The feature ownership twin handles its own error, see generateHandbookJsonTwins.
+    generateHandbookJsonTwins()
 
     // Generate changelog.md (+ per-year archives) from build-time Roadmap nodes for LLMs/agents.
     // The /changelog page renders a virtualized UI, so the HTML-scrape path can't cover it.
