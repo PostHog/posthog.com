@@ -4214,6 +4214,10 @@
             "destination": "/founders/writing-for-developers"
         },
         {
+            "source": "/newsletter/if-ai-writes-all-the-code-whats-left",
+            "destination": "/newsletter/when-ai-writes-all-code"
+        },
+        {
             "source": "/blog/build-features-users-love",
             "destination": "/newsletter/build-features-users-love"
         },
