@@ -5,7 +5,7 @@ showTitle: true
 ---
 
 [Full deck for sales training](https://docs.google.com/presentation/d/1CnXlVhrxDJ146p6PzNNt94RmYjR1Jr7V6Vsg1g-aIMk/edit?usp=sharing)
-[Recorded sales training session]()
+[Recorded sales training session]
 
 ## Why do companies need data tools?
 
@@ -49,12 +49,12 @@ Product data usually lives in a completely separate world from business data.
 | Step | Traditional tool |
 |------|------------------|
 | 1. Sources | Sources are your own, no one to replace. |
-| 2. Ingestion | Fivetran |
-| 3. Storage | Snowflake |
-| 4. Modeling | dbt |
-| 5. Orchestration | Airflow |
-| 6. BI | Looker |
-| 7. Activation | Hightouch |
+| 2. Ingestion | Fivetran, Airbyte, Portable |
+| 3. Storage | Snowflake, Redshift, BigQuery, Databricks |
+| 4. Modeling | dbt, sqlmesh |
+| 5. Orchestration | Airflow, Dagster |
+| 6. BI | Looker, Hex, Tableau, Metabase |
+| 7. Activation | Hightouch Segment, RudderStack|
 
 > Product analytics is usually your biggest data source so most of your data is already in PostHog, if customers use our full stack you don't have to export that data anywhere.
 
