@@ -1836,6 +1836,16 @@ export const handbookSidebar = [
                         name: 'Chrome extension billing case study',
                         url: '/handbook/onboarding/chrome-extension-billing-case-study-wildfire',
                     },
+                    {
+                        name: 'Context warehouse enablement',
+                        url: '',
+                        children: [
+                            {
+                                name: 'Data foundations',
+                                url: '/handbook/growth/sales/data-foundations',
+                            },
+                        ],
+                    },
                 ],
             },
             {
