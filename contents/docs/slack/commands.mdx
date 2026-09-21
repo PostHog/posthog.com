@@ -18,13 +18,11 @@ You mention `@PostHog` to start a task. Everything else – routing rules, proje
 
 Bare `/posthog` shows the command list too.
 
-A slash command answers only you, so you can reconfigure the bot without posting a message the whole channel reads. It also reads the same in a channel and in a DM, so there is one spelling to remember.
+A slash command answers only you, so you can reconfigure the bot without posting a message the whole channel reads. It reads the same in a channel and in a DM too.
 
-Mentioning the bot with a command doesn't run it. `@PostHog project 42` replies with the `/posthog` spelling instead, so a command can't turn into a coding task about its own syntax.
+Mentioning the bot with a command doesn't run it. For example, `@PostHog project 42` just gets `/posthog` back, so it can't become a coding task about its own syntax.
 
-Every setting here is also in the [App Home tab](/docs/slack#the-app-home-tab), which is usually the faster way to change a default. See [Pick a project](/docs/slack/setup#pick-a-project).
-
-For repo selection, the bot checks routing rules first. If nothing matches and you have multiple repos, it opens the in-thread picker. If you only have one repo connected, the task runs against it directly. The `project` commands only matter if your Slack workspace is connected to multiple PostHog projects.
+The `project` commands only matter if your Slack workspace is connected to multiple PostHog projects. The [App Home tab](/docs/slack#the-app-home-tab) has the same project settings as a dropdown, which saves you looking up an id. Use whichever is closer to hand: the tab if you're already in it, a slash command if you're in the conversation. Routing rules are commands only. See [Pick a project](/docs/slack/setup#pick-a-project).
 
 ## Routing rules
 
@@ -35,9 +33,13 @@ Routing rules let you map a mention's content to a specific repo so the agent do
 /posthog rules add "billing changes" posthog/billing
 ```
 
-The repo goes inline. A slash command has no thread to open a repo picker in, so a rule without one is refused with a reminder of the full spelling.
+Type the repo into the rule itself, as both examples do. A slash command has nowhere to post a repo picker, so `/posthog rules add "frontend bug"` on its own is refused with a reminder to add `org/repo`.
 
 When several rules match, the first one in `rules list` wins. Use `/posthog rules remove 1,2` to drop rules you no longer want. The numbers correspond to the positions printed by `rules list`.
+
+### How the agent picks a repo
+
+When you mention `@PostHog`, it reads your routing rules first. A rule that matches sends the task straight to its repo. If no rule matches and you have several repos connected, the bot opens a picker in the thread. If you have only one, it uses that one.
 
 ## Limitations
 
