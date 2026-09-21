@@ -84,7 +84,7 @@ The `campaigns`, `ad_groups`, `keywords`, and `acls` tables use full refresh, be
 
 The three reporting tables sync incrementally by `date`. Each run re-reads a trailing window of recent days, because Apple restates recent reporting as attribution settles. Rows are merged away by primary key, so restatements replace earlier values instead of duplicating them.
 
-Apple serves daily reporting for the **last 90 days only**. PostHog starts a couple of days inside that boundary, because Apple applies it in the ad account's own reporting time zone. If you set a report start date older than the window, PostHog starts from the oldest day Apple still serves rather than failing the sync. To build a longer history, connect the source and let it sync regularly — PostHog keeps the rows it has already imported after they age out of Apple's window.
+Apple serves daily reporting for the **last 90 days only**. PostHog starts a couple of days inside that boundary, because Apple applies it in the ad account's own reporting time zone. If you set a report start date older than the window, PostHog starts from the oldest day Apple still serves rather than failing the sync. To build a longer history, connect the source and let it sync regularly – PostHog keeps the rows it has already imported after they age out of Apple's window.
 
 ## Configuration
 
