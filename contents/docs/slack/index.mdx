@@ -86,9 +86,11 @@ Ratings from Slack sit beside the ones from PostHog AI in the app and from PostH
 
 You don't need a channel to talk to the bot – open a DM with **PostHog** and message it directly. Everything that works in a channel mention works in a DM: data questions, coding tasks, follow-ups, and attachments. It's a good place for quick tasks (or embarrassing questions) you'd rather not spam a channel with.
 
-The DM opens as a Slack AI assistant panel, with a short greeting and a few suggested prompts to start from. You never mention the bot in a DM – just type. The bot also carries the channel you were reading when you opened the panel. That makes "look into this" land in that channel's context rather than in nothing.
+A new DM opens as a Slack AI assistant panel, with a short greeting and a few suggested prompts to start from. You don't need to mention `@PostHog` in a DM – just type.
 
-The bot introduces itself by DM twice: once to whoever installs it, and once to each new teammate who joins your Slack workspace.
+The bot also carries the channel you were reading when you opened the panel. That means you can say "look into this" without naming what "this" is – the bot reads the channel you came from and works out what you're pointing at.
+
+The bot introduces itself by DM: once to whoever installs it, and once to each new teammate who joins your Slack workspace.
 
 Group DMs work too – start one with the bot and your teammates as members. What you can't do is mention the bot in an existing DM it isn't part of: it can't see or join those conversations.
 
@@ -106,7 +108,7 @@ Any model available in [PostHog Desktop](/desktop) works, and you can request a 
 
 A model named as the subject of the work doesn't switch anything. "Add Fable to the model picker" is a task about Fable, not a request to run on it.
 
-To change the model for everything you run, set your default in the [App Home tab](#the-app-home-tab) under **AI model**. You can also set it in PostHog under **Settings → Environment → Task agents**. They are the same setting: the Home tab edits your PostHog task agent default, which applies to Slack, the task composer, and PostHog Desktop alike. Project admins set a project-wide default in the same place.
+To change the model for everything you run, set your default in the [App Home tab](#the-app-home-tab) under **AI model**. You can also set it in PostHog Web under **Settings → Environment → Task agents**. They are the same setting: the Home tab edits your PostHog task agent default, which applies to Slack, the task composer, and PostHog Desktop alike. Project admins set a project-wide default in the same place.
 
 The precedence is: model named in the message → your PostHog default → the project default → **Claude Opus 5**.
 
