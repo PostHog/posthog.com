@@ -5,6 +5,7 @@ import * as Icons from '@posthog/icons'
 import { Logo } from '@posthog/brand/logo'
 import { APP_COUNT } from 'constants/index'
 import SearchableProductMenu from './SearchableProductMenu'
+import { docsMenuItems } from '../../TaskBarMenu/menuData'
 import {
     categoryOrder,
     categoryDisplayNames,
@@ -251,9 +252,9 @@ export function useMenuData(): MenuType[] {
         },
         {
             trigger: 'Docs',
-            link: '/docs',
-            items: [],
-            hideChevron: true,
+            // The docs tree is too deep to browse inside a hamburger; mobile goes to the homepage instead
+            mobileLink: '/docs',
+            items: docsMenuItems,
         },
         {
             trigger: 'Community',
