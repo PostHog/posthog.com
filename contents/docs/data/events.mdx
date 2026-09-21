@@ -12,7 +12,7 @@ An event is the core unit of data in PostHog. It represents an interaction a use
 
 Events consist of:
 
-1. An `event` name like `$pageview` or `query completed`. Events starting with `$` are PostHog defaults.
+1. An `event` name like `$pageview` or `query completed`. Events starting with `$` are PostHog defaults. Events starting with `$ai_` are [AI Observability events](/docs/ai-observability/basics), which are stored and billed differently.
 
 2. A `distinct_id` which is a unique identifier for [person](/docs/data/persons), commonly a `uuidv7` value like `018daf23-89b3-7cf8-a4f1-94064c96df90`
 

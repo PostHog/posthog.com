@@ -30,7 +30,7 @@ Every event name that starts with `$ai_` is an AI Observability event. This incl
 PostHog processes every `$ai_` event as an AI Observability event rather than a Product Analytics event:
 
 - It doesn't create or update a person profile. `$set` and `$set_once` on the event are ignored.
-- The full event, including large properties like `$ai_input` and `$ai_output`, is stored in the `ai_events` table for 30 days. A copy without those properties goes to the `events` table. See [data retention](/docs/ai-observability/data-retention).
+- The full event, including large properties like `$ai_input` and `$ai_output`, is kept for 30 days. After that, only a copy without those properties remains. See [data retention](/docs/ai-observability/data-retention).
 - It's billed as an AI Observability event, not as a Product Analytics event.
 
 Don't use the `$ai_` prefix for events that need person profiles or Product Analytics pricing.
