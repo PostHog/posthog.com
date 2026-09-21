@@ -11,7 +11,7 @@ Some accounts have both a CSM and a TAM. The point is depth: two people sharing 
 Both of you are expected to have a relationship with the customer, be in the Slack channel and know what's going on. The difference is _focus_, not ownership. The customer shouldn't have to work out who to contact: they message either of you, and we sort it out internally.
 
 The structure outlined on this page should be treated as a guideline & should be tweaked as needed for different accounts:
-- A strategic account (our [Top 40](/handbook/growth/sales/account-allocation#top-40-account-management) are the clearest example) with several teams and a renewal coming needs the structure.
+- A strategic account (our [Top 40](/handbook/growth/sales/account-allocation#top-40-account-management) are the clearest example) with several teams and a renewal coming needs more structure.
 - A smaller account earlier on in their trajectory with us & with fewer users probably doesn't.
 
 ## **What each role focuses on**
