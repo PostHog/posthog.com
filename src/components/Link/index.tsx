@@ -35,17 +35,6 @@ const createStandardMenuItems = (url: string, state?: any, isExternal = false): 
             type: 'item',
             disabled: isExternal,
             children: isExternal ? (
-                <span>Open in new PostHog window</span>
-            ) : (
-                <Link to={url} state={{ ...state, newWindow: true }} contextMenu={false}>
-                    Open in new PostHog window
-                </Link>
-            ),
-        },
-        {
-            type: 'item',
-            disabled: isExternal,
-            children: isExternal ? (
                 <span>Open in side by side view</span>
             ) : (
                 <Link to={url} state={{ ...state, newWindow: true, sideBySide: 'right' }} contextMenu={false}>

@@ -82,7 +82,7 @@ PostHog is a powerful tool for user segmentation because you can explore segment
 
 ## Further reading
 
-- [How to achieve B2B product market fit](/blog/product-market-fit-game): How to approach finding market fit for a B2B product
+- [How to achieve B2B product market fit](/founders/product-market-fit-game): How to approach finding market fit for a B2B product
 
 - [What is user segmentation?](/blog/how-to-do-user-segmentation): A quick guide to use segmentation and how to apply if to your business
 

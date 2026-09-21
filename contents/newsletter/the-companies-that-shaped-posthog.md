@@ -137,7 +137,7 @@ We also work hard to build a unique brand with [our design](/blog/posthog-as-a-d
 
 Ramp has been one of the fastest-growing companies of the last 5 years. To help make that happen, their growth team experimented a lot. This post lays out the principles of their growth team.
 
-**[PostHog's recommended reading for startup teams](/founders/recommended-reading) – Joe Martin**
+**[PostHog's recommended reading for startup teams](/founders/recommended-reading) – Joe Black**
 
 Looking for some holiday reads? Check out the best books our team recommends on topics like design, VC, management, and product development.
 
