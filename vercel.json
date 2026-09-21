@@ -1003,6 +1003,10 @@
             "destination": "/teams/self-driving"
         },
         {
+            "source": "/tutorials/multiple-environments",
+            "destination": "/docs/settings/projects"
+        },
+        {
             "source": "/tutorials/nps-survey",
             "destination": "/templates/nps-survey"
         },
