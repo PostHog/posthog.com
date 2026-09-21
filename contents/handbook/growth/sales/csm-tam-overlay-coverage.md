@@ -14,11 +14,11 @@ The structure outlined on this page should be treated as a guideline & should be
 - A strategic account (our [Top 40](/handbook/growth/sales/account-allocation#top-40-account-management) are the clearest example) with several teams and a renewal coming needs more structure.
 - A smaller account earlier on in their trajectory with us & with fewer users probably doesn't.
 
-## **What each role focuses on**
+## **What each role focuses on for overlay accounts**
 
 ### tl;dr
- - TAM leads commercial conversations (product adoption, renewals, expansion, etc.)
- - CSM leads technical conversations (efficient implementation, product training, support escalation)
+ - TAM leads commercial conversations (adoption of new products, breaking into new teams, renewals, expansion, etc.)
+ - CSM leads technical conversations (efficient implementation, existing product adoption, product training, support escalation, etc.)
  - Meet regularly (1-2x/month) to agree where each of you is focused and what's next, with a shared account plan documented
  - These roles aren't exclusive. CSMs should be able to speak to product adoption, TAMs to efficient implementation
 
@@ -27,7 +27,7 @@ The structure outlined on this page should be treated as a guideline & should be
 - Operational health and [health score](/handbook/cs-and-onboarding/health-tracking) monitoring
 - Support escalation and follow-through
 - Credit usage optimization
-- Onboarding, training, getting new users set up
+- Onboarding, getting new users set up, training and adoption of products they already have
 - Day-to-day responsiveness
 - Health of the technical implementation
 - Surface cross-sell signals from product usage and conversations to TAM
@@ -37,7 +37,7 @@ The structure outlined on this page should be treated as a guideline & should be
 - Cross-sell strategy and execution
 - Credit discount negotiation and deal structuring for new credit purchases, invoicing
 - Use case discovery, mapping products to problems
-- Multi-threading into new teams and stakeholders
+- Multi-threading into new teams/stakeholders, building relationships with their senior leaders and managers
 - Account planning (updated regularly in Customer Analytics)
 - Stakeholder management
 
@@ -155,6 +155,7 @@ As a TAM, come at it through [use-case selling](/handbook/growth/use-case-sellin
 - Which use cases are they running today, and how deep are they?
 - Do they have gaps that can be closed by a product they aren't using yet?
 - Which adjacent use cases does the wider org care about, and who owns them?
+- Who are the senior leaders or managers in those teams, and which of them do you need a relationship with?
 
 Cross-reference what you find against recent Slack threads and Customer Analytics notes. You want a current read on the account that your counterpart can sense-check.
 
