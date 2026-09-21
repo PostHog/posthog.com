@@ -83,22 +83,22 @@ A single Slack workspace can be connected to more than one PostHog project. When
 
 > This Slack workspace is connected to multiple PostHog projects:
 >
-> 1. Acme · Production (id `42`)
-> 2. Acme · Staging (id `7`)
+> • `42` — Acme · Production
+> • `7` — Acme · Staging
 >
-> Use `@PostHog project <id>` to pick one – that also saves it as your default.
+> Pick one on the app's Home tab, or set your default with `/posthog project <id>`.
 
-Pick a project once and the bot remembers it for you across channels and threads in this workspace.
+Pick a project once and the bot remembers it for you across channels and threads in this workspace. The Home tab has a dropdown under **Project routing**. The commands do the same thing from wherever you are:
 
 | Command                           | What it does                                                                                   |
 | --------------------------------- | ---------------------------------------------------------------------------------------------- |
-| `@PostHog project`                | Show which PostHog project your mentions route to in this workspace, and list the alternatives |
-| `@PostHog project <id>`           | Set the PostHog project your mentions route to in this workspace                               |
-| `@PostHog project workspace <id>` | Set the workspace-wide default project (Slack admins/owners only)                              |
+| `/posthog project`                | Show which PostHog project your mentions route to in this workspace, and list the alternatives |
+| `/posthog project <id>`           | Set the PostHog project your mentions route to in this workspace                               |
+| `/posthog project workspace <id>` | Set the workspace-wide default project (Slack admins/owners only)                              |
 
-The same commands are available as the `/posthog` slash command (e.g. `/posthog project <id>`). Unlike an @-mention, a slash command is visible only to you, so you can change your routing without posting a message everyone in the channel sees. In a DM you drop the mention entirely: `project <id>`. You can also manage your personal default and the workspace default from the App Home tab under **Project routing**.
+A slash command is visible only to you, so you can change your routing without posting a message everyone in the channel sees. It reads the same in a DM.
 
-The bot resolves a target with this precedence: thread context (continuing an existing task) → your personal default → workspace-wide default (set with `@PostHog project workspace <id>` by a Slack admin) → the only connected project → picker. Personal defaults always win over the workspace fallback, so each teammate can route their own mentions independently.
+The bot resolves a target with this precedence: [the project your message names](/docs/slack#pick-a-project) → thread context (continuing an existing task) → your personal default → workspace-wide default (set by a Slack admin) → the only connected project → the list above. Personal defaults always win over the workspace fallback, so each teammate can route their own mentions independently.
 
 If your workspace is only connected to a single PostHog project, you can skip this step – the bot routes there automatically.
 
