@@ -1,0 +1,81 @@
+---
+title: Sending reputation and allowance
+sidebar: Docs
+showTitle: true
+---
+
+Every project sends workflow email through PostHog's shared sending infrastructure. Mailbox providers judge that infrastructure on the bounce and spam complaint rates of everything it sends, so one project with a bad list can hurt deliverability for everyone. PostHog protects against this in two ways, and both are visible on the **Reputation** tab under **Workflows** in [PostHog](https://app.posthog.com/workflows/reputation).
+
+- **Sending health** shows your project's bounce rate, spam complaint rate, and emails sent over the last 30 days, with a per-workflow breakdown.
+- **Sending allowance** caps how much email your project can send in an hour and a day, and how large a single batch audience can be. The allowance starts small and grows as your project keeps a clean sending record.
+
+## Sending health
+
+The health card reports three rates over a trailing 30-day window:
+
+| Rate | What it measures | Threshold |
+| --- | --- | --- |
+| Bounce rate | Hard bounces divided by emails sent | Stay under 2% |
+| Spam complaint rate | Spam complaints divided by emails sent | Stay under 0.1% |
+| Emails sent | Workflow emails sent in the window | |
+
+The thresholds are the same ones mailbox providers use. A project above either threshold cannot move up a tier, and can be moved down. See [opt-outs and suppression](/docs/workflows/opt-outs) for how PostHog keeps hard-bounced addresses off your lists, and the [troubleshooting guide](/docs/workflows/troubleshooting#debugging-email-delivery-failures) for finding the invocations behind a bounce or complaint.
+
+## Sending allowance tiers
+
+Each project holds a **tier** from 0 to 7. The tier sets three caps:
+
+| Tier | Emails per hour | Emails per day | Largest batch audience |
+| --- | --- | --- | --- |
+| 0 | 50 | 100 | 100 |
+| 1 | 200 | 1,000 | 1,000 |
+| 2 | 600 | 3,000 | 3,000 |
+| 3 | 2,000 | 10,000 | 10,000 |
+| 4 | 6,000 | 30,000 | 30,000 |
+| 5 | 20,000 | 100,000 | 100,000 |
+| 6 | 60,000 | 300,000 | 300,000 |
+| 7 | 200,000 | 1,000,000 | 1,000,000 |
+
+Every new project starts at tier 0. Tier 0 is a probation tier for domains that have not sent anything yet, which is why its caps are much lower than the step to tier 1.
+
+Emails above the hourly or daily cap are **not dropped**. They wait and are sent once the allowance frees up. A batch send with an audience larger than the tier allows cannot be launched. The trigger button shows the current limit, so add filters to narrow the audience or wait for the next tier. This cap only applies to workflows with an email step.
+
+## How a project moves up a tier
+
+PostHog reviews every project's tier once a day. A project moves up one tier when all of the following are true:
+
+1. **It has held its current tier long enough.** The minimum stay is 3 days at tiers 0 to 2, 5 days at tiers 3 and 4, and 7 days from tier 5 upwards. A full climb from tier 0 to tier 7 takes about five weeks, which matches the warmup period mailbox providers expect for a new sender.
+2. **It has used the tier.** On at least 2 separate days since reaching the tier, the project sent at least half of its daily cap. A project that sends nothing proves nothing, so an unused tier does not earn the next one.
+3. **Its rates are clean over the last 30 days.** The bounce rate is under 2% and the spam complaint rate is under 0.1%. Rates are only judged once there is enough volume to measure them: at least 200 sends for the bounce rate and 1,000 sends for the complaint rate. Below those volumes, 3 or more complaints still count against the project.
+4. **The sending provider reports no reputation problem** for the project.
+
+Projects move up one tier at a time, so you cannot skip a tier by sending a large volume once.
+
+## How a project moves down a tier
+
+A project moves down one tier when, over the last 7 days, any of the following happen:
+
+- Its bounce rate or spam complaint rate goes over the thresholds above.
+- A workflow is automatically paused for reputation problems.
+- The sending provider reports a high reputation impact for the project.
+
+After a demotion for one of these reasons, the project is not demoted again for 7 days, so a single incident costs one tier rather than a slide to the bottom. The project can move up again once the 30-day rates are clean and it meets the other promotion conditions.
+
+Two other events change a tier:
+
+- **Inactivity.** A project above tier 0 that sends nothing for 30 days drops one tier every 30 days. Mailbox providers keep about a month of reputation history, so a dormant allowance is no longer earned.
+- **Sending suspended.** If email sending is suspended for the project, either by PostHog staff or by the sending provider, the project returns to tier 0 and starts again from there once sending is re-enabled.
+
+## Frequently asked questions
+
+### Can I request a higher tier?
+
+Tiers are earned by sending, and the daily review is the same for every project. If you have a verified sending history elsewhere and need to send at volume from day one, [contact support](https://app.posthog.com/#panel=support) and explain your use case.
+
+### Why does the UI say emails are sent later?
+
+The caps are rate limits, not quotas. An email that does not fit in the current hour is queued and goes out when the hourly allowance resets. The same applies to the daily cap. Your workflow's invocations show the delay.
+
+### Do transactional emails count against the allowance?
+
+Yes. The allowance covers every email a workflow sends, regardless of the message category.

@@ -8121,6 +8121,12 @@ export const docsMenu = {
                     color: 'green',
                 },
                 {
+                    name: 'Sending reputation and allowance',
+                    url: '/docs/workflows/sending-reputation',
+                    icon: 'IconShield',
+                    color: 'orange',
+                },
+                {
                     name: 'Import opt-out lists from Customer.io',
                     url: '/docs/workflows/import-customerio-optouts',
                     icon: 'IconUpload',
