@@ -36,7 +36,7 @@ Below are the main configurations. Each one outlines how the Stripe customers ar
    - The customer pays an invoice for credits before the subscription is created.
    - Once the invoice is paid, the subscription is created by revops.
    - Metadata added to the Stripe customer (`annual_plan_starts_at`, `annual_plan_ends_at`) sets the contract term. The billing service reads these dates to decide if the customer is on an annual plan today.
-   - Much of this is done via Zapier. See the [billing docs](/handbook/growth/sales/billing) for more info.
+   - Much of this is done via Zapier. See the [billing docs](/handbook/growth/revops/billing) for more info.
    - Credits apply to their usage.
    - Credits reduce product charges on invoices.
    - Should be using default products/prices.

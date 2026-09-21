@@ -118,7 +118,7 @@ We use tax law in the country of origin to determine what is a not for profit en
 
 When evaluating a discount, it’s important to <PrivateLink url="https://docs.google.com/spreadsheets/d/1ynNM9tbWsWki2Q0vhwCV0iYNtJ1NHz4eXtUvZDw_sjA/edit?usp=sharing">review our margin calculations</PrivateLink> to ensure we remain margin positive, especially for larger accounts.
 
-To set up the non-profit discount in Stripe, [follow these instructions](/handbook/growth/sales/billing#coupons-and-discounts).
+To set up the non-profit discount in Stripe, [follow these instructions](/handbook/growth/revops/billing#coupons-and-discounts).
 
 > Non-profit discounts only provide an additional 5% on top of standard volume discounts, and only for credit purchases between $25,000 and $100,000.
 
@@ -284,7 +284,7 @@ In order to qualify for this, the customer needs to send us the full quote docum
 
 Some customers are on a plan that is cheaper than list pricing and has an end date — a [campaign coupon](/handbook/marketing/campaigns-and-coupons) (Lenny's Newsletter grants a free Scale package and 2x free tier limits for 12 months), a beta plan for a product we haven't finished pricing, or a promotional increase to their free tier. These customers are paying us today, and they will pay more for the same usage once the plan ends.
 
-This covers pricing packages granted in Billing, not the [Stripe coupons and discounts](/handbook/growth/sales/billing#coupons-and-discounts) we apply per contract (legacy 30% off, non-profit discounts, and so on). This is also not the same situation as the [startup plan](#startup-plan-discounts). Startup credits make usage free, which is why we future-date that contract to sit after the free period. 
+This covers pricing packages granted in Billing, not the [Stripe coupons and discounts](/handbook/growth/revops/billing#coupons-and-discounts) we apply per contract (legacy 30% off, non-profit discounts, and so on). This is also not the same situation as the [startup plan](#startup-plan-discounts). Startup credits make usage free, which is why we future-date that contract to sit after the free period. 
 
 ### Don't touch the plan to close the deal
 

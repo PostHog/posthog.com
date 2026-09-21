@@ -141,7 +141,7 @@ We prefer to keep all signatures in PandaDoc, but sometimes clients may prefer t
     - Mark the status as completed.
     - Link to an opportunity in Salesforce and close the associated opportunity as Closed Won.
 
-Once you the signed form in PandaDoc is marked as complete and the Salesforce opportunity status is set to Closed Won, the RevOps team will get a notification and handle setting up the subscription and invoicing. See the [Billing](/handbook/growth/sales/billing) page for steps on how the billing setup works for more information.
+Once you the signed form in PandaDoc is marked as complete and the Salesforce opportunity status is set to Closed Won, the RevOps team will get a notification and handle setting up the subscription and invoicing. See the [Billing](/handbook/growth/revops/billing) page for steps on how the billing setup works for more information.
 
 ### Using prepaid credits to cover an existing pay-as-you-go invoice
 When a pay as you go customer wants to sign a prepaid contract and use their new credits to cover an invoice that is about to be issued, timing is important. Credits can only be applied cleanly to an invoice _before_ that invoice is finalized. 

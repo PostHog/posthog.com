@@ -908,6 +908,11 @@
             "statusCode": 301
         },
         {
+            "source": "/handbook/growth/sales/billing:ext(\\.md)?",
+            "destination": "/handbook/growth/revops/billing:ext?",
+            "statusCode": 301
+        },
+        {
             "source": "/handbook/growth/revops/lead-assignment-ooo",
             "destination": "/handbook/growth/revops/lead-assignment-tracker",
             "statusCode": 301
