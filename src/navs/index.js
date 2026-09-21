@@ -1168,6 +1168,10 @@ export const handbookSidebar = [
                         url: '/handbook/marketing/positioning/session-replay',
                     },
                     {
+                        name: 'Replay vision',
+                        url: '/handbook/marketing/positioning/replay-vision',
+                    },
+                    {
                         name: 'Feature flags',
                         url: '/handbook/marketing/positioning/feature-flags',
                     },
@@ -1294,6 +1298,10 @@ export const handbookSidebar = [
             {
                 name: 'Metric conventions',
                 url: '/handbook/growth/revops/metric-conventions',
+            },
+            {
+                name: 'Org definitions',
+                url: '/handbook/growth/revops/org-definitions',
             },
             {
                 name: 'Revenue adjustments',
@@ -2603,7 +2611,7 @@ export const docsMenu = {
                     url: '/docs/self-driving/setup',
                 },
                 {
-                    name: 'Products',
+                    name: 'Apps',
                 },
                 {
                     name: 'Slack',
@@ -2654,6 +2662,10 @@ export const docsMenu = {
                         {
                             name: 'Examples',
                             url: '/docs/self-driving/scout-examples',
+                        },
+                        {
+                            name: "What's in a scout",
+                            url: '/docs/self-driving/whats-in-a-scout',
                         },
                     ],
                 },
@@ -2994,6 +3006,10 @@ export const docsMenu = {
                             url: '/docs/libraries/docusaurus',
                         },
                         {
+                            name: 'Fastify',
+                            url: '/docs/libraries/fastify',
+                        },
+                        {
                             name: 'Flask',
                             url: '/docs/libraries/flask',
                         },
@@ -3247,6 +3263,14 @@ export const docsMenu = {
                         {
                             name: 'Cohorts',
                             url: '/docs/data/cohorts',
+                        },
+                        {
+                            name: 'Realtime cohorts',
+                            url: '/docs/data/realtime-cohorts',
+                            badge: {
+                                title: 'Beta',
+                                className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
+                            },
                         },
                         {
                             name: 'Sessions',
@@ -4169,12 +4193,30 @@ export const docsMenu = {
                             url: '/docs/settings/approvals',
                         },
                         {
-                            name: 'SSO, SAML, & SCIM',
-                            url: '/docs/settings/sso',
-                        },
-                        {
-                            name: 'ID-JAG (XAA)',
-                            url: '/docs/settings/id-jag',
+                            name: 'Authentication',
+                            url: '/docs/settings/authentication/sso',
+                            children: [
+                                {
+                                    name: 'SSO',
+                                    url: '/docs/settings/authentication/sso',
+                                },
+                                {
+                                    name: 'SAML',
+                                    url: '/docs/settings/authentication/saml',
+                                },
+                                {
+                                    name: 'SCIM',
+                                    url: '/docs/settings/authentication/scim',
+                                },
+                                {
+                                    name: 'OIDC',
+                                    url: '/docs/settings/authentication/oidc',
+                                },
+                                {
+                                    name: 'ID-JAG (XAA)',
+                                    url: '/docs/settings/authentication/id-jag',
+                                },
+                            ],
                         },
                         {
                             name: 'Agent discovery (auth.md)',
@@ -5104,8 +5146,14 @@ export const docsMenu = {
                     color: 'yellow',
                 },
                 {
-                    name: 'Digests and alerts',
-                    url: '/docs/replay-vision/actions',
+                    name: 'Scouts',
+                    url: '/docs/replay-vision/scouts',
+                    icon: 'IconBinoculars',
+                    color: 'yellow',
+                },
+                {
+                    name: 'Alerts',
+                    url: '/docs/replay-vision/alerts',
                     icon: 'IconBell',
                     color: 'yellow',
                 },
@@ -8330,6 +8378,7 @@ export const docsMenu = {
                         { name: 'Other languages', url: '/docs/metrics/installation/other' },
                         { name: 'Docker', url: '/docs/metrics/installation/docker' },
                         { name: 'Kubernetes', url: '/docs/metrics/installation/kubernetes' },
+                        { name: 'Google Cloud', url: '/docs/metrics/installation/google-cloud' },
                     ],
                 },
                 {

@@ -399,6 +399,39 @@ Don't use:
 - Lists when prose is clearer
 - Too many callout boxes
 
+### Choose components by task
+
+Use existing docs components. Keep plain Markdown for prose, lists, and reference tables.
+
+| Reader's task | Component or format | Guidance |
+|---|---|---|
+| Choose an equivalent code example | `MultiLanguage selector="tabs"` | Label each language or framework. Keep the examples equivalent. |
+| Follow an ordered procedure | `Steps` and `Step` | Give each step one action and an expected result. Keep required steps before optional work. |
+| Navigate an existing guided quickstart | `QuestLog` and `QuestLogItem` | Reuse the guide's structure. Keep the path to the first result short. |
+| Notice a consequential limitation | `CalloutBox` | Keep warnings visible beside the affected step. Use callouts sparingly. |
+| Read advanced compatibility notes | `<details>` and `<summary>` | Use a descriptive summary. Keep prerequisites and required instructions outside the fold. |
+| Inspect a product screenshot | `ProductScreenshot` | Supply useful alt text and light/dark variants when needed. |
+
+Check the component's README, when present, and an existing usage before adding it. Do not create a new component for a pattern we support.
+
+### Check the Markdown export
+
+Readers and AI agents use **Copy page** and the page's `.md` URL. Those exports must contain the same instructions as the website.
+
+Check that the export preserves:
+
+- Every language example, including inactive tabs
+- Code indentation and blank lines
+- Table columns, empty cells, links, and inline code
+- Compatibility notes inside closed details
+- One title and one image per light/dark screenshot pair
+
+Exclude copy buttons and other page controls from the export. Fix conversion problems in the shared exporter, not in a second copy of the docs.
+
+Run `pnpm test:markdown` when you change components or Markdown conversion. Add a focused case if your change introduces a new rendering pattern.
+
+Minimal preview builds do not generate `.md` files. Check the actual export from a full build before claiming that a preview validates it.
+
 ### Links
 
 #### Wikipedia-style internal links

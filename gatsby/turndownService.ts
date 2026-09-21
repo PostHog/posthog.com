@@ -46,6 +46,17 @@ export const preprocessHtmlForTabs = (html: string): string => {
         }
     })
 
+    doc.querySelectorAll(
+        'button[aria-label="Copy this page as Markdown"], button[aria-label="More Markdown actions"], .ask-posthog-ai-code-snippet'
+    ).forEach((control) => control.remove())
+
+    // ProductScreenshot renders both themes. Keep one image without hiding other tab content.
+    doc.querySelectorAll('img[class~="dark:hidden"] + img[class~="dark:block"]').forEach((image) => {
+        if (image.previousElementSibling?.getAttribute('alt') === image.getAttribute('alt')) {
+            image.remove()
+        }
+    })
+
     const result = doc.documentElement.outerHTML
     // Release JSDOM resources promptly — this runs once per page across
     // thousands of pages, and unclosed windows pile up on the build heap
@@ -56,11 +67,7 @@ export const preprocessHtmlForTabs = (html: string): string => {
 export const extractTitleFromHtml = (html: string): string => {
     const titleMatch = html.match(/<title[^>]*>([^<]+)<\/title>/i)
     if (titleMatch) {
-        let title = titleMatch[1].trim()
-        const parts = title.split(' - ')
-        if (parts.length > 1 && (parts[parts.length - 1] === 'Docs' || parts[parts.length - 1] === 'PostHog')) {
-            title = parts.slice(0, -1).join(' - ')
-        }
+        const title = titleMatch[1].trim().replace(/(?: - (?:Docs|PostHog))+$/, '')
         if (title) return title
     }
 
@@ -182,14 +189,12 @@ export const createTurndownService = (title: string) => {
                         const text = (line as HTMLElement).textContent || ''
                         return text.trimEnd()
                     })
-                    .filter((line) => line.length > 0)
                     .join('\n')
             } else {
                 code = (codeElement as HTMLElement).textContent || ''
             }
 
-            code = code.trim()
-            if (!code) return ''
+            if (!code.trim()) return ''
 
             const classAttr = codeElement.getAttribute('class') || node.getAttribute('class') || ''
             const languageMatch = classAttr.match(/language-(\w+)/)
@@ -269,47 +274,12 @@ export const createTurndownService = (title: string) => {
         },
     })
 
-    const getTableCellMarkdown = (cell: HTMLElement): string => {
-        const produceMarkdownFromNode = (node: Node): string => {
-            if (node.nodeType === 3) {
-                return node.textContent || ''
-            }
-
-            if (node.nodeType === 1) {
-                const el = node as HTMLElement
-
-                if (el.nodeName === 'A') {
-                    const href = el.getAttribute('href') || ''
-                    const text = (el.textContent || '').trim()
-                    if (!text) {
-                        return ''
-                    }
-                    const markdownHref = formatHrefForMarkdown(href)
-                    return `[${text}](${markdownHref})`
-                }
-
-                let accumulated = ''
-                el.childNodes.forEach((child) => {
-                    accumulated += produceMarkdownFromNode(child)
-                })
-                return accumulated
-            }
-
-            return ''
-        }
-
-        let result = ''
-        cell.childNodes.forEach((child) => {
-            result += produceMarkdownFromNode(child)
-        })
-
-        const text = result.trim()
-        if (!text) {
-            return ''
-        }
-
-        return text.replace(/\\/g, '\\\\').replace(/\|/g, '\\|').replace(/\s+/g, ' ')
-    }
+    const getTableCellMarkdown = (cell: HTMLElement): string =>
+        turndownService
+            .turndown(cell.innerHTML)
+            .replace(/(\\*)\|/g, (_, slashes) => `${slashes}${slashes.length % 2 ? '' : '\\'}|`)
+            .replace(/\s+/g, ' ')
+            .trim()
 
     turndownService.addRule('handleTables', {
         filter: (node) => {
@@ -323,9 +293,9 @@ export const createTurndownService = (title: string) => {
             if (thead) {
                 const headerRow = thead.querySelector('tr')
                 if (headerRow) {
-                    const headers = Array.from(headerRow.querySelectorAll('th, td'))
-                        .map((cell) => getTableCellMarkdown(cell as HTMLElement))
-                        .filter((text) => text.length > 0)
+                    const headers = Array.from(headerRow.querySelectorAll('th, td')).map((cell) =>
+                        getTableCellMarkdown(cell as HTMLElement)
+                    )
 
                     if (headers.length > 0) {
                         rows.push('| ' + headers.join(' | ') + ' |')
@@ -336,9 +306,9 @@ export const createTurndownService = (title: string) => {
 
             const bodyRows = Array.from(tbody.querySelectorAll('tr'))
             bodyRows.forEach((row) => {
-                const cells = Array.from(row.querySelectorAll('td, th'))
-                    .map((cell) => getTableCellMarkdown(cell as HTMLElement))
-                    .filter((text) => text.length > 0)
+                const cells = Array.from(row.querySelectorAll('td, th')).map((cell) =>
+                    getTableCellMarkdown(cell as HTMLElement)
+                )
 
                 if (cells.length > 0) {
                     rows.push('| ' + cells.join(' | ') + ' |')
@@ -390,7 +360,7 @@ export const createTurndownService = (title: string) => {
 export const postProcessMarkdown = (markdown: string, title: string): string => {
     let result = markdown
 
-    result = result.replace(/^---[\s\S]*?---\n*/m, '')
+    result = result.replace(/^---\n[\s\S]*?\n---\n*/, '')
 
     const lines = result.split('\n')
     const cleanedLines: string[] = []
@@ -413,6 +383,8 @@ export const postProcessMarkdown = (markdown: string, title: string): string => 
                 continue
             }
 
+            if (/^\s*-\s*$/.test(line)) continue
+
             const cleaned = line.replace(/[ \t]+$/, '')
             if (cleaned || cleanedLines.length === 0 || cleanedLines[cleanedLines.length - 1]) {
                 cleanedLines.push(cleaned)
@@ -421,9 +393,6 @@ export const postProcessMarkdown = (markdown: string, title: string): string => 
     }
 
     result = cleanedLines.join('\n')
-
-    result = result.replace(/\n{4,}/g, '\n\n\n')
-    result = result.replace(/^\s*-\s*$/gm, '')
 
     if (!result.trim().startsWith('# ')) {
         result = `# ${title}\n\n${result}`

@@ -16,7 +16,7 @@ tags:
 
 Normally, PostHog stores some information about the user in their browser using a cookie. This approach is typical for analytics tools and enables user tracking across sessions, caching feature flag data, and more.
 
-There are some situations where you don't want to use cookies and do cookieless tracking instead. For example, when you have concerns about user privacy or to comply with regulation such as [GDPR](/docs/integrate/gdpr) or [HIPAA](/docs/privacy/hipaa-compliance) (or you just hate cookie banners).
+There are some situations where you don't want to use cookies and do cookieless tracking instead. For example, when you have concerns about user privacy or to comply with regulation such as [GDPR](/docs/privacy/gdpr-compliance) or [HIPAA](/docs/privacy/hipaa-compliance) (or you just hate cookie banners).
 
 This tutorial shows how to configure PostHog's [JavaScript Web SDK](/docs/libraries/js) to do cookieless audience measurement.
 

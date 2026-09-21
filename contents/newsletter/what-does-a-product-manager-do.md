@@ -22,7 +22,7 @@ In our last issue, <TeamMember name="Ian Vanagas" /> wrote about how [engineerin
 
 We've seen this first-hand at PostHog, but it's not an isolated trend. The lines between product management and engineering are blurring, too.
 
-Thanks to LLMs, figuring out what to build is now a greater bottleneck than how to build it, and it's forcing engineers to think more like [product managers](/newsletter/product-management-is-broken) (PMs).
+Thanks to LLMs, [figuring out what to build](/newsletter/if-ai-writes-all-the-code-whats-left#2-setting-direction) is now a greater bottleneck than how to build it, and it's forcing engineers to think more like [product managers](/newsletter/product-management-is-broken) (PMs).
 
 In this issue, we'll help you take advantage of what product managers have already figured out by going over the top three skills in their playbook.
 

@@ -6,7 +6,7 @@ import { CTAs } from 'components/CTAs'
 import { DebugContainerQuery } from 'components/DebugContainerQuery'
 
 const Overview = ({ id, productData }: SectionComponentProps) => {
-    const { name, Icon, overview, screenshots, status, hogs } = productData ?? {}
+    const { name, overview, screenshots, hogs } = productData ?? {}
     // Sized by height, not width: the art ranges from wide to tall portraits, and
     // a fixed width makes the tall ones swamp the screenshot. It dips at `@3xl`
     // because that is where the screenshot's own `max-w-*` cap shrinks it.
@@ -53,25 +53,30 @@ const Overview = ({ id, productData }: SectionComponentProps) => {
                         )}
                     </Glow>
                 )}
-
-                <div className="space-y-4">
-                    <div className="flex items-center gap-2">
-                        <Glow color="white" size="md" intensity="strong" className="">
-                            {Icon && <Icon className={`size-6 text-${productData?.color}`} />}
-                        </Glow>
-                        <span className="text-lg font-bold">{name}</span>
-                        {status === 'beta' && (
-                            <span className="font-bold uppercase border-2 border-current px-1 rounded text-xs">
-                                Beta
-                            </span>
+                {!screenshots?.home?.src && (HogComponent || hog?.src) && (
+                    <div
+                        className={`w-fit mb-8 mx-auto @3xl/reader-content:float-right @3xl/reader-content:mx-0 @3xl/reader-content:ml-8 ${hogSizeClasses}`}
+                    >
+                        {HogComponent ? (
+                            <HogComponent className="h-full w-auto" title={hog.alt || name} />
+                        ) : (
+                            <CloudinaryImage
+                                src={hog.src as `https://res.cloudinary.com/${string}`}
+                                alt={hog.alt || `${name} hedgehog`}
+                                className="h-full"
+                                imgClassName="h-full w-auto"
+                            />
                         )}
                     </div>
+                )}
+
+                <div className="space-y-4">
                     <div>
                         <h1 className="!text-4xl font-bold !leading-tight">{overview?.title || name}</h1>
-                        <p className="leading-relaxed">{overview?.description}</p>
+                        {overview?.description && <p className="leading-relaxed">{overview.description}</p>}
                     </div>
                     <div>
-                        <CTAs wizardCommand={productData?.wizardCommand} />
+                        <CTAs wizardCommand={productData?.wizardCommand} links={productData?.ctaLinks} />
                     </div>
                 </div>
             </header>
