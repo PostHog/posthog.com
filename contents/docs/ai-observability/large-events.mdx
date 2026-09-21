@@ -104,7 +104,7 @@ Not on Python or Node? Build events with [manual capture](/docs/ai-observability
 POST <ph_client_api_host>/i/v0/ai/batch/
 ```
 
-The dedicated endpoint only accepts events whose name starts with `$ai_`. If a batch contains any other event, PostHog rejects the whole request with a `400` and records an [ingestion warning](/docs/data/ingestion-warnings#discarded-ai-events). Send other events to the regular endpoint.
+The dedicated endpoint only accepts events whose name starts with `$ai_`, and every event must include the `$ai_model` property. If a batch contains any other event, or an event without `$ai_model`, PostHog rejects the whole request with a `400` and records an [ingestion warning](/docs/data/ingestion-warnings#discarded-ai-events). Send other events to the regular endpoint, which has no `$ai_model` requirement.
 
 ## Sending over OpenTelemetry
 
