@@ -212,7 +212,7 @@ You can ask for access to team/company tools by submitted a request in Slack. Fi
 
 - AI coding tools (Cursor, Claude Code, etc.) are encouraged, but usage-based pricing can climb fast. Most engineers' monthly spend lands around a single max-tier subscription (~$200/month). If yours is running several times higher, that's usually a misconfiguration or inefficient workflow rather than a genuine need – compare setups with your teammates and ask in [#team-people-and-ops](https://posthog.slack.com/archives/C017WDX3BFZ) if you're unsure.
   - [Claude](https://claude.ai) (including Claude Code): log in with SSO and you'll be added to our team plan. If SSO doesn't add you automatically, request access with Zluri in Slack or ask in [#team-people-and-ops](https://posthog.slack.com/archives/C017WDX3BFZ).
-  - [ChatGPT](https://chatgpt.com) (including Codex): ask in [#chat-gpt-team](https://posthog.slack.com/archives/C08U0ERMESF) and ops will add you to the team account. That channel is also where questions about ChatGPT and Codex get answered.
+  - [ChatGPT](https://chatgpt.com) (including Codex): use the company workspace instead of a personal account, and ask in [#chat-gpt-team](https://posthog.slack.com/archives/C08U0ERMESF) for a seat. Each seat has a small weekly allowance and then runs on workspace credits – see your usage in [Codex analytics](https://chatgpt.com/codex/cloud/settings/analytics), and ask in the channel if you need a higher limit.
 
 ### Coworking
 - If there's a WeWork where you are, use it – we have a company All Access account, so default to that rather than paying for another coworking space. Ask [Kendal](https://posthog.com/community/profiles/28628) in [#team-people-and-ops](https://posthog.slack.com/archives/C017WDX3BFZ) for access.
