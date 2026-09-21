@@ -18,8 +18,11 @@ Hogpatch is our San Francisco coworking space, shared with a handpicked group of
 
 PostHog teammates don’t need an invite to use Hogpatch – the space is open for you whenever you’re in town. If you know your SF travel dates in advance, it’s helpful to post in the [sf-bay-area channel](https://posthog.slack.com/archives/C034FCE7RCG) so we can make sure the space is ready for you.
 
-- If you are visiting for the first time, ring the **black intercom doorbell** on the front door.
-- <TeamMember name="Judy Opperwall" photo /> will be notified and will remotely unlock the door for you.
+The door is controlled by **Kisi**. There is no key and no lockbox – a Kisi pass is the only way to let yourself in.
+
+- Ask <TeamMember name="Judy Opperwall" photo /> or <TeamMember name="Scott Lewis" photo /> in the [hogpatch channel](https://posthog.slack.com/archives/C08RK3RBP62) to add you to Kisi. Do this before your first visit.
+- You then get an invite by email. It sets up a digital pass in the Kisi app, or in your digital wallet. Use the pass on the reader at the front door to get in, at any hour.
+- If you do not have a pass yet, ring the **black intercom doorbell** on the front door. <TeamMember name="Judy Opperwall" photo /> will be notified and will remotely unlock the door for you.
  - <TeamMember name="Carol Donnelly" photo /> and <TeamMember name="Scott Lewis" photo /> also share intercom access so can open the door for you 24/7.
 - There’s no check-in or reservations needed, it's a very relaxed setup.
 
