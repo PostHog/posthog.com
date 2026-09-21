@@ -4,13 +4,14 @@ sidebar: Handbook
 showTitle: true
 ---
 
-So you want to learn more about data: why it exists, what it does, and where PostHog fits in (for people who don't write SQL for a living).
+[Full deck for sales training](https://docs.google.com/presentation/d/1CnXlVhrxDJ146p6PzNNt94RmYjR1Jr7V6Vsg1g-aIMk/edit?usp=sharing)
+[Recorded sales training session]()
 
 ## Why do companies need data tools?
 
 Every single SaaS platform or tool you use generates data. Payments in Stripe, customers in the CRM, and app data in a production database. That data could be used to ask questions that will help you improve your product, learn more about customers.
 
-Some questions you might have:
+Some questions customers might have:
 
 | Question | Data it needs |
 |----------|---------------|
@@ -55,7 +56,7 @@ Product data usually lives in a completely separate world from business data.
 | 6. BI | Looker |
 | 7. Activation | Hightouch |
 
-> Product analytics is usually your biggest data source so most of your data is already in PostHog, if you use our full stack you don't have to export that data anywhere.
+> Product analytics is usually your biggest data source so most of your data is already in PostHog, if customers use our full stack you don't have to export that data anywhere.
 
 ## PostHog collapses the stack
 
