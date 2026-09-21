@@ -5,6 +5,43 @@ export const datadog = {
         icon: '/images/competitors/datadog.svg',
     },
     products: {
+        traces: {
+            available: true,
+            tracing: {
+                features: {
+                    distributed_trace_waterfall: true,
+                    service_dependency_map: true,
+                    code_level_profiling: true,
+                    sampling_controls: true,
+                    retention_controls: true,
+                },
+            },
+            standards_and_setup: {
+                features: {
+                    native_open_telemetry_ingest: 'Maps to its own model',
+                    no_proprietary_sdk_required: 'Partial',
+                    instrumentation: 'Agent',
+                },
+            },
+            one_platform: {
+                features: {
+                    signals_alongside_traces: true,
+                },
+            },
+            ai_and_self_driving: {
+                features: {
+                    ai_opens_code_fix_pr: false,
+                    fix_and_open_pr_from_slack: false,
+                },
+            },
+            pricing: {
+                features: {
+                    pricing_model: 'Per host + per span',
+                    free_tier: 'Trial only',
+                    open_source: false,
+                },
+            },
+        },
         replay_vision: {
             // AI summaries, smart chapters, and AI Investigations run over replays, but as
             // fixed jobs – no scanners you point at a recording set with your own prompt.
@@ -167,7 +204,7 @@ export const datadog = {
             },
             pricing: {
                 features: {
-                    ingest_only_pricing: "$0.10 per GB",
+                    ingest_only_pricing: '$0.10 per GB',
                     no_query_compute_fees: false,
                     predictable_at_scale: false,
                 },

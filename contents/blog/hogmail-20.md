@@ -31,7 +31,7 @@ Words by Andy Vandervell, who just trains AIs to write now.
 
 ## Why do startups fail? (or why "product-market fit" doesn't guarantee success)
 
-In November, Adam Smith, the founder of AI-assisted programming startup Kite, [announced they were closing](https://www.kite.com/blog/product/kite-is-saying-farewell/) despite having reached [product-market fit](/blog/product-market-fit-game) and 500k monthly-active developers.
+In November, Adam Smith, the founder of AI-assisted programming startup Kite, [announced they were closing](https://www.kite.com/blog/product/kite-is-saying-farewell/) despite having reached [product-market fit](/founders/product-market-fit-game) and 500k monthly-active developers.
 
 ![kite](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/hogmail/kit-farewell.png)
 

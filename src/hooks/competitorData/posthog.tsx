@@ -5,6 +5,44 @@ export const posthog = {
         icon: '/images/logo.svg',
     },
     products: {
+        traces: {
+            available: true,
+            beta: true,
+            tracing: {
+                features: {
+                    distributed_trace_waterfall: true,
+                    service_dependency_map: false,
+                    code_level_profiling: false,
+                    sampling_controls: 'Via OTel SDK',
+                    retention_controls: true,
+                },
+            },
+            standards_and_setup: {
+                features: {
+                    native_open_telemetry_ingest: true,
+                    no_proprietary_sdk_required: true,
+                    instrumentation: 'OpenTelemetry',
+                },
+            },
+            one_platform: {
+                features: {
+                    signals_alongside_traces: true,
+                },
+            },
+            ai_and_self_driving: {
+                features: {
+                    ai_opens_code_fix_pr: true,
+                    fix_and_open_pr_from_slack: true,
+                },
+            },
+            pricing: {
+                features: {
+                    pricing_model: 'Usage-based, no per-host fee',
+                    free_tier: true,
+                    open_source: true,
+                },
+            },
+        },
         replay_vision: {
             available: true,
             features: {

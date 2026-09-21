@@ -29,9 +29,9 @@ export const workflows = {
     color: 'teal',
     colorSecondary: 'green-2',
     includeAddonRates: true,
-    // Matches billing API / pricing page (Emails + Destinations free tiers + first paid tiers).
+    // Matches billing API / pricing page (Emails + push and other destinations free tiers + first paid tiers).
     pricingDescription:
-        'First 10,000 emails and 10,000 destination dispatches free each month. Then starts at $0.003/email and $0.00075/dispatch, with volume discounts as usage grows.',
+        'First 10,000 emails and 10,000 push and other destination dispatches free each month. Then starts at $0.003/email and $0.00075/dispatch, with volume discounts as usage grows.',
     seo: {
         title: 'Workflows – Automate workflows with product data',
         description:
@@ -366,7 +366,7 @@ export const workflows = {
     addonSliders: [
         {
             key: 'workflows_destinations',
-            label: 'Destinations',
+            label: 'Push and other destinations',
             sliderConfig: {
                 marks: [10000, 1000000, 10000000],
                 min: 10000,
