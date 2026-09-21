@@ -4,7 +4,7 @@ sidebar: Handbook
 showTitle: true
 ---
 
-> Have something you want to announce? Let the Marketing team know in `#team-marketing`! If it's an iterative update, you can also demo it in the all-hands, or post in `#tell-posthog-anything`. 
+> Have something you want to announce? Let the Developer Marketing team know in `#team-marketing`! If it's an iterative update, you can also demo it in the all-hands, or post in `#tell-posthog-anything`. 
 
 Product marketers take responsibility for coordinating and publicizing news about PostHog, including product launches. We also help with [incident](/handbook/engineering/operations/incidents) and [maintenance announcements](/handbook/marketing/product-announcements#announcing-scheduled-maintenance), if needed. 
 
@@ -163,7 +163,7 @@ When informing users about maintenance, it is important to answer all of the fol
 - What will the impact be? Will insights, etc., still function?
 - Why is the maintenance being done, and what benefit will there be for users?
 
-We typically notify users of upcoming maintenance by email, so the Marketing team will need a way to target the correct users before they can update them. For smaller maintenance updates which will not cause any user updates, engineering teams can also update our status page.
+We typically notify users of upcoming maintenance by email, so the Developer Marketing team will need a way to target the correct users before they can update them. For smaller maintenance updates which will not cause any user updates, engineering teams can also update our status page.
 
 ## Incident communications
 

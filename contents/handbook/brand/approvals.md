@@ -29,7 +29,7 @@ When in doubt, ask in the `#design-review` Slack channel. Lottie is, for now, th
 - <SmallTeam slug="website" /> – Website, copy, major design decisions, motion work for web.
 - <SmallTeam slug="graphics" /> – Graphics, artwork, merch, anything illustrated, motion work for video.
 - <SmallTeam slug="editorial" /> – Blog, email copy, messaging guidelines, social presence.
-- <SmallTeam slug="marketing" /> – Email copy, external partnerships, influencers.
+- <SmallTeam slug="developer-marketing" /> – Email copy, external partnerships, influencers.
 - <SmallTeam slug="youtube" /> – Video production, editing.
 - <SmallTeam slug="builder-relations" /> – In-person events, PostHog speaking engagements, meetups, the forum, and Discord.
 - <SmallTeam slug="wizard-and-docs" /> – Docs, obviously. 

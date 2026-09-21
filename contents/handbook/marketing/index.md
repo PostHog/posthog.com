@@ -10,7 +10,7 @@ Marketing at PostHog is a collaborative effort across several teams. There are s
 
 - <SmallTeam slug="graphics" /> – Leads all art, design, illustration, and brand work for PostHog
 - <SmallTeam slug="website" /> – Leads all matters related to posthog.com and handles some product design aspects
-- <SmallTeam slug="marketing" /> – A multidisciplinary team that handles Product Marketing, Influencers & Partnerships, and other unowned marketing tasks
+- <SmallTeam slug="developer-marketing" /> – A multidisciplinary team that handles Product Marketing, Influencers & Partnerships, and other unowned marketing tasks
 - <SmallTeam slug="editorial" /> – Leads content, newsletters, and social
 - <SmallTeam slug="youtube" /> – Leads video
 - <SmallTeam slug="wizard-and-docs" /> – Leads on documentation and the wizard
