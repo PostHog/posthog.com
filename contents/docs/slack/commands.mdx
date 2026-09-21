@@ -33,7 +33,7 @@ Routing rules let you map a mention's content to a specific repo so the agent do
 /posthog rules add "billing changes" posthog/billing
 ```
 
-Type the repo into the rule itself, as both examples do. A slash command has nowhere to post a repo picker, so `/posthog rules add "frontend bug"` on its own is refused with a reminder to add `org/repo`.
+A rule needs both parts. `/posthog rules add "frontend bug"` with no repo is refused, and the bot replies with the full spelling to use.
 
 When several rules match, the first one in `rules list` wins. Use `/posthog rules remove 1,2` to drop rules you no longer want. The numbers correspond to the positions printed by `rules list`.
 
