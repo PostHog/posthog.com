@@ -23,7 +23,7 @@ The setting applies to every materialized view in the project. It is off by defa
 3. Find **Materialization on failing checks**.
 4. Turn on **Block materialization on failing checks**.
 
-You need editor access to warehouse objects to change this setting. The **Tests** tab on a materialized view shows whether the project-wide setting is on or off.
+You need editor access to warehouse objects to change this setting. The **Data quality** tab on a materialized view shows whether the project-wide setting is on or off.
 
 ## How a gated materialization runs
 
@@ -67,7 +67,7 @@ The failed check run keeps its failure count and diagnostic query. PostHog doesn
 
 ## Recover from a blocked materialization
 
-1. Open the materialized view and select **Tests**.
+1. Open the materialized view and select **Data quality**.
 2. Find the error-severity checks that failed.
 3. Open the failing rows in the SQL editor and confirm whether the source data or the assertion is wrong.
 4. Fix the source data or query. If the assertion is no longer valid, edit or disable the check.
