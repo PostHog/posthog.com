@@ -26,7 +26,7 @@ If you have a topic or theme you'd like covered, ask in the [#team-blitzscale](h
 -   PostHog’s mission - to help engineers build better products
     -   How we’re building an enduring company
 -   PostHog’s overall strategy
-    -   Every product you need to evaluate feature success
+    -   Every tool you need to evaluate feature success
     -   Get in first
     -   Be the source of truth for customer and product data
 -   Principles around:
