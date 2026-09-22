@@ -1,8 +1,5 @@
 /**
- * Serve raw markdown to clients that ask for it with `Accept: text/markdown`,
- * and to agents that fetch a page for a user but do not ask for markdown.
- * Crawlers such as Googlebot and ClaudeBot keep the HTML. Mintlify-hosted docs
- * use the same user-agent split.
+ * Serve raw markdown to clients that ask for it with `Accept: text/markdown`.
  *
  * This has to be middleware rather than a `vercel.json` rewrite. Vercel gives
  * the filesystem precedence over rewrites, and Gatsby writes an index.html for
@@ -22,13 +19,8 @@ export const config = {
     matcher: ['/docs/:path*', '/handbook/:path*', '/blog/:path*', '/newsletter/:path*', '/changelog'],
 }
 
-const USER_AGENT_FETCHERS = ["ChatGPT-User", "Claude-User", "Perplexity-User"]
-const USER_AGENT_FETCHERS_REGEX  = new RegExp(`\\b(?:${USER_AGENT_FETCHERS.join("|")})\\b`, "gi");
-
 export default async function middleware(request: Request): Promise<Response | undefined> {
-    const acceptsMarkdown = (request.headers.get('accept') || '').includes('text/markdown')
-    const isAgentFetch = USER_AGENT_FETCHERS.test(request.headers.get('user-agent') || '')
-    if (!acceptsMarkdown && !isAgentFetch) return
+    if (!(request.headers.get('accept') || '').includes('text/markdown')) return
 
     const url = new URL(request.url)
     const pathname = url.pathname.replace(/\/$/, '')
@@ -48,7 +40,7 @@ export default async function middleware(request: Request): Promise<Response | u
         headers: {
             'content-type': 'text/markdown; charset=utf-8',
             'cache-control': markdown.headers.get('cache-control') || 'public, max-age=0, must-revalidate',
-            vary: 'Accept, User-Agent',
+            vary: 'Accept',
         },
     })
 }
