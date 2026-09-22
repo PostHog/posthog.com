@@ -22,7 +22,8 @@ export const config = {
     matcher: ['/docs/:path*', '/handbook/:path*', '/blog/:path*', '/newsletter/:path*', '/changelog'],
 }
 
-const USER_AGENT_FETCHERS = /\b(ChatGPT-User|Claude-User|Perplexity-User)\b/
+const USER_AGENT_FETCHERS = ["ChatGPT-User", "Claude-User", "Perplexity-User"]
+const USER_AGENT_FETCHERS_REGEX  = new RegExp(`\\b(?:${USER_AGENT_FETCHERS.join("|")})\\b`, "gi");
 
 export default async function middleware(request: Request): Promise<Response | undefined> {
     const acceptsMarkdown = (request.headers.get('accept') || '').includes('text/markdown')
