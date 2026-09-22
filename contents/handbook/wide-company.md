@@ -4,7 +4,7 @@ sidebar: Handbook
 showTitle: true
 ---
 
-Part of our strategy is to provide all the products in one for evaluating feature success.
+Part of our strategy is to provide all the tools in one for evaluating feature success.
 
 ## Speed
 

@@ -14,7 +14,7 @@ Since the beginning, we've believed that engineers should be way more involved i
 
 Similar tools to the ones we've built have existed for a long time, but they were always built with other users in mind. By building things like product analytics, session replays, feature flags and a data warehouse for engineers first, we give engineers the ability to make product decisions themselves. This massively increases the speed at which engineers can make good decisions.
 
-The other way PostHog helps engineers is by combining _all_ the products they need into one platform. This avoids a ton of work integrating and linking up various products, both when integrating and ongoingly.
+The other way PostHog helps engineers is by combining _all_ the tools they need into one product. This avoids a ton of work integrating and linking up various products, both when integrating and ongoingly.
 
 We try to help engineers from the very beginning, when their product is just being built. We do that by having [generous free tiers](/pricing), and no need to talk to sales to get started.
 
@@ -26,7 +26,7 @@ Building a successful product is hard; doing so when you don't understand your c
 
 Traditionally, as companies scale, their data warehouse becomes the source of truth, and non-warehouse native tools (like product analytics) become less relevant as engineers lose trust in the data they collect, simply because they are misused and divorced from the source of truth. Every company winds up with a huge mess of data spaghetti, with their business logic still spread across dozens or hundreds of tools.
 
-We provide developer infrastructure - by providing _every_ product engineers need in one place, we can:
+We provide developer infrastructure - by providing _every_ tool engineers need in one place, we can:
 
 - Enhance the utility of all the products when used together by engineering teams
 - Increase trust in data by eliminating complex data stacks that engineers have to navigate

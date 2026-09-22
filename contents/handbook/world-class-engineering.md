@@ -4,7 +4,7 @@ sidebar: Handbook
 showTitle: true
 ---
 
-We know we've got to be quick to build all the products in one. So we better have a world-class engineering environment that lets us build everything. How do we do that?
+We know we've got to be quick to build all the tools in one. So we better have a world-class engineering environment that lets us build everything. How do we do that?
 
 ## No product management by default
 
