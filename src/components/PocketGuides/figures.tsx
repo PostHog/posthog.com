@@ -59,9 +59,10 @@ export function Fig({ n, caption, legend, children }: FigProps): JSX.Element {
 }
 
 // `<Figure>` is `not-prose`, so the docs table styles never reach a table inside the frame.
-// Illustrative rows, not live data: small uppercase headers over full-width, divided rows.
+// Illustrative rows, not live data: small uppercase headers over full-width, divided rows. The
+// frame clips overflow, so a table wider than a phone scrolls sideways instead of losing columns.
 const EXAMPLE_TABLE =
-    '[&_table]:w-full [&_table]:border-collapse [&_table]:text-left [&_table]:text-[0.85em] [&_thead]:border-b [&_thead]:border-primary [&_th]:py-1.5 [&_th]:pr-3 [&_th]:text-[0.85em] [&_th]:font-bold [&_th]:uppercase [&_th]:tracking-wide [&_th]:text-secondary [&_th:last-child]:pr-0 [&_td]:border-b [&_td]:border-primary/30 [&_td]:py-1.5 [&_td]:pr-3 [&_td]:text-primary [&_td:last-child]:pr-0'
+    'overflow-x-auto [&_table]:w-full [&_table]:border-collapse [&_table]:text-left [&_table]:text-[0.85em] [&_thead]:border-b [&_thead]:border-primary [&_th]:py-1.5 [&_th]:pr-3 [&_th]:text-[0.85em] [&_th]:font-bold [&_th]:uppercase [&_th]:tracking-wide [&_th]:text-secondary [&_th:last-child]:pr-0 [&_td]:border-b [&_td]:border-primary/30 [&_td]:py-1.5 [&_td]:pr-3 [&_td]:text-primary [&_td:last-child]:pr-0'
 
 /**
  * A worked example illustrating what an answer looks like – arbitrary MDX content (usually a
