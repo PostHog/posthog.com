@@ -9,6 +9,7 @@ import { algoliaIndexName, algoliaSearchClient } from 'lib/algoliaSearch'
 import { getMarkdownUrl } from 'components/MarkdownActions'
 import { buildWizardCommand } from 'components/PlatformInstall/buildCommand'
 import { MARKDOWN_CONTENT_PATHS, MCP_SERVER_URL, isMarkdownContentPath } from '../../constants'
+import { isSafeInternalPath } from 'lib/utils'
 
 /**
  * Registers WebMCP tools on every page so a browser agent (Gemini in Chrome, and others as they
@@ -70,7 +71,12 @@ const resolveSitePath = (input: unknown): URL | null => {
     if (typeof input !== 'string' || input.trim() === '') return null
     try {
         const url = new URL(input.trim(), window.location.origin)
-        return url.origin === window.location.origin ? url : null
+        // Origin match is not enough: `https://posthog.com//evil.com` and `/docs/..//evil.com`
+        // stay on this origin after parsing, but the pathname is `//evil.com`. Gatsby
+        // `navigate()` assigns `window.location` on a miss, which treats `//` as a
+        // protocol-relative URL. isSafeInternalPath is the site's existing guard for that.
+        if (url.origin !== window.location.origin || !isSafeInternalPath(url.pathname)) return null
+        return url
     } catch {
         return null
     }
