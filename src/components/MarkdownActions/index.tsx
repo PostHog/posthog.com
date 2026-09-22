@@ -3,7 +3,7 @@ import Link from 'components/Link'
 import React, { useState, useEffect } from 'react'
 import { Popover } from 'components/RadixUI/Popover'
 import OSButton from 'components/OSButton'
-import { isMarkdownContentPath, isMarkdownExportExcluded } from '../../constants'
+import { isMarkdownContentPath } from '../../constants'
 
 // `location.pathname` carries a trailing slash where `appWindow.path` doesn't, and
 // `/docs/foo/.md` is not a real file. Normalize the same way seo.tsx does.
@@ -92,8 +92,6 @@ export const useMarkdownUrlExists = (pageUrl: string): boolean | null => {
 interface MarkdownActionsProps {
     /** Current page path, e.g. `/docs/product-analytics/installation` */
     pageUrl?: string
-    /** MDX articles can advertise their generated Markdown before hydration. */
-    isMdx?: boolean
     /** Layout classes from the caller (ReaderView passes the prose column's width). */
     className?: string
 }
@@ -103,7 +101,7 @@ interface MarkdownActionsProps {
  * handing it to an LLM. Renders on any page with a generated `.md` counterpart (see
  * `gatsby/rawMarkdownUtils.ts`) and returns null everywhere else.
  */
-export const MarkdownActions: React.FC<MarkdownActionsProps> = ({ pageUrl, isMdx = false, className = '' }) => {
+export const MarkdownActions: React.FC<MarkdownActionsProps> = ({ pageUrl, className = '' }) => {
     const [copied, setCopied] = useState(false)
     const [popoverOpen, setPopoverOpen] = useState(false)
 
@@ -143,15 +141,8 @@ export const MarkdownActions: React.FC<MarkdownActionsProps> = ({ pageUrl, isMdx
     if (!isAllowedPath) return null
 
     return (
-        <div className={`not-prose flex flex-col gap-2 ${className}`}>
-            {isMdx && !isMarkdownExportExcluded(path) && (
-                <p data-markdown-agent-notice className="m-0 text-sm text-secondary">
-                    <a href={markdownUrl} className="underline">
-                        Read as Markdown
-                    </a>
-                </p>
-            )}
-            <div className={`flex self-end items-center gap-px ${exists === true ? '' : 'invisible'}`}>
+        <div className={`not-prose flex justify-end ${className}`}>
+            <div className={`flex items-center gap-px ${exists === true ? '' : 'invisible'}`}>
                 {/* `iconClassName` rather than the button's own className: OSButton's base classes
                     already set `text-primary` on the button, and two competing color utilities on one
                     element resolve by stylesheet order, not by which is written last. Setting the

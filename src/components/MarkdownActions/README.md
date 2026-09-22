@@ -13,25 +13,14 @@ It renders as two grouped buttons: a primary **Copy page** (copies the `.md` con
 flipping to a green check + "Copied" for 2s) and a chevron that opens a `Popover` with **Copy as Markdown**,
 **View as Markdown**, **Open in ChatGPT** and **Open in Claude**.
 
-MDX articles also render a direct **Read as Markdown** link. This link is present in the
-initial HTML, outside the dropdown and the client-side visibility check. Text readers can discover it
-without JavaScript.
-
 ## Props
 
 | Prop | Type | Default | Notes |
 | --- | --- | --- | --- |
 | `pageUrl` | `string` | — | The current page path, e.g. `/docs/product-analytics/installation`. |
-| `isMdx` | `boolean` | `false` | Show the static Markdown link for an exported MDX article. |
-| `className` | `string` | `''` | Layout/width classes for the wrapper. The component supplies a vertical layout with right-aligned buttons. |
+| `className` | `string` | `''` | Layout/width classes for the wrapper. The component supplies `not-prose flex justify-end`. |
 
 The component owns its own visibility and its own wrapper element — callers never need to guard it.
-
-The link uses the same exclusion predicate as the MDX exporter, `isMarkdownExportExcluded`, so excluded
-articles do not advertise a file. Non-MDX pages keep their existing buttons and do not receive this link.
-The link stays visible during hydration. Minimal previews do not generate Markdown, so the link's target
-is unavailable there. The exporter removes `data-markdown-agent-notice` from Markdown to avoid
-linking to the document the reader already has.
 
 ## Where the markdown comes from
 

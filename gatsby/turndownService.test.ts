@@ -19,12 +19,6 @@ test('exports one title without page and code actions', () => {
     assert.equal(extractTitleFromHtml('<title>MCP Analytics - Docs - PostHog</title>'), 'MCP Analytics')
 })
 
-test('omits the Markdown action link from exports without removing article links', () => {
-    const markdown = convert(`<p data-markdown-agent-notice><a href="/docs/example.md">Read as Markdown</a></p>
-        <h1>MCP Analytics</h1><p>Read the <a href="/docs/example">example</a>.</p>`)
-    assert.equal(markdown, '# MCP Analytics\n\nRead the [example](/docs/example.md).')
-})
-
 test('keeps empty table cells and inline formatting in their columns', () => {
     const markdown = convert(`<table><thead><tr><th>Option</th><th></th><th>Default</th></tr></thead>
         <tbody><tr><td><code>capture_model</code></td><td></td><td><strong>True</strong></td></tr>
