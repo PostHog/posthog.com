@@ -1537,6 +1537,10 @@ export const handbookSidebar = [
                         url: '/handbook/forward-deployed-engineering/how-we-work',
                     },
                     {
+                        name: 'How we work with AI',
+                        url: '/handbook/forward-deployed-engineering/working-with-ai',
+                    },
+                    {
                         name: 'New starter onboarding',
                         url: '/handbook/forward-deployed-engineering/new-hire-onboarding',
                     },
