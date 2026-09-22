@@ -153,7 +153,7 @@ function App() {
 export default App
 ```
 
-### TypeError: Cannot read properties of undefined
+### Fix: TypeError: Cannot read properties of undefined
 
 If you see the error `TypeError: Cannot read properties of undefined (reading '...')` this is likely because you tried to call a posthog function when posthog was not initialized (such as during the initial render). On purpose, we still render the children even if PostHog is not initialized so that your app still loads even if PostHog can't load.
 

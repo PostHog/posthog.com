@@ -158,7 +158,7 @@ startTransition(() => {
 To help PostHog track your user sessions across the client and server, you'll need to add the `tracing_headers: ['your-backend-hostname1.com', 'your-backend-hostname2.com', ...]` option to your PostHog initialization. This adds the `X-POSTHOG-DISTINCT-ID` and `X-POSTHOG-SESSION-ID` headers to requests sent to the configured hostnames, which we'll later use on the server-side.
 
 <details>
-<summary>TypeError: Cannot read properties of undefined</summary>
+<summary>Fix: TypeError: Cannot read properties of undefined</summary>
 
 <TypeErrorSection />
 
