@@ -26,6 +26,24 @@ export const isMarkdownContentPath = (path: string): boolean => {
     )
 }
 
+// Shared by the MDX exporter and the article's server-rendered Markdown link.
+export const isMarkdownExportExcluded = (path: string): boolean =>
+    [
+        '/_snippets',
+        '/snippets/',
+        '/_includes',
+        '/thanks',
+        '/notes/test-note',
+        '/service-error',
+        '/service-message',
+        '/services',
+        '/request-received',
+        '/teams/',
+        '/hosthog',
+        '/startups',
+        '/example-components',
+    ].some((term) => path.includes(term))
+
 // Default avatar fallback (Max the hedgehog)
 export const AVATAR_FALLBACK_URL =
     'https://res.cloudinary.com/dmukukwp6/image/upload/547324034_92465cc7_daa9_413a_9c77_e72dc38f1c9f_d77ba7e4c2.png'

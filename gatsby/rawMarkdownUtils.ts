@@ -1,5 +1,6 @@
 import path from 'path'
 import fs from 'fs'
+import { isMarkdownExportExcluded } from '../src/constants'
 import { SdkReferenceData } from '../src/templates/sdk/SdkReference'
 import {
     getLanguageFromSdkId,
@@ -28,25 +29,7 @@ export const generateRawMarkdownPages = async (
 ) => {
     const publicPath = path.resolve(__dirname, '../public')
 
-    const excludeTerms = [
-        '/_snippets',
-        '/snippets/',
-        '/_includes',
-        '/thanks',
-        '/notes/test-note',
-        '/service-error',
-        '/service-message',
-        '/services',
-        '/request-received',
-        '/teams/',
-        '/hosthog',
-        '/startups',
-        '/example-components',
-    ]
-
-    const filteredNodes = docsNodes.filter((node) => {
-        return !excludeTerms.some((term) => node.fields.slug.includes(term))
-    })
+    const filteredNodes = docsNodes.filter((node) => !isMarkdownExportExcluded(node.fields.slug))
 
     const processedPages: Array<{ slug: string; title: string }> = []
 

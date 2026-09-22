@@ -1736,6 +1736,7 @@ function ReaderViewContent({
                                     {!hideMarkdownActions && (
                                         <MarkdownActions
                                             pageUrl={appWindow?.path ?? pathname}
+                                            isMdx={body?.type === 'mdx'}
                                             className={`mb-2 transition-all ${contentWidthClass}`}
                                         />
                                     )}
