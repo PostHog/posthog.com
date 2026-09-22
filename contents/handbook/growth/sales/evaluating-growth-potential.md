@@ -26,7 +26,7 @@ Don't size it yet. But answering this question with a "yes" implies the opportun
 
 Most accounts won't have all four of these. One or two is normal.
 
-**1. Use case gaps.** Map their paid products against the [use case framework](/handbook/growth/use-case-selling). Which use cases are they in? Which *applicable* use cases are untouched? A B2C mobile app has no Group Analytics story. A company with no AI features has no AIO story. Only count use cases that plausibly map to who the company actually is externally, not everything that's technically possible. This is a big reason a heuristic model fails here, because it needs the human context to make that call.
+**1. Use case gaps.** Map their paid products against the [use case framework](/handbook/growth/use-case-selling). Which use cases are they in? Which *applicable* use cases are untouched? A B2C mobile app has no Group Analytics story. A company with no AI features has no LLM analytics story. Only count use cases that plausibly map to who the company actually is externally, not everything that's technically possible. This is a big reason a heuristic model fails here, because it needs the human context to make that call.
 
 **2. Workloads.** How many apps, products, environments, or business units do they have, and how many are instrumented? One workload fully instrumented at a company with a single product surface is largely saturated. Three business units globally with only one instrumented is an expansion lever. If you don't know the answer and you often can't get it from LinkedIn or enrichment data alone, that's not a "no" necessarily, it means you need more discovery.
 

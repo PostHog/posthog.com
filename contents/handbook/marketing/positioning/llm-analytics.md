@@ -12,9 +12,9 @@ PostHog AIO tracks every model call – latency, tokens, cost per user, quality 
 
 Langfuse shows you the trace. PostHog shows you the trace *and* what it cost you in user retention **and** makes that information queryable to PostHog Desktop, the self-driving development platform. 
 
-## The unique belief (in terms of AIO)
+## The unique belief (in terms of LLM analytics)
 
-Every team building an AI-native product is running two products simultaneously: the product users see, and the AI layer underneath it. That AI layer has its own failure modes – bad prompts, cost explosions, latency spikes, quality regressions – and none of those show up in standard product analytics. That's where AIO comes in!
+Every team building an AI-native product is running two products simultaneously: the product users see, and the AI layer underneath it. That AI layer has its own failure modes – bad prompts, cost explosions, latency spikes, quality regressions – and none of those show up in standard product analytics. That's where LLM analytics comes in!
 
 PostHog Desktop already uses LLM traces optimize AI features as part of the [product autonomy loop](/blog/self-driving-product). Its built-in `exploring-llm-traces` and `exploring-llm-clusters` skills let agents find patterns in model calls and propose prompt improvements. But that only works if the traces exist. **AIO is the signal layer that makes AI products self-improving.**
 
