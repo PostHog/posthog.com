@@ -357,7 +357,7 @@
     },
     {
         "handle": "tomas-farias",
-        "name": "Tomás Farías Santana",
+        "name": "Tom\u00e1s Far\u00edas Santana",
         "role": "Software Engineer"
     },
     {
@@ -788,5 +788,13 @@
         "name": "Daniel Zaltsman",
         "role": "Builder relations team lead",
         "profile_id": 34023
+    },
+    {
+        "handle": "juraj-majerik",
+        "name": "Juraj Majerik",
+        "role": "Product Engineer",
+        "link_type": "github",
+        "link_url": "https://github.com/jurajmajerik",
+        "profile_id": 29792
     }
 ]
