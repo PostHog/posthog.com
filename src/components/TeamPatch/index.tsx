@@ -3,6 +3,54 @@ import React from 'react'
 // source for this entire SVG lives here:
 // https://www.figma.com/design/QCYxjm4wVVVvs6UA27xRmz/Website-art?node-id=2806-100&t=OEHDCRsAlrgEUkV4-1
 
+// Tailwind font-size tokens (in px) that a team's crestOptions.fontSize can name.
+const FONT_SIZES: Record<string, number> = {
+    xs: 12,
+    sm: 14,
+    base: 16,
+    lg: 18,
+    xl: 20,
+    '2xl': 24,
+    '3xl': 30,
+    '4xl': 36,
+    '5xl': 48,
+}
+
+// How wide a name can be, in SVG user units, before it runs off each plaque. A name on a
+// textPath loses every glyph past the end of the path, so the fit must hold for all of them.
+const PLAQUE_FIT: Record<string, { maxWidth: number; letterSpacing?: number }> = {
+    straight: { maxWidth: 220 },
+    curved: { maxWidth: 226 },
+    wavy: { maxWidth: 218, letterSpacing: 0.05 }, // tracking-wider
+    stepped: { maxWidth: 174 },
+    'downward-curve': { maxWidth: 214 },
+    'upward-curve': { maxWidth: 214 },
+}
+
+// Advance widths of font-squeak's uppercase glyphs, in em, grouped by width. Within 2% of the
+// real widths, which is close enough to pick a font size that fits.
+const nameWidth = (name: string, letterSpacing: number) =>
+    name
+        .toUpperCase()
+        .split('')
+        .reduce((width, character) => {
+            if (character === ' ') return width + 0.25 + letterSpacing
+            if ('ILT1'.includes(character)) return width + 0.44 + letterSpacing
+            if ('MW'.includes(character)) return width + 0.85 + letterSpacing
+            if ('CGNOQVXY'.includes(character)) return width + 0.63 + letterSpacing
+            return width + 0.56 + letterSpacing
+        }, 0)
+
+// crestOptions.fontSize is a hint: a name that is too long for its plaque gets a smaller size.
+const fitFontSize = (name = '', fontSize = '3xl', plaque = ''): number => {
+    const requested = FONT_SIZES[fontSize] ?? FONT_SIZES['3xl']
+    const fit = PLAQUE_FIT[plaque]
+    if (!fit) return requested
+    const width = nameWidth(name, fit.letterSpacing ?? 0)
+    if (!width) return requested
+    return Math.min(requested, Math.round((fit.maxWidth / width) * 100) / 100)
+}
+
 interface TeamNameProps {
     id?: string
     name?: string
@@ -10,7 +58,7 @@ interface TeamNameProps {
     fill?: string
     textColor?: string
     textShadow?: string
-    textSize?: string
+    fontSize?: number
     children?: React.ReactNode
     startOffset?: string
     textAnchor?: string
@@ -25,7 +73,7 @@ const TeamName: React.FC<TeamNameProps> = ({
     fill,
     textColor,
     textShadow,
-    textSize,
+    fontSize,
     children,
     startOffset,
     textAnchor,
@@ -39,9 +87,8 @@ const TeamName: React.FC<TeamNameProps> = ({
             xmlSpace="preserve"
             {...(x ? { x: x } : {})}
             textAnchor={textAnchor}
-            className={`leading-none uppercase font-bold font-squeak [font-variant:none] text-${
-                textSize ? textSize : '3xl'
-            } 
+            fontSize={fontSize}
+            className={`leading-none uppercase font-bold font-squeak [font-variant:none]
         fill-${textColor ? textColor : 'white [text-shadow:0_1px_0_rgba(0,0,0,.5)]'} 
         ${
             textShadow === 'light'
@@ -96,6 +143,8 @@ export default function TeamPatch({
     imageYOffset,
     className = '',
 }: TeamPatchProps) {
+    const fittedFontSize = fitFontSize(name, fontSize, plaque)
+
     return (
         <svg
             viewBox="0 0 288 305"
@@ -407,7 +456,7 @@ export default function TeamPatch({
                                 href="curved-name"
                                 startOffset="26%"
                                 name={name}
-                                textSize={fontSize}
+                                fontSize={fittedFontSize}
                             />
                         </g>
                     )}
@@ -425,7 +474,7 @@ export default function TeamPatch({
                                     fill={textColor}
                                     textColor={textColor}
                                     textShadow={textShadow}
-                                    textSize={fontSize}
+                                    fontSize={fittedFontSize}
                                     textAnchor="middle"
                                     x="138"
                                 >
@@ -461,7 +510,7 @@ export default function TeamPatch({
                                 name={name}
                                 fill={textColor}
                                 textColor={textColor}
-                                textSize={fontSize}
+                                fontSize={fittedFontSize}
                                 textShadow={textShadow}
                                 href="name-wavy"
                                 startOffset="50%"
@@ -528,7 +577,7 @@ export default function TeamPatch({
                                 textShadow={textShadow}
                                 textAnchor="middle"
                                 x="139.2529"
-                                textSize={fontSize}
+                                fontSize={fittedFontSize}
                             >
                                 <tspan y="230.463">{name}</tspan>
                             </TeamName>
@@ -562,7 +611,7 @@ export default function TeamPatch({
                                 textAnchor="middle"
                                 href="downward-curve-name"
                                 startOffset="50%"
-                                textSize={fontSize}
+                                fontSize={fittedFontSize}
                                 name={name}
                             />
                         </>
@@ -593,7 +642,7 @@ export default function TeamPatch({
                                 href="upward-curve-name"
                                 startOffset="50%"
                                 name={name}
-                                textSize={fontSize}
+                                fontSize={fittedFontSize}
                             />
                         </g>
                     )}

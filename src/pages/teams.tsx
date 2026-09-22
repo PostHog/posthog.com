@@ -256,7 +256,6 @@ const Teams: React.FC<TeamsProps> = ({ searchTerm: propSearchTerm }) => {
                                                     imageUrl={crest?.data?.attributes?.url}
                                                     {...crestOptions}
                                                     className="w-full"
-                                                    fontSize="xl"
                                                 />
                                             </div>
 
