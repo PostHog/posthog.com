@@ -14,6 +14,7 @@ import {
     postProcessMarkdown,
     preprocessHtmlForTabs,
 } from './turndownService'
+import { parseFeatureOwnershipTable, parseSeverityLevels, parseSmeProductGroups } from './machineReadable'
 
 // Prepended to every generated .md file so LLM crawlers landing on a single page
 // still see the pointer to the full index. Pairs with <link rel="llms.txt"> in seo.tsx.
@@ -619,6 +620,85 @@ For features, screenshots, and details, see ${pageLinkFor(item)}.
     }
 }
 
+const writePublicFile = (relativePath: string, content: string) => {
+    const outputPath = path.join(path.resolve(__dirname, '../public'), relativePath)
+    fs.mkdirSync(path.dirname(outputPath), { recursive: true })
+    fs.writeFileSync(outputPath, content, 'utf8')
+    console.log(`Generated: ${relativePath}`)
+}
+
+const writePublicJson = (relativePath: string, data: Record<string, unknown>) =>
+    writePublicFile(relativePath, `${JSON.stringify({ generated_at: new Date().toISOString(), ...data }, null, 2)}\n`)
+
+// Machine-readable twins listed in llms.txt. Single source for the paths and the index entries.
+const MACHINE_READABLE_PAGES = {
+    teamsMd: { path: 'teams.md', title: 'Teams (Markdown)' },
+    teamsJson: { path: 'teams.json', title: 'Teams (JSON)' },
+    featureOwnership: { path: 'handbook/engineering/feature-ownership.json', title: 'Feature ownership (JSON)' },
+    supportSmes: { path: 'handbook/support/support-smes.json', title: 'Support SME product groups (JSON)' },
+    severityLevels: { path: 'docs/support-options.json', title: 'Support severity levels (JSON)' },
+}
+
+// Generate /teams.md and /teams.json. The /teams page is a client-rendered UI, so the HTML-scrape
+// path does not cover it. `teams` must come from the same query and filter as src/pages/teams/index.tsx.
+export const generateTeamsFiles = (teams: Array<{ name: string; slug: string; tagline?: string | null }>) => {
+    if (teams.length === 0) {
+        throw new Error('generateTeamsFiles: the allSqueakTeam query returned no teams.')
+    }
+
+    const sorted = [...teams]
+        .sort((a, b) => a.name.localeCompare(b.name))
+        .map(({ name, slug, tagline }) => ({ name, slug, tagline: tagline || '' }))
+
+    writePublicJson(MACHINE_READABLE_PAGES.teamsJson.path, { teams: sorted })
+
+    const lines = sorted.map(({ name, slug, tagline }) => `- ${name} (/teams/${slug})${tagline ? `: ${tagline}` : ''}`)
+    const content = `# PostHog teams
+
+The small teams at PostHog, as shown on https://posthog.com/teams. The same list as JSON: https://posthog.com/teams.json
+
+${lines.join('\n')}
+`
+    writePublicFile(MACHINE_READABLE_PAGES.teamsMd.path, withAgentSignpost(content))
+}
+
+// Generate the JSON twins of pages that agents read for routing (feature owners, support SME groups,
+// severity levels). Each is parsed from the page source, so the page stays the only source of truth.
+// Must run after generateRawMarkdownPages: the feature ownership table is a React component, so its
+// only Markdown form is the generated .md twin in public/.
+export const generateHandbookJsonTwins = () => {
+    const read = (filePath: string): string => {
+        if (!fs.existsSync(filePath)) {
+            throw new Error(`generateHandbookJsonTwins: ${filePath} does not exist.`)
+        }
+        return fs.readFileSync(filePath, 'utf8')
+    }
+    const root = path.resolve(__dirname, '..')
+
+    // This source exists only after a full build, so no test can check it before merge.
+    // On an error, publish no file (the URL returns 404) and let the site deploy.
+    // The two sources below have tests in machineReadable.test.ts, so an error there stops the build.
+    const ownershipSource = 'public/handbook/engineering/feature-ownership.md'
+    try {
+        writePublicJson(MACHINE_READABLE_PAGES.featureOwnership.path, {
+            features: parseFeatureOwnershipTable(read(path.join(root, ownershipSource)), ownershipSource),
+        })
+    } catch (error) {
+        fs.rmSync(path.join(root, 'public', MACHINE_READABLE_PAGES.featureOwnership.path), { force: true })
+        console.error(`Failed to generate ${MACHINE_READABLE_PAGES.featureOwnership.path}:`, error)
+    }
+
+    const smeSource = 'contents/handbook/support/support-smes.md'
+    writePublicJson(MACHINE_READABLE_PAGES.supportSmes.path, {
+        groups: parseSmeProductGroups(read(path.join(root, smeSource)), smeSource),
+    })
+
+    const severitySource = 'contents/docs/support-options.md'
+    writePublicJson(MACHINE_READABLE_PAGES.severityLevels.path, {
+        severities: parseSeverityLevels(read(path.join(root, severitySource)), severitySource),
+    })
+}
+
 type ChangelogRoadmapNode = {
     strapiID?: number | string
     title: string
@@ -888,6 +968,17 @@ What's new in PostHog — new features, products, and tools, updated with every 
 
 - [Changelog (last 12 months, Markdown)](https://posthog.com/changelog.md)
 - [Changelog RSS feed](https://posthog.com/changelog.rss)
+
+`
+
+    // Teams and ownership — generated from the same sources as the pages, for agents that route work
+    llmsTxtContent += `## Teams and ownership
+
+Which team owns a feature, and how support groups products. Generated at build time from the same sources as the pages.
+
+${Object.values(MACHINE_READABLE_PAGES)
+    .map((page) => `- [${page.title}](https://posthog.com/${page.path})`)
+    .join('\n')}
 
 `
 

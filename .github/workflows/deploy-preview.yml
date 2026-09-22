@@ -79,6 +79,9 @@ jobs:
             - name: Check Markdown exports
               run: pnpm test:markdown
 
+            - name: Check machine-readable sources
+              run: pnpm test:machine-readable
+
             - name: Build site
               run: pnpm build
               env:
