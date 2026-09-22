@@ -72,7 +72,7 @@ PostHog validates each ID-JAG against the trusted IdP's public keys (via OIDC di
 
 ### 1. Verify your domain in PostHog
 
-Go to [**Organization settings → Authentication domains & SSO**](https://app.posthog.com/settings/organization-authentication) and add and verify the domain your users authenticate with (e.g. `example.com`). See the [SSO docs](/docs/settings/sso) for domain verification steps.
+Go to [**Organization settings → Authentication domains & SSO**](https://app.posthog.com/settings/organization-authentication) and add and verify the domain your users authenticate with (e.g. `example.com`). See the [SSO docs](/docs/settings/authentication/sso) for domain verification steps.
 
 ID-JAG only accepts tokens for users who are **active members of the organization that owns the verified domain**, so the user's email domain must match.
 
@@ -153,6 +153,6 @@ The token endpoint returns standard OAuth errors ([RFC 6749 §5.2](https://www.r
 
 - [Enterprise-managed authorization for MCP](/docs/model-context-protocol/enterprise-managed-authorization)
 - [ID-JAG / XAA specification](https://xaa.dev)
-- [SSO, SAML, & SCIM](/docs/settings/sso)
+- [SSO](/docs/settings/authentication/sso)
 - [OAuth integration](/docs/api/oauth)
 - [API authentication and scopes](/docs/api#authentication)

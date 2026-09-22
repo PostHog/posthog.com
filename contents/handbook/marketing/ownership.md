@@ -37,7 +37,7 @@ These are some other areas that PMMs own outside of specific products.
 <details>
 <summary>I need a product marketer, but my team hasn't been assigned one</summary>
 
-Just ask in #team-marketing in Slack and tag <TeamMember name="Joe Martin" photo />. 
+Just ask in #team-marketing in Slack and tag <TeamMember name="Joe Black" photo />. 
 </details>
 
 
@@ -94,7 +94,7 @@ If your idea is for PostHog Stories (HogTok), hit up <TeamMember name="Edwin Lim
 <details>
 <summary>A customer is interested in doing a case study with us</summary>
 
-Speak to <TeamMember name="Joe Martin" />, <TeamMember name="Cleo Lant" />, or <TeamMember name="Sara Miteva" />.
+Speak to <TeamMember name="Joe Black" />, <TeamMember name="Cleo Lant" />, or <TeamMember name="Sara Miteva" />.
 </details>
 
 <details>

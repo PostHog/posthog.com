@@ -60,15 +60,15 @@ import { resourceFromAttributes } from '@opentelemetry/resources'
 export const loggerProvider = new LoggerProvider({
   resource: resourceFromAttributes({ 'service.name': 'my-nextjs-app' }),
   processors: [
-    new BatchLogRecordProcessor(
-      new OTLPLogExporter({
+    new BatchLogRecordProcessor({
+      exporter: new OTLPLogExporter({
         url: '<ph_client_api_host>/i/v1/logs',
         headers: {
           Authorization: 'Bearer <ph_project_token>',
           'Content-Type': 'application/json',
         },
-      })
-    ),
+      }),
+    }),
   ],
 })
 

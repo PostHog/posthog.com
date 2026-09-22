@@ -80,6 +80,19 @@ This is useful because, by default, users who opted out during a beta still have
 
 > **Note:** Once promoted to General Availability, the early access feature can no longer be edited.
 
+## Copying a feature to another project
+
+You can copy an early access feature to another project in the same organization. This option shows only when your organization has more than one project.
+
+1. Open the early access feature you want to copy.
+1. Open the actions sidebar.
+1. Click **Copy to another project**.
+1. Select the destination project.
+1. Under **Dependencies**, choose what to do with the connected feature flag. **Copy** creates a new flag in the destination project. **Use existing** links the feature to a flag that is already there.
+1. Click **Copy**.
+
+The original does not change, and the copy does not sync with it.
+
 ## Payloads
 
 Each early access feature can include a JSON payload – custom metadata that is delivered to users via the Early Access Features API and `posthog-js`. Use payloads to attach configuration, release notes, or UI customization data to a feature.
