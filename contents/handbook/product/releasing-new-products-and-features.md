@@ -64,7 +64,7 @@ To give customers a minimum amount of information and usability, set up the earl
 - It has a [feature owner](/handbook/engineering/feature-ownership)
 - It has a `product_key`
 
-Titles, descriptions, and links are all set on the early access feature in [Early Access Management](https://us.posthog.com/early_access_features). Product teams are responsible for [writing documentation](/handbook/engineering/writing-docs), but the <SmallTeam slug="content" /> can help, if needed.
+Titles, descriptions, and links are all set on the early access feature in [Early Access Management](https://us.posthog.com/early_access_features). Product teams are responsible for [writing documentation](/handbook/engineering/writing-docs), but the <SmallTeam slug="marketing" /> can help, if needed.
 
 <div className="flex justify-center">
   <CloudinaryImage
