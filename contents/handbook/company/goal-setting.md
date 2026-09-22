@@ -17,6 +17,8 @@ In terms of accountability, <TeamMember name="Scott Lewis" photo /> will notify 
 
 > If you prep properly (see below), planning meetings should take 1 hour max. The meeting is not the end of the process - you may still have some back and forth on the PR, but the meeting should give the team lead enough info to write a good PR. 
 
+Where a team owns a product that has product-market fit, the quarter's [per-product growth reviews](/handbook/product/per-product-growth-reviews) are part of this prep. The second review (5 weeks into the quarter) gives you the list of open questions to answer before planning, and the third (9 weeks in) gives an overall health check of the quarter.
+
 ### Planning template
 
 Teams should fill in the previous quarter reflection async in the doc before the meeting starts. **HOGS should be written privately and independently, in your own notes rather than the shared doc, then pasted in at the start of the session.** Doing them privately first stops people from being skewed by each other's thinking before they've formed their own view. The meeting itself should be 20% reviewing the past, and 80% talking about goals for next quarter. Don't fall into the trap of spending most of your time reviewing and then rushing the goals right at the end. 
