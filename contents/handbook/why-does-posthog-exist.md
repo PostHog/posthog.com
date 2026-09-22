@@ -33,9 +33,9 @@ We provide developer infrastructure - by providing _every_ tool engineers need i
 - Automate everything better than anyone else can, by using AI across this wider context
 - Continue to provide all the products engineering teams need as they grow
 
-### 2. Provide every product engineers need
+### 2. Provide every tool engineers need to build successful products
 
-We aim to offer every product engineering teams need to debug, understand, and improve their products. From session replay for debugging to feature flags for safe deployments, we help engineers ship better code faster.
+We aim to offer every tool engineering teams need to debug, understand, and improve their products. From session replay for debugging to feature flags for safe deployments, we help engineers ship better code faster.
 
 We can then get our AI to work across all of them together, whilst making every individual product cheaper than the rest of the market - since we provide so many we can charge less. This means engineers get better products at a fraction of the cost of piecing together solutions from multiple vendors.
 
@@ -51,6 +51,6 @@ Because we have all the context on both users and the product, we can automate l
 
 ## Secret master plan
 
-* Ship every product and all the data that engineering teams need to understand their own product and users
+* Ship every tool and all the data that engineering teams need to understand their product and users
 * Use that to speed up the cycle of shipping -> observing -> iterating
 * Eventually, automate the entire cycle
