@@ -1188,7 +1188,7 @@ All prices are in USD. Full interactive pricing calculator: https://posthog.com/
 PostHog has two plans:
 
 - **Free** — No credit card required. Generous monthly usage limits on every product. 1 project. 1 year data retention. Community support.
-- **Paid** (pay-as-you-go) — $0/mo base price. You get a free tier on every product, then pay only for what you use above it. The free tier resets every month. 6 projects. 7 year data retention. Email support.
+- **Paid** (pay-as-you-go) — $0/mo base price. You get a free tier on every product, then pay only for what you use above it. The free tier resets every month. 6 projects. 2 year data retention. Email support.
 
 There are no per-seat charges. Your whole team can use PostHog.
 

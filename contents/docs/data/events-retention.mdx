@@ -16,11 +16,11 @@ Your retention period comes from your plan:
 | Plan | Events data retention |
 |-----------|---------------|
 | Free | 1 year
-| Paid plans | 7 years
+| Paid plans | 2 years
 
 Two read-only fields on the [projects API](/docs/api/projects) report it:
 
-- `event_retention_months` – the length of the window in months. A value of `84` is 7 years.
+- `event_retention_months` – the length of the window in months. A value of `24` is 2 years, and a value of `84` is 7 years.
 - `events_retention_enforced` – whether the window applies to your project today.
 
 <CalloutBox type="fyi" title="Enforcement is a gradual rollout">
@@ -30,6 +30,15 @@ PostHog applies retention project by project. While `events_retention_enforced` 
 </CalloutBox>
 
 Retention applies on PostHog Cloud only. A self-hosted instance keeps your events until you remove them.
+
+### Organizations created before October 1, 2026
+
+On October 1, 2026, PostHog changed the retention period on paid plans from 7 years to 2 years.
+
+- If you created your organization before October 1, 2026, it keeps the 7-year period. PostHog calls this a grandfathered period.
+- If you create your organization on or after October 1, 2026, it gets the 2-year period.
+
+The grandfathered period applies to the organization, not to the project. A new project in a grandfathered organization also gets the 7-year period. Read `event_retention_months` on the [projects API](/docs/api/projects) to see which period your project has.
 
 ## What retention does to your data
 
@@ -41,9 +50,30 @@ When retention applies to your project:
 
 ## Retention is not a deletion tool
 
-You cannot make your retention period shorter to remove data, and a shorter period is not available on request. To remove data, use the tools in [controlling data storage](/docs/privacy/data-storage#data-deletion):
+Retention controls what your queries can read. It does not promise that PostHog deletes your data.
 
-- Delete a person, together with their events and recordings, to answer a [right to be forgotten](/docs/privacy/data-storage#right-to-be-forgotten) request.
-- Delete a project or an organization to remove all of the events in it.
+After your retention period ends:
+
+- Your queries no longer return the events. You cannot get them back through the PostHog UI or the API.
+- PostHog can delete the events, but PostHog does not guarantee that it deletes them at the end of the period, or on any schedule that you can rely on.
+- A copy of the events can stay in cold storage, in a backup, or in another internal system.
+
+<CalloutBox type="caution" title="Do not use retention as a compliance control">
+
+If you must show that PostHog deleted specific data, do not use the end of your retention period as evidence. Use a deletion tool, which gives you an action that you can request, monitor, and record. Examples of such a requirement are a data subject request under the GDPR or the CCPA, an audit, and a contractual deletion term.
+
+</CalloutBox>
+
+You also cannot make your retention period shorter to remove data, and a shorter period is not available on request.
+
+## How to delete your data
+
+To remove data from PostHog, use the tools in [data management](/docs/data) and [controlling data storage](/docs/privacy/data-storage#data-deletion):
+
+- [Delete a person](/docs/privacy/data-storage#right-to-be-forgotten), together with their events and recordings, to answer a right to be forgotten request.
+- [Delete a project or an organization](/docs/privacy/data-storage#data-deletion) to remove all of the events in it.
+- [Filter or drop events before ingestion](/docs/data/event-filtering) to keep unwanted data out of PostHog.
+
+For more about what PostHog stores and where, see [controlling data storage](/docs/privacy/data-storage), [GDPR compliance](/docs/privacy/gdpr-compliance), and [CCPA compliance](/docs/privacy/ccpa-compliance).
 
 To keep events for longer than your retention period, send them to your own storage with a [batch export](/docs/cdp/batch-exports).

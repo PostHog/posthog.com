@@ -74,8 +74,10 @@ const faqs = [
         a: (
             <>
                 <p>
-                    Events and metadata are guaranteed to be retained for 7 years on any paid plan and 1 year on a free
-                    plan. After 1 year, data may be moved into cold storage so queries may run more slowly.
+                    Events and metadata are guaranteed to be retained for 2 years on any paid plan and 1 year on a free
+                    plan. Organizations created before October 1, 2026 keep the previous 7-year period on paid plans.
+                    After 1 year, data may be moved into cold storage so queries may run more slowly. See{' '}
+                    <Link to="/docs/data/events-retention">events data retention</Link> for details.
                 </p>
                 <p>
                     Recordings on the free plan are retained for 1 month. On the pay-as-you-go plan, recordings are
@@ -88,7 +90,21 @@ const faqs = [
     },
     {
         q: 'What happens after the data retention period elapses?',
-        a: <p>Any data stored for more than the retention period may be permanently deleted from our systems.</p>,
+        a: (
+            <>
+                <p>
+                    Your queries stop returning the data, and you can no longer access it in PostHog. We may then
+                    permanently delete it.
+                </p>
+                <p>
+                    The end of the retention period is not a deletion guarantee. Data that you can no longer query has
+                    not necessarily been deleted from our systems, so don't rely on retention as a compliance control.
+                    If you need data deleted, use our{' '}
+                    <Link to="/docs/privacy/data-storage#data-deletion">data deletion tools</Link> or read about{' '}
+                    <Link to="/docs/data">data management</Link>.
+                </p>
+            </>
+        ),
     },
     {
         q: 'Is there a free trial on paid plans?',

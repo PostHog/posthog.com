@@ -32,7 +32,13 @@ The longest available retention period depends on your PostHog plan:
 | Scale | Up to 1 year
 | Enterprise | Up to 5 years
 
-> **Note:** When a recording expires, the deletion is not immediate. Recordings may still appear for a short time after the retention period expires or when manually deleted via the UI. Once a recording has been deleted we are unable to restore it - this makes data retention a useful feature if you are subject to data protection regulations.
+> **Note:** When a recording expires, the deletion is not immediate. Recordings may still appear for a short time after the retention period expires or when manually deleted via the UI. Once a recording has been deleted we are unable to restore it.
+
+<CalloutBox type="caution" title="Retention is not a deletion guarantee">
+
+The end of the retention period stops you from playing a recording. It does not promise that PostHog deleted the recording, so do not use retention as a compliance control. To make PostHog delete data, use the [data deletion tools](/docs/privacy/data-storage#data-deletion). For more about what PostHog stores, see [data management](/docs/data) and [events data retention](/docs/data/events-retention).
+
+</CalloutBox>
 
 ## Exporting recordings
 
