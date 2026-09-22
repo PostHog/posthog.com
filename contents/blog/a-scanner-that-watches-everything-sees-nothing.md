@@ -1,6 +1,6 @@
 ---
 title: What we learned from our first 400k Replay Vision scans
-date: 2026-09-17
+date: 2026-09-22
 author:
   - cory-slater
 featuredImage: >-
