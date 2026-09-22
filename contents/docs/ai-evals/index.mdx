@@ -323,6 +323,46 @@ The **Evaluations** page shows all your evaluations with their pass rates and re
 
 You can also filter generations by evaluation results or create [insights](/docs/product-analytics/insights) based on evaluation data to build quality monitoring dashboards.
 
+## Evaluating past data
+
+An evaluation only grades generations captured after you create it. To apply one to data you already have, run a **backfill** from the **Backfills** tab on the evaluation.
+
+### How backfills work
+
+A backfill runs the evaluation over a time range you pick, using the same conditions and sampling rate as the live evaluation. It skips anything the evaluation has already graded, so running one over a range the evaluation was already covering finds nothing to do.
+
+Results appear alongside live results in the evaluation's run history, and each backfill row links to the results it produced.
+
+### Creating a backfill
+
+1. Open the evaluation and go to the **Backfills** tab
+2. Pick a time range, up to 30 days back
+3. Adjust the conditions if you want a narrower scope than the live evaluation uses
+4. Check the count above the **Start backfill** button, which shows how many generations would be evaluated
+5. Click **Start backfill** and confirm
+
+One backfill runs at a time per evaluation. You can cancel a run while it is in progress, and results it already saved stay.
+
+### Re-evaluating generations that already have a result
+
+Turn on **Include generations that already have a result** to grade generations a second time. Use it after changing a prompt or a code check, when you want the new version applied to data the old version already scored. Both results are kept, so you can compare them.
+
+### Reading a backfill's progress
+
+The **Covered** column counts the generations in range that hold a result. A finished backfill usually reads as fully covered, because the evaluation grades new data on its own while the backfill works through older data.
+
+Expand a row to see the range, the conditions it used, and how many generations it started, skipped, or left without a result.
+
+### When the count is zero
+
+An enabled evaluation covers its own traffic within minutes, so a range it has been running over has nothing left to grade, and the count reads zero. This is expected, not an error. To grade that range again, turn on **Include generations that already have a result**.
+
+The most recent few minutes are also held back, because an evaluation waits for a generation to settle before grading it.
+
+### Backfill pricing
+
+Each generation a backfill evaluates counts as one AI Observability event, the same as a live evaluation, and LLM judge backfills use your provider API key. The confirmation dialog shows how many generations will be evaluated before you start, so check that number on a wide range.
+
 ## Evaluation reports
 
 When you create an evaluation, PostHog automatically provisions a default report configuration. Reports summarize evaluation results over time, so you can track quality trends without any additional setup.
@@ -405,3 +445,5 @@ If a provider API key is missing or deleted, PostHog automatically disables the 
 **Sentiment evaluations** have no LLM cost – they run a local ML model with no external API calls.
 
 Use sampling rates strategically to balance coverage and cost – 5-10% sampling often provides sufficient signal for quality monitoring.
+
+Backfills bill the same way. See [Evaluating past data](#evaluating-past-data) for how to check the count before starting one.
