@@ -7,13 +7,12 @@ import { getTool } from '../../data/tools'
 
 export const dataWarehouse = {
     ...getTool('data_warehouse'),
-    parentIcon: 'dataWarehouse',
     Icon: IconDatabase,
     type: 'data_warehouse',
     color: 'purple',
     colorSecondary: 'lilac',
     seo: {
-        title: 'Managed DuckDB warehouse - PostHog',
+        title: 'Managed Warehouse - PostHog',
         description:
             'A managed data warehouse that unifies your product context with any source – so agents can query all of it and act on it to make your product self-driving.',
     },

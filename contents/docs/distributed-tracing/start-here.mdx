@@ -11,12 +11,14 @@ import { QuestLog, QuestLogItem } from "components/Docs/QuestLog";
 <QuestLog firstSpeechBubble="Let's set up tracing!" lastSpeechBubble="Time to explore your traces!">
 
 <QuestLogItem
-    title="Install an OpenTelemetry trace exporter"
+    title="Install a trace exporter"
     subtitle="Required"
     icon="IconCode"
 >
 
-PostHog Distributed Tracing works with any OpenTelemetry client. No PostHog-specific packages are required. Use the OTel SDKs you already have, point your trace exporter at PostHog's HTTP endpoint, and add your project token.
+PostHog Distributed Tracing works with any OpenTelemetry client. Use the OTel SDKs you already have, point your trace exporter at PostHog's HTTP endpoint, and add your project token.
+
+On Node.js and Python you can skip OpenTelemetry entirely: `posthog-node` and `posthog` create and export spans themselves, and spans made inside a request context carry the person and session they belong to. See the [Node.js](/docs/distributed-tracing/installation/nodejs) and [Python](/docs/distributed-tracing/installation/python) guides.
 
 Set these on your OpenTelemetry SDK:
 
@@ -32,7 +34,7 @@ This is a different endpoint from PostHog's AI/LLM tracing (`/i/v0/ai/otel`), wh
 
 For language-specific setup, follow one of our installation guides:
 
-<CallToAction type="primary" to="/docs/tracing/installation">
+<CallToAction type="primary" to="/docs/distributed-tracing/installation">
   Configure your tracing client
 </CallToAction>
 

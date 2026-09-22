@@ -47,7 +47,11 @@ export const productAnalytics = {
      * feed the carousel templates their slide arrays).
      */
     productMenu: [
-        { slug: 'overview', name: 'Overview', icon: <IconEye className="size-4" /> },
+        {
+            slug: 'overview',
+            name: 'Overview',
+            icon: <IconEye className="size-4" />,
+        },
         {
             slug: 'eli5',
             name: 'What does it do?',
@@ -111,8 +115,6 @@ export const productAnalytics = {
     ],
     overview: {
         title: 'Product analytics with autocapture',
-        description:
-            'Product Analytics is one of the tools that makes your product self-driving: the measurement agents use to see what works. Built to natively work with session replay, feature flags, experiments, and surveys.',
         eli5: "Product Analytics turns what people do in your product into answers you can act on. Autocapture tracks pageviews, clicks, and form submissions without extra code. From there you build trends, funnels, retention curves, paths, and SQL queries – then jump straight into the session recordings behind any data point when you need the 'why'.",
         textColor: 'text-white', // tw
     },
@@ -195,7 +197,6 @@ export const productAnalytics = {
     volume: MILLION,
     worksWith: ['session_replay', 'feature_flags', 'surveys'],
     useCases: {
-        intro: 'Product Analytics is used across teams depending on your role.',
         rows: [
             [
                 'Product Engineers',

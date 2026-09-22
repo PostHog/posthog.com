@@ -20,6 +20,7 @@ import { AnimatePresence, motion, PanInfo } from 'framer-motion'
 import Markdown from 'components/Squeak/components/Markdown'
 import Link from 'components/Link'
 import Filters from 'components/Changelog/Filters'
+import { getChangelogDocsPath, stripPostHogOrigin } from 'components/Changelog/docsLinks'
 import { GatsbyImage } from 'gatsby-plugin-image'
 import type { IGatsbyImageData } from 'gatsby-plugin-image'
 import { useWindow } from '../context/Window'
@@ -107,6 +108,7 @@ type RoadmapNode = {
         data?: {
             attributes?: {
                 label?: string
+                slug?: string
             }
         }
     }
@@ -174,6 +176,7 @@ const Roadmap = ({
     const { isModerator, getJwt } = useUser()
     const { addWindow } = useApp()
     const hasProfiles = (roadmap.profiles?.data?.length ?? 0) > 0
+    const docsPath = getChangelogDocsPath(roadmap)
     const [width, setWidth] = useState(450)
     const [isResizing, setIsResizing] = useState(false)
 
@@ -336,6 +339,19 @@ const Roadmap = ({
                         {roadmap.description && (
                             <div className="py-2 px-4">
                                 <Markdown>{roadmap.description}</Markdown>
+                                {docsPath && docsPath !== stripPostHogOrigin(roadmap.cta?.url || '') && (
+                                    <div className="mt-4">
+                                        <OSButton
+                                            asLink
+                                            to={docsPath}
+                                            variant="secondary"
+                                            width="full"
+                                            state={{ newWindow: true }}
+                                        >
+                                            Read the docs
+                                        </OSButton>
+                                    </div>
+                                )}
                                 <div className="mt-8 mb-4 flex flex-row flex-wrap gap-1">
                                     <ChangelogEmojiReactions roadmapId={roadmap.id} />
                                 </div>
@@ -411,9 +427,6 @@ const StaticChangelogList = ({ roadmaps }: { roadmaps: RoadmapNode[] }) => {
     return (
         <ScrollArea className="h-full">
             <div className="max-w-3xl mx-auto px-4 pb-8">
-                <p className="text-sm text-secondary">
-                    Also available as <a href="/changelog.md">Markdown</a> and <a href="/changelog.rss">RSS</a>.
-                </p>
                 {byMonth.map(([month, items]) => {
                     const fullDetail = fullDetailCutoff ? !dayjs.utc(month).isBefore(fullDetailCutoff) : true
                     return (
@@ -421,14 +434,19 @@ const StaticChangelogList = ({ roadmaps }: { roadmaps: RoadmapNode[] }) => {
                             <h2>{dayjs.utc(month).format('MMMM YYYY')}</h2>
                             {items.map((roadmap) => {
                                 const teamName = roadmap.teams?.data?.[0]?.attributes?.name
+                                const topicLabel = roadmap.topic?.data?.attributes?.label
+                                const docsPath = getChangelogDocsPath(roadmap)
                                 return (
                                     <article key={roadmap.id} className="mb-6">
                                         <Heading as="h3" id={slugify(roadmap.title, { lower: true })} className="m-0">
                                             {roadmap.title}
                                         </Heading>
                                         <p className="m-0 text-sm opacity-60">
-                                            {dayjs.utc(roadmap.date).format('MMMM D, YYYY')}
+                                            <a href={`/changelog?id=${roadmap.id}`}>
+                                                {dayjs.utc(roadmap.date).format('MMMM D, YYYY')}
+                                            </a>
                                             {teamName ? ` · ${teamName} Team` : ''}
+                                            {topicLabel ? ` · ${topicLabel}` : ''}
                                         </p>
                                         {fullDetail && roadmap.description && (
                                             <div className="mt-2">
@@ -438,6 +456,15 @@ const StaticChangelogList = ({ roadmaps }: { roadmaps: RoadmapNode[] }) => {
                                         {fullDetail && roadmap.cta?.url && (
                                             <Link to={roadmap.cta.url}>{roadmap.cta.label || 'Learn more'}</Link>
                                         )}
+                                        {fullDetail &&
+                                            docsPath &&
+                                            docsPath !== stripPostHogOrigin(roadmap.cta?.url || '') && (
+                                                <p className="m-0 text-sm">
+                                                    <Link to={docsPath} state={{ newWindow: true }}>
+                                                        Read the docs
+                                                    </Link>
+                                                </p>
+                                            )}
                                     </article>
                                 )
                             })}
@@ -1063,33 +1090,45 @@ export default function Changelog({
                     className="bg-primary text-primary relative h-full flex border-t border-primary"
                 >
                     <div ref={resizeObserverRef} className="flex flex-col flex-1 min-w-0 h-full">
-                        <div className="min-h-0 flex-shrink-0 flex justify-between items-center px-4 mt-2">
+                        <div className="min-h-0 flex-shrink-0 flex justify-between items-center px-4 mt-2 flex-wrap gap-2">
                             <Filters
                                 onTeamChange={(value) => filterNavigate('team', value)}
                                 teamFilterValue={teamFilter}
                                 onCategoryChange={(value) => filterNavigate('category', value)}
                                 categoryFilterValue={categoryFilter}
                             />
-                            {isModerator && (
-                                <div className="space-x-1">
-                                    <Tooltip
-                                        trigger={<OSButton size="md" icon={<IconPlus />} onClick={handleAddFeature} />}
-                                        delay={0}
-                                    >
-                                        <IconShieldLock className="size-6 inline-block relative -top-px text-secondary" />{' '}
-                                        Add roadmap item
-                                    </Tooltip>
-                                    <Tooltip
-                                        trigger={
-                                            <OSButton size="md" icon={<IconDownload />} onClick={handleDownloadCSV} />
-                                        }
-                                        delay={0}
-                                    >
-                                        <IconShieldLock className="size-6 inline-block relative -top-px text-secondary" />{' '}
-                                        Download as CSV
-                                    </Tooltip>
-                                </div>
-                            )}
+                            <div className="flex items-center gap-2">
+                                <p className="text-sm text-secondary m-0">
+                                    Also available as <a href="/changelog.rss">RSS</a> and{' '}
+                                    <a href="/changelog.md">Markdown</a>.
+                                </p>
+                                {isModerator && (
+                                    <div className="space-x-1">
+                                        <Tooltip
+                                            trigger={
+                                                <OSButton size="md" icon={<IconPlus />} onClick={handleAddFeature} />
+                                            }
+                                            delay={0}
+                                        >
+                                            <IconShieldLock className="size-6 inline-block relative -top-px text-secondary" />{' '}
+                                            Add roadmap item
+                                        </Tooltip>
+                                        <Tooltip
+                                            trigger={
+                                                <OSButton
+                                                    size="md"
+                                                    icon={<IconDownload />}
+                                                    onClick={handleDownloadCSV}
+                                                />
+                                            }
+                                            delay={0}
+                                        >
+                                            <IconShieldLock className="size-6 inline-block relative -top-px text-secondary" />{' '}
+                                            Download as CSV
+                                        </Tooltip>
+                                    </div>
+                                )}
+                            </div>
                         </div>
 
                         <div className={`min-h-0 flex-grow pt-2 ${hideEmpty ? 'mb-4' : ''}`}>

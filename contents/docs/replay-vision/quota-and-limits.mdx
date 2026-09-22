@@ -4,7 +4,7 @@ title: Quota and limits
 
 import { ProductScreenshot } from "components/ProductScreenshot";
 
-Replay Vision usage is metered per organization in **credits**, on a monthly billing cycle. This page covers how observations are priced, what the budget is, what counts against it, and what to do when you're approaching it.
+Replay Vision usage is metered per organization in **credits**, on a monthly billing cycle. This page covers how observations are priced, what the budget is, how to cap a single scanner, what counts against it, and what to do when you're approaching it.
 
 ## How usage is priced
 
@@ -30,6 +30,16 @@ Each organization gets a monthly credit budget – this defaults to **15,000 cre
 
 You can also fetch the budget programmatically – the `vision-quota-retrieve` MCP tool returns `credit_limit` (null when uncapped), `credits_used`, `remaining`, `exhausted`, `projected_monthly_credits`, and the current period's start and end.
 
+## Per-scanner limits
+
+The organization budget is shared, so one broad scanner can spend the whole month's credits and leave nothing for the others. To prevent this, give a scanner its own limit: the maximum credits it can spend per billing period, set in the scanner editor or with the `credit_limit` field on the `vision-scanners-create` and `vision-scanners-update` MCP tools. For example, hold one scanner to 10,000 credits per month ($100) and another to 5,000 ($50).
+
+Scanners have no limit by default (`credit_limit` is null), and the minimum limit is 1 credit.
+
+A scanner stops when the credits it has left cannot pay for one more observation. It stays enabled, but it does not scan the sessions it skipped – there is no backfill when the period resets, the same as for [a scanner you re-enable](/docs/replay-vision/running-scanners). Scanning starts again at the next period reset.
+
+A scanner-level limit is a cap on one scanner, not a reserved share of the organization budget. The organization budget still applies on top of it, so a scanner below its own limit stops when the organization budget is exhausted.
+
 ## What counts against the budget
 
 | Observation outcome | Counts against budget?                                 |
@@ -51,7 +61,9 @@ Both enforcement paths use the same check:
 - **Background sweeps** – new observations queued by the automatic schedule are silently skipped. The scanner stays enabled, the sweep keeps running, but no work gets queued until budget frees up. A banner on the Replay Vision pages shows "Monthly spend limit reached" with the reset date.
 - **On-demand triggers** – the player action and the `vision-scanners-scan-session` MCP tool return a `402 Payment Required` response.
 
-A scanner that's been paused by the budget resumes producing observations automatically once the period resets.
+A scanner that reaches its own limit stops the same way, but only that scanner stops – the other scanners continue until the organization budget is reached.
+
+A scanner that's been paused by either budget resumes producing observations automatically once the period resets.
 
 ## Tracking where spend goes
 
@@ -93,5 +105,6 @@ Try these, in order:
 
 1. **Open the Usage tab and look at which scanner is consuming the most spend.** A scanner dominating the share-of-spend column is probably broader (or on a pricier model) than it needs to be.
 2. **Tighten its filters, session coverage, or sampling rate, or move it to a cheaper model.** Use the editor's estimate to find a setting that gives you enough signal without dominating the budget.
-3. **Disable scanners you're not actively using.** A disabled scanner produces zero new background observations.
-4. **Wait for the period to reset.** The reset date is shown on the spend tile and in the budget banner.
+3. **Give the expensive scanners their own limits.** A per-scanner limit keeps one scanner from spending the credits the others need.
+4. **Disable scanners you're not actively using.** A disabled scanner produces zero new background observations.
+5. **Wait for the period to reset.** The reset date is shown on the spend tile and in the budget banner.

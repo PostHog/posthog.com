@@ -20,7 +20,7 @@ The PostHog team includes a number of voracious readers - we even have [our own 
 If you're looking for more startup advice or support, don't forget to check out [PostHog for Startups](/startups), our program for helping early-stage teams get to product market fit. Our startup program includes $50,000 in PostHog credit, exclusive events and promotional opportunities, and is available to any company less than 2 years old and with less than $5M in funding. 
 ![Ask Iwata](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tracks/ask-iwata.jpg)
 ## [Ask Iwata: Words of Wisdom from Nintendo’s Legendary CEO by Hobonichi](https://www.goodreads.com/book/show/54736620-ask-iwata)
-**Recommended by [Joe Martin, Product Marketing](/community/profiles/29070)**
+**Recommended by [Joe Black, Product Marketing](/community/profiles/29070)**
 
 Former games journalist Joe has repeatedly recommended this collection of essays by Satoro Iwata in our book club Slack group. It’s one of the only books about management that he’s ever been able to finish. 
 
@@ -118,11 +118,11 @@ In addition to The Mom Test, Annika recommends this book for its practical advic
 
 One of the most universally popular books among the team (shortly followed by The Design of Everyday Things by Dan Norman), The Mom Test has helped shape the way we think about product design and user feedback at a fundamental level. 
 
-James recommends it in his guide to [finding product-market fit](/blog/product-market-fit-game), and Product Manager Annika Schmid is a big fan:
+James recommends it in his guide to [finding product-market fit](/founders/product-market-fit-game), and Product Manager Annika Schmid is a big fan:
 
 “The Mom Test is just a classic. Honestly, I recommend it for anyone who ever has to talk to users.” 
 
-> **Putting it into practice:** Getting to product-market fit is a vital step for every startup - [including us!](/blog/product-market-fit-game)
+> **Putting it into practice:** Getting to product-market fit is a vital step for every startup - [including us!](/founders/product-market-fit-game)
 
 ![founding sales](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tracks/founding-sales.jpg)
 

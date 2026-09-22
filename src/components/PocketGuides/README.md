@@ -87,19 +87,19 @@ after the prose.
 | `<Watches />` | The signal sources from this page's `watches` frontmatter |
 | `<Enable />` | The scout CTA – one click to add this page's scout |
 | `<Action />` | The CTA for volumes whose answer isn't a scout, from `pocketGuideCta:` frontmatter |
-| `<Contents />` | The contents list, built from the book itself |
 | `<SeeAlso>` | A print footnote at the foot of the column |
 | `<Term name="scout">` | An orange dotted-underline definition with a hover card |
 
-Headings map to the book's type scale: `#` is the page title, `##` a small-caps section heading.
+Headings, paragraphs, lists, tables, and inline code use the same prose styling as docs.
 
 ### How the reader lays a page out
 
 Every page is one linear scroll. `ReaderWrapper` (ReaderWrapper.tsx) re-orders the compiled
 elements by their `mdxType` and `n` props at render time: each figure is embedded after the
 first block that cites it via `<SeeFig>`, and a figure nobody cites prints at the end of the
-page. One exception: a figure-less page authored as two pages – the volume's front matter –
-renders `<LeftPage>` and `<RightPage>` as two columns at reading widths.
+page. Landing-page introductions render in one column in both the standalone reader and docs'
+Learn surface. Contents navigation belongs to each surface's sidebar, so introductory MDX does
+not include a separate contents page.
 
 The hover markers and their hint line show at reading widths only – below ~672px of container
 width they're hidden (there is no hover on touch), so a figure's caption has to carry it alone
@@ -107,12 +107,11 @@ on phones.
 
 ### Adding new content elements
 
-The page container is `not-prose`, so any element the prose map doesn't cover renders with bare
-browser defaults – silently. When a guide introduces something new (a table was the first),
-check the rendered page, and prefer wrapping the element in the site's native styling over
-book-specific styles: see how `ul`/`ol`/`table` borrow `.article-content` in
-[bookPieces.tsx](./bookPieces.tsx). Then test the Aa reading-size control at desktop and phone
-widths.
+The standalone reader applies the shared docs prose classes, and the Learn surface inherits
+them from `ReaderView`. The Aa control overrides the text size only after a reader changes it.
+When a guide introduces a new content element, check its rendered appearance against docs in
+light and dark mode and at narrow and wide widths. Keep book-specific mappings in
+[bookPieces.tsx](./bookPieces.tsx) only for behavior the shared prose styles cannot provide.
 
 ### One MDX trap worth knowing
 
@@ -142,10 +141,15 @@ shows after the `.mdx` file itself changes (or `pnpm clean`).
 
 ## The reader UI
 
-- **`BookReader`** – the window itself is the page, no inner frame and no toolbar: reading
-  controls are book tabs on the page's left edge (shelf link, a Contents popover, an Aa
-  reading-size control), a centered reading column, click-to-turn page margins, and a foot line
-  with prev/next turns, "All guides" (except where prev already is the shelf), and "p. N of M".
+- **`BookReader`** – wide windows pin the Contents panel on the left, with a compact Home and
+  reading-size control bar. `BookPage` uses Explorer's `transparent` option so the standard
+  frosted app-window background shows through, as it does in the docs reader. The sidebar
+  has no separate background or shadow, so it shares that same surface.
+  The page scrolls independently, and long contents
+  lists scroll within the sidebar. Below `@4xl`, compact book tabs keep the Contents and Aa
+  popovers. The reading column has its own container queries, click-to-turn page margins, and
+  a foot line with prev/next turns, "All guides" (except where prev already is the shelf), and
+  "p. N of M".
 - **One model drives everything.** `bookModel.tsx`'s `useBookPages(volumeId)` reads every page's
   `pocketGuideOrder` and produces that volume's reading order; the bar, contents, and page turns all
   derive from it. Front matter is unnumbered; arabic numbering starts at the page after it, so
@@ -161,12 +165,12 @@ shows after the `.mdx` file itself changes (or `pnpm clean`).
 | `Book.tsx` | The volume as a coloured spine for the `/docs` library column, plus the `BookShelf` it sits in |
 | `VolumeCard.tsx` | One volume pitched as a card: cover, pitch, button. Shared by the docs pages and `/self-driving` |
 | `GuidesForProduct.tsx` | Looks up the volume for a docs slug and renders a `VolumeCard`. Renders nothing when there is none |
-| `BookReader.tsx` | The full-window page: edge book tabs, popovers, turn zones, foot nav |
+| `BookReader.tsx` | The full-window page: pinned sidebar, compact book tabs, turn zones, foot nav |
 | `BookPage.tsx` | Renders one MDX page into the reader |
 | `bookComponents.tsx` | Assembles the MDX vocabulary from the files below |
 | `ReaderWrapper.tsx` | The figure-interleaving MDX wrapper + LeftPage/RightPage markers |
 | `figures.tsx` | Fig and every `<XxxFigure>` exhibit |
-| `bookPieces.tsx` | SeeFig, Eyebrow, Watches, Enable, Contents, SeeAlso, prose styling |
+| `bookPieces.tsx` | SeeFig, Eyebrow, Watches, Enable, SeeAlso, prose styling |
 | `Action.tsx` | The non-scout CTA and its pinned bar, from `pocketGuideCta:` frontmatter |
 | `terms.tsx` | The book's vocabulary – `<Term>` and every hover-card definition |
 | `bookContext.tsx` | EntryProvider + useEntry/useTemplate (page data for figures) |

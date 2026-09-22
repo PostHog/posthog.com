@@ -172,6 +172,7 @@ const generateMarkdownArtifacts = async (graphql: any) => {
                             data {
                                 attributes {
                                     label
+                                    slug
                                 }
                             }
                         }

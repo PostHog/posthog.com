@@ -2,7 +2,6 @@ import { IconInfo } from '@posthog/icons'
 import { PricingTiers } from 'components/Pricing/Plans'
 import { calculatePrice } from 'components/Pricing/PricingCalculator/calculatorLogic'
 import React, { useEffect, useMemo, useState } from 'react'
-import qs from 'qs'
 import Tooltip from 'components/Tooltip'
 import { Addons } from '../Tabbed'
 import UsageSliderRow, { UsageSliderHeader } from '../UsageSliderRow'
@@ -193,26 +192,11 @@ export default function ProductAnalyticsTab({
     }
 
     useEffect(() => {
-        const totalAnalyticsCost = getTotalAnalyticsCost(analyticsData)
+        const totalAnalyticsCost = getTotalAnalyticsCost(priceAnalyticsData(analyticsData))
         const totalAnalyticsVolume = getTotalAnalyticsVolume(analyticsData)
         const { costByTier } = calculatePrice(totalAnalyticsVolume, productAnalyticsTiers)
         setProduct('product_analytics', { cost: totalAnalyticsCost, volume: totalAnalyticsVolume, costByTier })
     }, [analyticsData])
-
-    useEffect(() => {
-        const urlParams = new URLSearchParams(window.location.search)
-        const volumes = qs.parse(urlParams.toString())
-        if (volumes['product_analytics']?.types) {
-            Object.keys(volumes['product_analytics'].types).forEach((subtype) => {
-                const volume = volumes['product_analytics'].types[subtype]?.volume
-                if (volume) {
-                    setAnalyticsVolume(subtype, Number(volume))
-                }
-            })
-            return
-        }
-        setAnalyticsData((data) => priceAnalyticsData(data))
-    }, [])
 
     return (
         <div className="@container">

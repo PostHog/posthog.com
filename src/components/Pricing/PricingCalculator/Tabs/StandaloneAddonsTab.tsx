@@ -56,7 +56,7 @@ export default function StandaloneAddonsTab({ activeProduct, setVolume, setProdu
     const [addonData, setAddonData] = useState(
         () =>
             activeProduct.addonSliders?.map((addon) => ({
-                volume: addon.volume ?? addon.sliderConfig?.min ?? 0,
+                volume: activeProduct.addons?.[addon.key]?.volume ?? addon.volume ?? addon.sliderConfig?.min ?? 0,
                 cost: 0,
                 costByTier: [],
             })) || []
@@ -111,18 +111,22 @@ export default function StandaloneAddonsTab({ activeProduct, setVolume, setProdu
         )
     }, [addonBillingData])
 
+    const addonVolumes = addonData.map((addon) => addon.volume).join(',')
     useEffect(() => {
         if (mainBillingTiers) {
             const { costByTier } = calculatePrice(billedMainVolume, mainBillingTiers)
             setProduct(activeProduct.handle, {
                 cost: totalCost,
                 volume: mainVolume,
+                addons: Object.fromEntries(
+                    addonBillingData.map((addon, index) => [addon.key, { volume: addonData[index].volume }])
+                ),
                 costByTier,
             })
         }
         // Omit setProduct: it is a new function every render and would retrigger this
         // effect, rebuild addonBillingData, and race a just-clicked volume.
-    }, [totalCost, mainVolume, billedMainVolume, mainBillingTiers, activeProduct.handle])
+    }, [totalCost, mainVolume, billedMainVolume, mainBillingTiers, activeProduct.handle, addonVolumes])
 
     // Cost is derived from billedMainVolume in the effect above — the cost SliderRow reports only
     // covers its own volume, which undercounts when an add-on meters through the main product.

@@ -127,7 +127,7 @@ In fact, when searching for product-market fit, surveys are often more helpful t
 
 3. Surveys help you identify and prioritize the next steps to improving your product. They are more actionable than stats at the early stage.
 
-Using levels two, three, and four of [the product-market fit game](/blog/product-market-fit-game), we can identify example questions you can use to advance to the next level:
+Using levels two, three, and four of [the product-market fit game](/founders/product-market-fit-game), we can identify example questions you can use to advance to the next level:
 
 **Validate the problem by talking to users**
 
@@ -148,7 +148,7 @@ Using levels two, three, and four of [the product-market fit game](/blog/product
 - How can we improve [feature]?
 - How would you feel if you could no longer use the product?
 
-There's even a dedicated survey for finding product-market fit: the PMF Survey. Read more about the PMF Survey in our [guide to measuring product-market fit](/blog/measure-product-market-fit).
+There's even a dedicated survey for finding product-market fit: the PMF Survey. Read more about the PMF Survey in our [guide to measuring product-market fit](/founders/measure-product-market-fit).
 
 ## Using your survey results
 
@@ -164,7 +164,7 @@ As an all-in-one platform, PostHog is uniquely placed to do all of the above. In
 
 ## Further reading
 
-- [In-depth: How to measure product-market fit](/blog/measure-product-market-fit)
+- [In-depth: How to measure product-market fit](/founders/measure-product-market-fit)
 - [10x engineers talk to users](/blog/10x-engineers-do-user-interviews)
 - [An engineer’s guide to talking to users](/newsletter/talk-to-users)
 

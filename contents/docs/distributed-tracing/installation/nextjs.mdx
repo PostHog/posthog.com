@@ -7,6 +7,8 @@ showStepsToc: true
 import { Steps, Step } from 'components/Docs/Steps'
 import TracingNextSteps from './_snippets/tracing-next-steps.mdx'
 
+> **Already using `posthog-node` on the server?** Route handlers, server actions, and server components can create spans with its own span API instead of OpenTelemetry, with no extra packages – see the [Node.js guide](/docs/distributed-tracing/installation/nodejs). Either way, spans are server-side only: there is no browser span API.
+
 <Steps>
 
 <Step title="Install OpenTelemetry packages" badge="required">

@@ -13,11 +13,15 @@ export default function Dashboards() {
         return <div>Product not found</div>
     }
 
-    const { name, overview, features, Icon, color, screenshots } = dashboardsProduct
+    const { name, overview, features, Icon, color, screenshots, seo } = dashboardsProduct
 
     return (
         <>
-            <SEO title={overview?.title} description={overview?.description} image="/images/og/default.png" />
+            <SEO
+                title={seo?.title || `${name} - PostHog`}
+                description={seo?.description || overview?.description}
+                image="/images/og/default.png"
+            />
             <Editor>
                 <div className="space-y-8">
                     <div>

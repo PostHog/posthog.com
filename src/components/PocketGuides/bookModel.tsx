@@ -27,8 +27,6 @@ export interface BookPageEntry {
     /** Arabic page number. Front matter is unnumbered, the way print leaves it. */
     page?: number
     isFrontMatter: boolean
-    /** Groups the Contents list into named sections. Undefined pages print in one flat list. */
-    section?: string
     /** Rich use case data (report, scout, watches), when this page is a use case. */
     template?: InboxTemplate
     /** The page's one action, when it isn't a scout – see bookPieces' `<Action />`. */
@@ -67,7 +65,6 @@ export function useBookPages(volumeId: string): BookPageEntry[] {
                         title
                         shortTitle
                         pocketGuideOrder
-                        section
                         pocketGuideCta {
                             kind
                             label
@@ -108,7 +105,6 @@ export function useBookPages(volumeId: string): BookPageEntry[] {
                     shortTitle: node.frontmatter.shortTitle || node.frontmatter.title,
                     order,
                     isFrontMatter: order === 0,
-                    section: node.frontmatter.section || undefined,
                     template: byUrl.get(url),
                     cta: node.frontmatter.pocketGuideCta || undefined,
                 }
@@ -152,11 +148,10 @@ export function bookTabs(pages: BookPageEntry[], activeUrl: string): BookTab[] {
     }))
 }
 
-/** Reading size, e-reader style: one root size scales the whole em-based page. The default
- * matches the site's body text (16px, `.article-content`'s text-base). */
-export const FONT_SIZES = [16, 18, 20, 22] as const
+/** Optional Aa size choices; the default is styled by the shared docs prose classes. */
+export const FONT_SIZES = [15, 17, 19, 21] as const
 const FONT_SIZE_KEY = 'pocket-guide-font-size'
-const DEFAULT_FONT_SIZE = 16
+const DEFAULT_FONT_SIZE = FONT_SIZES[0]
 
 export function useBookFontSize(): { fontSize: number; stepFontSize: (delta: number) => void } {
     // SSR the default, adopt the saved choice after mount – localStorage in render would mismatch.

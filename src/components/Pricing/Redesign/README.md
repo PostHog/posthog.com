@@ -2,7 +2,7 @@
 
 Components for the pricing page, served on **`/pricing`**. The page that assembles them is `pages/pricing/index.tsx`.
 
-These components shipped behind the `pricing-page-redesign` experiment. The redesign is now the only pricing page. The calculator is always visible as its own section (`CalculatorSection`). Nothing here reads a feature flag.
+These components shipped behind the `pricing-page-redesign` experiment. The redesign is now the only pricing page. The calculator is always visible as its own section (`CalculatorSection`). AI estimate links are always available beside **Share estimate** and in the **Estimating usage** guidance. The shared `AgentEstimateLink` popover retains the ChatGPT, Claude, and copy-prompt actions and their existing analytics events.
 
 ## Why
 

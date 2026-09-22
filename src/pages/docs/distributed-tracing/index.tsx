@@ -4,6 +4,8 @@ import ResourceItem from 'components/Docs/ResourceItem'
 import Intro from 'components/Docs/Intro'
 import ReaderView from 'components/ReaderView'
 import Link from 'components/Link'
+import useProduct from 'hooks/useProduct'
+import { buildProductMenuTabs, ProductSwitcher } from 'components/Products/ReaderViewProduct'
 
 export const Content = () => {
     return (
@@ -12,9 +14,11 @@ export const Content = () => {
                 <h2 className="mb-4">Overview</h2>
                 <div>
                     <p>
-                        PostHog Distributed Tracing works with the OpenTelemetry Protocol (OTLP). You don't need any
-                        vendor-specific SDKs. Use standard OpenTelemetry libraries to send spans to PostHog using your
-                        project token.
+                        PostHog Distributed Tracing works with the OpenTelemetry Protocol (OTLP). Use standard
+                        OpenTelemetry libraries to send spans to PostHog using your project token. On Node.js and
+                        Python, the PostHog SDK can also create and export spans itself, with no OpenTelemetry
+                        dependency – see the <Link to="/docs/distributed-tracing/installation/nodejs">Node.js</Link> and{' '}
+                        <Link to="/docs/distributed-tracing/installation/python">Python</Link> guides.
                     </p>
                     <p>
                         Distributed tracing is currently in beta. Setup details may change before general availability.
@@ -28,7 +32,8 @@ export const Content = () => {
                     <ul>
                         <li>
                             <b>OpenTelemetry-compatible</b> - Use standard OpenTelemetry SDKs, no PostHog packages
-                            required. Works with any compatible client.
+                            required. Works with any compatible client, or with the span API in{' '}
+                            <code>posthog-node</code> and <code>posthog</code> for Python.
                         </li>
                         <li>
                             <b>Part of the observability suite</b> - Traces use the same OpenTelemetry ingestion as{' '}
@@ -74,7 +79,7 @@ export const Content = () => {
                         type="Getting started"
                         title="Installation"
                         description="Language-specific guides for exporting OpenTelemetry traces to PostHog"
-                        url="/docs/tracing/installation"
+                        url="/docs/distributed-tracing/installation"
                     />
                     <ResourceItem
                         type="Related"
@@ -89,8 +94,20 @@ export const Content = () => {
 }
 
 const DistributedTracing: React.FC = () => {
+    // Same Product / Pricing / Docs tab strip and product switcher as /tracing,
+    // so the sidebar stays put when you move between the product and its docs.
+    const productData = useProduct({ handle: 'traces' }) as any
+    const menuTabs = buildProductMenuTabs({
+        productData,
+        activeSurface: 'docs',
+        currentPath: '/docs/distributed-tracing',
+    })
+
     return (
-        <ReaderView>
+        <ReaderView
+            menuTabs={menuTabs}
+            productSelect={productData ? <ProductSwitcher activeHandle={productData.handle} /> : undefined}
+        >
             <SEO title="Distributed tracing - Docs - PostHog" />
 
             <div className="mx-auto max-w-4xl">
