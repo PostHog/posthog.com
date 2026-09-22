@@ -51,6 +51,6 @@ Because we have all the context on both users and the product, we can automate l
 
 ## Secret master plan
 
-* Ship every product and all the data that engineering teams need to understand their product and users
+* Ship every product and all the data that engineering teams need to understand their own product and users
 * Use that to speed up the cycle of shipping -> observing -> iterating
 * Eventually, automate the entire cycle
