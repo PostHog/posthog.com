@@ -171,7 +171,7 @@ Using actors ensures the experience (and results) for your A/B test are consiste
 Read more about targeting in [When and how to run group-targeted A/B tests](/product-engineers/running-group-targeted-ab-tests).
 
 ## Good reads 🤔
-**[PostHog's recommended reading for startup teams](/founders/recommended-reading) – Joe Martin:** Great books on leadership, design, venture capital, operations, and sales (pretty much anything to do with startups), as recommended by the PostHog book club!
+**[PostHog's recommended reading for startup teams](/founders/recommended-reading) – Joe Black:** Great books on leadership, design, venture capital, operations, and sales (pretty much anything to do with startups), as recommended by the PostHog book club!
 
 **[How a startup loses its spark](https://blog.johnqian.com/startup-spark) – John Qian:** An interesting read diagnosing the many ways startups can become less enjoyable, and how to avoid them. The easiest one? Hire less. It’s one we believe in.
 

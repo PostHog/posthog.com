@@ -67,7 +67,7 @@ Check out the [MaxAI repo](https://github.com/PostHog/max-ai) for more info.
 
 ## Dashboard template libraries and learning tracks
 
-- **Team Vibes:** Ian Vanagas, Joe Martin and Andy Vandervell
+- **Team Vibes:** Ian Vanagas, Joe Black and Andy Vandervell
 
 The marketing team worked together to build (and ship) a [public library of pre-built dashboards](/templates), including an [AARRR pirate metrics dashboard](/templates/aarrr-dashboard), [templates for B2C](/templates/b2c-dashboard) and [B2B products](/templates/b2c-dashboard), and a [landing page report](/templates/landing-dashboard) for marketers transitioning from Google Analytics.
 
@@ -81,7 +81,7 @@ Got a request for a dashboard? DM the team on our community Slack!
 
 ## A curated set of PostHog tutorials
 
-- **Team Not-ShuffleHog:** Joe Martin and Eli Kinsey
+- **Team Not-ShuffleHog:** Joe Black and Eli Kinsey
 
 For Joe, one hackathon project wasn't enough. He also worked with Eli Kinsey from the Website & Docs team to ship [PostHog Tracks](/tracks), a new way to discover tutorials organized by role.
 

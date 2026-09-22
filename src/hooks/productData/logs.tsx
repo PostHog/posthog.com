@@ -37,7 +37,7 @@ export const logs = {
     includeAddonRates: true,
     // From contents/docs/logs/pricing.mdx
     pricingDescription:
-        'Logs is billed by the number of GB ingested. The price per GB changes based on your usage. Retention is 14 days by default; set custom retention per service or per source at $0.05/GB per month retained.',
+        'Logs and Tracing are billed together, by the number of GB ingested across both. The price per GB changes based on your usage. Retention is 14 days by default; set custom retention per service or per source at $0.05/GB per month retained.',
     seo: {
         title: 'Logs – Centralized log management with PostHog',
         description:
@@ -51,7 +51,11 @@ export const logs = {
      * feed the carousel templates their slide arrays).
      */
     productMenu: [
-        { slug: 'overview', name: 'Overview', icon: <IconEye className="size-4" /> },
+        {
+            slug: 'overview',
+            name: 'Overview',
+            icon: <IconEye className="size-4" />,
+        },
         {
             slug: 'eli5',
             name: 'What does it do?',
@@ -116,8 +120,6 @@ export const logs = {
     ],
     overview: {
         title: 'Logs that already know your users',
-        description:
-            'Events, requests, state changes, and session replays in one place – one of the tools that makes your product self-driving by giving agents the backend signal to find a bug and ship the fix, tied to the user who hit it.',
         eli5: 'Logs stores the records your services emit at runtime – requests handled, errors hit, decisions made – so you can search by service, severity, and attribute instead of grepping text files. Point any OpenTelemetry (OTLP) client at PostHog (no proprietary SDK), group similar lines into patterns to see what changed, and open any record to have PostHog AI explain it.',
         textColor: 'text-white',
         layout: 'overlay',
@@ -180,8 +182,8 @@ export const logs = {
             multiplier: { unit: 'month', initial: 1 },
             // Shown on /logs/pricing
             pricingDescription:
-                'Keep logs longer than the 14-day default. Custom retention is billed per GB for each month you keep your logs, and you can set it per service or per source in your logs and traces settings.',
-            note: 'Billed per month of retention. These GB also count toward logs ingestion above – this price is the added cost for each month you keep them.',
+                'Keep logs and traces longer than the 14-day default. Custom retention is billed per GB for each month you keep them, and you can set it per service or per source in your logs and traces settings.',
+            note: 'Billed per month of retention. These GB also count toward ingestion above – this price is the added cost for each month you keep them.',
             sliderConfig: {
                 marks: [0, 10, 100, 1000, 5000],
                 min: 0,
@@ -202,7 +204,6 @@ export const logs = {
     // Roles/scenarios reshaped from contents/docs/logs/basics.mdx ("When logs save you")
     // and link-person / link-session-replay docs.
     useCases: {
-        intro: 'Logs is used across teams depending on your role.',
         rows: [
             [
                 'Product Engineers',

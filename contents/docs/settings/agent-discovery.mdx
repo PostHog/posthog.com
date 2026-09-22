@@ -10,7 +10,7 @@ This page covers discovery. For the flows themselves, see:
 - [AI wizard](/docs/ai-engineering/ai-wizard) to create an account from the command line
 - [OAuth](/docs/api/oauth) and [personal API keys](/docs/api#authentication) for an existing user
 - [Provisioning API](/docs/integrate/provisioning) for partners creating accounts for their users
-- [ID-JAG (XAA)](/docs/settings/id-jag) for agent registration via identity assertion (Enterprise plan, beta)
+- [ID-JAG (XAA)](/docs/settings/authentication/id-jag) for agent registration via identity assertion (Enterprise plan, beta)
 
 ## How discovery works
 
@@ -83,7 +83,7 @@ The authorization server metadata ([RFC 8414](https://datatracker.ietf.org/doc/r
 ```
 
 - `skill` points at the auth.md manifest.
-- `identity_endpoint` is the token endpoint where an agent exchanges an identity assertion for an access token. PostHog accepts the [ID-JAG](/docs/settings/id-jag) assertion type via the JWT-bearer grant. See the [ID-JAG docs](/docs/settings/id-jag) for the exchange itself.
+- `identity_endpoint` is the token endpoint where an agent exchanges an identity assertion for an access token. PostHog accepts the [ID-JAG](/docs/settings/authentication/id-jag) assertion type via the JWT-bearer grant. See the [ID-JAG docs](/docs/settings/authentication/id-jag) for the exchange itself.
 
 ### The auth.md manifest
 

@@ -751,12 +751,12 @@
             "destination": "/teams/builder-relations/:path*"
         },
         {
-            "source": "/teams/query-performance",
-            "destination": "/teams/analytics-platform"
+            "source": "/teams/analytics-platform",
+            "destination": "/teams/query-performance"
         },
         {
-            "source": "/teams/query-performance/:path*",
-            "destination": "/teams/analytics-platform/:path*"
+            "source": "/teams/analytics-platform/:path*",
+            "destination": "/teams/query-performance/:path*"
         },
         {
             "source": "/docs/sdk-doctor/keeping-sdks-current:ext(\\.md)?",
@@ -817,6 +817,11 @@
         {
             "source": "/blog/autoresearch-query-bug",
             "destination": "/blog/karpathy-autoresearch-query-engine-bug"
+        },
+        {
+            "source": "/blog/is-autocapture-still-bad",
+            "destination": "/docs/product-analytics/autocapture",
+            "statusCode": 301
         },
         {
             "source": "/handbook/marketing/how-we-position-and-sell",
@@ -2893,7 +2898,7 @@
         },
         {
             "source": "/manual/sso",
-            "destination": "/docs/settings/sso"
+            "destination": "/docs/settings/authentication/sso"
         },
         {
             "source": "/manual/support",
@@ -3650,7 +3655,7 @@
         },
         {
             "source": "/blog/how-to-product-market-fit",
-            "destination": "/blog/product-market-fit-game"
+            "destination": "/founders/product-market-fit-game"
         },
         {
             "source": "/docs/cdp/zapier-connector:ext(\\.md)?",
@@ -4209,6 +4214,10 @@
             "destination": "/founders/writing-for-developers"
         },
         {
+            "source": "/newsletter/if-ai-writes-all-the-code-whats-left",
+            "destination": "/newsletter/when-ai-writes-all-code"
+        },
+        {
             "source": "/blog/build-features-users-love",
             "destination": "/newsletter/build-features-users-love"
         },
@@ -4405,8 +4414,8 @@
             "destination": "/blog/using-posthog"
         },
         {
-            "source": "/blog/categories/general",
-            "destination": "/blog/general"
+            "source": "/blog/general",
+            "destination": "/blog/categories/general"
         },
         {
             "source": "/product-analytics/customers",
@@ -5006,7 +5015,7 @@
         },
         {
             "source": "/docs/data/sso:ext(\\.md)?",
-            "destination": "/docs/settings/sso:ext?"
+            "destination": "/docs/settings/authentication/sso:ext?"
         },
         {
             "source": "/docs/ab-testing:ext(\\.md)?",
@@ -6394,6 +6403,19 @@
             "source": "/contact-us",
             "destination": "/talk-to-a-human",
             "statusCode": 301
+        },
+        {
+            "source": "/traces",
+            "destination": "/tracing",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/settings/sso:ext(\\.md)?",
+            "destination": "/docs/settings/authentication/sso:ext?"
+        },
+        {
+            "source": "/docs/settings/id-jag:ext(\\.md)?",
+            "destination": "/docs/settings/authentication/id-jag:ext?"
         }
     ]
 }

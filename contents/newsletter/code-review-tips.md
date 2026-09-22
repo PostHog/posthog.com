@@ -37,7 +37,7 @@ The number one thing to add, if you haven’t yet, is a way for agents to review
 
 The goal is to [offload the simpler reviews to agents, and flag if something genuinely needs a human](/blog/10k-prs-a-month#humans-dont-need-to-review-every-pr).
 
-The key is that the agent that wrote the code can’t be the one that reviews it. Agents are bad at checking their own work since they’re often unaware of their own blind spots.[^1]
+The key is that the agent that wrote the code can’t be the one that reviews it. Agents are bad at checking their own work since they’re often unaware of [their own blind spots](/newsletter/when-ai-writes-all-code#3-deciding-how-to-build-and-implement).[^1]
 
 For the same reason, it’s better to have multiple agents with different instructions and goals to cover more gaps,[^2] as well as different models and providers for different reviewers.[^3]
 
