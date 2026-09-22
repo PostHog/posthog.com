@@ -446,7 +446,11 @@ PostHog::MCP.instrument(
 | `event_properties` | `(request, extra) -> Hash` | – | Properties merged onto every event. |
 | `logger` | `->(message) { ... }` | no-op | STDIO-safe log sink. Never writes to stdout. |
 
-The injected arguments are stripped before your tool's `call` receives its keywords, so a tool declared as `def self.call(query:, server_context:)` keeps working. A tool that declares `context` in its own `input_schema` keeps it.
+The injected arguments are stripped before your tool's `call` receives its keywords, so a tool declared as `def self.call(query:, server_context:)` keeps working. A tool that declares `context` in its own `input_schema` keeps it. A tool whose `input_schema` is composed (`oneOf`, `allOf`, `anyOf`) or a `$ref` gets no injected arguments.
+
+Events are truncated to fit the 32 KB message limit of the `posthog-ruby` client, because the client drops larger messages when it sends a batch.
+
+`instrument` returns an analytics handle for [custom events](/docs/mcp-analytics/custom-events): `analytics.capture("feedback_submitted", { rating: 5 })`. Call it from the tool body. On Ruby 3.2+ it also works from a thread or fiber that the tool starts. On Ruby 3.0 and 3.1 such an event gets its own `$session_id` on HTTP servers.
 
 Prompt and resource traffic is captured too, as `$mcp_prompt_get`, `$mcp_prompts_list`, `$mcp_resource_read`, and `$mcp_resources_list`.
 

@@ -267,28 +267,33 @@ This does two things:
 - It adds a required `context` string argument to every tool. The agent fills it with why it is calling the tool, and you capture that as `$mcp_intent` in step 2. See [Capturing agent intent](/docs/mcp-analytics/intent). Pass `context: false` to skip it, or `context: { description: "..." }` to change the prompt.
 - With `report_missing: true`, it appends the `get_more_tools` virtual tool, so agents can tell you which capability they were missing. See [Missing capabilities](/docs/mcp-analytics/missing-capability).
 
+Pass `capture_model: true` to also add an optional `llm_model` argument, where the agent reports its model. A tool whose `inputSchema` is composed (`oneOf`, `allOf`, `anyOf`) or a `$ref` is returned unchanged.
+
 ### Step 2: Prepare each tool call
 
-When you answer `tools/call`, pass the tool name and the raw arguments through `prepare_tool_call` **before** you run the tool. It returns a `PreparedToolCall` with:
+When you answer `tools/call`, pass the tool name, the raw arguments, and the tool's own `inputSchema` through `prepare_tool_call` **before** you run the tool. It returns a `PreparedToolCall` with:
 
-- `args`: the arguments without the injected `context`, so your tool never sees it
+- `args`: the arguments without the injected `context` and `llm_model`, so your tool never sees them
 - `intent` and `intent_source`: the agent's stated reason, ready to capture
+- `llm_model` and `llm_model_source`: the agent's self-reported model, when you set `capture_model: true`
 - `is_missing_capability`: `true` when the agent called the `get_more_tools` virtual tool
 
+Pass the same `inputSchema` Hash you gave to `prepare_tool_list`. If the tool declares its own `context` or `llm_model` field, that field then stays in `args` and is not read as analytics. Without `input_schema:`, both names are always removed.
+
 ```ruby
-prepared = posthog.prepare_tool_call(name, arguments)
+prepared = posthog.prepare_tool_call(name, arguments, input_schema: tool[:inputSchema])
 
 if prepared.is_missing_capability
   posthog.capture_missing_capability(context: prepared.intent, distinct_id: user_id)
   return PostHog::MCP.get_more_tools_result # the canned reply the agent expects
 end
 
-result = run_tool(name, prepared.args)
+# Run the tool with prepared.args (see step 3)
 ```
 
 ### Step 3: Capture what happened
 
-After the tool runs, call `capture_tool_call`. Pass the prepared intent, the arguments and result, the duration, and whether it failed. On a failure pass `error:` (the exception, or a message); PostHog fills `$mcp_error_type`, `$mcp_error_message`, and emits the `$exception` sibling.
+After the tool runs, call `capture_tool_call`. Pass the prepared intent (and `llm_model:` and `llm_model_source:`, if you capture the model), the arguments and result, the duration, and whether it failed. On a failure pass `error:` (the exception, or a message); PostHog fills `$mcp_error_type`, `$mcp_error_message`, and emits the `$exception` sibling.
 
 ```ruby
 started = Process.clock_gettime(Process::CLOCK_MONOTONIC)
