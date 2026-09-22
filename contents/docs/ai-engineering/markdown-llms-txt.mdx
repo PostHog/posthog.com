@@ -58,3 +58,19 @@ Docs pages have a <IconCopy className="w-4 h-4 inline-block" /> menu in the bott
 - View the raw Markdown version of the page
 - Open a prompt in ChatGPT to read the page
 - Open a prompt in Claude to read the page
+## Browser tools (WebMCP)
+
+If you browse posthog.com with an agent that supports [WebMCP](https://webmachinelearning.github.io/webmcp/), the site registers a small set of tools the agent can call instead of reading the page. WebMCP is a proposed web standard that lets a page expose typed tools to the browser. Chrome ships it as an origin trial and plans to enable it by default in Chrome 157.
+
+| Tool | What it does |
+|------|--------------|
+| `search_docs` | Searches posthog.com and returns matching pages |
+| `read_page` | Returns a page as Markdown, using the `.md` versions above |
+| `get_site_overview` | Returns a short overview of the PostHog platform |
+| `read_skill` | Lists and reads PostHog agent skills |
+| `navigate_page` | Opens a posthog.com page in the current tab |
+| `ask_max` | Sends a question to PostHog AI on the page |
+| `get_mcp_connection_info` | Explains how to connect an MCP client to the [PostHog MCP server](/docs/model-context-protocol) |
+| `get_install_instructions` | Explains how to install PostHog with the [wizard](/wizard) |
+
+All tools are read-only, or only change what the page shows. None of them create accounts or change data in PostHog. In Chrome versions before 157, enable `chrome://flags/#enable-webmcp-testing` to see them.
