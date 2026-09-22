@@ -415,7 +415,7 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
             light: 'https://res.cloudinary.com/dmukukwp6/image/upload/conductor_wordmark_dark_b51da32b43.svg',
             dark: 'https://res.cloudinary.com/dmukukwp6/image/upload/conductor_wordmark_light_9d1162725f.svg',
         },
-        featured: false,
+        featured: true,
         height: 6,
     },
     contra: {
