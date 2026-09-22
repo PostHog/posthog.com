@@ -96,6 +96,12 @@ export const freeTierProducts: FreeTierProduct[] = [
         iconColor: 'text-purple',
     },
     {
+        name: 'Evaluations',
+        description: 'Billed with AI observability',
+        icon: Icons.IconListCheck,
+        iconColor: 'text-lilac',
+    },
+    {
         name: 'PostHog AI',
         allocation: '500 credits (worth $5)',
         icon: Icons.IconSparkles,
