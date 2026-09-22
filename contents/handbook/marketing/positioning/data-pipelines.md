@@ -16,11 +16,11 @@ That bundling is the pitch. Segment and Rudderstack only move data. PostHog move
 
 ## The unique belief (in terms of data pipelines)
 
-PostHog is [a doing company](/blog/posthogs-next-chapter). Agents already create the majority of dashboards through PostHog AI and MCP. PostHog Desktop runs the [product autonomy loop](/blog/self-driving-product): signals in, work out, evaluation, repeat.
+PostHog is [a doing company](/blog/posthogs-next-chapter). Agents already create the majority of dashboards through PostHog AI and MCP. [Self-driving](/blog/self-driving-product) runs the whole loop: watch the product, find what's worth fixing, open a PR, measure if it worked.
 
-That loop only closes if the agent can see the whole picture. Errors and replays don't tell you which customer to prioritize – revenue from Stripe, plan from HubSpot, tickets from Zendesk, spend from Google do. That data lives outside PostHog. So do some of the systems PostHog may need to push signals into.
+That loop only closes if self-driving can see the whole picture. Errors and replays don't tell you which customer to prioritize – revenue from Stripe, plan from HubSpot, tickets from Zendesk, spend from Google do. That data lives outside PostHog. So do some of the systems PostHog may need to push signals into.
 
-**Data pipelines are how PostHog becomes infrastructure for self-driving development.** Sources bring business context in. Destinations and batch exports push enriched signals back out. Without pipelines the autonomy loop is half-blind. Segment and Rudderstack just move data. PostHog moves it *and* runs the agents that act on it.
+**Data pipelines are how PostHog becomes infrastructure for self-driving development.** Sources bring business context in, so signals carry the context self-driving needs to prioritize (which customer, which revenue, which plan) before they group into reports in the [Inbox](/handbook/marketing/positioning/inbox). Destinations and batch exports push enriched signals back out. Without pipelines the loop is half-blind. Segment and Rudderstack just move data. PostHog moves it *and* runs the agents that act on it.
 
 ## Who this is for
 
