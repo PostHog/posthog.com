@@ -325,11 +325,15 @@ You can also filter generations by evaluation results or create [insights](/docs
 
 ## Evaluating past data
 
-An evaluation only grades generations captured after you create it. To apply one to data you already have, run a **backfill** from the **Backfills** tab on the evaluation.
+An evaluation only grades data captured after you create it. To apply one to data you already have, run a **backfill** from the **Backfills** tab on the evaluation.
+
+A backfill covers whatever the evaluation targets, so a generation evaluation backfills generations and a trace evaluation backfills traces. The tab's labels follow that target.
 
 ### How backfills work
 
-A backfill runs the evaluation over a time range you pick, using the same conditions and sampling rate as the live evaluation. It skips anything the evaluation has already graded, so running one over a range the evaluation was already covering finds nothing to do.
+A backfill runs the evaluation over a time range you pick. It starts from the evaluation's own property filters and sampling rate, and you can change either one for this run without touching the evaluation itself. Whatever you pick is frozen on the backfill, so later edits to the evaluation do not change what a run already covered.
+
+It skips anything the evaluation has already graded, so a run over a range the evaluation was already covering finds nothing to do.
 
 Results appear alongside live results in the evaluation's run history, and each backfill row links to the results it produced.
 
@@ -337,21 +341,21 @@ Results appear alongside live results in the evaluation's run history, and each 
 
 1. Open the evaluation and go to the **Backfills** tab
 2. Pick a time range, up to 30 days back
-3. Adjust the conditions if you want a narrower scope than the live evaluation uses
-4. Check the count above the **Start backfill** button, which shows how many generations would be evaluated
+3. Open **Conditions** to change the property filters or sampling rate for this run, or leave them as the evaluation has them
+4. Check the count above the **Start backfill** button, which shows how much would be evaluated
 5. Click **Start backfill** and confirm
 
 One backfill runs at a time per evaluation. You can cancel a run while it is in progress, and results it already saved stay.
 
 ### Re-evaluating generations that already have a result
 
-Turn on **Include generations that already have a result** to grade generations a second time. Use it after changing a prompt or a code check, when you want the new version applied to data the old version already scored. Both results are kept, so you can compare them.
+Turn on **Include generations that already have a result** to grade the same data a second time. Use it after changing a prompt or a code check, when you want the new version applied to data the old version already scored. Both results are kept, so you can compare them.
 
 ### Reading a backfill's progress
 
-The **Covered** column counts the generations in range that hold a result. A finished backfill usually reads as fully covered, because the evaluation grades new data on its own while the backfill works through older data.
+The **Covered** column counts how much of the range holds a result. A finished backfill usually reads as fully covered, because the evaluation grades new data on its own while the backfill works through older data.
 
-Expand a row to see the range, the conditions it used, and how many generations it started, skipped, or left without a result.
+Expand a row to see the range, the conditions it used, and how much it started, skipped, or left without a result.
 
 ### When the count is zero
 
@@ -361,7 +365,7 @@ The most recent few minutes are also held back, because an evaluation waits for 
 
 ### Backfill pricing
 
-Each generation a backfill evaluates counts as one AI Observability event, the same as a live evaluation, and LLM judge backfills use your provider API key. The confirmation dialog shows how many generations will be evaluated before you start, so check that number on a wide range.
+Each evaluation a backfill runs counts as one AI Observability event, the same as a live evaluation, and LLM judge backfills use your provider API key. The confirmation dialog shows how much will be evaluated before you start, so check that number on a wide range.
 
 ## Evaluation reports
 
