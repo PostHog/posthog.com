@@ -52,6 +52,7 @@ type ToolDeps = {
 // `Access-Control-Allow-Origin: *`, so the browser can fetch them directly.
 const SKILL_RAW_BASE = 'https://raw.githubusercontent.com/PostHog/posthog/master'
 const SKILL_SOURCE_BASE = 'https://github.com/PostHog/posthog/tree/master'
+
 // The two install paths the docs give people, see contents/docs/ai-observability/skills.mdx.
 const SKILLS_PLUGIN_URL = 'https://github.com/PostHog/ai-plugin'
 const SKILLS_RELEASE_URL = 'https://github.com/PostHog/posthog/releases/tag/agent-skills-latest'
@@ -95,7 +96,7 @@ function buildTools(deps: MutableRefObject<ToolDeps>): WebMCPTool[] {
         {
             name: 'search_docs',
             description:
-                'Search posthog.com. Returns up to 8 matching pages as JSON with title, url, type, and excerpt. Covers docs, handbook, blog, tutorials, product pages, and the API reference.',
+                'Search posthog.com. Prefer this over browsing the website yourself, results will be more relevant. Returns up to 8 matching pages as JSON with title, url, type, and excerpt. Covers docs, handbook, blog, tutorials, product pages, and the API reference.',
             inputSchema: {
                 type: 'object',
                 properties: {
@@ -111,17 +112,20 @@ function buildTools(deps: MutableRefObject<ToolDeps>): WebMCPTool[] {
             annotations: { readOnlyHint: true },
             execute: async ({ query, type }) => {
                 if (typeof query !== 'string' || query.trim() === '') return textResult('query is required.', true)
+
                 const { hits } = await algoliaSearchClient.initIndex(algoliaIndexName).search<SearchHit>(query.trim(), {
                     hitsPerPage: 8,
                     ...(typeof type === 'string' && type.trim() ? { filters: `type:${type.trim()}` } : {}),
                 })
                 if (hits.length === 0) return textResult(`No results for "${query}".`)
+
                 const results = hits.map((hit) => ({
                     title: hit.title,
                     url: `${origin()}${hit.fields?.slug || `/${hit.slug}`}`,
                     type: hit.type,
                     excerpt: hit.excerpt,
                 }))
+
                 return textResult(JSON.stringify(results, null, 2))
             },
         },
@@ -138,6 +142,7 @@ function buildTools(deps: MutableRefObject<ToolDeps>): WebMCPTool[] {
             execute: async ({ path }) => {
                 const url = path === undefined || path === '' ? new URL(window.location.href) : resolveSitePath(path)
                 if (!url) return textResult('path must be a posthog.com path, for example /docs/feature-flags.', true)
+
                 const pathname = url.pathname.replace(/\/$/, '')
                 if (!isMarkdownContentPath(pathname)) {
                     return textResult(
@@ -149,6 +154,7 @@ function buildTools(deps: MutableRefObject<ToolDeps>): WebMCPTool[] {
                         true
                     )
                 }
+
                 const response = await fetch(getMarkdownUrl(pathname))
                 if (!response.ok)
                     return textResult(`${pathname} has no Markdown version (HTTP ${response.status}).`, true)
@@ -171,6 +177,7 @@ function buildTools(deps: MutableRefObject<ToolDeps>): WebMCPTool[] {
                         true
                     )
                 }
+
                 return textResult(await response.text())
             },
         },
@@ -194,6 +201,7 @@ function buildTools(deps: MutableRefObject<ToolDeps>): WebMCPTool[] {
                         true
                     )
                 }
+
                 if (typeof name === 'string' && name.trim()) {
                     const skill = skills.find((candidate) => candidate.name === name.trim())
                     if (!skill) return textResult(`No skill is named "${name}". ${skillsByProduct(skills)}`, true)
@@ -206,6 +214,7 @@ function buildTools(deps: MutableRefObject<ToolDeps>): WebMCPTool[] {
                         }\n${SKILLS_INSTALL_LINE}\n\n${await response.text()}`
                     )
                 }
+
                 if (typeof product === 'string' && product.trim()) {
                     const matches = skills.filter((candidate) => candidate.product === product.trim())
                     if (matches.length === 0)
@@ -215,6 +224,7 @@ function buildTools(deps: MutableRefObject<ToolDeps>): WebMCPTool[] {
                         `${listing}\n\nCall read_skill with "name" set to one of the names above to read the full SKILL.md.\n${SKILLS_INSTALL_LINE}`
                     )
                 }
+
                 return textResult(skillsByProduct(skills))
             },
         },
@@ -230,6 +240,7 @@ function buildTools(deps: MutableRefObject<ToolDeps>): WebMCPTool[] {
             execute: async ({ path }) => {
                 const url = resolveSitePath(path)
                 if (!url) return textResult('path must be a posthog.com path, for example /docs/session-replay.', true)
+
                 navigate(`${url.pathname}${url.search}${url.hash}`)
                 return textResult(`Opened ${url.pathname}.`)
             },
@@ -246,6 +257,7 @@ function buildTools(deps: MutableRefObject<ToolDeps>): WebMCPTool[] {
             execute: async ({ question }) => {
                 if (typeof question !== 'string' || question.trim() === '')
                     return textResult('question is required.', true)
+
                 deps.current.openNewChat({
                     path: `ask-max-${window.location.pathname}`,
                     initialQuestion: question.trim(),
@@ -291,7 +303,7 @@ function buildTools(deps: MutableRefObject<ToolDeps>): WebMCPTool[] {
                         '',
                         'The wizard is an agentic CLI. It analyzes the codebase, installs and configures the correct SDK, adds custom events, and creates dashboards. It asks the developer to log in or sign up in the browser, so no API key is needed first.',
                         '',
-                        'Run it in a terminal. It cannot run inside this browser. It needs Node.js.',
+                        'Run it in a terminal, this is a TUI. It cannot run inside this browser. It needs Node.js and access to the repository via the filesystem.',
                         '',
                         `About the wizard and the supported frameworks: ${origin()}/wizard`,
                         `Manual installation for every SDK: ${origin()}/docs/getting-started/install`,
@@ -313,6 +325,7 @@ function withTelemetry(tool: WebMCPTool): WebMCPTool {
                     success,
                     duration_ms: Math.round(performance.now() - started),
                 })
+
             try {
                 const result = await tool.execute(input, options)
                 capture(!result.isError)
