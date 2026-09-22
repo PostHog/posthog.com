@@ -31,6 +31,7 @@ For manual installation, follow the steps below.
 npm install @posthog/mcp posthog-node
 # or pnpm add @posthog/mcp posthog-node
 # or yarn add @posthog/mcp posthog-node
+# or bun add @posthog/mcp posthog-node
 ```
 
 Pass your [`posthog-node`](/docs/libraries/node) client to `instrument()` as the required second argument. This follows the [`@posthog/ai`](/docs/ai-engineering) pattern. You manage the client lifecycle. Call `posthog.shutdown()` or `posthog.flush()` to send queued events.
