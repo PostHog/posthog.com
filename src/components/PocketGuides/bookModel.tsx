@@ -152,13 +152,16 @@ export function bookTabs(pages: BookPageEntry[], activeUrl: string): BookTab[] {
 export const FONT_SIZES = [15, 17, 19, 21] as const
 const FONT_SIZE_KEY = 'pocket-guide-font-size'
 const DEFAULT_FONT_SIZE = FONT_SIZES[0]
+/** The scale before it moved down 1px to match docs body text. A size saved on it maps to its new step. */
+const LEGACY_FONT_SIZES: readonly number[] = [16, 18, 20, 22]
 
 export function useBookFontSize(): { fontSize: number; stepFontSize: (delta: number) => void } {
     // SSR the default, adopt the saved choice after mount – localStorage in render would mismatch.
     const [fontSize, setSize] = useState<number>(DEFAULT_FONT_SIZE)
 
     useEffect(() => {
-        const saved = Number(window.localStorage.getItem(FONT_SIZE_KEY))
+        const stored = Number(window.localStorage.getItem(FONT_SIZE_KEY))
+        const saved = LEGACY_FONT_SIZES.includes(stored) ? stored - 1 : stored
         if (FONT_SIZES.includes(saved as (typeof FONT_SIZES)[number])) {
             setSize(saved)
         }
