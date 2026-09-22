@@ -406,6 +406,18 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
             },
         },
     },
+    conductor: {
+        name: 'Conductor',
+        toolsUsed: [],
+        industries: ['Devtool'],
+        notes: 'Cloud coding agents',
+        logo: {
+            light: 'https://res.cloudinary.com/dmukukwp6/image/upload/conductor_wordmark_dark_b51da32b43.svg',
+            dark: 'https://res.cloudinary.com/dmukukwp6/image/upload/conductor_wordmark_light_9d1162725f.svg',
+        },
+        featured: false,
+        height: 6,
+    },
     contra: {
         name: 'Contra',
         toolsUsed: ['product_analytics', 'session_replay', 'feature_flags', 'cdp'],
