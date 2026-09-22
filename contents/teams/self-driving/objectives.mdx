@@ -1,60 +1,92 @@
-## Q3 2026 goals
+## Q4 2026 goals
 
-### Inbox
+Our Q4 priority is to make Self-Driving's research valuable enough that customers return to it: surface important findings, help people act through PostHog or their own agents, and verify the impact.
 
-#### Make the Inbox UX amazing - Michael
+### Make Self-Driving easy to start and useful for ongoing work – Chris and Dylan
 
-- Users should not need to leave PostHog to merge a PR
+#### Increase activation – Chris
 
-#### Improve mergeability
+-   Improve adoption. Let new users start from PostHog web. Simplify onboarding by making it UI-first. Run the CLI wizard in a cloud sandbox instead of on the user's machine.
+-   Improve onboarding and empty states so users understand the value and know how to get their first useful report.
+-   Help users discover and adopt more capabilities after their first useful report.
+-   Help users activate later in the user journey when they have data.
+-   Experiment with report access without GitHub. In this experiment, require a repository connection only for work that needs code access.
+-   Scouts on by default: every project has the canonical scouts and project-specific suggestions waiting, so turning one on is the whole journey – Andy.
 
-- ReviewHog - Alex
-- CI followups for autostarted tasks
-- Screenshots and video previews of feature changes
+#### Help committed users turn reports into completed work – Dylan
 
-#### Costs - Josh
+-   Build an effective, enjoyable UI for understanding reports and managing tasks. Make the next action clear.
+-   Help users understand what was found, what changed, and what evidence supports it, so they can review work confidently with fewer decisions.
+-   Make assignment and personalization useful: show what each person owns, what needs their attention, and what matters to them.
+-   Help users find the reports that need attention first, based on urgency, relevance, and work status.
+-   Enable users to move from a report to implementation and review in PostHog Desktop.
+-   Improve report notifications so relevant findings reach the right people.
+-   Support use by larger orgs as report volumes and team sizes grow. Make reports work for teams with more than a few engineers, and keep ownership, work status, and review responsibilities clear.
 
-- Reduce wasted token spend per PR, so that we can spend it on things that improve quality
+### Make the report layer independent of our UI – Dylan, Georgiy
 
-#### Self-driving features - Olly
+-   Provide reliable MCP access to discover reports, inspect evidence, assign work, and update report status.
+-   Let users connect their own agents or build their own UI without losing core report capabilities.
+-   Support PostHog AI for investigating and acting on reports. Provide task views that make ongoing work easy to manage.
+-   Keep report state consistent across PostHog and external tools.
 
-- We have self-healing working: deploying a PR to fix a problem in the users codebase. We want to move to features that require multiple PRs, and tracking the progress between them, to achieve an objective.
+### Keep report quality high as we scale – Alex, Andy
 
-#### Make it easy to use
+-   Improve report quality across signals and scouts.
+-   Tailor reports across signals and scouts to our target ICPs and personas.
+-   Measure scout report quality as a number: online judge scouts that score a sample of reports, plus an offline eval suite. Compare a model, prompt, or skill change without a manual multi-hour experiment.
 
-- Add more sources, including logs and analytics
-- Increase quality of our existing integrations
-- Reduce friction to getting started with self-driving
-- Templates and recipes for scouts
+### Make Self-Driving pricing clear and sustainable
 
-#### Memory
+-   Ship new pricing – Olly.
+-   Ship credit-based pricing for scout runs, so run caps go away and users decide how many scouts to run and how often – Andy.
+-   Figure out better cost controls for customers around different Self-Driving steps (signals, scouts, research, implementation, review, monitoring) – Olly.
+-   Achieve positive margin (flex tier, better-suited models, negotiated discounts) – shared.
+-   Switch ReviewHog to usage-based pricing – Olly.
 
-- Shared memory for agents running in the pipeline. Form factor TBD
-- Semantic layer
+### Close the loop: monitor changes and verify their impact – Mikayla, Alex
 
-#### Pricing - Annika
+-   Define expected impact and success/failure criteria for implemented changes.
+-   Monitor those changes with PostHog data, report evidence, and trigger follow-up research when criteria aren't met.
+-   Make reports instrument PostHog in PRs by PostHog/external agents.
+-   Link reports, PRs, and verified outcomes, including PRs created outside PostHog.
 
-- Experiment with different pricing models, including per-merged-PR and agentic pricing
+### Make Self-Driving customizable for our customers
 
-### PostHog AI
+-   Let users customize their pipeline with automations in PostHog – Georgiy.
+-   Let users enable ReviewHog for Self-Driving PRs – Alex.
+-   Personal scouts: a scout owned by one person, watching their own work, delivering only to them (Slack DM first), with its own noise budget – Andy.
+-   Make Self-Driving act on feedback: use corrections, the context layer, report discussions, and dismissal reasons to improve future research, reports, and implementation, so users don't have to repeat the same instructions (ambient customization and steerability) – Andy.
+-   Give users control through settings, prompts, and skills (active customization) – Andy.
 
-- Complete the PostHog AI migration to give PostHog AI access to all products via MCP
-- Roll it out to users, and iterate on feedback
+### Make Self-Driving self-organize and orchestrate itself
 
-### Slack
+-   Let Self-Driving orchestrate scouts and signal sources – Mikayla.
+-   Scouts that act, opt-in per scout: a proposed action on the report with accept/reject, then actions inside PostHog (maintain dashboards, alerts, insights), then external actions through connected MCP servers, gated by per-scout write scopes and tool allow/deny lists – Andy.
+-   Let scouts improve themselves (without the need to manually run 10h+ experiments for model/effort changes, manually create scouts to look over other scouts, and so on) – Alex.
 
-- Better activation and onboarding
-- It messages you, you don't message it
-- Inbox notification digest, rather than just everything in a channel
-- Scouts send Slack messages to a user
+### Experiment with building features – Andy, Olly
 
-### Agentic interfaces
+-   Ship an experimental approach for Self-Driving to move beyond bug fixes and deliver new features.
 
-- Continue monitoring feedback and improving MCP, CLI, and SDK interfaces
-- Add skills for using the SDK
+### Product and growth – Annika, Georgiy
+
+-   Define our ideal customer profile (ICP) for Self-Driving.
+-   Define metrics for report activation and repeat use.
+-   Step up marketing for Self-Driving, for instance, using banger reports to tell compelling stories and reach more customers.
+-   Work with Sales to clarify Self-Driving's positioning and enable earlier customer pitches.
+
+### Only if capacity remains
+
+-   Further ranking improvements: explore more advanced or learned ranking if report ordering prevents users from finding useful work. Basic prioritization remains part of the core report experience.
+-   Take ReviewHog to the next level and add other last-mile features (visual reviews, etc.).
+-   Make implementation better.
+-   Autoresearch: get v1 shipped for internal dogfooding – Andy.
+-   Scouts as a system: a scout schedules its own follow-up run, one-off scouts, and event-triggered scouts that share one trigger primitive with workflows.
+-   Scouts as a platform: other products build on scouts (Replay Vision digests are the first case), scout templates, and publishing scouts to the skills marketplace.
 
 ## Anti-goals
 
-- Spending overly long amounts of time debating naming or pricing strategies
-- Trying to seek consensus on decisions - we have to lean on folks owning stuff as we're a big team
-- Shipping to any interface where we don't control rollout
+-   Trying to seek consensus on decisions – we have to lean on folks owning stuff as we're a big team.
+-   Spending overly long amounts of time debating naming or pricing strategies.
+-   Taking on ownership of more products.

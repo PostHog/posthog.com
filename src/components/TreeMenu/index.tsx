@@ -430,14 +430,14 @@ export function TreeMenu(props: TreeMenuProps) {
         setActiveItem(item)
     }
 
-    const items = useMemo(() => props.items, [])
+    const items = props.items
     const sections = useMemo(() => buildSections(items || []), [items])
 
     useEffect(() => {
         if (watchPath) {
             setActiveItem(getActiveItem(items || [], activeUrl ?? appWindow?.path ?? pathname))
         }
-    }, [appWindow?.path, activeUrl])
+    }, [items, watchPath, activeUrl, appWindow?.path, pathname])
 
     if (!items?.length) {
         return <p className="text-sm">No posts available</p>

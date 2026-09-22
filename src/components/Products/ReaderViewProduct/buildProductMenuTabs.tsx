@@ -123,6 +123,12 @@ interface BuildProductMenuTabsArgs {
               name: string
               productMenu?: ProductNavItem[]
               pricingMenu?: ProductNavItem[]
+              /**
+               * Docs URL slug, when the docs don't live at `/docs/<product slug>`
+               * under an entry named after the product. Set it and the Docs tab
+               * is looked up by `/docs/<docsSlug>` instead of by product name.
+               */
+              docsSlug?: string
               /** Volume id from `src/constants/pocketGuides.ts`; setting it is the whole opt-in. */
               pocketGuideVolume?: string
           }
@@ -173,14 +179,22 @@ export function buildProductMenuTabs({
 }: BuildProductMenuTabsArgs): MenuTab[] {
     if (!productData) return []
 
-    const { slug: productSlug, name: productName, productMenu = [], pricingMenu = [], pocketGuideVolume } = productData
+    const {
+        slug: productSlug,
+        name: productName,
+        productMenu = [],
+        pricingMenu = [],
+        pocketGuideVolume,
+        docsSlug,
+    } = productData
 
     const navProductMenu = productMenu.filter((item) => !item.hideFromNav)
     const navPricingMenu = pricingMenu.filter((item) => !item.hideFromNav)
 
-    const docsEntry = docsMenu.children.find(
-        ({ name }: { name: string }) => name.toLowerCase() === productName.toLowerCase()
-    )
+    const docsBasePath = `/docs/${docsSlug ?? productSlug}`
+    const docsEntry = docsSlug
+        ? docsMenu.children.find(({ url }: { url?: string }) => url === docsBasePath)
+        : docsMenu.children.find(({ name }: { name: string }) => name.toLowerCase() === productName.toLowerCase())
     const docsChildren = docsEntry?.children || []
     const resolvedNavStyle: 'grouped' | 'listed' = navStyle ?? docsEntry?.navStyle ?? 'listed'
 
@@ -226,7 +240,7 @@ export function buildProductMenuTabs({
             value: 'docs',
             icon: TAB_ICON.docs,
             default: activeSurface === 'docs',
-            href: `/docs/${productSlug}`,
+            href: docsBasePath,
             menu: (
                 <DocsTreeMenu
                     items={docsChildren}

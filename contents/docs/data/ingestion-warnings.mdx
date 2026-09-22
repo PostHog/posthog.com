@@ -42,6 +42,7 @@ List of ingestion warnings:
 - [$set or $set_once is ignored on exception events and should not be sent](#set-or-set_once-is-ignored-on-exception-events-and-should-not-be-sent)
 - [Invalid heatmap data](#invalid-heatmap-data)
 - [Discarded $groupidentify event with invalid $group_set](#discarded-groupidentify-event-with-invalid-group_set)
+- [Discarded cookieless event because cookieless tracking is disabled](#discarded-cookieless-event-because-cookieless-tracking-is-disabled)
 
 Validation warnings, raised when PostHog rejects a request as it arrives:
 
@@ -136,6 +137,21 @@ posthog.group("company", "company_id_in_your_db", "PostHog");
 ```
 
 `null` or `undefined` values for `$group_set` are accepted and upsert the group with empty properties.
+
+## Discarded cookieless event because cookieless tracking is disabled
+
+PostHog discards events sent in [cookieless mode](/tutorials/cookieless-tracking) when cookieless tracking is disabled for the project. The event is not ingested, and this warning is the only record of it. The drop happens before any other processing, so heatmap data and exceptions captured in cookieless mode are discarded the same way.
+
+Cookieless mode has two halves. On the SDK side, the [`cookieless_mode`](/docs/libraries/js/config) option in posthog-js (`"always"` or `"on_reject"`) sends events with the distinct ID `$posthog_cookieless` instead of a stored one. On the project side, **Cookieless tracking** under Settings > Web analytics tells PostHog to compute an anonymous ID for those events from a hash of the calendar day, user agent, IP address, and host. The project setting is off by default. PostHog doesn't turn it on when cookieless events arrive, because anyone holding your public project token could otherwise switch on cookieless processing for your project, which strips the IP address and user agent from every event.
+
+Discarded events still show up in **Activity > Live events**, which reads the stream before ingestion runs. So it can look like PostHog accepts the data and then loses it.
+
+To fix this, do one of the following:
+
+- Enable **Cookieless tracking** under Settings > Web analytics if you want cookieless mode. Events sent after the change are ingested immediately. Events already discarded can't be recovered.
+- Remove `cookieless_mode` from your posthog-js config if cookieless mode was enabled in the SDK by mistake.
+
+The warning's details carry the event name and UUID of a sampled discarded event.
 
 ## Validation warnings
 
