@@ -10,6 +10,7 @@ import JuiceboxLogo from 'components/CustomerLogos/JuiceboxLogo'
 import ExaLogo from 'components/CustomerLogos/ExaLogo'
 import useProduct from 'hooks/useProduct'
 import explorerHog from '../../../images/explorer-hog.png'
+import opportunityMiner from '../../../images/replay-vision-opportunity-miner.png'
 import { IconWarning, IconDocument, IconCursorClick, IconTrending, IconCheckCircle, IconCode } from '@posthog/icons'
 
 // Existing copy and imagery, with the approved hero adaptation. See the adjacent README.
@@ -75,7 +76,7 @@ const prompts = [
     },
     {
         title: 'Impact and cohorts',
-        prompt: `How many users did my "Dead-end pages" monitor affect in the last 14 days? Save them as a cohort.`,
+        prompt: `How many users did my "[Website] Opportunity miner" monitor affect in the last 14 days? Save them as a cohort.`,
     },
     {
         title: 'Create a scanner',
@@ -211,7 +212,7 @@ export default function ReplayVisionLandingPage(): JSX.Element {
                             <Link to="#how-it-works">01 / How it works</Link>
                             <Link to="#findings">02 / Observations</Link>
                             <Link to="#scanners">03 / Scanners</Link>
-                            <Link to="#setup">04 / AI wizard</Link>
+                            <Link to="#setup">04 / Getting started</Link>
                             <Link to="#mcp">05 / MCP</Link>
                         </nav>
 
@@ -266,7 +267,9 @@ export default function ReplayVisionLandingPage(): JSX.Element {
                                         Confidence and citations
                                     </h2>
                                 </div>
-                                <span className="font-mono text-xs text-secondary shrink-0">Dead-end pages</span>
+                                <span className="font-mono text-xs text-secondary shrink-0">
+                                    [Website] Opportunity miner
+                                </span>
                             </div>
                             <p className="max-w-3xl text-secondary leading-relaxed mb-6">
                                 Each scanner has an <strong>Observations</strong> tab listing every observation it's
@@ -274,19 +277,27 @@ export default function ReplayVisionLandingPage(): JSX.Element {
                             </p>
                             <figure className="m-0 border-2 border-primary rounded-sm overflow-hidden bg-accent/30">
                                 <div className="border-b border-primary px-4 py-3 flex flex-wrap items-center justify-between gap-2 text-xs font-mono">
-                                    <span>Replay Vision / Dead-end pages / Observation</span>
+                                    <span>Replay Vision / [Website] Opportunity miner / Observation</span>
                                 </div>
                                 <div className="p-2 @xl:p-5 bg-accent/40">
                                     <ZoomImage>
                                         <img
-                                            src="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/observation_detail_monitor_77a2192684.png"
-                                            alt="An observation detail page for a monitor scanner: verdict, confidence, model reasoning with citations, and the prompt that produced it"
+                                            src={opportunityMiner}
+                                            alt="The [Website] Opportunity miner scanner returns a Yes verdict, with timestamped reasoning showing a visitor searching for the changelog RSS feed"
                                             className="w-full block"
                                             loading="lazy"
                                         />
                                     </ZoomImage>
                                 </div>
                                 <figcaption className="grid @2xl:grid-cols-3 border-t border-primary text-sm">
+                                    <p className="@2xl:col-span-3 !m-0 p-5 border-b border-primary">
+                                        [Website] Opportunity miner: Yes verdict, 90% confidence. This observation
+                                        became a{' '}
+                                        <Link to="https://github.com/PostHog/posthog.com/pull/20192">
+                                            merged PR the same day
+                                        </Link>
+                                        .
+                                    </p>
                                     <div className="p-5 border-b @2xl:border-b-0 @2xl:border-r border-primary">
                                         <strong className="block mb-2">1. Verdict</strong>
                                         <span className="text-secondary">
@@ -486,7 +497,7 @@ export default function ReplayVisionLandingPage(): JSX.Element {
 
                         <section className="border-y border-primary py-10">
                             <p className="font-mono text-xs uppercase tracking-widest text-secondary mb-3">
-                                06 / Getting started
+                                06 / Questions
                             </p>
                             <h2 className="text-3xl font-bold mt-0 mb-6">Questions?</h2>
                             <details className="border-t border-primary py-5">
