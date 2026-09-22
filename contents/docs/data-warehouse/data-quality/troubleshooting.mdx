@@ -96,13 +96,13 @@ You can't move an existing check to a different table, view, or metric. Create a
 
 ## Recover from a blocked materialization
 
-A blocked refresh means at least one enabled error-severity check returned **Failed** against the staged, unpublished data. The previous published version continues serving, and a DAG skips downstream nodes.
+A blocked refresh means at least one enabled error-severity check returned **Failed** against the staged, unpublished data. The previous published version continues serving, and PostHog skips downstream views.
 
 1. Open the materialized view's **Data quality** tab.
 2. Inspect each failed error-severity check and rerun its diagnostic query.
 3. Fix the source data or edit the assertion.
 4. Start the materialization again.
-5. Rerun the DAG after the view publishes so skipped downstream nodes can run.
+5. Restart the affected data modeling run after the view publishes so PostHog can refresh the skipped downstream views.
 
 Don't disable the project-wide gate to hide an errored audit. An errored query already fails open. Fix the query or permission problem so the next refresh has a real verdict.
 

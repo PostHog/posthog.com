@@ -12,7 +12,7 @@ Data quality isn't available to every project. [Contact support](https://app.pos
 
 </CalloutBox>
 
-You can stop a materialized view from publishing new data when its error-severity checks fail. PostHog tests the unpublished data first, keeps the existing published version available when the test fails, and skips downstream nodes that depend on the blocked view.
+You can stop a materialized view from publishing new data when its error-severity checks fail. PostHog tests the unpublished data first, keeps the existing published version available when the test fails, and skips downstream views that depend on the blocked view.
 
 The setting applies to every materialized view in the project. It is off by default.
 
@@ -51,7 +51,7 @@ Only a completed **Failed** result from an error-severity check guarantees a blo
 | A check returns **Skipped** | No |
 | The staged audit can't return a verdict | No |
 
-The gate fails open for query errors and unavailable audits. These outcomes don't prove the staged data is valid, but they also don't provide a failing assertion that PostHog can use to block publication. PostHog records check errors so you can investigate them. In a data modeling directed acyclic graph (DAG), an audit that returns no verdict also leaves the node available for the DAG's post-run check sweep.
+The gate fails open for query errors and unavailable audits. These outcomes don't prove the staged data is valid, but they also don't provide a failing assertion that PostHog can use to block publication. PostHog records check errors so you can investigate them. When PostHog refreshes multiple related views, an audit without a verdict doesn't stop the remaining checks.
 
 ## What happens when publication is blocked
 
@@ -60,7 +60,7 @@ When an error-severity check fails:
 - PostHog doesn't replace the published table. Queries continue to read the previously published version.
 - The materialization job and model show a failed state with the number of blocking checks.
 - PostHog sends a materialization-blocked notification to team members who can access the view, its referenced tables and views, and query results.
-- A DAG marks the node as failed and skips its downstream nodes. Their skip reason identifies the upstream data quality failure.
+- PostHog marks the materialized view as failed and skips its downstream views. Each skipped view identifies the upstream data quality failure as the reason.
 - PostHog doesn't pause the view's schedule or count the block toward automatic suspension for repeated materialization errors.
 
 The failed check run keeps its failure count and diagnostic query. PostHog doesn't store a snapshot of the failing rows.
@@ -74,6 +74,6 @@ The failed check run keeps its failure count and diagnostic query. PostHog doesn
 5. Run the check again against the current published data when that helps verify the fix.
 6. Start the materialization again. PostHog creates new staged files and reruns the gate before publishing them.
 
-Rerun the DAG when downstream nodes were skipped. They run after the blocked view publishes successfully.
+Restart the affected data modeling run when downstream views were skipped. PostHog refreshes them after the blocked view publishes successfully.
 
 See [results and troubleshooting](/docs/data-warehouse/data-quality/troubleshooting) for query errors, timeouts, permissions, and failing-row investigation.

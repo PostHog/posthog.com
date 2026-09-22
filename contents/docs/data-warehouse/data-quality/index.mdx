@@ -44,7 +44,7 @@ Checks run in several ways:
 
 - Run one check, every check on a table, view, or metric, or every check in the project manually.
 - Run connected-table checks after that table completes a source sync.
-- Run view checks when their materialization or data modeling DAG executes.
+- Run view checks when PostHog refreshes or materializes the view.
 - Run metric and PostHog-table checks on a recurring schedule.
 
 Only enabled checks run. See [triggers and schedules](/docs/data-warehouse/data-quality/triggers) for the exact behavior.

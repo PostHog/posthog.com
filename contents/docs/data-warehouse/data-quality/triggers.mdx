@@ -28,15 +28,15 @@ Checks on a connected warehouse table run after that table completes a source sy
 
 PostHog tables don't have source syncs. Checks on `events`, `persons`, and `groups` use schedules instead.
 
-## Run checks with views and data modeling DAGs
+## Run checks after view refreshes
 
 A materialized view runs its checks as part of its refresh. This tests the version produced by that materialization run.
 
-A saved view in a data modeling directed acyclic graph (DAG) runs its checks when the DAG executes that view. PostHog runs the DAG in dependency order, then starts the applicable checks for each view that ran.
+A saved view that PostHog refreshes as part of data modeling runs its checks when the view refreshes. PostHog refreshes related views in dependency order, then starts the applicable checks for each view that ran.
 
-A view outside a DAG has no automatic execution trigger. Run its checks manually.
+A saved view without an automatic refresh has no automatic check trigger. Run its checks manually.
 
-Disabling a check prevents it from running after source syncs, materializations, DAG runs, schedules, and manual **Run all checks** actions.
+Disabling a check prevents it from running after source syncs, view refreshes, schedules, and manual **Run all checks** actions.
 
 ## Schedule metric and PostHog-table checks
 
