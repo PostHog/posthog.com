@@ -25,7 +25,7 @@ Every data quality operation requires query access. You also need access to the 
 - A `custom_sql` check requires access to every table or view selected by the query.
 - Metric checks require Data Catalog access. Table, view, and PostHog-table checks require warehouse object access.
 
-For a personal API key, include `query:read` and the matching subject scope. Use `warehouse_objects:read` or `warehouse_objects:write` for warehouse subjects, and `data_catalog:read` or `data_catalog:write` for metrics.
+For a personal API key, include `query:read` and the matching subject scope. Use `warehouse_table:read` or `warehouse_table:write` for warehouse and PostHog tables, `warehouse_view:read` or `warehouse_view:write` for views, and `data_catalog:read` or `data_catalog:write` for metrics. The broader `warehouse_objects:read` and `warehouse_objects:write` scopes also grant access to warehouse subjects.
 
 PostHog filters subject discovery, definitions, results, health, and notifications with the same access rules. A subject that you can't read doesn't appear as a partial or redacted row.
 
@@ -94,7 +94,7 @@ Call `data-quality-check-schedule` with `subject_type`, `subject_uuid`, and at l
 
 The schedule tool supports `metric` and `posthog_table` subjects. It rejects `table` and `view` because their checks run after data changes. The supported intervals are `1hour`, `6hour`, `12hour`, `24hour`, and `7day`.
 
-A subject gets its schedule when you add its first check. The unified MCP tool can update a schedule, but it can't read the current settings. To inspect them, open **Data warehouse** > **Data quality** and expand the metric or PostHog table. A metric's **Tests** tab shows the same controls. If an update returns an uncertain result, reload that page before you make another MCP call.
+A subject gets its schedule when you add its first check. The unified MCP tool can update a schedule, but it can't read the current settings. To inspect them, open **Data Warehouse** > **Data quality** and expand the metric or PostHog table. A metric's **Tests** tab shows the same controls. If an update returns an uncertain result, reload that page before you make another MCP call.
 
 ## Query check definitions
 
