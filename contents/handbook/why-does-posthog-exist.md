@@ -33,7 +33,7 @@ We provide developer infrastructure - by providing _every_ product engineers nee
 - Automate everything better than anyone else can, by using AI across this wider context
 - Continue to provide all the products engineering teams need as they grow
 
-### 2. Provide every product engineers need to build successful products
+### 2. Provide every product engineers need
 
 We aim to offer every product engineering teams need to debug, understand, and improve their products. From session replay for debugging to feature flags for safe deployments, we help engineers ship better code faster.
 
