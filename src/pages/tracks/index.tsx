@@ -53,6 +53,7 @@ const Tracks: React.FC = () => {
 
                 <TutorialsSlider
                     slugs={[
+                        '/tutorials/multiple-environments',
                         '/tutorials/canary-release',
                         '/tutorials/build-your-own-posthog-app',
                         '/tutorials/new-user-experiments',
