@@ -21,7 +21,7 @@ standard lists the tools and calls them. Gemini in Chrome is the first announced
 | `search_docs` | `query`, optional `type` | Searches the Algolia index that powers site search. Returns up to 8 hits as JSON. |
 | `read_page` | optional `path` | Fetches the `.md` twin of a page under `MARKDOWN_CONTENT_PATHS`. No path means the current page. |
 | `get_site_overview` | none | Returns `/platform.md`, the machine-readable platform overview built in `onPostBuild`. |
-| `read_skill` | optional `name` or `product` | Lists agent skills by product, or fetches one `SKILL.md` from the monorepo. |
+| `read_skill` | optional `name` or `product` | Lists agent skills by product, or fetches one `SKILL.md` from the monorepo. Every listing and skill ends with the source URL and the two install paths from the docs. |
 | `navigate_page` | `path` | Calls Gatsby `navigate`. Refuses paths that are not on this origin. |
 | `ask_max` | `question` | Opens the PostHog AI chat overlay with the question. The answer stays in the chat panel. |
 | `get_mcp_connection_info` | none | Returns the PostHog MCP server URL, the auth method, and the wizard setup command. |

@@ -51,6 +51,11 @@ type ToolDeps = {
 // Canonical SKILL.md files live in the monorepo, not on this site. raw.githubusercontent.com sends
 // `Access-Control-Allow-Origin: *`, so the browser can fetch them directly.
 const SKILL_RAW_BASE = 'https://raw.githubusercontent.com/PostHog/posthog/master'
+const SKILL_SOURCE_BASE = 'https://github.com/PostHog/posthog/tree/master'
+// The two install paths the docs give people, see contents/docs/ai-observability/skills.mdx.
+const SKILLS_PLUGIN_URL = 'https://github.com/PostHog/ai-plugin'
+const SKILLS_RELEASE_URL = 'https://github.com/PostHog/posthog/releases/tag/agent-skills-latest'
+const SKILLS_INSTALL_LINE = `Install: the PostHog AI plugin (${SKILLS_PLUGIN_URL}) bundles every PostHog skill for Claude Code, Codex, Cursor, and Gemini CLI. Or download skills.zip from ${SKILLS_RELEASE_URL} and copy a skill folder into the agent's skills directory, for example .claude/skills/.`
 
 const NO_INPUT_SCHEMA = { type: 'object', properties: {} }
 
@@ -184,7 +189,10 @@ function buildTools(deps: MutableRefObject<ToolDeps>): WebMCPTool[] {
             execute: async ({ name, product }) => {
                 const skills = deps.current.skills
                 if (skills.length === 0) {
-                    return textResult(`No skills are indexed on this site. Browse them at ${origin()}/skills.`, true)
+                    return textResult(
+                        `No skills are indexed on this site. Download them from ${SKILLS_RELEASE_URL}.`,
+                        true
+                    )
                 }
                 if (typeof name === 'string' && name.trim()) {
                     const skill = skills.find((candidate) => candidate.name === name.trim())
@@ -192,13 +200,20 @@ function buildTools(deps: MutableRefObject<ToolDeps>): WebMCPTool[] {
                     const response = await fetch(`${SKILL_RAW_BASE}/${skill.sourcePath}/SKILL.md`)
                     if (!response.ok)
                         return textResult(`Could not fetch ${skill.name} (HTTP ${response.status}).`, true)
-                    return textResult(await response.text())
+                    return textResult(
+                        `Source: ${SKILL_SOURCE_BASE}/${
+                            skill.sourcePath
+                        }\n${SKILLS_INSTALL_LINE}\n\n${await response.text()}`
+                    )
                 }
                 if (typeof product === 'string' && product.trim()) {
                     const matches = skills.filter((candidate) => candidate.product === product.trim())
                     if (matches.length === 0)
                         return textResult(`No product is named "${product}". ${skillsByProduct(skills)}`, true)
-                    return textResult(matches.map((skill) => `## ${skill.name}\n${skill.description}`).join('\n\n'))
+                    const listing = matches.map((skill) => `## ${skill.name}\n${skill.description}`).join('\n\n')
+                    return textResult(
+                        `${listing}\n\nCall read_skill with "name" set to one of the names above to read the full SKILL.md.\n${SKILLS_INSTALL_LINE}`
+                    )
                 }
                 return textResult(skillsByProduct(skills))
             },
