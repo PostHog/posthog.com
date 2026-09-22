@@ -40,15 +40,15 @@ If the setting is off, PostHog publishes the materialization and then runs its c
 
 ## Understand which outcomes block publication
 
-Only a completed `failed` result from an error-severity check guarantees a block.
+Only a completed **Failed** result from an error-severity check guarantees a block.
 
 | Check outcome | Blocks publication |
 | --- | --- |
-| An error-severity check returns `failed` | Yes |
-| A warning-severity check returns `failed` | No |
-| A check returns `passed` | No |
-| A check returns `errored` because it couldn't compile or execute | No |
-| A check returns `skipped` | No |
+| An error-severity check returns **Failed** | Yes |
+| A warning-severity check returns **Failed** | No |
+| A check returns **Passed** | No |
+| A check returns **Errored** because it couldn't compile or execute | No |
+| A check returns **Skipped** | No |
 | The staged audit can't return a verdict | No |
 
 The gate fails open for query errors and unavailable audits. These outcomes don't prove the staged data is valid, but they also don't provide a failing assertion that PostHog can use to block publication. PostHog records check errors so you can investigate them. In a data modeling directed acyclic graph (DAG), an audit that returns no verdict also leaves the node available for the DAG's post-run check sweep.
@@ -59,7 +59,7 @@ When an error-severity check fails:
 
 - PostHog doesn't replace the published table. Queries continue to read the previously published version.
 - The materialization job and model show a failed state with the number of blocking checks.
-- PostHog sends a materialization-blocked notification to team members who can access the view, its referenced subjects, and query results.
+- PostHog sends a materialization-blocked notification to team members who can access the view, its referenced tables and views, and query results.
 - A DAG marks the node as failed and skips its downstream nodes. Their skip reason identifies the upstream data quality failure.
 - PostHog doesn't pause the view's schedule or count the block toward automatic suspension for repeated materialization errors.
 

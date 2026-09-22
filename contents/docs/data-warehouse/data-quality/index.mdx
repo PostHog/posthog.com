@@ -14,7 +14,7 @@ Data quality isn't available to every project. [Contact support](https://app.pos
 
 A query can run successfully and still return the wrong answer. A source can stop updating, a join key can become null, duplicate rows can change a total, or a status column can gain a value that downstream logic doesn't handle. SQL reports none of these as query errors.
 
-Data quality checks turn those assumptions into assertions that PostHog can run repeatedly. Each check belongs to a **subject**:
+Data quality checks turn those assumptions into assertions that PostHog can run repeatedly. You can add checks to:
 
 - A connected warehouse table
 - A saved view or materialized view
@@ -42,21 +42,21 @@ You need both. An approved `monthly_recurring_revenue` metric can use the agreed
 
 Checks run in several ways:
 
-- Run one check, every check on a subject, or every check in the project manually.
+- Run one check, every check on a table, view, or metric, or every check in the project manually.
 - Run connected-table checks after that table completes a source sync.
 - Run view checks when their materialization or data modeling DAG executes.
 - Run metric and PostHog-table checks on a recurring schedule.
 
 Only enabled checks run. See [triggers and schedules](/docs/data-warehouse/data-quality/triggers) for the exact behavior.
 
-## Severity and subject health
+## Severity and health
 
 Set each check's severity based on what a failure means:
 
-- **Error** – The data shouldn't be trusted. A failure marks the subject as failing and sends a notification.
+- **Error** – The data shouldn't be trusted. A failure marks the table, view, or metric as failing and sends a notification.
 - **Warning** – The result is worth reviewing, but it doesn't mean consumers must stop using the data.
 
-PostHog rolls the newest results into subject health:
+PostHog rolls the newest results into an overall health status:
 
 - **Healthy** – At least one enabled check passed, and none failed or errored.
 - **Warning** – Only warning-severity checks are failing.

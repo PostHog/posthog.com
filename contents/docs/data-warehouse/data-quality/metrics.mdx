@@ -18,7 +18,7 @@ Only metrics with a saved HogQL definition support data quality checks. Markdown
 
 ## Create a metric check
 
-Open the metric in the Data Catalog, select **Tests**, and click **New check**. Metrics support the `custom_sql` check type only. Leave the column empty and write a HogQL `SELECT` that returns one row per failure.
+Open the metric in the Data Catalog, select **Tests**, and click **New check**. Metrics support **Custom SQL** checks only. Write a HogQL `SELECT` that returns one row per failure.
 
 Use `{metric}` exactly once as a relation:
 
@@ -58,7 +58,7 @@ WHERE daily_revenue < 0
 
 ## Discover the metric's output columns
 
-The check editor loads the columns returned by the saved metric query. PostHog binds the current metric definition into `SELECT * FROM {metric} LIMIT 0` and executes it to discover column names and ClickHouse types without loading result rows.
+The check editor loads the columns returned by the saved metric query so you can use them in the check.
 
 Column discovery can fail when:
 
@@ -92,6 +92,6 @@ After you change a metric:
 3. Run the checks manually.
 4. Update any check whose assumption changed.
 
-The check keeps its ID and run history when you edit it. If a definition change removes a referenced output column, makes the metric unsupported, or introduces invalid HogQL, later runs record `errored` instead of `failed`.
+The check keeps its run history when you edit it. If a definition change removes a referenced output column, makes the metric unsupported, or introduces invalid HogQL, later runs show **Errored** instead of **Failed**.
 
-Metric checks run on the subject's schedule. See [triggers and schedules](/docs/data-warehouse/data-quality/triggers) to change the interval or pause automatic runs.
+Metric checks run on the metric's schedule. See [triggers and schedules](/docs/data-warehouse/data-quality/triggers) to change the interval or pause automatic runs.

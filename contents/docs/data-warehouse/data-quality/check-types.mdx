@@ -1,5 +1,5 @@
 ---
-title: Data quality check types and configuration
+title: Data quality check types
 sidebar: Docs
 showTitle: true
 ---
@@ -12,162 +12,80 @@ Data quality isn't available to every project. [Contact support](https://app.pos
 
 </CalloutBox>
 
-PostHog supports seven data quality check types. Connected tables, saved views, and the PostHog tables `events`, `persons`, and `groups` support every type. Metrics support `custom_sql` only and must have a saved HogQL definition.
+PostHog supports seven data quality check types. Connected tables, saved views, and the PostHog tables `events`, `persons`, and `groups` support every type. Metrics support **Custom SQL** only and must have a saved HogQL definition.
 
-Most checks pass when their compiled query finds zero failing rows. `row_count` is the exception: it passes when the observed count falls within its configured bounds.
+Most checks pass when they find zero failing rows. **Row count** is the exception: it passes when the number of rows is within the limits you set.
 
-## Common fields
+## What you need to provide
 
-Create a check with these fields:
+Start by choosing the table, view, metric, or PostHog table that you want to check. Then provide:
 
-| Field | Required | Supported values |
+| Field | What to enter |
 | --- | --- | --- |
-| `subject_type` | Yes | `table`, `view`, `metric`, or `posthog_table` |
-| `subject_uuid` | Yes | The `id` returned by `data-quality-subjects` |
-| `check_type` | Yes | One of the seven types on this page |
-| `column_name` | Depends on type | A selectable column on the subject |
-| `config` | Depends on type | The type-specific object shown below |
-| `severity` | No | `error` or `warn`; defaults to `error` |
-| `enabled` | No | `true` or `false`; defaults to `true` |
-| `name` | No | At most 128 characters; letters, numbers, and underscores; starts with a letter; unique among active checks across the project, including different subjects |
-| `description` | No | Why the check exists and what a failure means |
-| `tags` | No | A list of string labels |
-| `created_source` | No | `user` or `ai_generated`; defaults to `user` |
-| `ai_model` | No | The model that generated an AI-authored check |
-| `confidence` | No | The AI author's confidence from `0` to `1`, or null |
-| `reasoning` | No | The AI author's reason for creating the check |
-
-Use `data-quality-check-types` to read the current JSON schema for each type. Unknown configuration keys are rejected.
-
-The MCP create tool sets `created_source` to `ai_generated` automatically. Fields such as the check ID, owner, creator, fingerprint, status, and timestamps are read-only.
+| **Check type** | One of the seven types on this page. Metrics only support **Custom SQL**. |
+| **Column** | The column to check when the selected type needs one. |
+| Type-specific options | The allowed values, referenced table and column, row limits, maximum age, or query described below. |
+| **Name** | An optional name that starts with a letter and contains only letters, numbers, and underscores. Names must be unique across active checks in the project. |
+| **Description** | Why the check exists and what a failure means. |
+| **Severity** | **Error** when a failure makes the data untrustworthy, or **Warning** when it provides useful context. |
+| **Tags** | Optional labels that help organize checks. |
 
 ## Not null
 
-`not_null` fails once for every row where `column_name` is null. It requires a column and no type-specific configuration.
-
-```json
-{
-  "check_type": "not_null",
-  "column_name": "customer_id",
-  "config": {}
-}
-```
+**Not null** fails once for every row where the selected column is null. Select the column that must always have a value, such as `customer_id`.
 
 ## Unique
 
-`unique` fails once for every distinct non-null value that appears more than once. Null values are ignored. It requires a column and no type-specific configuration.
-
-```json
-{
-  "check_type": "unique",
-  "column_name": "order_id",
-  "config": {}
-}
-```
+**Unique** fails once for every distinct non-null value that appears more than once. Null values are ignored. Select the column that must not contain duplicates, such as `order_id`.
 
 For example, if `order_id = 42` appears three times, the check reports one failing value, not three failing rows.
 
 ## Accepted values
 
-`accepted_values` fails on each non-null value outside the configured set. Null values are ignored. It requires a column and at least one value.
-
-```json
-{
-  "check_type": "accepted_values",
-  "column_name": "status",
-  "config": {
-    "values": ["paid", "pending", "refunded"]
-  }
-}
-```
+**Accepted values** fails on each non-null value outside the set you provide. Null values are ignored. Select a column and add every allowed value. For example, the `status` column might allow `paid`, `pending`, and `refunded`.
 
 Values can be strings, numbers, or booleans. PostHog normalizes them to the column's type when it knows that type.
 
 ## Relationships
 
-`relationships` checks referential integrity. It fails on each non-null value in `column_name` that has no match in the target column. Null values in the source column are ignored.
+**Relationships** checks referential integrity. It fails on each non-null value in the selected column that has no match in another table or view. Null values in the source column are ignored.
 
-```json
-{
-  "check_type": "relationships",
-  "column_name": "customer_id",
-  "config": {
-    "to_subject_type": "table",
-    "to_subject_uuid": "<customers subject id>",
-    "to_column": "id"
-  }
-}
-```
+Provide:
 
-The target `to_subject_type` can be `table`, `view`, or `posthog_table`. Metrics can't be relationship targets.
+- **Column** – The source column, such as `orders.customer_id`.
+- **References table or view** – The table, view, or PostHog table that contains valid values, such as `customers`.
+- **References column** – The target column, such as `customers.id`.
 
-The required configuration fields are:
+Metrics can't be relationship targets.
 
-- `to_subject_type` – The target's subject type.
-- `to_subject_uuid` – The target's subject ID.
-- `to_column` – The target column that holds valid values.
-
-You must have read access to the target as well as editor access to the subject you are checking.
+You must have read access to the referenced table or view and editor access to the item you are checking.
 
 ## Row count
 
-`row_count` compares the number of rows with inclusive minimum and maximum bounds. It doesn't take a column. Set `min`, `max`, or both. Values must be non-negative integers, and `min` can't exceed `max`.
+**Row count** compares the number of rows with inclusive minimum and maximum limits. Set **Minimum rows**, **Maximum rows**, or both. The values must be zero or greater, and the minimum can't exceed the maximum.
 
-```json
-{
-  "check_type": "row_count",
-  "column_name": "",
-  "config": {
-    "min": 1,
-    "max": 1000000
-  }
-}
-```
-
-The check passes when `min <= row count <= max`. Because no individual row is wrong, the run records the count as `observed_value` and leaves `failed_row_count` empty.
+The check passes when the row count is within both limits. Because no individual row is wrong, the result shows the observed count instead of failing rows.
 
 ## Freshness
 
-`freshness` checks the newest non-null timestamp in a column. It fails when that timestamp is older than `max_age_minutes`. It also fails when the table is empty or the column has no non-null value.
+**Freshness** checks the newest non-null timestamp in a column. Select the timestamp column and set **Maximum age in minutes**. The value must be at least one minute.
 
-```json
-{
-  "check_type": "freshness",
-  "column_name": "synced_at",
-  "config": {
-    "max_age_minutes": 60
-  }
-}
-```
-
-`max_age_minutes` must be an integer of at least one.
+The check fails when the newest timestamp is older than the maximum age. It also fails when the table is empty or the column has no non-null value.
 
 ## Custom SQL
 
-`custom_sql` runs a HogQL `SELECT`. Every returned row is a failure, and zero rows passes. It doesn't take a column.
+**Custom SQL** runs a HogQL `SELECT`. Every returned row is a failure, and zero rows passes. Enter a query that returns only invalid rows:
 
-```json
-{
-  "check_type": "custom_sql",
-  "column_name": "",
-  "config": {
-    "query": "SELECT * FROM orders WHERE total != subtotal + tax"
-  }
-}
+```sql
+SELECT * FROM orders WHERE total != subtotal + tax
 ```
 
-The query can read data beyond the subject, but the result still belongs to that subject. You must have access to every table the query reads. For non-metric checks, placeholder fields, placeholder expressions, and filter placeholders aren't supported.
+The query can read other tables, but the result stays attached to the table, view, or metric where you created the check. You must have access to every table the query reads. For non-metric checks, placeholder fields, placeholder expressions, and filter placeholders aren't supported.
 
 For metrics, the query must use `{metric}` exactly once as a relation:
 
-```json
-{
-  "check_type": "custom_sql",
-  "column_name": "",
-  "config": {
-    "query": "SELECT * FROM {metric} WHERE revenue < 0"
-  }
-}
+```sql
+SELECT * FROM {metric} WHERE revenue < 0
 ```
 
 Metric check SQL can't define common table expressions (CTEs), including nested CTEs and scalar `WITH` bindings. Other placeholders aren't supported. The saved metric definition can still contain CTEs and saved parameters.
@@ -176,65 +94,37 @@ Metric check SQL can't define common table expressions (CTEs), including nested 
 
 | Check type | Null behavior |
 | --- | --- |
-| `not_null` | Each null is a failure. |
-| `unique` | Nulls are ignored. |
-| `accepted_values` | Nulls are ignored. Add a separate `not_null` check when null isn't valid. |
-| `relationships` | Nulls in the source column are ignored. Add a separate `not_null` check when every row must have a reference. |
-| `row_count` | Every row counts, regardless of which values are null. |
-| `freshness` | Null timestamps are ignored when PostHog finds the newest value. The check fails if no non-null timestamp exists. |
-| `custom_sql` | Your query decides which null values return as failures. |
+| **Not null** | Each null is a failure. |
+| **Unique** | Nulls are ignored. |
+| **Accepted values** | Nulls are ignored. Add a separate **Not null** check when null isn't valid. |
+| **Relationships** | Nulls in the source column are ignored. Add a separate **Not null** check when every row must have a reference. |
+| **Row count** | Every row counts, regardless of which values are null. |
+| **Freshness** | Null timestamps are ignored when PostHog finds the newest value. The check fails if no non-null timestamp exists. |
+| **Custom SQL** | Your query decides which null values return as failures. |
 
 ## Limit checks to recent PostHog rows
 
-Every type except `custom_sql` can include `lookback_hours` when the subject has a time column. The current subjects with time columns are:
+Every type except **Custom SQL** can limit a PostHog-table check to recent rows. The current tables with time columns are:
 
 - `events`, using `timestamp`
 - `persons`, using `created_at`
 - `groups`, using `created_at`
 
-For example:
+Set **Only check recent rows** to the number of hours you want to include. Leave it empty to scan the whole table. A whole-table check gives the strongest assertion but can cost more on large tables. Add an explicit time filter to a **Custom SQL** query instead.
 
-```json
-{
-  "check_type": "not_null",
-  "column_name": "distinct_id",
-  "config": {
-    "lookback_hours": 24
-  }
-}
-```
-
-Omitting `lookback_hours` scans the whole table. This gives the strongest assertion but can cost more on large tables. Put an explicit time filter inside a `custom_sql` query instead.
-
-A `relationships` check can bound each side independently. `lookback_hours` limits the source rows, and `to_lookback_hours` limits the target rows searched for a match:
-
-```json
-{
-  "check_type": "relationships",
-  "column_name": "person_id",
-  "config": {
-    "to_subject_type": "posthog_table",
-    "to_subject_uuid": "<persons subject id>",
-    "to_column": "id",
-    "lookback_hours": 24,
-    "to_lookback_hours": 72
-  }
-}
-```
-
-Only set `to_lookback_hours` when the target has a time column. A target window that is too short can report valid older references as failures.
+A **Relationships** check can limit each side independently. **Only check recent rows** limits the source rows. **Only look for a match in recent rows** limits the target rows searched for a match. A target window that is too short can report valid older references as failures.
 
 ## Choose a severity
 
-- Use `error` when a failure means downstream results shouldn't be trusted. Error failures mark the subject as failing and send notifications.
-- Use `warn` when a failure is useful context but doesn't require immediate action. Warning failures surface in results and set subject health to warning.
+- Use **Error** when a failure means downstream results shouldn't be trusted. Error failures mark the table, view, or metric as failing and send notifications.
+- Use **Warning** when a failure is useful context but doesn't require immediate action. Warning failures surface in results and set the health status to warning.
 
-An execution error is different from an error-severity failure. A run with status `errored` means PostHog couldn't compile or execute the assertion. It doesn't prove that the data is invalid, and it doesn't send a data-failure notification.
+An execution error is different from an error-severity failure. An **Errored** result means PostHog couldn't compile or execute the assertion. It doesn't prove that the data is invalid, and it doesn't send a data-failure notification.
 
 ## Edit, disable, or delete a check
 
-Open the check's actions menu and select **Edit** to change its name, description, type, column, configuration, severity, or tags. The subject can't change. Editing keeps the check ID and run history.
+Open the check's actions menu and select **Edit** to change its name, description, type, column, options, severity, or tags. You can't move a check to another table, view, or metric. Editing keeps the run history.
 
 Use the **Enabled** switch to stop every manual and automatic trigger from selecting the check. Re-enable it to include it in future runs.
 
-Select **Delete** to remove the check. PostHog asks for confirmation and keeps its past run history. To test a different subject, delete the check and create a new one on that subject.
+Select **Delete** to remove the check. PostHog asks for confirmation and keeps its past run history. To test a different table, view, or metric, delete the check and create a new one there.
