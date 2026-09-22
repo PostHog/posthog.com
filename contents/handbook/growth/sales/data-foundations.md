@@ -82,7 +82,7 @@ The context warehouse = your events and your business data, together and queryab
 
 ## How users grow into the data stack
 
-Users only need data products once they start generating a reasonable volume of data. They will adopt PostHog's other products first.
+Users only need data tools once they start generating a reasonable volume of data. They will adopt PostHog's other products first.
 
 1. **Start · pre-data – PostHog core products**: Analytics, session replay, feature flags, experiments
 2. **First data tool – Connect Stripe**: Revenue data, joined to product events. Having Stripe synced signals that a user has customers!
