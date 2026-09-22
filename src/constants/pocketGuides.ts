@@ -29,6 +29,13 @@ export const FIRST_GUIDE_BOOK_ORDER = 2
 
 export const POCKET_GUIDE_VOLUMES: PocketGuideVolume[] = [
     {
+        id: 'posthog',
+        title: 'PostHog 101',
+        description: 'Start here: learn what PostHog does by investigating and improving an example app.',
+        token: 'blue',
+        volume: 0,
+    },
+    {
         id: 'self-driving',
         title: 'Self-driving',
         description: 'Scouts that watch your product and open a pull request when something breaks.',
@@ -55,7 +62,7 @@ export const POCKET_GUIDE_VOLUMES: PocketGuideVolume[] = [
     },
     {
         id: 'session-replay',
-        title: 'Session replay',
+        title: 'Session Replay',
         description: 'Watch how people actually use your product – or let Replay Vision watch it for you.',
         token: 'yellow',
         volume: 4,

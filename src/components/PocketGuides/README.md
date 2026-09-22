@@ -228,3 +228,10 @@ The report frontmatter contract and the `.md` agent-mirror constraints are docum
 **Adding a frontmatter field** needs a matching declaration in
 `gatsby/createSchemaCustomization.ts` plus `pnpm clean` – Gatsby won't infer fields that only some
 pages declare.
+
+### Twig introduction preview
+
+`TwigIntroductionFigure` embeds the full Twig website in a scrollable frame. Development uses
+`http://localhost:3000`; run the Twig dev server alongside this site. Production uses
+`https://twig.com`. Set `GATSBY_TWIG_URL` to use a deployed Twig preview instead. The new Twig
+experience must be deployed before publishing this guide with the default production URL.

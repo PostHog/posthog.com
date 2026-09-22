@@ -80,7 +80,7 @@ function CoverBody({ volume, count }: Omit<CoverProps, 'placement'>): JSX.Elemen
                 <span>Vol. {volume.volume}</span>
                 {!volume.comingSoon && (
                     <span className="tabular-nums">
-                        {count} {count === 1 ? 'guide' : 'guides'}
+                        {volume.volume === 0 ? 'Start here' : `${count} ${count === 1 ? 'guide' : 'guides'}`}
                     </span>
                 )}
             </footer>

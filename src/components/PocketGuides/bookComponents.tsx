@@ -1,6 +1,10 @@
 import { ProductVideo } from '../ProductVideo'
 
 import Term from './terms'
+import LessonFooter from './LessonFooter'
+import TwigFilterFigure from './TwigFilterFigure'
+import TwigPropertyFigure from './TwigPropertyFigure'
+import TwigIntroductionFigure from './TwigIntroductionFigure'
 
 import Action, { Setup } from './Action'
 import Callout from './Callout'
@@ -43,6 +47,10 @@ export const bookMdxComponents = {
     Eyebrow,
     Frontispiece,
     Fig,
+    TwigFilterFigure,
+    TwigPropertyFigure,
+    TwigIntroductionFigure,
+    LessonFooter,
     ReportFigure,
     AnatomyFigure,
     DetailFigure,
