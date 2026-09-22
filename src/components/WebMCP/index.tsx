@@ -18,9 +18,6 @@ import { MARKDOWN_CONTENT_PATHS, MCP_SERVER_URL, isMarkdownContentPath } from '.
  * Spec: https://webmachinelearning.github.io/webmcp/
  */
 
-/** PostHog feature flag that turns registration on. Off, or not loaded, means no tools. */
-export const WEBMCP_FEATURE_FLAG = 'webmcp-tools'
-
 // Minimal typings for the parts of the spec this file uses. `document.modelContext` only exists in
 // browsers that ship WebMCP, so it is optional here and every use is guarded.
 type ToolResult = { content: { type: 'text'; text: string }[]; isError?: boolean }
@@ -329,38 +326,13 @@ export default function WebMCP(): null {
         const modelContext = document.modelContext
         if (!modelContext?.registerTool) return
 
-        // Aborting the signal unregisters the tools, per spec. The `registered` guard covers the
-        // flag callback firing again on every flag reload.
+        // Aborting the signal unregisters the tools, per spec, so unmounting cleans up.
         const controller = new AbortController()
-        let registered = false
-        const register = () => {
-            if (registered || controller.signal.aborted) return
-            registered = true
-            const tools = buildTools(deps).map(withTelemetry)
-            Promise.all(tools.map((tool) => modelContext.registerTool(tool, { signal: controller.signal })))
-                .then(() =>
-                    window.posthog?.capture('webmcp tools registered', { tools: tools.map((tool) => tool.name) })
-                )
-                .catch((error) => console.warn('WebMCP: could not register tools', error))
-        }
-
-        // `gatsby develop` runs without posthog-js, so the flag can never load there. Register
-        // directly so the tools can be tested locally.
-        if (process.env.NODE_ENV === 'development') {
-            register()
-            return () => controller.abort()
-        }
-
-        // Read the flag from the callback argument, not from a captured posthog object: before
-        // posthog-js loads, `window.posthog` is the snippet stub, and the stub replays this call on
-        // the real instance later. Fails closed when flags never load (an ad blocker).
-        const unsubscribe = window.posthog?.onFeatureFlags((enabledFlags: string[]) => {
-            if (enabledFlags.includes(WEBMCP_FEATURE_FLAG)) register()
-        })
-        return () => {
-            controller.abort()
-            if (typeof unsubscribe === 'function') unsubscribe()
-        }
+        const tools = buildTools(deps).map(withTelemetry)
+        Promise.all(tools.map((tool) => modelContext.registerTool(tool, { signal: controller.signal })))
+            .then(() => window.posthog?.capture('webmcp tools registered', { tools: tools.map((tool) => tool.name) }))
+            .catch((error) => console.warn('WebMCP: could not register tools', error))
+        return () => controller.abort()
     }, [])
 
     return null

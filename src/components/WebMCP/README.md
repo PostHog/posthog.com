@@ -34,21 +34,16 @@ Each `execute` returns `{ content: [{ type: 'text', text }] }`, the MCP result s
 handled failure. A thrown error also becomes an error result, so the agent gets a message instead of a rejected
 call.
 
-## Gating
+## Availability
 
-Two things must be true before a visitor's browser has the tools:
+The tools exist for a visitor as soon as the browser exposes `document.modelContext`. There is no feature flag.
 
-1. **The browser exposes `document.modelContext`.** Chrome ships WebMCP as an origin trial in versions 149 to
-   156, and plans to enable it by default in 157. During the trial, the site must serve a per-origin token.
-   `src/html.tsx` renders `<meta http-equiv="origin-trial">` when `GATSBY_WEBMCP_ORIGIN_TRIAL_TOKEN` is set.
-   Register the origin at [developer.chrome.com/origintrials](https://developer.chrome.com/origintrials) and
-   set the token in Vercel. The token is public by design, so the `GATSBY_` prefix is fine.
-2. **The `webmcp-tools` feature flag is on.** The flag is read from the `onFeatureFlags` callback so it works
-   before posthog-js has replaced the snippet stub. If flags never load (an ad blocker), nothing registers.
-   This is the kill switch: turn the flag off to remove the tools without a deploy.
-
-Under `gatsby develop` there is no posthog-js, so the flag check is skipped and the tools register whenever the
-API exists.
+Chrome ships WebMCP as an origin trial in versions 149 to 156, and plans to enable it by default in 157. During
+the trial, the site must serve a per-origin token or the API is undefined and nothing registers. `src/html.tsx`
+renders `<meta http-equiv="origin-trial">` when `GATSBY_WEBMCP_ORIGIN_TRIAL_TOKEN` is set. Register the origin at
+[developer.chrome.com/origintrials](https://developer.chrome.com/origintrials) and set the token in Vercel. The
+token is public by design, so the `GATSBY_` prefix is fine. Before Chrome 157, unsetting the token is the only
+switch. After Chrome 157, removing the tools means removing the component.
 
 ## Testing locally
 
