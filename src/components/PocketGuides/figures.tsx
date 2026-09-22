@@ -58,6 +58,11 @@ export function Fig({ n, caption, legend, children }: FigProps): JSX.Element {
     )
 }
 
+// `<Figure>` is `not-prose`, so the docs table styles never reach a table inside the frame.
+// Illustrative rows, not live data: small uppercase headers over full-width, divided rows.
+const EXAMPLE_TABLE =
+    '[&_table]:w-full [&_table]:border-collapse [&_table]:text-left [&_table]:text-[0.85em] [&_thead]:border-b [&_thead]:border-primary [&_th]:py-1.5 [&_th]:pr-3 [&_th]:text-[0.85em] [&_th]:font-bold [&_th]:uppercase [&_th]:tracking-wide [&_th]:text-secondary [&_th:last-child]:pr-0 [&_td]:border-b [&_td]:border-primary/30 [&_td]:py-1.5 [&_td]:pr-3 [&_td]:text-primary [&_td:last-child]:pr-0'
+
 /**
  * A worked example illustrating what an answer looks like – arbitrary MDX content (usually a
  * table) in a numbered frame. A named wrapper around `<Fig>`, not `<Fig>` itself: the reader's
@@ -67,7 +72,7 @@ export function Fig({ n, caption, legend, children }: FigProps): JSX.Element {
 export function ExampleFigure({ n = 1, caption, legend, children }: FigProps): JSX.Element {
     return (
         <Fig n={n} caption={caption} legend={legend}>
-            {children}
+            <div className={EXAMPLE_TABLE}>{children}</div>
         </Fig>
     )
 }
