@@ -408,7 +408,7 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
     },
     conductor: {
         name: 'Conductor',
-        toolsUsed: [],
+        toolsUsed: ['product_analytics', 'feature_flags', 'cdp'],
         industries: ['Devtool'],
         notes: 'Cloud coding agents',
         logo: {
