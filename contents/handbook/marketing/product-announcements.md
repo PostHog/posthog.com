@@ -51,7 +51,7 @@ Before you settle on a launch tier, work through the questions below. They shape
 
 **Which surface is it for?** Should a user reach for this new thing through MCP, desktop, web, or the Slack app? Be explicit about where it's most relevant to the user based on the interface(s) they're engaged, or which interface you want them to adopt. 
 
-**What can their role actually do with it?** Match the audience to their permissions. Launches with pricing usually target owners and admins, since they make a purchase decision when enabling the new thing. Owners and admins are also the ones who have to turn on integrations before the rest of the team can use the new tool or feature (as was the case with the Slack app launch). 
+**What can their role actually do with it?** Match the audience to their permissions. Launches with pricing usually target owners and admins, since they make a purchase decision when enabling the new thing. Owners and admins are also the ones who have to turn on integrations before the rest of the team can use the new product or feature (as was the case with the Slack app launch). 
 
 **How does it fit the self-driving story?** Some launches feed the loop by giving the system a new source of context (tickets, conversations). Other launches close the loop by acting on that context (Scouts generating Inbox reports). Both promise the same thing: the user's product gets better. A support product isn't exciting because an agent can read tickets. It's exciting because bugs buried in those tickets get found and fixed without anyone prompting it.
 
@@ -65,7 +65,7 @@ Here are some activities your Tier 1 launch could include:
 
 - New product page 
 - Sales enablement doc
-- Competitive comparison (can be added to the tool page)
+- Competitive comparison (can be added to the product page)
 - A case study
 - Blog announcement
 - Social media brief for Liam 

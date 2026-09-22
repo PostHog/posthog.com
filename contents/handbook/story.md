@@ -206,7 +206,7 @@ We've hired a sales engineer super early (Mine, she's awesome) and we're really 
 
 Strategy-wise, we're just leaning into our basic three principles, which we're seeing more and more evidence are working well:
 
-1. **All the tools in one** – We want to go wider still. We think we can provide _every_ piece of SaaS that startups use, starting with those closest to customer data. We want to expand to a customer support product, the marketing and sales stack of tools too.
+1. **All the products in one** – We want to go wider still. We think we can provide _every_ piece of SaaS that startups use, starting with those closest to customer data. We want to expand to a customer support product, the marketing and sales stack of tools too.
 
 2. **Get in first** – Don't go upmarket. We're closing enterprises regularly, but we're not trying that hard here. We're trying to stay away from complex migrations for users who use many products already.
 

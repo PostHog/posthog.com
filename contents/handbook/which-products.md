@@ -3,7 +3,7 @@ title: Deciding which products we build
 sidebar: Handbook
 showTitle: true
 ---
-Providing all the tools in one is a core part of our strategy.
+Providing all the products in one is a core part of our strategy.
 
 Shipping them in the right order is key to a fast return on investment from every new product.
 
