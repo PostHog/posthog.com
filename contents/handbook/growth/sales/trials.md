@@ -38,3 +38,20 @@ For customers with existing paid subscriptions we need to complete additional st
 If they need a shared Slack channel as part of the trial, [follow these instructions.](/handbook/growth/sales/slack-channels)
 
 Consider framing a collaborative method for progressing in the trial period with timed objectives. If it's new and depending on the level of engagement, we can use a detailed [success plan](/handbook/cs-and-onboarding/onboarding-success-plan).
+
+## Spend caps during a trial
+
+A trial lifts the free tier on every product except four: Replay Vision, Desktop, PostHog AI, and Inbox. These meter model tokens, so a trial leaves a spend cap on them rather than making them unlimited.
+
+A limit the customer set stands, including a limit of $0. Where they set none, the trial caps the product:
+
+| Product | On a paid plan | No subscription |
+| --- | --- | --- |
+| Replay Vision | 7,500 credits (free tier + $50) | 5,000 credits |
+| Desktop | 12,000 credits (free tier + $100) | 4,000 credits |
+| PostHog AI | 15,500 credits (free tier + $150) | 1,000 credits |
+| Inbox | 19,500 credits (free tier + $150) | 9,000 credits |
+
+A customer on a paid plan pays for what they use, so their own limit is the figure that governs. A customer with no subscription pays nothing, so the cap is what the trial lends them.
+
+If a prospect needs more than this, raise their spend limit rather than removing it.
