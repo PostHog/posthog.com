@@ -79,7 +79,7 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     },
     'background-agents': {
         feature: 'Cloud agents',
-        owner: ['posthog-desktop'],
+        owner: ['surfaces'],
         label: 'feature/background-agents',
     },
     'api-structure': {
@@ -273,7 +273,7 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     },
     loops: {
         feature: 'Loops',
-        owner: ['posthog-desktop'],
+        owner: ['surfaces'],
         label: false,
     },
     'managed-migrations': {
@@ -368,12 +368,12 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     },
     'posthog-ai': {
         feature: 'PostHog AI platform',
-        owner: ['posthog-desktop'],
+        owner: ['surfaces'],
         label: 'feature/posthog-ai',
     },
     'posthog-code': {
         feature: 'PostHog Desktop',
-        owner: ['posthog-desktop'],
+        owner: ['surfaces'],
         label: 'feature/posthog-code',
     },
     'project-homepage': {
@@ -508,7 +508,7 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     },
     'slack-app': {
         feature: 'Slack app',
-        owner: ['posthog-desktop'],
+        owner: ['surfaces'],
         label: 'feature/slack-app',
     },
     settings: {
