@@ -92,7 +92,24 @@ const SDK_REFERENCE_QUERY_FIELDS = `
     }
 `
 
-export const createPages: GatsbyNode['createPages'] = async ({ actions: { createPage }, graphql }) => {
+// Vercel applies vercel.json redirects only on full page loads. Registering them with Gatsby
+// lets navigate() apply them on client-side navigation too. Gatsby matches exact paths only,
+// so wildcard, conditional, and external redirects stay server-only.
+function createClientRedirects(createRedirect: Parameters<GatsbyNode['createPages']>[0]['actions']['createRedirect']) {
+    const { redirects } = require('../vercel.json')
+    for (const { source, destination, has, missing } of redirects) {
+        const fromPath = source.replace(':ext(\\.md)?', '')
+        const toPath = destination.replace(':ext?', '')
+        if (has || missing || fromPath.includes(':') || toPath.includes(':')) {
+            continue
+        }
+        createRedirect({ fromPath, toPath, redirectInBrowser: true })
+    }
+}
+
+export const createPages: GatsbyNode['createPages'] = async ({ actions: { createPage, createRedirect }, graphql }) => {
+    createClientRedirects(createRedirect)
+
     if (isMinimalBuild) {
         return createMinimalPages({ createPage, graphql })
     }
