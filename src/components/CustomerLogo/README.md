@@ -1,13 +1,7 @@
 # CustomerLogo
 
-Renders one customer's logo. `customer.logo` comes in three shapes, and this component handles all
-three so that no page has to:
-
-| Shape | What renders |
-| --- | --- |
-| `undefined` | The customer's name as text |
-| A React component | That component, with `className` |
-| `{ light, dark }` | Two `<img>` tags, one hidden per color scheme |
+Renders one customer's logo from `useCustomers`: the SVG component, the light and dark `<img>` pair, or the name if
+there is no logo.
 
 ## Usage
 
@@ -15,7 +9,7 @@ three so that no page has to:
 import CustomerLogo from 'components/CustomerLogo'
 
 <CustomerLogo customer={customer} />
-<CustomerLogo customer={customer} className="h-6 w-auto object-contain fill-current" />
+<CustomerLogo customer={customer} className="h-6 max-w-40" />
 ```
 
 ## Props
@@ -23,7 +17,7 @@ import CustomerLogo from 'components/CustomerLogo'
 | Prop | Type | Default | What it does |
 | --- | --- | --- | --- |
 | `customer` | `Customer` | required | From `useCustomers`. |
-| `className` | `string` | `h-8 w-auto max-w-[180px] object-contain fill-current` | Applied to the logo component or to both `<img>` tags. |
+| `className` | `string` | `h-8 max-w-44` | Size classes. `w-auto object-contain fill-current` is always applied. |
 
 ## Known duplication
 

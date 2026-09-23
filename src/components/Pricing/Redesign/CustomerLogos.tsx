@@ -88,7 +88,7 @@ export default function CustomerLogos({
     scrolling?: boolean
     hideLink?: boolean
     reverse?: boolean
-    /** Links each logo to its case study, when one exists. Scrolling rail only. */
+    /** Scrolling rail only */
     linkStories?: boolean
 }): JSX.Element {
     const { getCustomers } = useCustomers()
