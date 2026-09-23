@@ -96,12 +96,10 @@ posthog.init("${process.env.GATSBY_POSTHOG_API_KEY}", {
             return null
         }
         var exceptions = (event.properties && event.properties.$exception_list) || []
-        for (var i = 0; i < exceptions.length; i++) {
-            if (${EXTENSION_INJECTED_EXCEPTION}.test(exceptions[i].value || '')) {
-                return null
-            }
-        }
-        return event
+        var injected = exceptions.some(function (exception) {
+            return ${EXTENSION_INJECTED_EXCEPTION}.test(exception.value || '')
+        })
+        return injected ? null : event
     },
     person_profiles: 'identified_only',
     __preview_heatmaps: true,
