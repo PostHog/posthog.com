@@ -23,11 +23,11 @@ export const config = {
 }
 
 const USER_AGENT_FETCHERS = ["ChatGPT-User", "Claude-User", "Perplexity-User"]
-const USER_AGENT_FETCHERS_REGEX  = new RegExp(`\\b(?:${USER_AGENT_FETCHERS.join("|")})\\b`, "gi");
+const USER_AGENT_FETCHERS_REGEX = new RegExp(`\\b(?:${USER_AGENT_FETCHERS.join("|")})\\b`, "i")
 
 export default async function middleware(request: Request): Promise<Response | undefined> {
     const acceptsMarkdown = (request.headers.get('accept') || '').includes('text/markdown')
-    const isAgentFetch = USER_AGENT_FETCHERS.test(request.headers.get('user-agent') || '')
+    const isAgentFetch = USER_AGENT_FETCHERS_REGEX.test(request.headers.get('user-agent') || '')
     if (!acceptsMarkdown && !isAgentFetch) return
 
     const url = new URL(request.url)
