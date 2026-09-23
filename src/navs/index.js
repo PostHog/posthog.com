@@ -1500,6 +1500,10 @@ export const handbookSidebar = [
                         url: '/handbook/cs-and-onboarding/lifecycle-csm',
                     },
                     {
+                        name: 'Customer-led calls',
+                        url: '/handbook/cs-and-onboarding/customer-led-calls',
+                    },
+                    {
                         name: 'Unengaged customers',
                         url: '/handbook/cs-and-onboarding/engaging-unengaged-customers',
                     },
