@@ -211,17 +211,17 @@ You can manually change the plan for a customer by updating the `plans_map` in t
 
 ### Extending a customer's events retention
 
-A customer that starts a paid plan on or after November 1, 2026 gets 2 years of events retention. Customers already on a paid plan before that date keep 7 years until they drop to the free plan. A customer on a platform package (Boost, Scale, or Enterprise) can ask for a longer window, up to 7 years. There are two ways to grant one.
+A customer that starts a paid plan on or after November 1, 2026 gets 2 years of events retention. Customers already on a paid plan before that date keep 7 years until they drop to the free plan.
 
-**One project.** In the PostHog Django admin, open "Team events retention grants" and add a grant for the project with the number of months and a note saying who asked and why. The project's window updates as soon as you save, and stays at the larger of the grant and the plan window. Delete the grant to end it.
-
-**The whole organization.** In the billing admin, open the customer and add an entry to `feature_overrides`:
+A customer on a platform package (Boost, Scale, or Enterprise) can ask for a longer window, up to 7 years. The longer window applies to every project in their organization. To grant one, open the customer in the billing admin and add an entry to `feature_overrides`:
 
 ```json
-{ "key": "product_analytics_data_retention", "limit": 7, "unit": "year", "reason": "Requested by ... on ..." }
+{ "key": "product_analytics_data_retention", "limit": 3, "unit": "years", "reason": "Requested by ... on ..." }
 ```
 
-The window updates on the next feature sync, within the hour. Use `year` as the unit. The override stays when the customer cancels their package, so remove it when the package ends.
+- Write the limit in whole years. Billing keeps whichever limit number is higher and ignores the unit, so an override in months can replace a longer window that is set in years.
+- The window updates on the next feature sync, within the hour.
+- The override stays if the customer cancels their package. Remove it when the package ends.
 
 ### Paid features for employee side projects
 
