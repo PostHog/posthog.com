@@ -18,7 +18,7 @@ From November 1, 2026, paid plans on PostHog Cloud keep events for 2 years inste
 
 ## If you need a longer window
 
-- On a platform package (Boost, Scale, or Enterprise), ask support for a longer window, up to 7 years.
+- On a platform package (Boost, Scale, or Enterprise), ask support for a longer window.
 - To keep events for longer than any window, send them to your own warehouse with a [batch export](/docs/cdp/batch-exports).
 
 ## How to check your window
