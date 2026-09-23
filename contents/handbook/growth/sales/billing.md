@@ -220,7 +220,7 @@ A customer on a platform package (Boost, Scale, or Enterprise) can ask for a lon
 ```
 
 - Write the limit in whole years. Billing keeps whichever limit number is higher and ignores the unit, so an override in months can replace a longer window that is set in years.
-- The window updates on the next feature sync, within the hour.
+- The window updates shortly after you save, when billing sends the customer's new features to PostHog.
 - The override stays if the customer cancels their package. Remove it when the package ends.
 
 ### Paid features for employee side projects
