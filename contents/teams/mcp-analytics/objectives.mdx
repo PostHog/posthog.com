@@ -1,18 +1,20 @@
 ## Q4 2026 objectives
 
-Last quarter we launched and started building self-driving on our own server. This quarter is about closing the loop: turning what agents and customers tell us into fixes, getting more teams onto the product, and getting ready for GA.
+Last quarter we launched and started building self-driving on our own server. This quarter is about closing the loop: turning what agents and customers tell us into fixes, getting more teams onto the product, and getting ready for GA. We're moving fast, so expect these to change as we learn.
 
-### Agent feedback loop (Driver: <TeamMember name="Georgis Andonis" />)
+### Turn agent feedback into fixes (Driver: <TeamMember name="Georgis Andonis" />)
 
-**Motivation:** Agents tell us what's broken and what's missing, but today that feedback is hard to see and harder to act on. It should be a first-class part of the product, and it should turn into fixes without us in the middle.
+**Motivation:** Agents tell us what's broken and what's missing, but today that feedback is hard to see and harder to act on. Customers fix things with coding agents, so errors and feedback should turn into fixes their coding agent can ship, without us in the middle.
 
 * Build agent feedback into the product: the UI, insights, and sessions
 * Expose MCP tools so agents can explore agent feedback too
-* Turn agent feedback into PRs, feeding the self-driving flow
+* Find sessions with errors or feedback, and make them easy for customers to find (<TeamMember name="Lucas Faria" />)
+* Turn agent feedback into PRs, giving the coding agent the context it needs to ship the fix
 * Deprecate missing capabilities, since agent feedback covers it
 * Migrate our own MCP server to agent feedback
+* Check whether customers ship a fix and come back to use the handoff again (<TeamMember name="Lucas Faria" />)
 
-**We'll know it worked when** agent feedback on our own MCP server regularly turns into merged PRs.
+**We'll know it worked when** agent feedback and errors regularly turn into merged fixes, on our own MCP server and for customers.
 
 ### Prepare MCP analytics for GA (Driver: <TeamMember name="Georgis Andonis" />)
 
@@ -25,16 +27,6 @@ Last quarter we launched and started building self-driving on our own server. Th
 * Prepare MCP analytics pricing for GA (<TeamMember name="Mike Warren" />)
 
 **We'll know it worked when** we have a clear yes or no on GA readiness, and pricing and billing are ready to switch on.
-
-### Help customers fix MCP problems with their coding agent (Driver: <TeamMember name="Lucas Faria" />)
-
-**Motivation:** Seeing that a tool call failed is only half the job. Customers fix things with coding agents, so we should hand those agents everything they need to ship the fix.
-
-* Find sessions with errors or agent feedback, and make them easy for customers to find too
-* Prepare the context their coding agent needs to fix the problem
-* Check whether customers ship a fix and come back to use the handoff again
-
-**We'll know it worked when** customers ship fixes from the handoff and keep using it.
 
 ### Help more teams start using MCP analytics (Driver: <TeamMember name="Lucas Faria" />)
 
