@@ -7,13 +7,6 @@ availability:
   selfServe: none
   scale: full
   enterprise: full
-  features:
-    activityLogRetention:
-      free: false
-      selfServe: false
-      boost: "7 days"
-      scale: "2 months"
-      enterprise: "60 months"
 ---
 
 export const activityLogsLight =
@@ -331,8 +324,6 @@ Filter by the client IP address that initiated the action. Use this to investiga
 ## Exporting and retention
 
 ### Retention periods
-
-<FeatureAvailability availability={_frontmatter.availability.features.activityLogRetention} />
 
 Activity logs are retained for a period that your [platform package](/platform-packages) sets:
 
