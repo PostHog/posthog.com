@@ -18,7 +18,7 @@ Your retention period comes from your plan:
 | Free | 1 year
 | Paid plans | 7 years
 
-Once retention applies to your project, a read-only endpoint reports it. Call it with a [personal API key](/docs/api#authentication) that has the `project:read` scope:
+A read-only endpoint reports it. Call it with a [personal API key](/docs/api#authentication) that has the `project:read` scope:
 
 ```bash
 GET /api/projects/:project_id/events_retention/
@@ -29,7 +29,7 @@ GET /api/projects/:project_id/events_retention/
 
 <CalloutBox type="fyi" title="Enforcement is a gradual rollout">
 
-PostHog applies retention project by project. Until retention applies to your project, the endpoint answers 404 and retention removes no events from your project.
+PostHog applies retention project by project. Until retention applies to your project, both fields are `null` and retention removes no events from your project.
 
 </CalloutBox>
 
