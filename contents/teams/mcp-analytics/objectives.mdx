@@ -1,45 +1,48 @@
-## Q3 2026 objectives
+## Q4 2026 objectives
 
-MCP analytics is greenfield. This quarter is about making onboarding magical, launching to real customers, and betting on "self-driving" as our top engineering priority. Expect these to change as we learn from customers.
+Last quarter we launched and started building self-driving on our own server. This quarter is about closing the loop: turning what agents and customers tell us into fixes, getting more teams onto the product, and getting ready for GA.
 
-### Self-driving (top priority)
+### Agent feedback loop (Driver: <TeamMember name="Georgis Andonis" />)
 
-**Motivation:** We don't want to be the bottleneck for improving MCP servers. Instead of fixing everything by hand, we want the system to catch problems and fix itself, with us stepping in only when it matters.
+**Motivation:** Agents tell us what's broken and what's missing, but today that feedback is hard to see and harder to act on. It should be a first-class part of the product, and it should turn into fixes without us in the middle.
 
-* When a tool call fails, it opens a PR automatically. Small fixes merge on their own, bigger ones get a human review
-* When an agent leaves feedback, it feeds into the same flow, so what agents tell us turns into real fixes
-* Group each user's tool calls by session to see what they're actually trying to do, since one task usually spans several tools. Use `$session_id` when it's there, and fall back to a simple time gap between calls until it is
-* Try the whole thing fully self-driving on our own MCP server first: let it ship improvements end to end with no human in the loop, and see how that compares to how we work today
+* Build agent feedback into the product: the UI, insights, and sessions
+* Expose MCP tools so agents can explore agent feedback too
+* Turn agent feedback into PRs, feeding the self-driving flow
+* Deprecate missing capabilities, since agent feedback covers it
+* Migrate our own MCP server to agent feedback
 
-**We'll know it worked when** a failing tool call can fix itself, and we trust the process enough to let it ship on its own.
+**We'll know it worked when** agent feedback on our own MCP server regularly turns into merged PRs.
 
-### Magical onboarding
+### Prepare MCP analytics for GA (Driver: <TeamMember name="Georgis Andonis" />)
 
-**Motivation:** Onboarding is where we're losing people. Most who start the wizard don't finish. Getting started should be as simple as running a command, and every drop-off is someone we can learn from.
+**Motivation:** To go GA we need numbers customers can trust and a pricing model we're ready to bill on. This one is a stretch for the quarter.
 
-* Make wizard onboarding work end to end, and make sure it works for real users ([wizard stats](https://us.posthog.com/project/2/dashboard/1781611))
-* Reach out to the people who dropped off or signed up but never got going, and find out what got in the way
-* Make the docs genuinely good and write up what we learn as blog posts. That's how we get Claude and Codex to actually use our content
+* Count events properly
+* Track MRR
+* Pick up the other tasks that come out of the GA RFC
+* Evaluate whether MCP analytics is ready for GA (<TeamMember name="Mike Warren" />)
+* Prepare MCP analytics pricing for GA (<TeamMember name="Mike Warren" />)
 
-**We'll know it worked when** more people finish the wizard and get to value without us walking them through it.
+**We'll know it worked when** we have a clear yes or no on GA readiness, and pricing and billing are ready to switch on.
 
-### Launch
+### Help customers fix MCP problems with their coding agent (Driver: <TeamMember name="Lucas Faria" />)
 
-**Motivation:** Almost nobody is competing on "MCP analytics" yet, so there's a window to own agent analytics before that changes. We need real customers and marketing behind us to use it.
+**Motivation:** Seeing that a tool call failed is only half the job. Customers fix things with coding agents, so we should hand those agents everything they need to ship the fix.
 
-* Get product marketing on our side for a launch about a month out
-* Land 5 to 10 close customers to build with
-* Publish blog posts on what we learn, not just docs, so Claude, ChatGPT and the rest pick us up early
-* Settle pricing: give MCP events their own bucket instead of mixing them with Product Analytics, charge the same rate as Product Analytics events but with a separate, smaller free tier to start. Sanity-check it by asking what PostHog would pay if it were the customer
+* Find sessions with errors or agent feedback, and make them easy for customers to find too
+* Prepare the context their coding agent needs to fix the problem
+* Check whether customers ship a fix and come back to use the handoff again
 
-**We'll know it worked when** we've launched with marketing support, have a handful of customers building with us, and a pricing model we believe in.
+**We'll know it worked when** customers ship fixes from the handoff and keep using it.
 
-### CLI & skills analytics (exploratory)
+### Help more teams start using MCP analytics (Driver: <TeamMember name="Lucas Faria" />)
 
-**Motivation:** Agents don't only act through MCP. CLIs and skills are next, and we'd rather reuse what we have than build a new SDK for each one.
+**Motivation:** Plenty of teams run MCP servers, but many don't know what MCP analytics can do for them, or get stuck setting it up.
 
-* CLI analytics: wrap existing CLIs with the MCP analytics SDK (Python, Go and Rust are already covered) and ship a wizard, so tool calls just show up as MCP events. No separate CLI SDK
-* Skills analytics: harder, and it needs hooks on the LLM side that we don't have yet. Talk to Anthropic and OpenAI about capturing skill-level data. We can probably build one for PostHog Code first
-* Keep it exploratory and pick it up once the core MCP work has settled
+* Publish an engineering post showing a concrete use case
+* Help teams connect servers that don't have an official SDK
+* Fix setup blockers, and check whether new teams keep using the product
+* Check whether the PostHog wizard's onboarding detects MCP servers
 
-**We'll know it worked when** CLI tool calls show up through the existing SDK, and we know whether skills analytics is actually doable.
+**We'll know it worked when** more new teams send MCP events and are still using the product a few weeks later.
