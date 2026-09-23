@@ -759,6 +759,14 @@
             "destination": "/teams/query-performance/:path*"
         },
         {
+            "source": "/teams/marketing",
+            "destination": "/teams/developer-marketing"
+        },
+        {
+            "source": "/teams/marketing/:path*",
+            "destination": "/teams/developer-marketing/:path*"
+        },
+        {
             "source": "/docs/sdk-doctor/keeping-sdks-current:ext(\\.md)?",
             "destination": "/docs/health-checks/keeping-sdks-current:ext?",
             "statusCode": 301
@@ -2450,7 +2458,7 @@
         },
         {
             "source": "/handbook/people/team-structure/marketing",
-            "destination": "/teams/content"
+            "destination": "/teams/developer-marketing"
         },
         {
             "source": "/handbook/people/team-structure/people",
@@ -5039,7 +5047,7 @@
         },
         {
             "source": "/handbook/small-teams/marketing",
-            "destination": "/teams/content"
+            "destination": "/teams/developer-marketing"
         },
         {
             "source": "/handbook/small-teams/exec",
