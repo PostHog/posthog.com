@@ -15,46 +15,46 @@ availability:
             enterprise: true
 ---
 
-## SCIM
+System for Cross-domain Identity Management (SCIM) enables you to automatically provision and deprovision users in PostHog from your Identity Provider (IdP). This is helpful for organizations that need centralized user management, including automatically creating accounts, assigning roles, and disabling accounts when users leave the organization.
 
-<FeatureAvailability availability={_frontmatter.availability.features.scim} />
+## Prerequisites
 
-SCIM enables you to automatically sync users and their roles from your identity provider (IdP) into PostHog. This is useful for automatically creating accounts and assigning roles when someone joins your organization, and disabling accounts when they leave.
+1. If you are using PostHog Cloud, your organization must be subscribed to a platform package that offers SCIM. If you are self-hosting PostHog, your instance must have an enterprise license that supports SCIM.
 
-### How SCIM works
+2. You need to [verify domains](/docs/settings/authentication/sso#authentication-domains) for the email addresses you want to provision. For example, if you want to provision users with an `@example.com` email address, you need to add and verify `example.com` as an authentication domain.
 
-- Assigning a user to the SCIM app in your IdP creates them in PostHog with the mapped role.
-- Removing a user from the app deactivates their PostHog account.
-- Users with matching emails in PostHog are updated to match the IdP details and roles.
-- Roles are matched by name (case-sensitive).
-- SCIM configuration changes (enabling, disabling, token rotation) are recorded in the [activity log](/docs/settings/activity-logs).
+3. If you are self-hosting PostHog, make sure you have properly configured the `SITE_URL` [environment variable](/docs/self-host/configure/environment-variables).
 
-### Prerequisites
+4. If you are self-hosting PostHog, your PostHog instance must be accessible from the public internet over TLS.
 
-Before setting up SCIM, you need:
+5. Your IdP must support SCIM 2.0. For example, Okta, Microsoft Entra ID, and OneLogin support SCIM 2.0.
 
-1. Verified authentication domain in PostHog Cloud
-2. SAML SSO configured and working for your domain
-3. Identity Provider that supports SCIM 2.0 (e.g., Okta, Entra ID, OneLogin)
+## How SCIM works
 
-### Setting up SCIM
+- Assigning a user to the PostHog application in your IdP creates the user in PostHog with the mapped role.
+- Removing a user from the application deactivates their PostHog account.
+- Users with matching email addresses in PostHog are updated to match the details and roles from your IdP.
+- Roles are matched by name and are case-sensitive.
+- SCIM configuration changes, including enabling, disabling, and token rotation, are recorded in the [activity log](/docs/settings/activity-logs).
 
-1. In PostHog, navigate to Organization settings and go to [Authentication domains](https://app.posthog.com/settings/organization-authentication).
+## Configuring SCIM
 
-2. Click the **(⋯)** next to your domain and select **Configure SCIM**.
+1. Navigate to your organization's [authentication settings](https://app.posthog.com/settings/organization-authentication#setting=scim-configuration) page in PostHog.
 
-3. Copy the **SCIM Base URL** and **SCIM Token**. You'll need these for your IdP configuration.
+2. Scroll down to the **SCIM** section, and select **Configure**.
 
-4. In your Identity Provider, configure SCIM for your PostHog application:
+3. Select **Enable SCIM provisioning**, then select **Save configuration**.
 
-   If you already have a SAML app configured and it supports SCIM 2.0 provisioning, you can use that same app. If not, you'll need to create a new app that supports both SAML and SCIM. After setting up SCIM in the new app, migrate your existing SAML configuration and users to it.
-   - Set the SCIM Base URL from PostHog
-   - Set the Bearer Token (SCIM Token) from PostHog
-   - Enable user provisioning
+4. In your IdP, create a new SCIM app for PostHog.
+<CalloutBox icon="IconInfo" title="Note" type="fyi">
+If you already have a SAML app in your IdP, and that app supports SCIM 2.0 provisioning, you can use that existing app.
+</CalloutBox>
 
-5. Configure role mapping in your IdP. Map your IdP roles to PostHog roles.
+5. Copy the "*SCIM base URL*" and "*Bearer token*" displayed in PostHog into your SCIM app's configuration in your IdP.
 
-6. Assign users and roles to the PostHog application in your IdP, verify that they appear in PostHog.
+6. Configure the role mapping in your IdP. Map your IdP roles to PostHog roles.
+
+7. Assign users and roles to the PostHog application in your IdP.
 
 ### Example: Okta
 
