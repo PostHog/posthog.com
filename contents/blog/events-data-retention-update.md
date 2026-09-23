@@ -16,10 +16,6 @@ From November 1, 2026, paid plans on PostHog Cloud keep events for 2 years inste
 - The free plan stays at 1 year.
 - An organization already on a paid plan before November 1, 2026 keeps 7 years for as long as it stays on a paid plan.
 
-## Why
-
-Storing every event for 7 years costs more than the events earn once they are more than a couple of years old, and very few queries reach that far back. A 2-year window covers year-over-year comparisons and keeps event pricing where it is.
-
 ## If you need a longer window
 
 - On a platform package (Boost, Scale, or Enterprise), ask support for a longer window, up to 7 years.
