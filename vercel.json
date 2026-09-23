@@ -65,7 +65,7 @@
             "headers": [
                 {
                     "key": "Content-Security-Policy-Report-Only",
-                    "value": "default-src 'self'; script-src 'self' https://*.posthog.com https://www.youtube.com https://fast.wistia.com https://import-cdn.default.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src 'self' data: https://*.posthog.com https://res.cloudinary.com https://www.gravatar.com https://raw.githubusercontent.com https://obuldanrptloktxcffvn.supabase.co https://cdn.shopify.com https://i.ytimg.com https://embed-ssl.wistia.com https://fast.wistia.com https://cdn.jsdelivr.net https://user-images.githubusercontent.com https://brandbadge.clearbit.com; font-src 'self' data: https://d27nj4tzr3d5tm.cloudfront.net https://res.cloudinary.com https://fonts.gstatic.com https://r2cdn.perplexity.ai https://fast.wistia.com https://use.typekit.net; connect-src 'self' https://*.posthog.com https://api.github.com https://lottie.host https://better-animal-d658c56969.strapiapp.com https://forms.default.com https://nucleus.default.com https://import-cdn.default.com https://posthog.myshopify.com https://*.algolia.net https://*.algolianet.com https://api.io.inkeep.com https://fast.wistia.net https://fast.wistia.com https://embed-cloudfront.wistia.com https://api.inkeep.com; media-src 'self' https://d1hovhsvet4m1p.cloudfront.net https://res.cloudinary.com blob:; frame-src 'self' https://www.youtube-nocookie.com https://hogwars.vercel.app https://hedgehog-mode-playground.vercel.app; worker-src 'self' blob:; child-src 'self' blob:; object-src 'none'; frame-ancestors 'none'; report-uri https://us.i.posthog.com/report/?token=sTMFPsFhdP1Ssg&sample_rate=0.1&v=1; report-to posthog"
+                    "value": "default-src 'self'; script-src 'self' https://*.posthog.com https://www.youtube.com https://fast.wistia.com https://fast.wistia.net https://import-cdn.default.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src 'self' data: https://*.posthog.com https://res.cloudinary.com https://www.gravatar.com https://raw.githubusercontent.com https://obuldanrptloktxcffvn.supabase.co https://cdn.shopify.com https://i.ytimg.com https://embed-ssl.wistia.com https://fast.wistia.com https://cdn.jsdelivr.net https://user-images.githubusercontent.com https://brandbadge.clearbit.com; font-src 'self' data: https://d27nj4tzr3d5tm.cloudfront.net https://res.cloudinary.com https://fonts.gstatic.com https://r2cdn.perplexity.ai https://fast.wistia.com https://fast.wistia.net https://use.typekit.net; connect-src 'self' https://*.posthog.com https://api.github.com https://lottie.host https://better-animal-d658c56969.strapiapp.com https://forms.default.com https://nucleus.default.com https://import-cdn.default.com https://posthog.myshopify.com https://*.algolia.net https://*.algolianet.com https://api.io.inkeep.com https://fast.wistia.net https://fast.wistia.com https://embed-cloudfront.wistia.com https://api.inkeep.com; media-src 'self' https://d1hovhsvet4m1p.cloudfront.net https://res.cloudinary.com blob:; frame-src 'self' https://www.youtube-nocookie.com https://hogwars.vercel.app https://hedgehog-mode-playground.vercel.app; worker-src 'self' blob:; child-src 'self' blob:; object-src 'none'; frame-ancestors 'none'; report-uri https://us.i.posthog.com/report/?token=sTMFPsFhdP1Ssg&sample_rate=0.1&v=1; report-to posthog"
                 },
                 {
                     "key": "Reporting-Endpoints",
@@ -817,6 +817,11 @@
         {
             "source": "/blog/autoresearch-query-bug",
             "destination": "/blog/karpathy-autoresearch-query-engine-bug"
+        },
+        {
+            "source": "/blog/is-autocapture-still-bad",
+            "destination": "/docs/product-analytics/autocapture",
+            "statusCode": 301
         },
         {
             "source": "/handbook/marketing/how-we-position-and-sell",
@@ -2893,7 +2898,7 @@
         },
         {
             "source": "/manual/sso",
-            "destination": "/docs/settings/sso"
+            "destination": "/docs/settings/authentication/sso"
         },
         {
             "source": "/manual/support",
@@ -3650,7 +3655,7 @@
         },
         {
             "source": "/blog/how-to-product-market-fit",
-            "destination": "/blog/product-market-fit-game"
+            "destination": "/founders/product-market-fit-game"
         },
         {
             "source": "/docs/cdp/zapier-connector:ext(\\.md)?",
@@ -4207,6 +4212,10 @@
         {
             "source": "/blog/writing-for-developers",
             "destination": "/founders/writing-for-developers"
+        },
+        {
+            "source": "/newsletter/if-ai-writes-all-the-code-whats-left",
+            "destination": "/newsletter/when-ai-writes-all-code"
         },
         {
             "source": "/blog/build-features-users-love",
@@ -5006,7 +5015,7 @@
         },
         {
             "source": "/docs/data/sso:ext(\\.md)?",
-            "destination": "/docs/settings/sso:ext?"
+            "destination": "/docs/settings/authentication/sso:ext?"
         },
         {
             "source": "/docs/ab-testing:ext(\\.md)?",
@@ -5054,7 +5063,7 @@
         },
         {
             "source": "/teams/data-warehouse",
-            "destination": "/teams/data-stack"
+            "destination": "/teams/managed-warehouse"
         },
         {
             "source": "/handbook/small-teams/infrastructure",
@@ -5224,7 +5233,7 @@
         },
         {
             "source": "/teams/pipeline",
-            "destination": "/teams/cdp"
+            "destination": "/teams/workflows"
         },
         {
             "source": "/teams/feature-success",
@@ -5753,7 +5762,7 @@
         },
         {
             "source": "/teams/video",
-            "destination": "/teams/content"
+            "destination": "/teams/youtube"
         },
         {
             "source": "/customers/headshot-pro",
@@ -6391,9 +6400,62 @@
             "statusCode": 301
         },
         {
+            "source": "/teams/cdp",
+            "destination": "/teams/workflows"
+        },
+        {
+            "source": "/teams/cdp/:path*",
+            "destination": "/teams/workflows/:path*"
+        },
+        {
+            "source": "/teams/content",
+            "destination": "/teams/marketing"
+        },
+        {
+            "source": "/teams/content/:path*",
+            "destination": "/teams/marketing/:path*"
+        },
+        {
+            "source": "/teams/data-stack",
+            "destination": "/teams/managed-warehouse"
+        },
+        {
+            "source": "/teams/data-stack/:path*",
+            "destination": "/teams/managed-warehouse/:path*"
+        },
+        {
+            "source": "/teams/signals/:path*",
+            "destination": "/teams/self-driving/:path*"
+        },
+        {
+            "source": "/teams/ops",
+            "destination": "/teams/people"
+        },
+        {
+            "source": "/teams/revenue-analytics",
+            "destination": "/teams"
+        },
+        {
+            "source": "/teams/actually-ai",
+            "destination": "/teams"
+        },
+        {
             "source": "/contact-us",
             "destination": "/talk-to-a-human",
             "statusCode": 301
+        },
+        {
+            "source": "/traces",
+            "destination": "/tracing",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/settings/sso:ext(\\.md)?",
+            "destination": "/docs/settings/authentication/sso:ext?"
+        },
+        {
+            "source": "/docs/settings/id-jag:ext(\\.md)?",
+            "destination": "/docs/settings/authentication/id-jag:ext?"
         }
     ]
 }

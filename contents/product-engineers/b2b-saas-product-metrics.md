@@ -108,7 +108,7 @@ We view this figure as more important than the number of active users. If the nu
 
 ### Net Promoter Score (NPS)
 
-**What is it?**  [NPS](/product-engineers/nps-vs-csat-vs-ces) is a well-known customer satisfaction metric, and a good indicator for future customer retention and [product-market fit](/blog/product-market-fit-game). 
+**What is it?**  [NPS](/product-engineers/nps-vs-csat-vs-ces) is a well-known customer satisfaction metric, and a good indicator for future customer retention and [product-market fit](/founders/product-market-fit-game). 
 
 On a scale of 1 to 10, users who select 9 or 10 when asked "how likely are you to recommend us to a friend of colleague" are promoters. Those who vote 0 to 6 are detractors.
 
@@ -222,10 +222,10 @@ For more inspiration around measuring product success, we recommend reading our 
 
 You may also find the following guides useful:
 
-- [How to achieve B2B product market fit](/blog/product-market-fit-game): There's no universal standard for achieving market fit, but this guide introduces heuristics to help you find it
+- [How to achieve B2B product market fit](/founders/product-market-fit-game): There's no universal standard for achieving market fit, but this guide introduces heuristics to help you find it
 
 - [Finding your north star metric](/blog/north-star-metrics): All SaaS products can benefit from a north star metric and this guide will help you find one
 
-- [How to measure product-market fit](/blog/measure-product-market-fit): Product-market fit isn't just an ephemeral gut feeling. You can measure it, and it moves as your customer's needs change. 
+- [How to measure product-market fit](/founders/measure-product-market-fit): Product-market fit isn't just an ephemeral gut feeling. You can measure it, and it moves as your customer's needs change. 
 
 <NewsletterForm />

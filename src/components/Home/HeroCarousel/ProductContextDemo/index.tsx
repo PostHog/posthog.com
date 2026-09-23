@@ -8,12 +8,22 @@ import { usePrefersReducedMotion } from 'components/Code/usePrefersReducedMotion
 import { useSlideActive, useSlidePaused } from '../autoAdvanceGate'
 import './animations.css'
 
-// Positions share the SVG's 1000 × 774 coordinate system.
-const NODES = [
+/** Positions share the SVG's 1000 × 774 coordinate system. `x: 500` centers a node
+ *  under the hub, which gets a straight connector instead of a side curve. */
+export interface ContextNode {
+    handle: string
+    x: number
+    y: number
+}
+
+const HUB_X = 500
+const HUB_Y = 387
+
+const DEFAULT_NODES: ContextNode[] = [
     { handle: 'product_analytics', x: 230, y: 140 },
     { handle: 'session_replay', x: 770, y: 140 },
-    { handle: 'error_tracking', x: 160, y: 387 },
-    { handle: 'feature_flags', x: 840, y: 387 },
+    { handle: 'error_tracking', x: 160, y: HUB_Y },
+    { handle: 'feature_flags', x: 840, y: HUB_Y },
     { handle: 'experiments', x: 230, y: 634 },
     { handle: 'data_warehouse', x: 770, y: 634 },
 ]
@@ -23,14 +33,14 @@ const CLIENTS = ['claude', 'codex', 'cursor', 'vscode'].flatMap((id) => {
     return platform?.href ? [{ ...platform, href: platform.href }] : []
 })
 
-export default function ProductContextDemo() {
+export default function ProductContextDemo({ nodes: nodeConfig = DEFAULT_NODES }: { nodes?: ContextNode[] } = {}) {
     const allProducts = useProduct()
     const active = useSlideActive()
     const paused = useSlidePaused()
     const reducedMotion = usePrefersReducedMotion()
     const { ref, inView } = useInView({ threshold: 0.25 })
     const running = active && inView && !paused && !reducedMotion
-    const nodes = NODES.flatMap((node) => {
+    const nodes = nodeConfig.flatMap((node) => {
         const product = Array.isArray(allProducts)
             ? allProducts.find((product: any) => product.handle === node.handle)
             : undefined
@@ -44,8 +54,7 @@ export default function ProductContextDemo() {
             data-running={running}
         >
             <figcaption className="sr-only">
-                PostHog analytics, session replays, errors, feature flags, experiments, and warehouse data flow into
-                your agents.
+                {nodes.map(({ product }) => product.name).join(', ')} flow into your agents.
             </figcaption>
             <div>
                 <svg
@@ -55,8 +64,11 @@ export default function ProductContextDemo() {
                     aria-hidden="true"
                 >
                     {nodes.map(({ handle, x, y, product }, index) => {
-                        const startX = x + (x < 500 ? 155 : -155)
-                        const path = `M ${startX} ${y} C 500 ${y}, ${startX} 387, 500 387`
+                        const centered = x === HUB_X
+                        const startX = centered ? HUB_X : x + (x < HUB_X ? 155 : -155)
+                        const path = centered
+                            ? `M ${HUB_X} ${y} L ${HUB_X} ${HUB_Y}`
+                            : `M ${startX} ${y} C ${HUB_X} ${y}, ${startX} ${HUB_Y}, ${HUB_X} ${HUB_Y}`
                         return (
                             <g key={handle} className={`text-${product.color}`}>
                                 <path d={path} className="context-connection stroke-[rgb(var(--border))] stroke-2" />
@@ -85,7 +97,11 @@ export default function ProductContextDemo() {
                             state={{ newWindow: true }}
                             wrapperClassName="block"
                             className={`context-product flex items-center gap-[1.2cqw] py-[1cqw] text-[2.8cqw] font-medium whitespace-nowrap leading-tight text-primary focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 [&_g]:[clip-path:none] ${
-                                x < 500 ? 'justify-end pr-[1.2cqw]' : 'justify-start pl-[1.2cqw]'
+                                x === HUB_X
+                                    ? 'justify-center'
+                                    : x < HUB_X
+                                    ? 'justify-end pr-[1.2cqw]'
+                                    : 'justify-start pl-[1.2cqw]'
                             }`}
                         >
                             {product.Icon && (

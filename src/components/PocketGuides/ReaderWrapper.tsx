@@ -87,7 +87,7 @@ export default function ReaderWrapper({ children }: { children: React.ReactNode 
         // No hover on touch: below @2xl the hover hint disappears, markers stay visible, and
         // each figure prints its glosses as a numbered key instead. At @2xl+ the markers go
         // back to hover-reveal (group-hover and focus outrank the opacity-0 by specificity).
-        <div className="px-5 py-6 [counter-reset:book-section] @xl:px-12 @xl:py-10 [&_.anatomy-hint]:hidden @2xl:[&_.anatomy-hint]:inline-flex @2xl:[&_.anatomy-marker]:opacity-0">
+        <div className="px-5 py-6 @xl:px-12 @xl:py-10 [&_.anatomy-hint]:hidden @2xl:[&_.anatomy-hint]:inline-flex @2xl:[&_.anatomy-marker]:opacity-0">
             {React.Children.toArray(stream)}
         </div>
     )
