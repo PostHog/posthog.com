@@ -48,7 +48,7 @@ At the end of the week share a full retro of what you've done and learned with t
 
 ## Week 2 – start working with customers
 
-> Use the <PrivateLink url="https://github.com/PostHog/fde-vault/">FDE Vault</PrivateLink> to make your work visible and reviewable. We expect every ticket, task, and intake you work on to be visible to the team, to clear our quality bar, and to keep the agreed format for its kind of record. For now, the vault is the only place that does all three. Set it up from the README in the root of the repository, and learn the rest as you record your own work.
+> The <PrivateLink url="https://github.com/PostHog/fde-vault/">FDE Vault</PrivateLink> is where we share what we're working on. Whenever you pick up a ticket, task, or intake, write it up in the vault using our shared format, so it's easy for the other FDEs to follow along and give feedback. Set it up from the README in the root of the repository, and learn the rest as you record your own work.
 
 This is when you start working with your customers. Ask the vault for the current in-flight engagements we have, and then work with the FDE on that engagement to see which tasks you can pick up. Ask for their review once you're done. When you pick up a task, ask the vault how we solved similar problems for other customers.
 
