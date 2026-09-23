@@ -4,7 +4,7 @@ sidebar: Handbook
 showTitle: true
 ---
 
-> Have something you want to announce? Let the Marketing team know in `#team-marketing`! If it's an iterative update, you can also demo it in the all-hands, or post in `#tell-posthog-anything`. 
+> Have something you want to announce? Let the Developer Marketing team know in `#team-marketing`! If it's an iterative update, you can also demo it in the all-hands, or post in `#tell-posthog-anything`. 
 
 Product marketers take responsibility for coordinating and publicizing news about PostHog, including product launches. We also help with [incident](/handbook/engineering/operations/incidents) and [maintenance announcements](/handbook/marketing/product-announcements#announcing-scheduled-maintenance), if needed. 
 
@@ -21,9 +21,9 @@ Where we can, releases and launches should happen together, but they don't have 
 
 Releases and launches involve lots of moving pieces. It's helpful to be very specific about who is responsible for what, so you don't waste time figuring this stuff out:
 
-- Product team lead – product readiness for launch, flag setup, and stability.
-- PM – pricing and packaging readiness, building the target cohort.
-- PMM – go-to-market readiness, launch messaging, product page, and working with other teams on campaign assets (website, video, social, editorial, paid ads).
+- **Product team lead** – product readiness for launch, flag setup, and stability.
+- **PM** – pricing and packaging readiness, building the target cohort.
+- **PMM** – go-to-market readiness, launch messaging, product page, and working with other teams on campaign assets (website, video, social, editorial, paid ads).
     
 If you are one of these people, you can give feedback to each but you shouldn't block decisions not in your lane. For example, the team lead can say the product is not ready, but should not block a the content of an email. Similarly, marketing can decide what the product page says, but should not block a pricing decision. 
 
@@ -40,6 +40,7 @@ It's easy to look at what competitors post on X and feel like we should be slick
 ## Types of announcement
 
 We classify announcements into four tiers, from a full-blown new product launch (tier 1) down to a minor changelog note (tier 4). The tier defines how much we do to market something. It's a guideline, but PMMs have free rein to do something different.
+
 > This framework helps us manage expectations with other teams. When a team lead or PM tells us about a launch, we use the context they give us (plus our own judgement) to decide which tier it falls into. Share that back with the team so they know what marketing will deliver.
 
 ### Deciding what to market
@@ -50,7 +51,7 @@ Before you settle on a launch tier, work through the questions below. They shape
 
 **Which surface is it for?** Should a user reach for this new thing through MCP, desktop, web, or the Slack app? Be explicit about where it's most relevant to the user based on the interface(s) they're engaged, or which interface you want them to adopt. 
 
-**What can their role actually do with it?** Match the audience to their permissions. Launches with pricing usually target owners and admins, since they make a purchase decision when enabling the new thing. Owners and admins are also the ones who have to turn on integrations before the rest of the team can use the new tool or feature (as was the case with the Slack app launch). 
+**What can their role actually do with it?** Match the audience to their permissions. Launches with pricing usually target owners and admins, since they make a purchase decision when enabling the new thing. Owners and admins are also the ones who have to turn on integrations before the rest of the team can use the new product or feature (as was the case with the Slack app launch). 
 
 **How does it fit the self-driving story?** Some launches feed the loop by giving the system a new source of context (tickets, conversations). Other launches close the loop by acting on that context (Scouts generating Inbox reports). Both promise the same thing: the user's product gets better. A support product isn't exciting because an agent can read tickets. It's exciting because bugs buried in those tickets get found and fixed without anyone prompting it.
 
@@ -64,7 +65,7 @@ Here are some activities your Tier 1 launch could include:
 
 - New product page 
 - Sales enablement doc
-- Competitive comparison (can be added to the tool page)
+- Competitive comparison (can be added to the product page)
 - A case study
 - Blog announcement
 - Social media brief for Liam 
@@ -73,7 +74,7 @@ Here are some activities your Tier 1 launch could include:
 - Custom designs for blog covers, social posts, etc. 
 - [Memes](https://www.figma.com/design/I0VKEEjbkKUDSVzFus2Lpu/Hoglitos?node-id=3962-6)
 
-Some other things we've done for launches: 
+#### Some other things we've done for launches 
 
 - Having a messaging doc is very useful for bigger launches because it can be used by different content-producing teams, and it brings alignment on how we want to communicate the product.
 - Initiate communication with the billing team so you're on top of billing changes and schedule your announcements accordingly.
@@ -88,6 +89,8 @@ As an example, here's the issue of the [Tier 1 launch for Replay Vision](https:/
 _Note: All of these are suggestions, not must-haves. It's likely that not all of these things can be ready for launch. A case study, for example, can follow a few weeks after._
 
 
+#### Best practices and other processes
+
 - Ensure the product has a product page added to the website.
 - Ensure the product team has implemented [intent](/handbook/growth/growth-engineering/product-intents) and [activation](/handbook/growth/growth-engineering/per-product-activation) signals for the product.
 - Ensure the product has at least one customer story created for it within 3 weeks of launch. [example](/customers/lovable)
@@ -96,12 +99,11 @@ _Note: All of these are suggestions, not must-haves. It's likely that not all of
 - Ensure launch activities (such as changelog) link clearly to the docs.
 - Ensure the product is added to email and in-app onboarding flows.
 - Ensure the product is added to the [pricing page](/pricing) (this is typically owned by the product team's PM and the <SmallTeam slug="billing" /> as part of the product's release)
-- Add a 🚀 annotation in [our PostHog project](https://us.posthog.com/project/2/data-management/annotations) on the launch date, so the launch's impact is visible on dashboards.
+- Add an 🚀 annotation in [our PostHog project](https://us.posthog.com/project/2/data-management/annotations) on the launch date, so the launch's impact is visible on dashboards.
 - Submit an [art request](/handbook/brand/art-requests) for any creative assets needed for the email campaign, blog post, social media posts etc...
 
-Comms should also be aware of [the engineering best practices for product launches](/handbook/engineering/development-process#best-practices-for-full-releases), so we can be sure that features launch well.
+*Comms should also be aware of [the engineering best practices for product launches](/handbook/engineering/development-process#best-practices-for-full-releases), so we can be sure that features launch well.*
 
-If the product is moving from free beta to paid general availability (GA) you might also want to choose a reward for beta users. Examples of this include giving PostHog AI beta users 30 extra days of unlimited free usage, or giving Workflows beta users a discount code for merch.
 
 ### Tier 2: Major announcements
 
@@ -163,7 +165,7 @@ When informing users about maintenance, it is important to answer all of the fol
 - What will the impact be? Will insights, etc., still function?
 - Why is the maintenance being done, and what benefit will there be for users?
 
-We typically notify users of upcoming maintenance by email, so the Marketing team will need a way to target the correct users before they can update them. For smaller maintenance updates which will not cause any user updates, engineering teams can also update our status page.
+We typically notify users of upcoming maintenance by email, so the Developer Marketing team will need a way to target the correct users before they can update them. For smaller maintenance updates which will not cause any user updates, engineering teams can also update our status page.
 
 ## Incident communications
 

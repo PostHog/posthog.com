@@ -33,7 +33,7 @@ All campaign ideation, creative work, strategy, media plans, and monthly Growth 
 
 We use a 50/50 conversion and awareness split to make sure that we're educating as much as we're driving lower-funnel conversion, then adjust within each half:
 
-- **Conversion:** Cap Brand before it hits diminishing returns, and work to increase the success of our tool campaigns to get within striking range of our brand ads.
+- **Conversion:** Cap Brand before it hits diminishing returns, and work to increase the success of our product campaigns to get within striking range of our brand ads.
 - **Awareness:** Use a mix of video, UGC, static, and content ads, with smaller budgets for new channels and creative tests.
 - **Experiments:** Design them with a smaller budget, a clear goal, and a date to decide whether or not to move forward with the campaign.
 
