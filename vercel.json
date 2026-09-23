@@ -492,6 +492,11 @@
             "statusCode": 301
         },
         {
+            "source": "/docs/data/team-collaboration:ext(\\.md)?",
+            "destination": "/docs/settings/organizations:ext?",
+            "statusCode": 301
+        },
+        {
             "source": "/docs/data/data-residency:ext(\\.md)?",
             "destination": "/docs/privacy/data-storage:ext?",
             "statusCode": 301
@@ -2898,7 +2903,7 @@
         },
         {
             "source": "/manual/team-collaboration",
-            "destination": "/docs/data/team-collaboration"
+            "destination": "/docs/settings/organizations"
         },
         {
             "source": "/manual/utm-segmentation",
