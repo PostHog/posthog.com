@@ -340,7 +340,7 @@ If a deployment appears stuck, reach out in `#support-infrastructure` or ping `@
 
 If you build it, [document it](/docs). You're in the best position to do this, and it forces you to think things through from a user perspective.
 
-It's not the responsibility of either <SmallTeam slug="website" /> or <SmallTeam slug="content" /> teams to document features.
+It's not the responsibility of either <SmallTeam slug="website" /> or <SmallTeam slug="marketing" /> teams to document features.
 
 See our [docs style guide](/handbook/content/posthog-style-guide) for tips on how to write great docs.
 

@@ -585,7 +585,7 @@ This means it's not only an alternative to Datadog but also tools like [Amplitud
 
 - **Logs:** Filter, aggregate, and explore logs by attributes instead of scrolling text and combine with all the rest of your analytics data. Works with OpenTelemetry data.
 
-- **Distributed tracing (beta):** Follow one request across every service, queue, database, and third-party API it touches, then read the result as a waterfall. Point your existing [OpenTelemetry](/docs/distributed-tracing) exporter at PostHog – there is no proprietary agent or SDK to install.
+- **Distributed tracing:** Follow one request across every service, queue, database, and third-party API it touches, then read the result as a waterfall. Point your existing [OpenTelemetry](/docs/distributed-tracing) exporter at PostHog – there is no proprietary agent or SDK to install.
 
 - **Metrics (alpha):** Send counters, gauges, and histograms over OpenTelemetry, with the `posthog.metrics` API in the SDK you already have, or with a [Helm chart](/docs/metrics/installation/kubernetes) that scrapes the Prometheus endpoints your Kubernetes pods already expose.
 
@@ -736,7 +736,7 @@ For most teams, **New Relic** is the closest like-for-like alternative to Datado
 <details>
   <summary>Does PostHog have APM and distributed tracing?</summary>
 
-Yes. **PostHog** has [distributed tracing](/tracing) in beta and [metrics](/docs/metrics) in alpha, next to [logs](/logs) and [error tracking](/error-tracking). All of them use OpenTelemetry over OTLP, so you can point an existing collector at PostHog instead of installing a new agent.
+Yes. **PostHog** has [distributed tracing](/tracing), plus [metrics](/docs/metrics) in alpha, next to [logs](/logs) and [error tracking](/error-tracking). All of them use OpenTelemetry over OTLP, so you can point an existing collector at PostHog instead of installing a new agent.
 
 What PostHog does not have is the operations layer around it: infrastructure and cloud monitoring, incident management, on-call scheduling, status pages, and uptime monitoring. If you need those, look at **Datadog** or **Better Stack**.
 
