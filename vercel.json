@@ -5978,15 +5978,23 @@
         },
         {
             "source": "/teams/twig",
-            "destination": "/teams/posthog-desktop"
+            "destination": "/teams/surfaces"
         },
         {
             "source": "/teams/posthog-code",
-            "destination": "/teams/posthog-desktop"
+            "destination": "/teams/surfaces"
         },
         {
             "source": "/teams/posthog-code/:path*",
-            "destination": "/teams/posthog-desktop/:path*"
+            "destination": "/teams/surfaces/:path*"
+        },
+        {
+            "source": "/teams/posthog-desktop",
+            "destination": "/teams/surfaces"
+        },
+        {
+            "source": "/teams/posthog-desktop/:path*",
+            "destination": "/teams/surfaces/:path*"
         },
         {
             "source": "/docs/max-ai:ext(\\.md)?",
