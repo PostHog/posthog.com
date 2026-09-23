@@ -31,7 +31,7 @@ These are some other areas that PMMs own outside of specific products.
 - **Research** – Joe
 - **Incident comms** – distributed, ask in `#team-marketing` if you need help
 - **Lifecycle (i.e. email) & aligning with eng** – Joe
-- **Initial small launches for new tools** – Joe
+- **Initial small launches for new products** – Joe
 - **Startups & partnerships** – Joe
 
 <details>
