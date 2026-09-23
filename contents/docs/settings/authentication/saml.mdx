@@ -19,76 +19,70 @@ availability:
 
 Security Assertion Markup Language (SAML) enables users to access multiple systems with a single set of credentials. This is helpful for growing organizations that require centralized user management in an Identity Provider (IdP).
 
-If you are configuring IdP-based SSO for the first time, we recommend you use [OIDC](/docs/settings/authentication/oidc). Many identity providers offer better support for OIDC, because SAML is an older protocol.
+If you are configuring IdP-based SSO for the first time, we recommend you use [OIDC](/docs/settings/authentication/oidc), because it is [generally considered more secure](https://blog.trailofbits.com/2026/09/21/saml-a-fractal-of-bad-design/) and simpler to operate than SAML.
+
+## Prerequisites
+
+1. If you are using PostHog cloud, your organization must be subscribed to a platform package that offers SAML. If you are self-hosting PostHog, your instance must have an enterprise license that supports SAML.
+
+2. You need to [verify domains](/docs/settings/authentication/sso#authentication-domains) for any email address that you want to allow users to login with. For example, if you want to allow users with an `@example.com` email address to login, like `john@example.com`, you need to add and verify `example.com` as an authentication domain.
+
+3. If you are self-hosting PostHog, make sure you have properly set up your `SITE_URL` [environment variable](/docs/self-host/configure/environment-variables) configuration.
+
+4. If you are self-hosting PostHog, your PostHog instance must be accessible from the public internet over TLS.
 
 ## Configuring SAML
 
-For SAML to work your IdP and PostHog (SP) need to exchange information. To do this, you need to configure some settings in your IdP and on PostHog. Depending on your IdP you might need to pass PostHog information first, or the other way around. We provide complete examples for OneLogin and Okta below, but the general flow is:
+1. Navigate to your organization's [authentication settings](https://app.posthog.com/settings/organization-authentication#setting=saml-configuration) page in PostHog.
 
-1. If you are on self-hosted, make sure you have properly set up your `SITE_URL` [environment variable](/docs/self-host/configure/environment-variables) configuration.
+2. Scroll down to the **SAML** section, and select **Configure**.
 
-2. If you are on self-hosted, you will need to be running your PostHog instance over TLS.
+3. In your IdP, create a new SAML app for PostHog.
 
-3. Register a new SAML 2.0 application with your IdP. If you need to pass PostHog's information to your provider first, set the following values below (alternatively if your IdP supports it, you can obtain our XML metadata from `<yourdomain>/api/saml/metadata/` or `https://us.posthog.com/api/saml/metadata/` for PostHog Cloud US or `https://eu.posthog.com/api/saml/metadata/` for PostHog Cloud EU)
-   - **Single Sign On URL** (also called ACS Consumer URL): `<yourdomain>/complete/saml/` or `https://us.posthog.com/complete/saml/` for PostHog Cloud US or `https://eu.posthog.com/complete/saml/` for PostHog Cloud EU.
-   - **Audience or Entity ID**: _Your Site URL_ value (verbatim), on PostHog Cloud this is `https://us.posthog.com` or `https://eu.posthog.com`
-   - **RelayState**: On PostHog cloud, get your RelayState value from the SAML configuration modal in your PostHog Organization settings. For self hosted, _empty or default_ (will be set on every request).
+    a. Copy the "*ACS Consumer URL*" and "*Audience / entity ID*" displayed in PostHog into your SAML app's configuration in your IdP.
 
-4. For SAML to work properly with PostHog, we need to receive at least the following information from your IdP in the SAML assertion payload: ID, email and first name. Optionally, you can also pass the last name. By default, PostHog expects these attributes with a certain name.
+    b. Copy the following values from your SAML app's configuration in your IdP into PostHog:
+       - **ACS URL** (also called **Sign-on URL** or **SAML endpoint**)
+       - **Entity ID** (also called **Issuer**, **IdP issuer**, or **Azure AD Identifier**)
+       - **X.509 certificate** used to verify SAML assertions
 
-<table>
-  <thead>
-    <tr>
-      <th>Attribute</th>
-      <th>Default name on PostHog</th>
-      <th>Optional?</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>Permanent ID</td>
-      <td>
-        <code>name_id</code>
-      </td>
-      <td>❌ No</td>
-    </tr>
-    <tr>
-      <td>Email</td>
-      <td>
-        <code>email</code>
-      </td>
-      <td>❌ No</td>
-    </tr>
-    <tr>
-      <td>First (Given) Name</td>
-      <td>
-        <code>first_name</code>
-      </td>
-      <td>❌ No</td>
-    </tr>
-    <tr>
-      <td>Last Name (Surname)</td>
-      <td>
-        <code>last_name</code>
-      </td>
-      <td>✅ Yes</td>
-    </tr>
-  </tbody>
-</table>
+       Your IdP might provide these values in an XML metadata file. If the certificate is provided as a file, open it in a text editor and copy its contents without changing the spaces or line breaks. The `BEGIN CERTIFICATE` and `END CERTIFICATE` lines are optional.
 
-3. You will now need to obtain some parameters from your IdP and configure them in PostHog for the appropriate domain in Authentication domains. Depending on your provider, they may only provide this information as an XML metadata file. If this is the case, you can open the file in a text editor and obtain the required values from there.
-   - **SAML Entity ID**: Will be identified as EntityID or IdP issuer. This can vary greatly between providers, but it usually looks like a URL.
-     - If using Azure AD the setting to use for this field is called `Azure AD Identifier`.
-   - **SAML ACS URL**: The endpoint to which the SAML requests are posted. It's usually called SAML endpoint or IdP sign-on URL.
-   - **SAML X.509 certificate**: The public certificate used to validate SAML assertions from your IdP. It must be in X509 (almost all providers will provide it in this format). If your provider gives you the certificate as a file (usually `.pem`), just open it with a text editor to get the contents. When setting this certificate be sure to **keep any spaces and new lines** (don't format it). The first and last line of the certificate (e.g. `-----BEGIN CERTIFICATE-----`) are optional.
+    c. Verify that your IdP shares the following attributes in the SAML assertion with PostHog:
 
-   ![Screenshot: SAML configuration](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/features/sso/saml-configuration.png)
+       <table>
+         <thead>
+           <tr>
+             <th>Attribute</th>
+             <th>Default name in PostHog</th>
+             <th>Optional?</th>
+           </tr>
+         </thead>
+         <tbody>
+           <tr>
+             <td>Permanent ID</td>
+             <td><code>name_id</code></td>
+             <td>❌ No</td>
+           </tr>
+           <tr>
+             <td>Email</td>
+             <td><code>email</code></td>
+             <td>❌ No</td>
+           </tr>
+           <tr>
+             <td>First (given) name</td>
+             <td><code>first_name</code></td>
+             <td>❌ No</td>
+           </tr>
+           <tr>
+             <td>Last name (surname)</td>
+             <td><code>last_name</code></td>
+             <td>✅ Yes</td>
+           </tr>
+         </tbody>
+       </table>
 
-4. Once you've configured all the settings above, you can now log out and attempt logging in using SAML (you just need to enter your email address).
-
-5. For security reasons, we don't output errors directly in your browser when something goes wrong. If you need help debugging on PostHog cloud, please contact support and provide the error ID that is shown at the bottom of the error page. To debug your self-hosted configuration, you have two options:
-   - **Recommended**. Check your app logs (this varies depending on your deployment). Any errors will be logged there.
-   - If everything else fails, **temporarily** set environment variable `DEBUG=1`, errors will be fully displayed now in the browser. **Please be sure to remove this once you're done, ugly things can happen if you don't.**
+4. Select **Save**.
 
 ### Example: OneLogin
 
