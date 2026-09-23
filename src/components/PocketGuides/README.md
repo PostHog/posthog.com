@@ -2,7 +2,7 @@
 
 The digital book format for pocket guides – the docs-site sibling of the marketing team's field
 guide microsites. Educational register, not marketing: the structure does the teaching, and the
-whole thing uses PostHog fonts and tokens only.
+reader UI uses PostHog fonts and tokens. PostHog 101's Twig snapshots retain Twig styling.
 
 **Every page of a book is an MDX file.** Nothing in this folder contains prose – these components
 are layout and vocabulary, the words all live in `contents/pocket-guides/`.
@@ -229,9 +229,46 @@ The report frontmatter contract and the `.md` agent-mirror constraints are docum
 `gatsby/createSchemaCustomization.ts` plus `pnpm clean` – Gatsby won't infer fields that only some
 pages declare.
 
-### Twig introduction preview
+### Code and event examples
 
-`TwigIntroductionFigure` embeds the full Twig website in a scrollable frame. Development uses
-`http://localhost:3000`; run the Twig dev server alongside this site. Production uses
-`https://twig.com`. Set `GATSBY_TWIG_URL` to use a deployed Twig preview instead. The new Twig
-experience must be deployed before publishing this guide with the default production URL.
+`PocketGuideCodeEvents` is the guide's code-and-outcome exhibit. It renders a single frame with
+code on the left and simulated event rows on the right, stacking them when the reading column is
+narrow. Pass the language key (for example, `javascript`), code, event name, column label, and
+example rows from MDX. The code side derives its visible language label from that key and has its
+own copy button. These rows are local teaching data, not PostHog events.
+
+Authors choose the format per example: use a fenced code block (`js`, `python`, etc.) to show code
+alone, `PocketGuideCodeEvents` to show code beside the simulated events it produces, or a figure's
+event inspector to focus on one selected interaction. The PostHog 101 lesson uses the paired
+component only for the fixed-value mismatch; its other code examples remain regular snippets.
+
+### Twig snapshots in PostHog 101
+
+The agreed shared-library design is:
+
+```mermaid
+flowchart LR
+    library["@posthog/twig-components"]
+    twig["twig.com"]
+    guide["posthog.com / PostHog 101"]
+    library -->|"Twig UI, playground, and labs"| twig
+    library -. "Planned read-only views in Shadow DOM" .-> guide
+```
+
+The library owns reusable Twig UI, data, CSS, and assets. Twig.com owns its pages, routing,
+instrumentation, and placement of the playground and labs. PostHog.com owns the guide prose,
+code and event examples, introductory screenshot, click illustration, and PostHog event
+inspector. The guide currently uses a local, read-only Twig snapshot while package installation
+is paused. A future package integration will put the Twig view in Shadow DOM and keep the
+inspector and “Explore Twig” link outside it.
+
+`TwigEventFlow` pairs the local Twig snapshot with an inspector underneath. A CSS timeline
+illustrates a visitor changing from Forest to Coast; reduced-motion and print views show the
+final Coast state. The inspector starts open and can be collapsed. Figure 1 shows the event
+without a destination property; figure 2 shows the fixed-value mismatch; figure 3 shows the
+corrected value. No figure sends events to PostHog.
+
+`TwigIntroductionFigure` uses a screenshot of Twig's homepage. Its Halfre font is kept under
+`static/pocket-guides/posthog/` and scoped to `TwigBrowseStaysMockup`. The inspector and guide
+link use PostHog.com fonts. When the package integration resumes, replace the local snapshot
+with `BrowseStaysPreview` and check narrow and wide widths, both themes, and reduced motion.

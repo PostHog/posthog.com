@@ -15,32 +15,25 @@ pocketGuideOrder: 0
 
 <RightPage>
 
-Building a product means understanding how it works for the people using it. What brings them to it? Can they accomplish what they came to do? What makes them return? Product engineers need that understanding to decide what to build and improve. PostHog brings together tools to support that work, from <Term name="product analytics">Product Analytics</Term> and <Term name="session replay">Session Replay</Term> to <Term name="feature flag">Feature Flags</Term> and <Term name="ai observability">AI Observability</Term>.
+Building a product means understanding how people use it. Product engineers use PostHog to do just that.
 
-This pocket guide follows the product engineers building **Twig**, a fictional vacation-rental application, as they develop and improve the product. Their work highlights what PostHog does, what data it needs, and how its tools fit together to help build a better product.
-
-## About the guide
-
-The story starts with a search page and a seemingly simple question: _what kind of stay are visitors looking for?_ From there, it follows the team's efforts to understand why bookings fail and whether a change improves the experience. Along the way, the guide covers:
-
-- Recording interactions as <Term name="event">events</Term> and choosing <Term name="event property">properties</Term> that give them useful context.
-- Using <Term name="identity" /> to connect activity to the people behind it.
-- Choosing PostHog tools to investigate behavior, diagnose problems, and evaluate changes.
-- Connecting those pieces to drive a loop from evidence to shipped improvement using <Term name="self-driving">Self-driving</Term>.
-
-This guide uses interactive examples so you can test the team's decisions yourself: inspect simulated data, change <Term name="instrumentation" />, and rerun an interaction to see what changes. No PostHog account or installation is required.
+This pocket guide follows the product engineers building [Twig](https://twig.com), a fictional vacation-rental application, as they develop and improve the product. Their work highlights what PostHog does, what data it needs, and how its tools fit together to help build a better product.
 
 ## Meet Twig
 
-[Twig](https://twig.com) is a fictional vacation-rental website for a company run by birds, with humans looking for a getaway. It serves as the playground for this guide: a shared application for exploring PostHog concepts through practical examples.
+Twig is the bird-run vacation-rental site at the center of this guide. You'll see snapshots of its pages, starting with "Find a stay". Twig itself is interactive: use **Explore Twig** to browse stays and learn about PostHog with hands-on tools.
 
 <TwigIntroductionFigure />
 
-Twig's listings use fictional photos and details, and the example simulate activity without making real reservations or sending data to PostHog. Think of it like a sandbox to experiment and learn with!
+## What you'll learn
 
-Parts of Twig appear throughout the guide as interactive, hands-on examples. The full website and its PostHog labs are also available at [twig.com](https://twig.com), so the same concepts can be explored here or in the playground.
+The guide starts with a question: _what kind of stay are visitors looking for?_ That first question leads to bigger ones. Follow Twig's engineers as they:
 
-Ready to get started? Follow the Twig team's story.
+- Record meaningful events, then use identity to connect activity to the people behind it.
+- Use PostHog's tools to understand behavior, investigate problems, ship changes, and measure their impact.
+- See how self-driving spots useful signals across those tools and helps the team decide what to do next.
+
+The PostHog data in this guide is simulated. No account or installation is needed to read along.
 
 <CTA to="/pocket-guides/posthog/101" external={false}>
     Start reading →

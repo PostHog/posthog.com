@@ -9,10 +9,10 @@ export default function LessonFooter({
     children: React.ReactNode
 }): JSX.Element {
     return (
-        <footer className="not-prose mt-10 border-t border-primary pt-6" aria-label="Lesson resources and next lesson">
+        <footer className="not-prose mt-10" aria-label="Lesson resources and next lesson">
             <div className="mb-6 flex flex-wrap items-center gap-3">
                 <OSButton variant="primary" size="md" disabled>
-                    Next: {nextLabel} →
+                    {nextLabel} →
                 </OSButton>
                 <span className="text-sm text-secondary">Coming soon</span>
             </div>

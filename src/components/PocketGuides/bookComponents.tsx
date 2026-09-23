@@ -4,7 +4,9 @@ import Term from './terms'
 import LessonFooter from './LessonFooter'
 import TwigFilterFigure from './TwigFilterFigure'
 import TwigPropertyFigure from './TwigPropertyFigure'
+import TwigEventFigure from './TwigEventFigure'
 import TwigIntroductionFigure from './TwigIntroductionFigure'
+import PocketGuideCodeEvents from './PocketGuideCodeEvents'
 
 import Action, { Setup } from './Action'
 import Callout from './Callout'
@@ -49,7 +51,9 @@ export const bookMdxComponents = {
     Fig,
     TwigFilterFigure,
     TwigPropertyFigure,
+    TwigEventFigure,
     TwigIntroductionFigure,
+    PocketGuideCodeEvents,
     LessonFooter,
     ReportFigure,
     AnatomyFigure,

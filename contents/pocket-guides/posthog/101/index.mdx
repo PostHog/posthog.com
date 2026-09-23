@@ -1,5 +1,5 @@
 ---
-title: What kind of stay are visitors looking for?
+title: Events and properties
 shortTitle: Events and properties
 subtitle: Follow Twig's team as they record visitor choices and check that the data tells the right story.
 pocketGuideOrder: 1
@@ -8,15 +8,17 @@ isPrimer: true
 
 <LeftPage>
 
-<TwigPropertyFigure n={1} caption="Test the team's starting code and compare the clicks with the recorded values." />
+<TwigEventFigure n={1} caption="A visitor selects Coast on Twig. PostHog receives the event, but the destination type is not included yet." />
 
-<TwigFilterFigure n={2} caption="Try different filters with the corrected code and compare each selection with its recorded property." />
+<TwigPropertyFigure n={2} caption="The Coast filter is selected, but the event still records Forest." />
+
+<TwigFilterFigure n={3} caption="With the corrected code, the Coast selection and recorded destination_type agree." />
 
 </LeftPage>
 
 <RightPage>
 
-# What kind of stay are visitors looking for?
+# Events and properties
 
 Twig's product engineers want to understand what visitors look for when browsing stays. The **Find a stay** page offers a starting point: visitors can narrow the listings to **Forest**, **Coast**, or **Mountain**. Those choices could help the team decide which destination types deserve more attention.
 
@@ -36,23 +38,28 @@ They add this call to the filter's click handler:
 posthog.capture("stay_filter_selected");
 ```
 
-Each time a visitor selects a filter, `posthog.capture()` records an event named `stay_filter_selected`.
+Each time a visitor selects a filter, `posthog.capture()` records an event named `stay_filter_selected`. <SeeFig n={1} /> shows a simulated visitor choosing Coast and the event arriving in PostHog. The event does not yet say which filter they chose.
 
-## Add the destination type as a property
+## Add context with an event property
 
 The event name tells the team that someone used a filter, but it doesn't say which destination type they selected.
 
 An <Term name="event property">event property</Term> supplies that detail. The team adds `destination_type` to the capture call. Their starting code uses a fixed value:
 
-```js
-posthog.capture("stay_filter_selected", {
-  destination_type: "Forest",
-});
-```
+<PocketGuideCodeEvents
+  language="javascript"
+  code={'posthog.capture("stay_filter_selected", {\n  destination_type: "Forest",\n});'}
+  eventName="stay_filter_selected"
+  recordedLabel="Recorded destination_type"
+  events={[
+    { clicked: 'Forest', recorded: 'Forest' },
+    { clicked: 'Coast', recorded: 'Forest', mismatch: true },
+  ]}
+/>
 
-Before relying on those records, the engineers test a different selection. In <SeeFig n={1} />, click **Apply the code** to activate the tracking code shown above. Each subsequent filter click will create a simulated event using that code. Choose **Forest** and **Coast** in Twig's stay filters, then click **Inspect the difference** to compare those choices with the recorded properties.
+The table shows what the fixed value would record for two clicks. Forest matches, but Coast still records Forest. In <SeeFig n={2} />, Twig shows the Coast selection behind that mismatch.
 
-## Connect the property to the selected filter
+## Use a value from the interaction
 
 The visitor chooses Coast, but the event records Forest. The event name is correct – the property value describes the wrong selection. The fixed string `"Forest"` never changes, regardless of which filter the visitor clicks.
 
@@ -66,19 +73,15 @@ posthog.capture("stay_filter_selected", {
 
 Here, `selectedDestinationType` holds the visitor's selection. The second argument to `posthog.capture()` holds the event's properties, so `destination_type` now follows the click instead of always recording Forest.
 
+## Check the recorded event
 
-
-## Try the corrected code on Twig
-
-The engineers check that the fix works for other selections too. In <SeeFig n={2} />, click **Apply the code** to activate the corrected tracking code, then select **Forest** and **Coast** to generate new events. Click **Inspect the difference** to check the recorded values, then **Continue reading** to return to the guide.
-
-<div id="corrected-filter-results" />
+The engineers check the corrected code against Coast. In <SeeFig n={3} />, Twig still shows a Coast stay, and the simulated event now records `destination_type: Coast`.
 
 The event name stays `stay_filter_selected` – its `destination_type` value changes with the selection. The team can count filter selections or compare them by destination type. Those clicks show what visitors explore, without establishing what anyone eventually books.
 
 The team changes the tracking code, not the visitor's experience. Checking that an event exists would miss this bug. Comparing its properties with the interaction exposes it.
 
-## What the team can now measure
+## What the data can tell you
 
 The engineers now have a way to record destination choices and a check that those records describe the clicks accurately. Three decisions make the data useful:
 
@@ -90,7 +93,7 @@ Counting selections still isn't the same as counting people, though. One visitor
 
 <LessonFooter nextLabel="Identity">
 
-[Events reference](/docs/data/events) · [Custom event guide](/docs/product-analytics/capture-events) · [Twig playground](https://twig.com) – choose **Stay filters**.
+[Events reference](/docs/data/events) · [Custom event guide](/docs/product-analytics/capture-events) · [Twig playground](https://twig.com).
 
 </LessonFooter>
 
