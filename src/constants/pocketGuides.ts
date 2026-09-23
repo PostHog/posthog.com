@@ -61,6 +61,14 @@ export const POCKET_GUIDE_VOLUMES: PocketGuideVolume[] = [
         volume: 4,
         docsProduct: 'session-replay',
     },
+    {
+        id: 'feature-flags',
+        title: 'Feature Flags',
+        description: 'Ship code turned off, then decide from PostHog who gets it – and turn it back off in seconds.',
+        token: 'orange',
+        volume: 5,
+        docsProduct: 'feature-flags',
+    },
 ]
 
 /** The volume that teaches a product, if one does. Drives `GuidesForProduct` on tool docs pages. */

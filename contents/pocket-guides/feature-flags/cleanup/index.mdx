@@ -1,0 +1,81 @@
+---
+title: Cleaning up
+shortTitle: Cleaning up
+subtitle: A flag at 100% has done its job. Remove it from your code, then from PostHog.
+pocketGuideOrder: 7
+section: Maintain
+pocketGuideCta:
+  kind: link
+  label: Open the flag debt scout
+  href: /pocket-guides/self-driving/flag-debt
+  note: A scout that checks your flags every day and opens the cleanup PR.
+---
+
+<LeftPage>
+
+<LedgerFigure
+    n={1}
+    caption="The rollout tells you which code path to keep."
+    rows={[
+        {
+            flag: 'new-checkout',
+            rollout: '100%',
+            age: '4 mo',
+            evaluations: '~29,000',
+            inCode: '3 files',
+            verdict: 'remove',
+        },
+        {
+            flag: 'beta-nav',
+            rollout: '0%',
+            age: '5 mo',
+            evaluations: '~1,200',
+            inCode: '1 file',
+            verdict: 'remove',
+        },
+        {
+            flag: 'pro-exports',
+            rollout: '40%',
+            age: '2 mo',
+            evaluations: '~6,500',
+            inCode: '2 files',
+            verdict: 'question',
+        },
+    ]}
+/>
+
+</LeftPage>
+
+<RightPage>
+
+# Cleaning up
+
+Every flag you keep is a branch in your code nobody tests anymore. It can cost you money too. The web SDK evaluates every active flag on load, so a request can get billed for a flag your code stopped checking months ago.
+
+## Stale means finished
+
+PostHog calls a flag stale when nothing has checked it in 30 days, or when it's sat at 100% for 30 days with no property filters. A flag you turned off on purpose isn't stale.
+
+## Give every flag an owner
+
+Most flag debt comes from flags nobody owns. When you create a flag, give it an owner, a name that says what it's for, and a plan for removing it. Not six months later.
+
+## Code first, then the flag
+
+Remove the checks from your code, deploy, then disable the flag. Do it the other way around and every leftover check returns `false`, so the feature vanishes for everyone. At 100%, keep the enabled path. At 0%, keep the fallback. Anything in between needs a person to decide <SeeFig n={1} />.
+
+Your two example flags go first. Delete their call sites and the constants the wizard added, deploy, then delete the flags (weirdly satisfying).
+
+## Let a scout do it
+
+A <Term name="scout">scout</Term> can check your flags every day and open the PR for you. It leaves alone any flag whose key it can't find in your code.
+
+<Action />
+
+<SeeAlso>
+
+See also: [Cleaning up stale flags](/docs/feature-flags/cleaning-up-stale-flags) · [Flag debt](/pocket-guides/self-driving/flag-debt) · [How GitHub and GitLab use feature flags](/product-engineers/github-gitlab-feature-flags)
+
+</SeeAlso>
+
+</RightPage>

@@ -116,6 +116,35 @@ export const TERMS = {
             'Feature flags let you ship code without shipping the feature. Wrap a change in a flag, roll it out to 1% of users, watch what happens, and turn it off the moment something looks wrong.',
         slug: '/docs/feature-flags',
     },
+    'distinct id': {
+        title: 'Distinct ID',
+        description: 'Every event in PostHog has a distinct ID – a unique identifier that groups events together.',
+        slug: '/docs/data/persons',
+    },
+    'release condition': {
+        title: 'Release conditions',
+        description:
+            'This specifies the conditions a user must meet to access the feature flag and receive a value. Release conditions do not apply to remote config flags.',
+        slug: '/docs/feature-flags/creating-feature-flags#release-conditions',
+    },
+    'local evaluation': {
+        title: 'Local evaluation',
+        description:
+            'Instead of making a request for each flag, PostHog will periodically request and store feature flag definitions locally, enabling you to evaluate flags without making additional requests.',
+        slug: '/docs/feature-flags/local-evaluation',
+    },
+    bootstrapping: {
+        title: 'Bootstrapping',
+        description:
+            'Bootstrapping Feature Flags makes precomputed flag values available as soon as a client-side PostHog SDK initializes. This prevents flicker and enables startup logic, such as redirects, to use flags before the SDK finishes its first /flags request.',
+        slug: '/docs/feature-flags/bootstrapping',
+    },
+    payload: {
+        title: 'Payload',
+        description:
+            'A payload is an additional piece of information sent to your app when a flag is matched for a user. The returned value can be any valid JSON type (object, array, number, string, boolean, or null).',
+        slug: '/docs/feature-flags/creating-feature-flags#payloads',
+    },
     exception: {
         title: 'Exception',
         description:

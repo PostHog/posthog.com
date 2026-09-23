@@ -1,0 +1,55 @@
+---
+title: From flag to experiment
+shortTitle: Experiments
+subtitle: Split people between variants, then measure which one wins.
+pocketGuideOrder: 6
+section: Learn
+pocketGuideCta:
+  kind: link
+  label: Create an experiment
+  href: https://app.posthog.com/experiments
+---
+
+<LeftPage>
+
+<ScreenshotFigure
+    n={1}
+    product="feature_flags"
+    screenshot="multivariate"
+    alt="A multivariate flag with control and test variants, each with its own rollout percentage"
+    caption="An experiment runs on a multivariate flag with a control variant."
+/>
+
+</LeftPage>
+
+<RightPage>
+
+# From flag to experiment
+
+A rollout asks "is it safe?" An <Term name="experiment">experiment</Term> asks "is it better?" In PostHog, an experiment runs on a flag with variants <SeeFig n={1} />.
+
+## You already have the pieces
+
+An experiment needs a multivariate flag with at least two variants, one named `control`. Use an existing flag that has those (with `control` as its first variant), or let the experiment make one. Someone counts as exposed when a `$feature_flag_called` event comes in, and your checks already send that.
+
+## The 101 rules matter more here
+
+If someone switches variants mid-experiment, their results count in both groups. That happens when the distinct ID changes between checks. Call `identify()` before the first check, check once, and stick with the variant.
+
+## Check the flag as late as you can
+
+Put the check right where the experience actually splits, after every other condition. Otherwise people who never see the change still count as exposed, and they water down your results.
+
+## When it ends
+
+Ship the winning variant, then delete the flag. When you end an experiment, PostHog can even open the cleanup PR for you.
+
+<Action />
+
+<SeeAlso>
+
+See also: [Creating an experiment](/docs/experiments/creating-an-experiment) · [Exposures](/docs/experiments/exposures) · [A software engineer's guide to A/B testing](/product-engineers/ab-testing-guide-for-engineers) · [Prevent flashing during A/B tests](/tutorials/prevent-fouc-ab-tests)
+
+</SeeAlso>
+
+</RightPage>

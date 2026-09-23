@@ -1,0 +1,70 @@
+---
+title: The off switch
+shortTitle: Off switch
+subtitle: Turn a feature off in seconds, without a rollback.
+pocketGuideOrder: 4
+section: Release
+pocketGuideCta:
+  kind: link
+  label: Open your feature flags
+  href: https://app.posthog.com/feature_flags
+  note: Find the flag and switch it off.
+---
+
+<LeftPage>
+
+<ExampleFigure n={1} caption="From alert to off, with no rollback and no deploy.">
+
+| Time | What happens |
+| --- | --- |
+| 14:00 | `new-checkout` raised to 25% |
+| 14:11 | Checkout errors triple for people with the flag |
+| 14:12 | Flag disabled in PostHog |
+| 14:12 | Servers that evaluate remotely: off on the next request |
+| ≤14:13 | Servers that evaluate locally: off at the next poll (30s by default) |
+| Later | Browsers: off at the next flag fetch (reload, identify, property change) |
+
+</ExampleFigure>
+
+<ExampleFigure n={2} caption="Disabled, unreachable, and not loaded all end up on the path that already works.">
+
+```js
+const useNewCheckout = flags.getFlag(CHECKOUT_FLAG) ?? false
+
+if (!useNewCheckout) return renderCheckout()
+return renderNewCheckout()
+```
+
+</ExampleFigure>
+
+</LeftPage>
+
+<RightPage>
+
+# The off switch
+
+A rollback is a revert, a build, and a deploy, and your users see the bug the whole time. If the change is behind a flag, you just turn the flag off <SeeFig n={1} />.
+
+## How fast "off" arrives
+
+A disabled flag returns `false` everywhere it's checked. How fast each side notices depends on how it evaluates. A server asking PostHog on every request sees it on the next request. A server evaluating locally sees it at its next poll (30 seconds by default). A browser sees it the next time the SDK fetches flags (page load, `identify()`, a property or group change, or `reloadFeatureFlags()`), so an open tab can hang on to the old value for a while.
+
+## Make "off" the safe path
+
+The off switch only works if the off path still works. Keep the old code working until the flag is gone, and make it your default for a flag that hasn't loaded or a server that can't reach PostHog <SeeFig n={2} />. That way an outage lands in the same place as a kill.
+
+Then actually test it. Flip the flag off in staging and check the old path still works, and have CI run your tests with the flag both on and off. A kill switch you've never flipped is one you're just hoping works.
+
+## Switches you keep
+
+Some flags are meant to stick around (a switch for an expensive feature under load, or a disaster recovery switch). Most flags are temporary, and these are the deliberate exception. If you run your own cleanup automation, tag them as intentionally dormant so it skips them.
+
+<Action />
+
+<SeeAlso>
+
+See also: [Best practices](/docs/feature-flags/best-practices) · [Fallback defaults](/docs/feature-flags/local-evaluation#cold-start-and-fallback-defaults) · [Don't make these feature flag mistakes](/newsletter/feature-flag-mistakes) · [Slack alerts when flags change](/tutorials/feature-flag-slack-notifications)
+
+</SeeAlso>
+
+</RightPage>
