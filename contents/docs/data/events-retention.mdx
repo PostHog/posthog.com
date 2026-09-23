@@ -2,7 +2,7 @@
 title: Events data retention
 ---
 
-PostHog keeps your events for a period that your plan sets. This page tells you what that period is, where to read it, and what it does not do.
+PostHog keeps your events for a period that your plan sets. This page tells you what that period is and what it does not do.
 
 This page describes general data retention rules, with the following exceptions:
 - [Session recording retention](/docs/session-replay/recording-retention)
@@ -18,18 +18,9 @@ Your retention period comes from your plan:
 | Free | 1 year
 | Paid plans | 7 years
 
-A read-only endpoint reports it. Call it with a [personal API key](/docs/api#authentication) that has the `project:read` scope:
-
-```bash
-GET /api/projects/:project_id/events_retention/
-```
-
-- `retention_months`: the length of the window in months. A value of `84` is 7 years.
-- `retained_from`: the earliest date whose events are still queryable, in the project's timezone.
-
 <CalloutBox type="fyi" title="Enforcement is a gradual rollout">
 
-PostHog applies retention project by project. Until retention applies to your project, both fields are `null` and retention removes no events from your project.
+PostHog applies retention project by project. Until retention applies to your project, retention removes no events from your project.
 
 </CalloutBox>
 
