@@ -28,7 +28,15 @@ You don't need to configure MCP servers for inbox sources manually. Once your re
 
 ## PostHog sources
 
-These sources are available when the matching PostHog product has data in your project.
+These sources use data from the matching PostHog products in your project.
+Enable the corresponding source or scout to receive findings in your inbox.
+
+Feature flags, web analytics, surveys, data warehouse, and data pipelines use [scouts](/docs/self-driving/scouts).
+Enable the corresponding scout and keep **Write signals to the inbox** on.
+A paused scout or a scout in [dry run](/docs/self-driving/scouts#dry-runs) does not write findings to the inbox.
+
+Endpoints sends signals directly when an execution fails or a breakdown exceeds its limit.
+These signals require an enabled Endpoints source configuration.
 
 <List
   className="grid gap-4 grid-cols-1 @md:grid-cols-3 not-prose"
