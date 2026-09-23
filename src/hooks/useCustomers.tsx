@@ -73,32 +73,6 @@ export type CustomerLogo =
           dark: string
       }
 
-// The personas from /handbook/who-we-build-for, matched against the free-text role on each quote.
-// A role can match more than one persona — "Growth Marketing Lead" is both Growth and Marketing.
-export const PERSONAS = [
-    { label: 'Engineering', match: /engineer|technical|cto|developer|devrel|architect|full stack/i },
-    { label: 'Product', match: /product/i },
-    { label: 'Growth', match: /growth/i },
-    { label: 'Marketing', match: /market|brand/i },
-    { label: 'Founders', match: /founder|ceo/i },
-    { label: 'Data', match: /data|analytics|machine learning/i },
-]
-
-// YC runs four batches a year, so a batch stops being current without anything in this repo changing.
-// Store the batch code on the customer and compare against this, rather than storing "is current".
-export const CURRENT_YC_BATCH = 'F26'
-
-export interface CustomerPerson {
-    key: string
-    customer: Customer
-    name: string
-    role: string
-    image?: { thumb: string; url?: string }
-    personas: string[]
-    product?: string
-    quote?: string
-}
-
 export interface Customer {
     slug: string
     name: string
@@ -123,10 +97,6 @@ export interface Customer {
         }
     >
     yc?: string
-    startupProgram?: number
-    aiPilled?: boolean
-    region?: string
-    soloFounder?: boolean
     featured: boolean
     hasCaseStudy: boolean // Now always populated dynamically
 }
@@ -154,17 +124,8 @@ interface BaseCustomer {
             quotes?: string[]
         }
     >
-    // YC batch code, eg 'W20'. Verified against ycombinator.com/companies — leave undefined if unverified.
+    // YC batch, eg 'W20'. Only set when verified on ycombinator.com/companies
     yc?: string
-    // Year the company joined PostHog for Startups. Undefined means unknown, not "no".
-    startupProgram?: number
-    // Builds AI-first, per /handbook/who-we-build-for. Undefined means unknown, not "no".
-    aiPilled?: boolean
-    // HQ country as an ISO-2 code, matching the StickerFlag* components. Remote-first companies with
-    // two equal hubs are left unset — under-claim rather than pick one.
-    region?: string
-    // A one- or two-person team. Drives the founders section; undefined means unknown, not "no".
-    soloFounder?: boolean
     featured: boolean
 }
 
@@ -255,7 +216,6 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
     },
     airbus: {
         name: 'Airbus',
-        region: 'FR',
         toolsUsed: [
             'product_analytics',
             'web_analytics',
@@ -276,6 +236,7 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
     },
     assemblyai: {
         name: 'AssemblyAI',
+        yc: 'S17',
         toolsUsed: ['experiments', 'product_analytics'],
         industries: ['API Platform'],
         users: ['Leadership', 'Marketing', 'Engineering'],
@@ -302,8 +263,6 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
     },
     arena: {
         name: 'Arena',
-        region: 'US',
-        aiPilled: true,
         toolsUsed: [
             'product_analytics',
             'web_analytics',
@@ -348,6 +307,7 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
     },
     brainboard: {
         name: 'Brainboard',
+        yc: 'W22',
         toolsUsed: ['product_analytics', 'session_replay', 'feature_flags', 'experiments', 'ai_observability'],
         industries: ['SaaS', 'Devtool'],
         users: ['Product', 'Engineering', 'Growth', 'Marketing'],
@@ -406,7 +366,6 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
     },
     clerk: {
         name: 'Clerk',
-        region: 'US',
         toolsUsed: [
             'product_analytics',
             'web_analytics',
@@ -476,9 +435,6 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
     },
     convex: {
         name: 'Convex',
-        region: 'US',
-        yc: 'W19',
-        aiPilled: true,
         toolsUsed: [
             'product_analytics',
             'web_analytics',
@@ -588,7 +544,6 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
     },
     elevenlabs: {
         name: 'ElevenLabs',
-        aiPilled: true,
         toolsUsed: [
             'product_analytics',
             'web_analytics',
@@ -628,9 +583,7 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
     },
     exa: {
         name: 'Exa',
-        region: 'US',
         yc: 'S21',
-        aiPilled: true,
         toolsUsed: [
             'product_analytics',
             'web_analytics',
@@ -688,8 +641,6 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
     },
     fireworksai: {
         name: 'Fireworks AI',
-        region: 'US',
-        aiPilled: true,
         toolsUsed: [
             'product_analytics',
             'web_analytics',
@@ -795,6 +746,7 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
         ],
         industries: ['AI'],
         users: ['Engineering', 'Product', 'Growth', 'Marketing'],
+        notes: 'Open source AI coding platform',
         featured: false,
         logo: {
             light: 'https://res.cloudinary.com/dmukukwp6/image/upload/e_trim,q_auto,f_auto/kilocodelogo_93f0668287.png',
@@ -847,9 +799,7 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
     },
     greptile: {
         name: 'Greptile',
-        region: 'US',
         yc: 'W24',
-        aiPilled: true,
         toolsUsed: [
             'product_analytics',
             'web_analytics',
@@ -893,7 +843,6 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
     },
     hasura: {
         name: 'Hasura',
-        region: 'US',
         toolsUsed: ['product_analytics', 'session_replay'],
         industries: ['Devtool'],
         users: ['Engineering', 'User Experience', 'Marketing'],
@@ -927,8 +876,6 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
     },
     heygen: {
         name: 'Heygen',
-        region: 'US',
-        aiPilled: true,
         toolsUsed: [
             'product_analytics',
             'web_analytics',
@@ -949,6 +896,7 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
     },
     hostai: {
         name: 'HostAI',
+        yc: 'W24',
         toolsUsed: ['product_analytics', 'session_replay', 'feature_flags', 'ai_observability'],
         industries: ['AI'],
         users: ['Engineering', 'Leadership', 'Founders'],
@@ -982,6 +930,7 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
     },
     juicebox: {
         name: 'Juicebox',
+        yc: 'S22',
         toolsUsed: [
             'product_analytics',
             'web_analytics',
@@ -1056,6 +1005,7 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
     },
     mintlify: {
         name: 'Mintlify',
+        yc: 'W22',
         toolsUsed: [
             'product_analytics',
             'web_analytics',
@@ -1087,8 +1037,6 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
     },
     mistralai: {
         name: 'Mistral AI',
-        region: 'FR',
-        aiPilled: true,
         toolsUsed: ['product_analytics', 'feature_flags'],
         // users: [], // TODO: Add users
         notes: 'Open source LLMs',
@@ -1209,6 +1157,7 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
     },
     pry: {
         name: 'Pry',
+        yc: 'W21',
         toolsUsed: ['product_analytics', 'session_replay'],
         industries: ['Financial planning software'],
         users: ['Leadership', 'Product', 'Engineering'],
@@ -1232,9 +1181,7 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
     },
     posthog: {
         name: 'PostHog',
-        region: 'US',
         yc: 'W20',
-        aiPilled: true,
         toolsUsed: [
             'web_analytics',
             'product_analytics',
@@ -1354,9 +1301,7 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
     },
     raycast: {
         name: 'Raycast',
-        region: 'GB',
         yc: 'W20',
-        aiPilled: true,
         toolsUsed: ['product_analytics', 'feature_flags', 'data_warehouse', 'posthog_ai'],
         // industries: [], // TODO: Add industries
         // users: [], // TODO: Add users
@@ -1393,7 +1338,6 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
     },
     railway: {
         name: 'Railway',
-        region: 'US',
         toolsUsed: [
             'product_analytics',
             'web_analytics',
@@ -1432,7 +1376,6 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
     },
     researchgate: {
         name: 'ResearchGate',
-        region: 'DE',
         toolsUsed: [
             'product_analytics',
             'web_analytics',
@@ -1462,7 +1405,6 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
     },
     resend: {
         name: 'Resend',
-        region: 'US',
         yc: 'W23',
         toolsUsed: [
             'product_analytics',
@@ -1556,9 +1498,7 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
     },
     supabase: {
         name: 'Supabase',
-        region: 'US',
         yc: 'S20',
-        aiPilled: true,
         toolsUsed: [
             'product_analytics',
             'feature_flags',
@@ -1621,7 +1561,6 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
     },
     startengine: {
         name: 'StartEngine',
-        region: 'US',
         toolsUsed: [
             'product_analytics',
             'web_analytics',
@@ -1650,7 +1589,6 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
     },
     ukgovt: {
         name: 'UK Government',
-        region: 'GB',
         toolsUsed: [], // TODO: Add toolsUsed
         // industries: [], // TODO: Add industries
         // users: [], // TODO: Add users
@@ -1717,8 +1655,6 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
     },
     wisprflow: {
         name: 'WisprFlow',
-        region: 'US',
-        aiPilled: true,
         toolsUsed: [
             'product_analytics',
             'web_analytics',
@@ -1760,8 +1696,6 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
     },
     ycombinator: {
         name: 'Y Combinator',
-        region: 'US',
-        aiPilled: true,
         toolsUsed: ['product_analytics', 'session_replay', 'feature_flags', 'experiments'],
         industries: ['SaaS', 'Education'],
         users: ['Leadership', 'Engineering', 'Product'],
@@ -1922,30 +1856,10 @@ export const useCustomers = () => {
         return !!customers[slug]?.featured
     }
 
-    // Every quoted person, tagged with the personas their role matches. One case study can appear
-    // under several personas — Arena shows up for Engineering and for Marketing, with a different quote each time.
-    const getPeople = (persona?: string): CustomerPerson[] =>
-        Object.values(customers)
-            .flatMap((customer) =>
-                Object.entries(customer.quotes || {}).map(([key, person]) => {
-                    const [product, productQuote] = Object.entries(person.products || {})[0] || []
-                    return {
-                        ...person,
-                        key,
-                        customer,
-                        product,
-                        quote: productQuote || person.quotes?.[0],
-                        personas: PERSONAS.filter(({ match }) => match.test(person.role)).map(({ label }) => label),
-                    }
-                })
-            )
-            .filter((person) => person.quote && (!persona || person.personas.includes(persona)))
-
     return {
         customers,
         getCustomer,
         getCustomers,
-        getPeople,
         hasCaseStudy,
         isFeatured,
     }

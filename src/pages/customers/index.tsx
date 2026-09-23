@@ -1,22 +1,24 @@
-import React, { useEffect, useMemo, useState } from 'react'
+import React, { useEffect, useState } from 'react'
+import { graphql, useStaticQuery } from 'gatsby'
 import SEO from 'components/seo'
 import Link from 'components/Link'
 import ReaderView from 'components/ReaderView'
 import ViewerFilters from 'components/Viewer/ViewerFilters'
 import OSTable from 'components/OSTable'
 import OSButton from 'components/OSButton'
-import CustomerShuffle from 'components/CustomerShuffle'
-import CustomerCards, { CustomerBadges } from 'components/CustomerCards'
-import { OSQuote } from 'components/OSQuote'
+import CustomerLogo from 'components/CustomerLogo'
+import CustomerLogos from 'components/Pricing/Redesign/CustomerLogos'
+import { SectionLayout, SectionHeader } from 'components/Pricing/Test/Sections'
+import { ToggleGroup } from 'components/RadixUI/ToggleGroup'
+import Tooltip from 'components/RadixUI/Tooltip'
 import CloudinaryImage from 'components/CloudinaryImage'
 import { RoughAnnotation } from 'components/Code/RoughAnnotation'
 import { usePrefersReducedMotion } from 'components/Code/usePrefersReducedMotion'
-import { StickerAi, StickerCrown, StickerLaptop } from 'components/Stickers/Stickers'
-import { COL1, COL2, companyAttributes, companyBreakdowns } from 'components/Home/Customers'
-import { useCustomers, Customer as CustomerType, CustomerPerson, PERSONAS, CURRENT_YC_BATCH } from 'hooks/useCustomers'
-import { IconArrowUpRight } from '@posthog/icons'
+import { StickerCoffee } from 'components/Stickers/Stickers'
+import { useCustomers, Customer as CustomerType } from 'hooks/useCustomers'
+import { IconArrowUpRight, IconChevronLeft, IconChevronRight } from '@posthog/icons'
 
-// add `featured: true` to useCustomers.ts (for filtering), then set the order below:
+// These customers show first in the table, in this order
 const CUSTOMER_ORDER = [
     'ycombinator',
     'mistralai',
@@ -35,125 +37,400 @@ const CUSTOMER_ORDER = [
     'posthog',
 ]
 
-// The board reuses the homepage's curated logo set, because the joke categories are written against it.
-const BOARD = [...COL1, ...COL2]
+const ROLES = [
+    { label: 'Engineering', blurb: 'Installed it before anyone asked.' },
+    { label: 'Product', blurb: 'Came for one funnel. Built forty.' },
+    { label: 'Marketing', blurb: 'Plenty of marketers ship code now.' },
+    { label: 'Founders', blurb: 'Picked the tool. Still refreshing the dashboard.' },
+]
 
-// Category pairs we can prove from the customer data, so nothing here is a second list to maintain.
-// A pair with fewer than three companies in column 1 hides itself — see components/CustomerShuffle.
-const ICP_BREAKDOWNS = {
-    aiPilled: { col1: 'AI-pilled', col2: 'AI-curious' },
-    yc: { col1: 'YC alumni', col2: 'Got funded without a demo day' },
-    currentYcBatch: { col1: `In YC right now (${CURRENT_YC_BATCH})`, col2: 'Already survived YC' },
-    startupProgram: { col1: 'Started on free startup credits', col2: 'Now pays us real money' },
-    outsideUS: { col1: 'Builds outside the US', col2: 'Builds in the US (or everywhere)' },
-    posthogAI: { col1: 'Asks PostHog AI', col2: 'Builds the funnel by hand' },
-    engineerLed: { col1: 'An engineer brought us in', col2: 'Somebody else brought us in' },
-    allIn: { col1: 'Uses six products or more', col2: 'Has treats left to find' },
-}
+// Three people per role, each in one role only. Each stat must be in that customer's case study.
+// Keep these people out of HERO_QUOTES so no quote shows twice
+const ROLE_RESULTS: (QuoteSource & { role: string; stat: string; label: string })[] = [
+    { role: 'Engineering', customer: 'cloudpeek', author: 'craig_hollington', stat: '10x', label: 'faster debugging' },
+    {
+        role: 'Engineering',
+        customer: 'phantom',
+        author: 'francesco_agosti',
+        stat: '90%',
+        label: 'fewer failed token transfers',
+    },
+    {
+        role: 'Engineering',
+        customer: 'adauris',
+        author: 'varun_sharma',
+        stat: '500%',
+        label: 'more landing page visits',
+    },
+    {
+        role: 'Product',
+        customer: 'ycombinator',
+        author: 'cat_li',
+        stat: '40%',
+        label: 'more messages sent, from one experiment',
+    },
+    {
+        role: 'Product',
+        customer: 'vendasta',
+        author: 'taric_santos',
+        stat: '50%',
+        label: 'less drop-off in onboarding',
+    },
+    {
+        role: 'Product',
+        customer: 'purplewave',
+        author: 'matt_amick',
+        product: 'surveys',
+        stat: '25%',
+        label: 'survey response rate, up from 14%',
+    },
+    {
+        role: 'Marketing',
+        customer: 'brainboard',
+        author: 'stephane_boghossian',
+        stat: '3.5x',
+        label: 'desktop conversion rate, from 20% to 70%',
+    },
+    {
+        role: 'Marketing',
+        customer: 'grantable',
+        author: 'evan_ralliss',
+        product: 'workflows',
+        stat: '10 min',
+        label: 'to set up a production workflow',
+    },
+    {
+        role: 'Marketing',
+        customer: '11x',
+        author: 'keith_fearon',
+        stat: '85%',
+        label: 'of API usage traced to one bad actor',
+    },
+    {
+        role: 'Founders',
+        customer: 'webshare',
+        author: 'utku_zihnioglu',
+        product: 'experiments',
+        stat: '26%',
+        label: 'more conversions from one call-to-action change',
+    },
+    {
+        role: 'Founders',
+        customer: 'hostai',
+        author: 'punn_kam',
+        product: 'ai_observability',
+        stat: '50%',
+        label: 'higher AI evaluation score',
+    },
+    {
+        role: 'Founders',
+        customer: '4dayweek',
+        author: 'phil_mcparlane',
+        stat: '4%',
+        label: 'more conversions from one A/B test',
+    },
+]
 
-const PERSONA_BLURBS: Record<string, string> = {
-    Engineering: 'Engineers get here first, because engineers exist first.',
-    Product: 'They arrived second and immediately asked for a funnel.',
-    Growth: 'Somebody has to find out where the users went.',
-    Marketing: 'The people who learned to code so they could stop filing tickets.',
-    Founders: 'Technical founders, mostly. They picked the tool and never left.',
-    Data: 'They were doing this before it was AI-pilled.',
-}
+// Panel cells draw a top and left border. The grid's negative margin hides the outer ones under the
+// panel's own border, so only the dividers between cells show, for any number of columns
+const PANEL_CLASS = 'paper-desk overflow-hidden rounded-lg border border-primary'
+const PANEL_GRID_CLASS = '-ml-px -mt-px grid'
+const PANEL_CELL_CLASS = 'border-l border-t border-primary'
 
-const LOGO_CLASS = 'h-8 w-auto max-w-[180px] object-contain fill-current'
-const QUOTES_SHOWN = 6
+// About PostHog as a whole, not one product
+const HERO_QUOTES: QuoteSource[] = [
+    { customer: 'kilocode', author: 'job_rietbergen', quote: 2 },
+    { customer: 'supabase', author: 'aleksi_immonen', quote: 1 },
+    { customer: 'arena', author: 'matt_hova', product: 'experiments' },
+    { customer: 'zealot', author: 'brandon_jakobson' },
+]
+
+const TOOLS_SHOWN = 5
 const HERO_ROTATE_MS = 8000
-// A quote has to fit on three lines at display size, or the hero stops being a hero.
-const HERO_MAX_CHARS = 150
+const HOG_IMAGE = 'https://res.cloudinary.com/dmukukwp6/image/upload/will_smith_hog_0248c8f94c.png'
+const NEWSPAPER_HOG_IMAGE = 'https://res.cloudinary.com/dmukukwp6/image/upload/newspaper_hog_f0dd8cda48.png'
 
-// ─────────────────────────────────────────────
-// Hero — a customer does the talking, not us
-// ─────────────────────────────────────────────
+// Same lookup as OSQuote: a product quote when `product` is set, otherwise `quotes[quote]`
+interface QuoteSource {
+    customer: string
+    author: string
+    quote?: number
+    product?: string
+}
 
-const HeroQuote = ({ people }: { people: CustomerPerson[] }): JSX.Element | null => {
+interface HeroPerson {
+    customer: CustomerType
+    author: string
+    name: string
+    role: string
+    image?: { thumb: string }
+    text: string
+}
+
+const resolveQuote = (
+    customers: Record<string, CustomerType>,
+    { customer: slug, author, quote = 0, product }: QuoteSource
+): HeroPerson | undefined => {
+    const customer = customers[slug]
+    const person = customer?.quotes?.[author]
+    const text = product ? person?.products?.[product] : person?.quotes?.[quote]
+    return customer && person && text
+        ? { customer, author, name: person.name, role: person.role, image: person.image, text }
+        : undefined
+}
+
+const HeroQuote = ({ people }: { people: HeroPerson[] }): JSX.Element => {
     const prefersReducedMotion = usePrefersReducedMotion()
     const [index, setIndex] = useState(0)
+    const [paused, setPaused] = useState(false)
 
     useEffect(() => {
-        if (prefersReducedMotion || people.length < 2) return
+        if (prefersReducedMotion || paused || people.length < 2) return
         const timer = setInterval(() => setIndex((i) => (i + 1) % people.length), HERO_ROTATE_MS)
         return () => clearInterval(timer)
-    }, [people.length, prefersReducedMotion])
+    }, [people.length, prefersReducedMotion, paused])
 
-    if (people.length === 0) return null
-    const person = people[index % people.length]
+    const step = (delta: number) => setIndex((i) => (i + delta + people.length) % people.length)
+    const person = people[index]
 
     return (
-        <div className="relative mb-8">
-            <StickerAi className="absolute -top-4 right-0 hidden size-16 rotate-12 @2xl:block" aria-hidden />
-            <p className="!mt-0 mb-2 text-sm font-semibold uppercase tracking-wide text-secondary">
-                We build for{' '}
-                <RoughAnnotation type="highlight" color="rgba(48, 164, 108, 0.2)" strokeWidth={1} padding={2}>
-                    <Link to="/handbook/who-we-build-for">AI-pilled software teams</Link>
-                </RoughAnnotation>
-            </p>
-            <blockquote
-                key={person.key}
-                className={`m-0 border-l-0 p-0 not-italic ${prefersReducedMotion ? '' : 'animate-slide-up-fade-in'}`}
+        <div className="@container not-prose mb-6">
+            <div
+                className="paper-desk rounded-lg border border-primary"
+                onMouseEnter={() => setPaused(true)}
+                onMouseLeave={() => setPaused(false)}
+                onFocus={() => setPaused(true)}
+                onBlur={() => setPaused(false)}
             >
-                <h1 className="m-0 text-balance text-2xl font-bold leading-tight tracking-tight @2xl:text-4xl @2xl:pr-20">
-                    “{person.quote}”
-                </h1>
-            </blockquote>
-            <div className="mt-3 flex items-center gap-2">
-                {person.image?.thumb && (
-                    <div className="size-9 overflow-hidden rounded-full bg-accent">
-                        <CloudinaryImage
-                            src={person.image.thumb as `https://res.cloudinary.com/${string}`}
-                            alt={person.name}
-                            imgClassName="size-9 object-cover object-center"
-                        />
+                <div className="flex flex-col gap-6 p-6 @2xl:flex-row @2xl:items-center @2xl:gap-8 @2xl:p-8">
+                    <div className="min-w-0 flex-1">
+                        <h1 className="mb-1 text-2xl font-bold tracking-tight">Customers</h1>
+                        <p className="mb-5 text-base text-secondary">
+                            We build for{' '}
+                            <RoughAnnotation
+                                type="highlight"
+                                color="rgba(48, 164, 108, 0.2)"
+                                strokeWidth={1}
+                                padding={2}
+                            >
+                                <Link to="/handbook/who-we-build-for" className="underline">
+                                    AI-pilled software teams
+                                </Link>
+                            </RoughAnnotation>
+                            . Here are some of them.
+                        </p>
+
+                        {person && (
+                            <div
+                                key={`${person.customer.slug}-${person.author}`}
+                                className={prefersReducedMotion ? '' : 'animate-slide-up-fade-in'}
+                            >
+                                <blockquote className="m-0 border-l-0 p-0 not-italic">
+                                    <p className="mb-4 text-balance text-2xl font-bold leading-tight tracking-tight @2xl:text-4xl">
+                                        &ldquo;{person.text}&rdquo;
+                                    </p>
+                                </blockquote>
+                                <div className="flex flex-wrap items-center gap-x-4 gap-y-2">
+                                    <div className="flex items-center gap-2">
+                                        {person.image?.thumb && (
+                                            <div className="size-9 overflow-hidden rounded-full bg-accent">
+                                                <CloudinaryImage
+                                                    src={person.image.thumb as `https://res.cloudinary.com/${string}`}
+                                                    alt={person.name}
+                                                    imgClassName="size-9 object-cover object-center"
+                                                />
+                                            </div>
+                                        )}
+                                        <p className="m-0 text-sm text-secondary">
+                                            <span className="font-semibold text-primary">{person.name}</span>,{' '}
+                                            {person.role}
+                                            <span className="sr-only"> at {person.customer.name}</span>
+                                        </p>
+                                    </div>
+                                    <div className="flex h-8 items-center border-l border-primary pl-4">
+                                        <CustomerLogo
+                                            customer={person.customer}
+                                            className="h-6 w-auto max-w-40 object-contain fill-current"
+                                        />
+                                    </div>
+                                </div>
+                            </div>
+                        )}
+
+                        {people.length > 1 && (
+                            <div className="mt-5 flex items-center gap-3">
+                                <OSButton
+                                    variant="secondary"
+                                    size="sm"
+                                    icon={<IconChevronLeft className="size-4" />}
+                                    onClick={() => step(-1)}
+                                    aria-label="Previous quote"
+                                />
+                                <div className="flex items-center gap-1.5">
+                                    {people.map((p, i) => (
+                                        <button
+                                            key={`${p.customer.slug}-${p.author}`}
+                                            type="button"
+                                            onClick={() => setIndex(i)}
+                                            aria-label={`Show quote ${i + 1} of ${people.length}`}
+                                            aria-current={i === index}
+                                            className={`size-2.5 rounded-full border transition-colors ${
+                                                i === index
+                                                    ? 'border-red bg-red dark:border-yellow dark:bg-yellow'
+                                                    : 'border-primary hover:bg-accent'
+                                            }`}
+                                        />
+                                    ))}
+                                </div>
+                                <OSButton
+                                    variant="secondary"
+                                    size="sm"
+                                    icon={<IconChevronRight className="size-4" />}
+                                    onClick={() => step(1)}
+                                    aria-label="Next quote"
+                                />
+                            </div>
+                        )}
                     </div>
-                )}
-                <p className="!my-0 text-sm text-secondary">
-                    <span className="font-semibold text-primary">{person.name}</span>, {person.role} at{' '}
-                    {person.customer.name}
-                </p>
-            </div>
-            {people.length > 1 && (
-                <div className="mt-3 flex gap-1.5">
-                    {people.map((p, i) => (
-                        <button
-                            key={p.key}
-                            onClick={() => setIndex(i)}
-                            aria-label={`Show the quote from ${p.name}`}
-                            aria-current={i === index % people.length}
-                            className={`h-1.5 w-6 rounded-full transition-colors ${
-                                i === index % people.length ? 'bg-primary' : 'bg-primary/20 hover:bg-primary/40'
-                            }`}
-                        />
-                    ))}
+
+                    <CloudinaryImage
+                        src={HOG_IMAGE}
+                        alt=""
+                        className="hidden shrink-0 @2xl:block @2xl:w-56"
+                        imgClassName="h-auto w-full"
+                    />
                 </div>
-            )}
+            </div>
         </div>
     )
 }
 
-// ─────────────────────────────────────────────
-// Table
-// ─────────────────────────────────────────────
+interface Story {
+    fields: { slug: string }
+    frontmatter: { title: string; date: string }
+}
+
+const LatestCaseStudy = ({ story, customer }: { story: Story; customer?: CustomerType }): JSX.Element => {
+    return (
+        <div className="@container not-prose mt-3">
+            <div className="paper-desk rounded-lg border border-primary">
+                <div className="flex flex-col gap-6 p-6 @2xl:flex-row @2xl:items-center @2xl:gap-8 @2xl:p-8">
+                    <div className="min-w-0 flex-1">
+                        <h2 className="mb-4 flex items-center gap-2 text-2xl font-bold tracking-tight">
+                            <StickerCoffee className="size-8 -rotate-6" aria-hidden />
+                            Hot off the press
+                        </h2>
+                        <Link
+                            to={story.fields.slug}
+                            state={{ newWindow: true }}
+                            className="mb-4 block text-balance text-2xl font-bold leading-tight tracking-tight text-primary hover:underline @2xl:text-3xl"
+                        >
+                            {story.frontmatter.title}
+                        </Link>
+                        <div className="flex flex-wrap items-center gap-x-4 gap-y-2">
+                            {customer && (
+                                <div className="flex h-8 items-center border-r border-primary pr-4">
+                                    <CustomerLogo
+                                        customer={customer}
+                                        className="h-6 w-auto max-w-40 object-contain fill-current"
+                                    />
+                                </div>
+                            )}
+                            <span className="text-sm text-secondary">{story.frontmatter.date}</span>
+                            <OSButton
+                                asLink
+                                to={story.fields.slug}
+                                state={{ newWindow: true }}
+                                variant="primary"
+                                size="sm"
+                                className="ml-auto"
+                            >
+                                Read the story
+                            </OSButton>
+                        </div>
+                    </div>
+
+                    <CloudinaryImage
+                        src={NEWSPAPER_HOG_IMAGE}
+                        alt=""
+                        className="hidden shrink-0 @2xl:block @2xl:w-40"
+                        imgClassName="h-auto w-full"
+                    />
+                </div>
+            </div>
+        </div>
+    )
+}
+
+const StoryLink = ({ slug, children }: { slug: string; children: React.ReactNode }) => (
+    <Link to={`/customers/${slug}`} state={{ newWindow: true }} className="group text-sm font-semibold">
+        {children} <IconArrowUpRight className="inline-block size-4 text-muted group-hover:text-primary" />
+    </Link>
+)
+
+const QuoteCard = ({ person, stat, label }: { person: HeroPerson; stat: string; label: string }) => (
+    <figure className={`m-0 flex flex-col gap-3 p-5 @2xl:p-6 ${PANEL_CELL_CLASS}`}>
+        <div className="flex items-start justify-between gap-3">
+            <div>
+                <p className="m-0 text-3xl font-bold leading-none tracking-tight text-primary @2xl:text-4xl">{stat}</p>
+                <p className="m-0 mt-1 text-sm text-secondary">{label}</p>
+            </div>
+            <div className="flex h-6 shrink-0 items-center">
+                <CustomerLogo customer={person.customer} className="h-5 w-auto max-w-24 object-contain fill-current" />
+            </div>
+        </div>
+        <blockquote className="m-0 border-l-0 p-0 text-sm not-italic leading-snug text-primary">
+            &ldquo;{person.text}&rdquo;
+        </blockquote>
+        <figcaption className="mt-auto pt-2">
+            <StoryLink slug={person.customer.slug}>Read the story</StoryLink>
+        </figcaption>
+    </figure>
+)
+
+const LogoWall = ({ customers }: { customers: CustomerType[] }) => (
+    <div className="grid grid-cols-2 gap-2 @xl:grid-cols-3 @3xl:grid-cols-6">
+        {customers.map((customer) => (
+            <Tooltip
+                key={customer.slug}
+                delay={0}
+                className="flex"
+                trigger={
+                    <div
+                        tabIndex={0}
+                        className="flex h-20 flex-1 items-center justify-center rounded border border-primary bg-light p-3 outline-none focus-visible:ring-2 focus-visible:ring-red dark:bg-dark"
+                    >
+                        <CustomerLogo
+                            customer={customer}
+                            className="h-7 w-auto max-w-full object-contain fill-current"
+                        />
+                    </div>
+                }
+            >
+                <p className="m-0 text-sm">
+                    {customer.notes || customer.name}
+                    {customer.yc && <span className="text-secondary"> · YC {customer.yc}</span>}
+                </p>
+            </Tooltip>
+        ))}
+    </div>
+)
 
 const CustomerLink = ({
     customer,
     hasCaseStudy,
     children,
-    className = 'group inline-flex h-full items-center',
 }: {
     customer: CustomerType
     hasCaseStudy: (slug: string) => boolean
     children: React.ReactNode
-    className?: string
 }) => {
     return hasCaseStudy(customer.slug) || customer.slug === 'posthog' ? (
         <Link
             to={customer.slug === 'posthog' ? '/blog/posthog-marketing' : `/customers/${customer.slug}`}
             state={{ newWindow: true }}
-            className={className}
+            wrapperClassName="flex max-w-full"
+            className="group inline-flex h-full max-w-full items-center"
         >
             {children}
         </Link>
@@ -163,51 +440,36 @@ const CustomerLink = ({
 }
 
 interface CustomerProps {
-    number: number
     customer: CustomerType
     hasCaseStudy: (slug: string) => boolean
 }
 
-const Customer = ({ number, customer, hasCaseStudy }: CustomerProps) => {
-    const renderLogo = () => {
-        if (!customer.logo) {
-            return <span>{customer.name}</span>
-        }
-
-        // Check if logo is a React component (single SVG format)
-        if (typeof customer.logo === 'function') {
-            const LogoComponent = customer.logo
-
-            return (
-                <CustomerLink customer={customer} hasCaseStudy={hasCaseStudy}>
-                    <LogoComponent className={LOGO_CLASS} />
-                </CustomerLink>
-            )
-        }
-
-        // Otherwise, it's the existing light/dark object format
-        return (
-            <CustomerLink customer={customer} hasCaseStudy={hasCaseStudy}>
-                <img src={customer.logo.light} alt={customer.name} className={`${LOGO_CLASS} dark:hidden`} />
-                <img src={customer.logo.dark} alt={customer.name} className={`${LOGO_CLASS} hidden dark:block`} />
-            </CustomerLink>
-        )
-    }
-
+const Customer = ({ customer, hasCaseStudy }: CustomerProps) => {
     return {
         key: customer.name,
         cells: [
-            { content: number },
             {
                 content: (
-                    <div className="flex flex-col gap-1">
-                        <div className="flex h-8 items-center">{renderLogo()}</div>
-                        <CustomerBadges customer={customer} />
+                    <div className="flex h-8 items-center">
+                        <CustomerLink customer={customer} hasCaseStudy={hasCaseStudy}>
+                            <CustomerLogo
+                                customer={customer}
+                                className="h-6 w-auto max-w-full object-contain fill-current"
+                            />
+                        </CustomerLink>
                     </div>
                 ),
                 className: '!p-4',
             },
-            { content: customer.toolsUsed?.join(', '), className: 'text-sm' },
+            {
+                content: (
+                    <span title={customer.toolsUsed?.join(', ')}>
+                        {customer.toolsUsed?.slice(0, TOOLS_SHOWN).join(', ')}
+                        {(customer.toolsUsed?.length || 0) > TOOLS_SHOWN && ', …'}
+                    </span>
+                ),
+                className: 'text-sm',
+            },
             {
                 content:
                     hasCaseStudy(customer.slug) || customer.slug === 'posthog' ? (
@@ -217,7 +479,19 @@ const Customer = ({ number, customer, hasCaseStudy }: CustomerProps) => {
                         </CustomerLink>
                     ) : null,
             },
-            { content: customer.notes || '', className: 'text-sm' },
+            {
+                content: (
+                    <div className="flex flex-col gap-1">
+                        {customer.notes}
+                        {customer.yc && (
+                            <span className="text-xs font-semibold uppercase tracking-wide leading-none text-orange dark:text-orange-dark">
+                                YC {customer.yc}
+                            </span>
+                        )}
+                    </div>
+                ),
+                className: 'text-sm',
+            },
         ],
     }
 }
@@ -233,75 +507,51 @@ const sortCustomers = (customers: CustomerType[]) => {
 }
 
 const columns = [
-    { name: '', width: 'auto', align: 'center' as const },
-    { name: 'Company name', width: 'minmax(150px,1fr)', align: 'left' as const },
+    { name: 'Company name', width: 'minmax(120px,180px)', align: 'left' as const },
     { name: 'Product(s) used', width: 'minmax(auto,250px)', align: 'left' },
     { name: 'Case study', width: 'minmax(auto,100px)', align: 'center' as const },
-    { name: 'Notes', width: 'minmax(auto,180px)', align: 'left' as const },
+    { name: 'Notes', width: 'minmax(180px,1fr)', align: 'left' as const },
 ]
 
 export default function Customers(): JSX.Element {
-    const { hasCaseStudy, isFeatured, customers: allCustomers, getPeople } = useCustomers()
-    const customers = useMemo(() => sortCustomers(Object.values(allCustomers)), [allCustomers])
-    const [filteredCustomers, setFilteredCustomers] = useState<any>(customers.filter((customer) => customer.featured))
-    const [persona, setPersona] = useState(PERSONAS[0].label)
-    const [showAllQuotes, setShowAllQuotes] = useState(false)
+    const { hasCaseStudy, customers: allCustomers } = useCustomers()
+    const customers = sortCustomers(Object.values(allCustomers))
+    const hasStory = (customer: CustomerType) => hasCaseStudy(customer.slug) || customer.slug === 'posthog'
+    const tableCustomers = customers.filter(hasStory)
+    const noStoryYet = customers.filter((customer) => !hasStory(customer))
+    const [filteredCustomers, setFilteredCustomers] = useState<any>(tableCustomers)
+    const [role, setRole] = useState(ROLES[0].label)
 
-    const icpAttributes = useMemo(() => {
-        const where = (test: (customer: CustomerType) => boolean) =>
-            BOARD.filter((slug) => allCustomers[slug] && test(allCustomers[slug]))
-        return {
-            aiPilled: where((customer) => !!customer.aiPilled),
-            yc: where((customer) => !!customer.yc),
-            currentYcBatch: where((customer) => customer.yc === CURRENT_YC_BATCH),
-            startupProgram: where((customer) => !!customer.startupProgram),
-            outsideUS: where((customer) => !!customer.region && customer.region !== 'US'),
-            posthogAI: where((customer) => !!customer.toolsUsedHandles?.includes('posthog_ai')),
-            engineerLed: where((customer) => !!customer.users?.includes('Engineering')),
-            allIn: where((customer) => (customer.toolsUsedHandles?.length || 0) >= 6),
+    const { stories } = useStaticQuery(graphql`
+        query {
+            stories: allMdx(
+                filter: { fields: { slug: { regex: "/^/customers/" } } }
+                sort: { order: DESC, fields: [frontmatter___date] }
+                limit: 1
+            ) {
+                nodes {
+                    fields {
+                        slug
+                    }
+                    frontmatter {
+                        title
+                        date(formatString: "MMMM D, YYYY")
+                    }
+                }
+            }
         }
-    }, [allCustomers])
+    `)
+    const [latestStory]: Story[] = stories.nodes
 
-    const people = useMemo(() => getPeople(), [allCustomers])
-    const heroPeople = useMemo(
-        () => people.filter((person) => (person.quote?.length || 0) <= HERO_MAX_CHARS).slice(0, 6),
-        [people]
+    const heroPeople = HERO_QUOTES.map((source) => resolveQuote(allCustomers, source)).filter(
+        (person): person is HeroPerson => !!person
     )
-    const personas = useMemo(
-        () =>
-            PERSONAS.map(({ label }) => ({
-                label,
-                people: people.filter((person) => person.personas.includes(label)),
-            })).filter(({ people: matched }) => matched.length > 0),
-        [people]
-    )
-    const selected = personas.find(({ label }) => label === persona) || personas[0]
-    const visibleQuotes = showAllQuotes ? selected?.people : selected?.people.slice(0, QUOTES_SHOWN)
-
-    // A quote per customer, so a card can upgrade itself from its `notes` line the day one arrives.
-    const peopleBySlug = useMemo(
-        () =>
-            people.reduce((acc, person) => {
-                if (!acc[person.customer.slug]) acc[person.customer.slug] = person
-                return acc
-            }, {} as Record<string, CustomerPerson>),
-        [people]
-    )
-
-    // The middle rung: companies we want to show off that have no case study. Their `notes` line
-    // carries the card until somebody gives us a quote.
-    const noStoryYet = useMemo(
-        () =>
-            BOARD.map((slug) => allCustomers[slug]).filter(
-                (customer) =>
-                    customer && customer.aiPilled && !hasCaseStudy(customer.slug) && customer.slug !== 'posthog'
-            ),
-        [allCustomers]
-    )
-
-    const founders = useMemo(
-        () => people.filter((person) => person.personas.includes('Founders')).slice(0, 3),
-        [people]
+    const selectedRole = ROLES.find(({ label }) => label === role) || ROLES[0]
+    const roleResults = ROLE_RESULTS.filter((result) => result.role === selectedRole.label).flatMap(
+        ({ stat, label, ...source }) => {
+            const person = resolveQuote(allCustomers, source)
+            return person ? [{ person, stat, label }] : []
+        }
     )
 
     const handleFilterChange = (filters: any) => {
@@ -323,205 +573,112 @@ export default function Customers(): JSX.Element {
                 <div className="@container w-full max-w-5xl mx-auto">
                     <HeroQuote people={heroPeople} />
 
-                    <CustomerShuffle
-                        companies={BOARD}
-                        breakdowns={{ ...ICP_BREAKDOWNS, ...companyBreakdowns }}
-                        attributes={{ ...icpAttributes, ...companyAttributes }}
-                        defaultBreakdown="aiPilled"
-                        showPicker
-                        className="mb-8"
+                    <CustomerLogos
+                        title="And a few hundred thousand more"
+                        subtitle="from a weekend project to the UK Government"
+                        scrolling
+                        reverse
+                        hideLink
+                        linkStories
                     />
 
-                    <h2 className="text-xl font-bold mb-1">Who brings PostHog in?</h2>
-                    <p className="!mt-0 mb-2">
-                        An engineer, almost always. Then everybody else turns up. Pick a job and read what that person
-                        said — one company can show up more than once, because Arena's engineer and Arena's marketer do
-                        not use the same half of PostHog.
-                    </p>
-                    <div className="flex flex-wrap gap-1 mb-3">
-                        {personas.map(({ label, people: matched }) => (
-                            <button
-                                key={label}
-                                onClick={() => {
-                                    setPersona(label)
-                                    setShowAllQuotes(false)
-                                }}
-                                className={`text-sm px-2 py-1 rounded border transition-colors ${
-                                    label === selected?.label
-                                        ? 'border-primary bg-accent font-semibold'
-                                        : 'border-transparent text-secondary hover:border-primary'
-                                }`}
-                            >
-                                {label} <span className="text-xs text-muted font-normal">{matched.length}</span>
-                            </button>
-                        ))}
-                    </div>
-                    {selected && (
-                        <>
-                            <p className="!mt-0 mb-3 text-secondary italic">{PERSONA_BLURBS[selected.label]}</p>
-                            <div className="grid grid-cols-1 @2xl:grid-cols-2 gap-4 [&_>div>div]:!max-w-none [&_>div>div]:!mb-0 [&_>div>div]:!flex-1 mb-3">
-                                {visibleQuotes?.map((person) => (
-                                    <div key={`${person.customer.slug}-${person.key}`} className="flex flex-col">
-                                        <OSQuote
-                                            customer={person.customer.slug}
-                                            author={person.key}
-                                            product={person.product}
-                                        />
-                                        {hasCaseStudy(person.customer.slug) && (
-                                            <Link
-                                                to={`/customers/${person.customer.slug}`}
-                                                state={{ newWindow: true }}
-                                                className="group text-sm mt-1"
-                                            >
-                                                Read the {person.customer.name} story{' '}
-                                                <IconArrowUpRight className="size-4 inline-block text-muted group-hover:text-primary" />
-                                            </Link>
-                                        )}
-                                    </div>
+                    <SectionLayout>
+                        <SectionHeader>
+                            <h2 className="mb-0 text-xl">Who brings PostHog in?</h2>
+                            <p className="mb-0 mt-1 text-base text-secondary">
+                                An engineer, usually. Then everybody else.
+                            </p>
+                        </SectionHeader>
+                        <div className={PANEL_CLASS}>
+                            <div className="flex flex-col gap-2 p-4 @2xl:flex-row @2xl:items-center @2xl:gap-4 @2xl:px-6">
+                                <div className="w-full max-w-md shrink-0">
+                                    <ToggleGroup
+                                        title="Filter by role"
+                                        hideTitle
+                                        value={selectedRole.label}
+                                        onValueChange={setRole}
+                                        options={ROLES.map(({ label }) => ({ label, value: label }))}
+                                    />
+                                </div>
+                                <p className="m-0 text-sm text-secondary">{selectedRole.blurb}</p>
+                            </div>
+                            <div className={`${PANEL_GRID_CLASS} grid-cols-1 @3xl:grid-cols-3`}>
+                                {roleResults.map(({ person, stat, label }) => (
+                                    <QuoteCard key={person.customer.slug} person={person} stat={stat} label={label} />
                                 ))}
                             </div>
-                            {selected.people.length > QUOTES_SHOWN && (
-                                <OSButton
-                                    onClick={() => setShowAllQuotes(!showAllQuotes)}
-                                    variant="secondary"
-                                    size="sm"
-                                    className="mb-8"
-                                >
-                                    {showAllQuotes ? 'Show fewer' : `Show all ${selected.people.length}`}
-                                </OSButton>
+                        </div>
+                    </SectionLayout>
+
+                    <SectionLayout className="!mb-4">
+                        <SectionHeader>
+                            <h2 className="mb-0 text-xl">Every case study, in a table</h2>
+                            <p className="mb-0 mt-1 text-base text-secondary">
+                                Filter it to read how they use different products.
+                            </p>
+                        </SectionHeader>
+                        <ViewerFilters
+                            availableFilters={[
+                                {
+                                    label: 'Product',
+                                    options: [
+                                        { label: 'Any', value: undefined },
+                                        ...Array.from(
+                                            new Set(
+                                                tableCustomers
+                                                    .filter((customer) => customer.toolsUsed?.length)
+                                                    .flatMap((customer) => customer.toolsUsed || [])
+                                            )
+                                        ).map((tool) => ({
+                                            label: tool,
+                                            value: tool,
+                                        })),
+                                    ],
+                                    filter: (obj, value) => obj['toolsUsed']?.includes(value),
+                                    operator: 'includes',
+                                },
+                                {
+                                    label: 'YC alum',
+                                    options: [
+                                        { label: 'Any', value: undefined },
+                                        { label: 'Yes', value: true },
+                                        { label: 'No', value: false },
+                                    ],
+                                    filter: (obj, value) => (value ? !!obj.yc : !obj.yc),
+                                    operator: 'equals',
+                                },
+                            ]}
+                            dataToFilter={tableCustomers}
+                            onFilterChange={handleFilterChange}
+                        />
+                        <OSTable
+                            className="mt-2"
+                            columns={columns}
+                            width="full"
+                            rows={(filteredCustomers || tableCustomers).map((customer: CustomerType) =>
+                                Customer({ customer, hasCaseStudy })
                             )}
-                        </>
+                        />
+                    </SectionLayout>
+
+                    {latestStory && (
+                        <LatestCaseStudy
+                            story={latestStory}
+                            customer={allCustomers[latestStory.fields.slug.split('/').pop() || '']}
+                        />
                     )}
 
                     {noStoryYet.length > 0 && (
-                        <>
-                            <h2 className="text-xl font-bold mb-1">Teams who have not written us a story yet</h2>
-                            <p className="!mt-0 mb-3">
-                                Shipping beats writing, and we respect that. Here is what they build while we wait for
-                                somebody to answer our email.
-                            </p>
-                            <CustomerCards
-                                customers={noStoryYet}
-                                people={peopleBySlug}
-                                hasCaseStudy={hasCaseStudy}
-                                className="mb-8"
-                            />
-                        </>
-                    )}
-
-                    <div className="mb-8 grid grid-cols-1 gap-3 @2xl:grid-cols-2">
-                        <div className="relative rounded border border-primary bg-accent p-4">
-                            <StickerLaptop className="absolute right-3 top-3 size-10 -rotate-6" aria-hidden />
-                            <h2 className="!mt-0 mb-1 pr-12 text-lg font-bold">One person, one laptop</h2>
-                            <p className="!mt-0 mb-2 text-[15px] text-secondary">
-                                Plenty of the names above started as a founder and a terminal. If that is you, do not
-                                write us a case study. Take the free credits and go build.
-                            </p>
-                            {founders.length > 0 && (
-                                <p className="!mt-0 mb-3 text-[15px] italic">
-                                    “{founders[0].quote}” —{' '}
-                                    <span className="not-italic">
-                                        {founders[0].name}, {founders[0].customer.name}
-                                    </span>
+                        <SectionLayout>
+                            <SectionHeader>
+                                <h2 className="mb-0 text-xl">Also on PostHog</h2>
+                                <p className="mb-0 mt-1 text-base text-secondary">
+                                    No case study yet. Hover a logo to read what they build.
                                 </p>
-                            )}
-                            <div className="flex flex-wrap gap-2">
-                                <OSButton asLink to="/startups" state={{ newWindow: true }} variant="primary" size="sm">
-                                    Startup program
-                                </OSButton>
-                                <OSButton
-                                    asLink
-                                    to="/students"
-                                    state={{ newWindow: true }}
-                                    variant="secondary"
-                                    size="sm"
-                                >
-                                    Students
-                                </OSButton>
-                            </div>
-                        </div>
-                        <div className="relative rounded border border-primary bg-accent p-4">
-                            <StickerCrown className="absolute right-3 top-3 size-10 rotate-6" aria-hidden />
-                            <h2 className="!mt-0 mb-1 pr-12 text-lg font-bold">Rather a lot of people</h2>
-                            <p className="!mt-0 mb-3 text-[15px] text-secondary">
-                                Airbus and the UK Government are on this page too. Procurement, security reviews, and
-                                the rest of it are somebody else's problem — ours.
-                            </p>
-                            <OSButton asLink to="/enterprise" state={{ newWindow: true }} variant="primary" size="sm">
-                                PostHog for enterprise
-                            </OSButton>
-                        </div>
-                    </div>
-
-                    <h2 className="text-xl font-bold mb-1">Everybody, in a table</h2>
-                    <p className="!mt-0">You can use the filters below to read how they use different products.</p>
-                    <ViewerFilters
-                        availableFilters={[
-                            {
-                                label: 'Product',
-                                options: [
-                                    { label: 'Any', value: undefined },
-                                    ...Array.from(
-                                        new Set(
-                                            customers
-                                                .filter((customer) => customer.toolsUsed?.length)
-                                                .flatMap((customer) => customer.toolsUsed || [])
-                                        )
-                                    ).map((tool) => ({
-                                        label: tool,
-                                        value: tool,
-                                    })),
-                                ],
-                                filter: (obj, value) => obj['toolsUsed']?.includes(value),
-                                operator: 'includes',
-                            },
-                            {
-                                label: 'Case study',
-                                options: [
-                                    { label: 'Any', value: undefined },
-                                    { label: 'Yes', value: true },
-                                    { label: 'No', value: false },
-                                ],
-                                filter: (obj, value) => (value ? hasCaseStudy(obj.slug) : !hasCaseStudy(obj.slug)),
-                                operator: 'equals',
-                            },
-                            {
-                                label: 'Badge',
-                                options: [
-                                    { label: 'Any', value: undefined },
-                                    { label: 'AI-pilled', value: 'aiPilled' },
-                                    { label: 'YC alum', value: 'yc' },
-                                ],
-                                filter: (obj, value) => !!obj[value],
-                                operator: 'equals',
-                            },
-                            {
-                                label: 'Featured',
-                                options: [
-                                    { label: 'Any', value: undefined },
-                                    { label: 'Yes', value: true },
-                                    { label: 'No', value: false },
-                                ],
-                                filter: (obj, value) => (value ? isFeatured(obj.slug) : !isFeatured(obj.slug)),
-                                operator: 'equals',
-                                initialValue: true,
-                            },
-                        ]}
-                        dataToFilter={customers}
-                        onFilterChange={handleFilterChange}
-                    />
-                    <OSTable
-                        className="mt-2"
-                        columns={columns}
-                        width="full"
-                        rows={(filteredCustomers || customers).map((customer: any, index: number) => {
-                            return Customer({
-                                number: index + 1,
-                                customer,
-                                hasCaseStudy,
-                            })
-                        })}
-                    />
+                            </SectionHeader>
+                            <LogoWall customers={noStoryYet} />
+                        </SectionLayout>
+                    )}
                 </div>
             </ReaderView>
         </>
