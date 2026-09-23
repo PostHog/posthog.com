@@ -1,0 +1,57 @@
+---
+title: Link releases for PHP
+showStepsToc: true
+---
+
+import ReleaseIdGitHubActions from './_snippets/release-id-github-actions.mdx'
+import ReleaseIdApp from './_snippets/release-id-app.mdx'
+import ReleaseIdVerify from './_snippets/release-id-verify.mdx'
+import ReleaseIdManual from './_snippets/release-id-manual.mdx'
+
+PHP apps run their source code directly, so there are no source maps to upload. Stack traces already show the right files and lines.
+
+To link each exception to the [release](/docs/error-tracking/releases) that produced it, create the release when you deploy and give its ID to your app. The [PHP SDK](/docs/error-tracking/installation/php) reads the ID from the `POSTHOG_RELEASE_ID` environment variable and sends it as `$release_id` on every event.
+
+<Steps>
+
+<Step title="Update the SDK" badge="required">
+
+Install [posthog-php 4.14.0](https://github.com/PostHog/posthog-php/releases/tag/4.14.0) or later:
+
+```bash
+composer require "posthog/posthog-php:^4.14"
+```
+
+</Step>
+
+<Step title="Resolve the release in GitHub Actions" badge="required">
+
+<ReleaseIdGitHubActions />
+
+If you don't use GitHub Actions, see [without GitHub Actions](#without-github-actions).
+
+</Step>
+
+<Step title="Give the release ID to your app" badge="required">
+
+<ReleaseIdApp />
+
+If you run PHP-FPM, pass the variable through to its workers. PHP-FPM removes environment variables from its workers by default. Add this line to your pool config, for example `www.conf`:
+
+```ini
+env[POSTHOG_RELEASE_ID] = $POSTHOG_RELEASE_ID
+```
+
+</Step>
+
+<Step checkpoint title="Verify the release">
+
+<ReleaseIdVerify />
+
+</Step>
+
+</Steps>
+
+## Without GitHub Actions
+
+<ReleaseIdManual />

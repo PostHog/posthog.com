@@ -6039,6 +6039,18 @@ export const docsMenu = {
                             url: '/docs/error-tracking/upload-debug-symbols/kmp',
                         },
                         {
+                            name: 'PHP',
+                            url: '/docs/error-tracking/upload-source-maps/php',
+                        },
+                        {
+                            name: 'Python',
+                            url: '/docs/error-tracking/upload-source-maps/python',
+                        },
+                        {
+                            name: 'Ruby',
+                            url: '/docs/error-tracking/upload-source-maps/ruby',
+                        },
+                        {
                             name: 'Rust',
                             url: '/docs/error-tracking/upload-source-maps/rust',
                         },

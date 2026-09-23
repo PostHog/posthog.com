@@ -1,0 +1,50 @@
+Resolve the release in the workflow that deploys your app to production. Resolving creates the release if it doesn't exist yet, so skip it for pull requests, preview builds, and local development. When `POSTHOG_RELEASE_ID` isn't set, the SDK sends no release ID.
+
+Add the `PostHog/resolve-release` action before the step that builds your app:
+
+```yaml
+name: Deploy
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: Resolve PostHog release
+        id: posthog-release
+        uses: PostHog/resolve-release@v1
+        with:
+          api-key: ${{ secrets.POSTHOG_CLI_API_KEY }}
+          project-id: ${{ vars.POSTHOG_PROJECT_ID }}
+          # host: https://eu.posthog.com # Required only for EU cloud
+
+      - name: Build image
+        env:
+          POSTHOG_RELEASE_ID: ${{ steps.posthog-release.outputs.release-id }}
+        run: docker build --build-arg POSTHOG_RELEASE_ID="$POSTHOG_RELEASE_ID" --tag my-app .
+
+      # Deploy the image
+```
+
+The action finds the release for this commit, or creates it, and puts its ID in the `release-id` output. It names the release after the repository and uses the commit SHA as the version. If the same workflow also uploads source maps with that name and version, both steps use the same release.
+
+<div className="overflow-x-hidden">
+
+| **Input** | **Required** | **Description** |
+| --- | --- | --- |
+| `api-key` | Yes | Personal API key with the error tracking write scope. Get it from your [personal API key settings](https://app.posthog.com/settings/user-api-keys#variables) |
+| `project-id` | Yes | PostHog project ID. Get it from your [project settings](https://app.posthog.com/settings/project#variables) |
+| `host` | No | PostHog host URL. Defaults to US cloud. For EU cloud, set it to `https://eu.posthog.com` |
+| `release-name` | No | Release name. Defaults to the repository name |
+| `release-version` | No | Release version. Defaults to the commit SHA |
+
+</div>
+
+To keep deploying when PostHog can't be reached, add `continue-on-error: true` and `timeout-minutes: 5` to the step. If the step fails, `release-id` is empty, and the SDK treats an empty `POSTHOG_RELEASE_ID` as unset.
+
+See the [action's README](https://github.com/PostHog/resolve-release#readme) for all inputs and outputs, and for how to share one release across several jobs.

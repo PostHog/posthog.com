@@ -1,0 +1,16 @@
+If you deploy with another CI system or a script, resolve the release with the [PostHog CLI](/docs/error-tracking/upload-source-maps/cli) 0.12.0 or later. Run these commands in your production deploy, from a checkout of your repository:
+
+```bash
+npm install -g @posthog/cli
+
+# Set these from your CI secrets
+export POSTHOG_CLI_API_KEY=<personal_api_key>
+export POSTHOG_CLI_PROJECT_ID=<project_id>
+# export POSTHOG_CLI_HOST=https://eu.posthog.com # Required only for EU cloud
+
+export POSTHOG_RELEASE_ID=$(posthog-cli release resolve)
+```
+
+The command prints only the release ID. It reads the repository name and commit from Git. To choose your own, add `--release-name` and `--release-version`.
+
+Then give `POSTHOG_RELEASE_ID` to your app when it starts, for example with `docker build --build-arg POSTHOG_RELEASE_ID="$POSTHOG_RELEASE_ID"`.

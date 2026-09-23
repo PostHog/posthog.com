@@ -1,0 +1,57 @@
+---
+title: Link releases for Ruby
+showStepsToc: true
+---
+
+import ReleaseIdGitHubActions from './_snippets/release-id-github-actions.mdx'
+import ReleaseIdApp from './_snippets/release-id-app.mdx'
+import ReleaseIdVerify from './_snippets/release-id-verify.mdx'
+import ReleaseIdManual from './_snippets/release-id-manual.mdx'
+
+Ruby apps run their source code directly, so there are no source maps to upload. Stack traces already show the right files and lines.
+
+To link each exception to the [release](/docs/error-tracking/releases) that produced it, create the release when you deploy and give its ID to your app. The [Ruby SDK](/docs/error-tracking/installation/ruby) reads the ID from the `POSTHOG_RELEASE_ID` environment variable and sends it as `$release_id` on every event. This also applies to [Rails](/docs/error-tracking/installation/ruby-on-rails) apps, since `posthog-rails` uses the Ruby SDK.
+
+<Steps>
+
+<Step title="Update the SDK" badge="required">
+
+Update to [posthog-ruby 3.25.0](https://github.com/PostHog/posthog-ruby/releases/tag/posthog-ruby-v3.25.0) or later:
+
+```bash
+bundle update posthog-ruby
+```
+
+On Rails, update `posthog-rails` in the same command. Each `posthog-rails` version depends on one exact `posthog-ruby` version:
+
+```bash
+bundle update posthog-rails posthog-ruby
+```
+
+</Step>
+
+<Step title="Resolve the release in GitHub Actions" badge="required">
+
+<ReleaseIdGitHubActions />
+
+If you don't use GitHub Actions, see [without GitHub Actions](#without-github-actions).
+
+</Step>
+
+<Step title="Give the release ID to your app" badge="required">
+
+<ReleaseIdApp />
+
+</Step>
+
+<Step checkpoint title="Verify the release">
+
+<ReleaseIdVerify />
+
+</Step>
+
+</Steps>
+
+## Without GitHub Actions
+
+<ReleaseIdManual />

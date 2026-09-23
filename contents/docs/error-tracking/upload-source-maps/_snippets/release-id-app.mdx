@@ -1,0 +1,10 @@
+The app must have `POSTHOG_RELEASE_ID` in its environment when it starts. The SDK reads it once, when you create the PostHog client.
+
+If you deploy a Docker image, turn the build argument into an environment variable. Add these lines to the stage of your Dockerfile that runs the app:
+
+```dockerfile
+ARG POSTHOG_RELEASE_ID
+ENV POSTHOG_RELEASE_ID=$POSTHOG_RELEASE_ID
+```
+
+If you don't build an image, set `POSTHOG_RELEASE_ID` the same way you set your app's other environment variables, with the value of the `release-id` output.
