@@ -59,6 +59,18 @@ logger_provider.add_log_record_processor(
 logging.getLogger().addHandler(LoggingHandler(logger_provider=logger_provider))
 ```
 
+The root logger receives records from every logger that propagates to it. If your app logs private data, replace the last line with a handler on a reviewed logger:
+
+```python
+operations_logger = logging.getLogger("my-app.operations")
+operations_logger.setLevel(logging.WARNING)
+operations_logger.addHandler(
+    LoggingHandler(level=logging.WARNING, logger_provider=logger_provider)
+)
+```
+
+Send only reviewed operational messages through that logger. Remove or mask prompts, response bodies, request headers, and tokens before logging. Check both the message and any `extra` attributes.
+
 Alternatively, you can pass the API key as a query parameter:
 
 ```python
@@ -79,11 +91,14 @@ import logging
 logging.basicConfig(level=logging.INFO)
 
 # Use standard Python logging
-logger = logging.getLogger("my-app")
-logger.info("User action", extra={"userId": "123", "action": "login"})
+logger = logging.getLogger("my-app.operations")
 logger.warning("Deprecated API used", extra={"endpoint": "/old-api"})
 logger.error("Database connection failed", extra={"error": "Connection timeout"})
 ```
+
+The selected logger example exports warnings and errors. To [link logs to a person](/docs/logs/link-person), add `posthogDistinctId` as an attribute.
+
+With the selected handler, send person-linked warnings or errors through `my-app.operations`. The linked guide's `INFO` example won't export with this setup.
 
 </Step>
 
