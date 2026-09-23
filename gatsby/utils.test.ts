@@ -7,7 +7,7 @@
 import assert from 'node:assert/strict'
 import { describe, test } from 'node:test'
 
-import { getPublicID } from './utils.ts'
+import { EXTENSION_INJECTED_EXCEPTION, getPublicID } from './utils.ts'
 
 const BASE = 'https://res.cloudinary.com/dmukukwp6/image/upload/'
 
@@ -50,5 +50,30 @@ describe('getPublicID', () => {
 
     test('keeps a public ID that has no file extension', () => {
         assert.equal(getPublicID(`${BASE}q_auto/posthog.com/contents/images/hog`), 'posthog.com/contents/images/hog')
+    })
+})
+
+describe('EXTENSION_INJECTED_EXCEPTION', () => {
+    test('matches the globals that browser extensions inject', () => {
+        for (const message of [
+            "undefined is not an object (evaluating 'window.ethereum.selectedAddress = undefined')",
+            "undefined is not an object (evaluating 'window.ethereum.emit')",
+            "undefined is not an object (evaluating 'window.__firefox__.reader')",
+            "Can't find variable: __firefox__",
+            'undefined is not an object (evaluating \'(yield this.sendExtensionMessage("getUrlAutofillTargetingRules")).result\')',
+        ]) {
+            assert.ok(EXTENSION_INJECTED_EXCEPTION.test(message), message)
+        }
+    })
+
+    test('keeps exceptions that posthog.com can act on', () => {
+        for (const message of [
+            'Loading chunk 2286 failed.',
+            "Cannot read properties of null (reading 'style')",
+            'page resources for /docs/privacy/browser-extension not found. Not rendering React',
+            'Script error.',
+        ]) {
+            assert.equal(EXTENSION_INJECTED_EXCEPTION.test(message), false, message)
+        }
     })
 })

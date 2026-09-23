@@ -6,6 +6,7 @@ import fs from 'fs'
 import { fetchAndProcessMCPTools, writeMCPToolsToFile } from './utils/fetchMCPTools'
 import { fetchScoutSkills, writeScoutSkillsToFile } from './utils/fetchScoutSkills'
 import { enrichVideos } from './enrichVideos'
+import { EXTENSION_INJECTED_EXCEPTION } from './utils'
 
 export const PAGEVIEW_CACHE_KEY = 'onPreBootstrap@@posthog-pageviews'
 export const MCP_TOOLS_CACHE_KEY = 'onPreBootstrap@@mcp-tools'
@@ -82,13 +83,23 @@ posthog.init("${process.env.GATSBY_POSTHOG_API_KEY}", {
     error_tracking: {
         __capturePostHogExceptions: true,
     },
-    // Drop exceptions coming from local dev servers so developers' local
-    // exceptions (e.g. Gatsby dev-server ChunkLoadErrors on hot recompiles)
-    // don't pollute production error tracking. Real users are never on localhost.
+    // Drop exceptions we know are not ours. Local dev servers, because developers' local
+    // exceptions (e.g. Gatsby dev-server ChunkLoadErrors on hot recompiles) must not pollute
+    // production error tracking, and real users are never on localhost. Browser extensions,
+    // because their injected scripts throw on globals that posthog.com never reads.
     before_send: function (event) {
+        if (!event || event.event !== '$exception') {
+            return event
+        }
         var hostname = window.location.hostname
-        if (event && event.event === '$exception' && (hostname === 'localhost' || hostname === '127.0.0.1')) {
+        if (hostname === 'localhost' || hostname === '127.0.0.1') {
             return null
+        }
+        var exceptions = (event.properties && event.properties.$exception_list) || []
+        for (var i = 0; i < exceptions.length; i++) {
+            if (${EXTENSION_INJECTED_EXCEPTION}.test(exceptions[i].value || '')) {
+                return null
+            }
         }
         return event
     },

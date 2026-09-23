@@ -43,3 +43,10 @@ export const getPublicID = (image: string) => {
     const extension = imagePath.lastIndexOf('.')
     return extension > imagePath.lastIndexOf('/') ? imagePath.substring(0, extension) : imagePath
 }
+
+// Browser extensions inject scripts into every page they open. When one of those scripts throws,
+// posthog-js autocapture sees it through window.onerror with a single "global code" frame, so the
+// page path is the only thing that separates one report from the next and each new path becomes a
+// new error tracking issue. posthog.com reads none of these globals, so nothing on the page is
+// broken and there is nothing to fix. Match the injected global, not the message around it.
+export const EXTENSION_INJECTED_EXCEPTION = /window\.ethereum|__firefox__|sendExtensionMessage\(/
