@@ -209,6 +209,20 @@ Each plan can have a list of features, and a price.
 Features are used to infer which features are available in the product, for a customer on that plan.
 You can manually change the plan for a customer by updating the `plans_map` in the billing admin panel.
 
+### Extending a customer's events retention
+
+Organizations created from November 1, 2026 get 2 years of events retention on paid plans. A customer on a platform package (Boost, Scale, or Enterprise) can ask for a longer window, up to 7 years. There are two ways to grant one.
+
+**One project.** In the PostHog Django admin, open "Team events retention grants" and add a grant for the project with the number of months and a note saying who asked and why. The project's window updates as soon as you save, and stays at the larger of the grant and the plan window. Delete the grant to end it.
+
+**The whole organization.** In the billing admin, open the customer and add an entry to `feature_overrides`:
+
+```json
+{ "key": "product_analytics_data_retention", "limit": 7, "unit": "year", "reason": "Requested by ... on ..." }
+```
+
+The window updates on the next feature sync, within the hour. Use `year` as the unit. The override stays when the customer cancels their package, so remove it when the package ends.
+
 ### Paid features for employee side projects
 
 Employees can get access to paid features (like Boost) on personal or side projects. Ask in #team-billing with your organization ID and someone can set this up. There are two approaches for platform packages:
