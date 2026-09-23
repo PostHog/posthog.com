@@ -8,30 +8,25 @@ import { ProductPanel } from './ProductPanel'
 import { Cart } from './Cart'
 import { getProductMetafieldByNamespace } from './utils'
 import HeaderBar from 'components/OSChrome/HeaderBar'
-import ScrollArea from 'components/RadixUI/ScrollArea'
-import { Accordion } from 'components/RadixUI/Accordion'
+import ReaderView from 'components/ReaderView'
+import ViewerFilters from 'components/Viewer/ViewerFilters'
 import { useWindow } from '../../context/Window'
-import { getProseClasses } from '../../constants'
-import AddressBar from 'components/OSChrome/AddressBar'
 import Fuse from 'fuse.js'
 import { useApp } from '../../context/App'
 import OrderHistory from 'components/Merch/OrderHistory'
 import { useUser } from 'hooks/useUser'
 import MobileDrawer from 'components/MobileDrawer'
 import { useCartStore } from './store'
-import Link from 'components/Link'
 
-// Category configuration with icons and display order
-type CategoryKey = 'all' | 'Apparel' | 'Stickers' | 'Goods' | 'Novelty'
+// Category configuration with display order
+type CategoryKey = 'Apparel' | 'Stickers' | 'Goods' | 'Novelty'
 
-const categoryConfig: Record<CategoryKey, { label: string; icon: string; color: string; order: number; slug: string }> =
-    {
-        all: { label: 'All products', icon: 'IconShop', color: 'blue', order: 1, slug: 'all' },
-        Apparel: { label: 'Apparel', icon: 'IconShirt', color: 'purple', order: 2, slug: 'apparel' },
-        Stickers: { label: 'Stickers', icon: 'IconSticker', color: 'yellow', order: 3, slug: 'stickers' },
-        Goods: { label: 'Goods', icon: 'IconMug', color: 'orange', order: 4, slug: 'goods' },
-        Novelty: { label: 'Novelty', icon: 'IconCouch', color: 'teal', order: 5, slug: 'novelty' },
-    }
+const categoryConfig: Record<CategoryKey, { label: string; order: number; slug: string }> = {
+    Apparel: { label: 'Apparel', order: 1, slug: 'apparel' },
+    Stickers: { label: 'Stickers', order: 2, slug: 'stickers' },
+    Goods: { label: 'Goods', order: 3, slug: 'goods' },
+    Novelty: { label: 'Novelty', order: 4, slug: 'novelty' },
+}
 
 type CollectionProps = {
     pageContext: CollectionPageContext
@@ -40,6 +35,24 @@ type CollectionProps = {
 // Helper function to get product by handle
 function getProductFromHandle(products: any[], handle: string) {
     return products.find((p) => p.handle === handle) || null
+}
+
+// Category of a product, from its metafield if it has one, otherwise from its category or type
+function getProductCategory(product: any): string | undefined {
+    const metafieldCategory = getProductMetafieldByNamespace(product, 'product', 'category')
+    if (typeof metafieldCategory === 'string') {
+        return metafieldCategory
+    }
+    const directCategorySearch = product.metafields?.find((m: any) => m.key === 'category')
+    if (typeof directCategorySearch?.value === 'string') {
+        return directCategorySearch.value
+    }
+    return product.category?.name || product.type
+}
+
+function getProductCategorySlug(product: any): string | undefined {
+    const category = getProductCategory(product)
+    return category ? categoryConfig[category as CategoryKey]?.slug : undefined
 }
 
 // Helper function to update URL without triggering navigation
@@ -59,99 +72,12 @@ function updateURL(params: { product?: string; state?: string; category?: string
         if (params.state) {
             url.searchParams.set('state', params.state)
         }
-        if (params.category && params.category !== 'all') {
-            url.searchParams.set(
-                'category',
-                categoryConfig[params.category as CategoryKey]?.slug || params.category.toLowerCase()
-            )
+        if (params.category) {
+            url.searchParams.set('category', params.category)
         }
 
         window.history.pushState({}, '', url.toString())
     }
-}
-
-// Add inline SidebarContent component (from Explorer)
-interface AccordionItem {
-    title: string
-    content: React.ReactNode
-}
-
-const leftSidebarContent = [
-    {
-        title: 'About our merch',
-        content: (
-            <>
-                <p className="text-sm mb-2">
-                    A tech startup with merch you actually want to wear? Now that's a novel idea...
-                </p>
-                <p className="text-sm mb-0">We won't stop until our merch store reaches product-market fit.</p>
-            </>
-        ),
-    },
-    {
-        title: 'Shipping',
-        content: (
-            <>
-                <p className="prose dark:prose-invert text-primary text-sm mb-2">
-                    Merch is shipped from Ohio via our fulfillment partner,{' '}
-                    <a href="https://www.micromerch.com/" target="_blank" rel="noopener noreferrer">
-                        MicroMerch
-                    </a>
-                    .
-                </p>
-                <p>
-                    <strong>Estimated shipping times:</strong>
-                </p>
-                <div className="grid grid-cols-2 gap-2 mb-2">
-                    <strong>Within the US:</strong>
-                    <span>1 week</span>
-                    <strong>Outside the US:</strong>
-                    <span>2 weeks</span>
-                </div>
-            </>
-        ),
-    },
-    {
-        title: 'Returns & cancellations',
-        content: (
-            <>
-                <p>
-                    Returns?? We've literally never had a return. Not sure if it's because our products are that awesome
-                    or because we don't have an official return policy.
-                </p>
-                <p>
-                    But if you need to cancel or return something, you can{' '}
-                    <Link to="/merch/orders" state={{ newWindow: true }} className="font-semibold underline">
-                        look up your order
-                    </Link>{' '}
-                    and handle it yourself.
-                </p>
-            </>
-        ),
-    },
-]
-
-const SidebarContent = ({ content }: { content: React.ReactNode | AccordionItem[] }): JSX.Element | null => {
-    if (!content) return null
-
-    if (Array.isArray(content)) {
-        return (
-            <Accordion
-                data-scheme="primary"
-                type="multiple"
-                className="[&>*:first-child_button]:!pt-0"
-                triggerClassName="!text-sm !font-semibold"
-                contentClassName="!text-sm [&_p]:!text-sm"
-                items={content.map((item, index) => ({
-                    value: `item-${index}`,
-                    trigger: item.title,
-                    content: item.content,
-                }))}
-            />
-        )
-    }
-
-    return <>{content}</>
 }
 
 const defaultAsideWidth = 396
@@ -161,7 +87,7 @@ export default function Collection(props: CollectionProps): React.ReactElement {
     const [selectedProduct, setSelectedProduct] = useState<any>(null)
     const [cartIsOpen, setCartIsOpen] = useState(false)
     const [orderHistoryIsOpen, setOrderHistoryIsOpen] = useState(false)
-    const [selectedCategory, setSelectedCategory] = useState<string>('all')
+    const [selectedCategory, setSelectedCategory] = useState<string | undefined>(undefined)
     const [hasInitialized, setHasInitialized] = useState(false)
     const [searchQuery, setSearchQuery] = useState('')
     const [asideWidth, setAsideWidth] = useState(defaultAsideWidth)
@@ -173,17 +99,16 @@ export default function Collection(props: CollectionProps): React.ReactElement {
     const addToCart = useCartStore((state) => state.update)
     const hasProcessedAddToCart = useRef(false)
 
-    const currentPath = appWindow?.path?.replace(/^\//, '') || '' // Remove leading slash, default to empty string
     const products = pageContext.productsForCurrentPage
     const transformedProducts = useMemo(() => products?.map((p) => getProduct(p)), [products])
     const fuse = useMemo(
         () =>
-            new Fuse(products, {
+            new Fuse(transformedProducts || [], {
                 keys: ['title', 'description', 'id'],
                 includeMatches: true,
                 threshold: 0.3,
             }),
-        [products]
+        [transformedProducts]
     )
 
     // Initialize state from URL parameters on mount only
@@ -192,21 +117,9 @@ export default function Collection(props: CollectionProps): React.ReactElement {
             const urlParams = new URLSearchParams(window.location.search)
             const productHandle = urlParams.get('product')
             const state = urlParams.get('state')
-            const category = urlParams.get('category')
             const addProductHandle = urlParams.get('add')
             const variantId = urlParams.get('variant')
             const quantity = parseInt(urlParams.get('qty') || '1', 10) || 1
-
-            // Handle category parameter
-            if (category) {
-                // Find the category key that matches the slug
-                const properCategory = Object.entries(categoryConfig).find(
-                    ([_, config]) => config.slug === category.toLowerCase()
-                )?.[0]
-                if (properCategory && categoryConfig[properCategory as CategoryKey]) {
-                    setSelectedCategory(properCategory)
-                }
-            }
 
             // Handle add to cart parameter (only once per page load)
             if (addProductHandle && !hasProcessedAddToCart.current) {
@@ -267,54 +180,33 @@ export default function Collection(props: CollectionProps): React.ReactElement {
         }
     }, [selectedProduct, cartIsOpen, selectedCategory, hasInitialized])
 
-    // Extract unique categories from products and create selectOptions
-    const selectOptions = useMemo(() => {
+    // Only offer the categories that the products of this collection use
+    const availableFilters = useMemo(() => {
         const foundCategories = new Set<string>()
 
-        // Always include "all" as the default
-        foundCategories.add('all')
-
-        // Extract categories from products
         transformedProducts?.forEach((product) => {
-            // Try metafield first (product namespace, category key)
-            const metafieldCategory = getProductMetafieldByNamespace(product, 'product', 'category')
-            if (metafieldCategory && typeof metafieldCategory === 'string') {
-                foundCategories.add(metafieldCategory)
-            }
-            // Try the direct search if namespace search fails
-            else {
-                const directCategorySearch = product.metafields?.find((m) => m.key === 'category')
-                if (directCategorySearch && typeof directCategorySearch.value === 'string') {
-                    foundCategories.add(directCategorySearch.value)
-                }
-                // Fall back to product.category.name if available
-                else if (product.category?.name) {
-                    foundCategories.add(product.category.name)
-                }
-                // Fall back to product.type if available
-                else if (product.type) {
-                    foundCategories.add(product.type)
-                }
+            const category = getProductCategory(product)
+            if (category && categoryConfig[category as CategoryKey]) {
+                foundCategories.add(category)
             }
         })
 
-        // Filter to only include configured categories and sort by order
-        const categoryList = Array.from(foundCategories)
-            .filter((category) => categoryConfig[category as CategoryKey]) // Only include configured categories
-            .sort((a, b) => categoryConfig[a as CategoryKey].order - categoryConfig[b as CategoryKey].order) // Sort by configured order
+        const categoryList = Array.from(foundCategories).sort(
+            (a, b) => categoryConfig[a as CategoryKey].order - categoryConfig[b as CategoryKey].order
+        )
 
         return [
             {
-                label: 'Categories',
-                items: categoryList.map((category) => {
-                    const config = categoryConfig[category as CategoryKey]
-                    return {
-                        value: category,
-                        label: config.label,
-                        icon: config.icon,
-                        color: config.color,
-                    }
-                }),
+                label: 'Category',
+                options: [
+                    { label: 'All products', value: undefined },
+                    ...categoryList.map((category) => ({
+                        label: categoryConfig[category as CategoryKey].label,
+                        value: categoryConfig[category as CategoryKey].slug,
+                    })),
+                ],
+                filter: (product: any, value: any) => getProductCategorySlug(product) === value,
+                operator: 'equals',
             },
         ]
     }, [transformedProducts])
@@ -323,29 +215,8 @@ export default function Collection(props: CollectionProps): React.ReactElement {
     const filteredProducts = useMemo(() => {
         let products = transformedProducts
 
-        // First filter by category
-        if (selectedCategory !== 'all') {
-            products = products?.filter((product) => {
-                // Try metafield first (product namespace, category key)
-                const metafieldCategory = getProductMetafieldByNamespace(product, 'product', 'category')
-                if (metafieldCategory && typeof metafieldCategory === 'string') {
-                    return metafieldCategory === selectedCategory
-                }
-                // Try direct search for category key regardless of namespace
-                const directCategorySearch = product.metafields?.find((m) => m.key === 'category')
-                if (directCategorySearch && typeof directCategorySearch.value === 'string') {
-                    return directCategorySearch.value === selectedCategory
-                }
-                // Fall back to product.category.name
-                if (product.category?.name) {
-                    return product.category.name === selectedCategory
-                }
-                // Fall back to product.type
-                if (product.type) {
-                    return product.type === selectedCategory
-                }
-                return false
-            })
+        if (selectedCategory) {
+            products = products?.filter((product) => getProductCategorySlug(product) === selectedCategory)
         }
 
         if (searchQuery.trim() !== '' && products) {
@@ -353,7 +224,7 @@ export default function Collection(props: CollectionProps): React.ReactElement {
         }
 
         return products
-    }, [transformedProducts, selectedCategory, searchQuery])
+    }, [transformedProducts, selectedCategory, searchQuery, fuse])
 
     // Product handlers - close cart when product is opened
     const handleProductSelect = (product: any) => {
@@ -382,21 +253,13 @@ export default function Collection(props: CollectionProps): React.ReactElement {
         setSelectedProduct(null)
     }
 
-    const handleValueChange = (value: string) => {
-        // Use custom category change handler for filtering
-        setSelectedCategory(value)
+    const handleFilterChange = (filters: Record<string, { value: any }>) => {
+        setSelectedCategory(filters.Category?.value)
     }
 
     const handleSearch = (query: string) => {
         setSearchQuery(query)
     }
-
-    const ContentWrapper = useMemo(
-        () => (appWindow?.size?.width && appWindow.size.width <= 768 ? ScrollArea : React.Fragment),
-        [appWindow]
-    )
-
-    const MainContainer = ScrollArea
 
     const fetchOrders = async () => {
         try {
@@ -418,8 +281,27 @@ export default function Collection(props: CollectionProps): React.ReactElement {
         }
     }, [user])
 
+    const asidePanel = cartIsOpen ? (
+        <Cart className="h-full overflow-y-auto" />
+    ) : orderHistoryIsOpen ? (
+        <div className="h-full overflow-y-auto @container">
+            <OrderHistory orders={orders} />
+        </div>
+    ) : selectedProduct ? (
+        <ProductPanel
+            product={selectedProduct}
+            setIsCart={() => undefined} // Fix linter error - return undefined instead of empty function
+            onClick={() => undefined} // Fix linter error - return undefined instead of empty function
+            updateURL={handleProductSelect} // Allow navigation between products (URL will be updated automatically)
+            onCartOpen={handleCartOpen} // Allow opening cart from product panel
+            className="!p-4 !pt-4" // Override default padding
+            containerWidth={asideWidth}
+        />
+    ) : null
+
     return (
         <div className="@container w-full h-full flex flex-col min-h-1 border-t border-primary">
+            <SEO title="Merch - PostHog" image="/images/merch.png" />
             <HeaderBar
                 showBack
                 showForward
@@ -435,132 +317,82 @@ export default function Collection(props: CollectionProps): React.ReactElement {
                 showSearch
                 onSearch={handleSearch}
             />
-            <AddressBar
-                selectOptions={selectOptions}
-                currentPath={currentPath}
-                handleValueChange={handleValueChange}
-                selectedCategory={selectedCategory}
-            />
-            {/* <DebugContainerQuery /> */}
-            <ContentWrapper>
-                <div data-scheme="secondary" className="flex flex-col @3xl:flex-row-reverse flex-grow min-h-0">
-                    {!isMobile && (cartIsOpen || selectedProduct || orderHistoryIsOpen) && (
-                        <motion.aside
-                            data-scheme="secondary"
-                            className="not-prose bg-primary border-l border-primary h-full text-primary relative"
-                            style={{ width: asideWidth }}
-                            initial={false}
-                        >
-                            <div className="h-full flex flex-col">
-                                <div className="flex-1 overflow-auto">
-                                    {cartIsOpen ? (
-                                        <Cart className="h-full overflow-y-auto" />
-                                    ) : orderHistoryIsOpen ? (
-                                        <div className="h-full overflow-y-auto @container">
-                                            <OrderHistory orders={orders} />
-                                        </div>
-                                    ) : selectedProduct ? (
-                                        <ProductPanel
-                                            product={selectedProduct}
-                                            setIsCart={() => undefined} // Fix linter error - return undefined instead of empty function
-                                            onClick={() => undefined} // Fix linter error - return undefined instead of empty function
-                                            updateURL={handleProductSelect} // Allow navigation between products (URL will be updated automatically)
-                                            onCartOpen={handleCartOpen} // Allow opening cart from product panel
-                                            className="!p-4 !pt-4" // Override default padding
-                                            containerWidth={asideWidth}
-                                        />
-                                    ) : null}
-                                </div>
-                            </div>
-                            <motion.div
-                                data-scheme="tertiary"
-                                className="w-1.5 cursor-ew-resize top-0 left-0 !transform-none absolute z-20 h-full hover:bg-accent active:bg-accent"
-                                drag="x"
-                                dragMomentum={false}
-                                dragConstraints={{ left: 0, right: 0 }}
-                                onDrag={(_event, info) => {
-                                    const newWidth = Math.max(
-                                        Math.min(asideWidth - info.delta.x, (appWindow?.size?.width || 0) / 2),
-                                        defaultAsideWidth
-                                    )
-                                    setAsideWidth(newWidth)
-                                }}
-                            />
-                        </motion.aside>
-                    )}
-
-                    {/* Mobile: use MobileDrawer */}
-                    {isMobile && (
-                        <MobileDrawer
-                            isOpen={cartIsOpen || selectedProduct !== null || orderHistoryIsOpen}
-                            onClose={() => {
-                                if (cartIsOpen) handleCartClose()
-                                if (selectedProduct) setSelectedProduct(null)
-                                if (orderHistoryIsOpen) handleOrderHistoryClose()
-                            }}
-                            title={
-                                cartIsOpen
-                                    ? 'Cart'
-                                    : orderHistoryIsOpen
-                                    ? 'Order History'
-                                    : selectedProduct?.title || 'Product'
-                            }
-                        >
-                            {cartIsOpen ? (
-                                <Cart className="h-full overflow-y-auto" />
-                            ) : orderHistoryIsOpen ? (
-                                <div className="h-full overflow-y-auto @container">
-                                    <OrderHistory orders={orders} />
-                                </div>
-                            ) : selectedProduct ? (
-                                <ProductPanel
-                                    product={selectedProduct}
-                                    setIsCart={() => undefined}
-                                    onClick={() => undefined}
-                                    updateURL={handleProductSelect}
-                                    onCartOpen={handleCartOpen}
-                                    className="!p-4 !pt-4"
-                                    containerWidth={asideWidth}
-                                />
-                            ) : null}
-                        </MobileDrawer>
-                    )}
-
-                    <main
-                        data-app="Explorer"
-                        data-scheme="primary"
-                        className="@container flex-1 bg-primary relative h-full"
+            <div data-scheme="secondary" className="flex flex-col @3xl:flex-row-reverse flex-grow min-h-0">
+                {!isMobile && (cartIsOpen || selectedProduct || orderHistoryIsOpen) && (
+                    <motion.aside
+                        data-scheme="secondary"
+                        className="not-prose bg-primary border-l border-primary h-full text-primary relative"
+                        style={{ width: asideWidth }}
+                        initial={false}
                     >
-                        <MainContainer>
-                            {/* <DebugContainerQuery /> */}
-                            <div className={`${getProseClasses()} max-w-none h-full`}>
-                                <SEO title="Merch - PostHog" image="/images/merch.png" />
-                                {/* <Nav currentCollectionHandle={pageContext.handle} /> */}
-                                {/* <ShippingBanner /> */}
-                                <div className="flex gap-4">
-                                    <div className="@container flex-1 not-prose">
-                                        <ProductGrid
-                                            products={filteredProducts}
-                                            onProductClick={handleProductSelect}
-                                            selectedProduct={selectedProduct}
-                                        />
-                                    </div>
-                                </div>
+                        <div className="h-full flex flex-col">
+                            <div className="flex-1 overflow-auto">{asidePanel}</div>
+                        </div>
+                        <motion.div
+                            data-scheme="tertiary"
+                            className="w-1.5 cursor-ew-resize top-0 left-0 !transform-none absolute z-20 h-full hover:bg-accent active:bg-accent"
+                            drag="x"
+                            dragMomentum={false}
+                            dragConstraints={{ left: 0, right: 0 }}
+                            onDrag={(_event, info) => {
+                                const newWidth = Math.max(
+                                    Math.min(asideWidth - info.delta.x, (appWindow?.size?.width || 0) / 2),
+                                    defaultAsideWidth
+                                )
+                                setAsideWidth(newWidth)
+                            }}
+                        />
+                    </motion.aside>
+                )}
+
+                {/* Mobile: use MobileDrawer */}
+                {isMobile && (
+                    <MobileDrawer
+                        isOpen={cartIsOpen || selectedProduct !== null || orderHistoryIsOpen}
+                        onClose={() => {
+                            if (cartIsOpen) handleCartClose()
+                            if (selectedProduct) setSelectedProduct(null)
+                            if (orderHistoryIsOpen) handleOrderHistoryClose()
+                        }}
+                        title={
+                            cartIsOpen
+                                ? 'Cart'
+                                : orderHistoryIsOpen
+                                ? 'Order History'
+                                : selectedProduct?.title || 'Product'
+                        }
+                    >
+                        {asidePanel}
+                    </MobileDrawer>
+                )}
+
+                <div className="flex-1 min-w-0 min-h-0">
+                    <ReaderView
+                        hideTitle
+                        proseSize="lg"
+                        showQuestions={false}
+                        hideRightSidebar
+                        hideLeftSidebar
+                        hideMenu
+                        defaultNavVisible={false}
+                    >
+                        <div className="w-full">
+                            <ViewerFilters
+                                availableFilters={availableFilters}
+                                dataToFilter={transformedProducts || []}
+                                handleFilterChange={handleFilterChange}
+                            />
+                            <div className="@container not-prose">
+                                <ProductGrid
+                                    products={filteredProducts}
+                                    onProductClick={handleProductSelect}
+                                    selectedProduct={selectedProduct}
+                                />
                             </div>
-                        </MainContainer>
-                    </main>
-                    {leftSidebarContent && (
-                        <aside
-                            data-scheme="secondary"
-                            className="@3xl:w-64 w-full bg-primary  @3xl:border-r border-t @3xl:border-t-0 border-primary h-full"
-                        >
-                            <ScrollArea className={`p-4`}>
-                                <SidebarContent content={leftSidebarContent} />
-                            </ScrollArea>
-                        </aside>
-                    )}
+                        </div>
+                    </ReaderView>
                 </div>
-            </ContentWrapper>
+            </div>
         </div>
     )
 }
