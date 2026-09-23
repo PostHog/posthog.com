@@ -236,6 +236,23 @@ Stripe subscriptions can be modified relatively freely for example if moving to 
 > **NOTE:** Removing a metered product price (events, recordings) and adding a new price will likely reset the usage. This is fine as the Billing Service will update it during the next sync.
 
 
+### Moving a paid plan to a different organization
+
+A customer sometimes gives us the wrong organization ID, and we set the contract up on it. The correct organization is usually a second organization in the same company, and it can already have its own Stripe customer from earlier use.
+
+Do not move the credits, and do not send a new invoice. Payments, credits, and invoices stay with the Stripe customer that paid them, so it is safer and much less work to point the correct organization at that Stripe customer.
+
+> Tell the <SmallTeam slug="billing" /> before you change anything. This operation changes revenue attribution, and more than one object must change together.
+
+1. Find the Stripe customer for each of the two organization IDs. Search the `Customers` list in the Billing Service admin by organization ID, and open the Stripe customer that each result links to.
+1. Decide which Stripe customer keeps the money. This is the one with the paid invoice and the credit balance.
+1. Link the correct organization ID to that Stripe customer. An organization ID can be on only one billing customer at a time, so remove it from the other billing customer in the same change.
+1. Check the subscription on the Stripe customer that keeps the money. A subscription that a customer started themselves, or an old subscription that was cancelled and restarted, often contains only some of the products. Add the default paid prices for all the usage-based products, as in [updating subscriptions](#updating-subscriptions) above.
+1. Set `plans_map` on the billing customer to the paid defaults, not the free defaults, and add the add-ons that the contract includes. See [plans](#plans) above.
+1. Confirm the result in the app: the correct organization must show the plan, the credit balance, and its usage.
+
+> This is not the same as a customer who wants to keep organizations in more than one region. For that, see [customer billing configurations](/handbook/growth/billing/customer-billing-configurations).
+
 ### Self-hosted differences
 
 Self-hosted billing is no longer supported except for legacy customers who were using the paid kubernetes deployment.

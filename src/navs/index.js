@@ -1328,6 +1328,10 @@ export const handbookSidebar = [
                 url: '',
                 children: [
                     {
+                        name: 'Billing',
+                        url: '/handbook/growth/revops/billing',
+                    },
+                    {
                         name: 'Refunds',
                         url: '/handbook/growth/sales/refunds',
                     },
@@ -1742,7 +1746,7 @@ export const handbookSidebar = [
                     },
                     {
                         name: 'Billing',
-                        url: '/handbook/growth/sales/billing',
+                        url: '/handbook/growth/revops/billing',
                     },
                     {
                         name: 'Renewals',
