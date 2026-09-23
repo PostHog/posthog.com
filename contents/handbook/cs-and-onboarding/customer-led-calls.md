@@ -39,7 +39,7 @@ After the call, do the audit. Now it is driven by what they told you rather than
 
 Use this as the default for check-ins, health calls, and any call where the customer has brought their own list. It is especially useful if you tend to feel nervous going into calls or feel like you are racing the clock, because the structure gives the customer the floor and gives you the room to answer properly afterwards. Defer to the follow-up if needed.
 
-Keep the old approach for calls that are genuinely about showing something new, like a product launch walkthrough or a [training session](/handbook/growth/sales/customer-training) the customer asked for.
+Keep the old approach for calls that are genuinely about showing something new, like a product launch walkthrough or a [training session](/handbook/growth/sales/customer-training) the customer asked for - make sure the customer knows what to expect before the call if this is the approach you're taking.
 
 ## Helpful sample checklist
 
