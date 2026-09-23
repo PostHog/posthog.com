@@ -8,13 +8,13 @@ hideAnchor: true
 category: PostHog news
 ---
 
-From November 1, 2026, a new organization on PostHog Cloud keeps its events for 2 years on paid plans and 1 year on the free plan. Organizations created before that date keep their current window: 7 years on paid plans.
+From November 1, 2026, paid plans on PostHog Cloud keep events for 2 years instead of 7. The free plan stays at 1 year. Organizations already on a paid plan keep 7 years.
 
 ## What changes
 
-- Paid plans for new organizations retain events for 2 years instead of 7.
+- An organization that starts a paid plan on or after November 1, 2026 keeps events for 2 years, even if it was on the free plan before.
 - The free plan stays at 1 year.
-- Organizations created before November 1, 2026 keep 7 years for as long as they stay on a paid plan.
+- An organization already on a paid plan before November 1, 2026 keeps 7 years for as long as it stays on a paid plan.
 
 ## Why
 

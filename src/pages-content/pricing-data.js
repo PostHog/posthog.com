@@ -74,9 +74,10 @@ const faqs = [
         a: (
             <>
                 <p>
-                    Events are retained for 2 years on paid plans and 1 year on the free plan for organizations created
-                    on or after November 1, 2026. Organizations created before that date keep 7 years on paid plans. If
-                    you are on a platform package and need a longer window, contact support. See{' '}
+                    Events are retained for 2 years on paid plans and 1 year on the free plan. Organizations already on
+                    a paid plan before November 1, 2026 keep 7 years for as long as they stay on a paid plan. An
+                    organization that starts a paid plan on or after that date gets 2 years, even if it was on the free
+                    plan before. If you are on a platform package and need a longer window, contact support. See{' '}
                     <Link to="/docs/data/events-retention">events data retention</Link> for details. After 1 year, data
                     may be moved into cold storage so queries may run more slowly.
                 </p>

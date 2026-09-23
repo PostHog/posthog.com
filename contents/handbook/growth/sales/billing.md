@@ -211,7 +211,7 @@ You can manually change the plan for a customer by updating the `plans_map` in t
 
 ### Extending a customer's events retention
 
-Organizations created from November 1, 2026 get 2 years of events retention on paid plans. A customer on a platform package (Boost, Scale, or Enterprise) can ask for a longer window, up to 7 years. There are two ways to grant one.
+A customer that starts a paid plan on or after November 1, 2026 gets 2 years of events retention. Customers already on a paid plan before that date keep 7 years until they drop to the free plan. A customer on a platform package (Boost, Scale, or Enterprise) can ask for a longer window, up to 7 years. There are two ways to grant one.
 
 **One project.** In the PostHog Django admin, open "Team events retention grants" and add a grant for the project with the number of months and a note saying who asked and why. The project's window updates as soon as you save, and stays at the larger of the grant and the plan window. Delete the grant to end it.
 
