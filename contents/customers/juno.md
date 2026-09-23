@@ -1,5 +1,5 @@
 ---
-title: How Juno uses PostHog self-driving PRs to make health tracking less tiring
+title: How Juno makes health tracking easier by merging 90% of self-driving PRs
 customer: Juno
 featuredImage: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/PLACEHOLDER_juno_featured.png
@@ -37,7 +37,7 @@ This approach is great for user privacy, but makes debugging harder for humans b
 
 "If someone's being vague about their problem and hasn't shared logs, we can prompt PostHog on what it could be based on their analytics, error reports, and previous bugs," Marshall says. "Realistically, if one user reports something, another 100 users have it too."
 
-A scout doesn't need to read a user's data to see [rage clicks](/docs/product-analytics/autocapture) and know something is wrong, and it can piece the rest together from [error tracking](/error-tracking) and [product analytics](/product-analytics). That's enough context to open a PR even when the bug report is thin — which is important because in a health app even small bugs can have a big impact.
+A [PostHog scout](/blog/what-is-a-scout) doesn't need to read a user's data to see [rage clicks](/docs/product-analytics/autocapture) and know something is wrong, and it can piece the rest together from [Error Tracking](/error-tracking) and [Product Analytics](/product-analytics). That's enough context to open a PR even when the bug report is thin — which is important because in a health app even small bugs can have a big impact.
 
 "If something goes wrong in our medication log, for example, people might miss their medications or get dosages wrong," Marshall says. "If they're not entering the right thing, or they're not getting notifications? Those are the things we need to find straight away and squash as soon as they happen."
 
@@ -45,9 +45,8 @@ A scout doesn't need to read a user's data to see [rage clicks](/docs/product-an
 
 That's exactly what happened too. A PostHog scout spotted the missed taps and proposed making the button bigger — a small change on the surface but one that makes a massive difference to Juno's users.
 
-<!-- TODO: add before/after image of the medication log button (asset coming from Juno) -->
 
-The same loop has fixed dozens of other issues for Juno: a chat box that hung so people couldn't message the in-app AI, dose-logging errors that only appeared on certain screen sizes, users getting stuck on frozen tabs, and a silent dead tap that was losing drafts in the symptom logging flow.
+The same loop has fixed dozens of other issues for Juno: a chat box that hung so people couldn't message the in-app AI, dose-logging errors that only appeared on certain screen sizes, users getting stuck on frozen tabs, and dead taps that were losing drafts in the symptom logging flow.
 
 ![Juno's symptom log before and after a self-driving fix](/images/customers/juno/juno-symptom-hint-before-after.png)
 
@@ -65,6 +64,6 @@ No. Marshall still commits to reading every one and staying in the self-driving 
 
 "Right now we're merging 90% of our self-driving PRs though, and we think it's going great. The only thing PostHog can't do for us yet is generate React Native source maps, but I'm sure that will change," Marshall says. "We want to be fully PostHog-pilled going forward."
 
-There is plenty left to build. The next release adds around 100 environmental data sources, including pollen count, weather, and air pressure, so Juno can surface trends earlier and move from tracking symptoms toward preventing them.
+There is plenty left for Juno to build. The next release will add around 100 environmental data sources, including pollen count, weather, and air pressure, so Juno can surface trends earlier and move from tracking symptoms toward preventing them.
 
 "With so much left to build, it's great that PostHog is helping us not just gather better data, but also ship faster and increase stability so users can rely on us to track their health."
