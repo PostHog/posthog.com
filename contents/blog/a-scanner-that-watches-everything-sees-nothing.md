@@ -13,7 +13,7 @@ tags:
   - Session replay
 ---
 
-In August we launched [Replay Vision](/replay-vision), our AI layer over Session Replay. It watches session recordings and writes up what it finds, so nobody has to sit through them. We put it to work on PostHog right away. Since then, Replay Vision has watched 400k recordings for us.[^1] Nobody was going to watch(/blog/nobody-watches-session-replays) most of them anyway.
+In August we launched [Replay Vision](/replay-vision), our AI layer over Session Replay. It watches session recordings and writes up what it finds, so nobody has to sit through them. We put it to work on PostHog right away. Since then, Replay Vision has watched 400k recordings for us.[^1] [Nobody was going to watch](/blog/nobody-watches-session-replays) most of them anyway.
 
 The biggest thing we learned? Replay Vision fixes the watching part, but not the *thinking* part.
 
@@ -285,5 +285,5 @@ after I choose, estimate the scanner against the remaining quota, create it safe
 
 [Design scanners with PostHog AI](https://app.posthog.com/#panel=max:read%20this%20blog%20post%3A%20https%3A%2F%2Fposthog.com%2Fblog%2Fa-scanner-that-watches-everything-sees-nothing.%20then%20inspect%20our%20product%20code%2C%20PostHog%20event%20schema%2C%20cohorts%2C%20recordings%2C%20and%20existing%20Replay%20Vision%20scanners.%0A%0Apropose%20five%20scanners%20grounded%20in%20what%20this%20product%20actually%20does.%20each%20proposal%20must%20include%3A%0A-%20one%20visible%20question%20applied%20to%20one%20recording.%0A-%20the%20scanner%20type%20and%20why%20it%20matches%20the%20output.%0A-%20a%20narrow%20recording%20query%20using%20real%20events%2C%20urls%2C%20cohorts%2C%20and%20duration%20filters.%0A-%20the%20exact%20per-recording%20output%20shape%2C%20including%20no%20or%20inconclusive%20behavior.%0A-%20the%20model%2C%20sampling%20mode%2C%20and%20estimated%20monthly%20observations%20and%20credits.%0A-%20the%20cross-observation%20question%20for%20its%20Digest%20or%20Scout.%0A-%20the%20first%20observations%20a%20human%20should%20calibrate.%0A%0Areject%20ideas%20that%20require%20one%20scanner%20observation%20to%20compare%20sessions%2C%20infer%20hidden%20intent%2C%20or%20discover%20what%20matters%20without%20a%20product%20question.%20do%20not%20invent%20event%20names.%0A%0Arank%20the%20five%20ideas%20by%20expected%20product%20value%20and%20evidence%20quality.%20recommend%20one.%20do%20not%20create%20anything%20until%20I%20choose.%0A%0Aafter%20I%20choose%2C%20estimate%20the%20scanner%20against%20the%20remaining%20quota%2C%20create%20it%20safely%2C%20test%20it%20against%20representative%20recordings%2C%20add%20an%20appropriate%20Digest%20or%20alert%2C%20and%20return%20the%20links.)
 
-[^1]: 397,118 scans of 284,031 distinct recordings, $recording_observed in project 2, all-time through 2026-09-15. re-pull before publish
+[^1]: 397,118 scans of 284,031 distinct recordings, $recording_observed in project 2, all-time through 2026-09-15.
 [^2]: 9 of 15 as of the Sept 11, 2026 calibration pass
