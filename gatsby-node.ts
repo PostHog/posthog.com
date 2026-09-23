@@ -82,7 +82,8 @@ export const onCreateBabelConfig: GatsbyNode['onCreateBabelConfig'] = ({ actions
 
 export const onCreateWebpackConfig: GatsbyNode['onCreateWebpackConfig'] = ({ stage, actions }) => {
     actions.setWebpackConfig({
-        ...(process.env.GATSBY_MINIMAL === 'true'
+        // Nothing reads production source maps, and making them is about a quarter of the build's webpack time
+        ...(process.env.GATSBY_MINIMAL === 'true' || stage.startsWith('build')
             ? {
                   devtool: false,
               }
