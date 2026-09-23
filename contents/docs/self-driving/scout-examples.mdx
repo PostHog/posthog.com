@@ -59,6 +59,8 @@ PostHog ships a fleet of canonical scouts out of the box, each watching a common
 
 Most are specialists that watch one surface in depth; the [general](https://github.com/PostHog/posthog/blob/master/products/signals/skills/signals-scout-general/SKILL.md) scout is the exception – it watches the seams between surfaces, like a deploy, then an error burst, then a conversion dip, that no single specialist would catch on its own. Browse them all in the [`products/signals/skills`](https://github.com/PostHog/posthog/tree/master/products/signals/skills) directory.
 
+To see the fleet at work on a real product, read how a scout spotted missed taps in [Juno](/customers/juno)'s medication log and proposed the fix.
+
 ## Ideas for custom scouts
 
 You can create your own scout for anything you care about. The job is the same each time: pick a surface you wish someone was watching, write down what "worth my attention" means for it in plain English, and let the scout hold that bar for you. Some directions to steal:
