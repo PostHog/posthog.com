@@ -256,5 +256,5 @@ To confirm, open a recent event in the [activity feed](https://us.posthog.com/ac
 To correct it:
 
 1. Send the visitor's IP address in `x-forwarded-for`. PostHog reads this header first. See [client IP resolution](/docs/advanced/proxy/proxy-reference#client-ip-resolution) for the full order.
-2. If a CDN or a load balancer is in front of your Remix server, the IP address your Remix server sees is the CDN edge, not the visitor. Read the visitor's IP address from the header that the CDN adds, then put that value in `x-forwarded-for`. An `x-forwarded-for` header that holds an edge IP address wins over every other header, so the visitor's IP address must be in it.
+2. If a CDN or a load balancer is in front of your Remix server, the IP address your Remix server sees is the CDN edge, not the visitor. Read the visitor's IP address from the header that the CDN adds, then put that value in `x-forwarded-for`. PostHog reads `x-forwarded-for` before every other header, so an edge address there hides the visitor.
 3. If you cannot set the header, set the `$ip` property on the event instead. PostHog keeps the `$ip` property that an event already has, and uses the request IP address only when the event has no `$ip`.
