@@ -1,6 +1,6 @@
 Resolve the release in the workflow that deploys your app to production. Resolving creates the release if it doesn't exist yet, so skip it for pull requests, preview builds, and local development. When `POSTHOG_RELEASE_ID` isn't set, the SDK sends no release ID.
 
-Add the `PostHog/resolve-release` action before the step that builds your app:
+Add the `PostHog/resolve-release` action before the step that deploys your app:
 
 ```yaml
 name: Deploy
@@ -24,12 +24,11 @@ jobs:
           # For EU cloud:
           # host: https://eu.posthog.com
 
-      - name: Build image
+      - name: Deploy
         env:
           POSTHOG_RELEASE_ID: ${{ steps.posthog-release.outputs.release-id }}
-        run: docker build --build-arg POSTHOG_RELEASE_ID="$POSTHOG_RELEASE_ID" --tag my-app .
-
-      # Deploy the image
+        # Your deploy command. It must pass POSTHOG_RELEASE_ID to your app.
+        run: ./deploy.sh
 ```
 
 The action finds the release for this commit, or creates it, and puts its ID in the `release-id` output. It names the release after the repository and uses the commit SHA as the version. If the same workflow also uploads source maps with that name and version, both steps use the same release.

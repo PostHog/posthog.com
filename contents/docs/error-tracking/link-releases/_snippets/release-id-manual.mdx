@@ -14,4 +14,4 @@ export POSTHOG_RELEASE_ID=$(posthog-cli release resolve)
 
 The command prints only the release ID. It reads the repository name and commit from Git. To choose your own, add `--release-name` and `--release-version`.
 
-Then give `POSTHOG_RELEASE_ID` to your app when it starts, for example with `docker build --build-arg POSTHOG_RELEASE_ID="$POSTHOG_RELEASE_ID"`.
+Then give `POSTHOG_RELEASE_ID` to your deployed app, so that it is in the app's environment when the app starts.
