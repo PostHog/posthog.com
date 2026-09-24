@@ -275,7 +275,7 @@ The `posthog-react-native/expo` config plugin can wire up native symbol upload f
 
 When enabled, `expo prebuild` adds an iOS dSYM-upload build phase and applies the `com.posthog.android` Gradle plugin on Android. From `posthog-react-native` 4.78.0, it also enables the plugin's Android `.so` debug symbol upload for NDK crashes. If your project was prebuilt earlier with a `com.posthog:posthog-android-gradle-plugin` classpath older than 1.5.0, the next prebuild bumps it.
 
-To additionally upload native source files for source-code context, pass an options object instead of `true`. On Android, this bundles the C/C++ sources with the `.so` debug symbols, from `posthog-react-native` 4.78.0:
+To additionally upload native source files, pass an options object instead of `true`. On iOS, this adds source-code context to crash frames. On Android, it bundles the C/C++ sources with the `.so` debug symbols, from `posthog-react-native` 4.78.0:
 
 ```json
 {
