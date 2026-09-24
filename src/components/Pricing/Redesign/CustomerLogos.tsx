@@ -80,14 +80,12 @@ export default function CustomerLogos({
     subtitle = 'from side projects to public companies',
     scrolling = false,
     hideLink = false,
-    reverse = false,
     linkStories = false,
 }: {
     title?: string
     subtitle?: string
     scrolling?: boolean
     hideLink?: boolean
-    reverse?: boolean
     /** Scrolling rail only */
     linkStories?: boolean
 }): JSX.Element {
@@ -124,7 +122,7 @@ export default function CustomerLogos({
                             <div
                                 className="flex w-max motion-reduce:!animate-none group-hover:[animation-play-state:paused!important] group-focus-within:[animation-play-state:paused!important]"
                                 style={{
-                                    animation: `tools-ticker-marquee 45s linear infinite${reverse ? ' reverse' : ''}`,
+                                    animation: 'tools-ticker-marquee 45s linear infinite',
                                 }}
                             >
                                 {[false, true].map((duplicate) => (

@@ -172,6 +172,7 @@ const HERO_QUOTES: QuoteSource[] = [
 ]
 
 const TOOLS_SHOWN = 5
+const TABLE_ROWS_STEP = 10
 const HERO_ROTATE_MS = 8000
 const HOG_IMAGE = 'https://res.cloudinary.com/dmukukwp6/image/upload/will_smith_hog_0248c8f94c.png'
 const NEWSPAPER_HOG_IMAGE = 'https://res.cloudinary.com/dmukukwp6/image/upload/newspaper_hog_f0dd8cda48.png'
@@ -201,6 +202,31 @@ const HogCard = ({
     </div>
 )
 
+// Puts every item in the same grid cell, so the tallest item sets the height and switching items does not move the layout
+const Stack = <T,>({
+    items,
+    active,
+    className = '',
+    children,
+}: {
+    items: T[]
+    active: number
+    className?: string
+    children: (item: T) => React.ReactNode
+}) => (
+    <div className={`grid ${className}`}>
+        {items.map((item, i) => (
+            <div
+                key={i}
+                aria-hidden={i !== active || undefined}
+                className={`[grid-area:1/1] ${i === active ? 'motion-safe:animate-slide-up-fade-in' : 'invisible'}`}
+            >
+                {children(item)}
+            </div>
+        ))}
+    </div>
+)
+
 const HeroQuote = ({ people }: { people: HeroPerson[] }): JSX.Element => {
     const prefersReducedMotion = usePrefersReducedMotion()
     const [index, setIndex] = useState(0)
@@ -213,7 +239,6 @@ const HeroQuote = ({ people }: { people: HeroPerson[] }): JSX.Element => {
     }, [people.length, prefersReducedMotion, paused])
 
     const step = (delta: number) => setIndex((i) => (i + delta + people.length) % people.length)
-    const person = people[index]
 
     return (
         <HogCard
@@ -236,42 +261,44 @@ const HeroQuote = ({ people }: { people: HeroPerson[] }): JSX.Element => {
                 . Here are some of them.
             </p>
 
-            {person && (
-                <div key={`${person.customer.slug}-${person.author}`} className="motion-safe:animate-slide-up-fade-in">
-                    <blockquote className="m-0 border-l-0 p-0 not-italic">
-                        <p className="mb-4 text-balance text-2xl font-bold leading-tight tracking-tight @2xl:text-4xl">
-                            &ldquo;{person.text}&rdquo;
-                        </p>
-                    </blockquote>
-                    <div className="flex flex-wrap items-center gap-x-4 gap-y-2">
-                        <div className="flex items-center gap-2">
-                            {person.image?.thumb && (
-                                <div className="size-9 overflow-hidden rounded-full bg-accent">
-                                    <CloudinaryImage
-                                        src={person.image.thumb as `https://res.cloudinary.com/${string}`}
-                                        alt={person.name}
-                                        imgClassName="size-9 object-cover object-center"
-                                    />
-                                </div>
-                            )}
-                            <p className="m-0 text-sm text-secondary">
-                                <span className="font-semibold text-primary">{person.name}</span>, {person.role}
-                                <span className="sr-only"> at {person.customer.name}</span>
+            <Stack items={people} active={index}>
+                {(person) => (
+                    <>
+                        <blockquote className="m-0 border-l-0 p-0 not-italic">
+                            <p className="mb-4 text-balance text-2xl font-bold leading-tight tracking-tight @2xl:text-4xl">
+                                &ldquo;{person.text}&rdquo;
                             </p>
+                        </blockquote>
+                        <div className="flex flex-wrap items-center gap-x-4 gap-y-2">
+                            <div className="flex items-center gap-2">
+                                {person.image?.thumb && (
+                                    <div className="size-9 overflow-hidden rounded-full bg-accent">
+                                        <CloudinaryImage
+                                            src={person.image.thumb as `https://res.cloudinary.com/${string}`}
+                                            alt={person.name}
+                                            imgClassName="size-9 object-cover object-center"
+                                        />
+                                    </div>
+                                )}
+                                <p className="m-0 text-sm text-secondary">
+                                    <span className="font-semibold text-primary">{person.name}</span>, {person.role}
+                                    <span className="sr-only"> at {person.customer.name}</span>
+                                </p>
+                            </div>
+                            <div className="flex h-8 items-center border-l border-primary pl-4">
+                                <CustomerLogo customer={person.customer} className="h-6 max-w-40" />
+                            </div>
                         </div>
-                        <div className="flex h-8 items-center border-l border-primary pl-4">
-                            <CustomerLogo customer={person.customer} className="h-6 max-w-40" />
-                        </div>
-                    </div>
-                </div>
-            )}
+                    </>
+                )}
+            </Stack>
 
             {people.length > 1 && (
-                <div className="mt-5 flex items-center gap-3">
+                <div className="mt-5 flex items-center gap-2">
                     <OSButton
-                        variant="secondary"
-                        size="sm"
-                        icon={<IconChevronLeft className="size-4" />}
+                        windowButton
+                        size="md"
+                        icon={<IconChevronLeft />}
                         onClick={() => step(-1)}
                         aria-label="Previous quote"
                     />
@@ -292,9 +319,9 @@ const HeroQuote = ({ people }: { people: HeroPerson[] }): JSX.Element => {
                         ))}
                     </div>
                     <OSButton
-                        variant="secondary"
-                        size="sm"
-                        icon={<IconChevronRight className="size-4" />}
+                        windowButton
+                        size="md"
+                        icon={<IconChevronRight />}
                         onClick={() => step(1)}
                         aria-label="Next quote"
                     />
@@ -483,6 +510,7 @@ export default function Customers(): JSX.Element {
     const noStoryYet = customers.filter((customer) => !hasStory(customer))
     const [filteredCustomers, setFilteredCustomers] = useState<CustomerType[]>(tableCustomers)
     const [role, setRole] = useState(ROLES[0].label)
+    const [rowsShown, setRowsShown] = useState(TABLE_ROWS_STEP)
 
     const { stories } = useStaticQuery(graphql`
         query {
@@ -506,10 +534,14 @@ export default function Customers(): JSX.Element {
     const [latestStory]: Story[] = stories.nodes
 
     const heroPeople = HERO_QUOTES.flatMap((source) => resolveQuote(allCustomers, source) ?? [])
-    const roleResults = ROLE_RESULTS.filter((result) => result.role === role).flatMap(({ stat, label, ...source }) => {
-        const person = resolveQuote(allCustomers, source)
-        return person ? [{ person, stat, label }] : []
-    })
+    // Every role renders at once so the tallest one sets the height of the section
+    const roleIndex = ROLES.findIndex(({ label }) => label === role)
+    const roleResults = ROLES.map(({ label: roleLabel }) =>
+        ROLE_RESULTS.filter((result) => result.role === roleLabel).flatMap(({ stat, label, ...source }) => {
+            const person = resolveQuote(allCustomers, source)
+            return person ? [{ person, stat, label }] : []
+        })
+    )
 
     return (
         <>
@@ -553,16 +585,25 @@ export default function Customers(): JSX.Element {
                                         options={ROLES.map(({ label }) => ({ label, value: label }))}
                                     />
                                 </div>
-                                <p className="m-0 text-sm text-secondary">
-                                    {ROLES.find(({ label }) => label === role)?.blurb}
-                                </p>
+                                <Stack items={ROLES} active={roleIndex} className="text-sm text-secondary">
+                                    {({ blurb }) => <p className="m-0">{blurb}</p>}
+                                </Stack>
                             </div>
                             {/* Cells draw a top and left border. The negative margin hides the outer ones under the panel border */}
-                            <div className="-ml-px -mt-px grid grid-cols-1 @3xl:grid-cols-3">
-                                {roleResults.map(({ person, stat, label }) => (
-                                    <QuoteCard key={person.customer.slug} person={person} stat={stat} label={label} />
-                                ))}
-                            </div>
+                            <Stack items={roleResults} active={roleIndex}>
+                                {(results) => (
+                                    <div className="-ml-px -mt-px grid h-full grid-cols-1 @3xl:grid-cols-3">
+                                        {results.map(({ person, stat, label }) => (
+                                            <QuoteCard
+                                                key={person.customer.slug}
+                                                person={person}
+                                                stat={stat}
+                                                label={label}
+                                            />
+                                        ))}
+                                    </div>
+                                )}
+                            </Stack>
                         </div>
                     </SectionLayout>
 
@@ -601,14 +642,28 @@ export default function Customers(): JSX.Element {
                                 },
                             ]}
                             dataToFilter={tableCustomers}
-                            onFilterChange={(filtered) => setFilteredCustomers(sortCustomers(filtered))}
+                            onFilterChange={(filtered) => {
+                                setFilteredCustomers(sortCustomers(filtered))
+                                setRowsShown(TABLE_ROWS_STEP)
+                            }}
                         />
                         <OSTable
                             className="mt-2"
                             columns={columns}
                             width="full"
-                            rows={filteredCustomers.map(customerRow)}
+                            rows={filteredCustomers.slice(0, rowsShown).map(customerRow)}
                         />
+                        {rowsShown < filteredCustomers.length && (
+                            <div className="mb-8 mt-4 flex justify-center">
+                                <OSButton
+                                    variant="secondary"
+                                    size="md"
+                                    onClick={() => setRowsShown(rowsShown + TABLE_ROWS_STEP)}
+                                >
+                                    Show more
+                                </OSButton>
+                            </div>
+                        )}
                     </SectionLayout>
 
                     {latestStory && <LatestCaseStudy story={latestStory} />}
