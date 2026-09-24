@@ -109,6 +109,7 @@ export function Setup(): JSX.Element {
                 displayCommand={wizard.displayCommand}
                 copyCommand={wizard.copyCommand}
                 onCopy={trackSetupCopy}
+                slim
             />
         </div>
     )
