@@ -14,7 +14,7 @@ test('exports one title without page and code actions', () => {
     const markdown = convert(`<button aria-label="Copy this page as Markdown">Copy page</button>
         <h1>MCP Analytics</h1><p>Call <code>instrument()</code>.</p>
         <div class="not-prose"><button><code>npx @posthog/wizard</code></button>
-        <a href="/wizard" data-export="skip">Learn more</a></div>
+        <a href="/wizard" data-md-export="skip">Learn more</a></div>
         <div class="code-block"><button class="ask-posthog-ai-code-snippet">PostHog AI</button>
         <pre><code class="language-python">instrument(server, posthog)</code></pre></div>`)
     assert.equal(

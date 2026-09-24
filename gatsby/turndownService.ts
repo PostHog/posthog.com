@@ -52,7 +52,7 @@ export const preprocessHtmlForTabs = (html: string): string => {
     })
 
     doc.querySelectorAll(
-        'button[aria-label="Copy this page as Markdown"], button[aria-label="More Markdown actions"], .ask-posthog-ai-code-snippet, [data-export="skip"]'
+        'button[aria-label="Copy this page as Markdown"], button[aria-label="More Markdown actions"], .ask-posthog-ai-code-snippet, [data-md-export="skip"]'
     ).forEach((control) => control.remove())
 
     // ProductScreenshot renders both themes. Keep one image without hiding other tab content.
