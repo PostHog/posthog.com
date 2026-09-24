@@ -223,14 +223,17 @@ If you are not using the Expo plugin (step 1), you will need to also disable Use
 
 The steps above upload **JavaScript** source maps, which symbolicate exceptions thrown in your JS/TS code (including Hermes bytecode). They do **not** cover native iOS and Android crashes.
 
-If you enable [native crash autocapture](/docs/libraries/react-native#native-crash-autocapture) (`errorTracking.autocapture.nativeCrashes` or `errorTracking.autocapture.androidNdkCrashes`), you also need to upload **native** debug symbols at build time so those crash reports are readable. This reuses the native PostHog SDKs' own tooling:
+If you enable [native crash autocapture](/docs/libraries/react-native#native-crash-autocapture) (`errorTracking.autocapture.nativeCrashes`, `errorTracking.autocapture.androidNdkCrashes`, or both), you also need to upload **native** debug symbols at build time so those crash reports are readable. This reuses the native PostHog SDKs' own tooling:
 
-- **iOS** – upload dSYMs via posthog-ios's `upload-symbols.sh`, which runs `posthog-cli dsym upload`. You can optionally include native source files for source-code context around crashes.
-- **Android** – upload ProGuard/R8 mapping files via the official [`com.posthog.android` Gradle plugin](/docs/error-tracking/upload-mappings/android), which also injects a matching map-id into the app. For native C/C++ (NDK) crashes, the same plugin also uploads the app's `.so` debug symbols.
+| Platform | Crashes | Symbols | Uploaded by |
+| --- | --- | --- | --- |
+| iOS | All native crashes (`nativeCrashes`) | dSYMs | posthog-ios's `upload-symbols.sh` (`posthog-cli dsym upload`) |
+| Android | Java/Kotlin crashes (`nativeCrashes`) | ProGuard/R8 mapping files, for minified release builds | The [`com.posthog.android` Gradle plugin](/docs/error-tracking/upload-mappings/android), which also injects a matching map-id into the app |
+| Android | C/C++ (NDK) crashes (`androidNdkCrashes`) | `.so` debug symbols | The same Gradle plugin |
 
-<CalloutBox icon="IconInfo" title="Source-code context on Android covers NDK code only" type="fyi">
+<CalloutBox icon="IconInfo" title="Source-code context" type="fyi">
 
-Including native source files for source-code context (`includeSource` / `POSTHOG_INCLUDE_SOURCE`) is supported on iOS, and on Android for C/C++ sources uploaded with the `.so` debug symbols. The Android ProGuard/R8 mapping upload has no source-inclusion equivalent, so Java/Kotlin crashes have no source-code context.
+`includeSource` (or `POSTHOG_INCLUDE_SOURCE` on iOS) also uploads your native source files, so crash frames can show the surrounding code. It applies to iOS crashes and Android C/C++ (NDK) crashes. Android Java/Kotlin crashes have no source-code context, because the ProGuard/R8 mapping upload doesn't include sources.
 
 </CalloutBox>
 
