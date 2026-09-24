@@ -41,9 +41,9 @@ Consider framing a collaborative method for progressing in the trial period with
 
 ## Spend caps during a trial
 
-A trial lifts the free tier on every product except four: Replay Vision, Desktop, PostHog AI, and Inbox. These meter model tokens, so a trial leaves a spend cap on them rather than making them unlimited.
+A trial lifts the free tier so a customer can try what they do not pay for. It leaves a spend limit they set exactly as it stands outside the trial, on every product.
 
-On those four, a limit the customer set stands, including a limit of $0. Where they set none, the trial caps the product:
+Four products also get a cap where the customer set no limit: Replay Vision, Desktop, PostHog AI, and Inbox. These meter model tokens, so an unlimited trial on them is expensive for us. Every other product the customer set no limit on runs unlimited for the length of the trial, which is what a trial is for.
 
 | Product | On a paid plan | No subscription |
 | --- | --- | --- |
@@ -54,6 +54,6 @@ On those four, a limit the customer set stands, including a limit of $0. Where t
 
 A customer on a paid plan pays for what they use, so their own limit is the figure that governs. A customer with no subscription pays nothing, so the cap is what the trial lends them.
 
-On every other product, a trial removes the limit, including one the customer set. Someone who capped session replay at $500 records without a cap for the length of the trial. Their invoice still stops at $500, so we absorb the difference rather than charging them for it.
+An addon reads the limit on its parent. Mobile session replay follows the Session replay limit, and Batch exports follows Realtime destinations.
 
 If a prospect needs more than this, raise their spend limit rather than removing it.
