@@ -58,35 +58,107 @@ Before setting up SCIM, you need:
 
 ### Example: Okta
 
-If you already have a custom SAML app configured for PostHog, you can enable SCIM provisioning directly on it. If not, first set up SAML following the [Okta SAML example](#example-okta), then continue with these steps:
+1. In Okta admin, go to **Applications** and select your existing SAML application for PostHog. [Create a SAML application if you do not have one](/docs/settings/authentication/saml#example-okta).
+   <ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/2026_09_17_okta_saml_step_1_3c4abb3562.png"
+    alt="Okta admin UI showing listed applications"
+    classes="rounded"
+   />
 
-1. In Okta admin, go to **Applications** and open your PostHog app.
+2. In the Okta app, under the **General** tab, in **App settings**, select **Edit**.
+   <ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/2026_09_24_okta_scim_application_settings_bc2bda3579.png"
+    alt="Okta admin UI showing application details"
+    classes="rounded"
+   />
 
-2. Navigate to the **Provisioning** tab and click **Configure API Integration**.
+3. Under the **Provisioning** section, select **SCIM**, then select **Save**.
+   <ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/2026_09_24_okta_scim_application_settings_edit_ece6c4c38d.png"
+    alt="Okta admin UI showing application settings form"
+    classes="rounded"
+   />
 
-3. Check **Enable API integration** and enter:
-   - **SCIM Base URL** from PostHog
-   - **API Token** (the SCIM Token from PostHog)
+4. Navigate to the **Provisioning** tab, then select **Edit**.
+   <ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/2026_09_24_okta_scim_application_provisioning_24d472d9fa.png"
+    alt="Okta admin UI showing application provisioning tab"
+    classes="rounded"
+   />
 
-   In **Unique identifier field for users**, enter the Okta attribute that is unique for each provisioned user. This is usually set to the email address, but any unique identifier works.
+5. Navigate to your PostHog organization's [authentication settings](https://app.posthog.com/settings/organization-authentication#setting=scim-configuration), scroll down to **SCIM**, then select **Configure**.
+   <ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/2026_09_17_okta_saml_step_4_light_5657a92830.png"
+    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/2026_09_17_okta_saml_step_4_dark_f67925b245.png"
+    alt="PostHog UI showing authentication configurations"
+    classes="rounded"
+   />
 
-4. Click **Test API Credentials** to verify the connection.
+6. Select **Enable SCIM provisioning**, then select **Save**.
+   <ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/2026_09_24_okta_scim_posthog_config_saved_light_71aa37242e.png"
+    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/2026_09_24_okta_scim_posthog_config_saved_dark_f9c1080e39.png"
+    alt="PostHog UI showing SCIM form"
+    classes="rounded"
+   />
 
-5. In the **Provisioning to App** settings, enable:
-   - Create Users
-   - Update User Attributes
-   - Deactivate Users
+7. Copy the "*SCIM base URL*" from PostHog into the Okta app's "*SCIM connector base URL*" field.
+   <ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/2026_09_24_okta_scim_application_provisioning_base_url_73a5be4ae4.png"
+    alt="Okta SCIM form with SCIM base URL completed"
+    classes="rounded"
+   />
 
-6. Go to the **Assignments** tab and assign the application to users and groups.
+8. In the Okta app, change "*Authentication Mode*" to "*HTTP Header*".
+   <ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/2026_09_24_okta_scim_application_provisioning_auth_mode_b1a486a77d.png"
+    alt="Okta SCIM form with Authentication Mode completed"
+    classes="rounded"
+   />
+
+9. Copy the "*Bearer token*" from PostHog into the Okta app's "*Authorization*" field.
+   <ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/2026_09_24_okta_scim_application_provisioning_auth_token_1b10f001dd.png"
+    alt="Okta SCIM form with Authentication completed"
+    classes="rounded"
+   />
+
+10. In the Okta app, under "*Unique identifier field for users*" enter a field that uniquely identifies your users. Most likely this will be `email`.
+   <ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/2026_09_24_okta_scim_application_provisioning_unique_id_8830ffbd48.png"
+    alt="Okta SCIM form with Unique Identifier completed"
+    classes="rounded"
+   />
+
+11. Under **Supported provisioning actions** select the following options:
+   - Push New Users
+   - Push Profile Updates
+   - Push Groups
+
+   <ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/2026_09_24_okta_scim_application_provisioning_actions_a69c18c89f.png"
+    alt="Okta SCIM form with Support provisioning actions completed"
+    classes="rounded"
+   />
+
+12. Select **Test Connector Configuration**. Verify that Okta can communicate with PostHog.
+
+13. Navigate to the **Assignments** tab and assign the application to users and groups.
    - Click **Assign to People** and select the users you want to provision into PostHog.
-   - Click **Assign to Groups** and select the Okta groups to provision.
+   - Click **Assign to Groups** and select the Okta groups to provision into PostHog.
 
-7. Go to the **Push Groups** tab.
+   <ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/2026_09_24_okta_scim_application_assignments_c4d73edba1.png"
+    alt="Okta application assignments tab"
+    classes="rounded"
+   />
+
+14. Go to the **Push Groups** tab.
    - To push specific groups, select **Find groups by name**, then choose **Create Group** (creates a new role in PostHog) or **Link Group** (links it to an existing PostHog role). When you link the group to an existing role in PostHog, the role name will be updated to match Okta.
    - If you have lots of groups, you can choose **Find groups by rule**. This way, all groups matching the rule are pushed to PostHog.
    - Verify the pushed groups show as **Active**.
 
-   For detailed Okta instructions, see [Okta's SCIM provisioning documentation](https://help.okta.com/en-us/content/topics/apps/apps_app_integration_wizard_scim.htm).
+Users and roles will now be automatically provisioned in PostHog by Okta. For additional detailed Okta instructions, see [Okta's SCIM provisioning documentation](https://help.okta.com/en-us/content/topics/apps/apps_app_integration_wizard_scim.htm).
 
 ### Example: OneLogin
 
