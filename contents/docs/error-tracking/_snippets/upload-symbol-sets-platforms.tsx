@@ -64,21 +64,6 @@ const UploadSymbolSetsPlatforms = () => {
             image: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/integrate/kmp.svg',
         },
         {
-            label: 'PHP',
-            url: '/docs/error-tracking/upload-source-maps/php',
-            image: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/integrate/php.svg',
-        },
-        {
-            label: 'Python',
-            url: '/docs/error-tracking/upload-source-maps/python',
-            image: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/integrate/python.svg',
-        },
-        {
-            label: 'Ruby',
-            url: '/docs/error-tracking/upload-source-maps/ruby',
-            image: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/integrate/ruby.svg',
-        },
-        {
             label: 'Rust',
             url: '/docs/error-tracking/upload-source-maps/rust',
             image: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/integrate/rust.svg',

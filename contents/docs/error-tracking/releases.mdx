@@ -21,7 +21,7 @@ Release information is automatically created when you [upload sourcemaps](/docs/
 
 The CLI finds or creates the release for the project and version it detects, and stores that link inside each sourcemap. You can specify `--release-name` and `--release-version` yourself; otherwise the CLI inspects Git metadata (like the repo name and commit SHA) to choose sensible values. You can also pass `--build` to record a build number (e.g. `CFBundleVersion` on iOS, `versionCode` on Android). The build number is stored as release metadata and displayed separately from the version in the UI. Artefacts are locked to their release once written, so they cannot move between releases later.
 
-Python, Ruby, and PHP apps have no source maps to upload. For these, create the release when you deploy and give its ID to the app in the `POSTHOG_RELEASE_ID` environment variable. See the guides for [Python](/docs/error-tracking/upload-source-maps/python), [Ruby](/docs/error-tracking/upload-source-maps/ruby), and [PHP](/docs/error-tracking/upload-source-maps/php).
+Python, Ruby, and PHP apps have no source maps to upload. For these, create the release when you deploy and give its ID to the app in the `POSTHOG_RELEASE_ID` environment variable. See the guides for [Python](/docs/error-tracking/link-releases/python), [Ruby](/docs/error-tracking/link-releases/ruby), and [PHP](/docs/error-tracking/link-releases/php).
 
 ## Uploading artefacts
 
