@@ -22,6 +22,8 @@ All of our permanent merch items are reordered via Micromerch. To do this you ne
 
 It's really important that we do not allow stock levels to run low as restocking items can take a couple of weeks, so the Ops team will regularly check inventory levels. However if you happen to see anything looking amiss, or you know you want to place a big order for a customer that may affect our stock levels a lot, just let Kendal know ahead of time!
 
+Before sending a large merch order to another country, check with Kendal and Micromerch to confirm that we have an importer of record in the destination country.
+
 ## Adding new items
 
 Micromerch is integrated with our Shopify store, so all orders are made and processed through there. To add new products to Shopify, [follow these instructions.](/handbook/engineering/posthog-com/merch-store).
