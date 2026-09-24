@@ -8515,6 +8515,12 @@ export const docsMenu = {
                     icon: 'IconBook',
                     color: 'seagreen',
                 },
+                {
+                    name: 'Link traces to LLM analytics',
+                    url: '/docs/distributed-tracing/link-llm-analytics',
+                    icon: 'IconLlmAnalytics',
+                    color: 'purple',
+                },
             ],
         },
         {
