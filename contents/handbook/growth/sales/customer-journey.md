@@ -62,7 +62,7 @@ Notes:
 - FDE coverage is conditional where TAM, CSM, or TAE sell an FDE engagement to a customer account and then an FDE runs a short-term, hands-on technical engagement where the implementation need is more than a TAM or CSM can deliver. 
   - The 🟡 at Proving covers the case where an FDE helps prove technical fit during a POC with a top prospect. 
   - The 🟡 at Steady state is for a churn prevention play where an FDE has been brought in to fix issues with a customer implementation.
-  - [Where FDE fits in the customer lifecycle](/handbook/forward-deployed-engineering/working-with-sales-and-cs#where-fde-fits-in-the-customer-lifecycle) names the points in Implementing and Expanding where the account team can offer an engagement.
+  - [Where FDE fits in the customer lifecycle](/handbook/forward-deployed-engineering/working-with-sales-and-cs#where-fde-fits-in-the-customer-lifecycle) names the three points (landing, a TAM joining, and expansion) where the account team can offer an engagement.
 
 ## Ownership rules
 
