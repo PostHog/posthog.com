@@ -58,7 +58,7 @@ Before setting up SCIM, you need:
 
 ### Example: Okta
 
-1. In Okta admin, go to **Applications** and select your existing SAML application for PostHog. [Create a SAML application if you do not have one](/docs/settings/authentication#example-okta).
+1. In Okta admin, go to **Applications** and select your existing SAML application for PostHog. [Create a SAML application if you do not have one](/docs/settings/authentication/saml#example-okta).
    <ProductScreenshot
     imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/2026_09_17_okta_saml_step_1_3c4abb3562.png"
     alt="Okta admin UI showing listed applications"
@@ -82,7 +82,7 @@ Before setting up SCIM, you need:
 4. Navigate to the **Provisioning** tab, then select **Edit**.
    <ProductScreenshot
     imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/2026_09_24_okta_scim_application_provisioning_24d472d9fa.png"
-    alt="Okta admin UI showing application settings form"
+    alt="Okta admin UI showing application provisioning tab"
     classes="rounded"
    />
 
@@ -112,14 +112,14 @@ Before setting up SCIM, you need:
 8. In the Okta app, change "*Authentication Mode*" to "*HTTP Header*".
    <ProductScreenshot
     imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/2026_09_24_okta_scim_application_provisioning_auth_mode_b1a486a77d.png"
-    alt="Okta SCIM form with Authorization Mode completed"
+    alt="Okta SCIM form with Authentication Mode completed"
     classes="rounded"
    />
 
 9. Copy the "*Bearer token*" from PostHog into the Okta app's "*Authorization*" field.
    <ProductScreenshot
     imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/2026_09_24_okta_scim_application_provisioning_auth_token_1b10f001dd.png"
-    alt="Okta SCIM form with Authorization completed"
+    alt="Okta SCIM form with Authentication completed"
     classes="rounded"
    />
 
@@ -146,7 +146,7 @@ Before setting up SCIM, you need:
 13. Navigate to the **Assignments** tab and assign the application to users and groups.
    - Click **Assign to People** and select the users you want to provision into PostHog.
    - Click **Assign to Groups** and select the Okta groups to provision into PostHog.
-   
+
    <ProductScreenshot
     imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/2026_09_24_okta_scim_application_assignments_c4d73edba1.png"
     alt="Okta application assignments tab"
