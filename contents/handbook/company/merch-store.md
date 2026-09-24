@@ -20,7 +20,11 @@ All of our permanent merch items are reordered via Micromerch. To do this you ne
 2. Approve the estimate that will be sent from Micromerch
 3. Pay the invoice via Brex once it comes in (usually in 1-2 days after estimate approval)
 
-It's really important that we do not allow stock levels to run low as restocking items can take a couple of weeks, so the Ops team will regularly check inventory levels. However if you happen to see anything looking amiss, or you know you want to place a big order for a customer that may affect our stock levels a lot, just let Kendal know ahead of time!
+It's really important that we do not allow stock levels to run low as restocking items can take a couple of weeks, so the Ops team will regularly check inventory levels. However, if you happen to see anything looking amiss, just let Kendal know ahead of time!
+
+## Big orders
+
+If you want to place a big order for a customer that may affect our stock levels a lot, just let Kendal know ahead of time!
 
 Before sending a large merch order to another country, check with Kendal and Micromerch to confirm that we have an importer of record in the destination country.
 
