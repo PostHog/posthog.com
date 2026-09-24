@@ -7,6 +7,7 @@ import CookieBannerToast from 'components/CookieBanner/ToastVersion'
 import { SearchOverlay } from 'components/SearchUI'
 import { ChatOverlay } from 'hooks/useChat'
 import AppContainer from 'components/AppContainer'
+import WebMCP from 'components/WebMCP'
 
 // Isolates the `windows` subscription so that opening/closing a window only
 // re-renders this list, not the whole Wrapper (and therefore not the desktop,
@@ -39,6 +40,7 @@ export default function Wrapper() {
             */}
             <SearchOverlay />
             <ChatOverlay />
+            <WebMCP />
             <CookieBannerToast />
         </AppContainer>
     )
