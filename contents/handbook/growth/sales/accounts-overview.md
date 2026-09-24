@@ -55,6 +55,6 @@ flowchart TB
 
 ## What this means
 
-- **Every $20k+ account has a [customer success manager](/handbook/cs-and-onboarding/customer-success).** The CSM is the base layer and stays on the account for as long as it's above $20k.
-- **A [technical account manager](/handbook/growth/sales/how-we-work#technical-account-managers) is an overlay.** A TAM joins only while there's a qualified expansion opportunity to work, and comes off at quarter end once expansion is exhausted. [Account allocation](/handbook/growth/sales/account-allocation) covers how TAMs get added and removed.
-- **A [forward deployed engineer](/handbook/forward-deployed-engineering/overview) is an optional engagement, not an owner.** The dotted lines mark three points where the account team can offer one: landing, a TAM joining, and expansion. [Where FDE fits in the customer lifecycle](/handbook/forward-deployed-engineering/working-with-sales-and-cs#where-fde-fits-in-the-customer-lifecycle) covers when and how.
+- **Every $20k+ account has a [customer success manager](/handbook/cs-and-onboarding/customer-success).**
+- **A [technical account manager](/handbook/growth/sales/how-we-work#technical-account-managers) is an overlay.** A TAM joins when there's a qualified expansion opportunity to work, and comes off at quarter end once expansion is exhausted. [Account allocation](/handbook/growth/sales/account-allocation) covers how TAMs get added and removed.
+- **A [forward deployed engineer](/handbook/forward-deployed-engineering/overview) is an optional engagement, not an owner.** The dotted lines mark three points where the account team should consider offering one: landing, a TAM joining, and expansion. [Where FDE fits in the customer lifecycle](/handbook/forward-deployed-engineering/working-with-sales-and-cs#where-fde-fits-in-the-customer-lifecycle) covers when and how.

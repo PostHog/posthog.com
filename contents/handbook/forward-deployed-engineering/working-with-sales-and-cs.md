@@ -49,10 +49,8 @@ The customer moves on the same way whether or not they take an engagement.
 ### What this means
 
 - **Raising FDE is optional.** The TAM or TAE decides whether to mention it at all. Many customers won't need an engagement, and that's fine. They still know the team exists and can come back to it later.
-- **The engagement shape is a suggestion.** Instrumentation is the most likely engagement when a TAM joins. The TAM or TAE can ask for any engagement at any point.
 - **These aren't the only ways in.** Audits, signals, and a TAM or customer coming to us directly all still work. See [how to get an FDE involved](/handbook/forward-deployed-engineering/how-to-get-fde-involved).
-- **The pain has to be urgent.** A customer funds an engagement and opens up their codebase only when the problem is urgent. If it isn't urgent yet, park it and raise it again when it is.
-- **Healthy accounts count too.** Fixing badly instrumented accounts is half the picture. Delivering an FDE engagement alongside a new product sale is the other half.
+- **This proactively sets up accounts for success** Delivering an FDE engagement alongside a new product sale or a TAM assignment is the right timing to setup a customers environment correctly before problems arise. 
 
 ## Pre-sale vs post-sale
 FDE engagements begin where pre-sales ends. If a prospect needs deep, ongoing technical work to be convinced, that's a signal the engagement should be scoped.
