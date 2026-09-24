@@ -19,7 +19,7 @@ The two products do not correlate automatically. You must give the span and the 
 
 - [Distributed tracing](/docs/distributed-tracing/start-here) sends spans from your application.
 - [LLM analytics](/docs/ai-observability/installation) sends `$ai_generation` events from the same service.
-- Both products send to the same PostHog project.
+- Both products send to the same PostHog project. SQL in PostHog is scoped to one project, so a query cannot join data across two projects.
 
 ## Use the trace ID as `$ai_trace_id`
 
@@ -188,6 +188,8 @@ To read the prompts and the model responses, query the `posthog.ai_events` table
 
 - **The IDs must match exactly.** `$ai_trace_id` must be 32 lowercase hexadecimal characters. `unhex` accepts a dashed UUID without an error, but it returns a value of the wrong length, so the query silently finds nothing. Remove the dashes, or use a real span trace ID.
 - **One query cannot read both tables.** Spans and events sit on different clusters, so you must correlate in two steps.
+- **Only the trace ID joins the two products.** `$ai_span_id` identifies a generation or a span inside LLM analytics. It is not an OpenTelemetry span ID, and it does not match `posthog.trace_spans.span_id`.
+- **A trace can arrive without its root span.** If a process stops before the exporter sends the root span, the child spans still arrive. Do not filter on `is_root_span` alone when you collect trace IDs.
 - **PostHog does not link the two products in the UI.** A span does not show a button to its LLM trace, and an LLM trace does not show a button to its span.
 - **Spans and events expire at different times.** Spans follow the logs retention period, which is 14 days by default. See [logs pricing](/docs/logs/pricing#retention). Events in [Product Analytics](/docs/product-analytics) stay for much longer.
 
