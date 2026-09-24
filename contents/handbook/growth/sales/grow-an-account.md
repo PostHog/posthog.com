@@ -43,7 +43,7 @@ They self-served the implementation and then nobody reviewed it. They're calling
  
 If you try to cross-sell a customer whose implementation is broken, two things happen. First, they don't trust their data, so they don't trust your recommendations. Second, their bill is higher than it should be, which makes every pricing conversation harder.
  
-Fix the foundation first. Run an implementation health check. Look for the common problems: unnecessary event volume from misconfigured autocapture, inflated identify/group calls, replay capturing everything, missing reverse proxy, no feature flag fallbacks. Then help them fix it.
+Fix the foundation first. Run an implementation health check. Look for the common problems: unnecessary event volume from misconfigured autocapture, inflated identify/group calls, replay capturing everything, missing reverse proxy, no feature flag fallbacks. Then help them fix it. If the fix is more than you can take on, a [forward deployed engineer](/handbook/forward-deployed-engineering/working-with-sales-and-cs#where-fde-fits-in-the-customer-lifecycle) can do the work with the customer.
  
 This feels counterintuitive. You're a TAM with a [growth quota](/handbook/growth/sales/how-we-work#how-commission-works---technical-account-managers), and your first move is to reduce the customer's bill. But this is the single most trust-building thing you can do. When you tell a customer "you're paying $800/month for events you don't need, here's how to fix that," they stop seeing you as a vendor trying to expand their contract and start seeing you as someone who's actually on their side.
  
