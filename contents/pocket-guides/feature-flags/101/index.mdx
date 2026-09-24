@@ -49,7 +49,7 @@ A flag is a named question your code asks PostHog: should this person get this f
 
 PostHog hashes the flag key with the person's <Term name="distinct id">distinct ID</Term> and gets a number between 0 and 1. If that number is under the rollout percentage, they're in <SeeFig n={2} />. Same key plus same distinct ID gives the same answer, every single time.
 
-So when a flag gives someone the "wrong" answer, the flag is proooobably fine. One of its inputs changed, and it's almost always the distinct ID. A browser that checks a flag before `identify()` runs is asking about an anonymous visitor, not your user. Call `identify()` first.
+So when a flag gives someone the "wrong" answer, the flag isn't broken. One of its inputs changed, and it's almost always the distinct ID. A browser that checks a flag before `identify()` runs is asking about an anonymous visitor, not your user. Call `identify()` first.
 
 ## Evaluate once per request
 
@@ -57,7 +57,7 @@ Check the flag once, where the request comes in, and pass the value down. Every 
 
 ## Every check gets recorded
 
-Each check sends a `$feature_flag_called` <Term name="event">event</Term> with the flag key and the value the person got (the SDK dedupes repeats). That's how PostHog knows who saw what, and experiments count exposures off the same event. It's also exactly what the wizard's Check step looks for at the end.
+Each check sends a `$feature_flag_called` <Term name="event">event</Term> with the flag key and the value the person got (the SDK drops repeats). That's how PostHog knows who saw what, and Experiments counts exposures from the same event. It's also exactly what the wizard's Check step looks for at the end.
 
 ## "Not loaded yet" is not "off"
 
@@ -65,7 +65,7 @@ In the browser, flags load async. Until they show up, `getFeatureFlag()` returns
 
 <SeeAlso>
 
-See also: [Feature flags](/docs/feature-flags) · [Best practices](/docs/feature-flags/best-practices) · [Adding flag code](/docs/feature-flags/adding-feature-flag-code) · [How we made flags faster and more reliable](/blog/how-we-improved-feature-flags-resiliency) · [Keep ad blockers from breaking flags](/tutorials/flags-adblock-prevention)
+See also: [Feature Flags](/docs/feature-flags) · [Best practices](/docs/feature-flags/best-practices) · [Adding flag code](/docs/feature-flags/adding-feature-flag-code) · [How we made flags faster and more reliable](/blog/how-we-improved-feature-flags-resiliency) · [Keep ad blockers from breaking flags](/tutorials/flags-adblock-prevention)
 
 </SeeAlso>
 

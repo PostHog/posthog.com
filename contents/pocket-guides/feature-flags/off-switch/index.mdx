@@ -43,7 +43,7 @@ return renderNewCheckout()
 
 # The off switch
 
-A rollback is a revert, a build, and a deploy, and your users see the bug the whole time. If the change is behind a flag, you just turn the flag off <SeeFig n={1} />.
+A rollback is a revert, a build, and a deploy, and your users see the bug the whole time. If the change is behind a flag, you turn the flag off <SeeFig n={1} />.
 
 ## How fast "off" arrives
 
@@ -53,7 +53,7 @@ A disabled flag returns `false` everywhere it's checked. How fast each side noti
 
 The off switch only works if the off path still works. Keep the old code working until the flag is gone, and make it your default for a flag that hasn't loaded or a server that can't reach PostHog <SeeFig n={2} />. That way an outage lands in the same place as a kill.
 
-Then actually test it. Flip the flag off in staging and check the old path still works, and have CI run your tests with the flag both on and off. A kill switch you've never flipped is one you're just hoping works.
+Then actually test it. Flip the flag off in staging and check the old path still works, and have CI run your tests with the flag both on and off. A kill switch you've never flipped is one you hope works.
 
 ## Switches you keep
 

@@ -66,7 +66,7 @@ describe('pocket guide volumes', () => {
         assert.deepEqual(unknown, [])
     })
 
-    test('a volume teaching a docs product has that product’s Learn tab', () => {
+    test('a volume teaching a docs product has a Learn tab on that product', () => {
         const productData = readdirSync(path.join(repoRoot, 'src/hooks/productData'))
             .filter((file) => file.endsWith('.tsx'))
             .map((file) => readRepoFile(`src/hooks/productData/${file}`))
