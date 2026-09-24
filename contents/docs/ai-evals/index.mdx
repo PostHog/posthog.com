@@ -351,7 +351,7 @@ One backfill runs at a time per evaluation. You can cancel a run while it is in 
 
 Turn on **Include generations that already have a result** to grade the same data a second time. Use it after changing a prompt or a code check, when you want the new version applied to data the old version already scored. Both results are kept, so you can compare them.
 
-### Reading a backfill's progress
+### Reading backfill progress
 
 The **Covered** column counts how much of the range holds a result. A finished backfill usually reads as fully covered, because the evaluation grades new data on its own while the backfill works through older data.
 
@@ -365,7 +365,7 @@ The most recent few minutes are also held back, because an evaluation waits for 
 
 ### Backfill pricing
 
-Each evaluation a backfill runs counts as one AI Observability event, the same as a live evaluation, and LLM judge backfills use your provider API key. The confirmation dialog shows how much will be evaluated before you start, so check that number on a wide range.
+Every generation, trace, or session a backfill evaluates counts as one AI Observability event, the same as a live evaluation, and LLM judge backfills use your provider API key. The confirmation dialog shows how much will be evaluated before you start, so check that number on a wide range.
 
 ## Evaluation reports
 
