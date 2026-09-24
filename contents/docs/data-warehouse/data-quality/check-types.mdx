@@ -1,0 +1,130 @@
+---
+title: Data quality check types
+sidebar: Docs
+showTitle: true
+---
+
+import { CalloutBox } from 'components/Docs/CalloutBox'
+
+<CalloutBox icon="IconFlask" title="Data quality is in alpha" type="action">
+
+Data quality isn't available to every project. [Contact support](https://app.posthog.com/home#supportModal) to request access or share feedback.
+
+</CalloutBox>
+
+PostHog supports seven data quality check types. Connected tables, saved views, and the PostHog tables `events`, `persons`, and `groups` support every type. Metrics support **Custom SQL** only and must have a saved HogQL definition.
+
+Most checks pass when they find zero failing rows. **Row count** is the exception: it passes when the number of rows is within the limits you set.
+
+## What you need to provide
+
+Start by choosing the table, view, metric, or PostHog table that you want to check. Then provide:
+
+| Field | What to enter |
+| --- | --- | --- |
+| **Check type** | One of the seven types on this page. Metrics only support **Custom SQL**. |
+| **Column** | The column to check when the selected type needs one. |
+| Type-specific options | The allowed values, referenced table and column, row limits, maximum age, or query described below. |
+| **Name** | An optional name that starts with a letter and contains only letters, numbers, and underscores. Names must be unique across active checks in the project. |
+| **Description** | Why the check exists and what a failure means. |
+| **Severity** | **Error** when a failure makes the data untrustworthy, or **Warning** when it provides useful context. |
+| **Tags** | Optional labels that help organize checks. |
+
+## Not null
+
+**Not null** fails once for every row where the selected column is null. Select the column that must always have a value, such as `customer_id`.
+
+## Unique
+
+**Unique** fails once for every distinct non-null value that appears more than once. Null values are ignored. Select the column that must not contain duplicates, such as `order_id`.
+
+For example, if `order_id = 42` appears three times, the check reports one failing value, not three failing rows.
+
+## Accepted values
+
+**Accepted values** fails on each non-null value outside the set you provide. Null values are ignored. Select a column and add every allowed value. For example, the `status` column might allow `paid`, `pending`, and `refunded`.
+
+Values can be strings, numbers, or booleans. PostHog normalizes them to the column's type when it knows that type.
+
+## Relationships
+
+**Relationships** checks referential integrity. It fails on each non-null value in the selected column that has no match in another table or view. Null values in the source column are ignored.
+
+Provide:
+
+- **Column** – The source column, such as `orders.customer_id`.
+- **References table or view** – The table, view, or PostHog table that contains valid values, such as `customers`.
+- **References column** – The target column, such as `customers.id`.
+
+Metrics can't be relationship targets.
+
+You must have read access to the referenced table or view and editor access to the item you are checking.
+
+## Row count
+
+**Row count** compares the number of rows with inclusive minimum and maximum limits. Set **Minimum rows**, **Maximum rows**, or both. The values must be zero or greater, and the minimum can't exceed the maximum.
+
+The check passes when the row count is within both limits. Because no individual row is wrong, the result shows the observed count instead of failing rows.
+
+## Freshness
+
+**Freshness** checks the newest non-null timestamp in a column. Select the timestamp column and set **Maximum age in minutes**. The value must be at least one minute.
+
+The check fails when the newest timestamp is older than the maximum age. It also fails when the table is empty or the column has no non-null value.
+
+## Custom SQL
+
+**Custom SQL** runs a HogQL `SELECT`. Every returned row is a failure, and zero rows passes. Enter a query that returns only invalid rows:
+
+```sql
+SELECT * FROM orders WHERE total != subtotal + tax
+```
+
+The query can read other tables, but the result stays attached to the table, view, or metric where you created the check. You must have access to every table the query reads. For non-metric checks, placeholder fields, placeholder expressions, and filter placeholders aren't supported.
+
+For metrics, the query must use `{metric}` exactly once as a relation:
+
+```sql
+SELECT * FROM {metric} WHERE revenue < 0
+```
+
+Metric check SQL can't define common table expressions (CTEs), including nested CTEs and scalar `WITH` bindings. Other placeholders aren't supported. The saved metric definition can still contain CTEs and saved parameters.
+
+## How each type handles null values
+
+| Check type | Null behavior |
+| --- | --- |
+| **Not null** | Each null is a failure. |
+| **Unique** | Nulls are ignored. |
+| **Accepted values** | Nulls are ignored. Add a separate **Not null** check when null isn't valid. |
+| **Relationships** | Nulls in the source column are ignored. Add a separate **Not null** check when every row must have a reference. |
+| **Row count** | Every row counts, regardless of which values are null. |
+| **Freshness** | Null timestamps are ignored when PostHog finds the newest value. The check fails if no non-null timestamp exists. |
+| **Custom SQL** | Your query decides which null values return as failures. |
+
+## Limit checks to recent PostHog rows
+
+Every type except **Custom SQL** can limit a PostHog-table check to recent rows. The current tables with time columns are:
+
+- `events`, using `timestamp`
+- `persons`, using `created_at`
+- `groups`, using `created_at`
+
+Set **Only check recent rows** to the number of hours you want to include. Leave it empty to scan the whole table. A whole-table check gives the strongest assertion but can cost more on large tables. Add an explicit time filter to a **Custom SQL** query instead.
+
+A **Relationships** check can limit each side independently. **Only check recent rows** limits the source rows. **Only look for a match in recent rows** limits the target rows searched for a match. A target window that is too short can report valid older references as failures.
+
+## Choose a severity
+
+- Use **Error** when a failure means downstream results shouldn't be trusted. Error failures mark the table, view, or metric as failing and send notifications.
+- Use **Warning** when a failure is useful context but doesn't require immediate action. Warning failures surface in results and set the health status to warning.
+
+An execution error is different from an error-severity failure. An **Errored** result means PostHog couldn't compile or execute the assertion. It doesn't prove that the data is invalid, and it doesn't send a data-failure notification.
+
+## Edit, disable, or delete a check
+
+Open the check's actions menu and select **Edit** to change its name, description, type, column, options, severity, or tags. You can't move a check to another table, view, or metric. Editing keeps the run history.
+
+Use the **Enabled** switch to stop every manual and automatic trigger from selecting the check. Re-enable it to include it in future runs.
+
+Select **Delete** to remove the check. PostHog asks for confirmation and keeps its past run history. To test a different table, view, or metric, delete the check and create a new one there.
