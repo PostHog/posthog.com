@@ -233,7 +233,7 @@ If you enable [native crash autocapture](/docs/libraries/react-native#native-cra
 
 <CalloutBox icon="IconInfo" title="Source-code context" type="fyi">
 
-`includeSource` (or `POSTHOG_INCLUDE_SOURCE` on iOS) also uploads your native source files, so crash frames can show the surrounding code. It applies to iOS crashes and Android C/C++ (NDK) crashes. Android Java/Kotlin crashes have no source-code context, because the ProGuard/R8 mapping upload doesn't include sources.
+`includeSource` (or `POSTHOG_INCLUDE_SOURCE` on iOS) also uploads your native source files. On iOS, crash frames then show the surrounding code. On Android, it uploads your C/C++ sources with the `.so` debug symbols. Java/Kotlin crashes have no source-code context, because the ProGuard/R8 mapping upload doesn't include sources.
 
 </CalloutBox>
 
