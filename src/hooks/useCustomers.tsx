@@ -927,7 +927,7 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
         industries: ['Fashion'],
         // users: ['Engineering', 'Leadership', 'Founders'],
         notes: "Men's chains & accessories",
-        featured: true,
+        featured: false,
         logo: JaxxonLogo,
         height: 12,
     },
@@ -1585,7 +1585,7 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
     },
     ukgovt: {
         name: 'UK Government',
-        toolsUsed: [], // TODO: Add toolsUsed
+        toolsUsed: ['product_analytics', 'session_replay', 'feature_flags', 'error_tracking', 'posthog_ai'],
         // industries: [], // TODO: Add industries
         // users: [], // TODO: Add users
         notes: 'Most popular country with a King',
