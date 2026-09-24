@@ -132,3 +132,20 @@ You can then customize the insight and save it. You can change the type of insig
 3. Inside any notebook. Insights created in a Notebook aren't saved to 'Your Insights' automatically – see our Notebook docs for more.
 
 4. Using [Terraform](/docs/product-analytics/dashboards#managing-dashboards-with-terraform) to manage insights as infrastructure-as-code.
+
+## Copying insights to another project
+
+You can copy a saved insight to another project in the same organization. This option shows only when your organization has more than one project.
+
+1. Open the insight you want to copy.
+1. Open the actions sidebar.
+1. Click **Copy to another project**.
+1. Select the destination project.
+1. For each dependency, such as an [action](/docs/data/actions) or a [cohort](/docs/data/cohorts), choose to create a new copy or to use an existing resource in the destination project.
+1. Click **Copy**.
+
+A few things to keep in mind:
+
+- The original insight does not change.
+- The copy is independent. Changes to the original do not sync to the copy, and changes to the copy do not sync to the original.
+- The copy is not added to a dashboard. To copy an insight together with its dashboard, [copy the dashboard](/docs/product-analytics/dashboards#copying-dashboards-and-templates-between-projects).
