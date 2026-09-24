@@ -1,4 +1,54 @@
-## Q3 2026 Objectives
+## Q4 2026 Objectives
+
+### Objective 1: Fix the docs
+A new user can tell what Support and the agent do, how Support works with the rest of PostHog, and what Business Knowledge is.
+- KR1: Docs explain Support and the Support Agent, including how Support works with other tools such as dashboards and workflows
+- KR2: Docs explain Business Knowledge
+
+### Objective 2: General availability for the Support Agent
+The agent is a great experience on real tickets, has clear pricing, and a customer can import their existing support history.
+- KR1: The Support Agent sends secure customer replies, answers when it is confident, hands off to a human when it is not, and auto-resolves common questions in the widget
+- KR2: Support Agent has a clear, published price and bills usage
+- KR3: A customer can import tickets from other tools, starting with Fin, Crisp, Plain, and InKeep
+
+### Objective 3: General availability for Business Knowledge
+Customers can store and sync product knowledge, pay for it, and bring an existing knowledge base with them.
+- KR1: Business Knowledge leaves beta
+- KR2: It syncs external sources (GitHub, Linear, docs)
+- KR3: Business Knowledge has a published price and bills usage
+- KR4: A customer can import a knowledge base from Fin, with Crisp, Plain, and InKeep on the same importer
+
+### Objective 4: Make Support email reliable
+Customers receive mail, and a Mailgun failure does not stop the queue.
+- KR1: Incoming and outgoing support email no longer depends on the current Mailgun path
+- KR2: A failed delivery is visible on the ticket and can be retried
+
+## Previous goals
+<details>
+<summary>Q3 2026 Objectives</summary>
+
+### Objective 1: PostHog fully migrates to our own support product
+Handle all PostHog support through our own product, replacing external tools.
+- KR1: 100% of support tickets flow through our product (emails, Slack, API ingestion)
+- KR2: All missing features requested by support team are shipped (track blockers to zero)
+- KR3: All docs and internal procedures are updated to reflect the new workflow (<SmallTeam slug="support" /> owns, we unblock)
+
+### Objective 2: Launch the Support product to public beta
+Make the product available to all users who want to opt-in.
+- KR1: Product is available in feature preview menu and has a product page on posthog.com
+- KR2: At least 1000 customers have handled at least 10 tickets in the Support product
+- KR3: Marketing campaign launched to drive awareness
+
+### Objective 3: Build knowledge base product
+Give customers a place to store product knowledge (code, articles, docs, text) that AI can search across PostHog.
+- KR1: Customers can add and manage knowledge sources (code, links, text, documents) in a searchable database
+- KR2: AI reply suggestions in the Support product use the knowledge base to find answers
+- KR3: Knowledge base is available via MCP
+- KR4: At least 100 beta customers have added knowledge sources and AI has used them in replies
+
+</details>
+<details>
+<summary>Q2 2026 Objectives</summary>
 
 ### Objective 1: Launch the Support product to general availability
 - Product is officially GA
@@ -22,29 +72,6 @@
 ### Objective 5: Set pricing for AI products
 - Define and validate pricing for the AI support bot
 - Define and validate pricing for Business Knowledge
-
-## Previous goals
-<details>
-<summary>Q2 2026 Objectives</summary>
-
-### Objective 1: PostHog fully migrates to our own support product
-Handle all PostHog support through our own product, replacing external tools.
-- KR1: 100% of support tickets flow through our product (emails, Slack, API ingestion)
-- KR2: All missing features requested by support team are shipped (track blockers to zero)
-- KR3: All docs and internal procedures are updated to reflect the new workflow (<SmallTeam slug="support" /> owns, we unblock)
-
-### Objective 2: Launch the Support product to public beta
-Make the product available to all users who want to opt-in.
-- KR1: Product is available in feature preview menu and has a product page on posthog.com
-- KR2: At least 1000 customers have handled at least 10 tickets in the Support product
-- KR3: Marketing campaign launched to drive awareness
-
-### Objective 3: Build knowledge base product
-Give customers a place to store product knowledge (code, articles, docs, text) that AI can search across PostHog.
-- KR1: Customers can add and manage knowledge sources (code, links, text, documents) in a searchable database
-- KR2: AI reply suggestions in the Support product use the knowledge base to find answers
-- KR3: Knowledge base is available via MCP
-- KR4: At least 100 beta customers have added knowledge sources and AI has used them in replies
 
 </details>
 
