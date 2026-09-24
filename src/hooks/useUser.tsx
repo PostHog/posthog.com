@@ -368,6 +368,16 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
         }
     }
 
+    // Both disambiguation actions report failure the same way, so they share one
+    // capture. `source` names the action that failed.
+    const captureProviderError = (source: string, error: unknown) => {
+        posthog?.capture('squeak error', {
+            source,
+            provider: 'posthog',
+            error: error instanceof Error ? error.message : String(error),
+        })
+    }
+
     // Disambiguation: create a brand-new community account from the verified
     // PostHog identity carried in the pending token.
     const createWithProvider = async ({
@@ -378,12 +388,9 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
         try {
             const { ok, data, error } = await postPosthogAuth('create', { pendingToken })
             if (!ok) {
-                posthog?.capture('squeak error', {
-                    source: 'useUser.createWithProvider',
-                    provider: 'posthog',
-                    error: error || 'Could not create account.',
-                })
-                return { error: error || 'Could not create account.' }
+                const message = error || 'Could not create account.'
+                captureProviderError('useUser.createWithProvider', message)
+                return { error: message }
             }
             // await so a failure inside finalizeLogin (e.g. /me errors) is caught
             // here rather than becoming an unhandled rejection in the caller.
@@ -399,11 +406,7 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
 
             return user
         } catch (error) {
-            posthog?.capture('squeak error', {
-                source: 'useUser.createWithProvider',
-                provider: 'posthog',
-                error: error instanceof Error ? error.message : String(error),
-            })
+            captureProviderError('useUser.createWithProvider', error)
             console.error(error)
             return { error: 'Your account was created, but loading it failed. Please refresh and sign in.' }
         }
@@ -423,12 +426,9 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
         try {
             const { ok, data, error } = await postPosthogAuth('link', { pendingToken, identifier, password })
             if (!ok) {
-                posthog?.capture('squeak error', {
-                    source: 'useUser.linkExisting',
-                    provider: 'posthog',
-                    error: error || 'Could not link account.',
-                })
-                return { error: error || 'Could not link account.' }
+                const message = error || 'Could not link account.'
+                captureProviderError('useUser.linkExisting', message)
+                return { error: message }
             }
             const user = await finalizeLogin(data.jwt)
 
@@ -440,11 +440,7 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
 
             return user
         } catch (error) {
-            posthog?.capture('squeak error', {
-                source: 'useUser.linkExisting',
-                provider: 'posthog',
-                error: error instanceof Error ? error.message : String(error),
-            })
+            captureProviderError('useUser.linkExisting', error)
             console.error(error)
             return { error: 'Your account was linked, but loading it failed. Please refresh and sign in.' }
         }
