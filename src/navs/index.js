@@ -1500,6 +1500,10 @@ export const handbookSidebar = [
                         url: '/handbook/cs-and-onboarding/lifecycle-csm',
                     },
                     {
+                        name: 'Customer-led calls',
+                        url: '/handbook/cs-and-onboarding/customer-led-calls',
+                    },
+                    {
                         name: 'Unengaged customers',
                         url: '/handbook/cs-and-onboarding/engaging-unengaged-customers',
                     },
@@ -3454,10 +3458,6 @@ export const docsMenu = {
                         {
                             name: 'Endpoints',
                             url: '/docs/api/endpoints',
-                        },
-                        {
-                            name: 'Environments',
-                            url: '/docs/api/environments',
                         },
                         {
                             name: 'Error tracking',
@@ -6660,6 +6660,50 @@ export const docsMenu = {
                     url: '/docs/data-warehouse/views/materialize-troubleshooting',
                     icon: 'IconQuestion',
                     color: 'orange',
+                },
+                {
+                    name: 'Data quality',
+                    url: '/docs/data-warehouse/data-quality',
+                    icon: 'IconListCheck',
+                    color: 'red',
+                    badge: {
+                        title: 'Alpha',
+                        className: 'uppercase !bg-red/10 !text-red !dark:text-white !dark:bg-red/50',
+                    },
+                    children: [
+                        {
+                            name: 'Overview',
+                            url: '/docs/data-warehouse/data-quality',
+                        },
+                        {
+                            name: 'Start here',
+                            url: '/docs/data-warehouse/data-quality/start-here',
+                        },
+                        {
+                            name: 'Check types and configuration',
+                            url: '/docs/data-warehouse/data-quality/check-types',
+                        },
+                        {
+                            name: 'Triggers and schedules',
+                            url: '/docs/data-warehouse/data-quality/triggers',
+                        },
+                        {
+                            name: 'Block materialization',
+                            url: '/docs/data-warehouse/data-quality/block-materialization',
+                        },
+                        {
+                            name: 'Test metrics',
+                            url: '/docs/data-warehouse/data-quality/metrics',
+                        },
+                        {
+                            name: 'MCP and SQL reference',
+                            url: '/docs/data-warehouse/data-quality/mcp',
+                        },
+                        {
+                            name: 'Results and troubleshooting',
+                            url: '/docs/data-warehouse/data-quality/troubleshooting',
+                        },
+                    ],
                 },
                 {
                     name: 'SQL commands',
