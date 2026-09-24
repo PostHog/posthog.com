@@ -337,6 +337,7 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
 
             posthog?.capture('squeak oauth login success', {
                 provider,
+                method: 'resolve',
                 email: user.email,
             })
 
@@ -377,12 +378,32 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
         try {
             const { ok, data, error } = await postPosthogAuth('create', { pendingToken })
             if (!ok) {
+                posthog?.capture('squeak error', {
+                    source: 'useUser.createWithProvider',
+                    provider: 'posthog',
+                    error: error || 'Could not create account.',
+                })
                 return { error: error || 'Could not create account.' }
             }
             // await so a failure inside finalizeLogin (e.g. /me errors) is caught
             // here rather than becoming an unhandled rejection in the caller.
-            return await finalizeLogin(data.jwt)
+            const user = await finalizeLogin(data.jwt)
+
+            // The same success event as a direct sign-in: this branch also ends with
+            // a signed-in person, so the start -> success funnel must count it.
+            posthog?.capture('squeak oauth login success', {
+                provider: 'posthog',
+                method: 'create',
+                email: user.email,
+            })
+
+            return user
         } catch (error) {
+            posthog?.capture('squeak error', {
+                source: 'useUser.createWithProvider',
+                provider: 'posthog',
+                error: error instanceof Error ? error.message : String(error),
+            })
             console.error(error)
             return { error: 'Your account was created, but loading it failed. Please refresh and sign in.' }
         }
@@ -402,10 +423,28 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
         try {
             const { ok, data, error } = await postPosthogAuth('link', { pendingToken, identifier, password })
             if (!ok) {
+                posthog?.capture('squeak error', {
+                    source: 'useUser.linkExisting',
+                    provider: 'posthog',
+                    error: error || 'Could not link account.',
+                })
                 return { error: error || 'Could not link account.' }
             }
-            return await finalizeLogin(data.jwt)
+            const user = await finalizeLogin(data.jwt)
+
+            posthog?.capture('squeak oauth login success', {
+                provider: 'posthog',
+                method: 'link',
+                email: user.email,
+            })
+
+            return user
         } catch (error) {
+            posthog?.capture('squeak error', {
+                source: 'useUser.linkExisting',
+                provider: 'posthog',
+                error: error instanceof Error ? error.message : String(error),
+            })
             console.error(error)
             return { error: 'Your account was linked, but loading it failed. Please refresh and sign in.' }
         }
