@@ -25,7 +25,7 @@ If you are configuring IdP-based SSO for the first time, we recommend you use [O
 
 1. If you are using PostHog cloud, your organization must be subscribed to a platform package that offers SAML. If you are self-hosting PostHog, your instance must have an enterprise license that supports SAML.
 
-2. You need to [verify domains](/docs/settings/authentication/sso#authentication-domains) for any email address that you want to allow users to login with. For example, if you want to allow users with an `@example.com` email address to login, like `john@example.com`, you need to add and verify `example.com` as an authentication domain.
+2. You need to [verify domains](/docs/settings/authentication/sso#authentication-domains) for any email address that you want to allow users to log in with. For example, if you want to allow users with an `@example.com` email address to log in, like `john@example.com`, you need to add and verify `example.com` as an authentication domain.
 
 3. If you are self-hosting PostHog, make sure you have properly set up your `SITE_URL` [environment variable](/docs/self-host/configure/environment-variables) configuration.
 
@@ -39,7 +39,7 @@ If you are configuring IdP-based SSO for the first time, we recommend you use [O
 
 3. In your IdP, create a new SAML app for PostHog.
 
-    a. Copy the "*ACS Consumer URL*" and "*Audience / entity ID*" displayed in PostHog into your SAML app's configuration in your IdP.
+    a. Copy the "*ACS Consumer URL*", "*Audience / entity ID*", and "*Relay state*" displayed in PostHog into your SAML app's configuration in your IdP.
 
     b. Copy the following values from your SAML app's configuration in your IdP into PostHog:
        - **ACS URL** (also called **Sign-on URL** or **SAML endpoint**)
