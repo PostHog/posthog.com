@@ -34,13 +34,15 @@ Because `$ai_trace_id` is a string that you choose, most examples set it to a ne
 
 ### From a PostHog SDK span
 
-The PostHog SDKs expose the active span as a W3C `traceparent` header value. The header has the form `00-<trace_id>-<span_id>-<flags>`, so the second field is the trace ID.
+The PostHog Node.js SDK (version 5.52.0 and later) and Python SDK (version 7.58.0 and later) expose the active span as a W3C `traceparent` header value. The header has the form `00-<trace_id>-<span_id>-<flags>`, so the second field is the trace ID.
+
+Tracing is off until you set the `traces` option on the client. When tracing is off, `traceparent()` returns `null` (`None` in Python), so check the value before you use it.
 
 <MultiLanguage>
 
 ```javascript file=JavaScript
 await posthog.withSpan('POST /api/chat', { kind: 'server' }, async (span) => {
-  const traceId = span.traceparent().split('-')[1]
+  const traceId = span.traceparent()?.split('-')[1]
 
   const response = await openai.responses.create({
     model: 'gpt-5',
@@ -55,7 +57,8 @@ await posthog.withSpan('POST /api/chat', { kind: 'server' }, async (span) => {
 
 ```python file=Python
 with posthog.start_span("POST /api/chat", kind="server") as span:
-    trace_id = span.traceparent().split("-")[1]
+    traceparent = span.traceparent()
+    trace_id = traceparent.split("-")[1] if traceparent else None
 
     response = client.responses.create(
         model="gpt-5",
@@ -96,9 +99,10 @@ If the LLM call runs in a different service, or behind a proxy that captures the
 
 ```javascript file=JavaScript
 // Caller: pass the trace context onward
+const traceparent = span.traceparent()
 await fetch('https://llm-proxy.internal/chat', {
   method: 'POST',
-  headers: { traceparent: span.traceparent() },
+  headers: traceparent ? { traceparent } : {},
   body: JSON.stringify({ message }),
 })
 ```
@@ -110,7 +114,8 @@ with posthog.start_span(
     kind="server",
     parent=request.headers.get("traceparent"),
 ) as span:
-    trace_id = span.traceparent().split("-")[1]
+    traceparent = span.traceparent()
+    trace_id = traceparent.split("-")[1] if traceparent else None
 ```
 
 </MultiLanguage>
@@ -119,7 +124,7 @@ with posthog.start_span(
 
 Spans and LLM events live in different tables, and the tables store the trace ID in different encodings:
 
-- `posthog.trace_spans.trace_id` holds the 16 raw bytes, and the [SQL editor](https://app.posthog.com/sql) returns them base64-encoded.
+- `posthog.trace_spans.trace_id` holds the 16-byte trace ID, base64-encoded. The [SQL editor](https://app.posthog.com/sql) returns it in that form.
 - `$ai_trace_id` on the `events` table holds 32 hexadecimal characters.
 
 Convert between them with these two expressions:
@@ -191,7 +196,7 @@ To read the prompts and the model responses, query the `posthog.ai_events` table
 - **Only the trace ID joins the two products.** `$ai_span_id` identifies a generation or a span inside LLM analytics. It is not an OpenTelemetry span ID, and it does not match `posthog.trace_spans.span_id`.
 - **A trace can arrive without its root span.** If a process stops before the exporter sends the root span, the child spans still arrive. Do not filter on `is_root_span` alone when you collect trace IDs.
 - **PostHog does not link the two products in the UI.** A span does not show a button to its LLM trace, and an LLM trace does not show a button to its span.
-- **Spans and events expire at different times.** Spans follow the logs retention period, which is 14 days by default. See [logs pricing](/docs/logs/pricing#retention). Events in [Product Analytics](/docs/product-analytics) stay for much longer.
+- **Spans and events expire at different times.** Spans stay for 14 days by default. Events in [Product Analytics](/docs/product-analytics) stay for much longer.
 
 ## Next steps
 
