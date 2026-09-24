@@ -150,14 +150,14 @@ Use this option if you want to add additional configurations to your app that ar
 2. Select the **SAML 2.0** option for sign-in method.
    <ProductScreenshot
     imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/2026_09_17_okta_saml_step_2_d3fae34823.png"
-    alt="Okta admin UI showing a Create App Integration button"
+    alt="Okta admin UI showing a modal to configure an app integration"
     classes="rounded"
    />
   
 3. Select **Next**, name the configuration *PostHog*, then select **Next** again.
    <ProductScreenshot
     imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/2026_09_17_okta_saml_step_3_d41495d5e5.png"
-    alt="Okta admin UI showing a Create App Integration button"
+    alt="Okta admin UI showing application form with a name field"
     classes="rounded"
    />
 
@@ -165,28 +165,28 @@ Use this option if you want to add additional configurations to your app that ar
    <ProductScreenshot
     imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/2026_09_17_okta_saml_step_4_light_5657a92830.png"
     imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/2026_09_17_okta_saml_step_4_dark_f67925b245.png"
-    alt="Okta admin UI showing a Create App Integration button"
+    alt="PostHog UI showing authentication configurations"
     classes="rounded"
    />
 
 5. Copy the *ACS consumer URL* from PostHog into the Okta app's *Single sign-on URL* field, and copy the *Audience / entity ID* from PostHog into the Okta app's *Audience URI (SP Entity ID)* field.
    <ProductScreenshot
     imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/2026_09_17_okta_saml_step_5_914ca0123f.png"
-    alt="Okta admin UI showing a Create App Integration button"
+    alt="Okta admin UI showing application form with single sign on url and audience uri fields"
     classes="rounded"
    />
 
 6. In Okta, select **Next**. Check the box that says *This is an internal app that we have created*, then select **Finish**.
    <ProductScreenshot
     imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/2026_09_17_okta_saml_step_6_0c1a394257.png"
-    alt="Okta admin UI showing a Create App Integration button"
+    alt="Okta admin UI showing application form with a internal app checkbox"
     classes="rounded"
    />
 
 7. Copy the *Sign on URL* from Okta to the *SAML ACS URL* field in PostHog, the *Issuer* from Okta to the *SAML entity ID* field in PostHog, and the *Signing Certificate* from Okta to the *SAML X.509 certificate* field in PostHog.
    <ProductScreenshot
     imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/2026_09_17_okta_saml_step_7_bf9659ed8d.png"
-    alt="Okta admin UI showing a Create App Integration button"
+    alt="Okta admin UI showing SAML details"
     classes="rounded"
    />
 
@@ -194,21 +194,21 @@ Use this option if you want to add additional configurations to your app that ar
    <ProductScreenshot
     imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/2026_09_17_okta_saml_step_8_light_c9de006770.png"
     imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/2026_09_17_okta_saml_step_8_dark_6b2976cf77.png"
-    alt="Okta admin UI showing a Create App Integration button"
+    alt="PostHog UI showing SAML settings form"
     classes="rounded"
    />
 
 9. In Okta, navigate to the Sign On tab of your SAML app, then select **Edit** in the **Settings** section.
    <ProductScreenshot
     imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/2026_09_17_okta_saml_step_9_7c370ffb69.png"
-    alt="Okta admin UI showing a Create App Integration button"
+    alt="Okta admin UI showing application single sign on tab"
     classes="rounded"
    />
 
 10. Copy the *Relay state* from PostHog to the *Default Relay State* field in Okta. Select **Save**
    <ProductScreenshot
     imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/2026_09_17_okta_saml_step_10_225870e4a8.png"
-    alt="Okta admin UI showing a Create App Integration button"
+    alt="Okta admin UI showing application form with defauly relay state field"
     classes="rounded"
    />
 
@@ -237,7 +237,7 @@ Use this option if you want to add additional configurations to your app that ar
   </table>
    <ProductScreenshot
     imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/2026_09_17_okta_saml_step_11_3e259c5ae8.png"
-    alt="Okta admin UI showing a Create App Integration button"
+    alt="Okta admin UI showing SAML assertions"
     classes="rounded"
    />
 
