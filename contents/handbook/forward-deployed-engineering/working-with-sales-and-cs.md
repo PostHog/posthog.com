@@ -22,7 +22,7 @@ One thing worth naming from the sales and CS side: **an FDE ask usually surfaces
 
 ## Where FDE fits in the customer lifecycle
 
-An FDE engagement is one tool in the account team's toolbox, next to cost reviews, training, and implementation help. It is not a separate sales motion. The [accounts overview](/handbook/growth/sales/accounts-overview) shows how an account moves between the TAE, the CSM, and the TAM. There are three points in that journey where it's worth asking whether an FDE engagement would help the customer:
+An FDE engagement is one tool in the account team's toolbox. It is not a separate sales motion. The [accounts overview](/handbook/growth/sales/accounts-overview) shows how an account moves between the TAE, the CSM, and the TAM. There are three points in that journey where it's worth asking whether an FDE engagement would help the customer:
 
 1. **Landing.** The TAE closes the deal. A migration or a first implementation is the natural first engagement, before the customer counts as onboarded.
 2. **A TAM joins.** A qualified opportunity comes out of onboarding, a CSM account qualifies for growth, or an unowned account shows PLG signals. The TAM's first step is often to fix the instrumentation and set the account up for success. Some customers want an FDE to do that work with them.
