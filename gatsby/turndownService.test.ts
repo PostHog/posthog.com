@@ -13,9 +13,14 @@ const convert = (html: string) =>
 test('exports one title without page and code actions', () => {
     const markdown = convert(`<button aria-label="Copy this page as Markdown">Copy page</button>
         <h1>MCP Analytics</h1><p>Call <code>instrument()</code>.</p>
+        <div class="not-prose"><button><code>npx @posthog/wizard</code></button>
+        <a href="/wizard" data-export="skip">Learn more</a></div>
         <div class="code-block"><button class="ask-posthog-ai-code-snippet">PostHog AI</button>
         <pre><code class="language-python">instrument(server, posthog)</code></pre></div>`)
-    assert.equal(markdown, '# MCP Analytics\n\nCall `instrument()`.\n\n```python\ninstrument(server, posthog)\n```')
+    assert.equal(
+        markdown,
+        '# MCP Analytics\n\nCall `instrument()`.\n\n`npx @posthog/wizard`\n\n```python\ninstrument(server, posthog)\n```'
+    )
     assert.equal(extractTitleFromHtml('<title>MCP Analytics - Docs - PostHog</title>'), 'MCP Analytics')
 })
 

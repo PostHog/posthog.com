@@ -91,6 +91,7 @@ export function InlineCommand({
                 <Link
                     to={secondaryTo}
                     state={{ newWindow: true }}
+                    data-export="skip"
                     className="group relative -top-2 flex gap-px justify-center items-center pt-3 pr-2 pl-5 pb-1 text-xs text-secondary hover:text-primary mx-1.5 border-b border-x border-primary bg-accent/50 hover:bg-hover/100 rounded-b-md text-center"
                 >
                     Learn more
