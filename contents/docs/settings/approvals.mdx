@@ -63,9 +63,9 @@ Once enough approvers approve the request and reach the required quorum, PostHog
 
 Approvals currently support gating the following actions:
 
-| Resource      | Gateable actions                           |
-| ------------- | ------------------------------------------ |
-| Feature flags | Enable, disable, change rollout percentage |
+| Resource      | Gateable actions                                                  |
+| ------------- | ----------------------------------------------------------------- |
+| Feature flags | Enable, disable, change rollout percentage, change release conditions |
 
 More resource types and actions are coming soon. If you need approval gates for other actions, [let us know](https://posthog.com/questions).
 
@@ -97,6 +97,17 @@ Each approval policy includes:
 ### Conditions
 
 Conditions let you require approval only when certain criteria are met. If no conditions are set, all matching actions require approval.
+
+For **Update feature flag** policies, a condition targets one of these fields:
+
+| Field                  | What it covers                                                                                                   | Condition types                        |
+| ---------------------- | ---------------------------------------------------------------------------------------------------------------- | -------------------------------------- |
+| **Rollout percentage** | The rollout percentage of each release condition set, variant, and holdout                                       | Any change, before/after, change amount |
+| **Release conditions** | Who a flag matches: adding, removing, or editing a property filter, adding or removing a condition set, or switching between person and group targeting | Any change                             |
+
+Release conditions are opt-in. Only a policy that selects **Release conditions** requires approval for targeting changes. A policy with no conditions, or a condition on rollout percentage, lets targeting changes save without approval.
+
+Reordering filters or saving a flag without changing its targeting doesn't create a change request. Creating a new flag isn't gated by release conditions.
 
 | Condition type    | Description                                                     | Example                                       |
 | ----------------- | --------------------------------------------------------------- | --------------------------------------------- |
@@ -257,6 +268,21 @@ Now all feature flag changes will create change requests that must be approved.
 6. Save the policy
 
 Small rollout adjustments (20% or less) proceed immediately. Larger increases require approval.
+
+### Requiring approval for targeting changes
+
+**Scenario**: Your flags run at 100% rollout and target specific groups or users, so the risky change is who a flag matches, not the percentage.
+
+**Setup**:
+
+1. Go to **Settings** → **Project** → **Approvals**
+2. Click **New policy**
+3. Select **Update feature flag**
+4. Add a condition: **Release conditions** changes
+5. Add approvers
+6. Save the policy
+
+Now any edit to a flag's release conditions, such as changing a `$group_key` filter or adding a property filter, creates a change request.
 
 ### Dual approval for compliance
 
