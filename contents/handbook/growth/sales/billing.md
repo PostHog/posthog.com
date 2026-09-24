@@ -217,6 +217,10 @@ Employees can get access to paid features (like Boost) on personal or side proje
 
 2. **Long trial**: Create a trial that does not auto-convert with a long `expires_at` date. This works well for temporary access or when you want a clear end date.
 
+Side projects on a long trial meet the same [spend caps](/handbook/growth/sales/trials) as a prospect on Replay Vision, Desktop, PostHog AI, and Inbox. They reach them quickly. To lift them, add the organization to the `billing-trial-expanded-free-allocation` feature flag in PostHog. It is an organization group flag, so target it on `organization.$group_key` with the organization ID. That gives the side project ten times each product's free allocation instead of twice it.
+
+The flag only changes what a trial lends where the customer set no limit. If the side project has a spend limit of its own, that limit still governs, so clear it first.
+
 ### Updating subscriptions
 
 Stripe subscriptions can be modified relatively freely for example if moving to a custom pricing plan. 

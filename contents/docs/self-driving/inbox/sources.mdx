@@ -28,7 +28,15 @@ You don't need to configure MCP servers for inbox sources manually. Once your re
 
 ## PostHog sources
 
-These sources are available when the matching PostHog product has data in your project.
+These sources use data from the matching PostHog products in your project.
+Enable the corresponding source or scout to receive findings in your inbox.
+
+Feature flags, web analytics, surveys, data warehouse, and data pipelines use [scouts](/docs/self-driving/scouts).
+Enable the corresponding scout and keep **Write signals to the inbox** on.
+A paused scout or a scout in [dry run](/docs/self-driving/scouts#dry-runs) does not write findings to the inbox.
+
+Endpoints sends signals directly when an execution fails or a breakdown exceeds its limit.
+These signals require an enabled Endpoints source configuration.
 
 <List
   className="grid gap-4 grid-cols-1 @md:grid-cols-3 not-prose"
@@ -80,6 +88,48 @@ These sources are available when the matching PostHog product has data in your p
       url: "/docs/product-analytics",
       icon: "IconGraph",
       description: "Investigated anomalies from your insights.",
+      lineClamp: 2,
+    },
+    {
+      label: "Feature flags",
+      url: "/docs/feature-flags",
+      icon: "IconToggle",
+      description: "Evaluation cliffs, ghost flags, distribution shifts, and flag debt.",
+      lineClamp: 2,
+    },
+    {
+      label: "Web analytics",
+      url: "/docs/web-analytics",
+      icon: "IconPieChart",
+      description: "Channels, entry paths, and referrers that diverge from their own baseline.",
+      lineClamp: 2,
+    },
+    {
+      label: "Surveys",
+      url: "/docs/surveys",
+      icon: "IconMessage",
+      description: "Score regressions, abandonment spikes, and recurring themes in open-text answers.",
+      lineClamp: 2,
+    },
+    {
+      label: "Data warehouse",
+      url: "/docs/data-warehouse",
+      icon: "IconDatabase",
+      description: "Failed source connections, stale or stuck syncs, and materialized views that stop refreshing.",
+      lineClamp: 2,
+    },
+    {
+      label: "Data pipelines",
+      url: "/docs/cdp",
+      icon: "IconPlug",
+      description: "Destinations, transformations, batch exports, and flows where delivery stops matching the config.",
+      lineClamp: 2,
+    },
+    {
+      label: "Endpoints",
+      url: "/docs/endpoints",
+      icon: "IconBrackets",
+      description: "Runs that fail, and breakdowns that hit their limit.",
       lineClamp: 2,
     },
     {
