@@ -5,12 +5,24 @@
 // it safe under `pull_request_target`.
 
 const COMMENT_MARKER = '<!-- seo-aeo-pr-check -->'
-const IMAGE_URL = 'https://raw.githubusercontent.com/PostHog/posthog.com/master/.github/assets/seo-aeo-danger.png'
+const IMAGE_PATH = '.github/assets/seo-aeo-danger.png'
 
 const PAGE_EXTENSIONS = /\.mdx?$/
 const HEAD_TAG_PATTERN =
     /<Helmet|<SEO\b|<title|name=["']description["']|property=["']og:|name=["']twitter:|application\/ld\+json|rel=["']canonical["']/
 const ROBOTS_RULE_PATTERN = /^\s*(user-agent|disallow|allow)\s*:/i
+const BOT_PATTERN =
+    /user-?agent|isbot|GPTBot|ChatGPT-User|OAI-SearchBot|ClaudeBot|Claude-User|PerplexityBot|Googlebot|Google-Extended|Bingbot|CCBot/i
+const CLIENT_ONLY_PATTERN =
+    /typeof window\s*===?\s*['"]undefined['"]|ssr:\s*false|loadable\(|React\.lazy|<ClientOnly|<NoSSR|useHydrated/
+const EXTERNAL_SCRIPT_PATTERN = /<script[^>]+src=\{?["'`]https?:|loadScript\(\s*["'`]https?:|\.src\s*=\s*["'`]https?:/
+const SEO_HEADER_PATTERN = /^(x-robots-tag|link|vary|cache-control|content-type|location)$/i
+const IMAGE_EXTENSIONS = /\.(png|jpe?g|gif|webp|avif)$/i
+const LARGE_IMAGE_BYTES = 1000000
+// Prefixes where files under contents/ are the only source of pages, so a missing file means a missing page.
+const CHECKED_URL_PREFIX =
+    /^\/(docs|blog|tutorials|handbook|product-engineers|founders|newsletter|customers|spotlight)\//
+const GENERATED_URL_PATTERN = /\/(api|references|tags|categories)(\/|$)/
 
 function isPagePath(filename) {
     if (!filename || !filename.startsWith('contents/') || !PAGE_EXTENSIONS.test(filename)) {
@@ -82,6 +94,54 @@ function redirectKey(redirect) {
     return `${redirect.source} -> ${redirect.destination}`
 }
 
+function normalizeUrl(url) {
+    return url.split(/[?#]/)[0].replace(/\.md$/, '').replace(/\/$/, '') || '/'
+}
+
+// True when the URL is a known page or redirect, or sits outside the paths this check can verify.
+function resolvesToPage(url, pageUrls, redirects) {
+    if (!pageUrls) {
+        return true
+    }
+    const path = normalizeUrl(url)
+    if (!CHECKED_URL_PREFIX.test(`${path}/`) || GENERATED_URL_PATTERN.test(path)) {
+        return true
+    }
+    return pageUrls.has(path) || Boolean(redirectFor(redirects, path))
+}
+
+function pageUrlsFromTree(tree) {
+    const urls = new Set()
+    for (const entry of tree) {
+        if (entry.type !== 'blob') {
+            continue
+        }
+        if (isPagePath(entry.path)) {
+            urls.add(contentPathToUrl(entry.path))
+        }
+        const page = /^src\/pages\/(.*)\.(tsx|ts|jsx|js)$/.exec(entry.path)
+        if (page && !/\[|(^|\/)_/.test(page[1])) {
+            urls.add(`/${page[1]}`.replace(/\/index$/, '') || '/')
+        }
+    }
+    return urls
+}
+
+function internalLinks(lines) {
+    const links = []
+    for (const line of lines) {
+        for (const match of line.matchAll(/\]\((\/[^)\s]*)\)|href=["'](\/[^"']*)["']/g)) {
+            links.push(match[1] || match[2])
+        }
+    }
+    return links
+}
+
+function wordCount(content) {
+    const body = (content || '').replace(/^---\n[\s\S]*?\n---/, '')
+    return (body.match(/[A-Za-z]{2,}/g) || []).length
+}
+
 function parsePatch(patch) {
     const added = []
     const removed = []
@@ -138,7 +198,7 @@ function clean(text) {
         .slice(0, 200)
 }
 
-function analyzeRedirects(baseRedirects, headRedirects) {
+function analyzeRedirects(baseRedirects, headRedirects, pageUrls = null) {
     const findings = []
     const baseKeys = new Set(baseRedirects.map(redirectKey))
     const headKeys = new Set(headRedirects.map(redirectKey))
@@ -168,6 +228,35 @@ function analyzeRedirects(baseRedirects, headRedirects) {
                     next.destination
                 )}\`. Each extra hop slows crawlers and can dilute ranking signals.`,
                 fix: `Point \`${clean(source)}\` straight at the final page.`,
+                file: 'vercel.json',
+            })
+        }
+        if (
+            !destination.includes(':') &&
+            destination.startsWith('/') &&
+            !resolvesToPage(destination, pageUrls, headSources)
+        ) {
+            findings.push({
+                severity: 'blocker',
+                title: 'Redirect points to a missing page',
+                detail: `\`${clean(source)}\` redirects to \`${clean(
+                    destination
+                )}\`, and no page or redirect exists at that URL, so visitors and crawlers still end on a 404.`,
+                fix: 'Point the redirect at a page that exists.',
+                file: 'vercel.json',
+            })
+        } else if (
+            !source.includes(':') &&
+            source.split('/').filter(Boolean).length >= 2 &&
+            destination.split(/[?#]/)[0].split('/').filter(Boolean).length <= 1
+        ) {
+            findings.push({
+                severity: 'review',
+                title: 'Redirect to a generic page',
+                detail: `\`${clean(source)}\` redirects to \`${clean(
+                    destination
+                )}\`. Google treats a redirect from a specific page to a homepage or section index as a soft 404 and drops the old ranking.`,
+                fix: 'Redirect to the closest page on the same topic.',
                 file: 'vercel.json',
             })
         }
@@ -203,10 +292,60 @@ function analyzeRedirects(baseRedirects, headRedirects) {
     return findings
 }
 
-// files: [{ filename, status, previous_filename, patch, headContent }]
-// headRedirects: the redirects array from vercel.json at the PR head.
-function analyzeFiles(files, headRedirects) {
+function analyzeVercelConfig(baseConfig, headConfig) {
     const findings = []
+    const base = baseConfig || {}
+    const head = headConfig || {}
+    for (const key of ['trailingSlash', 'cleanUrls']) {
+        if (JSON.stringify(base[key]) !== JSON.stringify(head[key])) {
+            findings.push({
+                severity: 'blocker',
+                title: `\`${key}\` changed`,
+                detail: 'This changes the URL of every page on the site. Google has to re-crawl and re-rank all of them, and old URLs can break.',
+                fix: 'Revert unless this is a planned site-wide URL change with redirects in place.',
+                file: 'vercel.json',
+            })
+        }
+    }
+    if (JSON.stringify(base.rewrites || []) !== JSON.stringify(head.rewrites || [])) {
+        findings.push({
+            severity: 'review',
+            title: 'Rewrites changed',
+            detail: "A rewrite serves one URL with another URL's content. A wrong rewrite can create duplicate pages or hide a page from crawlers.",
+            fix: 'Check each changed rewrite in the Vercel preview.',
+            file: 'vercel.json',
+        })
+    }
+    const seoHeaders = (config) =>
+        JSON.stringify(
+            (config.headers || []).map((rule) => ({
+                source: rule.source,
+                headers: (rule.headers || []).filter((h) => SEO_HEADER_PATTERN.test(h.key)),
+            }))
+        )
+    if (seoHeaders(base) !== seoHeaders(head)) {
+        findings.push({
+            severity: 'review',
+            title: 'Response headers changed',
+            detail: 'Headers such as `X-Robots-Tag`, `Link`, `Vary`, and `Cache-Control` affect how crawlers and AI agents index and cache pages.',
+            fix: 'Check the headers of an affected page in the Vercel preview with `curl -I`.',
+            file: 'vercel.json',
+        })
+    }
+    return findings
+}
+
+// files: [{ filename, status, previous_filename, patch, headContent, baseContent }]
+// headRedirects: the redirects array from vercel.json at the PR head.
+// ctx.pageUrls: every page URL at the PR head, or null when the tree was not loaded.
+// ctx.sizes: file size in bytes by path at the PR head.
+function analyzeFiles(files, headRedirects, ctx = {}) {
+    const findings = []
+    const pageUrls = ctx.pageUrls || null
+    const sizes = ctx.sizes || {}
+    const missingLinks = []
+    const redirectedLinks = []
+    const imagesWithoutAlt = []
 
     for (const file of files) {
         const { filename, status, previous_filename: previousFilename, patch } = file
@@ -325,6 +464,161 @@ function analyzeFiles(files, headRedirects) {
             })
         }
 
+        if (filename === 'middleware.ts') {
+            findings.push({
+                severity: 'review',
+                title: 'Markdown serving for AI agents changed',
+                detail: 'This middleware serves the Markdown version of docs, handbook, blog, and newsletter pages to AI agents and to clients that ask for `text/markdown`.',
+                fix: 'Fetch a docs page with `curl -H "Accept: text/markdown"` in the Vercel preview and confirm it still returns Markdown.',
+                file: filename,
+            })
+        }
+
+        if (filename === 'gatsby-config.js' && added.some((l) => /trailingSlash|pathPrefix|siteUrl/.test(l))) {
+            findings.push({
+                severity: 'blocker',
+                title: 'Site URL settings changed',
+                detail: 'A change to `trailingSlash`, `pathPrefix`, or `siteUrl` changes the URL or canonical of every page.',
+                fix: 'Revert unless this is a planned site-wide URL change with redirects in place.',
+                file: filename,
+            })
+        }
+
+        if (isCode && [...added, ...removed].some((l) => BOT_PATTERN.test(l))) {
+            findings.push({
+                severity: 'review',
+                title: 'Bot or user-agent handling changed',
+                detail: 'Code that treats bots differently can block Googlebot or AI crawlers (GPTBot, ClaudeBot, PerplexityBot), or serve them different content.',
+                fix: 'Confirm search and AI crawlers still get the full page.',
+                file: filename,
+            })
+        }
+
+        if (/^src\/(templates|layouts)\//.test(filename) && isCode && added.some((l) => CLIENT_ONLY_PATTERN.test(l))) {
+            findings.push({
+                severity: 'review',
+                title: 'Content may render only in the browser',
+                detail: 'This template now renders part of the page only after JavaScript runs. Crawlers and AI agents read the server HTML, so they may not see that content.',
+                fix: 'Check that the main text is in the page source (View Source, not DevTools) in the Vercel preview.',
+                file: filename,
+            })
+        }
+
+        if (isCode && added.some((l) => EXTERNAL_SCRIPT_PATTERN.test(l))) {
+            findings.push({
+                severity: 'review',
+                title: 'New third-party script',
+                detail: 'Extra scripts slow page load and hurt Core Web Vitals, which Google uses for ranking.',
+                fix: 'Load it with `async` or `defer`, or only on the pages that need it.',
+                file: filename,
+            })
+        }
+
+        if (IMAGE_EXTENSIONS.test(filename) && status === 'added' && sizes[filename] > LARGE_IMAGE_BYTES) {
+            findings.push({
+                severity: 'review',
+                title: 'Large image added',
+                detail: `This image is ${(sizes[filename] / 1000000).toFixed(
+                    1
+                )} MB. Large images slow the page (Largest Contentful Paint), which hurts ranking.`,
+                fix: 'Compress it, or upload it to Cloudinary like other site images.',
+                file: filename,
+            })
+        }
+
+        if (isPagePath(filename)) {
+            for (const link of internalLinks(added)) {
+                const path = normalizeUrl(link)
+                if (!resolvesToPage(link, pageUrls, headRedirects)) {
+                    missingLinks.push({ file: filename, link })
+                } else if (pageUrls && !pageUrls.has(path) && redirectFor(headRedirects, path)) {
+                    redirectedLinks.push({ file: filename, link })
+                }
+            }
+            for (const line of added) {
+                if (/!\[\s*\]\(/.test(line) || /<img\b(?![^>]*\balt=)[^>]*>/i.test(line)) {
+                    imagesWithoutAlt.push(filename)
+                }
+            }
+        }
+
+        if (isPagePath(filename) && status === 'modified') {
+            const beforeTitle = frontmatterValue(removed, 'title')
+            const afterTitle = frontmatterValue(added, 'title')
+            const normalize = (t) =>
+                t
+                    .toLowerCase()
+                    .replace(/[^a-z0-9]+/g, ' ')
+                    .trim()
+            if (
+                !filename.startsWith('contents/handbook/') &&
+                beforeTitle &&
+                afterTitle &&
+                normalize(beforeTitle) !== normalize(afterTitle)
+            ) {
+                findings.push({
+                    severity: 'minor',
+                    title: 'Page title changed',
+                    detail: `\`${clean(contentPathToUrl(filename))}\`: "${clean(beforeTitle)}" becomes "${clean(
+                        afterTitle
+                    )}". The title is the strongest on-page ranking signal, so a new title can move rankings for the searches this page wins today.`,
+                    fix: 'Fine if intended. Keep the main search terms of the old title.',
+                    file: filename,
+                })
+            }
+            if (
+                frontmatterValue(removed, 'featuredImage') !== undefined &&
+                frontmatterValue(added, 'featuredImage') === undefined
+            ) {
+                findings.push({
+                    severity: 'minor',
+                    title: 'Featured image removed',
+                    detail: `\`${clean(
+                        contentPathToUrl(filename)
+                    )}\` loses its featured image, which is also its social preview image.`,
+                    fix: 'Keep a `featuredImage` unless the page should use the default preview.',
+                    file: filename,
+                })
+            }
+            const before = wordCount(file.baseContent)
+            const after = wordCount(file.headContent)
+            if (file.baseContent && file.headContent && before >= 600 && after < before * 0.5) {
+                findings.push({
+                    severity: 'review',
+                    title: 'Page lost most of its content',
+                    detail: `\`${clean(
+                        contentPathToUrl(filename)
+                    )}\` goes from about ${before} to ${after} words. Pages that lose their depth tend to lose rankings and AI citations.`,
+                    fix: 'Fine if the content moved to another page. Then link to it and check that the old searches are still covered.',
+                    file: filename,
+                })
+            }
+        }
+
+        if (isPagePath(filename) && status === 'added') {
+            const lines = frontmatterLines(file.headContent) || []
+            const title = frontmatterValue(lines, 'title') || ''
+            const description = frontmatterValue(lines, 'description') || ''
+            if (title.length > 65) {
+                findings.push({
+                    severity: 'minor',
+                    title: 'Title too long',
+                    detail: `The new title has ${title.length} characters, so Google cuts it off in search results.`,
+                    fix: 'Keep the title under 60 characters, with the main search term first.',
+                    file: filename,
+                })
+            }
+            if (description.length > 160) {
+                findings.push({
+                    severity: 'minor',
+                    title: 'Description too long',
+                    detail: `The new description has ${description.length} characters, so Google cuts it off in search results.`,
+                    fix: 'Keep the description under 155 characters.',
+                    file: filename,
+                })
+            }
+        }
+
         if (isPagePath(filename) && status === 'modified') {
             for (const key of ['title', 'description']) {
                 const before = frontmatterValue(removed, key)
@@ -373,28 +667,74 @@ function analyzeFiles(files, headRedirects) {
         }
     }
 
+    const examples = (items) =>
+        items
+            .slice(0, 3)
+            .map((i) => `\`${clean(i.link)}\` in \`${clean(i.file)}\``)
+            .join(', ') + (items.length > 3 ? `, and ${items.length - 3} more` : '')
+    if (missingLinks.length > 0) {
+        findings.push({
+            severity: 'review',
+            title: `${missingLinks.length} link${missingLinks.length === 1 ? '' : 's'} to missing pages`,
+            detail: `No page or redirect exists at ${examples(
+                missingLinks
+            )}. Broken links waste crawl budget and send readers to a 404.`,
+            fix: 'Fix the path, or add the missing redirect.',
+            file: missingLinks[0].file,
+        })
+    }
+    if (redirectedLinks.length > 0) {
+        findings.push({
+            severity: 'minor',
+            title: `${redirectedLinks.length} link${redirectedLinks.length === 1 ? '' : 's'} through a redirect`,
+            detail: `${examples(
+                redirectedLinks
+            )} go through a redirect. Direct links pass ranking signals better and load faster.`,
+            fix: 'Link to the final URL instead.',
+            file: redirectedLinks[0].file,
+        })
+    }
+    const altFiles = [...new Set(imagesWithoutAlt)]
+    if (altFiles.length > 0) {
+        findings.push({
+            severity: 'minor',
+            title: 'Images without alt text',
+            detail: `New images in ${altFiles
+                .slice(0, 3)
+                .map((f) => `\`${clean(f)}\``)
+                .join(', ')} have no alt text. Search engines and AI agents use alt text to understand images.`,
+            fix: 'Describe each image in its alt text.',
+            file: altFiles[0],
+        })
+    }
     return findings
 }
 
-function buildComment(findings, { reviewer, backupNote }) {
+function buildComment(findings, { reviewer, backupNote, imageUrl }) {
     const blockers = findings.filter((f) => f.severity === 'blocker')
     const reviews = findings.filter((f) => f.severity === 'review')
+    const minors = findings.filter((f) => f.severity === 'minor')
     const section = (heading, items) =>
         items.length === 0
             ? ''
             : `**${heading} (${items.length})**\n\n` +
               items
+                  .slice(0, 10)
                   .map((f) => `- **${f.title}** in \`${clean(f.file)}\`\n  ${f.detail}\n  _Fix:_ ${f.fix}`)
                   .join('\n') +
+              (items.length > 10 ? `\n- …and ${items.length - 10} more` : '') +
               '\n\n'
 
     return (
         `${COMMENT_MARKER}\n` +
-        `![AEO/SEO: I'm in danger](${IMAGE_URL})\n\n` +
+        `![AEO/SEO: I'm in danger](${imageUrl})\n\n` +
         `### This PR may affect SEO/AEO\n\n` +
         `@${reviewer}, please review the items below before this PR merges. ${backupNote}\n\n` +
         section('🚨 Likely to hurt search or AI visibility', blockers) +
         section('🔍 Worth a look', reviews) +
+        (minors.length === 0
+            ? ''
+            : `<details><summary>Minor (${minors.length})</summary>\n\n${section('Minor', minors)}</details>\n\n`) +
         `<sub>This comment updates on each push. The check reads the diff only, so it can miss problems or flag safe changes. If this is a false alarm, reply here so the check can improve.</sub>`
     )
 }
@@ -447,24 +787,43 @@ async function checkPullRequest({ github, core, owner, repo, number, reviewer, b
         per_page: 100,
     })
 
-    for (const file of files) {
-        // Frontmatter is only needed for new pages and for patches that add a markdown H1.
-        const needsFrontmatter = file.status === 'added' || /\n\+# \S/.test(file.patch || '')
-        if (isPagePath(file.filename) && file.status !== 'removed' && needsFrontmatter) {
-            file.headContent = await getText(github, owner, repo, file.filename, pr.head.sha)
+    const touchesPages = files.some((f) => isPagePath(f.filename) || isPagePath(f.previous_filename))
+    const touchesVercel = files.some((f) => f.filename === 'vercel.json')
+    let pageUrls = null
+    const sizes = {}
+    if (touchesPages || touchesVercel || files.some((f) => IMAGE_EXTENSIONS.test(f.filename))) {
+        const { data: tree } = await github.rest.git.getTree({ owner, repo, tree_sha: pr.head.sha, recursive: 'true' })
+        if (!tree.truncated) {
+            pageUrls = pageUrlsFromTree(tree.tree)
+        }
+        for (const entry of tree.tree) {
+            sizes[entry.path] = entry.size
         }
     }
 
-    const needsRedirects = files.some(
-        (f) => f.filename === 'vercel.json' || (f.status !== 'modified' && f.status !== 'added')
-    )
-    const headConfig = needsRedirects ? await getJsonFile(github, owner, repo, 'vercel.json', pr.head.sha) : null
+    for (const file of files) {
+        if (!isPagePath(file.filename) || file.status === 'removed') {
+            continue
+        }
+        const removedLines = parsePatch(file.patch).removed.length
+        // Full file text is only needed for new pages, added H1s, and large removals.
+        if (file.status === 'added' || /\n\+# \S/.test(file.patch || '') || removedLines >= 20) {
+            file.headContent = await getText(github, owner, repo, file.filename, pr.head.sha)
+        }
+        if (file.status === 'modified' && removedLines >= 20) {
+            file.baseContent = await getText(github, owner, repo, file.filename, pr.base.sha)
+        }
+    }
+
+    const headConfig =
+        touchesPages || touchesVercel ? await getJsonFile(github, owner, repo, 'vercel.json', pr.head.sha) : null
     const headRedirects = headConfig?.redirects || []
 
-    const findings = analyzeFiles(files, headRedirects)
-    if (files.some((f) => f.filename === 'vercel.json')) {
+    const findings = analyzeFiles(files, headRedirects, { pageUrls, sizes })
+    if (touchesVercel) {
         const baseConfig = await getJsonFile(github, owner, repo, 'vercel.json', pr.base.sha)
-        findings.push(...analyzeRedirects(baseConfig?.redirects || [], headRedirects))
+        findings.push(...analyzeRedirects(baseConfig?.redirects || [], headRedirects, pageUrls))
+        findings.push(...analyzeVercelConfig(baseConfig, headConfig))
     }
 
     const comments = await github.paginate(github.rest.issues.listComments, {
@@ -475,7 +834,9 @@ async function checkPullRequest({ github, core, owner, repo, number, reviewer, b
     })
     const existing = comments.find((c) => c.user?.type === 'Bot' && c.body?.includes(COMMENT_MARKER))
 
-    if (findings.length === 0) {
+    // Minor items alone never start a comment or ping the reviewer.
+    const needsReview = findings.some((f) => f.severity !== 'minor')
+    if (!needsReview && !(existing && findings.length > 0)) {
         if (existing && !existing.body.includes('✅')) {
             await github.rest.issues.updateComment({
                 owner,
@@ -488,7 +849,8 @@ async function checkPullRequest({ github, core, owner, repo, number, reviewer, b
         return
     }
 
-    const body = buildComment(findings, { reviewer, backupNote })
+    const imageUrl = `https://raw.githubusercontent.com/${owner}/${repo}/refs/heads/${pr.base.ref}/${IMAGE_PATH}`
+    const body = buildComment(findings, { reviewer, backupNote, imageUrl })
     if (existing) {
         // Editing a comment does not notify anyone, so later pushes do not ping the reviewer again.
         await github.rest.issues.updateComment({ owner, repo, comment_id: existing.id, body })
@@ -525,6 +887,8 @@ module.exports = {
     run,
     analyzeFiles,
     analyzeRedirects,
+    analyzeVercelConfig,
+    pageUrlsFromTree,
     buildComment,
     contentPathToUrl,
     isPagePath,

@@ -1,6 +1,13 @@
 const test = require('node:test')
 const assert = require('node:assert/strict')
-const { analyzeFiles, analyzeRedirects, contentPathToUrl, redirectFor, addedH1s } = require('./check')
+const {
+    analyzeFiles,
+    analyzeRedirects,
+    analyzeVercelConfig,
+    contentPathToUrl,
+    redirectFor,
+    addedH1s,
+} = require('./check')
 
 test('maps content files to page URLs', () => {
     assert.equal(contentPathToUrl('contents/docs/product-analytics/index.mdx'), '/docs/product-analytics')
@@ -92,4 +99,41 @@ test('flags new redirect chains, temporary redirects, and removed redirects', ()
     assert.ok(titles.includes('Redirect chain'))
     assert.ok(titles.includes('Temporary redirect'))
     assert.ok(titles.includes('1 redirect removed'))
+})
+
+test('flags redirects and links to pages that do not exist', () => {
+    const pageUrls = new Set(['/docs/real', '/docs/new'])
+    const redirects = [{ source: '/docs/moved', destination: '/docs/new' }]
+    const titles = analyzeRedirects([], [{ source: '/docs/gone', destination: '/docs/nowhere' }], pageUrls).map(
+        (f) => f.title
+    )
+    assert.ok(titles.includes('Redirect points to a missing page'))
+
+    const files = [
+        {
+            filename: 'contents/docs/real.mdx',
+            status: 'modified',
+            patch: '@@\n+See [a](/docs/nowhere), [b](/docs/moved), [c](/docs/real#x), and [d](/docs/api/foo).',
+        },
+    ]
+    const found = analyzeFiles(files, redirects, { pageUrls }).map((f) => f.title)
+    assert.deepEqual(found.sort(), ['1 link through a redirect', '1 link to missing pages'])
+})
+
+test('flags title changes and site-wide URL settings', () => {
+    const files = [
+        {
+            filename: 'contents/blog/post.md',
+            status: 'modified',
+            patch: '@@\n-title: Best analytics tools\n+title: Our favorite tools',
+        },
+    ]
+    assert.deepEqual(
+        analyzeFiles(files, []).map((f) => f.title),
+        ['Page title changed']
+    )
+    assert.deepEqual(
+        analyzeVercelConfig({ redirects: [] }, { redirects: [], trailingSlash: true }).map((f) => f.severity),
+        ['blocker']
+    )
 })
