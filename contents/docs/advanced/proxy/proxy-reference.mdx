@@ -22,7 +22,7 @@ Check your project URL in the [PostHog app](https://app.posthog.com) to confirm 
 - Set the `Host` header to the PostHog domain (e.g., `Host: us.i.posthog.com`). Without this, you'll get 401 errors.
 - Allow `GET` and `POST`** on all paths.
 - Support 64MB request bodies, session recordings can be large.
-- Forward `X-Forwarded-For` to preserve client IPs for geolocation. See [client IP resolution](#client-ip-resolution).
+- Forward `X-Forwarded-For` to preserve client IP addresses for geolocation. See [client IP resolution](#client-ip-resolution).
 - Avoid obvious paths like `/analytics`, `/posthog`, or `/ph`. Use `/e` or `/ingest` instead.
 
 ### Client IP resolution
