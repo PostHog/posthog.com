@@ -89,7 +89,7 @@ For a single server that runs all month at the default interval, the unchanged p
 
 To keep this cost down:
 
-1. **Use an SDK version that sends ETags.** Support arrived in Node.js 5.17.2, Python 7.13.0, Go 1.12.2, Ruby 3.4.0, PHP 3.7.3, and .NET 2.4.2. These versions send the ETag automatically.
+1. **Use an SDK version that sends ETags.** Support arrived in Node.js 5.17.2, Python 7.13.0, Go 1.12.2, Ruby 3.4.0, PHP 3.7.3, .NET 2.4.2, and Java (posthog-server) 2.2.0. These versions send the ETag automatically.
 2. **Increase the [polling interval](/docs/feature-flags/local-evaluation#step-2-initialize-posthog-with-your-feature-flags-secure-api-key)** when initializing PostHog, for example every 5 minutes instead of every 30 seconds. The drawback is that a flag change takes up to 5 minutes (instead of 30 seconds) to reach your server.
 3. **Share definitions across instances.** Every instance polls on its own, so 20 instances cost 20 times as much as one. With an [external cache provider](/docs/feature-flags/local-evaluation/distributed-environments), one instance polls and the others read from the shared cache.
 
