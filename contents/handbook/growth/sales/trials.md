@@ -54,6 +54,6 @@ Four products also get a cap where the customer set no limit: Replay Vision, Des
 
 A customer on a paid plan pays for what they use, so their own limit is the figure that governs. A customer with no subscription pays nothing, so the cap is what the trial lends them.
 
-An addon reads the limit on its parent. Mobile session replay follows the Session replay limit, and Batch exports follows Realtime destinations.
+An addon reads the limit on its parent. For example, Mobile Session Replay follows the Session Replay limit, and Batch Exports follows Realtime Destinations.
 
 If a prospect needs more than this, raise their spend limit rather than removing it.
