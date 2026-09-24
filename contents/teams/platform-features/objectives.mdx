@@ -1,32 +1,32 @@
-### Q3 2026 objectives
+### Q4 2026 objectives
 
 - Yasen
-    - Multi-project dashboards
-    - Activity logs -> SIEM
-    - Billing activity logs
-    - Auth flows for MCP (e.g. MFA trips users up, so we need to move to code-based verifications)
-    - Access control scope expansion
-    - Fix the broken US/EU redirects
-    - Support Grow plan launch
-    - Build a fallback mechanism for emails (c.io -> smtp)
+    - ReBAC v2
+    - Approval flows rewrite
+    - Expand MCP with features that are currently not covered e.g. notifications, change requests
+    - Explore MCP apps
+    - Elicitations using latest MCP SDK
+    - “Forbid members from joining other orgs” feature
+    - Jev experimentation
+    - Optional: Notifications framework and a notifications management upgrade
 
 - Reece
-    - Multi-domain SAML/SCIM support
-    - Redesign the org domain and IdP config settings UI
-    - OIDC
-    - Access control all the things
-        - Event access controls for HogQL
-        - Cover all products with resource access controls
-        - Resource <-> HogQL parity
-        - Fully remove the access control settings UI v1
-    - Update the docs for SAML, SCIM, and access control for the new PostHog and Okta UIs, with demo videos showing how to set it up
+    - SSF/CAEP
+    - Okta OIN integration
+    - ReBAC v2
+    - remove platform features stuff from ee
+        - dashboard collaborator
+        - scim
+        - role
+        - other authentication utilities and oauth helpers
+    - New "settings" access control scope
+    - Investigate if users can configure SSO features in their IdP using the PostHog and IdP MCPs
 
 - Alex
-    - RBAC v2 - always apply the more specific rule
-    - Guest mode (aka the contractor use case) - share a specific object or resource without giving access to everything else in the project
-    - MCP read/write tools for access controls
-    - Access controls for tasks (sharing conversations with a team)
-    - Figure out how access controls should work for the Slack bot and Inbox
-    - Simplify activity logs tools (Claude struggles to use them)
-    - Reverse proxy troubleshooting skill
-    - Write 2 blog posts about collaborative notebooks and the upselling workflow
+    - Service accounts and/or agent access framework
+    - Upsell enterprise features instead of hiding them from MCP tools list
+    - Combine sharing with access control UI (based on ReBAC)
+    - Data access controls for AI observability
+    - Move transaction emails to Workflows
+    - Organize user interviews about using platform features via UI and MCP
+    - Help with notifications management
