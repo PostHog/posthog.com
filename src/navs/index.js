@@ -6065,6 +6065,31 @@ export const docsMenu = {
                     ],
                 },
                 {
+                    name: 'Link releases',
+                    url: '/docs/error-tracking/link-releases',
+                    icon: 'IconGitBranch',
+                    color: 'purple',
+                    featured: true,
+                    children: [
+                        {
+                            name: 'Overview',
+                            url: '/docs/error-tracking/link-releases',
+                        },
+                        {
+                            name: 'Python',
+                            url: '/docs/error-tracking/link-releases/python',
+                        },
+                        {
+                            name: 'Ruby',
+                            url: '/docs/error-tracking/link-releases/ruby',
+                        },
+                        {
+                            name: 'PHP',
+                            url: '/docs/error-tracking/link-releases/php',
+                        },
+                    ],
+                },
+                {
                     name: 'Surfaces',
                 },
                 {
