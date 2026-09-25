@@ -44,10 +44,14 @@ The agent pairs the production signal with codebase access to find the root caus
 
 ## Assign owners
 
-The inbox suggests reviewers and owners for each report from two signals:
+The inbox suggests reviewers and owners for each report. Each suggestion shows a label that tells you where it came from:
 
-- **Git blame** – who recently touched the affected lines.
-- **Historical ownership** – who has resolved similar issues in this part of the codebase.
+- **Code history** – the person recently changed the affected code, or is active in that part of the repository.
+- **The name of a scout** – the [scout](/docs/self-driving/scouts) that created or updated the report suggested this person. If the inbox groups reviewers that share a reason, the group shows `Added by scout`.
+- **Added by teammate** – a person in your project added this reviewer by hand.
+- **Agent suggestion** – the research agent suggested this person from the report context.
+
+To correct a suggestion, add or remove reviewers in the report. The reviewers control who sees the report in the `For you` filter of the inbox. PostHog also sends your correction to the scout, so that its later reports use your routing.
 
 ## Next step
 
