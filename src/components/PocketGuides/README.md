@@ -2,10 +2,16 @@
 
 The digital book format for pocket guides – the docs-site sibling of the marketing team's field
 guide microsites. Educational register, not marketing: the structure does the teaching, and the
-reader UI uses PostHog fonts and tokens. PostHog 101's Twig snapshots retain Twig styling.
+reader UI uses PostHog fonts and tokens. The Product Analytics guide's Twig views retain Twig styling.
 
-**Every page of a book is an MDX file.** Nothing in this folder contains prose – these components
-are layout and vocabulary, the words all live in `contents/pocket-guides/`.
+**Every page of a book is an MDX file.** Narrative prose lives in `contents/pocket-guides/`.
+Components here supply layout, interactions, and short labels for the data they display.
+
+The Product Analytics figures use commit-pinned `@posthog/twig-components` views for browsing and
+stay cards. `ProductAnalyticsExhibits.tsx` owns the guide's example event feed and chart. Reader
+clicks only change local example state – they do not send practice events to PostHog.
+`TwigBrowseFigure.tsx` imports Twig's styles and photos from the package, so a package update must
+be reviewed on both sites.
 
 ```
 contents/pocket-guides/<volume>/
@@ -238,36 +244,18 @@ own copy button. These rows are local teaching data, not PostHog events.
 
 Authors choose the format per example: use a fenced code block (`js`, `python`, etc.) to show code
 alone, `PocketGuideCodeEvents` to show code beside the simulated events it produces, or a figure's
-event inspector to focus on one selected interaction. The PostHog 101 lesson uses the paired
-component only for the fixed-value mismatch; its other code examples remain regular snippets.
+event inspector to focus on one selected interaction. Product Analytics uses the Twig event
+figures for the filter example.
 
-### Twig snapshots in PostHog 101
+### Twig in Product Analytics
 
-The agreed shared-library design is:
+The introduction uses a screenshot of Twig's homepage from `static/pocket-guides/posthog/`.
+The Events and properties chapter uses `BrowseStays` and `StayCardContent` from the pinned
+`@posthog/twig-components` package. `TwigBrowseFigure` adds local filter state and package photos.
+`TwigEventFlow` places the PostHog event inspector below the Twig view. The chapter's activity
+feed, event properties, and chart are guide-owned examples in `ProductAnalyticsExhibits.tsx`.
+These examples do not send events to a PostHog project.
 
-```mermaid
-flowchart LR
-    library["@posthog/twig-components"]
-    twig["twig.com"]
-    guide["posthog.com / PostHog 101"]
-    library -->|"Twig UI, playground, and labs"| twig
-    library -. "Planned read-only views in Shadow DOM" .-> guide
-```
-
-The library owns reusable Twig UI, data, CSS, and assets. Twig.com owns its pages, routing,
-instrumentation, and placement of the playground and labs. PostHog.com owns the guide prose,
-code and event examples, introductory screenshot, click illustration, and PostHog event
-inspector. The guide currently uses a local, read-only Twig snapshot while package installation
-is paused. A future package integration will put the Twig view in Shadow DOM and keep the
-inspector and “Explore Twig” link outside it.
-
-`TwigEventFlow` pairs the local Twig snapshot with an inspector underneath. A CSS timeline
-illustrates a visitor changing from Forest to Coast; reduced-motion and print views show the
-final Coast state. The inspector starts open and can be collapsed. Figure 1 shows the event
-without a destination property; figure 2 shows the fixed-value mismatch; figure 3 shows the
-corrected value. No figure sends events to PostHog.
-
-`TwigIntroductionFigure` uses a screenshot of Twig's homepage. Its Halfre font is kept under
-`static/pocket-guides/posthog/` and scoped to `TwigBrowseStaysMockup`. The inspector and guide
-link use PostHog.com fonts. When the package integration resumes, replace the local snapshot
-with `BrowseStaysPreview` and check narrow and wide widths, both themes, and reduced motion.
+Twig.com owns its pages and instrumentation. The package owns reusable Twig UI, data, styles,
+and assets. PostHog.com owns the teaching prose and example data. When the package pin changes,
+review the Twig views on both sites at narrow and wide widths, in both themes.

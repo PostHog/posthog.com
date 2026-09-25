@@ -15,6 +15,8 @@ export interface PocketGuideVolume {
     volume: number
     /** Docs slug of the product this volume teaches. Omit when it teaches no single product. */
     docsProduct?: string
+    /** Route to the product's Learn tab, when that tab exists. */
+    learnPath?: string
     /** A hand-written src/pages file owns this route, so don't generate one. */
     hasStaticPage?: boolean
     /** Announced but unwritten – renders as a cover with a sash and no link. */
@@ -29,11 +31,13 @@ export const FIRST_GUIDE_BOOK_ORDER = 2
 
 export const POCKET_GUIDE_VOLUMES: PocketGuideVolume[] = [
     {
-        id: 'posthog',
-        title: 'PostHog 101',
-        description: 'Start here: learn what PostHog does by investigating and improving an example app.',
+        id: 'product-analytics',
+        title: 'Product Analytics',
+        description: 'Record what people do in Twig, connect their activity, and build reports you can explain.',
         token: 'blue',
         volume: 0,
+        docsProduct: 'product-analytics',
+        learnPath: '/docs/product-analytics/learn',
     },
     {
         id: 'self-driving',
@@ -51,6 +55,7 @@ export const POCKET_GUIDE_VOLUMES: PocketGuideVolume[] = [
         token: 'purple',
         volume: 2,
         docsProduct: 'ai-observability',
+        learnPath: '/docs/ai-observability/learn',
     },
     {
         id: 'context-warehouse',
@@ -67,6 +72,7 @@ export const POCKET_GUIDE_VOLUMES: PocketGuideVolume[] = [
         token: 'yellow',
         volume: 4,
         docsProduct: 'session-replay',
+        learnPath: '/docs/session-replay/learn',
     },
 ]
 
@@ -77,4 +83,9 @@ export function volumeForProduct(docsProduct: string): PocketGuideVolume | undef
 
 export function volumeById(id: string): PocketGuideVolume | undefined {
     return POCKET_GUIDE_VOLUMES.find((v) => v.id === id)
+}
+
+/** Covers and cards open the Learn tab where one exists; other books keep their reader route. */
+export function pocketGuideUrl(volume: PocketGuideVolume): string {
+    return volume.learnPath ?? `/pocket-guides/${volume.id}`
 }

@@ -1,7 +1,6 @@
-import React from 'react'
+import React, { useState } from 'react'
 import PostHogEventInspector from './PostHogEventInspector'
-import TwigBrowseStaysMockup from './TwigBrowseStaysMockup'
-import './twigEventFlow.css'
+import TwigBrowseFigure from './TwigBrowseFigure'
 
 export default function TwigEventFlow({
     recorded,
@@ -10,15 +9,16 @@ export default function TwigEventFlow({
     recorded?: string
     mismatch?: boolean
 }): JSX.Element {
+    const [clicked, setClicked] = useState('Coast')
     return (
         <div className="twig-click-demo @container">
-            <p className="sr-only">
-                Animated example: a visitor changes Twig's stay filter from Forest to Coast. The PostHog inspector below
-                shows the event associated with that click.
-            </p>
             <div className="grid gap-3">
                 <div className="overflow-hidden rounded border border-primary bg-primary">
-                    <TwigBrowseStaysMockup selected="Coast" animated framed={false} />
+                    <TwigBrowseFigure
+                        id={`guide-event-${recorded || 'bare'}`}
+                        initialSetting="Coast"
+                        onFilter={(setting) => setClicked(setting)}
+                    />
                     <div className="flex justify-end border-t border-primary px-4 py-3 text-sm">
                         <a
                             href="https://twig.com/#twig-playground"
@@ -31,9 +31,9 @@ export default function TwigEventFlow({
                     </div>
                 </div>
                 <PostHogEventInspector
-                    clicked="Coast"
-                    recorded={recorded}
-                    mismatch={mismatch}
+                    clicked={clicked}
+                    recorded={mismatch ? recorded : recorded === undefined ? undefined : clicked}
+                    mismatch={mismatch && clicked !== recorded}
                     eventOnly={recorded === undefined}
                 />
             </div>

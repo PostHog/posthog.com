@@ -17,6 +17,12 @@ export interface TermDefinition {
 }
 
 export const TERMS = {
+    trend: {
+        title: 'Trend',
+        description:
+            'An insight that shows how often an event happens over time, with an optional breakdown by a property.',
+        slug: '/docs/product-analytics/insights',
+    },
     'product analytics': {
         title: 'Product Analytics',
         description:

@@ -7,6 +7,7 @@ import TwigPropertyFigure from './TwigPropertyFigure'
 import TwigEventFigure from './TwigEventFigure'
 import TwigIntroductionFigure from './TwigIntroductionFigure'
 import PocketGuideCodeEvents from './PocketGuideCodeEvents'
+import { AutocaptureFigure, FilterPropertiesFigure, DestinationChartFigure } from './ProductAnalyticsExhibits'
 
 import Action, { Setup } from './Action'
 import Callout from './Callout'
@@ -54,6 +55,9 @@ export const bookMdxComponents = {
     TwigEventFigure,
     TwigIntroductionFigure,
     PocketGuideCodeEvents,
+    AutocaptureFigure,
+    FilterPropertiesFigure,
+    DestinationChartFigure,
     LessonFooter,
     ReportFigure,
     AnatomyFigure,

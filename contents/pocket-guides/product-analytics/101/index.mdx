@@ -1,0 +1,90 @@
+---
+title: Events and properties
+shortTitle: Events and properties
+subtitle: See how Twig records a destination choice and gives it enough context to be useful.
+pocketGuideOrder: 1
+isPrimer: true
+---
+
+<LeftPage>
+
+<TwigEventFigure n={1} caption="A visitor chooses Coast on Twig. The event arrives, but its name alone cannot tell the team which destination was selected." />
+
+<TwigFilterFigure n={2} caption="The selected destination travels with the event as a property. Coast on Twig now reads Coast in the event." />
+
+</LeftPage>
+
+<RightPage>
+
+# Events and properties
+
+On Twig, choosing **Forest**, **Coast**, or **City** changes the stays on the page. The filter works. But once a visitor leaves, the product engineers cannot tell which destination caught their attention. The page has a memory problem.
+
+To measure that behavior, the team uses <Term name="product analytics">Product Analytics</Term>. Its basic unit is an <Term name="event" /> – a record that something happened in the product.
+
+## See what autocapture records
+
+The engineers add the PostHog web SDK to Twig using its project token and host:
+
+```js
+posthog.init(TWIG_POSTHOG_TOKEN, {
+  api_host: TWIG_POSTHOG_HOST,
+  autocapture: true,
+});
+```
+
+The SDK records pageviews, and <Term name="autocapture" /> records supported clicks without a capture call for every button. Open the activity feed and the site suddenly has a lot to say.
+
+<AutocaptureFigure />
+
+The feed tells the team that somebody clicked a button. It does not give the destination choice a stable, product-specific name. Twig may change its buttons later, but the team still wants to count the same behavior.
+
+## Name the filter selection
+
+The engineers add a <Term name="custom event" /> in the filter's click handler. A custom event gives this particular product action a name they choose:
+
+```js
+posthog.capture("stay_filter_selected");
+```
+
+Now each selection records `stay_filter_selected`. <SeeFig n={1} /> shows a Coast click and the event it produces. The name says a visitor used the filter. It still does not say which destination the visitor chose.
+
+## Add the destination as a property
+
+The engineers attach an <Term name="event property">event property</Term> – a detail about this specific event. They use the destination value already passed to the click handler:
+
+```js
+posthog.capture("stay_filter_selected", {
+  destination_type: selectedDestinationType,
+});
+```
+
+If the visitor clicks **Coast**, `selectedDestinationType` is `"Coast"`. If they click **Forest**, it's `"Forest"`. The event name stays the same, while its property describes the choice. <SeeFig n={2} /> connects the Twig interaction to the resulting record.
+
+An event can carry more than one property. For example, the team can also record the number of matching stays and whether any results appear:
+
+```js
+posthog.capture("stay_filter_selected", {
+  destination_type: selectedDestinationType,
+  results_count: matchingStays.length,
+  has_results: matchingStays.length > 0,
+});
+```
+
+Here, `destination_type` is text, `results_count` is a number, and `has_results` is true or false. These values describe the same filter selection from different angles. The event already has a timestamp, so the engineers do not need to invent another property just to say when the click happened.
+
+<FilterPropertiesFigure />
+
+## Compare the destinations people choose
+
+The team builds a <Term name="trend" /> from `stay_filter_selected` and breaks it down by `destination_type`. That produces three bars instead of one total. Coast has three selections in the example data, Forest and City one each. The report tells the engineers which filters people used – a useful first look at destination interest.
+
+<DestinationChartFigure />
+
+There is a limit to that answer. Three Coast clicks do not necessarily mean three interested visitors – one person could click the same filter more than once. For now, Twig has a clear record of *what* happened. A later chapter can tackle *who* did it.
+
+<LessonFooter nextLabel="Next: Identity and sessions">
+    <a href="/docs/data/events">Events reference</a> · <a href="/docs/product-analytics/autocapture">Autocapture</a> · <a href="/docs/product-analytics/capture-events">Custom event guide</a>
+</LessonFooter>
+
+</RightPage>

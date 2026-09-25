@@ -118,6 +118,31 @@
     ],
     "redirects": [
         {
+            "source": "/pocket-guides/posthog",
+            "destination": "/docs/product-analytics/learn",
+            "statusCode": 301
+        },
+        {
+            "source": "/pocket-guides/posthog/101",
+            "destination": "/docs/product-analytics/learn/101",
+            "statusCode": 301
+        },
+        {
+            "source": "/pocket-guides/product-analytics",
+            "destination": "/docs/product-analytics/learn",
+            "statusCode": 301
+        },
+        {
+            "source": "/pocket-guides/ai-observability",
+            "destination": "/docs/ai-observability/learn",
+            "statusCode": 301
+        },
+        {
+            "source": "/pocket-guides/session-replay",
+            "destination": "/docs/session-replay/learn",
+            "statusCode": 301
+        },
+        {
             "source": "/docs/replay-vision/actions:ext(\\.md)?",
             "destination": "/docs/replay-vision/scouts:ext?",
             "statusCode": 301
