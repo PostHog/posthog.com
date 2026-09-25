@@ -28,6 +28,8 @@ If you want to place a big order for a customer that may affect our stock levels
 
 Before sending a large merch order to another country, check with Kendal and Micromerch to confirm that we have an importer of record in the destination country.
 
+If you send merch to a hotel, use the hotel only for the address. Always name a specific person as the recipient, with their own contact details. Never name the hotel or use its contact details. If the hotel is the recipient, customs contacts the hotel, and the hotel usually will not act as the importer or claim the package. The shipment then stays at customs.
+
 ## Adding new items
 
 Micromerch is integrated with our Shopify store, so all orders are made and processed through there. To add new products to Shopify, [follow these instructions.](/handbook/engineering/posthog-com/merch-store).
