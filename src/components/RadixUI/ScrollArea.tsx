@@ -89,27 +89,24 @@ const ScrollArea = ({
     // posthog-js measures scroll depth against the first element matching its
     // `scroll_root_selector` and does no scrollability check of its own. A page renders
     // either windowed (this viewport scrolls) or full page (the document scrolls), so only
-    // claim the marker while this viewport is the element that actually scrolls.
+    // claim the marker while this viewport is the element that actually scrolls. Callers pass
+    // `isScrollRoot` only for the focused window, since the SDK picks the first match in the DOM.
     React.useEffect(() => {
         const node = scrollRootRef.current
-        if (!isScrollRoot || !node) return
+        if (!node) return
 
-        const sync = () => {
-            if (node.scrollHeight > node.clientHeight) {
-                node.setAttribute('data-scroll-root', '')
-            } else {
-                node.removeAttribute('data-scroll-root')
-            }
-        }
+        const sync = () =>
+            node.toggleAttribute('data-scroll-root', isScrollRoot && node.scrollHeight > node.clientHeight)
 
         sync()
+        if (!isScrollRoot) return
         const observer = new ResizeObserver(sync)
         observer.observe(node)
         if (node.firstElementChild) {
             observer.observe(node.firstElementChild)
         }
         return () => observer.disconnect()
-    }, [isScrollRoot, children])
+    }, [isScrollRoot])
 
     return (
         <RadixScrollArea.Root
