@@ -2,7 +2,9 @@
 
 Setting `config.sessionReplay = false` in your PostHog configuration will prevent PostHog from automatically starting session recordings on SDK setup.
 
-On iOS, `config.sessionReplay` only controls whether recording starts automatically at setup. It doesn't make `stopSessionRecording()` permanent. Once replay is set up, either automatically or by your first `startSessionRecording()` call, a later remote config load or a matched [event trigger](/docs/session-replay/how-to-control-which-sessions-you-record#event-triggers) can start recording again after a stop, whatever `sessionReplay` is set to. To keep specific users out of recordings, target them with a [linked feature flag](/docs/session-replay/how-to-control-which-sessions-you-record#feature-flag-triggers) instead of calling `stopSessionRecording()`.
+With `config.sessionReplay = true` (automatic mode), PostHog decides when to record: remote config, [trigger groups](/docs/session-replay/how-to-control-which-sessions-you-record#trigger-groups) (event triggers, a linked feature flag, sampling), and session rotation can all start a recording. In this mode, `stopSessionRecording()` only pauses the recording that's running right now. A later matched event trigger or a remote config load can start recording again.
+
+If you have your own logic for deciding who gets recorded (a feature flag you read yourself, consent state, a region check, an allow/deny list of screens), set `config.sessionReplay = false` instead. In this manual mode, PostHog doesn't start a recording on its own. Recording starts only when you call `startSessionRecording()` and carries on into new sessions. After `stopSessionRecording()`, it stays stopped through event triggers, new sessions, and remote config loads until you call `startSessionRecording()` again.
 
 You can manually control when to start and stop session recordings using the following methods:
 
