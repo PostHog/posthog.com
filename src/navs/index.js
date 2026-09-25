@@ -8144,6 +8144,10 @@ export const docsMenu = {
                             name: 'Create emails with PostHog AI',
                             url: '/docs/workflows/create-emails-ai',
                         },
+                        {
+                            name: 'Run AI tasks from a workflow',
+                            url: '/docs/workflows/ai-tasks',
+                        },
                     ],
                 },
                 {
