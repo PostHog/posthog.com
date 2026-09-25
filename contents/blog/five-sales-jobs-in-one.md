@@ -58,7 +58,7 @@ On the other hand, AI is a massive accelerator for operational sales work. In th
 
 Thanks to the Salesforce MCP, I have not logged into the Salesforce UI in over a month. Only to verify the work and for closed-won or closed-lost. My entire opportunity review is now a skill in PostHog Desktop (or Claude) that looks at my notes and then interviews me opp by opp for an update and writes it directly into Salesforce. This has condensed that operational time by 80%.
 
-The same goes for the numbers side of the job. I recently built a quota calculator that takes Stripe billing, Salesforce opps, customer analytics and so on and turns it into a per rep scenario plan of comp now and comp in the future. Took me a day.
+The same goes for the numbers side of the job. I recently built a quota calculator that takes Stripe billing, Salesforce oops, customer analytics and so on and turns it into a per rep scenario plan of comp now and comp in the future. Took me a day.
 
 Thanks to PostHog Desktop, building out my demo environment is easier than ever before -> generic demo data and even specific customer requests can be built in minutes because I can explain the situation, it builds out the solution and demo data, tests it in PostHog and in the browser, iterates, and then gives me the finished demo. Days of my solution consulting time have been spent on demo prep - now I can come with a super personalized demo in a fraction of the time.
 
