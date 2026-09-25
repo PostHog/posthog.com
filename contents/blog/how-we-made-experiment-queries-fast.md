@@ -27,7 +27,9 @@ By late spring this year, our system was choking on the load, and many of our la
 4. Use a dedicated exposure event
 5. Move recalculation to Temporal
 
-## 1. Build a precomputation system (by <TeamMember name="Robbie Coomber" photo />)
+## 1. Build a precomputation system
+
+<TeamMember name="Robbie Coomber" photo />
 
 Earlier this year, we spun off a query performance team with the aim of improving query performance across the entire PostHog platform. We quickly built an MVP of query precomputation: a library that different teams could use to precompute their queries. There are different kinds of queries, but the kind this applies to best is a timeseries query - a series of time buckets over some range of time, which is exactly what experiments use.
 
@@ -44,7 +46,9 @@ In practice, this is more involved than the example above. Because in analytics 
 
 There's a tradeoff here: events that arrive after their bucket is frozen are missing until the data expires and is rebuilt. For experiments this is acceptable. You aren't checking results every single minute; you let the experiment run for a couple of days or weeks and then conclude, so tiny inaccuracies are acceptable. With some production testing, we found a good balance between not doing too much work and keeping results accurate and consistent. We have production checks that monitor consistency here - more on that below.
 
-## 2. Integrate precomputation into Experiments (by <TeamMember name="Juraj Majerik" photo />)
+## 2. Integrate precomputation into Experiments
+
+<TeamMember name="Juraj Majerik" photo />
 
 Experiments was the first product to use the precomputation library, and we tested and improved it a lot by operating it in production. Integrating the library was itself a big task. We have four different metric types, each with different aggregations. Then there are optional breakdowns, and experiments that aggregate by users or by groups. This creates many possible combinations, and precomputation needs to work for each of them. We store everything in a single table, but that single table needs to support all the different data shapes.
 
@@ -62,7 +66,9 @@ We caught other issues too. Cached buckets were aligned to calendar days in UTC,
 
 To solve this uncertainty for good, we built a comprehensive canary testing suite running on production data. Each night, a background job picks a random set of metrics and runs each of them in both modes: the direct-scan mode, which reads the entire time range, and the precomputed mode, which reads the cached data. Then we compare the results. If they diverge beyond a small tolerance, we get an alert. The canary also caught the issue of late-arriving events and helped us tune the cache invalidation times.
 
-## 3. Optimize the SQL (by <TeamMember name="Anders Asheim Hennum" photo />)
+## 3. Optimize the SQL
+
+ <TeamMember name="Anders Asheim Hennum" photo />
 
 Experiment queries need to work out who was exposed to a variant and what those people did afterwards. Both sets of data come from the events table, and combining them per user adds to the cost of reading billions of rows. Our funnel query used to scan the table twice, once for exposures and once for metric events. We rewrote it to collect both in a single scan, keeping the timestamps needed to evaluate the funnel in the right order. As a result, an example production query we tested went from 16 seconds to 8 seconds.
 
@@ -70,13 +76,17 @@ Other metric queries had a different problem: they ran out of memory while joini
 
 We also found an expensive read that the metric calculation didn't need. Clicking a funnel step shows session recordings of users who reached it, and finding those recordings required a session ID stored inside each event's properties. That meant reading the largest column in the events table for every scanned row, even if nobody opened a recording. We moved the lookup into a separate query that runs only when someone uses the feature.
 
-## 4. Use a dedicated exposure event (by <TeamMember name="Anders Asheim Hennum" photo />)
+## 4. Use a dedicated exposure event
+
+(<TeamMember name="Anders Asheim Hennum" photo
 
 For a long time, we used an event called `$feature_flag_called` to track experiment exposure. This event also records evaluations of flags unrelated to experiments, so most of that traffic wasn't useful to an experiment query. Reusing the event made sense when Experiments was small, but our large customers were now accumulating tens of millions of flag events a month. Every query had to find the relevant exposures among all that data.
 
 We added a dedicated event, `$experiment_exposure`, which records assignments to flag variants. We create it during ingestion from the flag events customers already send, so the change needed no SDK updates. These exposure events are roughly a tenth of the volume of flag events, giving experiment queries a much smaller set of data to read.
 
-## 5. Move recalculation to Temporal (by <TeamMember name="Rodrigo Iloro" photo />)
+## 5. Move recalculation to Temporal
+
+by <TeamMember name="Rodrigo Iloro" photo />
 
 Until recently, when you opened an experiment with 30 metrics, your browser issued API calls for all 30 results at once. This is a problem, as we only allow a team 10 concurrent queries - a limitation designed to protect our ClickHouse cluster. The remaining 20 would keep retrying until slots freed up, but that waiting counted towards their timeouts. Refreshing the page could then submit the same 30 queries again while the first batch was still running.
 
