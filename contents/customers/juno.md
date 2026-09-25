@@ -11,7 +11,7 @@ seo:
 
 [Juno](https://junocompanion.com/) is an AI health assistant for people living with chronic illness. Despite only launching recently out of YC's Spring 2026 batch the team has already found product-market fit and built a user base of 250,000 users who rely on it for health tracking support.
 
-"People with a chronic illness spend 99.99% of their lives outside the medical system," says Marshall Gould, Juno's CEO, who studied genetics at UCL and genomic medicine at Oxford University. "I've experienced that personally as someone who has myalgic encephalomyelitis/chronic fatigue syndrome and I know that not everyone can afford a personal care assistant. That's why we built Juno."
+"People with a chronic illness spend 99.99% of their lives outside the medical system," says Marshall Gould, Juno's CEO, who studied genetics at UCL and genomic medicine at Oxford University. "I've experienced that personally as someone who has myalgic encephalomyelitis/chronic fatigue syndrome and I know that not everyone can afford a personal care assistant. Health services put a huge emphasis on attending doctor's appointments, with no care or management set up in the interim. We wanted to fill the gap and that's why we built Juno."
 
 Marshall built the app himself, but a side-effect of the rapid success and growing user base was that he found he couldn't keep up with bug reports and feature requests. Rather than balloon the size of the team, he created a system of agents to fix simple issues for him by pulling data from [Mixpanel](/blog/posthog-vs-mixpanel).
 
