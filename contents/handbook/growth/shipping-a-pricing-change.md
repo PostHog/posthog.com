@@ -52,7 +52,7 @@ You do not need full consensus. You are ultimately the driver but each reasonabl
 Once you've decided to move ahead with your new pricing scheme, you can begin implementing. Implementing a pricing change can often feel like juggling because you're working across a few teams with a single launch date. Communicating publicly and early helps.
 
 The moment you have a launch date (mentioned below), tell everyone who has to do work:
-- Your PMM, or the marketing team if you don't have one
+- Your PMM, or the Developer Marketing team if you don't have one
 - TAMs, AEs, CSMs, and support
 - Paid ads
 
@@ -126,7 +126,7 @@ The [paid ads team](/handbook/growth/marketing/paid) runs ads with your price in
 - Create the grandfathering tab with the `building-usage-and-revenue-dataset` skill
 - Send billing the org IDs to grandfather
 - Notify TAMs, AEs, CSMs, and support
-- Notify the marketing team
+- Notify the Developer Marketing team
 - Notify the paid ads team
 - Ask #team-workflows to add you (or the PMM) as an email sender
 - Create the static cohort of owner and admin emails

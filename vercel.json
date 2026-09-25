@@ -759,6 +759,14 @@
             "destination": "/teams/query-performance/:path*"
         },
         {
+            "source": "/teams/marketing",
+            "destination": "/teams/developer-marketing"
+        },
+        {
+            "source": "/teams/marketing/:path*",
+            "destination": "/teams/developer-marketing/:path*"
+        },
+        {
             "source": "/docs/sdk-doctor/keeping-sdks-current:ext(\\.md)?",
             "destination": "/docs/health-checks/keeping-sdks-current:ext?",
             "statusCode": 301
@@ -886,6 +894,21 @@
         {
             "source": "/docs/api/product-tours:ext(\\.md)?",
             "destination": "/docs/api:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/api/environments.md",
+            "destination": "/docs/api.md",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/api/environments:ext(\\.md)?",
+            "destination": "/docs/api/projects:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/api/environments-:n(\\d+)",
+            "destination": "/docs/api/projects",
             "statusCode": 301
         },
         {
@@ -2450,7 +2473,7 @@
         },
         {
             "source": "/handbook/people/team-structure/marketing",
-            "destination": "/teams/content"
+            "destination": "/teams/developer-marketing"
         },
         {
             "source": "/handbook/people/team-structure/people",
@@ -5039,7 +5062,7 @@
         },
         {
             "source": "/handbook/small-teams/marketing",
-            "destination": "/teams/content"
+            "destination": "/teams/developer-marketing"
         },
         {
             "source": "/handbook/small-teams/exec",
@@ -5970,15 +5993,23 @@
         },
         {
             "source": "/teams/twig",
-            "destination": "/teams/posthog-desktop"
+            "destination": "/teams/surfaces"
         },
         {
             "source": "/teams/posthog-code",
-            "destination": "/teams/posthog-desktop"
+            "destination": "/teams/surfaces"
         },
         {
             "source": "/teams/posthog-code/:path*",
-            "destination": "/teams/posthog-desktop/:path*"
+            "destination": "/teams/surfaces/:path*"
+        },
+        {
+            "source": "/teams/posthog-desktop",
+            "destination": "/teams/surfaces"
+        },
+        {
+            "source": "/teams/posthog-desktop/:path*",
+            "destination": "/teams/surfaces/:path*"
         },
         {
             "source": "/docs/max-ai:ext(\\.md)?",

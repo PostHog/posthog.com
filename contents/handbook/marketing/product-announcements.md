@@ -4,7 +4,7 @@ sidebar: Handbook
 showTitle: true
 ---
 
-> Have something you want to announce? Let the Marketing team know in `#team-marketing`! If it's an iterative update, you can also demo it in the all-hands, or post in `#tell-posthog-anything`. 
+> Have something you want to announce? Let the Developer Marketing team know in `#team-marketing`! If it's an iterative update, you can also demo it in the all-hands, or post in `#tell-posthog-anything`. 
 
 Product marketers take responsibility for coordinating and publicizing news about PostHog, including product launches. We also help with [incident](/handbook/engineering/operations/incidents) and [maintenance announcements](/handbook/marketing/product-announcements#announcing-scheduled-maintenance), if needed. 
 
@@ -51,7 +51,7 @@ Before you settle on a launch tier, work through the questions below. They shape
 
 **Which surface is it for?** Should a user reach for this new thing through MCP, desktop, web, or the Slack app? Be explicit about where it's most relevant to the user based on the interface(s) they're engaged, or which interface you want them to adopt. 
 
-**What can their role actually do with it?** Match the audience to their permissions. Launches with pricing usually target owners and admins, since they make a purchase decision when enabling the new thing. Owners and admins are also the ones who have to turn on integrations before the rest of the team can use the new tool or feature (as was the case with the Slack app launch). 
+**What can their role actually do with it?** Match the audience to their permissions. Launches with pricing usually target owners and admins, since they make a purchase decision when enabling the new thing. Owners and admins are also the ones who have to turn on integrations before the rest of the team can use the new product or feature (as was the case with the Slack app launch). 
 
 **How does it fit the self-driving story?** Some launches feed the loop by giving the system a new source of context (tickets, conversations). Other launches close the loop by acting on that context (Scouts generating Inbox reports). Both promise the same thing: the user's product gets better. A support product isn't exciting because an agent can read tickets. It's exciting because bugs buried in those tickets get found and fixed without anyone prompting it.
 
@@ -65,7 +65,7 @@ Here are some activities your Tier 1 launch could include:
 
 - New product page 
 - Sales enablement doc
-- Competitive comparison (can be added to the tool page)
+- Competitive comparison (can be added to the product page)
 - A case study
 - Blog announcement
 - Social media brief for Liam 
@@ -165,7 +165,7 @@ When informing users about maintenance, it is important to answer all of the fol
 - What will the impact be? Will insights, etc., still function?
 - Why is the maintenance being done, and what benefit will there be for users?
 
-We typically notify users of upcoming maintenance by email, so the Marketing team will need a way to target the correct users before they can update them. For smaller maintenance updates which will not cause any user updates, engineering teams can also update our status page.
+We typically notify users of upcoming maintenance by email, so the Developer Marketing team will need a way to target the correct users before they can update them. For smaller maintenance updates which will not cause any user updates, engineering teams can also update our status page.
 
 ## Incident communications
 
