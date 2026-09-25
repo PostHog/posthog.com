@@ -1517,6 +1517,10 @@
             "destination": "/docs/api:ext?"
         },
         {
+            "source": "/docs/api/environments:ext(\\.md)?",
+            "destination": "/docs/api:ext?"
+        },
+        {
             "source": "/docs/api/post-only-endpoints:ext(\\.md)?",
             "destination": "/docs/api/capture:ext?"
         },
