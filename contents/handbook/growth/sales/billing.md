@@ -59,6 +59,48 @@ If this is a new contract for an existing customer, you will need to add their e
     - Add the ID of the Subscription Schedule to the table
 
 
+### Fixing an invoice with incorrect details
+
+Sometimes an invoice goes out with the wrong due date, the wrong amount, the wrong products, or to the wrong customer. Correct it quickly, and tell the customer before they find the error themselves.
+
+You cannot change the amount, the line items, or the due date after Stripe finalizes an invoice. Do not try to correct one of these with a second invoice for the same charge. Two invoices for one charge break our revenue reporting and confuse the customer's finance team.
+
+#### Step 1: Find the state of the invoice
+
+Open the invoice in Stripe and look at its status.
+
+- **Draft** — the customer has received nothing. Edit the invoice, check it again, and send it. No other steps are necessary.
+- **Open** — Stripe finalized the invoice and sent it, but the customer has not paid it. Go to step 2.
+- **Paid** — the customer has paid the invoice. Go to step 3.
+
+#### Step 2: Correct an open invoice
+
+1. Open the invoice in Stripe and select "Void invoice" from the actions menu. Do not try to delete it. Stripe cannot delete a finalized invoice, and a void invoice keeps the audit trail.
+2. Create the corrected invoice. For a credit-based plan, click "Create Invoice - Upfront" in the [Credit-based Plan Table](https://tables.zapier.com/app/tables/t/01HGX2N9JXNV2EEDYARD24901R) again, then replace the invoice ID in the table row. The later automation steps read this ID.
+3. Check the corrected invoice and the Stripe customer object before you send: billing email, billing and shipping addresses, Tax ID, amount, products, and due date. Our standard terms are 30 days from the contract start date, so make sure the due date is not the date of the invoice.
+4. If the customer has a credit balance in Stripe, remove it before you send the invoice, then apply it again. See [step 3 of the upfront payment setup](#step-3-verify-invoice-details-and-send).
+5. Send the corrected invoice.
+
+#### Step 3: Correct a paid invoice
+
+You cannot void a paid invoice. Escalate to RevOps. The correction goes through a credit note, not the Stripe refund button, because the refund button attributes the revenue incorrectly. See [issuing a refund](/handbook/growth/sales/refunds#issuing-a-refund).
+
+Escalate to RevOps for an overdue invoice too, even if the customer has not paid it. These also need a credit note.
+
+#### Step 4: Tell people
+
+Do this while you make the correction, not after it.
+
+- **Tell the customer.** Say that the first invoice is void and that a corrected invoice follows. Stripe does not always email the customer when you void an invoice, so a customer who hears nothing can keep the wrong invoice in their payment queue.
+- **Tell the account owner.** Find the owner in Vitally and tag them in Slack. The customer usually asks them first.
+- **Tell RevOps** if the invoice is paid, overdue, or large.
+
+#### Two cases that need more care
+
+**A wrong due date can make the invoice late immediately.** A due date that is today or in the past can set a risk indicator in Vitally and send an alert to <PrivateLink url='https://posthog.slack.com/archives/C071PGWKBQS'>#sales-alerts</PrivateLink>. Check that this has not happened, and clear it if it has. See [failed/late payments](#failedlate-payments).
+
+**An invoice sent to the wrong customer is a data disclosure.** It shows one customer another company's name, address, amounts, and contract terms. Void it, tell RevOps immediately, and ask the recipient to delete their copy.
+
 ### Failed/late payments
 
 We define late payments as follows:
