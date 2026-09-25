@@ -1,5 +1,5 @@
 ---
-title: Systems and Automation
+title: Systems and automation
 sidebar: Handbook
 showTitle: true
 ---
