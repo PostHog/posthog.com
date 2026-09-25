@@ -28,7 +28,7 @@ is the same in all variants.
 
 | Variant id | Headline                         | Body                                                                |
 | ---------- | -------------------------------- | ------------------------------------------------------------------- |
-| `control`  | Make your product self-driving   | PostHog already has your analytics and errors. Now it ships code... |
+| `control`  | Your product’s context layer     | PostHog already has your analytics and errors. Now it ships code... |
 | `test`     | Give your agents product context | PostHog combines and stores your analytics, errors, replays...      |
 
 To add a variant, add an entry to `HERO_COPY_VARIANTS` and add a variant with the same key to the

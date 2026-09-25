@@ -55,7 +55,7 @@ export type HeroCopyVariant = {
 export const HERO_COPY_VARIANTS: HeroCopyVariant[] = [
     {
         id: 'control',
-        headline: { lead: 'Make your product', emphasis: 'self-driving' },
+        headline: { lead: 'Your product’s', emphasis: 'context layer' },
         Body: BodyControl,
     },
     {
