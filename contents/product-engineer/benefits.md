@@ -37,7 +37,7 @@ Customers love it when an engineer listens to their problem and quickly ships a 
 
 ### 2. Spontaneous creativity
 
-Product engineers who have autonomy to experiment often end up shipping brilliant products and features that an exec or product leader never imagine. Numerous PostHog products and key features, such as [session replay](/session-replay), [data warehouse](/data-warehouse), and [PostHog AI](/ai), came from individual engineers hacking together a proof of concept or MVP. 
+Product engineers who have autonomy to experiment often end up shipping brilliant products and features that an exec or product leader never imagine. Numerous PostHog products and key features, such as [session replay](/session-replay), [data warehouse](/context-warehouse), and [PostHog AI](/ai), came from individual engineers hacking together a proof of concept or MVP. 
 
 ### 3. You can do more at once
 

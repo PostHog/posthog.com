@@ -136,7 +136,7 @@ For a long time, we were happy competing with lots of $1-2 billion companies, ea
 
 But we kept seeing companies streaming their PostHog data to a warehouse - such as [BigQuery](https://cloud.google.com/bigquery). We even lost our then-largest customer for this reason - where their source of truth became their warehouse instead of PostHog.
 
-So we decided we would ship our [own warehouse](/data-warehouse), enabling us to remain the [source of truth for customer and product data](/blog/modern-data-stack-sucks). This would let us offer a better integrated service to our customers, and meant we could work on a bigger challenge.
+So we decided we would ship our [own warehouse](/context-warehouse), enabling us to remain the [source of truth for customer and product data](/blog/modern-data-stack-sucks). This would let us offer a better integrated service to our customers, and meant we could work on a bigger challenge.
 
 ### August 2023: Growth continues
 
