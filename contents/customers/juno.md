@@ -1,17 +1,17 @@
 ---
-title: How Juno makes health tracking easier by merging 90% of self-driving PRs
+title: How Juno uses PostHog self-driving PRs to make health tracking less tiring
 customer: Juno
 featuredImage: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/PLACEHOLDER_juno_featured.png
 date: 2026-09-23
 seo:
-  metaTitle: Why Juno merges 90% of self-driving PRs from PostHog
-  metaDescription: Juno's founder had already built his own bug-fixing agent, but switched to PostHog self-driving anyway. Now the team merges 90% of the PRs it gets.
+  metaTitle: How Juno uses PostHog self-driving PRs to make health tracking less tiring
+  metaDescription: Juno's founder had already built his own bug-fixing agent, but switched to PostHog self-driving anyway. Now the team merges roughly 90% of the PRs it gets.
 ---
 
 [Juno](https://junocompanion.com/) is an AI health assistant for people living with chronic illness. Despite only launching recently out of YC's Spring 2026 batch the team has already found product-market fit and built a user base of 250,000 users who rely on it for health tracking support.
 
-"People with a chronic illness spend 99.99% of their lives outside the medical system," says Marshall Gould, Juno's CEO, who studied genetics at UCL and genomic medicine at Oxford University. "I've experienced that personally as someone who has myalgic encephalomyelitis/chronic fatigue syndrome and I know that not everyone can afford a personal care assistant. Health services put a huge emphasis on attending doctor's appointments, with no care or management set up in the interim. We wanted to fill the gap and that's why we built Juno."
+"People with a chronic illness spend 99.99% of their lives outside the medical system," says Marshall Gould, Juno's CEO, who studied genetics at UCL and genomic medicine at Oxford University. "I've experienced that personally as someone who has myalgic encephalomyelitis/chronic fatigue syndrome and I know that not everyone can afford a personal care assistant. So much attention goes into doctor's appointments, but people still have to manage their health between visits, often with little day-to-day support. We built Juno to help fill that gap."
 
 Marshall built the app himself, but a side-effect of the rapid success and growing user base was that he found he couldn't keep up with bug reports and feature requests. Rather than balloon the size of the team, he created a system of agents to fix simple issues for him by pulling data from [Mixpanel](/blog/posthog-vs-mixpanel).
 
@@ -21,7 +21,7 @@ Because agents didn't always have the right context to identify and fix issues, 
 
 After installing PostHog with [the wizard](/wizard) he had one platform to monitor analytics, track errors, and observe behaviour — as well as PostHog's [self-driving features](/self-driving) to turn that data and context into PRs.
 
-"I'd basically done part of what PostHog was doing," he says. "But it's so much nicer to have a system that's actually meant for it and integrated with all of the context seamlessly. Our merge rate for self-driving PRs has increased to 90% now that we use PostHog for self-driving."
+"I'd basically done part of what PostHog was doing," he says. "But it's so much nicer to have a system that's actually meant for it and integrated with all of the context seamlessly. Our merge rate for self-driving PRs is roughly 90% now that we use PostHog for self-driving."
 
 <OSQuote
   customer="juno"
@@ -41,10 +41,9 @@ A [PostHog scout](/blog/what-is-a-scout) doesn't need to read a user's data to s
 
 "If something goes wrong in our medication log, for example, people might miss their medications or get dosages wrong," Marshall says. "If they're not entering the right thing, or they're not getting notifications? Those are the things we need to find straight away and squash as soon as they happen."
 
-"We had one issue where users were repeatedly tapping at a button to log their medication and kept missing it," says Marshall. "It's the type of thing where a human can't easily notice it without watching dozens of recordings with the same behaviour, but an AI can spot it much faster and propose a fix."
+PostHog helped Juno identify friction when people returned to log medication they had already taken. Someone catching up on ten medications had to tick them off individually. Juno added "Log all" to record the scheduled group in one action — less repetitive work for people already dealing with fatigue.
 
-That's exactly what happened too. A PostHog scout spotted the missed taps and proposed making the button bigger — as well as adding a "Log all" button that simplifies the process for people already dealing with fatigue. It's a small change on the surface, but one that makes a massive difference to Juno's users.
-
+<!-- TODO: add the "Log all" screenshot (shows the existing control with sample data, not a before/after pair). Source file is on Google Drive but not shared publicly. -->
 
 The same loop has fixed dozens of other issues for Juno: a chat box that hung so people couldn't message the in-app AI, dose-logging errors that only appeared on certain screen sizes, users getting stuck on frozen tabs, and dead taps that were losing drafts in the symptom logging flow.
 
@@ -62,7 +61,7 @@ No. Marshall still commits to reading every one and staying in the self-driving 
 
 "It's not 100% accurate and I do sometimes edit slightly," he says. "We generally like to test on the simulator ourselves, depending on how much time we have. Sometimes we get an AI to test it if it's a high-confidence fix that just needs confirming."
 
-"Right now we're merging 90% of our self-driving PRs though, and we think it's going great. The only thing PostHog can't do for us yet is generate React Native source maps, but I'm sure that will change," Marshall says. "We want to be fully PostHog-pilled going forward."
+"Right now we've merged 26 of our last 30 self-driving PRs though, and we think it's going great. The only thing PostHog can't do for us yet is generate React Native source maps, but I'm sure that will change," Marshall says. "We want to be fully PostHog-pilled going forward."
 
 There is plenty left for Juno to build. The next release will add around 100 environmental data sources, including pollen count, weather, and air pressure, so Juno can surface trends earlier and move from tracking symptoms toward preventing them.
 
