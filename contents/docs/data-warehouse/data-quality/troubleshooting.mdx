@@ -1,0 +1,109 @@
+---
+title: Data quality results and troubleshooting
+sidebar: Docs
+showTitle: true
+---
+
+import { CalloutBox } from 'components/Docs/CalloutBox'
+
+<CalloutBox icon="IconFlask" title="Data quality is in alpha" type="action">
+
+Data quality isn't available to every project. [Contact support](https://app.posthog.com/home#supportModal) to request access or share feedback.
+
+</CalloutBox>
+
+Start troubleshooting with the individual check result, then use the overall health status to understand its effect on the table, view, or metric.
+
+## Understand check results
+
+Each check execution ends with one result:
+
+| Result | Meaning |
+| --- | --- |
+| **Passed** | The assertion succeeded. Most checks found zero failing rows. |
+| **Failed** | The assertion ran and found a violation. This is a data result, not a query error. |
+| **Errored** | PostHog couldn't compile or execute the check. The result doesn't prove that the data is valid or invalid. |
+| **Skipped** | PostHog couldn't run the check, usually because its table, view, or metric was deleted. |
+
+Row-based checks show how many rows failed. Row count and freshness checks show the value they observed instead. A **Row count** check has no individual failing rows.
+
+## Understand overall health
+
+PostHog rolls the latest result of every enabled check into one health value for the table, view, or metric.
+
+| Health | Meaning |
+| --- | --- |
+| **Failing** | At least one error-severity check failed. |
+| **Erroring** | No error-severity check is failing, but at least one check errored. |
+| **Warning** | Only warning-severity checks are failing. |
+| **Healthy** | At least one check passed, with no failing or errored check taking priority. |
+| **Not run yet** | No enabled check has produced a usable result. |
+
+The worst outcome wins in the order shown above. A failing error-severity check takes priority over an errored check.
+
+## Investigate failing rows
+
+Expand a check to view its recent history, failure count, duration, and error details. For a failed check, select **Open failing rows in SQL editor**.
+
+PostHog stores the count and compiled query. It doesn't store a snapshot of the failing warehouse rows. When you rerun the diagnostic query, it reads current data. The returned rows can differ from the original count if a sync, materialization, or data repair happened after the check.
+
+For a **Row count** check, compare the observed count with the limits you configured. There is no failing-row query because no individual row is wrong.
+
+## Understand notifications
+
+PostHog sends a check-failure notification when an error-severity check starts a failing streak. It doesn't send the same notification after every run in that streak.
+
+PostHog doesn't send a data-failure notification for:
+
+- Warning-severity failures
+- Errored checks
+- Skipped checks
+- Repeated failures in a streak that was already reported
+
+A blocked materialization sends a separate notification for that materialization job. Recipients must have query access and access to the view and other tables that the failing checks read.
+
+## Fix permission errors
+
+You need query access to view data quality checks and results. You also need viewer access to read a table, view, or metric and editor access to create, edit, delete, or run its checks.
+
+**Relationships** and **Custom SQL** checks can read other tables and views. PostHog checks access to everything the check reads when you create, edit, run, or schedule it. Automated runs use the permissions of the person who last changed the definition, with the creator as a fallback.
+
+Every automated check on `events`, `persons`, or `groups` uses the same permission fallback, including generic check types. PostHog needs that person's permissions because PostHog-table properties and warehouse joins resolve per person. The run shows **Errored** and executes no SQL when PostHog has no authorized person to use.
+
+If a check, table, view, or metric is missing from the Data quality page:
+
+1. Confirm that data quality alpha access is enabled for the organization.
+2. Confirm that you have query access.
+3. Confirm that you can read the table, view, or metric and every other table the check reads.
+
+For MCP and SQL permission troubleshooting, see the [data quality MCP and SQL reference](/docs/data-warehouse/data-quality/mcp#permissions-and-scopes).
+
+## Fix query errors and timeouts
+
+Open the run's error details before you change the assertion. Common causes include invalid HogQL, a renamed column, a missing table, changed permissions, an unsupported metric definition, or a query timeout.
+
+For large `events`, `persons`, or `groups` checks, set **Only check recent rows**. `events` filters on `timestamp`; `persons` and `groups` filter on `created_at`. For **Custom SQL**, add a time condition to the query because the automatic option isn't supported.
+
+Use the smallest window that still tests the data your decision depends on. For a **Relationships** check, review both **Only check recent rows** and **Only look for a match in recent rows**. A target window that is too short can report a valid older reference as missing.
+
+An errored check doesn't count as a failing assertion. If the materialization gate is on, query errors and audit failures don't guarantee a block.
+
+## Fix a missing table, view, or metric
+
+A deleted table, view, or metric can produce a **Skipped** run and leave its check visible until cleanup runs. Cleanup removes checks and their run history after a short delay.
+
+You can't move an existing check to a different table, view, or metric. Create a new check on the replacement. If the old name is still reserved, use another name or wait for cleanup. If a source was renamed rather than deleted, confirm that its current columns still match the check.
+
+## Recover from a blocked materialization
+
+A blocked refresh means at least one enabled error-severity check returned **Failed** against the staged, unpublished data. The previous published version continues serving, and PostHog skips downstream views.
+
+1. Open the materialized view's **Data quality** tab.
+2. Inspect each failed error-severity check and rerun its diagnostic query.
+3. Fix the source data or edit the assertion.
+4. Start the materialization again.
+5. Restart the affected data modeling run after the view publishes so PostHog can refresh the skipped downstream views.
+
+Don't disable the project-wide gate to hide an errored audit. An errored query already fails open. Fix the query or permission problem so the next refresh has a real verdict.
+
+See [block materialization on failing checks](/docs/data-warehouse/data-quality/block-materialization) for the full gate behavior.
