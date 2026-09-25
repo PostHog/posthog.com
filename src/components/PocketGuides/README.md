@@ -8,8 +8,9 @@ reader UI uses PostHog fonts and tokens. The Product Analytics guide's Twig view
 Components here supply layout, interactions, and short labels for the data they display.
 
 The Product Analytics figures use commit-pinned `@posthog/twig-components` views for browsing and
-stay cards. `ProductAnalyticsExhibits.tsx` owns the guide's example event feed and chart. Reader
-clicks only change local example state – they do not send practice events to PostHog.
+stay cards. `ProductAnalyticsExhibits.tsx` owns the guide's example events and chart, while
+`PostHogInspector.tsx` gives every inspector the same frame and code display. Reader clicks only
+change local example state – they do not send practice events to PostHog.
 `TwigBrowseFigure.tsx` imports Twig's styles and photos from the package, so a package update must
 be reviewed on both sites.
 
@@ -234,27 +235,14 @@ The report frontmatter contract and the `.md` agent-mirror constraints are docum
 `gatsby/createSchemaCustomization.ts` plus `pnpm clean` – Gatsby won't infer fields that only some
 pages declare.
 
-### Code and event examples
-
-`PocketGuideCodeEvents` is the guide's code-and-outcome exhibit. It renders a single frame with
-code on the left and simulated event rows on the right, stacking them when the reading column is
-narrow. Pass the language key (for example, `javascript`), code, event name, column label, and
-example rows from MDX. The code side derives its visible language label from that key and has its
-own copy button. These rows are local teaching data, not PostHog events.
-
-Authors choose the format per example: use a fenced code block (`js`, `python`, etc.) to show code
-alone, `PocketGuideCodeEvents` to show code beside the simulated events it produces, or a figure's
-event inspector to focus on one selected interaction. Product Analytics uses the Twig event
-figures for the filter example.
-
 ### Twig in Product Analytics
 
 The introduction uses a screenshot of Twig's homepage from `static/pocket-guides/posthog/`.
 The Events and properties chapter uses `BrowseStays` and `StayCardContent` from the pinned
 `@posthog/twig-components` package. `TwigBrowseFigure` adds local filter state and package photos.
 `TwigEventFlow` places the PostHog event inspector below the Twig view. The chapter's activity
-feed, event properties, and chart are guide-owned examples in `ProductAnalyticsExhibits.tsx`.
-These examples do not send events to a PostHog project.
+The inspectors show event timestamps separately from custom properties. These examples do not
+send events to a PostHog project.
 
 Twig.com owns its pages and instrumentation. The package owns reusable Twig UI, data, styles,
 and assets. PostHog.com owns the teaching prose and example data. When the package pin changes,

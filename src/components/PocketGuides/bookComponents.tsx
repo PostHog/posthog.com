@@ -3,10 +3,8 @@ import { ProductVideo } from '../ProductVideo'
 import Term from './terms'
 import LessonFooter from './LessonFooter'
 import TwigFilterFigure from './TwigFilterFigure'
-import TwigPropertyFigure from './TwigPropertyFigure'
 import TwigEventFigure from './TwigEventFigure'
 import TwigIntroductionFigure from './TwigIntroductionFigure'
-import PocketGuideCodeEvents from './PocketGuideCodeEvents'
 import { AutocaptureFigure, FilterPropertiesFigure, DestinationChartFigure } from './ProductAnalyticsExhibits'
 
 import Action, { Setup } from './Action'
@@ -51,10 +49,8 @@ export const bookMdxComponents = {
     Frontispiece,
     Fig,
     TwigFilterFigure,
-    TwigPropertyFigure,
     TwigEventFigure,
     TwigIntroductionFigure,
-    PocketGuideCodeEvents,
     AutocaptureFigure,
     FilterPropertiesFigure,
     DestinationChartFigure,

@@ -95,10 +95,10 @@ const LearnNav = ({
                         <li key={page.url} className="m-0 p-0">
                             <Link
                                 to={to}
-                                className={`block w-full px-2 py-1 rounded text-sm hover:bg-accent ${
+                                className={`block w-full px-2 py-1 rounded text-sm !no-underline focus-visible:outline-offset-[-2px] ${
                                     active
-                                        ? 'font-semibold text-primary bg-accent'
-                                        : 'text-secondary hover:text-primary'
+                                        ? 'bg-dark/15 dark:bg-light/15 !text-primary font-semibold'
+                                        : '!text-primary hover:bg-dark/10 dark:hover:bg-light/10'
                                 }`}
                             >
                                 <span data-sidebar-label>{page.shortTitle || page.title}</span>

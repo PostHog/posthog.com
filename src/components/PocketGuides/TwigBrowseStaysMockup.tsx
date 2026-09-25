@@ -30,10 +30,7 @@ export default function TwigBrowseStaysMockup({
                 role="img"
                 aria-label={`Twig's Browse stays page with the ${selected} filter selected and one ${selected} stay`}
             >
-                <span className="text-xs uppercase" style={{ color: twigPalette.muted }}>
-                    Explore
-                </span>
-                <h3 className="!mt-1 !mb-4 text-2xl font-semibold" style={{ color: twigPalette.ink }}>
+                <h3 className="!mt-0 !mb-4 text-2xl font-semibold" style={{ color: twigPalette.ink }}>
                     Browse stays
                 </h3>
                 <div className="flex flex-wrap gap-2" aria-hidden="true">

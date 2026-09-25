@@ -15,20 +15,23 @@ export default function TwigBrowseFigure({
     onFilter,
     onOpen,
     initialSetting = 'Coast',
+    controlledSetting,
     id,
 }: {
     onFilter?: (setting: StaySetting, count: number) => void
     onOpen?: (stay: Stay) => void
     initialSetting?: StaySetting
+    controlledSetting?: StaySetting
     id: string
 }): JSX.Element {
     const [setting, setSetting] = useState<StaySetting>(initialSetting)
     const [search, setSearch] = useState('')
+    const selectedSetting = controlledSetting ?? setting
     return (
-        <div className="twig-browser overflow-hidden rounded border border-[#d7c8b6] bg-[#f7eddf] p-4 text-[#2d2b29] @md:p-6">
+        <div className="twig-browser overflow-hidden rounded border border-[#d7c8b6] bg-[#f7eddf] p-4 text-[#2d2b29] [&_.vac-eyebrow]:hidden @md:p-6">
             <BrowseStays
                 id={id}
-                setting={setting}
+                setting={selectedSetting}
                 search={search}
                 onSearchChange={setSearch}
                 onSettingChange={(next) => {
