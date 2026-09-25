@@ -33,7 +33,7 @@ After installing PostHog with [the wizard](/wizard) he had one platform to monit
 
 As a healthtech app, Juno takes privacy further than most consumer apps, and doesn't sell or share personal data. It strips PII and PHI before storing anything, hashes everything in its database, and covers the AI models it uses with zero data retention agreements and BAAs so user data is never used for training.
 
-This approach is great for user privacy, but makes debugging harder for humans because it's difficult to spot a bug in a session replay when most of the screen is masked. Self-driving agents, on the other hand, can pull supporting context from several tools at once.
+This approach is great for user privacy, but makes debugging harder for humans because it's difficult to spot a bug when you have privacy protections in place. Self-driving agents, on the other hand, can pull supporting context from several tools at once.
 
 "If someone's being vague about their problem and hasn't shared logs, we can prompt PostHog on what it could be based on their analytics, error reports, and previous bugs," Marshall says. "Realistically, if one user reports something, another 100 users have it too."
 
