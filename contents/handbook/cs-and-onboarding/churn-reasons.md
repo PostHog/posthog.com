@@ -62,7 +62,7 @@ Some customers have constraints we can't fully solve — e.g. they can't store d
 Make sure they know what privacy controls PostHog offers. We're anonymous by default, Session Replay masks sensitive data, and many customers don't realize what's possible. Useful links:
 
 - [Data collection](https://posthog.com/docs/privacy/data-collection)
-- [URL masking](https://posthog.com/docs/cdp/transformations/template-url-masking)
+- [URL masking](/docs/cdp/transformations/url-masking)
 - [Session replay privacy](https://posthog.com/docs/session-replay/privacy)
 - [Cookieless tracking](https://posthog.com/tutorials/cookieless-tracking)
 - [GDPR](https://posthog.com/docs/privacy/gdpr-compliance)
