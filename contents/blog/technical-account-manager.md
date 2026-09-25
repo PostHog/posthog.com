@@ -39,9 +39,8 @@ The benefit is that, in return for all of this, customers and companies are opti
 
 ## What do technical account managers do? 
 
-So now that you know why they exist, what do they actually do? 
 
-They spend their days interacting with customers, mostly engineers, to help solve their problems such as:
+TAMs spend their days interacting with customers (mostly engineers) to help solve their problems such as:
 
 - Planning usage of a product such as how much to provision, best practices around implementation and usage as well as how to integrate with their existing app. 
 
