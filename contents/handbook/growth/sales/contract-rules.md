@@ -171,7 +171,7 @@ If you believe you have a customer who falls into one of these categories and wo
 
 ## Additional credit purchase
 
-It's often difficult to right-size the credit needed for a longer term plan, so customers can buy additional credit in the first half of a contract term (e.g. 6 months for an annual plan). See [when they don't have enough credit to cover their term](#when-they-dont-have-enough-credit-to-cover-their-term) for how those purchases are priced. Within the first 6 months given our billing usage reports we should be able to predict whether the customer is going to run out of credit or not. There are also alerts set up in `#sales-alerts` to help notify account owners about this.
+It's often difficult to right-size the credit needed for a longer term plan, so customers can buy additional credit in the first half of a contract term (e.g. 6 months for an annual plan). See [when they don't have enough credit to cover their term](#when-they-dont-have-enough-credit-to-cover-their-term) for how those purchases are priced. Within the first 6 months given our billing usage reports we should be able to predict whether the customer is going to run out of credit or not. There are also alerts set up in `#sales-alerts` to help notify account owners about this. On a multi-year deal the window depends on how the customer pays - see [multi-year contract top-ups](#multi-year-contract-top-ups).
 
 ## Price guarantees & lock-ins
 
@@ -197,9 +197,44 @@ We will allocate the credit for that year to the Stripe account when the contrac
 
 If a customer wishes to use subsequent year's credit early they must agree to pay the invoice for that year early before the credit is transferred.
 
-The additional credit purchase applies to each year separately, e.g. they can purchase additional credits at the same discount level in the first 6 months of each year.
+The additional credit purchase applies to each year separately, e.g. they can purchase additional credits at the same discount level in the first 6 months of each year. See [multi-year contract top-ups](#multi-year-contract-top-ups) for the window in each payment model and the paperwork a top-up needs.
 
 You can see a signed multi-year contract set up in this way by navigating to Documents -> Examples (folder) inside of [PandaDoc](https://app.pandadoc.com).
+
+## Multi-year contract top-ups
+
+A top-up is an additional credit purchase inside a term the customer has already signed. On a 12 month deal this is simple. Multi-year deals raise two questions: which years the top-up discount applies in, and what paperwork a top-up needs.
+
+### Which years the discount applies in
+
+We honor the top-up discount in every year of a multi-year term, not only the first. The window depends on how the customer pays:
+
+-   **Paid yearly (or in tranches):** each year is its own credit tranche with its own 12 month expiry, so each year gets its own window. The window is the first 6 months of that contract year, at the discount level on the original order form.
+-   **Paid up-front for the full term:** there is one credit pool with one expiry, so there is one window. The window is the first half of the full term. A 24 month term paid up-front has a 12 month window and no reset in year 2.
+
+We honor year 2 and year 3 because the customer bought the whole term. A discount that quietly stops after year 1 makes the deal worse than the customer understood it to be at signature, and it puts the account owner in the position of arguing against a term we wrote. If we decide the per-year reset is too generous, we change the order form template for new deals. We do not re-read contracts that are already signed.
+
+Two limits keep a top-up from becoming a cheap route to a renewal:
+
+-   **A top-up cannot extend the term.** Top-up credits expire with the tranche or the term they attach to. A customer who needs a longer runway signs a new term.
+-   **A top-up can be smaller than a new contract, and it does not earn a better tier.** Volume tiers are set by the credit value of a full contract year. A top-up adds to a year that already qualified, so it can be smaller than the amount a new deal needs. For the same reason it is [priced independently](#when-they-dont-have-enough-credit-to-cover-their-term) and never adds to earlier purchases to reach a higher tier.
+
+A customer who tops up in consecutive years has a mis-sized deal. Re-size it at the next renewal instead of topping up a third time.
+
+### Proof of the customer request
+
+A top-up inside the window does not need its own signed order form. The original order form already grants the right to buy more credit at that discount, so a second signature adds delay and nothing else. We do need a record of who asked for what, because the invoice is the only other trace and it does not say who approved it.
+
+**What counts as proof.** A written request from a customer contact who can commit spend, which names the credit amount and the price. An email or a Slack message is sufficient. A screenshot of either is also sufficient, and it is the correct answer when the request came in a DM, because we cannot rely on a DM link staying readable to the rest of the team. A request made on a call is not sufficient on its own. Send a short written summary afterwards and get the customer to confirm it.
+
+**Where the proof goes.** All of it goes on the Salesforce opportunity:
+
+-   Attach the proof file to the opportunity. Do not rely on a link to Slack.
+-   Under **Opportunity closure details**, add a note with the credit amount, the price, the discount applied, and the special term in the original contract that allows the discount.
+-   Set **Contract Link** to the original order form in PandaDoc. The top-up has no paperwork of its own, and that order form holds the term the discount comes from.
+-   Set **Contract Start Date** to the start of the customer's current billing period, as for any credit purchase, so the credits apply to the invoice they are intended to cover. Set the end date to the end date of the current contract, so the top-up expires with the term.
+
+Do this when the top-up is agreed, not at renewal. It takes two minutes now and hours to reconstruct in six months.
 
 ## Uptime SLA
 
@@ -316,7 +351,7 @@ Their costs rise on a known date whether or not they sign, so it belongs in the 
 
 Sometimes a customer's usage grows faster than the credits they bought, and they exhaust the term's credits with months left to run. They have two options.
 
-1. **Top up the current term.** They buy additional credits that expire with the existing term on a new order form. Available in the first half of the term.
+1. **Top up the current term.** They buy additional credits that expire with the existing term. Available in the first half of the term. See [multi-year contract top-ups](#multi-year-contract-top-ups) for the window on a multi-year deal and for the proof we need.
 2. **Start a new term.** The current order form is replaced by a new term. The new purchase must be sized in good faith against the full new term: a credible forecast of usage across all 12 months, not a bridge to the next conversation. A customer expecting their usage to settle below its current peak can price against that, provided they're candid about the assumption.
 
 Running out of credit early neither creates nor destroys eligibility for the early renewal discount, because eligibility is always measured against the term's natural end date. A top-up prices on the volume lever alone. A new term earns the +5% only if it's signed inside the normal [early renewal window](#3-ability-to-forecast---mutual-commitment-to-timing-additive) — in the last 6 months of the original term, 60+ days before its natural end date, and while the customer is still on prepaid credits. Burning through credits faster than planned doesn't open that window sooner.
