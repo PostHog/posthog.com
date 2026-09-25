@@ -39,6 +39,25 @@
         )
     } catch (err) {}
 
+    // The menu bar is server-rendered, but its triggers stay inert until React
+    // hydrates, so a click in that window is swallowed with no feedback. Record the
+    // click and mark the trigger as pending; MenuBar replays it once it is live.
+    document.addEventListener(
+        'pointerdown',
+        function (event) {
+            if (window.__menuBarHydrated) return
+            var pending = window.__pendingMenuBarClick
+            if (pending) pending.trigger.removeAttribute('data-pending')
+            window.__pendingMenuBarClick = null
+            var target = event.target
+            var trigger = target && target.closest && target.closest('[data-menubar-trigger]')
+            if (!trigger) return
+            trigger.setAttribute('data-pending', '')
+            window.__pendingMenuBarClick = { trigger: trigger, time: Date.now() }
+        },
+        true
+    )
+
     // Hide dismissed WizardHint variants before first paint
     try {
         ;['warehouse-wizard-hint-dismissed', 'ai-observability-wizard-hint-dismissed'].forEach(function (key) {
