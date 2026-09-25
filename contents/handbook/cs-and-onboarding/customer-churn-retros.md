@@ -6,7 +6,7 @@ showTitle: true
 
 ## Churn retros
 
-When a human-managed account churns from PostHog, we share learnings in #customer-churn-retros. The goal is simple: learn from what happened so we can prevent it next time.
+When a human-managed account churns from PostHog, we share learnings in #customer-churn. The goal is simple: learn from what happened so we can prevent it next time.
 
 ## Who does this
 
