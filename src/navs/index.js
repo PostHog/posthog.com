@@ -1459,10 +1459,6 @@ export const handbookSidebar = [
                         name: 'Getting people to talk to you',
                         url: '/handbook/growth/sales/getting-people-to-talk-to-you',
                     },
-                    {
-                        name: 'Customer on-sites',
-                        url: '/handbook/growth/sales/customer-onsites',
-                    },
                 ],
             },
             {
@@ -1867,6 +1863,20 @@ export const handbookSidebar = [
                     {
                         name: 'Overview',
                         url: '/teams/gtm-engineering',
+                    },
+                ],
+            },
+            {
+                name: 'Working with customers in person',
+                url: '',
+                children: [
+                    {
+                        name: 'Customer on-sites',
+                        url: '/handbook/growth/sales/customer-onsites',
+                    },
+                    {
+                        name: 'Cohort dinners',
+                        url: '/handbook/cs-and-onboarding/cohort-dinners',
                     },
                 ],
             },
