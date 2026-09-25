@@ -304,7 +304,10 @@ const Form = ({
                 throw new ApplicationError('rejected', message || 'Failed to submit application. Please try again.')
             }
 
-            posthog?.capture('job application submitted', { jobPostingId: id })
+            posthog?.capture('job application submitted', {
+                jobPostingId: id,
+                isInExcludedCountry: !!isInExcludedCountry,
+            })
             onSubmit()
             setConfetti(true)
         } catch (err) {
@@ -330,7 +333,13 @@ const Form = ({
     return (
         <div>
             <h4 className="!text-lg mb-0">(Now for the fun part...)</h4>
-            <p>Just fill out this painless form and we'll get back to you within a few days. Thanks in advance!</p>
+            <p>
+                Just fill out this painless form{' '}
+                {isInExcludedCountry
+                    ? "and read the note below, because we most likely can't take your application further."
+                    : "and we'll get back to you within a few days."}{' '}
+                Thanks in advance!
+            </p>
             {/*             
             <p className="opacity-50 text-sm">
                 <span className="font-bold">Bolded fields</span> are required
@@ -341,8 +350,9 @@ const Form = ({
                     <div data-scheme="secondary" className="p-4 bg-accent border-b border-primary">
                         <h5 className="m-0">Heads up!</h5>
                         <p className="m-0 text-sm">
-                            It looks like you're applying from a country we don't hire in (yet!). You can learn more
-                            about where we hire in our{' '}
+                            It looks like you're applying from a country we don't hire in (yet!). You can still send
+                            your application, but we most likely can't take it further, and we can't promise you a
+                            reply. See the countries we do hire in, and why the list looks like this, in our{' '}
                             <Link to="/handbook/people/hiring-process" state={{ newWindow: true }}>
                                 handbook
                             </Link>
@@ -409,7 +419,13 @@ if (!code) {
     throw new Error('GATSBY_SHOPIFY_STICKER_CODE is not set')
 }
 
-const ApplicationSuccess = ({ isInUnitedStates }: { isInUnitedStates?: boolean }) => {
+const ApplicationSuccess = ({
+    isInUnitedStates,
+    isInExcludedCountry,
+}: {
+    isInUnitedStates?: boolean
+    isInExcludedCountry?: boolean
+}) => {
     const { setWindowTitle } = useApp()
     const { appWindow } = useWindow()
     const posthog = usePostHog()
@@ -468,7 +484,25 @@ const ApplicationSuccess = ({ isInUnitedStates }: { isInUnitedStates?: boolean }
                         </div>
                         <p className="text-base mt-2 mb-0">
                             Our mailhog has delivered your information to the hiring manager.{' '}
-                            <strong>You can expect to get a response within a few days.</strong>
+                            {isInExcludedCountry ? (
+                                <>
+                                    <strong>
+                                        It looks like you applied from a country we can't employ people in, so we most
+                                        likely can't take your application further.
+                                    </strong>{' '}
+                                    Read about where we hire, and why, in our{' '}
+                                    <Link
+                                        to="/handbook/people/hiring-process"
+                                        state={{ newWindow: true }}
+                                        className="text-red dark:text-yellow font-semibold"
+                                    >
+                                        handbook
+                                    </Link>
+                                    .
+                                </>
+                            ) : (
+                                <strong>You can expect to get a response within a few days.</strong>
+                            )}
                         </p>
                     </div>
 
@@ -545,7 +579,9 @@ const ApplicationSuccess = ({ isInUnitedStates }: { isInUnitedStates?: boolean }
                     <div className={`mx-6 md:mx-12 pb-2  ${!isInUnitedStates ? '' : 'border-t border-primary pt-6'}`}>
                         <h4 className="mb-0">More cool tech jobs</h4>
                         <p className="text-sm mb-4">
-                            While you're waiting to hear back, you might also be interested in exploring our{' '}
+                            {isInExcludedCountry
+                                ? 'You might also be interested in exploring our'
+                                : "While you're waiting to hear back, you might also be interested in exploring our"}{' '}
                             <Link
                                 to="/cool-tech-jobs"
                                 state={{ newWindow: true }}
@@ -617,9 +653,10 @@ export default function Apply({ id, info }: { id: string; info: any }) {
                 location={{ pathname: 'application-success' }}
                 newWindow
                 isInUnitedStates={isInUnitedStates}
+                isInExcludedCountry={isInExcludedCountry}
             />
         )
-    }, [isInUnitedStates])
+    }, [isInUnitedStates, isInExcludedCountry])
 
     useEffect(() => {
         posthog?.onFeatureFlags?.(() => {
@@ -638,7 +675,11 @@ export default function Apply({ id, info }: { id: string; info: any }) {
     return submitted ? (
         <>
             <h3>Thanks for your interest in joining PostHog!</h3>
-            <p>We will review your application as soon as possible and get back to you.</p>
+            <p>
+                {isInExcludedCountry
+                    ? "We will review your application, but it looks like you're in a country we can't employ people in, so we most likely can't take it further."
+                    : 'We will review your application as soon as possible and get back to you.'}
+            </p>
         </>
     ) : (
         <Form info={info} id={id} onSubmit={handleSubmit} isInExcludedCountry={isInExcludedCountry} />
