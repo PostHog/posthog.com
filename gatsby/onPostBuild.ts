@@ -131,10 +131,28 @@ const generateMarkdownArtifacts = async (graphql: any) => {
                     }
                 }
             }
+            allApiEndpoint {
+                nodes {
+                    url
+                    name
+                }
+            }
         }
-    `)) as { data: { allMdx: { nodes: Array<{ fields: { slug: string }; frontmatter: { title: string } }> } } }
+    `)) as {
+        data: {
+            allMdx: { nodes: Array<{ fields: { slug: string }; frontmatter: { title: string } }> }
+            allApiEndpoint: { nodes: Array<{ url: string; name: string }> }
+        }
+    }
 
-    const filteredPages = await generateRawMarkdownPages(docsQuery.data.allMdx.nodes)
+    // `/docs/api/<group>` pages are built from the OpenAPI spec, not MDX, so allMdx never returns
+    // them and they had no `.md` sibling. The scrape only needs built HTML, a slug and a title.
+    const apiReferenceNodes = docsQuery.data.allApiEndpoint.nodes.map(({ url, name }) => ({
+        fields: { slug: url },
+        frontmatter: { title: name },
+    }))
+
+    const filteredPages = await generateRawMarkdownPages([...docsQuery.data.allMdx.nodes, ...apiReferenceNodes])
     // Only include docs pages in llms.txt (not handbook)
     const docsPages = filteredPages.filter((page) => page.fields.slug.startsWith('/docs'))
     generateLlmsTxt(docsPages)
