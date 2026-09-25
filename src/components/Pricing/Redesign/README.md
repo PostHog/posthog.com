@@ -27,7 +27,7 @@ Everything in the `Component` column is deleted, except `Test/ImageSlider` and `
 | Product screenshot slider | `Test/ImageSlider` | Didn't fit alongside a full-width headline, and screenshots aren't a pricing question. |
 | "Jump to" table of contents | `ReaderView` right sidebar | Suppressed with `hideRightSidebar`; buys ~290px of content width. |
 
-Kept and reused: `Test/FreeTier`, `Test/Calculator`, `FAQs`, and `pages/pricing/philosophy`.
+Kept and reused: `Test/FreeTier`, `Test/Calculator`, `FAQs`, and `Philosophy`.
 
 - **`Test/Calculator`** — two optional props (`hideHeader`, `id`), both defaulting to its previous behavior. Its sidebar pieces (`SidebarList`, `SidebarListItem`, `Discounts`) used to be passed in as props from `Pricing/PricingExperiment`; they moved into the component when that file was deleted.
 - **`Test/FreeTier`** — its hard-coded list of products moved into `Test/freeTierData` and the component now maps over it. Pure refactor: same items, same order, same markup. It was extracted so `FreeTierModal` could render the same allowances in a different shape without a second copy of the numbers. **Update allowances there, not in a component.** Two places render it (`FreeTierTicker` and `Presentation/Templates/PricingTemplate`) plus the modal, so a stale duplicate would be hard to spot.
@@ -120,13 +120,13 @@ Unlike `components/Home/Customers`, there's no shuffle button or breakdown label
 
 **Note on logo heights:** customer records carry `height` as a Tailwind scale value. This component maps those to literal class names via `LOGO_HEIGHT_CLASSES` rather than interpolating `h-${n}`, because interpolated classes aren't in `safelist.txt` and only survive purge by coincidence elsewhere in the codebase. The rail uses one step smaller than `/customers` does, to keep the row compact.
 
-### `pages/pricing/philosophy`
+### `Philosophy`
 
-James's pricing note is shared by `/pricing` and the standalone `/pricing/philosophy` route. His photo, name, and co-founder title lead the card so the attribution is clear before the note begins.
+James's pricing note is a section of `/pricing`. His photo, name, and co-founder title lead the card so the attribution is clear before the note begins.
 
 The copy is intentionally limited to four commitments: no loss leaders, cheapest-at-scale pricing, financial stability, and an MIT-licensed open source option. The old biographical sign-off and secondary FAQ/contact paragraph were removed so the note ends on its signup CTA.
 
-**A copy edit here changes both routes**, which is intentional — the note is a company position, not a design.
+The note is a company position, not a design.
 
 ### `CalculatorReveal`
 
