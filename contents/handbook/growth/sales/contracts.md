@@ -143,6 +143,20 @@ We prefer to keep all signatures in PandaDoc, but sometimes clients may prefer t
 
 Once you the signed form in PandaDoc is marked as complete and the Salesforce opportunity status is set to Closed Won, the RevOps team will get a notification and handle setting up the subscription and invoicing. See the [Billing](/handbook/growth/sales/billing) page for steps on how the billing setup works for more information.
 
+### Updating the billing email and address
+
+You do not need the RevOps or billing team to change a customer's billing email or billing address in Stripe. You can do it yourself in billing admin.
+
+1. Open the customer in <PrivateLink url="https://billing.posthog.com/admin/billing/customer/">billing admin</PrivateLink> and find the **Billing details** panel on their profile.
+2. Click **Edit billing details**.
+3. Set the fields you must change:
+    - **Business name** - the bill-to name on invoices.
+    - **Billing email** - the address that receives invoices and billing notifications.
+    - **Billing address** - leave all address fields blank to keep the current Stripe address. If you set one address field, then address line 1, city, postal code, and country are also necessary. State/province is necessary for the US and Canada.
+4. Click **Save to Stripe**. The update goes to all Stripe customers in the **Stripe customers that get this update** list on the form.
+
+> Stripe uses the billing address as the tax location. A change to the address can add or remove sales tax or VAT on the next invoice, so make sure the customer gives you their correct legal address.
+
 ### Using prepaid credits to cover an existing pay-as-you-go invoice
 When a pay as you go customer wants to sign a prepaid contract and use their new credits to cover an invoice that is about to be issued, timing is important. Credits can only be applied cleanly to an invoice _before_ that invoice is finalized. 
 
