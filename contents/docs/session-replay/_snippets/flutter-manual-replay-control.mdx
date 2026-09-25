@@ -2,6 +2,8 @@
 
 Setting `config.sessionReplay = false` in your PostHog configuration will prevent PostHog from automatically starting session recordings on SDK setup.
 
+`startSessionRecording()` and `stopSessionRecording()` call straight through to the native SDK on iOS and Android, so what happens after a stop depends on the platform. On Android, with `sessionReplay` set to `false`, a stop lasts until you call `startSessionRecording()` again. Event triggers, new sessions, and remote config loads don't restart it. On iOS, a later remote config load or a matched [event trigger](/docs/session-replay/how-to-control-which-sessions-you-record#event-triggers) can start recording again after a stop, whatever `sessionReplay` is set to. To keep specific users out of recordings on both platforms, target them with a [linked feature flag](/docs/session-replay/how-to-control-which-sessions-you-record#feature-flag-triggers).
+
 You can manually control when to start and stop session recordings using the following methods:
 
 - `startSessionRecording({bool resumeCurrent = true})`

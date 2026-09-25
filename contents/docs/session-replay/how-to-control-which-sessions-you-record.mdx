@@ -34,7 +34,7 @@ When setting up recording rules, there are three questions to ask yourself:
 - How many of those matching sessions you actually need
 - How short is too short to be worth keeping
 
-In most cases, you can initialize the PostHog SDK with the default settings and use the trigger group conditions above to control what gets recorded. If you need more control, you can use [manual start/stop controls](#programmatic-start-and-stop-controls).
+In most cases, you can initialize the PostHog SDK with the default settings and use the trigger group conditions above to control what gets recorded. If your targeting logic lives on the server (an event, a linked feature flag, sampling), use trigger groups. If it lives in your own app code (a flag you read yourself, consent state, a region check), use [manual start/stop controls](#programmatic-start-and-stop-controls) instead. On mobile, that also means turning off automatic recording so PostHog doesn't start a session before you decide to.
 
 ## Trigger groups
 
@@ -266,6 +266,12 @@ For example, take one group with an event trigger for exception events and a URL
 To record both patterns independently at different rates, use two groups rather than one.
 
 ## Programmatic start and stop controls
+
+<CalloutBox icon="IconInfo" title="On mobile, pick automatic or manual mode" type="fyi">
+
+On mobile SDKs (iOS, Android, React Native, Flutter), `sessionReplay = true` puts PostHog in charge: [trigger groups](#trigger-groups), remote config, and session rotation can all start a recording, and a `stop` call only pauses the recording that's currently running. If your own app code decides who gets recorded (a feature flag you read yourself, consent state, a region check, a screen allow/deny list), set `sessionReplay = false` and drive `start`/`stop` yourself. Whether a stop lasts once you've started recording varies by platform. See the per-platform notes below.
+
+</CalloutBox>
 
 <Tab.Group tabs={["Web", "iOS", "Android", "React Native", "Flutter"]}>
   <Tab.List>
