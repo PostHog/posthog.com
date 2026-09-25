@@ -49,6 +49,24 @@ Every trial _should_ include:
 2. **Shared Slack channel** - Set up before kickoff if possible, so that there's a more "live" way to communicate that comes with better and more accessible support. See [Shared Slack Channels with Customers](/handbook/growth/sales/slack-channels) for additional guidance.
 3. **Onboarding success plan** - Use the [30-day onboarding success plan template](/handbook/cs-and-onboarding/onboarding-success-plan) as a starting point, then iterate where appropriate. Adapt for trial length, and share with the customer as a Slack canvas in the shared Slack channel.
 
+## AI products in a trial
+
+A trial gives unlimited usage on most products. Four AI products are different: Replay Vision, Desktop, PostHog AI, and Inbox. These products have a [spend cap during a trial](/handbook/growth/sales/trials#spend-caps-during-a-trial), because each use costs us model tokens.
+
+Many prospects in a sales-led trial do not have a subscription. For these prospects, the cap is 2x the free tier. This is low for a real evaluation. For example, the PostHog AI cap is 1,000 credits ($10). When the prospect gets to the cap, the product stops.
+
+If AI products are part of the evaluation, add the organization to the [`billing-trial-expanded-free-allocation`](https://us.posthog.com/project/2/feature_flags/902594) feature flag. Do this when you create the trial, before the kickoff call. The flag changes the cap to 10x the free tier. For example, the PostHog AI cap changes to 5,000 credits.
+
+To add an organization:
+
+1. Open the [flag](https://us.posthog.com/project/2/feature_flags/902594) and click **Edit**.
+2. Add the organization to the release conditions. The organization name must match exactly.
+3. Click **Save**.
+
+The new cap does not apply immediately. It can take up to 30 minutes. If the prospect is already at the cap, the product starts again after the new cap applies.
+
+If the prospect will need more than 10x the free tier, talk to the Billing team before the prospect gets to the cap.
+
 ## Suggested timeline
 
 > Note: Per above, the trial shouldn't progress past this point until the SDK is installed and event data is being sent to PostHog.
