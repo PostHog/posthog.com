@@ -70,6 +70,9 @@ const CUSTOMER_ORDER = [
     'posthog',
 ]
 
+// Kept out of the logo wall so it fills an even grid
+const LOGO_WALL_HIDDEN = ['squadsventures']
+
 const ROLES = [
     { label: 'Engineering', blurb: 'Installed it before anyone asked.' },
     { label: 'Product', blurb: 'Came for one funnel. Built forty.' },
@@ -507,7 +510,9 @@ export default function Customers(): JSX.Element {
     const { customers: allCustomers } = useCustomers()
     const customers = sortCustomers(Object.values(allCustomers))
     const tableCustomers = customers.filter(hasStory)
-    const noStoryYet = customers.filter((customer) => !hasStory(customer))
+    const noStoryYet = customers.filter(
+        (customer) => !hasStory(customer) && !LOGO_WALL_HIDDEN.includes(customer.slug)
+    )
     const [filteredCustomers, setFilteredCustomers] = useState<CustomerType[]>(tableCustomers)
     const [role, setRole] = useState(ROLES[0].label)
     const [rowsShown, setRowsShown] = useState(TABLE_ROWS_STEP)
