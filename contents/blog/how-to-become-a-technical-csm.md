@@ -1,13 +1,11 @@
 ---
 title: "How to become a technical CSM"
-date: 2026-09-24
+date: 2026-09-25
 author:
   - ella-cullen
 featuredImageType: full
-category: General
 tags:
   - Inside PostHog
-  - Guides
 seo:
   metaTitle: "How to become a technical CSM (without an engineering background)"
   metaDescription: "No CS degree, seven years in sales, and now a technical customer success manager at PostHog. The habits that got me here: work on a technical product, answer questions yourself before escalating, and build things you actually use."
