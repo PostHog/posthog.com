@@ -32,7 +32,7 @@ const Paragraph = ({ children }: { children: React.ReactNode }) => (
 )
 
 /** The emphasis clause is the one that gets the blue highlight treatment. */
-export const HERO_HEADLINE = { lead: 'Make your product', emphasis: 'self-driving' }
+export const HERO_HEADLINE = { lead: 'Your product’s', emphasis: 'context layer' }
 
 export const HeroBodyCopy = (): JSX.Element => (
     <Paragraph>
