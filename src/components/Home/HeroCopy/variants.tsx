@@ -36,7 +36,7 @@ export const HERO_HEADLINE = { lead: 'Make your product', emphasis: 'self-drivin
 
 export const HeroBodyCopy = (): JSX.Element => (
     <Paragraph>
-        PostHog combines and stores your <Highlight>analytics, errors, replays, and business data</Highlight> so you and
-        your <Underline delay={900}>agents</Underline> can understand and act on it.
+        PostHog ingests and stores your <Highlight>analytics, errors, replays, and business data</Highlight> so you and
+        your <Underline delay={900}>agents</Underline> can query and act on it.
     </Paragraph>
 )
