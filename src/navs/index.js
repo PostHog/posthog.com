@@ -8516,8 +8516,8 @@ export const docsMenu = {
                     color: 'seagreen',
                 },
                 {
-                    name: 'Link traces to LLM analytics',
-                    url: '/docs/distributed-tracing/link-llm-analytics',
+                    name: 'Link traces to AI Observability',
+                    url: '/docs/distributed-tracing/link-ai-observability',
                     icon: 'IconLlmAnalytics',
                     color: 'purple',
                 },

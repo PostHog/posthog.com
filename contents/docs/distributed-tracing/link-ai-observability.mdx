@@ -1,8 +1,8 @@
 ---
-title: Link traces to LLM analytics
+title: Link traces to AI Observability
 ---
 
-If your product sends OpenTelemetry spans to [Distributed tracing](/docs/distributed-tracing) and LLM events to [LLM analytics](/docs/ai-observability), you can correlate the two. One request then shows both the application work and the model calls that the request made.
+If your product sends OpenTelemetry spans to [Distributed tracing](/docs/distributed-tracing) and LLM events to [AI Observability](/docs/ai-observability), you can correlate the two. One request then shows both the application work and the model calls that the request made.
 
 The two products do not correlate automatically. You must give the span and the LLM events the same trace ID, and you must convert between two different ID encodings when you query them.
 
@@ -18,7 +18,7 @@ The two products do not correlate automatically. You must give the span and the 
 ## Prerequisites
 
 - [Distributed tracing](/docs/distributed-tracing/start-here) sends spans from your application.
-- [LLM analytics](/docs/ai-observability/installation) sends `$ai_generation` events from the same service.
+- [AI Observability](/docs/ai-observability/installation) sends `$ai_generation` events from the same service.
 - Both products send to the same PostHog project. SQL in PostHog is scoped to one project, so a query cannot join data across two projects.
 
 ## Use the trace ID as `$ai_trace_id`
@@ -28,7 +28,7 @@ The two products store a trace ID differently:
 | Product | Field | Format |
 | --- | --- | --- |
 | Distributed tracing | span `trace_id` | A [W3C Trace Context](https://www.w3.org/TR/trace-context/) trace ID: 16 bytes, written as 32 lowercase hexadecimal characters |
-| LLM analytics | `$ai_trace_id` | Any string that you choose |
+| AI Observability | `$ai_trace_id` | Any string that you choose |
 
 Because `$ai_trace_id` is a string that you choose, most examples set it to a new UUID. A UUID does not match any span, so the two products stay unlinked. To correlate them, set `$ai_trace_id` to the trace ID of the span that surrounds the LLM call.
 
@@ -130,10 +130,10 @@ Spans and LLM events live in different tables, and the tables store the trace ID
 Convert between them with these two expressions:
 
 ```sql
--- Span trace ID to the LLM analytics format
+-- Span trace ID to the AI Observability format
 lower(hex(tryBase64Decode(trace_id)))
 
--- LLM analytics trace ID to the span format
+-- AI Observability trace ID to the span format
 base64Encode(unhex('<trace_id_hex>'))
 ```
 
@@ -193,13 +193,13 @@ To read the prompts and the model responses, query the `posthog.ai_events` table
 
 - **The IDs must match exactly.** `$ai_trace_id` must be 32 lowercase hexadecimal characters. `unhex` accepts a dashed UUID without an error, but it returns a value of the wrong length, so the query silently finds nothing. Remove the dashes, or use a real span trace ID.
 - **One query cannot read both tables.** Spans and events sit on different clusters, so you must correlate in two steps.
-- **Only the trace ID joins the two products.** `$ai_span_id` identifies a generation or a span inside LLM analytics. It is not an OpenTelemetry span ID, and it does not match `posthog.trace_spans.span_id`.
+- **Only the trace ID joins the two products.** `$ai_span_id` identifies a generation or a span inside AI Observability. It is not an OpenTelemetry span ID, and it does not match `posthog.trace_spans.span_id`.
 - **A trace can arrive without its root span.** If a process stops before the exporter sends the root span, the child spans still arrive. Do not filter on `is_root_span` alone when you collect trace IDs.
 - **PostHog does not link the two products in the UI.** A span does not show a button to its LLM trace, and an LLM trace does not show a button to its span.
 - **Spans and events expire at different times.** Spans stay for 14 days by default. Events in [Product Analytics](/docs/product-analytics) stay for much longer.
 
 ## Next steps
 
-- **[Traces](/docs/ai-observability/traces)** – how LLM analytics groups generations and spans into a trace
+- **[Traces](/docs/ai-observability/traces)** – how AI Observability groups generations and spans into a trace
 - **[Link error tracking](/docs/ai-observability/link-error-tracking)** – attach exceptions to the same `$ai_trace_id`
 - **[Search logs](/docs/logs/search)** – filter logs by `trace_id`, in hexadecimal or base64
