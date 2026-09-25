@@ -81,8 +81,8 @@ importers:
         specifier: 0.36.6
         version: 0.36.6(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@posthog/twig-components':
-        specifier: github:PostHog/twig-components#e3097169335950cde912ec352eed1e9b9bfe20bc
-        version: https://codeload.github.com/PostHog/twig-components/tar.gz/e3097169335950cde912ec352eed1e9b9bfe20bc(react@18.3.1)
+        specifier: github:PostHog/twig-components#cdec9319cd1ff25e88d1176fcd516a51f6c9bb39
+        version: https://codeload.github.com/PostHog/twig-components/tar.gz/cdec9319cd1ff25e88d1176fcd516a51f6c9bb39(react@18.3.1)
       '@radix-ui/react-accordion':
         specifier: ^1.2.3
         version: 1.2.12(@types/react-dom@18.3.7(@types/react@16.14.66))(@types/react@16.14.66)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -3629,8 +3629,8 @@ packages:
       react: '>=16.14.0'
       react-dom: '>=16.14.0'
 
-  '@posthog/twig-components@https://codeload.github.com/PostHog/twig-components/tar.gz/e3097169335950cde912ec352eed1e9b9bfe20bc':
-    resolution: {tarball: https://codeload.github.com/PostHog/twig-components/tar.gz/e3097169335950cde912ec352eed1e9b9bfe20bc}
+  '@posthog/twig-components@https://codeload.github.com/PostHog/twig-components/tar.gz/cdec9319cd1ff25e88d1176fcd516a51f6c9bb39':
+    resolution: {tarball: https://codeload.github.com/PostHog/twig-components/tar.gz/cdec9319cd1ff25e88d1176fcd516a51f6c9bb39}
     version: 0.1.2
     peerDependencies:
       react: ^18.3.0 || ^19.0.0
@@ -21565,7 +21565,7 @@ snapshots:
       react: 18.3.1
       react-dom: 18.3.1(react@18.3.1)
 
-  '@posthog/twig-components@https://codeload.github.com/PostHog/twig-components/tar.gz/e3097169335950cde912ec352eed1e9b9bfe20bc(react@18.3.1)':
+  '@posthog/twig-components@https://codeload.github.com/PostHog/twig-components/tar.gz/cdec9319cd1ff25e88d1176fcd516a51f6c9bb39(react@18.3.1)':
     dependencies:
       '@rrweb/record': 2.1.6
       '@rrweb/replay': 2.1.6
