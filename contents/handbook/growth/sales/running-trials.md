@@ -63,6 +63,8 @@ To add an organization:
 2. Add the organization to the release conditions. The organization name must match exactly.
 3. Click **Save**.
 
+The new cap does not apply immediately. It can take up to 30 minutes. If the prospect is already at the cap, the product starts again after the new cap applies.
+
 If the prospect will need more than 10x the free tier, talk to the Billing team before the prospect gets to the cap.
 
 ## Suggested timeline
