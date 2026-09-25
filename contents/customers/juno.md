@@ -43,7 +43,9 @@ A [PostHog scout](/blog/what-is-a-scout) doesn't need to read a user's data to s
 
 PostHog helped Juno identify friction when people returned to log medication they had already taken. Someone catching up on ten medications had to tick them off individually. Juno added "Log all" to record the scheduled group in one action — less repetitive work for people already dealing with fatigue.
 
-<!-- TODO: add the "Log all" screenshot (shows the existing control with sample data, not a before/after pair). Source file is on Google Drive but not shared publicly. -->
+![The Log all control in Juno's medication log](/images/customers/juno/juno-medication-log-all.png)
+
+<Caption>The "Log all" control in Juno's medication log today, shown with sample data. It records a scheduled group of medications in one action.</Caption>
 
 The same loop has fixed dozens of other issues for Juno: a chat box that hung so people couldn't message the in-app AI, dose-logging errors that only appeared on certain screen sizes, users getting stuck on frozen tabs, and dead taps that were losing drafts in the symptom logging flow.
 
