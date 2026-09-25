@@ -43,7 +43,7 @@ A [PostHog scout](/blog/what-is-a-scout) doesn't need to read a user's data to s
 
 "We had one issue where users were repeatedly tapping at a button to log their medication and kept missing it," says Marshall. "It's the type of thing where a human can't easily notice it without watching dozens of recordings with the same behaviour, but an AI can spot it much faster and propose a fix."
 
-That's exactly what happened too. A PostHog scout spotted the missed taps and proposed making the button bigger — a small change on the surface but one that makes a massive difference to Juno's users.
+That's exactly what happened too. A PostHog scout spotted the missed taps and proposed making the button bigger — as well as adding a "Log all" button that simplifies the process for people already dealing with fatigue. It's a small change on the surface, but one that makes a massive difference to Juno's users.
 
 
 The same loop has fixed dozens of other issues for Juno: a chat box that hung so people couldn't message the in-app AI, dose-logging errors that only appeared on certain screen sizes, users getting stuck on frozen tabs, and dead taps that were losing drafts in the symptom logging flow.
