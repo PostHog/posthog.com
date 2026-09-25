@@ -8,9 +8,15 @@ The Cohort Dinner is an opportunity to show appreciation for our customers, deep
 
 ## What?
 
-"The Cohort Dinner" is a standardized format that we use to plan small dinner gatherings of customers, prospects, and PostHog people. We intentionally aim for the vibe to be less corporate, more fun, and it is *paramount* that the food is good. They have a soft cap of 25 attendees.
+"The Cohort Dinner" is a standardized format that we use to plan small dinner gatherings of customers, prospects, and PostHog people. We intentionally aim for the vibe to be less corporate, more fun, and it is *paramount* that the food is good. They have a soft cap of 25 attendees, and there should be one PostHog person for every 5-6 non-PostHog people.
 
-They are always driven by someone that is part of Customer Success or Sales, and while fun, are not just an excuse to get together and buy expensive bottles of champagne. Going into planning, there should be concrete goals and a reasonable justification for why the dinner should happen.
+They are always driven by someone that is part of Customer Success or Sales, and while fun, are not just an excuse to get together and buy expensive bottles of champagne. Going into planning, there should be concrete goals and a reasonable justification for why the dinner should happen. This likely looks like some mix of the following:
+
+- What expansion opportunities this helps move forward
+- What New Business opportunities this helps move forward
+- What contacts you are inviting and how they are meaningful to the relationship
+
+This is not to say that there must be a direct 1:1 relationship between who is being invited and opportunities - at the end of the day, the goal is building relationships for the long term. However, it is important to make sure that that concrete impact can be traced back to holding these events.
 
 ## When?
 
