@@ -65,7 +65,7 @@ Doing this lets us filter out the noise for everyone else while still giving goo
 >When adding yourself as a send-from address in Customer.io, be sure to edit the display name to '[your name] **from PostHog**'.
 
 ### Other broadcasts
-Any ad-hoc customer email broadcasts are owned by the <SmallTeam slug="marketing" />, and are usually sent via Customer.io. These can include product updates, outage alerts, or other PostHog news if needed.
+Any ad-hoc customer email broadcasts are owned by the <SmallTeam slug="developer-marketing" />, and are usually sent via Customer.io. These can include product updates, outage alerts, or other PostHog news if needed.
 
 These emails are usually tagged as `Service updates` in Customer.io when they include important account or product information. These emails are given a dedicated unsubscribe option in the footer, making it clear that we do not recommend users unsubscribe to these emails. 
 

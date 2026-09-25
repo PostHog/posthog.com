@@ -13,7 +13,7 @@ tags:
   - Session replay
 ---
 
-In August we launched [Replay Vision](/replay-vision), our AI layer over Session Replay. It watches session recordings and writes up what it finds, so nobody has to sit through them. We put it to work on PostHog right away. Since then, Replay Vision has watched 400k recordings for us.[^1] Nobody was going to watch(/blog/nobody-watches-session-replays) most of them anyway.
+In August we launched [Replay Vision](/replay-vision), our AI layer over Session Replay. It watches session recordings and writes up what it finds, so nobody has to sit through them. We put it to work on PostHog right away. Since then, Replay Vision has watched 400k recordings for us. [Nobody was going to watch](/blog/nobody-watches-session-replays) most of them anyway.
 
 The biggest thing we learned? Replay Vision fixes the watching part, but not the *thinking* part.
 
@@ -107,7 +107,7 @@ Create the scanner, then use the [bulk scan action](/docs/replay-vision/running-
 
 Here's one from the scanners we run on posthog.com. We built a summarizer to catch visitors who gave up on the site and reached for search, the AI chat, or the "talk to a human" form. Before enabling it, we ran it on a batch of recent sessions and read every observation. 9 of the first 15 had escaped to the human form, according to the model. 
 
-In the recordings, 9 people opened the form, typed nothing, and closed it. The model had invented their question from the pages around it, because the prompt asked what the visitor was looking for. One added rule fixed it: a form opened and closed with nothing typed is not an escape, and the scanner says so. [^2]
+In the recordings, 9 people opened the form, typed nothing, and closed it. The model had invented their question from the pages around it, because the prompt asked what the visitor was looking for. One added rule fixed it: a form opened and closed with nothing typed is not an escape, and the scanner says so. 
 
 The same pass taught us to watch the clips, not just read the text. A text-only review of our dead-end monitor called its "can't close this modal" findings solid. Watching the recordings said otherwise, so that scanner went back to calibration.
 
@@ -284,6 +284,3 @@ after I choose, estimate the scanner against the remaining quota, create it safe
 ```
 
 [Design scanners with PostHog AI](https://app.posthog.com/#panel=max:read%20this%20blog%20post%3A%20https%3A%2F%2Fposthog.com%2Fblog%2Fa-scanner-that-watches-everything-sees-nothing.%20then%20inspect%20our%20product%20code%2C%20PostHog%20event%20schema%2C%20cohorts%2C%20recordings%2C%20and%20existing%20Replay%20Vision%20scanners.%0A%0Apropose%20five%20scanners%20grounded%20in%20what%20this%20product%20actually%20does.%20each%20proposal%20must%20include%3A%0A-%20one%20visible%20question%20applied%20to%20one%20recording.%0A-%20the%20scanner%20type%20and%20why%20it%20matches%20the%20output.%0A-%20a%20narrow%20recording%20query%20using%20real%20events%2C%20urls%2C%20cohorts%2C%20and%20duration%20filters.%0A-%20the%20exact%20per-recording%20output%20shape%2C%20including%20no%20or%20inconclusive%20behavior.%0A-%20the%20model%2C%20sampling%20mode%2C%20and%20estimated%20monthly%20observations%20and%20credits.%0A-%20the%20cross-observation%20question%20for%20its%20Digest%20or%20Scout.%0A-%20the%20first%20observations%20a%20human%20should%20calibrate.%0A%0Areject%20ideas%20that%20require%20one%20scanner%20observation%20to%20compare%20sessions%2C%20infer%20hidden%20intent%2C%20or%20discover%20what%20matters%20without%20a%20product%20question.%20do%20not%20invent%20event%20names.%0A%0Arank%20the%20five%20ideas%20by%20expected%20product%20value%20and%20evidence%20quality.%20recommend%20one.%20do%20not%20create%20anything%20until%20I%20choose.%0A%0Aafter%20I%20choose%2C%20estimate%20the%20scanner%20against%20the%20remaining%20quota%2C%20create%20it%20safely%2C%20test%20it%20against%20representative%20recordings%2C%20add%20an%20appropriate%20Digest%20or%20alert%2C%20and%20return%20the%20links.)
-
-[^1]: 397,118 scans of 284,031 distinct recordings, $recording_observed in project 2, all-time through 2026-09-15. re-pull before publish
-[^2]: 9 of 15 as of the Sept 11, 2026 calibration pass

@@ -31,7 +31,7 @@ These are some other areas that PMMs own outside of specific products.
 - **Research** – Joe
 - **Incident comms** – distributed, ask in `#team-marketing` if you need help
 - **Lifecycle (i.e. email) & aligning with eng** – Joe
-- **Initial small launches for new tools** – Joe
+- **Initial small launches for new products** – Joe
 - **Startups & partnerships** – Joe
 
 <details>
@@ -50,7 +50,7 @@ You should speak to <SmallTeam slug="builder-relations" />, our resident party p
 <details>
 <summary>I want to launch my product out of beta</summary>
 
-Speak to <SmallTeam slug="marketing" /> and read about [product launches](/handbook/marketing/product-announcements).
+Speak to <SmallTeam slug="developer-marketing" /> and read about [product launches](/handbook/marketing/product-announcements).
 </details>
 
 <details>
@@ -70,7 +70,7 @@ Unless it's someone huge and important with a real audience, "Mark as spam" and 
 <details>
 <summary>Someone wants to partner with us</summary>
 
-Refer them to [our partnerships waitlist](/partnerships) and let <SmallTeam slug="marketing" /> know. 
+Refer them to [our partnerships waitlist](/partnerships) and let <SmallTeam slug="developer-marketing" /> know. 
 </details>
 
 <details>
