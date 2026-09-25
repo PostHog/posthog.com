@@ -128,18 +128,18 @@
             "statusCode": 301
         },
         {
-            "source": "/pocket-guides/product-analytics",
-            "destination": "/docs/product-analytics/learn",
+            "source": "/pocket-guides/product-analytics/:path*",
+            "destination": "/docs/product-analytics/learn/:path*",
             "statusCode": 301
         },
         {
-            "source": "/pocket-guides/ai-observability",
-            "destination": "/docs/ai-observability/learn",
+            "source": "/pocket-guides/ai-observability/:path*",
+            "destination": "/docs/ai-observability/learn/:path*",
             "statusCode": 301
         },
         {
-            "source": "/pocket-guides/session-replay",
-            "destination": "/docs/session-replay/learn",
+            "source": "/pocket-guides/session-replay/:path*",
+            "destination": "/docs/session-replay/learn/:path*",
             "statusCode": 301
         },
         {
