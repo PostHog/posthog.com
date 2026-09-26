@@ -34,7 +34,7 @@ You curate a public gallery of real self-driving work. The gallery lives on post
 
 1. **Real outcome.** The report is resolved, and one of these is true:
    - **Code lane.** Its implementation pull request is merged, and that pull request is in a public repository.
-   - **No-code lane.** It has no implementation pull request, and its resolution note or work log names a concrete change someone made and checked: a scout's instructions published as a new version, a dashboard tile or insight added, an alert added or retuned, a docs page updated. "Looked into it" or "no action needed" is not a change.
+   - **No-code lane.** It has no implementation pull request, and its resolution note or work log names a concrete change someone made and checked: a scout's instructions published as a new version, a dashboard tile or insight added, an alert added or returned, a docs page updated. "Looked into it" or "no action needed" is not a change.
 2. **Safe to publish.** The report comes from an allowlisted source, and nothing in it depends on customer data, security detail, or internal scale.
 
 A candidate that passes both is then ranked on how well it shows the loop: a clear finding, evidence a reader can follow, and a concrete fix. Neither half alone is enough. A merged fix for a customer's support ticket is a real outcome but not safe. A tidy report that nobody acted on is safe but shows nothing. Not every useful report needs a pull request, so give the no-code lane a fair share of picks.
