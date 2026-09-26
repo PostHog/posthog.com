@@ -56,7 +56,7 @@ Two things follow from that one line:
 - **The scout file is fetched from the monorepo at build time**, by
   `gatsby/utils/fetchScoutSkills.ts` (same shape as `fetchMCPTools.ts`: raw from `refs/heads/master`,
   15s timeout, written to a gitignored `src/data/scout-skills.json`). The monorepo file at
-  `products/ai_observability/backend/scouts/<name>.md` is the only copy — the app imports it too.
+  `products/ai_observability/backend/scouts/<name>.md` is the only copy – the app imports it too.
 
 This is what stops a guide describing a scout the button doesn't create. Hand-writing a second copy
 here was tried and drifted within one sitting: different headings, a dropped section, and invented
