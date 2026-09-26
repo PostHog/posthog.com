@@ -3,8 +3,9 @@ title: WTF is a forward deployed engineer? (and why everyone is hiring them)
 date: 2026-02-11
 author:
   - jina-yoon
-seoTitle: WTF is a forward deployed engineer (FDE)?
-seoDescription: What they do, why they’re hot right now, and when you should hire one.
+seo:
+    metaTitle: "WTF is a forward deployed engineer (FDE)?"
+    metaDescription: "What they do, why they’re hot right now, and when you should hire one."
 showTitle: true
 rootpage: /blog
 sidebar: Blog
