@@ -36,11 +36,20 @@ What goes to a customer should be a short, human-reviewed summary of **verified 
 
 Default to a concise summary; share the full file only when the customer specifically needs the detail and you've reviewed every line in it first. When an issue is resolved, send the customer the confirmed cause and fix in a few sentences. Keep the long AI investigation in the internal ticket, linked for teammates, not pasted into the reply.
 
+## Keep your setup current with each new model
+
+Model behavior shifts with every release. Prompts, skills, hooks, and `CLAUDE.md` or `AGENTS.md` files written for the last model can quietly work against the next one. An instruction that used to help, like "think carefully", can become redundant or pull the model the wrong way.
+
+When a new model ships, look for the provider's prompting guide. Anthropic and OpenAI both publish them, for example [Getting the most out of Opus 5.5](https://claude.dev/blog/getting-the-most-out-of-opus-5-5/) and [Rethinking skills and prompts for GPT-6 Astra](https://developers.openai.com/blog/rethinking-skills-and-prompts-for-gpt-6-astra).
+
+You don't need to do the audit by hand. Give the model the guide's link and ask it to audit your prompts, skills, and hooks against it. It can make most of the updates itself, or come back with a list of findings for you to review first. Either way, the audit is AI output: read the diff or the findings before you keep them.
+
 ## Do and don't
 
 - **Do** treat AI output as a hypothesis until you've checked it against the source data.
 - **Do** label machine-generated content clearly in shared notes and tickets.
 - **Do** send customers a concise summary of verified facts.
+- **Do** give the model the provider's prompting guide when a new model ships, and have it audit your prompts, skills, and hooks against it. Let it make the updates, or ask for a list of findings to review first.
 - **Don't** paste a confident AI summary into a ticket as if it were confirmed analysis.
 - **Don't** forward raw AI analysis files to customers by default. Distill first.
 - **Don't** put identifiable customer data into AI tools without applying our [data-sensitivity rules](/handbook/company/security#impersonating-users).
