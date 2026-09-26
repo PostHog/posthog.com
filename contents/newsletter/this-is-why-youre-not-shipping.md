@@ -115,7 +115,7 @@ PostHog currently comprises 91 people, the vast majority of whom have "engineer"
 
 * Mainly hire technical people into content and marketing roles.
 
-* Hire customer success and sales people with a technical background.
+* Hire [customer success and sales people with a technical background](/blog/how-to-become-a-technical-csm).
 
 * Hire [support engineers who have software development experience](/newsletter/engineeringification-of-everything).
 
