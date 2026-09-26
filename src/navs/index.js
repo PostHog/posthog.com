@@ -8215,6 +8215,12 @@ export const docsMenu = {
                     color: 'yellow',
                 },
                 {
+                    name: 'Workflow suggestions',
+                    url: '/docs/workflows/suggestions',
+                    icon: 'IconSparkles',
+                    color: 'purple',
+                },
+                {
                     name: 'Opt-outs',
                 },
                 {
