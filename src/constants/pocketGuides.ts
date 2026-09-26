@@ -52,6 +52,7 @@ export const POCKET_GUIDE_VOLUMES: PocketGuideVolume[] = [
             'Model revenue, conversion, activation, and usage once, so every dashboard and downstream model reuses the same definition.',
         token: 'blue',
         volume: 3,
+        docsProduct: 'data-warehouse',
     },
     {
         id: 'session-replay',
