@@ -4037,6 +4037,22 @@
             "destination": "/terms"
         },
         {
+            "source": "/legal/dpa",
+            "destination": "/dpa"
+        },
+        {
+            "source": "/legal/privacy",
+            "destination": "/privacy"
+        },
+        {
+            "source": "/legal/subprocessors",
+            "destination": "/subprocessors"
+        },
+        {
+            "source": "/legal/terms",
+            "destination": "/terms"
+        },
+        {
             "source": "/docs/getting-started/actions-and-insights:ext(\\.md)?",
             "destination": "/docs/data/actions:ext?"
         },
