@@ -44,6 +44,7 @@ import { Authentication } from 'components/Squeak'
 import OSTable from 'components/OSTable'
 import Editor from 'components/Editor'
 import { slugifyTeamName } from 'lib/utils'
+import { withPostHogUtmSource } from 'lib/urls'
 import {
     createFuseInstance,
     processItemsWithHighlighting,
@@ -209,7 +210,7 @@ const JobsByDepartment = ({
                             <Link
                                 externalNoIcon={!isPostHog}
                                 className="group !text-inherit underline"
-                                to={url + (isPostHog ? '' : '?utm_source=posthog')}
+                                to={isPostHog ? url : withPostHogUtmSource(url)}
                             >
                                 <span className="relative">
                                     {job.attributes.title}
@@ -379,7 +380,7 @@ const CompanyRows = ({
                                     <Link
                                         externalNoIcon={!isPostHog}
                                         className="group !text-inherit underline font-medium"
-                                        to={url + (isPostHog ? '' : '?utm_source=posthog')}
+                                        to={isPostHog ? url : withPostHogUtmSource(url)}
                                         state={isPostHog ? { newWindow: true } : undefined}
                                     >
                                         <span className="relative">
@@ -414,7 +415,7 @@ const CompanyRows = ({
                                 {logo && (
                                     <>
                                         {company.attributes.url ? (
-                                            <Link to={`${company.attributes.url}?utm_source=posthog`} externalNoIcon>
+                                            <Link to={withPostHogUtmSource(company.attributes.url)} externalNoIcon>
                                                 {logo}
                                             </Link>
                                         ) : (
@@ -452,7 +453,7 @@ const CompanyRows = ({
                                         <p className="my-0 text-sm">{company.attributes.description}</p>
                                         {company.attributes.url && (
                                             <OSButton
-                                                to={`${company.attributes.url}?utm_source=posthog`}
+                                                to={withPostHogUtmSource(company.attributes.url)}
                                                 className="px-3 rounded-full border-primary mt-2"
                                                 size="sm"
                                                 external
@@ -515,7 +516,7 @@ const CompanyRows = ({
                                             <>
                                                 {company.attributes.url ? (
                                                     <Link
-                                                        to={`${company.attributes.url}?utm_source=posthog`}
+                                                        to={withPostHogUtmSource(company.attributes.url)}
                                                         externalNoIcon
                                                     >
                                                         {logo}
@@ -553,7 +554,7 @@ const CompanyRows = ({
                                                 <p className="my-0 text-sm">{company.attributes.description}</p>
                                                 {company.attributes.url && (
                                                     <OSButton
-                                                        to={`${company.attributes.url}?utm_source=posthog`}
+                                                        to={withPostHogUtmSource(company.attributes.url)}
                                                         className="px-3 rounded-full border-primary mt-2"
                                                         size="sm"
                                                         external
