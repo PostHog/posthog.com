@@ -796,5 +796,13 @@
         "link_type": "github",
         "link_url": "https://github.com/fivestarspicy",
         "profile_id": 34160
+    },
+    {
+        "handle": "alessandro-pogliaghi",
+        "name": "Alessandro Pogliaghi",
+        "role": "Product Engineer",
+        "link_type": "github",
+        "link_url": "https://github.com/tatoalo",
+        "profile_id": 34600
     }
 ]
