@@ -1,4 +1,5 @@
 import React, { forwardRef, useEffect, useImperativeHandle, useRef } from 'react'
+import { removeWistiaPlayer } from 'lib/wistia'
 
 declare global {
     interface Window {
@@ -61,12 +62,12 @@ const WistiaVideo = forwardRef<WistiaVideoRef, WistiaVideoProps>(
                     }
                 }
                 endHandlerRef.current = null
+
+                removeWistiaPlayer(playerRef.current)
                 playerRef.current = null
 
-                // Clear the container
-                if (containerRef.current) {
-                    containerRef.current.innerHTML = ''
-                }
+                // Covers an embed that never became a player.
+                containerRef.current?.replaceChildren()
             }
 
             const initializePlayer = () => {
