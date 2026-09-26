@@ -1,0 +1,205 @@
+---
+title: Link traces to AI Observability
+---
+
+If your product sends OpenTelemetry spans to [Distributed tracing](/docs/distributed-tracing) and LLM events to [AI Observability](/docs/ai-observability), you can correlate the two. One request then shows both the application work and the model calls that the request made.
+
+The two products do not correlate automatically. You must give the span and the LLM events the same trace ID, and you must convert between two different ID encodings when you query them.
+
+> **Note:** Distributed tracing is in beta. Setup details may change before general availability.
+
+## Why correlate spans and LLM events
+
+- **Find the real cause of a slow request.** A trace shows that a request took 9 seconds. The LLM events show that 7 of those seconds were one model call.
+- **Attach a cost to a request.** Spans record the duration. LLM events record the token count and the cost. Together they tell you what one request costs to serve.
+- **Debug a failure end to end.** A failed span points at the LLM events in the same request, with the prompt and the model response.
+- **Compare application work with model work.** You see how much of the latency comes from your own code and how much comes from the provider.
+
+## Prerequisites
+
+- [Distributed tracing](/docs/distributed-tracing/start-here) sends spans from your application.
+- [AI Observability](/docs/ai-observability/installation) sends `$ai_generation` events from the same service.
+- Both products send to the same PostHog project. SQL in PostHog is scoped to one project, so a query cannot join data across two projects.
+
+## Use the trace ID as `$ai_trace_id`
+
+The two products store a trace ID differently:
+
+| Product | Field | Format |
+| --- | --- | --- |
+| Distributed tracing | span `trace_id` | A [W3C Trace Context](https://www.w3.org/TR/trace-context/) trace ID: 16 bytes, written as 32 lowercase hexadecimal characters |
+| AI Observability | `$ai_trace_id` | Any string that you choose |
+
+Because `$ai_trace_id` is a string that you choose, most examples set it to a new UUID. A UUID does not match any span, so the two products stay unlinked. To correlate them, set `$ai_trace_id` to the trace ID of the span that surrounds the LLM call.
+
+### From a PostHog SDK span
+
+The PostHog Node.js SDK (version 5.52.0 and later) and Python SDK (version 7.58.0 and later) expose the active span as a W3C `traceparent` header value. The header has the form `00-<trace_id>-<span_id>-<flags>`, so the second field is the trace ID.
+
+Tracing is off until you set the `traces` option on the client. When tracing is off, `traceparent()` returns `null` (`None` in Python), so check the value before you use it.
+
+<MultiLanguage>
+
+```javascript file=JavaScript
+await posthog.withSpan('POST /api/chat', { kind: 'server' }, async (span) => {
+  const traceId = span.traceparent()?.split('-')[1]
+
+  const response = await openai.responses.create({
+    model: 'gpt-5',
+    input: message,
+    posthogDistinctId: req.userId,
+    posthogTraceId: traceId, // The same ID the span carries
+  })
+
+  return response
+})
+```
+
+```python file=Python
+with posthog.start_span("POST /api/chat", kind="server") as span:
+    traceparent = span.traceparent()
+    trace_id = traceparent.split("-")[1] if traceparent else None
+
+    response = client.responses.create(
+        model="gpt-5",
+        input=message,
+        posthog_distinct_id=current_user.id,
+        posthog_trace_id=trace_id,  # The same ID the span carries
+    )
+```
+
+</MultiLanguage>
+
+### From an OpenTelemetry span
+
+If you instrument with the OpenTelemetry SDKs, read the trace ID from the active span context. Write it as 32 lowercase hexadecimal characters.
+
+<MultiLanguage>
+
+```javascript file=JavaScript
+import { trace } from '@opentelemetry/api'
+
+const traceId = trace.getActiveSpan()?.spanContext().traceId
+```
+
+```python file=Python
+from opentelemetry import trace
+
+span_context = trace.get_current_span().get_span_context()
+trace_id = format(span_context.trace_id, "032x")
+```
+
+</MultiLanguage>
+
+### Across a service boundary
+
+If the LLM call runs in a different service, or behind a proxy that captures the LLM events for you, send the `traceparent` header with the request. The receiving side continues the trace and reads the same trace ID out of the header.
+
+<MultiLanguage>
+
+```javascript file=JavaScript
+// Caller: pass the trace context onward
+const traceparent = span.traceparent()
+await fetch('https://llm-proxy.internal/chat', {
+  method: 'POST',
+  headers: traceparent ? { traceparent } : {},
+  body: JSON.stringify({ message }),
+})
+```
+
+```python file=Python
+# Receiver: continue the trace and reuse its ID
+with posthog.start_span(
+    "POST /chat",
+    kind="server",
+    parent=request.headers.get("traceparent"),
+) as span:
+    traceparent = span.traceparent()
+    trace_id = traceparent.split("-")[1] if traceparent else None
+```
+
+</MultiLanguage>
+
+## Query both products together
+
+Spans and LLM events live in different tables, and the tables store the trace ID in different encodings:
+
+- `posthog.trace_spans.trace_id` holds the 16-byte trace ID, base64-encoded. The [SQL editor](https://app.posthog.com/sql) returns it in that form.
+- `$ai_trace_id` on the `events` table holds 32 hexadecimal characters.
+
+Convert between them with these two expressions:
+
+```sql
+-- Span trace ID to the AI Observability format
+lower(hex(tryBase64Decode(trace_id)))
+
+-- AI Observability trace ID to the span format
+base64Encode(unhex('<trace_id_hex>'))
+```
+
+You cannot join the two tables in one query. The spans table sits on a different ClickHouse cluster from the events table, and a query that reads both fails with `Cannot query tables from different clusters`. Run the correlation as two queries instead.
+
+### From spans to LLM events
+
+First, list the traces that interest you, with their IDs in hexadecimal:
+
+```sql
+SELECT
+    lower(hex(tryBase64Decode(trace_id))) AS trace_id_hex,
+    service_name,
+    name,
+    duration_nano / 1e6 AS duration_ms
+FROM posthog.trace_spans
+WHERE is_root_span
+  AND timestamp > now() - INTERVAL 1 DAY
+ORDER BY duration_nano DESC
+LIMIT 20
+```
+
+Then read the LLM events for those IDs:
+
+```sql
+SELECT
+    properties.$ai_trace_id AS trace_id_hex,
+    count() AS generations,
+    sum(toFloat(properties.$ai_total_cost_usd)) AS cost_usd,
+    sum(toFloat(properties.$ai_latency)) AS llm_seconds
+FROM events
+WHERE event = '$ai_generation'
+  AND properties.$ai_trace_id IN ('<trace_id_hex>', '<trace_id_hex>')
+  AND timestamp > now() - INTERVAL 1 DAY
+GROUP BY trace_id_hex
+```
+
+### From LLM events to spans
+
+Start from the LLM events, for example the most expensive traces of the day. Then convert the IDs back and read the spans:
+
+```sql
+SELECT
+    service_name,
+    name,
+    duration_nano / 1e6 AS duration_ms,
+    status_code
+FROM posthog.trace_spans
+WHERE trace_id IN (base64Encode(unhex('<trace_id_hex>')))
+  AND timestamp > now() - INTERVAL 1 DAY
+ORDER BY timestamp
+```
+
+To read the prompts and the model responses, query the `posthog.ai_events` table instead of `events`. See [AI event data retention](/docs/ai-observability/data-retention).
+
+## Limitations
+
+- **The IDs must match exactly.** `$ai_trace_id` must be 32 lowercase hexadecimal characters. `unhex` accepts a dashed UUID without an error, but it returns a value of the wrong length, so the query silently finds nothing. Remove the dashes, or use a real span trace ID.
+- **One query cannot read both tables.** Spans and events sit on different clusters, so you must correlate in two steps.
+- **Only the trace ID joins the two products.** `$ai_span_id` identifies a generation or a span inside AI Observability. It is not an OpenTelemetry span ID, and it does not match `posthog.trace_spans.span_id`.
+- **A trace can arrive without its root span.** If a process stops before the exporter sends the root span, the child spans still arrive. Do not filter on `is_root_span` alone when you collect trace IDs.
+- **PostHog does not link the two products in the UI.** A span does not show a button to its LLM trace, and an LLM trace does not show a button to its span.
+- **Spans and events expire at different times.** Spans stay for 14 days by default. Events in [Product Analytics](/docs/product-analytics) stay for much longer.
+
+## Next steps
+
+- **[Traces](/docs/ai-observability/traces)** – how AI Observability groups generations and spans into a trace
+- **[Link error tracking](/docs/ai-observability/link-error-tracking)** – attach exceptions to the same `$ai_trace_id`
+- **[Search logs](/docs/logs/search)** – filter logs by `trace_id`, in hexadecimal or base64

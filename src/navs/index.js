@@ -8560,6 +8560,12 @@ export const docsMenu = {
                     icon: 'IconBook',
                     color: 'seagreen',
                 },
+                {
+                    name: 'Link traces to AI Observability',
+                    url: '/docs/distributed-tracing/link-ai-observability',
+                    icon: 'IconLlmAnalytics',
+                    color: 'purple',
+                },
             ],
         },
         {
