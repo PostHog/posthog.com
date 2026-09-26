@@ -1,5 +1,7 @@
 When using [local evaluation](/docs/feature-flags/local-evaluation), the SDK fetches feature flag definitions and stores them in memory. This works well for single-instance applications, but in distributed or stateless environments (multiple servers, edge workers, lambdas), each instance fetches its own copy, wasting API calls and adding latency on cold starts.
 
+Each instance also polls on its own schedule, and each poll is billed. A poll that returns unchanged definitions is charged as 1 flag request, and a poll that returns new definitions, including the first fetch after an instance starts, is charged as 10. See [reducing local evaluation costs](/docs/feature-flags/cutting-costs#reducing-local-evaluation-costs) for details. A shared cache brings this down to one polling instance, which matters most when you run many instances or they restart often.
+
 An **external cache provider** lets you store flag definitions in shared storage (Redis, database, Cloudflare KV, etc.) so all instances can read from a single source.
 
 This enables you to:
