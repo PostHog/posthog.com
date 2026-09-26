@@ -96,7 +96,7 @@ Commands read the same in a DM as in a channel: `/posthog project <id>`. See the
 
 ## Pick a model
 
-Tasks run on **Claude Opus 5** by default. To use a different model, just ask for it as part of your message:
+Tasks run on **Claude Opus 5.5** by default. To use a different model, just ask for it as part of your message:
 
 ```
 @PostHog investigate the checkout drop-off and use fable for it
@@ -108,7 +108,7 @@ A model named as the subject of the work doesn't switch anything. "Add Fable to 
 
 To change the model for everything you run, set your default in the [App Home tab](#the-app-home-tab) under **AI model**. You can also set it in PostHog Web under **Settings → Environment → Task agents**. They are the same setting: the Home tab edits your PostHog task agent default, which applies to Slack, the task composer, and PostHog Desktop alike. Project admins set a project-wide default in the same place.
 
-The precedence is: model named in the message → your PostHog default → the project default → **Claude Opus 5**.
+The precedence is: model named in the message → your PostHog default → the project default → **Claude Opus 5.5**.
 
 You can also switch models mid-run from a follow-up message, with one constraint: the runtime (Claude or Codex) is fixed once an agent starts, so moving to a model from the other family requires starting a new thread. For example, you can go from Opus to Fable mid-run, but not from a Claude model to a Codex one. Each reply's footer shows the model and reasoning effort actually used.
 
