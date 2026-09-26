@@ -92,6 +92,10 @@ const SDK_REFERENCE_QUERY_FIELDS = `
     }
 `
 
+// The "From our inbox" examples and curator scout are data files for one docs page, not pages.
+// They have no title, and the docs query's `title: { ne: "" }` filter can still match a node with no title.
+const isInboxExampleFile = (slug?: string): boolean => /^\/docs\/self-driving\/from-our-inbox\/_/.test(slug ?? '')
+
 export const createPages: GatsbyNode['createPages'] = async ({ actions: { createPage }, graphql }) => {
     if (isMinimalBuild) {
         return createMinimalPages({ createPage, graphql })
@@ -688,7 +692,7 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
         // `_`-prefixed template directories are starters to copy from, not pages. They carry a
         // title (a starter has to model a real template), so the `title: { nin: [""] }` filter
         // above doesn't exclude them the way it excludes sibling SKILL.md files.
-        if (/(^|\/)_/.test(plainSlug ?? '') && /(templates|pocket-guides)/.test(plainSlug ?? '')) return
+        if (/(^|\/)_/.test(plainSlug ?? '') && /(templates|pocket-guides|from-our-inbox)/.test(plainSlug ?? '')) return
         createPage({
             path: replacePath(node.slug),
             component: PlainTemplate,
@@ -844,7 +848,12 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
         name: 'Product Engineer Handbook',
         url: '/product-engineer',
     })
-    createPosts(result.data.docs.nodes, 'docs', HandbookTemplate, { name: 'Docs', url: '/docs' })
+    createPosts(
+        result.data.docs.nodes.filter((node) => !isInboxExampleFile(node.fields?.slug)),
+        'docs',
+        HandbookTemplate,
+        { name: 'Docs', url: '/docs' }
+    )
     createPosts(result.data.apidocs.nodes, 'docs', ApiEndpoint, { name: 'Docs', url: '/docs' }, (node) => ({
         regex: `$${node.url}/`,
     }))
@@ -1438,7 +1447,11 @@ async function createMinimalPages({
         })
     })
 
-    createHandbookPreviewPosts(data.docs.nodes, 'docs', { name: 'Docs', url: '/docs' })
+    createHandbookPreviewPosts(
+        data.docs.nodes.filter((node) => !isInboxExampleFile(node.fields?.slug)),
+        'docs',
+        { name: 'Docs', url: '/docs' }
+    )
 
     createHandbookPreviewPosts(data.handbook.nodes, 'handbook', { name: 'Handbook', url: '/handbook' })
     createHandbookPreviewPosts(data.productEngineerHandbook.nodes, 'product-engineer', {

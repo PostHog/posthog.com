@@ -65,7 +65,9 @@ export function useInboxExamples(): InboxExample[] {
     )
 }
 
-const formatDate = (date?: string): string | null => (date ? dayjs(date).format('MMM D, YYYY') : null)
+// Gatsby returns these dates as UTC midnight. Keep only the calendar day, so a viewer west of UTC
+// does not see the day before.
+const formatDate = (date?: string): string | null => (date ? dayjs(date.slice(0, 10)).format('MMM D, YYYY') : null)
 
 function prNumber(url: string): string | null {
     const match = url.match(/\/pull\/(\d+)/)
@@ -86,9 +88,7 @@ function Row({
             type="button"
             onClick={onSelect}
             aria-pressed={selected}
-            className={`block w-full border-b border-primary px-4 py-3 text-left last:border-b-0 hover:bg-accent ${
-                selected ? 'bg-accent' : ''
-            }`}
+            className={`block w-full px-4 py-3 text-left hover:bg-accent ${selected ? 'bg-accent' : ''}`}
         >
             <span className="mb-1 flex flex-wrap items-center gap-x-2 gap-y-1 text-xs text-secondary">
                 <span>{example.report.source}</span>
@@ -114,14 +114,14 @@ function Detail({ example }: { example: InboxExample }): JSX.Element {
             <ReportCard report={example.report} />
             <section className="rounded border border-primary p-4">
                 <h4 className="m-0 mb-2 text-sm font-bold text-primary">What happened next</h4>
-                <p className="m-0 flex flex-wrap items-center gap-x-1.5 text-[15px] text-primary">
-                    <IconPullRequest className="size-4 shrink-0 text-green" />
+                <p className="m-0 flex items-start gap-1.5 text-[15px] text-primary">
+                    <IconPullRequest className="mt-0.5 size-4 shrink-0 text-green" />
                     <Link to={pullRequest.url} externalNoIcon className="font-semibold">
                         {pullRequest.title}
                         {number && <span className="text-secondary"> {number}</span>}
                     </Link>
-                    {merged && <span className="text-secondary">· merged {merged}</span>}
                 </p>
+                {merged && <p className="m-0 mt-1 pl-[22px] text-sm text-secondary">Merged {merged}</p>}
                 {example.outcome && (
                     <Markdown className="mt-2 text-[15px] text-primary [&>p]:mb-0">{example.outcome}</Markdown>
                 )}
@@ -155,7 +155,7 @@ export default function FromOurInbox(): JSX.Element | null {
                     {examples.map((example) => {
                         const isSelected = example.reportId === selected.reportId
                         return (
-                            <li key={example.reportId} className="m-0">
+                            <li key={example.reportId} className="m-0 border-b border-primary last:border-b-0">
                                 <Row
                                     example={example}
                                     selected={isSelected}
@@ -163,7 +163,7 @@ export default function FromOurInbox(): JSX.Element | null {
                                 />
                                 {/* Narrow windows open the report under its row instead of in a side pane. */}
                                 {isSelected && (
-                                    <div className="border-b border-primary p-4 @[720px]:hidden">
+                                    <div className="border-t border-primary p-4 @[720px]:hidden">
                                         <Detail example={example} />
                                     </div>
                                 )}
