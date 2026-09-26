@@ -17,11 +17,17 @@ We run self-driving on PostHog itself. This page is a feed of real [reports](/do
 
 Not every useful report ends in code. Some end in a merged pull request, and we link to it. Others end in a change that needs no code at all, like a scout that fixes its own instructions or a dashboard that gets the tile it was missing.
 
+<CalloutBox icon="IconRefresh" title="This page drives itself" type="fyi">
+
+A scout curates this page, just like the scouts that found these reports. Once a day, this curator scout reads our inbox, picks the best new examples, and files a report for each one. Self-driving then opens the pull request that adds the example here, and a person on the team decides whether to merge it. So every new entry on this page is itself a small run of the loop. See [how this page stays up to date](#how-this-page-stays-up-to-date).
+
+</CalloutBox>
+
 <FromOurInbox />
 
 ## How this page stays up to date
 
-A scout keeps this page up to date too. Once a day, it picks one to three recent reports from our inbox that ended in useful work, and rewrites each one for a public audience. It then files a report that asks for the example to be added here. Self-driving opens the pull request against this website, and a person on the team reviews it and decides whether to publish it.
+Each day, the curator picks one to three recent reports from our inbox that ended in useful work, and rewrites each one for a public audience. It then files a report that asks for the example to be added here. Self-driving opens the pull request against this website, and a person on the team reviews it and decides whether to publish it.
 
 A code fix must already be public in a merged pull request. Work that needed no code must be something we can describe without internal detail. The scout skips anything from customer conversations, billing, or security work, and it leaves out customer names, internal volumes, and links into our project. You can [read the scout's instructions](https://github.com/PostHog/posthog.com/blob/master/contents/docs/self-driving/from-our-inbox/_curator/SKILL.md) on GitHub.
 
