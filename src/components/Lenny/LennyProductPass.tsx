@@ -95,7 +95,7 @@ const jobs: {
         copy: 'Sync revenue, CRM, and support data and analyze it all together.',
         tools: [
             { Icon: IconSparkles, name: 'PostHog AI', slug: 'ai' },
-            { Icon: IconDatabase, name: 'Data warehouse', slug: 'data-warehouse' },
+            { Icon: IconDatabase, name: 'Data warehouse', slug: 'context-warehouse' },
             { Icon: IconStack, name: 'CDP', slug: 'cdp' },
         ],
     },

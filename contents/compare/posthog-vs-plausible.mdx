@@ -35,13 +35,13 @@ Beyond PostHog's free tier, we try to be as cheap as possible and transparent. W
 
 [Web analytics](/web-analytics) is a core feature of PostHog, but we offer many more tools to help you analyze, test, observe, and deploy your site and app.
 
-These include [product analytics](/product-analytics), [session replay](/session-replay), [surveys](/surveys), [experiments](/experiments), [feature flags](/feature-flags), a [data warehouse](/data-warehouse), [error tracking](/error-tracking), [LLM observability](/ai-observability), [logs](/logs), [workflows](/workflows), a [CDP](/cdp), and more.
+These include [product analytics](/product-analytics), [session replay](/session-replay), [surveys](/surveys), [experiments](/experiments), [feature flags](/feature-flags), a [data warehouse](/context-warehouse), [error tracking](/error-tracking), [LLM observability](/ai-observability), [logs](/logs), [workflows](/workflows), a [CDP](/cdp), and more.
 
 ### 3. We're multi-platform
 
 [Plausible](/compare/best-plausible-alternatives) is entirely focused on the web, whereas PostHog supports both web tracking and other platforms, like mobile, backend, and [API](/docs/api).
 
-This isn't limited to event capture and features either. Our [data warehouse](/data-warehouse) lets you import and [query data](/docs/data-warehouse/query) from sources like [Stripe](/docs/data-warehouse/setup/stripe), [Hubspot](/docs/data-warehouse/setup/hubspot), and [Postgres](/docs/data-warehouse/setup/postgres), and our data pipelines let you send data to destinations like [Slack](/docs/cdp/destinations/slack), [S3](/docs/cdp/batch-exports/s3), or a custom [HTTP webhook](/docs/cdp/destinations/webhook).
+This isn't limited to event capture and features either. Our [data warehouse](/context-warehouse) lets you import and [query data](/docs/data-warehouse/query) from sources like [Stripe](/docs/data-warehouse/setup/stripe), [Hubspot](/docs/data-warehouse/setup/hubspot), and [Postgres](/docs/data-warehouse/setup/postgres), and our data pipelines let you send data to destinations like [Slack](/docs/cdp/destinations/slack), [S3](/docs/cdp/batch-exports/s3), or a custom [HTTP webhook](/docs/cdp/destinations/webhook).
 
 <WizardCTA />
 
@@ -219,7 +219,7 @@ Choosing the right analytics tool depends on what you need it to do. Here's a qu
 - **Plausible** – UTM campaign tracking, Google Search Console integration, and conversion goals without the complexity of GA4. PostHog also covers these basics via [web analytics](/web-analytics) and a [Google Search Console source](/docs/cdp/sources/google-search-console), and can send conversion data to ad platforms like Google and Meta via its [CDP](/docs/cdp), but adds product-level depth most marketers won't need.
 
 **For privacy-conscious and regulated organizations**
-- Both are open source, GDPR-ready, and hosted in the EU. PostHog is also SOC 2 certified, HIPAA-ready, and offers a built-in [data warehouse](/data-warehouse) for full data access. Plausible is cookieless by default with no personal data collection, which can eliminate the need for consent banners entirely.
+- Both are open source, GDPR-ready, and hosted in the EU. PostHog is also SOC 2 certified, HIPAA-ready, and offers a built-in [data warehouse](/context-warehouse) for full data access. Plausible is cookieless by default with no personal data collection, which can eliminate the need for consent banners entirely.
 
 **For early-stage startups**
 - **PostHog** – Start with [web analytics](/docs/web-analytics) and grow into [product analytics](/docs/product-analytics), [session replay](/docs/session-replay), [feature flags](/docs/feature-flags), and [experiments](/docs/experiments) without switching tools or rebuilding your stack. The [generous free tier](/pricing) covers 1 million events/month – 100x more than Plausible's cheapest plan. [Startups can also qualify for $50k in free credits](/startups).
