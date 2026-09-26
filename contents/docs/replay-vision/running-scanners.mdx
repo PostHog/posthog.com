@@ -77,6 +77,137 @@ This is also the fastest way to backfill after broadening a scanner's filters.
 
 You can also trigger an on-demand observation from your editor using the `vision-scanners-scan-session` MCP tool. See [Replay Vision MCP](/docs/replay-vision/mcp) for the full set of tools and example prompts.
 
+## Via the API
+
+To run a scan from your own backend, call the inline scan endpoint. It runs a prompt against sessions you name, without a saved scanner. Use it to pull Replay Vision results into a CRM, a support tool, or any pipeline of your own. With `scanner_type` set to `summarizer`, it is how you get PostHog's own AI summary for a recording ID.
+
+Two calls do the whole job: start the scan, then poll for the result. The examples below use US Cloud. On EU Cloud, send them to `https://eu.posthog.com` instead.
+
+Authenticate with a [personal API key](/docs/api/personal-api-keys) that holds these scopes:
+
+| Call                  | Scopes                                          |
+| --------------------- | ----------------------------------------------- |
+| Start a scan          | `replay_scanner:write` and `session_recording:read` |
+| Read the observations | `replay_scanner:read` and `session_recording:read`  |
+
+Your organization must also allow AI data processing. Without it, the request is refused and nothing is scanned. An organization admin turns it on in the organization settings.
+
+### 1. Start the scan
+
+```bash
+curl -X POST 'https://us.posthog.com/api/projects/:project_id/vision/scanners/inline_scan/' \
+  -H 'Authorization: Bearer <POSTHOG_PERSONAL_API_KEY>' \
+  -H 'Content-Type: application/json' \
+  -d '{
+    "session_ids": ["0198f0c1-1ce4-7a3b-9f2d-6b1c8a4e5d70"],
+    "prompt": "Summarize what the user did in this session, and call out anything that went wrong.",
+    "scanner_type": "summarizer",
+    "scanner_config": { "length": "medium" }
+  }'
+```
+
+| Field            | Required | What it does                                                                                                      |
+| ---------------- | -------- | ----------------------------------------------------------------------------------------------------------------- |
+| `session_ids`    | Yes      | The session recording IDs to scan. At most 200 per request.                                                         |
+| `prompt`         | Yes      | What to look for, in plain language. The same instruction a saved scanner carries.                                  |
+| `scanner_type`   | No       | `monitor` (the default), `classifier`, `scorer`, or `summarizer`. See [scanner types](/docs/replay-vision/scanner-types). |
+| `scanner_config` | No       | Type-specific configuration: `tags` for a classifier, `scale` for a scorer, `length` for a summarizer. Leave the prompt in `prompt`. |
+| `model`          | No       | The model to scan with. It sets what each observation costs in [credits](/docs/replay-vision/quota-and-limits).     |
+
+The response is `202` and looks like this:
+
+```json
+{
+  "scan_id": "0198f0c2-77a1-7c04-8f11-2b9d4f6ac315",
+  "started": 1,
+  "results": [
+    { "session_id": "0198f0c1-1ce4-7a3b-9f2d-6b1c8a4e5d70", "scan_outcome": "started" }
+  ]
+}
+```
+
+Nothing is scanned yet. Each session gets its own outcome, so one blocked session never fails the whole batch:
+
+| `scan_outcome`           | What it means                                                                        |
+| ------------------------ | ------------------------------------------------------------------------------------ |
+| `started`                | A scan is running. Poll for the result.                                                |
+| `already_running`        | A scan of this session is already in flight. Poll for the same result.                 |
+| `already_scanned`        | This scan already has a finished observation for the session. Read it now.             |
+| `skipped_limit`          | The in-flight cap was reached before this session. Send it again later.                |
+| `skipped_quota`          | The organization's credit quota for this period would be exceeded.                     |
+| `skipped_scanner_limit`  | The scan's own credit limit would be exceeded.                                         |
+| `failed`                 | The scan did not start.                                                                |
+
+`scan_id` is null when nothing started and nothing existed to read, which happens when the quota is used up.
+
+### 2. Poll for the result
+
+Read the results back through `scan_id`:
+
+```bash
+curl -G 'https://us.posthog.com/api/projects/:project_id/vision/scanners/:scan_id/observations/' \
+  -H 'Authorization: Bearer <POSTHOG_PERSONAL_API_KEY>' \
+  --data-urlencode 'session_id=0198f0c1-1ce4-7a3b-9f2d-6b1c8a4e5d70'
+```
+
+Each observation carries a `status`:
+
+- `pending` or `running` – the scan is still going. Poll again.
+- `succeeded` – the result is in `scanner_result.model_output`. For a summarizer, that is a `title` and a `summary`.
+- `failed` or `ineligible` – terminal. `error_reason` says why. See [ineligible sessions](#ineligible-sessions).
+
+A scan usually takes a few minutes, so poll every 10 seconds or so and stop after a timeout of your own:
+
+```python
+import time
+import requests
+
+BASE = "https://us.posthog.com/api/projects/:project_id/vision/scanners"
+HEADERS = {"Authorization": "Bearer <POSTHOG_PERSONAL_API_KEY>"}
+SESSION_ID = "0198f0c1-1ce4-7a3b-9f2d-6b1c8a4e5d70"
+
+scan = requests.post(
+    f"{BASE}/inline_scan/",
+    headers=HEADERS,
+    json={
+        "session_ids": [SESSION_ID],
+        "prompt": "Summarize what the user did in this session, and call out anything that went wrong.",
+        "scanner_type": "summarizer",
+        "scanner_config": {"length": "medium"},
+    },
+).json()
+
+deadline = time.time() + 600
+while time.time() < deadline:
+    observations = requests.get(
+        f"{BASE}/{scan['scan_id']}/observations/",
+        headers=HEADERS,
+        params={"session_id": SESSION_ID},
+    ).json()["results"]
+    if observations and observations[0]["status"] not in ("pending", "running"):
+        print(observations[0]["scanner_result"]["model_output"])
+        break
+    time.sleep(10)
+```
+
+To read every observation of a session across all of your scanners, call `/api/projects/:project_id/vision/observations/?session_id=...` instead.
+
+### The same question is only answered once
+
+`scan_id` is a fingerprint of the whole config: the prompt, the scanner type, the scanner configuration, and the model. So:
+
+- The same question in the same project always resolves to the same `scan_id`. Store it, or send the scan again to get it back.
+- Each session is only observed once per scan. A session you already scanned comes back as `already_scanned`, costs no credits, and its observation is ready to read.
+- Any change to the config gives you a new `scan_id`, and the sessions are scanned again at the usual price.
+
+The **Summarize this recording** action in the replay player runs an inline scan too. Your call shares its results only when the prompt, the scanner type, and the scanner configuration match what the button sends. Anything else is your own scan, with its own credits.
+
+A `scan_id` has no page in the app, so do not link to one.
+
+### Costs and limits
+
+Every observation that starts spends [credits](/docs/replay-vision/quota-and-limits). Check what is left with `GET /api/projects/:project_id/vision/quota/`, which returns `credit_limit`, `credits_used`, `remaining`, `exhausted`, `projected_monthly_credits`, and the bounds of the current period.
+
 ## Ineligible sessions
 
 Some sessions can't be analyzed – there's no recording data, the recording is too short to draw conclusions from, or the user did nothing the model can see. Rather than fail noisily, these come back marked **ineligible**.
