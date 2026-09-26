@@ -101,9 +101,11 @@ By default, the `posthog-js` library automatically captures pageviews, element c
 
 To call PostHog methods for actions like identifying users, capturing events, using feature flags, or using other features, you can access the initialized `posthog-js` library using the `usePostHog` hook.
 
-<CalloutBox icon="IconWarning" title="Don't directly import PostHog" type="fyi">
+<CalloutBox icon="IconWarning" title="Using PostHog outside React components" type="fyi">
 
-  Always use the `usePostHog` hook to access the PostHog library. Directly importing `posthog` will likely cause errors as the library might not be initialized yet. Initialization is handled automatically when you use the `PostHogProvider` and hook.
+  Inside React components, use the `usePostHog` hook. It returns the client from the nearest `PostHogProvider`, so your components always use the instance you gave the provider.
+
+  Outside React components, such as in utility modules or API clients, you can import `posthog` from `posthog-js` directly, as long as it's the same instance you initialized and passed to `PostHogProvider` as shown above. Events captured before `posthog.init()` runs are dropped, so make sure initialization happens first. If you pass the provider a different client instance, import that instance instead.
 
 </CalloutBox>
 
