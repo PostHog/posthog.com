@@ -126,10 +126,18 @@ export function ScannerTemplate({
  * volumes without a template behind them. One per section at most; a page of buttons is a page
  * with no button.
  */
-export function CTA({ to, children }: { to: string; children: React.ReactNode }): JSX.Element {
+export function CTA({
+    to,
+    children,
+    external = true,
+}: {
+    to: string
+    children: React.ReactNode
+    external?: boolean
+}): JSX.Element {
     return (
         <span className="not-prose my-[0.8em] block">
-            <OSButton asLink to={to} external variant="primary" size="md">
+            <OSButton asLink to={to} external={external} variant="primary" size="md">
                 {children}
             </OSButton>
         </span>

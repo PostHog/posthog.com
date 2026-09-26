@@ -5,7 +5,7 @@ import usePostHog from '../../hooks/usePostHog'
 
 import { Logo } from '@posthog/brand/logo'
 
-import { PocketGuideVolume } from '../../constants/pocketGuides'
+import { PocketGuideVolume, pocketGuideUrl } from '../../constants/pocketGuides'
 
 import { volumeArt } from './volumeArt'
 
@@ -80,7 +80,7 @@ function CoverBody({ volume, count }: Omit<CoverProps, 'placement'>): JSX.Elemen
                 <span>Vol. {volume.volume}</span>
                 {!volume.comingSoon && (
                     <span className="tabular-nums">
-                        {count} {count === 1 ? 'guide' : 'guides'}
+                        {volume.volume === 0 ? 'Start here' : `${count} ${count === 1 ? 'guide' : 'guides'}`}
                     </span>
                 )}
             </footer>
@@ -105,7 +105,7 @@ export default function Cover({ volume, count, placement }: CoverProps): JSX.Ele
 
     return (
         <Link
-            to={`/pocket-guides/${volume.id}`}
+            to={pocketGuideUrl(volume)}
             state={{ newWindow: true }}
             onClick={trackCoverClick}
             // Perspective lives on the link so the hover tilt reads as picking the book up.

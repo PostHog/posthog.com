@@ -5,21 +5,66 @@ import Tooltip from 'components/RadixUI/Tooltip'
 
 import usePostHog from '../../hooks/usePostHog'
 
-/**
- * The pocket guides' vocabulary, defined once so no chapter carries the 101. Definitions are
- * quoted from the docs page that owns each concept, so this can't drift into a competing source.
- */
+/** Shared definitions grounded in the docs that own each concept. */
 
 export interface TermDefinition {
     /** Display title in the hover card. */
     title: string
-    /** One or two sentences, quoted from the owning docs page. */
+    /** A concise definition grounded in the owning docs page. */
     description: string
     /** The docs page that owns this concept; the term itself links there. */
     slug: string
 }
 
 export const TERMS = {
+    trend: {
+        title: 'Trend',
+        description:
+            'An insight that shows how often an event happens over time, with an optional breakdown by a property.',
+        slug: '/docs/product-analytics/insights',
+    },
+    'product analytics': {
+        title: 'Product Analytics',
+        description:
+            'Answers what people actually do in your product using the events you send to PostHog. Explore trends, funnels, retention, and paths to understand behavior.',
+        slug: '/docs/product-analytics',
+    },
+    'ai observability': {
+        title: 'AI Observability',
+        description:
+            'Captures LLM calls, including prompts, responses, tokens, costs, and latency, and connects them into traces so you can investigate how your AI product behaves.',
+        slug: '/docs/ai-observability',
+    },
+    'event property': {
+        title: 'Event property',
+        description:
+            'Additional data attached to an event that describes that particular interaction. Examples include the current page URL or the selected filter value.',
+        slug: '/docs/data/events',
+    },
+    'custom event': {
+        title: 'Custom event',
+        description:
+            'An event you explicitly send from your application, choosing its name, properties, and capture point to describe an interaction you want to measure.',
+        slug: '/docs/product-analytics/capture-events',
+    },
+    action: {
+        title: 'Action',
+        description:
+            'A way of combining related events so you can analyze them in insights and dashboards as if they were a single event.',
+        slug: '/docs/data/actions',
+    },
+    identity: {
+        title: 'Identity',
+        description:
+            'How activity is connected to a person in PostHog. Identifying users lets you follow their behavior across devices and sessions instead of treating each visit as a different person.',
+        slug: '/docs/product-analytics/identify',
+    },
+    instrumentation: {
+        title: 'Instrumentation',
+        description:
+            'The tracking code you add or configure to record activity in your application, such as sending an event when a visitor selects a filter.',
+        slug: '/docs/product-analytics/capture-events',
+    },
     scout: {
         title: 'Scout',
         description:
@@ -372,10 +417,8 @@ export default function Term({ name, children, className = '' }: TermProps): JSX
                     onMouseEnter={() =>
                         posthog?.capture('pocket_guide_interaction', { kind: 'term_hover', term: name })
                     }
-                    // Orange dotted is the "defined term" affordance; navigation links keep a solid
-                    // text-color underline. Color is what separates the two at body size – the
-                    // orange matches the book's other teaching apparatus (figure markers, the spine).
-                    className={`underline decoration-orange decoration-dotted decoration-from-font underline-offset-4 ${className}`}
+                    // Dotted underlines distinguish definitions from ordinary navigation links.
+                    className={`font-semibold text-primary underline decoration-current decoration-dotted decoration-2 underline-offset-4 hover:decoration-solid focus-visible:decoration-solid ${className}`}
                 >
                     {children ?? name}
                 </Link>

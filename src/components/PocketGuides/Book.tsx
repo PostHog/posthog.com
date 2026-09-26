@@ -1,7 +1,7 @@
 import Link from 'components/Link'
 import React from 'react'
 
-import { PocketGuideVolume } from '../../constants/pocketGuides'
+import { PocketGuideVolume, pocketGuideUrl } from '../../constants/pocketGuides'
 import usePostHog from '../../hooks/usePostHog'
 
 interface BookProps {
@@ -41,7 +41,7 @@ export default function Book(props: BookProps): JSX.Element {
     return (
         <li>
             <Link
-                to={`/pocket-guides/${props.volume.id}`}
+                to={pocketGuideUrl(props.volume)}
                 state={{ newWindow: true }}
                 className="group block no-underline"
                 onClick={() =>

@@ -1,0 +1,99 @@
+---
+title: Events and properties
+shortTitle: Events and properties
+subtitle: See how Twig records a destination choice and gives it enough context to be useful.
+pocketGuideOrder: 1
+isPrimer: true
+---
+
+<RightPage>
+
+# Events and properties
+
+On Twig, choosing **Forest**, **Coast**, or **City** changes the stays on the page. The filter works. But once a visitor leaves, the product engineers can't tell which destination caught their attention.
+
+To measure that behavior, the team uses <Term name="product analytics">Product Analytics</Term>. Its basic unit is an <Term name="event" /> – a record that something happened in the product.
+
+## See what autocapture records
+
+The engineers add the [PostHog web SDK](/docs/libraries/js) to Twig using its project token and host:
+
+```js
+posthog.init(TWIG_POSTHOG_TOKEN, {
+  api_host: TWIG_POSTHOG_HOST,
+});
+```
+
+Once Twig loads the SDK, it records pageviews and <Term name="autocapture" /> is on by default. Clicks on links and buttons become `$autocapture` events with details about the element and page, without a separate capture call for each button. The team can see what people use before deciding which actions need custom names and properties.
+
+Select a filter below to inspect what Twig records for stay filters:
+
+<AutocaptureFigure />
+
+Autocapture tells the engineers which button a visitor clicked. The team wants to count stay-filter selections as one product action, even if the interface changes.
+
+## Name the filter selection
+
+To keep the action's name stable, the engineers add a <Term name="custom event" /> to the filter's click handler:
+
+```js
+posthog.capture("stay_filter_selected");
+```
+
+Now each selection records `stay_filter_selected`. Watch the Twig visitor move through the filters. With each click, the inspector's event count and timestamp change.
+
+<TwigEventFigure />
+
+The event name stays the same with each click. The `properties` section is empty here because the engineers have only named the event – they haven't added any Twig-specific details. They know a visitor used the stay filter, but still not whether they chose **Forest**, **Coast**, or **City**.
+
+## Add the destination as a property
+
+The engineers attach an <Term name="event property">event property</Term> – a detail about this specific event. They use the destination value already passed to the click handler:
+
+```js
+posthog.capture("stay_filter_selected", {
+  destination_type: selectedDestinationType,
+});
+```
+
+If the visitor clicks **Coast**, `selectedDestinationType` is `"Coast"`. If they click **Forest**, it's `"Forest"`. The event name stays the same, while its property describes the choice.
+
+<TwigFilterFigure />
+
+The inspector now shows the selected destination under `properties`. Twig also knows how many stays match that choice and whether any results appear. The engineers add both details to the same event:
+
+```js
+posthog.capture("stay_filter_selected", {
+  destination_type: selectedDestinationType,
+  results_count: matchingStays.length,
+  has_results: matchingStays.length > 0,
+});
+```
+
+Select a filter to see the full event:
+
+<FilterPropertiesFigure />
+
+The inspector shows three properties on the same event:
+
+- `destination_type` is text – the destination the visitor chose
+- `results_count` is a number – how many stays match
+- `has_results` is true or false – whether there is at least one stay
+
+The event's `timestamp` appears above `properties` because PostHog records when the click happened – Twig doesn't need to add that detail itself.
+
+## Compare the destinations people choose
+
+The inspector shows one filter click at a time. To compare the choices across all recorded clicks, the team builds a <Term name="trend" /> from `stay_filter_selected` and breaks it down by `destination_type`.
+
+Select a bar, then an event to inspect it:
+
+<DestinationChartFigure />
+
+Notice the Coast records – their event name and properties match, but their IDs and timestamps differ because each is a separate click. The trend tells the team how often Coast was selected. To see whether those clicks came from three visitors or one visitor clicking Coast three times, they need identity and session data.
+
+<LessonFooter nextLabel="Identity and sessions">
+    <a href="/docs/data/events">Events reference</a> · <a href="/docs/product-analytics/autocapture">Autocapture</a> · <a href="/docs/product-analytics/capture-events">Custom event guide</a>
+</LessonFooter>
+
+</RightPage>
