@@ -47,6 +47,8 @@ import RayfitLogoLight from '../images/customers/rayfitLogolight.png'
 import RebtelLogo from '../components/CustomerLogos/RebtelLogo'
 import ResearchGateLogo from '../components/CustomerLogos/ResearchGateLogo'
 import ResendLogo from '../components/CustomerLogos/ResendLogo'
+import RunableLogo from '../images/customers/runable-light.svg'
+import RunableLogoDark from '../images/customers/runable-dark.svg'
 import SignificaLogo from '../components/CustomerLogos/SignificaLogo'
 import SupedLogo from '../images/customers/suped-light.png'
 import SupedLogoDark from '../images/customers/suped-dark.png'
@@ -1365,6 +1367,52 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
         logo: RailwayLogo,
         featured: true,
         height: 8,
+    },
+    runable: {
+        name: 'Runable',
+        toolsUsed: [
+            'product_analytics',
+            'session_replay',
+            'feature_flags',
+            'error_tracking',
+            'logs',
+            'ai_observability',
+            'data_warehouse',
+            'cdp',
+        ],
+        industries: ['AI'],
+        users: ['Engineering', 'Growth'],
+        notes: 'AI agent platform for small business owners',
+        featured: false,
+        logo: {
+            light: RunableLogo,
+            dark: RunableLogoDark,
+        },
+        height: 8,
+        quotes: {
+            ankit_kumar: {
+                // This is the author handle used in OSQuote
+                name: 'Ankit Kumar',
+                role: 'Software Development Engineer',
+                image: {
+                    thumb: 'https://res.cloudinary.com/dmukukwp6/image/upload/Ankit_caa4201fc2.png',
+                },
+                quotes: [
+                    'All decisions are driven by PostHog metrics. It gives us the direction when something is failing or impacts a specific event that really helps us a lot.',
+                ],
+            },
+            eshaan_pawan: {
+                name: 'Eshaan Pawan',
+                role: 'Head of Growth',
+                image: {
+                    thumb: 'https://res.cloudinary.com/dmukukwp6/image/upload/Eshaan_dfad398910.png',
+                },
+                quotes: [
+                    "I don't need to leave the PostHog ecosystem often. I get almost everything I need on PostHog, which makes it easy for me to make a lot of decisions very fast.",
+                    'Instead of using 10 different data layers, data providers, and data collectors, you can just use PostHog.',
+                ],
+            },
+        },
     },
     rebtel: {
         name: 'Rebtel',
