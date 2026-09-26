@@ -43,3 +43,9 @@ export const getPublicID = (image: string) => {
     const extension = imagePath.lastIndexOf('.')
     return extension > imagePath.lastIndexOf('/') ? imagePath.substring(0, extension) : imagePath
 }
+
+// An exception thrown by an extension-injected script reaches autocapture through window.onerror
+// with a single "global code" frame, so every page path fingerprints as a new issue. posthog.com
+// reads none of these globals. Match the injected global, because the message around it differs
+// per browser.
+export const EXTENSION_INJECTED_EXCEPTION = /window\.ethereum|__firefox__|sendExtensionMessage\(/
