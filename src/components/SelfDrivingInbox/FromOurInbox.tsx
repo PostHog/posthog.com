@@ -1,7 +1,7 @@
 import React, { useMemo, useState } from 'react'
 import { graphql, useStaticQuery } from 'gatsby'
 import dayjs from 'dayjs'
-import { IconPullRequest } from '@posthog/icons'
+import { IconChevronDown, IconPullRequest } from '@posthog/icons'
 
 import Link from 'components/Link'
 import Markdown from 'components/Markdown'
@@ -74,32 +74,32 @@ function prNumber(url: string): string | null {
     return match ? `#${match[1]}` : null
 }
 
-function Row({
-    example,
-    selected,
-    onSelect,
-}: {
-    example: InboxExample
-    selected: boolean
-    onSelect: () => void
-}): JSX.Element {
+function Row({ example, open, onToggle }: { example: InboxExample; open: boolean; onToggle: () => void }): JSX.Element {
     return (
         <button
             type="button"
-            onClick={onSelect}
-            aria-pressed={selected}
-            className={`block w-full px-4 py-3 text-left hover:bg-accent ${selected ? 'bg-accent' : ''}`}
+            onClick={onToggle}
+            aria-expanded={open}
+            aria-controls={`inbox-example-${example.reportId}`}
+            className={`flex w-full items-start gap-3 px-4 py-3 text-left hover:bg-accent ${open ? 'bg-accent' : ''}`}
         >
-            <span className="mb-1 flex flex-wrap items-center gap-x-2 gap-y-1 text-xs text-secondary">
-                <span>{example.report.source}</span>
-                <span aria-hidden="true">·</span>
-                <span>{formatDate(example.publishedAt)}</span>
+            <span className="min-w-0 flex-1">
+                <span className="mb-1 flex flex-wrap items-center gap-x-2 gap-y-1 text-xs text-secondary">
+                    <span>{example.report.source}</span>
+                    <span aria-hidden="true">·</span>
+                    <span>{formatDate(example.publishedAt)}</span>
+                </span>
+                <span className="block text-sm font-bold leading-snug text-primary">{example.report.title}</span>
+                <span className="mt-1.5 inline-flex items-center gap-1 text-xs font-semibold text-green">
+                    <IconPullRequest className="size-3.5" />
+                    Merged
+                </span>
             </span>
-            <span className="block text-sm font-bold leading-snug text-primary">{example.report.title}</span>
-            <span className="mt-1.5 inline-flex items-center gap-1 text-xs font-semibold text-green">
-                <IconPullRequest className="size-3.5" />
-                Merged
-            </span>
+            <IconChevronDown
+                className={`mt-1 size-5 shrink-0 text-secondary transition-transform motion-reduce:transition-none ${
+                    open ? 'rotate-180' : ''
+                }`}
+            />
         </button>
     )
 }
@@ -133,12 +133,20 @@ function Detail({ example }: { example: InboxExample }): JSX.Element {
 /** A read-only mock of the inbox, filled with real reports from PostHog's own project. */
 export default function FromOurInbox(): JSX.Element | null {
     const examples = useInboxExamples()
-    const [selectedId, setSelectedId] = useState<string | undefined>(examples[0]?.reportId)
-    const selected = examples.find((example) => example.reportId === selectedId) || examples[0]
+    const [openIds, setOpenIds] = useState<Set<string>>(new Set())
 
-    if (!selected) {
+    if (examples.length === 0) {
         return null
     }
+
+    const toggle = (reportId: string): void =>
+        setOpenIds((current) => {
+            const next = new Set(current)
+            if (!next.delete(reportId)) {
+                next.add(reportId)
+            }
+            return next
+        })
 
     return (
         <div className="@container not-prose my-6 overflow-hidden rounded border border-primary bg-primary">
@@ -150,36 +158,23 @@ export default function FromOurInbox(): JSX.Element | null {
                 </span>
             </header>
 
-            <div className="@[720px]:grid @[720px]:grid-cols-[minmax(0,2fr)_minmax(0,3fr)]">
-                <ul className="m-0 list-none p-0 @[720px]:max-h-[720px] @[720px]:overflow-y-auto @[720px]:border-r @[720px]:border-primary">
-                    {examples.map((example) => {
-                        const isSelected = example.reportId === selected.reportId
-                        return (
-                            <li key={example.reportId} className="m-0 border-b border-primary last:border-b-0">
-                                <Row
-                                    example={example}
-                                    selected={isSelected}
-                                    onSelect={() => setSelectedId(example.reportId)}
-                                />
-                                {/* Narrow windows open the report under its row instead of in a side pane. */}
-                                {isSelected && (
-                                    <div className="border-t border-primary p-4 @[720px]:hidden">
-                                        <Detail example={example} />
-                                    </div>
-                                )}
-                            </li>
-                        )
-                    })}
-                </ul>
-                {/* Every report renders into the built HTML, so the .md mirror and search see them all. */}
-                <div className="hidden p-4 @[720px]:block">
-                    {examples.map((example) => (
-                        <div key={example.reportId} className={example.reportId === selected.reportId ? '' : 'hidden'}>
-                            <Detail example={example} />
-                        </div>
-                    ))}
-                </div>
-            </div>
+            <ul className="m-0 list-none p-0">
+                {examples.map((example) => {
+                    const open = openIds.has(example.reportId)
+                    return (
+                        <li key={example.reportId} className="m-0 border-b border-primary last:border-b-0">
+                            <Row example={example} open={open} onToggle={() => toggle(example.reportId)} />
+                            {/* Collapsed reports stay in the built HTML, so the .md mirror and search see them all. */}
+                            <div
+                                id={`inbox-example-${example.reportId}`}
+                                className={open ? 'border-t border-primary p-4' : 'hidden'}
+                            >
+                                <Detail example={example} />
+                            </div>
+                        </li>
+                    )
+                })}
+            </ul>
         </div>
     )
 }

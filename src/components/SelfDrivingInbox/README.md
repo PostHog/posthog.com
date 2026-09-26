@@ -186,8 +186,8 @@ agent reading the mirror can create the scout verbatim instead of translating it
 
 `FromOurInbox.tsx` is the one browse-all surface, and it is built on real data rather than
 templates. It renders on `/docs/self-driving/from-our-inbox` as a read-only mock of the inbox:
-a list of reports on the left and the selected report on the right, stacked under its row in a
-narrow window. Every report came from PostHog's own project and ended in a merged public pull
+a list of collapsed reports, each of which opens under its row on click and closes on a second
+click. Collapsed reports stay in the built HTML, so the `.md` mirror and search still see them. Every report came from PostHog's own project and ended in a merged public pull
 request, so the page carries no `receivedAgo` and shows real dates instead.
 
 Each example is one **frontmatter-only** file:
