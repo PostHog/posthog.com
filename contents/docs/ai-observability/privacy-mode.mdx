@@ -2,7 +2,7 @@
 title: Privacy mode
 ---
 
-To avoid storing potentially sensitive prompt, reasoning, and completion data, you can enable privacy mode. This excludes the `$ai_input` and `$ai_output_choices` properties from being captured.
+Privacy mode stops PostHog's LLM integrations from automatically recording prompt and completion content in `$ai_input` and `$ai_output_choices`. Review custom properties you add to those events because they can still contain or reintroduce this content.
 
 <CalloutBox icon="IconInfo" type="fyi" title="Data retention">
 
@@ -84,3 +84,7 @@ callback_handler = PosthogCallbackHandler(
 ```
 
 </MultiLanguage>
+
+## Review manual event payloads
+
+Privacy mode doesn't remove properties you supply to `posthog.capture()` or a direct HTTP capture request. If you [capture AI events manually](/docs/ai-observability/installation/manual-capture), leave `$ai_input` and `$ai_output_choices` out of the event payload. Check other properties for sensitive content before you send them.
