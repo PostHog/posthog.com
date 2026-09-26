@@ -77,7 +77,7 @@ after the prose.
 | Component | What it does |
 |---|---|
 | `<LeftPage>` / `<RightPage>` | Figures vs prose – markers the reader interleaves |
-| `<Eyebrow>` | The small line above a title-page heading |
+| `<Eyebrow>` | The line above a title-page heading, in body text |
 | `<Fig n caption legend>` | Any exhibit, in a numbered frame |
 | `<ReportFigure n caption legend>` | This use case's report, drawn as its inbox moment |
 | `<ScoutFigure n caption>` | This use case's `SKILL.md`, from its self-driving `InboxTemplate` |
