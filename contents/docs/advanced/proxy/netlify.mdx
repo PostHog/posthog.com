@@ -333,3 +333,15 @@ This often happens when your primary Netlify domain differs from the one in `api
 ### Redirects not working in SvelteKit
 
 Netlify [doesn't support](https://docs.netlify.com/frameworks/sveltekit/#limitations) `netlify.toml` redirects for SvelteKit projects. Use a `_redirects` file in your `static` directory instead.
+
+### All users show the same location
+
+PostHog sets country, region, and city from the client IP address of the request it receives. It does not read platform geolocation headers, such as `x-vercel-ip-city` or `cloudfront-viewer-country`. If your proxy sends its own IP address, PostHog resolves every visitor to the location of one edge server. The location breakdown still looks correct, so this failure is silent.
+
+To confirm, open a recent event in the [activity feed](https://us.posthog.com/activity/explore) and read its `$ip` property. If `$ip` is the same for visitors in different places, it is a proxy IP address.
+
+To correct it:
+
+1. Send the visitor's IP address in `x-forwarded-for`. PostHog reads this header first. See [client IP resolution](/docs/advanced/proxy/proxy-reference#client-ip-resolution) for the full order.
+2. If a CDN or a load balancer is in front of Netlify, the IP address Netlify sees is the CDN edge, not the visitor. Read the visitor's IP address from the header that the CDN adds, then put that value in `x-forwarded-for`. PostHog reads `x-forwarded-for` before every other header, so an edge address there hides the visitor.
+3. If you cannot set the header, set the `$ip` property on the event instead. PostHog keeps the `$ip` property that an event already has, and uses the request IP address only when the event has no `$ip`.
