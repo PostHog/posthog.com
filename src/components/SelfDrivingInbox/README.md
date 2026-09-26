@@ -182,6 +182,34 @@ The scout block is rendered in the canonical `SKILL.md` shape the monorepo uses
 the harness never runs it, and `description` doubles as the description on the config API. An
 agent reading the mirror can create the scout verbatim instead of translating it.
 
+## From our inbox
+
+`FromOurInbox.tsx` is the one browse-all surface, and it is built on real data rather than
+templates. It renders on `/docs/self-driving/from-our-inbox` as a read-only mock of the inbox:
+a list of reports on the left and the selected report on the right, stacked under its row in a
+narrow window. Every report came from PostHog's own project and ended in a merged public pull
+request, so the page carries no `receivedAgo` and shows real dates instead.
+
+Each example is one **frontmatter-only** file:
+
+```
+contents/docs/self-driving/from-our-inbox/
+├── index.mdx          the page
+├── _curator/SKILL.md  the scout that proposes new examples
+└── _examples/<date>-<slug>.md
+```
+
+An example reuses `report` and `category` from the template contract, plus an `inboxExample`
+block (`reportId`, `publishedAt`, `outcome`, `pullRequest { url, title, mergedAt }`). The
+`_curator/SKILL.md` has the full file shape. `reportId` is the curator's dedupe key, so never
+change it on a published example.
+
+New examples arrive as content-only pull requests. The curator scout runs daily in PostHog's
+project, picks one to three safe reports, and files each as an actionable report against this
+repository. Self-driving opens the pull request, and the self-driving team decides whether to
+merge it. To remove an example, delete its file. The curator reads the closed or deleted state
+and does not propose it again.
+
 ## Rendering contract
 
 - **Static-first.** Everything renders from `useStaticQuery` at build time; with JavaScript
@@ -203,7 +231,8 @@ agent reading the mirror can create the scout verbatim instead of translating it
 | `scoutDeepLink.ts` | Builds the CTA target: a `#createScout=` deep link, or an `appTemplate` link |
 | `sources.ts` | Product-source metadata: icons, color tokens, install and docs links |
 | _(terms moved)_ | `<Term>` and its definitions now live in `components/PocketGuides/terms.tsx` – the vocabulary spans every volume, not just self-driving |
-| `types.ts` | `SelfDrivingReport`, `InboxTemplate` |
+| `FromOurInbox.tsx` | `useInboxExamples()` and the read-only inbox on `/docs/self-driving/from-our-inbox` |
+| `types.ts` | `SelfDrivingReport`, `InboxTemplate`, `InboxExample` |
 
 The frontmatter type is declared in `gatsby/createSchemaCustomization.ts` (`FrontmatterReport`).
 It's explicit rather than inferred because the field exists on only a handful of the ~30

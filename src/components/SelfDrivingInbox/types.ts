@@ -69,3 +69,21 @@ export interface InboxTemplate {
     requires?: Requirement[]
     scout?: ScoutSpec
 }
+
+/** A real report from PostHog's own inbox that ended in merged work, for /docs/self-driving/from-our-inbox. */
+export interface InboxExample {
+    /** The inbox report's id. The curator scout dedupes on it, so it never changes once published. */
+    reportId: string
+    /** The day the example was added to the page. Drives the feed's order. */
+    publishedAt: string
+    /** Product surface, e.g. "Error tracking". */
+    category: string
+    report: SelfDrivingReport
+    /** One line on what the merged work changed. Markdown. */
+    outcome?: string
+    pullRequest: {
+        url: string
+        title: string
+        mergedAt?: string
+    }
+}

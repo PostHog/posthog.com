@@ -83,6 +83,18 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
       actionNote: String
       affected: String
     }
+    # One real report from PostHog's own inbox, published on /docs/self-driving/from-our-inbox.
+    type FrontmatterInboxExamplePullRequest {
+      url: String
+      title: String
+      mergedAt: Date @dateformat
+    }
+    type FrontmatterInboxExample {
+      reportId: String
+      publishedAt: Date @dateformat
+      outcome: String
+      pullRequest: FrontmatterInboxExamplePullRequest
+    }
     type FrontmatterWatches {
       name: String
       detail: String
@@ -108,6 +120,8 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
       authorData: [AuthorsJson] @link(by: "handle", from: "author")
       badge: String
       report: FrontmatterReport
+      # Prefixed for the same reason as pocketGuideCta: this Frontmatter type is shared site-wide.
+      inboxExample: FrontmatterInboxExample
       premise: String
       tldr: String
       # Short name for tight surfaces like the pocket guide's index tabs. Falls back to title.

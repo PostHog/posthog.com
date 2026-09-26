@@ -1,0 +1,32 @@
+---
+title: From our inbox
+sidebarTitle: From our inbox
+sidebar: Docs
+showTitle: true
+---
+
+import FromOurInbox from 'components/SelfDrivingInbox/FromOurInbox'
+
+<CalloutBox icon="IconFlask" title="Open beta" type="action">
+
+Self-driving is in open beta. It's improving quickly – expect rough edges, and expect them to disappear fast.
+
+</CalloutBox>
+
+We run self-driving on PostHog itself. This page is a feed of real [reports](/docs/self-driving/reports) from our own inbox that turned into merged work. Nothing here is a mockup: each report was found by a [scout](/docs/self-driving/scouts) or a [signal source](/docs/self-driving/inbox/sources), and each links to the public pull request that fixed it.
+
+<FromOurInbox />
+
+## How this page stays up to date
+
+A scout keeps this page up to date too. Once a day, it picks one to three recent reports from our inbox that ended in a merged pull request, and rewrites each one for a public audience. It then files a report that asks for the example to be added here. Self-driving opens the pull request against this website, and a person on the team reviews it and decides whether to publish it.
+
+The scout only picks reports whose fix is already public. It skips anything from customer conversations, billing, or security work, and it leaves out customer names, internal volumes, and links into our project. You can [read the scout's instructions](https://github.com/PostHog/posthog.com/blob/master/contents/docs/self-driving/from-our-inbox/_curator/SKILL.md) on GitHub.
+
+## Try it on your own product
+
+Every report above came from something you can turn on yourself:
+
+- [Set up self-driving](/docs/self-driving/setup) with one command.
+- Browse the [scout examples](/docs/self-driving/scout-examples) for what else a scout can watch.
+- Follow a scout end to end in the [pocket guides](/pocket-guides).

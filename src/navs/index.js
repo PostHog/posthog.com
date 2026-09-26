@@ -2747,6 +2747,10 @@ export const docsMenu = {
                     },
                 },
                 {
+                    name: 'From our inbox',
+                    url: '/docs/self-driving/from-our-inbox',
+                },
+                {
                     name: 'Pricing',
                     url: '/docs/self-driving/pricing',
                 },
