@@ -68,6 +68,8 @@ ORDER BY url_count DESC
 
 When a SQL insight's query includes the [`{filters}` placeholder](/docs/data-warehouse/sql/variables), you can adjust the date range and add property filters directly on the saved insight page without opening the SQL editor. Changes re-run the query immediately but aren't saved until you explicitly save the insight. Clicking **Edit** carries any unsaved filter changes into the SQL editor where you can save them.
 
+You can also join two event types on a property they share, such as an order ID. See [give related events a shared correlation key](/docs/product-analytics/best-practices#11-give-related-events-a-shared-correlation-key) for the worked example and for how to instrument the events so that the join is possible.
+
 You can use SQL insights within [notebooks](/docs/notebooks) and with external sources using the [data warehouse](/docs/data-warehouse).
 
 ## Query API
