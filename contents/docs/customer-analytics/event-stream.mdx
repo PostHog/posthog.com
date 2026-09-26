@@ -1,0 +1,86 @@
+---
+title: Event stream
+sidebar: Docs
+showTitle: true
+---
+
+import CustomerAnalyticsBetaWarning from "./_snippets/customer-analytics-beta-warning.mdx";
+
+<CustomerAnalyticsBetaWarning />
+
+The event stream delivers selected customers' events to a Slack channel in real time. Each team member configures their own personal stream — choosing which events to watch, which Slack channel to post to, and which accounts to include.
+
+This is useful for staying on top of key customer activity without constantly checking dashboards. For example, you can stream signup events from high-value accounts to stay aware of new user activity, or watch for error events to catch issues early.
+
+## Prerequisites
+
+- A [Slack workspace connected](/docs/cdp/destinations/slack) to your PostHog project
+- At least one [account](/docs/customer-analytics/customer-profiles) with an `external_id` set
+
+## Set up your event stream
+
+1. Go to [Customer Analytics > Configuration](https://app.posthog.com/customer_analytics/configuration?tab=customer-analytics-event-stream) and open the **Event stream** tab.
+
+2. Under **Events to stream**, click **Add event** and select the events you want to watch (e.g. `$pageview`, `signed_up`, `purchase_completed`).
+
+3. Under **Slack delivery**, select your Slack workspace and pick the channel where events should be posted.
+
+4. Toggle **Enable event stream** on.
+
+5. Click **Save**.
+
+6. Click **Send test message** to verify that delivery to your Slack channel works.
+
+> **Note:** The stream won't deliver anything until it has at least one event, a Slack channel, and at least one account added.
+
+## Add accounts to your stream
+
+After configuring your stream, add individual accounts from their profiles:
+
+1. Open the [accounts list](https://app.posthog.com/customer_analytics/accounts).
+
+2. Click on an account to open its profile.
+
+3. Open the **Event stream** tab.
+
+4. Toggle **Include in my event stream**.
+
+Only accounts with an `external_id` can have their events matched and delivered. If an account doesn't have one, you'll see a warning that its events won't stream.
+
+## How it works
+
+Each event stream creates a managed [Slack destination](/docs/cdp/destinations/slack) behind the scenes. When an event matches your configured event names and comes from a user belonging to one of your included accounts, it's posted to your Slack channel.
+
+| Component         | Description                                         |
+| ----------------- | --------------------------------------------------- |
+| **Events**        | The event names you've selected to watch            |
+| **Slack channel** | Where matched events are posted                     |
+| **Accounts**      | Which customer accounts are included in your stream |
+| **Enable toggle** | Controls whether the stream is actively delivering  |
+
+Streams are personal — each team member configures their own independently. Other team members' streams don't affect yours.
+
+## Manage your event stream via MCP
+
+The [PostHog MCP server](/docs/model-context-protocol) enables AI agents to programmatically manage event streams. You can create, update, and manage stream membership directly from any MCP client like Cursor, Claude Code, or VS Code.
+
+The following MCP tools are available for event streams:
+
+| Tool                              | Description                                    |
+| --------------------------------- | ---------------------------------------------- |
+| `event-streams-create`            | Create your personal event stream              |
+| `event-streams-list`              | Get your current event stream configuration    |
+| `event-streams-partial-update`    | Update events, Slack channel, or enabled state |
+| `event-streams-add-account`       | Add an account to your stream                  |
+| `event-streams-remove-account`    | Remove an account from your stream             |
+| `event-streams-send-test-message` | Send a test message to verify Slack delivery   |
+| `event-streams-destroy`           | Delete your event stream                       |
+
+Try these example prompts with your MCP-enabled agent:
+
+- `Create an event stream that watches for signed_up and purchase_completed events.`
+- `Add account "acme-corp" to my event stream.`
+- `Send a test message to my event stream's Slack channel.`
+- `List my current event stream configuration.`
+
+See the [MCP server documentation](/docs/model-context-protocol) for setup instructions.
