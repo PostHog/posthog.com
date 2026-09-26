@@ -1533,20 +1533,20 @@ export const handbookSidebar = [
                         url: '/handbook/forward-deployed-engineering/who-we-work-with',
                     },
                     {
-                        name: 'How to get an FDE involved',
-                        url: '/handbook/forward-deployed-engineering/how-to-get-fde-involved',
-                    },
-                    {
                         name: 'How we work',
                         url: '/handbook/forward-deployed-engineering/how-we-work',
                     },
                     {
-                        name: 'How we work with AI',
-                        url: '/handbook/forward-deployed-engineering/working-with-ai',
+                        name: 'How to get an FDE involved',
+                        url: '/handbook/forward-deployed-engineering/how-to-get-fde-involved',
                     },
                     {
-                        name: 'New starter onboarding',
-                        url: '/handbook/forward-deployed-engineering/new-hire-onboarding',
+                        name: 'Systems and automation',
+                        url: '/handbook/forward-deployed-engineering/systems-and-automation',
+                    },
+                    {
+                        name: 'How we work with AI',
+                        url: '/handbook/forward-deployed-engineering/working-with-ai',
                     },
                     {
                         name: 'Working with customers',
@@ -1559,6 +1559,10 @@ export const handbookSidebar = [
                     {
                         name: 'Working with product engineering',
                         url: '/handbook/forward-deployed-engineering/working-with-product-engineering',
+                    },
+                    {
+                        name: 'New starter onboarding',
+                        url: '/handbook/forward-deployed-engineering/new-hire-onboarding',
                     },
                 ],
             },

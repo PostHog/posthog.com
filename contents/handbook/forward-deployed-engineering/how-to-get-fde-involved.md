@@ -6,7 +6,7 @@ showTitle: true
 
 This page is for customer success managers, technical account managers (TAM), and anyone sitting on a customer who needs hands-on help setting up PostHog. It covers how to pull in a forward deployed engineer (FDE), and, just as often, how to sort the problem out without us. 
 
-New to FDE? Start with the [overview](/handbook/forward-deployed-engineering/overview).
+New to FDE? Start with the [overview](/handbook/forward-deployed-engineering/overview). For our engagement lifecycle, see [how we work](/handbook/forward-deployed-engineering/how-we-work).
 
 ## First, try to self-serve
 
@@ -24,13 +24,16 @@ We also have a growing library of **[PostHog skills](https://github.com/PostHog/
 
 For the smaller questions that come up along the way, **PostHog AI** and the **PostHog Slack app** handle most of them without needing to pull in a person.
 
-## If they still need hands-on help
+## If the customer still needs hands-on help
 
-Before you route anything to us, gather the data we need to get started. It saves you a round-trip and saves us the context-switch:
+Before you route anything to us, gather the context we need to get started. It saves you a round-trip:
 
-1. **Gather what we need to scope it.** Two things make discovery quick: the **wizard audit reports**, so we start from real evidence instead of a blank page, and a read on **what's actually blocking them**: engineering bandwidth, trust in the implementation, internal coordination, or "we want someone to do it for us." That's the signal that decides what kind of engagement this becomes. Alongside those, name the customer, the product area, a one-sentence description of the problem, what would exist at the end that future customers could reuse, what codebase or data access is available, and a rough size (a week, a month, longer).
-2. **Set rough expectations on price.** Use the shape, not an exact number; see [what it costs](/handbook/forward-deployed-engineering/how-we-work#what-it-costs). If the customer wants an exact figure, tell them you'll get a quote within a day and route it through the AE.
+1. **Start with the gap or pain point.** What problem does the customer have today, and what's the business and operational context around it? It also helps to know the dynamic between the business side and their engineers.
+   - **If it's to implement a new use case, share your discovery.** Tell us which [use cases](/handbook/growth/use-case-selling/use-case-selling) are in play now, how they could lead into others later, and one layer deeper on each: if they say they want Growth & Marketing, what do they actually mean, and why? The discovery questions in the library cover where the customer is today, what happens if they don't solve it, and what outcomes they want. Agreeing on a set number of use cases up front also helps us keep the scope of the technical work contained.
+2. **Add the technical evidence.** Share the **wizard audit reports**, so we start from real evidence instead of a blank page, and a read on **what's actually blocking them**: engineering bandwidth, trust in the implementation, internal coordination, or "we want someone to do it for us."
+3. **Set rough expectations on price.** Use the shape, not an exact number; see [what it costs](/handbook/forward-deployed-engineering/how-we-work#what-it-costs). If the customer wants an exact figure, tell them you'll get a quote within a day and route it through the account owner.
+4. **Confirm access and expected timelines.** Let us know what codebase or data access is available, and give us a rough expected timeline (a week, a month, longer).
 
-With that in hand, you can run intake yourself using the **FDE vault skills** (intake, scoping, and quoting). Anyone at PostHog can run them, and they'll produce a calibrated scope, an hour estimate, and a proposal without needing an FDE in the loop. See the <PrivateLink url="https://github.com/PostHog/fde-vault/blob/main/teams/fde/operational/knowledge/skills/README.md">skills README</PrivateLink> in the <PrivateLink url="https://github.com/PostHog/fde-vault">fde-vault repo</PrivateLink>.
+Once you have that, bring it straight to the <SmallTeam slug="forward-deployed-engineering" /> team in [#team-fde](https://posthog.slack.com/archives/C0ADE38DEFN) on Slack. We'll review it and come back to you with any questions. From there, an FDE picks it up and scopes it properly from the technical side.
 
-Or bring it straight to the <SmallTeam slug="forward-deployed-engineering" /> team.
+If you're unsure whether it's a FDE fit, ask anyway, even before you've gathered everything, and we'll let you know.

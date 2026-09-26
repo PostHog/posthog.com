@@ -57,6 +57,7 @@ This is when you start working with your customers. Ask the vault for the curren
 For weeks 2 and 3, also pick up support tickets, usually 1-2 per day, depending on your workload. A ticket is the quickest test of what you learned in week 1: a real customer problem, your answer, and their reply.
 
 - Before your first ticket, do the [support hero training](/handbook/people/onboarding#support-hero-training) with a support engineer. It covers where tickets live, how to claim one, and how to reply.
+- Let our Support team in #team-support know you will be picking up support tickets as part of your onboarding
 - Ask in #team-fde which ticket view to pick from. Choose tickets in the areas customers bring to FDE, like feature flags, migrations, and instrumentation.
 - Ask another FDE to review your answer before it goes out.
 - Note each ticket that looked like it needed an FDE engagement instead of an answer, and why. Bring those notes to the team at the end of week 3. They show the [line between support and FDE](/handbook/forward-deployed-engineering/working-with-customers#boundaries-with-support) from the support side.
