@@ -209,6 +209,20 @@ Each plan can have a list of features, and a price.
 Features are used to infer which features are available in the product, for a customer on that plan.
 You can manually change the plan for a customer by updating the `plans_map` in the billing admin panel.
 
+### Extending a customer's events retention
+
+A customer that starts a paid plan on or after November 1, 2026 gets 2 years of events retention. Customers already on a paid plan before that date keep 7 years until they drop to the free plan.
+
+A customer on a platform package (Boost, Scale, or Enterprise) can ask for a longer window, up to 7 years. The longer window applies to every project in their organization. To grant one, open the customer in the billing admin and add an entry to `feature_overrides`:
+
+```json
+{ "key": "product_analytics_data_retention", "limit": 3, "unit": "years", "reason": "Requested by ... on ..." }
+```
+
+- Write the limit in whole years. Billing keeps whichever limit number is higher and ignores the unit, so an override in months can replace a longer window that is set in years.
+- The window updates shortly after you save, when billing sends the customer's new features to PostHog.
+- The override stays if the customer cancels their package. Remove it when the package ends.
+
 ### Paid features for employee side projects
 
 Employees can get access to paid features (like Boost) on personal or side projects. Ask in #team-billing with your organization ID and someone can set this up. There are two approaches for platform packages:
