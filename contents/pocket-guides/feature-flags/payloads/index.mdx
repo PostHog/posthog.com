@@ -1,0 +1,72 @@
+---
+title: Payloads
+shortTitle: Payloads
+subtitle: Ship settings, not just on and off.
+pocketGuideOrder: 5
+section: Release
+pocketGuideCta:
+  kind: prompt
+  label: Ask PostHog AI
+  requires:
+    label: Needs a feature flag in your project. The wizard makes two.
+  prompt: 'Add a JSON payload {"label": "New"} to wizard-example-frontend-flag.'
+---
+
+<LeftPage>
+
+<ExampleFigure n={1} caption="A payload is any JSON value. PostHog sends it with the flag when the flag matches.">
+
+```json
+{
+  "label": "New",
+  "freeExportsPerMonth": 5
+}
+```
+
+</ExampleFigure>
+
+<ExampleFigure n={2} caption="Read the payload and keep a default in code.">
+
+```js
+const config =
+  posthog.getFeatureFlagPayload(FRONTEND_FLAG) ??
+  { label: 'Beta', freeExportsPerMonth: 3 }
+```
+
+</ExampleFigure>
+
+</LeftPage>
+
+<RightPage>
+
+# Payloads
+
+A flag can decide more than whether someone gets a feature. It can also decide how that feature behaves. A <Term name="payload">payload</Term> is JSON that rides along with the flag's answer <SeeFig n={1} />, so you can change copy, limits, or config from PostHog without a deploy.
+
+## Three shapes
+
+| Flag type | Payload | Use it for |
+| --- | --- | --- |
+| Boolean | One, sent when the flag is on | Settings that belong to the new feature |
+| Multivariate | One per variant | Different copy or pricing per variant |
+| Remote config | One, the same for everyone | App-wide settings, no targeting |
+
+Rule of thumb: if a value hasn't changed in six months, it belongs in your codebase, not in a flag.
+
+## Keep a default in code
+
+Read the payload once, where you read the flag, and fall back to a value in code if it's missing <SeeFig n={2} />. If you bootstrap flags, bootstrap their payloads too with `featureFlagPayloads`.
+
+## Payloads are not secrets
+
+Anything a browser can read, your users can read. Remote config can encrypt its payload, but then only your server can read it (with a personal API key). Keep keys and credentials out of anything a client loads. Real secrets belong in your config, not in a flag.
+
+<Action />
+
+<SeeAlso>
+
+See also: [Payloads](/docs/feature-flags/creating-feature-flags#payloads) · [Remote config](/docs/feature-flags/remote-config) · [Feature flags vs configuration](/product-engineers/feature-flags-vs-configuration)
+
+</SeeAlso>
+
+</RightPage>

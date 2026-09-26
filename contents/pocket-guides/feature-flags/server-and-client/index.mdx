@@ -1,0 +1,63 @@
+---
+title: Server and client
+shortTitle: Server and client
+subtitle: One flag per side, evaluated where the data lives, with the same person on both.
+pocketGuideOrder: 2
+section: Instrument
+---
+
+<LeftPage>
+
+<ExampleFigure n={1} caption="One flag per side, one person across both.">
+
+| Side | Call | Why |
+| --- | --- | --- |
+| Server | `evaluateFlags(user.id)` | Local evaluation from cached definitions, with your data right there |
+| Browser | `posthog.identify(user.id)` | Same ID, so the hash matches |
+| Browser | `bootstrap.featureFlags` | Values the server already has, so there's no flicker |
+
+</ExampleFigure>
+
+<SkillFigure n={2} caption="The skill itself. It uses the same rules the wizard follows. Copy it and give it to your agent before you add your next flag." />
+
+</LeftPage>
+
+<RightPage>
+
+# Server and client
+
+The wizard made one flag for your backend and one for your frontend, not one flag for both. Here's why, and how to keep the two sides agreeing with each other <SeeFig n={1} />.
+
+## One flag, one side
+
+A flag checked on the server and again in the browser gets two chances to disagree (different distinct IDs, different properties, different answers). Pick where each flag lives. If a flag is server-only, set its evaluation runtime to **Server-side only** so the browser SDK doesn't load it at all.
+
+## On the server, evaluate locally
+
+With <Term name="local evaluation">local evaluation</Term>, the server SDK downloads your flag definitions every 30 seconds (5 minutes in Go) and evaluates them in-process. No network request per check. The definitions fetch bills as 10 flag requests no matter how many checks you run, so it's genuinely cheaper too.
+
+The catch is that you pass in whatever properties your conditions use, like the person's plan. On the server you usually have those already. It also needs the feature flags secure API key, which stays on the server. Never ship it to a browser or a mobile app.
+
+Right after a cold start there are no definitions yet, so checks return `undefined` until the first fetch lands. Give every check a default. And if a check can't be evaluated locally, the SDK falls back to asking PostHog (unless you set `onlyEvaluateLocally`).
+
+## Same person on both sides
+
+The hash uses the distinct ID. If your server checks with `user.id` and the browser still has an anonymous ID, the same person can get a different answer on each side. Call `identify()` with the ID your server uses, before any flag check in the browser.
+
+## Bootstrap to stop the flicker
+
+If the server already knows the answer, send it along with the page. <Term name="bootstrapping">Bootstrapping</Term> passes those values into `posthog.init` under `bootstrap.featureFlags`, so the browser has them before the first render (no flash of the old version). Works in the web, React Native, iOS, Android, and Flutter SDKs.
+
+Two gotchas tho. Bootstrapping only seeds flags that are on (false and empty values get dropped), and the first full `/flags` response replaces everything you bootstrapped.
+
+## Take this skill with you
+
+The wizard followed these rules for your two example flags. For every flag after that, hand your agent the skill <SeeFig n={2} />.
+
+<SeeAlso>
+
+See also: [Local evaluation](/docs/feature-flags/local-evaluation) · [Bootstrapping](/docs/feature-flags/bootstrapping) · [Evaluation contexts](/docs/feature-flags/evaluation-contexts) · [Stable identity](/docs/feature-flags/stable-identity-for-flags) · [Bootstrap flags in React and Express](/tutorials/bootstrap-feature-flags-react) · [Evaluation runtimes and contexts](/tutorials/evaluation-runtimes-and-contexts) · [Local evaluation, from Django to Rust](/blog/local-flag-evals-rust)
+
+</SeeAlso>
+
+</RightPage>

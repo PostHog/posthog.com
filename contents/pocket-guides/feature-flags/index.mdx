@@ -1,0 +1,30 @@
+---
+title: Feature Flags
+shortTitle: Introduction
+subtitle: 'Ship code turned off, then decide from PostHog who gets it – and turn it back off in seconds.'
+pocketGuideOrder: 0
+---
+
+<LeftPage>
+
+<Eyebrow>Pocket guide to</Eyebrow>
+
+# Feature Flags
+
+A <Term name="feature flag">feature flag</Term> is a switch in your code that you flip from PostHog, no deploy needed. Ship a change turned off, turn it on for your team, then 5% of users, then everyone. Something breaks? Turn it back off in seconds.
+
+## Where to start
+
+We'll cover what a flag actually is, how PostHog decides who gets one, and how to roll one out, kill it, configure it, test with it, and eventually delete it.
+
+Every page assumes a PostHog SDK is in your app. The wizard installs one if you need it and wires up your first flags, or you can [install it yourself](/docs/feature-flags/installation):
+
+<Setup />
+
+The wizard creates two example flags, `wizard-example-backend-flag` and `wizard-example-frontend-flag`. Both start off at 0%. It checks each one once, on its own side of your app, and gates something harmless on it (a log line or a small label), so nothing changes until you turn them on. An API with no frontend only gets the backend flag. When it's done, it writes `posthog-feature-flags-report.md` with a link to each flag and the file that checks it.
+
+The rest of the guide basically follows those two flags around. By the last page you'll have rolled them out, turned them off, and deleted them.
+
+<Frontispiece />
+
+</LeftPage>

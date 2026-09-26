@@ -1,0 +1,73 @@
+---
+title: Roll out gradually
+shortTitle: Rollouts
+subtitle: Start with your team, then a percentage, then everyone.
+pocketGuideOrder: 3
+section: Release
+pocketGuideCta:
+  kind: prompt
+  label: Ask PostHog AI
+  note: Swap in your own email domain first.
+  requires:
+    label: Needs a feature flag in your project. The wizard makes two.
+  prompt: >-
+    Roll out wizard-example-frontend-flag to everyone whose email ends with @<my company domain>
+    at 100%, and to 5% of all other users.
+---
+
+<LeftPage>
+
+<ExampleFigure n={1} caption="A typical ladder. People who got the flag at 5% still have it at 25%.">
+
+| Step | Who gets it | Then |
+| --- | --- | --- |
+| Team | `email ends with @yourcompany.com` | Poke at it in production |
+| 5% | Everyone else, a few at a time | Watch errors and replays |
+| 25% | More of everyone | Same again |
+| 100% | Everyone | Schedule the cleanup |
+
+</ExampleFigure>
+
+<ScreenshotFigure
+    n={2}
+    product="feature_flags"
+    screenshot="release-conditions"
+    alt="A flag's release conditions, with property filters and a rollout percentage in each condition set"
+    caption="Release conditions on one flag. A person who matches any set gets the flag."
+/>
+
+</LeftPage>
+
+<RightPage>
+
+# Roll out gradually
+
+A flag at 0% is live code nobody runs. This page is about letting people in a few at a time <SeeFig n={1} />.
+
+## Release conditions
+
+Each flag has one or more <Term name="release condition">release conditions</Term> <SeeFig n={2} />. A set matches when every property filter passes and the person falls inside its rollout percentage. Match any set and you get the flag.
+
+## Start with your team
+
+At PostHog, a flag often starts rolled out to just the engineer who made the change. Then it goes to the team, by email domain: `email ends with @yourcompany.com`. Use `ends with`, not `contains` (contains also matches lookalike domains). Your team gets to poke at it in production before anyone else sees it.
+
+## Then a percentage
+
+Then add a set for everyone at a small percentage. Raising the percentage only moves the cut-off, and nobody's hash changes. Everyone who had the flag keeps it and new people join. You can go as low as 0.01%.
+
+A rollout is only as safe as what you're watching. Between steps, watch for new errors and pull up replays of people who have the flag. If you already know the next step, a scheduled flag change can do it for you.
+
+## Target who gets it
+
+You can target a <Term name="cohort">cohort</Term> (your beta testers), a <Term name="person property">person property</Term> (their plan), a country if GeoIP is on, or a whole company with group analytics. Target the data where it lives tho. If your server knows the plan, evaluate on the server and pass it in. If the plan lives in Stripe, sync it in as a warehouse property and target it like anything else.
+
+<Action />
+
+<SeeAlso>
+
+See also: [Release conditions](/docs/feature-flags/creating-feature-flags#release-conditions) · [Phased rollout](/docs/feature-flags/phased-rollout) · [Scheduled changes](/docs/feature-flags/scheduled-flag-changes) · [Testing in production](/product-engineers/testing-in-production) · [Sticky feature flags](/tutorials/sticky-feature-flags)
+
+</SeeAlso>
+
+</RightPage>
