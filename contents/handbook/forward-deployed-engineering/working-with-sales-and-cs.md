@@ -20,6 +20,38 @@ Sales or CS flag a technical blocker or opportunity, and we scope it. Before you
 
 One thing worth naming from the sales and CS side: **an FDE ask usually surfaces mid-deal or mid-relationship**, so the person routing it already holds the commercial context we don't. Bring that with you: where the account is in its lifecycle, what's actually at stake commercially, and how time-sensitive it is, so we scope against the real constraint rather than the technical problem in isolation. Then bring it to the <SmallTeam slug="forward-deployed-engineering" /> team.
 
+## Where FDE fits in the customer lifecycle
+
+An [FDE engagement](/handbook/forward-deployed-engineering/overview#what-an-fde-is) is one tool in the account team's toolbox. It is not a separate sales motion. The [accounts overview](/handbook/growth/sales/accounts-overview) shows how an account moves between the TAE, the CSM, and the TAM. There are three points in that journey where it's worth asking whether an FDE engagement would help the customer:
+
+1. **Landing.** The TAE closes the deal. A migration or a first implementation is the natural first engagement, before the customer counts as onboarded.
+2. **A TAM joins.** A deal closes with a qualified expansion opportunity, a TAM qualifies a growth opportunity on a CSM account, or a self-serve account becomes an expansion lead. The TAM's first step is often to [fix the foundation](/handbook/growth/sales/grow-an-account#fix-the-foundation-first). Some customers want an FDE to do that work with them.
+3. **Expansion.** The TAM sells a new product or replaces a competitor's tool. An FDE can implement the new product as part of the expansion.
+
+```mermaid
+flowchart TB
+  TAE["TAE"] -- "closed-won" --> G1{"Landing:<br>migration or implementation"}
+  G1 -. "FDE engagement" .-> ONB["Onboarded"]
+  G1 -- "not needed" --> ONB
+  ONB -- "no opp" --> CSM["CSM"]
+  ONB -- "qualified opp" --> G2
+  CSM -- "growth opp qualified" --> G2{"TAM joins:<br>fix the foundation"}
+  G2 -. "FDE engagement" .-> BOTH["CSM + TAM"]
+  G2 -- "not needed" --> BOTH
+  BOTH -- "new product or<br>tool replacement" --> G3{"Expansion:<br>implement new product"}
+  G3 -. "FDE engagement" .-> BOTH
+  G3 -- "not needed" --> BOTH
+  BOTH -- "expansion exhausted" --> CSM
+```
+
+The customer moves on the same way whether or not they take an engagement.
+
+### What this means
+
+- **Raising FDE is optional.** The TAE, TAM, or CSM decides whether to mention it at all. Many customers won't need an engagement, and that's fine. They still know the team exists and can come back to it later.
+- **These aren't the only ways in.** The [triggers in the overview](/handbook/forward-deployed-engineering/overview#when-fde-gets-involved) still apply at any point, and anyone can bring a customer to us directly. See [how to get an FDE involved](/handbook/forward-deployed-engineering/how-to-get-fde-involved).
+- **It sets accounts up for success early.** An engagement alongside a new product sale or a new TAM is the right time to set up the customer's implementation correctly, before problems start.
+
 ## Pre-sale vs post-sale
 FDE engagements begin where pre-sales ends. If a prospect needs deep, ongoing technical work to be convinced, that's a signal the engagement should be scoped.
 
