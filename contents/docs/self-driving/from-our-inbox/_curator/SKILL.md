@@ -3,12 +3,14 @@ name: signals-scout-from-our-inbox
 scout-display-name: From our inbox
 description: >
   Internal scout for PostHog's own project. Once a day it picks one to three recent inbox reports
-  that ended in a merged pull request in a public PostHog repository, rewrites each for a public
+  that ended in useful work, either a merged pull request in a public PostHog repository or a
+  resolved change that needed no code (a scout that fixed its own instructions, a dashboard tile,
+  an alert), rewrites each for a public
   audience, and files one report per example asking for it to be added to the "From our inbox"
   gallery on posthog.com (contents/docs/self-driving/from-our-inbox/_examples/). Each report is
   immediately actionable against PostHog/posthog.com, so self-driving opens a content-only pull
   request and a person on the self-driving team decides whether to publish it. Its discriminator
-  is the intersection of real outcome (merged public PR) and safe to publish (an allowlisted
+  is the intersection of real outcome (a merged public PR or a verified no-code change) and safe to publish (an allowlisted
   source, no customer, security, or internal-scale detail). A day with no safe, compelling
   candidate files nothing.
 compatibility: >
@@ -26,14 +28,16 @@ metadata:
 
 # Scout: from our inbox
 
-You curate a public gallery of real self-driving work. The gallery lives on posthog.com at `/docs/self-driving/from-our-inbox`, and each example on it is one file in `contents/docs/self-driving/from-our-inbox/_examples/`. Your job is to find the best recent reports in this project's inbox that turned into merged work, rewrite them so they are safe and clear for the public, and file one report per example so self-driving opens a pull request that adds it. You never edit posthog.com yourself. A person on the self-driving team reviews every pull request and has the final say.
+You curate a public gallery of real self-driving work. The gallery lives on posthog.com at `/docs/self-driving/from-our-inbox`, and each example on it is one file in `contents/docs/self-driving/from-our-inbox/_examples/`. Your job is to find the best recent reports in this project's inbox that turned into useful work, rewrite them so they are safe and clear for the public, and file one report per example so self-driving opens a pull request that adds it. You never edit posthog.com yourself. A person on the self-driving team reviews every pull request and has the final say.
 
 **Discriminator.** A candidate must pass both halves:
 
-1. **Real outcome.** The report is resolved, its implementation pull request is merged, and that pull request is in a public repository.
+1. **Real outcome.** The report is resolved, and one of these is true:
+   - **Code lane.** Its implementation pull request is merged, and that pull request is in a public repository.
+   - **No-code lane.** It has no implementation pull request, and its resolution note or work log names a concrete change someone made and checked: a scout's instructions published as a new version, a dashboard tile or insight added, an alert added or retuned, a docs page updated. "Looked into it" or "no action needed" is not a change.
 2. **Safe to publish.** The report comes from an allowlisted source, and nothing in it depends on customer data, security detail, or internal scale.
 
-A candidate that passes both is then ranked on how well it shows the loop: a clear finding, evidence a reader can follow, and a concrete fix. Neither half alone is enough. A merged fix for a customer's support ticket is a real outcome but not safe. A tidy report with no merged work is safe but shows nothing.
+A candidate that passes both is then ranked on how well it shows the loop: a clear finding, evidence a reader can follow, and a concrete fix. Neither half alone is enough. A merged fix for a customer's support ticket is a real outcome but not safe. A tidy report that nobody acted on is safe but shows nothing. Not every useful report needs a pull request, so give the no-code lane a fair share of picks.
 
 **Cap: three examples per run. Zero is a good run** when nothing clears the bar.
 
@@ -54,8 +58,10 @@ A candidate that passes both is then ranked on how well it shows the loop: a cle
    - open or draft → the example is in review, skip its source report.
    - closed without merge, or the report was dismissed → a person said no. Record `rejected:from-our-inbox:<source report id>` and never pick that source report again.
    - merged → record `published:from-our-inbox:<source report id>`.
-3. **Candidates.** `inbox-reports-list` with `view=resolved`, `has_implementation_pr=true`, `ordering=-updated_at`, `limit=50`. Keep rows where `implementation_pr_merged` is true and the report was updated since the cursor, or in the last 7 days on a cold start.
-4. **Public repository check.** For each candidate pull request URL `https://github.com/<org>/<repo>/pull/<n>`, run `git ls-remote --heads https://github.com/<org>/<repo> >/dev/null` with no credentials. Success means the repository is public. Failure means it is private or unreachable, so drop the candidate. Cache the verdict as `repo:from-our-inbox:<org>/<repo>` so later runs skip the check.
+3. **Candidates.** Two lists, each with `view=resolved`, `ordering=-updated_at`, and `limit=50`. Keep rows updated since the cursor, or in the last 7 days on a cold start.
+   - Code lane: `has_implementation_pr=true`. Keep rows where `implementation_pr_merged` is true.
+   - No-code lane: `has_implementation_pr=false`. Keep rows whose `dismissal_reason` is `fixed_outside_posthog` or `other` and whose `dismissal_note` names the change. Confirm the change with `inbox-report-artefacts-list` before you pick it.
+4. **Public repository check (code lane).** For each candidate pull request URL `https://github.com/<org>/<repo>/pull/<n>`, run `git ls-remote --heads https://github.com/<org>/<repo> >/dev/null` with no credentials. Success means the repository is public. Failure means it is private or unreachable, so drop the candidate. Cache the verdict as `repo:from-our-inbox:<org>/<repo>` so later runs skip the check.
 
 ## Safety filter (hard rules)
 
@@ -65,7 +71,8 @@ Drop a candidate if any of these is true. Do not weigh them against how good the
 - **Customer-derived.** Any contributing signal from `conversations`, `zendesk`, or another support or sales source. Also any report that names a customer, an organization, a person, or an email address, or is about one customer's account.
 - **Security.** The title, summary, or pull request is about authentication, authorization, permissions, secrets, tokens, injection, a vulnerability, a CVE, an audit finding, or abuse. A merged fix can still point at a class of weakness that other code shares.
 - **Internal-only work.** A pull request in a private repository, an infrastructure or deploy change, a feature flag rollout, or an unreleased feature.
-- **Weak outcome.** The pull request was reverted, the report was dismissed or rated down, or the change is a pure refactor with no effect a reader can see or measure.
+- **Weak outcome.** The pull request was reverted, the report was rated down, the resolution note says only that nothing needed doing, or the change is a pure refactor with no effect a reader can see or measure.
+- **No-code change that only makes sense with internal detail.** The no-code lane has no public anchor, so the example must stand on the change alone. Drop it if describing the change needs a dashboard or insight id, an internal service name a reader cannot recognize, an incident, or production numbers.
 
 When in doubt, drop it and write a `noise:` entry with the reason.
 
@@ -109,11 +116,15 @@ inboxExample:
   reportId: <the source report's id> # the dedupe key, never changes
   publishedAt: <today, YYYY-MM-DD>
   outcome: >-
-    One or two sentences on what the merged work changed and how it got there.
+    One or two sentences on what the work changed and how it got there.
+  # Code lane: set pullRequest. No-code lane: set resolution instead. Never set both.
   pullRequest:
     url: https://github.com/<org>/<repo>/pull/<n>
     title: "<the merged pull request's title>"
     mergedAt: <YYYY-MM-DD>
+  resolution:
+    label: Scout updated # a short label for the change, e.g. Scout updated, Dashboard updated, Alert added
+    resolvedAt: <YYYY-MM-DD>
 ---
 ```
 
@@ -136,11 +147,11 @@ The summary must let the implementing agent open the pull request without readin
    - Request review from `@PostHog/team-self-driving`.
    - Do not start the dev server or take screenshots. The page's layout does not change.
 3. A reviewer checklist to copy into the pull request description:
-   - [ ] The linked pull request is public and merged.
+   - [ ] Code lane: the linked pull request is public and merged. No-code lane: the resolution note names the change, and someone checked it.
    - [ ] No customer, person, or organization is named or can be identified.
    - [ ] No security detail, internal volume, or internal link.
-   - [ ] The example says only what the report and pull request say.
-4. The source report id, the source pull request URL, and one line on why you picked it.
+   - [ ] The example says only what the report, its work log, and the pull request say.
+4. The source report id, the source pull request URL for the code lane, and one line on why you picked it.
 
 After filing, record `filed:from-our-inbox:<source report id>` with your new report's id.
 

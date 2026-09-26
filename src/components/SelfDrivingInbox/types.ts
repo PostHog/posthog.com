@@ -70,7 +70,7 @@ export interface InboxTemplate {
     scout?: ScoutSpec
 }
 
-/** A real report from PostHog's own inbox that ended in merged work, for /docs/self-driving/from-our-inbox. */
+/** A real report from PostHog's own inbox that led to real work, for /docs/self-driving/from-our-inbox. */
 export interface InboxExample {
     /** The inbox report's id. The curator scout dedupes on it, so it never changes once published. */
     reportId: string
@@ -79,11 +79,18 @@ export interface InboxExample {
     /** Product surface, e.g. "Error tracking". */
     category: string
     report: SelfDrivingReport
-    /** One line on what the merged work changed. Markdown. */
+    /** One or two sentences on what the work changed. Markdown. */
     outcome?: string
-    pullRequest: {
+    /** Set when the work was a merged pull request. Exactly one of this and `resolution` is set. */
+    pullRequest?: {
         url: string
         title: string
         mergedAt?: string
+    }
+    /** Set when the work needed no pull request, e.g. a scout that fixed its own instructions. */
+    resolution?: {
+        /** Short label for what changed, e.g. "Scout updated" or "Dashboard updated". */
+        label: string
+        resolvedAt?: string
     }
 }

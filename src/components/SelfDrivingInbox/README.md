@@ -187,8 +187,9 @@ agent reading the mirror can create the scout verbatim instead of translating it
 `FromOurInbox.tsx` is the one browse-all surface, and it is built on real data rather than
 templates. It renders on `/docs/self-driving/from-our-inbox` as a read-only mock of the inbox:
 a list of collapsed reports, each of which opens under its row on click and closes on a second
-click. Collapsed reports stay in the built HTML, so the `.md` mirror and search still see them. Every report came from PostHog's own project and ended in a merged public pull
-request, so the page carries no `receivedAgo` and shows real dates instead.
+click. Collapsed reports stay in the built HTML, so the `.md` mirror and search still see them. Every report came from PostHog's own project and ended in real work: a merged public pull
+request, or a change that needed no code. The page carries no `receivedAgo` and shows real dates
+instead.
 
 Each example is one **frontmatter-only** file:
 
@@ -200,7 +201,8 @@ contents/docs/self-driving/from-our-inbox/
 ```
 
 An example reuses `report` and `category` from the template contract, plus an `inboxExample`
-block (`reportId`, `publishedAt`, `outcome`, `pullRequest { url, title, mergedAt }`). The
+block (`reportId`, `publishedAt`, `outcome`, and exactly one of `pullRequest { url, title, mergedAt }`
+or `resolution { label, resolvedAt }`). The
 `_curator/SKILL.md` has the full file shape. `reportId` is the curator's dedupe key, so never
 change it on a published example.
 

@@ -1,7 +1,7 @@
 import React, { useMemo, useState } from 'react'
 import { graphql, useStaticQuery } from 'gatsby'
 import dayjs from 'dayjs'
-import { IconChevronDown, IconPullRequest } from '@posthog/icons'
+import { IconCheck, IconChevronDown, IconPullRequest } from '@posthog/icons'
 
 import Link from 'components/Link'
 import Markdown from 'components/Markdown'
@@ -38,6 +38,10 @@ export function useInboxExamples(): InboxExample[] {
                                 title
                                 mergedAt
                             }
+                            resolution {
+                                label
+                                resolvedAt
+                            }
                         }
                     }
                 }
@@ -48,7 +52,11 @@ export function useInboxExamples(): InboxExample[] {
     return useMemo(
         () =>
             (data?.examples?.nodes || [])
-                .filter((node: any) => node.frontmatter?.report?.title && node.frontmatter?.inboxExample?.pullRequest)
+                .filter((node: any) => {
+                    const example = node.frontmatter?.inboxExample
+                    // An example must show its outcome: a merged pull request, or work that needed none.
+                    return node.frontmatter?.report?.title && (example?.pullRequest?.url || example?.resolution?.label)
+                })
                 .map(
                     (node: any): InboxExample => ({
                         ...node.frontmatter.inboxExample,
@@ -91,8 +99,17 @@ function Row({ example, open, onToggle }: { example: InboxExample; open: boolean
                 </span>
                 <span className="block text-sm font-bold leading-snug text-primary">{example.report.title}</span>
                 <span className="mt-1.5 inline-flex items-center gap-1 text-xs font-semibold text-green">
-                    <IconPullRequest className="size-3.5" />
-                    Merged
+                    {example.pullRequest ? (
+                        <>
+                            <IconPullRequest className="size-3.5" />
+                            Merged
+                        </>
+                    ) : (
+                        <>
+                            <IconCheck className="size-3.5" />
+                            {example.resolution?.label}
+                        </>
+                    )}
                 </span>
             </span>
             <IconChevronDown
@@ -104,24 +121,49 @@ function Row({ example, open, onToggle }: { example: InboxExample; open: boolean
     )
 }
 
-function Detail({ example }: { example: InboxExample }): JSX.Element {
-    const { pullRequest } = example
+function PullRequestOutcome({ pullRequest }: { pullRequest: NonNullable<InboxExample['pullRequest']> }): JSX.Element {
     const merged = formatDate(pullRequest.mergedAt)
     const number = prNumber(pullRequest.url)
 
+    return (
+        <>
+            <p className="m-0 flex items-start gap-1.5 text-[15px] text-primary">
+                <IconPullRequest className="mt-0.5 size-4 shrink-0 text-green" />
+                <Link to={pullRequest.url} externalNoIcon className="font-semibold">
+                    {pullRequest.title}
+                    {number && <span className="text-secondary"> {number}</span>}
+                </Link>
+            </p>
+            {merged && <p className="m-0 mt-1 pl-[22px] text-sm text-secondary">Merged {merged}</p>}
+        </>
+    )
+}
+
+function ResolutionOutcome({ resolution }: { resolution: NonNullable<InboxExample['resolution']> }): JSX.Element {
+    const resolved = formatDate(resolution.resolvedAt)
+
+    return (
+        <>
+            <p className="m-0 flex items-start gap-1.5 text-[15px] font-semibold text-primary">
+                <IconCheck className="mt-0.5 size-4 shrink-0 text-green" />
+                {resolution.label}, no pull request needed
+            </p>
+            {resolved && <p className="m-0 mt-1 pl-[22px] text-sm text-secondary">Resolved {resolved}</p>}
+        </>
+    )
+}
+
+function Detail({ example }: { example: InboxExample }): JSX.Element {
     return (
         <div className="space-y-4">
             <ReportCard report={example.report} />
             <section className="rounded border border-primary p-4">
                 <h4 className="m-0 mb-2 text-sm font-bold text-primary">What happened next</h4>
-                <p className="m-0 flex items-start gap-1.5 text-[15px] text-primary">
-                    <IconPullRequest className="mt-0.5 size-4 shrink-0 text-green" />
-                    <Link to={pullRequest.url} externalNoIcon className="font-semibold">
-                        {pullRequest.title}
-                        {number && <span className="text-secondary"> {number}</span>}
-                    </Link>
-                </p>
-                {merged && <p className="m-0 mt-1 pl-[22px] text-sm text-secondary">Merged {merged}</p>}
+                {example.pullRequest ? (
+                    <PullRequestOutcome pullRequest={example.pullRequest} />
+                ) : (
+                    example.resolution && <ResolutionOutcome resolution={example.resolution} />
+                )}
                 {example.outcome && (
                     <Markdown className="mt-2 text-[15px] text-primary [&>p]:mb-0">{example.outcome}</Markdown>
                 )}
@@ -154,7 +196,7 @@ export default function FromOurInbox(): JSX.Element | null {
                 <p className="m-0 text-sm font-bold text-primary">Inbox</p>
                 <span className="text-sm text-secondary">
                     PostHog's own project · {examples.length} {examples.length === 1 ? 'report' : 'reports'}, every one
-                    merged
+                    acted on
                 </span>
             </header>
 

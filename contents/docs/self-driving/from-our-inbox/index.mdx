@@ -13,15 +13,17 @@ Self-driving is in open beta. It's improving quickly – expect rough edges, and
 
 </CalloutBox>
 
-We run self-driving on PostHog itself. This page is a feed of real [reports](/docs/self-driving/reports) from our own inbox that turned into merged work. Nothing here is a mockup: each report was found by a [scout](/docs/self-driving/scouts) or a [signal source](/docs/self-driving/inbox/sources), and each links to the public pull request that fixed it.
+We run self-driving on PostHog itself. This page is a feed of real [reports](/docs/self-driving/reports) from our own inbox that turned into useful work. Nothing here is a mockup: each report was found by a [scout](/docs/self-driving/scouts) or a [signal source](/docs/self-driving/inbox/sources).
+
+Not every useful report ends in code. Some end in a merged pull request, and we link to it. Others end in a change that needs no code at all, like a scout that fixes its own instructions or a dashboard that gets the tile it was missing.
 
 <FromOurInbox />
 
 ## How this page stays up to date
 
-A scout keeps this page up to date too. Once a day, it picks one to three recent reports from our inbox that ended in a merged pull request, and rewrites each one for a public audience. It then files a report that asks for the example to be added here. Self-driving opens the pull request against this website, and a person on the team reviews it and decides whether to publish it.
+A scout keeps this page up to date too. Once a day, it picks one to three recent reports from our inbox that ended in useful work, and rewrites each one for a public audience. It then files a report that asks for the example to be added here. Self-driving opens the pull request against this website, and a person on the team reviews it and decides whether to publish it.
 
-The scout only picks reports whose fix is already public. It skips anything from customer conversations, billing, or security work, and it leaves out customer names, internal volumes, and links into our project. You can [read the scout's instructions](https://github.com/PostHog/posthog.com/blob/master/contents/docs/self-driving/from-our-inbox/_curator/SKILL.md) on GitHub.
+A code fix must already be public in a merged pull request. Work that needed no code must be something we can describe without internal detail. The scout skips anything from customer conversations, billing, or security work, and it leaves out customer names, internal volumes, and links into our project. You can [read the scout's instructions](https://github.com/PostHog/posthog.com/blob/master/contents/docs/self-driving/from-our-inbox/_curator/SKILL.md) on GitHub.
 
 ## Try it on your own product
 

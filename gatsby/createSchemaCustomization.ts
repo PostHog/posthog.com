@@ -89,11 +89,17 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
       title: String
       mergedAt: Date @dateformat
     }
+    # Work that needed no pull request, e.g. a scout that fixed its own instructions.
+    type FrontmatterInboxExampleResolution {
+      label: String
+      resolvedAt: Date @dateformat
+    }
     type FrontmatterInboxExample {
       reportId: String
       publishedAt: Date @dateformat
       outcome: String
       pullRequest: FrontmatterInboxExamplePullRequest
+      resolution: FrontmatterInboxExampleResolution
     }
     type FrontmatterWatches {
       name: String
