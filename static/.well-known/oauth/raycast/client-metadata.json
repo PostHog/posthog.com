@@ -1,5 +1,5 @@
 {
-    "client_id": "https://posthog.com/oauth/raycast/client-metadata.json",
+    "client_id": "https://posthog.com/.well-known/oauth/raycast/client-metadata.json",
     "client_name": "Raycast extension for PostHog",
     "redirect_uris": [
         "https://raycast.com/redirect?packageName=Extension",

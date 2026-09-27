@@ -1,5 +1,5 @@
 {
-    "client_id": "https://posthog.com/oauth/visual-review/client-metadata.json",
+    "client_id": "https://posthog.com/.well-known/oauth/visual-review/client-metadata.json",
     "client_name": "PostHog Visual Review for GitHub",
     "client_uri": "https://github.com/PostHog/visual-review-extension",
     "redirect_uris": ["https://coegljbgaffjilmoampifafjigkdmjaf.chromiumapp.org/"],

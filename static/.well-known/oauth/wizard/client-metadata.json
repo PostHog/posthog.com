@@ -1,5 +1,5 @@
 {
-    "client_id": "https://posthog.com/oauth/wizard/client-metadata.json",
+    "client_id": "https://posthog.com/.well-known/oauth/wizard/client-metadata.json",
     "client_name": "PostHog Wizard",
     "redirect_uris": ["http://localhost:8239/callback"],
     "grant_types": ["authorization_code"],

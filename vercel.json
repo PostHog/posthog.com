@@ -61,7 +61,7 @@
             ]
         },
         {
-            "source": "/oauth/:path*",
+            "source": "/.well-known/oauth/:path*",
             "headers": [
                 {
                     "key": "Content-Type",
