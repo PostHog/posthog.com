@@ -1,0 +1,14 @@
+{
+    "client_id": "https://posthog.com/oauth/raycast/client-metadata.json",
+    "client_name": "Raycast extension for PostHog",
+    "redirect_uris": [
+        "https://raycast.com/redirect?packageName=Extension",
+        "https://raycast.com/redirect?packageName=posthog"
+    ],
+    "grant_types": ["authorization_code"],
+    "response_types": ["code"],
+    "token_endpoint_auth_method": "none",
+    "com.posthog": {
+        "scopes": ["project:read", "feature_flag:read", "cohort:read", "dashboard:read", "person:read"]
+    }
+}
