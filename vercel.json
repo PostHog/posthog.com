@@ -61,7 +61,7 @@
             ]
         },
         {
-            "source": "/.well-known/oauth/:path*",
+            "source": "/.well-known/oauth/:app/client-metadata.json",
             "headers": [
                 {
                     "key": "Content-Type",
