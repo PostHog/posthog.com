@@ -61,7 +61,7 @@
             ]
         },
         {
-            "source": "/.well-known/oauth/:path*",
+            "source": "/.well-known/oauth/:app/client-metadata.json",
             "headers": [
                 {
                     "key": "Content-Type",
@@ -70,6 +70,15 @@
                 {
                     "key": "Cache-Control",
                     "value": "public, max-age=3600"
+                }
+            ]
+        },
+        {
+            "source": "/.well-known/oauth/:app/logo.png",
+            "headers": [
+                {
+                    "key": "Cache-Control",
+                    "value": "public, max-age=86400"
                 }
             ]
         },

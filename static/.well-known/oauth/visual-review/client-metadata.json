@@ -2,6 +2,7 @@
     "client_id": "https://posthog.com/.well-known/oauth/visual-review/client-metadata.json",
     "client_name": "PostHog Visual Review for GitHub",
     "client_uri": "https://github.com/PostHog/visual-review-extension",
+    "logo_uri": "https://posthog.com/.well-known/oauth/visual-review/logo.png",
     "redirect_uris": ["https://coegljbgaffjilmoampifafjigkdmjaf.chromiumapp.org/"],
     "grant_types": ["authorization_code", "refresh_token"],
     "response_types": ["code"],
