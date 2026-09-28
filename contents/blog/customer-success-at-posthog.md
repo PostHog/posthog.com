@@ -17,7 +17,7 @@ seo:
 
 Despite their name, customer success managers at many SaaS companies don’t actually help their customers succeed. They send quarterly business reviews nobody reads, gatekeep engineering access, forward support tickets and call it "advocacy," have titles like "Strategic Customer Success Partner," and LinkedIn bios that say "passionate about driving outcomes."
 
-Besides doing none of these things at PostHog, customer success managers (and technical account managers) also crochet hedgehogs, hand-deliver donuts to customers around the world, build customer and PostHog emoji mashups, and ship product PRs to fix complaints themselves.
+Besides doing none of these things at PostHog, customer success managers (and [technical account managers](/blog/technical-account-manager)) also crochet hedgehogs, hand-deliver donuts to customers around the world, build customer and PostHog emoji mashups, and ship product PRs to fix complaints themselves.
 
 We believe being genuine and being effective aren’t at odds, and our workdays reflect that. Here’s what a day in the life of a PostHog customer success manager (CSM) – and our technical account managers (TAMs) – actually looks like:
 

@@ -1459,10 +1459,6 @@ export const handbookSidebar = [
                         name: 'Getting people to talk to you',
                         url: '/handbook/growth/sales/getting-people-to-talk-to-you',
                     },
-                    {
-                        name: 'Customer on-sites',
-                        url: '/handbook/growth/sales/customer-onsites',
-                    },
                 ],
             },
             {
@@ -1506,6 +1502,10 @@ export const handbookSidebar = [
                     {
                         name: 'Unengaged customers',
                         url: '/handbook/cs-and-onboarding/engaging-unengaged-customers',
+                    },
+                    {
+                        name: 'Cost optimization',
+                        url: '/handbook/cs-and-onboarding/cost-optimization',
                     },
                     {
                         name: 'Automation & AI',
@@ -1863,6 +1863,20 @@ export const handbookSidebar = [
                     {
                         name: 'Overview',
                         url: '/teams/gtm-engineering',
+                    },
+                ],
+            },
+            {
+                name: 'Working with customers in person',
+                url: '',
+                children: [
+                    {
+                        name: 'Customer on-sites',
+                        url: '/handbook/growth/sales/customer-onsites',
+                    },
+                    {
+                        name: 'Cohort dinners',
+                        url: '/handbook/cs-and-onboarding/cohort-dinners',
                     },
                 ],
             },
@@ -2731,6 +2745,10 @@ export const docsMenu = {
                         title: 'New',
                         className: 'uppercase !bg-orange/10 !text-orange !dark:text-white !dark:bg-orange/50',
                     },
+                },
+                {
+                    name: 'From our inbox',
+                    url: '/docs/self-driving/from-our-inbox',
                 },
                 {
                     name: 'Pricing',
@@ -5148,6 +5166,12 @@ export const docsMenu = {
                     color: 'yellow',
                 },
                 {
+                    name: 'Scanner prompts',
+                    url: '/docs/replay-vision/scanner-prompts',
+                    icon: 'IconLlmPromptEvaluation',
+                    color: 'yellow',
+                },
+                {
                     name: 'Running scanners',
                     url: '/docs/replay-vision/running-scanners',
                     icon: 'IconPlay',
@@ -6061,6 +6085,31 @@ export const docsMenu = {
                         {
                             name: 'GitHub Action',
                             url: '/docs/error-tracking/upload-source-maps/github-actions',
+                        },
+                    ],
+                },
+                {
+                    name: 'Link releases',
+                    url: '/docs/error-tracking/link-releases',
+                    icon: 'IconGitBranch',
+                    color: 'purple',
+                    featured: true,
+                    children: [
+                        {
+                            name: 'Overview',
+                            url: '/docs/error-tracking/link-releases',
+                        },
+                        {
+                            name: 'Python',
+                            url: '/docs/error-tracking/link-releases/python',
+                        },
+                        {
+                            name: 'Ruby',
+                            url: '/docs/error-tracking/link-releases/ruby',
+                        },
+                        {
+                            name: 'PHP',
+                            url: '/docs/error-tracking/link-releases/php',
                         },
                     ],
                 },
@@ -8112,6 +8161,10 @@ export const docsMenu = {
                         {
                             name: 'Create emails with PostHog AI',
                             url: '/docs/workflows/create-emails-ai',
+                        },
+                        {
+                            name: 'Run AI tasks from a workflow',
+                            url: '/docs/workflows/ai-tasks',
                         },
                     ],
                 },
