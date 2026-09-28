@@ -35,7 +35,7 @@ Products have gotten broader and more technical. Seemingly [everyone is an engin
 
 - Hosting on Vercel requires a knowledge of the infrastructure services they offer and rewriting your codebase to fit within them.
 
-- Installing PostHog might mean integrating feature flags into page render logic and writing SQL queries across multiple sources using complex joins.
+- Installing PostHog might mean integrating [feature flags](/feature-flags) into page render logic and writing SQL queries across multiple sources using complex joins.
 
 Engineers are skeptical of how much "non-technical" people can help with all this. TAMs must add technical value or engineers will tune them out.
 
@@ -51,13 +51,13 @@ Beyond cutting bills, TAMs spend their days interacting with customers (mostly e
 
 - Planning usage of a product such as how much to provision, best practices around implementation and usage as well as how to integrate with their existing app. 
 
-- Fixing broken implementations like making requests to change data regardless of whether it actually changed or collecting data that's not being used.
+- Fixing broken implementations like making requests to change data regardless of whether it actually changed or [collecting data that's not being used](/docs/product-analytics/cutting-costs).
 
 - [Optimizing spend](/handbook/growth/sales/expansion-and-retention) like making sure customers are actually using what they pay for and only pay for features that bring them value. TAMs at PostHog often find companies capturing tens of thousands of events they never actually use. 
 
 - Handling bug and feature requests either by routing them to the right teams internally or by [writing fixes themselves](/blog/customer-success-at-posthog). 
 
-- Migrating and integrating with other tools in the customer's existing stack, answering questions about differences and constraints. For example, a team moving from LaunchDarkly to PostHog would need to know PostHog flags live in a single project rather than across environments and that release conditions replace rules.
+- Migrating and integrating with other tools in the customer's existing stack, answering questions about differences and constraints. For example, a team moving from [LaunchDarkly to PostHog](/docs/migrate/launchdarkly) would need to know PostHog flags live in a single project rather than across environments and that release conditions replace rules.
 
 - Expanding both the products customers are using and the users using them. New product launches at PostHog like [Replay Vision](/replay-vision) often lead to new conversations about how they can be valuable. TAMs often also run [training sessions](/handbook/growth/sales/customer-training) for the customer's teams with the goal of expanding who uses it.  
 
@@ -85,7 +85,7 @@ As you might guess, PostHog is not most companies. Technical account managers he
 
 You can think of TAMs at PostHog as salespeople. They: 
 
-- Interact with customers to sell PostHog. They understand our ideal customer profile, what matters to them, and how what we offer can provide value.
+- Interact with customers to sell PostHog. They understand our [ideal customer profile](/newsletter/ideal-customer-profile-framework), what matters to them, and how what we offer can provide value.
 
 - Own and maintain the customer relationship. Literally "manage the account." This means being the primary point of contact for sales conversations, issues that arise, and new features that release.
 
@@ -115,7 +115,7 @@ As for more character traits, a good way to summarize is that great TAMs are [lo
 
 Because TAMs are special at PostHog, we also have special requirements for them. Generally, we look for two types of people:
 
-- Account executives who have owned longer term customer relationships and are technical enough to hold their own. They won't be bringing engineers to their demos for example. We look for salespeople who have built their own vibe coded tools and side projects.
+- Account executives who have owned longer term customer relationships and are technical enough to hold their own. They won't be bringing engineers to their demos for example. We look for salespeople who have built their own [vibe coded tools](/blog/best-analytics-stack-for-vibe-coded-apps) and side projects.
 - Sales engineers or product specialists who are tired of letting the sales team get all the credit. Some of our TAMs are literally ex-[product engineers](/product-engineer/what-is-a-product-engineer).
 
 We then empower these people to really make our customers successful, even if that means smaller renewals. We count our anti-revenue wins as wins too. 
