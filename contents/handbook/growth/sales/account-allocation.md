@@ -56,10 +56,7 @@ Customer Analytics is the source of truth for account ownership. Billing and Sal
 
 ### Assigned is not the same as owned
 
-You own an account only when these two conditions are true:
-
-1. **A person assigned you to the account in Customer Analytics.** For TAMs, you must assign yourself. An automated assignment does not make you the owner.
-2. **The account has the correct managed tag in Customer Analytics.** TAMs need `AM Managed`. TAEs need `AE Managed`.
+**You are assigned to the account in Customer Analytics under the correct field and relevant tags are applied.** . 
 
 Only accounts that you own count toward your quota and commission.
 
@@ -67,19 +64,19 @@ Only accounts that you own count toward your quota and commission.
 
 The Salesforce round robin and the [lead-gateway](https://github.com/PostHog/lead-gateway) assign accounts automatically (see [task assignment logic](/handbook/growth/sales/crm#task-assignment-logic)). This assignment also shows in Customer Analytics, but it makes you a temporary owner only. If you disqualify the task or unassign yourself in Salesforce, Customer Analytics removes you from the account.
 
-A human assignment in Customer Analytics stays. If a person assigned you in Customer Analytics and you unassign yourself in Salesforce, Customer Analytics makes you the owner again in approximately 5 minutes. To come off the account, unassign yourself in Customer Analytics.
+A human assignment in Customer Analytics stays. If a person assigned you in Customer Analytics and you unassign yourself in Salesforce, Customer Analytics makes you the owner again in approximately 5 minutes. To come off the account, unassign yourself in Customer Analytics and remove any relevant tags.
 
 Do not change the owner in Salesforce. For an account that Customer Analytics controls, Customer Analytics writes over the Salesforce owner. An account without a PostHog organization is not in Customer Analytics, so you can manage it in Salesforce. If the account gets a PostHog organization later, the Salesforce owner becomes the owner in Customer Analytics.
 
 ### Technical Account Managers
 
-- Assign yourself as the TAM on the account in Customer Analytics.
-- The account must have the `AM Managed` tag to count toward your quota. Do not add this tag yourself. Simon or Ben adds it after a review with you and your team lead. See the [TAM book of business rules](/handbook/growth/sales/how-we-work#tam-book-of-business-rules).
+- Team Leads will assign you as the TAM on the account in Customer Analytics and add the 'AM Managed' tag. 
+- The account must have the `AM Managed` tag to count toward your quota. Do not add or tag yourself. See the [TAM book of business rules](/handbook/growth/sales/how-we-work#tam-book-of-business-rules).
 
 ### Technical Account Executives
 
 - Your TAE assignment comes from Salesforce automatically. The `AE Managed` tag does not.
-- Add the `AE Managed` tag in Customer Analytics yourself. Without it, the account does not count toward your quota.
+- Add the `AE Managed` tag in Customer Analytics yourself, with approval from your team lead. Without it, the account does not count toward your quota.
 
 ### Ownership history
 
