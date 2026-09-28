@@ -30,7 +30,7 @@ A rollout asks whether a change is safe. An <Term name="experiment">experiment</
 
 ## You already have the pieces
 
-An experiment needs a multivariate flag with at least two variants, one of them named `control`. Use an existing flag that has those, with `control` as its first variant, or let the experiment create one. A person counts as exposed when a `$feature_flag_called` event comes in, and your checks already send it.
+An experiment needs a multivariate flag with at least two variants, one of them named `control`. Use an existing flag that has those, with `control` as its first variant, or let the experiment create one. A person counts as exposed when a `$feature_flag_called` event comes in, and your checks already send it. Only exposed people count in the results, and anything they did before exposure is ignored.
 
 ## The 101 rules matter more here
 

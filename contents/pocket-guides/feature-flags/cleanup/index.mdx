@@ -58,13 +58,13 @@ PostHog calls a flag stale when nothing has checked it in 30 days, or when it ha
 
 ## Give every flag an owner
 
-Most flag debt comes from flags nobody owns. When you create a flag, give it an owner, a name that says what it's for, and a plan for removing it, written on day one rather than six months later.
+Most flag debt comes from flags nobody owns. When you create a flag, give it an owner, a name that says what it's for, and a plan for removing it. Do it on day one, not six months later.
 
 ## Code first, then the flag
 
-Remove the checks from your code, deploy, and only then disable the flag. In the other order, every leftover check returns `false` and the feature vanishes for everyone. At 100%, keep the enabled path. At 0%, keep the fallback. Anything in between needs a person to decide <SeeFig n={1} />.
+Remove the checks from your code, deploy, and only then disable the flag. For a flag at 100%, the deploy keeps the enabled path, so nobody loses the feature, and disabling the flag afterwards changes nothing. In the other order, every leftover check returns `false` and the feature vanishes for everyone. At 100%, keep the enabled path. At 0%, keep the fallback. Anything in between needs a person to decide <SeeFig n={1} />.
 
-Your two example flags go first. Delete their call sites and the constants the wizard added, deploy, then delete both flags: 0% to gone, the full life of a flag.
+Your two example flags go first. Delete their call sites and the constants the wizard added, deploy, then delete both flags.
 
 ## Let a scout do it
 

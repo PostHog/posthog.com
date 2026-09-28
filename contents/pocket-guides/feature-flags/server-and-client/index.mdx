@@ -26,7 +26,7 @@ section: Instrument
 
 # Server and client
 
-The wizard made one flag for your backend and one for your frontend, even though a single flag could have covered both. Two is the safer number, and this page explains why and how to keep both sides agreeing about who a person is <SeeFig n={1} />.
+The wizard made one flag for your backend and one for your frontend, not one flag for both. That's the recommended pattern, not a platform limit: each side gates its own code with its own flag. This page explains why, and how to keep both sides agreeing about who a person is <SeeFig n={1} />.
 
 ## One flag, one side
 
@@ -34,7 +34,7 @@ A flag checked on the server and again in the browser gets two chances to disagr
 
 ## On the server, evaluate locally
 
-With <Term name="local evaluation">local evaluation</Term>, the server SDK downloads your flag definitions every 30 seconds (every 5 minutes in Go) and evaluates them in-process, so a check makes no network request. The definitions fetch bills as 10 flag requests however many checks you run, which makes local evaluation cheaper as well as faster.
+With <Term name="local evaluation">local evaluation</Term>, the server SDK downloads your flag definitions every 30 seconds (every 5 minutes in Go) and evaluates them in-process, so a check makes no network request. Each definitions fetch counts as 10 flag requests, however many local checks your server makes, so local evaluation is cheaper as well as faster.
 
 The trade is that you pass in the properties your conditions use, like the person's plan, and on the server you usually have those already. Local evaluation also needs the feature flags secure API key, which stays on the server. Never ship it to a browser or a mobile app.
 
@@ -48,7 +48,7 @@ The hash uses the distinct ID, so if your server checks with `user.id` while the
 
 If the server already knows the answer, send it with the page. <Term name="bootstrapping">Bootstrapping</Term> passes those values into `posthog.init` under `bootstrap.featureFlags`, so the browser has them before the first render and never flashes the old version. The web, React Native, iOS, Android, and Flutter SDKs all support it.
 
-Two catches. Bootstrapping seeds only flags that are on, because false and empty values get dropped, and the first full `/flags` response replaces everything you bootstrapped.
+Two catches. Bootstrapping seeds only flags that are on, so a flag your server evaluated as off never arrives: the browser reads it as `undefined`, not `false`, and your default in code decides what renders. And the first full `/flags` response replaces everything you bootstrapped.
 
 ## Take this skill with you
 
