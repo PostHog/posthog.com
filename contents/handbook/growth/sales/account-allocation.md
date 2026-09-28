@@ -56,9 +56,9 @@ Customer Analytics is the source of truth for account ownership. Billing and Sal
 
 ### Assigned is not the same as owned
 
-**You are assigned to the account in Customer Analytics under the correct field and relevant tags are applied.** . 
+**You are considered assigned to the account in Customer Analytics when you are assigned to the correct field (account executive, csm, etc)  and relevant tags are applied to the account.** 
 
-Only accounts that you own count toward your quota and commission.
+Only accounts assigned to you count toward quota and commission.
 
 ### Automated assignments are temporary
 
