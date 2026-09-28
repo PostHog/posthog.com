@@ -51,7 +51,7 @@ Instead, you should build something end to end that solves a real problem you ha
 
 What’s important about what you build is that when you’re using something regularly, it will definitely break. And when it does, you have to work out why, and that's when the real learning happens. My troubleshooting was Claude + curiosity + slowly learning where to look when things went wrong. It helped that I was already digging around in the browser console with customers day to day, so I had a feel for where things tend to break.
 
-## 5. Become a jack of all trades, not a master
+## 4. Become a jack of all trades, not a master
 
 People assume technical CSM means you need to be a data whiz, have hand-coded an app in React, and understand distributed systems. You don't.
 
