@@ -1738,39 +1738,16 @@ export default function ProfilePage({ params }: PageProps) {
                                     <ModeratorFields setFieldValue={setFieldValue} values={values} errors={errors} />
                                 </Block>
                             )}
-                            {(isCurrentUser || isModerator) && (
+                            {(isCurrentUser || isModerator) && !isEditing && (
                                 <div className="flex gap-2 mt-4">
-                                    {isEditing ? (
-                                        <>
-                                            <OSButton
-                                                size="md"
-                                                variant="secondary"
-                                                onClick={() => {
-                                                    setIsEditing(false)
-                                                    resetForm()
-                                                }}
-                                            >
-                                                Cancel
-                                            </OSButton>
-                                            <OSButton
-                                                size="md"
-                                                variant="primary"
-                                                onClick={submitForm}
-                                                disabled={isSubmitting}
-                                            >
-                                                {isSubmitting ? 'Saving...' : 'Save'}
-                                            </OSButton>
-                                        </>
-                                    ) : (
-                                        <OSButton
-                                            size="md"
-                                            variant="secondary"
-                                            width="full"
-                                            onClick={() => setIsEditing(true)}
-                                        >
-                                            Edit profile
-                                        </OSButton>
-                                    )}
+                                    <OSButton
+                                        size="md"
+                                        variant="secondary"
+                                        width="full"
+                                        onClick={() => setIsEditing(true)}
+                                    >
+                                        Edit profile
+                                    </OSButton>
                                 </div>
                             )}
                         </div>
@@ -1850,6 +1827,23 @@ export default function ProfilePage({ params }: PageProps) {
                 <HeaderBar
                     rightActionButtons={
                         <>
+                            {(isCurrentUser || isModerator) && isEditing && (
+                                <div className="flex gap-2 mr-2">
+                                    <OSButton
+                                        size="md"
+                                        variant="secondary"
+                                        onClick={() => {
+                                            setIsEditing(false)
+                                            resetForm()
+                                        }}
+                                    >
+                                        Cancel
+                                    </OSButton>
+                                    <OSButton size="md" variant="primary" onClick={submitForm} disabled={isSubmitting}>
+                                        {isSubmitting ? 'Saving...' : 'Save'}
+                                    </OSButton>
+                                </div>
+                            )}
                             {isModerator && (
                                 <div className="flex gap-px">
                                     <Popover
