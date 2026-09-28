@@ -50,6 +50,49 @@ Accounts below $20k don't get a CSM or TAM. The [coverage map](/handbook/growth/
 
 ---
 
+## Account ownership in Customer Analytics
+
+Customer Analytics is the source of truth for account ownership. Billing and Salesforce get owner changes from Customer Analytics. The sync goes in one direction only: Customer Analytics to billing to Salesforce. A change shows in Salesforce in 5-10 minutes.
+
+### Assigned is not the same as owned
+
+You own an account only when these two conditions are true:
+
+1. **A person assigned you to the account in Customer Analytics.** For TAMs, you must assign yourself. An automated assignment does not make you the owner.
+2. **The account has the correct managed tag in Customer Analytics.** TAMs need `AM Managed`. TAEs need `AE Managed`.
+
+Only accounts that you own count toward your quota and commission.
+
+### Automated assignments are temporary
+
+The Salesforce round robin and the [lead-gateway](https://github.com/PostHog/lead-gateway) assign accounts automatically (see [task assignment logic](/handbook/growth/sales/crm#task-assignment-logic)). This assignment also shows in Customer Analytics, but it makes you a temporary owner only. If you disqualify the task or unassign yourself in Salesforce, Customer Analytics removes you from the account.
+
+A human assignment in Customer Analytics stays. If a person assigned you in Customer Analytics and you unassign yourself in Salesforce, Customer Analytics makes you the owner again in approximately 5 minutes. To come off the account, unassign yourself in Customer Analytics.
+
+Do not change the owner in Salesforce. For an account that Customer Analytics controls, Customer Analytics writes over the Salesforce owner. An account without a PostHog organization is not in Customer Analytics, so you can manage it in Salesforce. If the account gets a PostHog organization later, the Salesforce owner becomes the owner in Customer Analytics.
+
+### Technical Account Managers
+
+- Assign yourself as the TAM on the account in Customer Analytics.
+- The account must have the `AM Managed` tag to count toward your quota. Do not add this tag yourself. Simon or Ben adds it after a review with you and your team lead. See the [TAM book of business rules](/handbook/growth/sales/how-we-work#tam-book-of-business-rules).
+
+### Technical Account Executives
+
+- Your TAE assignment comes from Salesforce automatically. The `AE Managed` tag does not.
+- Add the `AE Managed` tag in Customer Analytics yourself. Without it, the account does not count toward your quota.
+
+### Ownership history
+
+The `system.account_relationships` table keeps the history of all account relationships. Each row is one person in one role on one account:
+
+- `started_at` is the date the relationship started.
+- `ended_at` is the date the relationship stopped. It is empty while the relationship is active.
+- `definition_id` joins to `system.account_relationship_definitions` for the role name. `account_id` joins to `system.accounts`.
+
+Use this table to find who owned an account at a given date.
+
+---
+
 ## TAM book balance
 
 TAM book size is set by ARR under management. Account count follows from that. This mirrors how [CSM books](/handbook/cs-and-onboarding/how-we-work) are balanced, by shape as well as total.
