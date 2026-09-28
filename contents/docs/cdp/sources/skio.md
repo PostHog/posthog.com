@@ -7,6 +7,7 @@ availability:
   selfServe: full
   enterprise: full
 sourceId: Skio
+beta: true
 ---
 
 import SourceSetupIntro from "../_snippets/source-setup-intro.mdx"
@@ -16,29 +17,27 @@ import AlphaRelease from "../_snippets/alpha-release.mdx"
 
 <AlphaRelease />
 
-The Skio connector syncs subscriptions, subscription lines, orders, and more into the PostHog data warehouse, so you can analyze them alongside your product data.
+The Skio connector syncs your Shopify subscription data into PostHog: subscriptions, subscription lines, orders, customers, products, and more. Use it to analyze subscription revenue and churn alongside your product data.
+
+Skio's data model mirrors Shopify's GraphQL objects: a Skio subscription is a Shopify `SubscriptionContract`, a Skio customer is a Shopify `Customer`, and each record's `platformId` column holds the Shopify GID (for example `gid://shopify/SubscriptionContract/123`), so you can join synced tables against Shopify data.
 
 ## Prerequisites
 
-Credentials that can read the data you want to sync. PostHog only reads data, so read access is enough.
+You need a Skio account and an API token. In your [Skio dashboard](https://dashboard.skio.com), click **API** in the left navigation bar, set a name for the token, and generate it.
 
 ## Adding a data source
 
 <SourceSetupIntro />
 
-Enter your Skio API token to pull your Skio subscription data.
+When linking Skio, you'll need:
 
-You can generate an API token in your Skio dashboard: click **API** in the left navigation bar, set a name, and generate the token.
-
-You'll be asked for:
-
-- **API token**
+- **API token**: the token you generated under **API** in your Skio dashboard.
 
 ## Sync modes
 
 <SyncModes />
 
-Some Skio tables sync incrementally, so later runs only fetch new or updated rows. The rest are full refresh.
+All Skio tables support incremental sync on `updatedAt` (recommended) or `createdAt`.
 
 ## Configuration
 
@@ -50,7 +49,6 @@ Some Skio tables sync incrementally, so later runs only fetch new or updated row
 
 ## Troubleshooting
 
-- If the connection fails with an authorization error, the API token is wrong, expired, or has been revoked. Create a new one, then reconnect the source.
-- If a table syncs no rows, the credential may not have access to that data. Check its permissions, then reconnect the source.
+If syncs fail with `Invalid response from authorization hook`, the API token is invalid or has been revoked. Generate a new token under **API** in your Skio dashboard and update the source credentials.
 
 <TroubleshootingLink />
