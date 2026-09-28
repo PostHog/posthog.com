@@ -601,13 +601,13 @@ export default function Tabbed({ defaultProducts = DEFAULT_PRODUCT_TYPES }: Tabb
         // Keyboard is covered separately: slider handles move on arrow keys without firing either
         // of the other two.
         <div
-            className="@container w-full min-w-0 flex-1"
+            className="@container w-full flex-1"
             onClickCapture={trackInteraction('click')}
             onChangeCapture={trackInteraction('change')}
             onKeyDownCapture={trackInteraction('keyboard')}
         >
             <div className="grid grid-cols-12 mb-1">
-                <div className="col-span-12 min-w-0 @3xl:col-span-4 @3xl:pr-6 mb-4 @3xl:mb-0">
+                <div className="col-span-12 @2xl:col-span-4 @3xl:pr-6 mb-4 @3xl:mb-0">
                     <div className="mb-2">
                         <p className="m-0 text-sm flex gap-1 items-baseline">
                             <strong>Your estimate</strong>{' '}
@@ -616,7 +616,7 @@ export default function Tabbed({ defaultProducts = DEFAULT_PRODUCT_TYPES }: Tabb
                             </span>
                         </p>
                     </div>
-                    <ul className="list-none m-0 p-0 flex flex-row @3xl:flex-col gap-px overflow-x-auto">
+                    <ul className="list-none m-0 p-0 flex flex-row @3xl:flex-col gap-px overflow-x-auto @md:w-auto -mx-4 px-4 @md:px-0 @md:mx-0">
                         {selectedProducts.map(
                             ({
                                 name,
@@ -637,7 +637,7 @@ export default function Tabbed({ defaultProducts = DEFAULT_PRODUCT_TYPES }: Tabb
                                         <button
                                             type="button"
                                             onClick={() => setActiveType(type)}
-                                            className={`p-2 rounded-md font-semibold text-sm flex flex-col @3xl:flex-row gap-2 whitespace-nowrap items-start @3xl:items-center justify-between w-full click ${
+                                            className={`p-2 rounded-md font-semibold text-sm flex flex-col @3xl:flex-row space-x-2 whitespace-nowrap items-start @3xl:items-center justify-between w-full click ${
                                                 active ? 'font-bold bg-accent' : 'hover:bg-accent'
                                             }`}
                                         >
@@ -787,7 +787,7 @@ export default function Tabbed({ defaultProducts = DEFAULT_PRODUCT_TYPES }: Tabb
                         </button>
                     </div>
                 </div>
-                <div className="col-span-12 min-w-0 @3xl:col-span-8 flex flex-col">
+                <div className="col-span-12 @2xl:col-span-8 @3xl:pl-0 flex flex-col">
                     {selectedProducts.length === 0 && !platformPackagesActive && (
                         <EmptyEstimate products={products} onAdd={addProduct} />
                     )}
