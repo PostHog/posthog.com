@@ -4,12 +4,9 @@ title: Installing the MCP Analytics SDK
 
 import CalloutBox from 'components/Docs/CalloutBox'
 import WizardCommand from 'components/WizardCommand'
+import MCPAnalyticsBeta from './_snippets/beta.mdx'
 
-<CalloutBox icon="IconFlask" title="Beta SDK" type="fyi">
-
-`@posthog/mcp` is in beta (pre-1.0). Minor `0.x` releases may contain breaking API changes until `v1`. Pin a version during the beta.
-
-</CalloutBox>
+<MCPAnalyticsBeta />
 
 ## Requirements
 
@@ -346,11 +343,9 @@ posthog.shutdown()        # flush + stop the posthog client
 
 For a custom dispatcher, use `PostHogMCP`, a `posthog` client subclass that does not require an MCP server object. Call its capture methods to create events. Use `prepare_tool_list()` and `prepare_tool_call()` for intent capture. It uses the same events, redaction, and truncation as `instrument()`. See the [custom dispatcher example](/docs/mcp-analytics/custom-servers#python).
 
-<CalloutBox icon="IconInfo" title="Python SDK is beta" type="fyi">
+<CalloutBox icon="IconInfo" title="Python SDK coverage" type="fyi">
 
-Python MCP Analytics is in beta, so its API may change. See the [event reference](/docs/mcp-analytics/events) for SDK coverage.
-
-It supports both official `mcp` majors and the `2026-07-28` protocol revision. See [MCP SDK v2](/docs/mcp-analytics/sdk-v2) for what that revision changes.
+Python MCP Analytics supports both official `mcp` majors and the `2026-07-28` protocol revision. See [MCP SDK v2](/docs/mcp-analytics/sdk-v2) for what that revision changes, and the [event reference](/docs/mcp-analytics/events) for SDK coverage.
 
 </CalloutBox>
 
