@@ -14,7 +14,7 @@ const photos: Record<Stay['setting'], string> = { Forest: cabin, Coast: coast, C
 export default function TwigBrowseFigure({
     onFilter,
     onOpen,
-    initialSetting = 'Coast',
+    initialSetting = 'All',
     controlledSetting,
     id,
 }: {

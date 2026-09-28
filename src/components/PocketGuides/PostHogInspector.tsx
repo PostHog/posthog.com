@@ -51,12 +51,12 @@ function ElementTree({ value }: { value: string }): JSX.Element {
     const match = value.match(/^<(\w+)\s+([^=]+)="([^"]+)">([^<]+)<\/(\w+)>$/)
 
     return (
-        <div className="min-w-0 py-2 font-code text-xs leading-6">
+        <div className="min-w-0 overflow-x-auto py-2 font-code text-xs leading-6">
             <div className="flex min-w-0 border-l-[3px] border-orange bg-[#fff0dc] px-3 text-[#292724]">
                 <span aria-hidden="true" className="mr-4 select-none text-[#878177]">
                     1
                 </span>
-                <samp className="min-w-0 whitespace-pre-wrap break-all">
+                <samp className="min-w-0 whitespace-pre">
                     {match ? (
                         <>
                             &lt;<span className="text-[#135e91]">{match[1]}</span>{' '}
@@ -82,16 +82,16 @@ function EventTree({ value }: { value: string }): JSX.Element {
     const properties = Object.entries(payload.properties)
 
     return (
-        <div className="min-w-0 py-2 font-code text-xs leading-6">
+        <div className="min-w-0 overflow-x-auto py-2 font-code text-xs leading-6">
             <details open className="min-w-0 px-3">
                 <summary className="cursor-pointer select-none text-[#5f5a52]">capture payload</summary>
                 <div className="ml-[5px] border-l border-[#dedad2] pl-4">
-                    <div className="break-all">
+                    <div className="whitespace-pre">
                         <span className="text-[#77529a]">event</span>:{' '}
                         <span className="text-[#9a4b1c]">"{payload.event}"</span>
                     </div>
                     {payload.timestamp && (
-                        <div className="break-all">
+                        <div className="whitespace-pre">
                             <span className="text-[#77529a]">timestamp</span>:{' '}
                             <span className="text-[#9a4b1c]">"{payload.timestamp}"</span>
                         </div>
@@ -103,7 +103,7 @@ function EventTree({ value }: { value: string }): JSX.Element {
                         <div className="ml-[5px] border-l border-[#dedad2] pl-4">
                             {properties.length ? (
                                 properties.map(([key, propertyValue]) => (
-                                    <div key={key} className="break-all">
+                                    <div key={key} className="whitespace-pre">
                                         <span className="text-[#77529a]">{key}</span>:{' '}
                                         <span className="text-[#9a4b1c]">{JSON.stringify(propertyValue)}</span>
                                     </div>

@@ -22,7 +22,7 @@ export default function TwigEventFlow({
     const [clicked, setClicked] = useState<string | null>(null)
     const [capturedAt, setCapturedAt] = useState<string | null>(null)
     const [eventCount, setEventCount] = useState(0)
-    const [visitorSetting, setVisitorSetting] = useState<StaySetting>('Coast')
+    const [visitorSetting, setVisitorSetting] = useState<StaySetting>('All')
     const [inView, setInView] = useState(false)
     const [manual, setManual] = useState(false)
     const [cursor, setCursor] = useState<VisitorCursor | null>(null)
@@ -105,7 +105,7 @@ export default function TwigEventFlow({
                 <div ref={twigRef} className="relative overflow-hidden rounded border border-primary bg-primary">
                     <TwigBrowseFigure
                         id={`guide-event-${withDestination ? 'destination' : 'bare'}`}
-                        initialSetting="Coast"
+                        initialSetting="All"
                         controlledSetting={autoplay ? visitorSetting : undefined}
                         onFilter={(setting) => {
                             setClicked(setting)
