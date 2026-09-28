@@ -138,7 +138,7 @@ export const posthog = {
                 event_timeline: true,
                 export_to_json: true,
                 filter_by_user_or_event: true,
-                highlights: 'Beta',
+                highlights: true,
                 identity_detection: true,
                 iframe_recording: true,
                 minimum_duration: true,
@@ -161,7 +161,7 @@ export const posthog = {
             export: {
                 features: {
                     export_to_json: true,
-                    export_to_video: 'Beta',
+                    export_to_video: true,
                     retention_policy: 'Up to 3 months',
                 },
             },
