@@ -50,25 +50,25 @@ pocketGuideCta:
 
 # Cleaning up
 
-Every flag you keep is a branch in your code nobody tests anymore. It can cost you money too. The web SDK evaluates every active flag on load, so a request can get billed for a flag your code stopped checking months ago.
+Every flag you keep is a code path nobody tests anymore, and it can cost money too. The web SDK evaluates every active flag on load, so a request can bill for a flag your code stopped checking months ago.
 
 ## Stale means finished
 
-PostHog calls a flag stale when nothing has checked it in 30 days, or when it's sat at 100% for 30 days with no property filters. A flag you turned off on purpose isn't stale.
+PostHog calls a flag stale when nothing has checked it in 30 days, or when it has sat at 100% for 30 days with no property filters. A flag you turned off on purpose isn't stale.
 
 ## Give every flag an owner
 
-Most flag debt comes from flags nobody owns. When you create a flag, give it an owner, a name that says what it's for, and a plan for removing it. Not six months later.
+Most flag debt comes from flags nobody owns. When you create a flag, give it an owner, a name that says what it's for, and a plan for removing it, written on day one rather than six months later.
 
 ## Code first, then the flag
 
-Remove the checks from your code, deploy, then disable the flag. Do it the other way around and every leftover check returns `false`, so the feature vanishes for everyone. At 100%, keep the enabled path. At 0%, keep the fallback. Anything in between needs a person to decide <SeeFig n={1} />.
+Remove the checks from your code, deploy, and only then disable the flag. In the other order, every leftover check returns `false` and the feature vanishes for everyone. At 100%, keep the enabled path. At 0%, keep the fallback. Anything in between needs a person to decide <SeeFig n={1} />.
 
-Your two example flags go first. Delete their call sites and the constants the wizard added, deploy, then delete the flags (weirdly satisfying).
+Your two example flags go first. Delete their call sites and the constants the wizard added, deploy, then delete both flags: 0% to gone, the full life of a flag.
 
 ## Let a scout do it
 
-A <Term name="scout">scout</Term> can check your flags every day and open the PR for you. It leaves alone any flag whose key it can't find in your code.
+A <Term name="scout">scout</Term> can check your flags every day and open the cleanup PR for you. It leaves alone any flag whose key it can't find in your code, so nothing disappears that it can't trace.
 
 <Action />
 

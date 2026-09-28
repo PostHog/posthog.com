@@ -42,25 +42,25 @@ pocketGuideCta:
 
 # Roll out gradually
 
-A flag at 0% is live code nobody runs. This page is about letting people in a few at a time <SeeFig n={1} />.
+A flag at 0% is live code that nobody runs. This page lets people in a few at a time, so a bug reaches 5% of your users instead of all of them <SeeFig n={1} />.
 
 ## Release conditions
 
-Each flag has one or more <Term name="release condition">release conditions</Term> <SeeFig n={2} />. A set matches when every property filter passes and the person falls inside its rollout percentage. Match any set and you get the flag.
+Each flag has one or more <Term name="release condition">release conditions</Term> <SeeFig n={2} />. A condition set matches when every property filter passes and the person falls inside its rollout percentage, and a person who matches any set gets the flag.
 
 ## Start with your team
 
-At PostHog, a flag often starts rolled out to just the engineer who made the change. Then it goes to the team, by email domain: `email ends with @yourcompany.com`. Use `ends with`, not `contains` (contains also matches lookalike domains). Your team gets to poke at it in production before anyone else sees it.
+At PostHog, a flag often starts with only the engineer who made the change. Next comes the team, by email domain: `email ends with @yourcompany.com`. Use `ends with`, not `contains`, because `contains` also matches lookalike domains. Your team uses the feature in production before any customer sees it.
 
 ## Then a percentage
 
-Then add a set for everyone at a small percentage. Raising the percentage only moves the cut-off, and nobody's hash changes. Everyone who had the flag keeps it and new people join. You can go as low as 0.01%.
+Then add a set for everyone at a small percentage, as low as 0.01%. Raising the percentage moves the cut-off and changes nobody's hash, so everyone who had the flag keeps it while new people join.
 
-A rollout is only as safe as what you're watching. Between steps, watch for new errors and pull up replays of people who have the flag. If you already know the next step, a scheduled flag change can do it for you.
+A rollout is only as safe as what you watch between steps. Before each raise, look for new errors and watch replays of people who have the flag. If you already know the next step, schedule the flag change and let PostHog make it.
 
 ## Target who gets it
 
-You can target a <Term name="cohort">cohort</Term> (your beta testers), a <Term name="person property">person property</Term> (their plan), a country if GeoIP is on, or a whole company with group analytics. Target the data where it lives tho. If your server knows the plan, evaluate on the server and pass it in. If the plan lives in Stripe, sync it in as a warehouse property and target it like anything else.
+You can target a <Term name="cohort">cohort</Term> (your beta testers), a <Term name="person property">person property</Term> (their plan), a country if GeoIP is on, or a whole company with group analytics. Target the data where it lives. If your server knows the plan, evaluate on the server and pass the plan in. If the plan lives in Stripe, sync it in as a warehouse property and target it like any other property.
 
 <Action />
 

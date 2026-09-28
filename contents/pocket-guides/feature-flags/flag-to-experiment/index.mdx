@@ -26,23 +26,23 @@ pocketGuideCta:
 
 # From flag to experiment
 
-A rollout asks "is it safe?" An <Term name="experiment">experiment</Term> asks "is it better?" In PostHog, an experiment runs on a flag with variants <SeeFig n={1} />.
+A rollout asks whether a change is safe. An <Term name="experiment">experiment</Term> asks whether it's better, and in PostHog it runs on a flag with variants <SeeFig n={1} />.
 
 ## You already have the pieces
 
-An experiment needs a multivariate flag with at least two variants, one named `control`. Use an existing flag that has those (with `control` as its first variant), or let the experiment make one. Someone counts as exposed when a `$feature_flag_called` event comes in, and your checks already send that.
+An experiment needs a multivariate flag with at least two variants, one of them named `control`. Use an existing flag that has those, with `control` as its first variant, or let the experiment create one. A person counts as exposed when a `$feature_flag_called` event comes in, and your checks already send it.
 
 ## The 101 rules matter more here
 
-If someone switches variants mid-experiment, their results count in both groups. That happens when the distinct ID changes between checks. Call `identify()` before the first check, check once, and stick with the variant.
+A person who switches variants mid-experiment counts in both groups and muddies both results. Switching happens when the distinct ID changes between checks, so call `identify()` before the first check, check once, and keep the variant.
 
 ## Check the flag as late as you can
 
-Put the check right where the experience actually splits, after every other condition. Otherwise people who never see the change still count as exposed, and they water down your results.
+Put the check where the experience splits, after every other condition. An earlier check counts people who never see the change as exposed, and they dilute your results.
 
 ## When it ends
 
-Ship the winning variant, then delete the flag. When you end an experiment, PostHog can even open the cleanup PR for you.
+Ship the winning variant, then delete the flag. When you end an experiment, PostHog can open the cleanup PR for you.
 
 <Action />
 

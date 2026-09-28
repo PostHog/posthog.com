@@ -41,7 +41,7 @@ const config =
 
 # Payloads
 
-A flag can decide more than whether someone gets a feature. It can also decide how that feature behaves. A <Term name="payload">payload</Term> is JSON that rides along with the flag's answer <SeeFig n={1} />, so you can change copy, limits, or config from PostHog without a deploy.
+A flag decides whether someone gets a feature, and a <Term name="payload">payload</Term> lets it decide how that feature behaves. A payload is JSON that rides along with the flag's answer <SeeFig n={1} />, so you can change copy, limits, or config from PostHog without a deploy.
 
 ## Three shapes
 
@@ -51,15 +51,15 @@ A flag can decide more than whether someone gets a feature. It can also decide h
 | Multivariate | One per variant | Different copy or pricing per variant |
 | Remote config | One, the same for everyone | App-wide settings, no targeting |
 
-Rule of thumb: if a value hasn't changed in six months, it belongs in your codebase, not in a flag.
+A payload is for values you still change. If one hasn't changed in six months, move it into your codebase.
 
 ## Keep a default in code
 
-Read the payload once, where you read the flag, and fall back to a value in code if it's missing <SeeFig n={2} />. If you bootstrap flags, bootstrap their payloads too with `featureFlagPayloads`.
+Read the payload once, where you read the flag, and fall back to a value in code when it's missing <SeeFig n={2} />. If you bootstrap flags, bootstrap their payloads too with `featureFlagPayloads`.
 
 ## Payloads are not secrets
 
-Anything a browser can read, your users can read. Remote config can encrypt its payload, but then only your server can read it (with a personal API key). Keep keys and credentials out of anything a client loads. Real secrets belong in your config, not in a flag.
+Anything a browser can read, your users can read. Remote config can encrypt its payload, but then only your server can read it, with a personal API key. Keep keys and credentials out of anything a client loads, and keep real secrets in your config, not in a flag.
 
 <Action />
 

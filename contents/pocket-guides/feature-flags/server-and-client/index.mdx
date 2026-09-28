@@ -26,33 +26,33 @@ section: Instrument
 
 # Server and client
 
-The wizard made one flag for your backend and one for your frontend, not one flag for both. Here's why, and how to keep the two sides agreeing with each other <SeeFig n={1} />.
+The wizard made one flag for your backend and one for your frontend, even though a single flag could have covered both. Two is the safer number, and this page explains why and how to keep both sides agreeing about who a person is <SeeFig n={1} />.
 
 ## One flag, one side
 
-A flag checked on the server and again in the browser gets two chances to disagree (different distinct IDs, different properties, different answers). Pick where each flag lives. If a flag is server-only, set its evaluation runtime to **Server-side only** so the browser SDK doesn't load it at all.
+A flag checked on the server and again in the browser gets two chances to disagree, because each side can have a different distinct ID and different properties. Pick one side for each flag. For a server-only flag, set its evaluation runtime to **Server-side only** so the browser SDK doesn't load it at all.
 
 ## On the server, evaluate locally
 
-With <Term name="local evaluation">local evaluation</Term>, the server SDK downloads your flag definitions every 30 seconds (5 minutes in Go) and evaluates them in-process. No network request per check. The definitions fetch bills as 10 flag requests no matter how many checks you run, so it's genuinely cheaper too.
+With <Term name="local evaluation">local evaluation</Term>, the server SDK downloads your flag definitions every 30 seconds (every 5 minutes in Go) and evaluates them in-process, so a check makes no network request. The definitions fetch bills as 10 flag requests however many checks you run, which makes local evaluation cheaper as well as faster.
 
-The catch is that you pass in whatever properties your conditions use, like the person's plan. On the server you usually have those already. It also needs the feature flags secure API key, which stays on the server. Never ship it to a browser or a mobile app.
+The trade is that you pass in the properties your conditions use, like the person's plan, and on the server you usually have those already. Local evaluation also needs the feature flags secure API key, which stays on the server. Never ship it to a browser or a mobile app.
 
-Right after a cold start there are no definitions yet, so checks return `undefined` until the first fetch lands. Give every check a default. And if a check can't be evaluated locally, the SDK falls back to asking PostHog (unless you set `onlyEvaluateLocally`).
+After a cold start the SDK has no definitions yet, so checks return `undefined` until the first fetch lands. Give every check a default. When a check can't be evaluated locally, the SDK asks PostHog instead, unless you set `onlyEvaluateLocally`.
 
 ## Same person on both sides
 
-The hash uses the distinct ID. If your server checks with `user.id` and the browser still has an anonymous ID, the same person can get a different answer on each side. Call `identify()` with the ID your server uses, before any flag check in the browser.
+The hash uses the distinct ID, so if your server checks with `user.id` while the browser still has an anonymous ID, one person can get a different answer on each side. In the browser, call `identify()` with the ID your server uses, before any flag check.
 
 ## Bootstrap to stop the flicker
 
-If the server already knows the answer, send it along with the page. <Term name="bootstrapping">Bootstrapping</Term> passes those values into `posthog.init` under `bootstrap.featureFlags`, so the browser has them before the first render (no flash of the old version). Works in the web, React Native, iOS, Android, and Flutter SDKs.
+If the server already knows the answer, send it with the page. <Term name="bootstrapping">Bootstrapping</Term> passes those values into `posthog.init` under `bootstrap.featureFlags`, so the browser has them before the first render and never flashes the old version. The web, React Native, iOS, Android, and Flutter SDKs all support it.
 
-Two gotchas tho. Bootstrapping only seeds flags that are on (false and empty values get dropped), and the first full `/flags` response replaces everything you bootstrapped.
+Two catches. Bootstrapping seeds only flags that are on, because false and empty values get dropped, and the first full `/flags` response replaces everything you bootstrapped.
 
 ## Take this skill with you
 
-The wizard followed these rules for your two example flags. For every flag after that, hand your agent the skill <SeeFig n={2} />.
+The wizard followed these rules for your two example flags. For every flag after those, hand your agent the skill <SeeFig n={2} />.
 
 <SeeAlso>
 
