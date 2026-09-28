@@ -321,7 +321,11 @@ const CopyURLButton = ({ onClick }: { onClick: () => string }) => {
     )
 }
 
-export default function Tabbed() {
+export interface TabbedProps {
+    defaultProducts?: string[]
+}
+
+export default function Tabbed({ defaultProducts = DEFAULT_PRODUCT_TYPES }: TabbedProps = {}) {
     const {
         allProductData: {
             nodes: [{ products: billingProducts }],
@@ -329,8 +333,8 @@ export default function Tabbed() {
     } = useStaticQuery(allProductsData)
     const [analyticsData, setAnalyticsData] = useState<Record<string, any>>(getDefaultAnalyticsData)
     const platform = billingProducts.find((product) => product.type === 'platform_and_support')
-    const [activeType, setActiveType] = useState<string | null>(DEFAULT_PRODUCT_TYPES[0])
-    const [selectedTypes, setSelectedTypes] = useState<string[]>(DEFAULT_PRODUCT_TYPES)
+    const [activeType, setActiveType] = useState<string | null>(defaultProducts[0] ?? null)
+    const [selectedTypes, setSelectedTypes] = useState<string[]>(() => Array.from(new Set(defaultProducts)))
     const [addingProduct, setAddingProduct] = useState(false)
     const [productSearch, setProductSearch] = useState('')
     const addProductRef = useRef(null)
@@ -445,7 +449,7 @@ export default function Tabbed() {
                           params.products.split(',').filter((type) => products.some((product) => product.type === type))
                       )
                   )
-                : selectedTypes
+                : selectedTypes.filter((type) => products.some((product) => product.type === type))
         setSelectedTypes(selected)
         setActiveType(
             params.calculator === PLATFORM_PACKAGES_TYPE
@@ -597,13 +601,13 @@ export default function Tabbed() {
         // Keyboard is covered separately: slider handles move on arrow keys without firing either
         // of the other two.
         <div
-            className="w-full flex-1"
+            className="@container w-full min-w-0 flex-1"
             onClickCapture={trackInteraction('click')}
             onChangeCapture={trackInteraction('change')}
             onKeyDownCapture={trackInteraction('keyboard')}
         >
             <div className="grid grid-cols-12 mb-1">
-                <div className="col-span-12 @2xl:col-span-4 md:pr-6 mb-4 md:mb-0">
+                <div className="col-span-12 min-w-0 @3xl:col-span-4 @3xl:pr-6 mb-4 @3xl:mb-0">
                     <div className="mb-2">
                         <p className="m-0 text-sm flex gap-1 items-baseline">
                             <strong>Your estimate</strong>{' '}
@@ -612,7 +616,7 @@ export default function Tabbed() {
                             </span>
                         </p>
                     </div>
-                    <ul className="list-none m-0 p-0 flex flex-row md:flex-col gap-px overflow-x-auto @md:w-auto -mx-4 px-4 @md:px-0 @md:mx-0">
+                    <ul className="list-none m-0 p-0 flex flex-row @3xl:flex-col gap-px overflow-x-auto">
                         {selectedProducts.map(
                             ({
                                 name,
@@ -633,7 +637,7 @@ export default function Tabbed() {
                                         <button
                                             type="button"
                                             onClick={() => setActiveType(type)}
-                                            className={`p-2 rounded-md font-semibold text-sm flex flex-col md:flex-row space-x-2 whitespace-nowrap items-start md:items-center justify-between w-full click ${
+                                            className={`p-2 rounded-md font-semibold text-sm flex flex-col @3xl:flex-row gap-2 whitespace-nowrap items-start @3xl:items-center justify-between w-full click ${
                                                 active ? 'font-bold bg-accent' : 'hover:bg-accent'
                                             }`}
                                         >
@@ -659,7 +663,7 @@ export default function Tabbed() {
                                             {billedWith ? (
                                                 <span className="opacity-25">--</span>
                                             ) : (
-                                                <div className="opacity-70 pl-5 md:pl-0">
+                                                <div className="opacity-70 pl-5 @3xl:pl-0">
                                                     {formatUSD(cost + addonsPrice)}
                                                 </div>
                                             )}
@@ -783,7 +787,7 @@ export default function Tabbed() {
                         </button>
                     </div>
                 </div>
-                <div className="col-span-12 @2xl:col-span-8 md:pl-0 flex flex-col">
+                <div className="col-span-12 min-w-0 @3xl:col-span-8 flex flex-col">
                     {selectedProducts.length === 0 && !platformPackagesActive && (
                         <EmptyEstimate products={products} onAdd={addProduct} />
                     )}
