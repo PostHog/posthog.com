@@ -31,7 +31,7 @@ Since alerts work on [trends](/docs/product-analytics/trends/overview), [funnels
 ## How to create an alert
 
 1. Open or create a saved [trend](/docs/product-analytics/trends/overview), [funnel](/docs/product-analytics/funnels), or [SQL insight](/docs/sql).
-2. Open **Actions** on the insight, select **Alerts**, and click **New alert**. You can also open **Alerts** from the sidebar to manage all alerts.
+2. On the insight, click **Monitor**, select **Alerts**, and click **New alert**. You can also open **Alerts** from the sidebar to manage all alerts.
 3. Give the alert a name. For a trend, select the series to monitor. For a funnel or SQL insight, [choose the conversion step](#alerts-on-funnels) or [result to check](#alerts-on-sql-insights).
 4. Select **Threshold** or **Anomaly detection**. For a threshold, choose **has value**, **increases by**, or **decreases by**. Set a **more than** or **less than** bound, or both. Relative conditions can use percentage bounds. For anomaly detection, [choose and simulate a detector](#anomaly-detection).
 5. Select how often PostHog checks the alert: **Real time**, **Every 15 minutes**, **Hourly**, **Daily**, **Weekly**, or **Monthly**. Real-time and 15-minute checks need [eligible plans](#real-time-alerts). For hourly checks, you can set the minute of the hour. The form shows the next planned evaluation.
@@ -137,7 +137,7 @@ Instead of setting a fixed threshold, anomaly detection uses detectors to identi
 
 1. Open a saved [trend insight](/docs/product-analytics/trends/overview) or [SQL insight](/docs/sql), or create and save one.
    - For SQL insights, use **last row** or **first row** evaluation mode. Anomaly detection isn't supported with **any row** evaluation because those rows represent individual entities, not a time series.
-2. Open **Actions** on the insight, select **Alerts**, then click **New alert**.
+2. On the insight, click **Monitor**, select **Alerts**, then click **New alert**.
 3. Select **Anomaly detection** instead of **Threshold**.
 4. Choose a **detector** (see [available detectors](#available-detectors) below).
 5. Configure the available options for your detector, such as sensitivity and window size.
@@ -316,7 +316,7 @@ Common reasons an alert may be auto-disabled:
 
 <CalloutBox icon="IconWarning" title="Re-enable manually" type="caution">
 
-Disabled alerts don't re-enable themselves. After fixing the configuration issue, go to the **Alerts** tab on the insight and manually re-enable the alert.
+Disabled alerts don't re-enable themselves. After fixing the configuration issue, open the saved insight, click **Monitor** > **Alerts**, and manually re-enable the alert.
 
 </CalloutBox>
 
