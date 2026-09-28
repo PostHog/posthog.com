@@ -26,14 +26,14 @@ Credentials that can read the data you want to sync. PostHog only reads data, so
 
 <SourceSetupIntro />
 
-Pull your 1Password security event streams ,  sign-in attempts, item usages, and audit events , .
+Pull your 1Password security event streams - sign-in attempts, item usages, and audit events - .
 
 This uses the 1Password Events API, which requires a 1Password Business or Enterprise plan. [Create an Events Reporting integration](https://support.1password.com/events-reporting/) in your 1Password admin console and issue a bearer token with the event types you want to sync:
 - Sign-in attempts
 - Item usages
 - Audit events
 
-Select the region where your 1Password account is hosted ,  the Events API is served from a region-specific address.
+Select the region where your 1Password account is hosted - the Events API is served from a region-specific address.
 
 You'll be asked for:
 

@@ -26,7 +26,7 @@ Credentials that can read the data you want to sync. PostHog only reads data, so
 
 <SourceSetupIntro />
 
-Pull U.S. FDA drug, device, and food data ,  adverse event reports, recalls, drug labeling, 510(k) clearances, and the NDC directory , .
+Pull U.S. FDA drug, device, and food data - adverse event reports, recalls, drug labeling, 510(k) clearances, and the NDC directory - .
 
 An API key is optional but recommended. Without one, openFDA limits you to 1,000 requests/day per IP; with one, 120,000 requests/day. Get a free key from the [openFDA API basics page](https://open.fda.gov/apis/authentication/).
 

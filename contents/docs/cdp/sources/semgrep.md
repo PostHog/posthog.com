@@ -26,7 +26,7 @@ Credentials that can read the data you want to sync. PostHog only reads data, so
 
 <SourceSetupIntro />
 
-Enter your Semgrep API token to sync your static analysis data ,  deployments, projects, code (SAST) and supply chain (SCA) findings, and secrets , .
+Enter your Semgrep API token to sync your static analysis data - deployments, projects, code (SAST) and supply chain (SCA) findings, and secrets - .
 
 Create a token in Semgrep AppSec Platform under **Settings → Tokens** and grant it the **Web API** scope. The API requires a Semgrep Team or Enterprise plan.
 

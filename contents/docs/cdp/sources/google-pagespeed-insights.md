@@ -30,7 +30,7 @@ Enter your Google Cloud API key and the URLs you want to analyze to pull PageSpe
 
 Create an API key in the [Google Cloud console](https://console.cloud.google.com/apis/credentials) and enable the **PageSpeed Insights API** for your project. A key raises your quota to 25,000 queries/day (400 per 100 seconds); without one, requests are heavily throttled.
 
-There is no list endpoint ,  every request runs a fresh, on-demand analysis of a single URL ,  so enter one URL per line (starting with `http://` or `https://`). For example:
+There is no list endpoint - every request runs a fresh, on-demand analysis of a single URL - so enter one URL per line (starting with `http://` or `https://`). For example:
 
 ```
 https://posthog.com

@@ -28,7 +28,7 @@ Credentials that can read the data you want to sync. PostHog only reads data, so
 
 Enter your Qualys API credentials to sync your VMDR vulnerability management data.
 
-Use your account's regional API server URL (for example `qualysapi.qualys.com`, `qualysapi.qg2.apps.qualys.com`, or `qualysapi.qualys.eu`) ,  you can find it under **Help > About** in the Qualys UI. The user needs API access enabled (a Manager role, or a role granted API access).
+Use your account's regional API server URL (for example `qualysapi.qualys.com`, `qualysapi.qg2.apps.qualys.com`, or `qualysapi.qualys.eu`) - you can find it under **Help > About** in the Qualys UI. The user needs API access enabled (a Manager role, or a role granted API access).
 
 The `knowledge_base` table additionally requires the KnowledgeBase download option to be enabled on your Qualys subscription. On API version 4.0 it also needs your account's gateway URL (for example `gateway.qg2.apps.qualys.com`), which you can find under **Help > About** in the Qualys UI. Leave the gateway URL blank if you do not sync the `knowledge_base` table.
 

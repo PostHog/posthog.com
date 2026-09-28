@@ -28,7 +28,7 @@ Credentials that can read the data you want to sync. PostHog only reads data, so
 
 Enter your Veeqo API key to automatically pull your Veeqo inventory, order and shipping data.
 
-You can find your API key in your Veeqo account under **Settings > Users**, on your user's profile. Veeqo support must enable API access for your account before the key appears there ,  contact them if you don't see it.
+You can find your API key in your Veeqo account under **Settings > Users**, on your user's profile. Veeqo support must enable API access for your account before the key appears there - contact them if you don't see it.
 
 The API key gives full account access, so store it securely.
 

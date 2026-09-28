@@ -26,7 +26,7 @@ Credentials that can read the data you want to sync. PostHog only reads data, so
 
 <SourceSetupIntro />
 
-Sync historical weather and climate data for weather stations from the Meteostat JSON API (hosted on RapidAPI). Get a free API key by subscribing to the [Meteostat API listing](https://rapidapi.com/meteostat/api/meteostat/) on RapidAPI ,  the free plan includes 500 requests per month.
+Sync historical weather and climate data for weather stations from the Meteostat JSON API (hosted on RapidAPI). Get a free API key by subscribing to the [Meteostat API listing](https://rapidapi.com/meteostat/api/meteostat/) on RapidAPI - the free plan includes 500 requests per month.
 
 Meteostat has no account-scoped list of stations, so list the [weather station IDs](https://meteostat.net) you want to sync.
 

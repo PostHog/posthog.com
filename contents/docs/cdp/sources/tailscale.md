@@ -28,7 +28,7 @@ Credentials that can read the data you want to sync. PostHog only reads data, so
 
 Sync your Tailscale devices, users, keys, and configuration audit logs.
 
-An **OAuth client** is the recommended credential for recurring syncs ,  API access tokens expire after at most 90 days. Create one in the [Tailscale admin console](https://login.tailscale.com/admin/settings/oauth) under **Settings > OAuth clients**, with read scopes for the tables you want to sync (for example `devices:core:read`, `users:read`, `auth_keys:read`, and `logs:configuration:read`).
+An **OAuth client** is the recommended credential for recurring syncs - API access tokens expire after at most 90 days. Create one in the [Tailscale admin console](https://login.tailscale.com/admin/settings/oauth) under **Settings > OAuth clients**, with read scopes for the tables you want to sync (for example `devices:core:read`, `users:read`, `auth_keys:read`, and `logs:configuration:read`).
 
 Alternatively, generate an API access token under **Settings > Keys**. Leave the tailnet field blank to use the credential's default tailnet.
 

@@ -28,7 +28,7 @@ None. The NuGet API is public, so no account or API key is needed.
 
 Track adoption of.NET libraries over time: package metadata, per-version download counts, and publish/delete events for the NuGet packages you care about.
 
-The public NuGet V3 API allows anonymous read access, so no API key is needed. Enter the package IDs you want to track, separated by commas or new lines ,  e.g. `Newtonsoft.Json, Serilog`.
+The public NuGet V3 API allows anonymous read access, so no API key is needed. Enter the package IDs you want to track, separated by commas or new lines - e.g. `Newtonsoft.Json, Serilog`.
 
 You'll be asked for:
 

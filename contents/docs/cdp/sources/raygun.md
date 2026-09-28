@@ -29,12 +29,12 @@ Credentials that can read the data you want to sync. PostHog only reads data, so
 Enter a Raygun [personal access token](https://raygun.com/documentation/product-guides/apis/personal-access-tokens/) to pull your Raygun crash reporting and real user monitoring data.
 
 Grant the token these read scopes for the tables you want to sync:
-- `applications:read` ,  Applications
-- `cr.errors:read` ,  Error groups
-- `deployments:read` ,  Deployments
-- `customers:read` ,  Customers
-- `rum.sessions:read` ,  Sessions
-- `rum.pages:read` ,  Pages
+- `applications:read` - Applications
+- `cr.errors:read` - Error groups
+- `deployments:read` - Deployments
+- `customers:read` - Customers
+- `rum.sessions:read` - Sessions
+- `rum.pages:read` - Pages
 
 You'll be asked for:
 

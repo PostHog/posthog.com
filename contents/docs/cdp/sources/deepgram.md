@@ -28,7 +28,7 @@ Credentials that can read the data you want to sync. PostHog only reads data, so
 
 Enter your Deepgram API key to sync your Deepgram Management API data.
 
-You can create an API key in your [Deepgram Console](https://console.deepgram.com/) under **Settings → API Keys**. A key with a read-capable scope (e.g. `member`) is sufficient ,  the source only reads projects, members, keys, balances, invites, and the request log.
+You can create an API key in your [Deepgram Console](https://console.deepgram.com/) under **Settings → API Keys**. A key with a read-capable scope (e.g. `member`) is sufficient - the source only reads projects, members, keys, balances, invites, and the request log.
 
 You'll be asked for:
 

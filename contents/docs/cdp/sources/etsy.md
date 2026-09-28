@@ -28,7 +28,7 @@ Credentials that can read the data you want to sync. PostHog only reads data, so
 
 Sync your Etsy shop's orders, listings, reviews and payment ledger.
 
-Register a personal app in the [Etsy developer portal](https://www.etsy.com/developers/your-apps) to get a keystring and its shared secret, then run Etsy's OAuth flow to grant your shop and keep the refresh token it returns. The token needs the `transactions_r`, `listings_r` and `shops_r` scopes ,  add `billing_r` if you want the payment ledger. Leave the shop ID blank and we'll use the shop the token belongs to.
+Register a personal app in the [Etsy developer portal](https://www.etsy.com/developers/your-apps) to get a keystring and its shared secret, then run Etsy's OAuth flow to grant your shop and keep the refresh token it returns. The token needs the `transactions_r`, `listings_r` and `shops_r` scopes - add `billing_r` if you want the payment ledger. Leave the shop ID blank and we'll use the shop the token belongs to.
 
 You'll be asked for:
 

@@ -34,7 +34,7 @@ Create an API credential in your Adyen Customer Area under **Developers > API cr
 - **Settlement detail reports** need a merchant account and the **Merchant Report Download** role. Adyen only creates these files once you turn on the settlement details report in your Customer Area.
 - **Companies and merchant accounts** come from the Management API and need an account read role.
 
-Pick the environment that matches where you created the API key ,  a test key won't work against live.
+Pick the environment that matches where you created the API key - a test key won't work against live.
 
 You'll be asked for:
 

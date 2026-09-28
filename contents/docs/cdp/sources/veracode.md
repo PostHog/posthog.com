@@ -28,7 +28,7 @@ Credentials that can read the data you want to sync. PostHog only reads data, so
 
 Connect Veracode with an API service account's **API ID** and **secret key**, generated under **Account settings → API credentials** in the Veracode Platform. Requests are signed with Veracode's HMAC scheme.
 
-The service account needs the **Results API** and **Applications API** roles to read the application portfolio and findings. Pick the region your Veracode account lives in ,  data is isolated per region.
+The service account needs the **Results API** and **Applications API** roles to read the application portfolio and findings. Pick the region your Veracode account lives in - data is isolated per region.
 
 You'll be asked for:
 

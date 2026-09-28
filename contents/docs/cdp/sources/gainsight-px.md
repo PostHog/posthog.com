@@ -28,7 +28,7 @@ Credentials that can read the data you want to sync. PostHog only reads data, so
 
 Connect Gainsight PX with your project's **API key**. Generate a key with **Read** access under **Administration → REST API** in Gainsight PX, then pick the region your subscription is hosted in.
 
-All tables are synced as full refresh ,  Gainsight PX's list endpoints don't expose an "updated since" filter.
+All tables are synced as full refresh - Gainsight PX's list endpoints don't expose an "updated since" filter.
 
 You'll be asked for:
 

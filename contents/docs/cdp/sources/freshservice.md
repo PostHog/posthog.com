@@ -28,7 +28,7 @@ Credentials that can read the data you want to sync. PostHog only reads data, so
 
 Enter your Freshservice domain and API key to pull your Freshservice ITSM data.
 
-Your **domain** is the subdomain in your Freshservice URL ,  e.g. `acme` for `acme.freshservice.com`.
+Your **domain** is the subdomain in your Freshservice URL - e.g. `acme` for `acme.freshservice.com`.
 
 Your **API key** is on your Freshservice profile settings page (click your profile picture → **Profile settings**; the API key is shown in the right sidebar).
 

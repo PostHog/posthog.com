@@ -30,7 +30,7 @@ Pull your daily Azure spend, broken down by service, resource group, and resourc
 
 Register an app in Microsoft Entra ID, create a client secret for it, and give its service principal the `Cost Management Reader` role on the scope you want to sync. Then enter the directory (tenant) ID, the application (client) ID, and the secret value.
 
-The scope is the Azure Resource Manager path to read cost for, without a leading slash ,  for example `subscriptions/00000000-0000-0000-0000-000000000000` for one subscription, or `providers/Microsoft.Billing/billingAccounts/1234567` for an enterprise billing account.
+The scope is the Azure Resource Manager path to read cost for, without a leading slash - for example `subscriptions/00000000-0000-0000-0000-000000000000` for one subscription, or `providers/Microsoft.Billing/billingAccounts/1234567` for an enterprise billing account.
 
 You'll be asked for:
 

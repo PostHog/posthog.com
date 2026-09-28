@@ -28,7 +28,7 @@ Credentials that can read the data you want to sync. PostHog only reads data, so
 
 Enter your Scale AI API key to sync your Scale data labeling data.
 
-You can find your API key in the [Scale dashboard](https://dashboard.scale.com/) under **Settings → API Keys**. Use a **live-mode** key ,  test-mode keys have fully isolated data. Only account Managers and Admins can access API keys.
+You can find your API key in the [Scale dashboard](https://dashboard.scale.com/) under **Settings → API Keys**. Use a **live-mode** key - test-mode keys have fully isolated data. Only account Managers and Admins can access API keys.
 
 You'll be asked for:
 

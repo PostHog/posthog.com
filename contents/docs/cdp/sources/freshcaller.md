@@ -28,7 +28,7 @@ Credentials that can read the data you want to sync. PostHog only reads data, so
 
 Enter your Freshcaller account name and API key to pull your Freshcaller call-center data.
 
-Your **account name** is the subdomain in your Freshcaller URL ,  e.g. `acme` for `acme.freshcaller.com`.
+Your **account name** is the subdomain in your Freshcaller URL - e.g. `acme` for `acme.freshcaller.com`.
 
 Your **API key** is on your Freshcaller profile settings page (click your profile picture → **Profile settings**; the API key is shown in the right sidebar).
 

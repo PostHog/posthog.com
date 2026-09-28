@@ -30,7 +30,7 @@ Enter a Kong Konnect access token to pull your gateway's Advanced Analytics API 
 
 Create a **Personal Access Token** under **Konnect → Personal access tokens**, or a **System Account access token** for a service identity. Either is sent as a bearer token.
 
-Pick the **region** that matches your Konnect organization's geo ,  the analytics API is region-specific.
+Pick the **region** that matches your Konnect organization's geo - the analytics API is region-specific.
 
 How far back the initial sync can reach depends on your Konnect plan's Advanced Analytics data retention.
 

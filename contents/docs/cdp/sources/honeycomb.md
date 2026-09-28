@@ -26,11 +26,11 @@ Credentials that can read the data you want to sync. PostHog only reads data, so
 
 <SourceSetupIntro />
 
-Enter a Honeycomb configuration API key to pull your Honeycomb observability configuration ,  datasets, SLOs, burn alerts, triggers, markers, boards, and more , .
+Enter a Honeycomb configuration API key to pull your Honeycomb observability configuration - datasets, SLOs, burn alerts, triggers, markers, boards, and more - .
 
 You can create a configuration key under **Environment settings → API keys** in your [Honeycomb account](https://ui.honeycomb.io/). Grant read access for the resources you want to sync: Manage Queries and Columns, Manage SLOs, Manage Triggers, Manage Markers, Manage Boards, and Manage Recipients.
 
-Keys are region-specific ,  pick the region that matches your Honeycomb account.
+Keys are region-specific - pick the region that matches your Honeycomb account.
 
 You'll be asked for:
 

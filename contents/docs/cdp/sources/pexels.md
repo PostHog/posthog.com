@@ -30,7 +30,7 @@ Enter your Pexels API key to pull Pexels stock photo and video catalog data.
 
 Generate an API key from your [Pexels API dashboard](https://www.pexels.com/api/).
 
-Attribution to Pexels and to the photographer/videographer is required when you use Pexels content ,  see the [Pexels API guidelines](https://www.pexels.com/api/documentation/#guidelines).
+Attribution to Pexels and to the photographer/videographer is required when you use Pexels content - see the [Pexels API guidelines](https://www.pexels.com/api/documentation/#guidelines).
 
 You'll be asked for:
 

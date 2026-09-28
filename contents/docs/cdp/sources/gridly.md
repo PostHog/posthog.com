@@ -30,7 +30,7 @@ Enter your Gridly API key and a View ID to pull that view's records.
 
 Create an API key in your Gridly company settings under **Settings → API keys** (Owner or Admin access is required). Use a **Full Access** or **Read-only** key.
 
-Find the **View ID** in Gridly by opening your grid, selecting a view, and opening the **API** panel ,  it looks like `v1v9jwwk1lwnkz`. For the default Master branch this is the same as the Grid ID.
+Find the **View ID** in Gridly by opening your grid, selecting a view, and opening the **API** panel - it looks like `v1v9jwwk1lwnkz`. For the default Master branch this is the same as the Grid ID.
 
 You'll be asked for:
 

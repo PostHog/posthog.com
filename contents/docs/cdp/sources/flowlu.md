@@ -28,7 +28,7 @@ Credentials that can read the data you want to sync. PostHog only reads data, so
 
 Enter your Flowlu API key and account subdomain to pull your CRM, project, task, and finance data.
 
-You can create an API key under **Portal Settings → API Settings** in Flowlu. Your subdomain is the first part of your portal URL ,  for `acme.flowlu.com` the subdomain is `acme`.
+You can create an API key under **Portal Settings → API Settings** in Flowlu. Your subdomain is the first part of your portal URL - for `acme.flowlu.com` the subdomain is `acme`.
 
 You'll be asked for:
 

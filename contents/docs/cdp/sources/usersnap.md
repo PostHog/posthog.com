@@ -28,7 +28,7 @@ Credentials that can read the data you want to sync. PostHog only reads data, so
 
 Enter your Usersnap REST API credentials to pull your Usersnap projects and feedback items.
 
-The Usersnap REST API is a gated feature: it must be enabled on your plan by Usersnap (contact their customer success team). Once enabled, generate a JWT secret under **Settings → REST API** in Usersnap and copy both the secret and its JWT ID here ,  PostHog signs the short-lived bearer tokens for you.
+The Usersnap REST API is a gated feature: it must be enabled on your plan by Usersnap (contact their customer success team). Once enabled, generate a JWT secret under **Settings → REST API** in Usersnap and copy both the secret and its JWT ID here - PostHog signs the short-lived bearer tokens for you.
 
 You'll be asked for:
 

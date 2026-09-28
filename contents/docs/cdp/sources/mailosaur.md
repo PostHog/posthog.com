@@ -30,7 +30,7 @@ Enter your Mailosaur API key to sync your email and SMS testing data.
 
 You can find your API key in your [Mailosaur account settings](https://mailosaur.com/app/keys).
 
-Use an **account-level** API key ,  a server-scoped key cannot list servers, so it can't enumerate the mail to sync.
+Use an **account-level** API key - a server-scoped key cannot list servers, so it can't enumerate the mail to sync.
 
 You'll be asked for:
 

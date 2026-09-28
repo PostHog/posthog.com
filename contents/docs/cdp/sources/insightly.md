@@ -28,7 +28,7 @@ Credentials that can read the data you want to sync. PostHog only reads data, so
 
 Enter your Insightly API key to sync your Insightly CRM data.
 
-Find your **API key** and your **API URL** in Insightly under **User Settings** (top-right profile menu). The API URL looks like `https://api.na1.insightly.com/v3.1` ,  the **pod** is the region token in the middle (`na1`, `eu1`,...). Enter just that token, or paste the full API URL.
+Find your **API key** and your **API URL** in Insightly under **User Settings** (top-right profile menu). The API URL looks like `https://api.na1.insightly.com/v3.1` - the **pod** is the region token in the middle (`na1`, `eu1`,...). Enter just that token, or paste the full API URL.
 
 The API key inherits your Insightly user's permissions, so make sure your user can access the data you want to sync.
 

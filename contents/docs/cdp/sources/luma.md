@@ -28,7 +28,7 @@ Credentials that can read the data you want to sync. PostHog only reads data, so
 
 Enter your Luma API key to pull your events, guests, and people.
 
-You can create an API key under **Settings → Developer** in [Luma](https://luma.com) ,  API access requires a Luma Plus subscription. Calendar API keys are scoped to a single calendar; use an organization API key to import across calendars.
+You can create an API key under **Settings → Developer** in [Luma](https://luma.com) - API access requires a Luma Plus subscription. Calendar API keys are scoped to a single calendar; use an organization API key to import across calendars.
 
 You'll be asked for:
 

@@ -26,7 +26,7 @@ Credentials that can read the data you want to sync. PostHog only reads data, so
 
 <SourceSetupIntro />
 
-Sync your Dynamics 365 (Dataverse) customer data ,  accounts, contacts, leads, opportunities, cases and activities , .
+Sync your Dynamics 365 (Dataverse) customer data - accounts, contacts, leads, opportunities, cases and activities - .
 
 To connect, register an app in **Microsoft Entra ID** and add a client secret. Then add that app as an **application user** in your Dynamics 365 environment (Power Platform admin center > Environments > Settings > Users + permissions > Application users) and give it a security role that can read the tables you want to sync. The environment URL is the one you use to open the app, for example `https://contoso.crm.dynamics.com`.
 

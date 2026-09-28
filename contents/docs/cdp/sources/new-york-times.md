@@ -30,7 +30,7 @@ Enter your New York Times API key to pull New York Times content.
 
 Create a free developer account and register an app at the [NYT Developer Network](https://developer.nytimes.com/), then enable the APIs you want to sync (Article Search, Most Popular, Top Stories) on your app to get an API key.
 
-Note: NYT enforces tight rate limits (≈10 requests/minute, 4,000/day), so syncs ,  especially Article Search ,  are intentionally throttled.
+Note: NYT enforces tight rate limits (≈10 requests/minute, 4,000/day), so syncs - especially Article Search - are intentionally throttled.
 
 You'll be asked for:
 

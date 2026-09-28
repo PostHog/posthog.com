@@ -30,7 +30,7 @@ Enter your Marketstack access key to pull end-of-day, intraday, splits, and divi
 
 You can find your access key in your [Marketstack dashboard](https://marketstack.com/dashboard).
 
-Add one or more comma-separated **symbols** (e.g. `AAPL,MSFT,TSLA`) to sync the EOD, intraday, splits, and dividends tables ,  those endpoints require at least one symbol. The reference tables don't need symbols.
+Add one or more comma-separated **symbols** (e.g. `AAPL,MSFT,TSLA`) to sync the EOD, intraday, splits, and dividends tables - those endpoints require at least one symbol. The reference tables don't need symbols.
 
 Note: Marketstack pricing is a monthly request quota tied to your plan. Some tables (e.g. intraday) require a paid plan.
 

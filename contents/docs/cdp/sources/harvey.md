@@ -30,7 +30,7 @@ Enter your Harvey API token to pull audit logs, usage and query history, client 
 
 Create an API token in Harvey workspace settings under **API Tokens** (if you don't see that section, ask your Harvey Customer Success Manager to enable API access).
 
-Each token carries a per-endpoint permissions list ,  grant access for the endpoints you want to sync: audit logs, history exports, client matters, and Vault.
+Each token carries a per-endpoint permissions list - grant access for the endpoints you want to sync: audit logs, history exports, client matters, and Vault.
 
 You'll be asked for:
 

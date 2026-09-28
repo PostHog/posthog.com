@@ -28,7 +28,7 @@ Credentials that can read the data you want to sync. PostHog only reads data, so
 
 Sync one or more datasets from [data.cdc.gov](https://data.cdc.gov).
 
-Find a dataset's ID in its data.cdc.gov URL ,  for example `9bhg-hcku` in `https://data.cdc.gov/d/9bhg-hcku`. Browse the full catalog at [data.cdc.gov](https://data.cdc.gov).
+Find a dataset's ID in its data.cdc.gov URL - for example `9bhg-hcku` in `https://data.cdc.gov/d/9bhg-hcku`. Browse the full catalog at [data.cdc.gov](https://data.cdc.gov).
 
 No account is required. Optionally, register a free [Socrata app token](https://support.socrata.com/hc/en-us/articles/210138558-Generating-an-App-Token) to avoid the shared public rate limit.
 

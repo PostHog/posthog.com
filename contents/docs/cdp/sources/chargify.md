@@ -28,7 +28,7 @@ Credentials that can read the data you want to sync. PostHog only reads data, so
 
 Enter your Chargify (Maxio Advanced Billing) API key and site subdomain to pull your billing data.
 
-You can create an API key under **Settings → Integrations → API Access** in your Chargify site. Your subdomain is the first part of your site URL ,  for `acme.chargify.com` the subdomain is `acme`.
+You can create an API key under **Settings → Integrations → API Access** in your Chargify site. Your subdomain is the first part of your site URL - for `acme.chargify.com` the subdomain is `acme`.
 
 You'll be asked for:
 

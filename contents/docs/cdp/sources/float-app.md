@@ -30,7 +30,7 @@ Enter your Float access token to automatically pull your Float resource-manageme
 
 You can create an access token in Float under **Team Settings → Integrations → API**. The token has the same access as its account owner.
 
-All streams sync via full refresh ,  Float's API exposes no server-side modified-since filter on its core resources.
+All streams sync via full refresh - Float's API exposes no server-side modified-since filter on its core resources.
 
 You'll be asked for:
 

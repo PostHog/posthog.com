@@ -28,7 +28,7 @@ Credentials that can read the data you want to sync. PostHog only reads data, so
 
 Enter your noCRM.io account subdomain and API key to automatically pull your noCRM.io data.
 
-Your subdomain is the first part of your noCRM.io URL ,  for `acme.nocrm.io`, enter `acme`.
+Your subdomain is the first part of your noCRM.io URL - for `acme.nocrm.io`, enter `acme`.
 
 You can create an API key as an account admin under **Admin panel → API & Webhooks → API keys**. The key is account-level and grants read access to leads, users, teams, pipelines and the other tables listed below.
 

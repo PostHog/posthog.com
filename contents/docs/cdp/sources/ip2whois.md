@@ -28,9 +28,9 @@ Credentials that can read the data you want to sync. PostHog only reads data, so
 
 Enter your IP2WHOIS API key and the domains you want to look up to pull WHOIS registration data.
 
-IP2WHOIS (by IP2Location) is a domain WHOIS lookup API. Create an API key in your [IP2WHOIS dashboard](https://www.ip2whois.com/) ,  the free tier includes 500 lookups per month.
+IP2WHOIS (by IP2Location) is a domain WHOIS lookup API. Create an API key in your [IP2WHOIS dashboard](https://www.ip2whois.com/) - the free tier includes 500 lookups per month.
 
-There is no list endpoint ,  every request looks up a single domain ,  so enter one domain per line (commas and spaces also work). For example:
+There is no list endpoint - every request looks up a single domain - so enter one domain per line (commas and spaces also work). For example:
 
 ```
 example.com

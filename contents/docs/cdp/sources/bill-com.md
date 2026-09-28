@@ -30,7 +30,7 @@ Connect BILL to pull your accounts payable and receivable data.
 
 Create a developer key in your [BILL developer account](https://developer.bill.com/docs/bill-keys-tokens), then enter the email and password you sign in with, your organization ID, and that developer key. PostHog uses them to start an API session for each sync.
 
-BILL Spend & Expense data is not included ,  it uses a separate API token.
+BILL Spend & Expense data is not included - it uses a separate API token.
 
 You'll be asked for:
 

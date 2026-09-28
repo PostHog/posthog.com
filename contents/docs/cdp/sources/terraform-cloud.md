@@ -28,7 +28,7 @@ Credentials that can read the data you want to sync. PostHog only reads data, so
 
 Sync organizations, projects, teams, workspaces, runs, and state versions from HCP Terraform (formerly Terraform Cloud) to analyze infrastructure change frequency, plan/apply durations, and failure rates.
 
-Create an API token in your HCP Terraform organization settings under **API tokens** ,  an organization token is recommended so every workspace is visible. Team and user tokens also work but only see the workspaces they have access to.
+Create an API token in your HCP Terraform organization settings under **API tokens** - an organization token is recommended so every workspace is visible. Team and user tokens also work but only see the workspaces they have access to.
 
 Only the SaaS API at `app.terraform.io` is supported; self-hosted Terraform Enterprise is not currently supported.
 

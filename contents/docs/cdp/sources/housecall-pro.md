@@ -28,7 +28,7 @@ Credentials that can read the data you want to sync. PostHog only reads data, so
 
 Enter your Housecall Pro API key to pull your jobs, customers, and invoices.
 
-API access needs a MAX plan. An account admin can generate a key under **My Apps → All Apps → API Key Management** ,  choose read-only access for a sync-only key.
+API access needs a MAX plan. An account admin can generate a key under **My Apps → All Apps → API Key Management** - choose read-only access for a sync-only key.
 
 You'll be asked for:
 

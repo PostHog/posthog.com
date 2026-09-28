@@ -30,7 +30,7 @@ Enter your OpenAQ API key to pull global air-quality data.
 
 You can create a free API key from your [OpenAQ Explorer account](https://explore.openaq.org/account).
 
-The free tier is limited to 60 requests per minute. The measurement tables fetch data per sensor, so syncing them against a broad set of locations makes many requests ,  they're off by default; enable only the sensors you need.
+The free tier is limited to 60 requests per minute. The measurement tables fetch data per sensor, so syncing them against a broad set of locations makes many requests - they're off by default; enable only the sensors you need.
 
 You'll be asked for:
 

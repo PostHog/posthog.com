@@ -30,7 +30,7 @@ Pull your Workday HCM data over the Workday REST API.
 
 Register an API client for integrations in Workday (**Register API Client for Integrations**) with the `staffing` scope, then paste its client ID, client secret and refresh token below.
 
-Your hostname and tenant are the first two parts of your Workday URL ,  for `https://wd2-impl-services1.workday.com/acme_pt1`, the hostname is `wd2-impl-services1.workday.com` and the tenant is `acme_pt1`.
+Your hostname and tenant are the first two parts of your Workday URL - for `https://wd2-impl-services1.workday.com/acme_pt1`, the hostname is `wd2-impl-services1.workday.com` and the tenant is `acme_pt1`.
 
 You'll be asked for:
 

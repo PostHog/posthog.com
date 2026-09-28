@@ -30,7 +30,7 @@ Enter the bearer token Clever issued to your app for a district. Find it in your
 app dashboard, under that district's **Data Sources** tab in the **API Token** section. See the
 [Clever API overview](https://dev.clever.com/docs/api-overview) for details.
 
-Each token is scoped to a single district ,  connect a separate source per district you want to sync.
+Each token is scoped to a single district - connect a separate source per district you want to sync.
 Rostering data beyond districts requires the district's Clever Secure Sync (Clever Complete) subscription.
 
 You'll be asked for:

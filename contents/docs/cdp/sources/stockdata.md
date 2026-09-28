@@ -30,7 +30,7 @@ Enter your StockData.org API token to pull market news with sentiment plus quote
 
 You can find your API token in your [StockData.org dashboard](https://www.stockdata.org/dashboard).
 
-Add one or more comma-separated **symbols** (e.g. `AAPL,MSFT,TSLA`) to sync the price tables (quote, EOD, intraday, dividends, splits) ,  those endpoints require at least one symbol. The news table works without symbols (all market news) and is filtered to your symbols when they are set.
+Add one or more comma-separated **symbols** (e.g. `AAPL,MSFT,TSLA`) to sync the price tables (quote, EOD, intraday, dividends, splits) - those endpoints require at least one symbol. The news table works without symbols (all market news) and is filtered to your symbols when they are set.
 
 Note: StockData.org plans are limited by daily request quotas (100 requests/day on the free plan), and some tables (dividends, splits) require a Standard or higher plan.
 

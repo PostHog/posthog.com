@@ -30,7 +30,7 @@ Enter your NewsAPI key to pull live and historical news articles.
 
 Create a free API key at [newsapi.org](https://newsapi.org/register). The search query drives the `everything` and `top_headlines` tables; the `sources` table lists available publishers.
 
-Note: NewsAPI's free Developer plan is limited to articles from the last month and is for development/testing only ,  a paid plan is required for production use and older articles.
+Note: NewsAPI's free Developer plan is limited to articles from the last month and is for development/testing only - a paid plan is required for production use and older articles.
 
 You'll be asked for:
 

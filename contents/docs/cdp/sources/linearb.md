@@ -30,7 +30,7 @@ Enter your LinearB API key to pull your engineering intelligence and DORA metric
 
 Generate an API token from **Settings → API Tokens** in your [LinearB account](https://app.linearb.io/). The token grants access to your organization's teams, users, services, deployments, and computed metrics.
 
-The **Measurements** table is only available on LinearB Business and Enterprise plans and is off by default ,  enable it if your plan includes API metrics access.
+The **Measurements** table is only available on LinearB Business and Enterprise plans and is off by default - enable it if your plan includes API metrics access.
 
 You'll be asked for:
 

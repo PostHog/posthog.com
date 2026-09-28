@@ -30,7 +30,7 @@ Enter your Open Exchange Rates App ID to pull foreign-exchange reference rates.
 
 Find your App ID in your [Open Exchange Rates dashboard](https://openexchangerates.org/account/app-ids).
 
-The free plan is restricted to the `USD` base currency ,  a custom base currency requires a paid plan. The `historical` table walks one request per day from the start date, so a large backfill can use a lot of your monthly request quota.
+The free plan is restricted to the `USD` base currency - a custom base currency requires a paid plan. The `historical` table walks one request per day from the start date, so a large backfill can use a lot of your monthly request quota.
 
 You'll be asked for:
 

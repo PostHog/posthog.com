@@ -30,7 +30,7 @@ Enter your Canvas domain, account ID, and an access token to pull course, enroll
 
 Generate a token from **Account → Settings → Approved Integrations → New access token** in Canvas. Use an admin account so the token can list every course in your account.
 
-Find your account ID in the URL when you view **Admin → [your account] → Settings** ,  it's the number after `/accounts/` (for example, `1` in `https://yourschool.instructure.com/accounts/1`).
+Find your account ID in the URL when you view **Admin → [your account] → Settings** - it's the number after `/accounts/` (for example, `1` in `https://yourschool.instructure.com/accounts/1`).
 
 You'll be asked for:
 

@@ -30,7 +30,7 @@ Enter your Orca Security API token to pull your cloud security posture data.
 
 Create an API token in Orca under **Settings → Users & Permissions → API**. A user with the **Viewer** role is enough to read alerts, assets, cloud accounts, and vulnerabilities.
 
-Pick the **region** that matches the URL you sign in to ,  the token is only valid for the region it was created in.
+Pick the **region** that matches the URL you sign in to - the token is only valid for the region it was created in.
 
 You'll be asked for:
 

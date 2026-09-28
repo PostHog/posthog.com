@@ -28,7 +28,7 @@ Credentials that can read the data you want to sync. PostHog only reads data, so
 
 Enter your Sage HR company subdomain and API key to pull your HR data.
 
-An admin must first enable API access under **Settings → Integrations → API** in Sage HR, which generates the API key. Requests go to your own subdomain ,  for `https://yourcompany.sage.hr` the subdomain is `yourcompany`.
+An admin must first enable API access under **Settings → Integrations → API** in Sage HR, which generates the API key. Requests go to your own subdomain - for `https://yourcompany.sage.hr` the subdomain is `yourcompany`.
 
 You'll be asked for:
 

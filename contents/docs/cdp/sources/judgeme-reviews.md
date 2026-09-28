@@ -28,7 +28,7 @@ Credentials that can read the data you want to sync. PostHog only reads data, so
 
 Enter your shop domain and private API token to pull your Judge.me product reviews.
 
-You can find your private API token under **Settings → Integrations → Judge.me API** in the [Judge.me admin](https://judge.me). Use the **private** token ,  the public token cannot read reviews. The shop domain is your store's `myshopify.com` domain (e.g. `example.myshopify.com`).
+You can find your private API token under **Settings → Integrations → Judge.me API** in the [Judge.me admin](https://judge.me). Use the **private** token - the public token cannot read reviews. The shop domain is your store's `myshopify.com` domain (e.g. `example.myshopify.com`).
 
 You'll be asked for:
 

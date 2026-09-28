@@ -28,9 +28,9 @@ Credentials that can read the data you want to sync. PostHog only reads data, so
 
 Enter your SolarWinds Service Desk JSON web token to pull your service desk data.
 
-You can generate a token in SolarWinds Service Desk under **Setup → Users & Access → Users** ,  open the user and use **Actions → Generate JSON Web Token**. The token inherits that user's role, so it needs read access to the records you want to sync, and requests stop working if that user is ever disabled.
+You can generate a token in SolarWinds Service Desk under **Setup → Users & Access → Users** - open the user and use **Actions → Generate JSON Web Token**. The token inherits that user's role, so it needs read access to the records you want to sync, and requests stop working if that user is ever disabled.
 
-SolarWinds Service Desk runs independent regional stacks that do not share data ,  pick the region your account is on.
+SolarWinds Service Desk runs independent regional stacks that do not share data - pick the region your account is on.
 
 You'll be asked for:
 

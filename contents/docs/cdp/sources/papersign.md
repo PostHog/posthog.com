@@ -28,7 +28,7 @@ Credentials that can read the data you want to sync. PostHog only reads data, so
 
 Enter your Paperform API key to sync your Papersign documents, folders, and spaces.
 
-Create an API key on your [Paperform account page](https://paperform.co/account/developer/api-keys). The key has full account access ,  Paperform does not offer per-resource scopes.
+Create an API key on your [Paperform account page](https://paperform.co/account/developer/api-keys). The key has full account access - Paperform does not offer per-resource scopes.
 
 The Papersign API requires a paid Paperform plan (Standard or Business tier).
 

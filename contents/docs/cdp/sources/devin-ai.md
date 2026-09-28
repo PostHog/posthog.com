@@ -29,10 +29,10 @@ Credentials that can read the data you want to sync. PostHog only reads data, so
 Enter your Devin service user API key and organization ID to sync your Devin data.
 
 Create a service user API key (prefixed `cog_`) in your [Devin organization settings](https://app.devin.ai/settings). The service user needs the following organization-level permissions:
-- `ViewOrgSessions` ,  Sessions
-- `ManageAccountKnowledge` ,  Playbooks and Knowledge notes
-- `ViewOrgMembership` ,  Members
-- `ManageOrgSecrets` ,  Secrets (metadata only; values are never synced)
+- `ViewOrgSessions` - Sessions
+- `ManageAccountKnowledge` - Playbooks and Knowledge notes
+- `ViewOrgMembership` - Members
+- `ManageOrgSecrets` - Secrets (metadata only; values are never synced)
 
 Your organization ID is the `org-...` identifier shown in your Devin organization settings.
 

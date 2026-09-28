@@ -28,7 +28,7 @@ Credentials that can read the data you want to sync. PostHog only reads data, so
 
 Enter your Gerrit instance URL and credentials to pull your code review data.
 
-Generate an HTTP password in your Gerrit account under **Settings > HTTP Credentials** (or **HTTP Password** on older versions) and enter it together with your Gerrit username. On public instances you can leave both blank to sync with anonymous read access ,  you'll only see the changes, accounts, and projects that are publicly visible, and group listing requires an authenticated account.
+Generate an HTTP password in your Gerrit account under **Settings > HTTP Credentials** (or **HTTP Password** on older versions) and enter it together with your Gerrit username. On public instances you can leave both blank to sync with anonymous read access - you'll only see the changes, accounts, and projects that are publicly visible, and group listing requires an authenticated account.
 
 You'll be asked for:
 

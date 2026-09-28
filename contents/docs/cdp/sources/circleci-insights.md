@@ -26,7 +26,7 @@ Credentials that can read the data you want to sync. PostHog only reads data, so
 
 <SourceSetupIntro />
 
-Enter your CircleCI personal API token and project slugs to pull pipeline health metrics ,  workflow and job durations, success rates, credit usage, recent runs, and flaky tests ,  from the CircleCI Insights API.
+Enter your CircleCI personal API token and project slugs to pull pipeline health metrics - workflow and job durations, success rates, credit usage, recent runs, and flaky tests - from the CircleCI Insights API.
 
 You can create a personal API token in your [CircleCI user settings](https://app.circleci.com/settings/user/tokens). Note that CircleCI retains Insights data for roughly 90 days.
 

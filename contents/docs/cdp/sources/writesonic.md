@@ -26,7 +26,7 @@ Credentials that can read the data you want to sync. PostHog only reads data, so
 
 <SourceSetupIntro />
 
-Connect Writesonic to pull your GEO (generative engine optimization) data ,  brand visibility, rank, and mentions across AI platforms like ChatGPT and Perplexity , .
+Connect Writesonic to pull your GEO (generative engine optimization) data - brand visibility, rank, and mentions across AI platforms like ChatGPT and Perplexity - .
 
 You'll need:
 

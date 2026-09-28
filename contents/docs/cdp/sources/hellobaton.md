@@ -28,7 +28,7 @@ Credentials that can read the data you want to sync. PostHog only reads data, so
 
 Enter your Baton (Hellobaton) company instance and API key to pull your onboarding and implementation data.
 
-Your company instance is the subdomain of your Baton URL ,  for `yourcompany.hellobaton.com`, enter `yourcompany`.
+Your company instance is the subdomain of your Baton URL - for `yourcompany.hellobaton.com`, enter `yourcompany`.
 
 Generate an API key in Baton under the **API** section of your account settings. The key inherits your account permissions, so it can read every record you can see.
 

@@ -28,7 +28,7 @@ Credentials that can read the data you want to sync. PostHog only reads data, so
 
 Enter your Phyllo API credentials to pull creator accounts, profiles, content, and income data.
 
-You can find your client ID and secret in the [Phyllo developer dashboard](https://dashboard.getphyllo.com) under **API credentials**. Credentials are environment-specific ,  sandbox credentials only authenticate against the sandbox environment.
+You can find your client ID and secret in the [Phyllo developer dashboard](https://dashboard.getphyllo.com) under **API credentials**. Credentials are environment-specific - sandbox credentials only authenticate against the sandbox environment.
 
 You'll be asked for:
 

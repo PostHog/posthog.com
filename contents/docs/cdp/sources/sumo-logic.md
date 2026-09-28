@@ -28,7 +28,7 @@ Credentials that can read the data you want to sync. PostHog only reads data, so
 
 Connect your Sumo Logic account to sync log search results, collectors, monitors, dashboards, users, and more.
 
-Create an access ID and access key in your [Sumo Logic preferences](https://help.sumologic.com/docs/manage/security/access-keys/) (or use a service account's access key). Pick the deployment region your account lives on ,  it's the subdomain of your Sumo Logic URL (e.g. `service.eu.sumologic.com` is the EU deployment).
+Create an access ID and access key in your [Sumo Logic preferences](https://help.sumologic.com/docs/manage/security/access-keys/) (or use a service account's access key). Pick the deployment region your account lives on - it's the subdomain of your Sumo Logic URL (e.g. `service.eu.sumologic.com` is the EU deployment).
 
 The `logs` table runs your log search query through the Search Job API over rolling time windows. Leave the query as `*` to sync everything, or narrow it (e.g. `_sourceCategory=prod/api`) to control volume.
 

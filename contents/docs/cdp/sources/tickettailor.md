@@ -28,7 +28,7 @@ Credentials that can read the data you want to sync. PostHog only reads data, so
 
 Enter your Ticket Tailor API key to pull your event ticketing data.
 
-You can create an API key under **Settings → API** in your [Ticket Tailor](https://www.tickettailor.com) box office. API keys are scoped to a single box office ,  connect one source per box office you want to sync.
+You can create an API key under **Settings → API** in your [Ticket Tailor](https://www.tickettailor.com) box office. API keys are scoped to a single box office - connect one source per box office you want to sync.
 
 You'll be asked for:
 
