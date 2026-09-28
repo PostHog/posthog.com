@@ -2,6 +2,7 @@
     "client_id": "https://posthog.com/.well-known/oauth/desktop-announcements-admin/client-metadata.json",
     "client_name": "PostHog Desktop Announcements Admin",
     "client_uri": "https://desktop-announcements-admin.hosthog.dev/",
+    "logo_uri": "https://posthog.com/.well-known/oauth/desktop-announcements-admin/logo.png",
     "redirect_uris": ["https://desktop-announcements-admin.hosthog.dev/oauth/callback"],
     "grant_types": ["authorization_code"],
     "response_types": ["code"],
