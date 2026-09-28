@@ -28,7 +28,7 @@ Credentials that can read the data you want to sync. PostHog only reads data, so
 
 Connect your Bitbucket Cloud workspace to sync repositories, pull requests, commits, pipelines, and more.
 
-Your credentials need the **repository**, **pullrequest**, **pipeline**, **project**, and **account** read scopes. Avoid app passwords ,  Atlassian is retiring them; use an API token or an access token instead.
+Your credentials need the **repository**, **pull request**, **pipeline**, **project**, and **account** read scopes. Avoid app passwords ,  Atlassian is retiring them; use an API token or an access token instead.
 
 You'll be asked for:
 

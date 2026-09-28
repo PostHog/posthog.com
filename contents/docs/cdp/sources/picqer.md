@@ -26,7 +26,7 @@ Credentials that can read the data you want to sync. PostHog only reads data, so
 
 <SourceSetupIntro />
 
-Enter your Picqer account name and API key to pull your Picqer warehouse and fulfilment data.
+Enter your Picqer account name and API key to pull your Picqer warehouse and fulfillment data.
 
 Create an API key under **Settings → API keys** in your Picqer account. The key inherits its permissions from its scope, so it can read the records that scope allows.
 
