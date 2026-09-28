@@ -1,6 +1,6 @@
 ---
 title: WTF is a technical account manager? (and why startups hire them)
-date: 2026-09-25
+date: 2026-09-28
 author:
   - ian-vanagas
 showTitle: true
@@ -8,7 +8,7 @@ rootpage: /blog
 sidebar: Blog
 hideAnchor: true
 featuredImage: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/harinezumi_943e9cc56e.png
+  https://res.cloudinary.com/dmukukwp6/image/upload/tam_7e4c679a73.png
 featuredImageType: full
 category: Engineering
 tags:
@@ -59,7 +59,7 @@ Beyond cutting bills, TAMs spend their days interacting with customers (mostly e
 
 - Migrating and integrating with other tools in the customer's existing stack, answering questions about differences and constraints. For example, a team moving from LaunchDarkly to PostHog would need to know PostHog flags live in a single project rather than across environments and that release conditions replace rules.
 
-- Expanding both the products customers are using and the users using them. New product launches at PostHog like [Replay Vision](/replay-vision) often lead to new conversations about how they can be valuable. TAMs often also run [training sessions](/handbook/growth/sales/customer-training) for the customer's teams. 
+- Expanding both the products customers are using and the users using them. New product launches at PostHog like [Replay Vision](/replay-vision) often lead to new conversations about how they can be valuable. TAMs often also run [training sessions](/handbook/growth/sales/customer-training) for the customer's teams with the goal of expanding who uses it.  
 
 The best technical account managers do all of this proactively. They have alerts for when accounts are assigned to them or when their assigned accounts have an anomaly worth exploring. This might trigger them to do something like the cost audit mentioned at the beginning of this section. 
 
@@ -75,13 +75,13 @@ TAMs at many companies work in partnership with account executives (AE), salespe
 
 Support engineers also help customers solve problems, but at a much higher volume than TAMs and they aren't usually attached to accounts.
 
-![Sales roles 2x2](https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/Clean_Shot_2026_09_24_at_15_49_34_2x_8461cd9e32.png)
+![Sales roles 2x2](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/tam2x2_4e57aa2474.png)
 
 ## What's different about TAMs at PostHog?
 
 As you might guess, PostHog is not most companies. Technical account managers here have many of the same responsibilities in terms of supporting customers, but at PostHog, they also have commercial responsibilities too. 
 
-![PostHog TAM 2x2](https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/Clean_Shot_2026_09_24_at_15_50_08_2x_d71440ec8e.png)
+![PostHog TAM 2x2](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/posthogtam2x2_37b9e48c97.png)
 
 You can think of TAMs at PostHog as salespeople. They: 
 
@@ -93,7 +93,7 @@ You can think of TAMs at PostHog as salespeople. They:
 
 Where everyone else splits by technical versus commercial, PostHog splits by customer lifecycle, roughly:
 
-- A technical account executive lands
+- A technical account *executive* lands
 - A technical account manager expands
 - And a technical customer success manager retains
 
@@ -116,7 +116,7 @@ As for more character traits, a good way to summarize is that great TAMs are [lo
 Because TAMs are special at PostHog, we also have special requirements for them. Generally, we look for two types of people:
 
 - Account executives who have owned longer term customer relationships and are technical enough to hold their own. They won't be bringing engineers to their demos for example. We look for salespeople who have built their own vibe coded tools and side projects.
-- Sales engineers or product specialists who are tired of letting the sales team get all the credit. Some of our TAMs are literally ex-product engineers.
+- Sales engineers or product specialists who are tired of letting the sales team get all the credit. Some of our TAMs are literally ex-[product engineers](/product-engineer/what-is-a-product-engineer).
 
 We then empower these people to really make our customers successful, even if that means smaller renewals. We count our anti-revenue wins as wins too. 
 
