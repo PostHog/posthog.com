@@ -317,7 +317,7 @@ const AskMaxButton = ({ onClick, askedMax }: { askedMax: boolean; onClick: () =>
     )
 }
 
-const AskMax = ({
+export const AskMax = ({
     question,
     refresh,
     manual = false,
@@ -332,6 +332,9 @@ const AskMax = ({
 }) => {
     const [loading, setLoading] = useState(true)
     const [confident, setConfident] = useState(false)
+    // The server refuses automatic replies in forum topics with AI replies off. That is not a failed search, so
+    // nothing shows.
+    const [refused, setRefused] = useState(false)
     const { getJwt } = useUser()
 
     useEffect(() => {
@@ -348,8 +351,13 @@ const AskMax = ({
                         manual,
                         withContext,
                     }),
-                }).then((res) => res.json())
-                setConfident(response.confident)
+                })
+                if (response.status === 403) {
+                    setRefused(true)
+                    return
+                }
+                const data = await response.json()
+                setConfident(data.confident)
                 setLoading(false)
                 refresh()
             } catch (error) {
@@ -360,7 +368,7 @@ const AskMax = ({
         window.history.replaceState({ ...window.history.state, askMax: false }, '')
     }, [])
 
-    return loading ? (
+    return refused ? null : loading ? (
         <AskMaxLoading isInForum={isInForum} />
     ) : !confident ? (
         <MaxReply isInForum={isInForum}>
