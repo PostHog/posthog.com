@@ -30,7 +30,7 @@ All tables except **merchant_accounts** support incremental syncs on the `create
 
 2. Click **+ New source** and then click **Link** next to Braintree.
 
-3. Select your **Environment** — either **Production** or **Sandbox**. Make sure the keys you provide in the next steps match the selected environment.
+3. Select your **Environment** – either **Production** or **Sandbox**. Make sure the keys you provide in the next steps match the selected environment.
 
 4. To find your API keys, go to the [Braintree Control Panel](https://www.braintreegateway.com/) and navigate to **Settings** > **API Keys**. If you don't have a key pair yet, generate one. Copy the **Public key** and **Private key**.
 
@@ -52,6 +52,6 @@ Once the sync completes, you can start querying your Braintree data in PostHog.
 
 ## Sync details
 
-- **Incremental sync** - For **transactions**, **refunds**, **customers**, and **recurring_billing_subscriptions**, PostHog filters server-side using a `greaterThanOrEqualTo` search filter on `createdAt`, so each run gets only new records. Braintree cannot filter disputes by `createdAt`, so each **disputes** sync reads all disputes and PostHog removes duplicates by primary key.
-- **Partitioning** - Data is partitioned by month on the `createdAt` field. The **merchant_accounts** table is not partitioned.
-- **Pagination** - Uses Relay-style cursor pagination. If a sync is interrupted, it resumes from the last successfully synced page.
+- **Incremental sync** – For **transactions**, **refunds**, **customers**, and **recurring_billing_subscriptions**, PostHog filters server-side using a `greaterThanOrEqualTo` search filter on `createdAt`, so each run gets only new records. Braintree cannot filter disputes by `createdAt`, so each **disputes** sync reads all disputes and PostHog removes duplicates by primary key.
+- **Partitioning** – Data is partitioned by month on the `createdAt` field. The **merchant_accounts** table is not partitioned.
+- **Pagination** – Uses Relay-style cursor pagination. If a sync is interrupted, it resumes from the last successfully synced page.
