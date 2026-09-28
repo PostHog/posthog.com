@@ -35,7 +35,7 @@ Let us know [on this GitHub issue](https://github.com/PostHog/posthog/issues/127
 
 5. Create a dashboard image in Figma in the [Hoggies](https://www.figma.com/design/I0VKEEjbkKUDSVzFus2Lpu/Hoggies?node-id=1-196&t=UZQMXMddH0DMLxqX-0) file. Make the size of image small (like 396x208). Export and upload to Cloudinary.
 
-6. With the URL, go to [templates tab](https://us.posthog.com/dashboard?tab=templates) under dashboards, click the three dots to the far right of your template, and click "Edit." Add the URL to the `image_url` field and press **Update template**.
+6. With the URL, go to [templates list](https://us.posthog.com/dashboard?templates=1) under dashboards, click the three dots to the far right of your template, and click "Edit." Add the URL to the `image_url` field and press **Update template**.
 
 7. For the website, copy the same hedgehog as a small square thumbnail image (400x400) with a transparent background. Export and upload to Cloudinary.
 
@@ -53,7 +53,7 @@ Let us know [on this GitHub issue](https://github.com/PostHog/posthog/issues/127
 
 If you ever need to remove a dashboard template, you need to:
 
-1. Open [the templates list](https://us.posthog.com/project/2/dashboard?tab=templates)
+1. Open [the templates list](https://us.posthog.com/project/2/dashboard?templates=1)
 2. Click on the three dots to the right of the template you want to remove and then click **Make visible to this team only**. This is a required step before you can delete it.
 3. Click on the three dots again and then click **Delete Dashboard**.
 

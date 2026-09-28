@@ -22,7 +22,6 @@ import {
     IconAsterisk,
     IconAI,
     IconTestTube,
-    IconTarget,
     IconArrowUpRight,
     IconTrends,
     IconCursorClick,
@@ -106,18 +105,6 @@ export default function useProduct({ handle }: { handle?: string } = {}) {
                     imgClasses: 'w-full rounded shadow-xl border border-primary',
                 },
             },
-        },
-        // A UI-only product card that shares AI Observability's page, not a canonical tool with its own root page.
-        {
-            name: 'AI Evals',
-            Icon: IconTarget,
-            description: 'Run LLM-as-a-judge evaluations to catch regressions.',
-            handle: 'llm_evals',
-            color: 'blue',
-            colorSecondary: 'blue',
-            category: 'ai',
-            slug: 'ai-observability',
-            status: 'beta',
         },
         // A feature of Experiments used in product UI, not a canonical tool with its own root page.
         {
@@ -643,6 +630,11 @@ export default function useProduct({ handle }: { handle?: string } = {}) {
             Icon: IconMagicWand,
             color: 'purple',
             colorSecondary: 'lilac',
+            seo: {
+                title: 'Business intelligence - PostHog',
+                description:
+                    'Query your data warehouse with SQL, visualize external data sources, and build dashboards that combine product and business data.',
+            },
             overview: {
                 title: 'Business intelligence for data-driven teams',
                 description:

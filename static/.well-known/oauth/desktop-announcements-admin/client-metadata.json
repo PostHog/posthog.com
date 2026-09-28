@@ -1,0 +1,12 @@
+{
+    "client_id": "https://posthog.com/.well-known/oauth/desktop-announcements-admin/client-metadata.json",
+    "client_name": "PostHog Desktop Announcements Admin",
+    "client_uri": "https://desktop-announcements-admin.hosthog.dev/",
+    "redirect_uris": ["https://desktop-announcements-admin.hosthog.dev/oauth/callback"],
+    "grant_types": ["authorization_code"],
+    "response_types": ["code"],
+    "token_endpoint_auth_method": "none",
+    "com.posthog": {
+        "scopes": ["feature_flag:read", "feature_flag:write", "user:read"]
+    }
+}

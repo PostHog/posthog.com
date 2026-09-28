@@ -1459,10 +1459,6 @@ export const handbookSidebar = [
                         name: 'Getting people to talk to you',
                         url: '/handbook/growth/sales/getting-people-to-talk-to-you',
                     },
-                    {
-                        name: 'Customer on-sites',
-                        url: '/handbook/growth/sales/customer-onsites',
-                    },
                 ],
             },
             {
@@ -1500,8 +1496,16 @@ export const handbookSidebar = [
                         url: '/handbook/cs-and-onboarding/lifecycle-csm',
                     },
                     {
+                        name: 'Customer-led calls',
+                        url: '/handbook/cs-and-onboarding/customer-led-calls',
+                    },
+                    {
                         name: 'Unengaged customers',
                         url: '/handbook/cs-and-onboarding/engaging-unengaged-customers',
+                    },
+                    {
+                        name: 'Cost optimization',
+                        url: '/handbook/cs-and-onboarding/cost-optimization',
                     },
                     {
                         name: 'Automation & AI',
@@ -1535,6 +1539,10 @@ export const handbookSidebar = [
                     {
                         name: 'How we work',
                         url: '/handbook/forward-deployed-engineering/how-we-work',
+                    },
+                    {
+                        name: 'How we work with AI',
+                        url: '/handbook/forward-deployed-engineering/working-with-ai',
                     },
                     {
                         name: 'New starter onboarding',
@@ -1836,6 +1844,16 @@ export const handbookSidebar = [
                         name: 'Chrome extension billing case study',
                         url: '/handbook/onboarding/chrome-extension-billing-case-study-wildfire',
                     },
+                    {
+                        name: 'Context warehouse enablement',
+                        url: '',
+                        children: [
+                            {
+                                name: 'Data foundations',
+                                url: '/handbook/growth/sales/data-foundations',
+                            },
+                        ],
+                    },
                 ],
             },
             {
@@ -1845,6 +1863,20 @@ export const handbookSidebar = [
                     {
                         name: 'Overview',
                         url: '/teams/gtm-engineering',
+                    },
+                ],
+            },
+            {
+                name: 'Working with customers in person',
+                url: '',
+                children: [
+                    {
+                        name: 'Customer on-sites',
+                        url: '/handbook/growth/sales/customer-onsites',
+                    },
+                    {
+                        name: 'Cohort dinners',
+                        url: '/handbook/cs-and-onboarding/cohort-dinners',
                     },
                 ],
             },
@@ -2715,6 +2747,10 @@ export const docsMenu = {
                     },
                 },
                 {
+                    name: 'From our inbox',
+                    url: '/docs/self-driving/from-our-inbox',
+                },
+                {
                     name: 'Pricing',
                     url: '/docs/self-driving/pricing',
                 },
@@ -3440,10 +3476,6 @@ export const docsMenu = {
                         {
                             name: 'Endpoints',
                             url: '/docs/api/endpoints',
-                        },
-                        {
-                            name: 'Environments',
-                            url: '/docs/api/environments',
                         },
                         {
                             name: 'Error tracking',
@@ -5134,6 +5166,12 @@ export const docsMenu = {
                     color: 'yellow',
                 },
                 {
+                    name: 'Scanner prompts',
+                    url: '/docs/replay-vision/scanner-prompts',
+                    icon: 'IconLlmPromptEvaluation',
+                    color: 'yellow',
+                },
+                {
                     name: 'Running scanners',
                     url: '/docs/replay-vision/running-scanners',
                     icon: 'IconPlay',
@@ -6051,6 +6089,31 @@ export const docsMenu = {
                     ],
                 },
                 {
+                    name: 'Link releases',
+                    url: '/docs/error-tracking/link-releases',
+                    icon: 'IconGitBranch',
+                    color: 'purple',
+                    featured: true,
+                    children: [
+                        {
+                            name: 'Overview',
+                            url: '/docs/error-tracking/link-releases',
+                        },
+                        {
+                            name: 'Python',
+                            url: '/docs/error-tracking/link-releases/python',
+                        },
+                        {
+                            name: 'Ruby',
+                            url: '/docs/error-tracking/link-releases/ruby',
+                        },
+                        {
+                            name: 'PHP',
+                            url: '/docs/error-tracking/link-releases/php',
+                        },
+                    ],
+                },
+                {
                     name: 'Surfaces',
                 },
                 {
@@ -6646,6 +6709,50 @@ export const docsMenu = {
                     url: '/docs/data-warehouse/views/materialize-troubleshooting',
                     icon: 'IconQuestion',
                     color: 'orange',
+                },
+                {
+                    name: 'Data quality',
+                    url: '/docs/data-warehouse/data-quality',
+                    icon: 'IconListCheck',
+                    color: 'red',
+                    badge: {
+                        title: 'Alpha',
+                        className: 'uppercase !bg-red/10 !text-red !dark:text-white !dark:bg-red/50',
+                    },
+                    children: [
+                        {
+                            name: 'Overview',
+                            url: '/docs/data-warehouse/data-quality',
+                        },
+                        {
+                            name: 'Start here',
+                            url: '/docs/data-warehouse/data-quality/start-here',
+                        },
+                        {
+                            name: 'Check types and configuration',
+                            url: '/docs/data-warehouse/data-quality/check-types',
+                        },
+                        {
+                            name: 'Triggers and schedules',
+                            url: '/docs/data-warehouse/data-quality/triggers',
+                        },
+                        {
+                            name: 'Block materialization',
+                            url: '/docs/data-warehouse/data-quality/block-materialization',
+                        },
+                        {
+                            name: 'Test metrics',
+                            url: '/docs/data-warehouse/data-quality/metrics',
+                        },
+                        {
+                            name: 'MCP and SQL reference',
+                            url: '/docs/data-warehouse/data-quality/mcp',
+                        },
+                        {
+                            name: 'Results and troubleshooting',
+                            url: '/docs/data-warehouse/data-quality/troubleshooting',
+                        },
+                    ],
                 },
                 {
                     name: 'SQL commands',
@@ -8119,6 +8226,12 @@ export const docsMenu = {
                     url: '/docs/workflows/opt-outs',
                     icon: 'IconShieldLock',
                     color: 'green',
+                },
+                {
+                    name: 'Sending reputation and allowance',
+                    url: '/docs/workflows/sending-reputation',
+                    icon: 'IconShield',
+                    color: 'orange',
                 },
                 {
                     name: 'Import opt-out lists from Customer.io',

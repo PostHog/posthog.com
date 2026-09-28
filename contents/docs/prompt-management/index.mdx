@@ -224,7 +224,7 @@ Resolution happens on the PostHog API at fetch time:
 
 - The SDK receives one assembled prompt with each tag replaced by the referenced content. No SDK changes are needed.
 - The response includes `resolved_references`: the exact versions that were spliced in. The same information is recorded on the `$llm_prompt_fetched` event, so you can trace which shared content each call actually used.
-- Pass `resolve=false` to get the raw text with the tags, for example for exporting.
+- Pass `resolve=false` to get the raw text with the tags, for example for exporting. Resolution applies to full content only: `content=preview` and `content=none` responses show raw tag text in previews and outlines.
 - If a referenced prompt can't be resolved, the fetch fails with an error naming it rather than returning a prompt with missing content.
 
 ### Rules and limits

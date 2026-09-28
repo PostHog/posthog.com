@@ -7,7 +7,7 @@ export const posthog = {
     products: {
         traces: {
             available: true,
-            beta: true,
+            beta: false,
             tracing: {
                 features: {
                     distributed_trace_waterfall: true,
@@ -111,8 +111,7 @@ export const posthog = {
             monitoring: {
                 features: {
                     cron_monitoring: false,
-                    // Beta since July 2026 (/blog/traces-beta).
-                    distributed_tracing: 'Beta',
+                    distributed_tracing: true,
                     release_tracking: true,
                     performance_monitoring: true,
                 },
@@ -229,8 +228,7 @@ export const posthog = {
                 features: {
                     // OTLP metrics ingest + the posthog.metrics SDK API (/docs/metrics).
                     metrics: 'Alpha',
-                    // Beta since July 2026 (/blog/traces-beta).
-                    traces: 'Beta',
+                    traces: true,
                     infra_monitoring: false,
                     alerting: true,
                     synthetic_monitoring: false,

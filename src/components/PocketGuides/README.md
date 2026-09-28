@@ -90,7 +90,7 @@ after the prose.
 | `<SeeAlso>` | A print footnote at the foot of the column |
 | `<Term name="scout">` | An orange dotted-underline definition with a hover card |
 
-Headings map to the book's type scale: `#` is the page title, `##` a small-caps section heading.
+Headings, paragraphs, lists, tables, and inline code use the same prose styling as docs.
 
 ### How the reader lays a page out
 
@@ -107,12 +107,11 @@ on phones.
 
 ### Adding new content elements
 
-The page container is `not-prose`, so any element the prose map doesn't cover renders with bare
-browser defaults – silently. When a guide introduces something new (a table was the first),
-check the rendered page, and prefer wrapping the element in the site's native styling over
-book-specific styles: see how `ul`/`ol`/`table` borrow `.article-content` in
-[bookPieces.tsx](./bookPieces.tsx). Then test the Aa reading-size control at desktop and phone
-widths.
+The standalone reader applies the shared docs prose classes, and the Learn surface inherits
+them from `ReaderView`. The Aa control overrides the text size only after a reader changes it.
+When a guide introduces a new content element, check its rendered appearance against docs in
+light and dark mode and at narrow and wide widths. Keep book-specific mappings in
+[bookPieces.tsx](./bookPieces.tsx) only for behavior the shared prose styles cannot provide.
 
 ### One MDX trap worth knowing
 

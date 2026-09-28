@@ -127,11 +127,11 @@ We send a short, founder-focused newsletter once per month to all program partic
 
 ## Credit usage
 
-Credits can be used for most PostHog tools and add-ons, including [platform packages](/platform-packages).
+Credits can be used for most PostHog products and add-ons, including [platform packages](/platform-packages).
 
 -   **Startups**: ❌ Cannot use credits toward a BAA due to legal risk.
 -   **YC teams**: ✅ Can use credits for a BAA under the Boost plan.
--   **AI tools**: ❌ From September 14, 2026, credits cannot be used toward AI tools such as PostHog Desktop, the PostHog Slack app, Replay Vision, PostHog AI, and Inbox, due to the prohibitive and unpredictable nature of token-based pricing. Usage incurred before the cut-off can still be paid with credits.
+-   **AI apps and products**: ❌ From September 14, 2026, credits cannot be used toward AI apps and products such as PostHog Desktop, the PostHog Slack app, Replay Vision, PostHog AI, and Inbox, due to the prohibitive and unpredictable nature of token-based pricing. Usage incurred before the cut-off can still be paid with credits.
 
 Buying a platform package with credits – including the enterprise add-on – does not come with a dedicated account manager, CSM, or sales contact, in the same way it does not come with high priority support. Those are for paying customers. Founders who want one-to-one help can buy a [30-minute onboarding call](/merch?product=30-min-onboarding-consultation) from the merch store.
 

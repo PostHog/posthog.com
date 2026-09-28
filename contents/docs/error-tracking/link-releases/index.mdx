@@ -1,0 +1,13 @@
+---
+title: Link releases
+---
+
+import LinkReleasesPlatforms from './_snippets/link-releases-platforms.tsx'
+
+Python, Ruby, and PHP apps run their source code directly, so there are no source maps to upload. Stack traces already show the right files and lines.
+
+To link each exception to the [release](/docs/error-tracking/releases) that produced it, create the release when you deploy and give its ID to your app. The SDK reads the ID from the `POSTHOG_RELEASE_ID` environment variable and sends it as `$release_id` on every event.
+
+## Platforms
+
+<LinkReleasesPlatforms />
