@@ -130,7 +130,7 @@ export const posthog = {
                 free_tier: '5,000 web recordings, 2,500 mobile recordings',
             },
             features: {
-                ai_summaries: 'Beta',
+                ai_summaries: true,
                 canvas_recording: true,
                 chat_with_recordings: true,
                 conditional_recording: true,
