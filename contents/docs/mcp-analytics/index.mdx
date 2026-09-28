@@ -9,13 +9,10 @@ import { IconPlug, IconBolt, IconNotebook, IconPullRequest, IconCheckCircle } fr
 import OSButton from 'components/OSButton'
 import CustomSelfDrivingLoop from 'components/CustomSelfDrivingLoop'
 import { SurfaceCards, SurfaceCard } from 'components/Docs/SurfaceCards'
-import MCPAnalyticsBeta from './_snippets/beta.mdx'
 
 MCP Analytics shows how AI agents use your MCP tools. It records tool calls, agent intent, reported models, failures, and requests for missing capabilities. It supports PostHog's hosted MCP server and servers that use the [MCP Analytics SDKs](/docs/mcp-analytics/installation).
 
 Each tool invocation creates a `$mcp_tool_call` event in your standard events table. Use these events in MCP Analytics, [Product Analytics](/docs/product-analytics), or [SQL](/docs/data-warehouse/sql). [Self-driving](/docs/self-driving) uses them to find problems and create reports. It can open a pull request for a server you own.
-
-<MCPAnalyticsBeta />
 
 <OSButton variant="primary" asLink to="/docs/mcp-analytics/start-here">Get started</OSButton>
 
