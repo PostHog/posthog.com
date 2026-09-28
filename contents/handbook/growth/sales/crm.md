@@ -153,19 +153,21 @@ If you meet a potential customer elsewhere (e.g., events, introductions, referra
 
 For support or billing questions submitted via the sales channel, disqualify with **Support Request** or **Billing Support Request** as in [Completed contact form](#completed-contact-form) (Zendesk ticket automation). If you still see legacy lead records from older flows, the same reasons apply; ticket creation may use [this Zapier path](https://zapier.com/editor/274433115/published) for some automations.
 
-#### Billing vs. finance: who owns what
+#### Billing vs. finance vs. RevOps: who owns what
 
-Billing and finance questions look similar but go to different teams. Route by what the customer is actually asking for:
+Billing, finance, and RevOps questions look similar but go to different teams. Route by what the customer is actually asking for:
 
 - **Invoices → billing team** Questions about what an invoice says or what information goes on it — line items, amounts, dates, the entity we bill under, or adding a PO number to an invoice. The <SmallTeam slug="billing" /> owns the invoice itself.
 
 - **Collections → finance team** Anything about getting paid or where an invoice needs to go — requests to upload an invoice to a customer's payment portal (e.g. Zip, Coupa, Ariba), supplier-onboarding or vendor-setup forms, requests for extra documentation or information from us, and chasing overdue payments.
 
-A quick test: if the question can be answered by reading or correcting the invoice, it's **billing**. If it asks us to send the invoice somewhere specific, complete a form, or provide extra information, it's **finance**.
+- **Contracts and credits → RevOps team** Anything about how a prepaid contract turns into credits and invoices — which invoices a credit balance pays, when credits start and expire, how much [rolls over at renewal](/handbook/growth/sales/contract-rules#when-they-will-end-the-contract-term-with-credit-remaining), contract start and end dates, upfront invoices for signed order forms, credit notes, and refunds that need an invoice change. The <SmallTeam slug="revops" /> sets up the subscription after an order form closes, so ask in [#team-revops](https://posthog.slack.com/archives/C0BSAUQENEA).
+
+A quick test: if the question can be answered by reading or correcting the invoice, it's **billing**. If it asks us to send the invoice somewhere specific, complete a form, or provide extra information, it's **finance**. If it's about the contract or the credit balance behind the invoice, it's **RevOps**.
 
 Tax is owned by finance, who handle tax determination and compliance via Anrok. Billing only gets involved when a specific tax amount has to appear as an explicit line item on an invoice. For anything about tax rates, treatment, or whether tax applies, ask finance.
 
-This comes up most with managed customers, where POs and payment notices sit at the intersection of sales, billing, and finance. These often arrive via the sales channel (the contact form or sales@) even though they belong to billing or finance — disqualify and re-route them using the split above rather than working them as leads.
+This comes up most with managed customers, where POs, payment notices, and renewal credit questions sit at the intersection of sales, billing, finance, and RevOps. These often arrive via the sales channel (the contact form or sales@) even though they belong to billing, finance, or RevOps — disqualify and re-route them using the split above rather than working them as leads.
 
 ### Below Threshold – Auto (Customer.io)
 
