@@ -596,6 +596,17 @@ Because Vercel charges per seat, we don't automatically invite all team members 
 
 To get changes into production, the website deploys automatically from `master`. The build takes up to an hour, but can be delayed if other preview builds are in the queue.
 
+### Source maps
+
+Production builds are minified, so a browser exception reaches [error tracking](/docs/error-tracking) with names like `La` and `Ui` unless PostHog holds the source maps. The `postbuild` script (`scripts/upload-sourcemaps.mjs`) uploads them from `public/` with the [PostHog CLI](/docs/cli) after `gatsby build`.
+
+The upload needs two environment variables in the Vercel production environment:
+
+-   `POSTHOG_CLI_API_KEY` - a personal API key with the `error_tracking:write` scope
+-   `POSTHOG_CLI_PROJECT_ID` - the id of the project that receives the exceptions
+
+Builds without these variables skip the upload and print a line that says so, so local builds, CI checks, and preview builds are unaffected. An upload that fails prints a warning but does not fail the deploy.
+
 ## Product interest tracking for onboarding
 
 We track which products users have shown interest in by visiting product landing pages or docs. This data is stored using PostHog's `cookie_persisted_properties` feature, making it available across all posthog.com subdomains (including app.posthog.com) for onboarding personalization.
