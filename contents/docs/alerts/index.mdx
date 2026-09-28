@@ -31,12 +31,26 @@ Since alerts work on [trends](/docs/product-analytics/trends/overview), [funnels
 ## How to create an alert
 
 1. Open or create a saved [trend](/docs/product-analytics/trends/overview), [funnel](/docs/product-analytics/funnels), or [SQL insight](/docs/sql).
-2. On the insight, click **Monitor**, select **Alerts**, and click **New alert**. You can also open **Alerts** from the sidebar to manage all alerts.
-3. Give the alert a name. For a trend, select the series to monitor. For a funnel or SQL insight, [choose the conversion step](#alerts-on-funnels) or [result to check](#alerts-on-sql-insights).
-4. Select **Threshold** or **Anomaly detection**. For a threshold, choose **has value**, **increases by**, or **decreases by**. Set a **more than** or **less than** bound, or both. Relative conditions can use percentage bounds. For anomaly detection, [choose and simulate a detector](#anomaly-detection).
-5. Select how often PostHog checks the alert: **Real time**, **Every 15 minutes**, **Hourly**, **Daily**, **Weekly**, or **Monthly**. Real-time and 15-minute checks need [eligible plans](#real-time-alerts). For hourly checks, you can set the minute of the hour. The form shows the next planned evaluation.
-6. Select the users to notify. You can add email recipients or [other notification destinations](#notifications).
-7. Click **Create alert**. Open its history to review the results of checks, or edit the alert to change its settings.
+2. On the insight, click **Monitor** and select **Alerts**. This shows the alerts for that insight.
+3. Click **New alert**.
+4. Set a name for the alert.
+5. For a trend, select the series to monitor. A series is one of the events or values in the insight. For example, an insight can have `A - $pageview` (total pageviews) and `B - signed_up` (signups). Select `A` to check pageviews or `B` to check signups. For a funnel or SQL insight, [select the conversion step](#alerts-on-funnels) or [result to check](#alerts-on-sql-insights).
+6. Select **Threshold** or **Anomaly detection**. For a threshold alert, choose a condition:
+   - **has value** compares the value with a fixed bound.
+   - **increases by** or **decreases by** compares the value with a prior period.
+7. For a threshold alert, set at least one bound: **more than**, **less than**, or both. For example, set **more than** to 5,000 to check when pageviews exceed 5,000.
+8. For **increases by** or **decreases by**, you can set a percentage threshold. PostHog compares the percentage change with your bound. For anomaly detection, [choose a detector and simulate it](#anomaly-detection).
+9. Select how often PostHog checks the alert:
+   - **Real time** requires a Scale or Enterprise plan. It checks about every two minutes. See [real-time alerts](#real-time-alerts).
+   - **Every 15 minutes** requires a Boost plan or higher.
+   - **Hourly** lets you set the minute of the hour for each check.
+   - **Daily** checks once a day.
+   - **Weekly** checks once a week.
+   - **Monthly** checks once a month.
+
+   The form shows the next planned evaluation.
+10. Select the users to notify. Subscribed users get in-app notifications when the alert fires. You can also add email recipients, Slack channels, Discord webhooks, Microsoft Teams channels, or webhook URLs in the alert form. See [notifications](#notifications).
+11. Click **Create alert**. Open **Monitor** > **Alerts** on the insight to review or edit its alerts. Open **Alerts** from the sidebar to manage alerts across insights.
 
 ## Create alerts with AI
 
