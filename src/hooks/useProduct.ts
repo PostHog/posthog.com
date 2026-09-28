@@ -60,6 +60,12 @@ export default function useProduct({ handle }: { handle?: string } = {}) {
         // },
         traces,
         {
+            ...getTool('metrics'),
+            Icon: IconTrends,
+            color: 'green',
+            colorSecondary: 'green',
+        },
+        {
             ...getTool('user_interviews'),
             Icon: IconThoughtBubble,
             color: 'purple',

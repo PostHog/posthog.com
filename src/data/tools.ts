@@ -92,7 +92,7 @@ export const tools = [
         handle: 'metrics',
         name: 'Application metrics',
         description: 'Send OpenTelemetry metrics to PostHog and analyze them.',
-        slug: 'metrics',
+        slug: 'docs/metrics',
         category: 'product_engineering',
         status: 'alpha',
     },
