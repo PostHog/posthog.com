@@ -16,30 +16,29 @@ import AlphaRelease from "../_snippets/alpha-release.mdx"
 
 <AlphaRelease />
 
-The Electricity Maps connector syncs carbon intensity, power breakdown, and more into the PostHog data warehouse, so you can analyze them alongside your product data.
+The Electricity Maps connector syncs hourly carbon intensity and power breakdown data for the grid zones you choose into PostHog, so you can analyze the carbon footprint of your infrastructure alongside your product data.
 
 ## Prerequisites
 
-Credentials that can read the data you want to sync. PostHog only reads data, so read access is enough.
+You need an Electricity Maps API token, created in the [Electricity Maps portal](https://portal.electricitymaps.com/). Which zones you can query and how far back history goes depend on your Electricity Maps plan.
 
 ## Adding a data source
 
 <SourceSetupIntro />
 
-Enter your Electricity Maps API token, created in the [Electricity Maps portal](https://portal.electricitymaps.com/).
+When linking Electricity Maps, you'll need:
 
-Zones is a comma-separated list of zone identifiers to sync, like `DE, DK-DK1, US-CAL-CISO`. Zone access and history depth depend on your Electricity Maps plan.
+- **API token**: create one in the [Electricity Maps portal](https://portal.electricitymaps.com/).
+- **Zones**: a comma-separated list of zone identifiers to sync, like `DE, DK-DK1, US-CAL-CISO`. The `/v3/zones` endpoint of the Electricity Maps API lists every zone identifier.
+- **Days of history to sync initially** (optional): how far back the first sync reaches. Defaults to 30 days. Set it to what your Electricity Maps plan allows.
 
-You'll be asked for:
-
-- **API token**
-- **Zones**: for example `DE, DK-DK1, US-CAL-CISO`.
+Each synced row is one hour of data for one zone.
 
 ## Sync modes
 
 <SyncModes />
 
-All Electricity Maps tables are full refresh. Each sync replaces the contents of the table.
+Incremental syncs use the hourly `datetime` field, so each sync only requests hours after the last synced one. Note that Electricity Maps can revise recent data points after publishing them. Run a full refresh if you need those revisions on already-synced hours.
 
 ## Configuration
 
@@ -51,7 +50,7 @@ All Electricity Maps tables are full refresh. Each sync replaces the contents of
 
 ## Troubleshooting
 
-- If the connection fails with an authorization error, the API token is wrong, expired, or has been revoked. Create a new one, then reconnect the source.
-- If a table syncs no rows, the credential may not have access to that data. Check its permissions, then reconnect the source.
+- **Zone access errors**: zone availability is gated by your Electricity Maps plan. If validation fails for a zone, check your plan in the Electricity Maps portal or remove the zone from the source settings.
+- **History range errors**: if syncs fail with a permission error, lower the days of history to what your plan allows.
 
 <TroubleshootingLink />
