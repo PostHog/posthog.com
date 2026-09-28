@@ -1813,38 +1813,40 @@ export default function ProfilePage({ params }: PageProps) {
             </ScrollArea>
             <div className="border-primary sticky border-t bottom-0">
                 <HeaderBar
+                    showCustomLeft={
+                        (isCurrentUser || isModerator) && (
+                            <div className="flex gap-2">
+                                {isEditing ? (
+                                    <>
+                                        <OSButton
+                                            size="md"
+                                            variant="secondary"
+                                            onClick={() => {
+                                                setIsEditing(false)
+                                                resetForm()
+                                            }}
+                                        >
+                                            Cancel
+                                        </OSButton>
+                                        <OSButton
+                                            size="md"
+                                            variant="primary"
+                                            onClick={submitForm}
+                                            disabled={isSubmitting}
+                                        >
+                                            {isSubmitting ? 'Saving...' : 'Save'}
+                                        </OSButton>
+                                    </>
+                                ) : (
+                                    <OSButton size="md" variant="secondary" onClick={() => setIsEditing(true)}>
+                                        Edit profile
+                                    </OSButton>
+                                )}
+                            </div>
+                        )
+                    }
                     rightActionButtons={
                         <>
-                            {(isCurrentUser || isModerator) && (
-                                <div className="flex gap-2 mr-2">
-                                    {isEditing ? (
-                                        <>
-                                            <OSButton
-                                                size="md"
-                                                variant="secondary"
-                                                onClick={() => {
-                                                    setIsEditing(false)
-                                                    resetForm()
-                                                }}
-                                            >
-                                                Cancel
-                                            </OSButton>
-                                            <OSButton
-                                                size="md"
-                                                variant="primary"
-                                                onClick={submitForm}
-                                                disabled={isSubmitting}
-                                            >
-                                                {isSubmitting ? 'Saving...' : 'Save'}
-                                            </OSButton>
-                                        </>
-                                    ) : (
-                                        <OSButton size="md" variant="secondary" onClick={() => setIsEditing(true)}>
-                                            Edit profile
-                                        </OSButton>
-                                    )}
-                                </div>
-                            )}
                             {isModerator && (
                                 <div className="flex gap-px">
                                     <Popover
