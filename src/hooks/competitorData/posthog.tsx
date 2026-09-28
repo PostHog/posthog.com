@@ -79,7 +79,7 @@ export const posthog = {
             available: true,
             features: {
                 clickmaps: true,
-                dead_taps: false,
+                dead_taps: true,
                 heatmaps: true,
                 scrollmaps: true,
                 movement_maps: true,
@@ -162,7 +162,7 @@ export const posthog = {
                 features: {
                     export_to_json: true,
                     export_to_video: true,
-                    retention_policy: 'Up to 3 months',
+                    retention_policy: 'Up to 5 years',
                 },
             },
             platform_support: {
