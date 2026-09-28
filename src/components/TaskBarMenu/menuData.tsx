@@ -181,17 +181,24 @@ export const docsMenuItems: MenuItemType[] = [
     { type: 'separator' },
     {
         type: 'item',
-        label: 'Tutorials',
-        link: '/tutorials',
-        icon: <Icons.IconGraduationCap className="size-4 text-purple" />,
+        label: 'PostHog playground',
+        link: 'https://twig.com/#twig-playground',
+        external: true,
+        icon: <Icons.IconPlay className="size-4 text-orange" />,
     },
     {
         type: 'item',
         label: 'Pocket guides',
         link: '/pocket-guides',
-        icon: <Icons.IconCompass className="size-4 text-orange" />,
+        icon: <Icons.IconCompass className="size-4 text-blue" />,
     },
-    { type: 'item', label: 'Templates', link: '/templates', icon: <Icons.IconMagic className="size-4 text-purple" /> },
+    {
+        type: 'item',
+        label: 'Tutorials',
+        link: '/tutorials',
+        icon: <Icons.IconGraduationCap className="size-4 text-purple" />,
+    },
+    { type: 'item', label: 'Templates', link: '/templates', icon: <Icons.IconMagic className="size-4 text-green" /> },
 ]
 
 // Tools promoted to the top level of the Products menu, in display order.

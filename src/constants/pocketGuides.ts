@@ -15,7 +15,7 @@ export interface PocketGuideVolume {
     volume: number
     /** Docs slug of the product this volume teaches. Omit when it teaches no single product. */
     docsProduct?: string
-    /** Route to the product's Learn tab, when that tab exists. */
+    /** Route where Pocket Guide touchpoints should open this volume. */
     learnPath?: string
     /** A hand-written src/pages file owns this route, so don't generate one. */
     hasStaticPage?: boolean
@@ -37,7 +37,7 @@ export const POCKET_GUIDE_VOLUMES: PocketGuideVolume[] = [
         token: 'blue',
         volume: 0,
         docsProduct: 'product-analytics',
-        learnPath: '/docs/product-analytics/learn',
+        learnPath: '/docs/product-analytics/learn/introduction',
     },
     {
         id: 'self-driving',
@@ -85,7 +85,7 @@ export function volumeById(id: string): PocketGuideVolume | undefined {
     return POCKET_GUIDE_VOLUMES.find((v) => v.id === id)
 }
 
-/** Covers and cards open the Learn tab where one exists; other books keep their reader route. */
+/** Covers, cards, and Pocket Guide links open the volume's configured entry route. */
 export function pocketGuideUrl(volume: PocketGuideVolume): string {
     return volume.learnPath ?? `/pocket-guides/${volume.id}`
 }

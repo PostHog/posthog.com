@@ -44,7 +44,11 @@ const IconLink = ({
 }) => {
     const Icon = (Icons[icon as keyof typeof Icons] as any) || Icons.IconBook
     return (
-        <Link to={to} className="flex items-start gap-2 text-sm font-medium text-primary hover:underline">
+        <Link
+            to={to}
+            externalNoIcon={to.startsWith('http')}
+            className="flex items-start gap-2 text-sm font-medium text-primary hover:underline"
+        >
             <Icon className={`mt-0.5 size-4 shrink-0 text-${color}`} />
             <span className="leading-snug">{children}</span>
         </Link>
@@ -66,6 +70,13 @@ const pathCards = [
         url: '/docs/self-driving',
         icon: 'IconStack',
         color: 'red',
+    },
+    {
+        name: 'Try PostHog interactively',
+        description: 'Build an event and see what PostHog captures.',
+        url: 'https://twig.com/#twig-playground',
+        icon: 'IconPlay',
+        color: 'orange',
     },
 ]
 

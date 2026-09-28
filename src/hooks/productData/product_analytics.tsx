@@ -28,6 +28,7 @@ export const productAnalytics = {
     teamSlug: 'product-analytics',
     forumTopicId: 349,
     pocketGuideVolume: 'product-analytics',
+    learnLanding: true,
     color: 'blue',
     colorSecondary: 'sky-blue',
     wizardSupport: true,

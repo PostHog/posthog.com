@@ -6,7 +6,10 @@ Stacked, prose-first product pages rendered inside `ReaderView`. This is the rep
 - **Pricing surface:** `/<product-slug>/pricing` → `<ProductReaderView productHandle="…" surface="pricing" />` stacks one `<section>` per `pricingMenu` item.
 - **Docs surface:** `/docs/<product-slug>` → a normal `<ReaderView>` that shares the same tabbed sidebar via `buildProductMenuTabs({ productData, activeSurface: 'docs' })`.
 
-Clicking a tab in the sidebar never navigates — it just swaps which menu is visible. Clicking a menu item does navigate (in-page anchor on the active surface, cross-page Gatsby link to `${basePath}#${slug}` otherwise).
+Clicking a tab in the sidebar usually swaps which menu is visible. Clicking a menu item navigates
+(in-page anchor on the active surface, cross-page Gatsby link to `${basePath}#${slug}` otherwise).
+Products with `learnLanding: true` are the exception: clicking the active Learn tab from a guide
+chapter returns to the product's Learn landing page.
 
 ---
 

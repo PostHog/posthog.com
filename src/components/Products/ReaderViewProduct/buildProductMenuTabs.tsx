@@ -79,17 +79,20 @@ const LearnNav = ({
     volumeId,
     basePath,
     currentPath,
+    hasLanding,
 }: {
     volumeId: string
     basePath: string
     currentPath?: string
+    hasLanding?: boolean
 }) => {
     const pages = useBookPages(volumeId)
     return (
         <nav>
             <ul className="list-none m-0 p-0 flex flex-col gap-px">
                 {pages.map((page) => {
-                    const to = learnChapterPath(basePath, page)
+                    const to =
+                        page.isFrontMatter && hasLanding ? `${basePath}/introduction` : learnChapterPath(basePath, page)
                     const active = currentPath ? currentPath.replace(/\/$/, '') === to : false
                     return (
                         <li key={page.url} className="m-0 p-0">
@@ -131,6 +134,8 @@ interface BuildProductMenuTabsArgs {
               docsSlug?: string
               /** Volume id from `src/constants/pocketGuides.ts`; setting it is the whole opt-in. */
               pocketGuideVolume?: string
+              /** The Learn tab opens a choice page before the volume's Introduction. */
+              learnLanding?: boolean
           }
         | null
         | undefined
@@ -185,6 +190,7 @@ export function buildProductMenuTabs({
         productMenu = [],
         pricingMenu = [],
         pocketGuideVolume,
+        learnLanding,
         docsSlug,
     } = productData
 
@@ -260,11 +266,13 @@ export function buildProductMenuTabs({
             icon: TAB_ICON.learn,
             default: activeSurface === 'learn',
             href: surfaceBasePath(productSlug, 'learn'),
+            navigateOnActiveClick: learnLanding,
             menu: (
                 <LearnNav
                     volumeId={pocketGuideVolume}
                     basePath={surfaceBasePath(productSlug, 'learn')}
                     currentPath={activeSurface === 'learn' ? currentPath : undefined}
+                    hasLanding={learnLanding}
                 />
             ),
         })

@@ -72,6 +72,8 @@ export interface MenuTab {
     icon?: React.ReactNode
     /** If set, clicking this tab navigates to the given path instead of only switching local state. */
     href?: string
+    /** When true, clicking the already-active tab returns to its `href`. */
+    navigateOnActiveClick?: boolean
 }
 
 interface ReaderViewProps {
@@ -1277,7 +1279,12 @@ const LeftSidebar = ({
                                                 from_tab: activeTab,
                                                 tab_count: menuTabs!.length,
                                             })
-                                            if (t.href && t.value !== activeTab) {
+                                            if (
+                                                t.href &&
+                                                (t.value !== activeTab ||
+                                                    (t.navigateOnActiveClick &&
+                                                        currentPath?.replace(/\/$/, '') !== t.href.replace(/\/$/, '')))
+                                            ) {
                                                 navigate(t.href)
                                             } else {
                                                 setActiveTab(t.value)
