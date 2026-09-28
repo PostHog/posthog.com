@@ -8,6 +8,7 @@ export const sessionReplayFeatures = {
     pricing: {
         free_tier: {
             name: 'Monthly free tier',
+            description: 'Recordings included every month at no cost',
         },
     },
     features: {

@@ -125,15 +125,17 @@ This is where estimates go wrong. Apply these rules and show your work.
 PostHog's pricing calculator at https://posthog.com/pricing accepts URL parameters and pre-fills itself. Build a link with only the products in scope:
 
 ```
-https://posthog.com/pricing?calculator=<primary_product>&<product>[volume]=<monthly_volume>&...
+https://posthog.com/pricing?calculator=<primary_product>&products=<comma_separated_product_types>&<product>[volume]=<monthly_volume>&...
 ```
 
-Valid product keys: `product_analytics`, `session_replay`, `feature_flags`, `surveys`, `error_tracking`, `data_warehouse`, `logs`, `ai_observability`. Experiments bill through `feature_flags`. Set `calculator=` to the product that matters most to the user, so the page opens on that tab.
+Valid product keys: `product_analytics`, `session_replay`, `feature_flags`, `surveys`, `error_tracking`, `data_warehouse`, `logs`, `ai_observability`. Experiments bill through `feature_flags`. Set `calculator=` to the product that matters most to the user, so the page opens on that tab. List every selected product in `products=`; this sets the exact selection and order. Use `products=` with an empty value for no products.
 
-Example – 12M events, 75K recordings, 3M flag requests:
+For Product analytics, set both `product_analytics[types][productAnalyticsEvents][volume]` (identified events) and `product_analytics[types][websiteAnalyticsEvents][volume]` (anonymous events). Do not send a combined analytics volume. Include explicit zeros; omitted inputs use the calculator defaults.
+
+Example – 9.6M identified events, 2.4M anonymous events, 75K recordings, 3M flag requests:
 
 ```
-https://posthog.com/pricing?calculator=product_analytics&product_analytics[volume]=12000000&session_replay[volume]=75000&feature_flags[volume]=3000000
+https://posthog.com/pricing?calculator=product_analytics&products=product_analytics,session_replay,feature_flags&product_analytics[types][productAnalyticsEvents][volume]=9600000&product_analytics[types][websiteAnalyticsEvents][volume]=2400000&session_replay[volume]=75000&feature_flags[volume]=3000000
 ```
 
 Append `&utm_campaign=agent-estimate` to the end of the link, after all volume parameters.

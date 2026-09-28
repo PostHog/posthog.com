@@ -51,7 +51,20 @@ Registration and unregistration are durable. If the device is offline or the req
 
 ## Capturing opens
 
-Automatic open capture detects cold-start taps on a notification from the system tray. Warm-start taps (handled in `onNewIntent`) and notifications you display yourself from a foreground data message need the manual API:
+Automatic open capture detects cold-start taps on a notification from the system tray, recognized by the `google.message_id` extra that Firebase puts on the intent.
+
+Android gives libraries no way to observe `Activity.onNewIntent`, so a tap that arrives while your app is already running needs one line in your activity:
+
+```kotlin
+override fun onNewIntent(intent: Intent) {
+    super.onNewIntent(intent)
+    PostHogAndroid.capturePushNotificationOpened(intent)
+}
+```
+
+Your launcher activity needs `android:launchMode="singleTop"`, or the system resumes the task instead of delivering the tap here. Requires Android SDK 3.62.0 or newer. `PostHogAndroid.capturePushNotificationOpened` is deduplicated against the automatic path by message ID, so it can't double-count. From Android SDK 3.65.0, `PostHog.capturePushNotificationOpened` below is deduplicated too: a repeat of a notification PostHog sent, captured in the last 5 minutes, is skipped, so one tap counts once whichever path reports it. That second dedupe only covers notifications PostHog sent; the message-ID dedupe above applies to any FCM notification.
+
+Notifications you display yourself from a foreground data message, and push delivered outside FCM, aren't detected at all. Capture those with the fully manual API:
 
 ```kotlin
 PostHog.capturePushNotificationOpened(
@@ -61,7 +74,7 @@ PostHog.capturePushNotificationOpened(
 )
 ```
 
-The `$push_notification_opened` event includes `$notification_title` and `$notification_body`, plus `$notification_action` for action-button taps. Notification content is only captured for notifications sent by PostHog. Opens of other notifications are still captured, but without title or body.
+The `$push_notification_opened` event includes `$notification_title` and `$notification_body`, plus `$notification_action` for action-button taps. Android taps captured automatically carry no title or body – Firebase strips the notification content from the intent it hands the app, so there is nothing to read. Title and body are only set when you pass them to `PostHog.capturePushNotificationOpened` yourself.
 
 ## Identity verification
 

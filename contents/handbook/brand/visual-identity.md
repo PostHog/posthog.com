@@ -174,7 +174,7 @@ PostHog uses three icon styles for different purposes:
 | icons8 sticker pack                         | Stickers and casual contexts |
 | OS-style icons                              | Website desktop              |
 
-Cory cares a little too much about icon glyphs. Icons should be intentional.
+We care a little too much about icon glyphs. Icons should be intentional.
 
 - When an icon is accompanies by a label, the icon should be complimentary.
 - When an icon is used without text, they should be clear enough to stand on their own.

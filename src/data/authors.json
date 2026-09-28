@@ -32,7 +32,7 @@
     },
     {
         "handle": "joe-martin",
-        "name": "Joe Martin",
+        "name": "Joe Black",
         "role": "Product Marketer",
         "link_type": "linkedin",
         "link_url": "https://www.linkedin.com/in/joemartinwords",
@@ -788,5 +788,13 @@
         "name": "Daniel Zaltsman",
         "role": "Builder relations team lead",
         "profile_id": 34023
+    },
+    {
+        "handle": "cory-slater",
+        "name": "Cory Slater",
+        "role": "Product Manager",
+        "link_type": "github",
+        "link_url": "https://github.com/fivestarspicy",
+        "profile_id": 34160
     }
 ]

@@ -309,6 +309,7 @@ module.exports = {
                 4.5: '1.125rem',
                 5.5: '1.375rem',
                 6.5: '1.625rem',
+                8.5: '2.125rem',
             },
             maxWidth: {
                 '2xs': '16rem',
@@ -342,12 +343,12 @@ module.exports = {
                     },
                 },
                 slideDown: {
-                    from: { height: '0px' },
-                    to: { height: 'var(--radix-accordion-content-height)' },
+                    from: { gridTemplateRows: '0fr' },
+                    to: { gridTemplateRows: '1fr' },
                 },
                 slideUp: {
-                    from: { height: 'var(--radix-accordion-content-height)' },
-                    to: { height: '0px' },
+                    from: { gridTemplateRows: '1fr' },
+                    to: { gridTemplateRows: '0fr' },
                 },
                 develop: {
                     '0%': {

@@ -25,7 +25,7 @@ import {
     TraceFigure,
     TriggerGroupFigure,
 } from './figures'
-import { Contents, Enable, Eyebrow, Frontispiece, SeeAlso, SeeFig, Watches, proseComponents } from './bookPieces'
+import { Enable, Eyebrow, Frontispiece, SeeAlso, SeeFig, Watches, proseComponents } from './bookPieces'
 import { AskAI, CTA, ScannerTemplate, ViewRecording, ViewRecordings } from './UIButton'
 
 export { EntryProvider } from './bookContext'
@@ -66,7 +66,6 @@ export const bookMdxComponents = {
     Callout,
     ProductVideo,
     Setup,
-    Contents,
     SeeAlso,
     ViewRecordings,
     ViewRecording,

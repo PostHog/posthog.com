@@ -476,14 +476,14 @@ const faqItems = [
             <>
                 <p>
                     Natively. Warehouse data can power cohorts used in experiments and flags. Pipeline data flows
-                    directly into analytics. DuckDB queries run on the same dataset your dashboards use. There's no
+                    directly into analytics. Trino queries run on the same dataset your dashboards use. There's no
                     separate sync to set up.
                 </p>
                 {/* On a light card in both themes, since the diagram has no dark variant. */}
                 <div className="not-prose mt-4 overflow-hidden rounded-md border border-primary bg-white p-4">
                     <CloudinaryImage
                         src={ARCHITECTURE_DIAGRAM}
-                        alt="Warehouse sources and PostHog product events feed the context warehouse – an S3 data lake partitioned per org, a DuckLake catalog, and a single-tenant DuckDB in a Firecracker MicroVM – which in turn serves the Postgres wire protocol, analytics and experiments, AI agents, and endpoints"
+                        alt="Warehouse sources and PostHog product events feed the context warehouse – an S3 data lake partitioned per org, a DuckLake catalog, and a single-tenant Trino in a Firecracker MicroVM – which in turn serves the Postgres wire protocol, analytics and experiments, AI agents, and endpoints"
                         className="!block w-full"
                         imgClassName="!block w-full"
                     />

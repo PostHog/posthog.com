@@ -249,11 +249,11 @@ export default function ManagedWarehouse(): JSX.Element {
                 </div>
 
                 <h2 className="!mt-10 @2xl/reader-content-container:!mt-12">
-                    Built on DuckDB. Enterprise-ready on top.
+                    Built on Trino. Enterprise-ready on top.
                 </h2>
                 <p>
-                    <Link to="https://duckdb.org/" external={true}>
-                        DuckDB
+                    <Link to="https://trino.io/" external={true}>
+                        Trino
                     </Link>{' '}
                     runs analytical queries fast, on hardware most teams already have. Here's what we built on top of it
                     to get it ready for production:

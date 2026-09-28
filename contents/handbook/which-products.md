@@ -39,23 +39,7 @@ The best products are often ones that not everyone thinks is a good idea before 
 
 For a complete walkthrough of the product lifecycle, see [releasing new products and features](/handbook/product/releasing-new-products-and-features).
 
-## Next products on deck
-
-From our [roadmap](/roadmap), here's what we're currently working on:
-
-- Endpoints - `#team-data-modeling`
-- Logs - `#project-logs`
-- Product autonomy - `#team-array`
-- Customer Analytics `#team-web-analytics`
-- Workflows `#team-workflows`
-
-And these are the products we think we'll focus on next:
-- 100x the toolbar - likely `#team-array`
-- Metrics
-- APM
-- BI over any database (not just those synced to our data warehouse)
-- Support -> PRs
-- AI answers and docs
+See our [roadmap](/roadmap) for what we're currently working on. 
 
 ## How to pick which feature within an existing product to build
 

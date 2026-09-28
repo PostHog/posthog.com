@@ -35,6 +35,7 @@ import ImageSlider from './components/ImageSlider'
 import { KeyboardShortcut } from './components/KeyboardShortcut'
 import { Label } from './components/Label'
 import Link from './components/Link'
+import LoopGame from './components/LoopGame'
 import { List } from './components/List'
 import { LPCTA } from './components/LPCTA'
 import { MaxCTA } from './components/MaxCTA'
@@ -113,6 +114,7 @@ export const shortcodes = {
     OSQuote,
     OSButton,
     Link,
+    LoopGame,
     PrivateLink,
     ProductOS,
     ProductScreenshot,

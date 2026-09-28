@@ -1002,9 +1002,17 @@ const LeftSidebar = ({
         return () => vp.removeEventListener('scroll', onScroll)
     }, [sidebarScrollKey])
     const hasTabs = !!menuTabs && menuTabs.length > 0
+    const showTabStrip = !!menuTabs && menuTabs.length > 1
     const initialTab = hasTabs ? menuTabs!.find((t) => t.default)?.value || menuTabs![0].value : ''
     const [activeTab, setActiveTab] = useState(initialTab)
     const activeMenu = hasTabs ? menuTabs!.find((t) => t.value === activeTab)?.menu : null
+
+    // An in-window navigation keeps this component mounted while the tab set changes: a page
+    // with no tabs, then a product docs page with three. The old value then matches no tab and
+    // the sidebar shows nothing, so follow the new page and select its default tab.
+    useEffect(() => {
+        setActiveTab(initialTab)
+    }, [currentPath, initialTab])
 
     // `isPinned` is the persisted user preference (toggled via the bottom-row
     // toggle button, written to localStorage in ReaderViewContext). When NOT
@@ -1226,7 +1234,7 @@ const LeftSidebar = ({
                         - Otherwise (collapsed OR hover-expanded): vertical
                           icon-only column. We deliberately don't reflow on
                           hover — tabs only rotate axes when the user pins. */}
-                        {hasTabs && !hasActiveSearch && (
+                        {showTabStrip && !hasActiveSearch && (
                             // Single container across all states (pinned, hover,
                             // collapsed) so SidebarTabButton instances stay
                             // mounted — required for the icon FLIP animation to
@@ -1415,7 +1423,7 @@ function ReaderViewContent({
     hideMenu = false,
     className = '',
 }: ReaderViewProps) {
-    const { compact } = useApp()
+    const { compact, focusedWindow } = useApp()
     const { appWindow, activeInternalMenu } = useWindow()
     const { hash, pathname } = useLocation()
     const contentRef = useRef<HTMLDivElement>(null)
@@ -1674,6 +1682,7 @@ function ReaderViewContent({
                     <div className="flex flex-1 min-h-0">
                         <ScrollArea
                             dataScheme="primary"
+                            isScrollRoot={focusedWindow === appWindow}
                             className="flex-1 min-w-0 min-h-0 relative [mask-image:linear-gradient(to_bottom,transparent_0,black_2rem,black_calc(100%_-_2rem),transparent_100%)] [-webkit-mask-image:linear-gradient(to_bottom,transparent_0,black_1rem,black_calc(100%_-_1rem),transparent_100%)]"
                         >
                             <article

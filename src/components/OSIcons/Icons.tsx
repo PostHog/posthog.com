@@ -173,6 +173,18 @@ export const IconDice = (props: IconProps) => (
     </BaseIcon>
 )
 
+export const IconCoolNumbers = (props: IconProps) => (
+    <BaseIcon viewBox="0 0 48 48" width="100%" height="100%" {...props}>
+        <rect width="48" height="48" rx="7" fill="#F54E00" />
+        <g fill="#F2EEE2">
+            <path d="M19 12h5.2l-3.2 24h-5.2z" />
+            <path d="M29 12h5.2l-3.2 24h-5.2z" />
+            <rect x="11.6" y="18.4" width="26" height="4.6" rx="1" />
+            <rect x="10.4" y="26" width="26" height="4.6" rx="1" />
+        </g>
+    </BaseIcon>
+)
+
 export const IconDictator = (props: IconProps) => (
     <BaseIcon viewBox="0 0 48 48" width="100%" height="100%" {...props}>
         <image

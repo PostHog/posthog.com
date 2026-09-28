@@ -58,7 +58,9 @@ export const onCreatePage: GatsbyNode['onCreatePage'] = async ({ page, actions }
         page.matchPath = '/next-steps/*'
         createPage(page)
     }
-    if (page.path.match(/^\/teams\//) && !page.path.match(/^\/teams\/new/)) {
+    // Only the [slug] page needs the wildcard. A static page under /teams (/teams/new, /teams/team-ben)
+    // that also claims '/teams/*' loses the tie to [slug] at runtime, and the browser shows that team as missing.
+    if (page.path.match(/^\/teams\//) && page.component.match(/teams[\\/]\[slug\]\.tsx$/)) {
         page.matchPath = '/teams/*'
         createPage(page)
     }

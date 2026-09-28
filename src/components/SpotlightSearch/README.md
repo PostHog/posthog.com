@@ -39,6 +39,10 @@ Keep search behavior and selection ordering in `index.tsx`. Extracted components
 
 Actions appear for short matching queries. One-shot actions close the palette, while actions with `keepOpen` can be repeated. Add an action by providing an id, label, icon, keywords, `perform`, and optional `keepOpen` value.
 
+### Direct routes
+
+When the query matches a site-local path, Spotlight puts a `Go to` row first. The regex requires a leading `/` and rejects protocol-relative URLs (`//`), whitespace, and backslashes. Query strings and fragments are allowed. The row opens the supplied path in a new window without checking that Gatsby created the route.
+
 ### Ask AI suggestion
 
 Queries of four or more words promote an Ask AI row. A settled query with no Algolia results does the same, so users can hand the question to Max chat. This handoff does not use Inkeep vector search.

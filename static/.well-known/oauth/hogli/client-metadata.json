@@ -1,0 +1,12 @@
+{
+    "client_id": "https://posthog.com/.well-known/oauth/hogli/client-metadata.json",
+    "client_name": "hogli CLI for PostHog",
+    "logo_uri": "https://raw.githubusercontent.com/PostHog/brand/main/assets/crests/full/png/dev-experience.png",
+    "redirect_uris": ["http://127.0.0.1/callback"],
+    "grant_types": ["authorization_code", "refresh_token"],
+    "response_types": ["code"],
+    "token_endpoint_auth_method": "none",
+    "com.posthog": {
+        "scopes": ["engineering_analytics:read"]
+    }
+}

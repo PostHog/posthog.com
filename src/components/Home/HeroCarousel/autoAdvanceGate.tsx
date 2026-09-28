@@ -37,6 +37,13 @@ export function usePauseAutoAdvance(active: boolean): void {
  */
 export const SlideActiveContext = React.createContext<boolean>(true)
 
+export const SlidePausedContext = React.createContext<boolean>(false)
+
+/** The carousel's explicit pause control, independent of animation holds. */
+export function useSlidePaused(): boolean {
+    return React.useContext(SlidePausedContext)
+}
+
 export function useSlideActive(): boolean {
     return React.useContext(SlideActiveContext)
 }

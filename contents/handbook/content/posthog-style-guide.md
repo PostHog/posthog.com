@@ -198,7 +198,7 @@ When [embedding YouTube videos](/handbook/engineering/posthog-com/markdown#embed
 
 #### Wistia
 
-<TeamMember name="Cory Watilo" photo /> or <TeamMember name="Jordo Dibb" photo /> can upload videos to Wistia. It's best to also have a thumbnail image which can be uploaded to Wistia as well. Videos can be embedded on the site using our <a href="/handbook/engineering/posthog-com/markdown#embedding-wistia-videos">Wistia component</a>.
+<TeamMember name="Jordo Dibb" photo /> can upload videos to Wistia. It's best to also have a thumbnail image which can be uploaded to Wistia as well. Videos can be embedded on the site using our <a href="/handbook/engineering/posthog-com/markdown#embedding-wistia-videos">Wistia component</a>.
 
 ### Best practices for images and videos
 

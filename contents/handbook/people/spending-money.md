@@ -180,7 +180,7 @@ Talk to [Tara](https://posthog.com/community/profiles/34526) who handles Macbook
       - US only: use your Brex since we earn cashback
       - Do not get AppleCare since it doesn't have great value for money
     - You can request a new laptop in `#team-people-and-ops` if it is over 4 years old, (for engineering machines) has less than 48GB of RAM, or is significantly impacting your productivity. We do ask that you do some diligence to make sure it's not a setup issue though - i.e. other applications aren't hogging the memory, etc.
-   - Phones and iPads - if you require a phone (Apple or Android) or an iPad for your role, please reach out to [Tara](https://posthog.com/community/profiles/34526) in `#team-people-and-ops`.
+   - Phones and iPads are only provided if they're integral to your role (e.g. mobile team or content purposes). Reach out to [Tara](https://posthog.com/community/profiles/34526) in `#team-people-and-ops` and she'll get one ordered for you. 
 
 #### Other equipment
 - Keyboard/mouse/laptop stand: Check Amazon and Apple for discounts. Refurbished items usually work just fine. [Nextstand](https://www.amazon.co.uk/NEXSTAND-K2-Adjustable-Foldable-Portable/dp/B01HHYQBB8) make great value laptop stands that are portable. You can use your personal budget for this.
@@ -210,7 +210,9 @@ You can ask for access to team/company tools by submitted a request in Slack. Fi
   - [Granola](https://granola.ai): It’s absolutely okay to use AI note-takers so you can stay engaged in meetings without writing everything down. Feel free to choose your own but please be aware of who the sub-processors are to ensure they do not use a competitor for analytics.
 - IDEs: Visual Studio, VIM and PyCharm are the most popular within our team. IDEs range widely in cost; best in class IDE suites can cost up to $700, which is not a great value proposition for most engineers.
 
-- AI coding tools (Cursor, Claude Code, etc.) are encouraged, but usage-based pricing can climb fast. Most engineers' monthly spend lands around a single max-tier subscription (~$200/month). If yours is running several times higher, that's usually a misconfiguration or inefficient workflow rather than a genuine need – compare setups with your teammates and ask in [#team-people-and-ops](https://posthog.slack.com/archives/C017WDX3BFZ) if you're unsure. We have a team Claude Code account that you can request to be added to using Zluri in slack.
+- AI coding tools (Cursor, Claude Code, etc.) are encouraged, but usage-based pricing can climb fast. Most engineers' monthly spend lands around a single max-tier subscription (~$200/month). If yours is running several times higher, that's usually a misconfiguration or inefficient workflow rather than a genuine need – compare setups with your teammates and ask in [#team-people-and-ops](https://posthog.slack.com/archives/C017WDX3BFZ) if you're unsure.
+  - [Claude](https://claude.ai) (including Claude Code): log in with SSO and you'll be added to our team plan. If SSO doesn't add you automatically, request access with Zluri in Slack or ask in [#team-people-and-ops](https://posthog.slack.com/archives/C017WDX3BFZ).
+  - [ChatGPT](https://chatgpt.com) (including Codex): use the company workspace instead of a personal account, and ask in [#chat-gpt-team](https://posthog.slack.com/archives/C08U0ERMESF) for a seat. Each seat has a small weekly allowance and then runs on workspace credits – see your usage in [Codex analytics](https://chatgpt.com/codex/cloud/settings/analytics), and ask in the channel if you need a higher limit.
 
 ### Coworking
 - If there's a WeWork where you are, use it – we have a company All Access account, so default to that rather than paying for another coworking space. Ask [Kendal](https://posthog.com/community/profiles/28628) in [#team-people-and-ops](https://posthog.slack.com/archives/C017WDX3BFZ) for access.

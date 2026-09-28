@@ -10,6 +10,7 @@ const docsUrlOverrides: Record<string, string> = {
     posthog_ai: '/docs/posthog-ai',
     inbox: '/docs/self-driving/inbox',
     posthog_code: '/docs/posthog-desktop',
+    llm_evals: '/docs/ai-evals',
 }
 
 const docsUrlFor = (product: any): string => docsUrlOverrides[product.handle] || `/docs/${product.slug}`

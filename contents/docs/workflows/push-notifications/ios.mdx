@@ -11,6 +11,7 @@ Available in the iOS SDK version 3.69.0 and newer.
 
 - Enable the **Push Notifications** capability for your app and register for remote notifications (`registerForRemoteNotifications()`), which requires requesting notification permission from the user.
 - A connected **FCM** or **APNs** channel in PostHog whose Firebase project / APNs topic (bundle id) matches your app.
+- **iOS 14 or newer** for the automatic hooks. On iOS 13 the SDK installs neither the registration nor the open-capture hook, so no push events are captured. Everything else the SDK captures is unaffected.
 
 ## Automatic registration and open tracking (default)
 
@@ -25,6 +26,30 @@ PostHogSDK.shared.setup(config)
 ```
 
 With these enabled you only need to register for remote notifications; the SDK picks up the token and open events automatically. The token is registered under the current distinct ID, so it follows the user across `identify()`. Locally-scheduled notifications are ignored. Capture those manually (below).
+
+<CalloutBox icon="IconWarning" title="Your app must set a notification delegate" type="caution">
+
+iOS reports a notification tap through `UNUserNotificationCenter.current().delegate`. If your app never sets one, the SDK has nothing to observe and `$push_notification_opened` is never captured, whatever the app state.
+
+</CalloutBox>
+
+Set the delegate when your app launches:
+
+```swift
+import UserNotifications
+
+class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate {
+  func application(
+    _ application: UIApplication,
+    didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?
+  ) -> Bool {
+    UNUserNotificationCenter.current().delegate = self
+    return true
+  }
+}
+```
+
+The SDK logs a warning a few seconds after `setup()` when the delegate is still missing, if you enable `config.debug`.
 
 Automatic registration and open capture require `config.enableSwizzling` to be `true` (the default). If you disable swizzling or manage your own delegates, use the manual APIs below.
 
@@ -73,7 +98,9 @@ There's also a fully manual variant if you don't have a `UNNotificationResponse`
 PostHogSDK.shared.capturePushNotificationOpened(title: "...", body: "...", payload: [:], action: "...")
 ```
 
-The `$push_notification_opened` event includes `$notification_title`, `$notification_subtitle`, and `$notification_body`, plus `$notification_action` for action-button taps. Notification content is only captured for notifications sent by PostHog. Opens of other notifications are still captured, but without title, subtitle, or body.
+From iOS SDK 3.75.0, both calls are deduplicated against automatic capture: a repeat of a notification PostHog sent, captured in the last 5 minutes, is skipped, so one tap counts once whichever path reports it. Notifications PostHog didn't send are never deduplicated. The field-based call carries no notification identifier, so a genuine re-send of the same workflow step inside those 5 minutes reads as the same tap and is skipped – report a re-send through `capturePushNotificationOpened(response:)`, which can tell the deliveries apart.
+
+The `$push_notification_opened` event includes `$notification_title`, `$notification_subtitle`, and `$notification_body`, plus `$notification_action` for action-button taps. On iOS, notification content is only captured for notifications sent by PostHog. Opens of other notifications are still captured, but without title, subtitle, or body.
 
 ## Identity verification
 
@@ -92,4 +119,5 @@ config.pushIdentityProvider = { distinctId, appId, completion in
 | --- | --- |
 | Token never registers | Confirm you call `registerForRemoteNotifications()` and the user granted notification permission. If you set `config.enableSwizzling = false`, automatic registration and open capture are off. Use the manual APIs. |
 | Push doesn't arrive | Confirm the channel's APNs environment (Production/Sandbox) matches your build, and the bundle id matches. |
+| Opens are never captured | Confirm your app sets `UNUserNotificationCenter.current().delegate`, that `config.enableSwizzling` is `true`, and that the device runs iOS 14 or newer. In a cross-platform host that configures PostHog from Dart or JavaScript, call `PostHogSDK.prewarmPushNotificationOpenCapture()` (iOS SDK 3.72.0 and newer) from `application(_:didFinishLaunchingWithOptions:)` so a cold-start tap isn't lost before `setup()` runs. The PostHog Flutter and React Native plugins already do this for you. |
 | Registration rejected on a Required channel | Your `pushIdentityProvider` isn't returning a valid token in time. See [Identity verification](/docs/workflows/push-notifications#identity-verification). |

@@ -38,7 +38,7 @@ export default function DataModeling(): JSX.Element {
                         <Link to="https://www.getdbt.com/" external>
                             dbt
                         </Link>{' '}
-                        to your PostHog DuckDB warehouse.
+                        to your PostHog Trino warehouse.
                     </p>
                 </div>
 

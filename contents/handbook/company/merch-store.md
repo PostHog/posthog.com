@@ -20,7 +20,15 @@ All of our permanent merch items are reordered via Micromerch. To do this you ne
 2. Approve the estimate that will be sent from Micromerch
 3. Pay the invoice via Brex once it comes in (usually in 1-2 days after estimate approval)
 
-It's really important that we do not allow stock levels to run low as restocking items can take a couple of weeks, so the Ops team will regularly check inventory levels. However if you happen to see anything looking amiss, or you know you want to place a big order for a customer that may affect our stock levels a lot, just let Kendal know ahead of time!
+It's really important that we do not allow stock levels to run low as restocking items can take a couple of weeks, so the Ops team will regularly check inventory levels. However, if you happen to see anything looking amiss, just let Kendal know ahead of time!
+
+## Big orders
+
+If you want to place a big order for a customer that may affect our stock levels a lot, just let Kendal know ahead of time!
+
+Before sending a large merch order to another country, check with Kendal and Micromerch to confirm that we have an importer of record in the destination country.
+
+If you send merch to a hotel, use the hotel only for the address. Always name a specific person as the recipient, with their own contact details. Never name the hotel or use its contact details. If the hotel is the recipient, customs contacts the hotel, and the hotel usually will not act as the importer or claim the package. The shipment then stays at customs.
 
 ## Adding new items
 
@@ -71,7 +79,7 @@ If you want more, <PrivateLink url="https://wiki.posthog.com/reference/merch"> h
 
 As always, we expect you to use this with restraint and with your own good judgement. The merch store should not become your sole source of clothing for your wardrobe, nor where you go any time a friend has a birthday. But sure, go ahead and buy your mom (or yourself) a hat or a hoodie!
 
-Please note that any free merch received outside of your birthday kit, work anniversary kit, or new hire kit is considered a taxable benefit in most jurisdictions and may be subject to tax. If you have questions about how this applies to you, we recommend checking with your local tax advisor.
+Please note that any free merch received outside of your birthday kit, work anniversary kit, or new hire kit is considered a taxable benefit in most jurisdictions and may be subject to tax. If you have questions about how this applies to you, we recommend checking with your local tax advisor. We will send the details of any free merch you have claimed to payroll once a year (usually in December) and any tax due will be deducted from that payroll (please note this is jurisdiction dependent, and also depends on your employment type at PostHog).
 
 For select exclusive or higher-value items, a cost-price discount code will be shared at the time of launch in lieu of the complimentary allowance, this will always be clearly communicated in advance. 
 

@@ -10,7 +10,7 @@ showTitle: true
 
 ## Elevator pitch
 
-The context warehouse brings your product events and business data – Stripe, HubSpot, Salesforce, Zendesk, and 40+ more – into one place, queryable together with SQL (and with PostHog AI to help you write it). Because it's part of PostHog, every piece of data is immediately available to your tools – analytics, experiments, feature flags – and to your agents.
+The context warehouse brings your product events and business data – Stripe, HubSpot, Salesforce, Zendesk, and 40+ more – into one place, queryable together with SQL (and with PostHog AI to help you write it). Because it's part of PostHog, every piece of data is immediately available to your products – analytics, experiments, feature flags – and to your agents.
 
 Snowflake stores data. The context warehouse stores data *and* acts on it.
 
@@ -106,7 +106,7 @@ Snowflake, BigQuery, and Databricks are powerful. They're also expensive, comple
 
 **Follow-up:** What's driving that requirement – performance, compliance, or avoiding data movement?
 
-**Answer:** PostHog's warehouse is integrated into the platform, so data never needs to travel between tools. If you're already on Snowflake, sync what you need in via Warehouse Sources. If you're starting fresh, PostHog gives you the warehouse and every tool that runs on top of it. The outcome is the same: unified data, no data movement, integrated workflows – without paying for Snowflake on top.
+**Answer:** PostHog's warehouse is integrated into the platform, so data never needs to travel between tools. If you're already on Snowflake, sync what you need in via Warehouse Sources. If you're starting fresh, PostHog gives you the warehouse and every product that runs on top of it. The outcome is the same: unified data, no data movement, integrated workflows – without paying for Snowflake on top.
 
 ### "We'll outgrow PostHog at scale"
 

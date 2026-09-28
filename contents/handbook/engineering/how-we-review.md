@@ -14,10 +14,19 @@ PRs can be written by humans or by agents (like PostHog Desktop). See [Creating 
 
 Who should review depends on who wrote the code:
 
-- **Human-authored PRs** can be reviewed by a team member or by [Stamphog, our AI approval agent](/newsletter/code-review-tips#3-add-a-pr-auto-stamper). Stamphog runs deterministic checks first (size, file ownership, tier) and then does an LLM review for approval eligibility and suggestions. Stamphog is the only AI approval agent whose approval can satisfy the review requirement, and only for eligible human-authored PRs, so a team member can merge.
+- **Human-authored PRs** can be reviewed by a team member or by [Stamphog, our AI approval agent](/newsletter/code-review-tips#3-add-a-pr-auto-stamper) (see [Enabling Stamphog on a repo](#enabling-stamphog-on-a-repo)). Stamphog runs deterministic checks first (size, file ownership, tier) and then does an LLM review for approval eligibility and suggestions. Stamphog is the only AI approval agent whose approval can satisfy the review requirement, and only for eligible human-authored PRs, so a team member can merge.
 - **Agent-authored PRs** always require a human review since we want at least one human in the loop. A team member must review the PR and approve it before merging.
 
 We encourage the use of AI review agents (Codex, Copilot, Greptile, etc.) on PRs. Run them when they're useful, whether before opening a PR, while iterating, or before requesting a human review, and respond to or resolve meaningful comments. Other AI review agent comments and suggestions do not count as approval, but they catch things humans miss and speed up the review process. Avoid adding more agent reviews when the PR already has automated feedback. Three agents arguing with each other is noisy, unless the extra agent has a niche focus like security.
+
+### Enabling Stamphog on a repo
+
+Stamphog is off for a repo until someone turns it on. Repos opt in one at a time, in two steps:
+
+1. Add the repo to the Stamphog GitHub App installation on the [PostHog org's installed apps page](https://github.com/organizations/PostHog/settings/installations/113819412). The install flow syncs the repo into Stamphog. You need org owner rights, or an org owner has to approve the request.
+2. Turn reviews on for the repo in the [Stamphog scene](https://us.posthog.com/project/2/stamphog), and pick the review mode. In label mode a review starts when someone adds the `stamphog` label to a PR, which is what every repo uses today. In auto mode every PR is reviewed. The daily Slack digest of Stamphog-approved merges is a separate toggle, and it needs reviews on.
+
+Repo-level policy is optional. Stamphog reads `.stamphog/policy.yml` and `.stamphog/review-guidance.md` from the repo's default branch and layers them over hosted defaults, so a repo with no `.stamphog/` directory gets the defaults. Stamphog can never approve a change to those files. It reads them from the default branch and never from the PR head, and every edit to them routes to a human reviewer.
 
 ## What reviews are for
 

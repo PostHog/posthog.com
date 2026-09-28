@@ -70,6 +70,11 @@ posthog.init("${process.env.GATSBY_POSTHOG_API_KEY}", {
     ui_host: "${process.env.GATSBY_POSTHOG_UI_HOST}",
     ${assetHostConfig}capture_pageview: false,
     capture_pageleave: true,
+    // A windowed page scrolls inside its app window, not the document, so the default
+    // document scroll root reports "100% scrolled" for everyone. ScrollArea marks the
+    // viewport with data-scroll-root while that viewport is what scrolls, and 'html'
+    // keeps the default behavior for a page that scrolls the document instead.
+    scroll_root_selector: ['[data-scroll-root]', 'html'],
     persistence: 'localStorage+cookie',
     cookie_persisted_properties: ['prod_interest'],
     uuid_version:'v7',

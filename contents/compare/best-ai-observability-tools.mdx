@@ -227,7 +227,7 @@ Teams building complex agents who want open-source observability with agent simu
 
 OpenLLMetry is an open-source set of extensions to OpenTelemetry, built by Traceloop. It's the pick for teams that already run OpenTelemetry and want LLM instrumentation to fit their existing stack rather than introduce a new platform. 
 
-It captures data from a wide range of LLM providers, vector databases, and frameworks, then sends it to whatever backend you already use, from Datadog to New Relic to Honeycomb. It's Apache 2.0-licensed, and its conventions directly seeded the OpenTelemetry GenAI SIG – now the upstream standard for LLM observability, though still in experimental status as of 2026.
+It captures data from a wide range of LLM providers, vector databases, and frameworks, then sends it to whatever backend you already use, from [Datadog](/compare/posthog-vs-datadog) to New Relic to Honeycomb. It's Apache 2.0-licensed, and its conventions directly seeded the OpenTelemetry GenAI SIG – now the upstream standard for LLM observability, though still in experimental status as of 2026.
 
 One thing to factor in: Traceloop was acquired by ServiceNow in March 2026 to power its AI Control Tower governance platform. The platform's roadmap and pricing are now shaped by a large enterprise vendor rather than an independent startup; worth knowing before you build a dependency on it.
 
@@ -267,7 +267,7 @@ The exception is **per-trace pricing** (LangSmith): one trace covers a whole req
 
 Let's see how much this would cost, across different platforms:
 
-- **PostHog (usage-based per event):** the first 100,000 LLM analytics events each month are free, then you pay a volume-tiered rate that starts at $35 per 100,000 events and falls to $6 per 100,000 at the highest volumes, with no seat fees. Each generation and span is an event, so this workload is roughly 700,000 events; the ~600,000 above the free tier works out to ~$76.
+- **PostHog (usage-based per event):** the first 100,000 AI Observability events each month are free, then you pay a volume-tiered rate that starts at $35 per 100,000 events and falls to $6 per 100,000 at the highest volumes, with no seat fees. Each generation and span is an event, so this workload is roughly 700,000 events; the ~600,000 above the free tier works out to ~$76.
 
 - **LangSmith (per seat + per trace):** one trace typically represents an entire user request, regardless of how many spans or model calls happen inside it. In this example, 100,000 requests produce 100,000 billable traces. With five seats at $39/month (Plus plan), that's $195 in seat costs. After the 10,000 included traces (Plus plan), the remaining 90,000 traces cost about $225 in overages ($0.0025/trace), bringing the total to roughly $420/month. The important thing is that the bill grows with request volume, not with the number of spans inside each request.
 
@@ -352,7 +352,7 @@ There's no single best LLM observability tool, only the best for your situation.
 
 Traditional observability tools like [Datadog](/compare/best-datadog-alternatives) track infrastructure: latency, error rates, uptime, and throughput. Those are mostly binary, since something either worked or it didn't. 
 
-LLM observability adds a quality dimension. A model call can return a perfectly valid response that's also wrong, biased, or off-topic, and a normal monitor would call that a success. LLM observability tools capture the actual prompts and outputs, and many add evaluations to measure whether responses are good, which traditional APM tools don't do.
+LLM observability adds a quality dimension. A model call can return a perfectly valid response that's also wrong, biased, or off-topic, and a normal monitor would call that a success. LLM observability tools capture the actual prompts and outputs, and many add evaluations to measure whether responses are good, which traditional [APM tools](/compare/best-apm-tools-for-developers) don't do.
 
 </details>
 

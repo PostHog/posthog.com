@@ -29,15 +29,6 @@ const ASSISTANTS = [
 /** Matches the inline link treatment used across the pricing page. */
 const DEFAULT_LINK_CLASSES = 'font-semibold text-red dark:text-yellow underline'
 
-// Experiment 450022
-export const AI_PRICING_FLAG = 'ai-pricing'
-
-export const AI_PRICING_EXPERIMENT_VARIANTS = {
-    control: 'control',
-    inside_calculator: 'inside-calculator',
-    outside_calculator: 'outside-calculator',
-} as const
-
 interface AgentEstimateLinkProps {
     /** Which link was clicked, sent with `pricing_ai_estimate_opened`. */
     source: string

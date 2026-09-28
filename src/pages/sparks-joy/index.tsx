@@ -47,6 +47,7 @@ export default function SparkJoy(): JSX.Element {
                                                     <AppLink
                                                         label={item.label}
                                                         url={item.link}
+                                                        external={item.external}
                                                         Icon={
                                                             item.iconName ? (
                                                                 <AppIcon name={item.iconName} />
@@ -92,6 +93,7 @@ export default function SparkJoy(): JSX.Element {
                                                     <AppLink
                                                         label={item.label}
                                                         url={item.link}
+                                                        external={item.external}
                                                         Icon={
                                                             item.iconName ? (
                                                                 <AppIcon name={item.iconName} />

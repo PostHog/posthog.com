@@ -5,7 +5,7 @@ import { BrowseMode, SkillsBrowseHeaderProps } from './types'
 
 const browseModeOptions: ToggleOption[] = [
     { label: 'Role', value: 'role' },
-    { label: 'Tools', value: 'product' },
+    { label: 'Products', value: 'product' },
 ]
 
 /**
