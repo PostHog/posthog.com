@@ -95,6 +95,7 @@ const SDK_REFERENCE_QUERY_FIELDS = `
 // The "From our inbox" examples and curator scout are data files for one docs page, not pages.
 // They have no title, and the docs query's `title: { ne: "" }` filter can still match a node with no title.
 const isInboxExampleFile = (slug?: string): boolean => /^\/docs\/self-driving\/from-our-inbox\/_/.test(slug ?? '')
+const PRODUCT_ANALYTICS_POCKET_GUIDE_ROOT = '/pocket-guides/product-analytics'
 
 export const createPages: GatsbyNode['createPages'] = async ({ actions: { createPage }, graphql }) => {
     if (isMinimalBuild) {
@@ -1033,7 +1034,7 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
         const { slug } = node.fields
         // A pocket guide's sibling SKILL.md and `_`-prefixed starter directories are files to
         // copy, not pages – the query filters on slug prefix alone, so skip them here.
-        if (slug.endsWith('/SKILL') || /\/_/.test(slug)) {
+        if (slug === PRODUCT_ANALYTICS_POCKET_GUIDE_ROOT || slug.endsWith('/SKILL') || /\/_/.test(slug)) {
             return
         }
         createPage({
@@ -1437,7 +1438,7 @@ async function createMinimalPages({
     // Same skip rule as the full build: SKILL.md siblings and _starter directories aren't pages.
     data.pocketGuides.nodes.forEach((node) => {
         const slug = node.fields?.slug
-        if (!slug || slug.endsWith('/SKILL') || /\/_/.test(slug)) return
+        if (!slug || slug === PRODUCT_ANALYTICS_POCKET_GUIDE_ROOT || slug.endsWith('/SKILL') || /\/_/.test(slug)) return
         createPage({
             path: slug,
             component: DashboardTemplate,

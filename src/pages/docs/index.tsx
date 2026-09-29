@@ -8,6 +8,7 @@ import { AppsList } from 'components/Docs/AppsList'
 import Book, { BookShelf } from 'components/PocketGuides/Book'
 import usePocketGuideCounts from '../../hooks/usePocketGuideCounts'
 import { POCKET_GUIDE_VOLUMES } from '../../constants/pocketGuides'
+import { TWIG_URL } from '../../constants'
 import usePostHog from '../../hooks/usePostHog'
 import { useApp } from '../../context/App'
 
@@ -74,7 +75,7 @@ const pathCards = [
     {
         name: 'Try PostHog interactively',
         description: 'Build an event and see what PostHog captures.',
-        url: 'https://twig.com/#twig-playground',
+        url: TWIG_URL,
         icon: 'IconPlay',
         color: 'orange',
     },

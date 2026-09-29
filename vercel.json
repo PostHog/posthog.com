@@ -136,19 +136,21 @@
         {
             "source": "/startups/:path*",
             "destination": "/startups/[...slug]/index.html"
+        },
+        {
+            "source": "/docs/product-analytics/learn/:path*",
+            "destination": "/docs/product-analytics/learn/[...chapter]/index.html"
+        },
+        {
+            "source": "/docs/ai-observability/learn/:path*",
+            "destination": "/docs/ai-observability/learn/[...chapter]/index.html"
+        },
+        {
+            "source": "/docs/session-replay/learn/:path*",
+            "destination": "/docs/session-replay/learn/[...chapter]/index.html"
         }
     ],
     "redirects": [
-        {
-            "source": "/pocket-guides/posthog",
-            "destination": "/docs/product-analytics/learn/introduction",
-            "statusCode": 301
-        },
-        {
-            "source": "/pocket-guides/posthog/101",
-            "destination": "/docs/product-analytics/learn/101",
-            "statusCode": 301
-        },
         {
             "source": "/pocket-guides/product-analytics",
             "destination": "/docs/product-analytics/learn/introduction",

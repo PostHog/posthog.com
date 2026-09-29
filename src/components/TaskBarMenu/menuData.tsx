@@ -19,6 +19,7 @@ import { useAppSettings } from '../../context/App'
 import { IconChevronDown } from '@posthog/icons'
 import { navigate } from 'gatsby'
 import { BROWSE_TOOLS_HANDLES, buildProductMenuItems } from 'constants/productNavigation'
+import { TWIG_URL } from '../../constants'
 
 interface DocsMenuItem {
     name: string
@@ -181,8 +182,8 @@ export const docsMenuItems: MenuItemType[] = [
     { type: 'separator' },
     {
         type: 'item',
-        label: 'PostHog playground',
-        link: 'https://twig.com/#twig-playground',
+        label: 'Explore Twig',
+        link: TWIG_URL,
         external: true,
         icon: <Icons.IconPlay className="size-4 text-orange" />,
     },

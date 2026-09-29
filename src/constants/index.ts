@@ -29,6 +29,10 @@ export const isMarkdownContentPath = (path: string): boolean => {
 // Hosted PostHog MCP server (streamable HTTP). Shared by the install UI and the WebMCP tools.
 export const MCP_SERVER_URL = 'https://mcp.posthog.com/mcp'
 
+// Twig is PostHog's interactive learning environment. Keep every website touchpoint on this
+// shared URL so a future destination change cannot leave one entry point behind.
+export const TWIG_URL = 'https://twig.com'
+
 // Default avatar fallback (Max the hedgehog)
 export const AVATAR_FALLBACK_URL =
     'https://res.cloudinary.com/dmukukwp6/image/upload/547324034_92465cc7_daa9_413a_9c77_e72dc38f1c9f_d77ba7e4c2.png'

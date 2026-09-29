@@ -54,13 +54,7 @@ export default function LearnSurface({ volumeId, chapter, basePath }: LearnSurfa
             return undefined
         }
         // A wrong url costs a click, not a dead end.
-        return (
-            (chapter &&
-                pages.find(
-                    (p) => learnChapterSlug(p) === chapter || (p.isFrontMatter && chapter === 'introduction')
-                )) ||
-            pages[0]
-        )
+        return (chapter && pages.find((p) => learnChapterSlug(p) === chapter)) || pages[0]
     }, [pages, chapter])
 
     const body = entry && bodies.get(normalizeUrl(entry.url))

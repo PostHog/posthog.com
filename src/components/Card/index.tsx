@@ -7,11 +7,15 @@ export default function Card({
     className = '',
 }: {
     children: JSX.Element[]
-    url: string
+    url?: string
     className?: string
 }): JSX.Element {
-    const internal = /^\/(?!\/)/.test(url)
     const classes = `group bg-white rounded-[10px] overflow-hidden hover:shadow-xl hover:translate-y-[-2px] ${className}`
+    if (!url) {
+        return <div className={classes}>{children}</div>
+    }
+
+    const internal = /^\/(?!\/)/.test(url)
     return internal ? (
         <Link to={url} className={classes}>
             {children}

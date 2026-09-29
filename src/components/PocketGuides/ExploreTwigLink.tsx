@@ -1,10 +1,7 @@
 import React from 'react'
+import { TWIG_URL } from '../../constants'
 
-export default function ExploreTwigLink({
-    href = 'https://twig.com/#twig-playground',
-}: {
-    href?: string
-}): JSX.Element {
+export default function ExploreTwigLink({ href = TWIG_URL }: { href?: string }): JSX.Element {
     return (
         <div className="mt-3 flex justify-end border-t border-primary pt-3 text-sm">
             <a

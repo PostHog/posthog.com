@@ -14,7 +14,7 @@ export default function TwigIntroductionFigure(): JSX.Element {
                     height="675"
                 />
             </div>
-            <ExploreTwigLink href="https://twig.com" />
+            <ExploreTwigLink />
         </figure>
     )
 }

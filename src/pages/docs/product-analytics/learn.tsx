@@ -1,6 +1,7 @@
 import React from 'react'
 
 import LearnPage from 'components/PocketGuides/LearnPage'
+import ProductAnalyticsLearnLanding from 'components/PocketGuides/ProductAnalyticsLearnLanding'
 
 export default function ProductAnalyticsLearn(): JSX.Element {
     return (
@@ -8,7 +9,7 @@ export default function ProductAnalyticsLearn(): JSX.Element {
             productHandle="product_analytics"
             title="Learn Product Analytics – PostHog"
             description="Follow engineers as they discover and learn about the wonderful world of user activity."
-            interactiveLearningUrl="https://twig.com/#twig-playground"
+            landing={ProductAnalyticsLearnLanding}
         />
     )
 }

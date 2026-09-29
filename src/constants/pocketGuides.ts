@@ -17,6 +17,8 @@ export interface PocketGuideVolume {
     docsProduct?: string
     /** Route where Pocket Guide touchpoints should open this volume. */
     learnPath?: string
+    /** Count the front matter and primer while this volume consists of those two learning pages. */
+    countOrientationPages?: boolean
     /** A hand-written src/pages file owns this route, so don't generate one. */
     hasStaticPage?: boolean
     /** Announced but unwritten – renders as a cover with a sash and no link. */
@@ -35,9 +37,10 @@ export const POCKET_GUIDE_VOLUMES: PocketGuideVolume[] = [
         title: 'Product Analytics',
         description: 'Record what people do in Twig, connect their activity, and build reports you can explain.',
         token: 'blue',
-        volume: 0,
+        volume: 5,
         docsProduct: 'product-analytics',
         learnPath: '/docs/product-analytics/learn/introduction',
+        countOrientationPages: true,
     },
     {
         id: 'self-driving',

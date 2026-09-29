@@ -80,13 +80,39 @@ const LearnNav = ({
     basePath,
     currentPath,
     hasLanding,
+    interactiveLearningUrl,
 }: {
     volumeId: string
     basePath: string
     currentPath?: string
     hasLanding?: boolean
+    interactiveLearningUrl?: string
 }) => {
     const pages = useBookPages(volumeId)
+
+    if (hasLanding && interactiveLearningUrl) {
+        const storyPages = pages.map((page) => ({
+            name: page.shortTitle || page.title,
+            url: page.isFrontMatter ? `${basePath}/introduction` : learnChapterPath(basePath, page),
+        }))
+
+        return (
+            <TreeMenu
+                appearance="sidebar"
+                activeUrl={currentPath}
+                items={[
+                    {
+                        name: 'Learn through a story',
+                        url: `${basePath}/introduction`,
+                        children: storyPages,
+                    },
+                    { name: 'Learn by doing', url: interactiveLearningUrl },
+                    { name: 'Have your agent teach you', url: `${basePath}#agent-teacher` },
+                ]}
+            />
+        )
+    }
+
     return (
         <nav>
             <ul className="list-none m-0 p-0 flex flex-col gap-px">
@@ -134,8 +160,8 @@ interface BuildProductMenuTabsArgs {
               docsSlug?: string
               /** Volume id from `src/constants/pocketGuides.ts`; setting it is the whole opt-in. */
               pocketGuideVolume?: string
-              /** The Learn tab opens a choice page before the volume's Introduction. */
-              learnLanding?: boolean
+              /** Adds an interactive option to the Learn landing and makes the active Learn tab return there. */
+              interactiveLearningUrl?: string
           }
         | null
         | undefined
@@ -190,9 +216,10 @@ export function buildProductMenuTabs({
         productMenu = [],
         pricingMenu = [],
         pocketGuideVolume,
-        learnLanding,
+        interactiveLearningUrl,
         docsSlug,
     } = productData
+    const hasLearnLanding = Boolean(interactiveLearningUrl)
 
     const navProductMenu = productMenu.filter((item) => !item.hideFromNav)
     const navPricingMenu = pricingMenu.filter((item) => !item.hideFromNav)
@@ -266,13 +293,14 @@ export function buildProductMenuTabs({
             icon: TAB_ICON.learn,
             default: activeSurface === 'learn',
             href: surfaceBasePath(productSlug, 'learn'),
-            navigateOnActiveClick: learnLanding,
+            navigateOnActiveClick: hasLearnLanding,
             menu: (
                 <LearnNav
                     volumeId={pocketGuideVolume}
                     basePath={surfaceBasePath(productSlug, 'learn')}
                     currentPath={activeSurface === 'learn' ? currentPath : undefined}
-                    hasLanding={learnLanding}
+                    hasLanding={hasLearnLanding}
+                    interactiveLearningUrl={interactiveLearningUrl}
                 />
             ),
         })
