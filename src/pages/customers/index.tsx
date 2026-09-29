@@ -510,9 +510,7 @@ export default function Customers(): JSX.Element {
     const { customers: allCustomers } = useCustomers()
     const customers = sortCustomers(Object.values(allCustomers))
     const tableCustomers = customers.filter(hasStory)
-    const noStoryYet = customers.filter(
-        (customer) => !hasStory(customer) && !LOGO_WALL_HIDDEN.includes(customer.slug)
-    )
+    const noStoryYet = customers.filter((customer) => !hasStory(customer) && !LOGO_WALL_HIDDEN.includes(customer.slug))
     const [filteredCustomers, setFilteredCustomers] = useState<CustomerType[]>(tableCustomers)
     const [role, setRole] = useState(ROLES[0].label)
     const [rowsShown, setRowsShown] = useState(TABLE_ROWS_STEP)
@@ -567,6 +565,7 @@ export default function Customers(): JSX.Element {
                         title="And a few hundred thousand more"
                         subtitle="from a weekend project to the UK Government"
                         scrolling
+                        additionalCustomerSlugs={['legora']}
                         reverse
                         hideLink
                         linkStories
