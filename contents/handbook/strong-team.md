@@ -50,7 +50,8 @@ We hire insanely talented people to build products ourselves, but sometimes acqu
 ### Acquihiring
 This is an efficient way to onboard great engineers without all the complexity of an acquisition. For us, an acquihire means closing down your old company as you and your team join PostHog purely as talent, which we will match up with our product teams where it makes sense.
 
-- **Everyone goes through our standard interview process.** There are no exceptions, even if you join as a group. <TeamMember name="Coua Phang" photo /> will organize each interview stage with your team members individually so everyone goes through the process in the same timeframe.
+- **Everyone goes through our standard interview process.** There are no exceptions, even if you join as a group. A member of our [Talent team](/teams/talent) who owns the role will organize each interview stage with your team members individually so everyone goes through the process in the same timeframe.
+- **Not everyone will be hired.** We assess each person individually, just like any other applicant, and we only make an offer where there's the right role for them. An acquihire conversation is not a guarantee that your whole team will join.
 - We do not pay for acquihires - we just hire the people. Sometimes we’ll pay a premium if it makes hiring multiple people easier.  
   - For YC founders, we may sometimes pay a premium. This is treated like additional compensation that vests over the standard PostHog equity schedule (not a lump sum upfront).  
   - For engineers, we pay our normal salary with the possibility of a discretionary bonus after probation.
