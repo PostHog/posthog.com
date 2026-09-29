@@ -78,13 +78,20 @@ Surveys rely on feature flags internally. Using `advanced_disable_feature_flags`
 
 ## Reducing local evaluation costs
 
-If you're using [local evaluation](/docs/feature-flags/local-evaluation), your bill may be high because of too many requests to fetch feature flag definitions. By default, PostHog fetches these every 30 seconds.
+If you're using [local evaluation](/docs/feature-flags/local-evaluation), your bill depends on how often each server instance polls for feature flag definitions, and on whether those definitions changed since the last poll. By default, PostHog fetches definitions every 30 seconds.
 
-Each request charges 10 credits, so assuming your server is constantly running and making 2 requests per minute (the default setting), this will charge `10 * 2 * 60 * 24 * 30 = 864,000 credits` each month.
+A poll is charged in one of two ways:
 
-You can reduce this by increasing the [feature flag polling interval](/docs/feature-flags/local-evaluation#step-2-initialize-posthog-with-your-personal-api-key) when initializing PostHog. For example, every 5 minutes instead of every 30 seconds.
+- **The definitions changed**, or the instance just started: PostHog returns the full definitions. This is charged as 10 requests.
+- **Nothing changed**: the SDK sends the ETag of the definitions it already holds, PostHog replies `304 Not Modified` with no body, and the poll is charged as 1 request.
 
-The drawback of this approach is that whenever you make an update to a feature flag using the PostHog UI, it takes 5 minutes (instead of 30 seconds) for that change to roll to your server.
+For a single server that runs all month at the default interval, the unchanged polls add up to `2 * 60 * 24 * 30 = 86,400 requests`, plus 10 requests for every poll that returns new definitions. Older SDK versions without ETag support are charged 10 requests for every poll, so the same server costs `10 * 2 * 60 * 24 * 30 = 864,000 requests`.
+
+To keep this cost down:
+
+1. **Use an SDK version that sends ETags.** Support arrived in Node.js 5.17.2, Python 7.13.0, Go 1.12.2, Ruby 3.4.0, PHP 3.7.3, .NET 2.4.2, and Java (posthog-server) 2.2.0. These versions send the ETag automatically.
+2. **Increase the [polling interval](/docs/feature-flags/local-evaluation#step-2-initialize-posthog-with-your-feature-flags-secure-api-key)** when initializing PostHog, for example every 5 minutes instead of every 30 seconds. The drawback is that a flag change takes up to 5 minutes (instead of 30 seconds) to reach your server.
+3. **Share definitions across instances.** Every instance polls on its own, so 20 instances cost 20 times as much as one. With an [external cache provider](/docs/feature-flags/local-evaluation/distributed-environments), one instance polls and the others read from the shared cache.
 
 <CalloutBox icon="IconWarning" title="Edge/Lambda environments" type="caution">
 

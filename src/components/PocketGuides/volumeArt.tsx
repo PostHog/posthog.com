@@ -1,6 +1,7 @@
 import React from 'react'
 
 import {
+    HedgehogTrenchcoat,
     HedgehogDirector,
     HedgehogDollHouse,
     HedgehogImTheDriver,
@@ -14,6 +15,7 @@ import {
  * what makes a book recognizable once it's off the shelf.
  */
 export const VOLUME_ART: Record<string, React.ComponentType<{ size?: number; className?: string }>> = {
+    'product-analytics': HedgehogTrenchcoat,
     'self-driving': HedgehogImTheDriver,
     'ai-observability': HedgehogXRay,
     'context-warehouse': HedgehogDollHouse,
