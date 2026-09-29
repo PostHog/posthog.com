@@ -113,13 +113,11 @@ The identity holds on every row except pre-2026 months where billing reported an
 ## Known caveats
 
 - **Pre-2026 annual months.** Before 2026 billing reported annual customers straight-line while their usage sat on separate rows. The recalc view restates those months onto usage. The summary view keeps billing's figure. The two agree from 2026 onward.
-- **Per-product columns are line-item based.** `products_mrr_sum` is the sum of every product key. The prepurchase-credit discount shows in both the per-product amounts and `total_mrr`. Refunds and credit notes issued after the invoice are netted from `total_mrr` only, so on those invoices the per-product sum is higher than `total_mrr`. Balance credits agree on most rows. About one in a hundred completed invoice rows differ.
-- **A new product is never lost, but it is invisible until it gets a column.** `total_mrr` includes every key. A key with no column lands in `other_products_mrr` and is named in `unmapped_product_keys`.
-- **Materialization cadence.** The fact and summary views are materialized about hourly. The recalc view follows the consumers built on it. The seeds and staging views are not materialized, so they compute live inside each run.
+- **Per-product columns are line-item based.** `products_mrr_sum` is the sum of every product key. The prepurchase-credit discount shows in both the per-product amounts and `total_mrr`. Refunds and credit notes issued after the invoice are netted from `total_mrr` only, so on those invoices the per-product sum is higher than `total_mrr`.
 
 ## Changing the views
 
-- A one-customer fix is a seed row, never a view edit.
+- A one customer fix is a seed row, never a view edit.
 - A logic change goes in the layer that owns it. Reading invoices changes in the invoice staging view. The waterfall changes in the fact view. Comp rules change in the recalc view.
 - Update the view's header comment and the column descriptions in the same change. The next reader starts there.
 - After a change, check the waterfall identity on the fact view and compare row counts and one closed month's total across fact, summary and recalc. They must be equal.
