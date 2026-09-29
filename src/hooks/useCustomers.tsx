@@ -1018,7 +1018,7 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
     },
     legora: {
         name: 'Legora',
-        toolsUsed: ['product_analytics'],
+        toolsUsed: ['product_analytics', 'cdp', 'posthog_ai'],
         industries: ['AI', 'Legal'],
         notes: 'AI platform for lawyers',
         featured: false,
