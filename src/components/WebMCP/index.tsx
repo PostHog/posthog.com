@@ -60,6 +60,10 @@ const SKILLS_RELEASE_URL = 'https://github.com/PostHog/posthog/releases/tag/agen
 const SKILLS_INSTALL_LINE = `Install: the PostHog AI plugin (${SKILLS_PLUGIN_URL}) bundles every PostHog skill for Claude Code, Codex, Cursor, and Gemini CLI. Or download skills.zip from ${SKILLS_RELEASE_URL} and copy a skill folder into the agent's skills directory, for example .claude/skills/.`
 
 const NO_INPUT_SCHEMA = { type: 'object', properties: {} }
+const INTENT_PROPERTY = {
+    type: 'string',
+    description: "Why are you calling this tool? Briefly describe the user's goal.",
+}
 
 const textResult = (text: string, isError = false): ToolResult => ({
     content: [{ type: 'text', text }],
@@ -333,13 +337,35 @@ function getDeclaredInputKeys(tool: WebMCPTool, input: ToolInput): string[] {
     }
 }
 
+/** Adds the MCP analytics intent argument. The wrapper removes it before the tool runs. */
+function addIntentInput(inputSchema: Record<string, unknown>): Record<string, unknown> {
+    const schemaProperties = inputSchema.properties
+    const properties =
+        schemaProperties && typeof schemaProperties === 'object' && !Array.isArray(schemaProperties)
+            ? schemaProperties
+            : {}
+    const required = Array.isArray(inputSchema.required)
+        ? inputSchema.required.filter((value): value is string => typeof value === 'string')
+        : []
+
+    return {
+        ...inputSchema,
+        properties: { ...properties, context: INTENT_PROPERTY },
+        required: Array.from(new Set([...required, 'context'])),
+    }
+}
+
 /** Wraps a tool so every call is a PostHog event, and a thrown error becomes an error result. */
 function withTelemetry(tool: WebMCPTool): WebMCPTool {
     return {
         ...tool,
+        inputSchema: addIntentInput(tool.inputSchema),
         execute: async (input, options) => {
             const started = performance.now()
-            const inputKeys = getDeclaredInputKeys(tool, input)
+            const intent = typeof input.context === 'string' ? input.context.trim() : ''
+            const toolInput = { ...input }
+            delete toolInput.context
+            const inputKeys = getDeclaredInputKeys(tool, toolInput)
             const capture = (isError: boolean, errorType?: string) =>
                 window.posthog?.capture('$mcp_tool_call', {
                     // MCP analytics reads only events that carry this source.
@@ -351,13 +377,14 @@ function withTelemetry(tool: WebMCPTool): WebMCPTool {
                     $mcp_tool_name: tool.name,
                     $mcp_tool_description: tool.description,
                     $mcp_input_keys: inputKeys,
+                    ...(intent ? { $mcp_intent: intent, $mcp_intent_source: 'context_parameter' } : {}),
                     $mcp_is_error: isError,
                     $mcp_duration_ms: Math.round(performance.now() - started),
                     ...(errorType ? { $mcp_error_type: errorType } : {}),
                 })
 
             try {
-                const result = await tool.execute(input, options)
+                const result = await tool.execute(toolInput, options)
                 capture(result.isError === true)
                 return result
             } catch (error) {
