@@ -1541,10 +1541,6 @@ export const handbookSidebar = [
                         url: '/handbook/forward-deployed-engineering/how-to-get-fde-involved',
                     },
                     {
-                        name: 'Systems and automation',
-                        url: '/handbook/forward-deployed-engineering/systems-and-automation',
-                    },
-                    {
                         name: 'How we work with AI',
                         url: '/handbook/forward-deployed-engineering/working-with-ai',
                     },
@@ -1559,6 +1555,10 @@ export const handbookSidebar = [
                     {
                         name: 'Working with product engineering',
                         url: '/handbook/forward-deployed-engineering/working-with-product-engineering',
+                    },
+                    {
+                        name: 'Working with support',
+                        url: '/handbook/forward-deployed-engineering/working-with-support',
                     },
                     {
                         name: 'New starter onboarding',
