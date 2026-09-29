@@ -62,10 +62,25 @@ preview deploy or production.
 | Event | When | Properties |
 | --- | --- | --- |
 | `webmcp tools registered` | Once per page load, after all tools register | `tools`: list of tool names |
-| `webmcp tool called` | Every call | `tool`, `success`, `duration_ms` |
+| `$mcp_tool_call` | Every call | Agent intent, tool name, description, declared input key names, error state, duration, server hostname, and WebMCP transport metadata |
 
-Inputs are not captured. The two events answer the only question that matters for now: does any agent call
-these tools, and which ones.
+`$mcp_tool_call` uses the [MCP analytics](/docs/mcp-analytics) event contract, so the calls show in MCP analytics
+next to the calls to the hosted MCP server. `$mcp_source` must be `posthog_mcp_analytics`, or MCP analytics does not
+read the event. `$mcp_transport` separates these calls from the calls to the server. Older calls use the event
+`webmcp tool called`, with the properties `tool`, `success`, and `duration_ms`.
+
+The telemetry wrapper adds a required `context` string to each tool schema. The calling agent uses it to describe
+the user's goal. The wrapper captures it as `$mcp_intent` with `$mcp_intent_source: context_parameter`. It removes
+the field before the tool runs.
+
+`$mcp_resource_name` and `$mcp_tool_name` both contain the tool name, as required by the SDK contract.
+`$mcp_tool_description` contains the registered description. `$mcp_input_keys` contains only names that appear in
+the registered input schema. It never contains input values. A thrown error adds `$mcp_error_type`, but not its
+message. PostHog JS adds the current `$session_id`, so the call links to the browser session and its replay.
+
+The agent-provided `context` is the only captured input value. Other inputs, results, and error messages are not
+captured. The WebMCP callback does not expose the calling agent, model, protocol version, or conversation ID.
+`$mcp_client_name: webmcp` identifies the integration surface, not the agent.
 
 ## Notes
 

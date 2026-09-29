@@ -1,8 +1,10 @@
 ---
-title: How FDE works with AI
+title: Working with AI
 sidebar: Handbook
 showTitle: true
 ---
+
+Forward Deployed Engineering is a craft that relies on our own judgment, taste and reasoning, so we're accountable for the work we deliver, not AI.
 
 We'd be at a disadvantage if we didn't use AI, but using it badly could put us at even more of a disadvantage. LLMs are great for exploration, batch processing, transformation, search, and anywhere a fuzzy answer is useful. We use them to speed up better solutions, not to solve the same problem again from scratch.
 

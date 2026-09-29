@@ -78,7 +78,7 @@ const CommunityQuestions = ({ id, productData }: SectionComponentProps) => {
                                 Check the docs
                             </Link>
                             <p className="text-secondary text-base">
-                                We have an entire <SmallTeam slug="docs-wizard" /> dedicated to docs gardening.
+                                We have an entire <SmallTeam slug="wizard-and-docs" /> dedicated to docs gardening.
                             </p>
                         </li>
                         {pocketGuide && (
