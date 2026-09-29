@@ -325,19 +325,24 @@ function withTelemetry(tool: WebMCPTool): WebMCPTool {
         ...tool,
         execute: async (input, options) => {
             const started = performance.now()
-            const capture = (success: boolean) =>
-                window.posthog?.capture('webmcp tool called', {
-                    tool: tool.name,
-                    success,
-                    duration_ms: Math.round(performance.now() - started),
+            const capture = (isError: boolean) =>
+                window.posthog?.capture('$mcp_tool_call', {
+                    // MCP analytics reads only events that carry this source.
+                    $mcp_source: 'posthog_mcp_analytics',
+                    $mcp_transport: 'webmcp',
+                    $mcp_client_name: 'webmcp',
+                    $mcp_server_name: window.location.hostname,
+                    $mcp_tool_name: tool.name,
+                    $mcp_is_error: isError,
+                    $mcp_duration_ms: Math.round(performance.now() - started),
                 })
 
             try {
                 const result = await tool.execute(input, options)
-                capture(!result.isError)
+                capture(result.isError === true)
                 return result
             } catch (error) {
-                capture(false)
+                capture(true)
                 return textResult(
                     `${tool.name} failed: ${error instanceof Error ? error.message : String(error)}`,
                     true

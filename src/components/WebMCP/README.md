@@ -62,10 +62,14 @@ preview deploy or production.
 | Event | When | Properties |
 | --- | --- | --- |
 | `webmcp tools registered` | Once per page load, after all tools register | `tools`: list of tool names |
-| `webmcp tool called` | Every call | `tool`, `success`, `duration_ms` |
+| `$mcp_tool_call` | Every call | `$mcp_tool_name`, `$mcp_is_error`, `$mcp_duration_ms`, `$mcp_server_name` (the hostname), and `$mcp_transport` and `$mcp_client_name`, both `webmcp` |
 
-Inputs are not captured. The two events answer the only question that matters for now: does any agent call
-these tools, and which ones.
+`$mcp_tool_call` uses the [MCP analytics](/docs/mcp-analytics) event contract, so the calls show in MCP analytics
+next to the calls to the hosted MCP server. `$mcp_source` must be `posthog_mcp_analytics`, or MCP analytics does not
+read the event. `$mcp_transport` separates these calls from the calls to the server. Older calls use the event
+`webmcp tool called`, with the properties `tool`, `success`, and `duration_ms`.
+
+Inputs, results, and error messages are not captured. Some error messages repeat the agent's input.
 
 ## Notes
 
