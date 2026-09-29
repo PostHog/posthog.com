@@ -471,7 +471,7 @@ export const sessionReplay = {
                 key: 'posthog',
             },
         ],
-        rows: ['session_replay', 'heatmaps'],
+        rows: ['session_replay'],
         excluded_sections: ['platform.integrations', 'platform.libraries', 'platform.developer', 'platform.security'],
     },
     pairsWith: [
