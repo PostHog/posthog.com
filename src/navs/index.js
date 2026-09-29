@@ -8520,6 +8520,12 @@ export const docsMenu = {
                     icon: 'IconDatabase',
                     color: 'purple',
                 },
+                {
+                    name: 'Changelog',
+                    url: '/docs/metrics/changelog',
+                    icon: 'IconRocket',
+                    color: 'purple',
+                },
             ],
         },
         {
