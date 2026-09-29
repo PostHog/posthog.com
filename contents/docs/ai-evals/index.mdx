@@ -333,7 +333,7 @@ A backfill covers whatever the evaluation targets: generations, traces, or sessi
 
 A backfill runs the evaluation over a time range you pick. It starts from the evaluation's own property filters and sampling rate, and you can change either one for this run without touching the evaluation itself. Whatever you pick is frozen on the backfill, so later edits to the evaluation do not change what a run already covered.
 
-It skips anything the evaluation has already graded, so a run over a range the evaluation was already covering finds nothing to do.
+By default it skips anything the evaluation has already graded, so a run over a range the evaluation was already covering finds nothing to do. To grade that data again, turn on **Include generations that already have a result**. See [Re-evaluating generations that already have a result](#re-evaluating-generations-that-already-have-a-result).
 
 Results appear alongside live results in the evaluation's run history, and each backfill row links to the results it produced.
 
