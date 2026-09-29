@@ -70,6 +70,12 @@ Usually the Superday buddy will review the output, but they can ask other engine
 
 Overall, candidates should spend at least 80% of their time and energy on the task and less than 20% on meeting people, as we base our decision on their output of the day. However, we encourage everyone to use the Slack channel as much as needed for any questions or problems.
 
+#### AI usage during the SuperDay
+
+Candidates can use AI tools for the SuperDay project – we expect it, as this is how many engineers work. But they must understand what they've built. During the check-in, the SuperDay buddy should ask them to walk through their architecture, explain their decisions, and reason about their code. If a candidate can't explain and defend their solution, it doesn't matter how polished it looks.
+
+AI tools are not allowed in the debugging session, beyond basic autocomplete. We want to see how the candidate reasons about code. This is also covered in our [guide to preparing for the engineering SuperDay](/handbook/people/hiring-process/engineering-superday#a-note-on-ai-tools).
+
 #### How to become an interviewer at PostHog
 
 As PostHog grows and our hiring goals get bigger and bigger, to achieve that we will need more people taking interviews and assessing people in those interviews. As we scale, it's important that we maintain a calibration across interviewers by onboarding each new interviewer to the interviewing process carefully. 
