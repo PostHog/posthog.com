@@ -24,10 +24,13 @@ export default function FilterMenu({
     const { openSignIn } = useApp()
     const { tagSubscription, subscribe, unsubscribe } = useForumSubscriptions()
 
+    const topicOf = (tag: ForumTag) => tag.attributes.topic?.data?.attributes.slug ?? ''
+    const grouped = new Set(tags.map(topicOf)).size > 1
     const visible = useMemo(() => {
         const q = query.trim().toLowerCase()
-        return q ? tags.filter((tag) => tag.attributes.label.toLowerCase().includes(q)) : tags
-    }, [tags, query])
+        const found = q ? tags.filter((tag) => tag.attributes.label.toLowerCase().includes(q)) : tags
+        return grouped ? [...found].sort((a, b) => topicOf(a).localeCompare(topicOf(b))) : found
+    }, [tags, query, grouped])
 
     const toggle = (id: number) =>
         onChange(selected.includes(id) ? selected.filter((tagId) => tagId !== id) : [...selected, id])
@@ -76,39 +79,48 @@ export default function FilterMenu({
                 </label>
                 <div className="px-3 pb-1 text-xs text-muted">{scope}</div>
                 <ul className="max-h-72 overflow-y-auto list-none m-0 p-0">
-                    {visible.map((tag) => {
+                    {visible.map((tag, index) => {
                         const subscribed = !!tagSubscription(tag.id)
                         const checked = selected.includes(tag.id)
+                        // Tags belong to one topic, so a list from several topics groups them under a heading.
+                        const topicSlug = tag.attributes.topic?.data?.attributes.slug
+                        const newGroup =
+                            grouped && topicSlug !== visible[index - 1]?.attributes.topic?.data?.attributes.slug
                         return (
-                            <li key={tag.id} className="group flex items-center gap-2 px-3 py-1 hover:bg-accent">
-                                <Checkbox
-                                    id={`forum-tag-${tag.id}`}
-                                    checked={checked}
-                                    onCheckedChange={() => toggle(tag.id)}
-                                />
-                                <label
-                                    htmlFor={`forum-tag-${tag.id}`}
-                                    className={`flex-1 cursor-pointer ${checked ? 'font-semibold' : ''}`}
-                                >
-                                    {tag.attributes.label}
-                                </label>
-                                <button
-                                    onClick={() => toggleSubscription(tag)}
-                                    aria-label={
-                                        subscribed
-                                            ? `Unsubscribe from ${tag.attributes.label}`
-                                            : `Subscribe to ${tag.attributes.label}`
-                                    }
-                                    aria-pressed={subscribed}
-                                    className={`size-6 rounded flex items-center justify-center ${
-                                        subscribed
-                                            ? 'text-red dark:text-yellow'
-                                            : 'text-muted opacity-0 group-hover:opacity-100 focus:opacity-100 hover:bg-primary border border-transparent hover:border-primary'
-                                    }`}
-                                >
-                                    <IconBell className="size-3.5" />
-                                </button>
-                            </li>
+                            <React.Fragment key={tag.id}>
+                                {newGroup && (
+                                    <li className="px-3 pt-2 pb-0.5 text-xs font-semibold text-muted">#{topicSlug}</li>
+                                )}
+                                <li className="group flex items-center gap-2 px-3 py-1 hover:bg-accent">
+                                    <Checkbox
+                                        id={`forum-tag-${tag.id}`}
+                                        checked={checked}
+                                        onCheckedChange={() => toggle(tag.id)}
+                                    />
+                                    <label
+                                        htmlFor={`forum-tag-${tag.id}`}
+                                        className={`flex-1 cursor-pointer ${checked ? 'font-semibold' : ''}`}
+                                    >
+                                        {tag.attributes.label}
+                                    </label>
+                                    <button
+                                        onClick={() => toggleSubscription(tag)}
+                                        aria-label={
+                                            subscribed
+                                                ? `Unsubscribe from ${tag.attributes.label}`
+                                                : `Subscribe to ${tag.attributes.label}`
+                                        }
+                                        aria-pressed={subscribed}
+                                        className={`size-6 rounded flex items-center justify-center ${
+                                            subscribed
+                                                ? 'text-red dark:text-yellow'
+                                                : 'text-muted opacity-0 group-hover:opacity-100 focus:opacity-100 hover:bg-primary border border-transparent hover:border-primary'
+                                        }`}
+                                    >
+                                        <IconBell className="size-3.5" />
+                                    </button>
+                                </li>
+                            </React.Fragment>
                         )
                     })}
                     {visible.length === 0 && <li className="px-3 py-2 text-muted">No tags</li>}

@@ -6,7 +6,6 @@ import {
     IconClock,
     IconDrag,
     IconEllipsis,
-    IconGear,
     IconMap,
     IconPencil,
     IconPlus,
@@ -15,6 +14,7 @@ import {
     IconTrash,
 } from '@posthog/icons'
 import OSButton from 'components/OSButton'
+import { IconTag } from 'components/OSIcons'
 import Link from 'components/Link'
 import ScrollArea from 'components/RadixUI/ScrollArea'
 import { Select } from 'components/RadixUI/Select'
@@ -144,7 +144,7 @@ const Navigation = ({
     loading?: boolean
 }) => {
     const { user, isModerator } = useUser()
-    const { editTopic, deleteTopic, manageTags } = useForumActions()
+    const { editTopic, deleteTopic } = useForumActions()
     const { reorderTopics } = useForumTopics()
     // Change order mode: the list becomes draggable. Done saves the new order; Cancel and Escape drop it.
     const [reordering, setReordering] = useState(false)
@@ -202,8 +202,6 @@ const Navigation = ({
                             }
                             items={[
                                 { label: 'New topic', icon: <IconPlus />, onClick: () => editTopic() },
-                                // Tags are shared between topics, so they are managed here, not in a topic's menu.
-                                { label: 'Manage tags', icon: <IconGear />, onClick: manageTags },
                                 {
                                     label: 'Change order',
                                     icon: <IconSort />,
@@ -252,6 +250,11 @@ const Navigation = ({
                                                 label: 'Edit topic',
                                                 icon: <IconPencil />,
                                                 onClick: () => editTopic(topic),
+                                            },
+                                            {
+                                                label: 'Manage tags',
+                                                icon: <IconTag />,
+                                                onClick: () => navigate(`/forum/t/${topic.attributes.slug}/tags`),
                                             },
                                             'divider',
                                             {

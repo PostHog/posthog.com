@@ -70,13 +70,19 @@ export type ForumTopicData = {
     sortOrder: number
     solutionsEnabled: boolean
     aiRepliesEnabled: boolean
-    allowedTags?: StrapiData<ForumTagData[]>
+    // Tags belong to exactly one topic.
+    tags?: StrapiData<ForumTagData[]>
 }
 
 export type ForumTagData = {
     label: string
     slug: string
     sortOrder: number
+    // Helps Jev decide when the tag fits a post.
+    description?: string | null
+    topic?: { data: StrapiRecord<Pick<ForumTopicData, 'label' | 'slug'>> | null }
+    // Present when a query asks for the post count.
+    questions?: { data: { attributes: { count: number } } }
 }
 
 // /api/forum-subscriptions returns flat records, not the usual { id, attributes } shape.

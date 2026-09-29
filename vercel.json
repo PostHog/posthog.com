@@ -100,6 +100,10 @@
             "destination": "/questions/[permalink]/index.html"
         },
         {
+            "source": "/forum/t/:topic/tags",
+            "destination": "/forum/t/[topic]/tags/index.html"
+        },
+        {
             "source": "/forum/t/:topic",
             "destination": "/forum/t/[topic]/index.html"
         },

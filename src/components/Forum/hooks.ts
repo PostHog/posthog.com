@@ -1,5 +1,5 @@
 import { useMemo } from 'react'
-import useSWR from 'swr'
+import useSWR, { useSWRConfig } from 'swr'
 import useSWRInfinite from 'swr/infinite'
 import qs from 'qs'
 import slugify from 'slugify'
@@ -54,12 +54,14 @@ const topicsQuery = qs.stringify(
     {
         sort: ['sortOrder:asc', 'label:asc'],
         pagination: { pageSize: 100 },
-        populate: { allowedTags: { fields: ['label', 'slug', 'sortOrder'], sort: ['sortOrder:asc', 'label:asc'] } },
+        populate: {
+            tags: { fields: ['label', 'slug', 'sortOrder', 'description'], sort: ['sortOrder:asc', 'label:asc'] },
+        },
     },
     { encodeValuesOnly: true }
 )
 
-export type TopicInput = Omit<ForumTopicData, 'allowedTags'> & { allowedTags: number[] }
+export type TopicInput = Omit<ForumTopicData, 'tags'>
 
 export const useForumTopics = () => {
     const request = useForumRequest()
@@ -128,22 +130,29 @@ export const useForumTopics = () => {
     }
 }
 
-// Tags for Manage tags, searched on the server, 10 at a time. loadMore adds the next 10, so the dialog stays fast
-// as the list grows.
-export const useForumTagSearch = (search: string, pageSize = 10) => {
+// One topic's tags for its Tags page, searched on the server, 10 at a time, each with its post count. loadMore adds
+// the next 10, so the page stays fast as the list grows.
+export const useForumTagSearch = (topicId: number | undefined, search: string, pageSize = 10) => {
     const { data, size, setSize, mutate, isLoading, isValidating } = useSWRInfinite<{
         data: ForumTag[]
         meta: { pagination: { total: number } }
     }>(
         (index) =>
-            `${API}/forum-tags?${qs.stringify(
-                {
-                    sort: ['label:asc'],
-                    ...(search.trim() ? { filters: { label: { $containsi: search.trim() } } } : {}),
-                    pagination: { page: index + 1, pageSize },
-                },
-                { encodeValuesOnly: true }
-            )}`,
+            topicId
+                ? `${API}/forum-tags?${qs.stringify(
+                      {
+                          sort: ['label:asc'],
+                          filters: {
+                              topic: { id: { $eq: topicId } },
+                              ...(search.trim() ? { label: { $containsi: search.trim() } } : {}),
+                          },
+                          fields: ['label', 'slug', 'sortOrder', 'description'],
+                          populate: { questions: { count: true } },
+                          pagination: { page: index + 1, pageSize },
+                      },
+                      { encodeValuesOnly: true }
+                  )}`
+                : null,
         (url: string) => fetch(url).then((res) => res.json()),
         // A new search keeps the old results on screen until its own arrive, so the list does not flash empty.
         { keepPreviousData: true }
@@ -161,31 +170,51 @@ export const useForumTagSearch = (search: string, pageSize = 10) => {
     }
 }
 
+export type TagInput = { label: string; description?: string | null }
+
+// Every tag with its topic, for the tag filter on All posts and Following. A topic has at most 30 tags, so one
+// page is enough for a forum with a few topics.
 export const useForumTags = () => {
     const request = useForumRequest()
-    const query = qs.stringify({ sort: ['sortOrder:asc', 'label:asc'], pagination: { pageSize: 200 } })
+    const { mutate: mutateKey } = useSWRConfig()
+    const query = qs.stringify(
+        {
+            sort: ['sortOrder:asc', 'label:asc'],
+            populate: { topic: { fields: ['label', 'slug'] } },
+            pagination: { pageSize: 100 },
+        },
+        { encodeValuesOnly: true }
+    )
     const { data, mutate } = useSWR<{ data: ForumTag[] }>(`${API}/forum-tags?${query}`, (url: string) =>
         fetch(url).then((res) => res.json())
     )
+    // Topic feeds and the Edit tags dialog read tags from the topic list, so a change refreshes it too.
+    const refreshAll = () => Promise.all([mutate(), mutateKey(`${API}/forum-topics?${topicsQuery}`)])
 
     return {
         tags: data?.data ?? [],
         refresh: mutate,
-        createTag: async (label: string) => {
+        createTag: async (topicId: number, { label, description }: TagInput) => {
             const res = await request<{ data: ForumTag }>('/forum-tags', {
                 method: 'POST',
-                body: { data: { label, slug: toSlug(label) } },
+                body: { data: { label, slug: toSlug(label), description: description || null, topic: topicId } },
             })
-            await mutate()
+            await refreshAll()
             return res.data
         },
-        updateTag: async (id: number, label: string) => {
-            await request(`/forum-tags/${id}`, { method: 'PUT', body: { data: { label } } })
-            await mutate()
+        updateTag: async (id: number, { label, description }: TagInput) => {
+            await request(`/forum-tags/${id}`, {
+                method: 'PUT',
+                body: { data: { label, slug: toSlug(label), description: description || null } },
+            })
+            await refreshAll()
         },
-        deleteTag: async (id: number) => {
-            await request(`/forum-tags/${id}`, { method: 'DELETE' })
-            await mutate()
+        // With moveTo, the tag's posts and subscriptions move to that tag (in the same topic) first.
+        deleteTag: async (id: number, moveTo?: number) => {
+            await request(`/forum-tags/${id}${moveTo ? `?${qs.stringify({ posts: 'move', moveTo })}` : ''}`, {
+                method: 'DELETE',
+            })
+            await refreshAll()
         },
     }
 }

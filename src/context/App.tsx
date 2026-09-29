@@ -1654,6 +1654,7 @@ const appSettings: AppSettings = {
     '/forum/drafts': { toolbar: true },
     '/forum/new': { toolbar: true },
     '/forum/t/:topic': { toolbar: true },
+    '/forum/t/:topic/tags': { toolbar: true },
     '/forum/p/:permalink': { toolbar: true },
     '/ai': {
         toolbar: true,

@@ -11,6 +11,7 @@ The `/forum` app. Forum posts are Squeak questions with a `forumTopic`, so the f
 | `/forum/drafts` | The signed-in user's drafts | `src/pages/forum/drafts.tsx` |
 | `/forum/new` | New post; `?draft=<id>` edits a draft | `src/pages/forum/new.tsx` |
 | `/forum/t/:topic` | One topic, pinned posts first | `src/pages/forum/t/[topic].tsx` |
+| `/forum/t/:topic/tags` | A topic's tags (staff) | `src/pages/forum/t/[topic]/tags.tsx` |
 | `/forum/p/:permalink` | One post and its comments | `src/pages/forum/p/[permalink].tsx` |
 
 The page files return `null`. `Router` in `src/components/AppWindow/index.tsx` renders one `<Forum />` for every `/forum` path, so the sidebar and any open modal survive navigation. `t/` and `p/` are client-only routes; `vercel.json` rewrites them to their page HTML. Post permalinks live under `p/`, so no permalink can collide with `new`, `following`, or `t`.
@@ -20,16 +21,17 @@ The page files return `null`. `Router` in `src/components/AppWindow/index.tsx` r
 | File | Contents |
 | --- | --- |
 | `index.tsx` | The app: picks the view from the URL, lays out the sidebar and main pane, and owns the modal state |
-| `context.tsx` | `useForumActions()`: opens the topic form, delete dialog, tag manager, and subscriptions dialog |
+| `context.tsx` | `useForumActions()`: opens the topic form, delete dialog, and subscriptions dialog |
 | `hooks.ts` | Data: `useForumTopics`, `useForumTags`, `useForumSubscriptions`, `useForumFeed`, `useForumPost` |
 | `Sidebar.tsx` | New post, search, nav, topic list with staff menus, and the off-ramps. Collapses to a top bar below `@2xl` |
 | `Feed.tsx`, `PostRow.tsx` | A post list with sorts (Latest, Active, Popular), the tag filter, infinite scroll, and empty states. Active and Popular sort by scores that Strapi stores on each post |
 | `Thread.tsx` | One post: vote box, body, author edits, the Moderate menu, and the shared Squeak replies |
 | `Composer.tsx` | The new post form, which also saves, edits, and publishes drafts. Authors choose only a topic; the server chooses tags when a post goes live |
 | `Drafts.tsx`, `DeletePostDialog.tsx` | The drafts list, and the confirmation for deleting a post or draft |
-| `FilterMenu.tsx` | Tag filter with a subscribe bell for each tag |
+| `FilterMenu.tsx` | Tag filter with a subscribe bell for each tag. On All posts it groups the tags by topic |
 | `TopicSubscribeButton.tsx`, `ManageSubscriptions.tsx` | The bell beside a topic's name (a daily digest), and the subscription list, where moderators can choose "Every post" |
-| `TopicForm.tsx`, `DeleteTopicDialog.tsx`, `TagManager.tsx` | Staff tools for topics and tags |
+| `TopicForm.tsx`, `DeleteTopicDialog.tsx` | Staff tools for topics |
+| `TopicTags.tsx` | Staff page for one topic's tags: search, add, edit the name and description, and delete or move to another tag |
 | `ForumMenu.tsx`, `VoteBox.tsx`, `TopicIcon.tsx` | Small shared pieces |
 
 ## Reused code
@@ -57,6 +59,6 @@ The server enforces every rule. The UI only hides controls that a role cannot us
 ## Topic data
 
 - `icon` is the export name of a `@posthog/icons` icon, such as `IconRocket`. `TopicIcon` falls back to `IconMessage`.
-- `allowedTags` limits the tags that the composer and "Edit tags" offer. The server does not check it.
+- Tags belong to exactly one topic (`topic.tags`). A topic has at most 30. The server refuses a post tag from another topic, and a post that moves to another topic loses its tags and gets new ones from Jev.
 - `solutionsEnabled` turns "Mark as solution" on for the topic. `aiRepliesEnabled` lets Max reply to new posts automatically; the thread only asks Max when it is on.
 - Deleting a topic with posts moves them to another topic or deletes them. The API can also detach posts, but the forum does not offer that.

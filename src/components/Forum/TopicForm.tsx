@@ -2,13 +2,10 @@ import React, { useState } from 'react'
 import Modal from 'components/RadixUI/Modal'
 import Switch from 'components/RadixUI/Switch'
 import OSButton from 'components/OSButton'
-import { OSInput, OSTextarea, Combobox } from 'components/OSForm'
+import { OSInput, OSTextarea } from 'components/OSForm'
 import DialogSelect from './DialogSelect'
-import { ForumTopic, TopicInput, toSlug, useForumTags, useForumTopics } from './hooks'
+import { ForumTopic, TopicInput, toSlug, useForumTopics } from './hooks'
 import TopicIcon, { iconNames } from './TopicIcon'
-
-// The server allows no more tags per topic than this, because automatic tagging asks about each one.
-const MAX_ALLOWED_TAGS = 30
 
 const iconOptions = iconNames.map((name) => ({
     label: name.replace(/^Icon/, ''),
@@ -17,7 +14,6 @@ const iconOptions = iconNames.map((name) => ({
 }))
 
 const Form = ({ topic, onDone, onDelete }: { topic?: ForumTopic; onDone: () => void; onDelete: () => void }) => {
-    const { tags, createTag } = useForumTags()
     const { topics, createTopic, updateTopic } = useForumTopics()
     const current = topic?.attributes
     const [values, setValues] = useState({
@@ -28,10 +24,6 @@ const Form = ({ topic, onDone, onDelete }: { topic?: ForumTopic; onDone: () => v
         solutionsEnabled: current?.solutionsEnabled ?? false,
         aiRepliesEnabled: current?.aiRepliesEnabled ?? false,
     })
-    // Numbers are existing tag ids; strings are new tags that the Combobox created. Save creates them first.
-    const [allowedTags, setAllowedTags] = useState<(number | string)[]>(
-        current?.allowedTags?.data?.map((tag) => tag.id) ?? []
-    )
     const [slugEdited, setSlugEdited] = useState(!!topic)
     const [saving, setSaving] = useState(false)
     const [error, setError] = useState('')
@@ -41,23 +33,12 @@ const Form = ({ topic, onDone, onDelete }: { topic?: ForumTopic; onDone: () => v
         setSaving(true)
         setError('')
         try {
-            const tagIds = new Set<number>()
-            for (const tag of allowedTags) {
-                if (typeof tag === 'number') {
-                    tagIds.add(tag)
-                    continue
-                }
-                // A typed name can match an existing tag, or one that an earlier failed save already created.
-                const existing = tags.find((t) => t.attributes.label.toLowerCase() === tag.trim().toLowerCase())
-                tagIds.add(existing ? existing.id : (await createTag(tag.trim())).id)
-            }
             const data: TopicInput = {
                 ...values,
                 // A new topic goes to the bottom of the sidebar; moderators move topics from the sidebar menu.
                 sortOrder: current
                     ? current.sortOrder ?? 0
                     : Math.max(-1, ...topics.map((t) => t.attributes.sortOrder ?? 0)) + 1,
-                allowedTags: Array.from(tagIds),
             }
             if (topic) await updateTopic(topic.id, data)
             else await createTopic(data)
@@ -106,18 +87,6 @@ const Form = ({ topic, onDone, onDelete }: { topic?: ForumTopic; onDone: () => v
                 onChange={(icon) => set('icon', icon)}
                 placeholder="Choose an icon"
             />
-            <Combobox
-                label="Allowed tags"
-                description={`Posts in this topic can use these tags, and untagged posts get them automatically. Tags are shared between topics; type a name to create one. ${allowedTags.length} of ${MAX_ALLOWED_TAGS} tags.`}
-                options={tags.map((tag) => ({ label: tag.attributes.label, value: tag.id }))}
-                value={allowedTags}
-                onChange={(next: (number | string)[]) =>
-                    // Removing a tag is always allowed, so a topic above the limit can get back under it.
-                    setAllowedTags((prev) =>
-                        next.length > MAX_ALLOWED_TAGS && next.length > prev.length ? prev : next
-                    )
-                }
-            />
             <div className="grid @md:grid-cols-2 gap-3">
                 <div className="p-3 rounded border border-primary">
                     <Switch
@@ -150,9 +119,7 @@ const Form = ({ topic, onDone, onDelete }: { topic?: ForumTopic; onDone: () => v
                     <OSButton
                         size="md"
                         variant="primary"
-                        disabled={
-                            saving || !values.label.trim() || !values.slug || allowedTags.length > MAX_ALLOWED_TAGS
-                        }
+                        disabled={saving || !values.label.trim() || !values.slug}
                         onClick={save}
                     >
                         {saving ? 'Saving…' : topic ? 'Save changes' : 'Create topic'}

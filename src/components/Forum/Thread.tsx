@@ -75,7 +75,10 @@ const MoveDialog = ({
                     value={topicId}
                     onChange={setTopicId}
                 />
-                <p className="text-secondary m-0">The post keeps its comments, tags, and pin.</p>
+                <p className="text-secondary m-0">
+                    The post keeps its comments and pin. Tags belong to a topic, so it loses its tags, and Jev picks
+                    tags from the new topic.
+                </p>
                 <div className="flex justify-end gap-2">
                     <OSButton size="md" onClick={() => onOpenChange(false)}>
                         Cancel
@@ -100,7 +103,7 @@ const MoveDialog = ({
     )
 }
 
-// Moderators' toggle chips for a topic's allowed tags. The server does not check allowedTags, so the UI limits the choice.
+// Moderators' toggle chips for the post's tags. Tags belong to one topic, so only that topic's tags show.
 const TagPicker = ({
     topic,
     value,
@@ -110,7 +113,7 @@ const TagPicker = ({
     value: number[]
     onChange: (tagIds: number[]) => void
 }) => {
-    const tags = topic?.attributes.allowedTags?.data ?? []
+    const tags = topic?.attributes.tags?.data ?? []
     return (
         <div>
             <div className="text-[15px] mb-1">

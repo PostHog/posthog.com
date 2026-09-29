@@ -5,14 +5,12 @@ import { ForumTopic } from './hooks'
 export type ForumActions = {
     editTopic: (topic?: ForumTopic) => void
     deleteTopic: (topic: ForumTopic) => void
-    manageTags: () => void
     manageSubscriptions: () => void
 }
 
 export const ForumActionsContext = createContext<ForumActions>({
     editTopic: () => undefined,
     deleteTopic: () => undefined,
-    manageTags: () => undefined,
     manageSubscriptions: () => undefined,
 })
 

@@ -95,7 +95,10 @@ export default function DeleteTopicDialog({
                                     value={moveTo}
                                     onChange={setMoveTo}
                                 />
-                                <p className="m-0 text-secondary">Posts keep their comments, tags, and pins.</p>
+                                <p className="m-0 text-secondary">
+                                    Posts keep their comments and pins. Tags belong to a topic, so they lose this
+                                    topic&apos;s tags, and Jev picks tags from the new topic.
+                                </p>
                             </>
                         ) : (
                             <p className="m-0 font-semibold text-red dark:text-yellow">
@@ -107,7 +110,7 @@ export default function DeleteTopicDialog({
                 ) : (
                     <p className="m-0 text-secondary">This topic has no posts.</p>
                 )}
-                <p className="m-0 text-muted">Subscriptions to this topic are also deleted.</p>
+                <p className="m-0 text-muted">The topic&apos;s tags and all subscriptions to it are also deleted.</p>
                 {error && <p className="m-0 text-red dark:text-yellow">{error}</p>}
                 <div className="flex justify-end gap-2 pt-1">
                     <OSButton size="md" onClick={() => onOpenChange(false)}>

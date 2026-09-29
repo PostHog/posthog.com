@@ -19,17 +19,17 @@ import TopicSubscribeButton from './TopicSubscribeButton'
 import TopicIcon from './TopicIcon'
 import TopicForm from './TopicForm'
 import DeleteTopicDialog from './DeleteTopicDialog'
-import TagManager from './TagManager'
+import TopicTags from './TopicTags'
 import ManageSubscriptions from './ManageSubscriptions'
 
-type View = 'home' | 'following' | 'drafts' | 'new' | 'topic' | 'post'
+type View = 'home' | 'following' | 'drafts' | 'new' | 'topic' | 'tags' | 'post'
 
 // AppWindow's Router renders one Forum for every /forum path, so state such as open modals survives navigation.
 const getView = (props: any): View => {
     if (props.params?.permalink) return 'post'
-    if (props.params?.topic) return 'topic'
     // Window props carry the page path; location is not always passed through.
     const path = (props.path || props.location?.pathname || '').replace(/\/$/, '')
+    if (props.params?.topic) return path.endsWith('/tags') ? 'tags' : 'topic'
     if (path.endsWith('/forum/following')) return 'following'
     if (path.endsWith('/forum/new')) return 'new'
     if (path.endsWith('/forum/drafts')) return 'drafts'
@@ -39,7 +39,7 @@ const getView = (props: any): View => {
 const TopicFeed = ({ topic }: { topic: ForumTopic }) => {
     const { isModerator } = useUser()
     const { editTopic } = useForumActions()
-    const { slug, description, icon, allowedTags } = topic.attributes
+    const { slug, description, icon, tags } = topic.attributes
     return (
         <Feed
             key={topic.id}
@@ -67,7 +67,7 @@ const TopicFeed = ({ topic }: { topic: ForumTopic }) => {
                 </>
             }
             description={description}
-            tags={allowedTags?.data ?? []}
+            tags={tags?.data ?? []}
             tagScope={`Tags in #${slug}`}
             showTopic={false}
             empty="No posts in this topic yet. Start the conversation!"
@@ -136,9 +136,8 @@ export default function Forum(props: any) {
     const { tags } = useForumTags()
     const [editing, setEditing] = useState<{ open: boolean; topic?: ForumTopic }>({ open: false })
     const [deleting, setDeleting] = useState<ForumTopic | undefined>()
-    const [tagsOpen, setTagsOpen] = useState(false)
     const [subscriptionsOpen, setSubscriptionsOpen] = useState(false)
-    const activeTopic = view === 'topic' ? getTopic(props.params?.topic) : undefined
+    const activeTopic = view === 'topic' || view === 'tags' ? getTopic(props.params?.topic) : undefined
 
     const actions: ForumActions = useMemo(
         () => ({
@@ -147,7 +146,6 @@ export default function Forum(props: any) {
                 setEditing({ open: false })
                 setDeleting(topic)
             },
-            manageTags: () => setTagsOpen(true),
             manageSubscriptions: () => setSubscriptionsOpen(true),
         }),
         []
@@ -171,6 +169,15 @@ export default function Forum(props: any) {
                 return <Drafts />
             case 'following':
                 return <FollowingFeed />
+            case 'tags':
+                if (activeTopic) return <TopicTags topic={activeTopic} />
+                return topicsLoading ? (
+                    <FeedPageSkeleton />
+                ) : (
+                    <div className="px-6 py-12 text-center text-secondary">
+                        There is no #{props.params?.topic} topic.
+                    </div>
+                )
             case 'topic':
                 if (activeTopic) return <TopicFeed topic={activeTopic} />
                 return topicsLoading ? (
@@ -196,6 +203,8 @@ export default function Forum(props: any) {
     const title =
         view === 'topic' && activeTopic
             ? `#${activeTopic.attributes.slug}`
+            : view === 'tags' && activeTopic
+            ? `#${activeTopic.attributes.slug} tags`
             : view === 'following'
             ? 'Following'
             : view === 'drafts'
@@ -222,7 +231,6 @@ export default function Forum(props: any) {
                     onDelete={actions.deleteTopic}
                 />
                 <DeleteTopicDialog topic={deleting} onOpenChange={(open) => !open && setDeleting(undefined)} />
-                <TagManager open={tagsOpen} onOpenChange={setTagsOpen} />
                 <ManageSubscriptions open={subscriptionsOpen} onOpenChange={setSubscriptionsOpen} />
             </ForumActionsContext.Provider>
         </MotionConfig>
