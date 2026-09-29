@@ -4,7 +4,7 @@ sidebar: Handbook
 showTitle: true
 ---
 
-Forward Deployed Engineering (FDE) is PostHog's team of engineers who embed with our biggest customers on short-term projects to deliver measurable, delightful outcomes. Depending on the engagement, that might mean hands-on engineering in their codebase (migrations, instrumentation, custom workflows, dashboards, experiments), or it might mean setting up the right foundations and enabling their team to follow PostHog best practices without ever touching code.
+Forward Deployed Engineering (FDE) is PostHog's team of engineers who work with our biggest customers on short-term projects to deliver measurable, delightful outcomes. Depending on the engagement, that might mean hands-on engineering in their codebase (migrations, instrumentation, custom workflows, dashboards, experiments), or it might mean setting up the right foundations and enabling their team to follow PostHog best practices without ever touching code.
 
 We work across the whole customer lifecycle, from new business and migrations with TAEs, to expansion with TAMs, to retention with CSMs. We then feed what we learn back into the product to benefit the wider PostHog user base.
 
@@ -25,7 +25,7 @@ FDEs need to navigate and operate autonomously within a customer's environment. 
 
 ## What an FDE does
 
-We don't maintain a fixed list of services. If a customer has a real problem where hands-on engineering can make a difference, we're interested in seeing if we can help. In practice, we often:
+We don't maintain a fixed list of services; however we do track all our previous engagements so as not to reinvent the wheel. If a customer has a real problem where hands-on engineering can make a difference, we're interested in seeing if we can help. In practice, we often:
 
 - Help customers design and implement PostHog for their specific stack, scale, and use cases
 - Unblock technical adoption: instrumentation, data modeling, migrations, and integrations

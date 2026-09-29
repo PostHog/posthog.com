@@ -26,7 +26,7 @@ For the smaller questions that come up along the way, **PostHog AI** and the **P
 
 ## If the customer still needs hands-on help
 
-Before you route anything to us, gather the context we need to get started. It saves you a round-trip:
+Before you route anything to us, gather the context we need to get started - it saves you a round-trip. If you find yourself blocked on answering any of the below, just bring it to us and we'll figure it out:
 
 1. **Start with the gap or pain point.** What problem does the customer have today, and what's the business and operational context around it? It also helps to know the dynamic between the business side and their engineers.
    - **If it's to implement a new use case, share your discovery.** Tell us which [use cases](/handbook/growth/use-case-selling/use-case-selling) are in play now, how they could lead into others later, and one layer deeper on each: if they say they want Growth & Marketing, what do they actually mean, and why? The discovery questions in the library cover where the customer is today, what happens if they don't solve it, and what outcomes they want. Agreeing on a set number of use cases up front also helps us keep the scope of the technical work contained.
@@ -36,4 +36,4 @@ Before you route anything to us, gather the context we need to get started. It s
 
 Once you have that, bring it straight to the <SmallTeam slug="forward-deployed-engineering" /> team in [#team-fde](https://posthog.slack.com/archives/C0ADE38DEFN) on Slack. We'll review it and come back to you with any questions. From there, an FDE picks it up and scopes it properly from the technical side.
 
-If you're unsure whether it's a FDE fit, ask anyway, even before you've gathered everything, and we'll let you know.
+Not sure if it's an FDE fit, or want help gathering this context from the customer? Just ask, even if you don't have everything yet, and we'll let you know.

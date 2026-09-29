@@ -17,13 +17,13 @@ Every engagement moves through four phases:
 
 Before delivery starts, every engagement needs a measurable outcome, a rough timeline, and a shared definition of "done." We write this down as a short brief and send it to the customer to confirm before committing. Scope small: it's cheaper to expand a tight scope than to unwind a loose one.
 
-While scoping, we always ask: **Is the problem described the actual problem? Are there any hidden dependencies?** Understanding the real problem space matters more than anything else in making an engagement succeed.
+While scoping, we always ask: **Is the described problem indicating a deeper pattern?** Understanding the real problem space and our ability to identify structure problems that may cause long-term problems matters more than anything else in making an engagement succeed.
 
 ### What it costs
 
 Pricing depends on shape, effort, and commercial context, so exact numbers live in the FDE calculator and the commercial reference, not here. The philosophy:
 
-- **Discovery and scoping** time before an engagement is free and time-boxed. If a customer wants more before signing, that becomes a paid proof-of-concept.
+- **Discovery and scoping** time before an engagement is free and time-boxed.
 - **Pricing is quoted per milestone deliverable**, not per hour. A deliverable that doubles in scope is a new quote, not an informal extension.
 
 Never invent an exact number on the spot. If a customer asks, say you'll get them a quote within a day and route it through the account owner.
@@ -32,11 +32,11 @@ Never invent an exact number on the spot. If a customer asks, say you'll get the
 
 These are the defaults we bring to every engagement to deliver delightful customer outcomes.
 
-- **The unit of output is a measurable customer outcome.** Not a doc, a recommendation, or a merged PR. We measure an engagement by what changed for the customer, and we agree on how we'll measure that before we start.
+- **The unit of value is a measurable customer outcome.** Not a doc, a recommendation, or a merged PR. We measure an engagement by what changed for the customer, and we agree on how we'll measure that before we start.
 - **Solve the customer's actual problem**, not the one that's easiest to ticket. The strongest move is often to correct a customer's mental model rather than build exactly what they asked for. Before digging in, ask what decision actually depends on the answer, and what "good enough" looks like for it.
 - **Start with the MVP.** Say what the minimum answer is before you start. A short list today usually beats a long analysis next week. Building more than the question asked for isn't thoroughness; it's waste. Push back on every "should we also...".
 - **Reach for PostHog's own primitives first.** Prefer PostHog AI and the platform's built-in capabilities over bespoke engineering. The simplest path the product already supports is usually right, and it's the one the customer can maintain after we leave.
-- **Capture what's reusable.** Where something we build for one customer would help others, turn it into an example, template, or product improvement. Don't force it where it wouldn't.
+- **Capture what's reusable.** Where something we build for one customer would help others, turn it into an example, template, or product improvement. Make your work visible so we can retrospectively find improvements based on the visible work and its results. 
 - **Lead with substance.** In customer communication, lead with what you found and what you'd do, never with the fact that an artifact exists. "The writeup is ready" reads as corporate filler. Say what's in it.
 - **Stay close to product engineering.** We're the fastest feedback loop between real customer usage and the roadmap, so [use it](/handbook/forward-deployed-engineering/working-with-product-engineering).
 
@@ -47,7 +47,7 @@ As AI handles more of the production, an FDE's value is less in how much they ca
 - **Prioritizing well.** Knowing which of ten reasonable things to do first, and which not to do at all.
 - **Deriving the true problem.** Reading ambiguous or over-specified requirements and finding the real question underneath.
 - **Choosing the simplest thing that works.** The simple approach where it serves, the robust one only where it prevents real regressions.
-- **Deciding now, defer, or delegate.** Knowing what to fix now, what to consciously defer, and what to hand to the customer's team, the product, or an AI agent.
+- **Make the work compound.** Decide what to do now, defer, or delegate, but structure the work so that what you do now also reduces uncertainty, produces evidence, or advances a larger engagement milestone.
 
 We hire and grow for this, and we give people room to exercise it rather than a script to follow.
 
@@ -65,11 +65,11 @@ That means we focus hard on a single customer's problem and deliver real, measur
 
 In practice:
 
-- **Go deep on one customer.** Keep asking why something is painful until we understand it as well as they do. Their pain becomes ours.
-- **Execute with urgency.** We bias for action and push the work through to completion. The value comes from shipping it on the customer's side, measuring whether it worked, and making that work visible.
-- **Deliver the outcome before thinking about scale.** The first job is making it work for this customer. Scaling comes second.
-- **Scale through solid primitives.** When we do scale to N, we build on shared platform primitives and guardrails, like the PostHog wizard, so quality stays high as the work compounds.
-- **Not everything goes back to the product.** Some of what we build is specific to one customer, and that's fine. But there are almost always learnings, and we bring those back.
+- **Deliver value now.** Keep asking what needs to happen next to move the customer's goal forward.
+- **Make the work visible.** Record what you do, learn, fix, and uncover so others can find and use it.
+- **Learn by doing the work.** Use real customer work to expose the actual problems instead of trying to model them all upfront.
+- **Solve for this customer first.** Generalize when the work gives us evidence that something should scale.
+- **Bring back what we learn.** The solution can stay customer-specific; the useful findings should not.
 
 ## Sprints
 
