@@ -45,6 +45,10 @@ if (flags.isEnabled(BACKEND_FLAG)) {
 
 A flag is a question your code asks PostHog: should this person get this feature? PostHog answers `true` or `false`, or a variant name like `control` or `test`. You change the answer in PostHog, and the code stays the same <SeeFig n={1} />.
 
+## Your two example flags
+
+If you ran the wizard, you have two flags to try this on: `wizard-example-backend-flag` and `wizard-example-frontend-flag`. The wizard checks each one once, on its own side of your app, and gates something harmless on it (a log line or a small label), so nothing changes until you turn them on. An API with no frontend gets only the backend flag. The wizard also writes `posthog-feature-flags-report.md`, with a link to each flag and the file that checks it.
+
 ## Same person, same answer
 
 PostHog hashes the flag key with the person's <Term name="distinct id">distinct ID</Term> into a number between 0 and 1, and if that number is under the rollout percentage, the person gets the flag <SeeFig n={2} />. The same key and the same distinct ID give the same answer on every check.

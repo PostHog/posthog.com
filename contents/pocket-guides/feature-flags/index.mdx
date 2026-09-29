@@ -15,13 +15,20 @@ A <Term name="feature flag">feature flag</Term> separates deploying code from re
 
 ## Where to start
 
-This guide follows a flag through its whole life: how PostHog decides who gets it, how to roll it out, kill it, configure it, and test with it, and finally how to delete it.
+Jump to the page for the job in front of you:
 
-Every page assumes a PostHog SDK is in your app. The wizard installs one if you need it and wires up your first flags, or you can [install it yourself](/docs/feature-flags/installation):
+- Letting a few people try a change first: [Rollouts](/pocket-guides/feature-flags/roll-out-gradually)
+- Something broke and has to go dark now: [The off switch](/pocket-guides/feature-flags/off-switch)
+- Checking a flag on the server and in the browser: [Server and client](/pocket-guides/feature-flags/server-and-client)
+- Changing copy or limits without a deploy: [Payloads](/pocket-guides/feature-flags/payloads)
+- Testing whether a change is better: [Experiments](/pocket-guides/feature-flags/flag-to-experiment)
+- Deleting flags that finished their job: [Cleaning up](/pocket-guides/feature-flags/cleanup)
+
+New to flags? Start with [Feature Flags 101](/pocket-guides/feature-flags/101).
+
+Every page assumes a PostHog SDK is in your app. The wizard installs one and creates two example flags that start at 0%, or you can [install it yourself](/docs/feature-flags/installation):
 
 <Setup />
-
-The wizard creates two example flags, `wizard-example-backend-flag` and `wizard-example-frontend-flag`, and both start at 0%. It checks each one once, on its own side of your app, and gates something harmless on it (a log line or a small label), so nothing changes until you turn them on. An API with no frontend gets only the backend flag. When the wizard finishes, it writes `posthog-feature-flags-report.md` with a link to each flag and the file that checks it.
 
 The rest of the guide follows those two flags from 0% to deleted.
 
