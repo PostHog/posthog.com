@@ -192,7 +192,7 @@ We offer HIPAA Compliance on PostHog Cloud and as such health companies will req
 An organization can have only one DPA and one BAA. Customers generate them self-serve from the [Legal documents page](https://app.posthog.com/legal). To generate a new one (for example, if they signed under the wrong legal entity or the company changed its name), the old document must be deleted first.
 
 - **Not signed yet:** An organization admin can delete the document from the Legal documents page. This voids the PandaDoc envelope, so the old signing link stops working.
-- **Signed:** Customers can't delete signed documents. A staff member deletes it in Django admin. Open the organization in Django admin, find the document in the legal documents list, open it, and click "Delete". You can also search for it under Legal documents in Django admin.
+- **Signed:** Customers can't delete signed documents. A staff member deletes it in Django admin. Open the organization in Django admin, find the document in the legal documents list, open it using the "change" button, and click "Delete". You can also search for it under Legal documents in Django admin.
 
 After you delete a signed document:
 
