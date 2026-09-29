@@ -153,7 +153,7 @@ This TAM used [PostHog Desktop](/desktop) to [open a PR](https://github.com/Post
 
 Within 12 hours, the fix was ready for review. Within 24 hours, it was merged. The customer's response: "I understand why people love PostHog now."
 
-This isn't that unusual here. Our TAMs and CSMs are technical. We hire for it.
+This isn't that unusual here. [Our TAMs and CSMs are technical](/blog/how-to-become-a-technical-csm). We hire for it.
 
 Another CSM got mistaken for a product engineer by one of his customers because he was answering their technical questions with so much depth. His response in our team channel: "chat, am I adding too much value?"
 
