@@ -71,7 +71,7 @@ const CUSTOMER_ORDER = [
 ]
 
 // Kept out of the logo wall so it fills an even grid
-const LOGO_WALL_HIDDEN = ['squadsventures']
+const LOGO_WALL_HIDDEN = ['squadsventures', 'jaxxon']
 
 const ROLES = [
     { label: 'Engineering', blurb: 'Installed it before anyone asked.' },
