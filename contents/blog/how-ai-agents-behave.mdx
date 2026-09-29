@@ -1,6 +1,6 @@
 ---
 title: "How AI agents behave: lessons from 63M MCP tool calls"
-date: 2026-09-23
+date: 2026-09-29
 author:
   - natalia-amorim
 category: General
@@ -21,19 +21,19 @@ And so, like any responsible naturalists, we began observing it (by which we mea
 
 In the 90 days to September 16, agents made **63 million tool calls** to [PostHog's MCP](/mcp), coming from **130,000 people**.[^1]
 
-![Weekly tool calls](https://res.cloudinary.com/dmukukwp6/image/upload/06_weekly_growth_e184e0aef1.png)
+![Weekly tool calls](https://res.cloudinary.com/dmukukwp6/image/upload/the_median_replay_9877eefcf3.png)
 
 ## Half of all agent traffic is Anthropic
 
 First, a caveat: almost half of that traffic is us. [PostHog Desktop](/desktop), the [CLI](/docs/cli), the [Slack app](/slack), and our [Signals scouts](/docs/self-driving/signals) all reach the same MCP server as everyone else, and the scouts in particular never sleep. So for this section we've set our own agents aside and looked only at the **55%** that comes from people using their own tools.[^2]
 
-![Who's calling](https://res.cloudinary.com/dmukukwp6/image/upload/01_whos_calling_9aa843d366.png)
+![Who's calling](https://res.cloudinary.com/dmukukwp6/image/upload/01_Who_s_calling_0f486c28c0.png)
 
 Over the last 14 days, **Claude Code** is the biggest caller, making up **32% of third-party calls**. OpenAI's **Codex** is second at **22%**, then **Cursor** at 10%, **Cowork** at 7%, and a long tail of Claude Desktop, Claude.ai, ChatGPT, and Claude's Agent SDK at 2–3% each.
 
 Roll it up by vendor and it's simpler: **Anthropic surfaces make up about 50% of all third-party calls, OpenAI 25%**, Cursor 10%, and everyone else fights over what's left.
 
-![Share of third-party calls by vendor](https://res.cloudinary.com/dmukukwp6/image/upload/01b_by_vendor_315046c525.png)
+![Share of third-party calls by vendor](https://res.cloudinary.com/dmukukwp6/image/upload/01b_By_vendor_4d6c56bb68.png)
 
 About **14%** of calls come from clients we can't place at all: homegrown scripts, unnamed bots, and agents that don't introduce themselves (rude).
 
@@ -41,7 +41,7 @@ Include our own agents and the picture inverts, by the way: our scouts run on Co
 
 The agent poking at your product almost certainly isn't in a chat window; it's in someone's code editor or terminal, running commands. **Only about 7% of calls come from a chat window.**
 
-![Where are they calling from](https://res.cloudinary.com/dmukukwp6/image/upload/02_not_a_chat_window_d141a3ecba.png)
+![Where are they calling from](https://res.cloudinary.com/dmukukwp6/image/upload/02_Not_a_chat_window_a89c1be4d0.png)
 
 ## Agents ignore 95% of what we built
 
@@ -49,7 +49,7 @@ Turns out, not much (at least not in terms of variety). Sixty-three million call
 
 Between them, those two are 32% of all traffic. 
 
-![What agents actually ask for](https://res.cloudinary.com/dmukukwp6/image/upload/03_what_agents_ask_for_87f55ae2e8.png)
+![What agents actually ask for](https://res.cloudinary.com/dmukukwp6/image/upload/03_What_agents_ask_for_2b1fa1cf23.png)
 
 It's worth knowing there are three doors an agent can take to ask our MCP a data question:
 
@@ -59,7 +59,7 @@ It's worth knowing there are three doors an agent can take to ask our MCP a data
 
 Agents overwhelmingly pick the first door. SQL gets about four times the traffic of the other two put together.
 
-![Three ways to ask a data question](https://res.cloudinary.com/dmukukwp6/image/upload/03b_three_doors_0ce623459e.png)
+![Three ways to ask a data question](https://res.cloudinary.com/dmukukwp6/image/upload/03b_Three_doors_9b6c24f461.png)
 
 Reading the schema tells an agent what's in your data (which events you capture, what properties they carry). But another **4.5%** of calls is the step before that: pulling up a skill, or searching the docs to work out how a particular tool wants to be called. 
 
@@ -69,7 +69,7 @@ A lot of our tools barely register, which is a little tragic, because [PostHog's
 
 Give an agent a single prompt and it could [spin up an A/B test](/experiments) today and ship the winning variant next week. It could open an error, [read the stack trace](/error-tracking), jump to the [exact replay](/session-replay) of the user who hit it, and patch the code. It could [point an AI at a week of sessions and ask questions about it](/replay-vision). The list goes on.
 
-![Iceberg](https://res.cloudinary.com/dmukukwp6/image/upload/03_iceberg_8480d54100.png)
+![Iceberg](https://res.cloudinary.com/dmukukwp6/image/upload/03_iceberg_634180c006.png)
 
 This is partly a note to self (we should advertise these better) and partly advice for anyone building an MCP: the good stuff needs to be discoverable.
 
@@ -83,7 +83,7 @@ In the last 30 days, **agents created 252,000 insights through the MCP. People c
 
 Add [PostHog AI](/ai) on top and more than half of every insight made last month came from an AI of some kind.
 
-![Who creates what](https://res.cloudinary.com/dmukukwp6/image/upload/07_who_creates_what_2454de4a69.png)
+![Who creates what](https://res.cloudinary.com/dmukukwp6/image/upload/07_Who_creates_what_545f764be6.png)
 
 It's the same story for dashboards, actions, and experiments: the MCP is the single biggest creation surface for all of them. 
 
@@ -95,25 +95,25 @@ Before anyone fights me: this measures how carefully each client forms its reque
 
 That said, **Codex is the standout**: among third-party callers it errors on just **2%** of calls. **Cursor** sits at **3.5%**, **Cowork** at **5.3%**, and **Claude Code** at **5.7%**. Grouped by vendor, the gap holds: OpenAI clients error about **2%** of the time, Anthropic clients about **5.5%**.
 
-![Error rate by client](https://res.cloudinary.com/dmukukwp6/image/upload/04_error_rate_by_client_3694010b45.png)
+![Error rate by client](https://res.cloudinary.com/dmukukwp6/image/upload/04_Error_rate_by_client_8191b0d457.png)
 
-![Error rate by vendor](https://res.cloudinary.com/dmukukwp6/image/upload/04b_error_rate_by_vendor_5d0ae83130.png)
+![Error rate by vendor](https://res.cloudinary.com/dmukukwp6/image/upload/04b_Error_rate_by_vendor_b5723b5c46.png)
 
 The one thing we can't tell you yet is which *model* is most reliable. Agents can self-report their model to our MCP, but nothing verifies it, so we're not charting it until something does.
 
 Here's a bit that made us sit up, though. Our own agents also run on Codex, against the same server, and they error just **1%** of the time – half the rate of everyone else on the same model. The likeliest explanation is boring and useful: our prompts and tool descriptions were tuned against this exact MCP.
 
-![Same model, half the errors](https://res.cloudinary.com/dmukukwp6/image/upload/04c_same_model_ae0b9c67b0.png)
+![Same model, half the errors](https://res.cloudinary.com/dmukukwp6/image/upload/04c_Same_model_ec970df9d1.png)
 
 The more interesting question, though, isn't who errors, but what they get wrong. 
 
 Agents almost never fail at finding data: reading the schema errors just **1.5%** of the time, about 1 in 66. It's the querying that trips them up. The actual SQL call fails **4.4%** of the time, nearly three times as often.
 
-![Schema reads vs SQL queries](https://res.cloudinary.com/dmukukwp6/image/upload/05_schema_vs_sql_262563c7f2.png)
+![Schema reads vs SQL queries](https://res.cloudinary.com/dmukukwp6/image/upload/05_Schema_vs_sql_fd4908f1a9.png)
 
 That said, agents don't panic: when one hits an error and the session keeps going, **39%** of the time its very next move is to call the exact same tool again, and **75%** of those retries work.
 
-![How agents handle failure](https://res.cloudinary.com/dmukukwp6/image/upload/05b_retry_funnel_361c19844d.png)
+![How agents handle failure](https://res.cloudinary.com/dmukukwp6/image/upload/05b_Retry_funnel_77f3d9d29a.png)
 
 ## 0.5% of calls cost 18% of the tokens
  
@@ -121,7 +121,7 @@ In the last 30 days our MCP handed agents **84 billion tokens**, roughly thirty 
  
 A typical call is cheap: the median response is **440 tokens**. But the tail is long; 5% of calls return more than 7,800 tokens, and 1% return more than 16,000.
 
-![Context cost](https://res.cloudinary.com/dmukukwp6/image/upload/08_context_cost_d74ff4be13.png)
+![Context cost](https://res.cloudinary.com/dmukukwp6/image/upload/08_Context_cost_fe8e53f8a3.png)
 
 And the tail isn't where you'd expect it. `execute-sql` is 23% of calls and 19% of tokens, which seems fair. But three dashboard tools (get, update, and reorder tiles) are **0.5% of calls and 18% of all tokens returned**. 
 
