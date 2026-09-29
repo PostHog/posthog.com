@@ -47,7 +47,10 @@ export default function ProductAnalyticsLearnLanding({
             </div>
 
             <div className="not-prose mt-8 grid gap-6 @xl/reader-content:grid-cols-2">
-                <Card className="flex h-full flex-col border border-primary bg-primary text-primary no-underline dark:border-dark dark:bg-accent-dark @2xl/reader-content:flex-row">
+                <Card
+                    hoverEffect={false}
+                    className="flex h-full flex-col border border-primary bg-primary text-primary no-underline dark:border-dark dark:bg-accent-dark @2xl/reader-content:flex-row"
+                >
                     <div
                         key="preview"
                         className="flex h-40 shrink-0 items-center justify-center border-b border-primary bg-accent p-4 dark:border-dark dark:bg-accent-dark @xl/reader-content:h-28 @2xl/reader-content:h-auto @2xl/reader-content:min-h-56 @2xl/reader-content:w-36 @2xl/reader-content:border-b-0 @2xl/reader-content:border-r @5xl/reader-content:w-44"
@@ -78,7 +81,10 @@ export default function ProductAnalyticsLearnLanding({
                     </div>
                 </Card>
 
-                <Card className="flex h-full flex-col border border-primary bg-primary text-primary no-underline dark:border-dark dark:bg-accent-dark @2xl/reader-content:flex-row">
+                <Card
+                    hoverEffect={false}
+                    className="flex h-full flex-col border border-primary bg-primary text-primary no-underline dark:border-dark dark:bg-accent-dark @2xl/reader-content:flex-row"
+                >
                     <div
                         key="preview"
                         className="flex h-40 shrink-0 items-center justify-center border-b border-primary bg-accent p-4 dark:border-dark dark:bg-accent-dark @xl/reader-content:h-28 @2xl/reader-content:h-auto @2xl/reader-content:min-h-56 @2xl/reader-content:w-36 @2xl/reader-content:border-b-0 @2xl/reader-content:border-r @5xl/reader-content:w-44"
@@ -104,7 +110,10 @@ export default function ProductAnalyticsLearnLanding({
                     </div>
                 </Card>
 
-                <Card className="flex h-full flex-col border border-primary bg-primary text-primary no-underline dark:border-dark dark:bg-accent-dark @xl/reader-content:col-span-2">
+                <Card
+                    hoverEffect={false}
+                    className="flex h-full flex-col border border-primary bg-primary text-primary no-underline dark:border-dark dark:bg-accent-dark @xl/reader-content:col-span-2"
+                >
                     <div key="intro" id="agent-teacher" className="flex flex-col @xl/reader-content:flex-row">
                         <div className="flex h-48 shrink-0 items-center justify-center border-b border-primary bg-accent p-4 dark:border-dark dark:bg-accent-dark @xl/reader-content:h-auto @xl/reader-content:min-h-56 @xl/reader-content:w-36 @xl/reader-content:border-b-0 @xl/reader-content:border-r @5xl/reader-content:w-44">
                             <HedgehogRoboHog
