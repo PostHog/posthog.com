@@ -53,8 +53,8 @@ action and the shortcut to it can't drift apart.
 |---|---|---|
 | `contents/pocket-guides/<id>/` | `index.mdx` at order 0 with `<Setup />` and `<Frontispiece />`, a 101 at order 1 | The reader builds the book from this directory |
 | `src/constants/pocketGuides.ts` | The shelf row | Cover, spine, and volume number |
-| `VOLUME_ART` in `volumeArt.tsx` | The volume's one hoggie, from [brand.posthog.com/hoggies](https://brand.posthog.com/hoggies) | The same character on the cover and title page makes the book recognizable. Chapters get none: the brand asks for Max "thoughtfully, not just to fill space", and no other volume puts hogs in chapters |
-| `VOLUME_SUBCOMMAND` in `Action.tsx` | The wizard subcommand, if the volume has one | `<Setup />` renders it with `@latest` pinned and copies tracked; a pasted `npx` command gets neither |
+| `VOLUME_ART` in `volumeArt.tsx` | The volume's one hedgehog illustration, from the [PostHog brand site](https://brand.posthog.com/hoggies) | The same character on the cover and title page makes the book recognizable. Chapters get none: the brand asks for Max "thoughtfully, not just to fill space", and no other volume puts hogs in chapters |
+| `VOLUME_SUBCOMMAND` in `Action.tsx` | The wizard command for the volume, if it has one | `<Setup />` renders it with `@latest` pinned and copies tracked; a pasted `npx` command gets neither |
 | `pocketGuideVolume` in `src/hooks/productData/<product>.tsx`, and `src/pages/docs/<product>/learn/[...chapter].tsx` | The docs Learn tab, for a volume with `docsProduct` | The product's docs link to the book it teaches |
 
 ## Authoring a page
@@ -98,7 +98,7 @@ after the prose.
 | `<LeftPage>` / `<RightPage>` | Figures vs prose – markers the reader interleaves |
 | `<Eyebrow>` | The small line above a title-page heading |
 | `<Setup />` | The volume's wizard command, for the front matter |
-| `<Frontispiece />` | The volume's hoggie, for the title page |
+| `<Frontispiece />` | The volume's hedgehog illustration, for the title page |
 | `<Fig n caption legend>` | Any exhibit, in a numbered frame |
 | `<ReportFigure n caption legend>` | This use case's report, drawn as its inbox moment |
 | `<ScoutFigure n caption>` | This use case's `SKILL.md`, from its self-driving `InboxTemplate` |

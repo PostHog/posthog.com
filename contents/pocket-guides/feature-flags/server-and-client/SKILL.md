@@ -23,7 +23,7 @@ Read the current docs first. Every PostHog docs URL returns Markdown if you appe
    gets the key from the server's constant, never a string literal.
 4. Evaluate with the identified user's distinct ID. It must be the same ID on the server and in
    the browser.
-5. On the server, prefer local evaluation. Never ship the feature flags secure API key to a client.
+5. On the server, prefer local evaluation. Never ship the Feature Flags secure API key to a client.
 6. Give every check an explicit default for "not loaded" and "unreachable", and make that default
    the old behavior.
 7. Where the server already evaluated a client flag, bootstrap it into the client SDK instead of

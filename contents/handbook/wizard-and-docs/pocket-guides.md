@@ -48,8 +48,8 @@ contents/pocket-guides/<volume>/<slug>/
   prompt itself, or `kind: link` with a destination – rendered by `<Action />` where the chapter
   wants it, and repeated in the reader's pinned bar automatically.
 - **A new volume is a directory plus a few registry entries.** The checklist, including the
-  volume's one hoggie and its wizard command, is in `src/components/PocketGuides/README.md`, and
-  `pnpm test:pocket-guides` checks it.
+  volume's one hedgehog illustration and its wizard command, is in
+  `src/components/PocketGuides/README.md`, and `pnpm test:pocket-guides` checks it.
 - **The body carries every word.** `<LeftPage>` holds the figures, `<RightPage>` the prose; the
   reader interleaves each figure after the first block that cites it via `<SeeFig n={1} />`.
 - **`SKILL.md` is a real file, not a string** – same frontmatter as the canonical scouts in the

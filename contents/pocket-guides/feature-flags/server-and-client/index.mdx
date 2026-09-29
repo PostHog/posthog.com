@@ -36,7 +36,7 @@ A flag checked on the server and again in the browser gets two chances to disagr
 
 With <Term name="local evaluation">local evaluation</Term>, the server SDK downloads your flag definitions every 30 seconds (every 5 minutes in Go) and evaluates them in-process, so a check makes no network request. Each definitions fetch counts as 10 flag requests, however many local checks your server makes, so local evaluation is cheaper as well as faster.
 
-The trade is that you pass in the properties your conditions use, like the person's plan, and on the server you usually have those already. Local evaluation also needs the feature flags secure API key, which stays on the server. Never ship it to a browser or a mobile app.
+The trade is that you pass in the properties your conditions use, like the person's plan, and on the server you usually have those already. Local evaluation also needs the Feature Flags secure API key, which stays on the server. Never ship it to a browser or a mobile app.
 
 After a cold start the SDK has no definitions yet, so checks return `undefined` until the first fetch lands. Give every check a default. When a check can't be evaluated locally, the SDK asks PostHog instead, unless you set `onlyEvaluateLocally`.
 
