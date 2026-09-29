@@ -1,6 +1,6 @@
 ---
 title: "How AI agents behave: lessons from 63M MCP tool calls"
-date: 2026-09-29
+date: 2026-09-17
 author:
   - natalia-amorim
 category: General
@@ -19,15 +19,15 @@ We're not describing a particularly mature ecosystem, but rather one that's bein
 
 And so, like any responsible naturalists, we began observing it (by which we mean digging through our data to see what these agents are up to).
 
-In the 90 days to September 16, agents made **63 million tool calls** to [PostHog's MCP](/mcp), coming from **130,000 people**.[^1]
+In the 90 days up to to September 16, agents made **63 million tool calls** to [PostHog's MCP](/mcp), coming from **130,000 people**.[^1]
 
 ![Weekly tool calls](https://res.cloudinary.com/dmukukwp6/image/upload/the_median_replay_9877eefcf3.png)
 
 ## Half of all agent traffic is Anthropic
 
-First, a caveat: almost half of that traffic is us. [PostHog Desktop](/desktop), the [CLI](/docs/cli), the [Slack app](/slack), and our [Signals scouts](/docs/self-driving/signals) all reach the same MCP server as everyone else, and the scouts in particular never sleep. So for this section we've set our own agents aside and looked only at the **55%** that comes from people using their own tools.[^2]
-
 ![Who's calling](https://res.cloudinary.com/dmukukwp6/image/upload/01_Who_s_calling_0f486c28c0.png)
+
+*First, a caveat: when we first looked into the data, almost half of it traffic was us. [PostHog Desktop](/desktop), the [CLI](/docs/cli), the [Slack app](/slack), and our [Signals scouts](/docs/self-driving/signals) all reach the same MCP server as everyone else, and the scouts in particular never sleep. So for this section we've set our own agents aside and looked only at the **55%** that comes from people using their own tools.[^2]*
 
 Over the last 14 days, **Claude Code** is the biggest caller, making up **32% of third-party calls**. OpenAI's **Codex** is second at **22%**, then **Cursor** at 10%, **Cowork** at 7%, and a long tail of Claude Desktop, Claude.ai, ChatGPT, and Claude's Agent SDK at 2–3% each.
 
@@ -45,7 +45,7 @@ The agent poking at your product almost certainly isn't in a chat window; it's i
 
 ## Agents ignore 95% of what we built
 
-Turns out, not much (at least not in terms of variety). Sixty-three million calls, and it mostly comes down to two moves: **running a SQL query** (15.6 million calls – 25% of everything) and **reading the schema** to find out what's queryable in the first place (another 7%).
+What do agents want? Turns out, not much (at least not in terms of variety). Sixty-three million calls, and it mostly comes down to two moves: **running a SQL query** (15.6 million calls – 25% of everything) and **reading the schema** to find out what's queryable in the first place (another 7%).
 
 Between them, those two are 32% of all traffic. 
 
