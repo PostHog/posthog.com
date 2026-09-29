@@ -12,10 +12,14 @@ const FeaturedPostSkeleton = () => {
     return <div className="w-full h-96 animate-pulse bg-accent rounded-md" />
 }
 
-const FeaturedPost = ({ attributes: { featuredImage, title, excerpt, post_category, slug } }) => {
+const FeaturedPost = ({ attributes }) => {
+    if (!attributes) return null
+    const { featuredImage, title, excerpt, post_category, slug } = attributes
+    const imageURL = featuredImage?.image?.data?.attributes?.url || featuredImage?.url
+
     return (
         <Link className="prose font-normal" to={slug}>
-            <img className="w-full mb-0" src={featuredImage?.url} />
+            <img className="w-full mb-0" src={imageURL} />
             <p className="text-primary dark:text-primary-dark text-sm opacity-60 dark:opacity-50 mt-3 mb-1">
                 {post_category?.data?.attributes?.label}
             </p>
@@ -25,14 +29,18 @@ const FeaturedPost = ({ attributes: { featuredImage, title, excerpt, post_catego
     )
 }
 
-const PostPreview = ({ attributes: { featuredImage, title, excerpt, post_category, slug } }) => {
+const PostPreview = ({ attributes }) => {
+    if (!attributes) return null
+    const { featuredImage, title, excerpt, post_category, slug } = attributes
+    const imageURL = featuredImage?.image?.data?.attributes?.url || featuredImage?.url
+
     return (
         <Link
             to={slug}
             className="@container font-normal grid @lg:grid-cols-[1fr_35%] @xl:grid-cols-[1fr_40%] gap-2 @lg:gap-4 items-center transition-all textred dark:text-yellow hover:text-red hover:dark:text-yellow"
         >
             <div className="@lg:order-2">
-                <img className="w-full" src={featuredImage?.url} />
+                <img className="w-full" src={imageURL} />
             </div>
             <div className="@lg:order-1">
                 <p className="text-primary dark:text-primary-dark text-sm opacity-75 dark:opacity-60 m-0">
@@ -51,20 +59,24 @@ export default function Posts() {
             filters: {
                 $and: [
                     {
-                        featuredImage: {
-                            url: {
-                                $notNull: true,
-                            },
-                        },
-                    },
-                    {
-                        featuredImage: {
-                            image: {
-                                id: {
-                                    $notNull: true,
+                        $or: [
+                            {
+                                featuredImage: {
+                                    url: {
+                                        $notNull: true,
+                                    },
                                 },
                             },
-                        },
+                            {
+                                featuredImage: {
+                                    image: {
+                                        id: {
+                                            $notNull: true,
+                                        },
+                                    },
+                                },
+                            },
+                        ],
                     },
                     {
                         post_category: {
@@ -112,7 +124,7 @@ export default function Posts() {
 
     return (
         <div className="@container space-y-8 @lg:space-y-4 [&>span]:block">
-            {isLoading ? <FeaturedPostSkeleton /> : <FeaturedPost {...posts?.[0]} />}
+            {isLoading ? <FeaturedPostSkeleton /> : <FeaturedPost {...(posts?.[0] || {})} />}
 
             {isLoading ? (
                 <PostPreviewSkeleton />

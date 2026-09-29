@@ -42,33 +42,30 @@ For each of these steps after you are finished record a short video (we use Loom
 - Integrate error tracking both on client and server.
 - Add in any other products as you see fit. We have a useful [framework](/handbook/cs-and-onboarding/new-hire-onboarding#learning-posthog) which can be used as a guide.
 
-- If you have a chance, rerun the integration above but use the [PostHog Wizard](/docs/ai-engineering/ai-wizard) to understand how much easier it is. 
+- Rerun the integration above with the [PostHog Wizard](/docs/ai-engineering/ai-wizard) to see how much easier it is, then ask it to audit your app. This is how other teams [self-serve discovery](/handbook/forward-deployed-engineering/how-to-get-fde-involved) before they bring the scope conversation to the FDE team.
 
 At the end of the week share a full retro of what you've done and learned with the team, and also submit a PR to this page to improve it for future new starters.
 
-## Week 2 – get acquainted with the FDE Vault
+## Week 2 – start working with customers
 
-The <PrivateLink url="https://github.com/PostHog/fde-vault/">FDE Vault</PrivateLink> is the main place we store internal context about how we work, and track specific customer engagements.  Once up and running as an FDE you'll be using this daily to track and inform your work.
+> The <PrivateLink url="https://github.com/PostHog/fde-vault/">FDE Vault</PrivateLink> is where we share what we're working on. Whenever you pick up a ticket, task, or intake, write it up in the vault using our shared format, so it's easy for the other FDEs to follow along and give feedback. Set it up from the README in the root of the repository, and learn the rest as you record your own work.
 
-To get started, follow the set up steps in the README in the root of the repository.
+This is when you start working with your customers. Ask the vault for the current in-flight engagements we have, and then work with the FDE on that engagement to see which tasks you can pick up. Ask for their review once you're done. When you pick up a task, ask the vault how we solved similar problems for other customers.
 
-Once connected, you can ask your AI of choice questions about the vault and process.  The rough order you should think about doing things is:
+**Support tickets:**
 
-- Read, in order: README → FDE manifesto → AGENTS.md → engagement process
-- How we work: standards, judgment, and the culture
-- Common FDE work patterns – for each of the implementation areas you covered in week 1 use the vault to find customer engagements where we have solved problems related to those areas.  What had drifted from our recommended best practice?  What did we do about it?
+For weeks 2 and 3, also pick up support tickets, usually 1-2 per day, depending on your workload. A ticket is the quickest test of what you learned in week 1: a real customer problem, your answer, and their reply.
 
-At the end of the week, revisit the [DevShip repo](https://github.com/PostHog/devship-app) from the SuperDay.  Seed the project in a new PostHog project and rerun the audit using the knowledge you have obtained from your first two weeks here.  Share a write up highlighting any gaps in your original submission (ask the team if you don't still have this to hand). 
-- If you have time, ask the PostHog Wizard to complete an automated audit. This is typically how other teams [self-serves discovery](/handbook/forward-deployed-engineering/how-to-get-fde-involved) before bringing the scope conversation back to the FDE team.
+- Before your first ticket, do the [support hero training](/handbook/people/onboarding#support-hero-training) with a support engineer. It covers where tickets live, how to claim one, and how to reply.
+- Ask in #team-fde which ticket view to pick from. Choose tickets in the areas customers bring to FDE, like feature flags, migrations, and instrumentation.
+- Ask another FDE to review your answer before it goes out.
+- Note each ticket that looked like it needed an FDE engagement instead of an answer, and why. Bring those notes to the team at the end of week 3. They show the [line between support and FDE](/handbook/forward-deployed-engineering/working-with-customers#boundaries-with-support) from the support side.
 
-
-> As you go through the vault if anything is unclear ask your onboarding team mates for help and clarification.  Once you learn something new, make sure you submit it as a PR to the vault or handbook.
-
-## Weeks 3 and 4 – start working with customers
+## Weeks 3 and 4 – take on more customer work
 
 > We will normally do in-person onboarding in week 3 – this will mainly be focused around a review of your first couple of weeks, how the wider GTM organization works as well as in-person work on the below.
 
-This is when you start working with your customers. Ask the vault for the current in-flight engagements we have, and then work with the FDE on that engagement to see which tasks you can pick up.  Ask for their review once you're done.
+Keep working on your engagement tasks, and take on more of the work yourself.
 
 Simultaneously, for any new engagements that crop up after your second week, start to run intake for those engagements (the vault should help you out with what to do here)
 
@@ -77,9 +74,10 @@ Simultaneously, for any new engagements that crop up after your second week, sta
 Things are going well if:
 
 - You have significantly leveled up your PostHog product knowledge from when you started
-- You're comfortable with the vault and how to contribute to it
+- Your work is visible and reviewable: it's recorded in the FDE Vault and passes its checks
 - You've started to work on customer engagements
 - You've run your first intake
+- You've answered support tickets and can say which ones needed an FDE engagement
 - You've improved the way we as a team work
   
 ## Month 2 and beyond

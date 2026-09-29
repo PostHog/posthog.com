@@ -129,11 +129,10 @@ export const tools = [
     },
     {
         handle: 'traces',
-        name: 'Traces',
+        name: 'Tracing',
         description: 'Distributed tracing that goes straight to the line that broke',
-        slug: 'traces',
+        slug: 'tracing',
         category: 'product_engineering',
-        status: 'beta',
     },
     {
         handle: 'web_analytics',

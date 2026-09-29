@@ -9,12 +9,9 @@ availability:
 sourceId: SendGrid
 ---
 
-import AlphaRelease from "../_snippets/alpha-release.mdx"
 import SourceSetupIntro from "../_snippets/source-setup-intro.mdx"
 import SyncModes from "../_snippets/sync-modes.mdx"
 import TroubleshootingLink from "../_snippets/dw-troubleshooting-link.mdx"
-
-<AlphaRelease />
 
 The SendGrid connector pulls your SendGrid data into the PostHog data warehouse, covering suppressions, daily email statistics, per-message activity, unsubscribe groups, marketing lists, and email templates.
 

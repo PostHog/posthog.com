@@ -93,7 +93,7 @@ The client derives the ID-JAG `aud` claim from the authorization server issuer (
 
 ### 1. Verify your domain in PostHog
 
-In PostHog, go to [**Organization settings → Authentication domains & SSO**](https://app.posthog.com/settings/organization-authentication) and add and verify the domain your users authenticate with (e.g. `example.com`). See the [SSO docs](/docs/settings/sso) for domain verification steps.
+In PostHog, go to [**Organization settings → Authentication domains & SSO**](https://app.posthog.com/settings/organization-authentication) and add and verify the domain your users authenticate with (e.g. `example.com`). See the [SSO docs](/docs/settings/authentication/sso) for domain verification steps.
 
 ID-JAG only accepts tokens for users who are **active members of the organization that owns the verified domain**, so the user's email domain must match.
 
@@ -168,9 +168,9 @@ The token endpoint returns standard OAuth errors ([RFC 6749 §5.2](https://www.r
 
 ## Further reading
 
-- [ID-JAG (XAA) authentication](/docs/settings/id-jag) – the general grant, beyond MCP
+- [ID-JAG (XAA) authentication](/docs/settings/authentication/id-jag) – the general grant, beyond MCP
 - [MCP Enterprise-Managed Authorization extension](https://modelcontextprotocol.io/extensions/auth/enterprise-managed-authorization)
 - [ID-JAG / XAA specification](https://xaa.dev)
 - [MCP server overview](/docs/model-context-protocol)
 - [MCP FAQ and advanced setup](/docs/model-context-protocol/faq)
-- [SSO and authentication domains](/docs/settings/sso)
+- [SSO and authentication domains](/docs/settings/authentication/sso)

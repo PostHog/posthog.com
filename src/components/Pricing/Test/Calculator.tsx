@@ -5,11 +5,7 @@ import Link from 'components/Link'
 import Tooltip from 'components/Tooltip'
 import { graphql, useStaticQuery } from 'gatsby'
 import { IconCode, IconHandMoney, IconRocket } from '@posthog/icons'
-import AgentEstimateLink, {
-    AI_PRICING_EXPERIMENT_VARIANTS,
-    AI_PRICING_FLAG,
-} from 'components/Pricing/AgentEstimateLink'
-import { RenderInClient } from 'components/RenderInClient'
+import AgentEstimateLink from 'components/Pricing/AgentEstimateLink'
 
 // The sidebar sits inside a `not-prose` section, so prose's link styling doesn't reach it and
 // `Link` ships no styles of its own — inline links read as plain text without this. Matches the
@@ -216,24 +212,12 @@ export const Calculator = ({ hideHeader = false, id = 'calculator' }: Calculator
                         <SidebarList>
                             <SidebarListItem>
                                 Not sure what your volume looks like?{' '}
-                                <RenderInClient
-                                    placeholder={<>Add</>}
-                                    render={() =>
-                                        window.posthog?.getFeatureFlag?.(AI_PRICING_FLAG) ===
-                                        AI_PRICING_EXPERIMENT_VARIANTS.outside_calculator ? (
-                                            <>
-                                                <AgentEstimateLink
-                                                    label="Generate an AI estimate"
-                                                    source="pricing-page-estimating-usage"
-                                                />{' '}
-                                                or add
-                                            </>
-                                        ) : (
-                                            <>Add</>
-                                        )
-                                    }
+                                <AgentEstimateLink
+                                    label="Generate an AI estimate"
+                                    source="pricing-page-estimating-usage"
                                 />{' '}
-                                the tracking code to your site and check back in a few days – no credit card required.
+                                or add the tracking code to your site and check back in a few days – no credit card
+                                required.
                             </SidebarListItem>
                             <SidebarListItem>
                                 If something stupid happens and you get an unexpected bill (like if{' '}

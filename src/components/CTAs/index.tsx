@@ -5,9 +5,25 @@ import { useState } from 'react'
 import IntegrationPrompt from 'components/IntegrationPrompt'
 import Link from 'components/Link'
 import { IconHeadset, IconPlayFilled } from '@posthog/icons'
-import { IconMCP } from 'components/OSIcons'
+import { IconDiscord, IconMCP } from 'components/OSIcons'
 
-export const CTAs = ({ wizardCommand }: { wizardCommand?: string }) => {
+/**
+ * Secondary links shown under the buttons. A product can change the set with
+ * `ctaLinks` on its product data (e.g. `src/hooks/productData/replay_vision.tsx`),
+ * which the Overview template passes through as `links`.
+ */
+export type CTALinkKey = 'mcp' | 'demo' | 'discord' | 'talk-to-a-human'
+
+const ctaLinks: Record<CTALinkKey, { to: string; label: string; Icon: React.ComponentType<any> }> = {
+    mcp: { to: '/docs/model-context-protocol', label: 'MCP', Icon: IconMCP },
+    demo: { to: '/demo', label: 'Watch a demo', Icon: IconPlayFilled },
+    discord: { to: 'https://discord.gg/t57vmkcm95', label: 'Discord', Icon: IconDiscord },
+    'talk-to-a-human': { to: '/talk-to-a-human', label: 'Talk to a human', Icon: IconHeadset },
+}
+
+const DEFAULT_LINKS: CTALinkKey[] = ['mcp', 'demo', 'talk-to-a-human']
+
+export const CTAs = ({ wizardCommand, links = DEFAULT_LINKS }: { wizardCommand?: string; links?: CTALinkKey[] }) => {
     const [showIntegrationPrompt, setShowIntegrationPrompt] = useState(false)
     return (
         <>
@@ -43,24 +59,24 @@ export const CTAs = ({ wizardCommand }: { wizardCommand?: string }) => {
             </motion.div>
 
             <p className="!text-sm flex flex-wrap items-center gap-2 mt-4 justify-start">
-                <Link
-                    to="/docs/model-context-protocol"
-                    state={{ newWindow: true }}
-                    className="text-secondary hover:text-primary"
-                >
-                    <IconMCP className="size-4 mr-1 inline-block relative -top-px" />
-                    <span className="underline font-semibold">MCP</span>
-                </Link>
-                <span className="text-secondary">•</span>
-                <Link to="/demo" state={{ newWindow: true }} className="text-secondary hover:text-primary">
-                    <IconPlayFilled className="size-4 mr-1 inline-block relative -top-px" />
-                    <span className="underline font-semibold">Watch a demo</span>
-                </Link>
-                <span className="text-secondary">•</span>
-                <Link to="/talk-to-a-human" state={{ newWindow: true }} className="text-secondary hover:text-primary">
-                    <IconHeadset className="size-4 mr-1 inline-block relative -top-px" />
-                    <span className="underline font-semibold">Talk to a human</span>
-                </Link>
+                {links.map((key, index) => {
+                    const { to, label, Icon } = ctaLinks[key]
+                    const external = to.startsWith('http')
+                    return (
+                        <React.Fragment key={key}>
+                            {index > 0 && <span className="text-secondary">•</span>}
+                            <Link
+                                to={to}
+                                state={external ? undefined : { newWindow: true }}
+                                externalNoIcon={external}
+                                className="text-secondary hover:text-primary"
+                            >
+                                <Icon className="size-4 mr-1 inline-block relative -top-px" />
+                                <span className="underline font-semibold">{label}</span>
+                            </Link>
+                        </React.Fragment>
+                    )
+                })}
             </p>
         </>
     )

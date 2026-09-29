@@ -109,8 +109,15 @@ type EditorActionButton = {
     disabled?: boolean
 }
 
-const ScrollWrapper = ({ scrollable, children }: { scrollable: boolean; children: React.ReactNode }) =>
-    scrollable ? <ScrollArea>{children}</ScrollArea> : <>{children}</>
+const ScrollWrapper = ({
+    scrollable,
+    isScrollRoot,
+    children,
+}: {
+    scrollable: boolean
+    isScrollRoot: boolean
+    children: React.ReactNode
+}) => (scrollable ? <ScrollArea isScrollRoot={isScrollRoot}>{children}</ScrollArea> : <>{children}</>)
 
 const contentWidthOptions: ToggleOption[] = [
     {
@@ -584,7 +591,7 @@ export function Editor({
                                 </article>
                             </div>
                         ) : (
-                            <ScrollWrapper scrollable={scrollable}>
+                            <ScrollWrapper scrollable={scrollable} isScrollRoot={focusedWindow === appWindow}>
                                 <article
                                     ref={articleRef ?? undefined}
                                     className={`${getProseClasses(proseSize)} ${

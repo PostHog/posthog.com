@@ -17,16 +17,16 @@ export default function Lifecycle() {
         return <div>Product not found</div>
     }
 
-    const { name, overview, features, Icon, color, screenshots } = lifecycleProduct
+    const { name, overview, features, Icon, color, screenshots, seo } = lifecycleProduct
 
     return (
         <>
             <SEO
-                title={overview?.title || 'Lifecycle'}
-                description={overview?.description || 'Understand how your active users break down'}
+                title={seo?.title || `${name} - PostHog`}
+                description={seo?.description || overview?.description}
                 image="/images/og/default.png"
             />
-            <ReaderView leftSidebar={<LeftSidebarContent />} title={overview.title} hideTitle>
+            <ReaderView leftSidebar={<LeftSidebarContent />} title={name} hideTitle>
                 <div className="space-y-8">
                     <div>
                         <div className="flex gap-2 items-center">

@@ -10,7 +10,7 @@ interface ChatContextType {
     loading: boolean
     renderChat: () => void
     setQuickQuestions: (questions: string[]) => void
-    conversationHistory: { id: string; question: number; date: string }[]
+    conversationHistory: { id: string; question: string; date: string }[]
     resetConversationHistory: () => void
     EmbeddedChat: any
     aiChatSettings: any
@@ -40,34 +40,33 @@ export function ChatProvider({
     initialQuestion?: string
     codeSnippet?: { code: string; language: string; sourceUrl: string }
 }): JSX.Element {
-    const { baseSettings, aiChatSettings, setBaseSettings, setAiChatSettings } = useInkeepSettings()
+    const { baseSettings, aiChatSettings } = useInkeepSettings()
     const [hasUnread, setHasUnread] = useState(false)
     const [loading, setLoading] = useState(true)
     const [hasFirstResponse, setHasFirstResponse] = useState(false)
     const [quickQuestions, setQuickQuestions] = useState(initialQuickQuestions || defaultQuickQuestions)
-    const [conversationHistory, setConversationHistory] = useState<{ id: string; question: number; date: string }[]>([])
-    const [context, setContext] = useState<{ type: 'page'; value: { path: string; label: string } }[]>([])
+    const [conversationHistory, setConversationHistory] = useState<{ id: string; question: string; date: string }[]>([])
+    const [context, setContext] = useState(initialContext || [])
     const [EmbeddedChat, setEmbeddedChat] = useState<any>()
     const [firstResponse, setFirstResponse] = useState<string | null>(null)
     const conversationStartedDate = useMemo(() => date || new Date().toISOString(), [])
 
     const logConversation = async (event: any) => {
         const conversationId = event?.properties?.conversation?.id
-        if (conversationId) {
+        const question = event?.properties?.conversation?.messages?.find(
+            (m: { role: string }) => m.role === 'user'
+        )?.content
+        if (conversationId && question) {
             try {
                 const newConversation = {
                     id: conversationId,
-                    question: event?.properties?.conversation?.messages[0]?.content,
+                    question,
                     date: conversationStartedDate,
                 }
                 const conversations = JSON.parse(localStorage.getItem('conversations') || '[]')
-                localStorage.setItem(
-                    'conversations',
-                    JSON.stringify([
-                        ...conversations.filter((c: any) => c.date !== conversationStartedDate),
-                        newConversation,
-                    ])
-                )
+                const history = [...conversations.filter((c: any) => c.id !== conversationId), newConversation]
+                localStorage.setItem('conversations', JSON.stringify(history))
+                setConversationHistory(history)
             } catch (error) {
                 console.error('Error adding conversation to history:', error)
             }
@@ -76,9 +75,12 @@ export function ChatProvider({
 
     const logEventCallback = useCallback(
         async (event: any) => {
-            if (event?.eventName === 'user_message_submitted' && !firstResponse) {
+            if (event?.eventName === 'user_message_submitted') {
                 setFirstResponse(
-                    event.properties.conversation.messages.filter((m: any) => m.role === 'user')[0].content
+                    (previous) =>
+                        previous ||
+                        event.properties.conversation.messages.find((m: any) => m.role === 'user')?.content ||
+                        null
                 )
             }
             if (event?.eventName === 'assistant_message_received') {
@@ -165,46 +167,6 @@ export function ChatProvider({
         }
     }, [hasFirstResponse])
 
-    useEffect(() => {
-        setBaseSettings({
-            ...baseSettings,
-            onEvent: logEventCallback,
-        })
-    }, [])
-
-    useEffect(() => {
-        const contextPrompts = context.map((c) =>
-            c.type === 'page' ? `The user is currently viewing the page ${c.value.label} at ${c.value.path}` : ``
-        )
-        // codePrompt is now handled in Chat/index.tsx and passed through Inkeep.tsx
-        setAiChatSettings({
-            ...aiChatSettings,
-            prompts: contextPrompts,
-        })
-    }, [context])
-
-    useEffect(() => {
-        setAiChatSettings({
-            ...aiChatSettings,
-            exampleQuestions: quickQuestions,
-        })
-    }, [quickQuestions])
-
-    useEffect(() => {
-        if (chatId) {
-            setAiChatSettings({
-                ...aiChatSettings,
-                chatId,
-            })
-        }
-    }, [chatId])
-
-    useEffect(() => {
-        if (initialContext) {
-            initialContext.forEach((c) => addContext(c))
-        }
-    }, [initialContext])
-
     return (
         <ChatContext.Provider
             value={{
@@ -216,8 +178,15 @@ export function ChatProvider({
                 conversationHistory,
                 resetConversationHistory,
                 EmbeddedChat,
-                aiChatSettings,
-                baseSettings,
+                aiChatSettings: {
+                    ...aiChatSettings,
+                    chatId,
+                    exampleQuestions: quickQuestions,
+                    prompts: context.map(
+                        (c) => `The user is currently viewing the page ${c.value.label} at ${c.value.path}`
+                    ),
+                },
+                baseSettings: { ...baseSettings, onEvent: logEventCallback },
                 context,
                 setContext,
                 addContext,
@@ -233,7 +202,7 @@ export function ChatProvider({
 
 // Global chat overlay. Rendered once (in the desktop wrapper) and toggled via the
 // app-level `chatOpen` flag instead of being managed as a draggable window. A fresh
-// set of `chatParams` remounts the provider (keyed by chat id / path) so switching
+// set of `chatParams` remounts the provider (keyed by request) so switching
 // conversations reinitializes the embedded chat.
 export function ChatOverlay(): JSX.Element | null {
     const { chatOpen, chatParams } = useApp()
@@ -244,7 +213,7 @@ export function ChatOverlay(): JSX.Element | null {
 
     return (
         <ChatProvider
-            key={chatParams.chatId || chatParams.path}
+            key={chatParams.sessionKey}
             context={chatParams.context}
             quickQuestions={chatParams.quickQuestions}
             chatId={chatParams.chatId}

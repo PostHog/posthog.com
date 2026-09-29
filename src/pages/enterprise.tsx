@@ -56,7 +56,9 @@ const FAQ_ITEMS = [
     },
     {
         trigger: 'Do you support SSO and role-based access?',
-        content: <p>Enterprise plans include SAML SSO and role-based access controls. Details are in the docs.</p>,
+        content: (
+            <p>Enterprise plans include OIDC and SAML SSO and role-based access controls. Details are in the docs.</p>
+        ),
     },
     {
         trigger: 'How does enterprise pricing work?',

@@ -255,7 +255,7 @@ No. PostHog's [LLM observability](/docs/ai-observability) product is built into 
 
 **Traditional application monitoring** focuses on things like error rates, latency, and uptime – binary metrics where something either works or doesn't. 
 
-**LLM observability** adds a quality dimension: you need to evaluate whether model outputs are actually good, not just whether the API call succeeded. This is why tools like Langfuse and Opik invest heavily in evals, human review, and prompt management – capabilities that don't exist in traditional APM tools.
+**LLM observability** adds a quality dimension: you need to evaluate whether model outputs are actually good, not just whether the API call succeeded. This is why tools like Langfuse and Opik invest heavily in evals, human review, and prompt management – capabilities that don't exist in [traditional APM tools](/compare/best-apm-tools-for-developers).
 
 </details>
  

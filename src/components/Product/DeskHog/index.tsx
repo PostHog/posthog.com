@@ -483,21 +483,21 @@ export const ProductDeskHog = () => {
                             image="https://res.cloudinary.com/dmukukwp6/image/upload/0e9ed66b_2907_4e08_b105_99f15bfee041_3bca3468a4.png"
                             title="Flappy Hog"
                             description="Despite the title, this game has neither hedgehogs nor flapping."
-                            author="Joe Martin"
+                            author="Joe Black"
                             authorUrl="https://posthog.com/community/profiles/29070"
                         />
                         <App
                             image="https://res.cloudinary.com/dmukukwp6/image/upload/e90c7a39_484a_40a0_94b1_693962bbd13e_52085d0806.png"
                             title="One Button Dungeon"
                             description="It's a roguelike throwback about an endless corridor. Such is life."
-                            author="Joe Martin"
+                            author="Joe Black"
                             authorUrl="https://posthog.com/community/profiles/29070"
                         />
                         <App
                             image="https://res.cloudinary.com/dmukukwp6/image/upload/c8a2a90c_bea7_4c99_99ab_0c67e4d97d48_24c67b992e.png"
                             title="Three Button Dungeon"
                             description="It's a roguelike throwback, but this time the corridor is a desert. Wow!"
-                            author="Joe Martin"
+                            author="Joe Black"
                             authorUrl="https://posthog.com/community/profiles/29070"
                         />
                         <App

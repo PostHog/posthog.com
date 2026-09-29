@@ -1,0 +1,250 @@
+---
+title: SAML
+sidebar: Docs
+showTitle: true
+availability:
+  free: none
+  selfServe: none
+  enterprise: full
+  features:
+    saml:
+      free: false
+      selfServe: false
+      boost: false
+      scale: true
+      enterprise: true
+---
+
+<FeatureAvailability availability={_frontmatter.availability.features.saml} />
+
+Security Assertion Markup Language (SAML) enables users to access multiple systems with a single set of credentials. This is helpful for growing organizations that require centralized user management in an Identity Provider (IdP).
+
+If you are configuring IdP-based SSO for the first time, we recommend you use [OIDC](/docs/settings/authentication/oidc), because it is [generally considered more secure](https://blog.trailofbits.com/2026/09/21/saml-a-fractal-of-bad-design/) and simpler to operate than SAML.
+
+## Prerequisites
+
+1. If you are using PostHog cloud, your organization must be subscribed to a platform package that offers SAML. If you are self-hosting PostHog, your instance must have an enterprise license that supports SAML.
+
+2. You need to [verify domains](/docs/settings/authentication/sso#authentication-domains) for any email address that you want to allow users to log in with. For example, if you want to allow users with an `@example.com` email address to log in, like `john@example.com`, you need to add and verify `example.com` as an authentication domain.
+
+3. If you are self-hosting PostHog, make sure you have properly set up your `SITE_URL` [environment variable](/docs/self-host/configure/environment-variables) configuration.
+
+4. If you are self-hosting PostHog, your PostHog instance must be accessible from the public internet over TLS.
+
+## Configuring SAML
+
+1. Navigate to your organization's [authentication settings](https://app.posthog.com/settings/organization-authentication#setting=saml-configuration) page in PostHog.
+
+2. Scroll down to the **SAML** section, and select **Configure**.
+
+3. In your IdP, create a new SAML app for PostHog.
+
+    a. Copy the "*ACS Consumer URL*", "*Audience / entity ID*", and "*Relay state*" displayed in PostHog into your SAML app's configuration in your IdP.
+
+    b. Copy the following values from your SAML app's configuration in your IdP into PostHog:
+       - **ACS URL** (also called **Sign-on URL** or **SAML endpoint**)
+       - **Entity ID** (also called **Issuer**, **IdP issuer**, or **Azure AD Identifier**)
+       - **X.509 certificate** used to verify SAML assertions
+
+       Your IdP might provide these values in an XML metadata file. If the certificate is provided as a file, open it in a text editor and copy its contents without changing the spaces or line breaks. The `BEGIN CERTIFICATE` and `END CERTIFICATE` lines are optional.
+
+    c. Verify that your IdP shares the following attributes in the SAML assertion with PostHog:
+
+       <table>
+         <thead>
+           <tr>
+             <th>Attribute</th>
+             <th>Default name in PostHog</th>
+             <th>Optional?</th>
+           </tr>
+         </thead>
+         <tbody>
+           <tr>
+             <td>Permanent ID</td>
+             <td><code>name_id</code></td>
+             <td>❌ No</td>
+           </tr>
+           <tr>
+             <td>Email</td>
+             <td><code>email</code></td>
+             <td>❌ No</td>
+           </tr>
+           <tr>
+             <td>First (given) name</td>
+             <td><code>first_name</code></td>
+             <td>❌ No</td>
+           </tr>
+           <tr>
+             <td>Last name (surname)</td>
+             <td><code>last_name</code></td>
+             <td>✅ Yes</td>
+           </tr>
+         </tbody>
+       </table>
+
+4. Select **Save**.
+
+### Example: OneLogin
+
+<div id="onelogin"></div>
+
+#### OneLogin quick setup
+
+You can quickly connect OneLogin and PostHog by using the prebuilt integration.
+
+1. In OneLogin admin, go to Applications and click **Add App**. Search for `PostHog` and create your app.
+
+2. Go to the **Configuration** tab and where it says "PostHog domain name" enter your PostHog's instance domain (as it's also specified in the `SITE_URL` [environment variable](/docs/self-host/configure/environment-variables)), **but don't include any protocol or trailing slashes.** Examples: `playground.posthog.com`, `myposthog.mydomain.com`, `myposthogdomain.com`.
+
+3. Go to the **SSO** tab. This is where you'll obtain the information you need to pass to PostHog.
+   - **Issuer URL** needs to be set as SAML Entity ID.
+   - **SAML 2.0 Endpoint (HTTP)** needs to be set as SAML ACS URL.
+   - On **X.509 Certificate** click on **View Details**. Copy the full certificate and set it as SAML X.509 certificate.
+
+4. You're good to go! Click **Login with SSO** in PostHog's login page.
+
+#### OneLogin advanced
+
+Use this option if you want to add additional configurations to your app that are not supported with the default app catalog.
+
+1. In OneLogin admin, go to Applications and click **Add App**.
+
+2. Search for `SAML` and select **SAML Custom Connector (Advanced)**. Set name to `PostHog`.
+
+3. Go to the **Configuration** tab and edit the following attributes (leave everything else as default)
+   - In the **Audience (EntityID)** enter `https://us.posthog.com`.
+     - If you are using our EU deployment, use `https://eu.posthog.com`.
+     - If you are self-hosting, enter the exact same value as your `SITE_URL` [environment variable](/docs/self-host/configure/environment-variables).
+   - Set the **ACS (Consumer) URL Validator** to a regex that only matches `<yourdomain>/complete/saml/`. For instance: `^https:\/\/us.posthog.com\/complete\/saml\/$` (or use `eu` for an EU instance)
+   - Set the **ACS (Consumer) URL** to `https://us.posthog.com/complete/saml/`.
+     - If you are using our EU deployment, use `https://eu.posthog.com/complete/saml/`.
+     - If you are self-hosting, use `<yourdomain>/complete/saml/`.
+
+4. Go to the **Parameters** tab. You will add the following parameters. **Be sure to check "Include in SAML assertion"**.
+   - `email` to match the user's email ("Email")
+   - `first_name` to match the user's first name ("First Name")
+   - `last_name` to match the user's last name ("Last Name")
+
+5. Go to the **SSO** tab. This is where you'll obtain the information you need to pass to PostHog.
+   - **Issuer URL** needs to be set as SAML Entity ID.
+   - **SAML 2.0 Endpoint (HTTP)** needs to be set as SAML ACS URL.
+   - On **X.509 Certificate** click on **View Details**. Copy the full certificate, removing the first and last lines and set it as SAML X.509 certificate.
+
+6. You're good to go! Click **Login with SSO** in the login page.
+
+### Example: Okta
+
+1. In Okta admin, go to **Applications** and select **Create App Integration**.
+   <ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/2026_09_17_okta_saml_step_1_3c4abb3562.png"
+    alt="Okta admin UI showing a Create App Integration button"
+    classes="rounded"
+   />
+
+2. Select the **SAML 2.0** option for sign-in method.
+   <ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/2026_09_17_okta_saml_step_2_d3fae34823.png"
+    alt="Okta admin UI showing a modal to configure an app integration"
+    classes="rounded"
+   />
+  
+3. Select **Next**, name the configuration *PostHog*, then select **Next** again.
+   <ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/2026_09_17_okta_saml_step_3_d41495d5e5.png"
+    alt="Okta admin UI showing application form with a name field"
+    classes="rounded"
+   />
+
+4. Navigate to your PostHog organization's [authentication settings](https://app.posthog.com/settings/organization-authentication#setting=saml-configuration), scroll down to **SAML**, then select **Configure**.
+   <ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/2026_09_17_okta_saml_step_4_light_5657a92830.png"
+    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/2026_09_17_okta_saml_step_4_dark_f67925b245.png"
+    alt="PostHog UI showing authentication configurations"
+    classes="rounded"
+   />
+
+5. Copy the *ACS consumer URL* from PostHog into the Okta app's *Single sign-on URL* field, and copy the *Audience / entity ID* from PostHog into the Okta app's *Audience URI (SP Entity ID)* field.
+   <ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/2026_09_17_okta_saml_step_5_914ca0123f.png"
+    alt="Okta admin UI showing application form with single sign on url and audience uri fields"
+    classes="rounded"
+   />
+
+6. In Okta, select **Next**. Check the box that says *This is an internal app that we have created*, then select **Finish**.
+   <ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/2026_09_17_okta_saml_step_6_0c1a394257.png"
+    alt="Okta admin UI showing application form with an internal app checkbox"
+    classes="rounded"
+   />
+
+7. Copy the *Sign on URL* from Okta to the *SAML ACS URL* field in PostHog, the *Issuer* from Okta to the *SAML entity ID* field in PostHog, and the *Signing Certificate* from Okta to the *SAML X.509 certificate* field in PostHog.
+   <ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/2026_09_17_okta_saml_step_7_bf9659ed8d.png"
+    alt="Okta admin UI showing SAML details"
+    classes="rounded"
+   />
+
+8. Select **Save configuration** in PostHog.
+   <ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/2026_09_17_okta_saml_step_8_light_c9de006770.png"
+    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/2026_09_17_okta_saml_step_8_dark_6b2976cf77.png"
+    alt="PostHog UI showing SAML settings form"
+    classes="rounded"
+   />
+
+9. In Okta, navigate to the Sign On tab of your SAML app, then select **Edit** in the **Settings** section.
+   <ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/2026_09_17_okta_saml_step_9_7c370ffb69.png"
+    alt="Okta admin UI showing application single sign on tab"
+    classes="rounded"
+   />
+
+10. Copy the *Relay state* from PostHog to the *Default Relay State* field in Okta. Select **Save**
+   <ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/2026_09_17_okta_saml_step_10_225870e4a8.png"
+    alt="Okta admin UI showing application form with default relay state field"
+    classes="rounded"
+   />
+
+11. In Okta, scroll down to **Attribute Statements** add the following statements:
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Expression</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>email</td>
+        <td>user.profile.email</td>
+      </tr>
+      <tr>
+        <td>first_name</td>
+        <td>user.profile.firstName</td>
+      </tr>
+      <tr>
+        <td>last_name</td>
+        <td>user.profile.lastName</td>
+      </tr>
+    </tbody>
+  </table>
+   <ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/2026_09_17_okta_saml_step_11_3e259c5ae8.png"
+    alt="Okta admin UI showing SAML assertions"
+    classes="rounded"
+   />
+
+The next time you enter your email address during login, you will see an option to login using SAML.
+
+## Warnings
+
+When using SAML to authenticate users in PostHog, there are a few considerations to keep in mind:
+
+1. **Only use SAML with identity providers you trust and that verify the user's email address.** During login we use the email address provided by the identity provider. An untrusted identity provider could spoof a user's email address to impersonate your users.
+
+2. Enabling or enforcing **SAML will not disable Personal API Key usage**. Users can authenticate with the PostHog API using their API keys without first authenticating via SAML. You can use [ID-JAG (XAA)](/docs/settings/authentication/id-jag) to programmatically restrict API access using policies defined in your identity provider.
+
+3. Our SAML integration only handles authentication and user provisioning. It does not handle user removal. You can use [SCIM](/docs/settings/authentication/scim) to automatically deprovision users.
+
+4. When you enable or enforce SAML, any existing user passwords are saved. If you disable SAML SSO in the future, your users will be able to login using their pre-existing password credentials.
