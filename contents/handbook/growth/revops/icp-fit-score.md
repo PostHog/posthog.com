@@ -24,9 +24,9 @@ Not to be confused with the legacy `icp_score` property: that is the old Clay-er
 
 ## How it works
 
-Each signup's company is looked up in [Harmonic](https://harmonic.ai) by the domain of the work email, and the profile is scored in three steps. This page describes the intent and shape of `v0.7`. The exact rules, thresholds, and Harmonic fields live in a Hog formula. The default formula is [`scoring_formula.hog`](https://github.com/PostHog/posthog/blob/master/products/growth/backend/enrichment/scoring_formula.hog). The formula reads four inputs: `company` (the Harmonic company data), `signup` (role, email domain, and the setup wizard's AI SDK detection), `enrichments` (saved LLM label results), and `lists` (the curated tag and investor lists).
+Each signup's company is looked up in [Harmonic](https://harmonic.ai) by the domain of the work email, and the profile is scored in three steps. This page describes the intent and shape of `v0.7`. The exact rules, thresholds, and Harmonic fields live in a Hog formula. The formula reads four inputs: `company` (the Harmonic company data), `signup` (role, email domain, and the setup wizard's AI SDK detection), `enrichments` (saved LLM label results), and `lists` (the curated tag and investor lists).
 
-Each saved scoring configuration version stores its own formula, and a version with no custom formula uses the default file. Staff edit the formula on the AI enrichment page in PostHog. The editor previews a draft against up to 10 previously enriched companies. The preview uses saved data only and writes no scores. Staff save a draft as a new inactive version, then activate it.
+Staff edit the formula on the **ICP scoring** tab of the AI enrichment page ([US](https://us.posthog.com/ai-enrichment), [EU](https://eu.posthog.com/ai-enrichment)). Each region keeps its own formula versions, so an edit in one region does not change the other. The editor previews a draft against up to 10 previously enriched companies. The preview uses saved data only and writes no scores. Staff save a draft as a new inactive version, then activate it.
 
 ### 1. Hard disqualifiers: score 0, with a reason code
 
