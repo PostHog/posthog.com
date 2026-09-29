@@ -1,6 +1,6 @@
 ---
 title: "I became a technical CSM with ZERO training. You can too."
-date: 2026-09-28
+date: 2026-09-29
 author:
   - ella-cullen
 featuredImage: https://res.cloudinary.com/dmukukwp6/image/upload/technical_csm_7fa0b9be5c.png
