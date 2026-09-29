@@ -1,4 +1,4 @@
-PostHog's backend SDKs and API capture identified events by default. To capture anonymous events, set the `$process_person_profile` property to `false` and use a distinct ID that isn't linked to a person profile, such as a random or system ID. If the distinct ID already belongs to a person, the event is still linked to that person and counts as an identified event – it just can't update their person properties:
+PostHog's backend SDKs and API capture identified events by default. To capture anonymous events, set the `$process_person_profile` property to `false` and use a distinct ID that isn't linked to a person profile. Generate a new random value for it, such as a UUID, instead of reusing one shared ID like `system` for all anonymous events. If the distinct ID already belongs to a person, the event is still linked to that person and counts as an identified event – it just can't update their person properties:
 
 <MultiLanguage>
 

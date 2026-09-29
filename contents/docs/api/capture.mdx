@@ -92,7 +92,7 @@ sendPosthogEvent()
 
 ### Anonymous event capture
 
-To capture [anonymous events](/docs/data/anonymous-vs-identified-events), add the `$process_person_profile` property to the event and set it to `false`. Use a distinct ID that isn't linked to a person profile – if it already belongs to a person, the event is still linked to that person and counts as an identified event.
+To capture [anonymous events](/docs/data/anonymous-vs-identified-events), add the `$process_person_profile` property to the event and set it to `false`. Use a random distinct ID that isn't linked to a person profile, such as a UUID – if it already belongs to a person, the event is still linked to that person and counts as an identified event.
 
 <MultiLanguage>
 

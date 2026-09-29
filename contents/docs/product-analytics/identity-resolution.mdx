@@ -224,11 +224,11 @@ This is a problem when person processing is enabled (the default). PostHog creat
 - **Increased costs** – identified events (with person processing) cost up to 4x more per event than anonymous events. Sending high-volume system events as identified is an unnecessary expense.
 - **Unusable data** – a single person profile containing events from unrelated system processes has no analytical value.
 
-To fix this, disable person processing for these events. Set `$process_person_profile` to `false` in your backend SDK and PostHog ingests the event without creating or updating a person profile.
+To fix this, give each of these events a random distinct ID, such as a UUID, and set `$process_person_profile` to `false` in your backend SDK. PostHog then ingests the events as anonymous events, without creating or updating a person profile.
 
 ```node
 client.capture({
-    distinctId: 'system',
+    distinctId: crypto.randomUUID(),
     event: 'batch_job_completed',
     properties: {
         job_name: 'nightly_sync',
@@ -238,7 +238,7 @@ client.capture({
 })
 ```
 
-This only makes the events anonymous if the distinct ID isn't already linked to a person. If your catch-all ID already has a person profile, its events stay linked to it and count as identified events, so switch to a new ID for these events.
+Disabling person processing alone doesn't fix a shared ID. The per-distinct-ID rate limit still applies to it, and if the ID already has a person profile, its events stay linked to that person and count as identified events.
 
 If you do need these events tied to a real user (e.g., a background job running on behalf of a specific user), use that user's actual distinct ID instead of a shared one.
 
