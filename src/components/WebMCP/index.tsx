@@ -319,22 +319,41 @@ function buildTools(deps: MutableRefObject<ToolDeps>): WebMCPTool[] {
     ]
 }
 
+/** Records only schema-owned key names. Argument values can contain private data. */
+function getDeclaredInputKeys(tool: WebMCPTool, input: ToolInput): string[] {
+    try {
+        const schemaProperties = tool.inputSchema.properties
+        if (!schemaProperties || typeof schemaProperties !== 'object' || Array.isArray(schemaProperties)) return []
+        return Object.keys(input)
+            .filter((key) => key.length <= 64 && Object.prototype.hasOwnProperty.call(schemaProperties, key))
+            .sort()
+            .slice(0, 20)
+    } catch {
+        return []
+    }
+}
+
 /** Wraps a tool so every call is a PostHog event, and a thrown error becomes an error result. */
 function withTelemetry(tool: WebMCPTool): WebMCPTool {
     return {
         ...tool,
         execute: async (input, options) => {
             const started = performance.now()
-            const capture = (isError: boolean) =>
+            const inputKeys = getDeclaredInputKeys(tool, input)
+            const capture = (isError: boolean, errorType?: string) =>
                 window.posthog?.capture('$mcp_tool_call', {
                     // MCP analytics reads only events that carry this source.
                     $mcp_source: 'posthog_mcp_analytics',
                     $mcp_transport: 'webmcp',
                     $mcp_client_name: 'webmcp',
                     $mcp_server_name: window.location.hostname,
+                    $mcp_resource_name: tool.name,
                     $mcp_tool_name: tool.name,
+                    $mcp_tool_description: tool.description,
+                    $mcp_input_keys: inputKeys,
                     $mcp_is_error: isError,
                     $mcp_duration_ms: Math.round(performance.now() - started),
+                    ...(errorType ? { $mcp_error_type: errorType } : {}),
                 })
 
             try {
@@ -342,7 +361,7 @@ function withTelemetry(tool: WebMCPTool): WebMCPTool {
                 capture(result.isError === true)
                 return result
             } catch (error) {
-                capture(true)
+                capture(true, error instanceof Error ? error.name : 'Error')
                 return textResult(
                     `${tool.name} failed: ${error instanceof Error ? error.message : String(error)}`,
                     true
