@@ -61,6 +61,28 @@
             ]
         },
         {
+            "source": "/.well-known/oauth/:app/client-metadata.json",
+            "headers": [
+                {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                },
+                {
+                    "key": "Cache-Control",
+                    "value": "public, max-age=3600"
+                }
+            ]
+        },
+        {
+            "source": "/.well-known/oauth/:app/logo.png",
+            "headers": [
+                {
+                    "key": "Cache-Control",
+                    "value": "public, max-age=86400"
+                }
+            ]
+        },
+        {
             "source": "/(.*)",
             "headers": [
                 {
@@ -117,6 +139,31 @@
         }
     ],
     "redirects": [
+        {
+            "source": "/pocket-guides/posthog",
+            "destination": "/docs/product-analytics/learn",
+            "statusCode": 301
+        },
+        {
+            "source": "/pocket-guides/posthog/101",
+            "destination": "/docs/product-analytics/learn/101",
+            "statusCode": 301
+        },
+        {
+            "source": "/pocket-guides/product-analytics/:path*",
+            "destination": "/docs/product-analytics/learn/:path*",
+            "statusCode": 301
+        },
+        {
+            "source": "/pocket-guides/ai-observability/:path*",
+            "destination": "/docs/ai-observability/learn/:path*",
+            "statusCode": 301
+        },
+        {
+            "source": "/pocket-guides/session-replay/:path*",
+            "destination": "/docs/session-replay/learn/:path*",
+            "statusCode": 301
+        },
         {
             "source": "/docs/replay-vision/actions:ext(\\.md)?",
             "destination": "/docs/replay-vision/scouts:ext?",
@@ -662,6 +709,11 @@
             "statusCode": 301
         },
         {
+            "source": "/sitemap_index.xml",
+            "destination": "/sitemap/sitemap-index.xml",
+            "statusCode": 301
+        },
+        {
             "source": "/blog/rss.xml",
             "destination": "/rss.xml",
             "statusCode": 301
@@ -757,6 +809,14 @@
         {
             "source": "/teams/analytics-platform/:path*",
             "destination": "/teams/query-performance/:path*"
+        },
+        {
+            "source": "/teams/marketing",
+            "destination": "/teams/developer-marketing"
+        },
+        {
+            "source": "/teams/marketing/:path*",
+            "destination": "/teams/developer-marketing/:path*"
         },
         {
             "source": "/docs/sdk-doctor/keeping-sdks-current:ext(\\.md)?",
@@ -886,6 +946,21 @@
         {
             "source": "/docs/api/product-tours:ext(\\.md)?",
             "destination": "/docs/api:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/api/environments.md",
+            "destination": "/docs/api.md",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/api/environments:ext(\\.md)?",
+            "destination": "/docs/api/projects:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/api/environments-:n(\\d+)",
+            "destination": "/docs/api/projects",
             "statusCode": 301
         },
         {
@@ -1865,6 +1940,10 @@
             "destination": "/docs/api/persons:ext?"
         },
         {
+            "source": "/docs/api/insights-3:ext(\\.md)?",
+            "destination": "/docs/api/insights:ext?"
+        },
+        {
             "source": "/handbook/engineering/k8s-overview",
             "destination": "/docs/self-host/architecture"
         },
@@ -2450,7 +2529,7 @@
         },
         {
             "source": "/handbook/people/team-structure/marketing",
-            "destination": "/teams/content"
+            "destination": "/teams/developer-marketing"
         },
         {
             "source": "/handbook/people/team-structure/people",
@@ -5039,7 +5118,7 @@
         },
         {
             "source": "/handbook/small-teams/marketing",
-            "destination": "/teams/content"
+            "destination": "/teams/developer-marketing"
         },
         {
             "source": "/handbook/small-teams/exec",
@@ -5970,15 +6049,23 @@
         },
         {
             "source": "/teams/twig",
-            "destination": "/teams/posthog-desktop"
+            "destination": "/teams/surfaces"
         },
         {
             "source": "/teams/posthog-code",
-            "destination": "/teams/posthog-desktop"
+            "destination": "/teams/surfaces"
         },
         {
             "source": "/teams/posthog-code/:path*",
-            "destination": "/teams/posthog-desktop/:path*"
+            "destination": "/teams/surfaces/:path*"
+        },
+        {
+            "source": "/teams/posthog-desktop",
+            "destination": "/teams/surfaces"
+        },
+        {
+            "source": "/teams/posthog-desktop/:path*",
+            "destination": "/teams/surfaces/:path*"
         },
         {
             "source": "/docs/max-ai:ext(\\.md)?",
