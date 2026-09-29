@@ -6,7 +6,7 @@ availability:
   free: full
   selfServe: full
   enterprise: full
-sourceId: SendOwl
+sourceId: Sendowl
 ---
 
 <CalloutBox icon="IconFlask" title="Alpha release" type="action">

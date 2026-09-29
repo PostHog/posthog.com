@@ -98,9 +98,7 @@ We use [PandaDoc](https://app.pandadoc.com/a/#/) to handle document generation, 
 
     - **Contract.Term** - The term in months of the contract (12 months by default)
 
-8. If they are buying credits upfront but must pay by credit card, change:
-    - Payment Terms to `Net 1 from Signature Date`.
-    - Payment Method to `Bank Transfer or Credit Card`.
+8. Keep the payment method as bank transfer. We don't accept credit card payments for credits bought upfront, so don't change the Payment Method to allow credit card. See [payment method](/handbook/growth/sales/contract-rules#payment-method).
 
 9. If an MSA is being used rather than the standard terms you will need to replace the following text:
 
