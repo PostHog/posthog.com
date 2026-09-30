@@ -32,8 +32,8 @@ export default function Hoglr(): JSX.Element {
                 description="A fictional blog dashboard with posts from James and Charles, made for the PostHog grab bag."
                 image="/images/og/default.png"
             />
-            <Editor maxWidth="100%" hasPadding={false}>
-                <div className="not-prose @container min-h-full bg-navy px-3 py-4 text-light-1 dark:bg-navy-dark @lg:px-6 @lg:py-6">
+            <Editor maxWidth="100%" hasPadding={false} className="bg-navy dark:bg-navy-dark">
+                <div className="not-prose @container min-h-full px-3 py-4 text-light-1 @lg:px-6 @lg:py-6">
                     <div className="mx-auto max-w-4xl">
                         <header className="mb-4 flex flex-wrap items-end justify-between gap-2 border-b border-light-1/20 pb-3">
                             <div>
