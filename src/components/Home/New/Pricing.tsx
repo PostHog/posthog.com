@@ -5,8 +5,18 @@ import OSTable from 'components/OSTable'
 import { IconArrowUpRight } from '@posthog/icons'
 import { Link } from 'gatsby'
 import OSButton from 'components/OSButton'
+import { useTranslation } from 'i18n'
 
 const productsToShow = ['product_analytics', 'feature_flags', 'session_replay', 'data_warehouse']
+
+// section.5.product.<n> in src/i18n/locales. English builds these strings from the live product data, so
+// only a translated page reads them from the locale file.
+const translationIndex: Record<string, number> = {
+    product_analytics: 1,
+    session_replay: 2,
+    feature_flags: 3,
+    data_warehouse: 4,
+}
 
 function numberToWords(num: number): string {
     if (num >= 1_000_000) {
@@ -20,12 +30,24 @@ function numberToWords(num: number): string {
 export default function Pricing() {
     const { products: initialProducts } = useProducts()
     const products = initialProducts.filter((product) => productsToShow.includes(product.handle))
+    const { locale, t } = useTranslation()
+
+    const freeTier = (product: any) =>
+        locale === 'en'
+            ? `${numberToWords(product.freeLimit)} ${product.unit}s/mo`
+            : t(`section.5.product.${translationIndex[product.handle]}.freetier`)
+    const pricing = (product: any) =>
+        locale === 'en'
+            ? `$${product.startsAt.length <= 3 ? Number(product.startsAt).toFixed(2) : product.startsAt}/${
+                  product.unit
+              }`
+            : t(`section.5.product.${translationIndex[product.handle]}.pricing`)
 
     const columns = [
         { name: '', width: '50px', align: 'center' as const },
-        { name: 'Product', width: 'minmax(200px,1fr)', align: 'left' as const },
-        { name: 'Free tier', width: 'minmax(200px,1fr)', align: 'left' as const },
-        { name: 'Pricing (decreases with volume)', width: 'minmax(200px,2fr)', align: 'left' as const },
+        { name: t('section.5.label.product'), width: 'minmax(200px,1fr)', align: 'left' as const },
+        { name: t('section.5.label.freetier'), width: 'minmax(200px,1fr)', align: 'left' as const },
+        { name: t('section.5.label.pricing_table'), width: 'minmax(200px,2fr)', align: 'left' as const },
     ]
 
     const rows = products.map((product, index) => ({
@@ -39,15 +61,8 @@ export default function Pricing() {
                     </Link>
                 ),
             },
-            { content: `${numberToWords(product.freeLimit)} ${product.unit}s/mo` },
-            {
-                content: (
-                    <span>
-                        ${product.startsAt.length <= 3 ? Number(product.startsAt).toFixed(2) : product.startsAt}/
-                        {product.unit}
-                    </span>
-                ),
-            },
+            { content: freeTier(product) },
+            { content: <span>{pricing(product)}</span> },
         ],
     }))
 
@@ -70,13 +85,10 @@ export default function Pricing() {
                         </div>
                         <div className="px-3 py-2 text-sm space-y-1">
                             <div>
-                                <span className="text-muted">Free tier:</span> {numberToWords(product.freeLimit)}{' '}
-                                {product.unit}s/mo
+                                <span className="text-muted">{t('section.5.label.freetier')}:</span> {freeTier(product)}
                             </div>
                             <div>
-                                <span className="text-muted">Pricing:</span> $
-                                {product.startsAt.length <= 3 ? Number(product.startsAt).toFixed(2) : product.startsAt}/
-                                {product.unit}
+                                <span className="text-muted">{t('section.5.label.pricing')}:</span> {pricing(product)}
                             </div>
                         </div>
                     </div>

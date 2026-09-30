@@ -4,6 +4,7 @@ import { IconPauseFilled, IconPlayFilled } from '@posthog/icons'
 import Tooltip from 'components/RadixUI/Tooltip'
 import { Tab, productUsageTabs } from './tabs'
 import { AutoAdvanceGateContext, SlideActiveContext, SlidePausedContext } from './autoAdvanceGate'
+import { useTranslation } from 'i18n'
 
 const SLIDE_DURATION = 5000
 
@@ -16,6 +17,7 @@ export default function HeroCarousel({
     staticHeight?: boolean
     className?: string
 }) {
+    const { t } = useTranslation()
     const [activeTab, setActiveTab] = useState(tabs[0].value)
     const [isPaused, setIsPaused] = useState(false)
     const [isHovering, setIsHovering] = useState(false)
@@ -50,7 +52,7 @@ export default function HeroCarousel({
         setProgressKey((k) => k + 1)
     }
 
-    const activeIndex = tabs.findIndex((t) => t.value === activeTab)
+    const activeIndex = tabs.findIndex((tab) => tab.value === activeTab)
     const activeColor = tabs[activeIndex]?.color || 'bg-yellow'
     const isFirst = activeIndex === 0
     const isLast = activeIndex === tabs.length - 1
@@ -77,7 +79,7 @@ export default function HeroCarousel({
                                                 : 'text-secondary'
                                         }`}
                                     >
-                                        {tab.label}
+                                        {tab.labelKey ? t(tab.labelKey) : tab.label}
                                         <div className="absolute bottom-0 left-2 right-2 h-[3px] overflow-hidden">
                                             {isActive && (
                                                 <div
@@ -113,7 +115,11 @@ export default function HeroCarousel({
                                         <button
                                             onClick={() => setIsPaused((p) => !p)}
                                             className="shrink-0 p-2 text-secondary hover:text-primary cursor-pointer border border-secondary hover:bg-accent rounded bg-light/25 dark:bg-dark/25 backdrop-blur"
-                                            aria-label={isPaused ? 'Resume carousel' : 'Pause carousel'}
+                                            aria-label={
+                                                isPaused
+                                                    ? t('section.2.carousel.resume')
+                                                    : t('section.2.carousel.pause')
+                                            }
                                         >
                                             {isPaused ? (
                                                 <IconPlayFilled className="size-3.5" />
@@ -124,7 +130,9 @@ export default function HeroCarousel({
                                     }
                                     delay={0}
                                 >
-                                    <span>{isPaused ? 'Resume carousel' : 'Pause carousel'}</span>
+                                    <span>
+                                        {isPaused ? t('section.2.carousel.resume') : t('section.2.carousel.pause')}
+                                    </span>
                                 </Tooltip>
                             </span>
                             {tabs.map((tab) => (
