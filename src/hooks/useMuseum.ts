@@ -1,207 +1,121 @@
 import qs from 'qs'
 import useSWR from 'swr'
+import { SQUEAK_HOST, type StrapiRecord } from 'lib/strapi'
 
-const API_HOST = process.env.GATSBY_SQUEAK_API_HOST
+type Relation<T> = { data: StrapiRecord<T> | null }
+type Relations<T> = { data: StrapiRecord<T>[] }
 
-export type MuseumMedia = {
-    id: number
-    url: string
-    alternativeText?: string | null
-    width?: number
-    height?: number
-}
-
-export type MuseumTerm = {
-    id: number
-    name: string
-    slug: string
-}
-
-export type MuseumCategory = MuseumTerm & { order?: number; types?: MuseumTerm[] }
-export type MuseumType = MuseumTerm & { category?: MuseumTerm | null }
-export type MuseumCollection = MuseumTerm & { description?: string | null }
-
+export type MuseumImage = { url: string; alternativeText?: string }
+export type MuseumTerm = { name: string; slug: string; description?: string }
+export type MuseumType = MuseumTerm & { category?: Relation<MuseumTerm> }
+export type MuseumPerson = { firstName?: string; lastName?: string }
 export type DatePrecision = 'day' | 'month' | 'year'
 
-export type MuseumLink = { label: string; url: string }
-export type MuseumVideo = { url: string; title?: string }
-
-export type MuseumCredit = {
-    id: number
-    firstName?: string
-    lastName?: string
-    avatar?: MuseumMedia | null
-}
-
-export type MuseumExhibitSummary = {
-    id: number
+export type MuseumArtifact = {
     title: string
     slug: string
     date: string
     datePrecision: DatePrecision
-    plaque?: string | null
-    heroImage?: MuseumMedia | null
-    category?: MuseumTerm | null
-    type?: MuseumTerm | null
-    collections: MuseumCollection[]
+    plaque?: string
+    context?: string
+    curatorNotes?: string
+    videos?: { url: string }[]
+    links?: { label: string; url: string }[]
+    heroImage?: Relation<MuseumImage>
+    gallery?: Relations<MuseumImage>
+    category?: Relation<MuseumTerm>
+    type?: Relation<MuseumTerm>
+    collections?: Relations<MuseumTerm>
+    credits?: Relations<MuseumPerson>
+    relatedArtifacts?: Relations<MuseumArtifact>
+    relatedBy?: Relations<MuseumArtifact>
 }
 
-export type MuseumExhibit = MuseumExhibitSummary & {
-    context?: string | null
-    gallery: MuseumMedia[]
-    videos: MuseumVideo[]
-    links: MuseumLink[]
-    curatorNotes?: string | null
-    credits: MuseumCredit[]
-    relatedExhibits: MuseumExhibitSummary[]
-    relatedBy: MuseumExhibitSummary[]
+export type MuseumExhibit = {
+    title: string
+    slug: string
+    summary?: string
+    statement?: string
+    openedAt?: string
+    featured?: boolean
+    coverImage?: Relation<MuseumImage>
+    curators?: Relations<MuseumPerson>
+    stops?: { id: number; label?: string; artifact: Relation<MuseumArtifact> }[]
 }
 
-// Strapi v4 wraps every entry in { id, attributes } and every relation/media in { data }.
-// Flatten both recursively so components work with plain objects.
-const unwrap = (value: any): any => {
-    if (Array.isArray(value)) {
-        return value.map(unwrap)
-    }
-    if (value && typeof value === 'object') {
-        if ('data' in value && Object.keys(value).length === 1) {
-            return unwrap(value.data)
-        }
-        if ('id' in value && 'attributes' in value) {
-            return { id: value.id, ...unwrap(value.attributes) }
-        }
-        return Object.fromEntries(Object.entries(value).map(([key, child]) => [key, unwrap(child)]))
-    }
-    return value
-}
+const cardPopulate = { heroImage: true, category: true, type: true, collections: true }
+const exhibitPopulate = { coverImage: true, stops: { populate: { artifact: { populate: cardPopulate } } } }
+const personPopulate = { fields: ['firstName', 'lastName'] }
 
-const SUMMARY_POPULATE = {
-    heroImage: true,
-    category: true,
-    type: true,
-    collections: true,
-}
-
-// Cloudinary returns absolute URLs; a local Strapi's upload provider returns /uploads/... paths
-const withHost = (media?: MuseumMedia | null): MuseumMedia | null =>
-    media?.url ? { ...media, url: media.url.startsWith('/') ? `${API_HOST}${media.url}` : media.url } : null
-
-const toSummary = (exhibit: any): MuseumExhibitSummary => ({
-    ...exhibit,
-    datePrecision: exhibit.datePrecision || 'month',
-    heroImage: withHost(exhibit.heroImage),
-    collections: exhibit.collections || [],
-})
-
-const toExhibit = (exhibit: any): MuseumExhibit => ({
-    ...toSummary(exhibit),
-    gallery: (exhibit.gallery || []).map(withHost).filter(Boolean),
-    videos: exhibit.videos || [],
-    links: exhibit.links || [],
-    credits: exhibit.credits || [],
-    relatedExhibits: (exhibit.relatedExhibits || []).map(toSummary),
-    relatedBy: (exhibit.relatedBy || []).map(toSummary),
-})
-
-// Links are stored one way (relatedExhibits) but shown both ways, so an exhibit's related
-// entries are the union of what it links to and what links to it
-export const getRelatedExhibits = (exhibit: MuseumExhibit): MuseumExhibitSummary[] => {
-    const seen = new Set<number>()
-    return [...exhibit.relatedExhibits, ...exhibit.relatedBy].filter((related) => {
-        if (related.id === exhibit.id || seen.has(related.id)) {
-            return false
-        }
-        seen.add(related.id)
-        return true
-    })
-}
-
-// Museum collections are small, so fetch every page up front and filter client-side
-const fetchAll = async (collection: string, params: Record<string, unknown>): Promise<any[]> => {
-    const collected: any[] = []
+const fetchAll = async <T>(collection: string, params: Record<string, unknown>): Promise<StrapiRecord<T>[]> => {
+    const records: StrapiRecord<T>[] = []
     let page = 1
     let pageCount = 1
     while (page <= pageCount) {
         const query = qs.stringify({ ...params, pagination: { page, pageSize: 100 } }, { encodeValuesOnly: true })
-        const response = await fetch(`${API_HOST}/api/${collection}?${query}`)
-        if (!response.ok) {
-            throw new Error(`Failed to fetch ${collection}: ${response.statusText}`)
-        }
-        const { data, meta } = await response.json()
-        collected.push(...unwrap(data || []))
-        pageCount = meta?.pagination?.pageCount || 1
-        page += 1
+        const res = await fetch(`${SQUEAK_HOST}/api/${collection}?${query}`)
+        if (!res.ok) throw new Error(res.statusText)
+        const { data, meta } = await res.json()
+        records.push(...data)
+        pageCount = meta.pagination.pageCount
+        page++
     }
-    return collected
+    return records
 }
 
-export const useMuseumExhibits = (): {
-    exhibits: MuseumExhibitSummary[]
-    isLoading: boolean
-    error: boolean
-    refresh: () => void
-} => {
-    const { data, error, isLoading, mutate } = useSWR('museum-exhibits', () =>
-        fetchAll('museum-exhibits', { populate: SUMMARY_POPULATE, sort: ['date:desc', 'title:asc'] })
+const fetchBySlug = async <T>(collection: string, slug: string, populate: Record<string, unknown>) =>
+    (await fetchAll<T>(collection, { filters: { slug: { $eq: slug } }, populate }))[0] || null
+
+export const useArtifacts = () => {
+    const { data, error, isLoading, mutate } = useSWR('museum-artifacts', () =>
+        fetchAll<MuseumArtifact>('museum-artifacts', { populate: cardPopulate, sort: ['date:desc', 'title:asc'] })
     )
-    return {
-        exhibits: (data || []).map(toSummary),
-        isLoading,
-        error: Boolean(error),
-        refresh: () => mutate(),
-    }
+    return { artifacts: data || [], error, isLoading, mutate }
 }
 
-export const useMuseumExhibit = (
-    slug?: string
-): {
-    exhibit?: MuseumExhibit
-    isLoading: boolean
-    error: boolean
-    refresh: () => void
-} => {
-    const { data, error, isLoading, mutate } = useSWR(slug ? `museum-exhibit-${slug}` : null, async () => {
-        const query = qs.stringify(
-            {
-                filters: { slug: { $eq: slug } },
-                populate: {
-                    ...SUMMARY_POPULATE,
-                    gallery: true,
-                    credits: { fields: ['firstName', 'lastName'], populate: ['avatar'] },
-                    relatedExhibits: { populate: SUMMARY_POPULATE },
-                    relatedBy: { populate: SUMMARY_POPULATE },
-                },
-            },
-            { encodeValuesOnly: true }
-        )
-        const response = await fetch(`${API_HOST}/api/museum-exhibits?${query}`)
-        if (!response.ok) {
-            throw new Error(`Failed to fetch exhibit: ${response.statusText}`)
-        }
-        const { data } = await response.json()
-        const [exhibit] = unwrap(data || [])
-        return exhibit ? toExhibit(exhibit) : null
+export const useArtifact = (slug: string) => {
+    const { data, error, isLoading, mutate } = useSWR(`museum-artifact-${slug}`, async () => {
+        const artifact = await fetchBySlug<MuseumArtifact>('museum-artifacts', slug, {
+            ...cardPopulate,
+            gallery: true,
+            credits: personPopulate,
+            relatedArtifacts: { populate: cardPopulate },
+            relatedBy: { populate: cardPopulate },
+        })
+        const exhibits = artifact
+            ? await fetchAll<MuseumExhibit>('museum-exhibits', {
+                  filters: { stops: { artifact: { id: { $eq: artifact.id } } } },
+                  populate: exhibitPopulate,
+              })
+            : []
+        return { artifact, exhibits }
     })
-    return {
-        exhibit: data || undefined,
-        // A slug with no matching exhibit resolves to null, which is "not found" rather than loading
-        isLoading: isLoading || (Boolean(slug) && data === undefined && !error),
-        error: Boolean(error),
-        refresh: () => mutate(),
-    }
+    return { artifact: data?.artifact, exhibits: data?.exhibits || [], error, isLoading, mutate }
 }
 
-export const useMuseumTaxonomy = (): {
-    categories: MuseumCategory[]
-    types: MuseumType[]
-    collections: MuseumCollection[]
-    refresh: () => void
-} => {
+export const useExhibits = () => {
+    const { data, isLoading, mutate } = useSWR('museum-exhibits', () =>
+        fetchAll<MuseumExhibit>('museum-exhibits', {
+            populate: exhibitPopulate,
+            sort: ['featured:desc', 'openedAt:desc'],
+        })
+    )
+    return { exhibits: data || [], isLoading, mutate }
+}
+
+export const useExhibit = (slug: string) => {
+    const { data, error, isLoading, mutate } = useSWR(`museum-exhibit-${slug}`, () =>
+        fetchBySlug<MuseumExhibit>('museum-exhibits', slug, { ...exhibitPopulate, curators: personPopulate })
+    )
+    return { exhibit: data, error, isLoading, mutate }
+}
+
+export const useMuseumTaxonomy = () => {
     const { data, mutate } = useSWR('museum-taxonomy', async () => {
         const [categories, types, collections] = await Promise.all([
-            fetchAll('museum-categories', { sort: ['order:asc', 'name:asc'] }),
-            fetchAll('museum-types', { populate: ['category'], sort: ['name:asc'] }),
-            fetchAll('museum-collections', { sort: ['name:asc'] }),
+            fetchAll<MuseumTerm>('museum-categories', { sort: ['order:asc'] }),
+            fetchAll<MuseumType>('museum-types', { populate: ['category'], sort: ['name:asc'] }),
+            fetchAll<MuseumTerm>('museum-collections', { sort: ['name:asc'] }),
         ])
         return { categories, types, collections }
     })
@@ -209,28 +123,31 @@ export const useMuseumTaxonomy = (): {
         categories: data?.categories || [],
         types: data?.types || [],
         collections: data?.collections || [],
-        refresh: () => mutate(),
+        mutate,
     }
 }
 
-// Authenticated write to the museum collections. Strapi enforces the moderator role server-side.
+// Related links are stored on one artifact and shown on both
+export const getRelatedArtifacts = (artifact: StrapiRecord<MuseumArtifact>): StrapiRecord<MuseumArtifact>[] => {
+    const related = [
+        ...(artifact.attributes.relatedArtifacts?.data || []),
+        ...(artifact.attributes.relatedBy?.data || []),
+    ]
+    return related.filter((other, index) => related.findIndex(({ id }) => id === other.id) === index)
+}
+
 export const museumRequest = async (
     path: string,
     jwt: string,
     method: 'POST' | 'PUT' | 'DELETE',
     data?: Record<string, unknown>
-): Promise<any> => {
-    const response = await fetch(`${API_HOST}/api/${path}`, {
+) => {
+    const res = await fetch(`${SQUEAK_HOST}/api/${path}`, {
         method,
-        headers: {
-            Authorization: `Bearer ${jwt}`,
-            ...(data ? { 'Content-Type': 'application/json' } : {}),
-        },
+        headers: { Authorization: `Bearer ${jwt}`, ...(data ? { 'Content-Type': 'application/json' } : {}) },
         body: data ? JSON.stringify({ data }) : undefined,
     })
-    const body = await response.json().catch(() => null)
-    if (!response.ok) {
-        throw new Error(body?.error?.message || response.statusText)
-    }
-    return unwrap(body?.data)
+    const body = await res.json().catch(() => null)
+    if (!res.ok) throw new Error(body?.error?.message || res.statusText)
+    return body?.data as StrapiRecord<{ slug: string }>
 }
