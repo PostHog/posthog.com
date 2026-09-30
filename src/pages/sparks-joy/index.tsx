@@ -6,6 +6,7 @@ import { explorerGridColumns } from '../../constants'
 import { SparksJoyItems } from '../../components/TaskBarMenu/menuData'
 import { AppLink, AppIcon } from 'components/OSIcons/AppIcon'
 import ZoomHover from 'components/ZoomHover'
+import { HedgehogReading } from '@posthog/brand/hoggies'
 
 export default function SparkJoy(): JSX.Element {
     return (
@@ -116,7 +117,7 @@ export default function SparkJoy(): JSX.Element {
                         items={[
                             {
                                 value: 'time-machine',
-                                trigger: <span>Time machine (2)</span>,
+                                trigger: <span>Time machine (3)</span>,
                                 content: (
                                     <div
                                         className={`@md:pl-4 grid ${explorerGridColumns} gap-y-4 items-start justify-items-center gap-x-1 @md:gap-x-4 relative [&>div]:mx-auto [&_figure]:text-center`}
@@ -134,6 +135,14 @@ export default function SparkJoy(): JSX.Element {
                                                 label="Hogbook"
                                                 url="/hogbook"
                                                 Icon={<AppIcon name="forums" />}
+                                                className="size-12"
+                                            />
+                                        </ZoomHover>
+                                        <ZoomHover className="w-28 justify-center">
+                                            <AppLink
+                                                label="Hogreads"
+                                                url="/hogreads"
+                                                Icon={<HedgehogReading className="size-12" />}
                                                 className="size-12"
                                             />
                                         </ZoomHover>
