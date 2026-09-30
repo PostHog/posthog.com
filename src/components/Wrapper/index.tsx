@@ -10,6 +10,7 @@ import AppContainer from 'components/AppContainer'
 import WebMCP from 'components/WebMCP'
 import { Direction } from 'radix-ui'
 import { useDirection } from '../../i18n/useDirection'
+import { useEnglishOnlyNotice } from '../../i18n/useEnglishOnlyNotice'
 
 // Isolates the `windows` subscription so that opening/closing a window only
 // re-renders this list, not the whole Wrapper (and therefore not the desktop,
@@ -30,6 +31,7 @@ export default function Wrapper() {
     const { constraintsRef } = useAppActions()
     const { compact } = useAppSettings()
     const dir = useDirection()
+    useEnglishOnlyNotice()
 
     // Overlays (cookie toast, search, chat) and Radix popovers render in portals attached
     // to <body>, outside #app-container, so they inherit direction from <html> rather than
