@@ -3,27 +3,32 @@ import Link from 'components/Link'
 import Markdown from 'components/Markdown'
 import Pricing from 'components/Home/New/Pricing'
 import { ImageMoney } from 'components/Home/Decorations'
+import { useTranslation } from 'i18n'
 
-export const PricingSection = () => (
-    <div id="pricing">
-        <h2>Usage-based pricing</h2>
+export const PricingSection = () => {
+    const { t } = useTranslation()
 
-        <ImageMoney />
+    return (
+        <div id="pricing">
+            <h2>{t('section.5.heading')}</h2>
 
-        <Markdown>{`Our whole philosophy is that you shouldn't have to worry about pricing.
+            <ImageMoney />
 
-All our paid products are pay-per-use with generous monthly free tiers. In fact, 98% of our customers use PostHog for free.
+            <Markdown>{`${t('section.5.body.1')}
 
-We aim to match the cheapest option at scale – PostHog should be a no-brainer. You never have to "jump on a quick call" with sales.
+${t('section.5.body.2')}
 
-Here are some examples of how we charge for most popular products:`}</Markdown>
+${t('section.5.body.3')}
 
-        <Pricing />
+${t('section.5.body.4')}`}</Markdown>
 
-        <Link to="/pricing" state={{ newWindow: true }}>
-            Explore pricing
-        </Link>
-    </div>
-)
+            <Pricing />
+
+            <Link to="/pricing" state={{ newWindow: true }}>
+                {t('section.5.button')}
+            </Link>
+        </div>
+    )
+}
 
 export default PricingSection

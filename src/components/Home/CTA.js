@@ -10,19 +10,24 @@ import { useInView } from 'react-intersection-observer'
 import { motion } from 'framer-motion'
 import { useApp } from '../../context/App'
 import { useWindow } from '../../context/Window'
+import { useTranslation } from 'i18n'
 
-const ProductDetails = () => (
-    <>
-        <span className="bg-green inline-flex items-center gap-1 px-2 py-1 rounded-sm">
-            <span className="w-3 h-3">
-                <Eco />
+const ProductDetails = () => {
+    const { t } = useTranslation()
+
+    return (
+        <>
+            <span className="bg-green inline-flex items-center gap-1 px-2 py-1 rounded-sm">
+                <span className="w-3 h-3">
+                    <Eco />
+                </span>
+                <span className="uppercase font-semibold text-xs text-white">{t('section.8.box.badge')}</span>
             </span>
-            <span className="uppercase font-semibold text-xs text-white">Eco-friendly</span>
-        </span>
-        <p className="text-4xl font-bold m-0 @xl:mt-2">PostHog Web</p>
-        <p className="opacity-50 m-0 mb-4 text-sm">Digital download*</p>
-    </>
-)
+            <p className="text-4xl font-bold m-0 @xl:mt-2">PostHog Web</p>
+            <p className="opacity-50 m-0 mb-4 text-sm">{t('section.8.box.subtitle')}</p>
+        </>
+    )
+}
 
 const SignupEmbed = () => {
     const { setWindowTitle } = useApp()
@@ -50,6 +55,7 @@ export default function CTA({ headline = true, card = false }) {
     const [version, setVersion] = useState('us')
     const [signupCountToday, setSignupCountToday] = useState(0)
     const [ref, inView] = useInView({ threshold: 0.5, triggerOnce: true })
+    const { t, rich } = useTranslation()
 
     useEffect(() => {
         if (posthog?.isFeatureEnabled('direct-to-eu-cloud')) {
@@ -78,7 +84,7 @@ export default function CTA({ headline = true, card = false }) {
                         <div className="absolute -left-2 bottom-0 translate-y-1/2">
                             <CloudinaryImage
                                 src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Home/images/g2-badge.png"
-                                alt="People on G2 think we're great"
+                                alt={t('section.8.sticker.1')}
                                 className="w-[90px]"
                             />
                         </div>
@@ -92,27 +98,27 @@ export default function CTA({ headline = true, card = false }) {
                             className="bg-blue text-left leading-none px-4 py-2 absolute -top-12 left-4 right-4 @xl:-left-4 @xl:right-auto rounded @xl:rounded-none"
                         >
                             <span className="text-sm font-bold text-white">
-                                3 people <span className="text-xs text-normal">(would have)</span> added PostHog to
-                                their cart*
+                                {rich('section.8.cart.label', {
+                                    small: (text) => <span className="text-xs text-normal">{text}</span>,
+                                })}
                             </span>
                             <br />
-                            <span className="text-xs text-white">*if this were a real cart</span>
+                            <span className="text-xs text-white">{t('section.8.cart.footnote')}</span>
                         </motion.div>
                     )}
                     <div className="absolute top-4 -right-12">
                         <div className="relative">
                             <Bang className="w-[189px] animate-grow" />
                             <p className="px-8 text-center m-0 absolute top-0 left-0 right-0 bottom-0 flex flex-col items-center justify-center text-black uppercase leading-none font-bold text-lg rotate-6">
-                                <span className="text-xs">Not</span>
-                                endorsed <br />
-                                by Kim K
+                                {rich('section.8.sticker.2', {
+                                    small: (text) => <span className="text-xs">{text}</span>,
+                                    br: () => <br />,
+                                })}
                             </p>
                         </div>
                     </div>
                     <p className="pl-24 text-xs opacity-60 text-right">
-                        *PostHog is a web product and cannot be installed by CD.
-                        <br />
-                        We <em>did</em> once send some customers a floppy disk but it was a Rickroll.
+                        {rich('section.8.footnote', { br: () => <br />, emphasis: (text) => <em>{text}</em> })}
                     </p>
                 </div>
                 <div>
@@ -122,7 +128,7 @@ export default function CTA({ headline = true, card = false }) {
 
                     <ul className="p-0 m-0 space-y-5">
                         <li className="list-none">
-                            <strong className="text-lg block pb-1">Select your cloud</strong>
+                            <strong className="text-lg block pb-1">{t('section.8.cloud.heading')}</strong>
                             <ul className="flex gap-2 p-0 list-none">
                                 <li>
                                     <button
@@ -133,7 +139,7 @@ export default function CTA({ headline = true, card = false }) {
                                                 : 'border-transparent dark:border-transparent'
                                         }  hover:border-black dark:hover:border-white`}
                                     >
-                                        US (Virginia)
+                                        {t('section.8.cloud.option.1')}
                                     </button>
                                 </li>
                                 <li>
@@ -145,18 +151,20 @@ export default function CTA({ headline = true, card = false }) {
                                                 : 'border-transparent dark:border-transparent'
                                         }  hover:border-black dark:hover:border-white`}
                                     >
-                                        EU (Frankfurt)
+                                        {t('section.8.cloud.option.2')}
                                     </button>
                                 </li>
                             </ul>
                         </li>
                         <li className="list-none">
-                            <strong className="text-lg block">Starts at:</strong>
+                            <strong className="text-lg block">{t('section.8.price.label')}</strong>
                             <div className="flex items-baseline gap-1">
-                                <s className="font-bold text-xl">$0</s>
-                                <span className="font-bold text-red text-xl uppercase">Free</span>
+                                <s className="font-bold text-xl">{t('section.8.price.old')}</s>
+                                <span className="font-bold text-red text-xl uppercase">{t('section.8.price.new')}</span>
                                 <span className="text-xs opacity-50">
-                                    &gt;<span className="text-sm">1 left at this price!!</span>
+                                    {rich('section.8.price.urgency', {
+                                        larger: (text) => <span className="text-sm">{text}</span>,
+                                    })}
                                 </span>
                             </div>
                         </li>
@@ -171,7 +179,7 @@ export default function CTA({ headline = true, card = false }) {
                             className="animate-grow-sm"
                             state={{ initialTab: 'signup' }}
                         >
-                            Get started
+                            {t('section.8.button')}
                         </CallToAction>
                     </div>
 
@@ -180,23 +188,30 @@ export default function CTA({ headline = true, card = false }) {
                             <TrendUp className="opacity-75" />
                         </span>
                         <p className="text-sm text-secondary leading-tight mb-0">
-                            <strong>Hurry:</strong> {signupCountToday || 'Tons of '} companies signed up{' '}
-                            <button
-                                onClick={() =>
-                                    addWindow(
-                                        <SignupEmbed
-                                            location={{ pathname: 'signup-embed' }}
-                                            key="signup-embed"
-                                            newWindow
-                                        />
-                                    )
-                                }
-                                className="font-bold dark:text-yellow text-red"
-                            >
-                                today
-                            </button>
-                            . <br className="hidden sm:block" />
-                            Act now and get $0 off your first order.
+                            {rich(
+                                'section.8.urgency.label',
+                                {
+                                    bold: (text) => <strong>{text}</strong>,
+                                    today: (text) => (
+                                        <button
+                                            onClick={() =>
+                                                addWindow(
+                                                    <SignupEmbed
+                                                        location={{ pathname: 'signup-embed' }}
+                                                        key="signup-embed"
+                                                        newWindow
+                                                    />
+                                                )
+                                            }
+                                            className="font-bold dark:text-yellow text-red"
+                                        >
+                                            {text}
+                                        </button>
+                                    ),
+                                    br: () => <br className="hidden sm:block" />,
+                                },
+                                { companies: signupCountToday || t('section.8.urgency.fallback') }
+                            )}
                         </p>
                     </div>
                 </div>
