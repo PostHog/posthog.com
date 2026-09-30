@@ -312,7 +312,7 @@ export const Customers = ({ tableClassName = '' }: { tableClassName?: string }) 
                     {renderLogo(customer)}
                     <Tooltip
                         trigger={
-                            <span className="absolute top-1 right-0 inline-flex w-4 h-4 rounded-full bg-red border-2 border-white dark:border-dark"></span>
+                            <span className="absolute top-1 end-0 inline-flex w-4 h-4 rounded-full bg-red border-2 border-white dark:border-dark"></span>
                         }
                         delay={0}
                         sideOffset={14}

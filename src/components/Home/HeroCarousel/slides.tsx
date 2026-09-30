@@ -138,7 +138,7 @@ export const OnePlaceSlide = () => {
                 <CloudinaryImage
                     src="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/construction_hog_80a362973d.png"
                     alt="A construction hedgehog carrying a pipe"
-                    imgClassName="mx-auto mb-4 w-48 @lg:float-end @lg:mb-0 @lg:ms-6 @3xl:absolute @3xl:right-0 @3xl:top-0 @3xl:z-0 @3xl:m-0 @3xl:w-64 @4xl:w-72"
+                    imgClassName="mx-auto mb-4 w-48 @lg:float-end @lg:mb-0 @lg:ms-6 @3xl:absolute @3xl:end-0 @3xl:top-0 @3xl:z-0 @3xl:m-0 @3xl:w-64 @4xl:w-72"
                 />
                 <div className="relative z-10 @3xl:max-w-[65%]">
                     <h2 className="mt-0 mb-2 text-xl @2xl:text-2xl">Build better products with better data</h2>
