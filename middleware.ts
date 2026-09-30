@@ -41,7 +41,7 @@ export const config = {
  * The Edge runtime cannot read the YAML in src/i18n/locales, so the codes are listed here too.
  * middleware.test.ts fails when this list and the YAML files disagree.
  */
-export const TRANSLATED_LOCALES = ['pt', 'de', 'es', 'fr', 'it', 'ja', 'ko', 'pl', 'tr', 'zh']
+export const TRANSLATED_LOCALES = ['pt', 'de', 'es', 'fr', 'it', 'ja', 'ko', 'pl', 'tr', 'zh', 'ar']
 
 /** A language subtag, then an optional region or script subtag: /pt-BR, /pt_br, /PT, /zh-Hant, /es-419. */
 const LOCALE_PATH_REGEX = /^\/([a-z]{2})(?:[-_][a-z0-9]{2,4})?$/i
