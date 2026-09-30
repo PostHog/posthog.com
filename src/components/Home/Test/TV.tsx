@@ -176,7 +176,7 @@ export default function TVScreen({
                                     />
                                 </g>
                                 <foreignObject x="88.045" y="500.515" width="244.681" height="37.3409">
-                                    <div className="font-comic text-xs font-bold leading-tight text-black text-balance w-full h-full flex items-center justify-center text-center py-1 pr-8 pl-2 overflow-hidden rotate-[-1.0878deg]">
+                                    <div className="font-comic text-xs font-bold leading-tight text-black text-balance w-full h-full flex items-center justify-center text-center py-1 pe-8 ps-2 overflow-hidden rotate-[-1.0878deg]">
                                         {title}
                                     </div>
                                 </foreignObject>

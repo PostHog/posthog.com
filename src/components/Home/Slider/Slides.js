@@ -69,7 +69,7 @@ const Slide = ({
     return (
         <div className="overflow-hidden flex h-full items-end md:mt-3 mb-2 md:mb-6 mdlg:my-0">
             <div
-                className={`bg-${bgColor} text-${textColor} md:rounded-tl-md md:rounded-tr-md dark:md:rounded-bl-md dark:md:rounded-br-md mdlg:text-${textColor} flex items-center pt-4 mdlg:pt-0 mdlg:mt-4 w-full ${containerClasses}`}
+                className={`bg-${bgColor} text-${textColor} md:rounded-ss-md md:rounded-se-md dark:md:rounded-es-md dark:md:rounded-ee-md mdlg:text-${textColor} flex items-center pt-4 mdlg:pt-0 mdlg:mt-4 w-full ${containerClasses}`}
             >
                 <div className="relative mdlg:grid grid-cols-16 mdlg:gap-2 w-full">
                     <ImageContainer className={imageColumn}>
@@ -83,27 +83,27 @@ const Slide = ({
                     <ContentContainer className={contentColumn}>
                         {flag && (
                             <div
-                                className={`inline-block mt-2 ml-2 md:m-0 md:absolute right-0 top-4 font-semibold bg-${flagColor} text-white uppercase text-sm`}
+                                className={`inline-block mt-2 ms-2 md:m-0 md:absolute right-0 top-4 font-semibold bg-${flagColor} text-white uppercase text-sm`}
                             >
                                 <div
                                     className={`
                                     relative py-1 
                                     before:w-0 before:h-0 before:content-[''] before:absolute
 
-                                    pl-3
-                                    md:pl-3
-                                    pr-2
-                                    md:pr-4
+                                    ps-3
+                                    md:ps-3
+                                    pe-2
+                                    md:pe-4
                                     
                                     before:border-[1rem] 
                                     before:border-${flagColor} 
                                     before:bottom-0 
                                     before:border-t-transparent
-                                    before:border-r-transparent 
+                                    before:border-e-transparent 
 
                                     md:before:border-b-${flagColor}
                                     md:before:border-t-transparent
-                                    before:border-l-transparent
+                                    before:border-s-transparent
                                     before:-right-4
                                     md:before:-left-4 
                                     md:right-initial
@@ -112,12 +112,12 @@ const Slide = ({
                                     
                                     after:border-[1rem] 
                                     after:border-${flagColor} 
-                                    after:border-r-transparent 
+                                    after:border-e-transparent 
                                     after:border-b-transparent 
                                     md:after:border-t-${flagColor} 
 
                                     md:after:border-b-transparent
-                                    after:border-l-transparent 
+                                    after:border-s-transparent 
                                     after:top-0 
                                     after:md:top-initial
                                     after:md:bottom-0
@@ -167,7 +167,7 @@ const Title = ({ title, label }) => {
             <h3 className="text-xl mdlg:text-lg lg:text-3xl mb-1">
                 {title}
                 {label && (
-                    <span className="ml-1 relative -top-0.5 text-sm text-secondary font-semibold leading-tight border border-dark dark:border-dark px-1 py-0.5 rounded-sm uppercase">
+                    <span className="ms-1 relative -top-0.5 text-sm text-secondary font-semibold leading-tight border border-dark dark:border-dark px-1 py-0.5 rounded-sm uppercase">
                         {label}
                     </span>
                 )}
@@ -257,7 +257,7 @@ export const ProductAnalytics = () => {
             features={features}
             featureListClasses="@[240px]:grid grid-cols-2"
             imageColumn="mdlg:col-span-9 lg:col-span-10 xl:col-span-11 2xl:col-span-10"
-            imageClasses="px-4 mdlg:pr-0"
+            imageClasses="px-4 mdlg:pe-0"
             contentColumn="mdlg:col-span-7 lg:col-span-6 xl:col-span-5 2xl:col-span-6"
             Images={() => {
                 return (
@@ -346,7 +346,7 @@ export const WebAnalytics = () => {
             descriptionClasses="mdlg:hidden lg:block"
             features={features}
             featureListClasses="sm:grid grid-cols-2 mdlg:flex"
-            imageColumn="mdlg:col-span-9 lg:col-span-10 xl:col-span-10 lg:pl-4"
+            imageColumn="mdlg:col-span-9 lg:col-span-10 xl:col-span-10 lg:ps-4"
             imageClasses="px-4 mdlg:px-0 -mb-3"
             contentColumn="mdlg:col-span-7 lg:col-span-6 xl:col-span-6"
             Images={() => {
@@ -400,7 +400,7 @@ export const WebAnalytics = () => {
                     alt="A hedgehog looking at product analytics"
                 />
             )}
-            contentOffset="mdlg:pb-6 lg:pb-8 lg:pr-8 xl:pb-12 2xl:pb-8"
+            contentOffset="mdlg:pb-6 lg:pb-8 lg:pe-8 xl:pb-12 2xl:pb-8"
             buttonLabel="Explore"
             buttonUrl="/web-analytics"
             buttonClasses="group !border-black/25 !bg-black/10 md:!w-auto !w-full"
@@ -433,7 +433,7 @@ export const SessionReplay = () => {
             description="Watch users interacting with your app or website. Available for web, Android, iOS, React Native, and Flutter."
             features={features}
             featureListClasses="sm:grid grid-cols-2 mdlg:flex"
-            imageColumn="md:pl-8 md:col-span-9 lg:col-span-10"
+            imageColumn="md:ps-8 md:col-span-9 lg:col-span-10"
             imageClasses="px-4 mdlg:px-0 -mb-1.5"
             contentColumn="md:col-span-7 lg:col-span-6 lg:py-4"
             Images={() => {
@@ -528,7 +528,7 @@ export const FeatureFlags = () => {
             description="Safely roll out features to select users or cohorts."
             features={features}
             featureListClasses="sm:grid grid-cols-2 mdlg:flex"
-            imageColumn="md:pl-8 md:col-span-9 lg:col-span-10 min-h-[12rem]"
+            imageColumn="md:ps-8 md:col-span-9 lg:col-span-10 min-h-[12rem]"
             imageClasses="px-4 mdlg:px-0 -mb-1.5 flex-col xl:items-center"
             contentColumn="md:col-span-7 lg:col-span-6 lg:py-8"
             Images={() => {
@@ -543,7 +543,7 @@ export const FeatureFlags = () => {
                             </div>
                         ) : (
                             <>
-                                <div className="-rotate-1 -mr-6 -mt-2 mdlg:-mr-24 lg:-mr-52 w-3/4 mdlg:w-3/4 lg:w-3/5 z-10">
+                                <div className="-rotate-1 -me-6 -mt-2 mdlg:-me-24 lg:-me-52 w-3/4 mdlg:w-3/4 lg:w-3/5 z-10">
                                     <div className="block dark:hidden">
                                         <CloudinaryImage
                                             {...image1Props}
@@ -559,7 +559,7 @@ export const FeatureFlags = () => {
                                         />
                                     </div>
                                 </div>
-                                <div className="rotate-1 -ml-20 mdlg:-ml-28 lg:-ml-60 w-3/4 mdlg:w-3/4 lg:w-3/5">
+                                <div className="rotate-1 -ms-20 mdlg:-ms-28 lg:-ms-60 w-3/4 mdlg:w-3/4 lg:w-3/5">
                                     <div className="block dark:hidden">
                                         <CloudinaryImage
                                             {...image2Props}
@@ -642,7 +642,7 @@ export const ABTesting = () => {
             description="Run experiments with statistical significance."
             features={features}
             featureListClasses="sm:grid grid-cols-2 mdlg:flex"
-            imageColumn="md:pl-8 md:col-span-9 lg:col-span-10 min-h-[12rem]"
+            imageColumn="md:ps-8 md:col-span-9 lg:col-span-10 min-h-[12rem]"
             imageClasses="px-4 mdlg:px-0 -mb-3"
             contentColumn="md:col-span-7 lg:col-span-6 lg:py-10"
             Images={() => {
@@ -657,7 +657,7 @@ export const ABTesting = () => {
                             </div>
                         ) : (
                             <>
-                                <div className="-rotate-1 mdlg:ml-4 lg:ml-8 mt-8 md:mt-0 md:mb-8 mdlg:m-0 w-3/4 mdlg:w-3/4 lg:w-3/5 z-10">
+                                <div className="-rotate-1 mdlg:ms-4 lg:ms-8 mt-8 md:mt-0 md:mb-8 mdlg:m-0 w-3/4 mdlg:w-3/4 lg:w-3/5 z-10">
                                     <div className="block dark:hidden">
                                         <CloudinaryImage
                                             {...image1Props}
@@ -673,7 +673,7 @@ export const ABTesting = () => {
                                         />
                                     </div>
                                 </div>
-                                <div className="rotate-1 -mt-12 mdlg:mt-0 -ml-24 md:-ml-32 w-5/6 mdlg:w-3/4 lg:w-3/5 z-20">
+                                <div className="rotate-1 -mt-12 mdlg:mt-0 -ms-24 md:-ms-32 w-5/6 mdlg:w-3/4 lg:w-3/5 z-20">
                                     <div className="block dark:hidden">
                                         <CloudinaryImage
                                             {...image2Props}
@@ -714,7 +714,7 @@ export const ABTesting = () => {
                     alt="A hedgehog running an experiment"
                 />
             )}
-            contentOffset="mdlg:pb-6 lg:pb-8 lg:pr-8 xl:pb-12 2xl:pb-8"
+            contentOffset="mdlg:pb-6 lg:pb-8 lg:pe-8 xl:pb-12 2xl:pb-8"
             buttonLabel="Explore"
             buttonUrl="/experiments"
             buttonClasses="md:!w-auto !w-full"
@@ -817,7 +817,7 @@ export const DataPipeline = () => {
             description="Build your customer data platform: Import data from your warehouse and send to 25+ destinations."
             features={features}
             featureListClasses="sm:grid grid-cols-2 mdlg:flex"
-            imageColumn="flex items-center justify-center pl-8 py-4 md:col-span-9 lg:col-span-10"
+            imageColumn="flex items-center justify-center ps-8 py-4 md:col-span-9 lg:col-span-10"
             imageClasses="px-4 mdlg:px-0 -mb-3"
             contentColumn="md:col-span-7 lg:col-span-6 lg:py-8"
             Images={() => {
@@ -845,7 +845,7 @@ export const DataPipeline = () => {
                     </>
                 )
             }}
-            contentOffset="mdlg:pb-6 lg:pb-8 lg:pr-8 xl:pb-12 2xl:pb-8"
+            contentOffset="mdlg:pb-6 lg:pb-8 lg:pe-8 xl:pb-12 2xl:pb-8"
             buttonLabel="Browse connectors"
             buttonUrl="/cdp"
             buttonClasses="group !border-black/25 !bg-black/10 md:!w-auto !w-full"
@@ -877,7 +877,7 @@ export const DataWarehouse = () => {
                 return (
                     <>
                         {enterpriseMode ? (
-                            <div className="py-2 pl-2">
+                            <div className="py-2 ps-2">
                                 <CloudinaryImage
                                     src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Home/Slider/images/enterprise-mode/shutterstock_343843886.jpg"
                                     alt=""
@@ -916,7 +916,7 @@ export const DataWarehouse = () => {
                     src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/products/data-warehouse/warehouse-hog.png"
                 />
             )}
-            contentOffset="mdlg:pb-6 lg:pb-8 lg:pr-8 xl:pb-12 2xl:pb-8"
+            contentOffset="mdlg:pb-6 lg:pb-8 lg:pe-8 xl:pb-12 2xl:pb-8"
             buttonLabel="Learn more"
             buttonUrl="/data-warehouse"
             buttonClasses="group !border-white/25 !bg-white/10 md:!w-auto !w-full"
@@ -1002,7 +1002,7 @@ export const aiObservability = () => {
                 return (
                     <>
                         {enterpriseMode ? (
-                            <div className="py-2 pl-2">
+                            <div className="py-2 ps-2">
                                 <CloudinaryImage
                                     src="https://res.cloudinary.com/dmukukwp6/image/upload/3ff68b81_ccf5_43b6_a392_398adb7b3f65_8c60038df2.jpeg"
                                     alt=""
@@ -1038,7 +1038,7 @@ export const aiObservability = () => {
                     loading="eager"
                     placeholder="none"
                     quality={100}
-                    className="w-full max-w-[100px] xl:max-w-[140px] mr-2 lg:-mr-4 -mb-2 xl:-mb-12"
+                    className="w-full max-w-[100px] xl:max-w-[140px] me-2 lg:-me-4 -mb-2 xl:-mb-12"
                     src="https://res.cloudinary.com/dmukukwp6/image/upload/1ab5c6f9e37af282fbec24c7350ad484_c9acab0119.png"
                     alt="Robot hedgehog"
                 />
@@ -1062,7 +1062,7 @@ export const Sql = () => {
     return (
         <div className="md:bg-[#D42F18] rounded-md text-white flex items-end">
             <div className="relative md:grid grid-cols-16 gap-2 lg:gap-4 w-full">
-                <ImageContainer className="pl-8 md:col-span-9 lg:col-span-10">
+                <ImageContainer className="ps-8 md:col-span-9 lg:col-span-10">
                     <div className="h-full">
                         <CloudinaryImage
                             alt="A hedgehog working on a laptop while standing, using some sort of internet link that connects to the stars..."

@@ -4,7 +4,7 @@ import { graphql, useStaticQuery } from 'gatsby'
 import React from 'react'
 
 const RoadmapColumn = ({ children }) => {
-    return <div className="md:border-r last:border-r-0 border-primary">{children}</div>
+    return <div className="md:border-e last:border-e-0 border-primary">{children}</div>
 }
 
 const RoadmapItem = ({ children }) => {
@@ -82,14 +82,14 @@ const Roadmap = () => {
                 />
             </figure>
             <div className="col-span-2">
-                <h2 className="m-0 text-5xl md:text-6xl text-primary dark:text-primary-dark text-center md:text-left">
+                <h2 className="m-0 text-5xl md:text-6xl text-primary dark:text-primary-dark text-center md:text-start">
                     The future of PostHog <span className="text-red inline-block">depends on you</span>
                 </h2>
-                <h3 className="m-0 text-lg leading-tight md:text-xl text-center md:text-left font-semibold mt-2 md:mt-3 opacity-75 text-primary dark:text-primary-dark">
+                <h3 className="m-0 text-lg leading-tight md:text-xl text-center md:text-start font-semibold mt-2 md:mt-3 opacity-75 text-primary dark:text-primary-dark">
                     We publish our product roadmap. Tell us what we should build next – and get early access.
                 </h3>
 
-                <div className="mt-4 mb-12 text-center md:text-left">
+                <div className="mt-4 mb-12 text-center md:text-start">
                     <CallToAction type="outline" to="/roadmap">
                         Explore our roadmap
                     </CallToAction>

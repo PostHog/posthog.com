@@ -33,7 +33,7 @@ function DataAttributes() {
                             <span>Standard (monthly)</span>
                             <strong>$12.99</strong>
                         </div>
-                        <ul className="list-none opacity-75 pl-4 pb-2">
+                        <ul className="list-none opacity-75 ps-4 pb-2">
                             <li className="!text-sm">Quality: HD</li>
                             <li className="!text-sm">Seats: 2</li>
                             <li className="!text-sm">Downloads: None</li>
@@ -60,7 +60,7 @@ function DataAttributes() {
                         </HoverTooltip>
                     </div>
                 </div>
-                <div className="flex justify-center lg:items-end lg:mb-12 lg:ml-[calc(-1rem_-_1px)]">
+                <div className="flex justify-center lg:items-end lg:mb-12 lg:ms-[calc(-1rem_-_1px)]">
                     <svg
                         className="hidden lg:block"
                         xmlns="http://www.w3.org/2000/svg"

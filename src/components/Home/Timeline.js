@@ -36,7 +36,7 @@ const Item = ({ title, category, description, squeakId }) => {
                 </div>
             </SideModal>
             <li
-                className="relative list-none text-sm text-left pl-4 content-none before:inline-block before:absolute before:w-[10px] before:h-[10px] before:left-0 before:top-[5px] before:rounded-full before:mr-2 mt-1 first:mt-0"
+                className="relative list-none text-sm text-start ps-4 content-none before:inline-block before:absolute before:w-[10px] before:h-[10px] before:left-0 before:top-[5px] before:rounded-full before:me-2 mt-1 first:mt-0"
                 data-type={categories[category]}
             >
                 <Tooltip
@@ -151,21 +151,21 @@ export default function Timeline() {
 
             <div className="text-center py-8 md:pb-12">
                 <div className="inline-flex flex-col md:flex-row gap-y-2 md:gap-x-6">
-                    <div className="flex items-center text-[15px] text-left gap-2">
+                    <div className="flex items-center text-[15px] text-start gap-2">
                         <span className="block w-[10px] h-[10px] rounded-full bg-[#43AF79]"></span>
                         <div>Major new feature</div>
                     </div>
-                    <div className="flex items-center text-[15px] text-left gap-2">
+                    <div className="flex items-center text-[15px] text-start gap-2">
                         <span className="block w-[10px] h-[10px] rounded-full bg-[#0080FF]"></span>
                         <div>Company news</div>
                     </div>
-                    <div className="flex items-center text-[15px] text-left gap-2">
+                    <div className="flex items-center text-[15px] text-start gap-2">
                         <span className="block w-[10px] h-[10px] rounded-full bg-[#C849F4]"></span>
                         <div>Something cool happened</div>
                     </div>
                 </div>
             </div>
-            <div className="relative -mx-4 pr-4">
+            <div className="relative -mx-4 pe-4">
                 <div className="md:block hidden absolute z-20 top-1/2 left-0 -translate-y-1/2">
                     <button
                         onClick={() => listRef?.current?.scrollBy({ left: -50, behavior: 'smooth' })}
@@ -176,7 +176,7 @@ export default function Timeline() {
                 </div>
                 <div
                     ref={listRef}
-                    className="-mr-4 px-4 md:px-16 snap-x snap-mandatory flex flex-nowrap gap-4 overflow-auto relative"
+                    className="-me-4 px-4 md:px-16 snap-x snap-mandatory flex flex-nowrap gap-4 overflow-auto relative"
                 >
                     {Object.keys(pastEvents).map((year, index) => {
                         const pastMonths = groupBy(pastEvents[year], (node) => {
@@ -223,7 +223,7 @@ export default function Timeline() {
                                                             return (
                                                                 <li
                                                                     key={title}
-                                                                    className="flex-auto relative text-[14px] text-left pl-4 content-none before:inline-block before:absolute before:w-[10px] before:h-[10px] before:left-0 before:top-[5px] before:rounded-full before:mr-2 mt-1 first:mt-0"
+                                                                    className="flex-auto relative text-[14px] text-start ps-4 content-none before:inline-block before:absolute before:w-[10px] before:h-[10px] before:left-0 before:top-[5px] before:rounded-full before:me-2 mt-1 first:mt-0"
                                                                     data-type={categories[category]}
                                                                 >
                                                                     {title}

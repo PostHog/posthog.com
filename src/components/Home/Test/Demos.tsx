@@ -216,7 +216,7 @@ const HomeHitCounter = () => {
                                 {[...Array(7)].map((_, index) => (
                                     <div
                                         key={index}
-                                        className="w-7 max-h-8 flex items-center justify-center text-red p-1.5 border-l border-primary"
+                                        className="w-7 max-h-8 flex items-center justify-center text-red p-1.5 border-s border-primary"
                                     >
                                         <DigitDash className="text-red w-full h-full" />
                                     </div>
@@ -772,7 +772,7 @@ const jsxComponentDescriptors: JsxComponentDescriptor[] = [
         Editor: () => (
             <Image
                 src="https://res.cloudinary.com/dmukukwp6/image/upload/data_warehouse_2c3928e9ad.png"
-                className="max-w-[213px] absolute bottom-[-4px] right-0 rounded-br-sm"
+                className="max-w-[213px] absolute bottom-[-4px] right-0 rounded-ee-sm"
             />
         ),
     },
@@ -783,7 +783,7 @@ const jsxComponentDescriptors: JsxComponentDescriptor[] = [
         Editor: () => (
             <Image
                 src="https://res.cloudinary.com/dmukukwp6/image/upload/dont_burn_money_28d5861fad.png"
-                className="float-right max-w-[120px] @sm:max-w-[200px] ml-2 @sm:ml-4 mb-2 @sm:-mt-4"
+                className="float-end max-w-[120px] @sm:max-w-[200px] ms-2 @sm:ms-4 mb-2 @sm:-mt-4"
             />
         ),
     },
@@ -794,7 +794,7 @@ const jsxComponentDescriptors: JsxComponentDescriptor[] = [
         Editor: () => (
             <Image
                 src="https://res.cloudinary.com/dmukukwp6/image/upload/reading_at_night_8397c5198c.png"
-                className="@md:hidden @xl:block @lg:float-right max-w-full @xl:max-w-xs rotate-1 shadow-2xl rounded border-4 border-white dark:border-primary -mb-2 @lg:mb-2 @lg:ml-4 @lg:-mt-2"
+                className="@md:hidden @xl:block @lg:float-end max-w-full @xl:max-w-xs rotate-1 shadow-2xl rounded border-4 border-white dark:border-primary -mb-2 @lg:mb-2 @lg:ms-4 @lg:-mt-2"
             />
         ),
     },
@@ -805,7 +805,7 @@ const jsxComponentDescriptors: JsxComponentDescriptor[] = [
         Editor: () => (
             <Image
                 src="https://res.cloudinary.com/dmukukwp6/image/upload/reading_at_night_8397c5198c.png"
-                className="hidden @md:block @md:float-right @xl:hidden @md:max-w-60 @xl:max-w-xs @sm:ml-4 @sm:mb-2 rotate-1 shadow-2xl rounded border-4 border-white dark:border-primary"
+                className="hidden @md:block @md:float-end @xl:hidden @md:max-w-60 @xl:max-w-xs @sm:ms-4 @sm:mb-2 rotate-1 shadow-2xl rounded border-4 border-white dark:border-primary"
             />
         ),
     },

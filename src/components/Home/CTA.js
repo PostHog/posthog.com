@@ -74,7 +74,7 @@ export default function CTA({ headline = true, card = false }) {
             </div>
 
             <div className={`@xl:grid grid-cols-2 gap-16 @xl:pt-16 max-w-5xl mx-auto ${card ? '@xl:-mt-14' : ''}`}>
-                <div className="relative text-right">
+                <div className="relative text-end">
                     <div className="relative mb-2">
                         <CloudinaryImage
                             src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Home/images/cloud-cd.jpg"
@@ -95,7 +95,7 @@ export default function CTA({ headline = true, card = false }) {
                             transition={{ duration: 1, type: 'tween' }}
                             initial={{ translateX: '-100vw' }}
                             animate={{ translateX: 0 }}
-                            className="bg-blue text-left leading-none px-4 py-2 absolute -top-12 left-4 right-4 @xl:-left-4 @xl:right-auto rounded @xl:rounded-none"
+                            className="bg-blue text-start leading-none px-4 py-2 absolute -top-12 left-4 right-4 @xl:-left-4 @xl:right-auto rounded @xl:rounded-none"
                         >
                             <span className="text-sm font-bold text-white">
                                 {rich('section.8.cart.label', {
@@ -117,7 +117,7 @@ export default function CTA({ headline = true, card = false }) {
                             </p>
                         </div>
                     </div>
-                    <p className="pl-24 text-xs opacity-60 text-right">
+                    <p className="ps-24 text-xs opacity-60 text-end">
                         {rich('section.8.footnote', { br: () => <br />, emphasis: (text) => <em>{text}</em> })}
                     </p>
                 </div>

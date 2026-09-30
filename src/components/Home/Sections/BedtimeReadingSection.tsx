@@ -13,7 +13,7 @@ export const BedtimeReadingSection = () => {
 
             <CloudinaryImage
                 src="https://res.cloudinary.com/dmukukwp6/image/upload/night_hog_219fff00f3.png"
-                className="@lg:float-right max-w-[340px] w-full @lg:ml-12 mb-2 rotate-[5deg]"
+                className="@lg:float-end max-w-[340px] w-full @lg:ms-12 mb-2 rotate-[5deg]"
             />
 
             <p>{t('section.7.body')}</p>

@@ -16,7 +16,7 @@ const Table = ({ columns, rows }: { columns: any; rows: any }) => {
     return (
         <div>
             <OSTable columns={columns} rows={rows} />
-            <div className="bg-accent p-1 text-left text-xs border-primary border-x border-b flex justify-end">
+            <div className="bg-accent p-1 text-start text-xs border-primary border-x border-b flex justify-end">
                 <Link to="/roadmap" state={{ newWindow: true }} className="hover:underline">
                     open <IconCalendar className="inline-block size-4 text-primary" /> Roadmap{' '}
                     <IconArrowRight className="inline-block -rotate-45 size-4 text-primary" />
@@ -130,7 +130,7 @@ const UnderConsiderationTable = ({ data }: { data: any }) => {
                                 content: (
                                     <div className="community-post-markdown">
                                         <Description
-                                            buttonClassName="ml-1"
+                                            buttonClassName="ms-1"
                                             description={roadmap.attributes.description}
                                         />
                                     </div>
