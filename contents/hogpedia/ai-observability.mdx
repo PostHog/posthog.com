@@ -1,6 +1,6 @@
 ---
 title: AI observability
-description: AI observability records what an application's calls to a language model did — the prompt, the response, the tools used, the latency, the tokens, and the cost. PostHog built it to watch its own AI assistant and released it as a product in February 2025.
+description: AI observability records what an application's calls to a language model did – the prompt, the response, the tools used, the latency, the tokens, and the cost. PostHog built it to watch its own AI assistant and released it as a product in February 2025.
 hogpedia:
     categories: ['Products']
     aliases: ['LLM observability', 'LLM analytics']
@@ -59,7 +59,7 @@ This is a recurring pattern at PostHog, and it is worth noting as such: several 
 
 ## How it works in PostHog
 
-An SDK wraps the model client, so each call is captured as an event with the request, the response, the token counts, the latency, and the computed cost.<Ref id="3" /> Related calls are grouped into a trace, which is what makes a multi-step agent legible — a single answer may involve several model calls and several tool calls.
+An SDK wraps the model client, so each call is captured as an event with the request, the response, the token counts, the latency, and the computed cost.<Ref id="3" /> Related calls are grouped into a trace, which is what makes a multi-step agent legible – a single answer may involve several model calls and several tool calls.
 
 From there the data behaves like any other PostHog event data. Cost can be broken down per user, per model, or per feature. Evaluations can score new generations as they arrive, which turns an opinion about quality into a number that can be tracked.<Ref id="3" />
 

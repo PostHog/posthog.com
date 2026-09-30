@@ -10,8 +10,8 @@ import './hogpedia.css'
  * The inner chrome of Hogpedia: the sidebar column, the tab strip, the white content area,
  * and the footer.
  *
- * The window chrome around this — the title bar, the back and forward buttons, the address
- * bar — comes from `<Explorer fullScreen>` in the page or template that renders this. That
+ * The window chrome around this – the title bar, the back and forward buttons, the address
+ * bar – comes from `<Explorer fullScreen>` in the page or template that renders this. That
  * split keeps `<SEO>` beside `<Explorer>`, the way `src/pages/paint/index.tsx` does it.
  *
  * The root sets `container-type: inline-size` in `hogpedia.css`, so the layout responds to

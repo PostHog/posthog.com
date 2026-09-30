@@ -12,12 +12,12 @@ export default function HogpediaAbout(): JSX.Element {
     return (
         <>
             <SEO
-                title="About Hogpedia - Hogpedia"
+                title="About Hogpedia – Hogpedia"
                 description="Hogpedia is an encyclopedia about PostHog, written by PostHog, in the style of a 2007 encyclopedia. This page explains how it is sourced and where its limits are."
                 canonicalUrl="/hogpedia/about"
                 noindex
             />
-            <Explorer template="generic" slug="hogpedia" title="About - Hogpedia" fullScreen>
+            <Explorer template="generic" slug="hogpedia" title="About – Hogpedia" fullScreen>
                 <HogpediaShell title="About Hogpedia" slug="/hogpedia/about" showTabs={false}>
                     <div className="hp-prose">
                         <p>
@@ -50,7 +50,7 @@ export default function HogpediaAbout(): JSX.Element {
                             </li>
                         </ul>
                         <p>
-                            A figure that changes over time — a price, a customer count, a headcount — links to the page
+                            A figure that changes over time – a price, a customer count, a headcount – links to the page
                             that states it rather than repeating the number here, so this encyclopedia cannot go stale
                             in a way a reader cannot detect.
                         </p>

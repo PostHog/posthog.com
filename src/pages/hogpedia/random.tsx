@@ -29,12 +29,12 @@ export default function HogpediaRandom(): JSX.Element {
     return (
         <>
             <SEO
-                title="Random article - Hogpedia"
+                title="Random article – Hogpedia"
                 description="Opens a random Hogpedia article."
                 canonicalUrl="/hogpedia/random"
                 noindex
             />
-            <Explorer template="generic" slug="hogpedia" title="Random article - Hogpedia" fullScreen>
+            <Explorer template="generic" slug="hogpedia" title="Random article – Hogpedia" fullScreen>
                 <HogpediaShell title="Random article" slug="/hogpedia/random" showTabs={false}>
                     <div className="hp-prose">
                         <p>

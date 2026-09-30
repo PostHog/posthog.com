@@ -12,12 +12,12 @@ export default function HogpediaAllPages(): JSX.Element {
     return (
         <>
             <SEO
-                title="All pages - Hogpedia"
+                title="All pages – Hogpedia"
                 description={`An index of all ${articles.length} Hogpedia articles about PostHog products, concepts, company history, and lore.`}
                 canonicalUrl="/hogpedia/all-pages"
                 noindex
             />
-            <Explorer template="generic" slug="hogpedia" title="All pages - Hogpedia" fullScreen>
+            <Explorer template="generic" slug="hogpedia" title="All pages – Hogpedia" fullScreen>
                 <HogpediaShell title="All pages" slug="/hogpedia/all-pages" showTabs={false}>
                     <div className="hp-prose">
                         <p>
@@ -31,7 +31,7 @@ export default function HogpediaAllPages(): JSX.Element {
                                     {article.categories.length > 0 && (
                                         <>
                                             {' '}
-                                            — <i>{article.categories.join(', ')}</i>
+                                            – <i>{article.categories.join(', ')}</i>
                                         </>
                                     )}
                                 </li>

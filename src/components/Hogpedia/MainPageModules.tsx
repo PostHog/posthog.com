@@ -1,6 +1,6 @@
 import React from 'react'
 import Link from 'components/Link'
-import * as Hoggies from '@posthog/brand/hoggies'
+import { HOGS } from './hogs'
 
 export const Module = ({
     title,
@@ -33,7 +33,7 @@ export const Module = ({
  *
  * Rotation is derived from the date, never from `Math.random()`. A random pick during
  * render would differ between the server and the client and React would report a hydration
- * mismatch — and a crawler would see a different page from the one a reader sees.
+ * mismatch – and a crawler would see a different page from the one a reader sees.
  */
 export const dayIndex = (length: number, date = new Date()): number => {
     if (length <= 0) {
@@ -58,7 +58,7 @@ export const FeaturedHog = ({
     caption: string
     to: string
 }): JSX.Element => {
-    const Hog = (Hoggies as Record<string, React.ComponentType<any>>)[hog]
+    const Hog = HOGS[hog]
     return (
         <div style={{ textAlign: 'center' }}>
             {Hog && <Hog size={130} title={name} />}

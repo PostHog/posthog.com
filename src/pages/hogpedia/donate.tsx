@@ -3,7 +3,7 @@ import Explorer from 'components/Explorer'
 import Link from 'components/Link'
 import { SEO } from 'components/seo'
 import HogpediaShell from 'components/Hogpedia/HogpediaShell'
-import { HedgehogMoney } from '@posthog/brand/hoggies'
+import { HOGS } from 'components/Hogpedia/hogs'
 
 /**
  * The fundraising appeal. It is a joke, and it ends somewhere real: PostHog's free tier and
@@ -13,12 +13,12 @@ export default function HogpediaDonate(): JSX.Element {
     return (
         <>
             <SEO
-                title="Donate to Hogpedia - Hogpedia"
+                title="Donate to Hogpedia – Hogpedia"
                 description="Hogpedia does not accept donations. It explains what to do instead."
                 canonicalUrl="/hogpedia/donate"
                 noindex
             />
-            <Explorer template="generic" slug="hogpedia" title="Donate - Hogpedia" fullScreen>
+            <Explorer template="generic" slug="hogpedia" title="Donate – Hogpedia" fullScreen>
                 <HogpediaShell title="Donate to Hogpedia" slug="/hogpedia/donate" showTabs={false}>
                     <div className="hp-notice" role="note">
                         <span className="hp-notice-icon" aria-hidden="true">
@@ -35,7 +35,7 @@ export default function HogpediaDonate(): JSX.Element {
                         <div className="hp-infobox">
                             <div className="hp-infobox-title">Fundraiser</div>
                             <div className="hp-infobox-image">
-                                <HedgehogMoney size={150} title="A hedgehog with money" />
+                                <HOGS.HedgehogMoney size={150} title="A hedgehog with money" />
                                 <span className="hp-infobox-caption">
                                     Your contribution would be returned to you immediately.
                                 </span>

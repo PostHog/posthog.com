@@ -1,5 +1,5 @@
 import React from 'react'
-import * as Hoggies from '@posthog/brand/hoggies'
+import { HOGS } from './hogs'
 import MdxLinks from './MdxLinks'
 
 /**
@@ -15,7 +15,7 @@ export type InfoboxRow = {
 
 export type InfoboxData = {
     title?: string
-    /** A component name exported by `@posthog/brand/hoggies`, for example `HedgehogReading`. */
+    /** A hog registered in `hogs.ts`, for example `HedgehogReading`. */
     hog?: string
     caption?: string
     rows?: InfoboxRow[]
@@ -26,7 +26,7 @@ export default function Infobox({ data, title }: { data?: InfoboxData; title: st
         return null
     }
 
-    const Hog = data.hog ? (Hoggies as Record<string, React.ComponentType<any>>)[data.hog] : undefined
+    const Hog = data.hog ? HOGS[data.hog] : undefined
 
     return (
         <aside className="hp-infobox" aria-label={`${data.title || title} (summary)`}>

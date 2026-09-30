@@ -4,7 +4,7 @@ Hogpedia is an encyclopedia about PostHog at `/hogpedia`, presented in the MonoB
 
 The format is the joke. The facts are not. Every article starts with a plain definition, links to the PostHog source for each claim, and cross-links the other articles.
 
-**Hogpedia is `noindex` throughout, and excluded from the sitemap.** This is deliberate, not an oversight. Indexed, the product and concept articles would compete with the real docs for the same queries, and an answer engine has no way to tell a lore article from a factual one — the encyclopedia format makes content *more* likely to be quoted, not less. Keep new pages `noindex`. For the same reason there is no structured data: `Article` and `DefinedTerm` JSON-LD would point machines at a parody page.
+**Hogpedia is `noindex` throughout, and excluded from the sitemap.** This is deliberate, not an oversight. Indexed, the product and concept articles would compete with the real docs for the same queries, and an answer engine has no way to tell a lore article from a factual one – the encyclopedia format makes content *more* likely to be quoted, not less. Keep new pages `noindex`. For the same reason there is no structured data: `Article` and `DefinedTerm` JSON-LD would point machines at a parody page.
 
 ## What lives where
 
@@ -18,13 +18,13 @@ The format is the joke. The facts are not. Every article starts with a plain def
 | `src/pages/sparks-joy/` | Lists Hogpedia under "Time machine", the section for parody recreations. |
 | `src/components/Hogpedia/` | The skin and the article furniture. |
 
-Hogpedia is listed on `/sparks-joy` under **Time machine**, the group for parody recreations of old websites, via `SparksJoyItems.timeMachine` in `src/components/TaskBarMenu/menuData.tsx`. That array drives the `/sparks-joy` page only — the taskbar's "Things that spark joy" entry is a plain link to the page and has no submenu.
+Hogpedia is listed on `/sparks-joy` under **Time machine**, the group for parody recreations of old websites, via `SparksJoyItems.timeMachine` in `src/components/TaskBarMenu/menuData.tsx`. That array drives the `/sparks-joy` page only – the taskbar's "Things that spark joy" entry is a plain link to the page and has no submenu.
 
 Pages are created in `gatsby/createPages.ts`. Articles are excluded from the generic `Plain` loop there and get their own loop, which also builds a page per category. The frontmatter types are declared in `gatsby/createSchemaCustomization.ts` under `FrontmatterHogpedia`.
 
 ## Adding an article
 
-Add one file to `contents/hogpedia/`. Nothing else is needed — the loop, the search index, the article count, `/hogpedia/all-pages` and the category pages all read from the files on disk.
+Add one file to `contents/hogpedia/`. Nothing else is needed – the loop, the search index, the article count, `/hogpedia/all-pages` and the category pages all read from the files on disk.
 
 ```yaml
 ---
@@ -36,7 +36,7 @@ hogpedia:
     notices: ['lore'] # maintenance banners; see MaintenanceBanner.tsx
     infobox:
         title: Product analytics
-        hog: HedgehogChartHog # any component exported by @posthog/brand/hoggies
+        hog: HedgehogChartHog # must be registered in hogs.ts – see the note below
         caption: Optional caption under the illustration.
         rows:
             - label: Type
@@ -55,7 +55,7 @@ hogpedia:
 ---
 ```
 
-The "See also", "References" and "External links" sections are generated from the frontmatter. Do not write them as prose — the template adds the headings, the `[edit]` links and the anchors.
+The "See also", "References" and "External links" sections are generated from the frontmatter. Do not write them as prose – the template adds the headings, the `[edit]` links and the anchors.
 
 In the body, use Markdown plus two components:
 
@@ -68,17 +68,19 @@ In the body, use Markdown plus two components:
 
 **No dead links.** Hogpedia has no red links. Link only to an article that exists. A sidebar or tab item with nothing behind it renders as plain text, not as a link. The hand-written Main Page modules are filtered against the live article index, so a rename cannot leave a broken link behind. A build-time link check covers the rest.
 
-**Keep it simple.** This is a parody site, not a documentation set. An article is a lead plus three or four short sections. Resist adding a "Criticism" or "Limits" section — that is essay writing, and it was cut once already.
+**Never `import * as` from `@posthog/brand/hoggies`.** An article names its hog as a string, so the component is looked up at run time – but a namespace import defeats tree-shaking and pulls all 130-odd illustrations into every page that renders one. That added about 8 MB of JavaScript before `hogs.ts` existed. To use a new illustration, add a named import and an entry to the `HOGS` registry in `src/components/Hogpedia/hogs.ts`.
+
+**Keep it simple.** This is a parody site, not a documentation set. An article is a lead plus three or four short sections. Resist adding a "Criticism" or "Limits" section – that is essay writing, and it was cut once already.
 
 **Mark lore as lore.** A lore article carries the `lore` notice. An infobox never contains a joke.
 
-**The global MDX shortcodes are deliberately not available.** `src/templates/Hogpedia.tsx` does not spread `shortcodes` from `src/mdxGlobalComponents.js`, unlike `Plain.js` and `Handbook.tsx`. Those components carry site design tokens and would look wrong in a 2007 skin. An unregistered component name fails the build, which is the behaviour we want. To add one, register it in the template's `components` map and document it here.
+**The global MDX shortcodes are deliberately not available.** `src/templates/Hogpedia.tsx` does not spread `shortcodes` from `src/mdxGlobalComponents.js`, unlike `Plain.js` and `Handbook.tsx`. Those components carry site design tokens and would look wrong in a 2007 skin. An unregistered component name fails the build, which is the behavior we want. To add one, register it in the template's `components` map and document it here.
 
 ## The skin
 
-`hogpedia.css` is the only file with non-token colours and a non-project font stack, and every rule in it is scoped under `.hogpedia`. This is the same approach `src/components/PocketGuides/twigMockup.css` takes. It touches no Tailwind config, mints no utility, and cannot leak.
+`hogpedia.css` is the only file with non-token colors and a non-project font stack, and every rule in it is scoped under `.hogpedia`. This is the same approach `src/components/PocketGuides/twigMockup.css` takes. It touches no Tailwind config, mints no utility, and cannot leak.
 
-**Hogpedia is always light.** MonoBook had no dark variant, so there is nothing to be faithful to and an invented one would break the premise. The root paints an opaque background and sets `color-scheme: light`, so a dark site theme shows a light page inside a themed window frame — which reads as a website in a browser, the effect we want. The sidebar says so in character.
+**Hogpedia is always light.** MonoBook had no dark variant, so there is nothing to be faithful to and an invented one would break the premise. The root paints an opaque background and sets `color-scheme: light`, so a dark site theme shows a light page inside a themed window frame – which reads as a website in a browser, the effect we want. The sidebar says so in character.
 
 **Layout responds to the window, not the viewport.** The root sets `container-type: inline-size`, and the breakpoints are `@container hogpedia (...)` queries. Every app window is resizable, so a media query would be wrong. Below 60rem the sidebar stacks above the article and the infobox goes full width.
 
@@ -90,6 +92,6 @@ Three things read live state rather than fake it:
 
 - **`[edit]`, "view source" and "history"** build GitHub URLs from the article's own `relativePath`. They open the real file.
 - **Special:RecentChanges** reads the commit log via `gatsby-source-git-metadata`. That plugin needs `GITHUB_API_KEY` and attaches nothing without one, so the page has an honest empty state that links to GitHub. Never fall back to `gitLogLatestDate` for a "last modified" line: the plugin defaults it to the current time, so it would print today's date for every article.
-- **Special:Random** server-renders a full article list and jumps to a random one on mount. Never pick a random value during render — it would differ between server and client.
+- **Special:Random** server-renders a full article list and jumps to a random one on mount. Never pick a random value during render – it would differ between server and client.
 
 For the same reason, the Main Page's rotating modules derive their choice from the date, in `MainPageModules.tsx`.

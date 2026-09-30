@@ -61,7 +61,7 @@ export const ArticleFooter = ({ lastModified }: { lastModified?: string }): JSX.
             <Link to="https://github.com/PostHog/posthog.com" externalNoIcon className="hp-external">
                 the posthog.com repository
             </Link>
-            . Hedgehogs are PostHog brand assets — read the <Link to="/handbook/brand/assets">brand guide</Link> before
+            . Hedgehogs are PostHog brand assets – read the <Link to="/handbook/brand/assets">brand guide</Link> before
             reusing one.
         </p>
         <p>

@@ -13,12 +13,12 @@ export default function HogpediaSearchPage(): JSX.Element {
     return (
         <>
             <SEO
-                title="Search results - Hogpedia"
+                title="Search results – Hogpedia"
                 description="Search the Hogpedia encyclopedia of PostHog products, concepts, company history, and lore."
                 canonicalUrl="/hogpedia/search"
                 noindex
             />
-            <Explorer template="generic" slug="hogpedia" title="Search - Hogpedia" fullScreen>
+            <Explorer template="generic" slug="hogpedia" title="Search – Hogpedia" fullScreen>
                 <HogpediaShell title="Search results" slug="/hogpedia/search" showTabs={false}>
                     <SearchResults initialQuery={query} />
                 </HogpediaShell>

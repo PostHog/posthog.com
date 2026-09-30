@@ -78,7 +78,7 @@ export default function HogpediaArticle({
     const summary = description || excerpt
     const toc = nestToc(tableOfContents)
     // A talk page lives at /hogpedia/talk/<slug> and renders through the same template. It
-    // gets the "Talk:" prefix, the discussion tab, and no index — an editorial argument is
+    // gets the "Talk:" prefix, the discussion tab, and no index – an editorial argument is
     // not a reference work.
     const isTalk = slug.startsWith('/hogpedia/talk/')
     const heading = isTalk ? `Talk: ${title}` : title

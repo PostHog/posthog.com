@@ -42,7 +42,7 @@ export default function HogpediaCategory({ data: { articles }, pageContext: { ca
                             {nodes.map((node: any) => (
                                 <li key={node.fields.slug}>
                                     <Link to={node.fields.slug}>{node.frontmatter.title}</Link>
-                                    {node.frontmatter.description && <> — {node.frontmatter.description}</>}
+                                    {node.frontmatter.description && <> – {node.frontmatter.description}</>}
                                 </li>
                             ))}
                         </ul>

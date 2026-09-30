@@ -1,7 +1,7 @@
 /*
- * Hogpedia — a recreation of the MonoBook skin that English Wikipedia used in 2007.
+ * Hogpedia – a recreation of the MonoBook skin that English Wikipedia used in 2007.
  *
- * Every value here is a period colour, border or metric. None of them exist as a project
+ * Every value here is a period color, border or metric. None of them exist as a project
  * Tailwind token, and none of them should: they belong to this one surface only. The whole
  * sheet is scoped under `.hogpedia`, so nothing leaks into the rest of the site.
  *
@@ -127,7 +127,7 @@
     }
     /* Flush to the right edge with the border only on the left, the way MonoBook joined the
        content column to the sidebar. No max-width: MonoBook never capped the line length,
-       and a centred column is the single thing that most reads as a modern site. */
+       and a centered column is the single thing that most reads as a modern site. */
     .hp-content {
         border-right: none;
         border-top: none;
@@ -600,7 +600,7 @@
 
 /* ---------------------------------------------------- article notices --- */
 
-/* MonoBook's "ambox": a thin box with a thick coloured left edge. */
+/* MonoBook's "ambox": a thin box with a thick colored left edge. */
 .hp-notice {
     display: flex;
     gap: 0.7em;
