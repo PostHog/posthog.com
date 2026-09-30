@@ -11,6 +11,7 @@ type Post = {
     url: string
     snippet: string
     date: string
+    image?: string
 }
 
 type Article = {
@@ -33,14 +34,14 @@ type PageData = {
 }
 
 export default function Hogbook({ data }: { data: PageData }): JSX.Element {
-    const [posts, setPosts] = useState<Post[]>(
-        data.blog.nodes.map(({ fields, frontmatter, excerpt }) => ({
-            title: frontmatter.title,
-            url: fields.slug,
-            snippet: excerpt,
-            date: frontmatter.date,
-        }))
-    )
+    const builtInPosts = data.blog.nodes.map(({ fields, frontmatter, excerpt }) => ({
+        title: frontmatter.title,
+        url: fields.slug,
+        snippet: excerpt,
+        date: frontmatter.date,
+        image: frontmatter.featuredImage?.publicURL,
+    }))
+    const [posts, setPosts] = useState<Post[]>(builtInPosts)
 
     useEffect(() => {
         if (!['posthog.com', 'www.posthog.com'].includes(window.location.hostname)) return
@@ -66,12 +67,24 @@ export default function Hogbook({ data }: { data: PageData }): JSX.Element {
                             if (url.origin !== 'https://posthog.com' || !url.pathname.startsWith('/blog/')) return null
                             const date = item.querySelector('pubDate')?.textContent || ''
                             if (!Number.isFinite(Date.parse(date))) return null
+                            const enclosure = item.querySelector('enclosure')?.getAttribute('url')
+                            let image: string | undefined
+                            if (enclosure) {
+                                const imageUrl = new URL(
+                                    enclosure.replace(/^https:\/\/posthog\.com(?=https?:\/\/)/, ''),
+                                    url.origin
+                                )
+                                if (['https://posthog.com', 'https://res.cloudinary.com'].includes(imageUrl.origin)) {
+                                    image = imageUrl.href
+                                }
+                            }
 
                             return {
                                 title: item.querySelector('title')?.textContent || '',
                                 url: url.pathname,
                                 snippet: item.querySelector('description')?.textContent || '',
                                 date,
+                                image,
                             }
                         } catch {
                             return null
@@ -97,6 +110,9 @@ export default function Hogbook({ data }: { data: PageData }): JSX.Element {
     const friends = data.friends.nodes
         .filter(({ squeakId, firstName, lastName }) => squeakId && (firstName || lastName))
         .slice(0, 6)
+    const photos = posts.some(({ image }) => image)
+        ? posts.filter(({ image }) => image)
+        : builtInPosts.filter(({ image }) => image)
 
     return (
         <>
@@ -348,19 +364,17 @@ export default function Hogbook({ data }: { data: PageData }): JSX.Element {
                                         ▼ Photos
                                     </h2>
                                     <div className="grid grid-cols-2 gap-2 p-3 @md:grid-cols-3">
-                                        {data.blog.nodes
-                                            .filter(({ frontmatter }) => frontmatter.featuredImage?.publicURL)
-                                            .map(({ fields, frontmatter }) => (
-                                                <Link key={fields.slug} to={fields.slug} className="min-w-0 text-xs">
-                                                    <img
-                                                        src={frontmatter.featuredImage?.publicURL}
-                                                        alt=""
-                                                        loading="lazy"
-                                                        className="aspect-[4/3] w-full border border-blue/30 object-cover"
-                                                    />
-                                                    <span className="mt-1 block line-clamp-2">{frontmatter.title}</span>
-                                                </Link>
-                                            ))}
+                                        {photos.map(({ url, title, image }) => (
+                                            <Link key={url} to={url} className="min-w-0 text-xs">
+                                                <img
+                                                    src={image}
+                                                    alt=""
+                                                    loading="lazy"
+                                                    className="aspect-[4/3] w-full border border-blue/30 object-cover"
+                                                />
+                                                <span className="mt-1 block line-clamp-2">{title}</span>
+                                            </Link>
+                                        ))}
                                     </div>
                                     <Link
                                         to="/blog"
