@@ -793,6 +793,12 @@ export const SparksJoyItems: Record<'games' | 'notGames', SparksJoyItem[]> = {
     ],
     notGames: [
         {
+            label: 'Hoglr',
+            link: '/sparks-joy/hoglr',
+            iconName: 'notebook' as AppIconName,
+            customIcon: null,
+        },
+        {
             label: 'PostHog FM',
             link: '/fm',
             iconName: null,
