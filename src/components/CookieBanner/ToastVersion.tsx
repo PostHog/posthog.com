@@ -4,11 +4,13 @@ import usePostHog from '../../hooks/usePostHog'
 import CloudinaryImage from 'components/CloudinaryImage'
 import Tooltip from 'components/RadixUI/Tooltip'
 import { IconX } from '@posthog/icons'
+import { useTranslation } from 'i18n'
 
 export default function CookieBannerToast() {
     const { addToast } = useToast()
     const posthog = usePostHog()
     const [hasShownBanner, setHasShownBanner] = useState(false)
+    const { t, rich } = useTranslation()
 
     useEffect(() => {
         const consent = localStorage.getItem('cookie_consent')
@@ -16,35 +18,30 @@ export default function CookieBannerToast() {
         if (!consent && !hasShownBanner) {
             setHasShownBanner(true)
             addToast({
-                title: 'Legally-required cookie banner',
+                title: t('cookie.heading'),
                 description: (
                     <>
-                        <p className="mt-1">
-                            PostHog.com doesn't use third-party cookies, only a single in-house cookie.
-                        </p>
+                        <p className="mt-1">{t('cookie.body.1')}</p>
                         <p className="pr-28">
-                            No data is sent to a third party. (
-                            <Tooltip
-                                trigger={
-                                    <span className="border-b border-primary border-dashed">Ursula von der Leyen</span>
-                                }
-                                delay={0}
-                            >
-                                <div className="max-w-64">
-                                    <span className="text-sm">
-                                        Ursula von der Leyen is the President of the European Commission – NOT to be
-                                        confused with Hillary Clinton.
-                                    </span>
-                                </div>
-                            </Tooltip>{' '}
-                            would be so proud.)
+                            {rich('cookie.body.2', {
+                                tooltip: (text) => (
+                                    <Tooltip
+                                        trigger={<span className="border-b border-primary border-dashed">{text}</span>}
+                                        delay={0}
+                                    >
+                                        <div className="max-w-64">
+                                            <span className="text-sm">{t('cookie.tooltip.label')}</span>
+                                        </div>
+                                    </Tooltip>
+                                ),
+                            })}
                         </p>
                     </>
                 ),
                 image: (
                     <div className="absolute bottom-0 -right-4 leading-[0]">
                         <CloudinaryImage
-                            alt="Ursula von der Leyen, President of the European Commission"
+                            alt={t('cookie.tooltip.image.alt')}
                             width={180}
                             src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/EU/images/ursula.png"
                         />
@@ -54,7 +51,7 @@ export default function CookieBannerToast() {
                     localStorage.setItem('cookie_consent', 'acknowledged')
                     posthog?.set_config({ persistence: 'localStorage+cookie' })
                 },
-                actionLabel: 'Close',
+                actionLabel: t('cookie.close'),
                 actionAsIcon: <IconX className="size-4" />,
                 verticalAlign: 'items-start',
                 duration: 999999999,
@@ -63,7 +60,7 @@ export default function CookieBannerToast() {
             // If acknowledgement was already received, ensure PostHog is configured correctly
             posthog?.set_config({ persistence: 'localStorage+cookie' })
         }
-    }, [addToast, posthog, hasShownBanner])
+    }, [addToast, posthog, hasShownBanner, t, rich])
 
     return null
 }
