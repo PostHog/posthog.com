@@ -1,11 +1,11 @@
 ### Q4 2026 Objectives
 
-#### Feature flags v2 <TeamMember name="Anders Asheim Hennum" photo />
-Continue the rollout of the new config format (v2). Get it to internal testing in Q4.
-- Stretch goal: everything specced in the RFC rolled out for internal testing.
-
-#### Self-driving experiment loop
+#### Self-driving experiment loop (TBD)
 We start with the health layer (below) so self-driving has good inputs. The self-driving offsite may bring architectural changes, so we wait for that context before we pick the self-driving feature to build in Q4.
+
+#### Feature flags v2 <TeamMember name="Anders Asheim Hennum" photo />
+Continue the rollout of the new config format (v2).
+- Stretch goal: everything specced in the RFC rolled out for internal testing.
 
 #### Health layer <TeamMember name="Marcel Poelker" photo />
 Understand the issues an experiment has. With that in place we can proactively fix issues, and feed good inputs into the creation workflow.
@@ -23,22 +23,22 @@ Replay vision can watch the recordings from an experiment and describe how users
 3. Quantify the differences.
 
 #### Warehouse-native experiments <TeamMember name="Juraj Majerik" photo />
-Let customers run experiments on data in their own warehouse (BigQuery, Snowflake). Large customers with an established warehouse need this before they can use us for flags and experiments.
+Let customers run experiments on data in their own warehouse.
 - Talk to the customers who asked for this.
 - Build a working prototype against one warehouse.
 - Add simple pricing for it.
-- Make the UI agent-first: use agents to help the user write the final query.
+- Make the UI agent-first: use agents to help the user write the metric query.
 
-#### Optimize compute costs <TeamMember name="Juraj Majerik" photo /> <TeamMember name="Rodrigo Iloro" photo />
+#### Optimize compute costs <TeamMember name="Rodrigo Iloro" photo />
 - Stop recomputing results daily for every experiment. (Juraj)
 - Add a cooldown period before manual refreshes. (Rodrigo)
 
 #### Prompts <TeamMember name="Juraj Majerik" photo />
-Keep adding the most requested features. Make sure power users have a great experience.
+- Keep adding the most requested features. Make sure power users have a great experience.
 - Improve the Playground. Get it to feature parity with relevant competitors.
 
 #### Prompt experiments: find out why traction is low <TeamMember name="Ruby Childs" photo />
-Prompts are growing fast, but few users run experiments on them. Research what is blocking adoption before we build more. Align this with the MCP work.
+Prompts are growing fast, but few users run experiments on them. Research what is blocking adoption before we build more.
 
 #### Positioning: sell experiments better <TeamMember name="Ruby Childs" photo />
 We build a lot but we do not tell the story well. Improve how we present experiments to the outside world:
