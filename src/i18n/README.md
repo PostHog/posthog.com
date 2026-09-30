@@ -60,7 +60,7 @@ The interactive demos on the home page show the PostHog app, and the app is in E
 
 1. Add the key and the English text to `locales/en.yml`.
 2. Call `t()` or `rich()` with the key.
-3. Add the translation to each file in `locales/` that has one. If you do not know the translation, leave the key out. The page shows English until someone adds it.
+3. Add the translation to each file in `locales/` that has one. Follow the style rules in the comment at the top of each file. If you do not know the translation, leave the key out. The page shows English until someone adds it.
 
 The build warns about a key in a translation file that `en.yml` does not have. In development, the browser console warns about a key that `en.yml` does not have.
 
@@ -68,7 +68,7 @@ The build warns about a key in a translation file that `en.yml` does not have. I
 
 1. Copy `locales/pt.yml` to `locales/<code>.yml`. Use the ISO 639-1 code, for example `es`.
    If the text is for one region, set `lang` to the full tag, for example `lang: pt-BR`. `lang` goes into `<html lang>` and hreflang. The URL keeps the short code.
-2. Translate the values. Keep the keys and the tags.
+2. Replace the style rules in the comment at the top with the rules for the new language. Then translate the values. Keep the keys and the tags.
 3. Add the code to `TRANSLATED_LOCALES` in `middleware.ts`. The Edge runtime cannot read YAML. `pnpm test:middleware` fails when the list and the files disagree.
 4. Restart `pnpm start`. The dev server reads the YAML files only when it starts.
 
