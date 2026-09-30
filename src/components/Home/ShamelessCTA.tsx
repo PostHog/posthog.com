@@ -13,7 +13,7 @@ export const ShamelessCTA = () => {
         <>
             <p className="-mt-2 mb-12 @md:mb-12 @md:me-[245px]">{t('section.8.body')}</p>
             <div className="relative" ref={ref}>
-                <div className="absolute top-0 -translate-y-[40%] @md:-translate-y-[60%] right-4 @md:right-12 max-w-[120px] @md:max-w-[185px] -z-10">
+                <div className="absolute top-0 -translate-y-[40%] @md:-translate-y-[60%] end-4 @md:end-12 max-w-[120px] @md:max-w-[185px] -z-10">
                     <motion.div
                         initial={{ opacity: 0, y: '100%' }}
                         animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: '100%' }}

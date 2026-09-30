@@ -20,7 +20,7 @@ export const HomeHappyHog = () => (
 export const ImageDW = () => (
     <HedgehogSailorHog
         size={220}
-        className="relative -top-[12px] ms-auto @lg:-right-5 -mb-[85px] -scale-x-100 @lg:ms-12"
+        className="relative -top-[12px] ms-auto @lg:-end-5 -mb-[85px] -scale-x-100 @lg:ms-12"
     />
 )
 
