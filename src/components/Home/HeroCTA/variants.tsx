@@ -146,7 +146,7 @@ const SIGNUP_CARD_POINTS = [
 
 const SignupCard = ({ actions, footer }: { actions: React.ReactNode; footer?: React.ReactNode }) => {
     return (
-        <div className="not-prose w-full max-w-md min-w-0 text-left border border-primary rounded-md bg-primary shadow-2xl">
+        <div className="not-prose w-full max-w-md min-w-0 text-start border border-primary rounded-md bg-primary shadow-2xl">
             <div className="p-4 space-y-3">
                 <h3 className="!text-lg font-bold text-primary m-0 flex items-center gap-2">
                     Set up
@@ -248,7 +248,7 @@ const VariantInstallDialog = () => {
     return (
         <div
             className={cn(
-                'not-prose w-full max-w-md min-w-0 text-left border border-primary rounded-md bg-primary shadow-2xl overflow-hidden',
+                'not-prose w-full max-w-md min-w-0 text-start border border-primary rounded-md bg-primary shadow-2xl overflow-hidden',
                 entrance
             )}
         >
@@ -287,7 +287,7 @@ const VariantInstallDialog = () => {
  * ---------------------------------------------------------------------------------------------- */
 
 const VariantMinimal = () => (
-    <div className="not-prose w-full max-w-sm min-w-0 text-left">
+    <div className="not-prose w-full max-w-sm min-w-0 text-start">
         <SignupButton width="full">Get started – free</SignupButton>
 
         {/* "or" sits outside the copy field so the field itself stays a clean, obvious click target. */}

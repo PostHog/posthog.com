@@ -157,7 +157,7 @@ export default function AskAnythingDemo() {
                     <div className="ai-demo-prompt pt-[3.1cqw] px-[1.3cqw] pb-0 text-[3cqw] leading-[1.4]">
                         {typedQuestion || <span className="text-secondary">Describe the task in detail...</span>}
                         {typedQuestion && time < 4200 && (
-                            <span className="ai-demo-caret inline-block h-[1em] ml-[0.15em] border-r border-current align-[-0.12em]" />
+                            <span className="ai-demo-caret inline-block h-[1em] ms-[0.15em] border-e border-current align-[-0.12em]" />
                         )}
                     </div>
                     <div className="ai-demo-composer-footer absolute bottom-[1.8cqw] left-[1.8cqw] right-[1.3cqw] flex items-end gap-[1cqw]">
@@ -167,7 +167,7 @@ export default function AskAnythingDemo() {
                         <span className="ai-demo-select border border-primary inline-flex items-center gap-[0.8cqw] whitespace-nowrap leading-none font-semibold bg-primary p-[1cqw] rounded-[0.7cqw] text-[2.5cqw] [&>svg:last-child]:!w-[0.7em] [&>svg:last-child]:ml-[0.5cqw]">
                             Default · Claude Sonnet 5 High <IconChevronDown />
                         </span>
-                        <span className="ai-demo-send border border-yellow text-secondary flex items-center justify-center ml-auto w-[7.6cqw] h-[6.1cqw] rounded-[1.3cqw] shadow-[0_0.55cqw_0_rgb(var(--input-border))] [&_svg]:!size-[3.6cqw] group-data-[submitting=true]/composer:bg-yellow group-data-[submitting=true]/composer:text-black">
+                        <span className="ai-demo-send border border-yellow text-secondary flex items-center justify-center ms-auto w-[7.6cqw] h-[6.1cqw] rounded-[1.3cqw] shadow-[0_0.55cqw_0_rgb(var(--input-border))] [&_svg]:!size-[3.6cqw] group-data-[submitting=true]/composer:bg-yellow group-data-[submitting=true]/composer:text-black">
                             <IconArrowRight />
                         </span>
                     </div>
@@ -195,7 +195,7 @@ export default function AskAnythingDemo() {
                     <PostHogMark /> <strong>PostHog AI</strong>
                     <span>Sample data</span>
                 </div>
-                <div className="ai-demo-question border border-primary bg-accent mt-[2.2cqw] mr-0 mb-[2.4cqw] ml-auto py-[1.6cqw] px-[2cqw] w-[85%] rounded-[1.5cqw] font-semibold text-[2.7cqw]">
+                <div className="ai-demo-question border border-primary bg-accent mt-[2.2cqw] me-0 mb-[2.4cqw] ms-auto py-[1.6cqw] px-[2cqw] w-[85%] rounded-[1.5cqw] font-semibold text-[2.7cqw]">
                     {QUESTION}
                 </div>
                 <p className="ai-demo-intro m-0 mb-[2cqw] text-[2.6cqw]">
@@ -228,7 +228,7 @@ export default function AskAnythingDemo() {
                                     <strong>{tool.label}</strong>
                                     <span>{done ? tool.result : tool.action}</span>
                                 </div>
-                                <span className="ai-demo-tool-status flex justify-center w-[3cqw] ml-auto">
+                                <span className="ai-demo-tool-status flex justify-center w-[3cqw] ms-auto">
                                     {done ? (
                                         <IconCheck className="text-green" />
                                     ) : (

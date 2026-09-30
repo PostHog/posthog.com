@@ -100,8 +100,8 @@ export default function ProductContextDemo({ nodes: nodeConfig = DEFAULT_NODES }
                                 x === HUB_X
                                     ? 'justify-center'
                                     : x < HUB_X
-                                    ? 'justify-end pr-[1.2cqw]'
-                                    : 'justify-start pl-[1.2cqw]'
+                                    ? 'justify-end pe-[1.2cqw]'
+                                    : 'justify-start ps-[1.2cqw]'
                             }`}
                         >
                             {product.Icon && (

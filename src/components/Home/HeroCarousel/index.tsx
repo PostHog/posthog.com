@@ -99,8 +99,8 @@ export default function HeroCarousel({
 
                     <div
                         className={`min-h-[300px] @[820px]:min-h-[400px] p-2 @sm:rounded-b-md @sm:rounded-t-md ${
-                            isFirst ? '@sm:rounded-tl-none' : ''
-                        } ${isLast ? '@sm:rounded-tr-none' : ''} relative ${activeColor} flex @sm:transition-colors`}
+                            isFirst ? '@sm:rounded-ss-none' : ''
+                        } ${isLast ? '@sm:rounded-se-none' : ''} relative ${activeColor} flex @sm:transition-colors`}
                     >
                         <div
                             className={`${

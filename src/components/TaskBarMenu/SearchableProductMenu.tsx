@@ -68,14 +68,14 @@ const SearchableProductMenu: React.FC<SearchableProductMenuProps> = ({ products,
         <div className="p-1 min-w-[280px] max-w-[320px]">
             {/* Search input */}
             <div className="relative mb-2">
-                <IconSearch className="absolute left-2 top-1/2 transform -translate-y-1/2 size-4 text-muted" />
+                <IconSearch className="absolute start-2 top-1/2 transform -translate-y-1/2 size-4 text-muted" />
                 <input
                     ref={inputRef}
                     type="text"
                     placeholder="Search tools..."
                     value={searchTerm}
                     onChange={(e) => setSearchTerm(e.target.value)}
-                    className="w-full !pl-8 pr-3 py-2 text-sm bg-accent border border-input rounded text-primary placeholder-muted focus:outline-none focus:ring-1 focus:ring-blue"
+                    className="w-full !ps-8 pe-3 py-2 text-sm bg-accent border border-input rounded text-primary placeholder-muted focus:outline-none focus:ring-1 focus:ring-blue"
                 />
             </div>
 

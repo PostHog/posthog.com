@@ -9,7 +9,7 @@ export const ShamelessCTA = () => {
 
     return (
         <>
-            <p className="-mt-2 mb-12 @md:mb-12 @md:mr-[245px]">
+            <p className="-mt-2 mb-12 @md:mb-12 @md:me-[245px]">
                 If nothing else has sold you on PostHog, hopefully these classic marketing tactics will.
             </p>
             <div className="relative" ref={ref}>

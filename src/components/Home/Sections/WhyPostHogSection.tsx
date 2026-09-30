@@ -9,7 +9,7 @@ export const WhyPostHogSection = () => (
         <h2>Why PostHog?</h2>
         <CloudinaryImage
             src="https://res.cloudinary.com/dmukukwp6/image/upload/steve_hogs_17c7900b07.png"
-            className="@lg:float-right max-w-[300px] w-full @lg:ml-12 mb-2"
+            className="@lg:float-end max-w-[300px] w-full @lg:ms-12 mb-2"
         />
 
         <Markdown>{`We're different from most companies for a bunch of reasons:

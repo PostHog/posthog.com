@@ -646,7 +646,7 @@ const RoadmapProductDetails = ({
                     <Icon className={`size-8 text-${color} ${colorDark ? 'dark:text-${colorDark}' : ''}`} />
                     <span>{name}</span>
                 </h2>
-                {description && <p className="text-sm opacity-70 ml-10">{description}</p>}
+                {description && <p className="text-sm opacity-70 ms-10">{description}</p>}
                 <div className="mt-4">
                     {isLoading ? (
                         <div className="h-64 bg-accent dark:bg-dark rounded-md animate-pulse" />
@@ -737,7 +737,7 @@ const ProductDetails = ({ product, onNext, onPrev }: { product: Product; onNext:
                     <span>{name}</span>
                     {badge && <span className="bg-accent rounded-md px-2 py-1 text-sm">{badge}</span>}
                 </h2>
-                {description && <p className="text-sm opacity-70 ml-10">{description}</p>}
+                {description && <p className="text-sm opacity-70 ms-10">{description}</p>}
                 {Images && (
                     <div className="-mb-32 h-[350px] relative">
                         <div className="absolute inset-0 w-full h-full">
@@ -791,7 +791,7 @@ const ProductDetails = ({ product, onNext, onPrev }: { product: Product; onNext:
                                 </div>
                             ))}
                     </div>
-                    <div className="md:ml-auto">
+                    <div className="md:ms-auto">
                         <CallToAction type="outline" size="sm" to={pricing?.cta?.url || '/pricing'}>
                             {pricing?.cta?.text || 'Explore'}
                         </CallToAction>
@@ -899,10 +899,10 @@ const ProductButton = ({
                                 }}
                             >
                                 <Icon className={`size-5 text-${color} ${colorDark ? 'dark:text-${colorDark}' : ''}`} />
-                                <div className="text-left">
-                                    <span className="text-left">{name}</span>
+                                <div className="text-start">
+                                    <span className="text-start">{name}</span>
                                     <span
-                                        className={`inline-block mt-1.5 ml-1 size-2 bg-${statusColor} rounded-full`}
+                                        className={`inline-block mt-1.5 ms-1 size-2 bg-${statusColor} rounded-full`}
                                     />
                                 </div>
                             </button>
@@ -1053,7 +1053,7 @@ export default function Hero(): JSX.Element {
                         )}
                     </ul>
 
-                    <div className="mr-8 mx-4 md:mx-0">
+                    <div className="me-8 mx-4 md:mx-0">
                         <p className="text-sm text-secondary mt-8 pb-3 mb-0">
                             Each product offers the lowest pricing vs. every competitor at scale.
                         </p>

@@ -123,7 +123,7 @@ function TaskBarMenu() {
                                     <IconUser className="size-6" />
                                 )}
                                 {notifications?.length > 0 && (
-                                    <span className="absolute top-4 -right-1 size-2.5 bg-red border border-bg-primary rounded-full" />
+                                    <span className="absolute top-4 -end-1 size-2.5 bg-red border border-bg-primary rounded-full" />
                                 )}
                             </div>
                         </>
@@ -371,7 +371,7 @@ function TaskBarMenu() {
                         ]}
                         className="[&_button]:px-2"
                     /> */}
-                            <div className="relative mr-1">
+                            <div className="relative me-1">
                                 <OSButton
                                     variant="primary"
                                     size="md"

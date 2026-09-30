@@ -51,7 +51,7 @@ const SecondaryActions = ({
             state={{ newWindow: true }}
             className="text-secondary hover:text-primary"
         >
-            <IconMCP className="size-4 mr-1 inline-block relative -top-px" />
+            <IconMCP className="size-4 me-1 inline-block relative -top-px" />
             <span className="underline font-semibold">MCP</span>
         </Link>
         <span className="text-secondary">•</span>
@@ -60,12 +60,12 @@ const SecondaryActions = ({
             state={demoNewWindow ? { newWindow: true } : undefined}
             className="text-secondary hover:text-primary"
         >
-            <IconPlayFilled className="size-4 mr-1 inline-block relative -top-px" />
+            <IconPlayFilled className="size-4 me-1 inline-block relative -top-px" />
             <span className="underline font-semibold">Watch a demo</span>
         </Link>
         <span className="text-secondary">•</span>
         <Link to="/talk-to-a-human" state={{ newWindow: true }} className="text-secondary hover:text-primary">
-            <IconHeadset className="size-4 mr-1 inline-block relative -top-px" />
+            <IconHeadset className="size-4 me-1 inline-block relative -top-px" />
             <span className="underline font-semibold">Talk to a human</span>
         </Link>
     </p>
@@ -132,7 +132,7 @@ export const CTAs = () => {
 function Hero(): JSX.Element {
     return (
         <>
-            <div className="text-center @xl:text-left min-w-0">
+            <div className="text-center @xl:text-start min-w-0">
                 <div className="[&_p]:m-0 flex gap-1 flex-wrap justify-center @xl:justify-start !text-2xl mb-12 pt-2">
                     <Logo className="max-w-[157px] dark:hidden" width="auto" />
                     <Logo className="hidden max-w-[157px] dark:block" variant="mono" color="white" width="auto" />

@@ -65,7 +65,7 @@ const Feature = ({ title, icon, url }) => {
                 href={url}
                 className="flex flex-col py-4 px-6 h-full space-y-1 font-semibold items-center justify-start text-black hover:text-black rounded hover:bg-primary"
             >
-                <Icon className="w-5 h-5 mr-1 md:mr-0" name={icon} />
+                <Icon className="w-5 h-5 me-1 md:me-0" name={icon} />
                 <div className="text-[14px] lg:text-[15px] mt-2 leading-tight">{title}</div>
             </a>
         </li>
@@ -168,7 +168,7 @@ const WhitepaperBanner = ({ onClose }) => {
                                         <div className="grid gap-4 grid-cols-2">
                                             {options.map((option) => (
                                                 <label key={option} className="flex items-center space-x-1">
-                                                    <input type="radio" name={name} value={option} className="mr-2" />
+                                                    <input type="radio" name={name} value={option} className="me-2" />
                                                     {option}
                                                 </label>
                                             ))}
@@ -188,7 +188,7 @@ const WhitepaperBanner = ({ onClose }) => {
                             id="blackPaperCheckbox"
                             checked={blackPaper}
                             onChange={() => setBlackPaper(!blackPaper)}
-                            className="mr-2"
+                            className="me-2"
                         />
                         <label htmlFor="blackPaperCheckbox">Opt for blackpaper</label>
                         <p className="text-xs m-0">(Same as white paper but with a black background)</p>
@@ -235,7 +235,7 @@ export default function Hero() {
         <>
             <Modal open={showNPS} setOpen={handleCloseNPS}>
                 <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 bg-white w-[300px] dark:bg-border-dark p-4 rounded-md border border-input">
-                    <div className="float-right ml-4">
+                    <div className="float-end ms-4">
                         <button onClick={handleCloseNPS}>
                             <IconX className="w-4 h-4" />
                         </button>
@@ -280,7 +280,7 @@ export default function Hero() {
                                     key={word}
                                     className={`${
                                         index > 1 ? 'text-red dark:text-yellow' : ''
-                                    } ml-4 first:ml-0 inline-block`}
+                                    } ms-4 first:ms-0 inline-block`}
                                 >
                                     {word}
                                 </span>
