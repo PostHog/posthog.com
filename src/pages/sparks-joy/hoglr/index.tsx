@@ -20,6 +20,8 @@ import {
 import Editor from 'components/Editor'
 import Link from 'components/Link'
 import SEO from 'components/seo'
+import { useAppActions } from '../../../context/App'
+import { useWindow } from '../../../context/Window'
 
 const postTypes = [
     { label: 'Text', Icon: IconPencil },
@@ -33,20 +35,23 @@ const postTypes = [
 
 const posts: {
     author: string
+    username: string
     lastName?: string
-    rebloggedFrom?: string
+    rebloggedUsername?: string
     image: string
     imageAlt: string
 }[] = [
     {
         author: 'James',
+        username: 'dogsdontneedlicenses',
         lastName: 'Hawkins',
         image: '/images/sparks-joy/hoglr/james-pivot.webp',
         imageAlt: 'A parody pull request to stop James from building Uber for Dogs, with dogs as the drivers.',
     },
     {
         author: 'Lottie',
-        rebloggedFrom: 'Charles',
+        username: 'marmitelover4life',
+        rebloggedUsername: 'letmecook',
         image: '/images/sparks-joy/hoglr/dictator-or-tech-bro.webp',
         imageAlt: 'Two Hoggie characters dressed as a tech bro and a dictator for the quiz.',
     },
@@ -59,6 +64,8 @@ type TeamMember = {
 }
 
 export default function Hoglr(): JSX.Element {
+    const { closeWindow } = useAppActions()
+    const { appWindow } = useWindow()
     const {
         team: { teamMembers },
     } = useStaticQuery<{ team: { teamMembers: TeamMember[] } }>(graphql`
@@ -91,7 +98,7 @@ export default function Hoglr(): JSX.Element {
             <Editor maxWidth="100%" hasPadding={false} className="bg-navy">
                 <div className="not-prose @container min-h-screen bg-blue-2/20 text-light-1">
                     <header className="bg-navy/30">
-                        <div className="mx-auto flex max-w-[56.25rem] items-center justify-between gap-4 px-3 py-1 @lg:px-5">
+                        <div className="mx-auto flex max-w-[56.25rem] items-center justify-between gap-4 py-1 pl-3 pr-10 @lg:pl-5 @lg:pr-12 @3xl:pr-5">
                             <h1 className="shrink-0 font-serif text-[3rem] font-black leading-none tracking-tight">
                                 hoglr
                             </h1>
@@ -99,7 +106,7 @@ export default function Hoglr(): JSX.Element {
                                 aria-label="Hoglr navigation"
                                 className="flex items-center gap-3 text-[11px] font-semibold @3xl:gap-5"
                             >
-                                <span className="text-light-1">Dashboard</span>
+                                <span className="hidden text-light-1 @lg:inline">Dashboard</span>
                                 <Link
                                     to="/sparks-joy"
                                     state={{ newWindow: true }}
@@ -107,15 +114,54 @@ export default function Hoglr(): JSX.Element {
                                 >
                                     Sparks Joy
                                 </Link>
-                                <span
-                                    aria-hidden="true"
-                                    className="hidden items-center gap-2 text-light-2/70 @lg:flex @3xl:gap-4"
-                                >
-                                    <IconPlus className="hidden size-4 @3xl:block" />
-                                    <IconMessage className="hidden size-4 @3xl:block" />
-                                    <IconQuestion className="size-4" />
-                                    <IconGear className="size-4" />
-                                    <span className="hidden text-xl leading-none @3xl:inline">⏻</span>
+                                <span className="flex items-center gap-1 text-light-2/70 @lg:gap-2 @3xl:gap-4">
+                                    <Link
+                                        to="/paint"
+                                        state={{ newWindow: true }}
+                                        aria-label="Create with HogPaint"
+                                        title="Create with HogPaint"
+                                        className="flex size-7 items-center justify-center"
+                                    >
+                                        <IconPlus aria-hidden="true" className="size-4" />
+                                    </Link>
+                                    <Link
+                                        to="/talk-to-a-human"
+                                        state={{ newWindow: true }}
+                                        aria-label="Contact sales"
+                                        title="Contact sales"
+                                        className="flex size-7 items-center justify-center"
+                                    >
+                                        <IconMessage aria-hidden="true" className="size-4" />
+                                    </Link>
+                                    <Link
+                                        to="/docs"
+                                        state={{ newWindow: true }}
+                                        aria-label="Read PostHog docs"
+                                        title="Read PostHog docs"
+                                        className="flex size-7 items-center justify-center"
+                                    >
+                                        <IconQuestion aria-hidden="true" className="size-4" />
+                                    </Link>
+                                    <Link
+                                        to="/display-options"
+                                        state={{ newWindow: true }}
+                                        aria-label="Display options"
+                                        title="Display options"
+                                        className="flex size-7 items-center justify-center"
+                                    >
+                                        <IconGear aria-hidden="true" className="size-4" />
+                                    </Link>
+                                    <button
+                                        type="button"
+                                        onClick={() => appWindow && closeWindow(appWindow)}
+                                        aria-label="Close Hoglr"
+                                        title="Close Hoglr"
+                                        className="flex size-7 cursor-pointer items-center justify-center"
+                                    >
+                                        <span aria-hidden="true" className="text-xl leading-none">
+                                            ⏻
+                                        </span>
+                                    </button>
                                 </span>
                             </nav>
                         </div>
@@ -165,14 +211,12 @@ export default function Hoglr(): JSX.Element {
                                             <div className="relative min-w-0 flex-1 rounded-md bg-light-1 px-3 py-3 text-navy shadow-sm before:absolute before:-left-1 before:top-5 before:size-2 before:rotate-45 before:bg-light-1 @lg:px-4">
                                                 <div className="flex flex-wrap items-center justify-between gap-x-2 text-[11px] text-light-9">
                                                     <span>
-                                                        <span className="font-semibold underline">
-                                                            {post.author.toLowerCase()}
-                                                        </span>{' '}
-                                                        {post.rebloggedFrom && (
+                                                        <span className="font-semibold underline">{post.username}</span>{' '}
+                                                        {post.rebloggedUsername && (
                                                             <>
                                                                 reblogged{' '}
                                                                 <span className="font-semibold underline">
-                                                                    {post.rebloggedFrom.toLowerCase()}
+                                                                    {post.rebloggedUsername}
                                                                 </span>
                                                             </>
                                                         )}
@@ -183,7 +227,7 @@ export default function Hoglr(): JSX.Element {
                                                         <IconHeart className="size-3" />
                                                     </span>
                                                 </div>
-                                                {post.rebloggedFrom && (
+                                                {post.rebloggedUsername && (
                                                     <div className="mt-3 space-y-2 text-xs leading-relaxed">
                                                         <p className="m-0">
                                                             Now we've got PostHog's Series E out of the way, I would
