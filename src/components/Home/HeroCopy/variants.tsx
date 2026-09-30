@@ -37,7 +37,7 @@ export const HeroBodyCopy = (): JSX.Element => {
 
     return (
         <Paragraph>
-            {rich('home.hero.body', {
+            {rich('hero.body.1', {
                 highlight: (text) => <Highlight>{text}</Highlight>,
                 underline: (text) => <Underline delay={900}>{text}</Underline>,
             })}

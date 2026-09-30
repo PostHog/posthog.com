@@ -139,7 +139,7 @@ const VariantControl = () => {
     )
 }
 
-const SIGNUP_CARD_POINTS = ['home.cta.pays_zero', 'home.cta.no_card', 'home.cta.wizard']
+const SIGNUP_CARD_POINTS = ['hero.cta.body.1', 'hero.cta.body.2', 'hero.cta.body.3']
 
 const SignupCard = ({ actions, footer }: { actions: React.ReactNode; footer?: React.ReactNode }) => {
     const { t, rich } = useTranslation()
@@ -148,7 +148,7 @@ const SignupCard = ({ actions, footer }: { actions: React.ReactNode; footer?: Re
         <div className="not-prose w-full max-w-md min-w-0 text-left border border-primary rounded-md bg-primary shadow-2xl">
             <div className="p-4 space-y-3">
                 <h3 className="!text-lg font-bold text-primary m-0 flex items-center gap-2">
-                    {rich('home.cta.title', {
+                    {rich('hero.cta.heading', {
                         logo: () => <PostHogMark size={30} />,
                         highlight: (text) => (
                             <RoughAnnotation
@@ -176,7 +176,7 @@ const CommandPanel = () => {
 
     return (
         <div className="border-t border-primary bg-accent px-4 py-3 rounded-b space-y-1.5">
-            <p className="!text-xs text-secondary m-0">{t('home.cta.terminal')}</p>
+            <p className="!text-xs text-secondary m-0">{t('hero.cta.button.2.body')}</p>
             <ClickableCommand />
         </div>
     )
@@ -202,7 +202,7 @@ const VariantDualCta = () => {
                     <div className="flex flex-col @[340px]:flex-row gap-2">
                         <div className="flex-1 min-w-0">
                             <SignupButton width="full" childClassName="whitespace-nowrap">
-                                {t('home.cta.get_started')}
+                                {t('hero.cta.button.1')}
                             </SignupButton>
                         </div>
                         <div className="flex-1 min-w-0">
@@ -212,7 +212,7 @@ const VariantDualCta = () => {
                                 width="full"
                                 onClick={() => setShowCommand((current) => !current)}
                             >
-                                <span className="whitespace-nowrap">{t('home.cta.install_with_ai')}</span>
+                                <span className="whitespace-nowrap">{t('hero.cta.button.2.label')}</span>
                             </CallToAction>
                         </div>
                     </div>

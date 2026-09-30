@@ -16,6 +16,16 @@ English ships in the JS bundle, so every page can show it. A translation ships o
 
 Each window gets the language of its own page. The taskbar and the desktop get the language of the current page.
 
+## Keys
+
+The keys match the labels in the home page translation spec: `meta.*`, `hero.*`, `section.<n>.*`, and `cookie.*`. For example, `hero.cta.button.1` is the "Get started" button in the hero. The YAML nests them, so `hero.cta.button.1` is `hero:` → `cta:` → `button:` → `1:`.
+
+Some labels in the spec are also the start of other labels, for example `hero.cta.button.2` and `hero.cta.button.2.body`. YAML cannot nest these, so the text of the shorter label goes under `label`: `hero.cta.button.2.label`.
+
+In the spec, text in `<…>` is not translated. Write it as-is inside the translation. A label that is only `<…>`, such as a product name or a command, has no key.
+
+`meta.title` and `meta.description` also fill the Open Graph and Twitter tags.
+
 ## Use it in a component
 
 ```tsx
@@ -26,8 +36,8 @@ const Example = () => {
 
     return (
         <>
-            <h2>{t('home.hero.social_proof')}</h2>
-            <p>{rich('home.hero.body', { highlight: (text) => <mark>{text}</mark> })}</p>
+            <h2>{t('hero.body.2')}</h2>
+            <p>{rich('hero.body.1', { highlight: (text) => <mark>{text}</mark> })}</p>
         </>
     )
 }
