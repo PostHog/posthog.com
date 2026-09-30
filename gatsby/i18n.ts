@@ -33,7 +33,11 @@ export function createLocalizedHomePages(page: Page, { createPage, deletePage }:
     const translations = locales.filter(({ code }) => code !== 'en')
     const languageAlternates = [
         { hrefLang: 'en', href: '/' },
-        ...translations.map(({ code, lang }) => ({ hrefLang: lang, href: `/${code}` })),
+        // A regional translation is also listed under its bare code, so pt.yml (lang: pt-BR) serves every
+        // Portuguese speaker in search, not only those in Brazil.
+        ...translations.flatMap(({ code, lang }) =>
+            (lang === code ? [code] : [code, lang]).map((hrefLang) => ({ hrefLang, href: `/${code}` }))
+        ),
         { hrefLang: 'x-default', href: '/' },
     ]
 

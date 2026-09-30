@@ -54,6 +54,8 @@ Product names stay in English in every locale, for example "Product analytics", 
 
 When a translated sentence contains a product name, write the name in English inside the translation.
 
+The interactive demos on the home page show the PostHog app, and the app is in English. So app UI inside a demo stays in English too: composer placeholders, buttons, chips, empty states, timestamps, and the Inbox reports. Translate only the prose around the app, the chat conversation (PostHog AI answers in the language you ask in), and the screen-reader descriptions of the demos.
+
 ## Add a string
 
 1. Add the key and the English text to `locales/en.yml`.
