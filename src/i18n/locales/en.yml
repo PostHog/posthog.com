@@ -5,6 +5,18 @@
 # App UI inside the interactive demos (buttons, placeholders, chips, the Inbox) is English on every locale, so it has no key.
 # <tag>…</tag> and <tag/> are markup that components fill in. Keep them, but move them with their words.
 # {name} is a value that components fill in. Keep it as-is.
+#
+# Style rules for this locale. Follow them when you add or change a string, and add a rule here when a
+# review comment applies to more than one string. See the translate skill in .claude/skills/translate and
+# contents/handbook/content/posthog-style-guide.md.
+#
+# - Write like a dev talks to another dev: direct, casual, and funny. Say what the product does, with no SaaS-speak.
+# - PostHog takes no article: "PostHog collects", "Install PostHog", not "the PostHog".
+# - Use American English, sentence case for headings, and the Oxford comma.
+# - Use an en dash with a space on each side ( – ), not an em dash or a hyphen.
+# - Capitalize a product name ("Session Replay"), but not the general term ("session replay tools").
+# - Jokes can be US-centric here. Each locale replaces them with its own references.
+# - Cut words the sentence does not need. Every other locale translates from this file, so keep it short.
 name: English
 messages:
     meta:
