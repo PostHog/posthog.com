@@ -1,6 +1,6 @@
 import React from 'react'
 import { cn } from '../../../utils'
-import { useTranslation } from '../../../i18n'
+import { useTranslation } from 'i18n'
 import { HeroBodyCopy } from './variants'
 
 /** The emphasis clause is the one that gets the blue highlight treatment. */

@@ -3,7 +3,6 @@
 name: English
 messages:
     home:
-        window_title: home.mdx
         seo:
             title: PostHog - your product’s context layer
             description: PostHog automatically diagnoses problems, fixes bugs, and generates pull requests – all without you having to prompt it.

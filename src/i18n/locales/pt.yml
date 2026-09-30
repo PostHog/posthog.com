@@ -4,7 +4,6 @@ name: Português (Brasil)
 lang: pt-BR
 messages:
     home:
-        window_title: início.mdx
         seo:
             title: PostHog - a camada de contexto do seu produto
             description: O PostHog diagnostica problemas, corrige bugs e gera pull requests automaticamente, sem que você precise pedir.
