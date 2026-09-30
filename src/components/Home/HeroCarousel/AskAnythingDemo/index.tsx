@@ -160,10 +160,10 @@ export default function AskAnythingDemo() {
                         )}
                     </div>
                     <div className="ai-demo-composer-footer absolute bottom-[1.8cqw] left-[1.8cqw] right-[1.3cqw] flex items-end gap-[1cqw]">
-                        <span className="ai-demo-select border border-primary inline-flex items-center gap-[0.8cqw] whitespace-nowrap leading-none font-semibold bg-primary p-[1cqw] rounded-[0.7cqw] text-[2.5cqw] [&>svg:last-child]:!w-[0.7em] [&>svg:last-child]:ml-[0.5cqw]">
+                        <span className="ai-demo-select border border-primary inline-flex items-center gap-[0.8cqw] whitespace-nowrap leading-none font-semibold bg-primary p-[1cqw] rounded-[0.7cqw] text-[2.5cqw] [&>svg:last-child]:!w-[0.7em] [&>svg:last-child]:ms-[0.5cqw]">
                             <IconShield className="text-green" /> Auto <IconChevronDown />
                         </span>
-                        <span className="ai-demo-select border border-primary inline-flex items-center gap-[0.8cqw] whitespace-nowrap leading-none font-semibold bg-primary p-[1cqw] rounded-[0.7cqw] text-[2.5cqw] [&>svg:last-child]:!w-[0.7em] [&>svg:last-child]:ml-[0.5cqw]">
+                        <span className="ai-demo-select border border-primary inline-flex items-center gap-[0.8cqw] whitespace-nowrap leading-none font-semibold bg-primary p-[1cqw] rounded-[0.7cqw] text-[2.5cqw] [&>svg:last-child]:!w-[0.7em] [&>svg:last-child]:ms-[0.5cqw]">
                             Default · Claude Sonnet 5 High <IconChevronDown />
                         </span>
                         <span className="ai-demo-send border border-yellow text-secondary flex items-center justify-center ms-auto w-[7.6cqw] h-[6.1cqw] rounded-[1.3cqw] shadow-[0_0.55cqw_0_rgb(var(--input-border))] [&_svg]:!size-[3.6cqw] group-data-[submitting=true]/composer:bg-yellow group-data-[submitting=true]/composer:text-black">
@@ -190,7 +190,7 @@ export default function AskAnythingDemo() {
                 aria-hidden="true"
                 data-visible={conversation}
             >
-                <div className="ai-demo-chat-heading flex items-center gap-[1.1cqw] h-[3.6cqw] text-[2.5cqw] [&>span:first-child]:w-[4.8cqw] [&_svg]:!w-full [&_svg]:!h-auto [&>span:last-child]:text-secondary [&>span:last-child]:ml-auto [&>span:last-child]:mr-[4.8cqw] [&>span:last-child]:text-[1.9cqw]">
+                <div className="ai-demo-chat-heading flex items-center gap-[1.1cqw] h-[3.6cqw] text-[2.5cqw] [&>span:first-child]:w-[4.8cqw] [&_svg]:!w-full [&_svg]:!h-auto [&>span:last-child]:text-secondary [&>span:last-child]:ms-auto [&>span:last-child]:me-[4.8cqw] [&>span:last-child]:text-[1.9cqw]">
                     <PostHogMark /> <strong>PostHog AI</strong>
                     <span>Sample data</span>
                 </div>
