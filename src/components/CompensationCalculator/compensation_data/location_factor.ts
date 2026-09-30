@@ -372,7 +372,7 @@ export const locationFactor: CompensationCalculatorLocation[] = [
     {
         country: 'United States',
         area: 'Everywhere else, Mississippi',
-        locationFactor: 0.8,
+        locationFactor: 0.85,
         currency: 'USD',
     },
     {
@@ -396,37 +396,37 @@ export const locationFactor: CompensationCalculatorLocation[] = [
     {
         country: 'United States',
         area: 'Everywhere else, Arkansas',
-        locationFactor: 0.84,
+        locationFactor: 0.85,
         currency: 'USD',
     },
     {
         country: 'United States',
         area: 'Fayetteville, Arkansas',
-        locationFactor: 0.84,
+        locationFactor: 0.85,
         currency: 'USD',
     },
     {
         country: 'United States',
         area: 'Everywhere else, Louisiana',
-        locationFactor: 0.84,
+        locationFactor: 0.85,
         currency: 'USD',
     },
     {
         country: 'United States',
         area: 'New Orleans, Louisiana',
-        locationFactor: 0.84,
+        locationFactor: 0.85,
         currency: 'USD',
     },
     {
         country: 'United States',
         area: 'Oklahoma',
-        locationFactor: 0.84,
+        locationFactor: 0.85,
         currency: 'USD',
     },
     {
         country: 'United States',
         area: 'Everywhere else, Texas',
-        locationFactor: 0.84,
+        locationFactor: 0.85,
         currency: 'USD',
     },
     {

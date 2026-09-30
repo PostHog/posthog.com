@@ -20,9 +20,6 @@ export const Content = () => {
                         dependency – see the <Link to="/docs/distributed-tracing/installation/nodejs">Node.js</Link> and{' '}
                         <Link to="/docs/distributed-tracing/installation/python">Python</Link> guides.
                     </p>
-                    <p>
-                        Distributed tracing is currently in beta. Setup details may change before general availability.
-                    </p>
                 </div>
             </section>
 

@@ -61,6 +61,28 @@
             ]
         },
         {
+            "source": "/.well-known/oauth/:app/client-metadata.json",
+            "headers": [
+                {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                },
+                {
+                    "key": "Cache-Control",
+                    "value": "public, max-age=3600"
+                }
+            ]
+        },
+        {
+            "source": "/.well-known/oauth/:app/logo.png",
+            "headers": [
+                {
+                    "key": "Cache-Control",
+                    "value": "public, max-age=86400"
+                }
+            ]
+        },
+        {
             "source": "/(.*)",
             "headers": [
                 {
@@ -129,6 +151,31 @@
         }
     ],
     "redirects": [
+        {
+            "source": "/pocket-guides/posthog",
+            "destination": "/docs/product-analytics/learn",
+            "statusCode": 301
+        },
+        {
+            "source": "/pocket-guides/posthog/101",
+            "destination": "/docs/product-analytics/learn/101",
+            "statusCode": 301
+        },
+        {
+            "source": "/pocket-guides/product-analytics/:path*",
+            "destination": "/docs/product-analytics/learn/:path*",
+            "statusCode": 301
+        },
+        {
+            "source": "/pocket-guides/ai-observability/:path*",
+            "destination": "/docs/ai-observability/learn/:path*",
+            "statusCode": 301
+        },
+        {
+            "source": "/pocket-guides/session-replay/:path*",
+            "destination": "/docs/session-replay/learn/:path*",
+            "statusCode": 301
+        },
         {
             "source": "/docs/replay-vision/actions:ext(\\.md)?",
             "destination": "/docs/replay-vision/scouts:ext?",
@@ -674,6 +721,11 @@
             "statusCode": 301
         },
         {
+            "source": "/sitemap_index.xml",
+            "destination": "/sitemap/sitemap-index.xml",
+            "statusCode": 301
+        },
+        {
             "source": "/blog/rss.xml",
             "destination": "/rss.xml",
             "statusCode": 301
@@ -906,6 +958,21 @@
         {
             "source": "/docs/api/product-tours:ext(\\.md)?",
             "destination": "/docs/api:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/api/environments.md",
+            "destination": "/docs/api.md",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/api/environments:ext(\\.md)?",
+            "destination": "/docs/api/projects:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/api/environments-:n(\\d+)",
+            "destination": "/docs/api/projects",
             "statusCode": 301
         },
         {
@@ -1883,6 +1950,10 @@
         {
             "source": "/docs/api/people:ext(\\.md)?",
             "destination": "/docs/api/persons:ext?"
+        },
+        {
+            "source": "/docs/api/insights-3:ext(\\.md)?",
+            "destination": "/docs/api/insights:ext?"
         },
         {
             "source": "/handbook/engineering/k8s-overview",

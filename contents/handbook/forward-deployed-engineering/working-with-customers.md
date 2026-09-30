@@ -17,11 +17,11 @@ A deliverable is finished when a stranger on the customer's team could pick it u
 3. **What does the customer do next?** Specific, ordered, and assigned to named people.
 4. **What did we assume, and what's out of scope?** Calibrates expectations and protects against scope creep on the next iteration.
 
-Write in the customer's vocabulary, not ours; their team has to live with the deliverable. Be direct: "use X" beats "you may want to consider X."
+Write in the customer's vocabulary, not ours; their team has to live with the deliverable. Be direct: "use X" beats "you may want to consider X." Please also read our [working with AI principles](/handbook/forward-deployed-engineering/working-with-ai) before shipping a deliverable.
 
 ### Foundations before dashboards
 
-Most analytics engagements have a hidden trap: dashboards are the visible deliverable, so there's pressure to build them first, but they're only as trustworthy as the data layer underneath. Built on a half-joined identity layer or a partially instrumented event stream, a dashboard won't throw an error. It'll show a number that looks right and isn't, which is worse than no dashboard at all, because the customer will make real decisions on it.
+Most analytics-related engagements have a hidden trap: dashboards are the visible deliverable, so there's pressure to build them first, but they're only as trustworthy as the data layer underneath. Built on a half-joined identity layer or a partially instrumented event stream, a dashboard won't throw an error. It'll show a number that looks right and isn't, which is worse than no dashboard at all, because the customer will make real decisions on it.
 
 So we work in order:
 

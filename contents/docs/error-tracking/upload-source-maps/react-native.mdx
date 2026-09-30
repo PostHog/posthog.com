@@ -223,14 +223,17 @@ If you are not using the Expo plugin (step 1), you will need to also disable Use
 
 The steps above upload **JavaScript** source maps, which symbolicate exceptions thrown in your JS/TS code (including Hermes bytecode). They do **not** cover native iOS and Android crashes.
 
-If you enable [native crash autocapture](/docs/libraries/react-native#native-crash-autocapture) (`errorTracking.autocapture.nativeCrashes`), you also need to upload **native** debug symbols at build time so those crash reports are readable. This reuses the native PostHog SDKs' own tooling:
+If you enable [native crash autocapture](/docs/libraries/react-native#native-crash-autocapture) (`errorTracking.autocapture.nativeCrashes`, `errorTracking.autocapture.androidNdkCrashes`, or both), you also need to upload **native** debug symbols at build time so those crash reports are readable. This reuses the native PostHog SDKs' own tooling:
 
-- **iOS** – upload dSYMs via posthog-ios's `upload-symbols.sh`, which runs `posthog-cli dsym upload`. You can optionally include native source files for source-code context around crashes.
-- **Android** – upload ProGuard/R8 mapping files via the official [`com.posthog.android` Gradle plugin](/docs/error-tracking/upload-mappings/android), which also injects a matching map-id into the app.
+| Platform | Crashes | Symbols | Uploaded by |
+| --- | --- | --- | --- |
+| iOS | All native crashes (`nativeCrashes`) | dSYMs | posthog-ios's `upload-symbols.sh` (`posthog-cli dsym upload`) |
+| Android | Java/Kotlin crashes (`nativeCrashes`) | ProGuard/R8 mapping files, for minified release builds | The [`com.posthog.android` Gradle plugin](/docs/error-tracking/upload-mappings/android), which also injects a matching map-id into the app |
+| Android | C/C++ (NDK) crashes (`androidNdkCrashes`) | `.so` debug symbols | The same Gradle plugin |
 
-<CalloutBox icon="IconInfo" title="Source-code context is iOS only" type="fyi">
+<CalloutBox icon="IconInfo" title="Source-code context" type="fyi">
 
-Including native source files for source-code context (`includeSource` / `POSTHOG_INCLUDE_SOURCE`) is supported on **iOS only**. The Android ProGuard/R8 mapping upload has no source-inclusion equivalent, so the option is ignored on Android.
+`includeSource` (or `POSTHOG_INCLUDE_SOURCE` on iOS) also uploads your native source files. On iOS, crash frames then show the surrounding code. On Android, it uploads your C/C++ sources with the `.so` debug symbols. Java/Kotlin crashes have no source-code context, because the ProGuard/R8 mapping upload doesn't include sources.
 
 </CalloutBox>
 
@@ -239,14 +242,14 @@ Including native source files for source-code context (`includeSource` / `POSTHO
 Symbolicated native crashes need all three of these working together:
 
 1. **Build-time** – upload native symbols (this section).
-2. **Runtime** – enable [`errorTracking.autocapture.nativeCrashes`](/docs/libraries/react-native#native-crash-autocapture) and install `@posthog/react-native-plugin`.
+2. **Runtime** – enable [`errorTracking.autocapture.nativeCrashes`](/docs/libraries/react-native#native-crash-autocapture) (and `errorTracking.autocapture.androidNdkCrashes` for Android NDK crashes) and install `@posthog/react-native-plugin`.
 3. **Server-side** – enable the **Enable exception autocapture** setting in your project's [error tracking settings](https://app.posthog.com/settings/project-error-tracking#exception-autocapture).
 
 </CalloutBox>
 
 ### Prerequisites
 
-Both platforms upload through `posthog-cli`, which must be installed and authenticated – the same setup covered in the **Download CLI** and **Authenticate** steps above. In CI/CD builds (such as EAS Build), set the `POSTHOG_CLI_API_KEY` and `POSTHOG_CLI_PROJECT_ID` environment variables (and `POSTHOG_CLI_HOST` for EU). See [authenticating the CLI](/docs/error-tracking/upload-source-maps/cli) for the full list.
+Both platforms upload through `posthog-cli`, which must be installed and authenticated – the same setup covered in the **Download CLI** and **Authenticate** steps above. The Android `.so` debug symbol upload needs `posthog-cli` 0.7.32 or later. In CI/CD builds (such as EAS Build), set the `POSTHOG_CLI_API_KEY` and `POSTHOG_CLI_PROJECT_ID` environment variables (and `POSTHOG_CLI_HOST` for EU). See [authenticating the CLI](/docs/error-tracking/upload-source-maps/cli) for the full list.
 
 For local builds, the easiest way to supply these credentials is the `dotenvFile` plugin option described in the **Upload** step — it covers the native symbol uploads on both platforms too. On bare React Native, you get the same behavior by adding `posthog.dotenvFile=../.env` to `android/gradle.properties` (relative paths resolve against the `android/` directory; the mapping upload needs `posthog-android-gradle-plugin` 1.4.0 or later) and, on iOS, defining a `POSTHOG_CLI_DOTENV_FILE` build setting (for example `$(SRCROOT)/../.env`) on your app target.
 
@@ -270,9 +273,9 @@ The `posthog-react-native/expo` config plugin can wire up native symbol upload f
 }
 ```
 
-When enabled, `expo prebuild` adds an iOS dSYM-upload build phase and applies the `com.posthog.android` Gradle plugin on Android.
+When enabled, `expo prebuild` adds an iOS dSYM-upload build phase and applies the `com.posthog.android` Gradle plugin on Android. From `posthog-react-native` 4.78.0, it also enables the plugin's Android `.so` debug symbol upload for NDK crashes. If your project was prebuilt earlier with a `com.posthog:posthog-android-gradle-plugin` classpath older than 1.5.0, the next prebuild bumps it.
 
-To additionally upload native source files for source-code context (iOS only), pass an options object instead of `true`:
+To additionally upload native source files, pass an options object instead of `true`. On iOS, this adds source-code context to crash frames. On Android, it bundles the C/C++ sources with the `.so` debug symbols, from `posthog-react-native` 4.78.0:
 
 ```json
 {
@@ -348,6 +351,16 @@ apply plugin: "com.posthog.android"
 ```
 
 The plugin uploads ProGuard/R8 mapping files and injects a matching map-id during your release build, so native Android crash stack traces are deobfuscated.
+
+If you enable `androidNdkCrashes`, also upload the `.so` debug symbols so NDK crash stack traces resolve. This needs the Gradle plugin 1.5.0 or later. Enable the upload in `android/app/build.gradle`:
+
+```gradle file=android/app/build.gradle
+posthog {
+    uploadNativeSymbols.set(true)
+}
+```
+
+See [upload native debug symbols (NDK)](/docs/error-tracking/upload-mappings/android#upload-native-debug-symbols-ndk) for the full options, including source context.
 
 </Tab.Panel>
 </Tab.Panels>
