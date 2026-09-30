@@ -13,7 +13,7 @@ Until products are built and launched, it's hard to predict which ones will do w
 
 Products should fit these criteria before we build them:
 
-- They contribute to our data, or utilize the data we already have
+- They add more data (for example, more events) or different types of data (for example, errors or logs), or utilize the data we already have
 - They have an initial ICP of someone on the product team
   - Ideally, the ICP does not change quickly to someone far removed from the product team
 - They already have $1 Bn competitors on the market, or are in extremely fast growing markets
