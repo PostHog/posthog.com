@@ -1,0 +1,386 @@
+# Modern Standard Arabic. Keys match en.yml. A key that is not here shows the English text.
+#
+# Style rules for this locale. Follow them when you add or change a translation, and add a rule
+# here when a review comment applies to more than one string. See the translate skill in
+# .claude/skills/translate and src/i18n/README.md.
+#
+# - Write clear, sober, and professional Modern Standard Arabic that readers in every Arab country understand.
+#   Never use dialect. Talk to the reader as "أنت" and use the imperative on buttons: "ابدأ مجانًا", "اسأل PostHog عن أي شيء".
+#   PostHog the team speaks as "نحن": "نختلف عن معظم الشركات".
+# - PostHog is masculine and singular: "يجمع PostHog", "كيف يعمل PostHog". Never attach "ال" or a particle to it
+#   ("لـ PostHog", "بـ PostHog"). Use a separate word instead: "في PostHog", "مع PostHog", "من PostHog".
+# - Mixed Arabic and Latin text is hard to read in right-to-left layout. Do not start or end a sentence with a
+#   Latin-script word, a {placeholder}, or a tag that shows Latin text or an icon. Put the verb first:
+#   "يجمع PostHog بياناتك", not "PostHog يجمع بياناتك". A short button or label that ends with a product name is
+#   fine when no other word order works ("ثبّت PostHog MCP").
+# - Keep English terms short and few. Use the Arabic term that devs know: التحليلات، تسجيلات الجلسات (replays)،
+#   الوكلاء (agents)، طلب سحب (pull request)، معالج الإعداد (wizard)، سطر الأوامر (terminal)، التوثيق (docs)،
+#   دليل الشركة (handbook). Keep acronyms, product names, and brand names in Latin script: API، SDK، SQL، MCP،
+#   Session Replay، Inbox، Self-driving، context warehouse.
+# - Use Western digits (0-9) only, never Eastern Arabic digits (٠-٩): "97%", "500,000 فريق". Use a comma for
+#   thousands and a period for decimals. Follow Arabic number agreement: "أكثر من 120 مصدرًا", "5,000 تسجيل".
+# - Write money as the amount, then "دولار", never the "$" sign, which flips in RTL: "0.00005 دولار للحدث".
+#   Joke amounts stay in dollars too, because no single currency works across the Arab world: "خصم 0 دولار".
+# - Use Arabic punctuation: the comma "،", the semicolon "؛", the question mark "؟", and the quotes «». Do not use an
+#   em dash. Use "،" or ":" instead. Join list items with "و" attached to the next word, with no Oxford comma:
+#   "Stripe وPostgres وHubSpot".
+# - Keep the humor light and tasteful. Replace a US reference with one that the whole Arab world knows:
+#   Kim K -> "المؤثرين", a Bond villain -> "شرير في فيلم أبيض وأسود", "hop on a quick call" -> «السعر على الخاص»,
+#   a band name -> a café name, Hillary Clinton -> Ursula the sea witch. Never touch religion, alcohol, dating,
+#   or the politics of the region, and avoid references that only one country knows.
+# - Cut words the sentence does not need. Keep headings, toggles, buttons, and menu labels short.
+name: العربية
+messages:
+    meta:
+        title: PostHog - طبقة السياق لمنتجك
+        description: يشخّص PostHog المشكلات ويصلح الأخطاء وينشئ طلبات السحب تلقائيًا، دون أن تطلب منه ذلك.
+
+    hero:
+        H1: <emphasis>طبقة السياق</emphasis> لمنتجك
+        body:
+            1: يجمع PostHog <highlight>التحليلات والأخطاء وتسجيلات الجلسات وبيانات الأعمال</highlight> ويخزّنها، حتى تتمكن أنت و<underline>وكلاؤك</underline> من الاستعلام عنها والعمل بها.
+            2: انضم إلى أكثر من 500,000 فريق يعتمد على PostHog في إطلاق منتجاته.
+        cta:
+            heading: ثبّت <logo/> <highlight>مجانًا</highlight>
+            body:
+                1: لا يدفع لنا 97% من المستخدمين شيئًا
+                2: بلا بطاقة ائتمان
+                3: معالج الإعداد يثبّت PostHog نيابةً عنك
+            button:
+                1: ابدأ الآن
+                2:
+                    label: ثبّت بالذكاء الاصطناعي
+                    body: 'تفضّل سطر الأوامر؟ استغنِ عن المتصفح:'
+
+    section:
+        2:
+            carousel:
+                pause: إيقاف العرض المتحرك مؤقتًا
+                resume: استئناف العرض المتحرك
+        2a:
+            toggle: اسأل PostHog عن أي شيء
+            heading: اسأل PostHog عن أي شيء
+            body:
+                1: يجمع PostHog بيانات منتجك وشركتك ويخزّنها ويتيح لك الاستعلام عنها، كلها في مكان واحد. التحليلات وتسجيلات الجلسات والأخطاء والسجلات مترابطة لحظيًا، لتجيب عن أي سؤال لديك.
+                2: استورد البيانات من <link>أكثر من {count} مصدر خارجي</link> لترى الصورة كاملة.
+            button: ابدأ مجانًا
+            products:
+                more: و<count/> أخرى
+                caption: تتدفق بيانات {products} إلى وكلائك.
+                label: أدوات PostHog
+                view_all: عرض جميع الأدوات ({count})
+            demo:
+                label: عرض توضيحي لمساعد PostHog AI
+                description: 'عرض توضيحي: يبحث PostHog AI في سبب تراجع التحويلات المدفوعة، مستعينًا بزيارات Google Ads ومسارات التحويل في PostHog ومدفوعات Stripe والتغييرات في GitHub. فيجد حقلًا إلزاميًا إضافيًا في صفحة الدفع على الجوال، ويوصي باختبار صفحة دفع أقصر. كل النتائج بيانات تجريبية.'
+                prompt: لماذا يزداد عدد المسجّلين بينما تتراجع التحويلات المدفوعة؟
+                reply:
+                    1: سأتتبّع المسار من النقر على الإعلان حتى يصبح الزائر عميلًا يدفع.
+                    2: يبدأ التراجع قبل مرحلة الدفع.
+                    3: حقل إلزامي جديد يُفقدنا العملاء في صفحة الدفع على الجوال.
+                    4: جرّب صفحة دفع أقصر على الجوال.
+                step:
+                    1:
+                        body: مقارنة زيارات الحملات
+                        result: زوار أكثر، والجمهور نفسه
+                    2:
+                        body: تحليل مسار التسجيل ← الدفع
+                        result: انسحاب عند الدفع على الجوال
+                    3:
+                        body: مراجعة المدفوعات وحالات الرفض
+                        result: حالات رفض الدفع لم تتغير
+                    4:
+                        body: مراجعة آخر التغييرات في صفحة الدفع
+                        result: أُضيف حقل إلزامي
+
+        2b:
+            toggle: امنح وكلاءك سياق المنتج
+            heading: امنح وكلاءك سياق المنتج
+            body: استعلم عن بيانات منتجك من محرّر الأكواد، دون التنقل إلى المتصفح. أنجز كل شيء، من تحليل سريع إلى إطلاق ميزات جديدة، دون واجهة جديدة.
+            cta:
+                label: ثبّت PostHog MCP
+                alt: أو جرّب <link>PostHog Desktop</link> بدلًا منه
+            demo:
+                agents: وكلاؤك
+
+        2c:
+            toggle: أطلق ميزاتك مع PostHog
+            heading: أطلق ميزاتك مع PostHog
+            body: يجمع صندوق Inbox لديك النتائج المترابطة في تقارير مدروسة ومرتبة حسب الأولوية. راجع التحسينات وطلبات السحب المقترحة، ثم قرّر ما يصل إلى المستخدمين.
+            button: ابدأ مجانًا
+            signals:
+                heading: 'يجمع Self-driving الإشارات من:'
+                1:
+                    body: الاستثناءات وتتبّعات المكدس، مجمّعة في مشكلات
+                2:
+                    body: نقرات بلا استجابة، وعودة سريعة، وتوقف طويل
+                3:
+                    title: الدعم
+                    body: التذاكر والمحادثات مع مستخدميك
+                4:
+                    title: أدوات خارجية
+                    body: مشكلات Zendesk وLinear وGitHub
+            demo:
+                description: 'صندوق Inbox توضيحي في Self-driving. تصل أربعة تقارير تجريبية تباعًا، الأحدث أولًا: طلب فاتورة من GitHub، وفحص لتتبع التحويلات مع مسودة طلب سحب، ومشكلة في صفحة الدفع رصدها Session Replay، وخطأ عالي الأولوية في تسجيل الدخول مع طلب سحب جاهز للمراجعة.'
+
+        3:
+            heading: الدليل الاجتماعي
+            body: نعم، يستخدموننا فعلًا. ولا، ليس الأمر مجرد مهندس جرّبنا مرة قبل عامين ثم نسينا.
+            button: عرض العملاء
+            shuffle: خلط الشركات
+            logo:
+                first_customer: أول عميل في تاريخ PostHog!
+                story: اقرأ قصة العميل
+            # Column labels for each shuffle of the customer logos. Keys match companyAttributes in Customers.tsx.
+            breakdown:
+                colorful:
+                    col1: شعارات ملوّنة
+                    col2: شعارات «أنيقة»
+                hardware:
+                    col1: شركات أجهزة
+                    col2: ليست شركات أجهزة
+                planes:
+                    col1: تصنع الطائرات
+                    col2: لا تصنع الطائرات (بعد)
+                caseStudy:
+                    col1: لها دراسة حالة معنا
+                    col2: ننتظر منها دراسة حالة
+                easyToYell:
+                    col1: أسماء تُنادى بسهولة
+                    col2: أسماء تحتاج إلى نفَس طويل
+                goodBandName:
+                    col1: تصلح اسمًا لمقهى جديد
+                    col2: قد تُظن اسم دواء
+                explainable:
+                    col1: تشرحها لوالديك بسهولة
+                    col2: يسألك والداك عنها في كل زيارة
+                shortNames:
+                    col1: أسماء من 7 أحرف أو أقل
+                    col2: أسماء يسهل الخطأ في كتابتها
+                realWords:
+                    col1: كلمات إنجليزية حقيقية
+                    col2: كلمات لا يعرفها أي قاموس
+                american:
+                    col1: تأسست في أمريكا
+                    col2: تأسست خارج أمريكا
+                pokemon:
+                    col1: قد يكون اسم بوكيمون
+                    col2: قد يكون اسم شرير في فيلم أبيض وأسود
+                arr:
+                    col1: تُقاس بالإيرادات السنوية
+                    col2: تُقاس بالناتج المحلي الإجمالي
+                devTool:
+                    col1: أداة مطورين رائجة
+                    col2: رائجة، لكنها ليست أداة مطورين
+                usesPostHog:
+                    col1: تستخدم PostHog
+                    col2: تستخدم PostHog أيضًا
+
+        4:
+            heading: كل بياناتك <highlight>تعمل معًا</highlight>
+            list:
+                heading: 'يأتي context warehouse <highlight>مزوّدًا</highlight> مسبقًا بما يلي:'
+                1: مستودع بيانات <tooltip/>
+                2: أكثر من 120 مصدرًا ووجهة
+                3: محرر SQL + ذكاء الأعمال + رسوم بيانية
+                4: موجز نشاط المستخدمين (CDP مصغّر)
+                5: واجهة API وwebhooks
+            # Markdown. Keep the formatting.
+            body:
+                1: سواء كنت تحلل استخدام العملاء أو توجّه الذكاء الاصطناعي، فعليك أن تعمل بالسياق *كاملًا*.
+                2: 'اجمع كل شيء في context warehouse من PostHog، لتستعلم عنه مباشرةً أنت ووكلاؤك ولوحات معلوماتك. ويشمل ذلك:'
+                list:
+                    1: بيانات من Stripe وPostgres وHubSpot وأكثر من 120 مصدرًا خارجيًا آخر
+                    2: رؤى من Session Replay وExperiments وسائر أدواتنا الأخرى
+                3: البيانات التي يحتاجها وكلاؤك لاتخاذ قرارات صائبة موجودة هنا بالفعل. حان الوقت للانتقال من «أخبرني بما حدث» إلى «إليك ما يجب إصلاحه الآن».
+            tooltip: ويمكنك أيضًا ربط مستودعك الخاص!
+            button: اربط أول مصدر بيانات
+
+        5:
+            heading: تسعير حسب الاستخدام
+            # Markdown. Keep the formatting.
+            body:
+                1: 'فلسفتنا بسيطة: لا ينبغي أن تشغل بالك بالأسعار.'
+                2: كل منتجاتنا المدفوعة تُحتسب حسب الاستخدام، مع حصة مجانية سخية كل شهر. بل إن 98% من عملائنا يستخدمون PostHog مجانًا.
+                3: نسعى إلى مجاراة أرخص البدائل عند التوسع، ليكون اختيار PostHog قرارًا بديهيًا. ولن تقرأ عندنا أبدًا عبارة «السعر على الخاص».
+                4: 'إليك أمثلة على أسعار أكثر منتجاتنا استخدامًا:'
+            label:
+                freetier: الحصة المجانية
+                pricing: السعر
+                product: المنتج
+                pricing_table: السعر (ينخفض مع زيادة الحجم)
+            product:
+                1:
+                    freetier: مليون حدث شهريًا
+                    pricing: 0.00005 دولار للحدث
+                2:
+                    freetier: 5,000 تسجيل شهريًا
+                    pricing: 0.005 دولار للتسجيل
+                3:
+                    freetier: مليون طلب شهريًا
+                    pricing: 0.0001 دولار للطلب
+                4:
+                    freetier: مليون صف شهريًا
+                    pricing: 0.000015 دولار للصف
+            button: اطّلع على الأسعار
+
+        6:
+            heading: لماذا PostHog دون غيره؟
+            body: 'نختلف عن معظم الشركات لأسباب كثيرة:'
+            list:
+                # Markdown. Keep the links.
+                1: '**الشفافية.** يمكنك قراءة [دليل الشركة](/handbook) و[دليل المبيعات](/handbook/growth/sales/overview) و[استراتيجية الشركة](/handbook/why-does-posthog-exist).'
+                2: '**نُطلق بسرعة.** اطّلع على [سجل التغييرات](/changelog).'
+                3: <bold>دعم تقني</bold> <emphasis>حقيقي</emphasis>. جميع <team>أعضاء فريق الدعم</team> لدينا مهندسون في الأصل.
+            button: اعرف المزيد عنا
+
+        7:
+            heading: قراءة قبل النوم
+            body: 'ما زلت هنا؟ إليك بعض الروابط التي قد تهمّك قليلًا:'
+            link:
+                2: التوثيق التقني
+                3: API
+                4: اطرح سؤالًا
+                5: فرق PostHog الصغيرة
+
+        8:
+            heading: ترويج بلا خجل
+            body: إن لم يقنعك PostHog حتى الآن، فلعل حيل التسويق التقليدية هذه تفعل.
+            box:
+                badge: صديق للبيئة
+                subtitle: تنزيل رقمي*
+            sticker:
+                1: مستخدمو G2 يرون أننا رائعون
+                2: <small>لا</small> يروّج له<br/>أي مؤثّر
+            cart:
+                label: 3 أشخاص <small>(كانوا)</small> سيضيفون PostHog إلى السلة*
+                footnote: '*لو كانت هذه سلة حقيقية'
+            footnote: '*لا يمكن تثبيت PostHog من قرص مدمج، فهو منتج ويب.<br/>لكننا أرسلنا <emphasis>فعلًا</emphasis> قرصًا مرنًا إلى بعض العملاء ذات مرة، وكان عليه مقلب لا أكثر.'
+            cloud:
+                heading: اختر السحابة
+                option:
+                    1: الولايات المتحدة (فرجينيا)
+                    2: الاتحاد الأوروبي (فرانكفورت)
+            price:
+                label: 'السعر يبدأ من:'
+                old: 0 دولار
+                new: مجانًا
+                urgency: '><larger>آخر قطعة بهذا السعر!!</larger>'
+            button: ابدأ الآن
+            urgency:
+                # {companies} is today's signup count, or `fallback` when it is not loaded yet.
+                label: '<bold>سارِع:</bold> عدد الشركات التي سجّلت <today>اليوم</today>: {companies}. <br/>اطلب الآن واحصل على خصم 0 دولار على طلبك الأول.'
+                fallback: كبير جدًا
+
+    cookie:
+        heading: إشعار ملفات تعريف الارتباط الإلزامي قانونًا
+        body:
+            1: لا يستخدم موقع PostHog.com ملفات تعريف ارتباط من جهات خارجية، بل ملفًا واحدًا خاصًا بنا فقط.
+            2: لا نرسل أي بيانات إلى جهات خارجية. (ستفخر بنا <tooltip>أورسولا فون دير لاين</tooltip> كثيرًا.)
+        tooltip:
+            label: أورسولا فون دير لاين هي رئيسة المفوضية الأوروبية، ولا علاقة لها بأورسولا ساحرة البحر في «حورية البحر الصغيرة».
+            image:
+                alt: أورسولا فون دير لاين، رئيسة المفوضية الأوروبية
+        close: إغلاق
+
+    # view_in_english stays in English on purpose.
+    taskbar:
+        get_started: ابدأ مجانًا
+        open_posthog: افتح PostHog
+        search: بحث
+        ask_max: اسأل Max
+        menu:
+            products: المنتجات
+            pricing: الأسعار
+            docs: التوثيق
+            community: المجتمع
+            company: الشركة
+            more: المزيد
+            less: أقل
+        logo:
+            home: الرئيسية
+            about: عن PostHog
+            display_options: خيارات العرض
+        docs:
+            overview: نظرة عامة
+            get_started: البدء
+            install: تثبيت PostHog
+            sdks: حزم SDK وأطر العمل
+            products: المنتجات
+            tools: الأدوات
+            analytics: التحليلات
+            more_tools: أدوات أخرى
+            application_metrics: مقاييس التطبيقات
+            distributed_tracing: التتبع الموزّع
+            context: السياق
+            reference: المرجع
+            new_to_posthog: جديد على PostHog
+            ai_engineering: هندسة الذكاء الاصطناعي
+            toolbar: شريط الأدوات والميزات
+            self_host: الاستضافة الذاتية والنشر
+            billing: الفوترة
+            privacy: الخصوصية وGDPR
+            how_posthog_works: كيف يعمل PostHog
+            glossary: المصطلحات
+            explore_twig: استكشف Twig
+            pocket_guides: أدلة مختصرة
+            tutorials: دروس تعليمية
+            templates: القوالب
+        community:
+            newsletter: النشرة البريدية
+            blog: المدونة
+            founders_hub: مركز المؤسسين
+            compare: مقارنات
+            forums: المنتديات
+            startups: الشركات الناشئة
+            merch_store: المتجر
+            events: الفعاليات
+            students: الطلاب
+            incubator: الحاضنة
+            cool_tech_jobs: وظائف تقنية مميزة
+            places: أماكن
+        company:
+            about: من نحن
+            customers: العملاء
+            handbook: دليل الشركة
+            roadmap: خارطة الطريق
+            changelog: سجل التغييرات
+            media: الإعلام
+            people: الفريق
+            small_teams: الفرق الصغيرة
+            careers: الوظائف
+            side_projects: مشاريع جانبية
+            partnerships: الشراكات
+        more:
+            sparks_joy: أشياء تبعث البهجة
+            services: الخدمات
+            display_options: خيارات العرض
+            system_status: حالة النظام
+            terms: الشروط
+            privacy: الخصوصية
+            dpa: مولّد DPA (ممتع فعلًا!)
+            baa: مولّد BAA (أقل متعة)
+            subprocessors: المعالجون الفرعيون
+            enterprise: المؤسسات
+        account:
+            go_to: انتقل إلى...
+            posthog_app: تطبيق PostHog
+            community: المجتمع
+            forums: المنتديات
+            notifications: الإشعارات
+            my_profile: ملفي الشخصي
+            bookmarks: المحفوظات
+            sign_in: الدخول إلى المجتمع
+            logout: الخروج من المجتمع
+
+    desktop:
+        home: الرئيسية
+        pricing: الأسعار
+        docs: التوثيق
+        demo: عرض توضيحي
+        talk_to_a_human: تحدّث إلى إنسان
+        about_us: من نحن
+        changelog: سجل التغييرات
+        company_handbook: دليل الشركة
+        store: المتجر
+        careers: الوظائف
+        trash: سلة المهملات
