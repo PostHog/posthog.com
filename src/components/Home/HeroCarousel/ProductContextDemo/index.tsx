@@ -6,6 +6,7 @@ import Tooltip from 'components/RadixUI/Tooltip'
 import { mcpInstallSchema } from 'components/PlatformInstall'
 import { usePrefersReducedMotion } from 'components/Code/usePrefersReducedMotion'
 import { useSlideActive, useSlidePaused } from '../autoAdvanceGate'
+import { useTranslation } from 'i18n'
 import './animations.css'
 
 /** Positions share the SVG's 1000 × 774 coordinate system. `x: 500` centers a node
@@ -35,6 +36,7 @@ const CLIENTS = ['claude', 'codex', 'cursor', 'vscode'].flatMap((id) => {
 
 export default function ProductContextDemo({ nodes: nodeConfig = DEFAULT_NODES }: { nodes?: ContextNode[] } = {}) {
     const allProducts = useProduct()
+    const { t } = useTranslation()
     const active = useSlideActive()
     const paused = useSlidePaused()
     const reducedMotion = usePrefersReducedMotion()
@@ -54,7 +56,7 @@ export default function ProductContextDemo({ nodes: nodeConfig = DEFAULT_NODES }
             data-running={running}
         >
             <figcaption className="sr-only">
-                {nodes.map(({ product }) => product.name).join(', ')} flow into your agents.
+                {t('section.2a.products.caption', { products: nodes.map(({ product }) => product.name).join(', ') })}
             </figcaption>
             <div>
                 <svg
@@ -116,7 +118,7 @@ export default function ProductContextDemo({ nodes: nodeConfig = DEFAULT_NODES }
                 ))}
 
                 <div className="context-hub absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[31%] px-[1.5cqw] py-[3cqw] rounded-md flex flex-col items-center gap-[1cqw] text-center bg-primary border border-primary">
-                    <strong className="text-[3.6cqw] leading-[1.2]">Your agents</strong>
+                    <strong className="text-[3.6cqw] leading-[1.2]">{t('section.2b.demo.agents')}</strong>
                     <div className="context-clients flex items-center justify-center gap-[1.8cqw] mt-[1.4cqw] [&_svg]:block [&_svg]:size-[3.4cqw]">
                         {CLIENTS.map((client) => (
                             <Tooltip

@@ -5,6 +5,8 @@ import { ShipWithPostHogSlide, AskAnythingSlide, GiveAgentsContext } from './hom
 export interface Tab {
     value: string
     label: string
+    /** Translation key for the label. Tabs without one show `label`. */
+    labelKey?: string
     content: React.ReactNode
     color: string
     activeText: string
@@ -52,6 +54,7 @@ export const buildTabs: Tab[] = [
     {
         value: 'ask-anything',
         label: 'Ask PostHog anything',
+        labelKey: 'section.2a.toggle',
         content: <AskAnythingSlide />,
         color: 'bg-purple',
         activeText: 'text-white',
@@ -60,6 +63,7 @@ export const buildTabs: Tab[] = [
     {
         value: 'slack',
         label: 'Give agents product context',
+        labelKey: 'section.2b.toggle',
         content: <GiveAgentsContext />,
         color: 'bg-red',
         activeText: 'text-white',
@@ -68,6 +72,7 @@ export const buildTabs: Tab[] = [
     {
         value: 'fix-bugs',
         label: 'Ship with PostHog',
+        labelKey: 'section.2c.toggle',
         content: <ShipWithPostHogSlide />,
         color: 'bg-blue',
         activeText: 'text-white',

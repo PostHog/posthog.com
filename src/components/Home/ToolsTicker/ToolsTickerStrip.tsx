@@ -1,5 +1,6 @@
 import React from 'react'
 import Link from 'components/Link'
+import { useTranslation } from 'i18n'
 
 export interface ToolsTickerProduct {
     handle: string
@@ -20,10 +21,12 @@ export default function ToolsTickerStrip({
     ariaHidden = false,
     compact = false,
 }: ToolsTickerStripProps): JSX.Element {
+    const { t, rich } = useTranslation()
+
     return (
         <ul
             aria-hidden={ariaHidden || undefined}
-            aria-label={compact ? 'PostHog tools' : undefined}
+            aria-label={compact ? t('section.2a.products.label') : undefined}
             style={compact ? { counterReset: `remaining-tools ${products.length}` } : undefined}
             className={
                 compact
@@ -61,9 +64,11 @@ export default function ToolsTickerStrip({
                         to="/products"
                         state={{ newWindow: true }}
                         className="block text-xs text-secondary underline underline-offset-2 whitespace-nowrap"
-                        aria-label={`View all ${products.length} tools`}
+                        aria-label={t('section.2a.products.view_all', { count: products.length })}
                     >
-                        and <span className="before:content-[counter(remaining-tools)]" /> more
+                        {rich('section.2a.products.more', {
+                            count: () => <span className="before:content-[counter(remaining-tools)]" />,
+                        })}
                     </Link>
                 </li>
             )}

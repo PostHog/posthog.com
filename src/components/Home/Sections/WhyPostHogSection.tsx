@@ -3,33 +3,43 @@ import Link from 'components/Link'
 import Markdown from 'components/Markdown'
 import SupportSmallTeamLink from 'components/Home/SupportSmallTeamLink'
 import CloudinaryImage from 'components/CloudinaryImage'
+import { useTranslation } from 'i18n'
 
-export const WhyPostHogSection = () => (
-    <div id="why-posthog">
-        <h2>Why PostHog?</h2>
-        <CloudinaryImage
-            src="https://res.cloudinary.com/dmukukwp6/image/upload/steve_hogs_17c7900b07.png"
-            className="@lg:float-right max-w-[300px] w-full @lg:ml-12 mb-2"
-        />
+export const WhyPostHogSection = () => {
+    const { t, rich } = useTranslation()
 
-        <Markdown>{`We're different from most companies for a bunch of reasons:
+    return (
+        <div id="why-posthog">
+            <h2>{t('section.6.heading')}</h2>
+            <CloudinaryImage
+                src="https://res.cloudinary.com/dmukukwp6/image/upload/steve_hogs_17c7900b07.png"
+                className="@lg:float-right max-w-[300px] w-full @lg:ml-12 mb-2"
+            />
 
-- **Transparency.** You can read our [company handbook](/handbook), our [sales manual](/handbook/growth/sales/overview), and [company strategy](/handbook/why-does-posthog-exist).
-- **We ship fast.** See our [changelog](/changelog).`}</Markdown>
+            <Markdown>{`${t('section.6.body')}
 
-        <ul>
-            <li>
-                <strong>
-                    <em>Actually</em>-technical support.
-                </strong>{' '}
-                Our <SupportSmallTeamLink /> all have engineering backgrounds.
-            </li>
-        </ul>
+- ${t('section.6.list.1')}
+- ${t('section.6.list.2')}`}</Markdown>
 
-        <Link to="/about" state={{ newWindow: true }}>
-            Read more about us
-        </Link>
-    </div>
-)
+            <ul>
+                <li>
+                    {rich('section.6.list.3', {
+                        emphasis: (text) => (
+                            <strong>
+                                <em>{text}</em>
+                            </strong>
+                        ),
+                        bold: (text) => <strong>{text}</strong>,
+                        team: (text) => <SupportSmallTeamLink>{text}</SupportSmallTeamLink>,
+                    })}
+                </li>
+            </ul>
+
+            <Link to="/about" state={{ newWindow: true }}>
+                {t('section.6.button')}
+            </Link>
+        </div>
+    )
+}
 
 export default WhyPostHogSection
