@@ -156,7 +156,7 @@ export default function AppWindow({ item, chrome = true }: { item: AppWindowType
     } = useApp()
     const isSSR = typeof window === 'undefined'
     const controls = useDragControls()
-    const dir = useDirection()
+    const dir = useDirection(item.props.pageContext?.locale || 'en')
     const sizeConstraints = item.sizeConstraints
     const size = item.size
     const previousSize = item.previousSize
