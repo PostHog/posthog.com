@@ -61,7 +61,7 @@ But chat isn't enough because sometimes reading a paragraph is worse than glanci
 
 <Caption>A look at the generative UI we're working on for PostHog</Caption>
 
-Most generative UI will be disposable, but some will become artifacts: outputs worth keeping, sharing, and forking. Examples include reports, documents, code, pull requests, configuration, and even entire apps. All of them are backed by your app's data. Generative UI is how you work with the agent right now; artifacts are what you walk away with.
+Most generative UI will be disposable, but some will become [artifacts](/newsletter/were-building-multiplayer-ai-heres#2-most-collaboration-happens-before-and-after-writing-the-code): outputs worth keeping, sharing, and forking. Examples include reports, documents, code, pull requests, configuration, and even entire apps. All of them are backed by your app's data. Generative UI is how you work with the agent right now; artifacts are what you walk away with.
 
 ## Build UI when text isn't enough
 
