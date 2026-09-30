@@ -7,8 +7,10 @@ import {
     IconHeart,
     IconImage,
     IconList,
+    IconMessage,
     IconMicrophone,
     IconPencil,
+    IconPlus,
     IconQuestion,
     IconQuote,
     IconSearch,
@@ -29,27 +31,24 @@ const postTypes = [
     { label: 'Video', Icon: IconVideoCamera },
 ]
 
-const posts = [
+const posts: {
+    author: string
+    lastName?: string
+    rebloggedFrom?: string
+    image: string
+    imageAlt: string
+}[] = [
     {
         author: 'James',
         lastName: 'Hawkins',
-        kind: 'Text',
-        title: 'Shipping this before I overthink it',
-        body: 'I made a tiny blog to see if people still like tiny blogs. If not, I can make a dashboard about it.',
+        image: '/images/sparks-joy/hoglr/james-pivot.webp',
+        imageAlt: 'A parody pull request to stop James from building Uber for Dogs, with dogs as the drivers.',
     },
     {
-        author: 'Charles',
-        lastName: 'Cook',
-        kind: 'Quote',
-        title: 'A short marketing plan',
-        body: 'Make something weird. Put it on the internet. See if anyone smiles.',
-    },
-    {
-        author: 'James',
-        lastName: 'Hawkins',
-        kind: 'Link',
-        title: 'Things that spark joy',
-        body: 'There are more little projects in the grab bag.',
+        author: 'Lottie',
+        rebloggedFrom: 'Charles',
+        image: '/images/sparks-joy/hoglr/dictator-or-tech-bro.webp',
+        imageAlt: 'Two Hoggie characters dressed as a tech bro and a dictator for the quiz.',
     },
 ]
 
@@ -78,61 +77,71 @@ export default function Hoglr(): JSX.Element {
         }
     `)
 
-    const avatarFor = (firstName: string, lastName: string) =>
-        teamMembers.find((member) => member.firstName === firstName && member.lastName === lastName)?.avatar?.url
+    const avatarFor = (firstName: string, lastName?: string) =>
+        teamMembers.find((member) => member.firstName === firstName && (!lastName || member.lastName === lastName))
+            ?.avatar?.url
 
     return (
         <>
             <SEO
                 title="Hoglr - PostHog"
-                description="A fictional blog dashboard with posts from James and Charles, made for the PostHog grab bag."
+                description="An old-school blog dashboard in the PostHog grab bag."
                 image="/images/og/default.png"
             />
             <Editor maxWidth="100%" hasPadding={false} className="bg-navy">
                 <div className="not-prose @container min-h-screen bg-blue-2/20 text-light-1">
                     <header className="bg-navy/30">
-                        <div className="mx-auto flex max-w-[48rem] items-center gap-6 px-3 py-1 @lg:px-5 @lg:pl-8">
-                            <h1 className="w-40 shrink-0 font-serif text-[2.5rem] font-black leading-none tracking-tight">
+                        <div className="mx-auto flex max-w-[56.25rem] items-center justify-between gap-4 px-3 py-1 @lg:px-5">
+                            <h1 className="shrink-0 font-serif text-[3rem] font-black leading-none tracking-tight">
                                 hoglr
                             </h1>
                             <nav
                                 aria-label="Hoglr navigation"
-                                className="flex items-center gap-3 text-[11px] font-semibold"
+                                className="flex items-center gap-3 text-[11px] font-semibold @3xl:gap-5"
                             >
                                 <span className="text-light-1">Dashboard</span>
-                                <span className="hidden text-light-2/70 @lg:inline">James</span>
-                                <span className="hidden text-light-2/70 @xl:inline">Charles</span>
                                 <Link
                                     to="/sparks-joy"
                                     state={{ newWindow: true }}
-                                    className="hidden text-light-2/70 @2xl:inline"
+                                    className="hidden text-light-2/70 @lg:inline"
                                 >
                                     Sparks Joy
                                 </Link>
-                                <span aria-hidden="true" className="hidden items-center gap-2 text-light-2/70 @lg:flex">
-                                    <IconList className="size-4" />
+                                <span
+                                    aria-hidden="true"
+                                    className="hidden items-center gap-2 text-light-2/70 @lg:flex @3xl:gap-4"
+                                >
+                                    <IconPlus className="hidden size-4 @3xl:block" />
+                                    <IconMessage className="hidden size-4 @3xl:block" />
                                     <IconQuestion className="size-4" />
                                     <IconGear className="size-4" />
+                                    <span className="hidden text-xl leading-none @3xl:inline">⏻</span>
                                 </span>
                             </nav>
                         </div>
                     </header>
 
-                    <div className="mx-auto grid max-w-[48rem] gap-3 px-3 py-2 @lg:px-5 @lg:pl-8 @xl:grid-cols-[minmax(0,1fr)_9rem]">
-                        <div className="min-w-0 space-y-3">
-                            <div className="flex items-start gap-2 @lg:gap-3">
-                                <div className="flex size-10 shrink-0 items-center justify-center overflow-hidden rounded bg-light-1 @lg:size-11">
-                                    <img src="/brand/posthog-logomark.svg" alt="" className="size-8 object-contain" />
+                    <div className="mx-auto grid max-w-[56.25rem] gap-4 rounded-xl bg-navy/30 px-3 py-4 @lg:px-5 @3xl:grid-cols-[minmax(0,1fr)_13.5rem] @3xl:gap-5">
+                        <div className="min-w-0 space-y-4">
+                            <div className="flex items-start gap-2 @lg:gap-4">
+                                <div className="size-10 shrink-0 overflow-hidden rounded bg-light-1 @lg:size-14 @3xl:size-16">
+                                    <img
+                                        src="/images/sparks-joy/hoglr/dj-hoggie.webp"
+                                        alt="PostHog's DJ Hoggie avatar"
+                                        className="size-full object-contain"
+                                        width="64"
+                                        height="64"
+                                    />
                                 </div>
                                 <section
                                     aria-label="Post types"
-                                    className="relative min-w-0 flex-1 rounded-md bg-light-1 p-2 text-navy shadow-sm before:absolute before:-left-1 before:top-4 before:size-2 before:rotate-45 before:bg-light-1"
+                                    className="relative min-w-0 flex-1 rounded-md bg-light-1 p-2 text-navy shadow-sm before:absolute before:-left-1 before:top-5 before:size-2 before:rotate-45 before:bg-light-1 @lg:p-3"
                                 >
                                     <ul className="grid grid-cols-4 gap-1 text-center @lg:grid-cols-7">
                                         {postTypes.map(({ label, Icon }) => (
                                             <li key={label} className="min-w-0 text-[10px] leading-tight text-light-11">
-                                                <span className="mx-auto mb-1 flex size-8 items-center justify-center rounded-sm border border-light-4 bg-light-2 shadow-sm @lg:size-9">
-                                                    <Icon className="size-5 text-navy" />
+                                                <span className="mx-auto mb-1 flex size-9 items-center justify-center rounded-sm border border-light-4 bg-light-2 shadow-sm @lg:size-12">
+                                                    <Icon className="size-5 text-navy @lg:size-7" />
                                                 </span>
                                                 {label}
                                             </li>
@@ -141,59 +150,79 @@ export default function Hoglr(): JSX.Element {
                                 </section>
                             </div>
 
-                            <div className="flex items-start gap-2 @lg:gap-3">
-                                <div
-                                    aria-hidden="true"
-                                    className="flex w-10 shrink-0 flex-col items-end gap-0.5 @lg:w-11"
-                                >
-                                    {['James', 'Charles'].map((name) => (
-                                        <span
-                                            key={name}
-                                            className="flex size-5 items-center justify-center rounded-sm bg-light-2 font-serif text-xs font-bold text-navy"
-                                        >
-                                            {name[0]}
-                                        </span>
-                                    ))}
-                                </div>
-                                <div className="min-w-0 flex-1 divide-y divide-light-1/10 rounded-sm bg-navy/40 text-[10px] text-light-2/80">
-                                    <p className="m-0 px-2 py-1.5 leading-3">James started following you</p>
-                                    <p className="m-0 px-2 py-1.5 leading-3">Charles liked your post</p>
-                                </div>
-                            </div>
-
-                            <section aria-label="Fictional posts" className="space-y-3">
+                            <section aria-label="Hoglr feed" className="space-y-4">
                                 {posts.map((post) => {
                                     const avatar = avatarFor(post.author, post.lastName)
                                     return (
-                                        <article key={post.title} className="flex items-start gap-2 @lg:gap-3">
-                                            <div className="flex size-10 shrink-0 items-center justify-center overflow-hidden rounded-sm bg-light-2 font-serif text-xl font-bold text-navy @lg:size-11">
+                                        <article key={post.author} className="flex items-start gap-2 @lg:gap-4">
+                                            <div className="flex size-10 shrink-0 items-center justify-center overflow-hidden rounded-sm bg-light-2 font-serif text-xl font-bold text-navy @lg:size-14 @3xl:size-16">
                                                 {avatar ? (
                                                     <img src={avatar} alt="" className="size-full object-cover" />
                                                 ) : (
                                                     post.author[0]
                                                 )}
                                             </div>
-                                            <div className="relative min-w-0 flex-1 rounded-md bg-light-1 px-3 py-2.5 text-navy shadow-sm before:absolute before:-left-1 before:top-4 before:size-2 before:rotate-45 before:bg-light-1">
-                                                <div className="flex flex-wrap items-center justify-between gap-x-2 text-[10px] text-light-9">
-                                                    <span>{post.author.toLowerCase()}:</span>
+                                            <div className="relative min-w-0 flex-1 rounded-md bg-light-1 px-3 py-3 text-navy shadow-sm before:absolute before:-left-1 before:top-5 before:size-2 before:rotate-45 before:bg-light-1 @lg:px-4">
+                                                <div className="flex flex-wrap items-center justify-between gap-x-2 text-[11px] text-light-9">
+                                                    <span>
+                                                        <span className="font-semibold underline">
+                                                            {post.author.toLowerCase()}
+                                                        </span>{' '}
+                                                        {post.rebloggedFrom && (
+                                                            <>
+                                                                reblogged{' '}
+                                                                <span className="font-semibold underline">
+                                                                    {post.rebloggedFrom.toLowerCase()}
+                                                                </span>
+                                                            </>
+                                                        )}
+                                                        :
+                                                    </span>
                                                     <span aria-hidden="true" className="flex items-center gap-2">
-                                                        <span>reply</span>
                                                         <span>reblog</span>
                                                         <IconHeart className="size-3" />
                                                     </span>
                                                 </div>
-                                                <h2 className="mt-2 font-serif text-lg font-bold leading-tight underline">
-                                                    {post.title}
-                                                </h2>
-                                                <p className="mb-0 mt-1 text-xs leading-relaxed">{post.body}</p>
-                                                {post.kind === 'Link' && (
-                                                    <Link
-                                                        to="/sparks-joy"
-                                                        state={{ newWindow: true }}
-                                                        className="mt-2 inline-block text-xs font-semibold underline"
-                                                    >
-                                                        Open the grab bag
-                                                    </Link>
+                                                {post.rebloggedFrom && (
+                                                    <div className="mt-3 space-y-2 text-xs leading-relaxed">
+                                                        <p className="m-0">
+                                                            Now we've got PostHog's Series E out of the way, I would
+                                                            like to take a moment to appreciate the 4,000+ people who
+                                                            have completed{' '}
+                                                            <a
+                                                                href="https://dictatorortechbro.com/"
+                                                                target="_blank"
+                                                                rel="noopener noreferrer"
+                                                                className="font-bold underline"
+                                                            >
+                                                                dictatorortechbro.com
+                                                            </a>
+                                                            .
+                                                        </p>
+                                                        <p className="m-0">
+                                                            (With just 4% getting all 8 questions right, I'm impressed
+                                                            how bad some of you are at this.)
+                                                        </p>
+                                                    </div>
+                                                )}
+                                                <a
+                                                    href={post.image}
+                                                    target="_blank"
+                                                    rel="noopener noreferrer"
+                                                    className="mt-3 block w-fit max-w-full"
+                                                >
+                                                    <img
+                                                        src={post.image}
+                                                        alt={post.imageAlt}
+                                                        className="block h-auto max-w-full rounded-sm border border-light-4/50"
+                                                        width={post.author === 'James' ? 448 : 352}
+                                                        height={post.author === 'James' ? 221 : 213}
+                                                    />
+                                                </a>
+                                                {post.author === 'James' && (
+                                                    <p className="mb-0 mt-2 text-xs text-light-11">
+                                                        Uber for Dogs, where the dogs drive.
+                                                    </p>
                                                 )}
                                             </div>
                                         </article>
@@ -202,12 +231,12 @@ export default function Hoglr(): JSX.Element {
                             </section>
                         </div>
 
-                        <aside aria-label="Hoglr sidebar" className="space-y-3 text-[10px]">
+                        <aside aria-label="Hoglr sidebar" className="w-full max-w-[13.5rem] space-y-3 text-[11px]">
                             <div className="overflow-hidden rounded-sm bg-navy/30">
                                 <Link
                                     to="/people"
                                     state={{ newWindow: true }}
-                                    className="flex items-center gap-1 whitespace-nowrap bg-green px-1.5 py-1.5 text-[10px] font-semibold leading-4 text-navy"
+                                    className="flex items-center gap-1 whitespace-nowrap bg-green px-2 py-2 font-semibold leading-4 text-navy"
                                 >
                                     <IconUser className="size-3 shrink-0" />
                                     Following {teamMembers.length - 1} people
@@ -235,17 +264,24 @@ export default function Hoglr(): JSX.Element {
                             >
                                 Search Tags <IconSearch className="size-3.5" />
                             </div>
-                            <div
-                                aria-hidden="true"
-                                className="flex aspect-[2/1] items-center justify-center rounded-sm bg-teal-2-dark/80"
-                            >
-                                <img src="/brand/posthog-logomark.svg" alt="" className="size-10 opacity-70" />
+                            <div className="aspect-square overflow-hidden rounded-sm bg-light-1">
+                                <img
+                                    src="/images/sparks-joy/hoglr/hoggie-radar.webp"
+                                    alt="Hoggie in a red top"
+                                    className="size-full object-contain"
+                                    width="216"
+                                    height="216"
+                                />
                             </div>
                             <p className="m-0 flex items-center gap-2 text-light-2/70">
-                                <span className="flex size-5 items-center justify-center rounded-full bg-light-2 text-navy">
-                                    h
-                                </span>
-                                hoglr radar
+                                <img
+                                    src="/images/sparks-joy/hoglr/dj-hoggie.webp"
+                                    alt=""
+                                    className="size-5 rounded-sm bg-light-1 object-contain"
+                                    width="20"
+                                    height="20"
+                                />
+                                Hoggie radar
                             </p>
                         </aside>
                     </div>
