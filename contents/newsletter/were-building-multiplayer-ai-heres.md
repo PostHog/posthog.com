@@ -4,7 +4,7 @@ date: 2026-09-28
 author:
   - jina-yoon
 featuredImage: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/[PLACEHOLDER_were-building-multiplayer-ai-heres].png
+  https://res.cloudinary.com/dmukukwp6/image/upload/multiplayer_website_blog_7ee4280443.png
 featuredImageType: full
 tags:
   - Product engineers
