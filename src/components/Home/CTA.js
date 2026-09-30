@@ -11,6 +11,7 @@ import { motion } from 'framer-motion'
 import { useApp } from '../../context/App'
 import { useWindow } from '../../context/Window'
 import { useTranslation } from 'i18n'
+import { useDirection } from '../../i18n/useDirection'
 
 const ProductDetails = () => {
     const { t } = useTranslation()
@@ -50,6 +51,7 @@ const SignupEmbed = () => {
 }
 
 export default function CTA({ headline = true, card = false }) {
+    const dir = useDirection()
     const { addWindow } = useApp()
     const posthog = usePostHog()
     const [version, setVersion] = useState('us')
@@ -81,7 +83,7 @@ export default function CTA({ headline = true, card = false }) {
                             alt="PostHog Web"
                             className="max-w-[443px]"
                         />
-                        <div className="absolute -left-2 bottom-0 translate-y-1/2">
+                        <div className="absolute -start-2 bottom-0 translate-y-1/2">
                             <CloudinaryImage
                                 src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Home/images/g2-badge.png"
                                 alt={t('section.8.sticker.1')}
@@ -93,9 +95,9 @@ export default function CTA({ headline = true, card = false }) {
                     {inView && (
                         <motion.div
                             transition={{ duration: 1, type: 'tween' }}
-                            initial={{ translateX: '-100vw' }}
+                            initial={{ translateX: dir === 'rtl' ? '100vw' : '-100vw' }}
                             animate={{ translateX: 0 }}
-                            className="bg-blue text-start leading-none px-4 py-2 absolute -top-12 left-4 right-4 @xl:-left-4 @xl:right-auto rounded @xl:rounded-none"
+                            className="bg-blue text-start leading-none px-4 py-2 absolute -top-12 left-4 right-4 @xl:-start-4 @xl:end-auto rounded @xl:rounded-none"
                         >
                             <span className="text-sm font-bold text-white">
                                 {rich('section.8.cart.label', {
@@ -106,7 +108,7 @@ export default function CTA({ headline = true, card = false }) {
                             <span className="text-xs text-white">{t('section.8.cart.footnote')}</span>
                         </motion.div>
                     )}
-                    <div className="absolute top-4 -right-12">
+                    <div className="absolute top-4 -end-12">
                         <div className="relative">
                             <Bang className="w-[189px] animate-grow" />
                             <p className="px-8 text-center m-0 absolute top-0 left-0 right-0 bottom-0 flex flex-col items-center justify-center text-black uppercase leading-none font-bold text-lg rotate-6">
