@@ -8,7 +8,7 @@ import { RoughAnnotation } from 'components/Code/RoughAnnotation'
 import { usePrefersReducedMotion } from 'components/Code/usePrefersReducedMotion'
 import usePostHog from '../../../hooks/usePostHog'
 import { cn } from '../../../utils'
-import { useTranslation } from '../../../i18n'
+import { useTranslation } from 'i18n'
 
 const SIGNUP_URL = 'https://app.posthog.com/signup'
 const SIGNUP_STATE = { newWindow: true, initialTab: 'signup' }

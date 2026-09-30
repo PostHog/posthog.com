@@ -19,7 +19,7 @@ Each window gets the language of its own page. The taskbar and the desktop get t
 ## Use it in a component
 
 ```tsx
-import { useTranslation } from '../../i18n'
+import { useTranslation } from 'i18n'
 
 const Example = () => {
     const { t, rich } = useTranslation()
@@ -40,7 +40,7 @@ Keep the markup in the YAML, not the JSX, so a translator can move it. Word orde
 
 ## What not to translate
 
-Product names stay in English in every locale, for example "Product analytics", "Session replay", and "Feature flags". Also keep brand names, code, commands, and URLs in English. Do not add keys for them. Keep them in the JSX or in the product data (`src/hooks/useProducts.tsx`).
+Product names stay in English in every locale, for example "Product analytics", "Session replay", and "Feature flags". Also keep brand names, code, commands, and URLs in English. Window titles that look like file names, such as `home.mdx`, stay as they are. Do not add keys for them. Keep them in the JSX or in the product data (`src/hooks/useProducts.tsx`).
 
 When a translated sentence contains a product name, write the name in English inside the translation.
 

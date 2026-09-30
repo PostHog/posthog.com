@@ -31,8 +31,8 @@ import CloudinaryImage from 'components/CloudinaryImage'
 import MediaUploadModal from 'components/MediaUploadModal'
 import KeyboardShortcut from 'components/KeyboardShortcut'
 import { MOTION_LAYER, TASKBAR_BG } from '../../constants/frostedSurfaces'
-import { useTranslation } from '../../i18n'
-import { skipTranslation } from '../../i18n/cookie'
+import { useTranslation } from 'i18n'
+import { skipTranslation } from 'i18n/cookie'
 
 const NAV_MENU_CLASS =
     '[&_button]:px-2 [&_button:not(:first-child)]:hidden md:[&_button:not(:first-child)]:flex [&_a:not(:first-child)]:hidden md:[&_a:not(:first-child)]:flex'

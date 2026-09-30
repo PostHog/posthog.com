@@ -38,7 +38,7 @@ import FloatingModal from 'components/FloatingModal'
 import { MOTION_LAYER, WINDOW_BG } from '../../constants/frostedSurfaces'
 
 import { containsURL, getActiveMenuSection } from '../../navs/activeMenu'
-import { I18nProvider } from '../../i18n'
+import { I18nProvider } from 'i18n'
 
 const snapThreshold = -50
 
