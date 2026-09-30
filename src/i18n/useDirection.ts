@@ -1,9 +1,10 @@
 import { useEffect, useState } from 'react'
 import { useLocation } from '@reach/router'
-import { Direction, getDirectionFromPath } from './locales'
+import { Direction, getDirection, getDirectionFromPath } from './locales'
 
 /**
- * Writing direction for the current route.
+ * Writing direction for a locale, or for the current route when no locale is given.
+ * A window passes the locale of its own page, so an English window next to `/ar` stays LTR.
  *
  * `?dir=rtl` forces a direction on any page. It is opt-in, affects only the reader who
  * types it, and persists nothing — but it is deliberately not gated to development, so
@@ -14,9 +15,9 @@ import { Direction, getDirectionFromPath } from './locales'
  * attribute mismatches while hydrating, so reading the query during render would be
  * silently discarded in production.
  */
-export const useDirection = (): Direction => {
+export const useDirection = (locale?: string): Direction => {
     const { pathname, search } = useLocation()
-    const fromPath = getDirectionFromPath(pathname)
+    const fromPath = locale ? getDirection(locale) : getDirectionFromPath(pathname)
     const [dir, setDir] = useState<Direction>(fromPath)
 
     useEffect(() => {

@@ -1,5 +1,6 @@
 import React from 'react'
 import SEO, { buildProductStructuredData, type LanguageAlternate } from 'components/seo'
+import { getDirection } from '../i18n/locales'
 import Test from '../components/Home/Test'
 import { useTranslation } from 'i18n'
 
@@ -19,6 +20,7 @@ export default function Home({
                 description={t('meta.description')}
                 image="/images/og/default.png"
                 lang={pageContext.lang}
+                dir={getDirection(locale)}
                 languageAlternates={pageContext.languageAlternates}
                 structuredData={buildProductStructuredData({
                     name: 'PostHog',
