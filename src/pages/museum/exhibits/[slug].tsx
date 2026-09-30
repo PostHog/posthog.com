@@ -7,6 +7,7 @@ import OSButton from 'components/OSButton'
 import { Markdown } from 'components/Markdown'
 import { IconPencil, IconSpinner, IconTrash } from '@posthog/icons'
 import { useExhibitForm } from 'components/Museum/ExhibitForm'
+import MuseumMenu from 'components/Museum/MuseumMenu'
 import { formatDate, personName } from 'components/Museum/utils'
 import { museumRequest, useExhibit } from 'hooks/useMuseum'
 import { useUser } from 'hooks/useUser'
@@ -29,7 +30,7 @@ export default function Exhibit({ params }: PageProps): JSX.Element {
         }
     }
 
-    const curators = attributes?.curators?.data.map(({ attributes }) => personName(attributes)).filter(Boolean)
+    const curators = attributes?.curators?.data?.map(({ attributes }) => personName(attributes)).filter(Boolean)
 
     return (
         <>
@@ -43,7 +44,25 @@ export default function Exhibit({ params }: PageProps): JSX.Element {
                 title={attributes?.title}
                 hideTitle
                 hideRightSidebar
+                hideAppOptions
                 showQuestions={false}
+                leftSidebar={<MuseumMenu activeUrl={`/museum/exhibits/${params.slug}`} />}
+                rightActionButtons={
+                    isModerator && exhibit ? (
+                        <div className="flex gap-1">
+                            <OSButton
+                                size="sm"
+                                icon={<IconPencil />}
+                                onClick={() => openExhibitForm(exhibit, () => mutate())}
+                            >
+                                Curate
+                            </OSButton>
+                            <OSButton size="sm" icon={<IconTrash />} onClick={handleDelete}>
+                                Delete
+                            </OSButton>
+                        </div>
+                    ) : undefined
+                }
             >
                 <div className="prose mx-auto max-w-3xl dark:prose-invert">
                     {isLoading ? (
@@ -54,26 +73,7 @@ export default function Exhibit({ params }: PageProps): JSX.Element {
                         </p>
                     ) : (
                         <>
-                            <div className="not-prose flex flex-wrap items-center justify-between gap-2">
-                                <Link to="/museum" className="text-sm font-semibold text-secondary">
-                                    ← Museum
-                                </Link>
-                                {isModerator && (
-                                    <div className="flex gap-1">
-                                        <OSButton
-                                            size="sm"
-                                            icon={<IconPencil />}
-                                            onClick={() => openExhibitForm(exhibit, () => mutate())}
-                                        >
-                                            Curate
-                                        </OSButton>
-                                        <OSButton size="sm" icon={<IconTrash />} onClick={handleDelete}>
-                                            Delete
-                                        </OSButton>
-                                    </div>
-                                )}
-                            </div>
-                            <h1 className="!mb-1 !mt-4">{attributes.title}</h1>
+                            <h1 className="!mb-1">{attributes.title}</h1>
                             <p className="!mt-0 text-sm text-secondary">
                                 {[
                                     curators?.length && `Curated by ${curators.join(', ')}`,
@@ -92,22 +92,25 @@ export default function Exhibit({ params }: PageProps): JSX.Element {
                                         <li
                                             key={id}
                                             data-scheme="secondary"
-                                            className="grid gap-4 rounded-md border border-primary bg-primary p-4 @xl:grid-cols-[minmax(0,3fr)_minmax(0,2fr)]"
+                                            className={`grid gap-4 rounded-md border border-primary bg-primary p-4 ${
+                                                stop.heroImage?.data
+                                                    ? '@xl:grid-cols-[minmax(0,3fr)_minmax(0,2fr)]'
+                                                    : ''
+                                            }`}
                                         >
-                                            <Link to={`/museum/artifacts/${stop.slug}`} state={{ newWindow: true }}>
-                                                {stop.heroImage?.data && (
+                                            {stop.heroImage?.data && (
+                                                <Link to={`/museum/artifacts/${stop.slug}`}>
                                                     <img
                                                         src={stop.heroImage.data.attributes.url}
                                                         alt={stop.title}
                                                         className="w-full rounded border border-primary"
                                                     />
-                                                )}
-                                            </Link>
+                                                </Link>
+                                            )}
                                             <div>
                                                 <p className="m-0 text-sm font-semibold text-muted">{index + 1}</p>
                                                 <Link
                                                     to={`/museum/artifacts/${stop.slug}`}
-                                                    state={{ newWindow: true }}
                                                     className="text-lg font-semibold text-primary"
                                                 >
                                                     {stop.title}

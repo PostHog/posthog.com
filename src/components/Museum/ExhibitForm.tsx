@@ -116,7 +116,7 @@ export const ExhibitForm = ({
             statement: attributes?.statement || '',
             openedAt: attributes?.openedAt || '',
             featured: !!attributes?.featured,
-            curators: attributes?.curators?.data.map(({ id }) => id) || [],
+            curators: attributes?.curators?.data?.map(({ id }) => id) || [],
             stops: (attributes?.stops || []).flatMap(({ artifact, label }) =>
                 artifact.data ? [{ artifact: artifact.data.id, label: label || '' }] : []
             ) as Stop[],

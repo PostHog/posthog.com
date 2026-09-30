@@ -68,7 +68,7 @@ export default function Museum({ location }: { location: { search: string } }): 
             if (filters.type && attributes.type?.data?.attributes.slug !== filters.type) return false
             if (
                 filters.collection &&
-                !attributes.collections?.data.some((collection) => collection.attributes.slug === filters.collection)
+                !attributes.collections?.data?.some((collection) => collection.attributes.slug === filters.collection)
             )
                 return false
             return true
@@ -190,6 +190,7 @@ export default function Museum({ location }: { location: { search: string } }): 
                             <div className="grid gap-4 @md:grid-cols-2 @3xl:grid-cols-3">
                                 {exhibits.map(({ id, attributes: exhibit }) => (
                                     <MuseumCard
+                                        newWindow
                                         key={id}
                                         to={`/museum/exhibits/${exhibit.slug}`}
                                         image={
@@ -215,6 +216,7 @@ export default function Museum({ location }: { location: { search: string } }): 
                             <div className="grid gap-4 @md:grid-cols-2 @3xl:grid-cols-3">
                                 {filtered.map(({ id, attributes: artifact }) => (
                                     <MuseumCard
+                                        newWindow
                                         key={id}
                                         to={`/museum/artifacts/${artifact.slug}`}
                                         image={artifact.heroImage?.data?.attributes.url}

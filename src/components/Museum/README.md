@@ -2,7 +2,8 @@
 
 Components for [/museum](/museum). Content lives in Strapi (`museum-artifact`, `museum-exhibit`, `museum-category`, `museum-type`, `museum-collection`); data hooks are in `src/hooks/useMuseum.ts`.
 
-- `MuseumCard` – image card used for artifacts and exhibits. Props: `to`, `image`, `title`, `meta`.
+- `MuseumCard` – image card used for artifacts and exhibits. Props: `to`, `image`, `title`, `meta`, `newWindow`.
+- `MuseumMenu` – `TreeMenu` of exhibits and artifacts for the detail pages' left sidebar.
 - `ArtifactForm` / `useArtifactForm()` – add or edit an artifact in a window.
 - `ExhibitForm` / `useExhibitForm()` – curate an exhibit: pick artifacts, drag to order, add a label per stop.
 

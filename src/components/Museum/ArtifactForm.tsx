@@ -60,7 +60,7 @@ export const ArtifactForm = ({
     const { categories, types, collections, mutate: mutateTaxonomy } = useMuseumTaxonomy()
     const profiles = useCreatorProfiles()
     const attributes = artifact?.attributes
-    const incoming = attributes?.relatedBy?.data.map(({ id }) => id) || []
+    const incoming = attributes?.relatedBy?.data?.map(({ id }) => id) || []
 
     const formik = useFormik({
         initialValues: {
@@ -74,9 +74,9 @@ export const ArtifactForm = ({
             curatorNotes: attributes?.curatorNotes || '',
             videos: attributes?.videos?.map(({ url }) => url).join('\n') || '',
             links: attributes?.links?.map(({ label, url }) => `${label} | ${url}`).join('\n') || '',
-            collections: attributes?.collections?.data.map(({ id }) => id) || ([] as (number | string)[]),
+            collections: attributes?.collections?.data?.map(({ id }) => id) || ([] as (number | string)[]),
             related: artifact ? getRelatedArtifacts(artifact).map(({ id }) => id) : [],
-            credits: attributes?.credits?.data.map(({ id }) => id) || [],
+            credits: attributes?.credits?.data?.map(({ id }) => id) || [],
             heroImage: attributes?.heroImage?.data || (undefined as FormImage | undefined),
             gallery: (attributes?.gallery?.data || []) as FormImage[],
         },

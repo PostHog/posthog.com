@@ -10,6 +10,7 @@ import WistiaEmbed from 'components/WistiaEmbed'
 import { IconPencil, IconSpinner, IconTrash } from '@posthog/icons'
 import MuseumCard from 'components/Museum/MuseumCard'
 import { useArtifactForm } from 'components/Museum/ArtifactForm'
+import MuseumMenu from 'components/Museum/MuseumMenu'
 import { formatDate, parseVideo, personName } from 'components/Museum/utils'
 import { getRelatedArtifacts, museumRequest, useArtifact } from 'hooks/useMuseum'
 import { useUser } from 'hooks/useUser'
@@ -32,7 +33,7 @@ export default function Artifact({ params }: PageProps): JSX.Element {
         }
     }
 
-    const credits = attributes?.credits?.data.map(({ attributes }) => personName(attributes)).filter(Boolean)
+    const credits = attributes?.credits?.data?.map(({ attributes }) => personName(attributes)).filter(Boolean)
 
     return (
         <>
@@ -46,7 +47,25 @@ export default function Artifact({ params }: PageProps): JSX.Element {
                 title={attributes?.title}
                 hideTitle
                 hideRightSidebar
+                hideAppOptions
                 showQuestions={false}
+                leftSidebar={<MuseumMenu activeUrl={`/museum/artifacts/${params.slug}`} />}
+                rightActionButtons={
+                    isModerator && artifact ? (
+                        <div className="flex gap-1">
+                            <OSButton
+                                size="sm"
+                                icon={<IconPencil />}
+                                onClick={() => openArtifactForm(artifact, () => mutate())}
+                            >
+                                Edit
+                            </OSButton>
+                            <OSButton size="sm" icon={<IconTrash />} onClick={handleDelete}>
+                                Delete
+                            </OSButton>
+                        </div>
+                    ) : undefined
+                }
             >
                 <div className="prose mx-auto max-w-3xl dark:prose-invert">
                     {isLoading ? (
@@ -57,26 +76,7 @@ export default function Artifact({ params }: PageProps): JSX.Element {
                         </p>
                     ) : (
                         <>
-                            <div className="not-prose flex flex-wrap items-center justify-between gap-2">
-                                <Link to="/museum" className="text-sm font-semibold text-secondary">
-                                    ← Museum
-                                </Link>
-                                {isModerator && (
-                                    <div className="flex gap-1">
-                                        <OSButton
-                                            size="sm"
-                                            icon={<IconPencil />}
-                                            onClick={() => openArtifactForm(artifact, () => mutate())}
-                                        >
-                                            Edit
-                                        </OSButton>
-                                        <OSButton size="sm" icon={<IconTrash />} onClick={handleDelete}>
-                                            Delete
-                                        </OSButton>
-                                    </div>
-                                )}
-                            </div>
-                            <h1 className="!mb-1 !mt-4">{attributes.title}</h1>
+                            <h1 className="!mb-1">{attributes.title}</h1>
                             <p className="!mt-0 text-sm text-secondary">
                                 {[
                                     formatDate(attributes.date, attributes.datePrecision),
@@ -124,9 +124,9 @@ export default function Artifact({ params }: PageProps): JSX.Element {
                                     <p className="whitespace-pre-line">{attributes.curatorNotes}</p>
                                 </blockquote>
                             )}
-                            {!!attributes.gallery?.data.length && (
+                            {!!attributes.gallery?.data?.length && (
                                 <div className="not-prose grid grid-cols-2 gap-2 @xl:grid-cols-3">
-                                    {attributes.gallery.data.map(({ id, attributes: image }) => (
+                                    {attributes.gallery.data?.map(({ id, attributes: image }) => (
                                         <ZoomImage key={id}>
                                             <img
                                                 src={image.url}

@@ -6,18 +6,20 @@ export default function MuseumCard({
     image,
     title,
     meta,
+    newWindow = false,
     children,
 }: {
     to: string
     image?: string
     title: string
     meta?: string
+    newWindow?: boolean
     children?: React.ReactNode
 }): JSX.Element {
     return (
         <Link
             to={to}
-            state={{ newWindow: true }}
+            state={newWindow ? { newWindow: true } : undefined}
             data-scheme="secondary"
             className="group flex h-full flex-col overflow-hidden rounded-md border border-primary bg-primary text-primary no-underline transition-transform duration-200 hover:-translate-y-0.5 hover:shadow-lg"
         >

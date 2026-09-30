@@ -3,7 +3,7 @@ import useSWR from 'swr'
 import { SQUEAK_HOST, type StrapiRecord } from 'lib/strapi'
 
 type Relation<T> = { data: StrapiRecord<T> | null }
-type Relations<T> = { data: StrapiRecord<T>[] }
+type Relations<T> = { data: StrapiRecord<T>[] | null }
 
 export type MuseumImage = { url: string; alternativeText?: string }
 export type MuseumTerm = { name: string; slug: string; description?: string }
