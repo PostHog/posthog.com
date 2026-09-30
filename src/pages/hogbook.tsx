@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { HedgehogBackToTheFuture } from '@posthog/brand/hoggies'
 import { IconDocument, IconNotebook, IconPeopleFilled } from '@posthog/icons'
 import { graphql } from 'gatsby'
+import { pizzaPhotos } from 'components/Careers/Pizza/photos'
 import Link from 'components/Link'
 import ReaderView from 'components/ReaderView'
 import SEO from 'components/seo'
@@ -12,13 +13,12 @@ type Post = {
     url: string
     snippet: string
     date: string
-    image?: string
 }
 
 type Article = {
     excerpt: string
     fields: { slug: string }
-    frontmatter: { title: string; date: string; featuredImage?: { publicURL?: string } }
+    frontmatter: { title: string; date: string }
 }
 
 type Friend = {
@@ -70,7 +70,6 @@ export default function Hogbook({ data }: { data: PageData }): JSX.Element {
         url: fields.slug,
         snippet: excerpt,
         date: frontmatter.date,
-        image: frontmatter.featuredImage?.publicURL,
     }))
     const [posts, setPosts] = useState<Post[]>(builtInPosts)
     const [feedFriends, setFeedFriends] = useState<Friend[]>([])
@@ -129,24 +128,11 @@ export default function Hogbook({ data }: { data: PageData }): JSX.Element {
                             if (url.origin !== 'https://posthog.com' || !url.pathname.startsWith('/blog/')) return null
                             const date = item.querySelector('pubDate')?.textContent || ''
                             if (!Number.isFinite(Date.parse(date))) return null
-                            const enclosure = item.querySelector('enclosure')?.getAttribute('url')
-                            let image: string | undefined
-                            if (enclosure) {
-                                const imageUrl = new URL(
-                                    enclosure.replace(/^https:\/\/posthog\.com(?=https?:\/\/)/, ''),
-                                    url.origin
-                                )
-                                if (['https://posthog.com', 'https://res.cloudinary.com'].includes(imageUrl.origin)) {
-                                    image = imageUrl.href
-                                }
-                            }
-
                             return {
                                 title: item.querySelector('title')?.textContent || '',
                                 url: url.pathname,
                                 snippet: item.querySelector('description')?.textContent || '',
                                 date,
-                                image,
                             }
                         } catch {
                             return null
@@ -172,9 +158,6 @@ export default function Hogbook({ data }: { data: PageData }): JSX.Element {
     const friends = data.friends.nodes
         .filter(({ squeakId, firstName, lastName }) => squeakId && (firstName || lastName))
         .slice(0, 6)
-    const photos = posts.some(({ image }) => image)
-        ? posts.filter(({ image }) => image)
-        : builtInPosts.filter(({ image }) => image)
 
     return (
         <>
@@ -238,7 +221,10 @@ export default function Hogbook({ data }: { data: PageData }): JSX.Element {
                                 >
                                     View all PostHog's friends
                                 </Link>
-                                <Link to="/blog" className="block border-b border-[var(--hogbook-border)] py-1 text-sm">
+                                <Link
+                                    to="/careers#pizza"
+                                    className="block border-b border-[var(--hogbook-border)] py-1 text-sm"
+                                >
                                     View more photos
                                 </Link>
                                 <Link
@@ -478,20 +464,19 @@ export default function Hogbook({ data }: { data: PageData }): JSX.Element {
                                     ▼ Photos
                                 </h2>
                                 <div className="grid grid-cols-2 gap-2 p-3 @md:grid-cols-3">
-                                    {photos.map(({ url, title, image }) => (
-                                        <Link key={url} to={url} className="min-w-0 text-xs">
+                                    {pizzaPhotos.map(({ src, alt }) => (
+                                        <Link key={src} to="/careers#pizza" className="min-w-0 text-xs">
                                             <img
-                                                src={image}
-                                                alt=""
+                                                src={src}
+                                                alt={alt}
                                                 loading="lazy"
                                                 className="aspect-[4/3] w-full border border-[var(--hogbook-border)] object-cover"
                                             />
-                                            <span className="mt-1 block line-clamp-2">{title}</span>
                                         </Link>
                                     ))}
                                 </div>
                                 <Link
-                                    to="/blog"
+                                    to="/careers#pizza"
                                     className="block border-t border-[var(--hogbook-border)] px-3 py-2 text-right text-xs"
                                 >
                                     See more photos
@@ -524,9 +509,6 @@ export const query = graphql`
                 frontmatter {
                     title
                     date(formatString: "MMM D, YYYY")
-                    featuredImage {
-                        publicURL
-                    }
                 }
             }
         }
