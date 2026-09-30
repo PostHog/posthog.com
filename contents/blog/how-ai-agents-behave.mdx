@@ -1,6 +1,6 @@
 ---
 title: "How AI agents behave: lessons from 63M MCP tool calls"
-date: 2026-09-17
+date: 2026-09-30
 author:
   - natalia-amorim
 category: General
@@ -29,7 +29,7 @@ In the 90 days up to to September 16, agents made **63 million tool calls** to [
 
 *First, a caveat: when we first looked into the data, almost half of it traffic was us. [PostHog Desktop](/desktop), the [CLI](/docs/cli), the [Slack app](/slack), and our [Signals scouts](/docs/self-driving/signals) all reach the same MCP server as everyone else, and the scouts in particular never sleep. So for this section we've set our own agents aside and looked only at the **55%** that comes from people using their own tools.[^2]*
 
-Over the last 14 days, **Claude Code** is the biggest caller, making up **32% of third-party calls**. OpenAI's **Codex** is second at **22%**, then **Cursor** at 10%, **Cowork** at 7%, and a long tail of Claude Desktop, Claude.ai, ChatGPT, and Claude's Agent SDK at 2–3% each.
+In this timeframe, **Claude Code** was the biggest caller, making up **32% of third-party calls**. OpenAI's **Codex** was second at **22%**, then **Cursor** at 10%, **Cowork** at 7%, and a long tail of Claude Desktop, Claude.ai, ChatGPT, and Claude's Agent SDK at 2–3% each.
 
 Roll it up by vendor and it's simpler: **Anthropic surfaces make up about 50% of all third-party calls, OpenAI 25%**, Cursor 10%, and everyone else fights over what's left.
 
