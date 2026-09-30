@@ -60,6 +60,10 @@ const SKILLS_RELEASE_URL = 'https://github.com/PostHog/posthog/releases/tag/agen
 const SKILLS_INSTALL_LINE = `Install: the PostHog AI plugin (${SKILLS_PLUGIN_URL}) bundles every PostHog skill for Claude Code, Codex, Cursor, and Gemini CLI. Or download skills.zip from ${SKILLS_RELEASE_URL} and copy a skill folder into the agent's skills directory, for example .claude/skills/.`
 
 const NO_INPUT_SCHEMA = { type: 'object', properties: {} }
+const INTENT_PROPERTY = {
+    type: 'string',
+    description: "Why are you calling this tool? Briefly describe the user's goal.",
+}
 
 const textResult = (text: string, isError = false): ToolResult => ({
     content: [{ type: 'text', text }],
@@ -319,25 +323,72 @@ function buildTools(deps: MutableRefObject<ToolDeps>): WebMCPTool[] {
     ]
 }
 
+/** Records only schema-owned key names. Argument values can contain private data. */
+function getDeclaredInputKeys(tool: WebMCPTool, input: ToolInput): string[] {
+    try {
+        const schemaProperties = tool.inputSchema.properties
+        if (!schemaProperties || typeof schemaProperties !== 'object' || Array.isArray(schemaProperties)) return []
+        return Object.keys(input)
+            .filter((key) => key.length <= 64 && Object.prototype.hasOwnProperty.call(schemaProperties, key))
+            .sort()
+            .slice(0, 20)
+    } catch {
+        return []
+    }
+}
+
+/** Adds the MCP analytics intent argument. The wrapper removes it before the tool runs. */
+function addIntentInput(inputSchema: Record<string, unknown>): Record<string, unknown> {
+    const schemaProperties = inputSchema.properties
+    const properties =
+        schemaProperties && typeof schemaProperties === 'object' && !Array.isArray(schemaProperties)
+            ? schemaProperties
+            : {}
+    const required = Array.isArray(inputSchema.required)
+        ? inputSchema.required.filter((value): value is string => typeof value === 'string')
+        : []
+
+    return {
+        ...inputSchema,
+        properties: { ...properties, context: INTENT_PROPERTY },
+        required: Array.from(new Set([...required, 'context'])),
+    }
+}
+
 /** Wraps a tool so every call is a PostHog event, and a thrown error becomes an error result. */
 function withTelemetry(tool: WebMCPTool): WebMCPTool {
     return {
         ...tool,
+        inputSchema: addIntentInput(tool.inputSchema),
         execute: async (input, options) => {
             const started = performance.now()
-            const capture = (success: boolean) =>
-                window.posthog?.capture('webmcp tool called', {
-                    tool: tool.name,
-                    success,
-                    duration_ms: Math.round(performance.now() - started),
+            const intent = typeof input.context === 'string' ? input.context.trim() : ''
+            const toolInput = { ...input }
+            delete toolInput.context
+            const inputKeys = getDeclaredInputKeys(tool, toolInput)
+            const capture = (isError: boolean, errorType?: string) =>
+                window.posthog?.capture('$mcp_tool_call', {
+                    // MCP analytics reads only events that carry this source.
+                    $mcp_source: 'posthog_mcp_analytics',
+                    $mcp_transport: 'webmcp',
+                    $mcp_client_name: 'webmcp',
+                    $mcp_server_name: window.location.hostname,
+                    $mcp_resource_name: tool.name,
+                    $mcp_tool_name: tool.name,
+                    $mcp_tool_description: tool.description,
+                    $mcp_input_keys: inputKeys,
+                    ...(intent ? { $mcp_intent: intent, $mcp_intent_source: 'context_parameter' } : {}),
+                    $mcp_is_error: isError,
+                    $mcp_duration_ms: Math.round(performance.now() - started),
+                    ...(errorType ? { $mcp_error_type: errorType } : {}),
                 })
 
             try {
-                const result = await tool.execute(input, options)
-                capture(!result.isError)
+                const result = await tool.execute(toolInput, options)
+                capture(result.isError === true)
                 return result
             } catch (error) {
-                capture(false)
+                capture(true, error instanceof Error ? error.name : 'Error')
                 return textResult(
                     `${tool.name} failed: ${error instanceof Error ? error.message : String(error)}`,
                     true
