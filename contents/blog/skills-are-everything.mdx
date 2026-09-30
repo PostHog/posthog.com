@@ -28,12 +28,12 @@ Here is a blog about all the reasons and ways I love skills and how they have ch
 Today, almost every single chat I have with an agent, on any surface, loads at least one skill from the [PostHog skills store](/docs/skills). I own 126 skills in our internal project as I write this. About 90 of them are [scouts](/docs/self-driving/scouts), which are skills that run themselves on a schedule. The other 30 or so are skills I built for how I actually work, and those are the ones this post is about.
 
 <ProductScreenshot
-    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/TODO_skills_pilled_slack.png"
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/skills_powerful_slack_b2e9c69600.png"
     classes="rounded"
-    alt="A teammate on Slack asking whether Andy has literally built skills for everything in his life, and Andy replying: yes."
+    alt="A Slack message from a teammate, Jake: wow. yeah i had no idea the skills product was this powerful... it seems more like an agents product to me. Basically you have a skill (directory of files/context/instructions) that you can invoke with your own local harness."
 />
 
-*A colleague asked if I had literally built skills for everything in my life. Yes. See below.*
+*A teammate, after I shared how I use the skills store.*
 
 So this post is my attempt to explain what changed my mind, and to show you the actual skills I lean on every day. Not in a cringe "hey try my skill bro" sort of way. 
 
@@ -57,15 +57,32 @@ Here's how I use the store, roughly in order of how much it changed my day.
 
 Every meaningful piece of work I do on scouts and self-driving is documented and maintained by my agents in one of two skills: `self-driving-work` and `scouts-work`. They're siblings with identical conventions: a numbered `issues/` backlog with an index, an `ideas/` folder, `open-prs.md`, a rolling 14-day `CHANGELOG.md`, `environment-notes.md` for durable gotchas, and a `HANDOVER.md` that each session overwrites its own section of.
 
-The `self-driving-work` skill was created on August 13. By the time I'm writing this, it's on version 260 with 64 bundled files, including 45 numbered issues and 10 ideas. I didn't write most of those. My agents did, at the end of sessions, because the skill tells them to.
+The `self-driving-work` skill was created on August 13. By the time I'm writing this, it's on version 368 with 104 bundled files, including 48 numbered issues, 14 ideas, and 28 pain points. I didn't write most of those. My agents did, at the end of sessions, because the skill tells them to.
 
-<ProductScreenshot
-    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/TODO_self_driving_work_files.png"
-    classes="rounded"
-    alt="The self-driving-work skill in PostHog showing its version history and bundled files: HANDOVER.md, CHANGELOG.md, issues/, ideas/, open-prs.md."
-/>
+```
+self-driving-work         v368, 104 bundled files
+├── SKILL.md              the thin index
+├── HANDOVER.md           one section per thread of work
+├── CHANGELOG.md          rolling 14-day window
+├── environment-notes.md  durable gotchas
+├── open-prs.md
+├── roadmap.md
+├── dogfooding.md
+├── field-feedback.md
+├── issues/               48 issues + index
+│   ├── 01-reviewer-suggestion-regression.md
+│   ├── 02-crowd-fallback-provenance.md
+│   └── ...
+├── ideas/                14 ideas + index
+│   ├── 01-rank-by-author-association.md
+│   └── ...
+├── pain-points/          28 bad examples + index
+├── feedback/             2 + index
+└── scripts/
+    └── task_summary_sampler.py
+```
 
-*The file tree of a project-tracker skill after six weeks of agents maintaining it.*
+*The file tree of a project-tracker skill after seven weeks of agents maintaining it.*
 
 The loop looks like this. I start a session on any surface (local Claude Code, a cloud task, Slack, PostHog Desktop) and say "resume self-driving work". The agent loads the skill, reads `HANDOVER.md`, scans the backlog index, and knows where we left off. We do the work in the repo and the product, not in the skill. At the end of the session, the agent logs any new issue or idea, records any PR that opened or merged, adds one changelog line, and overwrites its handover section.
 
@@ -90,15 +107,31 @@ The project tracker pattern scales further than I expected. `autoresearch` is th
 
 That's a lot of moving parts, a lot of design calls, and a PR stack 31 layers deep. Every bit of context anyone internally needs to work on it is in one skill.
 
-<ProductScreenshot
-    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/TODO_autoresearch_skill_files.png"
-    classes="rounded"
-    alt="The autoresearch skill in PostHog at version 463, with bundled files including design.md, TODO.md, HANDOVER.md, PORTBACK.md, stack-split-plan.md, reviewer-brief.md, and helper scripts."
-/>
+```
+autoresearch              v551, 17 bundled files
+├── SKILL.md              the thin index
+├── HANDOVER.md           rewritten every session
+├── CHANGELOG.md
+├── design.md             spec + decision log
+├── architecture.md
+├── TODO.md               the backlog
+├── PORTBACK.md
+├── stack-split-plan.md
+├── reviewer-brief.md
+├── local-e2e-testing.md
+├── demo-runbook.md
+├── pr-bodies-31-30-22.md
+├── wave-e-pr-bodies.md
+├── wave-e-manifest.txt
+├── wave-e-layers.json
+├── wave-e-slicer.py
+├── wave-e-replay.sh
+└── sign_and_push.sh
+```
 
-*One skill, 463 versions, 17 bundled files, and five months of a product taking shape.*
+*One skill, 551 versions, 17 bundled files, and five months of a product taking shape.*
 
-The skill started on April 27 as a design spec. Today it's on version 463 with 17 bundled files:
+The skill started on April 27 as a design spec. Today it's on version 551 with 17 bundled files:
 
 - `design.md` is the spec, including the trust boundaries, the open questions, the things we ruled out, and a decision log. The first rule in the skill body is to check that log before reopening anything, because settled questions stay settled.
 - `TODO.md` is the backlog, split into items that fold into the current stack, items that wait until it lands, and items blocked on a call from me. PRs and review replies cite them by id.
@@ -139,11 +172,18 @@ Its sibling, `scouts-debugging`, does the same job for the scout fleet itself. B
 
 The `andy-inbox` skill is how I start most days. It pulls every report in the [self-driving inbox](/docs/self-driving/inbox) where I'm a suggested reviewer, maps each one to its GitHub PR and issues, and renders one plain line per report: priority, age, review state, CI, and one next action.
 
-<ProductScreenshot
-    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/TODO_andy_inbox_table.png"
-    classes="rounded"
-    alt="Terminal output from the andy-inbox skill: a numbered table of inbox reports with PR number, age, review state, CI status, and a next action per row."
-/>
+```
+In flight with a PR, newest report first
+
+#  Next               Report                                        PR       Signals
+1  ENQUEUE (YOUR GO)  fix(signals): give the revenue scout a supp…  #108959  stamp✓ CI✓
+2  FIX CI             fix(mcp): paginate large GitHub repository…   #108947  stamp✓ CI2✗
+3  ENQUEUE (YOUR GO)  fix(mcp): document the usable --json flag p…  #108934  stamp✓ CI✓
+4  ENQUEUE (YOUR GO)  fix(hogql): system schema discovery relapse…  #108866  stamp✓ CI✓
+5  FIX CI             fix(inbox): show why follow-up checks faile…  #108829  stamp? CI2✗
+6  ENQUEUE (YOUR GO)  fix(mcp): bound health-issues-list payloads…  #108798  stamp✓ CI✓
+7  FIX CI             fix(mcp): make execute-sql join errors iden…  #108284  stamp✓ CI2✗
+```
 
 *The in-flight table. One line per report, with the thing I need to do next.*
 
@@ -160,9 +200,9 @@ Before I went on holiday recently, I posted a state-of-the-world message to my t
 Almost every bullet was a link to a skill.
 
 <ProductScreenshot
-    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/TODO_holiday_handover_slack.png"
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/holiday_handover_slack_edc435a4a1.png"
     classes="rounded"
-    alt="Andy's Slack handover message before a holiday, with bullets linking to scouts-dogfooding, scouts-debugging, scouts-dashboard, signals-dwh, and other skills."
+    alt="Part of Andy's Slack handover message before a holiday. Each bullet links to a skill: scouts-dashboard, signals-dwh, signals-alerts, inbox-alerts, inbox-observability, scouts-dogfooding, scouts-debugging, signals-temporal, and inbox-vision-scanner."
 />
 
 *The holiday handover. Every bullet is a skill, so a teammate or their agent can pick it up.*
@@ -195,9 +235,19 @@ You can do all of this with a `.claude/skills/` folder. I did for a while. Here'
 
 - **It's on every surface.** The same skill loads in Claude Code on my laptop, in a cloud task, in Slack, in Codex, in Cursor, and in PostHog Desktop. If your skills only live in one repo's dotfiles, your agents on every other surface are working from nothing.
 - **Agents can write to it.** The `skill-update` tool takes incremental `edits` and `file_edits` with a `base_version` check, so two sessions can maintain the same skill without clobbering each other. That's what makes the project-tracker pattern possible.
-- **It's versioned.** 260 versions of `self-driving-work` means 260 diffs I can read when something looks off. A file on disk gives me one.
+- **It's versioned.** 368 versions of `self-driving-work` means 368 diffs I can read when something looks off. A file on disk gives me one.
 - **It's shared.** A teammate, or their agent, or a scout, reads the same thing I do. The holiday handover only works because of this.
 - **Progressive disclosure is built in.** `skill-list` returns names and descriptions. `skill-get` returns the body and a file manifest. `skill-file-get` pulls one file. Nothing loads that the task doesn't need.
+
+It's not just me, either. Here's every skill created in our internal project since late April:
+
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/skills_store_growth_insight_3473c68bd8.png"
+    classes="rounded"
+    alt="A PostHog SQL insight showing the cumulative number of skills created in PostHog's internal project, by week, rising from 62 in late April to 761 at the end of September."
+/>
+
+*Skills created in PostHog's own project, cumulative by week. Deleted skills excluded.*
 
 If you're already using the [PostHog MCP](/docs/model-context-protocol), you have this today. Install the [PostHog AI plugin](https://github.com/PostHog/ai-plugin) and your agent already knows the `skills-store` skill. I keep a tiny local bridge called `/phs` that just loads it; the [docs show how](/docs/skills#step-3-set-up-a-bridge-skill-optional-shortcut).
 
