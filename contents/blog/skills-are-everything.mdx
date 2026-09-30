@@ -19,9 +19,13 @@ seo:
     metaDescription: "How I use PostHog skills for almost everything: project tracking, data warehouse context, inbox triage, team handovers, and scouts that maintain their own skills. Real skills, version counts, and the rules I learned the hard way."
 ---
 
-When agent skills first came out, I thought they were a bit ridiculous. A markdown file with some frontmatter that tells the model how to do a thing? We already had prompts. We already had `CLAUDE.md`. Why did this need a name?
+When agent skills first came out, I thought they were very silly. We just casting magic spells now are we? Is that where we are?
 
-I was wrong, and I'm not even sorry about how wrong I was. Today, almost every single chat I have with an agent, on any surface, loads at least one skill from the [PostHog skills store](/docs/skills). I own 126 skills in our internal project as I write this. About 90 of them are [scouts](/docs/self-driving/scouts), which are skills that run themselves on a schedule. The other 30 or so are skills I built for how I actually work, and those are the ones this post is about.
+But over time i bought into the whole context engineering thing and started to use them more and now im convinced they will change your life!
+
+Here is a blog about all the reasons and ways i love skills and how they have changed my life. I hope it changes yours too.
+
+Today, almost every single chat I have with an agent, on any surface, loads at least one skill from the [PostHog skills store](/docs/skills). I own 126 skills in our internal project as I write this. About 90 of them are [scouts](/docs/self-driving/scouts), which are skills that run themselves on a schedule. The other 30 or so are skills I built for how I actually work, and those are the ones this post is about.
 
 <ProductScreenshot
     imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/TODO_skills_pilled_slack.png"
@@ -31,15 +35,21 @@ I was wrong, and I'm not even sorry about how wrong I was. Today, almost every s
 
 *A colleague asked if I had literally built skills for everything in my life. Yes. See below.*
 
-So this post is my attempt to explain what changed my mind, and to show you the actual skills I lean on every day. Not in a cringe "hey try my skill bro" sort of way. All of that is cringe, and I promise the skills I'm about to show you are not magic prompts that make the model smarter.
+So this post is my attempt to explain what changed my mind, and to show you the actual skills I lean on every day. Not in a cringe "hey try my skill bro" sort of way. 
+
+All of that is a bit cringe, and I promise the skills I'm about to show you are not magic prompts that make the model smarter. I'm much more evangelical about various _ways_ to use skills so that you can be as lazy as possible and make your agents a joy to work with.
 
 ## Skills are context, but they're more than that
 
 Here's the thing I got wrong at the start: I thought of a skill as a better prompt. Something that teaches the agent a trick.
 
-The skills I actually use aren't tricks. They're **little portable agentic memory systems**. A skill is the perfect abstraction for tagging a bundle of context, so an agent (or I) can pull that context in exactly when it's needed and nowhere else. The body is a thin index. The bundled files hold the detail. The agent reads the index and pulls only the files the current task touches. That's [progressive disclosure](/docs/skills#how-it-works), and it's the whole point.
+The skills I actually use aren't tricks. They're **little portable agentic memory systems**. A skill is the perfect abstraction for tagging a bundle of context, so an agent (or I) can pull that context in exactly when it's needed and nowhere else. 
 
-We shouldn't need magical skills to make AI better, and I think that whole category will go away soon. Models will just be good. What won't go away is the need to manage **context**: what's true right now, what happened last session, what's in flight, what bit us before. That's the part I'm skills-pilled on.
+The body is typically a thin index. The bundled files hold the detail. The agent reads the index and pulls only the files the current task touches. That's [progressive disclosure](https://platform.claude.com/docs/en/agents-and-tools/agent-skills/best-practices#progressive-disclosure-patterns), and it's the whole point.
+
+We shouldn't need magical skills to make AI better, and I think that whole category will go away soon. Models will just be good. 
+
+What won't go away is the need to manage **context**: what's true right now, what happened last session, what's in flight, what bit us before. That's the part I'm skills-pilled on. Eventually the models will probalby just learn all this too but thats probably a bit further out.
 
 Here's how I use the store, roughly in order of how much it changed my day.
 
