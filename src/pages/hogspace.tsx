@@ -1,10 +1,12 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
 import { HedgehogDj } from '@posthog/brand/hoggies'
 import { graphql, useStaticQuery } from 'gatsby'
 import Link from 'components/Link'
 import ReaderView from 'components/ReaderView'
 import SEO from 'components/seo'
+import { extractVideoId } from 'components/TapePlayer/utils'
 import { AVATAR_FALLBACK_URL } from 'constants/index'
+import { useMixtapes } from 'hooks/useMixtapes'
 
 const ABOUT_ME = `hai every1 im new!!!!!!! im PostHog, the little hog of analytics doom XD\u0020\u0020
 i watch users click the wrong button 47 times and call it “insight” *holds up spork*\u0020\u0020
@@ -31,6 +33,21 @@ export default function Hogspace(): JSX.Element {
             }
         }
     `)
+    const { mixtapes, isLoading: mixtapesLoading } = useMixtapes()
+    const playableMixtapes = useMemo(
+        () =>
+            mixtapes
+                .map((mixtape) => ({
+                    id: mixtape.id,
+                    title: mixtape.attributes.title,
+                    videoIds: mixtape.attributes.tracks
+                        .map((track) => extractVideoId(track.youtubeUrl))
+                        .filter((videoId) => /^[a-zA-Z0-9_-]{11}$/.test(videoId)),
+                }))
+                .filter((mixtape) => mixtape.videoIds.length > 0),
+        [mixtapes]
+    )
+    const [selectedMixtape, setSelectedMixtape] = useState<{ id: number; title: string; src: string } | null>(null)
     const [friends, setFriends] = useState<Friend[]>([])
     const [blogPost, setBlogPost] = useState<BlogPost | null>(null)
     const [status, setStatus] = useState<'online' | 'issue' | 'unknown'>('unknown')
@@ -254,14 +271,60 @@ export default function Hogspace(): JSX.Element {
                                         <div className="min-w-0 flex-1">
                                             <p className="m-0 text-sm font-semibold">PostHog FM</p>
                                             <p className="m-0 text-xs">Mixtapes for people who build software.</p>
-                                            <Link
-                                                to="/fm"
-                                                className="mt-2 inline-block border border-light-1 px-3 py-1 text-xs !text-light-1 hover:bg-blue"
-                                            >
-                                                ▶ Play a mixtape
-                                            </Link>
+                                            {mixtapesLoading ? (
+                                                <p className="mt-2 text-xs">Loading mixtapes…</p>
+                                            ) : playableMixtapes.length &&
+                                              (!selectedMixtape || playableMixtapes.length > 1) ? (
+                                                <button
+                                                    type="button"
+                                                    className="mt-2 border border-light-1 px-3 py-1 text-xs text-light-1 hover:bg-blue"
+                                                    onClick={() => {
+                                                        const choices = playableMixtapes.filter(
+                                                            (mixtape) => mixtape.id !== selectedMixtape?.id
+                                                        )
+                                                        const mixtape =
+                                                            choices[Math.floor(Math.random() * choices.length)]
+                                                        const [firstVideo, ...remainingVideos] = mixtape.videoIds
+                                                        const parameters = new URLSearchParams({
+                                                            autoplay: '1',
+                                                            playsinline: '1',
+                                                        })
+                                                        if (remainingVideos.length) {
+                                                            parameters.set('playlist', remainingVideos.join(','))
+                                                        }
+                                                        setSelectedMixtape({
+                                                            id: mixtape.id,
+                                                            title: mixtape.title,
+                                                            src: `https://www.youtube-nocookie.com/embed/${firstVideo}?${parameters}`,
+                                                        })
+                                                    }}
+                                                >
+                                                    {selectedMixtape
+                                                        ? '↻ Play another mixtape'
+                                                        : '▶ Play a random mixtape'}
+                                                </button>
+                                            ) : !selectedMixtape ? (
+                                                <Link
+                                                    to="/fm"
+                                                    className="mt-2 inline-block text-xs !text-light-1 underline"
+                                                >
+                                                    Explore mixtapes ↗
+                                                </Link>
+                                            ) : null}
                                         </div>
                                     </div>
+                                    {selectedMixtape && (
+                                        <div className="bg-light-12 px-4 pb-4 text-light-1">
+                                            <p className="mb-2 text-xs">Now playing: {selectedMixtape.title}</p>
+                                            <iframe
+                                                src={selectedMixtape.src}
+                                                title={`PostHog FM: ${selectedMixtape.title}`}
+                                                className="aspect-video w-full border-0"
+                                                allow="autoplay; encrypted-media; picture-in-picture"
+                                                allowFullScreen
+                                            />
+                                        </div>
+                                    )}
                                 </section>
 
                                 <section aria-labelledby="blog-heading">
