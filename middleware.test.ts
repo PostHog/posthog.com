@@ -70,7 +70,7 @@ test('falls through when no Markdown sibling exists', async (t) => {
 const home = 'https://posthog.com/'
 
 test('redirects the home page to the translation the visitor ranks highest', async () => {
-    for (const acceptLanguage of ['pt', 'pt-BR,pt;q=0.9,en-US;q=0.8', 'pt-PT', 'fr;q=0.9, pt-BR;q=0.8, en;q=0.1']) {
+    for (const acceptLanguage of ['pt', 'pt-BR,pt;q=0.9,en-US;q=0.8', 'pt-PT', 'nl;q=0.9, pt-BR;q=0.8, en;q=0.1']) {
         const response = await middleware(
             new Request(home, { headers: { 'accept-language': acceptLanguage, cookie: testVisitor } })
         )
@@ -141,7 +141,7 @@ test('captures the exposure with the variant the visitor got', async (t) => {
 })
 
 test('serves English when English ranks higher, nothing matches, or the header is missing', async () => {
-    for (const acceptLanguage of ['', 'en-US,en;q=0.9,pt-BR;q=0.8', 'fr-FR,de;q=0.9', 'pt;q=0', '*']) {
+    for (const acceptLanguage of ['', 'en-US,en;q=0.9,pt-BR;q=0.8', 'nl-NL,sv;q=0.9', 'pt;q=0', '*']) {
         const headers = acceptLanguage ? { 'accept-language': acceptLanguage } : undefined
         assert.equal(await middleware(new Request(home, { headers })), undefined, acceptLanguage)
     }
@@ -171,7 +171,7 @@ test('sends locale-shaped paths to the translated page for their language', asyn
 })
 
 test('leaves the translated page and other short paths alone', async () => {
-    for (const path of ['/pt', '/ai', '/fr-FR', '/EU', '/pt-BRAZIL']) {
+    for (const path of ['/pt', '/ai', '/nl-NL', '/EU', '/pt-BRAZIL']) {
         assert.equal(await middleware(new Request(`https://posthog.com${path}`)), undefined, path)
     }
 })
