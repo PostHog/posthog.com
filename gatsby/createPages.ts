@@ -5,6 +5,7 @@ import slugify from 'slugify'
 import menu from '../src/navs/index'
 import type { GatsbyContentResponse, MetaobjectsCollection } from '../src/templates/merch/types'
 import { flattenMenu, replacePath } from './utils'
+import { HOGPEDIA_RESERVED } from '../src/components/Hogpedia/categories'
 import { isLatestVersion, typeHasPage } from '../src/components/SdkReferences/utils'
 const Slugger = require('github-slugger')
 const markdownLinkExtractor = require('markdown-link-extractor')
@@ -124,6 +125,8 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
     // Docs
     const ApiEndpoint = path.resolve(`src/templates/ApiEndpoint.tsx`)
     const HandbookTemplate = path.resolve(`src/templates/Handbook.tsx`)
+    const HogpediaTemplate = path.resolve(`src/templates/Hogpedia.tsx`)
+    const HogpediaCategoryTemplate = path.resolve(`src/templates/HogpediaCategory.tsx`)
 
     const DataPipeline = path.resolve(`src/templates/DataPipeline.tsx`)
     const DataWarehouseSource = path.resolve(`src/templates/DataWarehouseSource.tsx`)
@@ -222,6 +225,25 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
                         slug
                     }
                     rawBody
+                }
+            }
+            hogpedia: allMdx(
+                filter: { fields: { slug: { regex: "/^/hogpedia//" } }, frontmatter: { title: { ne: "" } } }
+            ) {
+                nodes {
+                    id
+                    headings {
+                        depth
+                        value
+                    }
+                    fields {
+                        slug
+                    }
+                    frontmatter {
+                        hogpedia {
+                            categories
+                        }
+                    }
                 }
             }
             tutorials: allMdx(filter: { fields: { slug: { regex: "/^/tutorials/" } } }) {
@@ -689,6 +711,9 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
         if (node.parent?.sourceInstanceName === 'posthog-main-repo') return
         const plainSlug = node.fields?.slug || node.slug
         if (plainSlug?.startsWith('/ko/newsletter/') || plainSlug?.startsWith('ko/newsletter/')) return
+        // Hogpedia articles get the MonoBook template from the dedicated loop below, so a
+        // generic Plain page would be a duplicate at the same path.
+        if (plainSlug?.startsWith('/hogpedia/')) return
         // `_`-prefixed template directories are starters to copy from, not pages. They carry a
         // title (a starter has to model a real template), so the `title: { nin: [""] }` filter
         // above doesn't exclude them the way it excludes sibling SKILL.md files.
@@ -858,6 +883,43 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
         regex: `$${node.url}/`,
     }))
     createPosts(result.data.manual.nodes, 'docs', HandbookTemplate, { name: 'Using PostHog', url: '/using-posthog' })
+
+    // Hogpedia: one page per article, plus one page per category the articles declare.
+    //
+    // `createPosts` is deliberately not used. It resolves breadcrumbs out of the shared nav in
+    // `src/navs/index.js`, and Hogpedia is intentionally absent from that nav — it brings its
+    // own sidebar, the way /context-warehouse does.
+    const hogpediaCategories = new Set<string>()
+    result.data.hogpedia.nodes.forEach((node) => {
+        const slug = replacePath(node.fields.slug)
+        if (HOGPEDIA_RESERVED.some((reserved) => slug === `/hogpedia/${reserved}`)) {
+            throw new Error(
+                `contents${node.fields.slug}.mdx collides with a Hogpedia meta page. ` +
+                    `Reserved names: ${HOGPEDIA_RESERVED.join(', ')}`
+            )
+        }
+        ;(node.frontmatter?.hogpedia?.categories || []).forEach((category) => hogpediaCategories.add(category))
+        createPage({
+            path: slug,
+            component: HogpediaTemplate,
+            context: {
+                id: node.id,
+                slug,
+                // The template asks whether a talk page exists, so the discussion tab is only a
+                // link when it leads somewhere.
+                talkSlug: slug.replace('/hogpedia/', '/hogpedia/talk/'),
+                tableOfContents: node.headings && formatToc(node.headings),
+            },
+        })
+    })
+
+    Array.from(hogpediaCategories).forEach((category) => {
+        createPage({
+            path: `/hogpedia/category/${slugify(category, { lower: true, strict: true })}`,
+            component: HogpediaCategoryTemplate,
+            context: { category },
+        })
+    })
 
     result.data.tutorials.nodes.forEach((node) => {
         const { slug } = node.fields
@@ -1344,6 +1406,25 @@ async function createMinimalPages({
                     }
                 }
             }
+            hogpedia: allMdx(
+                filter: { fields: { slug: { regex: "/^/hogpedia//" } }, frontmatter: { title: { ne: "" } } }
+            ) {
+                nodes {
+                    id
+                    headings {
+                        depth
+                        value
+                    }
+                    fields {
+                        slug
+                    }
+                    frontmatter {
+                        hogpedia {
+                            categories
+                        }
+                    }
+                }
+            }
         }
     `)
 
@@ -1431,6 +1512,7 @@ async function createMinimalPages({
         allSdkReferences: { nodes: any[] }
         allSdkTypes: { nodes: any[] }
         pocketGuides: { nodes: any[] }
+        hogpedia: { nodes: any[] }
     }
 
     // Pocket guides render in preview builds too - reviewers need to click through the book.
@@ -1444,6 +1526,34 @@ async function createMinimalPages({
             context: {
                 id: node.id,
             },
+        })
+    })
+
+    // Hogpedia renders in preview builds too - a reviewer has to click through the
+    // encyclopedia, and every link in it has to resolve.
+    const minimalHogpediaCategories = new Set<string>()
+    data.hogpedia.nodes.forEach((node) => {
+        const slug = replacePath(node.fields?.slug)
+        if (!slug) return
+        ;(node.frontmatter?.hogpedia?.categories || []).forEach((category: string) =>
+            minimalHogpediaCategories.add(category)
+        )
+        createPage({
+            path: slug,
+            component: path.resolve(`src/templates/Hogpedia.tsx`),
+            context: {
+                id: node.id,
+                slug,
+                talkSlug: slug.replace('/hogpedia/', '/hogpedia/talk/'),
+                tableOfContents: node.headings && formatToc(node.headings),
+            },
+        })
+    })
+    Array.from(minimalHogpediaCategories).forEach((category) => {
+        createPage({
+            path: `/hogpedia/category/${slugify(category, { lower: true, strict: true })}`,
+            component: path.resolve(`src/templates/HogpediaCategory.tsx`),
+            context: { category },
         })
     })
 

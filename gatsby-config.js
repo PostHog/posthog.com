@@ -236,8 +236,12 @@ module.exports = {
                     // Versioned SDK reference pages age out of the build, so keep them out of the sitemap.
                     const VERSIONED_SDK_REFERENCE = /^\/docs\/references\/[a-z0-9-]+-(\d|latest)/
 
+                    // Hogpedia's talk pages and its redirect/search routes are noindex, so listing
+                    // them in the sitemap would be a mixed signal. The articles themselves stay.
+                    const HOGPEDIA_NOINDEX = /^\/hogpedia\/(talk\/|random$|search$)/
+
                     const transformedPages = allPages
-                        .filter(({ path }) => !VERSIONED_SDK_REFERENCE.test(path))
+                        .filter(({ path }) => !VERSIONED_SDK_REFERENCE.test(path) && !HOGPEDIA_NOINDEX.test(path))
                         .map(({ path }) => {
                             return {
                                 path: `${site.siteMetadata.siteUrl}${path}`,

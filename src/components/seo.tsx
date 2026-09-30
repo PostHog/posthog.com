@@ -139,7 +139,7 @@ export default SEO
  * PostHog as a schema.org Organization. Shared so the homepage and every product page
  * describe the same entity rather than drifting copies of it.
  */
-const POSTHOG_ORGANIZATION = {
+export const POSTHOG_ORGANIZATION = {
     '@context': 'https://schema.org',
     '@type': 'Organization',
     name: 'PostHog',

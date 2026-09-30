@@ -1,0 +1,136 @@
+---
+title: PostHog
+description: PostHog is an open-source platform for building software products. It combines product analytics, session replay, feature flags, experiments, error tracking, surveys, and a data warehouse in a single tool.
+hogpedia:
+    categories: ['Company', 'Products']
+    aliases: ['PostHog Inc', 'PostHog Inc.']
+    featured: true
+    infobox:
+        title: PostHog
+        hog: HedgehogFinalEvolution
+        caption: PostHog uses a hedgehog as its mascot.
+        rows:
+            - label: Type
+              value: Software company
+            - label: Industry
+              value: Developer tools
+            - label: Founded
+              value: 23 January 2020
+            - label: Founders
+              value: James Hawkins, Tim Glaser
+            - label: Accelerator
+              value: Y Combinator (W20)
+            - label: Headquarters
+              value: Fully remote
+            - label: Products
+              value: '[Product analytics](/hogpedia/product-analytics), [session replay](/hogpedia/session-replay), [feature flags](/hogpedia/feature-flags), [experiments](/hogpedia/experiments), [error tracking](/hogpedia/error-tracking), surveys, web analytics, data warehouse, CDP, [AI observability](/hogpedia/ai-observability)'
+            - label: Licence
+              value: Open source, with a paid cloud service
+            - label: Website
+              value: '[posthog.com](/)'
+    seeAlso:
+        - 'History of PostHog|/hogpedia/history-of-posthog'
+        - 'The PostHog Handbook|/hogpedia/the-posthog-handbook'
+        - 'Remote work at PostHog|/hogpedia/remote-work-at-posthog'
+        - 'Product engineering|/hogpedia/product-engineering'
+        - 'Max the hedgehog|/hogpedia/max-the-hedgehog'
+    references:
+        - id: 1
+          text: 'PostHog handbook, "How we got here"'
+          url: /handbook/story
+        - id: 2
+          text: 'PostHog press kit, funding history'
+          url: /media
+        - id: 3
+          text: 'PostHog handbook, "Why does PostHog exist?"'
+          url: /handbook/why-does-posthog-exist
+        - id: 4
+          text: 'PostHog products'
+          url: /products
+        - id: 5
+          text: 'PostHog handbook, "Culture"'
+          url: /handbook/company/culture
+        - id: 6
+          text: 'PostHog handbook, "Small teams"'
+          url: /handbook/company/small-teams
+        - id: 7
+          text: 'PostHog on GitHub'
+          url: https://github.com/PostHog/posthog
+        - id: 8
+          text: 'PostHog pricing'
+          url: /pricing
+    external:
+        - title: posthog.com
+          url: /
+        - title: PostHog on GitHub
+          url: https://github.com/PostHog/posthog
+        - title: The PostHog Handbook
+          url: /handbook
+        - title: PostHog documentation
+          url: /docs
+---
+
+**PostHog** is an open-source platform for building software products. It combines [product analytics](/hogpedia/product-analytics), [session replay](/hogpedia/session-replay), [feature flags](/hogpedia/feature-flags), [experiments](/hogpedia/experiments), [error tracking](/hogpedia/error-tracking), surveys, web analytics, a data warehouse, and a customer data platform in a single tool.<Ref id="4" /> The company of the same name was founded by James Hawkins and Tim Glaser on 23 January 2020.<Ref id="1" />
+
+PostHog is built for engineers who make product decisions themselves, a role the company calls a [product engineer](/hogpedia/product-engineering). Its core is open source and can be self-hosted, and it also sells a hosted cloud service with a free monthly allowance on every product.<Ref id="8" />
+
+## Overview
+
+A product team usually buys one tool to measure behaviour, a second to record sessions, a third to control feature releases, and a fourth to run tests. Each tool holds a separate copy of the user data, so a question that crosses two of them is hard to answer.
+
+PostHog puts those tools on one event database. A single stream of events feeds every product, so the same user can be counted in a funnel, watched in a replay, targeted by a flag, and enrolled in an experiment without a data export. This is the company's main argument for itself, and it is the reason it describes its products as one platform rather than a suite.<Ref id="4" />
+
+## History
+
+PostHog began after its founders spent about half a year on other ideas. Their first idea was a tool to help engineers manage technical debt. PostHog was their sixth idea.<Ref id="1" />
+
+The company entered Y Combinator's W20 batch and released its first version on Hacker News four weeks after the first line of code. The response produced more than 300 self-hosted deployments within days, and the GitHub repository passed 1,500 stars two weeks later.<Ref id="1" />
+
+PostHog has raised money in six rounds. Investors include Y Combinator's Continuity Fund, GV, 1984 Ventures, Tapas Capital, Formus Capital, Stripe, and Peak XV Partners.<Ref id="1" /><Ref id="2" /> The handbook gives the total raised since 2020 as approximately $194m as of October 2025.<Ref id="1" />
+
+The two PostHog sources give different dates and amounts for the early rounds. The handbook timeline dates the seed round to April 2020, the Series A to December 2020, and the Series B to June 2021.<Ref id="1" /> The press kit dates them to March 2020, July 2020, and March 2021, and it lists a $10m Series C that the timeline does not mention.<Ref id="2" /> This article does not resolve the difference. For a specific round, read both sources.
+
+For the full timeline, see [History of PostHog](/hogpedia/history-of-posthog).
+
+## Products
+
+PostHog groups its products by the question each one answers.
+
+| Product | What it answers |
+| --- | --- |
+| [Product analytics](/hogpedia/product-analytics) | How do people use the product? |
+| Web analytics | Where does the traffic come from? |
+| [Session replay](/hogpedia/session-replay) | What did this person actually do? |
+| [Feature flags](/hogpedia/feature-flags) | Who can see this feature? |
+| [Experiments](/hogpedia/experiments) | Did the change work? |
+| [Error tracking](/hogpedia/error-tracking) | What is broken, and for whom? |
+| Surveys | What do people say? |
+| Data warehouse | What do the other systems know? |
+| CDP | Where else must this data go? |
+| [AI observability](/hogpedia/ai-observability) | What are the model calls doing? |
+
+The current list, with prices, is on the [products page](/products).<Ref id="4" />
+
+## Philosophy
+
+PostHog states its mission as equipping every developer to build successful products.<Ref id="3" /> Three positions follow from it and are visible in how the company operates.
+
+**The engineer makes the decision.** PostHog is designed for a person who writes the code and also decides what to build. This is why the tools sit together rather than in separate departments.
+
+**Prices are published, and cut.** PostHog publishes its pricing and has reduced it more than once.<Ref id="8" />
+
+**Write it down.** The company records decisions in public, in [the handbook](/hogpedia/the-posthog-handbook).<Ref id="5" />
+
+## Open source
+
+The PostHog application is open source and the repository is public.<Ref id="7" /> A team can run it on its own infrastructure, which was the original reason people adopted it: the first release attracted self-hosted deployments, not cloud sign-ups.<Ref id="1" />
+
+The paid product is the hosted service. This is the usual arrangement for a commercial open-source company: the code is free, the operation of it is the product.
+
+## Company culture
+
+PostHog has been fully remote since it was founded, and it writes down decisions rather than hold meetings about them.<Ref id="5" /> Work is organised into small teams, which the handbook defines as strictly between two and six people, each owning a product area.<Ref id="6" />
+
+The company also treats unusual behaviour as a value in its own right, under the name ["Do more weird"](/hogpedia/do-more-weird). For the internal jokes and traditions this produces, see [Category: Hog lore](/hogpedia/category/hog-lore).
+
+See [Remote work at PostHog](/hogpedia/remote-work-at-posthog) for how the remote arrangement works in practice.

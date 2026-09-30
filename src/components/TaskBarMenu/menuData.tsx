@@ -825,6 +825,20 @@ export const SparksJoyItems: Record<'games' | 'notGames', SparksJoyItem[]> = {
             customIcon: null,
         },
         {
+            label: 'Hogpedia',
+            link: '/hogpedia',
+            iconName: null,
+            // An inline mark rather than a new AppIcon, so the icon registry stays untouched.
+            customIcon: (
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                    <path
+                        fill="#000"
+                        d="M4 3.5A1.5 1.5 0 0 1 5.5 2h5A2.5 2.5 0 0 1 12 2.46A2.5 2.5 0 0 1 13.5 2h5A1.5 1.5 0 0 1 20 3.5v14a1.5 1.5 0 0 1-1.5 1.5h-5c-.56 0-1.08.2-1.5.54A2.5 2.5 0 0 0 10.5 19h-5A1.5 1.5 0 0 1 4 17.5zm7.25 1A1 1 0 0 0 10.5 3.5h-5v14h5c.45 0 .87.1 1.25.28zm1.5 13.28c.38-.18.8-.28 1.25-.28h5v-14h-5a1 1 0 0 0-.75.75zM6.5 6h3v1.5h-3zm0 3h3v1.5h-3zm8-3h3v1.5h-3zm0 3h3v1.5h-3zM3 20.5h18V22H3z"
+                    />
+                </svg>
+            ),
+        },
+        {
             label: 'Coloring book.pdf',
             link: '/coloring-book.pdf',
             iconName: 'pdf' as AppIconName,
