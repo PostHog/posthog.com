@@ -1,20 +1,29 @@
 import React from 'react'
-import SEO, { buildProductStructuredData } from 'components/seo'
+import SEO, { buildProductStructuredData, type LanguageAlternate } from 'components/seo'
 import Test from '../components/Home/Test'
+import { useTranslation } from '../i18n'
 
-export default function Home() {
+// `/` and every translated copy of it (`/pt`, ...) render this page. See gatsby/i18n.ts.
+export default function Home({
+    pageContext,
+}: {
+    pageContext: { lang?: string; languageAlternates?: LanguageAlternate[] }
+}) {
+    const { locale, t } = useTranslation()
+
     return (
         <>
             <SEO
-                title="PostHog - your product’s context layer"
+                title={t('home.seo.title')}
                 updateWindowTitle={false}
-                description="PostHog automatically diagnoses problems, fixes bugs, and generates pull requests – all without you having to prompt it."
+                description={t('home.seo.description')}
                 image="/images/og/default.png"
+                lang={pageContext.lang}
+                languageAlternates={pageContext.languageAlternates}
                 structuredData={buildProductStructuredData({
                     name: 'PostHog',
-                    description:
-                        'PostHog automatically diagnoses problems, fixes bugs, and generates pull requests – all without you having to prompt it.',
-                    slug: '',
+                    description: t('home.seo.description'),
+                    slug: locale === 'en' ? '' : locale,
                 })}
             />
             <Test />

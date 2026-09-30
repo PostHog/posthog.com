@@ -31,6 +31,8 @@ import CloudinaryImage from 'components/CloudinaryImage'
 import MediaUploadModal from 'components/MediaUploadModal'
 import KeyboardShortcut from 'components/KeyboardShortcut'
 import { MOTION_LAYER, TASKBAR_BG } from '../../constants/frostedSurfaces'
+import { useTranslation } from '../../i18n'
+import { skipTranslation } from '../../i18n/cookie'
 
 const NAV_MENU_CLASS =
     '[&_button]:px-2 [&_button:not(:first-child)]:hidden md:[&_button:not(:first-child)]:flex [&_a:not(:first-child)]:hidden md:[&_a:not(:first-child)]:flex'
@@ -47,6 +49,7 @@ function TaskBarMenu() {
         updateTaskbarHeight,
     } = useAppActions()
     const { posthogInstance } = useAppSettings()
+    const { locale, t } = useTranslation()
     const [isAnimating, setIsAnimating] = useState(false)
 
     const { user, notifications, logout, isModerator } = useUser()
@@ -371,6 +374,12 @@ function TaskBarMenu() {
                         ]}
                         className="[&_button]:px-2"
                     /> */}
+                            {/* Only on a translated page. The cookie stops the middleware from sending the visitor back. */}
+                            {locale !== 'en' && (
+                                <OSButton asLink to="/" onClick={skipTranslation} size="md" className="mr-1">
+                                    <span lang="en">{t('taskbar.view_in_english')}</span>
+                                </OSButton>
+                            )}
                             <div className="relative mr-1">
                                 <OSButton
                                     variant="primary"

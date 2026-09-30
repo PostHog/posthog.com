@@ -157,11 +157,6 @@
             "statusCode": 301
         },
         {
-            "source": "/ko",
-            "destination": "/",
-            "statusCode": 302
-        },
-        {
             "source": "/myspace",
             "destination": "/hogspace",
             "statusCode": 301
