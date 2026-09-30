@@ -333,9 +333,15 @@ export default function Hogbook({ data }: { data: PageData }): JSX.Element {
                                     <button
                                         type="button"
                                         onClick={shareProfile}
-                                        className="border border-[var(--hogbook-bar)] bg-[var(--hogbook-pale)] px-3 py-0.5 font-bold text-[var(--hogbook-blue)]"
+                                        className="flex items-center gap-2 border border-[var(--hogbook-bar)] bg-light-1 px-2 py-0.5 font-bold text-[var(--hogbook-blue)]"
                                     >
                                         Share
+                                        <span
+                                            aria-hidden="true"
+                                            className="border-l border-[var(--hogbook-bar)] pl-2 text-lg leading-none"
+                                        >
+                                            +
+                                        </span>
                                     </button>
                                 </div>
                             </section>
