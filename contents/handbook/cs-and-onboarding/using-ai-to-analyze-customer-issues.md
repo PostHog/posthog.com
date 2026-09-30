@@ -42,13 +42,15 @@ Model behavior shifts with every release. Prompts, skills, hooks, and `CLAUDE.md
 
 ### Why it matters for customer work
 
-A stale setup rarely fails loudly. The output still looks confident and well formatted, so you don't see the problem. [Getting the most out of Opus 5.5](https://claude.dev/blog/getting-the-most-out-of-opus-5-5/) gives some examples:
+If you don't update your skills, hooks, and prompts, and your own sense of how the current models work best, you can reduce the model's performance.
 
-- A "think carefully" line is no longer needed. The model decides how much to think, and the extra line only makes replies start later.
-- Without a rule about when to continue and when to ask, the model can stop partway through a long task to report back.
-- A vague instruction, like "avoid a generic look", mostly swaps one default for another.
+For example, earlier models needed strict instructions, because they tended to overstep. With the current generation, you want to give the model room to use its judgment, and it generally won't overstep (though not always). You only know this if you keep up with each model's strengths and weaknesses, and with what the providers are improving.
 
-In an investigation, this means slower answers, investigations that stop early, and output that follows your old instructions instead of the task. You then have more to verify before anything reaches the customer, and a weak hypothesis is easier to mistake for a finding.
+Old instructions can also slow your skills down. [Getting the most out of Opus 5.5](https://claude.dev/blog/getting-the-most-out-of-opus-5-5/) says that a "think carefully" line only makes replies start later. The model decides how much to think. If you want it to think harder, use a higher [effort level](#match-the-effort-to-the-task).
+
+Give the model a clear goal, a definition of "done", and rules for when to stop or ask. Models get more training to be agentic with each release, so without these rules they tend to keep going past what you need, or stop to report before they're done.
+
+A current setup lets you use the model at its full strength. Together with the rest of this page, it helps keep your investigations factual.
 
 ### Where to find model updates
 
