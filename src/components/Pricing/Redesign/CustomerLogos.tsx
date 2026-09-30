@@ -81,6 +81,7 @@ export default function CustomerLogos({
     scrolling = false,
     hideLink = false,
     linkStories = false,
+    additionalCustomerSlugs = [],
 }: {
     title?: string
     subtitle?: string
@@ -88,9 +89,10 @@ export default function CustomerLogos({
     hideLink?: boolean
     /** Scrolling rail only */
     linkStories?: boolean
+    additionalCustomerSlugs?: string[]
 }): JSX.Element {
     const { getCustomers } = useCustomers()
-    const customers = getCustomers(TRUST_LOGOS)
+    const customers = getCustomers([...additionalCustomerSlugs, ...TRUST_LOGOS])
 
     return (
         <div className="@container not-prose">
