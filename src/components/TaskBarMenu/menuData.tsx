@@ -20,6 +20,7 @@ import { IconChevronDown } from '@posthog/icons'
 import { navigate } from 'gatsby'
 import { BROWSE_TOOLS_HANDLES, buildProductMenuItems } from 'constants/productNavigation'
 import { TWIG_URL } from '../../constants'
+import { useTranslation } from 'i18n'
 
 interface DocsMenuItem {
     name: string
@@ -37,19 +38,25 @@ const getMenuIcon = (items: DocsMenuItem[], link: string, fallbackIcon: keyof ty
 }
 
 // Static Docs menu. Edit this list directly when a docs section moves or a new one is added.
-const docsMenuItems: MenuItemType[] = [
-    { type: 'item', label: 'Overview', link: '/docs', icon: <Icons.IconHome className="size-4 text-purple" /> },
-    { type: 'separator' },
-    { type: 'label', label: 'Get started' },
+// Product names stay in English. See src/i18n/README.md.
+const buildDocsMenuItems = (t: (key: string) => string): MenuItemType[] => [
     {
         type: 'item',
-        label: 'Install PostHog',
+        label: t('taskbar.docs.overview'),
+        link: '/docs',
+        icon: <Icons.IconHome className="size-4 text-purple" />,
+    },
+    { type: 'separator' },
+    { type: 'label', label: t('taskbar.docs.get_started') },
+    {
+        type: 'item',
+        label: t('taskbar.docs.install'),
         link: '/docs/getting-started/install',
         icon: <Icons.IconWrench className="size-4 text-salmon" />,
     },
     {
         type: 'item',
-        label: 'SDKs & frameworks',
+        label: t('taskbar.docs.sdks'),
         link: '/docs/libraries',
         icon: <Icons.IconBox className="size-4 text-blue" />,
     },
@@ -60,10 +67,10 @@ const docsMenuItems: MenuItemType[] = [
         icon: <Icons.IconFlag className="size-4 text-red" />,
     },
     { type: 'separator' },
-    { type: 'label', label: 'Products' },
+    { type: 'label', label: t('taskbar.docs.products') },
     {
         type: 'submenu',
-        label: 'Analytics',
+        label: t('taskbar.docs.analytics'),
         icon: <Icons.IconGraph className="size-4 text-blue" />,
         items: [
             { type: 'item', label: 'Product Analytics', link: '/docs/product-analytics' },
@@ -93,11 +100,11 @@ const docsMenuItems: MenuItemType[] = [
     },
     {
         type: 'submenu',
-        label: 'More products',
+        label: t('taskbar.docs.more_products'),
         icon: <Icons.IconApps className="size-4 text-blue" />,
         items: [
-            { type: 'item', label: 'Application metrics', link: '/docs/metrics' },
-            { type: 'item', label: 'Distributed tracing', link: '/docs/distributed-tracing' },
+            { type: 'item', label: t('taskbar.docs.application_metrics'), link: '/docs/metrics' },
+            { type: 'item', label: t('taskbar.docs.distributed_tracing'), link: '/docs/distributed-tracing' },
             { type: 'item', label: 'Endpoints', link: '/docs/endpoints' },
             { type: 'item', label: 'Experiments', link: '/docs/experiments' },
             { type: 'item', label: 'Feature Flags', link: '/docs/feature-flags' },
@@ -111,7 +118,7 @@ const docsMenuItems: MenuItemType[] = [
         ],
     },
     { type: 'separator' },
-    { type: 'label', label: 'Apps' },
+    { type: 'label', label: t('taskbar.docs.apps') },
     {
         type: 'item',
         label: 'PostHog Web',
@@ -143,7 +150,7 @@ const docsMenuItems: MenuItemType[] = [
         icon: <Icons.IconTerminal className="size-4 text-seagreen" />,
     },
     { type: 'separator' },
-    { type: 'label', label: 'Context' },
+    { type: 'label', label: t('taskbar.docs.context') },
     {
         type: 'item',
         label: 'Data Warehouse',
@@ -165,41 +172,46 @@ const docsMenuItems: MenuItemType[] = [
     { type: 'separator' },
     {
         type: 'submenu',
-        label: 'Reference',
+        label: t('taskbar.docs.reference'),
         icon: <Icons.IconBook className="size-4 text-lilac" />,
         items: [
             { type: 'item', label: 'API', link: '/docs/api' },
-            { type: 'item', label: 'New to PostHog', link: '/docs/new-to-posthog/getting-hogpilled' },
-            { type: 'item', label: 'AI engineering', link: '/docs/ai-engineering' },
-            { type: 'item', label: 'Toolbar & features', link: '/docs/toolbar' },
-            { type: 'item', label: 'Self-host & deploy', link: '/docs/self-host' },
-            { type: 'item', label: 'Billing', link: '/docs/billing/estimating-usage-costs' },
-            { type: 'item', label: 'Privacy & GDPR', link: '/docs/privacy' },
-            { type: 'item', label: 'How PostHog works', link: '/docs/how-posthog-works' },
-            { type: 'item', label: 'Glossary', link: '/docs/glossary' },
+            { type: 'item', label: t('taskbar.docs.new_to_posthog'), link: '/docs/new-to-posthog/getting-hogpilled' },
+            { type: 'item', label: t('taskbar.docs.ai_engineering'), link: '/docs/ai-engineering' },
+            { type: 'item', label: t('taskbar.docs.toolbar'), link: '/docs/toolbar' },
+            { type: 'item', label: t('taskbar.docs.self_host'), link: '/docs/self-host' },
+            { type: 'item', label: t('taskbar.docs.billing'), link: '/docs/billing/estimating-usage-costs' },
+            { type: 'item', label: t('taskbar.docs.privacy'), link: '/docs/privacy' },
+            { type: 'item', label: t('taskbar.docs.how_posthog_works'), link: '/docs/how-posthog-works' },
+            { type: 'item', label: t('taskbar.docs.glossary'), link: '/docs/glossary' },
         ],
     },
     { type: 'separator' },
     {
         type: 'item',
-        label: 'Playground',
+        label: t('taskbar.docs.playground'),
         link: TWIG_URL,
         external: true,
         icon: <Icons.IconPlay className="size-4 text-orange" />,
     },
     {
         type: 'item',
-        label: 'Pocket guides',
+        label: t('taskbar.docs.pocket_guides'),
         link: '/pocket-guides',
         icon: <Icons.IconCompass className="size-4 text-blue" />,
     },
     {
         type: 'item',
-        label: 'Tutorials',
+        label: t('taskbar.docs.tutorials'),
         link: '/tutorials',
         icon: <Icons.IconGraduationCap className="size-4 text-purple" />,
     },
-    { type: 'item', label: 'Templates', link: '/templates', icon: <Icons.IconMagic className="size-4 text-green" /> },
+    {
+        type: 'item',
+        label: t('taskbar.docs.templates'),
+        link: '/templates',
+        icon: <Icons.IconMagic className="size-4 text-green" />,
+    },
 ]
 
 const docsProductIconFallbacks = {
@@ -210,9 +222,10 @@ const docsProductIconFallbacks = {
 
 const docsProductHandleOverrides = { 'posthog-ai': 'posthog_ai' }
 
-const addDocsProductIcons = (items: MenuItemType[], allProducts: any[]): MenuItemType[] =>
+// Takes the submenu labels to decorate because they are translated
+const addDocsProductIcons = (items: MenuItemType[], allProducts: any[], submenuLabels: string[]): MenuItemType[] =>
     items.map((item) => {
-        if (item.type !== 'submenu' || !['Analytics', 'More products'].includes(item.label)) return item
+        if (item.type !== 'submenu' || !submenuLabels.includes(item.label)) return item
 
         return {
             ...item,
@@ -252,15 +265,15 @@ const PRIMARY_TOOL_HANDLES: string[] = [
 ]
 
 // Build Products menu items
-const buildProductsMenuItems = (allProducts: any[]) => {
+const buildProductsMenuItems = (allProducts: any[], t: (key: string) => string) => {
     const moreToolHandles = BROWSE_TOOLS_HANDLES.filter((handle) => !PRIMARY_TOOL_HANDLES.includes(handle))
 
     const items: any[] = [
         ...buildProductMenuItems(PRIMARY_TOOL_HANDLES, allProducts),
         {
             type: 'expandable' as const,
-            label: 'More',
-            expandedLabel: 'Less',
+            label: t('taskbar.menu.more'),
+            expandedLabel: t('taskbar.menu.less'),
             items: buildProductMenuItems(moreToolHandles, allProducts),
         },
         {
@@ -306,140 +319,144 @@ const buildProductsMenuItems = (allProducts: any[]) => {
 
 export function useMenuData(): MenuType[] {
     const allProducts = useProduct() as any[]
+    const { t } = useTranslation()
     const { isMobile } = useAppSettings()
 
     // Define main navigation items (excluding logo menu)
     const mainNavItems: MenuType[] = [
         {
-            trigger: 'Products',
-            items: buildProductsMenuItems(allProducts),
+            trigger: t('taskbar.menu.products'),
+            items: buildProductsMenuItems(allProducts, t),
         },
         {
-            trigger: 'Pricing',
+            trigger: t('taskbar.menu.pricing'),
             link: '/pricing',
             items: [],
             hideChevron: true,
         },
         {
-            trigger: 'Docs',
+            trigger: t('taskbar.menu.docs'),
             // The docs tree is too deep to browse inside a hamburger; mobile goes to the homepage instead
             mobileLink: '/docs',
-            items: addDocsProductIcons(docsMenuItems, allProducts),
+            items: addDocsProductIcons(buildDocsMenuItems(t), allProducts, [
+                t('taskbar.docs.analytics'),
+                t('taskbar.docs.more_products'),
+            ]),
         },
         {
-            trigger: 'Community',
+            trigger: t('taskbar.menu.community'),
             items: [
                 {
                     type: 'item',
-                    label: 'Newsletter',
+                    label: t('taskbar.community.newsletter'),
                     link: '/newsletter',
                     icon: <Icons.IconNewspaper className="size-4 text-orange" />,
                 },
                 {
                     type: 'item',
-                    label: 'Blog',
+                    label: t('taskbar.community.blog'),
                     link: '/blog',
                     icon: <Icons.IconPencil className="size-4 text-yellow" />,
                 },
                 {
                     type: 'item',
-                    label: 'Founders hub',
+                    label: t('taskbar.community.founders_hub'),
                     link: '/founders',
                     icon: <Icons.IconRocket className="size-4 text-purple" />,
                 },
                 {
                     type: 'item',
-                    label: 'Compare',
+                    label: t('taskbar.community.compare'),
                     link: '/compare',
                     icon: <Icons.IconColumns className="size-4 text-lilac" />,
                 },
                 {
                     type: 'item' as const,
-                    label: 'Forums',
+                    label: t('taskbar.community.forums'),
                     link: '/questions',
                     icon: <Icons.IconMessage className="size-4 text-green" />,
                 },
                 { type: 'separator' },
                 {
                     type: 'item',
-                    label: 'Startups',
+                    label: t('taskbar.community.startups'),
                     link: '/startups',
                     icon: <Icons.IconPresent className="size-4 text-purple" />,
                 },
                 {
                     type: 'item',
-                    label: 'Merch store',
+                    label: t('taskbar.community.merch_store'),
                     link: '/merch',
                     icon: <Icons.IconStore className="size-4 text-purple" />,
                 },
                 {
                     type: 'item',
-                    label: 'Events',
+                    label: t('taskbar.community.events'),
                     link: '/events',
                     icon: <Icons.IconCalendar className="size-4 text-red" />,
                 },
                 {
                     type: 'item',
-                    label: 'Students',
+                    label: t('taskbar.community.students'),
                     link: '/students',
                     icon: <Icons.IconGraduationCap className="size-4 text-blue" />,
                 },
                 {
                     type: 'item',
-                    label: 'Incubator',
+                    label: t('taskbar.community.incubator'),
                     link: '/community-incubator',
                     icon: <Icons.IconFlask className="size-4 text-seagreen" />,
                 },
                 {
                     type: 'item',
-                    label: 'Cool tech jobs',
+                    label: t('taskbar.community.cool_tech_jobs'),
                     link: '/cool-tech-jobs',
                     icon: <Icons.IconLaptop className="size-4 text-blue" />,
                 },
                 {
                     type: 'item',
-                    label: 'Places',
+                    label: t('taskbar.community.places'),
                     link: '/places',
                     icon: <Icons.IconMap className="size-4 text-red" />,
                 },
             ],
         },
         {
-            trigger: 'Company',
+            trigger: t('taskbar.menu.company'),
             items: [
                 {
                     type: 'item',
-                    label: 'About',
+                    label: t('taskbar.company.about'),
                     link: '/about',
                     icon: getMenuIcon(companyMenu.children, '/about', 'IconLogomark', 'gray'),
                 },
                 {
                     type: 'item',
-                    label: 'Customers',
+                    label: t('taskbar.company.customers'),
                     link: '/customers',
                     icon: getMenuIcon(companyMenu.children, '/customers', 'IconPerson', 'yellow'),
                 },
                 {
                     type: 'item',
-                    label: 'Handbook',
+                    label: t('taskbar.company.handbook'),
                     link: '/handbook',
                     icon: getMenuIcon(companyMenu.children, '/handbook', 'IconBook', 'seagreen'),
                 },
                 {
                     type: 'item',
-                    label: 'Roadmap',
+                    label: t('taskbar.company.roadmap'),
                     link: '/roadmap',
                     icon: getMenuIcon(companyMenu.children, '/roadmap', 'IconMap', 'orange'),
                 },
                 {
                     type: 'item',
-                    label: 'Changelog',
+                    label: t('taskbar.company.changelog'),
                     link: '/changelog',
                     icon: getMenuIcon(companyMenu.children, '/changelog', 'IconCalendar', 'red'),
                 },
                 {
                     type: 'item',
-                    label: 'Media',
+                    label: t('taskbar.company.media'),
                     link: '/media',
                     icon: getMenuIcon(companyMenu.children, '/media', 'IconNewspaper', 'salmon'),
                 },
@@ -448,31 +465,31 @@ export function useMenuData(): MenuType[] {
                 },
                 {
                     type: 'item',
-                    label: 'People',
+                    label: t('taskbar.company.people'),
                     link: '/people',
                     icon: getMenuIcon(companyMenu.children, '/people', 'IconPeople', 'blue'),
                 },
                 {
                     type: 'item',
-                    label: 'Small teams',
+                    label: t('taskbar.company.small_teams'),
                     link: '/teams',
                     icon: getMenuIcon(companyMenu.children, '/teams', 'IconShieldPeople', 'teal'),
                 },
                 {
                     type: 'item',
-                    label: 'Careers',
+                    label: t('taskbar.company.careers'),
                     link: '/careers',
                     icon: getMenuIcon(companyMenu.children, '/careers', 'IconLaptop', 'purple'),
                 },
                 {
                     type: 'item',
-                    label: 'Side projects',
+                    label: t('taskbar.company.side_projects'),
                     link: '/side-projects',
                     icon: getMenuIcon(companyMenu.children, '/side-projects', 'IconRocket', 'purple'),
                 },
                 {
                     type: 'item',
-                    label: 'Partnerships',
+                    label: t('taskbar.company.partnerships'),
                     link: '/partnerships',
                     icon: getMenuIcon(companyMenu.children, '/partnerships', 'IconPuzzle', 'lilac'),
                 },
@@ -532,7 +549,7 @@ export function useMenuData(): MenuType[] {
         {
             trigger: (
                 <>
-                    <span>More</span>
+                    <span>{t('taskbar.menu.more')}</span>
                 </>
             ),
             items: [
@@ -544,7 +561,7 @@ export function useMenuData(): MenuType[] {
                 },
                 {
                     type: 'item',
-                    label: 'Things that spark joy',
+                    label: t('taskbar.more.sparks_joy'),
                     link: '/sparks-joy',
                     icon: <IconSparksJoy className="size-4" />,
                 },
@@ -556,7 +573,7 @@ export function useMenuData(): MenuType[] {
                 // },
                 {
                     type: 'item',
-                    label: 'Services',
+                    label: t('taskbar.more.services'),
                     link: '/services',
                     icon: <Icons.IconLaptop className="size-4 text-blue" />,
                 },
@@ -565,7 +582,7 @@ export function useMenuData(): MenuType[] {
                 },
                 {
                     type: 'item',
-                    label: 'Display options',
+                    label: t('taskbar.more.display_options'),
                     onClick: () => {
                         navigate('/display-options', { state: { newWindow: true } })
                     },
@@ -574,7 +591,7 @@ export function useMenuData(): MenuType[] {
                 },
                 {
                     type: 'item',
-                    label: 'System status',
+                    label: t('taskbar.more.system_status'),
                     link: 'https://status.posthog.com',
                     external: true,
                     icon: <Icons.IconPulse className="size-4 text-red" />,
@@ -584,25 +601,25 @@ export function useMenuData(): MenuType[] {
                 },
                 {
                     type: 'item',
-                    label: 'Terms',
+                    label: t('taskbar.more.terms'),
                     link: '/terms',
                     icon: <Icons.IconDocument className="size-4 text-blue" />,
                 },
                 {
                     type: 'item',
-                    label: 'Privacy',
+                    label: t('taskbar.more.privacy'),
                     link: '/privacy',
                     icon: <Icons.IconLock className="size-4 text-seagreen" />,
                 },
                 {
                     type: 'item',
-                    label: "DPA generator (it's fun!)",
+                    label: t('taskbar.more.dpa'),
                     link: '/dpa',
                     icon: <Icons.IconMagicWand className="size-4 text-purple" />,
                 },
                 {
                     type: 'item',
-                    label: 'BAA generator (less fun)',
+                    label: t('taskbar.more.baa'),
                     link: '/baa',
                     icon: <Icons.IconNotebook className="size-4 text-lilac" />,
                 },
@@ -620,7 +637,7 @@ export function useMenuData(): MenuType[] {
                 },
                 {
                     type: 'item',
-                    label: 'Subprocessors',
+                    label: t('taskbar.more.subprocessors'),
                     link: '/subprocessors',
                     icon: <Icons.IconServer className="size-4 text-orange" />,
                 },
@@ -629,7 +646,7 @@ export function useMenuData(): MenuType[] {
                 },
                 {
                     type: 'item',
-                    label: 'Enterprise',
+                    label: t('taskbar.more.enterprise'),
                     link: '/enterprise',
                     icon: <Icons.IconBuilding className="size-4 text-blue" />,
                 },
@@ -641,13 +658,13 @@ export function useMenuData(): MenuType[] {
     const baseLogoMenuItems = [
         {
             type: 'item' as const,
-            label: 'About PostHog',
+            label: t('taskbar.logo.about'),
             link: '/about',
             icon: getMenuIcon(companyMenu.children, '/about', 'IconLogomark', 'gray'),
         },
         {
             type: 'item' as const,
-            label: 'Display options',
+            label: t('taskbar.logo.display_options'),
             onClick: () => {
                 navigate('/display-options', { state: { newWindow: true } })
             },
@@ -657,7 +674,7 @@ export function useMenuData(): MenuType[] {
 
     const homeLogoMenuItem = {
         type: 'item' as const,
-        label: 'Home',
+        label: t('taskbar.logo.home'),
         link: '/',
         icon: <Icons.IconHome className="size-4 text-purple" />,
     }
