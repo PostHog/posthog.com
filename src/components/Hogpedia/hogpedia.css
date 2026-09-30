@@ -36,6 +36,11 @@
     font-family: var(--hp-sans);
     font-size: 13px;
     line-height: 1.5;
+    /* A definite height, or the root grows to fit its content and the scroll container
+       inside it inherits that height - which leaves it nothing to scroll while the app
+       window clips the overflow. */
+    height: 100%;
+    min-height: 0;
     /* The window is resizable, so the skin is a container-query layout, not a media-query
        one. `inline-size` lets the children respond to the window width. */
     container-type: inline-size;
@@ -95,8 +100,6 @@
 
 .hogpedia-scroll {
     height: 100%;
-    overflow-y: auto;
-    overflow-x: hidden;
 }
 
 .hogpedia-frame {
