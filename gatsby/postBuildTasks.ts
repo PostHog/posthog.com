@@ -130,23 +130,12 @@ export const createOGImages = async (data) => {
 
     // Blog post OG
     for (const post of data.blog.nodes) {
-        const { title, authorData, featuredImage } = post.frontmatter
+        const { featuredImage } = post.frontmatter
         const image = featuredImage?.publicURL
-        const author =
-            authorData &&
-            authorData.map((author) => {
-                const image =
-                    author.profile?.avatar?.url ||
-                    `https://res.cloudinary.com/dmukukwp6/image/upload/contributor_posthog_e8c595ea3d.png`
-                return {
-                    ...author,
-                    image,
-                }
-            })[0]
         jobs.push(
             ogLimit(() =>
                 createOG({
-                    html: blogTemplate({ title, authorData: author, image, font }),
+                    html: blogTemplate({ image }),
                     slug: post.fields.slug,
                 })
             )
