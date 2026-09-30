@@ -20,7 +20,7 @@ tags:
 >
 > - As thanks, beta users will get an increased free allowance and 30 days of free usage.
 
-After a month-long public beta, our data warehouse is ready for prime time. We’re releasing it into general availability, so teams can start syncing data from other sources and working with it in PostHog. 
+After a month-long public beta, our data warehouse is ready for prime time. We’re releasing it into general availability, so teams can start syncing data from other sources and working with it in PostHog.
 
 Why would you want to get non-product data into PostHog? So you can do things like...
 
@@ -28,11 +28,11 @@ Why would you want to get non-product data into PostHog? So you can do things li
 - [Sync Hubspot data](/tutorials/hubspot-reports) to identify leads based on their actions, pageviews, and churn-risk.
 - [Sync Zendesk data](/tutorials/zendesk-reports) to see how ticket volume and SLA metrics impact usage and churn.
 
-All that is just using our pre-built connectors. You can also bring data into PostHog from almost anywhere using [Snowflake, Cloudflare R2, Amazon S3, Google Cloud Storage](/docs/cdp/sources), or [custom sources](/docs/cdp/sources#linking-a-custom-source) — and we’re fascinated to see what further use cases teams will come up with. 
+All that is just using our pre-built connectors. You can also bring data into PostHog from almost anywhere using [Snowflake, Cloudflare R2, Amazon S3, Google Cloud Storage](/docs/data-warehouse/sources), or [custom sources](/docs/data-warehouse/sources#linking-a-custom-source) — and we’re fascinated to see what further use cases teams will come up with.
 
 Over the beta we’ve already seen teams sync everything from their bank data (for analyzing P&L without an accountant) to CRMs (for monitoring sales team performance) to [billing data](/blog/data-warehouse-at-posthog) (for analyzing revenue and churn). Teams like [Headshot Pro, for example, have synced Google Adwords](/customers/headshot-pro), so they can analyze marketing data in detail and attribute it to sign-ups and usage.
 
-Ultimately, this is why we’ve poured so much attention into building our data warehouse recently — so we can give you the tools they need you [build more successful products](/handbook/why-does-posthog-exist). If that means working with external data, then that’s what the data warehouse (along with [SQL](/docs/sql) and [insights](/product-analytics)) is for. 
+Ultimately, this is why we’ve poured so much attention into building our data warehouse recently — so we can give you the tools they need you [build more successful products](/handbook/why-does-posthog-exist). If that means working with external data, then that’s what the data warehouse (along with [SQL](/docs/sql) and [insights](/product-analytics)) is for.
 
 As always, we want to make sure [our pricing](/pricing) is fair, margin-positive, and usage-based. So, we'll bill based on the number of rows that get synced each month — after a generous free allowance that should offer more than enough to support smaller teams and side projects. If you're ready to get started, [sync your first data source now](https://app.posthog.com/data-management/sources)!
 

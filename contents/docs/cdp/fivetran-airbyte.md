@@ -4,9 +4,11 @@ sidebar: Docs
 showTitle: true
 ---
 
-While ETL tools like Fivetran, Airbyte, and similar platforms often offer unofficial PostHog connectors, **we do not recommend using those** to move data from PostHog to other destinations (like a data warehouse). They're not well-suited for the high-volume, real-time nature of product analytics data. PostHog's [data pipelines](/docs/cdp) are purpose-built for this use case and offer significant advantages, including being **much cheaper**.
+This page is about one direction: pulling data **out of** PostHog into a warehouse. For that job, ETL tools like Fivetran and Airbyte often offer unofficial PostHog connectors, and **we do not recommend using those**. They are not well suited to the high volume of product analytics data. PostHog's [batch exports](/docs/cdp/batch-exports) are built for it, and are usually **much cheaper**.
 
-## ETL tools
+Going the other way is a different question. If you want to pull data **into** PostHog from Stripe, HubSpot, Salesforce, your own Postgres, or another 1,300 tools, PostHog does that itself. See [ETL](/docs/etl/start-here). You do not need Fivetran or Airbyte in front of PostHog.
+
+## Why not pull PostHog data with an ETL tool
 
 ETL tools like Fivetran and Airbyte are designed for traditional business data with predictable volumes and update patterns, but product analytics data is fundamentally different. PostHog customers often generate billions of events per day with bursty traffic patterns that can overwhelm ETL tool rate limits and quotas. These tools typically sync on hourly or daily schedules, which doesn't meet the real-time requirements of most of our customers. In addition, the way that these tools grab data (uncompressed rest API requests in small increments) requires disproportionally large amounts of resources, which means we often need to rate limit those requests.
 

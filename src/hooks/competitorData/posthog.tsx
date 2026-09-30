@@ -718,6 +718,45 @@ export const posthog = {
                 },
             },
         },
+        etl: {
+            available: true,
+            sources: {
+                features: {
+                    number_of_sources: '1,300+',
+                    custom_rest_source: true,
+                    database_cdc: true,
+                    incremental_sync: true,
+                },
+            },
+            destinations: {
+                features: {
+                    warehouse_destinations: true,
+                    object_storage_destinations: true,
+                    included_warehouse: true,
+                },
+            },
+            analysis: {
+                features: {
+                    built_in_sql: true,
+                    product_analytics_context: true,
+                    built_in_dashboards: true,
+                },
+            },
+            operations: {
+                features: {
+                    sync_health_dashboard: true,
+                    open_source: true,
+                    self_host: false,
+                },
+            },
+            pricing: {
+                features: {
+                    per_row_pricing: true,
+                    free_tier: '1 million rows/month',
+                    free_historical_backfill: true,
+                },
+            },
+        },
         data_warehouse: {
             available: true,
             pricing: {

@@ -1,0 +1,27 @@
+---
+title: Monitoring your syncs
+sidebar: Docs
+showTitle: true
+---
+
+The ETL page answers three questions: what broke, what moved, and what is running.
+
+## Needs attention
+
+Tables that have stopped syncing sit at the top, worst first, with the error and a link to the source. The section disappears when nothing is wrong, so an empty page means an empty problem list rather than a page that failed to load.
+
+Tables fed by a webhook do not appear here. A webhook table is pushed to on the vendor's schedule rather than pulled on ours, so it has no last sync and cannot have stopped.
+
+## Runs
+
+The failed runs from the window you pick. This list answers a different question from the one above: "needs attention" is the state a table is in right now, and "runs" is individual jobs that failed recently. A table can be broken with no recent run, if nothing retried it.
+
+## Rows synced by destination
+
+Rows written to each destination over the window, one series per destination. A destination that quietly stopped receiving rows shows up as a flat line.
+
+A row that reaches two destinations counts against both, so the series stack. That matches how the rows bill.
+
+## Tables syncing
+
+How many tables are switched on across every source, and how many runs are in flight. These numbers refresh every 30 seconds while the page is open.

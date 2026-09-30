@@ -36,6 +36,7 @@ import { elastic } from '../../hooks/competitorData/elastic'
 import { eppo } from '../../hooks/competitorData/eppo'
 import { fathom } from '../../hooks/competitorData/fathom'
 import { fivetran } from '../../hooks/competitorData/fivetran'
+import { airbyte } from 'hooks/competitorData/airbyte'
 import { flagsmith } from '../../hooks/competitorData/flagsmith'
 import { fullstory } from '../../hooks/competitorData/fullstory'
 import { ga4 } from '../../hooks/competitorData/ga4'
@@ -133,6 +134,7 @@ import { surveysFeatures } from '../../hooks/featureDefinitions/surveys'
 import { webAnalyticsFeatures } from '../../hooks/featureDefinitions/web_analytics'
 import { workflowsFeatures } from '../../hooks/featureDefinitions/workflows'
 import { logsFeatures } from 'hooks/featureDefinitions/logs'
+import { etlFeatures } from 'hooks/featureDefinitions/etl'
 import { supportFeatures } from 'hooks/featureDefinitions/support'
 import { tracesFeatures } from 'hooks/featureDefinitions/traces'
 import { logs } from 'hooks/productData/logs'
@@ -175,6 +177,7 @@ export default function ProductComparisonTable({
 }: ProductComparisonTableProps) {
     // Feature definitions (loaded before use)
     const featureDefs: Record<string, any> = {
+        etl: etlFeatures,
         cdp: cdpFeatures,
         dashboards: dashboardsFeatures,
         data_warehouse: dataWarehouseFeatures,
@@ -629,6 +632,7 @@ export default function ProductComparisonTable({
 
     // Competitor data
     const competitorData: Record<string, any> = {
+        airbyte,
         ab_tasty,
         activecampaign,
         adobe_analytics,

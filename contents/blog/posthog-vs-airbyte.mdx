@@ -1,0 +1,70 @@
+---
+title: 'In-depth: PostHog vs Airbyte'
+date: 2026-09-30
+author:
+    - ian-vanagas
+rootPage: /blog
+featuredImage: >-
+    https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/products/data-warehouse/warehouse-hog.png
+featuredImageType: full
+category: General
+tags:
+    - Comparisons
+seo:
+    metaTitle: PostHog vs Airbyte comparison
+    metaDescription: Compare PostHog and Airbyte on connectors, self-hosting, pricing, and what happens once the data has landed.
+---
+
+Airbyte is open source data integration you can run yourself. PostHog is a product analytics platform that syncs your business tools into a warehouse it already includes.
+
+The honest version of this comparison: if you want to own and operate the pipeline, Airbyte is built for that and PostHog is not. If you want the data queryable next to your product analytics without operating anything, that is where PostHog wins.
+
+## Self-hosting
+
+Airbyte's whole shape is that you can run it. Deploy it on your own infrastructure, keep the data inside your network, read the connector code, and patch it when a vendor changes an API.
+
+PostHog's ETL is not self-hostable. PostHog is open source, and you can self-host the platform, but the managed warehouse and the sync infrastructure behind ETL run on PostHog Cloud. If self-hosting the pipeline is a requirement, stop here and use Airbyte.
+
+## Connectors
+
+PostHog has over 1,300 sources. Airbyte has around 600, plus a connector builder for anything missing.
+
+As with any catalog, the depth varies more than the count suggests. A few dozen of ours are hand-built and documented, including Stripe, HubSpot, Salesforce, and Postgres. The rest are REST connectors covering tools that rarely appear in a vendor catalog at all.
+
+Airbyte's advantage is that its connectors are readable and forkable. When one breaks you can go and see why, and fix it. With PostHog you file a bug and wait for us.
+
+## Operating it
+
+This is the cost people forget when comparing an open source tool to a hosted one.
+
+Running Airbyte yourself means running the scheduler, the workers, the database behind it, and the upgrades. Teams do this happily, and teams also quietly move to Airbyte Cloud a year later. Airbyte Cloud prices on credits, which is closer to PostHog's model than to running it yourself.
+
+PostHog has nothing for you to operate. The trade is that you cannot tune it either.
+
+## What you get once the data lands
+
+Airbyte delivers rows to a destination you supply. You then bring a warehouse, something to model the data, and something to chart it.
+
+PostHog includes the warehouse. A synced table is immediately queryable in SQL and joinable to the events your product sends, so revenue against activation is one query rather than a pipeline plus a BI tool. You can still write the same rows onward to your own Postgres, Snowflake, BigQuery, Redshift, Databricks, S3, or Azure Blob.
+
+<ProductComparisonTable
+    competitors={['posthog', 'airbyte']}
+    rows={['etl']}
+/>
+
+## Where Airbyte is the better answer
+
+- **You need to self-host.** Regulatory, network, or policy reasons all land the same way here.
+- **You want to read and patch connector code.** Ours is not open in the way theirs is.
+- **The pipeline is the product to you.** If a data team owns ingestion as their job, they will want Airbyte's control.
+
+## Where PostHog is the better answer
+
+- **You do not want to run a pipeline.** Nothing to deploy, upgrade, or page someone about.
+- **You want the data next to your product analytics.** That is the whole reason PostHog has ETL at all.
+- **You do not already own a warehouse.** PostHog includes one, so there is no second purchase.
+- **You want a bill that tracks rows.** Per row synced, with a free million each month, rather than credits.
+
+## Getting started
+
+[Connect a source](/docs/etl/start-here). The first million rows each month are free, so you can see what your actual tables cost before deciding.

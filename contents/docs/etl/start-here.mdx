@@ -1,0 +1,40 @@
+---
+title: Getting started with sources & destinations (ETL)
+sidebar: Docs
+showTitle: true
+availability:
+  free: full
+  selfServe: full
+  enterprise: full
+---
+
+ETL means extract, transform, load: PostHog pulls tables out of the tools your business runs on, and loads them somewhere you can use them. That is one product with two halves.
+
+- **Sources** are where the data comes from. Over 1,300 of them, including Stripe, HubSpot, Salesforce, and your own Postgres.
+- **Destinations** are where the rows land. Your PostHog warehouse by default, and your own Postgres, Snowflake, BigQuery, Redshift, Databricks, S3, or Azure Blob if you want them there too.
+
+## Connect your first source
+
+[Linking a source](/docs/data-warehouse/sources) covers the whole flow: credentials, picking tables, sync frequency, and the IP addresses to allow. Every connector has its own page for the credentials it needs.
+
+If your tool is not in the list, the [custom REST source](/docs/data-warehouse/sources/custom-rest-source) can usually reach it.
+
+## Choose where the rows land
+
+By default a source writes to your PostHog warehouse and you can query it straight away.
+
+To send the same rows to your own database or object store, set a [destination](/docs/etl/destinations). Read that page first if the source has already synced: adding a destination starts a full resync, and every destination is billed for the rows it receives.
+
+## Query what you synced
+
+Synced tables sit in the same query engine as the events your product sends, so you can join them. Start with [querying the warehouse](/docs/data-warehouse/query) and [joins](/docs/data-warehouse/join).
+
+## Keep an eye on it
+
+Pipelines usually fail quietly, and you find out when a dashboard looks wrong. The [ETL page](/docs/etl/monitoring) opens on what stopped, then shows rows written per destination, tables syncing, and runs in flight.
+
+When something does break, [warehouse troubleshooting](/docs/data-warehouse/troubleshooting) covers the common sync failures.
+
+## What it costs
+
+Rows you sync in are billed on the managed warehouse product, and the first million each month are free. Rows you write to an external destination are billed separately. [ETL pricing](/docs/etl/pricing) has the worked example.

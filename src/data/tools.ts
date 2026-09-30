@@ -341,8 +341,8 @@ export const tools = [
     },
     {
         handle: 'data_in',
-        name: 'Data sources & import (ELT)',
-        description: 'Data sources & import (ELT)',
+        name: 'Data sources & import (ETL)',
+        description: 'Data sources & import (ETL)',
         searchDescription: 'Connect external data sources and import them into PostHog.',
         slug: 'context-warehouse/sources',
         category: 'data',
@@ -371,6 +371,17 @@ export const tools = [
         slug: 'context-warehouse/reverse-etl-export',
         category: 'data',
         status: 'alpha',
+    },
+    {
+        handle: 'etl',
+        // Short in the nav, spelled out with "(ETL)" in page titles and SEO. Someone who does
+        // not know the acronym still gets it, and someone searching for it still finds us.
+        name: 'Sources & destinations',
+        description: 'Sync data from 1,300+ sources, then write it wherever you need it',
+        searchDescription:
+            'Import data from over 1,300 sources into PostHog, and write it onward to Postgres, Snowflake, BigQuery, Redshift, Databricks, S3, or Azure Blob.',
+        slug: 'etl',
+        category: 'data',
     },
 ] as const satisfies readonly Tool[]
 

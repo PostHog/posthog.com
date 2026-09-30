@@ -10,7 +10,7 @@ Data pipelines has three moving parts, and you rarely need all of them at once. 
 
 **Getting data out of PostHog** is the most common starting point. If you want events delivered as they happen – to Slack, a webhook, a CRM, an ad platform – use a [realtime destination](/docs/cdp/destinations). If you want reliable, scheduled delivery of large volumes into a warehouse, use a [batch export](/docs/cdp/batch-exports) instead.
 
-**Getting data into PostHog** means linking a [source](/docs/cdp/sources). PostHog syncs from hundreds of tools, and you can also push data in yourself with an [incoming webhook](/docs/cdp/sources/incoming-webhooks). Once a source is linked, you can join it to your event and person data in the [data warehouse](/docs/data-warehouse).
+**Getting data into PostHog** means linking a [source](/docs/data-warehouse/sources). PostHog syncs from hundreds of tools, and you can also push data in yourself with an [incoming webhook](/docs/data-warehouse/sources/incoming-webhooks). Once a source is linked, you can join it to your event and person data in the [data warehouse](/docs/data-warehouse).
 
 **Changing events before they're stored** is a [transformation](/docs/cdp/transformations). Transformations run during ingestion, so they can add properties, rewrite them, or [drop events](/docs/cdp/transformations/drop-events) entirely.
 
