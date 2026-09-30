@@ -200,6 +200,7 @@ messages:
             label: Ursula von der Leyen é a presidente da Comissão Europeia. NÃO confundir com Hillary Clinton.
             image:
                 alt: Ursula von der Leyen, presidente da Comissão Europeia
+        close: Fechar
 
     # view_in_english stays in English on purpose.
     taskbar:
