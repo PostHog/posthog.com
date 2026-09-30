@@ -14,15 +14,15 @@ export default function Home({
     return (
         <>
             <SEO
-                title={t('home.seo.title')}
+                title={t('meta.title')}
                 updateWindowTitle={false}
-                description={t('home.seo.description')}
+                description={t('meta.description')}
                 image="/images/og/default.png"
                 lang={pageContext.lang}
                 languageAlternates={pageContext.languageAlternates}
                 structuredData={buildProductStructuredData({
                     name: 'PostHog',
-                    description: t('home.seo.description'),
+                    description: t('meta.description'),
                     slug: locale === 'en' ? '' : locale,
                 })}
             />
