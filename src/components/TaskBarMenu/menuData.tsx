@@ -37,7 +37,7 @@ const getMenuIcon = (items: DocsMenuItem[], link: string, fallbackIcon: keyof ty
 }
 
 // Static Docs menu. Edit this list directly when a docs section moves or a new one is added.
-export const docsMenuItems: MenuItemType[] = [
+const docsMenuItems: MenuItemType[] = [
     { type: 'item', label: 'Overview', link: '/docs', icon: <Icons.IconHome className="size-4 text-purple" /> },
     { type: 'separator' },
     { type: 'label', label: 'Get started' },

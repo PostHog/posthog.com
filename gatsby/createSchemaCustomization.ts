@@ -208,8 +208,6 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
       allowed_tools: [String]
       featureFlag: String
       hideFromIndex: Boolean
-      lang: String
-      translationOf: String
       price: String
       platformLogo: String
       platformIconName: String

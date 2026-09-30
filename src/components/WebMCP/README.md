@@ -87,6 +87,5 @@ captured. The WebMCP callback does not expose the calling agent, model, protocol
 - Tools register once and read live page state through a ref, so `ask_max` always opens the chat for the
   current page and `read_skill` sees the skills from the static query.
 - Aborting the registration signal unregisters the tools, per spec. The component does this on unmount.
-- Korean pages use `KoreanWrapper`, which does not mount this component. The tools cover the English site.
 - The pages under `/pocket-guides` are also readable through `read_page`. The self-driving guides render a
   scout's `SKILL.md` in the page, so an agent can read a scout definition either way.
