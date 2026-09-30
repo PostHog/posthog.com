@@ -13,7 +13,7 @@ export const DataStackSection = () => {
         <div id="customer-infrastructure">
             <h2>{rich('section.4.heading', { highlight: Highlight })}</h2>
 
-            <div className="@lg:float-right text-sm @lg:max-w-xs bg-accent p-4 rounded-sm @lg:ml-6 @lg:mb-2 relative overflow-hidden">
+            <div className="@lg:float-end text-sm @lg:max-w-xs bg-accent p-4 rounded-sm @lg:ms-6 @lg:mb-2 relative overflow-hidden">
                 <p className="my-0 [&_p]:my-0">
                     <strong>{rich('section.4.list.heading', { highlight: Highlight })}</strong>
                 </p>

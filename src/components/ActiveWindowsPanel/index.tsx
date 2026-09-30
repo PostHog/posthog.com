@@ -101,7 +101,7 @@ export default function ActiveWindowsPanel() {
                                         e.stopPropagation()
                                         closeWindow(window)
                                     }}
-                                    className="ml-2 text-secondary hover:text-primary opacity-0 group-hover:opacity-100 transition-opacity text-lg leading-none px-1"
+                                    className="ms-2 text-secondary hover:text-primary opacity-0 group-hover:opacity-100 transition-opacity text-lg leading-none px-1"
                                 >
                                     ×
                                 </button>

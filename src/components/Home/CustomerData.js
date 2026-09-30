@@ -44,13 +44,13 @@ export default function CustomerData() {
                         {features.map(({ icon, title, description, color }) => {
                             return (
                                 <li
-                                    className="relative md:max-w-md py-4 md:py-8 pl-16 pr-2 md:pl-20 md:pr-6 "
+                                    className="relative md:max-w-md py-4 md:py-8 ps-16 pe-2 md:ps-20 md:pe-6 "
                                     key={title}
                                 >
                                     <span className="absolute left-4 md:left-8 top-4.5 md:top-6.5 inline-block w-8 h-8 text-primary dark:text-primary-dark opacity-60">
                                         {icon}
                                     </span>
-                                    <h5 className={`text-lg font-bold m-0 pb-0 pr-4 text-${color}`}>{title}</h5>
+                                    <h5 className={`text-lg font-bold m-0 pb-0 pe-4 text-${color}`}>{title}</h5>
                                     <p className="m-0 text-[15px] opacity-75">{description}</p>
                                 </li>
                             )
@@ -88,7 +88,11 @@ export default function CustomerData() {
                             </div>
                         </div>
                     </div>
-                    <CloudinaryImage src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Home/images/host-hogs.png" className="w-full" imgClassName="w-full" />
+                    <CloudinaryImage
+                        src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Home/images/host-hogs.png"
+                        className="w-full"
+                        imgClassName="w-full"
+                    />
                 </div>
             </div>
         </section>

@@ -117,17 +117,17 @@ export const CTAs = () => {
                     state={{ newWindow: true }}
                     className="text-secondary hover:text-primary"
                 >
-                    <IconMCP className="size-4 mr-1 inline-block relative -top-px" />
+                    <IconMCP className="size-4 me-1 inline-block relative -top-px" />
                     <span className="underline font-semibold">MCP</span>
                 </Link>
                 <span className="text-secondary">•</span>
                 <Link to="/demo" state={{ newWindow: true }} className="text-secondary hover:text-primary">
-                    <IconPlayFilled className="size-4 mr-1 inline-block relative -top-px" />
+                    <IconPlayFilled className="size-4 me-1 inline-block relative -top-px" />
                     <span className="underline font-semibold">Watch a demo</span>
                 </Link>
                 <span className="text-secondary">•</span>
                 <Link to="/talk-to-a-human" state={{ newWindow: true }} className="text-secondary hover:text-primary">
-                    <IconHeadset className="size-4 mr-1 inline-block relative -top-px" />
+                    <IconHeadset className="size-4 me-1 inline-block relative -top-px" />
                     <span className="underline font-semibold">Talk to a human</span>
                 </Link>
             </p>
@@ -265,7 +265,7 @@ const CompanyStageTabs = () => {
 export const HeroImage = () => (
     <CloudinaryImage
         src="https://res.cloudinary.com/dmukukwp6/image/upload/lazy_a2afd552f7.png"
-        className="w-64 @xl:w-48 @xl:float-right @xl:ml-4 @2xl:w-56 @3xl:w-64 @2xl:float-right -scale-x-100 @xl:mt-16 @3xl:mt-8"
+        className="w-64 @xl:w-48 @xl:float-end @xl:ms-4 @2xl:w-56 @3xl:w-64 @2xl:float-end -scale-x-100 @xl:mt-16 @3xl:mt-8"
     />
 )
 

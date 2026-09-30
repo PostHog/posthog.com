@@ -13,35 +13,35 @@ export const HomeHappyHog = () => (
     <img
         src="https://res.cloudinary.com/dmukukwp6/image/upload/happy_hog_ebc59e4658.png"
         alt="happy hog"
-        className="@xl:float-right @xl:ml-2 max-w-[400px] max-h-48 -mt-2 -mr-2"
+        className="@xl:float-end @xl:ms-2 max-w-[400px] max-h-48 -mt-2 -me-2"
     />
 )
 
 export const ImageDW = () => (
     <HedgehogSailor
         size={220}
-        className="relative -top-[12px] ml-auto @lg:-right-5 -mb-[85px] -scale-x-100 @lg:ml-12"
+        className="relative -top-[12px] ms-auto @lg:-right-5 -mb-[85px] -scale-x-100 @lg:ms-12"
     />
 )
 
 export const ImageMoney = () => (
     <CloudinaryImage
         src="https://res.cloudinary.com/dmukukwp6/image/upload/hogmillionaire_6a6c2c958d.png"
-        className="float-right max-w-[120px] @sm:max-w-[280px] w-full @lg:ml-12 @sm:ml-4 mb-2 @sm:-mt-4"
+        className="float-end max-w-[120px] @sm:max-w-[280px] w-full @lg:ms-12 @sm:ms-4 mb-2 @sm:-mt-4"
     />
 )
 
 export const ImageReading1 = () => (
     <Image
         src="https://res.cloudinary.com/dmukukwp6/image/upload/reading_at_night_8397c5198c.png"
-        className="@md:hidden @xl:block @lg:float-right max-w-full @xl:max-w-xs rotate-1 shadow-2xl rounded border-4 border-white dark:border-primary -mb-2 @lg:mb-2 @lg:ml-4 @lg:-mt-2"
+        className="@md:hidden @xl:block @lg:float-end max-w-full @xl:max-w-xs rotate-1 shadow-2xl rounded border-4 border-white dark:border-primary -mb-2 @lg:mb-2 @lg:ms-4 @lg:-mt-2"
     />
 )
 
 export const ImageReading2 = () => (
     <Image
         src="https://res.cloudinary.com/dmukukwp6/image/upload/reading_at_night_8397c5198c.png"
-        className="hidden @md:block @md:float-right @xl:hidden @md:max-w-60 @xl:max-w-xs @sm:ml-4 @sm:mb-2 rotate-1 shadow-2xl rounded border-4 border-white dark:border-primary"
+        className="hidden @md:block @md:float-end @xl:hidden @md:max-w-60 @xl:max-w-xs @sm:ms-4 @sm:mb-2 rotate-1 shadow-2xl rounded border-4 border-white dark:border-primary"
     />
 )
 

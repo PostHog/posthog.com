@@ -35,7 +35,7 @@ export default function ToolsTickerStrip({
                     @[26rem]/tools:grid-cols-3 @[26rem]/tools:[&>li:nth-child(-n+8)]:flex
                     @[35rem]/tools:grid-cols-4 @[35rem]/tools:[&>li:nth-child(-n+11)]:flex
                     @[44rem]/tools:grid-cols-5 @[44rem]/tools:[&>li:nth-child(-n+14)]:flex`
-                    : 'flex items-center gap-6 pr-6 m-0 p-0 list-none shrink-0'
+                    : 'flex items-center gap-6 pe-6 m-0 p-0 list-none shrink-0'
             }
         >
             {products.map((product) => (
