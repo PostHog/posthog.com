@@ -79,6 +79,9 @@ jobs:
             - name: Check Markdown exports
               run: pnpm test:markdown
 
+            - name: Check RTL-safe areas use logical Tailwind classes
+              run: pnpm test:rtl-classes
+
             - name: Build site
               run: pnpm build
               env:
