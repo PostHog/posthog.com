@@ -382,3 +382,8 @@ messages:
         store: ストア
         careers: 採用情報
         trash: ゴミ箱
+
+    toast:
+        english_only:
+            title: 翻訳済みのページはここまでです
+            description: サイトのその他のページは、現在英語のみです。

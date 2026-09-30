@@ -383,3 +383,8 @@ messages:
         store: Shop
         careers: Karriere
         trash: Papierkorb
+
+    toast:
+        english_only:
+            title: Du verlässt die übersetzten Seiten
+            description: Der Rest der Website ist vorerst auf Englisch.

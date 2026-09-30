@@ -387,3 +387,8 @@ messages:
         store: Sklep
         careers: Kariera
         trash: Kosz
+
+    toast:
+        english_only:
+            title: Opuszczasz przetłumaczone strony
+            description: Reszta serwisu jest na razie po angielsku.

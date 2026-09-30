@@ -384,3 +384,8 @@ messages:
         store: المتجر
         careers: الوظائف
         trash: سلة المهملات
+
+    toast:
+        english_only:
+            title: أنت تغادر الصفحات المترجمة
+            description: باقي الموقع متاح باللغة الإنجليزية فقط حاليًا.
