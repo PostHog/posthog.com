@@ -36,7 +36,7 @@ const postTypes = [
 const posts: {
     author: string
     username: string
-    lastName?: string
+    lastName: string
     rebloggedUsername?: string
     image: string
     imageAlt: string
@@ -51,6 +51,7 @@ const posts: {
     {
         author: 'Lottie',
         username: 'marmitelover4life',
+        lastName: 'Coxon',
         rebloggedUsername: 'letmecook',
         image: '/images/sparks-joy/hoglr/dictator-or-tech-bro.webp',
         imageAlt: 'Two Hoggie characters dressed as a tech bro and a dictator for the quiz.',
@@ -60,6 +61,7 @@ const posts: {
 type TeamMember = {
     firstName: string
     lastName: string
+    squeakId: number
     avatar?: { url?: string }
 }
 
@@ -76,6 +78,7 @@ export default function Hoglr(): JSX.Element {
                 teamMembers: nodes {
                     firstName
                     lastName
+                    squeakId
                     avatar {
                         url
                     }
@@ -84,9 +87,9 @@ export default function Hoglr(): JSX.Element {
         }
     `)
 
-    const avatarFor = (firstName: string, lastName?: string) =>
-        teamMembers.find((member) => member.firstName === firstName && (!lastName || member.lastName === lastName))
-            ?.avatar?.url
+    const profileFor = (firstName: string, lastName: string) =>
+        teamMembers.find((member) => member.firstName === firstName && member.lastName === lastName)
+    const charles = profileFor('Charles', 'Cook')
 
     return (
         <>
@@ -198,7 +201,8 @@ export default function Hoglr(): JSX.Element {
 
                             <section aria-label="Hoglr feed" className="space-y-4">
                                 {posts.map((post) => {
-                                    const avatar = avatarFor(post.author, post.lastName)
+                                    const author = profileFor(post.author, post.lastName)
+                                    const avatar = author?.avatar?.url
                                     return (
                                         <article key={post.author} className="flex items-start gap-2 @lg:gap-4">
                                             <div className="flex size-10 shrink-0 items-center justify-center overflow-hidden rounded-sm bg-light-2 font-serif text-xl font-bold text-navy @lg:size-14 @3xl:size-16">
@@ -211,13 +215,33 @@ export default function Hoglr(): JSX.Element {
                                             <div className="relative min-w-0 flex-1 rounded-md bg-light-1 px-3 py-3 text-navy shadow-sm before:absolute before:-left-1 before:top-5 before:size-2 before:rotate-45 before:bg-light-1 @lg:px-4">
                                                 <div className="flex flex-wrap items-center justify-between gap-x-2 text-[11px] text-light-9">
                                                     <span>
-                                                        <span className="font-semibold underline">{post.username}</span>{' '}
+                                                        {author ? (
+                                                            <Link
+                                                                to={`/community/profiles/${author.squeakId}`}
+                                                                state={{ newWindow: true }}
+                                                                className="font-semibold underline"
+                                                            >
+                                                                {post.username}
+                                                            </Link>
+                                                        ) : (
+                                                            <span className="font-semibold">{post.username}</span>
+                                                        )}{' '}
                                                         {post.rebloggedUsername && (
                                                             <>
                                                                 reblogged{' '}
-                                                                <span className="font-semibold underline">
-                                                                    {post.rebloggedUsername}
-                                                                </span>
+                                                                {charles ? (
+                                                                    <Link
+                                                                        to={`/community/profiles/${charles.squeakId}`}
+                                                                        state={{ newWindow: true }}
+                                                                        className="font-semibold underline"
+                                                                    >
+                                                                        {post.rebloggedUsername}
+                                                                    </Link>
+                                                                ) : (
+                                                                    <span className="font-semibold">
+                                                                        {post.rebloggedUsername}
+                                                                    </span>
+                                                                )}
                                                             </>
                                                         )}
                                                         :
@@ -265,7 +289,7 @@ export default function Hoglr(): JSX.Element {
                                                 </a>
                                                 {post.author === 'James' && (
                                                     <p className="mb-0 mt-2 text-xs text-light-11">
-                                                        Uber for Dogs, where the dogs drive.
+                                                        @posthog, stop uberfordogsblockign me
                                                     </p>
                                                 )}
                                             </div>
