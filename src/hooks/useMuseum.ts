@@ -167,7 +167,7 @@ export const useMuseumExhibit = (
                 populate: {
                     ...SUMMARY_POPULATE,
                     gallery: true,
-                    credits: { populate: ['avatar'] },
+                    credits: { fields: ['firstName', 'lastName'], populate: ['avatar'] },
                     relatedExhibits: { populate: SUMMARY_POPULATE },
                     relatedBy: { populate: SUMMARY_POPULATE },
                 },
