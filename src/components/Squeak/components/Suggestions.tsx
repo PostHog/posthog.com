@@ -61,8 +61,8 @@ const mentionToken = (profile) =>
         ? '@max'
         : `@${slugify(profile.attributes.firstName || '', { lower: true, strict: true }) || 'user'}/${profile.id}`
 
-// Square brackets in a title would end the Markdown link text early.
-const linkText = (text: string) => text.replace(/[[\]]/g, '\\$&')
+// Square brackets in a title would end the Markdown link text early, and a backslash would escape the closing one.
+const linkText = (text: string) => text.replace(/[\\[\]]/g, '\\$&')
 
 const SuggestionList = forwardRef<SuggestionMenuHandle, MenuProps & { groups: Group[]; loading?: boolean }>(
     function SuggestionList({ groups, loading, position, onSelect, onClose }, ref) {
