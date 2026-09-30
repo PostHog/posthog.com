@@ -30,12 +30,12 @@ name: Türkçe
 messages:
     meta:
         title: PostHog - ürününün bağlam katmanı
-        description: PostHog sorunları kendi kendine teşhis eder, bug'ları düzeltir ve pull request açar. Üstelik senin prompt yazmana gerek kalmadan.
+        description: PostHog sorunları kendi kendine teşhis eder, bug'ları düzeltir ve pull request açar. Üstelik senin yönlendirmene gerek kalmadan.
 
     hero:
         H1: Ürününün <emphasis>bağlam katmanı</emphasis>
         body:
-            1: PostHog <highlight>analitik verilerini, hatalarını, replay'lerini ve iş verilerini</highlight> toplar ve saklar. Böylece hem sen hem de <underline>agent'ların</underline> bunları sorgulayıp harekete geçebilirsiniz.
+            1: PostHog <highlight>analitik verilerini, hatalarını, oturum kayıtlarını ve iş verilerini</highlight> toplar ve saklar. Böylece hem sen hem de <underline>agent'ların</underline> bunları sorgulayıp harekete geçebilirsiniz.
             2: PostHog'la ürün çıkaran 500.000'den fazla ekibe sen de katıl.
         cta:
             heading: <logo/> kurulumu <highlight>bedava</highlight>
@@ -58,7 +58,7 @@ messages:
             toggle: PostHog'a ne istersen sor
             heading: PostHog'a ne istersen sor
             body:
-                1: PostHog, ürün ve şirket verilerini toplayıp saklayacağın ve sorgulayacağın tek yer. Analitik, replay'ler, hatalar ve loglar anında birleşip aklına gelen her soruyu cevaplıyor.
+                1: PostHog, ürün ve şirket verilerini toplayıp saklayacağın ve sorgulayacağın tek yer. Analitik, oturum kayiıları, hatalar ve loglar anında birleşip aklına gelen her soruyu cevaplıyor.
                 2: Tabloyu tamamlamak için <link>{count}+ kaynaktan</link> üçüncü taraf verisi çek.
             button: Ücretsiz başla
             products:
@@ -68,7 +68,7 @@ messages:
                 view_all: '{count} aracın hepsini gör'
             demo:
                 label: PostHog AI demosu
-                description: "Örnek demo: PostHog AI, Google Ads trafiğini, PostHog funnel'larını, Stripe ödemelerini ve GitHub değişikliklerini kullanarak ücretli dönüşümlerdeki düşüşü inceliyor. Mobil checkout'ta fazladan eklenmiş zorunlu bir alan buluyor ve daha kısa bir checkout'u test etmeyi öneriyor. Tüm bulgular örnek veridir."
+                description: "Örnek demo: PostHog AI, Google Ads trafiğini, PostHog huni analizlerini, Stripe ödemelerini ve GitHub değişikliklerini kullanarak ücretli dönüşümlerdeki düşüşü inceliyor. Mobil checkout'ta fazladan eklenmiş zorunlu bir alan buluyor ve daha kısa bir checkout'u test etmeyi öneriyor. Tüm bulgular örnek veridir."
                 prompt: Signup'lar artıyor ama ücretli dönüşümler neden düşüyor?
                 reply:
                     1: Reklam tıklamasından ödeme yapan müşteriye kadar tüm yolu takip edeceğim.
@@ -80,7 +80,7 @@ messages:
                         body: Kampanya trafiğini karşılaştır
                         result: Daha çok ziyaretçi, aynı kitle
                     2:
-                        body: Signup → ödeme funnel'ını analiz et
+                        body: Signup → ödeme yolunu analiz et
                         result: Kopuş mobil checkout'ta
                     3:
                         body: Ödemeleri ve reddedilenleri kontrol et
@@ -102,10 +102,10 @@ messages:
         2c:
             toggle: PostHog'la canlıya al
             heading: PostHog'la canlıya al
-            body: Inbox'un ilgili bulguları araştırılmış raporlarda toplar ve önceliğe göre sıralar. Önerilen iyileştirmeleri ve pull request'leri incele, neyin canlıya çıkacağına sen karar ver.
+            body: PostHog ilgili bulguları araştırılmış raporlarda toplar ve önceliğe göre sıralar. Önerilen iyileştirmeleri ve pull request'leri incele, neyin canlıya çıkacağına sen karar ver.
             button: Ücretsiz başla
             signals:
-                heading: 'Self-driving sinyalleri şuralardan çeker:'
+                heading: 'Otonom sinyalleri şuralardan çeker:'
                 1:
                     body: Issue olarak gruplanmış exception'lar ve stack trace'ler
                 2:
@@ -117,10 +117,10 @@ messages:
                     title: Dış araçlar
                     body: Zendesk, Linear, GitHub issue'ları
             demo:
-                description: "Örnek self-driving inbox. Dört örnek rapor, en yenisi en üstte olacak şekilde tek tek geliyor: GitHub'dan bir fatura talebi, taslak pull request'i olan bir dönüşüm takibi scout'u, session replay'den bir checkout sorunu ve incelemeye hazır pull request'iyle yüksek öncelikli bir giriş hatası."
+                description: "Örnek otonom inbox. Dört örnek rapor, en yenisi en üstte olacak şekilde tek tek geliyor: GitHub'dan bir fatura talebi, taslak pull request'i olan bir dönüşüm takibi scout'u, session replay'den bir checkout sorunu ve incelemeye hazır pull request'iyle yüksek öncelikli bir giriş hatası."
 
         3:
-            heading: Sosyal kanıt
+            heading: Müşteri Yorumları
             body: Evet, bizi gerçekten kullanıyorlar. Hayır, 2 yıl önce bizi bir kere deneyip bırakan rastgele bir mühendisten bahsetmiyoruz.
             button: Müşterileri gör
             shuffle: Karıştır
@@ -236,7 +236,7 @@ messages:
                 2: Teknik dokümanlar
                 3: API
                 4: Soru sor
-                5: PostHog'daki küçük ekipler
+                5: PostHog'daki küçük takımlar
 
         8:
             heading: Utanmaz CTA
@@ -258,13 +258,13 @@ messages:
                     2: AB (Frankfurt)
             price:
                 label: 'Başlangıç fiyatı:'
-                old: 0 TL
+                old: 0 dolar
                 new: Bedava
                 urgency: '><larger>Zam gelmeden son 1 adet!!</larger>'
             button: Hemen başla
             urgency:
                 # {companies} is today's signup count, or `fallback` when it is not loaded yet.
-                label: '<bold>Acele et:</bold> <today>Bugün</today> {companies} şirket kaydoldu. <br/>Fırsatı kaçırma, ilk siparişinde 0 TL indirimi kap.'
+                label: '<bold>Acele et:</bold> <today>Bugün</today> {companies} şirket kaydoldu. <br/>Fırsatı kaçırma, ilk siparişinde indirimi kap.'
                 fallback: bir sürü
 
     cookie:
@@ -342,7 +342,7 @@ messages:
             changelog: Changelog
             media: Medya
             people: Ekip
-            small_teams: Küçük ekipler
+            small_teams: Küçük takımlar
             careers: Kariyer
             side_projects: Yan projeler
             partnerships: İş ortaklıkları
