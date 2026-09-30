@@ -8,15 +8,14 @@ import { useTranslation } from 'i18n'
 import './animations.css'
 
 // Illustrative reports, in arrival order. These are not live issues or pull requests.
-// The title, summary, and source text come from section.2c.demo.card.<n> in src/i18n/locales. Sources that
-// are product or brand names (GitHub, Session replay, Error tracking) have no key and stay in English.
+// App UI stays in English on every locale, so only the screen-reader caption is translated.
 const ITEMS = [
     {
         priority: 'P2',
         scope: 'feat(billing)',
+        title: 'Make invoices easier to find',
+        summary: 'Customers keep asking where to download invoices. Add a direct link from their account page.',
         source: 'GitHub',
-        sourcePrefix: undefined,
-        sourceKey: undefined,
         Icon: IconGithub,
         color: 'text-secondary',
         repo: undefined,
@@ -25,9 +24,9 @@ const ITEMS = [
     {
         priority: 'P3',
         scope: 'fix(analytics)',
+        title: 'Restore checkout conversion tracking',
+        summary: 'The new checkout stopped sending completion events. Restore tracking so the funnel is accurate.',
         source: 'Scout · Conversion tracking',
-        sourcePrefix: 'Scout · ',
-        sourceKey: 'section.2c.demo.card.2.source',
         Icon: IconCompass,
         color: 'text-orange',
         repo: 'acme/web',
@@ -36,9 +35,9 @@ const ITEMS = [
     {
         priority: 'P2',
         scope: 'fix(checkout)',
+        title: 'Explain why a payment was declined',
+        summary: 'Replays show customers retrying the same card. Replace the generic error with a useful message.',
         source: 'Session replay',
-        sourcePrefix: undefined,
-        sourceKey: undefined,
         Icon: IconRewindPlay,
         color: 'text-yellow',
         repo: undefined,
@@ -47,9 +46,9 @@ const ITEMS = [
     {
         priority: 'P1',
         scope: 'fix(auth)',
+        title: 'Fix sign-in failures on mobile',
+        summary: 'An expired token leaves mobile users on a blank screen. Refresh the session before redirecting.',
         source: 'Error tracking',
-        sourcePrefix: undefined,
-        sourceKey: undefined,
         Icon: IconWarning,
         color: 'text-orange',
         repo: 'acme/web',
@@ -94,10 +93,10 @@ export default function InboxDemo() {
                 <div className="inbox-demo-list absolute inset-x-[3cqw] inset-y-[2.5cqw]">
                     <div className="inbox-demo-empty absolute inset-0 flex flex-col items-center justify-center gap-[1.5cqw] text-center text-[2.6cqw] opacity-0 text-secondary">
                         <IconArchive className="size-[7cqw] mb-[1cqw]" />
-                        <strong>{t('section.2c.demo.empty.heading')}</strong>
-                        <span>{t('section.2c.demo.empty.body')}</span>
+                        <strong>Your inbox is clear</strong>
+                        <span>New findings will appear here.</span>
                     </div>
-                    {ITEMS.map(({ priority, scope, source, sourcePrefix, sourceKey, Icon, color, repo, pr }, index) => (
+                    {ITEMS.map(({ priority, scope, title, summary, source, Icon, color, repo, pr }, index) => (
                         <article
                             key={scope}
                             className="inbox-demo-item absolute inset-x-0 top-0 flex h-[var(--row-height)] p-[2.5cqw] data-[has-pr=false]:border-dashed bg-primary dark:bg-accent/30 border border-primary rounded"
@@ -128,7 +127,7 @@ export default function InboxDemo() {
                                         <code className="inbox-demo-scope inline-flex items-center shrink-0 h-[var(--badge-height)] px-[0.6cqw] py-0 font-medium whitespace-nowrap bg-transparent border border-primary rounded">
                                             {scope}
                                         </code>
-                                        <span>{t(`section.2c.demo.card.${index + 1}.title`)}</span>
+                                        <span>{title}</span>
                                     </h4>
                                     {pr && (
                                         <span
@@ -144,15 +143,14 @@ export default function InboxDemo() {
                                     )}
                                 </div>
                                 <p className="inbox-demo-summary line-clamp-2 my-[1cqw] mr-0 ml-[calc(var(--badge-height)+1cqw)] text-[2.35cqw] leading-[1.35] text-secondary">
-                                    {t(`section.2c.demo.card.${index + 1}.body`)}
+                                    {summary}
                                 </p>
                                 <footer className="inbox-demo-meta flex items-center gap-[1.5cqw] mt-auto ml-[calc(var(--badge-height)+1cqw)] text-[2.1cqw] leading-[1.3] whitespace-nowrap text-secondary">
                                     {repo && <span className="inbox-demo-repo font-mono">{repo}</span>}
                                     <span className="inbox-demo-source inline-flex items-center gap-[0.8cqw] min-w-0 overflow-hidden text-ellipsis [&_svg]:size-[2.4cqw] [&_svg]:shrink-0 [&_g]:[clip-path:none]">
-                                        <Icon className={`${color} fill-current`} />{' '}
-                                        {sourceKey ? `${sourcePrefix}${t(sourceKey)}` : source}
+                                        <Icon className={`${color} fill-current`} /> {source}
                                     </span>
-                                    <span className="inbox-demo-time ml-auto">{t('section.2c.demo.timestamp')}</span>
+                                    <span className="inbox-demo-time ml-auto">Just now</span>
                                 </footer>
                             </div>
                         </article>

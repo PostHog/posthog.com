@@ -58,17 +58,17 @@ const TOOLS = [
     },
 ]
 
-// Product names and SQL stay in English. The other chips have a translation key.
+// App UI (the composer, these chips, the chat header) stays in English on every locale. Only the conversation is translated.
 const CAPABILITIES = [
-    { label: 'Coding', labelKey: 'section.2a.demo.capability.coding', Icon: IconCode2 },
+    { label: 'Coding', Icon: IconCode2 },
     { label: 'Product analytics', Icon: IconGraph },
     { label: 'SQL', Icon: IconDatabase },
     { label: 'Session replay', Icon: IconRewindPlay },
-    { label: 'SDK setup', labelKey: 'section.2a.demo.capability.sdk_setup', Icon: IconServer },
+    { label: 'SDK setup', Icon: IconServer },
     { label: 'Feature flags', Icon: IconToggle },
     { label: 'Experiments', Icon: IconFlask },
     { label: 'Surveys', Icon: IconMessage },
-    { label: 'Docs', labelKey: 'section.2a.demo.capability.docs', Icon: IconBook },
+    { label: 'Docs', Icon: IconBook },
 ]
 
 function PostHogMark({ className = '' }: { className?: string }) {
@@ -143,7 +143,7 @@ export default function AskAnythingDemo() {
             >
                 <PostHogMark className="ai-demo-welcome-logo block w-[10.4cqw] shrink-0 [&_svg]:!w-full [&_svg]:!h-auto" />
                 <h3 className="w-full text-center m-0 text-[4cqw] font-bold leading-tight">
-                    {t('section.2a.demo.welcome')}
+                    What can I help you with?
                 </h3>
 
                 <div
@@ -151,23 +151,20 @@ export default function AskAnythingDemo() {
                     data-submitting={time >= 4200 && !conversation}
                 >
                     <span className="ai-demo-context border border-primary inline-flex items-center gap-[0.8cqw] whitespace-nowrap leading-none font-semibold text-secondary py-[0.8cqw] px-[1cqw] rounded-[1.1cqw] text-[2.5cqw]">
-                        <IconAtSign /> {t('section.2a.demo.composer.context')} <IconChevronDown />
+                        <IconAtSign /> Add context <IconChevronDown />
                     </span>
                     <div className="ai-demo-prompt pt-[3.1cqw] px-[1.3cqw] pb-0 text-[3cqw] leading-[1.4]">
-                        {typedQuestion || (
-                            <span className="text-secondary">{t('section.2a.demo.composer.placeholder')}</span>
-                        )}
+                        {typedQuestion || <span className="text-secondary">Describe the task in detail...</span>}
                         {typedQuestion && time < 4200 && (
                             <span className="ai-demo-caret inline-block h-[1em] ml-[0.15em] border-r border-current align-[-0.12em]" />
                         )}
                     </div>
                     <div className="ai-demo-composer-footer absolute bottom-[1.8cqw] left-[1.8cqw] right-[1.3cqw] flex items-end gap-[1cqw]">
                         <span className="ai-demo-select border border-primary inline-flex items-center gap-[0.8cqw] whitespace-nowrap leading-none font-semibold bg-primary p-[1cqw] rounded-[0.7cqw] text-[2.5cqw] [&>svg:last-child]:!w-[0.7em] [&>svg:last-child]:ml-[0.5cqw]">
-                            <IconShield className="text-green" /> {t('section.2a.demo.composer.mode')}{' '}
-                            <IconChevronDown />
+                            <IconShield className="text-green" /> Auto <IconChevronDown />
                         </span>
                         <span className="ai-demo-select border border-primary inline-flex items-center gap-[0.8cqw] whitespace-nowrap leading-none font-semibold bg-primary p-[1cqw] rounded-[0.7cqw] text-[2.5cqw] [&>svg:last-child]:!w-[0.7em] [&>svg:last-child]:ml-[0.5cqw]">
-                            {t('section.2a.demo.composer.model')} · Claude Sonnet 5 High <IconChevronDown />
+                            Default · Claude Sonnet 5 High <IconChevronDown />
                         </span>
                         <span className="ai-demo-send border border-yellow text-secondary flex items-center justify-center ml-auto w-[7.6cqw] h-[6.1cqw] rounded-[1.3cqw] shadow-[0_0.55cqw_0_rgb(var(--input-border))] [&_svg]:!size-[3.6cqw] group-data-[submitting=true]/composer:bg-yellow group-data-[submitting=true]/composer:text-black">
                             <IconArrowRight />
@@ -176,13 +173,13 @@ export default function AskAnythingDemo() {
                 </div>
 
                 <div className="ai-demo-capabilities w-full flex flex-wrap gap-y-[1.5cqw] gap-x-[1.2cqw] justify-center [&_svg]:text-secondary">
-                    {CAPABILITIES.map(({ label, labelKey, Icon }) => (
+                    {CAPABILITIES.map(({ label, Icon }) => (
                         <span
                             key={label}
                             className="border border-primary inline-flex items-center gap-[0.8cqw] whitespace-nowrap leading-none font-semibold bg-primary p-[0.85cqw] rounded-[1.1cqw] text-[2.5cqw] shadow-[0_0.45cqw_0_rgb(var(--input-border))]"
                         >
                             <Icon className="fill-current [&_g]:[clip-path:none]" />
-                            {labelKey ? t(labelKey) : label}
+                            {label}
                         </span>
                     ))}
                 </div>
@@ -195,7 +192,7 @@ export default function AskAnythingDemo() {
             >
                 <div className="ai-demo-chat-heading flex items-center gap-[1.1cqw] h-[3.6cqw] text-[2.5cqw] [&>span:first-child]:w-[4.8cqw] [&_svg]:!w-full [&_svg]:!h-auto [&>span:last-child]:text-secondary [&>span:last-child]:ml-auto [&>span:last-child]:mr-[4.8cqw] [&>span:last-child]:text-[1.9cqw]">
                     <PostHogMark /> <strong>PostHog AI</strong>
-                    <span>{t('section.2a.demo.sample_data')}</span>
+                    <span>Sample data</span>
                 </div>
                 <div className="ai-demo-question border border-primary bg-accent mt-[2.2cqw] mr-0 mb-[2.4cqw] ml-auto py-[1.6cqw] px-[2cqw] w-[85%] rounded-[1.5cqw] font-semibold text-[2.7cqw]">
                     {question}
