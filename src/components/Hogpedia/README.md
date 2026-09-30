@@ -4,6 +4,8 @@ Hogpedia is an encyclopedia about PostHog at `/hogpedia`, presented in the MonoB
 
 The format is the joke. The facts are not. Every article starts with a plain definition, links to the PostHog source for each claim, and cross-links the other articles.
 
+**Hogpedia is `noindex` throughout, and excluded from the sitemap.** This is deliberate, not an oversight. Indexed, the product and concept articles would compete with the real docs for the same queries, and an answer engine has no way to tell a lore article from a factual one — the encyclopedia format makes content *more* likely to be quoted, not less. Keep new pages `noindex`. For the same reason there is no structured data: `Article` and `DefinedTerm` JSON-LD would point machines at a parody page.
+
 ## What lives where
 
 | Path | Contents |
@@ -13,7 +15,10 @@ The format is the joke. The facts are not. Every article starts with a plain def
 | `src/templates/Hogpedia.tsx` | The article template. |
 | `src/templates/HogpediaCategory.tsx` | A category listing. |
 | `src/pages/hogpedia/` | The Main Page and the meta pages. |
+| `src/pages/sparks-joy/` | Lists Hogpedia under "Time machine", the section for parody recreations. |
 | `src/components/Hogpedia/` | The skin and the article furniture. |
+
+Hogpedia is listed on `/sparks-joy` under **Time machine**, the group for parody recreations of old websites, via `SparksJoyItems.timeMachine` in `src/components/TaskBarMenu/menuData.tsx`. That array drives the `/sparks-joy` page only — the taskbar's "Things that spark joy" entry is a plain link to the page and has no submenu.
 
 Pages are created in `gatsby/createPages.ts`. Articles are excluded from the generic `Plain` loop there and get their own loop, which also builds a page per category. The frontmatter types are declared in `gatsby/createSchemaCustomization.ts` under `FrontmatterHogpedia`.
 
@@ -54,14 +59,16 @@ The "See also", "References" and "External links" sections are generated from th
 
 In the body, use Markdown plus two components:
 
-- `<Ref id="1" />` renders `[1]` and jumps to the matching reference.
+- `<Ref id="1" />` renders a footnote marker and jumps to the matching reference. The number shown is the reference's **position** in the list, not its `id`, so a gap in the ids can never make the marker disagree with the numbered list. An `id` with no matching reference renders nothing.
 - `<CitationNeeded reason="..." />` renders `[citation needed]`.
 
 ## Rules
 
 **Do not invent facts.** Every claim comes from a first-party PostHog file. `contents/handbook/story.md` for the timeline, `contents/docs/glossary.mdx` for definitions, `contents/handbook/company/lore.md` for lore, `src/data/tools.ts` for product names. A figure that changes over time links to its source rather than repeating the number.
 
-**No dead links.** Hogpedia has no red links. Link only to an article that exists. A sidebar or tab item with nothing behind it renders as plain text, not as a link. A build-time link check covers this.
+**No dead links.** Hogpedia has no red links. Link only to an article that exists. A sidebar or tab item with nothing behind it renders as plain text, not as a link. The hand-written Main Page modules are filtered against the live article index, so a rename cannot leave a broken link behind. A build-time link check covers the rest.
+
+**Keep it simple.** This is a parody site, not a documentation set. An article is a lead plus three or four short sections. Resist adding a "Criticism" or "Limits" section — that is essay writing, and it was cut once already.
 
 **Mark lore as lore.** A lore article carries the `lore` notice. An infobox never contains a joke.
 

@@ -14,7 +14,6 @@ import References, { Ref } from 'components/Hogpedia/References'
 import CitationNeeded from 'components/Hogpedia/CitationNeeded'
 import { SeeAlso, CategoryLinks } from 'components/Hogpedia/ArticleFooter'
 import { makeSectionHeading } from 'components/Hogpedia/SectionHeading'
-import { buildArticleStructuredData } from 'components/Hogpedia/structuredData'
 
 /**
  * A Hogpedia article.
@@ -90,16 +89,11 @@ export default function HogpediaArticle({
                 title={`${heading} - Hogpedia`}
                 description={summary}
                 canonicalUrl={slug}
-                noindex={isTalk}
+                // Hogpedia is a parody encyclopedia, so the whole section is kept out of search
+                // engines. Indexed, it would compete with the real docs for the same queries, and
+                // an answer engine has no way to tell the lore articles from the factual ones.
+                noindex
                 article
-                structuredData={buildArticleStructuredData({
-                    title,
-                    description: summary,
-                    slug,
-                    dateModified: fields?.commits?.[0]?.date,
-                    categories: meta.categories,
-                    isDefinition: (meta.categories || []).includes('Concepts'),
-                })}
             />
             <Explorer template="generic" slug="hogpedia" title={`${heading} - Hogpedia`} fullScreen>
                 <HogpediaShell
@@ -108,6 +102,7 @@ export default function HogpediaArticle({
                     slug={slug}
                     filePath={filePath}
                     hasTalkPage={isTalk || !!talkPage}
+                    referenceIds={(meta.references || []).map((r: { id: string }) => String(r.id))}
                     currentTab={isTalk ? 'discussion' : 'article'}
                     lastModified={lastModified}
                 >

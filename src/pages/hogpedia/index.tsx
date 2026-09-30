@@ -6,8 +6,7 @@ import HogpediaShell from 'components/Hogpedia/HogpediaShell'
 import { Module, FeaturedHog, dayIndex } from 'components/Hogpedia/MainPageModules'
 import { useHogpediaArticles, onlyArticles, onlyResolvable } from 'components/Hogpedia/data'
 import { HOGPEDIA_CATEGORIES, categoryPath } from 'components/Hogpedia/categories'
-import { buildMainPageStructuredData } from 'components/Hogpedia/structuredData'
-import { DID_YOU_KNOW, IN_THE_NEWS, FEATURED_HOGS, nearestEvents } from 'components/Hogpedia/mainPageData'
+import { DID_YOU_KNOW, IN_THE_NEWS, FEATURED_HOGS } from 'components/Hogpedia/mainPageData'
 
 /**
  * The Hogpedia Main Page, in the shape Wikipedia's 2007 one had: a welcome banner with an
@@ -24,8 +23,6 @@ export default function HogpediaMainPage(): JSX.Element {
     const facts = onlyResolvable(DID_YOU_KNOW, articles)
     const hogs = onlyResolvable(FEATURED_HOGS, articles)
     const hog = hogs[dayIndex(hogs.length)]
-    const onThisDay = nearestEvents()
-    const events = onlyResolvable(onThisDay.events, articles)
     const featured = articles.find((article) => article.slug === '/hogpedia/posthog')
 
     return (
@@ -34,7 +31,7 @@ export default function HogpediaMainPage(): JSX.Element {
                 title="Hogpedia, the free encyclopedia"
                 description="An encyclopedia of PostHog products, concepts, company history, and lore. Written in the style of a 2007 encyclopedia, sourced from PostHog's own documentation and handbook."
                 canonicalUrl="/hogpedia"
-                structuredData={buildMainPageStructuredData(articles.length)}
+                noindex
             />
             <Explorer template="generic" slug="hogpedia" title="Hogpedia" fullScreen>
                 <HogpediaShell title="Main Page" tagline={false} slug="/hogpedia" showTabs={false}>
@@ -72,6 +69,12 @@ export default function HogpediaMainPage(): JSX.Element {
                             </Module>
                         )}
 
+                        {hog && (
+                            <Module title="Featured hog" tint="warm">
+                                <FeaturedHog hog={hog.hog} name={hog.name} caption={hog.caption} to={hog.to} />
+                            </Module>
+                        )}
+
                         <Module title="Did you know…">
                             <ul>
                                 {facts.map((fact) => (
@@ -91,25 +94,6 @@ export default function HogpediaMainPage(): JSX.Element {
                                 ))}
                             </ul>
                         </Module>
-
-                        <Module title="On this day">
-                            <p>
-                                <b>{onThisDay.heading}</b>
-                            </p>
-                            <ul>
-                                {events.map((event) => (
-                                    <li key={event.date + event.text}>
-                                        <b>{event.date}</b> – {event.text} <Link to={event.to}>({event.label})</Link>
-                                    </li>
-                                ))}
-                            </ul>
-                        </Module>
-
-                        {hog && (
-                            <Module title="Featured hog" tint="warm">
-                                <FeaturedHog hog={hog.hog} name={hog.name} caption={hog.caption} to={hog.to} />
-                            </Module>
-                        )}
 
                         <Module title="Explore Hogpedia" wide>
                             <div className="hp-explore">

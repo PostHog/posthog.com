@@ -99,6 +99,8 @@ export default function HogpediaSidebar({
 
     // Two blocks rather than one, so a narrow window can keep the logo and the search box
     // above the article and move the rest below it. See the `order` rules in hogpedia.css.
+    // Three portlets, the way MonoBook had them: search, navigation, toolbox. The categories
+    // sit inside navigation rather than in a box of their own.
     return (
         <>
             <div className="hogpedia-nav-head">
@@ -110,24 +112,17 @@ export default function HogpediaSidebar({
             </div>
 
             <div className="hogpedia-nav-tail">
-                <Portlet title="navigation" links={navigation} currentPath={currentPath} />
-
-                <Portlet
-                    title="categories"
-                    links={HOGPEDIA_CATEGORIES.map((category) => ({
-                        label: category,
-                        to: categoryPath(category),
-                    }))}
-                    currentPath={currentPath}
-                />
+                <Portlet title="navigation" links={navigation} currentPath={currentPath}>
+                    <ul className="hp-portlet-sub">
+                        {HOGPEDIA_CATEGORIES.map((category) => (
+                            <li key={category}>
+                                <Link to={categoryPath(category)}>{category}</Link>
+                            </li>
+                        ))}
+                    </ul>
+                </Portlet>
 
                 <Portlet title="toolbox" links={toolbox} currentPath={currentPath} />
-
-                <Portlet title="appearance">
-                    <p className="hp-portlet-note">
-                        Hogpedia has one skin and no dark mode. It is 2007. The window around it follows your theme.
-                    </p>
-                </Portlet>
             </div>
         </>
     )

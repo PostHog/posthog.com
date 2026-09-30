@@ -23,6 +23,7 @@ export default function HogpediaShell({
     slug,
     filePath,
     hasTalkPage = false,
+    referenceIds,
     currentTab = 'article',
     showTabs = true,
     lastModified,
@@ -33,13 +34,14 @@ export default function HogpediaShell({
     slug: string
     filePath?: string
     hasTalkPage?: boolean
+    referenceIds?: string[]
     currentTab?: TabName
     showTabs?: boolean
     lastModified?: string
     children: React.ReactNode
 }): JSX.Element {
     return (
-        <HogpediaProvider value={{ slug, filePath, hasTalkPage }}>
+        <HogpediaProvider value={{ slug, filePath, hasTalkPage, referenceIds }}>
             <div className="hogpedia" data-scheme="primary">
                 <ScrollArea className="hogpedia-scroll">
                     <div className="hogpedia-frame">
@@ -47,6 +49,13 @@ export default function HogpediaShell({
                             <HogpediaSidebar currentPath={slug} filePath={filePath} />
                         </div>
                         <div className="hogpedia-body">
+                            {/* MonoBook's personal-tools strip. Deadpan rather than functional:
+                                Hogpedia has no accounts, and the skin notice moved here from the
+                                sidebar. */}
+                            <div className="hp-personal">
+                                <span>Not logged in</span>
+                                <span>One skin, no dark mode. It is 2007.</span>
+                            </div>
                             {showTabs && (
                                 <ArticleTabs
                                     slug={slug}

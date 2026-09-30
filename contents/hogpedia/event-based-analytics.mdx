@@ -59,14 +59,6 @@ A page visit was a reasonable unit of record when a product was a set of pages. 
 
 **The question changed.** A marketing team asks how many people arrived. A product team asks how many people succeeded. Success is an action, not a location.
 
-## Trade-offs
-
-Event-based analytics is not free of cost.
-
-- **Naming is a design problem.** Events are named by the people who write the code. Inconsistent names produce data that cannot be queried, and renaming later does not repair history.
-- **Volume drives price.** Most tools charge by event volume, so instrumenting everything has a bill attached.
-- **Autocapture is a partial answer.** Recording clicks and pageviews automatically avoids the naming problem for simple cases, at the cost of events described by a CSS selector rather than by intent.<Ref id="1" />
-
 ## How PostHog uses it
 
 PostHog stores one event stream and builds every product on it.<Ref id="2" /> This is the reason a [session replay](/hogpedia/session-replay) can be opened from a funnel step, and why an [experiment](/hogpedia/experiments) metric is an ordinary insight: they are queries over the same table, not integrations between separate systems.

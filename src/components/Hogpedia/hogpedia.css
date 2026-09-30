@@ -124,16 +124,13 @@
     .hogpedia-body {
         flex: 1 1 auto;
         min-width: 0;
-        padding: 0.5em 0.8em 0 0;
     }
-    /* MonoBook never capped the line length. A maximised window on a wide display gives
-       300-character lines, so the article column gets a ceiling. Readability over
-       fidelity — called out for review. */
-    .hp-content,
-    .hp-mainpage-banner,
-    .hp-modules,
-    .hp-footer {
-        max-width: 68em;
+    /* Flush to the right edge with the border only on the left, the way MonoBook joined the
+       content column to the sidebar. No max-width: MonoBook never capped the line length,
+       and a centred column is the single thing that most reads as a modern site. */
+    .hp-content {
+        border-right: none;
+        border-top: none;
     }
 }
 
@@ -259,6 +256,15 @@
     padding: 0.1em 0.6em;
     color: var(--hp-text-soft);
 }
+.hogpedia .hp-portlet-sub {
+    list-style: none;
+    margin: 0;
+    padding: 0.15em 0 0 0;
+    border-top: 1px solid #eaeaea;
+}
+.hp-portlet-sub li a {
+    padding-left: 1.4em;
+}
 .hp-portlet-note {
     padding: 0.35em 0.6em;
     font-size: 10px;
@@ -323,13 +329,32 @@
     color: var(--hp-text-soft);
 }
 
+/* ------------------------------------------------- personal tools strip --- */
+
+/* The thin strip MonoBook ran along the top right, above the tabs. Period-correct, and it
+   is where the skin notice lives now that the sidebar has one box fewer. */
+.hp-personal {
+    display: flex;
+    justify-content: flex-end;
+    gap: 1em;
+    padding: 0.35em 1em 0.3em 1em;
+    border-bottom: 1px solid var(--hp-accent);
+    font-size: 10.5px;
+    color: var(--hp-text-soft);
+    background: var(--hp-page-bg);
+}
+.hp-personal span {
+    white-space: nowrap;
+}
+
 /* ---------------------------------------------------------------- tabs --- */
 
 .hp-tabs {
-    padding-left: 1px;
+    padding-left: 1em;
     font-size: 11px;
     line-height: 1.125em;
     white-space: nowrap;
+    background: var(--hp-page-bg);
 }
 .hogpedia .hp-tabs ul {
     list-style: none;
@@ -373,7 +398,7 @@
 .hp-content {
     background: var(--hp-content-bg);
     border: 1px solid var(--hp-rule);
-    padding: 1em 1em 1.4em 1em;
+    padding: 0.8em 1em 1.2em 1em;
     position: relative;
 }
 

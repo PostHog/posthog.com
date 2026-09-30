@@ -7,6 +7,13 @@ export type HogpediaArticle = {
     filePath?: string
     /** True when a talk page exists, so the discussion tab can be a real link. */
     hasTalkPage: boolean
+    /**
+     * The article's reference ids, in the order they are listed.
+     *
+     * A footnote marker shows its 1-based position in this list, not its authored id, so the
+     * marker and the numbered list can never disagree — and an id can be a name.
+     */
+    referenceIds?: string[]
 }
 
 const HogpediaContext = createContext<HogpediaArticle | null>(null)

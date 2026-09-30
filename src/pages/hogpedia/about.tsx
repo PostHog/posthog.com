@@ -15,6 +15,7 @@ export default function HogpediaAbout(): JSX.Element {
                 title="About Hogpedia - Hogpedia"
                 description="Hogpedia is an encyclopedia about PostHog, written by PostHog, in the style of a 2007 encyclopedia. This page explains how it is sourced and where its limits are."
                 canonicalUrl="/hogpedia/about"
+                noindex
             />
             <Explorer template="generic" slug="hogpedia" title="About - Hogpedia" fullScreen>
                 <HogpediaShell title="About Hogpedia" slug="/hogpedia/about" showTabs={false}>

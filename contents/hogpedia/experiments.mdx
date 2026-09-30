@@ -29,9 +29,6 @@ hogpedia:
         - id: 2
           text: 'PostHog Experiments'
           url: /experiments
-        - id: 3
-          text: 'PostHog documentation, Feature flags'
-          url: /docs/feature-flags
     external:
         - title: 'PostHog Experiments'
           url: /experiments
@@ -66,10 +63,3 @@ An experiment is a [feature flag](/hogpedia/feature-flags) with a metric attache
 | [Product analytics](/hogpedia/product-analytics) | Provides the metrics. An experiment metric is an insight. |
 | [Session replay](/hogpedia/session-replay) | Recordings can be filtered to one variant, to see how behaviour differs. |
 | Surveys | A survey can be shown to one variant, to ask why. |
-
-## Common errors
-
-- **Stopping when the result looks good.** A result checked repeatedly will cross a threshold by chance. The duration should be set before the experiment starts.
-- **Changing the split while it runs.** This mixes two different populations into one result.
-- **Measuring only the metric being improved.** A change that raises sign-ups and raises cancellations has not worked. This is what secondary metrics are for.
-- **Too little traffic.** A small difference needs a large sample. An experiment that cannot reach one will not produce an answer, whatever it shows.

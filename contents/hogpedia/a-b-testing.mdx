@@ -24,9 +24,6 @@ hogpedia:
         - id: 1
           text: 'PostHog documentation, Experiments'
           url: /docs/experiments
-        - id: 2
-          text: 'PostHog glossary'
-          url: /docs/glossary
     external:
         - title: 'PostHog Experiments documentation'
           url: /docs/experiments
@@ -63,12 +60,3 @@ Running both versions simultaneously on comparable groups removes the confoundin
 ## In PostHog
 
 PostHog implements A/B testing as the [Experiments](/hogpedia/experiments) product, which uses a multi-variant [feature flag](/hogpedia/feature-flags) for assignment and a [product analytics](/hogpedia/product-analytics) insight for the metric.<Ref id="1" />
-
-## Limits of the method
-
-A/B testing answers narrow questions well and broad questions badly.
-
-- It compares the options presented to it. It cannot suggest a better third option.
-- It measures what happens within the test window, so it is poor at detecting long-term effects such as fatigue or habit formation.
-- It needs enough traffic to resolve the effect, which excludes most early-stage products.
-- It reports that a difference exists, not why. For that a team needs [session replay](/hogpedia/session-replay) or a survey.

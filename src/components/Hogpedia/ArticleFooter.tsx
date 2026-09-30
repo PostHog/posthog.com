@@ -57,15 +57,15 @@ export const ArticleFooter = ({ lastModified }: { lastModified?: string }): JSX.
     <div className="hp-footer">
         {lastModified && <p>This page was last modified on {lastModified}.</p>}
         <p>
-            Hogpedia text is part of{' '}
+            Hogpedia is part of{' '}
             <Link to="https://github.com/PostHog/posthog.com" externalNoIcon className="hp-external">
                 the posthog.com repository
-            </Link>{' '}
-            and is licensed under its terms. Hedgehog illustrations are PostHog brand assets — see the{' '}
-            <Link to="/handbook/brand/assets">brand assets guide</Link> before you reuse one.
+            </Link>
+            . Hedgehogs are PostHog brand assets — read the <Link to="/handbook/brand/assets">brand guide</Link> before
+            reusing one.
         </p>
         <p>
-            <Link to="/hogpedia">Main Page</Link> · <Link to="/hogpedia/about">About Hogpedia</Link> ·{' '}
+            <Link to="/hogpedia">Main Page</Link> · <Link to="/hogpedia/about">About</Link> ·{' '}
             <Link to="/hogpedia/donate">Donate</Link> · <Link to="/">posthog.com</Link>
         </p>
     </div>

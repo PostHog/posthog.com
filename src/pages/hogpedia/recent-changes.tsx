@@ -64,6 +64,7 @@ export default function HogpediaRecentChanges(): JSX.Element {
                 title="Recent changes - Hogpedia"
                 description="The most recent edits to Hogpedia articles, taken from the commit log of the posthog.com repository."
                 canonicalUrl="/hogpedia/recent-changes"
+                noindex
             />
             <Explorer template="generic" slug="hogpedia" title="Recent changes - Hogpedia" fullScreen>
                 <HogpediaShell title="Recent changes" slug="/hogpedia/recent-changes" showTabs={false}>

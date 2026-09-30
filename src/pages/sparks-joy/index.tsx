@@ -66,6 +66,53 @@ export default function SparkJoy(): JSX.Element {
                         defaultValue="games"
                     />
 
+                    {/* Time machine Section - parody recreations of old websites */}
+                    <Accordion
+                        triggerClassName="flex-row-reverse [&>svg]:!-rotate-90 [&[data-state=open]>svg]:!rotate-0 [&>span]:gap-2 [&>span]:after:h-0.5 [&>span]:after:flex-1 [&>span]:after:bg-border [&>span]:after:content-['']"
+                        items={[
+                            {
+                                value: 'time-machine',
+                                trigger: (
+                                    <span>
+                                        Time machine (
+                                        {
+                                            SparksJoyItems.timeMachine.filter(
+                                                (item) => item.iconName || item.customIcon
+                                            ).length
+                                        }
+                                        )
+                                    </span>
+                                ),
+                                content: (
+                                    <div
+                                        className={`@md:pl-4 grid ${explorerGridColumns} gap-y-4 items-start justify-items-center gap-x-1 @md:gap-x-4 relative [&>div]:mx-auto [&_figure]:text-center`}
+                                    >
+                                        {SparksJoyItems.timeMachine
+                                            .filter((item) => item.iconName || item.customIcon)
+                                            .map((item) => (
+                                                <ZoomHover key={item.link} className="w-28 justify-center">
+                                                    <AppLink
+                                                        label={item.label}
+                                                        url={item.link}
+                                                        external={item.external}
+                                                        Icon={
+                                                            item.iconName ? (
+                                                                <AppIcon name={item.iconName} />
+                                                            ) : (
+                                                                item.customIcon
+                                                            )
+                                                        }
+                                                        className="size-12"
+                                                    />
+                                                </ZoomHover>
+                                            ))}
+                                    </div>
+                                ),
+                            },
+                        ]}
+                        defaultValue="time-machine"
+                    />
+
                     {/* Not games Section */}
                     <Accordion
                         triggerClassName="flex-row-reverse [&>svg]:!-rotate-90 [&[data-state=open]>svg]:!rotate-0 [&>span]:gap-2 [&>span]:after:h-0.5 [&>span]:after:flex-1 [&>span]:after:bg-border [&>span]:after:content-['']"
