@@ -25,6 +25,10 @@ messages:
                     body: 'Prefere o terminal? Pule o navegador:'
 
     section:
+        2:
+            carousel:
+                pause: Pausar carrossel
+                resume: Retomar carrossel
         2a:
             toggle: Pergunte qualquer coisa ao PostHog
             heading: Pergunte qualquer coisa ao PostHog
@@ -33,9 +37,24 @@ messages:
                 2: Traga dados de terceiros de <link>mais de {count} fontes</link> para ter uma visão mais completa.
             button: Comece de graça
             products:
-                more: e mais
-                caption: Product Analytics, Session Replay, Error Tracking, Feature Flags, Experiments e Managed warehouse alimentam seus agentes.
+                more: e mais <count/>
+                caption: '{products} alimentam seus agentes.'
+                label: Ferramentas do PostHog
+                view_all: Ver todas as {count} ferramentas
             demo:
+                label: Demonstração do PostHog AI
+                description: 'Demonstração ilustrativa: o PostHog AI investiga a queda nas conversões pagas usando o tráfego do Google Ads, os funis do PostHog, os pagamentos do Stripe e as mudanças no GitHub. Ele encontra um campo obrigatório a mais no checkout mobile e recomenda testar um checkout mais curto. Todos os resultados são dados de exemplo.'
+                welcome: Como posso ajudar?
+                composer:
+                    context: Adicionar contexto
+                    placeholder: Descreva a tarefa em detalhes...
+                    mode: Auto
+                    model: Padrão
+                sample_data: Dados de exemplo
+                capability:
+                    coding: Programação
+                    sdk_setup: Configuração de SDK
+                    docs: Documentação
                 prompt: Por que os cadastros estão crescendo, mas as conversões pagas estão caindo?
                 reply:
                     1: Vou rastrear o caminho do clique no anúncio até o cliente pagante.
@@ -45,12 +64,16 @@ messages:
                 step:
                     1:
                         body: Comparar o tráfego das campanhas
+                        result: Mais visitantes, mesmo público
                     2:
                         body: Analisar o funil de cadastro → pagamento
+                        result: Abandono no checkout mobile
                     3:
                         body: Verificar pagamentos e recusas
+                        result: As recusas de pagamento não mudaram
                     4:
                         body: Revisar as mudanças recentes no checkout
+                        result: Um campo obrigatório foi adicionado
 
         2b:
             toggle: Dê contexto de produto aos agentes
@@ -59,6 +82,8 @@ messages:
             cta:
                 label: Instalar o PostHog MCP
                 alt: Ou use o <link>PostHog Desktop</link>
+            demo:
+                agents: Seus agentes
 
         2c:
             toggle: Lance com o PostHog
@@ -78,6 +103,7 @@ messages:
                     title: Ferramentas externas
                     body: Issues do Zendesk, Linear e GitHub
             demo:
+                description: 'Inbox self-driving ilustrativo. Quatro relatórios de exemplo chegam um por vez, do mais novo para o mais antigo: um pedido sobre faturas vindo do GitHub, um scout de tracking de conversão com um pull request em rascunho, um problema de checkout vindo do session replay e um erro de login de alta prioridade com um pull request pronto para revisão.'
                 empty:
                     heading: Seu inbox está vazio
                     body: Novas descobertas vão aparecer aqui.
@@ -101,6 +127,53 @@ messages:
             heading: Prova social
             body: Sim, eles usam a gente de verdade. Não, não é só um engenheiro qualquer que testou a gente há mais de 2 anos.
             button: Ver clientes
+            shuffle: Embaralhar empresas
+            logo:
+                first_customer: Primeiro cliente do PostHog!
+                story: Leia a história do cliente
+            breakdown:
+                colorful:
+                    col1: Logos coloridos
+                    col2: 'Logos "elegantes"'
+                hardware:
+                    col1: Empresas de hardware
+                    col2: Empresas que não são de hardware
+                planes:
+                    col1: Constrói aviões
+                    col2: Não constrói aviões (ainda)
+                caseStudy:
+                    col1: Empresas com estudos de caso do PostHog
+                    col2: Empresas que deveriam fazer estudos de caso
+                easyToYell:
+                    col1: Nomes fáceis de gritar
+                    col2: Nomes que exigem controle de respiração
+                goodBandName:
+                    col1: Bons nomes de banda
+                    col2: Poderiam ser confundidos com remédios
+                explainable:
+                    col1: Empresas que você consegue explicar para os seus pais
+                    col2: Empresas que os seus pais nunca vão entender
+                shortNames:
+                    col1: Nomes com 7 letras ou menos
+                    col2: Nomes fáceis de digitar errado
+                realWords:
+                    col1: Palavras de verdade
+                    col2: Palavras que não existem
+                american:
+                    col1: Fundadas nos EUA
+                    col2: Não fundadas nos EUA
+                pokemon:
+                    col1: Poderia ser um Pokémon
+                    col2: Poderia ser um vilão do 007
+                arr:
+                    col1: Medido em ARR
+                    col2: Medido em PIB
+                devTool:
+                    col1: Devtool da moda
+                    col2: Da moda, mas não é devtool
+                usesPostHog:
+                    col1: Usa PostHog
+                    col2: Também usa PostHog
 
         4:
             heading: Todos os seus dados, <highlight>trabalhando juntos</highlight>
@@ -119,6 +192,7 @@ messages:
                     1: Dados de mais de 120 fontes externas, como Stripe, Postgres e HubSpot
                     2: Insights de todas as outras ferramentas do PostHog, como Session Replays e Experiments
                 3: Os dados que seus agentes precisam para tomar boas decisões já estão aqui. Pronto para transformar "me conta o que aconteceu" em "é isso que você precisa corrigir agora"?
+            tooltip: Você também pode conectar o seu!
             button: Conecte sua primeira fonte de dados
 
         5:
@@ -132,6 +206,8 @@ messages:
             label:
                 freetier: Plano gratuito
                 pricing: Preço
+                product: Produto
+                pricing_table: Preço (diminui com o volume)
             product:
                 1:
                     freetier: 1 milhão de eventos/mês
@@ -174,8 +250,11 @@ messages:
                 subtitle: Download digital*
             sticker:
                 1: O pessoal do G2 acha a gente incrível
-                2: Não tem o apoio da Kim K
-            footnote: '*O PostHog é um produto web e não pode ser instalado por CD. Uma vez a gente <emphasis>chegou</emphasis> a mandar um disquete para alguns clientes, mas era um Rickroll.'
+                2: <small>Não</small> tem o apoio<br/>da Kim K
+            cart:
+                label: 3 pessoas <small>(teriam)</small> adicionado o PostHog ao carrinho*
+                footnote: '*se este fosse um carrinho de verdade'
+            footnote: '*O PostHog é um produto web e não pode ser instalado por CD.<br/>Uma vez a gente <emphasis>chegou</emphasis> a mandar um disquete para alguns clientes, mas era um Rickroll.'
             cloud:
                 heading: Escolha sua nuvem
                 option:
@@ -185,10 +264,10 @@ messages:
                 label: 'A partir de:'
                 old: US$ 0
                 new: Grátis
-                urgency: '>1 restante por esse preço!!'
+                urgency: '><larger>1 restante por esse preço!!</larger>'
             button: Começar
             urgency:
-                label: '<bold>Corra:</bold> {companies} empresas se cadastraram hoje. Aja agora e ganhe US$ 0 de desconto no seu primeiro pedido.'
+                label: '<bold>Corra:</bold> {companies} empresas se cadastraram <today>hoje</today>. <br/>Aja agora e ganhe US$ 0 de desconto no seu primeiro pedido.'
                 fallback: Um monte de
 
     cookie:

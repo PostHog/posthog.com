@@ -4,6 +4,7 @@ import OSButton from 'components/OSButton'
 import Tooltip from 'components/RadixUI/Tooltip'
 import { IconRefresh } from '@posthog/icons'
 import { useCustomers } from 'hooks/useCustomers'
+import { useTranslation } from 'i18n'
 
 export const COL1 = [
     'ycombinator',
@@ -34,26 +35,7 @@ export const COL2 = [
     'posthog',
 ]
 
-export const companyBreakdowns = {
-    colorful: { col1: 'Colorful logos', col2: '"Sleek" logos' },
-    hardware: { col1: 'Hardware companies', col2: 'Not hardware companies' },
-    planes: { col1: 'Builds planes', col2: "Doesn't build planes (yet)" },
-    caseStudy: { col1: 'Companies with PostHog case studies', col2: 'Companies who should do case studies' },
-    easyToYell: { col1: 'Names you can yell easily', col2: 'Names that require breath control' },
-    goodBandName: { col1: 'Good band names', col2: 'Could be mistaken for pharmaceuticals' },
-    explainable: {
-        col1: 'Companies you can explain to your parents',
-        col2: 'Companies your parents will never understand',
-    },
-    shortNames: { col1: 'Names with 7 letters or fewer', col2: 'Names you can easily mistype' },
-    realWords: { col1: 'Real words', col2: 'Not real words' },
-    american: { col1: 'Founded in America', col2: 'Not founded in America' },
-    pokemon: { col1: 'Could be a Pokémon', col2: 'Could be a Bond Villain' },
-    arr: { col1: 'Measured in ARR', col2: 'Measured in GDP' },
-    devTool: { col1: 'Trendy devtool', col2: 'Trendy, but not a devtool' },
-    usesPostHog: { col1: 'Uses PostHog', col2: 'Also uses PostHog' },
-}
-
+// The column labels for each breakdown are section.3.breakdown.<key>.col1 and .col2 in src/i18n/locales.
 export const companyAttributes: Record<string, string[]> = {
     colorful: [
         'ycombinator',
@@ -210,6 +192,7 @@ export const companyAttributes: Record<string, string[]> = {
 
 export const Customers = ({ tableClassName = '' }: { tableClassName?: string }) => {
     const { getCustomers, hasCaseStudy } = useCustomers()
+    const { t } = useTranslation()
     const [currentBreakdown, setCurrentBreakdown] = useState('colorful')
     const [isAnimating, setIsAnimating] = useState(false)
     const logoRefs = React.useRef<Record<string, HTMLElement>>({})
@@ -255,7 +238,7 @@ export const Customers = ({ tableClassName = '' }: { tableClassName?: string }) 
             if (element) beforePositions[slug] = element.getBoundingClientRect()
         })
         setIsAnimating(true)
-        const breakdownKeys = Object.keys(companyBreakdowns)
+        const breakdownKeys = Object.keys(companyAttributes)
         const currentIndex = breakdownKeys.indexOf(currentBreakdown)
         const availableBreakdowns = breakdownKeys.filter((_, index) => index !== currentIndex)
         const randomIndex = Math.floor(Math.random() * availableBreakdowns.length)
@@ -288,10 +271,17 @@ export const Customers = ({ tableClassName = '' }: { tableClassName?: string }) 
         })
     }
 
-    const currentLabels = companyBreakdowns[currentBreakdown as keyof typeof companyBreakdowns]
     const columns = [
-        { name: currentLabels.col1, width: 'minmax(auto,1fr)', align: 'center' as const },
-        { name: currentLabels.col2, width: 'minmax(auto,1fr)', align: 'center' as const },
+        {
+            name: t(`section.3.breakdown.${currentBreakdown}.col1`),
+            width: 'minmax(auto,1fr)',
+            align: 'center' as const,
+        },
+        {
+            name: t(`section.3.breakdown.${currentBreakdown}.col2`),
+            width: 'minmax(auto,1fr)',
+            align: 'center' as const,
+        },
     ]
 
     const renderCustomerWithLink = (customer: any) => (
@@ -318,7 +308,9 @@ export const Customers = ({ tableClassName = '' }: { tableClassName?: string }) 
                         sideOffset={14}
                     >
                         <p className="text-sm mb-0">
-                            {customer.slug === 'posthog' ? 'First PostHog customer!' : 'Read customer story'}
+                            {customer.slug === 'posthog'
+                                ? t('section.3.logo.first_customer')
+                                : t('section.3.logo.story')}
                         </p>
                     </Tooltip>
                 </OSButton>
@@ -353,8 +345,8 @@ export const Customers = ({ tableClassName = '' }: { tableClassName?: string }) 
 
     return (
         <div id="customers">
-            <h2>Social proof</h2>
-            <p>Yes they actually use us, no it's not just some random engineer who tried us out 2+ years ago.</p>
+            <h2>{t('section.3.heading')}</h2>
+            <p>{t('section.3.body')}</p>
             <OSTable
                 columns={columns}
                 rows={rows}
@@ -371,7 +363,7 @@ export const Customers = ({ tableClassName = '' }: { tableClassName?: string }) 
                         size="sm"
                         className="font-semibold rounded-full [&_span]:rounded-full aspect-square [&_span]:aspect-square disabled:opacity-100"
                         disabled={isAnimating}
-                        tooltip="Shuffle companies"
+                        tooltip={t('section.3.shuffle')}
                         icon={
                             <IconRefresh
                                 className={`size-4 inline-block relative -top-px ${
@@ -383,7 +375,7 @@ export const Customers = ({ tableClassName = '' }: { tableClassName?: string }) 
                 </div>
             </OSTable>
             <OSButton asLink to="/customers" variant="secondary" size="md" className="mt-4" state={{ newWindow: true }}>
-                Open Customers
+                {t('section.3.button')}
             </OSButton>
         </div>
     )

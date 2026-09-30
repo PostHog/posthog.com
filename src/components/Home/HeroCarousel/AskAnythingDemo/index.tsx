@@ -20,9 +20,9 @@ import { useInView } from 'react-intersection-observer'
 import { usePrefersReducedMotion } from 'components/Code/usePrefersReducedMotion'
 import useSourcePlatforms from 'hooks/useSourcePlatforms'
 import { usePauseAutoAdvance, useSlideActive, useSlidePaused } from '../autoAdvanceGate'
+import { useTranslation } from 'i18n'
 import './animations.css'
 
-const QUESTION = 'Why are signups growing, but paid conversions falling?'
 const DURATION = 20000
 const CONVERSATION_START = 4800
 const FINDING_START = 15500
@@ -31,43 +31,44 @@ const TOOLS = [
     {
         slug: 'google-ads',
         label: 'Google Ads',
-        action: 'Compare campaign traffic',
-        result: 'More visitors, same audience',
+        action: 'section.2a.demo.step.1.body',
+        result: 'section.2a.demo.step.1.result',
         start: 5800,
     },
     {
         slug: 'posthog',
         label: 'PostHog',
-        action: 'Analyze the signup → payment funnel',
-        result: 'Drop-off at mobile checkout',
+        action: 'section.2a.demo.step.2.body',
+        result: 'section.2a.demo.step.2.result',
         start: 8200,
     },
     {
         slug: 'stripe',
         label: 'Stripe',
-        action: 'Check payments and declines',
-        result: 'Payment declines are unchanged',
+        action: 'section.2a.demo.step.3.body',
+        result: 'section.2a.demo.step.3.result',
         start: 10600,
     },
     {
         slug: 'github',
         label: 'GitHub',
-        action: 'Review recent checkout changes',
-        result: 'A required field was added',
+        action: 'section.2a.demo.step.4.body',
+        result: 'section.2a.demo.step.4.result',
         start: 13000,
     },
 ]
 
+// Product names and SQL stay in English. The other chips have a translation key.
 const CAPABILITIES = [
-    { label: 'Coding', Icon: IconCode2 },
+    { label: 'Coding', labelKey: 'section.2a.demo.capability.coding', Icon: IconCode2 },
     { label: 'Product analytics', Icon: IconGraph },
     { label: 'SQL', Icon: IconDatabase },
     { label: 'Session replay', Icon: IconRewindPlay },
-    { label: 'SDK setup', Icon: IconServer },
+    { label: 'SDK setup', labelKey: 'section.2a.demo.capability.sdk_setup', Icon: IconServer },
     { label: 'Feature flags', Icon: IconToggle },
     { label: 'Experiments', Icon: IconFlask },
     { label: 'Surveys', Icon: IconMessage },
-    { label: 'Docs', Icon: IconBook },
+    { label: 'Docs', labelKey: 'section.2a.demo.capability.docs', Icon: IconBook },
 ]
 
 function PostHogMark({ className = '' }: { className?: string }) {
@@ -81,6 +82,8 @@ function PostHogMark({ className = '' }: { className?: string }) {
 
 /** A scripted illustration. The composer and service calls never submit real requests. */
 export default function AskAnythingDemo() {
+    const { t } = useTranslation()
+    const question = t('section.2a.demo.prompt')
     const sources: { label: string; url: string; image: string }[] = useSourcePlatforms()
     const active = useSlideActive()
     const carouselPaused = useSlidePaused()
@@ -120,7 +123,7 @@ export default function AskAnythingDemo() {
     const time = reducedMotion ? DURATION : elapsed
     const conversation = time >= CONVERSATION_START
     const finding = time >= FINDING_START
-    const typedQuestion = QUESTION.slice(0, Math.floor(Math.max(0, time - 1500) / 45))
+    const typedQuestion = question.slice(0, Math.floor(Math.max(0, time - 1500) / 45))
 
     return (
         <div
@@ -129,13 +132,9 @@ export default function AskAnythingDemo() {
             data-phase={finding ? 'finding' : conversation ? 'tools' : 'composer'}
             data-running={running}
             role="group"
-            aria-label="PostHog AI demonstration"
+            aria-label={t('section.2a.demo.label')}
         >
-            <p className="sr-only">
-                Illustrative demo: PostHog AI investigates falling paid conversion using Google Ads traffic, PostHog
-                funnels, Stripe payments, and GitHub changes. It finds an extra required field at mobile checkout and
-                recommends testing a shorter checkout. All findings are sample data.
-            </p>
+            <p className="sr-only">{t('section.2a.demo.description')}</p>
 
             <div
                 className="ai-demo-welcome absolute inset-0 flex flex-col items-center justify-center gap-[3cqw] px-[2.6%] py-[6cqw] text-[2.8cqw] leading-[1.4]"
@@ -144,7 +143,7 @@ export default function AskAnythingDemo() {
             >
                 <PostHogMark className="ai-demo-welcome-logo block w-[10.4cqw] shrink-0 [&_svg]:!w-full [&_svg]:!h-auto" />
                 <h3 className="w-full text-center m-0 text-[4cqw] font-bold leading-tight">
-                    What can I help you with?
+                    {t('section.2a.demo.welcome')}
                 </h3>
 
                 <div
@@ -152,20 +151,23 @@ export default function AskAnythingDemo() {
                     data-submitting={time >= 4200 && !conversation}
                 >
                     <span className="ai-demo-context border border-primary inline-flex items-center gap-[0.8cqw] whitespace-nowrap leading-none font-semibold text-secondary py-[0.8cqw] px-[1cqw] rounded-[1.1cqw] text-[2.5cqw]">
-                        <IconAtSign /> Add context <IconChevronDown />
+                        <IconAtSign /> {t('section.2a.demo.composer.context')} <IconChevronDown />
                     </span>
                     <div className="ai-demo-prompt pt-[3.1cqw] px-[1.3cqw] pb-0 text-[3cqw] leading-[1.4]">
-                        {typedQuestion || <span className="text-secondary">Describe the task in detail...</span>}
+                        {typedQuestion || (
+                            <span className="text-secondary">{t('section.2a.demo.composer.placeholder')}</span>
+                        )}
                         {typedQuestion && time < 4200 && (
                             <span className="ai-demo-caret inline-block h-[1em] ml-[0.15em] border-r border-current align-[-0.12em]" />
                         )}
                     </div>
                     <div className="ai-demo-composer-footer absolute bottom-[1.8cqw] left-[1.8cqw] right-[1.3cqw] flex items-end gap-[1cqw]">
                         <span className="ai-demo-select border border-primary inline-flex items-center gap-[0.8cqw] whitespace-nowrap leading-none font-semibold bg-primary p-[1cqw] rounded-[0.7cqw] text-[2.5cqw] [&>svg:last-child]:!w-[0.7em] [&>svg:last-child]:ml-[0.5cqw]">
-                            <IconShield className="text-green" /> Auto <IconChevronDown />
+                            <IconShield className="text-green" /> {t('section.2a.demo.composer.mode')}{' '}
+                            <IconChevronDown />
                         </span>
                         <span className="ai-demo-select border border-primary inline-flex items-center gap-[0.8cqw] whitespace-nowrap leading-none font-semibold bg-primary p-[1cqw] rounded-[0.7cqw] text-[2.5cqw] [&>svg:last-child]:!w-[0.7em] [&>svg:last-child]:ml-[0.5cqw]">
-                            Default · Claude Sonnet 5 High <IconChevronDown />
+                            {t('section.2a.demo.composer.model')} · Claude Sonnet 5 High <IconChevronDown />
                         </span>
                         <span className="ai-demo-send border border-yellow text-secondary flex items-center justify-center ml-auto w-[7.6cqw] h-[6.1cqw] rounded-[1.3cqw] shadow-[0_0.55cqw_0_rgb(var(--input-border))] [&_svg]:!size-[3.6cqw] group-data-[submitting=true]/composer:bg-yellow group-data-[submitting=true]/composer:text-black">
                             <IconArrowRight />
@@ -174,13 +176,13 @@ export default function AskAnythingDemo() {
                 </div>
 
                 <div className="ai-demo-capabilities w-full flex flex-wrap gap-y-[1.5cqw] gap-x-[1.2cqw] justify-center [&_svg]:text-secondary">
-                    {CAPABILITIES.map(({ label, Icon }) => (
+                    {CAPABILITIES.map(({ label, labelKey, Icon }) => (
                         <span
                             key={label}
                             className="border border-primary inline-flex items-center gap-[0.8cqw] whitespace-nowrap leading-none font-semibold bg-primary p-[0.85cqw] rounded-[1.1cqw] text-[2.5cqw] shadow-[0_0.45cqw_0_rgb(var(--input-border))]"
                         >
                             <Icon className="fill-current [&_g]:[clip-path:none]" />
-                            {label}
+                            {labelKey ? t(labelKey) : label}
                         </span>
                     ))}
                 </div>
@@ -193,14 +195,12 @@ export default function AskAnythingDemo() {
             >
                 <div className="ai-demo-chat-heading flex items-center gap-[1.1cqw] h-[3.6cqw] text-[2.5cqw] [&>span:first-child]:w-[4.8cqw] [&_svg]:!w-full [&_svg]:!h-auto [&>span:last-child]:text-secondary [&>span:last-child]:ml-auto [&>span:last-child]:mr-[4.8cqw] [&>span:last-child]:text-[1.9cqw]">
                     <PostHogMark /> <strong>PostHog AI</strong>
-                    <span>Sample data</span>
+                    <span>{t('section.2a.demo.sample_data')}</span>
                 </div>
                 <div className="ai-demo-question border border-primary bg-accent mt-[2.2cqw] mr-0 mb-[2.4cqw] ml-auto py-[1.6cqw] px-[2cqw] w-[85%] rounded-[1.5cqw] font-semibold text-[2.7cqw]">
-                    {QUESTION}
+                    {question}
                 </div>
-                <p className="ai-demo-intro m-0 mb-[2cqw] text-[2.6cqw]">
-                    I’ll trace the path from ad click to paying customer.
-                </p>
+                <p className="ai-demo-intro m-0 mb-[2cqw] text-[2.6cqw]">{t('section.2a.demo.reply.1')}</p>
                 <div className="ai-demo-tools grid gap-[0.8cqw]">
                     {TOOLS.map((tool) => {
                         const started = time >= tool.start
@@ -226,7 +226,7 @@ export default function AskAnythingDemo() {
                                 </span>
                                 <div className="ai-demo-tool-copy flex flex-col gap-[0.1cqw] [&_strong]:text-[2.4cqw] [&>span]:text-secondary [&>span]:text-[2.2cqw]">
                                     <strong>{tool.label}</strong>
-                                    <span>{done ? tool.result : tool.action}</span>
+                                    <span>{t(done ? tool.result : tool.action)}</span>
                                 </div>
                                 <span className="ai-demo-tool-status flex justify-center w-[3cqw] ml-auto">
                                     {done ? (
@@ -243,10 +243,10 @@ export default function AskAnythingDemo() {
                     className="ai-demo-finding bg-light dark:bg-dark border border-primary mt-[2.4cqw] py-[1.7cqw] px-[2cqw] rounded-[1.5cqw] [&>strong]:text-[2.8cqw] [&_p]:text-secondary [&_p]:text-[2.3cqw] [&_p]:mt-[0.7cqw] [&_p]:mx-0 [&_p]:mb-[1.1cqw] [&>span]:flex [&>span]:items-center [&>span]:gap-[0.8cqw] [&>span]:text-[2.4cqw] [&>span]:font-semibold"
                     data-visible={finding}
                 >
-                    <strong>The drop starts before payment.</strong>
-                    <p>A new required field is losing customers at mobile checkout.</p>
+                    <strong>{t('section.2a.demo.reply.2')}</strong>
+                    <p>{t('section.2a.demo.reply.3')}</p>
                     <span>
-                        <IconFlask /> Test a shorter mobile checkout.
+                        <IconFlask /> {t('section.2a.demo.reply.4')}
                     </span>
                 </div>
             </div>
