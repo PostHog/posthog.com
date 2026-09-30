@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useAppActions, useAppSettings, useAppWindows } from '../../context/App'
 import Desktop from 'components/Desktop'
 import TaskBarMenu from 'components/TaskBarMenu'
@@ -30,6 +30,13 @@ export default function Wrapper() {
     const { constraintsRef } = useAppActions()
     const { compact } = useAppSettings()
     const dir = useDirection()
+
+    // Overlays (cookie toast, search, chat) and Radix popovers render in portals attached
+    // to <body>, outside #app-container, so they inherit direction from <html> rather than
+    // from the shell. Keep the document in step with the shell or they stay LTR.
+    useEffect(() => {
+        document.documentElement.setAttribute('dir', dir)
+    }, [dir])
 
     return (
         // Radix primitives read direction from this provider, not from the DOM, so it is
