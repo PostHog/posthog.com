@@ -90,10 +90,12 @@ Select a bar, then an event to inspect it:
 
 <DestinationChartFigure />
 
-Notice the Coast records – their event name and properties match, but their IDs and timestamps differ because each is a separate click. The trend tells the team how often Coast was selected. To see whether those clicks came from three visitors or one visitor clicking Coast three times, they need identity and session data.
+Notice the Coast records – their event name and properties match, but their event IDs and timestamps differ because each is a separate click. The trend tells the team that Coast was selected three times. It cannot tell them whether three people selected it once or one browser selected it three times. To find out how PostHog groups those clicks, the team looks at identity and session data.
 
-<LessonFooter nextLabel="Identity and sessions">
-    <a href="/docs/data/events">Events reference</a> · <a href="/docs/product-analytics/autocapture">Autocapture</a> · <a href="/docs/product-analytics/capture-events">Custom event guide</a>
+<LessonFooter nextLabel="Identity and sessions" nextHref="/pocket-guides/product-analytics/identity-sessions">
+
+<a href="/docs/data/events">Events reference</a> · <a href="/docs/product-analytics/autocapture">Autocapture</a> · <a href="/docs/product-analytics/capture-events">Custom event guide</a>
+
 </LessonFooter>
 
 </RightPage>

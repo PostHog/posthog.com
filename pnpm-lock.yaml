@@ -81,8 +81,8 @@ importers:
         specifier: 0.36.6
         version: 0.36.6(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@posthog/twig-components':
-        specifier: 0.1.2
-        version: 0.1.2(react@18.3.1)
+        specifier: 0.1.3
+        version: 0.1.3(react@18.3.1)
       '@radix-ui/react-accordion':
         specifier: ^1.2.3
         version: 1.2.12(@types/react-dom@18.3.7(@types/react@16.14.66))(@types/react@16.14.66)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -3629,8 +3629,8 @@ packages:
       react: '>=16.14.0'
       react-dom: '>=16.14.0'
 
-  '@posthog/twig-components@0.1.2':
-    resolution: {integrity: sha512-ZPYyLlYVzEALmof/AWTJZSTforxJfJR9oxNvaJmPg/x/SrVjgVhh5oGm1eJBFnfbnZmP3cjtwBKhpuTYk5+KeA==}
+  '@posthog/twig-components@0.1.3':
+    resolution: {integrity: sha512-k3yRoTjL5kyPbblPCY+2lIGYV/dHYpa9qSsWeDp1YWRgMC/tTZ0ysbS6SZZtoEaL9oZtHs95M192r4uNatsyrw==}
     peerDependencies:
       react: ^18.3.0 || ^19.0.0
 
@@ -21578,7 +21578,7 @@ snapshots:
       react: 18.3.1
       react-dom: 18.3.1(react@18.3.1)
 
-  '@posthog/twig-components@0.1.2(react@18.3.1)':
+  '@posthog/twig-components@0.1.3(react@18.3.1)':
     dependencies:
       '@rrweb/record': 2.1.6
       '@rrweb/replay': 2.1.6

@@ -1,5 +1,4 @@
 import React from 'react'
-import ExploreTwigLink from './ExploreTwigLink'
 
 export default function TwigIntroductionFigure(): JSX.Element {
     return (
@@ -14,7 +13,6 @@ export default function TwigIntroductionFigure(): JSX.Element {
                     height="675"
                 />
             </div>
-            <ExploreTwigLink />
         </figure>
     )
 }

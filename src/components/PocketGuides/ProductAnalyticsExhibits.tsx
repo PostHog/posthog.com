@@ -1,9 +1,9 @@
 import React, { useState } from 'react'
 import { colors } from '@posthog/brand/colors'
 import type { StaySetting } from '@posthog/twig-components/filters'
-import ExploreTwigLink from './ExploreTwigLink'
 import PostHogInspector, { InspectorCode, InspectorStatus } from './PostHogInspector'
 import TwigBrowseFigure from './TwigBrowseFigure'
+import ExhibitResetButton from './ExhibitResetButton'
 
 type EventRow = {
     id: string
@@ -25,19 +25,19 @@ const destinations = [
     { name: 'City', color: colors.teal.darker },
 ]
 
-function Exhibit({
+export function Exhibit({
     stacked = false,
-    exploreTwig = false,
+    onReset,
     children,
 }: {
     stacked?: boolean
-    exploreTwig?: boolean
+    onReset?: () => void
     children: React.ReactNode
-}) {
+}): JSX.Element {
     return (
         <figure className="not-prose my-6 mx-0 overflow-hidden rounded border border-primary bg-accent p-3 dark:bg-accent-dark @container @md:p-4">
+            {onReset && <ExhibitResetButton onReset={onReset} />}
             <div className={`grid gap-4 ${stacked ? '' : '@2xl:grid-cols-2'}`}>{children}</div>
-            {exploreTwig && <ExploreTwigLink />}
         </figure>
     )
 }
@@ -45,6 +45,7 @@ function Exhibit({
 export function AutocaptureFigure(): JSX.Element {
     const [choice, setChoice] = useState<StaySetting | null>(null)
     const [capturedAt, setCapturedAt] = useState<string | null>(null)
+    const [resetKey, setResetKey] = useState(0)
     const clickedLabel = choice === 'All' ? 'All locations' : choice
     const eventPayload = JSON.stringify(
         {
@@ -61,8 +62,16 @@ export function AutocaptureFigure(): JSX.Element {
     )
 
     return (
-        <Exhibit stacked exploreTwig>
+        <Exhibit
+            stacked
+            onReset={() => {
+                setChoice(null)
+                setCapturedAt(null)
+                setResetKey((key) => key + 1)
+            }}
+        >
             <TwigBrowseFigure
+                key={resetKey}
                 id="guide-autocapture"
                 onFilter={(setting) => {
                     setChoice(setting)
@@ -90,6 +99,7 @@ export function FilterPropertiesFigure(): JSX.Element {
     const [choice, setChoice] = useState<StaySetting | null>(null)
     const [count, setCount] = useState(0)
     const [capturedAt, setCapturedAt] = useState<string | null>(null)
+    const [resetKey, setResetKey] = useState(0)
     const eventPayload = JSON.stringify(
         {
             event: 'stay_filter_selected',
@@ -105,8 +115,17 @@ export function FilterPropertiesFigure(): JSX.Element {
     )
 
     return (
-        <Exhibit stacked exploreTwig>
+        <Exhibit
+            stacked
+            onReset={() => {
+                setChoice(null)
+                setCount(0)
+                setCapturedAt(null)
+                setResetKey((key) => key + 1)
+            }}
+        >
             <TwigBrowseFigure
+                key={resetKey}
                 id="guide-properties"
                 onFilter={(setting, matches) => {
                     setChoice(setting)
@@ -143,7 +162,13 @@ export function DestinationChartFigure(): JSX.Element {
         : null
 
     return (
-        <Exhibit stacked>
+        <Exhibit
+            stacked
+            onReset={() => {
+                setSelected('Coast')
+                setSelectedEventId(null)
+            }}
+        >
             <section
                 aria-label="Filter selections by destination"
                 className="min-w-0 overflow-hidden rounded border border-[#d3d0c8] bg-[#fffdfa] font-rounded text-[#292724] shadow-sm"
