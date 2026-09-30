@@ -152,6 +152,16 @@
     ],
     "redirects": [
         {
+            "source": "/ko/newsletter/:path*",
+            "destination": "/newsletter/:path*",
+            "statusCode": 301
+        },
+        {
+            "source": "/ko",
+            "destination": "/",
+            "statusCode": 302
+        },
+        {
             "source": "/pocket-guides/product-analytics",
             "destination": "/docs/product-analytics/learn/introduction",
             "statusCode": 301
