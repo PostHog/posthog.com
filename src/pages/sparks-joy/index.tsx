@@ -123,8 +123,8 @@ export default function SparkJoy(): JSX.Element {
                                     >
                                         <ZoomHover className="w-28 justify-center">
                                             <AppLink
-                                                label="PostHog on MySpace"
-                                                url="/myspace"
+                                                label="Hogspace"
+                                                url="/hogspace"
                                                 Icon={<AppIcon name="handbook" />}
                                                 className="size-12"
                                             />

@@ -1,56 +1,84 @@
-import React, { useEffect, useState } from "react"
-import { HedgehogDj } from "@posthog/brand/hoggies"
-import ArenaLogo from "components/CustomerLogos/ArenaLogo"
-import ElevenLabsLogo from "components/CustomerLogos/ElevenLabsLogo"
-import FireworksAILogo from "components/CustomerLogos/FireworksAILogo"
-import HeygenLogo from "components/CustomerLogos/HeygenLogo"
-import RaycastLogo from "components/CustomerLogos/RaycastLogo"
-import SupabaseLogo from "components/CustomerLogos/SupabaseLogo"
-import YCombinatorLogo from "components/CustomerLogos/YCombinatorLogo"
-import Link from "components/Link"
-import ReaderView from "components/ReaderView"
-import SEO from "components/seo"
+import React, { useEffect, useState } from 'react'
+import { HedgehogDj } from '@posthog/brand/hoggies'
+import { graphql, useStaticQuery } from 'gatsby'
+import Link from 'components/Link'
+import ReaderView from 'components/ReaderView'
+import SEO from 'components/seo'
+import { AVATAR_FALLBACK_URL } from 'constants/index'
 
-const friends = [
-    { name: "YC", url: "https://www.ycombinator.com/", Logo: YCombinatorLogo },
-    { name: "Supabase", url: "https://supabase.com/", Logo: SupabaseLogo, darkLogo: true },
-    { name: "ElevenLabs", url: "https://elevenlabs.io/", Logo: ElevenLabsLogo },
-    { name: "Raycast", url: "https://www.raycast.com/", Logo: RaycastLogo },
-    { name: "Arena", url: "https://arena.ai/", Logo: ArenaLogo },
-    { name: "HeyGen", url: "https://www.heygen.com/", Logo: HeygenLogo, darkLogo: true },
-    { name: "Legora", url: "https://legora.com/" },
-    { name: "Fireworks", url: "https://fireworks.ai/", Logo: FireworksAILogo, darkLogo: true },
-]
+const ABOUT_ME = `hai every1 im new!!!!!!! im PostHog, the little hog of analytics doom XD\u0020\u0020
+i watch users click the wrong button 47 times and call it “insight” *holds up spork*\u0020\u0020
+then i ship a feature flag to 100% of users by accident and say “rawr, statistically significant”\u0020\u0020
+anyway this is not a phase, mother, it’s a funnel.`
 
-type BlogPost = { title: string; description: string; url: string }
+type BlogPost = { title: string; snippet: string; url: string }
+type Friend = { squeakId: number; firstName: string | null; lastName: string | null; avatar: { url: string } | null }
 
-export default function MySpace(): JSX.Element {
+export default function Hogspace(): JSX.Element {
+    const { team }: { team: { nodes: Friend[] } } = useStaticQuery(graphql`
+        query HogspaceFriends {
+            team: allSqueakProfile(
+                filter: { teams: { data: { elemMatch: { id: { ne: null } } } }, squeakId: { ne: 28378 } }
+            ) {
+                nodes {
+                    squeakId
+                    firstName
+                    lastName
+                    avatar {
+                        url
+                    }
+                }
+            }
+        }
+    `)
+    const [friends, setFriends] = useState<Friend[]>([])
     const [blogPost, setBlogPost] = useState<BlogPost | null>(null)
-    const [status, setStatus] = useState<"online" | "issue" | "unknown">("unknown")
+    const [status, setStatus] = useState<'online' | 'issue' | 'unknown'>('unknown')
+
+    useEffect(() => {
+        const people = team.nodes.filter((person) => person.squeakId && (person.firstName || person.lastName))
+        for (let index = people.length - 1; index > 0; index--) {
+            const randomIndex = Math.floor(Math.random() * (index + 1))
+            const selected = people[index]
+            people[index] = people[randomIndex]
+            people[randomIndex] = selected
+        }
+        setFriends(people.slice(0, 8))
+    }, [team.nodes])
 
     useEffect(() => {
         const controller = new AbortController()
 
-        fetch("https://posthog.com/rss.xml", { signal: controller.signal })
+        fetch('https://posthog.com/rss.xml', { signal: controller.signal })
             .then((response) => {
-                if (!response.ok) throw new Error("Blog feed unavailable")
+                if (!response.ok) throw new Error('Blog feed unavailable')
                 return response.text()
             })
             .then((xml) => {
-                const feed = new DOMParser().parseFromString(xml, "application/xml")
-                const entries = Array.from(feed.querySelectorAll("item"))
+                const feed = new DOMParser().parseFromString(xml, 'application/xml')
+                const entries = Array.from(feed.querySelectorAll('item'))
                 const latest = entries.sort(
                     (first, second) =>
-                        new Date(second.querySelector("pubDate")?.textContent || 0).getTime() -
-                        new Date(first.querySelector("pubDate")?.textContent || 0).getTime()
+                        new Date(second.querySelector('pubDate')?.textContent || 0).getTime() -
+                        new Date(first.querySelector('pubDate')?.textContent || 0).getTime()
                 )[0]
-                const url = latest?.querySelector("link")?.textContent
-                if (!url || new URL(url).origin !== "https://posthog.com") return
+                const url = latest?.querySelector('link')?.textContent
+                if (!url || new URL(url).origin !== 'https://posthog.com') return
+                const html = latest.getElementsByTagNameNS('http://purl.org/rss/1.0/modules/content/', 'encoded')[0]
+                    ?.textContent
+                const paragraphs = Array.from(
+                    new DOMParser().parseFromString(html || '', 'text/html').querySelectorAll('p')
+                )
+                    .slice(0, 2)
+                    .map((paragraph) => paragraph.textContent?.trim())
+                    .filter(Boolean)
+                const text = paragraphs.join(' ').replace(/\s+/g, ' ')
+                const snippet = text.length > 300 ? `${text.slice(0, 300).replace(/\s+\S*$/, '')}…` : text
 
                 if (!controller.signal.aborted) {
                     setBlogPost({
-                        title: latest.querySelector("title")?.textContent || "Latest from PostHog",
-                        description: latest.querySelector("description")?.textContent || "",
+                        title: latest.querySelector('title')?.textContent || 'Latest from PostHog',
+                        snippet,
                         url: new URL(url).pathname,
                     })
                 }
@@ -59,9 +87,9 @@ export default function MySpace(): JSX.Element {
                 if (!controller.signal.aborted) setBlogPost(null)
             })
 
-        fetch("https://www.posthogstatus.com/api/v1/summary", { signal: controller.signal })
+        fetch('https://www.posthogstatus.com/api/v1/summary', { signal: controller.signal })
             .then((response) => {
-                if (!response.ok) throw new Error("Status unavailable")
+                if (!response.ok) throw new Error('Status unavailable')
                 return response.json()
             })
             .then((summary) => {
@@ -71,12 +99,12 @@ export default function MySpace(): JSX.Element {
                     Array.isArray(summary.in_progress_maintenances)
                 ) {
                     setStatus(
-                        summary.ongoing_incidents.length || summary.in_progress_maintenances.length ? "issue" : "online"
+                        summary.ongoing_incidents.length || summary.in_progress_maintenances.length ? 'issue' : 'online'
                     )
                 }
             })
             .catch(() => {
-                if (!controller.signal.aborted) setStatus("unknown")
+                if (!controller.signal.aborted) setStatus('unknown')
             })
 
         return () => controller.abort()
@@ -84,14 +112,12 @@ export default function MySpace(): JSX.Element {
 
     return (
         <>
-            <SEO title="PostHog's MySpace" description="What if PostHog had a MySpace profile?" />
+            <SEO title="Hogspace – PostHog" description="PostHog's Hogspace profile" />
             <ReaderView hideLeftSidebar hideRightSidebar hideAppOptions showQuestions={false}>
                 <div className="@container not-prose mx-auto w-full max-w-5xl pb-12 font-sans text-primary">
                     <header className="bg-blue px-4 py-3 text-light-1">
                         <div className="flex flex-wrap items-end justify-between gap-2">
-                            <p className="m-0 text-2xl font-black tracking-tight">
-                                myspace<span className="text-sm">™</span>
-                            </p>
+                            <p className="m-0 text-2xl font-black tracking-tight">Hogspace</p>
                             <Link to="/sparks-joy" className="text-xs !text-light-1 underline">
                                 Back to Time machine
                             </Link>
@@ -106,7 +132,7 @@ export default function MySpace(): JSX.Element {
                             <Link to="/about" className="!text-light-1">
                                 Profile
                             </Link>
-                            <Link to="/customers" className="!text-light-1">
+                            <Link to="/people" className="!text-light-1">
                                 Friends
                             </Link>
                             <Link to="/fm" className="!text-light-1">
@@ -145,18 +171,18 @@ export default function MySpace(): JSX.Element {
                                                     external
                                                     className="font-semibold"
                                                 >
-                                                    {status === "online"
-                                                        ? "● Online now"
-                                                        : status === "issue"
-                                                        ? "● Status update"
-                                                        : "Check online status"}
+                                                    {status === 'online'
+                                                        ? '● Online now'
+                                                        : status === 'issue'
+                                                        ? '● Status update'
+                                                        : 'Check online status'}
                                                 </Link>
                                             </p>
                                             <p>Last login: 1 second ago</p>
                                         </div>
                                     </div>
                                     <p className="mt-3 text-xs">
-                                        View my: <Link to="/customers">Friends</Link> | <Link to="/fm">Mixtapes</Link> |{" "}
+                                        View my: <Link to="/people">Friends</Link> | <Link to="/fm">Mixtapes</Link> |{' '}
                                         <Link to="/blog">Blog</Link>
                                     </p>
                                 </section>
@@ -170,7 +196,7 @@ export default function MySpace(): JSX.Element {
                                     </h2>
                                     <div className="grid grid-cols-2 gap-x-2 gap-y-2 p-3 text-xs font-semibold">
                                         <Link to="/talk-to-a-human">Send message</Link>
-                                        <Link to="/customers">Add to friends</Link>
+                                        <Link to="/people">Add to friends</Link>
                                         <Link to="/community">Join community</Link>
                                         <Link to="https://github.com/PostHog" external>
                                             Follow the code
@@ -179,7 +205,7 @@ export default function MySpace(): JSX.Element {
                                 </section>
 
                                 <p className="border border-blue/40 px-2 py-1 text-xs">
-                                    <strong>MySpace URL:</strong> posthog.com/myspace
+                                    <strong>Hogspace URL:</strong> posthog.com/hogspace
                                 </p>
 
                                 <section className="border border-blue/40" aria-labelledby="info-heading">
@@ -189,7 +215,7 @@ export default function MySpace(): JSX.Element {
                                     <dl className="grid grid-cols-[90px_1fr] gap-px bg-blue/20 text-xs">
                                         <dt className="bg-blue/10 p-2 font-bold">Influences</dt>
                                         <dd className="m-0 bg-primary p-2">
-                                            <Link to="/handbook/company/culture">Building in public</Link>,{" "}
+                                            <Link to="/handbook/company/culture">Building in public</Link>,{' '}
                                             <Link to="https://github.com/PostHog" external>
                                                 open source
                                             </Link>
@@ -203,7 +229,7 @@ export default function MySpace(): JSX.Element {
                                         <dd className="m-0 bg-primary p-2">
                                             <Link to="/handbook/people/bookhog">
                                                 Exhalation, Dune, and The Spy and the Traitor
-                                            </Link>{" "}
+                                            </Link>{' '}
                                             (BookHog picks)
                                         </dd>
                                     </dl>
@@ -251,7 +277,9 @@ export default function MySpace(): JSX.Element {
                                                 <Link to={blogPost.url} className="font-semibold">
                                                     {blogPost.title}
                                                 </Link>
-                                                <p className="mt-2 text-secondary">{blogPost.description}</p>
+                                                {blogPost.snippet && (
+                                                    <p className="mt-2 text-secondary">{blogPost.snippet}</p>
+                                                )}
                                             </>
                                         ) : (
                                             <Link to="/blog">Read the latest post on the blog ↗</Link>
@@ -266,11 +294,7 @@ export default function MySpace(): JSX.Element {
                                     <h2 id="about-heading" className="bg-orange/30 px-2 py-1 text-sm font-bold">
                                         About me
                                     </h2>
-                                    <p className="px-2 py-3 text-sm">
-                                        I build product tools. I like open source code, short experiments, and data that
-                                        changes my plans. I share my work. If a new feature does not help people, I
-                                        change it. I also collect hedgehog drawings.
-                                    </p>
+                                    <p className="whitespace-pre-wrap px-2 py-3 text-sm">{ABOUT_ME}</p>
                                 </section>
 
                                 <section aria-labelledby="friends-heading">
@@ -278,37 +302,30 @@ export default function MySpace(): JSX.Element {
                                         id="friends-heading"
                                         className="flex flex-wrap items-center justify-between gap-2 bg-orange/30 px-2 py-1 text-sm font-bold"
                                     >
-                                        PostHog's Top 8{" "}
-                                        <Link to="/customers" className="text-xs font-normal">
+                                        PostHog's Top 8{' '}
+                                        <Link to="/people" className="text-xs font-normal">
                                             View all friends
                                         </Link>
                                     </h2>
                                     <div className="grid grid-cols-2 gap-2 p-2 @md:grid-cols-4">
-                                        {friends.map(({ name, url, Logo, darkLogo }) => (
-                                            <a
-                                                key={name}
-                                                href={url}
-                                                target="_blank"
-                                                rel="noopener noreferrer"
-                                                aria-label={`Visit ${name}`}
+                                        {friends.map(({ squeakId, firstName, lastName, avatar }) => (
+                                            <Link
+                                                key={squeakId}
+                                                to={`/community/profiles/${squeakId}`}
                                                 className="flex min-w-0 flex-col items-center gap-2 border border-blue/40 bg-accent p-2 text-center text-xs font-semibold text-primary hover:border-blue"
                                             >
-                                                <span
-                                                    className={`flex h-14 w-full items-center justify-center overflow-hidden p-2 ${
-                                                        darkLogo
-                                                            ? "bg-light-12 text-light-1"
-                                                            : "bg-light-1 text-light-12"
-                                                    }`}
-                                                >
-                                                    {Logo ? (
-                                                        <Logo className="h-full w-full fill-current object-contain" />
-                                                    ) : (
-                                                        <span className="text-sm font-bold">Legora</span>
-                                                    )}
+                                                <span className="flex h-14 w-full items-center justify-center overflow-hidden bg-light-1 p-1">
+                                                    <img
+                                                        src={avatar?.url || AVATAR_FALLBACK_URL}
+                                                        alt=""
+                                                        loading="lazy"
+                                                        className="h-full w-full object-contain"
+                                                    />
                                                 </span>
-                                                {name}
-                                            </a>
+                                                {[firstName, lastName].filter(Boolean).join(' ')}
+                                            </Link>
                                         ))}
+                                        {!friends.length && <Link to="/people">View people at PostHog</Link>}
                                     </div>
                                 </section>
 
@@ -318,12 +335,12 @@ export default function MySpace(): JSX.Element {
                                     </h2>
                                     <div className="border-b border-blue/30 px-2 py-3 text-sm">
                                         <p className="font-bold">
-                                            James Hawkins{" "}
-                                            <span className="font-normal text-secondary">· fictional comment</span>
+                                            James Hawkins{' '}
+                                            <span className="font-normal text-secondary">· 1 second ago</span>
                                         </p>
                                         <p>
-                                            Uber for dogs. The dogs are the drivers. We will measure repeat rides before
-                                            we raise money.
+                                            Hi I am raising money for my startup, it's like Uber for dogs, but the dogs
+                                            are the drivers. Pls respond, I think this could be huge.
                                         </p>
                                     </div>
                                 </section>
