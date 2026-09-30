@@ -29,6 +29,7 @@ import ReactConfetti from 'react-confetti'
 import { useToast } from '../../context/Toast'
 import { navigate } from 'gatsby'
 import useDesktopBadges from '../../hooks/useDesktopBadges'
+import { useTranslation } from 'i18n'
 
 interface Product {
     name: string
@@ -135,6 +136,21 @@ export const apps: AppItem[] = [
     },
 ]
 
+// Translation keys for the icon labels, by URL. Product names (Self-driving product, Context warehouse) stay in English.
+const LABEL_KEYS: Record<string, string> = {
+    '/': 'desktop.home',
+    '/pricing': 'desktop.pricing',
+    '/docs': 'desktop.docs',
+    '/demo': 'desktop.demo',
+    '/talk-to-a-human': 'desktop.talk_to_a_human',
+    '/about': 'desktop.about_us',
+    '/changelog': 'desktop.changelog',
+    '/handbook': 'desktop.company_handbook',
+    '/merch': 'desktop.store',
+    '/careers': 'desktop.careers',
+    '/trash': 'desktop.trash',
+}
+
 // Fixed offset for icon layout — avoids CLS from context taskbarHeight (59 → measured) on SSR hydrate.
 // #taskbar is 42px inside AppContainer's p-2 (8px) top padding.
 const APP_CONTAINER_TOP_PADDING = 8
@@ -143,6 +159,7 @@ const DESKTOP_TOP_OFFSET = APP_CONTAINER_TOP_PADDING + TASKBAR_HEIGHT
 
 function Desktop() {
     const productLinks = useProductLinks()
+    const { t } = useTranslation()
     const { setScreensaverPreviewActive, setConfetti, updateSiteSettings } = useAppActions()
     const { siteSettings, compact } = useAppSettings()
     const { screensaverPreviewActive, confetti } = useAppUIState()
@@ -262,8 +279,11 @@ function Desktop() {
     const applyBadges = (items: AppItem[]) =>
         items.map((app) => (app.url && badges[app.url] ? { ...app, badge: badges[app.url] } : app))
 
-    const leftApps = applyBadges(applyGlow(productLinks))
-    const rightApps = applyBadges(applyGlow(apps))
+    const applyLabels = (items: AppItem[]) =>
+        items.map((app) => (app.url && LABEL_KEYS[app.url] ? { ...app, label: t(LABEL_KEYS[app.url]) } : app))
+
+    const leftApps = applyLabels(applyBadges(applyGlow(productLinks)))
+    const rightApps = applyLabels(applyBadges(applyGlow(apps)))
 
     // Mobile: one continuous wrapping grid (avoids a gap when left apps don't fill a row).
     // sm+: classic left/right desktop columns that wrap into extra columns when short on height.
