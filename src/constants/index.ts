@@ -33,9 +33,9 @@ export const MCP_SERVER_URL = 'https://mcp.posthog.com/mcp'
 // shared URL so a future destination change cannot leave one entry point behind.
 export const TWIG_URL = 'https://twig.com'
 
-// Default avatar fallback (Max the hedgehog)
+// Default avatar fallback (DrakeHog, flipped horizontally)
 export const AVATAR_FALLBACK_URL =
-    'https://res.cloudinary.com/dmukukwp6/image/upload/547324034_92465cc7_daa9_413a_9c77_e72dc38f1c9f_d77ba7e4c2.png'
+    'https://res.cloudinary.com/dmukukwp6/image/upload/a_hflip,f_png/drake_yah_a4a2087404.svg'
 
 export const PRODUCT_COUNT = 10
 export const APP_COUNT = 34 // total of /products - ai agents.md and cdp readme.md
