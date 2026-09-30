@@ -91,7 +91,13 @@ pnpm i18n:sync --locale pt            # translate them. Needs ANTHROPIC_API_KEY
 pnpm i18n:sync --check                # validate the locale files
 ```
 
-The workflow needs these repository secrets: `ANTHROPIC_API_KEY`, `I18N_BOT_CLIENT_ID` and `I18N_BOT_PRIVATE_KEY` (a GitHub App with write access to contents and pull requests), and `SLACK_WEBHOOK_TRANSLATION_REVIEW`. It also needs the labels `translations`, `needs-translation-review`, and `translations-reviewed`.
+The workflow needs these PostHog organization settings, each granted to this repository:
+
+- Secret `ANTHROPIC_API_KEY`.
+- Variable `GH_APP_POSTHOG_I18N_APP_ID` and secret `GH_APP_POSTHOG_I18N_PRIVATE_KEY`, from a GitHub App with read and write access to contents and pull requests.
+- Secret `SLACK_WEBHOOK_TRANSLATION_REVIEW`, an incoming webhook for the volunteer reviewers' Slack channel.
+
+It also needs the labels `translations`, `needs-translation-review`, and `translations-reviewed`.
 
 ## How to review a translation
 
