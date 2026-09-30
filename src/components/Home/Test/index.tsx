@@ -29,6 +29,7 @@ import { HeroBody, HeroHeadline } from 'components/Home/HeroCopy'
 import HeroCarousel from 'components/Home/HeroCarousel'
 import { buildTabs } from 'components/Home/HeroCarousel/tabs'
 import Customers from '../Customers'
+import { useTranslation } from '../../../i18n'
 
 const SecondaryActions = ({
     justify = 'center',
@@ -160,10 +161,11 @@ function Hero(): JSX.Element {
 export default function HomeTest() {
     const { appWindow } = useWindow()
     const { setWindowTitle } = useApp()
+    const { t } = useTranslation()
 
     useEffect(() => {
         if (appWindow) {
-            setWindowTitle(appWindow, 'home.mdx')
+            setWindowTitle(appWindow, t('home.window_title'))
         }
     }, [])
 

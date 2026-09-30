@@ -1,0 +1,23 @@
+# The source of truth for every translatable string. Other locale files use the same keys, and any key
+# they leave out falls back to the English text here. See src/i18n/README.md.
+name: English
+messages:
+    home:
+        window_title: home.mdx
+        seo:
+            title: PostHog - your product’s context layer
+            description: PostHog automatically diagnoses problems, fixes bugs, and generates pull requests – all without you having to prompt it.
+        hero:
+            headline: Your product's <emphasis>context layer</emphasis>
+            body: PostHog ingests and stores your <highlight>analytics, errors, replays, and business data</highlight> so you and your <underline>agents</underline> can query and act on it.
+            social_proof: Join 500,000+ teams already shipping with PostHog.
+        cta:
+            title: Set up <logo/> <highlight>for free</highlight>
+            pays_zero: 97% of users pay us $0
+            no_card: No credit card required
+            wizard: Setup wizard installs PostHog for you
+            get_started: Get started
+            install_with_ai: Install with AI
+            terminal: 'Happier in the terminal? Skip the browser:'
+    taskbar:
+        view_in_english: View in English
