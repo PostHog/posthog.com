@@ -147,6 +147,32 @@ test('serves English when English ranks higher, nothing matches, or the header i
     }
 })
 
+test('sends Simplified Chinese to /zh, and Traditional Chinese to English', async () => {
+    for (const acceptLanguage of ['zh', 'zh-CN', 'zh-SG', 'zh-Hans', 'zh-Hans-HK', 'zh-TW;q=0.9, zh-CN;q=0.8']) {
+        const response = await middleware(
+            new Request(home, { headers: { 'accept-language': acceptLanguage, cookie: testVisitor } })
+        )
+        assert.equal(response?.headers.get('location'), '/zh', acceptLanguage)
+    }
+    for (const acceptLanguage of ['zh-TW', 'zh-HK', 'zh-MO', 'zh-Hant', 'zh-Hant-CN', 'zh-TW,en;q=0.9']) {
+        assert.equal(
+            await middleware(new Request(home, { headers: { 'accept-language': acceptLanguage } })),
+            undefined,
+            acceptLanguage
+        )
+    }
+    for (const path of ['/zh-CN', '/zh-Hans', '/zh_cn']) {
+        assert.equal(
+            (await middleware(new Request(`https://posthog.com${path}`)))?.headers.get('location'),
+            '/zh',
+            path
+        )
+    }
+    for (const path of ['/zh-TW', '/zh-Hant', '/zh_hk']) {
+        assert.equal(await middleware(new Request(`https://posthog.com${path}`)), undefined, path)
+    }
+})
+
 test('serves English while the skip-translation cookie is set', async () => {
     for (const cookie of [`${SKIP_TRANSLATION_COOKIE}=1`, `theme=dark; ${SKIP_TRANSLATION_COOKIE}=1`]) {
         const response = await middleware(
