@@ -170,6 +170,34 @@ export const useForumTagSearch = (topicId: number | undefined, search: string, p
     }
 }
 
+// Published forum posts whose title contains the search, for `#` suggestions in the editor. Searches start at two
+// characters.
+export const useForumPostSearch = (search: string, pageSize = 5) => {
+    const query = search.trim()
+    const { data, isValidating } = useSWR<{
+        data: {
+            id: number
+            attributes: { subject: string; permalink: string; forumTopic?: { data: ForumTopic | null } }
+        }[]
+    }>(
+        query.length >= 2
+            ? `${API}/questions?${qs.stringify(
+                  {
+                      sort: ['activeAt:desc'],
+                      filters: { forumTopic: { id: { $notNull: true } }, subject: { $containsi: query } },
+                      fields: ['subject', 'permalink'],
+                      populate: { forumTopic: { fields: ['slug'] } },
+                      pagination: { pageSize },
+                  },
+                  { encodeValuesOnly: true }
+              )}`
+            : null,
+        (url: string) => fetch(url).then((res) => res.json()),
+        { keepPreviousData: true }
+    )
+    return { posts: query.length >= 2 ? data?.data ?? [] : [], isValidating }
+}
+
 export type TagInput = { label: string; description?: string | null }
 
 // Every tag with its topic, for the tag filter on All posts and Following. A topic has at most 30 tags, so one

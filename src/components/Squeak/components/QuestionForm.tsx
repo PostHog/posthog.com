@@ -249,6 +249,8 @@ function QuestionFormMain({
                                     initialValue={initialValues?.body ?? forum?.initialValues?.body}
                                     values={values}
                                     mentions={formType === 'reply'}
+                                    // Forum posts also suggest topics, tags, and posts after `#`.
+                                    references={!!forum}
                                     loading={loading}
                                     isValid={isValid}
                                     user={user}

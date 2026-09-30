@@ -5,6 +5,7 @@ import { ToggleGroup } from 'components/RadixUI/ToggleGroup'
 import { ForumSort, ForumTag, FeedOptions, useForumFeed } from './hooks'
 import FilterMenu from './FilterMenu'
 import PostRow from './PostRow'
+import { useWindow } from '../../context/Window'
 
 const sortOptions: { label: string; value: ForumSort }[] = [
     { label: 'Latest', value: 'latest' },
@@ -81,6 +82,13 @@ export default function Feed({
 }: FeedProps) {
     const [sort, setSort] = useState<ForumSort>('latest')
     const [tagIds, setTagIds] = useState<number[]>([])
+    // A `?tag=` link, such as a `#topic/tag` reference in a post, opens the feed filtered to that tag.
+    const { appWindow } = useWindow()
+    const tagSlug = new URLSearchParams(appWindow?.location?.search || '').get('tag')
+    useEffect(() => {
+        const tag = tagSlug ? tags?.find((tag) => tag.attributes.slug === tagSlug) : undefined
+        if (tag) setTagIds([tag.id])
+    }, [tagSlug, tags?.length])
     const { questions, isLoading, isFirstLoad, isSwitching, isLoadingMore, hasMore, fetchMore } = useForumFeed({
         sort,
         topicId,
