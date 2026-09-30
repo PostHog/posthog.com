@@ -1,5 +1,6 @@
 import React, { useEffect, useMemo, useState } from 'react'
 import { HedgehogDj } from '@posthog/brand/hoggies'
+import { IconGithub, IconGroups, IconHeartPlus, IconSend } from '@posthog/icons'
 import { graphql, useStaticQuery } from 'gatsby'
 import Link from 'components/Link'
 import ReaderView from 'components/ReaderView'
@@ -132,9 +133,24 @@ export default function Hogspace(): JSX.Element {
             <SEO title="Hogspace – PostHog" description="PostHog's Hogspace profile" />
             <ReaderView hideLeftSidebar hideRightSidebar hideAppOptions showQuestions={false}>
                 <div className="@container not-prose mx-auto w-full max-w-5xl pb-12 font-sans text-primary">
-                    <header className="bg-blue px-4 py-3 text-light-1">
+                    <header className="bg-ai-blue px-4 py-3 text-light-1">
                         <div className="flex flex-wrap items-end justify-between gap-2">
-                            <p className="m-0 text-2xl font-black tracking-tight">Hogspace</p>
+                            <p className="m-0 flex items-end gap-1 text-2xl font-black tracking-tight">
+                                <span className="flex items-end gap-0.5 pb-1" aria-hidden="true">
+                                    <img
+                                        src="/images/hedgehog.svg"
+                                        alt=""
+                                        className="h-3.5 w-auto brightness-0 invert"
+                                    />
+                                    <img
+                                        src="/images/hedgehog.svg"
+                                        alt=""
+                                        className="h-[18px] w-auto brightness-0 invert"
+                                    />
+                                    <img src="/images/hedgehog.svg" alt="" className="h-6 w-auto brightness-0 invert" />
+                                </span>
+                                Hogspace
+                            </p>
                             <Link to="/sparks-joy" className="text-xs !text-light-1 underline">
                                 Back to Time machine
                             </Link>
@@ -170,7 +186,7 @@ export default function Hogspace(): JSX.Element {
                                     </h1>
                                     <p className="mb-3 text-xs text-secondary">Indie / Open source / Building</p>
                                     <div className="grid grid-cols-[minmax(0,140px)_minmax(0,1fr)] gap-3">
-                                        <div className="flex aspect-square items-center justify-center border border-blue/40 bg-blue/10 p-2">
+                                        <div className="flex aspect-square items-center justify-center border border-pale-blue-dark bg-pale-blue/40 p-2 dark:bg-pale-blue-dark/20">
                                             <HedgehogDj
                                                 title="PostHog hedgehog DJ"
                                                 className="h-full w-full object-contain"
@@ -204,33 +220,54 @@ export default function Hogspace(): JSX.Element {
                                     </p>
                                 </section>
 
-                                <section className="border border-blue/40" aria-labelledby="contact-heading">
+                                <section className="border border-pale-blue-dark" aria-labelledby="contact-heading">
                                     <h2
                                         id="contact-heading"
-                                        className="bg-blue px-2 py-1 text-sm font-bold text-light-1"
+                                        className="bg-pale-blue-dark px-2 py-1 text-sm font-bold text-light-1"
                                     >
                                         Contacting PostHog
                                     </h2>
                                     <div className="grid grid-cols-2 gap-x-2 gap-y-2 p-3 text-xs font-semibold">
-                                        <Link to="/talk-to-a-human">Send message</Link>
-                                        <Link to="/people">Add to friends</Link>
-                                        <Link to="/community">Join community</Link>
-                                        <Link to="https://github.com/PostHog" external>
-                                            Follow the code
+                                        <Link to="/talk-to-a-human" className="flex items-center gap-1.5">
+                                            <IconSend className="size-4 shrink-0 text-ai-blue" aria-hidden="true" />
+                                            Send message
+                                        </Link>
+                                        <Link to="/people" className="flex items-center gap-1.5">
+                                            <IconHeartPlus
+                                                className="size-4 shrink-0 text-ai-blue"
+                                                aria-hidden="true"
+                                            />
+                                            Add to friends
+                                        </Link>
+                                        <Link to="/community" className="flex items-center gap-1.5">
+                                            <IconGroups className="size-4 shrink-0 text-ai-blue" aria-hidden="true" />
+                                            Join community
+                                        </Link>
+                                        <Link to="https://github.com/PostHog" external className="whitespace-nowrap">
+                                            <span className="inline-flex items-center gap-1.5">
+                                                <IconGithub
+                                                    className="size-4 shrink-0 text-ai-blue"
+                                                    aria-hidden="true"
+                                                />
+                                                Follow the code
+                                            </span>
                                         </Link>
                                     </div>
                                 </section>
 
-                                <p className="border border-blue/40 px-2 py-1 text-xs">
+                                <p className="border border-pale-blue-dark px-2 py-1 text-xs">
                                     <strong>Hogspace URL:</strong> posthog.com/hogspace
                                 </p>
 
-                                <section className="border border-blue/40" aria-labelledby="info-heading">
-                                    <h2 id="info-heading" className="bg-blue px-2 py-1 text-sm font-bold text-light-1">
+                                <section className="border border-pale-blue-dark" aria-labelledby="info-heading">
+                                    <h2
+                                        id="info-heading"
+                                        className="bg-pale-blue-dark px-2 py-1 text-sm font-bold text-light-1"
+                                    >
                                         PostHog: General info
                                     </h2>
-                                    <dl className="grid grid-cols-[90px_1fr] gap-px bg-blue/20 text-xs">
-                                        <dt className="bg-blue/10 p-2 font-bold">Influences</dt>
+                                    <dl className="grid grid-cols-[90px_1fr] gap-px bg-pale-blue-dark/50 text-xs">
+                                        <dt className="bg-pale-blue p-2 font-bold text-light-12">Influences</dt>
                                         <dd className="m-0 bg-primary p-2">
                                             <Link to="/handbook/company/culture">Building in public</Link>,{' '}
                                             <Link to="https://github.com/PostHog" external>
@@ -238,11 +275,11 @@ export default function Hogspace(): JSX.Element {
                                             </Link>
                                             , and the joy of shipping.
                                         </dd>
-                                        <dt className="bg-blue/10 p-2 font-bold">Music</dt>
+                                        <dt className="bg-pale-blue p-2 font-bold text-light-12">Music</dt>
                                         <dd className="m-0 bg-primary p-2">
                                             <Link to="/fm">PostHog FM</Link>
                                         </dd>
-                                        <dt className="bg-blue/10 p-2 font-bold">Books</dt>
+                                        <dt className="bg-pale-blue p-2 font-bold text-light-12">Books</dt>
                                         <dd className="m-0 bg-primary p-2">
                                             <Link to="/handbook/people/bookhog">
                                                 Exhalation, Dune, and The Spy and the Traitor
@@ -255,9 +292,9 @@ export default function Hogspace(): JSX.Element {
 
                             <div className="min-w-0 space-y-5">
                                 <section className="border border-primary" aria-label="Music player">
-                                    <div className="flex justify-between bg-accent px-3 py-2 text-sm font-bold">
+                                    <div className="flex justify-between bg-light-3 px-3 py-2 text-sm font-bold text-light-12">
                                         <span>♫ music</span>
-                                        <Link to="/fm" className="text-xs font-normal">
+                                        <Link to="/fm" className="text-xs font-normal !text-light-12">
                                             Open player ↗
                                         </Link>
                                     </div>
@@ -330,7 +367,7 @@ export default function Hogspace(): JSX.Element {
                                 <section aria-labelledby="blog-heading">
                                     <h2
                                         id="blog-heading"
-                                        className="border-b border-blue/40 bg-blue/10 px-2 py-1 text-sm font-bold"
+                                        className="border-b border-pale-blue-dark/50 bg-pale-blue px-2 py-1 text-sm font-bold text-light-12"
                                     >
                                         PostHog's latest blog entry
                                     </h2>
@@ -354,7 +391,10 @@ export default function Hogspace(): JSX.Element {
                                 </section>
 
                                 <section aria-labelledby="about-heading">
-                                    <h2 id="about-heading" className="bg-orange/30 px-2 py-1 text-sm font-bold">
+                                    <h2
+                                        id="about-heading"
+                                        className="bg-creamsicle px-2 py-1 text-sm font-bold text-light-12"
+                                    >
                                         About me
                                     </h2>
                                     <p className="whitespace-pre-wrap px-2 py-3 text-sm">{ABOUT_ME}</p>
@@ -363,10 +403,10 @@ export default function Hogspace(): JSX.Element {
                                 <section aria-labelledby="friends-heading">
                                     <h2
                                         id="friends-heading"
-                                        className="flex flex-wrap items-center justify-between gap-2 bg-orange/30 px-2 py-1 text-sm font-bold"
+                                        className="flex flex-wrap items-center justify-between gap-2 bg-creamsicle px-2 py-1 text-sm font-bold text-light-12"
                                     >
                                         PostHog's Top 8{' '}
-                                        <Link to="/people" className="text-xs font-normal">
+                                        <Link to="/people" className="text-xs font-normal !text-light-12">
                                             View all friends
                                         </Link>
                                     </h2>
@@ -375,7 +415,7 @@ export default function Hogspace(): JSX.Element {
                                             <Link
                                                 key={squeakId}
                                                 to={`/community/profiles/${squeakId}`}
-                                                className="flex min-w-0 flex-col items-center gap-2 border border-blue/40 bg-accent p-2 text-center text-xs font-semibold text-primary hover:border-blue"
+                                                className="flex min-w-0 flex-col items-center gap-2 border border-pale-blue-dark bg-pale-blue/30 p-2 text-center text-xs font-semibold text-primary hover:border-blue dark:bg-pale-blue-dark/20"
                                             >
                                                 <span className="flex h-14 w-full items-center justify-center overflow-hidden bg-light-1 p-1">
                                                     <img
@@ -393,10 +433,13 @@ export default function Hogspace(): JSX.Element {
                                 </section>
 
                                 <section aria-labelledby="comments-heading">
-                                    <h2 id="comments-heading" className="bg-orange/30 px-2 py-1 text-sm font-bold">
+                                    <h2
+                                        id="comments-heading"
+                                        className="bg-creamsicle px-2 py-1 text-sm font-bold text-light-12"
+                                    >
                                         Comments (1)
                                     </h2>
-                                    <div className="border-b border-blue/30 px-2 py-3 text-sm">
+                                    <div className="border-b border-pale-blue-dark/50 px-2 py-3 text-sm">
                                         <p className="font-bold">
                                             James Hawkins{' '}
                                             <span className="font-normal text-secondary">· 1 second ago</span>
