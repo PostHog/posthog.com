@@ -130,7 +130,7 @@ It integrates with the broader OpenTelemetry ecosystem, meaning it can instrumen
 
 Phoenix is an open source AI observability platform. It provides tracing, evaluation, experiments, prompt management, and more. It works out-of-the-box with frameworks like LlamaIndex and LangChain as well as LLM providers like OpenAI, Bedrock, and more. It’s built by Arize AI, a unified AI observability and evaluation platform. 
 
-Arize doesn’t provide a free hosted version of Phoenix. Their product, AX Pro, starts at $50 per month for 10k spans and up to 3 users. They were acquired by Dynatrace in August 2026, so this may change in the near future though. 
+Arize offers two free Phoenix Cloud instances, so you can try hosted Phoenix without setting up infrastructure. Arize AX, their separate SaaS platform, has its own plans: AX Free includes 25k spans per month, and AX Pro costs $50 per month for 50k spans with unlimited users. They were acquired by Dynatrace in August 2026, so this may change in the near future though. 
 
 ![Phoenix](https://res.cloudinary.com/dmukukwp6/image/upload/phoenix_fb7498c189.png)
 
