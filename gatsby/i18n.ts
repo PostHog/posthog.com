@@ -7,7 +7,8 @@ import { flattenMessages, type Messages } from '../src/i18n/flatten'
 const LOCALES_DIR = path.resolve(__dirname, '../src/i18n/locales')
 
 // `lang` is the BCP 47 tag for <html lang> and hreflang, when it differs from the code: pt.yml has `lang: pt-BR`.
-type Locale = { code: string; name: string; lang: string; messages: Messages }
+// `hreflang` replaces the search tags, for a file whose name is not a language code: latam.yml has `hreflang: [es]`.
+type Locale = { code: string; name: string; lang: string; hreflang: string[]; messages: Messages }
 
 // One YAML file per locale. The file name is the locale code, and also the URL prefix: pt.yml -> /pt.
 export function readLocales(): Locale[] {
@@ -16,8 +17,16 @@ export function readLocales(): Locale[] {
         .filter((file) => file.endsWith('.yml'))
         .map((file) => {
             const code = path.basename(file, '.yml')
-            const { name, lang, messages } = parse(fs.readFileSync(path.join(LOCALES_DIR, file), 'utf8'))
-            return { code, name, lang: lang || code, messages: flattenMessages(messages) }
+            const {
+                name,
+                lang = code,
+                hreflang,
+                messages,
+            } = parse(fs.readFileSync(path.join(LOCALES_DIR, file), 'utf8'))
+            // A regional translation is also listed under its bare code, so pt.yml (lang: pt-BR) serves every
+            // Portuguese speaker in search, not only those in Brazil.
+            const tags = hreflang || (lang === code ? [code] : [code, lang])
+            return { code, name, lang, hreflang: tags, messages: flattenMessages(messages) }
         })
 }
 
@@ -33,11 +42,7 @@ export function createLocalizedHomePages(page: Page, { createPage, deletePage }:
     const translations = locales.filter(({ code }) => code !== 'en')
     const languageAlternates = [
         { hrefLang: 'en', href: '/' },
-        // A regional translation is also listed under its bare code, so pt.yml (lang: pt-BR) serves every
-        // Portuguese speaker in search, not only those in Brazil.
-        ...translations.flatMap(({ code, lang }) =>
-            (lang === code ? [code] : [code, lang]).map((hrefLang) => ({ hrefLang, href: `/${code}` }))
-        ),
+        ...translations.flatMap(({ code, hreflang }) => hreflang.map((hrefLang) => ({ hrefLang, href: `/${code}` }))),
         { hrefLang: 'x-default', href: '/' },
     ]
 

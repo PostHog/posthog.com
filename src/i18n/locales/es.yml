@@ -4,6 +4,7 @@
 # here when a review comment applies to more than one string. See the translate skill in
 # .claude/skills/translate and src/i18n/README.md.
 #
+# - This file is Spanish from Spain, at /es. latam.yml is Latin American Spanish, at /latam. Do not mix their vocabulary.
 # - Write like a dev from Spain talks to another dev: casual, short, and funny. Use "tú" for the reader and
 #   "vosotros" for plural you ("para que tú y tus agentes podáis consultarlos"). Never "usted" or "ustedes".
 # - Use Castilian vocabulary, not Latin American: "ordenador", "móvil", "cesta", "coger", "vale", "curro",
@@ -26,6 +27,8 @@
 # - Cut words the sentence does not need. Spanish runs longer than English, and the layout was made for English.
 name: Español
 lang: es-ES
+# Search engines list /latam under the bare "es", because more Spanish speakers visit from Latin America.
+hreflang: [es-ES]
 messages:
     meta:
         title: PostHog - la capa de contexto de tu producto

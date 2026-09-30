@@ -108,6 +108,40 @@ test('sends Simplified Chinese to /zh, and Traditional Chinese to English', asyn
     }
 })
 
+test('sends Spanish from Spain to /es, and Latin American Spanish to /latam', async () => {
+    const cases: [string, string | undefined, string][] = [
+        ['es-ES', 'ES', '/es'],
+        ['es', 'AD', '/es'],
+        ['es-ES', undefined, '/es'],
+        ['es', undefined, '/es'],
+        ['es-ES', 'MX', '/latam'],
+        ['es', 'AR', '/latam'],
+        ['es-MX', 'ES', '/latam'],
+        ['es-419', undefined, '/latam'],
+        ['es-US,en;q=0.9', 'US', '/latam'],
+    ]
+    for (const [acceptLanguage, country, location] of cases) {
+        const headers: Record<string, string> = { 'accept-language': acceptLanguage }
+        if (country) headers['x-vercel-ip-country'] = country
+        const response = await middleware(new Request(home, { headers }))
+        assert.equal(response?.headers.get('location'), location, `${acceptLanguage} from ${country}`)
+    }
+    for (const [path, location] of [
+        ['/es-MX', '/latam'],
+        ['/es-419', '/latam'],
+        ['/es_ar', '/latam'],
+        ['/es-ES', '/es'],
+        ['/ES', '/es'],
+    ]) {
+        assert.equal(
+            (await middleware(new Request(`https://posthog.com${path}`)))?.headers.get('location'),
+            location,
+            path
+        )
+    }
+    assert.equal(await middleware(new Request('https://posthog.com/es')), undefined)
+})
+
 test('serves English while the skip-translation cookie is set', async () => {
     for (const cookie of [`${SKIP_TRANSLATION_COOKIE}=1`, `theme=dark; ${SKIP_TRANSLATION_COOKIE}=1`]) {
         const response = await middleware(new Request(home, { headers: { 'accept-language': 'pt-BR', cookie } }))

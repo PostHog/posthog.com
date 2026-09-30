@@ -72,7 +72,14 @@ The build warns about a key in a translation file that `en.yml` does not have. I
 3. Add the code to `TRANSLATED_LOCALES` in `middleware.ts`. The Edge runtime cannot read YAML. `pnpm test:middleware` fails when the list and the files disagree.
 4. Restart `pnpm start`. The dev server reads the YAML files only when it starts.
 
-The middleware matches the primary language subtag only, so `pt` matches `pt-BR` and `pt-PT`. It also sends locale-shaped paths such as `/pt-BR`, `/pt_br`, and `/PT` to `/pt` with a 301.
+The middleware matches the primary language subtag, so `pt` matches `pt-BR` and `pt-PT`. It also sends locale-shaped paths such as `/pt-BR`, `/pt_br`, and `/PT` to `/pt` with a 301. Two languages are exceptions:
+
+- **Chinese:** `/zh` is Simplified Chinese. A Traditional Chinese tag (`zh-TW`, `zh-HK`, `zh-MO`, `zh-Hant`) gets English.
+- **Spanish:** `/es` is Spain and `/latam` is Latin America. A region other than Spain (`es-MX`, `es-419`) gets `/latam`. For `es-ES` or a bare `es`, the visitor's country decides (`x-vercel-ip-country`), because many browsers outside Spain default to `es-ES`.
+
+## Regional pages
+
+The file name is the URL, so a page for a region can have a custom name, for example `latam.yml` for `/latam`. Set `lang` to the real tag (`lang: es-419`) for `<html lang>`. Search engines only accept a language code or a language plus a two-letter country, so set `hreflang` to the tags that the page should rank for: `latam.yml` has `hreflang: [es]`, and `es.yml` has `hreflang: [es-ES]`. Then add the routing rule to `middleware.ts`.
 
 ## A/B tests
 
