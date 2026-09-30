@@ -1,7 +1,9 @@
 import assert from 'node:assert/strict'
+import { readdirSync } from 'node:fs'
 import { test } from 'node:test'
 
-import middleware from './middleware.ts'
+import middleware, { TRANSLATED_LOCALES } from './middleware.ts'
+import { SKIP_TRANSLATION_COOKIE } from './src/i18n/cookie.ts'
 
 const page = 'https://posthog.com/docs/product-analytics'
 
@@ -55,4 +57,63 @@ test('falls through when no Markdown sibling exists', async (t) => {
     t.mock.method(globalThis, 'fetch', async () => new Response('Not found', { status: 404 }))
 
     assert.equal(await middleware(new Request(page, { headers: { 'user-agent': 'ChatGPT-User' } })), undefined)
+})
+
+const home = 'https://posthog.com/'
+
+test('redirects the home page to the translation the visitor ranks highest', async () => {
+    for (const acceptLanguage of ['pt', 'pt-BR,pt;q=0.9,en-US;q=0.8', 'pt-PT', 'fr;q=0.9, pt-BR;q=0.8, en;q=0.1']) {
+        const response = await middleware(new Request(home, { headers: { 'accept-language': acceptLanguage } }))
+        assert.equal(response?.status, 307, acceptLanguage)
+        assert.equal(response.headers.get('location'), '/pt')
+        assert.equal(response.headers.get('vary'), 'Accept-Language, Cookie')
+    }
+})
+
+test('keeps the query string on the redirect', async () => {
+    const response = await middleware(
+        new Request(`${home}?utm_source=newsletter`, { headers: { 'accept-language': 'pt-BR' } })
+    )
+    assert.equal(response?.headers.get('location'), '/pt?utm_source=newsletter')
+})
+
+test('serves English when English ranks higher, nothing matches, or the header is missing', async () => {
+    for (const acceptLanguage of ['', 'en-US,en;q=0.9,pt-BR;q=0.8', 'fr-FR,de;q=0.9', 'pt;q=0', '*']) {
+        const headers = acceptLanguage ? { 'accept-language': acceptLanguage } : undefined
+        assert.equal(await middleware(new Request(home, { headers })), undefined, acceptLanguage)
+    }
+})
+
+test('serves English while the skip-translation cookie is set', async () => {
+    for (const cookie of [`${SKIP_TRANSLATION_COOKIE}=1`, `theme=dark; ${SKIP_TRANSLATION_COOKIE}=1`]) {
+        const response = await middleware(new Request(home, { headers: { 'accept-language': 'pt-BR', cookie } }))
+        assert.equal(response, undefined, cookie)
+    }
+})
+
+test('does not redirect other pages', async (t) => {
+    t.mock.method(globalThis, 'fetch', async () => new Response('Not found', { status: 404 }))
+
+    assert.equal(await middleware(new Request(page, { headers: { 'accept-language': 'pt-BR' } })), undefined)
+})
+
+test('sends locale-shaped paths to the translated page for their language', async () => {
+    for (const path of ['/pt-BR', '/pt-br', '/pt_BR', '/PT', '/Pt', '/pt-PT', '/PT-BR']) {
+        const response = await middleware(new Request(`https://posthog.com${path}?ref=x`))
+        assert.equal(response?.status, 301, path)
+        assert.equal(response.headers.get('location'), '/pt?ref=x', path)
+    }
+})
+
+test('leaves the translated page and other short paths alone', async () => {
+    for (const path of ['/pt', '/ai', '/fr-FR', '/EU', '/pt-BRAZIL']) {
+        assert.equal(await middleware(new Request(`https://posthog.com${path}`)), undefined, path)
+    }
+})
+
+test('lists the same translations as src/i18n/locales', () => {
+    const files = readdirSync(new URL('./src/i18n/locales', import.meta.url))
+        .filter((file) => file.endsWith('.yml') && file !== 'en.yml')
+        .map((file) => file.replace(/\.yml$/, ''))
+    assert.deepEqual([...TRANSLATED_LOCALES].sort(), files.sort())
 })

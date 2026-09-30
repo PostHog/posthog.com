@@ -572,6 +572,9 @@ importers:
       unist-util-visit:
         specifier: ^1.4.0
         version: 1.4.1
+      yaml:
+        specifier: 2.8.1
+        version: 2.8.1
       yup:
         specifier: ^0.32.11
         version: 0.32.11

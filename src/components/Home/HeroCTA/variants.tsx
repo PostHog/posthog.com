@@ -8,6 +8,7 @@ import { RoughAnnotation } from 'components/Code/RoughAnnotation'
 import { usePrefersReducedMotion } from 'components/Code/usePrefersReducedMotion'
 import usePostHog from '../../../hooks/usePostHog'
 import { cn } from '../../../utils'
+import { useTranslation } from '../../../i18n'
 
 const SIGNUP_URL = 'https://app.posthog.com/signup'
 const SIGNUP_STATE = { newWindow: true, initialTab: 'signup' }
@@ -138,30 +139,31 @@ const VariantControl = () => {
     )
 }
 
-const SIGNUP_CARD_POINTS = [
-    '97% of users pay us $0',
-    'No credit card required',
-    'Setup wizard installs PostHog for you',
-]
+const SIGNUP_CARD_POINTS = ['home.cta.pays_zero', 'home.cta.no_card', 'home.cta.wizard']
 
 const SignupCard = ({ actions, footer }: { actions: React.ReactNode; footer?: React.ReactNode }) => {
+    const { t, rich } = useTranslation()
+
     return (
         <div className="not-prose w-full max-w-md min-w-0 text-left border border-primary rounded-md bg-primary shadow-2xl">
             <div className="p-4 space-y-3">
                 <h3 className="!text-lg font-bold text-primary m-0 flex items-center gap-2">
-                    Set up
-                    <PostHogMark size={30} />
-                    <RoughAnnotation
-                        type="highlight"
-                        color="rgba(247, 165, 1, 0.15)"
-                        strokeWidth={1}
-                        padding={2}
-                        delay={280}
-                    >
-                        for free
-                    </RoughAnnotation>
+                    {rich('home.cta.title', {
+                        logo: () => <PostHogMark size={30} />,
+                        highlight: (text) => (
+                            <RoughAnnotation
+                                type="highlight"
+                                color="rgba(247, 165, 1, 0.15)"
+                                strokeWidth={1}
+                                padding={2}
+                                delay={280}
+                            >
+                                {text}
+                            </RoughAnnotation>
+                        ),
+                    })}
                 </h3>
-                <CheckList items={SIGNUP_CARD_POINTS} />
+                <CheckList items={SIGNUP_CARD_POINTS.map((key) => t(key))} />
                 <div className="pt-1">{actions}</div>
             </div>
             {footer}
@@ -169,12 +171,16 @@ const SignupCard = ({ actions, footer }: { actions: React.ReactNode; footer?: Re
     )
 }
 
-const CommandPanel = () => (
-    <div className="border-t border-primary bg-accent px-4 py-3 rounded-b space-y-1.5">
-        <p className="!text-xs text-secondary m-0">Happier in the terminal? Skip the browser:</p>
-        <ClickableCommand />
-    </div>
-)
+const CommandPanel = () => {
+    const { t } = useTranslation()
+
+    return (
+        <div className="border-t border-primary bg-accent px-4 py-3 rounded-b space-y-1.5">
+            <p className="!text-xs text-secondary m-0">{t('home.cta.terminal')}</p>
+            <ClickableCommand />
+        </div>
+    )
+}
 
 /* -------------------------------------------------------------------------------------------------
  * B — Dual CTA. C's card, but signup shares the row with "Install with AI", and the command starts
@@ -184,6 +190,7 @@ const CommandPanel = () => (
 
 const VariantDualCta = () => {
     const [showCommand, setShowCommand] = useState(false)
+    const { t } = useTranslation()
 
     return (
         <SignupCard
@@ -195,7 +202,7 @@ const VariantDualCta = () => {
                     <div className="flex flex-col @[340px]:flex-row gap-2">
                         <div className="flex-1 min-w-0">
                             <SignupButton width="full" childClassName="whitespace-nowrap">
-                                Get started
+                                {t('home.cta.get_started')}
                             </SignupButton>
                         </div>
                         <div className="flex-1 min-w-0">
@@ -205,7 +212,7 @@ const VariantDualCta = () => {
                                 width="full"
                                 onClick={() => setShowCommand((current) => !current)}
                             >
-                                <span className="whitespace-nowrap">Install with AI</span>
+                                <span className="whitespace-nowrap">{t('home.cta.install_with_ai')}</span>
                             </CallToAction>
                         </div>
                     </div>

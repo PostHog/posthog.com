@@ -80,6 +80,7 @@ Reference these when working on specific areas:
 - [Data hooks](agents/data.md) – Product, customer, navigation data
 - [Window system](agents/windows.md) – Desktop OS architecture, window management
 - [Browser screenshots](agents/browser-screenshots.md) – Capturing the before/after grid a visual PR needs, GIFs for motion, and attaching them with `gh pr-assets`
+- [Translations](src/i18n/README.md) – YAML locale files, `useTranslation()`, and the locale redirect in `middleware.ts`. Product names stay in English in every locale, and home page A/B tests run on English only
 
 ## Boundaries
 

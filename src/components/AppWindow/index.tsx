@@ -39,6 +39,7 @@ import FloatingModal from 'components/FloatingModal'
 import { MOTION_LAYER, WINDOW_BG } from '../../constants/frostedSurfaces'
 
 import { containsURL, getActiveMenuSection } from '../../navs/activeMenu'
+import { I18nProvider } from '../../i18n'
 
 const snapThreshold = -50
 
@@ -840,7 +841,9 @@ export default function AppWindow({ item, chrome = true }: { item: AppWindowType
                                 : ''
                         }`}
                     >
-                        <Router {...item.props}>{item.element}</Router>
+                        <I18nProvider pageContext={item.props.pageContext}>
+                            <Router {...item.props}>{item.element}</Router>
+                        </I18nProvider>
                     </div>
                 </div>
             </WindowContainer>
