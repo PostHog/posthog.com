@@ -2,6 +2,7 @@
 # they leave out falls back to the English text here. See src/i18n/README.md.
 #
 # Keys follow the home page translation spec. Keep product names, brand names, code, and URLs in English.
+# App UI inside the interactive demos (buttons, placeholders, chips, the Inbox) is English on every locale, so it has no key.
 # <tag>…</tag> and <tag/> are markup that components fill in. Keep them, but move them with their words.
 # {name} is a value that components fill in. Keep it as-is.
 name: English
@@ -47,18 +48,6 @@ messages:
             demo:
                 label: PostHog AI demonstration
                 description: 'Illustrative demo: PostHog AI investigates falling paid conversion using Google Ads traffic, PostHog funnels, Stripe payments, and GitHub changes. It finds an extra required field at mobile checkout and recommends testing a shorter checkout. All findings are sample data.'
-                welcome: What can I help you with?
-                composer:
-                    context: Add context
-                    placeholder: Describe the task in detail...
-                    mode: Auto
-                    model: Default
-                sample_data: Sample data
-                # Product names and SQL stay in English and have no key.
-                capability:
-                    coding: Coding
-                    sdk_setup: SDK setup
-                    docs: Docs
                 prompt: Why are signups growing, but paid conversions falling?
                 reply:
                     1: I’ll trace the path from ad click to paying customer.
@@ -108,24 +97,6 @@ messages:
                     body: Zendesk, Linear, GitHub issues
             demo:
                 description: 'Illustrative self-driving inbox. Four sample reports arrive one at a time, newest first: an invoice request from GitHub, a conversion tracking scout with a draft pull request, a checkout issue from session replay, and a high-priority sign-in error with a pull request ready to review.'
-                empty:
-                    heading: Your inbox is clear
-                    body: New findings will appear here.
-                card:
-                    1:
-                        title: Make invoices easier to find
-                        body: Customers keep asking where to download invoices. Add a direct link from their account page.
-                    2:
-                        title: Restore checkout conversion tracking
-                        body: The new checkout stopped sending completion events. Restore tracking so the funnel is accurate.
-                        source: Conversion tracking
-                    3:
-                        title: Explain why a payment was declined
-                        body: Replays show customers retrying the same card. Replace the generic error with a useful message.
-                    4:
-                        title: Fix sign-in failures on mobile
-                        body: An expired token leaves mobile users on a blank screen. Refresh the session before redirecting.
-                timestamp: Just now
 
         3:
             heading: Social proof
