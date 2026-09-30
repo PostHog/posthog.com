@@ -21,7 +21,6 @@ Products should fit these criteria before we build them:
 - Someone is very excited about building this product internally
   - People pursuing their interests get more done, go much further, and execute to a better standard
   - Additionally, each product must have a Blitzscale sponsor
-- Customers have asked for this product
 - The product has a future in 2030, ie it's not something 2020-style
 
 ### Are there any exceptions?
