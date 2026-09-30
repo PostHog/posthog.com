@@ -1,0 +1,202 @@
+name: Sync translations
+
+# When en.yml changes, translate the changed keys and update one PR for each locale. If a locale's PR is
+# still open, the new keys go into that PR. Volunteers review in GitHub, then the website team.
+# See src/i18n/README.md.
+on:
+    push:
+        branches: [master]
+        paths: ['src/i18n/locales/en.yml']
+    workflow_dispatch:
+        inputs:
+            base:
+                description: Branch to translate and open the PRs against. Use a long-lived branch to translate a home page revamp before launch.
+                default: master
+
+permissions:
+    contents: read
+
+env:
+    BASE: ${{ inputs.base || 'master' }}
+
+jobs:
+    locales:
+        name: List locales
+        runs-on: ubuntu-latest
+        outputs:
+            codes: ${{ steps.list.outputs.codes }}
+        steps:
+            - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+              with:
+                  ref: ${{ env.BASE }}
+                  persist-credentials: false
+
+            - name: List locale files
+              id: list
+              run: |
+                  codes=$(find src/i18n/locales -maxdepth 1 -name '*.yml' ! -name en.yml -exec basename {} .yml \; | jq -R . | jq -sc .)
+                  echo "codes=$codes" >> "$GITHUB_OUTPUT"
+
+    sync:
+        name: Sync ${{ matrix.locale }}
+        needs: locales
+        if: needs.locales.outputs.codes != '[]'
+        runs-on: ubuntu-latest
+        strategy:
+            fail-fast: false
+            matrix:
+                locale: ${{ fromJSON(needs.locales.outputs.codes) }}
+        concurrency:
+            group: i18n-sync-${{ matrix.locale }}-${{ inputs.base || 'master' }}
+            cancel-in-progress: false
+        env:
+            LOCALE: ${{ matrix.locale }}
+            REPO: ${{ github.repository }}
+        steps:
+            # A PR that GITHUB_TOKEN opens does not start other workflows, so the checks and the Vercel
+            # preview would not run. A GitHub App token does not have this limit.
+            - name: Get a bot token
+              id: token
+              uses: actions/create-github-app-token@bcd2ba49218906704ab6c1aa796996da409d3eb1 # v3.2.0
+              with:
+                  client-id: ${{ secrets.I18N_BOT_CLIENT_ID }}
+                  private-key: ${{ secrets.I18N_BOT_PRIVATE_KEY }}
+
+            - name: Prepare the branch
+              id: branch
+              env:
+                  GH_TOKEN: ${{ steps.token.outputs.token }}
+              run: |
+                  if [ "$BASE" = master ]; then BRANCH="i18n/sync-$LOCALE"; else BRANCH="i18n/sync-$LOCALE-${BASE//\//-}"; fi
+                  PR=$(gh pr list --repo "$REPO" --head "$BRANCH" --base "$BASE" --state open --json number --jq '.[0].number // empty')
+                  behind() { gh api "repos/$REPO/compare/$BRANCH...$BASE" --jq .ahead_by; }
+
+                  if [ -n "$PR" ]; then
+                    # Keep the open PR and its reviewed edits. Bring the base in with GitHub's "Update branch",
+                    # which signs the merge commit. It fails only if someone edited this locale on the base by hand.
+                    if [ "$(behind)" != 0 ]; then
+                      gh api -X PUT "repos/$REPO/pulls/$PR/update-branch" > /dev/null
+                      for _ in $(seq 30); do [ "$(behind)" = 0 ] && break; sleep 5; done
+                      [ "$(behind)" = 0 ] || { echo "::error::Could not update $BRANCH from $BASE"; exit 1; }
+                    fi
+                  else
+                    gh api -X DELETE "repos/$REPO/git/refs/heads/$BRANCH" > /dev/null 2>&1 || true
+                    gh api "repos/$REPO/git/refs" -f ref="refs/heads/$BRANCH" -f sha="$(gh api "repos/$REPO/commits/$BASE" --jq .sha)" > /dev/null
+                  fi
+                  echo "branch=$BRANCH" >> "$GITHUB_OUTPUT"
+                  echo "pr=$PR" >> "$GITHUB_OUTPUT"
+
+            - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+              with:
+                  ref: ${{ steps.branch.outputs.branch }}
+                  fetch-depth: 0
+                  persist-credentials: false
+
+            - uses: pnpm/action-setup@c5ba7f7862a0f64c1b1a05fbac13e0b8e86ba08c # v4
+
+            - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
+              with:
+                  node-version: '22'
+                  cache: 'pnpm'
+
+            - name: Install dependencies
+              run: pnpm install --frozen-lockfile --ignore-scripts
+
+            - name: Translate
+              id: translate
+              env:
+                  ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+              run: |
+                  pnpm i18n:sync --locale "$LOCALE" --summary "$RUNNER_TEMP/summary.md"
+                  pnpm exec prettier --write "src/i18n/locales/$LOCALE.yml" "src/i18n/locales/.source/$LOCALE.yml"
+                  if [ -z "$(git status --porcelain src/i18n/locales)" ]; then
+                    echo "changed=false" >> "$GITHUB_OUTPUT"
+                  else
+                    echo "changed=true" >> "$GITHUB_OUTPUT"
+                  fi
+
+            # Commits through the GitHub API so it carries GitHub's signature, which
+            # the org-wide signed-commits ruleset requires. A plain `git push` is
+            # rejected.
+            - name: Commit
+              if: steps.translate.outputs.changed == 'true'
+              uses: planetscale/ghcommit-action@a6b150b81dca5dd027baa898604418eec9e11465 # v0.2.22
+              with:
+                  commit_message: Update ${{ matrix.locale }} translations
+                  repo: ${{ github.repository }}
+                  branch: ${{ steps.branch.outputs.branch }}
+                  file_pattern: src/i18n/locales
+              env:
+                  GITHUB_TOKEN: ${{ steps.token.outputs.token }}
+
+            - name: Open or update the PR
+              if: steps.translate.outputs.changed == 'true'
+              env:
+                  GH_TOKEN: ${{ steps.token.outputs.token }}
+                  BRANCH: ${{ steps.branch.outputs.branch }}
+                  PR: ${{ steps.branch.outputs.pr }}
+              run: |
+                  pnpm --silent i18n:sync --report "origin/$BASE" --locale "$LOCALE" > "$RUNNER_TEMP/body.md"
+
+                  if [ -z "$PR" ]; then
+                    URL=$(gh pr create --repo "$REPO" --draft --base "$BASE" --head "$BRANCH" \
+                      --title "Update $LOCALE home page translations" --body-file "$RUNNER_TEMP/body.md" \
+                      --label translations --label needs-translation-review)
+                    STATUS=new
+                  else
+                    gh pr edit "$PR" --repo "$REPO" --body-file "$RUNNER_TEMP/body.md" --add-label needs-translation-review
+                    gh pr edit "$PR" --repo "$REPO" --remove-label translations-reviewed || true
+                    # The new keys need a volunteer review before the website team sees the PR again.
+                    if [ "$(gh pr view "$PR" --repo "$REPO" --json isDraft --jq .isDraft)" = false ]; then
+                      gh pr ready "$PR" --repo "$REPO" --undo
+                    fi
+                    { echo "The English text changed again. This commit updates these keys:"; echo; cat "$RUNNER_TEMP/summary.md"; } \
+                      | gh pr comment "$PR" --repo "$REPO" --body-file -
+                    URL=$(gh pr view "$PR" --repo "$REPO" --json url --jq .url)
+                    STATUS=updated
+                  fi
+                  jq -n --arg locale "$LOCALE" --arg url "$URL" --arg status "$STATUS" '{$locale, $url, $status}' > "$RUNNER_TEMP/result.json"
+
+            - name: Record a failure
+              if: failure()
+              env:
+                  RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+              run: |
+                  jq -n --arg locale "$LOCALE" --arg url "$RUN_URL" '{$locale, $url, status: "failed"}' > "$RUNNER_TEMP/result.json"
+
+            - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+              if: always()
+              with:
+                  name: i18n-result-${{ matrix.locale }}
+                  path: ${{ runner.temp }}/result.json
+                  if-no-files-found: ignore
+
+    # One message for the whole run, not one for each locale.
+    notify:
+        name: Tell the volunteer reviewers
+        needs: sync
+        if: always() && needs.sync.result != 'skipped'
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4.3.0
+              continue-on-error: true
+              with:
+                  pattern: i18n-result-*
+                  path: results
+
+            - name: Post to Slack
+              env:
+                  SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_TRANSLATION_REVIEW }}
+                  COMMIT_URL: ${{ github.server_url }}/${{ github.repository }}/commit/${{ github.sha }}
+                  GUIDE_URL: ${{ github.server_url }}/${{ github.repository }}/blob/master/src/i18n/README.md#how-to-review-a-translation
+              run: |
+                  shopt -s nullglob
+                  files=(results/*/result.json)
+                  if [ -z "$SLACK_WEBHOOK" ] || [ ${#files[@]} = 0 ]; then exit 0; fi
+
+                  list=$(jq -rs 'map("• `\(.locale)`: <\(.url)|\(if .status == "failed" then "sync failed, see the run" else "\(.status) PR" end)>") | join("\n")' "${files[@]}")
+                  text="The home page English text changed (<$COMMIT_URL|commit>). These translation PRs need a review:
+                  $list
+
+                  Reply in this thread with the locale you take. Review on GitHub with suggested changes: <$GUIDE_URL|how to review>."
+                  jq -n --arg text "$text" '{text: $text}' | curl -sSf -X POST -H 'Content-Type: application/json' -d @- "$SLACK_WEBHOOK"

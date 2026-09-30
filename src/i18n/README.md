@@ -58,15 +58,63 @@ When a translated sentence contains a product name, write the name in English in
 
 1. Add the key and the English text to `locales/en.yml`.
 2. Call `t()` or `rich()` with the key.
-3. Add the translation to each file in `locales/` that has one. If you do not know the translation, leave the key out. The page shows English until someone adds it.
+3. Do not edit the other locale files. After your PR merges, a workflow translates the key into each locale (see [Keep translations up to date](#keep-translations-up-to-date)). The page shows English until the translation merges.
+
+If a key must stay in English in every locale, add it to the `untranslated` list at the top of `en.yml`.
 
 The build warns about a key in a translation file that `en.yml` does not have. In development, the browser console warns about a key that `en.yml` does not have.
 
+## Keep translations up to date
+
+When a change to `locales/en.yml` merges to `master`, the [Sync translations](../../.github/workflows/i18n-sync.yml) workflow runs `scripts/i18n-sync.ts` for each locale:
+
+1. It finds the keys whose English text is new or changed. `locales/.source/<code>.yml` records the English text that each translation came from. The script generates this file. Do not edit it.
+2. It sends only those keys to Claude, with the rules in [What not to translate](#what-not-to-translate). A translation that loses or adds a tag or a `{placeholder}` fails. A failed key stays out of the file, so the page shows English, and the next run tries it again.
+3. It keeps the translation of a renamed or moved key when the English text is the same, and it removes keys that `en.yml` no longer has.
+4. It commits to the branch `i18n/sync-<code>` and opens a draft PR for that locale. There is only one open PR for each locale. If the PR is still open, the next English change goes into the same PR.
+5. It posts one message to the volunteer reviewers' Slack channel, with a link to each PR.
+
+Then the review has two stages:
+
+1. **Volunteers.** A volunteer reviews the PR for their locale in GitHub (see [How to review a translation](#how-to-review-a-translation)). A maintainer commits their suggestions, then marks the PR **Ready for review**.
+2. **Website team.** CODEOWNERS then requests a review from @PostHog/website, and the [Translation review done](../../.github/workflows/i18n-ready.yml) workflow changes the label from `needs-translation-review` to `translations-reviewed`. If the English changes again before the merge, the sync workflow converts the PR back to a draft, because the new keys need a volunteer review too.
+
+The `Translations` check runs `pnpm i18n:sync --check` on each PR that changes a locale file. It fails when a locale file has a key that `en.yml` does not have, or when a translation does not have the same tags and placeholders as its English text.
+
+For a large change, such as a home page revamp, build it on a long-lived branch. Then run the sync workflow by hand with `base` set to that branch. The locale PRs target that branch, so the volunteers can review before the launch.
+
+To run the script locally:
+
+```bash
+pnpm i18n:sync --dry-run              # list the keys that each locale needs, with no API calls
+pnpm i18n:sync --locale pt            # translate them. Needs ANTHROPIC_API_KEY
+pnpm i18n:sync --check                # validate the locale files
+```
+
+The workflow needs these repository secrets: `ANTHROPIC_API_KEY`, `I18N_BOT_CLIENT_ID` and `I18N_BOT_PRIVATE_KEY` (a GitHub App with write access to contents and pull requests), and `SLACK_WEBHOOK_TRANSLATION_REVIEW`. It also needs the labels `translations`, `needs-translation-review`, and `translations-reviewed`.
+
+## How to review a translation
+
+This section is for volunteer reviewers. You need a GitHub account. You do not need write access to the repository.
+
+1. In Slack, reply to the message in the thread with the locale you take, so two people do not review the same PR.
+2. Open the PR. Its description has a table of the keys that it changes, with the English text and the new translation.
+3. Open **Files changed** and go to `src/i18n/locales/<code>.yml`.
+4. On a line that is wrong, click **+**, then **Add a suggestion**. Write the correct text in the suggestion block. For a question, write a normal comment.
+5. When you are done, click **Review changes**, then **Comment** or **Approve**. Tell the Slack thread that you are done.
+
+When you write a suggestion:
+
+- Keep product names, brand names, code, commands, and URLs in English. See [What not to translate](#what-not-to-translate).
+- Keep each tag, such as `<highlight>…</highlight>` or `<logo/>`. You can move a tag with its words.
+- Keep each `{placeholder}` as it is.
+- Keep the key and the indentation. Change only the text after the colon. If the text starts with a quote, keep the quotes.
+
 ## Add a locale
 
-1. Copy `locales/pt.yml` to `locales/<code>.yml`. Use the ISO 639-1 code, for example `es`.
-   If the text is for one region, set `lang` to the full tag, for example `lang: pt-BR`. `lang` goes into `<html lang>` and hreflang. The URL keeps the short code.
-2. Translate the values. Keep the keys and the tags.
+1. On a new branch, create `locales/<code>.yml` with a `name` and an empty `messages: {}`. Use the ISO 639-1 code, for example `es`.
+   If the text is for one region, add `lang` with the full tag, for example `lang: pt-BR`. `lang` goes into `<html lang>` and hreflang. The URL keeps the short code.
+2. Push the branch. Run the Sync translations workflow by hand with `base` set to your branch. It translates every key and opens a PR against your branch for the volunteers to review. You can also run `pnpm i18n:sync --locale <code>` locally.
 3. Add the code to `TRANSLATED_LOCALES` in `middleware.ts`. The Edge runtime cannot read YAML. `pnpm test:middleware` fails when the list and the files disagree.
 4. Restart `pnpm start`. The dev server reads the YAML files only when it starts.
 

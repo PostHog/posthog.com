@@ -12,6 +12,9 @@
 /src/context/App.tsx @PostHog/website
 /src/components/AppWindow/ @PostHog/website
 
+# Translations. The website team reviews a translation PR after the volunteer reviewers. See src/i18n/README.md.
+/src/i18n/locales/ @PostHog/website
+
 # Serverless API functions
 /api/ @PostHog/website
 
