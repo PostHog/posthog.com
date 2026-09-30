@@ -44,17 +44,6 @@ messages:
             demo:
                 label: Demonstração do PostHog AI
                 description: 'Demonstração ilustrativa: o PostHog AI investiga a queda nas conversões pagas usando o tráfego do Google Ads, os funis do PostHog, os pagamentos do Stripe e as mudanças no GitHub. Ele encontra um campo obrigatório a mais no checkout mobile e recomenda testar um checkout mais curto. Todos os resultados são dados de exemplo.'
-                welcome: Como posso ajudar?
-                composer:
-                    context: Adicionar contexto
-                    placeholder: Descreva a tarefa em detalhes...
-                    mode: Auto
-                    model: Padrão
-                sample_data: Dados de exemplo
-                capability:
-                    coding: Programação
-                    sdk_setup: Configuração de SDK
-                    docs: Documentação
                 prompt: Por que os cadastros estão crescendo, mas as conversões pagas estão caindo?
                 reply:
                     1: Vou rastrear o caminho do clique no anúncio até o cliente pagante.
@@ -104,24 +93,6 @@ messages:
                     body: Issues do Zendesk, Linear e GitHub
             demo:
                 description: 'Inbox self-driving ilustrativo. Quatro relatórios de exemplo chegam um por vez, do mais novo para o mais antigo: um pedido sobre faturas vindo do GitHub, um scout de tracking de conversão com um pull request em rascunho, um problema de checkout vindo do session replay e um erro de login de alta prioridade com um pull request pronto para revisão.'
-                empty:
-                    heading: Seu inbox está vazio
-                    body: Novas descobertas vão aparecer aqui.
-                card:
-                    1:
-                        title: Facilitar o acesso às faturas
-                        body: Os clientes vivem perguntando onde baixar as faturas. Adicione um link direto na página da conta.
-                    2:
-                        title: Restaurar o tracking de conversão do checkout
-                        body: O novo checkout parou de enviar os eventos de conclusão. Restaure o tracking para o funil ficar correto.
-                        source: Tracking de conversão
-                    3:
-                        title: Explicar por que um pagamento foi recusado
-                        body: Os replays mostram clientes tentando o mesmo cartão de novo. Troque o erro genérico por uma mensagem útil.
-                    4:
-                        title: Corrigir falhas de login no mobile
-                        body: Um token expirado deixa usuários mobile numa tela em branco. Atualize a sessão antes de redirecionar.
-                timestamp: Agora mesmo
 
         3:
             heading: Prova social
