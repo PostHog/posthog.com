@@ -1,6 +1,6 @@
 import React from 'react'
 import { RoughAnnotation } from 'components/Code/RoughAnnotation'
-import { useTranslation } from '../../../i18n'
+import { useTranslation } from 'i18n'
 
 const Highlight = ({ children, delay = 0 }: { children: React.ReactNode; delay?: number }) => (
     <RoughAnnotation
