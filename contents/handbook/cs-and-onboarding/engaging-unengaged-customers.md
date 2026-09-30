@@ -48,7 +48,7 @@ Ordered roughly by how often the trigger comes up — the first few you can do f
 
 ### SDK health — flag outdated SDKs
 
-Use the SDK health check to see if the customer is running outdated SDKs. This is one of the easiest, most concrete reasons to reach out. We recommend customers update monthly so they don't miss bug fixes and improvements.
+Use the [SDK health check](/docs/health-checks/sdk-health) to see if the customer is running outdated SDKs. This is one of the easiest, most concrete reasons to reach out. We recommend customers update monthly so they don't miss bug fixes and improvements.
 
 **Suggested cadence:** Run the SDK health check on each of your accounts quarterly, or whenever a customer is ramping up usage of a specific SDK.
 
