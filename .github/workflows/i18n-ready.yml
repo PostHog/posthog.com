@@ -1,0 +1,34 @@
+name: Translation review done
+
+# A maintainer marks a translation PR "Ready for review" after a volunteer reviews it. CODEOWNERS then
+# requests a review from the website team. This workflow changes the labels and tells the Slack channel.
+# See src/i18n/README.md.
+on:
+    pull_request:
+        types: [ready_for_review]
+
+permissions:
+    contents: read
+
+jobs:
+    ready:
+        name: Hand over to the website team
+        if: startsWith(github.event.pull_request.head.ref, 'i18n/sync-') && github.event.pull_request.head.repo.full_name == github.repository
+        runs-on: ubuntu-latest
+        permissions:
+            issues: write
+            pull-requests: write
+        steps:
+            - name: Change the labels and post to Slack
+              env:
+                  GH_TOKEN: ${{ github.token }}
+                  PR_URL: ${{ github.event.pull_request.html_url }}
+                  TITLE: ${{ github.event.pull_request.title }}
+                  SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_TRANSLATION_REVIEW }}
+              run: |
+                  gh pr edit "$PR_URL" --add-label translations-reviewed
+                  gh pr edit "$PR_URL" --remove-label needs-translation-review || true
+                  if [ -n "$SLACK_WEBHOOK" ]; then
+                    jq -n --arg text "<$PR_URL|$TITLE> is ready for the website team." '{text: $text}' \
+                      | curl -sSf -X POST -H 'Content-Type: application/json' -d @- "$SLACK_WEBHOOK"
+                  fi

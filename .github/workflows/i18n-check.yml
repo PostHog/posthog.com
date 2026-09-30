@@ -1,0 +1,34 @@
+name: Translations
+
+# Validates the locale files: no keys that en.yml does not have, and the same tags and placeholders as the
+# English text. See src/i18n/README.md.
+on:
+    pull_request:
+        paths:
+            - 'src/i18n/locales/**'
+            - 'scripts/i18n-sync.ts'
+
+permissions:
+    contents: read
+
+jobs:
+    check:
+        name: Translations
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+              with:
+                  persist-credentials: false
+
+            - uses: pnpm/action-setup@c5ba7f7862a0f64c1b1a05fbac13e0b8e86ba08c # v4
+
+            - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
+              with:
+                  node-version: '22'
+                  cache: 'pnpm'
+
+            - name: Install dependencies
+              run: pnpm install --frozen-lockfile --ignore-scripts
+
+            - name: Check the locale files
+              run: pnpm i18n:sync --check

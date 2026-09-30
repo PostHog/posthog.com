@@ -5,6 +5,9 @@
 # <tag>…</tag> and <tag/> are markup that components fill in. Keep them, but move them with their words.
 # {name} is a value that components fill in. Keep it as-is.
 name: English
+# Keys that stay in English in every locale. scripts/i18n-sync.ts does not translate them.
+untranslated:
+    - taskbar.view_in_english
 messages:
     meta:
         title: PostHog - your product’s context layer
