@@ -241,7 +241,7 @@ export default function TimelineNew() {
                                 roadmaps.map((node) => (
                                     <li key={node.squeakId}>
                                         <button
-                                            className={`text-left text-sm hover:bg-accent px-2 py-1 rounded-md text-ellipsis overflow-hidden ${
+                                            className={`text-start text-sm hover:bg-accent px-2 py-1 rounded-md text-ellipsis overflow-hidden ${
                                                 node.squeakId === activeRoadmap.squeakId
                                                     ? 'md:bg-accent md:dark:bg-accent-dark md:font-bold'
                                                     : ''
@@ -267,7 +267,7 @@ export default function TimelineNew() {
                                 return (
                                     <Fragment key={index}>
                                         {isLastMonth && roadmapsGrouped[nextYear] && (
-                                            <div className="ml-1 mt-2">
+                                            <div className="ms-1 mt-2">
                                                 <CallToAction
                                                     size="sm"
                                                     type="secondary"

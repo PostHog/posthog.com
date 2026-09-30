@@ -172,7 +172,7 @@ export default function Slider() {
                         onClick={() => handleArrow(activeSlide - 1, slides.length - 1)}
                         className="relative hover:scale-[1.01] hover:top-[-1px] active:top-[.5px] active:scale-[.99] md:z-30 p-2 xl:p-6"
                     >
-                        <IconChevronDown className="w-12 h-12 rounded-sm text-secondary hover:text-primary dark:text-primary-dark/60 dark:hover:text-primary-dark/100 rotate-90 hover:bg-accent hover:backdrop-blur-sm active:backdrop-blur-sm border-transparent hover:border-r-3 hover:border" />
+                        <IconChevronDown className="w-12 h-12 rounded-sm text-secondary hover:text-primary dark:text-primary-dark/60 dark:hover:text-primary-dark/100 rotate-90 hover:bg-accent hover:backdrop-blur-sm active:backdrop-blur-sm border-transparent hover:border-e-3 hover:border" />
                     </button>
                 </div>
                 <div className="flex-1 list-none max-w-full lg:max-w-7xl xl:max-w-7xl 2xl:max-w-7xl w-full mx-auto m-0 p-0 flex flex-nowrap snap-mandatory snap-x overflow-x-auto overflow-y-hidden">
@@ -187,7 +187,7 @@ export default function Slider() {
                         onClick={() => handleArrow(activeSlide + 1, 0)}
                         className="relative hover:scale-[1.01] hover:top-[-1px] active:top-[.5px] active:scale-[.99] md:z-30 p-2 xl:p-6 box-border"
                     >
-                        <IconChevronDown className="w-12 h-12 rounded-sm text-secondary hover:text-primary dark:text-primary-dark/60 dark:hover:text-primary-dark/100 -rotate-90 hover:bg-accent hover:backdrop-blur-sm active:backdrop-blur-sm border-transparent hover:border-l-3 hover:border" />
+                        <IconChevronDown className="w-12 h-12 rounded-sm text-secondary hover:text-primary dark:text-primary-dark/60 dark:hover:text-primary-dark/100 -rotate-90 hover:bg-accent hover:backdrop-blur-sm active:backdrop-blur-sm border-transparent hover:border-s-3 hover:border" />
                     </button>
                 </div>
             </div>
