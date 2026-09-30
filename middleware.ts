@@ -41,12 +41,25 @@ export const config = {
  * The Edge runtime cannot read the YAML in src/i18n/locales, so the codes are listed here too.
  * middleware.test.ts fails when this list and the YAML files disagree.
  */
-export const TRANSLATED_LOCALES = ['pt', 'de', 'es', 'fr', 'it', 'ja', 'ko', 'pl', 'tr']
+export const TRANSLATED_LOCALES = ['pt', 'de', 'es', 'fr', 'it', 'ja', 'ko', 'pl', 'tr', 'zh']
 
 /** A language subtag, then an optional region or script subtag: /pt-BR, /pt_br, /PT, /zh-Hant, /es-419. */
 const LOCALE_PATH_REGEX = /^\/([a-z]{2})(?:[-_][a-z0-9]{2,4})?$/i
 
 const SKIP_TRANSLATION_COOKIE_REGEX = new RegExp(`(?:^|;\\s*)${SKIP_TRANSLATION_COOKIE}=`)
+
+const TRADITIONAL_CHINESE = ['hant', 'tw', 'hk', 'mo']
+
+/**
+ * The page for a language tag, or undefined when there is none. /zh is Simplified Chinese, so a
+ * Traditional Chinese tag (zh-TW, zh-HK, zh-MO, zh-Hant) gets English rather than the wrong script.
+ */
+function translatedLocale(tag: string): string | undefined {
+    const [language, ...subtags] = tag.toLowerCase().split(/[-_]/)
+    const traditionalChinese =
+        language === 'zh' && !subtags.includes('hans') && subtags.some((subtag) => TRADITIONAL_CHINESE.includes(subtag))
+    return TRANSLATED_LOCALES.includes(language) && !traditionalChinese ? language : undefined
+}
 
 /** The translated locale the visitor ranks highest, or undefined when English ranks higher or none match. */
 export function preferredLocale(acceptLanguage: string): string | undefined {
@@ -55,21 +68,22 @@ export function preferredLocale(acceptLanguage: string): string | undefined {
         .map((entry) => {
             const [tag, ...params] = entry.trim().split(';')
             const q = params.map((param) => param.trim()).find((param) => param.startsWith('q='))
-            return { language: tag.split('-')[0].toLowerCase(), q: q ? Number(q.slice(2)) : 1 }
+            return { tag, language: tag.split('-')[0].toLowerCase(), q: q ? Number(q.slice(2)) : 1 }
         })
         .filter(({ q }) => q > 0)
         .sort((a, b) => b.q - a.q)
 
-    for (const { language } of ranked) {
+    for (const { tag, language } of ranked) {
         if (language === 'en') return
-        if (TRANSLATED_LOCALES.includes(language)) return language
+        const locale = translatedLocale(tag)
+        if (locale) return locale
     }
 }
 
 /** Sends a locale-shaped path to the translated page for its language: /pt-BR -> /pt. */
 function localePathRedirect(pathname: string, search: string): Response | undefined {
-    const language = pathname.match(LOCALE_PATH_REGEX)?.[1].toLowerCase()
-    if (!language || !TRANSLATED_LOCALES.includes(language) || pathname === `/${language}`) return
+    const language = translatedLocale(pathname.slice(1))
+    if (!language || !LOCALE_PATH_REGEX.test(pathname) || pathname === `/${language}`) return
 
     return new Response(null, { status: 301, headers: { location: `/${language}${search}` } })
 }
