@@ -1,10 +1,15 @@
 # The source of truth for every translatable string. Other locale files use the same keys, and any key
 # they leave out falls back to the English text here. See src/i18n/README.md.
+#
+# Keys follow the home page translation spec. Keep product names, brand names, code, and URLs in English.
+# <tag>…</tag> and <tag/> are markup that components fill in. Keep them, but move them with their words.
+# {name} is a value that components fill in. Keep it as-is.
 name: English
 messages:
     meta:
         title: PostHog - your product’s context layer
         description: PostHog automatically diagnoses problems, fixes bugs, and generates pull requests – all without you having to prompt it.
+
     hero:
         H1: Your product's <emphasis>context layer</emphasis>
         body:
@@ -21,5 +26,286 @@ messages:
                 2:
                     label: Install with AI
                     body: 'Happier in the terminal? Skip the browser:'
+
+    section:
+        2a:
+            toggle: Ask PostHog anything
+            heading: Ask PostHog anything
+            body:
+                1: PostHog is the single place to ingest, store, and query your product and company data. Analytics, replays, errors, and logs, stitched together on-the-fly to answer any question you have.
+                2: Pipe in third party data from <link>{count}+ sources</link> for a more complete picture.
+            button: Get started - free
+            products:
+                more: and more
+                caption: Product Analytics, Session Replay, Error Tracking, Feature Flags, Experiments, Managed warehouse flow into your agents.
+            demo:
+                prompt: Why are signups growing, but paid conversions falling?
+                reply:
+                    1: I'll trace the path from ad click to paying customer.
+                    2: The drop starts before payment.
+                    3: A new required field is losing customers at mobile checkout.
+                    4: Test a shorter mobile checkout.
+                step:
+                    1:
+                        body: Compare campaign traffic
+                    2:
+                        body: Analyze the signup → payment funnel
+                    3:
+                        body: Check payments and declines
+                    4:
+                        body: Review recent checkout changes
+
+        2b:
+            toggle: Give agents product context
+            heading: Give agents product context
+            body: Query product data from your editor instead of context-switching to a browser. Do everything from one-off analytics to launching new features - no new UI needed.
+            cta:
+                label: Install the PostHog MCP
+                alt: Or use <link>PostHog Desktop</link>
+
+        2c:
+            toggle: Ship with PostHog
+            heading: Ship with PostHog
+            body: Your Inbox clusters related findings into researched reports, ranked by priority. Review proposed improvements and pull requests, then decide what ships.
+            button: Get started - free
+            signals:
+                heading: 'Self-driving pulls signals from:'
+                1:
+                    body: Exceptions and stack traces grouped into issues
+                2:
+                    body: Dead clicks, quick backs, long stalls
+                3:
+                    title: Support
+                    body: Tickets and conversations from your users
+                4:
+                    title: External tools
+                    body: Zendesk, Linear, GitHub issues
+            demo:
+                empty:
+                    heading: Your inbox is clear
+                    body: New findings will appear here.
+                card:
+                    1:
+                        title: Make invoices easier to find
+                        body: Customers keep asking where to download invoices. Add a direct link from their account page.
+                    2:
+                        title: Restore checkout conversion tracking
+                        body: The new checkout stopped sending completion events. Restore tracking so the funnel is accurate.
+                        source: Conversion tracking
+                    3:
+                        title: Explain why a payment was declined
+                        body: Replays show customers retrying the same card. Replace the generic error with a useful message.
+                    4:
+                        title: Fix sign-in failures on mobile
+                        body: An expired token leaves mobile users on a blank screen. Refresh the session before redirecting.
+                timestamp: Just now
+
+        3:
+            heading: Social proof
+            body: Yes they actually use us, no it's not just some random engineer who tried us out 2+ years ago.
+            button: Open Customers
+
+        4:
+            heading: All your data, <highlight>working together</highlight>
+            list:
+                heading: 'Built-in, the context warehouse <highlight>ships</highlight> with:'
+                1: A data warehouse <tooltip/>
+                2: 120+ sources/destinations
+                3: SQL editor + BI + data viz
+                4: User activity feed (CDP-lite)
+                5: API, webhooks
+            # Markdown. Keep the formatting.
+            body:
+                1: Whether you're analyzing customer usage or directing AI, you should be operating with the *full* context.
+                2: "Combine everything in PostHog's context warehouse so that you, your agents, and your dashboard can query it directly. That includes:"
+                list:
+                    1: Data from 120+ external sources like Stripe, Postgres, and HubSpot
+                    2: Insights from every other PostHog tool like Session Replays and Experiments
+                3: The data your agents need to make good decisions is already here. Ready to turn "tell me what happened" into "here's what to fix next."
+            button: Connect your first data source
+
+        5:
+            heading: Usage-based pricing
+            # Markdown. Keep the formatting.
+            body:
+                1: Our whole philosophy is that you shouldn't have to worry about pricing.
+                2: All our paid products are pay-per-use with generous monthly free tiers. In fact, 98% of our customers use PostHog for free.
+                3: We aim to match the cheapest option at scale – PostHog should be a no-brainer. You never have to "jump on a quick call" with sales.
+                4: 'Here are some examples of how we charge for most popular products:'
+            label:
+                freetier: Free tier
+                pricing: Pricing
+            product:
+                1:
+                    freetier: 1 million events/mo
+                    pricing: $0.00005/event
+                2:
+                    freetier: 5,000 recordings/mo
+                    pricing: $0.005/recording
+                3:
+                    freetier: 1 million requests/mo
+                    pricing: $0.0001/request
+                4:
+                    freetier: 1 million rows/mo
+                    pricing: $0.000015/row
+            button: Explore pricing
+
+        6:
+            heading: Why PostHog?
+            body: "We're different from most companies for a bunch of reasons:"
+            list:
+                # Markdown. Keep the links.
+                1: '**Transparency.** You can read our [company handbook](/handbook), our [sales manual](/handbook/growth/sales/overview), and [company strategy](/handbook/why-does-posthog-exist).'
+                2: '**We ship fast.** See our [changelog](/changelog).'
+                3: <emphasis>Actually</emphasis><bold>-technical support.</bold> Our <team>support folks</team> all have engineering backgrounds.
+            button: Read more about us
+
+        7:
+            heading: Bedtime reading
+            body: "Still here? We've got some links that may be mildly interesting to you:"
+            link:
+                2: Technical docs
+                3: API
+                4: Ask a question
+                5: Small teams at PostHog
+
+        8:
+            heading: Shameless CTA
+            body: If nothing else has sold you on PostHog, hopefully these classic marketing tactics will.
+            box:
+                badge: Eco-friendly
+                subtitle: Digital download*
+            sticker:
+                1: People on G2 think we're great
+                2: Not endorsed by Kim K
+            footnote: '*PostHog is a web product and cannot be installed by CD. We <emphasis>did</emphasis> once send some customers a floppy disk but it was a Rickroll.'
+            cloud:
+                heading: Select your cloud
+                option:
+                    1: US (Virginia)
+                    2: EU (Frankfurt)
+            price:
+                label: 'Starts at:'
+                old: $0
+                new: Free
+                urgency: '>1 left at this price!!'
+            button: Get started
+            urgency:
+                # {companies} is today's signup count, or `fallback` when it is not loaded yet.
+                label: '<bold>Hurry:</bold> {companies} companies signed up today. Act now and get $0 off your first order.'
+                fallback: Tons of
+
+    cookie:
+        heading: Legally-required cookie banner
+        body:
+            1: PostHog.com doesn't use third-party cookies, only a single in-house cookie.
+            2: No data is sent to a third party. (<tooltip>Ursula von der Leyen</tooltip> would be so proud.)
+        tooltip:
+            label: Ursula von der Leyen is the President of the European Commission – NOT to be confused with Hillary Clinton.
+            image:
+                alt: Ursula von der Leyen, President of the European Commission
+
+    # The top bar. Product names in the menus stay in English and have no key.
     taskbar:
         view_in_english: View in English
+        get_started: Get started – free
+        open_posthog: Open PostHog
+        search: Search
+        ask_max: Ask Max
+        menu:
+            products: Products
+            pricing: Pricing
+            docs: Docs
+            community: Community
+            company: Company
+            more: More
+            less: Less
+        logo:
+            home: Home
+            about: About PostHog
+            display_options: Display options
+        docs:
+            overview: Overview
+            get_started: Get started
+            install: Install PostHog
+            sdks: SDKs & frameworks
+            products: Products
+            tools: Tools
+            analytics: Analytics
+            more_tools: More tools
+            application_metrics: Application metrics
+            distributed_tracing: Distributed tracing
+            context: Context
+            reference: Reference
+            new_to_posthog: New to PostHog
+            ai_engineering: AI engineering
+            toolbar: Toolbar & features
+            self_host: Self-host & deploy
+            billing: Billing
+            privacy: Privacy & GDPR
+            how_posthog_works: How PostHog works
+            glossary: Glossary
+            explore_twig: Explore Twig
+            pocket_guides: Pocket guides
+            tutorials: Tutorials
+            templates: Templates
+        community:
+            newsletter: Newsletter
+            blog: Blog
+            founders_hub: Founders hub
+            compare: Compare
+            forums: Forums
+            startups: Startups
+            merch_store: Merch store
+            events: Events
+            students: Students
+            incubator: Incubator
+            cool_tech_jobs: Cool tech jobs
+            places: Places
+        company:
+            about: About
+            customers: Customers
+            handbook: Handbook
+            roadmap: Roadmap
+            changelog: Changelog
+            media: Media
+            people: People
+            small_teams: Small teams
+            careers: Careers
+            side_projects: Side projects
+            partnerships: Partnerships
+        more:
+            sparks_joy: Things that spark joy
+            services: Services
+            display_options: Display options
+            system_status: System status
+            terms: Terms
+            privacy: Privacy
+            dpa: DPA generator (it's fun!)
+            baa: BAA generator (less fun)
+            subprocessors: Subprocessors
+            enterprise: Enterprise
+        account:
+            go_to: Go to...
+            posthog_app: PostHog app
+            community: Community
+            forums: Forums
+            notifications: Notifications
+            my_profile: My profile
+            bookmarks: Bookmarks
+            sign_in: Sign in to the community
+            logout: Community logout
+
+    # Icons on the desktop. "Self-driving product" and "Context warehouse" are product names and have no key.
+    desktop:
+        home: Home
+        pricing: Pricing
+        docs: Docs
+        demo: Demo
+        talk_to_a_human: Talk to a human
+        about_us: About us
+        changelog: Changelog
+        company_handbook: Company handbook
+        store: Store
+        careers: Careers
+        trash: Trash
