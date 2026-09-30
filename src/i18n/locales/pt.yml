@@ -374,3 +374,8 @@ messages:
         store: Loja
         careers: Careers
         trash: Lixeira
+
+    toast:
+        english_only:
+            title: Você saiu das páginas traduzidas
+            description: O resto do site tá em inglês, por enquanto.

@@ -14,6 +14,8 @@ export interface Toast {
     actionAsIcon?: React.ReactNode
     duration?: number
     image?: React.ReactNode
+    // For a toast in another language than the page, e.g. a German toast on an English page.
+    lang?: string
 }
 
 interface ToastContext {
