@@ -267,7 +267,7 @@ messages:
             1: PostHog.com não usa cookies de terceiros, só um único cookie próprio.
             2: Nenhum dado é enviado pra terceiros. (A <tooltip>Ursula von der Leyen</tooltip> e a LGPD ficariam tão orgulhosas.)
         tooltip:
-            label: Ursula von der Leyen é a presidente da Comissão Europeia. NÃO confunda com a Hillary Clinton, por favor.
+            label: Ursula von der Leyen é a presidente da Comissão Europeia. NÃO confunda com a Hebe, por favor. Que gracinha.
             image:
                 alt: Ursula von der Leyen, presidente da Comissão Europeia
         close: Fechar
