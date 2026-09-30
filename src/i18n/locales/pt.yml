@@ -3,19 +3,22 @@ name: Português (Brasil)
 # The BCP 47 tag for <html lang> and hreflang. The URL stays /pt.
 lang: pt-BR
 messages:
-    home:
-        seo:
-            title: PostHog - a camada de contexto do seu produto
-            description: O PostHog diagnostica problemas, corrige bugs e gera pull requests automaticamente, sem que você precise pedir.
-        hero:
-            headline: A <emphasis>camada de contexto</emphasis> do seu produto
-            body: O PostHog coleta e armazena seus <highlight>analytics, erros, replays e dados de negócio</highlight> para que você e seus <underline>agentes</underline> possam consultá-los e agir a partir deles.
-            social_proof: Junte-se a mais de 500.000 equipes que já lançam produtos com o PostHog.
+    meta:
+        title: PostHog - a camada de contexto do seu produto
+        description: O PostHog diagnostica problemas, corrige bugs e gera pull requests automaticamente, sem que você precise pedir.
+    hero:
+        H1: A <emphasis>camada de contexto</emphasis> do seu produto
+        body:
+            1: O PostHog coleta e armazena seus <highlight>analytics, erros, replays e dados de negócio</highlight> para que você e seus <underline>agentes</underline> possam consultá-los e agir a partir deles.
+            2: Junte-se a mais de 500.000 equipes que já lançam produtos com o PostHog.
         cta:
-            title: Configure o <logo/> <highlight>de graça</highlight>
-            pays_zero: 97% dos usuários não pagam nada
-            no_card: Sem cartão de crédito
-            wizard: O assistente de configuração instala o PostHog para você
-            get_started: Começar
-            install_with_ai: Instalar com IA
-            terminal: 'Prefere o terminal? Pule o navegador:'
+            heading: Configure o <logo/> <highlight>de graça</highlight>
+            body:
+                1: 97% dos usuários não pagam nada
+                2: Sem cartão de crédito
+                3: O assistente de configuração instala o PostHog para você
+            button:
+                1: Começar
+                2:
+                    label: Instalar com IA
+                    body: 'Prefere o terminal? Pule o navegador:'

@@ -9,7 +9,7 @@ export const HeroHeadline = ({ className }: { className?: string }): JSX.Element
 
     return (
         <h1 className={cn('!text-3xl @xl:!text-4xl mt-0', className)}>
-            {rich('home.hero.headline', {
+            {rich('hero.H1', {
                 emphasis: (text) => (
                     <span className="bg-blue/10 dark:bg-blue/20 text-blue rounded-md px-1 @xl:whitespace-nowrap">
                         {text}
@@ -26,7 +26,7 @@ export const HeroBody = (): JSX.Element => {
     return (
         <>
             <HeroBodyCopy />
-            <p className="text-balance @xl:text-wrap text-secondary">{t('home.hero.social_proof')}</p>
+            <p className="text-balance @xl:text-wrap text-secondary">{t('hero.body.2')}</p>
         </>
     )
 }
