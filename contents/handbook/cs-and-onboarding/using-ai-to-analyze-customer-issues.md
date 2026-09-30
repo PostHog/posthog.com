@@ -38,11 +38,50 @@ Default to a concise summary; share the full file only when the customer specifi
 
 ## Keep your setup current with each new model
 
-Model behavior shifts with every release. Prompts, skills, hooks, and `CLAUDE.md` or `AGENTS.md` files written for the last model can quietly work against the next one. An instruction that used to help, like "think carefully", can become redundant or pull the model the wrong way.
+Model behavior shifts with every release. Prompts, skills, hooks, and `CLAUDE.md` or `AGENTS.md` files written for the last model can quietly work against the next one.
 
-When a new model ships, look for the provider's prompting guide. Anthropic and OpenAI both publish them, for example [Getting the most out of Opus 5.5](https://claude.dev/blog/getting-the-most-out-of-opus-5-5/) and [Rethinking skills and prompts for GPT-6 Astra](https://developers.openai.com/blog/rethinking-skills-and-prompts-for-gpt-6-astra).
+### Why it matters for customer work
+
+A stale setup rarely fails loudly. The output still looks confident and well formatted, so you don't see the problem. [Getting the most out of Opus 5.5](https://claude.dev/blog/getting-the-most-out-of-opus-5-5/) gives some examples:
+
+- A "think carefully" line is no longer needed. The model decides how much to think, and the extra line only makes replies start later.
+- Without a rule about when to continue and when to ask, the model can stop partway through a long task to report back.
+- A vague instruction, like "avoid a generic look", mostly swaps one default for another.
+
+In an investigation, this means slower answers, investigations that stop early, and output that follows your old instructions instead of the task. You then have more to verify before anything reaches the customer, and a weak hypothesis is easier to mistake for a finding.
+
+### Where to find model updates
+
+Anthropic and OpenAI publish a prompting guide with each new model, for example the Opus 5.5 guide above and [Rethinking skills and prompts for GPT-6 Astra](https://developers.openai.com/blog/rethinking-skills-and-prompts-for-gpt-6-astra). Subscribe to these feeds so that you see them when they ship:
+
+| Source | What it covers | Feed |
+| --- | --- | --- |
+| [claude.dev Blog](https://claude.dev/blog/) | Claude prompting guides and Claude Code usage | `https://claude.dev/rss.xml` |
+| [OpenAI Developers Blog](https://developers.openai.com/blog) | OpenAI prompting guides and Codex usage | `https://developers.openai.com/rss.xml` |
+| [OpenAI News](https://openai.com/news/) | OpenAI model launches | `https://openai.com/news/rss.xml` |
+| [Claude Code releases](https://github.com/anthropics/claude-code/releases) | Claude Code changes | `https://github.com/anthropics/claude-code/releases.atom` |
+| [Codex releases](https://github.com/openai/codex/releases) | Codex changes | `https://github.com/openai/codex/releases.atom` |
+
+Also check [Anthropic News](https://www.anthropic.com/news) and the [Claude release notes](https://platform.claude.com/docs/en/release-notes/overview) when a new Claude model ships.
+
+To get the feeds in Slack, add the [RSS app](https://slack.com/help/articles/218688467-Add-RSS-feeds-to-Slack) to a channel that you read every day, such as your own channel, then add each feed URL. To see what other people at PostHog find with a new model, read #dev-ai.
+
+### Update your setup
 
 You don't need to do the audit by hand. Give the model the guide's link and ask it to audit your prompts, skills, and hooks against it. It can make most of the updates itself, or come back with a list of findings for you to review first. Either way, the audit is AI output: read the diff or the findings before you keep them.
+
+## Match the effort to the task
+
+Effort sets how much work the model does on a task: how much it thinks, how far it goes on its own judgment, and how much it verifies and tests edge cases. Higher effort takes longer and uses more tokens. Set it with `/effort` in Claude Code, in the [model picker](/docs/posthog-desktop/use-any-model-and-harness#set-reasoning-effort) in PostHog Desktop, or in your message to the [PostHog Slack app](/docs/slack) ("do this with high effort").
+
+[Spending your effort](https://claude.dev/blog/spending-your-effort/) tests each level. For customer work:
+
+- **Low:** fast work where you stay in the loop. Draft a reply, brainstorm, or get a first read of a ticket.
+- **Medium:** most everyday tasks.
+- **High:** investigate a customer issue. At high effort, the model is more likely to reproduce the problem, cross-check results, and test edge cases before it answers.
+- **Max:** long, hard work that runs on its own. On a small task, max can spend a long time exploring for little gain.
+
+Higher effort does not make the output verified. It helps the model find edge cases it would otherwise miss, but it does not correct a wrong approach. In Anthropic's tests, more tasks passed at higher effort, but "picked the wrong reading" failures also went up. At higher effort, the model also makes more decisions for you instead of asking. High-effort output is a better hypothesis, not a confirmed one.
 
 ## Do and don't
 
@@ -50,6 +89,7 @@ You don't need to do the audit by hand. Give the model the guide's link and ask 
 - **Do** label machine-generated content clearly in shared notes and tickets.
 - **Do** send customers a concise summary of verified facts.
 - **Do** give the model the provider's prompting guide when a new model ships, and have it audit your prompts, skills, and hooks against it. Let it make the updates, or ask for a list of findings to review first.
+- **Do** use high effort to investigate a customer issue, and low effort for drafts. Verify the output the same way at every level.
 - **Don't** paste a confident AI summary into a ticket as if it were confirmed analysis.
 - **Don't** forward raw AI analysis files to customers by default. Distill first.
 - **Don't** put identifiable customer data into AI tools without applying our [data-sensitivity rules](/handbook/company/security#impersonating-users).
