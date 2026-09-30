@@ -16,7 +16,7 @@
 #   term ("dead clicks", not "deadclicks"). Do not force a Portuguese word that nobody uses ("assistente de
 #   configuração", "opções de exibição"). "time" is better than "equipe".
 # - Localize the jokes. Replace a US reference with a Brazilian one that lands the same way: Kim K -> Virgínia,
-#   a 007 villain -> Carminha, "hop on a quick call" -> "ligar pro 0800". Brazilian slang and memes are welcome
+#   a Bond villain -> "vilão de novela das nove", "hop on a quick call" -> "ligar pro 0800". Brazilian slang and memes are welcome
 #   ("raaa", "boomer", "gringos", "quentinho no coração").
 # - Real prices stay in US$, because that is what PostHog bills. Joke amounts such as "R$ 0 de desconto" use R$.
 # - Cut words the sentence does not need. Portuguese runs longer than English, and the layout was made for English.
@@ -142,8 +142,8 @@ messages:
                     col1: Bons nomes pra uma banda
                     col2: Podia ser nome de remédio
                 explainable:
-                    col1: Empresa de boomer
-                    col2: Empresas que seus pais nunca vão entender
+                    col1: Dá pra explicar pra sua mãe
+                    col2: Sua mãe acha que é golpe
                 shortNames:
                     col1: Nomes com 7 letras ou menos
                     col2: Nomes fáceis de digitar errado
@@ -155,7 +155,7 @@ messages:
                     col2: Não fundadas nos EUA
                 pokemon:
                     col1: Podia ser um Pokémon
-                    col2: Podia ser um vilão junto com a Carminha
+                    col2: Podia ser vilão de novela das nove
                 arr:
                     col1: Medido em ARR
                     col2: Medido em PIB
