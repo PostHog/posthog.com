@@ -18,13 +18,15 @@ seo:
     context, where collaboration actually happens, and how teams scope work.
 ---
 
+[![Ethan Mollick on X: "Multiplayer AI, where many people in an organization can use AI together to accomplish goals, remains one of the biggest (non-technical) problems in using AI right now. Approaches tend to be pretty primitive and based around AI-as-a-person-in-your-group-chat. That is limiting."](https://res.cloudinary.com/dmukukwp6/image/upload/ethan_mollick_ee051b668e.png)](https://x.com/emollick/status/2095585825949946273)
+
 When people imagine multiplayer AI, they usually think of products like [Claude Tag](https://www.anthropic.com/news/introducing-claude-tag) or [PostHog in Slack](/slack).
 
 These are fine for simple tasks, like fixing minor bugs and querying data, but most work happens *outside* Slack across dozens of apps in messy, nonlinear processes.
 
 This creates a UI bottleneck that forces people to translate rich information into flat text, only to be transformed back into the original shape by agents at the end of the funnel.
 
-![PLACEHOLDER: Diagram of Jina, Ian, and Andy feeding into a Slack window, then an agent, then GitHub – the Slack UI becomes an information bottleneck for multiplayer AI collaboration](PLACEHOLDER)
+![The Slack UI becomes an information bottleneck for multiplayer AI collaboration](https://res.cloudinary.com/dmukukwp6/image/upload/slack_bottleneck_d76d5a5563.png)
 
 We wanted to build a collaboration tool that’s designed for agents from the start, so we’ve been exploring alternatives beyond Slack for multiplayer AI these last few months.
 
@@ -36,11 +38,11 @@ Context is important for any AI system, but the key word in multiplayer is *shar
 
 Say two teammates attend the same meeting but write down slightly different definitions of a goal metric. Their context now differs, which means their work may diverge without them even knowing. With agents, these minor differences can compound into completely different realities at scale.
 
-![PLACEHOLDER: Diagram of Person A's and Person B's context producing slightly different hedgehogs that diverge further – siloed context leads to diverging results that compound at scale](PLACEHOLDER)
+![Siloed context leads to diverging results that compound at scale](https://res.cloudinary.com/dmukukwp6/image/upload/siloed_context_bbc8e7d8db.png)
 
 A shared context system reduces that risk by being a source of truth. This also decreases the friction of information handoff, since teammates can just check a shared resource instead of asking and waiting on each other.
 
-![PLACEHOLDER: Diagram of one shared context producing two matching hedgehogs – shared context creates a shared reality that keeps everyone aligned](PLACEHOLDER)
+![Shared context creates a shared reality that keeps everyone aligned](https://res.cloudinary.com/dmukukwp6/image/upload/shared_context_9fbf1c1a20.png)
 
 There’s no reason to *not* have a shared context system since it can be as simple as a team Notion page connected via MCP. The real challenges are in keeping it up to date, trustworthy, and complete.
 
@@ -56,7 +58,7 @@ We’ve since been exploring automatic context maintenance for Spaces through an
 
 This is similar to what others might describe as an implicit knowledge layer, or company brain. The actual work objects like docs, PRs, and tickets live elsewhere; the context layer just looks at them to extract information:
 
-![PLACEHOLDER: Diagram of a merged PR, an updated handbook doc, and a new dashboard flowing into a context layer cloud – a context layer extracts the state of the company by watching what work was actually completed every day](PLACEHOLDER)
+![A context layer extracts the state of the company by watching what work was actually completed every day](https://res.cloudinary.com/dmukukwp6/image/upload/context_layer_ce1e8797fa.png)
 
 A key part of the design is that it only looks at what was actually shipped, merged, or decided in a day. If the context layer were to observe items like meeting notes or brainstorming docs, it would likely hallucinate and misrepresent reality and defeat the purpose of being a source of truth.
 
@@ -96,7 +98,7 @@ Most people think of artifacts as just another way for agents to display their a
 
 For example, Shy has been rearchitecting some features within Spaces. Instead of sharing his brainstorming session transcripts, he generated this artifact that summarizes only the relevant pieces that he wanted his teammates to comment on:
 
-![PLACEHOLDER: Screenshot of an artifact titled "One edit, end to end" showing Client A, API, Postgres, Redis stream, and Client B with optimistic, append, publish, and fan out steps](PLACEHOLDER)
+![Artifact showing one edit end to end, from Client A through the API, Postgres, and a Redis stream to Client B](https://res.cloudinary.com/dmukukwp6/image/upload/shy_artifact_5d6f23359b.png)
 
 <Caption>A screenshot of an artifact Shy generated to capture his architecture redesign.</Caption>
 
@@ -104,7 +106,7 @@ The obvious benefit is that it’s easier to read than a giant wall of text. But
 
 This concept is the backbone of [Linear](https://linear.app), [Asana](https://asana.com), and many other [software factory](/newsletter/software-factories) approaches. Persistent objects like tickets and specs hold context so that any agent (or human!) can pick up wherever the work has been left off – anywhere, any time – for future sessions and cycles:
 
-![PLACEHOLDER: Loop diagram – a session produces an artifact, and the artifact becomes context for the next session](PLACEHOLDER)
+![A session produces an artifact, and the artifact becomes context for the next session](https://res.cloudinary.com/dmukukwp6/image/upload/artifact_f81d563826.png)
 
 We want to take that session-artifact feedback loop to the next level by turning them into real-time experiences. You can think of it like Figma, but every change a human makes also gets recorded as code. That way, agents can easily consume and work with the same object, making a truly multiplayer experience where every actor is speaking in the same language.
 
@@ -126,7 +128,7 @@ Still, our dogfooding at least helped us identify how and why people set up diff
 
 The first was expected. Most teams set up a Space for their team, which ends up looking a lot like our Slack channel directory:
 
-![PLACEHOLDER: Side-by-side list of team Spaces in PostHog Desktop and team channels in Slack, such as team-ai-gateway, team-error-tracking, and team-replay](PLACEHOLDER)
+![Team Spaces in PostHog Desktop next to team channels in Slack](https://res.cloudinary.com/dmukukwp6/image/upload/team_directory_e2ad343b9a.png)
 
 But then people started creating Spaces based on criteria like product areas, specific incidents, or task types. For example, [Adam Bowker](/community/profiles/38198) cycles frequently between `#posthog-desktop` and a sub-team project called `#desktop-onboarding`, as well as `#builder-relations` to look at feedback from our Discord.
 
@@ -140,13 +142,13 @@ We were also wrong about how people would use public vs. private sessions. We th
 
 Maybe this is just because we all got used to talking to agents informally and asking them dumb questions.
 
-![PLACEHOLDER: Slack message from Matt Pua joking that coworkers would question why he was hired if they saw his agent chats](PLACEHOLDER)
+![Slack message from Matt Pua about how informally he talks to agents](https://res.cloudinary.com/dmukukwp6/image/upload/matt_message_bf94f8b58c.png)
 
 There’s still a lot left to learn about multiplayer scopes, but the hypothesis we’re landing on is that groups form around shared work and shared context – and those usually come from a shared goal.
 
 To experiment with this, we just shipped some simple UI changes that make it easier for users to tell us about those goals. For example, they can select that the goal for the Space is to move a metric and, if so, we ask them about their targets, measurement intervals, and deadlines:
 
-![PLACEHOLDER: "What is this space for?" setup form with a goal selected, a goal field, a target per month, and a deadline](PLACEHOLDER)
+![The "What is this space for?" form with a goal, a target, and a deadline](https://res.cloudinary.com/dmukukwp6/image/upload/create_space_a0a2c17b71.png)
 
 <Caption>We now ask users about their goals when they create a new Space.</Caption>
 
