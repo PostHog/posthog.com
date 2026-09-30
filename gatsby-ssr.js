@@ -11,6 +11,7 @@ import { initKea, wrapElement } from './kea'
 import { UserProvider } from './src/hooks/useUser'
 import Wrapper from './src/components/Wrapper'
 import { Provider } from './src/context/App'
+import { I18nProvider } from './src/i18n'
 import { Provider as ToastProvider } from './src/context/Toast'
 
 export const wrapRootElement = ({ element }) => (
@@ -19,11 +20,14 @@ export const wrapRootElement = ({ element }) => (
     </ToastProvider>
 )
 
-export const wrapPageElement = ({ element, props: { location } }) => {
+export const wrapPageElement = ({ element, props: { location, pageContext } }) => {
     initKea(true, location)
     return (
         <Provider element={element} location={location}>
-            <Wrapper />
+            {/* The taskbar and desktop follow the current page. Each window sets its own locale. */}
+            <I18nProvider pageContext={pageContext}>
+                <Wrapper />
+            </I18nProvider>
         </Provider>
     )
 }
