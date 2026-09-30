@@ -204,6 +204,7 @@ messages:
             label: Ursula von der Leyen is the President of the European Commission – NOT to be confused with Hillary Clinton.
             image:
                 alt: Ursula von der Leyen, President of the European Commission
+        close: Close
 
     # The top bar. Product names in the menus stay in English and have no key.
     taskbar:
