@@ -48,7 +48,9 @@ PostHog builds and hosts both models. They run on PostHog's own servers in the s
 ## Limits
 
 - Use the function as a named column in a `SELECT`. To filter or sort on its result, wrap it in a subquery and filter in the outer query.
-- Each query can evaluate a limited number of rows. If a query goes over the limit, the error tells you the current limit. Add a `LIMIT` to stay under it. A `SELECT` without a `LIMIT` reserves the maximum number of rows for each AI column.
+- Each query has two limits, and the error tells you the current value of whichever one you hit:
+    - **Rows:** the number of rows a `SELECT` can send to an AI function. Add a `LIMIT` to stay under it.
+    - **Evaluations:** the total across the whole query. Each AI column on each row counts as one, so two AI columns over 500 rows use 1,000 evaluations. A `SELECT` without a `LIMIT` reserves the full row limit for each AI column, so add a `LIMIT` when you use more than one.
 - Each input can be up to 8 KiB of text. Convert other types with `toString()`. Empty (`NULL`) inputs are skipped.
 - Identical inputs with the same question are only evaluated once per query.
 
