@@ -3,6 +3,7 @@ import React from 'react'
 type JobOgProps = {
     role: string
     timezone?: string
+    salary?: string
 }
 
 const metaStyle = {
@@ -12,7 +13,7 @@ const metaStyle = {
     lineHeight: '64px',
 }
 
-export const JobOg = ({ role, timezone }: JobOgProps) => (
+export const JobOg = ({ role, timezone, salary }: JobOgProps) => (
     <div
         style={{
             width: 1200,
@@ -58,6 +59,9 @@ export const JobOg = ({ role, timezone }: JobOgProps) => (
                 >
                     {role}
                 </h2>
+                {salary ? (
+                    <div style={{ fontSize: 36, fontWeight: 600, lineHeight: '48px', marginTop: 16 }}>{salary}</div>
+                ) : null}
             </div>
             <div style={{ marginBottom: 41 }}>
                 <div style={{ display: 'flex', alignItems: 'center' }}>
