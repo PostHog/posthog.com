@@ -11,18 +11,16 @@ test('Product Analytics is the next volume and is configured to count both orien
 
     assert.equal(volume?.volume, 5)
     assert.equal(volume?.countOrientationPages, true)
-    assert.equal(volume?.learnPath, '/docs/product-analytics/learn/introduction')
+    assert.equal(volume?.learnPath, '/docs/product-analytics/learn')
 })
 
-test('Product Analytics Pocket Guide roots redirect to the Introduction before the chapter splat', () => {
+test('Product Analytics keeps the standalone reader separate from its learning hub', () => {
     const redirects = vercelConfig.redirects as Array<{ source: string; destination: string }>
     const currentRoot = redirects.findIndex(({ source }) => source === '/pocket-guides/product-analytics')
     const chapterSplat = redirects.findIndex(({ source }) => source === '/pocket-guides/product-analytics/:path*')
 
-    assert.notEqual(currentRoot, -1)
-    assert.notEqual(chapterSplat, -1)
-    assert.ok(currentRoot < chapterSplat)
-    assert.equal(redirects[currentRoot].destination, '/docs/product-analytics/learn/introduction')
+    assert.equal(currentRoot, -1, 'The book introduction must not redirect into Learn')
+    assert.equal(chapterSplat, -1, 'Book chapters must remain in the reader')
     assert.equal(
         redirects.some(({ source }) => source.startsWith('/pocket-guides/posthog')),
         false,

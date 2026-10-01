@@ -4,7 +4,6 @@ import Term from './terms'
 import LessonFooter from './LessonFooter'
 import TwigFilterFigure from './TwigFilterFigure'
 import TwigEventFigure from './TwigEventFigure'
-import TwigIntroductionFigure from './TwigIntroductionFigure'
 import { AutocaptureFigure, FilterPropertiesFigure, DestinationChartFigure } from './ProductAnalyticsExhibits'
 
 import Action, { Setup } from './Action'
@@ -50,7 +49,6 @@ export const bookMdxComponents = {
     Fig,
     TwigFilterFigure,
     TwigEventFigure,
-    TwigIntroductionFigure,
     AutocaptureFigure,
     FilterPropertiesFigure,
     DestinationChartFigure,

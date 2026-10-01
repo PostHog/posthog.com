@@ -28,7 +28,7 @@ export default function TwigBrowseFigure({
     const [search, setSearch] = useState('')
     const selectedSetting = controlledSetting ?? setting
     return (
-        <div className="twig-browser overflow-hidden rounded border border-[#d7c8b6] bg-[#f7eddf] p-4 text-[#2d2b29] [&_.vac-eyebrow]:hidden @md:p-6">
+        <div className="twig-browser min-w-0 overflow-hidden rounded border border-[#d7c8b6] bg-[#f7eddf] p-3 text-[#2d2b29] [&_.vac-card-body]:min-w-0 [&_.vac-card-body]:!p-3 [&_.vac-card-body>p:last-child]:hidden [&_.vac-card:not(:first-child)]:hidden [&_.vac-card>button]:!grid [&_.vac-card>button]:!grid-cols-[6rem_minmax(0,1fr)] [&_.vac-card>button]:items-stretch [&_.vac-catalog>label]:hidden [&_.vac-filters]:!my-3 [&_.vac-image]:!aspect-auto [&_.vac-image]:!h-full [&_.vac-image]:!w-full [&_.vac-image]:!min-h-24 [&_.vac-image]:!rounded-r-none [&_.vac-stay-grid]:!mt-3 [&_.vac-stay-grid]:!grid-cols-1 [&_.vac-stay-grid]:!gap-0 [&_.vac-stay-search]:hidden @md:p-4">
             <BrowseStays
                 id={id}
                 setting={selectedSetting}

@@ -1,6 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react'
 import type { StaySetting } from '@posthog/twig-components/filters'
-import ExploreTwigLink from './ExploreTwigLink'
 import PostHogEventInspector from './PostHogEventInspector'
 import TwigBrowseFigure from './TwigBrowseFigure'
 
@@ -101,7 +100,7 @@ export default function TwigEventFlow({
 
     return (
         <div ref={rootRef} className="twig-click-demo @container">
-            <div className="grid gap-3">
+            <div className="grid items-start gap-3 @lg:grid-cols-[minmax(0,1.05fr)_minmax(14rem,0.95fr)]">
                 <div ref={twigRef} className="relative overflow-hidden rounded border border-primary bg-primary">
                     <TwigBrowseFigure
                         id={`guide-event-${withDestination ? 'destination' : 'bare'}`}
@@ -161,7 +160,6 @@ export default function TwigEventFlow({
                     eventCount={eventCount}
                 />
             </div>
-            <ExploreTwigLink />
         </div>
     )
 }

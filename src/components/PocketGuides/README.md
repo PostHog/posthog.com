@@ -237,10 +237,14 @@ pages declare.
 
 ### Twig in Product Analytics
 
-The introduction uses a screenshot of Twig's homepage from `static/pocket-guides/posthog/`.
+The Product Analytics Learn hub previews three paths: an agent prompt, the story reader, and
+the external Twig demo. Its sidebar uses section anchors; chapters belong to the standalone
+Pocket Guide reader, not the hub. The story introduction leads directly into the engineers'
+first question. The reader's return link goes back to Learn.
 The Events and properties chapter uses `BrowseStays` and `StayCardContent` from the pinned
 `@posthog/twig-components` package. `TwigBrowseFigure` adds local filter state and package photos.
-`TwigEventFlow` places the PostHog event inspector below the Twig view. The chapter's activity
+`TwigEventFlow` places the inspector beside a compact Twig view when its container is wide
+enough, and below it on narrow screens.
 The inspectors show event timestamps separately from custom properties. These examples do not
 send events to a PostHog project.
 

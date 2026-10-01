@@ -211,7 +211,7 @@ export default function BookReader({
                                 className="flex h-7 items-center gap-1.5 rounded px-1.5 text-xs text-secondary no-underline hover:bg-accent hover:text-primary"
                             >
                                 <IconHome className="size-4" />
-                                Home
+                                {shelf.label === 'Back to Learn' ? shelf.label : 'Home'}
                             </Link>
                         )}
                         {readingSizeControls}
@@ -300,7 +300,7 @@ export default function BookReader({
                                     {/* On the front matter the prev turn already IS the shelf – one link is plenty. */}
                                     {shelf && prev?.url !== shelf.url && (
                                         <Link to={shelf.url} className="text-secondary hover:text-primary">
-                                            All guides
+                                            {shelf.label === 'Back to Learn' ? shelf.label : 'All guides'}
                                         </Link>
                                     )}
                                     {position?.page && (

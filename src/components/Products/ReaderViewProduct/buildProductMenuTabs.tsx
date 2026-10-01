@@ -1,5 +1,13 @@
 import React, { useMemo } from 'react'
-import { IconBook, IconGraduationCap, IconPiggyBank, IconPresent } from '@posthog/icons'
+import {
+    IconBook,
+    IconCursorClick,
+    IconEye,
+    IconGraduationCap,
+    IconTerminal,
+    IconPiggyBank,
+    IconPresent,
+} from '@posthog/icons'
 import { TreeMenu } from 'components/TreeMenu'
 import Link from 'components/Link'
 import { learnChapterPath, useBookPages } from 'components/PocketGuides/bookModel'
@@ -74,21 +82,42 @@ const DocsTreeMenu = ({
     )
 }
 
-/** One item per chapter, each its own page; `ProductNav` scrolls within one instead. */
+const LearnHubNav = ({ basePath, contentRef }: { basePath: string; contentRef?: React.RefObject<HTMLElement> }) => (
+    <ProductNav
+        basePath={basePath}
+        contentRef={contentRef}
+        items={[
+            { slug: 'overview', name: 'Overview', icon: <IconEye className="size-4" /> },
+            { slug: 'agent-teacher', name: 'Have your agent teach you', icon: <IconTerminal className="size-4" /> },
+            { slug: 'learn-through-story', name: 'Learn through a story', icon: <IconBook className="size-4" /> },
+            { slug: 'learn-by-doing', name: 'Learn by doing', icon: <IconCursorClick className="size-4" /> },
+        ]}
+    />
+)
+
+/** Standard guides link between chapter pages; hub guides scroll between anchored sections. */
 const LearnNav = ({
     volumeId,
     basePath,
     currentPath,
     hasLanding,
     interactiveLearningUrl,
+    hub,
+    contentRef,
 }: {
     volumeId: string
     basePath: string
     currentPath?: string
     hasLanding?: boolean
     interactiveLearningUrl?: string
+    hub?: boolean
+    contentRef?: React.RefObject<HTMLElement>
 }) => {
     const pages = useBookPages(volumeId)
+
+    if (hub) {
+        return <LearnHubNav basePath={basePath} contentRef={contentRef} />
+    }
 
     if (hasLanding && interactiveLearningUrl) {
         const storyPages = pages.map((page) => ({
@@ -162,6 +191,8 @@ interface BuildProductMenuTabsArgs {
               pocketGuideVolume?: string
               /** Adds an interactive option to the Learn landing and makes the active Learn tab return there. */
               interactiveLearningUrl?: string
+              /** Shows a learning hub with Product-style anchor navigation. */
+              learnHub?: boolean
           }
         | null
         | undefined
@@ -217,9 +248,10 @@ export function buildProductMenuTabs({
         pricingMenu = [],
         pocketGuideVolume,
         interactiveLearningUrl,
+        learnHub,
         docsSlug,
     } = productData
-    const hasLearnLanding = Boolean(interactiveLearningUrl)
+    const hasLearnLanding = Boolean(interactiveLearningUrl || learnHub)
 
     const navProductMenu = productMenu.filter((item) => !item.hideFromNav)
     const navPricingMenu = pricingMenu.filter((item) => !item.hideFromNav)
@@ -301,6 +333,8 @@ export function buildProductMenuTabs({
                     currentPath={activeSurface === 'learn' ? currentPath : undefined}
                     hasLanding={hasLearnLanding}
                     interactiveLearningUrl={interactiveLearningUrl}
+                    hub={learnHub}
+                    contentRef={activeSurface === 'learn' ? contentRef : undefined}
                 />
             ),
         })

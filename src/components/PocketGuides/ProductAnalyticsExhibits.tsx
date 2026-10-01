@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import { colors } from '@posthog/brand/colors'
 import type { StaySetting } from '@posthog/twig-components/filters'
-import ExploreTwigLink from './ExploreTwigLink'
 import PostHogInspector, { InspectorCode, InspectorStatus } from './PostHogInspector'
 import TwigBrowseFigure from './TwigBrowseFigure'
 
@@ -25,19 +24,12 @@ const destinations = [
     { name: 'City', color: colors.teal.darker },
 ]
 
-function Exhibit({
-    stacked = false,
-    exploreTwig = false,
-    children,
-}: {
-    stacked?: boolean
-    exploreTwig?: boolean
-    children: React.ReactNode
-}) {
+function Exhibit({ children }: { children: React.ReactNode }) {
     return (
         <figure className="not-prose my-6 mx-0 overflow-hidden rounded border border-primary bg-accent p-3 dark:bg-accent-dark @container @md:p-4">
-            <div className={`grid gap-4 ${stacked ? '' : '@2xl:grid-cols-2'}`}>{children}</div>
-            {exploreTwig && <ExploreTwigLink />}
+            <div className="grid items-start gap-4 @lg:grid-cols-[minmax(0,1.05fr)_minmax(14rem,0.95fr)]">
+                {children}
+            </div>
         </figure>
     )
 }
@@ -61,7 +53,7 @@ export function AutocaptureFigure(): JSX.Element {
     )
 
     return (
-        <Exhibit stacked exploreTwig>
+        <Exhibit>
             <TwigBrowseFigure
                 id="guide-autocapture"
                 onFilter={(setting) => {
@@ -105,7 +97,7 @@ export function FilterPropertiesFigure(): JSX.Element {
     )
 
     return (
-        <Exhibit stacked exploreTwig>
+        <Exhibit>
             <TwigBrowseFigure
                 id="guide-properties"
                 onFilter={(setting, matches) => {
@@ -143,7 +135,7 @@ export function DestinationChartFigure(): JSX.Element {
         : null
 
     return (
-        <Exhibit stacked>
+        <Exhibit>
             <section
                 aria-label="Filter selections by destination"
                 className="min-w-0 overflow-hidden rounded border border-[#d3d0c8] bg-[#fffdfa] font-rounded text-[#292724] shadow-sm"
@@ -214,15 +206,17 @@ export function DestinationChartFigure(): JSX.Element {
                     </div>
                 </div>
             </section>
-            {selectedEvent && eventPayload && (
-                <PostHogInspector>
+            <PostHogInspector>
+                {selectedEvent && eventPayload ? (
                     <InspectorCode
                         label="Event payload · selected properties"
                         meta={selectedEvent.id}
                         value={eventPayload}
                     />
-                </PostHogInspector>
-            )}
+                ) : (
+                    <InspectorStatus>Select a bar or event to inspect its properties.</InspectorStatus>
+                )}
+            </PostHogInspector>
         </Exhibit>
     )
 }
