@@ -35,64 +35,54 @@ export interface Share {
 }
 
 // Labels that mean "we don't know", which the charts drop before they renormalize.
-export const UNKNOWN_LABELS = new Set(['Unknown', 'unknown', 'Unidentified', 'Not reported', 'None', 'Unspecified'])
+const UNKNOWN_LABELS = new Set(['Unknown', 'unknown', 'Unidentified', 'Not reported', 'None', 'Unspecified'])
 
 // Hex values of the Tailwind tokens named in the comments. Chart.js paints a canvas, so it needs
 // the values, not the classes. Anthropic and OpenAI use their brand colors, like the MCP analytics
 // dashboard does.
-const PALETTE = {
+export const PALETTE = {
     anthropic: '#D97757',
     openai: '#74AA9C',
-    google: '#2F80FA', // blue
-    openWeights: '#6AA84F', // green
-    cursor: '#8567FF', // lilac
-    microsoft: '#30ABC6', // seagreen
-    custom: '#F7A501', // yellow
-    apps: '#B62AD9', // purple
-    posthog: '#F54E00', // red
-    other: '#8F8F8C', // gray
+    blue: '#2F80FA',
+    green: '#6AA84F',
+    lilac: '#8567FF',
+    seagreen: '#30ABC6',
+    yellow: '#F7A501',
+    purple: '#B62AD9',
+    red: '#F54E00',
+    gray: '#8F8F8C',
 }
 
-export const CATEGORICAL = [
-    PALETTE.google,
-    PALETTE.custom,
-    PALETTE.openWeights,
-    PALETTE.apps,
-    PALETTE.microsoft,
-    PALETTE.posthog,
-    PALETTE.cursor,
+const CATEGORICAL = [
+    PALETTE.blue,
+    PALETTE.yellow,
+    PALETTE.green,
+    PALETTE.purple,
+    PALETTE.seagreen,
+    PALETTE.red,
+    PALETTE.lilac,
 ]
 
-// xAI and Grok use a monochrome mark, like the MCP analytics dashboard, so the color follows the theme.
-const monochrome = (theme: Theme): string => (theme === 'dark' ? '#EEEFE9' : '#4D4F46')
+// Colors for labels that have no lab or maker: gray for unknown and "Other", otherwise the next
+// categorical color.
+export const categoricalColor = (label: string, i: number): string =>
+    UNKNOWN_LABELS.has(label) || label === 'Other' ? PALETTE.gray : CATEGORICAL[i % CATEGORICAL.length]
 
-export const vendorColor = (vendor: string, theme: Theme): string => {
-    switch (vendor) {
-        case 'Anthropic':
-            return PALETTE.anthropic
-        case 'OpenAI':
-            return PALETTE.openai
-        case 'Google':
-            return PALETTE.google
-        case 'xAI':
-            return monochrome(theme)
-        case 'Open weights':
-        case 'Open source':
-            return PALETTE.openWeights
-        case 'Cursor':
-            return PALETTE.cursor
-        case 'Microsoft':
-            return PALETTE.microsoft
-        case 'Custom code':
-            return PALETTE.custom
-        case 'Other apps':
-            return PALETTE.apps
-        case 'PostHog':
-            return PALETTE.posthog
-        default:
-            return PALETTE.other
-    }
+const VENDOR_COLORS: Record<string, string> = {
+    Anthropic: PALETTE.anthropic,
+    OpenAI: PALETTE.openai,
+    Google: PALETTE.blue,
+    'Open weights': PALETTE.green,
+    'Open source': PALETTE.green,
+    Cursor: PALETTE.lilac,
+    Microsoft: PALETTE.seagreen,
+    'Custom code': PALETTE.yellow,
+    'Other apps': PALETTE.purple,
 }
+
+// xAI and Grok use a monochrome mark, like the MCP analytics dashboard, so the color follows the theme.
+export const vendorColor = (vendor: string, theme: Theme): string =>
+    vendor === 'xAI' ? (theme === 'dark' ? '#EEEFE9' : '#4D4F46') : VENDOR_COLORS[vendor] ?? PALETTE.gray
 
 // Mixes a hex color toward white (amount > 0) or black (amount < 0).
 const shade = (hex: string, amount: number): string => {
@@ -108,7 +98,10 @@ const shade = (hex: string, amount: number): string => {
 // read as one family and each model stays distinguishable. Pass entries in display order.
 export const labShades = (entries: { label: string; vendor: string }[], theme: Theme): Map<string, string> => {
     const byVendor = new Map<string, string[]>()
-    entries.forEach(({ label, vendor }) => byVendor.set(vendor, [...(byVendor.get(vendor) ?? []), label]))
+    entries.forEach(({ label, vendor }) => {
+        if (!byVendor.has(vendor)) byVendor.set(vendor, [])
+        byVendor.get(vendor)?.push(label)
+    })
     const colors = new Map<string, string>()
     byVendor.forEach((labels, vendor) => {
         const base = vendorColor(vendor, theme)
@@ -148,8 +141,17 @@ const CLIENT_MAKER: Record<string, string> = {
     OpenClaw: 'Open source',
     'Desktop Commander': 'Open source',
     'Custom code': 'Custom code',
-    'PostHog CLI': 'PostHog',
 }
+
+// Display names for raw labels. Labels without an entry show as they come from the endpoint.
+const DISPLAY_LABELS: Record<string, Record<string, string>> = {
+    auth_method: { oauth: 'OAuth', personal_api_key: 'Personal API key' },
+    region: { us: 'US', eu: 'EU' },
+    model_source: { self_reported: 'Agent said so', client_metadata: 'Client metadata' },
+    client: { Other: 'Other agents' },
+}
+
+export const displayLabel = (facet: string, label: string): string => DISPLAY_LABELS[facet]?.[label] ?? label
 
 export const clientMaker = (client: string): string => {
     if (client === 'Other') return 'Other'
@@ -171,17 +173,22 @@ export const modelVendor = (model: string): string => {
     return 'Other'
 }
 
-// Rows grouped by facet once per rows array, so the selectors below don't rescan every row.
+// Rows grouped by facet and group once per rows array, so the selectors below don't rescan every row.
 const facetIndex = new WeakMap<LeaderboardRow[], Map<string, LeaderboardRow[]>>()
 
-export const facetRows = (rows: LeaderboardRow[], facet: string, grp = ''): LeaderboardRow[] => {
+const facetRows = (rows: LeaderboardRow[], facet: string, grp = ''): LeaderboardRow[] => {
     let index = facetIndex.get(rows)
     if (!index) {
-        index = new Map()
-        rows.forEach((row) => index?.set(row.facet, [...(index.get(row.facet) ?? []), row]))
-        facetIndex.set(rows, index)
+        const built = new Map<string, LeaderboardRow[]>()
+        rows.forEach((row) => {
+            const key = `${row.facet}|${row.grp ?? ''}`
+            if (!built.has(key)) built.set(key, [])
+            built.get(key)?.push(row)
+        })
+        facetIndex.set(rows, built)
+        index = built
     }
-    return (index.get(facet) ?? []).filter((row) => (row.grp ?? '') === grp)
+    return index.get(`${facet}|${grp}`) ?? []
 }
 
 export const getPeriods = (rows: LeaderboardRow[], facet: string): string[] =>
@@ -194,7 +201,12 @@ export const weekShares = (
     facet: string,
     week: string,
     metric: Metric,
-    { grp = '', dropUnknown = false }: { grp?: string; dropUnknown?: boolean } = {}
+    {
+        grp = '',
+        dropUnknown = false,
+        dropOther = false,
+        limit,
+    }: { grp?: string; dropUnknown?: boolean; dropOther?: boolean; limit?: number } = {}
 ): Share[] => {
     const shares = facetRows(rows, facet, grp)
         .filter((row) => row.week === week && row[metric] !== null)
@@ -209,7 +221,20 @@ export const weekShares = (
     if (dropUnknown && metric === 'calls_pct' && total > 0) {
         shares.forEach((share) => (share.value = (share.value / total) * 100))
     }
-    return shares.sort((a, b) => b.value - a.value)
+    return shares
+        .sort((a, b) => b.value - a.value)
+        .filter((share) => !dropOther || share.label !== 'Other')
+        .slice(0, limit)
+}
+
+// One value of the `total` facet for each week, for the growth and reliability charts.
+export const totalSeries = (
+    rows: LeaderboardRow[],
+    weeks: string[],
+    key: 'calls_index' | 'users_index' | 'error_rate_pct' | 'p50_ms' | 'p95_ms'
+): (number | null)[] => {
+    const byWeek = new Map(facetRows(rows, 'total').map((row) => [row.week, row[key]]))
+    return weeks.map((week) => byWeek.get(week) ?? null)
 }
 
 // Share of a facet that is known, so a chart can say "62% of calls reported a model".
@@ -224,7 +249,7 @@ export const groupedSeries = (
     rows: LeaderboardRow[],
     facet: string,
     periods: string[],
-    groupOf: (label: string) => string | null
+    groupOf: (label: string) => string = (label) => label
 ): Map<string, number[]> => {
     const byGroup = new Map<string, number[]>()
     const known = facetRows(rows, facet).filter((row) => !UNKNOWN_LABELS.has(row.label))
@@ -233,7 +258,7 @@ export const groupedSeries = (
         const total = periodRows.reduce((sum, row) => sum + (row.calls_pct ?? 0), 0)
         periodRows.forEach((row) => {
             const group = groupOf(row.label)
-            if (!group || total <= 0) return
+            if (total <= 0) return
             // A group missing from a period is a real zero, because the facet has data that period.
             if (!byGroup.has(group)) byGroup.set(group, Array(periods.length).fill(0))
             const values = byGroup.get(group) as number[]
@@ -243,27 +268,33 @@ export const groupedSeries = (
     return byGroup
 }
 
-// Keeps the `limit` largest groups (by average share) and folds the rest into "Other".
+const average = (values: number[]): number => values.reduce((sum, value) => sum + value, 0) / (values.length || 1)
+
+// Group labels other than "Other", largest average share first.
+export const rankByAverage = (byGroup: Map<string, number[]>): string[] =>
+    Array.from(byGroup.keys())
+        .filter((label) => label !== 'Other')
+        .sort((a, b) => average(byGroup.get(b) as number[]) - average(byGroup.get(a) as number[]))
+
+// Keeps the `limit` largest groups and folds the rest into "Other".
 export const topSeries = (
     byGroup: Map<string, number[]>,
     limit: number,
-    colorOf: (label: string) => string
+    colorOf: (label: string, i: number) => string
 ): Series[] => {
-    const average = (values: number[]) => values.reduce((sum, value) => sum + value, 0) / (values.length || 1)
-    const ranked = Array.from(byGroup.entries())
-        .filter(([label]) => label !== 'Other')
-        .sort((a, b) => average(b[1]) - average(a[1]))
-    const kept = ranked.slice(0, limit)
-    const folded = [...ranked.slice(limit), ...(byGroup.has('Other') ? [['Other', byGroup.get('Other')]] : [])] as [
-        string,
-        number[]
-    ][]
-    const series: Series[] = kept.map(([label, data]) => ({ label, color: colorOf(label), data }))
+    const ranked = rankByAverage(byGroup)
+    const series = ranked
+        .slice(0, limit)
+        .map((label, i) => ({ label, color: colorOf(label, i), data: byGroup.get(label) as number[] }))
+    const folded = [...ranked.slice(limit), 'Other'].filter((label) => byGroup.has(label))
     if (folded.length > 0) {
+        const length = (byGroup.get(folded[0]) as number[]).length
         series.push({
             label: 'Other',
-            color: colorOf('Other'),
-            data: folded[0][1].map((_, i) => folded.reduce((sum, [, values]) => sum + values[i], 0)),
+            color: colorOf('Other', series.length),
+            data: Array.from({ length }, (_, i) =>
+                folded.reduce((sum, label) => sum + (byGroup.get(label) as number[])[i], 0)
+            ),
         })
     }
     return series

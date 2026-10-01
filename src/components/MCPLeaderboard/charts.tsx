@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useMemo } from 'react'
 import { Line } from 'react-chartjs-2'
 import {
     Chart,
@@ -20,8 +20,17 @@ const axisColors = (theme: Theme) =>
         ? { text: 'rgba(238, 239, 233, 0.7)', grid: 'rgba(238, 239, 233, 0.12)' }
         : { text: 'rgba(35, 37, 29, 0.7)', grid: 'rgba(35, 37, 29, 0.1)' }
 
-function baseOptions(theme: Theme, formatY: (value: number) => string): ChartOptions<'line'> {
+// Y-axis formats by name, so a chart's options only change when its theme or format does.
+const Y_FORMATS = {
+    share: (value: number) => `${Math.round(value)}%`,
+    rate: (value: number) => `${value.toFixed(1)}%`,
+    multiple: (value: number) => `${(value / 100).toFixed(1)}x`,
+    seconds: (value: number) => `${(value / 1000).toFixed(1)}s`,
+}
+
+function chartOptions(theme: Theme, format: keyof typeof Y_FORMATS, stacked: boolean): ChartOptions<'line'> {
     const colors = axisColors(theme)
+    const formatY = Y_FORMATS[format]
     return {
         responsive: true,
         maintainAspectRatio: false,
@@ -43,6 +52,8 @@ function baseOptions(theme: Theme, formatY: (value: number) => string): ChartOpt
             x: { ticks: { color: colors.text, font: { size: 11 } }, grid: { display: false } },
             y: {
                 beginAtZero: true,
+                stacked,
+                max: stacked ? 100 : undefined,
                 ticks: { color: colors.text, font: { size: 11 }, callback: (value) => formatY(Number(value)) },
                 grid: { color: colors.grid },
             },
@@ -50,72 +61,54 @@ function baseOptions(theme: Theme, formatY: (value: number) => string): ChartOpt
     }
 }
 
-// 100% stacked area: each week's series add up to 100.
-export function StackedShareChart({
-    weeks,
-    series,
-    theme,
-    height = 300,
-}: {
-    weeks: string[]
-    series: Series[]
-    theme: Theme
-    height?: number
-}): JSX.Element {
-    const options = baseOptions(theme, (value) => `${Math.round(value)}%`)
-    options.scales = { ...options.scales, y: { ...options.scales?.y, stacked: true, max: 100 } }
-    return (
-        <div style={{ height }}>
-            <Line
-                options={options}
-                data={{
-                    labels: weeks.map(formatDay),
-                    datasets: series.map((s) => ({
-                        label: s.label,
-                        data: s.data,
-                        borderColor: s.color,
-                        backgroundColor: `${s.color}CC`,
-                        borderWidth: 1,
-                        pointRadius: 0,
-                        fill: true,
-                        stack: 'share',
-                    })),
-                }}
-            />
-        </div>
-    )
-}
-
+// A line chart, or with `stacked` a 100% stacked area where each period's series add up to 100.
 export function LineChart({
-    weeks,
+    periods,
     series,
     theme,
-    formatY,
+    format = 'share',
+    stacked = false,
     height = 260,
 }: {
-    weeks: string[]
+    periods: string[]
     series: Series[]
     theme: Theme
-    formatY: (value: number) => string
+    format?: keyof typeof Y_FORMATS
+    stacked?: boolean
     height?: number
 }): JSX.Element {
+    const options = useMemo(() => chartOptions(theme, format, stacked), [theme, format, stacked])
+    const data = useMemo(
+        () => ({
+            labels: periods.map(formatDay),
+            datasets: series.map((s) =>
+                stacked
+                    ? {
+                          label: s.label,
+                          data: s.data,
+                          borderColor: s.color,
+                          backgroundColor: `${s.color}CC`,
+                          borderWidth: 1,
+                          pointRadius: 0,
+                          fill: true,
+                          stack: 'share',
+                      }
+                    : {
+                          label: s.label,
+                          data: s.data,
+                          borderColor: s.color,
+                          backgroundColor: s.color,
+                          borderWidth: 2,
+                          pointRadius: 2,
+                          tension: 0.25,
+                      }
+            ),
+        }),
+        [periods, series, stacked]
+    )
     return (
         <div style={{ height }}>
-            <Line
-                options={baseOptions(theme, formatY)}
-                data={{
-                    labels: weeks.map(formatDay),
-                    datasets: series.map((s) => ({
-                        label: s.label,
-                        data: s.data,
-                        borderColor: s.color,
-                        backgroundColor: s.color,
-                        borderWidth: 2,
-                        pointRadius: 2,
-                        tension: 0.25,
-                    })),
-                }}
-            />
+            <Line options={options} data={data} />
         </div>
     )
 }
@@ -123,11 +116,9 @@ export function LineChart({
 // Horizontal share bars. Bars scale to the largest value so small shares stay readable.
 export function ShareBars({
     items,
-    format = (value) => formatPct(value),
     detail,
 }: {
     items: Share[]
-    format?: (value: number) => string
     detail?: (item: Share) => React.ReactNode
 }): JSX.Element {
     const max = Math.max(...items.map((item) => item.value), 0.0001)
@@ -148,7 +139,7 @@ export function ShareBars({
                         />
                     </span>
                     <span className="tabular-nums text-secondary text-right min-w-[4.5rem]">
-                        {format(item.value)}
+                        {formatPct(item.value)}
                         {detail && <span className="block text-xs text-muted">{detail(item)}</span>}
                     </span>
                 </li>

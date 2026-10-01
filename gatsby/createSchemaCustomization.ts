@@ -720,13 +720,8 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
         calls_index: Float
         users_index: Float
     }
-    type McpLeaderboardQuery {
-        name: String!
-        query: String
-    }
     type McpLeaderboard implements Node @dontInfer {
         rows: [McpLeaderboardRow!]!
-        queries: [McpLeaderboardQuery!]!
         fetchedAt: Date @dateformat
     }
     # searchContentId is how Algolia indexing (gatsby/algoliaConfig.js) joins a page to the MDX it

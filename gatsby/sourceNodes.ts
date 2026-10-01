@@ -295,8 +295,7 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
     }
 
     // MCP usage shares for /mcp/leaderboard. The endpoints return percentages only, never raw counts,
-    // because everything sourced here ships in public page data. Each endpoint's own HogQL is sourced
-    // too, so the page can show the exact queries behind its charts.
+    // because everything sourced here ships in public page data.
     const sourceMCPLeaderboard = async () => {
         if (!process.env.POSTHOG_APP_API_KEY) return
 
@@ -307,12 +306,11 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
         const fetchEndpoint = async (name: string) => {
             const endpointUrl = `https://us.posthog.com/api/environments/2/endpoints/${name}`
             // OFFSET is not allowed with a personal API key, so fetch every row in one request.
-            const [res, definition] = await Promise.all([
-                fetch(`${endpointUrl}/run`, { method: 'POST', headers, body: JSON.stringify({ limit: 50000 }) }),
-                fetch(`${endpointUrl}/`, { headers })
-                    .then((res) => (res.ok ? res.json() : null))
-                    .catch(() => null),
-            ])
+            const res = await fetch(`${endpointUrl}/run`, {
+                method: 'POST',
+                headers,
+                body: JSON.stringify({ limit: 50000 }),
+            })
             if (res.status !== 200) throw new Error(`${name} returned ${res.status}`)
             const body: any = await res.json()
             if (body.hasMore) throw new Error(`${name} returned more than 50000 rows`)
@@ -320,16 +318,26 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
             const rows = (body.results || [])
                 .map((row: unknown[]) => Object.fromEntries(columns.map((column, i) => [column, row[i]])))
                 .filter((row: Record<string, unknown>) => row.week && row.facet && row.label)
-            return { rows, query: { name, query: definition?.query?.query ?? null } }
+            return rows
         }
+
+        // The page charts these facets over time. It shows every other facet for the latest week only,
+        // so older weeks of those facets would only add weight to the page data.
+        const historyFacets = new Set(['total', 'client', 'model_vendor', 'protocol_version'])
 
         try {
             const results = await Promise.all(
                 ['mcp_public_leaderboard_weekly', 'mcp_public_leaderboard_daily'].map(fetchEndpoint)
             )
+            const rows = results.flat()
+            const latestWeek = rows
+                .filter((row: any) => row.facet === 'total')
+                .reduce((latest: string, row: any) => (row.week > latest ? row.week : latest), '')
             const data = {
-                rows: results.flatMap((result) => result.rows),
-                queries: results.map((result) => result.query),
+                rows: rows.filter(
+                    (row: any) =>
+                        historyFacets.has(row.facet) || row.facet.endsWith('_daily') || row.week === latestWeek
+                ),
                 fetchedAt: new Date().toISOString(),
             }
             createNode({

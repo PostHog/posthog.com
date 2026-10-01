@@ -8,12 +8,12 @@ The page at `/mcp/leaderboard`. It shows which models, clients, spec versions, a
 2. Two endpoints in project 2 run HogQL over those events and refresh daily:
    - [`mcp_public_leaderboard_weekly`](https://us.posthog.com/project/2/endpoints/mcp_public_leaderboard_weekly): every facet, by week, since June 22, 2026
    - [`mcp_public_leaderboard_daily`](https://us.posthog.com/project/2/endpoints/mcp_public_leaderboard_daily): models and model labs, by day, since September 9, 2026, when `$mcp_llm_model` was first captured
-3. `sourceMCPLeaderboard` in `gatsby/sourceNodes.ts` calls both endpoints at build time, in one request each. A personal API key cannot use OFFSET, so the build asks for up to 50000 rows and fails the fetch if there are more. It also fetches each endpoint's definition, so the page can show the live queries. The result is one `McpLeaderboard` node (schema in `gatsby/createSchemaCustomization.ts`).
+3. `sourceMCPLeaderboard` in `gatsby/sourceNodes.ts` calls both endpoints at build time, in one request each. A personal API key cannot use OFFSET, so the build asks for up to 50000 rows and fails the fetch if there are more. The build keeps the full history only for the facets the page charts over time (`total`, `client`, `model_vendor`, `protocol_version`, and the daily facets), and the latest week for the rest. The result is one `McpLeaderboard` node (schema in `gatsby/createSchemaCustomization.ts`).
 4. `src/pages/mcp/leaderboard.tsx` queries the node and renders this component.
 
 The fetch needs `POSTHOG_APP_API_KEY`. Put it in `.env.development.local` locally, which git ignores. Do not put it in `.env.development`, which git tracks. If the key is not set, or a fetch fails, the node is not created and the page shows a "No data in this build" state. The build does not fail.
 
-**The endpoint output is public.** Anything the endpoints return ends up in the page data, and so do their queries. Do not add absolute counts.
+**The endpoint output is public.** Anything the endpoints return ends up in the page data. Do not add absolute counts.
 
 ## Row shape
 
