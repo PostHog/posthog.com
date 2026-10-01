@@ -26,7 +26,7 @@ export default function PostHogEventInspector({
     )
 
     return (
-        <PostHogInspector>
+        <PostHogInspector className="[&_.whitespace-pre]:whitespace-pre-wrap [&_.whitespace-pre]:break-words [&_summary]:!bg-transparent">
             {label ? (
                 <>
                     <InspectorCode label="Clicked element" value={`<button aria-pressed="true">${label}</button>`} />
