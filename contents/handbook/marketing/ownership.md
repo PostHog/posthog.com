@@ -17,9 +17,9 @@ We only add a dedicated product marketer when it becomes painful not to have one
 Here's how PMMs are currently assigned.
 
 <TeamMember name="Joe Black" />: Lifecycle marketing, Self-driving, Conversations
-<TeamMember name="Sara Miteva" />: Session Replay, Replay Vision, Logs (APM), Error-tracking
+<TeamMember name="Sara Miteva" />: Session Replay, Replay Vision, Logs (APM), Error Tracking
 <TeamMember name="Cleo Lant" />: PostHog MCP, PostHog Slack, PostHog AI
-<TeamMember name="Lizzie Epton" />: Data warehouse and related tools 
+<TeamMember name="Lizzie Epton" />: Warehouse Sources, ETL, Semantic Layer
 <TeamMember name="Juliana Meyer" />: Product Analytics, MCP Analytics, AI Observability
 
 **Cross-functional areas**
