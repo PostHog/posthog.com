@@ -133,6 +133,7 @@ export type UserData = {
     distinctId: string | null
     // Only present when explicitly populated, which Strapi gates to the moderator role
     wallet?: Wallet | null
+    creditRedemptionEnabled?: boolean
 }
 
 export type ProfileQuestionsData = {
