@@ -11,6 +11,7 @@ Translations for the home page. There is one YAML file per locale in `locales/`.
 | Pages | `gatsby/i18n.ts` | Reads the YAML files. Creates `/` with `locale: 'en'`, and `/<code>` with `locale` and `messages` in its page context. |
 | Lookup | `index.tsx` | `I18nProvider` reads a page's context. `useTranslation()` gives `t()` and `rich()`. |
 | Routing | `middleware.ts` | Sends a visitor from `/` to `/<code>` when their `Accept-Language` ranks that locale above English. |
+| Matching | `preferredLocale.ts` | Picks the page for a visitor's languages. The middleware uses it for the redirect. The hedgehog uses it to decide if a visitor is on their own page. |
 
 English ships in the JS bundle, so every page can show it. A translation ships only in the page data of its own `/<code>` page.
 
@@ -69,7 +70,7 @@ The build warns about a key in a translation file that `en.yml` does not have. I
 1. Copy `locales/pt.yml` to `locales/<code>.yml`. Use the ISO 639-1 code, for example `es`.
    If the text is for one region, set `lang` to the full tag, for example `lang: pt-BR`. `lang` goes into `<html lang>` and hreflang. The URL keeps the short code.
 2. Replace the style rules in the comment at the top with the rules for the new language. Then translate the values. Keep the keys and the tags.
-3. Add the code to `TRANSLATED_LOCALES` in `middleware.ts`. The Edge runtime cannot read YAML. `pnpm test:middleware` fails when the list and the files disagree.
+3. Add the code to `TRANSLATED_LOCALES` in `preferredLocale.ts`. The Edge runtime cannot read YAML. `pnpm test:middleware` fails when the list and the files disagree.
 4. Restart `pnpm start`. The dev server reads the YAML files only when it starts.
 
 The middleware matches the primary language subtag only, so `pt` matches `pt-BR` and `pt-PT`. It also sends locale-shaped paths such as `/pt-BR`, `/pt_br`, and `/PT` to `/pt` with a 301.

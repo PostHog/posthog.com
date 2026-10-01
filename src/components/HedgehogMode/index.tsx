@@ -1,6 +1,7 @@
 import React, { lazy, Suspense, useEffect, useRef, useState, useSyncExternalStore } from 'react'
 import type { HedgeHogMode, HedgehogActorFlagOption } from '@posthog/hedgehog-mode'
 import { useTranslation } from 'i18n'
+import { preferredTag } from 'i18n/preferredLocale'
 import { localeFlag as getLocaleFlag } from './localeFlag'
 
 const HedgeHogModeRenderer =
@@ -55,11 +56,12 @@ export default function HedgeHogModeEmbed(): JSX.Element | null {
     const localeHedgehogDismissed = useStoredBoolean(LOCALE_HEDGEHOG_DISMISSED_STORAGE_KEY)
     const [game, setGame] = useState<HedgeHogMode>()
     const { locale } = useTranslation()
-    // A translated home page turns hedgehog mode on, and the hedgehog holds a flag from the region
-    // of the visitor. The server has no navigator, so this waits until after hydration.
+    // A translated home page turns hedgehog mode on when the visitor's browser picks that page, and
+    // the hedgehog holds a flag from the region of the visitor. The server has no navigator, so this
+    // waits until after hydration.
     const [localeFlag, setLocaleFlag] = useState<HedgehogActorFlagOption>()
     useEffect(() => {
-        setLocaleFlag(getLocaleFlag(locale, navigator.languages ?? [navigator.language]))
+        setLocaleFlag(getLocaleFlag(locale, preferredTag(navigator.languages ?? [navigator.language])))
     }, [locale])
     // The game keeps the onQuit it started with, so it reads the locale of the current page from here.
     const localeFlagRef = useRef(localeFlag)
