@@ -236,7 +236,6 @@ export default function Hoglr(): JSX.Element {
                 title="Hoglr - PostHog"
                 description="An old-school blog dashboard in the PostHog Time machine."
                 image="/images/og/default.png"
-                noindex
             />
             <ReaderView
                 hideLeftSidebar

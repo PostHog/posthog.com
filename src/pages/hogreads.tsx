@@ -123,7 +123,6 @@ export default function Hogreads(): JSX.Element {
             <SEO
                 title="Hogreads – PostHog's bookish profile"
                 description="See PostHog's favorite books, BookHog shelves, and friends on Hogreads."
-                noindex
             />
             <ReaderView hideAppOptions hideRightSidebar hideLeftSidebar showQuestions={false}>
                 <div
