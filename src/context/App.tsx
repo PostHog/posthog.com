@@ -2093,7 +2093,9 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
             zIndex?: number
         }
     ) {
-        const keyToUse = getKey(element.key)
+        // Translated home pages (/pt, ...) use the settings of /, but skip its experiments: A/B tests are English-only
+        const locale = element.props.pageContext?.locale
+        const keyToUse = locale && locale !== 'en' ? '/' : getKey(element.key)
         const size = element.props?.location?.state?.size || element.props.size || getInitialSize(keyToUse)
         const position =
             element.props?.location?.state?.position ||

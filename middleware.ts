@@ -1,3 +1,5 @@
+import { SKIP_TRANSLATION_COOKIE } from './src/i18n/cookie.ts'
+
 /**
  * Serve raw markdown to clients that ask for it with `Accept: text/markdown`,
  * and to agents that fetch a page for a user but do not ask for markdown.
@@ -19,18 +21,86 @@
  * this function declines to handle behaves exactly as it does today.
  */
 export const config = {
-    matcher: ['/docs/:path*', '/handbook/:path*', '/blog/:path*', '/newsletter/:path*', '/changelog'],
+    matcher: [
+        '/',
+        // Locale-shaped paths such as /pt-BR, /pt_br, and /PT. See LOCALE_PATH_REGEX.
+        '/:locale([a-zA-Z][a-zA-Z][-_][a-zA-Z0-9]+)',
+        '/:locale([A-Z][a-zA-Z]|[a-z][A-Z])',
+        '/docs/:path*',
+        '/handbook/:path*',
+        '/blog/:path*',
+        '/newsletter/:path*',
+        '/changelog',
+    ],
 }
 
-const USER_AGENT_FETCHERS = ["ChatGPT-User", "Claude-User", "Perplexity-User"]
-const USER_AGENT_FETCHERS_REGEX = new RegExp(`\\b(?:${USER_AGENT_FETCHERS.join("|")})\\b`, "i")
+/**
+ * The home page also runs through here, to send visitors to a translated copy of it. The same two
+ * costs apply: every request to `/` takes this hop, not only the ones that get redirected.
+ *
+ * The Edge runtime cannot read the YAML in src/i18n/locales, so the codes are listed here too.
+ * middleware.test.ts fails when this list and the YAML files disagree.
+ */
+export const TRANSLATED_LOCALES = ['pt']
+
+/** A language subtag, then an optional region or script subtag: /pt-BR, /pt_br, /PT, /zh-Hant, /es-419. */
+const LOCALE_PATH_REGEX = /^\/([a-z]{2})(?:[-_][a-z0-9]{2,4})?$/i
+
+const SKIP_TRANSLATION_COOKIE_REGEX = new RegExp(`(?:^|;\\s*)${SKIP_TRANSLATION_COOKIE}=`)
+
+/** The translated locale the visitor ranks highest, or undefined when English ranks higher or none match. */
+export function preferredLocale(acceptLanguage: string): string | undefined {
+    const ranked = acceptLanguage
+        .split(',')
+        .map((entry) => {
+            const [tag, ...params] = entry.trim().split(';')
+            const q = params.map((param) => param.trim()).find((param) => param.startsWith('q='))
+            return { language: tag.split('-')[0].toLowerCase(), q: q ? Number(q.slice(2)) : 1 }
+        })
+        .filter(({ q }) => q > 0)
+        .sort((a, b) => b.q - a.q)
+
+    for (const { language } of ranked) {
+        if (language === 'en') return
+        if (TRANSLATED_LOCALES.includes(language)) return language
+    }
+}
+
+/** Sends a locale-shaped path to the translated page for its language: /pt-BR -> /pt. */
+function localePathRedirect(pathname: string, search: string): Response | undefined {
+    const language = pathname.match(LOCALE_PATH_REGEX)?.[1].toLowerCase()
+    if (!language || !TRANSLATED_LOCALES.includes(language) || pathname === `/${language}`) return
+
+    return new Response(null, { status: 301, headers: { location: `/${language}${search}` } })
+}
+
+function translatedHomeRedirect(request: Request, search: string): Response | undefined {
+    if (SKIP_TRANSLATION_COOKIE_REGEX.test(request.headers.get('cookie') || '')) return
+    const locale = preferredLocale(request.headers.get('accept-language') || '')
+    if (!locale) return
+
+    return new Response(null, {
+        status: 307,
+        headers: {
+            location: `/${locale}${search}`,
+            vary: 'Accept-Language, Cookie',
+            'cache-control': 'private, no-store',
+        },
+    })
+}
+
+const USER_AGENT_FETCHERS = ['ChatGPT-User', 'Claude-User', 'Perplexity-User']
+const USER_AGENT_FETCHERS_REGEX = new RegExp(`\\b(?:${USER_AGENT_FETCHERS.join('|')})\\b`, 'i')
 
 export default async function middleware(request: Request): Promise<Response | undefined> {
+    const url = new URL(request.url)
+    if (url.pathname === '/') return translatedHomeRedirect(request, url.search)
+    if (LOCALE_PATH_REGEX.test(url.pathname)) return localePathRedirect(url.pathname, url.search)
+
     const acceptsMarkdown = (request.headers.get('accept') || '').includes('text/markdown')
     const isAgentFetch = USER_AGENT_FETCHERS_REGEX.test(request.headers.get('user-agent') || '')
     if (!acceptsMarkdown && !isAgentFetch) return
 
-    const url = new URL(request.url)
     const pathname = url.pathname.replace(/\/$/, '')
     if (!pathname || pathname.endsWith('.md')) return
 

@@ -4,9 +4,11 @@ import { IconGithub } from 'components/OSIcons'
 import { useInView } from 'react-intersection-observer'
 import { usePrefersReducedMotion } from 'components/Code/usePrefersReducedMotion'
 import { usePauseAutoAdvance, useSlideActive, useSlidePaused } from '../autoAdvanceGate'
+import { useTranslation } from 'i18n'
 import './animations.css'
 
 // Illustrative reports, in arrival order. These are not live issues or pull requests.
+// App UI stays in English on every locale, so only the screen-reader caption is translated.
 const ITEMS = [
     {
         priority: 'P2',
@@ -56,6 +58,7 @@ const ITEMS = [
 
 /** CSS owns every animation frame; React only controls the sequence lifecycle. */
 export default function InboxDemo() {
+    const { t } = useTranslation()
     const active = useSlideActive()
     const paused = useSlidePaused()
     const reducedMotion = usePrefersReducedMotion()
@@ -85,11 +88,7 @@ export default function InboxDemo() {
             data-running={running}
             data-finished={finished}
         >
-            <figcaption className="sr-only">
-                Illustrative self-driving inbox. Four sample reports arrive one at a time, newest first: an invoice
-                request from GitHub, a conversion tracking scout with a draft pull request, a checkout issue from
-                session replay, and a high-priority sign-in error with a pull request ready to review.
-            </figcaption>
+            <figcaption className="sr-only">{t('section.2c.demo.description')}</figcaption>
             <div className="absolute inset-0" aria-hidden="true">
                 <div className="inbox-demo-list absolute inset-x-[3cqw] inset-y-[2.5cqw]">
                     <div className="inbox-demo-empty absolute inset-0 flex flex-col items-center justify-center gap-[1.5cqw] text-center text-[2.6cqw] opacity-0 text-secondary">

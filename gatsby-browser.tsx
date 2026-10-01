@@ -8,6 +8,7 @@ import { RouteUpdateArgs } from 'gatsby'
 import { UserProvider } from './src/hooks/useUser'
 import Wrapper from './src/components/Wrapper'
 import { Provider } from './src/context/App'
+import { I18nProvider } from './src/i18n'
 initKea(false)
 
 export const wrapRootElement = ({ element }) => (
@@ -38,10 +39,13 @@ export const onRouteUpdate = ({ location, prevLocation }: RouteUpdateArgs) => {
     }
 }
 
-export const wrapPageElement = ({ element, props: { location } }) => {
+export const wrapPageElement = ({ element, props: { location, pageContext } }) => {
     return (
         <Provider element={element} location={location}>
-            <Wrapper />
+            {/* The taskbar and desktop follow the current page. Each window sets its own locale. */}
+            <I18nProvider pageContext={pageContext}>
+                <Wrapper />
+            </I18nProvider>
         </Provider>
     )
 }

@@ -1,9 +1,9 @@
 import React from 'react'
 import SmallTeam from 'components/SmallTeam'
 
-export const SupportSmallTeamLink = () => (
+export const SupportSmallTeamLink = ({ children = 'support folks' }: { children?: React.ReactNode }) => (
     <SmallTeam slug="support" noMiniCrest>
-        support folks
+        {children}
     </SmallTeam>
 )
 
