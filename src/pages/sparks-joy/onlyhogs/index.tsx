@@ -16,7 +16,7 @@ import {
     IconUser,
     IconVideoCamera,
 } from '@posthog/icons'
-import Explorer from 'components/Explorer'
+import ReaderView from 'components/ReaderView'
 import Link from 'components/Link'
 import SEO from 'components/seo'
 
@@ -61,16 +61,17 @@ export default function OnlyHogs(): JSX.Element {
                 description="Come for the Hoggies. Stay for the funnels, session replays, and feature flags."
                 image="/images/og/default.png"
             />
-            <Explorer
-                template="generic"
-                slug="onlyhogs"
+            <ReaderView
                 title="OnlyHogs"
-                showAddressBar={false}
-                headerBarOptions={[]}
-                fullScreen
+                className="border-t border-primary"
+                hideTitle
+                hideAppOptions
+                hideLeftSidebar
+                hideRightSidebar
+                hideMarkdownActions
             >
-                <div className="@container h-full overflow-y-auto bg-white text-primary dark:bg-dark">
-                    <div className="mx-auto min-h-full max-w-6xl border-x border-primary">
+                <div className="@container not-prose mx-auto mb-8 max-w-6xl bg-white font-normal text-primary dark:bg-dark">
+                    <div className="border border-primary">
                         <nav aria-label="OnlyHogs navigation" className="grid h-14 grid-cols-5 border-b border-primary">
                             {[
                                 { label: 'PostHog home', to: '/', Icon: IconHome },
@@ -82,7 +83,7 @@ export default function OnlyHogs(): JSX.Element {
                                     key={label}
                                     to={to}
                                     aria-label={label}
-                                    className="flex items-center justify-center text-secondary focus-visible:outline-blue"
+                                    className="flex h-full items-center justify-center text-secondary focus-visible:outline-blue"
                                     externalNoIcon
                                 >
                                     <Icon aria-hidden="true" className="size-6" />
@@ -92,7 +93,7 @@ export default function OnlyHogs(): JSX.Element {
                                 href="#creator"
                                 aria-label="PostHog profile"
                                 aria-current="page"
-                                className="flex items-center justify-center border-b-2 border-[#00aff0] text-[#007a9c] focus-visible:outline-[#007a9c] dark:text-[#5bd2ff]"
+                                className="flex items-center justify-center border-b-2 border-[#4dadea] text-[#007a9c] focus-visible:outline-[#007a9c] dark:text-[#4dadea]"
                             >
                                 <IconUser aria-hidden="true" className="size-6" />
                             </a>
@@ -101,7 +102,7 @@ export default function OnlyHogs(): JSX.Element {
                         <div className="@4xl:grid @4xl:grid-cols-[minmax(0,1fr)_17rem]">
                             <div className="min-w-0">
                                 <header id="creator">
-                                    <div className="relative flex h-40 items-center overflow-hidden bg-[#00aff0] px-4 text-[#002b3d] @md:h-48 @md:px-6">
+                                    <div className="relative flex h-40 items-center overflow-hidden bg-[#4dadea] px-4 text-[#002b3d] @md:h-48 @md:px-6">
                                         <div className="relative z-10 max-w-[55%]">
                                             <p className="mb-2 text-xs font-bold uppercase tracking-[.2em]">OnlyHogs</p>
                                             <p className="m-0 text-2xl font-bold leading-tight @md:text-3xl">
@@ -112,7 +113,7 @@ export default function OnlyHogs(): JSX.Element {
                                         </div>
                                         <HedgehogRose
                                             aria-hidden="true"
-                                            className="absolute -bottom-8 right-2 h-48 w-48 @md:right-10 @md:h-64 @md:w-64"
+                                            className="absolute -bottom-8 right-2 h-48 w-48 max-w-[40%] @xl:right-10 @xl:h-64 @xl:w-64"
                                         />
                                     </div>
 
@@ -127,7 +128,7 @@ export default function OnlyHogs(): JSX.Element {
                                             PostHog
                                             <span
                                                 aria-label="Verified profile"
-                                                className="inline-flex size-5 items-center justify-center rounded-full bg-[#00aff0] text-xs text-[#002b3d]"
+                                                className="inline-flex size-5 items-center justify-center rounded-full bg-[#4dadea] text-xs text-[#002b3d]"
                                             >
                                                 ✓
                                             </span>
@@ -153,7 +154,7 @@ export default function OnlyHogs(): JSX.Element {
                                             <Link
                                                 to="https://app.posthog.com/signup"
                                                 externalNoIcon
-                                                className="block rounded-full bg-[#00aff0] px-4 py-2.5 text-center text-sm font-bold text-[#002b3d] no-underline focus-visible:outline-[#007a9c]"
+                                                className="block rounded-full bg-[#4dadea] px-4 py-2.5 text-center text-sm font-bold text-[#002b3d] no-underline focus-visible:outline-[#007a9c]"
                                             >
                                                 SUBSCRIBE FOR $0
                                             </Link>
@@ -171,7 +172,7 @@ export default function OnlyHogs(): JSX.Element {
                                     <a
                                         href="#posts"
                                         aria-current="page"
-                                        className="flex items-center justify-center gap-2 border-b-2 border-[#00aff0] py-3 font-semibold text-[#007a9c] no-underline dark:text-[#5bd2ff]"
+                                        className="flex items-center justify-center gap-2 border-b-2 border-[#4dadea] py-3 font-semibold text-[#007a9c] no-underline dark:text-[#4dadea]"
                                     >
                                         <IconMessage aria-hidden="true" className="size-4" /> Posts
                                     </a>
@@ -202,7 +203,7 @@ export default function OnlyHogs(): JSX.Element {
                                                 <div>
                                                     <p className="m-0 text-sm font-semibold">
                                                         PostHog{' '}
-                                                        <span className="text-[#007a9c] dark:text-[#5bd2ff]">✓</span>
+                                                        <span className="text-[#007a9c] dark:text-[#4dadea]">✓</span>
                                                     </p>
                                                     <p className="m-0 text-xs text-secondary">{label}</p>
                                                 </div>
@@ -275,7 +276,7 @@ export default function OnlyHogs(): JSX.Element {
                                             state={{ newWindow: true }}
                                             className="block min-w-0 rounded border border-primary bg-white p-3 no-underline focus-visible:outline-[#007a9c] dark:bg-accent-dark"
                                         >
-                                            <p className="m-0 text-sm font-semibold text-[#007a9c] underline dark:text-[#5bd2ff]">
+                                            <p className="m-0 text-sm font-semibold text-[#007a9c] underline dark:text-[#4dadea]">
                                                 {name}
                                             </p>
                                             <p className="mb-0 mt-1 text-xs text-secondary">{line}</p>
@@ -286,13 +287,13 @@ export default function OnlyHogs(): JSX.Element {
                                     <p className="mb-2 flex items-center gap-2 text-sm font-semibold">
                                         <IconPlay
                                             aria-hidden="true"
-                                            className="size-4 text-[#007a9c] dark:text-[#5bd2ff]"
+                                            className="size-4 text-[#007a9c] dark:text-[#4dadea]"
                                         />
                                         See more of me
                                     </p>
                                     <Link
                                         to="/videos"
-                                        className="text-sm font-semibold text-[#007a9c] dark:text-[#5bd2ff]"
+                                        className="text-sm font-semibold text-[#007a9c] dark:text-[#4dadea]"
                                     >
                                         Watch PostHog videos
                                     </Link>
@@ -301,7 +302,7 @@ export default function OnlyHogs(): JSX.Element {
                         </div>
                     </div>
                 </div>
-            </Explorer>
+            </ReaderView>
         </>
     )
 }
