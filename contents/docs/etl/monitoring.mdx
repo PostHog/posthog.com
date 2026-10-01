@@ -4,24 +4,26 @@ sidebar: Docs
 showTitle: true
 ---
 
-The ETL page answers three questions: what broke, what moved, and what is running.
+The ETL page answers three questions: what stopped, what moved, and what's running.
 
 ## Needs attention
 
-Tables that have stopped syncing sit at the top, worst first, with the error and a link to the source. The section disappears when nothing is wrong, so an empty page means an empty problem list rather than a page that failed to load.
+Tables that have stopped syncing come first, with the error and a link to the source. The section is hidden when nothing is wrong, so an empty page means there's nothing to fix.
 
-Tables fed by a webhook do not appear here. A webhook table is pushed to on the vendor's schedule rather than pulled on ours, so it has no last sync and cannot have stopped.
+Tables fed by a webhook don't appear here. A webhook table is pushed to on the vendor's schedule rather than pulled on PostHog's, so it has no last sync and can't have stopped.
 
 ## Runs
 
-The failed runs from the window you pick. This list answers a different question from the one above: "needs attention" is the state a table is in right now, and "runs" is individual jobs that failed recently. A table can be broken with no recent run, if nothing retried it.
+Every sync in the window you pick, newest first, with runs in progress at the top.
+
+This answers a different question from the section above. "Needs attention" is the state a table is in right now. "Runs" is individual jobs. A table can be broken with no recent run if nothing has retried it.
 
 ## Rows synced by destination
 
-Rows written to each destination over the window, one series per destination. A destination that quietly stopped receiving rows shows up as a flat line.
+Rows written to each destination over the window, one series per destination. A destination that stopped receiving rows shows up as a flat line.
 
-A row that reaches two destinations counts against both, so the series stack. That matches how the rows bill.
+A row that reaches two destinations counts against both, so the series stack. This matches how the rows are billed.
 
 ## Tables syncing
 
-How many tables are switched on across every source, and how many runs are in flight. These numbers refresh every 30 seconds while the page is open.
+How many tables are switched on across every source, and how many runs are in progress. These numbers refresh every 30 seconds while the page is open.

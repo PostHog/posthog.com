@@ -3,7 +3,6 @@ export const fivetran = {
     key: 'fivetran',
     assets: {
         icon: '/images/competitors/fivetran.svg',
-        comparisonArticle: '/blog/posthog-vs-fivetran',
     },
     products: {
         etl: {

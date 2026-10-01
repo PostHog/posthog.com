@@ -27,9 +27,9 @@ export const etl = {
     color: 'purple',
     colorSecondary: 'lilac',
     seo: {
-        title: 'Sources & destinations (ETL) - sync 1,300+ sources into PostHog',
+        title: 'Sources & destinations (ETL) – import data from 1,300+ sources',
         description:
-            'Import from over 1,300 sources, query the data next to your product analytics, and write it onward to Postgres, Snowflake, BigQuery, Redshift, Databricks, S3, or Azure Blob.',
+            'Import data from 1,300+ sources, query it alongside your product analytics, and write it to Postgres, Snowflake, BigQuery, Redshift, Databricks, S3, or Azure Blob.',
     },
     /**
      * Sections rendered on the Product surface (`/etl`). Each entry resolves to a section
@@ -86,8 +86,8 @@ export const etl = {
         { slug: 'getting-started', name: 'Get started', group: 'divided', icon: <IconRocket className="size-4" /> },
     ],
     overview: {
-        title: 'Sync 1,300+ sources, then send the rows wherever you need them',
-        eli5: 'ETL connects the tools your business already runs on, like Stripe, HubSpot, Salesforce, and your own Postgres, and copies their tables into PostHog on a schedule. Query those tables next to your product analytics, and write the same rows onward to your own Postgres, Snowflake, BigQuery, Redshift, Databricks, S3, or Azure Blob. One page shows you every sync, what it moved, and what broke.',
+        title: 'Import data from 1,300+ sources',
+        eli5: 'ETL copies tables from tools like Stripe, HubSpot, Salesforce, and your own Postgres into PostHog on a schedule. Once a table is in, you can query it alongside the events your product sends, so revenue and activation are one SQL query rather than an export and a spreadsheet. You can also send the same rows to your own Postgres, Snowflake, BigQuery, Redshift, Databricks, S3, or Azure Blob.',
         textColor: 'text-white',
         layout: 'overlay',
     },
@@ -117,15 +117,15 @@ export const etl = {
         rows: [
             [
                 'Data engineers',
-                'You maintain connectors nobody thanks you for. Point PostHog at the source instead, and watch the syncs from one page.',
+                'Connect a source instead of building and maintaining the connector. Sync status for every table is on one page.',
             ],
             [
                 'Product engineers',
-                'You want revenue next to activation without filing a ticket. Sync Stripe, then join it to your events in SQL.',
+                'Sync Stripe or HubSpot, then join it to your product events in SQL without waiting on a data team.',
             ],
             [
                 'Founders and small teams',
-                'You cannot justify a separate ETL bill on top of a warehouse bill. Sync the handful of sources you actually use and pay per row.',
+                'Pay per row synced, with the first million free each month. The warehouse is included, so there is no second bill.',
             ],
         ],
     },
@@ -139,7 +139,7 @@ export const etl = {
     pairsWith: [
         {
             slug: 'context-warehouse/managed-warehouse',
-            description: 'Query everything ETL syncs next to your product analytics, in SQL.',
+            description: 'Query synced tables alongside your product analytics in SQL.',
         },
         {
             slug: 'cdp',
@@ -147,22 +147,22 @@ export const etl = {
         },
         {
             slug: 'product-analytics',
-            description: 'Join synced business data to the events your product already sends.',
+            description: 'Join synced tables to the events your product sends.',
         },
     ],
     comparison: {
         summary: {
             them: [
-                { title: 'You need a connector we do not have, and you need it this quarter' },
-                { title: 'Your warehouse is the centre of your stack and PostHog is one source among many' },
-                { title: 'You have a data team who already run dbt and an orchestrator' },
+                { title: 'You need a connector we do not have yet' },
+                { title: 'Your own warehouse is the center of your stack, and PostHog is one source among many' },
+                { title: 'You already run dbt and an orchestrator, and want ingestion to fit that setup' },
             ],
             us: [
-                { title: 'You want your business data next to your product data without running a pipeline' },
-                { title: 'You would rather pay per row than per monthly active row' },
+                { title: 'You want business data alongside product data without running a pipeline' },
+                { title: 'You want per-row pricing rather than monthly active rows' },
                 {
-                    title: 'You want one page that tells you a sync broke',
-                    subtitle: 'Failing tables, rows per destination, and what is running right now',
+                    title: 'You want sync status in one place',
+                    subtitle: 'Failing tables, rows per destination, and runs in progress',
                 },
             ],
         },

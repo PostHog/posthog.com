@@ -11,7 +11,7 @@ const style = {
     progressBar: 'bg-purple',
 }
 
-/** Applications = the ways a person shows up to ETL. */
+/** Applications = the ways you use ETL. */
 export const applications: CarouselSlide[] = [
     {
         slug: 'sync-a-source',
@@ -19,16 +19,16 @@ export const applications: CarouselSlide[] = [
         icon: <IconPlug className="size-5" />,
         ...style,
         layout: 'stack',
-        heading: 'Connect a tool and pick its tables',
+        heading: 'Connect a source and pick its tables',
         description: (
             <>
                 <p>
-                    Choose a source, hand PostHog credentials, and select the tables worth syncing. PostHog reads the
-                    schema, sets a schedule, and keeps going when a column changes underneath it.
+                    Choose a source, provide credentials, and select the tables you want. PostHog reads the schema, sets
+                    a schedule, and keeps syncing when a column changes.
                 </p>
                 <p>
-                    Every connector has its own page covering the credentials it needs and the tables it offers. Start
-                    with <Link to="/docs/data-warehouse/sources">the source list</Link>.
+                    Each connector has a page covering the credentials it needs and the tables it offers. Start with{' '}
+                    <Link to="/docs/data-warehouse/sources">the source list</Link>.
                 </p>
                 <div className="@container">
                     <LabeledList
@@ -48,12 +48,12 @@ export const applications: CarouselSlide[] = [
         icon: <IconServer className="size-5" />,
         ...style,
         layout: 'stack',
-        heading: 'Write the same rows to your own warehouse',
+        heading: 'Send the same rows to your own warehouse',
         description: (
             <>
                 <p>
-                    A source can write to PostHog, to your own warehouse, or to both. Pick the destinations on the
-                    source and every table follows, or override a single table that belongs somewhere else.
+                    A source can write to PostHog, to your own warehouse, or both. Set destinations on the source and
+                    every table follows, or override a single table.
                 </p>
                 <p>
                     Adding a destination to a source that has already synced starts a full resync of its tables, and
@@ -79,13 +79,13 @@ export const applications: CarouselSlide[] = [
         icon: <IconGraph className="size-5" />,
         ...style,
         layout: 'stack',
-        heading: 'Find out a sync broke before a dashboard does',
+        heading: 'Check what is running and what stopped',
         description: (
             <>
                 <p>
-                    The ETL page opens on what stopped. Under that sit the rows each destination received over time, the
-                    number of tables syncing, and the runs in flight. The counts refresh every 30 seconds while you have
-                    the page open.
+                    The ETL page opens with the tables that have stopped syncing. Below that are the rows each
+                    destination received over time, the number of tables syncing, and the runs in progress. The counts
+                    refresh every 30 seconds while the page is open.
                 </p>
                 <div className="@container">
                     <LabeledList
@@ -105,11 +105,11 @@ export const applications: CarouselSlide[] = [
         icon: <IconDatabase className="size-5" />,
         ...style,
         layout: 'stack',
-        heading: 'Join business data to your product events',
+        heading: 'Join synced tables to your product events',
         description: (
             <>
                 <p>
-                    Synced tables sit in the same query engine as the events your product sends, so revenue against
+                    Synced tables use the same query engine as the events your product sends, so revenue against
                     activation is one query rather than an export and a spreadsheet.
                 </p>
                 <div className="@container">

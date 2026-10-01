@@ -4,82 +4,82 @@ import { IconDatabase, IconGraph, IconPlug, IconServer } from '@posthog/icons'
 export const features = {
     sources: {
         title: 'Sources',
-        headline: 'Over 1,300 sources, including the ones you actually use',
+        headline: '1,300+ sources, including the ones most teams start with',
         description:
-            'Connect Stripe, HubSpot, Salesforce, your own Postgres, and a long tail of another 1,300 tools. You give PostHog credentials and pick the tables. PostHog handles the schedule, the schema changes, and the retries.',
+            'Connect Stripe, HubSpot, Salesforce, your own Postgres, and 1,300 more. You provide credentials and pick the tables. PostHog handles the schedule, schema changes, and retries.',
         icon: <IconPlug />,
         color: 'purple',
         features: [
             {
-                title: 'The connectors most teams need, first',
+                title: 'Documented connectors for common tools',
                 description:
-                    'Stripe, HubSpot, Salesforce, Postgres, MySQL, Zendesk, and the ad platforms are hand-built and documented.',
+                    'Stripe, HubSpot, Salesforce, Postgres, MySQL, Zendesk, and the ad platforms each have their own setup docs.',
             },
             {
-                title: 'A long tail behind them',
+                title: 'REST connectors for everything else',
                 description:
-                    'Another 1,300 REST connectors cover the tools that never make a vendor catalog. Build your own if yours is missing.',
+                    'Another 1,300 connectors cover smaller tools. If yours is missing, you can build it with the custom REST source.',
             },
             {
                 title: 'Incremental by default',
                 description:
-                    'Most sources sync only what changed since last time, so you pay for new rows rather than the whole table.',
+                    'Most sources sync only what changed since the last run, so you pay for new rows rather than the whole table.',
             },
         ],
     },
     destinations: {
         title: 'Destinations',
-        headline: 'The same rows, written wherever you need them',
+        headline: 'Write synced rows to your own warehouse',
         description:
-            'A source does not have to stop at PostHog. Point any table at your own Postgres, Snowflake, BigQuery, Redshift, Databricks, S3, or Azure Blob, and PostHog writes there on the same schedule it syncs.',
+            'Point a table at your own Postgres, Snowflake, BigQuery, Redshift, Databricks, S3, or Azure Blob. PostHog writes there on the same schedule it syncs.',
         icon: <IconServer />,
         color: 'purple',
         features: [
             {
-                title: 'Seven destinations, plus PostHog',
+                title: 'Seven destinations, plus the PostHog warehouse',
                 description:
-                    'Postgres, Snowflake, BigQuery, Redshift, Databricks, S3, and Azure Blob. The PostHog warehouse is one of the list, not a special case.',
+                    'Postgres, Snowflake, BigQuery, Redshift, Databricks, S3, and Azure Blob. A table with no destination set writes to the PostHog warehouse.',
             },
             {
-                title: 'Set it per table, not per source',
+                title: 'Set per source, override per table',
                 description:
-                    'A table follows its source by default, and you can override any table to write somewhere else.',
+                    'Tables follow their source by default. Override a single table when it belongs somewhere else.',
             },
             {
                 title: 'One set of credentials',
                 description:
-                    'Destinations reuse the same connections as batch exports, so a warehouse you already connected is ready to use.',
+                    'Destinations reuse the same connections as batch exports, so a warehouse you already connected is ready to pick.',
             },
         ],
     },
     health: {
         title: 'Health',
-        headline: 'One page that tells you a sync broke',
+        headline: 'Sync status in one place',
         description:
-            'Most pipelines fail quietly and you find out when a dashboard looks wrong. The ETL page leads with what stopped, then shows rows written per destination over time, how many tables are syncing, and what is running right now.',
+            'The ETL page opens with the tables that have stopped syncing, then shows rows written per destination over time, how many tables are syncing, and which runs are in progress.',
         icon: <IconGraph />,
         color: 'purple',
         features: [
             {
-                title: 'Failures first',
-                description:
-                    'Tables that have stopped syncing sit at the top, with the error and a link straight to the source.',
+                title: 'Failures at the top',
+                description: 'Tables that have stopped syncing come first, with the error and a link to the source.',
             },
             {
                 title: 'Rows per destination, over time',
-                description: 'See what each destination actually received, so a silent drop shows up as a flat line.',
+                description:
+                    'See what each destination received, so a destination that stopped shows up as a flat line.',
             },
             {
-                title: 'Numbers that keep up',
+                title: 'Updates while you watch',
                 description: 'The counts refresh every 30 seconds while the page is open.',
             },
         ],
     },
     query: {
         title: 'Query',
-        headline: 'Business data next to product data, in one query',
+        headline: 'Query business data alongside product data',
         description:
-            'Once a table is in PostHog you can join it to the events your product already sends. Revenue against activation, support tickets against retention, without exporting anything to a third tool first.',
+            'Once a table is in PostHog, you can join it to the events your product sends. Revenue against activation, or support tickets against retention, without exporting to another tool first.',
         icon: <IconDatabase />,
         color: 'purple',
         features: [
@@ -88,8 +88,8 @@ export const features = {
                 description: 'Synced tables and product analytics events live in the same query engine.',
             },
             {
-                title: 'Joins you define once',
-                description: 'Tell PostHog how a synced table maps to a person, and every insight can use it.',
+                title: 'Define a join once',
+                description: 'Map a synced table to a person once, and every insight can use it.',
             },
         ],
     },

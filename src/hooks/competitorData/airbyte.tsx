@@ -3,7 +3,6 @@ export const airbyte = {
     key: 'airbyte',
     assets: {
         icon: '/images/competitors/airbyte.svg',
-        comparisonArticle: '/blog/posthog-vs-airbyte',
     },
     products: {
         etl: {

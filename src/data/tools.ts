@@ -377,9 +377,9 @@ export const tools = [
         // Short in the nav, spelled out with "(ETL)" in page titles and SEO. Someone who does
         // not know the acronym still gets it, and someone searching for it still finds us.
         name: 'Sources & destinations',
-        description: 'Sync data from 1,300+ sources, then write it wherever you need it',
+        description: 'Import data from 1,300+ sources and send it to your warehouse',
         searchDescription:
-            'Import data from over 1,300 sources into PostHog, and write it onward to Postgres, Snowflake, BigQuery, Redshift, Databricks, S3, or Azure Blob.',
+            'Import data from 1,300+ sources into PostHog, and write it to Postgres, Snowflake, BigQuery, Redshift, Databricks, S3, or Azure Blob.',
         slug: 'etl',
         category: 'data',
     },
