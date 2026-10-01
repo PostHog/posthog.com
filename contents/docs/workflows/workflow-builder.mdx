@@ -82,6 +82,7 @@ To set this up:
 ### Batch triggers
 
 Batch triggers let you run a workflow for each person in an audience you define, optionally on a recurring schedule.
+To send a single email to an audience, a [broadcast](/docs/workflows/broadcasts) is quicker to set up.
 When the batch runs, PostHog evaluates your audience filters and executes the workflow once per matching person. If the workflow contains an [email dispatch](#dispatches), PostHog automatically deduplicates recipients by email address so each unique address receives only one email.
 
 A batch trigger combines two things:
