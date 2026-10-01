@@ -3,7 +3,7 @@ title: Heatmaps
 sidebar: Docs
 showTitle: true
 availability:
-  free: full
+  free: partial
   selfServe: full
   enterprise: full
 ---
@@ -14,11 +14,31 @@ Heatmaps shows you how users are interacting with elements on your website or ap
 
 To start, ensure you enable the capturing of heatmap data in [your project settings](https://app.posthog.com/settings/project-heatmaps#heatmaps) or with the `enable_heatmaps` key in the [JavaScript Web SDK initialization config](/docs/libraries/js/config).
 
-Heatmap data is captured along with other events, so it doesn't contribute to your bill, but the clickmap requires [autocapture](/docs/product-analytics/autocapture) and the scrollmap requires pageleave events.
+Heatmap data is free to ingest, so it doesn't contribute to your bill. The clickmap requires [autocapture](/docs/product-analytics/autocapture) and the scrollmap requires pageleave events.
+
+<CalloutBox icon="IconInfo" title="Heatmaps on the free plan are limited" type="fyi">
+
+On the free plan, PostHog collects heatmap data for up to 3 pages that you [choose](#choosing-which-pages-to-capture). You can view these pages in the in-app Heatmaps tool. To collect data for more pages and to view heatmaps in the toolbar, add a card in your [billing settings](https://app.posthog.com/organization/billing) to start pay-as-you-go. See our [pricing page](/pricing) for details.
+
+</CalloutBox>
 
 You can view heatmaps via the PostHog toolbar, or using the in-app Heatmap tool that's currently an opt-in beta.
 
+## Choosing which pages to capture
+
+You choose which pages send heatmap data in the **Heatmap capture URLs** section of your [heatmap settings](https://app.posthog.com/settings/environment-heatmaps#heatmaps-capture):
+
+1. Under **Pages to capture**, select **Only listed URLs**. On a pay-as-you-go plan, you can select **Allow all URLs** instead.
+2. Under **Allowed URLs**, enter the full URL of each page, such as `https://example.com/pricing`. Use `*` to match any characters, such as `https://example.com/docs/*`.
+3. Click **Save capture URLs**.
+
+Before you save, the settings show the pages from the last 30 days that your list does not cover. PostHog does not collect heatmap data from these pages.
+
+On the free plan, you can list up to 3 URLs. If you don't choose any, PostHog uses the URLs of your 3 oldest saved heatmaps. You can change your list at any time. Data that PostHog already collected for a page stays available after you remove the page from the list.
+
 ## Viewing heatmaps using the toolbar
+
+> **Note:** Toolbar heatmaps require a pay-as-you-go plan.
 
 To view your heatmaps, click the heatmap icon on the toolbar.
 
