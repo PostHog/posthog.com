@@ -26,7 +26,7 @@ type TypeConfig = {
 const typeConfig: TypeConfig[] = [
     {
         type: 'tools',
-        label: 'Tools',
+        label: 'Products',
         icon: <IconApps />,
         aliases: ['tools', 'tool', 'products', 'product', 'platform'],
     },

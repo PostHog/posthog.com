@@ -62,12 +62,12 @@ We also default to charging as little as possible while still making a sensible 
 
 **Pendo** has four pricing tiers – Free, Base, Core, and Ultimate. Pendo's Free plan is limited to 500 monthly active users and doesn't include session replays.
 
-**PostHog** uses usage-based pricing with a generous free tier – no credit card required, and unlimited teammates on every plan. Every month, you get 1 million events, 5,000 session replays, 1 million feature flag requests, and more for free. After that, you only pay for what you use, and pricing gets cheaper at scale.
+**PostHog** uses usage-based pricing with a generous free tier – no credit card required, and unlimited teammates on every plan. Every month, you get 1 million events, 5,000 web and 2,500 mobile session replays, 1 million feature flag requests, and more for free. After that, you only pay for what you use, and pricing gets cheaper at scale.
 
 Adding a credit card unlocks additional features like advanced paths, correlation analysis, lifecycle insights, and dashboard subscriptions. [Startups can qualify for $50k in free credits](/startups), and you can set billing limits per product to avoid surprises. See the [pricing page](/pricing) for a full breakdown.
 
 - **Product Analytics and Web Analytics**: 1 million events/month
-- **Session Replay**: 5,000 recordings/month
+- **Session Replay**: 5,000 web and 2,500 mobile recordings/month
 - **Feature Flags**: 1 million requests/month
 - **Surveys**: 1,500 responses/month
 - **Data warehouse**: 1 million synced rows/month + free historical syncs for the first 7 days for each new source
@@ -242,7 +242,7 @@ Regulatory compliance can be a critical need for many teams, especially if they 
 
 Pendo and PostHog both support a variety of tracking and implementation options to get your data into their platform. Both platforms enable you to create tracked events manually, as well as offering autocapture to help you get started quickly.
 
-Autocapture is preferred by many users because it's faster to set up, but some argue that it creates too much noise or cost to be useful. We disagree, and it's why PostHog gives you your first million events for free, every month – so you can capture events without worrying about these issues. [It's something we feel quite strongly about](/blog/is-autocapture-still-bad).
+Autocapture is preferred by many users because it's faster to set up, but some argue that it creates too much noise or cost to be useful. We disagree, and it's why PostHog gives you your first million events for free, every month – so you can capture events without worrying about these issues.
 
 <p>
 <ProductComparisonTable
@@ -377,7 +377,7 @@ Based on third-party data from Vendr and customer reports, typical Pendo costs r
 <details>
 <summary>How much does PostHog cost?</summary>
 
-PostHog uses transparent, usage-based [pricing](/pricing). It's free to get started – no credit card required – and every month you get generous free allowances including 1 million analytics events, 5,000 session replays, and 1 million feature flag requests.
+PostHog uses transparent, usage-based [pricing](/pricing). It's free to get started – no credit card required – and every month you get generous free allowances including 1 million analytics events, 5,000 web and 2,500 mobile session replays, and 1 million feature flag requests.
 
 After the free tier, you pay only for what you use, and pricing gets cheaper at scale. You can set billing limits per product to avoid surprises, and all pricing is public on the [pricing page](/pricing). Volume discounts and [startup credits of $50k](/startups) are available. In practice, more than 90% of PostHog users stay on the free tier.
 
@@ -388,7 +388,7 @@ After the free tier, you pay only for what you use, and pricing gets cheaper at 
 
 **Pendo** offers a free tier (Pendo Free) rather than a time-limited trial. It supports up to 500 MAUs with basic analytics, in-app guides, and branded NPS surveys. Once you exceed 500 MAUs, you can no longer create guides or segments, and usage data is sampled. Pendo does not offer free trials of its paid plans – you need to contact sales.
 
-**PostHog** is free to start with no restrictions on features or time. All users get 1 million events, 5,000 session replays, and 1 million feature flag requests free every month. You can set billing limits to keep usage within the free allowance indefinitely, and there's no Pendo-style branding on free accounts. Adding a credit card unlocks advanced features like correlation analysis and lifecycle insights while still staying on the free tier.
+**PostHog** is free to start with no restrictions on features or time. All users get 1 million events, 5,000 web and 2,500 mobile session replays, and 1 million feature flag requests free every month. You can set billing limits to keep usage within the free allowance indefinitely, and there's no Pendo-style branding on free accounts. Adding a credit card unlocks advanced features like correlation analysis and lifecycle insights while still staying on the free tier.
 
 </details>
 
@@ -424,7 +424,7 @@ Pendo offers Agent Analytics for tracking AI agent adoption, conversation effect
 
 **PostHog** has stronger session replay for developers. Beyond watching user sessions, it includes console logs, network request monitoring, a DOM explorer, and performance metrics – so you can debug issues, not just observe behavior. Replays also link directly to error tracking and feature flag evaluations, so you can see exactly what went wrong and which variant a user was on. Both tools follow a user across tabs: PostHog stitches every tab of a session into a single recording, and the player either follows the user between tabs or stays pinned to the one you pick. See [recordings across multiple tabs and windows](/docs/session-replay/how-to-watch-recordings#recordings-across-multiple-tabs-and-windows).
 
-**Pendo** includes session replay on Core plans and above, focused on understanding user journeys alongside in-app guide performance. It doesn't include developer debugging tools. Pendo's free tier doesn't include replay at all; PostHog's free tier includes 5,000 replays/month.
+**Pendo** includes session replay on Core plans and above, focused on understanding user journeys alongside in-app guide performance. It doesn't include developer debugging tools. Pendo's free tier doesn't include replay at all; PostHog's free tier includes 5,000 web and 2,500 mobile replays/month.
 
 </details>
 

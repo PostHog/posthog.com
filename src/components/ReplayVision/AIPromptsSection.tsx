@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import CloudinaryImage from 'components/CloudinaryImage'
 import Link from 'components/Link'
 import { ToggleGroup } from 'components/RadixUI/ToggleGroup'
-import { LabeledList } from 'components/Products/ReaderViewProduct/helpers'
+import { LabeledList, SECTION_H2 } from 'components/Products/ReaderViewProduct/helpers'
 import type { SectionComponentProps } from 'components/Products/ReaderViewProduct/types'
 
 /** Opens PostHog AI pre-filled (and auto-submitted) with the prompt. */
@@ -100,7 +100,7 @@ const AIPromptsSection = ({ id }: SectionComponentProps) => {
 
     return (
         <section id={id} className="scroll-mt-20 not-prose">
-            <h2 className="mb-3">AI prompts</h2>
+            <h2 className={SECTION_H2}>AI prompts</h2>
             <p className="text-base text-secondary mb-4">{INTRO}</p>
             <ToggleGroup
                 title="View"

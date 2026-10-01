@@ -11,7 +11,7 @@ import MoreOptions from 'components/Pricing/Redesign/MoreOptions'
 import CalculatorSection from 'components/Pricing/Redesign/CalculatorSection'
 import PricingJourney from 'components/Pricing/Redesign/PricingJourney'
 import Surfaces from 'components/Pricing/Redesign/Surfaces'
-import Philosophy from './philosophy'
+import Philosophy from 'components/Pricing/Philosophy'
 import ShamelessCTA from 'components/Home/ShamelessCTA'
 import AskMax from 'components/AskMax'
 

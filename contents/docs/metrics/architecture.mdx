@@ -2,7 +2,7 @@
 title: How metrics works
 ---
 
-> **Note:** Metrics is in private alpha and the viewer is only turned on for selected teams. The details on this page describe current behavior and may change before general availability.
+> **Note:** Metrics is in open alpha. Any team can turn it on — open [Metrics](https://app.posthog.com/metrics) and select **Enable metrics** in the onboarding view. The details on this page describe current behavior and may change before general availability.
 
 This page explains what happens to a metric between your application and a chart: how ingestion works, what a series is, how aggregations are computed, and where the data lives. You don't need any of this to use metrics, but it helps when you're deciding what to instrument or debugging why a chart looks the way it does.
 
@@ -58,9 +58,9 @@ Two more things sit between storage and the chart:
 
 Metrics are stored in a columnar time series table and exposed to SQL as `posthog.metrics`, scoped to your project like every other PostHog table. The SQL tab in the metrics viewer is a full escape hatch: anything the chart controls can't express, you can write directly, and join against the rest of your PostHog data.
 
-## What alpha means here
+## What the alpha means here
 
-While metrics is in alpha, ingestion details and limits may still change, and retention policy is not final. The OTLP endpoint, the series model, and the aggregation semantics described above are the stable core the product is built on.
+While metrics is in open alpha, ingestion details and limits may still change, and retention policy is not final. The OTLP endpoint, the series model, and the aggregation semantics described above are the stable core the product is built on.
 
 ## Next steps
 

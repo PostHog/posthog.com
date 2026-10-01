@@ -1,15 +1,14 @@
 import React from 'react'
-import { IconArrowUpRight, IconLaptop, IconPlug, IconRewindPlay, IconSupport, IconWarning } from '@posthog/icons'
-import { IconOpenAI } from 'components/OSIcons'
+import { IconPlug, IconRewindPlay, IconSupport, IconWarning } from '@posthog/icons'
 import Link from 'components/Link'
 import { SignupCTA } from 'components/SignupCTA'
 import useSourcePlatforms from 'hooks/useSourcePlatforms'
 import AskAnythingDemo from './AskAnythingDemo'
 import { useToolsProducts } from 'components/Home/ToolsTicker'
 import ToolsTickerStrip from 'components/Home/ToolsTicker/ToolsTickerStrip'
-import PlatformInstall, { mcpInstallSchema, type InstallSchema } from 'components/PlatformInstall'
 import ProductContextDemo from './ProductContextDemo'
 import InboxDemo from './InboxDemo'
+import MCPInstallCTA from 'components/MCPInstallCTA'
 
 const signalSources = [
     {
@@ -42,23 +41,6 @@ const signalSources = [
     },
 ]
 
-const compactMcpSchema: InstallSchema = {
-    ...mcpInstallSchema,
-    supports: undefined,
-    secondaryAction: { label: 'Docs', to: '/docs/model-context-protocol', state: { newWindow: true } },
-    platforms: [
-        ...mcpInstallSchema.platforms.filter(({ id }) => id === 'claude'),
-        {
-            id: 'chatgpt',
-            label: 'ChatGPT',
-            group: 'platforms',
-            icon: <IconOpenAI className="size-4" />,
-            href: 'https://chatgpt.com/plugins/plugin_asdk_app_699caef2d680819188727b0ddbb349dd',
-        },
-        ...mcpInstallSchema.platforms.filter(({ id }) => ['codex', 'cursor', 'vscode'].includes(id)),
-    ],
-}
-
 export const GiveAgentsContext = () => {
     return (
         <div className="@container rounded p-4 @md:p-6 h-full bg-accent/20">
@@ -70,22 +52,7 @@ export const GiveAgentsContext = () => {
                         Query product data from your editor instead of context-switching to a browser. Do everything
                         from one-off analytics to launching new features - no new UI needed.
                     </p>
-                    <PlatformInstall
-                        schema={compactMcpSchema}
-                        linkOnly
-                        hideSecondaryAction
-                        className="!shadow-none !mb-0"
-                    />
-                    <p className="text-sm text-secondary m-0 inline-flex gap-1">
-                        Or use{' '}
-                        <Link
-                            to="/desktop"
-                            state={{ newWindow: true }}
-                            className="inline-flex items-center gap-1 underline underline-offset-2"
-                        >
-                            <IconLaptop className="size-4" /> PostHog Desktop <IconArrowUpRight className="size-3" />
-                        </Link>
-                    </p>
+                    <MCPInstallCTA />
                 </div>
             </div>
         </div>

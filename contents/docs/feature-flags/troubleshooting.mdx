@@ -91,6 +91,8 @@ Behavioral and lifecycle cohorts are dynamic cohorts created using the options u
 
 We don't support using them with feature flags because querying them is relatively slow. Feature flags require fast evaluation and these queries would significantly impact the evaluation speed of the entire service. 
 
+[Realtime cohorts](/docs/data/realtime-cohorts) remove this limit for cohorts built from simple event criteria, by keeping track of who is in the cohort as events arrive instead of querying at evaluation time. They're in early beta and rolling out gradually, so they aren't available in most projects yet, and sequences and lifecycle criteria still aren't supported.
+
 ### How do I create a flag that targets users who completed an event?
 
 Although you can't use behavioral or lifecycle cohorts, you still might want to target users who completed an event.

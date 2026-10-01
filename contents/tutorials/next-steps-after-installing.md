@@ -17,7 +17,7 @@ You created a PostHog account and installed it on your site, but what’s next? 
 
 To get the best possible understanding of your product, you need as much data as possible. Capturing the most possible events helps you do this. PostHog makes it easy.
 
-Autocapture is enabled by default if you've installed either [the PostHog snippet](/docs/integrate#snippet) or [`posthog-js`](/docs/integrate/client/js). That means your product will send pageviews, button clicks, inputs, and more to PostHog automatically. 
+Autocapture is enabled by default if you've installed either [the PostHog snippet](/docs/integrate#snippet) or [`posthog-js`](/docs/libraries/js). That means your product will send pageviews, button clicks, inputs, and more to PostHog automatically. 
 
 > With either of these installed, you can also **enable session recordings** in “Project Settings”, under "Recordings.”
 
@@ -170,7 +170,7 @@ Read more about setting up and using experiments in [our product manual](/manual
 
 ## Further reading
 
-- [The full documentation on the PostHog JavaScript SDK](/docs/integrate/client/js)
+- [The full documentation on the PostHog JavaScript SDK](/docs/libraries/js)
 - [How to set up Next.js analytics, feature flags, and more](/tutorials/nextjs-analytics)
 - [Complete guide to event tracking](/tutorials/event-tracking-guide)
 - [Calculating average session duration, time on site, and other session-based metrics](/tutorials/session-metrics)

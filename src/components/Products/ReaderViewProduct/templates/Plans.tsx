@@ -164,7 +164,12 @@ const SubheaderRow = ({ label }: { label: string }) => (
 )
 
 const Plans = ({ id, productData }: SectionComponentProps) => {
-    const billingHandle = productData?.sharesFreeTier || productData?.handle
+    // `useProduct` resolves `sharesFreeTier` from a handle string into the full
+    // product object, so read the handle back off it. Accept both shapes – callers
+    // that pass raw productData still hand us the string.
+    const sharesFreeTier = productData?.sharesFreeTier
+    const billingHandle =
+        (typeof sharesFreeTier === 'string' ? sharesFreeTier : sharesFreeTier?.handle) || productData?.handle
     const product = useProduct({ handle: billingHandle })
     const billing = product?.billingData
     const [showDifferencesOnly, setShowDifferencesOnly] = useState(true)
@@ -215,7 +220,9 @@ const Plans = ({ id, productData }: SectionComponentProps) => {
     const freeTierRows: Array<{ name: string; allocation: number; unit: string }> = []
     if (freePlan?.free_allocation) {
         freeTierRows.push({
-            name: productData.label || billing.name,
+            // When the meter is shared, name the shared product ("Logs & Tracing")
+            // rather than just the billing product it happens to be keyed on.
+            name: productData.label || product?.categoryName || billing.name,
             allocation: freePlan.free_allocation,
             unit,
         })
@@ -433,37 +440,29 @@ const Plans = ({ id, productData }: SectionComponentProps) => {
                     )}
                 </div>
 
-                {/* Product features */}
-                <div className="mt-12 mb-4 flex items-center justify-between gap-4">
-                    <h3 className="text-2xl font-bold text-primary m-0">Product features</h3>
-                    <Toggle
-                        checked={showDifferencesOnly}
-                        onChange={setShowDifferencesOnly}
-                        label="Show differences only"
-                        position="right"
-                    />
-                </div>
+                {/* Product features – a product that shares another's billing meter
+                    (sharesFreeTier) inherits its plan features, which are named for the
+                    billing product. Those rows read wrong on the borrowing product's page,
+                    so it can opt out and show platform features only. */}
+                {!productData.hideProductFeatures && (
+                    <>
+                        {/* Product features */}
+                        <div className="mt-12 mb-4 flex items-center justify-between gap-4">
+                            <h3 className="text-2xl font-bold text-primary m-0">Product features</h3>
+                            <Toggle
+                                checked={showDifferencesOnly}
+                                onChange={setShowDifferencesOnly}
+                                label="Show differences only"
+                                position="right"
+                            />
+                        </div>
 
-                {visibleProductRows.length === 0 && !showDifferencesOnly ? (
-                    <p className="text-sm text-primary/50 italic py-4 m-0">No product features.</p>
-                ) : (
-                    <div className="divide-y divide-primary">
-                        <AnimatePresence initial={false}>
-                            {productSplit.ungrouped.map((row) => (
-                                <motion.div key={`prod-${row.key}`} {...ROW_ANIMATION}>
-                                    <div className={`${ROW_GRID} ${ROW_PADDING} items-center`}>
-                                        <span className={`${LABEL_CELL} text-sm text-primary/70`}>{row.name}</span>
-                                        <ValueCell value={row.free} />
-                                        <ValueCell value={row.paid} />
-                                    </div>
-                                </motion.div>
-                            ))}
-                            {productSplit.categories.map((cat) => (
-                                <React.Fragment key={`prod-group-${cat}`}>
-                                    <motion.div key={`prod-subheader-${cat}`} {...ROW_ANIMATION}>
-                                        <SubheaderRow label={cat} />
-                                    </motion.div>
-                                    {productSplit.grouped[cat].map((row) => (
+                        {visibleProductRows.length === 0 && !showDifferencesOnly ? (
+                            <p className="text-sm text-primary/50 italic py-4 m-0">No product features.</p>
+                        ) : (
+                            <div className="divide-y divide-primary">
+                                <AnimatePresence initial={false}>
+                                    {productSplit.ungrouped.map((row) => (
                                         <motion.div key={`prod-${row.key}`} {...ROW_ANIMATION}>
                                             <div className={`${ROW_GRID} ${ROW_PADDING} items-center`}>
                                                 <span className={`${LABEL_CELL} text-sm text-primary/70`}>
@@ -474,26 +473,54 @@ const Plans = ({ id, productData }: SectionComponentProps) => {
                                             </div>
                                         </motion.div>
                                     ))}
-                                </React.Fragment>
-                            ))}
-                            {showDifferencesOnly && hiddenProductCount > 0 && (
-                                <motion.div key="show-all-product" {...ROW_ANIMATION}>
-                                    <div className="py-3 text-center">
-                                        <button
-                                            onClick={() => setShowDifferencesOnly(false)}
-                                            className="text-sm text-primary/50 hover:text-primary/80 cursor-pointer"
-                                        >
-                                            Show all {productRows.length} features
-                                        </button>
-                                    </div>
-                                </motion.div>
-                            )}
-                        </AnimatePresence>
-                    </div>
+                                    {productSplit.categories.map((cat) => (
+                                        <React.Fragment key={`prod-group-${cat}`}>
+                                            <motion.div key={`prod-subheader-${cat}`} {...ROW_ANIMATION}>
+                                                <SubheaderRow label={cat} />
+                                            </motion.div>
+                                            {productSplit.grouped[cat].map((row) => (
+                                                <motion.div key={`prod-${row.key}`} {...ROW_ANIMATION}>
+                                                    <div className={`${ROW_GRID} ${ROW_PADDING} items-center`}>
+                                                        <span className={`${LABEL_CELL} text-sm text-primary/70`}>
+                                                            {row.name}
+                                                        </span>
+                                                        <ValueCell value={row.free} />
+                                                        <ValueCell value={row.paid} />
+                                                    </div>
+                                                </motion.div>
+                                            ))}
+                                        </React.Fragment>
+                                    ))}
+                                    {showDifferencesOnly && hiddenProductCount > 0 && (
+                                        <motion.div key="show-all-product" {...ROW_ANIMATION}>
+                                            <div className="py-3 text-center">
+                                                <button
+                                                    onClick={() => setShowDifferencesOnly(false)}
+                                                    className="text-sm text-primary/50 hover:text-primary/80 cursor-pointer"
+                                                >
+                                                    Show all {productRows.length} features
+                                                </button>
+                                            </div>
+                                        </motion.div>
+                                    )}
+                                </AnimatePresence>
+                            </div>
+                        )}
+                    </>
                 )}
 
                 {/* Platform features */}
-                <h3 className="text-2xl font-bold text-primary mt-12 mb-4">Platform features</h3>
+                <div className="mt-12 mb-4 flex items-center justify-between gap-4">
+                    <h3 className="text-2xl font-bold text-primary m-0">Platform features</h3>
+                    {productData.hideProductFeatures && (
+                        <Toggle
+                            checked={showDifferencesOnly}
+                            onChange={setShowDifferencesOnly}
+                            label="Show differences only"
+                            position="right"
+                        />
+                    )}
+                </div>
                 {visiblePlanRows.length === 0 && !showDifferencesOnly ? (
                     <p className="text-sm text-primary/50 italic py-4 m-0">No platform features.</p>
                 ) : (

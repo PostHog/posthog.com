@@ -14,6 +14,7 @@ import {
     postProcessMarkdown,
     preprocessHtmlForTabs,
 } from './turndownService'
+import { getChangelogDocsPath, stripPostHogOrigin } from '../src/components/Changelog/docsLinks'
 
 // Prepended to every generated .md file so LLM crawlers landing on a single page
 // still see the pointer to the full index. Pairs with <link rel="llms.txt"> in seo.tsx.
@@ -535,6 +536,55 @@ const CONTEXT_BLURB =
 const CONTEXT_WAREHOUSE_BLURB =
     'The data warehouse plus the full context-ingestion pipeline for your product — where context lives and a significant part of how we bill.'
 
+const PRODUCT_DESCRIPTOR = "one of PostHog's products — the surfaces you adopt to access self-driving"
+const TOOL_DESCRIPTOR = "one of PostHog's tools — the functional capabilities that make your product self-driving"
+
+// Pages in the Product nav that need the same .md twin as the taxonomy entries above, but that the
+// taxonomy can't generate one for: Support and Replay Vision are entries whose canonical link points
+// at docs instead of a slug, context warehouse and self-driving are layers of their own rather than
+// tools, and tracing and heatmaps have no entry. Listing them here writes the identical .md without
+// touching /platform.md or llms.txt — where each belongs in the taxonomy is a separate question.
+type MdOnlyPage = { name: string; slug: string; oneLiner: string; descriptor: string }
+
+const MD_ONLY_PAGES: MdOnlyPage[] = [
+    {
+        name: 'Tracing',
+        slug: 'tracing',
+        oneLiner: 'The span-level signal that shows agents where a request broke.',
+        descriptor: TOOL_DESCRIPTOR,
+    },
+    {
+        name: 'Heatmaps',
+        slug: 'heatmaps',
+        oneLiner: 'The visual signal — where people click, scroll, and rage-click.',
+        descriptor: TOOL_DESCRIPTOR,
+    },
+    {
+        name: 'Replay Vision',
+        slug: 'replay-vision',
+        oneLiner: 'Agents that watch session recordings at scale and turn what users hit into observations.',
+        descriptor: TOOL_DESCRIPTOR,
+    },
+    {
+        name: 'Support',
+        slug: 'support',
+        oneLiner: 'Tickets triaged with full product context — agents draft replies and fixes from the same data.',
+        descriptor: TOOL_DESCRIPTOR,
+    },
+    {
+        name: 'Context warehouse',
+        slug: 'context-warehouse',
+        oneLiner: CONTEXT_WAREHOUSE_BLURB,
+        descriptor: "one of the four layers of PostHog — where your product's context lives",
+    },
+    {
+        name: 'Self-driving',
+        slug: 'self-driving',
+        oneLiner: 'The loop itself — agents find problems and opportunities in your product and ship the fix.',
+        descriptor: "PostHog's umbrella story — the loop every product and tool serves",
+    },
+]
+
 const pageLinkFor = (item: PlatformItem): string => item.link || `https://posthog.com/${item.slug}`
 const mdLinkFor = (item: PlatformItem): string =>
     item.slug ? `https://posthog.com/${item.slug}.md` : item.link || 'https://posthog.com'
@@ -589,33 +639,39 @@ All docs are available as Markdown (append \`.md\` to any docs URL). Full index:
 export const generateProductPagesMarkdown = () => {
     const publicPath = path.resolve(__dirname, '../public')
 
-    for (const item of PLATFORM_ITEMS) {
-        if (!item.slug) continue // Web / MCP point at existing pages, no bespoke .md
-        const layerLabel =
-            item.layer === 'product'
-                ? "one of PostHog's products — the surfaces you adopt to access self-driving"
-                : "one of PostHog's tools — the functional capabilities that make your product self-driving"
+    const pages = [
+        // Web / MCP point at existing pages, no bespoke .md
+        ...PLATFORM_ITEMS.filter((item) => item.slug).map((item) => ({
+            name: item.name,
+            slug: item.slug as string,
+            oneLiner: item.oneLiner,
+            descriptor: item.layer === 'product' ? PRODUCT_DESCRIPTOR : TOOL_DESCRIPTOR,
+            pageLink: pageLinkFor(item),
+        })),
+        ...MD_ONLY_PAGES.map((page) => ({ ...page, pageLink: `https://posthog.com/${page.slug}` })),
+    ]
 
-        const content = `# ${item.name}
+    for (const page of pages) {
+        const content = `# ${page.name}
 
-${item.oneLiner}
+${page.oneLiner}
 
-${item.name} is ${layerLabel}.
+${page.name} is ${page.descriptor}.
 
 PostHog is the platform for self-driving products: it pairs the full context of your data (events, errors, logs, replays, and more) with agents that ship better products, faster.
 
-- Full page: ${pageLinkFor(item)}
+- Full page: ${page.pageLink}
 - All products and tools: https://posthog.com/platform.md
 - Pricing: https://posthog.com/pricing.md
 
-For features, screenshots, and details, see ${pageLinkFor(item)}.
+For features, screenshots, and details, see ${page.pageLink}.
 `
 
-        const outputPath = path.join(publicPath, `${item.slug}.md`)
+        const outputPath = path.join(publicPath, `${page.slug}.md`)
         const dirPath = path.dirname(outputPath)
         if (!fs.existsSync(dirPath)) fs.mkdirSync(dirPath, { recursive: true })
         fs.writeFileSync(outputPath, withAgentSignpost(content), 'utf8')
-        console.log(`Generated: ${item.slug}.md`)
+        console.log(`Generated: ${page.slug}.md`)
     }
 }
 
@@ -626,7 +682,7 @@ type ChangelogRoadmapNode = {
     date: string
     cta?: { label?: string; url?: string }
     teams?: { data?: Array<{ attributes?: { name?: string } }> }
-    topic?: { data?: { attributes?: { label?: string } } }
+    topic?: { data?: { attributes?: { label?: string; slug?: string } } }
 }
 
 type ChangelogVideoNode = {
@@ -668,8 +724,17 @@ export const generateChangelogMd = (roadmaps: ChangelogRoadmapNode[], videos: Ch
         const meta = [dayTitle(roadmap.date), team && `${team} Team`, topic].filter(Boolean).join(' · ')
         const description = cleanDescription(roadmap.description)
         const cta = roadmap.cta?.url ? `[${roadmap.cta.label || 'Learn more'}](${absoluteUrl(roadmap.cta.url)})` : ''
+        const docsPath = getChangelogDocsPath(roadmap)
+        const docs =
+            docsPath && docsPath !== stripPostHogOrigin(roadmap.cta?.url || '')
+                ? `[Docs](${absoluteUrl(docsPath)})`
+                : ''
+        const links = [docs, cta].filter(Boolean).join(' · ')
+        const title = roadmap.strapiID
+            ? `### [${roadmap.title}](https://posthog.com/changelog?id=${roadmap.strapiID})`
+            : `### ${roadmap.title}`
 
-        return [`### ${roadmap.title}`, `_${meta}_`, description, cta].filter(Boolean).join('\n\n')
+        return [title, `_${meta}_`, description, links].filter(Boolean).join('\n\n')
     }
 
     // Group entries and videos by YYYY-MM, newest first (input is sorted date DESC)

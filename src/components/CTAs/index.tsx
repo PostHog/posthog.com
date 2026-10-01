@@ -17,7 +17,7 @@ export type CTALinkKey = 'mcp' | 'demo' | 'discord' | 'talk-to-a-human'
 const ctaLinks: Record<CTALinkKey, { to: string; label: string; Icon: React.ComponentType<any> }> = {
     mcp: { to: '/docs/model-context-protocol', label: 'MCP', Icon: IconMCP },
     demo: { to: '/demo', label: 'Watch a demo', Icon: IconPlayFilled },
-    discord: { to: 'https://discord.gg/posthog', label: 'Discord', Icon: IconDiscord },
+    discord: { to: 'https://discord.gg/t57vmkcm95', label: 'Discord', Icon: IconDiscord },
     'talk-to-a-human': { to: '/talk-to-a-human', label: 'Talk to a human', Icon: IconHeadset },
 }
 

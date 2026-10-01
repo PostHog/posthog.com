@@ -391,7 +391,9 @@ export default function Handbook({ data: { post, postHogSource }, pageContext: {
     const docsProductSlug = typeof slug === 'string' && slug.startsWith('/docs/') ? slug.split('/')[2] : null
     const productSurfaceData = docsProductSlug
         ? allProducts
-              .filter((p: any) => p.slug?.split('/').pop() === docsProductSlug)
+              // `docsSlug` covers the products whose docs don't sit at
+              // `/docs/<product slug>` (Traces docs live at /docs/distributed-tracing).
+              .filter((p: any) => (p.docsSlug ?? p.slug?.split('/').pop()) === docsProductSlug)
               .sort((a: any, b: any) => (b.productMenu?.length ? 1 : 0) - (a.productMenu?.length ? 1 : 0))[0]
         : null
     const isProductDocsPage = !!productSurfaceData?.productMenu?.length

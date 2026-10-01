@@ -156,10 +156,10 @@ export const TabContent = ({
                     setAddons,
                     addons,
                 }) ||
-                    (activeProduct.name == 'Experiments' ? (
+                    (activeProduct.billedWith ? (
                         <div className="bg-accent border border-primary rounded-md px-4 py-3 mb-2 text-sm">
-                            Experiments is currently bundled with Feature flags and share a free tier and volume
-                            pricing.
+                            {activeProduct.name} is currently bundled with {activeProduct.billedWith} and shares a free
+                            tier and volume pricing.
                         </div>
                     ) : activeProduct.addonSliders ? (
                         <StandaloneAddonsTab
@@ -321,7 +321,11 @@ const CopyURLButton = ({ onClick }: { onClick: () => string }) => {
     )
 }
 
-export default function Tabbed() {
+export interface TabbedProps {
+    defaultProducts?: string[]
+}
+
+export default function Tabbed({ defaultProducts = DEFAULT_PRODUCT_TYPES }: TabbedProps = {}) {
     const {
         allProductData: {
             nodes: [{ products: billingProducts }],
@@ -329,8 +333,8 @@ export default function Tabbed() {
     } = useStaticQuery(allProductsData)
     const [analyticsData, setAnalyticsData] = useState<Record<string, any>>(getDefaultAnalyticsData)
     const platform = billingProducts.find((product) => product.type === 'platform_and_support')
-    const [activeType, setActiveType] = useState<string | null>(DEFAULT_PRODUCT_TYPES[0])
-    const [selectedTypes, setSelectedTypes] = useState<string[]>(DEFAULT_PRODUCT_TYPES)
+    const [activeType, setActiveType] = useState<string | null>(defaultProducts[0] ?? null)
+    const [selectedTypes, setSelectedTypes] = useState<string[]>(() => Array.from(new Set(defaultProducts)))
     const [addingProduct, setAddingProduct] = useState(false)
     const [productSearch, setProductSearch] = useState('')
     const addProductRef = useRef(null)
@@ -344,8 +348,10 @@ export default function Tabbed() {
     // `sort` is stable, so the `Infinity` bucket stays in `useProducts` order.
     const products = useMemo(() => {
         const navOrder = (product) => {
+            // A product billed with another (`sharesFreeTier`) sorts next to it.
             const index = BROWSE_TOOLS_HANDLES.indexOf(product.handle)
-            return index === -1 ? Infinity : index
+            const parentIndex = BROWSE_TOOLS_HANDLES.indexOf(product.sharesFreeTier)
+            return index !== -1 ? index : parentIndex !== -1 ? parentIndex : Infinity
         }
         return initialProducts
             .filter(
@@ -443,7 +449,7 @@ export default function Tabbed() {
                           params.products.split(',').filter((type) => products.some((product) => product.type === type))
                       )
                   )
-                : selectedTypes
+                : selectedTypes.filter((type) => products.some((product) => product.type === type))
         setSelectedTypes(selected)
         setActiveType(
             params.calculator === PLATFORM_PACKAGES_TYPE
@@ -595,13 +601,13 @@ export default function Tabbed() {
         // Keyboard is covered separately: slider handles move on arrow keys without firing either
         // of the other two.
         <div
-            className="w-full flex-1"
+            className="@container w-full flex-1"
             onClickCapture={trackInteraction('click')}
             onChangeCapture={trackInteraction('change')}
             onKeyDownCapture={trackInteraction('keyboard')}
         >
             <div className="grid grid-cols-12 mb-1">
-                <div className="col-span-12 @2xl:col-span-4 md:pr-6 mb-4 md:mb-0">
+                <div className="col-span-12 @2xl:col-span-4 @3xl:pr-6 mb-4 @3xl:mb-0">
                     <div className="mb-2">
                         <p className="m-0 text-sm flex gap-1 items-baseline">
                             <strong>Your estimate</strong>{' '}
@@ -610,9 +616,20 @@ export default function Tabbed() {
                             </span>
                         </p>
                     </div>
-                    <ul className="list-none m-0 p-0 flex flex-row md:flex-col gap-px overflow-x-auto @md:w-auto -mx-4 px-4 @md:px-0 @md:mx-0">
+                    <ul className="list-none m-0 p-0 flex flex-row @3xl:flex-col gap-px overflow-x-auto @md:w-auto -mx-4 px-4 @md:px-0 @md:mx-0">
                         {selectedProducts.map(
-                            ({ name, type, Icon, cost, color, colorDark, billingData, categoryName, pricingBadge }) => {
+                            ({
+                                name,
+                                type,
+                                Icon,
+                                cost,
+                                color,
+                                colorDark,
+                                billingData,
+                                categoryName,
+                                pricingBadge,
+                                billedWith,
+                            }) => {
                                 const active = activeProduct?.type === type
                                 const addonsPrice = getAddonsCostForProduct(productAddons, billingData)
                                 return (
@@ -620,7 +637,7 @@ export default function Tabbed() {
                                         <button
                                             type="button"
                                             onClick={() => setActiveType(type)}
-                                            className={`p-2 rounded-md font-semibold text-sm flex flex-col md:flex-row space-x-2 whitespace-nowrap items-start md:items-center justify-between w-full click ${
+                                            className={`p-2 rounded-md font-semibold text-sm flex flex-col @3xl:flex-row space-x-2 whitespace-nowrap items-start @3xl:items-center justify-between w-full click ${
                                                 active ? 'font-bold bg-accent' : 'hover:bg-accent'
                                             }`}
                                         >
@@ -643,10 +660,10 @@ export default function Tabbed() {
                                                     )}
                                                 </span>
                                             </div>
-                                            {name == 'Experiments' ? (
+                                            {billedWith ? (
                                                 <span className="opacity-25">--</span>
                                             ) : (
-                                                <div className="opacity-70 pl-5 md:pl-0">
+                                                <div className="opacity-70 pl-5 @3xl:pl-0">
                                                     {formatUSD(cost + addonsPrice)}
                                                 </div>
                                             )}
@@ -729,7 +746,7 @@ export default function Tabbed() {
                                                         </span>
                                                         <span className="text-secondary shrink-0">
                                                             {billedWith
-                                                                ? `Billed with ${billedWith.toLowerCase()}`
+                                                                ? `via ${billedWith}`
                                                                 : startsAt && unit
                                                                 ? `$${startsAt}/${unit}`
                                                                 : null}
@@ -770,7 +787,7 @@ export default function Tabbed() {
                         </button>
                     </div>
                 </div>
-                <div className="col-span-12 @2xl:col-span-8 md:pl-0 flex flex-col">
+                <div className="col-span-12 @2xl:col-span-8 @3xl:pl-0 flex flex-col">
                     {selectedProducts.length === 0 && !platformPackagesActive && (
                         <EmptyEstimate products={products} onAdd={addProduct} />
                     )}
@@ -854,7 +871,7 @@ export default function Tabbed() {
                                             Remove
                                         </button>
                                     </div>
-                                    {activeProduct.name !== 'Experiments' &&
+                                    {!activeProduct.billedWith &&
                                         (activeProduct.freeAllocationText ||
                                             activeProduct.freeLimit ||
                                             activeProduct.slider?.min) && (

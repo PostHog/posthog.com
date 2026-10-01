@@ -7,6 +7,7 @@ interface ReaderViewContextType {
     isNavVisible: boolean
     isTocVisible: boolean
     isNarrow: boolean
+    setContainerWidth: (width: number | null) => void
     fullWidthContent: boolean
     setFullWidthContent: (value: boolean) => void
     backgroundImage: string | null
@@ -21,6 +22,7 @@ const ReaderViewContext = createContext<ReaderViewContextType | undefined>(undef
 const isLabel = (item: any) => !item?.url && item?.name
 
 const SIDEBAR_PINNED_KEY = 'reader-sidebar-pinned'
+const NARROW_READER_BREAKPOINT = 672 // 42rem; matches @2xl/app-reader
 // Declaring here as a variable lets it survive re-renders - navigating between pages will not reset it.
 let persistedPinnedMemory: boolean | null = null
 
@@ -42,13 +44,23 @@ export function ReaderViewProvider({
     defaultNavVisible?: boolean
 }) {
     const { appWindow } = useWindow()
+    // The reader only needs to know which side of the responsive breakpoint it
+    // is on. Storing every measured pixel would re-render the whole reader for
+    // every ResizeObserver tick while someone drags the window edge.
+    const [measuredNarrow, setMeasuredNarrow] = useState<boolean | null>(null)
+    const setContainerWidth = useCallback((width: number | null) => {
+        setMeasuredNarrow(width === null ? null : width < NARROW_READER_BREAKPOINT)
+    }, [])
+    const appWindowWidth = appWindow?.size?.width
     // @2xl breakpoint for sidebar visibility (equivalent to @2xl/app-reader used in CSS)
-    const isWideEnoughForSidebar = appWindow?.size?.width && appWindow?.size?.width >= 672 // 42rem = 672px
+    const isWideEnoughForSidebar =
+        measuredNarrow !== null ? !measuredNarrow : !!appWindowWidth && appWindowWidth >= NARROW_READER_BREAKPOINT
     // Below the @2xl threshold the inline sidebar rail eats too much of the
     // reading column, so on mobile we hide it entirely and swap in a floating
     // control cluster + off-canvas drawer. Only treat as narrow once the width
     // is actually known so SSR/first paint defaults to the desktop layout.
-    const isNarrow = !!appWindow?.size?.width && appWindow.size.width < 672
+    const isNarrow =
+        measuredNarrow !== null ? measuredNarrow : !!appWindowWidth && appWindowWidth < NARROW_READER_BREAKPOINT
     const [isNavVisible, setIsNavVisible] = useState<boolean>(defaultNavVisible ?? persistedPinnedMemory ?? true)
     const [navUserToggled, setNavUserToggled] = useState(persistedPinnedMemory !== null)
     // @6xl breakpoint is 72rem = 1152px
@@ -148,6 +160,7 @@ export function ReaderViewProvider({
         isNavVisible,
         isTocVisible,
         isNarrow,
+        setContainerWidth,
         fullWidthContent,
         setFullWidthContent,
         backgroundImage,

@@ -92,7 +92,7 @@ const meQuery = qs.stringify(
                                             },
                                             user: {
                                                 populate: ['role'],
-                                                fields: ['role'],
+                                                fields: ['id'],
                                             },
                                         },
                                     },

@@ -1,5 +1,6 @@
 import React from 'react'
 import InstallFrameworkGrid from 'components/Products/InstallFrameworkGrid'
+import { SECTION_H2 } from '../helpers'
 import type { SectionComponentProps } from '../types'
 
 /**
@@ -20,7 +21,7 @@ const Installation = ({ id, productData }: SectionComponentProps) => {
 
     return (
         <section id={id} className="scroll-mt-20 not-prose">
-            <h2 className="mb-3">{heading}</h2>
+            <h2 className={SECTION_H2}>{heading}</h2>
             {description && <p className="text-base text-secondary mb-4">{description}</p>}
 
             <div className="bg-primary rounded shadow-2xl p-4 @2xl/reader-content:p-8 @4xl/reader-content:p-10">
