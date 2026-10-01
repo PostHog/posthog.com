@@ -30,7 +30,7 @@ The format is the joke. The facts are not. Every article starts with a plain def
 
 `Special:RecentChanges` reads the PostHog changelog – the same `allRoadmap` records that `/changelog` renders. It lists changes to the software, says so, and links to the repository commit log for edits to the articles themselves.
 
-Hogpedia is listed on `/sparks-joy` under **Time machine**, the group for parody recreations of old websites, via `SparksJoyItems.timeMachine` in `src/components/TaskBarMenu/menuData.tsx`. That array drives the `/sparks-joy` page only – the taskbar's "Things that spark joy" entry is a plain link to the page and has no submenu.
+Hogpedia is listed on `/sparks-joy` under **Time machine**, the group for parody recreations of old websites. The link is in `src/pages/sparks-joy/index.tsx`, alongside the other Time machine profiles. The taskbar's "Things that spark joy" entry is a plain link to the page and has no submenu.
 
 Pages are created in `gatsby/createPages.ts`. Articles are excluded from the generic `Plain` loop there and get their own loop, which also builds a page per category. The frontmatter types are declared in `gatsby/createSchemaCustomization.ts` under `FrontmatterHogpedia`.
 
