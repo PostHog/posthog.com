@@ -24,7 +24,6 @@ export default function HogpediaCategory({ data: { articles }, pageContext: { ca
                     nodes.length === 1 ? 'page' : 'pages'
                 }.`}
                 canonicalUrl={categoryPath(category)}
-                noindex
             />
             <Explorer
                 template="generic"

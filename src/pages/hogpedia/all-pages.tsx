@@ -15,7 +15,6 @@ export default function HogpediaAllPages(): JSX.Element {
                 title="All pages – Hogpedia"
                 description={`An index of all ${articles.length} Hogpedia articles about PostHog products, concepts, company history, and lore.`}
                 canonicalUrl="/hogpedia/all-pages"
-                noindex
             />
             <Explorer template="generic" slug="hogpedia" title="All pages – Hogpedia" fullScreen showAddressBar={false}>
                 <HogpediaShell title="All pages" slug="/hogpedia/all-pages" showTabs={false}>

@@ -32,7 +32,6 @@ export default function HogpediaRandom(): JSX.Element {
                 title="Random article – Hogpedia"
                 description="Opens a random Hogpedia article."
                 canonicalUrl="/hogpedia/random"
-                noindex
             />
             <Explorer
                 template="generic"

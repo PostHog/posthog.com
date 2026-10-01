@@ -37,7 +37,6 @@ export default function HogpediaMainPage(): JSX.Element {
                 title="Hogpedia, the free encyclopedia"
                 description="An encyclopedia of PostHog products, concepts, company history, and lore. Written in the style of a 2007 encyclopedia, sourced from PostHog's own documentation and handbook."
                 canonicalUrl="/hogpedia"
-                noindex
             />
             <Explorer template="generic" slug="hogpedia" title="Hogpedia" fullScreen showAddressBar={false}>
                 <HogpediaShell title="Main Page" tagline={false} slug="/hogpedia" showTabs={false}>

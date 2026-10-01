@@ -60,7 +60,6 @@ export default function HogpediaRecentChanges(): JSX.Element {
                 title="Recent changes – Hogpedia"
                 description="The most recent changes to PostHog, taken from the PostHog changelog."
                 canonicalUrl="/hogpedia/recent-changes"
-                noindex
             />
             <Explorer
                 template="generic"

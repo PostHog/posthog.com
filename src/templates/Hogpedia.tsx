@@ -86,16 +86,7 @@ export default function HogpediaArticle({
 
     return (
         <>
-            <SEO
-                title={`${heading} - Hogpedia`}
-                description={summary}
-                canonicalUrl={slug}
-                // Hogpedia is a parody encyclopedia, so the whole section is kept out of search
-                // engines. Indexed, it would compete with the real docs for the same queries, and
-                // an answer engine has no way to tell the lore articles from the factual ones.
-                noindex
-                article
-            />
+            <SEO title={`${heading} - Hogpedia`} description={summary} canonicalUrl={slug} article />
             <Explorer
                 template="generic"
                 slug="hogpedia"

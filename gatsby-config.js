@@ -236,17 +236,8 @@ module.exports = {
                     // Versioned SDK reference pages age out of the build, so keep them out of the sitemap.
                     const VERSIONED_SDK_REFERENCE = /^\/docs\/references\/[a-z0-9-]+-(\d|latest)/
 
-                    // Hogpedia is a parody encyclopedia and is noindex throughout, so none of it
-                    // belongs in the sitemap. Indexed, its product and concept articles would
-                    // compete with the real docs for the same queries.
-                    const HOGPEDIA = /^\/hogpedia(?:\/|$)/
-                    const TIME_MACHINE = /^\/(?:hogspace|hogbook|hogreads|sparks-joy\/(?:hoglr|onlyhogs))\/?$/
-
                     const transformedPages = allPages
-                        .filter(
-                            ({ path }) =>
-                                !VERSIONED_SDK_REFERENCE.test(path) && !HOGPEDIA.test(path) && !TIME_MACHINE.test(path)
-                        )
+                        .filter(({ path }) => !VERSIONED_SDK_REFERENCE.test(path))
                         .map(({ path }) => {
                             return {
                                 path: `${site.siteMetadata.siteUrl}${path}`,

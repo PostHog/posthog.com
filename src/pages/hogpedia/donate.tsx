@@ -16,7 +16,6 @@ export default function HogpediaDonate(): JSX.Element {
                 title="Donate to Hogpedia – Hogpedia"
                 description="Hogpedia does not accept donations. It explains what to do instead."
                 canonicalUrl="/hogpedia/donate"
-                noindex
             />
             <Explorer template="generic" slug="hogpedia" title="Donate – Hogpedia" fullScreen showAddressBar={false}>
                 <HogpediaShell title="Donate to Hogpedia" slug="/hogpedia/donate" showTabs={false}>

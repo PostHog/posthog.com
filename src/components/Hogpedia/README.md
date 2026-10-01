@@ -4,7 +4,7 @@ Hogpedia is an encyclopedia about PostHog at `/hogpedia`, presented in the MonoB
 
 The format is the joke. The facts are not. Every article starts with a plain definition, links to the PostHog source for each claim, and cross-links the other articles.
 
-**Hogpedia is `noindex` throughout, and excluded from the sitemap.** This is deliberate, not an oversight. Indexed, the product and concept articles would compete with the real docs for the same queries, and an answer engine has no way to tell a lore article from a factual one – the encyclopedia format makes content *more* likely to be quoted, not less. Keep new pages `noindex`. For the same reason there is no structured data: `Article` and `DefinedTerm` JSON-LD would point machines at a parody page.
+Hogpedia links to first-party sources for its claims. The product docs remain the source for product definitions. Do not add `Article` or `DefinedTerm` JSON-LD: that would present a parody page as an official definition.
 
 ## What lives where
 

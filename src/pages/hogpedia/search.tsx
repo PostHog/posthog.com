@@ -16,7 +16,6 @@ export default function HogpediaSearchPage(): JSX.Element {
                 title="Search results – Hogpedia"
                 description="Search the Hogpedia encyclopedia of PostHog products, concepts, company history, and lore."
                 canonicalUrl="/hogpedia/search"
-                noindex
             />
             <Explorer template="generic" slug="hogpedia" title="Search – Hogpedia" fullScreen showAddressBar={false}>
                 <HogpediaShell title="Search results" slug="/hogpedia/search" showTabs={false}>
