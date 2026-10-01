@@ -27,23 +27,21 @@ const LANGUAGE_FLAGS: Record<string, HedgehogActorFlagOption> = {
 }
 
 /**
- * The flag that the hedgehog holds on the page of a locale, or undefined on an English page.
- * `languages` is `navigator.languages`. The first tag in the language of the page gives the region,
- * so pt-BR gets Brazil, pt-PT gets the globe, zh-CN gets China, and zh-TW gets the globe. A region
- * without a flag (de-AT, es-AR, es-419) gets the globe. No tag in that language, or a tag without a
- * region, gets the flag of the language.
+ * The flag that the hedgehog holds on the page of a locale, or undefined when the visitor isn't on their
+ * own page. `tag` is the visitor's `preferredTag()` from `navigator.languages`, the same tag that the
+ * middleware redirects with. So an English browser on /ja gets no hedgehog, and neither does zh-TW on /zh.
+ * The region of the tag gives the country: pt-BR gets Brazil, pt-PT gets the globe, zh-CN gets China. A
+ * region without a flag (de-AT, es-AR, es-419) gets the globe. A tag without a region gets the flag of
+ * the language.
  */
-export function localeFlag(locale: string, languages: readonly string[]): HedgehogActorFlagOption | undefined {
-    if (locale === 'en') return
+export function localeFlag(locale: string, tag: string | undefined): HedgehogActorFlagOption | undefined {
+    if (!tag) return
 
-    for (const tag of languages) {
-        const [language, ...subtags] = tag.toLowerCase().split(/[-_]/)
-        if (language !== locale) continue
-        // The region is two letters or three digits, after an optional script: zh-Hans-CN, es-419.
-        const region = subtags.find((subtag) => /^([a-z]{2}|\d{3})$/.test(subtag))
-        if (region) return TAG_FLAGS[`${language}-${region}`] ?? 'earth'
-        break
-    }
+    const [language, ...subtags] = tag.toLowerCase().split(/[-_]/)
+    if (language !== locale) return
+    // The region is two letters or three digits, after an optional script: zh-Hans-CN, es-419.
+    const region = subtags.find((subtag) => /^([a-z]{2}|\d{3})$/.test(subtag))
+    if (region) return TAG_FLAGS[`${language}-${region}`] ?? 'earth'
 
-    return LANGUAGE_FLAGS[locale] ?? 'earth'
+    return LANGUAGE_FLAGS[language] ?? 'earth'
 }
