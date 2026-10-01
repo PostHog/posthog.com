@@ -64,7 +64,6 @@ export default function OnlyHogs({ data }: { data: { posts: { nodes: PostSummary
                 title="OnlyHogs - PostHog"
                 description="Come for the Hoggies. Stay for the funnels, session replays, and feature flags."
                 image="/images/og/default.png"
-                noindex
             />
             <ReaderView
                 title="OnlyHogs"
