@@ -240,9 +240,13 @@ module.exports = {
                     // belongs in the sitemap. Indexed, its product and concept articles would
                     // compete with the real docs for the same queries.
                     const HOGPEDIA = /^\/hogpedia(?:\/|$)/
+                    const TIME_MACHINE = /^\/(?:hogspace|hogbook|hogreads|sparks-joy\/(?:hoglr|onlyhogs))\/?$/
 
                     const transformedPages = allPages
-                        .filter(({ path }) => !VERSIONED_SDK_REFERENCE.test(path) && !HOGPEDIA.test(path))
+                        .filter(
+                            ({ path }) =>
+                                !VERSIONED_SDK_REFERENCE.test(path) && !HOGPEDIA.test(path) && !TIME_MACHINE.test(path)
+                        )
                         .map(({ path }) => {
                             return {
                                 path: `${site.siteMetadata.siteUrl}${path}`,
