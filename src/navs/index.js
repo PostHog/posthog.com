@@ -7588,6 +7588,10 @@ export const docsMenu = {
                             url: '/docs/mcp-analytics/installation/python',
                         },
                         {
+                            name: 'Go',
+                            url: '/docs/mcp-analytics/installation/go',
+                        },
+                        {
                             name: 'Ruby',
                             url: '/docs/mcp-analytics/installation/ruby',
                         },
