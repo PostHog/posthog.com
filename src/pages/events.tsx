@@ -819,8 +819,11 @@ export const EventsContent = ({ initialSelectedId, initialSelectedEvent }: Event
                             value={view}
                         />
                         {demo && (
-                            <div className="border-t border-primary px-2 py-1 text-center text-[11px] text-secondary">
-                                🧪 Demo data mixed in · add <code>?demo=0</code> to hide
+                            <div
+                                className="border-t border-primary px-2 py-1 text-center text-[11px] text-secondary"
+                                title="Fake online, live, and recorded events are mixed in. Add ?demo=0 to the URL to hide them."
+                            >
+                                🧪 Demo data
                             </div>
                         )}
                     </div>
@@ -834,7 +837,7 @@ export const EventsContent = ({ initialSelectedId, initialSelectedEvent }: Event
                             onSelectEvent={handleEventClick}
                             graphicPropsFor={eventGraphicProps}
                             // Leave room for the detail panel, which floats over the left side
-                            className={`pt-12 ${
+                            className={`pt-24 ${
                                 !isMobile && (selectedEvent || editingEvent || creatingEvent) ? '@3xl:pl-[25rem]' : ''
                             }`}
                         />
@@ -842,7 +845,7 @@ export const EventsContent = ({ initialSelectedId, initialSelectedEvent }: Event
 
                     {view === 'passport' && (
                         <div
-                            className={`absolute inset-0 overflow-y-auto pt-16 ${
+                            className={`absolute inset-0 overflow-y-auto pt-24 ${
                                 !isMobile && (selectedEvent || editingEvent || creatingEvent) ? '@3xl:pl-[25rem]' : ''
                             }`}
                         >
