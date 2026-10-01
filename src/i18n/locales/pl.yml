@@ -28,19 +28,19 @@
 # - Typography: Polish quotes „…”, an en dash with a space on each side ( – ), never an em dash. No space before
 #   "!", "?", or ":". A colon is followed by a lowercase word.
 # - Numbers: a decimal comma, and a non-breaking space as the thousands separator from five digits up
-#   ("500 000", but "5000"). Use "mln" for millions ("1 mln"). Real prices stay in USD after the number
-#   ("0,005 USD"). Joke amounts use złoty: "0 zł rabatu".
+#   ("500 000", but "5000"). Use "mln" for millions ("1 mln"). Real prices stay in US dollars, with "$"
+#   before the number ("$0,005"). Joke amounts use złoty: "0 zł rabatu".
 # - For dynamic counts, choose wording that remains grammatical for every possible value, e.g.
 #   "narzędzia ({count})".
 # - Cut words the sentence does not need. Polish runs longer than English, so keep toggles, buttons, and menu labels short.
 name: Polski
 messages:
     meta:
-        title: PostHog – warstwa kontekstu twojego produktu
+        title: PostHog – pełny kontekst twojego produktu
         description: PostHog sam diagnozuje problemy, naprawia bugi i tworzy pull requesty. Bez żadnego promptowania z twojej strony.
 
     hero:
-        H1: <emphasis>Warstwa kontekstu</emphasis> twojego produktu
+        H1: <emphasis>Pełny kontekst</emphasis> twojego produktu
         body:
             1: PostHog zbiera i przechowuje <highlight>dane analityczne, informacje o błędach, nagrania sesji i dane biznesowe</highlight>. Ty i twoi <underline>agenci</underline> możecie je odpytywać i działać na ich podstawie.
             2: Ponad 500 000 zespołów korzysta już z PostHoga. Dołącz do nich.
@@ -51,7 +51,7 @@ messages:
                 2: Bez karty kredytowej
                 3: Nasz wizard sam zainstaluje ci PostHoga
             button:
-                1: Zacznij
+                1: Załóż konto
                 2:
                     label: Zainstaluj z AI
                     body: 'Wolisz terminal? Olej przeglądarkę:'
@@ -67,7 +67,7 @@ messages:
             body:
                 1: PostHog to jedno miejsce, w którym zbierasz, przechowujesz i odpytujesz dane o produkcie i firmie. Łączy w locie dane analityczne, nagrania sesji, informacje o błędach i logi, żeby odpowiedzieć na każde twoje pytanie.
                 2: Podepnij dane z <link>ponad {count} zewnętrznych źródeł</link>, żeby mieć pełniejszy obraz.
-            button: Zacznij za darmo
+            button: Załóż darmowe konto
             products:
                 more: i jeszcze <count/>
                 caption: '{products} zasilają twoich agentów.'
@@ -110,7 +110,7 @@ messages:
             toggle: Wdrażaj z PostHogiem
             heading: Wdrażaj z PostHogiem
             body: Twój Inbox łączy powiązane problemy w raporty z analizą i porządkuje je według priorytetu. Przejrzyj proponowane poprawki i pull requesty, a potem zdecyduj, co leci na proda.
-            button: Zacznij za darmo
+            button: Załóż darmowe konto
             signals:
                 heading: 'Self-driving zbiera sygnały z:'
                 1:
@@ -128,7 +128,7 @@ messages:
 
         3:
             heading: Tak, oni też używają PostHoga
-            body: Tak, serio z nas korzystają. I nie, to nie jakiś przypadkowy inżynier, który testował nas ponad 2 lata temu.
+            body: Tak, serio z nas korzystają. I nie, to nie jakiś przypadkowy programista, który testował nas ponad 2 lata temu.
             button: Zobacz klientów
             shuffle: Przetasuj
             logo:
@@ -200,7 +200,7 @@ messages:
             button: Podepnij pierwsze źródło danych
 
         5:
-            heading: Płacisz za użycie
+            heading: Płacisz tyle, ile zużyjesz
             # Markdown. Keep the formatting.
             body:
                 1: Nasza filozofia jest prosta – cennik nie powinien spędzać ci snu z powiek.
@@ -215,16 +215,16 @@ messages:
             product:
                 1:
                     freetier: 1 mln eventów/mies.
-                    pricing: 0,00005 USD/event
+                    pricing: $0,00005/event
                 2:
                     freetier: 5000 nagrań/mies.
-                    pricing: 0,005 USD/nagranie
+                    pricing: $0,005/nagranie
                 3:
                     freetier: 1 mln requestów/mies.
-                    pricing: 0,0001 USD/request
+                    pricing: $0,0001/request
                 4:
                     freetier: 1 mln wierszy/mies.
-                    pricing: 0,000015 USD/wiersz
+                    pricing: $0,000015/wiersz
             button: Zobacz cennik
 
         6:
@@ -247,7 +247,7 @@ messages:
                 5: Małe zespoły w PostHogu
 
         8:
-            heading: Bezwstydne CTA
+            heading: Bezwstydna autopromocja
             body: Jeśli nic cię jeszcze nie przekonało do PostHoga, może zrobią to te klasyczne sztuczki marketingowe.
             box:
                 badge: Eko
@@ -269,7 +269,7 @@ messages:
                 old: 0 zł
                 new: Gratis
                 urgency: '><larger>Ostatnia sztuka w tej cenie!!</larger>'
-            button: Zacznij
+            button: Załóż konto
             urgency:
                 label: '<bold>Pospiesz się!</bold> Rejestracje <today>dziś</today>: {companies}. <br/>Kup teraz i zgarnij 0 zł rabatu na pierwsze zamówienie.'
                 fallback: mnóstwo
@@ -287,7 +287,7 @@ messages:
 
     # view_in_english stays in English on purpose.
     taskbar:
-        get_started: Zacznij za darmo
+        get_started: Załóż darmowe konto
         open_posthog: Otwórz PostHoga
         search: Szukaj
         ask_max: Zapytaj Maxa
