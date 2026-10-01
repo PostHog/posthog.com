@@ -86,7 +86,7 @@ Use this whenever you need a longer standard description of PostHog, e.g. for a 
 
 <AboutPostHog />
 
-Product Analytics, Session Replay, Logs etc. are **products.** The surfaces that you interact with PostHog via - Web, Slack, MCP etc. are **apps.**
+Product Analytics, Session Replay, Logs etc. are **products.** The surfaces that you interact with PostHog, like Web, Slack, MCP are **apps.**
 
 Product marketers can find the granular vocabulary rules and the per-product playbooks in [Positioning and selling](/handbook/marketing/positioning).
 
