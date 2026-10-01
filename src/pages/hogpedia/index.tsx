@@ -3,11 +3,12 @@ import Explorer from 'components/Explorer'
 import Link from 'components/Link'
 import { SEO } from 'components/seo'
 import HogpediaShell from 'components/Hogpedia/HogpediaShell'
-import { Module, FeaturedHog } from 'components/Hogpedia/MainPageModules'
-import { useHogpediaArticles, onlyArticles, onlyResolvable } from 'components/Hogpedia/data'
+import { Module, FeaturedHog, dayIndex } from 'components/Hogpedia/MainPageModules'
+import { useHogpediaArticles, onlyArticles } from 'components/Hogpedia/data'
 import { useRecentBlogPosts } from 'components/Hogpedia/blogPosts'
+import { useLoreFacts, LORE_PAGE } from 'components/Hogpedia/loreFacts'
 import { HOGPEDIA_CATEGORIES, categoryPath } from 'components/Hogpedia/categories'
-import { DID_YOU_KNOW } from 'components/Hogpedia/mainPageData'
+import MdxLinks from 'components/Hogpedia/MdxLinks'
 
 /**
  * The Hogpedia Main Page, in the shape Wikipedia's 2007 one had: a welcome banner with an
@@ -17,12 +18,17 @@ import { DID_YOU_KNOW } from 'components/Hogpedia/mainPageData'
  * query the search index uses, so it is always right.
  */
 export default function HogpediaMainPage(): JSX.Element {
-    const articles = onlyArticles(useHogpediaArticles())
-    // "In the news" is the real blog, read at build time, so it cannot go stale.
+    const allArticles = useHogpediaArticles()
+    const articles = onlyArticles(allArticles)
+    // "In the news" is the real blog and "Did you know…" is the handbook's lore page, both
+    // read at build time, so neither is a copy that can drift from its source.
     const news = useRecentBlogPosts()
-    // The hand-written facts are checked against the live article index, so the Main Page
-    // cannot link to an article that was renamed or removed.
-    const facts = onlyResolvable(DID_YOU_KNOW, articles)
+    const lore = useLoreFacts(allArticles)
+    // Six at a time, starting at a point that moves with the date. The lore page holds far
+    // more than fit, and a module that changes mid-session would be noise.
+    const facts = lore.length
+        ? Array.from({ length: Math.min(6, lore.length) }, (_, i) => lore[(dayIndex(lore.length) + i) % lore.length])
+        : []
     const featured = articles.find((article) => article.slug === '/hogpedia/posthog')
 
     return (
@@ -77,10 +83,13 @@ export default function HogpediaMainPage(): JSX.Element {
                             <ul>
                                 {facts.map((fact) => (
                                     <li key={fact.text}>
-                                        …that {fact.text} <Link to={fact.to}>({fact.label})</Link>
+                                        <MdxLinks text={fact.text} /> <Link to={fact.to}>({fact.label})</Link>
                                     </li>
                                 ))}
                             </ul>
+                            <p className="hp-module-more">
+                                <Link to={LORE_PAGE}>PostHog lore and inside jokes</Link>
+                            </p>
                         </Module>
 
                         <Module title="In the news">

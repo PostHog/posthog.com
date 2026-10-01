@@ -24,7 +24,7 @@ The format is the joke. The facts are not. Every article starts with a plain def
 | --- | --- |
 | From today's featured article | Hand-written, checked against the live article index. |
 | Featured hog | A random illustration from the `HOGS` registry, re-picked after hydration. |
-| Did you know… | `mainPageData.ts`, hand-written from first-party files. |
+| Did you know… | The handbook's [lore page](/handbook/company/lore), six at a time, rotating by date. |
 | In the news | The six most recent posts on the PostHog blog, read at build time. |
 | Explore Hogpedia | The live article index, grouped by category. |
 
@@ -87,6 +87,10 @@ The Main Page's "Featured hog" rotates through the same registry for the same re
 **Centre illustrations with auto margins, not `text-align`.** Tailwind's preflight sets `img, svg { display: block }` site-wide, so `text-align: center` on a container does nothing to the image inside it.
 
 **Keep it simple.** This is a parody site, not a documentation set. An article is a lead plus three or four short sections. Resist adding a "Criticism" or "Limits" section – that is essay writing, and it was cut once already.
+
+**`[edit]` opens the source, not this file.** A section cites its source with `<Ref id="…" />`, and the `[edit]` link beside the heading opens the first first-party page that section cites — the handbook or docs page a correction actually belongs on. Editing the Hogpedia article would fix the mirror and leave the handbook saying the old thing. `buildSectionSources` in `context.tsx` does the mapping; headings the template generates rather than the author writes ("See also", "References", "External links") pass `noEdit` and carry no link at all. The tab strip's "view source" and "history" still point at the file on GitHub, which is what they mean — note those 404 until this branch merges, because they point at `master`.
+
+**Do not write a `## See also` section.** The template renders one from the frontmatter `seeAlso` list. Writing one too gives the article two.
 
 **Mark lore as lore.** A lore article carries the `lore` notice. An infobox never contains a joke.
 

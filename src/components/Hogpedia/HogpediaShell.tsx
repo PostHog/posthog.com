@@ -24,6 +24,8 @@ export default function HogpediaShell({
     filePath,
     hasTalkPage = false,
     referenceIds,
+    sectionSources,
+    primarySource,
     currentTab = 'article',
     showTabs = true,
     lastModified,
@@ -35,13 +37,15 @@ export default function HogpediaShell({
     filePath?: string
     hasTalkPage?: boolean
     referenceIds?: string[]
+    sectionSources?: Record<string, string>
+    primarySource?: string
     currentTab?: TabName
     showTabs?: boolean
     lastModified?: string
     children: React.ReactNode
 }): JSX.Element {
     return (
-        <HogpediaProvider value={{ slug, filePath, hasTalkPage, referenceIds }}>
+        <HogpediaProvider value={{ slug, filePath, hasTalkPage, referenceIds, sectionSources, primarySource }}>
             <div className="hogpedia" data-scheme="primary">
                 <ScrollArea className="hogpedia-scroll">
                     <div className="hogpedia-frame">

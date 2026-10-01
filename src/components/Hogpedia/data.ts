@@ -109,15 +109,3 @@ export const SEARCH_EASTER_EGGS: Record<string, string> = {
 }
 
 export const findEasterEgg = (query: string): string | undefined => SEARCH_EASTER_EGGS[query.trim().toLowerCase()]
-
-/**
- * Drops any entry whose target article does not exist.
- *
- * The Main Page modules are hand-written, so a rename or a deleted file would otherwise
- * leave a dead link behind. Filtering against the live index means the worst case is a
- * missing fact, never a broken link.
- */
-export const onlyResolvable = <T extends { to: string }>(entries: T[], articles: HogpediaArticleSummary[]): T[] => {
-    const known = new Set(articles.map((article) => article.slug))
-    return entries.filter((entry) => !entry.to.startsWith('/hogpedia/') || known.has(entry.to))
-}

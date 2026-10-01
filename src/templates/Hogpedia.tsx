@@ -7,6 +7,7 @@ import Link from 'components/Link'
 import { SEO } from 'components/seo'
 import { MdxCodeBlock } from '../components/CodeBlock'
 import HogpediaShell from 'components/Hogpedia/HogpediaShell'
+import { buildSectionSources, primarySource } from 'components/Hogpedia/context'
 import TableOfContents, { TocItem } from 'components/Hogpedia/TableOfContents'
 import Infobox from 'components/Hogpedia/Infobox'
 import MaintenanceBanner from 'components/Hogpedia/MaintenanceBanner'
@@ -109,6 +110,8 @@ export default function HogpediaArticle({
                     filePath={filePath}
                     hasTalkPage={isTalk || !!talkPage}
                     referenceIds={(meta.references || []).map((r: { id: string }) => String(r.id))}
+                    sectionSources={buildSectionSources(article.rawBody, meta.references)}
+                    primarySource={primarySource(meta.references)}
                     currentTab={isTalk ? 'discussion' : 'article'}
                     lastModified={lastModified}
                 >
@@ -121,13 +124,21 @@ export default function HogpediaArticle({
                         </MDXProvider>
                         {meta.seeAlso && meta.seeAlso.length > 0 && (
                             <>
-                                {React.createElement(makeSectionHeading('h2'), { id: 'see-also' }, 'See also')}
+                                {React.createElement(
+                                    makeSectionHeading('h2'),
+                                    { id: 'see-also', noEdit: true },
+                                    'See also'
+                                )}
                                 <SeeAlso entries={meta.seeAlso} />
                             </>
                         )}
                         {meta.references && meta.references.length > 0 && (
                             <>
-                                {React.createElement(makeSectionHeading('h2'), { id: 'references' }, 'References')}
+                                {React.createElement(
+                                    makeSectionHeading('h2'),
+                                    { id: 'references', noEdit: true },
+                                    'References'
+                                )}
                                 <References references={meta.references} />
                             </>
                         )}
@@ -135,7 +146,7 @@ export default function HogpediaArticle({
                             <>
                                 {React.createElement(
                                     makeSectionHeading('h2'),
-                                    { id: 'external-links' },
+                                    { id: 'external-links', noEdit: true },
                                     'External links'
                                 )}
                                 <ul>
@@ -161,6 +172,7 @@ export const query = graphql`
     query HogpediaArticle($id: String!, $talkSlug: String!) {
         article: mdx(id: { eq: $id }) {
             body
+            rawBody
             excerpt(pruneLength: 165)
             fields {
                 slug
