@@ -234,7 +234,7 @@ export default function Hoglr(): JSX.Element {
         <>
             <SEO
                 title="Hoglr - PostHog"
-                description="An old-school blog dashboard in the PostHog grab bag."
+                description="An old-school blog dashboard in the PostHog Time machine."
                 image="/images/og/default.png"
             />
             <ReaderView
