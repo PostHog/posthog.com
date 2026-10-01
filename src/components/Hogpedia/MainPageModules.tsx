@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import Link from 'components/Link'
-import { HOGGIES } from './hoggieImages'
+import { HOGS } from './hogs'
 
 export const Module = ({
     title,
@@ -48,35 +48,56 @@ export const dayIndex = (length: number, date = new Date()): number => {
 }
 
 /**
- * A hedgehog drawn at random from the whole brand library.
+ * A hedgehog from the brand library, drawn at random.
+ *
+ * The pool is the `HOGS` registry, which the article infoboxes already import, so rotating
+ * through it costs no extra JavaScript. Widening it to all 142 illustrations in
+ * `@posthog/brand/hoggies` is not free: each component inlines its own SVG path data, on
+ * the order of 240 KB of module source. The library also ships PNG URL exports, which would
+ * be free, but Gatsby's webpack rules turn the referenced file into a JS module and the
+ * package's own `new URL()` then resolves to that module rather than to the image, so
+ * serving the whole library would need a webpack asset rule.
  *
  * The first render uses the date-derived index, so the server, a crawler and a reader with
  * no JavaScript all get a real illustration. The random pick happens in an effect after
  * hydration, which is the only safe place for it: `Math.random()` during render gives the
  * server and the client different answers and React reports a hydration mismatch.
  */
+const HOG_NAMES = Object.keys(HOGS).sort()
+
+/** `HedgehogReadingIsMagic` reads as "Reading is magic". */
+const hogName = (key: string): string => {
+    const spaced = key
+        .replace(/^Hedgehog/, '')
+        .replace(/([a-z0-9])([A-Z])/g, '$1 $2')
+        .replace(/([A-Z])([A-Z][a-z])/g, '$1 $2')
+    return spaced.charAt(0).toUpperCase() + spaced.slice(1).toLowerCase()
+}
+
 export const FeaturedHog = (): JSX.Element | null => {
-    const [index, setIndex] = useState(() => dayIndex(HOGGIES.length))
+    const [index, setIndex] = useState(() => dayIndex(HOG_NAMES.length))
 
     useEffect(() => {
-        if (HOGGIES.length > 0) {
-            setIndex(Math.floor(Math.random() * HOGGIES.length))
+        if (HOG_NAMES.length > 0) {
+            setIndex(Math.floor(Math.random() * HOG_NAMES.length))
         }
     }, [])
 
-    const hoggie = HOGGIES[index]
-    if (!hoggie) {
+    const key = HOG_NAMES[index]
+    const Hog = key ? HOGS[key] : undefined
+    if (!Hog) {
         return null
     }
 
+    const name = hogName(key)
+
     return (
         <figure className="hp-featured-hog">
-            <img src={hoggie.src} alt={`${hoggie.name}, a PostHog hedgehog illustration`} />
+            <Hog size={150} title={`${name}, a PostHog hedgehog illustration`} />
             <figcaption>
-                <b>{hoggie.name}</b>
+                <b>{name}</b>
                 <br />
-                One of the {HOGGIES.length} hedgehogs in the{' '}
-                <Link to="/handbook/brand/assets">PostHog brand library</Link>.
+                One of the hedgehogs in the <Link to="/handbook/brand/assets">PostHog brand library</Link>.
             </figcaption>
         </figure>
     )

@@ -511,9 +511,12 @@
     margin: 0;
     text-align: center;
 }
-.hp-featured-hog img {
+.hp-featured-hog img,
+.hp-featured-hog svg {
     max-width: 150px;
     height: auto;
+    /* Tailwind's preflight makes these `display: block`, so auto margins are what centre
+       them. `text-align` on the figure has no effect on a block box. */
     margin: 0 auto 0.5em auto;
 }
 .hp-featured-hog figcaption {

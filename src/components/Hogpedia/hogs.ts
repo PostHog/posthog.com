@@ -28,8 +28,8 @@ import {
  *
  * To use a new illustration, add a named import above and an entry below.
  *
- * For a hog chosen at run time out of the whole library, use `hoggieImages.ts` instead:
- * those are image URLs and cost no JavaScript.
+ * The Main Page's "Featured hog" rotates through this same registry, so it adds no weight
+ * of its own. See the note in `MainPageModules.tsx` for why it is not the whole library.
  */
 export const HOGS: Record<string, React.ComponentType<any>> = {
     HedgehogBeaker,

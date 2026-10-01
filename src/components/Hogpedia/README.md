@@ -23,7 +23,7 @@ The format is the joke. The facts are not. Every article starts with a plain def
 | Module | Source |
 | --- | --- |
 | From today's featured article | Hand-written, checked against the live article index. |
-| Featured hog | A random illustration from `@posthog/brand/hoggies/png`, via `hoggieImages.ts`. |
+| Featured hog | A random illustration from the `HOGS` registry, re-picked after hydration. |
 | Did you know… | `mainPageData.ts`, hand-written from first-party files. |
 | In the news | The six most recent posts on the PostHog blog, read at build time. |
 | Explore Hogpedia | The live article index, grouped by category. |
@@ -82,7 +82,7 @@ In the body, use Markdown plus two components:
 
 **Never `import * as` from `@posthog/brand/hoggies`.** An article names its hog as a string, so the component is looked up at run time – but a namespace import defeats tree-shaking and pulls all 130-odd illustrations into every page that renders one. Each one inlines its own SVG path data, on the order of 240 KB of module source. That added about 8 MB of JavaScript before `hogs.ts` existed. To use a new illustration in an infobox, add a named import and an entry to the `HOGS` registry in `src/components/Hogpedia/hogs.ts`.
 
-The rule is about the *component* exports. `hoggieImages.ts` does namespace-import `@posthog/brand/hoggies/png`, and that is fine for the opposite reason: those exports are image URLs, so the whole library costs a string per illustration and the browser fetches only the one on screen. Reach for `hoggieImages.ts` when the hog is chosen at run time, and for `hogs.ts` when an article names one.
+The Main Page's "Featured hog" rotates through the same registry for the same reason, so it adds no weight. Widening it to the whole library needs the illustrations served as images rather than inlined: `@posthog/brand/hoggies/png` exports URLs that would be free, but Gatsby's webpack rules turn the referenced file into a JS module and the package's own `new URL()` resolves to that module instead of the image, so it needs a webpack asset rule first.
 
 **Centre illustrations with auto margins, not `text-align`.** Tailwind's preflight sets `img, svg { display: block }` site-wide, so `text-align: center` on a container does nothing to the image inside it.
 

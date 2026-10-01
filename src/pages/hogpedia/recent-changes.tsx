@@ -44,10 +44,15 @@ export default function HogpediaRecentChanges(): JSX.Element {
 
     const changes: ChangelogEntry[] = data.allRoadmap?.nodes || []
 
-    // Changelog descriptions are Markdown, and some run to several paragraphs. A recent
-    // changes line wants one sentence, so this takes the first paragraph and renders its
-    // links through the same helper the infoboxes use.
-    const summarise = (description: string): string => description.split(/\n\s*\n/)[0].trim()
+    // Changelog descriptions are Markdown: several paragraphs in places, and often a bullet
+    // list of the platforms a change landed on. A recent changes line wants the opening
+    // sentence, so this keeps the first paragraph and stops at the first list item. The
+    // links inside it render through the same helper the infoboxes use.
+    const summarise = (description: string): string =>
+        description
+            .split(/\n\s*\n/)[0]
+            .split(/\n\s*[-*]\s/)[0]
+            .trim()
 
     return (
         <>
@@ -91,9 +96,9 @@ export default function HogpediaRecentChanges(): JSX.Element {
                                     {changes.map((change) => (
                                         <li key={`${change.date}-${change.title}`}>
                                             <span className="hp-changes-date">
-                                                {new Date(change.date).toLocaleDateString('en-US', {
+                                                {new Date(change.date).toLocaleDateString('en-GB', {
                                                     day: 'numeric',
-                                                    month: 'short',
+                                                    month: 'long',
                                                     year: 'numeric',
                                                 })}
                                             </span>{' '}
