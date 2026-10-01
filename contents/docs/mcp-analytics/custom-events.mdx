@@ -20,7 +20,7 @@ const analytics = instrument(server, posthog, {
 })
 ```
 
-`getRequestHeaders` reads headers on both MCP SDK majors – see [MCP SDK v2](/docs/mcp-analytics/sdk-v2#if-your-callbacks-read-headers-change-them).
+`getRequestHeaders` reads headers on both MCP SDK majors – see [MCP SDK v2](/docs/mcp-analytics/installation/typescript#read-request-headers-on-both-sdk-majors).
 
 The returned object is spread flat onto the event's properties alongside the built-in `$mcp_*` keys:
 

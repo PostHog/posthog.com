@@ -65,7 +65,7 @@ instrument(server, posthog, {
 
 ### Disabling the injected argument
 
-Set `context: false` to disable the injected intent argument. Use `intentFallback` if you still want to capture intent. Model capture and conversation IDs have separate options. [Disable those options](/docs/mcp-analytics/installation#capture-the-calling-model) to stop their schema changes.
+Set `context: false` to disable the injected intent argument. Use `intentFallback` if you still want to capture intent. Model capture and conversation IDs have separate options. [Disable those options](/docs/mcp-analytics/events#model-capture) to stop their schema changes.
 
 ## The `intentFallback` callback
 
@@ -103,7 +103,7 @@ intentFallback: (request, extra) => {
 }
 ```
 
-`getRequestHeaders` reads headers on both MCP SDK majors – see [MCP SDK v2](/docs/mcp-analytics/sdk-v2#if-your-callbacks-read-headers-change-them).
+`getRequestHeaders` reads headers on both MCP SDK majors – see [MCP SDK v2](/docs/mcp-analytics/installation/typescript#read-request-headers-on-both-sdk-majors).
 
 ### LLM-derived intent
 

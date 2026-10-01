@@ -76,7 +76,15 @@ Requests through a vendor's gateway identify the gateway, not necessarily the or
 
 A call without these properties is unattributed. An unrecognized client appears as "Other".
 
-If you see mostly "Other", check whether these properties contain values. On HTTP transports, the SDK captures headers automatically. [Custom dispatchers](/docs/mcp-analytics/custom-servers#attributing-the-caller) must pass them explicitly. Stdio and in-memory transports have no headers, so only the client name is available.
+If you see mostly "Other", check whether these properties contain values. On HTTP transports, the SDK captures headers automatically. Custom dispatchers must pass them explicitly, as in the [Python example](/docs/mcp-analytics/installation/python#custom-dispatchers). Stdio and in-memory transports have no headers, so only the client name is available.
+
+## Model capture
+
+MCP has no standard field for the calling model. The SDK reads recognized client metadata first, then the agent's self-reported `llm_model` argument, which the SDK adds to compatible tool schemas. Events include `$mcp_llm_model` and `$mcp_llm_model_source` (`"client_metadata"` or `"self_reported"`).
+
+The recognized metadata field is Codex's `params._meta["x-codex-turn-metadata"].model`. Other clients can pass the `llm_model` argument. Some clients report an exact model, others a model family. Missing, blank, and `unknown` values are omitted, and reasoning effort isn't captured.
+
+Both sources are unverified client input. Use them to compare tool quality, latency, and errors by model, not for billing or security decisions. To turn model capture off, see the configuration on your [language's installation page](/docs/mcp-analytics/installation).
 
 ## Exception properties
 

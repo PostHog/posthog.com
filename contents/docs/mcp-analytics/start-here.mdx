@@ -36,7 +36,7 @@ MCP Analytics shows how agents use your server. Add one wrapper call to capture:
 - 🧵 Sessions across calls when the client supplies correlation data
 - 🚧 Capabilities the agent wished existed (with `reportMissing`)
 
-Use an existing [supported MCP server](/docs/mcp-analytics/installation#requirements) and a PostHog [project token](/docs/getting-started/project-token). Install the analytics package for your language:
+Use an existing [supported MCP server](/docs/mcp-analytics/installation) and a PostHog [project token](/docs/getting-started/project-token). Install the analytics package for your language:
 
 <MultiLanguage selector="tabs">
 
@@ -84,7 +84,7 @@ For an EU project, use `https://eu.i.posthog.com` as the host. Keep your existin
 
 Intent, model capture, conversation IDs, and exception capture are on by default in both SDKs. Missing-capability reporting and agent feedback are opt-in.
 
-Flush queued events before shutdown. Follow the [TypeScript](/docs/mcp-analytics/installation#graceful-shutdown) or [Python](/docs/mcp-analytics/installation#flushing-on-exit) instructions for your server.
+Flush queued events before shutdown. Follow the [TypeScript](/docs/mcp-analytics/installation/typescript#send-queued-events-on-shutdown) or [Python](/docs/mcp-analytics/installation/python#send-queued-events-on-shutdown) instructions for your server.
 
 <details>
 
@@ -164,7 +164,7 @@ subtitle="Recommended"
 icon="IconAIText"
 >
 
-[Model capture](/docs/mcp-analytics/installation#capture-the-calling-model) is on by default in both SDKs. Check `$mcp_tool_call` events for `$mcp_llm_model`. The source, `$mcp_llm_model_source`, is `"client_metadata"` or `"self_reported"`.
+[Model capture](/docs/mcp-analytics/events#model-capture) is on by default in both SDKs. Check `$mcp_tool_call` events for `$mcp_llm_model`. The source, `$mcp_llm_model_source`, is `"client_metadata"` or `"self_reported"`.
 
 Use this unverified client input to compare quality, latency, and errors across models, not for billing or security decisions. Some clients report an exact model, others a model family. Missing, blank, and `unknown` values are omitted.
 

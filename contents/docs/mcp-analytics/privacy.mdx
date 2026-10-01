@@ -23,7 +23,7 @@ When the SDK can confirm that it owns an injected analytics argument, it removes
 
 `$mcp_llm_model` comes from recognized client metadata or the agent's self-report. `$mcp_llm_model_source` distinguishes the two. Neither source is verified by the MCP protocol. Don't use either for billing, authorization, or other security decisions.
 
-Model capture and conversation IDs are enabled by default. Conversation IDs add a visible JSON text block to eligible tool results. See [how to disable them](/docs/mcp-analytics/installation#capture-the-calling-model).
+Model capture and conversation IDs are enabled by default. Conversation IDs add a visible JSON text block to eligible tool results. See [how to disable them](/docs/mcp-analytics/events#model-capture).
 
 ## The redaction pipeline
 
@@ -117,7 +117,7 @@ beforeSend: (event) => {
 
 <CalloutBox icon="IconInfo" title="Drain the queue before exit" type="fyi">
 
-You manage the `posthog-node` client lifecycle. Call `posthog.shutdown()` or `posthog.flush()` from your shutdown handler, or at the end of each serverless invocation. This sends queued events before the process stops. See the [shutdown example](/docs/mcp-analytics/installation#graceful-shutdown).
+You manage the `posthog-node` client lifecycle. Call `posthog.shutdown()` or `posthog.flush()` from your shutdown handler, or at the end of each serverless invocation. This sends queued events before the process stops. See the [shutdown example](/docs/mcp-analytics/installation/typescript#send-queued-events-on-shutdown).
 
 </CalloutBox>
 
