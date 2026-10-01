@@ -161,7 +161,7 @@ export default function Hogbook({ data }: { data: PageData }): JSX.Element {
 
     return (
         <>
-            <SEO title="Hogbook" description="PostHog's 2006-style social profile." />
+            <SEO title="Hogbook" description="PostHog's 2006-style social profile." noindex />
             <ReaderView hideLeftSidebar hideRightSidebar hideAppOptions showQuestions={false}>
                 <div
                     className="@container not-prose mx-auto max-w-6xl border border-[var(--hogbook-border)] bg-light-1 text-light-12 [&_a]:text-[var(--hogbook-blue)]"

@@ -48,13 +48,13 @@ Ordered roughly by how often the trigger comes up — the first few you can do f
 
 ### SDK health — flag outdated SDKs
 
-Use the SDK health check to see if the customer is running outdated SDKs. This is one of the easiest, most concrete reasons to reach out. We recommend customers update monthly so they don't miss bug fixes and improvements.
+Use the SDK health check to see if the customer is running outdated SDKs. If the user is more than one major version behind, follow the instructions below. This is one of the easiest, most concrete reasons to reach out. We recommend customers update monthly so they don't miss bug fixes and improvements.
 
 **Suggested cadence:** Run the SDK health check on each of your accounts quarterly, or whenever a customer is ramping up usage of a specific SDK.
 
 **Suggested wording:**
 
-> BTW our SDK health check is warning that you are using a three year old version of our Python SDK — I promise we've improved it since then! Also your iOS and Android SDKs are really out of date. Any chance of updating these?
+> BTW our SDK health check is warning that your python sdk is 2 major versions behind the latest — we've recently released [feature or improvement that impacts them]. Upgrade will have [impact] on your Posthog usage!
 
 **Why it works:** Specific, helpful, and low-effort for both sides. The tone is light and friendly, not alarming.
 
