@@ -8167,6 +8167,10 @@ export const docsMenu = {
                             url: '/docs/workflows/create-emails-ai',
                         },
                         {
+                            name: 'Send a broadcast',
+                            url: '/docs/workflows/broadcasts',
+                        },
+                        {
                             name: 'Run AI tasks from a workflow',
                             url: '/docs/workflows/ai-tasks',
                         },
