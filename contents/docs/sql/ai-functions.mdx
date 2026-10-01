@@ -45,6 +45,8 @@ ORDER BY feedback DESC
 
 PostHog builds and hosts both models. They run on PostHog's own servers in the same region as your project, so your data is not sent to a third-party AI provider such as OpenAI or Anthropic. If your project is in the EU, the evaluation also stays in the EU.
 
+Jeeves, the default model, is open source. Its code, training data and benchmark results are in the [PostHog/jeeves](https://github.com/PostHog/jeeves) repository.
+
 ## Limits
 
 - Use the function as a named column in a `SELECT`. To filter or sort on its result, wrap it in a subquery and filter in the outer query.
