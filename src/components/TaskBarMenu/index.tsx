@@ -32,7 +32,8 @@ import MediaUploadModal from 'components/MediaUploadModal'
 import KeyboardShortcut from 'components/KeyboardShortcut'
 import { MOTION_LAYER, TASKBAR_BG } from '../../constants/frostedSurfaces'
 
-const NAV_MENU_CLASS = '[&_button]:px-2 [&_button:not(:first-child)]:hidden md:[&_button:not(:first-child)]:flex'
+const NAV_MENU_CLASS =
+    '[&_button]:px-2 [&_button:not(:first-child)]:hidden md:[&_button:not(:first-child)]:flex [&_a:not(:first-child)]:hidden md:[&_a:not(:first-child)]:flex'
 
 function TaskBarMenu() {
     const {
@@ -315,7 +316,7 @@ function TaskBarMenu() {
                     }}
                     className={`${TASKBAR_BG} ${
                         isAnimating ? MOTION_LAYER : ''
-                    } skin-classic:bg-accent wallpaper-keyboard-garden:dark:bg-black/15 border-secondary rounded pl-0.5 pr-2 shadow-2xl`}
+                    } skin-classic:bg-accent wallpaper-keyboard-garden:dark:bg-black/15 border-secondary rounded px-2 shadow-2xl`}
                 >
                     {/* Top and bottom edges of the 3D box — visible during rotation */}
                     <div

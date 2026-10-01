@@ -46,6 +46,6 @@ Since we shipped the [initial beta in June](/changelog?id=1945) with open text s
 - **[October 10:](/changelog?id=1947)** Redesign and multiple step surveys
 - **[October 19:](/changelog?id=1947)** Survey templates for NPS, CSAT, CES and more
 
-These features make surveys perfect for the most common use-cases, including NPS surveys, customer satisfaction surveys, and [product-market fit surveys](/blog/measure-product-market-fit). 
+These features make surveys perfect for the most common use-cases, including NPS surveys, customer satisfaction surveys, and [product-market fit surveys](/founders/measure-product-market-fit). 
 
 Dozens of teams participated in the beta and hundreds of developers contributed PRs and ideas elsewhere in our code to help us get this far. There are over 81,000 engineers in the PostHog community now, and we couldn’t have built surveys without their support and feedback — we’re thrilled to release surveys fully so they can start collecting feedback from their communities too. 

@@ -13,7 +13,7 @@ For customers who want to sign up for an annual (or longer) plan there is some a
 The credit term only extends beyond 12 months (e.g. to 24 months for a two-year deal) if the customer pays the full amount for the entire term upfront (e.g. the full two-year amount paid upfront). How the credits are allocated depends on how the customer pays:
 
 -   **Paying all upfront for the full term:** the customer gets the full credit amount added in bulk at the start, with an expiry set to the full length of the term (e.g. a two-year expiry for a two-year deal paid upfront).
--   **Paying per year (or in tranches):** the extended term does not apply. Credits are granted in tranches allocated on each renewal date, each with a 12-month term. For example, a two-year deal split evenly grants half the credits in the first year and half on the renewal date at the start of the second.
+-   **Paying per year (or in tranches):** the extended term does not apply. Credits are granted in tranches allocated on each renewal date, each with a 12-month term. For example, a two-year deal split evenly grants half the credits in the first year and half on the renewal date at the start of the second. Unused credit from one year rolls over into the next year of the same contract. Read [multi-year credit allocation](/handbook/growth/sales/contract-rules#paid-yearly) for who sends the subsequent invoices.
 
 ### Customers with organizations in more than one region
 
@@ -98,9 +98,7 @@ We use [PandaDoc](https://app.pandadoc.com/a/#/) to handle document generation, 
 
     - **Contract.Term** - The term in months of the contract (12 months by default)
 
-8. If they are buying credits upfront but must pay by credit card, change:
-    - Payment Terms to `Net 1 from Signature Date`.
-    - Payment Method to `Bank Transfer or Credit Card`.
+8. Keep the payment method as bank transfer. We don't accept credit card payments for credits bought upfront, so don't change the Payment Method to allow credit card. See [payment method](/handbook/growth/sales/contract-rules#payment-method).
 
 9. If an MSA is being used rather than the standard terms you will need to replace the following text:
 
@@ -152,7 +150,7 @@ Monthly invoices are generated automatically at the end of each billing period. 
 
 Credits added before billing period ends are applied automatically and the customer never has to pay the PAYG charge out of pocket. No further action needed here. 
 
-If they won't have enough credits to cover an invoice, and won't sign before the invoice issue date, you can ask the billing team to pause collection for a few days. Once the contract is signed and the credits are added, billing can release the invoice and the prepurchase credits will cover it. Flag this as early as possible. Billing can only pause an invoice that hasn't been issued yet.
+If they won't have enough credits to cover an invoice and won't sign before the invoice issue date, ask the billing team to pause collection. Flag it as early as possible, because billing can only pause an invoice that hasn't been issued yet. A pause lasts 48 hours, and each invoice only gets one pause. Once the contract is signed and the credits are added, billing releases the invoice and the prepurchase credits cover it.
 
 #### Contract timing rules
 

@@ -1,0 +1,79 @@
+---
+title: Block materialization on failing checks
+sidebar: Docs
+showTitle: true
+---
+
+import { CalloutBox } from 'components/Docs/CalloutBox'
+
+<CalloutBox icon="IconFlask" title="Data quality is in alpha" type="action">
+
+Data quality isn't available to every project. [Contact support](https://app.posthog.com/home#supportModal) to request access or share feedback.
+
+</CalloutBox>
+
+You can stop a materialized view from publishing new data when its error-severity checks fail. PostHog tests the unpublished data first, keeps the existing published version available when the test fails, and skips downstream views that depend on the blocked view.
+
+The setting applies to every materialized view in the project. It is off by default.
+
+## Enable the materialization gate
+
+1. Open **Project settings**.
+2. Select **Data quality**.
+3. Find **Materialization on failing checks**.
+4. Turn on **Block materialization on failing checks**.
+
+You need editor access to warehouse objects to change this setting. The **Data quality** tab on a materialized view shows whether the project-wide setting is on or off.
+
+## How a gated materialization runs
+
+PostHog uses a write-audit-publish flow when the setting is on and the view has at least one enabled error-severity check:
+
+1. PostHog runs the materialization query and writes the new files to a staged location.
+2. The view's enabled checks run against those staged files instead of the published view.
+3. PostHog publishes the staged files when no error-severity check fails.
+4. PostHog leaves the staged files unpublished when one or more error-severity checks fail.
+
+Checks can still read other tables. Only the materialized view being refreshed points to its staged files during the audit.
+
+If the setting is off, PostHog publishes the materialization and then runs its checks. It also uses this non-blocking behavior when a view has no enabled error-severity checks. Warning-severity checks never hold up publication.
+
+## Understand which outcomes block publication
+
+Only a completed **Failed** result from an error-severity check guarantees a block.
+
+| Check outcome | Blocks publication |
+| --- | --- |
+| An error-severity check returns **Failed** | Yes |
+| A warning-severity check returns **Failed** | No |
+| A check returns **Passed** | No |
+| A check returns **Errored** because it couldn't compile or execute | No |
+| A check returns **Skipped** | No |
+| The staged audit can't return a verdict | No |
+
+The gate fails open for query errors and unavailable audits. These outcomes don't prove the staged data is valid, but they also don't provide a failing assertion that PostHog can use to block publication. PostHog records check errors so you can investigate them. When PostHog refreshes multiple related views, an audit without a verdict doesn't stop the remaining checks.
+
+## What happens when publication is blocked
+
+When an error-severity check fails:
+
+- PostHog doesn't replace the published table. Queries continue to read the previously published version.
+- The materialization job and model show a failed state with the number of blocking checks.
+- PostHog sends a materialization-blocked notification to team members who can access the view, its referenced tables and views, and query results.
+- PostHog marks the materialized view as failed and skips its downstream views. Each skipped view identifies the upstream data quality failure as the reason.
+- PostHog doesn't pause the view's schedule or count the block toward automatic suspension for repeated materialization errors.
+
+The failed check run keeps its failure count and diagnostic query. PostHog doesn't store a snapshot of the failing rows.
+
+## Recover from a blocked materialization
+
+1. Open the materialized view and select **Data quality**.
+2. Find the error-severity checks that failed.
+3. Open the failing rows in the SQL editor and confirm whether the source data or the assertion is wrong.
+4. Fix the source data or query. If the assertion is no longer valid, edit or disable the check.
+5. Run the check again against the current published data when that helps verify the fix.
+6. Start the materialization again. PostHog creates new staged files and reruns the gate before publishing them.
+
+Restart the affected data modeling run when downstream views were skipped. PostHog refreshes them after the blocked view publishes successfully.
+
+See [results and troubleshooting](/docs/data-warehouse/data-quality/troubleshooting) for query errors, timeouts, permissions, and failing-row investigation.

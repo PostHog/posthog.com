@@ -61,7 +61,11 @@ export const experiments = {
      * feed the carousel templates their slide arrays).
      */
     productMenu: [
-        { slug: 'overview', name: 'Overview', icon: <IconEye className="size-4" /> },
+        {
+            slug: 'overview',
+            name: 'Overview',
+            icon: <IconEye className="size-4" />,
+        },
         {
             slug: 'eli5',
             name: 'What does it do?',
@@ -127,8 +131,6 @@ export const experiments = {
     ],
     overview: {
         title: 'Test changes with statistical significance',
-        description:
-            'Experiments is one of the tools that makes your product self-driving: the evaluation that proves a change actually worked. Built to natively work with product analytics, session replay, feature flags, and surveys.',
         eli5: 'Experiments let you run A/B, A/B/n, holdout, fake door, and redirect tests with statistical significance. Create an experiment (which creates a feature flag), pick primary and secondary metrics, target cohorts or geographies, then launch variants. Bayesian and frequentist engines tell you what won – and you can watch session replays for each variant when you need the why.',
         textColor: 'text-white', // tw
     },
@@ -199,7 +201,6 @@ export const experiments = {
         },
     },
     useCases: {
-        intro: 'Experiments is used across teams depending on your role.',
         rows: [
             [
                 'Product Engineers',

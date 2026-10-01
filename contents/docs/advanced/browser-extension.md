@@ -253,7 +253,7 @@ If you'd like to instrument your own custom events, use the `posthog.capture()` 
 posthog.capture('custom_event_name', {})
 ```
 
-See our [JavaScript web SDK docs](/docs/integrate/client/js) for more details.
+See our [JavaScript web SDK docs](/docs/libraries/js) for more details.
 
 ## Using error tracking
 

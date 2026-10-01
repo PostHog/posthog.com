@@ -23,10 +23,12 @@ import { FormulaScreenshot } from './components/FormulaScreenshot'
 import { GDPRForm } from './components/GDPRForm'
 import ImageSlider from './components/ImageSlider'
 import Link from './components/Link'
+import LoopGame from './components/LoopGame'
 import OSButton from './components/OSButton'
 import { OSQuote } from './components/OSQuote'
 import { OverflowXSection } from './components/OverflowXSection'
 import { Quote } from './components/Pricing/Quote'
+import PricingCalculator from './components/Pricing/PricingCalculator/Embedded'
 import { PrivateLink } from './components/PrivateLink'
 import { ProductScreenshot } from './components/ProductScreenshot'
 import { ProductVideo } from './components/ProductVideo'
@@ -62,8 +64,10 @@ export const shortcodes = {
     OverflowXSection,
     OSQuote,
     Quote,
+    PricingCalculator,
     OSButton,
     Link,
+    LoopGame,
     PrivateLink,
     ProductChangelog,
     ProductScreenshot,

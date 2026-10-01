@@ -2,8 +2,6 @@ import React from 'react'
 import { getWizardFrameworkRows } from 'constants/installation-taxonomy'
 import {
     IconEye,
-    IconWarning,
-    IconSparkles,
     IconPeople,
     IconCursorClick,
     IconList,
@@ -19,8 +17,6 @@ import {
     IconGraph,
 } from '@posthog/icons'
 import type { CTALinkKey } from 'components/CTAs'
-import OldWaySection from 'components/ReplayVision/OldWaySection'
-import PostHogWaySection from 'components/ReplayVision/PostHogWaySection'
 import HowToUseSection from 'components/ReplayVision/HowToUseSection'
 import AIPromptsSection from 'components/ReplayVision/AIPromptsSection'
 import WorksWithSection from 'components/ReplayVision/WorksWithSection'
@@ -219,18 +215,16 @@ export const replayVision = {
      * so the slug doubles as the lookup key when no explicit `template` is set.
      */
     productMenu: [
-        { slug: 'overview', name: 'Overview', icon: <IconEye className="size-4" /> },
         {
-            slug: 'old-way',
-            name: 'The old way',
-            component: OldWaySection,
-            icon: <IconWarning className="size-4" />,
+            slug: 'overview',
+            name: 'Overview',
+            icon: <IconEye className="size-4" />,
         },
         {
-            slug: 'posthog-way',
-            name: 'The PostHog way',
-            component: PostHogWaySection,
-            icon: <IconSparkles className="size-4" />,
+            slug: 'eli5',
+            name: 'What does it do?',
+            hideFromNav: true,
+            icon: <IconInfo className="size-4" />,
         },
         { slug: 'use-cases', name: 'Who is it for?', icon: <IconPeople className="size-4" /> },
         {
@@ -259,7 +253,11 @@ export const replayVision = {
         },
         { slug: 'changelog', name: 'Changelog', icon: <IconNewspaper className="size-4" /> },
         { slug: 'community', name: 'Questions?', icon: <IconMessage className="size-4" /> },
-        { slug: 'installation', name: 'Install', icon: <IconCode className="size-4" /> },
+        {
+            slug: 'installation',
+            name: 'Install',
+            icon: <IconCode className="size-4" />,
+        },
         { slug: 'getting-started', name: 'Get started', icon: <IconRocket className="size-4" /> },
     ],
     /**
@@ -295,8 +293,7 @@ export const replayVision = {
     ],
     overview: {
         title: 'Your product, watching itself',
-        description:
-            'Replay Vision reads through a filtered set of recordings, tells you in plain language what went wrong, and opens a pull request with the fix. The problem fixes itself for you. You just hit merge.',
+        eli5: 'Replay Vision watches your session recordings for you. Describe what to look for once, and a scanner reads every matching session, video and events, and turns what it sees into structured observations you can query, chart, and alert on.',
         textColor: 'text-black', // tw
     },
     screenshots: {
@@ -306,7 +303,6 @@ export const replayVision = {
         },
     },
     useCases: {
-        intro: 'Replay Vision is used across teams depending on your role.',
         rows: [
             ['Product Engineers', "Scan sessions in bulk for the failure you can't reproduce locally"],
             ['PMs & Designers', 'Score friction and spot dead ends across a release without watching a replay'],
@@ -314,6 +310,12 @@ export const replayVision = {
             ['Support & UX Research', 'Classify what users were actually trying to do, at scale'],
             ['Founders', 'Skim a one-line summary of every session instead of spending hours watching them'],
         ],
+    },
+    hogs: {
+        default: {
+            src: 'https://res.cloudinary.com/dmukukwp6/image/upload/replay_hog_20fc000c14.png',
+            alt: 'A hedgehog directing a session replay',
+        },
     },
     // Same install surface as Session Replay – pulls from the same source.
     installation: sessionReplay.installation,

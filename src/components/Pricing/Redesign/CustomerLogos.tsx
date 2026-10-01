@@ -79,13 +79,20 @@ export default function CustomerLogos({
     title = '600k+ companies',
     subtitle = 'from side projects to public companies',
     scrolling = false,
+    hideLink = false,
+    linkStories = false,
+    additionalCustomerSlugs = [],
 }: {
     title?: string
     subtitle?: string
     scrolling?: boolean
+    hideLink?: boolean
+    /** Scrolling rail only */
+    linkStories?: boolean
+    additionalCustomerSlugs?: string[]
 }): JSX.Element {
     const { getCustomers } = useCustomers()
-    const customers = getCustomers(TRUST_LOGOS)
+    const customers = getCustomers([...additionalCustomerSlugs, ...TRUST_LOGOS])
 
     return (
         <div className="@container not-prose">
@@ -99,9 +106,11 @@ export default function CustomerLogos({
                     <p className="text-[15px] font-bold leading-tight mb-0.5">{title}</p>
                     <p className="text-sm text-secondary leading-tight mb-1">{subtitle}</p>
                     {/* This text should be the same color as all other links */}
-                    <Link to="/customers" state={{ newWindow: true }} className="text-sm font-semibold   underline">
-                        Customer stories
-                    </Link>
+                    {!hideLink && (
+                        <Link to="/customers" state={{ newWindow: true }} className="text-sm font-semibold   underline">
+                            Customer stories
+                        </Link>
+                    )}
                 </div>
 
                 {scrolling ? (
@@ -126,9 +135,20 @@ export default function CustomerLogos({
                                             duplicate ? 'motion-reduce:hidden' : ''
                                         }`}
                                     >
-                                        {customers.map((customer) => (
-                                            <Logo key={customer.slug} customer={customer} marquee />
-                                        ))}
+                                        {customers.map((customer) =>
+                                            linkStories && customer.hasCaseStudy ? (
+                                                <Link
+                                                    key={customer.slug}
+                                                    to={`/customers/${customer.slug}`}
+                                                    state={{ newWindow: true }}
+                                                    tabIndex={duplicate ? -1 : undefined}
+                                                >
+                                                    <Logo customer={customer} marquee />
+                                                </Link>
+                                            ) : (
+                                                <Logo key={customer.slug} customer={customer} marquee />
+                                            )
+                                        )}
                                     </div>
                                 ))}
                             </div>

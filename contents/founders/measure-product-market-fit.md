@@ -17,7 +17,7 @@ crosspost:
   - Blog
 ---
 
-Startups can't succeed without [achieving product-market fit](/blog/product-market-fit-game) – it's one of the few things startup gurus agree on. It's often described as a feeling – a palpable excitement from users, or a sense you can't keep up with demand. You either have _it_, or you don't.
+Startups can't succeed without [achieving product-market fit](/founders/product-market-fit-game) – it's one of the few things startup gurus agree on. It's often described as a feeling – a palpable excitement from users, or a sense you can't keep up with demand. You either have _it_, or you don't.
 
 But product-market fit isn't just an ephemeral gut feeling. You can _measure_ it and _it moves_ as your customer's needs change. It's also a spectrum. Some products have rock solid product-market fit, others the green shoots of _potential_ fit. This guide will help you figure out where you are on that spectrum.
 
@@ -385,7 +385,7 @@ So, what about burn multiple and CLV/CAC?
 
 They're outliers in that they aren't traditional measures of product-market fit. But they do prove how _strong_ your product-market fit is. They're useful when seeking investment, or if your model dictates heavy expenditure on acquisition.
 
-And, if you find yourself unable to find product-market fit, we share how we found it for PostHog (and a step-by-step process achieving it) in [The Product-Market Fit Game](/blog/product-market-fit-game). The golden rule? If in doubt, pivot. 😅
+And, if you find yourself unable to find product-market fit, we share how we found it for PostHog (and a step-by-step process achieving it) in [The Product-Market Fit Game](/founders/product-market-fit-game). The golden rule? If in doubt, pivot. 😅
 
 #### Footnotes
 

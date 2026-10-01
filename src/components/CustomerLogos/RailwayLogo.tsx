@@ -6,7 +6,7 @@ interface RailwayLogoProps {
 
 export default function RailwayLogo({ className = '' }: RailwayLogoProps) {
     return (
-        <svg className={className} viewBox="0 160 3733 704" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <svg className={className} viewBox="320 160 3055 704" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path
                 className="fill-[#100F13] dark:fill-white"
                 d="M323.27 461.245a357.915 357.915 0 0 0-3.27 35.448h534.737c-1.868-3.648-4.376-6.937-6.906-10.156-91.417-118.106-140.593-107.866-210.938-110.866-23.453-.965-39.359-1.352-132.713-1.352-49.965 0-104.286.127-157.182.267-6.847 18.483-13.451 36.399-16.667 50.972h274.018v35.687H323.27Zm535.681 71.171H320.275c.564 9.522 1.452 18.918 2.734 28.187h497.33c22.171 0 34.581-12.579 38.612-28.187ZM350.949 657.96S433.397 860.402 671.629 864c142.389 0 264.736-84.567 320.31-206.04h-640.99Z"

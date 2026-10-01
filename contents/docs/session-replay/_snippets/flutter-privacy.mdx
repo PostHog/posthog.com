@@ -25,6 +25,24 @@ These settings apply on iOS, Android, and — with [canvas masking](#masking-on-
 ...
 ```
 
+### Pausing recording on sensitive screens
+
+Masking hides what's drawn on screen, but not where the user touches it: the recording still includes the position of each tap. On a PIN, passcode, or card-number keypad, those positions alone can reveal the value entered, so masking the keypad isn't enough. There are two ways to keep the taps out:
+
+- **App-wide:** turn off touch capture. Screenshots continue, but the recording carries no touch positions.
+
+```dart
+final config = PostHogConfig('<ph_project_token>');
+config.sessionReplay = true;
+/// Leave touch positions out of the recording; screenshots continue.
+/// Default: true. Set it before setup(); it can't be changed at runtime.
+config.sessionReplayConfig.captureTouches = false;
+```
+
+> Requires PostHog Flutter SDK version >= [5.41.0](https://github.com/PostHog/posthog-flutter/releases), with posthog-android >= 3.64.0 and posthog-ios >= 3.74.0.
+
+- **Per screen:** stop session recording while the sensitive screen is shown and start it again once it's dismissed, so the rest of the session keeps its taps. See the Flutter tab of [programmatic start and stop controls](/docs/session-replay/how-to-control-which-sessions-you-record#programmatic-start-and-stop-controls) for the methods and a widget example.
+
 ### Masking on Flutter Web
 
 > Requires PostHog Flutter SDK version >= [5.34.0](https://github.com/PostHog/posthog-flutter/releases) and posthog-js version >= [1.408.0](https://github.com/PostHog/posthog-js/releases) in your `web/index.html`.
