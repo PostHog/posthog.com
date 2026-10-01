@@ -118,7 +118,7 @@ export type Transaction = {
     id: number
     amount: number
     date: string
-    type: 'gift' | 'achievement' | 'redemption'
+    type: 'gift' | 'achievement' | 'redemption' | 'reply' | 'question'
     metadata?: TransactionMetadata
 }
 

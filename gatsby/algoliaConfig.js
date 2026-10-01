@@ -55,8 +55,7 @@ const PAGE_TYPE_RULES = [
     { type: 'handbook', pattern: /^\/(?:handbook|product-engineer)(?:\/|$)/ },
     {
         type: 'blog',
-        pattern:
-            /^\/(?:(?:blog|compare|spotlight|library|features|founders|newsletter|product-engineers)(?:\/|$)|ko\/newsletter(?:\/|$))/,
+        pattern: /^\/(?:blog|compare|spotlight|library|features|founders|newsletter|product-engineers)(?:\/|$)/,
     },
     { type: 'tutorial', pattern: /^\/tutorials(?:\/|$)/ },
     { type: 'customers', pattern: /^\/customers(?:\/|$)/ },

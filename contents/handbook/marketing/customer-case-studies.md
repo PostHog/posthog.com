@@ -8,7 +8,7 @@ Case studies should make our users look smart, our products look useful, and Pos
 
 **Things we don't care about:**
 - if they pay us or not (most customers don't)
-- if they use every tool in the box (they might be a power user of only one tool)
+- if they use every tool in the box (they might be a power user of only one product)
 - if they have a recognizable brand (big logos are nice, but more frequent, smaller stories often beat enterprise red tape)
 
 **Things we do care about:**
@@ -16,7 +16,7 @@ Case studies should make our users look smart, our products look useful, and Pos
 - that they represent [who we build for](/handbook/who-we-build-for)
 - that someone else might benefit from reading their story 
 
-> Case studies are typically owned by the <SmallTeam slug="marketing" />. They live in `/contents/customers/` and appear on [posthog.com/customers](/customers). If you have a suggestion for who we should interview, let us know in the <PrivateLink url="https://posthog.slack.com/archives/C08CG24E3SR">marketing channel</PrivateLink>.
+> Case studies are typically owned by the <SmallTeam slug="developer-marketing" />. They live in `/contents/customers/` and appear on [posthog.com/customers](/customers). If you have a suggestion for who we should interview, let us know in the <PrivateLink url="https://posthog.slack.com/archives/C08CG24E3SR">marketing channel</PrivateLink>.
 
 
 ## Creating a case study

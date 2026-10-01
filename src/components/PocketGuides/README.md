@@ -2,10 +2,17 @@
 
 The digital book format for pocket guides – the docs-site sibling of the marketing team's field
 guide microsites. Educational register, not marketing: the structure does the teaching, and the
-whole thing uses PostHog fonts and tokens only.
+reader UI uses PostHog fonts and tokens. The Product Analytics guide's Twig views retain Twig styling.
 
-**Every page of a book is an MDX file.** Nothing in this folder contains prose – these components
-are layout and vocabulary, the words all live in `contents/pocket-guides/`.
+**Every page of a book is an MDX file.** Narrative prose lives in `contents/pocket-guides/`.
+Components here supply layout, interactions, and short labels for the data they display.
+
+The Product Analytics figures use commit-pinned `@posthog/twig-components` views for browsing and
+stay cards. `ProductAnalyticsExhibits.tsx` owns the guide's example events and chart, while
+`PostHogInspector.tsx` gives every inspector the same frame and code display. Reader clicks only
+change local example state – they do not send practice events to PostHog.
+`TwigBrowseFigure.tsx` imports Twig's styles and photos from the package, so a package update must
+be reviewed on both sites.
 
 ```
 contents/pocket-guides/<volume>/
@@ -90,7 +97,7 @@ after the prose.
 | `<SeeAlso>` | A print footnote at the foot of the column |
 | `<Term name="scout">` | An orange dotted-underline definition with a hover card |
 
-Headings map to the book's type scale: `#` is the page title, `##` a small-caps section heading.
+Headings, paragraphs, lists, tables, and inline code use the same prose styling as docs.
 
 ### How the reader lays a page out
 
@@ -107,12 +114,11 @@ on phones.
 
 ### Adding new content elements
 
-The page container is `not-prose`, so any element the prose map doesn't cover renders with bare
-browser defaults – silently. When a guide introduces something new (a table was the first),
-check the rendered page, and prefer wrapping the element in the site's native styling over
-book-specific styles: see how `ul`/`ol`/`table` borrow `.article-content` in
-[bookPieces.tsx](./bookPieces.tsx). Then test the Aa reading-size control at desktop and phone
-widths.
+The standalone reader applies the shared docs prose classes, and the Learn surface inherits
+them from `ReaderView`. The Aa control overrides the text size only after a reader changes it.
+When a guide introduces a new content element, check its rendered appearance against docs in
+light and dark mode and at narrow and wide widths. Keep book-specific mappings in
+[bookPieces.tsx](./bookPieces.tsx) only for behavior the shared prose styles cannot provide.
 
 ### One MDX trap worth knowing
 
@@ -228,3 +234,16 @@ The report frontmatter contract and the `.md` agent-mirror constraints are docum
 **Adding a frontmatter field** needs a matching declaration in
 `gatsby/createSchemaCustomization.ts` plus `pnpm clean` – Gatsby won't infer fields that only some
 pages declare.
+
+### Twig in Product Analytics
+
+The introduction uses a screenshot of Twig's homepage from `static/pocket-guides/posthog/`.
+The Events and properties chapter uses `BrowseStays` and `StayCardContent` from the pinned
+`@posthog/twig-components` package. `TwigBrowseFigure` adds local filter state and package photos.
+`TwigEventFlow` places the PostHog event inspector below the Twig view. The chapter's activity
+The inspectors show event timestamps separately from custom properties. These examples do not
+send events to a PostHog project.
+
+Twig.com owns its pages and instrumentation. The package owns reusable Twig UI, data, styles,
+and assets. PostHog.com owns the teaching prose and example data. When the package pin changes,
+review the Twig views on both sites at narrow and wide widths, in both themes.

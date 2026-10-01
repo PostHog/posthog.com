@@ -256,7 +256,7 @@ export default function RichText({
     cta = React.ReactNode,
 }: any) {
     const textarea = useRef<HTMLTextAreaElement>(null)
-    const [value, setValue] = useState(initialValue)
+    const [value, setValue] = useState(initialValue ?? '')
     const [cursor, setCursor] = useState<number | null>(null)
     const [imageLoading, setImageLoading] = useState(false)
     const [showPreview, setShowPreview] = useState(false)

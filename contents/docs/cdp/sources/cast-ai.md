@@ -6,7 +6,7 @@ availability:
   free: full
   selfServe: full
   enterprise: full
-sourceId: CAST_AI
+sourceId: CastAi
 ---
 
 import SourceSetupIntro from "../\_snippets/source-setup-intro.mdx"

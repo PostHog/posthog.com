@@ -4,6 +4,7 @@ import usePostHog from '../../hooks/usePostHog'
 
 import Link from 'components/Link'
 import { SingleCodeBlock } from 'components/CodeBlock'
+import { InlineCode } from 'components/InlineCode'
 import EnableScout from 'components/SelfDrivingInbox/EnableScout'
 import { productSource } from 'components/SelfDrivingInbox/sources'
 
@@ -16,9 +17,9 @@ export function SeeFig({ n }: { n: number }): JSX.Element {
     return <span className="whitespace-nowrap text-orange">Fig.&nbsp;{n}</span>
 }
 
-/** The small line above a title page's heading. */
+/** Introductory text uses the same prose styling as docs. */
 export function Eyebrow({ children }: { children: React.ReactNode }): JSX.Element {
-    return <p className="mb-1 text-[0.8em] font-bold uppercase tracking-wide text-secondary">{children}</p>
+    return <p>{children}</p>
 }
 
 /** The volume's specimen drawing, on the pages that open a book. */
@@ -87,11 +88,6 @@ export function SeeAlso({ children }: { children: React.ReactNode }): JSX.Elemen
     )
 }
 
-// Borrows .article-content, overriding its red 'unstyled' alarm color and its fixed font
-// sizes – the book's type is em-based so the Aa control can scale everything together.
-const NATIVE_CONTENT =
-    'article-content !text-secondary [&_li]:![font-size:1em] [&_p]:![font-size:1em] [&_li]:!leading-relaxed [&_p]:!leading-relaxed [&_li]:![list-style-type:revert] [&_ul]:![list-style-type:revert] [&_ol]:![list-style-type:revert] [&_ul]:[padding-left:revert] [&_ol]:[padding-left:revert]'
-
 /** A prose link, counted like a CTA – some chapters answer with a link, not a button. */
 function BookLink({ href, ...props }: any): JSX.Element {
     const posthog = usePostHog()
@@ -119,46 +115,9 @@ function BookLink({ href, ...props }: any): JSX.Element {
     )
 }
 
-/** Prose defaults. The page container is `not-prose`, so every tag is styled here. */
+/** The parent reader supplies docs prose styles; only book-specific behavior is mapped here. */
 export const proseComponents = {
-    // Em-based sizes AND margins: the reading-size control scales type and rhythm together.
-    // Margins add rather than collapse – the page column is a flex column.
-    h1: (props: any) => (
-        <h1 className="mb-[0.5em] mt-0 text-[1.7em] font-bold leading-tight text-primary @4xl:text-[2em]" {...props} />
-    ),
-    // Numbered like steps via CSS counter, so authors never write the numbers by hand.
-    h2: (props: any) => (
-        <h2
-            className="mb-[0.4em] mt-[1.2em] text-[0.8em] font-bold uppercase tracking-wide text-primary [counter-increment:book-section] before:mr-2 before:tabular-nums before:text-orange before:content-[counter(book-section,decimal-leading-zero)]"
-            {...props}
-        />
-    ),
-    // Below the h2 section label, which is 0.8em uppercase: a 1em bold h3 under it inverts the
-    // hierarchy, reading as the larger of the two. Sentence case at 0.9em stays subordinate.
-    h3: (props: any) => <h3 className="mb-[0.3em] mt-[1.1em] text-[0.9em] font-bold text-primary" {...props} />,
-    p: (props: any) => <p className="mb-[0.8em] text-[1em] leading-relaxed text-secondary last:mb-0" {...props} />,
-    // Lists and tables borrow the site's native docs styling (.article-content in global.css),
-    // wrapped per element because the class also styles headings/paragraphs, which the book owns.
-    ul: (props: any) => (
-        <div className={NATIVE_CONTENT}>
-            <ul {...props} />
-        </div>
-    ),
-    ol: (props: any) => (
-        <div className={NATIVE_CONTENT}>
-            <ol {...props} />
-        </div>
-    ),
-    // Cells get primary directly – the wrapper's secondary is for prose, and table text is data.
-    table: (props: any) => (
-        <div className={`${NATIVE_CONTENT} my-[0.8em] overflow-x-auto [&_td]:text-primary [&_th]:text-primary`}>
-            <table {...props} />
-        </div>
-    ),
-    strong: (props: any) => <strong className="font-bold text-primary" {...props} />,
-    // Fenced code. MDX v1 sends the block through `code` and inline spans through `inlineCode`,
-    // so `pre` only has to get out of the way – a div inside it would be invalid nesting.
-    // Without this a fence renders unstyled and runs past the page column.
+    // Fenced code. MDX v1 sends the block through `code` and inline spans through `inlineCode`.
     pre: ({ children }: any) => <>{children}</>,
     code: ({ className, children }: any) => (
         <div className="my-[0.8em] [&_.min-w-fit]:min-w-0 [&_.whitespace-pre]:whitespace-pre-wrap [&_.whitespace-pre]:break-words">
@@ -171,24 +130,6 @@ export const proseComponents = {
             </SingleCodeBlock>
         </div>
     ),
-    // text-primary, not inherited: the chips sit on a tinted background inside secondary-colored
-    // prose, and the small mono face can't afford the double contrast loss.
-    inlineCode: (props: any) => (
-        <code
-            className="rounded border border-primary bg-accent px-1 py-0.5 text-[0.85em] text-primary dark:bg-accent-dark"
-            {...props}
-        />
-    ),
+    inlineCode: InlineCode,
     a: (props: any) => <BookLink {...props} />,
-    hr: () => <span aria-hidden="true" className="my-6 block w-16 border-t border-primary" />,
-    // A worked-example table inside a <Fig> – illustrative rows, not live data.
-    table: (props: any) => <table className="mb-[0.8em] w-full border-collapse text-left text-[0.85em]" {...props} />,
-    thead: (props: any) => <thead className="border-b border-primary" {...props} />,
-    th: (props: any) => (
-        <th
-            className="py-1.5 pr-3 text-[0.85em] font-bold uppercase tracking-wide text-secondary last:pr-0"
-            {...props}
-        />
-    ),
-    td: (props: any) => <td className="border-b border-primary/30 py-1.5 pr-3 text-primary last:pr-0" {...props} />,
 }

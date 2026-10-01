@@ -24,7 +24,7 @@ Any company that is <2 years old and has raised less than $5M in funding is elig
 
 -   $50,000 in PostHog credits (valid for 12 months)
 -   One unique welcome pack for founders
--   Partner benefits with Speakeasy, Incident.io, and Chroma
+-   Partner benefits with Speakeasy and Incident.io
 -   A monthly newsletter for founders
 
 > ❗Credits **cannot** be used toward a BAA under the Boost plan.
@@ -47,7 +47,7 @@ This program is similar to our startup program but has some key differences for 
    -   If they previously registered for the old deal and it expired, they need to re-register
 -   Up to 4 unique founder merch packs (different from the startup program)
 -   Access to HogPatch for the duration of their time in the batch
--   Partner benefits with Speakeasy, Incident.io and Chroma
+-   Partner benefits with Speakeasy and Incident.io
 
 You can find the copy for the latest deal on Bookface in this [doc](https://docs.google.com/document/d/1dmsMxrfWSVhKZY4bQp5QIRiXS2iCvLGJah5EKWOvoeI/edit?tab=t.0#heading=h.o7fhsqrlnheo). To post updates, you need to ask James or Tim to do it.
 
@@ -94,12 +94,12 @@ Subscribers to [Every](https://every.to/) get:
    If they meet the basic criteria, we automatically apply the correct amount of Stripe credit.
 
 3. **Welcome + merch**
-   Shortly after, they receive an [automated email](https://fly.customer.io/workspaces/127208/journeys/composer/actions/2185)) from <TeamMember name="Joe Martin" photo />, in which we
+   Shortly after, they receive an [automated email](https://fly.customer.io/workspaces/127208/journeys/composer/actions/2185)) from <TeamMember name="Joe Black" photo />, in which we
    - Confirm their acceptance, welcome them and explain perks
    - Provide unique code(s) to claim founder kit(s) from [the merch store](/merch) (orders are fulfilled by Micromerch, merch questions can go in the `#merch` Slack channel)
 
 4. **Milestones**
-   When teams reach 50%, 75%, or 100% of their credit usage — or when credits expire — they receive milestone emails. These come from Customer.io and are managed by <TeamMember name="Joe Martin" photo />.
+   When teams reach 50%, 75%, or 100% of their credit usage — or when credits expire — they receive milestone emails. These come from Customer.io and are managed by <TeamMember name="Joe Black" photo />.
 
 5. **Post-credit**
    Once credit is fully used or expired, teams are moved to a standard paid plan automatically.
@@ -127,11 +127,11 @@ We send a short, founder-focused newsletter once per month to all program partic
 
 ## Credit usage
 
-Credits can be used for most PostHog tools and add-ons, including [platform packages](/platform-packages).
+Credits can be used for most PostHog products and add-ons, including [platform packages](/platform-packages).
 
 -   **Startups**: ❌ Cannot use credits toward a BAA due to legal risk.
 -   **YC teams**: ✅ Can use credits for a BAA under the Boost plan.
--   **AI tools**: ❌ From September 14, 2026, credits cannot be used toward AI tools such as PostHog Desktop, the PostHog Slack app, Replay Vision, PostHog AI, and Inbox, due to the prohibitive and unpredictable nature of token-based pricing. Usage incurred before the cut-off can still be paid with credits.
+-   **AI apps and products**: ❌ From September 14, 2026, credits cannot be used toward AI apps and products such as PostHog Desktop, the PostHog Slack app, Replay Vision, PostHog AI, and Inbox, due to the prohibitive and unpredictable nature of token-based pricing. Usage incurred before the cut-off can still be paid with credits.
 
 Buying a platform package with credits – including the enterprise add-on – does not come with a dedicated account manager, CSM, or sales contact, in the same way it does not come with high priority support. Those are for paying customers. Founders who want one-to-one help can buy a [30-minute onboarding call](/merch?product=30-min-onboarding-consultation) from the merch store.
 
@@ -143,7 +143,6 @@ We currently partner with:
 
 -   **Incident.io** – $1,500 off a teams plan
 -   **Speakeasy** – 50% off for 6 months
--   **Chroma** – $5,000 of credit
 
 Discount codes are sent in the welcome email after signup.
 
@@ -153,9 +152,8 @@ Contacts:
 
 -   Incident.io: Zain Mobarik
 -   Speakeasy: Nolan Di Mare Sullivan
--   Chroma: Philip Thomas
 
-We previously offered DigitalOcean credits ($25k) and a Mintlify partnership, but these were retired in Q2 2025.
+We previously offered DigitalOcean credits ($25k), but this was retired in Q2 2025.
 
 ## Program extensions
 

@@ -122,7 +122,6 @@ idempotency
 impactful
 innersource
 kanban
-ko
 linter
 lockfile
 lockfiles

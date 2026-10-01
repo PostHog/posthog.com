@@ -134,6 +134,7 @@ import { webAnalyticsFeatures } from '../../hooks/featureDefinitions/web_analyti
 import { workflowsFeatures } from '../../hooks/featureDefinitions/workflows'
 import { logsFeatures } from 'hooks/featureDefinitions/logs'
 import { supportFeatures } from 'hooks/featureDefinitions/support'
+import { tracesFeatures } from 'hooks/featureDefinitions/traces'
 import { logs } from 'hooks/productData/logs'
 interface RowConfig {
     // Shorthand: e.g., "error_tracking.core" or "platform.deployment.self_host" or "product_analytics"
@@ -193,6 +194,7 @@ export default function ProductComparisonTable({
         workflows: workflowsFeatures,
         logs: logsFeatures,
         support: supportFeatures,
+        traces: tracesFeatures,
     }
 
     // Resolve nested nodes by dot-path
@@ -317,9 +319,13 @@ export default function ProductComparisonTable({
                         const section = defs[sectionKey]
                         if (!section || typeof section !== 'object') continue
 
-                        // Store both the key and description for rendering (with header)
+                        // Store both the key and description for rendering (with header).
+                        // Prefer the section's own `name` – deriving the label from the key
+                        // cannot produce an acronym or a hyphen ("ai_and_self_driving" would
+                        // read "Ai and self driving"). Every other section's name matches its
+                        // derived label, so this changes no existing table.
                         expanded.push({
-                            label: sentenceCase(sectionKey.replace(/_/g, ' ')),
+                            label: section.name || sentenceCase(sectionKey.replace(/_/g, ' ')),
                             description: section.description,
                             type: 'header',
                         })

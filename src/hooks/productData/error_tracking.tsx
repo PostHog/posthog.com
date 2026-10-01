@@ -45,7 +45,11 @@ export const errorTracking = {
      * feed the carousel templates their slide arrays).
      */
     productMenu: [
-        { slug: 'overview', name: 'Overview', icon: <IconEye className="size-4" /> },
+        {
+            slug: 'overview',
+            name: 'Overview',
+            icon: <IconEye className="size-4" />,
+        },
         {
             slug: 'eli5',
             name: 'What does it do?',
@@ -109,8 +113,6 @@ export const errorTracking = {
     ],
     overview: {
         title: 'Track errors and resolve issues',
-        description:
-            'Error tracking is one of the tools that makes your product self-driving: every exception is tied to the user who hit it, so agents have the context to ship the fix. Built to natively work with product analytics, session replay, and feature flags.',
         eli5: "Error Tracking captures exceptions from across your stack and turns them into issues you can prioritize, assign, and resolve. Because PostHog already knows what's happening in your product, every issue comes with the affected user's session replay, events, and properties attached – so you can see what went wrong instead of trying to reproduce it.",
         textColor: 'text-black', // tw
     },
@@ -183,7 +185,6 @@ export const errorTracking = {
         },
     },
     useCases: {
-        intro: 'Error Tracking is used across teams depending on your role.',
         rows: [
             [
                 'Product & Growth Engineers',

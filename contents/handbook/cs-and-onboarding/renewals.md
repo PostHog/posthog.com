@@ -33,7 +33,7 @@ Work back from the end of the customer's final billing period (if they are going
 
 Regardless, have a checkpoint the week before the final billing period closes. If signature is going to slip, either:
 
-1. **Ask billing to pause collection.** If the invoice hasn't been issued yet, billing can hold it for a few days so the credits land first. Flag it as early as you can, because [they can't pause an invoice that has already been issued](/handbook/growth/sales/contracts#flag-insufficient-credits-before-the-invoice-is-issued).
+1. **Ask billing to pause collection.** If the invoice hasn't been issued yet, billing can hold it for 48 hours so the credits land first. The pause is [48 hours with no extension, and they can't pause an invoice that has already been issued](/handbook/growth/sales/contracts#flag-insufficient-credits-before-the-invoice-is-issued), so flag it as early as you can. If signature is going to take longer than 48 hours, use option 2 instead.
 2. **Re-paper with the next period's start date.** If the period is going to close before signature, don't hold the original start date. Move the `Contract.EffectiveDate` to the beginning of the next billing period and tell the customer the new credits apply from that date. The period we already invoiced stays payable separately.
 
 Tell the customer which of these is happening while the order form is still out, not after they get an invoice they weren't expecting. If a customer does end up with a balance on an already-issued invoice because the renewal slipped, that's a [refund, not a credit](/handbook/growth/sales/refunds#refund-or-credit). Credits only apply to upcoming invoices.

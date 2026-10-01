@@ -97,7 +97,7 @@ const query = (offset: number, options?: UseQuestionsOptions, isModerator?: bool
                             },
                             user: {
                                 populate: ['role'],
-                                fields: ['role'],
+                                fields: ['id'],
                             },
                         },
                     },

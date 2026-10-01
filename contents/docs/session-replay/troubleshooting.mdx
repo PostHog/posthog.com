@@ -294,6 +294,15 @@ A recording with **no** full snapshot anywhere shows a full error screen because
 
 If you consistently see late snapshot warnings, make sure your `posthog-js` version is up to date and check that nothing is interfering with network requests to PostHog (see [ad/tracking blockers](#adtracking-blockers) and [content security policy](#content-security-policy) above).
 
+## Element looks frozen because of rapid DOM changes
+
+Session replay records changes to the page DOM. The recorder limits how often it records attribute changes, such as `style` or `class` updates, on any single element. When an element's attributes change faster than that limit, for example during an SVG animation that updates styles every frame, the recorder drops the element's extra attribute changes until the rate slows down. Added nodes, removed nodes, and text changes are still recorded.
+
+In playback, a throttled element can look frozen or out of date. To fix this:
+
+- Avoid per-frame style or attribute animation on large elements and SVGs where you can.
+- Exclude the element from capture with the `ph-no-capture` class, so the recorder skips it and the DOM changes inside it. Masking doesn't help here – it redacts the content but still records the element and its mutations. See [excluding elements from capture](/docs/session-replay/privacy#other-elements).
+
 ## Person not found
 
 If you are able to capture a replay, but the entry says "person not found," this is replay has been captured from an anonymous user and a [person profile](/docs/data/persons) has **not** been created for them.

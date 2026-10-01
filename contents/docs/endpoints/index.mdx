@@ -6,19 +6,12 @@ contentMaxWidthClass: max-w-5xl
 ---
 
 import { IconLaptop, IconBrackets, IconMagic, IconCode, IconGraph, IconHogQL, IconDatabase, IconServer, IconBolt, IconNotebook, IconCheckCircle } from '@posthog/icons'
-import CalloutBox from 'components/Docs/CalloutBox'
 import OSButton from 'components/OSButton'
 import CustomSelfDrivingLoop from 'components/CustomSelfDrivingLoop'
 
 Endpoints turn a saved insight or SQL query into a named, callable API route. You write the query once in PostHog, give it a name, and your app fetches the results over HTTP – no query strings to assemble in client code, and no query logic scattered across your services.
 
 Because the query lives in PostHog, you get versioning, execution logs, and optional [materialization](/docs/endpoints/materialization) for free. That makes endpoints a good fit for customer-facing analytics and internal tools, where the same query runs constantly and needs to stay fast and predictable.
-
-<CalloutBox icon="IconFlask" title="Endpoints is in beta" type="action">
-
-Endpoints is in early beta and free to use while it is. We're always looking for feedback, so [reach out to us directly](https://app.posthog.com#panel=support%3Afeedback%3A%3Alow%3Atrue) in app.
-
-</CalloutBox>
 
 <OSButton variant="primary" asLink to="/docs/endpoints/start-here">Get started</OSButton>
 

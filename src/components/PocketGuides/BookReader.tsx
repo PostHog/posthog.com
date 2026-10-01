@@ -27,7 +27,7 @@ interface BookReaderProps {
     shelf?: { url: string; label: string }
     /** Where you are, printed in the foot line. Front matter is unnumbered. */
     position?: { page?: number; total: number }
-    /** Reading size in px, applied to the body so the em-based prose scales. */
+    /** Reading size control; the default body size comes from the docs prose styles. */
     fontSize?: number
     onFontSize?: (delta: number) => void
     fontSizes?: readonly number[]
@@ -280,7 +280,7 @@ export default function BookReader({
                         {/* min-h-full + mt-auto: on a short page the nav pins to the page's
                         foot instead of floating mid-page above empty paper. */}
                         <div className="mx-auto flex min-h-full w-full max-w-[52rem] flex-col @3xl:max-w-[56rem]">
-                            <div style={{ fontSize }}>{children}</div>
+                            <div>{children}</div>
                             <nav
                                 aria-label="Pocket guide pages"
                                 className="mt-auto flex items-baseline justify-between gap-4 px-5 pb-8 text-sm @xl:px-12"

@@ -6,7 +6,7 @@ availability:
   free: full
   selfServe: full
   enterprise: full
-sourceId: SmartReach
+sourceId: Smartreach
 ---
 
 import SourceSetupIntro from "../\_snippets/source-setup-intro.mdx"

@@ -214,20 +214,28 @@ More details on how exactly the uptime SLA works can be found in our [terms](/te
 
 ## Payment method
 
-For customers paying monthly, we only accept credit card payments, which will be taken automatically via Stripe at the end of their monthly billing period.
+How a customer pays depends on how they buy PostHog:
 
-For customers purchasing credits upfront, we only take bank transfers because:
+| How they buy | Payment method | When they pay |
+|---|---|---|
+| Monthly, self-serve (pay-as-you-go) | Credit card only | Automatically via Stripe at the end of each monthly billing period |
+| Credits upfront via an order form | Bank transfer only | Net 30 from the contract start date, unless the order form says otherwise |
+
+We do not accept credit card payments for credits bought via an order form. There are no exceptions, whatever the invoice amount. This is because:
 
 - For large payment amounts, the fees we incur are higher for credit card payments.
 - Our Sales Ops automations are set up to handle bank transfer payments.
+- Passing card fees on to the customer (a surcharge, a card fee line item, or fewer credits) adds manual work, and has legal, tax, and revenue recognition complexity that we don't want.
 
-You should confirm ahead of the customer signing the order form that they are happy and set up to pay by bank transfer. If they are absolutely unable to accommodate bank transfer we can accept credit card payments under the following conditions:
+Most vendors that sell prepaid contracts have the same rule, so this should not surprise the customer's finance team. What this means in practice:
 
-- We have a card on file which we can immediately charge for the full invoice amount.
-- They pay immediately on signature, not on the contract start date (i.e. no Net 30).
-- The order form says so. The default order form template keeps our standard Net 30 bank transfer terms, so you must change them on the document you generate from it (never on the template itself) to `Payment Terms: Net 1 from Signature Date` and `Payment Method: Bank Transfer or Credit Card`. If the order form still says Net 30, the customer can hold us to Net 30, whatever we agreed in conversation.
+- **The customer's AP can only pay by card.** They can't buy credits upfront via an order form. They can stay on (or move to) a monthly self-serve plan and pay by card, but they don't get the discounts that come with an order form.
+- **The customer wants to pay by card to pay faster.** The answer is still bank transfer. Send the invoice PDF from Stripe, which has our bank details on it.
+- **The invoice is already late and the customer asks to pay by card.** We don't take card payments to settle a late invoice. Follow the [late payments process](/handbook/growth/sales/billing#failedlate-payments) – suspending access gets payment faster than changing the payment method.
 
-If your customer must pay via credit card, you absolutely _need_ to let RevOps team know ahead of the order form being signed as there is a lot of manual work needed up front to make this work.
+Confirm ahead of the customer signing the order form that they are happy and set up to pay by bank transfer. Make this clear in your sales conversations, not only on the order form. If they can't pay by bank transfer, find out before they sign, not when the invoice is due.
+
+Do not change the payment terms or the payment method on the order form to allow credit card.
 
 > We absolutely do not allow payment by check. This is made clear on order forms. 
 

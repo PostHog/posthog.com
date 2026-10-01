@@ -106,24 +106,31 @@ const statusLabels = {
 const ProfileSelect = ({ value, onChange }: { value: any; onChange: (value: any) => void }) => {
     const [profiles, setProfiles] = useState<any[]>([])
     useEffect(() => {
-        const query = qs.stringify({
-            populate: ['avatar', 'teams'],
-            pagination: {
-                limit: 100,
-            },
-            filters: {
-                teams: {
-                    id: {
-                        $notNull: true,
+        const fetchPage = (page: number) =>
+            fetch(
+                `${process.env.GATSBY_SQUEAK_API_HOST}/api/profiles?${qs.stringify({
+                    populate: ['avatar', 'teams'],
+                    pagination: {
+                        page,
+                        pageSize: 100,
                     },
-                },
-            },
-        })
-        fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/profiles?${query}`)
-            .then((res) => res.json())
-            .then(({ data }) => {
-                setProfiles(data)
-            })
+                    filters: {
+                        teams: {
+                            id: {
+                                $notNull: true,
+                            },
+                        },
+                    },
+                })}`
+            ).then((res) => res.json())
+
+        const fetchProfiles = async () => {
+            const first = await fetchPage(1)
+            const pageCount = first?.meta?.pagination?.pageCount || 1
+            const rest = await Promise.all(Array.from({ length: pageCount - 1 }, (_, i) => fetchPage(i + 2)))
+            setProfiles([first, ...rest].flatMap((page) => page?.data || []))
+        }
+        fetchProfiles()
     }, [])
 
     const sortedProfiles = useMemo(() => {

@@ -29,7 +29,7 @@ This is a vague aspiration and "[agent-first software](/newsletter/agent-first-p
 
 The current era of software is designed for humans to do all the work, but in 2030, agents will be the ones **doing**. Agents have shown that they can do the obvious stuff themselves. What does this leave humans to do?
 
-1. **Judging and deciding.** Humans will approve, prioritize, choose direction, and resolve ambiguity.
+1. **Judging and deciding.** Humans will approve, prioritize, [choose direction](/newsletter/when-ai-writes-all-code#2-setting-direction), and resolve ambiguity.
 
 2. **Understanding and trusting.** Humans will evaluate whether it worked, if it's safe, and what's changed.
 

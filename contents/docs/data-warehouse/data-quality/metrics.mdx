@@ -1,0 +1,97 @@
+---
+title: Test semantic layer metrics
+sidebar: Docs
+showTitle: true
+---
+
+import { CalloutBox } from 'components/Docs/CalloutBox'
+
+<CalloutBox icon="IconFlask" title="Data quality is in alpha" type="action">
+
+Data quality isn't available to every project. [Contact support](https://app.posthog.com/home#supportModal) to request access or share feedback.
+
+</CalloutBox>
+
+Metric checks test the rows returned by a saved [semantic layer metric](/docs/semantic-layer/metrics). They help you verify constraints such as revenue never being negative or a daily signup count staying above a required minimum.
+
+Only metrics with a saved HogQL definition support data quality checks. Markdown definitions, Trends definitions, metrics without a definition, and deleted metrics aren't supported.
+
+## Create a metric check
+
+Open the metric in the Data Catalog, select **Tests**, and click **New check**. Metrics support **Custom SQL** checks only. Write a HogQL `SELECT` that returns one row per failure.
+
+Use `{metric}` exactly once as a relation:
+
+```sql
+SELECT *
+FROM {metric}
+WHERE revenue < 0
+```
+
+This check fails once for every metric output row where `revenue` is negative. It passes when the query returns no rows.
+
+The `{metric}` relation uses the metric's saved HogQL query and saved parameter values. Your check can filter its output, aggregate it in a subquery, or join it to another table that you can access.
+
+## Follow the metric query rules
+
+A metric check must meet these requirements:
+
+- Use `{metric}` exactly once in a `FROM` or `JOIN` relation.
+- Don't use `{filters}`, expression placeholders, or other relation placeholders.
+- Don't define a common table expression (CTE) in the check query. This includes nested CTEs and scalar `WITH` bindings.
+- Return one row per failure.
+- Use valid HogQL that you can run with access to every table the check reads.
+
+The saved metric definition can contain CTEs and saved parameter values. The CTE restriction applies to the check query around `{metric}`, not to the metric definition itself.
+
+For example, use a subquery instead of a CTE when the check needs another calculation:
+
+```sql
+SELECT *
+FROM (
+    SELECT day, sum(revenue) AS daily_revenue
+    FROM {metric}
+    GROUP BY day
+)
+WHERE daily_revenue < 0
+```
+
+## Discover the metric's output columns
+
+The check editor loads the columns returned by the saved metric query so you can use them in the check.
+
+Column discovery can fail when:
+
+- The metric isn't a HogQL metric.
+- The saved HogQL no longer parses or executes.
+- A referenced table or column was renamed.
+- You don't have permission to query a referenced table.
+
+Fix the metric definition or access problem, then reload the editor.
+
+## Understand validation and execution
+
+Saving a check and running it are separate operations.
+
+| Operation | What PostHog verifies |
+| --- | --- |
+| Open the check editor | Executes a zero-row schema query to discover the metric's output columns. |
+| Save or edit the check | Parses the saved metric definition and check query, validates the placeholder and CTE rules, and saves the definition without running the full check. |
+| Run the check | Binds the current saved metric definition into the check and executes the compiled query. |
+
+A check can save successfully and later error during execution. For example, a table can become unavailable, permissions can change, or a query can time out.
+
+## Handle changes to the metric definition
+
+The check stores its own query with the `{metric}` relation. It doesn't copy the metric definition. Each validation and run uses the metric's current saved HogQL definition and parameter values.
+
+After you change a metric:
+
+1. Review its **Tests** tab.
+2. Confirm that every check still uses output columns the metric returns.
+3. Run the checks manually.
+4. Update any check whose assumption changed.
+
+The check keeps its run history when you edit it. If a definition change removes a referenced output column, makes the metric unsupported, or introduces invalid HogQL, later runs show **Errored** instead of **Failed**.
+
+Metric checks run on the metric's schedule. See [triggers and schedules](/docs/data-warehouse/data-quality/triggers) to change the interval or pause automatic runs.

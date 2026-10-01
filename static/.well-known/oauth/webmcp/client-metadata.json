@@ -1,0 +1,9 @@
+{
+    "client_id": "https://posthog.com/.well-known/oauth/webmcp/client-metadata.json",
+    "client_name": "PostHog WebMCP",
+    "logo_uri": "https://posthog.com/.well-known/oauth/webmcp/logo.png",
+    "redirect_uris": ["https://us.posthog.com/webmcp/callback", "https://eu.posthog.com/webmcp/callback"],
+    "grant_types": ["authorization_code"],
+    "response_types": ["code"],
+    "token_endpoint_auth_method": "none"
+}

@@ -17,7 +17,7 @@ seo:
 
 Despite their name, customer success managers at many SaaS companies don’t actually help their customers succeed. They send quarterly business reviews nobody reads, gatekeep engineering access, forward support tickets and call it "advocacy," have titles like "Strategic Customer Success Partner," and LinkedIn bios that say "passionate about driving outcomes."
 
-Besides doing none of these things at PostHog, customer success managers (and technical account managers) also crochet hedgehogs, hand-deliver donuts to customers around the world, build customer and PostHog emoji mashups, and ship product PRs to fix complaints themselves.
+Besides doing none of these things at PostHog, customer success managers (and [technical account managers](/blog/technical-account-manager)) also crochet hedgehogs, hand-deliver donuts to customers around the world, build customer and PostHog emoji mashups, and ship product PRs to fix complaints themselves.
 
 We believe being genuine and being effective aren’t at odds, and our workdays reflect that. Here’s what a day in the life of a PostHog customer success manager (CSM) – and our technical account managers (TAMs) – actually looks like:
 
@@ -153,7 +153,7 @@ This TAM used [PostHog Desktop](/desktop) to [open a PR](https://github.com/Post
 
 Within 12 hours, the fix was ready for review. Within 24 hours, it was merged. The customer's response: "I understand why people love PostHog now."
 
-This isn't that unusual here. Our TAMs and CSMs are technical. We hire for it.
+This isn't that unusual here. [Our TAMs and CSMs are technical](/blog/how-to-become-a-technical-csm). We hire for it.
 
 Another CSM got mistaken for a product engineer by one of his customers because he was answering their technical questions with so much depth. His response in our team channel: "chat, am I adding too much value?"
 
@@ -189,4 +189,4 @@ Working at PostHog is a grab bag of weird, fun, intense, goofy, and hard work. A
 
 The weird stuff isn't a distraction from the real work because it’s how we do the real work. Being genuine and being effective aren't at odds. If anything, the customer who got a crocheted hedgehog is probably more likely to take your call about trying that new product we launched than the one who got a quarterly business review PDF.
 
-If you think this sounds like a place you'd want to work, [we're always hiring](/careers/technical-customer-success-manager).
+If you think this sounds like a place you'd want to work, [we're always hiring](/careers).

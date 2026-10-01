@@ -617,10 +617,14 @@ At the 1x tier:
 | Endpoints | Burst | Refill |
 | --- | --- | --- |
 | Account requests | 5 | 10/hour |
+| Token exchange | 10 | 20/hour |
 | Project provisioning (`/resources`) | 10 | 30/hour |
-| Everything else (token exchange, token refresh, reads, credential rotation, deep links) | 30 | 120/hour |
+| Deep links | Blocked | Blocked |
+| Everything else (token refresh, reads, credential rotation) | 30 | 120/hour |
 
-So account requests, the tightest budget, run at 10/20/50/100 per hour across the four tiers. Token refreshes have their own budget, separate from token exchanges, so keeping many users' tokens alive never competes with onboarding new ones.
+So account requests, the tightest budget, run at 10/20/50/100 per hour across the four tiers, and token exchanges at 20/40/100/200. Token refreshes have their own budget, separate from token exchanges, so keeping many users' tokens alive never competes with onboarding new ones.
+
+Deep links have no budget at the 1x and 2x tiers: a public client gets a 403 `forbidden` from that endpoint. Declare `private_key_jwt` and they run at 150 burst and 600/hour at 5x, or 300 burst and 1,200/hour at 10x. Polling a GitHub grant's repositories is the one budget that does not scale with tier: 30 burst and 120/hour per grant, because how fast a visitor's repo picker polls has nothing to do with how strongly your app identifies itself.
 
 Limits are per region: US and EU count separately.
 

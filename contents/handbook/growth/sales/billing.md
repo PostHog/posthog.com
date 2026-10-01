@@ -37,7 +37,7 @@ If this is a new contract for an existing customer, you will need to add their e
 - Click the invoice link in the table to open it in Stripe, or use the Invoice ID to locate the invoice in Stripe. 
 - Ensure all details are correct, particularly the Customer’s Billing/Shipping addresses and Tax ID on the Customer object.
 - If the customer has an existing credit balance in Stripe (common for renewals), remove the credit before sending the invoice. Otherwise, Stripe will automatically apply the credit balance to the invoice. After the invoice is sent, you can reapply the credit. 
-- Send the invoice to the customer and wait for the payment to be completed. Ensure that the customer is aware that payment is via Bank Transfer only (no checks).
+- Send the invoice to the customer and wait for the payment to be completed. Ensure that the customer is aware that payment is via bank transfer only (no credit cards and no checks). See [payment method](/handbook/growth/sales/contract-rules#payment-method).
 
 **Do not proceed to the next steps until invoice is finalized.** Any credits added to an account gets automatically applied to outstanding invoices. If you add credits before payment is completed, the credits will settle any existing debts, and customer will not be able to make a payment.
 
@@ -76,7 +76,9 @@ As the account owner you will be assigned a risk indicator in Vitally, as well a
 
 You should reach out to any known contacts, as well as any finance email addresses we have in Stripe asking for payment to be made immediately.  For credit-based customers, you can download the Invoice PDF from the Stripe invoice page, and for monthly customers you can get the payment link from the Stripe invoice page. To get a payment update link, click on the subscription, then click actions in the top right corner and choose share payment update link. Make it easy for them to make payment by including these details in your email.
 
-> Make it clear in this outreach that if we don't receive payment in the next 7 calendar days, their user access will be suspended. If they come back to you with genuine reasons why they need more time, use your discretion with the next steps. 
+> Make it clear in this outreach that if we don't receive payment in the next 7 calendar days, their user access will be suspended. If they come back to you with genuine reasons why they need more time, use your discretion with the next steps.
+
+> If a credit-based customer asks to pay a late invoice by credit card instead, say no. Tell them to pay by bank transfer, and send the invoice PDF again. The [payment method rules](/handbook/growth/sales/contract-rules#payment-method) do not change because the invoice is late.
 
 #### Step 2 - 1 day before suspending user access
 
@@ -216,6 +218,10 @@ Employees can get access to paid features (like Boost) on personal or side proje
 1. **Special billing-only plan**: Add a plan like `boost-addon-20250602` to the customer's `plans_map` in the billing admin. These plans exist only in the billing system and grant features without a Stripe subscription.
 
 2. **Long trial**: Create a trial that does not auto-convert with a long `expires_at` date. This works well for temporary access or when you want a clear end date.
+
+Side projects on a long trial meet the same [spend caps](/handbook/growth/sales/trials) as a prospect on Replay Vision, Desktop, PostHog AI, and Inbox. They reach them quickly. To lift them, add the organization to the `billing-trial-expanded-free-allocation` feature flag in PostHog. It is an organization group flag, so target it on `organization.$group_key` with the organization ID. That gives the side project ten times each product's free allocation instead of twice it.
+
+The flag only changes what a trial lends where the customer set no limit. If the side project has a spend limit of its own, that limit still governs, so clear it first.
 
 ### Updating subscriptions
 

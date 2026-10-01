@@ -322,14 +322,14 @@ const PitchIdeaPanel = (): JSX.Element => {
 
     const submit = (event: React.FormEvent) => {
         event.preventDefault()
-        if (!idea.trim()) {
+        if (!idea.trim() || !email.trim()) {
             return
         }
         posthog?.capture('survey sent', {
             $survey_id: PITCH_SURVEY_ID,
             $survey_response: idea.trim(),
             [`$survey_response_${PITCH_QUESTION_ID}`]: idea.trim(),
-            ...(email.trim() ? { [`$survey_response_${PITCH_EMAIL_QUESTION_ID}`]: email.trim() } : {}),
+            [`$survey_response_${PITCH_EMAIL_QUESTION_ID}`]: email.trim(),
         })
         setSubmitted(true)
     }
@@ -367,7 +367,9 @@ const PitchIdeaPanel = (): JSX.Element => {
                             />
                         </label>
                         <Input
-                            label="Email (optional)"
+                            label="Email"
+                            description="So we can follow up if we have questions about your pitch."
+                            required
                             showLabel
                             direction="column"
                             size="md"

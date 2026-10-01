@@ -40,7 +40,7 @@ export type Event = {
     partners?: Array<{ name: string; url?: string; logoUrl?: string }>
     attendees?: number
     vibeScore?: number
-    photos?: { id: number; url: string }[]
+    photos?: { id: number; url: string; name?: string }[]
     video?: string
     presentation?: string
     link?: string
@@ -57,7 +57,12 @@ export const transformStrapiEvent = (strapiEvent: any): Event => {
         photos: photosData,
     } = strapiEvent.attributes
 
-    const photos = photosData?.data?.map((photo: any) => ({ id: photo.id, url: photo.attributes?.url }))
+    const photos = photosData?.data?.map((photo: any) => ({
+        id: photo.id,
+        url: photo.attributes?.url,
+        // The generated graphic is saved as a regular photo — the form uses the file name to find it again
+        name: photo.attributes?.name,
+    }))
     const speakers = speakersData?.data?.map((s: any) =>
         [s.attributes?.firstName, s.attributes?.lastName].filter(Boolean).join(' ')
     )

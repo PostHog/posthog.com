@@ -236,6 +236,15 @@ const graphicFileName = (eventName?: string, format: EventGraphicFormat = 'squar
         format === 'landscape' ? '-landscape' : ''
     }.png`
 
+// The auto-uploaded graphic lives in the event's `photos`, so an edit must recognize it to replace it.
+// The upload keeps the file name we gave it, which is derived from the event name — match on either the
+// saved name or the name in the form, because the organizer can rename the event in the same save.
+const isGeneratedGraphic = (photoName?: string, ...eventNames: (string | undefined)[]): boolean =>
+    !!photoName &&
+    eventNames
+        .filter(Boolean)
+        .some((name) => photoName === graphicFileName(name) || photoName === graphicFileName(name, 'landscape'))
+
 // Export sizes: a square social graphic, and the standard Open Graph ratio for link previews.
 const GRAPHIC_EXPORT_SIZES: Record<EventGraphicFormat, { width: number; height: number }> = {
     square: { width: 1080, height: 1080 },
@@ -386,11 +395,19 @@ export default function EventForm({ onSuccess, event }: { onSuccess?: () => void
                             return await uploadImage(img.file, jwt)
                         })
                 )
+                // Photos the event already had that are the graphic we generated last time. They are dropped
+                // here and regenerated below, so a shuffled color (or an edited date, venue, speaker) reaches
+                // the site instead of leaving the first-ever render in place.
+                const staleGraphicIds = (event?.photos || [])
+                    .filter((photo) => isGeneratedGraphic(photo.name, event?.name, values.name))
+                    .map((photo) => photo.id)
                 let photoIds = [
                     ...uploadedPhotos.map((photo) => photo.id),
-                    ...values.photosLocal.filter((image) => 'id' in image && image.id).map((image) => image.id),
+                    ...values.photosLocal
+                        .filter((image) => 'id' in image && image.id && !staleGraphicIds.includes(image.id))
+                        .map((image) => image.id),
                 ]
-                // No photos provided — upload the generated graphic so the event has art everywhere
+                // No photo of their own — upload the generated graphic so the event has art everywhere
                 if (photoIds.length === 0 && graphicRef.current) {
                     try {
                         const blob = await toBlob(graphicRef.current, {
@@ -408,8 +425,9 @@ export default function EventForm({ onSuccess, event }: { onSuccess?: () => void
                             }
                         }
                     } catch (error) {
-                        // Don't block event creation if the graphic can't be generated
+                        // Don't block the save if the graphic can't be generated — keep the previous one
                         console.error('Error uploading event graphic:', error)
+                        photoIds = staleGraphicIds
                     }
                 }
                 const dateTime = dayjs(`${values.date} ${values.startTime || '00:00'}`).toISOString()
@@ -760,8 +778,10 @@ export default function EventForm({ onSuccess, event }: { onSuccess?: () => void
         }
     }, [formik.values.speakers, data.allSqueakProfile.nodes])
 
-    // Falls back to a stable hash of the event name so the same event always starts on the same style.
-    const graphicStyleIndex = graphicStyleOverride ?? eventGraphicStyleIndex(formik.values.name)
+    // Falls back to a stable hash so the same event always starts on the same style. Saved events use the
+    // same seed as the site (`id-name`), so an unshuffled preview matches what the list and detail views show.
+    const graphicStyleIndex =
+        graphicStyleOverride ?? eventGraphicStyleIndex(event ? `${event.id}-${event.name}` : formik.values.name)
 
     // Step by a random non-zero offset so every press lands on a different hue/variant combination.
     const shuffleGraphicStyle = () =>

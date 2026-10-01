@@ -49,7 +49,7 @@ const ProductRateBlock = ({
     initialVolume: number
     unit: string
     // Adds a second input that multiplies the cost, e.g. months of retention
-    multiplier?: { unit: string; initial: number }
+    multiplier?: { unit: string; initial: number; max?: number }
     onCostChange: (cost: number) => void
 }) => {
     const [volume, setVolume] = useState(initialVolume)
@@ -212,6 +212,11 @@ const ProductRateBlock = ({
                                             value={multiplierValue}
                                             decimalScale={0}
                                             allowNegative={false}
+                                            isAllowed={({ floatValue }) =>
+                                                !multiplier.max ||
+                                                floatValue === undefined ||
+                                                floatValue <= multiplier.max
+                                            }
                                             onValueChange={({ floatValue }) => {
                                                 if (floatValue !== undefined)
                                                     setMultiplierValue(Math.max(1, floatValue))
@@ -248,7 +253,12 @@ const ProductRateBlock = ({
 }
 
 const PricingCalculator = ({ id, productData }: SectionComponentProps) => {
-    const billingHandle = productData?.sharesFreeTier || productData?.handle
+    // `useProduct` resolves `sharesFreeTier` from a handle string into the full
+    // product object, so read the handle back off it. Accept both shapes – callers
+    // that pass raw productData still hand us the string.
+    const sharesFreeTier = productData?.sharesFreeTier
+    const billingHandle =
+        (typeof sharesFreeTier === 'string' ? sharesFreeTier : sharesFreeTier?.handle) || productData?.handle
     const productHook = useProduct({ handle: billingHandle })
     const billing = productHook?.billingData
 
@@ -291,7 +301,16 @@ const PricingCalculator = ({ id, productData }: SectionComponentProps) => {
             {/* Main product */}
             {mainTiers.length > 0 && (
                 <ProductRateBlock
-                    name={activeProduct.label || activeProduct.name || productData.label || productData.name}
+                    name={
+                        // `categoryName` is the shared-product name ("Logs & Tracing"), the same
+                        // rule PricingAccordion uses. It matters when a product shares another's
+                        // meter – /tracing/pricing bills on the logs product and should say so.
+                        activeProduct.categoryName ||
+                        activeProduct.label ||
+                        activeProduct.name ||
+                        productData.label ||
+                        productData.name
+                    }
                     description={activeProduct.pricingDescription || productData?.pricingDescription}
                     billingTiers={mainTiers}
                     sliderConfig={

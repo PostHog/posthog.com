@@ -48,7 +48,11 @@ export const endpoints = {
      * `props` is passed straight to the resolved section component.
      */
     productMenu: [
-        { slug: 'overview', name: 'Overview', icon: <IconEye className="size-4" /> },
+        {
+            slug: 'overview',
+            name: 'Overview',
+            icon: <IconEye className="size-4" />,
+        },
         {
             slug: 'eli5',
             name: 'What does it do?',
@@ -110,8 +114,6 @@ export const endpoints = {
     ],
     overview: {
         title: 'Custom API endpoints powered by your PostHog data',
-        description:
-            "Use them to build embedded analytics, data feeds, and more – no backend required. Endpoints are how your product's context flows out to the agents and tools that make it self-driving.",
         eli5: 'Endpoints turns any saved insight or SQL query into a stable, authenticated HTTP URL. You define the query once in PostHog – filters, breakdowns, variables, and all – and your app, agent, or internal tool fetches the results over HTTP. No custom analytics backend, no CSV exports on Monday, no Query API spaghetti. Versioning, caching, materialization, and an OpenAPI spec come with it.',
         textColor: 'text-black',
         layout: 'overlay',
@@ -156,7 +158,6 @@ export const endpoints = {
         footerClasses: 'max-w-[550px]',
     },
     useCases: {
-        intro: 'Endpoints is used across teams depending on your role.',
         rows: [
             [
                 'Product Engineers',

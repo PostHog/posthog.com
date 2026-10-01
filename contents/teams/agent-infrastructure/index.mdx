@@ -1,0 +1,34 @@
+---
+title: Agent Infrastructure
+sidebar: Handbook
+showTitle: true
+hideAnchor: false
+template: team
+---
+
+We build the foundation that powers all of PostHog's LLM and agent applications. Product teams build agents and AI features on top of our infrastructure, so they can focus on their product instead of the plumbing underneath it.
+
+## What we own
+
+- **AI gateway**: the single endpoint PostHog's AI features use to call LLM providers, with shared auth and cost attribution
+- **Tasks and sessions**: the infrastructure that runs agents in cloud sandboxes
+- **Agent package**: the shared agent runtime that other teams build their agents on
+- **Hog harness**: our custom agent harness, built on Pi. It captures product intent and passes it to the model, which leads to better generations. It ships as the [Pi option in PostHog Desktop](/docs/posthog-desktop/use-any-model-and-harness)
+
+## Working with other teams
+
+If a PostHog product uses an LLM or an agent, it probably runs on something we own.
+
+Come to us if you:
+
+- Are calling an LLM from inside PostHog and want to go through the gateway
+- Are building an agent that needs a sandbox or a cloud session
+- Hit a bug or a limit in the tasks infrastructure or the agent package
+
+## Slack channel
+
+[#team-agent-infra](https://posthog.slack.com/archives/C0C1T3V1RJA)
+
+## Feature ownership
+
+You can find out more about the [features we own](/handbook/engineering/feature-ownership).

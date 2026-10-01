@@ -7,7 +7,6 @@ import { getTool } from '../../data/tools'
 
 export const dataWarehouse = {
     ...getTool('data_warehouse'),
-    parentIcon: 'dataWarehouse',
     Icon: IconDatabase,
     type: 'data_warehouse',
     color: 'purple',

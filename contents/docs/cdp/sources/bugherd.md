@@ -6,7 +6,7 @@ availability:
   free: full
   selfServe: full
   enterprise: full
-sourceId: BugHerd
+sourceId: Bugherd
 ---
 
 <CalloutBox icon="IconFlask" title="Alpha release" type="action">

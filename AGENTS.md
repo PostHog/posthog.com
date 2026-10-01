@@ -11,6 +11,20 @@ If you're reading this, you're an agent (or a curious human)! Welcome! To make t
 - Avoid duplication. Greenfield implementations, especially of common UI components, should typically be avoided. If your user is asking for one, make sure they have a *very good* reason for it prior to building.
 - Think critically about the things your user is asking you to do. Is this a good idea, and will it add value to users or maintainers? Is it the right way to go about it? Never hesitate to push back.
 
+## Issue or PR?
+
+A PR is not always the correct output. Decide this before you build, because the team closes a PR that must be an issue. The full guidance is in [Should I open an issue or a PR?](contents/handbook/engineering/posthog-com/issue-or-pr.md). A summary:
+
+- **Content change: open a PR.** A blog post, doc, handbook page, tutorial, customer story, or newsletter. The copy on an existing page. Page details such as the title, tags, featured image, or SEO description. A sidebar entry. A redirect for a page that you move.
+- **Isolated change: use your judgement.** A campaign page that is not in the main nav. A new product page that follows the existing template. A small change that you have fully reviewed in preview.
+- **Everything else: open an issue.** Any change to the Home or Pricing pages. A new or restructured page that the main nav links to. A visual change that affects more than one page. A change to site behavior, such as buttons, menus, dropdowns, windows, forms, search, or navigation. A bug. The removal of a feature that is live.
+
+For a bug, report the bug – do not repair it. The team frequently selects a different repair from the obvious one, and sometimes there is no problem to repair.
+
+Open an issue with the [bug report template](https://github.com/PostHog/posthog.com/issues/new?template=bug-report.md) for something that is broken, or the [website request template](https://github.com/PostHog/posthog.com/issues/new?template=website-request.md) for all other requests. Include the URL, a screenshot or a recording, what you expected, and what occurred.
+
+If you are not sure, or if you think that your change is an exception, ask in #team-website before you build.
+
 ## PRs
 
 Following these guidelines is essential – any PR that doesn't adhere to these rules will be closed or ignored. We want your changes to go through too – so make sure your PR adheres to the following:
@@ -72,6 +86,7 @@ Reference these when working on specific areas:
 ### Always
 
 - For any non-trivial change, present a plan and get confirmation from your user before you build.
+- Confirm that your change is a PR and not an issue before you build. See [Issue or PR?](#issue-or-pr).
 - When using a component, check for a `README.md` inside the component's folder for detailed documentation.
 - When building a new component, add a `README.md` with comprehensive documentation.
 - Use `pnpm`, never `npm`
@@ -98,3 +113,4 @@ Reference these when working on specific areas:
 - Duplicate code when a shared solution exists
 - Skip verifying parent directories before creating files
 - Move or rename a page without adding a redirect in `vercel.json`
+- Open a PR for a bug, a visual change that affects more than one page, or any change to the Home or Pricing pages – open an issue instead

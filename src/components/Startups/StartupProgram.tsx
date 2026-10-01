@@ -152,12 +152,6 @@ const perks: { image: string; alt: string; title: string; copy: string }[] = [
         copy: 'Build MCPs & skills with Speakeasy and get 50% off for 6 months.',
     },
     {
-        image: 'https://res.cloudinary.com/dmukukwp6/image/upload/startups_search_3ecaae1574.png',
-        alt: '$5,000 of Chroma credit',
-        title: '$5,000 of Chroma credit',
-        copy: "Chroma's search infra for AI is fast, serverless, and scalable.",
-    },
-    {
         image: 'https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/598171862_7fff97b6_15e5_4ff8_8f7c_46148f81efa1_515ee89918.png',
         alt: '$5,000 of Depot credit',
         title: '$5,000 of Depot credit',
@@ -395,7 +389,7 @@ const faqItems = [
         ),
     },
     {
-        trigger: 'How do I get the Incident.io/Speakeasy/Chroma/Depot discount?',
+        trigger: 'How do I get the Incident.io/Speakeasy/Depot discount?',
         content: (
             <p>
                 Once you're accepted into the PostHog for Startups program, we'll email you with details on how to get

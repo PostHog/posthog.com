@@ -343,12 +343,12 @@ module.exports = {
                     },
                 },
                 slideDown: {
-                    from: { height: '0px' },
-                    to: { height: 'var(--radix-accordion-content-height)' },
+                    from: { gridTemplateRows: '0fr' },
+                    to: { gridTemplateRows: '1fr' },
                 },
                 slideUp: {
-                    from: { height: 'var(--radix-accordion-content-height)' },
-                    to: { height: '0px' },
+                    from: { gridTemplateRows: '1fr' },
+                    to: { gridTemplateRows: '0fr' },
                 },
                 develop: {
                     '0%': {

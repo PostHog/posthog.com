@@ -2,7 +2,7 @@ import { CallToAction } from 'components/CallToAction'
 import React from 'react'
 
 import { WINDOW_BG } from '../../constants/frostedSurfaces'
-import type { PocketGuideVolume } from '../../constants/pocketGuides'
+import { pocketGuideUrl, type PocketGuideVolume } from '../../constants/pocketGuides'
 import usePostHog from '../../hooks/usePostHog'
 import Cover from './Cover'
 
@@ -53,7 +53,7 @@ export default function VolumeCard({
                 <p className="m-0 text-base font-bold text-primary">The pocket guide to {volume.title}</p>
                 <p className="m-0 mt-2 text-base leading-relaxed text-secondary">{description ?? volume.description}</p>
                 <CallToAction
-                    to={to ?? `/pocket-guides/${volume.id}`}
+                    to={to ?? pocketGuideUrl(volume)}
                     state={{ newWindow: true }}
                     onClick={trackCtaClick}
                     type="secondary"

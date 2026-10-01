@@ -139,13 +139,13 @@ function Hero(): JSX.Element {
                 </div>
 
                 <div className="group grid @xl:grid-cols-2 @xl:gap-x-8 min-w-0">
-                    <HeroHeadline className="@xl:row-start-1 @xl:col-start-1 @xl:col-span-2 @xl:group-has-[[data-cta-aligned]]:col-span-1" />
+                    <div>
+                        <HeroHeadline />
 
-                    <div className="min-w-0 @xl:row-start-2 @xl:col-start-1">
                         <HeroBody />
                     </div>
 
-                    <div className="mt-6 flex flex-col items-center min-w-0 w-full @xl:row-start-2 @xl:col-start-2 @xl:mt-0 @xl:justify-center @xl:group-has-[[data-cta-aligned]]:row-start-1 @xl:group-has-[[data-cta-aligned]]:row-span-2 @xl:group-has-[[data-cta-aligned]]:justify-start">
+                    <div className="@xl:mt-0 mt-6 flex-shrink-0 flex justify-center w-full @xl:w-auto">
                         <HeroCTA />
                     </div>
                 </div>
