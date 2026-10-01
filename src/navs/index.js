@@ -4183,6 +4183,10 @@ export const docsMenu = {
                                     url: '/docs/sql/aggregations',
                                 },
                                 {
+                                    name: 'Classifying rows with AI',
+                                    url: '/docs/sql/ai-functions',
+                                },
+                                {
                                     name: 'Optimizing SQL queries',
                                     url: '/docs/sql/optimizing-queries',
                                 },
