@@ -200,10 +200,9 @@ export default function Hogreads(): JSX.Element {
                                             San Francisco, California · Usually online
                                         </p>
                                         <p className="mt-4 max-w-prose text-sm leading-relaxed">
-                                            I'm a San Francisco tech bro with a monthly book club and strong opinions. I
-                                            read Feynman to sound smart, Dune to sound deep, and The Panama Papers to
-                                            check my ethics. I call our book votes "data-driven" until I lose. I asked
-                                            AI to summarize Exhalation. The club asked if I had read it. Rude.
+                                            Aspiring ironic tech bro with a monthly book club and strong opinions,
+                                            strongly held. Believes audiobooks on 6x speed are superior to actual
+                                            reading. Performatively reading Feynman in public since '06 (still single).
                                         </p>
                                         <Link
                                             to="/handbook/people/bookhog"
@@ -417,9 +416,6 @@ export default function Hogreads(): JSX.Element {
                                         </footer>
                                     </blockquote>
                                 </section>
-                                <p className="text-xs text-[#69605a] dark:text-[#c5b9ab]">
-                                    A PostHog parody. Not affiliated with Goodreads.
-                                </p>
                             </aside>
                         </div>
                     </div>
