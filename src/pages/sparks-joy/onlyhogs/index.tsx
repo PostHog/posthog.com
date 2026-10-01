@@ -1,11 +1,5 @@
 import React from 'react'
-import {
-    HedgehogChartHog,
-    HedgehogDirector,
-    HedgehogPartyHog,
-    HedgehogPearlNecklace,
-    HedgehogRose,
-} from '@posthog/brand/hoggies'
+import { HedgehogChartHog, HedgehogPearlNecklace, HedgehogRose } from '@posthog/brand/hoggies'
 import {
     IconBell,
     IconHome,
@@ -16,36 +10,12 @@ import {
     IconUser,
     IconVideoCamera,
 } from '@posthog/icons'
+import { graphql } from 'gatsby'
 import ReaderView from 'components/ReaderView'
 import Link from 'components/Link'
+import PostImage from 'components/PostsIndex/PostImage'
+import { PostSummary } from 'components/PostsIndex/types'
 import SEO from 'components/seo'
-
-const posts = [
-    {
-        label: 'Pinned post',
-        title: 'The full funnel. No filters.',
-        text: 'Every step. Every drop-off. Nothing left to the imagination.',
-        imageText: 'My funnel is wide open',
-        Artwork: HedgehogChartHog,
-        color: 'bg-pale-blue dark:bg-blue-2-dark',
-    },
-    {
-        label: 'Behind the scenes',
-        title: 'I watched the whole thing back.',
-        text: 'Three missed clicks, one session replay, and a button that finally makes sense.',
-        imageText: 'Caught on replay',
-        Artwork: HedgehogDirector,
-        color: 'bg-light-yellow dark:bg-accent-dark',
-    },
-    {
-        label: 'Early access',
-        title: 'I have a little secret.',
-        text: 'It is a feature flag. I will tell everyone when it is ready.',
-        imageText: 'Exclusive, until rollout',
-        Artwork: HedgehogPartyHog,
-        color: 'bg-light-purple dark:bg-accent-dark',
-    },
-]
 
 const photos = [
     { title: 'Dressed up for a cohort report', Artwork: HedgehogPearlNecklace, color: 'bg-light-purple' },
@@ -53,7 +23,9 @@ const photos = [
     { title: 'Spotted in the charts again', Artwork: HedgehogChartHog, color: 'bg-light-yellow' },
 ]
 
-export default function OnlyHogs(): JSX.Element {
+export default function OnlyHogs({ data }: { data: { posts: { nodes: PostSummary[] } } }): JSX.Element {
+    const posts = data.posts.nodes.filter((post) => post.frontmatter.title)
+
     return (
         <>
             <SEO
@@ -158,9 +130,6 @@ export default function OnlyHogs(): JSX.Element {
                                             >
                                                 SUBSCRIBE FOR $0
                                             </Link>
-                                            <p className="mb-0 mt-2 text-center text-xs text-secondary">
-                                                Opens PostHog sign-up.
-                                            </p>
                                         </section>
                                     </div>
                                 </header>
@@ -192,10 +161,10 @@ export default function OnlyHogs(): JSX.Element {
 
                                 <section id="posts" aria-label="PostHog posts" className="divide-y divide-primary">
                                     <div className="px-4 py-3 text-xs font-semibold uppercase tracking-wide text-secondary @md:px-6">
-                                        3 posts
+                                        {posts.length} {posts.length === 1 ? 'post' : 'posts'}
                                     </div>
-                                    {posts.map(({ label, title, text, imageText, Artwork, color }) => (
-                                        <article key={title} className="px-4 py-6 @md:px-6">
+                                    {posts.map((post) => (
+                                        <article key={post.fields.slug} className="px-4 py-6 @md:px-6">
                                             <div className="mb-4 flex items-center gap-3">
                                                 <div className="flex size-10 shrink-0 items-center justify-center overflow-hidden rounded-full bg-light-1">
                                                     <HedgehogPearlNecklace aria-hidden="true" className="size-10" />
@@ -205,24 +174,41 @@ export default function OnlyHogs(): JSX.Element {
                                                         PostHog{' '}
                                                         <span className="text-[#007a9c] dark:text-[#4dadea]">✓</span>
                                                     </p>
-                                                    <p className="m-0 text-xs text-secondary">{label}</p>
+                                                    <p className="m-0 text-xs text-secondary">
+                                                        {post.fields.slug.startsWith('/newsletter/')
+                                                            ? 'Newsletter'
+                                                            : 'Blog'}{' '}
+                                                        · {post.frontmatter.fullDate}
+                                                    </p>
                                                 </div>
                                             </div>
-                                            <h2 className="mb-1 text-lg font-bold">{title}</h2>
-                                            <p className="mt-0 text-sm text-secondary">{text}</p>
-                                            <div
-                                                className={`relative mt-4 flex h-52 items-center justify-center overflow-hidden rounded border border-primary ${color}`}
+                                            <Link
+                                                to={post.fields.slug}
+                                                state={{ newWindow: true }}
+                                                className="block text-primary no-underline focus-visible:outline-[#007a9c]"
                                             >
-                                                <span className="absolute left-4 top-4 rounded-full bg-primary px-3 py-1 text-xs font-semibold text-primary">
-                                                    FREE PREVIEW
-                                                </span>
-                                                <Artwork aria-hidden="true" className="h-44 w-auto max-w-[65%]" />
-                                                <span className="absolute bottom-3 left-4 right-4 rounded bg-primary/90 px-3 py-2 text-center text-sm font-semibold text-primary">
-                                                    {imageText}
-                                                </span>
-                                            </div>
+                                                <h2 className="mb-1 text-lg font-bold">{post.frontmatter.title}</h2>
+                                                <p className="mt-0 line-clamp-3 text-sm text-secondary">
+                                                    {post.frontmatter.seo?.metaDescription || post.excerpt}
+                                                </p>
+                                                <div className="mt-4 aspect-video overflow-hidden rounded border border-primary bg-primary">
+                                                    <PostImage
+                                                        post={post}
+                                                        className="h-full w-full"
+                                                        imgClassName="block h-full w-full !object-contain"
+                                                    />
+                                                </div>
+                                            </Link>
                                         </article>
                                     ))}
+                                    <div className="flex flex-wrap gap-x-5 gap-y-2 px-4 py-4 text-sm font-semibold @md:px-6">
+                                        <Link to="/blog" className="text-[#007a9c] dark:text-[#4dadea]">
+                                            All blog posts
+                                        </Link>
+                                        <Link to="/newsletter" className="text-[#007a9c] dark:text-[#4dadea]">
+                                            All newsletter posts
+                                        </Link>
+                                    </div>
                                 </section>
 
                                 <section
@@ -306,3 +292,40 @@ export default function OnlyHogs(): JSX.Element {
         </>
     )
 }
+
+export const query = graphql`
+    {
+        posts: allMdx(
+            filter: {
+                isFuture: { eq: false }
+                fields: { slug: { regex: "/^/(blog|newsletter)/" } }
+                frontmatter: { date: { ne: null }, title: { ne: null } }
+            }
+            sort: { order: DESC, fields: [frontmatter___date] }
+            limit: 6
+        ) {
+            nodes {
+                id
+                fields {
+                    slug
+                    wordCount
+                }
+                excerpt(pruneLength: 200)
+                frontmatter {
+                    title
+                    shortDate: date(formatString: "MMM D")
+                    fullDate: date(formatString: "MMM D, YYYY")
+                    seo {
+                        metaDescription
+                    }
+                    featuredImage {
+                        publicURL
+                        childImageSharp {
+                            gatsbyImageData(width: 1600)
+                        }
+                    }
+                }
+            }
+        }
+    }
+`
