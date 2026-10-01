@@ -164,28 +164,71 @@ Users and roles will now be automatically provisioned in PostHog by Okta. For ad
 
 ### Example: OneLogin
 
-If you already have a SAML app configured, you'll need to migrate to an app that supports SCIM provisioning.
+1. In OneLogin admin, go to **Applications** and select **Add App**.
+   <ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/2026_09_25_onelogin_applications_584d48a954.png"
+    alt="OneLogin admin UI showing applications"
+    classes="rounded"
+   />
+  
+2. Search for "*SCIM Provisioner with SAML (SCIM v2 Enterprise, full SAML)*" and select the option with the same name.
+   <ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/2026_10_01_onelogin_scim_connector_search_64c02aabfa.png"
+    alt="OneLogin admin UI showing application catalog"
+    classes="rounded"
+   />
 
-1. In OneLogin admin, go to **Applications** and click **Add App**.
+3. Name the app "*PostHog*" and select **Save**.
+   <ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/2026_10_01_onelogin_scim_details_form_870167dc66.png"
+    alt="OneLogin admin UI showing application details form"
+    classes="rounded"
+   />
 
-2. Search for `SCIM Provisioner with SAML (SCIM v2 Enterprise, full SAML)` and select it.
+4. Finish setting up SAML by following the [advanced guide for OneLogin](/docs/settings/authentication/saml#onelogin-advanced).
 
-3. In the **Configuration** tab, copy the settings from your existing SAML app: SAML Audience URL, RelayState, ACS (Consumer) URL.
+5. Navigate to your PostHog organization's [authentication settings](https://app.posthog.com/settings/organization-authentication#setting=scim-configuration), scroll down to **SCIM**, then select **Configure**.
+   <ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/2026_09_17_okta_oidc_step_4_light_4a7b75e712.png"
+    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/2026_09_17_okta_oidc_step_4_dark_faea597d68.png"
+    alt="PostHog UI showing authentication configurations"
+    classes="rounded"
+   />
 
-4. Go to the **Parameters** tab and ensure the following attributes are created (they are required for SAML to work correctly):
-   - `email` (Email)
-   - `first_name` (First Name)
-   - `last_name` (Last Name)
+6. Select **Enable SCIM provisioning**, then select **Save configuration**.
+   <ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/2026_10_01_onelogin_scim_posthog_settings_light_a89048b400.png"
+    imageDark="hhttps://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/2026_10_01_onelogin_scim_posthog_settings_dark_fixed_a02c0df7ce.png"
+    alt="PostHog UI showing SCIM form"
+    classes="rounded"
+   />
 
-5. Navigate to the **Configuration** tab and paste the **SCIM Base URL** and **SCIM Bearer Token** from PostHog into the API Connection section. Click **Enable**.
+7. In OneLogin admin. navigate to the **Configuration** tab. Copy the "*SCIM Base URL*" and "*SCIM Bearer Token*" from PostHog into the API Connection section. Click **Enable**.
+   <ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/2026_10_01_onelogin_scim_connection_section_c8cdf5fa9f.png"
+    alt="OneLogin admin UI showing SCIM configuration form"
+    classes="rounded"
+   />
 
-6. Go to the **Provisioning** tab and check **Enable provisioning**. Select whether you want admin approval for creating or deleting users.
+8. Go to the **Provisioning** tab and check **Enable provisioning**. Select whether you want admin approval for creating or deleting users.
+   <ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/2026_10_01_onelogin_provisioning_section_51d3cae8fb.png"
+    alt="OneLogin admin UI showing SCIM provisioning form"
+    classes="rounded"
+   />
 
-7. To sync roles, go to the **Rules** tab and create a rule to map OneLogin roles to PostHog roles. To sync all roles as-is:
-   - In **Actions**, select `Set Groups in SCIM v2 Provisioner with SAML`
-   - Select `Map from OneLogin`
-   - For each `role` with value that matches `.*`
+9. To sync roles, go to the **Rules** tab and create a rule to map OneLogin roles to PostHog roles. To sync all roles as-is:
 
-8. Go to the **SSO** tab and copy the new **Issuer URL**, **SAML 2.0 Endpoint**, and **X.509 Certificate**. Update your existing SAML configuration in PostHog with these new values.
+   a. In **Actions**, select `Set Groups in <your SCIM app name>`
 
-9. Assign users to the new application. Go to **Users**, select a user, assign roles, and add them to the application.
+   b. Select `Map from OneLogin`
+
+   c. For each `role` with value that matches `.*`
+
+   <ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/2026_10_01_onelogin_scim_role_sync_rule_89e918ef25.png"
+    alt="OneLogin admin UI showing SCIM role mapping rule"
+    classes="rounded"
+   />
+
+10. Assign users to the new application. Go to **Users**, select a user, assign roles, and add them to the application.
