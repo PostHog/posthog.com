@@ -162,6 +162,11 @@
             "statusCode": 302
         },
         {
+            "source": "/myspace",
+            "destination": "/hogspace",
+            "statusCode": 301
+        },
+        {
             "source": "/pocket-guides/product-analytics",
             "destination": "/docs/product-analytics/learn/introduction",
             "statusCode": 301

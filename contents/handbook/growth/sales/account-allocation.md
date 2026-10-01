@@ -78,6 +78,8 @@ There is no CSM to TAM handoff anymore, because the CSM never leaves. Instead, w
 
 Anyone can flag: the CSM, a TAE, support, or automated alerts. The flag routes to a TAM in the right region for qualification.
 
+To flag an account, add the `tam overlay needed` tag to it in Customer Analytics. TAM team leads check accounts with this tag and assign them to a TAM. Before you tag an account, use the [growth potential framework](/handbook/growth/sales/evaluating-growth-potential) to check that there is a real expansion opportunity. Add a Customer Analytics note that tells the TAM what you saw.
+
 The receiving TAM qualifies the opportunity using the [growth potential framework](/handbook/growth/sales/evaluating-growth-potential). If it holds up, they join the account as the overlay, open the opp, and intro themselves to the customer with the CSM's help. If it doesn't, they document why in Customer Analytics and the account stays CSM-only. A documented "no" is still useful. It stops the next person re-litigating the same idea in 3 months.
 
 We track coverage in Customer Analytics with the existing tags: `CSM Managed` for the base layer and `AM Managed` for the TAM overlay. An account with both tags has both.

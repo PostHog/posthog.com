@@ -4183,6 +4183,10 @@ export const docsMenu = {
                                     url: '/docs/sql/aggregations',
                                 },
                                 {
+                                    name: 'Classifying rows with AI',
+                                    url: '/docs/sql/ai-functions',
+                                },
+                                {
                                     name: 'Optimizing SQL queries',
                                     url: '/docs/sql/optimizing-queries',
                                 },
@@ -8165,6 +8169,10 @@ export const docsMenu = {
                         {
                             name: 'Create emails with PostHog AI',
                             url: '/docs/workflows/create-emails-ai',
+                        },
+                        {
+                            name: 'Send a broadcast',
+                            url: '/docs/workflows/broadcasts',
                         },
                         {
                             name: 'Run AI tasks from a workflow',

@@ -6,6 +6,7 @@ import { explorerGridColumns } from '../../constants'
 import { SparksJoyItems } from '../../components/TaskBarMenu/menuData'
 import { AppLink, AppIcon } from 'components/OSIcons/AppIcon'
 import ZoomHover from 'components/ZoomHover'
+import { HedgehogReading, HedgehogRose } from '@posthog/brand/hoggies'
 
 export default function SparkJoy(): JSX.Element {
     return (
@@ -157,6 +158,62 @@ export default function SparkJoy(): JSX.Element {
                             },
                         ]}
                         defaultValue="grab-bag"
+                    />
+                    <Accordion
+                        triggerClassName="flex-row-reverse [&>svg]:!-rotate-90 [&[data-state=open]>svg]:!rotate-0 [&>span]:gap-2 [&>span]:after:h-0.5 [&>span]:after:flex-1 [&>span]:after:bg-border [&>span]:after:content-['']"
+                        items={[
+                            {
+                                value: 'time-machine',
+                                trigger: <span>Time machine (5)</span>,
+                                content: (
+                                    <div
+                                        className={`@md:pl-4 grid ${explorerGridColumns} gap-y-4 items-start justify-items-center gap-x-1 @md:gap-x-4 relative [&>div]:mx-auto [&_figure]:text-center`}
+                                    >
+                                        <ZoomHover className="w-28 justify-center">
+                                            <AppLink
+                                                label="Hogspace"
+                                                url="/hogspace"
+                                                Icon={<AppIcon name="handbook" />}
+                                                className="size-12"
+                                            />
+                                        </ZoomHover>
+                                        <ZoomHover className="w-28 justify-center">
+                                            <AppLink
+                                                label="Hogbook"
+                                                url="/hogbook"
+                                                Icon={<AppIcon name="forums" />}
+                                                className="size-12"
+                                            />
+                                        </ZoomHover>
+                                        <ZoomHover className="w-28 justify-center">
+                                            <AppLink
+                                                label="Hogreads"
+                                                url="/hogreads"
+                                                Icon={<HedgehogReading className="size-12" />}
+                                                className="size-12"
+                                            />
+                                        </ZoomHover>
+                                        <ZoomHover className="w-28 justify-center">
+                                            <AppLink
+                                                label="Hoglr"
+                                                url="/sparks-joy/hoglr"
+                                                Icon={<AppIcon name="notebook" />}
+                                                className="size-12"
+                                            />
+                                        </ZoomHover>
+                                        <ZoomHover className="w-28 justify-center">
+                                            <AppLink
+                                                label="OnlyHogs"
+                                                url="/sparks-joy/onlyhogs"
+                                                Icon={<HedgehogRose className="size-12" />}
+                                                className="size-12"
+                                            />
+                                        </ZoomHover>
+                                    </div>
+                                ),
+                            },
+                        ]}
+                        defaultValue="time-machine"
                     />
                 </div>
             </ReaderView>

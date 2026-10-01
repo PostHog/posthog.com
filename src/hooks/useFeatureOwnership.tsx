@@ -170,6 +170,17 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
         owner: ['product-analytics'],
         notes: <>Owns Actions, Event definitons, Property definitions</>,
     },
+    'data-modeling': {
+        feature: 'Data models',
+        owner: ['data-modeling'],
+        notes: 'Views, materialized views, orchestration, and lineage.',
+        label: 'feature/data-modeling',
+    },
+    'data-quality': {
+        feature: 'Data quality checks',
+        owner: ['data-modeling'],
+        label: false,
+    },
     'data-table': {
         feature: 'Data table',
         owner: ['product-analytics'],
@@ -301,7 +312,7 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     },
     notebooks: {
         feature: 'Notebooks',
-        owner: ['data-tools'],
+        owner: ['data-modeling'],
         label: 'feature/notebooks',
     },
     oauth: {
@@ -508,8 +519,8 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
         label: 'feature/signup',
         notes: (
             <>
-                Growth owns everything from the moment someone lands on the signup page, plus every path to signup
-                from any surface other than PostHog.com (for example partner integrations and agents). Website owns
+                Growth owns everything from the moment someone lands on the signup page, plus every path to signup from
+                any surface other than PostHog.com (for example partner integrations and agents). Website owns
                 conversion from PostHog.com visits to the signup page.
             </>
         ),
@@ -523,6 +534,11 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
         feature: 'Slack app',
         owner: ['surfaces'],
         label: 'feature/slack-app',
+    },
+    'semantic-layer': {
+        feature: 'Semantic layer and data catalog',
+        owner: ['data-modeling'],
+        label: false,
     },
     settings: {
         feature: 'Settings structure (personal & project)',

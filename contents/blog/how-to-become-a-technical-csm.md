@@ -62,4 +62,4 @@ If you are a master in a particular area, that will absolutely help. Your fellow
 
 Your job is to understand how the pieces fit together and be an expert on how they can get the most value from your platform (which, yes, if you're lucky and you work somewhere with high trust, can also mean [shipping bug fixes and features to production](/product-engineers/testing-in-production)).
 
-If the above sounds like you – curious, stubborn about working things out, and excited about technical concepts – technical customer success might suit you. Oh and [PostHog is hiring for this exact role right now](/careers/technical-customer-success-manager). Wow, what a crazy coincidence.
+If the above sounds like you – curious, stubborn about working things out, and excited about technical concepts – technical customer success might suit you. Oh and [PostHog is hiring for this exact role right now](/careers). Wow, what a crazy coincidence.
