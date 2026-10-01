@@ -4,7 +4,12 @@ title: Link traces to AI Observability
 
 If your product sends OpenTelemetry spans to [Distributed tracing](/docs/distributed-tracing) and LLM events to [AI Observability](/docs/ai-observability), you can correlate the two. One request then shows both the application work and the model calls that the request made.
 
-The two products do not correlate automatically. You must give the span and the LLM events the same trace ID, and you must convert between two different ID encodings when you query them.
+How much work this takes depends on how you send the LLM events:
+
+- **Through [OpenTelemetry](/docs/ai-observability/installation/opentelemetry).** The IDs already match, and you do not need to change your code. PostHog sets `$ai_trace_id` to the trace ID of each `gen_ai.*` span and `$ai_span_id` to its span ID. Export the same spans to Distributed tracing too, then go to [query both products together](#query-both-products-together).
+- **Through a PostHog SDK.** You must set `$ai_trace_id` to the trace ID of the span yourself. The sections below show how.
+
+In both cases, the two products store the IDs in different encodings, so you must convert them when you query.
 
 > **Note:** Distributed tracing is in beta. Setup details may change before general availability.
 
@@ -30,7 +35,7 @@ The two products store a trace ID differently:
 | Distributed tracing | span `trace_id` | A [W3C Trace Context](https://www.w3.org/TR/trace-context/) trace ID: 16 bytes, written as 32 lowercase hexadecimal characters |
 | AI Observability | `$ai_trace_id` | Any string that you choose |
 
-Because `$ai_trace_id` is a string that you choose, most examples set it to a new UUID. A UUID does not match any span, so the two products stay unlinked. To correlate them, set `$ai_trace_id` to the trace ID of the span that surrounds the LLM call.
+When you send LLM events through a PostHog SDK, `$ai_trace_id` is a string that you choose. Most examples set it to a new UUID. A UUID does not match any span, so the two products stay unlinked. To correlate them, set `$ai_trace_id` to the trace ID of the span that surrounds the LLM call.
 
 ### From a PostHog SDK span
 
@@ -95,6 +100,8 @@ trace_id = format(span_context.trace_id, "032x")
 
 If the LLM call runs in a different service, or behind a proxy that captures the LLM events for you, send the `traceparent` header with the request. The receiving side continues the trace and reads the same trace ID out of the header.
 
+Some proxies store the trace ID from the header as a dashed UUID, for example `4bf92f35-77b3-4da6-a3ce-929d0e0e4736`. The PostHog LLM gateway does this. The ID is correct, but it is in a different format. The queries below remove the dashes, so they find these events too.
+
 <MultiLanguage>
 
 ```javascript file=JavaScript
@@ -125,7 +132,7 @@ with posthog.start_span(
 Spans and LLM events live in different tables, and the tables store the trace ID in different encodings:
 
 - `posthog.trace_spans.trace_id` holds the 16-byte trace ID, base64-encoded. The [SQL editor](https://app.posthog.com/sql) returns it in that form.
-- `$ai_trace_id` on the `events` table holds 32 hexadecimal characters.
+- `$ai_trace_id` on the `events` table holds 32 lowercase hexadecimal characters, or a dashed UUID if a proxy wrote it.
 
 Convert between them with these two expressions:
 
@@ -156,17 +163,19 @@ ORDER BY duration_nano DESC
 LIMIT 20
 ```
 
-Then read the LLM events for those IDs:
+Then read the LLM events for those IDs. The query removes dashes from `$ai_trace_id` and converts it to lowercase, so it matches every format above.
+
+> **Note:** The tracing UI shows trace IDs in uppercase hexadecimal. If you copy a trace ID from the UI, write it in lowercase before you paste it into this query.
 
 ```sql
 SELECT
-    properties.$ai_trace_id AS trace_id_hex,
+    lower(replaceAll(toString(properties.$ai_trace_id), '-', '')) AS trace_id_hex,
     count() AS generations,
     sum(toFloat(properties.$ai_total_cost_usd)) AS cost_usd,
     sum(toFloat(properties.$ai_latency)) AS llm_seconds
 FROM events
 WHERE event = '$ai_generation'
-  AND properties.$ai_trace_id IN ('<trace_id_hex>', '<trace_id_hex>')
+  AND trace_id_hex IN ('<trace_id_hex>', '<trace_id_hex>')
   AND timestamp > now() - INTERVAL 1 DAY
 GROUP BY trace_id_hex
 ```
@@ -191,9 +200,9 @@ To read the prompts and the model responses, query the `posthog.ai_events` table
 
 ## Limitations
 
-- **The IDs must match exactly.** `$ai_trace_id` must be 32 lowercase hexadecimal characters. `unhex` accepts a dashed UUID without an error, but it returns a value of the wrong length, so the query silently finds nothing. Remove the dashes, or use a real span trace ID.
+- **The trace IDs must hold the same 16 bytes.** A dashed UUID that a proxy writes from a `traceparent` header is the correct ID in a different format. Remove the dashes before you pass it to `unhex`. `unhex` accepts a dashed UUID without an error, but it returns a value of the wrong length, so the query silently finds nothing. A random UUID that your code generates does not match any span.
 - **One query cannot read both tables.** Spans and events sit on different clusters, so you must correlate in two steps.
-- **Only the trace ID joins the two products.** `$ai_span_id` identifies a generation or a span inside AI Observability. It is not an OpenTelemetry span ID, and it does not match `posthog.trace_spans.span_id`.
+- **With a PostHog SDK, only the trace ID joins the two products.** `$ai_span_id` from an SDK identifies a generation or a span inside AI Observability. It does not match `posthog.trace_spans.span_id`. With OpenTelemetry, `$ai_span_id` is the span ID in hexadecimal, so `base64Encode(unhex(...))` converts it to a `span_id`.
 - **A trace can arrive without its root span.** If a process stops before the exporter sends the root span, the child spans still arrive. Do not filter on `is_root_span` alone when you collect trace IDs.
 - **PostHog does not link the two products in the UI.** A span does not show a button to its LLM trace, and an LLM trace does not show a button to its span.
 - **Spans and events expire at different times.** Spans stay for 14 days by default. Events in [Product Analytics](/docs/product-analytics) stay for much longer.
