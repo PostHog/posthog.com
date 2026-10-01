@@ -73,7 +73,7 @@ This is the frame everyone at PostHog should use, across the product, website, m
 
 Our products help customers do one of four things, which build on each other:
 
-1. **Get data in.** PostHog ingests and store your data, which can come directly from our own products or 3rd party sources.
+1. **Get data in.** PostHog ingests and stores your data, which can come directly from our own products or 3rd party sources.
 2. **Query the data yourself.** Using PostHog AI or our Web UI, you can manually run queries. 
 3. **Give the data to your agent to act on.** Make the same data available to our customers' agents via PostHog MCP so they can find issues and propose or take action.
 4. **Let PostHog self-drive.** Use PostHog to ship changes, measure their effect, and repeat.
