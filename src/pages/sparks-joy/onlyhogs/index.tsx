@@ -185,8 +185,8 @@ export default function OnlyHogs({ data }: { data: { posts: { nodes: PostSummary
                                         <IconImage aria-hidden="true" className="size-4" /> Media
                                     </a>
                                     <Link
-                                        to="/videos"
-                                        state={{ newWindow: true }}
+                                        to="https://www.youtube.com/@PostHog"
+                                        externalNoIcon
                                         className="flex items-center justify-center gap-2 py-3 text-secondary no-underline"
                                     >
                                         <IconVideoCamera aria-hidden="true" className="size-4" /> Videos
@@ -354,8 +354,8 @@ export default function OnlyHogs({ data }: { data: { posts: { nodes: PostSummary
                                         See more of me
                                     </p>
                                     <Link
-                                        to="/videos"
-                                        state={{ newWindow: true }}
+                                        to="https://www.youtube.com/@PostHog"
+                                        externalNoIcon
                                         className="text-sm font-semibold text-[#007a9c] dark:text-[#4dadea]"
                                     >
                                         Watch PostHog videos
