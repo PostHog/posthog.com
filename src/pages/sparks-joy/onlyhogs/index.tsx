@@ -272,6 +272,7 @@ export default function OnlyHogs(): JSX.Element {
                                         <Link
                                             key={name}
                                             to={to}
+                                            state={{ newWindow: true }}
                                             className="block min-w-0 rounded border border-primary bg-white p-3 no-underline focus-visible:outline-[#007a9c] dark:bg-accent-dark"
                                         >
                                             <p className="m-0 text-sm font-semibold text-[#007a9c] underline dark:text-[#5bd2ff]">
