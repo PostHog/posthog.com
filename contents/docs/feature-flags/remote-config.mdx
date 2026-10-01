@@ -28,9 +28,11 @@ This also works for CLIs, scripts, or anything else that can call `/flags` with 
 
 ## Using remote config on the server
 
-Server-side SDKs fetch remote config payloads using your secret API key. This key is only required for [local evaluation](/docs/feature-flags/local-evaluation) and encrypted payloads – not for remote config in general. Unlike your project API key, it must never be exposed publicly.
+Server-side SDKs fetch remote config payloads using your secret API key. This key is only required for [local evaluation](/docs/feature-flags/local-evaluation) and server-side remote config – not for remote config in general. It returns [encrypted payloads](#encrypted-payloads) redacted, so use a [personal API key](/docs/api/personal-api-keys) if you need them decrypted. Unlike your project API key, it must never be exposed publicly.
 
 There are 3 steps to use remote config flags on the server:
+
+<a id="step-1-find-your-feature-flags-secure-api-key" />
 
 ### Step 1: Get a secret API key
 
