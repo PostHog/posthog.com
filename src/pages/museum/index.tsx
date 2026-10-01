@@ -55,7 +55,6 @@ const PERMANENT_EXHIBIT = {
     title: 'The Evolution of Marketing',
     url: '/museum/exhibits/evolution',
     summary: 'The Department of Anthropology presents six years of PostHog marketing evolution, 2020–2026.',
-    image: hog('research_8bfa53dab7'),
 }
 
 // Slugs of the teams that make what's in the museum, credited at the bottom of the page
@@ -235,7 +234,7 @@ export default function Museum({ location }: { location: { search: string } }): 
                         ),
                     },
                     {
-                        title: 'Permanent collection',
+                        title: 'Permanent exhibit',
                         content: (
                             <Link
                                 to={PERMANENT_EXHIBIT.url}
@@ -243,20 +242,13 @@ export default function Museum({ location }: { location: { search: string } }): 
                                 data-scheme="primary"
                                 className="not-prose group block rounded border border-primary bg-primary p-3 text-primary no-underline shadow-sm transition-transform duration-200 hover:-translate-y-0.5 hover:-rotate-1 hover:shadow-lg"
                             >
-                                <div className="flex items-center gap-3">
-                                    <CloudinaryImage
-                                        src={PERMANENT_EXHIBIT.image}
-                                        alt=""
-                                        imgClassName="h-auto w-14 shrink-0"
-                                    />
-                                    <div className="min-w-0">
-                                        <p className="m-0 text-sm font-bold leading-tight group-hover:underline">
-                                            {PERMANENT_EXHIBIT.title}
-                                        </p>
-                                        <p className="m-0 mt-1 text-xs leading-snug text-secondary">
-                                            {PERMANENT_EXHIBIT.summary}
-                                        </p>
-                                    </div>
+                                <div>
+                                    <p className="m-0 text-sm font-bold leading-tight group-hover:underline">
+                                        {PERMANENT_EXHIBIT.title}
+                                    </p>
+                                    <p className="m-0 mt-1 text-xs leading-snug text-secondary">
+                                        {PERMANENT_EXHIBIT.summary}
+                                    </p>
                                 </div>
                             </Link>
                         ),
