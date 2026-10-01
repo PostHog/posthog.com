@@ -13,15 +13,15 @@ Until products are built and launched, it's hard to predict which ones will do w
 
 Products should fit these criteria before we build them:
 
-- They add more data (for example, more events) or different types of data (for example, errors or logs), or utilize the data we already have
-- They have an initial ICP of someone on the product team
+- They add more data (for example, more events) or different types of data (for example, errors or logs), or use the data we already have
+- They have an initial ICP of [someone on the product team](https://posthog.com/handbook/who-we-build-for#our-current-persona)
   - Ideally, the ICP does not change quickly to someone far removed from the product team
-- They already have $1 Bn competitors on the market, or are in extremely fast growing markets
-  - Eg AI Observability did not have a $1 Bn competitor when we started it, but was growing very quickly
+- They already have $1bn competitors on the market, or are in extremely fast-growing markets
+  - For example, AI Observability did not have a $1bn competitor when we started it, but the market was growing very quickly
 - Someone is very excited about building this product internally
   - People pursuing their interests get more done, go much further, and execute to a better standard
   - Additionally, each product must have a Blitzscale sponsor
-- The product has a future in 2030, ie it's not something 2020-style
+- The product has a future in 2030, i.e. it's not something 2020-style
 
 ### Are there any exceptions?
 
