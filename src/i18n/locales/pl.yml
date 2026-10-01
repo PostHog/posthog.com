@@ -5,29 +5,33 @@
 # .claude/skills/translate and src/i18n/README.md.
 #
 # - Write like a Polish dev talks to another dev: casual, short, and funny. Use "ty", never "Pan/Pani" or "Państwo".
-# - Write "ty", "twój", "ciebie", and "ci" in lowercase. The capitalized "Ty/Twój" is for letters and formal
-#   customer service, and reads stiff here: "twoi agenci", "zainstaluje ci PostHoga", not "Twoi agenci".
+# - Write "ty", "twój", "ciebie", and "ci" in lowercase, except at the start of a sentence. Capitals used as
+#   formal address read stiff here: "twoi agenci", "zainstaluje ci PostHoga", not "Twoi agenci".
 # - PostHog is a masculine noun, so inflect it like any Polish noun: "PostHoga", "z PostHogiem", "w PostHogu",
 #   "o PostHogu". Use the plain form only in the nominative ("Dlaczego PostHog?", "PostHog zbiera"). Inflect
-#   GitHub the same way ("na GitHubie"). Product names such as Session Replay, PostHog AI, PostHog Desktop,
-#   Inbox, and Experiments stay uninflected.
+#   GitHub the same way ("na GitHubie"). Product names such as Feature Flags, Session Replay, PostHog AI,
+#   PostHog Desktop, Inbox, and Experiments stay in English and uninflected. Translate generic descriptions
+#   naturally: "dane analityczne", "informacje o błędach", "nagrania sesji". Keep code, commands, URLs,
+#   and product UI labels in demos unchanged.
 # - Keep the English tech words that Polish devs say, with Polish endings: bugi, featury (featurów), pull requesty,
-#   deploy, eventy, requesty, tickety, insighty, feed, support, checkout (w checkoucie), dead clicki, case study.
+#   deploy, eventy, requesty, tickety, feed, support, checkout (w checkoucie), dead clicki, case study.
 #   Use an apostrophe when the English spelling ends in a letter you do not pronounce: "stack trace'y",
 #   "hardware'u". Keep "wizard", not "kreator". Use the normal Polish word when devs use it too: lejek,
-#   rejestracja, hurtownia danych, nagrania sesji.
+#   rejestracja, hurtownia danych, nagrania sesji, wnioski. Do not borrow an English word just because it
+#   appears in the source.
 # - Dev slang is welcome when it is clear: "odpal", "podepnij", "dowozimy", "leci na proda", "zwiechy", "sztos", "olej".
 # - Localize the jokes with Polish references that land the same way: Kim K -> Magda Gessler, a Bond villain ->
-#   "potwór z Wiedźmina", Hillary Clinton -> Krystyna Czubówna, "hop on a quick call" -> "wskakiwać na szybkiego
-#   calla" (corpo-speak), an install CD -> "płyta z CD-Action". Section 8 parodies Allegro-style sales copy:
-#   "Ostatnia sztuka", "Gratis", "zgarnij".
+#   "potwór z Wiedźmina", "hop on a quick call" -> "wskakiwać na szybkiego calla" (corpo-speak), an install
+#   CD -> "płyta z CD-Action". Preserve what makes the joke work; do not swap famous names mechanically.
+#   Rewrite or drop an aside if the comparison no longer makes sense. Section 8 parodies Allegro-style
+#   sales copy: "Ostatnia sztuka", "Gratis", "zgarnij".
 # - Typography: Polish quotes „…”, an en dash with a space on each side ( – ), never an em dash. No space before
 #   "!", "?", or ":". A colon is followed by a lowercase word.
 # - Numbers: a decimal comma, and a non-breaking space as the thousands separator from five digits up
 #   ("500 000", but "5000"). Use "mln" for millions ("1 mln"). Real prices stay in USD after the number
 #   ("0,005 USD"). Joke amounts use złoty: "0 zł rabatu".
-# - Polish has three plural forms (1, 2 to 4, 5 and up). Next to a {placeholder}, use a form that works for any big
-#   number ("ponad {count} źródeł", "{companies} firm") or put the count in parentheses ("narzędzia ({count})").
+# - For dynamic counts, choose wording that remains grammatical for every possible value, e.g.
+#   "narzędzia ({count})".
 # - Cut words the sentence does not need. Polish runs longer than English, so keep toggles, buttons, and menu labels short.
 name: Polski
 messages:
@@ -38,8 +42,8 @@ messages:
     hero:
         H1: <emphasis>Warstwa kontekstu</emphasis> twojego produktu
         body:
-            1: PostHog zbiera i przechowuje twoją <highlight>analitykę, błędy, nagrania sesji i dane biznesowe</highlight>, dzięki czemu ty i twoi <underline>agenci</underline> możecie je odpytywać i na ich podstawie działać.
-            2: Dołącz do ponad 500 000 zespołów, które już budują produkty z PostHogiem.
+            1: PostHog zbiera i przechowuje <highlight>dane analityczne, informacje o błędach, nagrania sesji i dane biznesowe</highlight>. Ty i twoi <underline>agenci</underline> możecie je odpytywać i działać na ich podstawie.
+            2: Ponad 500 000 zespołów korzysta już z PostHoga. Dołącz do nich.
         cta:
             heading: Odpal <logo/> <highlight>za darmo</highlight>
             body:
@@ -61,7 +65,7 @@ messages:
             toggle: Zapytaj PostHoga o wszystko
             heading: Zapytaj PostHoga o wszystko
             body:
-                1: PostHog to jedno miejsce, w którym zbierasz, przechowujesz i odpytujesz dane o produkcie i firmie. Analityka, nagrania sesji, błędy i logi, sklejane w locie, żeby odpowiedzieć na każde twoje pytanie.
+                1: PostHog to jedno miejsce, w którym zbierasz, przechowujesz i odpytujesz dane o produkcie i firmie. Łączy w locie dane analityczne, nagrania sesji, informacje o błędach i logi, żeby odpowiedzieć na każde twoje pytanie.
                 2: Podepnij dane z <link>ponad {count} zewnętrznych źródeł</link>, żeby mieć pełniejszy obraz.
             button: Zacznij za darmo
             products:
@@ -105,7 +109,7 @@ messages:
         2c:
             toggle: Wdrażaj z PostHogiem
             heading: Wdrażaj z PostHogiem
-            body: Twój Inbox grupuje powiązane znaleziska w raporty z researchem, posortowane według priorytetu. Przejrzyj proponowane poprawki i pull requesty, a potem zdecyduj, co leci na proda.
+            body: Twój Inbox łączy powiązane problemy w raporty z analizą i porządkuje je według priorytetu. Przejrzyj proponowane poprawki i pull requesty, a potem zdecyduj, co leci na proda.
             button: Zacznij za darmo
             signals:
                 heading: 'Self-driving zbiera sygnały z:'
@@ -123,7 +127,7 @@ messages:
                 description: 'Przykładowy self-driving inbox. Cztery przykładowe raporty pojawiają się po kolei, od najnowszego: prośba o faktury z GitHuba, scout śledzenia konwersji z roboczym pull requestem, problem z checkoutem wykryty w Session Replay i błąd logowania o wysokim priorytecie z pull requestem gotowym do review.'
 
         3:
-            heading: Dowód społeczny
+            heading: Tak, oni też używają PostHoga
             body: Tak, serio z nas korzystają. I nie, to nie jakiś przypadkowy inżynier, który testował nas ponad 2 lata temu.
             button: Zobacz klientów
             shuffle: Przetasuj
@@ -190,7 +194,7 @@ messages:
                 2: 'Zbierz wszystko w context warehouse PostHoga, żeby ty, twoi agenci i twój dashboard mogli odpytywać to bezpośrednio. W tym:'
                 list:
                     1: Dane z ponad 120 zewnętrznych źródeł, takich jak Stripe, Postgres czy HubSpot
-                    2: Insighty ze wszystkich innych narzędzi PostHoga, np. Session Replays i Experiments
+                    2: Wnioski ze wszystkich innych narzędzi PostHoga, np. Session Replays i Experiments
                 3: Dane, których twoi agenci potrzebują do dobrych decyzji, już tu są. Gotowe, by „powiedz mi, co się stało” zamienić w „oto, co naprawić teraz”.
             tooltip: Możesz też podpiąć własną!
             button: Podepnij pierwsze źródło danych
@@ -250,7 +254,7 @@ messages:
                 subtitle: Do pobrania*
             sticker:
                 1: Na G2 mówią, że jesteśmy super
-                2: <small>Nie</small> poleca<br/>Magda Gessler
+                2: <small>Bez</small> rekomendacji<br/>Magdy Gessler
             cart:
                 label: 3 osoby dodały<small>(by)</small> PostHoga do koszyka*
                 footnote: '*gdyby to był prawdziwy koszyk'
@@ -267,7 +271,7 @@ messages:
                 urgency: '><larger>Ostatnia sztuka w tej cenie!!</larger>'
             button: Zacznij
             urgency:
-                label: '<bold>Pospiesz się:</bold> <today>dziś</today> zarejestrowało się już {companies} firm. <br/>Kup teraz i zgarnij 0 zł rabatu na pierwsze zamówienie.'
+                label: '<bold>Pospiesz się!</bold> Rejestracje <today>dziś</today>: {companies}. <br/>Kup teraz i zgarnij 0 zł rabatu na pierwsze zamówienie.'
                 fallback: mnóstwo
 
     cookie:
@@ -276,7 +280,7 @@ messages:
             1: PostHog.com nie używa cookies stron trzecich, tylko jednego własnego ciasteczka.
             2: Żadne dane nie trafiają do stron trzecich. (<tooltip>Ursula von der Leyen</tooltip> byłaby taka dumna. RODO też.)
         tooltip:
-            label: Ursula von der Leyen to przewodnicząca Komisji Europejskiej – NIE MYLIĆ z Krystyną Czubówną.
+            label: Ursula von der Leyen to przewodnicząca Komisji Europejskiej.
             image:
                 alt: Ursula von der Leyen, przewodnicząca Komisji Europejskiej
         close: Zamknij
@@ -311,7 +315,7 @@ messages:
             application_metrics: Metryki aplikacji
             distributed_tracing: Tracing rozproszony
             context: Kontekst
-            reference: Referencja
+            reference: Materiały pomocnicze
             new_to_posthog: Pierwszy raz z PostHogiem
             ai_engineering: Inżynieria AI
             toolbar: Toolbar i funkcje
