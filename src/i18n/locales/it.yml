@@ -379,3 +379,8 @@ messages:
         store: Negozio
         careers: Lavora con noi
         trash: Cestino
+
+    toast:
+        english_only:
+            title: Stai lasciando le pagine tradotte
+            description: Per ora il resto del sito è in inglese.

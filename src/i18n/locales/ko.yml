@@ -379,3 +379,8 @@ messages:
         store: 스토어
         careers: 채용
         trash: 휴지통
+
+    toast:
+        english_only:
+            title: 번역된 페이지는 여기까지예요
+            description: 나머지 페이지는 아직 영어로만 볼 수 있어요.

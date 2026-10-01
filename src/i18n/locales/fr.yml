@@ -382,3 +382,8 @@ messages:
         store: Boutique
         careers: On recrute
         trash: Corbeille
+
+    toast:
+        english_only:
+            title: Vous quittez les pages traduites
+            description: Pour l’instant, le reste du site est en anglais.

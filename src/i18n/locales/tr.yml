@@ -380,3 +380,8 @@ messages:
         store: Mağaza
         careers: Kariyer
         trash: Çöp kutusu
+
+    toast:
+        english_only:
+            title: Çevrilmiş sayfalardan çıkıyorsun
+            description: Sitenin geri kalanı şimdilik İngilizce.

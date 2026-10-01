@@ -379,3 +379,8 @@ messages:
         store: 商店
         careers: 招聘
         trash: 回收站
+
+    toast:
+        english_only:
+            title: 你正在离开已翻译的页面
+            description: 网站的其他页面目前只有英文版。

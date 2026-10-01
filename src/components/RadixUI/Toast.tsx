@@ -17,6 +17,8 @@ const Toast = ({
     verticalAlign = 'items-center',
     onClose,
     actionClassName = '',
+    lang,
+    dir,
 }: {
     title?: string
     description: string | React.ReactNode
@@ -30,6 +32,8 @@ const Toast = ({
     verticalAlign?: string
     onClose?: () => void
     actionClassName?: string
+    lang?: string
+    dir?: 'ltr' | 'rtl'
 }): JSX.Element => {
     const [open, setOpen] = React.useState(true)
 
@@ -55,6 +59,8 @@ const Toast = ({
     return (
         <RadixToast.Root
             data-scheme="primary"
+            lang={lang}
+            dir={dir}
             className={`ToastRoot grid grid-cols-[auto_max-content] gap-x-[15px] rounded-md bg-light dark:bg-dark border border-primary text-primary prose dark:prose-invert p-4 shadow-[hsl(206_22%_7%_/_35%)_0px_10px_38px_-10px,_hsl(206_22%_7%_/_20%)_0px_10px_20px_-15px] [grid-template-areas:_'title_action'_'description_action'] data-[swipe=cancel]:translate-x-0 data-[swipe=move]:translate-x-[var(--radix-toast-swipe-move-x)] data-[state=closed]:animate-swipeOut data-[state=open]:animate-slideIn data-[swipe=end]:animate-swipeOut data-[swipe=cancel]:transition-[transform_200ms_ease-out] relative ${
                 verticalAlign ? verticalAlign : 'items-center'
             } ${className}`}
