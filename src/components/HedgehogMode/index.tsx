@@ -1,6 +1,7 @@
 import React, { lazy, Suspense, useEffect, useRef, useState, useSyncExternalStore } from 'react'
 import type { HedgeHogMode, HedgehogActorFlagOption } from '@posthog/hedgehog-mode'
 import { useTranslation } from 'i18n'
+import { localeFlag as getLocaleFlag } from './localeFlag'
 
 const HedgeHogModeRenderer =
     typeof window !== 'undefined'
@@ -10,22 +11,6 @@ const HedgeHogModeRenderer =
 const HEDGEHOG_MODE_STORAGE_KEY = 'hedgehog-mode-enabled'
 // Set when a visitor quits the hedgehog that a translated home page turned on, so it stays off.
 const LOCALE_HEDGEHOG_DISMISSED_STORAGE_KEY = 'hedgehog-mode-locale-dismissed'
-
-// A translated home page turns hedgehog mode on, and the hedgehog holds the flag of that locale.
-// pt.yml is Brazilian Portuguese. Arabic has no single country, so its hedgehog holds the globe.
-const LOCALE_FLAGS: Record<string, HedgehogActorFlagOption> = {
-    pt: 'brazil',
-    de: 'germany',
-    es: 'mexico',
-    fr: 'france',
-    it: 'italy',
-    ja: 'japan',
-    ko: 'south-korea',
-    pl: 'poland',
-    tr: 'turkiye',
-    zh: 'china',
-    ar: 'earth',
-}
 
 // localStorage is the source of truth; an external store lets every caller
 // (the menu toggle and the renderer) stay in sync and re-render live, without a
@@ -70,7 +55,12 @@ export default function HedgeHogModeEmbed(): JSX.Element | null {
     const localeHedgehogDismissed = useStoredBoolean(LOCALE_HEDGEHOG_DISMISSED_STORAGE_KEY)
     const [game, setGame] = useState<HedgeHogMode>()
     const { locale } = useTranslation()
-    const localeFlag = LOCALE_FLAGS[locale]
+    // A translated home page turns hedgehog mode on, and the hedgehog holds a flag from the region
+    // of the visitor. The server has no navigator, so this waits until after hydration.
+    const [localeFlag, setLocaleFlag] = useState<HedgehogActorFlagOption>()
+    useEffect(() => {
+        setLocaleFlag(getLocaleFlag(locale, navigator.languages ?? [navigator.language]))
+    }, [locale])
     // The game keeps the onQuit it started with, so it reads the locale of the current page from here.
     const localeFlagRef = useRef(localeFlag)
     localeFlagRef.current = localeFlag
