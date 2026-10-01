@@ -444,7 +444,6 @@ export default function Museum({ location }: { location: { search: string } }): 
                                         to={`/museum/artifacts/${artifact.slug}`}
                                         image={artifact.heroImage?.data?.attributes.url}
                                         title={artifact.title}
-                                        number={id}
                                         meta={[
                                             formatDate(artifact.date, artifact.datePrecision),
                                             artifact.type?.data?.attributes.name ||
