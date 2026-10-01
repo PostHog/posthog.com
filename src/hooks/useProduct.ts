@@ -2105,7 +2105,7 @@ export default function useProduct({ handle }: { handle?: string } = {}) {
                         {
                             title: 'Free to ingest',
                             description:
-                                'Heatmap data is free. Free plan covers 3 pages you choose; pay-as-you-go unlocks unlimited pages and toolbar heatmaps',
+                                'Heatmap data is free. Free plan covers 3 pages you choose; pay-as-you-go unlocks unlimited pages and viewing heatmaps from the toolbar',
                         },
                     ],
                 },

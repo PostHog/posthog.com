@@ -140,7 +140,7 @@ const topFeatures: CarouselSlide[] = [
                             {
                                 label: 'Free to ingest',
                                 description:
-                                    'Heatmap data does not contribute to your bill. The free plan collects data for up to 3 pages you choose. Pay-as-you-go unlocks unlimited pages and toolbar heatmaps.',
+                                    'Heatmap data does not contribute to your bill. The free plan collects data for up to 3 pages you choose. Pay-as-you-go unlocks unlimited pages and viewing heatmaps from the toolbar.',
                             },
                         ]}
                     />
