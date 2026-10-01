@@ -11,7 +11,8 @@ import { docsMenu, handbookSidebar } from '../src/navs/index.js'
 import blogTemplate from '../src/templates/OG/blog.js'
 import docsHandbookTemplate from '../src/templates/OG/docs-handbook.js'
 import customerTemplate from '../src/templates/OG/customer.js'
-import jobTemplate from '../src/templates/OG/job.js'
+import { createJobOgImages } from './og/jobs'
+import { createTakumiRenderer } from './og/takumi'
 import { flattenMenu } from './utils'
 
 const limit = pLimit(10)
@@ -89,9 +90,9 @@ export const createOGImages = async (data) => {
         })
     })
 
-    const font = fs.readFileSync(path.resolve(__dirname, '../fonts/matter.woff'), {
-        encoding: 'base64',
-    })
+    const fontBuffer = fs.readFileSync(path.resolve(__dirname, '../fonts/matter.woff'))
+    const font = fontBuffer.toString('base64')
+    const takumi = await createTakumiRenderer(fontBuffer)
 
     const browserFetcher = chromium.puppeteer.createBrowserFetcher()
     const revisionInfo = await browserFetcher.download('982053')
@@ -222,22 +223,7 @@ export const createOGImages = async (data) => {
         )
     }
 
-    for (const job of data.careers.nodes) {
-        const {
-            title,
-            parent,
-            fields: { slug },
-        } = job
-        const timezone = parent?.customFields?.find(({ title }) => title === 'Timezone(s)')?.value
-        jobs.push(
-            ogLimit(() =>
-                createOG({
-                    html: jobTemplate({ role: title, font, timezone }),
-                    slug,
-                })
-            )
-        )
-    }
+    jobs.push(createJobOgImages(takumi, data.careers.nodes, ogImagesDir))
 
     await Promise.all(jobs)
 
