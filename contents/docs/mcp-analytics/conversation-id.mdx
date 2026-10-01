@@ -16,7 +16,7 @@ Conversation IDs are enabled by default. Calls stay correlated when the agent ec
 
 ## Enabling
 
-Conversation IDs are on by default in the TypeScript, Python, and Ruby SDKs, with no configuration. The Go SDK doesn't support them yet.
+Conversation IDs are on by default in every SDK, with no configuration.
 
 The SDK does three things:
 
@@ -90,7 +90,7 @@ PostHog's session-level joins use `$session_id`. When conversation IDs are enabl
 
 ## When to skip this
 
-If your MCP server runs over a long-lived `2025-11-25` connection that already matches your conversation boundaries, you can disable conversation IDs. Set `enableConversationId: false` in TypeScript, `MCPAnalyticsOptions(enable_conversation_id=False)` in Python, or `enable_conversation_id: false` in Ruby to omit the injected argument and response block.
+If your MCP server runs over a long-lived `2025-11-25` connection that already matches your conversation boundaries, you can disable conversation IDs. Turn conversation IDs off in your SDK's configuration to omit the injected argument and response block. See your [language's installation page](/docs/mcp-analytics/installation) for the option name.
 
 Keep it enabled when:
 

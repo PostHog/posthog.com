@@ -41,7 +41,7 @@ Install the SDK for your server's language. Each guide takes four steps: install
 
 <MCPInstallationPlatforms />
 
-Intent capture and exception events are on by default in every SDK. Model capture and conversation IDs are on by default in the TypeScript, Python, and Ruby SDKs. Missing-capability reports and agent feedback are opt-in.
+Every SDK has the same defaults. Intent, model capture, conversation IDs, and exception events are on. Missing-capability reports and agent feedback are opt-in.
 
 For TypeScript and Python servers, the wizard does the setup for you:
 
@@ -104,7 +104,7 @@ subtitle="Recommended"
 icon="IconAIText"
 >
 
-[Model capture](/docs/mcp-analytics/events#model-capture) is on by default in the TypeScript, Python, and Ruby SDKs. Check `$mcp_tool_call` events for `$mcp_llm_model`. The source, `$mcp_llm_model_source`, is `"client_metadata"` or `"self_reported"`.
+[Model capture](/docs/mcp-analytics/events#model-capture) is on by default. Check `$mcp_tool_call` events for `$mcp_llm_model`. The source, `$mcp_llm_model_source`, is `"client_metadata"` or `"self_reported"`.
 
 Use this unverified client input to compare quality, latency, and errors across models, not for billing or security decisions. Some clients report an exact model, others a model family. Missing, blank, and `unknown` values are omitted.
 
