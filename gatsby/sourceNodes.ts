@@ -294,6 +294,59 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
         }
     }
 
+    // MCP usage shares for /mcp/leaderboard. The endpoints return percentages only, never raw counts,
+    // because everything sourced here ships in public page data. Each endpoint's own HogQL is sourced
+    // too, so the page can show the exact queries behind its charts.
+    const sourceMCPLeaderboard = async () => {
+        if (!process.env.POSTHOG_APP_API_KEY) return
+
+        const headers = {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${process.env.POSTHOG_APP_API_KEY}`,
+        }
+        const fetchEndpoint = async (name: string) => {
+            const endpointUrl = `https://us.posthog.com/api/environments/2/endpoints/${name}`
+            // OFFSET is not allowed with a personal API key, so fetch every row in one request.
+            const [res, definition] = await Promise.all([
+                fetch(`${endpointUrl}/run`, { method: 'POST', headers, body: JSON.stringify({ limit: 50000 }) }),
+                fetch(`${endpointUrl}/`, { headers })
+                    .then((res) => (res.ok ? res.json() : null))
+                    .catch(() => null),
+            ])
+            if (res.status !== 200) throw new Error(`${name} returned ${res.status}`)
+            const body: any = await res.json()
+            if (body.hasMore) throw new Error(`${name} returned more than 50000 rows`)
+            const columns: string[] = body.columns || []
+            const rows = (body.results || [])
+                .map((row: unknown[]) => Object.fromEntries(columns.map((column, i) => [column, row[i]])))
+                .filter((row: Record<string, unknown>) => row.week && row.facet && row.label)
+            return { rows, query: { name, query: definition?.query?.query ?? null } }
+        }
+
+        try {
+            const results = await Promise.all(
+                ['mcp_public_leaderboard_weekly', 'mcp_public_leaderboard_daily'].map(fetchEndpoint)
+            )
+            const data = {
+                rows: results.flatMap((result) => result.rows),
+                queries: results.map((result) => result.query),
+                fetchedAt: new Date().toISOString(),
+            }
+            createNode({
+                id: createNodeId('mcp-leaderboard'),
+                parent: null,
+                children: [],
+                internal: {
+                    type: 'McpLeaderboard',
+                    contentDigest: createContentDigest(data),
+                },
+                ...data,
+            })
+        } catch (err) {
+            console.error('Error fetching the MCP leaderboard endpoints:', err)
+        }
+    }
+
     const createProductDataNode = async () => {
         const url = `${process.env.BILLING_SERVICE_URL}/api/products-v2?display_friendly=true`
         const headers = {
@@ -1505,6 +1558,7 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
         sourceChangelogVideos(),
         sourcePostCategories(),
         sourceCommunityStats(),
+        sourceMCPLeaderboard(),
         sourceShopifyNodes(),
         sourceSlackEmojis(),
         sourceG2Reviews(),
