@@ -6,8 +6,14 @@ import { explorerGridColumns } from '../../constants'
 import { SparksJoyItems } from '../../components/TaskBarMenu/menuData'
 import { AppLink, AppIcon } from 'components/OSIcons/AppIcon'
 import ZoomHover from 'components/ZoomHover'
-import { HedgehogReading, HedgehogRose } from '@posthog/brand/hoggies'
-import { IconBook } from '@posthog/icons'
+import {
+    HedgehogBackToTheFuture,
+    HedgehogDj,
+    HedgehogReading,
+    HedgehogReadingIsMagic,
+    HedgehogRose,
+    HedgehogSurfer,
+} from '@posthog/brand/hoggies'
 
 export default function SparkJoy(): JSX.Element {
     return (
@@ -125,9 +131,17 @@ export default function SparkJoy(): JSX.Element {
                                     >
                                         <ZoomHover className="w-28 justify-center">
                                             <AppLink
+                                                label="Hogpedia"
+                                                url="/hogpedia"
+                                                Icon={<HedgehogReading className="size-12" />}
+                                                className="size-12"
+                                            />
+                                        </ZoomHover>
+                                        <ZoomHover className="w-28 justify-center">
+                                            <AppLink
                                                 label="Hogspace"
                                                 url="/hogspace"
-                                                Icon={<AppIcon name="handbook" />}
+                                                Icon={<HedgehogDj className="size-12" />}
                                                 className="size-12"
                                             />
                                         </ZoomHover>
@@ -135,7 +149,7 @@ export default function SparkJoy(): JSX.Element {
                                             <AppLink
                                                 label="Hogbook"
                                                 url="/hogbook"
-                                                Icon={<AppIcon name="forums" />}
+                                                Icon={<HedgehogBackToTheFuture className="size-12" />}
                                                 className="size-12"
                                             />
                                         </ZoomHover>
@@ -143,7 +157,7 @@ export default function SparkJoy(): JSX.Element {
                                             <AppLink
                                                 label="Hogreads"
                                                 url="/hogreads"
-                                                Icon={<HedgehogReading className="size-12" />}
+                                                Icon={<HedgehogReadingIsMagic className="size-12" />}
                                                 className="size-12"
                                             />
                                         </ZoomHover>
@@ -151,7 +165,7 @@ export default function SparkJoy(): JSX.Element {
                                             <AppLink
                                                 label="Hoglr"
                                                 url="/sparks-joy/hoglr"
-                                                Icon={<AppIcon name="notebook" />}
+                                                Icon={<HedgehogSurfer className="size-12" />}
                                                 className="size-12"
                                             />
                                         </ZoomHover>
@@ -160,14 +174,6 @@ export default function SparkJoy(): JSX.Element {
                                                 label="OnlyHogs"
                                                 url="/sparks-joy/onlyhogs"
                                                 Icon={<HedgehogRose className="size-12" />}
-                                                className="size-12"
-                                            />
-                                        </ZoomHover>
-                                        <ZoomHover className="w-28 justify-center">
-                                            <AppLink
-                                                label="Hogpedia"
-                                                url="/hogpedia"
-                                                Icon={<IconBook className="size-12 text-primary" />}
                                                 className="size-12"
                                             />
                                         </ZoomHover>
