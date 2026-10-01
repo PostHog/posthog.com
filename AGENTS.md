@@ -69,6 +69,27 @@ Complete every item below, then record what you did in the PR description:
 - Use relative URLs for internal links (e.g., `/docs/feature-flags` not `https://posthog.com/docs/feature-flags`)
 - When writing copy, follow our [writing style guide](@contents/handbook/content/posthog-style-guide.md) and [docs style guide](@contents/handbook/wizard-and-docs/docs-style-guide.md)
 
+## RTL-safe areas
+
+The landing page and the desktop shell render in Arabic, so they must be direction-agnostic. Use **logical** Tailwind properties there:
+
+| Do not use | Use |
+|---|---|
+| `ml-` `mr-` | `ms-` `me-` |
+| `pl-` `pr-` | `ps-` `pe-` |
+| `text-left` `text-right` | `text-start` `text-end` |
+| `border-l` `border-r` | `border-s` `border-e` |
+| `rounded-tl` `tr` `bl` `br` | `rounded-ss` `se` `es` `ee` |
+| `float-left` `float-right` | `float-start` `float-end` |
+
+These render identically in English, so a physical class is invisible until someone reads the site in Arabic. `pnpm test:rtl-classes` fails the build instead. The scoped areas and the rules are in `src/i18n/rtlClasses.test.ts`.
+
+`left-`, `right-`, `space-x-`, `inset-x-`, and `translate-x-` are **not** banned. They are usually symmetric, decorative, or transform-based. Think about each one.
+
+**The desktop canvas is exempt.** `components/Wrapper` pins `DesktopViewport` to `dir="ltr"`, because window positions are container-relative `{x, y}` coordinates rendered as framer-motion transforms, which ignore direction. Physical classes are correct inside that canvas, so `components/AppWindow` and `components/Desktop` are out of scope.
+
+Check any layout change with `?dir=rtl` on a page. It forces a direction and persists nothing.
+
 ## Detailed guides
 
 Reference these when working on specific areas:
@@ -98,6 +119,7 @@ Reference these when working on specific areas:
 - Use best practices – ask before duplicating code or hard-coding values
 - When creating commits, commit only your changes as other agents may be working on other files. If testing a build, only fix changes related to your work.
 - Use Tailwind @container queries for everything. **Important:** Don't rely on media queries, as all apps can be resized. Follow existing patterns to ensure full responsiveness.
+- Use **logical** Tailwind properties in RTL-safe areas – `ms-`/`me-` not `ml-`/`mr-`, `ps-`/`pe-` not `pl-`/`pr-`, `text-start`/`text-end`, `border-s`/`border-e`, `rounded-ss`/`se`/`es`/`ee`, `float-start`/`float-end`. See [RTL-safe areas](#rtl-safe-areas).
 
 ### Ask first
 
@@ -108,6 +130,7 @@ Reference these when working on specific areas:
 
 ### Never
 
+- Use a physical directional Tailwind class in an RTL-safe area (`ml-`, `pr-`, `text-left`, `float-right`, …). `pnpm test:rtl-classes` fails the build. See [RTL-safe areas](#rtl-safe-areas).
 - Use stock Tailwind colors (only project tokens)
 - Use `npm` instead of `pnpm`
 - Hard-code fallback values from reference data

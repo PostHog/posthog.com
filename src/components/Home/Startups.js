@@ -8,7 +8,7 @@ import { CallToAction } from 'components/CallToAction'
 
 const Benefit = ({ title, description }) => {
     return (
-        <li className="list-none relative pl-10 p-0">
+        <li className="list-none relative ps-10 p-0">
             <Check3 className="w-5 h-5 inline-block absolute left-2 top-1" />
             <strong className="text-[15px]">{title}</strong>
             <p className="mb-0 text-sm">{description}</p>
@@ -20,7 +20,7 @@ export default function Startups() {
     return (
         <section className="overflow-x-hidden pt-12 md:pt-20">
             <div className="max-w-5xl p-8 border border-primary bg-accent rounded mb-12 lg:mb-20 xl:mb-24 mx-4 xl:mx-auto">
-                <div className="-mt-28 -mx-12 mb-6 lg:float-right lg:ml-4 lg:-mt-40 lg:-mr-20 xl:-mr-32 lg:mb-0 lg:w-auto relative text-center">
+                <div className="-mt-28 -mx-12 mb-6 lg:float-end lg:ms-4 lg:-mt-40 lg:-me-20 xl:-me-32 lg:mb-0 lg:w-auto relative text-center">
                     <CloudinaryImage
                         src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Home/images/billboard.png"
                         alt="A billboard with Dalton Caldwell extolling how great PostHog is"
@@ -47,7 +47,7 @@ export default function Startups() {
                         title="Pre-product/market fit guides"
                         description="We literally wrote a book on how to get product-market fit"
                     />
-                    <li className="list-none relative pl-10 flex flex-col md:flex-row md:justify-start gap-2">
+                    <li className="list-none relative ps-10 flex flex-col md:flex-row md:justify-start gap-2">
                         <Check3 className="w-4 h-4 inline-block absolute left-2 top-0" />
                         <strong className="text-[15px]">Used and recommended by</strong>
                         <YC className="w-[115px]" />

@@ -99,7 +99,7 @@ export function RollingWords({ steps, className = '' }: RollingWordsProps): JSX.
                     type="button"
                     onClick={() => setIndex(0)}
                     aria-label="Replay"
-                    className="absolute left-full top-1/2 ml-1 -translate-y-1/2 text-muted opacity-0 transition-opacity duration-150 hover:text-primary focus-visible:opacity-100 group-hover:opacity-100"
+                    className="absolute left-full top-1/2 ms-1 -translate-y-1/2 text-muted opacity-0 transition-opacity duration-150 hover:text-primary focus-visible:opacity-100 group-hover:opacity-100"
                 >
                     <IconRewind className="size-4" />
                 </button>

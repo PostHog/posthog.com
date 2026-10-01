@@ -138,7 +138,7 @@ export const OnePlaceSlide = () => {
                 <CloudinaryImage
                     src="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/construction_hog_80a362973d.png"
                     alt="A construction hedgehog carrying a pipe"
-                    imgClassName="mx-auto mb-4 w-48 @lg:float-right @lg:mb-0 @lg:ml-6 @3xl:absolute @3xl:right-0 @3xl:top-0 @3xl:z-0 @3xl:m-0 @3xl:w-64 @4xl:w-72"
+                    imgClassName="mx-auto mb-4 w-48 @lg:float-end @lg:mb-0 @lg:ms-6 @3xl:absolute @3xl:end-0 @3xl:top-0 @3xl:z-0 @3xl:m-0 @3xl:w-64 @4xl:w-72"
                 />
                 <div className="relative z-10 @3xl:max-w-[65%]">
                     <h2 className="mt-0 mb-2 text-xl @2xl:text-2xl">Build better products with better data</h2>
@@ -278,7 +278,7 @@ const ProductStatusLink = ({ product, className = '' }: { product: any; classNam
                     delay={0}
                     trigger={
                         <span
-                            className={`inline-block size-2 shrink-0 rounded-full relative -top-px -ml-px ${
+                            className={`inline-block size-2 shrink-0 rounded-full relative -top-px -ms-px ${
                                 statusDotColor[status] || 'bg-muted'
                             }`}
                         />
@@ -410,9 +410,9 @@ const PostHogAIEmptyState = () => (
         <div className="mt-7 w-full">
             <div className="relative z-10 flex h-11 items-center gap-2 rounded-xl border-2 border-primary bg-light px-3 shadow-[0_0_0_3px_rgba(83,88,75,0.12)] dark:bg-[#222328]">
                 <IconSearch className="size-5 shrink-0 text-primary" />
-                <span className="min-w-0 flex-1 text-left text-base text-secondary">What can I help you with?</span>
+                <span className="min-w-0 flex-1 text-start text-base text-secondary">What can I help you with?</span>
             </div>
-            <div className="mx-4 -mt-px flex h-8 items-center gap-1.5 rounded-b-xl border border-primary bg-accent/40 px-2 text-left text-sm text-secondary">
+            <div className="mx-4 -mt-px flex h-8 items-center gap-1.5 rounded-b-xl border border-primary bg-accent/40 px-2 text-start text-sm text-secondary">
                 <kbd className="flex size-5 items-center justify-center rounded border border-primary bg-light font-mono text-sm text-primary shadow-sm dark:bg-dark">
                     /
                 </kbd>
@@ -498,7 +498,7 @@ export const DebugFixSlide = () => {
                     return (
                         <div key={product.handle} className="rounded p-2">
                             <ProductStatusLink product={product} className="top-0" />
-                            <p className="text-secondary text-[13px] mt-1 ml-[calc(16px+.375rem)] mb-0 leading-snug">
+                            <p className="text-secondary text-[13px] mt-1 ms-[calc(16px+.375rem)] mb-0 leading-snug">
                                 {product.shortDescription || product.description}
                             </p>
                         </div>
@@ -542,7 +542,7 @@ export const TestRolloutSlide = () => {
         <div className="rounded p-4 pb-6">
             <CloudinaryImage
                 src="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/coastal_hog_79dc4dff47.png"
-                imgClassName="@lg:float-right mb-4 @lg:!ml-2 @lg:!mt-4 @lg:!mr-0 @lg:mb-0 w-48"
+                imgClassName="@lg:float-end mb-4 @lg:!ms-2 @lg:!mt-4 @lg:!me-0 @lg:mb-0 w-48"
             />
             <h2 className="mt-0 text-xl @2xl:text-2xl">Ship features safely & get feedback</h2>
             <p className="text-secondary text-sm">

@@ -16,6 +16,8 @@ interface SEOProps {
     imageType?: 'absolute' | 'relative'
     updateWindowTitle?: boolean
     lang?: string
+    /** Writing direction for the document. Set this for RTL locales such as `ar`. */
+    dir?: 'ltr' | 'rtl'
     languageAlternates?: LanguageAlternate[]
     /** schema.org JSON-LD object(s) emitted as <script type="application/ld+json"> */
     structuredData?: Record<string, any> | Record<string, any>[]
@@ -40,6 +42,7 @@ export const SEO = ({
     imageType = 'relative',
     updateWindowTitle = true,
     lang,
+    dir,
     languageAlternates,
     structuredData,
     documentRkey,
@@ -78,7 +81,7 @@ export const SEO = ({
 
     return (
         <Helmet title={seo.title} titleTemplate={titleTemplate}>
-            {lang && <html lang={lang} />}
+            {(lang || dir) && <html lang={lang} dir={dir} />}
             {noindex && <meta name="robots" content="noindex" />}
             {seo.description && <meta name="description" content={seo.description} />}
             {seo.image && <meta name="image" content={seo.image} />}

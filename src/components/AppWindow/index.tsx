@@ -14,8 +14,9 @@ import {
     IconDrag,
 } from '@posthog/icons'
 import { Menu, MenuItem, useApp } from '../../context/App'
+import { useDirection } from '../../i18n/useDirection'
 import { Provider as WindowProvider, AppWindow as AppWindowType, useWindow } from '../../context/Window'
-import { ContextMenu, Dialog } from 'radix-ui'
+import { ContextMenu, Dialog, Direction } from 'radix-ui'
 import Tooltip from 'components/RadixUI/Tooltip'
 import OSButton from 'components/OSButton'
 import { Button } from 'components/Squeak/components/SubscribeButton'
@@ -155,6 +156,7 @@ export default function AppWindow({ item, chrome = true }: { item: AppWindowType
     } = useApp()
     const isSSR = typeof window === 'undefined'
     const controls = useDragControls()
+    const dir = useDirection(item.props.pageContext?.locale || 'en')
     const sizeConstraints = item.sizeConstraints
     const size = item.size
     const previousSize = item.previousSize
@@ -814,6 +816,9 @@ export default function AppWindow({ item, chrome = true }: { item: AppWindowType
                     <div
                         ref={contentRef}
                         data-app="AppWindowContent"
+                        // The desktop canvas is pinned to LTR for drag/resize math, so the
+                        // locale's direction is reapplied here, to the page content itself.
+                        dir={dir}
                         className={`size-full flex-grow ${
                             chrome
                                 ? `${
@@ -836,7 +841,9 @@ export default function AppWindow({ item, chrome = true }: { item: AppWindowType
                         }`}
                     >
                         <I18nProvider pageContext={item.props.pageContext}>
-                            <Router {...item.props}>{item.element}</Router>
+                            <Direction.Provider dir={dir}>
+                                <Router {...item.props}>{item.element}</Router>
+                            </Direction.Provider>
                         </I18nProvider>
                     </div>
                 </div>
