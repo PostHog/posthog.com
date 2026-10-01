@@ -1,7 +1,8 @@
-import { useEffect, useRef } from 'react'
+import React, { useEffect, useRef } from 'react'
 import { useLocation } from '@reach/router'
 import { useToast } from '../context/Toast'
 import { useTranslation } from '.'
+import { IconX } from '@posthog/icons'
 
 const SEEN_KEY = 'ph_english_only_notice_seen'
 
@@ -14,7 +15,7 @@ export const useEnglishOnlyNotice = (): void => {
     const { locale, t } = useTranslation()
     const { pathname } = useLocation()
     const { addToast } = useToast()
-    const previous = useRef<{ locale: string; title: string; description: string }>()
+    const previous = useRef<{ locale: string; title: string; description: string; close: string }>()
 
     useEffect(() => {
         const from = previous.current
@@ -22,6 +23,7 @@ export const useEnglishOnlyNotice = (): void => {
             locale,
             title: t('toast.english_only.title'),
             description: t('toast.english_only.description'),
+            close: t('cookie.close'),
         }
 
         // `/` is the English home page, which the reader picked with "View in English".
@@ -33,6 +35,9 @@ export const useEnglishOnlyNotice = (): void => {
             title: from.title,
             description: from.description,
             duration: 10000,
+            onAction: () => {},
+            actionLabel: from.close,
+            actionAsIcon: React.createElement(IconX, { className: 'size-4' }),
             lang: from.locale,
         })
     }, [locale, t, pathname])
