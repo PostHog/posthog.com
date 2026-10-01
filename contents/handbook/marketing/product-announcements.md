@@ -55,7 +55,7 @@ Before you settle on a launch tier, work through the questions below. They shape
 
 **How does it fit the self-driving story?** Some launches feed the loop by giving the system a new source of context (tickets, conversations). Other launches close the loop by acting on that context (Scouts generating Inbox reports). Both promise the same thing: the user's product gets better. A support product isn't exciting because an agent can read tickets. It's exciting because bugs buried in those tickets get found and fixed without anyone prompting it.
 
-**What's the "now what?"** Once someone clicks the email, ad, or notification, what's the one meaningful action we want? Be diligent about setting a goal metric in Customer.io, usually tied to the activation criteria for thing that's launching (the PMM can ask the PM for this). Actions that carry more decision or risk, like connecting a GitHub account to enable self-driving, will typically have lower conversion and need more follow-ups emails and marketing.
+**What's the "now what?", and how will people hear about it?** Once someone clicks the email, ad, or notification, what's the one meaningful action we want? Plan which channels will reach the intended audience and who owns each one. Be diligent about setting a goal metric in Customer.io, usually tied to the activation criteria for the thing that's launching (the PMM can ask the PM for this). Share the launch internally, too, so the team can help amplify it. Actions that carry more decision or risk, like connecting a GitHub account to enable self-driving, will typically have lower conversion and need more follow-up emails and marketing.
 
 ### Tier 1: New product announcements
 
