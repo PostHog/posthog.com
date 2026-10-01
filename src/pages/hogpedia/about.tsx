@@ -17,7 +17,7 @@ export default function HogpediaAbout(): JSX.Element {
                 canonicalUrl="/hogpedia/about"
                 noindex
             />
-            <Explorer template="generic" slug="hogpedia" title="About – Hogpedia" fullScreen>
+            <Explorer template="generic" slug="hogpedia" title="About – Hogpedia" fullScreen showAddressBar={false}>
                 <HogpediaShell title="About Hogpedia" slug="/hogpedia/about" showTabs={false}>
                     <div className="hp-prose">
                         <p>

@@ -18,6 +18,18 @@ The format is the joke. The facts are not. Every article starts with a plain def
 | `src/pages/sparks-joy/` | Lists Hogpedia under "Time machine", the section for parody recreations. |
 | `src/components/Hogpedia/` | The skin and the article furniture. |
 
+## Where the Main Page gets its content
+
+| Module | Source |
+| --- | --- |
+| From today's featured article | Hand-written, checked against the live article index. |
+| Featured hog | A random illustration from `@posthog/brand/hoggies/png`, via `hoggieImages.ts`. |
+| Did you know… | `mainPageData.ts`, hand-written from first-party files. |
+| In the news | The six most recent posts on the PostHog blog, read at build time. |
+| Explore Hogpedia | The live article index, grouped by category. |
+
+`Special:RecentChanges` reads the PostHog changelog – the same `allRoadmap` records that `/changelog` renders. It lists changes to the software, says so, and links to the repository commit log for edits to the articles themselves.
+
 Hogpedia is listed on `/sparks-joy` under **Time machine**, the group for parody recreations of old websites, via `SparksJoyItems.timeMachine` in `src/components/TaskBarMenu/menuData.tsx`. That array drives the `/sparks-joy` page only – the taskbar's "Things that spark joy" entry is a plain link to the page and has no submenu.
 
 Pages are created in `gatsby/createPages.ts`. Articles are excluded from the generic `Plain` loop there and get their own loop, which also builds a page per category. The frontmatter types are declared in `gatsby/createSchemaCustomization.ts` under `FrontmatterHogpedia`.
@@ -68,7 +80,11 @@ In the body, use Markdown plus two components:
 
 **No dead links.** Hogpedia has no red links. Link only to an article that exists. A sidebar or tab item with nothing behind it renders as plain text, not as a link. The hand-written Main Page modules are filtered against the live article index, so a rename cannot leave a broken link behind. A build-time link check covers the rest.
 
-**Never `import * as` from `@posthog/brand/hoggies`.** An article names its hog as a string, so the component is looked up at run time – but a namespace import defeats tree-shaking and pulls all 130-odd illustrations into every page that renders one. That added about 8 MB of JavaScript before `hogs.ts` existed. To use a new illustration, add a named import and an entry to the `HOGS` registry in `src/components/Hogpedia/hogs.ts`.
+**Never `import * as` from `@posthog/brand/hoggies`.** An article names its hog as a string, so the component is looked up at run time – but a namespace import defeats tree-shaking and pulls all 130-odd illustrations into every page that renders one. Each one inlines its own SVG path data, on the order of 240 KB of module source. That added about 8 MB of JavaScript before `hogs.ts` existed. To use a new illustration in an infobox, add a named import and an entry to the `HOGS` registry in `src/components/Hogpedia/hogs.ts`.
+
+The rule is about the *component* exports. `hoggieImages.ts` does namespace-import `@posthog/brand/hoggies/png`, and that is fine for the opposite reason: those exports are image URLs, so the whole library costs a string per illustration and the browser fetches only the one on screen. Reach for `hoggieImages.ts` when the hog is chosen at run time, and for `hogs.ts` when an article names one.
+
+**Centre illustrations with auto margins, not `text-align`.** Tailwind's preflight sets `img, svg { display: block }` site-wide, so `text-align: center` on a container does nothing to the image inside it.
 
 **Keep it simple.** This is a parody site, not a documentation set. An article is a lead plus three or four short sections. Resist adding a "Criticism" or "Limits" section – that is essay writing, and it was cut once already.
 
@@ -80,7 +96,9 @@ In the body, use Markdown plus two components:
 
 `hogpedia.css` is the only file with non-token colors and a non-project font stack, and every rule in it is scoped under `.hogpedia`. This is the same approach `src/components/PocketGuides/twigMockup.css` takes. It touches no Tailwind config, mints no utility, and cannot leak.
 
-**Hogpedia is always light.** MonoBook had no dark variant, so there is nothing to be faithful to and an invented one would break the premise. The root paints an opaque background and sets `color-scheme: light`, so a dark site theme shows a light page inside a themed window frame – which reads as a website in a browser, the effect we want. The sidebar says so in character.
+**Hogpedia is always light.** MonoBook had no dark variant, so there is nothing to be faithful to and an invented one would break the premise. The root paints an opaque background and sets `color-scheme: light`, so a dark site theme shows a light page inside a themed window frame – which reads as a website in a browser, the effect we want.
+
+**Every window passes `showAddressBar={false}`.** `Explorer`'s address bar is a path select, and Hogpedia has no categories to put in it, so it rendered as an empty dropdown above the page. Keep it off on new pages.
 
 **Layout responds to the window, not the viewport.** The root sets `container-type: inline-size`, and the breakpoints are `@container hogpedia (...)` queries. Every app window is resizable, so a media query would be wrong. Below 60rem the sidebar stacks above the article and the infobox goes full width.
 

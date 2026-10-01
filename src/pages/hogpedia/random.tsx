@@ -34,7 +34,13 @@ export default function HogpediaRandom(): JSX.Element {
                 canonicalUrl="/hogpedia/random"
                 noindex
             />
-            <Explorer template="generic" slug="hogpedia" title="Random article – Hogpedia" fullScreen>
+            <Explorer
+                template="generic"
+                slug="hogpedia"
+                title="Random article – Hogpedia"
+                fullScreen
+                showAddressBar={false}
+            >
                 <HogpediaShell title="Random article" slug="/hogpedia/random" showTabs={false}>
                     <div className="hp-prose">
                         <p>

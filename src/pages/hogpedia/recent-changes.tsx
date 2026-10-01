@@ -4,137 +4,123 @@ import Explorer from 'components/Explorer'
 import Link from 'components/Link'
 import { SEO } from 'components/seo'
 import HogpediaShell from 'components/Hogpedia/HogpediaShell'
+import MdxLinks from 'components/Hogpedia/MdxLinks'
 
-type Commit = {
+type ChangelogEntry = {
     date: string
-    message: string
-    url: string
-    author?: { login: string; html_url: string } | null
+    title: string
+    description?: string | null
+    cta?: { label?: string | null; url?: string | null } | null
 }
 
-type Change = Commit & { title: string; slug: string }
-
 /**
- * Special:RecentChanges, driven by the real commit log.
+ * Special:RecentChanges, driven by the PostHog changelog.
  *
- * `gatsby-source-git-metadata` attaches the commits for each content file. That plugin
- * needs `GITHUB_API_KEY`, and it attaches nothing without one, so this page has an honest
- * empty state rather than a fabricated list. Byte counts are not shown because the plugin
- * does not report them.
+ * The entries are the same `allRoadmap` records that `/changelog` renders — completed
+ * roadmap items with a date — so this page lists real shipped changes rather than a
+ * fabricated edit history. The source is Strapi, and a build without it yields nothing, so
+ * the page keeps an honest empty state that links to the changelog itself.
  */
 export default function HogpediaRecentChanges(): JSX.Element {
     const data = useStaticQuery(graphql`
         query HogpediaRecentChanges {
-            allMdx(filter: { fields: { slug: { regex: "/^/hogpedia//" } }, frontmatter: { title: { ne: "" } } }) {
+            allRoadmap(
+                filter: { complete: { eq: true }, date: { ne: null } }
+                sort: { fields: date, order: DESC }
+                limit: 50
+            ) {
                 nodes {
-                    fields {
-                        slug
-                        commits {
-                            date
-                            message
-                            url
-                            author {
-                                login
-                                html_url
-                            }
-                        }
-                    }
-                    frontmatter {
-                        title
+                    date
+                    title
+                    description
+                    cta {
+                        label
+                        url
                     }
                 }
             }
         }
     `)
 
-    const changes: Change[] = data.allMdx.nodes
-        .flatMap((node: any) =>
-            (node.fields.commits || []).map((commit: Commit) => ({
-                ...commit,
-                title: node.frontmatter.title,
-                slug: node.fields.slug.replace(/\/$/, ''),
-            }))
-        )
-        .sort((a: Change, b: Change) => new Date(b.date).getTime() - new Date(a.date).getTime())
-        .slice(0, 60)
+    const changes: ChangelogEntry[] = data.allRoadmap?.nodes || []
+
+    // Changelog descriptions are Markdown, and some run to several paragraphs. A recent
+    // changes line wants one sentence, so this takes the first paragraph and renders its
+    // links through the same helper the infoboxes use.
+    const summarise = (description: string): string => description.split(/\n\s*\n/)[0].trim()
 
     return (
         <>
             <SEO
                 title="Recent changes – Hogpedia"
-                description="The most recent edits to Hogpedia articles, taken from the commit log of the posthog.com repository."
+                description="The most recent changes to PostHog, taken from the PostHog changelog."
                 canonicalUrl="/hogpedia/recent-changes"
                 noindex
             />
-            <Explorer template="generic" slug="hogpedia" title="Recent changes – Hogpedia" fullScreen>
+            <Explorer
+                template="generic"
+                slug="hogpedia"
+                title="Recent changes – Hogpedia"
+                fullScreen
+                showAddressBar={false}
+            >
                 <HogpediaShell title="Recent changes" slug="/hogpedia/recent-changes" showTabs={false}>
                     <div className="hp-prose">
                         {changes.length === 0 ? (
                             <p>
-                                No edits are listed. Hogpedia reads its history from the commit log of the{' '}
-                                <Link
-                                    to="https://github.com/PostHog/posthog.com/commits/master/contents/hogpedia"
-                                    externalNoIcon
-                                    className="hp-external"
-                                >
-                                    posthog.com repository
-                                </Link>
-                                , and a build without a GitHub token cannot read it. The link above always shows the
-                                real history.
+                                No changes are listed. Hogpedia reads this page from the{' '}
+                                <Link to="/changelog">PostHog changelog</Link>, and a build without access to it cannot
+                                read the entries. The changelog itself is always current.
                             </p>
                         ) : (
                             <>
                                 <p>
-                                    The {changes.length} most recent edits to Hogpedia, newest first. This list is the
-                                    real commit log of{' '}
+                                    The {changes.length} most recent changes to PostHog, newest first, taken from the{' '}
+                                    <Link to="/changelog">PostHog changelog</Link>. These are changes to the software,
+                                    not to Hogpedia. For edits to the articles, read the{' '}
                                     <Link
-                                        to="https://github.com/PostHog/posthog.com/tree/master/contents/hogpedia"
+                                        to="https://github.com/PostHog/posthog.com/commits/master/contents/hogpedia"
                                         externalNoIcon
                                         className="hp-external"
                                     >
-                                        contents/hogpedia
+                                        commit log
                                     </Link>
                                     .
                                 </p>
                                 <ul className="hp-changes">
                                     {changes.map((change) => (
-                                        <li key={`${change.url}-${change.slug}`}>
-                                            <span className="hp-changes-diff">
-                                                (
-                                                <Link to={change.url} externalNoIcon>
-                                                    diff
-                                                </Link>{' '}
-                                                |{' '}
-                                                <Link
-                                                    to={`https://github.com/PostHog/posthog.com/commits/master/contents${change.slug}.mdx`}
-                                                    externalNoIcon
-                                                >
-                                                    hist
-                                                </Link>
-                                                )
-                                            </span>{' '}
-                                            . . <Link to={change.slug}>{change.title}</Link>;{' '}
+                                        <li key={`${change.date}-${change.title}`}>
                                             <span className="hp-changes-date">
-                                                {new Date(change.date).toLocaleString('en-US', {
+                                                {new Date(change.date).toLocaleDateString('en-US', {
                                                     day: 'numeric',
                                                     month: 'short',
                                                     year: 'numeric',
-                                                    hour: '2-digit',
-                                                    minute: '2-digit',
                                                 })}
                                             </span>{' '}
                                             . .{' '}
-                                            {change.author ? (
-                                                <Link to={change.author.html_url} externalNoIcon>
-                                                    {change.author.login}
+                                            {change.cta?.url ? (
+                                                <Link to={change.cta.url} externalNoIcon>
+                                                    {change.title}
                                                 </Link>
                                             ) : (
-                                                <span>an unknown editor</span>
-                                            )}{' '}
-                                            <i>({change.message})</i>
+                                                <b>{change.title}</b>
+                                            )}
+                                            {change.description && (
+                                                <>
+                                                    {' '}
+                                                    . .{' '}
+                                                    <i>
+                                                        <MdxLinks text={summarise(change.description)} />
+                                                    </i>
+                                                </>
+                                            )}
                                         </li>
                                     ))}
                                 </ul>
+                                <p>
+                                    <Link to="/changelog">The full changelog</Link> ·{' '}
+                                    <Link to="/roadmap">What PostHog is building next</Link>
+                                </p>
                             </>
                         )}
                     </div>

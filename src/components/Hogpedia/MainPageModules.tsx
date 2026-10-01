@@ -1,6 +1,6 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Link from 'components/Link'
-import { HOGS } from './hogs'
+import { HOGGIES } from './hoggieImages'
 
 export const Module = ({
     title,
@@ -47,28 +47,37 @@ export const dayIndex = (length: number, date = new Date()): number => {
     return dayOfYear % length
 }
 
-export const FeaturedHog = ({
-    hog,
-    name,
-    caption,
-    to,
-}: {
-    hog: string
-    name: string
-    caption: string
-    to: string
-}): JSX.Element => {
-    const Hog = HOGS[hog]
+/**
+ * A hedgehog drawn at random from the whole brand library.
+ *
+ * The first render uses the date-derived index, so the server, a crawler and a reader with
+ * no JavaScript all get a real illustration. The random pick happens in an effect after
+ * hydration, which is the only safe place for it: `Math.random()` during render gives the
+ * server and the client different answers and React reports a hydration mismatch.
+ */
+export const FeaturedHog = (): JSX.Element | null => {
+    const [index, setIndex] = useState(() => dayIndex(HOGGIES.length))
+
+    useEffect(() => {
+        if (HOGGIES.length > 0) {
+            setIndex(Math.floor(Math.random() * HOGGIES.length))
+        }
+    }, [])
+
+    const hoggie = HOGGIES[index]
+    if (!hoggie) {
+        return null
+    }
+
     return (
-        <div style={{ textAlign: 'center' }}>
-            {Hog && <Hog size={130} title={name} />}
-            <p>
-                <b>
-                    <Link to={to}>{name}</Link>
-                </b>
+        <figure className="hp-featured-hog">
+            <img src={hoggie.src} alt={`${hoggie.name}, a PostHog hedgehog illustration`} />
+            <figcaption>
+                <b>{hoggie.name}</b>
                 <br />
-                {caption}
-            </p>
-        </div>
+                One of the {HOGGIES.length} hedgehogs in the{' '}
+                <Link to="/handbook/brand/assets">PostHog brand library</Link>.
+            </figcaption>
+        </figure>
     )
 }

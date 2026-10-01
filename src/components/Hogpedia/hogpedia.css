@@ -256,15 +256,6 @@
     padding: 0.1em 0.6em;
     color: var(--hp-text-soft);
 }
-.hogpedia .hp-portlet-sub {
-    list-style: none;
-    margin: 0;
-    padding: 0.15em 0 0 0;
-    border-top: 1px solid #eaeaea;
-}
-.hp-portlet-sub li a {
-    padding-left: 1.4em;
-}
 .hp-portlet-note {
     padding: 0.35em 0.6em;
     font-size: 10px;
@@ -327,24 +318,6 @@
 .hp-suggestions-empty {
     padding: 0.3em 0.6em;
     color: var(--hp-text-soft);
-}
-
-/* ------------------------------------------------- personal tools strip --- */
-
-/* The thin strip MonoBook ran along the top right, above the tabs. Period-correct, and it
-   is where the skin notice lives now that the sidebar has one box fewer. */
-.hp-personal {
-    display: flex;
-    justify-content: flex-end;
-    gap: 1em;
-    padding: 0.35em 1em 0.3em 1em;
-    border-bottom: 1px solid var(--hp-accent);
-    font-size: 10.5px;
-    color: var(--hp-text-soft);
-    background: var(--hp-page-bg);
-}
-.hp-personal span {
-    white-space: nowrap;
 }
 
 /* ---------------------------------------------------------------- tabs --- */
@@ -532,6 +505,28 @@
     padding-right: 0.5em;
 }
 
+/* --------------------------------------------------------- featured hog --- */
+
+.hp-featured-hog {
+    margin: 0;
+    text-align: center;
+}
+.hp-featured-hog img {
+    max-width: 150px;
+    height: auto;
+    margin: 0 auto 0.5em auto;
+}
+.hp-featured-hog figcaption {
+    font-size: 11px;
+    line-height: 1.4;
+}
+
+/* The date beside a blog headline in "In the news". */
+.hp-news-date {
+    color: var(--hp-text-soft);
+    white-space: nowrap;
+}
+
 /* ------------------------------------------------------------ infoboxes --- */
 
 .hp-infobox {
@@ -570,6 +565,10 @@
 .hp-infobox-image svg {
     max-width: 150px;
     height: auto;
+    /* Tailwind's preflight makes images and SVGs `display: block`, which ignores the
+       `text-align: center` above. Auto margins are what actually centres them. */
+    margin-left: auto;
+    margin-right: auto;
 }
 .hp-infobox-caption {
     display: block;

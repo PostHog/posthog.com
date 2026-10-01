@@ -26,7 +26,13 @@ export default function HogpediaCategory({ data: { articles }, pageContext: { ca
                 canonicalUrl={categoryPath(category)}
                 noindex
             />
-            <Explorer template="generic" slug="hogpedia" title={`${title} - Hogpedia`} fullScreen>
+            <Explorer
+                template="generic"
+                slug="hogpedia"
+                title={`${title} - Hogpedia`}
+                fullScreen
+                showAddressBar={false}
+            >
                 <HogpediaShell
                     title={title}
                     tagline="From Hogpedia, the free encyclopedia"

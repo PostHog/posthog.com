@@ -27,6 +27,9 @@ import {
  * renders one. That added about 8 MB of JavaScript before this registry existed.
  *
  * To use a new illustration, add a named import above and an entry below.
+ *
+ * For a hog chosen at run time out of the whole library, use `hoggieImages.ts` instead:
+ * those are image URLs and cost no JavaScript.
  */
 export const HOGS: Record<string, React.ComponentType<any>> = {
     HedgehogBeaker,

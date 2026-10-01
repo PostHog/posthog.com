@@ -4,8 +4,6 @@ import { navigate } from 'gatsby'
 import HogpediaLogo from './HogpediaLogo'
 import { SearchBox } from './HogpediaSearch'
 import { useHogpediaArticles, pickRandomArticle } from './data'
-import { articleSourceUrls } from './context'
-import { HOGPEDIA_CATEGORIES, categoryPath } from './categories'
 
 type PortletLink = { label: string; to?: string; external?: boolean; onClick?: (e: React.MouseEvent) => void }
 
@@ -54,15 +52,8 @@ const Portlet = ({
  * Every entry here goes to a page that exists. Where a 2007 encyclopedia had an item with
  * nothing behind it, this sidebar leaves it out rather than render a link that fails.
  */
-export default function HogpediaSidebar({
-    currentPath,
-    filePath,
-}: {
-    currentPath?: string
-    filePath?: string
-}): JSX.Element {
+export default function HogpediaSidebar({ currentPath }: { currentPath?: string }): JSX.Element {
     const articles = useHogpediaArticles()
-    const urls = articleSourceUrls(filePath)
 
     const hasFeatured = articles.some((article) => article.slug === '/hogpedia/posthog')
 
@@ -90,17 +81,12 @@ export default function HogpediaSidebar({
         { label: 'Donate to Hogpedia', to: '/hogpedia/donate' },
     ]
 
-    const toolbox: PortletLink[] = [
-        ...(urls ? [{ label: 'Edit this page', to: urls.edit, external: true }] : []),
-        ...(urls ? [{ label: 'View source', to: urls.source, external: true }] : []),
-        ...(urls ? [{ label: 'Page history', to: urls.history, external: true }] : []),
-        { label: 'About Hogpedia', to: '/hogpedia/about' },
-    ]
-
     // Two blocks rather than one, so a narrow window can keep the logo and the search box
     // above the article and move the rest below it. See the `order` rules in hogpedia.css.
-    // Three portlets, the way MonoBook had them: search, navigation, toolbox. The categories
-    // sit inside navigation rather than in a box of their own.
+    //
+    // Navigation ends at "Donate to Hogpedia". The per-page GitHub links live in the tab
+    // strip, and the categories are listed on the Main Page and at the foot of each
+    // article, so nothing here is the only route to anywhere.
     return (
         <>
             <div className="hogpedia-nav-head">
@@ -112,17 +98,7 @@ export default function HogpediaSidebar({
             </div>
 
             <div className="hogpedia-nav-tail">
-                <Portlet title="navigation" links={navigation} currentPath={currentPath}>
-                    <ul className="hp-portlet-sub">
-                        {HOGPEDIA_CATEGORIES.map((category) => (
-                            <li key={category}>
-                                <Link to={categoryPath(category)}>{category}</Link>
-                            </li>
-                        ))}
-                    </ul>
-                </Portlet>
-
-                <Portlet title="toolbox" links={toolbox} currentPath={currentPath} />
+                <Portlet title="navigation" links={navigation} currentPath={currentPath} />
             </div>
         </>
     )

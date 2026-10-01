@@ -3,10 +3,11 @@ import Explorer from 'components/Explorer'
 import Link from 'components/Link'
 import { SEO } from 'components/seo'
 import HogpediaShell from 'components/Hogpedia/HogpediaShell'
-import { Module, FeaturedHog, dayIndex } from 'components/Hogpedia/MainPageModules'
+import { Module, FeaturedHog } from 'components/Hogpedia/MainPageModules'
 import { useHogpediaArticles, onlyArticles, onlyResolvable } from 'components/Hogpedia/data'
+import { useRecentBlogPosts } from 'components/Hogpedia/blogPosts'
 import { HOGPEDIA_CATEGORIES, categoryPath } from 'components/Hogpedia/categories'
-import { DID_YOU_KNOW, IN_THE_NEWS, FEATURED_HOGS } from 'components/Hogpedia/mainPageData'
+import { DID_YOU_KNOW } from 'components/Hogpedia/mainPageData'
 
 /**
  * The Hogpedia Main Page, in the shape Wikipedia's 2007 one had: a welcome banner with an
@@ -17,12 +18,11 @@ import { DID_YOU_KNOW, IN_THE_NEWS, FEATURED_HOGS } from 'components/Hogpedia/ma
  */
 export default function HogpediaMainPage(): JSX.Element {
     const articles = onlyArticles(useHogpediaArticles())
-    // Every hand-written module entry is checked against the live article index, so the Main
-    // Page cannot link to an article that was renamed or removed.
-    const news = IN_THE_NEWS
+    // "In the news" is the real blog, read at build time, so it cannot go stale.
+    const news = useRecentBlogPosts()
+    // The hand-written facts are checked against the live article index, so the Main Page
+    // cannot link to an article that was renamed or removed.
     const facts = onlyResolvable(DID_YOU_KNOW, articles)
-    const hogs = onlyResolvable(FEATURED_HOGS, articles)
-    const hog = hogs[dayIndex(hogs.length)]
     const featured = articles.find((article) => article.slug === '/hogpedia/posthog')
 
     return (
@@ -33,7 +33,7 @@ export default function HogpediaMainPage(): JSX.Element {
                 canonicalUrl="/hogpedia"
                 noindex
             />
-            <Explorer template="generic" slug="hogpedia" title="Hogpedia" fullScreen>
+            <Explorer template="generic" slug="hogpedia" title="Hogpedia" fullScreen showAddressBar={false}>
                 <HogpediaShell title="Main Page" tagline={false} slug="/hogpedia" showTabs={false}>
                     <div className="hp-mainpage-banner">
                         <h2 className="hp-mainpage-title">Welcome to Hogpedia,</h2>
@@ -69,11 +69,9 @@ export default function HogpediaMainPage(): JSX.Element {
                             </Module>
                         )}
 
-                        {hog && (
-                            <Module title="Featured hog" tint="warm">
-                                <FeaturedHog hog={hog.hog} name={hog.name} caption={hog.caption} to={hog.to} />
-                            </Module>
-                        )}
+                        <Module title="Featured hog" tint="warm">
+                            <FeaturedHog />
+                        </Module>
 
                         <Module title="Did you know…">
                             <ul>
@@ -87,12 +85,16 @@ export default function HogpediaMainPage(): JSX.Element {
 
                         <Module title="In the news">
                             <ul>
-                                {news.map((item) => (
-                                    <li key={item.text}>
-                                        {item.text} <Link to={item.to}>{item.label}</Link>
+                                {news.map((post) => (
+                                    <li key={post.slug}>
+                                        <Link to={post.slug}>{post.title}</Link>{' '}
+                                        <span className="hp-news-date">({post.date})</span>
                                     </li>
                                 ))}
                             </ul>
+                            <p className="hp-module-more">
+                                <Link to="/blog">The PostHog blog</Link> · <Link to="/changelog">Changelog</Link>
+                            </p>
                         </Module>
 
                         <Module title="Explore Hogpedia" wide>

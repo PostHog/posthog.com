@@ -18,7 +18,7 @@ export default function HogpediaSearchPage(): JSX.Element {
                 canonicalUrl="/hogpedia/search"
                 noindex
             />
-            <Explorer template="generic" slug="hogpedia" title="Search – Hogpedia" fullScreen>
+            <Explorer template="generic" slug="hogpedia" title="Search – Hogpedia" fullScreen showAddressBar={false}>
                 <HogpediaShell title="Search results" slug="/hogpedia/search" showTabs={false}>
                     <SearchResults initialQuery={query} />
                 </HogpediaShell>

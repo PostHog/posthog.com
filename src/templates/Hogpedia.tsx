@@ -95,7 +95,13 @@ export default function HogpediaArticle({
                 noindex
                 article
             />
-            <Explorer template="generic" slug="hogpedia" title={`${heading} - Hogpedia`} fullScreen>
+            <Explorer
+                template="generic"
+                slug="hogpedia"
+                title={`${heading} - Hogpedia`}
+                fullScreen
+                showAddressBar={false}
+            >
                 <HogpediaShell
                     title={heading}
                     tagline={isTalk ? 'This is the discussion page for the article above.' : undefined}

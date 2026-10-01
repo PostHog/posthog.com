@@ -46,16 +46,9 @@ export default function HogpediaShell({
                 <ScrollArea className="hogpedia-scroll">
                     <div className="hogpedia-frame">
                         <div className="hogpedia-nav-column">
-                            <HogpediaSidebar currentPath={slug} filePath={filePath} />
+                            <HogpediaSidebar currentPath={slug} />
                         </div>
                         <div className="hogpedia-body">
-                            {/* MonoBook's personal-tools strip. Deadpan rather than functional:
-                                Hogpedia has no accounts, and the skin notice moved here from the
-                                sidebar. */}
-                            <div className="hp-personal">
-                                <span>Not logged in</span>
-                                <span>One skin, no dark mode. It is 2007.</span>
-                            </div>
                             {showTabs && (
                                 <ArticleTabs
                                     slug={slug}
