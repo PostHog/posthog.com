@@ -2,6 +2,9 @@ import React from 'react'
 import { TreeMenu } from 'components/TreeMenu'
 import { useArtifacts, useExhibits, useMuseumTaxonomy } from 'hooks/useMuseum'
 
+// Exhibits that are pages in this repo rather than Strapi entries
+const PERMANENT_EXHIBITS = [{ name: 'The Evolution of Marketing', url: '/museum/exhibits/evolution' }]
+
 export default function MuseumMenu({ activeUrl }: { activeUrl: string }): JSX.Element {
     const { artifacts } = useArtifacts()
     const { exhibits } = useExhibits()
@@ -9,7 +12,8 @@ export default function MuseumMenu({ activeUrl }: { activeUrl: string }): JSX.El
 
     const items = [
         { name: 'Museum', url: '/museum' },
-        ...(exhibits.length > 0 ? [{ name: 'Exhibits' }] : []),
+        { name: 'Exhibits' },
+        ...PERMANENT_EXHIBITS,
         ...exhibits.map(({ attributes }) => ({
             name: attributes.title,
             url: `/museum/exhibits/${attributes.slug}`,
