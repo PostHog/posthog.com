@@ -50,7 +50,7 @@ We should assume our audience either has to do technical work or wants to, regar
 This shapes everything. Engineers...
 
 - Distrust marketing by default. They've been burned by overpromising before.
-- Drefer specificity over benefits language. "It does X" beats "It empowers you to unlock X."
+- Prefer specificity over benefits language. "It does X" beats "It empowers you to unlock X."
 - Can tell within seconds if something is authentic or corporate. They view source code for fun.
 - React well to honesty, including honesty about limitations and tradeoffs.
 - Respond to wit, but are allergic to forced humor.
@@ -65,17 +65,17 @@ Hacker News is intensely logical and skeptical. They'll call out corporate spin,
 
 ## How we describe PostHog
 
-> **PostHog is the context layer for your product.** PostHog ingests and stores your analytics, errors, replays, and business data so you and your agents can query and act on it.
+> **PostHog is the context layer for your product.** PostHog ingests and stores your analytics, errors, replays, and business data so you and your agents can query it and make changes.
 
 <img width="705" height="508" alt="Screenshot 2026-09-30 at 15 03 55" src="https://github.com/user-attachments/assets/5f03e72d-6a58-4bee-8c85-c1c5c5e8b735" />
 
-This is the frame everyone at PostHog should use, across the product, website, marketing, content, and support.
+This is the frame everyone at PostHog should use, everywhere.
 
 Our products help customers do one of four things, which build on each other:
 
 1. **Get data in.** PostHog ingests and stores your data, which can come directly from our own products or 3rd party sources.
 2. **Query the data yourself.** Using PostHog AI or our Web UI, you can manually run queries. 
-3. **Give the data to your agent to act on.** Make the same data available to our customers' agents via PostHog MCP so they can find issues and propose or take action.
+3. **Give the data to your agent to act on.** Agents are the primary interface for our users, so we make the same data available via PostHog MCP so agents can find issues and propose or take action.
 4. **Let PostHog self-drive.** Use PostHog to ship changes, measure their effect, and repeat.
 
 Start with the step that matches the customer's needs. Self-driving is an aspirational state, but the component parts are composable. If a customer wants to take Reports and pass them to their own agents to act on, that is totally fine. Our job is to give engineers a suite of tools they can pick and choose from. 
@@ -88,7 +88,7 @@ Use this whenever you need a longer standard description of PostHog, e.g. for a 
 
 Product Analytics, Session Replay, Logs etc. are **products.** The surfaces that you interact with PostHog, like Web, Slack, MCP are **apps.**
 
-Product marketers can find the granular vocabulary rules and the per-product playbooks in [Positioning and selling](/handbook/marketing/positioning).
+Developer marketers can find the granular vocabulary rules and the per-product playbooks in [Positioning and selling](/handbook/marketing/positioning).
 
 ## What we want people to know
 
@@ -102,8 +102,8 @@ Beyond literally communicating what PostHog is and what it does, we want to [equ
 
 ## Why people pick PostHog
 
-- We help people debug and ship their product faster.
-- PostHog already has all the data about how people use your product and how your product performs, like usage analytics, error tracking, session replays, logs, traces, and more. This lets them discover and understand issues and their context, but also feeds our self-driving loop.
+- We help engineers build better products, faster.
+- PostHog already has all the data about how people use your product and how your product performs, like usage analytics, error tracking, session replays, logs, traces, and more. This lets you discover and understand issues and their context, but also feeds your self-driving loop.
 - We have all the products and context in one. This means less time spent patching separate services together and paying for them all separately. When builders (and their agents) need a new capability, they can just use PostHog.
 - Our team is technical and speaks the language of developers. Our engineers talk with customers to figure out what to build. Our support team are all former engineers and get into the nitty-gritty of issues. Our sales and CS teams are very technical too. They focus more on your use cases and implementation than steak dinners.
 - We want engineers to self-serve. They can sign up and use all of the features of PostHog for free.
