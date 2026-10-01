@@ -130,7 +130,7 @@ export default function Hogspace(): JSX.Element {
 
     return (
         <>
-            <SEO title="Hogspace – PostHog" description="PostHog's Hogspace profile" />
+            <SEO title="Hogspace – PostHog" description="PostHog's Hogspace profile" noindex />
             <ReaderView hideLeftSidebar hideRightSidebar hideAppOptions showQuestions={false}>
                 <div className="@container not-prose mx-auto w-full max-w-5xl pb-12 font-sans text-primary">
                     <header className="bg-ai-blue px-4 py-3 text-light-1">
