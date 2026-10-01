@@ -92,7 +92,7 @@ export const createOGImages = async (data) => {
 
     const fontBuffer = fs.readFileSync(path.resolve(__dirname, '../fonts/matter.woff'))
     const font = fontBuffer.toString('base64')
-    const takumi = await createTakumiRenderer(fontBuffer)
+    const takumi = await createTakumiRenderer()
 
     const browserFetcher = chromium.puppeteer.createBrowserFetcher()
     const revisionInfo = await browserFetcher.download('982053')
