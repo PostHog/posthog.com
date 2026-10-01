@@ -18,7 +18,7 @@ PostHog adds two identifiers that help connect the event to the visitor and visi
 
 ## Group events into one visit
 
-Put yourself in the shoes of an anonymous Twig visitor: select **Forest**, then **Coast**, and notice how the `distinct_id` and `$session_id` remain the same:
+Put yourself in the shoes of an anonymous Twig visitor. Select **Forest**, then **Coast**, and notice how the `distinct_id` and `$session_id` remain the same:
 
 <SessionGroupingFigure />
 
@@ -57,7 +57,7 @@ Later, Edgar visits Twig on his phone. The phone starts with a different anonymo
 
 ## Reset the identity at sign-out
 
-Now suppose Edgar signs out and a second person uses Twig in the same browser. Open the profile menu and select **Log out**.
+Now suppose Edgar signs out and a second person uses Twig in the same browser. Open the profile menu and select **Log out**:
 
 <ResetIdentityFigure />
 
@@ -74,7 +74,7 @@ The safe sequence is:
 
 ## See the visit behind an event
 
-to see context around a click, like what led to the event or what the user did next, Twig opens an even't <Term name="session replay">Session Replay</Term> – a playback of what happened in the browser during that visit.
+To see context around a click, like what led to the event or what the user did next, Twig opens an even't <Term name="session replay">Session Replay</Term> – a playback of what happened in the browser during that visit.
 
 PostHog uses the same `$session_id` already attached to the event to find the matching replay. For the **City** click, `session_b2` connects the click to its recorded visit. Because the event’s `distinct_id: anon_7f3` is now linked to `user_812`, PostHog can also connect that visit to Edgar.
 

@@ -1,5 +1,4 @@
 import React from 'react'
-import { Logo } from '@posthog/brand/logo'
 
 const BORDER = 'border-[#d3d0c8]'
 
@@ -13,14 +12,11 @@ export default function PostHogInspector({
 }): JSX.Element {
     return (
         <section
-            aria-label="PostHog inspector"
+            aria-label="Inspector"
             className={`min-w-0 overflow-hidden rounded border ${BORDER} bg-[#fffdfa] font-rounded text-[#292724] shadow-sm [&_details]:!m-0 [&_details]:!rounded-none [&_details]:!border-0 [&_details]:!bg-transparent [&_details]:!pb-0 ${className}`}
         >
             <div className={`flex items-center gap-2 border-b ${BORDER} bg-[#f6f3ed] px-3 py-2 text-sm font-semibold`}>
-                <span aria-hidden="true" className="flex shrink-0 items-center">
-                    <Logo layout="logomark" size={20} />
-                </span>
-                PostHog inspector
+                Inspector
             </div>
             <div aria-live="polite" className="min-w-0 text-sm">
                 {children}

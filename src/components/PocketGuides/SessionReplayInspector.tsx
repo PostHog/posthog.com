@@ -3,7 +3,6 @@ import React from 'react'
 import PostHogInspector from './PostHogInspector'
 
 export type SessionReplayInspectorEvent = {
-    time: string
     timeMs: number
     kind: string
     title: string
@@ -34,13 +33,16 @@ export default function SessionReplayInspector({
             <ol className="m-0 flex-1 list-none divide-y divide-[#e8e4dc] p-0">
                 {events.map((item, index) => (
                     <li
-                        key={`${item.time}-${item.title}`}
+                        key={`${item.timeMs}-${item.title}`}
                         aria-current={activeIndex === index ? 'true' : undefined}
                         className={`m-0 grid grid-cols-[2.2rem_minmax(0,1fr)] gap-1.5 px-2.5 py-2.5 ${
                             activeIndex === index ? 'bg-orange/10' : ''
                         }`}
                     >
-                        <time className="pt-0.5 font-code text-[10px] text-[#716c63]">{item.time}</time>
+                        <time className="pt-0.5 font-code text-[10px] text-[#716c63]">
+                            {Math.floor(item.timeMs / 60000)}:
+                            {String(Math.floor((item.timeMs % 60000) / 1000)).padStart(2, '0')}
+                        </time>
                         <div className="min-w-0">
                             <div className="flex min-w-0 items-start gap-2">
                                 <span

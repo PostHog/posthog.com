@@ -45,6 +45,7 @@ const firstVisit: ExampleEvent[] = [
 
 const REPLAY_VIDEO_URL =
     'https://res.cloudinary.com/dmukukwp6/video/upload/Clean_Shot_2026_09_30_at_3_59_48_PM_19130113ef.mp4'
+const REPLAY_PLAYBACK_RATE = 0.75
 
 const profile = {
     displayName: 'Edgar Hogg',
@@ -79,34 +80,37 @@ function CompactBrowseStays({
     const photo = selected === 'Coast' ? coast : cabin
 
     return (
-        <section className="twig-browser min-w-0 overflow-hidden rounded border border-[#d7c8b6] bg-[#f7eddf] p-4 text-[#2d2b29] @md:p-5">
-            <div className="border-b border-[#d7c8b6] pb-3">
-                <span className="text-sm font-semibold">Browse stays</span>
+        <section
+            aria-label="Twig"
+            className="twig-browser min-w-0 overflow-hidden rounded border border-[#d7c8b6] bg-[#f7eddf] text-[#2d2b29]"
+        >
+            <div className="border-b border-[#d7c8b6] px-3 py-2 font-rounded text-sm font-semibold">Twig</div>
+            <div className="p-4 @md:p-5">
+                <fieldset className="vac-filters !my-3">
+                    <legend className="vac-sr-only">Filter by destination type</legend>
+                    {(['Forest', 'Coast'] as const).map((destination) => (
+                        <button
+                            key={destination}
+                            type="button"
+                            className="vac-filter text-sm font-semibold"
+                            aria-pressed={selected === destination}
+                            onClick={() => onSelect(destination)}
+                        >
+                            {destination}
+                        </button>
+                    ))}
+                </fieldset>
+                <article className="vac-card grid grid-cols-[6rem_minmax(0,1fr)] items-center gap-3 rounded border border-[#d7c8b6] bg-[#fff8ee] p-3 [&_.vac-card-body]:p-0 [&_.vac-card-body_h3]:text-base [&_.vac-card-body_p]:text-xs [&_.vac-card-body>p:nth-of-type(2)]:hidden [&_.vac-card-body>p:last-child]:!mb-0 [&_.vac-image]:aspect-[4/3]">
+                    <StayCardContent
+                        stay={stay}
+                        image={
+                            <div className="vac-image">
+                                <img src={photo} alt={stay.images[0]?.alt ?? ''} />
+                            </div>
+                        }
+                    />
+                </article>
             </div>
-            <fieldset className="vac-filters !my-3">
-                <legend className="vac-sr-only">Filter by destination type</legend>
-                {(['Forest', 'Coast'] as const).map((destination) => (
-                    <button
-                        key={destination}
-                        type="button"
-                        className="vac-filter text-sm font-semibold"
-                        aria-pressed={selected === destination}
-                        onClick={() => onSelect(destination)}
-                    >
-                        {destination}
-                    </button>
-                ))}
-            </fieldset>
-            <article className="vac-card grid grid-cols-[6rem_minmax(0,1fr)] items-center gap-3 rounded border border-[#d7c8b6] bg-[#fff8ee] p-3 [&_.vac-card-body]:p-0 [&_.vac-card-body_h3]:text-base [&_.vac-card-body_p]:text-xs [&_.vac-card-body>p:nth-of-type(2)]:hidden [&_.vac-card-body>p:last-child]:!mb-0 [&_.vac-image]:aspect-[4/3]">
-                <StayCardContent
-                    stay={stay}
-                    image={
-                        <div className="vac-image">
-                            <img src={photo} alt={stay.images[0]?.alt ?? ''} />
-                        </div>
-                    }
-                />
-            </article>
         </section>
     )
 }
@@ -239,7 +243,11 @@ export function IdentifySavedStayFigure(): JSX.Element {
     return (
         <Exhibit stacked onReset={() => setStage('stay')}>
             <div className="grid items-start gap-4 @lg:grid-cols-[minmax(0,1.05fr)_minmax(14rem,0.95fr)]">
-                <section className="twig-browser min-w-0 overflow-hidden rounded border border-[#d7c8b6] bg-[#f7eddf] text-[#2d2b29]">
+                <section
+                    aria-label="Twig"
+                    className="twig-browser min-w-0 overflow-hidden rounded border border-[#d7c8b6] bg-[#f7eddf] text-[#2d2b29]"
+                >
+                    <div className="border-b border-[#d7c8b6] px-3 py-2 font-rounded text-sm font-semibold">Twig</div>
                     <div className="p-3 @md:p-4">
                         {stage === 'login' ? (
                             <LoginView
@@ -327,11 +335,13 @@ export function ResetIdentityFigure(): JSX.Element {
         >
             <div className="grid items-start gap-4 @lg:grid-cols-[minmax(0,1.05fr)_minmax(14rem,0.95fr)]">
                 <section
+                    aria-label="Twig"
                     className={`twig-browser overflow-visible rounded border border-[#d7c8b6] bg-[#f7eddf] text-[#2d2b29] ${
                         signedIn && menuOpen ? 'min-h-[22rem]' : ''
                     }`}
                 >
-                    <header className="relative z-10 flex items-center justify-end border-b border-[#d7c8b6] px-4 py-3">
+                    <div className="relative z-10 flex items-center justify-between border-b border-[#d7c8b6] px-3 py-2">
+                        <span className="font-rounded text-sm font-semibold">Twig</span>
                         {signedIn && (
                             <ProfileMenu
                                 className="[&_.twig-profile-popover]:!top-[calc(100%+6px)] [&_.twig-profile-popover]:!w-32 [&_.twig-profile-summary]:hidden [&_.twig-profile-popover_nav]:hidden [&_.twig-profile-signout]:!px-2.5 [&_.twig-profile-signout]:!py-2.5"
@@ -346,7 +356,7 @@ export function ResetIdentityFigure(): JSX.Element {
                                 }}
                             />
                         )}
-                    </header>
+                    </div>
                     <div className="p-4">{signedIn ? <CompactSavedStays /> : <CompactSignedOutBrowse />}</div>
                 </section>
                 <PostHogInspector>
@@ -392,7 +402,6 @@ export function ResetIdentityFigure(): JSX.Element {
 
 const replayTimeline: SessionReplayInspectorEvent[] = [
     {
-        time: '0:00',
         timeMs: 0,
         kind: 'Pageview',
         title: 'Browse stays',
@@ -403,7 +412,6 @@ const replayTimeline: SessionReplayInspectorEvent[] = [
         ],
     },
     {
-        time: '0:01',
         timeMs: 1100,
         kind: 'Click',
         title: 'Forest filter',
@@ -415,7 +423,6 @@ const replayTimeline: SessionReplayInspectorEvent[] = [
         ],
     },
     {
-        time: '0:03',
         timeMs: 3000,
         kind: 'Click',
         title: 'Coast filter',
@@ -427,7 +434,6 @@ const replayTimeline: SessionReplayInspectorEvent[] = [
         ],
     },
     {
-        time: '0:05',
         timeMs: 4700,
         kind: 'Click',
         title: 'City filter',
@@ -439,7 +445,6 @@ const replayTimeline: SessionReplayInspectorEvent[] = [
         ],
     },
     {
-        time: '0:06',
         timeMs: 5800,
         kind: 'Pageview',
         title: 'Le Nid Chic',
@@ -451,7 +456,6 @@ const replayTimeline: SessionReplayInspectorEvent[] = [
         ],
     },
     {
-        time: '0:08',
         timeMs: 8500,
         kind: 'Click',
         title: 'Save stay',
@@ -464,6 +468,11 @@ const replayTimeline: SessionReplayInspectorEvent[] = [
     },
 ]
 
+const replayInspectorTimeline = replayTimeline.map((event) => ({
+    ...event,
+    timeMs: event.timeMs / REPLAY_PLAYBACK_RATE,
+}))
+
 function formatReplayTime(milliseconds: number): string {
     return `${(milliseconds / 1000).toFixed(1)}s`
 }
@@ -474,6 +483,8 @@ export function SessionReplayLinkFigure(): JSX.Element {
     const [durationMs, setDurationMs] = useState(14_050)
     const [positionMs, setPositionMs] = useState(0)
     const [playing, setPlaying] = useState(false)
+    const playbackDurationMs = durationMs / REPLAY_PLAYBACK_RATE
+    const playbackPositionMs = positionMs / REPLAY_PLAYBACK_RATE
 
     const syncReplayPosition = (video: HTMLVideoElement): void => {
         const nextPosition = video.currentTime * 1000
@@ -502,6 +513,7 @@ export function SessionReplayLinkFigure(): JSX.Element {
             syncReplayPosition(video)
         }
 
+        video.playbackRate = REPLAY_PLAYBACK_RATE
         void video.play()
     }
 
@@ -561,6 +573,7 @@ export function SessionReplayLinkFigure(): JSX.Element {
                                 syncReplayPosition(event.currentTarget)
                             }}
                             onLoadedMetadata={(event) => {
+                                event.currentTarget.playbackRate = REPLAY_PLAYBACK_RATE
                                 setDurationMs(event.currentTarget.duration * 1000)
                                 syncReplayPosition(event.currentTarget)
                             }}
@@ -575,11 +588,11 @@ export function SessionReplayLinkFigure(): JSX.Element {
                         <input
                             aria-label="Replay position"
                             className="col-span-3 col-start-1 row-start-1 my-0 w-full"
-                            max={durationMs}
+                            max={playbackDurationMs}
                             min={0}
-                            step={100}
+                            step="any"
                             type="range"
-                            value={Math.min(positionMs, durationMs)}
+                            value={Math.min(playbackPositionMs, playbackDurationMs)}
                             onChange={(event) => {
                                 const video = videoRef.current
                                 if (!video) {
@@ -587,7 +600,7 @@ export function SessionReplayLinkFigure(): JSX.Element {
                                 }
 
                                 const nextPosition = Number(event.currentTarget.value)
-                                video.currentTime = nextPosition / 1000
+                                video.currentTime = (nextPosition * REPLAY_PLAYBACK_RATE) / 1000
                                 syncReplayPosition(video)
                             }}
                         />
@@ -615,12 +628,12 @@ export function SessionReplayLinkFigure(): JSX.Element {
                             )}
                         </button>
                         <output className="col-start-2 row-start-2 text-xs">
-                            {formatReplayTime(positionMs)} / {formatReplayTime(durationMs)}
+                            {formatReplayTime(playbackPositionMs)} / {formatReplayTime(playbackDurationMs)}
                         </output>
                     </div>
                 </section>
 
-                <SessionReplayInspector events={replayTimeline} activeIndex={activeReplayEvent} />
+                <SessionReplayInspector events={replayInspectorTimeline} activeIndex={activeReplayEvent} />
             </div>
         </Exhibit>
     )
