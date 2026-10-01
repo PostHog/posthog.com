@@ -9,7 +9,7 @@ import { SectionHeading } from '../helpers'
 import Link from 'components/Link'
 import { useApp } from '../../../../context/App'
 import SmallTeam from 'components/SmallTeam'
-import { volumeById } from '../../../../constants/pocketGuides'
+import { pocketGuideUrl, volumeById } from '../../../../constants/pocketGuides'
 
 type CommunityStatsNode = {
     topicId: number | null
@@ -83,11 +83,11 @@ const CommunityQuestions = ({ id, productData }: SectionComponentProps) => {
                         </li>
                         {pocketGuide && (
                             <li className="list-decimal">
-                                <Link to={`/pocket-guides/${pocketGuide.id}`} className="underline font-bold">
+                                <Link to={pocketGuideUrl(pocketGuide)} className="underline font-bold">
                                     Read the pocket guide
                                 </Link>
                                 <p className="text-secondary text-base">
-                                    PostHog use cases, in your pocket. Each chapter ends with a quick start.
+                                    Follow a guided story that introduces {productData.name} one concept at a time.
                                 </p>
                             </li>
                         )}
