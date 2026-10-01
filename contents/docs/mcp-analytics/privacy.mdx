@@ -41,7 +41,7 @@ The SDK runs a deterministic sanitizer:
 - **Credentials inside URLs** – replaced with `[redacted]`. This applies to string values in resource names, parameters, responses, and exception messages. See the URL rules below.
 - **Credential-looking words** – detected through entropy and known formats, such as `sk-…` and PEM markers. The SDK replaces these words in parameters, responses, intent, and exception messages. It preserves surrounding diagnostic text.
 
-Automatic sanitization is not configurable. It detects known key formats and sensitive property names, but it cannot detect every secret. Other text, including exception messages, remains unchanged. Use `beforeSend` for additional filtering.
+Automatic sanitization is not configurable. It detects known key formats and sensitive property names, but it cannot detect every secret. Other text, including exception messages, remains unchanged. Use your [before-send hook](#3-your-before-send-hook-optional) for additional filtering.
 
 #### URL credentials
 
@@ -68,101 +68,118 @@ After sanitization, the payload is truncated to fit within PostHog ingestion lim
 
 If a payload would exceed the budget, the SDK truncates rather than drops. The truncation markers are visible in the captured `$mcp_parameters` / `$mcp_response`.
 
-### 3. `beforeSend` (optional)
+### 3. Your before-send hook (optional)
 
-`beforeSend` runs on each fully-built PostHog payload – `{ event, distinct_id, properties }` – right before it's sent, once per emitted event (including the `$exception` sibling). It mirrors the [`beforeSend` hook in `posthog-node`](/docs/libraries/node) and may be sync or async.
+The hook runs on each fully built payload right before it's sent, once per event, including the `$exception` event of a failed call. It runs after sanitization and truncation, so its changes are final.
 
-- Return the (possibly mutated) event to send it.
-- Return a nullish value (`null`/`undefined`) to **drop** that event.
-- A thrown error also drops that event.
+- Return the event, changed or not, to send it.
+- Return nothing (`null`, `None`, or `nil`) to drop it.
+- An error in the hook also drops the event.
 
-```ts
+<MultiLanguage>
+
+```ts file=TypeScript
 instrument(server, posthog, {
   beforeSend: (event) => {
     if (event.event === "$exception") return null // drop
+    delete event.properties.$mcp_parameters
+    delete event.properties.$mcp_response
     return event
   },
 })
 ```
 
-The hook runs after sanitization and truncation. Changes made in this hook are final before the SDK sends the event.
-
-## Exception autocapture
-
-By default the SDK emits an `$exception` sibling event whenever a tool call fails (throws or returns `isError: true`). Set `enableExceptionAutocapture: false` to suppress that sibling – the `$mcp_tool_call` still records `$mcp_is_error`, but no `$exception` event is sent.
-
-```ts
-instrument(server, posthog, {
-  enableExceptionAutocapture: false,
-})
-```
-
-## Anonymous sessions and person profiles
-
-Events for sessions with no resolved identity are sent with `$process_person_profile: false`, so anonymous MCP sessions do not each create a person profile. When `identify()` resolves an identity for a session, person processing stays on and events attribute to that user. See [Identifying users](/docs/mcp-analytics/identifying-users).
-
-## Disabling capture entirely
-
-Return `null` or `undefined` from `beforeSend` to discard every event. To remove only tool arguments and results, delete these properties:
-
-Intent, error messages, exception details, and custom properties remain unless you remove or disable them separately.
-
-```ts
-beforeSend: (event) => {
-  delete event.properties.$mcp_parameters
-  delete event.properties.$mcp_response
-  return event
-},
-```
-
-<CalloutBox icon="IconInfo" title="Drain the queue before exit" type="fyi">
-
-You manage the `posthog-node` client lifecycle. Call `posthog.shutdown()` or `posthog.flush()` from your shutdown handler, or at the end of each serverless invocation. This sends queued events before the process stops. See the [shutdown example](/docs/mcp-analytics/installation/typescript#send-queued-events-on-shutdown).
-
-</CalloutBox>
-
-## Python
-
-Python uses the same sanitizer, truncation limits, and additional `$exception` events. `before_send` controls the final payload. The SDK sanitizes exception messages and limits them to 2048 characters.
-
-On the `instrument()` path it's an `MCPAnalyticsOptions` field. On the `PostHogMCP` path it's the standard `posthog` client kwarg, which MCP events run through like any other capture:
-
-```python
-from posthog.mcp import instrument, PostHogMCP
+```python file=Python
 from posthog.mcp.types import MCPAnalyticsOptions
 
 def before_send(event):
     if event["event"] == "$exception":
         return None  # drop
+    event["properties"].pop("$mcp_parameters", None)
+    event["properties"].pop("$mcp_response", None)
     return event
 
 instrument(server, posthog, MCPAnalyticsOptions(before_send=before_send))
-
-# custom dispatchers:
-posthog = PostHogMCP("phc_your_project_api_key", before_send=before_send)
 ```
 
-The callback receives the built payload (`event`, `distinct_id`, `properties`, `timestamp`) and runs once per emitted event, including the `$exception` sibling. `MCPAnalyticsOptions.before_send` can be sync or async. The standard `PostHogMCP` client callback must be synchronous. Return the event to send it, or `None` to drop it. A raised exception drops it too and is routed to the logger.
-
-To remove tool arguments, responses, and error messages, strip these properties. Intent, model metadata, and exception details remain unless you remove or disable them separately:
-
-```python
-def before_send(event):
-    event["properties"].pop("$mcp_parameters", None)
-    event["properties"].pop("$mcp_response", None)
-    event["properties"].pop("$mcp_error_message", None)
-    return event
+```go file=Go
+client, err := posthog.NewWithConfig(os.Getenv("POSTHOG_PROJECT_TOKEN"), posthog.Config{
+	BeforeSend: func(msg posthog.Message) posthog.Message {
+		capture, ok := msg.(posthog.Capture)
+		if !ok {
+			return msg
+		}
+		if capture.Event == "$exception" {
+			return nil // drop
+		}
+		delete(capture.Properties, "$mcp_parameters")
+		delete(capture.Properties, "$mcp_response")
+		return capture
+	},
+})
 ```
 
-Set `enable_exception_autocapture=False` (`MCPAnalyticsOptions`) or `mcp_exception_autocapture=False` (`PostHogMCP`) to suppress the `$exception` sibling entirely.
+```ruby file=Ruby
+PostHog::MCP.instrument(
+  server, posthog,
+  before_send: lambda do |event|
+    next nil if event["event"] == "$exception" # drop
+    event["properties"].delete("$mcp_parameters")
+    event["properties"].delete("$mcp_response")
+    event
+  end
+)
+```
 
-## Buffering and back-pressure
+</MultiLanguage>
 
-The in-memory queue is owned by the `posthog-node` client you pass in. If it overflows or fails to flush, events are dropped with a warning surfaced to your `logger`.
+Removing `$mcp_parameters` and `$mcp_response` keeps tool arguments and results out of PostHog. Intent, error messages, exception details, and custom properties stay unless you remove them too.
+
+Language notes:
+
+- **Python:** `MCPAnalyticsOptions.before_send` can be sync or async. On a [`PostHogMCP`](/docs/mcp-analytics/installation/python#custom-dispatchers) dispatcher, pass `before_send=` to the client instead. That callback must be synchronous.
+- **Go:** the hook is the `posthog-go` client's `BeforeSend`, so it also sees your app's other events.
+- **TypeScript:** on a `PostHogMCP` dispatcher, pass `beforeSend` to the client constructor.
+
+Dropping a tool call event doesn't drop its `$exception` event. Check for `$exception` too if you want both gone.
+
+## Turn off exception events
+
+By default, each failed tool call also sends a `$exception` event to [Error Tracking](/docs/error-tracking). Turn it off and the `$mcp_tool_call` event still records `$mcp_is_error`:
+
+<MultiLanguage>
+
+```ts file=TypeScript
+instrument(server, posthog, { enableExceptionAutocapture: false })
+```
+
+```python file=Python
+instrument(server, posthog, MCPAnalyticsOptions(enable_exception_autocapture=False))
+```
+
+```go file=Go
+posthogmcpsdk.Instrument(server, posthogmcp.New(client, posthogmcp.WithExceptionAutocapture(false)))
+```
+
+```ruby file=Ruby
+PostHog::MCP.instrument(server, posthog, enable_exception_autocapture: false)
+```
+
+</MultiLanguage>
+
+On custom dispatchers, use `mcp_exception_autocapture=False` on Python's `PostHogMCP` and `mcp_exception_autocapture: false` on Ruby's `PostHog::MCP::Client`.
+
+## Anonymous sessions and person profiles
+
+Events for sessions with no resolved identity are sent with `$process_person_profile: false`, so anonymous MCP sessions don't each create a person profile. When your identify callback resolves an identity, events attribute to that user. See [Identifying users](/docs/mcp-analytics/identifying-users).
+
+## Buffering
+
+Events queue in the PostHog client you pass in. If the queue overflows or fails to flush, events are dropped. Send queued events before the process stops, as each [installation page](/docs/mcp-analytics/installation) shows.
 
 ## Logging
 
-MCP servers often use stdio. Calls to `console.*` can corrupt the protocol stream. The SDK's default logger writes nothing. Configure a logger during development to see callback errors and warnings:
+MCP servers often use stdio, where writing to stdout corrupts the protocol stream. The SDKs' default loggers write nothing. Pass a logger during development to see callback errors and warnings, such as `logger` in TypeScript, Python, and Ruby, or `WithErrorHandler` in Go:
 
 ```ts
 instrument(server, posthog, {
@@ -170,4 +187,4 @@ instrument(server, posthog, {
 })
 ```
 
-The SDK catches errors from `beforeSend`, `identify`, `intentFallback`, and `eventProperties`. It sends these errors to the logger without interrupting tool execution. If `beforeSend` throws, the SDK also discards that event.
+The SDK catches errors from your callbacks, such as identify, intent fallback, event properties, and before-send. It reports them without interrupting the tool call. If the before-send hook fails, the SDK also drops that event.

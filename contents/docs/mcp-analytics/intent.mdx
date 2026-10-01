@@ -17,7 +17,7 @@ Explicit context always wins. If the agent passes a non-empty `context`, the fal
 
 Intent capture is on by default. The SDK adds a `context` string to compatible tool schemas and removes it before your handler runs when it can confirm it injected the field. An application-owned `context` argument is preserved.
 
-TypeScript advertises the injected field as required. Python makes it optional on raw low-level servers and standalone FastMCP. Calls can omit the injected field without failing validation.
+Every SDK adds the `context` argument by default. TypeScript, Go, and Ruby advertise it as required. Python makes it optional on raw low-level servers and standalone FastMCP. Calls can omit it without failing validation.
 
 What the agent sees in the schema:
 
@@ -35,13 +35,7 @@ What the agent sees in the schema:
 }
 ```
 
-What your handler receives:
-
-```ts
-server.tool("search_events", schema, async (args) => {
-  // args.context has been stripped — only your real arguments are here
-})
-```
+Your handler receives only your own arguments. The SDK removes `context` before the handler runs.
 
 PostHog captures this value as `$mcp_intent`:
 
@@ -55,23 +49,46 @@ PostHog captures this value as `$mcp_intent`:
 
 If you want to nudge the agent toward a specific style of context (use case, user goal, ticket id, etc.), pass an object:
 
-```ts
+<MultiLanguage>
+
+```ts file=TypeScript
 instrument(server, posthog, {
   context: {
-    description: "Describe the user's underlying goal in one sentence — not the tool you're calling.",
+    description: "Describe the user's underlying goal in one sentence, not the tool you're calling.",
   },
 })
 ```
 
+```python file=Python
+from posthog.mcp.types import MCPAnalyticsContextOptions, MCPAnalyticsOptions
+
+instrument(server, posthog, MCPAnalyticsOptions(
+    context=MCPAnalyticsContextOptions(
+        description="Describe the user's underlying goal in one sentence, not the tool you're calling.",
+    ),
+))
+```
+
+```ruby file=Ruby
+PostHog::MCP.instrument(
+  server, posthog,
+  context: { description: "Describe the user's underlying goal in one sentence, not the tool you're calling." }
+)
+```
+
+</MultiLanguage>
+
+The Go SDK uses a fixed prompt.
+
 ### Disabling the injected argument
 
-Set `context: false` to disable the injected intent argument. Use `intentFallback` if you still want to capture intent. Model capture and conversation IDs have separate options. [Disable those options](/docs/mcp-analytics/events#model-capture) to stop their schema changes.
+Turn off the injected argument with `context: false` in TypeScript and Ruby, `MCPAnalyticsOptions(context=False)` in Python, or `posthogmcpsdk.WithContextParameter(false)` in Go. Use an intent fallback if you still want to capture intent. Model capture and conversation IDs have separate options. [Disable those options](/docs/mcp-analytics/events#model-capture) to stop their schema changes.
 
-## The `intentFallback` callback
+## The intent fallback callback
 
 A client can omit the SDK-injected `context` argument. Without a fallback, the event has no `$mcp_intent`.
 
-The SDK calls `intentFallback` when the agent provides no context. It captures a non-empty result as `$mcp_intent` with `$mcp_intent_source = "inferred"`.
+The SDK calls the fallback (`intentFallback` in TypeScript, `intent_fallback` in Python and Ruby) when the agent provides no context. The Go SDK doesn't have a fallback yet. It captures a non-empty result as `$mcp_intent` with `$mcp_intent_source = "inferred"`.
 
 The SDK does no inference of its own. It doesn't call an LLM. It doesn't inspect your tool arguments. It doesn't cache results. Whatever logic you want goes in your callback.
 
@@ -79,7 +96,9 @@ The SDK does no inference of its own. It doesn't call an LLM. It doesn't inspect
 
 Use a synchronous callback when you can derive intent from the tool name and arguments:
 
-```ts
+<MultiLanguage>
+
+```ts file=TypeScript
 instrument(server, posthog, {
   intentFallback: (request) => {
     const tool = request.params?.name
@@ -89,6 +108,22 @@ instrument(server, posthog, {
   },
 })
 ```
+
+```python file=Python
+from posthog.mcp.types import MCPAnalyticsOptions
+
+def intent_fallback(request, extra):
+    params = request.get("params") or {}
+    tool = params.get("name")
+    args = params.get("arguments") or {}
+    if tool == "search_events":
+        return f'Searching events for "{args.get("query")}"'
+    return f"Invoking {tool}" if tool else None
+
+instrument(server, posthog, MCPAnalyticsOptions(intent_fallback=intent_fallback))
+```
+
+</MultiLanguage>
 
 ### Using transport metadata
 
@@ -103,7 +138,7 @@ intentFallback: (request, extra) => {
 }
 ```
 
-`getRequestHeaders` reads headers on both MCP SDK majors – see [MCP SDK v2](/docs/mcp-analytics/installation/typescript#read-request-headers-on-both-sdk-majors).
+In TypeScript, `getRequestHeaders` reads headers on both MCP SDK majors – see [MCP SDK v2](/docs/mcp-analytics/installation/typescript#read-request-headers-on-both-sdk-majors).
 
 ### LLM-derived intent
 
@@ -142,7 +177,7 @@ A high share of `inferred` means most clients do not supply context. Review `con
 
 <CalloutBox icon="IconWarning" title="`get_more_tools` reports its source as `context_parameter`" type="caution">
 
-The virtual `get_more_tools` tool (enabled by `reportMissing: true`) always reports `$mcp_intent_source = "context_parameter"`, even though the SDK is what defined the schema. Defensible – the agent did type a string – but filter it out of source-attribution queries if the number matters.
+The virtual `get_more_tools` tool always reports `$mcp_intent_source = "context_parameter"`, even though the SDK is what defined the schema. Defensible – the agent did type a string – but filter it out of source-attribution queries if the number matters.
 
 </CalloutBox>
 

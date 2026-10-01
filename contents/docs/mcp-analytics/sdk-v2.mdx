@@ -12,7 +12,7 @@ To set up a server on either revision, see the installation page for [TypeScript
 
 That revision removed the `initialize` handshake and the `Mcp-Session-Id` header, so the [stateless session token](/docs/mcp-analytics/installation/typescript#stateless-and-multi-pod-servers) doesn't apply. Use a conversation handle to correlate requests:
 
-- **[Conversation IDs](/docs/mcp-analytics/conversation-id)** – enabled by default in both SDKs. The SDK injects a `conversation_id` parameter and returns a handle in eligible tool results. Calls share a `$session_id` when the agent echoes that handle. Clients that ignore it can still produce a separate session per request.
+- **[Conversation IDs](/docs/mcp-analytics/conversation-id)** – enabled by default in the TypeScript, Python, and Ruby SDKs. The SDK injects a `conversation_id` parameter and returns a handle in eligible tool results. Calls share a `$session_id` when the agent echoes that handle. Clients that ignore it can still produce a separate session per request.
 - **[`identify`](/docs/mcp-analytics/identifying-users)** – attributes calls to a person via `distinct_id`. Use it for user-level grouping. It does not provide a `$session_id`.
 
 The protocol revision belongs to each request. A v2 server also serves `2025-11-25` traffic, which most clients still negotiate.
@@ -27,7 +27,7 @@ On `2025-11-25`, the client sends its name and version only at `initialize`. For
 
 ## Capture model identity on both revisions
 
-Both SDKs capture model identity on `2025-11-25` and `2026-07-28`. Recognized client metadata takes priority over the agent's self-reported `llm_model` argument. `$mcp_llm_model_source` records `"client_metadata"` or `"self_reported"`.
+The TypeScript, Python, and Ruby SDKs capture model identity on `2025-11-25` and `2026-07-28`. Recognized client metadata takes priority over the agent's self-reported `llm_model` argument. `$mcp_llm_model_source` records `"client_metadata"` or `"self_reported"`.
 
 Both sources are unverified. See [model capture](/docs/mcp-analytics/events#model-capture) for how the SDK reads it.
 

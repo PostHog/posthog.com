@@ -9,10 +9,11 @@ import { IconGraph, IconWarning, IconAIText, IconWrench, IconPlug } from '@posth
 import OSButton from 'components/OSButton'
 import CalloutBox from 'components/Docs/CalloutBox'
 import WizardCommand from 'components/WizardCommand'
+import MCPInstallationPlatforms from './installation/_snippets/mcp-installation-platforms'
 
 <CalloutBox icon="IconFlask" title="MCP Analytics is in beta" type="fyi">
 
-`@posthog/mcp` is published as a pre-1.0 release on npm. We're building it in public, so the event shape, options, and tracing behavior may still change before `1.0`. Pin a specific version and don't depend on it for production reporting yet.
+The MCP Analytics SDKs are pre-1.0. We're building them in public, so event shapes and options may still change. Pin a specific version.
 
 </CalloutBox>
 
@@ -26,7 +27,7 @@ icon="IconPlug"
 
 <a id="quest-item-add-posthogmcp-to-your-mcp-server" />
 
-MCP Analytics shows how agents use your server. Add one wrapper call to capture:
+MCP Analytics shows how agents use your server. Wrap your server once to capture:
 
 - 🛠️ Every tool call (parameters, response, duration, errors)
 - 🎯 Agent intent – the *why* behind each call, not just the *what*
@@ -34,67 +35,17 @@ MCP Analytics shows how agents use your server. Add one wrapper call to capture:
 - 🧭 Tool and resource discovery, plus resource reads without their bodies
 - 🪪 The MCP client name and version
 - 🧵 Sessions across calls when the client supplies correlation data
-- 🚧 Capabilities the agent wished existed (with `reportMissing`)
+- 🚧 Capabilities the agent wished existed (opt-in)
 
-Use an existing [supported MCP server](/docs/mcp-analytics/installation) and a PostHog [project token](/docs/getting-started/project-token). Install the analytics package for your language:
+Install the SDK for your server's language. Each guide takes four steps: install the package, wrap your server, send queued events on shutdown, and check your first events.
 
-<MultiLanguage selector="tabs">
+<MCPInstallationPlatforms />
 
-```bash file=TypeScript
-npm install @posthog/mcp posthog-node
-```
+Intent capture and exception events are on by default in every SDK. Model capture and conversation IDs are on by default in the TypeScript, Python, and Ruby SDKs. Missing-capability reports and agent feedback are opt-in.
 
-```bash file=Python
-pip install posthog
-```
-
-</MultiLanguage>
-
-Set `POSTHOG_PROJECT_TOKEN` in your environment. Call `instrument()` once with your existing `server`, before it accepts requests:
-
-<MultiLanguage selector="tabs">
-
-```ts
-import { PostHog } from "posthog-node"
-import { instrument } from "@posthog/mcp"
-
-const posthog = new PostHog(process.env.POSTHOG_PROJECT_TOKEN, {
-  host: "https://us.i.posthog.com",
-})
-
-const analytics = instrument(server, posthog)
-```
-
-```python
-import os
-from posthog import Posthog
-from posthog.mcp import instrument
-
-posthog = Posthog(
-    os.environ["POSTHOG_PROJECT_TOKEN"],
-    host="https://us.i.posthog.com",
-)
-
-analytics = instrument(server, posthog)
-```
-
-</MultiLanguage>
-
-For an EU project, use `https://eu.i.posthog.com` as the host. Keep your existing tool registration and server startup code.
-
-Intent, model capture, conversation IDs, and exception capture are on by default in both SDKs. Missing-capability reporting and agent feedback are opt-in.
-
-Flush queued events before shutdown. Follow the [TypeScript](/docs/mcp-analytics/installation/typescript#send-queued-events-on-shutdown) or [Python](/docs/mcp-analytics/installation/python#send-queued-events-on-shutdown) instructions for your server.
-
-<details>
-
-<summary>Set up TypeScript with the wizard</summary>
-
-The wizard installs the package and configures `instrument()`. It also supports [LLM coding agents](/blog/envoy-wizard-llm-agent), such as Cursor and Bolt:
+For TypeScript and Python servers, the wizard does the setup for you:
 
 <WizardCommand command="mcp-analytics" />
-
-</details>
 
 <OSButton variant="primary" asLink to="/docs/mcp-analytics/installation">
 
@@ -110,7 +61,7 @@ subtitle="Required"
 icon="IconGraph"
 >
 
-Run your MCP server. Connect an agent, such as Claude Desktop, Cursor, Codex, or your own client. PostHog receives `$mcp_tool_call` and `$mcp_tools_list` events when the agent calls tools and requests their listing. Clients on `2025-11-25` also produce `$mcp_initialize`. The handshake-free `2026-07-28` revision has no initialize event.
+Run your MCP server. Connect an agent, such as Claude Desktop, Cursor, Codex, or your own client. PostHog receives `$mcp_tool_call` and `$mcp_tools_list` events when the agent calls tools and requests their listing. Clients on `2025-11-25` also produce `$mcp_initialize`. The handshake-free `2026-07-28` revision has no initialize event. The Go SDK sends only `$mcp_tool_call` and `$exception` for now.
 
 Open the [activity feed](https://app.posthog.com/activity/explore) in your project. Filter for `event = $mcp_tool_call`. Each row represents a tool invocation and includes `$mcp_tool_name`, `$mcp_parameters`, `$mcp_response`, `$mcp_duration_ms`, and `$mcp_is_error`.
 
@@ -137,24 +88,13 @@ icon="IconLock"
 
 The SDK sanitizes each event and truncates it to fit ingestion limits. It removes media payloads and masks known credential patterns, sensitive keys, and credentials inside URLs.
 
-Add `beforeSend` to your existing `instrument()` call to inspect the final payload before the SDK sends it. Return the event to send it. Return `null` or `undefined` to discard it:
-
-```ts
-instrument(server, posthog, {
-  beforeSend: (event) => {
-    if (event.event === "$exception") return null // drop exceptions
-    return event
-  },
-})
-```
+To inspect, change, or drop events before they're sent, add a before-send hook. You can also turn off capture of tool arguments and results.
 
 <OSButton variant="primary" asLink to="/docs/mcp-analytics/privacy">
 
 Privacy & redaction
 
 </OSButton>
-
-For Python, use the [equivalent `before_send` callback](/docs/mcp-analytics/privacy#python).
 
 </QuestLogItem>
 
@@ -164,7 +104,7 @@ subtitle="Recommended"
 icon="IconAIText"
 >
 
-[Model capture](/docs/mcp-analytics/events#model-capture) is on by default in both SDKs. Check `$mcp_tool_call` events for `$mcp_llm_model`. The source, `$mcp_llm_model_source`, is `"client_metadata"` or `"self_reported"`.
+[Model capture](/docs/mcp-analytics/events#model-capture) is on by default in the TypeScript, Python, and Ruby SDKs. Check `$mcp_tool_call` events for `$mcp_llm_model`. The source, `$mcp_llm_model_source`, is `"client_metadata"` or `"self_reported"`.
 
 Use this unverified client input to compare quality, latency, and errors across models, not for billing or security decisions. Some clients report an exact model, others a model family. Missing, blank, and `unknown` values are omitted.
 
@@ -176,26 +116,9 @@ subtitle="Recommended"
 icon="IconAIText"
 >
 
-**Intent** is the user goal that led the agent to call a tool. The SDK adds a `context` argument to compatible tool schemas and captures it as `$mcp_intent`. It removes the argument before your handler runs when it can confirm it injected the field.
+**Intent** is the user goal that led the agent to call a tool. The SDK adds a `context` argument to compatible tool schemas and captures it as `$mcp_intent`. It removes the argument before your handler runs.
 
-```ts
-instrument(server, posthog, {
-  context: {
-    description: "Describe the user's underlying goal in one sentence — not the tool you're calling.",
-  },
-})
-```
-
-For agents that ignore the schema hint (raw cURL clients, schema-blind crawlers), supply an `intentFallback`. The SDK calls it whenever no `context` argument was passed:
-
-```ts
-instrument(server, posthog, {
-  intentFallback: (request) => {
-    const tool = request.params?.name
-    return tool ? `Invoking ${tool}` : null
-  },
-})
-```
+You can change the prompt the agent sees, and supply a fallback for agents that skip the argument.
 
 <OSButton variant="primary" asLink to="/docs/mcp-analytics/intent">
 
@@ -220,7 +143,7 @@ Which tools do agents call most often?
 Which tools fail most often? Use `$exception` events to investigate errors.
 
 - ### <IconAIText className="text-purple w-7 -mt-1 inline-block"/> Intent samples by source
-How much of your traffic supplies explicit context vs falls back to `intentFallback`?
+How much of your traffic supplies explicit context, and how much uses the intent fallback?
 
 - ### <IconWrench className="text-orange w-7 -mt-1 inline-block"/> Advertised tools that never get called
 Join `$mcp_tools_list` with `$mcp_tool_call` to find tools that agents never call.
@@ -248,21 +171,7 @@ subtitle="Recommended"
 icon="IconPerson"
 >
 
-By default, each event uses an SDK-generated session ID. Add an `identify` callback to associate calls with users, person properties, and groups:
-
-```ts
-import { instrument, getRequestHeaders } from "@posthog/mcp"
-
-instrument(server, posthog, {
-  identify: async (request, extra) => {
-    const token = getRequestHeaders(extra)?.["authorization"]
-    const user = token ? await resolveUserFromToken(token) : null
-    return user ? { distinctId: user.id, properties: { name: user.name } } : null
-  },
-})
-```
-
-The SDK emits `$identify` when it observes a new identity for a session. PostHog uses this event to associate earlier anonymous activity. See the [identity merge caveats](/docs/mcp-analytics/identifying-users#identity-merges) for stateless servers.
+By default, each event uses an SDK-generated session ID. Add an identify callback to associate calls with users, person properties, and groups. Return the user from your own auth data, such as the OAuth subject.
 
 <OSButton variant="primary" asLink to="/docs/mcp-analytics/identifying-users">
 
@@ -273,18 +182,12 @@ Identify users
 </QuestLogItem>
 
 <QuestLogItem
-title="Find capability gaps with `reportMissing`"
+title="Find capability gaps"
 subtitle="Recommended"
 icon="IconWrench"
 >
 
-Enable `reportMissing: true` to register the `get_more_tools` virtual tool. Agents can call it to report requests your server cannot satisfy. Use these reports to prioritize capabilities:
-
-```ts
-instrument(server, posthog, {
-  reportMissing: true,
-})
-```
+Turn on missing-capability reports to add the `get_more_tools` virtual tool. Agents call it to report requests your server cannot satisfy. Use these reports to prioritize capabilities:
 
 ```sql
 SELECT

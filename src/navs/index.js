@@ -7672,6 +7672,12 @@ export const docsMenu = {
                     color: 'salmon',
                 },
                 {
+                    name: 'Agent feedback',
+                    url: '/docs/mcp-analytics/feedback',
+                    icon: 'IconMessage',
+                    color: 'blue',
+                },
+                {
                     name: 'Custom events & metadata',
                     url: '/docs/mcp-analytics/custom-events',
                     icon: 'IconBrackets',
