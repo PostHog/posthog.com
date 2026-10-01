@@ -191,7 +191,7 @@ export default function OnlyHogs({ data }: { data: { posts: { nodes: PostSummary
                                                 <p className="mt-0 line-clamp-3 text-sm text-secondary">
                                                     {post.frontmatter.seo?.metaDescription || post.excerpt}
                                                 </p>
-                                                <div className="mt-4 aspect-video overflow-hidden rounded border border-primary bg-primary">
+                                                <div className="mt-4 aspect-video overflow-hidden rounded border border-primary bg-white">
                                                     <PostImage
                                                         post={post}
                                                         className="h-full w-full"
