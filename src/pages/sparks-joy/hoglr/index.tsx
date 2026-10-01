@@ -1,6 +1,7 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { HedgehogChef, HedgehogReading, HedgehogSailorHog, HedgehogSurfer } from '@posthog/brand/hoggies'
 import { graphql, useStaticQuery } from 'gatsby'
+import { GatsbyImage, getImage, ImageDataLike } from 'gatsby-plugin-image'
 import {
     IconGear,
     IconHeart,
@@ -45,10 +46,19 @@ const posts: {
     },
 ]
 
+type BlogAuthor = {
+    handle: string
+    name: string
+    profile_id?: number
+    profile?: { avatar?: { url?: string } }
+}
+
+type ArticleImage = ImageDataLike & { publicURL?: string }
+
 type Article = {
     excerpt: string
     fields: { slug: string }
-    frontmatter: { title: string; date: string }
+    frontmatter: { title: string; date: string; authors?: BlogAuthor[]; featuredImage?: ArticleImage }
 }
 
 type FeedUpdate = {
@@ -57,7 +67,28 @@ type FeedUpdate = {
     snippet: string
     date: string
     kind: 'blog' | 'newsletter'
+    authors?: BlogAuthor[]
+    featuredImage?: ArticleImage
 }
+
+const blogUsernames: Record<string, string> = {
+    'natalia-amorim': 'brazilianwinterproof',
+    'ella-cullen': 'marmiteinmayo',
+    'ian-vanagas': 'westcoastforever',
+    'cory-slater': 'pygmygoatsandtax',
+    'andy-maguire': 'sqlisthenewexcel',
+    'daniel-zaltsman': 'maxmagicmaker',
+    'tue-haulund': 'toomanybikes',
+    'lizzie-epton': 'sailboatdogmum',
+    'thiago-rocha-salvatore': 'occasionalprodexplosion',
+    'joe-martin': 'chainsawclown',
+    'jake-sciotto': 'hawaiianshirtsandpets',
+    'cleo-lant': 'sidequestbard',
+    'charles-cook': '50booksandbadjokes',
+    'sara-miteva': 'ninetybooksandcake',
+}
+
+const blogUsername = ({ handle, name }: BlogAuthor) => blogUsernames[handle] || name
 
 type TeamMember = {
     firstName: string
@@ -106,7 +137,7 @@ export default function Hoglr(): JSX.Element {
                     frontmatter: { date: { ne: null } }
                 }
                 sort: { order: DESC, fields: [frontmatter___date] }
-                limit: 3
+                limit: 20
             ) {
                 nodes {
                     excerpt(pruneLength: 150)
@@ -116,6 +147,22 @@ export default function Hoglr(): JSX.Element {
                     frontmatter {
                         title
                         date(formatString: "MMM D, YYYY")
+                        featuredImage {
+                            publicURL
+                            childImageSharp {
+                                gatsbyImageData(width: 480, height: 270)
+                            }
+                        }
+                        authors: authorData {
+                            handle
+                            name
+                            profile_id
+                            profile {
+                                avatar {
+                                    url
+                                }
+                            }
+                        }
                     }
                 }
             }
@@ -144,66 +191,6 @@ export default function Hoglr(): JSX.Element {
 
     const [searchQuery, setSearchQuery] = useState('')
     const [radarIndex, setRadarIndex] = useState(0)
-    const [blogUpdates, setBlogUpdates] = useState<FeedUpdate[]>(() =>
-        blogArticles.map(({ fields, frontmatter, excerpt }) => ({
-            title: frontmatter.title,
-            url: fields.slug,
-            snippet: excerpt,
-            date: frontmatter.date,
-            kind: 'blog',
-        }))
-    )
-
-    useEffect(() => {
-        if (!['posthog.com', 'www.posthog.com'].includes(window.location.hostname)) return
-
-        const controller = new AbortController()
-        fetch('/rss.xml', { signal: controller.signal })
-            .then((response) => {
-                if (!response.ok) throw new Error('Blog feed unavailable')
-                return response.text()
-            })
-            .then((xml) => {
-                const feed = new DOMParser().parseFromString(xml, 'application/xml')
-                if (feed.querySelector('parsererror')) return
-
-                const latest = Array.from(feed.querySelectorAll('item'))
-                    .map((item): FeedUpdate | null => {
-                        const link = item.querySelector('link')?.textContent
-                        if (!link) return null
-                        try {
-                            const url = new URL(link)
-                            if (url.origin !== 'https://posthog.com' || !url.pathname.startsWith('/blog/')) return null
-                            const date = item.querySelector('pubDate')?.textContent || ''
-                            if (!Number.isFinite(Date.parse(date))) return null
-                            return {
-                                title: item.querySelector('title')?.textContent || '',
-                                url: url.pathname,
-                                snippet: item.querySelector('description')?.textContent || '',
-                                date,
-                                kind: 'blog',
-                            }
-                        } catch {
-                            return null
-                        }
-                    })
-                    .filter((post): post is FeedUpdate => Boolean(post))
-                    .sort((first, second) => Date.parse(second.date) - Date.parse(first.date))
-                    .slice(0, 3)
-
-                if (
-                    latest.length &&
-                    (!blogArticles.length ||
-                        Date.parse(latest[0].date) >= Date.parse(blogArticles[0].frontmatter.date)) &&
-                    !controller.signal.aborted
-                ) {
-                    setBlogUpdates(latest)
-                }
-            })
-            .catch(() => undefined)
-
-        return () => controller.abort()
-    }, [blogArticles])
 
     const profileFor = (firstName: string, lastName: string) =>
         teamMembers.find((member) => member.firstName === firstName && member.lastName === lastName)
@@ -215,7 +202,15 @@ export default function Hoglr(): JSX.Element {
             .includes(query)
     )
     const updates: FeedUpdate[] = [
-        ...blogUpdates,
+        ...blogArticles.map(({ fields, frontmatter, excerpt }) => ({
+            title: frontmatter.title,
+            url: fields.slug,
+            snippet: excerpt,
+            date: frontmatter.date,
+            kind: 'blog' as const,
+            authors: frontmatter.authors,
+            featuredImage: frontmatter.featuredImage,
+        })),
         ...newsletterArticles.map(({ fields, frontmatter, excerpt }) => ({
             title: frontmatter.title,
             url: fields.slug,
@@ -225,7 +220,13 @@ export default function Hoglr(): JSX.Element {
         })),
     ]
         .sort((first, second) => Date.parse(second.date) - Date.parse(first.date))
-        .filter((update) => `${update.title} ${update.snippet} ${update.kind}`.toLowerCase().includes(query))
+        .filter((update) =>
+            `${update.title} ${update.snippet} ${update.kind} ${
+                update.authors?.map((author) => `${author.name} ${blogUsername(author)}`).join(' ') || ''
+            }`
+                .toLowerCase()
+                .includes(query)
+        )
     const radar = radarHoggies[radarIndex]
     const RadarIcon = radar.Icon
 
@@ -466,48 +467,98 @@ export default function Hoglr(): JSX.Element {
                                         </article>
                                     )
                                 })}
-                                {updates.map((update) => (
-                                    <article key={update.url} className="flex items-start gap-2 @lg:gap-4">
-                                        <div className="size-10 shrink-0 overflow-hidden rounded-[3px] bg-white @lg:size-14 @3xl:size-16">
-                                            <img
-                                                src="/images/sparks-joy/hoglr/dj-hoggie.webp"
-                                                alt=""
-                                                className="size-full object-contain"
-                                                width="64"
-                                                height="64"
-                                            />
-                                        </div>
-                                        <div className="relative min-w-0 flex-1 rounded-md bg-white px-3 py-3 text-[#292929] shadow-[0_1px_2px_#1c364f] before:absolute before:-left-1 before:top-5 before:size-2 before:rotate-45 before:bg-white @lg:px-4">
-                                            <p className="m-0 text-[11px] text-[#82909c]">
-                                                <Link
-                                                    to={update.url}
-                                                    state={{ newWindow: true }}
-                                                    className="font-semibold underline"
-                                                >
-                                                    posthog
-                                                </Link>{' '}
-                                                · {update.kind} ·{' '}
-                                                {new Date(update.date).toLocaleDateString('en-US', {
-                                                    month: 'short',
-                                                    day: 'numeric',
-                                                    year: 'numeric',
-                                                })}
-                                            </p>
-                                            <h2 className="my-2 text-base font-bold leading-snug">
-                                                <Link
-                                                    to={update.url}
-                                                    state={{ newWindow: true }}
-                                                    className="text-[#292929] underline"
-                                                >
-                                                    {update.title}
-                                                </Link>
-                                            </h2>
-                                            <p className="m-0 text-xs leading-relaxed text-[#536374]">
-                                                {update.snippet}
-                                            </p>
-                                        </div>
-                                    </article>
-                                ))}
+                                {updates.map((update) => {
+                                    const author = update.authors?.[0]
+                                    const avatar = author?.profile?.avatar?.url
+                                    const image = update.featuredImage && getImage(update.featuredImage)
+
+                                    return (
+                                        <article key={update.url} className="flex items-start gap-2 @lg:gap-4">
+                                            <div className="size-10 shrink-0 overflow-hidden rounded-[3px] bg-white @lg:size-14 @3xl:size-16">
+                                                <img
+                                                    src={avatar || '/images/sparks-joy/hoglr/dj-hoggie.webp'}
+                                                    alt=""
+                                                    className={`size-full ${
+                                                        avatar ? 'object-cover' : 'object-contain'
+                                                    }`}
+                                                    loading="lazy"
+                                                    width="64"
+                                                    height="64"
+                                                />
+                                            </div>
+                                            <div className="relative min-w-0 flex-1 rounded-md bg-white px-3 py-3 text-[#292929] shadow-[0_1px_2px_#1c364f] before:absolute before:-left-1 before:top-5 before:size-2 before:rotate-45 before:bg-white @lg:px-4">
+                                                <p className="m-0 text-[11px] text-[#82909c]">
+                                                    {update.authors?.length ? (
+                                                        update.authors.map((writer, index) => (
+                                                            <React.Fragment key={writer.handle}>
+                                                                {index > 0 && ' & '}
+                                                                {writer.profile_id ? (
+                                                                    <Link
+                                                                        to={`/community/profiles/${writer.profile_id}`}
+                                                                        state={{ newWindow: true }}
+                                                                        className="font-semibold underline"
+                                                                    >
+                                                                        {blogUsername(writer)}
+                                                                    </Link>
+                                                                ) : (
+                                                                    <span className="font-semibold">
+                                                                        {blogUsername(writer)}
+                                                                    </span>
+                                                                )}
+                                                            </React.Fragment>
+                                                        ))
+                                                    ) : (
+                                                        <span className="font-semibold">posthog</span>
+                                                    )}{' '}
+                                                    · {update.kind} ·{' '}
+                                                    {new Date(update.date).toLocaleDateString('en-US', {
+                                                        month: 'short',
+                                                        day: 'numeric',
+                                                        year: 'numeric',
+                                                    })}
+                                                </p>
+                                                <h2 className="my-2 text-base font-bold leading-snug">
+                                                    <Link
+                                                        to={update.url}
+                                                        state={{ newWindow: true }}
+                                                        className="text-[#292929] underline"
+                                                    >
+                                                        {update.title}
+                                                    </Link>
+                                                </h2>
+                                                <p className="m-0 text-xs leading-relaxed text-[#536374]">
+                                                    {update.snippet}
+                                                </p>
+                                                {(image || update.featuredImage?.publicURL) && (
+                                                    <Link
+                                                        to={update.url}
+                                                        state={{ newWindow: true }}
+                                                        aria-label={`Read ${update.title}`}
+                                                        className="mt-3 block w-full"
+                                                    >
+                                                        {image ? (
+                                                            <GatsbyImage
+                                                                image={image}
+                                                                alt={update.title}
+                                                                className="block w-full border border-[#e1e4e5]"
+                                                                loading="lazy"
+                                                            />
+                                                        ) : (
+                                                            <img
+                                                                src={update.featuredImage?.publicURL}
+                                                                alt={update.title}
+                                                                loading="lazy"
+                                                                width="480"
+                                                                height="270"
+                                                                className="block h-auto w-full border border-[#e1e4e5]"
+                                                            />
+                                                        )}
+                                                    </Link>
+                                                )}
+                                            </div>
+                                        </article>
+                                    )
+                                })}
                                 {!visiblePosts.length && !updates.length && (
                                     <p className="ml-12 rounded-[3px] bg-white px-3 py-2 text-xs text-[#292929] @lg:ml-[4.5rem] @3xl:ml-20">
                                         No posts match “{searchQuery.trim()}”.
