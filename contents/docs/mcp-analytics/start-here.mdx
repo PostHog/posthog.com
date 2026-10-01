@@ -9,7 +9,6 @@ import { IconGraph, IconWarning, IconAIText, IconWrench, IconPlug } from '@posth
 import OSButton from 'components/OSButton'
 import CalloutBox from 'components/Docs/CalloutBox'
 import WizardCommand from 'components/WizardCommand'
-import MCPInstallationPlatforms from './installation/_snippets/mcp-installation-platforms'
 
 <CalloutBox icon="IconFlask" title="MCP Analytics is in beta" type="fyi">
 
@@ -37,11 +36,95 @@ MCP Analytics shows how agents use your server. Wrap your server once to capture
 - 🧵 Sessions across calls when the client supplies correlation data
 - 🚧 Capabilities the agent wished existed (opt-in)
 
-Install the SDK for your server's language. Each guide takes four steps: install the package, wrap your server, send queued events on shutdown, and check your first events.
+Install the SDK for your server's language:
 
-<MCPInstallationPlatforms />
+<MultiLanguage>
 
-Every SDK has the same defaults. Intent, model capture, conversation IDs, and exception events are on. Missing-capability reports and agent feedback are opt-in.
+```bash file=TypeScript
+npm install @posthog/mcp posthog-node
+```
+
+```bash file=Python
+pip install posthog
+```
+
+```bash file=Go
+go get github.com/posthog/posthog-go/posthogmcpsdk
+```
+
+```bash file=Ruby
+bundle add posthog-ruby
+```
+
+</MultiLanguage>
+
+Set `POSTHOG_PROJECT_TOKEN` in your environment. Wrap your existing server once, before it accepts requests, and send queued events when the process stops:
+
+<MultiLanguage>
+
+```ts file=TypeScript
+import { PostHog } from "posthog-node"
+import { instrument } from "@posthog/mcp"
+
+const posthog = new PostHog(process.env.POSTHOG_PROJECT_TOKEN, {
+  host: "https://us.i.posthog.com", // or https://eu.i.posthog.com
+})
+
+instrument(server, posthog)
+
+process.on("SIGTERM", async () => {
+  await posthog.shutdown()
+  process.exit(0)
+})
+```
+
+```python file=Python
+import os
+from posthog import Posthog
+from posthog.mcp import instrument
+
+posthog = Posthog(
+    os.environ["POSTHOG_PROJECT_TOKEN"],
+    host="https://us.i.posthog.com",  # or https://eu.i.posthog.com
+)
+
+analytics = instrument(server, posthog)
+
+# when the process stops:
+await analytics.flush()
+posthog.shutdown()
+```
+
+```go file=Go
+client, err := posthog.NewWithConfig(os.Getenv("POSTHOG_PROJECT_TOKEN"), posthog.Config{
+	Endpoint: "https://us.i.posthog.com", // or https://eu.i.posthog.com
+})
+if err != nil {
+	log.Fatal(err)
+}
+defer client.Close()
+
+posthogmcpsdk.Instrument(server, posthogmcp.New(client),
+	posthogmcpsdk.WithServerInfo("my-mcp-server", "1.0.0"),
+)
+```
+
+```ruby file=Ruby
+require "posthog/mcp"
+
+posthog = PostHog::Client.new(
+  api_key: ENV.fetch("POSTHOG_PROJECT_TOKEN"),
+  host: "https://us.i.posthog.com" # or https://eu.i.posthog.com
+)
+
+PostHog::MCP.instrument(server, posthog)
+
+at_exit { posthog.shutdown }
+```
+
+</MultiLanguage>
+
+Every SDK has the same defaults. Intent, model capture, conversation IDs, and exception events are on. Missing-capability reports and agent feedback are opt-in. The Ruby SDK is [experimental](/docs/mcp-analytics/installation/ruby).
 
 For TypeScript and Python servers, the wizard does the setup for you:
 
@@ -88,7 +171,48 @@ icon="IconLock"
 
 The SDK sanitizes each event and truncates it to fit ingestion limits. It removes media payloads and masks known credential patterns, sensitive keys, and credentials inside URLs.
 
-To inspect, change, or drop events before they're sent, add a before-send hook. You can also turn off capture of tool arguments and results.
+To inspect, change, or drop events before they're sent, add a before-send hook. Return the event to send it, or nothing to drop it:
+
+<MultiLanguage>
+
+```ts file=TypeScript
+instrument(server, posthog, {
+  beforeSend: (event) => {
+    delete event.properties.$mcp_response // keep tool results out of PostHog
+    return event
+  },
+})
+```
+
+```python file=Python
+from posthog.mcp.types import MCPAnalyticsOptions
+
+def before_send(event):
+    event["properties"].pop("$mcp_response", None)  # keep tool results out of PostHog
+    return event
+
+instrument(server, posthog, MCPAnalyticsOptions(before_send=before_send))
+```
+
+```go file=Go
+posthogmcpsdk.Instrument(server, posthogmcp.New(client),
+	posthogmcpsdk.WithCaptureResponses(false), // keep tool results out of PostHog
+)
+```
+
+```ruby file=Ruby
+PostHog::MCP.instrument(
+  server, posthog,
+  before_send: lambda do |event|
+    event["properties"].delete("$mcp_response") # keep tool results out of PostHog
+    event
+  end
+)
+```
+
+</MultiLanguage>
+
+In Go, a full before-send hook is the `BeforeSend` field of your `posthog.Config`.
 
 <OSButton variant="primary" asLink to="/docs/mcp-analytics/privacy">
 
@@ -171,7 +295,54 @@ subtitle="Recommended"
 icon="IconPerson"
 >
 
-By default, each event uses an SDK-generated session ID. Add an identify callback to associate calls with users, person properties, and groups. Return the user from your own auth data, such as the OAuth subject.
+By default, each event uses an SDK-generated session ID. Add an identify callback to associate calls with users, person properties, and groups. Return the user from your own auth data, such as the OAuth subject:
+
+<MultiLanguage>
+
+```ts file=TypeScript
+import { instrument, getRequestHeaders } from "@posthog/mcp"
+
+instrument(server, posthog, {
+  identify: async (request, extra) => {
+    const user = await resolveUser(getRequestHeaders(extra)?.["authorization"])
+    return user ? { distinctId: user.id, properties: { plan: user.plan } } : null
+  },
+})
+```
+
+```python file=Python
+from posthog.mcp import get_request_headers
+from posthog.mcp.types import MCPAnalyticsOptions, UserIdentity
+
+async def identify(request, extra):
+    user = await resolve_user((get_request_headers(extra) or {}).get("authorization"))
+    return UserIdentity(distinct_id=user.id, properties={"plan": user.plan}) if user else None
+
+instrument(server, posthog, MCPAnalyticsOptions(identify=identify))
+```
+
+```go file=Go
+posthogmcpsdk.Instrument(server, posthogmcp.New(client),
+	posthogmcpsdk.WithIdentity(func(ctx context.Context, req *mcp.CallToolRequest) (posthogmcpsdk.Identity, error) {
+		if req.Extra == nil || req.Extra.TokenInfo == nil {
+			return posthogmcpsdk.Identity{}, nil
+		}
+		return posthogmcpsdk.Identity{DistinctID: req.Extra.TokenInfo.UserID}, nil
+	}),
+)
+```
+
+```ruby file=Ruby
+PostHog::MCP.instrument(
+  server, posthog,
+  identify: ->(_request, extra) {
+    user = resolve_user(extra["headers"]["authorization"])
+    user && { distinct_id: user.id, properties: { plan: user.plan } }
+  }
+)
+```
+
+</MultiLanguage>
 
 <OSButton variant="primary" asLink to="/docs/mcp-analytics/identifying-users">
 
@@ -187,7 +358,25 @@ subtitle="Recommended"
 icon="IconWrench"
 >
 
-Turn on missing-capability reports to add the `get_more_tools` virtual tool. Agents call it to report requests your server cannot satisfy. Use these reports to prioritize capabilities:
+Turn on missing-capability reports to add the `get_more_tools` virtual tool. Agents call it to report requests your server cannot satisfy. The Go SDK doesn't support it yet:
+
+<MultiLanguage>
+
+```ts file=TypeScript
+instrument(server, posthog, { reportMissing: true })
+```
+
+```python file=Python
+instrument(server, posthog, MCPAnalyticsOptions(report_missing=True))
+```
+
+```ruby file=Ruby
+PostHog::MCP.instrument(server, posthog, report_missing: true)
+```
+
+</MultiLanguage>
+
+Use these reports to prioritize capabilities:
 
 ```sql
 SELECT
