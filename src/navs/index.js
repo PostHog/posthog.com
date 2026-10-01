@@ -1440,6 +1440,10 @@ export const handbookSidebar = [
                         url: '/handbook/growth/sales/how-to-pitch-self-driving',
                     },
                     {
+                        name: 'Reverse demo calls',
+                        url: '/handbook/growth/sales/reverse-demo-calls',
+                    },
+                    {
                         name: 'Expansion, cross-sell & retention',
                         url: '/handbook/growth/sales/expansion-and-retention',
                     },
@@ -1494,10 +1498,6 @@ export const handbookSidebar = [
                     {
                         name: 'Engagement lifecycle',
                         url: '/handbook/cs-and-onboarding/lifecycle-csm',
-                    },
-                    {
-                        name: 'Customer-led calls',
-                        url: '/handbook/cs-and-onboarding/customer-led-calls',
                     },
                     {
                         name: 'Unengaged customers',
