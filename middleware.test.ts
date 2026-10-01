@@ -2,8 +2,9 @@ import assert from 'node:assert/strict'
 import { readdirSync } from 'node:fs'
 import { test } from 'node:test'
 
-import middleware, { TRANSLATED_LOCALES } from './middleware.ts'
+import middleware from './middleware.ts'
 import { SKIP_TRANSLATION_COOKIE } from './src/i18n/cookie.ts'
+import { TRANSLATED_LOCALES } from './src/i18n/preferredLocale.ts'
 
 const page = 'https://posthog.com/docs/product-analytics'
 
