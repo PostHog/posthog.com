@@ -8,7 +8,7 @@ import { Steps, Step } from 'components/Docs/Steps'
 
 <CalloutBox icon="IconFlask" title="Beta SDK" type="fyi">
 
-The Go SDK is in beta and captures fewer events than the TypeScript and Python SDKs. See [What the Go SDK doesn't capture yet](#what-the-go-sdk-doesnt-capture-yet).
+The Go SDK is in beta. It has the same defaults as the other SDKs, but captures fewer events and has fewer optional features. See [What the Go SDK doesn't capture yet](#what-the-go-sdk-doesnt-capture-yet).
 
 </CalloutBox>
 
@@ -110,7 +110,9 @@ Every event has a `$session_id`:
 
 - **Streamable HTTP with sessions:** the SDK hashes the transport's session ID into `ses_` plus 32 hex characters. Every PostHog MCP SDK computes the same value, so a session served from several languages groups together.
 - **stdio and in-memory transports:** the SDK generates a `ses_` ID per go-sdk session and starts a new one after 30 minutes without a tool call.
-- **Stateless HTTP:** each request is its own go-sdk session, so each call gets its own `$session_id`. Use `WithIdentity` to group calls by user.
+- **Stateless HTTP:** there's no transport session, so the SDK uses [conversation IDs](/docs/mcp-analytics/conversation-id). It returns a handle in the first result, and calls that echo it share a `$session_id`. A client that ignores the handle gets a new session per request. Use `WithIdentity` to group those calls by user.
+
+A valid conversation handle also takes priority over the transport session, so a conversation that reconnects stays in one session.
 
 ## Configuration
 
@@ -118,6 +120,8 @@ Every event has a `$session_id`:
 | --- | --- | --- |
 | `WithServerInfo(name, version)` | – | Adds the server name and version to each event. |
 | `WithContextParameter(bool)` | `true` | Adds a required `context` argument to capture [agent intent](/docs/mcp-analytics/intent). The SDK removes it before your handler and go-sdk's input validation run. |
+| `WithCaptureModel(bool)` | `true` | Captures the [calling model](/docs/mcp-analytics/events#model-capture) from client metadata, or from a required `llm_model` argument the SDK adds. |
+| `WithConversationID(bool)` | `true` | Adds an optional `conversation_id` argument to [group calls](/docs/mcp-analytics/conversation-id) across requests. |
 | `WithIdentity(resolver)` | – | Maps a call to a person and groups. See [Identify the caller](#identify-the-caller). |
 | `WithProperties(resolver)` | – | Adds properties to each event. The resolver also receives the result and the handler's error. |
 | `WithCaptureParameters(bool)` | `true` | Captures the tool arguments as `$mcp_parameters`. |
@@ -126,7 +130,7 @@ Every event has a `$session_id`:
 
 To stop the `$exception` event for failed calls, pass `posthogmcp.WithExceptionAutocapture(false)` to `posthogmcp.New`. To change or drop events before they're sent, use `BeforeSend` in your `posthog.Config`. See [Privacy](/docs/mcp-analytics/privacy).
 
-The SDK learns each tool's schema from `tools/list` and refreshes it when the server sends `notifications/tools/list_changed`. A tool that declares its own `context` argument keeps it, and its value is still captured as intent. Schemas built from `$ref`, `allOf`, `anyOf`, or `oneOf` get no `context` argument.
+The SDK learns each tool's schema from `tools/list` and refreshes it when the server sends `notifications/tools/list_changed`. A tool that declares its own `context`, `llm_model`, or `conversation_id` argument keeps it. Schemas built from `$ref`, `allOf`, `anyOf`, or `oneOf` get no added arguments.
 
 ## Middleware order
 
@@ -170,12 +174,9 @@ Pass a stable `SessionID` yourself. The SDK doesn't set one on this path.
 
 The Go SDK sends `$mcp_tool_call` and `$exception` events. It doesn't yet have:
 
-- [Conversation IDs](/docs/mcp-analytics/conversation-id), so a stateless server's calls don't share a session
-- [Model capture](/docs/mcp-analytics/events#model-capture)
 - An intent fallback callback
 - [Missing capability](/docs/mcp-analytics/missing-capability) and agent feedback tools
 - `$mcp_tools_list`, `$mcp_initialize`, and resource events
-- The `$mcp_client_user_agent` and `$mcp_vendor_client` properties
 - Wizard support
 
 Go events report `$lib: "posthog-go"`.

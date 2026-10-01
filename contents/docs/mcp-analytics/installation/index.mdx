@@ -22,7 +22,7 @@ Each page has a Markdown version for coding agents. Add `.md` to the URL, such a
 
 ## What each SDK captures
 
-Every SDK sends the same `$mcp_*` events, so your insights and dashboards work across languages. The SDKs differ in which features they implement:
+Every SDK sends the same `$mcp_*` events with the same defaults, so your insights and dashboards work across languages. The SDKs differ in which optional features they implement:
 
 | Feature | TypeScript | Python | Go | Ruby |
 | --- | --- | --- | --- | --- |
@@ -30,8 +30,8 @@ Every SDK sends the same `$mcp_*` events, so your insights and dashboards work a
 | Tool listings, handshakes, and resource reads | Yes | Yes | No | Yes |
 | [Agent intent](/docs/mcp-analytics/intent) (`context` argument) | Yes | Yes | Yes | Yes |
 | Intent fallback callback | Yes | Yes | No | Yes |
-| [Model capture](/docs/mcp-analytics/events#model-capture) | Yes | Yes | No | Yes |
-| [Conversation IDs](/docs/mcp-analytics/conversation-id) | Yes | Yes | No | Yes |
+| [Model capture](/docs/mcp-analytics/events#model-capture) | Yes | Yes | Yes | Yes |
+| [Conversation IDs](/docs/mcp-analytics/conversation-id) | Yes | Yes | Yes | Yes |
 | [Identifying users](/docs/mcp-analytics/identifying-users) | Yes | Yes | Yes | Yes |
 | [Missing capabilities](/docs/mcp-analytics/missing-capability) (`get_more_tools`) | Yes | Yes | No | Yes |
 | Agent feedback (`send_feedback`) | Yes | Yes | No | No |
