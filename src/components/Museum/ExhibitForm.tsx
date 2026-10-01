@@ -96,7 +96,7 @@ export const ExhibitForm = ({
     location?: { pathname: string }
     newWindow?: boolean
 }): JSX.Element => {
-    const { getJwt } = useUser()
+    const { getJwt, user } = useUser()
     const { addToast } = useToast()
     const { closeWindow } = useApp()
     const { appWindow } = useWindow()
@@ -147,7 +147,18 @@ export const ExhibitForm = ({
                     curators: values.curators,
                     stops: values.stops,
                     ...(values.coverImage !== undefined && {
-                        coverImage: values.coverImage && (await uploadImage(values.coverImage.file, jwt))?.id,
+                        // Attached to the uploader's profile so it shows under "My uploads" in the media library
+                        coverImage:
+                            values.coverImage &&
+                            (
+                                await uploadImage(
+                                    values.coverImage.file,
+                                    jwt,
+                                    user?.profile?.id
+                                        ? { id: user.profile.id, type: 'api::profile.profile', field: 'images' }
+                                        : undefined
+                                )
+                            )?.id,
                     }),
                 }
                 await museumRequest(

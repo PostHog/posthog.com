@@ -20,8 +20,17 @@ type Artifact = StrapiRecord<MuseumArtifact>
 type FormImage = UploadImage | StrapiRecord<MuseumImage>
 
 const isUpload = (image: FormImage): image is UploadImage => 'file' in image
-const upload = async (image: FormImage, jwt: string) =>
-    isUpload(image) ? (await uploadImage(image.file, jwt))?.id : image.id
+// Attached to the uploader's profile so it shows under "My uploads" in the media library
+const upload = async (image: FormImage, jwt: string, profileId?: number) =>
+    isUpload(image)
+        ? (
+              await uploadImage(
+                  image.file,
+                  jwt,
+                  profileId ? { id: profileId, type: 'api::profile.profile', field: 'images' } : undefined
+              )
+          )?.id
+        : image.id
 const preview = (image: FormImage) => (isUpload(image) ? image.objectURL : image.attributes.url)
 
 const validationSchema = Yup.object({
@@ -52,7 +61,7 @@ export const ArtifactForm = ({
     location?: { pathname: string }
     newWindow?: boolean
 }): JSX.Element => {
-    const { getJwt } = useUser()
+    const { getJwt, user } = useUser()
     const { addToast } = useToast()
     const { closeWindow } = useApp()
     const { appWindow } = useWindow()
@@ -120,8 +129,8 @@ export const ArtifactForm = ({
                     // Links another artifact already stores stay on that artifact
                     relatedArtifacts: values.related.filter((id) => !incoming.includes(id)),
                     credits: values.credits,
-                    heroImage: values.heroImage ? await upload(values.heroImage, jwt) : null,
-                    gallery: await Promise.all(values.gallery.map((image) => upload(image, jwt))),
+                    heroImage: values.heroImage ? await upload(values.heroImage, jwt, user?.profile?.id) : null,
+                    gallery: await Promise.all(values.gallery.map((image) => upload(image, jwt, user?.profile?.id))),
                 }
                 const saved = await museumRequest(
                     artifact ? `museum-artifacts/${artifact.id}` : 'museum-artifacts',
