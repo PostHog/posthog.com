@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { HedgehogReading, HedgehogReadingIsMagic } from '@posthog/brand/hoggies'
 import { graphql, useStaticQuery } from 'gatsby'
+import { Helmet } from 'react-helmet'
 import Link from 'components/Link'
 import ReaderView from 'components/ReaderView'
 import SEO from 'components/seo'
@@ -8,32 +9,76 @@ import { AVATAR_FALLBACK_URL } from 'constants/index'
 
 type Friend = { squeakId: number; firstName: string | null; lastName: string | null; avatar: { url: string } | null }
 
-const favorites = [
-    {
+const books = {
+    noRulesRules: {
         title: 'No Rules Rules',
         author: 'Reed Hastings and Erin Meyer',
-        cover: 'bg-[#392719] text-[#fff3de]',
-        review: 'No rules? My AI agent still asked for permission before opening a pull request. Five stars for optimism.',
+        url: 'https://www.goodreads.com/book/show/51718082-no-rules-rules',
+        cover: 'https://m.media-amazon.com/images/S/compressed.photo.goodreads.com/books/1582617287i/51718082.jpg',
     },
-    {
+    exhalation: {
         title: 'Exhalation',
         author: 'Ted Chiang',
-        cover: 'bg-[#b66e3f] text-[#fff9eb]',
-        review: 'I asked a model for a one-line summary. It used my whole token budget and asked what it means to be human.',
+        url: 'https://www.goodreads.com/book/show/41160292-exhalation',
+        cover: 'https://m.media-amazon.com/images/S/compressed.photo.goodreads.com/books/1534388394i/41160292.jpg',
     },
-    {
+    projectHailMary: {
         title: 'Project Hail Mary',
         author: 'Andy Weir',
-        cover: 'bg-[#234453] text-[#fff9eb]',
-        review: 'I could solve this with one prompt. The model would also forget to turn the spaceship around.',
+        url: 'https://www.goodreads.com/book/show/54493401-project-hail-mary',
+        cover: 'https://m.media-amazon.com/images/S/compressed.photo.goodreads.com/books/1764703833i/54493401.jpg',
+    },
+    panamaPapers: {
+        title: 'The Panama Papers',
+        author: 'Bastian Obermayer and Frederik Obermaier',
+        url: 'https://www.goodreads.com/book/show/34396006-the-panama-papers',
+        cover: 'https://m.media-amazon.com/images/S/compressed.photo.goodreads.com/books/1488074336i/34396006.jpg',
+    },
+    sixEasyPieces: {
+        title: 'Six Easy Pieces',
+        author: 'Richard Feynman',
+        url: 'https://www.goodreads.com/book/show/5553.Six_Easy_Pieces',
+        cover: 'https://m.media-amazon.com/images/S/compressed.photo.goodreads.com/books/1400827293i/5553.jpg',
+    },
+    dune: {
+        title: 'Dune',
+        author: 'Frank Herbert',
+        url: 'https://www.goodreads.com/book/show/44767458-dune',
+        cover: 'https://m.media-amazon.com/images/S/compressed.photo.goodreads.com/books/1555447414i/44767458.jpg',
+    },
+    orderOfTime: {
+        title: 'The Order of Time',
+        author: 'Carlo Rovelli',
+        url: 'https://www.goodreads.com/book/show/36442813-the-order-of-time',
+        cover: 'https://m.media-amazon.com/images/S/compressed.photo.goodreads.com/books/1516424407i/36442813.jpg',
+    },
+}
+
+const favorites = [
+    {
+        ...books.noRulesRules,
+        review: "Do NOT apply this book to your marriage, my partner did not appreciate me 'testing the market for a better offer'.",
+    },
+    {
+        ...books.exhalation,
+        review: 'My brain is so rotted by the algo that short stories are all I can handle (and even some of these were a bit long).',
+    },
+    {
+        ...books.projectHailMary,
+        review: "The main character isn't as smart as me - I watch Rick and Morty - but otherwise thought this was pretty good.",
     },
 ]
 
 const shelves = [
-    { name: 'read', books: ['The Panama Papers', 'Exhalation', 'Six Easy Pieces', 'Dune', 'No Rules Rules'] },
-    { name: 'currently reading', books: ['Dune (again)'] },
-    { name: 'to read', books: ['Project Hail Mary', 'The Order of Time'] },
+    {
+        name: 'read',
+        books: [books.panamaPapers, books.exhalation, books.sixEasyPieces, books.dune, books.noRulesRules],
+    },
+    { name: 'currently reading', books: [{ ...books.dune, title: 'Dune (again)' }] },
+    { name: 'to read', books: [books.projectHailMary, books.orderOfTime] },
 ]
+
+const serifFont = { fontFamily: '"Merriweather", Georgia, serif' }
 
 export default function Hogreads(): JSX.Element {
     const { team }: { team: { nodes: Friend[] } } = useStaticQuery(graphql`
@@ -67,26 +112,38 @@ export default function Hogreads(): JSX.Element {
 
     return (
         <>
+            <Helmet>
+                <link rel="preconnect" href="https://fonts.googleapis.com" />
+                <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+                <link
+                    rel="stylesheet"
+                    href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Merriweather:wght@400;700&display=swap"
+                />
+            </Helmet>
             <SEO
                 title="Hogreads – PostHog's bookish profile"
                 description="See PostHog's favorite books, BookHog shelves, and friends on Hogreads."
             />
             <ReaderView hideAppOptions hideRightSidebar hideLeftSidebar showQuestions={false}>
-                <div className="@container not-prose min-h-full bg-[#fffdfb] text-[#382110] dark:bg-[#211c19] dark:text-[#f4e9da]">
+                <div
+                    className="@container not-prose min-h-full bg-white text-[#181818] dark:bg-[#211c19] dark:text-[#f4e9da]"
+                    style={{ fontFamily: '"Lato", "Helvetica Neue", Helvetica, Arial, sans-serif' }}
+                >
                     <nav
                         aria-label="Hogreads"
-                        className="border-b border-[#ded8d1] bg-[#f4f1ea] dark:border-[#55463b] dark:bg-[#302820]"
+                        className="border-b border-[#d6d0c4] bg-[#faf8f6] text-[#382110] dark:border-[#55463b] dark:bg-[#302820] dark:text-[#f4e9da]"
                     >
                         <div className="mx-auto flex max-w-[72rem] flex-wrap items-center gap-x-6 gap-y-2 px-4 py-3 @lg:px-7">
                             <Link
                                 to="/hogreads"
-                                className="flex items-center gap-1.5 font-serif text-3xl tracking-tight !text-inherit no-underline"
+                                className="flex items-center gap-1.5 text-3xl tracking-tight !text-inherit no-underline"
+                                style={serifFont}
                                 aria-label="Hogreads home"
                             >
                                 <HedgehogReading className="h-9 w-9" aria-hidden="true" />
                                 hogreads
                             </Link>
-                            <div className="flex flex-wrap items-center gap-x-5 gap-y-2 text-sm">
+                            <div className="flex flex-wrap items-center gap-x-5 gap-y-2 text-base">
                                 <Link to="/sparks-joy" className="!text-inherit no-underline hover:underline">
                                     Home
                                 </Link>
@@ -133,16 +190,20 @@ export default function Hogreads(): JSX.Element {
                                         </p>
                                     </div>
                                     <div className="min-w-0 flex-1">
-                                        <h1 className="border-b border-[#ded8d1] pb-2 font-serif text-3xl font-bold dark:border-[#55463b]">
+                                        <h1
+                                            className="border-b border-[#d6d0c4] pb-2 text-3xl font-bold text-[#382110] dark:border-[#55463b] dark:text-[#f4e9da]"
+                                            style={serifFont}
+                                        >
                                             PostHog
                                         </h1>
                                         <p className="mt-3 text-sm text-[#69605a] dark:text-[#c5b9ab]">
                                             San Francisco, California · Usually online
                                         </p>
                                         <p className="mt-4 max-w-prose text-sm leading-relaxed">
-                                            I like long walks through event streams, short release cycles, and books
-                                            that explain why my last experiment failed. I join a book club once a month
-                                            and bring a dashboard to every meeting.
+                                            I'm a San Francisco tech bro with a monthly book club and strong opinions. I
+                                            read Feynman to sound smart, Dune to sound deep, and The Panama Papers to
+                                            check my ethics. I call our book votes "data-driven" until I lose. I asked
+                                            AI to summarize Exhalation. The club asked if I had read it. Rude.
                                         </p>
                                         <Link
                                             to="/handbook/people/bookhog"
@@ -156,21 +217,35 @@ export default function Hogreads(): JSX.Element {
                                 <section aria-labelledby="favorites-heading">
                                     <h2
                                         id="favorites-heading"
-                                        className="border-b border-[#ded8d1] pb-2 text-sm font-bold uppercase dark:border-[#55463b]"
+                                        className="border-b border-[#d6d0c4] pb-2 text-sm font-bold uppercase text-[#382110] dark:border-[#55463b] dark:text-[#f4e9da]"
                                     >
                                         PostHog's favorite books
                                     </h2>
                                     <div className="grid grid-cols-3 gap-3 pt-4 @md:gap-5">
                                         {favorites.map((book) => (
                                             <div key={book.title} className="min-w-0">
-                                                <div
-                                                    className={`flex aspect-[2/3] max-h-44 items-center justify-center border-l-4 border-black/20 p-2 text-center shadow-sm ${book.cover}`}
+                                                <a
+                                                    href={book.url}
+                                                    target="_blank"
+                                                    rel="noopener noreferrer"
+                                                    className="inline-block max-w-full"
                                                 >
-                                                    <span className="font-serif text-sm font-bold leading-tight @md:text-lg">
+                                                    <img
+                                                        src={book.cover}
+                                                        alt={`${book.title} cover`}
+                                                        className="h-32 max-w-full object-contain shadow-sm @md:h-44"
+                                                    />
+                                                </a>
+                                                <p className="mt-2 text-sm font-semibold">
+                                                    <a
+                                                        href={book.url}
+                                                        target="_blank"
+                                                        rel="noopener noreferrer"
+                                                        className="text-[#00635d] hover:underline dark:text-[#79d6c6]"
+                                                    >
                                                         {book.title}
-                                                    </span>
-                                                </div>
-                                                <p className="mt-2 text-sm font-semibold">{book.title}</p>
+                                                    </a>
+                                                </p>
                                                 <p className="text-xs text-[#69605a] dark:text-[#c5b9ab]">
                                                     {book.author}
                                                 </p>
@@ -182,7 +257,7 @@ export default function Hogreads(): JSX.Element {
                                 <section aria-labelledby="shelves-heading">
                                     <h2
                                         id="shelves-heading"
-                                        className="border-b border-[#ded8d1] pb-2 text-sm font-bold uppercase dark:border-[#55463b]"
+                                        className="border-b border-[#d6d0c4] pb-2 text-sm font-bold uppercase text-[#382110] dark:border-[#55463b] dark:text-[#f4e9da]"
                                     >
                                         PostHog's bookshelves
                                     </h2>
@@ -193,8 +268,23 @@ export default function Hogreads(): JSX.Element {
                                                     {shelf.name} ({shelf.name === 'read' ? 23 : shelf.books.length})
                                                 </h3>
                                                 <ul className="mt-2 space-y-1 text-sm">
-                                                    {shelf.books.map((title) => (
-                                                        <li key={title}>{title}</li>
+                                                    {shelf.books.map((book) => (
+                                                        <li key={book.title}>
+                                                            <a
+                                                                href={book.url}
+                                                                target="_blank"
+                                                                rel="noopener noreferrer"
+                                                                className="flex items-center gap-2 text-[#00635d] hover:underline dark:text-[#79d6c6]"
+                                                            >
+                                                                <img
+                                                                    src={book.cover}
+                                                                    alt=""
+                                                                    loading="lazy"
+                                                                    className="h-11 w-8 shrink-0 object-contain"
+                                                                />
+                                                                <span>{book.title}</span>
+                                                            </a>
+                                                        </li>
                                                     ))}
                                                 </ul>
                                             </div>
@@ -211,16 +301,35 @@ export default function Hogreads(): JSX.Element {
                                 <section aria-labelledby="reading-heading">
                                     <h2
                                         id="reading-heading"
-                                        className="border-b border-[#ded8d1] pb-2 text-sm font-bold uppercase dark:border-[#55463b]"
+                                        className="border-b border-[#d6d0c4] pb-2 text-sm font-bold uppercase text-[#382110] dark:border-[#55463b] dark:text-[#f4e9da]"
                                     >
                                         PostHog is currently reading
                                     </h2>
                                     <div className="flex gap-4 pt-4">
-                                        <div className="flex h-32 w-20 shrink-0 items-center justify-center border-l-4 border-black/20 bg-[#a7854c] p-2 text-center font-serif text-lg font-bold text-[#241a11] shadow-sm">
-                                            Dune
-                                        </div>
+                                        <a
+                                            href={books.dune.url}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            className="shrink-0"
+                                        >
+                                            <img
+                                                src={books.dune.cover}
+                                                alt="Dune cover"
+                                                loading="lazy"
+                                                className="h-32 w-20 object-cover shadow-sm"
+                                            />
+                                        </a>
                                         <div className="text-sm">
-                                            <p className="font-serif text-lg font-bold">Dune</p>
+                                            <p className="text-lg font-bold" style={serifFont}>
+                                                <a
+                                                    href={books.dune.url}
+                                                    target="_blank"
+                                                    rel="noopener noreferrer"
+                                                    className="text-[#00635d] hover:underline dark:text-[#79d6c6]"
+                                                >
+                                                    Dune
+                                                </a>
+                                            </p>
                                             <p className="text-[#69605a] dark:text-[#c5b9ab]">by Frank Herbert</p>
                                             <p className="mt-3">
                                                 Reading it again. This time the spice is token usage.
@@ -235,14 +344,23 @@ export default function Hogreads(): JSX.Element {
                                 <section aria-labelledby="reviews-heading">
                                     <h2
                                         id="reviews-heading"
-                                        className="border-b border-[#ded8d1] pb-2 text-sm font-bold uppercase dark:border-[#55463b]"
+                                        className="border-b border-[#d6d0c4] pb-2 text-sm font-bold uppercase text-[#382110] dark:border-[#55463b] dark:text-[#f4e9da]"
                                     >
                                         PostHog's reviews
                                     </h2>
-                                    <div className="divide-y divide-[#ded8d1] dark:divide-[#55463b]">
+                                    <div className="divide-y divide-[#d6d0c4] dark:divide-[#55463b]">
                                         {favorites.map((book) => (
                                             <article key={book.title} className="py-4 text-sm">
-                                                <h3 className="font-serif text-lg font-bold">{book.title}</h3>
+                                                <h3 className="text-lg font-bold" style={serifFont}>
+                                                    <a
+                                                        href={book.url}
+                                                        target="_blank"
+                                                        rel="noopener noreferrer"
+                                                        className="text-[#00635d] hover:underline dark:text-[#79d6c6]"
+                                                    >
+                                                        {book.title}
+                                                    </a>
+                                                </h3>
                                                 <p
                                                     className="text-[#b26015] dark:text-[#ffbd57]"
                                                     aria-label="Five stars"
@@ -260,7 +378,7 @@ export default function Hogreads(): JSX.Element {
                                 <section aria-labelledby="friends-heading">
                                     <h2
                                         id="friends-heading"
-                                        className="border-b border-[#ded8d1] pb-2 text-sm font-bold uppercase dark:border-[#55463b]"
+                                        className="border-b border-[#d6d0c4] pb-2 text-sm font-bold uppercase text-[#382110] dark:border-[#55463b] dark:text-[#f4e9da]"
                                     >
                                         PostHog's friends ({friends.length})
                                     </h2>
@@ -287,11 +405,11 @@ export default function Hogreads(): JSX.Element {
                                 <section aria-labelledby="quotes-heading">
                                     <h2
                                         id="quotes-heading"
-                                        className="border-b border-[#ded8d1] pb-2 text-sm font-bold uppercase dark:border-[#55463b]"
+                                        className="border-b border-[#d6d0c4] pb-2 text-sm font-bold uppercase text-[#382110] dark:border-[#55463b] dark:text-[#f4e9da]"
                                     >
                                         Quotes
                                     </h2>
-                                    <blockquote className="pt-3 font-serif text-lg leading-snug">
+                                    <blockquote className="pt-3 text-lg leading-snug" style={serifFont}>
                                         “It's like Uber for dogs, but where the dogs are the drivers. It's going to be
                                         huge.”
                                         <footer className="mt-2 font-sans text-sm not-italic text-[#69605a] dark:text-[#c5b9ab]">
