@@ -18,13 +18,45 @@ import { PostSummary } from 'components/PostsIndex/types'
 import SEO from 'components/seo'
 
 const photos = [
-    { title: 'Dressed up for a cohort report', Artwork: HedgehogPearlNecklace, color: 'bg-light-purple' },
-    { title: 'A rose for your retention curve', Artwork: HedgehogRose, color: 'bg-pale-blue' },
-    { title: 'Spotted in the charts again', Artwork: HedgehogChartHog, color: 'bg-light-yellow' },
+    { title: 'Both feet', viewBox: '420 800 340 190', color: 'bg-light-purple' },
+    { title: 'The left one', viewBox: '450 820 150 150', color: 'bg-pale-blue' },
+    { title: 'The right one', viewBox: '570 820 150 150', color: 'bg-light-yellow' },
+]
+
+const creatorPosts = [
+    {
+        id: 'full-funnel',
+        title: 'The full funnel. No filters.',
+        description: 'Every step is on show. Look as long as you like.',
+        to: '/funnels',
+        cta: 'See my funnel',
+        image: <HedgehogChartHog title="PostHog shows you the full funnel" className="size-full p-4" />,
+    },
+    {
+        id: 'feet-pics',
+        title: 'You asked for feet pics.',
+        description: 'Come a little closer. The full set is waiting for you.',
+        to: '#media',
+        cta: 'See the full set',
+        image: (
+            <HedgehogPearlNecklace
+                title="A lightly blurred preview of PostHog's feet"
+                viewBox={photos[0].viewBox}
+                className="size-full blur-sm"
+            />
+        ),
+    },
 ]
 
 export default function OnlyHogs({ data }: { data: { posts: { nodes: PostSummary[] } } }): JSX.Element {
-    const posts = data.posts.nodes.filter((post) => post.frontmatter.title)
+    const articles = data.posts.nodes.filter((post) => post.frontmatter.title)
+    const posts = [
+        ...articles.slice(0, 2),
+        creatorPosts[0],
+        ...articles.slice(2, 4),
+        creatorPosts[1],
+        ...articles.slice(4),
+    ]
 
     return (
         <>
@@ -54,6 +86,7 @@ export default function OnlyHogs({ data }: { data: { posts: { nodes: PostSummary
                                 <Link
                                     key={label}
                                     to={to}
+                                    state={{ newWindow: true }}
                                     aria-label={label}
                                     className="flex h-full items-center justify-center text-secondary focus-visible:outline-blue"
                                     externalNoIcon
@@ -153,6 +186,7 @@ export default function OnlyHogs({ data }: { data: { posts: { nodes: PostSummary
                                     </a>
                                     <Link
                                         to="/videos"
+                                        state={{ newWindow: true }}
                                         className="flex items-center justify-center gap-2 py-3 text-secondary no-underline"
                                     >
                                         <IconVideoCamera aria-hidden="true" className="size-4" /> Videos
@@ -163,49 +197,89 @@ export default function OnlyHogs({ data }: { data: { posts: { nodes: PostSummary
                                     <div className="px-4 py-3 text-xs font-semibold uppercase tracking-wide text-secondary @md:px-6">
                                         {posts.length} {posts.length === 1 ? 'post' : 'posts'}
                                     </div>
-                                    {posts.map((post) => (
-                                        <article key={post.fields.slug} className="px-4 py-6 @md:px-6">
-                                            <div className="mb-4 flex items-center gap-3">
-                                                <div className="flex size-10 shrink-0 items-center justify-center overflow-hidden rounded-full bg-light-1">
-                                                    <HedgehogPearlNecklace aria-hidden="true" className="size-10" />
+                                    {posts.map((post) => {
+                                        const isArticle = 'frontmatter' in post
+                                        const to = isArticle ? post.fields.slug : post.to
+
+                                        return (
+                                            <article key={post.id} className="px-4 py-6 @md:px-6">
+                                                <div className="mb-4 flex items-center gap-3">
+                                                    <div className="flex size-10 shrink-0 items-center justify-center overflow-hidden rounded-full bg-light-1">
+                                                        <HedgehogPearlNecklace aria-hidden="true" className="size-10" />
+                                                    </div>
+                                                    <div>
+                                                        <p className="m-0 text-sm font-semibold">
+                                                            PostHog{' '}
+                                                            <span className="text-[#007a9c] dark:text-[#4dadea]">
+                                                                ✓
+                                                            </span>
+                                                        </p>
+                                                        <p className="m-0 text-xs text-secondary">
+                                                            {isArticle
+                                                                ? `${
+                                                                      post.fields.slug.startsWith('/newsletter/')
+                                                                          ? 'Newsletter'
+                                                                          : 'Blog'
+                                                                  } · ${post.frontmatter.fullDate}`
+                                                                : 'OnlyHogs original'}
+                                                        </p>
+                                                    </div>
                                                 </div>
-                                                <div>
-                                                    <p className="m-0 text-sm font-semibold">
-                                                        PostHog{' '}
-                                                        <span className="text-[#007a9c] dark:text-[#4dadea]">✓</span>
+                                                <Link
+                                                    to={to}
+                                                    state={
+                                                        isArticle || to.startsWith('/')
+                                                            ? { newWindow: true }
+                                                            : undefined
+                                                    }
+                                                    contextMenu={!to.startsWith('#')}
+                                                    className="block text-primary no-underline focus-visible:outline-[#007a9c]"
+                                                >
+                                                    <h2 className="mb-1 text-lg font-bold">
+                                                        {isArticle ? post.frontmatter.title : post.title}
+                                                    </h2>
+                                                    <p className="mt-0 line-clamp-3 text-sm text-secondary">
+                                                        {isArticle
+                                                            ? post.frontmatter.seo?.metaDescription || post.excerpt
+                                                            : post.description}
                                                     </p>
-                                                    <p className="m-0 text-xs text-secondary">
-                                                        {post.fields.slug.startsWith('/newsletter/')
-                                                            ? 'Newsletter'
-                                                            : 'Blog'}{' '}
-                                                        · {post.frontmatter.fullDate}
-                                                    </p>
-                                                </div>
-                                            </div>
-                                            <Link
-                                                to={post.fields.slug}
-                                                state={{ newWindow: true }}
-                                                className="block text-primary no-underline focus-visible:outline-[#007a9c]"
-                                            >
-                                                <h2 className="mb-1 text-lg font-bold">{post.frontmatter.title}</h2>
-                                                <p className="mt-0 line-clamp-3 text-sm text-secondary">
-                                                    {post.frontmatter.seo?.metaDescription || post.excerpt}
-                                                </p>
-                                                <div className="mt-4 aspect-video overflow-hidden rounded border border-primary bg-white">
-                                                    <PostImage
-                                                        post={post}
-                                                        className="h-full w-full"
-                                                        imgClassName="block h-full w-full !object-contain"
-                                                    />
-                                                </div>
-                                            </Link>
-                                        </article>
-                                    ))}
+                                                    <div
+                                                        className={`mt-4 aspect-video overflow-hidden rounded border border-primary ${
+                                                            isArticle ? 'bg-white' : 'bg-pale-blue'
+                                                        }`}
+                                                    >
+                                                        {isArticle ? (
+                                                            <PostImage
+                                                                post={post}
+                                                                className="h-full w-full"
+                                                                imgClassName="block h-full w-full !object-contain"
+                                                            />
+                                                        ) : (
+                                                            post.image
+                                                        )}
+                                                    </div>
+                                                    {!isArticle && (
+                                                        <span className="mt-3 inline-block text-sm font-semibold text-[#007a9c] underline dark:text-[#4dadea]">
+                                                            {post.cta}
+                                                        </span>
+                                                    )}
+                                                </Link>
+                                            </article>
+                                        )
+                                    })}
                                     <div className="flex flex-wrap gap-x-5 gap-y-2 px-4 py-4 text-sm font-semibold @md:px-6">
-                                        <Link to="/blog" className="text-[#007a9c] dark:text-[#4dadea]">
+                                        <Link
+                                            to="/blog"
+                                            state={{ newWindow: true }}
+                                            className="text-[#007a9c] dark:text-[#4dadea]"
+                                        >
                                             All blog posts
                                         </Link>
-                                        <Link to="/newsletter" className="text-[#007a9c] dark:text-[#4dadea]">
+                                        <Link
+                                            to="/newsletter"
+                                            state={{ newWindow: true }}
+                                            className="text-[#007a9c] dark:text-[#4dadea]"
+                                        >
                                             All newsletter posts
                                         </Link>
                                     </div>
@@ -217,18 +291,20 @@ export default function OnlyHogs({ data }: { data: { posts: { nodes: PostSummary
                                     className="border-t border-primary px-4 py-7 @md:px-6"
                                 >
                                     <h2 id="media-heading" className="mb-1 text-lg font-bold">
-                                        The photos you came for
+                                        Feet pics
                                     </h2>
-                                    <p className="mt-0 text-sm text-secondary">
-                                        Hoggies in their natural habitat: your product data.
-                                    </p>
+                                    <p className="mt-0 text-sm text-secondary">A closer look. Just for you.</p>
                                     <div className="grid grid-cols-2 gap-3 @md:grid-cols-3">
-                                        {photos.map(({ title, Artwork, color }) => (
+                                        {photos.map(({ title, viewBox, color }) => (
                                             <figure key={title} className="m-0 min-w-0">
                                                 <div
                                                     className={`flex aspect-square items-center justify-center overflow-hidden rounded border border-primary ${color}`}
                                                 >
-                                                    <Artwork title={title} className="h-4/5 w-4/5" />
+                                                    <HedgehogPearlNecklace
+                                                        title={title}
+                                                        viewBox={viewBox}
+                                                        className="size-full"
+                                                    />
                                                 </div>
                                                 <figcaption className="mt-2 text-xs text-secondary">{title}</figcaption>
                                             </figure>
@@ -279,6 +355,7 @@ export default function OnlyHogs({ data }: { data: { posts: { nodes: PostSummary
                                     </p>
                                     <Link
                                         to="/videos"
+                                        state={{ newWindow: true }}
                                         className="text-sm font-semibold text-[#007a9c] dark:text-[#4dadea]"
                                     >
                                         Watch PostHog videos
