@@ -50,7 +50,7 @@ const WINGS: Record<string, { image: string; intro: string }> = {
     'do-more-weird': { image: hog('endpoints_7e459e6202'), intro: 'Real things that came out of #domoreweird.' },
 }
 
-// Exhibits that are pages in this repo rather than Strapi entries. Shown on the lobby below "Now showing".
+// Exhibits that are pages in this repo rather than Strapi entries. Shown in the lobby sidebar.
 const PERMANENT_EXHIBIT = {
     title: 'The Evolution of Marketing',
     url: '/museum/exhibits/evolution',
@@ -232,6 +232,33 @@ export default function Museum({ location }: { location: { search: string } }): 
                                     </FilterButton>
                                 ))}
                             </div>
+                        ),
+                    },
+                    {
+                        title: 'Permanent collection',
+                        content: (
+                            <Link
+                                to={PERMANENT_EXHIBIT.url}
+                                state={{ newWindow: true }}
+                                data-scheme="primary"
+                                className="not-prose group block rounded border border-primary bg-primary p-3 text-primary no-underline shadow-sm transition-transform duration-200 hover:-translate-y-0.5 hover:-rotate-1 hover:shadow-lg"
+                            >
+                                <div className="flex items-center gap-3">
+                                    <CloudinaryImage
+                                        src={PERMANENT_EXHIBIT.image}
+                                        alt=""
+                                        imgClassName="h-auto w-14 shrink-0"
+                                    />
+                                    <div className="min-w-0">
+                                        <p className="m-0 text-sm font-bold leading-tight group-hover:underline">
+                                            {PERMANENT_EXHIBIT.title}
+                                        </p>
+                                        <p className="m-0 mt-1 text-xs leading-snug text-secondary">
+                                            {PERMANENT_EXHIBIT.summary}
+                                        </p>
+                                    </div>
+                                </div>
+                            </Link>
                         ),
                     },
                     {
@@ -420,41 +447,6 @@ export default function Museum({ location }: { location: { search: string } }): 
                                 </section>
                             )}
                         </div>
-                    )}
-
-                    {isLobby && (
-                        <section className="flex items-center gap-4 rounded-md border border-primary bg-light p-4 dark:bg-accent @xl:gap-6">
-                            <div className="w-24 shrink-0 @xl:w-32">
-                                <CloudinaryImage src={PERMANENT_EXHIBIT.image} alt="" imgClassName="h-auto w-full" />
-                            </div>
-                            <div className="flex min-w-0 flex-1 flex-col items-start gap-2 @2xl:flex-row @2xl:items-center @2xl:gap-6">
-                                <div className="min-w-0 flex-1">
-                                    <p className="m-0 text-xs font-semibold uppercase leading-none tracking-wide text-orange dark:text-orange-dark">
-                                        Permanent collection
-                                    </p>
-                                    <h2 className="m-0 mt-2 text-lg font-bold leading-tight @xl:text-xl">
-                                        <Link
-                                            to={PERMANENT_EXHIBIT.url}
-                                            state={{ newWindow: true }}
-                                            className="text-primary no-underline hover:underline"
-                                        >
-                                            {PERMANENT_EXHIBIT.title}
-                                        </Link>
-                                    </h2>
-                                    <p className="m-0 mt-1 text-sm text-secondary">{PERMANENT_EXHIBIT.summary}</p>
-                                </div>
-                                <OSButton
-                                    asLink
-                                    to={PERMANENT_EXHIBIT.url}
-                                    state={{ newWindow: true }}
-                                    variant="primary"
-                                    size="md"
-                                    className="shrink-0"
-                                >
-                                    Step inside
-                                </OSButton>
-                            </div>
-                        </section>
                     )}
 
                     <section>
