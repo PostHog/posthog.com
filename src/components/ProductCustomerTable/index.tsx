@@ -42,6 +42,22 @@ const ProductCustomerTable = ({ productType }: ProductCustomerTableProps) => {
     const customerSlugs = Object.keys(product.customers)
     const customers = getCustomers(customerSlugs)
 
+    const renderLogo = (customer: any): JSX.Element => {
+        if (!customer.logo) {
+            return <span>{customer.name}</span>
+        }
+        if (typeof customer.logo === 'function') {
+            const LogoComponent = customer.logo
+            return <LogoComponent className="w-auto object-contain fill-current" />
+        }
+        return (
+            <>
+                <img src={customer.logo.light} alt={customer.name} className="w-auto object-contain dark:hidden" />
+                <img src={customer.logo.dark} alt={customer.name} className="w-auto object-contain hidden dark:block" />
+            </>
+        )
+    }
+
     const columns = [
         { name: '', width: 'auto', align: 'center' as const },
         { name: 'Company', width: 'minmax(150px,1fr)', align: 'center' as const },
@@ -58,22 +74,7 @@ const ProductCustomerTable = ({ productType }: ProductCustomerTableProps) => {
                 cells: [
                     { content: index + 1 },
                     {
-                        content: customer.logo ? (
-                            <>
-                                <img
-                                    src={customer.logo.light}
-                                    alt={customer.name}
-                                    className="w-auto object-contain dark:hidden"
-                                />
-                                <img
-                                    src={customer.logo.dark}
-                                    alt={customer.name}
-                                    className="w-auto object-contain hidden dark:block"
-                                />
-                            </>
-                        ) : (
-                            <span>{customer.name}</span>
-                        ),
+                        content: renderLogo(customer),
                         className: '!p-4',
                     },
                     {
