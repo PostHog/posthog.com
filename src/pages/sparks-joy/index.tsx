@@ -167,7 +167,7 @@ export default function SparkJoy(): JSX.Element {
                                             <AppLink
                                                 label="Hogpedia"
                                                 url="/hogpedia"
-                                                Icon={<IconBook className="size-12" />}
+                                                Icon={<IconBook className="size-12 text-primary" />}
                                                 className="size-12"
                                             />
                                         </ZoomHover>
