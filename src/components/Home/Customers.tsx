@@ -15,6 +15,7 @@ export const COL1 = [
     'startengine',
     'researchgate',
     'heygen',
+    'legora',
 ]
 
 export const COL2 = [
@@ -85,6 +86,7 @@ export const companyAttributes: Record<string, string[]> = {
         'ukgovt',
         'railway',
         'fireworksai',
+        'legora',
     ],
     goodBandName: [
         'elevenlabs',
@@ -112,6 +114,7 @@ export const companyAttributes: Record<string, string[]> = {
         'nationaldesignstudio',
         'ukgovt',
         'wisprflow',
+        'legora',
     ],
     shortNames: [
         'airbus',
@@ -128,6 +131,7 @@ export const companyAttributes: Record<string, string[]> = {
         'ukgovt',
         'paper',
         'posthog',
+        'legora',
     ],
     realWords: [
         'airbus',
@@ -164,7 +168,19 @@ export const companyAttributes: Record<string, string[]> = {
         'railway',
         'fireworksai',
     ],
-    pokemon: ['convex', 'supabase', 'hasura', 'mistralai', 'raycast', 'resend', 'exa', 'heygen', 'paper', 'greptile'],
+    pokemon: [
+        'convex',
+        'supabase',
+        'hasura',
+        'mistralai',
+        'raycast',
+        'resend',
+        'exa',
+        'heygen',
+        'paper',
+        'greptile',
+        'legora',
+    ],
     arr: [
         'ycombinator',
         'airbus',
@@ -187,6 +203,7 @@ export const companyAttributes: Record<string, string[]> = {
         'paper',
         'posthog',
         'fireworksai',
+        'legora',
     ],
     devTool: [
         'ycombinator',

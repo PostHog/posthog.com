@@ -318,7 +318,7 @@ function UseCases(): JSX.Element {
                         <div className="grid items-start gap-6 @lg/reader-content:grid-cols-[1fr_280px]">
                             <div>
                                 <div className="prose">
-                                    <h1 className="!m-0 text-3xl font-bold !leading-[1.12] tracking-tight @md/reader-content:text-4xl @3xl/reader-content:text-5xl">
+                                    <h1 className="!m-0 text-3xl text-primary font-bold !leading-[1.12] tracking-tight @md/reader-content:text-4xl @3xl/reader-content:text-5xl">
                                         <Highlight>Data questions</Highlight> worth asking
                                     </h1>
                                     <p className="!mb-0 !mt-5 max-w-lg text-base leading-relaxed text-secondary @xl/reader-content:text-[17px]">
