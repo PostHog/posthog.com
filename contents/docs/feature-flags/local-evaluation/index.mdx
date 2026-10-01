@@ -62,15 +62,15 @@ Each flag definition includes a `version` number that the SDK uses to detect cha
 
 There are 3 steps to enable local evaluation:
 
-## Step 1: Find your feature flags secure API key
+## Step 1: Get a secret API key
 
 import ObtainFeatureFlagsSecureAPIKey from "../../integrate/_snippets/obtain-flags-secure-key.mdx";
 
 <ObtainFeatureFlagsSecureAPIKey />
 
-## Step 2: Initialize PostHog with your feature flags secure API key
+## Step 2: Initialize PostHog with your secret API key
 
-When you initialize PostHog with your feature flags secure API key, PostHog will use the key to automatically fetch feature flag definitions. These definitions are then used to evaluate feature flags locally.
+When you initialize PostHog with your secret API key, PostHog will use the key to automatically fetch feature flag definitions. These definitions are then used to evaluate feature flags locally.
 
 By default, PostHog fetches these definitions every 30 seconds (or 5 minutes in the Go SDK). However, you can change this frequency by specifying a different value in the polling interval argument.
 
@@ -311,7 +311,7 @@ flag_value = PostHog.FeatureFlags.Evaluations.get_flag(flags, "flag-key")
 
 ## Reloading flags
 
-As mentioned in [step 2](#step-2-initialize-posthog-with-your-feature-flags-secure-api-key), PostHog periodically fetches feature flag definitions. However, you can also force a reload by calling `reloadFeatureFlags()`:
+As mentioned in [step 2](#step-2-initialize-posthog-with-your-secret-api-key), PostHog periodically fetches feature flag definitions. However, you can also force a reload by calling `reloadFeatureFlags()`:
 
 <MultiLanguage>
 

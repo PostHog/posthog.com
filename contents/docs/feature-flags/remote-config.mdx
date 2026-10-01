@@ -28,23 +28,23 @@ This also works for CLIs, scripts, or anything else that can call `/flags` with 
 
 ## Using remote config on the server
 
-Server-side SDKs fetch remote config payloads using your feature flags secure API key. This key is only required for [local evaluation](/docs/feature-flags/local-evaluation) and encrypted payloads – not for remote config in general. Unlike your project API key, it must never be exposed publicly.
+Server-side SDKs fetch remote config payloads using your secret API key. This key is only required for [local evaluation](/docs/feature-flags/local-evaluation) and encrypted payloads – not for remote config in general. Unlike your project API key, it must never be exposed publicly.
 
 There are 3 steps to use remote config flags on the server:
 
-### Step 1: Find your feature flags secure API key
+### Step 1: Get a secret API key
 
 import ObtainFeatureFlagsSecureAPIKey from "../integrate/_snippets/obtain-flags-secure-key.mdx"
 
 <ObtainFeatureFlagsSecureAPIKey />
 
-### Step 2: Initialize PostHog with your feature flags secure API key in options
+### Step 2: Initialize PostHog with your secret API key in options
 
 import ConfigureFlagsSecureKey from "../integrate/_snippets/configure-flags-secure-key.mdx"
 
 <ConfigureFlagsSecureKey />
 
-> **Note:** By default, initializing PostHog with your feature flags secure API key enables local evaluation, but this can be disabled in `posthog-node` by setting `enableLocalEvaluation: false` in your config.
+> **Note:** By default, initializing PostHog with your secret API key enables local evaluation, but this can be disabled in `posthog-node` by setting `enableLocalEvaluation: false` in your config.
 
 
 ### Step 3: Use remote config flags

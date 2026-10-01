@@ -64,19 +64,22 @@ Key behaviors:
 
 ## Feature flags secure API key
 
-Use secure API keys to retrieve feature flag definitions for [local evaluation](/docs/feature-flags/local-evaluation) or [remote config settings](/docs/feature-flags/remote-config). These keys replace personal API keys for flag-related operations.
+> **Deprecated:** The feature flags secure API key is deprecated. Use a [project secret API key](https://us.posthog.com/settings/environment-secret-api-keys) with the `feature_flag:read` scope instead — it works as a drop-in replacement for [local evaluation](/docs/feature-flags/local-evaluation) and [remote config settings](/docs/feature-flags/remote-config), no SDK code changes needed. Existing feature flags secure API keys continue to work until you switch.
+
+Secure API keys retrieve feature flag definitions for [local evaluation](/docs/feature-flags/local-evaluation) or [remote config settings](/docs/feature-flags/remote-config).
 
 ### Key management
+
+If you still use a feature flags secure API key, you can manage it from the Feature flags tab of your project settings:
 
 - **Primary key**: The currently active key used for API requests
 - **Backup key**: Created when you rotate keys to support safe migration
 - **Key rotation**: Generate new keys while keeping the old one temporarily active
 
-### Best practices
+Rotation without downtime works by maintaining both primary and backup keys during the transition period. Delete the backup key once all your systems use the new one.
 
-1. **Keep keys private**: Never expose these keys in client-side code
-2. **Rotate regularly**: Generate new keys periodically for security
-3. **Clean up backups**: Delete backup keys once you've migrated all systems
-4. **Use project-specific keys**: Each PostHog project should use its own secure API key
+### Migrating to a project secret API key
 
-The secure API key system enables you to safely rotate keys without downtime by maintaining both primary and backup keys during the transition period.
+1. Create a [project secret API key](https://us.posthog.com/settings/environment-secret-api-keys) with the **Local feature flag evaluation** preset (the `feature_flag:read` scope).
+2. Replace the key in your SDK configuration. Both key types use the same `phs_` prefix and the same configuration option, so nothing else changes.
+3. Once all your deployments use the new key, delete the legacy feature flags secure API key.
