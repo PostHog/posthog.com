@@ -1,37 +1,21 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import { HedgehogChef, HedgehogReading, HedgehogSailorHog, HedgehogSurfer } from '@posthog/brand/hoggies'
 import { graphql, useStaticQuery } from 'gatsby'
 import {
-    IconArrowUpRight,
-    IconChat,
     IconGear,
     IconHeart,
-    IconImage,
     IconList,
     IconMessage,
-    IconMicrophone,
-    IconPencil,
     IconPlus,
     IconQuestion,
-    IconQuote,
     IconSearch,
     IconUser,
-    IconVideoCamera,
 } from '@posthog/icons'
-import Editor from 'components/Editor'
 import Link from 'components/Link'
+import ReaderView from 'components/ReaderView'
 import SEO from 'components/seo'
 import { useAppActions } from '../../../context/App'
 import { useWindow } from '../../../context/Window'
-
-const postTypes = [
-    { label: 'Text', Icon: IconPencil },
-    { label: 'Photo', Icon: IconImage },
-    { label: 'Quote', Icon: IconQuote },
-    { label: 'Link', Icon: IconArrowUpRight },
-    { label: 'Chat', Icon: IconChat },
-    { label: 'Audio', Icon: IconMicrophone },
-    { label: 'Video', Icon: IconVideoCamera },
-]
 
 const posts: {
     author: string
@@ -40,23 +24,40 @@ const posts: {
     rebloggedUsername?: string
     image: string
     imageAlt: string
+    searchText: string
 }[] = [
     {
         author: 'James',
-        username: 'dogsdontneedlicenses',
+        username: 'wannabeprocyclist',
         lastName: 'Hawkins',
         image: '/images/sparks-joy/hoglr/james-pivot.webp',
         imageAlt: 'A parody pull request to stop James from building Uber for Dogs, with dogs as the drivers.',
+        searchText: '@posthog, stop uberfordogsblockign me',
     },
     {
         author: 'Lottie',
         username: 'marmitelover4life',
         lastName: 'Coxon',
-        rebloggedUsername: 'letmecook',
+        rebloggedUsername: '50booksandbadjokes',
         image: '/images/sparks-joy/hoglr/dictator-or-tech-bro.webp',
         imageAlt: 'Two Hoggie characters dressed as a tech bro and a dictator for the quiz.',
+        searchText: 'PostHog Series E 4,000+ dictatorortechbro.com 4% eight questions',
     },
 ]
+
+type Article = {
+    excerpt: string
+    fields: { slug: string }
+    frontmatter: { title: string; date: string }
+}
+
+type FeedUpdate = {
+    title: string
+    url: string
+    snippet: string
+    date: string
+    kind: 'blog' | 'newsletter'
+}
 
 type TeamMember = {
     firstName: string
@@ -65,12 +66,26 @@ type TeamMember = {
     avatar?: { url?: string }
 }
 
+const radarHoggies = [
+    { name: 'Hoggie radar', src: '/images/sparks-joy/hoglr/hoggie-radar.webp' },
+    { name: 'Chef Hoggie', Icon: HedgehogChef },
+    { name: 'Reading Hoggie', Icon: HedgehogReading },
+    { name: 'Sailor Hoggie', Icon: HedgehogSailorHog },
+    { name: 'Surfer Hoggie', Icon: HedgehogSurfer },
+]
+
 export default function Hoglr(): JSX.Element {
     const { closeWindow } = useAppActions()
     const { appWindow } = useWindow()
     const {
         team: { teamMembers },
-    } = useStaticQuery<{ team: { teamMembers: TeamMember[] } }>(graphql`
+        blog: { nodes: blogArticles },
+        newsletter: { nodes: newsletterArticles },
+    } = useStaticQuery<{
+        team: { teamMembers: TeamMember[] }
+        blog: { nodes: Article[] }
+        newsletter: { nodes: Article[] }
+    }>(graphql`
         query HoglrTeamQuery {
             team: allSqueakProfile(
                 filter: { teams: { data: { elemMatch: { id: { ne: null } } } }, squeakId: { ne: 28378 } }
@@ -84,12 +99,135 @@ export default function Hoglr(): JSX.Element {
                     }
                 }
             }
+            blog: allMdx(
+                filter: {
+                    isFuture: { eq: false }
+                    fields: { slug: { regex: "/^/blog/" } }
+                    frontmatter: { date: { ne: null } }
+                }
+                sort: { order: DESC, fields: [frontmatter___date] }
+                limit: 3
+            ) {
+                nodes {
+                    excerpt(pruneLength: 150)
+                    fields {
+                        slug
+                    }
+                    frontmatter {
+                        title
+                        date(formatString: "MMM D, YYYY")
+                    }
+                }
+            }
+            newsletter: allMdx(
+                filter: {
+                    isFuture: { eq: false }
+                    fields: { slug: { regex: "/^/newsletter/" } }
+                    frontmatter: { date: { ne: null } }
+                }
+                sort: { order: DESC, fields: [frontmatter___date] }
+                limit: 2
+            ) {
+                nodes {
+                    excerpt(pruneLength: 170)
+                    fields {
+                        slug
+                    }
+                    frontmatter {
+                        title
+                        date(formatString: "MMM D, YYYY")
+                    }
+                }
+            }
         }
     `)
+
+    const [searchQuery, setSearchQuery] = useState('')
+    const [radarIndex, setRadarIndex] = useState(0)
+    const [blogUpdates, setBlogUpdates] = useState<FeedUpdate[]>(() =>
+        blogArticles.map(({ fields, frontmatter, excerpt }) => ({
+            title: frontmatter.title,
+            url: fields.slug,
+            snippet: excerpt,
+            date: frontmatter.date,
+            kind: 'blog',
+        }))
+    )
+
+    useEffect(() => {
+        if (!['posthog.com', 'www.posthog.com'].includes(window.location.hostname)) return
+
+        const controller = new AbortController()
+        fetch('/rss.xml', { signal: controller.signal })
+            .then((response) => {
+                if (!response.ok) throw new Error('Blog feed unavailable')
+                return response.text()
+            })
+            .then((xml) => {
+                const feed = new DOMParser().parseFromString(xml, 'application/xml')
+                if (feed.querySelector('parsererror')) return
+
+                const latest = Array.from(feed.querySelectorAll('item'))
+                    .map((item): FeedUpdate | null => {
+                        const link = item.querySelector('link')?.textContent
+                        if (!link) return null
+                        try {
+                            const url = new URL(link)
+                            if (url.origin !== 'https://posthog.com' || !url.pathname.startsWith('/blog/')) return null
+                            const date = item.querySelector('pubDate')?.textContent || ''
+                            if (!Number.isFinite(Date.parse(date))) return null
+                            return {
+                                title: item.querySelector('title')?.textContent || '',
+                                url: url.pathname,
+                                snippet: item.querySelector('description')?.textContent || '',
+                                date,
+                                kind: 'blog',
+                            }
+                        } catch {
+                            return null
+                        }
+                    })
+                    .filter((post): post is FeedUpdate => Boolean(post))
+                    .sort((first, second) => Date.parse(second.date) - Date.parse(first.date))
+                    .slice(0, 3)
+
+                if (
+                    latest.length &&
+                    (!blogArticles.length ||
+                        Date.parse(latest[0].date) >= Date.parse(blogArticles[0].frontmatter.date)) &&
+                    !controller.signal.aborted
+                ) {
+                    setBlogUpdates(latest)
+                }
+            })
+            .catch(() => undefined)
+
+        return () => controller.abort()
+    }, [blogArticles])
 
     const profileFor = (firstName: string, lastName: string) =>
         teamMembers.find((member) => member.firstName === firstName && member.lastName === lastName)
     const charles = profileFor('Charles', 'Cook')
+    const query = searchQuery.trim().toLowerCase()
+    const visiblePosts = posts.filter((post) =>
+        `${post.author} ${post.username} ${post.rebloggedUsername || ''} ${post.imageAlt} ${post.searchText}`
+            .toLowerCase()
+            .includes(query)
+    )
+    const updates: FeedUpdate[] = [
+        ...blogUpdates,
+        ...newsletterArticles.map(({ fields, frontmatter, excerpt }) => ({
+            title: frontmatter.title,
+            url: fields.slug,
+            snippet: excerpt,
+            date: frontmatter.date,
+            kind: 'newsletter' as const,
+        })),
+    ]
+        .sort((first, second) => Date.parse(second.date) - Date.parse(first.date))
+        .filter((update) => `${update.title} ${update.snippet} ${update.kind}`.toLowerCase().includes(query))
+    const radar = radarHoggies[radarIndex]
+    const RadarIcon = radar.Icon
 
     return (
         <>
@@ -98,7 +236,15 @@ export default function Hoglr(): JSX.Element {
                 description="An old-school blog dashboard in the PostHog grab bag."
                 image="/images/og/default.png"
             />
-            <Editor maxWidth="100%" hasPadding={false} className="bg-[#3a5775]">
+            <ReaderView
+                hideLeftSidebar
+                hideRightSidebar
+                hideAppOptions
+                hideMarkdownActions
+                showQuestions={false}
+                padding={false}
+                className="bg-[#3a5775] [&_.reader-view-content-container>div]:!pt-0"
+            >
                 <div className="not-prose @container min-h-screen bg-[#3a5775] font-[Arial,Helvetica,sans-serif] text-white">
                     <header>
                         <div className="mx-auto flex max-w-[56.25rem] items-center justify-between gap-4 py-1 pl-3 pr-10 @lg:pl-5 @lg:pr-12 @3xl:pr-5">
@@ -109,9 +255,12 @@ export default function Hoglr(): JSX.Element {
                                 aria-label="Hoglr navigation"
                                 className="flex items-center gap-3 text-[11px] font-semibold @3xl:gap-5"
                             >
-                                <span className="relative hidden text-white after:absolute after:-bottom-3 after:left-1/2 after:size-2 after:-translate-x-1/2 after:rotate-45 after:bg-[#2c4762] @lg:inline">
+                                <Link
+                                    to="/sparks-joy/hoglr"
+                                    className="relative hidden text-white after:absolute after:-bottom-3 after:left-1/2 after:size-2 after:-translate-x-1/2 after:rotate-45 after:bg-[#2c4762] @lg:inline"
+                                >
                                     Dashboard
-                                </span>
+                                </Link>
                                 <Link
                                     to="/sparks-joy"
                                     state={{ newWindow: true }}
@@ -174,42 +323,8 @@ export default function Hoglr(): JSX.Element {
 
                     <div className="mx-auto grid max-w-[56.25rem] gap-4 rounded-t-lg bg-[#2c4762] px-3 py-3 @lg:grid-cols-[minmax(0,1fr)_9rem] @lg:px-5 @3xl:grid-cols-[minmax(0,1fr)_13.5rem]">
                         <div className="min-w-0 space-y-3">
-                            <div className="flex items-start gap-2 @lg:gap-4">
-                                <div className="size-10 shrink-0 overflow-hidden rounded-[3px] bg-white @lg:size-14 @3xl:size-16">
-                                    <img
-                                        src="/images/sparks-joy/hoglr/dj-hoggie.webp"
-                                        alt="PostHog's DJ Hoggie avatar"
-                                        className="size-full object-contain"
-                                        width="64"
-                                        height="64"
-                                    />
-                                </div>
-                                <section
-                                    aria-label="Post types"
-                                    className="relative min-w-0 flex-1 rounded-md bg-[#fdfdfc] p-2 text-[#32495c] shadow-[0_1px_2px_#1c364f] before:absolute before:-left-1 before:top-5 before:size-2 before:rotate-45 before:bg-[#fdfdfc]"
-                                >
-                                    <ul className="grid grid-cols-4 gap-1 text-center @lg:grid-cols-7">
-                                        {postTypes.map(({ label, Icon }, index) => (
-                                            <li
-                                                key={label}
-                                                className="min-w-0 text-[10px] leading-tight text-[#536374]"
-                                            >
-                                                <span
-                                                    className={`mx-auto mb-1 flex size-9 items-center justify-center border border-[#c5ccd0] bg-gradient-to-br from-white via-[#f3f3f0] to-[#d0d9dc] shadow-[1px_2px_2px_#acb6ba] @lg:size-10 @3xl:size-12 ${
-                                                        index % 2 === 0 ? '-rotate-6' : 'rotate-3'
-                                                    }`}
-                                                >
-                                                    <Icon className="size-5 text-[#6c8390] drop-shadow-[1px_1px_0_white] @lg:size-6 @3xl:size-7" />
-                                                </span>
-                                                {label}
-                                            </li>
-                                        ))}
-                                    </ul>
-                                </section>
-                            </div>
-
                             <div aria-label="Recent activity" className="space-y-px">
-                                {posts.map((post, index) => {
+                                {visiblePosts.map((post) => {
                                     const author = profileFor(post.author, post.lastName)
                                     return (
                                         <div key={post.author} className="flex items-center gap-2 @lg:gap-4">
@@ -233,15 +348,17 @@ export default function Hoglr(): JSX.Element {
                                                     </Link>
                                                 )}
                                                 <span className="min-w-0 flex-1 truncate">
-                                                    {index === 0 ? 'started following you' : 'reblogged letmecook'}
+                                                    {post.rebloggedUsername
+                                                        ? `reblogged ${post.rebloggedUsername}`
+                                                        : 'started following you'}
                                                 </span>
-                                                {index === 0 ? (
-                                                    <IconUser
+                                                {post.rebloggedUsername ? (
+                                                    <IconHeart
                                                         aria-hidden="true"
                                                         className="size-3 shrink-0 opacity-50"
                                                     />
                                                 ) : (
-                                                    <IconHeart
+                                                    <IconUser
                                                         aria-hidden="true"
                                                         className="size-3 shrink-0 opacity-50"
                                                     />
@@ -253,7 +370,7 @@ export default function Hoglr(): JSX.Element {
                             </div>
 
                             <section aria-label="Hoglr feed" className="space-y-3">
-                                {posts.map((post) => {
+                                {visiblePosts.map((post) => {
                                     const author = profileFor(post.author, post.lastName)
                                     const avatar = author?.avatar?.url
                                     return (
@@ -349,6 +466,53 @@ export default function Hoglr(): JSX.Element {
                                         </article>
                                     )
                                 })}
+                                {updates.map((update) => (
+                                    <article key={update.url} className="flex items-start gap-2 @lg:gap-4">
+                                        <div className="size-10 shrink-0 overflow-hidden rounded-[3px] bg-white @lg:size-14 @3xl:size-16">
+                                            <img
+                                                src="/images/sparks-joy/hoglr/dj-hoggie.webp"
+                                                alt=""
+                                                className="size-full object-contain"
+                                                width="64"
+                                                height="64"
+                                            />
+                                        </div>
+                                        <div className="relative min-w-0 flex-1 rounded-md bg-white px-3 py-3 text-[#292929] shadow-[0_1px_2px_#1c364f] before:absolute before:-left-1 before:top-5 before:size-2 before:rotate-45 before:bg-white @lg:px-4">
+                                            <p className="m-0 text-[11px] text-[#82909c]">
+                                                <Link
+                                                    to={update.url}
+                                                    state={{ newWindow: true }}
+                                                    className="font-semibold underline"
+                                                >
+                                                    posthog
+                                                </Link>{' '}
+                                                · {update.kind} ·{' '}
+                                                {new Date(update.date).toLocaleDateString('en-US', {
+                                                    month: 'short',
+                                                    day: 'numeric',
+                                                    year: 'numeric',
+                                                })}
+                                            </p>
+                                            <h2 className="my-2 text-base font-bold leading-snug">
+                                                <Link
+                                                    to={update.url}
+                                                    state={{ newWindow: true }}
+                                                    className="text-[#292929] underline"
+                                                >
+                                                    {update.title}
+                                                </Link>
+                                            </h2>
+                                            <p className="m-0 text-xs leading-relaxed text-[#536374]">
+                                                {update.snippet}
+                                            </p>
+                                        </div>
+                                    </article>
+                                ))}
+                                {!visiblePosts.length && !updates.length && (
+                                    <p className="ml-12 rounded-[3px] bg-white px-3 py-2 text-xs text-[#292929] @lg:ml-[4.5rem] @3xl:ml-20">
+                                        No posts match “{searchQuery.trim()}”.
+                                    </p>
+                                )}
                             </section>
                         </div>
 
@@ -362,15 +526,28 @@ export default function Hoglr(): JSX.Element {
                                     <IconUser className="size-3 shrink-0" />
                                     Following {teamMembers.length - 1} people
                                 </Link>
-                                <p className="m-0 px-2 py-1.5 text-[#bac9d5]">＋ Add and remove</p>
+                                <Link
+                                    to="/people"
+                                    state={{ newWindow: true }}
+                                    className="block px-2 py-1.5 text-[#bac9d5]"
+                                >
+                                    ＋ Add and remove
+                                </Link>
                             </div>
                             <div className="overflow-hidden rounded-[3px] bg-[#455f78]">
-                                <p className="m-0 flex items-center gap-1.5 border-b border-[#3a5775] px-2 py-1.5 text-[#d8e0e7]">
+                                <Link
+                                    to="/feet-pics"
+                                    state={{ newWindow: true }}
+                                    className="flex items-center gap-1.5 border-b border-[#3a5775] px-2 py-1.5 text-[#d8e0e7]"
+                                >
                                     <IconHeart className="size-3.5" /> Liked posts
-                                </p>
-                                <p className="m-0 flex items-center gap-1.5 border-b border-[#3a5775] px-2 py-1.5 font-semibold">
+                                </Link>
+                                <Link
+                                    to="/sparks-joy/hoglr"
+                                    className="flex items-center gap-1.5 border-b border-[#3a5775] px-2 py-1.5 font-semibold text-white"
+                                >
                                     <IconList className="size-3.5" /> hoglr dashboard
-                                </p>
+                                </Link>
                                 <Link
                                     to="/sparks-joy"
                                     state={{ newWindow: true }}
@@ -379,22 +556,45 @@ export default function Hoglr(): JSX.Element {
                                     Explore more tags
                                 </Link>
                             </div>
-                            <div
-                                aria-hidden="true"
-                                className="flex items-center justify-between rounded-[3px] bg-[#455f78] px-2 py-1.5 text-[#bac9d5]"
-                            >
-                                Search Tags <IconSearch className="size-3.5" />
-                            </div>
-                            <div className="aspect-square overflow-hidden rounded-[3px] bg-white shadow-[0_1px_2px_#1c364f]">
-                                <img
-                                    src="/images/sparks-joy/hoglr/hoggie-radar.webp"
-                                    alt="Hoggie in a red top"
-                                    className="size-full object-contain"
-                                    width="216"
-                                    height="216"
+                            <label className="relative flex items-center rounded-[3px] bg-[#455f78] text-[#bac9d5]">
+                                <span className="sr-only">Search Hoglr posts and updates</span>
+                                <input
+                                    type="search"
+                                    value={searchQuery}
+                                    onChange={(event) => setSearchQuery(event.target.value)}
+                                    placeholder="Search Tags"
+                                    className="w-full min-w-0 bg-transparent px-2 py-1.5 pr-7 text-[11px] text-white placeholder:text-[#bac9d5] focus:outline-white"
                                 />
+                                <IconSearch
+                                    aria-hidden="true"
+                                    className="pointer-events-none absolute right-2 size-3.5"
+                                />
+                            </label>
+                            <div className="aspect-square overflow-hidden rounded-[3px] bg-white shadow-[0_1px_2px_#1c364f]">
+                                {RadarIcon ? (
+                                    <RadarIcon title={radar.name} className="size-full object-contain" />
+                                ) : (
+                                    <img
+                                        src={radar.src}
+                                        alt={radar.name}
+                                        className="size-full object-contain"
+                                        width="216"
+                                        height="216"
+                                    />
+                                )}
                             </div>
-                            <p className="m-0 flex items-center gap-2 text-[#bac9d5]">
+                            <button
+                                type="button"
+                                onClick={() =>
+                                    setRadarIndex(
+                                        (index) =>
+                                            (index + 1 + Math.floor(Math.random() * (radarHoggies.length - 1))) %
+                                            radarHoggies.length
+                                    )
+                                }
+                                aria-label="Show another Hoggie"
+                                className="flex w-full cursor-pointer items-center gap-2 text-left text-[#bac9d5] hover:underline"
+                            >
                                 <img
                                     src="/images/sparks-joy/hoglr/dj-hoggie.webp"
                                     alt=""
@@ -402,12 +602,12 @@ export default function Hoglr(): JSX.Element {
                                     width="20"
                                     height="20"
                                 />
-                                Hoggie radar
-                            </p>
+                                Hoggie radar{radarIndex ? ` · ${radar.name}` : ''} ↻
+                            </button>
                         </aside>
                     </div>
                 </div>
-            </Editor>
+            </ReaderView>
         </>
     )
 }
