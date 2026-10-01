@@ -31,12 +31,9 @@
 -   Decide whether to deprecate wireframe mode for mobile session replay, and proceed if agreed
 -   Add v2 session replay triggers to mobile SDKs
 
-#### Goal 4: Configure SDK features remotely after a single installation, including error tracking (Driver: <TeamMember name="Anna Garcia" />)
+#### Goal 4: Research how to capture product usage across agent-driven interactions (Driver: <TeamMember name="Anna Garcia" />)
 
--   Add remote configuration support for SDK features
--   Enable or disable error tracking autocapture through project settings, without code changes
-
-#### Goal 5: Explore a shared Rust core for SDKs (Driver: <TeamMember name="Manoel Aranda Neto" />)
-
--   Experiment with a shared Rust implementation for server-side feature flag local evaluation
--   Validate it in a backend SDK to assess correctness, performance, and integration effort
+-   Interview customers building agents, bots, MCP servers, and edge applications to understand what they need to measure, how they capture events today, and where our SDKs fall short
+-   Evaluate capture options, including deriving analytics events from tool calls, capturing agent-driven interactions through WebMCP, and offering lightweight SDKs for edge runtimes and unsupported ecosystems
+-   Share findings with the MCP and web teams, and recommend opportunities to test with customers
+    -   Pair with the [Product Analytics team](/teams/product-analytics) to explore their ideas and test them together where client libraries support is needed
