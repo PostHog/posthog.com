@@ -22,11 +22,11 @@ Put yourself in the shoes of an anonymous Twig visitor. Select **Forest**, then 
 
 <SessionGroupingFigure />
 
-The matching IDs tells the Twig team that both selections happen during _one_ session and both events came from the _same_ anonymous identity.
+The matching IDs tell the Twig team that both selections happened during _one_ session and both events came from the _same_ anonymous identity.
 
 For this visit, PostHog counts two events associated with the same anonymous identity and session. The identity and session help the team determine which visitor and visit the events belong to, while the event count records how many distinct actions occurred.
 
-There’s a problem with anonymous IDs, though: `anon_7f3` identifies activity from this browser, but it doesn’t show _who_ was using it. If two people share the browser, they share an anonymous ID, so Twig team has no idea which one generated activity..
+There's a problem with anonymous IDs, though: `anon_7f3` identifies activity from this browser, but it doesn't show _who_ was using it. If two people share the browser, they share an anonymous ID, so the Twig team has no idea which one generated the activity.
 
 ## Same browser, new session
 
@@ -69,7 +69,7 @@ Now suppose Edgar signs out and a second person uses Twig in the same browser. O
 
 <ResetIdentityFigure />
 
-When Edgar signs out, Twig tells the PostHog tracking code in the browser to forget his identity. `reset()` replaces Edgar’s identified `distinct_id` with a new anonymous ID and starts a new session. This only changes the identity used when Edgar is logged out.
+When Edgar signs out, Twig tells the PostHog tracking code in the browser to forget his identity. `reset()` replaces Edgar's identified `distinct_id` with a new anonymous ID and starts a new session. Edgar's person profile and earlier events stay unchanged.
 
 Without `reset()`, the second person's browsing could be attached to Edgar's account. If the second person later signs in, Twig may also attempt to connect two different accounts incorrectly.
 
@@ -82,7 +82,7 @@ The safe sequence is:
 
 ## See the visit behind an event
 
-To see context around a click, like what led to the event or what the user did next, Twig opens an even't <Term name="session replay">Session Replay</Term> – a playback of what happened in the browser during that visit.
+To see context around a click, like what led to the event or what the user did next, Twig opens the event's <Term name="session replay">Session Replay</Term> – a playback of what happened in the browser during that visit.
 
 PostHog uses the same `$session_id` already attached to the event to find the matching replay. For the **City** click, `session_b2` connects the click to its recorded visit. Because the event’s `distinct_id: anon_7f3` is now linked to `user_812`, PostHog can also connect that visit to Edgar.
 

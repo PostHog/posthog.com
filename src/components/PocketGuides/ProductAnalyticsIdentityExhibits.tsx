@@ -44,8 +44,7 @@ const firstVisit: ExampleEvent[] = [
 ]
 
 const REPLAY_VIDEO_URL =
-    'https://res.cloudinary.com/dmukukwp6/video/upload/Clean_Shot_2026_09_30_at_3_59_48_PM_19130113ef.mp4'
-const REPLAY_PLAYBACK_RATE = 0.75
+    'https://res.cloudinary.com/dmukukwp6/video/upload/Clean_Shot_2026_10_02_at_1_05_27_PM_553e7c2693.mp4'
 
 const profile = {
     displayName: 'Edgar Hogg',
@@ -400,6 +399,7 @@ export function ResetIdentityFigure(): JSX.Element {
     )
 }
 
+// Offsets match the recording at normal speed; identifiers are the lesson's example data.
 const replayTimeline: SessionReplayInspectorEvent[] = [
     {
         timeMs: 0,
@@ -407,34 +407,13 @@ const replayTimeline: SessionReplayInspectorEvent[] = [
         title: 'Browse stays',
         properties: [
             { label: 'event', value: '$pageview' },
+            { label: 'pathname', value: '/' },
             { label: 'distinct_id', value: 'anon_7f3' },
             { label: '$session_id', value: 'session_b2' },
         ],
     },
     {
-        timeMs: 1100,
-        kind: 'Click',
-        title: 'Forest filter',
-        properties: [
-            { label: 'event', value: 'stay_filter_selected' },
-            { label: 'destination_type', value: 'Forest' },
-            { label: 'distinct_id', value: 'anon_7f3' },
-            { label: '$session_id', value: 'session_b2' },
-        ],
-    },
-    {
-        timeMs: 3000,
-        kind: 'Click',
-        title: 'Coast filter',
-        properties: [
-            { label: 'event', value: 'stay_filter_selected' },
-            { label: 'destination_type', value: 'Coast' },
-            { label: 'distinct_id', value: 'anon_7f3' },
-            { label: '$session_id', value: 'session_b2' },
-        ],
-    },
-    {
-        timeMs: 4700,
+        timeMs: 7300,
         kind: 'Click',
         title: 'City filter',
         properties: [
@@ -445,33 +424,61 @@ const replayTimeline: SessionReplayInspectorEvent[] = [
         ],
     },
     {
-        timeMs: 5800,
+        timeMs: 10_200,
         kind: 'Pageview',
         title: 'Le Nid Chic',
         properties: [
             { label: 'event', value: '$pageview' },
-            { label: 'pathname', value: '/stays/le-nid-chic' },
+            { label: 'pathname', value: '/stays/stay-03' },
             { label: 'distinct_id', value: 'anon_7f3' },
             { label: '$session_id', value: 'session_b2' },
         ],
     },
     {
-        timeMs: 8500,
+        timeMs: 12_400,
+        kind: 'Pageview',
+        title: 'Log in',
+        properties: [
+            { label: 'event', value: '$pageview' },
+            { label: 'pathname', value: '/login' },
+            { label: 'distinct_id', value: 'anon_7f3' },
+            { label: '$session_id', value: 'session_b2' },
+        ],
+    },
+    {
+        timeMs: 13_800,
+        kind: 'Identity',
+        title: 'Identify Edgar',
+        properties: [
+            { label: 'event', value: '$identify' },
+            { label: '$anon_distinct_id', value: 'anon_7f3' },
+            { label: 'distinct_id', value: 'user_812' },
+            { label: '$session_id', value: 'session_b2' },
+        ],
+    },
+    {
+        timeMs: 13_900,
+        kind: 'Pageview',
+        title: 'Le Nid Chic',
+        properties: [
+            { label: 'event', value: '$pageview' },
+            { label: 'pathname', value: '/stays/stay-03' },
+            { label: 'distinct_id', value: 'user_812' },
+            { label: '$session_id', value: 'session_b2' },
+        ],
+    },
+    {
+        timeMs: 16_900,
         kind: 'Click',
         title: 'Save stay',
         properties: [
             { label: 'event', value: 'stay_saved' },
             { label: 'stay_name', value: 'Le Nid Chic' },
-            { label: 'distinct_id', value: 'anon_7f3' },
+            { label: 'distinct_id', value: 'user_812' },
             { label: '$session_id', value: 'session_b2' },
         ],
     },
 ]
-
-const replayInspectorTimeline = replayTimeline.map((event) => ({
-    ...event,
-    timeMs: event.timeMs / REPLAY_PLAYBACK_RATE,
-}))
 
 function formatReplayTime(milliseconds: number): string {
     return `${(milliseconds / 1000).toFixed(1)}s`
@@ -480,11 +487,15 @@ function formatReplayTime(milliseconds: number): string {
 export function SessionReplayLinkFigure(): JSX.Element {
     const videoRef = useRef<HTMLVideoElement>(null)
     const [activeReplayEvent, setActiveReplayEvent] = useState(0)
-    const [durationMs, setDurationMs] = useState(14_050)
+    const [durationMs, setDurationMs] = useState(19_133)
     const [positionMs, setPositionMs] = useState(0)
     const [playing, setPlaying] = useState(false)
-    const playbackDurationMs = durationMs / REPLAY_PLAYBACK_RATE
-    const playbackPositionMs = positionMs / REPLAY_PLAYBACK_RATE
+
+    const syncReplayDuration = (video: HTMLVideoElement): void => {
+        if (Number.isFinite(video.duration) && video.duration > 0) {
+            setDurationMs(video.duration * 1000)
+        }
+    }
 
     const syncReplayPosition = (video: HTMLVideoElement): void => {
         const nextPosition = video.currentTime * 1000
@@ -513,7 +524,6 @@ export function SessionReplayLinkFigure(): JSX.Element {
             syncReplayPosition(video)
         }
 
-        video.playbackRate = REPLAY_PLAYBACK_RATE
         void video.play()
     }
 
@@ -566,15 +576,15 @@ export function SessionReplayLinkFigure(): JSX.Element {
                             disablePictureInPicture
                             muted
                             playsInline
-                            preload="auto"
+                            preload="metadata"
                             src={REPLAY_VIDEO_URL}
+                            onDurationChange={(event) => syncReplayDuration(event.currentTarget)}
                             onEnded={(event) => {
                                 setPlaying(false)
                                 syncReplayPosition(event.currentTarget)
                             }}
                             onLoadedMetadata={(event) => {
-                                event.currentTarget.playbackRate = REPLAY_PLAYBACK_RATE
-                                setDurationMs(event.currentTarget.duration * 1000)
+                                syncReplayDuration(event.currentTarget)
                                 syncReplayPosition(event.currentTarget)
                             }}
                             onPause={() => setPlaying(false)}
@@ -588,11 +598,11 @@ export function SessionReplayLinkFigure(): JSX.Element {
                         <input
                             aria-label="Replay position"
                             className="col-span-3 col-start-1 row-start-1 my-0 w-full"
-                            max={playbackDurationMs}
+                            max={durationMs}
                             min={0}
                             step="any"
                             type="range"
-                            value={Math.min(playbackPositionMs, playbackDurationMs)}
+                            value={Math.min(positionMs, durationMs)}
                             onChange={(event) => {
                                 const video = videoRef.current
                                 if (!video) {
@@ -600,7 +610,7 @@ export function SessionReplayLinkFigure(): JSX.Element {
                                 }
 
                                 const nextPosition = Number(event.currentTarget.value)
-                                video.currentTime = (nextPosition * REPLAY_PLAYBACK_RATE) / 1000
+                                video.currentTime = nextPosition / 1000
                                 syncReplayPosition(video)
                             }}
                         />
@@ -628,12 +638,12 @@ export function SessionReplayLinkFigure(): JSX.Element {
                             )}
                         </button>
                         <output className="col-start-2 row-start-2 text-xs">
-                            {formatReplayTime(playbackPositionMs)} / {formatReplayTime(playbackDurationMs)}
+                            {formatReplayTime(positionMs)} / {formatReplayTime(durationMs)}
                         </output>
                     </div>
                 </section>
 
-                <SessionReplayInspector events={replayInspectorTimeline} activeIndex={activeReplayEvent} />
+                <SessionReplayInspector events={replayTimeline} activeIndex={activeReplayEvent} />
             </div>
         </Exhibit>
     )

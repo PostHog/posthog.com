@@ -109,7 +109,7 @@ export default function TwigEventFlow({
             if (interval !== undefined) window.clearInterval(interval)
             timeouts.forEach((timeout) => window.clearTimeout(timeout))
         }
-    }, [autoplay, inView, manual])
+    }, [autoplay, inView, manual, resetKey])
 
     return (
         <div ref={rootRef} className="twig-click-demo @container">
