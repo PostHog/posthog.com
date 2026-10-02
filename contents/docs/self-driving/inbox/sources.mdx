@@ -26,6 +26,21 @@ You don't need to configure MCP servers for inbox sources manually. Once your re
 
 </CalloutBox>
 
+## Steer a source
+
+Every source decides which of its records are actionable enough to become signals. Steering rules let you change that decision in plain language.
+
+Turn the source on, expand its card in the inbox **settings**, then select **Add steering rules**. Describe what matters, what to skip, and what is out of scope. For example, you can tell a source to skip issues with a chore label, and to always keep anything about billing. Rules can be up to 2,000 characters.
+
+Then choose a default behavior for records that your rules do not cover:
+
+- **Include everything except what I list** keeps those records. This is the default.
+- **Only include what's clearly actionable** drops them.
+
+Rules apply from the next sync. They do not remove signals that are already in your inbox. Select **Edit steering rules** to change or clear them later.
+
+Steering is available on the sources that use the shared actionability check: **Support**, **GitHub issues**, **Linear**, **Zendesk**, and **pganalyze**. Other sources keep their own settings, which continue to work independently. To compare how much a source covers against a [scout](/docs/self-driving/scouts), see [Sources or scouts?](/docs/self-driving/signals#sources-or-scouts).
+
 ## PostHog sources
 
 These sources use data from the matching PostHog products in your project.
