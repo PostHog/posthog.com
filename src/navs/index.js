@@ -1304,6 +1304,10 @@ export const handbookSidebar = [
                 url: '/handbook/growth/revops/org-definitions',
             },
             {
+                name: 'Revenue views',
+                url: '/handbook/growth/revops/revenue-views',
+            },
+            {
                 name: 'Revenue adjustments',
                 url: '/handbook/growth/revops/revenue-adjustments',
             },
@@ -1533,20 +1537,16 @@ export const handbookSidebar = [
                         url: '/handbook/forward-deployed-engineering/who-we-work-with',
                     },
                     {
-                        name: 'How to get an FDE involved',
-                        url: '/handbook/forward-deployed-engineering/how-to-get-fde-involved',
-                    },
-                    {
                         name: 'How we work',
                         url: '/handbook/forward-deployed-engineering/how-we-work',
                     },
                     {
-                        name: 'How we work with AI',
-                        url: '/handbook/forward-deployed-engineering/working-with-ai',
+                        name: 'How to get an FDE involved',
+                        url: '/handbook/forward-deployed-engineering/how-to-get-fde-involved',
                     },
                     {
-                        name: 'New starter onboarding',
-                        url: '/handbook/forward-deployed-engineering/new-hire-onboarding',
+                        name: 'How we work with AI',
+                        url: '/handbook/forward-deployed-engineering/working-with-ai',
                     },
                     {
                         name: 'Working with customers',
@@ -1559,6 +1559,14 @@ export const handbookSidebar = [
                     {
                         name: 'Working with product engineering',
                         url: '/handbook/forward-deployed-engineering/working-with-product-engineering',
+                    },
+                    {
+                        name: 'Working with support',
+                        url: '/handbook/forward-deployed-engineering/working-with-support',
+                    },
+                    {
+                        name: 'New starter onboarding',
+                        url: '/handbook/forward-deployed-engineering/new-hire-onboarding',
                     },
                 ],
             },
@@ -4177,6 +4185,10 @@ export const docsMenu = {
                                 {
                                     name: 'Supported aggregations',
                                     url: '/docs/sql/aggregations',
+                                },
+                                {
+                                    name: 'Classifying rows with AI',
+                                    url: '/docs/sql/ai-functions',
                                 },
                                 {
                                     name: 'Optimizing SQL queries',
@@ -8163,6 +8175,10 @@ export const docsMenu = {
                             url: '/docs/workflows/create-emails-ai',
                         },
                         {
+                            name: 'Send a broadcast',
+                            url: '/docs/workflows/broadcasts',
+                        },
+                        {
                             name: 'Run AI tasks from a workflow',
                             url: '/docs/workflows/ai-tasks',
                         },
@@ -8516,6 +8532,12 @@ export const docsMenu = {
                     icon: 'IconDatabase',
                     color: 'purple',
                 },
+                {
+                    name: 'Changelog',
+                    url: '/docs/metrics/changelog',
+                    icon: 'IconRocket',
+                    color: 'purple',
+                },
             ],
         },
         {
@@ -8567,6 +8589,12 @@ export const docsMenu = {
                     url: '/docs/distributed-tracing/basics',
                     icon: 'IconBook',
                     color: 'seagreen',
+                },
+                {
+                    name: 'Link traces to AI Observability',
+                    url: '/docs/distributed-tracing/link-ai-observability',
+                    icon: 'IconLlmAnalytics',
+                    color: 'purple',
                 },
             ],
         },

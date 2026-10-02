@@ -15,8 +15,10 @@ export interface PocketGuideVolume {
     volume: number
     /** Docs slug of the product this volume teaches. Omit when it teaches no single product. */
     docsProduct?: string
-    /** Route to the product's Learn tab, when that tab exists. */
+    /** Route where Pocket Guide touchpoints should open this volume. */
     learnPath?: string
+    /** Count the front matter and primer while this volume consists of those two learning pages. */
+    countOrientationPages?: boolean
     /** A hand-written src/pages file owns this route, so don't generate one. */
     hasStaticPage?: boolean
     /** Announced but unwritten – renders as a cover with a sash and no link. */
@@ -35,9 +37,10 @@ export const POCKET_GUIDE_VOLUMES: PocketGuideVolume[] = [
         title: 'Product Analytics',
         description: 'Record what people do in Twig, connect their activity, and build reports you can explain.',
         token: 'blue',
-        volume: 0,
+        volume: 5,
         docsProduct: 'product-analytics',
-        learnPath: '/docs/product-analytics/learn',
+        learnPath: '/docs/product-analytics/learn/introduction',
+        countOrientationPages: true,
     },
     {
         id: 'self-driving',
@@ -93,7 +96,7 @@ export function volumeById(id: string): PocketGuideVolume | undefined {
     return POCKET_GUIDE_VOLUMES.find((v) => v.id === id)
 }
 
-/** Covers and cards open the Learn tab where one exists; other books keep their reader route. */
+/** Covers, cards, and Pocket Guide links open the volume's configured entry route. */
 export function pocketGuideUrl(volume: PocketGuideVolume): string {
     return volume.learnPath ?? `/pocket-guides/${volume.id}`
 }

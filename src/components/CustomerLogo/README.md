@@ -21,5 +21,5 @@ import CustomerLogo from 'components/CustomerLogo'
 
 ## Known duplication
 
-`Pricing/Redesign/CustomerLogos.tsx`, `Products/Slides/CustomersSlide.tsx`, `Home/Test/Demos.tsx`,
-`Korean/KoreanHomeShared`, and `pages/components/index.tsx` still have their own copy of this logic.
+`Pricing/Redesign/CustomerLogos.tsx`, `Products/Slides/CustomersSlide.tsx`, `Home/Test/Demos.tsx`, and
+`pages/components/index.tsx` still have their own copy of this logic.

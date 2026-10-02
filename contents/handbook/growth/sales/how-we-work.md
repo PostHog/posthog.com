@@ -52,24 +52,26 @@ The CSM stays on every $20k+ account, so there's no handoff when a TAM's work is
 - Quota is calculated annually, and is paid out quarterly
 - A deal counts toward quota in the quarter of its **effective date**. For annual deals, the effective date is the contract start date or the signature date, whichever is later. For monthly accounts, each payment counts toward the quarter it falls in.
 - Because the signature date sets the floor, a deal can never be credited to a quarter that has already closed, even if its contract start was backdated to align with the customer's current billing period.
-- The Commission rate is 10% flat and uncapped, regardless of whether it is monthly or annual
-	- There is an additional 6.7% incentive on net-new annual contracts 
+- The Commission rate is 10% flat and uncapped on annual agreements. The commission rate is 5% on monthly contracts
 	- There is also an additional 6.7% incentive on growth in annual renewals
 	- There is no additional incentive on monthly payments
  - An account counts toward your quota only from the date it is added to your book (when the `AM Managed` segment is applied). Cash paid before that date does not count toward commission, even if it lands in the current quarter. We don't pay retroactively on an account that wasn't yet in your book.
 
 **Examples**
-Ator, the TAM has a book account that pays month to month. In the quarter, that account makes 3 payments of $2,200, $2,100, and $2,500 totaling $6,800. The quota realized and paid out to Ator on this account is 10% of the total for that quarter, $680.
+Ator, the TAM, has a book account that pays month to month. In the quarter, that account makes 3 payments of $2,200, $2,100, and $2,500, totaling $6,800. The quota realized and paid out to Ator on this account is 5% of the total for that quarter: $340.
 
-Ator has another book account that he lands on an annual credit purchase that quarter. The first month of the quarter, they paid $8,000 and then they signed an annual credit purchase for $142,857.15 in credits. After discount, they paid PostHog $100,000. Ator realizes: 
-- $10,000 in quota from the 10% on the cash paid
-- $6,700 in quota from the 6.7% incentive to balance out the annual discount
-- $800 from their single monthly payment that quarter
-Ator is paid a total of $17,500 for that account that quarter.
+Ator has another book account that he lands on an annual credit purchase that quarter. In the first month of the quarter, they paid $8,000 on their monthly plan, and then they signed an annual credit purchase for $142,857.15 in credits. After discount, they paid PostHog $100,000. Ator realizes:
+
+- $10,000 in quota from the 10% on the annual cash paid
+- $400 in quota from the 5% on their single monthly payment that quarter
+
+Ator is paid a total of $10,400 for that account that quarter.
 
 Ator has (yet) another book account coming up for renewal. Last year, that account spent $100,000 with PostHog. This year, they are increasing their annual credit purchase to $171,428.57. After discount, they pay PostHog $120,000. Ator realizes:
-- $12,000 in quota from the 10% on the cash paid
-- $1,340 in quota from the 6.7% incentive on the increase over last year
+
+- $12,000 in quota from the 10% on the annual cash paid
+- $1,340 in quota from the 6.7% incentive on the $20,000 increase over last year
+
 Ator is paid a total of $13,340 for this account.
 
 **Effective date example**

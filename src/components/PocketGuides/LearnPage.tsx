@@ -15,21 +15,43 @@ interface LearnPageProps {
     chapter?: string
     title: string
     description: string
+    /** Optional product-specific choice page. Its URL comes from product data. */
+    landing?: React.ComponentType<LearnLandingProps>
+}
+
+export interface LearnLandingProps {
+    productName: string
+    description: string
+    pocketGuideUrl: string
+    interactiveLearningUrl: string
 }
 
 /** Page shell shared by the index and per-chapter routes. */
-export default function LearnPage({ productHandle, chapter, title, description }: LearnPageProps): JSX.Element {
+export default function LearnPage({
+    productHandle,
+    chapter,
+    title,
+    description,
+    landing: Landing,
+}: LearnPageProps): JSX.Element {
     const productData = useProduct({ handle: productHandle }) as any
     const contentRef = useRef<HTMLElement>(null)
     const location = useLocation()
-    const menuTabs = buildProductMenuTabs({
+    const volumeId = productData?.pocketGuideVolume
+    const interactiveLearningUrl = productData?.interactiveLearningUrl as string | undefined
+    const isLearnLanding = Boolean(!chapter && volumeId && Landing && interactiveLearningUrl)
+    const landingProps = {
+        productName: productData?.name,
+        description,
+        pocketGuideUrl: `${surfaceBasePath(productData?.slug, 'learn')}/introduction`,
+        interactiveLearningUrl,
+    } as LearnLandingProps
+    const productMenuTabs = buildProductMenuTabs({
         productData,
         contentRef,
         activeSurface: 'learn',
         currentPath: location?.pathname,
     })
-    const volumeId = productData?.pocketGuideVolume
-
     return (
         <>
             <SEO title={title} description={description} image="/images/og/default.png" />
@@ -37,12 +59,15 @@ export default function LearnPage({ productHandle, chapter, title, description }
                 // The book carries its own structure; a second contents column competes.
                 hideRightSidebar
                 hideTitle
+                hideMarkdownActions={isLearnLanding}
                 showQuestions={false}
-                menuTabs={menuTabs}
+                menuTabs={productMenuTabs}
                 productSelect={<ProductSwitcher activeHandle={productHandle} />}
             >
                 <article ref={contentRef}>
-                    {volumeId ? (
+                    {isLearnLanding && Landing && interactiveLearningUrl ? (
+                        <Landing {...landingProps} />
+                    ) : volumeId ? (
                         <LearnSurface
                             volumeId={volumeId}
                             chapter={chapter}
