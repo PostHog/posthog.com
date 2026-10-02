@@ -476,6 +476,7 @@ Prompts are cached on the SDK side to minimize latency and API calls:
 - **Default TTL**: 5 minutes (300 seconds)
 - **Configurable per-request**: Override with `cache_ttl_seconds` (Python) or `cacheTtlSeconds` (JS)
 - **Stale-while-revalidate**: If a fetch fails, the cached value is used (even if expired)
+- **Refetch cooldown**: After a failed refetch, the stale value is served for 60 seconds before the SDK tries the network again. When the server sends a `Retry-After` header, the SDK waits that long instead, up to 1 hour
 - **Fallback support**: Provide a fallback value that's used when both fetch and cache fail
 - **Separate entries per fetch type**: Latest, pinned-version, and labeled fetches of the same prompt are cached independently. Label moves reach your app when the labeled entry's TTL expires
 - **Bulk warm-up**: `get_all` (Python) and `getAll` (JavaScript) load every prompt in one request, at a label or at the latest version, and fill the cache for later fetches
@@ -515,6 +516,15 @@ Once linked, you can:
 - View related traces from the prompt detail page
 - See which specific version was used in each trace
 - Analyze which prompt versions perform best
+
+## Prompt usage
+
+Every SDK fetch of a prompt captures a `$llm_prompt_fetched` event. The **Usage** tab on a prompt shows these events in two views:
+
+- **Trend**: a graph of prompt fetches over time
+- **Log**: the individual fetch events, including the version each fetch resolved to
+
+Both views can show fetches of the selected version only, or of all versions of the prompt. Use this to check whether a version is still being fetched, for example before you move a label or archive the prompt.
 
 ## Limits
 
