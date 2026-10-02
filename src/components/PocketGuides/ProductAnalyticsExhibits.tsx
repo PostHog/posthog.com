@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { colors } from '@posthog/brand/colors'
 import type { StaySetting } from '@posthog/twig-components/filters'
-import PostHogInspector, { InspectorCode, InspectorStatus } from './PostHogInspector'
+import PostHogInspector, { COMPACT_INSPECTOR_CLASSES, InspectorCode, InspectorStatus } from './PostHogInspector'
 import TwigBrowseFigure from './TwigBrowseFigure'
 import ExhibitResetButton from './ExhibitResetButton'
 
@@ -37,7 +37,13 @@ export function Exhibit({
     return (
         <figure className="not-prose my-6 mx-0 overflow-hidden rounded border border-primary bg-accent p-3 dark:bg-accent-dark @container @md:p-4">
             {onReset && <ExhibitResetButton onReset={onReset} />}
-            <div className={`grid gap-4 ${stacked ? '' : '@2xl:grid-cols-2'}`}>{children}</div>
+            <div
+                className={`grid items-start gap-4 ${
+                    stacked ? '' : '@lg:grid-cols-[minmax(0,1.05fr)_minmax(14rem,0.95fr)]'
+                }`}
+            >
+                {children}
+            </div>
         </figure>
     )
 }
@@ -63,7 +69,6 @@ export function AutocaptureFigure(): JSX.Element {
 
     return (
         <Exhibit
-            stacked
             onReset={() => {
                 setChoice(null)
                 setCapturedAt(null)
@@ -78,7 +83,7 @@ export function AutocaptureFigure(): JSX.Element {
                     setCapturedAt(new Date().toISOString())
                 }}
             />
-            <PostHogInspector>
+            <PostHogInspector className={COMPACT_INSPECTOR_CLASSES}>
                 {clickedLabel ? (
                     <>
                         <InspectorCode
@@ -116,7 +121,6 @@ export function FilterPropertiesFigure(): JSX.Element {
 
     return (
         <Exhibit
-            stacked
             onReset={() => {
                 setChoice(null)
                 setCount(0)
@@ -133,7 +137,7 @@ export function FilterPropertiesFigure(): JSX.Element {
                     setCapturedAt(new Date().toISOString())
                 }}
             />
-            <PostHogInspector>
+            <PostHogInspector className={COMPACT_INSPECTOR_CLASSES}>
                 {choice && capturedAt ? (
                     <InspectorCode label="Event payload · selected properties" value={eventPayload} />
                 ) : (
@@ -163,7 +167,6 @@ export function DestinationChartFigure(): JSX.Element {
 
     return (
         <Exhibit
-            stacked
             onReset={() => {
                 setSelected('Coast')
                 setSelectedEventId(null)
@@ -173,6 +176,9 @@ export function DestinationChartFigure(): JSX.Element {
                 aria-label="Filter selections by destination"
                 className="min-w-0 overflow-hidden rounded border border-[#d3d0c8] bg-[#fffdfa] font-rounded text-[#292724] shadow-sm"
             >
+                <div className="border-b border-[#d3d0c8] bg-[#f6f3ed] px-3 py-2 text-sm font-semibold">
+                    Filter selections
+                </div>
                 <div className="p-3">
                     <div className="space-y-2" aria-label="Filter selections by destination">
                         {destinations.map(({ name, color }) => {
@@ -239,15 +245,17 @@ export function DestinationChartFigure(): JSX.Element {
                     </div>
                 </div>
             </section>
-            {selectedEvent && eventPayload && (
-                <PostHogInspector>
+            <PostHogInspector className={COMPACT_INSPECTOR_CLASSES}>
+                {selectedEvent && eventPayload ? (
                     <InspectorCode
                         label="Event payload · selected properties"
                         meta={selectedEvent.id}
                         value={eventPayload}
                     />
-                </PostHogInspector>
-            )}
+                ) : (
+                    <InspectorStatus>Select a bar or event to inspect its properties.</InspectorStatus>
+                )}
+            </PostHogInspector>
         </Exhibit>
     )
 }

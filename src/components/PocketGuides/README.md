@@ -239,9 +239,11 @@ pages declare.
 ### Twig in Product Analytics
 
 The introduction uses a screenshot of Twig's homepage from `static/pocket-guides/posthog/`.
-The Events and properties chapter uses `BrowseStays` and `StayCardContent` from the pinned
-`@posthog/twig-components` package. `TwigBrowseFigure` adds local filter state and package photos.
-`TwigEventFlow` places the PostHog event inspector below the Twig view. The inspectors show event
+The Events and properties chapter uses destination filters and `StayCardContent` from the pinned
+`@posthog/twig-components` package. `TwigBrowseFigure` shows three destination buttons and one
+compact stay card, using local filter state and package photos. The examples place the labeled
+Twig view and Inspector side by side in wide containers and stack them in narrow containers.
+Reset clears captured events and restarts the automated visitor. The inspectors show event
 timestamps separately from custom properties. These examples do not send events to a PostHog
 project.
 

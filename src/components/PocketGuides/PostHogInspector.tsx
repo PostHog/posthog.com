@@ -2,6 +2,9 @@ import React from 'react'
 
 const BORDER = 'border-[#d3d0c8]'
 
+export const COMPACT_INSPECTOR_CLASSES =
+    '[&_.whitespace-pre]:whitespace-pre-wrap [&_.whitespace-pre]:break-words [&_summary]:!bg-transparent'
+
 /** The PostHog side of Twig interactions, styled like a light developer inspector. */
 export default function PostHogInspector({
     children,

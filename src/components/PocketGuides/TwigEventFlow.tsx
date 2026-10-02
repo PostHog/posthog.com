@@ -22,7 +22,7 @@ export default function TwigEventFlow({
     const [clicked, setClicked] = useState<string | null>(null)
     const [capturedAt, setCapturedAt] = useState<string | null>(null)
     const [eventCount, setEventCount] = useState(0)
-    const [visitorSetting, setVisitorSetting] = useState<StaySetting>('All')
+    const [visitorSetting, setVisitorSetting] = useState<StaySetting>('Forest')
     const [inView, setInView] = useState(false)
     const [manual, setManual] = useState(false)
     const [cursor, setCursor] = useState<VisitorCursor | null>(null)
@@ -35,7 +35,7 @@ export default function TwigEventFlow({
         setClicked(null)
         setCapturedAt(null)
         setEventCount(0)
-        setVisitorSetting('All')
+        setVisitorSetting('Forest')
         setManual(false)
         setCursor(null)
         setResetKey((key) => key + 1)
@@ -57,7 +57,7 @@ export default function TwigEventFlow({
     useEffect(() => {
         if (!autoplay || !inView || manual) return
 
-        const choices: StaySetting[] = ['Forest', 'City', 'Coast']
+        const choices: StaySetting[] = ['City', 'Coast', 'Forest']
         const timeouts: number[] = []
         let firstMove = true
         const advance = () => {
@@ -114,12 +114,11 @@ export default function TwigEventFlow({
     return (
         <div ref={rootRef} className="twig-click-demo @container">
             <ExhibitResetButton onReset={reset} />
-            <div className="grid gap-3">
+            <div className="grid items-start gap-3 @lg:grid-cols-[minmax(0,1.05fr)_minmax(14rem,0.95fr)]">
                 <div ref={twigRef} className="relative overflow-hidden rounded border border-primary bg-primary">
                     <TwigBrowseFigure
                         key={resetKey}
                         id={`guide-event-${withDestination ? 'destination' : 'bare'}`}
-                        initialSetting="All"
                         controlledSetting={autoplay ? visitorSetting : undefined}
                         onFilter={(setting) => {
                             setClicked(setting)
