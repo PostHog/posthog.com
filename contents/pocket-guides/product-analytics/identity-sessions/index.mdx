@@ -61,6 +61,23 @@ Suppose Edgar clicks **Book stay** in his browser and Twig's server completes th
 
 In the browser, `identify()` tells PostHog which account to use for subsequent events. On the server, the engineers pass that account ID with each event.
 
+<figure className="not-prose my-6 mx-auto max-w-[460px] rounded border border-primary bg-accent p-2 dark:bg-accent-dark">
+    <img
+        className="block h-auto w-full dark:hidden"
+        src="https://res.cloudinary.com/dmukukwp6/image/upload/c_crop,x_320,y_200,w_1800,h_1200/q_auto,f_auto/Browser_server_identity_light_mode_b242ed4cb1.png"
+        alt="The browser's booking_started event and the server's booking_completed event both use user_812, connecting them to Edgar Hogg's person profile in PostHog."
+        width="1800"
+        height="1200"
+    />
+    <img
+        className="hidden h-auto w-full dark:block"
+        src="https://res.cloudinary.com/dmukukwp6/image/upload/c_crop,x_320,y_200,w_1800,h_1200/q_auto,f_auto/Browser_server_identity_dark_mode_a0ed01eb7d.png"
+        alt="The browser's booking_started event and the server's booking_completed event both use user_812, connecting them to Edgar Hogg's person profile in PostHog."
+        width="1800"
+        height="1200"
+    />
+</figure>
+
 Here, `user_812` represents the ID from Edgar's signed-in account – not a value to hard-code. Both events arrive with the same `distinct_id`, connecting them to the same person.
 
 ## Reset the identity at sign-out
