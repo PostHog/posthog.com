@@ -49,7 +49,7 @@ pip install posthog
 ```
 
 ```bash file=Go
-go get github.com/posthog/posthog-go/posthogmcpsdk
+go get github.com/posthog/posthog-go/posthogmcpsdk@v1.30.0
 ```
 
 ```bash file=Ruby
@@ -144,7 +144,7 @@ subtitle="Required"
 icon="IconGraph"
 >
 
-Run your MCP server. Connect an agent, such as Claude Desktop, Cursor, Codex, or your own client. PostHog receives `$mcp_tool_call` and `$mcp_tools_list` events when the agent calls tools and requests their listing. Clients on `2025-11-25` also produce `$mcp_initialize`. The handshake-free `2026-07-28` revision has no initialize event. The Go SDK sends only `$mcp_tool_call` and `$exception` for now.
+Run your MCP server. Connect an agent, such as Claude Desktop, Cursor, Codex, or your own client. PostHog receives `$mcp_tool_call` and `$mcp_tools_list` events when the agent calls tools and requests their listing. Clients on `2025-11-25` also produce `$mcp_initialize`. The handshake-free `2026-07-28` revision has no initialize event. The Go SDK sends `$mcp_tool_call`, `$exception`, `$mcp_unknown_tool`, and `$mcp_input_required`. It sends neither `$mcp_tools_list` nor `$mcp_initialize`.
 
 Open the [activity feed](https://app.posthog.com/activity/explore) in your project. Filter for `event = $mcp_tool_call`. Each row represents a tool invocation and includes `$mcp_tool_name`, `$mcp_parameters`, `$mcp_response`, `$mcp_duration_ms`, and `$mcp_is_error`.
 
@@ -212,7 +212,7 @@ PostHog::MCP.instrument(
 
 </MultiLanguage>
 
-In Go, a full before-send hook is the `BeforeSend` field of your `posthog.Config`.
+In Go, `WithCaptureResponses(false)` still sends a failed call's error text as `$mcp_error_message` and in `$exception`. A full before-send hook is the `BeforeSend` field of your `posthog.Config`. See the [Go example](/docs/mcp-analytics/privacy#3-your-before-send-hook-optional).
 
 <OSButton variant="primary" asLink to="/docs/mcp-analytics/privacy">
 
@@ -242,7 +242,7 @@ icon="IconAIText"
 
 **Intent** is the user goal that led the agent to call a tool. The SDK adds a `context` argument to compatible tool schemas and captures it as `$mcp_intent`. It removes the argument before your handler runs.
 
-You can change the prompt the agent sees, and supply a fallback for agents that skip the argument.
+You can change the prompt the agent sees, and supply a fallback for agents that skip the argument. The Go SDK has a fixed prompt and no fallback.
 
 <OSButton variant="primary" asLink to="/docs/mcp-analytics/intent">
 
@@ -270,7 +270,7 @@ Which tools fail most often? Use `$exception` events to investigate errors.
 How much of your traffic supplies explicit context, and how much uses the intent fallback?
 
 - ### <IconWrench className="text-orange w-7 -mt-1 inline-block"/> Advertised tools that never get called
-Join `$mcp_tools_list` with `$mcp_tool_call` to find tools that agents never call.
+Join `$mcp_tools_list` with `$mcp_tool_call` to find tools that agents never call. The Go SDK sends no `$mcp_tools_list`, so this query returns nothing for Go servers.
 
 The tool quality tab shows error rates and latency percentiles for each tool. Select a tool to inspect its calls:
 

@@ -39,7 +39,7 @@ The SDK captures App tool calls with intent, self-reported model, and protocol v
 
 ## Not instrumented yet
 
-These gaps apply to the TypeScript and Python SDKs alike.
+These gaps apply to the TypeScript and Python SDKs alike. For Go, see the note after the table.
 
 | `2026-07-28` feature | What you get today |
 | --- | --- |
@@ -48,5 +48,7 @@ These gaps apply to the TypeScript and Python SDKs alike.
 | `server/discover` | Not captured – no session-start event on this revision. |
 | `Mcp-Method` / `Mcp-Name` headers | Not read. |
 | `clientCapabilities` in `_meta` | Not captured. `clientInfo` and protocol version are. |
+
+The Go SDK handles multi round-trip differently. It sends each `input_required` round as `$mcp_input_required`, and the retry that completes the call is the `$mcp_tool_call`. A round never carries a conversation handle. Rounds need go-sdk v1.8.0 or later, and the adapter needs v1.6.1 or later. The Go SDK doesn't handle tasks.
 
 Task-based tools and multi-round-trip tools can produce misleading counts and durations. Check these limitations before using their dashboard metrics.

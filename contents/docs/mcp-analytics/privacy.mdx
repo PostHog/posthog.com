@@ -35,6 +35,7 @@ The SDK runs a deterministic sanitizer:
 
 - **Image/audio content blocks** -> replaced with `[image redacted: <mime>]` or `[audio redacted: <mime>]`.
 - **Resource blocks with a `.blob`** -> replaced with `[resource redacted: <mime>]`.
+- **Go stubs** have no MIME type. They read `[image content redacted - not supported by PostHog MCP analytics]`, `[audio content redacted - not supported by PostHog MCP analytics]`, and `[binary resource content redacted - not supported by PostHog MCP analytics]`.
 - **Long base64-looking strings (>=10KB)** -> replaced with `"[binary data redacted...]"`.
 - **Keys matching the sensitive-key pattern** – `authorization`, `cookie`, `password`, `token`, `secret`, `api_key`, `private_key`, and similar – have their values replaced with `"[redacted]"`.
 - **PostHog API key patterns** (`ph[a-z]_…`) in any string value -> replaced with `"[redacted]"`.
@@ -105,16 +106,15 @@ instrument(server, posthog, MCPAnalyticsOptions(before_send=before_send))
 ```go file=Go
 client, err := posthog.NewWithConfig(os.Getenv("POSTHOG_PROJECT_TOKEN"), posthog.Config{
 	BeforeSend: func(msg posthog.Message) posthog.Message {
-		capture, ok := msg.(posthog.Capture)
-		if !ok {
-			return msg
-		}
-		if capture.Event == "$exception" {
+		switch event := msg.(type) {
+		case posthog.Exception:
 			return nil // drop
+		case posthog.Capture:
+			delete(event.Properties, "$mcp_parameters")
+			delete(event.Properties, "$mcp_response")
+			return event
 		}
-		delete(capture.Properties, "$mcp_parameters")
-		delete(capture.Properties, "$mcp_response")
-		return capture
+		return msg
 	},
 })
 ```
@@ -138,7 +138,7 @@ Removing `$mcp_parameters` and `$mcp_response` keeps tool arguments and results 
 Language notes:
 
 - **Python:** `MCPAnalyticsOptions.before_send` can be sync or async. On a [`PostHogMCP`](/docs/mcp-analytics/installation/python#custom-dispatchers) dispatcher, pass `before_send=` to the client instead. That callback must be synchronous.
-- **Go:** the hook is the `posthog-go` client's `BeforeSend`, so it also sees your app's other events.
+- **Go:** the hook is the `posthog-go` client's `BeforeSend`, so it also sees your app's other events. It receives the `$exception` event as a `posthog.Exception` and every other event as a `posthog.Capture`.
 - **TypeScript:** on a `PostHogMCP` dispatcher, pass `beforeSend` to the client constructor.
 
 Dropping a tool call event doesn't drop its `$exception` event. Check for `$exception` too if you want both gone.
@@ -179,7 +179,7 @@ Events queue in the PostHog client you pass in. If the queue overflows or fails 
 
 ## Logging
 
-MCP servers often use stdio, where writing to stdout corrupts the protocol stream. The SDKs' default loggers write nothing. Pass a logger during development to see callback errors and warnings, such as `logger` in TypeScript, Python, and Ruby, or `WithErrorHandler` in Go:
+MCP servers often use stdio, where writing to stdout corrupts the protocol stream. The SDKs' default loggers write nothing. Pass a logger during development to see callback errors and warnings, such as `logger` in TypeScript, Python, and Ruby, or `WithErrorHandler` in Go. The Go adapter's `WithErrorHandler` default is a no-op, but the `posthog-go` client logs to stderr by default. Set `Config.Logger` to change that:
 
 ```ts
 instrument(server, posthog, {

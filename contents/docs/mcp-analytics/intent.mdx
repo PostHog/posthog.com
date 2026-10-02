@@ -82,7 +82,7 @@ The Go SDK uses a fixed prompt.
 
 ### Disabling the injected argument
 
-Turn off the injected argument with `context: false` in TypeScript and Ruby, `MCPAnalyticsOptions(context=False)` in Python, or `posthogmcpsdk.WithContextParameter(false)` in Go. Use an intent fallback if you still want to capture intent. Model capture and conversation IDs have separate options. [Disable those options](/docs/mcp-analytics/events#model-capture) to stop their schema changes.
+Turn off the injected argument with `context: false` in TypeScript and Ruby, `MCPAnalyticsOptions(context=False)` in Python, or `posthogmcpsdk.WithContextParameter(false)` in Go. Use an intent fallback if you still want to capture intent. The Go SDK has no fallback, so with `WithContextParameter(false)` it captures no intent, not even a tool's own `context` argument. Model capture and conversation IDs have separate options. [Disable those options](/docs/mcp-analytics/events#model-capture) to stop their schema changes.
 
 ## The intent fallback callback
 
